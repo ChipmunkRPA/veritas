@@ -124,6 +124,12 @@ integration remains unfinished.
 - The [voice resonance trial](audio-formant-local-transfer-2026-11-13.md)
   found zero of 12 competing-speech edits at the fixed points versus one
   for the current check. The new voice cues stay experimental.
+- The [foreground isolation diagnostic](audio-source-isolation-diagnostic-2026-11-13.md)
+  tested 12 synthetic voice edits and 40 ordinary deliveries under competing
+  speech. The current check located one edit, blind separation located none,
+  and the exact benchmark foreground located five using the same two-second
+  windows. The exact foreground added no ordinary flags. Blind separation
+  stays experimental and supplies no confidence.
 - The [upper-frequency audio check](audio-bandwidth-return-2026-11-13.md)
   located 34 of 64 temporary low-pass changes from a single upload and
   reported one range on 128 ordinary controls. Twelve inputs per cutoff

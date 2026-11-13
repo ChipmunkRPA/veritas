@@ -31,6 +31,11 @@ includes two public source plans and runners that recover the exact native
 clip clocks. The [JPEG90 reflection study](image-regional-jpeg90-reflection-2026-11-13.md)
 recounts the original-mask outcomes on both source banks.
 
+The [noisy voice diagnostic](audio-source-isolation-diagnostic-2026-11-13.md#replay)
+includes separate readers for acoustic recovery and classifier localization.
+The readers recount published scalar records. Native replay additionally
+requires the frozen source audio and the retained local checkpoints.
+
 ### Replay delivery and earlier-copy comparisons
 
 Recount the [two JPEG90 delivery histories](image-regional-jpeg90-carrier-2026-11-13.md),

@@ -1,0 +1,1220 @@
+{
+  "freeze_sha256": "c5a563082647e9facefd831fd95313b541f87572806e42d90fb7cac088e36f0f",
+  "rows": [
+    {
+      "family": "clone",
+      "input_sha256": "5c4c8cadad443fd4c07210259a8a4eee8f36c86c68478491b6266f6e5eab19bc",
+      "kind": "untouched",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -22.4305809,
+            3.8206159
+          ],
+          "ideal_mask": 7.6095274,
+          "mixture": -5.1805635
+        }
+      },
+      "stream_correlations": [
+        0.97089362,
+        0.92296978
+      ],
+      "truth": null
+    },
+    {
+      "family": "clone",
+      "input_sha256": "0a498c27acec27e03639afd01b735ee0aeca039dd486c5caef2d6efb2be61909",
+      "kind": "ordinary_same_host",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -22.3647418,
+            3.9766208
+          ],
+          "ideal_mask": 7.8926161,
+          "mixture": -5.192771
+        }
+      },
+      "stream_correlations": [
+        0.96818492,
+        0.91189423
+      ],
+      "truth": null
+    },
+    {
+      "family": "clone",
+      "input_sha256": "ca5def6bcf4dea9ff31700b7d6a0d760a77a961113b98fca99fdef962cdcb4dc",
+      "kind": "ordinary_other_voice",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -17.3440419,
+            1.8429706
+          ],
+          "ideal_mask": 8.4548371,
+          "mixture": -5.3378261
+        }
+      },
+      "stream_correlations": [
+        0.9838176,
+        0.96292186
+      ],
+      "truth": null
+    },
+    {
+      "family": "clone",
+      "input_sha256": "325134a9f2c67cb9a0733fdf393a2a480f0820064fe02dea2c7ae0f69c5551f3",
+      "kind": "synthetic",
+      "si_sdr_db": {
+        "exact_edit": {
+          "blind": [
+            0.731417,
+            -2.2070954
+          ],
+          "ideal_mask": 13.596307,
+          "mixture": 3.2390332
+        },
+        "whole": {
+          "blind": [
+            -12.5631171,
+            -0.642355
+          ],
+          "ideal_mask": 8.3397542,
+          "mixture": -5.1948733
+        }
+      },
+      "stream_correlations": [
+        0.98433289,
+        0.96734316
+      ],
+      "truth": [
+        5120,
+        15360
+      ]
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "8882721fb72676cd8b8d16ad2b34046590d1ff10455f26b2ea4736ec670d75ca",
+      "kind": "untouched",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            5.7218628,
+            -21.0051034
+          ],
+          "ideal_mask": 10.888927,
+          "mixture": -4.9846239
+        }
+      },
+      "stream_correlations": [
+        0.98580715,
+        0.99611159
+      ],
+      "truth": null
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "cb767c9545974da72706357e3f08364d82a2fd263418503879ddf865c74b7dcc",
+      "kind": "ordinary_same_host",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            5.3766243,
+            -20.7233845
+          ],
+          "ideal_mask": 10.9390603,
+          "mixture": -4.9752169
+        }
+      },
+      "stream_correlations": [
+        0.97882521,
+        0.99459173
+      ],
+      "truth": null
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "b683731a921ff17d07d933a20acece13eb8bf7883c7df6988a6bde8be7da3c64",
+      "kind": "ordinary_other_voice",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            3.4156523,
+            -17.9867917
+          ],
+          "ideal_mask": 10.3346998,
+          "mixture": -5.0027354
+        }
+      },
+      "stream_correlations": [
+        0.96644708,
+        0.99270051
+      ],
+      "truth": null
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "c074cb79396fa2c4465d6d381307abc16006088f05fc4d0739e3b7ea0e620681",
+      "kind": "synthetic",
+      "si_sdr_db": {
+        "exact_edit": {
+          "blind": [
+            -3.9324014,
+            -7.624134
+          ],
+          "ideal_mask": 8.8011595,
+          "mixture": -6.4284189
+        },
+        "whole": {
+          "blind": [
+            3.8002868,
+            -18.2252
+          ],
+          "ideal_mask": 10.7281436,
+          "mixture": -4.9869939
+        }
+      },
+      "stream_correlations": [
+        0.97862641,
+        0.99533615
+      ],
+      "truth": [
+        55040,
+        67840
+      ]
+    },
+    {
+      "family": "stock",
+      "input_sha256": "8502023018e0ca9c3007fb86863c51d2fcd10aa84c1d7e0ff2d33cb19eb93d2e",
+      "kind": "untouched",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            4.7444665,
+            -21.3994712
+          ],
+          "ideal_mask": 8.6366642,
+          "mixture": -4.8271628
+        }
+      },
+      "stream_correlations": [
+        0.96682193,
+        0.98864939
+      ],
+      "truth": null
+    },
+    {
+      "family": "stock",
+      "input_sha256": "46d80f1734dc8f0c02c9a6e25a7dbd459261922998de3f63b142054fe3de6347",
+      "kind": "ordinary_same_host",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            3.8785477,
+            -19.2564261
+          ],
+          "ideal_mask": 8.3452742,
+          "mixture": -4.7351713
+        }
+      },
+      "stream_correlations": [
+        0.96802805,
+        0.98891164
+      ],
+      "truth": null
+    },
+    {
+      "family": "stock",
+      "input_sha256": "2ce02f8d8e2cedaaea6567b1b432b0fed7f0e061bb4abb69811923b5895e067b",
+      "kind": "ordinary_other_voice",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            3.8920788,
+            -21.898475
+          ],
+          "ideal_mask": 8.0526742,
+          "mixture": -4.9723007
+        }
+      },
+      "stream_correlations": [
+        0.93330216,
+        0.97097739
+      ],
+      "truth": null
+    },
+    {
+      "family": "stock",
+      "input_sha256": "e154eee8d04d9dc764cd1aa7d0bb1006dd047b4724917b46f84890a44e3529b3",
+      "kind": "synthetic",
+      "si_sdr_db": {
+        "exact_edit": {
+          "blind": [
+            -10.5463225,
+            -11.9771856
+          ],
+          "ideal_mask": 4.795563,
+          "mixture": -9.2337738
+        },
+        "whole": {
+          "blind": [
+            0.6721874,
+            -19.241915
+          ],
+          "ideal_mask": 8.2269375,
+          "mixture": -5.0953659
+        }
+      },
+      "stream_correlations": [
+        0.89379742,
+        0.95927823
+      ],
+      "truth": [
+        20480,
+        35840
+      ]
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "cd499af493666b894f55a4e4a7e2ed9cfa46db22b57d5f921c14ab1c346cdfd6",
+      "kind": "untouched",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -23.8731528,
+            4.4958299
+          ],
+          "ideal_mask": 8.797673,
+          "mixture": -5.0135289
+        }
+      },
+      "stream_correlations": [
+        0.98145546,
+        0.98702731
+      ],
+      "truth": null
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "d13a7d27aa9fad18bf1178f974ce69a0ced638e901064bb04e25d0c3090aea2a",
+      "kind": "ordinary_same_host",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -24.4930006,
+            4.4483307
+          ],
+          "ideal_mask": 8.9128666,
+          "mixture": -5.0697198
+        }
+      },
+      "stream_correlations": [
+        0.9791969,
+        0.98526702
+      ],
+      "truth": null
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "58e24137b34f233fbb07d5985411c2fb371c2b8f120f0456813a1da4e1bcf4a9",
+      "kind": "ordinary_other_voice",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -24.2046812,
+            4.589396
+          ],
+          "ideal_mask": 8.9030071,
+          "mixture": -5.054657
+        }
+      },
+      "stream_correlations": [
+        0.97722338,
+        0.98371214
+      ],
+      "truth": null
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "b815e5c2f687666d65533025e628489f0d5abdf11282549f479f26017d2e99a1",
+      "kind": "synthetic",
+      "si_sdr_db": {
+        "exact_edit": {
+          "blind": [
+            -43.267171,
+            4.6793517
+          ],
+          "ideal_mask": 6.5054607,
+          "mixture": -17.5247022
+        },
+        "whole": {
+          "blind": [
+            -24.5316634,
+            4.5125988
+          ],
+          "ideal_mask": 8.9865723,
+          "mixture": -5.0633441
+        }
+      },
+      "stream_correlations": [
+        0.97867278,
+        0.98482292
+      ],
+      "truth": [
+        80640,
+        90880
+      ]
+    },
+    {
+      "family": "stock",
+      "input_sha256": "2d83eb6072c9b452ce03ba6b8e736813542dbd5af769a58b2c56a8e2632f5d82",
+      "kind": "untouched",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -19.6801108,
+            5.8266265
+          ],
+          "ideal_mask": 7.8364798,
+          "mixture": -5.1333693
+        }
+      },
+      "stream_correlations": [
+        0.99892056,
+        0.99160732
+      ],
+      "truth": null
+    },
+    {
+      "family": "stock",
+      "input_sha256": "404437b1b71df0c9be4e05c4add1d94837cbb773591b636667bc2e2cf53f6ee8",
+      "kind": "ordinary_same_host",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -19.1929157,
+            4.6539459
+          ],
+          "ideal_mask": 6.9214653,
+          "mixture": -5.2871114
+        }
+      },
+      "stream_correlations": [
+        0.99817781,
+        0.99098916
+      ],
+      "truth": null
+    },
+    {
+      "family": "stock",
+      "input_sha256": "2d686d43d1b3dd89d9e3507bc821f5124e43b05c6469dfccebc3e774bfd6c56f",
+      "kind": "ordinary_other_voice",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -13.570454,
+            1.2578088
+          ],
+          "ideal_mask": 8.2689352,
+          "mixture": -5.0860255
+        }
+      },
+      "stream_correlations": [
+        0.9913566,
+        0.93098219
+      ],
+      "truth": null
+    },
+    {
+      "family": "stock",
+      "input_sha256": "c8e6fe1a89542f5ae4725c26552c8439e112a562ff0dc0e615d95fc13b7b2f37",
+      "kind": "synthetic",
+      "si_sdr_db": {
+        "exact_edit": {
+          "blind": [
+            -18.2270476,
+            7.062663
+          ],
+          "ideal_mask": 10.1744598,
+          "mixture": -0.8681168
+        },
+        "whole": {
+          "blind": [
+            -19.7635444,
+            5.7645578
+          ],
+          "ideal_mask": 7.7359899,
+          "mixture": -4.8887528
+        }
+      },
+      "stream_correlations": [
+        0.99898226,
+        0.99605966
+      ],
+      "truth": [
+        29440,
+        42240
+      ]
+    },
+    {
+      "family": "clone",
+      "input_sha256": "ffc515c68685312e70cb3148c2da7bcf5a4606f7deb251ded67dcca837e5e4c2",
+      "kind": "untouched",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            1.9944328,
+            -19.4453584
+          ],
+          "ideal_mask": 10.6348211,
+          "mixture": -5.1776166
+        }
+      },
+      "stream_correlations": [
+        0.49843797,
+        0.69515228
+      ],
+      "truth": null
+    },
+    {
+      "family": "clone",
+      "input_sha256": "2fdedea4b93e2f9f88a77801402c3d91f9503147607bab5ed2fbf08173ced896",
+      "kind": "ordinary_same_host",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -25.6499679,
+            6.9799657
+          ],
+          "ideal_mask": 10.515739,
+          "mixture": -5.0508449
+        }
+      },
+      "stream_correlations": [
+        -0.9867656,
+        -0.96911604
+      ],
+      "truth": null
+    },
+    {
+      "family": "clone",
+      "input_sha256": "47b6e95b01416a58e07d4266a62f115eb9a29a454c7fbfa5cda57bedb9354ffa",
+      "kind": "ordinary_other_voice",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -1.3017697,
+            -20.643099
+          ],
+          "ideal_mask": 10.3672026,
+          "mixture": -5.2264918
+        }
+      },
+      "stream_correlations": [
+        -0.42308863,
+        -0.73660447
+      ],
+      "truth": null
+    },
+    {
+      "family": "clone",
+      "input_sha256": "4df8252c3a3000d7ef018e671ec31a785493237acdf88aab59b16e47b2e2a915",
+      "kind": "synthetic",
+      "si_sdr_db": {
+        "exact_edit": {
+          "blind": [
+            -16.1697305,
+            4.3427413
+          ],
+          "ideal_mask": 6.7993854,
+          "mixture": -4.931143
+        },
+        "whole": {
+          "blind": [
+            -21.4889228,
+            -0.7815221
+          ],
+          "ideal_mask": 10.0194458,
+          "mixture": -5.0653291
+        }
+      },
+      "stream_correlations": [
+        -0.71623909,
+        -0.44207681
+      ],
+      "truth": [
+        26880,
+        42240
+      ]
+    },
+    {
+      "family": "stock",
+      "input_sha256": "824c632753d4b3ef4cb4b4e6cf780cd5ff27f097efe6be847b86a4fcd9d33791",
+      "kind": "untouched",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -29.3377386,
+            3.1247126
+          ],
+          "ideal_mask": 10.438336,
+          "mixture": -4.9288195
+        }
+      },
+      "stream_correlations": [
+        0.99554712,
+        0.98526576
+      ],
+      "truth": null
+    },
+    {
+      "family": "stock",
+      "input_sha256": "7c8cde46f9abc59c69a99dc99b46b57c1e87f9ea1088303e9e984153301fb345",
+      "kind": "ordinary_same_host",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -27.5604326,
+            5.2560931
+          ],
+          "ideal_mask": 10.1791415,
+          "mixture": -4.9050041
+        }
+      },
+      "stream_correlations": [
+        0.9953897,
+        0.98462297
+      ],
+      "truth": null
+    },
+    {
+      "family": "stock",
+      "input_sha256": "13cbfee614d32b8c232bb93d21cb99bbf9ce0de46e9758997289d285af3a2603",
+      "kind": "ordinary_other_voice",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -24.1081845,
+            2.3335612
+          ],
+          "ideal_mask": 10.5312877,
+          "mixture": -4.9262787
+        }
+      },
+      "stream_correlations": [
+        0.99291453,
+        0.97688728
+      ],
+      "truth": null
+    },
+    {
+      "family": "stock",
+      "input_sha256": "facff443caaa71274de2d748e2f4375833f6299b0b9f88a9e87f09bed0cf291d",
+      "kind": "synthetic",
+      "si_sdr_db": {
+        "exact_edit": {
+          "blind": [
+            -12.1076053,
+            0.9312911
+          ],
+          "ideal_mask": 10.6107816,
+          "mixture": -7.0260328
+        },
+        "whole": {
+          "blind": [
+            -26.0772718,
+            4.9531531
+          ],
+          "ideal_mask": 10.4398691,
+          "mixture": -4.9182062
+        }
+      },
+      "stream_correlations": [
+        0.99416385,
+        0.98061511
+      ],
+      "truth": [
+        5120,
+        15360
+      ]
+    },
+    {
+      "family": "clone",
+      "input_sha256": "f633ffb9943454ea3bfcfe5ca7a3c7f97c5466f97da0ba35577e92a3328075e5",
+      "kind": "untouched",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -1.9222227,
+            -11.2858067
+          ],
+          "ideal_mask": 10.4335682,
+          "mixture": -5.2467672
+        }
+      },
+      "stream_correlations": [
+        0.40799048,
+        0.92598968
+      ],
+      "truth": null
+    },
+    {
+      "family": "clone",
+      "input_sha256": "b93464aca558218f3a5ffd721ccd729a2921a239ca0322fc464b79b59cc5a5f3",
+      "kind": "ordinary_same_host",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -1.9642321,
+            -11.3123009
+          ],
+          "ideal_mask": 10.3575386,
+          "mixture": -5.2574988
+        }
+      },
+      "stream_correlations": [
+        0.40825022,
+        0.92704031
+      ],
+      "truth": null
+    },
+    {
+      "family": "clone",
+      "input_sha256": "313414ce9ac1f3ef84b32f23ddd60aa131a650e0162ca31805848b8bdd0e3e65",
+      "kind": "ordinary_other_voice",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -2.0831937,
+            -11.1253905
+          ],
+          "ideal_mask": 10.4276757,
+          "mixture": -5.2454909
+        }
+      },
+      "stream_correlations": [
+        0.4095084,
+        0.92622277
+      ],
+      "truth": null
+    },
+    {
+      "family": "clone",
+      "input_sha256": "8b24acf0caa7fd0a23340c56e756976a78cbdafc3aeee0709563e80269eb924f",
+      "kind": "synthetic",
+      "si_sdr_db": {
+        "exact_edit": {
+          "blind": [
+            0.4594921,
+            -13.0531821
+          ],
+          "ideal_mask": 9.1978804,
+          "mixture": -7.8775157
+        },
+        "whole": {
+          "blind": [
+            -2.0280465,
+            -11.1137416
+          ],
+          "ideal_mask": 10.4389381,
+          "mixture": -5.2615821
+        }
+      },
+      "stream_correlations": [
+        0.40644087,
+        0.92699681
+      ],
+      "truth": [
+        17920,
+        30720
+      ]
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "60c7417427e3ee5db297c8f566b8dce1170a9b7017d68b1c01f84464f93214f6",
+      "kind": "untouched",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -9.3197451,
+            -6.0372535
+          ],
+          "ideal_mask": 10.3179702,
+          "mixture": -4.9532026
+        }
+      },
+      "stream_correlations": [
+        0.87201471,
+        0.98308364
+      ],
+      "truth": null
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "19955add901a012527d1f3b8e8a8761ac51c9db3948ff8d6509595e3989d7bc3",
+      "kind": "ordinary_same_host",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -9.9651759,
+            -5.7432446
+          ],
+          "ideal_mask": 10.1575322,
+          "mixture": -4.9162754
+        }
+      },
+      "stream_correlations": [
+        0.88136657,
+        0.98483065
+      ],
+      "truth": null
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "b198a73145251f0ecb9fe508cb993fefc7ad10f56b81a0e35b709b634102758f",
+      "kind": "ordinary_other_voice",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -7.2519965,
+            -5.9651708
+          ],
+          "ideal_mask": 10.1362503,
+          "mixture": -4.9691755
+        }
+      },
+      "stream_correlations": [
+        -0.8614955,
+        -0.46745588
+      ],
+      "truth": null
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "d51f026f79118b110ceefd4cbc6d28ff166809908a7f556748af4d6110453797",
+      "kind": "synthetic",
+      "si_sdr_db": {
+        "exact_edit": {
+          "blind": [
+            -6.440476,
+            -14.7358811
+          ],
+          "ideal_mask": 5.3152147,
+          "mixture": -12.9248858
+        },
+        "whole": {
+          "blind": [
+            -6.7019563,
+            -6.9009122
+          ],
+          "ideal_mask": 10.1678654,
+          "mixture": -4.9508408
+        }
+      },
+      "stream_correlations": [
+        0.8946709,
+        0.98210864
+      ],
+      "truth": [
+        28160,
+        43520
+      ]
+    },
+    {
+      "family": "clone",
+      "input_sha256": "be9bef622e0f9c49c8957cf3c9468c18359994da1a65c87170774a1b75192de1",
+      "kind": "untouched",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            6.9764481,
+            -20.4594819
+          ],
+          "ideal_mask": 13.9418336,
+          "mixture": -4.9921404
+        }
+      },
+      "stream_correlations": [
+        0.99844582,
+        0.99982851
+      ],
+      "truth": null
+    },
+    {
+      "family": "clone",
+      "input_sha256": "42e45a417ac5b3e5d4fd4f468b9ba3201350073a4dc9d7dc99a4ec1d6221bd8e",
+      "kind": "ordinary_same_host",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            7.0156458,
+            -20.4866949
+          ],
+          "ideal_mask": 14.1933893,
+          "mixture": -5.0089037
+        }
+      },
+      "stream_correlations": [
+        0.99777514,
+        0.99976561
+      ],
+      "truth": null
+    },
+    {
+      "family": "clone",
+      "input_sha256": "3933a9bf20142cbe7a5b6f72bc43168da434b97248eefe83a155f95a61e9c639",
+      "kind": "ordinary_other_voice",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            4.3154814,
+            -16.8728515
+          ],
+          "ideal_mask": 13.8112869,
+          "mixture": -4.9399472
+        }
+      },
+      "stream_correlations": [
+        0.99765476,
+        0.99974448
+      ],
+      "truth": null
+    },
+    {
+      "family": "clone",
+      "input_sha256": "1f55572028e952a74d5e5a7bd390185c60c17159a4d2bf4f0374fa4d255b15b4",
+      "kind": "synthetic",
+      "si_sdr_db": {
+        "exact_edit": {
+          "blind": [
+            3.7549814,
+            -15.3258269
+          ],
+          "ideal_mask": 6.6741011,
+          "mixture": -6.7180785
+        },
+        "whole": {
+          "blind": [
+            6.525847,
+            -19.267951
+          ],
+          "ideal_mask": 12.9612289,
+          "mixture": -5.0465517
+        }
+      },
+      "stream_correlations": [
+        0.99793383,
+        0.99977275
+      ],
+      "truth": [
+        83200,
+        93440
+      ]
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "db6843d9cfaec3bbb26de35781ba4f86d92cbd7bd9da99d08bcab59a1c0dca0a",
+      "kind": "untouched",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -19.1406371,
+            4.6963149
+          ],
+          "ideal_mask": 11.4807706,
+          "mixture": -4.9118295
+        }
+      },
+      "stream_correlations": [
+        0.99105159,
+        0.96949409
+      ],
+      "truth": null
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "7568f888ef246f95cd54f92c6740e0680bc668058ea73485f4fbde4756736b6c",
+      "kind": "ordinary_same_host",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -18.5285348,
+            4.351141
+          ],
+          "ideal_mask": 11.8163381,
+          "mixture": -4.8424481
+        }
+      },
+      "stream_correlations": [
+        0.97215935,
+        0.90262455
+      ],
+      "truth": null
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "1e545ce54cdfa9f19f6048dd71d84cde58c54027a30398e4a3cc937ba72ca9c8",
+      "kind": "ordinary_other_voice",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -18.7621005,
+            3.8964623
+          ],
+          "ideal_mask": 10.6954738,
+          "mixture": -4.8529024
+        }
+      },
+      "stream_correlations": [
+        0.9878572,
+        0.96096887
+      ],
+      "truth": null
+    },
+    {
+      "family": "expressive",
+      "input_sha256": "448072cdedf5fad751ada155e26a9a115ac27860dc7e6f25677de971f249838f",
+      "kind": "synthetic",
+      "si_sdr_db": {
+        "exact_edit": {
+          "blind": [
+            -15.6875816,
+            5.6805335
+          ],
+          "ideal_mask": 11.8437765,
+          "mixture": -2.6588483
+        },
+        "whole": {
+          "blind": [
+            -18.515237,
+            4.0277411
+          ],
+          "ideal_mask": 11.423077,
+          "mixture": -4.8446795
+        }
+      },
+      "stream_correlations": [
+        0.98521361,
+        0.94824088
+      ],
+      "truth": [
+        48640,
+        61440
+      ]
+    },
+    {
+      "family": "stock",
+      "input_sha256": "1b75d7afd967102e5db1044b3e377c6a144f5da4c62796bb3f91369b75684884",
+      "kind": "untouched",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -26.8885287,
+            8.0515634
+          ],
+          "ideal_mask": 11.0150822,
+          "mixture": -4.9416186
+        }
+      },
+      "stream_correlations": [
+        0.99939566,
+        0.99734319
+      ],
+      "truth": null
+    },
+    {
+      "family": "stock",
+      "input_sha256": "911d99332cae503c3bfa018889c588fa55ad556257de78b09a54dc0912edb543",
+      "kind": "ordinary_same_host",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -25.9781179,
+            8.2877499
+          ],
+          "ideal_mask": 11.6221098,
+          "mixture": -4.8760985
+        }
+      },
+      "stream_correlations": [
+        0.99921328,
+        0.99663807
+      ],
+      "truth": null
+    },
+    {
+      "family": "stock",
+      "input_sha256": "02b63241ae1400028ec43b59cdf2088b99249decd4f1ad6eb4326a8821dccd22",
+      "kind": "ordinary_other_voice",
+      "si_sdr_db": {
+        "whole": {
+          "blind": [
+            -19.5257465,
+            4.9636796
+          ],
+          "ideal_mask": 11.5646063,
+          "mixture": -4.896339
+        }
+      },
+      "stream_correlations": [
+        0.9984659,
+        0.99351094
+      ],
+      "truth": null
+    },
+    {
+      "family": "stock",
+      "input_sha256": "3d731c3dde0e26463365b89c1951b5c6da63a781f5c213c8c0ba434a935a8ecc",
+      "kind": "synthetic",
+      "si_sdr_db": {
+        "exact_edit": {
+          "blind": [
+            -18.2665361,
+            5.6833651
+          ],
+          "ideal_mask": 8.6032711,
+          "mixture": -4.3509716
+        },
+        "whole": {
+          "blind": [
+            -25.2091379,
+            7.7029832
+          ],
+          "ideal_mask": 11.4516917,
+          "mixture": -4.8872498
+        }
+      },
+      "stream_correlations": [
+        0.99712574,
+        0.98594622
+      ],
+      "truth": [
+        16640,
+        32000
+      ]
+    },
+    {
+      "family": null,
+      "input_sha256": "383b999cdfe89922f0fc8f0cafd9152a6d4297626a6189ec080ea8fb6a688eb2",
+      "kind": "background_only",
+      "si_sdr_db": {},
+      "stream_correlations": [
+        0.95567418,
+        0.81565933
+      ],
+      "truth": null
+    },
+    {
+      "family": null,
+      "input_sha256": "9716f7585ec812565467ecd0ac407637611d2f680b46ac6e96f3a5db5bc169cf",
+      "kind": "background_only",
+      "si_sdr_db": {},
+      "stream_correlations": [
+        -0.98148371,
+        -0.91502249
+      ],
+      "truth": null
+    },
+    {
+      "family": null,
+      "input_sha256": "60edd679f4bca740eea5c143594c5b9298afb016d1ac04d477294906302f5884",
+      "kind": "background_only",
+      "si_sdr_db": {},
+      "stream_correlations": [
+        0.90547236,
+        0.85001037
+      ],
+      "truth": null
+    },
+    {
+      "family": null,
+      "input_sha256": "26fa7862293b1a5213fbd61e9925ae4a3f9c8316323d9fd74367a5c6812fb781",
+      "kind": "background_only",
+      "si_sdr_db": {},
+      "stream_correlations": [
+        0.99653077,
+        0.95380737
+      ],
+      "truth": null
+    }
+  ],
+  "runner_sha256": "ef8a40214cc834a1eb0bb14e6038601d4c52dc293260ad504d3c681b5a2b242d",
+  "schema": "chipmunk.audio-source-isolation-acoustics/1",
+  "scope": "Offline acoustic comparison. Blind recovery uses hindsight to identify the best anonymous stream.",
+  "separator": {
+    "card_sha256": "c34341c446d0c5abd1603ee3cb9e4c0093a7b2422389fdeceeea7625e280fce1",
+    "clock": "Declared training16kHz; serialized default8000 retained as metadata only. Free learned filters have no samplerate-dependent arithmetic. No resampling.",
+    "input": "Exact mono16kHz64000 float32 samples, no input normalization, denoising, padding or clipping",
+    "output": "Two unordered64000-sample float32 source estimates; not identified people or guaranteed clean voices",
+    "parameters": 5066929,
+    "repository": "JorisCos/ConvTasNet_Libri2Mix_sepclean_16k",
+    "revision": "e1ef95ab7a037950f3a606b9a56760cf94701d3d",
+    "runtime": "CPUfloat32, frozen weights, eval. Inspected local architecture, no dynamic remote code or unsafe pickle globals.",
+    "serving_admitted": false,
+    "tensor_entries": 345,
+    "terms": "Card metadata CC-BY-SA-4.0, explicit author notice CC-BY-SA-3.0, LibriSpeech source CC-BY-4.0. Version conflict retained; no unambiguous license or complete training-rights warranty asserted.",
+    "weight_sha256": "8d97f012f7b2f22bb79cb0d0983a7ba27a52c1796ee3f63cbf25b4d28630adce"
+  },
+  "summary": {
+    "all": {
+      "exact_edit": {
+        "blind": {
+          "measured": 12,
+          "median_gain_db": 8.14717,
+          "planned": 12,
+          "recovered": 8
+        },
+        "ideal_mask": {
+          "measured": 12,
+          "median_gain_db": 14.26598,
+          "planned": 12,
+          "recovered": 12
+        }
+      },
+      "whole": {
+        "blind": {
+          "measured": 48,
+          "median_gain_db": 9.08529,
+          "planned": 48,
+          "recovered": 37
+        },
+        "ideal_mask": {
+          "measured": 48,
+          "median_gain_db": 15.36262,
+          "planned": 48,
+          "recovered": 48
+        }
+      }
+    },
+    "edits": {
+      "exact_edit": {
+        "blind": {
+          "measured": 12,
+          "median_gain_db": 8.14717,
+          "planned": 12,
+          "recovered": 8
+        },
+        "ideal_mask": {
+          "measured": 12,
+          "median_gain_db": 14.26598,
+          "planned": 12,
+          "recovered": 12
+        }
+      },
+      "whole": {
+        "blind": {
+          "measured": 12,
+          "median_gain_db": 8.82985,
+          "planned": 12,
+          "recovered": 8
+        },
+        "ideal_mask": {
+          "measured": 12,
+          "median_gain_db": 15.23839,
+          "planned": 12,
+          "recovered": 12
+        }
+      }
+    }
+  }
+}

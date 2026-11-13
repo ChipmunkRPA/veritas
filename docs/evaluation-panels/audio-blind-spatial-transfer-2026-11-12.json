@@ -1,0 +1,349 @@
+{
+  "acoustics": {
+    "held": {
+      "advance": true,
+      "arms": {
+        "blind": {
+          "clipped_views": 0,
+          "edit_gain_db": 5.2115,
+          "full_gain_db": 5.4526,
+          "views": 6
+        },
+        "measured_room": {
+          "clipped_views": 0,
+          "edit_gain_db": 9.8081,
+          "full_gain_db": 5.9655,
+          "views": 6
+        },
+        "oracle": {
+          "clipped_views": 0,
+          "edit_gain_db": 5.2115,
+          "full_gain_db": 5.4526,
+          "views": 6
+        }
+      },
+      "background_only_routes": 2,
+      "ordinary_routes": 20
+    },
+    "selection": {
+      "advance": true,
+      "arms": {
+        "blind": {
+          "clipped_views": 0,
+          "edit_gain_db": 6.267,
+          "full_gain_db": 5.9046,
+          "views": 6
+        },
+        "measured_room": {
+          "clipped_views": 0,
+          "edit_gain_db": 8.6704,
+          "full_gain_db": 7.2784,
+          "views": 6
+        },
+        "oracle": {
+          "clipped_views": 0,
+          "edit_gain_db": 6.267,
+          "full_gain_db": 5.9046,
+          "views": 6
+        }
+      },
+      "background_only_routes": 2,
+      "ordinary_routes": 18
+    }
+  },
+  "decision_rule": {
+    "admission": "Keep only windows that pass the incumbent speech gate on both arms. Original-only coverage remains visible. No source labels in routing.",
+    "advance": "At least two net additional useful held edits in different generator families and distinct groups, at most one additional held false genuine group, and no new background-only flags. Also report the historical original-track comparison point and retrospective equal-false-group operating points separately.",
+    "location": "Use the best admitted two-second score. Match the known edit with at least 0.30 temporal IoU and half the edit covered.",
+    "points": "Use each arm's strict maximum on all assessed genuine selection views. Retain the parent original point as a separate descriptive comparator.",
+    "scope": "Offline on the 52 already exposed stereo deliveries used for the acoustic preflight. A gain requires a later fresh test."
+  },
+  "fixed_voice": {
+    "held": {
+      "added_families": [
+        "clone",
+        "expressive"
+      ],
+      "added_locations": 2,
+      "advance": true,
+      "calls": {
+        "blind": 51,
+        "original": 52
+      },
+      "equal_false_group": {
+        "0": {
+          "blind": {
+            "ai_flags": 0,
+            "assessed": 26,
+            "background_flags": 0,
+            "false_cases": 0,
+            "false_groups": 0,
+            "inconclusive": 26,
+            "located": [],
+            "unassessed": 0
+          },
+          "original": {
+            "ai_flags": 0,
+            "assessed": 26,
+            "background_flags": 0,
+            "false_cases": 0,
+            "false_groups": 0,
+            "inconclusive": 26,
+            "located": [],
+            "unassessed": 0
+          }
+        },
+        "1": {
+          "blind": {
+            "ai_flags": 1,
+            "assessed": 26,
+            "background_flags": 0,
+            "false_cases": 2,
+            "false_groups": 1,
+            "inconclusive": 23,
+            "located": [],
+            "unassessed": 0
+          },
+          "original": {
+            "ai_flags": 1,
+            "assessed": 26,
+            "background_flags": 0,
+            "false_cases": 3,
+            "false_groups": 1,
+            "inconclusive": 22,
+            "located": [],
+            "unassessed": 0
+          }
+        },
+        "2": {
+          "blind": {
+            "ai_flags": 4,
+            "assessed": 26,
+            "background_flags": 0,
+            "false_cases": 5,
+            "false_groups": 2,
+            "inconclusive": 17,
+            "located": [
+              33,
+              42
+            ],
+            "unassessed": 0
+          },
+          "original": {
+            "ai_flags": 1,
+            "assessed": 26,
+            "background_flags": 0,
+            "false_cases": 4,
+            "false_groups": 2,
+            "inconclusive": 21,
+            "located": [],
+            "unassessed": 0
+          }
+        }
+      },
+      "fixed": {
+        "blind": {
+          "ai_flags": 3,
+          "assessed": 26,
+          "background_flags": 0,
+          "false_cases": 5,
+          "false_groups": 2,
+          "inconclusive": 18,
+          "located": [
+            33,
+            42
+          ],
+          "unassessed": 0
+        },
+        "original": {
+          "ai_flags": 1,
+          "assessed": 26,
+          "background_flags": 0,
+          "false_cases": 4,
+          "false_groups": 2,
+          "inconclusive": 21,
+          "located": [],
+          "unassessed": 0
+        }
+      },
+      "historical_original": {
+        "ai_flags": 0,
+        "assessed": 26,
+        "background_flags": 0,
+        "false_cases": 0,
+        "false_groups": 0,
+        "inconclusive": 26,
+        "located": [],
+        "unassessed": 0
+      },
+      "lost_locations": 0,
+      "original_full_coverage": {
+        "ai_flags": 1,
+        "assessed": 26,
+        "background_flags": 0,
+        "false_cases": 4,
+        "false_groups": 2,
+        "inconclusive": 21,
+        "located": [],
+        "unassessed": 0
+      }
+    },
+    "selection": {
+      "added_families": [
+        "clone"
+      ],
+      "added_locations": 1,
+      "advance": false,
+      "calls": {
+        "blind": 47,
+        "original": 51
+      },
+      "equal_false_group": {
+        "0": {
+          "blind": {
+            "ai_flags": 1,
+            "assessed": 24,
+            "background_flags": 0,
+            "false_cases": 0,
+            "false_groups": 0,
+            "inconclusive": 23,
+            "located": [
+              3
+            ],
+            "unassessed": 2
+          },
+          "original": {
+            "ai_flags": 0,
+            "assessed": 24,
+            "background_flags": 0,
+            "false_cases": 0,
+            "false_groups": 0,
+            "inconclusive": 24,
+            "located": [],
+            "unassessed": 2
+          }
+        },
+        "1": {
+          "blind": {
+            "ai_flags": 1,
+            "assessed": 24,
+            "background_flags": 0,
+            "false_cases": 2,
+            "false_groups": 1,
+            "inconclusive": 21,
+            "located": [
+              3
+            ],
+            "unassessed": 2
+          },
+          "original": {
+            "ai_flags": 0,
+            "assessed": 24,
+            "background_flags": 0,
+            "false_cases": 2,
+            "false_groups": 1,
+            "inconclusive": 22,
+            "located": [],
+            "unassessed": 2
+          }
+        },
+        "2": {
+          "blind": {
+            "ai_flags": 3,
+            "assessed": 24,
+            "background_flags": 0,
+            "false_cases": 6,
+            "false_groups": 2,
+            "inconclusive": 15,
+            "located": [
+              3
+            ],
+            "unassessed": 2
+          },
+          "original": {
+            "ai_flags": 3,
+            "assessed": 24,
+            "background_flags": 0,
+            "false_cases": 5,
+            "false_groups": 2,
+            "inconclusive": 16,
+            "located": [
+              7
+            ],
+            "unassessed": 2
+          }
+        }
+      },
+      "fixed": {
+        "blind": {
+          "ai_flags": 1,
+          "assessed": 24,
+          "background_flags": 0,
+          "false_cases": 0,
+          "false_groups": 0,
+          "inconclusive": 23,
+          "located": [
+            3
+          ],
+          "unassessed": 2
+        },
+        "original": {
+          "ai_flags": 0,
+          "assessed": 24,
+          "background_flags": 0,
+          "false_cases": 0,
+          "false_groups": 0,
+          "inconclusive": 24,
+          "located": [],
+          "unassessed": 2
+        }
+      },
+      "historical_original": {
+        "ai_flags": 0,
+        "assessed": 26,
+        "background_flags": 0,
+        "false_cases": 0,
+        "false_groups": 0,
+        "inconclusive": 26,
+        "located": [],
+        "unassessed": 0
+      },
+      "lost_locations": 0,
+      "original_full_coverage": {
+        "ai_flags": 0,
+        "assessed": 26,
+        "background_flags": 0,
+        "false_cases": 0,
+        "false_groups": 0,
+        "inconclusive": 26,
+        "located": [],
+        "unassessed": 0
+      }
+    }
+  },
+  "independent_checks": {
+    "max_scored_window_commitments": 208,
+    "model_launches_with_equal_raw_scores_and_admission": 2,
+    "pcm_commitment_replay": 52,
+    "published_row_scores": 0,
+    "reference_fft_implementations": [
+      "scipy",
+      "numpy"
+    ]
+  },
+  "model_run": {
+    "peak_rss": 2957705216,
+    "platform": "darwin",
+    "seconds": 123.512
+  },
+  "parent_roster_sha256": "28a3ecbaa264cff9de2f37a510734255fda833a4b057726127d6de0922f41f8a",
+  "private_artifact_commitments": {
+    "freeze.json": "abdbcff77c0c5b776794efb57eb979a773e76ef15681da8ba248fe5e8c73c2a7",
+    "result.json": "3e8f01e6dd81178cf5751a87b97ebe5e4b88b13e4decb44acaee0a8a01092c7f",
+    "voice-freeze.json": "40a9466771abd0aa8444469c4c8d7af12e85e3b2ccbee4e772db3278b3fc92a6",
+    "voice-held.json": "26592f4239a7197fbcfeb0ae7b0cd5dffd5c75274bdd85a047ac849a5a506c60",
+    "voice-result.json": "c57ceb678d202341de400d099473aa9af2fdfcc0ea90366e9477d6d6ff518b4d",
+    "voice-selection.json": "5c4858012c59897786431f62a4d7394884a65181e7cc10685d3684083f21a1df"
+  },
+  "schema": "chipmunk.audio-blind-spatial-study/1"
+}

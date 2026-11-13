@@ -97,6 +97,9 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [blind stereo comparison](audio-blind-spatial-transfer-2026-11-12.md) located two of six known short edits on the reused held panel, versus zero on the original stereo mix. Both methods flagged two ordinary groups. In the [third room](audio-blind-huddersfield-transfer-2026-11-12.md) the routing rule discarded the better component for all eight off-center targets, so it remains outside serving.
+- The [longer article transfer](writing-long-position-transfer-2026-11-12.md) gained two locations at the short-passage point with one extra genuine work flagged. The longer-document operating point gave no added locations. The [JPEG contour trial](image-jpeg-contour-gap-transfer-2026-11-12.md) gave no useful localization before applying its points. Both remain in evaluation.
+
 - The [local audio timing check](audio-reference-local-shift-2026-11-12.md) compares a short recording with its earlier copy. It recovered 34 of 48 known moves and added zero ranges on 216 held controls. The local app and downloadable evidence use the same two time ranges and waveforms.
 - The [three-sentence writing check](writing-position-app-2026-11-12.md) adds source-linked evidence in the browser, PDF and JSON on eligible CPU runs. It added six correct sentence locations and no genuine groups across three historical publisher evaluations.
 - The [JPEG texture ranking](image-jpeg-texture-rank-transfer-2026-11-12.md) remains experimental after useful localization on only one fresh photo group. The [Lombard source qualification](lombard-original-mouth-event-2026-11-12.md) provides genuine controls for a separate synchronized mouth-redraw test.

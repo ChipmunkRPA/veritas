@@ -19,14 +19,16 @@ export interface CustomerAssessment {
 }
 type Signal = { id: string; detector_id?: string | null; family?: string | null; modality?: string | null; lane?: string | null
   hypothesis?: string | null; metrics?: Record<string, unknown> | null; details?: Record<string, unknown> | null
-  legacy?: { v1_id?: string | null } | null; status?: string | null; outside_estimate?: unknown; effective_weight?: number | null }
+  legacy?: { v1_id?: string | null } | null; status?: string | null; outside_estimate?: unknown; effective_weight?: number | null
+  segments?: readonly unknown[] | null }
 type Input = FindingContext & {
   decision?: Decision | null; status?: string; stored_record?: unknown
   kind?: string; signals?: readonly Signal[]; findings?: readonly FindingInput[]
   condition_profile?: { within_validated_envelope?: boolean | null; slice_id?: string | null } | null
   caveats?: readonly string[]
 }
-export const ASSESSMENT_RULE = 'evidence-led-assessment/v6'
+export const ASSESSMENT_RULE = 'evidence-led-assessment/v7'
+const minLandmarkTimingChangeWindows = 4
 const INTERVAL_NOTE = 'This range describes uncertainty in the combined estimate. It does not include every detection error or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate.'
 const ESTIMATE_NOTE = "This is the system's estimated likelihood, not an independently established accuracy rate or proof of origin. An original-file tendency does not establish that every part of the file is unedited."
 const probability = (p: unknown): p is number => typeof p === 'number' && Number.isFinite(p) && p >= 0 && p <= 1
@@ -60,7 +62,11 @@ function videoScope(result: Input): [AssessmentScope, boolean] {
         : ['image', 'video'].includes(signal.modality ?? '') || /^(img|vid|face)\./.test(detector)
           || ['F3_whole_image_generation', 'F4_localised_manipulation', 'F10_face', 'V1_face_track', 'V3_synthetic_video'].some(f => families.has(f)) ? 'visual' : null
     if (channel === null) continue
-    const status = signal.status || 'unknown'
+    let status = signal.status || 'unknown'
+    const windows = signal.metrics?.windows
+    if (channel === 'audio_picture_timing' && status === 'ok' && typeof windows === 'number'
+      && (windows === 0 || (signal.metrics?.longest_measured_run !== undefined && windows > 0 && windows < minLandmarkTimingChangeWindows))
+      && !signal.segments?.length && !signal.metrics?.steps && !signal.metrics?.collapses) status = 'insufficient_timing_windows'
     statuses[channel].add(status)
     const matched = rows.filter(r => r.signal_id != null && refs.has(r.signal_id))
     const omitted = !!signal.outside_estimate || signal.effective_weight === 0 || matched.some(r => r.counted === false)
@@ -77,6 +83,7 @@ function videoScope(result: Input): [AssessmentScope, boolean] {
     if (['failed', 'timeout', 'timed_out'].some(status => states.has(status))) notes.push(`Some ${label.toLowerCase()} checks could not complete.`)
     if (states.has('skipped')) notes.push(`Some ${label.toLowerCase()} checks were skipped.`)
     if (states.has('not_applicable')) notes.push(`Some ${label.toLowerCase()} checks were unavailable or not applicable.`)
+    if (states.has('insufficient_timing_windows')) notes.push('Audio/picture timing had too few measured speech windows to assess a change on at least one track.')
     if (!states.size || (states.size === 1 && states.has('unknown'))) notes.push(`${label} check coverage is unavailable in the saved result.`)
   }
   const visualOnly = included.size === 1 && included.has('visual')

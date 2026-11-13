@@ -1,0 +1,165 @@
+{
+  "acoustic_sha256": "896bd1fd6dba50cce2c80d9c7b5c91c65d9c234f106353940c367da90d21cdae",
+  "conditions": {
+    "benchmark": "Compare integer mono mean, exact clean room-rendered target, both unassigned frozen AuxIVA candidates, and the unchanged lower-side-energy routing. Report oracle from best full-clip SNR, exact range SNR, clipping, and route misses. No model inference, fit, serving or confidence change.",
+    "gate": {
+      "maximum_clipped_routed_positive_views": 0,
+      "minimum_median_edit_gain_db": 3,
+      "minimum_median_full_gain_db": 3,
+      "minimum_routed_positive_groups": 8
+    },
+    "mix": "Convolve six-second dry source and room inputs on a fixed 16 kHz clock. Normalize total masker energy against unedited target mean at -5 dB using a common per-group gain. Before that scaling, dual feeds each have equal mono energy. All matched edits and genuine controls share exact quantized masker samples. Include isolated background-only deliveries for each route stress.",
+    "room": "Huddersfield St Paul's Hall fixed KU100 receiver, 44.1k native paired WAVs, pins v299. Use paths named S01, S03 and S07. Define roles by predeclared interaural balance and delay checks; publisher angle mapping remains unverified. Preserve complete 3s measured responses, channel order, and stored clock while converting to 16 kHz.",
+    "sources": "Eight exact interior prior remote-neighbor groups, with three expressive, three stock and two clone edits. Four previous background-only source clips serve as controls and additional feeds. All group, speaker, source, donor fragment and exact room capture intervals are disjoint from the two blind-pilot roles; underlying source banks and AMI sessions have prior project exposure.",
+    "stresses": {
+      "balanced_target": "S01 target and one lateral masker, alternating S03 and S07.",
+      "lateral_target": "Swap target and masker paths on the same sources; assignment stays frozen.",
+      "second_competitor": "S01 target and two separately retained AMI feeds on the opposing lateral paths."
+    }
+  },
+  "freeze_sha256": "68cdf65d974156221bf4fc1176961d789e4f2c7ad04bb9bfb2058d4bac76d93e",
+  "model_inference_calls": 0,
+  "pilot_receipt_sha256": "488d4c2b9fa5965fccdffe5f8a4c3f733eae2d72d19dc0d7f91e5c76d89e6092",
+  "review": {
+    "alternate_fft_views": 108,
+    "elapsed_s": 57.96,
+    "rendered_pcm_bindings": 432
+  },
+  "room": {
+    "S01": {
+      "early_correlation_delay_samples": 0,
+      "early_left_minus_right_energy_db": 0.12481,
+      "native_peak_samples": [
+        1147,
+        1142
+      ],
+      "native_rate": 44100,
+      "render_rate": 16000,
+      "render_samples": 48000,
+      "render_sha256": "049572de81dd686df302e83b342b6e97072ec48085ea7ffc959ea49ae23b1b1d"
+    },
+    "S03": {
+      "early_correlation_delay_samples": 33,
+      "early_left_minus_right_energy_db": -10.67975,
+      "native_peak_samples": [
+        1168,
+        1135
+      ],
+      "native_rate": 44100,
+      "render_rate": 16000,
+      "render_samples": 48000,
+      "render_sha256": "5d5d048fc277fec9dd89bebfa9c0fec7b9fa3a1f72d3fcec1b51d0f3cbb77a8c"
+    },
+    "S07": {
+      "early_correlation_delay_samples": -35,
+      "early_left_minus_right_energy_db": 10.80801,
+      "native_peak_samples": [
+        1109,
+        1143
+      ],
+      "native_rate": 44100,
+      "render_rate": 16000,
+      "render_samples": 48000,
+      "render_sha256": "d05bb1f9cad990c543a948a298e63b2fb18a0d23b7eff2eacf1d0ab4ba0ebd6b"
+    }
+  },
+  "room_receipt_sha256": "1b0542f1f0c1392907756794ca4b00afda251396e55a19f946fdf2d73529bbd4",
+  "roster_sha256": "2c327a1f52931510cd07091cb4b7fb38ae868c7895d456e548e660fcc6e47e11",
+  "runner_sha256": "556f6f2c1d493f53212cc1e8a005dbeb88c33d5ab1a64902276b5fc6fe7a2810",
+  "runtime": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "soundfile": "0.14.0"
+  },
+  "schema": "chipmunk.audio-blind-huddersfield-transfer/1",
+  "seconds": null,
+  "separator_sha256": "baf3f9ad4140a33bb527f4a079aa9d1f82a86b09eb5adcead79913bcfa4991e0",
+  "source_counts": {
+    "distinct_capture_intervals": 12,
+    "prior_pilot_capture_intervals": 16,
+    "selected_exact_source_and_fragment_hashes": 50,
+    "selected_speaker_identities": 24,
+    "selected_utterance_groups": 8,
+    "shared_background_sessions": 4
+  },
+  "source_receipt_sha256": "3d3c27c859e60c86fcb583e017b3e4fda4397ef81110c42b8c1773ec7edd1599",
+  "summary": {
+    "balanced_target": {
+      "acoustic_gate_passes": false,
+      "blind": {
+        "clipped_views": 0,
+        "median_edit_gain_db": 2.78161,
+        "median_full_gain_db": 2.91702,
+        "views": 8
+      },
+      "oracle": {
+        "median_edit_gain_db": 2.65937,
+        "median_full_gain_db": 2.91702,
+        "views": 8
+      },
+      "routing_counts": {
+        "background_only_routed": 4,
+        "ordinary_other_voice_routed": 8,
+        "ordinary_same_host_routed": 8,
+        "synthetic_route_matches_oracle": 7,
+        "synthetic_routed": 8,
+        "untouched_routed": 8
+      },
+      "synthetic": 8,
+      "views": 36
+    },
+    "lateral_target": {
+      "acoustic_gate_passes": false,
+      "blind": {
+        "clipped_views": 0,
+        "median_edit_gain_db": 0.60145,
+        "median_full_gain_db": 0.24232,
+        "views": 8
+      },
+      "oracle": {
+        "median_edit_gain_db": 4.89462,
+        "median_full_gain_db": 5.49913,
+        "views": 8
+      },
+      "routing_counts": {
+        "background_only_routed": 4,
+        "ordinary_other_voice_routed": 8,
+        "ordinary_same_host_routed": 8,
+        "synthetic_route_matches_oracle": 0,
+        "synthetic_routed": 8,
+        "untouched_routed": 8
+      },
+      "synthetic": 8,
+      "views": 36
+    },
+    "second_competitor": {
+      "acoustic_gate_passes": false,
+      "blind": {
+        "clipped_views": 0,
+        "median_edit_gain_db": 2.13811,
+        "median_full_gain_db": 2.30657,
+        "views": 6
+      },
+      "oracle": {
+        "median_edit_gain_db": 3.21273,
+        "median_full_gain_db": 2.37838,
+        "views": 8
+      },
+      "routing_counts": {
+        "background_only_routed": 3,
+        "background_only_unrouted": 1,
+        "ordinary_other_voice_routed": 7,
+        "ordinary_other_voice_unrouted": 1,
+        "ordinary_same_host_routed": 6,
+        "ordinary_same_host_unrouted": 2,
+        "synthetic_route_matches_oracle": 3,
+        "synthetic_routed": 6,
+        "synthetic_unrouted": 2,
+        "untouched_routed": 6,
+        "untouched_unrouted": 2
+      },
+      "synthetic": 8,
+      "views": 36
+    }
+  }
+}

@@ -102,6 +102,20 @@ def test_report_presentation_matches_api_headline_and_preserves_evidence(name):
     assert snapshot_hash(snapshot) == before
 
 
+def test_video_report_describes_limited_timing_coverage():
+    from app.reports import engine
+    from app.reports.public_view import public_view
+    from app.reports.view import page_view
+
+    snapshot, expected = headline_snapshot("real video excludes checked voice and timing from visual percentage")
+    signal = next(row for row in snapshot.result["signals"] if row["family"] == "av-sync")
+    signal["metrics"] = {"windows": 1, "longest_measured_run": 1, "steps": 0, "collapses": 0}
+    view = public_view(snapshot, page_view(snapshot, images={}))
+    assert view["customer_assessment"]["confidence_pct"] == expected["confidence_pct"]
+    assert "too few measured speech windows" in view["customer_assessment"]["scope_note"]
+    assert "too few measured speech windows" in engine.render_html(snapshot, embed_fonts=False)
+
+
 @pytest.mark.parametrize("kind", ["image", "video", "audio", "document"])
 @pytest.mark.parametrize("profile", ["summary", "standard", "forensic", "newsroom"])
 def test_every_standard_report_discloses_screening_scope_and_private_engagement(kind, profile):

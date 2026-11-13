@@ -34,7 +34,7 @@ def test_scoped_image_presentation(case):
     result = customer_assessment(value)
     assert {k: result[k] for k in case["expected"]} == case["expected"]
     assert value == before
-    assert result["rule"] == "evidence-led-assessment/v6"
+    assert result["rule"] == "evidence-led-assessment/v7"
     if case.get("component_confidence"):
         assert result["component_estimate"]["confidence_pct"] == case["component_confidence"]
         assert result["component_estimate"]["interval_pct"] == [92., 99.]

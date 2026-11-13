@@ -1437,6 +1437,17 @@ native procedure additionally checks original picture timestamps and crop
 pixels. It requires the exact publisher sources described in the study.
 [Face-change study and replay instructions](video-face-short-prefix-transfer-2026-11-12.md)
 
+### Verify an earlier-audio timing export
+
+For a comparison that shows a moved excerpt, keep both original recordings and download the comparison JSON. The verifier independently decodes their clocks and reruns the waveform match. It checks the signed offset, both time ranges, the supporting windows, the waveform values and the bytes of both playable clips. It needs FFmpeg, FFprobe, NumPy and OpenCV. The supplemental export is unsigned, so this verifies its evidence against the supplied copies. [Local timing evaluation](audio-reference-local-shift-2026-11-12.md)
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python -B -m scripts.verify_audio_local_timing_export \
+  earlier.wav analyzed.wav comparison.json
+```
+
+The verifier checked the 34 localized WAV pairs from the published held panel and all 68 exported excerpts. In a separate check, the public timing, RADAR, Lombard source and writing result readers printed identical output on macOS Python 3.11.9 and offline Linux Python 3.12.15. The shared output SHA-256 was `9d2680b4ca0e7dd6041ff90c364eb9f89b8010e093fbfe1d3a03645362f8183d`. This cross-platform replay uses saved evaluation ledgers. [Timing reader](../backend/scripts/review_audio_reference_local_shift_panel.py) · [RADAR reader](../backend/scripts/review_audio_selective_fusion_transfer.py) · [Lombard reader](../backend/scripts/review_lombard_mouth_events.py) · [Writing reader](../backend/scripts/review_writing_position_qwen.py)
+
 ### Replay the stereo export and the latest held checks
 
 Run from the repository root with Python 3.11 or later. The first command also

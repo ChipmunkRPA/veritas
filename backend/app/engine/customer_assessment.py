@@ -16,6 +16,7 @@ from app.engine.service_policy import RULE, THRESHOLD, standard_service_policy
 
 ARTICLE_REFERENCE_SLICE = "document/local-article-v1"
 EMAIL_REFERENCE_SLICE = "document/local-email-v1"
+MIN_LANDMARK_TIMING_CHANGE_WINDOWS = 4
 INTERVAL_NOTE = (
     "This range describes uncertainty in the combined estimate. It does not include every detection error "
     "or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate."
@@ -60,6 +61,12 @@ def _video_scope(result: Mapping[str, Any]) -> tuple[dict[str, Any], bool]:
         else:
             continue
         status = signal.get("status") or "unknown"
+        metrics = signal.get("metrics") or {}
+        windows = metrics.get("windows")
+        if (channel == "audio_picture_timing" and status == "ok" and type(windows) in (float, int)
+                and (windows == 0 or "longest_measured_run" in metrics and 0 < windows < MIN_LANDMARK_TIMING_CHANGE_WINDOWS)
+                and not (signal.get("segments") or metrics.get("steps") or metrics.get("collapses"))):
+            status = "insufficient_timing_windows"
         statuses[channel].add(status)
         matched = [r for r in rows if r.get("signal_id") in refs]
         omitted = (bool(signal.get("outside_estimate")) or signal.get("effective_weight") == 0
@@ -81,6 +88,8 @@ def _video_scope(result: Mapping[str, Any]) -> tuple[dict[str, Any], bool]:
             notes.append(f"Some {label.lower()} checks were skipped.")
         if "not_applicable" in states:
             notes.append(f"Some {label.lower()} checks were unavailable or not applicable.")
+        if "insufficient_timing_windows" in states:
+            notes.append("Audio/picture timing had too few measured speech windows to assess a change on at least one track.")
         if not states or states == {"unknown"}:
             notes.append(f"{label} check coverage is unavailable in the saved result.")
     visual_only = included == {"visual"}

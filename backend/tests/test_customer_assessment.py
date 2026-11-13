@@ -35,6 +35,20 @@ def test_rejects_non_probability(p):
     assert customer_assessment(result)["confidence_pct"] is None
 
 
+def test_one_video_timing_window_does_not_assess_a_change():
+    case = next(c for c in CASES if c["name"] == "real video excludes checked voice and timing from visual percentage")
+    result = copy.deepcopy(case["input"])
+    before = customer_assessment(result)
+    timing = next(s for s in result["signals"] if s.get("family") == "av-sync")
+    timing["metrics"] = {"windows": 1, "longest_measured_run": 1, "steps": 0, "collapses": 0}
+    got = customer_assessment(result)
+    assert "too few measured speech windows" in got["scope_note"]
+    assert "Audio/picture timing was checked" not in got["scope_note"]
+    assert all(got[key] == before[key] for key in ("direction", "confidence_pct", "excluded_channels"))
+    timing["metrics"]["steps"] = 1
+    assert "too few measured speech windows" not in customer_assessment(result)["scope_note"]
+
+
 @pytest.mark.parametrize("code,p,direction,confidence", [
     ("ai_supported", .6, "ai", 60), ("ai_supported", .599999, "inconclusive", None),
     ("no_ai_indicators", .4, "original", 60), ("no_ai_indicators", .400001, "inconclusive", None),

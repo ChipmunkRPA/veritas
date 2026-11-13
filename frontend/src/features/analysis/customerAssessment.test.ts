@@ -36,6 +36,14 @@ describe('evidence-led customer interpretation, shared report/API cases', () => 
     expect(presentedCustomerAssessment({ ...input, signals: undefined, customer_assessment: fromApi })).toBe(fromApi)
     expect(presentedCustomerAssessment({ ...input, signals: undefined, customer_assessment: {} }).scope).toBe('assessed_components')
   })
+  it('states when one measured timing window cannot assess a change', () => {
+    const input = cases.find(c => c.name === 'real video excludes checked voice and timing from visual percentage')!.input
+    const got = customerAssessment({ ...input, signals: input.signals?.map(s => s.family === 'av-sync'
+      ? { ...s, metrics: { windows: 1, longest_measured_run: 1, steps: 0, collapses: 0 } } : s) })
+    expect(got.scope_note).toContain('too few measured speech windows')
+    expect(got.scope_note).not.toContain('Audio/picture timing was checked')
+    expect(got.confidence_pct).toBe(customerAssessment(input).confidence_pct)
+  })
   it('recomputes a cached v1 original headline when the recorded decision is inconclusive', () => {
     const input = { ...cases[2].input, decision: { ...cases[2].input.decision!, code: 'inconclusive' as const } }
     const previous = { ...customerAssessment(cases[2].input), rule: '80-percent-leaning/v1' }

@@ -24,6 +24,7 @@ from app.evidence import video_reference_soundtrack as reference_timing
 from app.reports.media_reference_pdf import render as render_comparison
 from app.storage.db import Analysis, Artefact, BillingOrderRow, Job, utcnow
 from scripts.compare_audio_references import run
+from scripts.verify_audio_local_timing_export import verify_export as verify_timing
 from scripts.verify_stereo_reference import verify as verify_stereo
 
 pytestmark = pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg required")
@@ -126,10 +127,20 @@ def test_local_timing_evidence_replays_offsets_excerpts_and_pdf(tmp_path):
     package = {"comparison": record, "assets": {name: base64.b64encode(raw).decode() for name, raw in assets.items()}}
     exported.write_text(json.dumps(package))
     assert run(earlier, analyzed, exported, verify=True) == record
+    assert verify_timing(earlier, analyzed, exported) == {
+        "offset_ms": 200, "earlier_samples": [12800, 23040], "submitted_samples": [16000, 26240], "excerpts_verified": 2,
+    }
     package["comparison"]["local_timing"]["range"]["submitted"]["samples"][0] += 1
     exported.write_text(json.dumps(package))
     with pytest.raises(ValueError, match="differs from the re-decoded sources"):
         run(earlier, analyzed, exported, verify=True)
+    with pytest.raises(ValueError, match="Exported source clock differs"):
+        verify_timing(earlier, analyzed, exported)
+    package["comparison"]["local_timing"]["range"]["submitted"]["samples"][0] -= 1
+    package["comparison"]["local_timing"]["range"]["submitted"]["waveform"]["low"][0] = 7
+    exported.write_text(json.dumps(package))
+    with pytest.raises(ValueError, match="Source PCM or waveform differs"):
+        verify_timing(earlier, analyzed, exported)
 
     globally_shifted = save(tmp_path, "timing-globally-shifted", np.r_[np.zeros(3200), original[:-3200]])
     silence = save(tmp_path, "timing-silence", np.zeros_like(original))

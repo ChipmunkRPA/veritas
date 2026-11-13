@@ -33,7 +33,7 @@ body:
     id: inputs
     attributes:
       label: Source references, permission, and independence
-      description: Link public sources and terms; give hashes and known source, speaker, topic, or generator overlap. Do not attach private media.
+      description: Link public sources and terms; give hashes and known source, speaker, topic, or generator overlap. The optional `verify-inputs` receipt counts rehashed inputs and parent files without sharing local paths. Do not attach private media.
     validations:
       required: true
   - type: textarea

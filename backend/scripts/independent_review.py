@@ -51,6 +51,11 @@ def main() -> None:
     locations.add_argument("response", type=Path)
     locations.add_argument("output", type=Path)
     locations.add_argument("--image-mask-dir", type=Path, help="Local directory for explicitly declared binary PBM masks")
+    inputs = commands.add_parser("verify-inputs", help="Rehash every planned input and parent source on disk")
+    inputs.add_argument("manifest", type=Path)
+    inputs.add_argument("file_index", type=Path)
+    inputs.add_argument("output", type=Path)
+    inputs.add_argument("--root", type=Path, required=True)
     example = commands.add_parser("demo", help="Create a fictional four-modality example with no media or weights")
     example.add_argument("output", type=Path)
     args = parser.parse_args()
@@ -75,6 +80,10 @@ def main() -> None:
         write(args.output, result)
         print(digest(result))
         return
+    elif args.command == "verify-inputs":
+        from app.bench.independent_inputs import verify_inputs
+
+        result = verify_inputs(manifest, read(args.file_index), args.root)
     else:
         result = compare(manifest, read(args.baseline), read(args.baseline_lock),
                          read(args.candidate), read(args.candidate_lock),

@@ -6,6 +6,7 @@ from copy import deepcopy
 import pytest
 
 from app.bench import independent as review
+from app.bench import independent_inputs as files
 from app.bench import independent_locations as locations
 
 
@@ -140,6 +141,44 @@ def test_four_media_fixture_audits_and_summarizes_without_loading_models():
     assert manifest == original
     # Summary deliberately excludes source paths, source URLs, individual IDs and media bytes.
     assert "predictions" not in summary and "cases" not in summary
+
+
+def test_verify_input_and_parent_bytes_returns_counts_only(tmp_path):
+    manifest, _ = fixture()
+    root = tmp_path / "private"
+    root.mkdir()
+    rows = []
+    for i, case in enumerate(manifest["cases"]):
+        source = f"source-{i // 2}.dat"
+        delivery = f"input-{i}.dat"
+        for role, name in (("source", source), ("input", delivery)):
+            body = name.encode()
+            (root / name).write_bytes(body)
+            case[f"{role}_sha256"] = hashlib.sha256(body).hexdigest()
+        rows.append({"id": case["id"], "source": source, "input": delivery})
+    index = {"schema": files.INDEX_SCHEMA, "manifest_sha256": review.digest(manifest), "cases": rows}
+    assert files.verify_inputs(manifest, index, root) == {
+        "schema": files.RECEIPT_SCHEMA, "manifest_sha256": review.digest(manifest),
+        "verified_cases": len(rows), "verified_file_bindings": len(rows) * 2,
+    }
+    with pytest.raises(ValueError, match="Every planned"):
+        files.verify_inputs(manifest, {**index, "cases": rows[1:]}, root)
+    with pytest.raises(ValueError, match="exact evaluation manifest"):
+        files.verify_inputs(manifest, {**index, "manifest_sha256": "0" * 64}, root)
+    with pytest.raises(ValueError, match="duplicate"):
+        files.verify_inputs(manifest, {**index, "cases": [*rows, rows[0]]}, root)
+    outside = tmp_path / "outside.dat"
+    outside.write_bytes((root / rows[0]["source"]).read_bytes())
+    (root / "linked.dat").symlink_to(outside)
+    for source in ("../outside.dat", str(outside), "linked.dat"):
+        with pytest.raises(ValueError, match="supplied root"):
+            files.verify_inputs(manifest, {**index, "cases": [{**rows[0], "source": source}, *rows[1:]]}, root)
+    (root / rows[0]["source"]).write_bytes(b"changed parent")
+    with pytest.raises(ValueError, match="differ from the manifest"):
+        files.verify_inputs(manifest, index, root)
+    (root / rows[0]["input"]).unlink()
+    with pytest.raises(ValueError, match="Could not read"):
+        files.verify_inputs(manifest, index, root)
 
 
 @pytest.mark.parametrize("field", ["group", "source_sha256", "input_sha256", "lineage"])

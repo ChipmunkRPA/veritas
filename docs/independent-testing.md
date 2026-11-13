@@ -1906,6 +1906,23 @@ python3 backend/scripts/independent_review.py summarize manifest.json confirmati
 python3 backend/scripts/independent_review.py compare manifest.json baseline.json baseline-frozen.json candidate.json candidate-frozen.json comparison.json
 ```
 
+Before sharing a result, an evaluator with the original files can verify
+the actual submitted and parent bytes against every planned digest.
+
+```sh
+python3 -B -IS backend/scripts/independent_review.py verify-inputs \
+  manifest.json private-file-index.json input-verification.json --root "$media_dir"
+```
+
+Create the private index with `schema: "chipmunk.independent-file-index/1"`,
+the canonical `manifest_sha256` printed by `audit`, and a `cases` list.
+Each case has its exact manifest `id`, `input` and `source`. Use paths
+relative to the supplied directory. Include both splits and repeat the
+parent path for related variants. File names, paths, and individual
+hashes stay out of the output. Reviewers with equivalent source access
+can perform their own verification. The receipt records checked bytes.
+Confirm labels, source rights and absence of earlier exposure separately.
+
 Outputs refuse overwrite. Keep the original manifests, frozen decisions, and
 receipts. Store private evaluation media outside Git. The summary deliberately
 omits individual source identifiers and media; review it before public sharing.

@@ -191,6 +191,19 @@ def test_additional_response_limits_preserve_exact_input_and_drop_incomplete_win
     assert load_packet_set(db, analysis, store) == evidence
 
 
+def test_additional_responses_replay_canonical_values_and_keep_exact_direction_when_available(packet_factory):
+    db, store, analysis, result, decoded, _ = packet_factory(scores=(.4999998, .4999998, .2))
+    windows = result["signals"][0]["details"]["text_evidence"]["windows"]
+    windows[1]["score_exact_hex"] = float(windows[1]["score"]).hex()
+    analysis.result_hash = canonical_hash(result)
+    store.put_bytes(canonical_json(result))
+    evidence = build_packet_set(db, analysis, store, result)
+    first, second, _ = evidence["coverage"][document_unselected_responses.KEY]["rows"]
+    assert first["direction"] == "supports_ai" and second["direction"] == "opposes_ai"
+    assert first["response"] == second["response"] == .5
+    assert load_packet_set(db, analysis, store) == evidence
+
+
 def test_partial_classifier_has_no_exact_coverage_and_ratio_keeps_only_committed_token_positions():
     text = "A B C D E"
     mapping = [{"start": 0, "end": len(text), "kind": "text"}]

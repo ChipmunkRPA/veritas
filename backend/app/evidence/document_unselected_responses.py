@@ -114,6 +114,12 @@ def build(result: dict, text: str, mapping: list[dict], packets: list[dict]) -> 
             if response_key in seen_responses:
                 continue
             seen_responses.add(response_key)
+            # Older classifier records stored the canonical rounded float. Use
+            # that same value on first build and replay when no exact value exists.
+            if not window.get("score_exact_hex"):
+                response = round(response, 6)
+            if not window.get("threshold_exact_hex"):
+                boundary = round(boundary, 6)
             eligible.append({"focus": focus, "spans": spans, "sources": sources, "check": label, "input_sha256": pin,
                              "direction": "supports_ai" if response >= boundary else "opposes_ai", "response": round(response, 6),
                              "text": input_text})

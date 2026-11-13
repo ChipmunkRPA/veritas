@@ -50,6 +50,7 @@ def main() -> None:
     locations.add_argument("truth", type=Path)
     locations.add_argument("response", type=Path)
     locations.add_argument("output", type=Path)
+    locations.add_argument("--image-mask-dir", type=Path, help="Local directory for explicitly declared binary PBM masks")
     example = commands.add_parser("demo", help="Create a fictional four-modality example with no media or weights")
     example.add_argument("output", type=Path)
     args = parser.parse_args()
@@ -70,7 +71,7 @@ def main() -> None:
     elif args.command == "count-locations":
         from app.bench.independent_locations import count_locations
 
-        result = count_locations(manifest, read(args.truth), read(args.response))
+        result = count_locations(manifest, read(args.truth), read(args.response), mask_directory=args.image_mask_dir)
         write(args.output, result)
         print(digest(result))
         return

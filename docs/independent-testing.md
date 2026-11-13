@@ -22,6 +22,23 @@ replays a PNG seam or video frame schedule directly from a supplied original
 and its signed evidence record. Start there to check those measurements on a
 local export.
 
+### Replay the single-upload transfer results
+
+Recount the [native image prediction trial](image-bayer-prediction-transfer-2026-11-13.md),
+[brief face changes in four-second videos](video-brief-face-120-carrier-2026-11-13.md),
+[overlapping speech trial](audio-overlap-pitch-transfer-2026-11-13.md) and
+[writing typography trial](writing-typography-transfer-2026-11-13.md).
+The local receipts cover useful locations, misses, ordinary controls and
+which inputs each method could assess. The replay uses only the Python
+standard library and the committed scalar records. It does not repeat model
+inference or validate general accuracy.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/single-upload.json" --suite single-upload-transfers
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/single-upload.json" --format-issue
+```
+
 ### Replay the expanded local evidence checks
 
 Run this from a clean checkout with Python 3.11 or later. It recounts all
@@ -2028,8 +2045,42 @@ All coordinates start at zero and use exclusive ends. An assessed
 check with no located region uses an empty list. An unassessed check uses
 its status and reason, without a region list. Confirm the clock, frame
 order or text extraction against the original before entering positions.
-Use this tool for rectangle or interval annotations. An irregular pixel
-mask requires exact mask arithmetic or a faithful rectangle decomposition.
+
+For an irregular image region, use a binary PBM mask in the original
+image geometry. Truth or response can use a mask in place of `regions`.
+The other side can be another mask or a set of rectangles. Use the
+`mask` field `{"file": "case-a.pbm", "sha256": "<file SHA-256>"}` and
+add `--image-mask-dir "$scratch/masks"` to the command. The basename,
+file digest, native dimensions and target pixel count are checked before
+the overlap is counted. The masks and their names are omitted from the
+counted output. Keep the original mask files and private annotations
+locally. The accepted PBM uses an exact `P4\nWIDTH HEIGHT\n` header,
+most-significant-bit first pixels, one for included pixels, and zero
+padding to each row's next byte. For a PNG mask with black background and
+white edit pixels, this optional conversion produces the exact encoding.
+
+```sh
+mkdir -p "$scratch/masks"
+python3 - "$mask_png" "$scratch/masks/case-a.pbm" <<'PY'
+import sys
+from PIL import Image
+
+with Image.open(sys.argv[1], formats=["PNG"]) as image:
+    if image.mode not in ("1", "L") or set(image.convert("L").tobytes()) - {0, 255}:
+        raise SystemExit("Expected a black-and-white PNG with white edit pixels")
+    width, height = image.size
+    stride = (width + 7) // 8
+    mask = bytearray(stride * height)
+    for y in range(height):
+        for x in range(width):
+            if image.getpixel((x, y)):
+                mask[y * stride + x // 8] |= 128 >> (x % 8)
+with open(sys.argv[2], "xb") as out:
+    out.write(f"P4\n{width} {height}\n".encode("ascii"))
+    out.write(mask)
+PY
+shasum -a 256 "$scratch/masks/case-a.pbm"
+```
 
 ## Review an audio supplement by acoustic condition
 

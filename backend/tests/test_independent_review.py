@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 from copy import deepcopy
 
 import pytest
@@ -73,6 +74,56 @@ def test_coordinate_locations_count_shared_area_once_and_remove_private_position
     by_id[image_id]["localization"] = {"status": "not_applicable", "reason": "No valid source map"}
     output = locations.count_locations(manifest, truth, response)
     assert next(row["localization"] for row in output["predictions"] if row["id"] == image_id) == by_id[image_id]["localization"]
+
+
+def test_exact_image_masks_and_rectangles_use_the_same_native_geometry(tmp_path):
+    manifest, receipt = fixture()
+    case = next(row for row in manifest["cases"] if row["modality"] == "image"
+                and row["split"] == "confirmation" and row["label"] == 1)
+    case["localization_truth"] = {"unit": "pixels", "source_units": 15, "target_units": 4}
+    response = receipt("confirmation")
+    prediction = next(row for row in response["predictions"] if row["id"] == case["id"])
+
+    def make_mask(name, pixels):
+        body = b"P4\n5 3\n" + bytes(pixels)
+        (tmp_path / name).write_bytes(body)
+        return {"file": name, "sha256": hashlib.sha256(body).hexdigest()}
+
+    target = make_mask("target.pbm", [0b10100_000, 0b01000_000, 0b00001_000])
+    measured = make_mask("reported.pbm", [0b10001_000, 0b00000_000, 0b00001_000])
+    source = {"id": case["id"], "input_sha256": case["input_sha256"], "extent": [5, 3], "mask": target}
+    truth = {"schema": locations.TRUTH_SCHEMA, "manifest_sha256": review.digest(manifest),
+             "split": "confirmation", "cases": [source]}
+
+    def run(reported_units, overlap_units):
+        counted = locations.count_locations(manifest, truth, response, mask_directory=tmp_path)
+        measured_row = next(row for row in counted["predictions"] if row["id"] == case["id"])
+        assert measured_row["localization"] == {"status": "ok", "reported_units": reported_units,
+                                                "overlap_units": overlap_units}
+
+    prediction["localization"] = {"status": "ok", "mask": measured}
+    run(3, 2)
+    source.pop("mask")
+    source["regions"] = [[0, 0, 2, 2]]
+    run(3, 1)
+    source.pop("regions")
+    source["mask"] = target
+    prediction["localization"] = {"status": "ok", "regions": [[0, 0, 3, 2], [2, 0, 5, 1]]}
+    run(8, 3)
+    with pytest.raises(ValueError, match="supplied mask directory"):
+        locations.count_locations(manifest, truth, response)
+    invalid = make_mask("padding.pbm", [0b10100_001, 0b01000_000, 0b00001_000])
+    for mask, error in (({**target, "file": "../target.pbm"}, "basename"),
+                        ({**target, "sha256": "0" * 64}, "SHA-256 differ"),
+                        (invalid, "padding bits"),
+                        (measured, "target extent")):
+        source["mask"] = mask
+        with pytest.raises(ValueError, match=error):
+            locations.count_locations(manifest, truth, response, mask_directory=tmp_path)
+    source["mask"] = target
+    source["extent"] = [3, 5]
+    with pytest.raises(ValueError, match="dimensions"):
+        locations.count_locations(manifest, truth, response, mask_directory=tmp_path)
 
 
 def test_four_media_fixture_audits_and_summarizes_without_loading_models():

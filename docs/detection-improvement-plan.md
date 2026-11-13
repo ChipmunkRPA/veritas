@@ -97,6 +97,12 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [overlapping speech confirmation](audio-dense-evidence-confirmation-2026-11-12.md)
+  compared 60 matched deliveries across six editing families. The union
+  localized 15/18 gain-only and 12/18 traffic edits, up from 7/18 and 6/18.
+  It added one genuine flag and 6.73 points of flagged genuine time, exceeding
+  the four-point frozen limit. Dense alone lowered flagged genuine time but
+  also lost some of the existing locations. The serving review stays in place.
 - The [paired native face edges study](video-face-paired-edge-transfer-2026-11-12.md)
   refined two of three previously missed H.264 swap ranges to the exact native
   boundaries. It added no ranges on 79 ordinary deliveries. The fixed H.264

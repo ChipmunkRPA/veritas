@@ -122,6 +122,10 @@ The [paired neural speech edit pilot](audio-partialedit-dense-transfer-2026-11-1
 checks overlapping speech windows across two edit generators, matched genuine
 utterances and two background mixes. The replay recounts localized edits and
 flagged genuine time.
+The [overlapping speech confirmation](audio-dense-evidence-confirmation-2026-11-12.md)
+recounts matched gain-only and traffic deliveries from six generator families.
+It reports edit coverage and genuine time separately for the sparse, dense and
+combined window rules.
 The [native word-clock qualification](grid-reserve-word-clocks-2026-11-12.md)
 aligns publisher word intervals with original embedded speech and replays four
 ordinary mouth changes with unchanged soundtracks.

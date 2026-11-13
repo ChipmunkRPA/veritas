@@ -155,7 +155,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         preview_proof = verify_preview(data, preview, lambda digest: archive.read(f'assets/{digest}.png'),
                                      source_size=(declared['width'], declared['height']))
         if not crops and not repeat_checks and not quality_checks and pair is None:
-            return 'Original SHA-256 matched.' + _preview_detail(preview_proof)
+            return 'Original SHA-256 matched.' + _preview_detail(preview_proof, preview["preview_carrier"])
     else:
         preview_proof = None
     with Image.open(io.BytesIO(data)) as raw:
@@ -202,7 +202,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     detail = (f'Original SHA-256 and {crop_count} unannotated crops matched at their recorded EXIF-oriented coordinates.'
               if crop_count else 'Original SHA-256 matched.')
     if preview_proof:
-        detail += _preview_detail(preview_proof)
+        detail += _preview_detail(preview_proof, preview["preview_carrier"])
     elif not crop_count:
         detail += ' No unannotated crops were recorded.'
     if pair is not None:
@@ -220,7 +220,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     return detail
 
 
-def _preview_detail(proof):
+def _preview_detail(proof, carrier):
+    from app.evidence.image_editor_preview_binding import PNG_CARRIER
+
     count = proof["footprints"]
+    label = "PNG Exif preview" if carrier == PNG_CARRIER else "editor-preview"
     return (f' Matched {proof["source_crops"]} main-image and stored thumbnail crops. '
-            f'Recomputed {count} saved editor-preview {"footprint" if count == 1 else "footprints"}.')
+            f'Recomputed {count} saved {label} {"footprint" if count == 1 else "footprints"}.')

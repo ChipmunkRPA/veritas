@@ -13,11 +13,13 @@ from app.detectors.image.adapters.provenance import MetadataConsistencyDetector
 from app.engine.exhibits import ExhibitWriter
 from app.engine.stages import image as image_stage
 from app.evidence import image_thumbnail_evidence as evidence
+from app.evidence.image_editor_preview_binding import PNG_CARRIER
 from app.provenance import image_thumbnail_localization as localization
 from app.reports import engine, figures
 from app.reports.specimens import specimen
 from app.storage.objects import ObjectStore
 from scripts.image_editor_preview_transfer import adversarial, attach, segment, without_exif
+from scripts.image_png_exif_preview_transfer import corrupt_crc, png, xmp_oriented_png
 from scripts.image_thumbnail_localization_transfer import color_patch, jpeg, preview_from, thumbnail
 from scripts.image_thumbnail_mirror_transfer import OPERATIONS as MIRRORS
 from scripts.image_thumbnail_orientation_transfer import encode as rotated_carrier
@@ -40,7 +42,7 @@ def _pair(orientation=1, *, display_preview=False):
     return jpeg(changed, preview=embedded), jpeg(earlier, preview=embedded)
 
 
-def _run(store, source, monkeypatch):
+def _run(store, source, monkeypatch, *, mime="image/jpeg"):
     writer = ExhibitWriter("thumbnail-test", store)
     media = SimpleNamespace(original_bytes=lambda: source)
     detector = MetadataConsistencyDetector()
@@ -53,7 +55,7 @@ def _run(store, source, monkeypatch):
     monkeypatch.setattr(image_stage.common, "index_artefacts", lambda *_args, **_kw: events.append("preview"))
     context = SimpleNamespace(analysis_id="thumbnail-test", exhibits=writer, state={"media": media},
                               sessions=lambda: nullcontext(SimpleNamespace(commit=lambda: None)),
-                              outputs={"ingest": {"mime": "image/jpeg", "sha256": source_sha}})
+                              outputs={"ingest": {"mime": mime, "sha256": source_sha}})
     rendered = image_stage.render(context)
     assert events == (["legacy", "preview"] if rendered["artefacts"] else ["legacy"])
     result = {"exhibits": original_exhibits + rendered["exhibits"], "input": {"sha256": source_sha}}
@@ -202,3 +204,30 @@ def test_editor_preview_preserves_source_assets_and_refuses_ambiguous_resources(
     text = " ".join(engine.pdf_text(engine.render_pdf(frozen).pdf).split())
     assert "The saved editor thumbnail in this JPEG and the main image differ" in text
     assert "White cells mark measured differences" in text
+
+def test_png_thumbnail_opt_in_keeps_bound_crops_and_reports_difference(tmp_path, monkeypatch):
+    altered, clean = _pair()
+    store = ObjectStore(tmp_path / "objects")
+    with Image.open(io.BytesIO(altered)) as raw:
+        edited_png = png(raw.convert("RGB"), raw.info["exif"])
+        plain_png = png(raw.convert("RGB"))
+        alpha_png = png(raw.convert("RGBA"), raw.info["exif"])
+        xmp_rotation = xmp_oriented_png(raw.convert("RGB"), raw.info["exif"])
+    with Image.open(io.BytesIO(clean)) as raw:
+        clean_png = png(raw.convert("RGB"), raw.info["exif"])
+    monkeypatch.setattr(image_stage.settings, "image_png_exif_preview_review", False)
+    baseline, no_preview = _run(store, edited_png, monkeypatch, mime="image/png")
+    assert evidence.from_result(no_preview) is None
+    monkeypatch.setattr(image_stage.settings, "image_png_exif_preview_review", True)
+    outcome, result = _run(store, edited_png, monkeypatch, mime="image/png")
+    assert outcome.aggregate == baseline.aggregate and outcome.unit_scores == baseline.unit_scores
+    preview = evidence.from_result(result)
+    assert preview["preview_carrier"] == PNG_CARRIER
+    assert "Its date and origin are unknown" in preview["interpretation"]
+    assert preview["authorship_confidence_contribution"] == 0
+    assert verify_editor_preview(edited_png, preview, store.read_bytes) == {
+        "regions": 1, "source_crops": 2, "footprints": 1,
+    }
+    for negative in (plain_png, alpha_png, clean_png, xmp_rotation, corrupt_crc(edited_png, b"IDAT"), corrupt_crc(edited_png, b"IEND")):
+        _, result = _run(store, negative, monkeypatch, mime="image/png")
+        assert evidence.from_result(result) is None

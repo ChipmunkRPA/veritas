@@ -1,0 +1,299 @@
+{
+  "app": {
+    "edited": {
+      "analysis_jobs": 1,
+      "native_crop_assets": 3,
+      "pdf_assets_verified": 3,
+      "prepayment_jobs": 0,
+      "preview_regions": 1,
+      "signed_source_replay": true
+    },
+    "opt-out": {
+      "analysis_jobs": 1,
+      "native_crop_assets": 0,
+      "pdf_assets_verified": 0,
+      "prepayment_jobs": 0,
+      "preview_regions": 0,
+      "signed_source_replay": true
+    },
+    "ordinary": {
+      "analysis_jobs": 1,
+      "native_crop_assets": 0,
+      "pdf_assets_verified": 0,
+      "prepayment_jobs": 0,
+      "preview_regions": 0,
+      "signed_source_replay": true
+    }
+  },
+  "app_receipt_sha256": "982b0aa0cab336fba38f5b34592dfc026fb7c1303f8c3a85c887f442424bd41f",
+  "authorship_confidence_weight": 0,
+  "chrome": {
+    "loaded_png_asset_dimensions": [
+      [
+        14,
+        53
+      ],
+      [
+        61,
+        238
+      ],
+      [
+        13,
+        52
+      ]
+    ],
+    "no_control_panel": true,
+    "version": "157.0.8103.51",
+    "view": "plain"
+  },
+  "code": {
+    "image_local_residual_covariance.py": "20f40fbff3d20f8eba538dc02badfac11677cb21619a4ff8f7f30d7247c0a209",
+    "image_png_exif_preview_transfer.py": "65d10774e7e32263ec53335b9e666e8307a27b13c130d0753a2c1b86ae027985",
+    "image_thumbnail_extent_transfer.py": "0eb88c13e22a9f2420b768964e42f006acc63b6e70f15bc97be501e5865bebb9",
+    "image_thumbnail_localization.py": "ebdf8559d5a3c8b3844c6fa53076f0cdd66118603e1d9b1ee2d72256237820f9",
+    "png_exif_thumbnail.py": "73fdd4a555146fe0c3778e173adfe6ef8ca3e91912b720516e0391e5b71a7633"
+  },
+  "counts": {
+    "encoding/explicit_srgb": {
+      "comparable": 1,
+      "flags": 1,
+      "total": 1,
+      "useful": 1
+    },
+    "encoding/standard_gamma": {
+      "comparable": 1,
+      "flags": 1,
+      "total": 1,
+      "useful": 1
+    },
+    "flux/feather": {
+      "comparable": 6,
+      "flags": 1,
+      "total": 6,
+      "useful": 0
+    },
+    "flux/foreign": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 6,
+      "useful": 0
+    },
+    "flux/global_tone": {
+      "comparable": 6,
+      "flags": 0,
+      "total": 6,
+      "useful": 0
+    },
+    "flux/local_blur": {
+      "comparable": 6,
+      "flags": 0,
+      "total": 6,
+      "useful": 0
+    },
+    "flux/local_tone": {
+      "comparable": 6,
+      "flags": 2,
+      "total": 6,
+      "useful": 2
+    },
+    "flux/missing": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 6,
+      "useful": 0
+    },
+    "flux/ordinary": {
+      "comparable": 6,
+      "flags": 0,
+      "total": 6,
+      "useful": 0
+    },
+    "flux/resampled": {
+      "comparable": 6,
+      "flags": 0,
+      "total": 6,
+      "useful": 0
+    },
+    "flux/sharp": {
+      "comparable": 6,
+      "flags": 1,
+      "total": 6,
+      "useful": 0
+    },
+    "lama/feather": {
+      "comparable": 12,
+      "flags": 11,
+      "total": 12,
+      "useful": 11
+    },
+    "lama/foreign": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 12,
+      "useful": 0
+    },
+    "lama/global_tone": {
+      "comparable": 12,
+      "flags": 0,
+      "total": 12,
+      "useful": 0
+    },
+    "lama/local_blur": {
+      "comparable": 12,
+      "flags": 0,
+      "total": 12,
+      "useful": 0
+    },
+    "lama/local_tone": {
+      "comparable": 12,
+      "flags": 2,
+      "total": 12,
+      "useful": 2
+    },
+    "lama/missing": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 12,
+      "useful": 0
+    },
+    "lama/ordinary": {
+      "comparable": 12,
+      "flags": 0,
+      "total": 12,
+      "useful": 0
+    },
+    "lama/resampled": {
+      "comparable": 12,
+      "flags": 0,
+      "total": 12,
+      "useful": 0
+    },
+    "lama/sharp": {
+      "comparable": 12,
+      "flags": 11,
+      "total": 12,
+      "useful": 11
+    },
+    "malformed/alpha": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 1,
+      "useful": 0
+    },
+    "malformed/animated": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 1,
+      "useful": 0
+    },
+    "malformed/bad_crc": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 1,
+      "useful": 0
+    },
+    "malformed/bad_idat_crc": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 1,
+      "useful": 0
+    },
+    "malformed/bad_iend_crc": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 1,
+      "useful": 0
+    },
+    "malformed/bad_pointer": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 1,
+      "useful": 0
+    },
+    "malformed/duplicate": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 1,
+      "useful": 0
+    },
+    "malformed/effective_xmp_rotation": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 1,
+      "useful": 0
+    },
+    "malformed/jpeg_preview_icc": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 1,
+      "useful": 0
+    },
+    "malformed/late": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 1,
+      "useful": 0
+    },
+    "malformed/nonstandard_gamma": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 1,
+      "useful": 0
+    },
+    "malformed/nonupright": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 1,
+      "useful": 0
+    },
+    "malformed/oversized_preview": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 1,
+      "useful": 0
+    },
+    "malformed/palette": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 1,
+      "useful": 0
+    },
+    "malformed/rgb_icc": {
+      "comparable": 0,
+      "flags": 0,
+      "total": 1,
+      "useful": 0
+    }
+  },
+  "freeze_sha256": "93603225fe71d960577f8ab177532a2138193a43a4846d683859eb69436438e0",
+  "gate": {
+    "maximum_malformed_admitted": 0,
+    "maximum_ordinary_delivery_flags": 1,
+    "maximum_unrelated_admitted": 0,
+    "minimum_useful_flux_feather": 3,
+    "minimum_useful_lama_feather": 6
+  },
+  "gate_actual": {
+    "maximum_malformed_admitted": 0,
+    "maximum_ordinary_delivery_flags": 0,
+    "maximum_unrelated_admitted": 0,
+    "minimum_useful_flux_feather": 0,
+    "minimum_useful_lama_feather": 11
+  },
+  "local_result_sha256": "e3987436d55a4f069206c3f5b5e0e3aaa387d4e2fcc185687348bc064a4c4868",
+  "native_inputs": 179,
+  "native_replay": "repeated exactly",
+  "native_source_crops_verified": 60,
+  "passed": false,
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv": "5.0.0"
+  },
+  "schema": "chipmunk.image-png-exif-preview-transfer/1",
+  "scope": "Comparison of an embedded JPEG preview with native PNG pixels. The preview\u2019s origin and age are unknown.",
+  "settings": {
+    "VERITAS_IMAGE_PNG_EXIF_PREVIEW_REVIEW": "true",
+    "default_enabled": false
+  },
+  "source_exposure": "Previously measured LaMa and FLUX source images. New PNG carrier and matched controls."
+}

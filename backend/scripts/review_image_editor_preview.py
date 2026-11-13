@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Read back saved JPEG editor-thumbnail evidence against the original source."""
+"""Read back saved embedded-thumbnail evidence against the submitted source."""
 
 from __future__ import annotations
 
@@ -8,7 +8,6 @@ import json
 from pathlib import Path
 
 from app.evidence.image_editor_preview_source import MAX_BYTES, require, verify
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)

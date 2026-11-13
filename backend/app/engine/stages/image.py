@@ -513,13 +513,14 @@ def render(ctx: StageContext) -> dict[str, Any]:
     image_exhibits, image_artefacts = [], []
     ingest = ctx.outputs.get("ingest") or {}
     jpeg = ingest.get("mime") == "image/jpeg"
+    png_preview = ingest.get("mime") == "image/png" and settings.image_png_exif_preview_review
     whole_review = (settings.image_whole_review_python is not None and settings.environment == "dev"
                     and ctx.profile == Profile.FULL)
-    if (jpeg or whole_review) and not ctx.state.get("refusion") and not provenance_gate.stop(ctx):
+    if (jpeg or png_preview or whole_review) and not ctx.state.get("refusion") and not provenance_gate.stop(ctx):
         writer = ctx.exhibits.bind(image_thumbnail_evidence.CREATOR)
         ids = set()
-        if jpeg:
-            ids.update(image_thumbnail_evidence.add_exhibits(bytes(_media(ctx).original_bytes()), writer))
+        if jpeg or png_preview:
+            ids.update(image_thumbnail_evidence.add_exhibits(bytes(_media(ctx).original_bytes()), writer, png=png_preview))
         if whole_review:
             sha = ingest["sha256"]
             ids.update(image_whole_review.add_exhibits(ctx.store.path_for(sha), sha, writer,

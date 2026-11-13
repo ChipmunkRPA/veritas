@@ -86,17 +86,17 @@ def _evidence(frozen):
 
 
 def _editor_preview(db, frozen, evidence):
-    """Project only the frozen editor-preview exhibits and resolve their exact object IDs."""
+    """Project only supported frozen preview exhibits and resolve their exact object IDs."""
     from app.evidence.image_thumbnail_evidence import CREATOR, from_result, is_preview_exhibit
 
     preview = from_result(frozen.result)
-    if not preview or preview.get("preview_carrier") != editor_preview.CARRIER:
+    if not preview or preview.get("preview_carrier") not in editor_preview.CARRIER_SCHEMAS:
         return None, {}
     if frozen.report.redacted:
         raise legacy.PackageError("Thumbnail crops require an unredacted image report.")
     rows = [{**row, "crops": {role: {k: v for k, v in asset.items() if k != "url"}
                              for role, asset in row["crops"].items()}} for row in preview["regions"]]
-    projection = {"schema": editor_preview.SCHEMA, "regions": rows,
+    projection = {"schema": editor_preview.CARRIER_SCHEMAS[preview["preview_carrier"]], "regions": rows,
                   **{key: preview[key] for key in ("source_sha256", "preview_carrier", "main_exif_orientation",
                      "preview_alignment_orientation", "authorship_confidence_contribution")}}
     exhibits = {item["id"]: item for item in frozen.result.get("exhibits", [])

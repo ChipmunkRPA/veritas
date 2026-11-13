@@ -97,6 +97,13 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [PNG Exif preview comparison](image-png-exif-preview-2026-11-12.md)
+  can show a difference between a supported PNG and the thumbnail embedded
+  in the same file. It located 11/12 feathered edits in one test group and
+  0/6 smaller edits in the second. The optional check shows the original
+  and preview crops and their difference without adding authorship weight.
+  The separate [texture and JPEG95 trials](image-local-edit-candidates-2026-11-12.md)
+  stay outside the app.
 - The [selectable-text check for mixed PDFs](writing-mixed-pdf-page-transfer-2026-11-12.md)
   found 11 of 44 known edited passages in files previously skipped by the
   second check, with agreement on 13 of 56 genuine or ordinarily edited

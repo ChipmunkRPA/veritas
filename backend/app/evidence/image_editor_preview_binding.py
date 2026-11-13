@@ -1,4 +1,4 @@
-"""Bounded signed JPEG editor-preview records, independent of image runtimes."""
+"""Bounded signed embedded-preview records, independent of image runtimes."""
 
 from __future__ import annotations
 
@@ -8,6 +8,8 @@ KEY = "thumbnail_evidence"
 SCHEMA = "chipmunk.jpeg-editor-preview/1"
 REPORT_PROFILES = frozenset({"standard", "summary", "forensic"})
 CARRIER = "jpeg_editor_resource"
+PNG_CARRIER = "png_exif_thumbnail"
+CARRIER_SCHEMAS = {CARRIER: SCHEMA, PNG_CARRIER: "chipmunk.png-exif-thumbnail/1"}
 BOX = ("x", "y", "w", "h")
 SOURCE_ROLES = ("main_image", "embedded_preview")
 FOOTPRINT = "measured_footprint"
@@ -43,7 +45,8 @@ def asset_groups(document, source):
     """Validate the signed projection and return the declared PNG references."""
     _require(isinstance(document, dict) and set(document) == {"schema", "source_sha256", "preview_carrier",
              "main_exif_orientation", "preview_alignment_orientation", "authorship_confidence_contribution", "regions"}
-             and document["schema"] == SCHEMA and document["preview_carrier"] == CARRIER
+             and isinstance(document["preview_carrier"], str) and document["preview_carrier"] in CARRIER_SCHEMAS
+             and document["schema"] == CARRIER_SCHEMAS[document["preview_carrier"]]
              and document["source_sha256"] == source.get("sha256") and source.get("exif_orientation") == 1
              and type(document["main_exif_orientation"]) is int and document["main_exif_orientation"] == 1
              and type(document["preview_alignment_orientation"]) is int and document["preview_alignment_orientation"] == 0

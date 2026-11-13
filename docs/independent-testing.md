@@ -49,6 +49,11 @@ The [photographic PNG supplement](image-png-layout-guard-2026-11-12.md)
 replays the scope check on paired browser layouts and ordinary photos.
 Its public ledger compares the separate indications against 74 exact
 Full app results and records native crop commitments.
+The [PNG Exif preview comparison](image-png-exif-preview-2026-11-12.md)
+reopens a submitted PNG and its saved thumbnail, then verifies both crops
+and the measured difference from the signed evidence. The [single-file image
+candidates](image-local-edit-candidates-2026-11-12.md) document tested texture
+and JPEG95 comparisons that stay outside the app.
 
 The [earlier-video comparison](video-reference-comparison-2026-11-11.md#replay-without-the-app)
 re-decodes two supplied clips and checks the JSON, native picture timestamps,

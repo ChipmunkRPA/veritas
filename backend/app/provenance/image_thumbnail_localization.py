@@ -10,7 +10,8 @@ import numpy as np
 from PIL import Image
 
 from app.detectors.image.reference_compare import _regions, _tone
-from app.provenance import jpeg_editor_thumbnail
+from app.evidence.image_editor_preview_binding import PNG_CARRIER
+from app.provenance import jpeg_editor_thumbnail, png_exif_thumbnail
 from app.provenance.exiftool import _pillow_thumbnail
 
 MIN_SIDE, MAX_SIDE = 64, 512
@@ -192,6 +193,30 @@ def retained_preview(source, exif):
             return None, None
     editor_preview = jpeg_editor_thumbnail.extract(source)
     return ("jpeg_editor_resource", editor_preview) if editor_preview is not None else (None, None)
+
+
+def measure_png(data, *, minimum_component_fraction):
+    """Compare a static upright RGB PNG and its retained Exif JPEG."""
+    with Image.open(io.BytesIO(data), formats=["PNG"]) as original:
+        size = original.size
+        if original.mode != "RGB" or size[0] * size[1] > MAX_MAIN_PIXELS or min(size) < 160:
+            return {"status": "unsupported_carrier"}, None
+        blob = png_exif_thumbnail.extract(data)
+        if blob is None:
+            return {"status": "no_retained_thumbnail"}, None
+        # Pillow also honors orientation carried in XMP when Exif omits it.
+        # Loading first makes orientation metadata after IDAT visible as well.
+        original.load()
+        if original.getexif().get(274, 1) != 1:
+            return {"status": "unsupported_carrier"}, None
+        proof = _preview(blob, size)
+        if proof is None:
+            return {"status": "unsupported_thumbnail"}, None
+        before, trim = proof
+        result, masks = _projected(original, before, trim, size, minimum_component_fraction)
+        if masks is not None:
+            result["preview_carrier"] = PNG_CARRIER
+        return result, masks
 
 
 def measure(data: bytes, *, minimum_component_fraction: float = PILOT_COMPONENT_FRACTION, extend=False):

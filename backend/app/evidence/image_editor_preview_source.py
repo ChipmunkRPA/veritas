@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Read back saved JPEG editor-thumbnail evidence against the original source."""
+"""Read back saved embedded-thumbnail evidence against the submitted source."""
 
 from __future__ import annotations
 
@@ -11,8 +11,9 @@ import cv2
 import numpy as np
 from PIL import Image
 
-from app.evidence.image_editor_preview_binding import BOX, CARRIER, DISPLAY_EDGE, MAX_REGIONS
+from app.evidence.image_editor_preview_binding import BOX, CARRIER, DISPLAY_EDGE, MAX_REGIONS, PNG_CARRIER
 from app.provenance import image_thumbnail_localization as localization
+from app.provenance import png_exif_thumbnail
 
 MAX_BYTES = 60 * 1024 * 1024
 
@@ -46,22 +47,25 @@ def _match_asset(assets, record, image):
 def verify(body, document, assets, *, source_size=None):
     require(len(body) <= MAX_BYTES, "Source is larger than the verification limit")
     require(sha(body) == document.get("source_sha256"), "Submitted source differs from the export")
-    require(document.get("preview_carrier") == CARRIER
+    carrier = document.get("preview_carrier")
+    require(carrier in (CARRIER, PNG_CARRIER)
             and document.get("main_exif_orientation") == 1 and document.get("preview_alignment_orientation") == 0
             and document.get("authorship_confidence_contribution") == 0, "Unsupported preview carrier, orientation or confidence")
+    png = carrier == PNG_CARRIER
+    measure = localization.measure_png if png else localization.measure
     try:
-        measurement, masks = localization.measure(body, minimum_component_fraction=localization.CONFIRMATION_COMPONENT_FRACTION)
+        measurement, masks = measure(body, minimum_component_fraction=localization.CONFIRMATION_COMPONENT_FRACTION)
     except (cv2.error, SyntaxError, struct.error) as error:
-        raise ValueError("The editor thumbnail comparison could not be reproduced") from error
+        raise ValueError("The embedded thumbnail comparison could not be reproduced") from error
     rows = document["regions"]
-    require(masks is not None and measurement.get("preview_carrier") == CARRIER
+    require(masks is not None and measurement.get("preview_carrier") == carrier
             and 0 < len(rows) <= min(MAX_REGIONS, len(measurement["regions"])), "Source comparison differs from the saved regions")
     require(source_size is None or measurement["native_size"] == source_size, "Thumbnail evidence has different source geometry")
     checked = {"regions": len(rows), "source_crops": 0, "footprints": 0}
     if any("footprint_grid" in row for row in rows):
         _, labels, stats, _ = cv2.connectedComponentsWithStats(masks[0].astype(np.uint8), connectivity=8)
-    with Image.open(io.BytesIO(body), formats=["JPEG"]) as source:
-        _, blob = localization.retained_preview(source, source.getexif())
+    with Image.open(io.BytesIO(body), formats=["PNG" if png else "JPEG"]) as source:
+        blob = png_exif_thumbnail.extract(body) if png else localization.retained_preview(source, source.getexif())[1]
         with Image.open(io.BytesIO(blob), formats=["JPEG"]) as preview:
             for index, (saved, region) in enumerate(zip(rows, measurement["regions"][:len(rows)], strict=True), 1):
                 require(saved["region"] == index and saved["main_image"] == region["submitted"]

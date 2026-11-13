@@ -1,0 +1,892 @@
+{
+  "covariance": {
+    "calibration_sha256": "5cebebcac8b7aa5b27aeacf7a8bf7757537c6a6b2d98a92ef913101efb2dadf7",
+    "calibration_views": 60,
+    "code": {
+      "image_crop_layout_transfer.py": "d3c1c77879ebaecba43963cbc95ad23b478a93b65a3a70712159b9c4bb744d14",
+      "image_jpeg_copy_blocks_transfer.py": "f9d05b59ee644590bddd08777e6e8cbfb02fae935802626c346e8bb2303102c6",
+      "image_jpeg_copy_public_replay.py": "e11367d0a3390515e88262a1b93981c2df943e000bd4e5a95fa09537b1ed6215",
+      "image_local_residual_covariance.py": "20f40fbff3d20f8eba538dc02badfac11677cb21619a4ff8f7f30d7247c0a209",
+      "image_matched_detail_transfer.py": "d37e90b0fbbc9fc9cb33f0d6397c9e7c0a887f420cd57f9c71b150332bb450bd",
+      "image_reference_delivery_envelope_lama.py": "31e8e21e3dfc88952d1d0df8677a8fc6c8cf2f2579b10013cdef10fba54654fc",
+      "image_reference_png_jpeg_stability.py": "5c0b8ede4ad6bbbd0c26a7b1aa22ceb1a4336790c02a8ddb05b76e6be0ce1f03",
+      "sharp_boundary.py": "04c120cd027e50bd107fd15778f66fe38c43d64439e090835dfad99727e41cbc"
+    },
+    "design": {
+      "area_power": 0.18,
+      "calibration": "Separate per encoding and arm, strictly above second-highest group maximum.",
+      "cell": 16,
+      "coarse_context_floors": [
+        12.0,
+        0.25,
+        0.25,
+        0.18
+      ],
+      "coarse_lowpass_sigma": 2.4,
+      "comparison": "trace-normalized patch covariance spectra",
+      "confidence_weight": 0,
+      "exclusion_cells": 6,
+      "feather_width_px": 12,
+      "gate": {
+        "maximum_added_control_groups": 2,
+        "maximum_wrong_edit_views": 2,
+        "minimum_added_flux": 1,
+        "minimum_added_lama": 2
+      },
+      "luma_lowpass_sigma": 0.9,
+      "maximum_context_distance": 2.5,
+      "maximum_matches": 18,
+      "minimum_matches": 8,
+      "minimum_per_feature_mad": 0.18,
+      "minimum_supporting_cell_fraction": 0.6,
+      "minimum_usable_inside": 0.8,
+      "minimum_usable_surround": 8,
+      "patch": 4,
+      "rectangle_sides_cells": [
+        3,
+        4,
+        6,
+        8,
+        10,
+        12,
+        16
+      ],
+      "reference": "distant cells matched on coarse luma, variation, and edge direction",
+      "spectrum_bins": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          8,
+          16
+        ]
+      ],
+      "stride": 2,
+      "supporting_cell_point": 0.75,
+      "surround_penalty": 0.65,
+      "useful": {
+        "iou": 0.3,
+        "recall": 0.5
+      }
+    },
+    "freeze_sha256": "41f5b62e6a96d3bc4c2e0d482315efd0cba41a438e3ab513fd6724d065a63cc5",
+    "held_views": 180,
+    "local_result_sha256": "4f57dd4d661474299a5cd4769bf0674943ad68ec4ce40621de14b51a7e8b493e",
+    "native_replay": "repeated exactly",
+    "outcomes": {
+      "agreement": {
+        "actual": {
+          "maximum_added_control_groups": 1,
+          "maximum_wrong_edit_views": 1,
+          "minimum_added_flux": 0,
+          "minimum_added_lama": 0
+        },
+        "passed": false
+      },
+      "color_spectrum": {
+        "actual": {
+          "maximum_added_control_groups": 7,
+          "maximum_wrong_edit_views": 14,
+          "minimum_added_flux": 0,
+          "minimum_added_lama": 0
+        },
+        "passed": false
+      },
+      "luma_spectrum": {
+        "actual": {
+          "maximum_added_control_groups": 1,
+          "maximum_wrong_edit_views": 2,
+          "minimum_added_flux": 0,
+          "minimum_added_lama": 0
+        },
+        "passed": false
+      }
+    },
+    "points": {
+      "jpeg75": {
+        "agreement": 1.3440628124153948,
+        "color_spectrum": 1.7108784668251045,
+        "luma_spectrum": 2.718519814422392
+      },
+      "png": {
+        "agreement": 2.0526268207925145,
+        "color_spectrum": 2.0970207174530446,
+        "luma_spectrum": 3.7303414732514484
+      }
+    },
+    "runtime": {
+      "numpy": "2.2.6",
+      "opencv": "5.0.0",
+      "pillow": "12.3.0"
+    },
+    "strata": {
+      "flux/jpeg75/feather/agreement": {
+        "assessed": 6,
+        "flagged": 1,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/feather/color_spectrum": {
+        "assessed": 6,
+        "flagged": 2,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/feather/current_sharp": {
+        "assessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/feather/luma_spectrum": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/local_blur/agreement": {
+        "assessed": 6,
+        "flagged": 1,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/local_blur/color_spectrum": {
+        "assessed": 6,
+        "flagged": 2,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/local_blur/current_sharp": {
+        "assessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/local_blur/luma_spectrum": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/local_tone/agreement": {
+        "assessed": 6,
+        "flagged": 1,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/local_tone/color_spectrum": {
+        "assessed": 6,
+        "flagged": 2,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/local_tone/current_sharp": {
+        "assessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/local_tone/luma_spectrum": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/ordinary/agreement": {
+        "assessed": 6,
+        "flagged": 1,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/ordinary/color_spectrum": {
+        "assessed": 6,
+        "flagged": 2,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/ordinary/current_sharp": {
+        "assessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/ordinary/luma_spectrum": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/sharp/agreement": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/sharp/color_spectrum": {
+        "assessed": 6,
+        "flagged": 2,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/sharp/current_sharp": {
+        "assessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/jpeg75/sharp/luma_spectrum": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/feather/agreement": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 1,
+        "views": 6
+      },
+      "flux/png/feather/color_spectrum": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 1,
+        "views": 6
+      },
+      "flux/png/feather/current_sharp": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/feather/luma_spectrum": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/local_blur/agreement": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/local_blur/color_spectrum": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/local_blur/current_sharp": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/local_blur/luma_spectrum": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/local_tone/agreement": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/local_tone/color_spectrum": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/local_tone/current_sharp": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/local_tone/luma_spectrum": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/ordinary/agreement": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/ordinary/color_spectrum": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/ordinary/current_sharp": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/ordinary/luma_spectrum": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/sharp/agreement": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 2,
+        "views": 6
+      },
+      "flux/png/sharp/color_spectrum": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 1,
+        "views": 6
+      },
+      "flux/png/sharp/current_sharp": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "flux/png/sharp/luma_spectrum": {
+        "assessed": 6,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "lama/jpeg75/feather/agreement": {
+        "assessed": 12,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/feather/color_spectrum": {
+        "assessed": 12,
+        "flagged": 3,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/feather/current_sharp": {
+        "assessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/feather/luma_spectrum": {
+        "assessed": 12,
+        "flagged": 1,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/local_blur/agreement": {
+        "assessed": 12,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/local_blur/color_spectrum": {
+        "assessed": 12,
+        "flagged": 3,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/local_blur/current_sharp": {
+        "assessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/local_blur/luma_spectrum": {
+        "assessed": 12,
+        "flagged": 1,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/local_tone/agreement": {
+        "assessed": 12,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/local_tone/color_spectrum": {
+        "assessed": 12,
+        "flagged": 3,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/local_tone/current_sharp": {
+        "assessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/local_tone/luma_spectrum": {
+        "assessed": 12,
+        "flagged": 1,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/ordinary/agreement": {
+        "assessed": 12,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/ordinary/color_spectrum": {
+        "assessed": 12,
+        "flagged": 3,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/ordinary/current_sharp": {
+        "assessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/ordinary/luma_spectrum": {
+        "assessed": 12,
+        "flagged": 1,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/sharp/agreement": {
+        "assessed": 12,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/sharp/color_spectrum": {
+        "assessed": 12,
+        "flagged": 3,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/sharp/current_sharp": {
+        "assessed": 0,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/jpeg75/sharp/luma_spectrum": {
+        "assessed": 12,
+        "flagged": 1,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/feather/agreement": {
+        "assessed": 12,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/feather/color_spectrum": {
+        "assessed": 12,
+        "flagged": 2,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/feather/current_sharp": {
+        "assessed": 11,
+        "flagged": 1,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/feather/luma_spectrum": {
+        "assessed": 12,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/local_blur/agreement": {
+        "assessed": 12,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/local_blur/color_spectrum": {
+        "assessed": 12,
+        "flagged": 2,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/local_blur/current_sharp": {
+        "assessed": 11,
+        "flagged": 1,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/local_blur/luma_spectrum": {
+        "assessed": 12,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/local_tone/agreement": {
+        "assessed": 12,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/local_tone/color_spectrum": {
+        "assessed": 12,
+        "flagged": 2,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/local_tone/current_sharp": {
+        "assessed": 11,
+        "flagged": 1,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/local_tone/luma_spectrum": {
+        "assessed": 12,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/ordinary/agreement": {
+        "assessed": 12,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/ordinary/color_spectrum": {
+        "assessed": 12,
+        "flagged": 2,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/ordinary/current_sharp": {
+        "assessed": 11,
+        "flagged": 1,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/ordinary/luma_spectrum": {
+        "assessed": 12,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/sharp/agreement": {
+        "assessed": 12,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/sharp/color_spectrum": {
+        "assessed": 12,
+        "flagged": 2,
+        "useful": 0,
+        "useful_before_point": 1,
+        "views": 12
+      },
+      "lama/png/sharp/current_sharp": {
+        "assessed": 11,
+        "flagged": 1,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      },
+      "lama/png/sharp/luma_spectrum": {
+        "assessed": 12,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 12
+      }
+    }
+  },
+  "jpeg95": {
+    "32": {
+      "alterations_rejected": [
+        "geometric_features",
+        "jpeg_offgrid_texture",
+        "native_patch_alignment"
+      ],
+      "by_treatment": {
+        "copy64": {
+          "added_flags": 1,
+          "candidate_useful": 2,
+          "current_flags": 2,
+          "current_useful": 1,
+          "views": 12
+        },
+        "copy72": {
+          "added_flags": 1,
+          "candidate_useful": 6,
+          "current_flags": 5,
+          "current_useful": 5,
+          "views": 12
+        },
+        "feather72": {
+          "added_flags": 1,
+          "candidate_useful": 3,
+          "current_flags": 3,
+          "current_useful": 2,
+          "views": 12
+        },
+        "local_blur": {
+          "added_flags": 0,
+          "candidate_useful": 0,
+          "current_flags": 0,
+          "current_useful": 0,
+          "views": 12
+        },
+        "local_tone": {
+          "added_flags": 0,
+          "candidate_useful": 0,
+          "current_flags": 0,
+          "current_useful": 0,
+          "views": 12
+        },
+        "ordinary": {
+          "added_flags": 0,
+          "candidate_useful": 0,
+          "current_flags": 0,
+          "current_useful": 0,
+          "views": 12
+        },
+        "repetition": {
+          "added_flags": 0,
+          "candidate_useful": 0,
+          "current_flags": 0,
+          "current_useful": 0,
+          "views": 10
+        }
+      },
+      "exclusion_sha256": [
+        "baf205c87eb0c71daeb0384d992ea24bfb6bfdb1c795e0423b8bcacdadaeffca",
+        "4213a743811bfbfc966eeee0315af9b2811b6a0ad1d0f331c531ecb101e2858f",
+        "3593ef387d89aea2002ee2b6d546c85e837e4978f3387da2312c34c4e30651b7",
+        "3d1b3961e9432d0b587df5bbcf410c4e89af2f0cdec17553ddce87602e1c692d",
+        "0cdc3064a3290cf4edfd0dd8257fd25d1eaeb4a6896a45805a17315aa866f832",
+        "04a934d2524e2a088ea9da482aff0456c4e6c6e33a2e98b183add72f150f76eb"
+      ],
+      "freeze_sha256": "db93f04fa25403825e861338f946efc1ddb3fa989cdb2d5af110a01ad697a29d",
+      "gate": {
+        "maximum_added_ordinary_groups": 1,
+        "maximum_added_repetition_groups": 0,
+        "maximum_wrong_sharp_views": 1,
+        "minimum_added_64_groups": 2,
+        "minimum_added_72_groups": 2,
+        "minimum_added_edit_groups": 4
+      },
+      "gate_actual": {
+        "maximum_added_ordinary_groups": 0,
+        "maximum_added_repetition_groups": 0,
+        "maximum_wrong_sharp_views": 0,
+        "minimum_added_64_groups": 1,
+        "minimum_added_72_groups": 1,
+        "minimum_added_edit_groups": 2
+      },
+      "gate_passed": false,
+      "local_result_sha256": "16d1a2524344a6e82662f2f2d55b250f2d3257b003cae85d84bc4380d4d85e09",
+      "native_inputs": 82,
+      "native_replay": "repeated exactly",
+      "profile_sha256": "b40e056724db43022fcc08475520e2fda95cb91c31551a5dc0f9f9f6b50b1ddc",
+      "runtime": {
+        "jpeg": "6.2",
+        "jpeglib": "1.0.2",
+        "numpy": "2.2.6",
+        "opencv": "5.0.0",
+        "pillow": "12.3.0"
+      },
+      "schema": "chipmunk.image-jpeg-offgrid-quality95-small-transfer/1",
+      "source_exposure": "Reused public architecture control images",
+      "verified_crop_assets": 26
+    },
+    "56": {
+      "alterations_rejected": [
+        "geometric_features",
+        "jpeg_offgrid_texture",
+        "native_patch_alignment"
+      ],
+      "by_treatment": {
+        "copy64": {
+          "added_flags": 1,
+          "candidate_useful": 7,
+          "current_flags": 6,
+          "current_useful": 6,
+          "views": 12
+        },
+        "copy72": {
+          "added_flags": 0,
+          "candidate_useful": 7,
+          "current_flags": 8,
+          "current_useful": 7,
+          "views": 12
+        },
+        "feather72": {
+          "added_flags": 1,
+          "candidate_useful": 5,
+          "current_flags": 6,
+          "current_useful": 4,
+          "views": 12
+        },
+        "local_blur": {
+          "added_flags": 0,
+          "candidate_useful": 0,
+          "current_flags": 0,
+          "current_useful": 0,
+          "views": 12
+        },
+        "local_tone": {
+          "added_flags": 0,
+          "candidate_useful": 0,
+          "current_flags": 0,
+          "current_useful": 0,
+          "views": 12
+        },
+        "ordinary": {
+          "added_flags": 0,
+          "candidate_useful": 0,
+          "current_flags": 0,
+          "current_useful": 0,
+          "views": 12
+        },
+        "repetition": {
+          "added_flags": 0,
+          "candidate_useful": 0,
+          "current_flags": 1,
+          "current_useful": 0,
+          "views": 12
+        }
+      },
+      "exclusion_sha256": [
+        "baf205c87eb0c71daeb0384d992ea24bfb6bfdb1c795e0423b8bcacdadaeffca",
+        "4213a743811bfbfc966eeee0315af9b2811b6a0ad1d0f331c531ecb101e2858f",
+        "3593ef387d89aea2002ee2b6d546c85e837e4978f3387da2312c34c4e30651b7",
+        "3d1b3961e9432d0b587df5bbcf410c4e89af2f0cdec17553ddce87602e1c692d",
+        "0cdc3064a3290cf4edfd0dd8257fd25d1eaeb4a6896a45805a17315aa866f832"
+      ],
+      "freeze_sha256": "c2512644dc09c8805e6c785e3dafa39e3a4552df1930ed0f6b739b436d099b6b",
+      "gate": {
+        "maximum_added_ordinary_groups": 1,
+        "maximum_added_repetition_groups": 0,
+        "maximum_wrong_sharp_views": 1,
+        "minimum_added_64_groups": 2,
+        "minimum_added_72_groups": 2,
+        "minimum_added_edit_groups": 4
+      },
+      "gate_actual": {
+        "maximum_added_ordinary_groups": 0,
+        "maximum_added_repetition_groups": 0,
+        "maximum_wrong_sharp_views": 0,
+        "minimum_added_64_groups": 1,
+        "minimum_added_72_groups": 0,
+        "minimum_added_edit_groups": 1
+      },
+      "gate_passed": false,
+      "local_result_sha256": "55ce87359a5104feb91ef3cd55a5bf741faa600528c7ab3e4c8b7c6c0adeef29",
+      "native_inputs": 84,
+      "native_replay": "repeated exactly",
+      "profile_sha256": "b40e056724db43022fcc08475520e2fda95cb91c31551a5dc0f9f9f6b50b1ddc",
+      "runtime": {
+        "jpeg": "6.2",
+        "jpeglib": "1.0.2",
+        "numpy": "2.2.6",
+        "opencv": "5.0.0",
+        "pillow": "12.3.0"
+      },
+      "schema": "chipmunk.image-jpeg-offgrid-quality95-transfer/1",
+      "source_exposure": "Reused public architecture control images",
+      "verified_crop_assets": 46
+    }
+  },
+  "schema": "chipmunk.single-file-image-localization-candidate-receipt/1"
+}

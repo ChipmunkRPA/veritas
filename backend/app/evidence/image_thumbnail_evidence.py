@@ -11,7 +11,9 @@ import numpy as np
 from PIL import Image, ImageOps
 
 from app.engine.exhibits import ExhibitBudgetExceeded
+from app.evidence.image_editor_preview_binding import CARRIER_SCHEMAS, PNG_CARRIER
 from app.provenance import image_thumbnail_localization as localization
+from app.provenance import png_exif_thumbnail
 
 # Keep this in the render stage namespace. On resume the shared writer starts
 # with empty counters even when the earlier detector exhibits are reused.
@@ -33,6 +35,9 @@ INTERPRETATION = ("The file’s embedded preview and main image differ in these 
                   "differences. The preview’s origin is unknown. This evidence carries zero AI authorship weight.")
 EDITOR_INTERPRETATION = ("The saved editor thumbnail in this JPEG and the main image differ in these areas. "
                          + INTERPRETATION.split(". ", 1)[1])
+PNG_INTERPRETATION = ("The PNG’s saved Exif preview and main image differ in these areas. The preview is a lower-resolution "
+                      "view carried in the submitted file. Its date and origin are unknown. Ordinary editing and image "
+                      "processing can produce these differences. This evidence carries zero AI authorship weight.")
 MAX_REGIONS = 3
 DISPLAY_EDGE = 384
 BOX_KEYS = ("x", "y", "w", "h")
@@ -99,15 +104,17 @@ def _footprint(region, trim, labels, stats):
         return dict(zip(BOX_KEYS, (x, y, w, h), strict=True)), output.getvalue()
 
 
-def add_exhibits(data, writer):
+def add_exhibits(data, writer, *, png=False):
     """Keep local evidence separate from metadata anomalies and score inputs."""
     try:
-        measurement, masks = localization.measure(data, minimum_component_fraction=localization.CONFIRMATION_COMPONENT_FRACTION)
+        measure = localization.measure_png if png else localization.measure
+        measurement, masks = measure(data, minimum_component_fraction=localization.CONFIRMATION_COMPONENT_FRACTION)
         if not measurement.get("regions"):
             return []
         _, labels, stats, _ = cv2.connectedComponentsWithStats(masks[0].astype(np.uint8), connectivity=8)
         with Image.open(io.BytesIO(data)) as source:
-            carrier, embedded = localization.retained_preview(source, source.getexif())
+            carrier, embedded = ((PNG_CARRIER, png_exif_thumbnail.extract(data)) if png
+                                 else localization.retained_preview(source, source.getexif()))
             if embedded is None or carrier != measurement.get("preview_carrier", "exif"):
                 return []
             main = ImageOps.exif_transpose(source) if measurement.get("main_orientation") else source
@@ -123,8 +130,8 @@ def add_exhibits(data, writer):
         # An unreadable preview must not change the existing metadata finding or score.
         return []
 
-    editor = carrier == "jpeg_editor_resource"
-    note = EDITOR_INTERPRETATION if editor else INTERPRETATION
+    identified_carrier = carrier in CARRIER_SCHEMAS
+    note = {PNG_CARRIER: PNG_INTERPRETATION, "jpeg_editor_resource": EDITOR_INTERPRETATION}.get(carrier, INTERPRETATION)
     exhibit_ids, rows, regions = [], [], []
     for n, (main, thumb, marked, main_crop, thumb_crop, footprint) in enumerate(prepared, 1):
         try:
@@ -148,11 +155,11 @@ def add_exhibits(data, writer):
         rows.append([str(n), _coordinates(main), _coordinates(thumb), str(marked),
                      ", ".join(map(str, main_crop[1])), ", ".join(map(str, thumb_crop[1])),
                      f"{measurement.get('main_orientation', 1)}, {measurement.get('preview_orientation', 0)}", footprint_location])
-        if editor:
+        if identified_carrier:
             rows[-1].append(carrier)
         regions.append({"region": {"kind": "bbox", "bbox": main}, "label": f"Preview difference {n}"})
     if rows:
-        exhibit_ids.append(writer.table(EDITOR_COLUMNS if editor else FOOTPRINT_COLUMNS, rows, title=TABLE, caption=note))
+        exhibit_ids.append(writer.table(EDITOR_COLUMNS if identified_carrier else FOOTPRINT_COLUMNS, rows, title=TABLE, caption=note))
         width, height = measurement["native_size"]
         exhibit_ids.append(writer.regions(regions, title=REGIONS, caption=note,
                                           media_ref="original", coordinate_space={"width": width, "height": height, "scale_to_original": 1.0}))
@@ -172,8 +179,8 @@ def from_result(result):
     if not table:
         return None
     crops = {item["title"]: item for item in exhibits if item.get("kind") == "image" and item.get("role") == "comparison"}
-    rows, orientations = [], set()
-    editor = table["columns"] == EDITOR_COLUMNS
+    rows, orientations, carriers = [], set(), set()
+    has_carrier = table["columns"] == EDITOR_COLUMNS
     try:
         for region, main, thumb, marked, main_size, thumb_size, *extra in table["rows"]:
             if len(extra) != len(table["columns"]) - len(LEGACY_COLUMNS):
@@ -182,8 +189,10 @@ def from_result(result):
             if (main_tag not in (1, *localization.TRANSFORMS)
                     or (preview_alignment != 0 and (main_tag == 1 or preview_alignment != main_tag))):
                 return None
-            if editor and (main_tag != 1 or extra[2] != "jpeg_editor_resource"):
-                return None
+            if has_carrier:
+                if main_tag != 1 or extra[2] not in CARRIER_SCHEMAS:
+                    return None
+                carriers.add(extra[2])
             orientations.add((main_tag, preview_alignment))
             photos = {key: crops[f"{name} {region}"] for key, name in (("main_image", MAIN), ("embedded_preview", PREVIEW))}
             boxes = {key: dict(zip(BOX_KEYS, map(int, data.split(",")), strict=True))
@@ -207,11 +216,11 @@ def from_result(result):
             rows.append(row)
     except (KeyError, AttributeError, TypeError, ValueError):
         return None
-    if len(orientations) != 1:
+    if len(orientations) != 1 or len(carriers) != int(has_carrier):
         return None
     main_orientation, preview_orientation = next(iter(orientations))
     return {"source_sha256": (result.get("input") or {}).get("sha256"), "coordinate_exhibit_id": table["id"],
-            **({"preview_carrier": "jpeg_editor_resource"} if editor else {}),
+            **({"preview_carrier": next(iter(carriers))} if has_carrier else {}),
             "main_coordinate_space": "exif-oriented-main-image", "preview_coordinate_space": "stored-embedded-preview",
             "main_exif_orientation": main_orientation, "preview_alignment_orientation": preview_orientation,
             "regions": rows, "interpretation": table.get("caption", INTERPRETATION), "authorship_confidence_contribution": 0} if rows else None

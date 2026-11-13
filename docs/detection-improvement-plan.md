@@ -110,6 +110,9 @@ integration remains unfinished.
   added three gain-only locations and zero under louder rain or train sound.
   The two separately frozen points added no genuine file flags. It did not
   resolve the loud-noise gap and stays outside the app.
+- The [adjacent speech-frame study](audio-adjacent-frame-transfer-2026-11-12.md)
+  found one additional rain-masked edit, flagged two genuine readers under
+  rain, and found no train-masked edit. The cue stays outside the app.
 - The [exact small PNG copy check](image-exact-small-copy-2026-11-12.md)
   found 44/48 known copies and added zero flags on 66 held controls and
   eight interface captures. New local opt-in reports show both native crops
@@ -119,6 +122,10 @@ integration remains unfinished.
   added zero useful locations on 24 known rewrites and flagged five of 15
   genuine article groups at the frozen operating point. It stays outside
   the app.
+- The [paired draft check beside a paragraph break](writing-paired-center-transfer-2026-11-12.md)
+  located four of 12 known edits and flagged zero of eight ordinary revisions.
+  Local paid verification confirmed the exact source spans in the browser,
+  PDF and JSON. The opt-in needs both versions of a short English TXT draft.
 - The [narrower speech evidence study](audio-focused-window-transfer-2026-11-12.md)
   compared 98 exact deliveries. Replacing a broad displayed range only when
   it contains a corroborated narrow range preserved every useful sparse

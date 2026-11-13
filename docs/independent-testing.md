@@ -139,6 +139,9 @@ The [mixed PDF writing check](writing-mixed-pdf-page-transfer-2026-11-12.md)
 replays writing responses and exact source locations on intact selectable
 pages of mixed PDFs. Its receipt records ordinary agreement and skipped
 cross-page inputs.
+The [paired writing check beside a paragraph break](writing-paired-center-transfer-2026-11-12.md)
+compares changes in exact sentence and context readings. Its replay checks
+both draft positions and reports held genuine revisions separately.
 The [paired writing response comparison](writing-instruct-base-passage-transfer-2026-11-12.md)
 checks response differences on identical target tokens and replays the held
 publisher's false flags and missed rewrites.
@@ -156,6 +159,9 @@ backgrounds and marked genuine speech in partly edited files.
 The [frequency-view study](audio-subband-partial-transfer-2026-11-12.md) replays
 separate band points and tests whether either rescues edits in the same noisy
 deliveries. Its native check also recomputes the filtered PCM window hashes.
+The [adjacent speech-frame study](audio-adjacent-frame-transfer-2026-11-12.md)
+replays the local evidence windows, genuine-group false flags, and exact
+sample counts under the same loud rain and train conditions.
 The [native word-clock qualification](grid-reserve-word-clocks-2026-11-12.md)
 aligns publisher word intervals with original embedded speech and replays four
 ordinary mouth changes with unchanged soundtracks.

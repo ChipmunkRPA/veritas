@@ -80,6 +80,9 @@ decision alongside the edit and control counts.
 The [general-video insertion source audit](video-temporal-insert-source-intake-2026-11-13.md#replay)
 verifies the archive roster and edit labels with about 152 KB of publisher
 byte ranges, preserving original and inserted cadence separately.
+The [four-second H.264 face comparison](video-brief-face-avc-confirmation-2026-11-13.md#local-replay)
+recounts exact source-frame ranges and control outcomes for six recordings
+and their paired deliveries.
 
 ### Replay delivery and earlier-copy comparisons
 

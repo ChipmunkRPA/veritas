@@ -173,6 +173,10 @@ integration remains unfinished.
   added four useful locations per carrier on expressive speech with no added
   ordinary flags. It added none on the separately sourced conversational clips
   and retained a synchronized-copy error. The combination stays experimental.
+- The [four-second H.264 face comparison](video-brief-face-avc-confirmation-2026-11-13.md)
+  located 12 of 12 short swap deliveries versus 10 of 12 with the current
+  Full check and added no flags on 30 ordinary deliveries. Both exact
+  additions are encodes of the same edit. The H.264 proposal stays experimental.
 - The [general-video insertion source audit](video-temporal-insert-source-intake-2026-11-13.md)
   verified 100 labeled triplets and identified 34 with equal declared
   original and generated frame rates. Four smallest triplets form a

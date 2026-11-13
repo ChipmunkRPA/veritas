@@ -1,0 +1,1062 @@
+{
+  "schema": "chipmunk.video-brief-face-avc-confirmation/1",
+  "protocol": {
+    "prior_sha256": {
+      "four_second": "6eddf92858137633e64373f372d3764a42d1fca94d3679e689c92e66ec8cdb2a",
+      "eight_second_hevc": "1ee86ff12dc7a3099b77072e4b558353b91ed7d8af410b9784d1f04319f9ff26",
+      "eight_second_avc_vp9": "1aeaeee6c8dd7468e306fc0116678b8ffddc7d29f0800a14492e86e9ca7f5661"
+    },
+    "qualified_sha256": "0f76b7d66a87558f35b2ebe792c675298a10bf154ab520b63f230ed17430cb38",
+    "method_sha256": {
+      "video_brief_face_avc_confirmation.py": "22a29338cac04321b49c35ee0666b2773354a3d69ecff8e94ba5fd76bc7c1cd1",
+      "video_brief_face_120_carrier.py": "9d3b96b9ee8a0c0c734480b927093b6a44970783c8ef68c2f5025ed2400dc7ef",
+      "video_face_720p30_transfer.py": "5aac8cb3158cf26f4338be7f54f4c0080bfcb1a1ceaf2fe195519c2f5a83b7b7",
+      "video_face_two_returns_hd.py": "b46373b27ffae389462d491bdc0d073cbc7680c95ac74d9dbed070acff240164",
+      "face_paired_edge.py": "6ed182fdf5d1bc6e809afdeef25e0b13c03453bfaf6a4ba1f67273b527f041a0",
+      "face_short_proposal.py": "cfefa6cd4630a49ac91cca6add59fb5187dd805a792a4bfad76da3f0d727089b",
+      "face_appearance.py": "e7885fe12c9823886b0a58be95865c783005a41dc11f0f084b01bbd0b205455d",
+      "face_short_proposal_binding.py": "97b14a5bde1f0d96582b3e8680520968415e7219da9aa4dd25d687870b63f35a",
+      "screen_video_native_background_challenge.py": "6a3f19d84131e70a5d455eab6236e967eddecf1aad069d0065ebd58fa3ced4fb"
+    },
+    "face_weights": {
+      "face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+      "face_recognition_sface_2021dec.onnx": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79"
+    },
+    "flags": {
+      "VERITAS_VIDEO_FACE_SECOND_RETURN_REVIEW": "true",
+      "VERITAS_VIDEO_FACE_DETAIL_REPEAT_REVIEW": "true",
+      "VERITAS_VIDEO_FACE_PAIRED_EDGE_REFINEMENT": "true",
+      "VERITAS_VIDEO_FACE_SPATIAL_CUT_CONTEXT": "true",
+      "VERITAS_VIDEO_FACE_UNROUTED_SHORT_REVIEW": "false",
+      "VERITAS_VIDEO_FACE_SHORT_WINDOW_REVIEW": "false",
+      "VERITAS_VIDEO_FACE_SHORT_CARRIER_REVIEW": "false"
+    },
+    "opencv": "5.0.0",
+    "binaries": {
+      "ffmpeg": "ffmpeg version 7.0.2 Copyright (c) 2000-2024 the FFmpeg developers",
+      "ffprobe": "ffprobe version 7.0.2 Copyright (c) 2007-2024 the FFmpeg developers"
+    },
+    "gates": {
+      "minimum_useful_additions": 4,
+      "minimum_distinct_gained_groups": 3,
+      "minimum_exact_additions": 2,
+      "maximum_new_ordinary_flags": 1,
+      "maximum_new_ordinary_cut_flags": 0,
+      "maximum_new_wrong_edited_ranges": 1,
+      "minimum_candidate_coverage": 0.75
+    },
+    "point": 0.1
+  },
+  "private_freeze_sha256": "71a506e5405b57811fe26c3891cdf54061e47e6803571d0fdb1fc2cc8b91d7c2",
+  "rows": [
+    {
+      "group": 1,
+      "condition": "original",
+      "sha256": "33e6c2bc573d939186474f4c8fdcc22ceeb86916f1a1652b4b9365ebf0e3ed2c",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 54,
+        "scheduled": 54,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "tandem_original",
+      "sha256": "61c802decb39f860265d11016ea15ff647166081a67ed8eb3b45c57295bf2da4",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 60,
+        "scheduled": 60,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "swap",
+      "sha256": "e4295cc9cacc183791cdadc7a89c3827bba2b8edee6e9ebf3755a965da67213e",
+      "truth": [
+        [
+          63,
+          69
+        ]
+      ],
+      "prior": [
+        [
+          64,
+          70
+        ]
+      ],
+      "baseline_status": "ok",
+      "eligible": false,
+      "measurement": null,
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "tandem_swap",
+      "sha256": "179a80313079f1ca3329c03434021b59ff48abb7bdcd002fcf4b8cd88b420758",
+      "truth": [
+        [
+          63,
+          69
+        ]
+      ],
+      "prior": [
+        [
+          64,
+          70
+        ]
+      ],
+      "baseline_status": "ok",
+      "eligible": false,
+      "measurement": null,
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "lighting",
+      "sha256": "bb600595236814cf0bad5dd1b8b44493f7ad486f6eb012861286a4ff33f5080a",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 54,
+        "scheduled": 54,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "same_recording_jump",
+      "sha256": "b9f1b6e5d8058839b792a8b9df2e420103cdd048df0f8c22ca76a42e9b1ee6c5",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 59,
+        "scheduled": 59,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "cross_recording_cut",
+      "sha256": "78cb413521966a04ec9dc1fdfbfa227b176b5110e17ea8809f4ab1708388c774",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 67,
+        "scheduled": 67,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "original",
+      "sha256": "a86a0ff3ee9631ca53b7e4a2d121565fc30c5fbaa11b9545ed637262e337aad8",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 72,
+        "scheduled": 72,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "tandem_original",
+      "sha256": "d4d2319be5cf166db0fef3b552b05163787ae667fe8bca6c85914ab43e005696",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 67,
+        "scheduled": 67,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "swap",
+      "sha256": "6385c7dbdee9ddf75b6b5e77dad7a131f4b7c643325ec8ea5d788a1dfb5aa74a",
+      "truth": [
+        [
+          72,
+          78
+        ]
+      ],
+      "prior": [
+        [
+          72,
+          78
+        ]
+      ],
+      "baseline_status": "ok",
+      "eligible": false,
+      "measurement": null,
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "tandem_swap",
+      "sha256": "74d19e8adc8752ce8f3779ecf04c5e498977e37d6ff08adf6aa08dc7fd95d382",
+      "truth": [
+        [
+          72,
+          78
+        ]
+      ],
+      "prior": [
+        [
+          72,
+          78
+        ]
+      ],
+      "baseline_status": "ok",
+      "eligible": false,
+      "measurement": null,
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "lighting",
+      "sha256": "67db1e2f4250acb9b62183a2f194b825fb327a0fd02cc2dc2dbe9c05904a8e7f",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 68,
+        "scheduled": 68,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "same_recording_jump",
+      "sha256": "9a723b7a37271a985412fe3a97e222643f888ebd397af4f5bdac4a4416db2ff6",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 69,
+        "scheduled": 69,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "cross_recording_cut",
+      "sha256": "9a178d21ad1a3a38406f7c68e8ec568f8ceb4daee0ad4343d53a602746d4c9a1",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 68,
+        "scheduled": 68,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "original",
+      "sha256": "b5e03006acaa20019ebdfddc1b0cf52f96b39ee56a8eb73f14f265f4963f722b",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 54,
+        "scheduled": 54,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "tandem_original",
+      "sha256": "25717ea0e68eab696d83e5aefa21a9e14b2ef5774ea642046be5a27a3c23d2c0",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 59,
+        "scheduled": 59,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "swap",
+      "sha256": "2b23dfc196624e7879e272460eff060a2823c336cbec2214f0f3f5064da18adc",
+      "truth": [
+        [
+          81,
+          87
+        ]
+      ],
+      "prior": [
+        [
+          82,
+          88
+        ]
+      ],
+      "baseline_status": "ok",
+      "eligible": false,
+      "measurement": null,
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "tandem_swap",
+      "sha256": "cf816ef657cba62b36901fe8452c174cad184bfcd12dad110d88f6225751b0a1",
+      "truth": [
+        [
+          81,
+          87
+        ]
+      ],
+      "prior": [
+        [
+          82,
+          88
+        ]
+      ],
+      "baseline_status": "ok",
+      "eligible": false,
+      "measurement": null,
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "lighting",
+      "sha256": "db1fb9b51b2d5089bfadd64bac08fd743c44a6660fb4500b0626790a28540fb9",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 54,
+        "scheduled": 54,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "same_recording_jump",
+      "sha256": "d8cea4ad5347a33c0a49fd5aedbb3d8bc60f92f46f2e6845b0e4a6d5a9abd639",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 54,
+        "scheduled": 54,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "cross_recording_cut",
+      "sha256": "47b51167f28f91d60c3d3df9be97242e11de37840209efcd4784c947407b17b0",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 55,
+        "scheduled": 55,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "original",
+      "sha256": "a4f6b2afd42bf2823fd66c4a01b29329e4ed3ebf98cd727c1beba622431175ec",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 73,
+        "scheduled": 73,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "tandem_original",
+      "sha256": "3646f29bc05187c1466d4e37416ce229dfe59437ba808dd76a5898e84a55510e",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 69,
+        "scheduled": 69,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "swap",
+      "sha256": "b87aaaddb8639b483170485326384476da72bfc66b159a003825555814644354",
+      "truth": [
+        [
+          90,
+          96
+        ]
+      ],
+      "prior": [
+        [
+          90,
+          96
+        ]
+      ],
+      "baseline_status": "ok",
+      "eligible": false,
+      "measurement": null,
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "tandem_swap",
+      "sha256": "9cdb53740327e9efcf243bc567cf78049510f1ab056b1926d26282a6ffc28802",
+      "truth": [
+        [
+          90,
+          96
+        ]
+      ],
+      "prior": [
+        [
+          90,
+          96
+        ]
+      ],
+      "baseline_status": "ok",
+      "eligible": false,
+      "measurement": null,
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "lighting",
+      "sha256": "33f3cd73ad0714d7371e404b8379e947e6ba4317601a8a489a61ed807473efdf",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 73,
+        "scheduled": 73,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "same_recording_jump",
+      "sha256": "0e872cb339b8fd977abb138d9148a4d29dd8f2ef48ef638cb5898b1182dcfb15",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 72,
+        "scheduled": 72,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "cross_recording_cut",
+      "sha256": "c55065e90dc537107f30c9da5d4814f9cb599fac138f9ec3c700248fbb7d902f",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 77,
+        "scheduled": 77,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "original",
+      "sha256": "7a7751ca5ccb73c31cad447675fa5a7efebbe7609a2f0a013c63147cca8c14c2",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 42,
+        "scheduled": 42,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "tandem_original",
+      "sha256": "2b49f9aa05b62a7ec1c8246d37c5fecfab948fe80a79c4f63bb3ac8fb60d4486",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 42,
+        "scheduled": 42,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "swap",
+      "sha256": "7240ea5a3c417b1b76de14d461c6a2e700b35d0df85d463af542df0b3420663c",
+      "truth": [
+        [
+          99,
+          105
+        ]
+      ],
+      "prior": [
+        [
+          100,
+          106
+        ]
+      ],
+      "baseline_status": "ok",
+      "eligible": false,
+      "measurement": null,
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "tandem_swap",
+      "sha256": "6d738388565ce0f43896d8779f25eddeff435b8a262d6a5021a48160828085b1",
+      "truth": [
+        [
+          99,
+          105
+        ]
+      ],
+      "prior": [
+        [
+          100,
+          106
+        ]
+      ],
+      "baseline_status": "ok",
+      "eligible": false,
+      "measurement": null,
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "lighting",
+      "sha256": "59c980d181c2aac46e0914bb2b17fefae950786b315a4a9de87d1c337b2a4b83",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 48,
+        "scheduled": 48,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "same_recording_jump",
+      "sha256": "36924f0b21c93aea61bb2a2ca5024b7c3d401e288b40d12644485fea224c55b7",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 31,
+        "scheduled": 31,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "cross_recording_cut",
+      "sha256": "a3ec9113b41af752a26d83deafaa8a5c43cedf9335e50afc1a77577d5155a15f",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 42,
+        "scheduled": 42,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "original",
+      "sha256": "ebadcfa94b388d63b3966fc0e38018790f72ce98ed5e32010a3eb755027e049d",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 17,
+        "scheduled": 17,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "tandem_original",
+      "sha256": "5594d2454cf02291687e37e7ee6441afd019ad28fd814478b81605855cb69769",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 17,
+        "scheduled": 17,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "swap",
+      "sha256": "8e2d18ecee2e22271790f3bcdf0f1f96bdb970026c2306a184dfa140651ed470",
+      "truth": [
+        [
+          108,
+          114
+        ]
+      ],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 28,
+        "scheduled": 28,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": {
+        "frames": [
+          108,
+          114
+        ],
+        "response": 0.4588489693660496,
+        "pts": [
+          108000,
+          114000
+        ],
+        "anchors": [
+          {
+            "frame_index": 107,
+            "pts": 107000,
+            "decoded_rgb_sha256": "518543265c9f1deb95858d390e5aa20620dfeedf751c06f39290dd56f89752ff",
+            "aligned_rgb_sha256": "631c21f323f7cad7026b400483de21df21b1afeedf9c778acac6c7bcef1aaa9b"
+          },
+          {
+            "frame_index": 111,
+            "pts": 111000,
+            "decoded_rgb_sha256": "febc59c50aa7351974674b5ce9d82ea7c1e719d926d7850afc0f8e850fe3c85e",
+            "aligned_rgb_sha256": "d6429f94f56929785e28272ec76816b77d25b978baebd948ebb37110157c202c"
+          },
+          {
+            "frame_index": 114,
+            "pts": 114000,
+            "decoded_rgb_sha256": "d0b47f8b66988a889a07d9b70012caf8c999e68f3dbe96cda70b560f8b309e42",
+            "aligned_rgb_sha256": "2058cec7e0968b95ad2da21c7f4fcde6c8b108cf4f32ef3cbc97b79b1d7bc1a2"
+          }
+        ]
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "tandem_swap",
+      "sha256": "b397751044e7b7b47c499992515e319f44cc679bcfcb2630659f82661d8e8cee",
+      "truth": [
+        [
+          108,
+          114
+        ]
+      ],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 28,
+        "scheduled": 28,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": {
+        "frames": [
+          108,
+          114
+        ],
+        "response": 0.25547377077608824,
+        "pts": [
+          108000,
+          114000
+        ],
+        "anchors": [
+          {
+            "frame_index": 107,
+            "pts": 107000,
+            "decoded_rgb_sha256": "97ccc49a26e6a2fa5dfc0804ebcacff1c5e67343c83d6e72c2235b8324b04dc0",
+            "aligned_rgb_sha256": "54654fd42942091205edbe8dfdf6b9df44c6b8128d83376318600f306bfe8fa6"
+          },
+          {
+            "frame_index": 111,
+            "pts": 111000,
+            "decoded_rgb_sha256": "baa0d10635775d3ab71c18cc430826460f73df0d8e5d9489f933aac11ec088b8",
+            "aligned_rgb_sha256": "0473c1c2832599bb52ed3a5b77341710d8000365756768c240d52649e07c44e2"
+          },
+          {
+            "frame_index": 114,
+            "pts": 114000,
+            "decoded_rgb_sha256": "3270bcd7a8f56efd9e15b64d5f52e8f0f093ecd1cb258f5c6f5924e16be504bb",
+            "aligned_rgb_sha256": "3fb2e99c684c155003cd8bb3b168d168e8c21b493eca73781ec90b9a40a0305d"
+          }
+        ]
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "lighting",
+      "sha256": "6ce16646dbd8cceb2bd0045d0049f85d677532ca0c7924f26ed03feb9608765e",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 17,
+        "scheduled": 17,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "same_recording_jump",
+      "sha256": "d08bfe35a6e1da37e05ae5a8e92cfeb602787cb0f116ecd270957265a0645f05",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 17,
+        "scheduled": 17,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "cross_recording_cut",
+      "sha256": "4cf9a92112bde5f994e19b0590109afebc4472ba4d02e85a305efb9c964d33e1",
+      "truth": [],
+      "prior": [],
+      "baseline_status": "ok",
+      "eligible": true,
+      "measurement": {
+        "available": true,
+        "face_frames": 25,
+        "scheduled": 25,
+        "native_pts_sha256": "6a427c9e49e4e4bd4413523dbc6a9dd1f1f661f2a6998f88beb609875e99eea3"
+      },
+      "proposal": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    }
+  ],
+  "independent_native": {
+    "clock_ticks": 5040,
+    "rgb_frames": 5040,
+    "anchors": 6,
+    "repeated_authoring_files": 42
+  },
+  "result": {
+    "totals": {
+      "files": 42,
+      "baseline_flags": 10,
+      "baseline_useful": 10,
+      "eligible": 32,
+      "measured": 32,
+      "additional_ranges": 2,
+      "additional_useful": 2,
+      "additional_exact": 2,
+      "additional_ordinary": 0,
+      "additional_cut": 0,
+      "additional_wrong": 0,
+      "final_useful": 12,
+      "gained_groups": 1
+    },
+    "strata": {
+      "original": {
+        "files": 6,
+        "baseline_flags": 0,
+        "baseline_useful": 0,
+        "eligible": 6,
+        "measured": 6,
+        "additional_ranges": 0,
+        "additional_useful": 0,
+        "additional_exact": 0,
+        "additional_ordinary": 0,
+        "additional_cut": 0,
+        "additional_wrong": 0,
+        "final_useful": 0
+      },
+      "tandem_original": {
+        "files": 6,
+        "baseline_flags": 0,
+        "baseline_useful": 0,
+        "eligible": 6,
+        "measured": 6,
+        "additional_ranges": 0,
+        "additional_useful": 0,
+        "additional_exact": 0,
+        "additional_ordinary": 0,
+        "additional_cut": 0,
+        "additional_wrong": 0,
+        "final_useful": 0
+      },
+      "swap": {
+        "files": 6,
+        "baseline_flags": 5,
+        "baseline_useful": 5,
+        "eligible": 1,
+        "measured": 1,
+        "additional_ranges": 1,
+        "additional_useful": 1,
+        "additional_exact": 1,
+        "additional_ordinary": 0,
+        "additional_cut": 0,
+        "additional_wrong": 0,
+        "final_useful": 6
+      },
+      "tandem_swap": {
+        "files": 6,
+        "baseline_flags": 5,
+        "baseline_useful": 5,
+        "eligible": 1,
+        "measured": 1,
+        "additional_ranges": 1,
+        "additional_useful": 1,
+        "additional_exact": 1,
+        "additional_ordinary": 0,
+        "additional_cut": 0,
+        "additional_wrong": 0,
+        "final_useful": 6
+      },
+      "lighting": {
+        "files": 6,
+        "baseline_flags": 0,
+        "baseline_useful": 0,
+        "eligible": 6,
+        "measured": 6,
+        "additional_ranges": 0,
+        "additional_useful": 0,
+        "additional_exact": 0,
+        "additional_ordinary": 0,
+        "additional_cut": 0,
+        "additional_wrong": 0,
+        "final_useful": 0
+      },
+      "same_recording_jump": {
+        "files": 6,
+        "baseline_flags": 0,
+        "baseline_useful": 0,
+        "eligible": 6,
+        "measured": 6,
+        "additional_ranges": 0,
+        "additional_useful": 0,
+        "additional_exact": 0,
+        "additional_ordinary": 0,
+        "additional_cut": 0,
+        "additional_wrong": 0,
+        "final_useful": 0
+      },
+      "cross_recording_cut": {
+        "files": 6,
+        "baseline_flags": 0,
+        "baseline_useful": 0,
+        "eligible": 6,
+        "measured": 6,
+        "additional_ranges": 0,
+        "additional_useful": 0,
+        "additional_exact": 0,
+        "additional_ordinary": 0,
+        "additional_cut": 0,
+        "additional_wrong": 0,
+        "final_useful": 0
+      }
+    },
+    "checks": {
+      "useful_additions": false,
+      "distinct_gained_groups": false,
+      "exact_additions": true,
+      "ordinary_flags": true,
+      "ordinary_cut_flags": true,
+      "wrong_edited_ranges": true,
+      "candidate_coverage": true
+    },
+    "passes": false
+  }
+}

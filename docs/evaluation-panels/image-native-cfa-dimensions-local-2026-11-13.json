@@ -1,0 +1,75 @@
+{
+  "browser": {
+    "checked_uploads": 4,
+    "json_matches": true,
+    "page_errors": 0,
+    "plain_view": true
+  },
+  "checkout": "simulated USD 9.99",
+  "compared_cell_count": 3888,
+  "confidence_weight": 0,
+  "focused_backend_tests": 7,
+  "focused_frontend_tests": 39,
+  "held_transfer_sha256": "88e781d0763d9477d30193cc35904bb9aac2ccc2330d5682b6e241434d80c70f",
+  "historical_v1_packages_replayed": 4,
+  "matched_context_size": [
+    1152,
+    864
+  ],
+  "matched_region": [
+    480,
+    384,
+    608,
+    512
+  ],
+  "outcomes": [
+    {
+      "case": "phase_shift",
+      "exact_native_crop": true,
+      "pdf_json_parity": true,
+      "source_replay": true,
+      "source_size": [
+        2304,
+        1728
+      ],
+      "status": "matched"
+    },
+    {
+      "case": "original",
+      "exact_native_crop": false,
+      "pdf_json_parity": true,
+      "source_replay": true,
+      "source_size": [
+        2304,
+        1728
+      ],
+      "status": "no_match"
+    },
+    {
+      "case": "resized",
+      "exact_native_crop": false,
+      "pdf_json_parity": true,
+      "source_replay": true,
+      "source_size": [
+        2304,
+        1728
+      ],
+      "status": "no_repeatable_stencil"
+    },
+    {
+      "case": "phase_shift",
+      "exact_native_crop": false,
+      "pdf_json_parity": true,
+      "source_replay": true,
+      "source_size": [
+        1536,
+        2048
+      ],
+      "status": "unsupported_png"
+    }
+  ],
+  "profile": "full",
+  "schema": "chipmunk.image-native-cfa-dimensions-local/1",
+  "template": "veritas-report-2.0.r122",
+  "unpaid_jobs": 0
+}

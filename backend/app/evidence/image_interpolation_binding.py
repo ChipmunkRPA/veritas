@@ -9,7 +9,14 @@ from app.core.canonical import canonical_hash
 KEY = "native_interpolation_review"
 COMMITMENT = "native_interpolation_review_sha256"
 SCHEMA = "image-native-interpolation/1"
+EXTENDED_SCHEMA = "image-native-interpolation/2"
 SCOPE = "This check requires a 2048 × 1536, 16-bit RGB PNG without ancillary chunks and a repeatable interpolation pattern."
+EXTENDED_SCOPE = (
+    "This check requires a 16-bit RGB PNG without ancillary chunks, a repeatable interpolation pattern, "
+    "and one of these sizes: 2048 × 1536, 2304 × 1728, 2368 × 1344 or 1792 × 1792."
+)
+LEGACY_SIZE = (2048, 1536)
+SUPPORTED_SIZES = frozenset({LEGACY_SIZE, (2304, 1728), (2368, 1344), (1792, 1792)})
 LIMITATION = "An ordinary edit can change the interpolation pattern. The observation carries zero AI confidence weight."
 STATUS = {
     "unsupported_png": "The PNG did not match the supported input profile.",
@@ -41,18 +48,22 @@ def validate(document, commitment):
     record = review["record"]
     pictures = review["artifacts"]
     status = record["status"]
+    schema = record["schema"]
+    scope = {SCHEMA: SCOPE, EXTENDED_SCHEMA: EXTENDED_SCOPE}.get(schema)
     if (not isinstance(commitment, str) or not SHA.fullmatch(commitment)
             or canonical_hash(record) != commitment or source.get(COMMITMENT) != commitment
-            or record["schema"] != SCHEMA or record["source_sha256"] != source["sha256"]
+            or scope is None or record["source_sha256"] != source["sha256"]
             or status not in STATUS or record["observation"] != STATUS[status]
-            or record["scope"] != SCOPE or record["limitation"] != LIMITATION
+            or record["scope"] != scope or record["limitation"] != LIMITATION
             or record["affects_overall_confidence"] is not False):
         raise ValueError("Interpolation evidence differs from its source commitment")
     checked = status in {"no_match", "matched"}
     count, phase, support = (record[key] for key in ("supported_cells", "phase", "reference_closure"))
     if checked:
-        if ((source["width"], source["height"], source.get("exif_orientation")) != (2048, 1536, 1)
-                or type(count) is not int or not 0 < count <= 3072 or type(phase) is not int or not 0 <= phase < 4
+        size = source["width"], source["height"]
+        sizes = {LEGACY_SIZE} if schema == SCHEMA else SUPPORTED_SIZES
+        if (size not in sizes or source.get("exif_orientation") != 1
+                or type(count) is not int or not 0 < count <= (size[0] // 32) * (size[1] // 32) or type(phase) is not int or not 0 <= phase < 4
                 or type(support) not in (int, float) or not math.isfinite(support) or not 0 <= support <= 1):
             raise ValueError("Interpolation evidence has invalid checked coverage")
     elif (count, phase, support) != (0, None, None):
@@ -65,11 +76,11 @@ def validate(document, commitment):
         return
     x0, y0, x1, y1 = box
     if (any(type(v) is not int or v % 32 for v in box)
-            or not 0 <= x0 < x1 <= 2048 or not 0 <= y0 < y1 <= 1536
+            or not 0 <= x0 < x1 <= size[0] or not 0 <= y0 < y1 <= size[1]
             or not 64 <= x1 - x0 <= 192 or not 64 <= y1 - y0 <= 192
             or not SHA.fullmatch(str(digest)) or set(pictures) != set(ROLES)):
         raise ValueError("Interpolation region or source image is invalid")
-    for role, (width, height) in zip(ROLES, ((1024, 768), (x1 - x0, y1 - y0)), strict=True):
+    for role, (width, height) in zip(ROLES, ((size[0] // 2, size[1] // 2), (x1 - x0, y1 - y0)), strict=True):
         asset = pictures[role]
         if (asset["media_type"] != "image/png" or not SHA.fullmatch(asset["sha256"])
                 or (asset["width"], asset["height"]) != (width, height)):

@@ -97,6 +97,24 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [local picture area check](video-paired-local-area-2026-11-13.md)
+  handles supported matched short H.264 clips. On eight source groups it
+  raised useful large-edit regions from 3/8 to 8/8, kept the 16 small and
+  texture edit locations, and flagged zero of 16 ordinary delivery controls.
+  One of the controls lacked photometric support. Public media reconstruction
+  replayed all 48 paired results.
+- The [expanded native PNG check](image-native-cfa-dimensions-transfer-2026-11-13.md)
+  adds three supported landscape and square sizes. Those three sizes
+  localized 48 of 60 planted interpolation edits and highlighted none of
+  150 controls. The tested portrait size remains outside scope.
+- [Reordered Word tables](document-word-table-alignment-2026-11-13.md)
+  now compare uniquely matched columns and rows. The test recovered
+  31 changed cells from genuine publisher revisions and flagged none of
+  12 controls. Each side retains its own native coordinates.
+- The [matched short voice edit panel](audio-phoneme-short-edit-intake-2026-11-13.md)
+  prepared 108 waveform deliveries with exact same-word replacements and
+  ordinary controls under annotated competing speech. Native replay matched
+  all deliveries. Detector scoring is still pending.
 - [Matching Word tables](document-word-table-comparison-2026-11-13.md) now
   show wording changes in earlier-draft comparison with native cell and
   paragraph coordinates. The browser, PDF, JSON and source replay found

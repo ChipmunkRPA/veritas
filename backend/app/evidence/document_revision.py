@@ -310,6 +310,7 @@ def compare_with_text(earlier: bytes, later: bytes, extension: str, *,
 def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                          email_body_only: bool = False, pdf_paired_text_only: bool = False, earlier_extension: str | None = None,
                          include_word_tables: bool = True,
+                         strict_word_tables: bool = False,
                          ) -> tuple[dict, str, str, WordLayouts | None]:
     """Keep the native Word paragraph locations available for exact paired sentence mapping."""
     if extension not in FORMATS:
@@ -327,9 +328,11 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     word_bodies = ((docx_body(earlier), docx_body(later)) if extension == ".docx" and not mixed and include_word_tables else (None, None))
     word_tables = None
     if word_bodies[0] is not None:
-        from app.evidence import document_revision_word_tables
-
-        word_tables = document_revision_word_tables.compare(*word_bodies)
+        if strict_word_tables:
+            from app.evidence import document_revision_word_tables as word_table_comparator
+        else:
+            from app.evidence import document_revision_word_alignment as word_table_comparator
+        word_tables = word_table_comparator.compare(*word_bodies)
     has_compared_table = bool(word_tables and word_tables["compared"])
     with TemporaryDirectory(prefix="document-revision-") as staging:
         directory = Path(staging)
@@ -376,7 +379,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     if mixed:
         return result, old_text, new_text, None
     if word_tables is not None:
-        result.update(schema=document_revision_word_tables.SCHEMA, scope=document_revision_word_tables.SCOPE, word_tables=word_tables)
+        result.update(schema=word_table_comparator.SCHEMA, scope=word_table_comparator.SCOPE, word_tables=word_tables)
     if extension == ".eml" and email_body_only:
         return result, _email_body_prefix(old_text, old_tokens), _email_body_prefix(new_text, new_tokens), None
     if extension == ".pdf" and pdf_paired_text_only:

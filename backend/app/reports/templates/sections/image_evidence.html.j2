@@ -18,7 +18,7 @@
 <h3>Local pixel interpolation</h3>
 <p>{{ reading.observation }}</p>
 <p class="caption">{{ reading.scope }} {{ reading.limitation }}</p>
-{% if reading.supported_cells %}<p class="caption">{{ reading.supported_cells }} of 3,072 native image cells supplied comparable measurements.</p>{% endif %}
+{% if reading.supported_cells %}<p class="caption">{{ reading.supported_cells }} of {{ "{:,}".format((v.image_evidence.source.width // 32) * (v.image_evidence.source.height // 32)) }} native image cells supplied comparable measurements.</p>{% endif %}
 {% if reading.region %}<p class="caption">Source columns [{{ reading.region[0] }}, {{ reading.region[2] }}) and rows [{{ reading.region[1] }}, {{ reading.region[3] }}). Right and bottom edges are exclusive.</p>{% endif %}
 {% if not v.image_evidence.withheld %}
 <div class="evidence-plates">{% for image in native_interpolation.images %}<figure><img src="{{ image.uri }}" alt="{{ image.label }}"><figcaption>{{ image.label }}</figcaption></figure>{% endfor %}</div>

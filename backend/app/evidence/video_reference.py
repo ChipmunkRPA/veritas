@@ -17,7 +17,7 @@ from PIL import Image
 from app.core.canonical import canonical_hash
 from app.detectors.audio.decode import SAMPLE_RATE, audio_stream_indices
 from app.detectors.video.decode import DecodeError, FrameTable, decode_frames, probe_frames
-from app.evidence import video_reference_local
+from app.evidence import video_reference_local, video_reference_photometric
 from app.evidence.audio_reference import (
     _read_track,
     channel_timing,
@@ -99,9 +99,10 @@ def _asset(assets, filename, content, media_type):
     return {"file": filename, "sha256": hashlib.sha256(content).hexdigest(), "media_type": media_type}
 
 
-def _image(assets, name, rgb):
+def _image(assets, name, rgb, *, native=False):
     with Image.fromarray(rgb) as picture, io.BytesIO() as output:
-        picture.thumbnail((PREVIEW_SIDE, PREVIEW_SIDE), Image.Resampling.LANCZOS)
+        if not native:
+            picture.thumbnail((PREVIEW_SIDE, PREVIEW_SIDE), Image.Resampling.LANCZOS)
         picture.save(output, "PNG")
         return _asset(assets, name, output.getvalue(), "image/png")
 
@@ -177,14 +178,15 @@ def _trimmed_pairs(paths, tables, offset):
             yield first, second
 
 
-def _picture(paths, tables, assets, *, include_local, trim_offset=None):
+def _picture(paths, tables, assets, *, include_local, include_local_area=False, trim_offset=None):
     clock = _elapsed(tables[1])
     earlier_clock = _elapsed(tables[0]) if trim_offset is not None else None
     earlier_offset = trim_offset if trim_offset is not None else 0
     local_check = video_reference_local.eligible(paths, tables, clock) if include_local else None
-    rects = video_reference_local.rectangles(tables[0].height, tables[0].width) if local_check else None
+    area_check = include_local and include_local_area and video_reference_photometric.eligible(paths, tables, clock)
+    rects = video_reference_local.rectangles(tables[0].height, tables[0].width) if local_check or area_check else None
     measurements = []
-    signals, background_errors = [], []
+    signals, background_errors, cells = [], [], []
     pairs = _frame_pairs(paths, tables) if trim_offset is None else _trimmed_pairs(paths, tables, earlier_offset)
     for first, second in pairs:
         difference = first.rgb != second.rgb
@@ -197,7 +199,11 @@ def _picture(paths, tables, assets, *, include_local, trim_offset=None):
         if earlier_clock is not None:
             measurements[-1].update(earlier_frame=first.index, earlier_time_s=float(earlier_clock[first.index]))
         if rects is not None:
-            signal, background = video_reference_local.measure(first.rgb, second.rgb, rects)
+            if area_check:
+                signal, background, grid = video_reference_photometric.measurements(first.rgb, second.rgb, rects)
+                cells.append(grid)
+            else:
+                signal, background = video_reference_local.measure(first.rgb, second.rgb, rects)
             signals.append(signal)
             background_errors.append(background)
     if len(measurements) != len(tables[1]):
@@ -227,10 +233,18 @@ def _picture(paths, tables, assets, *, include_local, trim_offset=None):
                               earlier_end_s=float(earlier_clock[end + earlier_offset]))
 
     local = choice = None
-    if local_check is not None and rects is not None:
-        dt, scope = local_check
-        status, choice = video_reference_local.assess(signals, background_errors, dt, rects)
+    if rects is not None:
+        if area_check:
+            scope = video_reference_photometric.SCOPE
+            status, choice = video_reference_photometric.assess(signals, background_errors, rects)
+        else:
+            dt, scope = local_check
+            status, choice = video_reference_local.assess(signals, background_errors, dt, rects)
         local = {"status": status, "summary": video_reference_local.STATUS[status], "scope": scope}
+        if area_check:
+            local["basis"] = video_reference_photometric.BASIS
+            if choice:
+                choice["tile"] = video_reference_photometric.expanded_region(np.array(cells), choice, constrained=False)
         if choice:
             needed.update(choice["samples"].values())
 
@@ -248,7 +262,7 @@ def _picture(paths, tables, assets, *, include_local, trim_offset=None):
                 if choice and index in crop_indices:
                     x, y, w, h = (choice["tile"][key] for key in ("x", "y", "w", "h"))
                     crops.setdefault(frame.index, {})[side] = _image(
-                        assets, f"{side}-local-crop-{frame.index:03d}.png", frame.rgb[y:y+h, x:x+w]
+                        assets, f"{side}-local-crop-{frame.index:03d}.png", frame.rgb[y:y+h, x:x+w], native=area_check
                     )
     if set(previews) != needed or any(len(pictures) != 2 for pictures in previews.values()):
         raise DecodeError("Video could not be decoded with all requested evidence pictures.")
@@ -298,6 +312,7 @@ def _additional_soundtracks(paths, sources, tables, assets):
 
 
 def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
+            include_local_area: bool = False,
             timing_event_s: Fraction | None = None, timing_model: Path | None = None,
             timing_short_fallback: bool = False, include_soundtrack: bool = True,
             timing_local_sound: bool = False,
@@ -325,7 +340,8 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
         return record, assets
     tracks = decoded = None
     if status == "measured":
-        record["picture"] = _picture(paths, tables, assets, include_local=include_local)
+        record["picture"] = _picture(paths, tables, assets, include_local=include_local,
+                                     include_local_area=include_local_area and timing_event_s is None)
         if "local_comparison" in record["picture"]:
             record["schema"] = SCHEMA_WITH_LOCAL
         decoded = [

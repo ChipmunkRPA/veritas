@@ -46,12 +46,12 @@ def encode(folder, name, frames, samples=None, *, rate=25, origin=0):
     return path
 
 
-def encode_lossy_comparison(path, pictures, *, lossless, crf=28):
+def encode_lossy_comparison(path, pictures, *, lossless, crf=28, rate=25):
     height, width = pictures.shape[1:3]
     output = (["-c:v", "ffv1", "-pix_fmt", "bgr0"] if lossless
               else ["-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", str(crf)])
     subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-filter_threads", "1", "-threads", "1", "-f", "rawvideo",
-                    "-pixel_format", "rgb24", "-video_size", f"{width}x{height}", "-framerate", "25", "-i", "pipe:0",
+                    "-pixel_format", "rgb24", "-video_size", f"{width}x{height}", "-framerate", str(rate), "-i", "pipe:0",
                     *output, "-threads", "1", str(path)], input=pictures.tobytes(), capture_output=True, check=True, timeout=20)
     return path
 
@@ -352,30 +352,43 @@ def test_picture_identical_soundtrack_shift_has_signed_exact_evidence(tmp_path):
     assert global_record["soundtrack_alignment"]["status"] == "no_local_shift"
 
 
-@pytest.mark.parametrize("lossless", [True, False], ids=["earlier-ffv1", "earlier-h264"])
-def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(tmp_path, reference_http, monkeypatch, lossless):
-    yy, xx = np.indices((288, 360))
-    shade = 42 + xx * .27 + yy * .21 + 18 * np.cos(xx / 13) * np.sin(yy / 15)
+@pytest.mark.parametrize(("lossless", "local_area"), [(True, False), (False, False), (False, True)],
+                         ids=["earlier-ffv1", "earlier-h264", "earlier-h264-local-area"])
+def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(
+    tmp_path, reference_http, monkeypatch, lossless, local_area
+):
+    yy, xx = np.indices((480, 720) if local_area else (288, 360))
+    shade = 42 + xx * (.12 if local_area else .27) + yy * (.13 if local_area else .21) + 18 * np.cos(xx / 13) * np.sin(yy / 15)
     base = np.uint8(np.stack((shade, shade + 7, shade - 5), axis=-1))
     earlier_frames = np.stack([np.roll(base, i % 4, axis=1) for i in range(68)])
     later_frames = earlier_frames.copy()
-    later_frames[24:44, 176:220, 110:174] = (224, 223, 219)
+    y0, y1, x0, x1 = (176, 288, 110, 290) if local_area else (176, 220, 110, 174)
+    later_frames[24:44, y0:y1, x0:x1] = (224, 223, 219)
     extension, mime = ("mkv", "video/x-matroska") if lossless else ("mp4", "video/mp4")
-    earlier = encode_lossy_comparison(tmp_path / f"earlier.{extension}", earlier_frames, lossless=lossless, crf=23)
-    later = encode_lossy_comparison(tmp_path / f"submitted.{extension}", later_frames, lossless=False)
-    neutral = encode_lossy_comparison(tmp_path / f"reencoded.{extension}", earlier_frames, lossless=False)
-    wrong = encode_lossy_comparison(tmp_path / f"different.{extension}", 255 - earlier_frames, lossless=lossless, crf=23)
+    rate = 24 if local_area else 25
+    earlier = encode_lossy_comparison(tmp_path / f"earlier.{extension}", earlier_frames, lossless=lossless, crf=23, rate=rate)
+    later = encode_lossy_comparison(tmp_path / f"submitted.{extension}", later_frames, lossless=False, rate=rate)
+    neutral = encode_lossy_comparison(tmp_path / f"reencoded.{extension}", earlier_frames, lossless=False, rate=rate)
+    wrong = encode_lossy_comparison(tmp_path / f"different.{extension}", 255 - earlier_frames, lossless=lossless, crf=23, rate=rate)
 
-    record, assets = video_reference.compare(earlier, later)
+    record, assets = video_reference.compare(earlier, later, include_local_area=local_area)
     local = record["picture"]["local_comparison"]
     assert record["schema"] == video_reference.SCHEMA_WITH_LOCAL
     assert record["affects_overall_confidence"] is False and local["status"] == "local_difference"
-    assert local["scope"] == (video_reference_local.SCOPE if lossless else video_reference_local.H264_SCOPE)
+    if local_area:
+        assert local["basis"] == "paired_h264_local_area/1"
+        assert "overall brightness and contrast" in local["scope"]
+        assert "local_comparison" not in video_reference.compare(earlier, later)[0]["picture"]
+    else:
+        assert local["scope"] == (video_reference_local.SCOPE if lossless else video_reference_local.H264_SCOPE)
     span = local["range"]
     assert record["picture"]["matching_frames"] == 0
     assert max(span["start_s"], .96) < min(span["end_s"], 1.76)
     x, y, w, h = (span["tile"][key] for key in ("x", "y", "w", "h"))
-    assert 110 <= x < 174 and 176 <= y < 220
+    if local_area:
+        assert x <= x0 < x1 <= x + w and y <= y0 < y1 <= y + h
+    else:
+        assert x0 <= x < x1 and y0 <= y < y1
     assert list(span["previews"]) == ["before", "during", "after"]
     assert span["previews"]["before"]["frame"] == span["start_frame"] - 1
     assert span["previews"]["after"]["frame"] == span["end_frame_exclusive"]
@@ -394,6 +407,7 @@ def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(t
     f = reference_http
     stored = f.store.put_file(later)
     monkeypatch.setattr(settings, "video_reference_comparison_enabled", True)
+    monkeypatch.setattr(settings, "video_reference_local_area", local_area)
 
     @contextmanager
     def sessions():
@@ -449,8 +463,8 @@ def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(t
     for name, data in {"comparison.json": canonical_json(v1) + b"\n", **v1_assets}.items():
         (historical / name).write_bytes(data)
     assert run(earlier, later, historical, verify=True) == v1
-    assert video_reference.compare(earlier, neutral)[0]["picture"]["local_comparison"]["status"] == "no_local_range"
-    assert video_reference.compare(wrong, later)[0]["picture"]["local_comparison"]["status"] == "insufficient_shared_picture_content"
+    assert video_reference.compare(earlier, neutral, include_local_area=local_area)[0]["picture"]["local_comparison"]["status"] == "no_local_range"
+    assert video_reference.compare(wrong, later, include_local_area=local_area)[0]["picture"]["local_comparison"]["status"] == "insufficient_shared_picture_content"
 
 
 @pytest.mark.parametrize(("width", "height", "step"), [(360, 288, 400001), (480, 360, 333333)])

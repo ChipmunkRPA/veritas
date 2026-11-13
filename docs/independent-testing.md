@@ -22,6 +22,22 @@ replays a PNG seam or video frame schedule directly from a supplied original
 and its signed evidence record. Start there to check those measurements on a
 local export.
 
+### Replay the expanded local evidence checks
+
+Run this from a clean checkout with Python 3.11 or later. It recounts all
+350 [PNG dimension cases](image-native-cfa-dimensions-transfer-2026-11-13.md),
+48 [paired video comparisons](video-paired-local-area-2026-11-13.md),
+108 [short voice edit deliveries](audio-phoneme-short-edit-intake-2026-11-13.md)
+and [reorganized Word tables](document-word-table-alignment-2026-11-13.md).
+The video guide also rebuilds the paired carrier measurements from eight
+pinned public recordings, using about 2.8 MB of downloads.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/evidence.json" --suite local-evidence-expansion
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/evidence.json" --format-issue
+```
+
 ### Replay difficult edits across four media
 
 Run from a clean checkout with Python 3.11 or later. The readers use only

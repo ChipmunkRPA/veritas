@@ -32,7 +32,8 @@ PNG_URL = "data:image/png;base64,"
 TABLE_SKIP = {"no_matching_position": "No table at the same body position.",
               "unsupported_layout": "Outside the supported table layout.",
               "changed_structure": "The table shape, headings or row labels changed.",
-              "comparison_limit": "The table exceeded the comparison limit."}
+              "comparison_limit": "The table exceeded the comparison limit.",
+              "caption_unmatched": "The table caption has no unique match in both drafts."}
 
 
 def _word_position(item):
@@ -111,13 +112,20 @@ def _word_tables(coverage):
               "<p>Table, row and column numbers start at one. Character positions start within each cell.</p>"]
     for table in coverage["compared"]:
         old_number, new_number = table["earlier_table"], table["later_table"]
+        if table.get("match") == "caption":
+            output.append(f'<p>Earlier table {old_number} and analyzed table {new_number} were matched by a unique Word caption.</p>')
+        for key, label in (("unchecked_rows", "rows"), ("unchecked_columns", "columns")):
+            if (counts := table.get(key)) and any(counts.values()):
+                output.append(f'<p>Unchecked {label}: {counts["earlier"]} earlier, {counts["later"]} analyzed.</p>')
         if not table["changes"]:
-            output.append(f'<p>Earlier table {old_number} and analyzed table {new_number} had no wording changes.</p>')
+            output.append(f'<p>No wording changes in the compared cells of earlier table {old_number} and analyzed table {new_number}.</p>')
         for change in table["changes"]:
             ident = escape(change["id"])
+            old_pos = (f' · Row {change["earlier_row"]}, column {change["earlier_column"]}' if "earlier_row" in change else "")
+            new_pos = f' · Row {change["row"]}, column {change["column"]}' if old_pos else ""
             output.append(f'<section><h2 id="draft-change-{ident}">{ident} · Row {change["row"]}, column {change["column"]}</h2>'
-                          f'{_side(f"Earlier table {old_number}", change["earlier"])}'
-                          f'{_side(f"Analyzed table {new_number}", change["later"])}</section>')
+                          f'{_side(f"Earlier table {old_number}{old_pos}", change["earlier"])}'
+                          f'{_side(f"Analyzed table {new_number}{new_pos}", change["later"])}</section>')
     for table in coverage["skipped"]:
         numbers = [f"{label} table {table[key]}" for key, label in (("earlier_table", "Earlier"), ("later_table", "Analyzed"))
                    if table[key] is not None]

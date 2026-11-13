@@ -14,6 +14,7 @@ from app.evidence.document_revision import (
     MAX_BYTES,
     compare_with_sources,
 )
+from app.evidence.document_revision_word_alignment import SCHEMA as ALIGNED_WORD_TABLES_SCHEMA
 from app.evidence.document_revision_word_tables import SCHEMA as WORD_TABLES_SCHEMA
 
 MAX_EXPORT = 2 * 1024 * 1024
@@ -51,7 +52,8 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
     expected, old_text, new_text, word_layouts = compare_with_sources(
         _read(earlier, MAX_BYTES), _read(later, MAX_BYTES), extension, earlier_extension=old_extension,
         email_body_only=paired is not None, pdf_paired_text_only=paired is not None,
-        include_word_tables=received.get("schema") == WORD_TABLES_SCHEMA,
+        include_word_tables=received.get("schema") in {WORD_TABLES_SCHEMA, ALIGNED_WORD_TABLES_SCHEMA},
+        strict_word_tables=received.get("schema") == WORD_TABLES_SCHEMA,
     )
     if json.dumps(received, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
         raise ValueError("The comparison does not replay from these source bytes and decoded positions")

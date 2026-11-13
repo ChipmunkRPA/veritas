@@ -159,7 +159,10 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         include_channel_timing=settings.audio_reference_local_timing,
                     )
                 elif timing_event_s is None:
-                    record, assets = video_reference.compare(reference, submitted, include_channel_timing=True, include_trimmed=True)
+                    record, assets = video_reference.compare(
+                        reference, submitted, include_channel_timing=True, include_trimmed=True,
+                        include_local_area=settings.video_reference_local_area,
+                    )
                 else:
                     record, assets = video_reference.compare(reference, submitted, timing_event_s=timing_event_s,
                                                               timing_model=settings.video_reference_timing_model_path,

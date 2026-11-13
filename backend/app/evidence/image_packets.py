@@ -447,7 +447,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["source"][interpolation.COMMITMENT] = canonical_hash(recorded)
         document[interpolation.KEY] = {"record": recorded, "artifacts": {}}
         if recorded["region"] is not None:
-            for role, image in plates(original, recorded["region"]).items():
+            for role, image in plates(original, recorded["region"], schema=recorded["schema"]).items():
                 ok, png = cv2.imencode(".png", image)
                 if not ok:
                     raise PacketIntegrityError("Could not encode interpolation evidence")

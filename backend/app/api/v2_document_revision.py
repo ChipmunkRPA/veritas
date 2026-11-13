@@ -158,24 +158,35 @@ class DraftWordCellChange(BaseModel):
     id: str
     row: int
     column: int
+    earlier_row: int | None = None
+    earlier_column: int | None = None
     earlier: DraftWordCellExcerpt
     later: DraftWordCellExcerpt
 
 
 class DraftWordComparedTable(BaseModel):
-    body_index: int
+    body_index: int | None = None
+    earlier_body_index: int | None = None
+    later_body_index: int | None = None
     earlier_table: int
     later_table: int
     rows: int
     columns: int
     changes: list[DraftWordCellChange]
+    match: Literal["caption", "body_position"] | None = None
+    earlier_rows: int | None = None
+    earlier_columns: int | None = None
+    unchecked_rows: dict[Literal["earlier", "later"], int] | None = None
+    unchecked_columns: dict[Literal["earlier", "later"], int] | None = None
 
 
 class DraftWordSkippedTable(BaseModel):
-    body_index: int
+    body_index: int | None = None
+    earlier_body_index: int | None = None
+    later_body_index: int | None = None
     earlier_table: int | None
     later_table: int | None
-    reason: Literal["no_matching_position", "unsupported_layout", "changed_structure", "comparison_limit"]
+    reason: Literal["no_matching_position", "unsupported_layout", "changed_structure", "comparison_limit", "caption_unmatched"]
 
 
 class DraftWordTables(BaseModel):
@@ -187,7 +198,8 @@ class DraftWordTables(BaseModel):
 
 class DraftComparison(BaseModel):
     schema_name: Literal["chipmunk.document-revision-comparison/1", "chipmunk.document-revision-comparison/2",
-                         "chipmunk.document-revision-comparison/3", "chipmunk.document-revision-comparison/4"] = Field(alias="schema")
+                         "chipmunk.document-revision-comparison/3", "chipmunk.document-revision-comparison/4",
+                         "chipmunk.document-revision-comparison/5"] = Field(alias="schema")
     format: Literal["email", "plain_text", "docx", "pdf", "mixed"]
     coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint",
                               "pdf_native_text_unicode_codepoint", "email_html_extracted_text_unicode_codepoint",

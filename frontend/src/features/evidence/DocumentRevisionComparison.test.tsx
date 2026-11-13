@@ -57,11 +57,13 @@ it('shows the page and both views of the source PDF crop', async () => {
 it('shows exact changes in Word table cells and explains skipped table coverage', async () => {
   const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64), decoded_characters: 30, mime_part: null }
   const comparison: DraftComparison = {
-    schema: 'chipmunk.document-revision-comparison/4', format: 'docx', coordinate_space: 'docx_body_unicode_codepoint',
+    schema: 'chipmunk.document-revision-comparison/5', format: 'docx', coordinate_space: 'docx_body_unicode_codepoint',
     earlier: source, later: source, scope: 'Matching Word tables.', interpretation: 'Source comparison only.', changes: [],
     word_tables: { coordinate_space: 'docx_table_cell_unicode_codepoint', omitted_positions: 0, compared: [{
-      body_index: 1, earlier_table: 1, later_table: 1, rows: 2, columns: 2,
-      changes: [{ id: 'T01', row: 2, column: 2,
+      earlier_body_index: 1, later_body_index: 3, match: 'caption',
+      unchecked_rows: { earlier: 1, later: 0 }, unchecked_columns: { earlier: 0, later: 0 },
+      earlier_table: 1, later_table: 1, rows: 2, columns: 2,
+      changes: [{ id: 'T01', row: 2, column: 2, earlier_row: 3, earlier_column: 1,
         earlier: { start: 1, end: 5, text: '🚀red', changed_tokens: [[2, 5]],
           paragraphs: [{ paragraph: 1, cell_index: 1, start: 1, end: 5 }] },
         later: { start: 1, end: 7, text: '🚀green', changed_tokens: [[2, 7]],
@@ -77,6 +79,9 @@ it('shows exact changes in Word table cells and explains skipped table coverage'
   fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
   await screen.findByText('1 change found')
   expect(screen.getByText('T01 · Row 2, column 2')).toBeTruthy()
+  expect(screen.getByText('Earlier cell · Row 3, column 1')).toBeTruthy()
+  expect(screen.getByText('Analyzed cell · Row 2, column 2')).toBeTruthy()
+  expect(screen.getByText('Unchecked rows. 1 earlier, 0 analyzed.')).toBeTruthy()
   expect(screen.getByText('Paragraph 1 [1, 7)')).toBeTruthy()
   expect(screen.getByText('green').tagName).toBe('MARK')
   expect(screen.getByText('green').closest('pre')?.textContent).toBe('🚀green')

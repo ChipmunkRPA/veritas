@@ -12,6 +12,7 @@ const tableSkips = {
   unsupported_layout: 'Outside the supported table layout.',
   changed_structure: 'The table shape, headings or row labels changed.',
   comparison_limit: 'The table exceeded the comparison limit.',
+  caption_unmatched: 'The table caption has no unique match in both drafts.',
 }
 type WordTables = NonNullable<DraftComparison['word_tables']>
 type CellExcerpt = WordTables['compared'][number]['changes'][number]['earlier']
@@ -33,9 +34,16 @@ function WordTableResults({ coverage }: { coverage: WordTables }) {
   return <section aria-label="Word table wording changes" className="mt-4">
     <h3 className="m-0 text-small font-medium">Word table wording changes</h3>
     <p className="mt-2 mb-0 text-caption text-text-muted">Table, row and column numbers start at one. Character positions start within each cell.</p>
-    {coverage.compared.map(table => <div key={table.body_index} className="mt-3">
+    {coverage.compared.map(table => <div key={table.earlier_body_index ?? table.body_index} className="mt-3">
       <h4 className="m-0 text-small font-medium">Earlier table {table.earlier_table} · Analyzed table {table.later_table}</h4>
-      {!table.changes.length && <p className="mt-2 mb-0 text-small">No wording changes in this table.</p>}
+      {table.match === 'caption' && <p className="mt-2 mb-0 text-small">Matched by a unique Word caption.</p>}
+      {(['rows', 'columns'] as const).map(label => {
+        const count = label === 'rows' ? table.unchecked_rows : table.unchecked_columns
+        return count && (count.earlier > 0 || count.later > 0) ? <p key={label} className="mt-2 mb-0 text-small">
+          Unchecked {label}. {count.earlier} earlier, {count.later} analyzed.
+        </p> : null
+      })}
+      {!table.changes.length && <p className="mt-2 mb-0 text-small">No wording changes in the compared cells.</p>}
       {!!table.changes.length && <ol className="mt-2 mb-0 list-none space-y-3 p-0">
         {table.changes.map(change => <li key={change.id} className="rounded-md border border-border p-3">
           <h5 className="m-0 text-small font-medium">{change.id} · Row {change.row}, column {change.column}</h5>
@@ -43,7 +51,9 @@ function WordTableResults({ coverage }: { coverage: WordTables }) {
             {(['earlier', 'later'] as const).map(side => {
               const excerpt = change[side]
               return <div key={side} className="min-w-0">
-                <p className="m-0 text-small font-medium">{side === 'earlier' ? 'Earlier cell' : 'Analyzed cell'}</p>
+                <p className="m-0 text-small font-medium">{side === 'earlier' ? 'Earlier cell' : 'Analyzed cell'}
+                  {change.earlier_row != null && ` · Row ${side === 'earlier' ? change.earlier_row : change.row}, column ${side === 'earlier' ? change.earlier_column : change.column}`}
+                </p>
                 <p className="mt-1 mb-0 font-mono text-caption text-text-muted">[{excerpt.start}, {excerpt.end})</p>
                 {excerpt.paragraphs.map(anchor => <p key={anchor.cell_index} className="mt-1 mb-0 font-mono text-caption text-text-muted">
                   Paragraph {anchor.paragraph} [{anchor.start}, {anchor.end})
@@ -56,7 +66,7 @@ function WordTableResults({ coverage }: { coverage: WordTables }) {
         </li>)}
       </ol>}
     </div>)}
-    {coverage.skipped.map(table => <p key={table.body_index} className="mt-2 mb-0 text-small text-text-muted">
+    {coverage.skipped.map(table => <p key={`${table.earlier_body_index ?? table.body_index}:${table.later_body_index}`} className="mt-2 mb-0 text-small text-text-muted">
       {[table.earlier_table != null && `Earlier table ${table.earlier_table}`, table.later_table != null && `Analyzed table ${table.later_table}`]
         .filter(Boolean).join(' / ')}. {tableSkips[table.reason]}
     </p>)}
@@ -233,7 +243,7 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
   return <section aria-labelledby={headingId} className="rounded-md border border-border p-4">
     <h2 id={headingId} className="m-0 text-body font-medium">Compare with an earlier draft</h2>
     <p className="mt-2 mb-0 text-small text-text-muted">Choose an earlier {earlierExtensions.length > 1 ? 'TXT, DOCX or PDF' : extension} file, up to 1 MiB, to see where the wording changed.</p>
-    {extension === '.docx' && <p className="mt-2 mb-0 text-small text-text-muted">Checks body wording. Two Word drafts can also compare simple tables with the same headings, row labels and layout.</p>}
+    {extension === '.docx' && <p className="mt-2 mb-0 text-small text-text-muted">Checks body wording and matches simple Word tables by exact row and column labels. A moved table needs the same unique Word caption.</p>}
     {extension === '.eml' && <p className="mt-2 mb-0 text-small text-text-muted">Use two plain-text emails or two HTML-only replies with two, three, five or six simple body paragraphs and a trailing blockquote.</p>}
     {extension === '.pdf' && <p className="mt-2 mb-0 text-small text-text-muted">Use unlocked PDFs with selectable text on every page, up to 12 pages each.</p>}
     {earlierExtensions.length > 1 && <p className="mt-2 mb-0 text-small text-text-muted">For drafts in different formats, use an upright PDF with selectable text. Multi-page PDFs need a single column per page and can have up to 12 pages.</p>}

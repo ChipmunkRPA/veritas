@@ -9,11 +9,13 @@ import json
 import re
 import subprocess
 from fractions import Fraction
+from itertools import pairwise
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
 SCHEMA = "chipmunk.native-video-interval/1"
 COMPARISON_SCHEMA = "chipmunk.video-reference-comparison/2"
+LOCAL_AREA_BASIS = "paired_h264_local_area/1"
 ROLES = ("before", "during", "after")
 SHA = re.compile(r"[0-9a-f]{64}")
 TIMESTAMP = re.compile(rb"\bn:\s*(\d+)\s+pts:\s*(-?\d+)")
@@ -157,12 +159,17 @@ def verify(source_path, receipt, exhibits=None):
     }
 
 
-def comparison_source(path, source):
+def comparison_source(path, source, *, local_area=False):
     require(0 < path.stat().st_size == source["bytes"] <= MAX_COMPARISON_BYTES
             and sha_file(path) == source["sha256"], "Comparison source bytes do not match")
-    width, height, base, pts, _ = probe(path)
-    require((width, height) in {(360, 288), (480, 360)} and len(pts) <= 100,
+    width, height, base, pts, codec = probe(path)
+    shapes = {(720, 480)} if local_area else {(360, 288), (480, 360)}
+    require((width, height) in shapes and len(pts) <= 100,
             "Source lies outside the local comparison dimensions or frame limit")
+    if local_area:
+        step = (pts[1] - pts[0]) * base
+        require(codec == "h264" and len(pts) >= 40 and Fraction(1, 25) <= step <= Fraction(1, 23)
+                and all((b - a) * base == step for a, b in pairwise(pts)), "Unsupported local area clock")
     require((width, height, str(base), len(pts), pts[0], pts[-1], clock_sha256(pts)) == (
         source["width"], source["height"], source["time_base"], source["frames"], source["first_pts"],
         source["last_pts"], source["frame_pts_sha256"],
@@ -179,6 +186,7 @@ def verify_comparison(earlier, submitted, export):
     require(record["schema"] == COMPARISON_SCHEMA and record["status"] == "measured"
             and record["affects_overall_confidence"] is False, "Expected a version 2 video comparison")
     local = record["picture"]["local_comparison"]
+    local_area = local.get("basis") == LOCAL_AREA_BASIS
     require(local["status"] == "local_difference", "The export has no measured local picture interval")
     region = local["range"]
     start, end = region["start_frame"], region["end_frame_exclusive"]
@@ -188,13 +196,16 @@ def verify_comparison(earlier, submitted, export):
     indices = [previews[role]["frame"] for role in ROLES]
     require(all(type(index) is int for index in indices) and indices[0] == start - 1
             and start <= indices[1] < end == indices[2], "Picture indices differ from the interval roles")
+    if local_area:
+        require(end - start in {8, 12, 16, 20} and indices[1] == (start + end) // 2,
+                "The local area requires the selected middle picture")
     x, y, w, h = (region["tile"][key] for key in ("x", "y", "w", "h"))
     require(all(type(value) is int for value in (x, y, w, h)) and min(x, y) >= 0 and min(w, h) > 0,
             "Invalid crop rectangle")
 
     clocks = []
     for side, path in (("earlier", earlier), ("submitted", submitted)):
-        width, height, base, pts = comparison_source(path, record[side])
+        width, height, base, pts = comparison_source(path, record[side], local_area=local_area)
         require(end < len(pts) and x + w <= width and y + h <= height, "Interval or crop lies outside the source")
         clock = [(tick - pts[0]) * base for tick in pts]
         clocks.append(((width, height), clock))

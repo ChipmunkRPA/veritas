@@ -427,6 +427,9 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
   const copySkipped = set.copy_similarity?.status === 'skipped_trusted_ai_credentials'
   const interpolation = set.native_interpolation_review
   const region = interpolation?.record.region
+  const interpolationCells = set.source.width && set.source.height
+    ? Math.floor(set.source.width / 32) * Math.floor(set.source.height / 32)
+    : 0
   const hasLocalEvidence = set.copy_similarity?.pairs.length || set.copy_translation?.pairs.length || set.copy_affine?.pairs.length || set.embedded_pair_difference?.pair || region
   const shown = showAll ? set.packets : set.packets.slice(0, 3)
   return (
@@ -439,7 +442,7 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
       {interpolation && <section aria-label="Local pixel interpolation" className="mt-4 rounded-md border border-border p-4">
         <h3 className="m-0 text-body font-medium">Local pixel interpolation</h3>
         <p className="mt-2 mb-0 text-small">{interpolation.record.observation}</p>
-        {!!interpolation.record.supported_cells && <p className="mt-2 mb-0 text-small">{interpolation.record.supported_cells.toLocaleString('en-US')} of 3,072 native image cells supplied comparable measurements.</p>}
+        {!!interpolation.record.supported_cells && <p className="mt-2 mb-0 text-small">{interpolation.record.supported_cells.toLocaleString('en-US')}{interpolationCells ? ` of ${interpolationCells.toLocaleString('en-US')}` : ''} native image cells supplied comparable measurements.</p>}
         {region && <p className="mt-2 mb-0 text-small">Source columns [{region[0]}, {region[2]}) and rows [{region[1]}, {region[3]}). Right and bottom edges are exclusive.</p>}
         <p className="mt-2 mb-0 text-small text-text-muted">{interpolation.record.scope} {interpolation.record.limitation}</p>
         {region && <div className="mt-3 grid gap-4 sm:grid-cols-2">{([

@@ -16,6 +16,7 @@ import pymupdf
 import pytest
 from docx import Document
 from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
 from PIL import Image
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -551,11 +552,11 @@ def test_word_table_comparison_keeps_exact_native_cell_ranges_across_api_pdf_and
     assert response.status_code == 200, response.text
     result = response.json()
     comparison = result["comparison"]
-    assert comparison["schema"] == "chipmunk.document-revision-comparison/4" and not comparison["changes"]
+    assert comparison["schema"] == "chipmunk.document-revision-comparison/5" and not comparison["changes"]
     tables = comparison["word_tables"]
     assert tables["coordinate_space"] == "docx_table_cell_unicode_codepoint" and not tables["skipped"]
     (table,) = tables["compared"]
-    assert (table["body_index"], table["earlier_table"], table["later_table"]) == (1, 1, 1)
+    assert (table["earlier_body_index"], table["later_body_index"], table["earlier_table"], table["later_table"]) == (1, 1, 1, 1)
     assert all((change["row"], change["column"]) == (2, 2) for change in table["changes"])
     for change in table["changes"]:
         for key, source in (("earlier", before), ("later", after)):
@@ -579,12 +580,15 @@ def test_word_table_comparison_keeps_exact_native_cell_ranges_across_api_pdf_and
     historical, *_ = document_revision.compare_with_sources(earlier, later, ".docx", include_word_tables=False)
     export.write_text(json.dumps(historical))
     assert "word_tables_compared" not in review(export, a, b)
+    strict, *_ = document_revision.compare_with_sources(earlier, later, ".docx", strict_word_tables=True)
+    assert strict["schema"] == "chipmunk.document-revision-comparison/4"
+    export.write_text(json.dumps(strict))
+    assert review(export, a, b)["word_cell_token_ranges_verified"] >= 6
 
 
 @pytest.mark.parametrize(("layout", "label", "reason"), [
     ("merged", "Review", "unsupported_layout"), ("nested", "Review", "unsupported_layout"),
     ("tracked", "Review", "unsupported_layout"), ("moved", "Review", "no_matching_position"),
-    ("simple", "Changed row label", "changed_structure"),
 ])
 def test_word_table_comparison_discloses_skips_and_preserves_other_text(layout, label, reason):
     first = _word_with_table("Earlier value")
@@ -592,6 +596,78 @@ def test_word_table_comparison_discloses_skips_and_preserves_other_text(layout, 
     coverage = document_revision.compare(first, second, ".docx")["word_tables"]
     assert not coverage["compared"]
     assert {row["reason"] for row in coverage["skipped"]} == {reason}
+
+
+def test_word_table_keeps_matching_rows_when_one_label_changed():
+    first = _word_with_table("Earlier value")
+    second = _word_with_table("Later value", label="Changed row label")
+    coverage = document_revision.compare(first, second, ".docx")["word_tables"]
+    [table] = coverage["compared"]
+    assert table["unchecked_rows"] == {"earlier": 1, "later": 1}
+    assert not table["changes"] and not coverage["skipped"]
+
+
+def _word_alignment(rows, *, moved=False, duplicate_caption=False):
+    word = Document()
+    word.add_paragraph("A stable introduction.")
+    if moved:
+        word.add_paragraph("A new paragraph before the table.")
+    for _ in range(1 + duplicate_caption):
+        table = word.add_table(rows=len(rows), cols=len(rows[0]))
+        caption = OxmlElement("w:tblCaption")
+        caption.set(qn("w:val"), "Historical estimates")
+        table._tbl.tblPr.append(caption)
+        for i, row in enumerate(rows):
+            for j, value in enumerate(row):
+                table.cell(i, j).text = value
+    out = BytesIO()
+    word.save(out)
+    return out.getvalue()
+
+
+def test_word_table_aligns_moved_rows_and_columns_with_exact_coverage(reference_http, monkeypatch, tmp_path):
+    old = _word_alignment([("Key", "Value", "Units"), ("Stable row", "13", "count"), ("Removed row", "20", "count")])
+    new = _word_alignment([("Key", "Units", "Value"), ("Added row", "count", "99"), ("Stable row", "count", "14")], moved=True)
+    f = _install(reference_http, monkeypatch)
+    _saved(f, "aligned-word-draft", ".docx", new)
+    response = f.client.post(_url("aligned-word-draft"), headers=f.viewer, files=_upload(old, ".docx"), data={"include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    result = response.json()
+    comparison = result["comparison"]
+    [table] = comparison["word_tables"]["compared"]
+    [change] = table["changes"]
+    assert table["match"] == "caption" and table["earlier_body_index"] == 1 and table["later_body_index"] == 2
+    assert table["unchecked_rows"] == {"earlier": 1, "later": 1}
+    assert (change["earlier_row"], change["earlier_column"], change["row"], change["column"]) == (2, 2, 3, 3)
+    assert [change[side]["text"] for side in ("earlier", "later")] == ["13", "14"]
+    with pymupdf.open(stream=base64.b64decode(result["pdf"]), filetype="pdf") as report:
+        text = " ".join(" ".join(page.get_text().split()) for page in report)
+    assert "Earlier table 1 · Row 2, column 2" in text and "Analyzed table 1 · Row 3, column 3" in text
+    assert "Unchecked rows: 1 earlier, 1 analyzed." in text
+    a, b, export = (tmp_path / name for name in ("earlier.docx", "analyzed.docx", "comparison.json"))
+    a.write_bytes(old)
+    b.write_bytes(new)
+    export.write_text(json.dumps(comparison))
+    assert review(export, a, b)["word_cell_token_ranges_verified"] == 2
+    change["earlier_column"] = 3
+    export.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(export, a, b)
+
+
+def test_word_table_skips_duplicate_captions_and_only_unchecked_duplicate_rows_and_columns():
+    head = ("Key", "Value", "Units")
+    first = _word_alignment([head, ("One", "13", "number"), ("Two", "14", "number"), ("Three", "15", "number")])
+    changed = [head, ("One", "13", "number"), ("One", "999", "number"), ("Three", "16", "number")]
+    duplicate_caption = document_revision.compare(first, _word_alignment(changed, duplicate_caption=True), ".docx")["word_tables"]
+    assert not duplicate_caption["compared"]
+    assert {table["reason"] for table in duplicate_caption["skipped"]} == {"caption_unmatched"}
+    [table] = document_revision.compare(first, _word_alignment(changed), ".docx")["word_tables"]["compared"]
+    assert table["unchecked_rows"] == {"earlier": 2, "later": 2}
+    [change] = table["changes"]
+    assert change["later"]["text"] == "16"
+    repeated = [("Key", "Value", "Value"), *changed[1:]]
+    assert not document_revision.compare(first, _word_alignment(repeated), ".docx")["word_tables"]["compared"]
 
 
 def test_word_table_comparison_has_a_total_token_cap_and_ignores_formatting():

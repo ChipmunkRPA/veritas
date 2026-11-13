@@ -3515,7 +3515,7 @@ export interface components {
              * Schema
              * @enum {string}
              */
-            schema: "chipmunk.document-revision-comparison/1" | "chipmunk.document-revision-comparison/2" | "chipmunk.document-revision-comparison/3" | "chipmunk.document-revision-comparison/4";
+            schema: "chipmunk.document-revision-comparison/1" | "chipmunk.document-revision-comparison/2" | "chipmunk.document-revision-comparison/3" | "chipmunk.document-revision-comparison/4" | "chipmunk.document-revision-comparison/5";
             /** Scope */
             scope: string;
             word_tables?: components["schemas"]["DraftWordTables"] | null;
@@ -3674,6 +3674,10 @@ export interface components {
             /** Column */
             column: number;
             earlier: components["schemas"]["DraftWordCellExcerpt"];
+            /** Earlier Column */
+            earlier_column?: number | null;
+            /** Earlier Row */
+            earlier_row?: number | null;
             /** Id */
             id: string;
             later: components["schemas"]["DraftWordCellExcerpt"];
@@ -3710,31 +3714,53 @@ export interface components {
         /** DraftWordComparedTable */
         DraftWordComparedTable: {
             /** Body Index */
-            body_index: number;
+            body_index?: number | null;
             /** Changes */
             changes: components["schemas"]["DraftWordCellChange"][];
             /** Columns */
             columns: number;
+            /** Earlier Body Index */
+            earlier_body_index?: number | null;
+            /** Earlier Columns */
+            earlier_columns?: number | null;
+            /** Earlier Rows */
+            earlier_rows?: number | null;
             /** Earlier Table */
             earlier_table: number;
+            /** Later Body Index */
+            later_body_index?: number | null;
             /** Later Table */
             later_table: number;
+            /** Match */
+            match?: ("caption" | "body_position") | null;
             /** Rows */
             rows: number;
+            /** Unchecked Columns */
+            unchecked_columns?: {
+                [key: string]: number;
+            } | null;
+            /** Unchecked Rows */
+            unchecked_rows?: {
+                [key: string]: number;
+            } | null;
         };
         /** DraftWordSkippedTable */
         DraftWordSkippedTable: {
             /** Body Index */
-            body_index: number;
+            body_index?: number | null;
+            /** Earlier Body Index */
+            earlier_body_index?: number | null;
             /** Earlier Table */
             earlier_table: number | null;
+            /** Later Body Index */
+            later_body_index?: number | null;
             /** Later Table */
             later_table: number | null;
             /**
              * Reason
              * @enum {string}
              */
-            reason: "no_matching_position" | "unsupported_layout" | "changed_structure" | "comparison_limit";
+            reason: "no_matching_position" | "unsupported_layout" | "changed_structure" | "comparison_limit" | "caption_unmatched";
         };
         /** DraftWordTables */
         DraftWordTables: {

@@ -21,6 +21,7 @@ from app.evidence.video_reference import (
     SCHEMA_WITH_TRIM,
     compare,
 )
+from app.evidence.video_reference_photometric import BASIS as LOCAL_AREA_BASIS
 from app.evidence.video_reference_timing import SHORT_WAVEFORM_BASIS
 
 
@@ -62,7 +63,7 @@ def replay(compare, earlier: Path, submitted: Path, output: Path, *, verify: boo
 
 def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds: Fraction | None = None, timing_model: Path | None = None) -> dict:
-    options = {"include_trimmed": not verify}
+    options = {"include_trimmed": not verify, "include_local_area": not verify}
     short_fallback = not verify
     local_sound = not verify
     if verify:
@@ -79,6 +80,8 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
             )
             additional = schema == SCHEMA_WITH_ADDITIONAL_SOUNDTRACK
             composite = additional or local_sound or channel_timing
+            local = record.get("picture", {}).get("local_comparison", {})
+            options["include_local_area"] = local.get("basis") == LOCAL_AREA_BASIS
             options.update(include_local=("local_comparison" in record.get("picture", {}) if composite
                                           else schema != SCHEMA),
                            include_soundtrack=schema == SCHEMA_WITH_SOUNDTRACK

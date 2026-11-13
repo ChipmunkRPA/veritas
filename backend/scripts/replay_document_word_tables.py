@@ -56,7 +56,7 @@ def verify_rows(run, panel):
         earlier = document(before)
         later = document(after, bold=True)
         legacy, *_ = document_revision.compare_with_sources(earlier, later, ".docx", include_word_tables=False)
-        found = document_revision.compare(earlier, later, ".docx")
+        found, *_ = document_revision.compare_with_sources(earlier, later, ".docx", strict_word_tables=True)
         plain = document_revision.compare(before.encode(), after.encode(), ".txt")
         study.require(not legacy["changes"] and not found["changes"] and not found["word_tables"]["skipped"],
                       "Source text escaped its matched table")

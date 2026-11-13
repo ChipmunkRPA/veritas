@@ -28,7 +28,7 @@ const evidence: ImageEvidenceSet = {
 
 const show = (value = evidence, token = 'signed token') => render(<MemoryRouter><ImageEvidenceContent set={value} token={token} mediaReady /></MemoryRouter>)
 it('shows the native interpolation measurement and exact crop next to its source position', () => {
-  show({ ...evidence, packets: [], native_interpolation_review: {
+  show({ ...evidence, source: { ...evidence.source, width: 2048, height: 1536 }, packets: [], native_interpolation_review: {
     record: { status: 'matched', observation: 'A local interpolation shift was measured.',
       scope: 'Supported 16-bit PNGs only.', limitation: 'This carries zero AI confidence weight.',
       supported_cells: 2620, region: [480, 416, 608, 544], affects_overall_confidence: false },
@@ -37,6 +37,15 @@ it('shows the native interpolation measurement and exact crop next to its source
   expect(screen.getByText(/Source columns \[480, 608\) and rows \[416, 544\)/)).toBeTruthy()
   expect(screen.getByAltText('Original 16-bit source crop')).toBeTruthy()
   expect(screen.getByText(/2,620 of 3,072/)).toBeTruthy()
+})
+it('uses the submitted image dimensions for expanded interpolation coverage', () => {
+  show({ ...evidence, source: { ...evidence.source, width: 2304, height: 1728 }, packets: [], native_interpolation_review: {
+    record: { status: 'no_match', observation: 'No qualifying interpolation shift was found.',
+      scope: 'Supported 16-bit PNGs only.', limitation: 'This carries zero AI confidence weight.',
+      supported_cells: 3150, region: null, affects_overall_confidence: false },
+    artifacts: {},
+  } })
+  expect(screen.getByText(/3,150 of 3,888 native image cells/)).toBeTruthy()
 })
 afterEach(() => {
   cleanup()

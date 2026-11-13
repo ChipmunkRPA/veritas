@@ -169,9 +169,20 @@ EVIDENCE_EXTENT_2026_11_13 = {
         "writing-uswds-revision-transfer-2026-11-13.json", "document-word-table-comparison-2026-11-13.json",
     ), ("review",), (f"{SCRIPTS}/writing_uswds_revision_transfer.py",)),
 }
+LOCAL_EVIDENCE_EXPANSION = {
+    "image": ("review_image_native_cfa_dimensions_transfer.py", (
+        "image-native-cfa-dimensions-measurements-2026-11-13.json",
+        "image-native-cfa-dimensions-cc0-roster-2026-11-13.json", "image-native-cfa-dimensions-transfer-2026-11-13.json",
+    ), (), ()),
+    "video": ("review_video_reference_robust_transfer.py", ("video-paired-local-area-transfer-2026-11-13.json",), (), ()),
+    "audio": ("review_audio_phoneme_short_edit_intake.py", ("audio-phoneme-short-edit-intake-2026-11-13.json",), (), ()),
+    "writing": ("replay_document_word_table_alignment.py", (
+        "document-word-table-alignment-cbo-roster-2026-11-13.json", "document-word-table-alignment-cbo-2026-11-13.json",
+    ), ("review",), ()),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
-          "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13")
+          "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -233,6 +244,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = EVIDENCE_TRANSFER_2026_11_13[modality]
     elif suite == "evidence-extent-2026-11-13":
         script, panel_names, prefix, dependencies = EVIDENCE_EXTENT_2026_11_13[modality]
+    elif suite == "local-evidence-expansion":
+        script, panel_names, prefix, dependencies = LOCAL_EVIDENCE_EXPANSION[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

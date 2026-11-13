@@ -5416,7 +5416,8 @@
               "chipmunk.document-revision-comparison/1",
               "chipmunk.document-revision-comparison/2",
               "chipmunk.document-revision-comparison/3",
-              "chipmunk.document-revision-comparison/4"
+              "chipmunk.document-revision-comparison/4",
+              "chipmunk.document-revision-comparison/5"
             ],
             "title": "Schema",
             "type": "string"
@@ -5967,6 +5968,28 @@
           "earlier": {
             "$ref": "#/components/schemas/DraftWordCellExcerpt"
           },
+          "earlier_column": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Earlier Column"
+          },
+          "earlier_row": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Earlier Row"
+          },
           "id": {
             "title": "Id",
             "type": "string"
@@ -6069,8 +6092,15 @@
       "DraftWordComparedTable": {
         "properties": {
           "body_index": {
-            "title": "Body Index",
-            "type": "integer"
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Body Index"
           },
           "changes": {
             "items": {
@@ -6083,21 +6113,119 @@
             "title": "Columns",
             "type": "integer"
           },
+          "earlier_body_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Earlier Body Index"
+          },
+          "earlier_columns": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Earlier Columns"
+          },
+          "earlier_rows": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Earlier Rows"
+          },
           "earlier_table": {
             "title": "Earlier Table",
             "type": "integer"
+          },
+          "later_body_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Later Body Index"
           },
           "later_table": {
             "title": "Later Table",
             "type": "integer"
           },
+          "match": {
+            "anyOf": [
+              {
+                "enum": [
+                  "caption",
+                  "body_position"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Match"
+          },
           "rows": {
             "title": "Rows",
             "type": "integer"
+          },
+          "unchecked_columns": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "propertyNames": {
+                  "enum": [
+                    "earlier",
+                    "later"
+                  ]
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unchecked Columns"
+          },
+          "unchecked_rows": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "propertyNames": {
+                  "enum": [
+                    "earlier",
+                    "later"
+                  ]
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unchecked Rows"
           }
         },
         "required": [
-          "body_index",
           "earlier_table",
           "later_table",
           "rows",
@@ -6110,8 +6238,26 @@
       "DraftWordSkippedTable": {
         "properties": {
           "body_index": {
-            "title": "Body Index",
-            "type": "integer"
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Body Index"
+          },
+          "earlier_body_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Earlier Body Index"
           },
           "earlier_table": {
             "anyOf": [
@@ -6123,6 +6269,17 @@
               }
             ],
             "title": "Earlier Table"
+          },
+          "later_body_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Later Body Index"
           },
           "later_table": {
             "anyOf": [
@@ -6140,14 +6297,14 @@
               "no_matching_position",
               "unsupported_layout",
               "changed_structure",
-              "comparison_limit"
+              "comparison_limit",
+              "caption_unmatched"
             ],
             "title": "Reason",
             "type": "string"
           }
         },
         "required": [
-          "body_index",
           "earlier_table",
           "later_table",
           "reason"

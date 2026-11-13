@@ -86,7 +86,7 @@ def test_signed_interpolation_observation_binds_native_crop_and_coordinates(rend
     sha = hashlib.sha256(body).hexdigest()
     measured = source.record(sha, body=body)
     assets, data = {}, {}
-    for name, plate in source.plates(body, measured["region"]).items():
+    for name, plate in source.plates(body, measured["region"], schema=measured["schema"]).items():
         ok, encoded = cv2.imencode(".png", plate)
         assert ok
         digest = hashlib.sha256(encoded).hexdigest()
@@ -107,3 +107,56 @@ def test_signed_interpolation_observation_binds_native_crop_and_coordinates(rend
     data[assets["crop"]["sha256"]] = altered.tobytes()
     with pytest.raises(ValueError, match="differs from its original pixels"):
         source.verify(body, review, data.__getitem__)
+
+
+@pytest.mark.parametrize("size", [(2304, 1728), (2368, 1344), (1792, 1792)])
+def test_checked_dimensions_and_historical_profile(renders, size):
+    from app.detectors.image import native_cfa_dimensions
+
+    original, _ = renders
+    width, height = size
+    rgb = np.tile(original, (2, 2, 1))[:height, :width].copy()
+    rgb[416:544, 480:608] = rgb[160:288, 129:257]
+    body = png(rgb)
+    digest = hashlib.sha256(body).hexdigest()
+    legacy = source.record(digest, body=body, schema=binding.SCHEMA)
+    assert legacy["status"] == "unsupported_png" and legacy["scope"] == binding.SCOPE
+    assert source.verify(body, {"record": legacy, "artifacts": {}}, {}.__getitem__)
+
+    measured = source.record(digest, body=body)
+    assert measured["schema"] == binding.EXTENDED_SCHEMA and measured["status"] == "matched"
+    assert measured["region"] == [480, 416, 608, 544]
+    assert measured["decoded_rgb16_sha256"] == hashlib.sha256(rgb.tobytes()).hexdigest()
+    assert native_cfa_dimensions.inspect_png(memoryview(body)).region == tuple(measured["region"])
+    plates = source.plates(body, measured["region"], schema=measured["schema"])
+    assert plates["context"].shape == (height // 2, width // 2, 3)
+    assert plates["crop"].dtype == np.uint16
+    assert np.array_equal(plates["crop"][..., ::-1], rgb[416:544, 480:608])
+
+    assets, data = {}, {}
+    for name, plate in plates.items():
+        ok, encoded = cv2.imencode(".png", plate)
+        assert ok
+        checksum = hashlib.sha256(encoded).hexdigest()
+        data[checksum] = encoded.tobytes()
+        assets[name] = {"sha256": checksum, "media_type": "image/png", "width": plate.shape[1], "height": plate.shape[0]}
+    review = {"record": measured, "artifacts": assets}
+    commitment = canonical_hash(measured)
+    document = {"schema": "chipmunk.image-evidence/1",
+                "source": {"sha256": digest, "width": width, "height": height, "exif_orientation": 1,
+                           binding.COMMITMENT: commitment},
+                binding.KEY: review}
+    binding.validate(document, commitment)
+    assert source.verify(body, review, data.__getitem__)
+    document["source"]["width"], document["source"]["height"] = height, width
+    if width != height:
+        with pytest.raises(ValueError, match="invalid checked coverage"):
+            binding.validate(document, commitment)
+
+
+def test_portrait_and_rgb8_remain_outside_qualified_profile(renders):
+    from app.detectors.image import native_cfa_dimensions
+
+    original, _ = renders
+    assert native_cfa_dimensions.inspect_png(png(np.rot90(original))).status == "unsupported_png"
+    assert native_cfa_dimensions.inspect_png(png((original >> 8).astype(np.uint8))).status == "unsupported_png"

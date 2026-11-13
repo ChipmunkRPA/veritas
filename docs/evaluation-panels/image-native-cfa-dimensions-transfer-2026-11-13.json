@@ -1,0 +1,290 @@
+{
+  "design": {
+    "admission": "Per geometry at least 7/10 useful sharp and 7/10 useful feathered shifts. Zero highlights in ordinary views and all ten resampled files decline. Advance each geometry separately.",
+    "confidence_weight": 0,
+    "controls": "Untouched, ordinary even-phase copy, odd whole-image crop, local fractional interpolation and down/up-resampled views.",
+    "frozen_method": "The same 32-pixel cells, parity support, scoring point, rectangle shapes and phase-shift-only candidate as the existing app. No rescale, no padding and no geometry-dependent point.",
+    "scope": "A bare PNG in one of five stated geometries, each side divisible by 32, 16-bit truecolor RGB. No metadata, rotation tags, ancillary chunks or resampling. Portrait pixels in fixtures use an exact quarter-turn, so native lattice remains intact and submitted image is already upright.",
+    "sources": "Ten new checksum-bound CC0 camera models outside all prior native transfer banks. One deterministic crop per input geometry; no measurements used to choose sources or destinations.",
+    "useful": "Native RGB mask IoU at least 0.30, recall at least 0.50."
+  },
+  "detector_sha256": "724154703d6277c2de3f224186112cb79b1eb16fd8ddcb7f6e474f0ac157ae88",
+  "exact_replay_rows": 350,
+  "freeze_sha256": "5721646908ca4de0e174f297624be7ce470f57371f6c2bf09d5412ea4ba3527a",
+  "geometries": {
+    "current_landscape": [
+      1536,
+      2048
+    ],
+    "large_landscape": [
+      1728,
+      2304
+    ],
+    "portrait": [
+      2048,
+      1536
+    ],
+    "square": [
+      1792,
+      1792
+    ],
+    "wide": [
+      1344,
+      2368
+    ]
+  },
+  "held": {
+    "current_landscape": {
+      "passed": true,
+      "roles": {
+        "even_copy": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "global_crop": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "local_fractional": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "original": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "phase_shift": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 9,
+          "useful": 9
+        },
+        "phase_shift_feather": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 9,
+          "useful": 9
+        },
+        "resized": {
+          "assessed": 0,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        }
+      }
+    },
+    "large_landscape": {
+      "passed": true,
+      "roles": {
+        "even_copy": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "global_crop": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "local_fractional": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "original": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "phase_shift": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 10,
+          "useful": 8
+        },
+        "phase_shift_feather": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 9,
+          "useful": 8
+        },
+        "resized": {
+          "assessed": 0,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        }
+      }
+    },
+    "portrait": {
+      "passed": false,
+      "roles": {
+        "even_copy": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "global_crop": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "local_fractional": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "original": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "phase_shift": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 8,
+          "useful": 6
+        },
+        "phase_shift_feather": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 8,
+          "useful": 6
+        },
+        "resized": {
+          "assessed": 0,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        }
+      }
+    },
+    "square": {
+      "passed": true,
+      "roles": {
+        "even_copy": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "global_crop": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "local_fractional": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "original": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "phase_shift": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 9,
+          "useful": 9
+        },
+        "phase_shift_feather": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 9,
+          "useful": 9
+        },
+        "resized": {
+          "assessed": 0,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        }
+      }
+    },
+    "wide": {
+      "passed": true,
+      "roles": {
+        "even_copy": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "global_crop": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "local_fractional": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "original": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        },
+        "phase_shift": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 9,
+          "useful": 7
+        },
+        "phase_shift_feather": {
+          "assessed": 10,
+          "files": 10,
+          "flags": 9,
+          "useful": 7
+        },
+        "resized": {
+          "assessed": 0,
+          "files": 10,
+          "flags": 0,
+          "useful": 0
+        }
+      }
+    }
+  },
+  "held_sha256": "7f22270fd6ab004f3c6b7b8abd18b1bd59dbd9408137105d5f2992980bbbc0f2",
+  "point": 0.25,
+  "roster_sha256": "5627c22ea47b5a69715e9e9faf39875db83899a37f51664c211198d8269648ef",
+  "runner_sha256": "211a45db38baec7157325f51139ef883d25ef88fb97dd1b8e7f99baf2ff33619",
+  "schema": "chipmunk.image-native-cfa-dimensions-transfer/1",
+  "source_sha256": [
+    "2b846f932c665f196af9af97b18469730331b60b2c62811969be7db245ce6cce",
+    "5f8e8005be87366bbf7746d35c3c88f82a12a1dd18206c939d8f1254c5922360",
+    "5d1bb0597da59bc920442c55dbd7f70d090a9aa01b5642607bcdde523ae892c6",
+    "c7355ced190268cc14183762f6f8fb983bf90e165c29424d6ce1be6845a392d4",
+    "3d29dfa6397b0aa4e72969bb5b85d040e8bebf2e02f61f6364f580ce39f30bf2",
+    "0e752ddaf81795885efc6443c78e5fee4d5f8f00c8d979ef20e235424f98d595",
+    "6eb2ba8974aba7af9eab4a9350f8ab3fc294dc47b5afcc9e0d04be26643b2923",
+    "ab0d54e3819c9372df0fa98c8686dba0ae87c9d43526a5dd6fd26bd2a664483d",
+    "04eacd403d92e0c90da9d91b87615af8eda1afc963350d3ab774557c36763eef",
+    "2666a6ed03e8678bc6ce0e5354f39a07284e6f8b200dc696d9b543dc9f82bdd5"
+  ]
+}

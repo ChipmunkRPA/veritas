@@ -31,9 +31,11 @@ export async function compareDraft(analysisId: string, file: File, signal: Abort
     error: response.ok ? undefined : data }))
   const schema = result?.comparison?.schema
   if ((schema !== 'chipmunk.document-revision-comparison/1' && schema !== 'chipmunk.document-revision-comparison/2'
-      && schema !== 'chipmunk.document-revision-comparison/3' && schema !== 'chipmunk.document-revision-comparison/4')
+      && schema !== 'chipmunk.document-revision-comparison/3' && schema !== 'chipmunk.document-revision-comparison/4'
+      && schema !== 'chipmunk.document-revision-comparison/5')
       || !Array.isArray(result.comparison.changes)
-      || (schema === 'chipmunk.document-revision-comparison/4' && !result.comparison.word_tables)) {
+      || ((schema === 'chipmunk.document-revision-comparison/4' || schema === 'chipmunk.document-revision-comparison/5')
+        && !result.comparison.word_tables)) {
     throw new Error('The server returned an incomplete draft comparison.')
   }
   return result

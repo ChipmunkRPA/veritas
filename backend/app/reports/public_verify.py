@@ -43,6 +43,7 @@ SCHEMA = 'chipmunk.public-evidence/1'
 _SHA = re.compile(r'[a-f0-9]{64}')
 TYPES = {'image/png': 'png', 'audio/wav': 'wav', 'video/mp4': 'mp4'}
 IMAGE_PAIR_VERSION = 'image-evidence-15'
+IMAGE_EDITOR_PREVIEW = 'thumbnail_evidence'
 VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3', 'image-evidence-4', 'image-evidence-5',
                       'image-evidence-6', IMAGE_PAIR_VERSION} | REFLECTION_VERSIONS, 'video': VIDEO_VERSIONS,
             'audio': {'audio-evidence-1', 'audio-evidence-2', 'audio-evidence-3'}, 'document': document_scope.VERSIONS}
@@ -75,7 +76,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     _require(result.get('schema') == 'chipmunk.public-result/1' and result.get('is_projection') is True
              and bundle['result'].get('is_projection') is True, 'The result must identify itself as a public projection')
     _require(result.get('original_result_sha256') == analysis['original_result_sha256'], 'The result commits to a different original')
-    _require(set(result) <= {'schema', 'is_projection', 'original_result_sha256', 'decision', 'findings', 'checks', 'note'},
+    _require(set(result) <= {'schema', 'is_projection', 'original_result_sha256', 'decision', 'findings', 'checks', 'note',
+                             IMAGE_EDITOR_PREVIEW},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
     binding = bundle['evidence']
@@ -236,6 +238,18 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             validate_acoustic_context(acoustic, source=evidence['source'], voice_packets=evidence['packets'])
     groups = [group for part in parts for group in
               [part.get('overview') or {}, *(p.get('artifacts') or {} for p in part.get('packets', []))]]
+    thumbnail_assets = set()
+    if IMAGE_EDITOR_PREVIEW in result:
+        from app.evidence import image_editor_preview_binding
+
+        reports = bundle.get('reports')
+        _require(analysis['kind'] == 'image' and (result.get('decision') or {}).get('image_copy_coverage') is None
+                 and isinstance(reports, list) and len(reports) == 1
+                 and reports[0].get('profile') in image_editor_preview_binding.REPORT_PROFILES,
+                 'Editor thumbnail evidence is outside an eligible image report')
+        thumbnail_groups = list(image_editor_preview_binding.asset_groups(result[IMAGE_EDITOR_PREVIEW], evidence['source']))
+        thumbnail_assets = {asset['sha256'] for group in thumbnail_groups for asset in group.values()}
+        groups.extend(thumbnail_groups)
     repeat_pcm = {}
     for part in parts:
         copy_base = part
@@ -335,6 +349,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         _require(entry.get('file') == path and path in names and entry.get('media_type') == asset['media_type'],
                  'An artifact path or media type differs from its frozen reference')
         _require(entry.get('bytes') == archive.getinfo(path).file_size, 'An artifact size differs from its index')
+        if digest in thumbnail_assets:
+            _require(0 < entry['bytes'] <= image_editor_preview_binding.MAX_ASSET_BYTES, 'A thumbnail crop exceeds its size limit')
         recorded = hashlib.sha256()
         with archive.open(path) as stream:
             while chunk := stream.read(1024 * 1024):

@@ -33,6 +33,7 @@ from test_image_copy_similarity import affine_result, reflected_result
 from test_image_embedded_pair import embedded_pair_result
 from test_image_evidence_access import evidence_http as evidence_http
 from test_image_packets import packet_fixture as packet_fixture
+from test_image_thumbnail_evidence import _pair as thumbnail_pair
 from test_public_evidence_package import rewrite
 from test_video_evidence_packets import vfr_source as vfr_source
 from test_video_evidence_packets import video_fixture as video_fixture
@@ -41,21 +42,26 @@ from app.api import auth, security, tokens, v2_evidence_packets, v2_reports
 from app.api.v2 import install_problem_handlers
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
+from app.engine.exhibits import ExhibitWriter
 from app.evidence import (
     audio_packets,
     document_matched_context,
     document_packets,
     document_scope,
+    image_editor_preview_binding,
     image_packets_v7,
+    image_thumbnail_evidence,
     service,
     video_packets,
 )
 from app.reports import engine, package, signing, snapshot, verify
 from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
-from app.storage.db import Analysis, CaseMemberRow, MediaObject, ReportRow
+from app.storage.db import Analysis, Artefact, CaseMemberRow, MediaObject, ReportRow
 from app.storage.migrations import alembic_config, current_revision, migration
 from app.storage.objects import ObjectStore
+from scripts.image_editor_preview_transfer import attach, segment, without_exif
+from scripts.image_thumbnail_localization_transfer import preview_from
 
 
 def _zip_bytes(files):
@@ -117,7 +123,8 @@ def test_actual_0023_to_0024_migration_preserves_legacy_package_bytes_and_every_
 
 
 @pytest.fixture(params=["video", "audio", "document", "document_agreement", "hybrid_document", "scanned_document",
-                        "image", "image_translation", "image_affine", "image_affine_large", "image_embedded_pair"])
+                        "image", "image_translation", "image_affine", "image_affine_large", "image_embedded_pair",
+                        "image_editor_preview"])
 def multimedia_package(request, tmp_path, monkeypatch):
     hybrid = request.param == "hybrid_document"
     scanned = request.param == "scanned_document"
@@ -126,12 +133,31 @@ def multimedia_package(request, tmp_path, monkeypatch):
     large_affine = request.param == "image_affine_large"
     geometric = large_affine or request.param == "image_affine"
     embedded = request.param == "image_embedded_pair"
-    kind = "document" if hybrid or scanned or agreement else "image" if translated or geometric or embedded else request.param
+    editor = request.param == "image_editor_preview"
+    kind = "document" if hybrid or scanned or agreement else "image" if translated or geometric or embedded or editor else request.param
     if kind == "image":
+        monkeypatch.setattr(settings, "image_jpeg_block_copy_review", False)
+        monkeypatch.setattr(settings, "image_jpeg_offgrid_copy_review", False)
         monkeypatch.setattr(settings, "image_embedded_pair_review", embedded)
         fixture = request.getfixturevalue("packet_fixture")
         if embedded:
             db, store, analysis, result, _ = embedded_pair_result(fixture, monkeypatch)
+        elif editor:
+            monkeypatch.setattr(settings, "image_affine_copy_review", False)
+            db, store, analysis, *_ = fixture
+            changed, _ = thumbnail_pair()
+            body = attach(without_exif(changed), segment(preview_from(changed)))
+            stored = store.put_bytes(body)
+            analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+            analysis.filename, analysis.content_type = "original.jpg", "image/jpeg"
+            writer = ExhibitWriter(analysis.id, store).bind(image_thumbnail_evidence.CREATOR)
+            assert image_thumbnail_evidence.add_exhibits(body, writer)
+            writer.persist_artefacts(db)
+            result = copy.deepcopy(specimen("image", "standard").result)
+            result["input"]["sha256"] = stored.sha256
+            result.update(signals=[], findings=[], exhibits=[item.model_dump(mode="json") for item in writer.exhibits])
+            analysis.result_hash = canonical_hash(result)
+            store.put_bytes(canonical_json(result))
         elif geometric:
             monkeypatch.setattr(settings, "environment", "dev")
             monkeypatch.setattr(settings, "image_affine_copy_review", True)
@@ -146,6 +172,8 @@ def multimedia_package(request, tmp_path, monkeypatch):
         if embedded:
             assert document["version"] == "image-evidence-15"
             assert document["embedded_pair_difference"]["pair"]["different_pixels"] == 437
+        elif editor:
+            assert image_thumbnail_evidence.from_result(result)["preview_carrier"] == image_editor_preview_binding.CARRIER
         else:
             assert document["version"] == ("image-evidence-14" if large_affine else "image-evidence-13" if geometric else "image-evidence-12")
             assert document["source"]["width"] == (1536 if large_affine else 768 if translated or geometric else 1408)
@@ -206,7 +234,8 @@ def multimedia_package(request, tmp_path, monkeypatch):
     monkeypatch.setattr(settings, "data_dir", tmp_path / "data")
     # Use the real source/result identity and the exact builder-produced set.
     # Only the report scaffolding and its small signed PDF are synthetic.
-    frozen = specimen(kind, "standard")
+    profile = "forensic" if editor else "standard"
+    frozen = specimen(kind, profile)
     frozen = frozen.model_copy(update={
         "result": copy.deepcopy(result),
         ("image_evidence" if kind == "image" else "evidence"): copy.deepcopy(document),
@@ -214,6 +243,7 @@ def multimedia_package(request, tmp_path, monkeypatch):
         "media": frozen.media.model_copy(update={"sha256": analysis.sha256, "size_bytes": analysis.size_bytes,
                                                  "filename": analysis.filename, "content_type": analysis.content_type}),
         "report": frozen.report.model_copy(update={"template_set": engine.TEMPLATE_SET}),
+        **({"exhibit_images": snapshot.exhibit_images(db, analysis, result, store)} if editor else {}),
     })
     with pymupdf.open() as pdf:
         pdf.new_page().insert_text((50, 70), f"Chipmunk Verify {kind} export integrity fixture")
@@ -223,7 +253,7 @@ def multimedia_package(request, tmp_path, monkeypatch):
     snap_art = register_artefact(db, store, snapshot.dump(frozen), media_type="application/json", role="stage_output",
                                 created_by="report-snapshot", analysis_id=analysis.id)
     report = ReportRow(id=frozen.report.id, display_id=frozen.report.display_id, revision=frozen.report.revision,
-                       analysis_id=analysis.id, analysis_revision=analysis.revision, profile="standard", redacted=False,
+                       analysis_id=analysis.id, analysis_revision=analysis.revision, profile=profile, redacted=False,
                        review_state="machine", issuable=False, template_set=engine.TEMPLATE_SET, engine="test",
                        status="done", snapshot_hash=snapshot.snapshot_hash(frozen), snapshot_artefact_id=snap_art.id,
                        artefact_id=pdf_art.id, sha256=pdf_art.sha256, signature=key.sign(pdf_bytes), signing_key_id=key.key_id,
@@ -240,7 +270,7 @@ def multimedia_package(request, tmp_path, monkeypatch):
     db.add(media)
     db.flush()
     analysis.media_id = media.id
-    return SimpleNamespace(db=db, store=store, analysis=analysis, frozen=frozen, report=report, row=row, key=key)
+    return SimpleNamespace(db=db, store=store, analysis=analysis, frozen=frozen, report=report, row=row, key=key, editor=editor)
 
 
 @pytest.mark.parametrize("include_original", [False, True])
@@ -264,6 +294,17 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
         assert bundle["analysis"]["original_result_sha256"] == f.analysis.result_hash
         assert bundle["reports"][0]["snapshot_sha256"] == snapshot.snapshot_hash(f.frozen)
         expected = service.asset_refs(frozen)
+        public = json.loads(archive.read("result.json"))
+        if f.editor:
+            preview = public[image_editor_preview_binding.KEY]
+            assert preview["source_sha256"] == f.analysis.sha256
+            assert preview["authorship_confidence_contribution"] == 0
+            for group in image_editor_preview_binding.asset_groups(preview, frozen["source"]):
+                expected.update({asset["sha256"]: asset for asset in group.values()})
+            assert len(expected) == 3
+            assert "/api/" not in json.dumps(preview)
+        else:
+            assert image_editor_preview_binding.KEY not in public
         writing_agreement = frozen.get("coverage", {}).get(document_scope.CHECKPOINT_AGREEMENT_KEY)
         assert {entry["sha256"] for entry in bundle["artifacts"]} == set(expected)
         if writing_agreement:
@@ -277,7 +318,6 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
                 {"video/mp4", "image/png"} if f.analysis.kind == "video" else {"image/png"})
         assert bundle["reproduction_supported"] is False
         assert bundle["custody"]["complete_event_chain_included"] is False
-        public = json.loads(archive.read("result.json"))
         assert "manifest" not in public and "exhibits" not in public
         assert public["original_result_sha256"] == canonical_hash(f.frozen.result)
         leaked = [name for name in ("vid.swap.private", "aud.gustking_xlsr", "PRIVATE MODEL")
@@ -308,13 +348,65 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
         checks = {item["name"]: item for item in json.loads(check.stdout)["checks"]}
         assert checks["original image crops"]["ok"]
         geometric = frozen.get("copy_affine")
-        if embedded:
+        if f.editor:
+            assert "Matched 2 main-image and stored thumbnail crops. Recomputed 1 saved editor-preview footprint." in checks["original image crops"]["detail"]
+        elif embedded:
             assert "Recomputed 437 differing pixels in the exact aligned comparison" in checks["original image crops"]["detail"]
         elif geometric:
             assert f"Recomputed {2 * len(geometric['pairs'])} geometric copy masks" in checks["original image crops"]["detail"]
         else:
             assert "2 unannotated crops matched" in checks["original image crops"]["detail"]
-        if not include_original:
+        if not include_original and f.editor:
+            def mutate_editor(files, attack):
+                result = json.loads(files["result.json"])
+                bundle = json.loads(files["bundle.json"])
+                preview = result[image_editor_preview_binding.KEY]
+                row = preview["regions"][0]
+                if attack == "move":
+                    row["embedded_preview"]["x"] += 1
+                elif attack == "path":
+                    preview["regions"][0]["crops"]["main_image"]["url"] = "/private/internal.png"
+                elif attack == "role":
+                    bundle["reports"][0]["profile"] = "newsroom"
+                elif attack in {"assets", "oversize"}:
+                    with Image.open(io.BytesIO(files[f'assets/{row["crops"]["main_image"]["sha256"]}.png'])) as picture:
+                        replacement = Image.new("RGB", picture.size, (1, 2, 3))
+                    buf = io.BytesIO()
+                    replacement.save(buf, format="PNG")
+                    raw = buf.getvalue()
+                    if attack == "oversize":
+                        raw += b"x" * image_editor_preview_binding.MAX_ASSET_BYTES
+                    digest = hashlib.sha256(raw).hexdigest()
+                    old = row["crops"]["main_image"]["sha256"]
+                    files.pop(f"assets/{old}.png")
+                    files[f"assets/{digest}.png"] = raw
+                    next(entry for entry in bundle["artifacts"] if entry["sha256"] == old).update(
+                        sha256=digest, file=f"assets/{digest}.png", bytes=len(raw))
+                    row["crops"]["main_image"]["sha256"] = digest
+                files["result.json"] = canonical_json(result)
+                bundle["result"]["sha256"] = hashlib.sha256(files["result.json"]).hexdigest()
+                files["bundle.json"] = canonical_json(bundle)
+
+            for attack, expected in (("move", "thumbnail region differs"), ("assets", "PNG differs from the source pixels"),
+                                     ("path", "invalid crop identity"), ("role", "outside an eligible image report"),
+                                     ("oversize", "thumbnail crop exceeds its size limit")):
+                altered = rewrite(built.path, tmp_path / f"editor-{attack}.zip", lambda files: mutate_editor(files, attack), f.key)
+                offline_checked = verify.verify_package(altered, public_key_pem=f.key.public_pem())
+                assert offline_checked.ok == (attack in {"move", "assets"}), offline_checked.as_dict()
+                checked = verify.verify_package(altered, public_key_pem=f.key.public_pem(), source_image=original)
+                assert not checked.ok and any(expected in item.detail for item in checked.checks)
+
+            art = next(item for item in f.frozen.result["exhibits"] if item.get("kind") == "image")
+            indexed = f.db.get(Artefact, art["payload_artefact_id"])
+            indexed.analysis_id = None
+            with pytest.raises(package.PackageError, match="thumbnail crop no longer matches"):
+                package.build(f.db, f.row, store=f.store, key=f.key, exported_at=datetime.now(UTC))
+            indexed.analysis_id = f.analysis.id
+            f.report.redacted = True
+            with pytest.raises(package.PackageError, match="unredacted"):
+                package.build(f.db, f.row, store=f.store, key=f.key, exported_at=datetime.now(UTC))
+            f.report.redacted = False
+        elif not include_original:
             # A new valid signature and fresh commitments can bind a wrong crop location.
             with zipfile.ZipFile(built.path) as archive:
                 files = {name: archive.read(name) for name in archive.namelist() if name not in verify.UNLISTED}
@@ -381,6 +473,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
         if fullname == 'app.evidence.image_embedded_pair_binding' and sys.argv[3] == 'True':
             return None
         if fullname in ('app.evidence', 'app.evidence.mp4', 'app.evidence.image_eligibility', 'app.evidence.image_copy_similarity_binding',
+                        'app.evidence.image_editor_preview_binding',
                         'app.evidence.image_copy_affine_binding',
                         'app.evidence.document_context', 'app.evidence.document_scope', 'app.evidence.document_repeat',
                         'app.evidence.document_matched_context', 'app.evidence.document_paragraph_priority',
@@ -442,7 +535,8 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
 
 
 @pytest.mark.parametrize('name', ['face_interval_binding.py', 'sound_event_binding.py', 'document_scope.py',
-                                 'image_copy_similarity_binding.py', 'image_copy_affine_binding.py', 'stereo_binding.py'])
+                                 'image_copy_similarity_binding.py', 'image_copy_affine_binding.py',
+                                 'image_editor_preview_binding.py', 'stereo_binding.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
 

@@ -127,7 +127,7 @@ def _verify_source_quality(archive, checks, source, data):
 
 def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     """Bind source bytes and EXIF coordinates, then compare every unannotated crop."""
-    from app.reports.public_verify import SCHEMA
+    from app.reports.public_verify import IMAGE_EDITOR_PREVIEW, SCHEMA
 
     if bundle.get('schema') != SCHEMA or bundle.get('analysis', {}).get('kind') != 'image':
         raise ValueError('Original-image verification requires a public image evidence package')
@@ -139,15 +139,25 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError('The supplied image SHA-256 differs from the committed original')
 
     evidence = json.loads(archive.read('evidence.json'))
+    preview = json.loads(archive.read('result.json')).get(IMAGE_EDITOR_PREVIEW) if 'result.json' in archive.namelist() else None
     crops = list(_crops(evidence))
     pair = (evidence.get(embedded_pair.KEY) or {}).get('pair')
     repeat_checks = [check for check in (evidence.get("coverage") or {}).get("inspection_checks", [])
                      if (check.get("flip_consistency") or {}).get("aligned_mask_png_sha256")]
     quality_checks = [check for check in (evidence.get("coverage") or {}).get("inspection_checks", [])
                       if check.get("source_quality") is not None]
-    if not crops and not repeat_checks and not quality_checks and pair is None:
+    if not crops and not repeat_checks and not quality_checks and pair is None and preview is None:
         return 'Original SHA-256 matched. No unannotated crops were recorded.'
     declared = evidence['source']
+    if preview is not None:
+        from app.evidence.image_editor_preview_source import verify as verify_preview
+
+        preview_proof = verify_preview(data, preview, lambda digest: archive.read(f'assets/{digest}.png'),
+                                     source_size=(declared['width'], declared['height']))
+        if not crops and not repeat_checks and not quality_checks and pair is None:
+            return 'Original SHA-256 matched.' + _preview_detail(preview_proof)
+    else:
+        preview_proof = None
     with Image.open(io.BytesIO(data)) as raw:
         if raw.width * raw.height > MAX_SOURCE_PIXELS:
             raise ValueError('The original exceeds the image pixel limit')
@@ -190,7 +200,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         matched_blocks = verify(data, translation['pairs'])
     crop_count = len(crops) + (2 if pair is not None else 0)
     detail = (f'Original SHA-256 and {crop_count} unannotated crops matched at their recorded EXIF-oriented coordinates.'
-              if crop_count else 'Original SHA-256 matched. No unannotated crops were recorded.')
+              if crop_count else 'Original SHA-256 matched.')
+    if preview_proof:
+        detail += _preview_detail(preview_proof)
+    elif not crop_count:
+        detail += ' No unannotated crops were recorded.'
     if pair is not None:
         detail += f' Recomputed {pair["different_pixels"]} differing pixels in the exact aligned comparison.'
     if masks:
@@ -204,3 +218,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if quality:
         detail += f' Recomputed source quality masks for {quality} image {"check" if quality == 1 else "checks"}.'
     return detail
+
+
+def _preview_detail(proof):
+    count = proof["footprints"]
+    return (f' Matched {proof["source_crops"]} main-image and stored thumbnail crops. '
+            f'Recomputed {count} saved editor-preview {"footprint" if count == 1 else "footprints"}.')

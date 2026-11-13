@@ -819,6 +819,12 @@ project Python environment also recomputes both masks with the recorded
 alignment and starting box. This replay does not rerun sparse proposal
 generation. [Geometric copy evaluation](image-affine-copy-transfer-2026-11-11.md)
 
+When a signed JPEG export includes a saved editor thumbnail comparison, the
+same command uses the project environment to verify the submitted JPEG, both
+source crops and the recorded difference footprint. The thumbnail positions
+and PNG references are in the signed `result.json` projection. Earlier ZIPs
+continue to verify against their original contents. [Editor thumbnail verification](image-editor-preview-2026-11-12.md)
+
 When the export includes an aligned repeat-pass mask, the project environment
 also recomputes the overlap of every inspected component with that mask, even
 when the check withheld all crops. It uses the recorded response and quality

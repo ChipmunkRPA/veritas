@@ -22,7 +22,9 @@ A useful region covered at least half the exact changed pixels and had at least 
 
 ## Local verification
 
-An isolated Full analysis worker accepted a known generated edit and an ordinary control after simulated prepaid checkout. The positive returned two source crops and one footprint. The actual API assets, JSON bounds and both Standard and Summary PDF crops agreed, including decoded image pixels. The control produced no thumbnail finding. The worker used the actual preview implementation while the unrelated model registry lanes were disabled for the scoped test. The signed package included the verified Standard PDF. The thumbnail PNGs use the separate export/source check below.
+An isolated Full analysis worker accepted a known generated edit and an ordinary control after simulated prepaid checkout. The positive returned two source crops and one footprint. The actual API assets, JSON bounds and the PDF crops agreed, including decoded image pixels. The control produced no thumbnail finding. The worker used the actual preview implementation with the unrelated model registry lanes disabled for the scoped test.
+
+New signed ZIPs for unredacted Standard, Summary and Forensic image reports include the saved editor thumbnail coordinates and PNGs when a region is recorded. The ZIP keeps the existing frozen image evidence set and commits the thumbnail record separately in its public result projection. Providing the original JPEG and a separately obtained signing key verifies the source hash, both crops and any saved measured footprint. The original remains optional in the ZIP. Previously signed exports retain their original bytes and verify against the evidence they contained. [Signed ZIP test receipt](evaluation-panels/image-editor-preview-zip-2026-11-12.json)
 
 ```sh
 export PYTHONPATH=backend OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
@@ -30,6 +32,7 @@ for step in freeze run review; do
   python -B -m scripts.image_editor_preview_transfer "$step" "$archive" "$public_sources" "$run" || exit
 done
 python -B -m scripts.review_image_editor_preview "$original" "$export_json" "$crops"
+python -m app.cli verify "$zip" --public-key "$public_key" --source-image "$original"
 ```
 
 The carrier replay uses the exact previous thumbnail extent archive and the two pinned Wikimedia originals. For source readback, save the API crop PNGs from the export under their SHA-256 filenames in `$crops`. The verifier reopens both images, recomputes the footprint from the submitted bytes, and checks every recorded position, asset commitment and decoded pixel. It rejected altered source, position and crop bytes in the focused tests.

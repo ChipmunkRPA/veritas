@@ -21,6 +21,7 @@ from app.audit import chain as audit
 from app.cases import review
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
+from app.evidence import image_editor_preview_binding as editor_preview
 from app.evidence.service import ASSET_TYPES, asset_refs
 from app.reports import package as legacy
 from app.reports import signing, snapshot
@@ -77,6 +78,44 @@ def _evidence(frozen):
     return document
 
 
+def _editor_preview(db, frozen, evidence):
+    """Project only the frozen editor-preview exhibits and resolve their exact object IDs."""
+    from app.evidence.image_thumbnail_evidence import CREATOR, from_result, is_preview_exhibit
+
+    preview = from_result(frozen.result)
+    if not preview or preview.get("preview_carrier") != editor_preview.CARRIER:
+        return None, {}
+    if frozen.report.redacted:
+        raise legacy.PackageError("Thumbnail crops require an unredacted image report.")
+    rows = [{**row, "crops": {role: {k: v for k, v in asset.items() if k != "url"}
+                             for role, asset in row["crops"].items()}} for row in preview["regions"]]
+    projection = {"schema": editor_preview.SCHEMA, "regions": rows,
+                  **{key: preview[key] for key in ("source_sha256", "preview_carrier", "main_exif_orientation",
+                     "preview_alignment_orientation", "authorship_confidence_contribution")}}
+    exhibits = {item["id"]: item for item in frozen.result.get("exhibits", [])
+                if item.get("kind") == "image" and item.get("role") == "comparison" and is_preview_exhibit(item)}
+    try:
+        groups = list(editor_preview.asset_groups(projection, evidence["source"]))
+    except ValueError as error:
+        raise legacy.PackageError(str(error)) from error
+    indexed = {}
+    for group in groups:
+        for exhibit_id, asset in group.items():
+            sha = asset["sha256"]
+            exhibit = exhibits.get(exhibit_id) or {}
+            artefact = db.get(Artefact, exhibit["payload_artefact_id"]) if exhibit.get("payload_artefact_id") else None
+            if (artefact is None or artefact.analysis_id != frozen.analysis.id or artefact.created_by != CREATOR
+                    or artefact.role != "exhibit_payload" or artefact.media_type != asset["media_type"]
+                    or not 0 < artefact.bytes <= editor_preview.MAX_ASSET_BYTES
+                    or artefact.sha256 != sha or exhibit.get("sha256") != sha
+                    or frozen.exhibit_images.get(exhibit_id) != sha):
+                raise legacy.PackageError("A thumbnail crop no longer matches the frozen image report.")
+            if sha in indexed and indexed[sha][0] != asset:
+                raise legacy.PackageError("One thumbnail crop has conflicting frozen geometry.")
+            indexed[sha] = asset, artefact
+    return projection, indexed
+
+
 def build_public(db, package, *, store, key: signing.InstanceKey, exported_at: datetime) -> legacy.Built:
     analysis = db.get(Analysis, package.analysis_id)
     report = db.get(ReportRow, package.report_id)
@@ -101,22 +140,38 @@ def build_public(db, package, *, store, key: signing.InstanceKey, exported_at: d
     if not legacy_face_scope_safe(frozen):
         raise legacy.PackageError('Generate a current, signed, unredacted report before exporting its evidence package.')
     evidence = _evidence(frozen)
+    result = public_result(frozen.result)
+    previews = {}
+    if analysis.kind == "image" and report.profile in editor_preview.REPORT_PROFILES:
+        projection, previews = _editor_preview(db, frozen, evidence)
+        if projection is not None:
+            if result["decision"].get("image_copy_coverage") is not None:
+                raise legacy.PackageError("Thumbnail evidence conflicts with the original provenance scope.")
+            result[editor_preview.KEY] = projection
     if analysis.kind != 'image':
         from app.reports.multimedia_evidence import verify_assets
 
         verify_assets(evidence, store, result=frozen.result)
     files = {'report.pdf': legacy._verified(db, store, report.artefact_id, analysis.id),
-             'evidence.json': canonical_json(evidence), 'result.json': canonical_json(public_result(frozen.result))}
+             'evidence.json': canonical_json(evidence), 'result.json': canonical_json(result)}
     if (hashlib.sha256(files['report.pdf']).hexdigest() != report.sha256 or report.signing_key_id != key.key_id
             or not signing.verify(key.public, files['report.pdf'], report.signature)):
         raise legacy.PackageError('The frozen report signature or hash does not verify with this instance key.')
 
     assets = []
     extensions = {mime: suffix for suffix, mime in ASSET_TYPES.items()}
-    for sha, asset in sorted(asset_refs(evidence).items()):
+    refs = asset_refs(evidence)
+    for sha, (asset, _) in previews.items():
+        reference = refs.setdefault(sha, asset)
+        if any(asset[key] != reference.get(key) for key in ("media_type", "width", "height")):
+            raise legacy.PackageError("A thumbnail crop conflicts with another frozen asset.")
+    for sha, asset in sorted(refs.items()):
         mime = asset['media_type']
-        indexed = db.scalar(select(Artefact).where(Artefact.analysis_id == analysis.id, Artefact.sha256 == sha,
-                                                  Artefact.media_type == mime, Artefact.role.in_(('preview', 'working_copy'))))
+        if sha in previews:
+            indexed = previews[sha][1]
+        else:
+            indexed = db.scalar(select(Artefact).where(Artefact.analysis_id == analysis.id, Artefact.sha256 == sha,
+                                Artefact.media_type == mime, Artefact.role.in_(('preview', 'working_copy'))))
         if indexed is None:
             raise legacy.PackageError('A declared evidence asset is no longer indexed for this analysis.')
         name = f'assets/{sha}.{extensions[mime]}'
@@ -160,12 +215,15 @@ def build_public(db, package, *, store, key: signing.InstanceKey, exported_at: d
     files['bundle.json'] = canonical_json(bundle)
     files['instance_public_key.pem'] = key.public_pem()
     files['reproduce.md'] = b'# Public evidence derivative\n\nThis package cannot reproduce model inference. Obtain the authorised internal analysis record separately. Adding the source does not change this limitation.\n'
+    preview_note = ('result.json also declares the saved editor thumbnail crops and footprint. '
+                    'Use verify with --source-image to check them against the submitted JPEG.\n' if previews else '')
     files['README.txt'] = (
         'Chipmunk Verify public evidence package\n\n'
         f"Status: {package.kind.upper()}; report {report.display_id}.\n"
         'evidence.json is the exact frozen evidence set used by the report and API.\n'
         'assets/ contains all declared evidence images, audio clips and silent video context clips, named by SHA-256.\n'
         'result.json is a public projection with its own hash, not the original internal result.\n'
+        f'{preview_note}'
         'Source excerpts and crops are included. The optional source/ file is unredacted user content.\n'
         'No internal model registry, arbitrary internal artifacts, or original custody event bodies are included.\n'
         'Custody entries are commitments only; this export cannot prove the completeness of the original event chain.\n'

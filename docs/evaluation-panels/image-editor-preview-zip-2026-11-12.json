@@ -1,0 +1,51 @@
+{
+  "native_and_signature_readback": {
+    "current": {
+      "ordinary": {
+        "editor_preview_projection": false,
+        "pdf_profile": "forensic",
+        "sha256": "985f6d857fe13a926cb96a3612cc5a110e218db2eaf4f69cda464d3ec1b5a588",
+        "signed_verified": true,
+        "source_proof": "Original SHA-256 matched. No unannotated crops were recorded."
+      },
+      "positive": {
+        "editor_preview_projection": true,
+        "pdf_profile": "forensic",
+        "sha256": "0a2a3024edfbe1f23cca599d736729ac6bb4c816900a1f251bda59a5641cad2a",
+        "signed_verified": true,
+        "source_proof": "Original SHA-256 matched. Matched 2 main-image and stored thumbnail crops. Recomputed 1 saved editor-preview footprint."
+      }
+    },
+    "prior": {
+      "ordinary": {
+        "editor_preview_projection": false,
+        "pdf_profile": "standard",
+        "sha256": "f0ad34dae19921eac7c8507b3149c8fd2ad3d34d85eec0e8674d90663bdbb3dd",
+        "signed_verified": true,
+        "source_proof": "Original SHA-256 matched. No unannotated crops were recorded."
+      },
+      "positive": {
+        "editor_preview_projection": false,
+        "pdf_profile": "standard",
+        "sha256": "0ba837b692cf24cde530d0d4c29d24506e8178fd18106a8acca4a9b07bca120b",
+        "signed_verified": true,
+        "source_proof": "Original SHA-256 matched. No unannotated crops were recorded."
+      }
+    }
+  },
+  "prior_zip_bytes_preserved": true,
+  "restricted_paths": {
+    "redacted_report_package": 422,
+    "unauthenticated_download": 401,
+    "unrelated_examiner_download": 404
+  },
+  "schema": "chipmunk.jpeg-editor-preview-zip-receipt/1",
+  "signature_verified_with_separately_pinned_key": true,
+  "source_bytes_included": false,
+  "test_model_registry_lanes_enabled": false,
+  "test_payment": "simulated_prepaid",
+  "frozen_format_compatibility": {
+    "image_evidence_schema_changed": false,
+    "template_revision_changed": false
+  }
+}

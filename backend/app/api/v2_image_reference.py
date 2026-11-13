@@ -159,6 +159,13 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
     try:
         comparison = inspect(reference_path, submitted_path, evidence_dir=artifacts, allow_proportional_resize=True,
                              allow_oriented_crop=True, allow_oriented_resize=True, allow_embedded_photo=True)
+        if settings.image_reference_jpeg_png_envelope and comparison["status"] != "comparable":
+            from app.evidence.image_reference_delivery_envelope import inspect as compare_delivery
+
+            delivery_artifacts = workspace / "delivery-evidence"
+            delivery = compare_delivery(reference_path, submitted_path, delivery_artifacts)
+            if delivery is not None:
+                comparison, artifacts = delivery, delivery_artifacts
     except (*_image_errors, OpenCVError):
         raise ProblemError(422, "Image comparison could not finish", "The comparison could not read or compare the two images.") from None
     if comparison["submitted"]["sha256"] != sha256:

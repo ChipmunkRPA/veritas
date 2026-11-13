@@ -24,8 +24,9 @@ MAX_REGIONS = 5
 RESIZE_SCHEMA = "chipmunk.image-reference-comparison/3"
 CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/4"
 EXACT_PNG_CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/5"
+JPEG_PNG_ENVELOPE_SCHEMA = "chipmunk.image-reference-comparison/10"
 ORIENTATION_SCHEMA = "chipmunk.image-reference-comparison/6"
-CROPPED_RESIZE_SCHEMAS = {CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA}
+CROPPED_RESIZE_SCHEMAS = {CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, JPEG_PNG_ENVELOPE_SCHEMA}
 ORIENTATIONS = {
     "rotate_90_clockwise": Image.Transpose.ROTATE_270,
     "rotate_180": Image.Transpose.ROTATE_180,
@@ -156,7 +157,24 @@ def _geometry(comparison, reference, submitted):
     return dx, dy, overlap
 
 
-def _resize_replay(comparison, ref, sub, carrier, earlier):
+def _delivery_envelope_replay(comparison, earlier, carrier, earlier_path, submitted_path):
+    from app.evidence.image_reference import inspect
+    from app.evidence.image_reference_delivery_envelope import INTERPRETATION, compare
+
+    baseline = inspect(earlier_path, submitted_path, allow_proportional_resize=True, allow_oriented_crop=True,
+                       allow_oriented_resize=True, allow_embedded_photo=True)
+    _require(baseline["status"] != "comparable" and baseline["reference"] == comparison["reference"]
+             and baseline["submitted"] == comparison["submitted"],
+             "The JPEG to PNG fallback is only available when earlier checks abstain on these sources")
+    expected, mask = compare(earlier, carrier)
+    _require(expected is not None and comparison["interpretation"] == INTERPRETATION,
+             "JPEG to PNG delivery comparison differs from its source scope")
+    _require(all("submitted_overlay" in region for region in comparison["regions"]),
+             "JPEG to PNG comparison omitted a source-bound overlay")
+    return expected, mask
+
+
+def _resize_replay(comparison, ref, sub, carrier, earlier, *, earlier_path, submitted_path):
     """Recompute resized comparisons directly from the two sources."""
     try:
         import numpy as np
@@ -177,22 +195,25 @@ def _resize_replay(comparison, ref, sub, carrier, earlier):
              and "alignment" not in comparison, "Resize comparison has unexpected source dimensions or coordinates")
     reference, submitted = np.asarray(ref), np.asarray(sub)
     try:
-        aligned, _ = reference_alignment.compare(reference, submitted, carrier)
-        _require(aligned["status"] == "integer_alignment_unresolved", "Resize comparison must follow the integer alignment check")
-        if cropped:
-            if ref.size != sub.size:
-                same_framing, _ = reference_resize.compare(reference, submitted, carrier)
-                _require(same_framing["status"] != "comparable", "Cropped resize must follow the same-framing check")
-            if schema == EXACT_PNG_CROP_RESIZE_SCHEMA:
-                expected, mask = reference_png_exact_resize.compare(reference, submitted, carrier)
-                _require(expected is not None, "Cropped PNG does not reproduce the submitted pixels in scope")
-            else:
-                _require(supported_crop_resize(carrier, ref.size, earlier=earlier),
-                         "Cropped resize uses unsupported JPEG delivery or dimensions")
-                expected, mask = reference_crop_resize.compare(reference, submitted, carrier)
-                _require(accepted_crop_resize(expected, sub.size), "Cropped resize did not establish an exact earlier area in scope")
+        if schema == JPEG_PNG_ENVELOPE_SCHEMA:
+            expected, mask = _delivery_envelope_replay(comparison, earlier, carrier, earlier_path, submitted_path)
         else:
-            expected, mask = reference_resize.compare(reference, submitted, carrier)
+            aligned, _ = reference_alignment.compare(reference, submitted, carrier)
+            _require(aligned["status"] == "integer_alignment_unresolved", "Resize comparison must follow the integer alignment check")
+            if cropped:
+                if ref.size != sub.size:
+                    same_framing, _ = reference_resize.compare(reference, submitted, carrier)
+                    _require(same_framing["status"] != "comparable", "Cropped resize must follow the same-framing check")
+                if schema == EXACT_PNG_CROP_RESIZE_SCHEMA:
+                    expected, mask = reference_png_exact_resize.compare(reference, submitted, carrier)
+                    _require(expected is not None, "Cropped PNG does not reproduce the submitted pixels in scope")
+                else:
+                    _require(supported_crop_resize(carrier, ref.size, earlier=earlier),
+                             "Cropped resize uses unsupported JPEG delivery or dimensions")
+                    expected, mask = reference_crop_resize.compare(reference, submitted, carrier)
+                    _require(accepted_crop_resize(expected, sub.size), "Cropped resize did not establish an exact earlier area in scope")
+            else:
+                expected, mask = reference_resize.compare(reference, submitted, carrier)
     except OpenCVError as error:
         raise ValueError("The image comparison could not be recomputed") from error
     measured_fields = {"status", "regions", "additional_regions", "supported_resize_kernels", "framing_check",
@@ -319,7 +340,8 @@ def review(export, earlier, submitted):
         if resized:
             carrier = stack.enter_context(Image.open(io.BytesIO(submitted_bytes), formats=["PNG", "JPEG"]))
             earlier_carrier = stack.enter_context(Image.open(io.BytesIO(earlier_bytes), formats=["PNG", "JPEG"]))
-            expected_mask = _resize_replay(comparison, ref, sub, carrier, earlier_carrier)
+            expected_mask = _resize_replay(comparison, ref, sub, carrier, earlier_carrier,
+                                           earlier_path=earlier, submitted_path=submitted)
             overlap = (0, 0, sub.width, sub.height)
         elif oriented:
             carrier = stack.enter_context(Image.open(io.BytesIO(submitted_bytes), formats=["PNG", "JPEG"]))

@@ -4,7 +4,7 @@ import { Button } from '../../components/ui'
 import { saveBlob } from '../../lib/api/reports'
 import {
   compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
-  exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema,
+  exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, jpegPngEnvelopeSchema,
   imageReferenceExport, orientationLabels, referencePngSrc,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
@@ -70,13 +70,15 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const orientedCrop = comparison.schema === exactOrientedCropSchema ? comparison.exact_oriented_crop : orientedResize
   const orientation = comparison.schema === exactPngOrientationSchema ? comparison.exact_orientation : orientedCrop
   const embeddedPhoto = comparison.schema === embeddedPhotoSchema ? comparison.embedded_native_photo : undefined
-  const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' || exact
+  const delivery = comparison.schema === jpegPngEnvelopeSchema
+  const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' || exact || delivery
     ? comparison.reference_crop_bounds : undefined
   const resized = comparable && (Boolean(cropped) || comparison.schema === 'chipmunk.image-reference-comparison/3')
   const completeMatch = (exact ?? orientation)?.matched_pixels === submitted.width * submitted.height
     || (embeddedPhoto && embeddedPhoto.exact_pixels === embeddedPhoto.submitted_bounds.w * embeddedPhoto.submitted_bounds.h)
   const kernels = (orientedResize?.kernels ?? comparison.supported_resize_kernels)?.map(kernel => kernel === 'opencv_area' ? 'area' : kernel).join(', ')
-  const maskDescription = (exact || orientedResize) ? 'White marks retained differences from the reproduced resize.'
+  const maskDescription = delivery ? 'White marks color differences outside the expected delivery range.'
+    : (exact || orientedResize) ? 'White marks retained differences from the reproduced resize.'
     : resized ? 'White marks differences flagged by at least two tested resizes.' : 'White marks the selected differences.'
   const reason = Object.prototype.hasOwnProperty.call(unassessed, comparison.status)
     ? unassessed[comparison.status] : 'The selected copies could not be compared reliably.'
@@ -110,6 +112,10 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     {comparable && cropped && <p className="mt-3 mb-0 text-small text-text-muted">
       The comparison matched the submitted image to an area of the earlier copy at <NativeArea area={cropped} />.
       {' '}Differences were measured after resizing that area. Pixels outside the earlier area were unassessed.
+    </p>}
+    {delivery && <p className="mt-2 mb-0 text-caption text-text-muted">
+      We compared color differences across plausible resize, tone and compression variations.
+      Ordinary processing can still cause highlights. This comparison does not assess AI authorship.
     </p>}
     {comparable && exact && <p className="mt-2 mb-0 text-small text-text-muted">
       {completeMatch ? 'The resized area matches every submitted pixel.'

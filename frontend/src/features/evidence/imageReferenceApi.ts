@@ -76,6 +76,7 @@ export const exactPngOrientationSchema = 'chipmunk.image-reference-comparison/6'
 export const exactOrientedCropSchema = 'chipmunk.image-reference-comparison/7'
 export const exactOrientedResizeSchema = 'chipmunk.image-reference-comparison/8'
 export const embeddedPhotoSchema = 'chipmunk.image-reference-comparison/9'
+export const jpegPngEnvelopeSchema = 'chipmunk.image-reference-comparison/10'
 export const orientationLabels = {
   rotate_90_clockwise: '90-degree clockwise rotation',
   rotate_180: '180-degree rotation',
@@ -190,6 +191,17 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
             || region.y + region.h > photo.y + photo.h
         })) {
       throw new Error('The server returned an incomplete screenshot comparison.')
+    }
+  }
+  if (comparison.schema === jpegPngEnvelopeSchema) {
+    const crop = comparison.reference_crop_bounds
+    if (comparison.status !== 'comparable' || !crop
+        || !validAreaWithin(crop, comparison.reference.width, comparison.reference.height)
+        || comparison.regions.some(region => !validAreaWithin(region, comparison.submitted.width, comparison.submitted.height)
+          || !validArea(region.reference_region)
+          || !validAreaWithin({ ...region.reference_region, x: region.reference_region.x - crop.x,
+            y: region.reference_region.y - crop.y }, crop.w, crop.h))) {
+      throw new Error('The server returned an incomplete JPEG to PNG comparison.')
     }
   }
   return result

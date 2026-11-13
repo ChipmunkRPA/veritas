@@ -218,6 +218,7 @@ class Settings(BaseSettings):
     image_region_flip_review: bool = False  # Development-only repeatability filter for sensitive PNG regions.
     image_sharp_boundary_enabled: bool = False
     image_reference_comparison_enabled: bool = False  # Development-only comparison of an uploaded earlier copy.
+    image_reference_jpeg_png_envelope: bool = False  # Optional earlier standard JPEG to cropped PNG color differences.
     audio_reference_comparison_enabled: bool = False  # Authenticated comparison of a short earlier recording.
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.
     video_reference_timing_model_path: Path | None = None  # Optional pinned local landmark task for a marked earlier closure.

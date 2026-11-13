@@ -167,6 +167,26 @@ describe('earlier-copy comparison', () => {
     expect(JSON.parse(await blobText(download))).toEqual({ comparison: result.comparison, pngs: result.pngs })
   })
 
+  it('explains the JPEG to PNG comparison and rejects a crop outside the earlier area', async () => {
+    const result = structuredClone(comparison)
+    result.comparison.schema = 'chipmunk.image-reference-comparison/10'
+    result.comparison.reference_crop_bounds = { x: 16, y: 11, w: 356, h: 230 }
+    delete result.comparison.alignment
+    vi.stubGlobal('fetch', vi.fn((_url: string, request: RequestInit) => Promise.resolve(
+      request.method === 'POST' ? json(result) : json({ available: true }),
+    )))
+    show()
+    await choose('earlier.jpg')
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText(/Ordinary processing can still cause highlights/)).toBeTruthy()
+    expect(screen.getByText(/outside the expected delivery range/)).toBeTruthy()
+    expect(screen.getByText('x 134, y 76 · 90 × 70 px')).toBeTruthy()
+    result.comparison.regions[0].reference_region!.x = 15
+    await choose('different.jpg')
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect((await screen.findByRole('alert')).textContent).toContain('The server returned an incomplete JPEG to PNG comparison.')
+  })
+
   it('shows the earlier-image overlap for a cropped reflection and exports its proof', async () => {
     const result = structuredClone(comparison)
     result.comparison.schema = 'chipmunk.image-reference-comparison/7'

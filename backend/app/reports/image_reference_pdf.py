@@ -11,6 +11,7 @@ from app.detectors.image import (
     reference_png_screenshot,
 )
 from app.evidence.image_reference import CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, RESIZE_SCHEMA
+from app.evidence.image_reference_delivery_envelope import SCHEMA as JPEG_PNG_ENVELOPE_SCHEMA
 
 PAGE_WIDTH = 612
 PAGE_HEIGHT = 792
@@ -109,7 +110,7 @@ def _summary(document, comparison, assets):
               size=10, color=MUTED)
         _text(page, MARGIN, 357, "Local edits or interface overlays can produce differences. AI origin remains unassessed.",
               size=10, color=MUTED)
-    if schema in (RESIZE_SCHEMA, CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA) and comparison["status"] == "comparable":
+    if schema in (RESIZE_SCHEMA, CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, JPEG_PNG_ENVELOPE_SCHEMA) and comparison["status"] == "comparable":
         crop = comparison.get("reference_crop_bounds")
         if crop:
             _text(page, MARGIN, 302, f"Earlier copy area used: {_area(crop)}", size=10, font="hebo")
@@ -125,6 +126,8 @@ def _summary(document, comparison, assets):
             kernels = ", ".join(kernel.replace("opencv_area", "area") for kernel in comparison["supported_resize_kernels"])
             _text(page, MARGIN, 350, f"Exact match on {proof['matched_pixels']:,} pixels and {tiles} textured tiles ({kernels}).",
                   size=10, color=MUTED)
+        elif schema == JPEG_PNG_ENVELOPE_SCHEMA:
+            _text(page, MARGIN, 350, "Compared with the expected range for resize, tone and compression.", size=10, color=MUTED)
         elif regions:
             _text(page, MARGIN, 350, "Retained pixels were flagged by at least two tested resizes.", size=10, color=MUTED)
     if mask := comparison.get("mask"):

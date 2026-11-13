@@ -1,0 +1,82 @@
+{
+  "checks": {
+    "audio": {
+      "arguments": [
+        "review",
+        "docs/evaluation-panels/audio-transient-reduction-transfer-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/audio_transient_reduction_transfer.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/audio_dense_evidence_confirmation.py": "de9089f4413ee34fa6aa96eaa7293f6c58f188981d7704e6795836ea60abd995",
+        "backend/scripts/audio_focused_window_transfer.py": "2088802db64f99ddc9279c59f877837908b4dc7dd4490aea2f3884fb62367c2a",
+        "backend/scripts/audio_subband_partial_transfer.py": "4088052df618d1b663ba18b605c86d429c715786cde7d97e9e999ebbfed415b1",
+        "backend/scripts/audio_transient_reduction_transfer.py": "268082b7bdeb269985529f0f4c4746657a6fa99f33e8d71180a6db35aa2191ee",
+        "backend/scripts/audio_vocal_event_mixtures.py": "4747813e96bf8d1ffdfd34054fd92df1a09a775d43ce3647f9a61110c1db87ce",
+        "backend/scripts/review_audio_reduced_background_localization.py": "0def90d0e4b116cdf8b54c30e04e052aaf950c9c42d73d4f287e74eca17aa123",
+        "docs/evaluation-panels/audio-focused-window-transfer-2026-11-12.json": "ae15cc9b7f3693a2743b5aac299f2841ab6aa2308eada642be14c9448c7c5e72",
+        "docs/evaluation-panels/audio-noise-window-transfer-2026-11-12.json": "b2cbbccff57fee617b6d956be6d88bedbcb50309eb43e7d3922b7a422431fc7a",
+        "docs/evaluation-panels/audio-transient-reduction-transfer-2026-11-12.json": "aba744d5597696c1885120d490ec24236f2d1d3852c457187321a5f3f46f959c"
+      },
+      "output_sha256": "76d2fd103e8d3df160c7b6c102ce84e22c35fd7be05c407faaaa91b93ad596d2",
+      "status": "matched"
+    },
+    "image": {
+      "arguments": [
+        "review",
+        "docs/evaluation-panels/image-gainmap-cross-camera-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/image_gainmap_cross_camera.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/image_gainmap_cross_camera.py": "c52f8691796b530044943d2cdaca0428030fe4d3c69222022373ce640070584f",
+        "backend/scripts/image_gainmap_iso.py": "ff5b0793d04d7764453cdb4ea7a599305641495084bf7ce6d2daedaf95cc3597",
+        "backend/scripts/image_gainmap_localization_transfer.py": "9f6b693a60e064d24a5b033b5783a66a44b9224e017f314142fc275c0fafce93",
+        "docs/evaluation-panels/image-gainmap-cross-camera-2026-11-12.json": "5b26d2ec452b7265c13999a77857d00dbf2525fcbfc551b469117166e8f1f3e9",
+        "docs/evaluation-panels/image-gainmap-localization-2026-11-12.json": "3fa970510ecc9c68406533f6a6202e88ce943a313ddee517dfc418730818defd"
+      },
+      "output_sha256": "2894cae2808e5b2b98f6d16a8cb5a969f2f5ff72156e626276ac935d3dd34385",
+      "status": "matched"
+    },
+    "video": {
+      "arguments": [
+        "docs/evaluation-panels/video-face-unrouted-short-transfer-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/review_video_face_unrouted_short_transfer.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/review_video_face_unrouted_short_transfer.py": "3aab38781b6d41554fe52cf17012dfa26626b144e8ec2708c8e8f49bfa91c48f",
+        "docs/evaluation-panels/video-face-unrouted-short-transfer-2026-11-12.json": "bc7b52b19ea1274e5cb67d96518f3e7d6ad44f1cd0a69eb10b1c2e9a4883f761"
+      },
+      "output_sha256": "779159194cebacec1a2d835e1913ca66abb1231f9890d3cbef0c867da1104742",
+      "status": "matched"
+    },
+    "writing": {
+      "arguments": [
+        "docs/evaluation-panels/writing-paired-center-transfer-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/review_writing_paired_center_transfer.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/review_writing_paired_center_transfer.py": "b54db6bdf138d77fe7e9a77fb8c23854f498203d980a08f7ca7543e6cd3bc8d8",
+        "docs/evaluation-panels/writing-paired-center-transfer-2026-11-12.json": "0dcc670ef5c398004b5d820176eabd6060bca549a14a14c86dac166df1e09e2a"
+      },
+      "output_sha256": "c4b104f95af64917a588c5c92e074c5ec00ea068641adc66fe0eb9fcb23813a6",
+      "status": "matched"
+    }
+  },
+  "environment": {
+    "architecture": "arm64",
+    "os": "Darwin",
+    "python": "3.12.6"
+  },
+  "runner_sha256": "0e6f7eb3b47a918f06e524dafd1a08445bcccfb83376fb7b147a447b6c3ccaf6",
+  "schema": "chipmunk.public-evaluation-replay/1",
+  "scope": "Arithmetic replay of published evaluation ledgers",
+  "source_revision": "a5498ee291890c3e6e17082381db75c72d06d6aa",
+  "suite": "recent-checks"
+}

@@ -1362,6 +1362,23 @@ python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/source-
 The reference records our local run. Add your own receipt and the specific
 claim you verified or challenged to the [independent evaluation form](https://github.com/ChipmunkRPA/veritas/issues/new?template=independent-evaluation.yml).
 
+### Replay the latest detector comparisons
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/recent.json" --suite recent-checks
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/recent.json" \
+  --compare docs/evaluation-panels/recent-checks-replay-reference-2026-11-12.json
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/recent.json" --format-issue
+```
+
+This suite replays the held [cross-camera HDR cue](image-gainmap-cross-camera-2026-11-12.md),
+[six-picture face check](video-face-unrouted-short-transfer-2026-11-12.md),
+[transient-reduced speech check](audio-transient-reduction-transfer-2026-11-12.md),
+and [writing comparison across a paragraph break](writing-paired-center-transfer-2026-11-12.md).
+Python 3.11 and 3.12 reproduced all four outputs locally. The suite runs without
+model weights, media downloads or network access. It replays published measurements.
+
 ### Replay recent evaluations from a clean checkout
 
 From the repository root, use Python 3.11 or later. These commands read the

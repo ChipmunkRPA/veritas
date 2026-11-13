@@ -63,7 +63,21 @@ SOURCE_EVIDENCE = {
         f"{PANELS}/writing-agreement-document-format-transfer-2026-11-12.json",
     )),
 }
-SUITES = ("overview", "localization", "transfer", "source-evidence")
+RECENT_CHECKS = {
+    "image": ("image_gainmap_cross_camera.py", "image-gainmap-cross-camera-2026-11-12.json", ("review",), (
+        f"{SCRIPTS}/image_gainmap_iso.py", f"{SCRIPTS}/image_gainmap_localization_transfer.py",
+        f"{PANELS}/image-gainmap-localization-2026-11-12.json",
+    )),
+    "video": ("review_video_face_unrouted_short_transfer.py", "video-face-unrouted-short-transfer-2026-11-12.json", (), ()),
+    "audio": ("audio_transient_reduction_transfer.py", "audio-transient-reduction-transfer-2026-11-12.json", ("review",), (
+        f"{SCRIPTS}/audio_subband_partial_transfer.py", f"{SCRIPTS}/audio_focused_window_transfer.py",
+        f"{SCRIPTS}/audio_dense_evidence_confirmation.py", f"{SCRIPTS}/audio_vocal_event_mixtures.py",
+        f"{SCRIPTS}/review_audio_reduced_background_localization.py",
+        f"{PANELS}/audio-noise-window-transfer-2026-11-12.json", f"{PANELS}/audio-focused-window-transfer-2026-11-12.json",
+    )),
+    "writing": ("review_writing_paired_center_transfer.py", "writing-paired-center-transfer-2026-11-12.json", (), ()),
+}
+SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -100,6 +114,9 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         prefix = ()
     elif suite == "transfer":
         script, panel, prefix, dependencies = TRANSFERS[modality]
+        panel_names = (panel,)
+    elif suite == "recent-checks":
+        script, panel, prefix, dependencies = RECENT_CHECKS[modality]
         panel_names = (panel,)
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]

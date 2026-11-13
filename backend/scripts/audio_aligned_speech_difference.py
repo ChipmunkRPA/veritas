@@ -249,7 +249,7 @@ def current(root, first, second):
     return {"status": result["status"], "spans": [list(span) for span in sorted(set(map(tuple, candidates)))]}
 
 
-def partial_cases(folder, receipt):
+def partial_cases(folder, receipt, *, scenes=("clean", "construction")):
     import numpy as np
 
     roster = receipt["roster"]
@@ -262,7 +262,7 @@ def partial_cases(folder, receipt):
         return np.frombuffer(raw, dtype="<i2")
 
     for row in roster:
-        if row["scene"] in {"clean", "construction"}:
+        if row["scene"] in scenes:
             first = load(originals[row["utterance"]])
             yield str(row["id"]), row["utterance"], f"{row['scene']}/{row['family']}", row["truth"], first, load(row)
 

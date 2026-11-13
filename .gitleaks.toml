@@ -193,3 +193,21 @@ regexes = [
   '''^tokenizer\.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"$''',
   '''^tokenizer_config\.json": "c91efca15ceff6e9ee9424db58a6f59cd41294e550a86cbd07e3c1fb500b34f9"$''',
 ]
+
+[[rules.allowlists]]
+description = "Pinned speech recognition tokenizer file SHA-256"
+condition = "AND"
+paths = ['''(^|/)backend/scripts/audio_paired_word_change\.py$''', '''(^|/)docs/evaluation-panels/audio-paired-word-change-2026-11-13\.json$''']
+regexTarget = "match"
+regexes = ['''^tokenizer\.json": "27fc476bfe7f17299480be2273fc0608e4d5a99aba2ab5dec5374b4482d1a566"$''']
+
+[[rules.allowlists]]
+description = "Verified writing surprisal tokenizer and native position SHA-256 metadata"
+condition = "AND"
+paths = ['''(^|/)docs/evaluation-panels/writing-surprisal-dynamics-2026-11-13\.json$''']
+regexTarget = "match"
+regexes = [
+  '''^token_indices_sha256": "[0-9a-f]{64}"$''',
+  '''^tokenizer\.json": "(?:c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539|2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf)"$''',
+  '''^tokenizer_config\.json": "(?:c91efca15ceff6e9ee9424db58a6f59cd41294e550a86cbd07e3c1fb500b34f9|d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432)"$''',
+]

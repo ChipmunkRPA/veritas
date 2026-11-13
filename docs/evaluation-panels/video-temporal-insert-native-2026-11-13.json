@@ -1,0 +1,1884 @@
+{
+  "groups": [
+    {
+      "deliveries": [
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 150,
+            "height": 270,
+            "luma_sha256": "0f302e4be09d9e045051f3d694be8567df47c70a478ec1fcbfe82711d9febe11",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "611798e463c82c7091e066515065c04ece849689c8a11c504085967d46b49e80",
+            "sha256": "76fe0042e7bfc1e7e2b969cd65d4cbdafbb15c6e8143fb7343c47174721c26ce",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_status": "measured",
+          "known": null,
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "role": "same_encode",
+          "standalone": {
+            "app": [],
+            "structural": []
+          },
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 150,
+            "height": 270,
+            "luma_sha256": "0f302e4be09d9e045051f3d694be8567df47c70a478ec1fcbfe82711d9febe11",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "611798e463c82c7091e066515065c04ece849689c8a11c504085967d46b49e80",
+            "sha256": "76fe0042e7bfc1e7e2b969cd65d4cbdafbb15c6e8143fb7343c47174721c26ce",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          }
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 150,
+            "height": 270,
+            "luma_sha256": "0f302e4be09d9e045051f3d694be8567df47c70a478ec1fcbfe82711d9febe11",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "611798e463c82c7091e066515065c04ece849689c8a11c504085967d46b49e80",
+            "sha256": "76fe0042e7bfc1e7e2b969cd65d4cbdafbb15c6e8143fb7343c47174721c26ce",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_status": "picture_timelines_differ",
+          "known": [
+            101,
+            226
+          ],
+          "paired": {
+            "after_error_p50_p90": [
+              0.003768,
+              0.006265
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.000495
+            ],
+            "best": [
+              101,
+              226
+            ],
+            "bounds": null,
+            "status": "ambiguous_insertion",
+            "uncertain_starts": [
+              97,
+              105
+            ]
+          },
+          "role": "ordinary_insert",
+          "standalone": {
+            "app": [],
+            "structural": []
+          },
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 275,
+            "height": 270,
+            "luma_sha256": "3a3c5ed045bd121bd212c6ebdffdd027496d2d5b4782a0c710fbf2e08b7f5654",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "3ebdedce5cd0798bc4215374ee9bc8579eeb1ecf59cca4366cf88abdcddc8073",
+            "sha256": "ac56b3fa50461e43e0d1122d8fca4b1ae5f43f98f3a5dd61dcc7aa7913d4279d",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          }
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 150,
+            "height": 270,
+            "luma_sha256": "0f302e4be09d9e045051f3d694be8567df47c70a478ec1fcbfe82711d9febe11",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "611798e463c82c7091e066515065c04ece849689c8a11c504085967d46b49e80",
+            "sha256": "76fe0042e7bfc1e7e2b969cd65d4cbdafbb15c6e8143fb7343c47174721c26ce",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_status": "picture_timelines_differ",
+          "known": [
+            101,
+            226
+          ],
+          "paired": {
+            "after_error_p50_p90": [
+              0.005956,
+              0.008419
+            ],
+            "before_error_p50_p90": [
+              0.007867,
+              0.011157
+            ],
+            "best": [
+              101,
+              226
+            ],
+            "bounds": [
+              101,
+              226
+            ],
+            "evidence": [
+              {
+                "frame": 100,
+                "gray_96_sha256": "41677255a322a8df853cd2ae427ac74e1a12309dd5a4f20c11e4b12aa073a8bc",
+                "pts": 51200
+              },
+              {
+                "frame": 163,
+                "gray_96_sha256": "55518c3395c5a072698efc66ca60ff70cbb217f974451a9b31f8dcedc62c782e",
+                "pts": 83456
+              },
+              {
+                "frame": 226,
+                "gray_96_sha256": "a6739ebe44db63cca8fb224f8b7ed3e9fc69c568e8939425886343c0da2efd36",
+                "pts": 115712
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              101,
+              102
+            ]
+          },
+          "role": "generated_insert",
+          "standalone": {
+            "app": [],
+            "structural": []
+          },
+          "submitted": {
+            "codec": "h264",
+            "color_space": null,
+            "frames": 275,
+            "height": 270,
+            "luma_sha256": "9922b020a6d8cfd4f7d44729f38dd20e5a10df70b117cdf4e4492155d3866ca9",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "3ebdedce5cd0798bc4215374ee9bc8579eeb1ecf59cca4366cf88abdcddc8073",
+            "sha256": "fa1624ab85af73e1f66a437994fe457023b6a544754891ad42b20ceda8630aca",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          }
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 150,
+            "height": 270,
+            "luma_sha256": "e63de320dbe706e5a319e43ae8ef9bbc090e87efa3e36127b5b35674a3e539f5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "611798e463c82c7091e066515065c04ece849689c8a11c504085967d46b49e80",
+            "sha256": "b7ab708124ed90b95449682dcfde6a32dd92b293aa0d34f92203fd352cb393e0",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_status": "picture_timelines_differ",
+          "known": null,
+          "paired": {
+            "after_error_p50_p90": [
+              0.734104,
+              0.744891
+            ],
+            "before_error_p50_p90": [
+              0.739183,
+              0.740226
+            ],
+            "best": [
+              24,
+              149
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              24,
+              25
+            ]
+          },
+          "role": "wrong_reference",
+          "standalone": null,
+          "submitted": {
+            "codec": "h264",
+            "color_space": null,
+            "frames": 275,
+            "height": 270,
+            "luma_sha256": "9922b020a6d8cfd4f7d44729f38dd20e5a10df70b117cdf4e4492155d3866ca9",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "3ebdedce5cd0798bc4215374ee9bc8579eeb1ecf59cca4366cf88abdcddc8073",
+            "sha256": "fa1624ab85af73e1f66a437994fe457023b6a544754891ad42b20ceda8630aca",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          }
+        }
+      ],
+      "example": 38,
+      "native": {
+        "authentic": {
+          "codec": "h264",
+          "color_space": "bt709",
+          "frames": 150,
+          "height": 2160,
+          "luma_sha256": "9a0e22a75f83214a67c18a1401543986f7f6aa12acf9aea6a91f4a8830c57f6e",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "611798e463c82c7091e066515065c04ece849689c8a11c504085967d46b49e80",
+          "sha256": "5f87c550eb74e1f655ffc5c7659a5543b730dbc80068c34d987e078aff363cc2",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 3840
+        },
+        "fake_segments": {
+          "codec": "h264",
+          "color_space": null,
+          "frames": 125,
+          "height": 464,
+          "luma_sha256": "69d2578378e429b8287eebb52c6d0fbcd52a60e2d595a767a5a016b817dc4bd8",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "bfc6f10ed2db1ef71e277527445487030130d35090f240515d04a4c7a5be853e",
+          "sha256": "1ef92d95b66f54f55332f648ee9ff0ae361d14783e4a0427ea9b413f4e30f567",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 832
+        },
+        "merged": {
+          "codec": "mpeg4",
+          "color_space": null,
+          "frames": 275,
+          "height": 2160,
+          "luma_sha256": "31bb990df89f34f93a210d100607a499bcdb8e6f7be5bdfc0aa2977292b8b331",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "3ebdedce5cd0798bc4215374ee9bc8579eeb1ecf59cca4366cf88abdcddc8073",
+          "sha256": "f41b086c1ec492a64dfcb1b7013be6a9c25825f02db5d97604698c79c9f18455",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 3840
+        }
+      },
+      "native_merged_shots": {
+        "app": [],
+        "structural": []
+      },
+      "native_pair_app_status": "above_app_pixel_limit",
+      "source_binding": {
+        "expected_from_one_based_paper": [
+          99,
+          224
+        ],
+        "native_frames": [
+          101,
+          226
+        ],
+        "trials": [
+          {
+            "bounds": [
+              95,
+              220
+            ],
+            "mean_luma_errors": [
+              1.89507,
+              10.527961,
+              2.475866
+            ],
+            "median_luma_errors": [
+              1.903103,
+              7.878581,
+              1.887912
+            ]
+          },
+          {
+            "bounds": [
+              96,
+              221
+            ],
+            "mean_luma_errors": [
+              1.895257,
+              9.700621,
+              2.391829
+            ],
+            "median_luma_errors": [
+              1.90332,
+              6.949978,
+              1.887478
+            ]
+          },
+          {
+            "bounds": [
+              97,
+              222
+            ],
+            "mean_luma_errors": [
+              1.895092,
+              8.850361,
+              2.297811
+            ],
+            "median_luma_errors": [
+              1.903103,
+              6.324544,
+              1.887044
+            ]
+          },
+          {
+            "bounds": [
+              98,
+              223
+            ],
+            "mean_luma_errors": [
+              1.8954,
+              7.986199,
+              2.19858
+            ],
+            "median_luma_errors": [
+              1.90332,
+              5.773221,
+              1.886122
+            ]
+          },
+          {
+            "bounds": [
+              99,
+              224
+            ],
+            "mean_luma_errors": [
+              1.8951,
+              6.848444,
+              2.100569
+            ],
+            "median_luma_errors": [
+              1.903103,
+              5.105469,
+              1.8852
+            ]
+          },
+          {
+            "bounds": [
+              100,
+              225
+            ],
+            "mean_luma_errors": [
+              1.895408,
+              5.175666,
+              2.00207
+            ],
+            "median_luma_errors": [
+              1.90332,
+              3.854926,
+              1.884983
+            ]
+          },
+          {
+            "bounds": [
+              101,
+              226
+            ],
+            "mean_luma_errors": [
+              1.89507,
+              1.89185,
+              1.889866
+            ],
+            "median_luma_errors": [
+              1.903103,
+              1.880317,
+              1.884766
+            ]
+          },
+          {
+            "bounds": [
+              102,
+              227
+            ],
+            "mean_luma_errors": [
+              1.936064,
+              5.275127,
+              1.889716
+            ],
+            "median_luma_errors": [
+              1.90332,
+              3.962999,
+              1.883843
+            ]
+          },
+          {
+            "bounds": [
+              103,
+              228
+            ],
+            "mean_luma_errors": [
+              1.976629,
+              6.976644,
+              1.888859
+            ],
+            "median_luma_errors": [
+              1.903537,
+              5.153863,
+              1.882921
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "deliveries": [
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 276,
+            "height": 480,
+            "luma_sha256": "009b81f6caeda9842a3334b4c049c9e39157403b3127c9a0cdfdc95b87839871",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "9bf07dc890e54856ea00cf4345b67dde51a0f5febc76c77e47e1d0b158361e35",
+            "sha256": "54aab93b96561b38bd11d82f69b7f06715e982e3aeb66f01f004fa6a0e169d5d",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "existing_status": "measured",
+          "known": null,
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "role": "same_encode",
+          "standalone": {
+            "app": [],
+            "structural": []
+          },
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 276,
+            "height": 480,
+            "luma_sha256": "009b81f6caeda9842a3334b4c049c9e39157403b3127c9a0cdfdc95b87839871",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "9bf07dc890e54856ea00cf4345b67dde51a0f5febc76c77e47e1d0b158361e35",
+            "sha256": "54aab93b96561b38bd11d82f69b7f06715e982e3aeb66f01f004fa6a0e169d5d",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          }
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 276,
+            "height": 480,
+            "luma_sha256": "009b81f6caeda9842a3334b4c049c9e39157403b3127c9a0cdfdc95b87839871",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "9bf07dc890e54856ea00cf4345b67dde51a0f5febc76c77e47e1d0b158361e35",
+            "sha256": "54aab93b96561b38bd11d82f69b7f06715e982e3aeb66f01f004fa6a0e169d5d",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "existing_status": "comparison_limit",
+          "known": [
+            101,
+            226
+          ],
+          "paired": {
+            "after_error_p50_p90": [
+              0.014004,
+              0.021745
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.00846
+            ],
+            "best": [
+              101,
+              226
+            ],
+            "bounds": [
+              101,
+              226
+            ],
+            "evidence": [
+              {
+                "frame": 100,
+                "gray_96_sha256": "f0bc63e3d970da0a7eec3a3dd1b656a6b66745efe80f0e954b5650f71ea65a4b",
+                "pts": 51200
+              },
+              {
+                "frame": 163,
+                "gray_96_sha256": "09020e841e34d07c0c9646a4c8fead69ae6c09d539ad270e50ecc8392ddcaafd",
+                "pts": 83456
+              },
+              {
+                "frame": 226,
+                "gray_96_sha256": "d2a201afb7220babadd8bd6dc03986cc6dc8fe0c4e45104149fafc6f0758df84",
+                "pts": 115712
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              100,
+              101
+            ]
+          },
+          "role": "ordinary_insert",
+          "standalone": {
+            "app": [],
+            "structural": [
+              101
+            ]
+          },
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 401,
+            "height": 480,
+            "luma_sha256": "0f3b0e29b98ca7cf430e77ee1cf1fe728313c22624b235bed82afd3bb051065c",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "2ed036a705c816464dc1d6353a8a3514d5e898330c962edd4b3ca5e6997aa530",
+            "sha256": "b7e1e90e1ea96aa537df6eb4da644b40cbdbe33d07f25596033142aab4d4380f",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          }
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 276,
+            "height": 480,
+            "luma_sha256": "009b81f6caeda9842a3334b4c049c9e39157403b3127c9a0cdfdc95b87839871",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "9bf07dc890e54856ea00cf4345b67dde51a0f5febc76c77e47e1d0b158361e35",
+            "sha256": "54aab93b96561b38bd11d82f69b7f06715e982e3aeb66f01f004fa6a0e169d5d",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "existing_status": "comparison_limit",
+          "known": [
+            101,
+            226
+          ],
+          "paired": {
+            "after_error_p50_p90": [
+              0.022586,
+              0.025616
+            ],
+            "before_error_p50_p90": [
+              0.020087,
+              0.02292
+            ],
+            "best": [
+              101,
+              226
+            ],
+            "bounds": [
+              101,
+              226
+            ],
+            "evidence": [
+              {
+                "frame": 100,
+                "gray_96_sha256": "054578b8226dbd1f7dbd3947ba13eb96dc88f733fd3525b721527fee9a607241",
+                "pts": 51200
+              },
+              {
+                "frame": 163,
+                "gray_96_sha256": "669dcc8052fb51823ebe574ec707d1f0114be51862fd4832662bfe317d06edde",
+                "pts": 83456
+              },
+              {
+                "frame": 226,
+                "gray_96_sha256": "54fa8c2ec03776a3fe533a8d76645babbca7dbb6c71fe1e5406ba94590a5ca68",
+                "pts": 115712
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              101,
+              103
+            ]
+          },
+          "role": "generated_insert",
+          "standalone": {
+            "app": [],
+            "structural": [
+              226
+            ]
+          },
+          "submitted": {
+            "codec": "h264",
+            "color_space": null,
+            "frames": 401,
+            "height": 480,
+            "luma_sha256": "d9fb6730a458061424cfc094016e593676793691810eb489f5b4699592aced1d",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "2ed036a705c816464dc1d6353a8a3514d5e898330c962edd4b3ca5e6997aa530",
+            "sha256": "4f61335f7fa6d3f5314111aa82b584f26cb241d7331c1172b6d83a07a7e791a6",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          }
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 276,
+            "height": 480,
+            "luma_sha256": "6f3730d98907a376192aaf9d28c9877e4e198f2e2135a43d948898ddd288db60",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "9bf07dc890e54856ea00cf4345b67dde51a0f5febc76c77e47e1d0b158361e35",
+            "sha256": "e9482eeb9c1a706315fcd5321e38ca3a729d5a9a5cf1529d74121961a250c7c1",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "existing_status": "comparison_limit",
+          "known": null,
+          "paired": {
+            "after_error_p50_p90": [
+              0.6978,
+              0.701729
+            ],
+            "before_error_p50_p90": [
+              0.700479,
+              0.704645
+            ],
+            "best": [
+              101,
+              226
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              101,
+              104
+            ]
+          },
+          "role": "wrong_reference",
+          "standalone": null,
+          "submitted": {
+            "codec": "h264",
+            "color_space": null,
+            "frames": 401,
+            "height": 480,
+            "luma_sha256": "d9fb6730a458061424cfc094016e593676793691810eb489f5b4699592aced1d",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "2ed036a705c816464dc1d6353a8a3514d5e898330c962edd4b3ca5e6997aa530",
+            "sha256": "4f61335f7fa6d3f5314111aa82b584f26cb241d7331c1172b6d83a07a7e791a6",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          }
+        }
+      ],
+      "example": 47,
+      "native": {
+        "authentic": {
+          "codec": "h264",
+          "color_space": "bt709",
+          "frames": 276,
+          "height": 3840,
+          "luma_sha256": "8b5a56a578e64231ae61313a4d2cf616038e9b8f7419fb14aee135ea54f10a6f",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "9bf07dc890e54856ea00cf4345b67dde51a0f5febc76c77e47e1d0b158361e35",
+          "sha256": "477da005dde8d85cd67ec70b3fafcf1f425ada96ed8364e47b8dca0cb554b2ee",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 2160
+        },
+        "fake_segments": {
+          "codec": "h264",
+          "color_space": null,
+          "frames": 125,
+          "height": 832,
+          "luma_sha256": "d5bb7aaeafa312afe52dc809ada65badf97dc3cf568cdfce017ae594b70aabe9",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "bfc6f10ed2db1ef71e277527445487030130d35090f240515d04a4c7a5be853e",
+          "sha256": "13a8bb8505bf5c05f72e85e9f1563cd469e1e47f9dd5531dadb13323041ab75a",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 464
+        },
+        "merged": {
+          "codec": "mpeg4",
+          "color_space": null,
+          "frames": 401,
+          "height": 3840,
+          "luma_sha256": "8c98f942a0db200bea592f0f905ed3769f899748a1492293bb8212bc400ea66a",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "2ed036a705c816464dc1d6353a8a3514d5e898330c962edd4b3ca5e6997aa530",
+          "sha256": "23c408de291b8927ce177a69a2f65f7224a77c0b50ea71148cde4e59f8c4df4e",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 2160
+        }
+      },
+      "native_merged_shots": {
+        "app": [],
+        "structural": [
+          226
+        ]
+      },
+      "native_pair_app_status": "above_app_pixel_limit",
+      "source_binding": {
+        "expected_from_one_based_paper": [
+          99,
+          224
+        ],
+        "native_frames": [
+          101,
+          226
+        ],
+        "trials": [
+          {
+            "bounds": [
+              95,
+              220
+            ],
+            "mean_luma_errors": [
+              1.682249,
+              2.146131,
+              1.849235
+            ],
+            "median_luma_errors": [
+              1.68457,
+              2.209852,
+              1.647027
+            ]
+          },
+          {
+            "bounds": [
+              96,
+              221
+            ],
+            "mean_luma_errors": [
+              1.682538,
+              2.046296,
+              1.816118
+            ],
+            "median_luma_errors": [
+              1.686198,
+              2.096897,
+              1.647027
+            ]
+          },
+          {
+            "bounds": [
+              97,
+              222
+            ],
+            "mean_luma_errors": [
+              1.681911,
+              1.952384,
+              1.781397
+            ],
+            "median_luma_errors": [
+              1.68457,
+              1.973416,
+              1.647027
+            ]
+          },
+          {
+            "bounds": [
+              98,
+              223
+            ],
+            "mean_luma_errors": [
+              1.682828,
+              1.862777,
+              1.746066
+            ],
+            "median_luma_errors": [
+              1.686198,
+              1.890625,
+              1.646701
+            ]
+          },
+          {
+            "bounds": [
+              99,
+              224
+            ],
+            "mean_luma_errors": [
+              1.682842,
+              1.779566,
+              1.710277
+            ],
+            "median_luma_errors": [
+              1.68457,
+              1.797852,
+              1.646376
+            ]
+          },
+          {
+            "bounds": [
+              100,
+              225
+            ],
+            "mean_luma_errors": [
+              1.683385,
+              1.70829,
+              1.673913
+            ],
+            "median_luma_errors": [
+              1.686198,
+              1.715712,
+              1.645779
+            ]
+          },
+          {
+            "bounds": [
+              101,
+              226
+            ],
+            "mean_luma_errors": [
+              1.682586,
+              1.639866,
+              1.637182
+            ],
+            "median_luma_errors": [
+              1.68457,
+              1.632812,
+              1.645182
+            ]
+          },
+          {
+            "bounds": [
+              102,
+              227
+            ],
+            "mean_luma_errors": [
+              1.698792,
+              1.75701,
+              1.636923
+            ],
+            "median_luma_errors": [
+              1.686198,
+              1.705729,
+              1.645074
+            ]
+          },
+          {
+            "bounds": [
+              103,
+              228
+            ],
+            "mean_luma_errors": [
+              1.715035,
+              1.874972,
+              1.636588
+            ],
+            "median_luma_errors": [
+              1.687826,
+              1.772244,
+              1.644965
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "deliveries": [
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 210,
+            "height": 270,
+            "luma_sha256": "fc9396ce37fd9a5e9a29c8e2929dd6ddea8ccbb298bd8467f6314a68b3040036",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "5b2164f52c9b0c53c0d818f1edecd6ae6f48920be2e9b76b17ca670b1d856bb1",
+            "sha256": "cc59636fc80969c4b8bebfc6775bac7267ca8f5cadd7c78c6185f3257fa4dedf",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_status": "measured",
+          "known": null,
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "role": "same_encode",
+          "standalone": {
+            "app": [],
+            "structural": []
+          },
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 210,
+            "height": 270,
+            "luma_sha256": "fc9396ce37fd9a5e9a29c8e2929dd6ddea8ccbb298bd8467f6314a68b3040036",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "5b2164f52c9b0c53c0d818f1edecd6ae6f48920be2e9b76b17ca670b1d856bb1",
+            "sha256": "cc59636fc80969c4b8bebfc6775bac7267ca8f5cadd7c78c6185f3257fa4dedf",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          }
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 210,
+            "height": 270,
+            "luma_sha256": "fc9396ce37fd9a5e9a29c8e2929dd6ddea8ccbb298bd8467f6314a68b3040036",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "5b2164f52c9b0c53c0d818f1edecd6ae6f48920be2e9b76b17ca670b1d856bb1",
+            "sha256": "cc59636fc80969c4b8bebfc6775bac7267ca8f5cadd7c78c6185f3257fa4dedf",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_status": "comparison_limit",
+          "known": [
+            101,
+            226
+          ],
+          "paired": {
+            "after_error_p50_p90": [
+              0.007293,
+              0.009972
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.004531
+            ],
+            "best": [
+              101,
+              226
+            ],
+            "bounds": [
+              101,
+              226
+            ],
+            "evidence": [
+              {
+                "frame": 100,
+                "gray_96_sha256": "25d9b6ae436f62795c55c982726ed7c767b4edd104fa70539c9f92137975fb61",
+                "pts": 51200
+              },
+              {
+                "frame": 163,
+                "gray_96_sha256": "b94efa7bf043a415d57e6f9d8e23702c3b2219c533cecf60863c0e879d97e0c7",
+                "pts": 83456
+              },
+              {
+                "frame": 226,
+                "gray_96_sha256": "fd8d77dd3a03bdea1e911f265674be20d7af962854f6535bec4b70af5d449488",
+                "pts": 115712
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              101,
+              101
+            ]
+          },
+          "role": "ordinary_insert",
+          "standalone": {
+            "app": [],
+            "structural": [
+              101
+            ]
+          },
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 335,
+            "height": 270,
+            "luma_sha256": "aba85b771c8f5460f10d7ba22c97867a1033b069533ead1831ccfbb1930a9e1a",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "3e898540b9536e80d5f61cc06273b63ce3052d56dcaf15c9ab361c0f2a4f0ba5",
+            "sha256": "42ab32a86f5eec73e360e25ffef062032e46008709711006b6f9a9d39b7c7ab0",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          }
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 210,
+            "height": 270,
+            "luma_sha256": "fc9396ce37fd9a5e9a29c8e2929dd6ddea8ccbb298bd8467f6314a68b3040036",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "5b2164f52c9b0c53c0d818f1edecd6ae6f48920be2e9b76b17ca670b1d856bb1",
+            "sha256": "cc59636fc80969c4b8bebfc6775bac7267ca8f5cadd7c78c6185f3257fa4dedf",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_status": "comparison_limit",
+          "known": [
+            101,
+            226
+          ],
+          "paired": {
+            "after_error_p50_p90": [
+              0.008222,
+              0.009826
+            ],
+            "before_error_p50_p90": [
+              0.006841,
+              0.009918
+            ],
+            "best": [
+              101,
+              226
+            ],
+            "bounds": [
+              101,
+              226
+            ],
+            "evidence": [
+              {
+                "frame": 100,
+                "gray_96_sha256": "61bf49f85a811389cb11c9578d469f03fdd6c464277fc83250c9a0d16ecf5737",
+                "pts": 51200
+              },
+              {
+                "frame": 163,
+                "gray_96_sha256": "e14bd9b1a9042ea8a1d58428cc85663464399228faf1fce31057d16fd6db52ea",
+                "pts": 83456
+              },
+              {
+                "frame": 226,
+                "gray_96_sha256": "c8932a45b29706b7b28991a5d33b267090fd11ed9f3bae3a48ba68645723c1f4",
+                "pts": 115712
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              100,
+              103
+            ]
+          },
+          "role": "generated_insert",
+          "standalone": {
+            "app": [],
+            "structural": []
+          },
+          "submitted": {
+            "codec": "h264",
+            "color_space": null,
+            "frames": 335,
+            "height": 270,
+            "luma_sha256": "f0669de56568b0c93871f393e62d9d9e85f358d65a068d7036184ffd558e4efe",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "3e898540b9536e80d5f61cc06273b63ce3052d56dcaf15c9ab361c0f2a4f0ba5",
+            "sha256": "16893ec3bfd04c80a30c6f1cf633799b59177101f8c541909fe11715be33e0a8",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          }
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 210,
+            "height": 270,
+            "luma_sha256": "ee80bd1150e7ff16d1ee400cb70197e2e98d7b2a3744434500786137f4a053ad",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "5b2164f52c9b0c53c0d818f1edecd6ae6f48920be2e9b76b17ca670b1d856bb1",
+            "sha256": "a9e6e64237e985ca313c7a19a4a757d6513a209b6c209d179cf0f52ec29a11d4",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_status": "comparison_limit",
+          "known": null,
+          "paired": {
+            "after_error_p50_p90": [
+              0.564076,
+              0.56859
+            ],
+            "before_error_p50_p90": [
+              0.541018,
+              0.566607
+            ],
+            "best": [
+              186,
+              311
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              181,
+              186
+            ]
+          },
+          "role": "wrong_reference",
+          "standalone": null,
+          "submitted": {
+            "codec": "h264",
+            "color_space": null,
+            "frames": 335,
+            "height": 270,
+            "luma_sha256": "f0669de56568b0c93871f393e62d9d9e85f358d65a068d7036184ffd558e4efe",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "3e898540b9536e80d5f61cc06273b63ce3052d56dcaf15c9ab361c0f2a4f0ba5",
+            "sha256": "16893ec3bfd04c80a30c6f1cf633799b59177101f8c541909fe11715be33e0a8",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          }
+        }
+      ],
+      "example": 74,
+      "native": {
+        "authentic": {
+          "codec": "h264",
+          "color_space": "bt709",
+          "frames": 210,
+          "height": 2160,
+          "luma_sha256": "6a168e1809ff491ea7781468524d1d2c8fce39d5879624abdfcde225901e7e84",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "5b2164f52c9b0c53c0d818f1edecd6ae6f48920be2e9b76b17ca670b1d856bb1",
+          "sha256": "9e70349998e71e9b33929057d8ee202d65e3d3658e7f14bfa63ad51870c8fb60",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 3840
+        },
+        "fake_segments": {
+          "codec": "h264",
+          "color_space": null,
+          "frames": 125,
+          "height": 464,
+          "luma_sha256": "09311ad7fecb82bc796f7e7e9ddc9e15049fe03a880696f028b7d761c42e49c4",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "bfc6f10ed2db1ef71e277527445487030130d35090f240515d04a4c7a5be853e",
+          "sha256": "35b70efc17c4fffedf203d8a4579f666ac84d312a3fc3cce02e1243e55cb03c2",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 832
+        },
+        "merged": {
+          "codec": "mpeg4",
+          "color_space": null,
+          "frames": 335,
+          "height": 2160,
+          "luma_sha256": "add18f8cbd1f23fb13d9ab95ea05488f94b75613e6208174d6f2be7aabc9b903",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "3e898540b9536e80d5f61cc06273b63ce3052d56dcaf15c9ab361c0f2a4f0ba5",
+          "sha256": "8384535868e71db1a6e2be4bb3b8d8736a9f11af354d2da57ed9102ce19e75ed",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 3840
+        }
+      },
+      "native_merged_shots": {
+        "app": [],
+        "structural": []
+      },
+      "native_pair_app_status": "above_app_pixel_limit",
+      "source_binding": {
+        "expected_from_one_based_paper": [
+          99,
+          224
+        ],
+        "native_frames": [
+          101,
+          226
+        ],
+        "trials": [
+          {
+            "bounds": [
+              95,
+              220
+            ],
+            "mean_luma_errors": [
+              1.940328,
+              2.840231,
+              2.047114
+            ],
+            "median_luma_errors": [
+              1.935981,
+              2.892253,
+              1.934028
+            ]
+          },
+          {
+            "bounds": [
+              96,
+              221
+            ],
+            "mean_luma_errors": [
+              1.940853,
+              2.735818,
+              2.032038
+            ],
+            "median_luma_errors": [
+              1.93788,
+              2.788411,
+              1.93354
+            ]
+          },
+          {
+            "bounds": [
+              97,
+              222
+            ],
+            "mean_luma_errors": [
+              1.940434,
+              2.622686,
+              2.012428
+            ],
+            "median_luma_errors": [
+              1.935981,
+              2.677192,
+              1.933051
+            ]
+          },
+          {
+            "bounds": [
+              98,
+              223
+            ],
+            "mean_luma_errors": [
+              1.941316,
+              2.502725,
+              1.991787
+            ],
+            "median_luma_errors": [
+              1.93788,
+              2.540473,
+              1.933051
+            ]
+          },
+          {
+            "bounds": [
+              99,
+              224
+            ],
+            "mean_luma_errors": [
+              1.941051,
+              2.392879,
+              1.972311
+            ],
+            "median_luma_errors": [
+              1.935981,
+              2.435655,
+              1.933051
+            ]
+          },
+          {
+            "bounds": [
+              100,
+              225
+            ],
+            "mean_luma_errors": [
+              1.941513,
+              2.258729,
+              1.953231
+            ],
+            "median_luma_errors": [
+              1.93788,
+              2.272027,
+              1.9324
+            ]
+          },
+          {
+            "bounds": [
+              101,
+              226
+            ],
+            "mean_luma_errors": [
+              1.940887,
+              2.047691,
+              1.934462
+            ],
+            "median_luma_errors": [
+              1.935981,
+              2.042752,
+              1.931749
+            ]
+          },
+          {
+            "bounds": [
+              102,
+              227
+            ],
+            "mean_luma_errors": [
+              1.951371,
+              2.281301,
+              1.934795
+            ],
+            "median_luma_errors": [
+              1.93788,
+              2.282444,
+              1.9324
+            ]
+          },
+          {
+            "bounds": [
+              103,
+              228
+            ],
+            "mean_luma_errors": [
+              1.962773,
+              2.439088,
+              1.934478
+            ],
+            "median_luma_errors": [
+              1.939779,
+              2.432943,
+              1.931749
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "deliveries": [
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 184,
+            "height": 270,
+            "luma_sha256": "65a78031f9d7491af38623d0d7957d72e4ff3887bbb9d431611740b292dfd8b5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "9486e78c22b4262fba98e2baded96837884da03cf79680bee8093005eba1613c",
+            "sha256": "19aac5dbcf229e6d53de03d7aaca0b50217ff5bed0e37b8f0c94053c4e9abe5b",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_status": "measured",
+          "known": null,
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "role": "same_encode",
+          "standalone": {
+            "app": [],
+            "structural": []
+          },
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 184,
+            "height": 270,
+            "luma_sha256": "65a78031f9d7491af38623d0d7957d72e4ff3887bbb9d431611740b292dfd8b5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "9486e78c22b4262fba98e2baded96837884da03cf79680bee8093005eba1613c",
+            "sha256": "19aac5dbcf229e6d53de03d7aaca0b50217ff5bed0e37b8f0c94053c4e9abe5b",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          }
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 184,
+            "height": 270,
+            "luma_sha256": "65a78031f9d7491af38623d0d7957d72e4ff3887bbb9d431611740b292dfd8b5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "9486e78c22b4262fba98e2baded96837884da03cf79680bee8093005eba1613c",
+            "sha256": "19aac5dbcf229e6d53de03d7aaca0b50217ff5bed0e37b8f0c94053c4e9abe5b",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_status": "comparison_limit",
+          "known": [
+            101,
+            226
+          ],
+          "paired": {
+            "after_error_p50_p90": [
+              0.01146,
+              0.016696
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.007714
+            ],
+            "best": [
+              101,
+              226
+            ],
+            "bounds": [
+              101,
+              226
+            ],
+            "evidence": [
+              {
+                "frame": 100,
+                "gray_96_sha256": "660aa0c51c9089d8407875621c5bf51d5f9ce6e1d9209ec534dda40e163c5e10",
+                "pts": 51200
+              },
+              {
+                "frame": 163,
+                "gray_96_sha256": "97a631bf6cdbb029712bc4fbfd8f315ae0c1b57892dec19ce5b332f253d6bd12",
+                "pts": 83456
+              },
+              {
+                "frame": 226,
+                "gray_96_sha256": "3c785ef20545a71cd79e2d212daf0ac753b89208f3cc14481c72db9ef79a3aa4",
+                "pts": 115712
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              100,
+              101
+            ]
+          },
+          "role": "ordinary_insert",
+          "standalone": {
+            "app": [],
+            "structural": [
+              101
+            ]
+          },
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 309,
+            "height": 270,
+            "luma_sha256": "d43e2dac315a241cff7ea00046f12d0c419475c81332b45c33ffc597071efbe9",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "c0d1c9603cd18e31e2c3553a41e1730c368233a94914e98390df1158f912f0ec",
+            "sha256": "5b371acc06a17c8419fcd63227295c207c8012ffaec7ca9c84f076972e5fc532",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          }
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 184,
+            "height": 270,
+            "luma_sha256": "65a78031f9d7491af38623d0d7957d72e4ff3887bbb9d431611740b292dfd8b5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "9486e78c22b4262fba98e2baded96837884da03cf79680bee8093005eba1613c",
+            "sha256": "19aac5dbcf229e6d53de03d7aaca0b50217ff5bed0e37b8f0c94053c4e9abe5b",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_status": "comparison_limit",
+          "known": [
+            101,
+            226
+          ],
+          "paired": {
+            "after_error_p50_p90": [
+              0.013364,
+              0.016732
+            ],
+            "before_error_p50_p90": [
+              0.014744,
+              0.019465
+            ],
+            "best": [
+              101,
+              226
+            ],
+            "bounds": [
+              101,
+              226
+            ],
+            "evidence": [
+              {
+                "frame": 100,
+                "gray_96_sha256": "c9570e7f8a0041f268c0e7d762b7dbde28d9f1b859a1daf2f262a22b82d6e244",
+                "pts": 51200
+              },
+              {
+                "frame": 163,
+                "gray_96_sha256": "5b63ab4ff511e5acac99a633b3d022456f6901617eacd0a75f441839598749d8",
+                "pts": 83456
+              },
+              {
+                "frame": 226,
+                "gray_96_sha256": "942d36dbca2557be5a121d0aba1b24b03a26c4e4c426485e72c6e2478d84c776",
+                "pts": 115712
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              101,
+              102
+            ]
+          },
+          "role": "generated_insert",
+          "standalone": {
+            "app": [],
+            "structural": []
+          },
+          "submitted": {
+            "codec": "h264",
+            "color_space": null,
+            "frames": 309,
+            "height": 270,
+            "luma_sha256": "2a6b0070ef58fa991aa20584d659c1de47f068e07c6bc6b0205d45cd6121d8e6",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "c0d1c9603cd18e31e2c3553a41e1730c368233a94914e98390df1158f912f0ec",
+            "sha256": "ac37cd7a4aa8e67eaeac321469841c72f437a6cdc31fcebec84ff9eaef7aa409",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          }
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 184,
+            "height": 270,
+            "luma_sha256": "18e4c0dda103adaa7d7564e171f25b3b5623dcb0ee6cfd1dbcd1ad896579aeb3",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "9486e78c22b4262fba98e2baded96837884da03cf79680bee8093005eba1613c",
+            "sha256": "48f8c0318d28db898c777a5e5a4b1f9b380ac3083e590c91b9bfcdfefe6407b1",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_status": "comparison_limit",
+          "known": null,
+          "paired": {
+            "after_error_p50_p90": [
+              0.542156,
+              0.545164
+            ],
+            "before_error_p50_p90": [
+              0.535797,
+              0.539932
+            ],
+            "best": [
+              101,
+              226
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              89,
+              105
+            ]
+          },
+          "role": "wrong_reference",
+          "standalone": null,
+          "submitted": {
+            "codec": "h264",
+            "color_space": null,
+            "frames": 309,
+            "height": 270,
+            "luma_sha256": "2a6b0070ef58fa991aa20584d659c1de47f068e07c6bc6b0205d45cd6121d8e6",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "c0d1c9603cd18e31e2c3553a41e1730c368233a94914e98390df1158f912f0ec",
+            "sha256": "ac37cd7a4aa8e67eaeac321469841c72f437a6cdc31fcebec84ff9eaef7aa409",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          }
+        }
+      ],
+      "example": 86,
+      "native": {
+        "authentic": {
+          "codec": "h264",
+          "color_space": "bt709",
+          "frames": 184,
+          "height": 2160,
+          "luma_sha256": "d2ae96b0dba461ce298e0194a02942b3401ab511900bd7c0b7e7832b29cb8b12",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "9486e78c22b4262fba98e2baded96837884da03cf79680bee8093005eba1613c",
+          "sha256": "37ae2c8aeea1d6d4d283dd1d83d0fb566cecd5dfda281f47ceee29b757040f9c",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 3840
+        },
+        "fake_segments": {
+          "codec": "h264",
+          "color_space": null,
+          "frames": 125,
+          "height": 464,
+          "luma_sha256": "3ed5f7a96319aa0e7e67d34707ee8fd83bea701d10b95a4e43fdd811786fd9ea",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "bfc6f10ed2db1ef71e277527445487030130d35090f240515d04a4c7a5be853e",
+          "sha256": "d4447fd8a15da4ea7d1b58780f9efe046c23138d931d4f480367e4bfcce432a2",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 832
+        },
+        "merged": {
+          "codec": "mpeg4",
+          "color_space": null,
+          "frames": 309,
+          "height": 2160,
+          "luma_sha256": "d1fb065864d9dd59a3e65d532418671c468fe431ab07f2e34bb8f148e9433b81",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "c0d1c9603cd18e31e2c3553a41e1730c368233a94914e98390df1158f912f0ec",
+          "sha256": "72e3b7c00b967b1d360685f2ef32b8564f888a359e761d64bd66aa9ff27a5f9b",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 3840
+        }
+      },
+      "native_merged_shots": {
+        "app": [],
+        "structural": []
+      },
+      "native_pair_app_status": "above_app_pixel_limit",
+      "source_binding": {
+        "expected_from_one_based_paper": [
+          99,
+          224
+        ],
+        "native_frames": [
+          101,
+          226
+        ],
+        "trials": [
+          {
+            "bounds": [
+              95,
+              220
+            ],
+            "mean_luma_errors": [
+              1.931538,
+              5.417258,
+              2.266719
+            ],
+            "median_luma_errors": [
+              1.917101,
+              5.826281,
+              1.939128
+            ]
+          },
+          {
+            "bounds": [
+              96,
+              221
+            ],
+            "mean_luma_errors": [
+              1.931992,
+              4.909712,
+              2.222897
+            ],
+            "median_luma_errors": [
+              1.92041,
+              5.325412,
+              1.938585
+            ]
+          },
+          {
+            "bounds": [
+              97,
+              222
+            ],
+            "mean_luma_errors": [
+              1.931598,
+              4.398113,
+              2.172608
+            ],
+            "median_luma_errors": [
+              1.917101,
+              4.787435,
+              1.938043
+            ]
+          },
+          {
+            "bounds": [
+              98,
+              223
+            ],
+            "mean_luma_errors": [
+              1.932634,
+              3.900546,
+              2.118747
+            ],
+            "median_luma_errors": [
+              1.92041,
+              4.152452,
+              1.935818
+            ]
+          },
+          {
+            "bounds": [
+              99,
+              224
+            ],
+            "mean_luma_errors": [
+              1.932468,
+              3.39672,
+              2.061836
+            ],
+            "median_luma_errors": [
+              1.917101,
+              3.502279,
+              1.933594
+            ]
+          },
+          {
+            "bounds": [
+              100,
+              225
+            ],
+            "mean_luma_errors": [
+              1.933313,
+              2.785982,
+              2.002558
+            ],
+            "median_luma_errors": [
+              1.92041,
+              2.758355,
+              1.93354
+            ]
+          },
+          {
+            "bounds": [
+              101,
+              226
+            ],
+            "mean_luma_errors": [
+              1.93293,
+              1.98043,
+              1.93832
+            ],
+            "median_luma_errors": [
+              1.917101,
+              1.980577,
+              1.933485
+            ]
+          },
+          {
+            "bounds": [
+              102,
+              227
+            ],
+            "mean_luma_errors": [
+              1.958569,
+              2.83959,
+              1.938323
+            ],
+            "median_luma_errors": [
+              1.92041,
+              2.765625,
+              1.933051
+            ]
+          },
+          {
+            "bounds": [
+              103,
+              228
+            ],
+            "mean_luma_errors": [
+              1.982441,
+              3.505759,
+              1.937807
+            ],
+            "median_luma_errors": [
+              1.92372,
+              3.502062,
+              1.932617
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "intake_sha256": "7defd929fa0b4a229145810b8c35ae5e3f879367ae59bbd2bd2de24304fb557f",
+  "method": {
+    "clock": "24 fps on both ffprobe's native frame table and an independent FFmpeg framehash decode, with zero native origin.",
+    "controls": "Apply the same local H.264 delivery to both members. Test the generated insertion against unchanged delivery, a genuine insertion of the same length at the same boundary, and a different genuine source as earlier copy. The genuine insert should be locatable as a physical change but provides no AI authorship evidence.",
+    "limits": "Four smallest equal-cadence source triplets from a single publisher. No model, calibration or app change.",
+    "paired_check": "Compare an earlier video with a longer submitted video. Fit one frame insertion and preserve all earlier frames in order. Use 96-square luma standardized per frame. Require at least 24 authentic frames on each side, a median retained difference no greater than .10, and a 90th percentile no greater than .22 on each side. Withhold if the candidate split is ambiguous by over 3 frames at the fixed profile-distance tolerance.",
+    "source_binding": "Search the released triplet for the best global split within four frames of the paper's implied zero-based start. Compare aligned authentic prefix, generated segment and authentic suffix at every position in that range.",
+    "standalone": "Compare app HSV shot boundaries with robust luma changes using fixed symmetric half-second windows, an absolute .10 standardized feature step and a 6 MAD margin. Report endpoints independently within three frames and retain ordinary-control boundary observations."
+  },
+  "results": {
+    "generated_insert": {
+      "app_files_with_observations": 0,
+      "app_near_boundary_count": 0,
+      "app_total_observations": 0,
+      "current_compared": 0,
+      "files": 4,
+      "paired_exact": 4,
+      "paired_reported": 4,
+      "paired_within_three_frames": 4,
+      "structural_files_with_observations": 1,
+      "structural_near_boundary_count": 1,
+      "structural_total_observations": 1
+    },
+    "native": {
+      "app_files_with_observations": 0,
+      "app_near_boundary_count": 0,
+      "app_total_observations": 0,
+      "clock_verified_files": 12,
+      "current_compared": 0,
+      "decoded_frames": 2640,
+      "files": 4,
+      "paired_exact": 0,
+      "paired_reported": 0,
+      "paired_within_three_frames": 0,
+      "publisher_labels_match_picture_bindings": 0,
+      "structural_files_with_observations": 1,
+      "structural_near_boundary_count": 1,
+      "structural_total_observations": 1
+    },
+    "ordinary_insert": {
+      "app_files_with_observations": 0,
+      "app_near_boundary_count": 0,
+      "app_total_observations": 0,
+      "current_compared": 0,
+      "files": 4,
+      "paired_exact": 3,
+      "paired_reported": 3,
+      "paired_within_three_frames": 3,
+      "structural_files_with_observations": 3,
+      "structural_near_boundary_count": 3,
+      "structural_total_observations": 3
+    },
+    "same_encode": {
+      "app_files_with_observations": 0,
+      "app_near_boundary_count": 0,
+      "app_total_observations": 0,
+      "current_compared": 4,
+      "files": 4,
+      "paired_exact": 0,
+      "paired_reported": 0,
+      "paired_within_three_frames": 0,
+      "structural_files_with_observations": 0,
+      "structural_near_boundary_count": 0,
+      "structural_total_observations": 0
+    },
+    "wrong_reference": {
+      "current_compared": 0,
+      "files": 4,
+      "paired_exact": 0,
+      "paired_reported": 0,
+      "paired_within_three_frames": 0
+    }
+  },
+  "schema": "chipmunk.video-temporal-insert-native/1"
+}

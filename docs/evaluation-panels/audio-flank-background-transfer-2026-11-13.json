@@ -1,0 +1,2704 @@
+{
+  "assessment": {
+    "forwards": {
+      "flank": 46,
+      "frontal": 46,
+      "mono": 50,
+      "wpe": 48
+    },
+    "rows": [
+      {
+        "case": "vctk-reader-00-prompt-0",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-0:natural:room",
+        "input_sha256": "cfe0b2ab339f020a37e616cd9b906a150d255d567acfc809cefe0c04822797a7",
+        "level_db": null,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "mono": null
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "b893b4386d9e0f99aa5d517ae000dfc3dacde851d0f94ab4583c09175f018ead"
+        }
+      },
+      {
+        "case": "vctk-reader-00-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -1.142622,
+          "frontal": -1.625427,
+          "wpe": -1.155151
+        },
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-0:natural:0",
+        "input_sha256": "cf70c7c7d1245b7f83aa1d6cad12de25d26d7a0695226de5c7c4151a08128308",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": -3.722507901252265,
+          "frontal": 0.6648185558496146,
+          "mono": 5.215076060157487,
+          "wpe": -2.6291389508391223
+        },
+        "role": "assessment",
+        "snr_db": -0.0,
+        "window_hashes": {
+          "flank": "b20b1c6adca541d9ca9b1986b409fdc0231dc9fc14d2e3ff72163c297e09cd39",
+          "frontal": "a4c59007059fb351bba8d9bc1b28e89e367969d1637c9e06f55c05f2c171b588",
+          "mono": "c269a97bd0b1874c82ea8798bb7949ecf9e616a1f37d04414c5ca83b8dfa7aa3",
+          "wpe": "a1ae4e6e1770d98347ea2f98314dd56a7442228a2125d8a0ffc51c6229aefcb2"
+        }
+      },
+      {
+        "case": "vctk-reader-00-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": 0.281707,
+          "frontal": -0.386402,
+          "wpe": -0.039617
+        },
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-0:natural:-5",
+        "input_sha256": "7b8a80719e6eec37e29a4c7c8b678a0458207fa318625eea39bae7a0dc9869db",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": -5.236454911147615,
+          "frontal": -4.953783107834595,
+          "mono": 5.193074032133015,
+          "wpe": 4.218811257962719
+        },
+        "role": "assessment",
+        "snr_db": -5.0,
+        "window_hashes": {
+          "flank": "12ffd92cf56ed9ababc944b4cfb90f26b332cd259b732aff76d8445c80a3be3f",
+          "frontal": "51419a7d319d2bde8cfdc0007f6670091ba499be3b4619628659d15da6849e06",
+          "mono": "e53992b0ad1998f3f12775d31dc55cb359f62bf6b645ef49480aa8316ff49130",
+          "wpe": "e2f8cc39a440bb81afa4823c1a1896929148f0fb971db25d50508995fe94ffc3"
+        }
+      },
+      {
+        "case": "vctk-reader-00-prompt-0",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-0:vits:room",
+        "input_sha256": "1647e8a5df71ef575c5e066278205095fbc574eb5222b1e0ccd96cee78e4cc1f",
+        "level_db": null,
+        "origin": "vits",
+        "position": "left",
+        "responses": {
+          "mono": null
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "bf430a2ad589f0d174e2a3c28bffde7838ba7af0278adc2063779a7b6899c01c"
+        }
+      },
+      {
+        "case": "vctk-reader-00-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -0.29392,
+          "frontal": -1.959849,
+          "wpe": -0.839278
+        },
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-0:vits:0",
+        "input_sha256": "4d094f99917cf5072996b27fa713fa64da906d7e417fda20da877f84803edb49",
+        "level_db": 0,
+        "origin": "vits",
+        "position": "left",
+        "responses": {
+          "flank": -5.782814927021972,
+          "frontal": -5.106784823252261,
+          "mono": -1.0243621699877976,
+          "wpe": -5.003357890919598
+        },
+        "role": "assessment",
+        "snr_db": -9e-06,
+        "window_hashes": {
+          "flank": "ac216b13ce6163f1674b6e1c0ce53b58194eb34418853f8fe17e7da75fa38da0",
+          "frontal": "6e40be2589600cdcdd9837935058ecdb66d66333ab4557de1e27923fbe123302",
+          "mono": "bcb51e021094f20b4981e8b6549ac156c6196dac54fe6109f6c40ebaba66afed",
+          "wpe": "78dba7954d3c7c756db8cd68fc6207d437ea79b65307c66a72fdf931dee5e378"
+        }
+      },
+      {
+        "case": "vctk-reader-00-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": 1.081803,
+          "frontal": -0.820737,
+          "wpe": 0.116589
+        },
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-0:vits:-5",
+        "input_sha256": "f771fa0241d0e19c8c796d899b9261db33111752f2dd5727bf5fb708a773839c",
+        "level_db": -5,
+        "origin": "vits",
+        "position": "left",
+        "responses": {
+          "flank": -4.031117923988825,
+          "frontal": 4.608361534793959,
+          "mono": 5.331258470594195,
+          "wpe": -4.907156931899524
+        },
+        "role": "assessment",
+        "snr_db": -5.000008,
+        "window_hashes": {
+          "flank": "6b3cc4d852691955122f033f266cf2a22da486f849a79140b6b7a332056fb927",
+          "frontal": "79fa5642784c7af9b2c03f6d8e3c3df7726545a5c88bcbb112d76f52dea2918f",
+          "mono": "c454f4941baec9cc13e51fb2edb8f8302847901150b145f6341209f66040e37c",
+          "wpe": "eb552d880c1aa2f568e66c03b5c8a0e3b93ac258617672c116ff7ab3e4386ef4"
+        }
+      },
+      {
+        "case": "vctk-reader-00-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-0:background:0",
+        "input_sha256": "53db1fd133c60e0e892c8d6f90cc694a06ac827aa33dd027daf0ee44c69c0efa",
+        "level_db": 0,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -6.70142986838358,
+          "frontal": -6.484086031253023,
+          "mono": -5.996262575377175,
+          "wpe": -6.300794642172712
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "0c1104e3deefee7d57c3883857c08ea2643d59dc7143262172773b26faf4c2f0",
+          "frontal": "ea14ee7330a709ff969cab45089708ac2ee5f4c50d0d8d198377ba3062cc5a30",
+          "mono": "22e4e76c72a2ef715cd7542a65deba319ebf6e8b26200fdf2f5cb55b1f50fbf3",
+          "wpe": "f38040982aa30da0e293cfce58adb9d6cc6a955190963d83ba339c4f9d09bf76"
+        }
+      },
+      {
+        "case": "vctk-reader-00-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-0:background:-5",
+        "input_sha256": "32dcd738786db0bc77ef089ce219b6f1c1565de23c046b6e67bbad151c78a30a",
+        "level_db": -5,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -6.7061395420712415,
+          "frontal": -6.484121730852343,
+          "mono": -5.930025171721983,
+          "wpe": -6.3258494819160225
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "e207f4935f1527aaabc4c4cb7e8345c1f14a479f5dbac132b63e9d10ebdc63da",
+          "frontal": "75aaed6a4a8d90016d02aee9e330f627836df1ccbc99baceace8fb4d62df19b4",
+          "mono": "42d134d5de69871ae4a6a33cd8faef9892ad117c6bccd950d0cfa47374b2577f",
+          "wpe": "b12b7c027757f29e73f89a7cd089cbb0469065a60afe0ed5564e0e11e3cdb6ca"
+        }
+      },
+      {
+        "case": "vctk-reader-00-prompt-1",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-1:natural:room",
+        "input_sha256": "ef586e1ac1520938f2d68cf1f05483517e18e0c035b221832faa5789d12e84b4",
+        "level_db": null,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "mono": null
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "fc2f06374f5c4cbdab2b98fc89a93a0716e261727fd5dcca397969f1f7d2a55c"
+        }
+      },
+      {
+        "case": "vctk-reader-00-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": 0.289416,
+          "frontal": -1.5081,
+          "wpe": 1.10699
+        },
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-1:natural:0",
+        "input_sha256": "64d36f10177eb2a8cb4f4a5f811e8e5e973ba9e54dc76d39d5fcbeb22e872482",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": -6.5723167118627925,
+          "frontal": -6.709976191776981,
+          "mono": -6.62446735156588,
+          "wpe": -6.430144752114706
+        },
+        "role": "assessment",
+        "snr_db": -5e-06,
+        "window_hashes": {
+          "flank": "14f8aae8e3bc1a0fbabb0fb198ae80a185476f7729f52e95e6575e59c72b7536",
+          "frontal": "41fbfaadc8d422f59ef0dad264184c8e5b360ccde8dee4e1f8d4c92c06397b92",
+          "mono": "9eab518581a3f47d27f7160d975e0f028003856224fcb0a8094fe23444878264",
+          "wpe": "c4dadbb9825bce7ea834f0ef8b7b2a48d6611cce41868f7ccbd04974e4e2c5e6"
+        }
+      },
+      {
+        "case": "vctk-reader-00-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": 1.355602,
+          "frontal": -0.417373,
+          "wpe": 2.018587
+        },
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-1:natural:-5",
+        "input_sha256": "856746de5282ea5b97777685c52844649dfec6e37c80fbf23dd754ed04e5d5a8",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": -6.758283634131845,
+          "frontal": -6.771750023329722,
+          "mono": -6.695807463450205,
+          "wpe": -6.805656922510398
+        },
+        "role": "assessment",
+        "snr_db": -5.000003,
+        "window_hashes": {
+          "flank": "800b52d2fa237e04594dc17999ab18e4c7642623fd70b8a0da3f70ca98b44880",
+          "frontal": "47f3638e2c0c317eac326065f067e8a1196ebe5bfc9020bc8ca9b645d2b1f46a",
+          "mono": "b1e45868cb56cba23fa5d7396ea33445899381ec955b2fc9d2bf7ff91d61de87",
+          "wpe": "500ee46bb8261694deaef4cd0de4e612c6499ea6ec5c417a229533cd2bd9a54a"
+        }
+      },
+      {
+        "case": "vctk-reader-00-prompt-1",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-1:vits:room",
+        "input_sha256": "81da4f1576850adc2717e4f9fa8c78a9ab73a0e2a5e5022769ff11b3a0fd9926",
+        "level_db": null,
+        "origin": "vits",
+        "position": "right",
+        "responses": {
+          "mono": null
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "8075018d75021319c0bbc29919305c1b4c3f81cee5a2d431564b153caf77e515"
+        }
+      },
+      {
+        "case": "vctk-reader-00-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": 0.039,
+          "frontal": -1.215744,
+          "wpe": 0.960763
+        },
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-1:vits:0",
+        "input_sha256": "72b0f5ee7400eef9d2972cd78dfa906d9255e87e7cedf02708f2fc7fc9f9c04d",
+        "level_db": 0,
+        "origin": "vits",
+        "position": "right",
+        "responses": {
+          "flank": -5.974362332287031,
+          "frontal": -6.397921628409961,
+          "mono": -6.216086335503937,
+          "wpe": -6.188870410449232
+        },
+        "role": "assessment",
+        "snr_db": 5e-06,
+        "window_hashes": {
+          "flank": "997a6f01624b87c1eb985856a279e734630ccf5cf4f477678bd2cc2ce1c36b29",
+          "frontal": "025ef983364db3af21f07784f55f508f322d6230a2f3002c9a46c0aa62242dfe",
+          "mono": "1c89ee27c61e2fa07c83e97772ddb21ca12b33c77191072a52cfaed8ee42380f",
+          "wpe": "eddb3becec46d6bb0a18530b1b2ba30c80ac6c0af9f22d47e94eef1eac0e594e"
+        }
+      },
+      {
+        "case": "vctk-reader-00-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": 0.862286,
+          "frontal": -0.296766,
+          "wpe": 1.909112
+        },
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-1:vits:-5",
+        "input_sha256": "d683075f66e8af230b790bb57878c168d306f6d33ea555c8a771bec9fefa963b",
+        "level_db": -5,
+        "origin": "vits",
+        "position": "right",
+        "responses": {
+          "flank": -6.303025216943801,
+          "frontal": -6.573514928119306,
+          "mono": -5.981639827482798,
+          "wpe": -6.740239060918269
+        },
+        "role": "assessment",
+        "snr_db": -4.999993,
+        "window_hashes": {
+          "flank": "93f7f0ee6908cd5a0e6ffd8a648e409a2e2a8d93fbdf41bec04c79ae24412634",
+          "frontal": "d53c2b01d0ff678dfb97e2e48882f757cb37ffd44ac327046b71fd8b62958934",
+          "mono": "c46809065ff170f45e156a53b7436c5e670db0821c184d0402b9ad924beae404",
+          "wpe": "a9a8856098df82337ebdc850441777e9d8d08fcbd672e4997ff4e7bbc2ff1350"
+        }
+      },
+      {
+        "case": "vctk-reader-00-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-1:background:0",
+        "input_sha256": "010c774186da6f43421dd61d76be808a23461a8b85c71235eaddf8905994d6b2",
+        "level_db": 0,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": -7.109619166511215,
+          "frontal": -7.099093479271964,
+          "mono": -7.060995106286608,
+          "wpe": -7.103136533169662
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "525fa92b04472f9aeff742b8625fb8416cccad3f6e213eaec50194820ed4192d",
+          "frontal": "54c0e8ac69f056f922d2022b539c81f044f0f36b0c58accf44e88156b57f995d",
+          "mono": "05a05c1048a6b3f10661b96c190bf70e420a2215e546bde650407f0c232c6245",
+          "wpe": "939fe13d86891d2944006e5ca185de6d0ce3f53934b9782d601b6c9717341280"
+        }
+      },
+      {
+        "case": "vctk-reader-00-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-00",
+        "id": "vctk-reader-00-prompt-1:background:-5",
+        "input_sha256": "77affd5a750e4aee97a9dff8cdf1eee3d414304adddffa1adbde69463e4f1448",
+        "level_db": -5,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": -7.103198983786743,
+          "frontal": -7.083586215069488,
+          "mono": -7.055380766411265,
+          "wpe": -7.112002395320181
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "d563e7c3d990cb7954ef42f98562c93d2fcbec629204c7707386d089b551a0da",
+          "frontal": "6f73cbb2af3b38e07942fd0b71f6fd09b9ed2732b5e60e5c15eb095cfd01a2b7",
+          "mono": "079d1db8bce223de324575bab468057b4afedf3fb2dba6d64b8289b911bde2c3",
+          "wpe": "a1ace2b3d060de58af2c0dff25ee3f580d26167ee223d304fe2ffaa5fe679dd1"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-0",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-0:natural:room",
+        "input_sha256": "79d68316c844fbc2448520030343ff56dfa249e8c7e5552676f86b86db2edd5a",
+        "level_db": null,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "mono": null
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "4ffd1230884dde82fcc3f050a9a38cb806fce689d3bd0285d66da4846ad6432d"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -0.036212,
+          "frontal": -1.090235,
+          "wpe": -1.412513
+        },
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-0:natural:0",
+        "input_sha256": "426813170e9d362a23556dd88af1ad85aec980b27fe621b40c45598cca846293",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": -6.771139141413081,
+          "frontal": -6.695824646904489,
+          "mono": -6.677037237577111,
+          "wpe": -6.787661584628028
+        },
+        "role": "assessment",
+        "snr_db": -2e-06,
+        "window_hashes": {
+          "flank": "3b85692f556025cecde5a50682dbfc09a76447b20fa2ff56f395e2609a66df70",
+          "frontal": "23f060f5b5a72f24c5b68094db2eea3286c2600afb274eafad52d3ed236c2efb",
+          "mono": "c75d1bff12d22c92482d63878cb99b49d567f9060b0fd6b157c1c02eb95bc626",
+          "wpe": "d6a3f5c1a52b8f35420faba9950f23ebdba27ef97071ebdf3334d3c3eb00bfb7"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": 1.287513,
+          "frontal": -0.118953,
+          "wpe": -0.105263
+        },
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-0:natural:-5",
+        "input_sha256": "058d57b20f6278404ac75e0466bf1b42bcb231fff8eaa62df7a68b049538b3e9",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": -6.798142484580546,
+          "frontal": -6.666653695927106,
+          "mono": -6.464912441700596,
+          "wpe": -6.815553660275421
+        },
+        "role": "assessment",
+        "snr_db": -5.000007,
+        "window_hashes": {
+          "flank": "3c6bda22fb449ba023492ef4b6e103518e85d67bdaae658933c232580b5b7f58",
+          "frontal": "c33e28cec8064f9830ae4fa62d4240498b96cfc4dfb923174790f9da662577cc",
+          "mono": "a10061fb2ccc0f46831828e0afb3a0608f5f60d82ef3a0b15853099078f4cdcb",
+          "wpe": "7b36987cd2c57dbc7239415740f043e5e8c838410117cb784cf403a5aa61e81f"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-0",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-0:vits:room",
+        "input_sha256": "2fcbc09caf10096c794fda29a2a9dd8d2570de4dbbc7fab676dc2d14d08e3fdd",
+        "level_db": null,
+        "origin": "vits",
+        "position": "left",
+        "responses": {
+          "mono": null
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "956afc3c8cde592e8ab5da16472008d447b03674664fae8c07feb39127ce6c80"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -0.202369,
+          "frontal": -1.284053,
+          "wpe": -1.476611
+        },
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-0:vits:0",
+        "input_sha256": "4dfd99dc18712c92a5851f3664f9a62480598d6ed6605019e90df46efeab1f35",
+        "level_db": 0,
+        "origin": "vits",
+        "position": "left",
+        "responses": {
+          "flank": -6.277962211330343,
+          "frontal": -6.578192178270985,
+          "mono": -6.346153183028663,
+          "wpe": -6.0833777914353915
+        },
+        "role": "assessment",
+        "snr_db": 5e-06,
+        "window_hashes": {
+          "flank": "bc48d43108607625164a9bce4be206e9c8d4eae8d590bb83cf98cacd3008e4e0",
+          "frontal": "ed0545135eb715359c60453e958c910f5d007abb1a97d45358b5095b18dc235a",
+          "mono": "1f9755f76062b694a3bd6264d753cf3dabc9439ffcb65a491b3c237f07eeac07",
+          "wpe": "9adaad6c9e9b74e2eb263ade6462feedf0f6811c0eac323a73731eb26a8237a5"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": 0.964476,
+          "frontal": -0.298173,
+          "wpe": -0.03382
+        },
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-0:vits:-5",
+        "input_sha256": "0c0957efe298aa872e12b3e8c5fcced87eb866958263f2d81680147076770ee3",
+        "level_db": -5,
+        "origin": "vits",
+        "position": "left",
+        "responses": {
+          "flank": -6.685059534827968,
+          "frontal": -6.765949269399978,
+          "mono": -6.4126505478193385,
+          "wpe": -6.094466269994727
+        },
+        "role": "assessment",
+        "snr_db": -4.999999,
+        "window_hashes": {
+          "flank": "1714c71df2213aae1a5683c7df75073c682084314da4ca648b1aba4b47aefc2b",
+          "frontal": "b38d180d92536834e90ae6ea92e4807484ca08f704242b1dd67a78ddaf423553",
+          "mono": "c6e6e638e71c7e28b7c41f1d70a1dd59649ada5976537911127a622f66fb326c",
+          "wpe": "e26a6a6413b4026c39188d68bcbb120ed044c45d6fa47b58f9dd530af62c9b5d"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-0:background:0",
+        "input_sha256": "da0b1b0c9ae059e616ad67a8ddfd796ed81a8ebc570160379dbf8b3ae9984257",
+        "level_db": 0,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -6.962135268373757,
+          "frontal": -6.965934689769048,
+          "mono": -6.990429371786183,
+          "wpe": -7.104852682784599
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "b807ba55c91744d190ac6d1eb7dd0df82693f0116a3dfed0878309e724bdf64a",
+          "frontal": "e3726306f625398c6974fab3166c677b3b623ad5eea72d3221dc89722d63fa35",
+          "mono": "39b80fad57ce20f3f3b79972558735832e32f2029e4423ad00d8fb2b8e05607b",
+          "wpe": "4f4f08c9596d1f0141910e45bdadc131793b30ce77815b466df3316cc5b7f574"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-0:background:-5",
+        "input_sha256": "c8d60afaddd88816945f21ef54409930747cc17657437dbc9b7eb20f931be208",
+        "level_db": -5,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -6.962985084918383,
+          "frontal": -6.9463372519380515,
+          "mono": -6.994611749454767,
+          "wpe": -7.112599429490762
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "19ab55186315a07ed5ee90ebf18f673735a751c9c2411302bab8fbfbe9b038a1",
+          "frontal": "e5246d7b6982f37ebda21b4194283751ae9b2a4e50e4f8320eb59f30fe51235b",
+          "mono": "efeaffdfe648e9ddd586cdf77d9bcbc1966baa498a8ebf8119ef68130c0f9907",
+          "wpe": "d5179dc04560f1d34e0e9c69f4e5a25fd0ce4aef73b98cc447608f1ffe3cf019"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-1",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-1:natural:room",
+        "input_sha256": "720f43381025a73f95a034e410d0eec3570ea3c73e29982b68ce806226e96dfd",
+        "level_db": null,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "mono": null
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "17a84cc7d98c91f6de566b66c29422a31c897cb8625601878e34776c8f3e4efd"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -0.209507,
+          "frontal": -0.625453,
+          "wpe": -3.006194
+        },
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-1:natural:0",
+        "input_sha256": "f34e18ab7b6a81fd3f537e1e7052d0afb52975620e29cfec22828c89f0f4019d",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": -7.185136264127977,
+          "frontal": -7.167143834104673,
+          "mono": -7.175279635831148,
+          "wpe": -7.130120308176416
+        },
+        "role": "assessment",
+        "snr_db": -1e-06,
+        "window_hashes": {
+          "flank": "93bfc158ce44c8ab58ba7bf4fd260dc7b42f7377e56f206f79f36e519ff141de",
+          "frontal": "219c8113c08e70630e9cc6a3512c542ee15699f51007550a1bc2db14f8f73f99",
+          "mono": "bb8d7a4b6ccce58fa0b39d9be0a310e15c4d011230e1c7290708db86e5c4b946",
+          "wpe": "c0cabd4ee3bbd47c3f1d98d395476e21724f9ebd5f8fdce7ec99c336c2d860c8"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": 0.86652,
+          "frontal": 0.670837,
+          "wpe": -1.650417
+        },
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-1:natural:-5",
+        "input_sha256": "084d80eb244d86ba18c78e060bc3a2b41230d17c8d7a17088668ca3f416809c7",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": -7.17018223580961,
+          "frontal": -7.155408848061999,
+          "mono": -7.121661162780245,
+          "wpe": -7.0919789864827
+        },
+        "role": "assessment",
+        "snr_db": -4.999994,
+        "window_hashes": {
+          "flank": "dc030f91a7c8ea33de6af26fd45f5747b18f593611a44d20fbdd80f1946340eb",
+          "frontal": "fa2aebd3d7370cc32736ce14547b74909c4649628ae38504159b9dba5d33ffa5",
+          "mono": "966ee8ab82480277f8512d783d058ac2ac0c7f5bd6ed290401abec3c48afa0ba",
+          "wpe": "0b8affef086e78ffea08aacaa5bdc2106632d1cd52afba2132ff747fdf8cc0db"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-1",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-1:vits:room",
+        "input_sha256": "6800e5266eb45b2b963d2ae338d48a32c9fba9a97e155718d5b271194d38bd39",
+        "level_db": null,
+        "origin": "vits",
+        "position": "right",
+        "responses": {
+          "mono": null
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "82e45d57bed9e163b90aa36bbef78cb2737a8deb6aeaf133e1dd0b45b63db2ac"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": 0.426972,
+          "frontal": 0.165676,
+          "wpe": -3.375674
+        },
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-1:vits:0",
+        "input_sha256": "3e57228960712bdb5ea704697c5f99c3cc4cd43773a5c1cf4024a6258f468d77",
+        "level_db": 0,
+        "origin": "vits",
+        "position": "right",
+        "responses": {
+          "flank": -4.636189924004293,
+          "frontal": -5.351511019972685,
+          "mono": -5.550438372707548,
+          "wpe": 1.5914929292221318
+        },
+        "role": "assessment",
+        "snr_db": 1.6e-05,
+        "window_hashes": {
+          "flank": "45567e78a1d7f3ef3f9265d9b5fa1d8bb10e7f0c95823278ff7fe099e4c0335c",
+          "frontal": "e07500e87cba7fdcd7c94aa1999d7f6f4c02bf4d9bfc34e6f16e5b7ed98d2dad",
+          "mono": "9c4c7d4912da67c0a72e221433a3f04e0dbacaa2846c3ccf31eb28fc653bafea",
+          "wpe": "4a7c1dfdbe5b2a0766529f0c013c1c492f7bef7001dac381c95e99bc0f32aca2"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": 1.239462,
+          "frontal": 1.133439,
+          "wpe": -1.890637
+        },
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-1:vits:-5",
+        "input_sha256": "cf23da63dd55133763a48b9bde91771d5bf393aa96f595aa1d30aa5adea551cc",
+        "level_db": -5,
+        "origin": "vits",
+        "position": "right",
+        "responses": {
+          "flank": -5.25806325790453,
+          "frontal": -6.002070421667322,
+          "mono": -5.880209930467777,
+          "wpe": -5.828504571890849
+        },
+        "role": "assessment",
+        "snr_db": -4.999978,
+        "window_hashes": {
+          "flank": "09890d0a9229278d9af9a26b12d985ae40327e620aa6fcb6afcf8f0022312eaf",
+          "frontal": "a396f15de92dc152350c11ccb1922afcbc94afc132c256d870b56e20cdf7957e",
+          "mono": "c222b647c71eddbe83c2c10b995d23a6b0dd0d91c98665a18df6168811b2f9c7",
+          "wpe": "c94fefec1c08ea67ffb421d008c4260d887e1e01bf96035c0dce433d98d46827"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-1:background:0",
+        "input_sha256": "e6b941dd3245e00210ced4526f554046a0c6b5e8f75e603bd999adbf7c85e9f2",
+        "level_db": 0,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": -6.7976588966746405,
+          "frontal": -6.824166283352352,
+          "mono": -6.79314518132296,
+          "wpe": -6.493697112490732
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "08621d0892df8dcf6c32ca21dc6e9f0133ca5d31b29d5a2f2d3222aa0cb57afd",
+          "frontal": "2fd10a117805ec8d299a4d61e536ccb6ae8e1a95f0d07903f46152259289d837",
+          "mono": "ad379a8482a2cb94aefedaf6da5907a35e632579096a9942ab192b26213a0595",
+          "wpe": "7a024dce1185c66dfda89a43254f154b289e78d430ec4c703ca82432e4e0bab0"
+        }
+      },
+      {
+        "case": "vctk-reader-01-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-01",
+        "id": "vctk-reader-01-prompt-1:background:-5",
+        "input_sha256": "d5e4dd844fbfe4b6c61e034e2ff9dd6f11a6b9e0e72d4471968fec7d95c26821",
+        "level_db": -5,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": -6.80220510563237,
+          "frontal": -6.807610522685398,
+          "mono": -6.790180209638514,
+          "wpe": -6.495294603533375
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "dd8777f15c7b8975dce6f1005824be94304e6c4bc559612cbbc6e4a69bb3bdd7",
+          "frontal": "e9663d92f42d9e108279670763fa16e36f04faca5549865f7a3b6e311451144b",
+          "mono": "2f19870f48bf619ad4962dfe9c083200d41a23c2874ab0ec755f0cf4422be154",
+          "wpe": "a595f8b546d76fb443cd900840c2770ba8c935779d1c1d2dace504f673438079"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-0",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-0:natural:room",
+        "input_sha256": "db460fb9d106ca0262bdfd113399ec4e449f1f8440d20e65138c3c0a46775bac",
+        "level_db": null,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "mono": null
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "17bd0079c595cf48cbbd356bf03e895ef425bab2515d50507c86da9d10a40ad4"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -0.951564,
+          "frontal": -1.288742,
+          "wpe": -0.267181
+        },
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-0:natural:0",
+        "input_sha256": "1209af24b908e7ececa7c207036462483e2dbe7593cff6c827db1f8b2c7b6bea",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": -5.417045553596137,
+          "frontal": -5.4939460766386965,
+          "mono": -5.720840425151548,
+          "wpe": -6.238243062098848
+        },
+        "role": "assessment",
+        "snr_db": 1.7e-05,
+        "window_hashes": {
+          "flank": "5d2cdcd79d920c80f34cbefd9a678e9152869194147a2a3456d29ccd1db8e73d",
+          "frontal": "ee79c7487fc4f314d686dc508a3ea904a3fa963c3b00ec57938773ca01a774ae",
+          "mono": "44b50487e6a3f92d81ea789e7712a79067b88a9a539d75fe8e2c691f5f48339e",
+          "wpe": "28bdf6bc2bf6e3d14c5d0ce903e82fd13d2af1d215ba1024b422f9e414abc340"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -0.045819,
+          "frontal": -0.309507,
+          "wpe": 0.963906
+        },
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-0:natural:-5",
+        "input_sha256": "7b6fd65bfdf660fc2fa1f5cd349ab9b80b54c0a8083d809ab1fba461f0585e1a",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": -5.543740304873674,
+          "frontal": -6.048222535056597,
+          "mono": -5.314690622499314,
+          "wpe": -5.576834635543627
+        },
+        "role": "assessment",
+        "snr_db": -4.999993,
+        "window_hashes": {
+          "flank": "932ad9713689f48f97ae2d7aab028b956381119179622e40de1d90cdc91601d4",
+          "frontal": "d8b9499bc539beff2a4244ac77edf861b4eb77d75a605cabcf20bff489ad55df",
+          "mono": "0117aa05d856ae673d67525fa9dbf8bcc7cc90000c86a3ea2a02ad68a1f69c81",
+          "wpe": "a7f7f5e93ef0cbdb48228a2674030283ccb3a3b106386b4a42f7bde8affefb48"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-0",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-0:vits:room",
+        "input_sha256": "2c17b049a0f8c8383f0a4439049f50967d23c418581c5d164a51f87e493bdab3",
+        "level_db": null,
+        "origin": "vits",
+        "position": "left",
+        "responses": {
+          "mono": null
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "865a0d7353533f5e8da338768b18be120b9f44e902ddb1e45fa226af5bbad4b4"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -0.987497,
+          "frontal": -2.116374,
+          "wpe": 0.052629
+        },
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-0:vits:0",
+        "input_sha256": "832f4679503064f68e81f17f79e38b4164e74685bd7caf7209b7ee091f8b45ad",
+        "level_db": 0,
+        "origin": "vits",
+        "position": "left",
+        "responses": {
+          "flank": -6.44256970803943,
+          "frontal": -6.487636519119496,
+          "mono": -6.225126230959084,
+          "wpe": 1.1110465215076208
+        },
+        "role": "assessment",
+        "snr_db": 5e-06,
+        "window_hashes": {
+          "flank": "d43bebed686a099f0aa8be9ad74fdf0c877f4733314403507dc635b615df2a45",
+          "frontal": "6c3efe448c1fefe77fe505eb11e26509d5f4807f5aeb2c738c90ba3d377b61f4",
+          "mono": "c11e24cd6a39ff738b7d24ec6b5a86b9a4f2fb79538036c1ee64501e8129bef4",
+          "wpe": "d1eeed1a94d848313c8584c78dd9f2c79192a59054a9db78b396363a43793248"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": 0.256118,
+          "frontal": -0.989868,
+          "wpe": 1.365019
+        },
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-0:vits:-5",
+        "input_sha256": "1c973de99baeef7da0b507c521fb3b700e434b34bdad19ef9215c515a6f7a659",
+        "level_db": -5,
+        "origin": "vits",
+        "position": "left",
+        "responses": {
+          "flank": -6.627820937539821,
+          "frontal": -6.749122659988275,
+          "mono": -6.632707531215723,
+          "wpe": -5.90211673011448
+        },
+        "role": "assessment",
+        "snr_db": -5.000005,
+        "window_hashes": {
+          "flank": "143f943d084029d1e5e26bbe2b6a7f2a56d253e23ac8bb91cce495008d27352a",
+          "frontal": "b4cd8e2c18b94fdffb6d4dba90e0524141c0e7b84bb372ad61e6aae07a80a7a4",
+          "mono": "2d8852ca9582a40c63f1898d4d01bafac371529d4c0e0867cf32c76ffb4b4d5b",
+          "wpe": "1e4e8ba4e656c5a6380060e1b118451203eab211dfd9478ee5198be81959614c"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-0:background:0",
+        "input_sha256": "3f9433a8caab8f01e9f1792ac6e4debc64adbc5eba7934030923aea3dddff52f",
+        "level_db": 0,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -6.5177879555851534,
+          "frontal": -6.563247624126415,
+          "mono": -6.1556562967017845,
+          "wpe": -5.871514334171484
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "3a7c5e1939886769f51f87e8922e579844b8e3e74f098422ce654ab985c2df01",
+          "frontal": "540d6190fc48ed6b4d751b07e3d2ff048cd4a9463c89dd49ff602cb7061df56d",
+          "mono": "0669621daa3e54a3c6f294d52adcc6ad72fc5639a368f0bfd43be0eddd5ee2e6",
+          "wpe": "1d56dc1fe1cc971bca8e903dceb0997a941743c94805b627c626f011f6d65236"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-0:background:-5",
+        "input_sha256": "e294b0bad44949a6a185d04b5772d8cd8186b225dcd89d1c519ebfcebc51ae98",
+        "level_db": -5,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -6.50879904757916,
+          "frontal": -6.580232125134382,
+          "mono": -6.180163393794329,
+          "wpe": -5.86420254078984
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "ab95625fcc90475fb51f1bd9b612b0c918ac92b0d9fad38b941422f22dce354d",
+          "frontal": "75d4c7f8843d1d6281c089572dd867b16b5ee2275a782c6ec3b4d1d064961de4",
+          "mono": "5a81dcc40be94ee444ec835caa12f30271d3b40f6486fa5604d3df837d334270",
+          "wpe": "94cbfd62be8218351b53362e9a9aadd1c4d0ca2de3d8b73dd0de3b062336eb78"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-1",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-1:natural:room",
+        "input_sha256": "9e702357e826c44110df0d09083e066e2f958863576499075ca05af4df699b3d",
+        "level_db": null,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "mono": null
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "d406cc5ecb54e7ee4d8300b98eb63aa3cd460b6249f2c23b02f21cb6744ca940"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -0.714128,
+          "frontal": -2.135821,
+          "wpe": -1.48666
+        },
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-1:natural:0",
+        "input_sha256": "911e84dc699f95aba1e9dc19cc2d1283c15d3adcf288f800e87eda69c3b3ebc0",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": -2.3267884480525027,
+          "frontal": -6.5380459436976075,
+          "mono": -6.4522103790713174,
+          "wpe": -6.155809399724858
+        },
+        "role": "assessment",
+        "snr_db": 6e-06,
+        "window_hashes": {
+          "flank": "0363488fc56a09921461a55164a437be427e91eb6ac1b76619fe1c590241b8d0",
+          "frontal": "accb19c13c92df537cbf0b230942875a7db04174660e376e9ced16e2c2f52e80",
+          "mono": "a33f23a6536ce9dd460dceb5c77491bff361af8a78331b5315cd92a8af261ae5",
+          "wpe": "fe407b5e6fb4845630ee7bad3caa98d243075169f02d1936a6ccbf04a2c365ef"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": 0.274138,
+          "frontal": -1.305552,
+          "wpe": -0.581448
+        },
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-1:natural:-5",
+        "input_sha256": "182fed946c1723ca6dce0430d68b8fd10cb912556edfbfbc14d25ed3d03d73b0",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": -5.8289299317998795,
+          "frontal": -6.585843990705669,
+          "mono": -6.553500121649067,
+          "wpe": -6.705471067776878
+        },
+        "role": "assessment",
+        "snr_db": -5.000007,
+        "window_hashes": {
+          "flank": "46a8a30359a4ba025c879dfc06633f325c59e4b9db49130e767e499cc9df1c14",
+          "frontal": "de39f15092dfde66f002da089e011d7dc00f0145b6d55fdde671cd7846542903",
+          "mono": "769b135d1308e952e475a38813ca648bf5a27efb413be6fc6e3d0acb7cf49de3",
+          "wpe": "7413857f5a899d48b1922fdbe9790a1bece0d09fccf41ecb450bb2bff63ce90a"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-1",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-1:vits:room",
+        "input_sha256": "da0ebccfcb00d63c36c90e286d2c90c22d30589821b7bdd93f234a8cd18723a6",
+        "level_db": null,
+        "origin": "vits",
+        "position": "right",
+        "responses": {
+          "mono": null
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "12ca99d32ee8acecca5face74796aac1047d7fb9b4c02e4c4f8444c942e8053b"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -1.073299,
+          "frontal": -1.405386,
+          "wpe": -0.958826
+        },
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-1:vits:0",
+        "input_sha256": "ee07cc356df96fc1978d17c524125e93359a4fcf0c9f209c4b2231e0d5b42fd4",
+        "level_db": 0,
+        "origin": "vits",
+        "position": "right",
+        "responses": {
+          "flank": -1.1607717939731743,
+          "frontal": -6.096569590317326,
+          "mono": -2.075545831018974,
+          "wpe": -5.674746534370081
+        },
+        "role": "assessment",
+        "snr_db": 7e-06,
+        "window_hashes": {
+          "flank": "e62c6d900d33caa4bfac75bcc4fd52fa72028a6bf8818cc6105526f1bb83f7f8",
+          "frontal": "ca342c43645b36847816a5f8cf26bfb4c49345ca04b41ac6637b7e633bd8fa1f",
+          "mono": "5b3cc54e22fc6d5e93fa7c147d69a0430a4dfb36aab95448dffebdccb87b6c88",
+          "wpe": "5b4933998068d0b1ab96b404d6bcc360065e09ce38a88ac19fc79137d5dc4c65"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": 0.080888,
+          "frontal": -0.331654,
+          "wpe": -0.108729
+        },
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-1:vits:-5",
+        "input_sha256": "59e3c136c448b3feeef5185669669aaeeb79f9cde60be2f268c4eec8a869826f",
+        "level_db": -5,
+        "origin": "vits",
+        "position": "right",
+        "responses": {
+          "flank": -4.612206004821181,
+          "frontal": -6.016039856012847,
+          "mono": -4.550599058164297,
+          "wpe": -5.684679011507729
+        },
+        "role": "assessment",
+        "snr_db": -5.000006,
+        "window_hashes": {
+          "flank": "393d9763f54dc5edb3ee5621d8f89b5b73596852259419ce38547d2340e5e371",
+          "frontal": "67ce063ac411ccd2710f5ef78e682e7e2dce3a1274d39354a50b33f226c6e02f",
+          "mono": "77bee2c6b300033f1fec1fc978b615f3a45ec37e7575956d6cc9e7c856f342b6",
+          "wpe": "140686e9a29f133abdd411b8792014e85d76ab1fad0322e8b3a553970abe9a42"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-1:background:0",
+        "input_sha256": "36f5e883a4ac388c99ed99d3f02d67b48084c577b9fe86123ff9b9c14c4054c3",
+        "level_db": 0,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": -6.33566854992133,
+          "frontal": -6.050877567167492,
+          "mono": -6.015204394905009,
+          "wpe": -6.889162045366245
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "e1fd3939e86d641c9b83fca910cde82893fda9a78c557796c71452944ca30876",
+          "frontal": "2c542abc15469ae278d0929b7d8cf2c62d104268dcc2902349c907cb0ef12054",
+          "mono": "5ee7dc62418d5ac5cf6bdeff38587985eb34b52ccc5a243ce49d3ba5238c494d",
+          "wpe": "fd075f61e775d16f6581f76d9fea10bce99656549f85642edd9a3c653ecb4246"
+        }
+      },
+      {
+        "case": "vctk-reader-02-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-02",
+        "id": "vctk-reader-02-prompt-1:background:-5",
+        "input_sha256": "aaaf47325aa0f6deb72319c913021f5c5f9b8fe956498047d56a73928330a746",
+        "level_db": -5,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": -6.330610254236639,
+          "frontal": -5.7657309255703355,
+          "mono": -6.094071344161121,
+          "wpe": -6.891361210956531
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "86548b6d550035742071e8c19007856267a9da1a10b42c08404d94ef8e3582a6",
+          "frontal": "075e2645d3828b1764664aee6d3d3117304f15dfb8d3b37ec3e62bb475234128",
+          "mono": "26b971c451020fb4079e2e7441d15685301e91353ac8bbfcd8ace5b09409c56b",
+          "wpe": "8887e0e3a9bee0bb9a2925cc5f78b326e92b9f878ed9cb46b6786e23c64844d4"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-0",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-0:natural:room",
+        "input_sha256": "e278f4beb933ab9bf80b2c0a123e67754b85b0f8501558ca95120a92307a1a31",
+        "level_db": null,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "mono": null
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "db5d9b0656862d9bff56b21490ee9d9a32ff4fd76414cb904438df4ce32a607b"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -1.696203,
+          "frontal": -3.377012,
+          "wpe": -1.258134
+        },
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-0:natural:0",
+        "input_sha256": "a0509076cbf9aa4c9f62c5af365dc671d4f9db757add8eaacd6df8483563b96c",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": -2.0026831521094444,
+          "frontal": 4.17023043836169,
+          "mono": -1.5334972315226338,
+          "wpe": 3.472231384266599
+        },
+        "role": "assessment",
+        "snr_db": 6e-06,
+        "window_hashes": {
+          "flank": "eaf0fe1eb1ec51b16a953968c7135ffeb2d29406abc6c25abed955eb8c1b413d",
+          "frontal": "7d41b9da99859ac5d269ec348d8a3417632b5ff139c9aacb325ebe1eb4fe2c3c",
+          "mono": "bd4c2d76b55f9f8547d044c8d917066de98de4fd5f67a7eec2df89d9cc511122",
+          "wpe": "cbc28411c5eb03a04a87796366e554908feb1adb77d149e781ccedf2db9e7002"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -0.851969,
+          "frontal": -2.695298,
+          "wpe": -0.186366
+        },
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-0:natural:-5",
+        "input_sha256": "edcb6bd2e90382570055d2434770954384677e2929d618c38e182aad6c3b56d5",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": 3.2928266182302672,
+          "frontal": 0.3621439169085048,
+          "mono": 4.460828433513313,
+          "wpe": 4.789221668279421
+        },
+        "role": "assessment",
+        "snr_db": -4.999997,
+        "window_hashes": {
+          "flank": "fc4bf3cb9007dd930744c11c5d70b307e24ecbaae710dce15f1b8e6d614ccf39",
+          "frontal": "c9a9e99ae7d3bce126ee0fed3b7abc33754ed38ec429ecd66125cdc0c60477b6",
+          "mono": "5ae85b9114dfe33b4c2c95cccecbe8cc4db7cf7232030e0410c7c50322d044cb",
+          "wpe": "86b6b24dc93c9a6237d5d29adcd8c041117a71f126f58a6cba5fdaa3e3789797"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-0",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-0:vits:room",
+        "input_sha256": "cb182ad0e088b39d012ed03865b3e9b27926e259fe12932a5000f7084fbddd79",
+        "level_db": null,
+        "origin": "vits",
+        "position": "left",
+        "responses": {
+          "mono": null
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "e1551a3654f4adbc833adfd474287d9ec16020f1926bebe101816673e8ded21b"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -2.037008,
+          "frontal": -3.181518,
+          "wpe": -1.014349
+        },
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-0:vits:0",
+        "input_sha256": "38c3c0db312ad3134ab112591d40379550a033082a041a6442d742615b3fcfa7",
+        "level_db": 0,
+        "origin": "vits",
+        "position": "left",
+        "responses": {
+          "flank": 5.573656677807284,
+          "frontal": 5.010204031427905,
+          "mono": 5.620741721361445,
+          "wpe": 5.524341446324056
+        },
+        "role": "assessment",
+        "snr_db": -5e-06,
+        "window_hashes": {
+          "flank": "1e1e7a11a4de81294ef7927296beb297b2e08e09f7b06d9c8ed9da976c5449fd",
+          "frontal": "d7c5719a49380ef3e290f6c7d715f179745b7c02ec32c09c4e0dd2fdfe8eb322",
+          "mono": "3d67d9de8d45be1f07ea79c8c1c7754c6fb52ee15759a151abfdb6426803e5d2",
+          "wpe": "119f1ea95e1d73bae48c1782aa7f6d5eb9e804eef93273d74000774a1e3cfc29"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -1.12544,
+          "frontal": -2.502836,
+          "wpe": 0.031616
+        },
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-0:vits:-5",
+        "input_sha256": "29388ac7bd087f959d8b6628f2d270cc0f260715bc6a04fc5c7e3334f0008dfa",
+        "level_db": -5,
+        "origin": "vits",
+        "position": "left",
+        "responses": {
+          "flank": 4.624331941614318,
+          "frontal": 4.794612000811012,
+          "mono": 4.743323548476956,
+          "wpe": 4.088503381586936
+        },
+        "role": "assessment",
+        "snr_db": -5.000007,
+        "window_hashes": {
+          "flank": "1b3b0982c869e5b36db44dff0024a4f1840cb5e372894bc1a98b726dbe6dd380",
+          "frontal": "929b202bfe24c9fbc1cd4725515d88957e85a6907352501924f97d1cbb9d1bc4",
+          "mono": "ae791618090ad216cf735ab30581c5e904494cb8638ed6c4bc7d7ad41805a086",
+          "wpe": "2f153fb70ca0003b4e061d854fa420bbe944478180bfe85c09b74381e36de80d"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-0:background:0",
+        "input_sha256": "cfab2c47ba1c99c3ed2ce90759b5af2e1aa6035d0c3b4e6ca4c4b800634a102b",
+        "level_db": 0,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -7.092245607118181,
+          "frontal": -7.103438827509741,
+          "mono": -6.972082140589002,
+          "wpe": -6.674851398007206
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "6c463a71264c0a7c1fdf77203ff2e0081d80a4287845e3476b2f0e4cd2e1ba1a",
+          "frontal": "8210059c049fd6ce4abd9371ba7a0aa83b3d7458725b2eae7fe4ec94a6c1cb21",
+          "mono": "c31a05eb375c46681bb7eb1aa5e241d7e5990bb96ed763838e06fb85a9d39dcf",
+          "wpe": "2bebba4712412ce5ba63956fd5f037596328e6a08c6a7adedbcf520d083a1ea8"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-0:background:-5",
+        "input_sha256": "69427792a744483c70378cfcadf299f20373b8373091c8081ea81075511e634e",
+        "level_db": -5,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -7.088389435399231,
+          "frontal": -7.105319083814971,
+          "mono": -6.969376548754764,
+          "wpe": -6.701049781517248
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "bc46eb75f8ce934dbe2f72a831736cfacaa58d831b8a89fed48698b83acf8830",
+          "frontal": "240a7a823f35afe6d8902bbcaf849807247ac67fccc40f0781fedb3f35ed0d07",
+          "mono": "f976b56b71869e29332ab721e0564dc1cdd69b0808e52b727d8626a29a568be8",
+          "wpe": "df11734fe9b68b01fec2eeb4b8d4334e99ca6222ad7417d548c4d54759aa3cf0"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-1",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-1:natural:room",
+        "input_sha256": "323ba3317189c7193291e58d5ca4d3745213d433758c5e15a2fde91377ba508c",
+        "level_db": null,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "mono": -7.149662052893706
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "c85fc555113492a2fc85eb887f1819d60b7b4b269a3c605cccfa660fba37611f"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -2.43234,
+          "frontal": -2.177627,
+          "wpe": -2.166758
+        },
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-1:natural:0",
+        "input_sha256": "24cbd5a6c1b73071b9ab409a2e3f74c057716cd98c5d23fe313b5cfde0ace1d5",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": -6.238554899462501,
+          "frontal": -5.864025164432247,
+          "mono": -4.554449105884811,
+          "wpe": -2.280698357704583
+        },
+        "role": "assessment",
+        "snr_db": -3e-06,
+        "window_hashes": {
+          "flank": "7c0dbadc28641d1d5788026403f81d33d762e0e3023acc022169da09827059e4",
+          "frontal": "1807523d14346fd1507d339db7eeaef7bfee6d534930d1cfc597f5b7f37c925d",
+          "mono": "4208f7f078b55ce5537ad860f85c6fe20e1fd652fbdccdc1c7c03cea2f5dae02",
+          "wpe": "714f1152ce3f1cc1e381750981981c84bdfa761cf191a1837ea7fcc57e7dab6d"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -0.755664,
+          "frontal": -0.6932,
+          "wpe": -1.041205
+        },
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-1:natural:-5",
+        "input_sha256": "a5e606624a4e18f266f057c7f678478cc6f7fe3dfc2e43a07acd6e28d72a8eb9",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": -5.978320596250607,
+          "frontal": -5.702992460865392,
+          "mono": -4.337514896726584,
+          "wpe": 5.494714176482111
+        },
+        "role": "assessment",
+        "snr_db": -5.000002,
+        "window_hashes": {
+          "flank": "ded3e7e37c5730003aedc96e4417a1017beb5126c63d0a8848e784baf570fa43",
+          "frontal": "8ca579819b48432324968a8b713f3cdd8e10badfb33bc3b4dedbb0694353d46f",
+          "mono": "d7ab95c5844ba1365b00d09cff77a9ccaddc7b79fc713e8b00cfd0c295ba8314",
+          "wpe": "1403d447dabde3920e4ba5c88c40cb00c33a8f1f5290c72c8f679091d65a16bc"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-1",
+        "fft_max_lsb": {},
+        "gain_db": null,
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-1:vits:room",
+        "input_sha256": "204a55e0c4319ae4e59e9101fed0ab0363303f887986e9304e3910a05c6413f9",
+        "level_db": null,
+        "origin": "vits",
+        "position": "right",
+        "responses": {
+          "mono": 7.280576241220855
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "mono": "1cc663bba9a8677111ea00d0ba0620612ab9fd9fc8effe7a7f4ce506bdc37756"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -2.558798,
+          "frontal": -2.330747,
+          "wpe": -1.987987
+        },
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-1:vits:0",
+        "input_sha256": "b10f58e98f6f4833d495723aacf431bd12cb06af4288329584b01d00fa0311c7",
+        "level_db": 0,
+        "origin": "vits",
+        "position": "right",
+        "responses": {
+          "flank": 6.77558773980074,
+          "frontal": 7.041438867661484,
+          "mono": 6.820112914924224,
+          "wpe": 5.967935317107199
+        },
+        "role": "assessment",
+        "snr_db": 2e-06,
+        "window_hashes": {
+          "flank": "881e412e7602635faaed943540229741635bc9707308172e297dc4cd71db78a8",
+          "frontal": "55d760d5ba875b8b409e129542b055f10751efb4c1f44cbd32336f27f1078585",
+          "mono": "6efb89bd549d4a3a9b7ea3fc82dafaa2d8f230f2830b1fd9345fdb1bfe43b1d7",
+          "wpe": "7d52013ecc84bd26413f5208727bb1ccdcaa27d5087d0b66269654ff90861088"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": {
+          "flank": -0.872004,
+          "frontal": -0.798662,
+          "wpe": -0.922111
+        },
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-1:vits:-5",
+        "input_sha256": "33cff85fff8748ffaeb0727f735d635f345f739f0ceb5cb1e4f2562287492bd2",
+        "level_db": -5,
+        "origin": "vits",
+        "position": "right",
+        "responses": {
+          "flank": 6.375575461922328,
+          "frontal": 6.770575220734123,
+          "mono": 6.661566941043205,
+          "wpe": 5.589954834679363
+        },
+        "role": "assessment",
+        "snr_db": -4.999997,
+        "window_hashes": {
+          "flank": "5b844b3e7f96f3645553b22690e06ceda4294fe86d4a29a2df6526b056d8d76c",
+          "frontal": "cba3bbd8660e24df03bc7c738fd42febadacd4db3c8e7959394e869e260c7a1c",
+          "mono": "55fbf7baa36494ec8120fdb6e58d0bc38355e8111fc03631693d7227f52b917a",
+          "wpe": "38cb64fd652601e19ed8ddcfe339de4e658c51c32bc3868209ec2ec648a0cedb"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-1:background:0",
+        "input_sha256": "d30d098e753da7f7a5df92102e4c164520b506bcca09c1a1f1823c63846dbbae",
+        "level_db": 0,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": null,
+          "frontal": null,
+          "mono": -6.252094288822378,
+          "wpe": -5.285863862794367
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "e24bc068e15bc226f1ff16b675969b2539f56cea8d04280cc407f50e8110a2c1",
+          "frontal": "2420e5917b264e7214467cb45815b0d07dc6290bcd731acae8ff9f1edc8f5293",
+          "mono": "03bedb2a1f50781d162498860d5b172d820de6caf9db77c8ccd69b9be380ee95",
+          "wpe": "a784a951eed9c65d6793e005298f19ff98414eca6cdccb3f9274451ca737e2ab"
+        }
+      },
+      {
+        "case": "vctk-reader-03-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0,
+          "frontal": 0,
+          "wpe": 1
+        },
+        "gain_db": null,
+        "group": "vctk-reader-03",
+        "id": "vctk-reader-03-prompt-1:background:-5",
+        "input_sha256": "148caa6109a16b0a0737df7bff04630c73f2b028a66288e64076c507ae9af819",
+        "level_db": -5,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": null,
+          "frontal": null,
+          "mono": -6.2465724471586075,
+          "wpe": -5.244019548010566
+        },
+        "role": "assessment",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "098b6970e44ff4765372d9529fb6d2f9e7ff1a2672c2e899fd73cbb7e6715f49",
+          "frontal": "0d84e70f3cb37fcf9560c313264380c614f70f541952c8ff437fe20ec4b6eb5b",
+          "mono": "64907ac3c1155b9ea6c0b3d67ff138bdb1a7bd73bf60cc0d72782713e8b07190",
+          "wpe": "b351ab3f55bc206c404de6256faba2b9028d91343ec59deaf104fabe2275c629"
+        }
+      }
+    ]
+  },
+  "development": {
+    "forwards": {
+      "flank": 32
+    },
+    "rows": [
+      {
+        "case": "reader-00-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 1.415148
+        },
+        "group": "reader-00",
+        "id": "reader-00-prompt-0:natural:0",
+        "input_sha256": "b7777e879f2dbffadc9f38d8bbf9eff743d06b65b7746d956edfcae94b8ece24",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": -6.3774137397664195
+        },
+        "role": "development",
+        "snr_db": 5.485196684493677e-06,
+        "window_hashes": {
+          "flank": "35389897110989e34ceba7e9a86358568ac8de0ab1df23c74cd985c2423bca54"
+        }
+      },
+      {
+        "case": "reader-00-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 1.446879
+        },
+        "group": "reader-00",
+        "id": "reader-00-prompt-0:natural:-5",
+        "input_sha256": "2c219f71780e976c7d08b50467e0bdb9856d1d2d94d811539972a721e7583048",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": -6.096602429586233
+        },
+        "role": "development",
+        "snr_db": -4.999992526481337,
+        "window_hashes": {
+          "flank": "e6d7012cd0aec0b08f7c5aece511bf95d008c7cd5923bb5850b3e3c42123afcc"
+        }
+      },
+      {
+        "case": "reader-00-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-00",
+        "id": "reader-00-prompt-0:background:0",
+        "input_sha256": "80051840a35440184d61b9af37c98cfdb0cafbb329ce5ee476c677251a6f22f2",
+        "level_db": 0,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -6.8429913532113025
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "5ddcff9e7f0b4f26fc973fa9b5edbe618e8267fea3b880a1b151995821274029"
+        }
+      },
+      {
+        "case": "reader-00-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-00",
+        "id": "reader-00-prompt-0:background:-5",
+        "input_sha256": "df11a0d6b324657472c1895b164d0bed4906e55dfe7abbb98d40d110847e4290",
+        "level_db": -5,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -6.840950925767276
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "64cf6a39f7c73a01499f438a36dc50c16fb12f9e9b5569b4d5f376740ced5481"
+        }
+      },
+      {
+        "case": "reader-00-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 0.464752
+        },
+        "group": "reader-00",
+        "id": "reader-00-prompt-1:natural:0",
+        "input_sha256": "8b3e28944f2a1598d15333e8265061293167d1780e0822f36f4e485c16570075",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": -5.950495729353548
+        },
+        "role": "development",
+        "snr_db": -1.2655349266260711e-06,
+        "window_hashes": {
+          "flank": "c8c312bfc67f0f15b6fe0b3449394ce9cff4e1c6b778f9841d20a62959472871"
+        }
+      },
+      {
+        "case": "reader-00-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 0.544265
+        },
+        "group": "reader-00",
+        "id": "reader-00-prompt-1:natural:-5",
+        "input_sha256": "3064d7506db30d69996ca445f989a7e817411ca092d48d204dd07a656a30cfc8",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": -3.651414851970161
+        },
+        "role": "development",
+        "snr_db": -5.000007418423651,
+        "window_hashes": {
+          "flank": "71dec3cc8281c4cea2f8342c5e67f18493f5fe08917a5618468bb19202b8629f"
+        }
+      },
+      {
+        "case": "reader-00-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-00",
+        "id": "reader-00-prompt-1:background:0",
+        "input_sha256": "c1098ec0e0971d684884e980e750adf29824f4c7e62f21ad7b5262d87d89db7a",
+        "level_db": 0,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": -7.070485156221356
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "49a1fcf749b4320e23edf4e42a8d86a865d0b09e20b56bc9ba0fa7367460293d"
+        }
+      },
+      {
+        "case": "reader-00-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-00",
+        "id": "reader-00-prompt-1:background:-5",
+        "input_sha256": "86cece05d7dea878380068c28ddf035f2c8f4a5ad82ec8156e66354fc6331ce2",
+        "level_db": -5,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": -7.069617266264639
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "44e46c7e817f5371a801a7235cdb649e4adbde112e59451c2db421ade040b736"
+        }
+      },
+      {
+        "case": "reader-01-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 1.744243
+        },
+        "group": "reader-01",
+        "id": "reader-01-prompt-0:natural:0",
+        "input_sha256": "74f4a0e624aa3772a65b9755e10d5e7cca5f69e220763f020f7c3bec13967972",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": -6.283617069673329
+        },
+        "role": "development",
+        "snr_db": -6.046928400837449e-06,
+        "window_hashes": {
+          "flank": "069aed31d7671c19554d1aa30343b74e2251e4f7735e80356727802b8d4a8dfb"
+        }
+      },
+      {
+        "case": "reader-01-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 1.785594
+        },
+        "group": "reader-01",
+        "id": "reader-01-prompt-0:natural:-5",
+        "input_sha256": "67f71ff1d4394b7470526e88bd86b5a30a00cf77c4d249de3060efb464bdca37",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": -4.040787675861405
+        },
+        "role": "development",
+        "snr_db": -5.0000059171798,
+        "window_hashes": {
+          "flank": "3b7027507e255e3126b8c0ae70734ede8a23359d58e3d609df0fd4b9f89d6b10"
+        }
+      },
+      {
+        "case": "reader-01-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-01",
+        "id": "reader-01-prompt-0:background:0",
+        "input_sha256": "15d971a327d9c9604163f58f3af1deb5f0e4ba5cd62b5f3586b100d1a36ab654",
+        "level_db": 0,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -6.080060500115996
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "34b274cd649c54c83a1679fd647e9829fb8e6899e3559cf2b6cf156f12241e2a"
+        }
+      },
+      {
+        "case": "reader-01-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-01",
+        "id": "reader-01-prompt-0:background:-5",
+        "input_sha256": "baa0771dff126ac4d75857f2067c614f3ea5468f47c599c4ec4e8cfb65f4a436",
+        "level_db": -5,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -6.082275420394157
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "e501b10a9a13bbe7279abfba302cc31830f28060f78589fb203d080e1415c4e2"
+        }
+      },
+      {
+        "case": "reader-01-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 1.074829
+        },
+        "group": "reader-01",
+        "id": "reader-01-prompt-1:natural:0",
+        "input_sha256": "5fe2ee7095c38eae36c6671e442489640d2b44bc928ebbc1a1fafb9f541c646a",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": -5.836562207433299
+        },
+        "role": "development",
+        "snr_db": 6.617887878673063e-06,
+        "window_hashes": {
+          "flank": "626cdaa066e80d620c858580348875d0299f8420ec6e07a94cf8976fc2a8c66a"
+        }
+      },
+      {
+        "case": "reader-01-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 1.185793
+        },
+        "group": "reader-01",
+        "id": "reader-01-prompt-1:natural:-5",
+        "input_sha256": "c84b0232960c2726175aa395616b78840062dc4cc81786085a7e57933849fc85",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": -6.40009503057811
+        },
+        "role": "development",
+        "snr_db": -4.999987613737598,
+        "window_hashes": {
+          "flank": "65d633ffc6a9fafba2fa27df679464ac6323049d8d6a02b5774eb1a343779cd5"
+        }
+      },
+      {
+        "case": "reader-01-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-01",
+        "id": "reader-01-prompt-1:background:0",
+        "input_sha256": "759667e8cda054d5b360f3a355e31028e8a49222f6ed172ab643accacf08328e",
+        "level_db": 0,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": -6.98901602983982
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "00567a58f2030294fdfc32eed7dad14288400ebd1fffd3ef6f81c69b26e458bb"
+        }
+      },
+      {
+        "case": "reader-01-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-01",
+        "id": "reader-01-prompt-1:background:-5",
+        "input_sha256": "4c52f3bc1323a1108532733dbc58443ca00cdad1b310a128b14123c0de4ca43a",
+        "level_db": -5,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": -6.9900141314562605
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "da6c1cd64ae6a1bea569fe63684d705f5a2ac481157e86e4ab8de92dc70bb2ac"
+        }
+      },
+      {
+        "case": "reader-02-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 1.081497
+        },
+        "group": "reader-02",
+        "id": "reader-02-prompt-0:natural:0",
+        "input_sha256": "53a0c159f96aeb9f4482d74ea3a1094125bc139d2ac7cd4bded3ced41721a304",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": -3.526208793987206
+        },
+        "role": "development",
+        "snr_db": -9.375106892126326e-06,
+        "window_hashes": {
+          "flank": "132ba01efd4143240a767a64bfdd491476796cc9f2389be22c34aefd71a95451"
+        }
+      },
+      {
+        "case": "reader-02-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 1.344975
+        },
+        "group": "reader-02",
+        "id": "reader-02-prompt-0:natural:-5",
+        "input_sha256": "fc35fc892d9e0af854c5ba29f56a4d504edeb0ced3eb16578d2106a96779b0fd",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": -4.9239340398767855
+        },
+        "role": "development",
+        "snr_db": -5.000004496432471,
+        "window_hashes": {
+          "flank": "94bfaf6fcdbe598c833ef8db152842e18afc4de32588c3c9620eb4cc8f814e7a"
+        }
+      },
+      {
+        "case": "reader-02-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-02",
+        "id": "reader-02-prompt-0:background:0",
+        "input_sha256": "3e7a31c02a065f32e9cb77a9fe41e68d05df6e2da867a28cb6f9e42e88f1a46e",
+        "level_db": 0,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -7.066813409806473
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "e0eae042a5b95e51a846b9839ff4858cf831c39777ceafe1da1799b6cf3dd702"
+        }
+      },
+      {
+        "case": "reader-02-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-02",
+        "id": "reader-02-prompt-0:background:-5",
+        "input_sha256": "5a6f4d5bcc8507658c23aeae8aed9a39c9f86af2b3bb0b8e8a2fc91308ba88db",
+        "level_db": -5,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -7.066161130972315
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "7545201b5451bc914127d1c0b9dabac4645d29fbeb10037b2ecfaa6a02848457"
+        }
+      },
+      {
+        "case": "reader-02-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 1.275564
+        },
+        "group": "reader-02",
+        "id": "reader-02-prompt-1:natural:0",
+        "input_sha256": "e63ba3f6fe3bbeefdf55515e43bfd38a441c1d768033d7e84a651d06e2d96fce",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": 4.7431703686087765
+        },
+        "role": "development",
+        "snr_db": -3.939565124903176e-06,
+        "window_hashes": {
+          "flank": "498e4b5efc627a01ef780be5e5c06fea37ec93c042fd224db53095f9986df2fa"
+        }
+      },
+      {
+        "case": "reader-02-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 1.410688
+        },
+        "group": "reader-02",
+        "id": "reader-02-prompt-1:natural:-5",
+        "input_sha256": "bd63da43c286f88bac8f44a55d0a89f6dbc811cd7b3c69fce98ba0ba3a9248d2",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": 6.10857522783884
+        },
+        "role": "development",
+        "snr_db": -5.000003206048868,
+        "window_hashes": {
+          "flank": "fea60b434f869f1f4138939f465acd52c1626ef135679f52fb724fff88e81185"
+        }
+      },
+      {
+        "case": "reader-02-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-02",
+        "id": "reader-02-prompt-1:background:0",
+        "input_sha256": "f45fbff4ae8f3420d14b9c61d1537f01cc758d93309cdbedb07cc54607401ddd",
+        "level_db": 0,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": -6.723990451483721
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "938c27f9c0ad3aae24fa17908c46d1a378ac1b6241c9b81d9b1dccac8193d619"
+        }
+      },
+      {
+        "case": "reader-02-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-02",
+        "id": "reader-02-prompt-1:background:-5",
+        "input_sha256": "2229bf50f591a9ece05b209f9f65b97a6efca04891324565adddf71bf4c690e6",
+        "level_db": -5,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": -6.723148315198731
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "bbb710086eac870d26948bdc6622ac0ed8cc51086effb237288fc63c06e708e9"
+        }
+      },
+      {
+        "case": "reader-03-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 1.516946
+        },
+        "group": "reader-03",
+        "id": "reader-03-prompt-0:natural:0",
+        "input_sha256": "c7256d1cdc522bda973d5ac5f29731e2b41131109986dad6e88908a4c786d238",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": -6.0761671050209
+        },
+        "role": "development",
+        "snr_db": 4.4456561888460245e-06,
+        "window_hashes": {
+          "flank": "7429f5369dbadf2e3beb43ea518ab2652aa1902b855f2170a36792d1cde7c5b7"
+        }
+      },
+      {
+        "case": "reader-03-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 1.646417
+        },
+        "group": "reader-03",
+        "id": "reader-03-prompt-0:natural:-5",
+        "input_sha256": "55f8fa9446ca44d2983d6bbe58a66e118f1e7f73e800ca340e33a765700c99cc",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "left",
+        "responses": {
+          "flank": -6.559732429258136
+        },
+        "role": "development",
+        "snr_db": -4.999997697185882,
+        "window_hashes": {
+          "flank": "74ca2f5439464d5bf88bc78df9c4d5976d4eda52b819733596aee2e24dc845ac"
+        }
+      },
+      {
+        "case": "reader-03-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-03",
+        "id": "reader-03-prompt-0:background:0",
+        "input_sha256": "9eea0415775dd21f5f01733ccab37bad1a71dd9e071497be200a3359f478e853",
+        "level_db": 0,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -7.120709421328682
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "42349258db6495d93534205d22b8ce9e10a7e8785de4ab8559132ac4607b90b9"
+        }
+      },
+      {
+        "case": "reader-03-prompt-0",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-03",
+        "id": "reader-03-prompt-0:background:-5",
+        "input_sha256": "37d0058a7e368ad2896e02e9d5026ec40bb46eff9b2e3fae972223314d7a5d8a",
+        "level_db": -5,
+        "origin": "background",
+        "position": "left",
+        "responses": {
+          "flank": -7.120377567412539
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "5ccfa4e15594cc4dd9018ea51026d4a636d88af4975078659578bb88e5474b89"
+        }
+      },
+      {
+        "case": "reader-03-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 1.024458
+        },
+        "group": "reader-03",
+        "id": "reader-03-prompt-1:natural:0",
+        "input_sha256": "c6bd4f8441241861bbfbfa24c3ec28e78c6cc5c2959933e67990b4ade266831b",
+        "level_db": 0,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": -3.656656508900012
+        },
+        "role": "development",
+        "snr_db": 1.3477487091127399e-06,
+        "window_hashes": {
+          "flank": "c9c11e52c11312236698a74424cd7fc31c6859e1dcfbd8c9b30aea5dd429e5eb"
+        }
+      },
+      {
+        "case": "reader-03-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": 1.186725
+        },
+        "group": "reader-03",
+        "id": "reader-03-prompt-1:natural:-5",
+        "input_sha256": "df586bfad82532cdce298333c2ab7b03e8c18e87e6b37797becc8ce8c4e372e4",
+        "level_db": -5,
+        "origin": "natural",
+        "position": "right",
+        "responses": {
+          "flank": -2.3257446039842717
+        },
+        "role": "development",
+        "snr_db": -4.999994897038546,
+        "window_hashes": {
+          "flank": "ebb8f2f3594875a00d5da8f07f0d72ea554dc1d938b49a07e38d1857b7f8ce09"
+        }
+      },
+      {
+        "case": "reader-03-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-03",
+        "id": "reader-03-prompt-1:background:0",
+        "input_sha256": "80c6280e81eec7fb26889e6df87d6c256e45fbc7ae3f2c4989fb9cecb3e8a493",
+        "level_db": 0,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": -6.6103673077396135
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "ad9552b43f2c10a062979dc220e8b50b5e69ee4feb7be6880ca14e890424f836"
+        }
+      },
+      {
+        "case": "reader-03-prompt-1",
+        "fft_max_lsb": {
+          "flank": 0
+        },
+        "gain_db": {
+          "flank": null
+        },
+        "group": "reader-03",
+        "id": "reader-03-prompt-1:background:-5",
+        "input_sha256": "60f7f9c0eaeaf3c65686d07482759aaaedf1deb6337ba4c8c153f238b9ce6ff4",
+        "level_db": -5,
+        "origin": "background",
+        "position": "right",
+        "responses": {
+          "flank": -6.611025325164707
+        },
+        "role": "development",
+        "snr_db": null,
+        "window_hashes": {
+          "flank": "223971f689d41ab6ea5841e0bb66c693b28a735b7c7c8e259f3ad394aa14854a"
+        }
+      }
+    ]
+  },
+  "freeze": {
+    "air_archive_sha256": "d2fd52767505c402e8aed9299dcd046493c8254cfab2f769fcf480dc7c616a5f",
+    "air_license_sha256": "576e14bfd0215f50085d9980f8586f2cd3e69b0db43cbf1cb12aa49807406347",
+    "assessment_background_recording_sha256": {
+      "ES2005a": "59a785d1a0e5df2e878a6c4b05fd539f06b243b2ff345465387a65cd300b7279",
+      "ES2008a": "2382b3b7eea81ff6393555680c660f4b00be3f0971aef2a0a71197bb5109eae1"
+    },
+    "assessment_background_roster_sha256": "bc7105e2c0d40d6917acff0f17673a42c00b9de5c615ddbea09078d47ab9c9b0",
+    "code_sha256": "c0528f7c76a8dcc9f1e3fb6dc5f261a3a5e9e70f0545d2558100012f92dea18d",
+    "delivery_roster_sha256": "f29a79b585dfa582e4a11a9f744b06eec3df774b0f3b0ab2b7aae45cffd11911",
+    "development_background_roster_sha256": "397d24de8545e1023671435a61d0828ca0f8b7cb7b58c0829dfe1a89fb3bcd3f",
+    "excluded_source_rosters": {
+      "audio-matched-babble-v181/private-plan.json": "8832372e8884c03e8043424aebd3694df3346e0910e5d64bd4cc04eae39a1bb3",
+      "audio-pacc-false-alarm-v177/authored/output/result.json": "6874851aac1a1290577add62fb80683ca005665c0058094e6a2e33bc212d0716",
+      "audio-pacc-false-alarm-v177/authored/profile.json": "5a9c4e5957895492c4af301c048125261d7352c89a238a5a781f904581c8c28f",
+      "audio-pacc-false-alarm-v177/freeze.json": "eb36498738dcb9d95189ac6a7eeaf3c8c3938c867223ea100249a8a18bfc76b8",
+      "audio-pacc-p-independent-sample-v176/bind-00/output/private-observations.json": "5f1eaf259417a36b1aca778fe4b6cb2042db2c32cd03a074eca631b9215e245b",
+      "audio-pacc-p-independent-sample-v176/bind-00/output/result.json": "8dc8e26f1d3a44691a77b6282df5e0c4a5a9bb17a8e193aa07d2931fa8f96525",
+      "audio-pacc-p-independent-sample-v176/bind-00/profile.json": "5d6fa73805c7a414a1f08e99137f850f389c0895e9dd50c49ad163080a6f6ad3",
+      "audio-pacc-p-independent-sample-v176/freeze.json": "e9aed0644d698d6e0fcd239520984565b1ed552e43d4666594a8bdc8daf2a073",
+      "audio-pacc-p-independent-sample-v176/private-plan.json": "d2da3174baf60a12f072dc73fa725b80409de27464529d595c0da136bfedbc48",
+      "audio-v9/source-plan.json": "f3d7a7f2e20a9d2aa9092c371f5af4d2a05ed9172e4652677049a8286f61605f"
+    },
+    "levels_db": [
+      0,
+      -5
+    ],
+    "method": {
+      "fresh": "Compare the frozen routes on two matched VCTK prompts per reader, with four readers excluded from the existing ODSS, PhonemeDF, serving, matched-babble, and PACC source IDs. Render the complete native genuine and VITS utterance, matched at publisher ID and transcript, in the Aachen meeting room. Alternate lateral paths and reuse each exact competing-speech segment and gain across origins. Take the earliest four nonoverlapping eligible six-second clips per AMI session, with at least 3.9 seconds of annotated speech, 350 ms of simultaneous speech, and 300 ms of annotated speech in each background-reference flank. Assess 0 and -5 dB, room-only and masker-only controls.",
+      "point": "Keep the existing mono/WPE/frontal operating points from the published ODSS development role. Fit the flank projection point as the maximum admitted flank score across genuine mixed speech and isolated competing-speech controls from that same development role. Leave all mono flags in place. Add a flag only when the previous selective cleanup rule would add one and the flank score exceeds its independently fitted point.",
+      "projection": "Use the existing square-root Hann transform. Estimate each complex mid/side regression coefficient from frames wholly contained within 0\u20131 and 5\u20136 seconds. Use the same diagonal floor, cap, sub-150 Hz exclusion, subtraction amount and output-availability checks as the existing whole-mixture frontal view. Apply frozen coefficients to all frames and reconstruct at the original sample clock.",
+      "scope": "The whole foreground utterance is centered within the known 1.5\u20134.5-second window of a six-second stereo recording. The two outer one-second flanks are expected to carry background only. This geometry is part of the test design. The proposed check is inapplicable when there are no usable background-reference flanks."
+    },
+    "odss_catalog_sha256": "497157e4b1dc4324cc2dcce0565905dc76e654e318fb8f84d5c6a5420bf1faaa",
+    "odss_receipt_sha256": "b664e009c7c62dc890a4817358288d143874257e1d66c0fd250edafea9e41f4a",
+    "odss_transcripts_sha256": "3edf8a4978111f696bfa896f420e5d526049e6cdc21693b30ae6108c16eb32f7",
+    "phonemedf_receipt_sha256": "d77ac7521450dd708e4c64a61877a966e888ae32fb0a9fc102fae12fabe3ce8f",
+    "primary_points": {
+      "frontal": {
+        "one": 2.659480261663396,
+        "zero": 4.873891025785238
+      },
+      "mono": {
+        "one": 3.181390972200118,
+        "zero": 6.398707422838692
+      },
+      "wpe": {
+        "one": 4.346269172327075,
+        "zero": 5.664545957647945
+      }
+    },
+    "room_code_sha256": "352729f2f576e1233e3c70e8dbd35715118bdbba889c55b6b3fe157a65385734",
+    "room_responses": {
+      "front": {
+        "distance_cm": 225,
+        "impulse_sha256": "e76c3f875cc9a889a92a18019e3cdf16553b758657b16439794ded3c8c4702f9",
+        "members": [
+          {
+            "name": "AIR_1_4/air_binaural_meeting_1_1_4.mat",
+            "sha256": "7c62fcfe8abd426a03f54d9ff23e2ba0b8eb9aa31c06046f386dff90a17a3299"
+          },
+          {
+            "name": "AIR_1_4/air_binaural_meeting_0_1_4.mat",
+            "sha256": "655d4cda7d632aa5033f9a0d7beb024602fef4db47e7171370ed10493c431e18"
+          }
+        ],
+        "peaks_at_16k": [
+          119,
+          119
+        ]
+      },
+      "left": {
+        "distance_cm": 145,
+        "impulse_sha256": "4ba5b5652dd7339432a47e28fa9fb3307d2d8b1b44c74bf4e675ffbcaaa281d4",
+        "members": [
+          {
+            "name": "AIR_1_4/air_binaural_meeting_1_1_1.mat",
+            "sha256": "ac47e496c5bdc3aa1c5c885bca772f77b0a90a05dab0f2b863cf134236415bfe"
+          },
+          {
+            "name": "AIR_1_4/air_binaural_meeting_0_1_1.mat",
+            "sha256": "799792dfd4ecd3c8243c9d6ede33c573ae61d0aa736e36e2240b9513a6777e1a"
+          }
+        ],
+        "peaks_at_16k": [
+          86,
+          75
+        ]
+      },
+      "right": {
+        "distance_cm": 170,
+        "impulse_sha256": "d3dd6b890a0916af4a7302eb9183bcb205408a4c693ee845c8871a35c78c937d",
+        "members": [
+          {
+            "name": "AIR_1_4/air_binaural_meeting_1_1_2.mat",
+            "sha256": "195f7122e2bd0674132cc4c70fbc13e460421b7a9abe7cf09d4e523cdebcf7fa"
+          },
+          {
+            "name": "AIR_1_4/air_binaural_meeting_0_1_2.mat",
+            "sha256": "7eba1ae5f4e6b41c8cff7162e64e4f12baceea3b423234c3f257201167148fd1"
+          }
+        ],
+        "peaks_at_16k": [
+          88,
+          100
+        ]
+      }
+    },
+    "schema": "chipmunk.audio-flank-background/1",
+    "source_roster_sha256": "276813a18bf55c1cb92c400326c5253ff5e613b56beb972b99427f86de13ef86",
+    "speech_assets": {
+      "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+      "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+    },
+    "window_samples": [
+      24000,
+      72000
+    ]
+  },
+  "operating_point": {
+    "development_sha256": "e6c8e721012015de4da1e06c23733b81081eb5e593ddfe65a976a8e18fe4a038",
+    "flank_point": 6.10857522783884,
+    "freeze_sha256": "b48b483824f6bbe87ed161cdb3cd25ec3336cae719551dd9420d162a2e340b57"
+  }
+}

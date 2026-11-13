@@ -31,6 +31,7 @@ from app.evidence import (
     document_passage_position,
     document_repeat,
     document_scope,
+    document_tracked_changes,
     document_unselected_responses,
     email_alternatives,
 )
@@ -329,6 +330,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_paragraph_priority.validate(document)
         document_passage_coverage.validate(document)
         document_passage_position.validate(document)
+        document_tracked_changes.validate(document, document["source"].get(document_tracked_changes.COMMITMENT))
         document_unselected_responses.validate(document)
         document_email_contexts.validate(document)
         document_scope.validate_checkpoint_agreement(document)
@@ -508,6 +510,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 "omitted_windows": max(0, len(candidates) - len(selected)), "limitations": []}
     if partially_checked := decoded["meta"].get("partially_checked_pages"):
         document["coverage"]["partially_checked_pages"] = partially_checked
+    if tracked_commitment := document_tracked_changes.from_result(result):
+        document["source"][document_tracked_changes.COMMITMENT] = tracked_commitment
+        document["coverage"][document_tracked_changes.KEY] = decoded.get(document_tracked_changes.KEY)
+        document_tracked_changes.validate(document, tracked_commitment)
     if alternative_review := email_alternatives.result_review(result):
         document["coverage"][email_alternatives.KEY] = alternative_review
         email_alternatives.validate_set(document, canonical_hash(alternative_review))
@@ -685,6 +691,8 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_unselected_responses.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_passage_position.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_email_contexts.verify_source(document, decoded["text"], decoded["source_map"], result=result)
+            document_tracked_changes.verify_source(document, decoded.get(document_tracked_changes.KEY),
+                                                  expected=document_tracked_changes.from_result(result))
             if document_native_locations.KEY in document["coverage"]:
                 for packet in document["packets"]:
                     if packet["anchors"] != _inspection_anchors(decoded["source_map"], packet["inspection_scope"], len(decoded["text"])):

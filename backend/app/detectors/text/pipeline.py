@@ -490,7 +490,8 @@ def extract_within(path: Path, ext: str, *, native_pdf_only: bool = False) -> Do
         base = ValueError if failed.get("value_error") else RuntimeError
         raise type(str(failed.get("type") or "ExtractionError"), (base,), {})(str(failed.get("message") or ""))
     return Document(out["text"], [(int(a), int(b)) for a, b in out["paragraphs"]], dict(out["meta"]),
-                    list(out.get("source_map") or []), dict(out.get("source_rasters") or {}))
+                    list(out.get("source_map") or []), dict(out.get("source_rasters") or {}),
+                    word_review=out.get("word_review"))
 
 
 def segment_command() -> list[str]:

@@ -133,6 +133,56 @@ added zero strict locations. This readout covers three of five planned
 batches. One interrupted batch recovered 17 saved rows and one already-paid
 job before submitting its remaining ten deliveries. [Three-batch receipt](evaluation-panels/writing-revision-worker-held-batches0-2-2026-11-13.json)
 
+## Complete held evaluation
+
+All five batches completed. The 20 held reports supplied 140 deliveries,
+comprising 20 originals, 105 changed versions and 15 edited deliveries
+with byte-identical text. All 140 document conclusions were inconclusive.
+Each byte-identical delivery returned its matched original's selected
+positions and document conclusion. Including 16 fit controls, all 156
+deliveries completed all three configured checks after simulated payment.
+No job ran before payment. The held worker published 795 inspection packets,
+446 of which had no primary-classifier support. The three specialized
+writing reviews had no applicable input in this single-paragraph panel.
+
+| Inspection method | Genuine reports selected | Changed versions with any half-covered region | Strict changed-version locations |
+| --- | ---: | ---: | ---: |
+| Prior primary proxy | 17/20 | 83/105 | 4/105 |
+| Full worker, displayed packets | 20/20 | 92/105 | 4/105 |
+| Full worker packets with primary support | 17/20 | 77/105 | 3/105 |
+| Full worker packets with primary support and an exact ratio reduction | 12/20 | 48/105 | 0/105 |
+| Genuine-fit absolute response | 2/20 | 10/105 | 0/105 |
+| Genuine-fit within-document response | 3/20 | 13/105 | 0/105 |
+| Genuine-fit within-document agreement | 6/20 | 12/105 | 0/105 |
+
+Full worker marks included 20,681 non-whitespace characters in untouched
+originals. The proxy marked 17,429. Among changed deliveries, 34.0% of
+characters marked by the worker fell inside a publisher edit span, compared
+with 39.3% for the proxy. All four strict worker locations came from the
+earliest polishing stage. Strict counts were 2/58 for changed Gemini
+deliveries and 2/47 for changed Qwen deliveries. The fitted candidates
+added zero strict locations and missed all four of the worker's. Keep them
+outside the app's evidence selector and combined assessment.
+
+Using publisher annotations to choose the best possible interval, the
+existing three-sentence inputs could meet the strict rule on 23/105 changed
+deliveries. Allowing any contiguous sentence range increased that upper
+bound to 100/105. These are limits of the candidate geometry calculated
+from known edit labels. The counts do not measure a detector's ability
+to find those ranges. Evaluate longer regions on fresh works with genuine
+editorial controls before using them as automatic findings. The
+[change-point study](https://arxiv.org/html/2609.33787v1) tests one way to
+identify sustained transitions in a sequence of local responses.
+
+The completed [worker ledger](evaluation-panels/writing-revision-worker-complete-2026-11-13.json)
+contains response values, source ranges and commitments, with no source
+text or test-account credentials. A separate native replay rebuilt all
+156 pinned publisher deliveries and verified 3,042 source and input
+positions. A Standard PDF generated from one held analysis matched six
+source ranges in the authenticated API and JSON export. The PDF described
+the individual responses without publishing their selection cutoffs or
+checkpoint names.
+
 ## Replay
 
 ```sh
@@ -144,6 +194,9 @@ PYTHONPATH=backend python3 -B -S -m scripts.review_writing_revision_worker_trans
   docs/evaluation-panels/writing-revision-trajectory-2026-11-13.json
 PYTHONPATH=backend python3 -B -S -m scripts.review_writing_revision_worker_transfer review \
   docs/evaluation-panels/writing-revision-worker-held-batches0-2-2026-11-13.json \
+  docs/evaluation-panels/writing-revision-trajectory-2026-11-13.json
+PYTHONPATH=backend python3 -B -S -m scripts.review_writing_revision_worker_transfer review \
+  docs/evaluation-panels/writing-revision-worker-complete-2026-11-13.json \
   docs/evaluation-panels/writing-revision-trajectory-2026-11-13.json
 ```
 
@@ -171,3 +224,10 @@ reader accepts only consecutive completed batches and uses the prior
 ledger's recorded native source overlaps. It checks the fit arithmetic,
 identical-input behavior, and packet metrics from scalar and source-range
 records.
+
+For the geometry upper bound, the same reader's `metrics` accepts half-open
+sentence ranges. For each changed row, test each `[max(0, i-1), min(i+2, n))`
+range, where `i` is the sentence index and `n` is its total sentence count.
+Count the row once if any single range yields `strict_location`. Repeat with
+every `[start, end)` for `0 <= start < end <= n` to obtain the second bound.
+Exclude `identical_operation_ids` and genuine originals from both counts.

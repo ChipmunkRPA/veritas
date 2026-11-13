@@ -1,0 +1,238 @@
+{
+  "design": {
+    "admission": "At least eight exact-useful sharp 128-pixel regions for each odd phase on ten sources; no even-copy or ordinary highlights; every resized, 8-bit or alpha view declines. Report all smaller and feathered strata separately.",
+    "confidence_weight": 0,
+    "controls": "Untouched, globally odd-offset crops, global affine gain, local fractional interpolation, image-wide resize and re-encode, 8-bit and alpha PNG. Keep original-size camera pixels until lossless PNG transport.",
+    "eligible": "Static noninterlaced 2048x1536 RGB PNG, 16 bits per channel, without rotation, color transform or transparency metadata. Decode unchanged and measure repeating bilinear red/blue closure from two independent folds of submitted pixels.",
+    "fixed_prior": "Unchanged 32-pixel cells, proposal sizes, phase-shift measure and 0.25 operating point from the earlier RAW experiment. No sizing or cutoff changes after freezing. Score exact transmitted PNG bytes.",
+    "inputs": "Ten distinct held camera models, CC0 files verified by publisher SHA-256, excluding previous models. Edited panel includes exact 32-, 64- and 128-pixel square support, three odd phase shifts and even-aligned copy, for both hard and feathered boundaries.",
+    "useful": "Changed-pixel IoU at least 0.30 and recall at least 0.50."
+  },
+  "exact_held_replays": 310,
+  "freeze_sha256": "60b83bb1c5ab1e431f72ebe890489459c50383cda7552aaf038620bd93c07e0a",
+  "held": {
+    "admission": true,
+    "ordinary_highlights": 0,
+    "roles": {
+      "128_both_odd_feather": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 9,
+        "ungated_useful": 9,
+        "useful": 9
+      },
+      "128_both_odd_sharp": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 9,
+        "ungated_useful": 9,
+        "useful": 9
+      },
+      "128_even_feather": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "128_even_sharp": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "128_x_odd_feather": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 9,
+        "ungated_useful": 9,
+        "useful": 9
+      },
+      "128_x_odd_sharp": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 9,
+        "ungated_useful": 9,
+        "useful": 9
+      },
+      "128_y_odd_feather": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 9,
+        "ungated_useful": 9,
+        "useful": 9
+      },
+      "128_y_odd_sharp": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 9,
+        "ungated_useful": 9,
+        "useful": 9
+      },
+      "32_both_odd_feather": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "32_both_odd_sharp": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "32_even_feather": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "32_even_sharp": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "32_x_odd_feather": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "32_x_odd_sharp": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "32_y_odd_feather": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "32_y_odd_sharp": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 1,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "64_both_odd_feather": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 4,
+        "ungated_useful": 4,
+        "useful": 4
+      },
+      "64_both_odd_sharp": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 7,
+        "ungated_useful": 7,
+        "useful": 7
+      },
+      "64_even_feather": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "64_even_sharp": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "64_x_odd_feather": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 1,
+        "ungated_useful": 7,
+        "useful": 1
+      },
+      "64_x_odd_sharp": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 6,
+        "ungated_useful": 9,
+        "useful": 6
+      },
+      "64_y_odd_feather": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 6,
+        "useful": 0
+      },
+      "64_y_odd_sharp": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 6,
+        "ungated_useful": 9,
+        "useful": 6
+      },
+      "alpha": {
+        "files": 10,
+        "unsupported_png": 10
+      },
+      "crop_odd": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "eight_bit": {
+        "files": 10,
+        "unsupported_png": 10
+      },
+      "global_gain": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "local_fractional": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "original": {
+        "assessed": 10,
+        "files": 10,
+        "flags": 0,
+        "ungated_useful": 0,
+        "useful": 0
+      },
+      "resize": {
+        "files": 10,
+        "no_repeatable_stencil": 10
+      }
+    }
+  },
+  "held_sha256": "08ecfb4544b55abe763248bef9213ec2cb769b113fb152cb8e431ab7200e7a2c",
+  "held_sources": 10,
+  "numpy": "2.2.6",
+  "opencv": "5.0.0",
+  "phase_implementation_sha256": "223607cf9d0b59eac4ff496f1c59afd5756afa39afbc301e3f06c6760da0c2e9",
+  "point": 0.25,
+  "prior_receipt_sha256": "c93e5179177c4b0b24e520b6bd56978017aee8a38c16c402681869e089ab6c19",
+  "roster_sha256": "21963fa357e5495db2a4e64cdd14dca80db2996bdc548a794a93eb87642fd4ad",
+  "runner_sha256": "85e9ae3b5a69b97be2c3d913bbfc20ed02cccc80aa26571200669e59980f9217",
+  "schema": "chipmunk.image-native-cfa-png-transfer/1",
+  "wheel_sha256": "60e4c82d2dbce6ae20f95d0894bcacf355d32b783cd017c374c800dfc4a0d9b3"
+}

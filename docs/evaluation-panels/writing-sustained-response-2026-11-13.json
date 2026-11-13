@@ -1,0 +1,3631 @@
+{
+  "decisions": {
+    "classifier_plateau": {
+      "additional_strict_families": [
+        "qwen3-8b"
+      ],
+      "additional_strict_source_groups": 1,
+      "genuine_flags": 5
+    },
+    "two_reading_plateau": {
+      "additional_strict_families": [],
+      "additional_strict_source_groups": 0,
+      "genuine_flags": 1
+    }
+  },
+  "held": [
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.a39c225ce2370p+0",
+          "proposal": [
+            10,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.7208e4f2ab614p+0",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 0,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.f0a5061644ce2p+0",
+          "proposal": [
+            10,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.7b28f89f01d6ap+0",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 1,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.4c43332945f0ap+0",
+          "proposal": [
+            10,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.4c43332945f0ap+0",
+          "proposal": [
+            10,
+            13
+          ],
+          "source_range": null
+        }
+      },
+      "row": 2,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.c38a213d77c45p+0",
+          "proposal": [
+            10,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.206cc1cc65a29p+0",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 3,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.5f9a23f1e0674p+0",
+          "proposal": [
+            10,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.2e4cde37a0107p+0",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 4,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.6eaa5e822e6a5p+0",
+          "proposal": [
+            9,
+            14
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.51bd23c10d613p+0",
+          "proposal": [
+            9,
+            14
+          ],
+          "source_range": null
+        }
+      },
+      "row": 5,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.73ab3ea917562p+0",
+          "proposal": [
+            10,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.24efefb948341p+0",
+          "proposal": [
+            7,
+            14
+          ],
+          "source_range": null
+        }
+      },
+      "row": 6,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.fb3a067ab6afap-2",
+          "proposal": [
+            7,
+            10
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 7,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.e6921810f7cbfp-2",
+          "proposal": [
+            7,
+            10
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 8,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.7a21f63054c5bp-1",
+          "proposal": [
+            7,
+            10
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.27aa8fa2fc836p-1",
+          "proposal": [
+            7,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 9,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.974e5d63d9b23p-1",
+          "proposal": [
+            7,
+            12
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.974e5d63d9b23p-1",
+          "proposal": [
+            7,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 10,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.566ddb6d4c61dp+1",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.18d0ad4e0193fp+0",
+          "proposal": [
+            2,
+            6
+          ],
+          "source_range": null
+        }
+      },
+      "row": 11,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.566ddb6d4c61dp+1",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.18d0ad4e0193fp+0",
+          "proposal": [
+            2,
+            6
+          ],
+          "source_range": null
+        }
+      },
+      "row": 12,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.03947a6c615cbp+0",
+          "proposal": [
+            7,
+            10
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 13,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.2a2870863b8cep+1",
+          "proposal": [
+            10,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 111,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 14,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.3ec16ccfd2d8ep+1",
+          "proposal": [
+            10,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 111,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 15,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.60ff96bfe9f65p+1",
+          "proposal": [
+            10,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.2c23617a7fa24p-1",
+          "proposal": [
+            10,
+            16
+          ],
+          "source_range": null
+        }
+      },
+      "row": 16,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.20856c2034d80p+1",
+          "proposal": [
+            9,
+            17
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 81,
+          "maximum": "0x1.44ab15363f55ep+0",
+          "proposal": [
+            11,
+            17
+          ],
+          "source_range": null
+        }
+      },
+      "row": 17,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.2a2870863b8cep+1",
+          "proposal": [
+            10,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 111,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 18,
+      "stratum": "byte_identical"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.8a1e4b768a11cp+1",
+          "proposal": [
+            10,
+            13
+          ],
+          "source_range": [
+            1640,
+            2161
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.2a6db299b31e8p+1",
+          "proposal": [
+            2,
+            6
+          ],
+          "source_range": [
+            210,
+            852
+          ]
+        }
+      },
+      "row": 19,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.f79fbeaba9d06p+0",
+          "proposal": [
+            9,
+            14
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 81,
+          "maximum": "0x1.e349a2d47fe54p-1",
+          "proposal": [
+            9,
+            15
+          ],
+          "source_range": null
+        }
+      },
+      "row": 20,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.c0305232573ecp+0",
+          "proposal": [
+            5,
+            11
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.26b96637cfc97p+0",
+          "proposal": [
+            5,
+            13
+          ],
+          "source_range": null
+        }
+      },
+      "row": 21,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.b94a7049b8280p+0",
+          "proposal": [
+            5,
+            11
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.283824a4ce03bp+0",
+          "proposal": [
+            5,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 22,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.14017fef66f99p+1",
+          "proposal": [
+            5,
+            11
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.65f054ae8fc4ap+0",
+          "proposal": [
+            5,
+            8
+          ],
+          "source_range": null
+        }
+      },
+      "row": 23,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.2348a8f27d611p+1",
+          "proposal": [
+            5,
+            12
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.7a1253e40a606p+0",
+          "proposal": [
+            5,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 24,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.c0305232573ecp+0",
+          "proposal": [
+            5,
+            11
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.26b96637cfc97p+0",
+          "proposal": [
+            5,
+            13
+          ],
+          "source_range": null
+        }
+      },
+      "row": 25,
+      "stratum": "byte_identical"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.dd0aeb393307dp+0",
+          "proposal": [
+            5,
+            11
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.40a3d58636754p+0",
+          "proposal": [
+            5,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 26,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.dd0aeb393307dp+0",
+          "proposal": [
+            5,
+            11
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.69c6a52652646p+0",
+          "proposal": [
+            5,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 27,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.47bc3f3b819f4p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 24,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 28,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.47bc3f3b819f4p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 24,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 29,
+      "stratum": "byte_identical"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.6524f715421e8p+0",
+          "proposal": [
+            3,
+            7
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 24,
+          "maximum": "0x1.15f7c359f39dap+0",
+          "proposal": [
+            4,
+            7
+          ],
+          "source_range": null
+        }
+      },
+      "row": 30,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.2d770140d12b3p+1",
+          "proposal": [
+            5,
+            8
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 24,
+          "maximum": "0x1.fc9e49731a440p+0",
+          "proposal": [
+            5,
+            8
+          ],
+          "source_range": [
+            713,
+            1362
+          ]
+        }
+      },
+      "row": 31,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.47bc3f3b819f4p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 24,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 32,
+      "stratum": "byte_identical"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.0879da662cf1ep+1",
+          "proposal": [
+            5,
+            8
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 24,
+          "maximum": "0x1.9a4942c3cd779p+0",
+          "proposal": [
+            4,
+            8
+          ],
+          "source_range": [
+            566,
+            1411
+          ]
+        }
+      },
+      "row": 33,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.8abcf2148f544p+0",
+          "proposal": [
+            5,
+            9
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 24,
+          "maximum": "0x1.5782d64a48b09p+0",
+          "proposal": [
+            3,
+            8
+          ],
+          "source_range": null
+        }
+      },
+      "row": 34,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.0b8df3f76a8e1p+1",
+          "proposal": [
+            11,
+            19
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 22,
+          "maximum": "0x1.88160b4209ef0p-3",
+          "proposal": [
+            15,
+            18
+          ],
+          "source_range": null
+        }
+      },
+      "row": 35,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.ff4be8fbaca76p+0",
+          "proposal": [
+            11,
+            19
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 22,
+          "maximum": "0x1.63a83cc1af780p-3",
+          "proposal": [
+            15,
+            18
+          ],
+          "source_range": null
+        }
+      },
+      "row": 36,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.751410663515ep+1",
+          "proposal": [
+            11,
+            18
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 22,
+          "maximum": "0x1.3c8d4d6ccf98cp-2",
+          "proposal": [
+            3,
+            6
+          ],
+          "source_range": null
+        }
+      },
+      "row": 37,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.239cc13451c3ap+1",
+          "proposal": [
+            11,
+            19
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 22,
+          "maximum": "0x1.fdd849d9d4f79p-4",
+          "proposal": [
+            3,
+            6
+          ],
+          "source_range": null
+        }
+      },
+      "row": 38,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.0b8df3f76a8e1p+1",
+          "proposal": [
+            11,
+            19
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 22,
+          "maximum": "0x1.88160b4209ef0p-3",
+          "proposal": [
+            15,
+            18
+          ],
+          "source_range": null
+        }
+      },
+      "row": 39,
+      "stratum": "byte_identical"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.6df88b00fa15bp+1",
+          "proposal": [
+            11,
+            19
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 22,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 40,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 111,
+          "maximum": "0x1.400faa8ba5dfdp+1",
+          "proposal": [
+            11,
+            19
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 69,
+          "maximum": "0x1.5a0e7d4cca6a4p-1",
+          "proposal": [
+            12,
+            18
+          ],
+          "source_range": null
+        }
+      },
+      "row": 41,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 27,
+          "maximum": "0x1.89a689caaa098p+0",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 27,
+          "maximum": "0x1.1f6d289fd1813p-1",
+          "proposal": [
+            2,
+            9
+          ],
+          "source_range": null
+        }
+      },
+      "row": 42,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 27,
+          "maximum": "0x1.39e27e6f09330p-1",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 27,
+          "maximum": "0x1.2a15dd111aec6p-1",
+          "proposal": [
+            2,
+            8
+          ],
+          "source_range": null
+        }
+      },
+      "row": 43,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 27,
+          "maximum": "0x1.2f86d17e00fb2p+1",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 27,
+          "maximum": "0x1.6a9bd586bf34dp-4",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": null
+        }
+      },
+      "row": 44,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 33,
+          "maximum": "0x1.12ff3ca894680p+2",
+          "proposal": [
+            2,
+            9
+          ],
+          "source_range": [
+            202,
+            1290
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 33,
+          "maximum": "0x1.0c90b1808e6dep+0",
+          "proposal": [
+            4,
+            10
+          ],
+          "source_range": null
+        }
+      },
+      "row": 45,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 27,
+          "maximum": "0x1.0e09c7e62d728p+0",
+          "proposal": [
+            2,
+            9
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 27,
+          "maximum": "0x1.0e09c7e62d728p+0",
+          "proposal": [
+            2,
+            9
+          ],
+          "source_range": null
+        }
+      },
+      "row": 46,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 27,
+          "maximum": "0x1.0e09c7e62d728p+0",
+          "proposal": [
+            2,
+            9
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 27,
+          "maximum": "0x1.0e09c7e62d728p+0",
+          "proposal": [
+            2,
+            9
+          ],
+          "source_range": null
+        }
+      },
+      "row": 47,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 27,
+          "maximum": "0x1.b14e1c0b51142p+0",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 27,
+          "maximum": "0x1.e280170a9bf90p-3",
+          "proposal": [
+            6,
+            10
+          ],
+          "source_range": null
+        }
+      },
+      "row": 48,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 105,
+          "maximum": "0x1.3f97eddd3804ap+0",
+          "proposal": [
+            13,
+            16
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 69,
+          "maximum": "0x1.702b58f0ff810p-2",
+          "proposal": [
+            18,
+            21
+          ],
+          "source_range": null
+        }
+      },
+      "row": 49,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 105,
+          "maximum": "0x1.0778bab2bd23bp+0",
+          "proposal": [
+            13,
+            16
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 69,
+          "maximum": "0x1.8dc018216db08p-3",
+          "proposal": [
+            18,
+            21
+          ],
+          "source_range": null
+        }
+      },
+      "row": 50,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 105,
+          "maximum": "0x1.0599697752832p+1",
+          "proposal": [
+            13,
+            16
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 69,
+          "maximum": "0x1.469666032d0b8p-1",
+          "proposal": [
+            18,
+            21
+          ],
+          "source_range": null
+        }
+      },
+      "row": 51,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 105,
+          "maximum": "0x1.bc53b8a42e58bp+0",
+          "proposal": [
+            18,
+            22
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 69,
+          "maximum": "0x1.bb86c187acf7cp+0",
+          "proposal": [
+            19,
+            22
+          ],
+          "source_range": [
+            2605,
+            3073
+          ]
+        }
+      },
+      "row": 52,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 105,
+          "maximum": "0x1.3f97eddd3804ap+0",
+          "proposal": [
+            13,
+            16
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 69,
+          "maximum": "0x1.702b58f0ff810p-2",
+          "proposal": [
+            18,
+            21
+          ],
+          "source_range": null
+        }
+      },
+      "row": 53,
+      "stratum": "byte_identical"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 105,
+          "maximum": "0x1.3f97eddd3804ap+0",
+          "proposal": [
+            13,
+            16
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 69,
+          "maximum": "0x1.702b58f0ff810p-2",
+          "proposal": [
+            18,
+            21
+          ],
+          "source_range": null
+        }
+      },
+      "row": 54,
+      "stratum": "byte_identical"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 105,
+          "maximum": "0x1.051ba5f5877a2p+1",
+          "proposal": [
+            13,
+            16
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 69,
+          "maximum": "0x1.1e4768d287e8cp-1",
+          "proposal": [
+            8,
+            11
+          ],
+          "source_range": null
+        }
+      },
+      "row": 55,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.67cd5015b4a6ap+0",
+          "proposal": [
+            3,
+            6
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.c0ff4f6cc1f7cp-2",
+          "proposal": [
+            2,
+            6
+          ],
+          "source_range": null
+        }
+      },
+      "row": 56,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.baf934e6d9facp+0",
+          "proposal": [
+            3,
+            6
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.583ccbb6e0430p-2",
+          "proposal": [
+            4,
+            7
+          ],
+          "source_range": null
+        }
+      },
+      "row": 57,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.f4e4e21a833e7p+0",
+          "proposal": [
+            5,
+            8
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 58,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.f237d1aad38d4p+0",
+          "proposal": [
+            3,
+            6
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.ce1ed7297cd3fp-1",
+          "proposal": [
+            2,
+            6
+          ],
+          "source_range": null
+        }
+      },
+      "row": 59,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.67cd5015b4a6ap+0",
+          "proposal": [
+            3,
+            6
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.c0ff4f6cc1f7cp-2",
+          "proposal": [
+            2,
+            6
+          ],
+          "source_range": null
+        }
+      },
+      "row": 60,
+      "stratum": "byte_identical"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.9c7c45410e97ep+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.f239b330c512dp-2",
+          "proposal": [
+            2,
+            6
+          ],
+          "source_range": null
+        }
+      },
+      "row": 61,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.ce8ea4cee69fap+0",
+          "proposal": [
+            3,
+            6
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.10e84a1e4c662p+0",
+          "proposal": [
+            2,
+            6
+          ],
+          "source_range": null
+        }
+      },
+      "row": 62,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 57,
+          "maximum": "0x1.16c63d3315a5ep+3",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": [
+            1236,
+            1834
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 15,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 63,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 57,
+          "maximum": "0x1.c0e812a1099cfp+2",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": [
+            1236,
+            1836
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 15,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 64,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 57,
+          "maximum": "0x1.1cbfcf5497bfap+2",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": [
+            1310,
+            1923
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 15,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 65,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 57,
+          "maximum": "0x1.6a30f5642acb9p+2",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": [
+            1005,
+            1563
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 15,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 66,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 57,
+          "maximum": "0x1.1899e9055c02ep+3",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": [
+            1246,
+            1851
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 15,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 67,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 57,
+          "maximum": "0x1.da3314de4d086p+2",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": [
+            1256,
+            1851
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 15,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 68,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 57,
+          "maximum": "0x1.af36dc55ec9bep+2",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": [
+            1147,
+            1642
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 15,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 69,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 39,
+          "maximum": "0x1.8748eff3eb7e2p-1",
+          "proposal": [
+            5,
+            8
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 10,
+          "maximum": "0x1.06f038e3a6138p-1",
+          "proposal": [
+            4,
+            8
+          ],
+          "source_range": null
+        }
+      },
+      "row": 70,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 39,
+          "maximum": "0x1.8748eff3eb7e2p-1",
+          "proposal": [
+            5,
+            8
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 10,
+          "maximum": "0x1.06f038e3a6138p-1",
+          "proposal": [
+            4,
+            8
+          ],
+          "source_range": null
+        }
+      },
+      "row": 71,
+      "stratum": "byte_identical"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 39,
+          "maximum": "0x1.3dffd4912950dp-1",
+          "proposal": [
+            4,
+            7
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 10,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 72,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 39,
+          "maximum": "0x1.a85fbe8bab2b4p+0",
+          "proposal": [
+            5,
+            8
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 10,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 73,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 39,
+          "maximum": "0x1.8748eff3eb7e2p-1",
+          "proposal": [
+            5,
+            8
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 10,
+          "maximum": "0x1.06f038e3a6138p-1",
+          "proposal": [
+            4,
+            8
+          ],
+          "source_range": null
+        }
+      },
+      "row": 74,
+      "stratum": "byte_identical"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 39,
+          "maximum": "0x1.6fcfa80eada2cp-1",
+          "proposal": [
+            5,
+            8
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 10,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 75,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 39,
+          "maximum": "0x1.c1b352f4cbd35p+0",
+          "proposal": [
+            5,
+            8
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 10,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 76,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.955fed7a744c9p+1",
+          "proposal": [
+            5,
+            8
+          ],
+          "source_range": [
+            2628,
+            3110
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.8df7d28f8dafep-1",
+          "proposal": [
+            5,
+            10
+          ],
+          "source_range": null
+        }
+      },
+      "row": 77,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.e4c068d9c9898p+1",
+          "proposal": [
+            4,
+            7
+          ],
+          "source_range": [
+            640,
+            1127
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 33,
+          "maximum": "0x1.b51073fd5d004p-2",
+          "proposal": [
+            14,
+            18
+          ],
+          "source_range": null
+        }
+      },
+      "row": 78,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.546349cd86ae0p+2",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": [
+            1554,
+            2094
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 33,
+          "maximum": "0x1.80648c12f6a82p-1",
+          "proposal": [
+            14,
+            18
+          ],
+          "source_range": null
+        }
+      },
+      "row": 79,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.ee9e3476744e4p+0",
+          "proposal": [
+            9,
+            17
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 33,
+          "maximum": "0x1.8daee433fd8f0p-2",
+          "proposal": [
+            14,
+            17
+          ],
+          "source_range": null
+        }
+      },
+      "row": 80,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.955fed7a744c9p+1",
+          "proposal": [
+            5,
+            8
+          ],
+          "source_range": [
+            2628,
+            3110
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.8df7d28f8dafep-1",
+          "proposal": [
+            5,
+            10
+          ],
+          "source_range": null
+        }
+      },
+      "row": 81,
+      "stratum": "byte_identical"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.4b78f8906f2dep+1",
+          "proposal": [
+            3,
+            8
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.0c6bd5e62bd12p-1",
+          "proposal": [
+            3,
+            10
+          ],
+          "source_range": null
+        }
+      },
+      "row": 82,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.2c82ed3a955cbp+2",
+          "proposal": [
+            5,
+            8
+          ],
+          "source_range": [
+            2410,
+            2892
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.40ebd6de8a656p+0",
+          "proposal": [
+            5,
+            10
+          ],
+          "source_range": null
+        }
+      },
+      "row": 83,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 117,
+          "maximum": "0x1.257cda77d6f54p+1",
+          "proposal": [
+            20,
+            25
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 105,
+          "maximum": "0x1.f79472b5bfb3fp-1",
+          "proposal": [
+            8,
+            11
+          ],
+          "source_range": null
+        }
+      },
+      "row": 84,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 117,
+          "maximum": "0x1.38835026f3faap+1",
+          "proposal": [
+            5,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 105,
+          "maximum": "0x1.5f7d15c45b33ep+0",
+          "proposal": [
+            8,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 85,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 117,
+          "maximum": "0x1.ef27709f4550ap+0",
+          "proposal": [
+            5,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.3d9a456aa9845p+0",
+          "proposal": [
+            8,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 86,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 117,
+          "maximum": "0x1.0ecf1367b59f2p+1",
+          "proposal": [
+            5,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 117,
+          "maximum": "0x1.77941a9165316p+0",
+          "proposal": [
+            8,
+            14
+          ],
+          "source_range": null
+        }
+      },
+      "row": 87,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 117,
+          "maximum": "0x1.257cda77d6f54p+1",
+          "proposal": [
+            20,
+            25
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 105,
+          "maximum": "0x1.f79472b5bfb3fp-1",
+          "proposal": [
+            8,
+            11
+          ],
+          "source_range": null
+        }
+      },
+      "row": 88,
+      "stratum": "byte_identical"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 117,
+          "maximum": "0x1.2073f814ead5ap+1",
+          "proposal": [
+            5,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 105,
+          "maximum": "0x1.60f7d11ec58cap+0",
+          "proposal": [
+            8,
+            15
+          ],
+          "source_range": null
+        }
+      },
+      "row": 89,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 117,
+          "maximum": "0x1.b5d8eae14d56dp+0",
+          "proposal": [
+            10,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 105,
+          "maximum": "0x1.130ae295dbd7cp+0",
+          "proposal": [
+            9,
+            14
+          ],
+          "source_range": null
+        }
+      },
+      "row": 90,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 1,
+          "maximum": "0x1.6fdbeff315b75p+1",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 0,
+          "maximum": null,
+          "proposal": null,
+          "source_range": null
+        }
+      },
+      "row": 91,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 1,
+          "maximum": "0x1.82d525bd22bb8p-1",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 0,
+          "maximum": null,
+          "proposal": null,
+          "source_range": null
+        }
+      },
+      "row": 92,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 1,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 0,
+          "maximum": null,
+          "proposal": null,
+          "source_range": null
+        }
+      },
+      "row": 93,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 1,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 0,
+          "maximum": null,
+          "proposal": null,
+          "source_range": null
+        }
+      },
+      "row": 94,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 1,
+          "maximum": "0x1.53c1647a970f8p+1",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 0,
+          "maximum": null,
+          "proposal": null,
+          "source_range": null
+        }
+      },
+      "row": 95,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 1,
+          "maximum": "0x1.238c925758717p+2",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": [
+            353,
+            939
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 0,
+          "maximum": null,
+          "proposal": null,
+          "source_range": null
+        }
+      },
+      "row": 96,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 1,
+          "maximum": "0x1.238c925758717p+2",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": [
+            353,
+            939
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 0,
+          "maximum": null,
+          "proposal": null,
+          "source_range": null
+        }
+      },
+      "row": 97,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.3776d44b999f2p+2",
+          "proposal": [
+            5,
+            10
+          ],
+          "source_range": [
+            1419,
+            2556
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.fd24ec0a9eaf2p-2",
+          "proposal": [
+            7,
+            10
+          ],
+          "source_range": null
+        }
+      },
+      "row": 98,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.02b9bcbcf18b8p+2",
+          "proposal": [
+            7,
+            10
+          ],
+          "source_range": [
+            1832,
+            2559
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.5f39f83896898p-4",
+          "proposal": [
+            7,
+            10
+          ],
+          "source_range": null
+        }
+      },
+      "row": 99,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.5c08d9d9e24b9p+2",
+          "proposal": [
+            6,
+            10
+          ],
+          "source_range": [
+            1684,
+            2558
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.b8cd8931176c8p-4",
+          "proposal": [
+            6,
+            10
+          ],
+          "source_range": null
+        }
+      },
+      "row": 100,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.54dc220be5ab2p+1",
+          "proposal": [
+            5,
+            8
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 101,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.3776d44b999f2p+2",
+          "proposal": [
+            5,
+            10
+          ],
+          "source_range": [
+            1419,
+            2556
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.fd24ec0a9eaf2p-2",
+          "proposal": [
+            7,
+            10
+          ],
+          "source_range": null
+        }
+      },
+      "row": 102,
+      "stratum": "byte_identical"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.46d6051fd224dp+2",
+          "proposal": [
+            5,
+            10
+          ],
+          "source_range": [
+            1420,
+            2559
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.0931ee07e5488p-1",
+          "proposal": [
+            7,
+            10
+          ],
+          "source_range": null
+        }
+      },
+      "row": 103,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.4413a773bfdb7p-1",
+          "proposal": [
+            7,
+            10
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 21,
+          "maximum": "0x1.7b4afc974eedep-3",
+          "proposal": [
+            7,
+            10
+          ],
+          "source_range": null
+        }
+      },
+      "row": 104,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.deb49a670b46dp+0",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 105,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.9c7467b83dd66p+0",
+          "proposal": [
+            7,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.cd92fd48037e4p-1",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 106,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.17e54f2a3334dp+1",
+          "proposal": [
+            8,
+            12
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.7c04fa57595a6p+0",
+          "proposal": [
+            8,
+            11
+          ],
+          "source_range": null
+        }
+      },
+      "row": 107,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.3cfe128bbf4f5p+1",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 108,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.be48e513f184ap+0",
+          "proposal": [
+            7,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.2fdff7d5ca482p-3",
+          "proposal": [
+            9,
+            13
+          ],
+          "source_range": null
+        }
+      },
+      "row": 109,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.be48e513f184ap+0",
+          "proposal": [
+            7,
+            13
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.2fdff7d5ca482p-3",
+          "proposal": [
+            9,
+            13
+          ],
+          "source_range": null
+        }
+      },
+      "row": 110,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.3df5582eafa89p+1",
+          "proposal": [
+            8,
+            12
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 51,
+          "maximum": "0x1.4975e81febaf3p+0",
+          "proposal": [
+            9,
+            12
+          ],
+          "source_range": null
+        }
+      },
+      "row": 111,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.548ebd94856cdp+0",
+          "proposal": [
+            10,
+            18
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 75,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 112,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.bfa51f5efa032p+0",
+          "proposal": [
+            10,
+            18
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 75,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 113,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.ad1f40d20e5b4p+0",
+          "proposal": [
+            8,
+            12
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.bc91cb4344a18p-2",
+          "proposal": [
+            10,
+            13
+          ],
+          "source_range": null
+        }
+      },
+      "row": 114,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.ce1cad2e36e60p+0",
+          "proposal": [
+            10,
+            18
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.fcf4dc1b0d7e9p-2",
+          "proposal": [
+            9,
+            17
+          ],
+          "source_range": null
+        }
+      },
+      "row": 115,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.548ebd94856cdp+0",
+          "proposal": [
+            10,
+            18
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 75,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 116,
+      "stratum": "byte_identical"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.548ebd94856cdp+0",
+          "proposal": [
+            10,
+            18
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 75,
+          "maximum": "0x0.0p+0",
+          "proposal": [
+            2,
+            5
+          ],
+          "source_range": null
+        }
+      },
+      "row": 117,
+      "stratum": "byte_identical"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.04b1bd5545e90p+0",
+          "proposal": [
+            10,
+            18
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 75,
+          "maximum": "0x1.404e8c1cdee38p-1",
+          "proposal": [
+            9,
+            15
+          ],
+          "source_range": null
+        }
+      },
+      "row": 118,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.8aaa065838e14p+1",
+          "proposal": [
+            6,
+            10
+          ],
+          "source_range": [
+            995,
+            1771
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.a002ac8d7cbc4p+0",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": [
+            995,
+            1604
+          ]
+        }
+      },
+      "row": 119,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.20d1a564956aep+2",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": [
+            993,
+            1636
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.a5b7ebff06512p+1",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": [
+            993,
+            1636
+          ]
+        }
+      },
+      "row": 120,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.a4dea614046bdp+1",
+          "proposal": [
+            7,
+            10
+          ],
+          "source_range": [
+            1395,
+            1809
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.da83aae13d9c6p+0",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": [
+            989,
+            1652
+          ]
+        }
+      },
+      "row": 121,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.0593c3ee72c75p+1",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.242bf30d466eap+0",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": null
+        }
+      },
+      "row": 122,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.a638e9ddef0c0p+1",
+          "proposal": [
+            6,
+            10
+          ],
+          "source_range": [
+            1004,
+            1795
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.8623275a7a52fp+0",
+          "proposal": [
+            7,
+            10
+          ],
+          "source_range": null
+        }
+      },
+      "row": 123,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.6dd2055225b38p+2",
+          "proposal": [
+            5,
+            10
+          ],
+          "source_range": [
+            870,
+            1889
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.18c8640c31cb4p+1",
+          "proposal": [
+            7,
+            10
+          ],
+          "source_range": [
+            1449,
+            1889
+          ]
+        }
+      },
+      "row": 124,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.d14f492556b96p+1",
+          "proposal": [
+            12,
+            15
+          ],
+          "source_range": [
+            2012,
+            2531
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.f56cace662b6fp+0",
+          "proposal": [
+            12,
+            15
+          ],
+          "source_range": [
+            2012,
+            2531
+          ]
+        }
+      },
+      "row": 125,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.81cd19b977282p+1",
+          "proposal": [
+            11,
+            14
+          ],
+          "source_range": [
+            1860,
+            2329
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.3a42f54649a79p+0",
+          "proposal": [
+            12,
+            15
+          ],
+          "source_range": null
+        }
+      },
+      "row": 126,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.fbff41d94f58fp+1",
+          "proposal": [
+            11,
+            14
+          ],
+          "source_range": [
+            1873,
+            2342
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.3d1d0cf9e99e0p+0",
+          "proposal": [
+            12,
+            15
+          ],
+          "source_range": null
+        }
+      },
+      "row": 127,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.c729ea2cd4376p+1",
+          "proposal": [
+            12,
+            15
+          ],
+          "source_range": [
+            2131,
+            2568
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.b93cef74a56d0p+0",
+          "proposal": [
+            12,
+            16
+          ],
+          "source_range": [
+            2131,
+            2646
+          ]
+        }
+      },
+      "row": 128,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.6c477ea2be48cp+1",
+          "proposal": [
+            11,
+            14
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.85ea0d0cdb248p+0",
+          "proposal": [
+            12,
+            15
+          ],
+          "source_range": null
+        }
+      },
+      "row": 129,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.a6c6046ee6c5cp+1",
+          "proposal": [
+            11,
+            14
+          ],
+          "source_range": [
+            1860,
+            2329
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.3c68fe1698e46p+0",
+          "proposal": [
+            12,
+            15
+          ],
+          "source_range": null
+        }
+      },
+      "row": 130,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.2f43076c4f185p+1",
+          "proposal": [
+            11,
+            14
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.3914cb61a2bccp-1",
+          "proposal": [
+            12,
+            15
+          ],
+          "source_range": null
+        }
+      },
+      "row": 131,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.866ce97abb7b0p+1",
+          "proposal": [
+            10,
+            14
+          ],
+          "source_range": [
+            1714,
+            2317
+          ]
+        },
+        "two_reading_plateau": {
+          "eligible": 99,
+          "maximum": "0x1.e81b2807dce5bp-1",
+          "proposal": [
+            10,
+            16
+          ],
+          "source_range": null
+        }
+      },
+      "row": 132,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 117,
+          "maximum": "0x1.a2a41b71bcca0p-1",
+          "proposal": [
+            21,
+            24
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 66,
+          "maximum": "0x1.3d7c3fe2455e7p-2",
+          "proposal": [
+            4,
+            9
+          ],
+          "source_range": null
+        }
+      },
+      "row": 133,
+      "stratum": "original"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 117,
+          "maximum": "0x1.308c4a2bbcf62p+0",
+          "proposal": [
+            21,
+            24
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 66,
+          "maximum": "0x1.052d5fab0ab17p-1",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": null
+        }
+      },
+      "row": 134,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 117,
+          "maximum": "0x1.3ad638a540c67p+0",
+          "proposal": [
+            21,
+            24
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 66,
+          "maximum": "0x1.e00986422c84ap-1",
+          "proposal": [
+            6,
+            10
+          ],
+          "source_range": null
+        }
+      },
+      "row": 135,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 117,
+          "maximum": "0x1.529cf6ad449d9p+0",
+          "proposal": [
+            20,
+            24
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 66,
+          "maximum": "0x1.4848fd6860900p-8",
+          "proposal": [
+            12,
+            15
+          ],
+          "source_range": null
+        }
+      },
+      "row": 136,
+      "stratum": "gemini-2.5-flash"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 117,
+          "maximum": "0x1.8cb6de1b6230bp-1",
+          "proposal": [
+            21,
+            24
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 66,
+          "maximum": "0x1.64d1bb191e81cp-2",
+          "proposal": [
+            4,
+            10
+          ],
+          "source_range": null
+        }
+      },
+      "row": 137,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 117,
+          "maximum": "0x1.9c15387930b94p-1",
+          "proposal": [
+            21,
+            24
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 66,
+          "maximum": "0x1.db15de5f00076p-4",
+          "proposal": [
+            6,
+            9
+          ],
+          "source_range": null
+        }
+      },
+      "row": 138,
+      "stratum": "qwen3-8b"
+    },
+    {
+      "measurements": {
+        "classifier_plateau": {
+          "eligible": 117,
+          "maximum": "0x1.0e02672730167p+0",
+          "proposal": [
+            21,
+            24
+          ],
+          "source_range": null
+        },
+        "two_reading_plateau": {
+          "eligible": 66,
+          "maximum": "0x1.de1bc2791728ap-2",
+          "proposal": [
+            12,
+            17
+          ],
+          "source_range": null
+        }
+      },
+      "row": 139,
+      "stratum": "qwen3-8b"
+    }
+  ],
+  "held_ledger_sha256": "d8ad68988199c61fe9538887bfb0c2256c367ac44219f74c94ef55169ccaa8cf",
+  "method": {
+    "fit": {
+      "classifier_plateau": {
+        "genuine_measured": 16,
+        "point": "0x1.7719175dbddf4p+1"
+      },
+      "two_reading_plateau": {
+        "genuine_measured": 16,
+        "point": "0x1.97ca29f45fdc7p+0"
+      }
+    },
+    "fit_ledger_sha256": "65872a195cb26a29fe70966d6b6dd470ac93abf13de8613a64263019c6ca6c88",
+    "protocol": {
+      "admission": "A separate inspection cue would need at least three new strict locations on distinct source groups across both editing families, at most two genuine source groups flagged, and a separate fresh replication. Raw readings have no confidence weight.",
+      "comparison": "Score a robustly scaled classifier logit alone and the weaker of its response and the direction-adjusted exact sentence ratio. Each reading keeps its own scale. Allow no missing or neighbor-expanded ratio in the two-reading arm.",
+      "fitting": "Use 16 separate genuine work maxima. Require a strictly higher response than the second-highest genuine maximum, with a positive floor of 0.1.",
+      "scoring": "Select at most one interior run of 3\u20138 consecutive same-paragraph sentence centers with two measured flanks on each side. Compare the interior median response to the stronger flanking median and require at least two-thirds of interior centers above both flank medians."
+    },
+    "schema": "chipmunk.writing-sustained-response/1",
+    "scorer_sha256": "02ba55e402d601f17273313ddccd07d85302b338b524820e64d783cb41fd9838",
+    "source_reader_sha256": "7cc001963daca249b0ab2e6105a5559b74f64054348108ca8bf9a93d61680b03",
+    "worker_reader_sha256": "65b0056da02c2a080b69b88bb536b5c28d95e7f3df3e0b1e5727d345c076a60a"
+  },
+  "summary": {
+    "app": {
+      "byte_identical": {
+        "ai_chars_highlighted": 3406,
+        "file_highlighted": 15,
+        "files": 15,
+        "half_covered_spans": 22,
+        "has_half_covered_span": 13,
+        "ordinary_chars_highlighted": 13068,
+        "strict_location": 0
+      },
+      "gemini-2.5-flash": {
+        "ai_chars_highlighted": 16716,
+        "file_highlighted": 58,
+        "files": 58,
+        "half_covered_spans": 119,
+        "has_half_covered_span": 51,
+        "ordinary_chars_highlighted": 37177,
+        "strict_location": 2
+      },
+      "original": {
+        "ai_chars_highlighted": 0,
+        "file_highlighted": 20,
+        "files": 20,
+        "half_covered_spans": 0,
+        "has_half_covered_span": 0,
+        "ordinary_chars_highlighted": 20681,
+        "strict_location": 0
+      },
+      "qwen3-8b": {
+        "ai_chars_highlighted": 17320,
+        "file_highlighted": 47,
+        "files": 47,
+        "half_covered_spans": 114,
+        "has_half_covered_span": 41,
+        "ordinary_chars_highlighted": 28967,
+        "strict_location": 2
+      }
+    },
+    "classifier_plateau": {
+      "byte_identical": {
+        "ai_chars_highlighted": 135,
+        "assessed": 15,
+        "file_highlighted": 2,
+        "files": 15,
+        "half_covered_spans": 1,
+        "has_half_covered_span": 1,
+        "ordinary_chars_highlighted": 1248,
+        "strict_location": 0
+      },
+      "gemini-2.5-flash": {
+        "ai_chars_highlighted": 2517,
+        "assessed": 58,
+        "file_highlighted": 12,
+        "files": 58,
+        "half_covered_spans": 14,
+        "has_half_covered_span": 10,
+        "ordinary_chars_highlighted": 3880,
+        "strict_location": 0
+      },
+      "original": {
+        "ai_chars_highlighted": 0,
+        "assessed": 20,
+        "file_highlighted": 5,
+        "files": 20,
+        "half_covered_spans": 0,
+        "has_half_covered_span": 0,
+        "ordinary_chars_highlighted": 2958,
+        "strict_location": 0
+      },
+      "qwen3-8b": {
+        "ai_chars_highlighted": 2716,
+        "assessed": 47,
+        "file_highlighted": 13,
+        "files": 47,
+        "half_covered_spans": 16,
+        "has_half_covered_span": 11,
+        "ordinary_chars_highlighted": 4484,
+        "strict_location": 1
+      }
+    },
+    "two_reading_plateau": {
+      "byte_identical": {
+        "ai_chars_highlighted": 0,
+        "assessed": 15,
+        "file_highlighted": 0,
+        "files": 15,
+        "half_covered_spans": 0,
+        "has_half_covered_span": 0,
+        "ordinary_chars_highlighted": 0,
+        "strict_location": 0
+      },
+      "gemini-2.5-flash": {
+        "ai_chars_highlighted": 1366,
+        "assessed": 55,
+        "file_highlighted": 5,
+        "files": 58,
+        "half_covered_spans": 6,
+        "has_half_covered_span": 5,
+        "ordinary_chars_highlighted": 1144,
+        "strict_location": 0
+      },
+      "original": {
+        "ai_chars_highlighted": 0,
+        "assessed": 19,
+        "file_highlighted": 1,
+        "files": 20,
+        "half_covered_spans": 0,
+        "has_half_covered_span": 0,
+        "ordinary_chars_highlighted": 518,
+        "strict_location": 0
+      },
+      "qwen3-8b": {
+        "ai_chars_highlighted": 638,
+        "assessed": 44,
+        "file_highlighted": 4,
+        "files": 47,
+        "half_covered_spans": 4,
+        "has_half_covered_span": 4,
+        "ordinary_chars_highlighted": 1450,
+        "strict_location": 0
+      }
+    }
+  }
+}

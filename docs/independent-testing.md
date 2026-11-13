@@ -99,11 +99,19 @@ qualification archives.
 The [Full writing worker replay](writing-revision-worker-transfer-2026-11-13.md#replay)
 checks which ranges reached the app on genuine government-report excerpts and
 recomputes the separate candidate points from source-bound scalar records.
+The [sustained writing response replay](writing-sustained-response-2026-11-13.md)
+checks the longer ranges against the full 140-delivery worker ledger.
+The [camera-native interpolation replay](image-native-cfa-closure-2026-11-13.md#replay)
+uses a published CC0 camera roster to compare known locations, ordinary
+controls and incompatible image deliveries.
 The [matched utterance speech replay](audio-odss-matched-room-2026-11-13.md#reproduce)
 recomputes held background and voice flags on separate reader groups.
 The [PhonemeDF transfer replay](audio-phonemedf-matched-transfer-2026-11-13.md#reproduce)
 tests the same frozen operating points on four new readers, two generators
 and two competing-speech levels.
+The [Aachen flank comparison](audio-flank-background-transfer-2026-11-13.md#reproduce)
+publishes paired detection outcomes from a separate room and source
+speakers and tests whether adjacent audio can help estimate competing speech.
 Run these four studies together from a clean checkout to save a shareable
 receipt of the scalar checks.
 

@@ -139,9 +139,12 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
                 for key in ("pcm_sha256", "wav_sha256", "mapping_sha256", "samples", "sample_rate")):
             raise ObjectIntegrityError("Audio evidence does not match the published sample commitments")
     else:
+        from app.evidence import document_tracked_changes
+
         binding = sampling.get("document_source", {})
         if binding.get("source_sha256") != source_sha256 or any(source.get(key) != binding.get(key) or not source.get(key)
-                for key in ("extracted_text_sha256", "source_map_sha256", "decode_sha256")):
+                for key in ("extracted_text_sha256", "source_map_sha256", "decode_sha256")) or (
+                source.get(document_tracked_changes.COMMITMENT) != document_tracked_changes.from_result(result)):
             raise ObjectIntegrityError("Document evidence does not match the published extraction commitments")
 
 
@@ -486,6 +489,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_paragraph_priority,
         document_passage_coverage,
         document_passage_position,
+        document_tracked_changes,
         document_unselected_responses,
         email_alternatives,
     )
@@ -511,6 +515,8 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     if isinstance(email, dict) and canonical_hash(email) != canonical_hash(decoded.get("meta", {}).get("email")):
         raise ObjectIntegrityError("Frozen email coverage differs from the recorded extraction")
     try:
+        document_tracked_changes.verify_source(document, decoded.get(document_tracked_changes.KEY),
+                                              expected=source.get(document_tracked_changes.COMMITMENT))
         verify_repeated_passages(document, text, mapping)
         document_native_locations.validate(document)
         if document_email_contexts.KEY in coverage:
@@ -638,12 +644,14 @@ def quoted_values(snapshot: ReportSnapshot) -> list[str]:
     if snapshot.analysis.kind != "document" or snapshot.evidence is None:
         return []
     from app.evidence.document_passage_position import KEY as PASSAGE_POSITION
+    from app.evidence.document_tracked_changes import KEY as TRACKED
     from app.evidence.document_unselected_responses import KEY as UNSELECTED_RESPONSES
     from app.evidence.document_unselected_responses import REPORT_EXCERPT_CHARS
 
     repeats = (snapshot.evidence.get("repeated_passages") or {}).get("groups", [])
     extra = ((snapshot.evidence.get("coverage") or {}).get(UNSELECTED_RESPONSES) or {}).get("rows", [])
     excerpts = [row["text"][:REPORT_EXCERPT_CHARS] for row in extra]
+    excerpts.extend(row["text"] for row in ((snapshot.evidence.get("coverage") or {}).get(TRACKED) or {}).get("rows", ()))
     if (position := (snapshot.evidence.get("coverage") or {}).get(PASSAGE_POSITION)) and (focus := position.get("focus_text")):
         excerpts.append(focus)
     isolated = [input["text"] for packet in snapshot.evidence["packets"]
@@ -797,6 +805,7 @@ def _voice_interval_view(interval: dict, rate: int, video_origin_s: float | None
 def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[str, Any] | None:
     from app.evidence.document_email_contexts import KEY as EMAIL_INPUT_SCOPE
     from app.evidence.document_native_locations import KEY as ORIGINAL_TEXT_LOCATIONS
+    from app.evidence.document_tracked_changes import KEY as TRACKED
 
     if snapshot.analysis.kind not in KINDS:
         if snapshot.evidence is not None:
@@ -1147,6 +1156,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "writing_agreement": _writing_agreement_view(document.get("coverage") or {}) if kind == "document" else None,
             "email_body_alternatives": (document.get("coverage") or {}).get("email_body_alternatives") if kind == "document" else None,
             "email_classifier_input_scope": (document.get("coverage") or {}).get(EMAIL_INPUT_SCOPE) if kind == "document" else None,
+            "word_tracked_changes": (document.get("coverage") or {}).get(TRACKED) if kind == "document" and not withheld else None,
             "coverage_details": ([f"{'Voice evidence' if key == 'audio' else 'Audio/video synchronization evidence'}: {channel['reason']}"
                                   for key, channel in (document.get("coverage", {}).get("channels") or {}).items()]
                                  if kind == "video" else

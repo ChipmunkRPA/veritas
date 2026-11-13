@@ -1,0 +1,31 @@
+{
+  "outcomes": [
+    {
+      "status": "found",
+      "inserted": 1,
+      "deleted": 1,
+      "source_replay_verified": true,
+      "pdf_and_json_match": true
+    },
+    {
+      "status": "no_match",
+      "inserted": 0,
+      "deleted": 0,
+      "source_replay_verified": true,
+      "pdf_and_json_match": true
+    }
+  ],
+  "unpaid_jobs": 0,
+  "profile": "full",
+  "template": "veritas-report-2.0.r121",
+  "schema": "chipmunk.document-word-track-changes-local/1",
+  "browser": {
+    "checked_uploads": 2,
+    "json_matches": true,
+    "page_errors": 0,
+    "plain_view": true
+  },
+  "checkout": "simulated USD 9.99",
+  "scope": "authored Word markup, one tracked file and one control",
+  "optional_statistical_check_skipped": "memory budget"
+}

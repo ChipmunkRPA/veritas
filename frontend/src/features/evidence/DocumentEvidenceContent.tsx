@@ -197,11 +197,27 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const ocrPages = set.coverage?.ocr?.pages ?? []
   const matched = set.coverage?.matched_context_review
   const writingAgreement = set.coverage?.writing_second_check
+  const tracked = set.coverage?.word_tracked_changes
   const selectablePages = [...new Set(writingAgreement?.pdf_spans?.map((span) => span.page) ?? [])]
   const usesOcr = ocrPages.some((page) => page.status === 'extracted') || set.packets.some((packet) => packet.anchors.some((anchor) => anchor.extraction === 'ocr'))
   return <div data-testid="document-evidence-content">
     <EmailBodyComparison review={set.coverage?.email_body_alternatives} />
     {set.coverage?.email_classifier_input_scope && <EmailInputScope scope={set.coverage.email_classifier_input_scope} />}
+    {tracked && <section aria-label="Word tracked text changes" className="mt-4 rounded-md border border-border p-4">
+      <h3 className="m-0 text-body font-medium">Word tracked text changes</h3>
+      <p className="mt-2 mb-0 text-small">Checked {tracked.paragraphs} body paragraphs. Found {tracked.inserted} insertions and {tracked.deleted} deletions.</p>
+      {!!tracked.unsupported_marks && <p className="mt-2 mb-0 text-small">{tracked.unsupported_marks} additional revision marks were outside scope.</p>}
+      <p className="mt-2 mb-0 text-small text-text-muted">{tracked.scope} {tracked.limitation}</p>
+      {!!tracked.rows.length && <ol className="mt-3 mb-0 list-none space-y-3 p-0">
+        {tracked.rows.map((row) => <li key={`${row.body_index}:${row.inline_index}`} className="rounded-md border border-border p-3">
+          <p className="m-0 text-small font-medium">{row.kind === 'inserted' ? 'Inserted' : 'Deleted'} · Body paragraph {row.paragraph}</p>
+          <blockquote className="mt-2 mb-0 whitespace-pre-wrap break-words text-small">{row.text}
+            {row.characters > Array.from(row.text).length && `… (${row.characters} source characters)`}</blockquote>
+          <p className="mt-2 mb-0 text-caption text-text-muted">{tracked.part} · XML body index {row.body_index}, paragraph child index {row.inline_index} (zero-based).</p>
+        </li>)}
+      </ol>}
+      {!!tracked.omitted_excerpts && <p className="mt-2 mb-0 text-caption text-text-muted">{tracked.omitted_excerpts} further excerpts exceed the display limit.</p>}
+    </section>}
     <DocumentRepeatedPassages result={set.repeated_passages} />
     <DocumentInspectionMap packets={set.packets} selectedId={selectedId} onSelect={selectPassage} />
     <DocumentPassageCoverage coverage={set.coverage?.local_passage_coverage} />

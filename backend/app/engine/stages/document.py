@@ -35,6 +35,7 @@ from app.engine.fusion.registry import Selection
 from app.engine.registry import TEXT_FINETUNE_DETECTOR, TEXT_PRIMARY_DETECTORS
 from app.engine.runner import StageContext
 from app.engine.stages import common, document_screening
+from app.evidence import document_tracked_changes
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
@@ -73,12 +74,15 @@ def decode(ctx: StageContext) -> dict[str, Any]:
                           "role": "preview", "created_by": "document-ocr/1"})
     return {"text": doc.text, "paragraphs": [[int(a), int(b)] for a, b in doc.paragraphs], "meta": common.json_safe(doc.meta),
             "sentences": [dataclasses.asdict(s) for s in sents], "words": words, "source_map": doc.source_map,
-            "artefacts": artifacts}
+            "artefacts": artifacts,
+            **({document_tracked_changes.KEY: doc.word_review} if doc.word_review is not None else {})}
 
 
 def current_decode_output(output: Any) -> bool:
-    """Reuse extraction only when its OCR and partial-page scope are current."""
+    """Reuse extraction only when its source coverage is current."""
     if not isinstance(output, dict) or output.get("meta", {}).get("extraction_version") != EXTRACTION_VERSION:
+        return False
+    if output["meta"].get("method") == "python-docx" and document_tracked_changes.KEY not in output:
         return False
     hashes = {artifact.get("sha256") for artifact in output.get("artefacts", [])}
     return all(page.get("raster", {}).get("sha256") in hashes for page in output.get("meta", {}).get("ocr", {}).get("pages", [])
@@ -375,6 +379,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         "decode_sha256": canonical_hash(decoded),
         "offset_unit": "unicode_codepoint",
     }
+    if tracked := decoded.get(document_tracked_changes.KEY):
+        result.manifest.sampling[document_tracked_changes.COMMITMENT] = canonical_hash(tracked)
     if settings.document_email_alternatives_review and decoded.get("meta", {}).get("method") == "email":
         from app.evidence import email_alternatives
 

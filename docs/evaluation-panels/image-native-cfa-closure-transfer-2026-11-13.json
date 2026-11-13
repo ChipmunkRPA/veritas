@@ -1,0 +1,122 @@
+{
+  "cc0_roster_sha256": "cc2f920c1e40114ef1ca3b7647d3c186e5f95c0d2cb92f6c5b99c0005266c4a4",
+  "design": {
+    "cell": 32,
+    "closure_tolerance_in_uint16_codes": 12,
+    "confidence_weight": 0,
+    "crop_height_width": [
+      1536,
+      2048
+    ],
+    "cutoff": "Strictly above the second-highest development-camera ordinary maximum or 0.25, whichever is greater. Edits excluded from fit.",
+    "minimum_closure_fraction": 0.58,
+    "minimum_phase_margin": 0.18,
+    "minimum_samples_per_stencil": 36,
+    "minimum_two_neighbour_difference_in_uint16_codes": 48,
+    "positives": "Only conventional odd-pixel copy and classical Telea fill. No AI origin results.",
+    "selection": "Scan single compact rectangles of 2, 3, 4, 5 or 6 complete cells per side and at least 65% usable coverage. Rank positive cell evidence by sum over square root of candidate area.",
+    "supported": "Three-channel uint16 RGB sensor-grid raster. Require two spatial folds to agree on strong alternating bilinear closure in red and blue. Evaluation uses fixed linear no-resize RAW development into a centered 2048 by 1536 crop with even origin. Test resampling, 8-bit conversion and alternate adaptive demosaicing as scope challenges.",
+    "useful": "Changed-pixel IoU at least 0.30 and recall at least 0.50."
+  },
+  "development_sources": 6,
+  "exact_held_replays": 80,
+  "fit_sha256": "63d220947dbd1ab74f7b9409ce9dc8bb1665588e95f6050e55876e64f905daf5",
+  "freeze_sha256": "017ef372603a0ae0f7401c9f71d55bf587137b56b7c826bdb4866ae3c27ecdf4",
+  "held": {
+    "adaptive_demosaic": {
+      "files": 8,
+      "no_repeatable_stencil": 8
+    },
+    "classical_fill": {
+      "assessed": 8,
+      "files": 8,
+      "phase_loss_flags": 0,
+      "phase_loss_ungated_useful": 3,
+      "phase_loss_useful": 0,
+      "phase_shift_flags": 0,
+      "phase_shift_ungated_useful": 0,
+      "phase_shift_useful": 0
+    },
+    "eight_bit": {
+      "files": 8,
+      "unsupported_raster": 8
+    },
+    "even_copy": {
+      "assessed": 8,
+      "files": 8,
+      "phase_loss_flags": 0,
+      "phase_loss_ungated_useful": 0,
+      "phase_loss_useful": 0,
+      "phase_shift_flags": 0,
+      "phase_shift_ungated_useful": 0,
+      "phase_shift_useful": 0
+    },
+    "global_gain": {
+      "assessed": 8,
+      "files": 8,
+      "phase_loss_flags": 0,
+      "phase_loss_ungated_useful": 0,
+      "phase_loss_useful": 0,
+      "phase_shift_flags": 0,
+      "phase_shift_ungated_useful": 0,
+      "phase_shift_useful": 0
+    },
+    "local_blur": {
+      "assessed": 8,
+      "files": 8,
+      "phase_loss_flags": 3,
+      "phase_loss_ungated_useful": 7,
+      "phase_loss_useful": 3,
+      "phase_shift_flags": 0,
+      "phase_shift_ungated_useful": 0,
+      "phase_shift_useful": 0
+    },
+    "local_tone": {
+      "assessed": 8,
+      "files": 8,
+      "phase_loss_flags": 0,
+      "phase_loss_ungated_useful": 0,
+      "phase_loss_useful": 0,
+      "phase_shift_flags": 0,
+      "phase_shift_ungated_useful": 0,
+      "phase_shift_useful": 0
+    },
+    "odd_copy": {
+      "assessed": 8,
+      "files": 8,
+      "phase_loss_flags": 0,
+      "phase_loss_ungated_useful": 8,
+      "phase_loss_useful": 0,
+      "phase_shift_flags": 8,
+      "phase_shift_ungated_useful": 8,
+      "phase_shift_useful": 8
+    },
+    "original": {
+      "assessed": 8,
+      "files": 8,
+      "phase_loss_flags": 0,
+      "phase_loss_ungated_useful": 0,
+      "phase_loss_useful": 0,
+      "phase_shift_flags": 0,
+      "phase_shift_ungated_useful": 0,
+      "phase_shift_useful": 0
+    },
+    "resampled": {
+      "files": 8,
+      "no_repeatable_stencil": 8
+    }
+  },
+  "held_sha256": "f82fe22b7495582ed8227e1720c67461951c5db4f82ae68a6baaf7b88404f6a9",
+  "held_sources": 8,
+  "points": {
+    "phase_loss": 2.4346873354224834,
+    "phase_shift": 0.25
+  },
+  "runner_sha256": "223607cf9d0b59eac4ff496f1c59afd5756afa39afbc301e3f06c6760da0c2e9",
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv": "5.0.0"
+  },
+  "schema": "chipmunk.image-native-cfa-closure-transfer/1",
+  "wheel_sha256": "60e4c82d2dbce6ae20f95d0894bcacf355d32b783cd017c374c800dfc4a0d9b3"
+}

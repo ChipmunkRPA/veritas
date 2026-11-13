@@ -38,6 +38,23 @@ const show = (set: MultimediaEvidenceSet, token = 'signed token', mediaReady = t
 afterEach(cleanup)
 
 describe('ordinary multimedia evidence', () => {
+  it('shows submitted Word revision wording and its native XML position', () => {
+    const set: DocumentEvidenceSet = { ...document, packets: [], coverage: {
+      word_tracked_changes: { status: 'partial', part: 'word/document.xml', paragraphs: 3, inserted: 1, deleted: 0,
+        scope: 'Checks inline Track Changes.', limitation: 'Authorship remains undetermined.',
+        unsupported_marks: 1, omitted_excerpts: 0, authorship_confidence_contribution: 0,
+        rows: [{ kind: 'inserted', paragraph: 2, body_index: 1, inline_index: 4,
+          text: '<b>Added text</b> 😀', characters: 19 }] },
+    } }
+    show(set)
+    const section = within(screen.getByRole('region', { name: 'Word tracked text changes' }))
+    expect(section.getByText('Inserted · Body paragraph 2')).toBeTruthy()
+    expect(section.getByText(/paragraph child index 4/)).toBeTruthy()
+    expect(section.getByText(/<b>Added text<\/b> 😀/).querySelector('b')).toBeNull()
+    expect(section.getByText(/additional revision marks were outside scope/)).toBeTruthy()
+    expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
+  })
+
   it('links voice evidence to only sound categories overlapping its exact samples', () => {
     const set = structuredClone(audio)
     set.source.pcm_sha256 = 'a'.repeat(64)

@@ -30,6 +30,7 @@ class Document:
     meta: dict = field(default_factory=dict)
     source_map: list[dict] = field(default_factory=list)
     source_rasters: dict[str, str] = field(default_factory=dict)  # SHA256 -> base64 exact OCR input PNG, child transport only
+    word_review: dict | None = None
 
 
 SOURCE_MAP_VERSION = "document-source/1"
@@ -554,6 +555,8 @@ def extract_docx(path: Path) -> Document:
     from docx.table import Table
     from docx.text.paragraph import Paragraph
 
+    from app.evidence.document_tracked_changes import PART_NAME, inspect
+
     d = docx.Document(str(path))
     parts: list[tuple[str, dict]] = []
 
@@ -581,8 +584,14 @@ def extract_docx(path: Path) -> Document:
 
     walk(d, d.element.body, [])
     doc = _join_mapped(parts)
+    part = str(d.part.partname).removeprefix("/")
+    if PART_NAME.fullmatch(part):
+        doc.word_review = inspect(d.element.body, part)
+    word_warning = (" The file contains Word revision marks. The writing checks may omit text within those marks."
+                    if doc.word_review and doc.word_review["status"] != "no_match" else "")
     doc.meta = {"method": "python-docx", "paragraph_count": len(parts),
-                "coverage_warning": "Body paragraphs and tables were extracted in document order. Headers, footers, text boxes and embedded attachments were not checked; DOCX has no stable page numbers."}
+                "coverage_warning": ("Body paragraphs and tables were extracted in document order. Headers, footers, text boxes and "
+                                     "embedded attachments were not checked; DOCX has no stable page numbers." + word_warning)}
     return doc
 
 
@@ -845,7 +854,8 @@ def _child(argv: list[str]) -> int:
             d.meta["hidden_text_pages"] = hidden_text_pages
         else:
             d = extract(path, ext)
-        out: dict = {"text": d.text, "paragraphs": d.paragraphs, "meta": d.meta, "source_map": d.source_map, "source_rasters": d.source_rasters}
+        out: dict = {"text": d.text, "paragraphs": d.paragraphs, "meta": d.meta, "source_map": d.source_map,
+                     "source_rasters": d.source_rasters, "word_review": d.word_review}
     except Exception as e:  # noqa: BLE001 - handed to the parent, which raises it again
         out = {"error": {"type": type(e).__name__, "message": str(e), "value_error": isinstance(e, ValueError)}}
     sys.stdout.write(json.dumps(out))  # ASCII only: a lone surrogate of a damaged file crosses as an escape

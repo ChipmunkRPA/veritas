@@ -134,6 +134,20 @@ Samples [{{ window.start_sample }}, {{ window.end_sample }}) at 16000 Hz.
 <p class="caption">{% if page_coverage.additional_rows %}{{ page_coverage.additional_rows }} more rows appear in the JSON report. {% endif %}JSON pointer <span class="mono">/coverage/local_passage_coverage/pdf_pages</span>.</p>
 {% endif %}
 {% endif %}
+{% if evidence.get('word_tracked_changes') %}
+{% set tracked = evidence.word_tracked_changes %}
+<h3>Word tracked text changes</h3>
+<p class="caption">{{ tracked.scope }} {{ tracked.limitation }}</p>
+<p class="caption">Checked {{ tracked.paragraphs }} body paragraphs. Found {{ tracked.inserted }} insertions and {{ tracked.deleted }} deletions.
+{% if tracked.unsupported_marks %}{{ tracked.unsupported_marks }} additional revision marks were outside scope.{% endif %}
+{% if tracked.omitted_excerpts %}{{ tracked.omitted_excerpts }} further excerpts exceed the display limit.{% endif %}</p>
+{% for row in tracked.rows %}
+<p class="caption"><strong>{{ row.kind | capitalize }} · Body paragraph {{ row.paragraph }}</strong>.
+XML body index {{ row.body_index }}, paragraph child index {{ row.inline_index }} (zero-based).</p>
+<blockquote>{{ row.text }}{% if row.characters > row.text | length %}… ({{ row.characters }} source characters){% endif %}</blockquote>
+{% endfor %}
+<p class="caption">Source part <span class="mono">{{ tracked.part }}</span>. JSON pointer <span class="mono">/coverage/word_tracked_changes</span>.</p>
+{% endif %}
 {% if evidence.get('unselected_writing_responses') %}
 {% include 'sections/document_unselected_responses.html.j2' %}
 {% endif %}

@@ -97,6 +97,32 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- [Word tracked text changes](document-word-track-changes-2026-11-13.md)
+  displays the original inserted and deleted wording with exact XML locations.
+  The browser, Standard PDF, JSON and signed source replay agree. These
+  recorded changes carry no AI confidence weight.
+- The [full writing worker evaluation](writing-revision-worker-transfer-2026-11-13.md#complete-held-evaluation)
+  completed all 140 held deliveries. It precisely localized four of 105
+  changed versions, selected all 20 genuine reports for inspection and
+  returned an inconclusive assessment on every delivery. The separate
+  [sustained-response trial](writing-sustained-response-2026-11-13.md)
+  added one precise location with five genuine flags. Its agreement arm
+  added none. Both remain offline.
+- The [camera-native interpolation trial](image-native-cfa-closure-2026-11-13.md)
+  located eight of eight sharp, one-pixel-offset copies with zero flags on
+  40 held ordinary views. Classical fills were missed. The trial measures
+  local interpolation continuity in narrowly prepared 16-bit images.
+- A [ten-camera PNG transfer](image-native-cfa-png-transfer-2026-11-13.md)
+  located 54 of 60 odd-phase 128-pixel pastes and 24 of 60 at 64 pixels.
+  It highlighted none of 100 assessed ordinary controls and declined
+  30 incompatible inputs. The tested local interpolation cue still requires
+  integration and source-bound application verification.
+- The [flanking-audio background trial](audio-flank-background-transfer-2026-11-13.md)
+  tested four new source readers in the Aachen room. All three approaches
+  flagged two of 16 noisy synthetic deliveries and zero of 16 noisy genuine
+  deliveries. The extra cleanup never proposed a new synthetic flag in
+  that room and stays offline.
+
 - The standalone video picture-change check now states whether the source
   frames were checked, whether it found a range and why the check was
   unavailable. Chrome, the PDF and JSON matched on a positive, a supported

@@ -23,6 +23,7 @@ from app.evidence import (
     document_passage_position,
     document_repeat,
     document_scope,
+    document_tracked_changes,
     document_unselected_responses,
     email_alternatives,
 )
@@ -132,6 +133,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     email_inputs = document_email_contexts.verify_source(evidence, text, mapping)
     position = document_passage_position.verify_source(evidence, text, mapping)
     alternatives = email_alternatives.verify_source(evidence, original.read_bytes()) if email_alternatives.KEY in coverage else None
+    tracked = document_tracked_changes.verify_source(evidence, doc.word_review,
+                                                    expected=source.get(document_tracked_changes.COMMITMENT))
 
     pdf_bytes = original.read_bytes() if extension == ".pdf" else None
 
@@ -180,6 +183,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                            f" Verified writing inputs and source ranges at all {len(position_review['contexts'])} eligible centers.")
     native_detail = " Verified decoded original text locations for the inspected writing." if document_native_locations.KEY in coverage else ""
     email_input_detail = f" Verified source roles and text hashes for {email_inputs} classifier inputs." if email_inputs else ""
+    tracked_detail = f" Verified {tracked} retained tracked Word edit locations against the source XML." if tracked else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
-            f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}")
+            f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}{tracked_detail}")

@@ -13,6 +13,7 @@ from test_document_packets import packet_factory as packet_factory
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.evidence import document_native_locations as locations
+from app.evidence import document_tracked_changes as tracked
 from app.evidence.document_packets import (
     DocumentPacketIntegrityError,
     build_packet_set,
@@ -171,3 +172,90 @@ def test_pdf_positions_do_not_claim_decoded_character_locations(packet_factory):
     evidence = build_packet_set(db, analysis, store, result)
     assert locations.KEY not in evidence["coverage"]
     assert all(anchor["page"] == 1 for packet in evidence["packets"] for anchor in packet["anchors"])
+
+
+def test_word_track_changes_match_original_xml_and_stay_out_of_redacted_pdf(packet_factory, tmp_path, monkeypatch):
+    from docx.oxml import OxmlElement
+    from docx.oxml.ns import qn
+    from lxml import etree
+
+    original = tmp_path / "tracked.docx"
+    document = docx.Document()
+    document.add_paragraph(FIRST)
+    middle = document.add_paragraph(MIDDLE)
+    document.add_paragraph(LAST)
+    middle._p.insert(0, etree.Comment("This does not affect element coordinates"))
+    for kind, leaf, text in (("del", "delText", "Former wording 😀"), ("ins", "t", "Replacement wording 😀")):
+        change, run, content = (OxmlElement(f"w:{name}") for name in (kind, "r", leaf))
+        change.set(qn("w:author"), "PRIVATE REVISION AUTHOR")
+        content.text = text
+        run.append(content)
+        if kind == "ins":
+            run.append(OxmlElement("w:br"))
+            second = OxmlElement("w:t")
+            second.text = "Second  line of the insertion"
+            run.append(second)
+        change.append(run)
+        middle._p.append(change)
+    properties = middle._p.get_or_add_pPr()
+    mark_properties = OxmlElement("w:rPr")
+    mark_properties.append(OxmlElement("w:del"))
+    properties.append(mark_properties)
+    document.save(original)
+    moved = tmp_path / "moved.docx"
+    with zipfile.ZipFile(original) as package, zipfile.ZipFile(moved, "w", zipfile.ZIP_DEFLATED) as output:
+        for item in package.namelist():
+            data = package.read(item)
+            if item in ("[Content_Types].xml", "_rels/.rels"):
+                data = data.replace(b"word/document.xml", b"word/main.xml")
+            output.writestr(item.replace("word/document.xml", "word/main.xml").replace("word/_rels/document.xml.rels", "word/_rels/main.xml.rels"), data)
+    original = moved
+    db, store, analysis, result, decoded, _ = packet_factory(".docx", source_pdf=original)
+    source = docx.Document(original)
+    review = tracked.inspect(source.element.body, str(source.part.partname).lstrip("/"))
+    assert review["part"] == "word/main.xml"
+    assert review["status"] == "partial" and review["unsupported_marks"] == 1
+    assert [row["text"] for row in review["rows"]] == ["Former wording 😀", "Replacement wording 😀\nSecond  line of the insertion"]
+    assert [(row["paragraph"], row["body_index"], row["inline_index"]) for row in review["rows"]] == [(2, 1, 2), (2, 1, 3)]
+    assert all(row["text"] not in decoded["text"] for row in review["rows"])
+
+    from app.storage.artefacts import register_artefact
+    from app.storage.db import AnalysisStage
+
+    decoded[tracked.KEY] = review
+    stage = register_artefact(db, store, canonical_json(decoded), media_type="application/json", role="stage_output",
+                              created_by="decode", analysis_id=analysis.id)
+    db.get(AnalysisStage, (analysis.id, "decode")).output_artefact_id = stage.id
+    result["manifest"]["sampling"]["document_source"]["decode_sha256"] = stage.sha256
+    result["manifest"]["sampling"][tracked.COMMITMENT] = canonical_hash(review)
+    analysis.result_hash = canonical_hash(result)
+    store.put_bytes(canonical_json(result))
+    evidence = build_packet_set(db, analysis, store, result)
+    assert evidence["coverage"][tracked.KEY] == review
+    assert "PRIVATE REVISION AUTHOR" not in str(evidence)
+    snapshot = _snapshot(evidence, analysis, result)
+    monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
+    export = public_package._evidence(snapshot)
+    assert export["coverage"][tracked.KEY] == review
+    assert public_package.public_result(snapshot.result)[tracked.COMMITMENT] == canonical_hash(review)
+    pdf = engine.render_pdf(snapshot)
+    assert not pdf.refused
+    printed = engine.pdf_text(pdf.pdf)
+    assert "Replacement wording" in printed and "Second  line of the insertion" in printed
+    redacted = snapshot.model_copy(update={"report": snapshot.report.model_copy(update={"redacted": True})})
+    assert multimedia_evidence.view(redacted)["word_tracked_changes"] is None
+    assert "Replacement wording" not in engine.pdf_text(engine.render_pdf(redacted).pdf)
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"sha256": analysis.sha256, "bytes": analysis.size_bytes}}
+    archive_path = tmp_path / "tracked.zip"
+    with zipfile.ZipFile(archive_path, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(export))
+    with zipfile.ZipFile(archive_path) as archive:
+        assert "Verified 2 retained tracked Word edit locations" in verify_document_source.check(archive, bundle, original)
+    forged = deepcopy(export)
+    forged["coverage"][tracked.KEY]["rows"][0]["inline_index"] += 1
+    with pytest.raises(ValueError, match="source commitment"):
+        tracked.verify_source(forged, review, expected=canonical_hash(review))
+    forged["coverage"][tracked.KEY]["rows"][1]["inline_index"] += 1
+    with pytest.raises(ValueError, match="original XML positions"):
+        tracked.verify_source(forged, review, expected=canonical_hash(forged["coverage"][tracked.KEY]))

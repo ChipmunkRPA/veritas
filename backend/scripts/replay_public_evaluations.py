@@ -124,8 +124,19 @@ LOCALIZATION_LIMITS = {
         f"{PANELS}/writing-f1000-revision-spans-2026-11-13.json",
     )),
 }
+SPECIALIST_TRANSFER = {
+    "image": ("review_image_flame_jpeg_transfer.py", ("image-flame-jpeg-transfer-2026-11-13.json",), ()),
+    "video": ("review_video_mouth_codec_prediction.py", ("video-mouth-codec-prediction-2026-11-13.json",), ()),
+    "audio": ("review_audio_wpe_room_transfer.py", (
+        "audio-wpe-room-transfer-2026-11-13.json", "--ancestor", "audio-room-stress-transfer-2026-11-13.json",
+    ), ()),
+    "writing": ("review_writing_revision_trajectory_transfer.py", ("writing-revision-trajectory-2026-11-13.json",), (
+        f"{SCRIPTS}/writing_revision_trajectory_transfer.py",
+        f"{PANELS}/writing-multiblock-independent-2026-11-12.json",
+    )),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
-          "difficult-edits", "localization-limits")
+          "difficult-edits", "localization-limits", "specialist-transfer")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -178,6 +189,9 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
     elif suite == "localization-limits":
         script, panel, prefix, dependencies = LOCALIZATION_LIMITS[modality]
         panel_names = (panel,)
+    elif suite == "specialist-transfer":
+        script, panel_names, dependencies = SPECIALIST_TRANSFER[modality]
+        prefix = ()
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

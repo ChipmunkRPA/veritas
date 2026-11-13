@@ -81,6 +81,15 @@ and [blind dereverberation trial](audio-wpe-room-transfer-2026-11-13.md#replay)
 publish source-group results and standard-library checks for both operating
 points. The voice replay binds the unchanged mono measurements to the earlier
 public ledger.
+The [public-report revision replay](writing-revision-trajectory-2026-11-13.md#replay)
+rebuilds all 156 records and source positions from two pinned publisher CSVs.
+It separately counts text-identical operation labels. The [H.264 prediction
+study](video-mouth-codec-prediction-2026-11-13.md#local-replay) supplies the
+original frame and crop commitments and a standalone replay of the decisions.
+
+Use `--suite specialist-transfer` in the replay command below to check these
+four newer comparisons together. The resulting receipt can be reviewed
+without downloading the source reports or media.
 
 ### Replay the latest localization comparisons
 

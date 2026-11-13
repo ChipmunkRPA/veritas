@@ -97,6 +97,13 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [H.264 mouth prediction comparison](video-mouth-codec-prediction-2026-11-13.md)
+  located five of 17 neural redraws but flagged 37 of 75 ordinary files.
+  Motion-vector dispersion located zero. Both remain offline.
+- The [outside writing benchmark](writing-revision-trajectory-2026-11-13.md)
+  found one additional half-covered span on 105 text-changed deliveries,
+  no additional strict location, and no improvement in ordinary highlights.
+  Fifteen further publisher-labeled versions exactly matched their originals.
 - The [released FLAME JPEG comparison](image-flame-jpeg-transfer-2026-11-13.md)
   found no useful region on 26 object removals. Its published point with local
   region filtering highlighted 38 of 48 held ordinary files. Its separately

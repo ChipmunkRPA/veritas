@@ -134,7 +134,7 @@ def test_local_timing_evidence_replays_offsets_excerpts_and_pdf(tmp_path):
     exported.write_text(json.dumps(package))
     with pytest.raises(ValueError, match="differs from the re-decoded sources"):
         run(earlier, analyzed, exported, verify=True)
-    with pytest.raises(ValueError, match="Exported source clock differs"):
+    with pytest.raises(ValueError, match="Independent signed offset or range differs|Exported source clock differs"):
         verify_timing(earlier, analyzed, exported)
     package["comparison"]["local_timing"]["range"]["submitted"]["samples"][0] -= 1
     package["comparison"]["local_timing"]["range"]["submitted"]["waveform"]["low"][0] = 7
@@ -155,6 +155,45 @@ def test_local_timing_evidence_replays_offsets_excerpts_and_pdf(tmp_path):
     assert unsupported["local_timing"]["status"] == "unassessed"
     assert "range" not in unsupported["local_timing"]
     assert "local_timing" not in audio_reference.compare(earlier, analyzed)[0]
+
+
+def test_local_channel_timing_replays_opposite_stereo_moves(tmp_path):
+    generator = np.random.default_rng(665)
+    first = generator.integers(-10000, 10000, (52800, 2), dtype=np.int16)
+    last = first.copy()
+    start, stop = 14417, 21619
+    last[start:stop, 0] = first[start - 3200:stop - 3200, 0]
+    last[start:stop, 1] = first[start + 2727:stop + 2727, 1]
+    earlier = save_stereo(tmp_path, "original", first)
+    analyzed = save_stereo(tmp_path, "edited", last)
+    result, assets = audio_reference.compare(earlier, analyzed, include_local_timing=True, include_channel_timing=True)
+    assert result["schema"] == audio_reference.SCHEMA_WITH_CHANNEL_TIMING
+    timing = result["channel_timing"]
+    assert timing["status"] == "local_shift" and timing["affects_overall_confidence"] is False
+    for index, (channel, shift) in enumerate(zip(timing["ranges"], (3200, -2727), strict=True)):
+        span = channel["range"]
+        assert channel["channel"] == ("left", "right")[index]
+        assert channel["offset_ms"] == shift / 16
+        assert span["changed_samples"] == span["submitted_samples"] == [start, stop]
+        assert span["earlier_samples"] == [start - shift, stop - shift]
+        for key, signal in (("earlier", first), ("submitted", last)):
+            a, b = span[key]["samples"]
+            assert span[key]["source_pts"] == [a, b]
+            np.testing.assert_array_equal(read_wav(assets[span[key]["audio"]["file"]]), signal[a:b, index] / 32768)
+    with pymupdf.open(stream=render_comparison(result, assets), filetype="pdf") as document:
+        assert "Left channel timing" in document[-2].get_text()
+        assert "Right channel timing" in document[-1].get_text()
+        assert "0.901 to 1.351 s" in document[-1].get_text()
+    exported = tmp_path / "channel-evidence.json"
+    exported.write_text(json.dumps({"comparison": result, "assets": {
+        name: base64.b64encode(raw).decode() for name, raw in assets.items()}}))
+    assert run(earlier, analyzed, exported, verify=True) == result
+    verified = verify_stereo(earlier, analyzed, exported)
+    assert verified["left"]["differing_samples"] == int(np.count_nonzero(first[:, 0] != last[:, 0]))
+    assert verified["right"]["local_timing"] == {"signed_shift_samples": -2727, "excerpts_verified": 2}
+    unchanged, _ = audio_reference.compare(earlier, earlier, include_local_timing=True, include_channel_timing=True)
+    assert unchanged["channel_timing"]["status"] == "no_local_shift"
+    assert unchanged["channel_timing"]["ranges"] == []
 
 
 @pytest.mark.parametrize("span", [

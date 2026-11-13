@@ -7,7 +7,14 @@ import DocumentContextComparison from './DocumentContextComparison'
 import DocumentPassageCoverage from './DocumentPassageCoverage'
 import DocumentRepeatedPassages from './DocumentRepeatedPassages'
 import DocumentUnselectedResponses from './DocumentUnselectedResponses'
-import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentPassagePosition, type EmailBodyAlternatives } from './multimediaPackets'
+import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentOriginalTextLocation, type DocumentPassagePosition, type EmailBodyAlternatives } from './multimediaPackets'
+
+const originalLocationLabels: Record<DocumentOriginalTextLocation['coordinate'], string> = {
+  decoded_text: 'Original decoded text characters',
+  word_paragraph: 'Original Word paragraph characters',
+  decoded_email: 'Decoded email part characters',
+  decoded_email_html: 'Decoded email HTML source characters',
+}
 
 function PassagePosition({ review }: { review: DocumentPassagePosition }) {
   const labels = ['Opening sentence', 'Middle sentence', 'Closing sentence']
@@ -242,14 +249,19 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         </div>
         <DocumentContextComparison comparison={packet.context_comparison} focus={packet.focus} />
         <details className="mt-4 text-small text-text-muted"><summary className="cursor-pointer">Source anchors</summary>
-          <ul className="pl-4 list-disc">{packet.anchors.map((anchor, index) => <li key={index}>
-            {anchor.page != null ? `Page ${anchor.page}` : anchor.paragraph_index != null ? `Paragraph ${anchor.paragraph_index + 1}`
-              : anchor.paragraph != null ? `Paragraph ${anchor.paragraph}` : 'Recorded source passage'}
-            {anchor.kind === 'docx' && anchor.body_path && ` · document path ${anchor.body_path.join(' / ')}`}
-            {anchor.mime_part != null && ` · email part ${anchor.mime_part}`}{anchor.quote_role && ` · ${anchor.quote_role}`}
-            {anchor.extraction === 'ocr' && ' · text recognized from the page image'}
-            {anchor.selected_start != null && anchor.selected_end != null && ` · characters [${anchor.selected_start}, ${anchor.selected_end})`}
-          </li>)}</ul>
+          <ul className="pl-4 list-disc">{packet.anchors.map((anchor, index) => {
+            const original = set.coverage?.original_text_locations?.packets[packet.id]?.find((row) => row.anchor_index === index)
+            return <li key={index}>
+              {anchor.page != null ? `Page ${anchor.page}` : anchor.paragraph_index != null ? `Paragraph ${anchor.paragraph_index + 1}`
+                : anchor.paragraph != null ? `Paragraph ${anchor.paragraph}` : 'Recorded source passage'}
+              {anchor.kind === 'docx' && anchor.body_path && ` · document path ${anchor.body_path.join(' / ')}`}
+              {anchor.mime_part != null && ` · email part ${anchor.mime_part}`}{anchor.quote_role && ` · ${anchor.quote_role}`}
+              {anchor.extraction === 'ocr' && ' · text recognized from the page image'}
+              {anchor.selected_start != null && anchor.selected_end != null && ` · Extracted characters [${anchor.selected_start}, ${anchor.selected_end})`}
+              {original && <p className="mt-1 mb-2">{originalLocationLabels[original.coordinate]}{' '}
+                <span className="font-mono">{original.ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}</span></p>}
+            </li>
+          })}</ul>
         </details>
         <p className="mt-4 mb-0 text-small">{packet.interpretation}</p><EvidenceLimits lines={packet.limitations} /><EvidenceReferences packet={packet} />
       </article>

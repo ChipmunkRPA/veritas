@@ -24,6 +24,7 @@ from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
 from app.evidence import (
     document_matched_context,
+    document_native_locations,
     document_paragraph_priority,
     document_passage_coverage,
     document_passage_position,
@@ -362,6 +363,10 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         for artifact in packet.get("artifacts", {}).values():
             if not _SHA.fullmatch(str(artifact.get("sha256", ""))) or artifact.get("media_type") != "image/png":
                 raise DocumentPacketIntegrityError("Invalid document evidence image")
+    try:
+        document_native_locations.validate(document)
+    except (ValueError, KeyError, TypeError) as error:
+        raise DocumentPacketIntegrityError("Original text locations have invalid source positions") from error
 
 
 def public_ocr_coverage(meta: dict) -> dict | None:
@@ -627,6 +632,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document_paragraph_priority.apply(document, result, text, mapping)
     except (ValueError, KeyError, TypeError, AttributeError) as error:
         raise DocumentPacketIntegrityError("Paragraph review order has invalid source commitments or positions") from error
+    if original_locations := document_native_locations.build(document):
+        document["coverage"][document_native_locations.KEY] = original_locations
     document = json.loads(canonical_json(document))
     for packet in document["packets"]:
         for window in packet["supporting_windows"]:
@@ -668,6 +675,10 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
                                                     result=result, meta=decoded["meta"])
             document_unselected_responses.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_passage_position.verify_source(document, decoded["text"], decoded["source_map"], result=result)
+            if document_native_locations.KEY in document["coverage"]:
+                for packet in document["packets"]:
+                    if packet["anchors"] != _inspection_anchors(decoded["source_map"], packet["inspection_scope"], len(decoded["text"])):
+                        raise ValueError("Original text locations use a different source map")
             document_scope.validate_checkpoint_agreement(document, decoded["text"], result=result, mapping=decoded["source_map"])
             alternatives = email_alternatives.result_review(result)
             email_alternatives.validate_set(document, canonical_hash(alternatives) if alternatives is not None else None)

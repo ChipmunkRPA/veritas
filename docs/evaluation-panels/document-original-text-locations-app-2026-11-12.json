@@ -1,0 +1,83 @@
+{
+  "additional_native_fixtures": [
+    "UTF-16 BOM, supplementary Unicode and whitespace normalization",
+    "Word table cell and split runs",
+    "MIME quoted-printable HTML with entity and inline tags",
+    "PDF page-only source geometry"
+  ],
+  "browser": {
+    "api_json_and_report_download_match": true,
+    "exact_original_ranges": true,
+    "packet_count": 1,
+    "page_errors": 0,
+    "plain_view": true
+  },
+  "displayed_locations": {
+    "packets": {
+      "T01": [
+        {
+          "anchor_index": 0,
+          "coordinate": "decoded_text",
+          "ranges": [
+            [
+              4,
+              67
+            ]
+          ]
+        },
+        {
+          "anchor_index": 1,
+          "coordinate": "decoded_text",
+          "ranges": [
+            [
+              68,
+              266
+            ]
+          ]
+        },
+        {
+          "anchor_index": 2,
+          "coordinate": "decoded_text",
+          "ranges": [
+            [
+              267,
+              582
+            ]
+          ]
+        }
+      ]
+    },
+    "schema": "document-original-text-locations/1"
+  },
+  "focused_backend_tests": 118,
+  "focused_frontend_tests": 15,
+  "frontend_typecheck": true,
+  "historical_signed_source_replay": [
+    "veritas-report-2.0.r112",
+    "veritas-report-2.0.r114"
+  ],
+  "local_simulated_checkout": {
+    "native_packet_count": 1,
+    "paid_jobs": 1,
+    "signed_source_replay": true,
+    "source_sha256": "d5490bee0963153b83c4aeb46071571a4a2bed34ca99f24d7afa01b63f429f54",
+    "unpaid_jobs": 0
+  },
+  "output_files": [
+    {
+      "file": "report.pdf",
+      "sha256": "03863f1009b626b289e311618ba1bce0c2dddc159582d5f0bd11a4a6274d154d"
+    },
+    {
+      "file": "export.json",
+      "sha256": "56436dc07e5194e9fe535f06cc078b7afa5f7291de28e611394c69eba471a050"
+    },
+    {
+      "file": "signed-native.zip",
+      "sha256": "012329035eb816da7fea6eaba9463c82626ec34d2b55c1e4e5b17ad08a729b5a"
+    }
+  ],
+  "schema": "chipmunk.document-original-text-locations-app/1",
+  "template": "veritas-report-2.0.r116",
+  "visual_pdf_check_page": 7
+}

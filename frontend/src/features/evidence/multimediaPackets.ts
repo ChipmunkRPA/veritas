@@ -256,6 +256,11 @@ export interface DocumentAnchor {
   selected_start?: number; selected_end?: number; highlight_boxes?: number[][]
   ocr_word_confidence?: number | number[]
 }
+export interface DocumentOriginalTextLocation {
+  anchor_index: number
+  coordinate: 'decoded_text' | 'word_paragraph' | 'decoded_email' | 'decoded_email_html'
+  ranges: [number, number][]
+}
 export interface DocumentEvidencePacket extends PacketBase {
   focus: TextSpan; context: TextSpan; anchors: DocumentAnchor[]; measurements: EvidenceMeasure[]
   supporting_windows: DocumentEvidenceWindow[]
@@ -337,6 +342,7 @@ export interface DocumentEvidenceSet extends SetBase {
     local_passage_coverage?: DocumentPassageCoverage;
     unselected_passage_responses?: DocumentUnselectedResponses;
     passage_position_review?: DocumentPassagePosition;
+    original_text_locations?: { schema: 'document-original-text-locations/1'; packets: Record<string, DocumentOriginalTextLocation[]> };
     writing_second_check?: { schema: 'document-writing-second-check/1' | 'document-writing-second-check/2' | 'document-writing-second-check/3' | 'document-writing-second-check/4' | 'document-writing-second-check/5' | 'document-writing-second-check/6'; authorship_confidence_contribution: 0;
       body_spans?: { start: number; end: number }[];
       pdf_spans?: { start: number; end: number; page: number }[];

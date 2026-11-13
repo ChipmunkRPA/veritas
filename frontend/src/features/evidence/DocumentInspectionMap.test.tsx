@@ -116,6 +116,21 @@ describe('ordinary document passage inspection', () => {
     expect(screen.getByText(/Pages without mapped text: 3/)).toBeTruthy()
   })
 
+  it('distinguishes extracted positions from disjoint decoded email source ranges', () => {
+    const item = { ...packet, anchors: [{ kind: 'email', mime_part: '1.1', quote_role: 'body',
+      selected_start: 108, selected_end: 122 }, { kind: 'pdf', page: 2, selected_start: 123, selected_end: 137 }] }
+    const set = evidence([item])
+    show({ ...set, coverage: { ...set.coverage, original_text_locations: {
+      schema: 'document-original-text-locations/1', packets: { T01: [{ anchor_index: 0,
+        coordinate: 'decoded_email_html', ranges: [[20, 25], [31, 40]] }] },
+    } } })
+    const details = screen.getByText('Source anchors').closest('details')!
+    expect(within(details).getByText(/email part 1.1.*Extracted characters \[108, 122\)/)).toBeTruthy()
+    expect(within(details).getByText('Decoded email HTML source characters')).toBeTruthy()
+    expect(within(details).getByText('[20, 25), [31, 40)')).toBeTruthy()
+    expect(within(details).getByText(/Page 2.*Extracted characters \[123, 137\)/)).toBeTruthy()
+  })
+
   it('opens the prioritized passage first while preserving the other saved passage and disagreement', () => {
     const second = { ...packet, id: 'T02' }
     const set = evidence([second, packet])

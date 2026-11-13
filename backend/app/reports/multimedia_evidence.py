@@ -457,6 +457,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     from app.detectors.text.extract import text_hash
     from app.evidence import (
         document_matched_context,
+        document_native_locations,
         document_paragraph_priority,
         document_passage_coverage,
         document_passage_position,
@@ -486,6 +487,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         raise ObjectIntegrityError("Frozen email coverage differs from the recorded extraction")
     try:
         verify_repeated_passages(document, text, mapping)
+        document_native_locations.validate(document)
         if document["version"] == document_scope.MATCHED_VERSION:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             document_matched_context.verify_source(document, text, mapping, result=frozen)
@@ -755,6 +757,8 @@ def _voice_interval_view(interval: dict, rate: int, video_origin_s: float | None
 
 
 def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[str, Any] | None:
+    from app.evidence.document_native_locations import KEY as ORIGINAL_TEXT_LOCATIONS
+
     if snapshot.analysis.kind not in KINDS:
         if snapshot.evidence is not None:
             verified_set(snapshot)  # do not silently ignore an incorrectly attached set
@@ -918,6 +922,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                     segments.append({"text": context["text"][cursor - context["start"]:], "highlight": False})
                     row["context"]["segments"] = segments
                 row["source_locations"] = copy.deepcopy(packet["anchors"])
+                original = (part.get("coverage", {}).get(ORIGINAL_TEXT_LOCATIONS) or {}).get("packets", {})
+                for location in original.get(packet["id"], []):
+                    row["source_locations"][location["anchor_index"]]["original_location"] = location
             for window in packet["supporting_windows"]:
                 context_window = {"score": window["score"], "input_sha256": window["input_sha256"],
                                        "spans": copy.deepcopy(window["spans"]), "signal_ref": copy.deepcopy(window["signal_ref"]),

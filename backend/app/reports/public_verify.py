@@ -227,11 +227,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              'Writing position commitments require document evidence')
     if analysis['kind'] == 'document':
         from app.evidence.document_matched_context import validate as validate_matched_context
+        from app.evidence.document_native_locations import validate as validate_native_locations
         from app.evidence.document_paragraph_priority import validate as validate_paragraph_priority
         from app.evidence.document_repeat import validate as validate_repeated_passages
         from app.evidence.document_unselected_responses import validate as validate_unselected_responses
 
         validate_repeated_passages(evidence)
+        validate_native_locations(evidence)
         validate_matched_context(evidence, published_checks={check['id'] for check in result.get('checks', [])})
         validate_paragraph_priority(evidence)
         document_scope.validate_passage_coverage(evidence)

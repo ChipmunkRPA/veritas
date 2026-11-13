@@ -21,6 +21,7 @@ MAX_SAMPLES = RATE * 30
 MAX_BYTES = 48 * 1024 * 1024
 SCHEMA = "chipmunk.audio-reference-comparison/5"
 SCHEMA_WITH_LOCAL_TIMING = "chipmunk.audio-reference-comparison/6"
+SCHEMA_WITH_CHANNEL_TIMING = "chipmunk.audio-reference-comparison/7"
 SIDES = ("earlier", "submitted")
 FRAME = re.compile(rb"\bn:(\d+)\s+pts:(-?\d+).*?\bnb_samples:(\d+)")
 
@@ -136,19 +137,59 @@ def verify_channel(label, record, assets, first, second, origins):
     return {"differing_samples": sum(counts), "ranges": len(ranges), "previews_verified": clips}
 
 
+def verify_timing(row, assets, before, after, origins):
+    span = row["range"]
+    channel = row["channel"]
+    shift = span["shift_samples"]
+    a, b = span["earlier_samples"]
+    start, end = span["submitted_samples"]
+    require(1920 <= abs(shift) <= 5760 and row["offset_ms"] == shift / 16
+            and (a + shift, b + shift) == (start, end)
+            and 0 <= a < b <= len(before) and 0 <= start < end <= len(after) and b - a >= 2560,
+            "Channel timing offset or sample extent differs")
+    changes = [i for i, (x, y) in enumerate(zip(before, after, strict=True)) if x != y]
+    require(changes and span["changed_samples"] == [changes[0], changes[-1] + 1]
+            and 960 <= changes[0] <= start < end <= changes[-1] + 1 <= len(before) - 960
+            and changes[-1] + 1 - changes[0] <= 32000
+            and before[a:b] == after[start:end], "Changed interval or exact excerpt differs")
+    for side, pcm, position, origin in zip(SIDES, (before, after), ((a, b), (start, end)), origins, strict=True):
+        lo, hi = position
+        excerpt = pcm[lo:hi]
+        evidence = span[side]
+        require(evidence["samples"] == [lo, hi] and evidence["source_pts"] == [lo + origin, hi + origin]
+                and (evidence["start_s"], evidence["end_s"]) == (lo / RATE, hi / RATE)
+                and evidence["pcm_sha256"] == digest(b"".join(int(s).to_bytes(2, "little", signed=True) for s in excerpt))
+                and evidence["waveform"] == waveform(excerpt), "Channel timing source or waveform differs")
+        verify_clip(assets, evidence["audio"], excerpt, f"{channel}-timing-{side}.wav")
+    return {"signed_shift_samples": shift, "excerpts_verified": 2}
+
+
 def verify(earlier, submitted, export):
     package = json.loads(export.read_bytes())
     record, assets = package["comparison"], package["assets"]
     stereo = record["stereo_comparison"]
-    require(record["schema"] in {SCHEMA, SCHEMA_WITH_LOCAL_TIMING} and stereo["status"] == "measured"
+    require(record["schema"] in {SCHEMA, SCHEMA_WITH_LOCAL_TIMING, SCHEMA_WITH_CHANNEL_TIMING} and stereo["status"] == "measured"
             and stereo["source_time_base"] == f"1/{RATE}" and stereo["affects_overall_confidence"] is False,
             "The export needs a measured stereo comparison")
     require(set(stereo["channels"]) == {"left", "right"}, "Stereo comparison must include both channels")
     first, first_pts = decode(earlier, record["earlier"], stereo["sources"]["earlier"])
     second, second_pts = decode(submitted, record["submitted"], stereo["sources"]["submitted"])
     require(first_pts == second_pts and len(first[0]) == len(second[0]), "The two source clocks differ")
-    return {label: verify_channel(label, stereo["channels"][label], assets, before, after, (first_pts, second_pts))
-            for label, before, after in zip(("left", "right"), first, second, strict=True)}
+    results = {label: verify_channel(label, stereo["channels"][label], assets, before, after, (first_pts, second_pts))
+               for label, before, after in zip(("left", "right"), first, second, strict=True)}
+    if record["schema"] == SCHEMA_WITH_CHANNEL_TIMING:
+        timing = record["channel_timing"]
+        rows = timing["ranges"]
+        labels = [r["channel"] for r in rows]
+        require(labels == sorted(set(labels)) and all(label in results for label in labels)
+                and timing["sample_rate"] == RATE and timing["affects_overall_confidence"] is False
+                and timing["status"] == ("local_shift" if rows else "no_local_shift"), "Invalid stereo timing record")
+        for row in rows:
+            index = ("left", "right").index(row["channel"])
+            results[row["channel"]]["local_timing"] = verify_timing(
+                row, assets, first[index], second[index], (first_pts, second_pts)
+            )
+    return results
 
 
 if __name__ == "__main__":

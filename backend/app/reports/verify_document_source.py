@@ -16,6 +16,7 @@ from app.detectors.text.extract import extract, text_hash
 from app.evidence import (
     document_context,
     document_matched_context,
+    document_native_locations,
     document_paragraph_priority,
     document_passage_coverage,
     document_passage_position,
@@ -119,6 +120,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("Recorded document coverage differs from the re-extracted original")
     document_repeat.verify_source(evidence, text, mapping)
     document_matched_context.verify_source(evidence, text, mapping)
+    document_native_locations.validate(evidence)
     document_paragraph_priority.verify_source(evidence, text, mapping)
     document_passage_coverage.verify_source(evidence, text, mapping, meta=doc.meta)
     document_scope.validate_checkpoint_agreement(evidence, text, mapping=mapping)
@@ -166,6 +168,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     unselected_detail = f" Verified {unselected} additional recorded response locations and inputs." if unselected else ""
     alternative_detail = " Verified both decoded email body renditions and reported source positions." if alternatives and "parts" in alternatives else ""
     position_detail = " Verified all three writing position inputs and their source ranges." if position else ""
+    native_detail = " Verified decoded original text locations for the inspected writing." if document_native_locations.KEY in coverage else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
-            f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}")
+            f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}")

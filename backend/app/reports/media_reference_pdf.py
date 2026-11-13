@@ -7,6 +7,7 @@ import pymupdf
 from app.evidence.audio_reference import (
     AUDIO_RATE,
     MAX_SECONDS,
+    SCHEMA_WITH_CHANNEL_TIMING,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
     SCHEMA_WITH_LOCAL_TIMING,
     SCHEMA_WITH_STEREO,
@@ -262,10 +263,12 @@ def _soundtrack_timing_page(document, timing, assets):
     _text(page, MARGIN, 720, "Waveforms share one scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
 
 
-def _audio_local_timing_page(document, timing):
-    page = _page(document, "Local audio timing")
+def _audio_local_timing_page(document, timing, *, scope=None):
+    channel = timing.get("channel")
+    title = f"{channel.capitalize()} channel timing" if channel else "Local audio timing"
+    page = _page(document, title)
     page.insert_textbox((MARGIN, 124, RIGHT, 167), timing["summary"], fontsize=12, fontname="hebo", color=INK)
-    page.insert_textbox((MARGIN, 176, RIGHT, 231), timing["scope"], fontsize=11, fontname="helv", color=MUTED)
+    page.insert_textbox((MARGIN, 176, RIGHT, 231), scope or timing["scope"], fontsize=11, fontname="helv", color=MUTED)
     if timing["status"] != "local_shift":
         return
     span = timing["range"]
@@ -276,9 +279,13 @@ def _audio_local_timing_page(document, timing):
         row = span[side]
         first, end = row["samples"]
         _text(page, MARGIN, y - 65, f"{label}  {row['start_s']:.3f} to {row['end_s']:.3f} s", font="hebo")
-        _draw_waveform(page, row["waveform"], y, maximum, (end - first) / timing["sample_rate"])
+        _draw_waveform(page, row["waveform"], y, maximum, (end - first) / AUDIO_RATE)
         _text(page, MARGIN, y + 55, f"Decoded samples [{first}, {end}) at 16 kHz.", size=9, color=MUTED)
-    _text(page, MARGIN, 628, f"{span['supporting_windows']} matching windows support the time difference.", color=MUTED)
+    if channel:
+        start, end = span["changed_samples"]
+        _text(page, MARGIN, 628, f"Changed interval in analyzed recording  {start / AUDIO_RATE:.3f} to {end / AUDIO_RATE:.3f} s", color=MUTED)
+    else:
+        _text(page, MARGIN, 628, f"{span['supporting_windows']} matching windows support the time difference.", color=MUTED)
     _text(page, MARGIN, 650, "Waveforms share one scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
 
 
@@ -408,7 +415,8 @@ def _stereo_pages(document, comparison):
 def render(record, assets):
     with pymupdf.open() as document:
         is_audio = record["schema"] in (AUDIO_SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT, SCHEMA_WITH_TRIM_ALIGNMENT,
-                                        SCHEMA_WITH_TRIM_AND_LEVEL, SCHEMA_WITH_STEREO, SCHEMA_WITH_LOCAL_TIMING)
+                                        SCHEMA_WITH_TRIM_AND_LEVEL, SCHEMA_WITH_STEREO, SCHEMA_WITH_LOCAL_TIMING,
+                                        SCHEMA_WITH_CHANNEL_TIMING)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
         adjusted = record.get("level_adjusted")
         trimmed = record["schema"] == SCHEMA_WITH_TRIM_AND_LEVEL or (
@@ -442,6 +450,13 @@ def render(record, assets):
             _additional_soundtrack_pages(document, record["additional_soundtrack"])
         if "stereo_comparison" in record:
             _stereo_pages(document, record["stereo_comparison"])
-        if "local_timing" in record:
+        if (channel_timing := record.get("channel_timing")) is not None:
+            for row in channel_timing["ranges"]:
+                _audio_local_timing_page(document, row, scope=channel_timing["scope"])
+            if not channel_timing["ranges"]:
+                page = _page(document, "Stereo channel timing")
+                _text(page, MARGIN, 136, "No qualifying local move was found in either channel.")
+                page.insert_textbox((MARGIN, 164, RIGHT, 230), channel_timing["scope"], fontsize=11, fontname="helv", color=MUTED)
+        if "local_timing" in record and (channel_timing is None or record["local_timing"]["status"] == "local_shift"):
             _audio_local_timing_page(document, record["local_timing"])
         return document.tobytes(deflate=True, garbage=4)

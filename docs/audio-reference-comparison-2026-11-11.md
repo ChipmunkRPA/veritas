@@ -70,9 +70,9 @@ python -m scripts.compare_audio_references earlier.wav analyzed.wav evidence-fol
 python -m scripts.compare_audio_references earlier.wav analyzed.wav chipmunk-verify-audio-comparison.json --verify
 ```
 
-Replay uses the app's measurement implementation and supports all five export versions. Record the FFmpeg version if runs produce different decoded bytes. Keep private audio and exports in your local workspace.
+Replay uses the app's measurement implementation and supports all seven export versions. Record the FFmpeg version if runs produce different decoded bytes. Keep private audio and exports in your local workspace.
 
-For a measured version 5 stereo section, a separate reader needs only Python 3.11 or newer, FFmpeg and FFprobe. From the repository root, give it both original files and the JSON downloaded from the browser. It checks the original hashes, decoded channel bytes and clocks, every displayed interval, waveform and WAV against the originals. It verifies the channel comparison only.
+For a measured stereo section, a separate reader needs only Python 3.11 or newer, FFmpeg and FFprobe. From the repository root, give it both original files and the JSON downloaded from the browser. It checks the original hashes, decoded channel bytes and clocks, every displayed interval, waveform and WAV against the originals. In version 7 it also checks each reported exact channel timing match. [Stereo timing results and scope](audio-reference-stereo-channel-timing-2026-11-12.md)
 
 ```sh
 python3 -B -IS backend/scripts/verify_stereo_reference.py earlier.wav analyzed.wav chipmunk-verify-audio-comparison.json

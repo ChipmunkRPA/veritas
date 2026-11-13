@@ -1,0 +1,2054 @@
+{
+  "counts": {
+    "ambiguous": 12,
+    "background_only": 12,
+    "background_replace": 12,
+    "gain": 12,
+    "shift": 48,
+    "unchanged": 12
+  },
+  "results": [
+    {
+      "expected": {
+        "0": [
+          2082,
+          17793,
+          24306
+        ]
+      },
+      "group": 1,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            17793,
+            24306
+          ],
+          "earlier_samples": [
+            15791,
+            22144
+          ],
+          "shift_samples": 2082,
+          "submitted_samples": [
+            17873,
+            24226
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "0": [
+          -2934,
+          17793,
+          24306
+        ]
+      },
+      "group": 1,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            17793,
+            24306
+          ],
+          "earlier_samples": [
+            20807,
+            27160
+          ],
+          "shift_samples": -2934,
+          "submitted_samples": [
+            17873,
+            24226
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          2082,
+          17793,
+          24306
+        ]
+      },
+      "group": 1,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            17793,
+            24306
+          ],
+          "earlier_samples": [
+            15711,
+            22224
+          ],
+          "shift_samples": 2082,
+          "submitted_samples": [
+            17793,
+            24306
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          -2934,
+          17793,
+          24306
+        ]
+      },
+      "group": 1,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            17793,
+            24306
+          ],
+          "earlier_samples": [
+            20727,
+            27240
+          ],
+          "shift_samples": -2934,
+          "submitted_samples": [
+            17793,
+            24306
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {},
+      "group": 1,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "unchanged"
+    },
+    {
+      "expected": {},
+      "group": 1,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_only"
+    },
+    {
+      "expected": {},
+      "group": 1,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "gain"
+    },
+    {
+      "expected": {},
+      "group": 1,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_replace"
+    },
+    {
+      "expected": {},
+      "group": 1,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "ambiguous"
+    },
+    {
+      "expected": {
+        "0": [
+          2115,
+          16926,
+          23552
+        ]
+      },
+      "group": 2,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            16926,
+            23552
+          ],
+          "earlier_samples": [
+            14811,
+            21437
+          ],
+          "shift_samples": 2115,
+          "submitted_samples": [
+            16926,
+            23552
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "0": [
+          -2975,
+          16926,
+          23552
+        ]
+      },
+      "group": 2,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            16926,
+            23552
+          ],
+          "earlier_samples": [
+            19901,
+            26527
+          ],
+          "shift_samples": -2975,
+          "submitted_samples": [
+            16926,
+            23552
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          2115,
+          16926,
+          23552
+        ]
+      },
+      "group": 2,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            16926,
+            23552
+          ],
+          "earlier_samples": [
+            14891,
+            21357
+          ],
+          "shift_samples": 2115,
+          "submitted_samples": [
+            17006,
+            23472
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          -2975,
+          16926,
+          23552
+        ]
+      },
+      "group": 2,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            16926,
+            23552
+          ],
+          "earlier_samples": [
+            19981,
+            26447
+          ],
+          "shift_samples": -2975,
+          "submitted_samples": [
+            17006,
+            23472
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {},
+      "group": 2,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "unchanged"
+    },
+    {
+      "expected": {},
+      "group": 2,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_only"
+    },
+    {
+      "expected": {},
+      "group": 2,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "gain"
+    },
+    {
+      "expected": {},
+      "group": 2,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_replace"
+    },
+    {
+      "expected": {},
+      "group": 2,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "ambiguous"
+    },
+    {
+      "expected": {
+        "0": [
+          2148,
+          12059,
+          18798
+        ]
+      },
+      "group": 3,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            12059,
+            18798
+          ],
+          "earlier_samples": [
+            9991,
+            16570
+          ],
+          "shift_samples": 2148,
+          "submitted_samples": [
+            12139,
+            18718
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "0": [
+          -3016,
+          12059,
+          18798
+        ]
+      },
+      "group": 3,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            12059,
+            18798
+          ],
+          "earlier_samples": [
+            15155,
+            21734
+          ],
+          "shift_samples": -3016,
+          "submitted_samples": [
+            12139,
+            18718
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          2148,
+          12059,
+          18798
+        ]
+      },
+      "group": 3,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            12059,
+            18798
+          ],
+          "earlier_samples": [
+            9911,
+            16650
+          ],
+          "shift_samples": 2148,
+          "submitted_samples": [
+            12059,
+            18798
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          -3016,
+          12059,
+          18798
+        ]
+      },
+      "group": 3,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            12059,
+            18798
+          ],
+          "earlier_samples": [
+            15075,
+            21814
+          ],
+          "shift_samples": -3016,
+          "submitted_samples": [
+            12059,
+            18798
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {},
+      "group": 3,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "unchanged"
+    },
+    {
+      "expected": {},
+      "group": 3,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_only"
+    },
+    {
+      "expected": {},
+      "group": 3,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "gain"
+    },
+    {
+      "expected": {},
+      "group": 3,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_replace"
+    },
+    {
+      "expected": {},
+      "group": 3,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "ambiguous"
+    },
+    {
+      "expected": {
+        "0": [
+          2181,
+          11432,
+          18284
+        ]
+      },
+      "group": 4,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            11432,
+            18284
+          ],
+          "earlier_samples": [
+            9251,
+            16103
+          ],
+          "shift_samples": 2181,
+          "submitted_samples": [
+            11432,
+            18284
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "0": [
+          -3057,
+          11432,
+          18284
+        ]
+      },
+      "group": 4,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            11432,
+            18284
+          ],
+          "earlier_samples": [
+            14489,
+            21341
+          ],
+          "shift_samples": -3057,
+          "submitted_samples": [
+            11432,
+            18284
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          2181,
+          11432,
+          18284
+        ]
+      },
+      "group": 4,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            11432,
+            18284
+          ],
+          "earlier_samples": [
+            9331,
+            16023
+          ],
+          "shift_samples": 2181,
+          "submitted_samples": [
+            11512,
+            18204
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          -3057,
+          11432,
+          18284
+        ]
+      },
+      "group": 4,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            11432,
+            18284
+          ],
+          "earlier_samples": [
+            14569,
+            21261
+          ],
+          "shift_samples": -3057,
+          "submitted_samples": [
+            11512,
+            18204
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {},
+      "group": 4,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "unchanged"
+    },
+    {
+      "expected": {},
+      "group": 4,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_only"
+    },
+    {
+      "expected": {},
+      "group": 4,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "gain"
+    },
+    {
+      "expected": {},
+      "group": 4,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_replace"
+    },
+    {
+      "expected": {},
+      "group": 4,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "ambiguous"
+    },
+    {
+      "expected": {
+        "0": [
+          2214,
+          13445,
+          20410
+        ]
+      },
+      "group": 5,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            13445,
+            20410
+          ],
+          "earlier_samples": [
+            11311,
+            18116
+          ],
+          "shift_samples": 2214,
+          "submitted_samples": [
+            13525,
+            20330
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "0": [
+          -3098,
+          13445,
+          20410
+        ]
+      },
+      "group": 5,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            13445,
+            20410
+          ],
+          "earlier_samples": [
+            16623,
+            23428
+          ],
+          "shift_samples": -3098,
+          "submitted_samples": [
+            13525,
+            20330
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          2214,
+          13445,
+          20410
+        ]
+      },
+      "group": 5,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            13445,
+            20410
+          ],
+          "earlier_samples": [
+            11231,
+            18196
+          ],
+          "shift_samples": 2214,
+          "submitted_samples": [
+            13445,
+            20410
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          -3098,
+          13445,
+          20410
+        ]
+      },
+      "group": 5,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            13445,
+            20410
+          ],
+          "earlier_samples": [
+            16543,
+            23508
+          ],
+          "shift_samples": -3098,
+          "submitted_samples": [
+            13445,
+            20410
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {},
+      "group": 5,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "unchanged"
+    },
+    {
+      "expected": {},
+      "group": 5,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_only"
+    },
+    {
+      "expected": {},
+      "group": 5,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "gain"
+    },
+    {
+      "expected": {},
+      "group": 5,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_replace"
+    },
+    {
+      "expected": {},
+      "group": 5,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "ambiguous"
+    },
+    {
+      "expected": {
+        "0": [
+          2247,
+          14498,
+          21576
+        ]
+      },
+      "group": 6,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            14498,
+            21576
+          ],
+          "earlier_samples": [
+            12251,
+            19329
+          ],
+          "shift_samples": 2247,
+          "submitted_samples": [
+            14498,
+            21576
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "0": [
+          -3139,
+          14498,
+          21576
+        ]
+      },
+      "group": 6,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            14498,
+            21576
+          ],
+          "earlier_samples": [
+            17637,
+            24715
+          ],
+          "shift_samples": -3139,
+          "submitted_samples": [
+            14498,
+            21576
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          2247,
+          14498,
+          21576
+        ]
+      },
+      "group": 6,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            14498,
+            21576
+          ],
+          "earlier_samples": [
+            12331,
+            19249
+          ],
+          "shift_samples": 2247,
+          "submitted_samples": [
+            14578,
+            21496
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          -3139,
+          14498,
+          21576
+        ]
+      },
+      "group": 6,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            14498,
+            21576
+          ],
+          "earlier_samples": [
+            17717,
+            24635
+          ],
+          "shift_samples": -3139,
+          "submitted_samples": [
+            14578,
+            21496
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {},
+      "group": 6,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "unchanged"
+    },
+    {
+      "expected": {},
+      "group": 6,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_only"
+    },
+    {
+      "expected": {},
+      "group": 6,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "gain"
+    },
+    {
+      "expected": {},
+      "group": 6,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_replace"
+    },
+    {
+      "expected": {},
+      "group": 6,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "ambiguous"
+    },
+    {
+      "expected": {
+        "0": [
+          2280,
+          17711,
+          24902
+        ]
+      },
+      "group": 7,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            17711,
+            24902
+          ],
+          "earlier_samples": [
+            15511,
+            22542
+          ],
+          "shift_samples": 2280,
+          "submitted_samples": [
+            17791,
+            24822
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "0": [
+          -3180,
+          17711,
+          24902
+        ]
+      },
+      "group": 7,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            17711,
+            24902
+          ],
+          "earlier_samples": [
+            20971,
+            28002
+          ],
+          "shift_samples": -3180,
+          "submitted_samples": [
+            17791,
+            24822
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          2280,
+          17711,
+          24902
+        ]
+      },
+      "group": 7,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            17711,
+            24902
+          ],
+          "earlier_samples": [
+            15431,
+            22622
+          ],
+          "shift_samples": 2280,
+          "submitted_samples": [
+            17711,
+            24902
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          -3180,
+          17711,
+          24902
+        ]
+      },
+      "group": 7,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            17711,
+            24902
+          ],
+          "earlier_samples": [
+            20891,
+            28082
+          ],
+          "shift_samples": -3180,
+          "submitted_samples": [
+            17711,
+            24902
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {},
+      "group": 7,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "unchanged"
+    },
+    {
+      "expected": {},
+      "group": 7,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_only"
+    },
+    {
+      "expected": {},
+      "group": 7,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "gain"
+    },
+    {
+      "expected": {},
+      "group": 7,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_replace"
+    },
+    {
+      "expected": {},
+      "group": 7,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "ambiguous"
+    },
+    {
+      "expected": {
+        "0": [
+          2313,
+          16044,
+          23348
+        ]
+      },
+      "group": 8,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            16044,
+            23348
+          ],
+          "earlier_samples": [
+            13731,
+            21035
+          ],
+          "shift_samples": 2313,
+          "submitted_samples": [
+            16044,
+            23348
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "0": [
+          -3221,
+          16044,
+          23348
+        ]
+      },
+      "group": 8,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            16044,
+            23348
+          ],
+          "earlier_samples": [
+            19265,
+            26569
+          ],
+          "shift_samples": -3221,
+          "submitted_samples": [
+            16044,
+            23348
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          2313,
+          16044,
+          23348
+        ]
+      },
+      "group": 8,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            16044,
+            23348
+          ],
+          "earlier_samples": [
+            13811,
+            20955
+          ],
+          "shift_samples": 2313,
+          "submitted_samples": [
+            16124,
+            23268
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          -3221,
+          16044,
+          23348
+        ]
+      },
+      "group": 8,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            16044,
+            23348
+          ],
+          "earlier_samples": [
+            19345,
+            26489
+          ],
+          "shift_samples": -3221,
+          "submitted_samples": [
+            16124,
+            23268
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {},
+      "group": 8,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "unchanged"
+    },
+    {
+      "expected": {},
+      "group": 8,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_only"
+    },
+    {
+      "expected": {},
+      "group": 8,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "gain"
+    },
+    {
+      "expected": {},
+      "group": 8,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_replace"
+    },
+    {
+      "expected": {},
+      "group": 8,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "ambiguous"
+    },
+    {
+      "expected": {
+        "0": [
+          2346,
+          16217,
+          23634
+        ]
+      },
+      "group": 9,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            16217,
+            23634
+          ],
+          "earlier_samples": [
+            13951,
+            21208
+          ],
+          "shift_samples": 2346,
+          "submitted_samples": [
+            16297,
+            23554
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "0": [
+          -3262,
+          16217,
+          23634
+        ]
+      },
+      "group": 9,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            16217,
+            23634
+          ],
+          "earlier_samples": [
+            19559,
+            26816
+          ],
+          "shift_samples": -3262,
+          "submitted_samples": [
+            16297,
+            23554
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          2346,
+          16217,
+          23634
+        ]
+      },
+      "group": 9,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            16217,
+            23634
+          ],
+          "earlier_samples": [
+            13871,
+            21288
+          ],
+          "shift_samples": 2346,
+          "submitted_samples": [
+            16217,
+            23634
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          -3262,
+          16217,
+          23634
+        ]
+      },
+      "group": 9,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            16217,
+            23634
+          ],
+          "earlier_samples": [
+            19479,
+            26896
+          ],
+          "shift_samples": -3262,
+          "submitted_samples": [
+            16217,
+            23634
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {},
+      "group": 9,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "unchanged"
+    },
+    {
+      "expected": {},
+      "group": 9,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_only"
+    },
+    {
+      "expected": {},
+      "group": 9,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "gain"
+    },
+    {
+      "expected": {},
+      "group": 9,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_replace"
+    },
+    {
+      "expected": {},
+      "group": 9,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "ambiguous"
+    },
+    {
+      "expected": {
+        "0": [
+          2379,
+          13030,
+          20560
+        ]
+      },
+      "group": 10,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            13030,
+            20560
+          ],
+          "earlier_samples": [
+            10651,
+            18181
+          ],
+          "shift_samples": 2379,
+          "submitted_samples": [
+            13030,
+            20560
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "0": [
+          -3303,
+          13030,
+          20560
+        ]
+      },
+      "group": 10,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            13030,
+            20560
+          ],
+          "earlier_samples": [
+            16333,
+            23863
+          ],
+          "shift_samples": -3303,
+          "submitted_samples": [
+            13030,
+            20560
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          2379,
+          13030,
+          20560
+        ]
+      },
+      "group": 10,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            13030,
+            20560
+          ],
+          "earlier_samples": [
+            10731,
+            18101
+          ],
+          "shift_samples": 2379,
+          "submitted_samples": [
+            13110,
+            20480
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          -3303,
+          13030,
+          20560
+        ]
+      },
+      "group": 10,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            13030,
+            20560
+          ],
+          "earlier_samples": [
+            16413,
+            23783
+          ],
+          "shift_samples": -3303,
+          "submitted_samples": [
+            13110,
+            20480
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {},
+      "group": 10,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "unchanged"
+    },
+    {
+      "expected": {},
+      "group": 10,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_only"
+    },
+    {
+      "expected": {},
+      "group": 10,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "gain"
+    },
+    {
+      "expected": {},
+      "group": 10,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_replace"
+    },
+    {
+      "expected": {},
+      "group": 10,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "ambiguous"
+    },
+    {
+      "expected": {
+        "0": [
+          2412,
+          14883,
+          22526
+        ]
+      },
+      "group": 11,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            14883,
+            22526
+          ],
+          "earlier_samples": [
+            12551,
+            20034
+          ],
+          "shift_samples": 2412,
+          "submitted_samples": [
+            14963,
+            22446
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "0": [
+          -3344,
+          14883,
+          22526
+        ]
+      },
+      "group": 11,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            14883,
+            22526
+          ],
+          "earlier_samples": [
+            18307,
+            25790
+          ],
+          "shift_samples": -3344,
+          "submitted_samples": [
+            14963,
+            22446
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          2412,
+          14883,
+          22526
+        ]
+      },
+      "group": 11,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            14883,
+            22526
+          ],
+          "earlier_samples": [
+            12471,
+            20114
+          ],
+          "shift_samples": 2412,
+          "submitted_samples": [
+            14883,
+            22526
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          -3344,
+          14883,
+          22526
+        ]
+      },
+      "group": 11,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            14883,
+            22526
+          ],
+          "earlier_samples": [
+            18227,
+            25870
+          ],
+          "shift_samples": -3344,
+          "submitted_samples": [
+            14883,
+            22526
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {},
+      "group": 11,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "unchanged"
+    },
+    {
+      "expected": {},
+      "group": 11,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_only"
+    },
+    {
+      "expected": {},
+      "group": 11,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "gain"
+    },
+    {
+      "expected": {},
+      "group": 11,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_replace"
+    },
+    {
+      "expected": {},
+      "group": 11,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "ambiguous"
+    },
+    {
+      "expected": {
+        "0": [
+          2445,
+          16176,
+          23932
+        ]
+      },
+      "group": 12,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            16176,
+            23932
+          ],
+          "earlier_samples": [
+            13731,
+            21487
+          ],
+          "shift_samples": 2445,
+          "submitted_samples": [
+            16176,
+            23932
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "0": [
+          -3385,
+          16176,
+          23932
+        ]
+      },
+      "group": 12,
+      "passed": true,
+      "result": [
+        {
+          "changed_samples": [
+            16176,
+            23932
+          ],
+          "earlier_samples": [
+            19561,
+            27317
+          ],
+          "shift_samples": -3385,
+          "submitted_samples": [
+            16176,
+            23932
+          ]
+        },
+        null
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          2445,
+          16176,
+          23932
+        ]
+      },
+      "group": 12,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            16176,
+            23932
+          ],
+          "earlier_samples": [
+            13811,
+            21407
+          ],
+          "shift_samples": 2445,
+          "submitted_samples": [
+            16256,
+            23852
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {
+        "1": [
+          -3385,
+          16176,
+          23932
+        ]
+      },
+      "group": 12,
+      "passed": true,
+      "result": [
+        null,
+        {
+          "changed_samples": [
+            16176,
+            23932
+          ],
+          "earlier_samples": [
+            19641,
+            27237
+          ],
+          "shift_samples": -3385,
+          "submitted_samples": [
+            16256,
+            23852
+          ]
+        }
+      ],
+      "role": "shift"
+    },
+    {
+      "expected": {},
+      "group": 12,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "unchanged"
+    },
+    {
+      "expected": {},
+      "group": 12,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_only"
+    },
+    {
+      "expected": {},
+      "group": 12,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "gain"
+    },
+    {
+      "expected": {},
+      "group": 12,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "background_replace"
+    },
+    {
+      "expected": {},
+      "group": 12,
+      "passed": true,
+      "result": [
+        null,
+        null
+      ],
+      "role": "ambiguous"
+    }
+  ],
+  "schema": "chipmunk.stereo-channel-timing-challenge/1",
+  "source_receipt_sha256": "83c333f306d21bb7acfc16c3db9189db5c7cdc603d2603bef044184583dcb4ee"
+}

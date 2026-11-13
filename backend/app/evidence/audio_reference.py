@@ -23,6 +23,7 @@ SCHEMA_WITH_TRIM_ALIGNMENT = "chipmunk.audio-reference-comparison/3"
 SCHEMA_WITH_TRIM_AND_LEVEL = "chipmunk.audio-reference-comparison/4"
 SCHEMA_WITH_STEREO = "chipmunk.audio-reference-comparison/5"
 SCHEMA_WITH_LOCAL_TIMING = "chipmunk.audio-reference-comparison/6"
+SCHEMA_WITH_CHANNEL_TIMING = "chipmunk.audio-reference-comparison/7"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_SECONDS = 30
 MAX_PRESENTED_RANGES = 3
@@ -62,6 +63,10 @@ LOCAL_TIMING_SCOPE = (
     "This check looks for distinctive sound at a different time in the two recordings, with matching timing on both "
     "sides. Copying or ordinary editing can produce this pattern. This comparison contributes zero weight to the AI estimate."
 )
+CHANNEL_TIMING_SCOPE = (
+    "The two channels are checked separately for exact excerpts that moved inside a short change. "
+    "An ordinary edit can move or repeat sound. These measurements carry zero weight in the AI estimate."
+)
 
 
 def _identity(path: Path, filename: str) -> dict:
@@ -98,7 +103,14 @@ def _read_track(path, source, *, max_seconds, origin, video, stream_position=0, 
     mapping = decoded.mapping
     channel_info = {"channels": mapping["source_channels"], "sample_rate": mapping["source_sample_rate"],
                     "stream_index": mapping["source_stream_index"]}
-    stereo = channel_info, decoded.stereo_pcm
+    container = mapping.get("source_container")
+    stereo_native = (
+        channel_info["channels"] == 2 and channel_info["sample_rate"] == AUDIO_RATE and (
+            (mapping["source_codec"], container) == ("pcm_s16le", "wav")
+            or (mapping["source_codec"], container, mapping.get("source_bit_depth")) == ("flac", "flac", 16)
+        )
+    )
+    stereo = channel_info, decoded.stereo_pcm, stereo_native
     if (not video or stream_position) and mapping["samples"] > max_seconds * AUDIO_RATE:
         return ("comparison_limit", None, None), False, False, stereo, False
     if len(mapping["timeline"]) != 1 or mapping["samples"] >= mapping["limit_samples"]:
@@ -316,6 +328,48 @@ def _audio_trim(first, second, assets, *, adjust_volume=False):
                                "overlap": overlap, "support": supports}}, adjusted
 
 
+def _timing_excerpt(assets, prefix, side, pcm, pts, interval):
+    start, end = interval
+    excerpt = pcm[start:end]
+    return {
+        "samples": interval, "start_s": start / AUDIO_RATE, "end_s": end / AUDIO_RATE,
+        "source_pts": [pts + start, pts + end],
+        "pcm_sha256": hashlib.sha256((excerpt * 32768).astype("<i2").tobytes()).hexdigest(),
+        "waveform": envelope(excerpt),
+        "audio": _wav_asset(assets, f"{prefix}-{side}.wav", wav_bytes(excerpt)),
+    }
+
+
+def _channel_timing(decoded, stereo, assets):
+    from app.evidence.audio_exact_channel_timing import locate
+
+    if stereo is None or stereo["status"] != "measured" or not all(item[3][2] for item in decoded):
+        return None
+    count = decoded[0][0][2]["samples"]
+    if not 24000 <= count <= 192000:
+        return None
+    ranges = []
+    for index, channel in enumerate(("left", "right")):
+        values = [item[3][1][:, index] for item in decoded]
+        span = locate(*values)
+        if span is None:
+            continue
+        milliseconds = span["shift_samples"] * 1000 / AUDIO_RATE
+        direction = "later" if milliseconds > 0 else "earlier"
+        excerpts = {
+            side: _timing_excerpt(assets, f"{channel}-timing", side, pcm.astype(np.float32) / 32768,
+                                  item[0][2]["source_pts"], span[f"{side}_samples"])
+            for side, pcm, item in zip(("earlier", "submitted"), values, decoded, strict=True)
+        }
+        ranges.append({
+            "channel": channel, "status": "local_shift", "offset_ms": milliseconds,
+            "summary": f"An exact excerpt moved {abs(milliseconds):.1f} ms {direction} in the {channel} channel.",
+            "range": span | excerpts,
+        })
+    return {"status": "local_shift" if ranges else "no_local_shift", "scope": CHANNEL_TIMING_SCOPE,
+            "affects_overall_confidence": False, "sample_rate": AUDIO_RATE, "ranges": ranges}
+
+
 def _local_timing(decoded, audio, assets):
     from app.evidence import video_reference_soundtrack as timing
 
@@ -336,16 +390,8 @@ def _local_timing(decoded, audio, assets):
     ranges = (("earlier", earlier, span["earlier_samples"]), ("submitted", submitted, span["submitted_samples"]))
     if any(not 0 <= start < end <= len(track[1]) for _, track, (start, end) in ranges):
         return result | {"summary": "The matched excerpt extends beyond one recording’s verified sample clock."}
-    excerpts = {}
-    for side, track, (start, end) in ranges:
-        pcm = track[1][start:end]
-        excerpts[side] = {
-            "samples": [start, end], "start_s": start / AUDIO_RATE, "end_s": end / AUDIO_RATE,
-            "source_pts": [track[2]["source_pts"] + start, track[2]["source_pts"] + end],
-            "pcm_sha256": hashlib.sha256((pcm * 32768).astype("<i2").tobytes()).hexdigest(),
-            "waveform": envelope(pcm),
-            "audio": _wav_asset(assets, f"local-timing-{side}.wav", wav_bytes(pcm)),
-        }
+    excerpts = {side: _timing_excerpt(assets, "local-timing", side, track[1], track[2]["source_pts"], interval)
+                for side, track, interval in ranges}
     return result | {
         "status": "local_shift", "offset_ms": milliseconds,
         "summary": f"The matching excerpt occurs {abs(milliseconds):.1f} ms {direction} in the analyzed recording.",
@@ -358,7 +404,8 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             include_trim_alignment: bool = True,
             include_trim_level_adjustment: bool = True,
             include_stereo: bool = True,
-            include_local_timing: bool = False) -> tuple[dict, dict[str, bytes]]:
+            include_local_timing: bool = False,
+            include_channel_timing: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Compare continuous recordings and recover a small, exactly supported edge trim."""
     paths = earlier, submitted
     filenames = filenames or (earlier.name, submitted.name)
@@ -386,12 +433,17 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
         adjusted = _level_adjusted(*tracks, assets)
         if adjusted is not None:
             record.update(schema=SCHEMA_WITH_LEVEL_ADJUSTMENT, level_adjusted=adjusted)
+    stereo = None
     if include_stereo:
         stereo = _compare_stereo((first, second), assets)
         if stereo is not None:
             record.update(schema=SCHEMA_WITH_STEREO, stereo_comparison=stereo)
     if include_local_timing:
         record.update(schema=SCHEMA_WITH_LOCAL_TIMING, local_timing=_local_timing((first, second), audio, assets))
+        if include_channel_timing:
+            timing = _channel_timing((first, second), stereo, assets)
+            if timing is not None:
+                record.update(schema=SCHEMA_WITH_CHANNEL_TIMING, channel_timing=timing)
     if sources != tuple(_identity(path, name) for path, name in zip(paths, filenames, strict=True)):
         raise ValueError("One of the recordings changed while the comparison was running.")
     return record, assets

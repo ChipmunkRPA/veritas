@@ -278,11 +278,12 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% else %}
 <div class="multimedia-source-context"><h4>Original text and surrounding context</h4><blockquote>{{ packet.context.before }}<mark>{{ packet.context.focus }}</mark>{{ packet.context.after }}</blockquote><p class="caption">Source context [{{ packet.context.start }}, {{ packet.context.end }}). Highlighting identifies the selected passage; it does not prove those words were generated.</p></div>
 {% endif %}
-{% if matched_review %}<p class="caption">Source is the original plain-text file. Positions above use extracted Unicode code points.</p>{% else %}
 {% for anchor in packet.source_locations %}
-<p class="caption">Source: {% if anchor.kind == 'pdf' %}PDF page {{ anchor.page }}{% if anchor.get('extraction') == 'ocr' %}, OCR text{% endif %}; coordinates refer to the unrotated page.{% elif anchor.kind == 'docx' %}DOCX paragraph {{ anchor.paragraph_index + 1 }}, body path {{ anchor.body_path | join(' / ') }}.{% elif anchor.kind in ['email', 'markup'] %}MIME part {{ anchor.get('mime_part', 'body') }}, role {{ anchor.get('quote_role', 'unknown') }}.{% else %}{{ anchor.kind }} text{% if anchor.get('source_start') is not none %}, source offset {{ anchor.source_start }}{% endif %}.{% endif %}</p>
+{% set location = anchor.get('original_location') %}
+<p class="caption">{% if anchor.kind == 'pdf' %}PDF page {{ anchor.page }}{% if anchor.get('extraction') == 'ocr' %}, recognized text{% endif %}. Image coordinates refer to the unrotated page.{% elif anchor.kind == 'docx' %}Word paragraph {{ anchor.paragraph_index + 1 }}, body path {{ anchor.body_path | join(' / ') }}.{% elif anchor.get('mime_part') %}MIME part {{ anchor.mime_part }}, role {{ anchor.get('quote_role', 'unknown') }}.{% else %}{{ 'Plain-text file.' if anchor.kind == 'text' else 'Extracted markup text.' }}{% endif %}
+{% if anchor.get('selected_start') is not none %}{{ ' ' }}Extracted characters [{{ anchor.selected_start }}, {{ anchor.selected_end }}).{% endif %}
+{% if location %}{{ ' ' }}{% if location.coordinate == 'decoded_text' %}Original decoded text characters{% elif location.coordinate == 'word_paragraph' %}Original Word paragraph characters{% elif location.coordinate == 'decoded_email' %}Decoded email part characters{% else %}Decoded email HTML source characters{% endif %} {% for range in location.ranges %}[{{ range[0] }}, {{ range[1] }}){% if not loop.last %}, {% endif %}{% endfor %}.{% endif %}</p>
 {% endfor %}
-{% endif %}
 {{ plates(packet.images) }}
 {% endif %}
 {% for window in packet.windows %}

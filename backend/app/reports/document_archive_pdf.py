@@ -7,7 +7,7 @@ from html import escape
 from app.evidence.document_archive import RECOVERED_BOUNDARIES, STATUS
 from app.evidence.document_gao_archive import SCHEMA as GAO_SCHEMA
 from app.reports.document_revision_pdf import STYLE, _side
-from app.reports.engine import load_weasyprint
+from app.reports.engine import _restricted_fetcher, load_weasyprint
 
 
 def render(comparison: dict) -> bytes:
@@ -35,6 +35,13 @@ def render(comparison: dict) -> bytes:
                 f'[{location["paragraph_range"][0]}, {location["paragraph_range"][1]}).</li>'
                 for location in word_passages
             ) + "</ul>"
+        pdf_passages = [(page["page"], page["extracted_range"]) for row in comparison["aligned_paragraphs"]
+                        for page in row.get("pdf_pages") or ()]
+        if pdf_passages:
+            source += "<h2>Matched PDF pages</h2><ul>" + "".join(
+                f'<li>Page {page}, extracted characters [{start}, {end}).</li>'
+                for page, (start, end) in pdf_passages
+            ) + "</ul>"
     changes = []
     for change in comparison["changes"]:
         a = change["archive_paragraph"]
@@ -47,7 +54,9 @@ def render(comparison: dict) -> bytes:
             submitted_label = f"Word body paragraph {location['paragraph']}"
             start, end = location["paragraph_range"]
             native = f'<p class="offset">Word paragraph characters [{start}, {end}).</p>'
-        changes.append(f'<section><h2>{submitted_label}</h2>'
+        if pages := change["submitted"].get("pdf_pages"):
+            submitted_label = "Submitted PDF · " + ", ".join(f"page {page['page']}" for page in pages)
+        changes.append(f'<section class="archive-change"><h2>{submitted_label}</h2>'
                        f'{_side(label, change["archive"])}{_side("Submitted text", change["submitted"])}{native}</section>')
     if reference and not changes:
         changes.append("<p>No normalized wording differences in the compared passage.</p>" if gao else
@@ -57,7 +66,7 @@ def render(comparison: dict) -> bytes:
                        + ", ".join(f"[{start}, {end})" for start, end in sentences) + ".</p>") if sentences else ""
     coordinate_label = "relative to the full highlights transcript" if gao else "relative to their body paragraph"
     html = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Public archive comparison</title>
-<meta name="author" content="Chipmunk Verify"><style>{STYLE}</style></head><body>
+<meta name="author" content="Chipmunk Verify"><style>{STYLE}.archive-change {{ break-inside: avoid; }}</style></head><body>
 <p class="brand">CHIPMUNK VERIFY</p><h1>Public archive comparison</h1>
 <p>{escape(STATUS[comparison["status"]])}</p><p>{escape(comparison["scope"])}</p>
 <p>{escape(comparison["interpretation"])}</p>
@@ -70,7 +79,4 @@ Each range includes its start and excludes its end.</p>
 <p>Archive library SHA-256 <span class="hash">{escape(library["sha256"])}</span></p></div>{sentence_ranges}{''.join(changes)}
 </body></html>'''
 
-    def no_external_resources(_url):
-        raise ValueError("Archive comparison PDFs use inline content only.")
-
-    return load_weasyprint().HTML(string=html, url_fetcher=no_external_resources).write_pdf()
+    return load_weasyprint().HTML(string=html, url_fetcher=_restricted_fetcher(())).write_pdf()

@@ -4999,6 +4999,20 @@
             "title": "End",
             "type": "integer"
           },
+          "pdf_pages": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DraftPdfPage"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pdf Pages"
+          },
           "start": {
             "title": "Start",
             "type": "integer"
@@ -5065,6 +5079,34 @@
         "title": "DocumentArchiveLibrary",
         "type": "object"
       },
+      "DocumentArchivePageRange": {
+        "properties": {
+          "extracted_range": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Extracted Range",
+            "type": "array"
+          },
+          "page": {
+            "title": "Page",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "page",
+          "extracted_range"
+        ],
+        "title": "DocumentArchivePageRange",
+        "type": "object"
+      },
       "DocumentArchiveParagraph": {
         "properties": {
           "alignment": {
@@ -5108,6 +5150,20 @@
               }
             ],
             "title": "Docx Paragraph"
+          },
+          "pdf_pages": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DocumentArchivePageRange"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pdf Pages"
           },
           "submitted_paragraph": {
             "title": "Submitted Paragraph",

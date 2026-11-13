@@ -143,6 +143,27 @@ describe('Public archive comparison', () => {
     expect(screen.getByText('café').tagName).toBe('MARK')
   })
 
+  it('shows the matched PDF page and the exact original and highlighted crops', async () => {
+    const result = structuredClone(edited)
+    result.comparison.aligned_paragraphs[0].pdf_pages = [{ page: 2, extracted_range: [10, 16] }]
+    result.comparison.changes[0].submitted.pdf_pages = [{
+      page: 2, page_width: 612, page_height: 792, page_rotation: 0,
+      word_regions: [{ start: 12, end: 16, bbox: [10, 20, 40, 30] }],
+      preview: { source_bbox: [4, 14, 46, 36], render_scale: 1, source_crop_pixels: [4, 14, 46, 36],
+        crop_png: 'b3JpZ2luYWw=', crop_sha256: 'a'.repeat(64), highlighted_png: 'aGlnaGxpZ2h0ZWQ=', highlighted_sha256: 'b'.repeat(64) },
+    }]
+    vi.mocked(archiveAvailability).mockResolvedValue({ gaoAvailable: true })
+    vi.mocked(compareArchive).mockResolvedValue(result)
+    show()
+    fireEvent.click(await screen.findByRole('button', { name: 'Compare with public archive' }))
+    expect(await screen.findByRole('list', { name: 'Matched PDF pages' })).toHaveTextContent('Page 2, extracted characters [10, 16).')
+    expect(screen.getByRole('heading', { name: 'Submitted PDF · page 2' })).toBeVisible()
+    expect(screen.getByRole('img', { name: 'Page 2 with changed wording highlighted' })).toHaveAttribute('src', 'data:image/png;base64,aGlnaGxpZ2h0ZWQ=')
+    const original = screen.getByText('View original crop')
+    fireEvent.click(original)
+    expect(screen.getByAltText('Page 2 original crop')).toHaveAttribute('src', 'data:image/png;base64,b3JpZ2luYWw=')
+  })
+
   it('hides the action when the retained owner is ineligible', async () => {
     vi.mocked(archiveAvailability).mockResolvedValue(null)
     show()

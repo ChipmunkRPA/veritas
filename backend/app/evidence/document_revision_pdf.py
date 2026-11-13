@@ -23,7 +23,7 @@ MAX_PREVIEW_BYTES = 1024 * 1024
 MULTIPAGE_LEFT_MARGIN_SPREAD = 36  # Points, allowing ordinary first-line indents.
 
 
-def extract_native(path: Path, data: bytes, *, mixed_draft: bool = False):
+def extract_native(path: Path, data: bytes, *, mixed_draft: bool = False, visible_text_only: bool = False):
     from app.detectors.text.pipeline import extract_within
 
     path.write_bytes(data)
@@ -36,7 +36,10 @@ def extract_native(path: Path, data: bytes, *, mixed_draft: bool = False):
             or document.meta.get("unmapped_pages") or document.meta.get("partially_checked_pages")
             or any(row.get("extraction") != "text_layer" for row in document.source_map)):
         raise ValueError(message)
-    if mixed_draft and (hidden_pages := document.meta.get("hidden_text_pages")):
+    hidden_pages = document.meta.get("hidden_text_pages")
+    if visible_text_only and hidden_pages:
+        raise ValueError("The PDF contains hidden or fully transparent text.")
+    if mixed_draft and document.meta["pages"] > 1 and hidden_pages:
         numbers = ", ".join(map(str, hidden_pages))
         raise ValueError(f"Multi-page draft comparison requires visible PDF text. Hidden or fully transparent text was detected on page(s) {numbers}.")
     return document
@@ -70,14 +73,14 @@ def page_locations(extent, changed_tokens, source_map):
     return list(pages.values())
 
 
-def ordered_text(text: str, source_map: list[dict], *, page_limit: int = 1) -> str:
+def ordered_text(text: str, source_map: list[dict], *, page_limit: int = 1, single_column: bool = False) -> str:
     """Require upright native pages with contiguous, top-to-bottom word boxes."""
     if not source_map:
         return ""
     page = cursor = 0
     previous_bottom = 0.
     # Restrict multi-page comparisons to a single column on each page.
-    multipage = source_map[-1]["page"] > 1
+    single_column = single_column or source_map[-1]["page"] > 1
     left_min = left_max = None
     for index, block in enumerate(source_map):
         number = block.get("page")
@@ -106,7 +109,7 @@ def ordered_text(text: str, source_map: list[dict], *, page_limit: int = 1) -> s
                 if line_top is None or y0 > line_top + 2:
                     if line_bottom is not None and y0 < line_bottom - .5:
                         return ""
-                    if multipage:
+                    if single_column:
                         left_min = x0 if left_min is None else min(left_min, x0)
                         left_max = x0 if left_max is None else max(left_max, x0)
                         if left_max - left_min > MULTIPAGE_LEFT_MARGIN_SPREAD:

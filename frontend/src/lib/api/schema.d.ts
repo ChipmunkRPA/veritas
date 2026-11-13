@@ -3376,6 +3376,8 @@ export interface components {
             docx_location?: components["schemas"]["DocumentArchiveWordLocation"] | null;
             /** End */
             end: number;
+            /** Pdf Pages */
+            pdf_pages?: components["schemas"]["DraftPdfPage"][] | null;
             /** Start */
             start: number;
             /** Text */
@@ -3400,6 +3402,16 @@ export interface components {
             /** Url */
             url: string;
         };
+        /** DocumentArchivePageRange */
+        DocumentArchivePageRange: {
+            /** Extracted Range */
+            extracted_range: [
+                number,
+                number
+            ];
+            /** Page */
+            page: number;
+        };
         /** DocumentArchiveParagraph */
         DocumentArchiveParagraph: {
             /**
@@ -3412,6 +3424,8 @@ export interface components {
             docx_location?: components["schemas"]["DocumentArchiveWordLocation"] | null;
             /** Docx Paragraph */
             docx_paragraph?: number | null;
+            /** Pdf Pages */
+            pdf_pages?: components["schemas"]["DocumentArchivePageRange"][] | null;
             /** Submitted Paragraph */
             submitted_paragraph: number;
             /** Submitted Range */

@@ -8,6 +8,7 @@ from datetime import UTC, datetime
 from io import BytesIO
 
 import pymupdf
+import pytest
 from docx import Document as WordDocument
 from fastapi.testclient import TestClient
 from sqlalchemy import select
@@ -64,6 +65,18 @@ def _seed(fixture, identifier, text, *, owner=None, filename="original.txt"):
 
 def _url(aid):
     return f"/api/v2/analyses/{aid}/document-archive-comparison"
+
+
+def _native_pdf(blocks, *, hidden=False, columns=False):
+    import textwrap
+
+    with pymupdf.open() as pdf:
+        for index, block in enumerate(blocks):
+            page = pdf[0] if columns and index else pdf.new_page(width=612, height=792)
+            left = 310 if columns and index else 55
+            for row, line in enumerate(textwrap.wrap(block, width=48 if columns else 77)):
+                page.insert_text((left, 62 + row * 17), line, fontsize=11, render_mode=3 if hidden else 0)
+        return pdf.tobytes()
 
 
 def test_local_archive_uses_unchanged_and_no_match_without_exposing_a_reference(billing, monkeypatch):
@@ -129,6 +142,13 @@ def test_gao_archive_local_transcript_matches_api_and_pdf(billing, monkeypatch, 
     _seed(billing, "gao-exact-excerpt", crop)
     _seed(billing, "gao-altered-excerpt-edge", "An unsourced addition. " + crop)
     _seed(billing, "gao-unmatched", "> " + changed)
+    pdf_first, pdf_second = crop.split(" The board", 1)
+    pdf_exact = _native_pdf([pdf_first, "The board" + pdf_second])
+    pdf_changed = _native_pdf([pdf_first, "The board" + pdf_second.replace("Monday", "Thursday")])
+    _seed(billing, "gao-pdf-exact", pdf_exact, filename="excerpt.PDF")
+    _seed(billing, "gao-pdf-changed", pdf_changed, filename="changed.pdf")
+    _seed(billing, "gao-pdf-hidden", _native_pdf([crop], hidden=True), filename="hidden.pdf")
+    _seed(billing, "gao-pdf-columns", _native_pdf([pdf_first, "The board" + pdf_second], columns=True), filename="columns.pdf")
 
     def word_fixture(value, *, split_change=False, cross_paragraph=False):
         word = WordDocument()
@@ -192,8 +212,6 @@ def test_gao_archive_local_transcript_matches_api_and_pdf(billing, monkeypatch, 
         assert review(export, submitted, pack_path, pack_sha)["exact_changes_verified"] == 1
         change["submitted"]["changed_tokens"][0][0] -= 1
         export.write_text(json.dumps(result))
-        import pytest
-
         with pytest.raises(ValueError, match="does not replay"):
             review(export, submitted, pack_path, pack_sha)
         unchanged = client.post(_url("gao-unchanged"), headers=billing.headers, params=selection).json()["comparison"]
@@ -269,6 +287,43 @@ def test_gao_archive_local_transcript_matches_api_and_pdf(billing, monkeypatch, 
         assert table["coverage"]["body_paragraphs"] == 0 and not table["aligned_paragraphs"]
         unknown = client.post(_url("gao-unmatched"), headers=billing.headers, params=selection).json()["comparison"]
         assert unknown["status"] == "out_of_scope" and unknown["reference"] is None and unknown["changes"] == []
+        pdf_path = tmp_path / "submitted.pdf"
+        for key, data in (("gao-pdf-exact", pdf_exact), ("gao-pdf-changed", pdf_changed)):
+            pdf_url = _url(key)
+            assert client.get(pdf_url, headers=billing.headers).json() == {"available": True, "gao_available": True}
+            delivered = client.post(pdf_url, headers=billing.headers, params={"include_pdf": True, **selection})
+            assert delivered.status_code == 200, delivered.text[:500]
+            proof = delivered.json()["comparison"]
+            assert proof["status"] == "reference_bound" and proof["reference"]["id"] == "GAO-16-442"
+            assert proof["authorship_confidence_contribution"] == 0
+            assert {page["page"] for row in proof["aligned_paragraphs"] for page in row["pdf_pages"]} == {1, 2}
+            with pymupdf.open(stream=base64.b64decode(delivered.json()["pdf"]), filetype="pdf") as report:
+                report_text = " ".join(" ".join(page.get_text().split()) for page in report)
+                assert "Matched PDF pages" in report_text and "Page 2, extracted characters" in report_text
+                if key == "gao-pdf-changed":
+                    assert "Page 2 · highlighted source crop" in report_text and any(page.get_images() for page in report)
+            pdf_path.write_bytes(data)
+            export.write_text(json.dumps(proof))
+            assert review(export, pdf_path, pack_path, pack_sha)["exact_changes_verified"] == (key == "gao-pdf-changed")
+            if key == "gao-pdf-changed":
+                change, = proof["changes"]
+                submitted_change = change["submitted"]
+                location, = submitted_change["pdf_pages"]
+                assert location["page"] == 2 and submitted_change["text"] == "Thursday"
+                assert [(region["start"], region["end"]) for region in location["word_regions"]] == [(submitted_change["start"], submitted_change["end"] + 1)]
+                with pymupdf.open(stream=data, filetype="pdf") as original_pdf:
+                    assert original_pdf[1].get_textbox(pymupdf.Rect(location["word_regions"][0]["bbox"])) == "Thursday."
+                for image in ("crop", "highlighted"):
+                    png = base64.b64decode(location["preview"][f"{image}_png"])
+                    assert png.startswith(b"\x89PNG\r\n\x1a\n") and hashlib.sha256(png).hexdigest() == location["preview"][f"{image}_sha256"]
+                location["word_regions"][0]["bbox"][0] += 1
+                export.write_text(json.dumps(proof))
+                with pytest.raises(ValueError, match="does not replay"):
+                    review(export, pdf_path, pack_path, pack_sha)
+            else:
+                assert proof["changes"] == []
+        for key in ("gao-pdf-hidden", "gao-pdf-columns"):
+            assert client.post(_url(key), headers=billing.headers, params=selection).status_code == 422
         monkeypatch.setattr(settings, "document_gao_archive_sha256", "0" * 64)
         assert client.post(url, headers=billing.headers, params=selection).status_code == 503
 

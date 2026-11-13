@@ -11,6 +11,12 @@ const statusLabels = {
   out_of_scope: 'Text is outside the comparison scope',
 }
 
+function changeHeading(excerpt: ArchiveExcerpt, paragraph: number, joined: boolean) {
+  if (excerpt.docx_location) return `Word body paragraph ${excerpt.docx_location.paragraph}`
+  if (excerpt.pdf_pages?.length) return `Submitted PDF · ${excerpt.pdf_pages.map(page => `page ${page.page}`).join(', ')}`
+  return `${joined ? 'Passage in submitted paragraph' : 'Submitted paragraph'} ${paragraph}`
+}
+
 function Excerpt({ label, excerpt }: { label: string; excerpt: ArchiveExcerpt | null }) {
   const points = Array.from(excerpt?.text ?? '')
   let cursor = 0
@@ -30,6 +36,18 @@ function Excerpt({ label, excerpt }: { label: string; excerpt: ArchiveExcerpt | 
     {excerpt?.text
       ? <p className="mt-2 mb-0 whitespace-pre-wrap break-words text-small">{marked}{points.slice(cursor).join('')}</p>
       : <p className="mt-2 mb-0 text-small text-text-muted">{excerpt ? 'No text at this position.' : 'No corresponding text.'}</p>}
+    {excerpt?.pdf_pages?.map(page => <figure key={page.page} className="mx-0 mt-3 mb-0">
+      <figcaption className="text-caption text-text-muted">Page {page.page}{page.preview ? ' · highlighted source crop' : ''}</figcaption>
+      {page.preview && <>
+        <img alt={`Page ${page.page} with changed wording highlighted`} className="mt-1 max-h-56 max-w-full rounded-sm border border-border"
+          src={`data:image/png;base64,${page.preview.highlighted_png}`} />
+        <details className="mt-1 text-caption text-text-muted">
+          <summary className="cursor-pointer">View original crop</summary>
+          <img alt={`Page ${page.page} original crop`} className="mt-1 max-h-56 max-w-full rounded-sm border border-border"
+            src={`data:image/png;base64,${page.preview.crop_png}`} />
+        </details>
+      </>}
+    </figure>)}
   </div>
 }
 
@@ -39,6 +57,7 @@ function ArchiveResult({ result }: { result: ArchiveComparison }) {
   const joined = comparison.layout === 'recovered_archive_boundaries'
   const gao = comparison.schema === 'chipmunk.document-archive-comparison/2'
   const wordPassages = comparison.aligned_paragraphs.flatMap(row => row.docx_location ? [row.docx_location] : [])
+  const pdfPassages = comparison.aligned_paragraphs.flatMap(row => row.pdf_pages ?? [])
   const downloadJson = () => saveBlob(new Blob([JSON.stringify(comparison, null, 2) + '\n'], { type: 'application/json' }),
     'chipmunk-verify-archive-comparison.json')
   const downloadPdf = (body: string) => {
@@ -74,6 +93,11 @@ function ArchiveResult({ result }: { result: ArchiveComparison }) {
           Word body paragraph {location.paragraph}, characters [{location.paragraph_range.join(', ')}).
         </li>)}
       </ul>}
+      {pdfPassages.length > 0 && <ul aria-label="Matched PDF pages" className="mt-2 mb-0 text-caption text-text-muted">
+        {pdfPassages.map(({ page, extracted_range: range }) => <li key={`${page}/${range[0]}`}>
+          Page {page}, extracted characters [{range.join(', ')}).
+        </li>)}
+      </ul>}
       {joined && <p className="mt-2 mb-0 text-small text-text-muted">The submitted text joins several source paragraphs. The comparison recovered their boundaries from the archive.</p>}
       {changes.length === 0 && <p className="mt-2 mb-0 text-small">{gao ? 'No normalized wording differences in the compared passage.'
         : 'No word or punctuation differences in the compared passages.'}</p>}
@@ -86,9 +110,7 @@ function ArchiveResult({ result }: { result: ArchiveComparison }) {
       </p>}
       <ol className="mt-3 mb-0 list-none space-y-3 p-0">
         {changes.map((change, i) => <li key={i} className="rounded-md border border-border p-3">
-          <h3 className="m-0 text-small font-medium">{change.submitted.docx_location
-            ? `Word body paragraph ${change.submitted.docx_location.paragraph}`
-            : `${joined ? 'Passage in submitted paragraph' : 'Submitted paragraph'} ${change.submitted_paragraph}`}</h3>
+          <h3 className="m-0 text-small font-medium">{changeHeading(change.submitted, change.submitted_paragraph, joined)}</h3>
           <div className="mt-3 grid gap-4 sm:grid-cols-2">
             <Excerpt label={gao ? 'Published highlights transcript' : change.archive_paragraph == null ? 'Archive version' : `Archive body paragraph ${change.archive_paragraph}`}
               excerpt={change.archive} />

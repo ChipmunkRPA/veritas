@@ -1,6 +1,6 @@
 # Local comparison with published GAO report highlights
 
-Chipmunk Verify can compare an authenticated user's completed TXT or Word analysis
+Chipmunk Verify can compare an authenticated user's completed TXT, Word or PDF analysis
 with a locally installed collection of 12,228 U.S. Government Accountability
 Office report highlights. Choose **U.S. GAO report highlights** under
 **Compare with public archive** in the analysis results. The source record names the GAO publication, date and pinned
@@ -26,6 +26,21 @@ original paragraph and run coordinates where the visible text maps to
 ordinary Word runs. A difference crossing a paragraph boundary causes
 the comparison to abstain. Tables, headers, footers, text boxes,
 embedded content, formatting and tracked revisions are outside the check.
+
+Selectable PDFs report the submitted page numbers and extracted character
+ranges. The browser and downloaded report show crops of changed wording.
+JSON contains the original crop, highlighted crop, page coordinates and
+crop hashes. A word box can include punctuation adjacent to a changed token.
+Use an upright, visible, single-column PDF with up to 12 pages. Scans,
+hidden text and ambiguous reading order decline the archive check.
+
+A local transfer wrapped 60 excerpts from 20 new GAO works as two-page
+selectable PDFs. Three fixtures from one work changed during font encoding
+and were counted as unavailable. The archive matched 19 of 20 untouched
+excerpts and localized 37 of 40 provider edits, with no wrong-source match.
+One edited excerpt was ambiguous. The native review checked 224 page ranges
+and 90 source word boxes. These were controlled renderings of known
+excerpts. [Report source roster and terms](writing-word-edit-transfer-2026-11-13.md)
 
 For local format verification, the same 72 short report clips were
 wrapped in Word. Each sentence occupied one native paragraph, with

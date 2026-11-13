@@ -678,7 +678,7 @@ def _writing_agreement_view(coverage: dict) -> dict | None:
     if record is None:
         return None
     return {"email_reply_body": record["schema"] in document_scope.CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS,
-            "mapped_html_body": record["schema"] == document_scope.CHECKPOINT_AGREEMENT_HTML_SCHEMA,
+            "mapped_html_body": record["schema"] in document_scope.CHECKPOINT_AGREEMENT_HTML_SCHEMAS,
             "ranges": [{**row, "label": document_scope.CHECKPOINT_AGREEMENT_LABELS[row["state"]]} for row in record["ranges"]]}
 
 
@@ -782,6 +782,16 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["audio"] = {"interval": copy.deepcopy(packet["interval"]), "context_interval": copy.deepcopy(packet["context_interval"]),
                              "start_s": packet["start_s"], "end_s": packet["end_s"], "sample_rate": part["source"]["sample_rate"],
                              "source_ranges": copy.deepcopy(packet["anchor"]["source_timestamp_ranges"])}
+            row["recording_context"] = [
+                {"id": event["id"], "label": f"Acoustic observation {event['id']}"}
+                for event in (part.get("acoustic_context") or {}).get("events", ())
+                if packet["id"] in event["related_voice_packet_ids"]
+            ] + [
+                {"id": window["id"], "label": f"Sound categories {window['id']}"}
+                for window in (part.get("sound_events") or {}).get("windows", ())
+                if window["start_sample"] < packet["interval"]["end_sample"]
+                and window["end_sample"] > packet["interval"]["start_sample"]
+            ]
         elif packet_kind == "sound":
             a, b = packet["start_sample"], packet["end_sample"]
             interval = {"start_sample": a, "end_sample": b}

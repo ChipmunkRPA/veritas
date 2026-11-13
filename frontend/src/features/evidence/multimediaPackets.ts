@@ -318,7 +318,7 @@ export interface DocumentEvidenceSet extends SetBase {
   coverage?: { scored_windows?: number; candidate_spans?: number; unmapped_pages?: number[];
     local_passage_coverage?: DocumentPassageCoverage;
     unselected_passage_responses?: DocumentUnselectedResponses;
-    writing_second_check?: { schema: 'document-writing-second-check/1' | 'document-writing-second-check/2' | 'document-writing-second-check/3' | 'document-writing-second-check/4'; authorship_confidence_contribution: 0;
+    writing_second_check?: { schema: 'document-writing-second-check/1' | 'document-writing-second-check/2' | 'document-writing-second-check/3' | 'document-writing-second-check/4' | 'document-writing-second-check/5'; authorship_confidence_contribution: 0;
       body_spans?: { start: number; end: number }[];
       ranges: { start: number; end: number; spans: { start: number; end: number }[];
         state: 'corroborated' | 'different' | 'unavailable' }[] };

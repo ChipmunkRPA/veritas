@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Button } from '../../components/ui'
 import AudioInspectionTimeline from './AudioInspectionTimeline'
 import AudioBackgroundContext from './AudioBackgroundContext'
@@ -50,7 +50,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
     const measurement = stereo?.windows[overlap.stereo_window_index]?.downmix
     return measurement?.strong_attenuation ? [{ overlap, measurement }] : []
   }) ?? []
-  const { hash } = useLocation()
+  const { hash, search } = useLocation()
   const [selection, setSelection] = useState(set.packets[0]?.id ?? null)
   const root = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -229,7 +229,15 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
         <figcaption className="mt-2 text-caption text-text-muted">{role === 'waveform' ? 'Signal shape provides listening context; it does not prove synthesis.' : 'Recorded window responses. Gaps have no score; scores are not probabilities of editing.'}</figcaption>
       </figure>)}
     </div>}
-    <div className="mt-6 space-y-7">{set.packets.map((packet) => <article key={packet.id} id={`media-evidence-${packet.id}`} hidden={packet.id !== selectedId} tabIndex={-1} className={evidenceCard}
+    <div className="mt-6 space-y-7">{set.packets.map((packet) => {
+      const background = set.acoustic_context?.events.filter((event) => event.related_voice_packet_ids.includes(packet.id)) ?? []
+      const sounds = set.sound_events?.windows.filter((window) => window.start_sample < packet.interval.end_sample
+        && window.end_sample > packet.interval.start_sample) ?? []
+      const contextLinks = [
+        ...background.map((event) => ({ id: event.id, label: `Acoustic observation ${event.id}` })),
+        ...sounds.map((window) => ({ id: window.id, label: `Sound categories ${window.id}` })),
+      ]
+      return <article key={packet.id} id={`media-evidence-${packet.id}`} hidden={packet.id !== selectedId} tabIndex={-1} className={evidenceCard}
       aria-label={`Selected audio evidence ${packet.id}`}>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h3 className="m-0 text-body font-medium"><span className="font-mono text-accent mr-3">{packet.id}</span>{packet.title}</h3>
@@ -250,6 +258,12 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
         <EvidenceAudio set={set} artifact={packet.artifacts.context_clip} token={token} ready={mediaReady} alt={`${packet.id}: window with surrounding audio`} />
       </div>
       <p className="mt-2 mb-0 text-caption text-text-muted">Context samples [{packet.context_interval.start_sample}, {packet.context_interval.end_sample}); surrounding audio is listening context, not an additional confirmation.</p>
+      {contextLinks.length > 0 && <div className="mt-3 text-small">
+        <p className="m-0">Listen to overlapping background and recording evidence.</p>
+        <ul className="mt-1 mb-0 pl-4 list-disc">{contextLinks.map(({ id, label }) => <li key={id}>
+          <Link className="underline underline-offset-2" to={{ search, hash: `#media-evidence-${id}` }}>{label}</Link>
+        </li>)}</ul>
+      </div>}
       <p className="mt-4 mb-0 text-small">{packet.interpretation}</p>
       <EvidenceMeasurements values={packet.observations.map((observation) => ({ ...observation,
         label: `${observation.signal_refs.map((ref) => ref.display_id ?? 'Check').join(', ')} · ${observation.label}` }))} />
@@ -266,6 +280,6 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
         })}</ul>
       </details>
       <EvidenceLimits lines={packet.limitations} /><EvidenceReferences packet={packet} />
-    </article>)}</div>
+    </article>})}</div>
   </div>
 }

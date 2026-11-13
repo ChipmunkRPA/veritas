@@ -2,6 +2,11 @@
 
 Chipmunk Verify now runs the second writing check on supported English HTML-only replies when that check is enabled. A reply can have two, three, five, or six body paragraphs followed by an explicit blockquote. Selected passages stay inside a single body paragraph. The original decoded HTML must map to exactly the same text the main analysis sees. Styled, ambiguous, interleaved, malformed, and unsupported layouts stay outside the second check. This evidence contributes zero weight to overall authorship confidence.
 
+The [additional HTML reply layouts](writing-html-reply-short-layouts-2026-11-12.md)
+now cover a four-paragraph reply and a one-paragraph reply with exactly four
+sentences. That extension preserves the reply boundary and the same source
+position requirements.
+
 The report links to the passage in the extracted email text. The JSON includes positions in that text and in the decoded HTML message part. Both use Unicode codepoints. A signed evidence package can replay those positions against the original `.eml` file. Email attachments and sender authenticity are outside this check's scope.
 
 ## Local evaluation

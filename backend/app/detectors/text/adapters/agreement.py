@@ -138,7 +138,9 @@ def record(ctx, detected: dict, decoded: dict) -> None:
         email = decoded["meta"]["email"]
         legacy = document_scope.CHECKPOINT_AGREEMENT_EMAIL_SCHEMA
         if document_scope.mapped_email_html(email):
-            schema = document_scope.CHECKPOINT_AGREEMENT_HTML_SCHEMA
+            extended = document_scope.CHECKPOINT_AGREEMENT_HTML_SHORT_LAYOUT_SCHEMA
+            schema = (extended if len(body_spans) in document_scope.CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS[extended]
+                      else document_scope.CHECKPOINT_AGREEMENT_HTML_SCHEMA)
         else:
             schema = (legacy if len(body_spans) in document_scope.CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS[legacy]
                       else document_scope.CHECKPOINT_AGREEMENT_EMAIL_LAYOUT_SCHEMA)

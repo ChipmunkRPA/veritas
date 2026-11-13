@@ -104,6 +104,12 @@ selected passage cards, including known edits that the detector missed.
 The [two-sentence draft review](writing-draft-grammar-2026-11-12.md)
 replays paired responses and genuine revisions. The report and export point to
 the exact changed sentences in both drafts.
+The [single-file vocabulary comparison](writing-local-lexical-transfer-2026-11-12.md)
+replays sentence rankings and exact ranges across two held publishers. It
+checks whether any gain survives ordinary same-work substitutions.
+The [short HTML reply comparison](writing-html-reply-short-layouts-2026-11-12.md)
+checks the same writing inputs in plain text and HTML-only email. Its
+native replay verifies the exact MIME body and scored text ranges.
 The [paired neural speech edit pilot](audio-partialedit-dense-transfer-2026-11-12.md)
 checks overlapping speech windows across two edit generators, matched genuine
 utterances and two background mixes. The replay recounts localized edits and
@@ -117,6 +123,10 @@ closures, native pictures, and unchanged soundtracks.
 The [detector readout on those fixtures](grid-reserve-neural-mouth-readout-2026-11-12.md)
 repeats current and experimental timing checks on those exact clips and
 verifies source crops where an inspection range appears.
+The [speech-sound and mouth-shape comparison](grid-phone-viseme-timing-2026-11-12.md)
+replays signed timing errors on 96 controlled shifts and 144 ordinary
+controls. It also verifies the source pictures and wrong-direction responses
+from the separate neural-redraw panel.
 The [mouth-state timing study](grid-articulatory-timing-2026-11-12.md)
 compares local timing estimates on 108 authored shifts and 162 ordinary
 controls. Its reader reproduces signed displacement errors, including the

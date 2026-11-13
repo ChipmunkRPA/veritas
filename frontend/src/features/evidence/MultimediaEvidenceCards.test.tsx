@@ -38,6 +38,31 @@ const show = (set: MultimediaEvidenceSet, token = 'signed token', mediaReady = t
 afterEach(cleanup)
 
 describe('ordinary multimedia evidence', () => {
+  it('links voice evidence to only sound categories overlapping its exact samples', () => {
+    const set = structuredClone(audio)
+    set.source.pcm_sha256 = 'a'.repeat(64)
+    set.sound_events = {
+      schema: 'chipmunk.sound-events/1', status: 'ready',
+      source: { sha256: set.source.sha256, pcm_sha256: set.source.pcm_sha256, sample_rate: 16000, samples: 160000 },
+      method: { window_samples: 160000, hop_samples: 160000, description: 'Sound categories' }, limitations: [],
+      windows: [[0, 32000], [32000, 96000]].map(([start, end], index) => ({
+        id: `C0${index + 1}`, start_sample: start, end_sample: end, start_s: start / 16000, end_s: end / 16000,
+        labels: [{ label: 'Music', score: 0.7 }],
+        source_timestamp_ranges: [{ start_sample: start, end_sample: end, source_start_pts: start, source_end_pts: end, time_base: '1/16000' }],
+        artifacts: { selected_clip: asset('e', 'audio/wav'), waveform: asset('d') },
+      })),
+    }
+    render(<MemoryRouter initialEntries={['/analyses/audio/media-evidence?view=plain']}>
+      <MultimediaEvidenceContent set={set} token="signed token" mediaReady />
+    </MemoryRouter>)
+    const voice = within(screen.getByRole('article', { name: 'Selected audio evidence P01' }))
+    expect(voice.queryByRole('link', { name: 'Sound categories C01' })).toBeNull()
+    const contextLink = voice.getByRole('link', { name: 'Sound categories C02' })
+    expect(contextLink.getAttribute('href')).toBe('/analyses/audio/media-evidence?view=plain#media-evidence-C02')
+    fireEvent.click(contextLink)
+    expect(screen.getByRole('article', { name: 'Sound categories C02' })).toBeTruthy()
+  })
+
   it('distinguishes second writing responses and links the matching source passage', () => {
     const set = structuredClone(document)
     set.coverage!.writing_second_check = {
@@ -59,7 +84,7 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText('Quoted 😀 <script>text</script>')).toBeTruthy()
   })
 
-  it.each(['document-writing-second-check/2', 'document-writing-second-check/3', 'document-writing-second-check/4'] as const)(
+  it.each(['document-writing-second-check/2', 'document-writing-second-check/3', 'document-writing-second-check/4', 'document-writing-second-check/5'] as const)(
     'labels the second check on an email reply as body-only for %s', (schema) => {
     const set = structuredClone(document)
     set.coverage!.writing_second_check = {
@@ -69,7 +94,8 @@ describe('ordinary multimedia evidence', () => {
     show(set)
     expect(screen.getByText(/This check covers contexts wholly inside the reply body/)).toBeTruthy()
     expect(screen.getByText(/Text marked as a quote or signature and contexts that cross those boundaries are outside this check/)).toBeTruthy()
-    expect(Boolean(screen.queryByText(/decoded HTML body of the selected email part/))).toBe(schema === 'document-writing-second-check/4')
+    expect(Boolean(screen.queryByText(/decoded HTML body of the selected email part/)))
+      .toBe(schema === 'document-writing-second-check/4' || schema === 'document-writing-second-check/5')
   })
 
   it('shows a source-clock gap and its affected voice window in ordinary audio evidence', () => {

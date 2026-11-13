@@ -1,0 +1,4199 @@
+{
+  "schema": "chipmunk.writing-html-reply-short-layouts/1",
+  "method": {
+    "transfer": "Replay all 100 earlier measured plain replies, with one or four body paragraphs, as exact HTML paragraphs and a trailing blockquote. Alternate the two MIME encodings, retain explicit quote roles, and independently map decoded source characters.",
+    "evidence": "Each HTML case must return the same ordered candidate inputs as its original measured plain reply. Use saved responses only on identical text and native input geometry.",
+    "controls": "Use unsupported no-quote, interleaved, styled, unmarked, unbalanced and table variants on one genuine source of each body count. Require zero secondary-check admissions.",
+    "advance": "Reproduce every admitted plain-reply location and genuine file flag, keep the one-paragraph four-sentence condition, and reproduce every decoded MIME range. This measures format transfer, with zero overall confidence weight."
+  },
+  "prior_result": "7428954875c886aaccc79cbbc056bd24e0edbb926ff86534eea728b928d3cfe1",
+  "freeze_sha256": "f30f674c64d7bc0a55e6b91824007d71be0520d073330945360642845d10a009",
+  "counts": {
+    "4": {
+      "deliveries": 57,
+      "generated": 25,
+      "useful": 12,
+      "human": 32,
+      "human_flags": 10,
+      "checked_inputs": 73,
+      "verified_html_ranges": 1191,
+      "quoted-printable": 29,
+      "base64": 28
+    },
+    "1": {
+      "deliveries": 43,
+      "generated": 19,
+      "useful": 2,
+      "human": 24,
+      "human_flags": 3,
+      "checked_inputs": 6,
+      "verified_html_ranges": 352,
+      "base64": 22,
+      "quoted-printable": 21
+    }
+  },
+  "excluded": {
+    "no_quote": 2,
+    "interleaved": 2,
+    "styled": 2,
+    "unmarked": 2,
+    "unbalanced": 2,
+    "table": 2
+  },
+  "cases": [
+    {
+      "case": 0,
+      "filename": "000-quote.eml",
+      "plain_sha256": "c04c25223756695d400ab4f0281d9124ede7cf6e78ed475c5ebc7c7a3f3aa19b",
+      "html_sha256": "f01a76827aabafe2e5838dd52fcb62c911e95878e501aff2a259a212c9e3ad10",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          190
+        ],
+        [
+          192,
+          500
+        ],
+        [
+          502,
+          1045
+        ],
+        [
+          1047,
+          1897
+        ]
+      ],
+      "selected": [
+        "77a61d2e4f6fc9a57128174d07c24b7cc4dfddfe79f58ae14ab8d84b86750eb3",
+        "7cea6b6283da81f994dd41d1cf4f260f7a398f2a0a35728ecbc6c866bc9731f2"
+      ],
+      "corroborated": [
+        "77a61d2e4f6fc9a57128174d07c24b7cc4dfddfe79f58ae14ab8d84b86750eb3",
+        "7cea6b6283da81f994dd41d1cf4f260f7a398f2a0a35728ecbc6c866bc9731f2"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 190
+          },
+          {
+            "start": 192,
+            "end": 351
+          }
+        ],
+        [
+          {
+            "start": 0,
+            "end": 190
+          },
+          {
+            "start": 192,
+            "end": 351
+          },
+          {
+            "start": 352,
+            "end": 500
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": true,
+      "synthetic": false,
+      "verified_html_ranges": 31,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 1,
+      "filename": "001-quote.eml",
+      "plain_sha256": "aea0c3b209be9728f9130a89ed2c4f691e653028922df57e0b6bb7e7995fcc96",
+      "html_sha256": "ad1171ed84f9c36d7ac9f8a9b1a6b59d59cf42ee47ea736ff8e51f6f5c7939c4",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          190
+        ],
+        [
+          192,
+          500
+        ],
+        [
+          502,
+          920
+        ],
+        [
+          922,
+          1772
+        ]
+      ],
+      "selected": [
+        "77a61d2e4f6fc9a57128174d07c24b7cc4dfddfe79f58ae14ab8d84b86750eb3",
+        "7cea6b6283da81f994dd41d1cf4f260f7a398f2a0a35728ecbc6c866bc9731f2",
+        "a774c648ba568a227c6a379ad580590fa618f5311a0e3f30428530122098a23b"
+      ],
+      "corroborated": [
+        "77a61d2e4f6fc9a57128174d07c24b7cc4dfddfe79f58ae14ab8d84b86750eb3",
+        "7cea6b6283da81f994dd41d1cf4f260f7a398f2a0a35728ecbc6c866bc9731f2",
+        "a774c648ba568a227c6a379ad580590fa618f5311a0e3f30428530122098a23b"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 190
+          },
+          {
+            "start": 192,
+            "end": 351
+          }
+        ],
+        [
+          {
+            "start": 0,
+            "end": 190
+          },
+          {
+            "start": 192,
+            "end": 351
+          },
+          {
+            "start": 352,
+            "end": 500
+          }
+        ],
+        [
+          {
+            "start": 192,
+            "end": 351
+          },
+          {
+            "start": 352,
+            "end": 500
+          },
+          {
+            "start": 502,
+            "end": 805
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": true,
+      "synthetic": false,
+      "verified_html_ranges": 29,
+      "encoding": "base64"
+    },
+    {
+      "case": 2,
+      "filename": "002-quote.eml",
+      "plain_sha256": "afc92db23d0640d4b0bcc2aee920eb9b6f4381398127d4cbcc3c88b61475942d",
+      "html_sha256": "8377804069db41c0e5fe3f87d4aecf097e53ffe0c0564b269877dac3c326bf3b",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          190
+        ],
+        [
+          192,
+          500
+        ],
+        [
+          502,
+          1163
+        ],
+        [
+          1165,
+          2015
+        ]
+      ],
+      "selected": [
+        "77a61d2e4f6fc9a57128174d07c24b7cc4dfddfe79f58ae14ab8d84b86750eb3",
+        "7cea6b6283da81f994dd41d1cf4f260f7a398f2a0a35728ecbc6c866bc9731f2",
+        "438ba68d302e62fd8a963c324499d64dd27d57fb1fc1df218742861c42ff2a54"
+      ],
+      "corroborated": [
+        "77a61d2e4f6fc9a57128174d07c24b7cc4dfddfe79f58ae14ab8d84b86750eb3",
+        "7cea6b6283da81f994dd41d1cf4f260f7a398f2a0a35728ecbc6c866bc9731f2",
+        "438ba68d302e62fd8a963c324499d64dd27d57fb1fc1df218742861c42ff2a54"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 190
+          },
+          {
+            "start": 192,
+            "end": 351
+          }
+        ],
+        [
+          {
+            "start": 0,
+            "end": 190
+          },
+          {
+            "start": 192,
+            "end": 351
+          },
+          {
+            "start": 352,
+            "end": 500
+          }
+        ],
+        [
+          {
+            "start": 754,
+            "end": 887
+          },
+          {
+            "start": 888,
+            "end": 992
+          },
+          {
+            "start": 993,
+            "end": 1163
+          }
+        ]
+      ],
+      "useful": true,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 27,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 3,
+      "filename": "003-quote.eml",
+      "plain_sha256": "2e491f76bf4ed0508f36fb5f9939c9a8418c1515888ad121d25bb2c8bb4f9bcd",
+      "html_sha256": "23cc7ea16f6d66745be939c59ed6a76b4ba106900482aaa8be8282e42b38f386",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          152
+        ],
+        [
+          154,
+          284
+        ],
+        [
+          286,
+          469
+        ],
+        [
+          471,
+          749
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 17,
+      "encoding": "base64"
+    },
+    {
+      "case": 4,
+      "filename": "004-quote.eml",
+      "plain_sha256": "90267fd9060ae4ef80c4ed49fb880ced868cd34e99a3c9cca2bca1aee44a1cfd",
+      "html_sha256": "154a2768310a9a481e031521e55eb670a2394ab754fb84c7801a1eb32aadc1ce",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          152
+        ],
+        [
+          154,
+          284
+        ],
+        [
+          286,
+          507
+        ],
+        [
+          509,
+          787
+        ]
+      ],
+      "selected": [
+        "b468b6e03aef879cefde351ab4ca5f407064a98c3ae11c844b2ca2201dc2ff15",
+        "78056783b164a16f498349f82214c1105bac1fc6b248ee23871f3acb348e6b88",
+        "29133925a4f3ea9f546bf78da9daa9c1134f0d2596c009e8040a2b1fe43b0a9b"
+      ],
+      "corroborated": [
+        "b468b6e03aef879cefde351ab4ca5f407064a98c3ae11c844b2ca2201dc2ff15",
+        "78056783b164a16f498349f82214c1105bac1fc6b248ee23871f3acb348e6b88",
+        "29133925a4f3ea9f546bf78da9daa9c1134f0d2596c009e8040a2b1fe43b0a9b"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 152
+          },
+          {
+            "start": 154,
+            "end": 284
+          },
+          {
+            "start": 286,
+            "end": 361
+          }
+        ],
+        [
+          {
+            "start": 154,
+            "end": 284
+          },
+          {
+            "start": 286,
+            "end": 361
+          },
+          {
+            "start": 362,
+            "end": 437
+          }
+        ],
+        [
+          {
+            "start": 286,
+            "end": 361
+          },
+          {
+            "start": 362,
+            "end": 437
+          },
+          {
+            "start": 438,
+            "end": 507
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": true,
+      "synthetic": false,
+      "verified_html_ranges": 19,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 5,
+      "filename": "005-quote.eml",
+      "plain_sha256": "97fb3d23045e17d8f8bf8dd6307edae3118e03a0e69960995990bf24dc1559b1",
+      "html_sha256": "c7b8c02741a5d4cfd00f5efdc444cade806142f8a85a50d899ba0af0562f8c49",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          152
+        ],
+        [
+          154,
+          284
+        ],
+        [
+          286,
+          503
+        ],
+        [
+          505,
+          783
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 17,
+      "encoding": "base64"
+    },
+    {
+      "case": 6,
+      "filename": "006-quote.eml",
+      "plain_sha256": "e84369d9914de2e6ce1a8f905c861dcf426acd6f6c9d2d77b7e0f982fb706fa0",
+      "html_sha256": "e9d08503192a71e72eaff7f5b2d7581d544c08e92069027c56e7dcaa76ecb4b6",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          226
+        ],
+        [
+          228,
+          447
+        ],
+        [
+          449,
+          691
+        ],
+        [
+          693,
+          826
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 7,
+      "filename": "007-quote.eml",
+      "plain_sha256": "d72bbd3c0330beb3d6ec42a06a19557317e5f7e6b40af2ea69cfd5d81eb02e2c",
+      "html_sha256": "c3229c2555d139ac04e6209e2f132b1990352d1893ffd315c02b7bdf4cbc3deb",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          226
+        ],
+        [
+          228,
+          487
+        ],
+        [
+          489,
+          731
+        ],
+        [
+          733,
+          866
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 17,
+      "encoding": "base64"
+    },
+    {
+      "case": 8,
+      "filename": "008-quote.eml",
+      "plain_sha256": "d61e562728ce33dff60d0c7005d0d4709cb114430c5db96ce14357ee099c87ef",
+      "html_sha256": "0229442712f70aa0c7ef4c675bbf5efa87644331119f1a3535c508a72056a3d8",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          226
+        ],
+        [
+          228,
+          431
+        ],
+        [
+          433,
+          675
+        ],
+        [
+          677,
+          810
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 9,
+      "filename": "009-quote.eml",
+      "plain_sha256": "3a14a0ad669dc9fc086641ad441bb48703d0e9aabe7029935ed34fea4922cfeb",
+      "html_sha256": "0980c7ff28dbc8556f3148c2c00932f910fc4839a2302bf5c1bcbc75545dd482",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          226
+        ],
+        [
+          228,
+          439
+        ],
+        [
+          441,
+          683
+        ],
+        [
+          685,
+          818
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 17,
+      "encoding": "base64"
+    },
+    {
+      "case": 10,
+      "filename": "010-quote.eml",
+      "plain_sha256": "14adf07bccfc35e92bfe3abbdfab78e3351948194656fb5072c18b244b3b03a1",
+      "html_sha256": "a9f88942e2dd1ed04bb434f072b14ec2069286cfbc131686929ff0973c41c8e7",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          137
+        ],
+        [
+          139,
+          265
+        ],
+        [
+          267,
+          548
+        ],
+        [
+          550,
+          794
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 11,
+      "filename": "011-quote.eml",
+      "plain_sha256": "dee43073e4a4bbcb2fdccd71e733b82116f156deba3f9419a13b20faa5c040cf",
+      "html_sha256": "7c07236e3f42f885f369a9f054429597ee5b714aa1f2b961716fc827a19c0744",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          137
+        ],
+        [
+          139,
+          265
+        ],
+        [
+          267,
+          455
+        ],
+        [
+          457,
+          701
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 19,
+      "encoding": "base64"
+    },
+    {
+      "case": 12,
+      "filename": "012-quote.eml",
+      "plain_sha256": "cedaf9de24d879c8a3f9cea96b29263cded1ec25d73f7bc89b0fe508cd9a40be",
+      "html_sha256": "f19990f2a3a0c4bf03c1ef5376075d7bda21a40d5339f2f314a4e063d1c7e91f",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          137
+        ],
+        [
+          139,
+          265
+        ],
+        [
+          267,
+          502
+        ],
+        [
+          504,
+          748
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 13,
+      "filename": "013-quote.eml",
+      "plain_sha256": "74c181a1fdcbe8c9a55fb52318072ceed561d5918c0f7eec3ddc09ef5d36eb01",
+      "html_sha256": "0268ff996686967a6b25b7df726b7c5b309e300ca4e1504bcc78bd4a7df6ffaf",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          137
+        ],
+        [
+          139,
+          265
+        ],
+        [
+          267,
+          625
+        ],
+        [
+          627,
+          871
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 17,
+      "encoding": "base64"
+    },
+    {
+      "case": 14,
+      "filename": "014-quote.eml",
+      "plain_sha256": "2d97983c7e74ca501f8244d73faf20f7e852180e7dc73d8a43abf2ee4bc88fd2",
+      "html_sha256": "ecf617959a83cd417084b77cdbf802191eb8751b48857d987175ff94c5f26ae9",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          158
+        ],
+        [
+          160,
+          389
+        ],
+        [
+          391,
+          522
+        ],
+        [
+          524,
+          682
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 15,
+      "filename": "015-quote.eml",
+      "plain_sha256": "7b60a943cbf7450cb3f0951d8837fea8eb37f2eb1873310623a503cb58ccc908",
+      "html_sha256": "31ea30b1c7383dda39ec5b9462f44fc25cdcecf4cfdacf9885df21f8af548cd7",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          158
+        ],
+        [
+          160,
+          470
+        ],
+        [
+          472,
+          603
+        ],
+        [
+          605,
+          763
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 19,
+      "encoding": "base64"
+    },
+    {
+      "case": 16,
+      "filename": "016-quote.eml",
+      "plain_sha256": "f3862eacda8132ac5e7bf15994ea64ffa5433b95904862f81799003aebe2657c",
+      "html_sha256": "93261d420f5e4b73428c8219ec66b78f90e099f3e4ce9f02fa1ec3595642d81b",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          158
+        ],
+        [
+          160,
+          412
+        ],
+        [
+          414,
+          545
+        ],
+        [
+          547,
+          705
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 17,
+      "filename": "017-quote.eml",
+      "plain_sha256": "dd2ef8714ba72ea1848071fb04880b63f72b7842e8f570b3e92ee6ca0a8e2edf",
+      "html_sha256": "c717450e6392489734a5db5fee65a404e5c0b28e7434643bbac5eacbde91c21d",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          514
+        ],
+        [
+          516,
+          1148
+        ],
+        [
+          1150,
+          1652
+        ],
+        [
+          1654,
+          2044
+        ]
+      ],
+      "selected": [
+        "68aa35690af5b5c574a24926a854b6bceb699d439a821ccd05b355897984b971",
+        "bc695be5bc902496e06579717404674d2b454defcd819cdae018feb4ed1df8a2",
+        "8a144c3ab95c1fc94623e19dc28af1d52b2721faf2d160679025a05b98c8a39b",
+        "51c4638662ac2dea6a68b2ecaa0d24eed1cebdb7d380ce8ee0a8cece3197f8bb"
+      ],
+      "corroborated": [
+        "68aa35690af5b5c574a24926a854b6bceb699d439a821ccd05b355897984b971",
+        "8a144c3ab95c1fc94623e19dc28af1d52b2721faf2d160679025a05b98c8a39b"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 687,
+            "end": 936
+          },
+          {
+            "start": 937,
+            "end": 1148
+          },
+          {
+            "start": 1150,
+            "end": 1330
+          }
+        ],
+        [
+          {
+            "start": 937,
+            "end": 1148
+          },
+          {
+            "start": 1150,
+            "end": 1330
+          },
+          {
+            "start": 1331,
+            "end": 1439
+          }
+        ],
+        [
+          {
+            "start": 1150,
+            "end": 1330
+          },
+          {
+            "start": 1331,
+            "end": 1439
+          },
+          {
+            "start": 1440,
+            "end": 1652
+          }
+        ],
+        [
+          {
+            "start": 1440,
+            "end": 1652
+          },
+          {
+            "start": 1654,
+            "end": 1855
+          },
+          {
+            "start": 1856,
+            "end": 2044
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": true,
+      "synthetic": false,
+      "verified_html_ranges": 23,
+      "encoding": "base64"
+    },
+    {
+      "case": 18,
+      "filename": "018-quote.eml",
+      "plain_sha256": "fcc462799068220305fa816d92a3bac0784783f3c2c9c23049019ff3d5dcb935",
+      "html_sha256": "486c5a1a33d2380feeb8c90e1951dd524b918c591f8f825188562ea08ae3b840",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          514
+        ],
+        [
+          516,
+          1148
+        ],
+        [
+          1150,
+          1465
+        ],
+        [
+          1467,
+          1857
+        ]
+      ],
+      "selected": [
+        "77eb5da3013ac839c532559a84ffa4ef0e7d0b09e50fb70e4ecf3b93ede771b2"
+      ],
+      "corroborated": [
+        "77eb5da3013ac839c532559a84ffa4ef0e7d0b09e50fb70e4ecf3b93ede771b2"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 937,
+            "end": 1148
+          },
+          {
+            "start": 1150,
+            "end": 1313
+          },
+          {
+            "start": 1314,
+            "end": 1465
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": true,
+      "synthetic": false,
+      "verified_html_ranges": 23,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 19,
+      "filename": "019-quote.eml",
+      "plain_sha256": "5d4141b9da9326b036fb32e297aa4eb81af2ad5bf1350a6414409d9bbbdf29f9",
+      "html_sha256": "345cd57b02720084d5d729986504a2d444a4ed330c81495342683936412640d3",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          514
+        ],
+        [
+          516,
+          1148
+        ],
+        [
+          1150,
+          1588
+        ],
+        [
+          1590,
+          1980
+        ]
+      ],
+      "selected": [
+        "6430998448509a77d2ca98c851168267c473b0eb6a2e0d1700b53ec80417c30f",
+        "a430aa14f6027065c4f926a2225ecf859cbee84d56f83426988ea5574b681c65"
+      ],
+      "corroborated": [
+        "6430998448509a77d2ca98c851168267c473b0eb6a2e0d1700b53ec80417c30f"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 1150,
+            "end": 1327
+          },
+          {
+            "start": 1328,
+            "end": 1436
+          },
+          {
+            "start": 1437,
+            "end": 1588
+          }
+        ],
+        [
+          {
+            "start": 1437,
+            "end": 1588
+          },
+          {
+            "start": 1590,
+            "end": 1791
+          },
+          {
+            "start": 1792,
+            "end": 1980
+          }
+        ]
+      ],
+      "useful": true,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 25,
+      "encoding": "base64"
+    },
+    {
+      "case": 20,
+      "filename": "020-quote.eml",
+      "plain_sha256": "265f225480549f978e9acaf0d5938cfa08ec5789dd61afd7f9a7eeb7a3693fd5",
+      "html_sha256": "19b21917779ea02cc332222753ab80e6ff0424112347d32c9fdb6429eb677813",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          514
+        ],
+        [
+          516,
+          1148
+        ],
+        [
+          1150,
+          1618
+        ],
+        [
+          1620,
+          2010
+        ]
+      ],
+      "selected": [
+        "e868c3238f4a4208124dec002a17c0676f3bf2c1b0ca5f6e296b3a08b29f8668",
+        "1fafbf2cf6adf16aa42e9f0bca85137ff6f089d2bda89786a74aadab663e86b3",
+        "cb27a29e55948b030013dc2ef373d3fe55ecc6219112e60290fb8726ffbb471b",
+        "751af5dba22b8a55d64de7d533e62d0b2f3b91803592d85537f2de35e3e672c6"
+      ],
+      "corroborated": [
+        "e868c3238f4a4208124dec002a17c0676f3bf2c1b0ca5f6e296b3a08b29f8668",
+        "1fafbf2cf6adf16aa42e9f0bca85137ff6f089d2bda89786a74aadab663e86b3",
+        "cb27a29e55948b030013dc2ef373d3fe55ecc6219112e60290fb8726ffbb471b"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 687,
+            "end": 936
+          },
+          {
+            "start": 937,
+            "end": 1148
+          },
+          {
+            "start": 1150,
+            "end": 1415
+          }
+        ],
+        [
+          {
+            "start": 937,
+            "end": 1148
+          },
+          {
+            "start": 1150,
+            "end": 1415
+          },
+          {
+            "start": 1416,
+            "end": 1618
+          }
+        ],
+        [
+          {
+            "start": 1150,
+            "end": 1415
+          },
+          {
+            "start": 1416,
+            "end": 1618
+          },
+          {
+            "start": 1620,
+            "end": 1821
+          }
+        ],
+        [
+          {
+            "start": 1416,
+            "end": 1618
+          },
+          {
+            "start": 1620,
+            "end": 1821
+          },
+          {
+            "start": 1822,
+            "end": 2010
+          }
+        ]
+      ],
+      "useful": true,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 25,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 21,
+      "filename": "021-quote.eml",
+      "plain_sha256": "209e904904f7b155e0042226eb98eeea66db078ef5200fb1a5128b1ee3eb6f69",
+      "html_sha256": "eda22c88a78f09d032676f5f8463dea07b7abd7ff8917992aaeb1553c7882be5",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          555
+        ],
+        [
+          557,
+          1169
+        ],
+        [
+          1171,
+          1637
+        ],
+        [
+          1639,
+          2521
+        ]
+      ],
+      "selected": [
+        "431862311cd9ae333eede518569fb95e44c80ab645b4bd84de59334cbeecfe21",
+        "6cd9dfca32df93724ddc10a63c279a8f11d7737a11b60cffa090ac6ba609e625",
+        "e23c083848b2a0b1923615374880c2e31b0acb82b296520f29df2dac83b289ae",
+        "90e5882ae41259cb1baea64838cbce45bfaf03eb00ca4fdf56662a63867ef60b",
+        "b092e7cba8ecd4399f3567ea821ba13e87e73cc39a5914e792d0fb7260372716",
+        "f0c6adbb79733d46f50f1d94dded0bc6e75884ea280e3bd45dd9430e1a246623"
+      ],
+      "corroborated": [
+        "90e5882ae41259cb1baea64838cbce45bfaf03eb00ca4fdf56662a63867ef60b",
+        "f0c6adbb79733d46f50f1d94dded0bc6e75884ea280e3bd45dd9430e1a246623"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 249
+          },
+          {
+            "start": 250,
+            "end": 421
+          }
+        ],
+        [
+          {
+            "start": 0,
+            "end": 249
+          },
+          {
+            "start": 250,
+            "end": 421
+          },
+          {
+            "start": 422,
+            "end": 555
+          }
+        ],
+        [
+          {
+            "start": 250,
+            "end": 421
+          },
+          {
+            "start": 422,
+            "end": 555
+          },
+          {
+            "start": 557,
+            "end": 676
+          }
+        ],
+        [
+          {
+            "start": 557,
+            "end": 676
+          },
+          {
+            "start": 677,
+            "end": 837
+          },
+          {
+            "start": 838,
+            "end": 972
+          }
+        ],
+        [
+          {
+            "start": 838,
+            "end": 972
+          },
+          {
+            "start": 973,
+            "end": 1169
+          },
+          {
+            "start": 1171,
+            "end": 1404
+          }
+        ],
+        [
+          {
+            "start": 1171,
+            "end": 1404
+          },
+          {
+            "start": 1405,
+            "end": 1637
+          },
+          {
+            "start": 1639,
+            "end": 1747
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": true,
+      "synthetic": false,
+      "verified_html_ranges": 43,
+      "encoding": "base64"
+    },
+    {
+      "case": 22,
+      "filename": "022-quote.eml",
+      "plain_sha256": "d7c79f98f08548ca2c590a3cbcdd77649d24e3547b7c217935b3ee69bbd7359b",
+      "html_sha256": "e5c7a9926e7d1ad83591d68b400e32f2589aa473e235becef397d0f7df77c037",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          555
+        ],
+        [
+          557,
+          1169
+        ],
+        [
+          1171,
+          1493
+        ],
+        [
+          1495,
+          2377
+        ]
+      ],
+      "selected": [
+        "431862311cd9ae333eede518569fb95e44c80ab645b4bd84de59334cbeecfe21",
+        "6cd9dfca32df93724ddc10a63c279a8f11d7737a11b60cffa090ac6ba609e625",
+        "e23c083848b2a0b1923615374880c2e31b0acb82b296520f29df2dac83b289ae",
+        "90e5882ae41259cb1baea64838cbce45bfaf03eb00ca4fdf56662a63867ef60b"
+      ],
+      "corroborated": [
+        "90e5882ae41259cb1baea64838cbce45bfaf03eb00ca4fdf56662a63867ef60b"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 249
+          },
+          {
+            "start": 250,
+            "end": 421
+          }
+        ],
+        [
+          {
+            "start": 0,
+            "end": 249
+          },
+          {
+            "start": 250,
+            "end": 421
+          },
+          {
+            "start": 422,
+            "end": 555
+          }
+        ],
+        [
+          {
+            "start": 250,
+            "end": 421
+          },
+          {
+            "start": 422,
+            "end": 555
+          },
+          {
+            "start": 557,
+            "end": 676
+          }
+        ],
+        [
+          {
+            "start": 557,
+            "end": 676
+          },
+          {
+            "start": 677,
+            "end": 837
+          },
+          {
+            "start": 838,
+            "end": 972
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": true,
+      "synthetic": false,
+      "verified_html_ranges": 39,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 23,
+      "filename": "023-quote.eml",
+      "plain_sha256": "605d33023cf11fff1f713ffeb040fe364fccdb2343aaa9057aea15880f7a7efb",
+      "html_sha256": "e63667fb54e399262039851fe87b7ea8c24ec8b2ba011888819a80d45d328dd1",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          555
+        ],
+        [
+          557,
+          1169
+        ],
+        [
+          1171,
+          1588
+        ],
+        [
+          1590,
+          2472
+        ]
+      ],
+      "selected": [
+        "431862311cd9ae333eede518569fb95e44c80ab645b4bd84de59334cbeecfe21",
+        "6cd9dfca32df93724ddc10a63c279a8f11d7737a11b60cffa090ac6ba609e625",
+        "e23c083848b2a0b1923615374880c2e31b0acb82b296520f29df2dac83b289ae",
+        "90e5882ae41259cb1baea64838cbce45bfaf03eb00ca4fdf56662a63867ef60b",
+        "3518cffe1963fbca091b632f10a5a11071e16bd2e603278348e685bb007895f9",
+        "0ec138cae351cbcba56be5eff68e507da4f079446a7044211970e019b447710b"
+      ],
+      "corroborated": [
+        "90e5882ae41259cb1baea64838cbce45bfaf03eb00ca4fdf56662a63867ef60b",
+        "0ec138cae351cbcba56be5eff68e507da4f079446a7044211970e019b447710b"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 249
+          },
+          {
+            "start": 250,
+            "end": 421
+          }
+        ],
+        [
+          {
+            "start": 0,
+            "end": 249
+          },
+          {
+            "start": 250,
+            "end": 421
+          },
+          {
+            "start": 422,
+            "end": 555
+          }
+        ],
+        [
+          {
+            "start": 250,
+            "end": 421
+          },
+          {
+            "start": 422,
+            "end": 555
+          },
+          {
+            "start": 557,
+            "end": 676
+          }
+        ],
+        [
+          {
+            "start": 557,
+            "end": 676
+          },
+          {
+            "start": 677,
+            "end": 837
+          },
+          {
+            "start": 838,
+            "end": 972
+          }
+        ],
+        [
+          {
+            "start": 838,
+            "end": 972
+          },
+          {
+            "start": 973,
+            "end": 1169
+          },
+          {
+            "start": 1171,
+            "end": 1391
+          }
+        ],
+        [
+          {
+            "start": 973,
+            "end": 1169
+          },
+          {
+            "start": 1171,
+            "end": 1391
+          },
+          {
+            "start": 1392,
+            "end": 1588
+          }
+        ]
+      ],
+      "useful": true,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 41,
+      "encoding": "base64"
+    },
+    {
+      "case": 24,
+      "filename": "024-quote.eml",
+      "plain_sha256": "ff84ddf12da805db9e162dbb0b05c73c58d001d53fe25c09eb7db7094b73a9cc",
+      "html_sha256": "7f36cc2614cbbb5d2fcfac9bd76a69e8bbe9e977245eeec62b6abf6b17d0b272",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          555
+        ],
+        [
+          557,
+          1169
+        ],
+        [
+          1171,
+          1648
+        ],
+        [
+          1650,
+          2532
+        ]
+      ],
+      "selected": [
+        "431862311cd9ae333eede518569fb95e44c80ab645b4bd84de59334cbeecfe21",
+        "6cd9dfca32df93724ddc10a63c279a8f11d7737a11b60cffa090ac6ba609e625",
+        "e23c083848b2a0b1923615374880c2e31b0acb82b296520f29df2dac83b289ae",
+        "90e5882ae41259cb1baea64838cbce45bfaf03eb00ca4fdf56662a63867ef60b",
+        "a9c8b48f34d26548f74b1b3b95f31b8b60a14dc269d162cb70e5caad6d2a2b3c"
+      ],
+      "corroborated": [
+        "90e5882ae41259cb1baea64838cbce45bfaf03eb00ca4fdf56662a63867ef60b",
+        "a9c8b48f34d26548f74b1b3b95f31b8b60a14dc269d162cb70e5caad6d2a2b3c"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 249
+          },
+          {
+            "start": 250,
+            "end": 421
+          }
+        ],
+        [
+          {
+            "start": 0,
+            "end": 249
+          },
+          {
+            "start": 250,
+            "end": 421
+          },
+          {
+            "start": 422,
+            "end": 555
+          }
+        ],
+        [
+          {
+            "start": 250,
+            "end": 421
+          },
+          {
+            "start": 422,
+            "end": 555
+          },
+          {
+            "start": 557,
+            "end": 676
+          }
+        ],
+        [
+          {
+            "start": 557,
+            "end": 676
+          },
+          {
+            "start": 677,
+            "end": 837
+          },
+          {
+            "start": 838,
+            "end": 972
+          }
+        ],
+        [
+          {
+            "start": 1171,
+            "end": 1417
+          },
+          {
+            "start": 1418,
+            "end": 1648
+          },
+          {
+            "start": 1650,
+            "end": 1758
+          }
+        ]
+      ],
+      "useful": true,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 45,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 25,
+      "filename": "025-quote.eml",
+      "plain_sha256": "3cf89c529b78e543496095f356d7599f1d9f85c857dd0aa631798532ea7c81c2",
+      "html_sha256": "fa785e2d8d7ee216701b30018588333cb74921db74d4f14466cc8e2079771322",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          691
+        ],
+        [
+          693,
+          1240
+        ],
+        [
+          1242,
+          1494
+        ],
+        [
+          1496,
+          1718
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 31,
+      "encoding": "base64"
+    },
+    {
+      "case": 26,
+      "filename": "026-quote.eml",
+      "plain_sha256": "09c14ec3e588e88d522fe0fd83cd6ba4562b8fac49ec23bda9fdfad05168cc30",
+      "html_sha256": "bb99cf42d6fd302b020e419925a8a40e11a3a993551e4376a06d11589c86391a",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          691
+        ],
+        [
+          693,
+          1240
+        ],
+        [
+          1242,
+          1514
+        ],
+        [
+          1516,
+          1738
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 35,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 27,
+      "filename": "027-quote.eml",
+      "plain_sha256": "16bd1f32f7280dbb6a07a65b97a76b77cb4f26923aead05b31b96b273607fdbc",
+      "html_sha256": "e1f764cab5818b3cadb650473432bf7afee5d8924cbf36d373aeb2dfaccb1a2a",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          691
+        ],
+        [
+          693,
+          1240
+        ],
+        [
+          1242,
+          1546
+        ],
+        [
+          1548,
+          1770
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 30,
+      "encoding": "base64"
+    },
+    {
+      "case": 28,
+      "filename": "028-quote.eml",
+      "plain_sha256": "f08cc46050a562c84e25141857c1742b3029620d86e8076572816c651be778d4",
+      "html_sha256": "3b69999c4d0399c1a1d80166a95cc95e2097b121f26d499486f1df6c786b07d2",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          276
+        ],
+        [
+          278,
+          614
+        ],
+        [
+          616,
+          1108
+        ],
+        [
+          1110,
+          1395
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 29,
+      "filename": "029-quote.eml",
+      "plain_sha256": "f76deb3ba507b849bf66c0825243ff0f47d88f9ac75b63abf791cdb54727e6d5",
+      "html_sha256": "49d57b41bd2575f33b469747c2a33a24808f08b6c64a508c7db9772730a9115a",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          276
+        ],
+        [
+          278,
+          537
+        ],
+        [
+          539,
+          1031
+        ],
+        [
+          1033,
+          1318
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 17,
+      "encoding": "base64"
+    },
+    {
+      "case": 30,
+      "filename": "030-quote.eml",
+      "plain_sha256": "f3749d7d134248497ae5416d69d5045e7781dbdfbb9c54eec564dde0a117fae4",
+      "html_sha256": "da42f577728a15e0ee183d8c039a4c926574f5acfbbb4c3c1343b5e21967784d",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          276
+        ],
+        [
+          278,
+          516
+        ],
+        [
+          518,
+          1010
+        ],
+        [
+          1012,
+          1297
+        ]
+      ],
+      "selected": [
+        "7a99a4265bf73f6e83df6008d1f4ba63e3845811f46b0b910452cd891f1d9ebf"
+      ],
+      "corroborated": [
+        "7a99a4265bf73f6e83df6008d1f4ba63e3845811f46b0b910452cd891f1d9ebf"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 278,
+            "end": 371
+          },
+          {
+            "start": 372,
+            "end": 516
+          },
+          {
+            "start": 518,
+            "end": 671
+          }
+        ]
+      ],
+      "useful": true,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 31,
+      "filename": "031-quote.eml",
+      "plain_sha256": "2860e5a13c66323c3843a46f0b4a042ef9610cfe8efc110cbf1cbe41f07c4405",
+      "html_sha256": "42eff7982583d8f3ce2974b7a90b73c34ce758b56e9fa1bbac802cf4a52ea346",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          276
+        ],
+        [
+          278,
+          593
+        ],
+        [
+          595,
+          1087
+        ],
+        [
+          1089,
+          1374
+        ]
+      ],
+      "selected": [
+        "216b630d6d6cd0c9657a206f2dc83693320c9b0d02de0619024daed32b33f028",
+        "2294cca2ef8e06a73792a68f87845bfe1cf869c40f469bae69bfcf7fe3cafe85",
+        "9a296cf093abe66b8f1e6fb36e85a027204f20827331d7279cb3ac37892d6965"
+      ],
+      "corroborated": [
+        "216b630d6d6cd0c9657a206f2dc83693320c9b0d02de0619024daed32b33f028",
+        "2294cca2ef8e06a73792a68f87845bfe1cf869c40f469bae69bfcf7fe3cafe85"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 235,
+            "end": 276
+          },
+          {
+            "start": 278,
+            "end": 426
+          },
+          {
+            "start": 427,
+            "end": 593
+          }
+        ],
+        [
+          {
+            "start": 278,
+            "end": 426
+          },
+          {
+            "start": 427,
+            "end": 593
+          },
+          {
+            "start": 595,
+            "end": 748
+          }
+        ],
+        [
+          {
+            "start": 427,
+            "end": 593
+          },
+          {
+            "start": 595,
+            "end": 748
+          },
+          {
+            "start": 749,
+            "end": 966
+          }
+        ]
+      ],
+      "useful": true,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 21,
+      "encoding": "base64"
+    },
+    {
+      "case": 32,
+      "filename": "032-quote.eml",
+      "plain_sha256": "5f78f334fc0c31874c73f9925762a010199ea52e48be368aaf230fd9417b673c",
+      "html_sha256": "dcac7a1c1aca8f6c2b82bcb3df25a91fd0340d0e62fba199ba82aee875083338",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          154
+        ],
+        [
+          156,
+          434
+        ],
+        [
+          436,
+          608
+        ],
+        [
+          610,
+          996
+        ]
+      ],
+      "selected": [
+        "610a387c642379a7080b00fbd3737fcb73cdae82a66279d2100ae81029ad02f2",
+        "723045702ae9a190249ee2eb7e40d2c36e8e83f5a79571b8bb3db02fe7b3563d"
+      ],
+      "corroborated": [],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 154
+          },
+          {
+            "start": 156,
+            "end": 373
+          }
+        ],
+        [
+          {
+            "start": 564,
+            "end": 608
+          },
+          {
+            "start": 610,
+            "end": 716
+          },
+          {
+            "start": 717,
+            "end": 889
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 16,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 33,
+      "filename": "033-quote.eml",
+      "plain_sha256": "4cc07262eea9918e51c56c9280859acad9ab5b8f7ec03adebd675017f9e100b0",
+      "html_sha256": "760e79be4490d91b18f6efd12ad249a9368fecb7de8e53dbeadbe6532823f35c",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          154
+        ],
+        [
+          156,
+          434
+        ],
+        [
+          436,
+          636
+        ],
+        [
+          638,
+          1024
+        ]
+      ],
+      "selected": [
+        "610a387c642379a7080b00fbd3737fcb73cdae82a66279d2100ae81029ad02f2"
+      ],
+      "corroborated": [],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 154
+          },
+          {
+            "start": 156,
+            "end": 373
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 18,
+      "encoding": "base64"
+    },
+    {
+      "case": 34,
+      "filename": "034-quote.eml",
+      "plain_sha256": "7ad43ae929cd59e48b010abf193453ae41e06a8f8b75cca15f8ca5b77f030674",
+      "html_sha256": "776cfc5ce1f81c772d13a30ef0ed87fa29802a66c65b2d65618a2985422863cf",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          154
+        ],
+        [
+          156,
+          434
+        ],
+        [
+          436,
+          600
+        ],
+        [
+          602,
+          988
+        ]
+      ],
+      "selected": [
+        "610a387c642379a7080b00fbd3737fcb73cdae82a66279d2100ae81029ad02f2",
+        "1c79cc5f511f0ca45493e39a89b1a7508f2b7ef11018a21e4a0856fe918720e9"
+      ],
+      "corroborated": [],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 154
+          },
+          {
+            "start": 156,
+            "end": 373
+          }
+        ],
+        [
+          {
+            "start": 544,
+            "end": 600
+          },
+          {
+            "start": 602,
+            "end": 708
+          },
+          {
+            "start": 709,
+            "end": 881
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 16,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 35,
+      "filename": "035-quote.eml",
+      "plain_sha256": "3adb33ab42f072139d748ba772a5887ec63d1199df45da5b078dac8e89daa03c",
+      "html_sha256": "9c83d6e604ef5c6fff1336f9a7a862e761f048bf09c32c42f733bdab6cebe6a6",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          154
+        ],
+        [
+          156,
+          434
+        ],
+        [
+          436,
+          609
+        ],
+        [
+          611,
+          997
+        ]
+      ],
+      "selected": [
+        "610a387c642379a7080b00fbd3737fcb73cdae82a66279d2100ae81029ad02f2",
+        "e47a7f262bcd9c62cd5b988d68e55c37f9229bfa5af5c362157a2922abc97a66"
+      ],
+      "corroborated": [],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 154
+          },
+          {
+            "start": 156,
+            "end": 373
+          }
+        ],
+        [
+          {
+            "start": 552,
+            "end": 609
+          },
+          {
+            "start": 611,
+            "end": 717
+          },
+          {
+            "start": 718,
+            "end": 890
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 15,
+      "encoding": "base64"
+    },
+    {
+      "case": 36,
+      "filename": "036-quote.eml",
+      "plain_sha256": "16482157ea43f5afec1dc20ff9526ced2181d0cafb5cef6f8ddba1e4032a058f",
+      "html_sha256": "242b30f99b8b4c63a2b882178be8f1ad903bf7ed6ce62b1ba1dcf0ac2257be3a",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          254
+        ],
+        [
+          256,
+          447
+        ],
+        [
+          449,
+          744
+        ],
+        [
+          746,
+          991
+        ]
+      ],
+      "selected": [
+        "5d56defc6212add54fe0505fca2b342a2ce3fd2b7002b5d17556c950b9f2a69f"
+      ],
+      "corroborated": [
+        "5d56defc6212add54fe0505fca2b342a2ce3fd2b7002b5d17556c950b9f2a69f"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 85
+          },
+          {
+            "start": 86,
+            "end": 254
+          },
+          {
+            "start": 256,
+            "end": 447
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": true,
+      "synthetic": false,
+      "verified_html_ranges": 19,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 37,
+      "filename": "037-quote.eml",
+      "plain_sha256": "ff503c89c4f8551a8a3a223614d7e5a19f8b1e831c3b259278f8132c38357812",
+      "html_sha256": "cf5e517f664de965a6b26a5f81818757ac7067b1cd0b9779e0588f0fc07ecf52",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          254
+        ],
+        [
+          256,
+          435
+        ],
+        [
+          437,
+          732
+        ],
+        [
+          734,
+          979
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 17,
+      "encoding": "base64"
+    },
+    {
+      "case": 38,
+      "filename": "038-quote.eml",
+      "plain_sha256": "aeb3af4f388f90ebf547346d46ef76f1d71e235559d0bf4d3e0a466e2661c2e3",
+      "html_sha256": "10d64daf781edae9cd12d10820f2aec40818b7b9af5b386ab55f0a00679ea162",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          254
+        ],
+        [
+          256,
+          516
+        ],
+        [
+          518,
+          813
+        ],
+        [
+          815,
+          1060
+        ]
+      ],
+      "selected": [
+        "55426f70c25bd9e7b01a08d0d497f8f282016c13966869bc1a72244e34f0a21d",
+        "9bd66dd6083e07acbc38489e38daa63b577af60b23d61134cee41361f5dd5913",
+        "49777bc33b51d4b2eb77581c95b865f38402e4cae2db98dffba2587685d26790"
+      ],
+      "corroborated": [
+        "55426f70c25bd9e7b01a08d0d497f8f282016c13966869bc1a72244e34f0a21d",
+        "9bd66dd6083e07acbc38489e38daa63b577af60b23d61134cee41361f5dd5913",
+        "49777bc33b51d4b2eb77581c95b865f38402e4cae2db98dffba2587685d26790"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 85
+          },
+          {
+            "start": 86,
+            "end": 254
+          },
+          {
+            "start": 256,
+            "end": 516
+          }
+        ],
+        [
+          {
+            "start": 86,
+            "end": 254
+          },
+          {
+            "start": 256,
+            "end": 516
+          },
+          {
+            "start": 518,
+            "end": 754
+          }
+        ],
+        [
+          {
+            "start": 256,
+            "end": 516
+          },
+          {
+            "start": 518,
+            "end": 754
+          },
+          {
+            "start": 755,
+            "end": 813
+          }
+        ]
+      ],
+      "useful": true,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 39,
+      "filename": "039-quote.eml",
+      "plain_sha256": "bd371cfee3283e4da857ac797f735b38a24ddce1741b23565b630685a1ee3f25",
+      "html_sha256": "a68b4cd34803a067b3dc07d3178fd4c46bad75541c4e9e059da28bf15a8dbe55",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          522
+        ],
+        [
+          524,
+          1089
+        ],
+        [
+          1091,
+          1376
+        ],
+        [
+          1378,
+          1513
+        ]
+      ],
+      "selected": [
+        "fb6ed72f78641917238c0b09f6b92e3f37b1d38ede8362aa99bd00cdbe27f7e5"
+      ],
+      "corroborated": [],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 773,
+            "end": 925
+          },
+          {
+            "start": 926,
+            "end": 1089
+          },
+          {
+            "start": 1091,
+            "end": 1212
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 17,
+      "encoding": "base64"
+    },
+    {
+      "case": 40,
+      "filename": "040-quote.eml",
+      "plain_sha256": "f812e36c370dcc703fcabfac0eb8061508a459bdec17cc77a078b933fe6336ba",
+      "html_sha256": "3ce2e338905efcaa8265422da5589a890ee5987e02ce13987394a9e604351b47",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          522
+        ],
+        [
+          524,
+          1089
+        ],
+        [
+          1091,
+          1441
+        ],
+        [
+          1443,
+          1578
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 41,
+      "filename": "041-quote.eml",
+      "plain_sha256": "961e85e38038cc93bef6d83d8ccbb6b2d8b4e01cd0c7fdd489de70261abdfe60",
+      "html_sha256": "edd6ee1c8b0794dfe2a28a0cec2a16034bc78ed9e74b218f13042f833c709874",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          522
+        ],
+        [
+          524,
+          1089
+        ],
+        [
+          1091,
+          1377
+        ],
+        [
+          1379,
+          1514
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 17,
+      "encoding": "base64"
+    },
+    {
+      "case": 42,
+      "filename": "042-quote.eml",
+      "plain_sha256": "8a3555ab306658bd74bb82e50efadc97a9e88fcd219c8e388f2ebecf3366d73f",
+      "html_sha256": "c6da442408a3fb0255687f9aa8272368ad5a25f7a83160c0a610254dd4b3501e",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          506
+        ],
+        [
+          508,
+          1058
+        ],
+        [
+          1060,
+          1392
+        ],
+        [
+          1394,
+          1748
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 43,
+      "filename": "043-quote.eml",
+      "plain_sha256": "061217aaea3468817ebfc4ada8312f4646edb7931cf238124b7ed6ecf0c8b126",
+      "html_sha256": "3a134210ff1df886913fde927732491c90e9027fb2131769d4b0d700649e1807",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          506
+        ],
+        [
+          508,
+          859
+        ],
+        [
+          861,
+          1193
+        ],
+        [
+          1195,
+          1549
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 19,
+      "encoding": "base64"
+    },
+    {
+      "case": 44,
+      "filename": "044-quote.eml",
+      "plain_sha256": "3112b23fe3700bcf867dceab32d7f65b36948cc3ae7a680f667a1ab0de1ce85d",
+      "html_sha256": "5212e4d991b476e53cfab457477283265e12e2f8af03162a99ac7a204007609a",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          506
+        ],
+        [
+          508,
+          994
+        ],
+        [
+          996,
+          1328
+        ],
+        [
+          1330,
+          1684
+        ]
+      ],
+      "selected": [
+        "14b658224720386e58e6205a7c2c3da2ce4cfe6b373cb20e253120959ab2a17b",
+        "6b88ca0016c6e84c7701e6be26726d2f96943953539fac6f75c965d5c4e1f03e"
+      ],
+      "corroborated": [
+        "14b658224720386e58e6205a7c2c3da2ce4cfe6b373cb20e253120959ab2a17b",
+        "6b88ca0016c6e84c7701e6be26726d2f96943953539fac6f75c965d5c4e1f03e"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 393,
+            "end": 506
+          },
+          {
+            "start": 508,
+            "end": 662
+          },
+          {
+            "start": 663,
+            "end": 823
+          }
+        ],
+        [
+          {
+            "start": 508,
+            "end": 662
+          },
+          {
+            "start": 663,
+            "end": 823
+          },
+          {
+            "start": 824,
+            "end": 994
+          }
+        ]
+      ],
+      "useful": true,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 45,
+      "filename": "045-quote.eml",
+      "plain_sha256": "53ff619a5b18aeb50d2783b9fe3741b14582a16996095ed1b2dd099b3c979763",
+      "html_sha256": "44d476f8a823fdff0c49f21f6544645d26056568e8b820bff35bdf6b348d0ea5",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          506
+        ],
+        [
+          508,
+          1100
+        ],
+        [
+          1102,
+          1434
+        ],
+        [
+          1436,
+          1790
+        ]
+      ],
+      "selected": [
+        "d5d0eff394042eea656ed86985f0dd5f63f428e9c425e10f6b8a4db93d33126f",
+        "ee3456f1857d1c2cde8037881307afbe7dafe9ef59ce64d444ce3ba56ea5a572"
+      ],
+      "corroborated": [
+        "d5d0eff394042eea656ed86985f0dd5f63f428e9c425e10f6b8a4db93d33126f",
+        "ee3456f1857d1c2cde8037881307afbe7dafe9ef59ce64d444ce3ba56ea5a572"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 393,
+            "end": 506
+          },
+          {
+            "start": 508,
+            "end": 625
+          },
+          {
+            "start": 626,
+            "end": 704
+          }
+        ],
+        [
+          {
+            "start": 508,
+            "end": 625
+          },
+          {
+            "start": 626,
+            "end": 704
+          },
+          {
+            "start": 705,
+            "end": 876
+          }
+        ]
+      ],
+      "useful": true,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 21,
+      "encoding": "base64"
+    },
+    {
+      "case": 46,
+      "filename": "046-quote.eml",
+      "plain_sha256": "c97e69daf0c042cd7533ade05be0b97163f353f0c58c3b77da9acc2ce63521fe",
+      "html_sha256": "bcacc9566e4ad900d137a665439f2d8c3ab6936fb26564734bad887b74ead60d",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          242
+        ],
+        [
+          244,
+          518
+        ],
+        [
+          520,
+          1096
+        ],
+        [
+          1098,
+          1299
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 47,
+      "filename": "047-quote.eml",
+      "plain_sha256": "65ac6a3e570cda4a25971ef6e7ec38372a1d3616ff48b92cea7c035a8f7432f6",
+      "html_sha256": "9d1b5751b77c2459973b2a300f4fab3cc75547121d4a434139ce8621f7658377",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          242
+        ],
+        [
+          244,
+          601
+        ],
+        [
+          603,
+          1179
+        ],
+        [
+          1181,
+          1382
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 17,
+      "encoding": "base64"
+    },
+    {
+      "case": 48,
+      "filename": "048-quote.eml",
+      "plain_sha256": "d04aaa8bac627b32d5e2a5b18d2c0346cbcc7149499163efbb3aaef37d7bf526",
+      "html_sha256": "bd2fdebc793d3da301cafbf333dd4b8a58f99359190322fb6a1287f557b5f182",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          242
+        ],
+        [
+          244,
+          505
+        ],
+        [
+          507,
+          1083
+        ],
+        [
+          1085,
+          1286
+        ]
+      ],
+      "selected": [
+        "d5d26bcc12542b5322031999a7dfd8bd622e44bc6732ce37f0011c2d98b348f0"
+      ],
+      "corroborated": [
+        "d5d26bcc12542b5322031999a7dfd8bd622e44bc6732ce37f0011c2d98b348f0"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 244,
+            "end": 505
+          },
+          {
+            "start": 507,
+            "end": 693
+          },
+          {
+            "start": 694,
+            "end": 863
+          }
+        ]
+      ],
+      "useful": true,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 49,
+      "filename": "049-quote.eml",
+      "plain_sha256": "f23f8558bfc752ecce2f8b7d7a3f7d0ddaae09444850ed319e45f2e70b790fc1",
+      "html_sha256": "9b7e5e9b7a1b168003343bf60d24896fd04a4639312798e7a2ccb9a25b2e003f",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          242
+        ],
+        [
+          244,
+          511
+        ],
+        [
+          513,
+          1089
+        ],
+        [
+          1091,
+          1292
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 19,
+      "encoding": "base64"
+    },
+    {
+      "case": 50,
+      "filename": "050-quote.eml",
+      "plain_sha256": "8e4f109f481364b9ddc262af70d230325f8080a65ea2f82b3912262f543a6b9c",
+      "html_sha256": "33034d0c052d20f9d7b07d7834b1f7c16811291570bddfdd38917861fcd2ad15",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          492
+        ],
+        [
+          494,
+          908
+        ],
+        [
+          910,
+          1174
+        ],
+        [
+          1176,
+          1495
+        ]
+      ],
+      "selected": [
+        "00e7195672d51de3c99a5c5a03b7d1df18709bcee683ba68039a19a2abe961a2",
+        "5d09ceac3a58aaa1764cc8487c6900ca45bccb8a2ec400e387d24bf690bf28ad"
+      ],
+      "corroborated": [
+        "00e7195672d51de3c99a5c5a03b7d1df18709bcee683ba68039a19a2abe961a2"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 93
+          },
+          {
+            "start": 94,
+            "end": 166
+          }
+        ],
+        [
+          {
+            "start": 0,
+            "end": 93
+          },
+          {
+            "start": 94,
+            "end": 166
+          },
+          {
+            "start": 167,
+            "end": 287
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": true,
+      "synthetic": false,
+      "verified_html_ranges": 16,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 51,
+      "filename": "051-quote.eml",
+      "plain_sha256": "b3eca559c4561300572f154667f5a05220a3c4e5943515152b797176175e8a1a",
+      "html_sha256": "b618c566f2ba89193b75bec8adcd220acf8cb6e48df1577b09c8473cd1f39f1e",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          492
+        ],
+        [
+          494,
+          809
+        ],
+        [
+          811,
+          1075
+        ],
+        [
+          1077,
+          1396
+        ]
+      ],
+      "selected": [
+        "00e7195672d51de3c99a5c5a03b7d1df18709bcee683ba68039a19a2abe961a2",
+        "5d09ceac3a58aaa1764cc8487c6900ca45bccb8a2ec400e387d24bf690bf28ad"
+      ],
+      "corroborated": [
+        "00e7195672d51de3c99a5c5a03b7d1df18709bcee683ba68039a19a2abe961a2"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 93
+          },
+          {
+            "start": 94,
+            "end": 166
+          }
+        ],
+        [
+          {
+            "start": 0,
+            "end": 93
+          },
+          {
+            "start": 94,
+            "end": 166
+          },
+          {
+            "start": 167,
+            "end": 287
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": true,
+      "synthetic": false,
+      "verified_html_ranges": 16,
+      "encoding": "base64"
+    },
+    {
+      "case": 52,
+      "filename": "052-quote.eml",
+      "plain_sha256": "56abf403198750e65acc1e50dbd05ac669c4262f5ac8798c35da9c126a328531",
+      "html_sha256": "d3d2a636133893df4506484dc1a8a2a68dd57cf7ff2a48171dc20100ae9e922a",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          492
+        ],
+        [
+          494,
+          957
+        ],
+        [
+          959,
+          1223
+        ],
+        [
+          1225,
+          1544
+        ]
+      ],
+      "selected": [
+        "00e7195672d51de3c99a5c5a03b7d1df18709bcee683ba68039a19a2abe961a2",
+        "5d09ceac3a58aaa1764cc8487c6900ca45bccb8a2ec400e387d24bf690bf28ad"
+      ],
+      "corroborated": [
+        "00e7195672d51de3c99a5c5a03b7d1df18709bcee683ba68039a19a2abe961a2"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 93
+          },
+          {
+            "start": 94,
+            "end": 166
+          }
+        ],
+        [
+          {
+            "start": 0,
+            "end": 93
+          },
+          {
+            "start": 94,
+            "end": 166
+          },
+          {
+            "start": 167,
+            "end": 287
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 16,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 53,
+      "filename": "053-quote.eml",
+      "plain_sha256": "d2e8299869a1b1dad987bb225952a0a5bc52bc9b0e34606539b4ab2915c1b5b5",
+      "html_sha256": "bf507985316bf83e950b1cc27e0ac32d8f8fc28c7bb8b3fff04889ea8889ccb5",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          492
+        ],
+        [
+          494,
+          901
+        ],
+        [
+          903,
+          1167
+        ],
+        [
+          1169,
+          1488
+        ]
+      ],
+      "selected": [
+        "00e7195672d51de3c99a5c5a03b7d1df18709bcee683ba68039a19a2abe961a2",
+        "5d09ceac3a58aaa1764cc8487c6900ca45bccb8a2ec400e387d24bf690bf28ad",
+        "51c604dccd2f2c546b3a95425ba5a8248aaf8ce75170298865ce019ae9ae3e5b"
+      ],
+      "corroborated": [
+        "00e7195672d51de3c99a5c5a03b7d1df18709bcee683ba68039a19a2abe961a2",
+        "51c604dccd2f2c546b3a95425ba5a8248aaf8ce75170298865ce019ae9ae3e5b"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 0,
+            "end": 93
+          },
+          {
+            "start": 94,
+            "end": 166
+          }
+        ],
+        [
+          {
+            "start": 0,
+            "end": 93
+          },
+          {
+            "start": 94,
+            "end": 166
+          },
+          {
+            "start": 167,
+            "end": 287
+          }
+        ],
+        [
+          {
+            "start": 494,
+            "end": 741
+          },
+          {
+            "start": 742,
+            "end": 901
+          },
+          {
+            "start": 903,
+            "end": 1025
+          }
+        ]
+      ],
+      "useful": true,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 16,
+      "encoding": "base64"
+    },
+    {
+      "case": 54,
+      "filename": "054-quote.eml",
+      "plain_sha256": "78cea9ba1d8c59e67eaf69dfb699c7006117c3accbb86613887039171d6c07c9",
+      "html_sha256": "a8a885d18c6a3449e3f29d9a00956cfa31de613c741a2a8e55c16f27cebccad8",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          248
+        ],
+        [
+          250,
+          779
+        ],
+        [
+          781,
+          1030
+        ],
+        [
+          1032,
+          1422
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 55,
+      "filename": "055-quote.eml",
+      "plain_sha256": "3c17daa4c552e47ecf5b10c40a0ff4df57ed72cf6513af34b820c641e048f64f",
+      "html_sha256": "607e7fdba0b05116da0fa6cbb535daa4fa55e9f451c41cb746c2a5ecef8e4fe3",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          248
+        ],
+        [
+          250,
+          779
+        ],
+        [
+          781,
+          982
+        ],
+        [
+          984,
+          1374
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 17,
+      "encoding": "base64"
+    },
+    {
+      "case": 56,
+      "filename": "056-quote.eml",
+      "plain_sha256": "c21a801c7f8e4e5694a4aa8bc723f67f3a052a22e2ad0fc85086ddcaaf5846a1",
+      "html_sha256": "f86ac616d8f999038e79e8fa7e90c6e4e7fef0aeca4a9d8e3df56eaef7cdf8d9",
+      "paragraphs": 4,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          248
+        ],
+        [
+          250,
+          779
+        ],
+        [
+          781,
+          1063
+        ],
+        [
+          1065,
+          1455
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 17,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 57,
+      "filename": "057-quote.eml",
+      "plain_sha256": "d9388bd65f6e9d2d7aba9e7b2f594cc3c34b3151d1a8ec7b8936d7e23af88dc8",
+      "html_sha256": "efc9bbc5261ea6d458254d6574c461c29179d51e71785bfaae93c9963290374e",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          561
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 58,
+      "filename": "058-quote.eml",
+      "plain_sha256": "707c02c07aca2bd213bd419c4416d057378d33d84ced51fb15e4d179e8a6cb75",
+      "html_sha256": "37bbff0f6b5427bcda7a5f74bd01cd9bfffedb34751b0ae2e2af0505aba518b5",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          539
+        ]
+      ],
+      "selected": [
+        "d0482e5a85a783bd66c0d2d988f5327cad981bb323dfcbf44abd1c5766128035"
+      ],
+      "corroborated": [
+        "d0482e5a85a783bd66c0d2d988f5327cad981bb323dfcbf44abd1c5766128035"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 258,
+            "end": 358
+          },
+          {
+            "start": 359,
+            "end": 480
+          },
+          {
+            "start": 481,
+            "end": 539
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": true,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 59,
+      "filename": "059-quote.eml",
+      "plain_sha256": "459e05c49e7382d931eae581e4638d7aca2f0abe5904a6ebd5fb6ae2553c4f14",
+      "html_sha256": "22a827f03d547cf4c2cb0316023e39e74ec6113341692d0443d31095486b8897",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          576
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 60,
+      "filename": "060-quote.eml",
+      "plain_sha256": "7c9ffb23f36dc633b213c7709ab74de9b433aa86fd9735501593e87a0375cd9d",
+      "html_sha256": "bfcb789f71c4ffdc35b3cb504e72b0751d5d908bd862a1b797dcf7f1ef1602b4",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          676
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 61,
+      "filename": "061-quote.eml",
+      "plain_sha256": "0ad8c1bdcc661e47fe87023fd24c0e59ed494696585649f0e5e726f0b0d787c0",
+      "html_sha256": "05a80d5071e9d49960639889083367dc90988e03890568e7870fcd0c07e714d1",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          695
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 62,
+      "filename": "062-quote.eml",
+      "plain_sha256": "db1cbe653ea722a667c197decfb0dd7be5e11b0708155d74b0f2f8ebf3d74a6d",
+      "html_sha256": "4d6bbbac3a98907e6d541177abfbce4ea02526da9366221ecc0b7e345913a541",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          668
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 63,
+      "filename": "063-quote.eml",
+      "plain_sha256": "7cd83d229c490716c272c158e3e867a88d34a8652b8636fb92cac1159dcc56c2",
+      "html_sha256": "183cb4891205992d890b1d8f6f91560c48eee43a8b2b43b90df0e8032d20714f",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          651
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 64,
+      "filename": "064-quote.eml",
+      "plain_sha256": "8275235c52c6a16f0b148a2e824997801800577dbc44a4b2d01a363f4ce67921",
+      "html_sha256": "1dc8a7fcf1c861d5fe11d8ebd5657141ccd0ac73e28fbda32b5619c4ea026c89",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          750
+        ]
+      ],
+      "selected": [
+        "753d30c297116233f42e9fa418522547de2e4ff902303d9ec22d7008f0a951d6"
+      ],
+      "corroborated": [
+        "753d30c297116233f42e9fa418522547de2e4ff902303d9ec22d7008f0a951d6"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 173,
+            "end": 337
+          },
+          {
+            "start": 338,
+            "end": 548
+          },
+          {
+            "start": 549,
+            "end": 750
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": true,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 65,
+      "filename": "065-quote.eml",
+      "plain_sha256": "ce81a2de4cb9d7b75bc877a1b834c42587fa36a4e4f27abda9ff17a567b0d93a",
+      "html_sha256": "a870927d1001d195a4dcdaf426721d25057defb8c305a2b355cb36b13b85c4d9",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          759
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 66,
+      "filename": "066-quote.eml",
+      "plain_sha256": "f5bc475d42edaa093891b21d22e15ae03e4f68103ccdb71705c0ef7ed7785460",
+      "html_sha256": "768517a6237b7485ad6d91aabf6dec4f02dc9356c97df04721728f2fbedfbb3f",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          733
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 67,
+      "filename": "067-quote.eml",
+      "plain_sha256": "4743d6276ba49789bf5dc899fe5a941a969a22ce1d6badee4ade13e8bfaba7c3",
+      "html_sha256": "a2a39efd1d43e6f26fe4247f0b880f0539b63c48d57c50a2fd98c31c00163a6c",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          737
+        ]
+      ],
+      "selected": [
+        "addeb5af09d637acece8aeb78368c0a52d2e7feff7a3daadf006511f9c7654db"
+      ],
+      "corroborated": [
+        "addeb5af09d637acece8aeb78368c0a52d2e7feff7a3daadf006511f9c7654db"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 173,
+            "end": 324
+          },
+          {
+            "start": 325,
+            "end": 535
+          },
+          {
+            "start": 536,
+            "end": 737
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 68,
+      "filename": "068-quote.eml",
+      "plain_sha256": "581a4e77a793cf81bbb09949d2dc6ccdd820fa82c0feaa6e87d7a6403b2041f7",
+      "html_sha256": "de144429818cd395f54ae00a02d91fa1a8fb965aaa9658ac3fc7b5e1279b4b7a",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          695
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 69,
+      "filename": "069-quote.eml",
+      "plain_sha256": "db0c268c85cf2f876eea034ac82bab284ca6a3fe26652fd4677bda9409bf142c",
+      "html_sha256": "4d2f2239daab9868ef91aa12b4aa5aaae4b3d2b1d568e09f9682a1136c7eca12",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          697
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 70,
+      "filename": "070-quote.eml",
+      "plain_sha256": "1783fbf0af52316800e10af145f92dcdd0e8174312a3b13bcb2e37e59645c096",
+      "html_sha256": "428db3c3589f4e186d54494b1286e667d5b37259483f36d7fdb408dd716fe36f",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          695
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 71,
+      "filename": "071-quote.eml",
+      "plain_sha256": "0eabe15b6c89ae1b2ba0a1146bf0d58a6cdf26db89ee56d57877b07e2ae3fdab",
+      "html_sha256": "a4cc72b47cc8662983f5e810046425e9a528e9bda053f4cea384a267582c4745",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          686
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 72,
+      "filename": "072-quote.eml",
+      "plain_sha256": "543d0af7167b06a9998349e8858a824713ad5db11d4a5d7903a1aae2bb10aba1",
+      "html_sha256": "50d14534fb8530747d6c9c88c273459bd354af0b687f21399d23937bd86cbee3",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          890
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 73,
+      "filename": "073-quote.eml",
+      "plain_sha256": "bfd3c912613be668fb0b39c05c39ae6851202b14979ef27b076a1ab376b49e26",
+      "html_sha256": "aad0882a83da3c64251dd8fc26b7d4eae4d752c517c86b2dccd2d502dced0cc7",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          842
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 74,
+      "filename": "074-quote.eml",
+      "plain_sha256": "67600256464cbb8fa7a30a3928f51f8e3ca1ab23e8ba64d152f95fa6bb518e7b",
+      "html_sha256": "cdd8e6aea8915e58e446f5c740950b115c450e489cc25287cbb940545d4d5590",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          872
+        ]
+      ],
+      "selected": [
+        "ad8f968b0d5ed09a85e7c3b646cba876bf829c3fb0d30a08b149ac562f185326"
+      ],
+      "corroborated": [
+        "ad8f968b0d5ed09a85e7c3b646cba876bf829c3fb0d30a08b149ac562f185326"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 282,
+            "end": 528
+          },
+          {
+            "start": 529,
+            "end": 727
+          },
+          {
+            "start": 728,
+            "end": 872
+          }
+        ]
+      ],
+      "useful": true,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 10,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 75,
+      "filename": "075-quote.eml",
+      "plain_sha256": "ff9f3492ab4c699d709617430a2f875bc41eb36e513925c0ac59922e5fb38d81",
+      "html_sha256": "334dc7464e9abffd9c62c5399962939eb2a9b4566ea58825cf1dbb6daea9e958",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          645
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 76,
+      "filename": "076-quote.eml",
+      "plain_sha256": "77d6eacebbbe2b5738a59b4b3710b824c551505a6ad7d1208c421f5ff5d699bf",
+      "html_sha256": "791c8b6aaecf62e1f5cda2ef6e2342b27483d0c92621f2ec6d0a1da241f84b5a",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          673
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 77,
+      "filename": "077-quote.eml",
+      "plain_sha256": "56c921b1cbcbaae5fb21c77820991815c199bd5e17d7461958d6fc49c5c6fbc2",
+      "html_sha256": "a8b167d2184d6bc6444ca63d1d8e6b08389fe525d920b9aadf2d1705a76d2f0e",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          688
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 78,
+      "filename": "078-quote.eml",
+      "plain_sha256": "04bd62497b26a7fe8b3326b7fabba954dda53c5a115eb1cbfa9e7616e0b7611b",
+      "html_sha256": "a3f96125acaf84299c0b93585f4366706f104bcee820ea7578a4785643fb63de",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          954
+        ]
+      ],
+      "selected": [
+        "fa7857bda53765df05419af3d68354246319ca9f18ab42839ceac717b717ebc9"
+      ],
+      "corroborated": [
+        "fa7857bda53765df05419af3d68354246319ca9f18ab42839ceac717b717ebc9"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 258,
+            "end": 511
+          },
+          {
+            "start": 512,
+            "end": 627
+          },
+          {
+            "start": 628,
+            "end": 954
+          }
+        ]
+      ],
+      "useful": false,
+      "human_flag": true,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 79,
+      "filename": "079-quote.eml",
+      "plain_sha256": "0afcbd3db9505bc00222ef02210417f31f5b7bce167d429ef763318ca7e1b8b5",
+      "html_sha256": "faff8d79f68b287eb3d18287e41d1680486c1faa462853b9651f5870a2ff197d",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          953
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 80,
+      "filename": "080-quote.eml",
+      "plain_sha256": "cee64061d812055617669dc8cdf1827aaa430d44e31080848bbf639c2c781711",
+      "html_sha256": "f03e9c9ca6695b8467538488caa507e17db56fe0abcf4b9090c9e983c06bd07f",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          931
+        ]
+      ],
+      "selected": [
+        "f75546c4d5495dedef40e67e8932d21fd23be5134e6edea8b7dddd8f5a62107b"
+      ],
+      "corroborated": [
+        "f75546c4d5495dedef40e67e8932d21fd23be5134e6edea8b7dddd8f5a62107b"
+      ],
+      "exact_selected_spans": [
+        [
+          {
+            "start": 258,
+            "end": 488
+          },
+          {
+            "start": 489,
+            "end": 604
+          },
+          {
+            "start": 605,
+            "end": 931
+          }
+        ]
+      ],
+      "useful": true,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 81,
+      "filename": "081-quote.eml",
+      "plain_sha256": "5beec446c89b4e4c15e38e43a01e15c636ff20ef85b3fab3030e72786dc82962",
+      "html_sha256": "88df78726de68549f18140f8d8d372cade3c60ac4a063bac71ad5ad1582dab0e",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          673
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 82,
+      "filename": "082-quote.eml",
+      "plain_sha256": "3f1f81cc28950f4b7001193987475fe12af7f20e709fca997f23a49aa0083da1",
+      "html_sha256": "c9e3e62e6c94d66b42a1794ec5ff1868a2051329fab7ee4602fa2bc03572dbf7",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          698
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 83,
+      "filename": "083-quote.eml",
+      "plain_sha256": "2925ceed184eede5627b031c45d93145b048858f7cce47a36a2d5f6a60ce8c47",
+      "html_sha256": "3f342dbce7f022d024582bd3d091c56339e07ee70845189b742a1794221daeb8",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          635
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 84,
+      "filename": "084-quote.eml",
+      "plain_sha256": "cc7a935a45462fb1fb242400a61cb42dc45d28eda10aaeaaf02ec62b5bb273ad",
+      "html_sha256": "b1e6eeee5c1dfda21f59aacc60cd252c03b884ff05d6fb0d714038aa7dbd891c",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          702
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 85,
+      "filename": "085-quote.eml",
+      "plain_sha256": "32197277ff33025475445774a35fed0b6530367872c9c2e5c3bd35e013e4d7bc",
+      "html_sha256": "2c9f7ead06bfb5fa8c50afbc9785a6041a8cd1cb144f24a69414c76fa67c4d1f",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          680
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 86,
+      "filename": "086-quote.eml",
+      "plain_sha256": "2675bb52969cd3108146083640cf7cef8fcbae15cb86912874438aba73eed19e",
+      "html_sha256": "85bee66d46028da448bd0534de8b14b9148596f5704777cfea59b113b0c0288b",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          698
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 87,
+      "filename": "087-quote.eml",
+      "plain_sha256": "ab9e888e83570c681aa5a4befbb98e90ceb6ae20bc42d15e0946c9da2d6b3ab8",
+      "html_sha256": "4627142e1395ef72660787146cdfd1f4902ab0c09cedfe57c9aea618f53265b1",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          707
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 88,
+      "filename": "088-quote.eml",
+      "plain_sha256": "ca1a7615fefa99f22b340391b3a5224b066ab00e353fde39ae422e6a3d5189ce",
+      "html_sha256": "328ff36d7063c09d23bae9b12caf4e143e86cbc2c946fff5721ea87dad9d4332",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          635
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 89,
+      "filename": "089-quote.eml",
+      "plain_sha256": "190d8a3252360d316bc97d5ec87af7d767aa4bfdfdde1ed2c8eec6c71194f7dd",
+      "html_sha256": "0e3a46fd32bbcd25000fb26ab4a406098136daf42e0b5fce204850693b5ce39c",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          611
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 90,
+      "filename": "090-quote.eml",
+      "plain_sha256": "8fcf4e316aecf3783f328dc2db3ce9b07a7a65a6c63f4e38c93627658ffac7c8",
+      "html_sha256": "3ef41daefdb80b5aed24e5a3ae8c1bc24d93e685da0ddfcfad3655322882aecc",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          630
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 91,
+      "filename": "091-quote.eml",
+      "plain_sha256": "5bdd5cf67b64f7fad16f138a9076d07bfb03cc53695981ead9f93a8b831dc537",
+      "html_sha256": "e5a3b4b6eb6b71122477ccae94bb80cab73323117d6a77d57aff79f9c23afa99",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          633
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 92,
+      "filename": "092-quote.eml",
+      "plain_sha256": "49fd486cf4e821210b21b3998d26af2a193a491c2417a2e46d6cc5e87bae1318",
+      "html_sha256": "abaa12a7419d304cefc7515c3d17ba9fb183508247e8ec1c55389abd4cda7390",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          815
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 93,
+      "filename": "093-quote.eml",
+      "plain_sha256": "e61ea89d2a931e025aebfcda54b9f0326e098d0b77bf2ea75a4d7f7068b3fbad",
+      "html_sha256": "814a2c4243e3416273add881d90cb38d79fbf2e96612e63d77392986ce1b58a3",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          859
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    },
+    {
+      "case": 94,
+      "filename": "094-quote.eml",
+      "plain_sha256": "eb32afcc36d9d8ec7838efc4b61c8c765e39e44e50a6c59adebc86c100910d41",
+      "html_sha256": "112cc28a7607364006c769920167e6fc81deaad5beba835ec0d2695ea577a9af",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          788
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 95,
+      "filename": "095-quote.eml",
+      "plain_sha256": "02abc872db362d7bd301f0665b5a141499a611f1c38b0087ca5996c4e7293b49",
+      "html_sha256": "f465e787be33bf1f544e369b33bc76b3ee65856d710ac4f00a2d5f7e8f562ad5",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          789
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 10,
+      "encoding": "base64"
+    },
+    {
+      "case": 96,
+      "filename": "096-quote.eml",
+      "plain_sha256": "a66687ff0eadf5070509c7d288bceb24157074ed1f78245a943961488a308101",
+      "html_sha256": "68901c7fde35956de0401a340fb657110b377a970a1638ae09f489bebe2c9f2a",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          560
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 8,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 97,
+      "filename": "097-quote.eml",
+      "plain_sha256": "fc2dea3cfacc08fa8dc72042458eb4d971a51d4db761aff49ec70a089359ab30",
+      "html_sha256": "cd365fd4e42d35d58703e5634ab4adb20d3954249e614d0647ba06466cad9b81",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          559
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": false,
+      "verified_html_ranges": 10,
+      "encoding": "base64"
+    },
+    {
+      "case": 98,
+      "filename": "098-quote.eml",
+      "plain_sha256": "aeeee07036105d78c37baa007484ade16fb6d9bdb303d822d1a4befadf309fd8",
+      "html_sha256": "5fe39fc9a0fac72f9bb515164fccafa8d7055496a52d01864e8dce77eb6a08db",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          563
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 10,
+      "encoding": "quoted-printable"
+    },
+    {
+      "case": 99,
+      "filename": "099-quote.eml",
+      "plain_sha256": "aabcb26513a6ec684cafaf953b8d0d9ffd8512bcceca21f4e1b0137dda8c80c5",
+      "html_sha256": "c9da315c831b472e4bd36a92cf1fdade1fe3cbcf90580cba9873f975c385b750",
+      "paragraphs": 1,
+      "control": null,
+      "body_spans": [
+        [
+          0,
+          574
+        ]
+      ],
+      "selected": [],
+      "corroborated": [],
+      "exact_selected_spans": [],
+      "useful": false,
+      "human_flag": false,
+      "synthetic": true,
+      "verified_html_ranges": 8,
+      "encoding": "base64"
+    }
+  ]
+}

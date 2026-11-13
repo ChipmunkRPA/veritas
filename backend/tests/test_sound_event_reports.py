@@ -5,7 +5,7 @@ from test_audio_evidence import audio_fixture as audio_fixture
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.evidence import audio_packets, service
-from app.reports import multimedia_evidence
+from app.reports import engine, multimedia_evidence
 from app.reports.customer_view import customer_view
 from app.reports.specimens import specimen
 from app.storage.objects import ObjectIntegrityError
@@ -33,7 +33,7 @@ def sound_report(audio_fixture):
     return s, store
 
 
-def test_sound_category_report_uses_exact_frozen_windows_and_commits_all_assets(sound_report):
+def test_sound_category_report_uses_exact_frozen_windows_and_commits_all_assets(sound_report, monkeypatch):
     s, store = sound_report
     before = canonical_hash(s.model_dump(mode='python'))
     shown = multimedia_evidence.view(s, store=store)
@@ -42,6 +42,12 @@ def test_sound_category_report_uses_exact_frozen_windows_and_commits_all_assets(
     assert c['locator'] == 'PCM 0.000-8.000 s; samples [0, 128000)'
     assert c['observation'] == 'Speech: 0.830; Music: 0.120'
     assert len(c['images']) == 1 and len(c['assets']) == 2
+    voice = next(p for p in shown['packets'] if p['kind'] == 'audio')
+    assert {'id': 'C01', 'label': 'Sound categories C01'} in voice['recording_context']
+    monkeypatch.setattr(multimedia_evidence, 'default_store', lambda: store)
+    html = engine.render_html(s, embed_fonts=False)
+    assert 'href="#multimedia-evidence-C01">Sound categories C01</a>' in html
+    assert 'Source timestamps [0, 128000) at 1/16000' in html
     assert {a['sha256'] for a in c['assets']} <= set(service.asset_refs(s.evidence))
     assert {a['sha256'] for a in c['assets']} <= {a['sha256'] for a in multimedia_evidence.manifest(s)['artifacts']}
     public = customer_view(s, {'header_left': 'test', 'evidence': shown}, lambda x: x)

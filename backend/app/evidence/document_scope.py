@@ -25,11 +25,16 @@ CHECKPOINT_AGREEMENT_SCHEMA = "document-writing-second-check/1"
 CHECKPOINT_AGREEMENT_EMAIL_SCHEMA = "document-writing-second-check/2"
 CHECKPOINT_AGREEMENT_EMAIL_LAYOUT_SCHEMA = "document-writing-second-check/3"
 CHECKPOINT_AGREEMENT_HTML_SCHEMA = "document-writing-second-check/4"
+CHECKPOINT_AGREEMENT_HTML_SHORT_LAYOUT_SCHEMA = "document-writing-second-check/5"
+CHECKPOINT_AGREEMENT_HTML_SCHEMAS = frozenset({
+    CHECKPOINT_AGREEMENT_HTML_SCHEMA, CHECKPOINT_AGREEMENT_HTML_SHORT_LAYOUT_SCHEMA,
+})
 EMAIL_HTML_COORDINATES = "decoded-html-codepoint"
 CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS = {
     CHECKPOINT_AGREEMENT_EMAIL_SCHEMA: frozenset({1, 4}),
     CHECKPOINT_AGREEMENT_EMAIL_LAYOUT_SCHEMA: frozenset({2, 3, 5, 6}),
     CHECKPOINT_AGREEMENT_HTML_SCHEMA: frozenset({2, 3, 5, 6}),
+    CHECKPOINT_AGREEMENT_HTML_SHORT_LAYOUT_SCHEMA: frozenset({1, 4}),
 }
 REPLY_BODY_PARAGRAPHS = frozenset().union(*CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS.values())
 CHECKPOINT_AGREEMENT_MAX = 6
@@ -73,8 +78,7 @@ def email_agreement_body_spans(mapping: list[dict], email: dict, size: int) -> l
         else:
             return None
         previous = end
-    counts = CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS[CHECKPOINT_AGREEMENT_HTML_SCHEMA] if html else REPLY_BODY_PARAGRAPHS
-    return body if excluded and len(body) in counts and previous == size else None
+    return body if excluded and len(body) in REPLY_BODY_PARAGRAPHS and previous == size else None
 
 
 def checkpoint_window_in_scope(window: dict, body_spans: list[dict] | None) -> bool:
@@ -104,7 +108,7 @@ def validate_checkpoint_agreement(
                     or not isinstance(email.get("body_part"), str) or not email["body_part"]
                     or not isinstance(body_spans, list) or len(body_spans) not in reply_paragraphs):
                 raise ValueError("Invalid second-check email body scope")
-            if not (mapped_email_html(email) if schema == CHECKPOINT_AGREEMENT_HTML_SCHEMA
+            if not (mapped_email_html(email) if schema in CHECKPOINT_AGREEMENT_HTML_SCHEMAS
                     else email.get("body_content_type") == "text/plain"):
                 raise ValueError("Invalid second-check email source format")
             boundaries = [check_range(block, size) for block in body_spans]

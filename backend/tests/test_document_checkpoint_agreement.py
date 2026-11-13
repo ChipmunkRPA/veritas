@@ -126,6 +126,54 @@ def test_unverified_html_scope_does_not_select_reply_text(tmp_path, markup):
     assert document_scope.email_agreement_body_spans(doc.source_map, doc.meta["email"], len(doc.text)) is None
 
 
+@pytest.mark.parametrize("paragraphs", [1, 4])
+def test_html_short_reply_records_new_schema_without_admitting_old_schema(tmp_path, monkeypatch, paragraphs):
+    from dataclasses import asdict
+
+    from app.detectors.text.segment import segment
+
+    body = [
+        "We reviewed the draft earlier this week and kept the parts that explain how the new process works.",
+        "The remaining changes describe the dates and the steps each reviewer will take before the next meeting.",
+        "We can share the revised document with the whole team once the source details and notes have been checked.",
+        "Please bring any comments to the meeting so we can see which questions still need a written answer.",
+    ]
+    blocks = [" ".join(body)] if paragraphs == 1 else body
+    msg = EmailMessage()
+    msg.set_content("".join(f"<p>{block}</p>" for block in blocks) + "<blockquote><p>Earlier note.</p></blockquote>",
+                    subtype="html", cte="quoted-printable")
+    path = tmp_path / "reply.eml"
+    path.write_bytes(msg.as_bytes())
+    doc = extract(path, ".eml")
+    units = [{"start": unit.start, "end": unit.end} for unit in segment(doc)]
+    windows = []
+    for i, spans in enumerate((units[:2], units[-2:])):
+        content = " ".join(doc.text[span["start"]:span["end"]] for span in spans)
+        windows.append({"focus": spans[0], "spans": spans, "input_sha256": text_hash(content), "score": .8,
+                        "token_coverage": {"tokens": 42, "token_windows": 1}, "unit_ref": f"sentence:{i}"})
+    primary = {"detector_id": document_matched_context.DETECTOR, "status": "ok", "version": "1.0.0",
+               "model_revisions": {document_matched_context.MODEL: document_matched_context.REVISION},
+               "details": {"text_evidence": {"windows": windows}}}
+    decoded = {"text": doc.text, "paragraphs": doc.paragraphs, "source_map": doc.source_map, "meta": doc.meta,
+               "sentences": [asdict(unit) for unit in segment(doc)]}
+    monkeypatch.setattr("app.detectors.text.extract._ocr_language", lambda _: {"code": "en", "status": "supported"})
+    monkeypatch.setattr(agreement, "_review", lambda *_: {})
+    agreement.record(context(Deadline(60)), {"detectors": [primary]}, decoded)
+    evidence = primary["details"]["text_evidence"][agreement.KEY]
+    assert evidence["schema"] == document_scope.CHECKPOINT_AGREEMENT_HTML_SHORT_LAYOUT_SCHEMA
+    assert len(evidence["body_spans"]) == paragraphs
+    assert [row["input_sha256"] for row in evidence["ranges"]] == [windows[0]["input_sha256"]]
+    document = {"source": {"chars": len(doc.text), "method": "email"},
+                "coverage": {"email": doc.meta["email"], agreement.KEY: evidence}}
+    document_scope.validate_checkpoint_agreement(document, doc.text, result={"signals": [primary]}, mapping=doc.source_map)
+    if paragraphs == 1:
+        decoded["sentences"].pop(0)
+        assert agreement.candidates(decoded, primary) is None
+    evidence["schema"] = document_scope.CHECKPOINT_AGREEMENT_HTML_SCHEMA
+    with pytest.raises(ValueError, match="Invalid second-check email body scope"):
+        document_scope.validate_checkpoint_agreement(document, doc.text, mapping=doc.source_map)
+
+
 @pytest.mark.parametrize("paragraphs", [2, 3, 5, 6])
 def test_new_reply_layout_keeps_exact_windows_and_rejects_legacy_scope(monkeypatch, paragraphs):
     paragraph = (

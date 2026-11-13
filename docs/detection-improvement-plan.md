@@ -97,6 +97,19 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [short HTML reply extension](writing-html-reply-short-layouts-2026-11-12.md)
+  preserved 14 useful locations and 13 existing genuine flags over 100
+  matched plain-text and HTML-only emails. It assessed two more reply
+  layouts and omitted all 12 unsupported controls. Local prepaid analysis
+  and report replay preserved exact MIME positions.
+- The [speech-sound and mouth-shape check](grid-phone-viseme-timing-2026-11-12.md)
+  located one of 96 local audio shifts and flagged three of 144 ordinary
+  controls. It missed all four known picture retimes. The method remains
+  experimental, and the portable and native source replays are available.
+- The [local vocabulary comparison](writing-local-lexical-transfer-2026-11-12.md)
+  used two independent cues at the sentence level. Combined, they recovered
+  zero additional rewrites and flagged five additional genuine groups across
+  the two held publishers. Neither cue entered the app.
 - The [earlier-copy image comparison](image-reference-delivery-envelope-2026-11-12.md)
   added nine useful feathered edit locations across 14 controlled JPEG-to-PNG
   pairs. Two of 60 ordinary delivery controls highlighted after global

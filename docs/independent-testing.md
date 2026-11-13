@@ -22,6 +22,15 @@ replays a PNG seam or video frame schedule directly from a supplied original
 and its signed evidence record. Start there to check those measurements on a
 local export.
 
+The [PDF credential replay](pdf-content-credentials-2026-11-13.md#independent-local-replay)
+checks a pinned public signed PDF with the bundled trust list and verifies
+that the signature binds the document itself.
+
+The [fresh video timing study](video-lipsync-repeat-fresh-actors-2026-11-13.md#replay)
+includes two public source plans and runners that recover the exact native
+clip clocks. The [JPEG90 reflection study](image-regional-jpeg90-reflection-2026-11-13.md)
+recounts the original-mask outcomes on both source banks.
+
 ### Replay delivery and earlier-copy comparisons
 
 Recount the [two JPEG90 delivery histories](image-regional-jpeg90-carrier-2026-11-13.md),

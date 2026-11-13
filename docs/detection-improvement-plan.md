@@ -97,6 +97,19 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [PDF Content Credentials check](pdf-content-credentials-2026-11-13.md)
+  verifies a whole-file AI declaration locally before acquiring writing models.
+  Signed document coverage, modified PDF controls and payment-first behavior
+  were checked with a public provider example. The option is local and off by
+  default.
+- The [fresh lip-sync study](video-lipsync-repeat-fresh-actors-2026-11-13.md)
+  added four useful locations per carrier on expressive speech with no added
+  ordinary flags. It added none on the separately sourced conversational clips
+  and retained a synchronized-copy error. The combination stays experimental.
+- The [JPEG90 reflection check](image-regional-jpeg90-reflection-2026-11-13.md)
+  retained all four useful locations in the 11-photo confirmation and reduced
+  ordinary highlights from 15 to 10. The existing JPEG75 path flagged none of
+  those controls, so the new check remains experimental.
 - The [selectable PDF archive comparison](writing-gao-archive-comparison-2026-11-13.md)
   matches indexed report wording and places verified changes on the original
   pages, with the source crop in the browser and report. A two-page transfer

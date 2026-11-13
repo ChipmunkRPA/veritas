@@ -97,6 +97,34 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [short voice-edit comparison](audio-phoneme-short-edit-score-2026-11-13.md)
+  located nine of 16 edited deliveries with two-second windows, including
+  none of four with a competing voice at −5 dB. The tested background
+  reduction found the same nine and added one ordinary flag. The new
+  processing stays outside the app's confidence calculation.
+- The [forum revision transfer](writing-forum-revision-transfer-2026-11-13.md)
+  tested the two-check writing comparison against earlier copies from eight
+  dated threads. The interior-context expansion raised useful locations
+  from six to nine of 14 generated rewrites. No eligible genuine revision
+  flagged, and two genuine revisions fell outside the comparison scope.
+- The [single-upload mouth color test](video-mouth-photometric-transfer-2026-11-13.md)
+  located 2/17 redraws and flagged 29/75 ordinary files. Requiring
+  local texture support located 1/17 and flagged zero ordinary files.
+  All 92 held clips were measured, and 111 flagged native crops replayed.
+  Neither arm advanced.
+- The [public picture-change replay](video-scene-return-public-replay-2026-11-13.md)
+  reconstructs the existing single-upload test from eight pinned
+  publisher files, including all carrier hashes, frame times and
+  supporting crops.
+- The [picture-change evidence view](video-scene-return-2026-11-13.md)
+  marks the measured texture tiles on a copy of the during frame in
+  the browser and Standard PDF. The source frames and exact tile
+  indices remain available in the same evidence set.
+- The [shifted image grid trial](image-native-generated-grid-transfer-2026-11-13.md)
+  recovered 6/8 sharp and 5/8 feathered generated regions where the
+  existing grid recovered none. Ordinary flags increased from 1/64
+  to 13/64, mostly on rotation and quantized interpolation. The
+  added grid and the bit-depth veto remain experimental.
 - The [local picture area check](video-paired-local-area-2026-11-13.md)
   handles supported matched short H.264 clips. On eight source groups it
   raised useful large-edit regions from 3/8 to 8/8, kept the 16 small and

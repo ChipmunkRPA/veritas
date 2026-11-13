@@ -3552,6 +3552,18 @@ export interface components {
             /** Start */
             start: number;
         };
+        /** DraftNeighboringWritingContext */
+        DraftNeighboringWritingContext: {
+            earlier: components["schemas"]["DraftWritingFocus"];
+            later: components["schemas"]["DraftWritingFocus"];
+            /** Responses */
+            responses: components["schemas"]["DraftWritingResponse"][];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "no_joint_increase" | "joint_increase";
+        };
         /** DraftPairedCheck */
         DraftPairedCheck: {
             /**
@@ -3565,13 +3577,15 @@ export interface components {
             change_ids?: string[] | null;
             earlier?: components["schemas"]["DraftWritingFocus"] | null;
             later?: components["schemas"]["DraftWritingFocus"] | null;
+            /** Neighboring Contexts */
+            neighboring_contexts?: components["schemas"]["DraftNeighboringWritingContext"][] | null;
             /** Responses */
             responses?: components["schemas"]["DraftWritingResponse"][] | null;
             /**
              * Schema
              * @enum {string}
              */
-            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2" | "chipmunk.paired-writing-review/3" | "chipmunk.paired-writing-review/4";
+            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2" | "chipmunk.paired-writing-review/3" | "chipmunk.paired-writing-review/4" | "chipmunk.paired-writing-review/5";
             /** Scope */
             scope: string;
             /**

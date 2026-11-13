@@ -1,10 +1,22 @@
 {% if v.get('evidence') and not v.evidence.available %}<p class="caption evidence-unavailable">{{ v.evidence.note }}</p>{% endif %}
 {% if v.get('evidence') and v.evidence.available %}
 {% set evidence = v.evidence %}
-{% macro plates(images, wide=false) %}
+{% macro plates(images, wide=false, support=none) %}
 {% if images and not evidence.withheld %}
-<div class="multimedia-plates{% if wide %} multimedia-wide{% endif %}">
+<div class="multimedia-plates{% if wide %} multimedia-wide{% endif %}{% if support %} multimedia-picture-support{% endif %}">
 {% for image in images %}<figure{% if image.get('anchor') %} id="{{ image.anchor }}"{% endif %}><img src="{{ image.uri }}" alt="{{ image.label }}"><figcaption>{{ image.label }}</figcaption></figure>{% endfor %}
+{% if support %}
+<figure><div class="multimedia-support-frame">
+<img src="{{ images[0].uri }}" alt="Source frame with picture-change support tiles">
+<svg viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
+{% for tile in support %}
+{% set x = (tile % 10) * 10 %}{% set y = (tile // 10) * 10 %}
+<rect x="{{ x }}" y="{{ y }}" width="10" height="10" fill="#f6ca62" fill-opacity="0.15" stroke="#172923" stroke-width="0.65"/>
+<rect x="{{ x }}" y="{{ y }}" width="10" height="10" fill="none" stroke="#f6ca62" stroke-width="0.28"/>
+{% endfor %}
+</svg>
+</div><figcaption>The {{ support | length }} outlined tiles show texture measurements that support the start and end times. Ordinary cuts can produce this pattern.</figcaption></figure>
+{% endif %}
 </div>
 {% endif %}
 {% endmacro %}
@@ -272,7 +284,8 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% endif %}
 <div class="multimedia-frame">
 <p class="caption"><strong>{{ frame.id }}{% if frame.interval_role %} - {{ frame.interval_role | capitalize }} {% if packet.get('scene_return') %}picture change{% elif frame.cut_frame %}picture-cut range{% elif frame.refined %}refined range{% elif packet.face_spatial_cut %}review range{% else %}flagged range{% endif %}{% endif %}</strong> - source frame {{ frame.anchor.frame_index }}, PTS {{ frame.anchor.pts }} at time base {{ frame.anchor.time_base }}; source time {{ '%.6f' | format(frame.anchor.stream_time_s) }} s{% if frame.anchor.playback_time_s is not none %}; playback {{ '%.6f' | format(frame.anchor.playback_time_s) }} s{% endif %}{% if frame.score is not none %}; response {{ '%.4f' | format(frame.score) }} (uncalibrated){% endif %}.</p>
-{{ plates(frame.images) }}
+{% set scene = packet.get('scene_return') %}
+{{ plates(frame.images, support=scene.tiles if scene and scene.schema == 'picture-change-return/1' and frame.interval_role == 'during' else none) }}
 {% if frame.context_region %}<p class="caption">{% if packet.kind == 'av' %}Measured mouth input{% else %}Detected face context{% endif %}: x {{ frame.context_region.x }}, y {{ frame.context_region.y }}, width {{ frame.context_region.w }}, height {{ frame.context_region.h }} pixels. This is not a pixel-edit mask.</p>{% endif %}
 <p class="caption evidence-hash">Decoded RGB SHA-256 <span class="mono">{{ frame.anchor.decoded_rgb_sha256 }}</span></p>
 </div>

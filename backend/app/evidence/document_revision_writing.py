@@ -14,6 +14,7 @@ SCHEMA = "chipmunk.paired-writing-review/1"
 WIDE_SCHEMA = "chipmunk.paired-writing-review/2"
 BOUNDARY_SCHEMA = "chipmunk.paired-writing-review/3"
 WORD_BOUNDARY_SCHEMA = "chipmunk.paired-writing-review/4"
+INTERIOR_SCHEMA = "chipmunk.paired-writing-review/5"
 # Second-highest genuine work response in the frozen paired center transfer.
 BOUNDARY_POINT = 0.12844311183234092
 MAX_WORDS = 420
@@ -42,6 +43,9 @@ WORD_BOUNDARY_SCOPE = ("This experimental check compares one changed sentence be
                        "English Word draft. Both versions keep the same adjacent body paragraphs and neighboring "
                        "sentences. Each check reads the changed sentence alone and with its neighbors. "
                        "Responses are uncalibrated and carry zero authorship confidence weight.")
+INTERIOR_SCOPE = ("This experimental check compares an exact changed sentence in available three-sentence contexts "
+                  "within the same paragraph of a short English plain-text draft. Responses are uncalibrated and "
+                  "carry zero authorship confidence weight.")
 STATUS_TEXT = {
     "outside_scope": "This draft pair falls outside the exact single-sentence comparison scope.",
     "unavailable": "The local writing checks could not complete the paired comparison.",
@@ -57,6 +61,7 @@ class PairedInput:
     later: str
     geometry: dict
     across_paragraphs: bool = False
+    neighboring_contexts: tuple[PairedInput, ...] = ()
 
 
 def _source(text: str):
@@ -85,7 +90,8 @@ def _word_context_locations(spans: list[list[int]], layout: WordParagraphs) -> l
 
 
 def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool = True,
-                 allow_boundary: bool = False, word_layouts: WordLayouts | None = None) -> PairedInput | None:
+                 allow_boundary: bool = False, allow_interior: bool = False,
+                 word_layouts: WordLayouts | None = None) -> PairedInput | None:
     """Pair an interior change. For EML, use the verified decoded body prefix from the draft comparison."""
     changes = comparison["changes"]
     if comparison["format"] == "email":
@@ -115,7 +121,7 @@ def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool
                               or paragraphs[-1] - paragraphs[0] != 1):
         return None
 
-    def context(document, units, raw_text):
+    def context(document, units, raw_text, *, full_range=False):
         origins_by_paragraph = {}
         spans = []
         for unit in units:
@@ -132,7 +138,7 @@ def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool
                           offset + origins[unit.end - block["start"] - 1][1]])
         if [_normalise(raw_text[start:end])[0] for start, end in spans] != [unit.text for unit in units]:
             raise ValueError("Writing comparison context differs from its decoded source")
-        start, end = spans[1][0], spans[-2][1]
+        start, end = (spans[0][0], spans[-1][1]) if full_range else (spans[1][0], spans[-2][1])
         model_input = " ".join(unit.text for unit in units)
         focus = {"start": start, "end": end, "text": raw_text[start:end],
                  "context_spans": spans, "input_sha256": text_hash(model_input)}
@@ -197,11 +203,23 @@ def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool
                 if (len(pages) != 1 or pages[0]["page"] != 1 or pages[0]["page_rotation"] != 0
                         or (item["changed_tokens"] and not pages[0]["word_regions"])):
                     return None
+    neighboring_contexts = []
+    if allow_interior and comparison["format"] == "plain_text" and not wide and not across_paragraphs:
+        for center in (index - 1, index + 1):
+            if not 0 < center < len(old_units) - 1:
+                continue
+            window = slice(center - 1, center + 2)
+            if any(unit.paragraph != paragraphs[0] for unit in old_units[window]):
+                continue
+            old_geometry, old_window = context(old_doc, old_units[window], earlier, full_range=True)
+            new_geometry, new_window = context(new_doc, new_units[window], later, full_range=True)
+            neighboring_contexts.append(PairedInput(old_window, new_window, {"earlier": old_geometry, "later": new_geometry}))
     return PairedInput(old_input, new_input, {"earlier": before, "later": after,
-                                             "change_ids": [change["id"] for change in changes]}, across_paragraphs)
+                                             "change_ids": [change["id"] for change in changes]}, across_paragraphs,
+                       tuple(neighboring_contexts))
 
 
-def _increases(responses: list[dict]) -> list[float]:
+def _increases(responses: list[dict], *, floor: float = 1e-7) -> list[float]:
     if (not isinstance(responses, list) or len(responses) != 2
             or any(not isinstance(pair, dict) or set(pair) != {"earlier", "later"} for pair in responses)):
         raise ValueError("Two paired writing responses are required")
@@ -209,14 +227,15 @@ def _increases(responses: list[dict]) -> list[float]:
     def odds(p):
         if type(p) not in (float, int) or not math.isfinite(p) or not 0 <= p <= 1:
             raise ValueError("Invalid paired writing response")
-        value = min(1 - 1e-7, max(1e-7, p))
+        value = min(1 - floor, max(floor, p))
         return value / (1 - value)
 
     return [math.log(odds(row["later"]) / odds(row["earlier"])) for row in responses]
 
 
 def result(candidate: PairedInput | None, responses: list[dict] | None = None, *, draft_format: str = "plain_text",
-           allow_wide: bool = True, center_responses: list[dict] | None = None) -> dict:
+           allow_wide: bool = True, center_responses: list[dict] | None = None,
+           neighboring_responses: list[list[dict]] | None = None) -> dict:
     across_paragraphs = candidate is not None and candidate.across_paragraphs
     status = "outside_scope" if candidate is None else "unavailable"
     if responses is not None:
@@ -251,6 +270,20 @@ def result(candidate: PairedInput | None, responses: list[dict] | None = None, *
         value["responses"] = responses
     if center_responses is not None:
         value["center_responses"] = center_responses
+    if neighboring_responses is not None:
+        if (draft_format != "plain_text" or candidate is None or responses is None or not candidate.neighboring_contexts
+                or not isinstance(neighboring_responses, list)
+                or len(neighboring_responses) != len(candidate.neighboring_contexts)):
+            raise ValueError("The paired review needs all exact neighboring responses")
+        neighbors = [
+            context.geometry | {"responses": scores, "status": "joint_increase"
+                                if min(_increases(scores, floor=1e-6)) >= math.log(2) else "no_joint_increase"}
+            for context, scores in zip(candidate.neighboring_contexts, neighboring_responses, strict=True)
+        ]
+        if status != "joint_increase" and any(row["status"] == "joint_increase" for row in neighbors):
+            value.update(status="joint_increase", summary="Both writing checks gave a stronger AI-like response in "
+                         "another three-sentence context containing the changed sentence.")
+        value.update(schema=INTERIOR_SCHEMA, scope=INTERIOR_SCOPE, neighboring_contexts=neighbors)
     return value
 
 
@@ -258,14 +291,21 @@ def verify(comparison: dict, earlier: str, later: str, recorded: dict, *,
            word_layouts: WordLayouts | None = None) -> str:
     """Rebuild the source scope and check saved response arithmetic without inference."""
     schema = recorded.get("schema")
-    allow_wide = schema in (WIDE_SCHEMA, BOUNDARY_SCHEMA)
+    allow_wide = schema in (WIDE_SCHEMA, BOUNDARY_SCHEMA, INTERIOR_SCHEMA)
     candidate = paired_input(comparison, earlier, later, allow_wide=allow_wide,
                              allow_boundary=schema in (BOUNDARY_SCHEMA, WORD_BOUNDARY_SCHEMA),
+                             allow_interior=schema == INTERIOR_SCHEMA,
                              word_layouts=word_layouts if schema == WORD_BOUNDARY_SCHEMA else None)
     if candidate is None and "responses" in recorded:
         raise ValueError("An out-of-scope draft cannot carry paired responses")
+    neighboring = None
+    if schema == INTERIOR_SCHEMA:
+        records = recorded.get("neighboring_contexts")
+        if not isinstance(records, list) or any(not isinstance(row, dict) or "responses" not in row for row in records):
+            raise ValueError("The paired writing check does not replay without exact neighboring responses")
+        neighboring = [row["responses"] for row in records]
     expected = result(candidate, recorded.get("responses"), draft_format=comparison["format"], allow_wide=allow_wide,
-                      center_responses=recorded.get("center_responses"))
+                      center_responses=recorded.get("center_responses"), neighboring_responses=neighboring)
     if json.dumps(recorded, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
         raise ValueError("The paired writing check does not replay from these source positions and saved responses")
     return expected["status"]
@@ -290,7 +330,28 @@ def score_boundary(candidate: PairedInput) -> tuple[list[dict] | None, list[dict
             [{"earlier": row[2], "later": row[3]} for row in measured])
 
 
-def _score(inputs):
+def score_interior(candidate: PairedInput) -> tuple[list[dict] | None, list[list[dict]] | None]:
+    from app.engine.boundary import Deadline
+    from app.engine.models import MemoryBudgetExceeded
+
+    deadline = Deadline(REVIEW_SECONDS)
+    contexts = (candidate, *candidate.neighboring_contexts)
+    try:
+        measured = _score([text for context in contexts for text in (context.earlier, context.later)],
+                          allow_partial=True, deadline=deadline)
+    except MemoryBudgetExceeded:
+        measured = _score([candidate.earlier, candidate.later], deadline=deadline)
+        return ([{"earlier": row[0], "later": row[1]} for row in measured] if measured is not None else None), None
+    if measured is None or any(value is None for row in measured for value in row[:2]):
+        return None, None
+    primary = [{"earlier": row[0], "later": row[1]} for row in measured]
+    if any(value is None for row in measured for value in row[2:]):
+        return primary, None
+    return primary, [[{"earlier": row[i], "later": row[i + 1]} for row in measured]
+                     for i in range(2, 2 * len(contexts), 2)]
+
+
+def _score(inputs, *, allow_partial=False, deadline=None):
     from app.detectors.text.adapters import agreement
     from app.detectors.text.classifier import FourClassTextClassifier
     from app.engine.boundary import Deadline
@@ -300,7 +361,7 @@ def _score(inputs):
 
     models = get_model_manager()
     registry = get_registry()
-    deadline = Deadline(REVIEW_SECONDS)
+    deadline = deadline if deadline is not None else Deadline(REVIEW_SECONDS)
     measured = []
     for detector_id, model_id, revision in (
         (DETECTOR, MODEL, REVISION),
@@ -323,7 +384,10 @@ def _score(inputs):
                 values, coverage = agreement.score_inputs(inputs, loaded.obj, lease.device, check=deadline.check)
             deadline.check("paired writing check")
             del loaded
-        if len(values) != len(inputs) or len(coverage) != len(inputs) or not all(one_complete_window(proof) for proof in coverage):
+        if len(values) != len(inputs) or len(coverage) != len(inputs):
             return None
-        measured.append([float(value) for value in values])
+        complete = [one_complete_window(proof) for proof in coverage]
+        if not allow_partial and not all(complete):
+            return None
+        measured.append([float(value) if passed else None for value, passed in zip(values, complete, strict=True)])
     return measured

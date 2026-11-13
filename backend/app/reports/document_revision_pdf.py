@@ -101,7 +101,21 @@ def _paired(review: dict | None) -> str:
             if center:
                 exact = center[i - 1]
                 reading = f'With neighbors {reading}. Changed sentence alone {exact["earlier"]:.4g} → {exact["later"]:.4g}.'
+            elif review.get("neighboring_contexts"):
+                reading = f"Centered context {reading}"
             output.append(f'<p>Check {i} · {reading}</p>')
+        if review.get("neighboring_contexts"):
+            output.append("<h2>Additional scored contexts</h2>")
+        for context in review.get("neighboring_contexts", ()):
+            reading = ("Both responses increased enough for review." if context["status"] == "joint_increase"
+                       else "The responses did not show a shared increase at the review level.")
+            output.append(f"<p>{reading}</p>")
+            for side, label in (("earlier", "Earlier"), ("later", "Analyzed")):
+                row = context[side]
+                output.append(f'<div class="side"><p class="coordinates">{label} scored context [{row["start"]}, '
+                              f'{row["end"]})</p><p class="excerpt">{escape(row["text"])}</p></div>')
+            for i, row in enumerate(context["responses"], 1):
+                output.append(f'<p>Check {i} · {row["earlier"]:.4g} → {row["later"]:.4g}</p>')
     return "".join(output) + "</section>"
 
 

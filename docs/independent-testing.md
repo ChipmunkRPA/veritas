@@ -31,11 +31,34 @@ Run this from a clean checkout with Python 3.11 or later. It recounts all
 and [reorganized Word tables](document-word-table-alignment-2026-11-13.md).
 The video guide also rebuilds the paired carrier measurements from eight
 pinned public recordings, using about 2.8 MB of downloads.
+The [public single-upload video replay](video-scene-return-public-replay-2026-11-13.md)
+rebuilds the separately shipped picture-return detector's HEVC test from
+eight publisher recordings. The [mouth color trial](video-mouth-photometric-transfer-2026-11-13.md)
+has a standalone reader for false alarms, misses and exact timestamps.
+The [shifted image grid trial](image-native-generated-grid-transfer-2026-11-13.md)
+publishes all 104 scalar outcomes, including the rotation and
+quantization controls.
 
 ```sh
 review_dir=$(mktemp -d)
 python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/evidence.json" --suite local-evidence-expansion
 python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/evidence.json" --format-issue
+```
+
+### Replay fresh short-edit comparisons
+
+This suite recounts the [shifted image grids](image-native-generated-grid-transfer-2026-11-13.md),
+[mouth color and texture](video-mouth-photometric-transfer-2026-11-13.md),
+[short voice windows under competing speech](audio-phoneme-short-edit-score-2026-11-13.md),
+and [matched forum revisions](writing-forum-revision-transfer-2026-11-13.md).
+It checks the published counts and source commitments using the Python standard
+library. The guides describe the native checks run on retained local inputs
+and which inputs are needed to repeat them.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/short-edit-transfer.json" --suite short-edit-transfer-2026-11-13
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/short-edit-transfer.json" --format-issue
 ```
 
 ### Replay difficult edits across four media

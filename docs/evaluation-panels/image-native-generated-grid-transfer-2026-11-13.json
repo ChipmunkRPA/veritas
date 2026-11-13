@@ -1,0 +1,189 @@
+{
+  "design": {
+    "baseline": "Fixed 32-pixel grid, prior texture-supported stencil-loss threshold, then frozen global parity veto. No source pair at inference.",
+    "confidence_weight": 0,
+    "gate": "Add at least two useful generated sharp and two feathered locations; add at most one ordinary file highlight. Never use the promotion note as a veto if it removes a known promoted generated case. Untouched must stay clear and all format challenges decline.",
+    "generated": {
+      "delivery": "Sharp and 12-pixel feathered quadratic 8-to-16-bit transfer, plus sharp linear 8-to-16-bit promotion",
+      "guidance": 1.0,
+      "prompt": "Add a small bright yellow star sticker in the center of the source photo. Keep the framing and all other objects unchanged.",
+      "scheduler": "flow_match_euler_discrete",
+      "size": 256,
+      "source_revision": "860e87183ceb29e39627c0612ebd66d8ea66e68c",
+      "steps": 4,
+      "use_kv_cache": false
+    },
+    "grid_extension": "Add three half-cell offsets, recover absolute coordinates, and select the strongest proposal at the original point before the original parity veto.",
+    "quantization_note": "Declare a separate promotion clue only if every RGB channel's strongest modulo-256 or modulo-257 lattice accounts for at least 0.95 of interior codes, while it accounts for at most 0.70 of the surrounding-ring codes; both regions need at least 24 distinct codes per channel. Audit conventional and generated promotions separately. A promotion clue has zero independent authorship value.",
+    "scope": "Eight checksum-bound new CC0 cameras, controlled native linear 16-bit RGB sensor grid, exact masks. One local editor. 8-bit and resized views are separately checked as unsupported."
+  },
+  "exact_native_replays": 104,
+  "freeze_sha256": "8786a8f5e32c3caf9f45696beb9c171768f3f5f5099b07d23a72b7383fd319fe",
+  "generated_sha256": [
+    "d6aaaf261e9cef66de7335a6ed07734374df62f05db3866a99fb7a458fcb3600",
+    "ef05838b94261bfcfa7cc03a136377c957fbc29aa845ab5a3d816f3b090a0085",
+    "310984b6130b5441e7d68cc4b1561faaca02194d2a07031a929114de946c059a",
+    "ebc432ade72a17e6e94884a52536b039c6ef5e3a567035218275c51f4d89d423",
+    "f4204e3b7a81309cf812398923ca9eaca4d117db4142f2577852613f8534c3a1",
+    "ad85c635714493af45e5e0bbb3394cd9e624416e02ecaa89affa3c33d2c861b1",
+    "1d4a043a9aac796ac86332a324b511ab46e2a01293c19f80966e72b79b9307b7",
+    "d9f5e1ed9fa78647f09cfe233cbe2e25d64adab24629e958caaca2ec4c81e29f"
+  ],
+  "measurements": {
+    "by_role": {
+      "blur": {
+        "assessed": 8,
+        "base_flags": 0,
+        "base_useful": 0,
+        "files": 8,
+        "no_repeatable_stencil": 0,
+        "shifted_flags": 0,
+        "shifted_promotion": 0,
+        "shifted_useful": 0,
+        "unsupported_format": 0
+      },
+      "diagonal_cubic": {
+        "assessed": 8,
+        "base_flags": 1,
+        "base_useful": 1,
+        "files": 8,
+        "no_repeatable_stencil": 0,
+        "shifted_flags": 0,
+        "shifted_promotion": 0,
+        "shifted_useful": 0,
+        "unsupported_format": 0
+      },
+      "eight_bit": {
+        "assessed": 0,
+        "base_flags": 0,
+        "base_useful": 0,
+        "files": 8,
+        "no_repeatable_stencil": 0,
+        "shifted_flags": 0,
+        "shifted_promotion": 0,
+        "shifted_useful": 0,
+        "unsupported_format": 8
+      },
+      "even_copy": {
+        "assessed": 8,
+        "base_flags": 0,
+        "base_useful": 0,
+        "files": 8,
+        "no_repeatable_stencil": 0,
+        "shifted_flags": 0,
+        "shifted_promotion": 0,
+        "shifted_useful": 0,
+        "unsupported_format": 0
+      },
+      "generated_feathered": {
+        "assessed": 8,
+        "base_flags": 0,
+        "base_useful": 0,
+        "files": 8,
+        "no_repeatable_stencil": 0,
+        "shifted_flags": 5,
+        "shifted_promotion": 0,
+        "shifted_useful": 5,
+        "unsupported_format": 0
+      },
+      "generated_linear_promote": {
+        "assessed": 8,
+        "base_flags": 2,
+        "base_useful": 2,
+        "files": 8,
+        "no_repeatable_stencil": 0,
+        "shifted_flags": 7,
+        "shifted_promotion": 7,
+        "shifted_useful": 7,
+        "unsupported_format": 0
+      },
+      "generated_sharp": {
+        "assessed": 8,
+        "base_flags": 0,
+        "base_useful": 0,
+        "files": 8,
+        "no_repeatable_stencil": 0,
+        "shifted_flags": 6,
+        "shifted_promotion": 0,
+        "shifted_useful": 6,
+        "unsupported_format": 0
+      },
+      "local_tone": {
+        "assessed": 8,
+        "base_flags": 0,
+        "base_useful": 0,
+        "files": 8,
+        "no_repeatable_stencil": 0,
+        "shifted_flags": 0,
+        "shifted_promotion": 0,
+        "shifted_useful": 0,
+        "unsupported_format": 0
+      },
+      "original": {
+        "assessed": 8,
+        "base_flags": 0,
+        "base_useful": 0,
+        "files": 8,
+        "no_repeatable_stencil": 0,
+        "shifted_flags": 0,
+        "shifted_promotion": 0,
+        "shifted_useful": 0,
+        "unsupported_format": 0
+      },
+      "quantized_256": {
+        "assessed": 8,
+        "base_flags": 0,
+        "base_useful": 0,
+        "files": 8,
+        "no_repeatable_stencil": 0,
+        "shifted_flags": 4,
+        "shifted_promotion": 0,
+        "shifted_useful": 4,
+        "unsupported_format": 0
+      },
+      "quantized_257": {
+        "assessed": 8,
+        "base_flags": 0,
+        "base_useful": 0,
+        "files": 8,
+        "no_repeatable_stencil": 0,
+        "shifted_flags": 4,
+        "shifted_promotion": 0,
+        "shifted_useful": 4,
+        "unsupported_format": 0
+      },
+      "resized": {
+        "assessed": 0,
+        "base_flags": 0,
+        "base_useful": 0,
+        "files": 8,
+        "no_repeatable_stencil": 8,
+        "shifted_flags": 0,
+        "shifted_promotion": 0,
+        "shifted_useful": 0,
+        "unsupported_format": 0
+      },
+      "rotation_bilinear": {
+        "assessed": 8,
+        "base_flags": 0,
+        "base_useful": 0,
+        "files": 8,
+        "no_repeatable_stencil": 0,
+        "shifted_flags": 5,
+        "shifted_promotion": 0,
+        "shifted_useful": 5,
+        "unsupported_format": 0
+      }
+    },
+    "ordinary_base_flags": 1,
+    "ordinary_shifted_flags": 13,
+    "promotion_safe_as_veto": false,
+    "shifted_grid_passed": false
+  },
+  "prior_sha256": "0b7937515e084fd2e1f91f9a4040845da05965c2e8fbaf951d020b51e9fe473e",
+  "roster_sha256": "b24fac5de1be8658bc1c8cae25251072c42b747c3e90834a5cd27992c1ea4876",
+  "runner_sha256": "7d4263db75c90d22234850e30b505a06f66573ce2825019fef9fff3fcd029592",
+  "schema": "chipmunk.image-native-generated-grid-transfer/1",
+  "scored_sha256": "61c5a5583429a9e37305aa252fd59c17c8346d1ea60132873f2ab2811e9516d1",
+  "sources": 8
+}

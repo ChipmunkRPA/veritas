@@ -5569,6 +5569,39 @@
         "title": "DraftHtmlToken",
         "type": "object"
       },
+      "DraftNeighboringWritingContext": {
+        "properties": {
+          "earlier": {
+            "$ref": "#/components/schemas/DraftWritingFocus"
+          },
+          "later": {
+            "$ref": "#/components/schemas/DraftWritingFocus"
+          },
+          "responses": {
+            "items": {
+              "$ref": "#/components/schemas/DraftWritingResponse"
+            },
+            "title": "Responses",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "no_joint_increase",
+              "joint_increase"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "earlier",
+          "later",
+          "responses",
+          "status"
+        ],
+        "title": "DraftNeighboringWritingContext",
+        "type": "object"
+      },
       "DraftPairedCheck": {
         "properties": {
           "authorship_confidence_contribution": {
@@ -5624,6 +5657,20 @@
               }
             ]
           },
+          "neighboring_contexts": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DraftNeighboringWritingContext"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Neighboring Contexts"
+          },
           "responses": {
             "anyOf": [
               {
@@ -5643,7 +5690,8 @@
               "chipmunk.paired-writing-review/1",
               "chipmunk.paired-writing-review/2",
               "chipmunk.paired-writing-review/3",
-              "chipmunk.paired-writing-review/4"
+              "chipmunk.paired-writing-review/4",
+              "chipmunk.paired-writing-review/5"
             ],
             "title": "Schema",
             "type": "string"

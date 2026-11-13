@@ -7,6 +7,13 @@ browser, PDF and JSON use the same source interval and three exact decoded
 frames from before, during and after the change. This observation carries
 zero AI confidence weight. An ordinary edit can produce the same result.
 
+The browser and Standard PDF also show a marked copy of the during
+frame alongside the clean source image. Each outlined area corresponds
+to a measured tile that supports the start and end of the interval.
+The JSON lists the same tiles under `/packets/{index}/scene_return/tiles`.
+Tile indices count from zero, left to right and top to bottom on a
+10-column by 6-row grid. The measurements support the interval timing.
+
 New analyses also record whether all 120 frames were checked, whether
 a matching range was found, and why a check was unavailable when it
 could not be completed. Media Evidence, the Standard PDF and JSON use

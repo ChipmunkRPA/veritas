@@ -4,6 +4,21 @@ import { EvidenceLimits, EvidenceMeasurements, EvidencePicture, EvidenceReferenc
 import { evidenceAssetUrl, evidenceSourceMediaUrl, hasNestedVideoEvidence, seconds, type VideoEvidenceFrame, type VideoEvidencePacket, type VideoEvidenceSet } from './multimediaPackets'
 import VideoFrameNavigator from './VideoFrameNavigator'
 
+function PictureChangeSupport({ tiles }: { tiles: number[] }) {
+  return <svg viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true"
+    className="pointer-events-none absolute inset-0 h-full w-full">
+    {tiles.map(tile => {
+      const x = (tile % 10) * 10
+      const y = Math.floor(tile / 10) * 10
+      return <g key={tile}>
+        <rect x={x} y={y} width="10" height="10" fill="#f6ca62" fillOpacity="0.15"
+          stroke="#172923" strokeWidth="0.65" />
+        <rect x={x} y={y} width="10" height="10" fill="none" stroke="#f6ca62" strokeWidth="0.28" />
+      </g>
+    })}
+  </svg>
+}
+
 export function ContextClip({ packet, set, token, ready }: {
   packet: Pick<VideoEvidencePacket, 'id' | 'artifacts' | 'frames' | 'clip'> & { claim_scope: string }
   set: VideoEvidenceSet; token: string; ready: boolean
@@ -71,6 +86,8 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       const cut = packet.face_spatial_cut_frames?.some(item => item.id === frame.id)
       const crop = frame.artifact_refs.crop && packet.artifacts[frame.artifact_refs.crop]
       const mouthCrop = packet.mouth_local_hold && crop
+      const sceneSupport = frame.interval_role === 'during' && packet.scene_return?.schema === 'picture-change-return/1'
+        ? packet.scene_return.tiles : null
       const navigationKnown = frame.anchor.playback_time_s != null && Number.isFinite(frame.anchor.playback_time_s) && frame.anchor.playback_time_s >= 0
       const occurrence = packet.picture_sequence && (frame.anchor.frame_index <= packet.picture_sequence.first.end_frame_index
         ? 'First occurrence' : 'Second occurrence')
@@ -80,6 +97,11 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         <div className={evidenceGrid}>
           <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={packet.artifacts[frame.artifact_refs.original]} token={token} ready={mediaReady} alt={`${frame.id}: exact original video frame`} />
             <figcaption className="mt-2 text-caption text-text-muted">Exact source frame pixels, without diagnostic overlays.</figcaption></figure>
+          {sceneSupport && <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={packet.artifacts[frame.artifact_refs.original]}
+            token={token} ready={mediaReady} alt={`${frame.id}: source frame with picture-change support tiles`}
+            overlay={<PictureChangeSupport tiles={sceneSupport} />} />
+            <figcaption className="mt-2 text-caption text-text-muted">The {sceneSupport.length} outlined tiles show texture measurements that support the start and end times. Ordinary cuts can produce this pattern.</figcaption>
+          </figure>}
           {!packet.picture_hold && !packet.picture_sequence && !packet.scene_return && <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop || packet.artifacts[frame.artifact_refs.context]} token={token} ready={mediaReady}
             alt={`${frame.id}: ${mouthCrop ? 'exact measured mouth region' : crop ? 'source face crop for context' : 'frame context with its recorded label'}`} />
             <figcaption className="mt-2 text-caption text-text-muted">{mouthCrop ? 'Exact pixels of the measured mouth region.'
@@ -154,7 +176,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     {sceneReview && <section aria-labelledby="video-scene-return-coverage-heading" className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-scene-return-coverage-heading" className="m-0 text-body font-medium">Picture-change coverage</h3>
       <p className="mt-2 mb-0 text-small">{sceneReview.observation}{sceneReview.packet_id &&
-        <> <a className="underline" href={`#media-evidence-${sceneReview.packet_id}`}>Inspect the three source frames</a></>}</p>
+        <> <a className="underline" href={`#media-evidence-${sceneReview.packet_id}`}>Inspect the source frames and measured tiles</a></>}</p>
       <p className="mt-2 mb-0 text-caption text-text-muted">{sceneReview.limitation}</p>
     </section>}
     {set.coverage ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">

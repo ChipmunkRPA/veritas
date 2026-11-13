@@ -180,9 +180,23 @@ LOCAL_EVIDENCE_EXPANSION = {
         "document-word-table-alignment-cbo-roster-2026-11-13.json", "document-word-table-alignment-cbo-2026-11-13.json",
     ), ("review",), ()),
 }
+SHORT_EDIT_TRANSFER_2026_11_13 = {
+    "image": ("review_image_native_generated_grid_transfer.py", (
+        "image-native-generated-grid-measurements-2026-11-13.json",
+        "image-native-generated-grid-cc0-roster-2026-11-13.json", "image-native-generated-grid-transfer-2026-11-13.json",
+    ), (), ()),
+    "video": ("review_video_mouth_photometric_transfer.py", ("video-mouth-photometric-transfer-2026-11-13.json",), (), ()),
+    "audio": ("review_audio_phoneme_short_edit_score.py", (
+        "audio-phoneme-short-edit-score-2026-11-13.json", "audio-phoneme-short-edit-intake-2026-11-13.json",
+    ), (), ()),
+    "writing": ("review_writing_forum_revision_transfer.py", ("writing-forum-revision-transfer-2026-11-13.json",), (), (
+        f"{SCRIPTS}/writing_uswds_revision_transfer.py",
+    )),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
-          "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion")
+          "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion",
+          "short-edit-transfer-2026-11-13")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -246,6 +260,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = EVIDENCE_EXTENT_2026_11_13[modality]
     elif suite == "local-evidence-expansion":
         script, panel_names, prefix, dependencies = LOCAL_EVIDENCE_EXPANSION[modality]
+    elif suite == "short-edit-transfer-2026-11-13":
+        script, panel_names, prefix, dependencies = SHORT_EDIT_TRANSFER_2026_11_13[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

@@ -212,14 +212,16 @@ it('links highlighted HTML reply words to their decoded MIME positions', async (
   expect(screen.getByText('[12, 16) → [29, 31), [37, 38), [45, 51)')).toBeTruthy()
 })
 
-it.each([false, true])('opts in to the paired response and links the sentence locations, wide=%s', async (wide) => {
+it.each(['single', 'wide', 'interior'] as const)('opts in to the %s paired response and links the sentence locations', async (mode) => {
+  const wide = mode === 'wide'
+  const interior = mode === 'interior'
   const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64), decoded_characters: 100, mime_part: null }
   const comparison: DraftComparison = {
     schema: 'chipmunk.document-revision-comparison/1', format: 'plain_text', coordinate_space: 'decoded_source_unicode_codepoint',
     earlier: source, later: source, scope: 'Words and punctuation.', interpretation: 'Compare the wording.',
     changes: [{ id: 'C01', role: 'body', earlier: { start: 20, end: 24, text: 'here', changed_tokens: [[20, 24]] },
       later: { start: 20, end: 25, text: 'there', changed_tokens: [[20, 25]] } }],
-    paired_check: { schema: wide ? 'chipmunk.paired-writing-review/2' : 'chipmunk.paired-writing-review/1', status: 'joint_increase', scope: 'Zero authorship confidence weight.',
+    paired_check: { schema: interior ? 'chipmunk.paired-writing-review/5' : wide ? 'chipmunk.paired-writing-review/2' : 'chipmunk.paired-writing-review/1', status: 'joint_increase', scope: 'Zero authorship confidence weight.',
       summary: 'Both writing checks gave a stronger AI-like response.', authorship_confidence_contribution: 0, change_ids: ['C01'],
       earlier: { start: 20, end: wide ? 31 : 25, text: wide ? 'Here. Then.' : 'Here.',
         context_spans: wide ? [[0, 19], [20, 25], [26, 31], [32, 46]] : [[0, 19], [20, 25], [26, 40]],
@@ -227,7 +229,12 @@ it.each([false, true])('opts in to the paired response and links the sentence lo
       later: { start: 20, end: wide ? 33 : 26, text: wide ? 'There. Later.' : 'There.',
         context_spans: wide ? [[0, 19], [20, 26], [27, 33], [34, 48]] : [[0, 19], [20, 26], [27, 41]],
         input_sha256: 'b'.repeat(64) },
-      responses: [{ earlier: .1, later: .4 }, { earlier: .3, later: .6 }] },
+      responses: [{ earlier: .1, later: .4 }, { earlier: .3, later: .6 }],
+      ...(interior ? { neighboring_contexts: [{ status: 'joint_increase', responses: [{ earlier: .1, later: .7 }, { earlier: .2, later: .6 }],
+        earlier: { start: 20, end: 61, text: 'Here. Next sentence. Last sentence.',
+          context_spans: [[20, 25], [26, 40], [41, 61]], input_sha256: 'c'.repeat(64) },
+        later: { start: 20, end: 62, text: 'There. Next sentence. Last sentence.',
+          context_spans: [[20, 26], [27, 41], [42, 62]], input_sha256: 'd'.repeat(64) } }] } : {}) },
   }
   vi.mocked(draftAvailability).mockResolvedValue({ extension: '.txt', pairedCheckAvailable: true })
   vi.mocked(compareDraft).mockResolvedValue({ comparison })
@@ -245,6 +252,11 @@ it.each([false, true])('opts in to the paired response and links the sentence lo
   expect(screen.getByRole('link', { name: 'C01' }).getAttribute('href')).toBe(`#${change.id}`)
   expect(screen.getByText(wide ? 'Analyzed sentences [20, 33)' : 'Analyzed sentence [20, 26)')).toBeTruthy()
   if (wide) expect(screen.getByText('There. Later.')).toBeTruthy()
+  if (interior) {
+    expect(screen.getByRole('heading', { name: 'Additional scored contexts' })).toBeTruthy()
+    expect(screen.getByText('Analyzed scored context [20, 62)')).toBeTruthy()
+    expect(screen.getByText('There. Next sentence. Last sentence.')).toBeTruthy()
+  }
   expect(screen.queryByText(/ModernBERT|Tropa/)).toBeNull()
-  expect(screen.getByText(/Check 2 · 0.3000 → 0.6000/)).toBeTruthy()
+  expect(screen.getByText(interior ? /Check 2 · Centered context 0.3000 → 0.6000/ : /Check 2 · 0.3000 → 0.6000/)).toBeTruthy()
 })

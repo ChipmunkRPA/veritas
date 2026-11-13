@@ -177,12 +177,35 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
           {paired.responses.map((response, index) => {
             const center = paired.center_responses?.[index]
             return <li key={index}>
-              Check {index + 1} · {center && 'With neighbors '}{response.earlier.toPrecision(4)} → {response.later.toPrecision(4)}
+              Check {index + 1} · {center ? 'With neighbors ' : paired.neighboring_contexts?.length ? 'Centered context ' : ''}
+              {response.earlier.toPrecision(4)} → {response.later.toPrecision(4)}
               {center && <>. Changed sentence alone {center.earlier.toPrecision(4)} → {center.later.toPrecision(4)}.</>}
             </li>
           })}
         </ul>
       </>}
+      {!!paired.neighboring_contexts?.length && <div className="mt-3">
+        <h4 className="m-0 text-caption font-medium">Additional scored contexts</h4>
+        {paired.neighboring_contexts.map(context => <div key={context.later.start} className="mt-3 border-t border-border pt-2">
+          <p className="m-0 text-caption">{context.status === 'joint_increase' ? 'Both responses increased enough for review.'
+            : 'The responses did not show a shared increase at the review level.'}</p>
+          <div className="mt-2 grid gap-3 sm:grid-cols-2">
+            <div>
+              <p className="m-0 font-mono text-caption text-text-muted">Earlier scored context [{context.earlier.start}, {context.earlier.end})</p>
+              <p className="mt-1 mb-0 whitespace-pre-wrap break-words text-small">{context.earlier.text}</p>
+            </div>
+            <div>
+              <p className="m-0 font-mono text-caption text-text-muted">Analyzed scored context [{context.later.start}, {context.later.end})</p>
+              <p className="mt-1 mb-0 whitespace-pre-wrap break-words text-small">{context.later.text}</p>
+            </div>
+          </div>
+          <ul aria-label="Uncalibrated responses for this scored context" className="mt-2 mb-0 list-none p-0 text-caption">
+            {context.responses.map((response, index) => <li key={index}>
+              Check {index + 1} · {response.earlier.toPrecision(4)} → {response.later.toPrecision(4)}
+            </li>)}
+          </ul>
+        </div>)}
+      </div>}
     </section>}
     {!!comparison.changes.length && <>
       <p className="mt-2 mb-0 text-caption text-text-muted">Highlights mark changed words and punctuation. {docx

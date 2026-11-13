@@ -471,6 +471,82 @@ def test_opt_in_paired_check_replays_exact_focus_and_preserves_unscored_comparis
     assert "A private diagnostic" not in failure.text
 
 
+def test_paired_txt_neighboring_context_preserves_the_changed_sentence_and_replays(reference_http, monkeypatch, tmp_path):
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_detector_mode", "candidate")
+    monkeypatch.setattr(settings, "text_window_sentences", 3)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    earlier = ("The committee met on Monday morning to review the budget. The draft gives  the survey date and meeting "
+               "location. The final minutes will be available after the next meeting. "
+               "All attendees will receive a copy of those minutes at the end of the week.")
+    later = earlier.replace("The draft gives  the survey date and meeting location.",
+                            "The revision includes a detailed account of the survey and its outcomes.")
+    _saved(f, "paired-contexts", ".txt", later.encode())
+    url = _url("paired-contexts")
+    measured = []
+
+    def measure(inputs, *, allow_partial, deadline):
+        assert allow_partial and deadline.budget_s == paired.REVIEW_SECONDS and len(inputs) == 4
+        measured.append(inputs)
+        return [[.15, .18, .1, .5], [.2, .23, .3, .6]]
+
+    monkeypatch.setattr(paired, "_score", measure)
+    form = {"include_pdf": "true", "include_paired_check": "true"}
+    result = f.client.post(url, headers=f.viewer, files=_upload(earlier.encode(), ".txt"), data=form)
+    assert result.status_code == 200 and result.headers["cache-control"] == "no-store"
+    body = result.json()
+    comparison = body["comparison"]
+    check = comparison["paired_check"]
+    assert check["schema"] == paired.INTERIOR_SCHEMA and check["status"] == "joint_increase"
+    assert check["authorship_confidence_contribution"] == 0 and check["change_ids"] == ["C01"]
+    assert check["later"]["text"] == "The revision includes a detailed account of the survey and its outcomes."
+    neighbor, = check["neighboring_contexts"]
+    assert neighbor["status"] == "joint_increase"
+    for side, source, model_input in zip(("earlier", "later"), (earlier, later), measured[0][2:], strict=True):
+        row = neighbor[side]
+        assert row["text"] == source[row["start"]:row["end"]]
+        assert row["context_spans"][0] == [check[side]["start"], check[side]["end"]]
+        assert row["input_sha256"] == paired.text_hash(model_input)
+    with pymupdf.open(stream=base64.b64decode(body["pdf"]), filetype="pdf") as report:
+        text = " ".join(" ".join(page.get_text().split()) for page in report)
+        assert "Additional scored contexts" in text and "Linked wording changes C01" in text
+        assert f"Analyzed sentence [{check['later']['start']}, {check['later']['end']})" in text
+        assert f"Analyzed scored context [{neighbor['later']['start']}, {neighbor['later']['end']})" in text
+        assert "Tropa" not in text and "ModernBERT" not in text
+    old_path, new_path, export = (tmp_path / path for path in ("earlier.txt", "later.txt", "comparison.json"))
+    old_path.write_text(earlier)
+    new_path.write_text(later)
+    export.write_text(json.dumps(comparison))
+    assert review(export, old_path, new_path)["paired_scope_and_saved_response_arithmetic"] == "joint_increase"
+    neighbor["later"]["context_spans"][2][0] += 1
+    export.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="paired writing check does not replay"):
+        review(export, old_path, new_path)
+
+    monkeypatch.setattr(paired, "_score", lambda *a, **k: [[.15, .18, None, None], [.2, .23, .3, .6]])
+    fallback = f.client.post(url, headers=f.viewer, files=_upload(earlier.encode(), ".txt"), data=form)
+    ordinary = fallback.json()["comparison"]["paired_check"]
+    assert ordinary["schema"] == paired.SCHEMA and ordinary["status"] == "no_joint_increase"
+    assert "neighboring_contexts" not in ordinary
+    assert paired.verify(fallback.json()["comparison"], earlier, later, ordinary) == "no_joint_increase"
+
+    from app.engine.models import MemoryBudgetExceeded
+
+    deadlines = []
+
+    def limited(inputs, *, allow_partial=False, deadline):
+        deadlines.append(deadline)
+        if allow_partial:
+            raise MemoryBudgetExceeded("Test activation limit")
+        assert len(inputs) == 2
+        return [[.15, .18], [.2, .23]]
+
+    monkeypatch.setattr(paired, "_score", limited)
+    reduced = f.client.post(url, headers=f.viewer, files=_upload(earlier.encode(), ".txt"), data=form)
+    assert reduced.json()["comparison"]["paired_check"] == ordinary
+    assert len(deadlines) == 2 and deadlines[0] is deadlines[1]
+
+
 def test_word_comparison_uses_exact_body_paragraph_coordinates_in_api_pdf_and_replay(reference_http, monkeypatch, tmp_path):
     f = _install(reference_http, monkeypatch)
     monkeypatch.setattr(settings, "text_checkpoint_agreement_review", False)

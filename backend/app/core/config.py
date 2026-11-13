@@ -218,6 +218,7 @@ class Settings(BaseSettings):
     image_region_mode: Literal["legacy", "candidate"] = "legacy"
     image_region_flip_review: bool = False  # Development-only repeatability filter for sensitive PNG regions.
     image_region_jpeg_review: bool = False  # Development-only regional evidence for the evaluated JPEG profile.
+    image_native_interpolation_review: bool = False  # Optional local inspection of strictly profiled 16-bit PNGs.
     image_sharp_boundary_enabled: bool = False
     image_reference_comparison_enabled: bool = False  # Development-only comparison of an uploaded earlier copy.
     image_reference_jpeg_png_envelope: bool = False  # Optional earlier standard JPEG to cropped PNG color differences.

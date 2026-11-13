@@ -11,6 +11,7 @@ from app.core.config import settings
 from app.detectors.image import embedded_pair
 from app.evidence import image_embedded_pair_binding as binding
 from app.evidence import image_embedded_pair_pixels as pixels
+from app.evidence import image_interpolation_binding as interpolation
 from app.evidence import image_packets_v7 as prior
 from app.evidence.image_copy_similarity_binding import SKIPPED_CREDENTIALS, result_skip, url
 from app.storage.artefacts import register_artefact
@@ -41,13 +42,19 @@ def validate_packet_set(document, **source_binding) -> None:
 def validate_packet_source_mapping(document, result) -> None:
     try:
         binding.validate_scope(document, result_skip(result) is not None)
-    except ValueError as exc:
+        record = interpolation.from_result(result)
+        interpolation.validate(document, canonical_hash(record) if record is not None else None)
+        if record is not None and (record["status"] == "provenance") != (result_skip(result) is not None):
+            raise ValueError("Interpolation evidence differs from the frozen provenance disposition")
+    except (ValueError, KeyError, TypeError) as exc:
         raise PacketIntegrityError(str(exc)) from exc
     prior.validate_packet_source_mapping(binding.base_document(document), result)
 
 
 def validate_assets(document, store) -> None:
     prior.validate_assets(binding.base_document(document), store)
+    for asset in interpolation.assets(document).values():
+        store.verify(asset["sha256"])
     pair = (document.get(binding.KEY) or {}).get("pair")
     if pair is None:
         return
@@ -139,7 +146,13 @@ def load_packet_set(db, analysis, store, *, set_id=None):
         validate_packet_source_mapping(document, result)
         validate_assets(document, store)
         return document
-    return prior.load_packet_set(db, analysis, store, set_id=set_id)
+    document = prior.load_packet_set(db, analysis, store, set_id=set_id)
+    if document is not None and interpolation.KEY in document:
+        result = json.loads(prior.legacy._verified(store, analysis.result_hash))
+        validate_packet_source_mapping(document, result)
+        for asset in interpolation.assets(document).values():
+            store.verify(asset["sha256"])
+    return document
 
 
 def persist_packet_set(db, analysis, store, *, result=None):

@@ -52,7 +52,7 @@ from app.engine.fusion.runtime import DECLARED_AI_VERBAL
 from app.engine.media import MAX_PIXELS
 from app.engine.runner import StageContext
 from app.engine.stages import common
-from app.evidence import image_thumbnail_evidence, image_whole_review
+from app.evidence import image_interpolation_binding, image_thumbnail_evidence, image_whole_review
 from app.evidence.image_copy_similarity_binding import credential_skip
 from app.schemas.evidence import AnalysisResultV2, Decision, Exhibit, HeatmapExhibit, SignalV2
 from app.schemas.legacy import (
@@ -531,8 +531,18 @@ def render(ctx: StageContext) -> dict[str, Any]:
         if image_artefacts:
             common.index_artefacts(ctx, (), extra=image_artefacts)
     records.extend(image_artefacts)
+    interpolation = {}
+    if (settings.environment == "dev" and settings.image_native_interpolation_review
+            and ingest.get("mime") == "image/png" and not ctx.state.get("refusion")):
+        from app.evidence import image_interpolation_source
+
+        ctx.check("before the native interpolation check")
+        stopped = provenance_gate.stop(ctx)
+        remaining = ctx.deadline.remaining()
+        body = _media(ctx).original_bytes() if not stopped and (remaining is None or remaining >= 2) else None
+        interpolation[image_interpolation_binding.KEY] = image_interpolation_source.record(ingest["sha256"], body=body, skipped=stopped)
     return {"artefacts_indexed": len(records), "bytes": sum(a["size_bytes"] for a in records), "tiles": tiles,
-            "legacy_artifacts": legacy, "exhibits": image_exhibits, "artefacts": image_artefacts}
+            "legacy_artifacts": legacy, "exhibits": image_exhibits, "artefacts": image_artefacts, **interpolation}
 
 
 def build_result(ctx: StageContext) -> AnalysisResultV2:
@@ -587,6 +597,8 @@ def v1_view(ctx: StageContext, result: AnalysisResultV2) -> dict[str, Any]:
 def publish(ctx: StageContext) -> dict[str, Any]:
     """Project the evidence tables, store the canonical result and the v1 view. Reports are separate jobs (B11)."""
     result = build_result(ctx)
+    if interpolation := (ctx.outputs.get("render") or {}).get(image_interpolation_binding.KEY):
+        result.manifest.sampling[image_interpolation_binding.KEY] = interpolation
     if provenance_gate.stop(ctx):
         result.manifest.sampling["image_copy_coverage"] = credential_skip(ctx.outputs["ingest"]["sha256"])
     return common.publish(ctx, result, v1_view(ctx, result), pipeline_version=PIPELINE_VERSION, run_stages=SIGNAL_STAGES)

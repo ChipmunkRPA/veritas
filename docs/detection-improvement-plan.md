@@ -115,8 +115,9 @@ integration remains unfinished.
 - A [ten-camera PNG transfer](image-native-cfa-png-transfer-2026-11-13.md)
   located 54 of 60 odd-phase 128-pixel pastes and 24 of 60 at 64 pixels.
   It highlighted none of 100 assessed ordinary controls and declined
-  30 incompatible inputs. The tested local interpolation cue still requires
-  integration and source-bound application verification.
+  30 incompatible inputs. The local development app now shows the supported
+  interpolation observation and full-depth source crop. Chrome, the PDF,
+  JSON, and signed source replay agreed across four held deliveries.
 - The [flanking-audio background trial](audio-flank-background-transfer-2026-11-13.md)
   tested four new source readers in the Aachen room. All three approaches
   flagged two of 16 noisy synthetic deliveries and zero of 16 noisy genuine

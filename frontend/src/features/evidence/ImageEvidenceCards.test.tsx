@@ -27,6 +27,17 @@ const evidence: ImageEvidenceSet = {
 }
 
 const show = (value = evidence, token = 'signed token') => render(<MemoryRouter><ImageEvidenceContent set={value} token={token} mediaReady /></MemoryRouter>)
+it('shows the native interpolation measurement and exact crop next to its source position', () => {
+  show({ ...evidence, packets: [], native_interpolation_review: {
+    record: { status: 'matched', observation: 'A local interpolation shift was measured.',
+      scope: 'Supported 16-bit PNGs only.', limitation: 'This carries zero AI confidence weight.',
+      supported_cells: 2620, region: [480, 416, 608, 544], affects_overall_confidence: false },
+    artifacts: { context: artifact('b'), crop: artifact('c') },
+  } })
+  expect(screen.getByText(/Source columns \[480, 608\) and rows \[416, 544\)/)).toBeTruthy()
+  expect(screen.getByAltText('Original 16-bit source crop')).toBeTruthy()
+  expect(screen.getByText(/2,620 of 3,072/)).toBeTruthy()
+})
 afterEach(() => {
   cleanup()
   vi.unstubAllGlobals()

@@ -475,6 +475,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
             return None
         if fullname in ('app.evidence', 'app.evidence.mp4', 'app.evidence.image_eligibility', 'app.evidence.image_copy_similarity_binding',
                         'app.evidence.image_editor_preview_binding',
+                        'app.evidence.image_interpolation_binding',
                         'app.evidence.image_copy_affine_binding',
                         'app.evidence.document_context', 'app.evidence.document_scope', 'app.evidence.document_repeat',
                         'app.evidence.email_alternatives',

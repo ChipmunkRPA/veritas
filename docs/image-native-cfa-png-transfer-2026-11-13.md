@@ -14,8 +14,7 @@ IEND chunks. The reader checks CRCs, chunk order and exact length. Two
 spatial folds must independently support the same repeatable red and
 blue interpolation pattern before a region can be assessed. The check
 uses submitted pixels alone. The panel uses controlled linear renders
-of ten distinct, checksum-verified CC0 RAW captures. The native
-RAW files remain local and were not sent through the analysis pipeline.
+of ten distinct, checksum-verified CC0 RAW captures. The analysis pipeline receives the developed PNG. The source RAW files remain local.
 [Earlier calibration](image-native-cfa-closure-2026-11-13.md) ·
 [Held source roster](evaluation-panels/image-native-cfa-cc0-png-roster-2026-11-13.json) ·
 [Original publisher](https://raw.pixls.us/)
@@ -41,6 +40,32 @@ localized fractional interpolation. It declined the 30 resized,
 fills can leave the cue unchanged. The study supplies no performance
 estimate for generated replacements or common JPEG uploads.
 
+## Local application
+
+Set `VERITAS_IMAGE_NATIVE_INTERPOLATION_REVIEW=true` on a development
+instance and restart the worker. New PNG analyses show **Local pixel
+interpolation** in Media Evidence. When a region is selected, the browser
+and Standard PDF show its location and a source crop. The PNG asset
+retains the original 16-bit samples. The JSON binds its coordinates and
+the measured native image to the source. The signed package can replay
+the observation and confirm the full-depth crop from the original file.
+The report labels a completed scan with no match separately from an
+incompatible PNG or an image with no repeatable interpolation pattern.
+
+The local app test used four files from the held panel. The planted
+128-pixel paste produced the exact region. The unchanged, resized and
+8-bit inputs produced three separate coverage outcomes. The four analyses
+queued after simulated checkout. Local Chrome, the PDF, the evidence API
+and JSON showed the same results, and each signed package replayed against
+its original PNG. The same positive input with the check disabled kept
+the customer assessment and omitted the interpolation evidence. The test
+isolated the new check and ordinary checkout, evidence, and report code
+from the learned image checks.
+The application detector separately reproduced all 310 frozen outcomes
+and 79 native RGB hashes, including the oversized 32-pixel candidate.
+[Local application receipt](evaluation-panels/image-native-interpolation-local-2026-11-13.json) ·
+[Detector parity receipt](evaluation-panels/image-native-cfa-serving-parity-2026-11-13.json)
+
 ## Replay
 
 Download the ten source files listed in the CC0 roster into the
@@ -57,4 +82,6 @@ for phase in freeze held review; do
 done
 python3 -B -I -S backend/scripts/review_image_native_cfa_png_transfer.py \
   "$run" docs/evaluation-panels/image-native-cfa-cc0-png-roster-2026-11-13.json "$receipt"
+backend/.venv/bin/python -B -m scripts.review_image_native_cfa_serving \
+  "$rawnind" "$pixls" "$run" "$detector_receipt"
 ```

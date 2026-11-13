@@ -11,6 +11,7 @@ from zipfile import ZipFile
 from PIL import Image, ImageOps
 
 from app.evidence import image_embedded_pair_binding as embedded_pair
+from app.evidence import image_interpolation_binding as interpolation
 from app.evidence.image_copy_similarity_binding import (
     JPEG_BLOCK_BASIS,
     OFFGRID_BASIS,
@@ -140,6 +141,14 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError('The supplied image SHA-256 differs from the committed original')
 
     evidence = json.loads(archive.read('evidence.json'))
+    native_review = evidence.get(interpolation.KEY)
+    native_detail = ""
+    if native_review is not None:
+        from app.evidence.image_interpolation_source import verify
+
+        interpolation.validate(evidence, evidence["source"].get(interpolation.COMMITMENT))
+        if verify(data, native_review, lambda digest: archive.read(f"assets/{digest}.png")):
+            native_detail = " Recomputed the native interpolation inspection and any exact 16-bit source crop."
     preview = json.loads(archive.read('result.json')).get(IMAGE_EDITOR_PREVIEW) if 'result.json' in archive.namelist() else None
     crops = list(_crops(evidence))
     pair = (evidence.get(embedded_pair.KEY) or {}).get('pair')
@@ -148,7 +157,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     quality_checks = [check for check in (evidence.get("coverage") or {}).get("inspection_checks", [])
                       if check.get("source_quality") is not None]
     if not crops and not repeat_checks and not quality_checks and pair is None and preview is None:
-        return 'Original SHA-256 matched. No unannotated crops were recorded.'
+        return 'Original SHA-256 matched.' + (native_detail or ' No unannotated crops were recorded.')
     declared = evidence['source']
     if preview is not None:
         from app.evidence.image_editor_preview_source import verify as verify_preview
@@ -156,7 +165,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         preview_proof = verify_preview(data, preview, lambda digest: archive.read(f'assets/{digest}.png'),
                                      source_size=(declared['width'], declared['height']))
         if not crops and not repeat_checks and not quality_checks and pair is None:
-            return 'Original SHA-256 matched.' + _preview_detail(preview_proof, preview["preview_carrier"])
+            return 'Original SHA-256 matched.' + _preview_detail(preview_proof, preview["preview_carrier"]) + native_detail
     else:
         preview_proof = None
     with Image.open(io.BytesIO(data)) as raw:
@@ -209,7 +218,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
               if crop_count else 'Original SHA-256 matched.')
     if preview_proof:
         detail += _preview_detail(preview_proof, preview["preview_carrier"])
-    elif not crop_count:
+    elif not crop_count and not native_detail:
         detail += ' No unannotated crops were recorded.'
     if pair is not None:
         detail += f' Recomputed {pair["different_pixels"]} differing pixels in the exact aligned comparison.'
@@ -225,7 +234,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         detail += f' Recomputed repeat-pass overlap for {repeated} source regions from their recorded masks.'
     if quality:
         detail += f' Recomputed source quality masks for {quality} image {"check" if quality == 1 else "checks"}.'
-    return detail
+    return detail + native_detail
 
 
 def _preview_detail(proof, carrier):

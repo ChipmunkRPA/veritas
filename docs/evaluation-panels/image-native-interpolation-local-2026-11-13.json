@@ -1,0 +1,45 @@
+{
+  "outcomes": [
+    {
+      "case": "128_x_odd_sharp",
+      "status": "matched",
+      "source_replay": true,
+      "pdf_json_parity": true,
+      "exact_native_crop": true
+    },
+    {
+      "case": "original",
+      "status": "no_match",
+      "source_replay": true,
+      "pdf_json_parity": true,
+      "exact_native_crop": false
+    },
+    {
+      "case": "resize",
+      "status": "no_repeatable_stencil",
+      "source_replay": true,
+      "pdf_json_parity": true,
+      "exact_native_crop": false
+    },
+    {
+      "case": "eight_bit",
+      "status": "unsupported_png",
+      "source_replay": true,
+      "pdf_json_parity": true,
+      "exact_native_crop": false
+    }
+  ],
+  "unpaid_jobs": 0,
+  "profile": "full",
+  "template": "veritas-report-2.0.r122",
+  "schema": "chipmunk.image-native-interpolation-local/1",
+  "browser": {
+    "checked_uploads": 4,
+    "json_matches": true,
+    "page_errors": 0,
+    "plain_view": true
+  },
+  "checkout": "simulated USD 9.99",
+  "scope": "four retained held PNG cases in isolated worker with learned checks disabled",
+  "rollback_same_decision": true
+}

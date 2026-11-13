@@ -55,6 +55,7 @@ IMAGE_EDITOR_PREVIEW = 'thumbnail_evidence'
 EMAIL_CLASSIFIER_SCOPE = 'email_classifier_input_scope_sha256'
 WRITING_POSITION = 'writing_position_review_sha256'
 WORD_TRACKED_CHANGES = 'word_tracked_changes_sha256'
+IMAGE_INTERPOLATION = 'native_interpolation_review_sha256'
 VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3', 'image-evidence-4', 'image-evidence-5',
                       'image-evidence-6', IMAGE_PAIR_VERSION} | REFLECTION_VERSIONS, 'video': VIDEO_VERSIONS,
             'audio': {'audio-evidence-1', 'audio-evidence-2', 'audio-evidence-3'}, 'document': document_scope.VERSIONS}
@@ -91,7 +92,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              IMAGE_EDITOR_PREVIEW, face_return_coverage.COMMITMENT, email_alternatives.COMMITMENT,
                              face_short_window_binding.COMMITMENT, scene_return_binding.COMMITMENT,
                              scene_return_binding.COVERAGE_COMMITMENT, WRITING_POSITION,
-                             EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES},
+                             EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, IMAGE_INTERPOLATION},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
     binding = bundle['evidence']
@@ -193,9 +194,14 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         _require(not {scene_return_binding.COMMITMENT, scene_return_binding.COVERAGE_COMMITMENT}.intersection(result),
                  'Picture-change observations belong to video evidence')
     if analysis['kind'] == 'image':
+        from app.evidence import image_interpolation_binding as interpolation
         from app.evidence.image_eligibility import validate_inspection_coverage
 
+        interpolation.validate(evidence, result.get(interpolation.COMMITMENT))
         scope = (result.get('decision') or {}).get('image_copy_coverage')
+        if native := evidence.get(interpolation.KEY):
+            _require((native['record']['status'] == 'provenance') == (scope is not None),
+                     'Interpolation evidence differs from the provenance disposition')
         image_base = evidence
         if evidence['version'] == IMAGE_PAIR_VERSION:
             from app.evidence import image_embedded_pair_binding
@@ -233,6 +239,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                                  'Copy evidence search coverage is inconsistent')
                 else:
                     _require(cue is None and 'copy_donor' not in assets, 'Copy evidence is missing its component mask')
+    _require(analysis['kind'] == 'image' or IMAGE_INTERPOLATION not in result,
+             'Native interpolation commitments require image evidence')
     _require(analysis['kind'] == 'document' or email_alternatives.COMMITMENT not in result,
              'Email body rendition commitments require document evidence')
     _require(analysis['kind'] == 'document' or WRITING_POSITION not in result,
@@ -300,6 +308,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             validate_acoustic_context(acoustic, source=evidence['source'], voice_packets=evidence['packets'])
     groups = [group for part in parts for group in
               [part.get('overview') or {}, *(p.get('artifacts') or {} for p in part.get('packets', []))]]
+    if analysis['kind'] == 'image':
+        groups.append(interpolation.assets(evidence))
     thumbnail_assets = set()
     if IMAGE_EDITOR_PREVIEW in result:
         from app.evidence import image_editor_preview_binding

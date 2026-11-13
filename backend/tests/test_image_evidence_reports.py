@@ -168,6 +168,9 @@ def test_summary_pdf_and_manifest_present_non_mirrored_pair(packet_fixture, monk
     db, store, analysis, _, _ = packet_fixture
     monkeypatch.setattr(settings, "environment", "dev")
     monkeypatch.setattr(settings, "image_embedded_pair_review", False)
+    monkeypatch.setattr(settings, "image_small_png_copy_review", False)
+    monkeypatch.setattr(settings, "image_jpeg_block_copy_review", False)
+    monkeypatch.setattr(settings, "image_jpeg_offgrid_copy_review", False)
     monkeypatch.setattr(settings, "image_affine_copy_review", affine_review)
     if basis == "geometric_features":
         monkeypatch.setattr("app.detectors.image.copy_similarity.analyse_translation", lambda _: ("no_pair", []))

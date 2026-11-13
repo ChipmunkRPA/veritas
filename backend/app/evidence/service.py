@@ -84,12 +84,14 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
     """Only declared presentation assets may be fetched; source/raw hashes are not download grants."""
     if document is None:
         return {}
+    from app.evidence.image_interpolation_binding import assets as interpolation_assets
     parts = [document]
     if document.get("version") in NESTED_VERSIONS:
         parts.extend(document[key] for key in ("audio", "av"))
     groups = [group for part in parts for group in
               [part.get("overview") or {}, *(packet.get("artifacts") or {} for packet in part.get("packets", []))]]
     for part in parts:
+        groups.append(interpolation_assets(part))
         groups.extend(pair["artifacts"] for record in copy_records(embedded_pair.base_document(part)) for pair in record["pairs"])
         groups.append(embedded_pair.artifacts(part))
         context = part.get("acoustic_context")

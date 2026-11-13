@@ -4,7 +4,8 @@
 {% set translation = v.image_evidence.get('copy_translation') %}
 {% set affine = v.image_evidence.get('copy_affine') %}
 {% set exact_pair = v.image_evidence.get('embedded_pair_difference') %}
-{% set evidence_detail = v.image_evidence.packets or v.image_evidence.get('inspection_checks') or (similarity and similarity.pairs) or (translation and translation.pairs) or (affine and affine.pairs) or (exact_pair and exact_pair.pair) %}
+{% set native_interpolation = v.image_evidence.get('native_interpolation_review') %}
+{% set evidence_detail = v.image_evidence.packets or v.image_evidence.get('inspection_checks') or (similarity and similarity.pairs) or (translation and translation.pairs) or (affine and affine.pairs) or (exact_pair and exact_pair.pair) or native_interpolation %}
 <section class="{% if evidence_detail %}chapter{% else %}chapter-cont{% endif %} image-evidence{% if s.report.profile in ['summary', 'newsroom'] and evidence_detail %} evidence-appendix{% endif %}" aria-labelledby="image-evidence-heading">
 <h2 class="chapter-title" id="image-evidence-heading">{% if v.get('number', {}).get('source-evidence') %}<span class="n">{{ v.number['source-evidence'] }}</span>{% endif %}Image evidence</h2>
 <p>{{ v.image_evidence.note }}</p>
@@ -12,6 +13,17 @@
 <p class="caption">Evidence set {{ v.image_evidence.version }} · <span class="mono">{{ v.image_evidence.sha256 }}</span></p>
 <p class="caption">Coordinates are in the EXIF-oriented original, {{ v.image_evidence.source.width }} × {{ v.image_evidence.source.height }} pixels.</p>
 {% if v.image_evidence.withheld %}<p class="caption">Source images and crops are withheld in this redacted copy. The evidence references and observations remain available.</p>{% endif %}
+{% if native_interpolation %}
+{% set reading = native_interpolation.record %}
+<h3>Local pixel interpolation</h3>
+<p>{{ reading.observation }}</p>
+<p class="caption">{{ reading.scope }} {{ reading.limitation }}</p>
+{% if reading.supported_cells %}<p class="caption">{{ reading.supported_cells }} of 3,072 native image cells supplied comparable measurements.</p>{% endif %}
+{% if reading.region %}<p class="caption">Source columns [{{ reading.region[0] }}, {{ reading.region[2] }}) and rows [{{ reading.region[1] }}, {{ reading.region[3] }}). Right and bottom edges are exclusive.</p>{% endif %}
+{% if not v.image_evidence.withheld %}
+<div class="evidence-plates">{% for image in native_interpolation.images %}<figure><img src="{{ image.uri }}" alt="{{ image.label }}"><figcaption>{{ image.label }}</figcaption></figure>{% endfor %}</div>
+{% endif %}
+{% endif %}
 {% if similarity and similarity.status == 'skipped_trusted_ai_credentials' %}
 <p>{{ similarity.observation }}</p>
 {% else %}
@@ -160,7 +172,7 @@
 <p class="caption evidence-asset-hashes">{% for image in packet.images %}{{ image.label }} SHA-256 <span class="mono">{{ image.sha256 }}</span>{% if not loop.last %}<br>{% endif %}{% endfor %}</p>
 </article>
 {% else %}
-<p>{% if v.image_evidence.get('inspection_checks') %}No local editing candidates are shown. The coverage above explains what was measured and withheld.{% elif (translation and translation.pairs) or (exact_pair and exact_pair.pair) %}No other local editing regions were recorded.{% else %}No separate local editing regions were recorded.{% endif %} An overall classification does not identify altered pixels. This does not establish that the image is unaltered.</p>
+<p>{% if (translation and translation.pairs) or (exact_pair and exact_pair.pair) or (native_interpolation and native_interpolation.record.region) %}No other local editing regions were recorded.{% elif v.image_evidence.get('inspection_checks') %}No local editing candidates are shown. The coverage above explains what was measured and withheld.{% else %}No separate local editing regions were recorded.{% endif %} An overall classification does not identify altered pixels. This does not establish that the image is unaltered.</p>
 {% endfor %}
 {% if v.image_evidence.omitted_regions %}<p class="caption">{{ v.image_evidence.omitted_regions }} additional candidate regions were omitted from this bounded evidence set.</p>{% endif %}
 {% for note in v.image_evidence.limitations %}<p class="caption">{{ note }}</p>{% endfor %}

@@ -10,6 +10,7 @@ from PIL import Image
 
 from app.core.canonical import canonical_hash
 from app.evidence import image_embedded_pair_binding as embedded_pair
+from app.evidence import image_interpolation_binding as interpolation
 from app.reports.image_eligibility import eligibility_view, inspection_check_view
 from app.storage.objects import ObjectIntegrityError, ObjectStore, default_store
 
@@ -77,6 +78,8 @@ def capture(db: Session, analysis: Analysis, *, store: ObjectStore | None = None
             _asset_bytes(packet["artifacts"][role], store)
     for asset in embedded_pair.artifacts(document).values():
         _asset_bytes(asset, store)
+    for asset in interpolation.assets(document).values():
+        _asset_bytes(asset, store)
     return copy.deepcopy(document)
 
 
@@ -117,6 +120,12 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
 
     validate_assets(document, store)
     withheld = snapshot.report.profile == "newsroom" or snapshot.report.redacted
+    native_review = copy.deepcopy(document.get(interpolation.KEY))
+    if native_review is not None:
+        native_review["images"] = [
+            {"label": label, "uri": None if withheld else "data:image/png;base64," + base64.b64encode(_asset_bytes(asset, store)).decode("ascii")}
+            for role, label in (("context", "Region in the submitted image"), ("crop", "Original 16-bit source crop"))
+            if (asset := native_review["artifacts"].get(role)) is not None]
     packets = []
     for packet in document["packets"]:
         images = []
@@ -212,7 +221,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "source_sha256": document["source"]["sha256"], "source": document["source"], "packets": packets,
             "limitations": document["limitations"], "omitted_regions": document["omitted_regions"], "withheld": withheld,
             "inspection_checks": inspection_checks,
-            "comparison": comparison, **copy_checks, embedded_pair.KEY: exact,
+            "comparison": comparison, **copy_checks, embedded_pair.KEY: exact, interpolation.KEY: native_review,
             "note": "Each plate is derived from the recorded original and the same evidence set used by the JSON export. "
                     "Inspection regions alone do not establish editing or AI generation."}
 
@@ -237,4 +246,8 @@ def manifest(snapshot: ReportSnapshot) -> dict[str, Any] | None:
         result[embedded_pair.KEY] = copy.deepcopy(document[embedded_pair.KEY])
         result["artifacts"].extend({"packet_id": "D01", "role": role, "sha256": asset["sha256"]}
                                    for role, asset in embedded_pair.artifacts(document).items())
+    if interpolation.KEY in document:
+        result[interpolation.KEY] = copy.deepcopy(document[interpolation.KEY]["record"])
+        result["artifacts"].extend({"packet_id": "I01", "role": role, "sha256": asset["sha256"]}
+                                   for role, asset in interpolation.assets(document).items())
     return result

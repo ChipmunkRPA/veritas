@@ -39,10 +39,13 @@ def public_result(result: dict) -> dict:
     copy_coverage = {}
     source_coverage = {}
     if result.get('kind') == 'image':
+        from app.evidence import image_interpolation_binding as interpolation
         from app.evidence.image_copy_similarity_binding import result_skip
 
         if scope := result_skip(result):
             copy_coverage['image_copy_coverage'] = scope
+        if native := interpolation.from_result(result):
+            source_coverage[interpolation.COMMITMENT] = canonical_hash(native)
     if result.get('kind') == 'video':
         from app.evidence.face_return_coverage import COMMITMENT, from_result
 

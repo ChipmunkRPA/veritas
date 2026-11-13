@@ -425,7 +425,9 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
   }, [hash, key, set.id, set.packets, set.status, showAll])
   const localised = set.packets.some((p) => p.evidence_type === 'localisation')
   const copySkipped = set.copy_similarity?.status === 'skipped_trusted_ai_credentials'
-  const hasCopyPair = set.copy_similarity?.pairs.length || set.copy_translation?.pairs.length || set.copy_affine?.pairs.length || set.embedded_pair_difference?.pair
+  const interpolation = set.native_interpolation_review
+  const region = interpolation?.record.region
+  const hasLocalEvidence = set.copy_similarity?.pairs.length || set.copy_translation?.pairs.length || set.copy_affine?.pairs.length || set.embedded_pair_difference?.pair || region
   const shown = showAll ? set.packets : set.packets.slice(0, 3)
   return (
     <div ref={root} data-testid="image-evidence-content" data-evidence-set={set.id ?? ''} data-evidence-hash={set.sha256 ?? ''}>
@@ -434,12 +436,28 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
       <CopySimilarity set={set} field="copy_translation" token={token} mediaReady={mediaReady} />
       <CopySimilarity set={set} field="copy_affine" token={token} mediaReady={mediaReady} />
       <EmbeddedPairDifference set={set} token={token} mediaReady={mediaReady} />
+      {interpolation && <section aria-label="Local pixel interpolation" className="mt-4 rounded-md border border-border p-4">
+        <h3 className="m-0 text-body font-medium">Local pixel interpolation</h3>
+        <p className="mt-2 mb-0 text-small">{interpolation.record.observation}</p>
+        {!!interpolation.record.supported_cells && <p className="mt-2 mb-0 text-small">{interpolation.record.supported_cells.toLocaleString('en-US')} of 3,072 native image cells supplied comparable measurements.</p>}
+        {region && <p className="mt-2 mb-0 text-small">Source columns [{region[0]}, {region[2]}) and rows [{region[1]}, {region[3]}). Right and bottom edges are exclusive.</p>}
+        <p className="mt-2 mb-0 text-small text-text-muted">{interpolation.record.scope} {interpolation.record.limitation}</p>
+        {region && <div className="mt-3 grid gap-4 sm:grid-cols-2">{([
+          ['context', 'Region in the submitted image'], ['crop', 'Original 16-bit source crop'],
+        ] as const).map(([role, label]) => {
+          const asset = interpolation.artifacts[role]
+          return asset && <figure className="m-0 min-w-0" key={role}>
+            <EvidencePicture set={set} artifact={asset} token={token} ready={mediaReady} alt={label} />
+            <figcaption className="mt-2 text-small text-text-muted">{label}</figcaption>
+          </figure>
+        })}</div>}
+      </section>}
       <RegionalComparison set={set} token={token} mediaReady={mediaReady} />
       {set.status === 'not_generated' ? <p role="status" className="mt-3 mb-0 text-small text-text-muted">
         Region evidence has not been prepared for this result. The analysis record is still available; re-run the image analysis to create crops and supporting observations.
       </p> : set.packets.length === 0 ? (!copySkipped && <p className="mt-3 mb-0 text-small text-text-muted" data-testid="image-evidence-empty">
         {set.coverage?.inspection_checks?.length ? 'No local editing candidates are shown. The coverage below explains what was measured and withheld.'
-          : hasCopyPair ? 'No other local editing regions were recorded.' : 'No separate local editing regions were recorded.'}
+          : hasLocalEvidence ? 'No other local editing regions were recorded.' : 'No separate local editing regions were recorded.'}
         {' '}A whole-image score cannot identify which pixels were edited, and this does not establish that the image is unaltered.
       </p>) : <>
         <p className="mt-3 mb-0 text-body text-text-muted max-w-[80ch]">

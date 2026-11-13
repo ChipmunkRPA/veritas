@@ -27,6 +27,7 @@ from app.core.canonical import FLOAT_DP, canonical_hash, canonical_json
 from app.detectors.image import sharp_boundary
 from app.engine.media import MAX_PIXELS, MAX_SIDE, refuse_truncated_images
 from app.evidence import image_flip_mask
+from app.evidence import image_interpolation_binding as interpolation
 from app.evidence.image_eligibility import (
     SOURCE_QUALITY,
     validate_flip_consistency,
@@ -82,6 +83,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         raise PacketIntegrityError("Image evidence has invalid source dimensions")
     try:
         validate_inspection_coverage(document)
+        interpolation.validate(document, source.get(interpolation.COMMITMENT))
     except (KeyError, TypeError, ValueError) as exc:
         raise PacketIntegrityError(str(exc)) from exc
     ids = set()
@@ -428,7 +430,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if canonical_hash(result) != analysis.result_hash or result.get("input", {}).get("sha256") != analysis.sha256:
         raise PacketIntegrityError("Published result or source identity does not match")
     set_id = current_set_id(analysis)
-    source, orientation = _source(_verified(store, analysis.sha256))
+    original = _verified(store, analysis.sha256)
+    source, orientation = _source(original)
     width, height = source.size
     document: dict[str, Any] = {
         "schema": SCHEMA, "status": "ready", "id": set_id, "version": VERSION,
@@ -438,6 +441,21 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         "packets": [], "limitations": [], "omitted_regions": 0,
         "overview": {}, "coverage": {"inspection_checks": []},
     }
+    if recorded := interpolation.from_result(result):
+        from app.evidence.image_interpolation_source import plates
+
+        document["source"][interpolation.COMMITMENT] = canonical_hash(recorded)
+        document[interpolation.KEY] = {"record": recorded, "artifacts": {}}
+        if recorded["region"] is not None:
+            for role, image in plates(original, recorded["region"]).items():
+                ok, png = cv2.imencode(".png", image)
+                if not ok:
+                    raise PacketIntegrityError("Could not encode interpolation evidence")
+                art = register_artefact(db, store, png.tobytes(), media_type="image/png", role="preview",
+                                        created_by=CREATOR, analysis_id=analysis.id)
+                document[interpolation.KEY]["artifacts"][role] = {
+                    "sha256": art.sha256, "media_type": "image/png", "width": image.shape[1], "height": image.shape[0],
+                    "url": f"/api/v2/analyses/{analysis.id}/evidence-packets/{set_id}/images/{art.sha256}.png"}
     exhibits = result.get("exhibits", [])
     region_exhibits = [e for e in exhibits if e.get("kind") == "regions" and e.get("frame_pts") is None]
     eligible = [e for e in exhibits if e.get("kind") == "heatmap" and e.get("semantics") in {"error_level", "residual", "p_manipulated"}

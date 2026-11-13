@@ -1169,6 +1169,71 @@ The selected ledgers cover [JPEG preview regions](image-thumbnail-extent-transfe
 For source labels, decoder output, or predictive performance, follow the
 native instructions for the claim you are reviewing.
 
+### Replay recent evaluations from a clean checkout
+
+From the repository root, use Python 3.11 or later. These commands read the
+checked-in receipts and need only the standard library.
+
+```sh
+python3 -B -IS backend/scripts/review_audio_nemotron_noise_transfer.py review docs/evaluation-panels/audio-nemotron-noise-transfer-2026-11-12.json
+python3 -B -EsS backend/scripts/review_audio_nemotron_noise_confirmation.py review docs/evaluation-panels/audio-nemotron-noise-confirmation-2026-11-12.json
+python3 -B -IS backend/scripts/review_writing_punctuation_stability.py docs/evaluation-panels/writing-punctuation-stability-2026-11-12.json
+```
+
+- The audio readers recalculate added flags, genuine false alarms and the
+  advancement decisions from saved scores on two separate held panels.
+  [Method and native replay](audio-nemotron-noise-transfer-2026-11-12.md#replay)
+- The writing reader recalculates 108 cases, including the useful edit
+  locations the proposed punctuation guard would suppress.
+  [Method and replay](writing-punctuation-stability-2026-11-12.md#replay)
+
+The image editor-thumbnail and 720p video retry receipts publish aggregate
+counts. This command checks their recorded count relationships.
+
+```sh
+python3 -B -IS - <<'PY'
+import json
+from pathlib import Path
+
+panels = Path('docs/evaluation-panels')
+image = json.loads((panels / 'image-editor-preview-2026-11-12.json').read_bytes())
+video = json.loads((panels / 'video-face-hd-sparse-retry-2026-11-12.json').read_bytes())
+
+roles = image['by_role']
+image_cases = sum(row['views'] for row in roles.values())
+useful_images = roles['generated']['useful']
+assert image_cases == image['cases'] == 166
+assert all(sum(row['status'].values()) == row['views'] for row in roles.values())
+assert useful_images == image['counters']['useful_generated'] == 6
+malformed = image['malformed_rejected']
+assert len(malformed) == 6 and all(malformed.values())
+assert image['counters']['malformed_acceptances'] == 0
+assert sum(row['status'] == 'comparable' and row['regions'] == 0
+           for row in image['native_controls']) == image['counters']['native_controls'] == 2
+
+strata = video['held']['strata'].values()
+video_cases = sum(row['files'] for row in strata)
+retries = sum(row['retry'] for row in strata)
+before = sum(row['before'] for row in strata)
+after = sum(row['after'] for row in strata)
+assert video_cases == 48 and retries == 0
+assert sum(row['truth'] for row in strata) == 32 and before == after == 14
+assert after - before == video['held']['gains']['added_correct'] == 0
+assert video['held']['advances'] is False and video['admitted_to_serving'] is False
+print(f'Image: {image_cases} cases, {useful_images} useful generated-edit locations')
+print(f'Video: {video_cases} cases, {retries} retries, {before} useful ranges')
+PY
+```
+
+For native image replay, obtain the earlier image panel and the two pinned
+Wikimedia originals, and install Pillow, NumPy and OpenCV. The source check
+uses a supplied original, evidence export and crop PNGs.
+[Image replay instructions](image-editor-preview-2026-11-12.md#local-verification)
+For native video replay, use the retained source archive, the prepared held
+run with its exact video deliveries, FFmpeg/FFprobe and the backend Python
+environment. Recreating the Full comparison also requires the pinned detector
+assets. [Video replay instructions](video-face-hd-sparse-retry-2026-11-12.md#replay)
+
 ### Replay four measured panels from a clean checkout
 
 Run these commands from the repository root with Python 3.11 or later. They use

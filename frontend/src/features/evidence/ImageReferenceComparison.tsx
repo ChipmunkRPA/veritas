@@ -5,7 +5,7 @@ import { saveBlob } from '../../lib/api/reports'
 import {
   compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
-  IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, orientationLabels, referencePngSrc,
+  IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, orientationLabels, referencePngSrc, structureJpegSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -73,6 +73,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const delivery = comparison.schema === jpegPngEnvelopeSchema
   const sameJpegFraming = comparison.schema === exactJpegIdentitySchema ? alignment : undefined
   const shiftedJpeg = comparison.schema === shiftedJpegSchema ? alignment : undefined
+  const sameStructureFraming = comparison.schema === structureJpegSchema ? comparison.same_framing_structure : undefined
   const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' || exact || delivery
     ? comparison.reference_crop_bounds : undefined
   const resized = comparable && (Boolean(cropped) || comparison.schema === 'chipmunk.image-reference-comparison/3')
@@ -127,6 +128,11 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     </p>}
     {shiftedJpeg && <p className="mt-2 mb-0 text-small text-text-muted">
       After whole-pixel alignment, {shiftedJpeg.exact_tiles?.toLocaleString('en-US')} of {shiftedJpeg.full_tiles?.toLocaleString('en-US')} complete JPEG blocks matched in the area compared. Ordinary edits can produce highlighted differences.
+    </p>}
+    {sameStructureFraming && <p className="mt-2 mb-0 text-small text-text-muted">
+      {sameStructureFraming.aligned_tiles.length} of {sameStructureFraming.detailed_tiles} detailed areas matched across the two images.
+      {' '}After accounting for overall tone and JPEG compression, highlights require a local change in both color and structure.
+      {' '}Ordinary edits can produce these differences. AI origin remains undetermined.
     </p>}
     {comparable && exact && <p className="mt-2 mb-0 text-small text-text-muted">
       {completeMatch ? 'The resized area matches every submitted pixel.'

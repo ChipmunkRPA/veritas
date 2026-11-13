@@ -123,10 +123,13 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
     source = document["source"]
     sampling = result.get("manifest", {}).get("sampling", {})
     if kind == "video":
+        from app.evidence.scene_return_binding import COMMITMENT
+
         if (sampling.get("frame_anchor_version") != "stream-pts-rgb24/1"
                 or any(source.get(key) != sampling.get(key) or not source.get(key)
                        for key in ("frame_table_sha256", "frame_anchor_sha256"))
                 or source.get("timeline_origin_s") != sampling.get("timeline_origin_s")
+                or source.get(COMMITMENT) != sampling.get(COMMITMENT)
                 or ("picture_hold" in document and source.get("picture_hold_sha256") != sampling.get("picture_hold_sha256"))):
             raise ObjectIntegrityError("Video evidence does not match the published source-frame commitments")
     elif kind == "audio":
@@ -162,6 +165,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         face_short_window_binding,
         face_spatial_cut_binding,
         picture_hold_binding,
+        scene_return_binding,
         whole_face_binding,
     )
     from app.evidence.face_interval_binding import validate_packet as validate_face_interval
@@ -207,8 +211,12 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
     try:
         picture_hold_binding.validate_record(document, records["render"].get("picture_hold"), table_pts=table.pts,
                                              interpolated=table.interpolated, canonical_hash=canonical_hash)
+        scene = records["render"].get(scene_return_binding.KEY)
+        if (canonical_hash(scene) if scene is not None else None) != source.get(scene_return_binding.COMMITMENT):
+            raise ValueError("Picture-change record differs from the frozen render output")
+        scene_return_binding.validate(document, scene, pts=table.pts, canonical_hash=canonical_hash)
     except (ValueError, KeyError, TypeError) as error:
-        raise ObjectIntegrityError("Picture hold differs from the recorded native inspection") from error
+        raise ObjectIntegrityError("Picture evidence differs from the recorded native inspection") from error
     for packet in document["packets"]:
         validate_clip_binding(packet, source)
         validate_face_interval(packet, source, table_pts=table.pts, interpolated=table.interpolated)
@@ -848,6 +856,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             repeated_sequence = packet.get("picture_sequence")
             row["picture_sequence"] = copy.deepcopy(repeated_sequence)
             mouth_hold = packet.get("mouth_local_hold")
+            scene_return = packet.get("scene_return")
+            if scene_return is not None:
+                row["scene_return"] = copy.deepcopy(scene_return)
             if sheet := packet["artifacts"].get("contact_sheet"):
                 caption = ("Endpoints of both repeated ranges" if repeated_sequence else "Endpoints of the verified hold"
                            if hold else "Sampled frames (not continuous playback)")
@@ -870,9 +881,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                       "first_refined": position == coarse_count and boundary_count > 0,
                                       "cut_frame": position >= coarse_count + boundary_count,
                                       "first_cut": position == coarse_count + boundary_count,
-                                      "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact decoded source frame" if hold or repeated_sequence or mouth_hold else "Exact analysed source frame", "context": "Frame context", "crop": "Exact measured mouth-region crop" if mouth_hold else "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
+                                      "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact decoded source frame" if hold or repeated_sequence or mouth_hold or scene_return else "Exact analysed source frame", "context": "Frame context", "crop": "Exact measured mouth-region crop" if mouth_hold else "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
                                                  for role in ("original", "context", "crop", "measured_patch")
-                                                 if role in frame["artifact_refs"] and (not (hold or repeated_sequence) or role == "original")
+                                                 if role in frame["artifact_refs"] and (not (hold or repeated_sequence or scene_return) or role == "original")
                                                  and (not mouth_hold or role != "context")]})
         elif packet_kind == "audio":
             row["images"] = [plate(role, packet["artifacts"][role]) for role in ("waveform", "scores")]
@@ -999,6 +1010,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                     f"{repeat[side]['start_stream_s']:.3f}-{repeat[side]['end_stream_s']:.3f} s" for side in ("first", "second"))
             if packet.get("mouth_local_hold"):
                 row["locator"] = f"Mouth-region hold {row['window']['start_stream_s']:.3f}-{row['window']['end_stream_s']:.3f} s"
+            if scene_return:
+                row["locator"] = f"Picture change {scene_return['start_stream_s']:.3f}-{scene_return['end_stream_s']:.3f} s"
         else:
             locations = []
             for anchor in packet["anchors"]:

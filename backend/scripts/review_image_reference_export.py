@@ -28,6 +28,7 @@ EXACT_PNG_CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/5"
 JPEG_PNG_ENVELOPE_SCHEMA = "chipmunk.image-reference-comparison/10"
 EXACT_JPEG_IDENTITY_SCHEMA = "chipmunk.image-reference-comparison/11"
 SHIFTED_JPEG_SCHEMA = "chipmunk.image-reference-comparison/12"
+STRUCTURE_JPEG_SCHEMA = "chipmunk.image-reference-comparison/13"
 ORIENTATION_SCHEMA = "chipmunk.image-reference-comparison/6"
 CROPPED_RESIZE_SCHEMAS = {CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, JPEG_PNG_ENVELOPE_SCHEMA}
 ORIENTATIONS = {
@@ -335,11 +336,11 @@ def _same_replayed_fields(received, expected):
     return received == expected
 
 
-def _exact_jpeg_replay(comparison, earlier, submitted, sub):
+def _jpeg_replay(comparison, earlier, submitted, sub):
     try:
         from app.evidence.image_reference import inspect
     except ImportError as error:
-        raise ValueError("Use the backend Python environment and run this reviewer as a module for exact JPEG exports") from error
+        raise ValueError("Use the backend Python environment and run this reviewer as a module for JPEG exports") from error
     def source_fields(record):
         return {key: value for key, value in record.items() if key not in {"mask", "regions"}} | {
             "regions": [{key: value for key, value in region.items()
@@ -349,18 +350,21 @@ def _exact_jpeg_replay(comparison, earlier, submitted, sub):
 
     with TemporaryDirectory() as temporary:
         evidence = Path(temporary) / "evidence"
+        structure = comparison["schema"] == STRUCTURE_JPEG_SCHEMA
         result = inspect(earlier, submitted, evidence_dir=evidence, allow_proportional_resize=True,
                          allow_oriented_crop=True, allow_oriented_resize=True, allow_embedded_photo=True,
-                         allow_exact_jpeg_identity=comparison["schema"] == EXACT_JPEG_IDENTITY_SCHEMA,
-                         allow_shifted_jpeg=comparison["schema"] == SHIFTED_JPEG_SCHEMA)
+                         allow_exact_jpeg_identity=structure or comparison["schema"] == EXACT_JPEG_IDENTITY_SCHEMA,
+                         allow_shifted_jpeg=structure or comparison["schema"] == SHIFTED_JPEG_SCHEMA,
+                         allow_structure_jpeg=structure)
         _require(result.get("schema") == comparison["schema"]
                  and _same_replayed_fields(source_fields(comparison), source_fields(result))
                  and all("submitted_overlay" in region for region in comparison["regions"]),
-                 "Exact JPEG source proof, regions or artifacts differ from recomputed evidence")
+                 "Exact JPEG source proof, regions or artifacts differ from recomputed evidence" if not structure
+                 else "JPEG structure proof, regions or artifacts differ from recomputed evidence")
         if "mask" not in result:
             return None
         with Image.open(evidence / result["mask"]["file"], formats=["PNG"]) as mask:
-            _require(mask.size == sub.size and mask.mode == "L", "Exact JPEG mask differs from source dimensions")
+            _require(mask.size == sub.size and mask.mode == "L", "JPEG mask differs from source dimensions")
             return mask.tobytes()
 
 
@@ -385,7 +389,7 @@ def review(export, earlier, submitted):
         sub = _source(stack, submitted_bytes, comparison["submitted"])
         resized = comparison["schema"] == RESIZE_SCHEMA or comparison["schema"] in CROPPED_RESIZE_SCHEMAS
         oriented = comparison["schema"] == ORIENTATION_SCHEMA
-        exact_jpeg = comparison["schema"] in {EXACT_JPEG_IDENTITY_SCHEMA, SHIFTED_JPEG_SCHEMA}
+        jpeg = comparison["schema"] in {EXACT_JPEG_IDENTITY_SCHEMA, SHIFTED_JPEG_SCHEMA, STRUCTURE_JPEG_SCHEMA}
         crop = comparison.get("reference_crop_bounds") if comparison["schema"] in CROPPED_RESIZE_SCHEMAS else None
         if resized:
             carrier = stack.enter_context(Image.open(io.BytesIO(submitted_bytes), formats=["PNG", "JPEG"]))
@@ -398,8 +402,8 @@ def review(export, earlier, submitted):
             mismatch, inverse = _orientation_replay(comparison, ref, sub, carrier)
             stack.enter_context(mismatch)
             overlap = (0, 0, sub.width, sub.height)
-        elif exact_jpeg:
-            expected_jpeg_mask = _exact_jpeg_replay(comparison, earlier, submitted, sub)
+        elif jpeg:
+            expected_jpeg_mask = _jpeg_replay(comparison, earlier, submitted, sub)
             if comparison["schema"] == SHIFTED_JPEG_SCHEMA:
                 alignment = comparison["alignment"]
                 dx, dy = (alignment["reference_minus_submitted"][axis] for axis in ("x", "y"))
@@ -417,7 +421,7 @@ def review(export, earlier, submitted):
         if resized:
             _require(expected_mask is not None and mask.tobytes() == (expected_mask.astype("uint8") * 255).tobytes(),
                      "Difference mask pixels differ from the recomputed resize comparison")
-        if exact_jpeg:
+        if jpeg:
             _require(mask.tobytes() == expected_jpeg_mask, "Difference mask pixels differ from the recomputed JPEG comparison")
         if oriented:
             with ImageChops.subtract(mask, mismatch) as unsupported:

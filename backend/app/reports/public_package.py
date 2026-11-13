@@ -23,6 +23,7 @@ from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.evidence import face_short_window_binding as face_windows
 from app.evidence import image_editor_preview_binding as editor_preview
+from app.evidence import scene_return_binding
 from app.evidence.service import ASSET_TYPES, asset_refs
 from app.reports import package as legacy
 from app.reports import signing, snapshot
@@ -49,6 +50,8 @@ def public_result(result: dict) -> dict:
             source_coverage[COMMITMENT] = canonical_hash(brief_review)
         if window_review := face_windows.from_result(result):
             source_coverage[face_windows.COMMITMENT] = canonical_hash(window_review)
+        if scene_commitment := result.get("manifest", {}).get("sampling", {}).get(scene_return_binding.COMMITMENT):
+            source_coverage[scene_return_binding.COMMITMENT] = scene_commitment
     if result.get('kind') == 'document':
         from app.evidence import document_passage_position
         from app.evidence.email_alternatives import COMMITMENT, result_review

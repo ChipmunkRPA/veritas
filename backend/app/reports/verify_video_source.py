@@ -24,8 +24,9 @@ from app.detectors.video import (
     face_short_proposal,
     face_spatial_cut,
     picture_motion,
+    scene_return,
 )
-from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, probe_frames
+from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, decode_stream, probe_frames
 from app.detectors.video.frames import probe as probe_container
 from app.detectors.video.lipsync import source_mouth_patch
 from app.evidence import (
@@ -38,6 +39,7 @@ from app.evidence import (
     mouth_local_hold_binding,
     picture_hold_binding,
     picture_sequence,
+    scene_return_binding,
 )
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.face_return_binding import DENSE_ENCODING, FINE_SCENE_METHOD, GUARDED_METHODS
@@ -265,6 +267,20 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError("The original video differs from its measured face-window carrier or cadence")
 
     picture_hold_binding.validate(evidence)
+    scene_return_binding.validate(evidence, pts=table.pts, canonical_hash=canonical_hash)
+    if source.get(scene_return_binding.COMMITMENT):
+        delivery = probe_container(original, include_codec_tag=True)
+        scene_encoding = (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag"))
+        if scene_encoding != ("hevc", "yuv420p", "hvc1") or face_return.source_carrier(original) != "mp4":
+            raise ValueError("Picture-change evidence uses a different video delivery profile")
+        with closing(decode_stream(original, table, timeout_s=20)) as frames:
+            found = scene_return.detect(frames, table)
+        [packet] = [item for item in evidence["packets"] if item["id"] == scene_return_binding.PACKET_ID]
+        record = packet[scene_return_binding.KEY]
+        if found is None or canonical_hash(scene_return_binding.record(
+            found, table, [item["decoded_rgb_sha256"] for item in record["anchors"]],
+        )) != source[scene_return_binding.COMMITMENT]:
+            raise ValueError("The standalone picture-change interval or tile support differs from the original")
     hold = evidence.get("picture_hold") or {}
     sequence = hold.get("sequence_review")
     motion = hold.get("motion_sequence_review")

@@ -135,8 +135,17 @@ SPECIALIST_TRANSFER = {
         f"{PANELS}/writing-multiblock-independent-2026-11-12.json",
     )),
 }
+LOCAL_EVIDENCE_2026_11_13 = {
+    "image": ("review_image_structure_jpeg_totals.py", ("image-reference-structure-jpeg-held-2026-11-13.json",), (), ()),
+    "video": ("review_video_scene_return_transfer.py", ("video-scene-return-transfer-2026-11-13.json",), (), ()),
+    "audio": ("review_audio_odss_matched_room.py", ("audio-odss-matched-room-2026-11-13.json",), (), ()),
+    "writing": ("review_writing_revision_worker_transfer.py", (
+        "writing-revision-worker-held-batch0-2026-11-13.json", "writing-revision-trajectory-2026-11-13.json",
+    ), ("review",), (f"{SCRIPTS}/writing_revision_worker_priority.py", f"{SCRIPTS}/writing_revision_worker_transfer.py",
+                    f"{SCRIPTS}/writing_revision_trajectory_transfer.py", f"{SCRIPTS}/review_writing_revision_trajectory_transfer.py")),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
-          "difficult-edits", "localization-limits", "specialist-transfer")
+          "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -192,6 +201,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
     elif suite == "specialist-transfer":
         script, panel_names, dependencies = SPECIALIST_TRANSFER[modality]
         prefix = ()
+    elif suite == "local-evidence-2026-11-13":
+        script, panel_names, prefix, dependencies = LOCAL_EVIDENCE_2026_11_13[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

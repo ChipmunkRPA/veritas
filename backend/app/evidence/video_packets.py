@@ -23,7 +23,7 @@ from sqlalchemy.orm import Session
 from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.video import face_detail_repeat
-from app.detectors.video.decode import FrameTable, decode_frames
+from app.detectors.video.decode import FrameTable, decode_frames, parse_time_base
 from app.evidence import (
     face_alignment_context,
     face_boundary_binding,
@@ -39,6 +39,7 @@ from app.evidence import (
     mouth_local_hold_binding,
     picture_hold_binding,
     picture_sequence,
+    scene_return_binding,
     whole_face_binding,
 )
 from app.evidence.image_packets import PacketIntegrityError, _bounds, _box, _png, _verified
@@ -95,7 +96,7 @@ def _stage(db: Session, store: ObjectStore, analysis_id: str, name: str) -> tupl
     return json.loads(_verified(store, art.sha256)), art.sha256
 
 
-def _records(db: Session, store: ObjectStore, analysis: Analysis, result: dict) -> tuple[FrameTable, dict, dict, list, dict | None]:
+def _records(db: Session, store: ObjectStore, analysis: Analysis, result: dict) -> tuple[FrameTable, dict, dict, list, dict | None, dict | None]:
     probe, render = _stage(db, store, analysis.id, "probe"), _stage(db, store, analysis.id, "render")
     sampling = result.get("manifest", {}).get("sampling", {})
     if (probe is None or render is None or sampling.get("frame_anchor_version") != ANCHOR_VERSION
@@ -134,7 +135,13 @@ def _records(db: Session, store: ObjectStore, analysis: Analysis, result: dict) 
         source["picture_hold_sha256"] = sampling.get("picture_hold_sha256")
         if (canonical_hash(hold) if hold is not None else None) != source["picture_hold_sha256"]:
             raise PacketIntegrityError("Video picture hold differs from its published commitment")
-    return table, source, by_index, [{"stage": "probe", "sha256": probe[1]}, {"stage": "render", "sha256": render[1]}], hold
+    scene = render[0].get(scene_return_binding.KEY)
+    commitment = sampling.get(scene_return_binding.COMMITMENT)
+    if (canonical_hash(scene) if scene is not None else None) != commitment:
+        raise PacketIntegrityError("Picture-change record differs from its published commitment")
+    if commitment is not None:
+        source[scene_return_binding.COMMITMENT] = commitment
+    return table, source, by_index, [{"stage": "probe", "sha256": probe[1]}, {"stage": "render", "sha256": render[1]}], hold, scene
 
 
 def _signals(result: dict, exhibit: dict) -> list[dict]:
@@ -500,6 +507,32 @@ def _picture_hold_packet(db: Session, store: ObjectStore, analysis: Analysis, se
                            "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
 
 
+def _scene_return_packet(db, store, analysis, set_id, source, scene, decoded):
+    packet_id = scene_return_binding.PACKET_ID
+    frames, assets = [], {}
+    origin = source["timeline_origin_s"]
+    tb = parse_time_base(source["time_base"])
+    for role, item in zip(scene_return_binding.ROLES, scene["anchors"], strict=True):
+        stream_s = float(item["pts"] * tb)
+        assets[role] = _packet_image(db, store, analysis, set_id, Image.fromarray(decoded[item["frame_index"]]))
+        frames.append({"id": f"{packet_id}.{role}", "interval_role": role, "anchor": {
+            **item, "original_sha256": source["sha256"], "width": source["width"], "height": source["height"],
+            "time_base": source["time_base"], "stream_selector": source["stream_selector"],
+            "coordinate_space": source["coordinate_space"], "stream_time_s": stream_s,
+            "playback_time_s": None if origin is None else stream_s - origin},
+            "score": None, "is_peak": False, "context_region": None, "region_meaning": "whole_frame_context",
+            "artifact_refs": {"original": role, "context": role}})
+    return {"id": packet_id, "title": scene_return_binding.TITLE, "evidence_type": "anomaly",
+            "claim_scope": "sampled_window", "semantics": scene_return_binding.SCHEMA, scene_return_binding.KEY: scene,
+            "affects_overall_confidence": False, "finding_ids": [], "signal_refs": [], "exhibit_refs": [],
+            "frames": frames, "artifacts": assets, "observation": scene_return_binding.observation(scene),
+            "interpretation": scene_return_binding.INTERPRETATION, "measurements": [],
+            "limitations": ["This check looks for short changes that return to a similar picture. It can miss other edits."],
+            "clip": {"status": "unavailable", "reason": "Use the original video for playback."},
+            "derivation": {"version": VERSION, "selection": scene_return_binding.SCHEMA,
+                           "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
+
+
 def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis, set_id: str,
                              source: dict, review: dict, decoded: dict) -> dict:
     pair = review["pair"]
@@ -618,7 +651,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if canonical_hash(result) != analysis.result_hash or result.get("input", {}).get("sha256") != analysis.sha256:
         raise PacketIntegrityError("Video result or original identity does not match")
     store.verify(analysis.sha256)
-    table, source, anchors, records, hold = _records(db, store, analysis, result)
+    table, source, anchors, records, hold, scene = _records(db, store, analysis, result)
     candidates, scored_frames, omitted = _observations(db, store, analysis, result, table, anchors)
     window_candidates, window_frames = _window_observations(result, table, anchors)
     sequence_candidates, sequence_frames = _sequence_observations(result, table, source, anchors)
@@ -677,6 +710,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     boundary_indices.update(i for candidate in chosen for i in candidate.get("face_spatial_cut", {}).get("anchors", {}).values())
     exact_indices = boundary_indices | {i for candidate in return_candidates for i in candidate["face_return"]["anchors"].values()}
     wanted = {row["frame_index"] for candidate in chosen for row in candidate["rows"]} | boundary_indices
+    if scene is not None:
+        scene_indices = {item["frame_index"] for item in scene["anchors"]}
+        wanted.update(scene_indices)
+        exact_indices.update(scene_indices)
     endpoints = {match["start_frame_index"], match["end_frame_index"]} if match is not None else set()
     if pair is not None:
         endpoints.update(row[2] for row in picture_sequence.endpoints(pair))
@@ -925,6 +962,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["packets"].append(_picture_sequence_packet(db, store, analysis, set_id, source, review, decoded))
     if mouth_match is not None:
         document["packets"].append(_mouth_hold_packet(db, store, analysis, set_id, source, table, mouth_review, decoded))
+    if scene is not None:
+        document["packets"].append(_scene_return_packet(db, store, analysis, set_id, source, scene, decoded))
     if VERSION in NESTED_VERSIONS:
         from app.evidence import video_audio, video_av
 
@@ -943,6 +982,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     try:
         picture_hold_binding.validate_record(document, hold, table_pts=table.pts, interpolated=table.interpolated,
                                              canonical_hash=canonical_hash)
+        scene_return_binding.validate(document, scene, pts=table.pts, canonical_hash=canonical_hash)
     except (KeyError, TypeError, ValueError) as error:
         raise PacketIntegrityError(str(error)) from error
     register_artefact(db, store, canonical_json(document), media_type="application/json", role="exhibit_payload",
@@ -960,6 +1000,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
     source = document["source"]
     try:
         picture_hold_binding.validate(document)
+        scene_return_binding.validate(document, canonical_hash=canonical_hash)
         face_return_binding.validate_set(document)
         face_boundary_binding.validate_set(document)
         face_spatial_cut_binding.validate_set(document)

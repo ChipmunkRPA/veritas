@@ -74,12 +74,12 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       const occurrence = packet.picture_sequence && (frame.anchor.frame_index <= packet.picture_sequence.first.end_frame_index
         ? 'First occurrence' : 'Second occurrence')
       return <div key={frame.id} className="rounded-md border border-border p-3">
-        <p className="m-0 mb-3 text-small font-medium">{occurrence && `${occurrence} · `}{frame.interval_role && <span className="capitalize">{frame.interval_role} {cut ? 'picture-cut' : refined ? 'refined' : packet.mouth_local_hold ? 'hold' : packet.face_spatial_cut ? 'review' : 'flagged'} range · </span>}Frame {frame.anchor.frame_index}{frame.is_peak ? ' · highest response in this sample sequence' : ''}
+        <p className="m-0 mb-3 text-small font-medium">{occurrence && `${occurrence} · `}{frame.interval_role && <span className="capitalize">{frame.interval_role} {packet.scene_return ? 'picture change' : `${cut ? 'picture-cut' : refined ? 'refined' : packet.mouth_local_hold ? 'hold' : packet.face_spatial_cut ? 'review' : 'flagged'} range`} · </span>}Frame {frame.anchor.frame_index}{frame.is_peak ? ' · highest response in this sample sequence' : ''}
           {frame.score !== null && <span className="font-mono"> · response {frame.score.toFixed(3)}</span>}</p>
         <div className={evidenceGrid}>
           <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={packet.artifacts[frame.artifact_refs.original]} token={token} ready={mediaReady} alt={`${frame.id}: exact original video frame`} />
             <figcaption className="mt-2 text-caption text-text-muted">Exact source frame pixels, without diagnostic overlays.</figcaption></figure>
-          {!packet.picture_hold && !packet.picture_sequence && <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop || packet.artifacts[frame.artifact_refs.context]} token={token} ready={mediaReady}
+          {!packet.picture_hold && !packet.picture_sequence && !packet.scene_return && <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop || packet.artifacts[frame.artifact_refs.context]} token={token} ready={mediaReady}
             alt={`${frame.id}: ${mouthCrop ? 'exact measured mouth region' : crop ? 'source face crop for context' : 'frame context with its recorded label'}`} />
             <figcaption className="mt-2 text-caption text-text-muted">{mouthCrop ? 'Exact pixels of the measured mouth region.'
               : crop ? 'Detected-face crop for inspection; not an edit boundary or the exact aligned classifier input.'
@@ -178,7 +178,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     <div className="mt-6 space-y-7">{set.packets.map((packet) => <article key={packet.id} id={`media-evidence-${packet.id}`} className={evidenceCard}>
       <h3 className="m-0 text-body font-medium"><span className="font-mono text-accent mr-3">{packet.id}</span>{packet.title}</h3>
       {!packet.picture_hold && <p className="mt-2 mb-0 text-body">{packet.observation}</p>}
-      <p className="mt-2 mb-0 text-small text-text-muted">{packet.picture_hold
+      {!packet.scene_return && <p className="mt-2 mb-0 text-small text-text-muted">{packet.picture_hold
         ? <>{packet.picture_hold.frame_count} consecutive decoded frames have identical pixels over <strong>{seconds(packet.picture_hold.span_s)}</strong> between the first and last source timestamps.</>
         : packet.picture_sequence
         ? <>First occurrence <strong>{seconds(packet.picture_sequence.first.start_stream_s)}–{seconds(packet.picture_sequence.first.end_stream_s)}</strong> · Second occurrence <strong>{seconds(packet.picture_sequence.second.start_stream_s)}–{seconds(packet.picture_sequence.second.end_stream_s)}</strong> on the source clock.</>
@@ -194,7 +194,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         ? <>Flagged source range <strong>{seconds(packet.face_interval.start_stream_s)}–{seconds(packet.face_interval.end_stream_s)}</strong> across {packet.face_interval.samples.during.length} scored samples.</>
         : packet.claim_scope === 'sampled_window'
         ? 'One response for a sampled window. Representative frames do not have individual scores.'
-        : 'Individual sampled-frame responses. A face crop is context, not a mask of edited pixels.'}</p>
+        : 'Individual sampled-frame responses. A face crop is context, not a mask of edited pixels.'}</p>}
       {packet.window && <details className="mt-3 text-small text-text-muted"><summary className="cursor-pointer">Exact window coverage</summary>
         <p className="mt-2 mb-0">Source timestamps {seconds(packet.window.start_stream_s)}–{seconds(packet.window.end_stream_s)}. {packet.whole_face_review ? 'Planned frame indices' : 'Input frame indices'}: {packet.window.frame_indices.join(', ')}.</p>
         <p className="mt-2 mb-0">{packet.face_return && ['face-short-return/9', 'face-short-return/10', 'face-short-return/11'].includes(packet.face_return.method ?? '')
@@ -203,7 +203,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
           : packet.whole_face_review ? 'These positions show sample coverage. Some frames may lack a usable face, and intervals between samples were unassessed.'
           : 'Only these frames were input to this window. This does not establish continuous coverage between them.'}</p>
       </details>}
-      {!packet.picture_hold && !packet.picture_sequence && !packet.whole_face_review && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
+      {!packet.picture_hold && !packet.picture_sequence && !packet.whole_face_review && !packet.scene_return && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
       {packet.face_spatial_cut && packet.face_spatial_cut_frames && <section className="mt-5 rounded-md border border-border p-3">
         <h4 className="m-0 text-small font-medium">Picture-cut context</h4>
         <p className="mt-2 mb-0 text-small text-text-muted">Picture detail outside the face changed at both ends of <strong>{seconds(packet.face_spatial_cut.start_stream_s)}–{seconds(packet.face_spatial_cut.end_stream_s)}</strong> on the source clock, with an exclusive end. A cut between shots is one plausible explanation for this face change.</p>

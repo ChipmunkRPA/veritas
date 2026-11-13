@@ -74,6 +74,12 @@ export interface ImageReferenceRecord {
     witness_cells: [number, number, number][]
     native_difference_sha256: string
   }
+  same_framing_structure?: {
+    detailed_tiles: number
+    aligned_tiles: [number, number][]
+    background_support: [number, number]
+  }
+  affects_overall_confidence?: boolean
   additional_regions?: number
 }
 
@@ -85,6 +91,7 @@ export const embeddedPhotoSchema = 'chipmunk.image-reference-comparison/9'
 export const jpegPngEnvelopeSchema = 'chipmunk.image-reference-comparison/10'
 export const exactJpegIdentitySchema = 'chipmunk.image-reference-comparison/11'
 export const shiftedJpegSchema = 'chipmunk.image-reference-comparison/12'
+export const structureJpegSchema = 'chipmunk.image-reference-comparison/13'
 export const IMAGE_REFERENCE_SECTION_ID = 'earlier-image-comparison'
 export const orientationLabels = {
   rotate_90_clockwise: '90-degree clockwise rotation',
@@ -183,6 +190,24 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
             || original.x !== region.x + shift.x || original.y !== region.y + shift.y
         })) {
       throw new Error('The server returned an incomplete shifted JPEG comparison.')
+    }
+  }
+  if (comparison.schema === structureJpegSchema) {
+    const { width, height } = comparison.submitted
+    const proof = comparison.same_framing_structure
+    if (comparison.status !== 'comparable' || comparison.affects_overall_confidence !== false
+        || comparison.reference.width !== width || comparison.reference.height !== height
+        || ![width, height].every(value => Number.isSafeInteger(value) && value >= 512 && value <= 768)
+        || !proof || !Number.isSafeInteger(proof.detailed_tiles) || !Array.isArray(proof.aligned_tiles)
+        || proof.aligned_tiles.length < Math.max(24, .65 * proof.detailed_tiles) || proof.aligned_tiles.length > proof.detailed_tiles
+        || !Array.isArray(proof.background_support) || proof.background_support.length !== 2
+        || !proof.background_support.every(value => Number.isFinite(value) && value >= .80 && value <= 1)
+        || comparison.regions.some(region => {
+          const earlier = region.reference_region
+          return !validAreaWithin(region, width, height) || !earlier
+            || earlier.x !== region.x || earlier.y !== region.y || earlier.w !== region.w || earlier.h !== region.h
+        })) {
+      throw new Error('The server returned an incomplete JPEG structure comparison.')
     }
   }
   if (comparison.schema === exactPngCropResizeSchema && (!comparison.reference_crop_bounds

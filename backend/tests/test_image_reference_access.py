@@ -19,7 +19,12 @@ from sqlalchemy.orm import Session
 
 from app.api import auth, security, v2_image_reference
 from app.core.config import settings
-from app.detectors.image import reference_exact_jpeg, reference_png_orientation, reference_shifted_jpeg
+from app.detectors.image import (
+    reference_exact_jpeg,
+    reference_png_orientation,
+    reference_shifted_jpeg,
+    reference_structure_jpeg,
+)
 from app.main import app
 from app.storage.db import Analysis, Artefact, Base, CaseMemberRow, CaseRow
 from app.storage.objects import ObjectStore
@@ -751,3 +756,65 @@ def test_shifted_jpeg_evidence_keeps_only_the_certified_interior(reference_http,
     fractional[:, 2] += .5
     submit(original, interpolation=cv2.INTER_LINEAR, matrix=fractional)
     assert compare()["comparison"]["schema"] != reference_shifted_jpeg.SCHEMA
+
+
+def test_tone_adjusted_jpeg_keeps_source_structure_evidence(reference_http, tmp_path, monkeypatch):
+    f = reference_http
+    tiles = np.random.default_rng(84).integers(10, 242, (55, 70, 3), dtype=np.uint8)
+    original = cv2.resize(tiles, (768, 512), interpolation=cv2.INTER_CUBIC)
+    changed = original.copy()
+    changed[155:223, 219:306] = original[85:153, 355:442]
+
+    def jpeg(pixels):
+        with io.BytesIO() as output:
+            Image.fromarray(pixels).save(output, "JPEG", quality=75, subsampling=2)
+            return output.getvalue()
+
+    def compare(pixels, *, grade=True):
+        if grade:
+            pixels = np.rint(255 * (.03 + .94 * (pixels.astype(np.float32) / 255)**.73)).astype(np.uint8)
+        content = jpeg(pixels)
+        item = f.store.put_bytes(content)
+        with Session(f.engine) as db:
+            analysis = db.get(Analysis, "image-a")
+            analysis.sha256, analysis.size_bytes = item.sha256, item.size_bytes
+            db.commit()
+        response = f.client.post(_url(), headers=f.viewer, files={"reference": ("earlier.jpg", earlier, "image/jpeg")},
+                                 data={"include_pdf": "true"})
+        assert response.status_code == 200 and response.headers["Cache-Control"] == "no-store"
+        return response.json(), content
+
+    earlier = jpeg(original)
+    monkeypatch.setattr(settings, "image_reference_structure_jpeg", False)
+    baseline = compare(changed)[0]["comparison"]
+    assert baseline["status"] == "insufficient_common_background"
+    monkeypatch.setattr(settings, "image_reference_structure_jpeg", True)
+    payload, submitted = compare(changed)
+    comparison = payload["comparison"]
+    assert comparison["schema"] == reference_structure_jpeg.SCHEMA and comparison["status"] == "comparable"
+    assert comparison["affects_overall_confidence"] is False
+    [region] = comparison["regions"]
+    assert region["reference_region"] == {key: region[key] for key in ("x", "y", "w", "h")}
+    with Image.open(io.BytesIO(_asset_bytes(payload, comparison["mask"]))) as mask:
+        assert np.mean(np.asarray(mask)[155:223, 219:306] > 0) > .95
+        assert np.mean(np.asarray(mask) > 0) < .025
+    with pymupdf.open(stream=base64.b64decode(payload.pop("pdf")), filetype="pdf") as pdf:
+        assert "Highlights require local color and structure changes" in pdf[0].get_text()
+        _assert_pdf_assets(pdf, pdf[0], [comparison["mask"]], payload)
+        _assert_pdf_assets(pdf, pdf[1], [region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")], payload)
+
+    paths = [tmp_path / name for name in ("comparison.json", "earlier.jpg", "submitted.jpg")]
+    paths[0].write_text(json.dumps(payload))
+    paths[1].write_bytes(earlier)
+    paths[2].write_bytes(submitted)
+    assert review_oriented_resize(*paths)["mask_pixels_counted"] == region["selected_pixels"]
+    comparison["same_framing_structure"]["background_support"][0] = 1.
+    paths[0].write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="JPEG structure proof"):
+        review_oriented_resize(*paths)
+    clean, _ = compare(original)
+    assert clean["comparison"]["regions"] == [] and clean["pngs"] == {}
+    shift = cv2.warpAffine(changed, np.float32([[1, 0, 1.65], [0, 1, -1.65]]), (768, 512), borderMode=cv2.BORDER_REFLECT_101)
+    assert compare(shift)[0]["comparison"]["schema"] != reference_structure_jpeg.SCHEMA
+    with Session(f.engine) as db:
+        assert db.get(Analysis, "image-a").result_hash == "a" * 64

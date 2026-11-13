@@ -223,6 +223,7 @@ class Settings(BaseSettings):
     image_reference_jpeg_png_envelope: bool = False  # Optional earlier standard JPEG to cropped PNG color differences.
     image_reference_exact_jpeg_identity: bool = False  # Optional same-framing PNG to standard JPEG identity comparison.
     image_reference_shifted_jpeg: bool = False  # Optional bounded comparison of a whole-pixel translated JPEG.
+    image_reference_structure_jpeg: bool = False  # Optional same-framing JPEG comparison after global tone changes.
     audio_reference_comparison_enabled: bool = False  # Authenticated comparison of a short earlier recording.
     audio_reference_local_timing: bool = False  # Find localized changes in the timing of matching excerpts.
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.
@@ -251,6 +252,7 @@ class Settings(BaseSettings):
     video_face_boundary_refinement: bool = False  # Refine timing on an existing short appearance review range.
     video_face_paired_edge_refinement: bool = False  # Refine a retained 720p30 HEVC face-appearance range.
     video_face_spatial_cut_context: bool = False  # Explain supported surrounding-picture changes on qualified HEVC clips.
+    video_scene_return_review: bool = False  # Show brief picture changes independently of any face finding.
     video_face_short_window_review: bool = False  # Check overlapping native windows on supported eight-second HEVC clips.
     video_face_short_carrier_review: bool = False  # Check qualified eight-second H.264 MP4 and VP9 WebM clips.
     video_face_unrouted_short_review: bool = False  # Propose a brief face-change range on qualified HEVC sources.

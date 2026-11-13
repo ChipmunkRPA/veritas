@@ -86,6 +86,23 @@ rebuilds all 156 records and source positions from two pinned publisher CSVs.
 It separately counts text-identical operation labels. The [H.264 prediction
 study](video-mouth-codec-prediction-2026-11-13.md#local-replay) supplies the
 original frame and crop commitments and a standalone replay of the decisions.
+The [standalone video picture-change replay](video-scene-return-2026-11-13.md#reproduce)
+recomputes the cut and control counts from a public ledger. With the retained
+deliveries it also reopens all timestamps and the exact supporting images using
+FFmpeg. The [earlier-copy JPEG structure trial](image-reference-structure-jpeg-2026-11-13.md)
+publishes source-group results and the native comparison and export replays.
+The [Full writing worker replay](writing-revision-worker-transfer-2026-11-13.md#replay)
+checks which ranges reached the app on genuine government-report excerpts and
+recomputes the separate candidate points from source-bound scalar records.
+The [matched utterance speech replay](audio-odss-matched-room-2026-11-13.md#reproduce)
+recomputes held background and voice flags on separate reader groups.
+Run these four studies together from a clean checkout to save a shareable
+receipt of the scalar checks.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/local-evidence.json" --suite local-evidence-2026-11-13
+```
 
 Use `--suite specialist-transfer` in the replay command below to check these
 four newer comparisons together. The resulting receipt can be reviewed

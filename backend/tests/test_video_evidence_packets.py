@@ -16,10 +16,12 @@ from sqlalchemy.orm import Session
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.video.adapters import swap as swap_adapter
-from app.detectors.video.decode import DecodedFrame, probe_frames
+from app.detectors.video.decode import DecodedFrame, FrameTable, probe_frames
 from app.detectors.video.frame_store import FrameStore
 from app.detectors.video.frames import probe
+from app.detectors.video.scene_return import SceneReturn
 from app.detectors.video.swap import Window
+from app.evidence import scene_return_binding
 from app.evidence.image_packets import PacketIntegrityError
 from app.evidence.video_packets import (
     ANCHOR_VERSION,
@@ -33,6 +35,39 @@ from app.evidence.video_packets import (
 from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, AnalysisStage, Artefact, Base
 from app.storage.objects import ObjectStore
+
+
+def test_scene_return_rejects_wrong_support_clock_or_score():
+    binding = scene_return_binding
+    table = FrameTable("1/30000", tuple(5000 + 1000 * i for i in range(120)), (), "", 1280, 720, 1280, 720)
+    found = SceneReturn(33, 40, tuple(range(60)))
+    record = binding.record(found, table, ["a" * 64, "b" * 64, "c" * 64])
+    packet = {"id": binding.PACKET_ID, binding.KEY: record, "title": binding.TITLE, "semantics": binding.SCHEMA,
+              "claim_scope": "sampled_window", "evidence_type": "anomaly", "affects_overall_confidence": False,
+              "finding_ids": [], "signal_refs": [], "exhibit_refs": [], "interpretation": binding.INTERPRETATION,
+              "observation": binding.observation(record), "artifacts": {}, "frames": []}
+    source = {"width": 1280, "height": 720, "frame_count": 120, "time_base": table.time_base,
+              "stream_selector": "v:0", "coordinate_space": "display-oriented-native-frame"}
+    for role, anchor in zip(binding.ROLES, record["anchors"], strict=True):
+        packet["artifacts"][role] = {"width": 1280, "height": 720}
+        packet["frames"].append({"interval_role": role, "score": None, "is_peak": False, "context_region": None,
+                                 "artifact_refs": {"original": role, "context": role},
+                                 "anchor": {**source, **anchor}})
+    document = {"source": {**source, binding.COMMITMENT: canonical_hash(record)}, "packets": [packet]}
+    binding.validate(document, record, pts=table.pts, canonical_hash=canonical_hash)
+    for field in ("tiles", "end_pts", "score"):
+        broken = deepcopy(document)
+        other = broken["packets"][0]
+        if field == "tiles":
+            other[binding.KEY][field] = list(range(30))
+        elif field == "end_pts":
+            other[binding.KEY][field] += 1000
+        else:
+            other["frames"][0][field] = .99
+        other["observation"] = binding.observation(other[binding.KEY])
+        broken["source"][binding.COMMITMENT] = canonical_hash(other[binding.KEY])
+        with pytest.raises(ValueError, match="Picture-change"):
+            binding.validate(broken, pts=table.pts, canonical_hash=canonical_hash)
 
 
 @pytest.fixture(scope="module")

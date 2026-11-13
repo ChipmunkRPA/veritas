@@ -391,7 +391,7 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
             for attack, expected in (("move", "thumbnail region differs"), ("assets", "PNG differs from the source pixels"),
                                      ("path", "invalid crop identity"), ("role", "outside an eligible image report"),
                                      ("oversize", "thumbnail crop exceeds its size limit")):
-                altered = rewrite(built.path, tmp_path / f"editor-{attack}.zip", lambda files: mutate_editor(files, attack), f.key)
+                altered = rewrite(built.path, tmp_path / f"editor-{attack}.zip", lambda files, attack=attack: mutate_editor(files, attack), f.key)
                 offline_checked = verify.verify_package(altered, public_key_pem=f.key.public_pem())
                 assert offline_checked.ok == (attack in {"move", "assets"}), offline_checked.as_dict()
                 checked = verify.verify_package(altered, public_key_pem=f.key.public_pem(), source_image=original)
@@ -480,13 +480,16 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.email_alternatives',
                         'app.evidence.document_unselected_responses',
                         'app.evidence.document_matched_context', 'app.evidence.document_paragraph_priority',
+                        'app.evidence.document_email_contexts', 'app.evidence.document_native_locations',
+                        'app.evidence.document_passage_position', 'app.evidence.document_long_passage_position',
                         'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.audio_background_binding',
                         'app.evidence.audio_repetition_binding', 'app.evidence.audio_exact_repetition', 'app.evidence.audio_similarity_binding',
                         'app.evidence.face_interval_binding', 'app.evidence.face_boundary_binding', 'app.evidence.face_boundary_clock', 'app.evidence.face_alignment_context',
                         'app.evidence.face_paired_edge_binding', 'app.evidence.face_short_proposal_binding', 'app.evidence.face_short_window_binding', 'app.evidence.face_short_carrier_binding', 'app.evidence.face_spatial_cut_binding',
                         'app.evidence.face_lighting_context', 'app.evidence.face_return_binding', 'app.evidence.face_return_coverage',
                         'app.evidence.mouth_local_hold_binding', 'app.evidence.source_geometry',
-                        'app.evidence.video_packet_versions', 'app.evidence.picture_hold_binding', 'app.evidence.picture_sequence', 'app.evidence.sound_event_binding',
+                        'app.evidence.video_packet_versions', 'app.evidence.picture_hold_binding', 'app.evidence.picture_sequence',
+                        'app.evidence.scene_return_binding', 'app.evidence.sound_event_binding',
                         'app.evidence.stereo_binding', 'app.evidence.stereo_listening_binding'):
             return None
         if fullname.startswith(('app.storage', 'app.core.config', 'app.detectors', 'app.evidence', 'app.api',
@@ -540,7 +543,7 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
 
 @pytest.mark.parametrize('name', ['face_interval_binding.py', 'face_short_window_binding.py', 'face_short_carrier_binding.py', 'sound_event_binding.py', 'document_scope.py',
                                  'image_copy_similarity_binding.py', 'image_copy_affine_binding.py',
-                                 'image_editor_preview_binding.py', 'stereo_binding.py'])
+                                 'image_editor_preview_binding.py', 'stereo_binding.py', 'scene_return_binding.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
 

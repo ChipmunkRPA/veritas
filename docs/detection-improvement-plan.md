@@ -97,6 +97,27 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [standalone video picture-change check](video-scene-return-2026-11-13.md)
+  filled the face-routing gap on eight held layout-only cuts. It also located
+  six of eight speaker-plus-layout cuts and flagged none of 40 controls.
+  The local option uses exact source frames and carries no AI confidence weight.
+- The [structure-supported earlier-copy JPEG check](image-reference-structure-jpeg-2026-11-13.md)
+  raised useful sharp and feathered object-removal locations from 3/25 to
+  20/25 each, with the same 42/150 ordinary highlights. The optional local
+  comparison preserves both source crops and carries no AI confidence weight.
+- The [Full worker writing calibration controls](writing-revision-worker-transfer-2026-11-13.md)
+  confirmed inspection highlights on all 16 untouched reports, while every
+  document-level conclusion was inconclusive. The 95 saved packets and exact
+  source ranges support a separate held comparison of passage selection. The
+  first held batch highlighted all four genuine reports, covered at least half
+  of one edited passage in 19/22 changed versions, and found zero strict
+  locations. All three fitted selections found zero strict locations and
+  remain experimental.
+- The [matched utterance speech study](audio-odss-matched-room-2026-11-13.md)
+  improved synthetic flags from 17/32 to 28/32 with frontal background
+  cancellation, while increasing ordinary flags from 2/16 to 9/16.
+  The same-script, two-generator comparison remains experimental.
+
 - The [cross-format draft check](document-mixed-format-comparison-2026-11-13.md#multi-page-validation)
   now covers up to 12 supported PDF pages and can show a single revision across
   several source pages. The three-page replay localized all 40 PDF edits and

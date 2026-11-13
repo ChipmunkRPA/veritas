@@ -107,6 +107,27 @@ describe('earlier-copy comparison', () => {
     expect(screen.getByRole('button', { name: 'Download comparison PDF' })).toBeTruthy()
   })
 
+  it('shows source-bound color and structure differences as comparison evidence', async () => {
+    const result = structuredClone(comparison)
+    result.comparison.schema = 'chipmunk.image-reference-comparison/13'
+    result.comparison.reference = { ...result.comparison.reference, width: 768, height: 512 }
+    result.comparison.submitted = { ...result.comparison.submitted, width: 768, height: 512 }
+    delete result.comparison.alignment
+    result.comparison.regions[0].reference_region = { x: 118, y: 65, w: 90, h: 70 }
+    result.comparison.same_framing_structure = {
+      detailed_tiles: 30, aligned_tiles: Array.from({ length: 24 }, (_, index) => [64 * (index % 6), 64 * Math.floor(index / 6)]),
+      background_support: [.95, .97],
+    }
+    result.comparison.affects_overall_confidence = false
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
+    show()
+    await choose('earlier.jpg')
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect((await screen.findByText(/24 of 30 detailed areas matched/)).textContent).toContain('local change in both color and structure')
+    expect(screen.getByRole('button', { name: 'Download comparison PDF' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Download comparison JSON' })).toBeTruthy()
+  })
+
   it('checks fresh availability before displaying the form, even with a previously available cached value', async () => {
     const query = new QueryClient()
     query.setQueryData(['analysis', 'analysis-1', 'image-reference-comparison'], true)

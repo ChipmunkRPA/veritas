@@ -6,7 +6,7 @@ export default function VideoFrameNavigator({ set, token, mediaReady, selected, 
   onSelect: (frame: VideoEvidenceFrame) => void
 }) {
   const entries = set.packets.flatMap((packet) => [
-    ...packet.frames.map((frame) => ({ packet, frame, role: packet.face_spatial_cut ? 'review' : 'flagged' })),
+    ...packet.frames.map((frame) => ({ packet, frame, role: packet.scene_return ? 'picture-change' : packet.face_spatial_cut ? 'review' : 'flagged' })),
     ...(packet.face_boundary?.method === 'face-appearance-paired-edge/1' ? packet.face_boundary_frames ?? [] : [])
       .map((frame) => ({ packet, frame, role: 'refined' })),
     ...(packet.face_spatial_cut_frames ?? []).map((frame) => ({ packet, frame, role: 'picture-cut' })),
@@ -16,6 +16,7 @@ export default function VideoFrameNavigator({ set, token, mediaReady, selected, 
     ?? entries.find(({ frame }) => frame.is_peak && frame.region_meaning === 'detected_face_context')
     ?? entries.find(({ frame }) => frame.is_peak) ?? entries[0]
   const pictureCut = current.role === 'picture-cut'
+  const pictureChange = current.role === 'picture-change'
   return <section aria-label="Selected video moments" className="mt-5 rounded-md border border-border p-4">
     <h3 className="m-0 text-body font-medium">Moments to inspect</h3>
     <p className="mt-2 mb-0 text-small text-text-muted">Choose a recorded sample to jump to its time in the video and compare the area checked. The spaces between samples were not continuously assessed.</p>
@@ -36,15 +37,17 @@ export default function VideoFrameNavigator({ set, token, mediaReady, selected, 
       <p className="mt-2 mb-3 text-small">{current.packet.observation}</p>
       <div className={evidenceGrid}>
         <figure className="m-0"><EvidencePicture set={set} artifact={current.packet.artifacts[current.frame.artifact_refs.context]} token={token} ready={mediaReady}
-          alt={`${current.frame.id}: ${pictureCut ? 'original frame for comparing surrounding picture changes' : 'selected frame with the inspection area marked'}`} />
-          <figcaption className="mt-2 text-caption text-text-muted">{pictureCut
+          alt={`${current.frame.id}: ${pictureCut || pictureChange ? 'original frame for comparing picture changes' : 'selected frame with the inspection area marked'}`} />
+          <figcaption className="mt-2 text-caption text-text-muted">{pictureChange ? 'Exact source frame for comparing the picture change.' : pictureCut
             ? 'Original full frame for comparing the picture around the tracked face.'
             : 'The outline locates the area inspected. It is not a pixel-level edit mask.'}</figcaption></figure>
         {current.frame.artifact_refs.crop && <figure className="m-0"><EvidencePicture set={set} artifact={current.packet.artifacts[current.frame.artifact_refs.crop]} token={token} ready={mediaReady}
           alt={`${current.frame.id}: selected original face crop`} />
           <figcaption className="mt-2 text-caption text-text-muted">Original source crop for checking the suspicious sample against its surroundings.</figcaption></figure>}
       </div>
-      <p className="mt-3 mb-0 text-caption text-text-muted">{pictureCut
+      <p className="mt-3 mb-0 text-caption text-text-muted">{pictureChange
+        ? 'Compare the exact source frames before, during, and after the change. The first frame of the return marks the end.'
+        : pictureCut
         ? 'Compare the surrounding picture before, during, and after the measured cut. The interval ends at the first frame after the cut.'
         : current.role === 'refined'
         ? 'Compare the original face before, during, and after the two measured transitions. The interval ends at the first frame after the measured change.'

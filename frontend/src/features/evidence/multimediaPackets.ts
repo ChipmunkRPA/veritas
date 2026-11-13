@@ -32,6 +32,7 @@ export interface VideoEvidencePacket extends PacketBase {
     start_stream_s: number; end_stream_s: number; start_playback_s: number | null; end_playback_s: number | null;
     span_s: number; frame_count: number; decoded_rgb_sha256: string; pts: number[] }
   mouth_local_hold?: { frames: [number, number]; box: [number, number, number, number] }
+  scene_return?: { start_stream_s: number; end_stream_s: number; tiles: number[] }
   picture_sequence?: { first: PictureSequenceSpan; second: PictureSequenceSpan; frame_count: number; span_s: number }
   face_interval?: { start_stream_s: number; end_stream_s: number; lift: number;
     samples: Record<'before' | 'during' | 'after', { frame_index: number; pts: number; score: number }[]> }

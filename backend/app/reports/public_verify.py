@@ -19,6 +19,7 @@ from app.evidence import (
     face_return_coverage,
     face_short_window_binding,
     face_spatial_cut_binding,
+    scene_return_binding,
 )
 from app.evidence.face_alignment_context import validate as validate_face_alignment
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
@@ -87,7 +88,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     _require(result.get('original_result_sha256') == analysis['original_result_sha256'], 'The result commits to a different original')
     _require(set(result) <= {'schema', 'is_projection', 'original_result_sha256', 'decision', 'findings', 'checks', 'note',
                              IMAGE_EDITOR_PREVIEW, face_return_coverage.COMMITMENT, email_alternatives.COMMITMENT,
-                             face_short_window_binding.COMMITMENT, WRITING_POSITION,
+                             face_short_window_binding.COMMITMENT, scene_return_binding.COMMITMENT, WRITING_POSITION,
                              EMAIL_CLASSIFIER_SCOPE},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
@@ -108,6 +109,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         from app.evidence.picture_hold_binding import validate as validate_picture_hold
 
         validate_picture_hold(evidence)
+        _require(evidence['source'].get(scene_return_binding.COMMITMENT) == result.get(scene_return_binding.COMMITMENT),
+                 'Picture-change evidence differs from its committed public result')
+        scene_return_binding.validate(evidence, canonical_hash=canonical_hash)
         face_boundary_binding.validate_set(evidence)
         face_spatial_cut_binding.validate_set(evidence)
         face_return_binding.validate_set(evidence)
@@ -182,6 +186,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     else:
         _require(face_return_coverage.COMMITMENT not in result, 'Brief face-change coverage belongs to video evidence')
         _require(face_short_window_binding.COMMITMENT not in result, 'Overlapping face windows belong to video evidence')
+        _require(scene_return_binding.COMMITMENT not in result, 'Picture-change observations belong to video evidence')
     if analysis['kind'] == 'image':
         from app.evidence.image_eligibility import validate_inspection_coverage
 

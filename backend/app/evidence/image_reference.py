@@ -24,6 +24,7 @@ from app.detectors.image import (
     reference_png_screenshot,
     reference_resize,
     reference_shifted_jpeg,
+    reference_structure_jpeg,
 )
 
 MAX_INPUT_BYTES = 60 * 1024 * 1024
@@ -31,6 +32,8 @@ RESIZE_SCHEMA = "chipmunk.image-reference-comparison/3"
 CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/4"
 EXACT_PNG_CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/5"
 DIFFERENCE_MARK = (255, 173, 46, 144)
+INTERPRETATION = ("Regions show differences that survived the comparison settings. Ordinary processing can produce "
+                  "differences. The earlier file's authenticity and the cause of changes require separate evidence.")
 CROP_RESIZE_MAX_REFERENCE_SIDE = 768
 CROP_RESIZE_MAX_SUBMITTED_SIDE = 845
 CROP_RESIZE_MIN_SCALE = .72
@@ -113,7 +116,7 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             allow_integer_alignment: bool = False, allow_proportional_resize: bool = False,
             allow_oriented_crop: bool = False, allow_oriented_resize: bool = False,
             allow_embedded_photo: bool = False, allow_exact_jpeg_identity: bool = False,
-            allow_shifted_jpeg: bool = False) -> dict:
+            allow_shifted_jpeg: bool = False, allow_structure_jpeg: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     before, after = _bytes(reference_path), _bytes(submitted_path)
     with Image.open(io.BytesIO(before)) as original, Image.open(io.BytesIO(after)) as questioned:
@@ -165,12 +168,17 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             shifted, selection = reference_shifted_jpeg.compare(original, questioned, before, after, result)
             if shifted is not None:
                 result, mask, schema = shifted, selection, reference_shifted_jpeg.SCHEMA
+        if allow_structure_jpeg and result["status"] != "comparable":
+            structured, selection = reference_structure_jpeg.compare(original, questioned, before, after)
+            if structured is not None:
+                result, mask, schema = structured, selection, reference_structure_jpeg.SCHEMA
     aligned = "alignment" in result
     output = {"schema": schema or f"chipmunk.image-reference-comparison/{2 if aligned else 1}",
               "coordinate_space": "exif-oriented-submitted" if aligned or schema else "exif-oriented-original",
               "reference": {"sha256": hashlib.sha256(before).hexdigest(), "width": reference.shape[1], "height": reference.shape[0]},
               "submitted": {"sha256": hashlib.sha256(after).hexdigest(), "width": submitted.shape[1], "height": submitted.shape[0]},
-              **result, "interpretation": "Regions show differences that survived the comparison settings. Ordinary processing can produce differences. The earlier file's authenticity and the cause of changes require separate evidence."}
+              **result, "interpretation": (reference_structure_jpeg.INTERPRETATION if schema == reference_structure_jpeg.SCHEMA
+                                            else INTERPRETATION)}
     if evidence_dir is not None:
         _write_evidence(evidence_dir, output, reference, submitted, mask)
     return output

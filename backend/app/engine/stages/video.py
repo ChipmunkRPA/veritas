@@ -45,7 +45,7 @@ from app.detectors.audio.decode import decode_audio
 from app.detectors.common.fusion import prob_to_signal_fields
 from app.detectors.image.classifiers import specs as classifier_specs
 from app.detectors.image.scoring import dfdc_frame_weight, face_frame_weight, frame_weight, fuse_frame_scores
-from app.detectors.video import picture_hold, sampling
+from app.detectors.video import picture_hold, sampling, scene_return
 from app.detectors.video import segments as temporal_segments
 from app.detectors.video.adapters import lipsync as lipsync_lane
 from app.detectors.video.adapters import lipsync_xcorr as xcorr_lane
@@ -65,6 +65,7 @@ from app.detectors.video.adapters.whole_face import FAMILY as WHOLE_FACE_FAMILY
 from app.detectors.video.audio import SR, is_mostly_silence, limit_voice_signal, silent_signal, voice_signal
 from app.detectors.video.audio import specs as audio_specs
 from app.detectors.video.decode import DecodeError, FrameTable, decode_stream, probe_frames
+from app.detectors.video.face_return import source_carrier
 from app.detectors.video.frame_store import FrameStore
 from app.detectors.video.frames import probe as ffprobe
 from app.detectors.video.pipeline import (
@@ -75,7 +76,7 @@ from app.detectors.video.pipeline import (
     video_artifacts,
 )
 from app.detectors.video.shots import METHOD as SHOT_METHOD
-from app.detectors.video.shots import detect_shots
+from app.detectors.video.shots import ShotDetector, detect_shots
 from app.engine import card_copy, provenance_gate
 from app.engine.boundary import DetectorTimeout
 from app.engine.detector import Lane, Modality, StageOutputs
@@ -91,6 +92,7 @@ from app.evidence import (
     face_short_window_binding,
     face_spatial_cut_binding,
     picture_hold_binding,
+    scene_return_binding,
 )
 from app.evidence.audio_binding import (
     VOICE_CLOCK_LIMIT,
@@ -155,7 +157,7 @@ def probe(ctx: StageContext) -> dict[str, Any]:
     path = common.media_path(ctx)
     codec_tag = (settings.video_face_paired_edge_refinement or settings.video_face_unrouted_short_review
                  or settings.video_face_spatial_cut_context or settings.video_face_short_window_review
-                 or settings.video_face_short_carrier_review)
+                 or settings.video_face_short_carrier_review or settings.video_scene_return_review)
     info = common.json_safe(ffprobe(path, include_codec_tag=True) if codec_tag else ffprobe(path))
     try:
         table = probe_frames(path, check=ctx.check)
@@ -257,11 +259,34 @@ def shots(ctx: StageContext) -> dict[str, Any]:
     if not probed.get("frame_table") or not probed.get("plan"):
         return {"method": SHOT_METHOD, "boundaries": [], "ranges": [], "plan": None}
     table = FrameTable.from_json(probed["frame_table"])
-    detector = detect_shots(decode_stream(common.media_path(ctx), table, check=ctx.check), table)
+    path = common.media_path(ctx)
+    info = probed["info"]
+    review = (settings.environment == "dev" and settings.video_scene_return_review
+              and (info.get("codec"), info.get("pix_fmt"), info.get("codec_tag")) == ("hevc", "yuv420p", "hvc1")
+              and scene_return.supported(table) and source_carrier(path) == "mp4")
+    stream = decode_stream(path, table, check=ctx.check)
+    measured = None
+    if review:
+        # Score the same low-resolution stream without touching the shot plan or face routing.
+        detector = ShotDetector(table)
+
+        def observe():
+            for frame in stream:
+                detector.update(frame.index, frame.rgb)
+                yield frame
+
+        measured = scene_return.detect(observe(), table)
+        for frame in stream:
+            detector.update(frame.index, frame.rgb)
+    else:
+        detector = detect_shots(stream, table)
     base = probed["plan"]
     plan = sampling.build_plan(table, ctx.profile, seed=base["seed"], legacy_frames=len(base["legacy"]["frames"]),
                                shots=detector.ranges())
-    return {**detector.as_json(), "plan": plan}
+    outcome = {**detector.as_json(), "plan": plan}
+    if measured is not None:
+        outcome[scene_return_binding.KEY] = {"start": measured.start, "end": measured.stop, "tiles": list(measured.tiles)}
+    return outcome
 
 
 def tracks(ctx: StageContext) -> dict[str, Any]:
@@ -1072,6 +1097,22 @@ def render(ctx: StageContext) -> dict[str, Any]:
             hold = picture_hold.inspect(frame_store.path, table, origin=info.get("timeline_origin_s"),
                                         check=lambda: ctx.check("repeated-picture inspection"), remaining_s=ctx.deadline.remaining(),
                                         sequence_review=True, motion_encoding=(info.get("codec"), info.get("pix_fmt")), mouth_review=True)
+    scene = None
+    if frame_store is not None and not provenance_gate.stop(ctx):
+        pending = (ctx.outputs.get("shots") or {}).get(scene_return_binding.KEY)
+        remaining = ctx.deadline.remaining()
+        if pending is not None and (remaining is None or remaining > 2):
+            found = scene_return.SceneReturn(pending["start"], pending["end"], tuple(pending["tiles"]))
+            try:
+                timeout = 8. if remaining is None else min(8., remaining - 1.)
+                for _ in frame_store.iter_many(found.anchors, timeout_s=timeout):
+                    ctx.check("read picture-change evidence frames")
+                anchors = frame_store.native_anchors()
+                by_index = {anchor["frame_index"]: anchor["decoded_rgb_sha256"] for anchor in anchors}
+                if all(i in by_index and frame_store.native_pts_verified(i) for i in found.anchors):
+                    scene = scene_return_binding.record(found, frame_store.table, [by_index[i] for i in found.anchors])
+            except DecodeError:
+                ctx.log.warning("video.scene_return_frames_unavailable")
     decode_output = ctx.outputs.get("decode") or {}
     decoded_audio = decode_output.get("audio") or {}
     stereo_sha = decoded_audio.get("stereo_context_sha256")
@@ -1081,6 +1122,7 @@ def render(ctx: StageContext) -> dict[str, Any]:
             "artefacts": stills["artefacts"] + stereo_objects,
             "frame_anchor_version": "stream-pts-rgb24/1", "frame_anchors": anchors,
             "picture_hold": hold,
+            **({scene_return_binding.KEY: scene} if scene is not None else {}),
             "audio_mapping": ctx.state.get("video_audio_mapping"), "audio_status": decoded_audio.get("status"),
             "audio_stereo_context_sha256": stereo_sha}
 
@@ -1106,6 +1148,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         result.manifest.sampling["video_audio_mapping_sha256"] = canonical_hash(rendered["audio_mapping"])
     if rendered.get("picture_hold") is not None:
         result.manifest.sampling["picture_hold_sha256"] = canonical_hash(rendered["picture_hold"])
+    if rendered.get(scene_return_binding.KEY) is not None:
+        result.manifest.sampling[scene_return_binding.COMMITMENT] = canonical_hash(rendered[scene_return_binding.KEY])
     for entry in (ctx.outputs.get("detect") or {}).get("detectors", []):
         if entry["detector_id"] != APPEARANCE_REVIEW:
             continue

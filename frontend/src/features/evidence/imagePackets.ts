@@ -142,7 +142,7 @@ export interface ImageEvidenceSet {
   prior_embedded_pair_evidence?: { id: string; version: 'image-evidence-12' | 'image-evidence-13' | 'image-evidence-14' | 'image-evidence-16' | 'image-evidence-17' | 'image-evidence-18' | 'image-evidence-19' | 'image-evidence-20' | 'image-evidence-21'; sha256: string }
   embedded_pair_difference?: ImageEmbeddedPairDifference
   native_interpolation_review?: {
-    record: { status: string; observation: string; scope: string; limitation: string;
+    record: { status: string; observation: string; scope: string; limitation: string; basis?: string | null;
       supported_cells: number; region: [number, number, number, number] | null; affects_overall_confidence: false }
     artifacts: Partial<Record<'context' | 'crop', EvidenceImage>>
   }

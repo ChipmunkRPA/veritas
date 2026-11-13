@@ -45,7 +45,8 @@ it('supports arrow-key channel switching and moves focus with the selected tab',
   expect(voice.getAttribute('aria-selected')).toBe('true')
   expect(document.activeElement).toBe(voice)
 })
-it('marks the recorded picture-change tiles only on a separate copy of the during frame', () => {
+it.each(['picture-change-return/1', 'picture-change-return/2'] as const)(
+  'marks recorded %s tiles only on a separate copy of the during frame', (schema) => {
   const roles = ['before', 'during', 'after'] as const
   const frames: VideoEvidenceFrame[] = roles.map((role, i) => ({
     id: `VSC01.${role}`, score: null, is_peak: false, interval_role: role, context_region: null, region_meaning: 'whole_frame_context',
@@ -58,7 +59,7 @@ it('marks the recorded picture-change tiles only on a separate copy of the durin
     interpretation: 'An ordinary edit can produce this pattern.', limitations: [], finding_ids: [], signal_refs: [], measurements: [],
     artifacts: Object.fromEntries(roles.map((role, i) => [role, { sha256: String(i + 1).repeat(64), media_type: 'image/png', width: 1280, height: 720,
       url: `/api/v2/analyses/analysis/evidence-assets/${role}` }])),
-    claim_scope: 'sampled_window', frames, scene_return: { schema: 'picture-change-return/1', start_stream_s: .1, end_stream_s: .2, tiles },
+    claim_scope: 'sampled_window', frames, scene_return: { schema, start_stream_s: .1, end_stream_s: .2, tiles },
   }
   show('#media-evidence-VSC01', { ...set, packets: [packet] })
   const originals = screen.getAllByRole('img', { name: /exact original video frame/ })

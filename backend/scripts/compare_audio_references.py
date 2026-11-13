@@ -9,6 +9,7 @@ from pathlib import Path
 from app.evidence.audio_reference import (
     SCHEMA,
     SCHEMA_WITH_CHANNEL_TIMING,
+    SCHEMA_WITH_CLEAN_SPEECH,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
     SCHEMA_WITH_LOCAL_TIMING,
     SCHEMA_WITH_TRIM_ALIGNMENT,
@@ -18,8 +19,8 @@ from app.evidence.audio_reference import (
 from scripts.compare_video_references import main, replay
 
 
-def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False) -> dict:
-    compare_source = compare
+def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False, clean_speech: bool = False) -> dict:
+    compare_source = partial(compare, include_clean_speech=True) if clean_speech else compare
     if verify:
         exported = json.loads((output if output.is_file() else output / "comparison.json").read_bytes())
         record = exported.get("comparison", exported) if isinstance(exported, dict) else None
@@ -33,8 +34,11 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False) -
             compare_source = partial(compare, include_local_timing=True)
         elif isinstance(record, dict) and record.get("schema") == SCHEMA_WITH_CHANNEL_TIMING:
             compare_source = partial(compare, include_local_timing=True, include_channel_timing=True)
+        elif isinstance(record, dict) and record.get("schema") == SCHEMA_WITH_CLEAN_SPEECH:
+            compare_source = partial(compare, include_clean_speech=True, include_local_timing="local_timing" in record,
+                                     include_channel_timing="channel_timing" in record)
     return replay(compare_source, earlier, submitted, output, verify=verify)
 
 
 if __name__ == "__main__":
-    main(description=__doc__, runner=run)
+    main(description=__doc__, runner=run, clean_audio_option=True)

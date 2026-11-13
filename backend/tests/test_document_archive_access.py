@@ -18,7 +18,7 @@ from app.api import v2_document_archive
 from app.billing import purchase_notice
 from app.core.config import settings
 from app.detectors.text.extract import from_string
-from app.evidence import document_archive
+from app.evidence import document_archive, document_gao_archive
 from app.main import app
 from app.storage.db import Analysis, Artefact, BillingOrderRow, CaseMemberRow, CaseRow, Job
 
@@ -95,6 +95,75 @@ def test_local_archive_uses_unchanged_and_no_match_without_exposing_a_reference(
         monkeypatch.setattr(settings, "document_archive_comparison_enabled", False)
         assert client.get(_url("unchanged"), headers=fixture.headers).json() == {"available": False}
         assert client.post(_url("unchanged"), headers=fixture.headers).status_code == 404
+
+
+def test_gao_archive_local_transcript_matches_api_and_pdf(billing, monkeypatch, tmp_path):
+    import json
+
+    from scripts.review_gao_archive_export import review
+
+    monkeypatch.setattr(settings, "billing_mode", "disabled")
+    transcript = ("The regional audit office gathered records from several different departments and invited all "
+                  "program administrators to comment on the analysis. The board reviewed the accounting process "
+                  "in detail and approved its updated policy on Monday. The final review confirmed that the "
+                  "field officers had recorded complete findings and resolved every outstanding concern in the "
+                  "original worksheet. A separate committee will examine implementation during the following year.")
+    changed = transcript.replace("Monday", "Thursday")
+    pack_path = tmp_path / "gao-pack.json"
+    pack = {"schema": document_gao_archive.PACK_SCHEMA, "revision": document_gao_archive.REVISION,
+            "reports": {"GAO-16-442": {"text": transcript, "published_date": "2016-04-18", "split": "train",
+                                      "source_record_sha256": "1" * 64}}}
+    payload = json.dumps(pack).encode()
+    pack_path.write_bytes(payload)
+    pack_sha = hashlib.sha256(payload).hexdigest()
+    monkeypatch.setattr(document_gao_archive, "REPORT_COUNT", 1)
+    monkeypatch.setattr(settings, "document_gao_archive_path", pack_path)
+    monkeypatch.setattr(settings, "document_gao_archive_sha256", pack_sha)
+    _seed(billing, "gao-changed", changed)
+    _seed(billing, "gao-unchanged", transcript)
+    _seed(billing, "gao-unmatched", "> " + changed)
+    with _install(billing, monkeypatch) as client:
+        url = _url("gao-changed")
+        assert client.get(url, headers=billing.headers).json() == {"available": True, "gao_available": True}
+        assert client.post(url, headers=billing.headers).json()["comparison"]["schema"] == document_archive.SCHEMA
+        selection = {"collection": "gao"}
+        response = client.post(url, headers=billing.headers, params={"include_pdf": True, **selection})
+        assert response.status_code == 200 and response.headers["cache-control"] == "no-store"
+        body = response.json()
+        result = body["comparison"]
+        assert result["schema"] == document_gao_archive.SCHEMA and result["authorship_confidence_contribution"] == 0
+        assert result["reference"]["url"].endswith("/GAO-16-442")
+        assert result["reference"]["transcript_range"] == [0, len(transcript)]
+        assert result["reference"]["submitted_range"] == [0, len(changed)]
+        change, = result["changes"]
+        for side, text, word in (("submitted", changed, "Thursday"), ("archive", transcript, "Monday")):
+            excerpt = change[side]
+            assert text[excerpt["start"]:excerpt["end"]] == excerpt["text"] == word
+            assert excerpt["changed_tokens"] == [[excerpt["start"], excerpt["end"]]]
+        first, last = result["submitted_sentence_ranges"][0]
+        assert changed[first:last] == "The board reviewed the accounting process in detail and approved its updated policy on Thursday."
+        with pymupdf.open(stream=base64.b64decode(body["pdf"]), filetype="pdf") as pdf:
+            text = " ".join(" ".join(page.get_text().split()) for page in pdf)
+            assert "Published highlights transcript" in text and "Thursday" in text and "Monday" in text
+            assert f"Submitted sentences containing differences [{first}, {last})" in text
+            assert any(link.get("uri", "").endswith("/GAO-16-442") for page in pdf for link in page.get_links())
+        submitted = tmp_path / "later.txt"
+        submitted.write_text(changed)
+        export = tmp_path / "comparison.json"
+        export.write_text(json.dumps(result))
+        assert review(export, submitted, pack_path, pack_sha)["exact_changes_verified"] == 1
+        change["submitted"]["changed_tokens"][0][0] -= 1
+        export.write_text(json.dumps(result))
+        import pytest
+
+        with pytest.raises(ValueError, match="does not replay"):
+            review(export, submitted, pack_path, pack_sha)
+        unchanged = client.post(_url("gao-unchanged"), headers=billing.headers, params=selection).json()["comparison"]
+        assert unchanged["status"] == "reference_bound" and unchanged["changes"] == []
+        unknown = client.post(_url("gao-unmatched"), headers=billing.headers, params=selection).json()["comparison"]
+        assert unknown["status"] == "out_of_scope" and unknown["reference"] is None and unknown["changes"] == []
+        monkeypatch.setattr(settings, "document_gao_archive_sha256", "0" * 64)
+        assert client.post(url, headers=billing.headers, params=selection).status_code == 503
 
 
 def test_word_archive_change_keeps_native_paragraph_and_run_positions(billing, monkeypatch):

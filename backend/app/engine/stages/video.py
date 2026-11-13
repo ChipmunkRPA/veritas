@@ -45,7 +45,7 @@ from app.detectors.audio.decode import decode_audio
 from app.detectors.common.fusion import prob_to_signal_fields
 from app.detectors.image.classifiers import specs as classifier_specs
 from app.detectors.image.scoring import dfdc_frame_weight, face_frame_weight, frame_weight, fuse_frame_scores
-from app.detectors.video import picture_hold, sampling, scene_return
+from app.detectors.video import picture_hold, sampling, scene_return, scene_return_carrier
 from app.detectors.video import segments as temporal_segments
 from app.detectors.video.adapters import lipsync as lipsync_lane
 from app.detectors.video.adapters import lipsync_xcorr as xcorr_lane
@@ -260,16 +260,17 @@ def shots(ctx: StageContext) -> dict[str, Any]:
     if not probed.get("frame_table") or not probed.get("plan"):
         outcome = {"method": SHOT_METHOD, "boundaries": [], "ranges": [], "plan": None}
         if enabled:
-            outcome[scene_return_binding.COVERAGE] = scene_return_binding.coverage("unavailable", reason="unsupported_video")
+            outcome[scene_return_binding.COVERAGE] = scene_return_binding.coverage(
+                "unavailable", reason="unsupported_video", webm_available=True)
         return outcome
     table = FrameTable.from_json(probed["frame_table"])
     path = common.media_path(ctx)
     info = probed["info"]
-    review = (enabled and (info.get("codec"), info.get("pix_fmt"), info.get("codec_tag")) in scene_return_binding.ENCODINGS
-              and scene_return.supported(table) and source_carrier(path) == "mp4")
+    profile = (scene_return_carrier.profile(table, (info.get("codec"), info.get("pix_fmt"), info.get("codec_tag")),
+                                            source_carrier(path)) if enabled else None)
     stream = decode_stream(path, table, check=ctx.check)
     outcome = {}
-    if review:
+    if profile:
         # Score the same low-resolution stream without touching the shot plan or face routing.
         detector = ShotDetector(table)
         verified = 0
@@ -284,20 +285,23 @@ def shots(ctx: StageContext) -> dict[str, Any]:
                 yield frame
             exhausted = True
 
-        measured = scene_return.detect(observe(), table)
+        measured = scene_return_carrier.detect(observe(), table, profile)
         for frame in stream:
             detector.update(frame.index, frame.rgb)
+        first = table.pts[0] if profile == scene_return_binding.WEBM_SCHEMA else None
         if measured is not None:
-            outcome[scene_return_binding.KEY] = {"start": measured.start, "end": measured.stop, "tiles": list(measured.tiles)}
+            outcome[scene_return_binding.KEY] = {"start": measured.start, "end": measured.stop, "tiles": list(measured.tiles),
+                                                  **({"schema": profile} if first is not None else {})}
         elif exhausted and verified == len(table):
-            outcome[scene_return_binding.COVERAGE] = scene_return_binding.coverage("no_match", frames_scanned=verified)
+            outcome[scene_return_binding.COVERAGE] = scene_return_binding.coverage("no_match", frames_scanned=verified, first_pts=first)
         else:
             outcome[scene_return_binding.COVERAGE] = scene_return_binding.coverage(
-                "unavailable", reason="incomplete_decode", frames_scanned=verified)
+                "unavailable", reason="incomplete_decode", frames_scanned=verified, first_pts=first)
     else:
         detector = detect_shots(stream, table)
         if enabled:
-            outcome[scene_return_binding.COVERAGE] = scene_return_binding.coverage("unavailable", reason="unsupported_video")
+            outcome[scene_return_binding.COVERAGE] = scene_return_binding.coverage(
+                "unavailable", reason="unsupported_video", webm_available=True)
     base = probed["plan"]
     plan = sampling.build_plan(table, ctx.profile, seed=base["seed"], legacy_frames=len(base["legacy"]["frames"]),
                                shots=detector.ranges())
@@ -1119,7 +1123,7 @@ def render(ctx: StageContext) -> dict[str, Any]:
         if provenance_gate.stop(ctx):
             scene_coverage = scene_return_binding.coverage("unavailable", reason="provenance")
         elif frame_store is None:
-            scene_coverage = scene_return_binding.coverage("unavailable", reason="unsupported_video")
+            scene_coverage = scene_return_binding.coverage("unavailable", reason="unsupported_video", webm_available=True)
         elif ctx.profile == Profile.QUICK:
             scene_coverage = scene_return_binding.coverage("unavailable", reason="profile")
         elif not shot_output:
@@ -1129,6 +1133,7 @@ def render(ctx: StageContext) -> dict[str, Any]:
     if frame_store is not None and not provenance_gate.stop(ctx):
         pending = shot_output.get(scene_return_binding.KEY)
         remaining = ctx.deadline.remaining()
+        schema = pending.get("schema", scene_return_binding.SCHEMA) if pending is not None else None
         if pending is not None and (remaining is None or remaining > 2):
             found = scene_return.SceneReturn(pending["start"], pending["end"], tuple(pending["tiles"]))
             try:
@@ -1138,13 +1143,14 @@ def render(ctx: StageContext) -> dict[str, Any]:
                 anchors = frame_store.native_anchors()
                 by_index = {anchor["frame_index"]: anchor["decoded_rgb_sha256"] for anchor in anchors}
                 if all(i in by_index and frame_store.native_pts_verified(i) for i in found.anchors):
-                    scene = scene_return_binding.record(found, frame_store.table, [by_index[i] for i in found.anchors])
+                    scene = scene_return_binding.record(found, frame_store.table, [by_index[i] for i in found.anchors], schema=schema)
             except DecodeError:
                 ctx.log.warning("video.scene_return_frames_unavailable")
         if pending is not None:
-            scene_coverage = (scene_return_binding.coverage("matched", frames_scanned=scene_return_binding.FRAME_COUNT)
+            first = frame_store.table.pts[0] if schema == scene_return_binding.WEBM_SCHEMA else None
+            scene_coverage = (scene_return_binding.coverage("matched", frames_scanned=scene_return_binding.FRAME_COUNT, first_pts=first)
                               if scene is not None else scene_return_binding.coverage(
-                                  "unavailable", reason="missing_anchors", frames_scanned=scene_return_binding.FRAME_COUNT))
+                                  "unavailable", reason="missing_anchors", frames_scanned=scene_return_binding.FRAME_COUNT, first_pts=first))
     decode_output = ctx.outputs.get("decode") or {}
     decoded_audio = decode_output.get("audio") or {}
     stereo_sha = decoded_audio.get("stereo_context_sha256")

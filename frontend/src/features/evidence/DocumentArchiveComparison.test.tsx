@@ -62,7 +62,7 @@ describe('Public archive comparison', () => {
   })
 
   it('loads on demand, highlights exact Unicode ranges and exports both formats', async () => {
-    vi.mocked(archiveAvailability).mockResolvedValue(true)
+    vi.mocked(archiveAvailability).mockResolvedValue({ gaoAvailable: false })
     vi.mocked(compareArchive).mockResolvedValue(edited)
     show()
     const start = await screen.findByRole('button', { name: 'Compare with public archive' })
@@ -81,7 +81,7 @@ describe('Public archive comparison', () => {
   })
 
   it('presents an archive no-match without a source attribution', async () => {
-    vi.mocked(archiveAvailability).mockResolvedValue(true)
+    vi.mocked(archiveAvailability).mockResolvedValue({ gaoAvailable: false })
     vi.mocked(compareArchive).mockResolvedValue({
       pdf: null,
       comparison: { ...edited.comparison, status: 'no_qualified_reference', reference: null, changes: [], aligned_paragraphs: [] },
@@ -91,6 +91,32 @@ describe('Public archive comparison', () => {
     expect(await screen.findByText('No matching passage in this archive library')).toBeVisible()
     expect(screen.queryByRole('heading', { name: /submitted paragraph 1/i })).not.toBeInTheDocument()
     expect(screen.queryByRole('link', { name: /Source frus/ })).not.toBeInTheDocument()
+  })
+
+  it('shows the GAO transcript and changed sentence positions separately', async () => {
+    const result = structuredClone(edited)
+    result.comparison.schema = 'chipmunk.document-archive-comparison/2'
+    result.comparison.layout = 'submitted_paragraphs'
+    result.comparison.reference = {
+      id: 'GAO-16-442', url: 'https://www.gao.gov/products/GAO-16-442', version_url: 'https://huggingface.co/datasets/launch/gov_report',
+      volume: 'GAO highlights', document: 'GAO-16-442', published_date: '2016-04-18',
+      submitted_range: [0, 180], transcript_range: [0, 176],
+    }
+    result.comparison.changes[0].archive_paragraph = null
+    result.comparison.submitted_sentence_ranges = [[6, 41]]
+    vi.mocked(archiveAvailability).mockResolvedValue({ gaoAvailable: true })
+    vi.mocked(compareArchive).mockResolvedValue(result)
+    show()
+    const collection = await screen.findByLabelText('Archive collection')
+    expect(collection).toHaveValue('frus')
+    fireEvent.change(collection, { target: { value: 'gao' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Compare with public archive' }))
+    expect(await screen.findByRole('heading', { name: 'Published highlights transcript' })).toBeVisible()
+    expect(screen.getByText(/Matched submitted range \[0, 180\).*Transcript range \[0, 176\)/)).toBeVisible()
+    expect(screen.getByText(/Submitted sentences containing differences \[6, 41\)/)).toBeVisible()
+    expect(screen.getByRole('link', { name: 'Source GAO-16-442' })).toHaveAttribute('href', result.comparison.reference.url)
+    expect(screen.getByText('café').tagName).toBe('MARK')
+    expect(compareArchive).toHaveBeenCalledWith('archive-fixture', expect.any(AbortSignal), 'gao')
   })
 
   it('shows the changed Word paragraph and its original text range', async () => {
@@ -104,7 +130,7 @@ describe('Public archive comparison', () => {
       changed_tokens: [{ extracted_range: [12, 16], paragraph_range: [22, 26],
         runs: [{ run: 1, range: [2, 4] }, { run: 2, range: [0, 2] }] }],
     }
-    vi.mocked(archiveAvailability).mockResolvedValue(true)
+    vi.mocked(archiveAvailability).mockResolvedValue({ gaoAvailable: false })
     vi.mocked(compareArchive).mockResolvedValue(result)
     show()
     fireEvent.click(await screen.findByRole('button', { name: 'Compare with public archive' }))
@@ -114,7 +140,7 @@ describe('Public archive comparison', () => {
   })
 
   it('hides the action when the retained owner is ineligible', async () => {
-    vi.mocked(archiveAvailability).mockResolvedValue(false)
+    vi.mocked(archiveAvailability).mockResolvedValue(null)
     show()
     await waitFor(() => expect(archiveAvailability).toHaveBeenCalledOnce())
     expect(screen.queryByRole('button', { name: 'Compare with public archive' })).not.toBeInTheDocument()

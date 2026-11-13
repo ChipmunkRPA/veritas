@@ -2344,6 +2344,13 @@ export interface components {
                 [key: string]: unknown;
             }[];
         };
+        /** AudioReferenceAvailability */
+        AudioReferenceAvailability: {
+            /** Available */
+            available: boolean;
+            /** Clean Speech Available */
+            clean_speech_available?: boolean | null;
+        };
         /** AuditEventOut */
         AuditEventOut: {
             /** Action */
@@ -3283,6 +3290,8 @@ export interface components {
         DocumentArchiveAvailability: {
             /** Available */
             available: boolean;
+            /** Gao Available */
+            gao_available?: boolean | null;
         };
         /** DocumentArchiveChange */
         DocumentArchiveChange: {
@@ -3328,9 +3337,9 @@ export interface components {
             reference: components["schemas"]["DocumentArchiveReference"] | null;
             /**
              * Schema
-             * @constant
+             * @enum {string}
              */
-            schema: "chipmunk.document-archive-comparison/1";
+            schema: "chipmunk.document-archive-comparison/1" | "chipmunk.document-archive-comparison/2";
             /** Scope */
             scope: string;
             /**
@@ -3338,6 +3347,11 @@ export interface components {
              * @enum {string}
              */
             status: "reference_bound" | "no_qualified_reference" | "ambiguous_reference" | "out_of_scope";
+            /** Submitted Sentence Ranges */
+            submitted_sentence_ranges?: [
+                number,
+                number
+            ][] | null;
             /** Submitted Sha256 */
             submitted_sha256: string;
         };
@@ -3409,6 +3423,22 @@ export interface components {
             document: string;
             /** Id */
             id: string;
+            /** Published Date */
+            published_date?: string | null;
+            /** Source Record Sha256 */
+            source_record_sha256?: string | null;
+            /** Submitted Range */
+            submitted_range?: [
+                number,
+                number
+            ] | null;
+            /** Transcript Range */
+            transcript_range?: [
+                number,
+                number
+            ] | null;
+            /** Transcript Sha256 */
+            transcript_sha256?: string | null;
             /** Url */
             url: string;
             /** Version Url */
@@ -4498,11 +4528,6 @@ export interface components {
             sha256: string;
             /** Size Bytes */
             size_bytes: number;
-        };
-        /** MediaReferenceAvailability */
-        MediaReferenceAvailability: {
-            /** Available */
-            available: boolean;
         };
         /** MediaReferenceResponse */
         MediaReferenceResponse: {
@@ -6970,7 +6995,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["MediaReferenceAvailability"];
+                    "application/json": components["schemas"]["AudioReferenceAvailability"];
                 };
             };
             /** @description Unauthorized */
@@ -7021,6 +7046,12 @@ export interface operations {
                      * @description Earlier copy with the same timing or a supported small trim.
                      */
                     earlier: string;
+                    /**
+                     * @description Optional confirmation of an earlier clean copy of the same six-second recording on the same clock.
+                     * @default false
+                     * @enum {string}
+                     */
+                    earlier_has_clean_speech?: "true" | "false";
                     /**
                      * @default false
                      * @enum {string}
@@ -7541,6 +7572,7 @@ export interface operations {
         parameters: {
             query?: {
                 include_pdf?: boolean;
+                collection?: "frus" | "gao";
             };
             header?: never;
             path: {

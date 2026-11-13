@@ -1,0 +1,6878 @@
+{
+  "assessment": [
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": 0,
+      "measured_snr_db": 7e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99256391,
+              0.9877976,
+              1.02117815
+            ],
+            [
+              1.01924551,
+              0.98772852,
+              1.00274842
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.00989038
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.96235359,
+            1.01073287
+          ],
+          "middle": 0.82880604,
+          "range": [
+            46080,
+            57600
+          ],
+          "score": 0.12145273
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "637a10d45a111443d368926614175d624d6cf80993d98da032ae5d8f15732c28",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": 0,
+      "measured_snr_db": 7e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.0113137,
+              0.16225289,
+              0.9877976
+            ],
+            [
+              1.04932438,
+              0.01988178,
+              0.98772852
+            ]
+          ],
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.90780699
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.94394753,
+            0.86388218
+          ],
+          "middle": 0.02874462,
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.81512122
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "c49ac30f91e4ca35a1bd7d91e83f65ae8e19aa246433edafca02ae7bf4bad804",
+      "supported_pair": true,
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": 0,
+      "measured_snr_db": 7e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.31466462,
+              0.9877976,
+              1.02117815
+            ],
+            [
+              1.41892581,
+              0.98772852,
+              1.00274842
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.0238335
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.96378278,
+            1.01045168
+          ],
+          "middle": 0.82857546,
+          "range": [
+            46080,
+            57600
+          ],
+          "score": 0.12354009
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "add0ae1fc9dcbc0e554815313071dec8b96e10770422f0fb849955eba7ac0186",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": 0,
+      "measured_snr_db": 7e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.01131772,
+              0.16408677,
+              0.9877976
+            ],
+            [
+              1.04932443,
+              0.01889029,
+              0.98772852
+            ]
+          ],
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.90738063
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.94394531,
+            0.86388015
+          ],
+          "middle": 0.04326227,
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.80060159
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "a3453a6e02de4eedda4e966fbe8afe88e50d9852ac3ef0f6788f2df8a82c84b3",
+      "supported_pair": true,
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": 0,
+      "measured_snr_db": 7e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99375117,
+              0.9877976,
+              1.02117815
+            ],
+            [
+              1.02038783,
+              0.98772852,
+              1.00274842
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.01048487
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.96235343,
+            1.01073288
+          ],
+          "middle": 0.82880605,
+          "range": [
+            46080,
+            57600
+          ],
+          "score": 0.12145252
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "0139b238738f7ac15d9147f5aeba4f477d86cb72d2c21ca5b2fce75e4ae56444",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "measured_snr_db": 7e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.01129968,
+              0.11166558,
+              0.9877976
+            ],
+            [
+              1.04932447,
+              0.0301117,
+              0.98772852
+            ]
+          ],
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.9282346
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.94394081,
+            0.86387603
+          ],
+          "middle": 0.04434911,
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.79951072
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "4d8d7bdb37c54c672d7d22a83ce2d11546edc5bdc485467c4a8eda656ee91b2c",
+      "supported_pair": true,
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "measured_snr_db": 7e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99354963,
+              0.9877976,
+              1.02117815
+            ],
+            [
+              1.01999047,
+              0.98772852,
+              1.00274842
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.01038406
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.96235327,
+            1.01073288
+          ],
+          "middle": 0.82880604,
+          "range": [
+            46080,
+            57600
+          ],
+          "score": 0.12145233
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "b9d527ed74e42db267d3dc66a80b2190cbfccb8c778152f9c619084aea1a9e0a",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": 0,
+      "measured_snr_db": 7e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.0197703,
+              1.01539663,
+              1.04455294
+            ],
+            [
+              0.61100912,
+              0.5541713,
+              0.65987489
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.04865587
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.9751167,
+            1.03634633
+          ],
+          "middle": 0.81613452,
+          "range": [
+            49920,
+            61440
+          ],
+          "score": 0.14367478
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "00b474a700f59338756299c343131e4108ea7762e52de8a260656bfbfaf3cca5",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-0",
+      "earlier_sha256": "b2537fb65f44ab47a2bb5f303d709249498caa6c188a677888aef1aa442a3c54",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": 0,
+      "measured_snr_db": 7e-06,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "637a10d45a111443d368926614175d624d6cf80993d98da032ae5d8f15732c28",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 46,
+      "case": "held-0",
+      "earlier_sha256": "0b88ab169e2d934453f432cbc8331e3fd6fa986d449919056dd3de72499aeb2d",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": 0,
+      "measured_snr_db": 7e-06,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "637a10d45a111443d368926614175d624d6cf80993d98da032ae5d8f15732c28",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -5,
+      "measured_snr_db": -5.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98679681,
+              0.97830379,
+              1.0376592
+            ],
+            [
+              1.03418654,
+              0.97811129,
+              1.00486596
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.01761588
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.90754407,
+            1.0285241
+          ],
+          "middle": 0.68395774,
+          "range": [
+            46080,
+            57600
+          ],
+          "score": 0.19334132
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "73e34d3df7a9143b33c6327815b54809e067b958744a1d4af7888eb30c3f01fb",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -5,
+      "measured_snr_db": -5.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.02014096,
+              0.15868275,
+              0.97830379
+            ],
+            [
+              1.08771915,
+              0.03481387,
+              0.97811129
+            ]
+          ],
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.90110257
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.8700838,
+            0.72128297
+          ],
+          "middle": 0.03585306,
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.6482297
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "1c530948d8ceb5eae70c613a5ad54a8c8a597837f5361e90a3a5a9d5cb66d791",
+      "supported_pair": true,
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -5,
+      "measured_snr_db": -5.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.30889711,
+              0.97830379,
+              1.0376592
+            ],
+            [
+              1.43389306,
+              0.97811129,
+              1.00486596
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.04191318
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.9067271,
+            1.02756484
+          ],
+          "middle": 0.68331984,
+          "range": [
+            46080,
+            57600
+          ],
+          "score": 0.19319782
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "8b93d1f6c1583c553112fc457ad081563b3591aea7bc61757d2635d310d6ff7f",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -5,
+      "measured_snr_db": -5.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.02014499,
+              0.16052241,
+              0.97830379
+            ],
+            [
+              1.0877192,
+              0.03385864,
+              0.97811129
+            ]
+          ],
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.90065064
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.87008216,
+            0.72128161
+          ],
+          "middle": 0.04788174,
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.63619973
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "feb86c111bce6903852813f65fa62f56ff9f5c6448fc1fad84c2643db117b578",
+      "supported_pair": true,
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -5,
+      "measured_snr_db": -5.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98797017,
+              0.97830379,
+              1.0376592
+            ],
+            [
+              1.03525696,
+              0.97811129,
+              1.00486596
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.0182046
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.90754447,
+            1.02852411
+          ],
+          "middle": 0.68395774,
+          "range": [
+            46080,
+            57600
+          ],
+          "score": 0.19334183
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "9a788a5f04df2321977c187c313df109b8c50bd165bc371a328275a660f2e704",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "measured_snr_db": -5.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.02012688,
+              0.10809668,
+              0.97830379
+            ],
+            [
+              1.08771923,
+              0.04504646,
+              0.97811129
+            ]
+          ],
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.92172574
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.87007372,
+            0.72127462
+          ],
+          "middle": 0.04972351,
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.63435134
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "4d30bd473d94aa0e499f2efa35e36a8f5e5f7568f7ae229f17de8284c8f1f970",
+      "supported_pair": true,
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "measured_snr_db": -5.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98777165,
+              0.97830379,
+              1.0376592
+            ],
+            [
+              1.03490968,
+              0.97811129,
+              1.00486596
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.01810509
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.90754429,
+            1.02852411
+          ],
+          "middle": 0.68395774,
+          "range": [
+            46080,
+            57600
+          ],
+          "score": 0.19334159
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "03853b2ceeb7cd604328330fc7c5e9c511194bbba8001a57818c892db82cb7f5",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -5,
+      "measured_snr_db": -5.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.01398465,
+              1.00588931,
+              1.06103113
+            ],
+            [
+              0.62591825,
+              0.54457427,
+              0.66199707
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.06897157
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.93182933,
+            1.05565548
+          ],
+          "middle": 0.6799664,
+          "range": [
+            46080,
+            57600
+          ],
+          "score": 0.22090639
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "8b71ef453d0c431b8fa81353a17f957a198a0f2ada2956a3cc6a854ccfbee4b1",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-0",
+      "earlier_sha256": "b2537fb65f44ab47a2bb5f303d709249498caa6c188a677888aef1aa442a3c54",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -5,
+      "measured_snr_db": -5.00001,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "73e34d3df7a9143b33c6327815b54809e067b958744a1d4af7888eb30c3f01fb",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 46,
+      "case": "held-0",
+      "earlier_sha256": "0b88ab169e2d934453f432cbc8331e3fd6fa986d449919056dd3de72499aeb2d",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -5,
+      "measured_snr_db": -5.00001,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "73e34d3df7a9143b33c6327815b54809e067b958744a1d4af7888eb30c3f01fb",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -10,
+      "measured_snr_db": -10.00002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.97651046,
+              0.96139751,
+              1.0669815
+            ],
+            [
+              1.06078154,
+              0.96109801,
+              1.00861784
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.03129515
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.82771841,
+            1.05962393
+          ],
+          "middle": 0.56295634,
+          "range": [
+            46080,
+            57600
+          ],
+          "score": 0.20678569
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "d7a61c189b1165e7d0230ec30cdcda7c7a3ec6a980bf996f0f7f75db39129c7c",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -10,
+      "measured_snr_db": -10.00002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.03583051,
+              0.1523282,
+              0.96139751
+            ],
+            [
+              1.15597379,
+              0.06138894,
+              0.96109801
+            ]
+          ],
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.88884084
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.68214783,
+            0.56296012
+          ],
+          "middle": 0.05339212,
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.47977108
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "179f8eef721e6ddb05e8ff69ceab08788d5b162bf29909a7753951986fe12eb5",
+      "supported_pair": true,
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -10,
+      "measured_snr_db": -10.00002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.29862405,
+              0.96139751,
+              1.0669815
+            ],
+            [
+              1.460447,
+              0.96109801,
+              1.00861784
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.0730348
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.84028268,
+            0.95988516
+          ],
+          "middle": 0.57433273,
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.23604934
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "ddb6cfa0c492f7f4c7dfbfdeaf63ce8ca618bb822a3a4b6fe1a0ce122a32ab84",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -10,
+      "measured_snr_db": -10.00002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.03583455,
+              0.15417294,
+              0.96139751
+            ],
+            [
+              1.15597385,
+              0.06042753,
+              0.96109801
+            ]
+          ],
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.8883816
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.68214686,
+            0.56295932
+          ],
+          "middle": 0.05789698,
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.47526546
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "14a28dbed5a586c28f28e35777b2c866d32aa46f6c9682a178c5a2fe681a1504",
+      "supported_pair": true,
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -10,
+      "measured_snr_db": -10.00002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.97769519,
+              0.96139751,
+              1.0669815
+            ],
+            [
+              1.06187523,
+              0.96109801,
+              1.00861784
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.03189165
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.82771792,
+            1.05962391
+          ],
+          "middle": 0.56295633,
+          "range": [
+            46080,
+            57600
+          ],
+          "score": 0.20678509
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "867ee87dced2db12709a5fa84515138fc6216bb25694542acae708d0c6d12bab",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -10,
+      "measured_snr_db": -10.00002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.03581648,
+              0.10172382,
+              0.96139751
+            ],
+            [
+              1.15597389,
+              0.07158509,
+              0.96109801
+            ]
+          ],
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.90985455
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.77583557,
+            0.57573951
+          ],
+          "middle": 0.05883359,
+          "range": [
+            32000,
+            43520
+          ],
+          "score": 0.4668819
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "10fd652becb25e2cc1b8411d4a9b1b60a1a1a5bdec0824a45e3f3a01a81ffc52",
+      "supported_pair": true,
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -10,
+      "measured_snr_db": -10.00002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.97750189,
+              0.96139751,
+              1.0669815
+            ],
+            [
+              1.06149381,
+              0.96109801,
+              1.00861784
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.03179442
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.82771791,
+            1.05962392
+          ],
+          "middle": 0.56295633,
+          "range": [
+            46080,
+            57600
+          ],
+          "score": 0.20678507
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "b7335a4d6b22d03db7a4deb26254cb86ac3da976d59a78f9d28a0262b1364d18",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-0",
+      "earlier_sha256": "b84afd5e036709abd952423abb00263ab1ba96632082488400f2544b3c5b64c5",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -10,
+      "measured_snr_db": -10.00002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.00370922,
+              0.98900963,
+              1.09033442
+            ],
+            [
+              0.65250936,
+              0.52751888,
+              0.66578158
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.10309941
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.87878919,
+            1.11870006
+          ],
+          "middle": 0.57260054,
+          "range": [
+            46080,
+            57600
+          ],
+          "score": 0.24621093
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "2839d7ba434fa3b996daa7d88b4ee9c00f742bcecee6a52dd8c987a7b6e5fd34",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-0",
+      "earlier_sha256": "b2537fb65f44ab47a2bb5f303d709249498caa6c188a677888aef1aa442a3c54",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -10,
+      "measured_snr_db": -10.00002,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "d7a61c189b1165e7d0230ec30cdcda7c7a3ec6a980bf996f0f7f75db39129c7c",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 46,
+      "case": "held-0",
+      "earlier_sha256": "0b88ab169e2d934453f432cbc8331e3fd6fa986d449919056dd3de72499aeb2d",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -10,
+      "measured_snr_db": -10.00002,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "d7a61c189b1165e7d0230ec30cdcda7c7a3ec6a980bf996f0f7f75db39129c7c",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": 0,
+      "measured_snr_db": 3.2e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99303636,
+              1.01652544,
+              0.99511241
+            ],
+            [
+              1.00814824,
+              0.97124987,
+              0.99115093
+            ],
+            [
+              1.00148171,
+              0.99866798,
+              1.00799727
+            ]
+          ],
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 0.00280956
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.95454136,
+            0.89043476
+          ],
+          "middle": 0.60367676,
+          "range": [
+            26880,
+            38400
+          ],
+          "score": 0.27073135
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "098a65ac3ce0ff63e86c635246e119859cea401783d70aa3b1df4503d7ac6cc5",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": 0,
+      "measured_snr_db": 3.2e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99571592,
+              0.97924127,
+              1.02320782
+            ],
+            [
+              0.98729416,
+              1.00255634,
+              0.99575873
+            ]
+          ],
+          "range": [
+            67840,
+            79360
+          ],
+          "score": 0.00054347
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.92907563,
+            0.89391748
+          ],
+          "middle": 0.86366191,
+          "range": [
+            71680,
+            83200
+          ],
+          "score": 0.02146603
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "c51e4373edb8397b133b8a0e044c58548bad01b6fc2c5eed8e082e4eb59f968a",
+      "supported_pair": true,
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": 0,
+      "measured_snr_db": 3.2e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99571592,
+              0.97924127,
+              1.02320782
+            ],
+            [
+              0.98729416,
+              1.00255634,
+              0.99575873
+            ]
+          ],
+          "range": [
+            67840,
+            79360
+          ],
+          "score": 0.00054347
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.95454136,
+            0.95954559
+          ],
+          "middle": 0.73247023,
+          "range": [
+            26880,
+            38400
+          ],
+          "score": 0.22082007
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "a96e61b5124b9de963dbcb94f67498630874843d104d86088714f50e367cac5e",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": 0,
+      "measured_snr_db": 3.2e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99571592,
+              0.97924127,
+              1.02320782
+            ],
+            [
+              0.98729416,
+              1.00255634,
+              0.99575873
+            ]
+          ],
+          "range": [
+            67840,
+            79360
+          ],
+          "score": 0.00054347
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.92907563,
+            0.89391748
+          ],
+          "middle": 0.86366191,
+          "range": [
+            71680,
+            83200
+          ],
+          "score": 0.02146603
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "c142a03f45d44418348c89f4547f9f79908c43ae2200a5be6da8137bc27b53f8",
+      "supported_pair": true,
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": 0,
+      "measured_snr_db": 3.2e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99303636,
+              1.01717706,
+              0.99805643
+            ],
+            [
+              1.00814824,
+              0.97212974,
+              0.99247414
+            ],
+            [
+              1.00148171,
+              0.99985689,
+              1.01017289
+            ]
+          ],
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 0.00162241
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.95454136,
+            0.89106841
+          ],
+          "middle": 0.60460637,
+          "range": [
+            26880,
+            38400
+          ],
+          "score": 0.2705938
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "0c8462168f935349898c85f4c1167dd9aa17a4078535f4d667ca053ff626c793",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "measured_snr_db": 3.2e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99571592,
+              0.97924127,
+              1.02320782
+            ],
+            [
+              0.98729416,
+              1.00255634,
+              0.99575873
+            ]
+          ],
+          "range": [
+            67840,
+            79360
+          ],
+          "score": 0.00054347
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.92907563,
+            0.89391748
+          ],
+          "middle": 0.86366191,
+          "range": [
+            71680,
+            83200
+          ],
+          "score": 0.02146603
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "a5e45bf6b3725b93fc4b0798451b2c4b1b04ed43ff076a1f00458b6daaeebb40",
+      "supported_pair": true,
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "measured_snr_db": 3.2e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99303636,
+              1.01652544,
+              0.99511241
+            ],
+            [
+              1.00814824,
+              0.97124987,
+              0.99115093
+            ],
+            [
+              1.00148171,
+              0.99866798,
+              1.00799727
+            ]
+          ],
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 0.00280956
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.95454136,
+            0.89043476
+          ],
+          "middle": 0.60367676,
+          "range": [
+            26880,
+            38400
+          ],
+          "score": 0.27073135
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "098a65ac3ce0ff63e86c635246e119859cea401783d70aa3b1df4503d7ac6cc5",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": 0,
+      "measured_snr_db": 3.2e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.12335482,
+              1.13557861,
+              1.13965279
+            ],
+            [
+              0.51174307,
+              0.45697698,
+              0.67069169
+            ]
+          ],
+          "range": [
+            16640,
+            28160
+          ],
+          "score": 0.04806861
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.97214179,
+            0.84712565
+          ],
+          "middle": 0.63272564,
+          "range": [
+            26880,
+            38400
+          ],
+          "score": 0.18314598
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "c456d4a8ceb281b1c2156b5ea51d57af1ce0321126c0c8253437ad04b6a8a8df",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-1",
+      "earlier_sha256": "5c8bf4c5db159c94b8d99f0b66c0a47452a5a31a9bc9b1ffdf626a0ca7ccbf64",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": 0,
+      "measured_snr_db": 3.2e-05,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "098a65ac3ce0ff63e86c635246e119859cea401783d70aa3b1df4503d7ac6cc5",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 51,
+      "case": "held-1",
+      "earlier_sha256": "7c900a91c1a1aa52122d9ab15f3ad8e441dca87af0b5c3961d1402f06f8cf623",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": 0,
+      "measured_snr_db": 3.2e-05,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "098a65ac3ce0ff63e86c635246e119859cea401783d70aa3b1df4503d7ac6cc5",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -5,
+      "measured_snr_db": -4.999976,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98761928,
+              1.02939459,
+              0.99130229
+            ],
+            [
+              1.01447755,
+              0.94889673,
+              0.98427544
+            ],
+            [
+              1.00264869,
+              0.99764278,
+              1.01422231
+            ]
+          ],
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 0.00499268
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.89393823,
+            0.76987384
+          ],
+          "middle": 0.43492465,
+          "range": [
+            26880,
+            38400
+          ],
+          "score": 0.30393309
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "d6f62d1738ec665890032f7bb37203db76a7a1833a1667c3a166f239345113fd",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -5,
+      "measured_snr_db": -4.999976,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99238649,
+              0.96308442,
+              1.04127834
+            ],
+            [
+              0.97741239,
+              1.00453695,
+              0.99244882
+            ]
+          ],
+          "range": [
+            67840,
+            79360
+          ],
+          "score": 0.00088774
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.01553092,
+            0.87776884
+          ],
+          "middle": 0.83976673,
+          "range": [
+            66560,
+            78080
+          ],
+          "score": 0.00356159
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "3f4abdfd7e1ffc145f4ac8dfe38678d4bbbbfaae0fc471909f0953ab99cbf7e2",
+      "supported_pair": true,
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -5,
+      "measured_snr_db": -4.999976,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99238649,
+              0.96308442,
+              1.04127834
+            ],
+            [
+              0.97741239,
+              1.00453695,
+              0.99244882
+            ]
+          ],
+          "range": [
+            67840,
+            79360
+          ],
+          "score": 0.00088774
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.89133981,
+            0.90071956
+          ],
+          "middle": 0.56147434,
+          "range": [
+            26880,
+            38400
+          ],
+          "score": 0.32752053
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "59f0fe0874595814485bc7d58b556942a5e9a96d575fcb476f41b41c16078c36",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -5,
+      "measured_snr_db": -4.999976,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99238649,
+              0.96308442,
+              1.04127834
+            ],
+            [
+              0.97741239,
+              1.00453695,
+              0.99244882
+            ]
+          ],
+          "range": [
+            67840,
+            79360
+          ],
+          "score": 0.00088774
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.01553092,
+            0.87776884
+          ],
+          "middle": 0.83976673,
+          "range": [
+            66560,
+            78080
+          ],
+          "score": 0.00356159
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "25ab492f520bb10ead0e495493770cde72bc2aed671b46e10d2ee1473febe26b",
+      "supported_pair": true,
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -5,
+      "measured_snr_db": -4.999976,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98761928,
+              1.03004633,
+              0.99423684
+            ],
+            [
+              1.01447755,
+              0.94975747,
+              0.9855971
+            ],
+            [
+              1.00264869,
+              0.99883155,
+              1.01638929
+            ]
+          ],
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 0.00380706
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.89393823,
+            0.77096174
+          ],
+          "middle": 0.43576265,
+          "range": [
+            26880,
+            38400
+          ],
+          "score": 0.30445497
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "bd4257026ddb0e2713b0b75c06e703723da7827d231e6102ca144f04fbb2b138",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "measured_snr_db": -4.999976,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99238649,
+              0.96308442,
+              1.04127834
+            ],
+            [
+              0.97741239,
+              1.00453695,
+              0.99244882
+            ]
+          ],
+          "range": [
+            67840,
+            79360
+          ],
+          "score": 0.00088774
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.01553092,
+            0.87776884
+          ],
+          "middle": 0.83976673,
+          "range": [
+            66560,
+            78080
+          ],
+          "score": 0.00356159
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "0f5d2d85dc1e65cea7888d23f35af5a9bb832811c9912b73d9793fcb519e8652",
+      "supported_pair": true,
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "measured_snr_db": -4.999976,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98761928,
+              1.02939459,
+              0.99130229
+            ],
+            [
+              1.01447755,
+              0.94889673,
+              0.98427544
+            ],
+            [
+              1.00264869,
+              0.99764278,
+              1.01422231
+            ]
+          ],
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 0.00499268
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.89393823,
+            0.76987384
+          ],
+          "middle": 0.43492465,
+          "range": [
+            26880,
+            38400
+          ],
+          "score": 0.30393309
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "d6f62d1738ec665890032f7bb37203db76a7a1833a1667c3a166f239345113fd",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -5,
+      "measured_snr_db": -4.999976,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.11941937,
+              1.1424742,
+              1.14829439
+            ],
+            [
+              0.51358156,
+              0.45743627,
+              0.68763506
+            ]
+          ],
+          "range": [
+            16640,
+            28160
+          ],
+          "score": 0.04436286
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.92832401,
+            0.69647752
+          ],
+          "middle": 0.45043138,
+          "range": [
+            26880,
+            38400
+          ],
+          "score": 0.18808452
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "5ba1bd6d150552aaa17f9f57ac3c98a95c61fbcd881143f829f877200690ebf0",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-1",
+      "earlier_sha256": "5c8bf4c5db159c94b8d99f0b66c0a47452a5a31a9bc9b1ffdf626a0ca7ccbf64",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -5,
+      "measured_snr_db": -4.999976,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "d6f62d1738ec665890032f7bb37203db76a7a1833a1667c3a166f239345113fd",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 51,
+      "case": "held-1",
+      "earlier_sha256": "7c900a91c1a1aa52122d9ab15f3ad8e441dca87af0b5c3961d1402f06f8cf623",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -5,
+      "measured_snr_db": -4.999976,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "d6f62d1738ec665890032f7bb37203db76a7a1833a1667c3a166f239345113fd",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -10,
+      "measured_snr_db": -9.999981,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.97799033,
+              1.05228483,
+              0.98452117
+            ],
+            [
+              1.02574971,
+              0.90913692,
+              0.97201687
+            ],
+            [
+              1.00469945,
+              0.9958089,
+              1.02528842
+            ]
+          ],
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 0.00884897
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.81723433,
+            0.64405671
+          ],
+          "middle": 0.33655502,
+          "range": [
+            26880,
+            38400
+          ],
+          "score": 0.26420728
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "48454f037a7980616a66e95b1a66db1400ecaac9c6deaf4f69f1c44e7bc86af4",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -10,
+      "measured_snr_db": -9.999981,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98645728,
+              0.9343578,
+              1.0733834
+            ],
+            [
+              0.95982653,
+              1.00807546,
+              0.98658457
+            ]
+          ],
+          "range": [
+            67840,
+            79360
+          ],
+          "score": 0.00127318
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.03397804,
+            0.79601692
+          ],
+          "middle": 0.73225705,
+          "range": [
+            66560,
+            78080
+          ],
+          "score": 0.00426959
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "fc42e9b354fc3a348a2b905c10d0df9aafe9a9a8bb48fc4726c12df6317b32f8",
+      "supported_pair": true,
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -10,
+      "measured_snr_db": -9.999981,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98645728,
+              0.9343578,
+              1.0733834
+            ],
+            [
+              0.95982653,
+              1.00807546,
+              0.98658457
+            ]
+          ],
+          "range": [
+            67840,
+            79360
+          ],
+          "score": 0.00127318
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.80585634,
+            0.81641533
+          ],
+          "middle": 0.4398678,
+          "range": [
+            26880,
+            38400
+          ],
+          "score": 0.36334879
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "03f4bed51d4bef44d762a0c7e40d6921a26df0eb2117159c3476c5fb24c9c555",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -10,
+      "measured_snr_db": -9.999981,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98645728,
+              0.9343578,
+              1.0733834
+            ],
+            [
+              0.95982653,
+              1.00807546,
+              0.98658457
+            ]
+          ],
+          "range": [
+            67840,
+            79360
+          ],
+          "score": 0.00127318
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.03397804,
+            0.79601692
+          ],
+          "middle": 0.73225705,
+          "range": [
+            66560,
+            78080
+          ],
+          "score": 0.00426959
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "86a235c71b106225c68cc6291684f00efbb8d557022b7896977476b2f8ccfbd3",
+      "supported_pair": true,
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -10,
+      "measured_snr_db": -9.999981,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.97799033,
+              1.05293422,
+              0.98746959
+            ],
+            [
+              1.02574971,
+              0.90998695,
+              0.973366
+            ],
+            [
+              1.00469945,
+              0.99699523,
+              1.02746099
+            ]
+          ],
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 0.00766819
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.81723433,
+            0.64538331
+          ],
+          "middle": 0.33723457,
+          "range": [
+            26880,
+            38400
+          ],
+          "score": 0.26518598
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "f1a0d39ec2b8dfe2c2611d9bf83b036e2d214bd660ed0a58ce15f4ab991defd1",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -10,
+      "measured_snr_db": -9.999981,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98645728,
+              0.9343578,
+              1.0733834
+            ],
+            [
+              0.95982653,
+              1.00807546,
+              0.98658457
+            ]
+          ],
+          "range": [
+            67840,
+            79360
+          ],
+          "score": 0.00127318
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.03397804,
+            0.79601692
+          ],
+          "middle": 0.73225705,
+          "range": [
+            66560,
+            78080
+          ],
+          "score": 0.00426959
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "c46e010d71c6643f87dc43620876d9ec8ca2d0580326b50274743369e9e23285",
+      "supported_pair": true,
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -10,
+      "measured_snr_db": -9.999981,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.97799033,
+              1.05228483,
+              0.98452117
+            ],
+            [
+              1.02574971,
+              0.90913692,
+              0.97201687
+            ],
+            [
+              1.00469945,
+              0.9958089,
+              1.02528842
+            ]
+          ],
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 0.00884897
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.81723433,
+            0.64405671
+          ],
+          "middle": 0.33655502,
+          "range": [
+            26880,
+            38400
+          ],
+          "score": 0.26420728
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "48454f037a7980616a66e95b1a66db1400ecaac9c6deaf4f69f1c44e7bc86af4",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 47,
+      "case": "held-1",
+      "earlier_sha256": "a73d1ae28601e0f7e596a211b16072d38bfd95d1fd3964e3d6d560162d43c91c",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -10,
+      "measured_snr_db": -9.999981,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.10969068,
+              1.05641946,
+              1.18889726
+            ],
+            [
+              1.01819023,
+              1.08003009,
+              1.02758213
+            ],
+            [
+              0.68171579,
+              0.55375564,
+              0.6200481
+            ]
+          ],
+          "range": [
+            69120,
+            80640
+          ],
+          "score": 0.04800547
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.86300775,
+            0.56425565
+          ],
+          "middle": 0.3472134,
+          "range": [
+            26880,
+            38400
+          ],
+          "score": 0.14235423
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "977a524bec57014c1ad38825ecc71ea648f9c0cdf5c6329a642f881db3fdda9f",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-1",
+      "earlier_sha256": "5c8bf4c5db159c94b8d99f0b66c0a47452a5a31a9bc9b1ffdf626a0ca7ccbf64",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -10,
+      "measured_snr_db": -9.999981,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "48454f037a7980616a66e95b1a66db1400ecaac9c6deaf4f69f1c44e7bc86af4",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 51,
+      "case": "held-1",
+      "earlier_sha256": "7c900a91c1a1aa52122d9ab15f3ad8e441dca87af0b5c3961d1402f06f8cf623",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -10,
+      "measured_snr_db": -9.999981,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "48454f037a7980616a66e95b1a66db1400ecaac9c6deaf4f69f1c44e7bc86af4",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": 0,
+      "measured_snr_db": -1e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.0038204,
+              0.99805666,
+              1.01402537
+            ],
+            [
+              1.00039985,
+              0.99034058,
+              1.0010559
+            ]
+          ],
+          "range": [
+            49920,
+            61440
+          ],
+          "score": 0.00789852
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.00479932,
+            1.00738526
+          ],
+          "middle": 0.88872403,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.1154288
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "3687adea873e63fd8452d5b4a334c9bec694ca19c6f11f527e4a22b220fc8333",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": 0,
+      "measured_snr_db": -1e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.9653969,
+              0.00831589,
+              0.99632037
+            ],
+            [
+              0.97972301,
+              -0.00762141,
+              0.99987203
+            ]
+          ],
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.99958259
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.00766117,
+            1.01025447
+          ],
+          "middle": 0.89125528,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.11575756
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "7d1a057c679f894b76a0087339fcdeda171dd31a689f17894dfbe3f2723074b5",
+      "supported_pair": true,
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": 0,
+      "measured_snr_db": -1e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.40750467,
+              0.99632037,
+              1.01195445
+            ],
+            [
+              1.39123425,
+              0.99354287,
+              1.00663639
+            ]
+          ],
+          "range": [
+            53760,
+            65280
+          ],
+          "score": 0.0142283
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.00466537,
+            1.00725096
+          ],
+          "middle": 0.88860556,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.11541341
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "dba09d3bb720a0a2d61b859aa295c0911e8ca2253b00179bbb37227193171e9e",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": 0,
+      "measured_snr_db": -1e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.9985575,
+              0.00467557,
+              0.99536173
+            ],
+            [
+              1.00686819,
+              -0.01516207,
+              0.99910521
+            ]
+          ],
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 1.00523914
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.00766117,
+            1.01025447
+          ],
+          "middle": 0.89125528,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.11575756
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "1dd96408f32f817ad85e4a4688500528a2fbe8990d2c116d49df31bac347c50b",
+      "supported_pair": true,
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": 0,
+      "measured_snr_db": -1e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.00468813,
+              0.99819507,
+              1.01402537
+            ],
+            [
+              0.99974357,
+              0.99007896,
+              1.0010559
+            ]
+          ],
+          "range": [
+            49920,
+            61440
+          ],
+          "score": 0.00806492
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.00479932,
+            1.00738526
+          ],
+          "middle": 0.88872403,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.1154288
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "af9dd1cce740ff61984c279d1833601c47f907868db759f9f24229ecfed65118",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "measured_snr_db": -1e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.9058276,
+              -0.01043805,
+              0.99718312
+            ],
+            [
+              0.97629367,
+              0.00031537,
+              1.00056571
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 1.0056001
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.00766117,
+            1.01025447
+          ],
+          "middle": 0.89125528,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.11575756
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "8dd49fe8c432f03cdfb59c0ed3026eadde32a71414e0a4ec1c1b44684d6e676b",
+      "supported_pair": true,
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "measured_snr_db": -1e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.0038204,
+              0.99805666,
+              1.01402537
+            ],
+            [
+              1.00039985,
+              0.99034058,
+              1.0010559
+            ]
+          ],
+          "range": [
+            49920,
+            61440
+          ],
+          "score": 0.00789852
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.00479932,
+            1.00738526
+          ],
+          "middle": 0.88872403,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.1154288
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "3687adea873e63fd8452d5b4a334c9bec694ca19c6f11f527e4a22b220fc8333",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": 0,
+      "measured_snr_db": -1e-06,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.05817957,
+              1.04697634,
+              1.06446678
+            ],
+            [
+              0.74771677,
+              0.60593242,
+              0.70063325
+            ]
+          ],
+          "range": [
+            53760,
+            65280
+          ],
+          "score": 0.07287594
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.9971745,
+            1.0154731
+          ],
+          "middle": 0.88625889,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.10634097
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "b64ce7502c4a7718fc5833ac9b3fc7557de43fbcbc892f7f3074c48db3c3d074",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-2",
+      "earlier_sha256": "41946ec0ab2a255c7ba31ead1dc6816477b45d2493c2e4a26984a91151335d6f",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": 0,
+      "measured_snr_db": -1e-06,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "3687adea873e63fd8452d5b4a334c9bec694ca19c6f11f527e4a22b220fc8333",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 56,
+      "case": "held-2",
+      "earlier_sha256": "a7778f54e079cab9e944d01173a17b2a9a8e8130b0037cc6c4052431ff324c7b",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": 0,
+      "measured_snr_db": -1e-06,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "3687adea873e63fd8452d5b4a334c9bec694ca19c6f11f527e4a22b220fc8333",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.00679627,
+              0.99654091,
+              1.02496425
+            ],
+            [
+              1.00071372,
+              0.98283998,
+              1.00184689
+            ]
+          ],
+          "range": [
+            49920,
+            61440
+          ],
+          "score": 0.01402356
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.01479997,
+            1.02288348
+          ],
+          "middle": 0.74004071,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.27273838
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "993079310e35e5be66e72a857b8bbb8d6394716493c5473100dec779298a8a9d",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.96500438,
+              0.01415103,
+              0.99345565
+            ],
+            [
+              0.98481174,
+              -0.01608906,
+              0.99976967
+            ]
+          ],
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 1.00083649
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.02374236,
+            1.03189711
+          ],
+          "middle": 0.74656193,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.27514174
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "4653036a71560cecd2639e36f71c57dad35f6b4badf60b2584d4e2c199d4a017",
+      "supported_pair": true,
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.41334818,
+              0.99345565,
+              1.02125484
+            ],
+            [
+              1.38443944,
+              0.9885117,
+              1.01179444
+            ]
+          ],
+          "range": [
+            53760,
+            65280
+          ],
+          "score": 0.02511598
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.01451867,
+            1.02259994
+          ],
+          "middle": 0.73983557,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.27266278
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "8dc71d489d12aa214511808ddf2634717f473f263594fc4238aa642ae0db4422",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.9974539,
+              0.01189408,
+              0.99174862
+            ],
+            [
+              1.01221189,
+              -0.02363681,
+              0.99842107
+            ]
+          ],
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 1.00584058
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.02374236,
+            1.03189711
+          ],
+          "middle": 0.74656193,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.27514174
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "71fd8d8dc070da95a8086bd6d648d21ac33f5f58426eef2dafa2ae0536f78972",
+      "supported_pair": true,
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.00765924,
+              0.99668011,
+              1.02496425
+            ],
+            [
+              1.00003571,
+              0.98258596,
+              1.00184689
+            ]
+          ],
+          "range": [
+            49920,
+            61440
+          ],
+          "score": 0.0141724
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.01479997,
+            1.02288348
+          ],
+          "middle": 0.74004071,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.27273838
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "a30f93e37a9f0f382ac16e7001fa3d0d45ff4727bdfea874bb5e53a8d13dc6e0",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.90691808,
+              -0.00459412,
+              0.99499259
+            ],
+            [
+              0.98124591,
+              -0.00813618,
+              1.00099877
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 1.00667866
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.02374236,
+            1.03189711
+          ],
+          "middle": 0.74656193,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.27514174
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "11346273884d6e5c0ef3cab9609d5673f62ab9cf65ff486eec050566e333fdec",
+      "supported_pair": true,
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.00679627,
+              0.99654091,
+              1.02496425
+            ],
+            [
+              1.00071372,
+              0.98283998,
+              1.00184689
+            ]
+          ],
+          "range": [
+            49920,
+            61440
+          ],
+          "score": 0.01402356
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.01479997,
+            1.02288348
+          ],
+          "middle": 0.74004071,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.27273838
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "993079310e35e5be66e72a857b8bbb8d6394716493c5473100dec779298a8a9d",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.06402266,
+              1.04411461,
+              1.07377322
+            ],
+            [
+              0.74090969,
+              0.60090148,
+              0.70581034
+            ]
+          ],
+          "range": [
+            53760,
+            65280
+          ],
+          "score": 0.08367311
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.00809395,
+            1.03069952
+          ],
+          "middle": 0.74132537,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.2611172
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "f2beef1b5df1f02bae92419541f82806a92668effba1763a7ddd858baf4f9e2a",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-2",
+      "earlier_sha256": "41946ec0ab2a255c7ba31ead1dc6816477b45d2493c2e4a26984a91151335d6f",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "993079310e35e5be66e72a857b8bbb8d6394716493c5473100dec779298a8a9d",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 56,
+      "case": "held-2",
+      "earlier_sha256": "a7778f54e079cab9e944d01173a17b2a9a8e8130b0037cc6c4052431ff324c7b",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "993079310e35e5be66e72a857b8bbb8d6394716493c5473100dec779298a8a9d",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -10,
+      "measured_snr_db": -10.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.01207256,
+              0.993855,
+              1.04439411
+            ],
+            [
+              1.00124497,
+              0.9695114,
+              1.00324979
+            ]
+          ],
+          "range": [
+            49920,
+            61440
+          ],
+          "score": 0.02484718
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.0442372,
+            1.06885114
+          ],
+          "middle": 0.54096267,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.49712104
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "b4baa6df1187ad8b934547abe26851f18a2aaa90e7d5d36c1ce480a1a2c45039",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -10,
+      "measured_snr_db": -10.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.96429533,
+              0.02454057,
+              0.9883667
+            ],
+            [
+              0.99387264,
+              -0.03115524,
+              0.99957454
+            ]
+          ],
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 1.00294905
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.07028706,
+            1.09551503
+          ],
+          "middle": 0.55445769,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.50952237
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "67658b943351872e968d2181b5ae9faeb4ad2f35fa9c04c3370f972bd8969dab",
+      "supported_pair": true,
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -10,
+      "measured_snr_db": -10.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.42373371,
+              0.9883667,
+              1.03779997
+            ],
+            [
+              1.37233867,
+              0.97957923,
+              1.02099827
+            ]
+          ],
+          "range": [
+            53760,
+            65280
+          ],
+          "score": 0.04409997
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.0433476,
+            1.06794058
+          ],
+          "middle": 0.54050182,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.49669754
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "9e4c5d0aec92f0b9deb0fa7e2434a2b9abe1675b742dc77be970a4172b042133",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -10,
+      "measured_snr_db": -10.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99547889,
+              0.02474251,
+              0.98533098
+            ],
+            [
+              1.02172671,
+              -0.03867133,
+              0.99718641
+            ]
+          ],
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 1.00683479
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.07030016,
+            1.09552844
+          ],
+          "middle": 0.55446448,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.50952861
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "d16eb277f01772896eab2883917b5493f8a530ba63735b0c50a6723ba61ca914",
+      "supported_pair": true,
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -10,
+      "measured_snr_db": -10.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.0129382,
+              0.99399177,
+              1.04439411
+            ],
+            [
+              1.00058945,
+              0.96924508,
+              1.00324979
+            ]
+          ],
+          "range": [
+            49920,
+            61440
+          ],
+          "score": 0.02501517
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.0442372,
+            1.06885114
+          ],
+          "middle": 0.54096267,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.49712104
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "ae45bb0c2dd69d50b1a3f25401048e6d0e460074c691bb88ca28d62f9c1496d8",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -10,
+      "measured_snr_db": -10.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.96652128,
+              0.0057916,
+              0.9883667
+            ],
+            [
+              0.99430938,
+              -0.02319245,
+              0.99957454
+            ]
+          ],
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 1.00866648
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.07031429,
+            1.0955429
+          ],
+          "middle": 0.5544718,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.50953534
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "085d12afd7b06b5709a739837655490e8c953cf8407c3bb2fcfff35bc75bc964",
+      "supported_pair": true,
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -10,
+      "measured_snr_db": -10.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.01207256,
+              0.993855,
+              1.04439411
+            ],
+            [
+              1.00124497,
+              0.9695114,
+              1.00324979
+            ]
+          ],
+          "range": [
+            49920,
+            61440
+          ],
+          "score": 0.02484718
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.0442372,
+            1.06885114
+          ],
+          "middle": 0.54096267,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.49712104
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "b4baa6df1187ad8b934547abe26851f18a2aaa90e7d5d36c1ce480a1a2c45039",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 48,
+      "case": "held-2",
+      "earlier_sha256": "1d1887bcc8ea3e524a61a3a2f4ef6ce3c24364656578f8d0bcbae59721ebdaa8",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -10,
+      "measured_snr_db": -10.00001,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.07441004,
+              1.03902193,
+              1.09031927
+            ],
+            [
+              0.72880258,
+              0.59198118,
+              0.7149985
+            ]
+          ],
+          "range": [
+            53760,
+            65280
+          ],
+          "score": 0.10249491
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.04191741,
+            1.08050978
+          ],
+          "middle": 0.54619996,
+          "range": [
+            20480,
+            32000
+          ],
+          "score": 0.48606936
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "53f2044adfff5bafc9e0811fd9c9a07d960a739d8c01f5dea5aa5b434d5b4eb4",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 55,
+      "case": "held-2",
+      "earlier_sha256": "41946ec0ab2a255c7ba31ead1dc6816477b45d2493c2e4a26984a91151335d6f",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -10,
+      "measured_snr_db": -10.00001,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "b4baa6df1187ad8b934547abe26851f18a2aaa90e7d5d36c1ce480a1a2c45039",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 56,
+      "case": "held-2",
+      "earlier_sha256": "a7778f54e079cab9e944d01173a17b2a9a8e8130b0037cc6c4052431ff324c7b",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -10,
+      "measured_snr_db": -10.00001,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "b4baa6df1187ad8b934547abe26851f18a2aaa90e7d5d36c1ce480a1a2c45039",
+      "supported_pair": false,
+      "truth": null
+    }
+  ],
+  "development": [
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": 0,
+      "measured_snr_db": -1.7e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99417306,
+              0.95925828,
+              0.99996569
+            ],
+            [
+              0.99050268,
+              0.99334248,
+              0.99665328
+            ]
+          ],
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.01612619
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.99242053,
+            0.99519264
+          ],
+          "middle": 0.69238972,
+          "range": [
+            30720,
+            42240
+          ],
+          "score": 0.29933779
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "bd9f74da93bc6019f87930c58a4002fad309dd479d93fe683624571e6bc2fa02",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": 0,
+      "measured_snr_db": -1.7e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.8003236,
+              -0.00049891,
+              1.06437844
+            ],
+            [
+              0.97255654,
+              -0.00261779,
+              0.96374687
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 1.00166982
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.70991775,
+            0.87294989
+          ],
+          "middle": 0.01155228,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.65760743
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "5a9e730177490965562205dfcd862e5f511cdf08fce3cf7311219e258ec7de14",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": 0,
+      "measured_snr_db": -1.7e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99707646,
+              0.96789925,
+              1.39227555
+            ],
+            [
+              0.99809375,
+              1.00197004,
+              1.40288088
+            ]
+          ],
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 0.01268953
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.98507736,
+            1.01388736
+          ],
+          "middle": 0.78331502,
+          "range": [
+            30720,
+            42240
+          ],
+          "score": 0.19455984
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "4adf6bbdaca24a467b1c10ceadd75103bdf5c2bfe6545e36a0e3ce82495aa6f3",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": 0,
+      "measured_snr_db": -1.7e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.96789925,
+              0.00333148,
+              1.04179238
+            ],
+            [
+              1.0019699,
+              0.04351456,
+              0.97561031
+            ]
+          ],
+          "range": [
+            40960,
+            52480
+          ],
+          "score": 0.97597782
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.70991775,
+            0.87295021
+          ],
+          "middle": -0.00187411,
+          "range": [
+            40960,
+            52480
+          ],
+          "score": 0.67103374
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "37bb67ba964f8ae4fbcc433085b40414c23e835d1da71b6014ce21abb35bcacd",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": 0,
+      "measured_snr_db": -1.7e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99417306,
+              0.95925183,
+              1.00019567
+            ],
+            [
+              0.99050268,
+              0.99334248,
+              0.99601021
+            ]
+          ],
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.01612944
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.99242053,
+            0.99523152
+          ],
+          "middle": 0.69238972,
+          "range": [
+            30720,
+            42240
+          ],
+          "score": 0.29932807
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "69d59ecc32be792ca23f069a1b9aba50b481c5bfd181aa1cd9232925f24f4673",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "measured_snr_db": -1.7e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.96789925,
+              0.0429683,
+              1.04179238
+            ],
+            [
+              1.00196989,
+              0.1172033,
+              0.97561031
+            ]
+          ],
+          "range": [
+            40960,
+            52480
+          ],
+          "score": 0.91773666
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.70991775,
+            0.8729502
+          ],
+          "middle": 0.03656391,
+          "range": [
+            40960,
+            52480
+          ],
+          "score": 0.63259572
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "b45bb82a1d2b769d36f0a6aabbcf7014605ea8022ae4be094a94fa6367a9296f",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "measured_snr_db": -1.7e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99417306,
+              0.95925183,
+              1.00019567
+            ],
+            [
+              0.99050268,
+              0.99334248,
+              0.99601021
+            ]
+          ],
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.01612944
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.99242053,
+            0.99523152
+          ],
+          "middle": 0.69238972,
+          "range": [
+            30720,
+            42240
+          ],
+          "score": 0.29932807
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "69d59ecc32be792ca23f069a1b9aba50b481c5bfd181aa1cd9232925f24f4673",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": 0,
+      "measured_snr_db": -1.7e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.01421676,
+              1.00808867,
+              0.97854216
+            ],
+            [
+              0.6765564,
+              0.47950294,
+              0.67234267
+            ]
+          ],
+          "range": [
+            23040,
+            34560
+          ],
+          "score": 0.12831161
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.99262745,
+            1.0001845
+          ],
+          "middle": 0.69752356,
+          "range": [
+            30720,
+            42240
+          ],
+          "score": 0.29321462
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "fba2fd9e88fc3873950ac5a94fa3d36d442018cce71b68f7655d78410959597f",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-0",
+      "earlier_sha256": "5ede7555ed691519e44ea884ddb34065864973274adc3e7631f5ef8bcae4385e",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": 0,
+      "measured_snr_db": -1.7e-05,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "development",
+      "submitted_sha256": "bd9f74da93bc6019f87930c58a4002fad309dd479d93fe683624571e6bc2fa02",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 44,
+      "case": "dev-0",
+      "earlier_sha256": "bc7e07f341e03a4e0c2e6961658082893a409a0fddfd41ec57a95393ccae6af2",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": 0,
+      "measured_snr_db": -1.7e-05,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "development",
+      "submitted_sha256": "bd9f74da93bc6019f87930c58a4002fad309dd479d93fe683624571e6bc2fa02",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -5,
+      "measured_snr_db": -4.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98964454,
+              0.92753975,
+              0.99994034
+            ],
+            [
+              0.98311061,
+              0.98821655,
+              0.99402379
+            ]
+          ],
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.0287805
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.97428575,
+            0.98783657
+          ],
+          "middle": 0.50919806,
+          "range": [
+            30720,
+            42240
+          ],
+          "score": 0.46169999
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "bb5b694839b86c47e919da354896d8a81ddd7e6f5f68565961d8c7f2919aab12",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -5,
+      "measured_snr_db": -4.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.76901281,
+              -0.000526,
+              1.11447938
+            ],
+            [
+              0.97726575,
+              -0.00251567,
+              0.93554717
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 1.00168649
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.88250641,
+            0.94203805
+          ],
+          "middle": 0.82052578,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.04709773
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "37770d851b3e094b7b51082b292176cbd2a3957f63155d94b4cdc30bdd94b80f",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -5,
+      "measured_snr_db": -4.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99480993,
+              0.94290373,
+              1.38644683
+            ],
+            [
+              0.99658786,
+              1.00351486,
+              1.40567733
+            ]
+          ],
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 0.02261315
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.95650003,
+            1.0413752
+          ],
+          "middle": 0.60097302,
+          "range": [
+            30720,
+            42240
+          ],
+          "score": 0.33430822
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "92924ff7066e1017f050bc62541eb4ee98259111cd32d18f9ae2b923517e2eb7",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -5,
+      "measured_snr_db": -4.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.94290373,
+              -0.00204342,
+              1.07430844
+            ],
+            [
+              1.00351472,
+              0.04668293,
+              0.95664378
+            ]
+          ],
+          "range": [
+            40960,
+            52480
+          ],
+          "score": 0.97668425
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.88250641,
+            0.94203805
+          ],
+          "middle": 0.82052578,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.04709773
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "d2f619a2928a3605cbed54fb762057f31fe3bcc057ac670c96fca381b6316373",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -5,
+      "measured_snr_db": -4.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98964454,
+              0.92752731,
+              1.00016731
+            ],
+            [
+              0.98311061,
+              0.98821655,
+              0.99339322
+            ]
+          ],
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.02878678
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.97428575,
+            0.98790261
+          ],
+          "middle": 0.50919806,
+          "range": [
+            30720,
+            42240
+          ],
+          "score": 0.46168348
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "53367b6fb487bc27179d234ef3f1e58bb0854ad73d495f4e39f91e1ce64af522",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "measured_snr_db": -4.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.94290373,
+              0.03759472,
+              1.07430844
+            ],
+            [
+              1.00351471,
+              0.12038967,
+              0.95664378
+            ]
+          ],
+          "range": [
+            40960,
+            52480
+          ],
+          "score": 0.91714146
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.88250641,
+            0.94203805
+          ],
+          "middle": 0.82052578,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.04709773
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "4be7029714b968878c998c855ee5edee0aec4ad35a1dfc620437b3a5245d7b3c",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "measured_snr_db": -4.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98964454,
+              0.92752731,
+              1.00016731
+            ],
+            [
+              0.98311061,
+              0.98821655,
+              0.99339322
+            ]
+          ],
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.02878678
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.97428575,
+            0.98790261
+          ],
+          "middle": 0.50919806,
+          "range": [
+            30720,
+            42240
+          ],
+          "score": 0.46168348
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "53367b6fb487bc27179d234ef3f1e58bb0854ad73d495f4e39f91e1ce64af522",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -5,
+      "measured_snr_db": -4.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.01197549,
+              1.00089835,
+              0.94941628
+            ],
+            [
+              0.68269878,
+              0.46607608,
+              0.67106222
+            ]
+          ],
+          "range": [
+            23040,
+            34560
+          ],
+          "score": 0.1256201
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.97993174,
+            0.99989321
+          ],
+          "middle": 0.50020472,
+          "range": [
+            30720,
+            42240
+          ],
+          "score": 0.47473665
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "a9bfb15abfc483ff8b4c627ba13a85df55b50e8114531333198f560682e0e817",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-0",
+      "earlier_sha256": "5ede7555ed691519e44ea884ddb34065864973274adc3e7631f5ef8bcae4385e",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -5,
+      "measured_snr_db": -4.999996,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "development",
+      "submitted_sha256": "bb5b694839b86c47e919da354896d8a81ddd7e6f5f68565961d8c7f2919aab12",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 44,
+      "case": "dev-0",
+      "earlier_sha256": "bc7e07f341e03a4e0c2e6961658082893a409a0fddfd41ec57a95393ccae6af2",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -5,
+      "measured_snr_db": -4.999996,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "development",
+      "submitted_sha256": "bb5b694839b86c47e919da354896d8a81ddd7e6f5f68565961d8c7f2919aab12",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -10,
+      "measured_snr_db": -9.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98157167,
+              0.87115437,
+              0.99988459
+            ],
+            [
+              0.96994121,
+              0.97905104,
+              0.9894139
+            ]
+          ],
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.05154908
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.9268851,
+            0.97686424
+          ],
+          "middle": 0.38252723,
+          "range": [
+            30720,
+            42240
+          ],
+          "score": 0.53186309
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "e789ce524890966754f3687f28260ca2a249d95ee238c695c806b2962773f33c",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -10,
+      "measured_snr_db": -9.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.71336401,
+              -0.00057411,
+              1.20358128
+            ],
+            [
+              0.98562309,
+              -0.00233225,
+              0.88537659
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 1.00171949
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.8180313,
+            0.86289544
+          ],
+          "middle": 0.71659242,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.09022284
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "63604578f1c441c61e9db15c1d62315ec37bfd799dc375778f685f585d5f35e9",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -10,
+      "measured_snr_db": -9.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99076603,
+              0.89848926,
+              1.37608432
+            ],
+            [
+              0.99392354,
+              1.00624315,
+              1.410628
+            ]
+          ],
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 0.04037093
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.8969207,
+            1.10599839
+          ],
+          "middle": 0.44514036,
+          "range": [
+            30720,
+            42240
+          ],
+          "score": 0.39951091
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "61140fc3c29eb8dba235657a164657c80dfcc73f1b9880cf3477cda06ae3a93a",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -10,
+      "measured_snr_db": -9.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.89848926,
+              -0.01158955,
+              1.13214606
+            ],
+            [
+              1.00624301,
+              0.05232898,
+              0.9229075
+            ]
+          ],
+          "range": [
+            40960,
+            52480
+          ],
+          "score": 0.9780994
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.8180313,
+            0.86289544
+          ],
+          "middle": 0.71659242,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.09022284
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "9b023fa59da5415f80ac216bda8191335e9bdf60cf0524848e984a4e221df695",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -10,
+      "measured_snr_db": -9.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98157167,
+              0.87115105,
+              1.0001219
+            ],
+            [
+              0.96994121,
+              0.97905104,
+              0.98874471
+            ]
+          ],
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.05155077
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.9268851,
+            0.97698406
+          ],
+          "middle": 0.38252723,
+          "range": [
+            30720,
+            42240
+          ],
+          "score": 0.53183314
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "c25c979c91da700edc4646e463db92adff51f03cba447b1674afba49476bb6bd",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -10,
+      "measured_snr_db": -9.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.89848926,
+              0.0280393,
+              1.13214606
+            ],
+            [
+              1.006243,
+              0.12602121,
+              0.9229075
+            ]
+          ],
+          "range": [
+            40960,
+            52480
+          ],
+          "score": 0.9161224
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.8180313,
+            0.86289544
+          ],
+          "middle": 0.71659242,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.09022284
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "ee704b879fea482908bb5dece605b05de4a55607f19ebc0c4d19c78d4892fdc5",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -10,
+      "measured_snr_db": -9.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.98157167,
+              0.87115105,
+              1.0001219
+            ],
+            [
+              0.96994121,
+              0.97905104,
+              0.98874471
+            ]
+          ],
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.05155077
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.9268851,
+            0.97698406
+          ],
+          "middle": 0.38252723,
+          "range": [
+            30720,
+            42240
+          ],
+          "score": 0.53183314
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "c25c979c91da700edc4646e463db92adff51f03cba447b1674afba49476bb6bd",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-0",
+      "earlier_sha256": "d63595c3a4e350939d1f7b2427a45e92aaeb0998c345cbc79fa87f451882f2aa",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -10,
+      "measured_snr_db": -9.999996,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.00800377,
+              0.98809765,
+              0.89759275
+            ],
+            [
+              0.69360911,
+              0.44221627,
+              0.66881309
+            ]
+          ],
+          "range": [
+            23040,
+            34560
+          ],
+          "score": 0.11898685
+        },
+        "prior_correlation": {
+          "flanks": [
+            0.93911335,
+            0.99874248
+          ],
+          "middle": 0.36782433,
+          "range": [
+            30720,
+            42240
+          ],
+          "score": 0.55638174
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "e0f0e383fa4450da3a171d8f11d4facea8afc41080244414a71edb235fca108b",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-0",
+      "earlier_sha256": "5ede7555ed691519e44ea884ddb34065864973274adc3e7631f5ef8bcae4385e",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -10,
+      "measured_snr_db": -9.999996,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "development",
+      "submitted_sha256": "e789ce524890966754f3687f28260ca2a249d95ee238c695c806b2962773f33c",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 44,
+      "case": "dev-0",
+      "earlier_sha256": "bc7e07f341e03a4e0c2e6961658082893a409a0fddfd41ec57a95393ccae6af2",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -10,
+      "measured_snr_db": -9.999996,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "development",
+      "submitted_sha256": "e789ce524890966754f3687f28260ca2a249d95ee238c695c806b2962773f33c",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": 0,
+      "measured_snr_db": -1.5e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99743577,
+              1.0283733,
+              1.03291433
+            ],
+            [
+              1.00284823,
+              0.94259058,
+              0.99435085
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.01051864
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.02208772,
+            1.00616701
+          ],
+          "middle": 0.39309755,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.60908928
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "114f5c6bd75b947519d0943e04e508fabe2055e78c60f5fb5e5c47cba1470b9e",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": 0,
+      "measured_snr_db": -1.5e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.01156433,
+              0.12965249,
+              1.02702076
+            ],
+            [
+              0.99914397,
+              -0.03197945,
+              0.99420203
+            ]
+          ],
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 0.95199783
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.11669088,
+            1.085941
+          ],
+          "middle": 0.07059947,
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 1.00765406
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "8e582c0c64d8eb3f4522c0309036ebf3b938ad76ac77c2858a18ef525eb2580c",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": 0,
+      "measured_snr_db": -1.5e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.28425418,
+              1.0283733,
+              1.03291433
+            ],
+            [
+              1.26567375,
+              0.94259058,
+              0.99435085
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.02822533
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.02374846,
+            1.00475384
+          ],
+          "middle": 0.39254544,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.60745974
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "f3bb131f261b0dae381aa84d51a238f1e6550b9a841ac290e5c64de0ba3cec2c",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": 0,
+      "measured_snr_db": -1.5e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.01156913,
+              0.11530608,
+              1.02702076
+            ],
+            [
+              0.99914399,
+              0.04433211,
+              0.99420203
+            ]
+          ],
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 0.920711
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.11669088,
+            1.085941
+          ],
+          "middle": 0.02192455,
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 1.05632899
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "6346b15350a42c2f2a61a3bbbc33cfb64ad18c610a060f1faca6c5ebbe3365bd",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": 0,
+      "measured_snr_db": -1.5e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.9986386,
+              1.0283733,
+              1.03291433
+            ],
+            [
+              1.0029241,
+              0.94259058,
+              0.99435085
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.01113955
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.0220434,
+            1.00609807
+          ],
+          "middle": 0.39307062,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.60904112
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "3e656bc65138807f705f662a52d0fa62b8b0c03bc0ba853dc6fc64d07732886f",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "measured_snr_db": -1.5e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.01156098,
+              0.14366663,
+              1.02702076
+            ],
+            [
+              0.99914391,
+              0.03499627,
+              0.99420203
+            ]
+          ],
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 0.91138748
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.11669088,
+            1.085941
+          ],
+          "middle": 0.07624326,
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 1.00201028
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "801c269bc2bf44d45872b2db030dd3ae432a49899630004a1a0df2536a708190",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "measured_snr_db": -1.5e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99743577,
+              1.0283733,
+              1.03291433
+            ],
+            [
+              1.00284823,
+              0.94259058,
+              0.99435085
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.01051864
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.02208772,
+            1.00616701
+          ],
+          "middle": 0.39309755,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.60908928
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "114f5c6bd75b947519d0943e04e508fabe2055e78c60f5fb5e5c47cba1470b9e",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": 0,
+      "measured_snr_db": -1.5e-05,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.07575986,
+              1.05490203,
+              1.09028798
+            ],
+            [
+              0.44439676,
+              0.37720559,
+              0.5559802
+            ]
+          ],
+          "range": [
+            29440,
+            40960
+          ],
+          "score": 0.08529265
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.06927376,
+            1.04560977
+          ],
+          "middle": 0.42840913,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.61128465
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "00957846264e08c4267f1e6a3071ca1d5b368045b193bdaa5d5e694fe5001985",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-1",
+      "earlier_sha256": "f95db5c707fc9f0bee7506a8c5fc515772e130136563d70e7a4d40d198823b56",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": 0,
+      "measured_snr_db": -1.5e-05,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "development",
+      "submitted_sha256": "114f5c6bd75b947519d0943e04e508fabe2055e78c60f5fb5e5c47cba1470b9e",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 61,
+      "case": "dev-1",
+      "earlier_sha256": "2e38b04467f37b1f5ed7b4464620bde07c79fad35b5020df32f0b01aac6fde26",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": 0,
+      "measured_snr_db": -1.5e-05,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "development",
+      "submitted_sha256": "114f5c6bd75b947519d0943e04e508fabe2055e78c60f5fb5e5c47cba1470b9e",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -5,
+      "measured_snr_db": -5.000011,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99544246,
+              1.05046741,
+              1.05855397
+            ],
+            [
+              1.00507631,
+              0.89789772,
+              0.98994355
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.01885201
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.04368888,
+            1.01294268
+          ],
+          "middle": 0.2758121,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.72944404
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "bebda9e6945c95b6b834e6fc755c470d411c38ad867bb8d97b4dc4823de721a1",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -5,
+      "measured_snr_db": -5.000011,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.02056206,
+              0.12944664,
+              1.04804667
+            ],
+            [
+              0.99848691,
+              -0.03065455,
+              0.98969108
+            ]
+          ],
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 0.95206764
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.19845086,
+            1.12011914
+          ],
+          "middle": 0.08427694,
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 1.01625927
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "b3c7e77eb7977977fcd6303bac1ef9e495b86d4ea21fa1bc8fe1ddd9d9588cb2",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -5,
+      "measured_snr_db": -5.000011,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.28225056,
+              1.05046741,
+              1.05855397
+            ],
+            [
+              1.26789427,
+              0.89789772,
+              0.98994355
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.05031007
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.06827023,
+            1.00891741
+          ],
+          "middle": 0.27471606,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.71936314
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "7900ca25be858ea0ceb1072c558c243d2577118c0dc5d1e340cd7845ff96637b",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -5,
+      "measured_snr_db": -5.000011,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.02056684,
+              0.11508964,
+              1.04804667
+            ],
+            [
+              0.99848694,
+              0.04563181,
+              0.98969108
+            ]
+          ],
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 0.92056128
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.19845086,
+            1.12011914
+          ],
+          "middle": 0.03274126,
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 1.06779495
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "ad0b202702001ef01d267763523efc4da0e78cb6ad4f7d0e63cc442a0e13ff59",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -5,
+      "measured_snr_db": -5.000011,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99663901,
+              1.05046741,
+              1.05855397
+            ],
+            [
+              1.00516226,
+              0.89789772,
+              0.98994355
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.01948548
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.04360255,
+            1.01279849
+          ],
+          "middle": 0.27577284,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.72932464
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "7ac6f03fc7f29626e313a5648742eea632f14db6a7bb4763f10edfb13d3586ec",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "measured_snr_db": -5.000011,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.0205587,
+              0.1434536,
+              1.04804667
+            ],
+            [
+              0.99848685,
+              0.0363072,
+              0.98969108
+            ]
+          ],
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 0.91137541
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.19845086,
+            1.12011914
+          ],
+          "middle": 0.09574788,
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 1.00478834
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "ccda89acd56cd111776812c148a95bf60a214f710c721e9f3a260b561ccb4208",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "measured_snr_db": -5.000011,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99544246,
+              1.05046741,
+              1.05855397
+            ],
+            [
+              1.00507631,
+              0.89789772,
+              0.98994355
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.01885201
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.04368888,
+            1.01294268
+          ],
+          "middle": 0.2758121,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.72944404
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "bebda9e6945c95b6b834e6fc755c470d411c38ad867bb8d97b4dc4823de721a1",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -5,
+      "measured_snr_db": -5.000011,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.08508363,
+              1.0483901,
+              1.1123232
+            ],
+            [
+              0.44428055,
+              0.37397575,
+              0.55147621
+            ]
+          ],
+          "range": [
+            29440,
+            40960
+          ],
+          "score": 0.09603023
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.12061941,
+            1.08723355
+          ],
+          "middle": 0.30658136,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.77230572
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "02783dfff231546f5bc09aab300ef99d0bd1b9e78aba212bf54cac3902cfbd65",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-1",
+      "earlier_sha256": "f95db5c707fc9f0bee7506a8c5fc515772e130136563d70e7a4d40d198823b56",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -5,
+      "measured_snr_db": -5.000011,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "development",
+      "submitted_sha256": "bebda9e6945c95b6b834e6fc755c470d411c38ad867bb8d97b4dc4823de721a1",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 61,
+      "case": "dev-1",
+      "earlier_sha256": "2e38b04467f37b1f5ed7b4464620bde07c79fad35b5020df32f0b01aac6fde26",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -5,
+      "measured_snr_db": -5.000011,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "development",
+      "submitted_sha256": "bebda9e6945c95b6b834e6fc755c470d411c38ad867bb8d97b4dc4823de721a1",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -10,
+      "measured_snr_db": -10.000002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99189753,
+              1.0897349,
+              1.1041392
+            ],
+            [
+              1.00901002,
+              0.8184548,
+              0.98216259
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.03402219
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.05603932,
+            1.02052855
+          ],
+          "middle": 0.22449714,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.78715371
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "64d0cc57f56a9ab58795c7fafee0d4fbc44f18e74bc0be207b96f93aefea22d2",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -10,
+      "measured_snr_db": -10.000002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.03655484,
+              0.12907465,
+              1.08544359
+            ],
+            [
+              0.99734393,
+              -0.02832501,
+              0.9816879
+            ]
+          ],
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 0.95216531
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.22534321,
+            1.07785926
+          ],
+          "middle": 0.06178487,
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 0.9792034
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "f20dea834dc616a0dc4d3a2d9855529e03ac290b83492954c4b0cc4014edbd74",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -10,
+      "measured_snr_db": -10.000002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.2787088,
+              1.0897349,
+              1.1041392
+            ],
+            [
+              1.27185238,
+              0.8184548,
+              0.98216259
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.08986334
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.11686704,
+            1.01054076
+          ],
+          "middle": 0.22230002,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.76165917
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "3e975becc4aec36072bdcccb0146fcb06e3add46cd1d80fee3f407c038e0242d",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -10,
+      "measured_snr_db": -10.000002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.03655964,
+              0.11472488,
+              1.08544359
+            ],
+            [
+              0.99734396,
+              0.04798612,
+              0.9816879
+            ]
+          ],
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 0.92022012
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.22534321,
+            1.07785926
+          ],
+          "middle": 0.04731716,
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 0.99367111
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "970c8c9119eb2af3aa1d6f465955c09dedc9ff1cbdf031ad20f9a7a48ee2be64",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -10,
+      "measured_snr_db": -10.000002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99309049,
+              1.0897349,
+              1.1041392
+            ],
+            [
+              1.00910109,
+              0.8184548,
+              0.98216259
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.03468206
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.05579726,
+            1.02018388
+          ],
+          "middle": 0.22442132,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.78685921
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "a64c26386971f97005583a8bd9c0aef8aae5d6d3af62b7753954bfa112481503",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -10,
+      "measured_snr_db": -10.000002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.03655149,
+              0.14309175,
+              1.08544359
+            ],
+            [
+              0.99734388,
+              0.03864444,
+              0.9816879
+            ]
+          ],
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 0.91129437
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.22534321,
+            1.07785926
+          ],
+          "middle": 0.13132361,
+          "range": [
+            28160,
+            39680
+          ],
+          "score": 0.90966465
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "df6a96cc790377231f3d5a2ef4b6b4f2b48ec63eb0f7bad1b78a2ccf549a315f",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -10,
+      "measured_snr_db": -10.000002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              0.99189753,
+              1.0897349,
+              1.1041392
+            ],
+            [
+              1.00901002,
+              0.8184548,
+              0.98216259
+            ]
+          ],
+          "range": [
+            44800,
+            56320
+          ],
+          "score": 0.03402219
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.05603932,
+            1.02052855
+          ],
+          "middle": 0.22449714,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.78715371
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "64d0cc57f56a9ab58795c7fafee0d4fbc44f18e74bc0be207b96f93aefea22d2",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 63,
+      "case": "dev-1",
+      "earlier_sha256": "965b91bf7294b594db769407cea14b2d0e0a594b83f3ef29d5295698adaf461a",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -10,
+      "measured_snr_db": -10.000002,
+      "results": {
+        "coherent_projection": {
+          "band_gains": [
+            [
+              1.1016971,
+              1.03681067,
+              1.15150468
+            ],
+            [
+              0.44406368,
+              0.36816959,
+              0.54346303
+            ]
+          ],
+          "range": [
+            29440,
+            40960
+          ],
+          "score": 0.11490245
+        },
+        "prior_correlation": {
+          "flanks": [
+            1.19068306,
+            1.15271526
+          ],
+          "middle": 0.24969046,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.89353285
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "1c512ad5a8f3776aff5ac5c502698e43c50fdad8ead74b3e9519d34c65218e46",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 58,
+      "case": "dev-1",
+      "earlier_sha256": "f95db5c707fc9f0bee7506a8c5fc515772e130136563d70e7a4d40d198823b56",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -10,
+      "measured_snr_db": -10.000002,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "development",
+      "submitted_sha256": "64d0cc57f56a9ab58795c7fafee0d4fbc44f18e74bc0be207b96f93aefea22d2",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 61,
+      "case": "dev-1",
+      "earlier_sha256": "2e38b04467f37b1f5ed7b4464620bde07c79fad35b5020df32f0b01aac6fde26",
+      "exact_range": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -10,
+      "measured_snr_db": -10.000002,
+      "results": {
+        "coherent_projection": null,
+        "prior_correlation": null
+      },
+      "role": "development",
+      "submitted_sha256": "64d0cc57f56a9ab58795c7fafee0d4fbc44f18e74bc0be207b96f93aefea22d2",
+      "supported_pair": false,
+      "truth": null
+    }
+  ],
+  "freeze": {
+    "background_roster_sha256": "452e3ebc3c34fc86c955aabcb901eca646c1d348dcf5c2bf84c8eb45d8b64a50",
+    "clock_hz": 16000,
+    "code_sha256": "e1c3df6b2a21d07ed0987a8f85cb419ba14b8016761c3dec9436b28681bce490",
+    "levels": [
+      0,
+      -5,
+      -10
+    ],
+    "method": {
+      "baseline": "Compare with the earlier normalized-correlation cue and exact 20 ms PCM differences using the identical clean reference. The noisy-reference historical study is a separate experiment.",
+      "candidate": "A coherent match uses 240 ms Hann frames, 80 ms hops and three independent filtered bands from 300 to 3400 Hz. Evaluate local retained gain relative to both supported flanks. Reference-energy weighting reduces quiet frames and floor limits the coefficient extrapolation. Cross-band agreement uses the median of available signed deficits.",
+      "controls": "Separate no-edit, local gain, same-speech resampling and global EQ controls. Ordinary different-performance, TTS and voice-converted same-word replacements are physical-change positives. The earlier copy is untouched in all positives.",
+      "input": "A clean earlier copy of the same continuous six-second mono recording on the same 16 kHz sample clock. Test 0, -5 and -10 dB submission mixes with role-disjoint real competing speech. Include different-reader and same-words regenerated reference admission controls.",
+      "promotion": "Continue only if the candidate locates at least four of six synthetic deliveries at -5 dB with at most one ordinary control flag, two reader groups covered, and zero flags on unrelated reference controls. No customer confidence weight.",
+      "thresholds": "Use the strict maximum of each route on all ordinary development controls at all noise levels; seal before assessment. A localized range covers at least half the changed interval and reaches 0.30 interval IoU."
+    },
+    "prior_sha256": "3c4aeb6de332d72c8ca95c06dd5c9c73517b755c44f819c9e6746b90cb4f9091",
+    "publisher_ranges": {
+      "ChatterboxTTS": [
+        "b44dc8078f8077aa65b3300d62862182c29f0abfeef4dab56bae7ef9dc1f304e",
+        "de3acf48c5699fb3ff2a2f46aba885f2007c02db43d2291db303978aafe728b2",
+        "1010ac37dfc7ab5f7c9bc50f57c57d9d92589836bf4544bbb82470f0129c14c2",
+        "9b15774d2e2722284da193a79d770bcc8714600d7d6116386fc22ee822edda8d",
+        "31cb8c9be1f6a71f3d3d6eb640ca79ea847e24a0fdcf509e666b64f3b1d724bb",
+        "51fcee593c1c13f3b763c9f59ecd16efe76c6e17518105028b93a90f9aaa0d15",
+        "23e340db12c0a4db75c1b608e0a8e7669f10a0d0dcc513cfb5391d44c6fc30a7",
+        "d8538de9d76ae41ab65dc795fc857d1e3c5119968ff02b8856d632538fe38c68",
+        "02427c8d52058087515aa4dd7ab5475da88497b3bda6e9b6e630b904834a86e8",
+        "b653622e4a35559864cb7bc90550417ae5989a1a3e889a95bf7680adc4a815e1",
+        "1f3bb70ef29bfe6ef9c983f8b0200e5679a7f3991a9dfbb4f6c1b510fbb155e9",
+        "2f3a9521eb2cedb591649ec0f5379db952c4578602433340907cc2a997cb925a",
+        "0f212ec3cac773eb960f9a01f380840620cd56e9f3c05af8cc58cd037276b3de",
+        "eaafaed346f1d10d33b8fb015dddc14436288993743d00a15b2b017a819ba1a3",
+        "1425cf151872ca53f63153f895dfdfa99bf841c9dc73eee55066c0477030086a",
+        "febd5649ca695c3939a9c04660baf28879ef821ec673b21c84a95dc48034f9ce",
+        "3cd24dd0b0fc12c6e8c088166ccaaddb0d96ea0d06f986ae50d7ecd4f4c9cab6",
+        "4776dadae638ef7c2da8b56618ef082fd1f4ebfca123e592e8f07cd91460a6eb",
+        "03ce5de694b96754208599de3e8f83d113eee8f8036e4b6b5a7769ffd1281fe1",
+        "15891b0c720bb505cd593f24de4f5e51725e35ff291fb084cc83a4efe06013c1",
+        "f6898d5cf4f76f20e54bd1b16e21af144c45dc315060dfabad77d03a280c5153",
+        "5d838affbb04dcba334c815a86b3bb1e8317c534726bede0c1230ec77079f50f",
+        "adabb11a1afac03040dac5de055dd8f2061b2fbf88861d269beb3a630f315d07",
+        "2ca629d5455c4aed09a9eccd01a4993fcc78be5c74834f250d5bed24c5fea44a",
+        "f577d796a67d3ccab660a91cdf38a7b0c746d79eeedc991a88b4bf56f09a6591",
+        "d0f5fa78715dd12f8411a6e64f2ff3b34970e0164e36027082c58d3cfd0a8c92",
+        "60946ffb2f427f19e7603da2b626123e46ad892f50db2b396e42a886bec7c3f4",
+        "60f4c5ac4815b878c4c1a5b24061cee69069b7c072f2b8b247fa6ee1a579ecf2",
+        "f3f14f17b416294ef01139a98fe1e2cf5f12deb05f388bd190aa3424aecb856d",
+        "08b08793b316f3da64ae7a0ac26b9e50f0b84a18c22a1e0a40ea47bce849f824",
+        "8573941ae28c025c831b69d862228cc577591815689534e11a3636a177811377",
+        "ab1864aa1b344c403f9c0351adbe1e8ba987cd8e94c20b282d73e6d6a7b3256e",
+        "44a25cdb2a754eb183b745fe49dd2e97fe810bd42518b220ae963f5fc0991edf",
+        "561a128bafc518ee0e0c62554d49e6ff9b93b7a642250affba1e9da930f6b6df",
+        "dccce0bd8803c26b95227fe24c6806a8ea17e8e5388cc516d15f07f742d868b1",
+        "5d5d1594ae1575fa72229b757a7023642cf060a4157ef0e66a6de22430a03fd5",
+        "09d5a4496c4e79c4f5b160e7b9132b3cfb36df2879ebeb0b2bba4dd84325b27a",
+        "ce82588e1623c817a019c0a90d7953dd66e83f333b0c726485c3c63add1fda0f",
+        "942e95ab5657ab6fb4237cbdf47befb14a9ca3a93d2c74a12af6002c48196ca2",
+        "914b04d704282ace5900600d778fec7f14da7b18a2f118e134d1b8eaba0ae922",
+        "fa6e01e8989afdb2cec3e7efb0af79b0baa744575edeb9464f21c4091562cdd2",
+        "785529031987f09604e1cded49215a1a6f9fe56eb6e60e8e2c58b31e154b2e27",
+        "84f4595e91ef7e42db5cb430b187fd4e03b13dd29c119ee838e0bd1e40db1083",
+        "2d48edcdc1e01c4b304e52cb56511d8d196742621b85e369a0511c7dc54a51af",
+        "a07101da62c3243d1fcdee0d159ef22cdf8d599bbd3b5f8d0fbdb62dbce27cee",
+        "b170a0574492d58dc64b0a09244d497e7ccb4086a17ae311bd6ef48636ac757e",
+        "5bd43c80fd9b4428aaca365305af7effc7db344a1f2200ca10aaabbe515acb4b",
+        "b94e12ee7218b3ddc9ba21f016e1ece26167463af83bb4ad3010444eb637ced4",
+        "2f368f69598550ec98325f1f69bc260048c62b24d00bc37d09701825e87e050b",
+        "84ccb9adaad4227a06d9e258056aecd3e5314dd22322c7fc13fb8fa473016774",
+        "332cbcea8a72537ef9ca983de00aad8054007bf0d4f12d0e8c71ba174aa5e12a",
+        "bb4fd8fefa7a8924d7ecc4c1a9ae82488b227e2ee2e921bb65d9a005056425af",
+        "7df222764a366dde931b308793fe6ff4d6b58126fbbb11d8f08b3751123d1129",
+        "c5bae2c1b37966aa8abb6efb1815d056116a08a1e5b770618fee536964bd3641",
+        "71a4f0a7a80f779573ee990c77670bbb6aa39a845e37bc8afd40dcc3a0807fee",
+        "208037e40239b0970b30ec19eced5eb7bd260f3f37376a783fee1844ba1583c4"
+      ],
+      "ChatterboxVC": [
+        "23c6be66b6853f26f287b2c79054371722a7d0e339f69ee46fd80933d684d829",
+        "e35bea4183a3d14c4d0eb1e0ff84b9bc20d9be142162c88aa7477b4bde376c32",
+        "f4834ad30d13bfede04c5a48fb1026133a8bd3ff31a2311dc259d680e957c974",
+        "8659b8ae010813f4d729f9b66b1356fb2379c834da8b4a065bb2dced171c91a6",
+        "04bff65298f0ac7de45097267c6689f47d70687026fdb7edec5237a3934afe9a",
+        "20653756e32a5dc649ab60a6808a5fd534ef7e4412f8ac926bebbc743fa6b5bc",
+        "efe4f596f0c879c4c077fb07d270afeb834b2f2a42316bb2c80ad1baf1d5be17",
+        "ad7a9c424b3d8b1a588475b03a05ba7f8a57ad953b7b909b8c811b7f2ecfe48f",
+        "5cfdcb9ef2356385806ac50559fb559ce7797f83a1d3c4b997cd2032b974f9f7",
+        "ef4298c2ea450fe996f804edbde2268833a428987e7c4fb9e1779737332c97c3",
+        "538d1ab154fd81de2d9da81e300301940727aece5ba8eaf5d8563caa3397cf30",
+        "5c8b387a6b80bc4c05db8f5f6e5579824065640e57d2fcf9ecf261582c9e595e",
+        "6f9f012e0b6d5aee10366aed9993d213a7c3125811d8bbead4edd072ae881325",
+        "0e9aac952ab57a8c17bc06085eff97ca44cb485deab05c807815639a4a8d3487",
+        "dde4ae08b2c619c1c024c153a9df11adbfe4174ed5a51042d746b2b94b3fe963",
+        "8f22a5f56406d1af8a613c90aca94761228eb407bd080375bb2838c119cf2cc6",
+        "ddcdd0fb19c72b62b1789fdf2b486ac5b410599c0ede47abf4edd84b88bb5cd1",
+        "bf348585bb49ca7dc82405db008a9c227b3404c7841f5934f636c6ee495102b6",
+        "262805d3ff671d8d97a00df28c315568b7b79000ab2e9b279c3b9e64895e5e7e",
+        "f225a3298fa2c21c92246f6e6d4e1c6aacea25a5502ee249a243742ff29f8b23",
+        "78d55997c3350594786f80a6583d5015868a5f311d2e877cdfba494284facaed",
+        "545fe9270e2f9eb7eed4d3311d2f81a291e216b4f90c06ff0f30226f0afbc0ec",
+        "03f4076e2b034cbabcff3163c306f8e503164488bb0d614c4bc078d42bec9b4d",
+        "5ce03fed09f8b96674ab4bb1a0c9402217dfffe388d74ab63ee54162e69b56eb",
+        "14bbc2419d6802f79707c05f87a5c3560af25c30e87b1dac07104a9eb1b1df80",
+        "d0c0ad5a5e60005c786b17b14b470bd6578b7bd957bff24209eb1e9fb2f0e51f",
+        "cec6b35bc8e02d772e3333950223235646b39cdfde1e1fec9a8353c5f857185d",
+        "e1e8fda6fc7a9e4678ab49bb0a740e761ac07e9b0a4ee70346139783161de95d",
+        "c4cea7678bd543a8a266978460485033efbd328ad51a04d246a02e0911f07bdd",
+        "3b1fab47ab84300ea82b22fe32569faf1bbaa5d39fa0fd37047d3df74171bd2c",
+        "024ebca6935e82dc90a003cda3df6304a8391ab63e8e912dce0267815965cacc",
+        "e8eaf23cd252eab2b5040886706cefa2ef7262606938da225b6d9c2eb309ea70",
+        "743154029643dcd5cb6dddd08c399f0529c3144225a992a60df38cbb0390bdd5",
+        "6672609b8383bf56cdf7a39cd915fb9140a384296b2c2834918290da0397a997",
+        "1fd6edf929b9dd3bfe6a64d7060047bb5a687f0711002d9aa2748bc8e8bcfa13",
+        "3c43b4e768bd0fdbf9be897f1c9afe729f18ef27353d906b01eed1ccaccb34a0",
+        "18f2b207a920416d82072b0abedf10eb0ec807016eac7b9f93bf9b403eebdfa5",
+        "fd89790b023abc9ed53b09ea2fb37fec86e1ef0da23b8432b21421a8aa10bdf2",
+        "56b3fa46aa42b4ef034645603d386736e5abf318e85b0f4872381c0d31655ea3",
+        "8be1103f5cf0ea9ce419879825b6f3252fad3e7c70040a2dc2e2d760ee92322f",
+        "753b5913242408239464b03d865f504e1239f50409b6f5197787be098fef8018",
+        "f4456e06b9a94dcc2d32192f25ecb8a4e661615d699c0cf8c79205e95f6fa977",
+        "77e3b4f51388413a67c463192d17f693685ff8f7dc8f5765ee144a60dbf35ce9",
+        "1c8c8b9758f5d081a576b6ecc3f37ba059992ff1b5f4f8ecca36fd16dedfce29",
+        "498b01df374eac8b8e7530a4fb9135e66858f0d2a2bb7cbe9c6293d3c150e8e1",
+        "62a4c0f87888a433fe9c31ef222304b0a14c34092ed6b7e8fa19c63590a67b64",
+        "a6f9d55a8f48d819ea791cee0d7e5121518493348691103be5854577d11e4153",
+        "44d9c417bcd793f648d8781f4c8d4bf750439b96c9adb5c97cb8a92967059822",
+        "4551efae95008d86e0cb5f2fd221e96cff834cdda238d224f9195bc94b1f5bae",
+        "acf9b6671044dafe2f0aa986e6c1a120c3a611bc4d8f3fbfea9432d02e4e1a75",
+        "08ccc5ecc20585b35585560d7bab355bc66ed3edbe7e44067bfa1cc818c0f5de",
+        "fa87a6e0664f3a11cf39a8893640797ee0ad8eda2580ceae565a0c63c914dfb6",
+        "f2ac76906a441495fb96d0ad201fe3d23d7b866a91a6b953bf866e391a3077d5",
+        "e6793ef33b1a1e9a626a116894f8f4c2df0ac7d9002553b981176d539a5c5b80",
+        "7316d5227ae4da5923efb5f10a8c7e11e1c3d177ba5536087a0f897ceafd49e2",
+        "47d72e5b0e09fc2064e6936bc5df1b8be8c00d458d95b91a1d94adfdcc1931b5"
+      ],
+      "real": [
+        "658f1ae458ffbf71b80f6e660bcf6b98d4d5a5e8b3fa27f3b1a416e894560221",
+        "03c19eefb1a41ba72bcab151c23f2cf27dba297964f5758d018279376608e307",
+        "290e2ab06d06d25a7f2e1595ea7edaea4876e1263966619eec2b5ca11071409a",
+        "3170c57a77a03c9f3104bed201675815a44e4a8ba1c82ab26a56fb63f26786ae",
+        "2f96d37d2cafc00d10b48eabf82264c1e8bd683c116197f8b87f7bca0549efa2",
+        "74e4b763284c7b19d402b3e4c9ffe606fc39338930f36cdd12df5df05c5201ae",
+        "55b0f0bb4f178a97601ba3eedf4e9dc7fb0acb142320b0b467a1b3d0d3ed9b23",
+        "d7b9351db2d4ffa3b468ed9c8ed5ccece98ae13bd56415ea211348f20891a78a",
+        "f92bbc098ad5480b2ae706c7018b1f2b8577b2768ba7f7d739dc25b56423c882",
+        "ec13d281e849e45fe2242f16f1e78699681e0531d45e63fe0d97abb13bedb1c2",
+        "1ff0a67cc62f5cacff774bb6d4024e2602cf3a9c4ae75bae839f485f4813a746",
+        "6319571ad57cf797f647e2eaefbf949a90e0c2d142de903b25514aed13b52535",
+        "83d36ca371d02d115d04053e8a79c14e8e214bf1271ec22cfd6424acf3ca11bd",
+        "12839afd86471e94d3e6ff0ccf0f7761924b4fa0f24ce020e388a709a976c5b0",
+        "ba2644e45511b8e2d515add003d5f8abfd4121af046e892e6da58bb743e3f298",
+        "86e29c59f1c80532a6fb4a7f30bbe4cfaf6898e57c379f08b7016ebf0f0f7610",
+        "5ba993533e9573eefde7bfa7aed4ab2b09341028d9df884debaa60e00bb94af4",
+        "02c511c759897cb6e2af722e9270bf787c221d79ef4ae93d1bc7e62db38e79a1",
+        "294ee73021afdea7ec279dfaae7f7da815eb3ff45d5a736d173ee9ecd1a1f1c9",
+        "0d393e318aa78e4b134efb644aef0554fdb4864daa270f9ed95d9f7c0bcb3e58",
+        "7528721cdcc0d00e91e224a867e04342ab1a7088dcd996cd4d3bd279ccb40fec",
+        "6c7d4a73125d3314686c1e148843cb09d34d834b13baee99dfb3eba5d0476438",
+        "38ae63a644ce42c96293c0b99c8a6046af145c4b562c8bea8241ec1353e23f1a",
+        "3b258029e4a9ada5632636ec45c5ae4f20bc2c69457f1f1d26dd0345e2a0db47",
+        "cb7148d03d539ece9e73ba2d3fcc51498067ba94bccf3ceed15d812760a3c7a5",
+        "08cd288e3ecc78fd1ca6d4b04d3e456dc1db87ebe6a4d0ee40d2e84c2fb76fba",
+        "bdff98f1ee9b2d67d8cc41950173fd0beb178f5d88020c652aed48cbfb83513f",
+        "4f30bafce1122bb2206f445ef135bfbb16b29a2283df4066789dcd976c255f4c",
+        "9e11f0db2c3ac0f360892179f66b1d1eb7f032339df3f41503976325fec10097",
+        "343b11757c19da7194d5865b6e92012df23e65dfc404be9697112693a4595807",
+        "d82fff7aa0095a5666495c3ecdc7c454f95ae00c11ed83342966734bd03b314d",
+        "9f76133763cbff1439b00e1075213e04dbe07c24a7b67f698646bf5d9a238125",
+        "4613d1291b6555986f46bc8ec226bd42e3f9aae85e88be648e24b7cb17b0f1d8",
+        "c4fe82fa0e4876a99dd0a7a5d0030455dedbea699232d3c386a84f77975c531a",
+        "f7a3b72cc85f6f6c84148258f41f42eab9309240eef1905033ae1cdf5f716aab",
+        "69bf1ef686aae9ad23f95c8831be5f97ead8cf70b1d15e5bf3967d498ad23971",
+        "4202d7cc6d25e7993f05d155c10d1af416dfbc44171c608f7f2e0fcea4a84f07",
+        "545e7bb921e098e39ae3b6ca0ae12019fddbf8ba93ec7edce9b7ae0a88f90366",
+        "34baa805520ab528f3385330ac2544118de8a8dfd0dca79917cb1de3766a905e",
+        "8bb93aa47e346f437169e820a6032809b7887c2647f0b90da521626f4aa6f096",
+        "7700a28bd6c51c79b4a0372a3f42a945b4ff95b0a3abea66bf2b95d862f28d2f",
+        "60496c4ef149acaaec31dbc6f0c82bd7ad51ca729528730d3ed3ea8690d88542",
+        "4c3998130b19f61e5df4f720ac51cdfa08069a445bdea11f7c8ebc3c30842bb7",
+        "796116eae239adbd7c55121fcf348fc653007f64305ddeff6bd5bf6ced86340a",
+        "a2bdd6076876780fe376275b688941c01196bd50506ba3324bdc25234dabe304",
+        "965a7e35ad6b8444af32700e1a3f67ee37398e6b0ccf53143d538dcf995d36c3",
+        "7dd1fc4b5eed3de3a0ea7ebba94037cff96ca1b742a6ba75f6009e06d034e23e",
+        "c284896d142f2daf37aa8b8ed25965dc7a460d92dfa00208f15064947f28ff82",
+        "69f706e3f75ce51b798d0133f172d4ef9067008e21e4dfed770900d66c0adbba",
+        "38040eeceb230c92478efba9342105f5c6df28d62bab82357a6e45758c1892ad",
+        "57e00267c8e889375fb7bf279b923ca4f6b4d9a52a3a65c0086a4eb719673edb",
+        "95e8a635d189f4429a11ce320dc2ce8bf04da04e9990d96c51085936cd2425fb",
+        "f346d16e4c8b75511da14cc493c6fc9efc9f863d8b34be00953b89f5bf408079",
+        "70c3f12dba2fe5a76c96ee49757aa2e1a89e59eecc34b7a73bf85da1b5da55d6",
+        "420e9e25de04363796f4f0caab50306f15525e261ccc99e409e2a072e4b4ce2a",
+        "ddb0660b55e68f5867a24205bbf88b4d916631c0cc3cecf838a9818556cd3ca2"
+      ]
+    },
+    "roster_sha256": "ae038c2ca6b86cb8bec964517d09b34005e82717f05ef0dc9f0296bd120b5b26",
+    "schema": "chipmunk.audio-clean-reference-transfer/1",
+    "source_roster_sha256": "9410802c79bcc5ef8acac19348eda423b8ef4f18a072a216cc948d7fa7bd09b9",
+    "source_samples": 96000
+  },
+  "points": {
+    "development_sha256": "fc0da16589d2e84930a167d367a5752f85009fe9f0547760ce8fda7205661b8b",
+    "freeze_sha256": "ffe59f718c53c953fa9aba8c49a27153927e0f6da807db0c6995b1c7a976c36c",
+    "points": {
+      "coherent_projection": 0.12831161,
+      "prior_correlation": 0.89353285
+    }
+  }
+}

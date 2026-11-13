@@ -24,6 +24,7 @@ from app.evidence import video_reference_soundtrack as reference_timing
 from app.reports.media_reference_pdf import render as render_comparison
 from app.storage.db import Analysis, Artefact, BillingOrderRow, Job, utcnow
 from scripts.compare_audio_references import run
+from scripts.verify_audio_clean_speech_export import verify_export as verify_clean_speech
 from scripts.verify_audio_local_timing_export import verify_export as verify_timing
 from scripts.verify_stereo_reference import verify as verify_stereo
 
@@ -671,3 +672,113 @@ def test_authenticated_audio_comparison_pdf_json_and_temporary_storage(
         db.commit()
     assert f.client.get(endpoint, headers=f.viewer).json() == {"available": False}
     assert f.client.post(endpoint, headers=f.viewer, files=files).status_code == 404
+
+
+@pytest.fixture
+def clean_speech_pair(tmp_path):
+    from scipy.signal import butter, sosfiltfilt
+
+    rng = np.random.default_rng(87142)
+    shape = butter(2, (260, 3600), fs=16000, btype="bandpass", output="sos")
+    sources = [sosfiltfilt(shape, rng.standard_normal(96000)) * scale for scale in (1800, 1700, 2400)]
+    first, donor, background = sources
+    altered = first.copy()
+    altered[32000:43520] = donor[32000:43520]
+    return {
+        name: save(tmp_path, name, (np.rint(pcm) / 32768).astype(np.float32))
+        for name, pcm in (("earlier", first), ("altered", altered + background), ("control", first + background),
+                          ("other", donor), ("shorter", first[:-1]))
+    }
+
+
+def test_clean_speech_lane_localizes_and_falls_back_with_source_clips(tmp_path, clean_speech_pair):
+    first = clean_speech_pair["earlier"]
+    output = tmp_path / "clean-speech.json"
+    for kind, reason in (("altered", "local_change"), ("control", "no_local_change"),
+                         ("shorter", "six_second_common_clock_required"), ("other", "reference_match_not_supported")):
+        second = clean_speech_pair[kind]
+        record, assets = audio_reference.compare(first, second, include_clean_speech=True, include_local_timing=True)
+        standard, standard_assets = audio_reference.compare(first, second, include_local_timing=True)
+        assert record["schema"] == audio_reference.SCHEMA_WITH_CLEAN_SPEECH
+        result = record["clean_speech"]
+        assert result["reason"] == reason
+        assert record["affects_overall_confidence"] is result["affects_overall_confidence"] is False
+        assert {k: v for k, v in record.items() if k not in {"schema", "clean_speech"}} == {
+            k: v for k, v in standard.items() if k != "schema"
+        }
+        assert all(assets[name] == blob for name, blob in standard_assets.items())
+        payload = {"comparison": record, "assets": {name: base64.b64encode(blob).decode() for name, blob in assets.items()}}
+        output.write_text(json.dumps(payload))
+        assert run(first, second, output, verify=True) == record
+        if kind == "altered":
+            span = result["range"]
+            assert span["samples"] == [32000, 43520]
+            assert verify_clean_speech(first, second, output)["excerpts_verified"] == 2
+            span["earlier"]["source_pts"][0] += 1
+            output.write_text(json.dumps(payload))
+            with pytest.raises(ValueError, match="source clock differs"):
+                verify_clean_speech(first, second, output)
+        else:
+            assert "range" not in result and assets == standard_assets
+            if kind != "shorter":
+                assert verify_clean_speech(first, second, output)["excerpts_verified"] == 0
+
+    converted = tmp_path / "earlier.flac"
+    subprocess.run(["ffmpeg", "-v", "error", "-i", str(first), str(converted)], check=True)
+    record, _ = audio_reference.compare(converted, clean_speech_pair["altered"], include_clean_speech=True)
+    assert record["clean_speech"]["reason"] == "local_change"
+    lossy = tmp_path / "earlier.mp3"
+    subprocess.run(["ffmpeg", "-v", "error", "-i", str(first), str(lossy)], check=True)
+    record, _ = audio_reference.compare(lossy, clean_speech_pair["altered"], include_clean_speech=True)
+    assert record["clean_speech"]["reason"] == "native_format_required"
+
+
+def test_clean_speech_lane_api_is_opt_in_and_renders_source_ranges(reference_http, monkeypatch, tmp_path, clean_speech_pair):
+    f = reference_http
+
+    @contextmanager
+    def sessions():
+        with Session(f.engine) as db:
+            yield db
+
+    monkeypatch.setattr(v2_media_reference, "get_session", sessions)
+    monkeypatch.setattr(v2_media_reference, "default_store", lambda: f.store)
+    monkeypatch.setattr(settings, "audio_reference_comparison_enabled", True)
+    monkeypatch.setattr(settings, "audio_reference_clean_speech", True)
+    first, second = (clean_speech_pair[name] for name in ("earlier", "altered"))
+    stored = f.store.put_file(second)
+    with sessions() as db:
+        row = db.get(Analysis, "other-kind")
+        row.kind, row.filename, row.content_type = "audio", second.name, "audio/wav"
+        row.sha256, row.size_bytes = stored.sha256, stored.size_bytes
+        original_result = row.result_hash
+        db.commit()
+    endpoint = "/api/v2/analyses/other-kind/audio-reference-comparison"
+    assert f.client.get(endpoint, headers=f.viewer).json() == {"available": True, "clean_speech_available": True}
+    files = {"earlier": (first.name, first.read_bytes(), "audio/wav")}
+    assert f.client.post(endpoint, files=files, data={"earlier_has_clean_speech": "true"}).status_code == 401
+    standard = f.client.post(endpoint, headers=f.viewer, files=files).json()
+    assert "clean_speech" not in standard["comparison"]
+    response = f.client.post(endpoint, headers=f.viewer, files=files,
+                             data={"include_pdf": "true", "earlier_has_clean_speech": "true"})
+    assert response.status_code == 200 and response.headers["cache-control"] == "no-store"
+    payload = response.json()
+    span = payload["comparison"]["clean_speech"]["range"]
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"], validate=True), filetype="pdf") as report:
+        page = report[1]
+        copy = " ".join(page.get_text().split())
+        assert "Local speech comparison" in copy
+        assert "Ordinary edits" in copy and "zero weight" in copy
+        assert "2.000 to 2.720 s" in copy
+        assert f"[{span['samples'][0]}, {span['samples'][1]})" in copy
+        waveform_paths = [path for path in page.get_drawings()
+                          if path.get("color") == pytest.approx((.18, .39, .31))]
+        for side, center in (("earlier", 379), ("submitted", 565)):
+            lines = [item for path in waveform_paths for item in path["items"]
+                     if item[0] == "l" and abs(item[1].y - center) <= 45]
+            assert len({round(item[1].x, 2) for item in lines}) == len(span[side]["waveform"]["t"])
+    export = tmp_path / "local-speech-comparison.json"
+    export.write_text(json.dumps({key: payload[key] for key in ("comparison", "assets")}))
+    assert verify_clean_speech(first, second, export)["excerpts_verified"] == 2
+    with sessions() as db:
+        assert db.get(Analysis, "other-kind").result_hash == original_result

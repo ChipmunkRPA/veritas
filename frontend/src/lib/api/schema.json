@@ -1754,6 +1754,30 @@
         "title": "Assessment",
         "type": "object"
       },
+      "AudioReferenceAvailability": {
+        "properties": {
+          "available": {
+            "title": "Available",
+            "type": "boolean"
+          },
+          "clean_speech_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Clean Speech Available"
+          }
+        },
+        "required": [
+          "available"
+        ],
+        "title": "AudioReferenceAvailability",
+        "type": "object"
+      },
       "AuditEventOut": {
         "properties": {
           "action": {
@@ -4710,6 +4734,17 @@
           "available": {
             "title": "Available",
             "type": "boolean"
+          },
+          "gao_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gao Available"
           }
         },
         "required": [
@@ -4828,7 +4863,10 @@
             ]
           },
           "schema": {
-            "const": "chipmunk.document-archive-comparison/1",
+            "enum": [
+              "chipmunk.document-archive-comparison/1",
+              "chipmunk.document-archive-comparison/2"
+            ],
             "title": "Schema",
             "type": "string"
           },
@@ -4845,6 +4883,30 @@
             ],
             "title": "Status",
             "type": "string"
+          },
+          "submitted_sentence_ranges": {
+            "anyOf": [
+              {
+                "items": {
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "prefixItems": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "integer"
+                    }
+                  ],
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Submitted Sentence Ranges"
           },
           "submitted_sha256": {
             "title": "Submitted Sha256",
@@ -5063,6 +5125,81 @@
           "id": {
             "title": "Id",
             "type": "string"
+          },
+          "published_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published Date"
+          },
+          "source_record_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Record Sha256"
+          },
+          "submitted_range": {
+            "anyOf": [
+              {
+                "maxItems": 2,
+                "minItems": 2,
+                "prefixItems": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "integer"
+                  }
+                ],
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Submitted Range"
+          },
+          "transcript_range": {
+            "anyOf": [
+              {
+                "maxItems": 2,
+                "minItems": 2,
+                "prefixItems": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "integer"
+                  }
+                ],
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transcript Range"
+          },
+          "transcript_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transcript Sha256"
           },
           "url": {
             "title": "Url",
@@ -8474,19 +8611,6 @@
           "first_seen_at"
         ],
         "title": "MediaOut",
-        "type": "object"
-      },
-      "MediaReferenceAvailability": {
-        "properties": {
-          "available": {
-            "title": "Available",
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "available"
-        ],
-        "title": "MediaReferenceAvailability",
         "type": "object"
       },
       "MediaReferenceResponse": {
@@ -14567,7 +14691,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MediaReferenceAvailability"
+                  "$ref": "#/components/schemas/AudioReferenceAvailability"
                 }
               }
             },
@@ -14632,6 +14756,15 @@
                   "earlier": {
                     "description": "Earlier copy with the same timing or a supported small trim.",
                     "format": "binary",
+                    "type": "string"
+                  },
+                  "earlier_has_clean_speech": {
+                    "default": "false",
+                    "description": "Optional confirmation of an earlier clean copy of the same six-second recording on the same clock.",
+                    "enum": [
+                      "true",
+                      "false"
+                    ],
                     "type": "string"
                   },
                   "include_pdf": {
@@ -15359,6 +15492,20 @@
               "default": false,
               "title": "Include Pdf",
               "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "collection",
+            "required": false,
+            "schema": {
+              "default": "frus",
+              "enum": [
+                "frus",
+                "gao"
+              ],
+              "title": "Collection",
+              "type": "string"
             }
           }
         ],

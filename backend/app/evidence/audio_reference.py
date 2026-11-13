@@ -24,6 +24,7 @@ SCHEMA_WITH_TRIM_AND_LEVEL = "chipmunk.audio-reference-comparison/4"
 SCHEMA_WITH_STEREO = "chipmunk.audio-reference-comparison/5"
 SCHEMA_WITH_LOCAL_TIMING = "chipmunk.audio-reference-comparison/6"
 SCHEMA_WITH_CHANNEL_TIMING = "chipmunk.audio-reference-comparison/7"
+SCHEMA_WITH_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/8"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_SECONDS = 30
 MAX_PRESENTED_RANGES = 3
@@ -67,6 +68,21 @@ CHANNEL_TIMING_SCOPE = (
     "The two channels are checked separately for exact excerpts that moved inside a short change. "
     "An ordinary edit can move or repeat sound. These measurements carry zero weight in the AI estimate."
 )
+
+
+CLEAN_SPEECH_SCOPE = (
+    "This check looks for a 720 ms drop in sound shared with the earlier recording, with matching sound on both sides. "
+    "Ordinary edits, local level changes and overlapping sound can affect the result. "
+    "It contributes zero weight to the AI estimate and does not identify who spoke."
+)
+CLEAN_SPEECH_SUMMARY = {
+    "native_format_required": "Both files need continuous 16 kHz mono 16-bit WAV or FLAC audio.",
+    "six_second_common_clock_required": "Both files need exactly six seconds of audio on the same zero-based sample clock.",
+    "reference_match_not_supported": "There was too little shared sound to support a same-clock comparison.",
+    "local_support_not_available": "The recordings share sound, but there was insufficient matching sound on both sides of a candidate interval.",
+    "no_local_change": "No qualifying local drop in sound shared with the earlier recording was found.",
+    "local_change": "Sound shared with the earlier recording became weaker inside the interval compared with both sides.",
+}
 
 
 def _identity(path: Path, filename: str) -> dict:
@@ -407,13 +423,37 @@ def _local_timing(decoded, audio, assets):
     }
 
 
+def _clean_speech(decoded, assets):
+    from app.evidence import audio_clean_speech
+
+    tracks = tuple(source[0] for source in decoded)
+    if not all(track[0] == "measured" and source[4] for track, source in zip(tracks, decoded, strict=True)):
+        reason, span = "native_format_required", None
+    elif not all(track[2]["source_pts"] == 0 and track[2]["samples"] == audio_clean_speech.SAMPLES for track in tracks):
+        reason, span = "six_second_common_clock_required", None
+    else:
+        samples = ((track[1] * 32768).astype("<i2") for track in tracks)
+        reason, span = audio_clean_speech.locate(*samples)
+    statuses = {"local_change": "localized_difference", "no_local_change": "no_local_difference"}
+    result = {"status": statuses.get(reason, "unassessed"), "reason": reason,
+              "summary": CLEAN_SPEECH_SUMMARY[reason], "scope": CLEAN_SPEECH_SCOPE,
+              "sample_rate": AUDIO_RATE, "affects_overall_confidence": False}
+    if span is not None:
+        start, stop = span["samples"]
+        excerpts = {side: _timing_excerpt(assets, "clean-reference-speech", side, track[1], track[2]["source_pts"], [start, stop])
+                    for side, track in zip(("earlier", "submitted"), tracks, strict=True)}
+        result["range"] = span | excerpts | {"support_sha256": canonical_hash(span)}
+    return result
+
+
 def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None = None,
             include_level_adjustment: bool = True,
             include_trim_alignment: bool = True,
             include_trim_level_adjustment: bool = True,
             include_stereo: bool = True,
             include_local_timing: bool = False,
-            include_channel_timing: bool = False) -> tuple[dict, dict[str, bytes]]:
+            include_channel_timing: bool = False,
+            include_clean_speech: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Compare continuous recordings and recover a small, exactly supported edge trim."""
     paths = earlier, submitted
     filenames = filenames or (earlier.name, submitted.name)
@@ -452,6 +492,8 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             timing = channel_timing((first, second), assets) if stereo and stereo["status"] == "measured" else None
             if timing is not None:
                 record.update(schema=SCHEMA_WITH_CHANNEL_TIMING, channel_timing=timing)
+    if include_clean_speech:
+        record.update(schema=SCHEMA_WITH_CLEAN_SPEECH, clean_speech=_clean_speech((first, second), assets))
     if sources != tuple(_identity(path, name) for path, name in zip(paths, filenames, strict=True)):
         raise ValueError("One of the recordings changed while the comparison was running.")
     return record, assets

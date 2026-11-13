@@ -1,0 +1,49 @@
+"""Verify a GAO archive comparison JSON from the submitted TXT and pinned pack."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
+from app.detectors.text.extract import extract
+from app.evidence import document_gao_archive as gao
+from app.evidence.document_revision import MAX_BYTES
+from scripts.review_document_revision_export import _read, _unique
+
+MAX_EXPORT = 256 * 1024
+
+
+def review(export: Path, submitted: Path, pack: Path, sha256: str):
+    if submitted.suffix.lower() != ".txt":
+        raise ValueError("A retained TXT original is required")
+    original = _read(submitted, MAX_BYTES)
+    proof = json.loads(_read(export, MAX_EXPORT), object_pairs_hook=_unique)
+    with TemporaryDirectory(prefix="chipmunk-gao-review-") as directory:
+        staged = Path(directory) / "retained.txt"
+        staged.write_bytes(original)
+        doc = extract(staged, ".txt")
+    if "\ufffd" in doc.text or "\x00" in doc.text:
+        raise ValueError("The file contains undecodable text")
+    catalog, index = gao.library(pack, sha256)
+    expected = gao.compare(doc, hashlib.sha256(original).hexdigest(), sha256, catalog, index)
+    if proof != expected:
+        raise ValueError("The GAO comparison does not replay from these source bytes and positions")
+    return {"status": expected["status"], "source": (expected["reference"] or {}).get("id"),
+            "exact_changes_verified": len(expected["changes"]),
+            "sentence_ranges_verified": len(expected["submitted_sentence_ranges"])}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    for field in ("export", "submitted", "pack"):
+        parser.add_argument(field, type=Path)
+    parser.add_argument("pack_sha256")
+    args = parser.parse_args()
+    print(json.dumps(review(args.export, args.submitted, args.pack, args.pack_sha256), indent=2))
+
+
+if __name__ == "__main__":
+    main()

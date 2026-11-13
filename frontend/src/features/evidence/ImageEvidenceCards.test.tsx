@@ -47,6 +47,18 @@ it('uses the submitted image dimensions for expanded interpolation coverage', ()
   } })
   expect(screen.getByText(/3,150 of 3,888 native image cells/)).toBeTruthy()
 })
+it('shows the source-bound explanation for a small local rotation', () => {
+  show({ ...evidence, source: { ...evidence.source, width: 2048, height: 1536 }, packets: [], native_interpolation_review: {
+    record: { status: 'rotation', observation: 'The area is consistent with a small local rotation.',
+      basis: 'The red and blue channels showed a matching angled pattern in two parts of the crop.',
+      scope: 'Supported 16-bit PNGs only.', limitation: 'This carries zero AI confidence weight.',
+      supported_cells: 2620, region: [496, 416, 624, 544], affects_overall_confidence: false },
+    artifacts: { context: artifact('b'), crop: artifact('c') },
+  } })
+  expect(screen.getByText(/matching angled pattern/)).toBeTruthy()
+  expect(screen.getByText(/Source columns \[496, 624\)/)).toBeTruthy()
+  expect(screen.getByAltText('Original 16-bit source crop')).toBeTruthy()
+})
 afterEach(() => {
   cleanup()
   vi.unstubAllGlobals()

@@ -263,6 +263,30 @@ it('shows exact moved sound in the reported stereo channel', async () => {
   expect(screen.queryByRole('region', { name: 'Right channel timing' })).toBeNull()
 })
 
+it('offers the earlier clean speech check only when available and shows both source excerpts', async () => {
+  const audio = { file: 'excerpt.wav', media_type: 'audio/wav', sha256: 'c'.repeat(64) }
+  const excerpt = { start_s: 2, end_s: 2.72, source_pts: [32000, 43520], audio, waveform: { low: [-.4], high: [.2] } }
+  const comparison = {
+    schema: 'chipmunk.audio-reference-comparison/8', status: 'measured', interpretation: 'Decoded audio differences.',
+    clean_speech: { status: 'localized_difference', summary: 'Matching sound became weaker.', scope: 'Ordinary edits can cause this.',
+      range: { earlier: excerpt, submitted: excerpt, bands: [{ band_hz: [300, 900] }, { band_hz: [900, 1750] }] } },
+  }
+  const fetch = vi.fn().mockResolvedValueOnce(Response.json({ available: true, clean_speech_available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets: { 'excerpt.wav': 'UklGRg==' }, pdf: 'JVBERi0xLjQK' }))
+  vi.stubGlobal('fetch', fetch)
+  show('audio')
+  fireEvent.change(await screen.findByLabelText('Earlier audio'), { target: { files: [new File(['audio'], 'earlier.wav')] } })
+  fireEvent.click(screen.getByRole('checkbox', { name: 'The earlier file is a clean copy of the same recording' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Compare recordings' }))
+  expect(await screen.findByRole('region', { name: 'Local speech comparison' })).toBeTruthy()
+  expect(screen.getByText('Analyzed recording · 2.000–2.720 s')).toBeTruthy()
+  expect(screen.getByText(/source ticks 32000 to 43520/)).toBeTruthy()
+  expect(screen.getAllByRole('img', { name: /matched excerpt waveform/ })).toHaveLength(2)
+  expect((fetch.mock.calls[1][1].body as FormData).get('earlier_has_clean_speech')).toBe('true')
+  expect(screen.getByRole('button', { name: 'Download PDF' })).toBeTruthy()
+  expect(screen.getByRole('button', { name: 'Download JSON evidence' })).toBeTruthy()
+})
+
 it('accepts the scoped video comparison and shows native crops linked to the review interval', async () => {
   const picture = { file: 'picture.png', media_type: 'image/png', sha256: 'c'.repeat(64) }
   const crop = { file: 'crop.png', media_type: 'image/png', sha256: 'd'.repeat(64) }

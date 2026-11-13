@@ -76,6 +76,22 @@ python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/deliver
 python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/delivery.json" --format-issue
 ```
 
+### Replay source comparisons and local geometry
+
+Recount the [PNG rotation test](image-native-rotation-location-2026-11-13.md),
+[VP9 picture changes](video-scene-return-2026-11-13.md#vp9-webm-transfer),
+[clean-reference speech test](audio-clean-reference-transfer-2026-11-13.md),
+and [GAO archive passage comparison](writing-gao-archive-comparison-2026-11-13.md)
+from their published numeric receipts. The separate
+[mouth color trial](video-mouth-temporal-chroma-2026-11-13.md) documents
+the synchronized-redraw coverage gap.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/reference.json" --suite reference-and-rotation
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/reference.json" --format-issue
+```
+
 ### Replay difficult edits across four media
 
 Run from a clean checkout with Python 3.11 or later. The readers use only

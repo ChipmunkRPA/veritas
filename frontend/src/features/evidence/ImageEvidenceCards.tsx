@@ -442,6 +442,7 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
       {interpolation && <section aria-label="Local pixel interpolation" className="mt-4 rounded-md border border-border p-4">
         <h3 className="m-0 text-body font-medium">Local pixel interpolation</h3>
         <p className="mt-2 mb-0 text-small">{interpolation.record.observation}</p>
+        {interpolation.record.basis && <p className="mt-2 mb-0 text-small">{interpolation.record.basis}</p>}
         {!!interpolation.record.supported_cells && <p className="mt-2 mb-0 text-small">{interpolation.record.supported_cells.toLocaleString('en-US')}{interpolationCells ? ` of ${interpolationCells.toLocaleString('en-US')}` : ''} native image cells supplied comparable measurements.</p>}
         {region && <p className="mt-2 mb-0 text-small">Source columns [{region[0]}, {region[2]}) and rows [{region[1]}, {region[3]}). Right and bottom edges are exclusive.</p>}
         <p className="mt-2 mb-0 text-small text-text-muted">{interpolation.record.scope} {interpolation.record.limitation}</p>

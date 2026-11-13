@@ -104,7 +104,7 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
     return replay(partial(compare, **options), earlier, submitted, output, verify=verify)
 
 
-def main(*, description=__doc__, runner=run, marked_timing=False):
+def main(*, description=__doc__, runner=run, marked_timing=False, clean_audio_option=False):
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument("earlier", type=Path)
     parser.add_argument("submitted", type=Path)
@@ -113,10 +113,14 @@ def main(*, description=__doc__, runner=run, marked_timing=False):
     if marked_timing:
         parser.add_argument("--event-seconds", type=Fraction, help="Marked mouth closure time in the earlier video.")
         parser.add_argument("--timing-model", type=Path, help="Path to the optional pinned local landmark task.")
+    if clean_audio_option:
+        parser.add_argument("--clean-speech", action="store_true", help="Use an earlier clean copy of the same native recording.")
     args = parser.parse_args()
     try:
-        timing_options = {"event_seconds": args.event_seconds, "timing_model": args.timing_model} if marked_timing else {}
-        result = runner(args.earlier, args.submitted, args.output, verify=args.verify, **timing_options)
+        options = {"event_seconds": args.event_seconds, "timing_model": args.timing_model} if marked_timing else {}
+        if clean_audio_option:
+            options["clean_speech"] = args.clean_speech
+        result = runner(args.earlier, args.submitted, args.output, verify=args.verify, **options)
     except (KeyError, TypeError, ValueError, OSError) as error:
         parser.exit(1, f"{error}\n")
     print(f"{'Verified' if args.verify else 'Saved'} comparison. Status {result['status']}.")

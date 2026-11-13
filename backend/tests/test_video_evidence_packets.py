@@ -20,6 +20,7 @@ from app.detectors.video.decode import DecodedFrame, FrameTable, probe_frames
 from app.detectors.video.frame_store import FrameStore
 from app.detectors.video.frames import probe
 from app.detectors.video.scene_return import SceneReturn
+from app.detectors.video.scene_return_carrier import profile as scene_return_profile
 from app.detectors.video.swap import Window
 from app.evidence import scene_return_binding
 from app.evidence.image_packets import PacketIntegrityError
@@ -37,12 +38,17 @@ from app.storage.db import Analysis, AnalysisStage, Artefact, Base
 from app.storage.objects import ObjectStore
 
 
-def test_scene_return_rejects_wrong_support_clock_or_score():
+@pytest.mark.parametrize("webm", [False, True])
+def test_scene_return_rejects_wrong_support_clock_or_score(webm):
     binding = scene_return_binding
-    table = FrameTable("1/30000", tuple(5000 + 1000 * i for i in range(120)), (), "", 1280, 720, 1280, 720)
+    origin = 5000
+    time_base = "1/1000" if webm else "1/30000"
+    ticks = tuple(origin + (binding.webm_tick(i) if webm else 1000 * i) for i in range(120))
+    table = FrameTable(time_base, ticks, (), "", 1280, 720, 1280, 720)
+    schema = binding.WEBM_SCHEMA if webm else binding.SCHEMA
     found = SceneReturn(33, 40, tuple(range(60)))
-    record = binding.record(found, table, ["a" * 64, "b" * 64, "c" * 64])
-    packet = {"id": binding.PACKET_ID, binding.KEY: record, "title": binding.TITLE, "semantics": binding.SCHEMA,
+    record = binding.record(found, table, ["a" * 64, "b" * 64, "c" * 64], schema=schema)
+    packet = {"id": binding.PACKET_ID, binding.KEY: record, "title": binding.TITLE, "semantics": schema,
               "claim_scope": "sampled_window", "evidence_type": "anomaly", "affects_overall_confidence": False,
               "finding_ids": [], "signal_refs": [], "exhibit_refs": [], "interpretation": binding.INTERPRETATION,
               "observation": binding.observation(record), "artifacts": {}, "frames": []}
@@ -53,8 +59,11 @@ def test_scene_return_rejects_wrong_support_clock_or_score():
         packet["frames"].append({"interval_role": role, "score": None, "is_peak": False, "context_region": None,
                                  "artifact_refs": {"original": role, "context": role},
                                  "anchor": {**source, **anchor}})
-    document = {"source": {**source, binding.COMMITMENT: canonical_hash(record)}, "packets": [packet]}
+    coverage = binding.coverage("matched", frames_scanned=120, first_pts=origin if webm else None)
+    document = {"source": {**source, binding.COMMITMENT: canonical_hash(record), binding.COVERAGE_COMMITMENT: canonical_hash(coverage)},
+                "packets": [packet], "coverage": {binding.COVERAGE: coverage}}
     binding.validate(document, record, pts=table.pts, canonical_hash=canonical_hash)
+    binding.validate_coverage(document, canonical_hash=canonical_hash, pts=table.pts)
     for field in ("tiles", "end_pts", "score"):
         broken = deepcopy(document)
         other = broken["packets"][0]
@@ -68,6 +77,18 @@ def test_scene_return_rejects_wrong_support_clock_or_score():
         broken["source"][binding.COMMITMENT] = canonical_hash(other[binding.KEY])
         with pytest.raises(ValueError, match="Picture-change"):
             binding.validate(broken, pts=table.pts, canonical_hash=canonical_hash)
+    if webm:
+        assert scene_return_profile(table, binding.WEBM_ENCODING, "webm") == schema
+        assert scene_return_profile(table, binding.WEBM_ENCODING, "mp4") is None
+        broken_ticks = (*ticks[:70], ticks[70] + 1, *ticks[71:])
+        bad_table = FrameTable(time_base, broken_ticks, (), "", 1280, 720, 1280, 720)
+        assert scene_return_profile(bad_table, binding.WEBM_ENCODING, "webm") is None
+        with pytest.raises(ValueError, match="native WebM clock"):
+            binding.validate_coverage(document, canonical_hash=canonical_hash, pts=broken_ticks)
+        coverage["source_first_pts"] += 1
+        document["source"][binding.COVERAGE_COMMITMENT] = canonical_hash(coverage)
+        with pytest.raises(ValueError, match="different source clocks"):
+            binding.validate_coverage(document, canonical_hash=canonical_hash)
 
 
 @pytest.mark.parametrize(("status", "reason", "count"), [

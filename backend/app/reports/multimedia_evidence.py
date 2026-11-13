@@ -219,6 +219,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         if (canonical_hash(scene) if scene is not None else None) != source.get(scene_return_binding.COMMITMENT):
             raise ValueError("Picture-change record differs from the frozen render output")
         scene_return_binding.validate(document, scene, pts=table.pts, canonical_hash=canonical_hash)
+        scene_return_binding.validate_coverage(document, canonical_hash=canonical_hash, pts=table.pts)
         if records["render"].get(scene_return_binding.COVERAGE) != document["coverage"].get(scene_return_binding.COVERAGE):
             raise ValueError("Picture-change coverage differs from the frozen render output")
     except (ValueError, KeyError, TypeError) as error:

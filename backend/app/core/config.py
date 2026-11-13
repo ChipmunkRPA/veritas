@@ -219,6 +219,7 @@ class Settings(BaseSettings):
     image_region_flip_review: bool = False  # Development-only repeatability filter for sensitive PNG regions.
     image_region_jpeg_review: bool = False  # Development-only regional evidence for the evaluated JPEG profile.
     image_native_interpolation_review: bool = False  # Optional local inspection of strictly profiled 16-bit PNGs.
+    image_native_rotation_review: bool = False  # Also inspect supported 2048 × 1536 PNGs for a local rotation pattern.
     image_sharp_boundary_enabled: bool = False
     image_reference_comparison_enabled: bool = False  # Development-only comparison of an uploaded earlier copy.
     image_reference_jpeg_png_envelope: bool = False  # Optional earlier standard JPEG to cropped PNG color differences.
@@ -227,6 +228,7 @@ class Settings(BaseSettings):
     image_reference_structure_jpeg: bool = False  # Optional same-framing JPEG comparison after global tone changes.
     audio_reference_comparison_enabled: bool = False  # Authenticated comparison of a short earlier recording.
     audio_reference_local_timing: bool = False  # Find localized changes in the timing of matching excerpts.
+    audio_reference_clean_speech: bool = False  # Optional earlier clean copy on the same native sample clock.
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.
     video_reference_local_area: bool = False  # Qualified short 720 x 480 earlier-copy picture evidence.
     video_reference_timing_model_path: Path | None = None  # Optional pinned local landmark task for a marked earlier closure.
@@ -234,6 +236,8 @@ class Settings(BaseSettings):
     document_paired_boundary_review: bool = False  # Optional paired TXT and Word check beside one preserved paragraph break.
     document_email_alternatives_review: bool = False  # Compare two bounded body renditions of one EML.
     document_archive_comparison_enabled: bool = False  # Authenticated development-only public archive comparison.
+    document_gao_archive_path: Path | None = None  # Optional locally built GovReport highlights pack for TXT.
+    document_gao_archive_sha256: str | None = None  # Expected SHA-256 of the local GAO highlights pack.
     image_affine_copy_review: bool = False  # Development-only dense masks for same-image geometric copies.
     image_jpeg_block_copy_review: bool = False  # Development-only exact JPEG brightness-block fallback.
     image_jpeg_offgrid_copy_review: bool = False  # Development-only texture and perimeter matching for selected JPEGs.

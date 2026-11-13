@@ -103,6 +103,29 @@ integration remains unfinished.
   extent before producing counts for the portable evaluation contract.
   Contributors can prepare aggregate results without posting private
   files or positions.
+- The [native PNG local rotation check](image-native-rotation-location-2026-11-13.md)
+  found 35 of 39 authored small local rotations across 13 cameras.
+  None of 130 comparison deliveries produced a rotation observation.
+  The optional local check shows the exact 16-bit source crop and
+  carries no AI confidence.
+- The [mouth temporal color test](video-mouth-temporal-chroma-2026-11-13.md)
+  found no useful locations among 17 known redraws. The flicker arm
+  flagged eight of 75 ordinary videos. Both arms remain experimental.
+- The [VP9/WebM transfer](video-scene-return-2026-11-13.md#vp9-webm-transfer)
+  extends the single-upload short picture-change check to the validated
+  720p carrier. It found 15 of 16 authored changes with no flags on 58
+  ordinary controls. The report preserves the actual millisecond source
+  timestamps and exact source pictures.
+- The [clean earlier-audio comparison](audio-clean-reference-transfer-2026-11-13.md)
+  localized four of six synthetic replacements and two of three ordinary
+  replacements at each of three competing-speech levels, with no false
+  flags on 15 matched controls per level. The optional comparison requires
+  a suitable clean copy and supplies no AI confidence.
+- The [GAO highlights comparison](writing-gao-archive-comparison-2026-11-13.md)
+  found the correct archived report for 73 of 120 edited files and 18 of
+  20 untouched files. It found 23 precise differences in edited copies
+  and none in untouched copies. Forty-nine files lacked a qualified match.
+  It reports source wording differences with zero AI confidence.
 - The [re-encoded trim check](video-trimmed-reencode-transfer-2026-11-13.md)
   adds local video comparison when two clips have matching motion and the
   analyzed clip is shorter. It localized 27 of 33 authored edits and flagged

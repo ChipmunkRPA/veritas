@@ -19,9 +19,10 @@ from app.api.v2_evidence import _analysis
 from app.billing.entitlements import PaymentRequired, require_analysis_payment
 from app.cases import review
 from app.core.config import settings
+from app.core.deadline import StepTimeout
 from app.core.logging import get_logger
 from app.detectors.text.extract import extract
-from app.evidence import document_archive, document_archive_word
+from app.evidence import document_archive, document_archive_word, document_gao_archive
 from app.evidence.document_revision import MAX_BYTES
 from app.storage.db import get_session
 from app.storage.objects import ObjectNotFound, ObjectStoreError, default_store
@@ -40,6 +41,7 @@ ArchiveAlignment = Literal["fingerprint_anchor", "bounded_pair", "bounded_insert
 
 class DocumentArchiveAvailability(BaseModel):
     available: bool
+    gao_available: bool | None = None
 
 
 class DocumentArchiveLibrary(BaseModel):
@@ -65,6 +67,11 @@ class DocumentArchiveReference(BaseModel):
     version_url: str
     volume: str
     document: str
+    published_date: str | None = None
+    source_record_sha256: str | None = None
+    transcript_sha256: str | None = None
+    submitted_range: tuple[int, int] | None = None
+    transcript_range: tuple[int, int] | None = None
 
 
 class DocumentArchiveParagraph(BaseModel):
@@ -111,7 +118,7 @@ class DocumentArchiveChange(BaseModel):
 
 
 class DocumentArchiveComparison(BaseModel):
-    schema_name: Literal["chipmunk.document-archive-comparison/1"] = Field(alias="schema")
+    schema_name: Literal["chipmunk.document-archive-comparison/1", "chipmunk.document-archive-comparison/2"] = Field(alias="schema")
     status: ArchiveStatus
     coordinate_space: Literal["extracted_text_unicode_codepoint"]
     layout: Literal["submitted_paragraphs", "recovered_archive_boundaries"]
@@ -125,6 +132,7 @@ class DocumentArchiveComparison(BaseModel):
     reference: DocumentArchiveReference | None
     aligned_paragraphs: list[DocumentArchiveParagraph]
     changes: list[DocumentArchiveChange]
+    submitted_sentence_ranges: list[tuple[int, int]] | None = None
 
 
 class DocumentArchiveResponse(BaseModel):
@@ -138,6 +146,10 @@ def _enabled() -> bool:
 
 def _authenticated(request: Request) -> bool:
     return request.state.principal.auth in {"session", "api_key", "bootstrap"}
+
+
+def _gao_available(extension: str) -> bool:
+    return extension == ".txt" and settings.document_gao_archive_path is not None
 
 
 def _original(aid: str, owner: str, *, reject_inactive: bool = False) -> tuple[str, int, str, str] | None:
@@ -180,26 +192,33 @@ def document_archive_availability(aid: str, request: Request):
             available = path.is_file() and path.stat().st_size == size
         except (OSError, ObjectStoreError):
             pass
-    return JSONResponse({"available": available}, headers=NO_STORE)
+    body = {"available": available}
+    if available and original is not None and _gao_available(original[3]):
+        body["gao_available"] = True
+    return JSONResponse(body, headers=NO_STORE)
 
 
 @router.post(ROUTE, response_model=DocumentArchiveResponse, responses=problem_responses(401, 402, 404, 409, 422, 429, 503))
-def compare_document_archive(aid: str, request: Request, include_pdf: bool = False):
+def compare_document_archive(aid: str, request: Request, include_pdf: bool = False,
+                             collection: Literal["frus", "gao"] = "frus"):
     if not _authenticated(request):
         raise ProblemError(401, "Sign in required", "Use an authenticated session or API key for the archive comparison.")
     owner = request.state.principal.id
     original = _original(aid, owner, reject_inactive=True)
     if original is None:
         raise _unavailable()
+    if collection == "gao" and not _gao_available(original[3]):
+        raise ProblemError(404, "GAO highlights comparison unavailable", "A completed TXT analysis and local GAO archive are required.")
     if not _slot.acquire(blocking=False):
         raise ProblemError(429, "Archive comparison busy", "Try again after the active comparison finishes.")
     try:
-        return _compare(aid, owner, original, include_pdf)
+        return _compare(aid, owner, original, include_pdf, collection)
     finally:
         _slot.release()
 
 
-def _compare(aid: str, owner: str, original: tuple[str, int, str, str], include_pdf: bool) -> JSONResponse:
+def _compare(aid: str, owner: str, original: tuple[str, int, str, str], include_pdf: bool,
+             collection: Literal["frus", "gao"]) -> JSONResponse:
     if _original(aid, owner, reject_inactive=True) != original:
         raise _unavailable()
     sha, size, _, extension = original
@@ -222,10 +241,15 @@ def _compare(aid: str, owner: str, original: tuple[str, int, str, str], include_
                 doc = extract(path, ".txt")
                 if "\ufffd" in doc.text or "\x00" in doc.text:
                     raise ValueError("The file contains undecodable text.")
-                comparison = document_archive.compare(doc, sha)
+                if collection == "gao":
+                    path, pack_sha256 = settings.document_gao_archive_path, settings.document_gao_archive_sha256
+                    catalog, index = document_gao_archive.library(path, pack_sha256)
+                    comparison = document_gao_archive.compare(doc, sha, pack_sha256, catalog, index)
+                else:
+                    comparison = document_archive.compare(doc, sha)
     except document_archive.ArchiveUnavailable:
         raise ProblemError(503, "Archive library unavailable", "The local archive library could not be verified.") from None
-    except (UnicodeError, LookupError, ValueError):
+    except (UnicodeError, LookupError, ValueError, StepTimeout):
         raise ProblemError(422, "Could not read document", "Use a readable plain-text or standard Word document.") from None
     except OSError:
         raise ProblemError(503, "Archive comparison unavailable", "The local service could not read the document.") from None

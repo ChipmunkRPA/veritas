@@ -86,7 +86,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       const cut = packet.face_spatial_cut_frames?.some(item => item.id === frame.id)
       const crop = frame.artifact_refs.crop && packet.artifacts[frame.artifact_refs.crop]
       const mouthCrop = packet.mouth_local_hold && crop
-      const sceneSupport = frame.interval_role === 'during' && packet.scene_return?.schema === 'picture-change-return/1'
+      const sceneSupport = frame.interval_role === 'during' && packet.scene_return
         ? packet.scene_return.tiles : null
       const navigationKnown = frame.anchor.playback_time_s != null && Number.isFinite(frame.anchor.playback_time_s) && frame.anchor.playback_time_s >= 0
       const occurrence = packet.picture_sequence && (frame.anchor.frame_index <= packet.picture_sequence.first.end_frame_index

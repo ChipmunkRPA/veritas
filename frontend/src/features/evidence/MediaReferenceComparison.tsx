@@ -49,6 +49,13 @@ type SoundtrackTiming = {
   scope: string
   range?: Record<Side, SoundtrackSide> & { picture?: { frame_index: number; time_s: number; asset: Asset } }
 }
+type CleanSpeechComparison = {
+  summary: string
+  scope: string
+  status: 'localized_difference' | 'no_local_difference' | 'unassessed'
+  reason: string
+  range?: Record<Side, SoundtrackSide & { source_pts: [number, number] }> & { bands: { band_hz: [number, number] }[] }
+}
 type ChannelTimingRange = Omit<SoundtrackTiming, 'scope' | 'range'> & {
   channel: 'left' | 'right'
   range: Record<Side, SoundtrackSide> & { changed_samples: [number, number] }
@@ -108,12 +115,13 @@ type Comparison = {
   level_adjusted?: never
   stereo_comparison?: never
   local_timing?: never
+  clean_speech?: never
   channel_timing?: ChannelTiming
   trim_alignment?: PictureTrimAlignment
 } | {
   schema: 'chipmunk.audio-reference-comparison/1' | 'chipmunk.audio-reference-comparison/2' | 'chipmunk.audio-reference-comparison/3'
     | 'chipmunk.audio-reference-comparison/4' | 'chipmunk.audio-reference-comparison/5' | 'chipmunk.audio-reference-comparison/6'
-    | 'chipmunk.audio-reference-comparison/7'
+    | 'chipmunk.audio-reference-comparison/7' | 'chipmunk.audio-reference-comparison/8'
   picture?: never
   timing?: never
   soundtrack_alignment?: never
@@ -121,11 +129,12 @@ type Comparison = {
   level_adjusted?: LevelAdjustedAudio
   stereo_comparison?: StereoComparison
   local_timing?: SoundtrackTiming
+  clean_speech?: CleanSpeechComparison
   channel_timing?: ChannelTiming
   trim_alignment?: never
 })
 type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: string | null }
-type Availability = { available: boolean; timing_available?: boolean }
+type Availability = { available: boolean; timing_available?: boolean; clean_speech_available?: boolean }
 const sourceSeconds = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 7, useGrouping: false })
 const trimSampleRate = 16000
 
@@ -419,6 +428,7 @@ function ResultView({ result }: { result: Result }) {
     </div>
     <p className="m-0 text-small text-text-muted">{comparison.interpretation}</p>
     {comparison.status !== 'measured' && <p className="m-0 text-small">{notes[comparison.status] ?? 'The files could not be compared.'}</p>}
+    {comparison.clean_speech && <CleanSpeechEvidence result={comparison.clean_speech} assets={assets} />}
     {comparison.timing && <TimingEvidence timing={comparison.timing} assets={assets} />}
     {comparison.soundtrack_alignment && !comparison.timing?.changed_audio_samples &&
       (!comparison.channel_timing?.ranges.length || comparison.soundtrack_alignment.range) &&
@@ -514,12 +524,27 @@ function SecondSoundtrack({ result, assets }: { result: AdditionalSoundtrack; as
   </section>
 }
 
-function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId: string; kind: Kind; timingAvailable: boolean }) {
+function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison; assets: Result['assets'] }) {
+  const span = result.range
+  return <div className="space-y-2 rounded-md border border-border p-3">
+    <SoundtrackTimingEvidence timing={result} assets={assets} audioOnly title="Local speech comparison" />
+    {span
+      ? <p className="m-0 text-caption text-text-muted">{span.bands.length} frequency bands had matching sound on both sides.
+        The matched excerpts use source ticks {span.submitted.source_pts[0]} to {span.submitted.source_pts[1]} at 16 kHz in both files.</p>
+      : <p className="m-0 text-caption text-text-muted">The decoded sample comparison is reported separately.</p>}
+  </div>
+}
+
+function MediaReferenceForm({ analysisId, kind, timingAvailable, cleanSpeechAvailable }: {
+  analysisId: string; kind: Kind; timingAvailable: boolean; cleanSpeechAvailable: boolean
+}) {
   const heading = useId()
   const input = useId()
   const timingInput = useId()
+  const cleanInput = useId()
   const [file, setFile] = useState<File | null>(null)
   const [timingEvent, setTimingEvent] = useState('')
+  const [cleanSpeech, setCleanSpeech] = useState(false)
   const [pending, setPending] = useState(false)
   const [error, setError] = useState('')
   const [result, setResult] = useState<Result | null>(null)
@@ -538,10 +563,11 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
     body.append('earlier', file)
     body.append('include_pdf', 'true')
     if (timingAvailable && timingEvent) body.append('timing_event_s', timingEvent)
+    if (cleanSpeechAvailable && cleanSpeech) body.append('earlier_has_clean_speech', 'true')
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [1, 2, 3, 4, 5, 6, 7]
+      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [1, 2, 3, 4, 5, 6, 7, 8]
       if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
@@ -550,6 +576,9 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
       }
       if (schema === 'chipmunk.audio-reference-comparison/6' && !response.comparison.local_timing) {
         throw new Error('The comparison response is missing its local audio timing result.')
+      }
+      if (schema === 'chipmunk.audio-reference-comparison/8' && !response.comparison.clean_speech) {
+        throw new Error('The comparison response is missing its local speech result.')
       }
       if ((schema === 'chipmunk.audio-reference-comparison/7' || schema === 'chipmunk.video-reference-comparison/8')
           && !response.comparison.channel_timing) {
@@ -589,7 +618,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
       <div className="min-w-0">
         <label htmlFor={input} className="mb-1 block text-small font-medium">Earlier {kind}</label>
         <input id={input} type="file" accept={kind === 'audio' ? 'audio/*,.wav,.mp3,.m4a,.flac,.ogg,.opus' : 'video/*,.mov,.mkv,.mp4,.webm' + (timingAvailable ? ',.mpg,.mpeg' : '')} className="block max-w-full text-small" disabled={pending}
-          onChange={event => { setFile(event.currentTarget.files?.[0] ?? null); setTimingEvent(''); setResult(null); setError('') }} />
+          onChange={event => { setFile(event.currentTarget.files?.[0] ?? null); setTimingEvent(''); setCleanSpeech(false); setResult(null); setError('') }} />
       </div>
       {timingAvailable && <div className="min-w-0 basis-full">
         <label htmlFor={timingInput} className="mb-1 block text-small font-medium">Earlier mouth closure (seconds)</label>
@@ -598,6 +627,16 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
           onChange={event => { setTimingEvent(event.currentTarget.value); setResult(null); setError('') }} />
         <p id={timingInput + '-hint'} className="mt-1 mb-0 text-caption text-text-muted">
           Optional. Mark when the lips close just before reopening in the earlier clip. This supports matching 360 × 288 clips at 25 fps with 75 pictures and continuous audio, and some short 720 × 480 pairs with identical pictures.
+        </p>
+      </div>}
+      {cleanSpeechAvailable && <div className="min-w-0 basis-full">
+        <label htmlFor={cleanInput} className="flex items-start gap-2 text-small font-medium">
+          <input id={cleanInput} type="checkbox" checked={cleanSpeech} disabled={pending || !file} aria-describedby={cleanInput + '-hint'}
+            onChange={event => { setCleanSpeech(event.currentTarget.checked); setResult(null); setError('') }} />
+          The earlier file is a clean copy of the same recording
+        </label>
+        <p id={cleanInput + '-hint'} className="mt-1 mb-0 text-caption text-text-muted">
+          Compare short changes even with background speech. Both files need exactly six seconds of continuous 16 kHz mono 16-bit WAV or FLAC with the same start and timing.
         </p>
       </div>}
       <Button type="submit" variant="primary" disabled={!file || pending}>{pending ? 'Comparing…' : kind === 'audio' ? 'Compare recordings' : 'Compare videos'}</Button>
@@ -614,5 +653,6 @@ export default function MediaReferenceComparison({ analysisId, kind }: { analysi
     refetchOnMount: 'always', refetchOnWindowFocus: false, retry: false })
   return availability.isFetchedAfterMount && availability.data?.available && !availability.isError
     ? <MediaReferenceForm key={kind + analysisId} analysisId={analysisId} kind={kind}
-      timingAvailable={kind === 'video' && availability.data.timing_available === true} /> : null
+      timingAvailable={kind === 'video' && availability.data.timing_available === true}
+      cleanSpeechAvailable={kind === 'audio' && availability.data.clean_speech_available === true} /> : null
 }

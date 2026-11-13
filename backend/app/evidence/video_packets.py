@@ -529,13 +529,13 @@ def _scene_return_packet(db, store, analysis, set_id, source, scene, decoded):
             "score": None, "is_peak": False, "context_region": None, "region_meaning": "whole_frame_context",
             "artifact_refs": {"original": role, "context": role}})
     return {"id": packet_id, "title": scene_return_binding.TITLE, "evidence_type": "anomaly",
-            "claim_scope": "sampled_window", "semantics": scene_return_binding.SCHEMA, scene_return_binding.KEY: scene,
+            "claim_scope": "sampled_window", "semantics": scene["schema"], scene_return_binding.KEY: scene,
             "affects_overall_confidence": False, "finding_ids": [], "signal_refs": [], "exhibit_refs": [],
             "frames": frames, "artifacts": assets, "observation": scene_return_binding.observation(scene),
             "interpretation": scene_return_binding.INTERPRETATION, "measurements": [],
             "limitations": ["This check looks for short changes that return to a similar picture. It can miss other edits."],
             "clip": {"status": "unavailable", "reason": "Use the original video for playback."},
-            "derivation": {"version": VERSION, "selection": scene_return_binding.SCHEMA,
+            "derivation": {"version": VERSION, "selection": scene["schema"],
                            "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
 
 
@@ -991,6 +991,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         picture_hold_binding.validate_record(document, hold, table_pts=table.pts, interpolated=table.interpolated,
                                              canonical_hash=canonical_hash)
         scene_return_binding.validate(document, scene, pts=table.pts, canonical_hash=canonical_hash)
+        scene_return_binding.validate_coverage(document, canonical_hash=canonical_hash, pts=table.pts)
     except (KeyError, TypeError, ValueError) as error:
         raise PacketIntegrityError(str(error)) from error
     register_artefact(db, store, canonical_json(document), media_type="application/json", role="exhibit_payload",

@@ -1,0 +1,48 @@
+{
+  "schema": "chipmunk.video-scene-return-webm-app/1",
+  "simulated_checkout": true,
+  "analyses": 3,
+  "unpaid_jobs": 0,
+  "positive": {
+    "source_range_s": [
+      1.1,
+      1.333
+    ],
+    "native_time_base": "1/1000",
+    "frames": [
+      32,
+      36,
+      40
+    ],
+    "pts": [
+      1067,
+      1200,
+      1333
+    ],
+    "pdf_images_verified": 3,
+    "pdf_exact_tile_bounds": 56,
+    "signed_original_source_verified": true,
+    "report_sha256": "f6be701bf76772a235004744891069b1737916fb14b51130615ff5846576eb6e"
+  },
+  "ordinary_camera_shift": {
+    "scanned_frames": 120,
+    "picture_change_ranges": 0
+  },
+  "rollback": {
+    "picture_change_ranges": 0,
+    "same_overall_decision": true
+  },
+  "browser": {
+    "json_matches": true,
+    "native_ticks": [
+      1067,
+      1200,
+      1333
+    ],
+    "original_frames": 3,
+    "page_errors": 0,
+    "plain_view": true,
+    "source_clock": true,
+    "tiles": 56
+  }
+}

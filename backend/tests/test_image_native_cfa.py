@@ -80,6 +80,41 @@ def test_unsupported_transport_and_missing_stencil(renders):
     assert native_cfa.inspect_png(png(np.full_like(original, 24000))).status == "no_repeatable_stencil"
 
 
+def test_rotation_evidence_version_preserves_existing_phase_shift_and_allows_half_cell_crop(renders, monkeypatch):
+    from app.detectors.image import native_cfa_rotation
+
+    original, edited = renders
+    body = png(original)
+    sha = hashlib.sha256(body).hexdigest()
+    assert source.record(sha, body=body)["schema"] == binding.SCHEMA
+
+    crop = [496, 416, 624, 544]
+    monkeypatch.setattr(native_cfa_rotation, "inspect", lambda rgb, **kwargs: {"box": crop})
+    measured = source.record(sha, body=body, include_rotation=True)
+    assert measured["status"] == "rotation" and measured["schema"] == binding.ROTATION_SCHEMA
+    assert measured["basis"] == binding.ROTATION_OBSERVATION and measured["affects_overall_confidence"] is False
+    assets, content = {}, {}
+    for role, plate in source.plates(body, crop, schema=measured["schema"]).items():
+        ok, encoded = cv2.imencode(".png", plate)
+        assert ok
+        digest = hashlib.sha256(encoded).hexdigest()
+        content[digest] = encoded.tobytes()
+        assets[role] = {"sha256": digest, "media_type": "image/png", "width": plate.shape[1], "height": plate.shape[0]}
+    proof = {"record": measured, "artifacts": assets}
+    commitment = canonical_hash(measured)
+    document = {"schema": "chipmunk.image-evidence/1", binding.KEY: proof, "source": {
+        "sha256": sha, "width": 2048, "height": 1536, "exif_orientation": 1, binding.COMMITMENT: commitment}}
+    binding.validate(document, commitment)
+    assert source.verify(body, proof, content.__getitem__)
+    measured["basis"] = "An invented claim."
+    with pytest.raises(ValueError, match="did not replay"):
+        source.verify(body, proof, content.__getitem__)
+
+    edited_body = png(edited)
+    existing = source.record(hashlib.sha256(edited_body).hexdigest(), body=edited_body, include_rotation=True)
+    assert existing["status"] == "matched" and existing["region"] == [480, 416, 608, 544]
+
+
 def test_signed_interpolation_observation_binds_native_crop_and_coordinates(renders):
     _, edited = renders
     body = png(edited)

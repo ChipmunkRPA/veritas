@@ -8,6 +8,7 @@ from app.evidence.audio_reference import (
     AUDIO_RATE,
     MAX_SECONDS,
     SCHEMA_WITH_CHANNEL_TIMING,
+    SCHEMA_WITH_CLEAN_SPEECH,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
     SCHEMA_WITH_LOCAL_TIMING,
     SCHEMA_WITH_STEREO,
@@ -317,6 +318,29 @@ def _first_soundtrack(indices):
     return f"First soundtrack   Earlier stream {indices['earlier']}   Analyzed stream {indices['submitted']}"
 
 
+def _clean_speech_page(document, result):
+    page = _page(document, "Local speech comparison")
+    page.insert_textbox((MARGIN, 125, RIGHT, 170), result["summary"], fontsize=12, fontname="hebo", color=INK)
+    page.insert_textbox((MARGIN, 177, RIGHT, 242), result["scope"], fontsize=11, fontname="helv", color=MUTED)
+    span = result.get("range")
+    if not span:
+        _text(page, MARGIN, 259, "The decoded sample comparison is reported separately.")
+        return
+    first, end = span["samples"]
+    rate = result["sample_rate"]
+    _text(page, MARGIN, 253, f"Selected interval  {first / rate:.3f} to {end / rate:.3f} s", font="hebo")
+    _text(page, MARGIN, 274, f"{len(span['bands'])} frequency bands had matching sound on both sides.", size=10, color=MUTED)
+    maximum = max(.01, *(abs(level) for side in LABELS for field in ("low", "high")
+                        for level in span[side]["waveform"][field]))
+    for y, (side, label) in zip((379, 565), (("earlier", "Earlier recording"), ("submitted", "Analyzed recording")), strict=True):
+        row = span[side]
+        source_start, source_end = row["source_pts"]
+        _text(page, MARGIN, y - 63, f"{label}  {row['start_s']:.3f} to {row['end_s']:.3f} s", font="hebo")
+        _draw_waveform(page, row["waveform"], y, maximum, (end - first) / rate)
+        _text(page, MARGIN, y + 53, f"Source ticks [{source_start}, {source_end}) at 16 kHz.", size=9, color=MUTED)
+    _text(page, MARGIN, 673, "Waveforms share one scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
+
+
 def _sound_page(document, span, *, level_adjusted=False, track_title=None):
     difference = span.get("difference")
     if level_adjusted:
@@ -444,16 +468,17 @@ def render(record, assets):
     with pymupdf.open() as document:
         is_audio = record["schema"] in (AUDIO_SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT, SCHEMA_WITH_TRIM_ALIGNMENT,
                                         SCHEMA_WITH_TRIM_AND_LEVEL, SCHEMA_WITH_STEREO, SCHEMA_WITH_LOCAL_TIMING,
-                                        SCHEMA_WITH_CHANNEL_TIMING)
+                                        SCHEMA_WITH_CHANNEL_TIMING, SCHEMA_WITH_CLEAN_SPEECH)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
         adjusted = record.get("level_adjusted")
-        trimmed = record["schema"] == SCHEMA_WITH_TRIM_AND_LEVEL or (
-            record["schema"] == SCHEMA_WITH_LOCAL_TIMING and "trim_alignment" in record.get("audio", {}))
+        trimmed = is_audio and "trim_alignment" in record.get("audio", {})
         if adjusted and not trimmed:
             _level_adjusted_pages(document, adjusted)
         (_audio_summary if is_audio else _summary)(document, record)
         if adjusted and trimmed:
             _level_adjusted_pages(document, adjusted)
+        if "clean_speech" in record:
+            _clean_speech_page(document, record["clean_speech"])
         remaining = []
         local = record.get("picture", {}).get("local_comparison", {})
         if local.get("range"):

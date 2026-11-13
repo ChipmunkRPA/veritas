@@ -2,7 +2,7 @@ import { useEffect, useId, useRef, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Button } from '../../components/ui'
 import { saveBlob } from '../../lib/api/reports'
-import { archiveAvailability, compareArchive, type ArchiveComparison, type ArchiveExcerpt } from './documentArchiveApi'
+import { archiveAvailability, compareArchive, type ArchiveCollection, type ArchiveComparison, type ArchiveExcerpt } from './documentArchiveApi'
 
 const statusLabels = {
   reference_bound: 'Archive passage matched',
@@ -37,6 +37,7 @@ function ArchiveResult({ result }: { result: ArchiveComparison }) {
   const { comparison, pdf } = result
   const { library, reference, coverage, changes } = comparison
   const joined = comparison.layout === 'recovered_archive_boundaries'
+  const gao = comparison.schema === 'chipmunk.document-archive-comparison/2'
   const downloadJson = () => saveBlob(new Blob([JSON.stringify(comparison, null, 2) + '\n'], { type: 'application/json' }),
     'chipmunk-verify-archive-comparison.json')
   const downloadPdf = (body: string) => {
@@ -61,20 +62,29 @@ function ArchiveResult({ result }: { result: ArchiveComparison }) {
         <a href={reference.version_url} className="underline">Pinned source version</a>
       </p>
       <p className="mt-2 mb-0 text-small text-text-muted">
-        {coverage.matched_words} of {coverage.body_words} body words support the source match.
+        {coverage.matched_words} of {coverage.body_words} {gao ? 'body tokens' : 'body words'} support the source match.
       </p>
+      {gao && reference.submitted_range && reference.transcript_range && <p className="mt-2 mb-0 text-caption text-text-muted">
+        Published {reference.published_date}. Matched submitted range [{reference.submitted_range.join(', ')}).
+        {' '}Transcript range [{reference.transcript_range.join(', ')}).
+      </p>}
       {joined && <p className="mt-2 mb-0 text-small text-text-muted">The submitted text joins several source paragraphs. The comparison recovered their boundaries from the archive.</p>}
-      {changes.length === 0 && <p className="mt-2 mb-0 text-small">No word or punctuation differences in the compared passages.</p>}
+      {changes.length === 0 && <p className="mt-2 mb-0 text-small">{gao ? 'No normalized wording differences in the compared passage.'
+        : 'No word or punctuation differences in the compared passages.'}</p>}
     </>}
     {changes.length > 0 && <>
-      <p className="mt-2 mb-0 text-caption text-text-muted">Submitted positions count Unicode code points in the extracted text. Archive positions start within the cited paragraph. Range ends are excluded.</p>
+      <p className="mt-2 mb-0 text-caption text-text-muted">Submitted positions count Unicode code points in the extracted text.
+        {' '}{gao ? 'Archive positions start within the full highlights transcript.' : 'Archive positions start within the cited paragraph.'} Range ends are excluded.</p>
+      {!!comparison.submitted_sentence_ranges?.length && <p className="mt-2 mb-0 text-caption text-text-muted">
+        Submitted sentences containing differences {comparison.submitted_sentence_ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}.
+      </p>}
       <ol className="mt-3 mb-0 list-none space-y-3 p-0">
         {changes.map((change, i) => <li key={i} className="rounded-md border border-border p-3">
           <h3 className="m-0 text-small font-medium">{change.submitted.docx_location
             ? `Word body paragraph ${change.submitted.docx_location.paragraph}`
             : `${joined ? 'Passage in submitted paragraph' : 'Submitted paragraph'} ${change.submitted_paragraph}`}</h3>
           <div className="mt-3 grid gap-4 sm:grid-cols-2">
-            <Excerpt label={change.archive_paragraph == null ? 'Archive version' : `Archive body paragraph ${change.archive_paragraph}`}
+            <Excerpt label={gao ? 'Published highlights transcript' : change.archive_paragraph == null ? 'Archive version' : `Archive body paragraph ${change.archive_paragraph}`}
               excerpt={change.archive} />
             <Excerpt label="Submitted text" excerpt={change.submitted} />
           </div>
@@ -84,12 +94,13 @@ function ArchiveResult({ result }: { result: ArchiveComparison }) {
   </div>
 }
 
-function ArchiveAction({ analysisId }: { analysisId: string }) {
+function ArchiveAction({ analysisId, gaoAvailable }: { analysisId: string; gaoAvailable: boolean }) {
   const heading = useId()
   const request = useRef<AbortController | null>(null)
   const [pending, setPending] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<ArchiveComparison | null>(null)
+  const [collection, setCollection] = useState<ArchiveCollection>('frus')
   useEffect(() => () => request.current?.abort(), [])
 
   async function run() {
@@ -100,7 +111,7 @@ function ArchiveAction({ analysisId }: { analysisId: string }) {
     setError(null)
     setResult(null)
     try {
-      const response = await compareArchive(analysisId, active.signal)
+      const response = await compareArchive(analysisId, active.signal, collection)
       if (!active.signal.aborted) setResult(response)
     } catch (reason) {
       if (!active.signal.aborted) setError(reason instanceof Error ? reason.message : 'Please try again.')
@@ -114,7 +125,21 @@ function ArchiveAction({ analysisId }: { analysisId: string }) {
 
   return <section aria-labelledby={heading} className="rounded-md border border-border p-4">
     <h2 id={heading} className="m-0 text-body font-medium">Public archive comparison</h2>
-    <p className="mt-2 mb-3 text-small text-text-muted">Compare the retained text with a local collection of U.S. diplomatic records. See exact differences in matched passages.</p>
+    <p className="mt-2 mb-3 text-small text-text-muted">{collection === 'gao'
+      ? 'Compare the retained text with local GovReport transcripts of U.S. GAO report highlights.'
+      : 'Compare the retained text with a local collection of U.S. diplomatic records.'} See exact differences in matched passages.</p>
+    {gaoAvailable && <label className="mb-3 block text-small">
+      Archive collection
+      <select className="ml-2 rounded border border-border bg-surface-1 p-1" value={collection} disabled={pending}
+        onChange={event => {
+          setCollection(event.currentTarget.value === 'gao' ? 'gao' : 'frus')
+          setResult(null)
+          setError(null)
+        }}>
+        <option value="frus">U.S. diplomatic records</option>
+        <option value="gao">U.S. GAO report highlights</option>
+      </select>
+    </label>}
     <Button variant="primary" disabled={pending} onClick={() => void run()}>
       {pending ? 'Comparing…' : 'Compare with public archive'}
     </Button>
@@ -129,5 +154,5 @@ export default function DocumentArchiveComparison({ analysisId }: { analysisId: 
     queryFn: ({ signal }) => archiveAvailability(analysisId, signal), refetchOnMount: 'always',
     refetchOnWindowFocus: false, retry: false, gcTime: 0 })
   return availability.isFetchedAfterMount && availability.data && !availability.isError
-    ? <ArchiveAction key={analysisId} analysisId={analysisId} /> : null
+    ? <ArchiveAction key={analysisId} analysisId={analysisId} gaoAvailable={availability.data.gaoAvailable} /> : null
 }

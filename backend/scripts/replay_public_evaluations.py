@@ -209,10 +209,22 @@ DELIVERY_AND_LOCALIZATION = {
         f"{PANELS}/writing-revision-trajectory-2026-11-13.json", f"{PANELS}/writing-revision-worker-complete-2026-11-13.json",
     )),
 }
+REFERENCE_AND_ROTATION = {
+    "image": ("review_image_native_rotation_location.py", (
+        "image-native-rotation-location-2026-11-13.json", "image-native-stencil-interpolation-cc0-roster-2026-11-13.json",
+    ), (), ()),
+    "video": ("review_video_scene_return_webm_transfer.py", (
+        "video-scene-return-webm-transfer-2026-11-13.json", "video-scene-return-transfer-2026-11-13.json",
+    ), (), ()),
+    "audio": ("review_audio_clean_reference_transfer.py", ("audio-clean-reference-transfer-2026-11-13.json",), (), (
+        f"{SCRIPTS}/review_audio_paired_speech_continuity_transfer.py",
+    )),
+    "writing": ("review_writing_gao_archive_transfer.py", ("writing-gao-archive-transfer-2026-11-13.json",), (), ()),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
           "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion",
-          "short-edit-transfer-2026-11-13", "delivery-and-localization")
+          "short-edit-transfer-2026-11-13", "delivery-and-localization", "reference-and-rotation")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -280,6 +292,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = SHORT_EDIT_TRANSFER_2026_11_13[modality]
     elif suite == "delivery-and-localization":
         script, panel_names, prefix, dependencies = DELIVERY_AND_LOCALIZATION[modality]
+    elif suite == "reference-and-rotation":
+        script, panel_names, prefix, dependencies = REFERENCE_AND_ROTATION[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

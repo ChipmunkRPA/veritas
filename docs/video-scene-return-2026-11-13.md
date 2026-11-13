@@ -21,8 +21,9 @@ the same record. The optional observation has its own source commitment.
 An older analysis keeps its original recorded evidence.
 
 The optional Full and Deep check covers upright 1280 × 720 MP4 files
-with H.264 (`avc1`) or HEVC (`hvc1`), 8-bit 4:2:0 chroma and exactly
-120 verified frames at 30 fps.
+with H.264 (`avc1`) or HEVC (`hvc1`) and VP9 WebM files. It requires
+8-bit 4:2:0 chroma and exactly 120 verified frames at 30 fps.
+The WebM file must retain the matching millisecond picture clock.
 The check looks for a change lasting 6–24 frames followed by a return to a
 similar picture. It can miss edits outside that range, cuts without a return,
 and changes in low-texture areas. To enable it on a development instance,
@@ -69,6 +70,50 @@ sources, including 12 one-way cuts and six continuous retimes.
 The same source material appears in both encodes. This compares delivery
 formats and does not add independent positive examples.
 [Paired carrier ledger](evaluation-panels/video-scene-return-h264-transfer-2026-11-13.json)
+
+## VP9 WebM transfer
+
+The same picture check now runs on the qualified WebM profile. Native
+timestamps alternate between 33 and 34 ms spacing. The verifier checks
+the complete 30 fps millisecond lattice against the first stored picture
+timestamp. The browser, PDF and JSON report the actual WebM ticks.
+
+On 74 held deliveries, the VP9 transfer preserved all **14** exact prior
+picture-change locations and found **one additional** combined speaker and
+layout change. It flagged **0 of 58** ordinary controls, including 12
+one-way cuts and six continuous retimes. The earlier and new encodes use
+the same source recordings, so this measures codec transfer. It gives no
+estimate of the prevalence of ordinary edits or accuracy on unseen sites.
+Independent FFmpeg replay verified **8,880** native timestamps and **45**
+selected RGB frames. A repeat reproduced the decisions, tile indices and
+anchor hashes on all 74 deliveries. The WebM container byte hashes changed
+between encodes. [Transfer ledger](evaluation-panels/video-scene-return-webm-transfer-2026-11-13.json)
+
+In the local Full worker with simulated checkout, the layout-change
+example showed **1.100–1.333 s**, with an exclusive end. The three original
+frames were **32, 36 and 40**, at PTS **1067, 1200 and 1333** in a 1/1000
+time base. Chrome verified all three originals, 56 exact displayed tiles
+and the matching JSON evidence. The PDF and signed package reproduced
+the native images. The camera-shift control completed the scan and reported
+no matching change. Turning off the option removed the layout-change
+observation and returned the same overall assessment. All three runs queued
+only after simulated payment. [Local replay receipt](evaluation-panels/video-scene-return-webm-app-2026-11-13.json)
+
+```sh
+python3 -B -IS backend/scripts/review_video_scene_return_webm_transfer.py \
+  docs/evaluation-panels/video-scene-return-webm-transfer-2026-11-13.json \
+  docs/evaluation-panels/video-scene-return-transfer-2026-11-13.json
+```
+
+For media replay, use the rebuilt HEVC bank and the CRF 21 H.264 bank
+linked above as `hevc` and `h264`. Start with a new output directory.
+
+```sh
+export PYTHONPATH=backend OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+for phase in freeze score audit; do
+  backend/.venv/bin/python -B -m scripts.video_scene_return_webm_transfer "$phase" "$hevc" "$h264" "$run" || exit 1
+done
+```
 
 ## Local application verification
 

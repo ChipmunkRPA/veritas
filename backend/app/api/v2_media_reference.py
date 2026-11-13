@@ -41,6 +41,10 @@ class MediaReferenceAvailability(BaseModel):
     available: bool
 
 
+class AudioReferenceAvailability(MediaReferenceAvailability):
+    clean_speech_available: bool | None = None
+
+
 class VideoReferenceAvailability(MediaReferenceAvailability):
     timing_available: bool | None = None
 
@@ -89,7 +93,7 @@ def _unavailable(kind: str) -> ProblemError:
 
 
 @router.get(VIDEO_ROUTE, response_model=VideoReferenceAvailability, responses=problem_responses(401, 404))
-@router.get(AUDIO_ROUTE, response_model=MediaReferenceAvailability, responses=problem_responses(401, 404))
+@router.get(AUDIO_ROUTE, response_model=AudioReferenceAvailability, responses=problem_responses(401, 404))
 def availability(aid: str, request: Request):
     kind = kind_for_path(request.url.path)
     assert kind is not None
@@ -103,6 +107,8 @@ def availability(aid: str, request: Request):
         except (OSError, ObjectStoreError):
             pass
     result = {"available": available}
+    if available and kind == "audio" and settings.audio_reference_clean_speech:
+        result["clean_speech_available"] = True
     if available and kind == "video" and settings.video_reference_timing_model_path is not None:
         from app.evidence.video_reference_timing import available as timing_available
 
@@ -133,7 +139,7 @@ def _base64(data: bytes) -> str:
 
 
 def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: UploadFile, include_pdf: bool,
-             timing_event_s: Fraction | None = None) -> JSONResponse:
+             timing_event_s: Fraction | None = None, earlier_has_clean_speech: bool = False) -> JSONResponse:
     expected = original[:2]
 
     try:
@@ -157,6 +163,7 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         reference, submitted, filenames=(earlier.filename or "", original[2]),
                         include_local_timing=settings.audio_reference_local_timing,
                         include_channel_timing=settings.audio_reference_local_timing,
+                        include_clean_speech=settings.audio_reference_clean_speech and earlier_has_clean_speech,
                     )
                 elif timing_event_s is None:
                     record, assets = video_reference.compare(
@@ -201,6 +208,11 @@ def _upload_body(kind):
     }
     if kind == "video":
         properties["timing_event_s"] = {"type": "string", "description": "Optional marked mouth closure time in the earlier clip, in seconds."}
+    else:
+        properties["earlier_has_clean_speech"] = {
+            "type": "string", "enum": ["true", "false"], "default": "false",
+            "description": "Optional confirmation of an earlier clean copy of the same six-second recording on the same clock.",
+        }
     return {"requestBody": {"required": True, "content": {"multipart/form-data": {"schema": {
         "type": "object", "required": ["earlier"], "properties": properties,
     }}}}}
@@ -219,7 +231,7 @@ async def comparison(aid: str, request: Request):
     if not _slot.acquire(blocking=False):
         raise ProblemError(429, "Source comparison busy", "Try again after the active source comparison finishes.")
     try:
-        async with request.form(max_files=1, max_fields=2 if kind == "video" else 1, max_part_size=1024) as form:
+        async with request.form(max_files=1, max_fields=2, max_part_size=1024) as form:
             earlier = form.get("earlier")
             include_pdf = form.get("include_pdf", "false")
             if not isinstance(earlier, UploadFile) or include_pdf not in ("true", "false"):
@@ -230,6 +242,9 @@ async def comparison(aid: str, request: Request):
                            or re.fullmatch(r"[0-9]{1,2}(?:\.[0-9]{1,3})?", timing[0]) is None
                            or (event := Fraction(timing[0])) > video_reference.MAX_SECONDS):
                 raise ProblemError(422, "Invalid marked time", "Enter a time in seconds from the first picture in the earlier clip.")
-            return await run_in_threadpool(_compare, aid, kind, original, earlier, include_pdf == "true", event)
+            clean = form.getlist("earlier_has_clean_speech")
+            if clean and (kind != "audio" or len(clean) != 1 or clean[0] not in ("true", "false")):
+                raise ProblemError(422, "Invalid earlier recording option", "Confirm the optional earlier clean recording with true or false.")
+            return await run_in_threadpool(_compare, aid, kind, original, earlier, include_pdf == "true", event, clean == ["true"])
     finally:
         _slot.release()

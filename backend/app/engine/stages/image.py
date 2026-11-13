@@ -540,7 +540,10 @@ def render(ctx: StageContext) -> dict[str, Any]:
         stopped = provenance_gate.stop(ctx)
         remaining = ctx.deadline.remaining()
         body = _media(ctx).original_bytes() if not stopped and (remaining is None or remaining >= 2) else None
-        interpolation[image_interpolation_binding.KEY] = image_interpolation_source.record(ingest["sha256"], body=body, skipped=stopped)
+        rotation = settings.image_native_rotation_review and (remaining is None or remaining >= 15)
+        interpolation[image_interpolation_binding.KEY] = image_interpolation_source.record(
+            ingest["sha256"], body=body, skipped=stopped, include_rotation=rotation, check=ctx.check,
+        )
     return {"artefacts_indexed": len(records), "bytes": sum(a["size_bytes"] for a in records), "tiles": tiles,
             "legacy_artifacts": legacy, "exhibits": image_exhibits, "artefacts": image_artefacts, **interpolation}
 

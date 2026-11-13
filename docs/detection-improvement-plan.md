@@ -108,6 +108,10 @@ integration remains unfinished.
 - The [transient-reduction audio study](audio-transient-reduction-transfer-2026-11-12.md)
   added no locations under rain or train noise. Only 16 of 65 eligible
   edited windows under train noise passed the speech-activity check.
+- The [enhanced-audio blend study](audio-enhancement-blend-transfer-2026-11-12.md)
+  found two additional train-masked edits with full enhancement and flagged
+  two genuine recordings. Requiring support after restoring part of the
+  original signal removed both gains and both false flags.
 - A [separate Node.js replay](writing-paired-center-transfer-2026-11-12.md#replay)
   reproduced the writing study and the exact positions in four app exports.
 - The [fresh PLOS Biology writing study](writing-semantic-continuity-transfer-2026-11-12.md)

@@ -175,6 +175,9 @@ sample counts under the same loud rain and train conditions.
 The [transient-reduction comparison](audio-transient-reduction-transfer-2026-11-12.md)
 recreates the processed inputs on the original sample clock and checks whether
 two neighboring windows recover any additional known edits.
+The [enhanced-audio blend comparison](audio-enhancement-blend-transfer-2026-11-12.md)
+verifies the same native time intervals and checks whether restoring some of
+the background preserves useful locations or reduces false flags.
 The [native word-clock qualification](grid-reserve-word-clocks-2026-11-12.md)
 aligns publisher word intervals with original embedded speech and replays four
 ordinary mouth changes with unchanged soundtracks.

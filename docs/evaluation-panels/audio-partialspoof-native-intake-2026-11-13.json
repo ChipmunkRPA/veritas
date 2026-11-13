@@ -1,0 +1,828 @@
+{
+  "candidate_declared_speaker_intersection": 0,
+  "inference_calls": 0,
+  "partitions": {
+    "dev": {
+      "candidate_groups": [
+        {
+          "control": null,
+          "positive": {
+            "declared_speaker": "LA_0070",
+            "id": "CON_D_0012463",
+            "intervals": [
+              [
+                0,
+                7440,
+                2
+              ],
+              [
+                7440,
+                29771,
+                1
+              ],
+              [
+                29771,
+                30091,
+                2
+              ],
+              [
+                30091,
+                47531,
+                0
+              ],
+              [
+                47531,
+                48011,
+                2
+              ],
+              [
+                48011,
+                56531,
+                1
+              ],
+              [
+                56531,
+                56611,
+                2
+              ],
+              [
+                56611,
+                61222,
+                1
+              ],
+              [
+                61222,
+                61262,
+                2
+              ],
+              [
+                61262,
+                64105,
+                1
+              ]
+            ],
+            "label_sha256": "3b863b45ebc38db7678defce1c47c1cd388144ca19cc83cf91fc9c2a9d330742",
+            "pcm_sha256": "1619d48e159310032e06357d42130126eba4dca6481babcf6e37b596295de26a",
+            "samples": 64112,
+            "unlabelled_tail_samples": 7,
+            "wav_sha256": "f88bdb25446ce5aee9b8d9c241c03343fd7125bb6c3f491763932bdb88ea952f"
+          }
+        },
+        {
+          "control": {
+            "declared_speaker": "LA_0074",
+            "id": "LA_D_1481335",
+            "intervals": [
+              [
+                0,
+                23840,
+                2
+              ],
+              [
+                23840,
+                30080,
+                1
+              ],
+              [
+                30080,
+                30400,
+                2
+              ],
+              [
+                30400,
+                36160,
+                1
+              ],
+              [
+                36160,
+                36960,
+                2
+              ],
+              [
+                36960,
+                44800,
+                1
+              ],
+              [
+                44800,
+                44960,
+                2
+              ],
+              [
+                44960,
+                54400,
+                1
+              ],
+              [
+                54400,
+                54720,
+                2
+              ],
+              [
+                54720,
+                61120,
+                1
+              ],
+              [
+                61120,
+                68880,
+                2
+              ]
+            ],
+            "label_sha256": "ea4e92375a57c9a3a0852c1509a8aeaf7de4a7961bfdf86e41c84fe19b9943d0",
+            "pcm_sha256": "4bedd43d4dd41e974cc92b4c4239018ac0a8bd3805a6b3ba3fe53c32b9bb65f8",
+            "samples": 68891,
+            "unlabelled_tail_samples": 11,
+            "wav_sha256": "59f52049d6693f0e7e5e0dc82087ba9f3447b73ef05b95380ecc270f196d7ebc"
+          },
+          "positive": {
+            "declared_speaker": "LA_0074",
+            "id": "CON_D_0011232",
+            "intervals": [
+              [
+                0,
+                240,
+                2
+              ],
+              [
+                240,
+                18166,
+                1
+              ],
+              [
+                18166,
+                18326,
+                2
+              ],
+              [
+                18326,
+                27286,
+                0
+              ],
+              [
+                27286,
+                27446,
+                2
+              ],
+              [
+                27446,
+                38626,
+                1
+              ],
+              [
+                38626,
+                38826,
+                2
+              ],
+              [
+                38826,
+                40744,
+                1
+              ],
+              [
+                40744,
+                40784,
+                2
+              ],
+              [
+                40784,
+                47106,
+                1
+              ],
+              [
+                47106,
+                47186,
+                2
+              ],
+              [
+                47186,
+                50607,
+                1
+              ],
+              [
+                50607,
+                50727,
+                2
+              ],
+              [
+                50727,
+                70720,
+                1
+              ],
+              [
+                70720,
+                73992,
+                2
+              ]
+            ],
+            "label_sha256": "030d7abc6c24f591d9c68b7361a08920b586c7716c43441636975c0618035cb9",
+            "pcm_sha256": "d4ae83c3d03c54b6faae16eb53458cbb4c24d9ff6c1ce96782f77cae9d8133a7",
+            "samples": 74004,
+            "unlabelled_tail_samples": 12,
+            "wav_sha256": "5f56f00941998fbbe00a62f3409ed33629f50016e4c27edb8422dd1be0695f93"
+          }
+        },
+        {
+          "control": {
+            "declared_speaker": "LA_0069",
+            "id": "LA_D_2160989",
+            "intervals": [
+              [
+                0,
+                22880,
+                2
+              ],
+              [
+                22880,
+                27360,
+                1
+              ],
+              [
+                27360,
+                27840,
+                2
+              ],
+              [
+                27840,
+                55520,
+                1
+              ],
+              [
+                55520,
+                56960,
+                2
+              ],
+              [
+                56960,
+                65600,
+                1
+              ],
+              [
+                65600,
+                69472,
+                2
+              ]
+            ],
+            "label_sha256": "ee8feee35093869e6299b237f3a6e79986ded434093c0c66841b3023c19ec44f",
+            "pcm_sha256": "57013a5949af47465e908f67db81057bad789d40da5bac89d69a71d9f8ef0cd7",
+            "samples": 69478,
+            "unlabelled_tail_samples": 6,
+            "wav_sha256": "ce3e0de32717b6b80b3c83f2f0db5bfd2b85e937dda4bf059c6f114a40c0fc81"
+          },
+          "positive": {
+            "declared_speaker": "LA_0069",
+            "id": "CON_D_0010832",
+            "intervals": [
+              [
+                0,
+                4160,
+                2
+              ],
+              [
+                4160,
+                8710,
+                1
+              ],
+              [
+                8710,
+                9310,
+                2
+              ],
+              [
+                9310,
+                12908,
+                1
+              ],
+              [
+                12908,
+                12948,
+                2
+              ],
+              [
+                12948,
+                18250,
+                1
+              ],
+              [
+                18250,
+                18570,
+                2
+              ],
+              [
+                18570,
+                27210,
+                0
+              ],
+              [
+                27210,
+                27370,
+                2
+              ],
+              [
+                27370,
+                53355,
+                1
+              ],
+              [
+                53355,
+                53475,
+                2
+              ],
+              [
+                53475,
+                60698,
+                1
+              ],
+              [
+                60698,
+                60778,
+                2
+              ],
+              [
+                60778,
+                67987,
+                1
+              ],
+              [
+                67987,
+                70483,
+                2
+              ]
+            ],
+            "label_sha256": "f2b0fff4441e520394f63705c287fa9d76f5f37618003cb0b52cbdffea9cf8e2",
+            "pcm_sha256": "d38f19368b7e364742cb8aaa77d9c91aeaafe383284c2bcc3b65790b99543cf4",
+            "samples": 70495,
+            "unlabelled_tail_samples": 12,
+            "wav_sha256": "7a39ab73c31062f0334d37d257cbd76a5981c40112f8232c206b1686d8b0695d"
+          }
+        },
+        {
+          "control": null,
+          "positive": {
+            "declared_speaker": "LA_0077",
+            "id": "CON_D_0015604",
+            "intervals": [
+              [
+                0,
+                480,
+                2
+              ],
+              [
+                480,
+                14624,
+                1
+              ],
+              [
+                14624,
+                14784,
+                2
+              ],
+              [
+                14784,
+                17304,
+                1
+              ],
+              [
+                17304,
+                17384,
+                2
+              ],
+              [
+                17384,
+                25265,
+                1
+              ],
+              [
+                25265,
+                25425,
+                2
+              ],
+              [
+                25425,
+                29639,
+                1
+              ],
+              [
+                29639,
+                29799,
+                2
+              ],
+              [
+                29799,
+                40519,
+                0
+              ],
+              [
+                40519,
+                40679,
+                2
+              ],
+              [
+                40679,
+                64604,
+                1
+              ],
+              [
+                64604,
+                64644,
+                2
+              ],
+              [
+                64644,
+                77632,
+                1
+              ],
+              [
+                77632,
+                77832,
+                2
+              ],
+              [
+                77832,
+                81675,
+                1
+              ],
+              [
+                81675,
+                82155,
+                2
+              ],
+              [
+                82155,
+                84948,
+                1
+              ],
+              [
+                84948,
+                86732,
+                2
+              ]
+            ],
+            "label_sha256": "bfdf8c091621f20dd39b9a5ee501c1ef76d357f9bcd65b8b3a94df19e1eeb6d3",
+            "pcm_sha256": "26acb917a6baefcae5c6f0a3c47e4d2a02ff3fb638b5502ef977ee075137dda4",
+            "samples": 86740,
+            "unlabelled_tail_samples": 8,
+            "wav_sha256": "54df7ad83d040b77792f48d993f86ec7788a08a0b3fcca4bccc91bdfc0bfc4b6"
+          }
+        }
+      ],
+      "counts": {
+        "bonafide": 158,
+        "bonafide_label_qualified": 38,
+        "bonafide_native_qualified": 38,
+        "spoof": 1475,
+        "spoof_label_qualified": 4,
+        "spoof_native_qualified": 4,
+        "wav_members": 1633
+      },
+      "delivery": {
+        "archive_bytes": 2027972850,
+        "archive_md5": "ddd4cd3221b7210ac879f67452fb209e",
+        "chunk_sha256": [
+          "3f4f4b5f386b87bffdd247fdf0dffc73f5de98916978ed6427fd521060d57432",
+          "46593cf83472b902feddfc6a5d8148c0cbf8bb1120ab7014fa7a9f98b745f6c0",
+          "b53ea1e2ffeea8f981fe0a6c6a5ee19270c93516c740d8f66cf3a501a83bc381",
+          "c46277ae32f773b24595718d3f8db03e7ac12fc9d579db82404b12a097042ad0",
+          "642c363bd700d2b92dfb9f01d13db2bf03dd8dfdd025512fe5202222bef5f736",
+          "d16f16cd0c827a432c03f11897e8ceeb0ae1ce23bb95bd1b2e8eefc293b4ca73",
+          "2e75e549fb165c03258636e80f4f7183ea2565a6316300fb1ea136f15c7d13cb",
+          "ec693b0a806218cd5a4984cf482ebdc5c133c0c97dbdd895da7caf55ea66ef5b"
+        ],
+        "prefix_bytes": 134217728,
+        "prefix_sha256": "b49273f818758cab83478e5710c0c2bf66618297c5b19db4197d272e5f7c92c2"
+      },
+      "native_tail_samples": {
+        "1": 4,
+        "2": 4,
+        "3": 2,
+        "5": 3,
+        "6": 3,
+        "7": 4,
+        "8": 2,
+        "9": 3,
+        "10": 5,
+        "11": 3,
+        "12": 2,
+        "13": 3,
+        "14": 3,
+        "15": 1
+      },
+      "paired_cases": 2,
+      "paired_speakers": 2
+    },
+    "train": {
+      "candidate_groups": [
+        {
+          "control": null,
+          "positive": {
+            "declared_speaker": "LA_0080",
+            "id": "CON_T_0003642",
+            "intervals": [
+              [
+                0,
+                160,
+                2
+              ],
+              [
+                160,
+                3117,
+                1
+              ],
+              [
+                3117,
+                3397,
+                2
+              ],
+              [
+                3397,
+                13782,
+                1
+              ],
+              [
+                13782,
+                13942,
+                2
+              ],
+              [
+                13942,
+                25593,
+                1
+              ],
+              [
+                25593,
+                25753,
+                2
+              ],
+              [
+                25753,
+                44034,
+                1
+              ],
+              [
+                44034,
+                44194,
+                2
+              ],
+              [
+                44194,
+                60834,
+                0
+              ],
+              [
+                60834,
+                61074,
+                2
+              ],
+              [
+                61074,
+                66948,
+                1
+              ],
+              [
+                66948,
+                66988,
+                2
+              ],
+              [
+                66988,
+                74430,
+                1
+              ],
+              [
+                74430,
+                74510,
+                2
+              ],
+              [
+                74510,
+                82311,
+                1
+              ],
+              [
+                82311,
+                82391,
+                2
+              ],
+              [
+                82391,
+                92852,
+                1
+              ],
+              [
+                92852,
+                95092,
+                2
+              ],
+              [
+                95092,
+                102145,
+                1
+              ],
+              [
+                102145,
+                102185,
+                2
+              ],
+              [
+                102185,
+                112070,
+                1
+              ],
+              [
+                112070,
+                112190,
+                2
+              ],
+              [
+                112190,
+                118847,
+                1
+              ],
+              [
+                118847,
+                118967,
+                2
+              ],
+              [
+                118967,
+                131162,
+                1
+              ],
+              [
+                131162,
+                134546,
+                2
+              ]
+            ],
+            "label_sha256": "ec8d9c1953f6ef755ae04943597f16eb240ab2813cde913026fa65b31fc007d4",
+            "pcm_sha256": "e33583fc532d70029dd2f31951187afafbd89945207cb2bef42503aae8b033e5",
+            "samples": 134559,
+            "unlabelled_tail_samples": 13,
+            "wav_sha256": "5735b8bf9bce7839ff16d5a64608582ce48af18f23addd952d9bee2233fd98c1"
+          }
+        },
+        {
+          "control": null,
+          "positive": {
+            "declared_speaker": "LA_0090",
+            "id": "CON_T_0004883",
+            "intervals": [
+              [
+                0,
+                3040,
+                2
+              ],
+              [
+                3040,
+                19708,
+                1
+              ],
+              [
+                19708,
+                19948,
+                2
+              ],
+              [
+                19948,
+                33868,
+                0
+              ],
+              [
+                33868,
+                34588,
+                2
+              ],
+              [
+                34588,
+                45852,
+                1
+              ],
+              [
+                45852,
+                46732,
+                2
+              ],
+              [
+                46732,
+                68117,
+                1
+              ],
+              [
+                68117,
+                68237,
+                2
+              ],
+              [
+                68237,
+                78631,
+                1
+              ],
+              [
+                78631,
+                78671,
+                2
+              ],
+              [
+                78671,
+                84320,
+                1
+              ],
+              [
+                84320,
+                84600,
+                2
+              ],
+              [
+                84600,
+                95875,
+                1
+              ],
+              [
+                95875,
+                95995,
+                2
+              ],
+              [
+                95995,
+                122747,
+                1
+              ],
+              [
+                122747,
+                122787,
+                2
+              ],
+              [
+                122787,
+                129667,
+                1
+              ],
+              [
+                129667,
+                132011,
+                2
+              ]
+            ],
+            "label_sha256": "4476a9774f306283c3afdac0dbd4b26f6cb842b181a4d545fc2376970e4d4268",
+            "pcm_sha256": "658701d64f3a5e7b9887e5536e21677cbc9687006080a5ecfff826d31e1a8350",
+            "samples": 132017,
+            "unlabelled_tail_samples": 6,
+            "wav_sha256": "90e9851c9ce889f1ea421abdea7f26af363acf1f4ab6381ee63608d2224b4a0a"
+          }
+        }
+      ],
+      "counts": {
+        "bonafide": 172,
+        "bonafide_label_qualified": 35,
+        "bonafide_native_qualified": 35,
+        "spoof": 1528,
+        "spoof_label_qualified": 2,
+        "spoof_native_qualified": 2,
+        "wav_members": 1700
+      },
+      "delivery": {
+        "archive_bytes": 2027101056,
+        "archive_md5": "c4853ddd831e8e96b0e279fc0a512e7e",
+        "chunk_sha256": [
+          "3335575cf6e628ffa38e899f44c0511842db28fd1c20bda4c80fc24292562652",
+          "814223da65343a98930be45f64a5af4208642709c6474b1086c16b28a8b2bc7d",
+          "c6a5d1b3ada5c6721fdd7e93fea534f263305b92fcb86e53b8442f442f2a4bb1",
+          "bc21480febc631249036a6eff210fd144ebe71c1ffe4c55dc8260d102dd449aa",
+          "0c8cf2eae3eba4d75894a6c25f885b03df9f7603fd4589fcb5b125f0eced7084",
+          "bd88109a16df7a075454e4a05e9d3cd1ad3f8169383c33e538d4b1ae623b8906",
+          "b8e47446e107c391fe21c31eb0416b78c44dcd8bf841b070c4b43d1a210c0e4a",
+          "05e516e79a6503d07e5791251e8ba1f7938ded2256bcc3591c35f6cd630df142"
+        ],
+        "prefix_bytes": 134217728,
+        "prefix_sha256": "f610c76b596700170986722ebcd199461040c997ff36013415664a2a07ab7daa"
+      },
+      "native_tail_samples": {
+        "0": 4,
+        "1": 1,
+        "3": 2,
+        "4": 2,
+        "5": 3,
+        "6": 2,
+        "8": 1,
+        "9": 3,
+        "10": 3,
+        "11": 4,
+        "12": 4,
+        "13": 4,
+        "14": 3,
+        "15": 1
+      },
+      "paired_cases": 0,
+      "paired_speakers": 0
+    }
+  },
+  "per_edit_generator_lineage": false,
+  "rules": {
+    "clock": "Require contiguous integral 16 kHz intervals starting at zero and a final label no more than 15 samples before PCM end. The suffix is unlabelled.",
+    "controls": "Match within the declared speaker and split, with at most one second native duration difference. Process positives in digest order and take the unused nearest duration, breaking ties by digest.",
+    "geometry": "Use the earlier metadata audit's 0.50\u20131.20 s single edit, 4\u20139 s extent and 0.40 s genuine speech on each side.",
+    "intake": "Count only complete regular WAV members in the first 128 MiB of each publisher archive."
+  },
+  "sample_rate": 16000,
+  "schema": "chipmunk.partialspoof-native/1"
+}

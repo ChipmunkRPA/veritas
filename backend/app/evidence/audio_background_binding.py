@@ -8,7 +8,16 @@ from __future__ import annotations
 import math
 import re
 
-from app.evidence.audio_bandwidth_binding import BANDWIDTH_METHOD
+from app.evidence.audio_bandwidth_binding import (
+    BANDWIDTH_METHOD,
+    BANDWIDTH_SCHEMAS,
+    EXPANDED_SCHEMA,
+    EXPANDED_VERSION,
+    LEGACY_SCHEMA,
+    LEGACY_VERSION,
+    maximum_ranges,
+    native_input,
+)
 from app.evidence.audio_bandwidth_binding import validate as validate_bandwidth
 
 CONTINUITY_METHOD = {
@@ -58,11 +67,11 @@ def _validate(context, source, voice_packets):
         return bool(re.fullmatch(r"[a-f0-9]{64}", str(value)))
 
     versions = {"chipmunk.acoustic-context/1": "mixed-acoustics-1", "chipmunk.acoustic-context/2": "mixed-acoustics-2",
-                "chipmunk.acoustic-context/3": "mixed-acoustics-3"}
+                LEGACY_SCHEMA: LEGACY_VERSION, EXPANDED_SCHEMA: EXPANDED_VERSION}
     require(context["schema"] in versions and context["status"] == "ready",
             "Unsupported acoustic-context schema or status")
     current = context["schema"] != "chipmunk.acoustic-context/1"
-    bandwidth = context["schema"] == "chipmunk.acoustic-context/3"
+    bandwidth = context["schema"] in BANDWIDTH_SCHEMAS
     binding = context["source"]
     require(binding == {key: source[key] for key in ("sha256", "pcm_sha256", "samples", "sample_rate", "coordinate_space")}
             and all(sha(binding[key]) for key in ("sha256", "pcm_sha256")), "Acoustic context uses a different source input")
@@ -156,14 +165,15 @@ def _validate(context, source, voice_packets):
 
     measured_bandwidth = None
     if bandwidth:
-        require(method["upper_frequency_drop"] == BANDWIDTH_METHOD and samples == 96000
-                and source.get("source_channels") == 1 and source.get("source_sample_rate") == 16000
-                and source.get("source_duration_s") == 6
-                and source["timeline"] == [{"start_sample": 0, "end_sample": 96000, "source_pts": 0}],
+        supported = (native_input(samples, source, EXPANDED_VERSION) if context["schema"] == EXPANDED_SCHEMA
+                     else samples == 96000 and source.get("source_channels") == 1 and source.get("source_sample_rate") == 16000
+                     and source.get("source_duration_s") == 6
+                     and source["timeline"] == [{"start_sample": 0, "end_sample": 96000, "source_pts": 0}])
+        require(method["upper_frequency_drop"] == BANDWIDTH_METHOD and supported,
                 "Unsupported temporary upper-frequency review input or method")
         detail = context["upper_frequency_drop"]
         count, status = detail["assessed_ranges"], detail["status"]
-        require(integer(count) and 0 <= count <= 275 and status in {"unassessed", "no_supported_drop", "measured_drop"}
+        require(integer(count) and 0 <= count <= maximum_ranges(samples) and status in {"unassessed", "no_supported_drop", "measured_drop"}
                 and (count == 0) == (status == "unassessed") and ("measurement" in detail) == (status == "measured_drop"),
                 "Invalid temporary upper-frequency review coverage")
         measured_bandwidth = detail.get("measurement")

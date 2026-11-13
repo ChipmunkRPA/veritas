@@ -74,6 +74,8 @@ def _interval(value: Any, samples: int) -> tuple[int, int]:
 
 def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision: int,
                         original_result_hash: str, source_sha256: str) -> None:
+    from app.evidence.audio_bandwidth_binding import BANDWIDTH_SCHEMAS
+
     if (document.get("schema") != SCHEMA or document.get("version") not in {"audio-evidence-1", "audio-evidence-2", VERSION} or document.get("status") != "ready" or document.get("analysis_id") != analysis_id
             or document.get("revision") != revision or document.get("original_result_hash") != original_result_hash
             or document.get("source", {}).get("sha256") != source_sha256 or document.get("sha256") != packet_hash(document)):
@@ -81,7 +83,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
     validate_content(document)
     if document.get("version") in {"audio-evidence-2", VERSION} and not document.get("acoustic_context"):
         raise PacketIntegrityError("Current audio evidence lacks frozen acoustic context")
-    if document.get("version") == VERSION and document["acoustic_context"]["schema"] not in {"chipmunk.acoustic-context/2", "chipmunk.acoustic-context/3"}:
+    if document.get("version") == VERSION and document["acoustic_context"]["schema"] not in {"chipmunk.acoustic-context/2", *BANDWIDTH_SCHEMAS}:
         raise PacketIntegrityError("Current audio evidence lacks continuity measurements")
 
 
@@ -416,14 +418,21 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
     if not candidates:
         document["limitations"].append("No recorded window reached the inspection threshold. This does not establish authenticity."
                                        if windows else "No voice windows were scored; no local synthesis claim can be made.")
-    from app.evidence import audio_background
+    from app.evidence import audio_background, audio_bandwidth_binding
     acoustic_source = {key: document["source"][key] for key in
                        ("sha256", "pcm_sha256", "samples", "sample_rate", "coordinate_space")}
-    bandwidth_enabled = (settings.audio_bandwidth_return_review and analysis.kind == "audio" and len(pcm) == 6 * SAMPLE_RATE
-                         and audio_background.native_bandwidth_input(len(pcm), mapping))
+    acoustic_version = audio_background.VERSION
+    if settings.audio_bandwidth_return_review and analysis.kind == "audio":
+        if audio_bandwidth_binding.native_input(len(pcm), mapping, audio_bandwidth_binding.LEGACY_VERSION):
+            acoustic_version = audio_bandwidth_binding.LEGACY_VERSION
+        elif audio_bandwidth_binding.native_input(len(pcm), mapping, audio_bandwidth_binding.EXPANDED_VERSION):
+            from app.evidence.audio_short_review_binding import source_metadata
+
+            acoustic_version = audio_bandwidth_binding.EXPANDED_VERSION
+            document["source"].update(source_metadata(mapping))
     document["acoustic_context"] = audio_background.build_content(pcm, mapping, acoustic_source, document["packets"],
         lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata), _chart,
-        version=audio_background.BANDWIDTH_VERSION if bandwidth_enabled else audio_background.VERSION)
+        version=acoustic_version)
     from app.evidence.sound_events import build as build_sound_events
     sound_context = build_sound_events(store, record, binding, document["source"], pcm, mapping,
         lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata), _chart)

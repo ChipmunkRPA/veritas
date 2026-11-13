@@ -97,6 +97,12 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [longer audio bandwidth comparison](audio-bandwidth-return-2026-11-13.md#transfer-to-eight-and-twelve-seconds)
+  adds eight- and twelve-second lossless inputs and native 16-bit FLAC.
+  On two additional AMI recordings, twelve-second deliveries assessed all
+  64 edited files, versus 50 assessed at six seconds. They located 36
+  edits versus 35 at six seconds, with three ordinary observations at
+  each duration. The check carries zero AI-confidence weight.
 - The [re-encoded video soundtrack comparison](video-soundtrack-reencode-2026-11-13.md)
   found 30 of 40 expressive and eight of 16 conversational timing shifts
   per audio carrier on matching H.264 pairs. It produced no timing finding
@@ -124,6 +130,10 @@ integration remains unfinished.
   supports preparation of a speaker-held training panel, subject to native
   audio clock checks. It omits per-edit generator identity, so a separate
   source with named generators is needed for confirmation.
+- The [PartialSpoof native intake](audio-partialspoof-native-intake-2026-11-13.md)
+  scanned 3,333 native WAVs from bounded publisher ranges. It verified six
+  short edits and two speaker-matched controls. Those bounded ranges do
+  not support a supervised fit.
 - The [PDF Content Credentials check](pdf-content-credentials-2026-11-13.md)
   verifies a whole-file AI declaration locally before acquiring writing models.
   Signed document coverage, modified PDF controls and payment-first behavior

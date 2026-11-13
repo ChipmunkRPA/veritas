@@ -42,10 +42,10 @@ const show = (set: AudioEvidenceSet, entry = '/analysis') => render(<MemoryRoute
 afterEach(() => { cleanup(); vi.restoreAllMocks() })
 
 describe('background and recording context', () => {
-  it('shows the upper-frequency observation with the exact playable range', () => {
+  it.each([3, 4] as const)('shows the upper-frequency observation with the exact playable range in schema %i', version => {
     const set = fixture()
     const context = set.acoustic_context!
-    context.schema = 'chipmunk.acoustic-context/3'
+    context.schema = `chipmunk.acoustic-context/${version}`
     context.upper_frequency_drop = { assessed_ranges: 3, status: 'measured_drop' }
     context.events[0].category = 'upper_frequency_drop'
     context.events[0].interpretation = 'Ordinary sound changes or filtering can produce this pattern. This observation carries zero weight in the AI estimate.'

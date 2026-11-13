@@ -113,12 +113,19 @@ def test_timestamp_discontinuity_remains_two_ranges():
 def audio_fixture(tmp_path, request):
     source_path = tmp_path / "source.wav"
     fixture_type = getattr(request, "param", None)
-    if fixture_type in {"native_band_drop", "native_band_unassessed"}:
-        time = np.arange(96000) / SAMPLE_RATE
+    if fixture_type in {"native_band_drop", "native_band_unassessed", "eight_band_drop", "twelve_band_flac", "ten_band_drop", "twelve_band_flac24"}:
+        seconds = {"eight_band_drop": 8, "twelve_band_flac": 12, "twelve_band_flac24": 12, "ten_band_drop": 10}.get(fixture_type, 6)
+        time = np.arange(seconds * SAMPLE_RATE) / SAMPLE_RATE
         lower = .05 * np.sin(2 * np.pi * 1000 * time) + .05 * np.sin(2 * np.pi * 2235 * time)
         upper = .025 * np.sin(2 * np.pi * 4790 * time) + .025 * np.sin(2 * np.pi * 6490 * time)
         upper[32000:48000] = 0
-        source_path.write_bytes(wav_bytes(lower + (upper if fixture_type == "native_band_drop" else 0)))
+        source_path.write_bytes(wav_bytes(lower + (upper if fixture_type != "native_band_unassessed" else 0)))
+        if fixture_type in {"twelve_band_flac", "twelve_band_flac24"}:
+            flac = tmp_path / "source.flac"
+            format_ = "s32" if fixture_type == "twelve_band_flac24" else "s16"
+            subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(source_path), "-c:a", "flac",
+                            "-sample_fmt", format_, str(flac)], check=True, capture_output=True, timeout=15)
+            source_path = flac
     elif fixture_type == "clock_gap":
         _write_source(source_path, rate=16000, channels=1)
         shifted = tmp_path / "clock-gap.mka"
@@ -278,8 +285,11 @@ def test_current_audio_requires_source_bound_acoustics_but_legacy_remains_readab
                             original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
 
 
-@pytest.mark.parametrize(("audio_fixture", "expected"), [("native_band_drop", "measured_drop"), ("native_band_unassessed", "unassessed")], indirect=["audio_fixture"])
-def test_native_bandwidth_evidence_matches_source_and_pdf(audio_fixture, expected, tmp_path, monkeypatch):
+@pytest.mark.parametrize(("audio_fixture", "expected", "schema"), [
+    ("native_band_drop", "measured_drop", 3), ("native_band_unassessed", "unassessed", 3),
+    ("eight_band_drop", "measured_drop", 4), ("twelve_band_flac", "measured_drop", 4),
+], indirect=["audio_fixture"])
+def test_native_bandwidth_evidence_matches_source_and_pdf(audio_fixture, expected, schema, tmp_path, monkeypatch):
     from test_video_nested_evidence import _check_public_zip
 
     from app.core.config import settings
@@ -299,7 +309,7 @@ def test_native_bandwidth_evidence_matches_source_and_pdf(audio_fixture, expecte
     monkeypatch.setattr(settings, "audio_bandwidth_return_review", True)
     document = build_packet_set(db, analysis, store, result)
     acoustic = document["acoustic_context"]
-    assert acoustic["schema"] == "chipmunk.acoustic-context/3"
+    assert acoustic["schema"] == f"chipmunk.acoustic-context/{schema}"
     assert acoustic["upper_frequency_drop"]["status"] == expected
     assert document["packets"] == baseline["packets"] and document["coverage"] == baseline["coverage"]
     assert analysis.result_hash == document["original_result_hash"] == result_hash
@@ -332,6 +342,17 @@ def test_native_bandwidth_evidence_matches_source_and_pdf(audio_fixture, expecte
     assert phrase in pdf and "carries zero weight" in pdf and "gustking" not in pdf.casefold()
     _check_public_zip(SimpleNamespace(db=db, store=store, analysis=analysis, frozen=snapshot, document=document),
                       tmp_path, monkeypatch, rendered.pdf, source_audio=tmp_path / analysis.filename)
+
+
+@pytest.mark.parametrize("audio_fixture", ["ten_band_drop", "twelve_band_flac24"], indirect=True)
+def test_native_bandwidth_excludes_unqualified_duration_and_bit_depth(audio_fixture, monkeypatch):
+    from app.core.config import settings
+
+    db, store, analysis, result, _, _ = audio_fixture
+    monkeypatch.setattr(settings, "audio_bandwidth_return_review", True)
+    document = build_packet_set(db, analysis, store, result)
+    assert document["acoustic_context"]["schema"] == "chipmunk.acoustic-context/2"
+    assert "upper_frequency_drop" not in document["acoustic_context"]
 
 
 def test_unscored_spans_and_below_threshold_do_not_invent_regions(audio_fixture):

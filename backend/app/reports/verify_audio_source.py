@@ -176,7 +176,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         replay_detail += f" Verified {len(review['windows'])} long speech-window input ranges and their marked waveforms."
         if "regions" in review:
             replay_detail += f" Verified {len(review['regions'])} selected speech ranges against the same original samples."
-    if (context := audio.get("acoustic_context")) and context["schema"] == "chipmunk.acoustic-context/3":
+    from app.evidence.audio_bandwidth_binding import BANDWIDTH_SCHEMAS
+
+    if (context := audio.get("acoustic_context")) and context["schema"] in BANDWIDTH_SCHEMAS:
         from app.evidence.audio_background import verify_source_content
         from app.evidence.audio_packets import _chart
 

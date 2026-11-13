@@ -17,15 +17,25 @@ from PIL import Image, ImageDraw
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.audio.decode import SAMPLE_RATE, source_ranges, wav_bytes
-from app.evidence.audio_bandwidth_binding import BANDWIDTH_METHOD, POINT_DB
+from app.evidence.audio_bandwidth_binding import (
+    BANDWIDTH_METHOD,
+    EXPANDED_SCHEMA,
+    EXPANDED_VERSION,
+    POINT_DB,
+    native_input,
+)
+from app.evidence.audio_bandwidth_binding import (
+    LEGACY_SCHEMA as BANDWIDTH_SCHEMA,
+)
+from app.evidence.audio_bandwidth_binding import (
+    LEGACY_VERSION as BANDWIDTH_VERSION,
+)
 from app.evidence.audio_continuity import METHOD as CONTINUITY_METHOD
 from app.evidence.audio_continuity import candidates as continuity_windows
 from app.evidence.audio_continuity import select as select_continuity
 
 SCHEMA = "chipmunk.acoustic-context/2"
 VERSION = "mixed-acoustics-2"
-BANDWIDTH_VERSION = "mixed-acoustics-3"
-BANDWIDTH_SCHEMA = "chipmunk.acoustic-context/3"
 FRAME_SAMPLES = 8000
 MAX_EVENTS = 8
 THRESHOLDS = {"energy_change_db": 12.0, "near_silence_dbfs": -60.0,
@@ -37,13 +47,6 @@ LIMITATIONS = [
     "Half-second measurement windows do not locate an exact splice or voice-replacement boundary. Frequency plots are inspection context, not a synthesis score.",
     "Only the frozen decoded input was inspected; original stereo separation and audio beyond the decode limit are not assessed here.",
 ]
-
-
-def native_bandwidth_input(samples, mapping):
-    return (samples == 6 * SAMPLE_RATE and mapping.get("source_container") == "wav" and mapping.get("source_codec") == "pcm_s16le"
-            and mapping.get("source_channels") == 1 and mapping.get("source_sample_rate") == SAMPLE_RATE
-            and mapping.get("source_duration_s") == 6 and len(mapping.get("audio_stream_indices", [0])) == 1
-            and mapping.get("timeline") == [{"start_sample": 0, "end_sample": samples, "source_pts": 0}])
 
 
 def _db(value: float) -> float:
@@ -106,10 +109,12 @@ def _candidates(bins: list[dict]) -> list[dict]:
 
 
 def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict], *, version: str = VERSION) -> dict:
-    if version not in {"mixed-acoustics-1", VERSION, BANDWIDTH_VERSION}:
+    schemas = {"mixed-acoustics-1": "chipmunk.acoustic-context/1", VERSION: SCHEMA,
+               BANDWIDTH_VERSION: BANDWIDTH_SCHEMA, EXPANDED_VERSION: EXPANDED_SCHEMA}
+    if version not in schemas:
         raise ValueError("Unsupported acoustic measurement version")
     current = version != "mixed-acoustics-1"
-    bandwidth = version == BANDWIDTH_VERSION
+    bandwidth = version in {BANDWIDTH_VERSION, EXPANDED_VERSION}
     bins = measurements(pcm)
     candidates = _candidates(bins)
     selected = sorted(candidates, key=lambda c: (-c["priority"], -c["strength"], c["start_sample"], c["category"]))[:MAX_EVENTS]
@@ -121,8 +126,8 @@ def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict
     if bandwidth:
         from app.evidence.audio_bandwidth_confirmation import locate
 
-        if not native_bandwidth_input(len(pcm), mapping):
-            raise ValueError("Temporary upper-frequency review requires native six-second mono PCM16 WAV")
+        if not native_input(len(pcm), mapping, version):
+            raise ValueError("Temporary upper-frequency review requires a supported lossless mono source and clock")
         count, best = locate(pcm)
         bandwidth_detail = {"assessed_ranges": count, "status": "unassessed" if best is None else "no_supported_drop"}
         if best and best["drop_db"] > POINT_DB:
@@ -130,8 +135,7 @@ def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict
             bandwidth_detail.update(status="measured_drop", measurement=best)
             selected.append({"category": "upper_frequency_drop", "start_sample": a, "end_sample": b, "value": best["drop_db"]})
     selected.sort(key=lambda c: (c["start_sample"], c["end_sample"], c["category"]))
-    schema = BANDWIDTH_SCHEMA if bandwidth else SCHEMA if current else "chipmunk.acoustic-context/1"
-    document = {"schema": schema, "status": "ready", "source": source,
+    document = {"schema": schemas[version], "status": "ready", "source": source,
                 "method": {"version": version, "frame_samples": FRAME_SAMPLES,
                            "description": "Deterministic measurements of frozen mixed mono PCM; no sound-source separation or AI classification.",
                            "thresholds": THRESHOLDS, "selection": "Clipping, then energy changes, then longest quiet intervals; up to eight, shown in time order.",

@@ -100,7 +100,7 @@ export interface AcousticContextEvent {
   related_voice_packet_ids: string[]
 }
 export interface AcousticContext {
-  schema: 'chipmunk.acoustic-context/1' | 'chipmunk.acoustic-context/2' | 'chipmunk.acoustic-context/3'; status: 'ready'
+  schema: 'chipmunk.acoustic-context/1' | 'chipmunk.acoustic-context/2' | 'chipmunk.acoustic-context/3' | 'chipmunk.acoustic-context/4'; status: 'ready'
   source: { sha256: string; pcm_sha256: string; sample_rate: number; samples: number; coordinate_space: 'analysed-mono-pcm' }
   method: { version: string; frame_samples: number; description: string; thresholds: Record<string, number> }
   summary?: { measured_samples: number; frame_count: number; low_energy_reference_dbfs: number; peak_dbfs: number;

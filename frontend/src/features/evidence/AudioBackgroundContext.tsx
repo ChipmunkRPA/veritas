@@ -20,7 +20,8 @@ export default function AudioBackgroundContext({ set, token, mediaReady, pauseAu
     if (event) { pauseAudio(); setSelectedId(event.id) }
   }, [hash, context]) // pauseAudio is a presentation callback; source/hash changes select the event.
   const selected = events.find((event) => event.id === selectedId) ?? events[0]
-  const bound = context && ['chipmunk.acoustic-context/1', 'chipmunk.acoustic-context/2', 'chipmunk.acoustic-context/3'].includes(context.schema) && context.status === 'ready'
+  const bound = context && ['chipmunk.acoustic-context/1', 'chipmunk.acoustic-context/2', 'chipmunk.acoustic-context/3',
+    'chipmunk.acoustic-context/4'].includes(context.schema) && context.status === 'ready'
     && context.source.sha256 === set.source.sha256
     && context.source.pcm_sha256 === set.source.pcm_sha256
     && context.source.sample_rate === set.source.sample_rate && context.source.sample_rate > 0

@@ -257,7 +257,7 @@ class Settings(BaseSettings):
     # Local rollout switch; the legacy weights/calibration remain installed for rollback.
     audio_detector_mode: Literal["legacy", "candidate"] = "legacy"
     audio_focused_long_review: bool = False  # Optional source-clock review with overlapping native speech windows.
-    audio_bandwidth_return_review: bool = False  # Optional native six-second mixed-audio processing context.
+    audio_bandwidth_return_review: bool = False  # Optional native short lossless audio processing context.
     audio_background_review_model: Path | None = None  # Local pinned enhancement assets.
     audio_background_review_packages: Path | None = None  # Local Apple Silicon dependency overlay.
     video_face_review_mode: Literal["legacy", "sequence", "appearance"] = "legacy"

@@ -90,6 +90,70 @@ was queued until simulated payment was confirmed, and a repeated
 confirmation created no duplicate job.
 [Local application receipt](evaluation-panels/audio-bandwidth-return-app-2026-11-13.json)
 
+## Transfer to eight and twelve seconds
+
+The same measurement now runs on continuous native mono PCM16 WAV or
+FLAC at 16 kHz, for exactly six, eight or twelve seconds. The option
+remains local and off by default. A six-second WAV keeps its original
+evidence version. New format and duration records bind the source codec,
+bit depth and exact clock to the saved acoustic evidence. The replay
+verifier checks the original file and recomputes the measurements and
+plots. Other durations, stereo sources and higher-depth FLAC stay outside
+this optional check.
+
+Two different AMI meetings supplied 32 source positions, selected by a
+fixed digest rule before scoring. The earlier bandwidth study used
+different meetings. These meetings had prior project exposure in other
+work. For each source the six- and
+eight-second deliveries are exact crops of the twelve-second delivery.
+Each receives the same intervention and its unchanged, gain, conventional
+cut and whole-file low-pass controls. The check uses the existing 16 dB
+point throughout. The denominator is the same at every duration.
+
+| Source duration | Useful at 3.4 kHz | Useful at 3.8 kHz | Ordinary observations | Edited files unassessed |
+| --- | ---: | ---: | ---: | ---: |
+| 6 seconds | 18/32 | 17/32 | 3/128 | 14/64 |
+| 8 seconds | 18/32 | 18/32 | 3/128 | 8/64 |
+| 12 seconds | 18/32 | 18/32 | 3/128 | 0/64 |
+
+At each duration, one unchanged, one gain and one ordinary cut yielded a
+physical frequency-drop observation. The 32 whole-file low-pass controls
+were unassessed at each duration. Useful locations at either new duration
+were 2 of 16 per cutoff in one meeting and 16 of 16 in the other.
+This is evidence about finding a temporary frequency change in the
+recorded mixture. It carries zero AI-confidence weight.
+[Source and outcome receipt](evaluation-panels/audio-bandwidth-duration-transfer-2026-11-13.json)
+
+An isolated Full analysis on a held twelve-second FLAC measured a drop of
+**31.360893 dB** at **5.360–6.240 s**, or samples **[85760, 99840)**.
+The untouched match showed no supported drop. The report, evidence JSON
+and original WAV excerpt reproduced the same range. The signed export
+recomputed the source clock, audio, waveform and spectrogram from the FLAC.
+Analysis waited for simulated USD 9.99 payment, and disabling the optional
+check preserved the paid result's overall decision.
+
+The scalar reader requires only standard-library Python. To reproduce all
+576 rows from the same native files, use the two publisher WAVs below and
+a fresh output directory. The script verifies the complete parent hashes.
+The ES2010d WAV has two channels. The replay reads only its first channel
+to construct the mono deliveries.
+[ES2010d source](https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2010d/audio/ES2010d.Array1-01.wav)
+· [IS1007a source](https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/IS1007a/audio/IS1007a.Array1-01.wav)
+· [AMI terms](https://groups.inf.ed.ac.uk/ami/corpus/license.shtml)
+
+```sh
+export PYTHONPATH=backend OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+for phase in freeze score; do
+  backend/.venv/bin/python -B -m scripts.review_audio_bandwidth_duration "$phase" \
+    "$run" "$es2010d" "$is1007a" || exit 1
+done
+PYTHONPATH=backend python3 -B -S -m scripts.review_audio_bandwidth_duration review \
+  docs/evaluation-panels/audio-bandwidth-duration-transfer-2026-11-13.json
+cmp "$run/receipt.json" docs/evaluation-panels/audio-bandwidth-duration-transfer-2026-11-13.json
+```
+
+## Original six-second replay
+
 The confirmation reader can run without scientific dependencies. To
 reproduce the PCM measurements from native WAVs, use the four frozen
 AMI channel 01 files. The initial test reuses the source caches linked

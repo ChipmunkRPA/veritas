@@ -2,8 +2,9 @@
 from __future__ import annotations
 
 from app.core.canonical import canonical_hash, canonical_json
-from app.evidence import audio_packets, stereo_listening
+from app.evidence import audio_packets, stereo_listening, stereo_repetition
 from app.evidence.audio_binding import VOICE_CLOCK_POLICY
+from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import DetectorRun
 
@@ -26,6 +27,9 @@ def freeze_input(ctx, decoded) -> dict:
             # Preserve the mono-only mapping hash used by the AV timing proof.
             binding['stereo_listening_pcm_sha256'] = listening.sha256
             objects.append(listening)
+        if repeated := stereo_repetition.freeze(db, ctx.store, ctx.analysis_id, decoded):
+            binding[STEREO_REPEAT_INPUT] = repeated.sha256
+            objects.append(repeated)
         output = {'input': binding}
         if stereo_context is not None:
             stereo = register_artefact(db, ctx.store, canonical_json(stereo_context), media_type='application/json',
@@ -125,6 +129,7 @@ def verify_source_content(channel: dict, *, result: dict, store, source_sha256: 
     if channel.get('stereo_context_sha256') != record.get('stereo_context_sha256'):
         raise audio_packets.PacketIntegrityError('Video stereo context differs from its published commitment')
     stereo_listening.verify(store, channel, binding.get('stereo_listening_pcm_sha256'), pcm, read_waveform=read_waveform)
+    stereo_repetition.verify_frozen(store, channel, mapping, binding.get(STEREO_REPEAT_INPUT), store.read_bytes)
     if channel.get('sound_events') is not None:
         from app.evidence.sound_events import verify
         verify(channel['sound_events'], store=store, record=record, binding=binding,

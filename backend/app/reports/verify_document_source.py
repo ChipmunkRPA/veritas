@@ -172,7 +172,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     page_detail = f" Verified mapped text coverage across {page_coverage['page_count']} PDF pages." if page_coverage else ""
     unselected_detail = f" Verified {unselected} additional recorded response locations and inputs." if unselected else ""
     alternative_detail = " Verified both decoded email body renditions and reported source positions." if alternatives and "parts" in alternatives else ""
-    position_detail = " Verified all three writing position inputs and their source ranges." if position else ""
+    position_detail = ""
+    if position:
+        position_review = coverage[document_passage_position.KEY]
+        position_detail = (" Verified all three writing position inputs and their source ranges."
+                           if position_review["schema"] == document_passage_position.SCHEMA else
+                           f" Verified writing inputs and source ranges at all {len(position_review['contexts'])} eligible centers.")
     native_detail = " Verified decoded original text locations for the inspected writing." if document_native_locations.KEY in coverage else ""
     email_input_detail = f" Verified source roles and text hashes for {email_inputs} classifier inputs." if email_inputs else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "

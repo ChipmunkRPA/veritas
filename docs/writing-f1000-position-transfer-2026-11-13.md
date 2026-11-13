@@ -28,3 +28,17 @@ PYTHONPATH=backend python3.12 -B -S -m scripts.review_writing_f1000_position_tra
 ```
 
 The independent publisher replay separately verifies the genuine text and frozen native inputs against the licensed XML. The model-free comparison replays saved scores and source commitments. Generated text and the original inference logs stay local. One archived version contains a standalone zero-word punctuation segment from the normal segmenter. The replay preserves its exact native position, and that segment cannot qualify as a candidate focus.
+
+## Local app option
+
+The prototype is off by default. With the existing candidate writing checkpoint installed, add these settings and restart the local worker:
+
+```dotenv
+VERITAS_TEXT_DETECTOR_MODE=candidate
+VERITAS_TEXT_WINDOW_SENTENCES=3
+VERITAS_TEXT_LONG_PASSAGE_POSITION_REVIEW=true
+```
+
+The option runs on fully mapped English plain text with three to five paragraphs, 9–25 sentences, 160–680 words and at most 5,200 characters. An eligible sentence must have both immediate neighbors in the same paragraph. A complete review evaluates every eligible center. The plain evidence view, Standard PDF, and JSON expose the selected source sentence and its original decoded character range alongside the neighbors. When complete readings are unavailable, the check records an unassessed result and preserves the primary analysis. The signed package binds the coverage record, and replay with the original verifies every recorded input and its source positions. The check carries zero weight in the overall assessment. Existing three-sentence behavior is controlled by its separate setting.
+
+Five simulated prepaid runs each on CPU and Apple GPU reproduced both exact generated locations, one ordinary no-flag case, one known ordinary false alarm, and omission when disabled. The disabled and enabled copies of the same input preserved the existing assessment, findings and raw detector scores on each device. For the signed replay fixture, the two devices agreed on every source range, input hash and token count across six eligible centers, and the largest absolute raw response difference was below 0.000010. Chrome rendered the excerpt and all three neighboring source ranges, and its report and JSON downloads matched the worker’s output bytes. All jobs waited for simulated payment confirmation. [Local application receipt](evaluation-panels/writing-f1000-position-app-2026-11-13.json)

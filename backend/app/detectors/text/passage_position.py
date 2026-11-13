@@ -11,11 +11,12 @@ from pathlib import Path
 from app.core.config import settings
 from app.detectors.text.extract import text_hash
 from app.engine.boundary import DetectorTimeout
-from app.evidence import document_matched_context, document_passage_position
+from app.evidence import document_long_passage_position, document_matched_context, document_passage_position
 
 HEAD = Path(__file__).parent / "calibrations/passage-position-head-v1.json"
 HEAD_SHA256 = "d44984c5c137a4c8653a226932491b950764e989507756320428d993cff8b498"
 EXTRA_SECONDS = 6.0
+LONG_EXTRA_SECONDS = 22.0
 
 
 @lru_cache(maxsize=1)
@@ -86,9 +87,13 @@ def _scores(classifier, inputs, deadline):
 
 
 def capture(classifier, doc, sentences, ctx, spec, revisions):
-    if (not settings.text_passage_position_review or settings.text_detector_mode != "candidate"
-            or settings.text_window_sentences != 3 or str(ctx.device) not in {"cpu", "mps"}
-            or not document_matched_context.matches(spec.id, spec.version, revisions)):
+    if (settings.text_detector_mode != "candidate" or settings.text_window_sentences != 3
+            or not document_matched_context.matches(spec.id, spec.version, revisions)
+            or str(ctx.device) not in {"cpu", "mps"}):
+        return None
+    if settings.text_long_passage_position_review and 9 <= len(sentences) <= 25:
+        return _capture_long(classifier, doc, sentences, ctx.deadline)
+    if not settings.text_passage_position_review:
         return None
     spans = document_passage_position.geometry(doc.text, doc.source_map, doc.meta.get("method"), sentences)
     if spans is None:
@@ -103,3 +108,23 @@ def capture(classifier, doc, sentences, ctx, spec, revisions):
     except (DetectorTimeout, KeyError, OSError, RuntimeError, ValueError):
         return document_passage_position.unassessed(spans, sentences[1].text)
     return document_passage_position.record(spans, readings, sentences[1].text)
+
+
+def _capture_long(classifier, doc, sentences, deadline):
+    scope = document_long_passage_position.geometry(doc.text, doc.source_map, doc.meta.get("method"), sentences)
+    if scope is None:
+        return None
+    remaining = deadline.remaining()
+    if remaining is not None and remaining < LONG_EXTRA_SECONDS + 1:
+        return document_long_passage_position.record(scope)
+    budget = deadline.nested(LONG_EXTRA_SECONDS)
+    readings = []
+    try:
+        for start in range(0, len(scope["contexts"]), 2):
+            batch = [item for row in scope["contexts"][start:start + 2]
+                     for item in document_passage_position.inputs(doc.text, row["sentences"])]
+            output = _scores(classifier, batch, budget)
+            readings.extend(output[i:i + 3] for i in range(0, len(output), 3))
+    except (DetectorTimeout, KeyError, OSError, RuntimeError, ValueError):
+        return document_long_passage_position.record(scope)
+    return document_long_passage_position.record(scope, readings=readings, text=doc.text)

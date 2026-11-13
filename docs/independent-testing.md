@@ -46,6 +46,9 @@ accepts the output and the exact claim being checked.
 The [longer writing source replay](writing-f1000-revision-spans-2026-11-13.md)
 separately retrieves original and revised publisher XML, then verifies their
 exact sentence locations without running a classifier.
+The [single-upload stereo repeat replay](stereo-repetition-2026-11-13.md#verify-a-signed-export)
+uses a signed package and the original audio or video to recompute both
+channels and check the exact WAV excerpts.
 
 The [large-image copy comparison](image-affine-native-scale-2026-11-11.md#reproduce)
 provides a licensed roster, exact source commitments, and a separate reader

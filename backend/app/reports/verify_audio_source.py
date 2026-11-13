@@ -62,8 +62,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if source["sha256"] != source_sha256:
         raise ValueError("The audio input is bound to a different source")
     stereo = audio.get("stereo_context")
+    repeated = audio.get("stereo_repetition")
     decoded = decode_audio(original, source_sha256=source_sha256, max_seconds=600.0 if kind == "audio" else 120.0,
-                           inspect_stereo=stereo is not None)
+                           inspect_stereo=stereo is not None, retain_stereo=repeated is not None)
     with original.open("rb") as stream:
         if hashlib.file_digest(stream, "sha256").hexdigest() != source_sha256:
             raise ValueError("The supplied original changed during decoding")
@@ -113,6 +114,18 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         except ObjectIntegrityError as error:
             raise ValueError(str(error)) from error
         intervals += 3 * len(listening["windows"])
+    if repeated is not None:
+        from app.evidence.stereo_repetition import native_pcm, verify
+        from app.evidence.stereo_repetition_binding import pairs
+
+        if (data := native_pcm(decoded)) is None:
+            raise ValueError("The original does not yield aligned native stereo samples for the repeat check")
+        paths = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"]}
+        verify(repeated, data, source, decoded.mapping, lambda digest: archive.read(paths[digest]))
+        for pair in pairs(repeated):
+            covered.add(pair["artifacts"]["first_clip"]["sha256"])
+            intervals += 2
+        replay_detail += " Recomputed the exact repeat search on both recorded stereo channels."
     if (review := audio.get("background_reduced_voice_review")) is not None:
         from app.detectors.audio.decode import read_wav
         from app.evidence.audio_background_review_binding import SPAN

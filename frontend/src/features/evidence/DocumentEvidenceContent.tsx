@@ -44,6 +44,24 @@ function EmailInputScope({ scope }: { scope: EmailClassifierInputScope }) {
 }
 
 function PassagePosition({ review }: { review: DocumentPassagePosition }) {
+  if (review.schema === 'document-passage-position-review/2') {
+    const selected = review.selected == null ? null : review.contexts[review.selected]
+    const labels = ['Previous sentence', 'Selected sentence', 'Following sentence']
+    return <section id="document-passage-position" aria-labelledby="document-passage-position-title" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="document-passage-position-title" className="m-0 text-body font-medium">Longer-passage writing check</h3>
+      <p className="mt-2 mb-0 text-small">{review.contexts.length} eligible sentence centers across {review.paragraphs} paragraphs and {review.sentence_count} sentences.</p>
+      <p className="mt-2 mb-0 text-small">{review.status === 'flagged'
+        ? 'The selected sentence showed a stronger AI-like writing response than its immediate neighbors. Review the wording in context.'
+        : review.status === 'unassessed' ? 'Complete responses were unavailable for the eligible centers.'
+        : 'No sentence was selected among the eligible centers. Authorship remains undetermined.'}</p>
+      {selected && <>
+        <blockquote className="my-3 border-l-2 border-border pl-3 break-words text-small">{review.focus_text}</blockquote>
+        <ul className="mt-2 mb-0 list-none p-0 text-small">{selected.sentences.map((row, i) =>
+          <li key={row.source_start}>{labels[i]} <span className="font-mono">[{row.source_start}, {row.source_end})</span></li>)}</ul>
+      </>}
+      <p className="mt-2 mb-0 text-caption text-text-muted">Positions count Unicode characters in the original text. This optional check carries zero weight in the overall assessment.</p>
+    </section>
+  }
   const labels = ['Opening sentence', 'Middle sentence', 'Closing sentence']
   return <section id="document-passage-position" aria-labelledby="document-passage-position-title" className="mt-4 rounded-md border border-border p-4">
     <h3 id="document-passage-position-title" className="m-0 text-body font-medium">Three-sentence writing check</h3>

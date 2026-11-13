@@ -99,6 +99,11 @@ def asset_items(document: dict[str, Any]):
             for pair in (part.get(key) or {}).get("pairs", []):
                 for role, asset in sorted(pair["artifacts"].items()):
                     yield pair["id"], role, asset
+        if repeated := part.get("stereo_repetition"):
+            from app.evidence.stereo_repetition_binding import pairs
+
+            for pair in pairs(repeated):
+                yield from ((pair["id"], role, asset) for role, asset in sorted(pair["artifacts"].items()))
         acoustic = part.get("acoustic_context")
         if acoustic:
             for role, asset in sorted(acoustic.get("overview", {}).items()):
@@ -360,6 +365,12 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         if stereo_context != mapping.get("stereo_context"):
             raise ObjectIntegrityError("Stereo context differs from the frozen audio input mapping")
         stereo_listening.verify(store, document, mapping.get("stereo_listening_pcm_sha256"), pcm, read_waveform=assets.__getitem__)
+        from app.evidence.stereo_repetition_binding import INPUT
+
+        if "schema" in document and ("stereo_repetition" in document or mapping.get(INPUT)):
+            from app.evidence import stereo_repetition
+
+            stereo_repetition.verify_frozen(store, document, mapping, mapping.get(INPUT), assets.__getitem__)
     if stereo_context is not None:
         from app.detectors.audio.stereo import verify_mono_levels
 
@@ -620,8 +631,8 @@ def quoted_values(snapshot: ReportSnapshot) -> list[str]:
     repeats = (snapshot.evidence.get("repeated_passages") or {}).get("groups", [])
     extra = ((snapshot.evidence.get("coverage") or {}).get(UNSELECTED_RESPONSES) or {}).get("rows", [])
     excerpts = [row["text"][:REPORT_EXCERPT_CHARS] for row in extra]
-    if position := (snapshot.evidence.get("coverage") or {}).get(PASSAGE_POSITION):
-        excerpts.append(position["focus_text"])
+    if (position := (snapshot.evidence.get("coverage") or {}).get(PASSAGE_POSITION)) and (focus := position.get("focus_text")):
+        excerpts.append(focus)
     isolated = [input["text"] for packet in snapshot.evidence["packets"]
                 if (review := (packet.get("context_comparison") or {}).get("isolated_paragraph"))
                 for input in (review["context"], review["paragraph"])]
@@ -724,10 +735,20 @@ def _unselected_writing_responses_view(coverage: dict, *, withheld: bool) -> dic
 
 
 def _passage_position_view(coverage: dict, *, withheld: bool) -> dict | None:
+    from app.evidence.document_long_passage_position import SCHEMA as LONG_SCHEMA
     from app.evidence.document_passage_position import KEY, LABELS
 
     if (record := coverage.get(KEY)) is None:
         return None
+    if record["schema"] == LONG_SCHEMA:
+        selected = record["selected"]
+        context = record["contexts"][selected] if selected is not None else None
+        return {"longer": True, "status": record["status"], "text": None if withheld else record.get("focus_text"),
+                "paragraphs": record["paragraphs"], "sentence_count": record["sentence_count"],
+                "eligible": len(record["contexts"]), "rows": [] if context is None else
+                [{"label": label, **span, "response": float.fromhex(reading["response_hex"])}
+                 for label, span, reading in zip(("Previous", "Selected", "Following"), context["sentences"],
+                                                 context["readings"], strict=True)]}
     readings = record.get("readings")
     return {"status": record["status"], "text": None if withheld else record["focus_text"],
             "rows": [{"label": label.capitalize(), **span,
@@ -1008,6 +1029,12 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     stereo_source = (document.get("audio") or {}) if kind == "video" else document
     audio_tracks = (stereo_source.get("source") or {}).get("audio_stream_indices") if kind in {"audio", "video"} else None
     stereo_context = copy.deepcopy(stereo_source.get("stereo_context"))
+    stereo_repeated = copy.deepcopy(stereo_source.get("stereo_repetition"))
+    if stereo_repeated:
+        from app.evidence.stereo_repetition_binding import pairs
+
+        for pair in pairs(stereo_repeated):
+            pair["waveform"] = plate("waveform", pair["artifacts"]["waveform"], "Waveform shared by both occurrences")
     video_origin_s = document["source"].get("timeline_origin_s") if kind == "video" else None
     voice_coverage = (stereo_source.get("coverage") or {}) if kind in {"audio", "video"} else {}
     rate = (stereo_source.get("source") or {}).get("sample_rate")
@@ -1061,6 +1088,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "stereo_listening": stereo_listening,
             "repetition_context": copy.deepcopy(stereo_source.get("repetition_context")),
             "repetition_context_pointer": "/audio/repetition_context" if kind == "video" else "/repetition_context",
+            "stereo_repetition": stereo_repeated,
+            "stereo_repetition_pointer": "/audio/stereo_repetition" if kind == "video" else "/stereo_repetition",
             "similarity_context": copy.deepcopy(stereo_source.get("similarity_context")),
             "similarity_context_pointer": "/audio/similarity_context" if kind == "video" else "/similarity_context",
             "repeated_passages": repeated_passages,

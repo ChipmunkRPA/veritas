@@ -1,0 +1,95 @@
+{
+  "browser": {
+    "api_json_and_report_download_match": true,
+    "exact_excerpt": true,
+    "exact_ranges": 3,
+    "page_errors": 0,
+    "plain_view": true
+  },
+  "cases": [
+    {
+      "all_surfaces_match": true,
+      "enabled": false,
+      "group": "9026",
+      "role": "granite",
+      "status": null
+    },
+    {
+      "all_surfaces_match": true,
+      "enabled": true,
+      "group": "9026",
+      "role": "granite",
+      "status": "flagged"
+    },
+    {
+      "all_surfaces_match": true,
+      "enabled": true,
+      "group": "13610",
+      "role": "qwen",
+      "status": "flagged"
+    },
+    {
+      "all_surfaces_match": true,
+      "enabled": true,
+      "group": "9026",
+      "role": "after",
+      "status": "no_flag"
+    },
+    {
+      "all_surfaces_match": true,
+      "enabled": true,
+      "group": "12687",
+      "role": "after",
+      "status": "flagged"
+    }
+  ],
+  "device_runs": {
+    "cpu": 5,
+    "mps": 5
+  },
+  "known_exact_ranges": [
+    {
+      "group": "9026",
+      "source": [
+        125,
+        320
+      ],
+      "variant": "granite"
+    },
+    {
+      "group": "13610",
+      "source": [
+        1274,
+        1400
+      ],
+      "variant": "qwen"
+    }
+  ],
+  "paid_jobs": 10,
+  "prior_assessment_and_findings_unchanged": true,
+  "schema": "chipmunk.writing-f1000-position-app/1",
+  "signed_fixture": {
+    "altered_original_rejected": true,
+    "contexts_verified": 6,
+    "exact_cpu_mps_sources_and_inputs_match": true,
+    "group": "9026",
+    "maximum_cpu_mps_reading_delta": 9.160541636243913e-06,
+    "source_ranges": [
+      [
+        0,
+        124
+      ],
+      [
+        125,
+        320
+      ],
+      [
+        321,
+        413
+      ]
+    ],
+    "variant": "granite"
+  },
+  "source_signed_replay": true,
+  "unpaid_jobs": 0
+}

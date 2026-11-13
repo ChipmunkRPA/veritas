@@ -137,7 +137,7 @@ interface StereoListeningContext {
 type AudioRepeatSpan = SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] }
 interface AudioRepeatPair {
   id: string; first: AudioRepeatSpan; second: AudioRepeatSpan; sample_count: number; lag_samples: number
-  artifacts: Record<'first_clip' | 'second_clip', EvidenceAsset>
+  artifacts: Record<'first_clip' | 'second_clip', EvidenceAsset> & { waveform?: EvidenceAsset }
 }
 interface AudioRepeatRecord {
   status: 'measured' | 'unavailable' | 'ambiguous'; reason: string | null
@@ -145,6 +145,10 @@ interface AudioRepeatRecord {
 }
 export interface AudioRepetitionContext extends AudioRepeatRecord {
   schema: 'chipmunk.audio-exact-repetition/1'; pairs: (AudioRepeatPair & { pcm_s16le_sha256: string })[]
+}
+interface StereoRepetitionContext {
+  schema: 'chipmunk.stereo-exact-repetition/1'; source_sha256: string; affects_overall_confidence: false
+  channels: { channel: 'left' | 'right'; measurement: AudioRepetitionContext }[]
 }
 export interface AudioSimilarityContext extends AudioRepeatRecord {
   schema: 'chipmunk.audio-repeat-similarity/1' | 'chipmunk.audio-repeat-similarity/2'
@@ -209,6 +213,7 @@ export interface AudioEvidenceSet extends SetBase {
   stereo_context?: StereoChannelContext
   stereo_listening?: StereoListeningContext
   repetition_context?: AudioRepetitionContext
+  stereo_repetition?: StereoRepetitionContext
   similarity_context?: AudioSimilarityContext
   short_voice_review?: ShortVoiceReview
   long_voice_review?: LongVoiceReview
@@ -224,6 +229,7 @@ export interface VideoAudioChannel {
   stereo_context?: StereoChannelContext
   stereo_listening?: StereoListeningContext
   repetition_context?: AudioRepetitionContext
+  stereo_repetition?: StereoRepetitionContext
   similarity_context?: AudioSimilarityContext
 }
 export interface VideoAVFrameInput {
@@ -322,13 +328,17 @@ export interface DocumentUnselectedResponses {
       | { kind: 'text' | 'docx'; paragraph: number })[]
     check: string; input_sha256: string; direction: 'supports_ai' | 'opposes_ai'; response: number; text: string }[]
 }
-export interface DocumentPassagePosition {
-  schema: 'document-passage-position-review/1'; status: 'flagged' | 'no_flag' | 'unassessed'
-  authorship_confidence_contribution: 0; focus_text: string; signal_ref: EvidenceRef
-  sentences: { start: number; end: number; source_start: number; source_end: number }[]
-  readings?: { input_sha256: string; response_hex: string; focus_tokens: number; neighbor_tokens: number }[]
-  contrast_hex?: string
-}
+interface DocumentPositionSpan { start: number; end: number; source_start: number; source_end: number }
+interface DocumentPositionReading { input_sha256: string; response_hex: string; focus_tokens: number; neighbor_tokens: number }
+export type DocumentPassagePosition = { status: 'flagged' | 'no_flag' | 'unassessed';
+  authorship_confidence_contribution: 0; signal_ref: EvidenceRef } & ({
+  schema: 'document-passage-position-review/1'; focus_text: string; sentences: DocumentPositionSpan[];
+  readings?: DocumentPositionReading[]; contrast_hex?: string
+} | {
+  schema: 'document-passage-position-review/2'; paragraphs: number; sentence_count: number;
+  contexts: { paragraph: number; sentences: DocumentPositionSpan[]; readings?: DocumentPositionReading[] }[];
+  selected: number | null; focus_text?: string
+})
 export interface EmailClassifierInputScope {
   schema: 'document-email-classifier-input-scope/1'; mime_part: string; mapping: 'mapped' | 'unmapped'
   checks: { signal_ref: EvidenceRef; counts: Record<'body' | 'quoted' | 'signature' | 'mixed' | 'unmapped', number>;

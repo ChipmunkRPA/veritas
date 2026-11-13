@@ -197,7 +197,8 @@ def _audio(path: Path, has_audio: bool, *, source_sha256: str, capture: Callable
     if not has_audio:
         return AudioTrack("absent"), None
     try:
-        decoded = decode_audio(path, source_sha256=source_sha256, max_seconds=120, inspect_stereo=capture is not None)
+        decoded = decode_audio(path, source_sha256=source_sha256, max_seconds=120,
+                               inspect_stereo=capture is not None, retain_stereo=capture is not None)
     except (ValueError, RuntimeError):
         return AudioTrack("unreadable"), None
     pcm, mapping = decoded.pcm, decoded.mapping

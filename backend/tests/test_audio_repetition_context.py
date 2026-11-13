@@ -56,7 +56,7 @@ def _authored():
 
 def _wav(path, pcm):
     with wave.open(str(path), "wb") as output:
-        output.setparams((1, 2, SAMPLE_RATE, 0, "NONE", ""))
+        output.setparams((pcm.shape[1] if pcm.ndim == 2 else 1, 2, SAMPLE_RATE, 0, "NONE", ""))
         output.writeframes(pcm.tobytes())
     return path
 
@@ -67,25 +67,30 @@ def _stage_record(db, store, analysis_id, name, data):
     db.add(AnalysisStage(analysis_id=analysis_id, stage=name, status="done", output_artefact_id=asset.id))
 
 
-def _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapshot, api, pair, source_pts, source_path):
+def _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapshot, api, pair, source_pts, source_path,
+                              stereo=False):
     kind = analysis.kind
     clip = pair["artifacts"]["first_clip"]
     monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
     rendered = engine.render_pdf(snapshot)
     text = " ".join(engine.pdf_text(rendered.pdf).split())
-    assert "Exact repeated audio" in text and "0.200 s of identical samples" in text
+    title = "Exact repeats in the left channel" if stereo else "Exact repeated audio"
+    assert title in text and "0.200 s of identical samples" in text
+    if stereo:
+        assert "Waveform shared by both occurrences" in text
     assert "0.320–0.520 s" in text and "1.760–1.960 s" in text
     assert f"Source PTS [{source_pts + FIRST}, {source_pts + FIRST + LENGTH})" in text
     assert f"Source PTS [{source_pts + SECOND}, {source_pts + SECOND + LENGTH})" in text
     compact = "".join(text.split())
     assert all(digest in compact for digest in (clip["sha256"], pair["pcm_s16le_sha256"], api["sha256"]))
-    assert ("/audio/repetition_context" if kind == "video" else "/repetition_context") in text
+    field = "stereo_repetition/channels/0/measurement" if stereo else "repetition_context"
+    assert (("/audio/" if kind == "video" else "/") + field) in text
     if kind == "video":
         assert "Video playback 0.720–0.920 s" in text and "Video playback 2.160–2.360 s" in text
 
     redacted = snapshot.model_copy(update={"report": snapshot.report.model_copy(update={"redacted": True})})
     html = engine.render_html(redacted, embed_fonts=False)
-    assert clip["sha256"] in html and pair["pcm_s16le_sha256"] in html and "Exact repeated audio" in html
+    assert clip["sha256"] in html and pair["pcm_s16le_sha256"] in html and title in html
     assert "<audio" not in html and "data:audio/" not in html and "data:image/png;base64," not in html
     assert clip["url"] not in html
     with pymupdf.open(stream=rendered.pdf, filetype="pdf") as pdf:
@@ -136,12 +141,16 @@ sys.exit(0 if result.ok else 1)
     assert offline.returncode == 0, offline.stdout + offline.stderr
     verified = verify.verify_package(exported.path, public_key_pem=key.public_pem(), source_audio=source_path)
     assert verified.ok, verified.as_dict()
-    assert "Verified 4 published playback intervals across 3 WAV assets" in verified.checks[-1].detail
+    if stereo:
+        assert "Recomputed the exact repeat search on both recorded stereo channels" in verified.checks[-1].detail
+    else:
+        assert "Verified 4 published playback intervals across 3 WAV assets" in verified.checks[-1].detail
 
     def change_pair(files, field):
         evidence, bundle = json.loads(files["evidence.json"]), json.loads(files["bundle.json"])
         body = evidence if kind == "audio" else evidence["audio"]
-        altered_pair = body["repetition_context"]["pairs"][0]
+        record = body["stereo_repetition"]["channels"][0]["measurement"] if stereo else body["repetition_context"]
+        altered_pair = record["pairs"][0]
         if field == "source_time":
             altered_pair["second"]["source_timestamp_ranges"][0]["source_start_pts"] += 1
         elif field == "pcm":
@@ -167,7 +176,9 @@ sys.exit(0 if result.ok else 1)
     shifted = rewrite(exported.path, tmp_path / "shifted-repetition.zip", partial(change_pair, field="coordinates"), key)
     assert verify.verify_package(shifted, public_key_pem=key.public_pem()).ok
     failed = verify.verify_package(shifted, public_key_pem=key.public_pem(), source_audio=source_path)
-    assert failed.outcome == "not_verified" and "differs from the samples at its recorded source interval" in failed.checks[-1].detail
+    assert failed.outcome == "not_verified"
+    expected = "Stereo repetition differs" if stereo else "differs from the samples at its recorded source interval"
+    assert expected in failed.checks[-1].detail
 
 
 def test_serving_method_preserves_exact_historical_algorithm_bytes():
@@ -181,9 +192,15 @@ def test_serving_method_preserves_exact_historical_algorithm_bytes():
 
 
 @pytest.mark.parametrize("kind", ["audio", "video"])
-def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(tmp_path, monkeypatch, kind):
+@pytest.mark.parametrize("stereo", [False, True], ids=["mono", "stereo"])
+def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(tmp_path, monkeypatch, kind, stereo):
     pcm = _authored()
-    source_path = _wav(tmp_path / "source.wav", pcm)
+    carrier = pcm
+    if stereo:
+        pcm = np.append(pcm, np.arange(1231, dtype="<i2"))
+        background = np.random.default_rng(81).integers(-10000, 10000, size=len(pcm), dtype="<i2")
+        carrier = np.column_stack((pcm, background))
+    source_path = _wav(tmp_path / "source.wav", carrier)
     source_pts = 0
     if kind == "video":
         path = tmp_path / "offset.mkv"
@@ -243,16 +260,29 @@ def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(t
         assert api == document
         part = api if kind == "audio" else api["audio"]
         context = part["repetition_context"]
+        if stereo:
+            assert context["pairs"] == []
+            check = part["stereo_repetition"]
+            assert check["affects_overall_confidence"] is False
+            assert check["stereo_pcm_sha256"] == hashlib.sha256(carrier.tobytes()).hexdigest()
+            left, right = check["channels"]
+            assert left["channel"] == "left" and right["channel"] == "right" and right["measurement"]["pairs"] == []
+            context = left["measurement"]
+        else:
+            assert "stereo_repetition" not in part
         assert context["status"] == "measured" and context["affects_overall_confidence"] is False
         assert context["searched_interval"] == {"start_sample": 0, "end_sample": len(pcm)}
         [pair] = context["pairs"]
-        assert pair["id"] == "R01" and pair["sample_count"] == LENGTH and pair["lag_samples"] == SECOND - FIRST
+        assert pair["id"] == ("LR01" if stereo else "R01")
+        assert pair["sample_count"] == LENGTH and pair["lag_samples"] == SECOND - FIRST
         for name, start in (("first", FIRST), ("second", SECOND)):
             assert pair[name] == {"start_sample": start, "end_sample": start + LENGTH, "source_timestamp_ranges": [
                 {"start_sample": start, "end_sample": start + LENGTH, "source_start_pts": source_pts + start,
                  "source_end_pts": source_pts + start + LENGTH, "time_base": "1/16000"},
             ]}
         clip = pair["artifacts"]["first_clip"]
+        if stereo:
+            assert pair["artifacts"]["waveform"]["media_type"] == "image/png"
         assert clip == pair["artifacts"]["second_clip"]
         assert service.asset_refs(api)[clip["sha256"]] == clip
         assert pair["pcm_s16le_sha256"] == hashlib.sha256(pcm[FIRST:FIRST + LENGTH].tobytes()).hexdigest()
@@ -260,18 +290,20 @@ def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(t
 
         frozen = read_wav(store.read_bytes(binding["wav_sha256"]))
         mapping = json.loads(store.read_bytes(binding["mapping_sha256"]))
-        audio_repetition.verify(context, pcm=frozen, mapping=mapping, source=part["source"], read_asset=store.read_bytes)
-        with pytest.raises(ValueError, match="playback clip"):
-            audio_repetition.verify(context, pcm=frozen, mapping=mapping, source=part["source"], read_asset=lambda _: b"bad")
-        forged = deepcopy(context)
-        forged["pairs"][0]["second"]["source_timestamp_ranges"][0]["source_start_pts"] += 1
-        with pytest.raises(ValueError, match="source timestamps"):
-            validate(forged, part["source"])
+        if not stereo:
+            audio_repetition.verify(context, pcm=frozen, mapping=mapping, source=part["source"], read_asset=store.read_bytes)
+            with pytest.raises(ValueError, match="playback clip"):
+                audio_repetition.verify(context, pcm=frozen, mapping=mapping, source=part["source"], read_asset=lambda _: b"bad")
+            forged = deepcopy(context)
+            forged["pairs"][0]["second"]["source_timestamp_ranges"][0]["source_start_pts"] += 1
+            with pytest.raises(ValueError, match="source timestamps"):
+                validate(forged, part["source"])
 
         # A stored analysis made before this cue has no field at all.
         historic = deepcopy(api)
         old_audio = historic if kind == "audio" else historic["audio"]
         del old_audio["repetition_context"]
+        old_audio.pop("stereo_repetition", None)
         historic["sha256"] = service.packet_hash(historic)
         service.validate_packet_set(historic, analysis_id=analysis.id, revision=analysis.revision,
                                     original_result_hash=analysis.result_hash, source_sha256=source.sha256)
@@ -282,7 +314,7 @@ def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(t
                                                        "filename": analysis.filename, "content_type": analysis.content_type}),
             "report": snapshot.report.model_copy(update={"template_set": engine.TEMPLATE_SET}),
         })
-        _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapshot, api, pair, source_pts, source_path)
+        _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapshot, api, pair, source_pts, source_path, stereo)
 
 
 @pytest.mark.parametrize("mode,status,reason", [

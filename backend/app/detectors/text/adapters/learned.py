@@ -100,7 +100,7 @@ class _SequenceClassifier(Detector):
                     "extracted_text_sha256": text_hash(doc.text), "join": "single_space_between_sentences",
                     "windows": input_windows}
         model_revisions = revisions(ctx, self.MODEL_ID)
-        if self.ISOLATED_PARAGRAPH_REVIEW and settings.text_passage_position_review:
+        if self.ISOLATED_PARAGRAPH_REVIEW and (settings.text_passage_position_review or settings.text_long_passage_position_review):
             from app.detectors.text.passage_position import capture
             from app.evidence.document_passage_position import KEY
 

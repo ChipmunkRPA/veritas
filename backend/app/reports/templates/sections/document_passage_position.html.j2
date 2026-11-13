@@ -1,4 +1,23 @@
 {% set position = evidence.passage_position %}
+{% if position.longer %}
+<h3 id="document-passage-position">Longer-passage writing check</h3>
+<p>{{ position.eligible }} eligible sentence centers across {{ position.paragraphs }} paragraphs and {{ position.sentence_count }} sentences.</p>
+{% if position.status == 'flagged' %}
+<p>The selected sentence showed a stronger AI-like writing response than its immediate neighbors. Review the wording in context.</p>
+{% if position.text %}<p><strong>Selected sentence.</strong> {{ position.text }}</p>{% endif %}
+<table class="multimedia-locator">
+<thead><tr><th>Sentence</th><th>Original text characters</th><th>Raw response</th></tr></thead>
+<tbody>{% for row in position.rows %}
+<tr><td>{{ row.label }}</td><td>[{{ row.source_start }}, {{ row.source_end }})</td><td>{{ '%.4g' | format(row.response) }}</td></tr>
+{% endfor %}</tbody>
+</table>
+{% elif position.status == 'unassessed' %}
+<p>Complete responses were unavailable for the eligible centers.</p>
+{% else %}
+<p>No sentence was selected among the eligible centers. Authorship remains undetermined.</p>
+{% endif %}
+<p class="caption">This optional check carries zero weight in the overall assessment. JSON pointer <span class="mono">/coverage/passage_position_review</span>.</p>
+{% else %}
 <h3 id="document-passage-position">Three-sentence writing check</h3>
 {% if position.status == 'flagged' %}
 <p>The middle sentence showed a stronger AI-like writing response than both neighbors. This check marked that sentence for inspection.</p>
@@ -15,3 +34,4 @@
 {% endfor %}</tbody>
 </table>
 <p class="caption">Each response uses its sentence and immediate neighbors. This check carries zero weight in the overall assessment. JSON pointer <span class="mono">/coverage/passage_position_review</span>.</p>
+{% endif %}

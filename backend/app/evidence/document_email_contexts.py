@@ -7,7 +7,6 @@ from bisect import bisect_right
 from collections import Counter
 
 from app.core.canonical import canonical_hash
-from app.detectors.text.extract import text_hash
 from app.evidence.document_scope import check_range, mapped_email_html
 
 KEY = "email_classifier_input_scope"
@@ -59,6 +58,7 @@ def _complete(window):
 
 def build(result, text, mapping, email):
     from app.api.public_projection import alias_signal
+    from app.detectors.text.extract import text_hash
 
     if not email or not email.get("body_part"):
         return None
@@ -187,6 +187,8 @@ def validate(document, *, published_checks=None):
 
 
 def verify_source(document, text, mapping, *, result=None):
+    from app.detectors.text.extract import text_hash
+
     record = validate(document)
     if record is None:
         return 0

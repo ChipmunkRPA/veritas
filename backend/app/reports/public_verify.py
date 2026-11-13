@@ -13,8 +13,6 @@ import wave
 
 from app.core.canonical import canonical_hash
 from app.evidence import (
-    document_email_contexts,
-    document_passage_position,
     document_scope,
     email_alternatives,
     face_boundary_binding,
@@ -53,6 +51,8 @@ _SHA = re.compile(r'[a-f0-9]{64}')
 TYPES = {'image/png': 'png', 'audio/wav': 'wav', 'video/mp4': 'mp4'}
 IMAGE_PAIR_VERSION = 'image-evidence-15'
 IMAGE_EDITOR_PREVIEW = 'thumbnail_evidence'
+EMAIL_CLASSIFIER_SCOPE = 'email_classifier_input_scope_sha256'
+WRITING_POSITION = 'writing_position_review_sha256'
 VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3', 'image-evidence-4', 'image-evidence-5',
                       'image-evidence-6', IMAGE_PAIR_VERSION} | REFLECTION_VERSIONS, 'video': VIDEO_VERSIONS,
             'audio': {'audio-evidence-1', 'audio-evidence-2', 'audio-evidence-3'}, 'document': document_scope.VERSIONS}
@@ -87,8 +87,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     _require(result.get('original_result_sha256') == analysis['original_result_sha256'], 'The result commits to a different original')
     _require(set(result) <= {'schema', 'is_projection', 'original_result_sha256', 'decision', 'findings', 'checks', 'note',
                              IMAGE_EDITOR_PREVIEW, face_return_coverage.COMMITMENT, email_alternatives.COMMITMENT,
-                             face_short_window_binding.COMMITMENT, document_passage_position.COMMITMENT,
-                             document_email_contexts.COMMITMENT},
+                             face_short_window_binding.COMMITMENT, WRITING_POSITION,
+                             EMAIL_CLASSIFIER_SCOPE},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
     binding = bundle['evidence']
@@ -225,11 +225,12 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                     _require(cue is None and 'copy_donor' not in assets, 'Copy evidence is missing its component mask')
     _require(analysis['kind'] == 'document' or email_alternatives.COMMITMENT not in result,
              'Email body rendition commitments require document evidence')
-    _require(analysis['kind'] == 'document' or document_passage_position.COMMITMENT not in result,
+    _require(analysis['kind'] == 'document' or WRITING_POSITION not in result,
              'Writing position commitments require document evidence')
-    _require(analysis['kind'] == 'document' or document_email_contexts.COMMITMENT not in result,
+    _require(analysis['kind'] == 'document' or EMAIL_CLASSIFIER_SCOPE not in result,
              'Email classifier input commitments require document evidence')
     if analysis['kind'] == 'document':
+        from app.evidence import document_email_contexts, document_passage_position
         from app.evidence.document_matched_context import validate as validate_matched_context
         from app.evidence.document_native_locations import validate as validate_native_locations
         from app.evidence.document_paragraph_priority import validate as validate_paragraph_priority
@@ -348,6 +349,20 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             validate_stereo(stereo, part['source'], ranges=lambda a, b, src=part['source']: _timeline_ranges(src, a, b))
             validate_listening(part['stereo_listening'], stereo)
             groups.extend(window['artifacts'] for window in part['stereo_listening']['windows'])
+        if 'stereo_repetition' in part:
+            from app.evidence.stereo_repetition_binding import pairs
+            from app.evidence.stereo_repetition_binding import validate as validate_stereo_repeat
+
+            _require((analysis['kind'] == 'audio' and part is evidence) or part is evidence.get('audio'),
+                     'Stereo repetition is outside the audio evidence')
+            stereo_repeat = part['stereo_repetition']
+            validate_stereo_repeat(stereo_repeat, part['source'])
+            for pair in pairs(stereo_repeat):
+                groups.append(pair['artifacts'])
+                digest = pair['artifacts']['first_clip']['sha256']
+                pcm_digest = pair['pcm_s16le_sha256']
+                _require(repeat_pcm.setdefault(digest, pcm_digest) == pcm_digest,
+                         'One repeated-audio clip has conflicting PCM commitments')
         if (repeat := part.get('repetition_context')) is not None:
             from app.evidence.audio_repetition_binding import validate as validate_repetition
 

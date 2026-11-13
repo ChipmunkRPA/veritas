@@ -158,6 +158,13 @@ def validate_content(document: dict[str, Any]) -> None:
             validate(document["repetition_context"], source)
         except ValueError as error:
             raise PacketIntegrityError(str(error)) from error
+    if "stereo_repetition" in document:
+        from app.evidence.stereo_repetition_binding import validate
+
+        try:
+            validate(document["stereo_repetition"], source)
+        except ValueError as error:
+            raise PacketIntegrityError(str(error)) from error
     if "similarity_context" in document:
         from app.evidence.audio_similarity_binding import validate
 
@@ -238,7 +245,7 @@ def _windows(store: ObjectStore, result: dict[str, Any], record: dict[str, Any],
 
 
 def _chart(pcm: np.ndarray, windows: list[dict[str, Any]], *, start: int, end: int,
-           selected: tuple[int, int] | None, scores: bool) -> bytes:
+           selected: tuple[int, int] | None, scores: bool, title: str | None = None) -> bytes:
     im = Image.new("RGB", (960, 280), (250, 249, 245))
     draw = ImageDraw.Draw(im)
     x0, y0, x1, y1 = 58, 40, 938, 232
@@ -246,7 +253,8 @@ def _chart(pcm: np.ndarray, windows: list[dict[str, Any]], *, start: int, end: i
         return x0 + (sample - start) / (end - start) * (x1 - x0)
     if selected:
         draw.rectangle((px(selected[0]), y0, px(selected[1]), y1), fill=(255, 233, 195))
-    draw.text((x0, 12), "Recorded window responses (uncalibrated)" if scores else "Analysed mono waveform (context only)", fill=(30, 50, 40))
+    label = title or ("Recorded window responses (uncalibrated)" if scores else "Analysed mono waveform (context only)")
+    draw.text((x0, 12), label, fill=(30, 50, 40))
     draw.rectangle((x0, y0, x1, y1), outline=(135, 150, 135))
     if scores:
         threshold_y = y1 - THRESHOLD * (y1 - y0)
@@ -438,6 +446,14 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
         pcm, mapping, document["source"],
         lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
     )
+    from app.evidence.stereo_repetition import build_from_store
+    from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
+
+    if digest := binding.get(STEREO_REPEAT_INPUT) or mapping.get(STEREO_REPEAT_INPUT):
+        document["stereo_repetition"] = build_from_store(
+            store, digest, document["source"], mapping,
+            lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
+        )
     document["similarity_context"] = build_similarity(
         pcm, mapping, document["source"],
         lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
@@ -471,6 +487,11 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
         from app.evidence import stereo_listening
 
         stereo_listening.verify(store, document, listening_digest, read_wav(_verified(store, document["source"]["wav_sha256"])))
+    from app.evidence import stereo_repetition
+    from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
+
+    if mapping.get(STEREO_REPEAT_INPUT) or "stereo_repetition" in document:
+        stereo_repetition.verify_frozen(store, document, mapping, mapping.get(STEREO_REPEAT_INPUT), store.read_bytes)
     return document
 
 

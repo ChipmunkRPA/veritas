@@ -133,10 +133,12 @@ def provenance(ctx: StageContext) -> dict[str, Any]:
 def decode(ctx: StageContext) -> dict[str, Any]:
     """Decode once, preserving the exact checked PCM and its rational source timeline."""
     from app.detectors.video.adapters.common import AudioTrack
-    from app.evidence import stereo_listening
+    from app.evidence import stereo_listening, stereo_repetition
+    from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
 
     source_sha = ctx.outputs["ingest"]["sha256"]
-    decoded = decode_audio(ctx.store.path_for(source_sha), source_sha256=source_sha, max_seconds=AUDIO_MAX_SECONDS, inspect_stereo=True)
+    decoded = decode_audio(ctx.store.path_for(source_sha), source_sha256=source_sha, max_seconds=AUDIO_MAX_SECONDS,
+                           inspect_stereo=True, retain_stereo=True)
     pcm = decoded.pcm
     ctx.check("audio decoding")
     clock_breaks = tuple(item[0] for item in source_clock_breaks(decoded.mapping))
@@ -147,13 +149,16 @@ def decode(ctx: StageContext) -> dict[str, Any]:
         listening = stereo_listening.freeze(db, ctx.store, ctx.analysis_id, decoded)
         if listening is not None:
             decoded.mapping["stereo_listening_pcm_sha256"] = listening.sha256
+        repeated = stereo_repetition.freeze(db, ctx.store, ctx.analysis_id, decoded)
+        if repeated is not None:
+            decoded.mapping[STEREO_REPEAT_INPUT] = repeated.sha256
         mapping = register_artefact(db, ctx.store, canonical_json(decoded.mapping), media_type="application/json", role="stage_output",
                                    created_by="audio-input/1", analysis_id=ctx.analysis_id)
         binding = {"version": "audio-input/1", "pcm_sha256": decoded.mapping["pcm_sha256"],
                    "wav_sha256": wav.sha256, "mapping_sha256": mapping.sha256,
                    "sample_rate": SR, "samples": int(len(pcm))}
         objects = [{"id": a.id, "sha256": a.sha256, "size_bytes": a.bytes, "media_type": a.media_type,
-                    "role": a.role, "created_by": a.created_by} for a in (wav, mapping, listening) if a is not None]
+                    "role": a.role, "created_by": a.created_by} for a in (wav, mapping, listening, repeated) if a is not None]
         db.commit()
     return {"sample_rate": SR, "samples": int(len(pcm)), "seconds": round(len(pcm) / SR, 3),
             "short_voice_review_source_supported": supported_source(decoded.mapping),

@@ -269,6 +269,7 @@ class Settings(BaseSettings):
     text_matched_context_review: bool = False
     text_checkpoint_agreement_review: bool = False
     text_passage_position_review: bool = False
+    text_long_passage_position_review: bool = False
     text_classifier_id: str = "desklib/ai-text-detector-v1.01"  # base checkpoint (HF Hub)
     # fine-tuned on 2025-26 LLM output (scripts/finetune_text_detector.py); used automatically when present
     text_classifier_finetuned_path: Path = BACKEND_DIR / "data" / "weights" / "desklib-ft-v2"

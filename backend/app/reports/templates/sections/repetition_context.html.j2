@@ -38,16 +38,23 @@
 <p class="caption">Ordinary editing and compression can create this pattern. It carries no AI confidence weight. JSON pointer <span class="mono">/picture_hold/mouth_local_hold</span>.</p>
 {% endif %}
 {% endif %}
-{% for context, similar in [(evidence.get('repetition_context'), false), (evidence.get('similarity_context'), true)] if context %}
+{% set repeat_reports = [(evidence.get('repetition_context'), false, none, evidence.repetition_context_pointer), (evidence.get('similarity_context'), true, none, evidence.similarity_context_pointer)] %}
+{% if evidence.get('stereo_repetition') %}
+{% for row in evidence.stereo_repetition.channels %}
+{% set _ = repeat_reports.append((row.measurement, false, row.channel, evidence.stereo_repetition_pointer ~ '/channels/' ~ loop.index0 ~ '/measurement')) %}
+{% endfor %}
+{% endif %}
+{% for context, similar, channel, pointer in repeat_reports if context %}
 {% set waveform = context.schema == 'chipmunk.audio-repeat-similarity/2' %}
-<h3>{{ 'Similar repeated audio' if similar else 'Exact repeated audio' }}</h3>
-<p>{% if waveform %}The exact and frequency-band searches yielded no reportable pair. A second similarity check compared waveform patterns in the same continuous 2.5–4 second mono input. Background noise can mask repeats.{% elif similar %}This check compares patterns across frequency bands in continuous 2.5–4 second mono inputs. Background noise can mask repeats.{% else %}This check compares samples in continuous 2.5–4 second mono inputs.{% endif %} Loops, recurring alerts, and editing can all repeat audio. Matches carry no AI confidence weight.</p>
+<h3>{% if channel %}Exact repeats in the {{ channel }} channel{% elif similar %}Similar repeated audio{% else %}Exact repeated audio{% endif %}</h3>
+<p>{% if channel %}This check compares the recorded channel before it is mixed into mono.{% elif waveform %}The exact and frequency-band searches yielded no reportable pair. A second similarity check compared waveform patterns in the same continuous 2.5–4 second mono input. Background noise can mask repeats.{% elif similar %}This check compares patterns across frequency bands in continuous 2.5–4 second mono inputs. Background noise can mask repeats.{% else %}This check compares samples in continuous 2.5–4 second mono inputs.{% endif %} Loops, recurring alerts, and editing can all repeat audio. Matches carry no AI confidence weight.</p>
 {% if context.status == 'ambiguous' %}<p>{{ 'The waveform search could not establish a reliable pair.' if waveform else 'The search reached its comparison limit before it could establish a result.' }}</p>
 {% elif context.status == 'unavailable' %}<p>This input could not be checked within the supported duration, source timing, and signal conditions.</p>
 {% elif not context.pairs %}<p>No {{ 'waveform' if waveform else 'similar' if similar else 'exact active' }} repeat of at least 0.15 seconds was found in the checked input.{% if waveform and context.frequency_band_search.status != 'measured' %} The frequency-band search was inconclusive.{% endif %}</p>{% endif %}
 {% for pair in context.pairs %}
 <article class="multimedia-evidence-packet multimedia-repeat-pair" id="multimedia-evidence-{{ pair.id }}">
 <h4>{{ pair.id }} · {{ '%.3f' | format(pair.sample_count / context.sample_rate) }} s of {{ 'similar sound' if similar else 'identical samples' }}</h4>
+{% if pair.get('waveform') %}{{ plates([pair.waveform]) }}{% endif %}
 {% for label in ['first', 'second'] %}
 {% set span = pair[label] %}
 <p>{{ label | capitalize }} occurrence, analyzed audio {{ '%.3f' | format(span.start_sample / context.sample_rate) }}–{{ '%.3f' | format(span.end_sample / context.sample_rate) }} s. Samples [{{ span.start_sample }}, {{ span.end_sample }}).</p>
@@ -63,7 +70,7 @@
 {% if not similar %}<p class="caption evidence-hash">{% if not evidence.withheld %}The evidence ZIP includes one WAV for both locations. {% endif %}WAV SHA-256 <span class="mono">{{ pair.artifacts.first_clip.sha256 }}</span>. Decoded sample SHA-256 <span class="mono">{{ pair.pcm_s16le_sha256 }}</span>.</p>{% endif %}
 </article>
 {% endfor %}
-<p class="caption">JSON pointer <span class="mono">{{ evidence.similarity_context_pointer if similar else evidence.repetition_context_pointer }}</span>.</p>
+<p class="caption">JSON pointer <span class="mono">{{ pointer }}</span>.</p>
 {% endfor %}
 {% if evidence.get('repeated_passages') %}
 {% set repeated = evidence.repeated_passages %}

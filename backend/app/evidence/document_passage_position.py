@@ -6,7 +6,7 @@ import math
 import re
 
 from app.core.canonical import canonical_hash
-from app.evidence import document_matched_context
+from app.evidence import document_long_passage_position, document_matched_context
 from app.evidence.document_scope import check_range
 
 KEY = "passage_position_review"
@@ -103,21 +103,37 @@ def unassessed(spans, focus_text):
             "sentences": spans, "focus_text": focus_text}
 
 
+def validate_readings(readings):
+    if len(readings) != 3:
+        raise ValueError("Three complete writing responses required")
+    for row in readings:
+        if (set(row) != {"input_sha256", "response_hex", "focus_tokens", "neighbor_tokens"}
+                or not SHA256.fullmatch(row["input_sha256"])
+                or any(type(row[key]) is not int or row[key] <= 0 for key in ("focus_tokens", "neighbor_tokens"))
+                or row["focus_tokens"] + row["neighbor_tokens"] > 512):
+            raise ValueError("Incomplete writing input coverage")
+    return readings
+
+
 def validate(document, *, published_checks=None):
     value = (document.get("coverage") or {}).get(KEY)
     if value is None:
         return None
-    required = {"schema", "status", "authorship_confidence_contribution", "sentences", "signal_ref", "focus_text"}
-    if value.get("status") != "unassessed":
-        required.update(("readings", "contrast_hex"))
-    if (set(value) != required or value["schema"] != SCHEMA or value["authorship_confidence_contribution"] != 0
-            or document["source"].get("method") != "plain"):
+    if (value.get("schema") not in {SCHEMA, document_long_passage_position.SCHEMA}
+            or value.get("authorship_confidence_contribution") != 0 or document["source"].get("method") != "plain"):
         raise ValueError("Invalid writing position scope")
     checks = {row["signal_ref"]["id"] for row in document.get("coverage", {}).get("checks", [])}
-    ref = value["signal_ref"]
+    ref = value.get("signal_ref") or {}
     if (ref.get("id") not in checks or published_checks is not None and ref["id"] not in published_checks
             or not isinstance(ref.get("display_id"), str) or not re.fullmatch(r"S[0-9]{2,6}", ref["display_id"])):
         raise ValueError("Writing position evidence has no recorded check")
+    if value["schema"] == document_long_passage_position.SCHEMA:
+        return document_long_passage_position.validate(value, document["source"])
+    required = {"schema", "status", "authorship_confidence_contribution", "sentences", "signal_ref", "focus_text"}
+    if value.get("status") != "unassessed":
+        required.update(("readings", "contrast_hex"))
+    if set(value) != required:
+        raise ValueError("Invalid writing position scope")
     spans = value["sentences"]
     if len(spans) != 3:
         raise ValueError("Three complete writing positions required")
@@ -136,15 +152,7 @@ def validate(document, *, published_checks=None):
         raise ValueError("Writing position evidence has an invalid focus excerpt")
     if value["status"] == "unassessed":
         return value
-    readings = value["readings"]
-    if len(readings) != 3:
-        raise ValueError("Three complete writing responses required")
-    for row in readings:
-        if (set(row) != {"input_sha256", "response_hex", "focus_tokens", "neighbor_tokens"}
-                or not SHA256.fullmatch(row["input_sha256"])
-                or any(type(row[key]) is not int or row[key] <= 0 for key in ("focus_tokens", "neighbor_tokens"))
-                or row["focus_tokens"] + row["neighbor_tokens"] > 512):
-            raise ValueError("Incomplete writing input coverage")
+    readings = validate_readings(value["readings"])
     expected = record(spans, readings, value["focus_text"])
     if expected != {key: item for key, item in value.items() if key != "signal_ref"}:
         raise ValueError("The writing position direction does not replay")
@@ -160,8 +168,11 @@ def verify_source(document, text, mapping, *, result=None):
         raise ValueError("Writing position evidence differs from the recorded analysis")
     if value is None:
         return False
-    source = from_string(text)
-    mapped = geometry(text, mapping, document["source"]["method"], segment(source))
+    sentences = segment(from_string(text))
+    method = document["source"]["method"]
+    if value["schema"] == document_long_passage_position.SCHEMA:
+        return document_long_passage_position.verify_source(value, text, mapping, method, sentences)
+    mapped = geometry(text, mapping, method, sentences)
     if mapped != value["sentences"] or value["focus_text"] != text[mapped[1]["start"]:mapped[1]["end"]]:
         raise ValueError("Writing sentence positions differ from the original source")
     if value["status"] == "unassessed":

@@ -124,6 +124,16 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
             groups.append(review["artifacts"])
         if listening := part.get("stereo_listening"):
             groups.extend(window["artifacts"] for window in listening["windows"])
+        if "stereo_repetition" in part:
+            from app.evidence.stereo_repetition_binding import pairs, validate
+
+            if part.get("schema") != "chipmunk.audio-evidence/1" and part is not document.get("audio"):
+                raise ObjectIntegrityError("Stereo repetition is outside the audio evidence")
+            try:
+                validate(part["stereo_repetition"], part["source"])
+            except ValueError as error:
+                raise ObjectIntegrityError(str(error)) from error
+            groups.extend(pair["artifacts"] for pair in pairs(part["stereo_repetition"]))
         for key in ("repetition_context", "similarity_context"):
             repetition = part.get(key)
             if repetition is not None:

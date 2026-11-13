@@ -97,6 +97,21 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [single-upload stereo repeat check](stereo-repetition-2026-11-13.md)
+  located all 32 exact one-channel copies that the downmix missed, with no
+  matches on 16 unchanged recordings. It shows and replays both intervals
+  for supported audio and video soundtracks without changing AI confidence.
+- The [fresh synchronized video source study](lombard-fresh-musetalk-2026-11-13.md)
+  rebuilt 30 native deliveries across six speakers. One neural redraw
+  preserved the measured speech event and passed every timing control. The
+  study qualifies a second-generator detector fixture.
+- The [transparent PNG study](image-png-hidden-rgb-2026-11-13.md) verified
+  hidden color regions without exposing the pixels. It localized five of
+  twelve small targets and remained offline.
+- The [longer writing comparison](writing-f1000-position-transfer-2026-11-13.md)
+  raised the combined exact locations from two to four among 18 matched
+  rewrites and added one flagged genuine source work among nine.
+
 - The [three-sentence writing check](writing-position-app-2026-11-12.md) now
   runs on the local Apple GPU. It reproduced all 68 CPU decisions and passed
   the prepaid worker, browser, PDF, JSON, and signed source replay.

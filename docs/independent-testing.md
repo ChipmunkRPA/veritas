@@ -54,6 +54,9 @@ reopens a submitted PNG and its saved thumbnail, then verifies both crops
 and the measured difference from the signed evidence. The [single-file image
 candidates](image-local-edit-candidates-2026-11-12.md) document tested texture
 and JPEG95 comparisons that stay outside the app.
+The [exact PNG copy check](image-exact-small-copy-2026-11-12.md) replays matched
+native crops and surrounding differences. It includes ordinary photos, generated
+edit controls, repeated structures and duplicate graphics in Chrome captures.
 
 The [earlier-video comparison](video-reference-comparison-2026-11-11.md#replay-without-the-app)
 re-decodes two supplied clips and checks the JSON, native picture timestamps,
@@ -128,6 +131,9 @@ The [mixed PDF writing check](writing-mixed-pdf-page-transfer-2026-11-12.md)
 replays writing responses and exact source locations on intact selectable
 pages of mixed PDFs. Its receipt records ordinary agreement and skipped
 cross-page inputs.
+The [paired writing response comparison](writing-instruct-base-passage-transfer-2026-11-12.md)
+checks response differences on identical target tokens and replays the held
+publisher's false flags and missed rewrites.
 The [paired neural speech edit pilot](audio-partialedit-dense-transfer-2026-11-12.md)
 checks overlapping speech windows across two edit generators, matched genuine
 utterances and two background mixes. The replay recounts localized edits and

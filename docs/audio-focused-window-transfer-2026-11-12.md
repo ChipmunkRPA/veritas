@@ -72,10 +72,30 @@ hashes and all 511 window hashes against their exact PCM.
 The result supports a bounded optional review of short native recordings.
 The same rule has no demonstrated general rescue under strong noise. The
 train result, shared speaker history, and small number of noise recordings
-leave confidence changes unsupported. A scoped integration must preserve the
-underlying three-second readings and display any narrower waveform as an
-interval supported by the two surrounding windows.
+leave confidence changes unsupported.
 [Frozen case ledger](evaluation-panels/audio-focused-window-transfer-2026-11-12.json)
+
+## Local app
+
+Enable `VERITAS_AUDIO_FOCUSED_LONG_REVIEW=true` with the candidate audio mode
+to use the additional review in Full analyses. The check applies to continuous
+native mono 16 kHz PCM16 WAV or FLAC longer than six seconds and up to eleven
+seconds. Other supported durations retain the disjoint-window review. The
+browser shows each selected interval with its original playback and marked
+waveform. It lists the underlying three-second responses separately. The
+Standard PDF displays the same interval and source clock. The JSON preserves
+all the measured inputs and indexes the windows supporting each selection.
+The signed package verifies selected playback and waveform against the original.
+
+In the isolated prepaid flow, the same held rain mixture in WAV and FLAC
+produced a selected interval at **3.000–4.500 seconds**, samples
+**[48000, 72000)**. Chrome loaded the 1.5-second clip and 960 × 280 waveform.
+The genuine rain mixture and isolated rain produced no selected range.
+An additional gain-only control retained both of the prior three-second
+inspection ranges when neither contained a shorter corroborated range.
+The earlier review showed no corroboration on the same positive clip. The
+whole-file decision matched with the optional check enabled and disabled.
+[Local verification receipt](evaluation-panels/audio-focused-window-app-2026-11-12.json)
 
 ## Replay
 
@@ -98,3 +118,11 @@ python3 -B -S -m scripts.audio_focused_window_transfer review "$run/receipt.json
 The reviewer also accepts the published receipt with no native path to
 recalculate the result from the saved decisions. Original clips and authored
 mixtures stay local.
+
+To replay the application checks, set `app_run` to a new private directory
+and pass the completed study directory as `run`.
+
+```sh
+backend/.venv/bin/python -B -m scripts.audio_focused_window_app paid "$run" "$app_run"
+backend/.venv/bin/python -B -m scripts.audio_focused_window_app browser "$app_run"
+```

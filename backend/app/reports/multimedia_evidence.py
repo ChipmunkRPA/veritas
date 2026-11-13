@@ -84,9 +84,12 @@ def asset_items(document: dict[str, Any]):
                 yield window["id"], role, asset
         for role, asset in sorted((part.get("short_voice_review") or {}).get("artifacts", {}).items()):
             yield None, f"short_voice_review_{role}", asset
-        for index, window in enumerate((part.get("long_voice_review") or {}).get("windows", [])):
-            for role, asset in sorted(window["artifacts"].items()):
-                yield None, f"long_voice_review_{index}_{role}", asset
+        if review := part.get("long_voice_review"):
+            from app.evidence.audio_long_review_binding import media_windows
+
+            for index, window in enumerate(media_windows(review)):
+                for role, asset in sorted(window["artifacts"].items()):
+                    yield None, f"long_voice_review_{index}_{role}", asset
         for role, asset in sorted((part.get("background_reduced_voice_review") or {}).get("artifacts", {}).items()):
             yield None, f"background_reduced_voice_review_{role}", asset
         for window in (part.get("stereo_listening") or {}).get("windows", []):
@@ -969,12 +972,15 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         short_voice_review["waveform"] = plate("waveform", asset, "Waveform with the selected two-second window highlighted")
     long_voice_review = copy.deepcopy(document.get("long_voice_review"))
     if long_voice_review:
-        from app.evidence.audio_long_review_binding import LABELS
+        from app.evidence.audio_long_review_binding import LABELS, media_windows
 
         for window in long_voice_review["windows"]:
             window["label"] = LABELS[window["direction"]]
+        focused = "regions" in long_voice_review
+        for window in media_windows(long_voice_review):
             if asset := window["artifacts"].get("waveform"):
-                window["waveform"] = plate("waveform", asset, "Waveform with the reviewed three-second window highlighted")
+                caption = "Waveform with the selected speech range highlighted" if focused else "Waveform with the reviewed three-second window highlighted"
+                window["waveform"] = plate("waveform", asset, caption)
     background_review = copy.deepcopy(document.get("background_reduced_voice_review"))
     if background_review and (asset := background_review["artifacts"].get("waveform")):
         background_review["waveform"] = plate("waveform", asset, "Original waveform across the flagged three-second interval")

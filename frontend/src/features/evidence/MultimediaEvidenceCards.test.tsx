@@ -256,6 +256,28 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByTestId('multimedia-evidence-empty')).toBeTruthy()
   })
 
+  it('shows selected speech playback separately from the windows that support it', () => {
+    const set = { ...structuredClone(audio), packets: [] }
+    const timestamps = (start_sample: number, end_sample: number) => [{ start_sample, end_sample, source_start_pts: start_sample,
+      source_end_pts: end_sample, time_base: '1/16000' }]
+    set.long_voice_review = {
+      schema: 'chipmunk.long-voice-review/2', title: 'Long speech-window review', status: 'corroborated',
+      reason: 'The sampled windows support the speech ranges shown below.', limitation: 'This review carries no weight in the overall assessment.',
+      affects_overall_confidence: false,
+      windows: [24000, 48000].map((start_sample) => ({ start_sample, end_sample: start_sample + 48000,
+        pcm_sha256: 'a'.repeat(64), direction: 'ai', source_timestamp_ranges: timestamps(start_sample, start_sample + 48000), artifacts: {} })),
+      regions: [{ start_sample: 48000, end_sample: 72000, pcm_sha256: 'b'.repeat(64), basis: 'overlap', supporting_windows: [0, 1],
+        source_timestamp_ranges: timestamps(48000, 72000), artifacts: { selected_clip: asset('f', 'audio/wav'), waveform: asset('2') } }],
+    }
+    show(set)
+    const review = within(screen.getByRole('region', { name: 'Long speech-window review' }))
+    expect(review.getByText('Overlap of two AI-leaning windows')).toBeTruthy()
+    expect(review.getByText(/Selected range 3\.000 s–4\.500 s.*48000, 72000/)).toBeTruthy()
+    expect(review.getAllByText('Leans AI-generated in this window')).toHaveLength(2)
+    expect(review.getByLabelText('Selected speech range at 3.000 s–4.500 s').getAttribute('src')).toContain(`${'f'.repeat(64)}.wav`)
+    expect(review.queryByLabelText(/Corroborating speech window/)).toBeNull()
+  })
+
   it('shows the whole-clip face review as six positions and three source examples', () => {
     const set = structuredClone(video)
     const item = set.packets[0]

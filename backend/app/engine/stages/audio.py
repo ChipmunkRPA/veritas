@@ -49,7 +49,8 @@ from app.engine.fusion import abstain
 from app.engine.runner import StageContext
 from app.engine.stages import common
 from app.engine.stages import video as vid
-from app.evidence import audio_background_review_binding as background_binding, audio_long_review_binding
+from app.evidence import audio_background_review_binding as background_binding
+from app.evidence import audio_long_review_binding
 from app.evidence.audio_binding import VOICE_CLOCK_LIMIT, VOICE_CLOCK_POLICY, source_clock_breaks
 from app.evidence.audio_short_review_binding import SCOPE_REASON, supported_source
 from app.schemas.evidence import AnalysisResultV2, Decision
@@ -219,13 +220,15 @@ def _long_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict | 
     if (settings.audio_detector_mode != "candidate" or Profile(ctx.profile) is not Profile.FULL
             or not ctx.outputs["decode"].get("long_voice_review_source_supported") or provenance_gate.stop(ctx)):
         return None
+    focused = (settings.audio_focused_long_review and track is not None and track.pcm is not None
+               and audio_long_review_binding.focused_scope(len(track.pcm)))
     if not any(entry.get("detector_id") == long_voice_review.PellaVoiceDetector.spec.id
                and entry.get("status") in {"ok", "not_applicable"} for entry in entries):
-        return long_voice_review.skipped(audio_long_review_binding.SKIPPED_UNAVAILABLE)
+        return long_voice_review.skipped(audio_long_review_binding.SKIPPED_UNAVAILABLE, focused=focused)
     remaining = ctx.deadline.remaining()
     if remaining is not None and remaining < long_voice_review.BUDGET_S + long_voice_review.PIPELINE_RESERVE_S:
-        return long_voice_review.skipped(audio_long_review_binding.SKIPPED_BUDGET)
-    detector = long_voice_review.LongVoiceReview()
+        return long_voice_review.skipped(audio_long_review_binding.SKIPPED_BUDGET, focused=focused)
+    detector = long_voice_review.LongVoiceReview(focused=focused)
     run_ctx = RunContext(analysis_id=ctx.analysis_id, media=common.media(ctx), profile=ctx.profile, device="cpu",
                          dtype=None, lease=None, outputs=StageOutputs(audio=track), deadline=ctx.deadline,
                          exhibits=ctx.exhibits.bind(detector.spec.id), log=ctx.log.bind(detector_id=detector.spec.id))
@@ -233,10 +236,10 @@ def _long_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict | 
     review = run_detector(detector, run_ctx, store=store, models=ctx.state.get("models"), timeout_s=long_voice_review.BUDGET_S)
     ctx.check("long voice review")
     if review.status == "ok" and (run_id := store.run_id(ctx.analysis_id, detector.spec.id)):
-        return {"run_id": run_id}
+        return {"run_id": run_id, **({"schema": audio_long_review_binding.FOCUSED_SCHEMA} if focused else {})}
     reason = (audio_long_review_binding.SKIPPED_TIMEOUT if review.status == "timeout"
               else audio_long_review_binding.SKIPPED_UNAVAILABLE)
-    return long_voice_review.skipped(reason)
+    return long_voice_review.skipped(reason, focused=focused)
 
 
 def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
@@ -502,8 +505,10 @@ def publish(ctx: StageContext) -> dict[str, Any]:
                 (records if entry["family"] == "voice" else sound_records).append({"detector_id": entry["detector_id"], "raw_output_sha256": raw.sha256})
             short = _published_review(db, ctx, detect_output.get("short_voice_review"),
                                       short_voice_review.skipped("The optional short-window response could not be saved."))
-            long = _published_review(db, ctx, detect_output.get("long_voice_review"),
-                                     long_voice_review.skipped(audio_long_review_binding.SKIPPED_RECEIPT))
+            long_result = detect_output.get("long_voice_review")
+            long = _published_review(db, ctx, long_result, long_voice_review.skipped(
+                audio_long_review_binding.SKIPPED_RECEIPT,
+                focused=(long_result or {}).get("schema") == audio_long_review_binding.FOCUSED_SCHEMA))
             background_result = detect_output.get(background_binding.KEY)
             background = _published_review(db, ctx, background_result,
                                            background_voice_review.skipped(background_binding.SKIPPED_RECEIPT))

@@ -281,12 +281,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             validate_short_voice_review(review, part['source'])
             groups.append(review['artifacts'])
         if 'long_voice_review' in part:
+            from app.evidence.audio_long_review_binding import media_windows
             from app.evidence.audio_long_review_binding import validate as validate_long_voice_review
 
             _require(analysis['kind'] == 'audio' and part is evidence, 'Long speech-window review is outside standalone audio')
             review = part['long_voice_review']
             validate_long_voice_review(review, part['source'])
-            groups.extend(window['artifacts'] for window in review['windows'])
+            groups.extend(window['artifacts'] for window in media_windows(review))
         if 'background_reduced_voice_review' in part:
             from app.evidence.audio_background_review_binding import validate as validate_background_review
 

@@ -1,0 +1,123 @@
+{
+  "archived_r109_hevc_signed_source_replay": true,
+  "browser": {
+    "page_errors": 0,
+    "plain_view": true,
+    "playback_seconds": 1.5,
+    "range_seconds": [
+      3,
+      4.5
+    ],
+    "sample_interval": [
+      48000,
+      72000
+    ],
+    "waveform_dimensions": [
+      960,
+      280
+    ]
+  },
+  "cases": {
+    "genuine_rain": {
+      "case": 55,
+      "container": "wav",
+      "file_sha256": "2ffa0cf956c41d53f1bcc3953902044064f1af50da69befd70ffa3e4ecf1daf8",
+      "pcm_sha256": "55cce8083fef6974afc7dbee5b0aa7cdda9a467ce98c42531bc2aaf60a19353d",
+      "regions": [],
+      "schema": "chipmunk.long-voice-review/2",
+      "status": "no_corroboration",
+      "windows": 4
+    },
+    "rain_edit_flac": {
+      "case": 19,
+      "container": "flac",
+      "file_sha256": "437977976717427b80550318cb98a43fcf1f6b5ebf1a2dafab969b7fc98870f3",
+      "pcm_sha256": "c3e9df9816432d0adb5e8e3686bd60522b8b0e49103e6e31ab65cf9c6319f3be",
+      "regions": [
+        {
+          "basis": "overlap",
+          "samples": [
+            48000,
+            72000
+          ]
+        }
+      ],
+      "schema": "chipmunk.long-voice-review/2",
+      "status": "corroborated",
+      "windows": 4
+    },
+    "rain_edit_wav": {
+      "case": 19,
+      "container": "wav",
+      "file_sha256": "13c64f527aad0be6adc3a951d689c308d24b2b43647430d987465cd85197be69",
+      "pcm_sha256": "c3e9df9816432d0adb5e8e3686bd60522b8b0e49103e6e31ab65cf9c6319f3be",
+      "pdf_api_json_agree": true,
+      "regions": [
+        {
+          "basis": "overlap",
+          "samples": [
+            48000,
+            72000
+          ]
+        }
+      ],
+      "schema": "chipmunk.long-voice-review/2",
+      "selected_clip_sha256": "3a4289de88eefce67384126c66ebf2929b8e87abde6a71de2b4de632759e88de",
+      "signed_source_replay": true,
+      "status": "corroborated",
+      "template_set": "veritas-report-2.0.r110",
+      "waveform_sha256": "9d91d596650e78f92788fd9c6eac720c4dc3aed4743089abd55d860b9a2965da",
+      "windows": 4,
+      "wrong_original_rejected": true
+    },
+    "rain_only": {
+      "case": 90,
+      "container": "wav",
+      "file_sha256": "69eb63f47522a4697a76ea96592e997016522157223c0a0295954414d6e4c241",
+      "pcm_sha256": "f46cad0d5656e096212d69026636bc98fb8659859e5e7ce3b33f35ab2ea565a9",
+      "regions": [],
+      "schema": "chipmunk.long-voice-review/2",
+      "status": "no_corroboration",
+      "windows": 5
+    },
+    "sparse_only_retained": {
+      "case": 45,
+      "container": "wav",
+      "file_sha256": "9c90ecd6c57d660c8a3f9fb2ea7735682498ef9c7929fa0ea7302d05a7aa0a7d",
+      "pcm_sha256": "b2bd0869356d4af43a0d7fec32342d05c866a87d67d215ef6bd81f2b503839e2",
+      "regions": [
+        {
+          "basis": "sparse",
+          "samples": [
+            0,
+            48000
+          ]
+        },
+        {
+          "basis": "sparse",
+          "samples": [
+            118709,
+            166709
+          ]
+        }
+      ],
+      "schema": "chipmunk.long-voice-review/2",
+      "status": "corroborated",
+      "windows": 7
+    },
+    "sparse_opt_out": {
+      "case": 19,
+      "container": "wav",
+      "file_sha256": "13c64f527aad0be6adc3a951d689c308d24b2b43647430d987465cd85197be69",
+      "pcm_sha256": "c3e9df9816432d0adb5e8e3686bd60522b8b0e49103e6e31ab65cf9c6319f3be",
+      "regions": [],
+      "schema": "chipmunk.long-voice-review/1",
+      "status": "no_corroboration",
+      "windows": 2
+    }
+  },
+  "exact_wav_flac_parity": true,
+  "overall_decision_identical_flag_on_off": true,
+  "simulated_paid_jobs": 6,
+  "unpaid_jobs": 0
+}

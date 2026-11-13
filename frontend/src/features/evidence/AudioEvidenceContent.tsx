@@ -124,6 +124,22 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
       <h3 className="m-0 text-body font-medium">{longReview.title}</h3>
       <p className="mt-2 mb-0 text-small" role="status">{longReview.reason}</p>
+      {!!longReview.regions?.length && <ol className="mt-4 mb-0 space-y-3 list-none p-0">
+        {longReview.regions.map((region) => {
+          const span = `${seconds(region.start_sample / longVoiceSampleRate)}–${seconds(region.end_sample / longVoiceSampleRate)}`
+          return <li key={`${region.start_sample}:${region.end_sample}`} className="rounded-md border border-border p-3">
+            <p className="m-0 text-small font-medium">{region.basis === 'overlap' ? 'Overlap of two AI-leaning windows' : 'Corroborated three-second window'}</p>
+            <p className="mt-2 mb-0 font-mono text-caption text-text-muted">Selected range {span} · samples [{region.start_sample}, {region.end_sample})</p>
+            <SourceTimestamps ranges={region.source_timestamp_ranges} showSeconds />
+            <div className="mt-3">
+              <EvidencePicture set={set} artifact={region.artifacts.waveform} token={token} ready={mediaReady} chart alt={`Waveform for the selected speech range at ${span}`} />
+            </div>
+            <div className="mt-3">
+              <EvidenceAudio set={set} artifact={region.artifacts.selected_clip} token={token} ready={mediaReady} alt={`Selected speech range at ${span}`} />
+            </div>
+          </li>
+        })}
+      </ol>}
       {longReview.windows.length > 0 && <ol className="mt-4 mb-0 space-y-3 list-none p-0">
         {longReview.windows.map((window) => {
           const span = `${seconds(window.start_sample / longVoiceSampleRate)}–${seconds(window.end_sample / longVoiceSampleRate)}`

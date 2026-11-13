@@ -32,9 +32,12 @@ def _clips(audio: dict, alignment: dict) -> Iterator[tuple[str, dict, list[dict]
         yield f"{window['id']} sound clip", window, window["source_timestamp_ranges"], window["artifacts"]["selected_clip"]
     if (review := audio.get("short_voice_review")) and review["status"] == "flagged":
         yield "Short speech-window clip", review["interval"], review["source_timestamp_ranges"], review["artifacts"]["selected_clip"]
-    for window in (audio.get("long_voice_review") or {}).get("windows", []):
-        if clip := window["artifacts"].get("selected_clip"):
-            yield "Long speech-window clip", window, window["source_timestamp_ranges"], clip
+    if review := audio.get("long_voice_review"):
+        from app.evidence.audio_long_review_binding import media_windows
+
+        for window in media_windows(review):
+            if clip := window["artifacts"].get("selected_clip"):
+                yield "Long speech-window clip", window, window["source_timestamp_ranges"], clip
     if (review := audio.get("background_reduced_voice_review")) and review["status"] == "flagged":
         yield "Original background-reduced review clip", review["interval"], review["source_timestamp_ranges"], review["artifacts"]["selected_clip"]
     for name in ("repetition_context", "similarity_context"):
@@ -112,7 +115,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         intervals += 3 * len(listening["windows"])
     if (review := audio.get("background_reduced_voice_review")) is not None:
         from app.detectors.audio.decode import read_wav
-        from app.evidence.audio_background_review_binding import SPAN, validate as validate_background_review
+        from app.evidence.audio_background_review_binding import SPAN
+        from app.evidence.audio_background_review_binding import validate as validate_background_review
         from app.evidence.audio_packets import _chart
 
         validate_background_review(review, decoded.mapping)
@@ -153,6 +157,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
         verify_source(review, pcm=decoded.pcm, mapping=decoded.mapping, waveform=_chart)
         replay_detail += f" Verified {len(review['windows'])} long speech-window input ranges and their marked waveforms."
+        if "regions" in review:
+            replay_detail += f" Verified {len(review['regions'])} selected speech ranges against the same original samples."
     interval_label = "interval" if intervals == 1 else "intervals"
     asset_label = "asset" if len(covered) == 1 else "assets"
     playback = (f"{intervals} original playback {interval_label} and accounted for {len(covered)} WAV {asset_label}"

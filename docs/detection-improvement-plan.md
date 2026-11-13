@@ -97,12 +97,21 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [exact small PNG copy check](image-exact-small-copy-2026-11-12.md)
+  found 44/48 known copies and added zero flags on 66 held controls and
+  eight interface captures. New local opt-in reports show both native crops
+  and the measured surrounding differences. The cue carries no authorship
+  confidence weight.
+- The [paired writing response](writing-instruct-base-passage-transfer-2026-11-12.md)
+  added zero useful locations on 24 known rewrites and flagged five of 15
+  genuine article groups at the frozen operating point. It stays outside
+  the app.
 - The [narrower speech evidence study](audio-focused-window-transfer-2026-11-12.md)
   compared 98 exact deliveries. Replacing a broad displayed range only when
   it contains a corroborated narrow range preserved every useful sparse
   location, found 3/18 new rain edits and 0/18 train edits, and marked nearly
-  identical genuine time. It passed its fixed gate. The next serving step
-  is an optional source-bound review with the original readings retained.
+  identical genuine time. The optional Full review retains the original
+  readings and verifies the selected playback and waveform against the upload.
 - The [PNG Exif preview comparison](image-png-exif-preview-2026-11-12.md)
   can show a difference between a supported PNG and the thumbnail embedded
   in the same file. It located 11/12 feathered edits in one test group and
@@ -128,8 +137,10 @@ integration remains unfinished.
   advancement gate failed on the number of gains and the share of eligible
   edits assessed. A separate HEVC confirmation located three of eight swaps,
   up from zero, with no added ordinary ranges on 53 controls. It missed all
-  four six-frame edits. Both comparisons reproduce the native frames; the
-  timing refinement still needs an opt-in serving path and source verifier.
+  four six-frame edits. The local HEVC opt-in reproduced all 61 serving-stage
+  decisions. Prepaid browser, PDF and JSON checks displayed the exact interval
+  and three original frames. Signed replay checked both edges and surrounding
+  motion. The H.264 candidate remains experimental.
 - The [environmental sound comparison](environmental-embedding-transfer-2026-11-12.md)
   held the voice fixed while changing background origin across 348 exact
   deliveries. Mixed-condition spectral fitting found 21/36 generated

@@ -136,6 +136,57 @@ def test_auxiliary_run_only_copies_the_detect_stage_pin(tmp_path):
         assert {row.id for row in runs.current(db, "input", store, include_auxiliary=True)} == {"primary", "attempt-a"}
 
 
+def test_focused_review_retains_input_readings_and_binds_narrower_playback():
+    pcm = np.arange(160_001, dtype=np.int32).astype("<i2").astype("<f4") / 32768
+    source = native_source(len(pcm)) | {"pcm_sha256": sha256(pcm.tobytes()).hexdigest()}
+    schedule = binding.focused_intervals(len(pcm))
+    assert schedule == [(0, 48000), (24000, 72000), (48000, 96000), (56000, 104000),
+                        (72000, 120000), (96000, 144000), (112001, 160001)]
+
+    def pin(start, end):
+        return sha256(pcm[start:end].tobytes()).hexdigest()
+
+    directions = ("ai", "ai", "inconclusive", "ai", "unassessed", "inconclusive", "inconclusive")
+    windows = [{"start_sample": a, "end_sample": b, "direction": direction, "pcm_sha256": pin(a, b)}
+               for (a, b), direction in zip(schedule, directions, strict=True)]
+    regions = binding.focused_regions(len(pcm), windows)
+    assert regions == [{"start_sample": 24000, "end_sample": 48000, "basis": "overlap", "supporting_windows": [0, 1]},
+                       {"start_sample": 56000, "end_sample": 104000, "basis": "sparse", "supporting_windows": [0, 3]}]
+    for region in regions:
+        region["pcm_sha256"] = pin(region["start_sample"], region["end_sample"])
+    receipt = {"schema": binding.FOCUSED_SCHEMA, "status": "corroborated", "reason": binding.FOCUSED_REASONS["corroborated"],
+               "windows": windows, "regions": regions}
+    raw = canonical_json({"detector_id": binding.DETECTOR_ID, "status": "ok",
+                          "details": {"pcm_sha256": source["pcm_sha256"], "long_voice_review": receipt}})
+    digest = sha256(raw).hexdigest()
+    store = SimpleNamespace(read_bytes={digest: raw}.__getitem__)
+    record = {"raw_output_sha256": digest}
+    assets = {}
+
+    def asset(data, media_type, **metadata):
+        digest = sha256(data).hexdigest()
+        assets[digest] = data
+        return {"sha256": digest, "media_type": media_type, **metadata}
+
+    review = audio_long_review.build(record, store=store, source=source, pcm=pcm, mapping=source,
+                                    asset=asset, waveform=audio_packets._chart)
+    assert review["affects_overall_confidence"] is False and all(not row["artifacts"] for row in review["windows"])
+    marked = review["regions"][0]["artifacts"]["selected_clip"]
+    assert marked["samples"] == 24000
+    np.testing.assert_array_equal(read_wav(assets[marked["sha256"]]), pcm[24000:48000])
+    audio_long_review.verify(review, record, store=store, source=source, pcm=pcm, mapping=source,
+                             read_asset=assets.__getitem__, waveform=audio_packets._chart)
+    audio_long_review.verify_source(review, pcm=pcm, mapping=source, waveform=audio_packets._chart)
+    changed = deepcopy(review)
+    changed["regions"][0]["supporting_windows"] = [0, 2]
+    with pytest.raises(ValueError, match="region or source clock"):
+        binding.validate(changed, source)
+    changed = deepcopy(review)
+    changed["regions"][0]["pcm_sha256"] = "0" * 64
+    with pytest.raises(ValueError, match="PCM differs"):
+        audio_long_review.verify_source(changed, pcm=pcm, mapping=source, waveform=audio_packets._chart)
+
+
 def test_optional_review_respects_the_serving_model_and_provenance_gate(monkeypatch):
     monkeypatch.setattr(settings, "audio_detector_mode", "candidate")
     ctx = SimpleNamespace(profile=Profile.FULL, deadline=Deadline(5), state={},

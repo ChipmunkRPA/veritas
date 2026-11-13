@@ -82,7 +82,9 @@ to use the additional review in Full analyses. The check applies to continuous
 native mono 16 kHz PCM16 WAV or FLAC longer than six seconds and up to eleven
 seconds. Other supported durations retain the disjoint-window review. The
 browser shows each selected interval with its original playback and marked
-waveform. It lists the underlying three-second responses separately. The
+waveform. It links directly to the underlying three-second responses and
+distinguishes an entirely unassessed sample schedule from one with usable
+responses. The
 Standard PDF displays the same interval and source clock. The JSON preserves
 all the measured inputs and indexes the windows supporting each selection.
 The signed package verifies selected playback and waveform against the original.

@@ -274,8 +274,28 @@ describe('ordinary multimedia evidence', () => {
     expect(review.getByText('Overlap of two AI-leaning windows')).toBeTruthy()
     expect(review.getByText(/Selected range 3\.000 s–4\.500 s.*48000, 72000/)).toBeTruthy()
     expect(review.getAllByText('Leans AI-generated in this window')).toHaveLength(2)
+    const inputs = within(review.getByRole('list', { name: 'Supporting speech readings' }))
+    const firstInput = inputs.getByRole('link', { name: '1.500 s–4.500 s' })
+    expect(firstInput.getAttribute('href')).toBe('#long-speech-window-0')
+    fireEvent.click(firstInput)
+    expect(firstInput.ownerDocument.activeElement?.id).toBe('long-speech-window-0')
     expect(review.getByLabelText('Selected speech range at 3.000 s–4.500 s').getAttribute('src')).toContain(`${'f'.repeat(64)}.wav`)
     expect(review.queryByLabelText(/Corroborating speech window/)).toBeNull()
+  })
+
+  it('explains when dense audio windows have no usable speech responses', () => {
+    const set = { ...structuredClone(audio), packets: [] }
+    set.long_voice_review = {
+      schema: 'chipmunk.long-voice-review/2', title: 'Long speech-window review', status: 'no_corroboration',
+      reason: 'The sampled windows did not produce corroborating AI-like responses.',
+      limitation: 'This review carries no weight in the overall assessment.', affects_overall_confidence: false, regions: [],
+      windows: [{ start_sample: 0, end_sample: 48000, pcm_sha256: 'a'.repeat(64), direction: 'unassessed', artifacts: {},
+        source_timestamp_ranges: [{ start_sample: 0, end_sample: 48000, source_start_pts: 0, source_end_pts: 48000, time_base: '1/16000' }] }],
+    }
+    show(set)
+    const review = within(screen.getByRole('region', { name: 'Long speech-window review' }))
+    expect(review.getByRole('status').textContent).toBe('None of the sampled windows produced a usable speech response.')
+    expect(review.queryByRole('link')).toBeNull()
   })
 
   it('shows the whole-clip face review as six positions and three source examples', () => {

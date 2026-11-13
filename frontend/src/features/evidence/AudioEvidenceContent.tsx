@@ -41,6 +41,8 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
   const clock = set.coverage?.source_clock_context
   const shortReview = standalone ? set.short_voice_review : undefined
   const longReview = standalone ? set.long_voice_review : undefined
+  const focusedSpeech = longReview?.schema === 'chipmunk.long-voice-review/2'
+  const hasMeasuredSpeech = longReview?.windows.some((window) => window.direction !== 'unassessed')
   const backgroundReview = standalone ? set.background_reduced_voice_review : undefined
   const intervals = standalone && set.packets.length === 0 ? [...new Map(set.coverage?.windows?.map((window) =>
     [`${window.start_sample}:${window.end_sample}`, window] as const)).values()]
@@ -123,7 +125,8 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
     {longReview && <section id="media-evidence-long-voice-review" aria-label={longReview.title}
       className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
       <h3 className="m-0 text-body font-medium">{longReview.title}</h3>
-      <p className="mt-2 mb-0 text-small" role="status">{longReview.reason}</p>
+      <p className="mt-2 mb-0 text-small" role="status">{focusedSpeech && longReview.windows.length > 0 && !hasMeasuredSpeech
+        ? 'None of the sampled windows produced a usable speech response.' : longReview.reason}</p>
       {!!longReview.regions?.length && <ol className="mt-4 mb-0 space-y-3 list-none p-0">
         {longReview.regions.map((region) => {
           const span = `${seconds(region.start_sample / longVoiceSampleRate)}–${seconds(region.end_sample / longVoiceSampleRate)}`
@@ -131,6 +134,20 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
             <p className="m-0 text-small font-medium">{region.basis === 'overlap' ? 'Overlap of two AI-leaning windows' : 'Corroborated three-second window'}</p>
             <p className="mt-2 mb-0 font-mono text-caption text-text-muted">Selected range {span} · samples [{region.start_sample}, {region.end_sample})</p>
             <SourceTimestamps ranges={region.source_timestamp_ranges} showSeconds />
+            <ul aria-label="Supporting speech readings" className="mt-2 mb-0 flex flex-wrap gap-x-4 gap-y-1 list-none p-0 text-small">
+              {region.supporting_windows.map((index) => {
+                const window = longReview.windows[index]
+                if (!window) return null
+                return <li key={index}><a href={`#long-speech-window-${index}`} className="underline"
+                  onClick={(event) => {
+                    event.preventDefault()
+                    const reading = root.current?.querySelector<HTMLElement>(`#long-speech-window-${index}`)
+                    if (!reading) return
+                    reading.focus({ preventScroll: true })
+                    reading.scrollIntoView?.({ block: 'nearest' })
+                  }}>{seconds(window.start_sample / longVoiceSampleRate)}–{seconds(window.end_sample / longVoiceSampleRate)}</a></li>
+              })}
+            </ul>
             <div className="mt-3">
               <EvidencePicture set={set} artifact={region.artifacts.waveform} token={token} ready={mediaReady} chart alt={`Waveform for the selected speech range at ${span}`} />
             </div>
@@ -141,10 +158,11 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
         })}
       </ol>}
       {longReview.windows.length > 0 && <ol className="mt-4 mb-0 space-y-3 list-none p-0">
-        {longReview.windows.map((window) => {
+        {longReview.windows.map((window, index) => {
           const span = `${seconds(window.start_sample / longVoiceSampleRate)}–${seconds(window.end_sample / longVoiceSampleRate)}`
           const showMedia = longReview.status === 'corroborated' && window.direction === 'ai'
-          return <li key={window.start_sample} className="rounded-md border border-border p-3">
+          return <li key={`${window.start_sample}:${window.end_sample}`} id={focusedSpeech ? `long-speech-window-${index}` : undefined}
+            tabIndex={focusedSpeech ? -1 : undefined} className="rounded-md border border-border p-3 scroll-mt-20">
             <p className="m-0 text-small font-medium">{longVoiceLabels[window.direction]}</p>
             <p className="mt-2 mb-0 font-mono text-caption text-text-muted">
               Analyzed input {span} · samples [{window.start_sample}, {window.end_sample})

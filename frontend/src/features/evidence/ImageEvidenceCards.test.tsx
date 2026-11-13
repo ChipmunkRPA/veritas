@@ -197,6 +197,48 @@ describe('image evidence cards', () => {
     }
   })
 
+  it.each([true, false])('maps both recorded crops only when the original digest matches (%s)', async matching => {
+    const source = new Response('original image')
+    const fetch = vi.fn().mockResolvedValue(source)
+    const digest = vi.fn().mockResolvedValue(new Uint8Array(32).fill(matching ? 0xaa : 0xbb).buffer)
+    const close = vi.fn()
+    const decode = vi.fn().mockResolvedValue({ width: 1000, height: 800, close })
+    const drawImage = vi.fn()
+    vi.stubGlobal('fetch', fetch)
+    vi.stubGlobal('crypto', { subtle: { digest } })
+    vi.stubGlobal('createImageBitmap', decode)
+    const context = vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockImplementation(function (this: HTMLCanvasElement) {
+      return { canvas: this, drawImage } as unknown as CanvasRenderingContext2D
+    })
+    try {
+      show(copyOnly)
+      const card = within(screen.getByRole('region', { name: 'Same-image copy similarity' }))
+      expect(fetch).not.toHaveBeenCalled()
+      const details = card.getByText('Show both areas on the original image').parentElement as HTMLDetailsElement
+      details.open = true
+      fireEvent(details, new Event('toggle'))
+      if (!matching) {
+        expect(await card.findByText(/The source map is unavailable/)).toBeTruthy()
+        expect(decode).not.toHaveBeenCalled()
+        expect(card.queryByRole('img', { name: /two comparison areas marked/ })).toBeNull()
+        expect(card.getByRole('link', { name: 'Area A in the original image' })).toBeTruthy()
+        return
+      }
+      expect(await card.findByRole('img', { name: 'Original image with the two comparison areas marked' })).toBeTruthy()
+      expect(fetch).toHaveBeenCalledWith('/api/analyses/analysis-1/source?token=signed%20token', expect.anything())
+      expect(decode).toHaveBeenCalledWith(expect.anything(), { imageOrientation: 'from-image' })
+      expect(drawImage).toHaveBeenCalledTimes(1)
+      expect(close).toHaveBeenCalledTimes(1)
+      for (const [role, label] of [['area_a', 'A'], ['area_b', 'B']] as const) {
+        const link = card.getByRole('link', { name: `Inspect Area ${label} in the original image` })
+        const { x, y, w, h } = reflected.pairs[0].regions[role]
+        expect(new URL(link.getAttribute('href')!, 'http://localhost').searchParams.get('focus')).toBe(`${x},${y},${w},${h}`)
+      }
+    } finally {
+      context.mockRestore()
+    }
+  })
+
   it('describes both signed-credential skips once and shows no copy crops', () => {
     const status = 'skipped_trusted_ai_credentials'
     show({ ...copyOnly, version: 'image-evidence-12',

@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Button, ErrorState, SkeletonRows } from '../../components/ui'
+import type { Box } from '../../lib/coords'
 import { cx } from '../../lib/cx'
 import { evidenceImageUrl, evidenceSourceUrl, measurementValue, useImageEvidence, type EvidenceImage, type ImageEvidencePacket, type ImageEvidenceSet } from './imagePackets'
 import ImageInspectionChecks, { CandidateEligibilityNote } from './ImageInspectionChecks'
+import { evidenceSourceMediaUrl } from './multimediaPackets'
 
 function EvidencePicture({ set, artifact, token, ready, alt }: {
   set: ImageEvidenceSet; artifact: EvidenceImage; token: string; ready: boolean; alt: string
@@ -104,6 +106,85 @@ const smallPngCoverageText = {
   unassessed_match_budget: 'Too many competing offsets prevented a distinct small-copy comparison.',
 }
 
+const copyAreaLabels = { area_a: 'Area A', area_b: 'Area B' } as const
+const copyAreas = ['area_a', 'area_b'] as const
+
+function CopyLocationMap({ analysisId, source, regions, token, mediaReady }: {
+  analysisId: string; source: ImageEvidenceSet['source'] & { width: number; height: number }
+  regions: Record<(typeof copyAreas)[number], Box>; token: string; mediaReady: boolean
+}) {
+  const canvas = useRef<HTMLCanvasElement>(null)
+  const [status, setStatus] = useState<'loading' | 'ready' | 'unavailable'>('loading')
+  const { width, height, sha256 } = source
+  const scale = Math.min(1, 760 / width, 520 / height)
+  useEffect(() => {
+    if (!mediaReady) return
+    const controller = new AbortController()
+    const load = async () => {
+      setStatus('loading')
+      const response = await fetch(evidenceSourceMediaUrl(analysisId, token), { signal: controller.signal })
+      if (!response.ok) throw new Error('Original image unavailable')
+      const blob = await response.blob()
+      const digest = await crypto.subtle.digest('SHA-256', await blob.arrayBuffer())
+      const actual = Array.from(new Uint8Array(digest), value => value.toString(16).padStart(2, '0')).join('')
+      if (actual !== sha256 || controller.signal.aborted) throw new Error('Original image hash differs')
+      const image = await createImageBitmap(blob, { imageOrientation: 'from-image' })
+      try {
+        if (controller.signal.aborted) return
+        const context = canvas.current?.getContext('2d')
+        if (!context || image.width !== width || image.height !== height) throw new Error('Original image geometry differs')
+        context.drawImage(image, 0, 0, context.canvas.width, context.canvas.height)
+        setStatus('ready')
+      } finally {
+        image.close()
+      }
+    }
+    void load().catch(() => { if (!controller.signal.aborted) setStatus('unavailable') })
+    return () => controller.abort()
+  }, [analysisId, height, mediaReady, sha256, token, width])
+
+  return <div className="mt-2">
+    {!mediaReady || status === 'loading' ? <p role="status" className="m-0 text-small text-text-muted">Loading the original image…</p>
+      : status === 'unavailable' && <p role="status" className="m-0 text-small text-text-muted">The source map is unavailable. Both crops and their source coordinates are shown below.</p>}
+    <div className="relative max-w-full" style={{ width: width * scale }} hidden={!mediaReady || status !== 'ready'}>
+      <canvas ref={canvas} width={Math.max(1, Math.round(width * scale))} height={Math.max(1, Math.round(height * scale))}
+        className="block w-full rounded-md" style={{ aspectRatio: `${width} / ${height}` }} role="img"
+        aria-label="Original image with the two comparison areas marked" />
+      {copyAreas.map((area, index) => {
+        const { x, y, w, h } = regions[area]
+        const label = copyAreaLabels[area]
+        return <Link key={area} to={evidenceSourceUrl(analysisId, { region: regions[area] })}
+          aria-label={`Inspect ${label} in the original image`}
+          className={cx('absolute border-2 shadow-[0_0_0_1px_#111] focus-visible:outline-2 focus-visible:outline-white',
+            index === 0 ? 'border-amber-400' : 'border-cyan-300')}
+          style={{ left: `${x / width * 100}%`, top: `${y / height * 100}%`, width: `${w / width * 100}%`, height: `${h / height * 100}%` }}>
+          <span aria-hidden="true" className={cx('absolute top-0 left-0 rounded-br px-1 text-caption leading-none text-black',
+            index === 0 ? 'bg-amber-400' : 'bg-cyan-300')}>{label.at(-1)}</span>
+        </Link>
+      })}
+    </div>
+    {status === 'ready' && mediaReady && <p className="mt-2 mb-0 text-caption text-text-muted">The outlines locate Areas A and B. Select either to inspect the native pixels.</p>}
+  </div>
+}
+
+function CopyLocations({ set, sourceHash, regions, token, mediaReady }: {
+  set: ImageEvidenceSet; sourceHash: string; regions: Record<(typeof copyAreas)[number], Box>; token: string; mediaReady: boolean
+}) {
+  const [open, setOpen] = useState(false)
+  const { width, height, coordinate_space, sha256 } = set.source
+  if (width == null || height == null || ![width, height].every(value => Number.isSafeInteger(value) && value > 0)
+    || coordinate_space !== 'exif-oriented-original' || sha256 !== sourceHash || !/^[a-f0-9]{64}$/.test(sha256)
+    || !copyAreas.every(area => {
+      const { x, y, w, h } = regions[area]
+      return [x, y, w, h].every(Number.isSafeInteger) && x >= 0 && y >= 0 && w > 0 && h > 0 && x + w <= width && y + h <= height
+    })) return null
+  return <details className="mt-3" onToggle={event => setOpen(event.currentTarget.open)}>
+    <summary className="cursor-pointer text-small text-text-muted">Show both areas on the original image</summary>
+    {open && <CopyLocationMap analysisId={set.analysis_id} source={{ ...set.source, width, height }} regions={regions}
+      token={token} mediaReady={mediaReady} />}
+  </details>
+}
+
 function CopySimilarity({ set, field, token, mediaReady }: {
   set: ImageEvidenceSet; field: 'copy_similarity' | 'copy_translation' | 'copy_affine'; token: string; mediaReady: boolean
 }) {
@@ -152,10 +233,11 @@ function CopySimilarity({ set, field, token, mediaReady }: {
     {check.pairs.length > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">Coordinates use native pixels in the oriented original.</p>}
     {check.pairs.map(pair => <article key={pair.id} className="mt-4 border-t border-border pt-4">
       <h4 className="m-0 text-small font-medium text-text">{pair.id} · {geometric ? 'Matched source areas' : reflected ? 'Reflected pair' : 'Non-mirrored pair'}</h4>
+      <CopyLocations set={set} sourceHash={check.source_sha256} regions={pair.regions} token={token} mediaReady={mediaReady} />
       <div className="mt-3 grid grid-cols-2 gap-4 max-[639px]:grid-cols-1">
-        {(['area_a', 'area_b'] as const).map((role, index) => {
+        {copyAreas.map((role, index) => {
           const region = pair.regions[role]
-          const label = index === 0 ? 'Area A' : 'Area B'
+          const label = copyAreaLabels[role]
           const coordinatesId = `${sectionId}-${pair.id}-${role}-coordinates`
           const mask = 'selected_pixels' in pair ? pair.artifacts[index === 0 ? 'mask_a' : 'mask_b'] : undefined
           return <figure key={role} className="m-0 min-w-0">

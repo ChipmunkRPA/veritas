@@ -1,0 +1,137 @@
+{
+  "bounded_prefix_probes": {
+    "dev": {
+      "complete_archive_bytes": 2027972850,
+      "compressed_bytes": 65536,
+      "sha256": "e59e3bbfa1edc47b97a4c2bd32bd0e2f488f0e2445fb55c473b6605ea34bef2b"
+    },
+    "train": {
+      "complete_archive_bytes": 2027101056,
+      "compressed_bytes": 65536,
+      "sha256": "af7a439a0ae9f46b7d2f8e7d53dcd9664a77b2699b1b7cff06108f3024a7b9d9"
+    }
+  },
+  "declared_speaker_intersections": {
+    "dev/eval": 0,
+    "train/dev": 0,
+    "train/eval": 0
+  },
+  "inference_calls": 0,
+  "license": "CC BY 4.0",
+  "media_evaluated": 0,
+  "parent_license": "ODC-By 1.0",
+  "partitions": {
+    "dev": {
+      "declared_speakers": 20,
+      "parent_attack_ids": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06"
+      ],
+      "parent_genuine_ids_linked": 2548,
+      "parent_trials_sha256": "2fedaebf1ba3ae1a9bb7d3ec916804ac237b4eee063a27fa92e6549f03d129c7",
+      "partial_spoof_generator_ids_linked": 0,
+      "partial_spoof_protocol_codes": {
+        "-": 2548,
+        "CON": 22296
+      },
+      "timing": {
+        "duplicated_identical_clock": 0,
+        "files": 24844,
+        "genuine_trial_has_spoof_interval": 0,
+        "missing_records": 0,
+        "short_edit_declared_speakers": 10,
+        "short_edits": 113,
+        "spoof_trial_no_spoof_interval": 6449
+      },
+      "trials_sha256": "52b52c83552a0378d1c4d953da1df05cdfee9729ff30c67232cb5aca7b6f137a"
+    },
+    "eval": {
+      "declared_speakers": 67,
+      "parent_attack_ids": [
+        "A07",
+        "A08",
+        "A09",
+        "A10",
+        "A11",
+        "A12",
+        "A13",
+        "A14",
+        "A15",
+        "A16",
+        "A17",
+        "A18",
+        "A19"
+      ],
+      "parent_genuine_ids_linked": 7355,
+      "parent_trials_sha256": "84fce576efff092269a0a6ad247d2e9f2f7b4d4e25a4545efb2518da92708036",
+      "partial_spoof_generator_ids_linked": 0,
+      "partial_spoof_protocol_codes": {
+        "-": 7355,
+        "CON": 63882
+      },
+      "timing": {
+        "duplicated_identical_clock": 63882,
+        "files": 71237,
+        "genuine_trial_has_spoof_interval": 0,
+        "missing_records": 0,
+        "short_edit_declared_speakers": 48,
+        "short_edits": 411,
+        "spoof_trial_no_spoof_interval": 15808
+      },
+      "trials_sha256": "e2142d4b0957f9ff192e69ecf5eb23a1ea7715fbc9db6c941867ddbd1dca26ee"
+    },
+    "train": {
+      "declared_speakers": 20,
+      "parent_attack_ids": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06"
+      ],
+      "parent_genuine_ids_linked": 2580,
+      "parent_trials_sha256": "65a289e4009400b42bb4f1e47ac60938d93f7f595452d1f220d35defc3de8ab8",
+      "partial_spoof_generator_ids_linked": 0,
+      "partial_spoof_protocol_codes": {
+        "-": 2580,
+        "CON": 22800
+      },
+      "timing": {
+        "duplicated_identical_clock": 0,
+        "files": 25380,
+        "genuine_trial_has_spoof_interval": 0,
+        "missing_records": 0,
+        "short_edit_declared_speakers": 19,
+        "short_edits": 87,
+        "spoof_trial_no_spoof_interval": 6206
+      },
+      "trials_sha256": "6d25b6118021fac84856b8d3bda57ab238ca3681fa9a51d8b0054a70b6bc9c56"
+    }
+  },
+  "pinned_metadata": {
+    "README_v1.2": {
+      "md5": "4fec0742e2a606d1b1186067d79862d6",
+      "sha256": "5d0ea8337a8945dfa73ed709a6e308c9b5df30670d67e7edfb79606a5b735573"
+    },
+    "database_protocols.tar.gz": {
+      "md5": "699d81f020e4b7fa8f33747010e1cba8",
+      "sha256": "00cdede56868570857b342e568f12172328dd68d08c8f8826c77d80075053715"
+    },
+    "database_vad.tar.gz": {
+      "md5": "95e77e19a1bb4f2e79ed138fd35621ad",
+      "sha256": "2027efef64c2d3e27cab677454443137b00f8f607b23d774c805505f8b2eb118"
+    }
+  },
+  "release": "https://zenodo.org/records/5766198",
+  "schema": "chipmunk.partialspoof-source-audit/1",
+  "suitable_for_proposed_generator_disjoint_study": false,
+  "timing_census": {
+    "claims": "Only declared speaker groups and annotated origins are known for PartialSpoof rows. The CON code does not link to the donor recordings or attack system labels of ASVspoof2019.",
+    "rule": "One contiguous spoof interval of 0.50\u20131.20 s within 4\u20139 s of annotation, with at least 0.40 s labeled bona fide speech on each side. Merge immediately adjacent equal-label intervals only. This census tests candidate duration, not a native media clock or sample selection."
+  }
+}

@@ -375,4 +375,10 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         "decode_sha256": canonical_hash(decoded),
         "offset_unit": "unicode_codepoint",
     }
+    if settings.document_email_alternatives_review and decoded.get("meta", {}).get("method") == "email":
+        from app.evidence import email_alternatives
+
+        ctx.check("email body alternatives")
+        with common.media_path(ctx).open("rb") as source:
+            result.manifest.sampling[email_alternatives.KEY] = email_alternatives.review(source.read(email_alternatives.MAX_FILE + 1))
     return common.publish(ctx, result, v1_view(ctx, result), pipeline_version=PIPELINE_VERSION, run_stages=("detect",))

@@ -35,7 +35,7 @@ def public_result(result: dict) -> dict:
     public = project(result)
     decision = public.get('decision') or {}
     copy_coverage = {}
-    video_coverage = {}
+    source_coverage = {}
     if result.get('kind') == 'image':
         from app.evidence.image_copy_similarity_binding import result_skip
 
@@ -45,7 +45,12 @@ def public_result(result: dict) -> dict:
         from app.evidence.face_return_coverage import COMMITMENT, from_result
 
         if brief_review := from_result(result):
-            video_coverage[COMMITMENT] = canonical_hash(brief_review)
+            source_coverage[COMMITMENT] = canonical_hash(brief_review)
+    if result.get('kind') == 'document':
+        from app.evidence.email_alternatives import COMMITMENT, result_review
+
+        if alternatives := result_review(result):
+            source_coverage[COMMITMENT] = canonical_hash(alternatives)
     checks = [{k: s[k] for k in ('id', 'display_id', 'category', 'family', 'scope', 'status', 'raw_score',
                                 'raw_score_kind', 'calibrated_probability') if k in s}
               for s in public.get('signals') or []]
@@ -70,7 +75,7 @@ def public_result(result: dict) -> dict:
         'findings': [{k: f[k] for k in ('id', 'family', 'title', 'statement', 'evidence_ids') if k in f}
                      for f in public.get('findings') or []],
         'checks': checks,
-        **video_coverage,
+        **source_coverage,
         'note': 'This public projection has its own hash. It does not reproduce or hash to the original internal result.',
     }
 

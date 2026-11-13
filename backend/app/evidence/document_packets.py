@@ -29,6 +29,7 @@ from app.evidence import (
     document_repeat,
     document_scope,
     document_unselected_responses,
+    email_alternatives,
 )
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import Analysis, AnalysisStage, Artefact
@@ -326,6 +327,8 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_passage_coverage.validate(document)
         document_unselected_responses.validate(document)
         document_scope.validate_checkpoint_agreement(document)
+        if email_alternatives.KEY in document.get("coverage", {}):
+            email_alternatives.validate_set(document, canonical_hash(document["coverage"][email_alternatives.KEY]))
     except (ValueError, KeyError, TypeError, AttributeError) as error:
         raise DocumentPacketIntegrityError("Document review evidence has invalid source commitments or positions") from error
     ids = set()
@@ -496,6 +499,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 "omitted_windows": max(0, len(candidates) - len(selected)), "limitations": []}
     if partially_checked := decoded["meta"].get("partially_checked_pages"):
         document["coverage"]["partially_checked_pages"] = partially_checked
+    if alternative_review := email_alternatives.result_review(result):
+        document["coverage"][email_alternatives.KEY] = alternative_review
+        email_alternatives.validate_set(document, canonical_hash(alternative_review))
+        email_alternatives.verify_source(document, source)
     if checkpoint_review is not None:
         document["coverage"][document_scope.CHECKPOINT_AGREEMENT_KEY] = checkpoint_review
         document_scope.validate_checkpoint_agreement(document, text, result=result, mapping=mapping)
@@ -655,6 +662,8 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
                                                     result=result, meta=decoded["meta"])
             document_unselected_responses.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_scope.validate_checkpoint_agreement(document, decoded["text"], result=result, mapping=decoded["source_map"])
+            alternatives = email_alternatives.result_review(result)
+            email_alternatives.validate_set(document, canonical_hash(alternatives) if alternatives is not None else None)
         except (ValueError, KeyError, TypeError, AttributeError) as error:
             raise DocumentPacketIntegrityError("Document review evidence differs from the frozen text or source mapping") from error
     store.verify(analysis.sha256)

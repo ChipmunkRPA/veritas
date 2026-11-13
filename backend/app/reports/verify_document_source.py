@@ -21,6 +21,7 @@ from app.evidence import (
     document_repeat,
     document_scope,
     document_unselected_responses,
+    email_alternatives,
 )
 from app.evidence.document_packets import (
     DocumentPacketIntegrityError,
@@ -121,6 +122,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_passage_coverage.verify_source(evidence, text, mapping, meta=doc.meta)
     document_scope.validate_checkpoint_agreement(evidence, text, mapping=mapping)
     unselected = document_unselected_responses.verify_source(evidence, text, mapping)
+    alternatives = email_alternatives.verify_source(evidence, original.read_bytes()) if email_alternatives.KEY in coverage else None
 
     pdf_bytes = original.read_bytes() if extension == ".pdf" else None
 
@@ -160,5 +162,6 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     image_label = "PDF images, including OCR source rasters" if used_ocr else "native PDF images"
     page_detail = f" Verified mapped text coverage across {page_coverage['page_count']} PDF pages." if page_coverage else ""
     unselected_detail = f" Verified {unselected} additional recorded response locations and inputs." if unselected else ""
+    alternative_detail = " Verified both decoded email body renditions and reported source positions." if alternatives and "parts" in alternatives else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
-            f"recorded input windows ({window_count}) and {image_label} ({images}).{page_detail}{unselected_detail}")
+            f"recorded input windows ({window_count}) and {image_label} ({images}).{page_detail}{unselected_detail}{alternative_detail}")

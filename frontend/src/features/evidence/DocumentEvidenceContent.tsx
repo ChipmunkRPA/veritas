@@ -7,7 +7,33 @@ import DocumentContextComparison from './DocumentContextComparison'
 import DocumentPassageCoverage from './DocumentPassageCoverage'
 import DocumentRepeatedPassages from './DocumentRepeatedPassages'
 import DocumentUnselectedResponses from './DocumentUnselectedResponses'
-import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow } from './multimediaPackets'
+import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type EmailBodyAlternatives } from './multimediaPackets'
+
+function EmailBodyComparison({ review }: { review?: EmailBodyAlternatives }) {
+  if (!review) return null
+  return <section id="email-body-alternatives" aria-labelledby="email-body-alternatives-heading" className="mt-4 rounded-md border border-border p-4">
+    <h3 id="email-body-alternatives-heading" className="m-0 text-body font-medium">Email body rendition comparison</h3>
+    <p className="mt-2 mb-0 text-small">{review.status === 'difference'
+      ? 'Some wording differs between the plain-text and HTML bodies. Ordinary email formatting and different versions of a message can produce these differences.'
+      : review.status === 'equivalent' ? 'No material difference in the text checked.'
+      : 'The email body renditions could not be compared within the supported scope.'}</p>
+    <p className="mt-2 mb-0 text-caption text-text-muted">This comparison covers text only and carries zero AI confidence weight.</p>
+    {review.differences?.map((change) => <article key={change.id} id={`email-body-alternatives-${change.id}`} className="mt-3 rounded-md border border-border p-3">
+      <h4 className="m-0 text-small font-medium">{change.id} · Wording difference</h4>
+      <div className="mt-2 grid gap-3 sm:grid-cols-2">{(['plain', 'html'] as const).map((side) => {
+        const excerpt = change[side]
+        return <div key={side}>
+          <p className="m-0 text-small font-medium">{side === 'plain' ? 'Plain-text body' : 'HTML body text'}</p>
+          {excerpt ? <><p className="mt-1 mb-0 break-words text-small">{excerpt.text}</p>
+            <details className="mt-1 text-caption text-text-muted"><summary className="cursor-pointer">MIME part {review.parts?.[side].id} · decoded character ranges</summary>
+              <p className="mb-0 break-words">{excerpt.source_ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}.{excerpt.excerpt_truncated && ' Excerpt shortened.'}</p>
+            </details></> : <p className="mt-1 mb-0 text-caption text-text-muted">No corresponding wording change recorded.</p>}
+        </div>
+      })}</div>
+    </article>)}
+    {!!review.omitted_differences && <p className="mt-2 mb-0 text-caption text-text-muted">{review.omitted_differences} further differences exceed the excerpt display limit.</p>}
+  </section>
+}
 
 function ScoredContext({ window, index }: { window: DocumentEvidenceWindow; index: number }) {
   const ratio = window.score_kind === 'perplexity_ratio'
@@ -110,6 +136,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const selectablePages = [...new Set(writingAgreement?.pdf_spans?.map((span) => span.page) ?? [])]
   const usesOcr = ocrPages.some((page) => page.status === 'extracted') || set.packets.some((packet) => packet.anchors.some((anchor) => anchor.extraction === 'ocr'))
   return <div data-testid="document-evidence-content">
+    <EmailBodyComparison review={set.coverage?.email_body_alternatives} />
     <DocumentRepeatedPassages result={set.repeated_passages} />
     <DocumentInspectionMap packets={set.packets} selectedId={selectedId} onSelect={selectPassage} />
     <DocumentPassageCoverage coverage={set.coverage?.local_passage_coverage} />

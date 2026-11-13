@@ -224,6 +224,7 @@ class Settings(BaseSettings):
     video_reference_timing_model_path: Path | None = None  # Optional pinned local landmark task for a marked earlier closure.
     document_revision_comparison_enabled: bool = False  # Authenticated development-only earlier-draft comparison.
     document_paired_boundary_review: bool = False  # Optional paired TXT check beside one preserved paragraph break.
+    document_email_alternatives_review: bool = False  # Compare two bounded body renditions of one EML.
     document_archive_comparison_enabled: bool = False  # Authenticated development-only public archive comparison.
     image_affine_copy_review: bool = False  # Development-only dense masks for same-image geometric copies.
     image_jpeg_block_copy_review: bool = False  # Development-only exact JPEG brightness-block fallback.

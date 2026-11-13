@@ -324,6 +324,7 @@ export interface DocumentEvidenceSet extends SetBase {
       occurrences: { start: number; end: number; anchor: { kind: 'text' | 'email' | 'docx' | 'pdf'; source_start?: number;
         source_end?: number; mime_part?: string; paragraph_index?: number; page?: number; block?: number; bbox?: number[] } }[] }[] }
   coverage?: { scored_windows?: number; candidate_spans?: number; unmapped_pages?: number[];
+    email_body_alternatives?: EmailBodyAlternatives;
     local_passage_coverage?: DocumentPassageCoverage;
     unselected_passage_responses?: DocumentUnselectedResponses;
     writing_second_check?: { schema: 'document-writing-second-check/1' | 'document-writing-second-check/2' | 'document-writing-second-check/3' | 'document-writing-second-check/4' | 'document-writing-second-check/5' | 'document-writing-second-check/6'; authorship_confidence_contribution: 0;
@@ -340,6 +341,13 @@ export interface DocumentEvidenceSet extends SetBase {
     ocr?: { status?: string; pages?: { page: number; status: string; coverage_scope?: 'image_region'; reason?: string | null; mean_recognition_confidence?: number;
       language?: { status?: string; language?: string; reason?: string }; [key: string]: unknown }[]; unchecked_pages?: number[] } | null
     email?: { body_part?: string; body_content_type?: 'text/plain' | 'text/html'; attachments?: unknown[]; [key: string]: unknown } | boolean | null }
+}
+export interface EmailBodyAlternatives {
+  status: 'difference' | 'equivalent' | 'unsupported'
+  parts?: Record<'plain' | 'html', { id: string }>
+  differences?: ({ id: string } & Partial<Record<'plain' | 'html', {
+    text: string; source_ranges: [number, number][]; excerpt_truncated: boolean }>>)[]
+  omitted_differences?: number
 }
 export type MultimediaEvidenceSet = VideoEvidenceSet | AudioEvidenceSet | DocumentEvidenceSet
 

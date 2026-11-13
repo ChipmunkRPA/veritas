@@ -446,6 +446,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_paragraph_priority,
         document_passage_coverage,
         document_unselected_responses,
+        email_alternatives,
     )
     from app.evidence.document_packets import (
         _inspection_anchors,
@@ -485,6 +486,10 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         if document_scope.CHECKPOINT_AGREEMENT_KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             document_scope.validate_checkpoint_agreement(document, text, result=frozen, mapping=mapping)
+        if email_alternatives.KEY in coverage:
+            frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+            recorded = email_alternatives.result_review(frozen)
+            email_alternatives.validate_set(document, canonical_hash(recorded) if recorded is not None else None)
     except (ValueError, KeyError, TypeError) as error:
         raise ObjectIntegrityError("Document review evidence differs from the recorded source extraction") from error
     for packet in document["packets"]:
@@ -1036,6 +1041,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "unselected_writing_responses": _unselected_writing_responses_view(document.get("coverage") or {}, withheld=withheld)
             if kind == "document" else None,
             "writing_agreement": _writing_agreement_view(document.get("coverage") or {}) if kind == "document" else None,
+            "email_body_alternatives": (document.get("coverage") or {}).get("email_body_alternatives") if kind == "document" else None,
             "coverage_details": ([f"{'Voice evidence' if key == 'audio' else 'Audio/video synchronization evidence'}: {channel['reason']}"
                                   for key, channel in (document.get("coverage", {}).get("channels") or {}).items()]
                                  if kind == "video" else

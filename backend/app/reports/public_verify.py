@@ -12,7 +12,13 @@ import struct
 import wave
 
 from app.core.canonical import canonical_hash
-from app.evidence import document_scope, face_boundary_binding, face_return_coverage, face_spatial_cut_binding
+from app.evidence import (
+    document_scope,
+    email_alternatives,
+    face_boundary_binding,
+    face_return_coverage,
+    face_spatial_cut_binding,
+)
 from app.evidence.face_alignment_context import validate as validate_face_alignment
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.face_interval_binding import validate_packet as validate_face_interval
@@ -77,7 +83,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              and bundle['result'].get('is_projection') is True, 'The result must identify itself as a public projection')
     _require(result.get('original_result_sha256') == analysis['original_result_sha256'], 'The result commits to a different original')
     _require(set(result) <= {'schema', 'is_projection', 'original_result_sha256', 'decision', 'findings', 'checks', 'note',
-                             IMAGE_EDITOR_PREVIEW, face_return_coverage.COMMITMENT},
+                             IMAGE_EDITOR_PREVIEW, face_return_coverage.COMMITMENT, email_alternatives.COMMITMENT},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
     binding = bundle['evidence']
@@ -204,6 +210,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                                  'Copy evidence search coverage is inconsistent')
                 else:
                     _require(cue is None and 'copy_donor' not in assets, 'Copy evidence is missing its component mask')
+    _require(analysis['kind'] == 'document' or email_alternatives.COMMITMENT not in result,
+             'Email body rendition commitments require document evidence')
     if analysis['kind'] == 'document':
         from app.evidence.document_matched_context import validate as validate_matched_context
         from app.evidence.document_paragraph_priority import validate as validate_paragraph_priority
@@ -216,6 +224,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         document_scope.validate_passage_coverage(evidence)
         document_scope.validate_checkpoint_agreement(evidence)
         validate_unselected_responses(evidence, published_checks={check.get('display_id') for check in result.get('checks', [])})
+        email_alternatives.validate_set(evidence, result.get(email_alternatives.COMMITMENT))
     if analysis['kind'] == 'document' and evidence['version'] in document_scope.CONTEXT_VERSIONS:
         from app.evidence.document_context import validate as validate_context_comparison
 

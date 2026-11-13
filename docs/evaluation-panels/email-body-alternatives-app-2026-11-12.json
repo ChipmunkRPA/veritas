@@ -1,0 +1,44 @@
+{
+  "altered_coordinate_rejected": true,
+  "altered_original_rejected": true,
+  "browser": {
+    "browser": "157.0.8103.51",
+    "external_requests": 0,
+    "page_errors": 0,
+    "paired_exact_ranges": true,
+    "passive_excerpts": true,
+    "plain_view": true
+  },
+  "cases": [
+    {
+      "enabled": false,
+      "pdf_and_json": true,
+      "sha256": "e344bb5e4e16528d2984865da3bb1740588a371b3a77986da8754dd1f27df4ce",
+      "status": null
+    },
+    {
+      "enabled": true,
+      "pdf_and_json": true,
+      "sha256": "e344bb5e4e16528d2984865da3bb1740588a371b3a77986da8754dd1f27df4ce",
+      "status": "difference"
+    },
+    {
+      "enabled": true,
+      "pdf_and_json": true,
+      "sha256": "cb7633ac50459f19cd4e9e38c691738f6bea224fb0494ddd1cc1d9686e808ae7",
+      "status": "equivalent"
+    },
+    {
+      "enabled": true,
+      "pdf_and_json": true,
+      "sha256": "a8bcc52cc23cf9c1df61f534c33b9e6cfbb635e353ce275e5136f22b9504e644",
+      "status": "unsupported"
+    }
+  ],
+  "confidence_and_primary_unchanged": true,
+  "paid_jobs": 4,
+  "schema": "chipmunk.email-alternatives-app/1",
+  "signed_original_replay": true,
+  "template": "veritas-report-2.0.r112",
+  "unpaid_jobs": 0
+}

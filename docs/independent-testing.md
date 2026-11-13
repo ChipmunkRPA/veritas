@@ -68,6 +68,10 @@ also changed relative to an earlier copy. Its scalar receipt keeps source
 images and pixel masks local. The [separate transfer](image-jpeg90-paired-corroboration-2026-11-13.md#replay)
 counts exact local overlap, ordinary processing and incompatible reference
 outcomes on 154 pairs.
+The [exact-block comparison](image-reference-same-jpeg-2026-11-13.md#replay)
+compares the proposed fallback with the complete app on that diagnostic bank
+and on 322 separately held pairs. It preserves the per-source advancement
+decision alongside the edit and control counts.
 
 ### Replay delivery and earlier-copy comparisons
 

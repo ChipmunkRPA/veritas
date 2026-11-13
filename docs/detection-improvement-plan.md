@@ -177,6 +177,11 @@ integration remains unfinished.
   The earlier-copy check located 24 of 28 generated changes and 26 of 42
   ordinary local changes. Intersecting with the learned mask lost both
   useful standalone locations. The combined candidate stays experimental.
+- The [exact JPEG90 block comparison](image-reference-same-jpeg-2026-11-13.md)
+  uses the complete app as the comparator and locates 46 of 46 held edits
+  versus 44. Both additions are from one of 23 photos. Whole-image or
+  untouched highlights stay at 21 of 115. The experimental fallback needs
+  confirmation across additional photographs.
 - The [selectable PDF archive comparison](writing-gao-archive-comparison-2026-11-13.md)
   matches indexed report wording and places verified changes on the original
   pages, with the source crop in the browser and report. A two-page transfer

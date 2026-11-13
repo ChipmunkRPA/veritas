@@ -111,7 +111,9 @@ integration remains unfinished.
   missed 144 known changes and flagged 13 of 576 ordinary deliveries. The
   [writing position check](writing-two-context-transfer-2026-11-12.md) added
   three exact locations with zero new ordinary work flags, all from one
-  generator. A second-family comparison remains necessary for broader use.
+  generator. The [historical revision confirmation](writing-position-confirmation-2026-11-12.md)
+  added one further exact location with zero new ordinary flags and missed
+  all four rewrites from the second generator in that panel.
 - The [picture-cut context check](video-spatial-cut-context-transfer-2026-11-12.md)
   explained 13 of 15 routed ordinary cutaways at their exact authored
   boundaries. It left the separately reported brief face changes intact and

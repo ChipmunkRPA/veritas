@@ -1,0 +1,2588 @@
+{
+  "attempt_outcomes": {
+    "granite:qualifying_attempt": 29,
+    "granite:rejected_format_or_magnitude": 3,
+    "tiny:qualifying_attempt": 7,
+    "tiny:rejected_format_or_magnitude": 25
+  },
+  "cases": [
+    {
+      "characters": 314,
+      "contrast": -2.4814965265671103,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "pep-590",
+      "nonspace": [
+        86,
+        74,
+        105
+      ],
+      "publisher": "python-peps",
+      "responses": [
+        {
+          "current": 0.00032401084899902344,
+          "focus_tokens": 18,
+          "head": 1.1943185082060952,
+          "input_ids_sha256": "678fe2c8bbecfdd2ffae1535062e000c3aa5b83576e1369cae88baff2396fcd4",
+          "input_sha256": "5f82366a10c46e2579b33b4bef9af8ffabfd94e72fa21fd94f18f94ffa7585f7",
+          "neighbor_tokens": 19
+        },
+        {
+          "current": 0.00028508901596069336,
+          "focus_tokens": 19,
+          "head": -1.287178018361015,
+          "input_ids_sha256": "26c9a904ccfc79a2f187d154e7e4741f5fd9b9cc44096a299f05a2b9cf684c12",
+          "input_sha256": "faa437fad6dde820c0492fcd1b900f965775c0c2bd457919611c28f2fee04b55",
+          "neighbor_tokens": 42
+        },
+        {
+          "current": 0.001836240291595459,
+          "focus_tokens": 24,
+          "head": -0.5556635640356602,
+          "input_ids_sha256": "a036d5063a3a99daf115349c93f2939926df5a05c16ae32569770726039be424",
+          "input_sha256": "ad59e51a2c120ce8440a76ae745273b9996b1ede29d9e92b65df546d1a5d7537",
+          "neighbor_tokens": 19
+        }
+      ],
+      "role": "human",
+      "sha256": "faa437fad6dde820c0492fcd1b900f965775c0c2bd457919611c28f2fee04b55",
+      "truth": null,
+      "units": [
+        [
+          0,
+          100,
+          15
+        ],
+        [
+          101,
+          188,
+          14
+        ],
+        [
+          189,
+          314,
+          21
+        ]
+      ]
+    },
+    {
+      "characters": 314,
+      "contrast": -2.5996985037427405,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "pep-590",
+      "nonspace": [
+        86,
+        73,
+        105
+      ],
+      "publisher": "python-peps",
+      "responses": [
+        {
+          "current": 0.00028020143508911133,
+          "focus_tokens": 18,
+          "head": 1.3091354439598264,
+          "input_ids_sha256": "dfa50ab924d44990321a73acdf0b841692b96902c81e7ac451a6731649aefd1a",
+          "input_sha256": "966b58cfddfbe661cf095a1ce99106939cc33f2de62ab377ad03ecc01c279bc1",
+          "neighbor_tokens": 17
+        },
+        {
+          "current": 0.0003038644790649414,
+          "focus_tokens": 17,
+          "head": -1.290563059782914,
+          "input_ids_sha256": "8c2fc3036315c7e8d898b29598ea76581fa8d9ad0c65429bf8aed385bd819f07",
+          "input_sha256": "9f75bc0f69dac2b211b8f132d9df017b623e5658dcb6e4ada3e98b7052c2d3b5",
+          "neighbor_tokens": 42
+        },
+        {
+          "current": 0.0018450617790222168,
+          "focus_tokens": 24,
+          "head": -0.2734127841527009,
+          "input_ids_sha256": "42d93e8bd96675f969cbc303e0a1cb37bef7d9ea7aa1674be55a1d97e09fdfc5",
+          "input_sha256": "8f1bc258b0aa44da1131398cb5fc092cb51c8b52252865a93124f33f21d93a81",
+          "neighbor_tokens": 17
+        }
+      ],
+      "role": "ordinary",
+      "sha256": "9f75bc0f69dac2b211b8f132d9df017b623e5658dcb6e4ada3e98b7052c2d3b5",
+      "truth": null,
+      "units": [
+        [
+          0,
+          100,
+          15
+        ],
+        [
+          101,
+          188,
+          15
+        ],
+        [
+          189,
+          314,
+          21
+        ]
+      ]
+    },
+    {
+      "characters": 363,
+      "contrast": 1.35404147218757,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "pep-590",
+      "nonspace": [
+        86,
+        121,
+        105
+      ],
+      "publisher": "python-peps",
+      "responses": [
+        {
+          "current": 0.0010465383529663086,
+          "focus_tokens": 18,
+          "head": -1.084544967972602,
+          "input_ids_sha256": "a4da9222b4d7bd517b51c644b270205e0e68aa06ce70cb9370f22a6b3c0a1e60",
+          "input_sha256": "610f726a2bdb347cc2e8ca58f4ae5c7a074e6d30323a48b83a686b767135108b",
+          "neighbor_tokens": 24
+        },
+        {
+          "current": 0.0009428858757019043,
+          "focus_tokens": 24,
+          "head": 0.26949650421496796,
+          "input_ids_sha256": "0991f6ee9dd881fbf119bb03dd53eaee14bbb291603d82e8475b312f02568296",
+          "input_sha256": "b607b6479444eacf08bd405021954a53b381359b30f80747a386acb353cd782b",
+          "neighbor_tokens": 42
+        },
+        {
+          "current": 0.018118083477020264,
+          "focus_tokens": 24,
+          "head": -1.6784003706951842,
+          "input_ids_sha256": "df0067010ef4e091d71441f41e5c0c31f5c30afada24bf06f72e33494b9d3c4d",
+          "input_sha256": "3385ffe8f13a1f3269376787e0ac3b0910b44c3fe95b6d3f802c07ca7be77675",
+          "neighbor_tokens": 24
+        }
+      ],
+      "role": "granite",
+      "seed": 914763,
+      "sha256": "b607b6479444eacf08bd405021954a53b381359b30f80747a386acb353cd782b",
+      "truth": [
+        101,
+        237
+      ],
+      "units": [
+        [
+          0,
+          100,
+          15
+        ],
+        [
+          101,
+          237,
+          16
+        ],
+        [
+          238,
+          363,
+          21
+        ]
+      ]
+    },
+    {
+      "characters": 382,
+      "contrast": -2.2975942800353604,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "pep-594",
+      "nonspace": [
+        110,
+        135,
+        78
+      ],
+      "publisher": "python-peps",
+      "responses": [
+        {
+          "current": 0.0015203356742858887,
+          "focus_tokens": 21,
+          "head": 0.5732879067661769,
+          "input_ids_sha256": "dc0774c439b0974810e5dd8301d38561797718c4d156910a5e5becf57f347bf9",
+          "input_sha256": "506dcd497e3e9820a9f49b86c01e2238fbdad793140b80123e1b369b89128960",
+          "neighbor_tokens": 31
+        },
+        {
+          "current": 0.0022284984588623047,
+          "focus_tokens": 31,
+          "head": -1.7243063732691835,
+          "input_ids_sha256": "2b45ed4b072983072ff40c069afdf7f2e1cee15c1ac3781a5be634110d7e0c75",
+          "input_sha256": "5edf7e0a649901c170992a4290d0c79812271316c2bc7d3e06a01d19ac5c8b10",
+          "neighbor_tokens": 36
+        },
+        {
+          "current": 0.0012516975402832031,
+          "focus_tokens": 15,
+          "head": 0.19650265768145517,
+          "input_ids_sha256": "b201290f2e9f07a51584e5ce0c6ed55deb8140369d61219d821ecf7d186beedf",
+          "input_sha256": "d74f7421d61029af07732dd421df4d8a66e5419504fa216db55e2464e2fc5cd5",
+          "neighbor_tokens": 31
+        }
+      ],
+      "role": "human",
+      "sha256": "5edf7e0a649901c170992a4290d0c79812271316c2bc7d3e06a01d19ac5c8b10",
+      "truth": null,
+      "units": [
+        [
+          0,
+          129,
+          20
+        ],
+        [
+          130,
+          290,
+          26
+        ],
+        [
+          291,
+          382,
+          14
+        ]
+      ]
+    },
+    {
+      "characters": 383,
+      "contrast": -1.5097832242751987,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "pep-594",
+      "nonspace": [
+        110,
+        137,
+        78
+      ],
+      "publisher": "python-peps",
+      "responses": [
+        {
+          "current": 0.016058504581451416,
+          "focus_tokens": 21,
+          "head": -0.620251855404197,
+          "input_ids_sha256": "e03119fa23a84f9358388d28956bfff1347e4523b0f1266c968ce9ee74556285",
+          "input_sha256": "051e46a94b99331e8fc04ed8ae7444acae3264cc52edf9f72c5cfa4db25ae0d4",
+          "neighbor_tokens": 35
+        },
+        {
+          "current": 0.028272569179534912,
+          "focus_tokens": 35,
+          "head": -1.2293459126345003,
+          "input_ids_sha256": "5d470c1e1ce3f33db458a2af1172b696dee58594f45d1c7ab7a3abbea41ddf7c",
+          "input_sha256": "4ab238d4137275249fee0d3b9e46845b3b265ed564cd0e620b51d0ae94afd2a2",
+          "neighbor_tokens": 36
+        },
+        {
+          "current": 0.010937392711639404,
+          "focus_tokens": 15,
+          "head": 0.28043731164069846,
+          "input_ids_sha256": "f01549eb8568dfd3b8c2b323aae06e0f05531e91fe30703854f56dc6232a2c14",
+          "input_sha256": "d164af7b166ed63ea1edb974b01ca3d43e809ae91a3d890bfc3601245201f413",
+          "neighbor_tokens": 35
+        }
+      ],
+      "role": "ordinary",
+      "sha256": "4ab238d4137275249fee0d3b9e46845b3b265ed564cd0e620b51d0ae94afd2a2",
+      "truth": null,
+      "units": [
+        [
+          0,
+          129,
+          20
+        ],
+        [
+          130,
+          291,
+          25
+        ],
+        [
+          292,
+          383,
+          14
+        ]
+      ]
+    },
+    {
+      "characters": 415,
+      "contrast": 0.3484317710108613,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "pep-594",
+      "nonspace": [
+        110,
+        165,
+        78
+      ],
+      "publisher": "python-peps",
+      "responses": [
+        {
+          "current": 0.006200015544891357,
+          "focus_tokens": 21,
+          "head": -1.1376359259341928,
+          "input_ids_sha256": "b3eb7e781b06c3114a7bdc9dfd480028aeece6675aea43f8673b2c79d47bc12a",
+          "input_sha256": "8571652f25fefb07fe305d16d33478d0d95191f753ffa04703232215d732e38f",
+          "neighbor_tokens": 41
+        },
+        {
+          "current": 0.01031506061553955,
+          "focus_tokens": 41,
+          "head": -0.7892041549233315,
+          "input_ids_sha256": "52e78a69090b7cbacb2b0da6a042d766e79a73f81ebaa115d3e58fc30b7185c0",
+          "input_sha256": "3d620d63a225ecfac9eff169a0fbf65c8fcebd898c3f0fd9950f348d08c251da",
+          "neighbor_tokens": 36
+        },
+        {
+          "current": 0.0033255815505981445,
+          "focus_tokens": 15,
+          "head": -1.673923662767643,
+          "input_ids_sha256": "6c4f48701ef2ee9a366b1f47637aa16da70a36fe82e4ecb0b1fc9fbd9d3377aa",
+          "input_sha256": "ffe87ca4cffb94e6a4a6a618eaba832b996fe28b6800a29704463dc423aeb05d",
+          "neighbor_tokens": 41
+        }
+      ],
+      "role": "granite",
+      "seed": 914767,
+      "sha256": "3d620d63a225ecfac9eff169a0fbf65c8fcebd898c3f0fd9950f348d08c251da",
+      "truth": [
+        130,
+        323
+      ],
+      "units": [
+        [
+          0,
+          129,
+          20
+        ],
+        [
+          130,
+          323,
+          29
+        ],
+        [
+          324,
+          415,
+          14
+        ]
+      ]
+    },
+    {
+      "characters": 369,
+      "contrast": -1.477241649133818,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [
+        1
+      ],
+      "current_useful": true,
+      "group": "pep-594",
+      "nonspace": [
+        110,
+        124,
+        78
+      ],
+      "publisher": "python-peps",
+      "responses": [
+        {
+          "current": 0.34417247772216797,
+          "focus_tokens": 21,
+          "head": -0.07918160754299926,
+          "input_ids_sha256": "ddadc47db024e8d848bd5bce49eae1937790164fc7669748f4919200cb67e8fd",
+          "input_sha256": "3af5566ed11fcdfb5bb37a5e022badb72924aa2c89a37104d2b72d5cd87ecdf1",
+          "neighbor_tokens": 29
+        },
+        {
+          "current": 0.5200005769729614,
+          "focus_tokens": 29,
+          "head": -1.5564232566768172,
+          "input_ids_sha256": "04bbd5ec8fa39bae6971f7364fbb7d03603e2fceb5769a876367485de6bd4093",
+          "input_sha256": "dbfece3866693b1aa89a4e0203744b1553c4bc8d51645230f770c386da2b498f",
+          "neighbor_tokens": 36
+        },
+        {
+          "current": 0.022654294967651367,
+          "focus_tokens": 15,
+          "head": -2.389393414602882,
+          "input_ids_sha256": "1b4cd85958db2f48dda254fb3ade447f7c7ebcf42c61879800a315ae7b906b3d",
+          "input_sha256": "eb42a1a28241de683a8b7df8a8d738841b616d1902bce3b26419fd1c8371a0de",
+          "neighbor_tokens": 29
+        }
+      ],
+      "role": "tiny",
+      "seed": 139554,
+      "sha256": "dbfece3866693b1aa89a4e0203744b1553c4bc8d51645230f770c386da2b498f",
+      "truth": [
+        130,
+        277
+      ],
+      "units": [
+        [
+          0,
+          129,
+          20
+        ],
+        [
+          130,
+          277,
+          24
+        ],
+        [
+          278,
+          369,
+          14
+        ]
+      ]
+    },
+    {
+      "characters": 407,
+      "contrast": -0.7464261639143617,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "pep-313",
+      "nonspace": [
+        108,
+        102,
+        134
+      ],
+      "publisher": "python-peps",
+      "responses": [
+        {
+          "current": 0.2511708736419678,
+          "focus_tokens": 26,
+          "head": -1.0143047255536173,
+          "input_ids_sha256": "d7a80ab85d5f34514f0c137babb90ab8977739186afc3778f2b93ae8f22be9c2",
+          "input_sha256": "730773830f68f7a2c1a3fd120024cf0a91be79290a79c9c83bdee07589eeb881",
+          "neighbor_tokens": 22
+        },
+        {
+          "current": 0.0634009838104248,
+          "focus_tokens": 22,
+          "head": -1.3469630930605965,
+          "input_ids_sha256": "2d4e6208b671d9274722f0e909b0ae5075e1688e504ee107271a37430034e829",
+          "input_sha256": "f195cc237d3ebd38f538135de4cc16638b94b7baa96944a4e1da6481c7be0114",
+          "neighbor_tokens": 61
+        },
+        {
+          "current": 0.0014536380767822266,
+          "focus_tokens": 35,
+          "head": -0.6005369291462348,
+          "input_ids_sha256": "13082ad50b70da0086802570586742f8ec2b8087a48e93cc3a44c2ef1f60c5ff",
+          "input_sha256": "2d7ba672c7f1e31b3220088c366883100d468a61accc909b1fc834a6bc7fe7bf",
+          "neighbor_tokens": 22
+        }
+      ],
+      "role": "human",
+      "sha256": "f195cc237d3ebd38f538135de4cc16638b94b7baa96944a4e1da6481c7be0114",
+      "truth": null,
+      "units": [
+        [
+          0,
+          130,
+          23
+        ],
+        [
+          131,
+          250,
+          18
+        ],
+        [
+          251,
+          407,
+          25
+        ]
+      ]
+    },
+    {
+      "characters": 408,
+      "contrast": -0.8588001495700782,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "pep-313",
+      "nonspace": [
+        108,
+        102,
+        134
+      ],
+      "publisher": "python-peps",
+      "responses": [
+        {
+          "current": 0.33725786209106445,
+          "focus_tokens": 26,
+          "head": -1.0450733875932514,
+          "input_ids_sha256": "85a10b1b09730833109bdfc7a0d8453dd3834115aca894868b6934caf40ab5cf",
+          "input_sha256": "86a81fbce029f3b97cf19d7d33bc7ba3abebc5243bea95739569841878e0a5e0",
+          "neighbor_tokens": 22
+        },
+        {
+          "current": 0.1178331971168518,
+          "focus_tokens": 22,
+          "head": -1.439149641493125,
+          "input_ids_sha256": "b25084be9374d5340cd929ce3422948a0ace5619dc7d01b3c6247154aa9e3567",
+          "input_sha256": "881c217e27eaa15c13fd7363ed0ed66bae4b30607f937fa6f506f574de463174",
+          "neighbor_tokens": 61
+        },
+        {
+          "current": 0.0024393796920776367,
+          "focus_tokens": 35,
+          "head": -0.5803494919230469,
+          "input_ids_sha256": "64bf48123334b6841551b96967bbd81f3983aed9b58c0989213f6dde9c8e3d66",
+          "input_sha256": "32fb931edbe9d4dc29643f09a70737c20d150f41bfc156e2bf65da85dd4c3949",
+          "neighbor_tokens": 22
+        }
+      ],
+      "role": "ordinary",
+      "sha256": "881c217e27eaa15c13fd7363ed0ed66bae4b30607f937fa6f506f574de463174",
+      "truth": null,
+      "units": [
+        [
+          0,
+          130,
+          23
+        ],
+        [
+          131,
+          251,
+          19
+        ],
+        [
+          252,
+          408,
+          25
+        ]
+      ]
+    },
+    {
+      "characters": 433,
+      "contrast": -2.374713304907534,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "pep-313",
+      "nonspace": [
+        108,
+        125,
+        134
+      ],
+      "publisher": "python-peps",
+      "responses": [
+        {
+          "current": 0.01044851541519165,
+          "focus_tokens": 26,
+          "head": -0.43421598735875416,
+          "input_ids_sha256": "3077a8dd2c6dc6d98b96dbad22f3210fc2d520d02be31d03c8fd57a873c8fb44",
+          "input_sha256": "a19e9c8f34586ea557aa76bf09e6398210cdf51dad1534b1f4f1e59fc3b92470",
+          "neighbor_tokens": 23
+        },
+        {
+          "current": 0.022447943687438965,
+          "focus_tokens": 23,
+          "head": -2.264242799034883,
+          "input_ids_sha256": "8db4e3d2edb5e147b0298001b34af57877447aa7ef195b1cf7c4b52c625c8680",
+          "input_sha256": "6be4cd6c5dbb4946a0cda9e33708f5bd3f27b64a019284b9ec0a9670ed2e42dc",
+          "neighbor_tokens": 61
+        },
+        {
+          "current": 0.016757726669311523,
+          "focus_tokens": 35,
+          "head": 0.1104705058726511,
+          "input_ids_sha256": "c756be2b312f51a5203049f96c41d69b102cdc47f36112f06bdd1fc3b646e92f",
+          "input_sha256": "aa431ecb2ace373a779474eb7e4d6ea7ecf33096a47501cabbb95d445fa077fe",
+          "neighbor_tokens": 23
+        }
+      ],
+      "role": "granite",
+      "seed": 914771,
+      "sha256": "6be4cd6c5dbb4946a0cda9e33708f5bd3f27b64a019284b9ec0a9670ed2e42dc",
+      "truth": [
+        131,
+        276
+      ],
+      "units": [
+        [
+          0,
+          130,
+          23
+        ],
+        [
+          131,
+          276,
+          21
+        ],
+        [
+          277,
+          433,
+          25
+        ]
+      ]
+    },
+    {
+      "characters": 410,
+      "contrast": -1.1479041989375909,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "pep-313",
+      "nonspace": [
+        108,
+        104,
+        134
+      ],
+      "publisher": "python-peps",
+      "responses": [
+        {
+          "current": 0.3803365230560303,
+          "focus_tokens": 26,
+          "head": -0.5520130188899048,
+          "input_ids_sha256": "454a15fca933210231d43bd35ca425834ad6a32b0a49011e4d82be8764d99fea",
+          "input_sha256": "d2a00432052b4e5a0d44a926bf6df6cfecfd0e4f9e918cbfe835a8d37b94f8c2",
+          "neighbor_tokens": 23
+        },
+        {
+          "current": 0.05895262956619263,
+          "focus_tokens": 23,
+          "head": -1.6999172178274957,
+          "input_ids_sha256": "ff8daea59eb865caff8ffa8f8a39c499ed183278fd6d2c58bb577b9f47984065",
+          "input_sha256": "0363eff0a72cca03379d5a5d360a23035a07430efbeadf892512e557dec20169",
+          "neighbor_tokens": 61
+        },
+        {
+          "current": 0.0017281770706176758,
+          "focus_tokens": 35,
+          "head": -0.6696245391767066,
+          "input_ids_sha256": "6b64bf84c4ae0b78a24af12e5501ce6b420b0d4029caa934eba2a8aacd7d850c",
+          "input_sha256": "5dbc9fc39eca820c4c906840f2c7a266e2aadbf2942a73b079591b20d4d36a49",
+          "neighbor_tokens": 23
+        }
+      ],
+      "role": "tiny",
+      "seed": 139555,
+      "sha256": "0363eff0a72cca03379d5a5d360a23035a07430efbeadf892512e557dec20169",
+      "truth": [
+        131,
+        253
+      ],
+      "units": [
+        [
+          0,
+          130,
+          23
+        ],
+        [
+          131,
+          253,
+          19
+        ],
+        [
+          254,
+          410,
+          25
+        ]
+      ]
+    },
+    {
+      "characters": 239,
+      "contrast": -2.7719295233734558,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "pep-336",
+      "nonspace": [
+        54,
+        76,
+        72
+      ],
+      "publisher": "python-peps",
+      "responses": [
+        {
+          "current": 0.012942492961883545,
+          "focus_tokens": 13,
+          "head": 1.1003622717445187,
+          "input_ids_sha256": "758b18b561031e03ff5a91763d546c857460697fed14715e1748194b183f286f",
+          "input_sha256": "b8d966e57531488d0163bfedd15b313acbf9568989943c47c0bd5aff1c1cf309",
+          "neighbor_tokens": 20
+        },
+        {
+          "current": 0.01696723699569702,
+          "focus_tokens": 20,
+          "head": -1.6715672516289368,
+          "input_ids_sha256": "f01fb641f4ef2524ccc35445309f08e54b7177379ed6e130219709cee0ae16be",
+          "input_sha256": "e55c2ba79387c04bd110434ae14b733b92beb4e2a1b78d92f68ba0c9decf5bc1",
+          "neighbor_tokens": 28
+        },
+        {
+          "current": 0.007214665412902832,
+          "focus_tokens": 15,
+          "head": -1.4578917982854542,
+          "input_ids_sha256": "34261efa64e076e1635c8bfa63179e2eb82dd3a16d80cb17a18579e55cc91e76",
+          "input_sha256": "68d4dc02b682fc3c0fd9a376a58fe015523aa122094748e3d0552f639d6be580",
+          "neighbor_tokens": 20
+        }
+      ],
+      "role": "human",
+      "sha256": "e55c2ba79387c04bd110434ae14b733b92beb4e2a1b78d92f68ba0c9decf5bc1",
+      "truth": null,
+      "units": [
+        [
+          0,
+          65,
+          12
+        ],
+        [
+          66,
+          153,
+          12
+        ],
+        [
+          154,
+          239,
+          14
+        ]
+      ]
+    },
+    {
+      "characters": 240,
+      "contrast": -3.196350632481029,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "pep-336",
+      "nonspace": [
+        54,
+        77,
+        72
+      ],
+      "publisher": "python-peps",
+      "responses": [
+        {
+          "current": 0.06236886978149414,
+          "focus_tokens": 13,
+          "head": 0.8321114661822797,
+          "input_ids_sha256": "9070327413d63cbc476f7a0ab82f53312d8714342cb19fa79cf7b11ca8fa5a23",
+          "input_sha256": "1d7e2c331722dead17ed75e15eb725beba6a38f3cf474514b6616e661ca17797",
+          "neighbor_tokens": 18
+        },
+        {
+          "current": 0.09835612773895264,
+          "focus_tokens": 18,
+          "head": -2.3642391662987494,
+          "input_ids_sha256": "f1f60a01657c1a6d6154ba9a9a28d2b4548d480d8f8b79f94c629202b1d0a186",
+          "input_sha256": "ce21010f5f207f49e60a00b018b948d84c3905998bf9a2afd2b2e4a4628b38c1",
+          "neighbor_tokens": 28
+        },
+        {
+          "current": 0.0635913610458374,
+          "focus_tokens": 15,
+          "head": -0.8898284869067865,
+          "input_ids_sha256": "cccd68bd9a1005fc5fa5fcf6dc245eaa0887e20c1fc5ca2e584e88c799325893",
+          "input_sha256": "980bfb02ccd4cbc0574af32f61d079695cea37f6c91b3ea2a08fc41d1cb8504d",
+          "neighbor_tokens": 18
+        }
+      ],
+      "role": "ordinary",
+      "sha256": "ce21010f5f207f49e60a00b018b948d84c3905998bf9a2afd2b2e4a4628b38c1",
+      "truth": null,
+      "units": [
+        [
+          0,
+          65,
+          12
+        ],
+        [
+          66,
+          154,
+          12
+        ],
+        [
+          155,
+          240,
+          14
+        ]
+      ]
+    },
+    {
+      "characters": 247,
+      "contrast": -1.858701140000307,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [
+        0
+      ],
+      "current_useful": true,
+      "group": "pep-336",
+      "nonspace": [
+        54,
+        82,
+        72
+      ],
+      "publisher": "python-peps",
+      "responses": [
+        {
+          "current": 0.7364944815635681,
+          "focus_tokens": 13,
+          "head": -0.14177553201980217,
+          "input_ids_sha256": "605bf71b6e5868331ea287a21e4aa7a66b4b46b00abdb1bc06c2cf5b630fcbf3",
+          "input_sha256": "1d2694a4d624b31eeaf955809aa7ee43e57d53900d6c7cfb189e49ba44181661",
+          "neighbor_tokens": 18
+        },
+        {
+          "current": 0.0731319785118103,
+          "focus_tokens": 18,
+          "head": -2.0004766720201093,
+          "input_ids_sha256": "eed1ddeaae848705b7c65632ae4c47589d61b1dc3f686aa12f27fa00ac1e0df6",
+          "input_sha256": "3820c1216d44b6896daf208920bac20f66f64d9a95761a3a0ebfef943c1b100f",
+          "neighbor_tokens": 28
+        },
+        {
+          "current": 0.02941352128982544,
+          "focus_tokens": 15,
+          "head": -1.6152444156562813,
+          "input_ids_sha256": "aac0c66d0a52872fa29c0253c6c13e03f6bc849476edad18dc7d66a1e14393e3",
+          "input_sha256": "18360e2bdf8b3e3ed19af58c059919999cc88ac6dc36902a411260f7e671c4d4",
+          "neighbor_tokens": 18
+        }
+      ],
+      "role": "granite",
+      "seed": 914775,
+      "sha256": "3820c1216d44b6896daf208920bac20f66f64d9a95761a3a0ebfef943c1b100f",
+      "truth": [
+        66,
+        161
+      ],
+      "units": [
+        [
+          0,
+          65,
+          12
+        ],
+        [
+          66,
+          161,
+          14
+        ],
+        [
+          162,
+          247,
+          14
+        ]
+      ]
+    },
+    {
+      "characters": 399,
+      "contrast": -1.5088085931853767,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "1aae267cb06a654c",
+      "nonspace": [
+        67,
+        165,
+        94
+      ],
+      "publisher": "peerj",
+      "responses": [
+        {
+          "current": 0.027951419353485107,
+          "focus_tokens": 16,
+          "head": -0.24652382427023486,
+          "input_ids_sha256": "a57f32f10107244b09828d0d77a9bcd4442e4fd35c0ea62ff841a642569f5170",
+          "input_sha256": "3124ed5c50b394b726d11b3e7aa99d2e119bfceb4c8d2ffd63ea1e00a18cace2",
+          "neighbor_tokens": 44
+        },
+        {
+          "current": 0.0028471946716308594,
+          "focus_tokens": 44,
+          "head": -1.7553324174556115,
+          "input_ids_sha256": "2cab63856ed525d155c9768ba8117281ec100f45bccfaf4092808619b4ed0886",
+          "input_sha256": "5a07eb432f2b47135de88f0e87bcb1d4a1a8336ee568a3cfe990ebf4843325a2",
+          "neighbor_tokens": 42
+        },
+        {
+          "current": 0.0031726956367492676,
+          "focus_tokens": 26,
+          "head": -0.6884406066589669,
+          "input_ids_sha256": "5ec39e476b885a7993429a824b844112406d8638b550944056da7bda8f5069d3",
+          "input_sha256": "5cd8a7504446fa3a62312ce56311d1256bfd2af00f5a1b9f5369da694d6b338a",
+          "neighbor_tokens": 44
+        }
+      ],
+      "role": "human",
+      "sha256": "5a07eb432f2b47135de88f0e87bcb1d4a1a8336ee568a3cfe990ebf4843325a2",
+      "truth": null,
+      "units": [
+        [
+          0,
+          80,
+          14
+        ],
+        [
+          81,
+          284,
+          39
+        ],
+        [
+          285,
+          399,
+          21
+        ]
+      ]
+    },
+    {
+      "characters": 342,
+      "contrast": -0.5022106637599213,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [
+        0
+      ],
+      "current_useful": false,
+      "group": "1aae267cb06a654c",
+      "nonspace": [
+        67,
+        120,
+        94
+      ],
+      "publisher": "peerj",
+      "responses": [
+        {
+          "current": 0.6625405550003052,
+          "focus_tokens": 16,
+          "head": -3.260587164406327,
+          "input_ids_sha256": "551459ec448a616a4c88588294c0ff4c39a245b195852ad8c8d8594f4e6b5769",
+          "input_sha256": "8cc99bcde1ce034099c408cecf5fc61b5bb456b62873990f7f058165776b91f2",
+          "neighbor_tokens": 30
+        },
+        {
+          "current": 0.010201334953308105,
+          "focus_tokens": 30,
+          "head": -1.698374204711297,
+          "input_ids_sha256": "f16b15d87ce4129283726c4b84cd6647961a69abb5d0c93d273211c2e705edd3",
+          "input_sha256": "2ab40fd25fead287ec4d8ac62481b5ab07d3e1c82ccd2582985cf5b40794949a",
+          "neighbor_tokens": 42
+        },
+        {
+          "current": 0.00484919548034668,
+          "focus_tokens": 26,
+          "head": -1.1961635409513758,
+          "input_ids_sha256": "d17d1746a2416c0003bee59ae81c61a1a0944ae9224d1da9856fc70f6ffd4a44",
+          "input_sha256": "3e2cd1f16d8f41402a8edc7ec9fbe141879092b33245a99afaa154067fe8507c",
+          "neighbor_tokens": 30
+        }
+      ],
+      "role": "ordinary",
+      "sha256": "2ab40fd25fead287ec4d8ac62481b5ab07d3e1c82ccd2582985cf5b40794949a",
+      "truth": null,
+      "units": [
+        [
+          0,
+          80,
+          14
+        ],
+        [
+          81,
+          227,
+          27
+        ],
+        [
+          228,
+          342,
+          21
+        ]
+      ]
+    },
+    {
+      "characters": 421,
+      "contrast": 1.259735748951056,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "1aae267cb06a654c",
+      "nonspace": [
+        67,
+        191,
+        94
+      ],
+      "publisher": "peerj",
+      "responses": [
+        {
+          "current": 0.2693295478820801,
+          "focus_tokens": 16,
+          "head": -2.0536208278485786,
+          "input_ids_sha256": "8f9d092c9debf557d1d07630249f1c19e6538de60632585dd3c5d35dc2e6b753",
+          "input_sha256": "9a8d99b8662853a113edf091f2626511c156c281356f392dd8183303a4fe2756",
+          "neighbor_tokens": 40
+        },
+        {
+          "current": 0.007061123847961426,
+          "focus_tokens": 40,
+          "head": -0.3792497044461741,
+          "input_ids_sha256": "605a55fd3c0040be9a21555241443aa7425ebbe57be57c9f3f624be258e73d81",
+          "input_sha256": "63c8e5fd6049f50055a8543d9850e67dad19ffe770ee3eb6833a692cce735ee9",
+          "neighbor_tokens": 42
+        },
+        {
+          "current": 0.007101297378540039,
+          "focus_tokens": 26,
+          "head": -1.63898545339723,
+          "input_ids_sha256": "dedbfb09a3913b1115163999b2273a8a58854e68ebb56af7752c69952dcb143e",
+          "input_sha256": "aa343a08857845eaf64852f2db1caf59255a2b320d1ee9b9d806dcd7af84359e",
+          "neighbor_tokens": 40
+        }
+      ],
+      "role": "granite",
+      "seed": 914779,
+      "sha256": "63c8e5fd6049f50055a8543d9850e67dad19ffe770ee3eb6833a692cce735ee9",
+      "truth": [
+        81,
+        306
+      ],
+      "units": [
+        [
+          0,
+          80,
+          14
+        ],
+        [
+          81,
+          306,
+          35
+        ],
+        [
+          307,
+          421,
+          21
+        ]
+      ]
+    },
+    {
+      "characters": 452,
+      "contrast": -2.72199897245599,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "3c9105ecc547527a",
+      "nonspace": [
+        118,
+        131,
+        137
+      ],
+      "publisher": "peerj",
+      "responses": [
+        {
+          "current": 0.0005677342414855957,
+          "focus_tokens": 30,
+          "head": 0.39069144822499485,
+          "input_ids_sha256": "3b672067fbe6ec9a65f49bc92dac2891dd50741dbc3ae8b26bdb7fab93668dbc",
+          "input_sha256": "73cf561ad57c724543a251197c81886523ca63d1722d0cc743fb490dacf25c03",
+          "neighbor_tokens": 33
+        },
+        {
+          "current": 0.0006230473518371582,
+          "focus_tokens": 33,
+          "head": -2.3313075242309953,
+          "input_ids_sha256": "87ae93b6ac90966d1265615026219fd0a0962864eeb376cae605dc4ed18bc5de",
+          "input_sha256": "746105a50aae1faa91862bb659d3fe4281774e362d1cc2d9da3d44bd0d99d4f2",
+          "neighbor_tokens": 57
+        },
+        {
+          "current": 0.0010864734649658203,
+          "focus_tokens": 27,
+          "head": -0.0503750458004885,
+          "input_ids_sha256": "34d68ba4e12a428f5938dee7f086d1f9a114a8253fe1bfc39a53e02942bab7b7",
+          "input_sha256": "87adb9d0e3e2579ceaa20ad92fe64bb27589a2be3c253c20671131835eb2d88b",
+          "neighbor_tokens": 33
+        }
+      ],
+      "role": "human",
+      "sha256": "746105a50aae1faa91862bb659d3fe4281774e362d1cc2d9da3d44bd0d99d4f2",
+      "truth": null,
+      "units": [
+        [
+          0,
+          138,
+          21
+        ],
+        [
+          139,
+          291,
+          25
+        ],
+        [
+          292,
+          452,
+          24
+        ]
+      ]
+    },
+    {
+      "characters": 464,
+      "contrast": -3.9347157309237346,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "3c9105ecc547527a",
+      "nonspace": [
+        118,
+        141,
+        137
+      ],
+      "publisher": "peerj",
+      "responses": [
+        {
+          "current": 0.0008318424224853516,
+          "focus_tokens": 30,
+          "head": 1.1476157981458095,
+          "input_ids_sha256": "1ebacbd7a5390eb216506b3f8e24fea1024415d662446972af1b4b3f152387f7",
+          "input_sha256": "b64a54ef85e1435eec371411c22fd848eca814c6dbe65f314c79e33f55621a93",
+          "neighbor_tokens": 37
+        },
+        {
+          "current": 0.0007515549659729004,
+          "focus_tokens": 37,
+          "head": -2.787099932777925,
+          "input_ids_sha256": "090e9bb558ebb2ee83c6f9441b2dc96221db52c4e27611113f52a206aba3e256",
+          "input_sha256": "ff51dc9bc5bdb4cb14f775ed8becb5e8d0df4a84fb9d8c6b69d873619c82e570",
+          "neighbor_tokens": 57
+        },
+        {
+          "current": 0.000964045524597168,
+          "focus_tokens": 27,
+          "head": 0.3073433001904752,
+          "input_ids_sha256": "c67ffb6abaf0a6e600f740bccdc20545a3c8264a8a6d5eea8963c3b5d8c6797a",
+          "input_sha256": "21f89ed27d6e13dfaf21a572ca53e04d36d4e96f48e630da8a42ff0865e8fa26",
+          "neighbor_tokens": 37
+        }
+      ],
+      "role": "ordinary",
+      "sha256": "ff51dc9bc5bdb4cb14f775ed8becb5e8d0df4a84fb9d8c6b69d873619c82e570",
+      "truth": null,
+      "units": [
+        [
+          0,
+          138,
+          21
+        ],
+        [
+          139,
+          303,
+          27
+        ],
+        [
+          304,
+          464,
+          24
+        ]
+      ]
+    },
+    {
+      "characters": 478,
+      "contrast": -2.6362406472823183,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "3c9105ecc547527a",
+      "nonspace": [
+        118,
+        153,
+        137
+      ],
+      "publisher": "peerj",
+      "responses": [
+        {
+          "current": 0.0008121132850646973,
+          "focus_tokens": 30,
+          "head": 0.012937211126972586,
+          "input_ids_sha256": "d1f20b1350460057e930685ed35ea15c5b18c00bdd90deffae4d0ca01ebb2380",
+          "input_sha256": "4a5cafba23a215d4d1297e77a825b33269142375a667e0638b1f650c64056f16",
+          "neighbor_tokens": 39
+        },
+        {
+          "current": 0.0009789466857910156,
+          "focus_tokens": 39,
+          "head": -2.567832103319811,
+          "input_ids_sha256": "923bdbd9668287a56cd0ed630f0606d0022145ef783fe64373674ae24fd7643a",
+          "input_sha256": "bd2fab047358a963eaf91935649b3e1171c9f6e0dd06475f432bd61de655c38e",
+          "neighbor_tokens": 57
+        },
+        {
+          "current": 0.0012489557266235352,
+          "focus_tokens": 27,
+          "head": 0.06840854396250716,
+          "input_ids_sha256": "f627a839c434869b05fb97f29dc6f48582f57b6c06bbf9aeaba2f928675d55c0",
+          "input_sha256": "be0bc560fd11a6099a363815bb16f1d828d6b4ad3ff7f698f8bd745eb936f725",
+          "neighbor_tokens": 39
+        }
+      ],
+      "role": "granite",
+      "seed": 914783,
+      "sha256": "bd2fab047358a963eaf91935649b3e1171c9f6e0dd06475f432bd61de655c38e",
+      "truth": [
+        139,
+        317
+      ],
+      "units": [
+        [
+          0,
+          138,
+          21
+        ],
+        [
+          139,
+          317,
+          29
+        ],
+        [
+          318,
+          478,
+          24
+        ]
+      ]
+    },
+    {
+      "characters": 374,
+      "contrast": 2.407201180429871,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "10ff4732cfdc5f0a",
+      "nonspace": [
+        90,
+        126,
+        100
+      ],
+      "publisher": "copernicus",
+      "responses": [
+        {
+          "current": 0.0018450617790222168,
+          "focus_tokens": 17,
+          "head": -1.956721387402747,
+          "input_ids_sha256": "2c2a1a967ffffc65d52a84157ad9fb1709da15c057d75bef7b535aeeeb936cfc",
+          "input_sha256": "136abef5c0f8e10e214276b7eac2adc1fd49d296f49322795dc6109a70732cd7",
+          "neighbor_tokens": 26
+        },
+        {
+          "current": 0.00023216009140014648,
+          "focus_tokens": 26,
+          "head": 0.4504797930271242,
+          "input_ids_sha256": "0aacda56a6fcb1a57d3708d2c9ffaab438f47b833402360d61969aa578ccf463",
+          "input_sha256": "34073396d7c8f3d2d04b98e9b7c19e5a63e847b76d089724f1a1b0b1036dac1a",
+          "neighbor_tokens": 42
+        },
+        {
+          "current": 0.00032651424407958984,
+          "focus_tokens": 25,
+          "head": -2.2930345380607515,
+          "input_ids_sha256": "9cec24f2c83b5cd80b8ed8dad40f5ebc3a907a515652d0b0fd89d237836ddcf0",
+          "input_sha256": "3bdb44939f4d35c53d6b6c42a7dfb50b1e7d5a7e0d32334bb3c8e58237d80fa3",
+          "neighbor_tokens": 26
+        }
+      ],
+      "role": "human",
+      "sha256": "34073396d7c8f3d2d04b98e9b7c19e5a63e847b76d089724f1a1b0b1036dac1a",
+      "truth": null,
+      "units": [
+        [
+          0,
+          105,
+          16
+        ],
+        [
+          106,
+          254,
+          23
+        ],
+        [
+          255,
+          374,
+          20
+        ]
+      ]
+    },
+    {
+      "characters": 373,
+      "contrast": 2.164216039736607,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "10ff4732cfdc5f0a",
+      "nonspace": [
+        90,
+        126,
+        100
+      ],
+      "publisher": "copernicus",
+      "responses": [
+        {
+          "current": 0.00263291597366333,
+          "focus_tokens": 17,
+          "head": -2.2644205702993427,
+          "input_ids_sha256": "b600a4b2a27799e1584b53bf9b8b60ad884ec39249d25152eeb7315f1ac521a0",
+          "input_sha256": "dc18e9ebeaa652abc5eb5c79903db86df398486b6212ebd397c239c11d939355",
+          "neighbor_tokens": 26
+        },
+        {
+          "current": 0.00024086236953735352,
+          "focus_tokens": 26,
+          "head": 0.1668297321994491,
+          "input_ids_sha256": "9f5767d281a0f0fbfbad019f026a1f4a7f71d0d08b6d1d39a650806d6ad30fad",
+          "input_sha256": "1df82db5efbcd29cecf459eda7ebc6d235663845faea54ca6c1fc4264b8cc7ea",
+          "neighbor_tokens": 42
+        },
+        {
+          "current": 0.00040775537490844727,
+          "focus_tokens": 25,
+          "head": -1.997386307537158,
+          "input_ids_sha256": "71398e5d0be6a85b37dce958111c2ca45e21ffd755b45ab69286873df11a8d0b",
+          "input_sha256": "5408e0978da5bea33f508e688d3b31a5018ad8eb9a2fc7598cf2787e0d81f4e8",
+          "neighbor_tokens": 26
+        }
+      ],
+      "role": "ordinary",
+      "sha256": "1df82db5efbcd29cecf459eda7ebc6d235663845faea54ca6c1fc4264b8cc7ea",
+      "truth": null,
+      "units": [
+        [
+          0,
+          105,
+          16
+        ],
+        [
+          106,
+          253,
+          22
+        ],
+        [
+          254,
+          373,
+          20
+        ]
+      ]
+    },
+    {
+      "characters": 385,
+      "contrast": 2.8562356421840867,
+      "contrast_selected": true,
+      "contrast_useful": true,
+      "current": [],
+      "current_useful": false,
+      "group": "10ff4732cfdc5f0a",
+      "nonspace": [
+        90,
+        138,
+        100
+      ],
+      "publisher": "copernicus",
+      "responses": [
+        {
+          "current": 0.009911835193634033,
+          "focus_tokens": 17,
+          "head": -3.16691174094552,
+          "input_ids_sha256": "cef3fb7323771f47b177ab7c27c1f500c75a62242b62d91840a7c76fa23d631c",
+          "input_sha256": "d67245b95a2716469cd4543e303ee0945d36b47954168a28373abf08faeaa463",
+          "neighbor_tokens": 24
+        },
+        {
+          "current": 0.00022178888320922852,
+          "focus_tokens": 24,
+          "head": 0.370210985092347,
+          "input_ids_sha256": "1295831c9357e870342dec90ffa86e49ddd045584a2516a99a1436ea37dafc92",
+          "input_sha256": "dd68c7318075955ba56d3821f1929be8f2af34a9aff065d7bc63c366feaf810c",
+          "neighbor_tokens": 42
+        },
+        {
+          "current": 0.0003342628479003906,
+          "focus_tokens": 25,
+          "head": -2.4860246570917397,
+          "input_ids_sha256": "07581a8957bbcce4131b725570f783e143733a400538e9b4e15b310e3bf039b5",
+          "input_sha256": "63038d499ccc73fc1a51ef3413a2ea5d0ea044cb38accae4c409523f715b8f4c",
+          "neighbor_tokens": 24
+        }
+      ],
+      "role": "granite",
+      "seed": 914787,
+      "sha256": "dd68c7318075955ba56d3821f1929be8f2af34a9aff065d7bc63c366feaf810c",
+      "truth": [
+        106,
+        265
+      ],
+      "units": [
+        [
+          0,
+          105,
+          16
+        ],
+        [
+          106,
+          265,
+          22
+        ],
+        [
+          266,
+          385,
+          20
+        ]
+      ]
+    },
+    {
+      "characters": 380,
+      "contrast": 1.362531388279038,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "10ff4732cfdc5f0a",
+      "nonspace": [
+        90,
+        134,
+        100
+      ],
+      "publisher": "copernicus",
+      "responses": [
+        {
+          "current": 0.01368558406829834,
+          "focus_tokens": 17,
+          "head": -1.9493769186584453,
+          "input_ids_sha256": "f2e9142d98da94c24c15c48ed2b614b070857c89f50b92cc0c5135675b2d9adf",
+          "input_sha256": "ce53a404745f45deb5dd8405f43dd3f00c5739604ef213792c448ca72fbc335b",
+          "neighbor_tokens": 43
+        },
+        {
+          "current": 0.00041371583938598633,
+          "focus_tokens": 43,
+          "head": -0.4148472050027377,
+          "input_ids_sha256": "5e42546bbe1ea8e8ed97280c959f9d2f730eb54c650396809cd7f3d3d7b9dd17",
+          "input_sha256": "1d20bfc6c2658265b0e4b10aa5ceb08e43b84de512955d7f53adf2d230a8e492",
+          "neighbor_tokens": 42
+        },
+        {
+          "current": 0.0005893707275390625,
+          "focus_tokens": 25,
+          "head": -1.7773785932817756,
+          "input_ids_sha256": "2e8ad7453ee0c4fa47e64d603fce2c33d4fe07d4c18451cd71bb305053ee3e7b",
+          "input_sha256": "2d2cd6665036f705c851b1f87318896402714ad012e2b87b1973f02d71bba8be",
+          "neighbor_tokens": 43
+        }
+      ],
+      "role": "tiny",
+      "seed": 139571,
+      "sha256": "1d20bfc6c2658265b0e4b10aa5ceb08e43b84de512955d7f53adf2d230a8e492",
+      "truth": [
+        106,
+        260
+      ],
+      "units": [
+        [
+          0,
+          105,
+          16
+        ],
+        [
+          106,
+          260,
+          21
+        ],
+        [
+          261,
+          380,
+          20
+        ]
+      ]
+    },
+    {
+      "characters": 444,
+      "contrast": 0.011316497666582381,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "2abbfa891470cc2d",
+      "nonspace": [
+        131,
+        112,
+        131
+      ],
+      "publisher": "copernicus",
+      "responses": [
+        {
+          "current": 0.00042945146560668945,
+          "focus_tokens": 26,
+          "head": -1.5121480889238645,
+          "input_ids_sha256": "ed4eb4002d3aa70355036395f73aeca2320db1b9baecdac05d72522138459531",
+          "input_sha256": "ce39e9bf463d844395ab292eb36daa815dbdad747ed2d79322c2112a795d34d8",
+          "neighbor_tokens": 27
+        },
+        {
+          "current": 0.00026530027389526367,
+          "focus_tokens": 27,
+          "head": -0.761158418744929,
+          "input_ids_sha256": "52b854023e9658894c0123d3cfa74175cdc21c27bec3e29ecefcdef00e32fc72",
+          "input_sha256": "4b5c9b4b071cbbca631b25fe28a614eb2f909405df00888c03c02b8ec0fcd8da",
+          "neighbor_tokens": 56
+        },
+        {
+          "current": 0.0004935264587402344,
+          "focus_tokens": 30,
+          "head": -0.7724749164115113,
+          "input_ids_sha256": "7b5e48a85707e47491b87bb4666f3da76b44afbe0bd7bfacbfab7a7c45c21e81",
+          "input_sha256": "384e666dbaa89435eee7aaf00d8d116c3bb7413f59b548183d9251d4fec03d44",
+          "neighbor_tokens": 27
+        }
+      ],
+      "role": "human",
+      "sha256": "4b5c9b4b071cbbca631b25fe28a614eb2f909405df00888c03c02b8ec0fcd8da",
+      "truth": null,
+      "units": [
+        [
+          0,
+          154,
+          24
+        ],
+        [
+          155,
+          290,
+          24
+        ],
+        [
+          291,
+          444,
+          24
+        ]
+      ]
+    },
+    {
+      "characters": 485,
+      "contrast": -0.5846999225550682,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "2abbfa891470cc2d",
+      "nonspace": [
+        131,
+        148,
+        131
+      ],
+      "publisher": "copernicus",
+      "responses": [
+        {
+          "current": 0.0008930563926696777,
+          "focus_tokens": 26,
+          "head": -1.691846619114723,
+          "input_ids_sha256": "20385506f40589ca036523cdb48a05b27c8974329380fd4a35180abc95819f46",
+          "input_sha256": "5329b5aa3317873fdd976ad0b10fd7e9f8f10685579dfc92b56e85b2c489b747",
+          "neighbor_tokens": 33
+        },
+        {
+          "current": 0.0002751946449279785,
+          "focus_tokens": 33,
+          "head": -1.1437482116659026,
+          "input_ids_sha256": "9f32bb42c083ab7076ffbbb8b26550d329f5a2f00c63e05decef1239c1bc0324",
+          "input_sha256": "b148374d630ff20c91fccb4f54c5c66492c23cdbd7a649fd687918edc8d2ebc7",
+          "neighbor_tokens": 56
+        },
+        {
+          "current": 0.0004863739013671875,
+          "focus_tokens": 30,
+          "head": -0.5590482891108344,
+          "input_ids_sha256": "9618d0c4261b41dcd3daeb0dabb4903e94f48d4f0ea469d486887c59f1b8721b",
+          "input_sha256": "44d4d1dffe96066da8e34ee4918bdd7974b1b773ed355798924f62345a6302d6",
+          "neighbor_tokens": 33
+        }
+      ],
+      "role": "ordinary",
+      "sha256": "b148374d630ff20c91fccb4f54c5c66492c23cdbd7a649fd687918edc8d2ebc7",
+      "truth": null,
+      "units": [
+        [
+          0,
+          154,
+          24
+        ],
+        [
+          155,
+          331,
+          29
+        ],
+        [
+          332,
+          485,
+          24
+        ]
+      ]
+    },
+    {
+      "characters": 426,
+      "contrast": 1.23916849593454,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "2abbfa891470cc2d",
+      "nonspace": [
+        131,
+        100,
+        131
+      ],
+      "publisher": "copernicus",
+      "responses": [
+        {
+          "current": 0.0006742477416992188,
+          "focus_tokens": 26,
+          "head": -1.1047751486042299,
+          "input_ids_sha256": "a09b79a3439ff84e6dfb60817b021bc599477b8743bcb37c0d3ffbcc0f4e09d1",
+          "input_sha256": "6dd14af05e4b2f5e8813b411b5c6c12a7e39c47a29541007c8a412c8d6970ded",
+          "neighbor_tokens": 22
+        },
+        {
+          "current": 0.00027126073837280273,
+          "focus_tokens": 22,
+          "head": 0.13439334733031003,
+          "input_ids_sha256": "f80792f695b22177e910455f8cce1c0782ac471bf1b64d2202e7ec705d16ee43",
+          "input_sha256": "b90b5e97f1c4c79035ccf660b47e8b64a64827fd1d9d6edb94535fb3023d02fe",
+          "neighbor_tokens": 56
+        },
+        {
+          "current": 0.0008688569068908691,
+          "focus_tokens": 30,
+          "head": -1.8172193958594103,
+          "input_ids_sha256": "b5f1fd1a0fc27c59340bda3913a79b4394cf1739fe57b0a4004c6aeef39ff635",
+          "input_sha256": "a32a5751102c1528769a8c4ababe47d633d6c6fc02e19d786c98608a17f31e6c",
+          "neighbor_tokens": 22
+        }
+      ],
+      "role": "granite",
+      "seed": 914791,
+      "sha256": "b90b5e97f1c4c79035ccf660b47e8b64a64827fd1d9d6edb94535fb3023d02fe",
+      "truth": [
+        155,
+        272
+      ],
+      "units": [
+        [
+          0,
+          154,
+          24
+        ],
+        [
+          155,
+          272,
+          18
+        ],
+        [
+          273,
+          426,
+          24
+        ]
+      ]
+    },
+    {
+      "characters": 462,
+      "contrast": 0.0880061098377164,
+      "contrast_selected": false,
+      "contrast_useful": false,
+      "current": [],
+      "current_useful": false,
+      "group": "2abbfa891470cc2d",
+      "nonspace": [
+        131,
+        126,
+        131
+      ],
+      "publisher": "copernicus",
+      "responses": [
+        {
+          "current": 0.0013079047203063965,
+          "focus_tokens": 26,
+          "head": -2.713110383091263,
+          "input_ids_sha256": "12319bea727d1a841263810dedaba9430bee58aecaf637ad5a1977180de7a923",
+          "input_sha256": "87fa6faaed45dedd14131ac3aed4880b0b7d638a94fc5994b9430e199c8fe783",
+          "neighbor_tokens": 31
+        },
+        {
+          "current": 0.0002651810646057129,
+          "focus_tokens": 31,
+          "head": -0.6773288491816601,
+          "input_ids_sha256": "946563c8b94036aa95c651ff4dad02f69a4854591a452d66145e63f31555df51",
+          "input_sha256": "7c3054a3eda31ba3154072eca1f942e0734a5260590eb09afcede4edb8f26db6",
+          "neighbor_tokens": 56
+        },
+        {
+          "current": 0.0007246136665344238,
+          "focus_tokens": 30,
+          "head": -0.7653349590193765,
+          "input_ids_sha256": "767a358c1954751d9bbe29b24448f339472337af201375cd9224eea9e0eafb57",
+          "input_sha256": "e3dcab25f7801299a8ac8be8e53ff4c721345dfedce56037515f5c0c2bf6bc67",
+          "neighbor_tokens": 31
+        }
+      ],
+      "role": "tiny",
+      "seed": 139575,
+      "sha256": "7c3054a3eda31ba3154072eca1f942e0734a5260590eb09afcede4edb8f26db6",
+      "truth": [
+        155,
+        308
+      ],
+      "units": [
+        [
+          0,
+          154,
+          24
+        ],
+        [
+          155,
+          308,
+          28
+        ],
+        [
+          309,
+          462,
+          24
+        ]
+      ]
+    }
+  ],
+  "checkpoint_files": [
+    {
+      "file": "NOTICE",
+      "sha256": "4fe6835a2928bcfd7467888a9422d805dfa2fe6364437c1af01cf1945c3edd57"
+    },
+    {
+      "file": "config.json",
+      "sha256": "deac399da91c0cc96f5570fa5eae7cb716e32f6feb00860ce3e42c84f86c01a3"
+    },
+    {
+      "file": "model.safetensors",
+      "sha256": "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087"
+    },
+    {
+      "file": "serving_head.json",
+      "sha256": "098ce573e07d8d99221d9eac41f7acae7b324071490a06023f837efe43df4cab"
+    },
+    {
+      "file": "tokenizer.json",
+      "sha256": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf"
+    },
+    {
+      "file": "tokenizer_config.json",
+      "sha256": "d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432"
+    }
+  ],
+  "commitments": {
+    "confirm.py": "e6f50e34891b7463f7eab2b07f850f8ef11e2ffa8e7d1cd1f788784eaa9be5d0",
+    "freeze.json": "8ce02fef31c7616f4e5a983cbe16030d5b1a324e207fb964488ca3a55179a528",
+    "generate.py": "58847b7dd0fae56c6e24c0a2943de1feb1751968e5ca19193fe57f1f6aab37aa",
+    "generation-freeze.json": "92e68dfe8364549c45e843093ed6d6a378b0eee768dbfa1a66e981f05a864e04",
+    "journal-sources.json": "a9a7a0670a10f6621ee981a612a586679d122f8deea6e21390272ef15abfe416",
+    "native.json": "d115f197c540897b504086b4afd97994c8706fc2b7aef35fbf690e80abbc2857",
+    "panel.json": "f79a6fb6d14b644f16915d7e2f466e04c0ff94fb4220982289ce24f55d80091a",
+    "plan.json": "ccff65e718490a7c8ac53f2d7b775c787433f0bf1579c2c1decfc955aca69f36",
+    "publisher.py": "c150403535d37b64be00b94a710e032b725d009353e95b07d7a2314625fa4bc5",
+    "source.py": "9d576f0ba4f1efe7ab6d8b79e27f767266e54343c027f9eeac1ba94bdcfa5832",
+    "sources.json": "800b52bac669e1e14363594a4d35ac674d2c7effe31c73973b762da59aed4ddb"
+  },
+  "generator_admission": {
+    "granite": 8,
+    "human": 8,
+    "ordinary": 8,
+    "tiny": 4
+  },
+  "generator_runtime": {
+    "huggingface_hub": "1.28.0",
+    "mlx": "0.32.4",
+    "mlx-lm": "0.31.3",
+    "tokenizers": "0.22.2",
+    "transformers": "5.15.1"
+  },
+  "generator_settings": {
+    "attempts": 4,
+    "max_tokens": 96,
+    "prompt": "Paraphrase the sentence below in natural English, keeping its meaning and technical terminology. Use different wording. Return one complete sentence, no other text.\n\n{sentence}",
+    "temperature": 0.65,
+    "top_p": 0.9
+  },
+  "generators": {
+    "granite": {
+      "checkpoint_files": [
+        {
+          "file": "README.md",
+          "sha256": "9e4fa0f08ae1b0675d6372ea1a226798b46e0b4e14fd09797ec287d618fe68db"
+        },
+        {
+          "file": "added_tokens.json",
+          "sha256": "bb33d55934aa82d29cc62f3d19cdbc60f315763f6ccee21bdfd8b3bde2f33d3b"
+        },
+        {
+          "file": "config.json",
+          "sha256": "ff28d67485d1a40022f0eb0c19b983c2680e90c25b690032e59e645f604f67d1"
+        },
+        {
+          "file": "merges.txt",
+          "sha256": "303127a244b0078878156c17229f36d11b7a3a3f8e47b7cfdbb304ff46be5030"
+        },
+        {
+          "file": "model.safetensors",
+          "sha256": "f37ff14b14f2db07b4fc476e57e619b038b264fcc9f0681bc13274772698ac93"
+        },
+        {
+          "file": "model.safetensors.index.json",
+          "sha256": "3fe2357794653e58654f56c0378e78e2a34bd6c9eac6b37563bc7896ccb54906"
+        },
+        {
+          "file": "special_tokens_map.json",
+          "sha256": "21ce694081bb9ae1bd4bc64549e72e0799ebb74705e6b650e3585d85b71ebdc1"
+        },
+        {
+          "file": "tokenizer.json",
+          "sha256": "91168e938f05796aa6dcca7e485e4b30ab52785320c7a6391ecef86e6c84681e"
+        },
+        {
+          "file": "tokenizer_config.json",
+          "sha256": "042af89a5a0e0a183ebd104a875b1bf4435a091b19f2b62aaa58af1c5ea97600"
+        },
+        {
+          "file": "vocab.json",
+          "sha256": "80ab859339a2525fdfbda14bc39df02dffb824aefdaf86426217bbb146d17e01"
+        }
+      ],
+      "license": "Apache-2.0",
+      "quantized": "mlx-community/granite-3.3-2b-instruct-4bit",
+      "revision": "58246c5498495c14599525c852cfadb66c9f3084",
+      "upstream": "ibm-granite/granite-3.3-2b-instruct",
+      "upstream_revision": "707f574c62054322f6b5b04b6d075f0a8f05e0f0"
+    },
+    "tiny": {
+      "checkpoint_files": [
+        {
+          "file": "README.md",
+          "sha256": "e60b860e1802ed509ad287bb727012fddf79a02bab45d72cb8ef6150665a7145"
+        },
+        {
+          "file": "config.json",
+          "sha256": "cedb0e772aa0d6dcdb4bf3fcd6f2814ef3b103a12e6586ea553aeb812b3b2be2"
+        },
+        {
+          "file": "special_tokens_map.json",
+          "sha256": "82d96d7a9e6ced037f12394b7ea6a5b02e6ca87e0d11edaa8d60d9be857ce7db"
+        },
+        {
+          "file": "tokenizer.json",
+          "sha256": "bcd04f0eadf90287bd26e1a183ac487d8a141b09b06aecb7725bbdd343640f2e"
+        },
+        {
+          "file": "tokenizer_config.json",
+          "sha256": "5030b57187ef621d5e9f63cdd2e3531a9004f579326c0df62bc15ca9107582c3"
+        },
+        {
+          "file": "weights.00.safetensors",
+          "sha256": "5e84abc79956b48bb6e4a6c319bb6313aa6c0cbab34288e9f50d063854c486a6"
+        }
+      ],
+      "license": "Apache-2.0",
+      "quantized": "mlx-community/TinyLlama-1.1B-Chat-v1.0-4bit",
+      "revision": "01a708812690b4685ab18e3b0a27848f92c50746",
+      "upstream": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+      "upstream_revision": "fe8a4ea1ffedaf415f4da2f062534de366a451e6"
+    }
+  },
+  "minimum_admitted_per_family": 8,
+  "native": {
+    "forwards": 14,
+    "inputs": 84,
+    "max_logit_error": 5.7220458984375e-06,
+    "publisher_versions_reconstructed": 16
+  },
+  "point": 2.7579683180027486,
+  "prior_fit_sha256": "62d220720d88713e5a765e6a4cd5d499e0ac494f0f8f896a65cc038a70ade450",
+  "prior_receipt_sha256": "c9c38c3c5535980749d98d5ced85505a71c4598f24f76b4a0bdd987931489527",
+  "prior_source_intake": {
+    "journal-sources.json": {
+      "copernicus:admitted": 2,
+      "copernicus:no_exact_candidate": 37,
+      "copernicus:previous_group": 1,
+      "copernicus:source_metadata": 8,
+      "peerj:admitted": 2,
+      "peerj:no_exact_candidate": 39,
+      "peerj:previous_group": 1,
+      "peerj:source_metadata": 6
+    },
+    "sources.json": {
+      "admitted": 4,
+      "no_qualified_revision": 184,
+      "prior_work": 12,
+      "version_unavailable": 187
+    }
+  },
+  "schema": "chipmunk.writing-position-confirmation/1",
+  "sources": [
+    {
+      "attribution": [
+        "mark shannon"
+      ],
+      "group": "pep-590",
+      "locations": {
+        "earlier": {
+          "native": [
+            {
+              "block": [
+                4753,
+                5068
+              ],
+              "block_sha256": "11f4fab04a085526be2a5514b975242e8c5bcaa236691d5ae7ce5b4450a19f6e",
+              "normalized_span": [
+                0,
+                100
+              ]
+            },
+            {
+              "block": [
+                4753,
+                5068
+              ],
+              "block_sha256": "11f4fab04a085526be2a5514b975242e8c5bcaa236691d5ae7ce5b4450a19f6e",
+              "normalized_span": [
+                101,
+                188
+              ]
+            },
+            {
+              "block": [
+                4753,
+                5068
+              ],
+              "block_sha256": "11f4fab04a085526be2a5514b975242e8c5bcaa236691d5ae7ce5b4450a19f6e",
+              "normalized_span": [
+                189,
+                314
+              ]
+            }
+          ],
+          "target": [
+            101,
+            188
+          ]
+        },
+        "ordinary": {
+          "native": [
+            {
+              "block": [
+                4781,
+                5096
+              ],
+              "block_sha256": "1cad7f92e8d6e0608238caa29217ea7fb9993c1f95c62077338d2300de1ea779",
+              "normalized_span": [
+                0,
+                100
+              ]
+            },
+            {
+              "block": [
+                4781,
+                5096
+              ],
+              "block_sha256": "1cad7f92e8d6e0608238caa29217ea7fb9993c1f95c62077338d2300de1ea779",
+              "normalized_span": [
+                101,
+                188
+              ]
+            },
+            {
+              "block": [
+                4781,
+                5096
+              ],
+              "block_sha256": "1cad7f92e8d6e0608238caa29217ea7fb9993c1f95c62077338d2300de1ea779",
+              "normalized_span": [
+                189,
+                314
+              ]
+            }
+          ],
+          "target": [
+            101,
+            188
+          ]
+        }
+      },
+      "publisher": "python-peps",
+      "source": {
+        "after": "92f4dbdbf1f5d76fe839046452628f4daad20b38",
+        "after_authored": 1554636858,
+        "after_blob_sha256": "7acd07e654b7dc058f44ca8038053d7694966d2a7d90152f43d4acec2c4aedba",
+        "after_committed": 1554636858,
+        "after_prose_sha256": "f73ed6c6f03d76c0322fad919c2de61b46a7ea834cf460fa5ad21b6707bc08b6",
+        "before": "ad9c99dd8da9ddd810fb4bb1c2035b758a118d6f",
+        "before_blob_sha256": "36eae4902f9be7140c096afefeaaa53d3ca09947c4b6e91a03c18f84d38b929c",
+        "before_committed": 1554623154,
+        "before_prose_sha256": "7472fb217cf7f744b6207ac93ddae6a763883920453830e698ff9a9ffdd7ed87",
+        "editor": "jeroen demeyer",
+        "path": "pep-0590.rst"
+      },
+      "terms": "Public domain or CC0 stated in both exact Git blobs"
+    },
+    {
+      "attribution": [
+        "christian heimes"
+      ],
+      "group": "pep-594",
+      "locations": {
+        "earlier": {
+          "native": [
+            {
+              "block": [
+                3440,
+                3822
+              ],
+              "block_sha256": "c0d970d376b5d6adb47911e4eaa18a21d503e6c2f609d2eb9795348ad828f52e",
+              "normalized_span": [
+                0,
+                129
+              ]
+            },
+            {
+              "block": [
+                3440,
+                3822
+              ],
+              "block_sha256": "c0d970d376b5d6adb47911e4eaa18a21d503e6c2f609d2eb9795348ad828f52e",
+              "normalized_span": [
+                130,
+                290
+              ]
+            },
+            {
+              "block": [
+                3440,
+                3822
+              ],
+              "block_sha256": "c0d970d376b5d6adb47911e4eaa18a21d503e6c2f609d2eb9795348ad828f52e",
+              "normalized_span": [
+                291,
+                382
+              ]
+            }
+          ],
+          "target": [
+            130,
+            290
+          ]
+        },
+        "ordinary": {
+          "native": [
+            {
+              "block": [
+                3438,
+                3821
+              ],
+              "block_sha256": "3ac3b9cafe0268a585a96c2414d8b4625bf5eeaf3b480a1e4273040e5434bb1c",
+              "normalized_span": [
+                0,
+                129
+              ]
+            },
+            {
+              "block": [
+                3438,
+                3821
+              ],
+              "block_sha256": "3ac3b9cafe0268a585a96c2414d8b4625bf5eeaf3b480a1e4273040e5434bb1c",
+              "normalized_span": [
+                130,
+                291
+              ]
+            },
+            {
+              "block": [
+                3438,
+                3821
+              ],
+              "block_sha256": "3ac3b9cafe0268a585a96c2414d8b4625bf5eeaf3b480a1e4273040e5434bb1c",
+              "normalized_span": [
+                292,
+                383
+              ]
+            }
+          ],
+          "target": [
+            130,
+            291
+          ]
+        }
+      },
+      "publisher": "python-peps",
+      "source": {
+        "after": "5a3ff934c5841d5b62780f1834f812ea118f00b2",
+        "after_authored": 1559557794,
+        "after_blob_sha256": "af516de9e19c8f11022075d85406f3e4e7e785caa7cf69d0aa8da47657b969ff",
+        "after_committed": 1559557794,
+        "after_prose_sha256": "6ecde910e069a3ba41ab736733a263643b5b9ab9fa3684ed9634a3f962bb83ad",
+        "before": "66f4c95d8e8128a439005bd55f15b28600d70cd9",
+        "before_blob_sha256": "f39772dc2a6f552d7260e68dcc54555ceff2c153ee50d2cfc6362adf22ee1399",
+        "before_committed": 1559518759,
+        "before_prose_sha256": "fb2f97f03d17467addbc58e2259b9074d5239cb0b54a993794a8d6ff911418af",
+        "editor": "hugo",
+        "path": "pep-0594.rst"
+      },
+      "terms": "Public domain or CC0 stated in both exact Git blobs"
+    },
+    {
+      "attribution": [
+        "mike meyer"
+      ],
+      "group": "pep-313",
+      "locations": {
+        "earlier": {
+          "native": [
+            {
+              "block": [
+                1094,
+                1580
+              ],
+              "block_sha256": "ad5552bba9988bf6df6f54644664e4917f347bf71e2b5656cb5a66cf3a8b6b78",
+              "normalized_span": [
+                0,
+                130
+              ]
+            },
+            {
+              "block": [
+                1094,
+                1580
+              ],
+              "block_sha256": "ad5552bba9988bf6df6f54644664e4917f347bf71e2b5656cb5a66cf3a8b6b78",
+              "normalized_span": [
+                131,
+                250
+              ]
+            },
+            {
+              "block": [
+                1094,
+                1580
+              ],
+              "block_sha256": "ad5552bba9988bf6df6f54644664e4917f347bf71e2b5656cb5a66cf3a8b6b78",
+              "normalized_span": [
+                251,
+                407
+              ]
+            }
+          ],
+          "target": [
+            131,
+            250
+          ]
+        },
+        "ordinary": {
+          "native": [
+            {
+              "block": [
+                1094,
+                1581
+              ],
+              "block_sha256": "72df7c04da0475e880599681995069d0054bb466f0a553b5cd7f9f1a60e878ce",
+              "normalized_span": [
+                0,
+                130
+              ]
+            },
+            {
+              "block": [
+                1094,
+                1581
+              ],
+              "block_sha256": "72df7c04da0475e880599681995069d0054bb466f0a553b5cd7f9f1a60e878ce",
+              "normalized_span": [
+                131,
+                251
+              ]
+            },
+            {
+              "block": [
+                1094,
+                1581
+              ],
+              "block_sha256": "72df7c04da0475e880599681995069d0054bb466f0a553b5cd7f9f1a60e878ce",
+              "normalized_span": [
+                252,
+                408
+              ]
+            }
+          ],
+          "target": [
+            131,
+            251
+          ]
+        }
+      },
+      "publisher": "python-peps",
+      "source": {
+        "after": "04a6af2ab1b19a56db74d5ae85a96656cc04bfa6",
+        "after_authored": 1468250048,
+        "after_blob_sha256": "a7623bfab303dad2769eb648e5dffda6d833ef84c1573bc408b43c7d52177b09",
+        "after_committed": 1468251335,
+        "after_prose_sha256": "e198aff004daca30df0f9dd29bdd1fecb5a305c273e65f812ec5417511c3eb0a",
+        "before": "99722904ba6c64f4783999d7eed8469a38db38eb",
+        "before_blob_sha256": "6e85076bf689e2b30d6e8ea56ce3860ba7439e3cb7d92bc0c78b1ebfe9caaa76",
+        "before_committed": 1468034655,
+        "before_prose_sha256": "21ad87769346925e1660c43fb45943cf42ffdb4cfc21877816ecbaa22444eb77",
+        "editor": "marti raudsepp",
+        "path": "pep-0313.txt"
+      },
+      "terms": "Public domain or CC0 stated in both exact Git blobs"
+    },
+    {
+      "attribution": [
+        "andrew mcclelland"
+      ],
+      "group": "pep-336",
+      "locations": {
+        "earlier": {
+          "native": [
+            {
+              "block": [
+                398,
+                705
+              ],
+              "block_sha256": "54ff15f5d0409dae79b0230f67fb1e07ee98753790f6537b441142e68e1204c9",
+              "normalized_span": [
+                22,
+                87
+              ]
+            },
+            {
+              "block": [
+                398,
+                705
+              ],
+              "block_sha256": "54ff15f5d0409dae79b0230f67fb1e07ee98753790f6537b441142e68e1204c9",
+              "normalized_span": [
+                88,
+                175
+              ]
+            },
+            {
+              "block": [
+                398,
+                705
+              ],
+              "block_sha256": "54ff15f5d0409dae79b0230f67fb1e07ee98753790f6537b441142e68e1204c9",
+              "normalized_span": [
+                176,
+                261
+              ]
+            }
+          ],
+          "target": [
+            66,
+            153
+          ]
+        },
+        "ordinary": {
+          "native": [
+            {
+              "block": [
+                398,
+                706
+              ],
+              "block_sha256": "fd72bb717abf2e45c998ca818550372ee98860c441fce4db7e2be8adfb48aed6",
+              "normalized_span": [
+                22,
+                87
+              ]
+            },
+            {
+              "block": [
+                398,
+                706
+              ],
+              "block_sha256": "fd72bb717abf2e45c998ca818550372ee98860c441fce4db7e2be8adfb48aed6",
+              "normalized_span": [
+                88,
+                176
+              ]
+            },
+            {
+              "block": [
+                398,
+                706
+              ],
+              "block_sha256": "fd72bb717abf2e45c998ca818550372ee98860c441fce4db7e2be8adfb48aed6",
+              "normalized_span": [
+                177,
+                262
+              ]
+            }
+          ],
+          "target": [
+            66,
+            154
+          ]
+        }
+      },
+      "publisher": "python-peps",
+      "source": {
+        "after": "cfb7bd74dba6357a73be1f1e0614a1a3cc6b69cb",
+        "after_authored": 1562178045,
+        "after_blob_sha256": "696a862acafc230ae41d6ea1671b920c877c92c4c66006c380d44fcdb4c428e5",
+        "after_committed": 1562178045,
+        "after_prose_sha256": "00dd6293bd13eba90bbf0e82c58bfb2da34eb5cc41dea128b6338aa4f99bbe1c",
+        "before": "5f39f0648469d20851bc52bb3aea5c0c991beb9f",
+        "before_blob_sha256": "947352cc21e397183cfd875eeb43c3aa16f6baee51780634b2fcfa38d662b7f1",
+        "before_committed": 1562113454,
+        "before_prose_sha256": "f40d8e290d7a2cbdd9a8806619ff8e1f86f598877ed6593aa682fd1d01fb3e34",
+        "editor": "min ho kim",
+        "path": "pep-0336.txt"
+      },
+      "terms": "Public domain or CC0 stated in both exact Git blobs"
+    },
+    {
+      "authors": [
+        "david hendy"
+      ],
+      "doi": [
+        "10.7287/peerj.preprints.2336v1",
+        "10.7287/peerj.preprints.2336v2"
+      ],
+      "group": "1aae267cb06a654c",
+      "locations": {
+        "earlier": {
+          "excerpt_range": [
+            101,
+            500
+          ],
+          "paragraph": 4,
+          "paragraph_sha256": "30b8be75abd067de33af15320e29a71573bbe8603de23446583aa6d3a607fb1d",
+          "target": [
+            81,
+            284
+          ]
+        },
+        "ordinary": {
+          "excerpt_range": [
+            314,
+            656
+          ],
+          "paragraph": 5,
+          "paragraph_sha256": "401877b576bacf4bce6020ccc2b87ee3a9b2e62bd130c7ac8a10b6c23682aabb",
+          "target": [
+            81,
+            227
+          ]
+        }
+      },
+      "publisher": "peerj",
+      "source": {
+        "catalog_sha256": "11a55c02f359d7baeff98089d21158f17053a6a6721276a5483de30001e1a3ca",
+        "linked_record_sha256": "7709e420e429ba6f75c1dfc516a8d7b1fb0b20ebaccf63333ae29c0295c39568",
+        "published": [
+          "2016-08-04",
+          "2016-08-15"
+        ]
+      },
+      "terms": [
+        [
+          "http://creativecommons.org/licenses/by/4.0"
+        ],
+        [
+          "http://creativecommons.org/licenses/by/4.0"
+        ]
+      ]
+    },
+    {
+      "authors": [
+        "patricia müller-moulé",
+        "kazunari nozue",
+        "melissa l pytlak",
+        "christine m palmer",
+        "michael f covington",
+        "andreah d wallace",
+        "stacey l harmer",
+        "julin n maloof"
+      ],
+      "doi": [
+        "10.7287/peerj.preprints.2211v1",
+        "10.7287/peerj.preprints.2211v2"
+      ],
+      "group": "3c9105ecc547527a",
+      "locations": {
+        "earlier": {
+          "excerpt_range": [
+            443,
+            895
+          ],
+          "paragraph": 0,
+          "paragraph_sha256": "35413f87f168fa1c7a154fe6e93b2db26b74868fa12ef0810401ca4f63e285d0",
+          "target": [
+            139,
+            291
+          ]
+        },
+        "ordinary": {
+          "excerpt_range": [
+            509,
+            973
+          ],
+          "paragraph": 0,
+          "paragraph_sha256": "877df0718c83e0a8dca25b0f9f9e2bcb4645ee8ee6b673c2581ce58f4fa2ed60",
+          "target": [
+            139,
+            303
+          ]
+        }
+      },
+      "publisher": "peerj",
+      "source": {
+        "catalog_sha256": "11a55c02f359d7baeff98089d21158f17053a6a6721276a5483de30001e1a3ca",
+        "linked_record_sha256": "dc0a65f63fae6a92f3e1fe72dee72ce0276ddd4c2b2167cb2b45c4c5e0dbfbca",
+        "published": [
+          "2016-07-02",
+          "2016-09-11"
+        ]
+      },
+      "terms": [
+        [
+          "http://creativecommons.org/licenses/by/4.0"
+        ],
+        [
+          "http://creativecommons.org/licenses/by/4.0"
+        ]
+      ]
+    },
+    {
+      "authors": [
+        "michael dietze"
+      ],
+      "doi": [
+        "10.5194/esurf-2017-75",
+        "10.5194/esurf-6-669-2018"
+      ],
+      "group": "10ff4732cfdc5f0a",
+      "locations": {
+        "earlier": {
+          "excerpt_range": [
+            542,
+            916
+          ],
+          "paragraph": 0,
+          "paragraph_sha256": "6fdaac76e8ea8149ef54001f87189979cd6e8442cf3f5c53b88dee37d58ab66e",
+          "target": [
+            106,
+            254
+          ]
+        },
+        "ordinary": {
+          "excerpt_range": [
+            545,
+            918
+          ],
+          "paragraph": 0,
+          "paragraph_sha256": "13fd0775dba97ce204397a44030f7a084a1c94986568ea500c6f54ba7f58000d",
+          "target": [
+            106,
+            253
+          ]
+        }
+      },
+      "publisher": "copernicus",
+      "source": {
+        "catalog_sha256": "0a8ee0fcb45f9fcd942cdf73bdc0ff57ca00323a25b3e3ab4369bb7dd692f3d6",
+        "linked_record_sha256": "9aae088ab3d3f188154bea52f4cba961dbfb3f52855a6b64d083cc975361eb5e",
+        "published": [
+          "2018-01-08",
+          "2018-08-17"
+        ]
+      },
+      "terms": [
+        [
+          "https://creativecommons.org/licenses/by/4.0"
+        ],
+        [
+          "https://creativecommons.org/licenses/by/4.0"
+        ]
+      ]
+    },
+    {
+      "authors": [
+        "david a. lilien",
+        "ian joughin",
+        "benjamin smith",
+        "david e. shean"
+      ],
+      "doi": [
+        "10.5194/tc-2017-248",
+        "10.5194/tc-12-1415-2018"
+      ],
+      "group": "2abbfa891470cc2d",
+      "locations": {
+        "earlier": {
+          "excerpt_range": [
+            338,
+            782
+          ],
+          "paragraph": 0,
+          "paragraph_sha256": "3172654b1fba515ca7e3b9349ca4c2afb9d89e678ad90e2e23fe4da566702664",
+          "target": [
+            155,
+            290
+          ]
+        },
+        "ordinary": {
+          "excerpt_range": [
+            371,
+            856
+          ],
+          "paragraph": 0,
+          "paragraph_sha256": "b805abf0d949e3c62463f5ba6ef6bcf89aaab4ed75f581357b6f59f5e5b58ae3",
+          "target": [
+            155,
+            331
+          ]
+        }
+      },
+      "publisher": "copernicus",
+      "source": {
+        "catalog_sha256": "0a8ee0fcb45f9fcd942cdf73bdc0ff57ca00323a25b3e3ab4369bb7dd692f3d6",
+        "linked_record_sha256": "061e0ac14b260af08a6363a603ac8b35a3caa5a6f0f1593812a192457a1a30db",
+        "published": [
+          "2018-01-02",
+          "2018-04-19"
+        ]
+      },
+      "terms": [
+        [
+          "https://creativecommons.org/licenses/by/4.0"
+        ],
+        [
+          "https://creativecommons.org/licenses/by/4.0"
+        ]
+      ]
+    }
+  ]
+}

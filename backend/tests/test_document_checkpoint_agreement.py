@@ -57,6 +57,126 @@ def test_second_check_excludes_unsupported_source_geometry(method, anchor, meta)
     assert not agreement._supported_source(decoded)
 
 
+def test_mixed_pdf_second_check_binds_complete_native_text_to_one_intact_page(tmp_path, monkeypatch):
+    from dataclasses import asdict
+
+    import pymupdf
+
+    from app.detectors.text.segment import segment
+
+    source = tmp_path / "mixed.pdf"
+    prose = (
+        "We reviewed the draft earlier this week and kept the parts that explain how the new process works. "
+        "The remaining changes describe the dates and the steps each reviewer will take before the next meeting. "
+        "We can share the revised document with the whole team once the source details and notes have been checked. "
+        "Please bring any comments to the meeting so we can see which questions still need a written answer."
+    )
+    with pymupdf.open() as pdf:
+        page = pdf.new_page()
+        assert page.insert_textbox(pymupdf.Rect(32, 50, 525, 700), prose, fontsize=10) >= 0
+        pdf.new_page()
+        pdf.save(source)
+    doc = extract(source, ".pdf")
+    sentences = [asdict(unit) for unit in segment(doc)]
+    decoded = {"text": doc.text, "paragraphs": doc.paragraphs, "source_map": doc.source_map, "meta": doc.meta, "sentences": sentences}
+    spans = [{key: row[key] for key in ("start", "end")} for row in sentences[:3]]
+    window = {"focus": spans[1], "spans": spans, "input_sha256": text_hash(" ".join(doc.text[s["start"]:s["end"]] for s in spans)),
+              "score": .8, "unit_ref": "sentence:1", "token_coverage": {"tokens": 56, "token_windows": 1}}
+    primary = {"detector_id": document_matched_context.DETECTOR, "status": "ok", "version": "1.0.0",
+               "model_revisions": {document_matched_context.MODEL: document_matched_context.REVISION},
+               "details": {"text_evidence": {"windows": [window]}}}
+    monkeypatch.setattr("app.detectors.text.extract._ocr_language", lambda _: {"code": "en", "status": "supported"})
+    monkeypatch.setattr(agreement, "_review", lambda *_: {})
+    assert not agreement._supported_source(decoded)
+    assert agreement.candidates(decoded, primary) == [window]
+    agreement.record(context(Deadline(60)), {"detectors": [primary]}, decoded)
+    record = primary["details"]["text_evidence"][agreement.KEY]
+    assert record["schema"] == document_scope.CHECKPOINT_AGREEMENT_PDF_SCHEMA
+    assert record["pdf_spans"] == [{"start": 0, "end": len(doc.text), "page": 1}]
+    assert record["ranges"][0]["input_sha256"] == window["input_sha256"]
+    document = {"source": {"chars": len(doc.text), "method": "pymupdf"}, "coverage": {**doc.meta, agreement.KEY: record}}
+    document_scope.validate_checkpoint_agreement(document, doc.text, result={"signals": [primary]}, mapping=doc.source_map)
+    altered = deepcopy(document)
+    altered["coverage"][agreement.KEY]["pdf_spans"][0]["page"] = 2
+    with pytest.raises(ValueError, match="PDF source position"):
+        document_scope.validate_checkpoint_agreement(altered)
+    for corruption in (lambda fragment: fragment.update(bbox=[-2, 0, 1, 1]), lambda fragment: fragment.update(end=0)):
+        broken = deepcopy(decoded)
+        corruption(broken["source_map"][0]["fragments"][0])
+        assert agreement.candidates(broken, primary) is None
+    broken = deepcopy(decoded)
+    broken["source_map"][0]["fragments"].pop(0)
+    assert agreement.candidates(broken, primary) is None
+    broken["meta"]["ocr"]["pages"] = [None]
+    assert agreement.candidates(broken, primary) is None
+
+
+@pytest.mark.parametrize("ocr_succeeds", [True, False])
+def test_pdf_second_check_excludes_entire_ocr_and_partial_pages(tmp_path, monkeypatch, ocr_succeeds):
+    from dataclasses import asdict
+
+    import pymupdf
+    from test_document_hybrid_pdf_coverage import NATIVE, hybrid_pdf
+
+    from app.detectors.text import extract as extraction
+    from app.detectors.text.segment import segment
+
+    if ocr_succeeds and not extraction._ocr_runtime().get("available"):
+        pytest.skip("Verified local OCR runtime is unavailable")
+    if not ocr_succeeds:
+        monkeypatch.setattr(extraction, "_ocr_runtime", lambda: {"available": False, "reason": "Fixture"})
+    hybrid = tmp_path / "hybrid.pdf"
+    hybrid_pdf(hybrid)
+    mixed = tmp_path / "mixed.pdf"
+    prose = (
+        NATIVE + " The recorded explanations refer to the source version that we filed before the last meeting with "
+        "the whole review team, and our shared notes show exactly where the next set of decisions and written responses will appear."
+    )
+    with pymupdf.open(hybrid) as scan, pymupdf.open() as pdf:
+        pdf.insert_pdf(scan)
+        page = pdf.new_page(width=612, height=792)
+        assert page.insert_textbox(pymupdf.Rect(40, 25, 570, 135), prose, fontsize=12) >= 0
+        pdf.save(mixed)
+    doc = extract(mixed, ".pdf")
+    assert doc.meta["unmapped_pages"] == []
+    assert doc.meta["ocr"]["pages"][0]["status"] == ("extracted" if ocr_succeeds else "unchecked")
+    assert bool(doc.meta["partially_checked_pages"]) is not ocr_succeeds
+    original = doc.source_map[-1]
+    assert original["page"] == 2 and doc.text[original["start"]:original["end"]] == prose
+    scoped = [{key: original[key] for key in ("start", "end", "page")}]
+    assert document_scope.pdf_agreement_text_spans(doc.source_map, doc.meta, doc.text) == scoped
+
+    sentences = [asdict(unit) for unit in segment(doc)]
+    before, after = ([{key: row[key] for key in ("start", "end")} for row in sentences
+                      if (row["start"] < original["start"]) == on_first] for on_first in (True, False))
+    candidates = []
+    for i, spans in enumerate((before[:3], [before[-1], *after[:2]], after[:3])):
+        content = " ".join(doc.text[span["start"]:span["end"]] for span in spans)
+        candidates.append({"focus": spans[1], "spans": spans, "input_sha256": text_hash(content), "score": .8,
+                           "token_coverage": {"tokens": 76, "token_windows": 1}, "unit_ref": f"sentence:{i}"})
+    primary = {"detector_id": document_matched_context.DETECTOR, "status": "ok", "version": "1.0.0",
+               "model_revisions": {document_matched_context.MODEL: document_matched_context.REVISION},
+               "details": {"text_evidence": {"windows": candidates}}}
+    decoded = {"text": doc.text, "paragraphs": doc.paragraphs, "source_map": doc.source_map,
+               "meta": doc.meta, "sentences": sentences}
+    monkeypatch.setattr(extraction, "_ocr_language", lambda _: {"code": "en", "status": "supported"})
+    monkeypatch.setattr(agreement, "_review", lambda *_: {})
+    assert agreement.candidates(decoded, primary) == candidates[-1:]
+    agreement.record(context(Deadline(60)), {"detectors": [primary]}, decoded)
+    record = primary["details"]["text_evidence"][agreement.KEY]
+    assert record["pdf_spans"] == scoped
+    assert [row["spans"] for row in record["ranges"]] == [candidates[-1]["spans"]]
+
+
+def test_mixed_pdf_second_check_rejects_contexts_crossing_native_or_ocr_pages():
+    window = {"focus": {"start": 1, "end": 20}, "spans": [{"start": 1, "end": 20}, {"start": 32, "end": 49}]}
+    blocks = [{"start": 0, "end": 30, "page": 1}, {"start": 32, "end": 70, "page": 3}]
+    assert document_scope.pdf_agreement_window_page(window, blocks) is None
+    assert document_scope.pdf_agreement_window_page(window, blocks[:1]) is None
+    blocks[1]["page"] = 1
+    assert document_scope.pdf_agreement_window_page(window, blocks) == 1
+
+
 def test_reply_scope_replays_the_exact_body_and_rejects_quoted_context():
     text, window, _, _ = source()
     body_end = len(text)

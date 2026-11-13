@@ -107,6 +107,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const ocrPages = set.coverage?.ocr?.pages ?? []
   const matched = set.coverage?.matched_context_review
   const writingAgreement = set.coverage?.writing_second_check
+  const selectablePages = [...new Set(writingAgreement?.pdf_spans?.map((span) => span.page) ?? [])]
   const usesOcr = ocrPages.some((page) => page.status === 'extracted') || set.packets.some((packet) => packet.anchors.some((anchor) => anchor.extraction === 'ocr'))
   return <div data-testid="document-evidence-content">
     <DocumentRepeatedPassages result={set.repeated_passages} />
@@ -116,16 +117,21 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     {writingAgreement && <section className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <h3 className="m-0 text-body font-medium text-text">Second writing check</h3>
       <p className="mt-2 mb-0">The second check revisits the exact text behind up to six AI-like responses. This evidence carries zero weight in the overall assessment.</p>
-      {writingAgreement.schema !== 'document-writing-second-check/1' && <p className="mt-2 mb-0">
+      {writingAgreement.schema !== 'document-writing-second-check/1' && writingAgreement.schema !== 'document-writing-second-check/6' && <p className="mt-2 mb-0">
         This check covers contexts wholly inside the reply body. Text marked as a quote or signature and contexts that cross those boundaries are outside this check.
       </p>}
       {(writingAgreement.schema === 'document-writing-second-check/4' || writingAgreement.schema === 'document-writing-second-check/5') && <p className="mt-2 mb-0">
         The JSON includes exact positions in the decoded HTML body of the selected email part.
       </p>}
+      {selectablePages.length > 0 && <p className="mt-2 mb-0">
+        The second check uses selectable text on PDF {selectablePages.length === 1 ? 'page' : 'pages'} {selectablePages.join(', ')}.
+        It leaves OCR, partially checked pages, and contexts crossing pages outside this check.
+      </p>}
       {writingAgreement.ranges.length === 0 ? <p className="mt-2 mb-0">The first check supplied no AI-like contexts for this review.</p>
         : <ul className="mb-0 pl-4 list-disc">{writingAgreement.ranges.map((row) => {
           const packet = set.packets.find((item) => item.focus.start === row.start && item.focus.end === row.end)
-          const range = `Passage [${row.start}, ${row.end})`
+          const page = writingAgreement.pdf_spans?.find((span) => span.start <= row.start && row.end <= span.end)?.page
+          const range = `${page == null ? '' : `Page ${page} · `}Passage [${row.start}, ${row.end})`
           return <li key={row.start} className="mt-2">
             {packet ? <a href={`#media-evidence-${packet.id}`} onClick={(event) => { event.preventDefault(); selectPassage(packet.id) }}>{range}</a> : range}
             {' · '}{row.state === 'corroborated' ? 'Both checks gave an AI-like response'

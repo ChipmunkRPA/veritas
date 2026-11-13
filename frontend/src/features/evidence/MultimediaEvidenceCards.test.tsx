@@ -88,6 +88,23 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText('Quoted 😀 <script>text</script>')).toBeTruthy()
   })
 
+  it('shows the original selectable page for a mixed-PDF writing response', () => {
+    const set = structuredClone(document)
+    set.coverage!.writing_second_check = {
+      schema: 'document-writing-second-check/6', authorship_confidence_contribution: 0,
+      pdf_spans: [{ start: 0, end: 60, page: 3 }],
+      ranges: [{ start: 8, end: 30, spans: [{ start: 0, end: 6 }, { start: 8, end: 30 }], state: 'corroborated' }],
+    }
+    show(set)
+    expect(screen.getByText(/uses selectable text on PDF page 3/)).toBeTruthy()
+    expect(screen.getByText(/leaves OCR, partially checked pages, and contexts crossing pages outside/)).toBeTruthy()
+    expect(screen.queryByText(/wholly inside the reply body/)).toBeNull()
+    const link = screen.getByRole('link', { name: 'Page 3 · Passage [8, 30)' })
+    expect(link.getAttribute('href')).toBe('#media-evidence-P01')
+    fireEvent.click(link)
+    expect(screen.getByText('Quoted 😀 <script>text</script>')).toBeTruthy()
+  })
+
   it.each(['document-writing-second-check/2', 'document-writing-second-check/3', 'document-writing-second-check/4', 'document-writing-second-check/5'] as const)(
     'labels the second check on an email reply as body-only for %s', (schema) => {
     const set = structuredClone(document)

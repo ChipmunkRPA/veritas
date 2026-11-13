@@ -463,8 +463,9 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     candidates = [key for key, values in groups.items() if any(document_scope.supports_inspection(w) for w in values)]
     matched = sorted(key for key in candidates if document_matched_context.packet_record(groups[key]) is not None)
     reply_review = bool(checkpoint_review and checkpoint_review["schema"] in document_scope.CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS)
+    mixed_pdf_review = bool(checkpoint_review and checkpoint_review["schema"] == document_scope.CHECKPOINT_AGREEMENT_PDF_SCHEMA)
     priority = (sorted({(row["start"], row["end"]) for row in checkpoint_review["ranges"]}.intersection(candidates))
-                if reply_review else matched)
+                if reply_review or mixed_pdf_review else matched)
     # Ratios and classifier outputs are not commensurate. Reserve half the
     # bounded display for disagreement so selecting corroborated passages does
     # not systematically hide real opposing observations elsewhere in the file.
@@ -493,11 +494,16 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                               "unmapped_pages": decoded["meta"].get("unmapped_pages", []),
                                               "ocr": public_ocr, "email": decoded["meta"].get("email")},
                 "omitted_windows": max(0, len(candidates) - len(selected)), "limitations": []}
+    if partially_checked := decoded["meta"].get("partially_checked_pages"):
+        document["coverage"]["partially_checked_pages"] = partially_checked
     if checkpoint_review is not None:
         document["coverage"][document_scope.CHECKPOINT_AGREEMENT_KEY] = checkpoint_review
         document_scope.validate_checkpoint_agreement(document, text, result=result, mapping=mapping)
-        if reply_review:
+        if reply_review or mixed_pdf_review:
             document["coverage"]["selection_policy"] = (
+                "Passages revisited by the second writing check are prioritized for inclusion. Remaining passages use the standard "
+                "disagreement and source-order policy."
+            ) if mixed_pdf_review else (
                 "Passages revisited by the second reply-body check are prioritized for inclusion. Remaining passages use the standard "
                 "disagreement and source-order policy."
             )
@@ -507,8 +513,6 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             "Sentences selected by the short-passage review are prioritized for inclusion. Other passages follow the standard "
             "disagreement and source-order policy. Each check keeps its own recorded response."
         )
-    if partially_checked := decoded["meta"].get("partially_checked_pages"):
-        document["coverage"]["partially_checked_pages"] = partially_checked
     try:
         meta = decoded["meta"]
         pages = meta.get("pages")

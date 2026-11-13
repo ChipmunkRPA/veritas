@@ -677,9 +677,14 @@ def _writing_agreement_view(coverage: dict) -> dict | None:
     record = coverage.get(document_scope.CHECKPOINT_AGREEMENT_KEY)
     if record is None:
         return None
+    pdf_spans = record.get("pdf_spans", [])
     return {"email_reply_body": record["schema"] in document_scope.CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS,
             "mapped_html_body": record["schema"] in document_scope.CHECKPOINT_AGREEMENT_HTML_SCHEMAS,
-            "ranges": [{**row, "label": document_scope.CHECKPOINT_AGREEMENT_LABELS[row["state"]]} for row in record["ranges"]]}
+            "selectable_pdf_pages": sorted({span["page"] for span in pdf_spans}),
+            "ranges": [{**row, "label": document_scope.CHECKPOINT_AGREEMENT_LABELS[row["state"]],
+                        "page": next((span["page"] for span in pdf_spans
+                                      if span["start"] <= row["start"] < row["end"] <= span["end"]), None)}
+                       for row in record["ranges"]]}
 
 
 def _voice_interval_view(interval: dict, rate: int, video_origin_s: float | None) -> dict:

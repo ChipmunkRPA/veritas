@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import math
 import re
 from collections import Counter
 
@@ -26,6 +27,7 @@ CHECKPOINT_AGREEMENT_EMAIL_SCHEMA = "document-writing-second-check/2"
 CHECKPOINT_AGREEMENT_EMAIL_LAYOUT_SCHEMA = "document-writing-second-check/3"
 CHECKPOINT_AGREEMENT_HTML_SCHEMA = "document-writing-second-check/4"
 CHECKPOINT_AGREEMENT_HTML_SHORT_LAYOUT_SCHEMA = "document-writing-second-check/5"
+CHECKPOINT_AGREEMENT_PDF_SCHEMA = "document-writing-second-check/6"
 CHECKPOINT_AGREEMENT_HTML_SCHEMAS = frozenset({
     CHECKPOINT_AGREEMENT_HTML_SCHEMA, CHECKPOINT_AGREEMENT_HTML_SHORT_LAYOUT_SCHEMA,
 })
@@ -88,12 +90,95 @@ def checkpoint_window_in_scope(window: dict, body_spans: list[dict] | None) -> b
     )
 
 
+def _pdf_excluded_pages(coverage: dict) -> set[int]:
+    ocr = coverage.get("ocr", {})
+    if not isinstance(ocr, dict):
+        raise ValueError("Invalid PDF coverage")
+    unmapped = coverage.get("unmapped_pages", [])
+    partial = coverage.get("partially_checked_pages", [])
+    scanned = ocr.get("pages", [])
+    if (not all(isinstance(rows, list) for rows in (unmapped, partial, scanned))
+            or any(not isinstance(row, dict) for row in [*partial, *scanned])):
+        raise ValueError("Invalid PDF coverage")
+    excluded = [*unmapped, *(row.get("page") for row in [*partial, *scanned])]
+    if any(type(page) is not int or page < 1 for page in excluded):
+        raise ValueError("Invalid PDF coverage page")
+    return set(excluded)
+
+
+def pdf_agreement_text_spans(mapping: list[dict], coverage: dict, text: str) -> list[dict] | None:
+    """Find fully mapped selectable-text blocks on intact pages of a mixed PDF."""
+    try:
+        excluded = _pdf_excluded_pages(coverage)
+    except ValueError:
+        return None
+    if not excluded or not isinstance(mapping, list) or not mapping:
+        return None
+    spans = []
+    previous, previous_page = 0, 0
+    for block in mapping:
+        if not isinstance(block, dict):
+            return None
+        try:
+            start, end = check_range(block, len(text))
+        except ValueError:
+            return None
+        page = block.get("page")
+        if (block.get("kind") != "pdf" or type(page) is not int or page < max(1, previous_page)
+                or start != (previous + 2 if previous else 0)):
+            return None
+        previous, previous_page = end, page
+        if page in excluded:
+            continue
+        if (len(spans) >= 4 or block.get("extraction") != "text_layer"
+                or not _complete_pdf_fragments(block, text, start, end)):
+            return None
+        spans.append({"start": start, "end": end, "page": page})
+    return spans if previous == len(text) and len(spans) in {1, 4} else None
+
+
+def _complete_pdf_fragments(block: dict, text: str, start: int, end: int) -> bool:
+    width, height = block.get("page_width"), block.get("page_height")
+    fragments = block.get("fragments")
+    if (not isinstance(fragments, list)
+            or any(type(value) not in {int, float} or not math.isfinite(value) or value <= 0
+                   for value in (width, height))):
+        return False
+    positions = []
+    for fragment in fragments:
+        if not isinstance(fragment, dict):
+            return False
+        a, b = fragment.get("start"), fragment.get("end")
+        box = fragment.get("bbox")
+        if (type(a) is not int or type(b) is not int or not start <= a < b <= end
+                or not isinstance(box, list) or len(box) != 4
+                or any(type(value) not in {int, float} or not math.isfinite(value) for value in box)):
+            return False
+        x0, y0, x1, y1 = box
+        if not (0 <= x0 < x1 <= width + .01 and 0 <= y0 < y1 <= height + .01):
+            return False
+        if not positions or positions[-1] != (a, b):  # a dehyphenated word can have two boxes
+            positions.append((a, b))
+    return positions == [(start + word.start(), start + word.end()) for word in re.finditer(r"\S+", text[start:end])]
+
+
+def pdf_agreement_window_page(window: dict, pdf_spans: list[dict]) -> int | None:
+    pages = set()
+    for span in [window["focus"], *window["spans"]]:
+        page = next((block["page"] for block in pdf_spans
+                     if block["start"] <= span["start"] < span["end"] <= block["end"]), None)
+        if page is None:
+            return None
+        pages.add(page)
+    return next(iter(pages)) if len(pages) == 1 else None
+
+
 def validate_checkpoint_agreement(
     document: dict, text: str | None = None, *, result: dict | None = None, mapping: list[dict] | None = None,
 ) -> None:
     coverage = document.get("coverage") or {}
     record = coverage.get(CHECKPOINT_AGREEMENT_KEY)
-    body_spans = None
+    body_spans = pdf_spans = None
     if record is not None:
         fields = {"schema", "ranges", "authorship_confidence_contribution"}
         size = document["source"]["chars"]
@@ -117,6 +202,25 @@ def validate_checkpoint_agreement(
                     or boundaries[-1][1] + 2 >= size
                     or mapping is not None and email_agreement_body_spans(mapping, email, size) != body_spans):
                 raise ValueError("Second-check email scope differs from the mapped reply body")
+        elif schema == CHECKPOINT_AGREEMENT_PDF_SCHEMA:
+            fields.add("pdf_spans")
+            pdf_spans = record.get("pdf_spans")
+            excluded = _pdf_excluded_pages(coverage)
+            if (document["source"].get("method") != "pymupdf" or not excluded
+                    or not isinstance(pdf_spans, list) or len(pdf_spans) not in {1, 4}):
+                raise ValueError("Invalid second-check PDF scope")
+            previous, previous_page = 0, 0
+            for span in pdf_spans:
+                if not isinstance(span, dict):
+                    raise ValueError("Invalid second-check PDF source position")
+                start, end = check_range(span, size)
+                page = span.get("page")
+                if (set(span) != {"start", "end", "page"} or type(page) is not int
+                        or page < max(1, previous_page) or page in excluded or start < previous):
+                    raise ValueError("Invalid second-check PDF source position")
+                previous, previous_page = end, page
+            if mapping is not None and (text is None or pdf_agreement_text_spans(mapping, coverage, text) != pdf_spans):
+                raise ValueError("Second-check PDF scope differs from the mapped selectable pages")
         elif schema != CHECKPOINT_AGREEMENT_SCHEMA:
             raise ValueError("Unknown second writing check schema")
         ranges = record["ranges"]
@@ -136,6 +240,7 @@ def validate_checkpoint_agreement(
                 {**window["focus"], "spans": window["spans"], "input_sha256": window["input_sha256"]}
                 for window in evidence["windows"] if float.fromhex(window["score_exact_hex"]) >= .5
                 and checkpoint_window_in_scope(window, body_spans)
+                and (pdf_spans is None or pdf_agreement_window_page(window, pdf_spans) is not None)
             ][:CHECKPOINT_AGREEMENT_MAX]
             if expected != [
                 {key: row[key] for key in ("start", "end", "spans", "input_sha256")} for row in record["ranges"]
@@ -157,7 +262,8 @@ def validate_checkpoint_agreement(
                 or any(a[1] > b[0] for a, b in zip(spans, spans[1:]))
                 or not re.fullmatch(r"[0-9a-f]{64}", row["input_sha256"])
                 or state not in CHECKPOINT_AGREEMENT_LABELS
-                or not checkpoint_window_in_scope({"focus": row, "spans": row["spans"]}, body_spans)):
+                or not checkpoint_window_in_scope({"focus": row, "spans": row["spans"]}, body_spans)
+                or pdf_spans is not None and pdf_agreement_window_page({"focus": row, "spans": row["spans"]}, pdf_spans) is None):
             raise ValueError("Invalid second-check source coordinates")
         if state != "unavailable":
             fields |= {"response_exact_hex", "tokens"}

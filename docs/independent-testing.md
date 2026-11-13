@@ -119,6 +119,10 @@ checks whether any gain survives ordinary same-work substitutions.
 The [short HTML reply comparison](writing-html-reply-short-layouts-2026-11-12.md)
 checks the same writing inputs in plain text and HTML-only email. Its
 native replay verifies the exact MIME body and scored text ranges.
+The [mixed PDF writing check](writing-mixed-pdf-page-transfer-2026-11-12.md)
+replays writing responses and exact source locations on intact selectable
+pages of mixed PDFs. Its receipt records ordinary agreement and skipped
+cross-page inputs.
 The [paired neural speech edit pilot](audio-partialedit-dense-transfer-2026-11-12.md)
 checks overlapping speech windows across two edit generators, matched genuine
 utterances and two background mixes. The replay recounts localized edits and

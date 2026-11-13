@@ -97,6 +97,12 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [selectable-text check for mixed PDFs](writing-mixed-pdf-page-transfer-2026-11-12.md)
+  found 11 of 44 known edited passages in files previously skipped by the
+  second check, with agreement on 13 of 56 genuine or ordinarily edited
+  controls. The optional local check requires an intact native page and
+  confirms its source ranges in the app, PDF, JSON and signed export. It
+  leaves OCR text and cross-page contexts outside its scope.
 - The [overlapping speech confirmation](audio-dense-evidence-confirmation-2026-11-12.md)
   compared 60 matched deliveries across six editing families. The union
   localized 15/18 gain-only and 12/18 traffic edits, up from 7/18 and 6/18.

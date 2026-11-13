@@ -38,10 +38,16 @@ def _supported_source(decoded: dict) -> bool:
     method = meta.get("method")
     if method == "plain":
         return True
+    if method == "pymupdf":
+        try:
+            if document_scope.pdf_excluded_pages(meta):
+                return False
+        except ValueError:
+            return False
     sources = decoded.get("source_map") or ()
     paragraphs = decoded["paragraphs"]
     if not sources or len(sources) != len(paragraphs) or any(
-        (source.get("start"), source.get("end")) != (start, end)
+        not isinstance(source, dict) or (source.get("start"), source.get("end")) != (start, end)
         for source, (start, end) in zip(sources, paragraphs, strict=True)
     ):
         return False
@@ -49,9 +55,8 @@ def _supported_source(decoded: dict) -> bool:
         return all(source.get("kind") == "docx" and len(source.get("body_path", ())) == 1
                    and source.get("run_mapping_complete") for source in sources)
     if method == "pymupdf":
-        return (not meta.get("unmapped_pages") and not meta.get("partially_checked_pages")
-                and all(source.get("kind") == "pdf" and source.get("extraction") == "text_layer"
-                        and source.get("fragments") for source in sources))
+        return all(source.get("kind") == "pdf" and source.get("extraction") == "text_layer"
+                   and source.get("fragments") for source in sources)
     if method == "email":
         mail = meta.get("email") or {}
         return mail.get("body_content_type") == "text/plain" and all(
@@ -70,12 +75,25 @@ def _email_reply_body(decoded: dict) -> list[dict] | None:
     )
 
 
+def _pdf_text_pages(decoded: dict) -> list[dict] | None:
+    meta = decoded.get("meta") or {}
+    if meta.get("method") != "pymupdf":
+        return None
+    return document_scope.pdf_agreement_text_spans(decoded.get("source_map") or [], meta, decoded["text"])
+
+
 def candidates(decoded: dict, primary: dict) -> list[dict] | None:
     from app.detectors.text.extract import _ocr_language
 
     text = decoded["text"]
     body_spans = _email_reply_body(decoded)
-    if body_spans is None:
+    pdf_spans = _pdf_text_pages(decoded)
+    if pdf_spans is not None:
+        text = " ".join(text[span["start"]:span["end"]] for span in pdf_spans)
+        paragraphs = len(pdf_spans)
+        sentences = sum(any(span["start"] <= s["start"] < s["end"] <= span["end"] for span in pdf_spans)
+                        for s in decoded["sentences"])
+    elif body_spans is None:
         if not _supported_source(decoded):
             return None
         paragraphs, sentences = len(decoded["paragraphs"]), len(decoded["sentences"])
@@ -94,6 +112,7 @@ def candidates(decoded: dict, primary: dict) -> list[dict] | None:
         return None
     source = primary["details"]["text_evidence"]
     windows = [window for window in source["windows"] if document_scope.checkpoint_window_in_scope(window, body_spans)
+               and (pdf_spans is None or document_scope.pdf_agreement_window_page(window, pdf_spans) is not None)
                and window["score"] >= .5]
     return windows[:document_scope.CHECKPOINT_AGREEMENT_MAX]
 
@@ -147,7 +166,12 @@ def record(ctx, detected: dict, decoded: dict) -> None:
         value.update(schema=schema, body_spans=body_spans)
         document["source"]["method"] = "email"
         document["coverage"]["email"] = email
-    mapping = decoded.get("source_map") if body_spans is not None else None
+    pdf_spans = _pdf_text_pages(decoded)
+    if pdf_spans is not None:
+        value.update(schema=document_scope.CHECKPOINT_AGREEMENT_PDF_SCHEMA, pdf_spans=pdf_spans)
+        document["source"]["method"] = "pymupdf"
+        document["coverage"].update(decoded["meta"])
+    mapping = decoded.get("source_map") if body_spans is not None or pdf_spans is not None else None
     document_scope.validate_checkpoint_agreement(document, text, mapping=mapping)
     eligible = [window for window in windows if document_matched_context.one_complete_window(window["token_coverage"])]
     responses = _review(ctx, text, eligible)

@@ -94,7 +94,7 @@ def replay(sources, archive, fixtures=None):
     for index, first, only in build(sources, archive):
         for role, a, b, truth in variants(index, first, only):
             result = [locate(a[:, j], b[:, j]) for j in range(2)]
-            expected = {str(k): v for k, v in truth.items()}
+            expected = {str(channel): list(bounds) for channel, bounds in truth.items()}
             ok = all(
                 r is None
                 if j not in truth

@@ -156,8 +156,7 @@ def _truth_rows(document, expected, manifest_hash, split):
     return rows
 
 
-def count_locations(manifest, truth, response, *, mask_directory: Path | None = None):
-    """Convert local annotations to a portable receipt while stripping location coordinates."""
+def _count_locations(manifest, truth, response, mask_directory, *, retain_locations=False):
     audit = independent.audit_manifest(manifest)
     split = response.get("split")
     if split not in independent.SPLITS or response.get("manifest_sha256") != audit["manifest_sha256"]:
@@ -173,6 +172,7 @@ def count_locations(manifest, truth, response, *, mask_directory: Path | None = 
     if not isinstance(response.get("predictions"), list):
         raise ValueError("Missing planned predictions")
     result = deepcopy(response)
+    exact_locations = {}
     for row in result["predictions"]:
         if not isinstance(row, dict) or not isinstance(row.get("id"), str):
             raise ValueError("Expected a response with a case ID")
@@ -196,7 +196,15 @@ def count_locations(manifest, truth, response, *, mask_directory: Path | None = 
             continue
         if location.keys() not in ({"status", "regions"}, {"status", "mask"}):
             raise ValueError("Measured locations need exact regions or an image mask")
-        _, reported, overlap = _area(reference, _location(location, extent, directory), extent)
+        detected = _location(location, extent, directory)
+        _, reported, overlap = _area(reference, detected, extent)
+        if retain_locations:
+            exact_locations[row["id"]] = (extent, location, directory)
         row["localization"] = {"status": "ok", "reported_units": reported, "overlap_units": overlap}
     independent.audit_receipt(manifest, result, split)
-    return result
+    return result, exact_locations
+
+
+def count_locations(manifest, truth, response, *, mask_directory: Path | None = None):
+    """Convert local annotations to a portable receipt while stripping location coordinates."""
+    return _count_locations(manifest, truth, response, mask_directory)[0]

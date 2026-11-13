@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from collections import Counter, defaultdict
 
-from app.bench import independent
+from app.bench import independent, independent_locations
 
 SCHEMA = "chipmunk.independent-replication/1"
+LOCATIONS_SCHEMA = "chipmunk.independent-location-replication/1"
 
 
 def replicate(manifest, reference, replication, lock):
@@ -48,3 +49,39 @@ def replicate(manifest, reference, replication, lock):
                    for (modality, condition, label), counts in sorted(totals.items())],
         "scope": "Exact numeric responses and overlap counts on the same declared files. Matching counts can cover different locations.",
     }
+
+
+def replicate_locations(manifest, truth, reference, replication, lock, *, mask_directory=None):
+    """Compare exact unions of locations while reporting only aggregate outcomes."""
+    first, before = independent_locations._count_locations(manifest, truth, reference, mask_directory, retain_locations=True)
+    second, after = independent_locations._count_locations(manifest, truth, replication, mask_directory, retain_locations=True)
+    result = replicate(manifest, first, second, lock)
+    totals = defaultdict(Counter)
+    changed_groups = defaultdict(set)
+    for row in manifest["cases"]:
+        case_id = row["id"]
+        if case_id not in before or case_id not in after:
+            continue
+        extent, first_location, directory = before[case_id]
+        _, second_location, _ = after[case_id]
+        first_shape = independent_locations._location(first_location, extent, directory)
+        second_shape = independent_locations._location(second_location, extent, directory)
+        a, b, intersection = independent_locations._area(first_shape, second_shape, extent)
+        same_location = a == b == intersection
+        key = row["modality"], row["condition"], row["label"]
+        counts = totals[key]
+        counts.update(exact_matches=same_location,
+                      empty_matches=a == b == 0,
+                      equal_size_different_locations=a == b and intersection < a,
+                      changed_locations=not same_location,
+                      disjoint_nonempty_locations=a > 0 and b > 0 and intersection == 0)
+        if not same_location:
+            changed_groups[key].add(row["group"])
+    fields = ("exact_matches", "empty_matches", "equal_size_different_locations", "changed_locations", "disjoint_nonempty_locations")
+    for row in result["strata"]:
+        key = row["modality"], row["condition"], row["label"]
+        row.update({name: totals[key][name] for name in fields}, groups_with_changed_locations=len(changed_groups[key]))
+    result.update(schema=LOCATIONS_SCHEMA, truth_sha256=independent.digest(truth),
+                  reference_sha256=independent.digest(reference), replication_sha256=independent.digest(replication),
+                  scope="Exact union of source-coordinate locations when both runs measured them. Empty matches are counted separately.")
+    return result

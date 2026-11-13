@@ -40,7 +40,7 @@ body:
     id: reproduction
     attributes:
       label: Reproduction and complete outcomes
-      description: Include the project revision and the exact claim you reviewed. For a public ledger replay, paste the excerpt from `--format-issue` and note any difference from the published reference. The `replicate` command in docs/independent-testing.md can summarize two native runs of one frozen method. For new media tests, give conditions, coverage, false alarms, misses, inconclusive counts and the locations checked. Use `count-locations` to count overlap from private annotations and exact image masks.
+      description: Include the project revision and the exact claim you reviewed. For a public ledger replay, paste the excerpt from `--format-issue` and note any difference from the published reference. Use `replicate` to summarize two native runs of one frozen method or `replicate-locations` to compare their exact highlights while keeping coordinates local. For new media tests, give conditions, coverage, false alarms, misses, inconclusive counts and the locations checked. See docs/independent-testing.md for commands.
     validations:
       required: true
   - type: textarea

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from app.bench.independent import LOCALIZATION_UNITS, SCHEMA, compare, digest, freeze
 from app.bench.independent_locations import TRUTH_SCHEMA
+from app.bench.independent_replication import replicate_locations
 
 EXTENTS = {"audio": 48_000, "image": 1_000, "text": 500, "video": 100}
 BASELINE = ((.2, 0, 0), (.8, 10, 0), (.2, 0, 0), (.8, 9, 7), (.3, 3, 1), (None, 0, 0))
@@ -47,7 +48,7 @@ def _receipt(manifest, system, split, values):
             "weight_sha256": [], "score_kind": "raw", "response_units": "fictional response units", "predictions": outcomes}
 
 
-def _location_example(manifest, confirmation):
+def _location_example(manifest, confirmation, *, moved=False):
     cases = {case["id"]: case for case in manifest["cases"] if case["split"] == "confirmation"}
     truth = {"schema": TRUTH_SCHEMA, "manifest_sha256": digest(manifest), "split": "confirmation", "cases": []}
     predictions = []
@@ -61,12 +62,17 @@ def _location_example(manifest, confirmation):
             if size == 0:
                 return []
             return [[start // 10, 0, (start + size) // 10, 10]] if image else [[start, start + size]]
+        target_start = source // 2 if case["label"] else 0
         truth["cases"].append({"id": row["id"], "input_sha256": row["input_sha256"],
-                               "extent": extent, "regions": region(0, target)})
+                               "extent": extent, "regions": region(target_start, target)})
         location = row["localization"]
         if location["status"] == "ok":
             reported, overlap = (location[k] for k in ("reported_units", "overlap_units"))
-            location = {"status": "ok", "regions": region(target - overlap, reported)}
+            start = target_start + target - overlap
+            if moved and case["label"] and overlap < reported and overlap > 0:
+                # Move an equal-size highlight across to the other side of the truth.
+                start = target_start - (reported - overlap)
+            location = {"status": "ok", "regions": region(start, reported)}
         predictions.append({**row, "localization": location})
     return truth, {**confirmation, "predictions": predictions}
 
@@ -88,7 +94,10 @@ def create(directory, write):
             write(directory / f"{name}-{suffix}.json", data)
         if name == "candidate":
             truth, response = _location_example(manifest, confirmation)
+            _, repeated = _location_example(manifest, confirmation, moved=True)
             write(directory / "location-truth.json", truth)
             write(directory / "candidate-locations.json", response)
+            write(directory / "candidate-repeat-locations.json", repeated)
+            write(directory / "location-replication.json", replicate_locations(manifest, truth, response, repeated, lock))
         systems.extend((confirmation, lock))
     write(directory / "comparison.json", compare(manifest, *systems, require_freeze_commitment=True))

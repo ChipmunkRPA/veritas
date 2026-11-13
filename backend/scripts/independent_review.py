@@ -62,6 +62,14 @@ def main() -> None:
     repeat.add_argument("replication", type=Path)
     repeat.add_argument("lock", type=Path)
     repeat.add_argument("output", type=Path)
+    exact = commands.add_parser("replicate-locations", help="Compare the exact locations of two runs without sharing coordinates")
+    exact.add_argument("manifest", type=Path)
+    exact.add_argument("truth", type=Path)
+    exact.add_argument("reference", type=Path)
+    exact.add_argument("replication", type=Path)
+    exact.add_argument("lock", type=Path)
+    exact.add_argument("output", type=Path)
+    exact.add_argument("--image-mask-dir", type=Path, help="Local directory containing the declared PBM masks")
     example = commands.add_parser("demo", help="Create a fictional four-modality example with no media or weights")
     example.add_argument("output", type=Path)
     args = parser.parse_args()
@@ -94,6 +102,11 @@ def main() -> None:
         from app.bench.independent_replication import replicate
 
         result = replicate(manifest, read(args.reference), read(args.replication), read(args.lock))
+    elif args.command == "replicate-locations":
+        from app.bench.independent_replication import replicate_locations
+
+        result = replicate_locations(manifest, read(args.truth), read(args.reference), read(args.replication), read(args.lock),
+                                     mask_directory=args.image_mask_dir)
     else:
         result = compare(manifest, read(args.baseline), read(args.baseline_lock),
                          read(args.candidate), read(args.candidate_lock),

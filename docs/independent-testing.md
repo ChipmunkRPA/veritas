@@ -1969,6 +1969,21 @@ python3 -B -IS backend/scripts/independent_review.py replicate \
   manifest.json reference.json second-run.json frozen.json replication-summary.json
 ```
 
+Use `replicate-locations` when both reviewers can run locally against the
+same private truth and the two original location receipts from before
+`count-locations`. It counts exact matches of pixel, sample, timestamp, or
+character unions, including where equal-size highlights land in different
+places. For PBM image masks, supply one local directory with both sets of
+mask files, using distinct filenames for different bytes. The output includes
+aggregate counts and commitments to all three private receipts. It leaves
+source coordinates, case IDs, mask filenames and individual reasons local.
+
+```sh
+python3 -B -IS backend/scripts/independent_review.py replicate-locations \
+  manifest.json private-truth.json private-reference.json private-second-run.json \
+  frozen.json location-replication.json --image-mask-dir "$local_masks"
+```
+
 Outputs refuse overwrite. Keep the original manifests, frozen decisions, and
 receipts. Store private evaluation media outside Git. The summary deliberately
 omits individual source identifiers and media; review it before public sharing.
@@ -2052,10 +2067,17 @@ python3 -IS "$review" compare "$example/manifest.json" \
   "$example/candidate-confirmation.json" "$example/candidate-freeze.json" \
   "$scratch/replayed.json" --require-freeze-commitment
 cmp "$example/comparison.json" "$scratch/replayed.json"
+python3 -IS "$review" replicate-locations "$example/manifest.json" \
+  "$example/location-truth.json" "$example/candidate-locations.json" \
+  "$example/candidate-repeat-locations.json" "$example/candidate-freeze.json" \
+  "$scratch/replayed-locations.json"
+cmp "$example/location-replication.json" "$scratch/replayed-locations.json"
 ```
 
 Each method retains 24 confirmation cases and four unavailable outcomes.
 The comparison records false flags, recovered edits and source overlap.
+The location replay shows two shifted highlights per medium whose sizes and
+overlap counts match, even though they point to different places.
 Changing a frozen operating point while using the original confirmation receipt
 causes verification to stop before writing an output. Try the same review
 commands on your own receipts after replacing the fictional source roster.

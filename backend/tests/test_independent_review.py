@@ -210,6 +210,53 @@ def test_same_freeze_replication_reports_numerical_and_coverage_differences():
         replication.replicate(manifest, baseline, {**repeated, "freeze_sha256": "0" * 64}, lock)
 
 
+def test_location_replication_distinguishes_equal_counts_from_equal_shapes(tmp_path):
+    manifest, receipt = fixture()
+    for case in manifest["cases"]:
+        case["localization_truth"] = {"unit": review.LOCALIZATION_UNITS[case["modality"]], "source_units": 100,
+                                      "target_units": 20 if case["label"] else 0}
+    dev = receipt("development")
+    for row in dev["predictions"]:
+        row["localization"] = {"status": "ok", "reported_units": 0, "overlap_units": 0}
+    lock = review.freeze(manifest, dev, thresholds=dict.fromkeys(review.MEDIA, .5))
+    reference = receipt("confirmation")
+    reference["freeze_sha256"] = review.digest(lock)
+    truth = {"schema": locations.TRUTH_SCHEMA, "split": "confirmation", "manifest_sha256": review.digest(manifest),
+             "cases": []}
+    cases = {case["id"]: case for case in manifest["cases"]}
+    for row in reference["predictions"]:
+        case = cases[row["id"]]
+        image = case["modality"] == "image"
+        truth["cases"].append({"id": row["id"], "input_sha256": row["input_sha256"],
+                               "extent": [10, 10] if image else [100],
+                               "regions": ([[0, 0, 4, 5]] if image else [[0, 20]]) if case["label"] else []})
+        row["localization"] = {"status": "ok", "regions": ([[0, 0, 2, 2]] if image else [[0, 4]]) if case["label"] else []}
+    repeated = deepcopy(reference)
+    by_id = {row["id"]: row for row in repeated["predictions"]}
+    mask = b"P4\n10 10\n" + b"\xc0\x00" * 2 + b"\x00\x00" * 8
+    (tmp_path / "repeat.pbm").write_bytes(mask)
+    by_id["image/confirmation/1/clean"]["localization"] = {
+        "status": "ok", "mask": {"file": "repeat.pbm", "sha256": hashlib.sha256(mask).hexdigest()},
+    }
+    by_id["video/confirmation/1/clean"]["localization"]["regions"] = [[8, 12]]
+    by_id["text/confirmation/1/clean"]["localization"]["regions"] = [[0, 3], [1, 4]]
+    by_id["audio/confirmation/1/clean"]["localization"] = {"status": "inconclusive", "reason": "Clock changed"}
+    summary = replication.replicate_locations(manifest, truth, reference, repeated, lock, mask_directory=tmp_path)
+    by_type = {(row["modality"], row["condition"], row["label"]): row for row in summary["strata"]}
+    video = by_type["video", "clean", 1]
+    assert (video["changed_overlap_counts"], video["equal_size_different_locations"],
+            video["disjoint_nonempty_locations"], video["groups_with_changed_locations"]) == (0, 1, 1, 1)
+    assert by_type["text", "clean", 1]["exact_matches"] == by_type["image", "clean", 1]["exact_matches"] == 1
+    assert by_type["video", "clean", 0]["empty_matches"] == 1
+    audio = by_type["audio", "clean", 1]
+    assert (audio["exact_matches"], audio["changed_locations"], audio["both_locations_measured"],
+            audio["changed_location_status"]) == (0, 0, 0, 1)
+    assert not any(value in str(summary) for value in ("repeat.pbm", "video/confirmation", "Clock changed", "regions"))
+    with pytest.raises(ValueError, match="exact freeze"):
+        replication.replicate_locations(manifest, truth, reference, {**repeated, "freeze_sha256": "0" * 64}, lock,
+                                        mask_directory=tmp_path)
+
+
 @pytest.mark.parametrize("field", ["group", "source_sha256", "input_sha256", "lineage"])
 def test_transformed_source_or_known_lineage_cannot_cross_splits(field):
     manifest, _ = fixture()

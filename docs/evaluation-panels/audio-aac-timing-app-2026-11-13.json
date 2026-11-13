@@ -1,0 +1,56 @@
+{
+  "aac_presentation": {
+    "decoded_samples": 45056,
+    "excluded_trailing_samples": 256,
+    "presentation_end_exclusive_pts": 44800,
+    "presentation_start_pts": 0,
+    "sample_rate": 16000,
+    "side": "submitted",
+    "time_base": "1/16000"
+  },
+  "analysis_and_billing_state_unchanged": true,
+  "browser": {
+    "api_downloads_match": true,
+    "page_errors": 0,
+    "playable_excerpts": 2,
+    "waveforms": 2
+  },
+  "export_sha256": {
+    "json": "32bfcda9de40fbafa387a06684b47b62fe5f3cb06269cdca948a8f5ea8bf8249",
+    "pdf": "5115ff865a54fef3afc723c559355e498c91d0dda7b818fcdccdd46981abe555"
+  },
+  "fixture": "held Lombard 09, completed local analysis",
+  "independent_source_replay": true,
+  "matched_windows": 51,
+  "offset_ms": 200,
+  "payment_flow": "completed fixture, earlier-copy comparison created no jobs or orders",
+  "schema": "chipmunk.audio-aac-timing-app/1",
+  "source_intervals": {
+    "earlier": {
+      "pcm_sha256": "684dde52b12293f3e7793be34e7135ada139de9ec0f68419f68b6aa619896d5a",
+      "samples": [
+        5760,
+        16000
+      ],
+      "source_pts": [
+        5760,
+        16000
+      ]
+    },
+    "submitted": {
+      "pcm_sha256": "385e18adc4df7ef27ecd47953cc7940ac30fc43a02d17a9ba001f60ddf9fed81",
+      "samples": [
+        8960,
+        19200
+      ],
+      "source_pts": [
+        8960,
+        19200
+      ]
+    }
+  },
+  "source_sha256": {
+    "earlier": "c8e417587a21ffbaf2f43e4cc7952fd0010ed19822103a20577d746f1822f381",
+    "submitted": "6527bcc45081d687f20772f6cb5d8650492d2bcfaaeeddc24da4b7ae0fcce6e8"
+  }
+}

@@ -49,6 +49,8 @@ export interface ImageReferenceRecord {
     exact_tiles?: number
     anchor_count?: number
     supported_zones?: [number, number][]
+    anchor_sha256?: string
+    reference_decoded_rgb_sha256?: string
     reference_minus_submitted?: { x: number; y: number }
   }
   submitted_over_reference_xy?: [[number, number], [number, number]]
@@ -92,6 +94,7 @@ export const jpegPngEnvelopeSchema = 'chipmunk.image-reference-comparison/10'
 export const exactJpegIdentitySchema = 'chipmunk.image-reference-comparison/11'
 export const shiftedJpegSchema = 'chipmunk.image-reference-comparison/12'
 export const structureJpegSchema = 'chipmunk.image-reference-comparison/13'
+export const sameJpegSchema = 'chipmunk.image-reference-comparison/14'
 export const IMAGE_REFERENCE_SECTION_ID = 'earlier-image-comparison'
 export const orientationLabels = {
   rotate_90_clockwise: '90-degree clockwise rotation',
@@ -137,6 +140,34 @@ function validArea(area?: NativeImageArea): area is NativeImageArea {
 
 function validAreaWithin(area: NativeImageArea, width: number, height: number): boolean {
   return validArea(area) && area.x + area.w <= width && area.y + area.h <= height
+}
+
+function validSameJpegProof(comparison: ImageReferenceRecord): boolean {
+  const { width, height } = comparison.submitted
+  const proof = comparison.alignment
+  if (!proof || comparison.status !== 'comparable' || comparison.affects_overall_confidence !== false
+      || proof.method !== 'exact_decoded_jpeg_pair_identity'
+      || comparison.reference.width !== width || comparison.reference.height !== height
+      || ![width, height].every(value => Number.isSafeInteger(value) && value >= 512 && value <= 768)
+      || ![proof.submitted_overlap, proof.reference_overlap].every(area =>
+        validArea(area) && area.x === 0 && area.y === 0 && area.w === width && area.h === height)
+      || proof.reference_minus_submitted?.x !== 0 || proof.reference_minus_submitted.y !== 0) return false
+  const full = proof.full_tiles ?? 0
+  const exact = proof.exact_tiles ?? 0
+  const anchors = proof.anchor_count ?? 0
+  const zones = proof.supported_zones
+  return [full, exact, anchors].every(Number.isSafeInteger)
+    && full === Math.floor(width / 16) * Math.floor(height / 16) && full >= exact && exact >= .85 * full
+    && exact >= anchors && anchors >= 24 && Array.isArray(zones)
+    && zones.every(zone => Array.isArray(zone) && zone.length === 2 && zone.every(value => [0, 1, 2].includes(value)))
+    && new Set(zones.map(zone => zone.join(','))).size === zones.length && zones.length >= 6
+    && [0, 1].every(axis => new Set(zones.map(zone => zone[axis])).size === 3)
+    && [proof.anchor_sha256, proof.reference_decoded_rgb_sha256].every(value => typeof value === 'string' && /^[0-9a-f]{64}$/.test(value))
+    && comparison.regions.every(region => {
+      const earlier = region.reference_region
+      return validAreaWithin(region, width, height) && !!earlier
+        && earlier.x === region.x && earlier.y === region.y && earlier.w === region.w && earlier.h === region.h
+    })
 }
 
 export async function compareWithEarlierImage(analysisId: string, file: File, signal: AbortSignal): Promise<ImageReferenceResult> {
@@ -209,6 +240,9 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
         })) {
       throw new Error('The server returned an incomplete JPEG structure comparison.')
     }
+  }
+  if (comparison.schema === sameJpegSchema && !validSameJpegProof(comparison)) {
+    throw new Error('The server returned an incomplete exact-block JPEG comparison.')
   }
   if (comparison.schema === exactPngCropResizeSchema && (!comparison.reference_crop_bounds
       || !proof || !Number.isSafeInteger(proof.matched_pixels) || !Array.isArray(proof.matched_tiles)

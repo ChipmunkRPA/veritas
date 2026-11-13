@@ -27,6 +27,50 @@ Enable `VERITAS_AUDIO_REFERENCE_COMPARISON_ENABLED=true` and `VERITAS_AUDIO_REFE
 
 Local Chrome loaded both playable excerpts and showed their waveforms in the 200 ms example. Its PDF and JSON downloads matched the comparison API response. The PDF shows the two times and sample ranges, and the JSON includes the clips and supporting window positions. Offline replay against the two files confirmed the downloaded JSON. The supplemental comparison leaves the analysis record and billing state unchanged.
 
+## WAV or FLAC paired with AAC M4A
+
+The optional `VERITAS_AUDIO_REFERENCE_AAC_TIMING=true` setting adds timing
+comparison between native 16 kHz mono PCM16 WAV or FLAC and a supported
+16 kHz mono AAC M4A. Both streams need continuous zero-based clocks and the
+same presented length, from 1.5 to 12 seconds. The AAC stream must declare
+its duration in exact 16 kHz ticks. The decoder may expose up to 1,023
+trailing samples beyond that duration. Only the local timing measurement
+excludes those samples. The ordinary decoded-sample comparison still uses
+the original decoded extents. Turning off the setting restores the prior
+timing scope.
+
+Cross-carrier testing reused the original 24 held utterances from six
+speakers and their prepared 48 kbps AAC files. It paired the native earlier
+WAV with the AAC submitted file, checking two known shifts and nine
+ordinary conditions per utterance. It recovered **34 of 48** known
+shifts within the original overlap and signed offset limits. It produced
+**zero flags across 216 ordinary pairs**, including 24 silent pairs with
+insufficient evidence. The independent decoder and timing verifier
+checked the source clocks, signed displacement, flanks, and both
+playable excerpts for all 34 findings. A second run reproduced all 264
+results byte for byte. This evaluates a transport change
+on previously studied voices. The app check carries zero AI confidence.
+[Cross-carrier ledger](evaluation-panels/audio-aac-timing-transfer-2026-11-13.json)
+
+The browser and PDF show the AAC presentation duration and how many
+trailing samples were excluded. The JSON retains the declared and decoded
+clocks. The isolated Chrome check used a completed held fixture. Both
+waveforms, both playable excerpts and the matching PDF and JSON downloads
+were verified. The comparison created no additional order or analysis.
+[Browser and export receipt](evaluation-panels/audio-aac-timing-app-2026-11-13.json)
+
+Use the prepared directory from the original native replay as
+`$run` to reproduce the transfer. The portable recount requires no media.
+
+```sh
+export PYTHONPATH=backend OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+python3 -B -S -m scripts.review_audio_aac_timing \
+  docs/evaluation-panels/audio-aac-timing-transfer-2026-11-13.json
+backend/.venv/bin/python -B -m scripts.review_audio_aac_timing "$new_receipt" --prepared "$run"
+cmp "$new_receipt" docs/evaluation-panels/audio-aac-timing-transfer-2026-11-13.json
+backend/.venv/bin/python -B -m scripts.verify_audio_local_timing_export "$earlier" "$submitted" "$export"
+```
+
 ## Local replay
 
 Use the source directory from the [Lombard intake and qualification](lombard-original-mouth-event-2026-11-12.md) as `sources` and an unused private directory as `run`. The panel uses FFmpeg and the backend environment, with OpenCV as an independent timing comparator. The receipt’s arithmetic replay uses only Python’s standard library.

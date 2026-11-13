@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Experimental comparison of detailed blocks in two same-framing JPEGs."""
+"""Compare detailed blocks in two same-framing JPEGs."""
 
 from __future__ import annotations
 

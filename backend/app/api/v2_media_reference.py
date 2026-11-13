@@ -166,6 +166,7 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         reference, submitted, filenames=(earlier.filename or "", original[2]),
                         include_local_timing=settings.audio_reference_local_timing,
                         include_channel_timing=settings.audio_reference_local_timing,
+                        include_aac_timing=settings.audio_reference_aac_timing,
                         include_clean_speech=settings.audio_reference_clean_speech and earlier_has_clean_speech,
                         allow_long_clean_speech=settings.audio_reference_long_clean_speech,
                     )

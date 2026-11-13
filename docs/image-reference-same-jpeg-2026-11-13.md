@@ -75,15 +75,16 @@ Six meet the useful-location criterion. The ordinary counts in the table
 describe physical differences between copies. The existing app assessed
 one fractional shift with an empty mask, and neither arm admits an additional
 incompatible pair or highlights any of the incompatible controls. Neither
-arm meets the two-held-source requirement. The candidate stays experimental
-in the evaluation scripts and needs a new multiple-photo confirmation
-before app integration.
+arm meets the two-held-source requirement on this panel. The subsequent
+confirmation documents the additional source, the frozen failures and the
+bounded local opt-in. [Additional confirmation](image-reference-same-jpeg-confirmation-2026-11-13.md)
 [Diagnostic results](evaluation-panels/image-reference-same-jpeg-diagnostic-2026-11-13.json) ·
 [Held results](evaluation-panels/image-reference-same-jpeg-held-2026-11-13.json)
 
 ## Replay
 
-Use the retained source directories from the linked earlier studies. The
+For the exact historical native code hashes, check out `083db5f`. Use the
+retained source directories from the linked earlier studies. The
 freeze checks the exact source rosters, input bytes, truth masks and
 comparison code. The private sources and rendered media stay outside the
 repository. The public ledgers contain native bounds, hashes and scalar

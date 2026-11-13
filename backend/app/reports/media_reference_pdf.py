@@ -7,6 +7,7 @@ import pymupdf
 from app.evidence.audio_reference import (
     AUDIO_RATE,
     MAX_SECONDS,
+    SCHEMA_WITH_AAC_TIMING,
     SCHEMA_WITH_CHANNEL_TIMING,
     SCHEMA_WITH_CLEAN_SPEECH,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
@@ -122,8 +123,11 @@ def _audio_summary(document, record):
         _text(page, MARGIN, y, label, font="hebo")
         _text(page, MARGIN, y + 20, f"SHA-256 {record[side]['sha256']}", size=9, font="cour", color=MUTED)
     if record["status"] != "measured":
-        _text(page, MARGIN, 346, "Comparison unassessed", size=16, font="hebo")
+        title = "Decoded sample comparison unavailable" if record["schema"] == SCHEMA_WITH_AAC_TIMING else "Comparison unassessed"
+        _text(page, MARGIN, 346, title, size=16, font="hebo")
         _text(page, MARGIN, 370, AUDIO_ONLY_STATUS[record["status"]])
+        if record["schema"] == SCHEMA_WITH_AAC_TIMING:
+            _text(page, MARGIN, 397, "The local timing result appears on a separate page.", size=10, color=MUTED)
         return
     _text(page, MARGIN, 346, "Decoded sample comparison", size=16, font="hebo")
     alignment = audio.get("trim_alignment")
@@ -307,6 +311,11 @@ def _audio_local_timing_page(document, timing, *, scope=None, stream_indices=Non
     page.insert_textbox((MARGIN, 176, RIGHT, 231), scope or timing["scope"], fontsize=11, fontname="helv", color=MUTED)
     if stream_indices:
         _text(page, MARGIN, 246, _first_soundtrack(stream_indices), size=9, color=MUTED)
+    if proof := timing.get("aac_presentation"):
+        side = "Earlier recording" if proof["side"] == "earlier" else "Analyzed recording"
+        _text(page, MARGIN, 246,
+              f"{side} · AAC duration {proof['presentation_end_exclusive_pts'] / AUDIO_RATE:.3f} s · "
+              f"{proof['excluded_trailing_samples']:,} trailing decoded samples excluded", size=9, color=MUTED)
     if timing["status"] != "local_shift":
         return
     span = timing["range"]
@@ -491,7 +500,8 @@ def render(record, assets):
     with pymupdf.open() as document:
         is_audio = record["schema"] in (AUDIO_SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT, SCHEMA_WITH_TRIM_ALIGNMENT,
                                         SCHEMA_WITH_TRIM_AND_LEVEL, SCHEMA_WITH_STEREO, SCHEMA_WITH_LOCAL_TIMING,
-                                        SCHEMA_WITH_CHANNEL_TIMING, SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH)
+                                        SCHEMA_WITH_CHANNEL_TIMING, SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH,
+                                        SCHEMA_WITH_AAC_TIMING)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
         adjusted = record.get("level_adjusted")
         trimmed = is_audio and "trim_alignment" in record.get("audio", {})

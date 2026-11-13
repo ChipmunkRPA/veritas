@@ -50,6 +50,7 @@ type SoundtrackTiming = {
   scope: string
   status?: 'unassessed' | 'no_local_shift' | 'local_shift'
   basis?: string
+  aac_presentation?: { side: Side; sample_rate: number; presentation_end_exclusive_pts: number; excluded_trailing_samples: number }
   range?: Record<Side, SoundtrackSide> & {
     picture?: SoundtrackPicture
     paired_pictures?: Record<'before' | 'during' | 'after', Record<Side, SoundtrackPicture>>
@@ -131,6 +132,7 @@ type Comparison = {
   schema: 'chipmunk.audio-reference-comparison/1' | 'chipmunk.audio-reference-comparison/2' | 'chipmunk.audio-reference-comparison/3'
     | 'chipmunk.audio-reference-comparison/4' | 'chipmunk.audio-reference-comparison/5' | 'chipmunk.audio-reference-comparison/6'
     | 'chipmunk.audio-reference-comparison/7' | 'chipmunk.audio-reference-comparison/8' | 'chipmunk.audio-reference-comparison/9'
+    | 'chipmunk.audio-reference-comparison/10'
   picture?: never
   timing?: never
   soundtrack_alignment?: never
@@ -365,7 +367,7 @@ function TimingEvidence({ timing, assets }: { timing: TimingComparison; assets: 
 }
 
 function SoundtrackTimingEvidence({ timing, assets, audioOnly = false, title: customTitle }: {
-  timing: Pick<SoundtrackTiming, 'summary' | 'scope' | 'range'>; assets: Result['assets']; audioOnly?: boolean; title?: string
+  timing: Pick<SoundtrackTiming, 'summary' | 'scope' | 'range' | 'aac_presentation'>; assets: Result['assets']; audioOnly?: boolean; title?: string
 }) {
   const span = timing.range
   const picture = span?.picture
@@ -373,10 +375,15 @@ function SoundtrackTimingEvidence({ timing, assets, audioOnly = false, title: cu
   const title = customTitle ?? (audioOnly ? 'Local audio timing' : 'Local soundtrack timing')
   const labels = audioOnly ? { earlier: 'Earlier recording', submitted: 'Analyzed recording' } : names
   const excerpt = audioOnly ? 'matched excerpt' : 'matched soundtrack'
+  const aac = timing.aac_presentation
   const maximum = span ? Math.max(.01, ...sides.flatMap(side => [...span[side].waveform.low, ...span[side].waveform.high].map(Math.abs))) : 1
   return <section className="space-y-2" aria-label={title}>
     <h3 className="m-0 text-small font-medium">{title}</h3>
     <p className="m-0 text-small">{timing.summary}</p>
+    {aac && <p className="m-0 text-caption text-text-muted">
+      {labels[aac.side]} · AAC duration {sourceSeconds.format(aac.presentation_end_exclusive_pts / aac.sample_rate)} s
+      {' · '}{aac.excluded_trailing_samples.toLocaleString('en-US')} trailing decoded samples excluded
+    </p>}
     {span && <>
       {image && picture && <figure className="m-0 max-w-80 space-y-1">
         <img src={'data:image/png;base64,' + image} className="h-auto w-full rounded border border-border"
@@ -454,7 +461,10 @@ function ResultView({ result }: { result: Result }) {
         { type: 'application/pdf' }), downloadName + '.pdf')}>Download PDF</Button>}
     </div>
     <p className="m-0 text-small text-text-muted">{comparison.interpretation}</p>
-    {comparison.status !== 'measured' && <p className="m-0 text-small">{notes[comparison.status] ?? 'The files could not be compared.'}</p>}
+    {comparison.status !== 'measured' && <p className="m-0 text-small">
+      {comparison.schema === 'chipmunk.audio-reference-comparison/10' && 'Decoded sample comparison unavailable. '}
+      {notes[comparison.status] ?? 'The files could not be compared.'}
+    </p>}
     {comparison.clean_speech && <CleanSpeechEvidence result={comparison.clean_speech} assets={assets} />}
     {comparison.timing && <TimingEvidence timing={comparison.timing} assets={assets} />}
     {comparison.soundtrack_alignment && !comparison.timing?.changed_audio_samples &&
@@ -604,7 +614,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, cleanSpeechAvai
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] : [1, 2, 3, 4, 5, 6, 7, 8, 9]
+      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
       if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
@@ -613,6 +623,9 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, cleanSpeechAvai
       }
       if (schema === 'chipmunk.audio-reference-comparison/6' && !response.comparison.local_timing) {
         throw new Error('The comparison response is missing its local audio timing result.')
+      }
+      if (schema === 'chipmunk.audio-reference-comparison/10' && !response.comparison.local_timing?.aac_presentation) {
+        throw new Error('The comparison response is missing its AAC timing evidence.')
       }
       if ((schema === 'chipmunk.audio-reference-comparison/8' || schema === 'chipmunk.audio-reference-comparison/9')
           && !response.comparison.clean_speech) {

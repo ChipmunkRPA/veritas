@@ -97,6 +97,29 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [WAV and M4A timing check](audio-reference-local-shift-2026-11-12.md#wav-or-flac-paired-with-aac-m4a)
+  uses the declared AAC sample extent to exclude trailing decoder padding
+  before comparing timing. It located 34 of 48 known shifts with no flags
+  on 216 ordinary pairs. The local app shows both playable intervals
+  and the extent in the browser, PDF and JSON.
+- The [speech word-position comparison](audio-paired-word-change-2026-11-13.md)
+  added 16 ordinary flags on reprocessed or noisy audio when used alone.
+  Requiring acoustic agreement cleared them, but removed useful edits.
+  Neither channel located an edit under strong construction noise.
+- The [native video insertion comparison](video-temporal-insert-native-2026-11-13.md)
+  located four generated and three ordinary inserts against earlier
+  footage. The four publisher clips place the inserted content later than
+  their annotations imply. The paired check stays experimental.
+- The [ordered surprisal experiment](writing-surprisal-dynamics-transfer-2026-11-13.md)
+  added no useful locations to the 12 of 40 found by the current writing
+  comparator and added two ordinary-file flags. It stays outside the app.
+- The [exact JPEG90 confirmation](image-reference-same-jpeg-confirmation-2026-11-13.md)
+  adds a local opt-in for otherwise unassessed pairs. Across both held
+  banks it improved useful locations from 108 to 111 of 114, with no
+  added flags on 285 untouched or global-processing controls. The fourth
+  new region covered 48.95% of its known edit. Each bank's original
+  source-breadth decision remains recorded.
+
 - The [longer audio bandwidth comparison](audio-bandwidth-return-2026-11-13.md#transfer-to-eight-and-twelve-seconds)
   adds eight- and twelve-second lossless inputs and native 16-bit FLAC.
   On two additional AMI recordings, twelve-second deliveries assessed all

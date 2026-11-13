@@ -10,6 +10,7 @@ from app.detectors.image import (
     reference_png_oriented_crop,
     reference_png_oriented_resize,
     reference_png_screenshot,
+    reference_same_jpeg,
     reference_shifted_jpeg,
     reference_structure_jpeg,
 )
@@ -82,13 +83,19 @@ def _summary(document, comparison, assets):
         _text(page, MARGIN, 318, f"{proof['exact_tiles']:,} of {proof['full_tiles']:,} full blocks matched after JPEG encoding.",
               size=10, color=MUTED)
         _text(page, MARGIN, 334, f"{proof['anchor_count']:,} unique detailed blocks supported alignment.", size=10, color=MUTED)
+    if schema == reference_same_jpeg.SCHEMA:
+        proof = comparison["alignment"]
+        _text(page, MARGIN, 302, "Matching JPEG blocks support the same framing.", size=10, font="hebo")
+        _text(page, MARGIN, 318, f"{proof['exact_tiles']:,} of {proof['full_tiles']:,} complete decoded blocks match exactly.",
+              size=10, color=MUTED)
+        _text(page, MARGIN, 334, f"{proof['anchor_count']:,} unique detailed blocks support the alignment.", size=10, color=MUTED)
     if schema == reference_structure_jpeg.SCHEMA:
         proof = comparison["same_framing_structure"]
         aligned, detailed = len(proof["aligned_tiles"]), proof["detailed_tiles"]
         _text(page, MARGIN, 302, "Matching detail supports the same framing.", size=10, font="hebo")
         _text(page, MARGIN, 318, f"{aligned} of {detailed} detailed areas matched across the two images.", size=10, color=MUTED)
         _text(page, MARGIN, 334, "Highlights require local color and structure changes under both tone fits.", size=10, color=MUTED)
-    elif (alignment := comparison.get("alignment")) and "submitted_overlap" in alignment:
+    elif schema != reference_same_jpeg.SCHEMA and (alignment := comparison.get("alignment")) and "submitted_overlap" in alignment:
         label = "area compared" if schema == reference_shifted_jpeg.SCHEMA else "overlap"
         _text(page, MARGIN, 302, f"Earlier copy {label}: {_area(alignment['reference_overlap'])}", size=10)
         _text(page, MARGIN, 318, f"Submitted image {label}: {_area(alignment['submitted_overlap'])}", size=10)

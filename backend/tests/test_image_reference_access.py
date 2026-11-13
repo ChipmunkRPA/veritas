@@ -22,6 +22,7 @@ from app.core.config import settings
 from app.detectors.image import (
     reference_exact_jpeg,
     reference_png_orientation,
+    reference_same_jpeg,
     reference_shifted_jpeg,
     reference_structure_jpeg,
 )
@@ -816,5 +817,73 @@ def test_tone_adjusted_jpeg_keeps_source_structure_evidence(reference_http, tmp_
     assert clean["comparison"]["regions"] == [] and clean["pngs"] == {}
     shift = cv2.warpAffine(changed, np.float32([[1, 0, 1.65], [0, 1, -1.65]]), (768, 512), borderMode=cv2.BORDER_REFLECT_101)
     assert compare(shift)[0]["comparison"]["schema"] != reference_structure_jpeg.SCHEMA
+    with Session(f.engine) as db:
+        assert db.get(Analysis, "image-a").result_hash == "a" * 64
+
+
+def test_exact_jpeg_block_fallback_preserves_completed_analysis_and_exports(reference_http, tmp_path, monkeypatch):
+    f = reference_http
+    tiles = np.random.default_rng(661).integers(30, 220, (32, 48, 3), dtype=np.uint8)
+    original = cv2.resize(tiles, (768, 512), interpolation=cv2.INTER_CUBIC)
+    original[:176] = np.rint(115 + .09 * (original[:176].astype(float) - 115)).astype(np.uint8)
+    changed = original.copy()
+    changed[210:280, 349:404] = [204, 108, 77]
+
+    def jpeg(pixels, quality=90):
+        with io.BytesIO() as output:
+            Image.fromarray(pixels).save(output, "JPEG", quality=quality, subsampling=2)
+            return output.getvalue()
+
+    def compare(content):
+        stored = f.store.put_bytes(content)
+        with Session(f.engine) as db:
+            analysis = db.get(Analysis, "image-a")
+            analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+            db.commit()
+        response = f.client.post(_url(), headers=f.viewer, files={"reference": ("earlier.jpg", earlier, "image/jpeg")},
+                                 data={"include_pdf": "true"})
+        assert response.status_code == 200 and response.headers["Cache-Control"] == "no-store"
+        return response.json()
+
+    earlier, submitted = jpeg(original), jpeg(changed)
+    for name in ("image_reference_exact_jpeg_identity", "image_reference_shifted_jpeg", "image_reference_structure_jpeg"):
+        monkeypatch.setattr(settings, name, True)
+    monkeypatch.setattr(settings, "image_reference_same_jpeg", False)
+    baseline = compare(submitted)["comparison"]
+    assert baseline["status"] == "integer_alignment_unresolved" and baseline["regions"] == []
+    monkeypatch.setattr(settings, "image_reference_same_jpeg", True)
+    payload = compare(submitted)
+    comparison = payload["comparison"]
+    assert comparison["schema"] == reference_same_jpeg.SCHEMA and comparison["status"] == "comparable"
+    assert comparison["affects_overall_confidence"] is False
+    assert comparison["comparison_options"] == {"exact_jpeg_identity": True, "shifted_jpeg": True, "structure_jpeg": True}
+    assert comparison["alignment"]["exact_tiles"] == 1490
+    [region] = comparison["regions"]
+    assert region["reference_region"] == {key: region[key] for key in ("x", "y", "w", "h")}
+    with Image.open(io.BytesIO(_asset_bytes(payload, comparison["mask"]))) as mask:
+        assert np.mean(np.asarray(mask)[210:280, 349:404] > 0) > .95
+    with pymupdf.open(stream=base64.b64decode(payload.pop("pdf")), filetype="pdf") as pdf:
+        assert "complete decoded blocks match exactly" in pdf[0].get_text()
+        _assert_pdf_assets(pdf, pdf[0], [comparison["mask"]], payload)
+        _assert_pdf_assets(pdf, pdf[1], [region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")], payload)
+    exported, reference_path, submitted_path = [tmp_path / name for name in ("comparison.json", "earlier.jpg", "submitted.jpg")]
+    reference_path.write_bytes(earlier)
+    submitted_path.write_bytes(submitted)
+    exported.write_text(json.dumps(payload))
+    assert review(exported, reference_path, submitted_path)["mask_pixels_counted"] == region["selected_pixels"]
+    comparison["alignment"]["exact_tiles"] += 1
+    exported.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="Exact JPEG source proof"):
+        review(exported, reference_path, submitted_path)
+    comparison["alignment"]["exact_tiles"] -= 1
+    comparison["comparison_options"]["structure_jpeg"] = "false"
+    exported.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="invalid recorded comparison options"):
+        review(exported, reference_path, submitted_path)
+    assert compare(earlier)["comparison"]["regions"] == []
+    assert compare(jpeg(changed, 85))["comparison"]["schema"] != reference_same_jpeg.SCHEMA
+    assert compare(jpeg(np.roll(changed, 16, axis=1)))["comparison"]["schema"] != reference_same_jpeg.SCHEMA
+    monkeypatch.setattr(settings, "image_reference_same_jpeg", False)
+    assert compare(submitted)["comparison"] == baseline
     with Session(f.engine) as db:
         assert db.get(Analysis, "image-a").result_hash == "a" * 64

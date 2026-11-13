@@ -158,6 +158,66 @@ def test_local_timing_evidence_replays_offsets_excerpts_and_pdf(tmp_path):
     assert "local_timing" not in audio_reference.compare(earlier, analyzed)[0]
 
 
+def test_aac_timing_uses_presentation_duration_and_replays_source_excerpts(tmp_path, monkeypatch):
+    original = np.random.default_rng(34).integers(-9000, 9000, 48000).astype(np.float32) / 32768
+    shifted = original.copy()
+    shifted[16000:26240] = original[12800:23040]
+    earlier = save(tmp_path, "before", original)
+    wav = save(tmp_path, "shift", shifted)
+    aac = tmp_path / "submitted.m4a"
+    subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(wav), "-c:a", "aac", "-b:a", "48k", str(aac)],
+                   check=True, timeout=20, capture_output=True)
+    inactive, _ = audio_reference.compare(earlier, aac, include_local_timing=True)
+    assert inactive["local_timing"]["status"] == "unassessed"
+
+    result, assets = audio_reference.compare(earlier, aac, include_local_timing=True, include_aac_timing=True)
+    timing = result["local_timing"]
+    assert result["schema"] == audio_reference.SCHEMA_WITH_AAC_TIMING
+    assert result["audio"] == inactive["audio"]
+    assert timing["status"] == "local_shift" and timing["offset_ms"] == 200
+    assert timing["affects_overall_confidence"] is False
+    assert timing["aac_presentation"] == {
+        "side": "submitted", "sample_rate": 16000, "time_base": "1/16000",
+        "presentation_start_pts": 0, "presentation_end_exclusive_pts": 48000,
+        "decoded_samples": 48128, "excluded_trailing_samples": 128,
+    }
+    native = subprocess.check_output(["ffmpeg", "-nostdin", "-v", "error", "-i", str(aac), "-map", "0:a:0",
+                                      "-c:a", "pcm_s16le", "-f", "s16le", "-"], timeout=20)
+    span = timing["range"]["submitted"]
+    start, end = span["samples"]
+    assert span["source_pts"] == [start, end] == [16000, 26240]
+    assert hashlib.sha256(native[2*start:2*end]).hexdigest() == span["pcm_sha256"]
+    assert read_wav(assets[span["audio"]["file"]]).tobytes() == (
+        np.frombuffer(native[2*start:2*end], dtype="<i2").astype(np.float32) / 32768
+    ).tobytes()
+    with pymupdf.open(stream=render_comparison(result, assets), filetype="pdf") as report:
+        assert "128 trailing decoded samples excluded" in report[-1].get_text()
+        assert "1.000 to 1.640 s" in report[-1].get_text()
+
+    output = tmp_path / "aac-comparison.json"
+    package = {"comparison": result, "assets": {name: base64.b64encode(raw).decode() for name, raw in assets.items()}}
+    output.write_text(json.dumps(package))
+    assert run(earlier, aac, output, verify=True) == result
+    assert verify_timing(earlier, aac, output)["excerpts_verified"] == 2
+    timing["aac_presentation"]["excluded_trailing_samples"] += 1
+    output.write_text(json.dumps(package))
+    with pytest.raises(ValueError, match="differs from the re-decoded sources"):
+        run(earlier, aac, output, verify=True)
+    with pytest.raises(ValueError, match="AAC presentation proof differs"):
+        verify_timing(earlier, aac, output)
+    reverse, _ = audio_reference.compare(aac, earlier, include_local_timing=True, include_aac_timing=True)
+    assert reverse["local_timing"]["aac_presentation"]["side"] == "earlier"
+
+    short = save(tmp_path, "mismatched-extent", original[:-1])
+    mismatch, _ = audio_reference.compare(short, aac, include_local_timing=True, include_aac_timing=True)
+    assert mismatch["local_timing"]["status"] == "unassessed"
+    assert "aac_presentation" not in mismatch["local_timing"]
+
+    monkeypatch.setattr(audio_reference, "aac_native_extent", lambda _: None)
+    unavailable, _ = audio_reference.compare(earlier, aac, include_local_timing=True, include_aac_timing=True)
+    assert unavailable == inactive
+
+
 def test_local_channel_timing_replays_opposite_stereo_moves(tmp_path):
     generator = np.random.default_rng(665)
     first = generator.integers(-10000, 10000, (52800, 2), dtype=np.int16)

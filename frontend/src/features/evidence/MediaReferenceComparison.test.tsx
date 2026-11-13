@@ -273,14 +273,16 @@ it('shows the localized audio difference after volume adjustment alongside the r
   ])
 })
 
-it('shows both timestamps and waveforms for a moved excerpt in two recordings', async () => {
+it.each([6, 10])('shows both timestamps and waveforms for a moved excerpt with audio schema %i', async version => {
   const audio = { file: 'excerpt.wav', media_type: 'audio/wav', sha256: 'c'.repeat(64) }
   const waveform = { low: [-.4], high: [.2] }
   const comparison = {
-    schema: 'chipmunk.audio-reference-comparison/6', status: 'measured', interpretation: 'Decoded audio differences.',
+    schema: `chipmunk.audio-reference-comparison/${version}`, status: 'measured', interpretation: 'Decoded audio differences.',
     local_timing: {
       summary: 'The matching excerpt occurs 200.0 ms later in the analyzed recording.',
       scope: 'Copying or ordinary editing can produce this pattern.',
+      ...(version === 10 && { aac_presentation: { side: 'submitted', sample_rate: 16000,
+        presentation_end_exclusive_pts: 48000, excluded_trailing_samples: 128 } }),
       range: {
         earlier: { start_s: .8, end_s: 1.44, audio, waveform },
         submitted: { start_s: 1, end_s: 1.64, audio, waveform },
@@ -296,6 +298,7 @@ it('shows both timestamps and waveforms for a moved excerpt in two recordings', 
   expect(screen.getByText('Earlier recording · 0.800–1.440 s')).toBeTruthy()
   expect(screen.getByText('Analyzed recording · 1.000–1.640 s')).toBeTruthy()
   expect(screen.getAllByRole('img', { name: /matched excerpt waveform/ })).toHaveLength(2)
+  if (version === 10) expect(screen.getByText('Analyzed recording · AAC duration 3.000 s · 128 trailing decoded samples excluded')).toBeTruthy()
   expect(screen.getByRole('button', { name: 'Download PDF' })).toBeTruthy()
   expect(screen.getByRole('button', { name: 'Download JSON evidence' })).toBeTruthy()
 })

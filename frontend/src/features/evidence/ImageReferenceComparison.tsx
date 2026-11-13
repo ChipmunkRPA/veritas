@@ -5,7 +5,7 @@ import { saveBlob } from '../../lib/api/reports'
 import {
   compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
-  IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, orientationLabels, referencePngSrc, structureJpegSchema,
+  IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -72,6 +72,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const embeddedPhoto = comparison.schema === embeddedPhotoSchema ? comparison.embedded_native_photo : undefined
   const delivery = comparison.schema === jpegPngEnvelopeSchema
   const sameJpegFraming = comparison.schema === exactJpegIdentitySchema ? alignment : undefined
+  const sameJpegBlocks = comparison.schema === sameJpegSchema ? alignment : undefined
   const shiftedJpeg = comparison.schema === shiftedJpegSchema ? alignment : undefined
   const sameStructureFraming = comparison.schema === structureJpegSchema ? comparison.same_framing_structure : undefined
   const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' || exact || delivery
@@ -126,6 +127,11 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       {' '}{sameJpegFraming.anchor_count?.toLocaleString('en-US')} unique detailed blocks supported the alignment.
       Ordinary edits can produce highlighted differences.
     </p>}
+    {sameJpegBlocks && <p className="mt-2 mb-0 text-small text-text-muted">
+      {sameJpegBlocks.exact_tiles?.toLocaleString('en-US')} of {sameJpegBlocks.full_tiles?.toLocaleString('en-US')} complete decoded JPEG blocks match exactly.
+      {' '}{sameJpegBlocks.anchor_count?.toLocaleString('en-US')} unique detailed blocks support the same framing.
+      Ordinary edits can produce highlighted differences.
+    </p>}
     {shiftedJpeg && <p className="mt-2 mb-0 text-small text-text-muted">
       After whole-pixel alignment, {shiftedJpeg.exact_tiles?.toLocaleString('en-US')} of {shiftedJpeg.full_tiles?.toLocaleString('en-US')} complete JPEG blocks matched in the area compared. Ordinary edits can produce highlighted differences.
     </p>}
@@ -174,7 +180,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     {alignment && <dl className="mt-3 mb-0 grid grid-cols-1 gap-2 text-small text-text-muted sm:grid-cols-2">
       <div><dt className="font-medium text-text">{shiftedJpeg ? 'Submitted image area compared' : 'Submitted image overlap'}</dt><dd className="m-0"><NativeArea area={alignment.submitted_overlap} /></dd></div>
       <div><dt className="font-medium text-text">{shiftedJpeg ? 'Earlier copy area compared' : 'Earlier copy overlap'}</dt><dd className="m-0"><NativeArea area={alignment.reference_overlap} /></dd></div>
-      {!sameJpegFraming && <div className="sm:col-span-2"><dt className="sr-only">Comparison coverage</dt><dd className="m-0">{shiftedJpeg ? 'Margins outside these bounds were unassessed.' : 'Pixels outside the overlap were unassessed.'}</dd></div>}
+      {!sameJpegFraming && !sameJpegBlocks && <div className="sm:col-span-2"><dt className="sr-only">Comparison coverage</dt><dd className="m-0">{shiftedJpeg ? 'Margins outside these bounds were unassessed.' : 'Pixels outside the overlap were unassessed.'}</dd></div>}
     </dl>}
     {comparable && regions.length > 0 && <>
       {mask && <div className="mt-4 max-w-xl">

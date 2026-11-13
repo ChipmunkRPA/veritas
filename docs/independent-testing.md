@@ -63,6 +63,11 @@ from a public preview, retaining its one-reader and one-generator limits.
 The [earlier-copy alignment comparison](audio-aligned-speech-difference-2026-11-13.md#replay)
 replays both recorded source clocks, short neural-edit locations, and routine
 processing controls from SINE, PartialEdit and AMI without neural weights.
+The [word-position comparison](audio-paired-word-change-2026-11-13.md#replay)
+recounts the acoustic and word-timing results separately, with no private
+transcript in the public receipt. The [WAV and M4A timing replay](audio-reference-local-shift-2026-11-12.md#wav-or-flac-paired-with-aac-m4a)
+checks 264 earlier-copy pairs and independently verifies the exact source
+clocks, flank support, waveforms and playable excerpts for each result.
 The [Word boundary omission replay](writing-gao-archive-comparison-2026-11-13.md#word-omissions-at-paragraph-breaks)
 rebuilds 168 deliveries from the pinned public archive and verifies both
 original Word character positions for every reported omission.
@@ -77,9 +82,17 @@ The [exact-block comparison](image-reference-same-jpeg-2026-11-13.md#replay)
 compares the proposed fallback with the complete app on that diagnostic bank
 and on 322 separately held pairs. It preserves the per-source advancement
 decision alongside the edit and control counts.
+The [second exact-block panel](image-reference-same-jpeg-confirmation-2026-11-13.md#replay)
+checks 476 additional JPEG pairs and preserves both the combined local
+release decision and the separate panel results.
 The [general-video insertion source audit](video-temporal-insert-source-intake-2026-11-13.md#replay)
 verifies the archive roster and edit labels with about 152 KB of publisher
 byte ranges, preserving original and inserted cadence separately.
+The [native video insertion replay](video-temporal-insert-native-2026-11-13.md#replay)
+verifies the exact clocks and compares the publisher labels with decoded
+source content. The [ordered surprisal replay](writing-surprisal-dynamics-transfer-2026-11-13.md#replay)
+checks held report and ordinary writing outcomes from public features
+without exposing the original passages.
 The [four-second H.264 face comparison](video-brief-face-avc-confirmation-2026-11-13.md#local-replay)
 recounts exact source-frame ranges and control outcomes for six recordings
 and their paired deliveries.

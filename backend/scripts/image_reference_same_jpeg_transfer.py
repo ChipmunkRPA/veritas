@@ -142,8 +142,8 @@ def measure(case, path):
     import numpy as np
     from PIL import Image
 
+    from app.detectors.image import reference_same_jpeg
     from app.evidence import image_reference
-    from scripts import image_reference_same_jpeg
 
     key, before, after, truth = case
     earlier, submitted = path / "before.jpg", path / "after.jpg"
@@ -158,10 +158,19 @@ def measure(case, path):
     arms = {"current": (result, mask)}
     if mask is None or (before != after and not mask.any()):
         with Image.open(io.BytesIO(before)) as a, Image.open(io.BytesIO(after)) as b:
-            candidate, selected = image_reference_same_jpeg.compare(a, b, before, after)
+            candidate, selected = reference_same_jpeg.compare(a, b, before, after)
         if candidate is not None:
             if mask is None:
-                arms["combined"] = (candidate, selected)
+                integrated = image_reference.inspect(earlier, submitted, evidence_dir=path / "fallback",
+                                                     allow_same_jpeg=True, **OPTIONS)
+                require(integrated["schema"] == reference_same_jpeg.SCHEMA and integrated["affects_overall_confidence"] is False,
+                        "Native fallback differs from the exact-block candidate")
+                if integrated.get("mask"):
+                    with Image.open(path / "fallback" / integrated["mask"]["file"]) as image:
+                        require(np.array_equal(np.asarray(image) > 0, selected), "Integrated mask differs from the candidate")
+                else:
+                    require(not selected.any(), "Integrated mask is missing")
+                arms["combined"] = (integrated, selected)
             elif selected.any():
                 arms["also_empty"] = (candidate, selected)
     arms.setdefault("combined", arms["current"])
@@ -179,7 +188,7 @@ def measure(case, path):
                           "proof": {field: proof[field] for field in ("full_tiles", "exact_tiles", "anchor_count",
                                                                     "anchor_sha256", "supported_zones",
                                                                     "reference_decoded_rgb_sha256")}
-                          if proof.get("method") == image_reference_same_jpeg.METHOD else None}
+                          if proof.get("method") == reference_same_jpeg.METHOD else None}
     return key | measured
 
 
@@ -264,14 +273,18 @@ def main():
     else:
         import cv2
 
-        from app.detectors.image import reference_alignment, reference_compare, reference_exact_jpeg
+        from app.detectors.image import (
+            reference_alignment,
+            reference_compare,
+            reference_exact_jpeg,
+            reference_same_jpeg,
+        )
         from app.evidence import image_reference
-        from scripts import image_reference_same_jpeg
 
         require(all((args.main, args.external, args.confirmation, args.wavelet)), "Native source archives required")
         cv2.setNumThreads(1)
         modules = (prior, reference_alignment, reference_compare, reference_exact_jpeg,
-                   image_reference_same_jpeg, image_reference)
+                   reference_same_jpeg, image_reference)
         lock = {"schema": SCHEMA, "stage": args.stage, "design": DESIGN, "prior_paired_sha256": digest(PRIOR_PAIRED),
                 "code": {Path(path).name: digest(Path(path)) for path in (__file__, *(m.__file__ for m in modules))},
                 "cases": [case for case, *_ in cases(args, args.stage)]}

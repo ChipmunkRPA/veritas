@@ -28,12 +28,18 @@ from scripts.verify_stereo_reference import (
 )
 
 SCHEMA = "chipmunk.audio-reference-comparison/6"
+AAC_SCHEMA = "chipmunk.audio-reference-comparison/10"
 WINDOW = 2560
 MIN_SAMPLES = 24000
 MAX_SAMPLES = 192000
 
 
 def decode(path, original):
+    raw, origin, _ = _decode(path, original, aac_presentation=False)
+    return raw, origin
+
+
+def _decode(path, original, *, aac_presentation):
     path = str(path.resolve())
     with open(path, "rb") as source:
         size = Path(path).stat().st_size
@@ -42,20 +48,24 @@ def decode(path, original):
                 "Original file differs from the export")
     probe = command(
         "ffprobe", "-v", "error", "-protocol_whitelist", "file", "-select_streams", "a:0",
-        "-show_entries", "stream=sample_rate,channels,codec_name,bits_per_raw_sample,time_base:format=format_name", "-of", "json", path,
+        "-show_entries", "stream=sample_rate,channels,codec_name,bits_per_raw_sample,time_base,start_pts,duration_ts:format=format_name",
+        "-of", "json", path,
     )
     info = json.loads(probe.stdout)
     stream, = info["streams"]
     codec, container = stream["codec_name"], info["format"]["format_name"]
-    eligible = (codec, container) == ("pcm_s16le", "wav") or (
+    lossless = (codec, container) == ("pcm_s16le", "wav") or (
         (codec, container) == ("flac", "flac") and stream.get("bits_per_raw_sample") == "16"
     )
+    aac = aac_presentation and (codec, container) == ("aac", "mov,mp4,m4a,3gp,3g2,mj2")
+    eligible = aac or lossless
     require(eligible and int(stream["sample_rate"]) == RATE and stream["channels"] == 1
             and Fraction(stream["time_base"]) == Fraction(1, RATE),
-            "Timing evidence requires native 16 kHz mono PCM16 WAV or FLAC")
+            "Timing evidence requires native 16 kHz mono audio in a supported container")
+    limit = MAX_SAMPLES + (1024 if aac else 1)
     audio = command(
         "ffmpeg", "-v", "info", "-nostdin", "-protocol_whitelist", "file", "-copyts", "-i", path,
-        "-map", "0:a:0", "-af", f"atrim=end_sample={MAX_SAMPLES + 1},ashowinfo", "-c:a", "pcm_s16le", "-f", "s16le", "pipe:1",
+        "-map", "0:a:0", "-af", f"atrim=end_sample={limit},ashowinfo", "-c:a", "pcm_s16le", "-f", "s16le", "pipe:1",
     )
     frames = [(int(i), int(tick), int(length)) for i, tick, length in FRAME.findall(audio.stderr)]
     require(frames and len(audio.stdout) % 2 == 0, "Missing decoded sample clock")
@@ -63,19 +73,36 @@ def decode(path, original):
     for i, (index, tick, length) in enumerate(frames):
         require(index == i and tick == origin + count and length > 0, "Decoded clock is discontinuous")
         count += length
-    require(count * 2 == len(audio.stdout) and MIN_SAMPLES <= count <= MAX_SAMPLES, "Recording extent differs")
-    return audio.stdout, origin
+    require(count * 2 == len(audio.stdout), "Recording extent differs")
+    proof = None
+    presented = count
+    if aac:
+        duration = stream.get("duration_ts")
+        require(type(duration) is int and stream.get("start_pts") == origin == 0
+                and 0 <= count - duration < 1024, "AAC presentation extent differs")
+        presented = duration
+        proof = {"sample_rate": RATE, "time_base": f"1/{RATE}", "presentation_start_pts": 0,
+                 "presentation_end_exclusive_pts": presented, "decoded_samples": count,
+                 "excluded_trailing_samples": count - presented}
+    require(MIN_SAMPLES <= presented <= MAX_SAMPLES, "Recording extent differs")
+    return audio.stdout[:2*presented], origin, proof
 
 
 def verify_export(earlier, submitted, export):
     package = json.loads(export.read_bytes())
     record, assets = package["comparison"], package["assets"]
     timing = record["local_timing"]
-    require(record["schema"] == SCHEMA and timing["status"] == "local_shift" and timing["sample_rate"] == RATE
+    require(record["schema"] in {SCHEMA, AAC_SCHEMA} and timing["status"] == "local_shift" and timing["sample_rate"] == RATE
             and timing["affects_overall_confidence"] is False, "The export needs a measured local audio shift")
     span = timing["range"]
-    source = [decode(path, record[side]) for path, side in zip((earlier, submitted), SIDES, strict=True)]
-    samples = [np.frombuffer(raw, dtype="<i2").astype(np.float32) / 32768 for raw, _ in source]
+    source = [_decode(path, record[side], aac_presentation=record["schema"] == AAC_SCHEMA)
+              for path, side in zip((earlier, submitted), SIDES, strict=True)]
+    presented = [{"side": side, **proof} for side, (_, _, proof) in zip(SIDES, source, strict=True) if proof]
+    if record["schema"] == AAC_SCHEMA:
+        require(len(presented) == 1 and presented[0] == timing.get("aac_presentation"), "AAC presentation proof differs")
+    else:
+        require("aac_presentation" not in timing, "Unexpected AAC presentation proof")
+    samples = [np.frombuffer(raw, dtype="<i2").astype(np.float32) / 32768 for raw, _, _ in source]
     require(source[0][1] == source[1][1] and len(samples[0]) == len(samples[1]), "The source clocks differ")
     found, match_count = localize(*samples)
     require(found is not None and match_count == timing["matched_windows"], "Independent timing measurement differs")
@@ -119,7 +146,7 @@ def verify_export(earlier, submitted, export):
                 "Same-time support does not match the original recordings")
     require(flanks["before"][-1] + WINDOW <= bounds[0] and flanks["after"][0] >= bounds[1],
             "Same-time windows do not bracket the excerpt")
-    for side, (raw, origin), (start, end) in zip(SIDES, source, (prior, bounds), strict=True):
+    for side, (raw, origin, _), (start, end) in zip(SIDES, source, (prior, bounds), strict=True):
         row = span[side]
         require(0 <= start < end <= len(raw) // 2 and row["samples"] == [start, end]
                 and row["source_pts"] == [origin + start, origin + end]

@@ -12,7 +12,7 @@ import numpy as np
 
 from app.core.canonical import canonical_hash
 from app.detectors.audio.decode import SAMPLE_RATE as AUDIO_RATE
-from app.detectors.audio.decode import AudioStreamUnavailable, decode_audio, wav_bytes
+from app.detectors.audio.decode import AudioStreamUnavailable, aac_native_extent, decode_audio, wav_bytes
 from app.detectors.audio.waveform import envelope
 from app.evidence import audio_level_adjustment
 from app.storage.files import sniff_audio
@@ -26,6 +26,7 @@ SCHEMA_WITH_LOCAL_TIMING = "chipmunk.audio-reference-comparison/6"
 SCHEMA_WITH_CHANNEL_TIMING = "chipmunk.audio-reference-comparison/7"
 SCHEMA_WITH_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/8"
 SCHEMA_WITH_LONG_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/9"
+SCHEMA_WITH_AAC_TIMING = "chipmunk.audio-reference-comparison/10"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_SECONDS = 30
 MAX_PRESENTED_RANGES = 3
@@ -64,6 +65,11 @@ STEREO_SCOPE = (
 LOCAL_TIMING_SCOPE = (
     "This check looks for distinctive sound at a different time in the two recordings, with matching timing on both "
     "sides. Copying or ordinary editing can produce this pattern. This comparison contributes zero weight to the AI estimate."
+)
+AAC_TIMING_SCOPE = (
+    "For timing only, the AAC track is limited to its declared presentation duration. Trailing decoded samples outside "
+    "that duration are excluded. Matching sound on both sides supports the reported shift. Ordinary edits can produce "
+    "this result. It contributes zero weight to the AI estimate."
 )
 CHANNEL_TIMING_SCOPE = (
     "The two channels are checked separately for exact excerpts that moved inside a short change. "
@@ -409,14 +415,42 @@ def channel_timing(decoded, assets, *, sample_limit=None):
             "affects_overall_confidence": False, "sample_rate": AUDIO_RATE, "ranges": ranges}
 
 
-def _local_timing(decoded, audio, assets):
+def _aac_timing_tracks(paths, decoded):
+    tracks = tuple(item[0] for item in decoded)
+    if not all(track[0] == "measured" and track[2]["source_pts"] == 0 for track in tracks):
+        return None
+    if sum(item[4] for item in decoded) != 1:
+        return None
+    native = next(i for i, item in enumerate(decoded) if item[4])
+    aac = 1 - native
+    duration = aac_native_extent(paths[aac])
+    if duration is None or duration != len(tracks[native][1]) or not 0 <= len(tracks[aac][1]) - duration < 1024:
+        return None
+    aac_track = tracks[aac]
+    trimmed = tuple((track[0], track[1][:duration], track[2]) for track in tracks)
+    proof = {
+        "side": ("earlier", "submitted")[aac],
+        "sample_rate": AUDIO_RATE,
+        "time_base": f"1/{AUDIO_RATE}",
+        "presentation_start_pts": 0,
+        "presentation_end_exclusive_pts": duration,
+        "decoded_samples": len(aac_track[1]),
+        "excluded_trailing_samples": len(aac_track[1]) - duration,
+    }
+    return trimmed, proof
+
+
+def _local_timing(decoded, audio, assets, *, aac_tracks=None):
     from app.evidence import video_reference_soundtrack as timing
 
     (earlier, *_, earlier_native), (submitted, *_, submitted_native) = decoded
     result = {"status": "unassessed", "scope": LOCAL_TIMING_SCOPE, "affects_overall_confidence": False}
-    if audio["status"] != "measured" or not (earlier_native and submitted_native):
+    if aac_tracks:
+        (earlier, submitted), proof = aac_tracks
+        result.update(scope=AAC_TIMING_SCOPE, aac_presentation=proof)
+    elif audio["status"] != "measured" or not (earlier_native and submitted_native):
         return result | {"summary": "This timing check needs two continuous 16 kHz mono PCM16 WAV or FLAC recordings with matching clocks."}
-    if not timing.MIN_SAMPLES <= audio["earlier"]["samples"] <= timing.MAX_SAMPLES:
+    if not timing.MIN_SAMPLES <= len(earlier[1]) <= timing.MAX_SAMPLES:
         return result | {"summary": "This timing check supports recordings from 1.5 to 12 seconds."}
     span, support = timing.measure(earlier[1], submitted[1])
     result.update(matched_windows=support, sample_rate=AUDIO_RATE)
@@ -486,7 +520,8 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             include_local_timing: bool = False,
             include_channel_timing: bool = False,
             include_clean_speech: bool = False,
-            allow_long_clean_speech: bool = True) -> tuple[dict, dict[str, bytes]]:
+            allow_long_clean_speech: bool = True,
+            include_aac_timing: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Compare continuous recordings and recover a small, exactly supported edge trim."""
     paths = earlier, submitted
     filenames = filenames or (earlier.name, submitted.name)
@@ -519,8 +554,12 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
         stereo = _compare_stereo((first, second), assets)
         if stereo is not None:
             record.update(schema=SCHEMA_WITH_STEREO, stereo_comparison=stereo)
+    aac_tracks = None
     if include_local_timing:
-        record.update(schema=SCHEMA_WITH_LOCAL_TIMING, local_timing=_local_timing((first, second), audio, assets))
+        if include_aac_timing:
+            aac_tracks = _aac_timing_tracks(paths, (first, second))
+        record.update(schema=SCHEMA_WITH_LOCAL_TIMING,
+                      local_timing=_local_timing((first, second), audio, assets, aac_tracks=aac_tracks))
         if include_channel_timing:
             timing = channel_timing((first, second), assets) if stereo and stereo["status"] == "measured" else None
             if timing is not None:
@@ -528,6 +567,10 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
     if include_clean_speech:
         schema, speech = _clean_speech((first, second), assets, allow_long=allow_long_clean_speech)
         record.update(schema=schema, clean_speech=speech)
+    if aac_tracks:
+        record["schema"] = SCHEMA_WITH_AAC_TIMING
+        if include_clean_speech:
+            record["local_timing"]["twelve_second_speech_option"] = allow_long_clean_speech
     if sources != tuple(_identity(path, name) for path, name in zip(paths, filenames, strict=True)):
         raise ValueError("One of the recordings changed while the comparison was running.")
     return record, assets

@@ -227,8 +227,10 @@ class Settings(BaseSettings):
     image_reference_exact_jpeg_identity: bool = False  # Optional same-framing PNG to standard JPEG identity comparison.
     image_reference_shifted_jpeg: bool = False  # Optional bounded comparison of a whole-pixel translated JPEG.
     image_reference_structure_jpeg: bool = False  # Optional same-framing JPEG comparison after global tone changes.
+    image_reference_same_jpeg: bool = False  # Optional exact-block fallback for matching JPEG90 copies.
     audio_reference_comparison_enabled: bool = False  # Authenticated comparison of a short earlier recording.
     audio_reference_local_timing: bool = False  # Find localized changes in the timing of matching excerpts.
+    audio_reference_aac_timing: bool = False  # Support native mono M4A and lossless timing pairs with the same presented duration.
     audio_reference_clean_speech: bool = False  # Optional earlier clean copy on the same native sample clock.
     audio_reference_long_clean_speech: bool = False  # Extend the optional clean-copy comparison to twelve seconds.
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.

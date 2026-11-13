@@ -1,0 +1,37 @@
+{
+  "browser": {
+    "json_matches_api": true,
+    "overlay_verified": true,
+    "page_errors": 0,
+    "pdf_downloaded": true,
+    "plain_view_verified": true,
+    "rendered_images": 7
+  },
+  "comparison": {
+    "affects_overall_confidence": false,
+    "comparison_options": {
+      "exact_jpeg_identity": true,
+      "shifted_jpeg": true,
+      "structure_jpeg": true
+    },
+    "matching_blocks": 1470,
+    "regions": 3,
+    "schema": "chipmunk.image-reference-comparison/14",
+    "source_block_count": 1536,
+    "unique_detailed_blocks": 502
+  },
+  "confirmation_receipt_sha256": "05c5dfbe2a64c5cdcf4d51f64c21b3e0b29168a5ade66651eb99b910dd3af1ae",
+  "schema": "chipmunk.image-reference-same-jpeg-app-check/1",
+  "worker": {
+    "completed_analysis_unchanged": true,
+    "crops_verified": 6,
+    "duplicate_payment_event_created_no_job": true,
+    "mask_pixels_counted": 3913,
+    "no_analysis_or_job_before_payment": true,
+    "reported_status": "comparable",
+    "rollback_verified": true,
+    "simulated_payment_only": true,
+    "source_hashes_verified": 2,
+    "usd_minor": 999
+  }
+}

@@ -34,13 +34,31 @@ class AudioStreamUnavailable(ValueError):
     """The container has no audio stream to decode."""
 
 
-def _probe(path: Path) -> dict:
-    entries = ("stream=index,channels,channel_layout,sample_rate,codec_name,bit_rate,bits_per_raw_sample,time_base,start_pts,duration"
-               ":format=format_name,start_time,duration")
+def _probe(path: Path, *, exact_duration: bool = False) -> dict:
+    fields = "index,channels,channel_layout,sample_rate,codec_name,bit_rate,bits_per_raw_sample,time_base,start_pts,duration"
+    if exact_duration:
+        fields += ",duration_ts"
+    entries = f"stream={fields}:format=format_name,start_time,duration"
     probe = subprocess.run(["ffprobe", "-v", "error", "-protocol_whitelist", "file", "-select_streams", "a",
                             "-show_entries", entries, "-of", "json", _input(path)],
                            capture_output=True, text=True, timeout=60, check=True, stdin=subprocess.DEVNULL)
     return json.loads(probe.stdout)
+
+
+def aac_native_extent(path: Path) -> int | None:
+    """Read the integer presentation extent of supported single-track M4A audio."""
+    try:
+        info = _probe(path, exact_duration=True)
+        if info.get("format", {}).get("format_name") != "mov,mp4,m4a,3gp,3g2,mj2":
+            return None
+        stream, = info["streams"]
+        if (stream.get("codec_name"), stream.get("sample_rate"), stream.get("channels"),
+            stream.get("time_base"), stream.get("start_pts")) != ("aac", "16000", 1, "1/16000", 0):
+            return None
+        duration = stream["duration_ts"]
+        return duration if type(duration) is int and duration > 0 else None
+    except (ValueError, KeyError, TypeError, OSError, subprocess.SubprocessError):
+        return None
 
 
 def audio_stream_indices(path: Path) -> tuple[int, ...]:

@@ -84,6 +84,9 @@ for reconstructing the publisher versions and matched revision controls.
 The [clipped token-rank comparison](writing-clipped-rank-transfer-2026-11-12.md)
 recalculates 484 decisions on matched writing revisions from a public scalar
 receipt. Native source references and offsets support a separate input audit.
+The [source-conditioned comparison](writing-source-conditioned-2026-11-12.md)
+checks exact edited sentences against unchanged and incorrect earlier context.
+Its public replay compares the resulting regions with a simple lexical control.
 The [native word-clock qualification](grid-reserve-word-clocks-2026-11-12.md)
 aligns publisher word intervals with original embedded speech and replays four
 ordinary mouth changes with unchanged soundtracks.

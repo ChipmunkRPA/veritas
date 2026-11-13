@@ -233,6 +233,8 @@ class Settings(BaseSettings):
     audio_enabled: bool = True  # score the sound track of a video with audio_classifiers
     # Local rollout switch; the legacy weights/calibration remain installed for rollback.
     audio_detector_mode: Literal["legacy", "candidate"] = "legacy"
+    audio_background_review_model: Path | None = None  # Local pinned enhancement assets.
+    audio_background_review_packages: Path | None = None  # Local Apple Silicon dependency overlay.
     video_face_review_mode: Literal["legacy", "sequence", "appearance"] = "legacy"
     video_face_boundary_refinement: bool = False  # Refine timing on an existing short appearance review range.
     video_face_short_return_review: bool = False  # Add a distinct, source-bound range to eligible appearance reviews.

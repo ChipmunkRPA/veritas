@@ -41,6 +41,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
   const clock = set.coverage?.source_clock_context
   const shortReview = standalone ? set.short_voice_review : undefined
   const longReview = standalone ? set.long_voice_review : undefined
+  const backgroundReview = standalone ? set.background_reduced_voice_review : undefined
   const intervals = standalone && set.packets.length === 0 ? [...new Map(set.coverage?.windows?.map((window) =>
     [`${window.start_sample}:${window.end_sample}`, window] as const)).values()]
     .sort((a, b) => a.start_sample - b.start_sample || a.end_sample - b.end_sample) : []
@@ -81,7 +82,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
     setSelection(packet.id)
   }, [hash, set.packets])
   return <div ref={root} data-testid="audio-evidence-content"
-    onPlayCapture={longReview?.status === 'corroborated' ? (event) => {
+    onPlayCapture={longReview?.status === 'corroborated' || backgroundReview?.status === 'flagged' ? (event) => {
       if (event.target instanceof HTMLAudioElement) pauseAudio(event.target)
     } : undefined}>
     {tracks && tracks.length > 1 && <section aria-label="Audio track coverage" className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
@@ -146,9 +147,33 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       </ol>}
       <p className="mt-3 mb-0 text-caption text-text-muted">{longReview.limitation}</p>
     </section>}
+    {backgroundReview && <section id="media-evidence-background-reduced-voice-review" aria-label={backgroundReview.title}
+      className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
+      <h3 className="m-0 text-body font-medium">{backgroundReview.title}</h3>
+      <p className="mt-2 mb-0 text-small">{backgroundReview.reason}</p>
+      {backgroundReview.status === 'flagged' && <>
+        <SourceTimestamps ranges={backgroundReview.source_timestamp_ranges} showSeconds />
+        <p className="m-0 font-mono text-caption text-text-muted">
+          Samples [{backgroundReview.interval.start_sample}, {backgroundReview.interval.end_sample})
+        </p>
+        {backgroundReview.artifacts.waveform && <div className="mt-4">
+          <EvidencePicture set={set} artifact={backgroundReview.artifacts.waveform} token={token} ready={mediaReady} chart
+            alt="Original waveform across the flagged three-second interval" />
+        </div>}
+        {backgroundReview.artifacts.selected_clip && <div className="mt-4">
+          <EvidenceAudio set={set} artifact={backgroundReview.artifacts.selected_clip} token={token} ready={mediaReady}
+            alt="Original three-second interval" />
+        </div>}
+        {backgroundReview.artifacts.processed_clip && <div className="mt-4">
+          <EvidenceAudio set={set} artifact={backgroundReview.artifacts.processed_clip} token={token} ready={mediaReady}
+            alt="Processed copy with reduced background sound" />
+        </div>}
+      </>}
+      <p className="mt-3 mb-0 text-caption text-text-muted">{backgroundReview.limitation}</p>
+    </section>}
     {set.packets.length > 0 && <AudioInspectionTimeline set={set} token={token} mediaReady={mediaReady} selectedId={selectedId} onSelect={select} />}
     {set.coverage && rate ? <div id={standalone ? 'media-evidence-voice-coverage' : undefined} className="scroll-mt-14 mt-4 rounded-md border border-border p-4 text-small text-text-muted">
-      <p className="m-0">{shortReview || longReview ? 'Primary voice checks' : 'Voice checks'} cover {seconds(set.coverage.scored_samples / rate)} of the {seconds(set.coverage.decoded_samples / rate)} decoded input.
+      <p className="m-0">{shortReview || longReview || backgroundReview ? 'Primary voice checks' : 'Voice checks'} cover {seconds(set.coverage.scored_samples / rate)} of the {seconds(set.coverage.decoded_samples / rate)} decoded input.
         {' '}{seconds(set.coverage.unscored_samples / rate)} of that input has no window score. Overlapping windows are counted once in this coverage.</p>
       <p className="mt-2 mb-0">{set.coverage.windows.length} scored windows. Responses apply to complete windows, normally four seconds; they do not identify individual words or exact voice-replacement boundaries.</p>
       {intervals.length > 0 && <details className="mt-3" open={hash === '#media-evidence-voice-coverage' || undefined}>

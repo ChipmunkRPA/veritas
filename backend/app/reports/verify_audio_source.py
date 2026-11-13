@@ -35,6 +35,8 @@ def _clips(audio: dict, alignment: dict) -> Iterator[tuple[str, dict, list[dict]
     for window in (audio.get("long_voice_review") or {}).get("windows", []):
         if clip := window["artifacts"].get("selected_clip"):
             yield "Long speech-window clip", window, window["source_timestamp_ranges"], clip
+    if (review := audio.get("background_reduced_voice_review")) and review["status"] == "flagged":
+        yield "Original background-reduced review clip", review["interval"], review["source_timestamp_ranges"], review["artifacts"]["selected_clip"]
     for name in ("repetition_context", "similarity_context"):
         for pair in (audio.get(name) or {}).get("pairs", []):
             for side in ("first", "second"):
@@ -108,6 +110,24 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         except ObjectIntegrityError as error:
             raise ValueError(str(error)) from error
         intervals += 3 * len(listening["windows"])
+    if (review := audio.get("background_reduced_voice_review")) is not None:
+        from app.detectors.audio.decode import read_wav
+        from app.evidence.audio_background_review_binding import SPAN, validate as validate_background_review
+        from app.evidence.audio_packets import _chart
+
+        validate_background_review(review, decoded.mapping)
+        if review["status"] == "flagged":
+            assets = review["artifacts"]
+            paths = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"] if entry["media_type"] == "audio/wav"}
+            pin = assets["processed_clip"]["sha256"]
+            pcm = read_wav(archive.read(paths[pin]))
+            if len(pcm) != SPAN or hashlib.sha256((pcm * 32768.0).astype("<i2").tobytes()).hexdigest() != review["processed_pcm_sha256"]:
+                raise ValueError("Processed speech playback differs from its recorded PCM commitment")
+            covered.add(pin)
+            original_waveform = _chart(decoded.pcm, [], start=0, end=SPAN, selected=(0, SPAN), scores=False)
+            if hashlib.sha256(original_waveform).hexdigest() != assets["waveform"]["sha256"]:
+                raise ValueError("Background-reduced speech waveform differs from the original samples")
+            replay_detail += " Matched the marked original waveform and the saved processed audio commitment."
     expected = {entry["sha256"] for entry in bundle["artifacts"] if entry["media_type"] == "audio/wav"}
     if covered != expected:
         raise ValueError("The source comparison did not account for every WAV asset in the package")
@@ -135,5 +155,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         replay_detail += f" Verified {len(review['windows'])} long speech-window input ranges and their marked waveforms."
     interval_label = "interval" if intervals == 1 else "intervals"
     asset_label = "asset" if len(covered) == 1 else "assets"
+    playback = (f"{intervals} original playback {interval_label} and accounted for {len(covered)} WAV {asset_label}"
+                if audio.get("background_reduced_voice_review", {}).get("status") == "flagged"
+                else f"{intervals} published playback {interval_label} across {len(covered)} WAV {asset_label}")
     return (f"Original SHA-256, {len(decoded.pcm):,} decoded mono samples and source timeline matched. "
-            f"Verified {intervals} published playback {interval_label} across {len(covered)} WAV {asset_label}.{replay_detail}")
+            f"Verified {playback}.{replay_detail}")

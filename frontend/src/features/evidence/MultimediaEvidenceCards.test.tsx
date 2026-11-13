@@ -125,6 +125,31 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
   })
 
+  it('shows the exact background-reduced interval with distinct original and processed playback', () => {
+    const set = { ...structuredClone(audio), packets: [] }
+    const interval = { start_sample: 0, end_sample: 48000 }
+    set.background_reduced_voice_review = {
+      schema: 'chipmunk.background-reduced-voice-review/1', title: 'Speech review with reduced background sound',
+      status: 'flagged', reason: 'The speech response leaned AI-generated after background sound was reduced.',
+      limitation: 'This review carries no weight in the overall assessment.', affects_overall_confidence: false,
+      interval, source_timestamp_ranges: [{ ...interval, source_start_pts: 0, source_end_pts: 48000, time_base: '1/16000' }],
+      artifacts: { selected_clip: asset('f', 'audio/wav'), processed_clip: asset('e', 'audio/wav'), waveform: asset('2') },
+    }
+    show(set)
+    const review = within(screen.getByRole('region', { name: 'Speech review with reduced background sound' }))
+    expect(review.getByText(/Original audio 0\.000 s–3\.000 s\. Source PTS \[0, 48000\) at 1\/16000/)).toBeTruthy()
+    expect(review.getByAltText('Original waveform across the flagged three-second interval')).toBeTruthy()
+    const original = review.getByLabelText('Original three-second interval')
+    const processed = review.getByLabelText('Processed copy with reduced background sound')
+    expect(original.getAttribute('src')).toContain(`${'f'.repeat(64)}.wav`)
+    expect(processed.getAttribute('src')).toContain(`${'e'.repeat(64)}.wav`)
+    const pause = vi.fn()
+    Object.defineProperties(original, { paused: { value: false }, pause: { value: pause } })
+    fireEvent.play(processed)
+    expect(pause).toHaveBeenCalledOnce()
+    expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
+  })
+
   it('shows source ranges and plays only corroborating long speech windows', () => {
     const windows: LongVoiceReview['windows'] = [0, 56000, 112000].map((start_sample, index) => {
       const end_sample = start_sample + 48000

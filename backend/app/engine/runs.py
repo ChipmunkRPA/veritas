@@ -25,9 +25,12 @@ from sqlalchemy.orm import Session
 
 from app.core import times
 from app.engine.detector import SERVER_REASONS, of_the_server
+from app.evidence.audio_background_review_binding import DETECTOR_ID as BACKGROUND_REVIEW_ID, KEY as BACKGROUND_REVIEW_KEY
 from app.evidence.audio_long_review_binding import DETECTOR_ID as LONG_VOICE_REVIEW_ID
 from app.storage.db import AnalysisStage, Artefact, DetectorRun
 from app.storage.objects import ObjectStore, default_store
+
+_AUXILIARY = {LONG_VOICE_REVIEW_ID, BACKGROUND_REVIEW_ID}
 
 
 def _started(run: DetectorRun) -> tuple[int, str]:
@@ -41,7 +44,7 @@ def referenced(db: Session, analysis_id: str, store: ObjectStore | None = None) 
     out: set[str] = set()
     rows = db.execute(select(AnalysisStage.stage, Artefact.sha256)
                       .join(AnalysisStage, AnalysisStage.output_artefact_id == Artefact.id)
-                      .where(AnalysisStage.analysis_id == analysis_id, AnalysisStage.status == "done"))
+                      .where(AnalysisStage.analysis_id == analysis_id, AnalysisStage.status.in_(("done", "reused"))))
     for stage, sha256 in rows:
         try:
             output = json.loads(store.read_bytes(sha256))
@@ -49,8 +52,10 @@ def referenced(db: Session, analysis_id: str, store: ObjectStore | None = None) 
             continue
         if isinstance(output, dict):
             out.update(str(e["run_id"]) for e in output.get("detectors") or [] if isinstance(e, dict) and e.get("run_id"))
-            if stage == "detect" and isinstance(review := output.get("long_voice_review"), dict) and review.get("run_id"):
-                out.add(str(review["run_id"]))
+            if stage == "detect":
+                for key in ("long_voice_review", BACKGROUND_REVIEW_KEY):
+                    if isinstance(review := output.get(key), dict) and review.get("run_id"):
+                        out.add(str(review["run_id"]))
     return out
 
 
@@ -69,13 +74,13 @@ def current(db: Session, analysis_id: str, store: ObjectStore | None = None, *, 
     """Return public scoring runs in start order, optionally including a pinned supplemental receipt for re-fusion."""
     query = select(DetectorRun).where(DetectorRun.analysis_id == analysis_id)
     if not include_auxiliary:
-        query = query.where(DetectorRun.detector_id != LONG_VOICE_REVIEW_ID)
+        query = query.where(DetectorRun.detector_id.notin_(_AUXILIARY))
     rows = list(db.scalars(query))
-    has_auxiliary = any(run.detector_id == LONG_VOICE_REVIEW_ID for run in rows)
+    has_auxiliary = any(run.detector_id in _AUXILIARY for run in rows)
     if not has_auxiliary and len({r.detector_id for r in rows}) == len(rows):
         return sorted(rows, key=_started)
     pins = referenced(db, analysis_id, store)
-    return select_current([run for run in rows if run.detector_id != LONG_VOICE_REVIEW_ID or run.id in pins], pins)
+    return select_current([run for run in rows if run.detector_id not in _AUXILIARY or run.id in pins], pins)
 
 
 def statuses(db: Session, analysis_id: str, result: Mapping[str, Any] | None = None, store: ObjectStore | None = None) -> list[str]:

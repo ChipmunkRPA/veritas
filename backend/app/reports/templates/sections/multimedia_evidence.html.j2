@@ -39,6 +39,18 @@ Samples [{{ window.start_sample }}, {{ window.end_sample }}) at 16000 Hz.
 {% endfor %}
 <p class="caption">{{ review.limitation }} JSON pointer <span class="mono">/long_voice_review</span>.</p>
 {% endif %}
+{% if evidence.get('background_reduced_voice_review') %}
+{% set review = evidence.background_reduced_voice_review %}
+<h3 id="multimedia-background-reduced-voice-review">{{ review.title }}</h3>
+<p class="caption">{{ review.reason }}</p>
+{% if review.status == 'flagged' %}
+<p class="caption">Flagged interval 0.000–3.000 s. Samples [{{ review.interval.start_sample }}, {{ review.interval.end_sample }}) at 16000 Hz.
+{% for range in review.source_timestamp_ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% endfor %}</p>
+{% if not evidence.withheld %}<p class="caption">The evidence export includes original and background-reduced playback of this interval.</p>{% endif %}
+{% if review.get('waveform') %}{{ plates([review.waveform]) }}{% endif %}
+{% endif %}
+<p class="caption">{{ review.limitation }} JSON pointer <span class="mono">/background_reduced_voice_review</span>.</p>
+{% endif %}
 {% if evidence.get('passage_coverage') %}
 {% set writing = evidence.passage_coverage %}
 <h3>Recorded passage coverage</h3>

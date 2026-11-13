@@ -87,6 +87,8 @@ def asset_items(document: dict[str, Any]):
         for index, window in enumerate((part.get("long_voice_review") or {}).get("windows", [])):
             for role, asset in sorted(window["artifacts"].items()):
                 yield None, f"long_voice_review_{index}_{role}", asset
+        for role, asset in sorted((part.get("background_reduced_voice_review") or {}).get("artifacts", {}).items()):
+            yield None, f"background_reduced_voice_review_{role}", asset
         for window in (part.get("stereo_listening") or {}).get("windows", []):
             for role, asset in sorted(window["artifacts"].items()):
                 yield None, f"stereo_{window['stereo_window_index']}_{role}", asset
@@ -379,6 +381,19 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                                      read_asset=assets.__getitem__, waveform=audio_packets._chart)
         except (ValueError, KeyError, TypeError) as error:
             raise ObjectIntegrityError("Frozen long speech-window evidence differs from its recorded inputs") from error
+    if (review := document.get("background_reduced_voice_review")) is not None:
+        from app.evidence import audio_background_review, audio_packets
+        from app.evidence.audio_short_review_binding import source_metadata_matches
+
+        result = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+        try:
+            if not source_metadata_matches(source, mapping):
+                raise ValueError("Audio codec scope changed")
+            record = result["manifest"]["sampling"]["audio_evidence"]["background_reduced_voice_review"]
+            audio_background_review.verify(review, record, store=store, source=source, pcm=pcm, mapping=mapping,
+                                           read_asset=assets.__getitem__, waveform=audio_packets._chart)
+        except (ValueError, KeyError, TypeError) as error:
+            raise ObjectIntegrityError("Frozen background-reduced speech evidence differs from its recorded inputs") from error
     if (repetition := document.get("repetition_context")) is not None:
         from app.evidence.audio_repetition import verify
 
@@ -907,9 +922,13 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             window["label"] = LABELS[window["direction"]]
             if asset := window["artifacts"].get("waveform"):
                 window["waveform"] = plate("waveform", asset, "Waveform with the reviewed three-second window highlighted")
+    background_review = copy.deepcopy(document.get("background_reduced_voice_review"))
+    if background_review and (asset := background_review["artifacts"].get("waveform")):
+        background_review["waveform"] = plate("waveform", asset, "Original waveform across the flagged three-second interval")
     return {"available": True, "kind": kind, "title": f"{kind.capitalize()} evidence", "id": document["id"],
             "short_voice_review": short_voice_review,
             "long_voice_review": long_voice_review,
+            "background_reduced_voice_review": background_review,
             "stereo_context": stereo_context,
             "stereo_listening": stereo_listening,
             "repetition_context": copy.deepcopy(stereo_source.get("repetition_context")),

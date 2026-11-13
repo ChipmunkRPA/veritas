@@ -142,6 +142,15 @@ def validate_content(document: dict[str, Any]) -> None:
             validate_long_voice_review(document["long_voice_review"], source)
         except ValueError as error:
             raise PacketIntegrityError(str(error)) from error
+    if "background_reduced_voice_review" in document:
+        from app.evidence.audio_background_review_binding import validate as validate_background_review
+
+        try:
+            if document.get("schema") != SCHEMA:
+                raise ValueError("Background-reduced speech review is for standalone audio")
+            validate_background_review(document["background_reduced_voice_review"], source)
+        except ValueError as error:
+            raise PacketIntegrityError(str(error)) from error
     if document.get("repetition_context") is not None:
         from app.evidence.audio_repetition_binding import validate
 
@@ -340,6 +349,16 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
 
         document["source"].update(source_metadata(mapping))
         document["long_voice_review"] = build_long_voice_review(
+            review, store=store, source=document["source"], pcm=pcm, mapping=mapping,
+            asset=lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
+            waveform=_chart,
+        )
+    if analysis.kind == "audio" and (review := record.get("background_reduced_voice_review")):
+        from app.evidence.audio_background_review import build as build_background_review
+        from app.evidence.audio_short_review_binding import source_metadata
+
+        document["source"].update(source_metadata(mapping))
+        document["background_reduced_voice_review"] = build_background_review(
             review, store=store, source=document["source"], pcm=pcm, mapping=mapping,
             asset=lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
             waveform=_chart,

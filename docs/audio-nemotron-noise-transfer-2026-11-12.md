@@ -132,10 +132,40 @@ gain-only positives that the original check caught. The additive policy
 preserved them. Both trials show additional whole-window review evidence.
 They do not establish an improved calibrated probability or exact edit
 boundaries. The restaurant false alarms inherited from the original check
-remain a separate problem. Customer use requires a bounded local integration
-and verification of the original audio, report and evidence exports.
+remain a separate problem. The application limits this evidence to the
+delivery scope described below.
 The model-free reader checked 276 original and enhanced PCM hashes.
 [Confirmation receipt](evaluation-panels/audio-nemotron-noise-confirmation-2026-11-12.json)
+
+## Local Full analysis
+
+On Apple Silicon, set `VERITAS_AUDIO_DETECTOR_MODE=candidate` in a development
+instance and point `VERITAS_AUDIO_BACKGROUND_REVIEW_MODEL` at the pinned local
+model directory. Set `VERITAS_AUDIO_BACKGROUND_REVIEW_PACKAGES` to the
+absolute path of a Python package overlay for the backend interpreter. Use
+`mlx==0.32.4`, `mlx-metal==0.32.4`, and `mlx-audio==0.6.5`. The local model
+directory must contain the original `config.json`, `model.safetensors`,
+and `LICENSE` at the revision above. The worker checks their hashes before
+processing an upload. Inference uses local files. Remove the two paths to
+disable the additional check.
+
+The app runs this check on a single, continuous, exactly three-second
+16 kHz mono PCM16 WAV when the primary voice result is inconclusive or the
+original did not contain enough detected speech. A flag presents the original
+waveform and two playback clips covering samples `[0, 48000)`. The PDF shows
+the same interval and waveform. The JSON evidence includes separate asset
+references and a processed PCM commitment. Source verification checks the
+original samples, waveform and saved processed playback without rerunning
+the voice or enhancement model. This evidence carries zero overall weight.
+The deployment is local and requires the pinned Apple Silicon runtime.
+
+The isolated paid Full flow replayed two recovered synthetic mixtures, the
+known additional genuine flag, one unflagged genuine excerpt and one
+background-only excerpt. It skipped a recording with an existing original
+tendency. A same-input comparison with the optional review disabled preserved
+the whole-file decision, assessments and three ordinary check records. The
+signed evidence ZIP verified against the original WAV. The JSON, waveform,
+two playback assets and PDF matched the saved evidence.
 
 ## Replay
 

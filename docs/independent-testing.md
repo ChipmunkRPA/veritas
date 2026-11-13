@@ -1324,6 +1324,20 @@ It checks saved measurements and source commitments using Python's standard
 library. The native replay instructions in each study explain how to verify
 the media evidence against the supplied source.
 
+Compare your result with the [published local reference](evaluation-panels/source-evidence-replay-reference-2026-11-12.json)
+and prepare a short issue excerpt with these commands. A difference is useful
+evidence, including when the command exits with status 1. The formatter reads
+the receipt without running the embedded reader commands or publishing an issue.
+
+```sh
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/source-evidence.json" \
+  --compare docs/evaluation-panels/source-evidence-replay-reference-2026-11-12.json
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/source-evidence.json" --format-issue
+```
+
+The reference records our local run. Add your own receipt and the specific
+claim you verified or challenged to the [independent evaluation form](https://github.com/ChipmunkRPA/veritas/issues/new?template=independent-evaluation.yml).
+
 ### Replay recent evaluations from a clean checkout
 
 From the repository root, use Python 3.11 or later. These commands read the

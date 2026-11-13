@@ -40,7 +40,7 @@ body:
     id: reproduction
     attributes:
       label: Reproduction and complete outcomes
-      description: Include the project revision and the exact claim you reviewed. For a public ledger replay, share your privacy-safe receipt and any differences from the receipt you compared using docs/independent-testing.md. For new media tests, give conditions, coverage, false alarms, misses, inconclusive counts and the locations checked.
+      description: Include the project revision and the exact claim you reviewed. For a public ledger replay, paste the excerpt from `--format-issue`, include its JSON receipt, and note any difference from the published reference in docs/independent-testing.md. For new media tests, give conditions, coverage, false alarms, misses, inconclusive counts and the locations checked.
     validations:
       required: true
   - type: textarea

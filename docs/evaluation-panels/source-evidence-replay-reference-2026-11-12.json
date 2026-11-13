@@ -1,0 +1,83 @@
+{
+  "checks": {
+    "audio": {
+      "arguments": [
+        "review",
+        "docs/evaluation-panels/audio-dense-evidence-confirmation-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/audio_dense_evidence_confirmation.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/audio_dense_evidence_confirmation.py": "de9089f4413ee34fa6aa96eaa7293f6c58f188981d7704e6795836ea60abd995",
+        "backend/scripts/audio_vocal_event_mixtures.py": "4747813e96bf8d1ffdfd34054fd92df1a09a775d43ce3647f9a61110c1db87ce",
+        "backend/scripts/review_audio_reduced_background_localization.py": "0def90d0e4b116cdf8b54c30e04e052aaf950c9c42d73d4f287e74eca17aa123",
+        "docs/evaluation-panels/audio-dense-evidence-confirmation-2026-11-12.json": "74984c6dd99cd88fd8d11c97b5962881073194cd5562e22525cce97b198d2214",
+        "docs/evaluation-panels/audio-noise-window-transfer-2026-11-12.json": "b2cbbccff57fee617b6d956be6d88bedbcb50309eb43e7d3922b7a422431fc7a",
+        "docs/evaluation-panels/audio-partial-publisher-transfer-2026-11-12.json": "bf253f0dc47c0e05ca79f7f89186fd71dd9c5300798fa0331c95cc33b935afe3",
+        "docs/evaluation-panels/audio-reduced-background-localization-2026-11-12.json": "338606be1f35676a56e04c310457acdd5e8f119a8321238068211d3f02f7520e"
+      },
+      "output_sha256": "3ac0bd37b5a4572e83e4177629e13baf806d775c971b24fa89e875012de6f410",
+      "status": "matched"
+    },
+    "image": {
+      "arguments": [
+        "docs/evaluation-panels/image-png-exif-preview-2026-11-12.json",
+        "docs/evaluation-panels/image-png-exif-preview-cases-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/review_image_png_exif_preview_transfer.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/review_image_png_exif_preview_transfer.py": "7ddd791e7b7b1c71df03dcaea3f1700bdc3b1041a6801d9b3ba4ba22ad306e9e",
+        "docs/evaluation-panels/image-png-exif-preview-2026-11-12.json": "77f13bf7b4af48d8bf9af55d0fafe315bd4bd2aee7567a6a157ec60e00aab1e5",
+        "docs/evaluation-panels/image-png-exif-preview-cases-2026-11-12.json": "e3987436d55a4f069206c3f5b5e0e3aaa387d4e2fcc185687348bc064a4c4868"
+      },
+      "output_sha256": "52077bec7e3cb79f359432d0a1a4610fb2bf4b54d28072fdafbb27984730db01",
+      "status": "matched"
+    },
+    "video": {
+      "arguments": [
+        "docs/evaluation-panels/video-face-paired-edge-hevc-confirmation-2026-11-12.json",
+        "--confirm-against",
+        "docs/evaluation-panels/video-face-paired-edge-transfer-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/review_video_face_paired_edge_transfer.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/review_video_face_paired_edge_transfer.py": "a3d8fe3b846e6430f298449c03679c114d5c59474487c42ac81a73796465531c",
+        "docs/evaluation-panels/video-face-paired-edge-hevc-confirmation-2026-11-12.json": "d69f74585ca7b2c76a93eaeafff29b90d0589707d2d7154d009a95093fa4a5b6",
+        "docs/evaluation-panels/video-face-paired-edge-transfer-2026-11-12.json": "4c9e6df520b441bd91fef35eb4d279eb7406e1d4cd75ff08ffaaf81029608f52"
+      },
+      "output_sha256": "e2521cba523c0901f0896fa55b89f2096c9fcb4dbaaf270e0158b37b54ceaa52",
+      "status": "matched"
+    },
+    "writing": {
+      "arguments": [
+        "review",
+        "docs/evaluation-panels/writing-mixed-pdf-page-transfer-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/writing_mixed_pdf_page_transfer.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/writing_mixed_pdf_page_transfer.py": "258fa2228aefb0c21877d591281c63de9e28e7f7084685199b589e254eb97b53",
+        "docs/evaluation-panels/writing-agreement-document-format-transfer-2026-11-12.json": "25764698f8121aa94fafe994488a02018461e00ce91688d65fb215cd6ddc61ba",
+        "docs/evaluation-panels/writing-mixed-pdf-page-transfer-2026-11-12.json": "001a8005f0ff451d3f954f2c1cfae9d9d0e12527bacf50e7788afaafe30b348c"
+      },
+      "output_sha256": "1f5d1350ac25f48fee209f66fc23bba683243e1770b5dd64e1e57c6929a2f48e",
+      "status": "matched"
+    }
+  },
+  "environment": {
+    "architecture": "arm64",
+    "os": "Darwin",
+    "python": "3.11.9"
+  },
+  "runner_sha256": "2454561fa4fe10037fe9ad9c457b13a0682ce8155e8079e0c1e2d74682a02cf8",
+  "schema": "chipmunk.public-evaluation-replay/1",
+  "scope": "Arithmetic replay of published evaluation ledgers",
+  "source_revision": "66f7f63947905ac1091054c00a8ce6f84e1c9c5a",
+  "suite": "source-evidence"
+}

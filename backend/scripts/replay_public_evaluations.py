@@ -191,14 +191,45 @@ def compare(left: dict, right: dict) -> bool:
     return all_matched
 
 
+def issue_excerpt(receipt: dict) -> str:
+    suite = receipt.get("suite", "overview")
+    revision = receipt.get("source_revision")
+    if not isinstance(revision, str) or not re.fullmatch(r"(?:[0-9a-f]{40}|[0-9a-f]{64})", revision):
+        revision = "unrecorded"
+    environment = receipt.get("environment")
+    if not isinstance(environment, dict):
+        environment = {}
+    values = [environment.get(key) for key in ("python", "os", "architecture")]
+    python, system, architecture = [value if isinstance(value, str) and re.fullmatch(r"[A-Za-z0-9_.-]{1,32}", value)
+                                    else "unrecorded" for value in values]
+    lines = ["### Public evidence replay", "", f"Suite `{suite}` at revision `{revision}`.",
+             f"Python `{python}` on `{system}` / `{architecture}`.",
+             f"Runner SHA-256 `{receipt['runner_sha256']}`.", "",
+             "| Media | Status | Reader output SHA-256 |", "| --- | --- | --- |"]
+    for name, check in sorted(receipt["checks"].items()):
+        output = f"`{check['output_sha256']}`" if check["status"] == "matched" else "Unavailable"
+        lines.append(f"| {name.capitalize()} | `{check['status']}` | {output} |")
+    return "\n".join(lines + ["", "Attach or paste the JSON receipt to preserve the exact input and diagnostic hashes."])
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("receipt", type=Path, help="New JSON receipt path, or the first receipt in a comparison")
     parser.add_argument("--compare", type=Path, help="Compare two saved receipts without running their commands")
+    parser.add_argument("--format-issue", action="store_true", help="Print a validated replay receipt as a GitHub issue excerpt")
     parser.add_argument("--modality", action="append", choices=CHECKS, help="Select a modality (default: all four)")
     parser.add_argument("--suite", choices=SUITES, default="overview",
                         help="Select the published study set (default: overview)")
     args = parser.parse_args()
+    if args.format_issue:
+        if args.compare is not None or args.modality or args.suite != "overview":
+            parser.error("Issue formatting uses the suite and modalities recorded in the receipt")
+        try:
+            receipt = load_receipt(args.receipt)
+            print(issue_excerpt(receipt))
+        except (OSError, ValueError, RecursionError):
+            parser.error("Could not read a valid public replay receipt")
+        return
     if args.compare is not None:
         if args.modality or args.suite != "overview":
             parser.error("A comparison uses the suites and modalities recorded in the receipts")

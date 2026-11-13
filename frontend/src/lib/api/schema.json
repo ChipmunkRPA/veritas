@@ -5590,7 +5590,10 @@
             "title": "Responses"
           },
           "schema": {
-            "const": "chipmunk.paired-writing-review/1",
+            "enum": [
+              "chipmunk.paired-writing-review/1",
+              "chipmunk.paired-writing-review/2"
+            ],
             "title": "Schema",
             "type": "string"
           },

@@ -3564,9 +3564,9 @@ export interface components {
             responses?: components["schemas"]["DraftWritingResponse"][] | null;
             /**
              * Schema
-             * @constant
+             * @enum {string}
              */
-            schema: "chipmunk.paired-writing-review/1";
+            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2";
             /** Scope */
             scope: string;
             /**

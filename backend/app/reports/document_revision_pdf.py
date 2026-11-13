@@ -76,9 +76,10 @@ def _paired(review: dict | None) -> str:
     if review.get("responses"):
         links = ", ".join(f'<a href="#draft-change-{escape(value)}">{escape(value)}</a>' for value in review["change_ids"])
         output.append(f'<p class="coordinates">Linked wording changes {links}</p>')
-        for side, label in (("earlier", "Earlier sentence"), ("later", "Analyzed sentence")):
+        for side, label in (("earlier", "Earlier"), ("later", "Analyzed")):
             row = review[side]
-            output.append(f'<div class="side"><p class="coordinates">{label} [{row["start"]}, {row["end"]})</p>'
+            unit = "sentences" if len(row["context_spans"]) == 4 else "sentence"
+            output.append(f'<div class="side"><p class="coordinates">{label} {unit} [{row["start"]}, {row["end"]})</p>'
                           f'<p class="excerpt">{escape(row["text"])}</p></div>')
         output.append("<p>Uncalibrated responses from the earlier and analyzed versions</p>")
         output.extend(f'<p>Check {i} · {row["earlier"]:.4g} → {row["later"]:.4g}</p>'

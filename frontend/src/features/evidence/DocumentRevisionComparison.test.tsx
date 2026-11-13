@@ -144,17 +144,21 @@ it('links highlighted HTML reply words to their decoded MIME positions', async (
   expect(screen.getByText('[12, 16) → [29, 31), [37, 38), [45, 51)')).toBeTruthy()
 })
 
-it('opts in to the separate paired response and shows the linked sentence locations', async () => {
+it.each([false, true])('opts in to the paired response and links the sentence locations, wide=%s', async (wide) => {
   const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64), decoded_characters: 100, mime_part: null }
   const comparison: DraftComparison = {
     schema: 'chipmunk.document-revision-comparison/1', format: 'plain_text', coordinate_space: 'decoded_source_unicode_codepoint',
     earlier: source, later: source, scope: 'Words and punctuation.', interpretation: 'Compare the wording.',
     changes: [{ id: 'C01', role: 'body', earlier: { start: 20, end: 24, text: 'here', changed_tokens: [[20, 24]] },
       later: { start: 20, end: 25, text: 'there', changed_tokens: [[20, 25]] } }],
-    paired_check: { schema: 'chipmunk.paired-writing-review/1', status: 'joint_increase', scope: 'Zero authorship confidence weight.',
+    paired_check: { schema: wide ? 'chipmunk.paired-writing-review/2' : 'chipmunk.paired-writing-review/1', status: 'joint_increase', scope: 'Zero authorship confidence weight.',
       summary: 'Both writing checks gave a stronger AI-like response.', authorship_confidence_contribution: 0, change_ids: ['C01'],
-      earlier: { start: 20, end: 25, text: 'Here.', context_spans: [[0, 19], [20, 25], [26, 40]], input_sha256: 'a'.repeat(64) },
-      later: { start: 20, end: 26, text: 'There.', context_spans: [[0, 19], [20, 26], [27, 41]], input_sha256: 'b'.repeat(64) },
+      earlier: { start: 20, end: wide ? 31 : 25, text: wide ? 'Here. Then.' : 'Here.',
+        context_spans: wide ? [[0, 19], [20, 25], [26, 31], [32, 46]] : [[0, 19], [20, 25], [26, 40]],
+        input_sha256: 'a'.repeat(64) },
+      later: { start: 20, end: wide ? 33 : 26, text: wide ? 'There. Later.' : 'There.',
+        context_spans: wide ? [[0, 19], [20, 26], [27, 33], [34, 48]] : [[0, 19], [20, 26], [27, 41]],
+        input_sha256: 'b'.repeat(64) },
       responses: [{ earlier: .1, later: .4 }, { earlier: .3, later: .6 }] },
   }
   vi.mocked(draftAvailability).mockResolvedValue({ extension: '.txt', pairedCheckAvailable: true })
@@ -171,6 +175,8 @@ it('opts in to the separate paired response and shows the linked sentence locati
   expect(compareDraft).toHaveBeenCalledWith('draft-analysis', file, expect.any(AbortSignal), true)
   const change = screen.getByRole('heading', { name: 'C01 · Text' })
   expect(screen.getByRole('link', { name: 'C01' }).getAttribute('href')).toBe(`#${change.id}`)
-  expect(screen.getByText('Analyzed sentence [20, 26)')).toBeTruthy()
+  expect(screen.getByText(wide ? 'Analyzed sentences [20, 33)' : 'Analyzed sentence [20, 26)')).toBeTruthy()
+  if (wide) expect(screen.getByText('There. Later.')).toBeTruthy()
+  expect(screen.queryByText(/ModernBERT|Tropa/)).toBeNull()
   expect(screen.getByText(/Check 2 · 0.3000 → 0.6000/)).toBeTruthy()
 })

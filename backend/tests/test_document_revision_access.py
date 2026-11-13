@@ -648,3 +648,86 @@ def test_pdf_marks_only_changed_code_points_and_escapes_excerpt():
     earlier, later = result["changes"][0]["earlier"], result["changes"][0]["later"]
     assert "<mark>🚀</mark> Déjà &lt;<mark>end</mark>" in _side("Earlier draft", earlier)
     assert "<mark>🙂</mark> Déjà &lt;<mark>début</mark>" in _side("Analyzed version", later)
+
+
+def test_adjacent_sentence_pair_uses_exact_text_exports_and_preserves_legacy_replay(reference_http, monkeypatch, tmp_path):
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_detector_mode", "candidate")
+    monkeypatch.setattr(settings, "text_window_sentences", 3)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    first = "The committee met on Monday morning to review the budget."
+    last = "The final minutes will be available after the next meeting."
+    old_focus = "The draft gives the survey date and location.\r\n The registration desk opens early."
+    new_focus = "The report explains when and where the survey took place.\r\n Attendees can register before the meeting."
+    old, new = (f"{first} {focus} {last}".encode() for focus in (old_focus, new_focus))
+    _saved(f, "two-sentence-draft", ".txt", new)
+    url = _url("two-sentence-draft")
+    measured = []
+
+    def score(candidate):
+        measured.append(candidate)
+        return [{"earlier": .1, "later": .4}, {"earlier": .3, "later": .6}]
+
+    monkeypatch.setattr(paired, "score", score)
+    form = {"include_paired_check": "true", "include_pdf": "true"}
+    response = f.client.post(url, headers=f.viewer, files=_upload(old, ".txt"), data=form)
+    assert response.status_code == 200 and response.headers["cache-control"] == "no-store"
+    payload = response.json()
+    comparison = payload["comparison"]
+    check = comparison["paired_check"]
+    assert check["schema"] == paired.WIDE_SCHEMA and check["status"] == "joint_increase"
+    assert check["authorship_confidence_contribution"] == 0
+    assert check["change_ids"] == [change["id"] for change in comparison["changes"]]
+    assert len(measured) == 1
+    for side, raw, focus in (("earlier", old, old_focus), ("later", new, new_focus)):
+        excerpt = check[side]
+        assert raw.decode()[excerpt["start"]:excerpt["end"]] == excerpt["text"] == focus
+        spans = excerpt["context_spans"]
+        assert len(spans) == 4 and [spans[1][0], spans[2][1]] == [excerpt["start"], excerpt["end"]]
+        assert excerpt["input_sha256"] == hashlib.sha256(getattr(measured[0], side).encode()).hexdigest()
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as document:
+        text = " ".join(" ".join(page.get_text().split()) for page in document)
+        assert "Earlier sentences [" in text and "Analyzed sentences [" in text
+        assert "two adjacent changed sentences" in text and "zero authorship confidence weight" in text
+        assert "ModernBERT" not in text and "Tropa" not in text
+        assert any(page.get_links() for page in document)
+
+    earlier_path, later_path, json_path = (tmp_path / name for name in ("old.txt", "new.txt", "comparison.json"))
+    earlier_path.write_bytes(old)
+    later_path.write_bytes(new)
+    json_path.write_text(json.dumps(comparison))
+    assert review(json_path, earlier_path, later_path)["paired_scope_and_saved_response_arithmetic"] == "joint_increase"
+    check["later"]["context_spans"][2][0] += 1
+    json_path.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="paired writing check does not replay"):
+        review(json_path, earlier_path, later_path)
+
+    comparison["paired_check"] = paired.result(None, draft_format="plain_text", allow_wide=False)
+    json_path.write_text(json.dumps(comparison))
+    assert review(json_path, earlier_path, later_path)["paired_scope_and_saved_response_arithmetic"] == "outside_scope"
+    crossed = old.replace(b"\r\n ", b"\r\n\r\n")
+    nonadjacent = old.replace(b"The final minutes", b"Further minutes")
+    for unsupported in (new, crossed, nonadjacent):
+        result = f.client.post(url, headers=f.viewer, files=_upload(unsupported, ".txt"), data={
+            "include_paired_check": "true",
+        })
+        assert result.status_code == 200
+        check = result.json()["comparison"]["paired_check"]
+        assert check["schema"] == paired.WIDE_SCHEMA and check["status"] == "outside_scope"
+    assert len(measured) == 1
+
+    for extension, source in (
+        (".docx", _word(new.decode().replace("\r\n", " "), "later")),
+        (".eml", _email(new.decode().replace("\r\n", " "))),
+    ):
+        earlier_text = old.decode().replace("\r\n", " ")
+        prior = _word(earlier_text, "earlier") if extension == ".docx" else _email(earlier_text)
+        aid = "same-two-sentences-" + extension[1:]
+        _saved(f, aid, extension, source)
+        result = f.client.post(_url(aid), headers=f.viewer, files=_upload(prior, extension), data={
+            "include_paired_check": "true",
+        })
+        assert result.status_code == 200
+        check = result.json()["comparison"]["paired_check"]
+        assert check["schema"] == paired.SCHEMA and check["status"] == "outside_scope"
+    assert len(measured) == 1

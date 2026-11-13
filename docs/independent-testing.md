@@ -42,6 +42,9 @@ separates region size limits from score and layout errors.
 The [signed residual phase study](image-phase-locked-residual-2026-11-12.md)
 checks two pixel-grid periods on known generated regions and ordinary views.
 Neither period supplied a useful location at its frozen point.
+The [earlier-JPEG comparison](image-reference-delivery-envelope-2026-11-12.md)
+checks soft changes, ordinary re-encoding and global contrast. Its export
+reviewer reopens both originals and verifies the displayed crop and overlay.
 
 The [earlier-video comparison](video-reference-comparison-2026-11-11.md#replay-without-the-app)
 re-decodes two supplied clips and checks the JSON, native picture timestamps,
@@ -98,6 +101,9 @@ Its public replay compares the resulting regions with a simple lexical control.
 The [additional writing-response verification](writing-unselected-responses-2026-11-12.md)
 checks source locations and actual responses for scored text beyond the
 selected passage cards, including known edits that the detector missed.
+The [two-sentence draft review](writing-draft-grammar-2026-11-12.md)
+replays paired responses and genuine revisions. The report and export point to
+the exact changed sentences in both drafts.
 The [paired neural speech edit pilot](audio-partialedit-dense-transfer-2026-11-12.md)
 checks overlapping speech windows across two edit generators, matched genuine
 utterances and two background mixes. The replay recounts localized edits and

@@ -118,7 +118,7 @@ class DraftWritingResponse(BaseModel):
 
 
 class DraftPairedCheck(BaseModel):
-    schema_name: Literal["chipmunk.paired-writing-review/1"] = Field(alias="schema")
+    schema_name: Literal["chipmunk.paired-writing-review/1", "chipmunk.paired-writing-review/2"] = Field(alias="schema")
     status: Literal["outside_scope", "unavailable", "no_joint_increase", "joint_increase"]
     scope: str
     summary: str

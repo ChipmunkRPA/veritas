@@ -92,11 +92,15 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
         </p>
         <div className="mt-3 grid gap-4 sm:grid-cols-2">
           <div>
-            <p className="m-0 text-caption font-medium">Earlier sentence [{paired.earlier.start}, {paired.earlier.end})</p>
+            <p className="m-0 text-caption font-medium">
+              Earlier {paired.earlier.context_spans.length === 4 ? 'sentences' : 'sentence'} [{paired.earlier.start}, {paired.earlier.end})
+            </p>
             <p className="mt-1 mb-0 whitespace-pre-wrap break-words text-small">{paired.earlier.text}</p>
           </div>
           <div>
-            <p className="m-0 text-caption font-medium">Analyzed sentence [{paired.later.start}, {paired.later.end})</p>
+            <p className="m-0 text-caption font-medium">
+              Analyzed {paired.later.context_spans.length === 4 ? 'sentences' : 'sentence'} [{paired.later.start}, {paired.later.end})
+            </p>
             <p className="mt-1 mb-0 whitespace-pre-wrap break-words text-small">{paired.later.text}</p>
           </div>
         </div>

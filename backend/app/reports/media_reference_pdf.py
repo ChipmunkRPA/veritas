@@ -253,13 +253,13 @@ def _soundtrack_timing_page(document, timing, assets):
     _text(page, MARGIN, 720, "Waveforms share one scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
 
 
-def _sound_page(document, span, *, level_adjusted=False):
+def _sound_page(document, span, *, level_adjusted=False, second_track=False):
     difference = span.get("difference")
     if level_adjusted:
         title = "Volume-adjusted difference"
         count_note = "samples cannot be explained by the measured volume adjustment."
     else:
-        title = "Audio differences" if difference is not None else "Soundtrack differences"
+        title = "Second soundtrack differences" if second_track else ("Audio differences" if difference is not None else "Soundtrack differences")
         count_note = "differing samples in the selected range."
     page = _page(document, f"{span['id']}  {title}")
     aligned = span.get("file_ranges")
@@ -321,6 +321,34 @@ def _sound_range_label(span):
     return _range(span)
 
 
+def _additional_soundtrack_pages(document, track):
+    page = _page(document, "Second soundtrack comparison")
+    page.insert_textbox((MARGIN, 125, RIGHT, 202), track["scope"], fontsize=11, fontname="helv", color=INK)
+    for y, (side, label) in zip((220, 285), LABELS.items(), strict=True):
+        index = track["stream_indices"][side]
+        _text(page, MARGIN, y, label, font="hebo")
+        _text(page, MARGIN, y + 19, "No second soundtrack." if index is None else f"Second soundtrack is source stream {index}.")
+        count = len(track["inventory"][side]["unassessed_stream_indices"])
+        if count:
+            label = "track" if count == 1 else "tracks"
+            _text(page, MARGIN, y + 37, f"Unassessed beyond the second soundtrack: {count} {label}.", color=MUTED)
+    if track["status"] != "measured":
+        extra_status = {"missing_counterpart": "The second track has no counterpart.",
+                        "comparison_limit": "At least one second soundtrack exceeds 12 seconds."}
+        note = extra_status.get(track["status"]) or AUDIO_STATUS.get(track["status"], "The second tracks could not be compared.")
+        _text(page, MARGIN, 365, note)
+        return
+    _text(page, MARGIN, 365, f"{track['changed_samples']:,} decoded mono samples differ on the second soundtrack.")
+    _text(page, MARGIN, 385, "Times are relative to the first picture in each clip.", color=MUTED)
+    remaining = []
+    for span in track["ranges"]:
+        if span.get("preview"):
+            _sound_page(document, span, second_track=True)
+        else:
+            remaining.append((span["id"], f"{_range(span)} - {span['changed_samples']:,} differing samples"))
+    _remaining_ranges(document, remaining, "Additional second soundtrack ranges")
+
+
 def render(record, assets):
     with pymupdf.open() as document:
         is_audio = record["schema"] in (AUDIO_SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT, SCHEMA_WITH_TRIM_ALIGNMENT,
@@ -352,4 +380,6 @@ def render(record, assets):
             _timing_page(document, record["timing"], assets)
         if "soundtrack_alignment" in record:
             _soundtrack_timing_page(document, record["soundtrack_alignment"], assets)
+        if "additional_soundtrack" in record:
+            _additional_soundtrack_pages(document, record["additional_soundtrack"])
         return document.tobytes(deflate=True, garbage=4)

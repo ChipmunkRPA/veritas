@@ -12,6 +12,7 @@ from pathlib import Path
 from app.core.canonical import canonical_json
 from app.evidence.video_reference import (
     SCHEMA,
+    SCHEMA_WITH_ADDITIONAL_SOUNDTRACK,
     SCHEMA_WITH_SHORT_TIMING,
     SCHEMA_WITH_SOUNDTRACK,
     SCHEMA_WITH_TIMING,
@@ -65,11 +66,13 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds = None
         if isinstance(record, dict):
             schema = record.get("schema")
-            options.update(include_local=schema != SCHEMA, include_soundtrack=schema == SCHEMA_WITH_SOUNDTRACK)
-            if schema in (SCHEMA_WITH_TIMING, SCHEMA_WITH_SHORT_TIMING) or (schema == SCHEMA_WITH_SOUNDTRACK and "timing" in record):
+            additional = schema == SCHEMA_WITH_ADDITIONAL_SOUNDTRACK
+            options.update(include_local=("local_comparison" in record.get("picture", {}) if additional else schema != SCHEMA),
+                           include_soundtrack=schema == SCHEMA_WITH_SOUNDTRACK or additional and "soundtrack_alignment" in record,
+                           include_additional_soundtrack=additional)
+            if schema in (SCHEMA_WITH_TIMING, SCHEMA_WITH_SHORT_TIMING) or ((schema == SCHEMA_WITH_SOUNDTRACK or additional) and "timing" in record):
                 event_seconds = Fraction(record["timing"]["requested_earlier_time_s"])
-                short_fallback = (schema == SCHEMA_WITH_SHORT_TIMING or
-                                  (schema == SCHEMA_WITH_SOUNDTRACK and record["timing"].get("waveform_basis") == "short_marked_excerpt"))
+                short_fallback = schema == SCHEMA_WITH_SHORT_TIMING or record["timing"].get("waveform_basis") == "short_marked_excerpt"
     if event_seconds is not None:
         from app.core.config import settings
 

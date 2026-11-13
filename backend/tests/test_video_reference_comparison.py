@@ -23,6 +23,7 @@ from app.core.config import settings
 from app.detectors.audio.decode import read_wav, wav_bytes
 from app.detectors.video import decode
 from app.evidence import video_reference, video_reference_local, video_reference_timing
+from app.reports.media_reference_pdf import render as render_comparison
 from app.storage.db import Analysis, Artefact, BillingOrderRow, Job, utcnow
 from scripts.compare_video_references import run
 from scripts.verify_native_video_interval import verify_comparison
@@ -52,6 +53,25 @@ def encode_lossy_comparison(path, pictures, *, lossless, crf=28):
                     "-pixel_format", "rgb24", "-video_size", f"{width}x{height}", "-framerate", "25", "-i", "pipe:0",
                     *output, "-threads", "1", str(path)], input=pictures.tobytes(), capture_output=True, check=True, timeout=20)
     return path
+
+
+def add_soundtracks(source, folder, name, tracks, *, subtitle_first=False):
+    output = folder / (name + ".mov")
+    inputs, streams = [], ["-map", "0:v:0", "-map", "0:a:0"]
+    for index, pcm in enumerate(tracks, 1):
+        path = folder / f"{name}-{index}.wav"
+        path.write_bytes(wav_bytes(pcm))
+        inputs.extend(["-i", str(path)])
+        streams.extend(["-map", f"{index}:a:0"])
+    if subtitle_first:
+        captions = folder / "captions.srt"
+        captions.write_text("1\n00:00:00,000 --> 00:00:01,000\nExample\n")
+        inputs.extend(["-i", str(captions)])
+        streams[0:0] = ["-map", f"{len(tracks)+1}:s:0"]
+    subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(source), *inputs, *streams,
+                    "-c:v", "copy", "-c:a", "pcm_s16le", "-c:s", "mov_text", str(output)],
+                   capture_output=True, check=True, timeout=20)
+    return output
 
 
 @pytest.fixture
@@ -106,6 +126,76 @@ def test_clock_geometry_and_audio_mismatch_stay_unassessed(tmp_path, aligned_pai
     assert result["audio"]["status"] == "audio_timelines_differ"
     result, _ = video_reference.compare(no_audio, no_audio)
     assert result["audio"]["status"] == "no_stream"
+
+
+def test_second_soundtrack_keeps_exact_stream_and_source_sample_coordinates(tmp_path, aligned_pair, reference_http, monkeypatch):
+    source, _, _, pcm = aligned_pair
+    second = np.roll(pcm, 173)
+    modified = second.copy()
+    modified[12901:13401] += 501 / 32768
+    earlier = add_soundtracks(source, tmp_path, "two-earlier", [second])
+    later = add_soundtracks(source, tmp_path, "three-later", [modified, -pcm], subtitle_first=True)
+    record, assets = video_reference.compare(earlier, later)
+    track = record["additional_soundtrack"]
+    assert record["schema"] == video_reference.SCHEMA_WITH_ADDITIONAL_SOUNDTRACK
+    assert record["audio"]["changed_samples"] == 0 and record["picture"]["changed_frames"] == 0
+    assert track["stream_indices"] == {"earlier": 2, "submitted": 3}
+    assert track["inventory"]["submitted"] == {"stream_indices": [2, 3, 4], "unassessed_stream_indices": [4]}
+    assert track["changed_samples"] == 500 and record["affects_overall_confidence"] is False
+    span, = track["ranges"]
+    assert span["id"] == "T2-A01"
+    assert (span["start_s"], span["end_s"]) == (.8, .84)
+    for side, data in (("earlier", second), ("submitted", modified)):
+        assert span["source_ranges"][side] == {"start_pts": 12800, "end_exclusive_pts": 13440}
+        wave = assets[span["preview"]["assets"][side]["file"]]
+        np.testing.assert_array_equal(read_wav(wave), data[12800:13440])
+    with pymupdf.open(stream=render_comparison(record, assets), filetype="pdf") as pdf:
+        assert "Second soundtrack comparison" in pdf[-2].get_text()
+        assert "500 decoded mono samples" in pdf[-2].get_text()
+        assert "Difference waveform" in pdf[-1].get_text()
+        assert "Source ticks [12800, 13440)" in pdf[-1].get_text()
+    assert run(earlier, later, tmp_path / "replay") == record
+    assert run(earlier, later, tmp_path / "replay", verify=True) == record
+
+    f = reference_http
+    stored = f.store.put_file(later)
+    monkeypatch.setattr(settings, "video_reference_comparison_enabled", True)
+
+    @contextmanager
+    def sessions():
+        with Session(f.engine) as db:
+            yield db
+
+    monkeypatch.setattr(v2_media_reference, "get_session", sessions)
+    monkeypatch.setattr(v2_media_reference, "default_store", lambda: f.store)
+    with sessions() as db:
+        analysis = db.get(Analysis, "other-kind")
+        analysis.filename, analysis.content_type = later.name, "video/quicktime"
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        db.commit()
+    response = f.client.post("/api/v2/analyses/other-kind/video-reference-comparison", headers=f.viewer,
+                             files={"earlier": (earlier.name, earlier.read_bytes(), "video/quicktime")},
+                             data={"include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    package = response.json()
+    assert package["comparison"] == record
+    assert {name: base64.b64decode(body) for name, body in package["assets"].items()} == assets
+    with pymupdf.open(stream=base64.b64decode(package["pdf"]), filetype="pdf") as pdf:
+        assert "Difference waveform" in pdf[-1].get_text()
+
+    legacy, legacy_assets = video_reference.compare(earlier, later, include_additional_soundtrack=False)
+    historical = tmp_path / "older.json"
+    historical.write_text(json.dumps({"comparison": legacy, "assets": {k: base64.b64encode(v).decode() for k, v in legacy_assets.items()}}))
+    assert run(earlier, later, historical, verify=True) == legacy
+    without_pair, _ = video_reference.compare(source, later)
+    assert without_pair["additional_soundtrack"]["status"] == "missing_counterpart"
+    unequal = add_soundtracks(source, tmp_path, "unequal", [second[:-200]])
+    misaligned, _ = video_reference.compare(earlier, unequal)
+    assert misaligned["additional_soundtrack"]["status"] == "audio_timelines_differ"
+    assert not misaligned["additional_soundtrack"].get("ranges")
+    overlong = add_soundtracks(source, tmp_path, "overlong", [np.tile(second, 7)])
+    unassessed, _ = video_reference.compare(earlier, overlong)
+    assert unassessed["additional_soundtrack"]["status"] == "comparison_limit"
 
 
 def test_overlarge_picture_is_refused_before_per_frame_probe(monkeypatch, aligned_pair):

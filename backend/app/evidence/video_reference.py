@@ -14,6 +14,7 @@ import numpy as np
 from PIL import Image
 
 from app.core.canonical import canonical_hash
+from app.detectors.audio.decode import audio_stream_indices
 from app.detectors.video.decode import DecodeError, FrameTable, decode_frames, probe_frames
 from app.evidence import video_reference_local
 from app.evidence.audio_reference import compare_tracks, marked_ranges, read_track
@@ -24,6 +25,8 @@ SCHEMA_WITH_LOCAL = "chipmunk.video-reference-comparison/2"
 SCHEMA_WITH_TIMING = "chipmunk.video-reference-comparison/3"
 SCHEMA_WITH_SHORT_TIMING = "chipmunk.video-reference-comparison/4"
 SCHEMA_WITH_SOUNDTRACK = "chipmunk.video-reference-comparison/5"
+SCHEMA_WITH_ADDITIONAL_SOUNDTRACK = "chipmunk.video-reference-comparison/6"
+MAX_COMPARED_SOUNDTRACKS = 2
 MAX_BYTES = 48 * 1024 * 1024
 MAX_FRAMES = 360
 MAX_PIXELS = 1280 * 720
@@ -35,6 +38,11 @@ INTERPRETATION = (
     "The comparison shows changes in decoded pictures and the first soundtrack. "
     "Encoding, color conversion, and ordinary edits can change decoded values. "
     "Establishing edit intent or AI authorship requires other evidence."
+)
+ADDITIONAL_AUDIO_SCOPE = (
+    "The second soundtrack is compared by track order after decoding to mono. The comparison requires matching "
+    "clocks and supports up to 12 seconds of audio. Alternate mixes and ordinary edits can cause "
+    "differences. This comparison contributes zero weight to the AI estimate."
 )
 
 
@@ -195,9 +203,35 @@ def _picture(paths, tables, assets, *, include_local):
     return picture
 
 
+def _additional_soundtracks(paths, sources, tables, assets):
+    try:
+        left, right = map(audio_stream_indices, paths)
+    except ValueError:
+        return None
+    if max(len(left), len(right)) < 2:
+        return None
+    coverage = {"inventory": {side: {"stream_indices": list(indices),
+                                    "unassessed_stream_indices": list(indices[MAX_COMPARED_SOUNDTRACKS:])}
+                              for side, indices in (("earlier", left), ("submitted", right))},
+                "position": 2, "scope": ADDITIONAL_AUDIO_SCOPE,
+                "stream_indices": {"earlier": left[1] if len(left) > 1 else None,
+                                   "submitted": right[1] if len(right) > 1 else None}}
+    if min(len(left), len(right)) < 2:
+        return {**coverage, "status": "missing_counterpart"}
+    tracks = [read_track(path, source, max_seconds=MAX_SECONDS, video=True, origin=table.pts[0] * table.tb, stream_position=1)
+              for path, source, table in zip(paths, sources, tables, strict=True)]
+    changes = compare_tracks(*tracks, assets, preview_prefix="track-2-", difference_waveform=True)
+    if any(track[0] == "comparison_limit" for track in tracks):
+        changes["status"] = "comparison_limit"
+    for span in changes.get("ranges", []):
+        span["id"] = "T2-" + span["id"]
+    return {**coverage, **changes}
+
+
 def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             timing_event_s: Fraction | None = None, timing_model: Path | None = None,
-            timing_short_fallback: bool = False, include_soundtrack: bool = True) -> tuple[dict, dict[str, bytes]]:
+            timing_short_fallback: bool = False, include_soundtrack: bool = True,
+            include_additional_soundtrack: bool = True) -> tuple[dict, dict[str, bytes]]:
     """Report actual decoded differences at equal relative native picture timestamps."""
     paths = earlier, submitted
     sources = tuple(_identity(path) for path in paths)
@@ -239,6 +273,11 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
         else:
             assets.update(timing_assets)
         record.update(schema=SCHEMA_WITH_SOUNDTRACK, soundtrack_alignment=alignment)
+    if include_additional_soundtrack and status == "measured":
+        additional = _additional_soundtracks(paths, sources, tables, assets)
+        if additional is not None:
+            record.update(schema=SCHEMA_WITH_ADDITIONAL_SOUNDTRACK, additional_soundtrack=additional,
+                          interpretation=INTERPRETATION.replace("the first soundtrack", "the available soundtracks checked below"))
     if sources != tuple(_identity(path) for path in paths):
         raise ValueError("One of the clips changed while the comparison was running.")
     return record, assets

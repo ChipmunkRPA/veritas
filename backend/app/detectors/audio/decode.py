@@ -34,6 +34,23 @@ class AudioStreamUnavailable(ValueError):
     """The container has no audio stream to decode."""
 
 
+def _probe(path: Path) -> dict:
+    entries = ("stream=index,channels,channel_layout,sample_rate,codec_name,bit_rate,bits_per_raw_sample,time_base,start_pts,duration"
+               ":format=format_name,start_time,duration")
+    probe = subprocess.run(["ffprobe", "-v", "error", "-protocol_whitelist", "file", "-select_streams", "a",
+                            "-show_entries", entries, "-of", "json", _input(path)],
+                           capture_output=True, text=True, timeout=60, check=True, stdin=subprocess.DEVNULL)
+    return json.loads(probe.stdout)
+
+
+def audio_stream_indices(path: Path) -> tuple[int, ...]:
+    """Return the ordered audio stream indices from the source container."""
+    try:
+        return tuple(int(stream["index"]) for stream in _probe(path).get("streams", ()))
+    except (subprocess.SubprocessError, TypeError, ValueError, KeyError, OSError) as error:
+        raise ValueError("The audio stream inventory could not be read") from error
+
+
 @dataclass(frozen=True)
 class DecodedAudio:
     pcm: np.ndarray
@@ -114,7 +131,7 @@ def _read_stereo(path: Path, limit: int) -> np.ndarray:
 
 
 def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
-                 inspect_stereo: bool = False) -> DecodedAudio:
+                 inspect_stereo: bool = False, stream_position: int = 0) -> DecodedAudio:
     if not (0 < max_seconds <= 600):
         raise ValueError("Audio decoding is bounded to 600 seconds")
     if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
@@ -122,17 +139,17 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
     with path.open("rb") as stream:
         if hashlib.file_digest(stream, "sha256").hexdigest() != source_sha256:
             raise ValueError("The audio decoder input differs from the recorded original")
+    if type(stream_position) is not int or stream_position < 0:
+        raise ValueError("Invalid audio stream position")
     try:
-        entries = ("stream=index,channels,channel_layout,sample_rate,codec_name,bit_rate,bits_per_raw_sample,time_base,start_pts,duration"
-                   ":format=format_name,start_time,duration")
-        probe = subprocess.run(["ffprobe", "-v", "error", "-protocol_whitelist", "file", "-select_streams", "a",
-                                "-show_entries", entries, "-of", "json", _input(path)],
-                               capture_output=True, text=True, timeout=60, check=True, stdin=subprocess.DEVNULL)
-        info = json.loads(probe.stdout)
+        info = _probe(path)
         streams = info.get("streams") or []
         if not streams:
             raise AudioStreamUnavailable("The file has no audio stream")
-        stream = streams[0]
+        if stream_position >= len(streams):
+            raise AudioStreamUnavailable("The selected audio stream is not present")
+        stream = streams[stream_position]
+        input_stream = f"0:a:{stream_position}"
         maximum = math.floor(max_seconds * SAMPLE_RATE)
         filters = f"aformat=sample_fmts=s16:channel_layouts=mono,aresample={SAMPLE_RATE},atrim=end_sample={maximum},ashowinfo,asetpts=N/SR/TB"
         layout = stream.get("channel_layout")
@@ -149,7 +166,7 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
                 limit = min(maximum, STEREO_MAX_SECONDS * SAMPLE_RATE)
                 stereo_path = Path(temp) / "stereo.wav"
                 mono_filters = filters.replace("ashowinfo", "ashowinfo@mono")
-                graph = (f"[0:a:0]asplit=2[mix][channels];[mix]{mono_filters}[mono];"
+                graph = (f"[{input_stream}]asplit=2[mix][channels];[mix]{mono_filters}[mono];"
                          f"[channels]aresample={SAMPLE_RATE},atrim=end_sample={limit},"
                          "ashowinfo@stereo,asetpts=N/SR/TB[stereo]")
                 run = subprocess.run(
@@ -174,7 +191,7 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
                     capture_stereo = False
                     stereo_pcm, stereo_clock = None, None
             if not capture_stereo:
-                run = subprocess.run(command + ["-map", "0:a:0", "-af", filters] + mono_output,
+                run = subprocess.run(command + ["-map", input_stream, "-af", filters] + mono_output,
                                      capture_output=True, text=True, timeout=180, check=True, stdin=subprocess.DEVNULL)
                 pcm = read_wav(output.read_bytes())
                 timeline = _mapping(run.stderr, len(pcm))
@@ -206,6 +223,8 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
             mapping["source_bit_rate"] = int(bit_rate) if bit_rate is not None else None
         if len(streams) > 1:
             mapping["audio_stream_indices"] = [int(track["index"]) for track in streams]
+        if stream_position:
+            mapping["transform"] = mapping["transform"].replace("First audio stream", "Selected audio stream", 1)
         verified_stereo = None
         if inspect_stereo:
             mapping["stereo_context"] = stereo.build(mapping, pcm, layout, stereo_pcm, stereo_clock)

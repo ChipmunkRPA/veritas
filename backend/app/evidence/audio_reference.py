@@ -74,15 +74,16 @@ def _wav_asset(assets, filename, content):
     return {"file": filename, "sha256": hashlib.sha256(content).hexdigest(), "media_type": "audio/wav"}
 
 
-def _read_track(path, source, *, max_seconds, origin, video):
+def _read_track(path, source, *, max_seconds, origin, video, stream_position=0):
     try:
-        decoded = decode_audio(path, source_sha256=source["sha256"], max_seconds=max_seconds + 1)
+        options = {"stream_position": stream_position} if stream_position else {}
+        decoded = decode_audio(path, source_sha256=source["sha256"], max_seconds=max_seconds + 1, **options)
     except AudioStreamUnavailable:
         return ("no_stream", None, None), False, False
     except (ValueError, RuntimeError):
         return ("unverified_audio_clock", None, None), False, False
     mapping = decoded.mapping
-    if not video and mapping["samples"] > max_seconds * AUDIO_RATE:
+    if (not video or stream_position) and mapping["samples"] > max_seconds * AUDIO_RATE:
         return ("comparison_limit", None, None), False, False
     if len(mapping["timeline"]) != 1 or mapping["samples"] >= mapping["limit_samples"]:
         return ("unverified_audio_clock", None, None), False, False
@@ -98,8 +99,8 @@ def _read_track(path, source, *, max_seconds, origin, video):
                                      "relative_start": str(relative), "samples": len(decoded.pcm)}), native_lossless, exact_s16
 
 
-def read_track(path, source, *, max_seconds, origin=Fraction(0), video=False):
-    track, _, _ = _read_track(path, source, max_seconds=max_seconds, origin=origin, video=video)
+def read_track(path, source, *, max_seconds, origin=Fraction(0), video=False, stream_position=0):
+    track, _, _ = _read_track(path, source, max_seconds=max_seconds, origin=origin, video=video, stream_position=stream_position)
     return track
 
 
@@ -137,7 +138,7 @@ def _measure_changes(first, second, assets, difference, delta, *, origin, prefix
             "bin_counts_sha256": canonical_hash(changed_per_bin.tolist()), "ranges": result}
 
 
-def compare_tracks(first, second, assets, *, standalone=False):
+def compare_tracks(first, second, assets, *, standalone=False, preview_prefix="", difference_waveform=False):
     if first[0] == second[0] == "no_stream":
         return {"status": "no_stream"}
     if first[0] != "measured" or second[0] != "measured":
@@ -146,10 +147,10 @@ def compare_tracks(first, second, assets, *, standalone=False):
     if (left["relative_start"], left["samples"]) != (right["relative_start"], right["samples"]):
         return {"status": "audio_timelines_differ", "earlier": left, "submitted": right, "sample_rate": AUDIO_RATE}
 
-    delta = second[1] - first[1] if standalone else None
+    delta = second[1] - first[1] if standalone or difference_waveform else None
     origin = Fraction(0) if standalone else Fraction(right["relative_start"])
     return {"status": "measured", "earlier": left, "submitted": right,
-            **_measure_changes(first, second, assets, first[1] != second[1], delta, origin=origin)}
+            **_measure_changes(first, second, assets, first[1] != second[1], delta, origin=origin, prefix=preview_prefix)}
 
 
 def _gain_bounds(bounds):

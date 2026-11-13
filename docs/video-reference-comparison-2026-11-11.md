@@ -12,6 +12,10 @@ The earlier H.264 study recovered 24/32 neural redraw locations in the tested 25
 
 The first soundtrack is compared on the same 16 kHz decoded mono sample clock when both tracks have the same relative start, sample count, and continuous timing. Adjacent 20 ms bins with differences form a range. Counts include only samples that differ. The three longest ranges include waveforms and exact playable samples for the first two seconds or less. The two waveforms share a scale. JSON contains the exact source clocks, SHA-256 commitments, waveforms, and media. The separate PDF includes source identities, all ranges, picture previews, and selected waveforms. These measurements carry zero AI-confidence weight.
 
+When both files have a second audio stream, a separate check compares those streams by audio order. It records each container's actual stream index and compares up to 12 seconds of continuous audio on matching clocks. Its ranges show the relative time and both source-clock intervals. Selected ranges have playback, two source waveforms, and a difference waveform. A one-sided track or incompatible clock is reported as unassessed. The third and later audio streams are inventoried and remain unassessed. This check can expose changes to a separate dialogue, music, or effects track when the first soundtrack is unchanged. Each measured difference can also result from ordinary editing.
+
+Local verification used two pairs of six-second background-speech mixtures with known edit boundaries. On each pair the pictures and first soundtrack matched. The second soundtrack localized both generated-speech replacements and both ordinary speech replacements to their authored 20 ms bins, 0.320–0.960 s and 3.440–4.240 s. The two unmodified copies had zero differences. Chrome displayed all three waveforms and played both excerpts. The JSON and PDF downloads matched the authenticated response, and offline JSON replay reproduced the measurement. The comparison created no additional analysis, job, billing, or stored evidence record. [Speech source panel](audio-remote-neighbor-replication-2026-11-12.md)
+
 When every decoded picture matches, **Local soundtrack timing** checks whether the same sound moved earlier or later inside an otherwise aligned soundtrack. A measured shift shows the same sound at its time in each clip, both waveforms, and the native picture displayed at the midpoint of the measured interval. JSON includes playable excerpts and exact picture and sample positions. The supplemental PDF includes the picture and waveforms. The check runs without a marked mouth time and carries zero AI-confidence weight. [Held PCM and AAC results and replay](video-paired-soundtrack-transfer-2026-11-12.md)
 
 ## Mark a mouth closure
@@ -41,6 +45,8 @@ python -m scripts.compare_video_references earlier.mov analyzed.mov downloaded-c
 The replay uses the same measurement implementation as the app. Record your FFmpeg and Pillow versions if two runs produce different decoded bytes. Keep source files, previews, and sound clips in your local workspace. For version 3 timing evidence, install the pinned runtime and pass `--timing-model /path/to/face_landmarker.task` or set `VERITAS_VIDEO_REFERENCE_TIMING_MODEL_PATH`. The verifier reads the marked time from the export. To author a marked comparison offline, add `--event-seconds 0.720` and use the same local task.
 
 Version 5 includes the automatic soundtrack timing comparison. It requires no additional weights. A version 5 export that also includes marked mouth evidence needs the same pinned timing runtime for replay.
+
+Version 6 also records the second soundtrack comparison. The same replay command checks the separate source clocks, ranges, and waveforms. No additional weights are needed for the second soundtrack.
 
 To verify a downloaded version 2 JSON with a measured local range using only Python 3.11 or later, FFmpeg, and FFprobe, run from the repository root.
 

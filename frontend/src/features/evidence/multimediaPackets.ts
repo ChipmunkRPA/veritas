@@ -148,7 +148,17 @@ export interface AudioRepetitionContext extends AudioRepeatRecord {
 }
 interface StereoRepetitionContext {
   schema: 'chipmunk.stereo-exact-repetition/1'; source_sha256: string; affects_overall_confidence: false
-  channels: { channel: 'left' | 'right'; measurement: AudioRepetitionContext }[]
+  channels: { channel: 'left' | 'right'; measurement: AudioRepetitionContext; gain_measurement?: AudioGainRepetitionContext }[]
+}
+export function repeatedAudioCount(audio?: AudioEvidenceSet | VideoAudioChannel | null) {
+  return (audio?.repetition_context?.pairs.length ?? 0) + (audio?.similarity_context?.pairs.length ?? 0)
+    + (audio?.stereo_repetition?.channels.reduce((count, row) => count + row.measurement.pairs.length
+      + (row.gain_measurement?.pairs.length ?? 0), 0) ?? 0)
+}
+export interface AudioGainRepetitionContext extends Omit<AudioRepeatRecord, 'searched_interval'> {
+  schema: 'chipmunk.audio-gain-repetition/1'
+  pairs: (AudioRepeatPair & { gain_numerator: number; gain_denominator: number; scaled_occurrence: 'first' | 'second';
+    artifacts: Record<'first_clip' | 'second_clip' | 'first_waveform' | 'second_waveform', EvidenceAsset> })[]
 }
 export interface AudioSimilarityContext extends AudioRepeatRecord {
   schema: 'chipmunk.audio-repeat-similarity/1' | 'chipmunk.audio-repeat-similarity/2'

@@ -97,6 +97,22 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [single-upload fixed-gain stereo check](stereo-repetition-2026-11-13.md#gain-and-polarity)
+  found 96 of 96 level- or polarity-adjusted repeats missed by the exact
+  channel and mono searches. It added zero findings on 144 matched controls
+  across the same two AMI meetings. It is available on supported local audio
+  and video soundtracks and carries no AI confidence weight.
+- [Multi-frame mouth tracking](video-mouth-track-cycle-2026-11-13.md) found one
+  of ten qualified LivePortrait redraws, missed the qualified MuseTalk redraw,
+  and flagged eight of 123 ordinary files in its stronger localization arm.
+  The two candidate checks remain offline.
+- [Directional JPEG texture](image-directional-structure-transfer-2026-11-13.md)
+  located one of twelve feathered edits, flagged seven of 72 ordinary files,
+  and found no useful region on sixteen second-bank edits. It remains offline.
+- [Longer writing on eLife](writing-elife-long-position-transfer-2026-11-13.md)
+  found no useful location on 21 generated sentence substitutions and flagged
+  two of twelve ordinary works at the frozen longer-passage point. The local
+  opt-in scope remains unchanged.
 - The [single-upload stereo repeat check](stereo-repetition-2026-11-13.md)
   located all 32 exact one-channel copies that the downmix missed, with no
   matches on 16 unchanged recordings. It shows and replays both intervals

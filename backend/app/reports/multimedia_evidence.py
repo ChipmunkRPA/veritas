@@ -365,12 +365,14 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         if stereo_context != mapping.get("stereo_context"):
             raise ObjectIntegrityError("Stereo context differs from the frozen audio input mapping")
         stereo_listening.verify(store, document, mapping.get("stereo_listening_pcm_sha256"), pcm, read_waveform=assets.__getitem__)
+        from app.evidence.audio_gain_repetition_binding import GAIN_INPUT
         from app.evidence.stereo_repetition_binding import INPUT
 
         if "schema" in document and ("stereo_repetition" in document or mapping.get(INPUT)):
             from app.evidence import stereo_repetition
 
-            stereo_repetition.verify_frozen(store, document, mapping, mapping.get(INPUT), assets.__getitem__)
+            stereo_repetition.verify_frozen(store, document, mapping, mapping.get(INPUT), assets.__getitem__,
+                                           gain_version=mapping.get(GAIN_INPUT))
     if stereo_context is not None:
         from app.detectors.audio.stereo import verify_mono_levels
 
@@ -1034,7 +1036,12 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         from app.evidence.stereo_repetition_binding import pairs
 
         for pair in pairs(stereo_repeated):
-            pair["waveform"] = plate("waveform", pair["artifacts"]["waveform"], "Waveform shared by both occurrences")
+            if "scaled_occurrence" in pair:
+                for side in ("first", "second"):
+                    role = f"{side}_waveform"
+                    pair[role] = plate(role, pair["artifacts"][role], f"{side.capitalize()} occurrence waveform")
+            else:
+                pair["waveform"] = plate("waveform", pair["artifacts"]["waveform"], "Waveform shared by both occurrences")
     video_origin_s = document["source"].get("timeline_origin_s") if kind == "video" else None
     voice_coverage = (stereo_source.get("coverage") or {}) if kind in {"audio", "video"} else {}
     rate = (stereo_source.get("source") or {}).get("sample_rate")

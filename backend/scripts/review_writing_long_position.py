@@ -48,7 +48,7 @@ def useful(case, idx):
     return 10 * words[hit] >= 3 * sum(words[i] for i in indices)
 
 
-def select_case(case, point, *, allow_punctuation_unit=False):
+def select_case(case, point, *, allow_punctuation_unit=False, allow_touching=False):
     positions = case["positions"]
     assert 9 <= len(positions) <= 25 and 3 <= len({p for _, _, p, _ in positions}) <= 5
     assert 160 <= sum(n for *_, n in positions) <= 680 or case["truth"] is not None
@@ -60,7 +60,10 @@ def select_case(case, point, *, allow_punctuation_unit=False):
         for (a, b, _, n), m in zip(positions, case["nonspace"])
     )
     assert all(
-        (x[1] < y[0] or (allow_punctuation_unit and x[1] == y[0] and (x[3] == 0 or y[3] == 0)))
+        (
+            x[1] < y[0]
+            or (x[1] == y[0] and (allow_touching or (allow_punctuation_unit and (x[3] == 0 or y[3] == 0))))
+        )
         and x[2] <= y[2]
         for x, y in zip(positions, positions[1:])
     )
@@ -99,11 +102,16 @@ def select_case(case, point, *, allow_punctuation_unit=False):
     }
 
 
-def compare(cases, point, *, allow_punctuation_unit=False):
+def compare(cases, point, *, allow_punctuation_unit=False, allow_touching=False):
     result = {}
     for publisher in sorted({c["publisher"] for c in cases}):
         rows = [
-            (c, select_case(c, point, allow_punctuation_unit=allow_punctuation_unit))
+            (
+                c,
+                select_case(
+                    c, point, allow_punctuation_unit=allow_punctuation_unit, allow_touching=allow_touching
+                ),
+            )
             for c in cases
             if c["publisher"] == publisher
         ]

@@ -297,6 +297,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         thumbnail_assets = {asset['sha256'] for group in thumbnail_groups for asset in group.values()}
         groups.extend(thumbnail_groups)
     repeat_pcm = {}
+    gain_pairs = []
+    gain_pcm = {}
     for part in parts:
         copy_base = part
         if part.get('version') == IMAGE_PAIR_VERSION:
@@ -359,6 +361,15 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             validate_stereo_repeat(stereo_repeat, part['source'])
             for pair in pairs(stereo_repeat):
                 groups.append(pair['artifacts'])
+                if 'scaled_occurrence' in pair:
+                    gain_pairs.append(pair)
+                    for side in ('first', 'second'):
+                        digest = pair['artifacts'][side + '_clip']['sha256']
+                        pcm_digest = pair[side]['pcm_s16le_sha256']
+                        _require(repeat_pcm.setdefault(digest, pcm_digest) == pcm_digest,
+                                 'One repeated-audio clip has conflicting PCM commitments')
+                        gain_pcm[digest] = None
+                    continue
                 digest = pair['artifacts']['first_clip']['sha256']
                 pcm_digest = pair['pcm_s16le_sha256']
                 _require(repeat_pcm.setdefault(digest, pcm_digest) == pcm_digest,
@@ -429,7 +440,10 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              and audio.getnchannels() == asset.get('channels') and audio.getsampwidth() == 2,
                              'A WAV asset does not match its frozen sample dimensions')
                     if digest in repeat_pcm or digest in processed_pcm:
-                        pcm_digest = hashlib.sha256(audio.readframes(audio.getnframes())).hexdigest()
+                        pcm = audio.readframes(audio.getnframes())
+                        pcm_digest = hashlib.sha256(pcm).hexdigest()
+                        if digest in gain_pcm:
+                            gain_pcm[digest] = pcm
                     if digest in repeat_pcm:
                         _require(pcm_digest == repeat_pcm[digest],
                                  'A repeated-audio clip does not contain its committed samples')
@@ -439,6 +453,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                 dimensions = inspect_mp4(stream)
                 _require(all(canonical_hash(asset.get(k)) == canonical_hash(v) for k, v in dimensions.items()),
                          'An MP4 asset does not match its frozen frames, timing or track format')
+    if gain_pairs:
+        from app.evidence.audio_gain_repetition_binding import matches_clips
+
+        for pair in gain_pairs:
+            first, second = (gain_pcm[pair['artifacts'][side + '_clip']['sha256']] for side in ('first', 'second'))
+            _require(first is not None and second is not None and matches_clips(pair, first, second),
+                     'The recorded clips do not match the stated gain relationship')
     expected = {'README.txt', 'reproduce.md', 'bundle.json', 'evidence.json', 'result.json', 'report.pdf',
                 'instance_public_key.pem', 'manifest.sha256', 'manifest.sha256.sig', *(a['file'] for a in entries)}
     original = bundle.get('source')

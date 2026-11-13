@@ -348,8 +348,9 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% if packet.assets %}<details open class="multimedia-asset-list"><summary>Frozen evidence assets</summary>{% for asset in packet.assets %}<p class="caption evidence-hash">{{ asset.role | replace('_', ' ') }} ({{ asset.media_type }}) - SHA-256 <span class="mono">{{ asset.sha256 }}</span></p>{% endfor %}</details>{% endif %}
 </article>
 {% else %}
-{% set stereo_repeats = evidence.stereo_repetition.channels | map(attribute='measurement.pairs') | select | list if evidence.get('stereo_repetition') else [] %}
-{% if not stereo_repeats and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
+{% set stereo_repeats = namespace(found=false) %}
+{% if evidence.get('stereo_repetition') %}{% for row in evidence.stereo_repetition.channels %}{% if row.measurement.pairs or (row.get('gain_measurement') and row.gain_measurement.pairs) %}{% set stereo_repeats.found = true %}{% endif %}{% endfor %}{% endif %}
+{% if not stereo_repeats.found and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
 {% if evidence.omitted %}<p class="caption">{{ evidence.omitted }} additional candidates were omitted from this bounded evidence set.</p>{% endif %}
 {% for note in evidence.limitations %}<p class="caption">{{ note }}</p>{% endfor %}
 {% endif %}

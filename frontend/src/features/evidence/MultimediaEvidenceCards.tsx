@@ -4,7 +4,7 @@ import DocumentEvidenceContent from './DocumentEvidenceContent'
 import VideoEvidenceContent from './VideoEvidenceContent'
 import VideoEvidenceWorkspace from './VideoEvidenceWorkspace'
 import { EvidenceLimits } from './EvidenceMedia'
-import { hasNestedVideoEvidence, useMultimediaEvidence, type EvidenceKind, type MultimediaEvidenceSet } from './multimediaPackets'
+import { hasNestedVideoEvidence, repeatedAudioCount, useMultimediaEvidence, type EvidenceKind, type MultimediaEvidenceSet } from './multimediaPackets'
 
 const labels = { video: 'Video evidence', audio: 'Audio evidence', document: 'Text and document evidence' }
 export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: MultimediaEvidenceSet; token: string; mediaReady: boolean }) {
@@ -14,7 +14,7 @@ export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: Mul
   const stereo = nestedVideo ? set.audio?.stereo_context : set.schema === 'chipmunk.audio-evidence/1' ? set.stereo_context : undefined
   const monoLevelDrop = stereo?.windows.some((window) => window.downmix?.strong_attenuation)
   const audio = set.schema === 'chipmunk.video-evidence/1' ? set.audio : set.schema === 'chipmunk.audio-evidence/1' ? set : undefined
-  const repeatedAudio = audio?.repetition_context?.pairs.length || audio?.similarity_context?.pairs.length
+  const repeatedAudio = repeatedAudioCount(audio)
   const shortSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' && set.short_voice_review?.status === 'flagged'
   const longSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' && set.long_voice_review?.status === 'corroborated'
   const backgroundSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' && set.background_reduced_voice_review?.status === 'flagged'

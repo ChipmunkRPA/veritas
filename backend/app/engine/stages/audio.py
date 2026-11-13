@@ -33,6 +33,7 @@ from typing import Any
 import numpy as np
 
 from app.core.canonical import canonical_json
+from app.core.config import settings
 from app.core.evidence import Signal
 from app.detectors.audio import background_voice_review, long_voice_review, short_voice_review, waveform
 from app.detectors.audio.coverage import content_rows, coverage_seconds, scored_voice_spans
@@ -134,6 +135,7 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     """Decode once, preserving the exact checked PCM and its rational source timeline."""
     from app.detectors.video.adapters.common import AudioTrack
     from app.evidence import stereo_listening, stereo_repetition
+    from app.evidence.audio_gain_repetition_binding import GAIN_INPUT, GAIN_VERSION
     from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
 
     source_sha = ctx.outputs["ingest"]["sha256"]
@@ -152,6 +154,8 @@ def decode(ctx: StageContext) -> dict[str, Any]:
         repeated = stereo_repetition.freeze(db, ctx.store, ctx.analysis_id, decoded)
         if repeated is not None:
             decoded.mapping[STEREO_REPEAT_INPUT] = repeated.sha256
+            if settings.environment == "dev" and settings.audio_stereo_gain_repeat_review:
+                decoded.mapping[GAIN_INPUT] = GAIN_VERSION
         mapping = register_artefact(db, ctx.store, canonical_json(decoded.mapping), media_type="application/json", role="stage_output",
                                    created_by="audio-input/1", analysis_id=ctx.analysis_id)
         binding = {"version": "audio-input/1", "pcm_sha256": decoded.mapping["pcm_sha256"],

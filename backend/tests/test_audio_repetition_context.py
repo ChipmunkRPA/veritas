@@ -29,6 +29,7 @@ from app.detectors.video.decode import probe_frames
 from app.engine.stages import audio, video
 from app.evidence import (
     audio_exact_repetition,
+    audio_gain_repetition_binding,
     audio_repetition,
     service,
     video_audio,
@@ -68,7 +69,7 @@ def _stage_record(db, store, analysis_id, name, data):
 
 
 def _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapshot, api, pair, source_pts, source_path,
-                              stereo=False):
+                              stereo=False, gain_pair=None):
     kind = analysis.kind
     clip = pair["artifacts"]["first_clip"]
     monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
@@ -78,6 +79,11 @@ def _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapsh
     assert title in text and "0.200 s of identical samples" in text
     if stereo:
         assert "Waveform shared by both occurrences" in text
+    if gain_pair:
+        assert "Gain-adjusted repeats in the right channel" in text
+        assert "Multiplying the first occurrence by -3/4" in text
+        assert "First occurrence waveform" in text and "Second occurrence waveform" in text
+        assert "0.321–0.521 s" in text and "1.761–1.961 s" in text
     assert "0.320–0.520 s" in text and "1.760–1.960 s" in text
     assert f"Source PTS [{source_pts + FIRST}, {source_pts + FIRST + LENGTH})" in text
     assert f"Source PTS [{source_pts + SECOND}, {source_pts + SECOND + LENGTH})" in text
@@ -121,6 +127,10 @@ def _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapsh
         assert archive.read(asset_path) == store.read_bytes(clip["sha256"])
         with archive.open(asset_path) as stream, wave.open(stream, "rb") as wav:
             assert hashlib.sha256(wav.readframes(wav.getnframes())).hexdigest() == pair["pcm_s16le_sha256"]
+        if gain_pair:
+            for asset in gain_pair["artifacts"].values():
+                ext = "wav" if asset["media_type"] == "audio/wav" else "png"
+                assert archive.read(f"assets/{asset['sha256']}.{ext}") == store.read_bytes(asset["sha256"])
 
     trusted = tmp_path / "trusted.pem"
     trusted.write_bytes(key.public_pem())
@@ -145,6 +155,8 @@ sys.exit(0 if result.ok else 1)
         assert "Recomputed the exact repeat search on both recorded stereo channels" in verified.checks[-1].detail
     else:
         assert "Verified 4 published playback intervals across 3 WAV assets" in verified.checks[-1].detail
+    if gain_pair:
+        assert "Recomputed gain-adjusted repeats" in verified.checks[-1].detail
 
     def change_pair(files, field):
         evidence, bundle = json.loads(files["evidence.json"]), json.loads(files["bundle.json"])
@@ -155,6 +167,8 @@ sys.exit(0 if result.ok else 1)
             altered_pair["second"]["source_timestamp_ranges"][0]["source_start_pts"] += 1
         elif field == "pcm":
             altered_pair["pcm_s16le_sha256"] = "f" * 64
+        elif field == "gain_ratio":
+            body["stereo_repetition"]["channels"][1]["gain_measurement"]["pairs"][0]["gain_numerator"] = 3
         else:
             for side in ("first", "second"):
                 interval = altered_pair[side]
@@ -173,6 +187,10 @@ sys.exit(0 if result.ok else 1)
         failed = verify.verify_package(altered, public_key_pem=key.public_pem())
         assert failed.outcome == "not_verified"
         assert any(expected in check.detail for check in failed.checks)
+    if gain_pair:
+        altered = rewrite(exported.path, tmp_path / "changed-ratio.zip", partial(change_pair, field="gain_ratio"), key)
+        failed = verify.verify_package(altered, public_key_pem=key.public_pem())
+        assert failed.outcome == "not_verified" and any("stated gain relationship" in check.detail for check in failed.checks)
     shifted = rewrite(exported.path, tmp_path / "shifted-repetition.zip", partial(change_pair, field="coordinates"), key)
     assert verify.verify_package(shifted, public_key_pem=key.public_pem()).ok
     failed = verify.verify_package(shifted, public_key_pem=key.public_pem(), source_audio=source_path)
@@ -192,13 +210,19 @@ def test_serving_method_preserves_exact_historical_algorithm_bytes():
 
 
 @pytest.mark.parametrize("kind", ["audio", "video"])
-@pytest.mark.parametrize("stereo", [False, True], ids=["mono", "stereo"])
-def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(tmp_path, monkeypatch, kind, stereo):
+@pytest.mark.parametrize("stereo,gain", [(False, False), (True, False), (True, True)], ids=["mono", "stereo", "stereo-gain"])
+def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(tmp_path, monkeypatch, kind, stereo, gain):
     pcm = _authored()
     carrier = pcm
+    gain_pair = None
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "audio_stereo_gain_repeat_review", gain)
+    monkeypatch.setattr(settings, "audio_waveform_repeat_review", False)
     if stereo:
         pcm = np.append(pcm, np.arange(1231, dtype="<i2"))
         background = np.random.default_rng(81).integers(-10000, 10000, size=len(pcm), dtype="<i2")
+        if gain:
+            background[SECOND + 16:SECOND + 16 + LENGTH] = np.rint(background[FIRST + 16:FIRST + 16 + LENGTH] * (-3 / 4))
         carrier = np.column_stack((pcm, background))
     source_path = _wav(tmp_path / "source.wav", carrier)
     source_pts = 0
@@ -267,6 +291,18 @@ def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(t
             assert check["stereo_pcm_sha256"] == hashlib.sha256(carrier.tobytes()).hexdigest()
             left, right = check["channels"]
             assert left["channel"] == "left" and right["channel"] == "right" and right["measurement"]["pairs"] == []
+            assert ("gain_measurement" in left) == ("gain_measurement" in right) == gain
+            if gain:
+                assert not left["gain_measurement"]["pairs"]
+                [gain_pair] = right["gain_measurement"]["pairs"]
+                assert (gain_pair["gain_numerator"], gain_pair["gain_denominator"], gain_pair["scaled_occurrence"]) == (-3, 4, "second")
+                for side, start in (("first", FIRST + 16), ("second", SECOND + 16)):
+                    assert gain_pair[side]["start_sample"] == start and gain_pair[side]["end_sample"] == start + LENGTH
+                    asset = gain_pair["artifacts"][f"{side}_clip"]
+                    assert service.asset_refs(api)[asset["sha256"]] == asset
+                    np.testing.assert_array_equal(read_wav(store.read_bytes(asset["sha256"])), background[start:start + LENGTH] / 32768)
+                assert audio_gain_repetition_binding.matches_clips(gain_pair, background[FIRST + 16:FIRST + 16 + LENGTH].tobytes(),
+                                                                  background[SECOND + 16:SECOND + 16 + LENGTH].tobytes())
             context = left["measurement"]
         else:
             assert "stereo_repetition" not in part
@@ -314,7 +350,7 @@ def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(t
                                                        "filename": analysis.filename, "content_type": analysis.content_type}),
             "report": snapshot.report.model_copy(update={"template_set": engine.TEMPLATE_SET}),
         })
-        _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapshot, api, pair, source_pts, source_path, stereo)
+        _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapshot, api, pair, source_pts, source_path, stereo, gain_pair)
 
 
 @pytest.mark.parametrize("mode,status,reason", [

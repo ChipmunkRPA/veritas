@@ -1,0 +1,5759 @@
+{
+  "derived_sha256": "c81b0663a37d1f54ad9af07e61f6f66863bb5e170c4d4cdf9c7cb1a9562d17c7",
+  "development_sha256": "8caab8bfd84b37c79a8aa666f50c963876d5b3775ad878b99840406648879092",
+  "freeze_sha256": "fef955f6f9d247929743b9d083bbb5a2b74706fe2a877f745efe1b0bbbf231e4",
+  "held_sha256": "d5d901e36e56c8543739bee28b13bc83c525b6fba934adc3793a48f88e1e681d",
+  "native_audit": {
+    "files": 14,
+    "native_frame_crops": 47,
+    "proposals": 19
+  },
+  "ordinary_derivation_readback": {
+    "committed_changed_pictures": 192,
+    "files": 12,
+    "reconstructed_pictures": 670,
+    "verified_pictures": 670
+  },
+  "points": {
+    "cycle_separation": 1.7725997231900692,
+    "trajectory_loss": 0.6666666666666667
+  },
+  "protocol": {
+    "extent": "Search 8-, 12-, 16- and 20-picture cores inside one verified shot. Both five-picture flanks and the core need at least 60% measured entries per horizon. Use minimum excess over the two flanks, then require both horizons to support a positive excess. Keep the strongest interval, with exact before, middle and first-after source frames/crops.",
+    "gate": "At least four strict LivePortrait locations across three groups and the strict independent MuseTalk location, at least 70% measurement coverage on each main class, at most two ordinary alerts, none on untouched, hard-cut or recompressed deliveries. One strict MuseTalk case is descriptive, not a stable rate across generators.",
+    "ordinary_derivatives": "Six fresh speaker groups outside MuseTalk holdout. Add two 16-picture ordinary crop controls per group using fixed same-time subpixel resampling and a same-time local two-picture temporal blend with unchanged outer pixels. Encode native RGB losslessly, preserve presentation times, and keep all derived files in held only.",
+    "point": "Third-largest ordinary GRID development maximum per arm, with fixed floors 0.08 and 0.10 respectively, and strict exceedance. A useful location uses native half-open interval IoU >= 0.50.",
+    "signal": "Compare local point track survival and position disagreement between direct and adjacent routes over 3 and 4 native pictures. Rigid eye normalization, seed points from tracked mouth and cheek regions, match normalized corner strength and reject globally unreliable comparisons. No pixel-energy evidence, audio, earlier copy, source timing markers or rendered support enters measurement.",
+    "tracks": "Greedy one-to-one matching of strongest mouth corners to cheek corners within a 4x strength ratio. Require three matched starts. Track with 9-pixel Lucas\u2013Kanade, one pyramid level, and a fixed 1.25-pixel direct round-trip tolerance. Cycle arm includes pairs with all routes valid; adjacent chains and direct paths are independently computed."
+  },
+  "schema": "chipmunk.video-mouth-track-cycle/1",
+  "splits": {
+    "development": {
+      "geometry_frames": 4200,
+      "native_frames": 4200,
+      "rows": [
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.17982609337195754,
+              "seconds": [
+                "6/25",
+                "26/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 1,
+          "group": 1,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.18538655061274767,
+              "seconds": [
+                "6/25",
+                "26/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 2,
+          "group": 1,
+          "role": "resample_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.16291076876223087,
+              "seconds": [
+                "6/25",
+                "26/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 3,
+          "group": 1,
+          "role": "resample_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.1408543735742569,
+              "seconds": [
+                "6/25",
+                "26/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 4,
+          "group": 1,
+          "role": "brightness_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.13727810978889465,
+              "seconds": [
+                "1/5",
+                "17/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 5,
+          "group": 1,
+          "role": "brightness_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.13727810978889465,
+              "seconds": [
+                "1/5",
+                "17/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.07142857142857145,
+              "seconds": [
+                "21/25",
+                "29/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 6,
+          "group": 1,
+          "role": "genuine_frame_retime",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.17982609337195754,
+              "seconds": [
+                "6/25",
+                "26/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 7,
+          "group": 1,
+          "role": "audio_delay_320ms",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.06417844723910093,
+              "seconds": [
+                "16/25",
+                "36/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 8,
+          "group": 1,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.06562281772494316,
+              "seconds": [
+                "17/25",
+                "29/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 9,
+          "group": 1,
+          "role": "resample_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.05974650289863348,
+              "seconds": [
+                "16/25",
+                "28/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 10,
+          "group": 1,
+          "role": "resample_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.05460473708808422,
+              "seconds": [
+                "17/25",
+                "37/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 11,
+          "group": 1,
+          "role": "brightness_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.0815672054886818,
+              "seconds": [
+                "17/25",
+                "29/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 12,
+          "group": 1,
+          "role": "brightness_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.08354596048593521,
+              "seconds": [
+                "24/25",
+                "32/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 13,
+          "group": 1,
+          "role": "genuine_frame_retime",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.06417844723910093,
+              "seconds": [
+                "16/25",
+                "36/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 14,
+          "group": 1,
+          "role": "audio_delay_320ms",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.2234734296798706,
+              "seconds": [
+                "11/25",
+                "23/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 15,
+          "group": 2,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.22998543828725815,
+              "seconds": [
+                "2/5",
+                "22/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 16,
+          "group": 2,
+          "role": "resample_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.27239157259464264,
+              "seconds": [
+                "2/5",
+                "22/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 17,
+          "group": 2,
+          "role": "resample_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.2979864999651909,
+              "seconds": [
+                "11/25",
+                "23/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 18,
+          "group": 2,
+          "role": "brightness_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.2979864999651909,
+              "seconds": [
+                "11/25",
+                "23/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 19,
+          "group": 2,
+          "role": "brightness_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 1.6637047231197357,
+              "seconds": [
+                "43/25",
+                "51/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.6666666666666667,
+              "seconds": [
+                "8/5",
+                "48/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 20,
+          "group": 2,
+          "role": "genuine_frame_retime",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.2234734296798706,
+              "seconds": [
+                "11/25",
+                "23/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "grid",
+          "file": 21,
+          "group": 2,
+          "role": "audio_delay_320ms",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 1.6357645988464355,
+              "seconds": [
+                "8/5",
+                "48/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.5833333333333334,
+              "seconds": [
+                "42/25",
+                "2"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 22,
+          "group": 2,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 1.7725997231900692,
+              "seconds": [
+                "8/5",
+                "48/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.5833333333333334,
+              "seconds": [
+                "42/25",
+                "2"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 23,
+          "group": 2,
+          "role": "resample_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 1.4709619283676147,
+              "seconds": [
+                "41/25",
+                "49/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.5,
+              "seconds": [
+                "8/5",
+                "48/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 24,
+          "group": 2,
+          "role": "resample_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 2.1098173819482327,
+              "seconds": [
+                "8/5",
+                "48/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.7083333333333334,
+              "seconds": [
+                "41/25",
+                "49/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 25,
+          "group": 2,
+          "role": "brightness_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 3.3532641381025314,
+              "seconds": [
+                "41/25",
+                "49/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.75,
+              "seconds": [
+                "41/25",
+                "49/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 26,
+          "group": 2,
+          "role": "brightness_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.7117835059762001,
+              "seconds": [
+                "1/5",
+                "13/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.33333333333333337,
+              "seconds": [
+                "1/5",
+                "17/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 27,
+          "group": 2,
+          "role": "genuine_frame_retime",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 1.6357645988464355,
+              "seconds": [
+                "8/5",
+                "48/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.5833333333333334,
+              "seconds": [
+                "42/25",
+                "2"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 28,
+          "group": 2,
+          "role": "audio_delay_320ms",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.2572238836437464,
+              "seconds": [
+                "34/25",
+                "42/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.1428571428571429,
+              "seconds": [
+                "2/5",
+                "26/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 29,
+          "group": 3,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.24596111848950386,
+              "seconds": [
+                "1/5",
+                "1"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.1428571428571429,
+              "seconds": [
+                "2/5",
+                "26/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 30,
+          "group": 3,
+          "role": "resample_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.23709772154688835,
+              "seconds": [
+                "1/5",
+                "1"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.1428571428571429,
+              "seconds": [
+                "2/5",
+                "26/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 31,
+          "group": 3,
+          "role": "resample_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.17633073031902313,
+              "seconds": [
+                "7/25",
+                "27/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.1428571428571429,
+              "seconds": [
+                "2/5",
+                "26/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 32,
+          "group": 3,
+          "role": "brightness_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.19315236806869507,
+              "seconds": [
+                "34/25",
+                "42/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.1428571428571429,
+              "seconds": [
+                "2/5",
+                "26/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 33,
+          "group": 3,
+          "role": "brightness_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.3004706297069788,
+              "seconds": [
+                "42/25",
+                "2"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.13392857142857145,
+              "seconds": [
+                "11/25",
+                "31/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 34,
+          "group": 3,
+          "role": "genuine_frame_retime",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.2572238836437464,
+              "seconds": [
+                "34/25",
+                "42/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.1428571428571429,
+              "seconds": [
+                "2/5",
+                "26/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 35,
+          "group": 3,
+          "role": "audio_delay_320ms",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.34786318242549896,
+              "seconds": [
+                "9/25",
+                "29/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.16666666666666663,
+              "seconds": [
+                "9/25",
+                "29/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 36,
+          "group": 3,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.318959042429924,
+              "seconds": [
+                "9/25",
+                "29/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.17678571428571432,
+              "seconds": [
+                "24/25",
+                "32/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 37,
+          "group": 3,
+          "role": "resample_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.2802952826023102,
+              "seconds": [
+                "9/25",
+                "29/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.16666666666666663,
+              "seconds": [
+                "2/5",
+                "6/5"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 38,
+          "group": 3,
+          "role": "resample_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.3032473027706146,
+              "seconds": [
+                "9/25",
+                "29/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.125,
+              "seconds": [
+                "11/25",
+                "27/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 39,
+          "group": 3,
+          "role": "brightness_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.3237251192331314,
+              "seconds": [
+                "9/25",
+                "29/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.16666666666666663,
+              "seconds": [
+                "11/25",
+                "31/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 40,
+          "group": 3,
+          "role": "brightness_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.2608555071055889,
+              "seconds": [
+                "43/25",
+                "51/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.16666666666666669,
+              "seconds": [
+                "32/25",
+                "8/5"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 41,
+          "group": 3,
+          "role": "genuine_frame_retime",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.34786318242549896,
+              "seconds": [
+                "9/25",
+                "29/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.16666666666666663,
+              "seconds": [
+                "9/25",
+                "29/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 42,
+          "group": 3,
+          "role": "audio_delay_320ms",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.5645798370242119,
+              "seconds": [
+                "43/25",
+                "51/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "16/25",
+                "36/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 43,
+          "group": 4,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.594505250453949,
+              "seconds": [
+                "44/25",
+                "52/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "16/25",
+                "36/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 44,
+          "group": 4,
+          "role": "resample_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.6209214925765991,
+              "seconds": [
+                "28/25",
+                "36/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.33333333333333337,
+              "seconds": [
+                "3/5",
+                "7/5"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 45,
+          "group": 4,
+          "role": "resample_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.9297508001327515,
+              "seconds": [
+                "1",
+                "33/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.30952380952380953,
+              "seconds": [
+                "16/25",
+                "36/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 46,
+          "group": 4,
+          "role": "brightness_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 1.0192442536354065,
+              "seconds": [
+                "23/25",
+                "31/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.4,
+              "seconds": [
+                "44/25",
+                "52/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 47,
+          "group": 4,
+          "role": "brightness_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.4690958857536316,
+              "seconds": [
+                "36/25",
+                "48/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.15000000000000002,
+              "seconds": [
+                "32/25",
+                "52/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 48,
+          "group": 4,
+          "role": "genuine_frame_retime",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.5645798370242119,
+              "seconds": [
+                "43/25",
+                "51/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "16/25",
+                "36/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 49,
+          "group": 4,
+          "role": "audio_delay_320ms",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.4401620477437973,
+              "seconds": [
+                "6/25",
+                "14/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.33333333333333337,
+              "seconds": [
+                "2/5",
+                "22/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 50,
+          "group": 4,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.4401620477437973,
+              "seconds": [
+                "6/25",
+                "14/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.33333333333333337,
+              "seconds": [
+                "2/5",
+                "22/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 51,
+          "group": 4,
+          "role": "resample_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.4401620477437973,
+              "seconds": [
+                "6/25",
+                "14/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.33333333333333337,
+              "seconds": [
+                "2/5",
+                "22/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 52,
+          "group": 4,
+          "role": "resample_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.4401620477437973,
+              "seconds": [
+                "6/25",
+                "14/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.33333333333333337,
+              "seconds": [
+                "2/5",
+                "22/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 53,
+          "group": 4,
+          "role": "brightness_musetalk",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.4401620477437973,
+              "seconds": [
+                "6/25",
+                "14/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.33333333333333337,
+              "seconds": [
+                "2/5",
+                "22/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 54,
+          "group": 4,
+          "role": "brightness_liveportrait",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.4401620477437973,
+              "seconds": [
+                "6/25",
+                "14/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "36/25",
+                "48/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 55,
+          "group": 4,
+          "role": "genuine_frame_retime",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.4401620477437973,
+              "seconds": [
+                "6/25",
+                "14/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.33333333333333337,
+              "seconds": [
+                "2/5",
+                "22/25"
+              ]
+            }
+          },
+          "family": "grid",
+          "file": 56,
+          "group": 4,
+          "role": "audio_delay_320ms",
+          "source_event_retained": false,
+          "truth": null
+        }
+      ],
+      "totals": {
+        "cycle_separation": {
+          "by_role": {
+            "grid:audio_delay_320ms": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            },
+            "grid:brightness_liveportrait": {
+              "alerts": 1,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            },
+            "grid:brightness_musetalk": {
+              "alerts": 1,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            },
+            "grid:genuine_frame_retime": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            },
+            "grid:original": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            },
+            "grid:resample_liveportrait": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            },
+            "grid:resample_musetalk": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            }
+          },
+          "counts": {
+            "essential_alerts": 0,
+            "ordinary": 56,
+            "ordinary_alerts": 2,
+            "ordinary_measured": 56
+          },
+          "gate": {
+            "coverage": false,
+            "liveportrait": false,
+            "musetalk": false,
+            "ordinary": true
+          },
+          "strict_aligned_auc_among_measured": null,
+          "strict_liveportrait_localized_groups": 0
+        },
+        "trajectory_loss": {
+          "by_role": {
+            "grid:audio_delay_320ms": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            },
+            "grid:brightness_liveportrait": {
+              "alerts": 1,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            },
+            "grid:brightness_musetalk": {
+              "alerts": 1,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            },
+            "grid:genuine_frame_retime": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            },
+            "grid:original": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            },
+            "grid:resample_liveportrait": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            },
+            "grid:resample_musetalk": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            }
+          },
+          "counts": {
+            "essential_alerts": 0,
+            "ordinary": 56,
+            "ordinary_alerts": 2,
+            "ordinary_measured": 56
+          },
+          "gate": {
+            "coverage": false,
+            "liveportrait": false,
+            "musetalk": false,
+            "ordinary": true
+          },
+          "strict_aligned_auc_among_measured": null,
+          "strict_liveportrait_localized_groups": 0
+        }
+      }
+    },
+    "held": {
+      "geometry_frames": 9152,
+      "native_frames": 9152,
+      "rows": [
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.054621532559394836,
+              "seconds": [
+                "7/5",
+                "47/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "codec",
+          "file": 1,
+          "group": 5,
+          "role": "reencode",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.49612727761268616,
+              "seconds": [
+                "22/25",
+                "6/5"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.19999999999999996,
+              "seconds": [
+                "4/5",
+                "28/25"
+              ]
+            }
+          },
+          "family": "codec",
+          "file": 2,
+          "group": 5,
+          "role": "hard_cut",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.21911855321377516,
+              "seconds": [
+                "13/25",
+                "21/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "codec",
+          "file": 3,
+          "group": 6,
+          "role": "reencode",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.007326885126531124,
+              "seconds": [
+                "1/5",
+                "21/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "codec",
+          "file": 4,
+          "group": 6,
+          "role": "hard_cut",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.02704298496246338,
+              "seconds": [
+                "29/25",
+                "37/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "codec",
+          "file": 5,
+          "group": 7,
+          "role": "reencode",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.005070863291621208,
+              "seconds": [
+                "8/5",
+                "48/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.33333333333333337,
+              "seconds": [
+                "11/25",
+                "19/25"
+              ]
+            }
+          },
+          "family": "codec",
+          "file": 6,
+          "group": 8,
+          "role": "reencode",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.04503750614821911,
+              "seconds": [
+                "14/25",
+                "34/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "codec",
+          "file": 7,
+          "group": 9,
+          "role": "reencode",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.12640859931707382,
+              "seconds": [
+                "26/25",
+                "46/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.1833333333333333,
+              "seconds": [
+                "6/5",
+                "38/25"
+              ]
+            }
+          },
+          "family": "codec",
+          "file": 8,
+          "group": 10,
+          "role": "reencode",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.4795002043247223,
+              "seconds": [
+                "2/5",
+                "18/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "2/5",
+                "18/25"
+              ]
+            }
+          },
+          "family": "codec",
+          "file": 9,
+          "group": 11,
+          "role": "reencode",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.48258844017982483,
+              "seconds": [
+                "13/25",
+                "21/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "2/5",
+                "26/25"
+              ]
+            }
+          },
+          "family": "codec",
+          "file": 10,
+          "group": 12,
+          "role": "reencode",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.015089796390384436,
+              "seconds": [
+                "32/25",
+                "8/5"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "codec",
+          "file": 11,
+          "group": 13,
+          "role": "hard_cut",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.08879196643829346,
+              "seconds": [
+                "11/25",
+                "19/25"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "codec",
+          "file": 12,
+          "group": 14,
+          "role": "hard_cut",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 3.9275088980793953,
+              "seconds": [
+                "1001/3000",
+                "1001/1000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.8,
+              "seconds": [
+                "1001/3000",
+                "1001/1000"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 13,
+          "group": 15,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 1.6295476481318474,
+              "seconds": [
+                "1001/3000",
+                "1001/1000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.5666666666666667,
+              "seconds": [
+                "1001/3000",
+                "1001/1000"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 14,
+          "group": 15,
+          "role": "resample_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.4142857142857143,
+              "seconds": [
+                "19019/12000",
+                "1001/480"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 15,
+          "group": 15,
+          "role": "delayed_pixels_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 3.3947654962539673,
+              "seconds": [
+                "3003/8000",
+                "1001/960"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.7166666666666667,
+              "seconds": [
+                "3003/8000",
+                "1001/960"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 16,
+          "group": 15,
+          "role": "source_time_neural",
+          "source_event_retained": false,
+          "truth": [
+            "1001/1500",
+            "1001/750"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "trajectory_loss": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "lombard",
+          "file": 17,
+          "group": 15,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "trajectory_loss": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "lombard",
+          "file": 18,
+          "group": 15,
+          "role": "resample_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "trajectory_loss": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "lombard",
+          "file": 19,
+          "group": 15,
+          "role": "delayed_pixels_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "cycle_separation": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "trajectory_loss": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "lombard",
+          "file": 20,
+          "group": 15,
+          "role": "source_time_neural",
+          "source_event_retained": false,
+          "truth": [
+            "7007/12000",
+            "1001/800"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.27189575880765915,
+              "seconds": [
+                "252/145",
+                "324/145"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.375,
+              "seconds": [
+                "54/29",
+                "318/145"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 21,
+          "group": 16,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.27189575880765915,
+              "seconds": [
+                "252/145",
+                "324/145"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.375,
+              "seconds": [
+                "54/29",
+                "318/145"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 22,
+          "group": 16,
+          "role": "resample_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.27189575880765915,
+              "seconds": [
+                "252/145",
+                "324/145"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.375,
+              "seconds": [
+                "54/29",
+                "318/145"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 23,
+          "group": 16,
+          "role": "delayed_pixels_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.27189575880765915,
+              "seconds": [
+                "252/145",
+                "324/145"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.375,
+              "seconds": [
+                "54/29",
+                "318/145"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 24,
+          "group": 16,
+          "role": "source_time_neural",
+          "source_event_retained": false,
+          "truth": [
+            "48/145",
+            "144/145"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.9177419543266296,
+              "seconds": [
+                "168/289",
+                "264/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2916666666666667,
+              "seconds": [
+                "24/17",
+                "504/289"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 25,
+          "group": 17,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.4088481739163399,
+              "seconds": [
+                "396/289",
+                "492/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2916666666666667,
+              "seconds": [
+                "24/17",
+                "504/289"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 26,
+          "group": 17,
+          "role": "resample_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.4797461926937103,
+              "seconds": [
+                "396/289",
+                "492/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2916666666666667,
+              "seconds": [
+                "24/17",
+                "504/289"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 27,
+          "group": 17,
+          "role": "delayed_pixels_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.24749889969825745,
+              "seconds": [
+                "396/289",
+                "492/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2916666666666667,
+              "seconds": [
+                "24/17",
+                "504/289"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 28,
+          "group": 17,
+          "role": "source_time_neural",
+          "source_event_retained": false,
+          "truth": [
+            "192/289",
+            "384/289"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.4201599657535553,
+              "seconds": [
+                "228/287",
+                "324/287"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.3666666666666667,
+              "seconds": [
+                "240/287",
+                "48/41"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 29,
+          "group": 17,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.5395543873310089,
+              "seconds": [
+                "240/287",
+                "48/41"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.5,
+              "seconds": [
+                "240/287",
+                "48/41"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 30,
+          "group": 17,
+          "role": "resample_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.3426915407180786,
+              "seconds": [
+                "72/287",
+                "24/41"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2916666666666667,
+              "seconds": [
+                "312/287",
+                "408/287"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 31,
+          "group": 17,
+          "role": "delayed_pixels_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.8491222560405731,
+              "seconds": [
+                "240/287",
+                "48/41"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.5,
+              "seconds": [
+                "240/287",
+                "48/41"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 32,
+          "group": 17,
+          "role": "source_time_neural",
+          "source_event_retained": false,
+          "truth": [
+            "216/287",
+            "408/287"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.18498819135129452,
+              "seconds": [
+                "72/287",
+                "24/41"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.22499999999999998,
+              "seconds": [
+                "60/287",
+                "156/287"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 33,
+          "group": 18,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.18498819135129452,
+              "seconds": [
+                "72/287",
+                "24/41"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.22499999999999998,
+              "seconds": [
+                "60/287",
+                "156/287"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 34,
+          "group": 18,
+          "role": "resample_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.15920280292630196,
+              "seconds": [
+                "72/41",
+                "600/287"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.22499999999999998,
+              "seconds": [
+                "60/287",
+                "156/287"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 35,
+          "group": 18,
+          "role": "delayed_pixels_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.18498819135129452,
+              "seconds": [
+                "72/287",
+                "24/41"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.22499999999999998,
+              "seconds": [
+                "60/287",
+                "156/287"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 36,
+          "group": 18,
+          "role": "source_time_neural",
+          "source_event_retained": false,
+          "truth": [
+            "204/287",
+            "396/287"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.7147995233535767,
+              "seconds": [
+                "204/287",
+                "300/287"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2916666666666667,
+              "seconds": [
+                "480/287",
+                "624/287"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 37,
+          "group": 18,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.26682332158088684,
+              "seconds": [
+                "144/287",
+                "240/287"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2916666666666667,
+              "seconds": [
+                "480/287",
+                "624/287"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 38,
+          "group": 18,
+          "role": "resample_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.24015019834041595,
+              "seconds": [
+                "96/287",
+                "288/287"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2916666666666667,
+              "seconds": [
+                "480/287",
+                "624/287"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 39,
+          "group": 18,
+          "role": "delayed_pixels_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.2599756419658661,
+              "seconds": [
+                "156/287",
+                "36/41"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2916666666666667,
+              "seconds": [
+                "144/287",
+                "240/287"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 40,
+          "group": 18,
+          "role": "source_time_neural",
+          "source_event_retained": false,
+          "truth": [
+            "180/287",
+            "372/287"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 1.8468522801995277,
+              "seconds": [
+                "240/289",
+                "432/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.5,
+              "seconds": [
+                "192/289",
+                "432/289"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 41,
+          "group": 19,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 1.7195815742015839,
+              "seconds": [
+                "96/289",
+                "192/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.4,
+              "seconds": [
+                "192/289",
+                "432/289"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 42,
+          "group": 19,
+          "role": "resample_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 2.1097116470336914,
+              "seconds": [
+                "180/289",
+                "372/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.4,
+              "seconds": [
+                "192/289",
+                "432/289"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 43,
+          "group": 19,
+          "role": "delayed_pixels_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 2.0472725071012974,
+              "seconds": [
+                "240/289",
+                "432/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.5,
+              "seconds": [
+                "192/289",
+                "432/289"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 44,
+          "group": 19,
+          "role": "source_time_neural",
+          "source_event_retained": false,
+          "truth": [
+            "228/289",
+            "420/289"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 2.3461562991142273,
+              "seconds": [
+                "252/289",
+                "396/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.55,
+              "seconds": [
+                "528/289",
+                "624/289"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 45,
+          "group": 19,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 2.4690522253513336,
+              "seconds": [
+                "240/289",
+                "384/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.55,
+              "seconds": [
+                "528/289",
+                "624/289"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 46,
+          "group": 19,
+          "role": "resample_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 1.2537413835525513,
+              "seconds": [
+                "528/289",
+                "624/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.55,
+              "seconds": [
+                "528/289",
+                "624/289"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 47,
+          "group": 19,
+          "role": "delayed_pixels_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 2.0524425506591797,
+              "seconds": [
+                "240/289",
+                "384/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.55,
+              "seconds": [
+                "528/289",
+                "624/289"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 48,
+          "group": 19,
+          "role": "source_time_neural",
+          "source_event_retained": false,
+          "truth": [
+            "216/289",
+            "24/17"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.1324850283563137,
+              "seconds": [
+                "1001/2400",
+                "11011/12000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.22499999999999998,
+              "seconds": [
+                "1001/2400",
+                "11011/12000"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 49,
+          "group": 20,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.1679282896220684,
+              "seconds": [
+                "1001/2400",
+                "11011/12000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.09999999999999998,
+              "seconds": [
+                "1001/2400",
+                "11011/12000"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 50,
+          "group": 20,
+          "role": "resample_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.10803139768540859,
+              "seconds": [
+                "11011/24000",
+                "31031/24000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.07142857142857145,
+              "seconds": [
+                "11011/24000",
+                "19019/24000"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 51,
+          "group": 20,
+          "role": "delayed_pixels_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.19777443073689938,
+              "seconds": [
+                "1001/2400",
+                "11011/12000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.15476190476190477,
+              "seconds": [
+                "1001/2400",
+                "11011/12000"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 52,
+          "group": 20,
+          "role": "source_time_neural",
+          "source_event_retained": false,
+          "truth": [
+            "17017/24000",
+            "11011/8000"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.05082780681550503,
+              "seconds": [
+                "3003/4000",
+                "13013/12000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "lombard",
+          "file": 53,
+          "group": 20,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.06154430843889713,
+              "seconds": [
+                "7007/24000",
+                "1001/1600"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "lombard",
+          "file": 54,
+          "group": 20,
+          "role": "resample_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.04644206538796425,
+              "seconds": [
+                "11011/12000",
+                "1001/800"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.07142857142857145,
+              "seconds": [
+                "1001/1200",
+                "7007/6000"
+              ]
+            }
+          },
+          "family": "lombard",
+          "file": 55,
+          "group": 20,
+          "role": "delayed_pixels_ordinary",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.09253659658133984,
+              "seconds": [
+                "19019/24000",
+                "9009/8000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "lombard",
+          "file": 56,
+          "group": 20,
+          "role": "source_time_neural",
+          "source_event_retained": false,
+          "truth": [
+            "11011/24000",
+            "9009/8000"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.1928713470697403,
+              "seconds": [
+                "1/2",
+                "5/6"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "fresh",
+          "file": 57,
+          "group": 21,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.0019380762241780758,
+              "seconds": [
+                "5/4",
+                "7/4"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.09999999999999998,
+              "seconds": [
+                "17/8",
+                "59/24"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 58,
+          "group": 21,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.20987875014543533,
+              "seconds": [
+                "3/2",
+                "11/6"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "19/12",
+                "9/4"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 59,
+          "group": 21,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.12015711516141891,
+              "seconds": [
+                "3/2",
+                "11/6"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "fresh",
+          "file": 60,
+          "group": 21,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.5515334755182266,
+              "seconds": [
+                "3/8",
+                "17/24"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.325,
+              "seconds": [
+                "5/12",
+                "3/4"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 61,
+          "group": 22,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.3497202806174755,
+              "seconds": [
+                "37/24",
+                "15/8"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "7/24",
+                "19/24"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 62,
+          "group": 22,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.21083352342247963,
+              "seconds": [
+                "1/3",
+                "2/3"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "fresh",
+          "file": 63,
+          "group": 22,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.3645210415124893,
+              "seconds": [
+                "23/12",
+                "9/4"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.13174603174603172,
+              "seconds": [
+                "7/6",
+                "3/2"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 64,
+          "group": 22,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.03435003897175193,
+              "seconds": [
+                "1001/2400",
+                "3003/4000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "fresh",
+          "file": 65,
+          "group": 23,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.06437065824866295,
+              "seconds": [
+                "7007/6000",
+                "3003/2000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.07142857142857145,
+              "seconds": [
+                "1001/3000",
+                "1001/1500"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 66,
+          "group": 23,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.6600956171751022,
+              "seconds": [
+                "1001/960",
+                "11011/8000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.3541666666666667,
+              "seconds": [
+                "1001/1000",
+                "1001/750"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 67,
+          "group": 23,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.5643494427204132,
+              "seconds": [
+                "3003/8000",
+                "17017/24000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2857142857142857,
+              "seconds": [
+                "1001/2400",
+                "3003/4000"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 68,
+          "group": 23,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.0795411691069603,
+              "seconds": [
+                "1/3",
+                "2/3"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "fresh",
+          "file": 69,
+          "group": 24,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "trajectory_loss": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "fresh",
+          "file": 70,
+          "group": 24,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.4283682033419609,
+              "seconds": [
+                "1/2",
+                "5/6"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.16666666666666674,
+              "seconds": [
+                "11/24",
+                "19/24"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 71,
+          "group": 24,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.4454722460359335,
+              "seconds": [
+                "3/4",
+                "13/12"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.22499999999999998,
+              "seconds": [
+                "3/8",
+                "7/8"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 72,
+          "group": 24,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.10009043663740158,
+              "seconds": [
+                "168/289",
+                "360/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "fresh",
+          "file": 73,
+          "group": 25,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.3223625496029854,
+              "seconds": [
+                "192/289",
+                "384/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.19999999999999996,
+              "seconds": [
+                "120/289",
+                "216/289"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 74,
+          "group": 25,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.29506363719701767,
+              "seconds": [
+                "17/24",
+                "25/24"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.08333333333333331,
+              "seconds": [
+                "7/6",
+                "3/2"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 75,
+          "group": 25,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.26193516701459885,
+              "seconds": [
+                "13/12",
+                "17/12"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "25/24",
+                "11/8"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 76,
+          "group": 25,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.5360217988491058,
+              "seconds": [
+                "1/2",
+                "5/6"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2916666666666667,
+              "seconds": [
+                "11/24",
+                "19/24"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 77,
+          "group": 26,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.24298392608761787,
+              "seconds": [
+                "1001/2400",
+                "3003/4000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "fresh",
+          "file": 78,
+          "group": 26,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.5470580011606216,
+              "seconds": [
+                "3003/8000",
+                "17017/24000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "fresh",
+          "file": 79,
+          "group": 26,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.9365556240081787,
+              "seconds": [
+                "11/24",
+                "19/24"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.19999999999999996,
+              "seconds": [
+                "5/12",
+                "11/12"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 80,
+          "group": 26,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.36341845989227295,
+              "seconds": [
+                "1001/1200",
+                "7007/6000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2857142857142857,
+              "seconds": [
+                "1001/2400",
+                "13013/12000"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 81,
+          "group": 27,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.37897153198719025,
+              "seconds": [
+                "1001/1200",
+                "7007/6000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.12698412698412698,
+              "seconds": [
+                "31031/24000",
+                "13013/8000"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 82,
+          "group": 27,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.41617244482040405,
+              "seconds": [
+                "3003/4000",
+                "13013/12000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.26785714285714285,
+              "seconds": [
+                "13013/24000",
+                "1001/960"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 83,
+          "group": 27,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.23873277008533478,
+              "seconds": [
+                "1001/960",
+                "11011/8000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.17142857142857143,
+              "seconds": [
+                "1001/960",
+                "11011/8000"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 84,
+          "group": 27,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.13896694406867027,
+              "seconds": [
+                "60/289",
+                "156/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "108/289",
+                "12/17"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 85,
+          "group": 28,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.06584978103637695,
+              "seconds": [
+                "384/289",
+                "480/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.005555555555555591,
+              "seconds": [
+                "372/289",
+                "468/289"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 86,
+          "group": 28,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.17952239513397217,
+              "seconds": [
+                "84/289",
+                "324/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.125,
+              "seconds": [
+                "588/289",
+                "732/289"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 87,
+          "group": 28,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.1508706733584404,
+              "seconds": [
+                "228/289",
+                "324/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2222222222222222,
+              "seconds": [
+                "120/289",
+                "312/289"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 88,
+          "group": 28,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.2844616174697876,
+              "seconds": [
+                "84/289",
+                "180/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.10833333333333334,
+              "seconds": [
+                "132/289",
+                "228/289"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 89,
+          "group": 29,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 1.785284899175167,
+              "seconds": [
+                "132/289",
+                "228/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.29166666666666663,
+              "seconds": [
+                "108/289",
+                "300/289"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 90,
+          "group": 29,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 2.0463616847991943,
+              "seconds": [
+                "108/289",
+                "12/17"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "84/289",
+                "324/289"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 91,
+          "group": 29,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.7895304691046476,
+              "seconds": [
+                "4/3",
+                "5/3"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.33333333333333337,
+              "seconds": [
+                "31/24",
+                "13/8"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 92,
+          "group": 29,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "fresh",
+          "file": 93,
+          "group": 30,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.39809635281562805,
+              "seconds": [
+                "204/287",
+                "300/287"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "fresh",
+          "file": 94,
+          "group": 30,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "trajectory_loss": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "fresh",
+          "file": 95,
+          "group": 30,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 2.9443965777754784,
+              "seconds": [
+                "3003/8000",
+                "7007/8000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.4666666666666668,
+              "seconds": [
+                "3003/8000",
+                "7007/8000"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 96,
+          "group": 30,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.09326602797955275,
+              "seconds": [
+                "17/24",
+                "25/24"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "1/4",
+                "11/12"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 97,
+          "group": 31,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.142757099121809,
+              "seconds": [
+                "5/12",
+                "3/4"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2916666666666667,
+              "seconds": [
+                "5/12",
+                "3/4"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 98,
+          "group": 31,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.6235089879482985,
+              "seconds": [
+                "48/143",
+                "96/143"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2333333333333334,
+              "seconds": [
+                "210/143",
+                "258/143"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 99,
+          "group": 31,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.20590363070368767,
+              "seconds": [
+                "18/11",
+                "282/143"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.1916666666666667,
+              "seconds": [
+                "48/143",
+                "96/143"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 100,
+          "group": 31,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.38735026121139526,
+              "seconds": [
+                "1001/1200",
+                "7007/6000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.20000000000000007,
+              "seconds": [
+                "19019/24000",
+                "9009/8000"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 101,
+          "group": 32,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.6493083462119102,
+              "seconds": [
+                "7007/24000",
+                "1001/1600"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.28571428571428575,
+              "seconds": [
+                "1001/4800",
+                "13013/24000"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 102,
+          "group": 32,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.09719088859856129,
+              "seconds": [
+                "1001/1000",
+                "1001/750"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.18333333333333335,
+              "seconds": [
+                "3003/8000",
+                "17017/24000"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 103,
+          "group": 32,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.8014938235282898,
+              "seconds": [
+                "17017/24000",
+                "1001/960"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "1001/1500",
+                "1001/1000"
+              ]
+            }
+          },
+          "family": "fresh",
+          "file": 104,
+          "group": 32,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.12015711516141891,
+              "seconds": [
+                "3/2",
+                "11/6"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "musetalk",
+          "file": 105,
+          "group": 33,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.12015711516141891,
+              "seconds": [
+                "3/2",
+                "11/6"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "musetalk",
+          "file": 106,
+          "group": 33,
+          "role": "same_time_resample",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.5124507546424866,
+              "seconds": [
+                "1/4",
+                "7/12"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.125,
+              "seconds": [
+                "1/4",
+                "7/12"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 107,
+          "group": 33,
+          "role": "same_time_neural",
+          "source_event_retained": false,
+          "truth": [
+            "11/24",
+            "9/8"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.12015711516141891,
+              "seconds": [
+                "3/2",
+                "11/6"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "musetalk",
+          "file": 108,
+          "group": 33,
+          "role": "earlier_sound_neural",
+          "source_event_retained": false,
+          "truth": [
+            "11/24",
+            "9/8"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.1421332098543644,
+              "seconds": [
+                "2/3",
+                "1"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "musetalk",
+          "file": 109,
+          "group": 33,
+          "role": "delayed_pixels",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.6600956171751022,
+              "seconds": [
+                "1001/960",
+                "11011/8000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.3541666666666667,
+              "seconds": [
+                "1001/1000",
+                "1001/750"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 110,
+          "group": 34,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.5757963452488184,
+              "seconds": [
+                "1001/960",
+                "11011/8000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.33333333333333337,
+              "seconds": [
+                "1001/960",
+                "11011/8000"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 111,
+          "group": 34,
+          "role": "same_time_resample",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.7467513307929039,
+              "seconds": [
+                "1001/2400",
+                "3003/4000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.21428571428571436,
+              "seconds": [
+                "1001/1200",
+                "1001/750"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 112,
+          "group": 34,
+          "role": "same_time_neural",
+          "source_event_retained": false,
+          "truth": [
+            "1001/2000",
+            "7007/6000"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.607938077300787,
+              "seconds": [
+                "9009/8000",
+                "7007/4800"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.3666666666666667,
+              "seconds": [
+                "13013/12000",
+                "17017/12000"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 113,
+          "group": 34,
+          "role": "earlier_sound_neural",
+          "source_event_retained": false,
+          "truth": [
+            "1001/2000",
+            "7007/6000"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 1.172718346118927,
+              "seconds": [
+                "7007/12000",
+                "11011/12000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.23809523809523803,
+              "seconds": [
+                "1001/1500",
+                "1001/750"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 114,
+          "group": 34,
+          "role": "delayed_pixels",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.36341845989227295,
+              "seconds": [
+                "1001/1200",
+                "7007/6000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2857142857142857,
+              "seconds": [
+                "1001/2400",
+                "13013/12000"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 115,
+          "group": 35,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.3624590337276459,
+              "seconds": [
+                "1001/1200",
+                "7007/6000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "1001/2400",
+                "13013/12000"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 116,
+          "group": 35,
+          "role": "same_time_resample",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 1.2054867148399353,
+              "seconds": [
+                "1001/2000",
+                "1001/1200"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.2857142857142857,
+              "seconds": [
+                "3003/8000",
+                "1001/960"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 117,
+          "group": 35,
+          "role": "same_time_neural",
+          "source_event_retained": true,
+          "truth": [
+            "19019/24000",
+            "7007/4800"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.4636123925447464,
+              "seconds": [
+                "11011/24000",
+                "19019/24000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.24285714285714283,
+              "seconds": [
+                "1001/2400",
+                "13013/12000"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 118,
+          "group": 35,
+          "role": "earlier_sound_neural",
+          "source_event_retained": false,
+          "truth": [
+            "19019/24000",
+            "7007/4800"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 1.0282185077667236,
+              "seconds": [
+                "11011/24000",
+                "9009/8000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.29761904761904767,
+              "seconds": [
+                "3003/8000",
+                "1001/960"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 119,
+          "group": 35,
+          "role": "delayed_pixels",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.13896694406867027,
+              "seconds": [
+                "60/289",
+                "156/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "108/289",
+                "12/17"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 120,
+          "group": 36,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.13896694406867027,
+              "seconds": [
+                "60/289",
+                "156/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "108/289",
+                "12/17"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 121,
+          "group": 36,
+          "role": "same_time_resample",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.18761675246059895,
+              "seconds": [
+                "276/289",
+                "372/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "108/289",
+                "12/17"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 122,
+          "group": 36,
+          "role": "same_time_neural",
+          "source_event_retained": true,
+          "truth": [
+            "300/289",
+            "492/289"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.13896694406867027,
+              "seconds": [
+                "60/289",
+                "156/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "108/289",
+                "12/17"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 123,
+          "group": 36,
+          "role": "earlier_sound_neural",
+          "source_event_retained": false,
+          "truth": [
+            "300/289",
+            "492/289"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.17631885036826134,
+              "seconds": [
+                "360/289",
+                "456/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "108/289",
+                "12/17"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 124,
+          "group": 36,
+          "role": "delayed_pixels",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "musetalk",
+          "file": 125,
+          "group": 37,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "musetalk",
+          "file": 126,
+          "group": 37,
+          "role": "same_time_resample",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "musetalk",
+          "file": 127,
+          "group": 37,
+          "role": "same_time_neural",
+          "source_event_retained": true,
+          "truth": [
+            "7007/12000",
+            "1001/800"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "musetalk",
+          "file": 128,
+          "group": 37,
+          "role": "earlier_sound_neural",
+          "source_event_retained": false,
+          "truth": [
+            "7007/12000",
+            "1001/800"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "musetalk",
+          "file": 129,
+          "group": 37,
+          "role": "delayed_pixels",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.38735026121139526,
+              "seconds": [
+                "1001/1200",
+                "7007/6000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.20000000000000007,
+              "seconds": [
+                "19019/24000",
+                "9009/8000"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 130,
+          "group": 38,
+          "role": "original",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.3106066584587097,
+              "seconds": [
+                "19019/24000",
+                "31031/24000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "7007/12000",
+                "13013/12000"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 131,
+          "group": 38,
+          "role": "same_time_resample",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.34585828334093094,
+              "seconds": [
+                "7007/24000",
+                "23023/24000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.325,
+              "seconds": [
+                "7007/12000",
+                "11011/12000"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 132,
+          "group": 38,
+          "role": "same_time_neural",
+          "source_event_retained": false,
+          "truth": [
+            "19019/24000",
+            "7007/4800"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.32775605469942093,
+              "seconds": [
+                "1001/1000",
+                "1001/750"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.4666666666666668,
+              "seconds": [
+                "11011/12000",
+                "1001/800"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 133,
+          "group": 38,
+          "role": "earlier_sound_neural",
+          "source_event_retained": false,
+          "truth": [
+            "19019/24000",
+            "7007/4800"
+          ]
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.37100233137607574,
+              "seconds": [
+                "7007/24000",
+                "19019/24000"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.17142857142857143,
+              "seconds": [
+                "23023/24000",
+                "7007/4800"
+              ]
+            }
+          },
+          "family": "musetalk",
+          "file": 134,
+          "group": 38,
+          "role": "delayed_pixels",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.5515334755182266,
+              "seconds": [
+                "3/8",
+                "17/24"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.325,
+              "seconds": [
+                "5/12",
+                "3/4"
+              ]
+            }
+          },
+          "family": "derived_ordinary",
+          "file": 135,
+          "group": 22,
+          "role": "ordinary_subpixel_resample",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.5515334755182266,
+              "seconds": [
+                "3/8",
+                "17/24"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.325,
+              "seconds": [
+                "5/12",
+                "3/4"
+              ]
+            }
+          },
+          "family": "derived_ordinary",
+          "file": 136,
+          "group": 22,
+          "role": "ordinary_temporal_blend",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.11162936314940453,
+              "seconds": [
+                "5/12",
+                "11/12"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "derived_ordinary",
+          "file": 137,
+          "group": 24,
+          "role": "ordinary_subpixel_resample",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.12016228772699833,
+              "seconds": [
+                "3/8",
+                "17/24"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "derived_ordinary",
+          "file": 138,
+          "group": 24,
+          "role": "ordinary_temporal_blend",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.13180088996887207,
+              "seconds": [
+                "168/289",
+                "360/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "family": "derived_ordinary",
+          "file": 139,
+          "group": 25,
+          "role": "ordinary_subpixel_resample",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.1004960648715496,
+              "seconds": [
+                "252/289",
+                "348/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "264/289",
+                "360/289"
+              ]
+            }
+          },
+          "family": "derived_ordinary",
+          "file": 140,
+          "group": 25,
+          "role": "ordinary_temporal_blend",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.18776171281933784,
+              "seconds": [
+                "35/24",
+                "43/24"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "11/24",
+                "31/24"
+              ]
+            }
+          },
+          "family": "derived_ordinary",
+          "file": 141,
+          "group": 26,
+          "role": "ordinary_subpixel_resample",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.21896502375602722,
+              "seconds": [
+                "1/2",
+                "5/6"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.22499999999999998,
+              "seconds": [
+                "11/24",
+                "19/24"
+              ]
+            }
+          },
+          "family": "derived_ordinary",
+          "file": 142,
+          "group": 26,
+          "role": "ordinary_temporal_blend",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.2844616174697876,
+              "seconds": [
+                "84/289",
+                "180/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.15000000000000002,
+              "seconds": [
+                "132/289",
+                "228/289"
+              ]
+            }
+          },
+          "family": "derived_ordinary",
+          "file": 143,
+          "group": 29,
+          "role": "ordinary_subpixel_resample",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.2844616174697876,
+              "seconds": [
+                "84/289",
+                "180/289"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.10833333333333334,
+              "seconds": [
+                "132/289",
+                "228/289"
+              ]
+            }
+          },
+          "family": "derived_ordinary",
+          "file": 144,
+          "group": 29,
+          "role": "ordinary_temporal_blend",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.0867775697261095,
+              "seconds": [
+                "7/24",
+                "23/24"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "1/4",
+                "11/12"
+              ]
+            }
+          },
+          "family": "derived_ordinary",
+          "file": 145,
+          "group": 31,
+          "role": "ordinary_subpixel_resample",
+          "source_event_retained": false,
+          "truth": null
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "cycle_separation": {
+              "measured": true,
+              "score": 0.19857764523476362,
+              "seconds": [
+                "17/24",
+                "25/24"
+              ]
+            },
+            "trajectory_loss": {
+              "measured": true,
+              "score": 0.25,
+              "seconds": [
+                "1/4",
+                "11/12"
+              ]
+            }
+          },
+          "family": "derived_ordinary",
+          "file": 146,
+          "group": 31,
+          "role": "ordinary_temporal_blend",
+          "source_event_retained": false,
+          "truth": null
+        }
+      ],
+      "totals": {
+        "cycle_separation": {
+          "by_role": {
+            "codec:hard_cut": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 4,
+              "measured": 4,
+              "useful_before_point": 0
+            },
+            "codec:reencode": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            },
+            "derived_ordinary:ordinary_subpixel_resample": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 6,
+              "measured": 6,
+              "useful_before_point": 0
+            },
+            "derived_ordinary:ordinary_temporal_blend": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 6,
+              "measured": 6,
+              "useful_before_point": 0
+            },
+            "fresh:original": {
+              "alerts": 3,
+              "correct_ranges": 0,
+              "files": 48,
+              "measured": 46,
+              "useful_before_point": 0
+            },
+            "lombard:delayed_pixels_ordinary": {
+              "alerts": 1,
+              "correct_ranges": 0,
+              "files": 11,
+              "measured": 10,
+              "useful_before_point": 0
+            },
+            "lombard:original": {
+              "alerts": 3,
+              "correct_ranges": 0,
+              "files": 11,
+              "measured": 10,
+              "useful_before_point": 0
+            },
+            "lombard:resample_ordinary": {
+              "alerts": 1,
+              "correct_ranges": 0,
+              "files": 11,
+              "measured": 10,
+              "useful_before_point": 0
+            },
+            "lombard:source_time_neural": {
+              "alerts": 3,
+              "correct_ranges": 2,
+              "files": 11,
+              "measured": 10,
+              "useful_before_point": 4
+            },
+            "musetalk:delayed_pixels": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 6,
+              "measured": 6,
+              "useful_before_point": 0
+            },
+            "musetalk:earlier_sound_neural": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 6,
+              "measured": 6,
+              "useful_before_point": 1
+            },
+            "musetalk:original": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 6,
+              "measured": 6,
+              "useful_before_point": 0
+            },
+            "musetalk:same_time_neural": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 6,
+              "measured": 6,
+              "useful_before_point": 0
+            },
+            "musetalk:same_time_resample": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 6,
+              "measured": 6,
+              "useful_before_point": 0
+            }
+          },
+          "counts": {
+            "essential_alerts": 6,
+            "musetalk_retained": 3,
+            "musetalk_retained_localized": 0,
+            "musetalk_retained_measured": 3,
+            "neural": 23,
+            "neural_alerts": 3,
+            "neural_localized": 2,
+            "neural_measured": 22,
+            "neural_wrong_alerts": 1,
+            "ordinary": 123,
+            "ordinary_alerts": 8,
+            "ordinary_measured": 118,
+            "strict_lombard": 10,
+            "strict_lombard_localized": 1,
+            "strict_lombard_measured": 9,
+            "strict_lombard_raw_localized": 3,
+            "strict_musetalk": 1,
+            "strict_musetalk_localized": 0,
+            "strict_musetalk_measured": 1,
+            "strict_musetalk_raw_localized": 0
+          },
+          "gate": {
+            "coverage": true,
+            "liveportrait": false,
+            "musetalk": false,
+            "ordinary": false
+          },
+          "strict_aligned_auc_among_measured": "267/472",
+          "strict_liveportrait_localized_groups": 1
+        },
+        "trajectory_loss": {
+          "by_role": {
+            "codec:hard_cut": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 4,
+              "measured": 4,
+              "useful_before_point": 0
+            },
+            "codec:reencode": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 8,
+              "measured": 8,
+              "useful_before_point": 0
+            },
+            "derived_ordinary:ordinary_subpixel_resample": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 6,
+              "measured": 6,
+              "useful_before_point": 0
+            },
+            "derived_ordinary:ordinary_temporal_blend": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 6,
+              "measured": 6,
+              "useful_before_point": 0
+            },
+            "fresh:original": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 48,
+              "measured": 46,
+              "useful_before_point": 0
+            },
+            "lombard:delayed_pixels_ordinary": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 11,
+              "measured": 10,
+              "useful_before_point": 0
+            },
+            "lombard:original": {
+              "alerts": 1,
+              "correct_ranges": 0,
+              "files": 11,
+              "measured": 10,
+              "useful_before_point": 0
+            },
+            "lombard:resample_ordinary": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 11,
+              "measured": 10,
+              "useful_before_point": 0
+            },
+            "lombard:source_time_neural": {
+              "alerts": 1,
+              "correct_ranges": 0,
+              "files": 11,
+              "measured": 10,
+              "useful_before_point": 2
+            },
+            "musetalk:delayed_pixels": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 6,
+              "measured": 6,
+              "useful_before_point": 0
+            },
+            "musetalk:earlier_sound_neural": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 6,
+              "measured": 6,
+              "useful_before_point": 1
+            },
+            "musetalk:original": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 6,
+              "measured": 6,
+              "useful_before_point": 0
+            },
+            "musetalk:same_time_neural": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 6,
+              "measured": 6,
+              "useful_before_point": 0
+            },
+            "musetalk:same_time_resample": {
+              "alerts": 0,
+              "correct_ranges": 0,
+              "files": 6,
+              "measured": 6,
+              "useful_before_point": 0
+            }
+          },
+          "counts": {
+            "essential_alerts": 1,
+            "musetalk_retained": 3,
+            "musetalk_retained_localized": 0,
+            "musetalk_retained_measured": 3,
+            "neural": 23,
+            "neural_alerts": 1,
+            "neural_localized": 0,
+            "neural_measured": 22,
+            "neural_wrong_alerts": 1,
+            "ordinary": 123,
+            "ordinary_alerts": 1,
+            "ordinary_measured": 118,
+            "strict_lombard": 10,
+            "strict_lombard_localized": 0,
+            "strict_lombard_measured": 9,
+            "strict_lombard_raw_localized": 2,
+            "strict_musetalk": 1,
+            "strict_musetalk_localized": 0,
+            "strict_musetalk_measured": 1,
+            "strict_musetalk_raw_localized": 0
+          },
+          "gate": {
+            "coverage": true,
+            "liveportrait": false,
+            "musetalk": false,
+            "ordinary": false
+          },
+          "strict_aligned_auc_among_measured": "1613/2360",
+          "strict_liveportrait_localized_groups": 0
+        }
+      }
+    }
+  }
+}

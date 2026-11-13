@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from app.evidence import audio_gain_repetition_binding as gain
 from app.evidence.audio_exact_repetition import SAMPLE_RATE
 from app.evidence.audio_repetition_binding import METHOD, _valid_hash
 from app.evidence.audio_repetition_binding import validate as validate_mono
@@ -15,6 +16,8 @@ CHANNELS = ("left", "right")
 def pairs(record):
     for row in record["channels"]:
         yield from row["measurement"]["pairs"]
+        if context := row.get("gain_measurement"):
+            yield from context["pairs"]
 
 
 def validate(record, source):
@@ -44,5 +47,9 @@ def validate(record, source):
             ]:
                 raise ValueError("Stereo repetition pair identifiers differ")
             validate_mono({**measurement, "pairs": normalized}, {**source, "pcm_sha256": measurement["pcm_sha256"]})
+            if "gain_measurement" in row:
+                gain.validate(row["gain_measurement"], source, channel, measurement["pcm_sha256"])
+        if len({"gain_measurement" in row for row in record["channels"]}) != 1:
+            raise ValueError("Gain repetition coverage differs between recorded channels")
     except (AttributeError, IndexError, KeyError, TypeError) as error:
         raise ValueError("Invalid stereo repetition evidence") from error

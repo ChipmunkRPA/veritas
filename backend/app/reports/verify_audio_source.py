@@ -115,17 +115,21 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError(str(error)) from error
         intervals += 3 * len(listening["windows"])
     if repeated is not None:
+        from app.evidence.audio_gain_repetition_binding import GAIN_VERSION
         from app.evidence.stereo_repetition import native_pcm, verify
         from app.evidence.stereo_repetition_binding import pairs
 
         if (data := native_pcm(decoded)) is None:
             raise ValueError("The original does not yield aligned native stereo samples for the repeat check")
         paths = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"]}
-        verify(repeated, data, source, decoded.mapping, lambda digest: archive.read(paths[digest]))
+        gain_version = GAIN_VERSION if 'gain_measurement' in repeated['channels'][0] else None
+        verify(repeated, data, source, decoded.mapping, lambda digest: archive.read(paths[digest]), gain_version=gain_version)
         for pair in pairs(repeated):
-            covered.add(pair["artifacts"]["first_clip"]["sha256"])
+            covered.update(pair["artifacts"][f"{side}_clip"]["sha256"] for side in ("first", "second"))
             intervals += 2
         replay_detail += " Recomputed the exact repeat search on both recorded stereo channels."
+        if gain_version is not None:
+            replay_detail += " Recomputed gain-adjusted repeats on both recorded stereo channels."
     if (review := audio.get("background_reduced_voice_review")) is not None:
         from app.detectors.audio.decode import read_wav
         from app.evidence.audio_background_review_binding import SPAN

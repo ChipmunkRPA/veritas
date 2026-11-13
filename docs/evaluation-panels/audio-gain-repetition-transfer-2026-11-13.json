@@ -1,0 +1,618 @@
+{
+  "confirmation_gain_positives": {
+    "deliveries": 96,
+    "exact_channel_flagged_files": 0,
+    "exact_channel_useful": 0,
+    "exact_mono_flagged_files": 0,
+    "exact_mono_useful": 0,
+    "gain_channel_measured": 192,
+    "gain_flagged_files": 96,
+    "gain_useful": 96,
+    "maximum_useful_boundary_error_samples": 1,
+    "other_gain_spans": 0,
+    "production_decode_checks": 16
+  },
+  "confirmation_no_relation_controls": {
+    "deliveries": 144,
+    "exact_channel_flagged_files": 0,
+    "exact_channel_useful": 0,
+    "exact_mono_flagged_files": 0,
+    "exact_mono_useful": 0,
+    "gain_channel_measured": 288,
+    "gain_flagged_files": 0,
+    "gain_useful": 0,
+    "maximum_useful_boundary_error_samples": 0,
+    "other_gain_spans": 0,
+    "production_decode_checks": 24
+  },
+  "counts": {
+    "confirmation": {
+      "by_source_group": {
+        "ES2004a": {
+          "deliveries": 132,
+          "exact_channel_flagged_files": 12,
+          "exact_channel_useful": 12,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 264,
+          "gain_flagged_files": 48,
+          "gain_useful": 48,
+          "maximum_useful_boundary_error_samples": 1,
+          "other_gain_spans": 0,
+          "production_decode_checks": 22
+        },
+        "IS1009a": {
+          "deliveries": 132,
+          "exact_channel_flagged_files": 12,
+          "exact_channel_useful": 12,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 264,
+          "gain_flagged_files": 48,
+          "gain_useful": 48,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 22
+        }
+      },
+      "by_variant": {
+        "amplified": {
+          "deliveries": 24,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 48,
+          "gain_flagged_files": 24,
+          "gain_useful": 24,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 4
+        },
+        "attenuated": {
+          "deliveries": 24,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 48,
+          "gain_flagged_files": 24,
+          "gain_useful": 24,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 4
+        },
+        "clipped_repeat": {
+          "deliveries": 24,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 48,
+          "gain_flagged_files": 0,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 4
+        },
+        "competing_microphone": {
+          "deliveries": 24,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 48,
+          "gain_flagged_files": 0,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 4
+        },
+        "earlier_attenuated": {
+          "deliveries": 24,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 48,
+          "gain_flagged_files": 24,
+          "gain_useful": 24,
+          "maximum_useful_boundary_error_samples": 1,
+          "other_gain_spans": 0,
+          "production_decode_checks": 4
+        },
+        "exact_copy": {
+          "deliveries": 24,
+          "exact_channel_flagged_files": 24,
+          "exact_channel_useful": 24,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 48,
+          "gain_flagged_files": 0,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 4
+        },
+        "global_gain": {
+          "deliveries": 24,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 48,
+          "gain_flagged_files": 0,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 4
+        },
+        "inverted": {
+          "deliveries": 24,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 48,
+          "gain_flagged_files": 24,
+          "gain_useful": 24,
+          "maximum_useful_boundary_error_samples": 1,
+          "other_gain_spans": 0,
+          "production_decode_checks": 4
+        },
+        "short_repeat": {
+          "deliveries": 24,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 48,
+          "gain_flagged_files": 0,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 4
+        },
+        "unchanged": {
+          "deliveries": 24,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 48,
+          "gain_flagged_files": 0,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 4
+        },
+        "unsupported_gain": {
+          "deliveries": 24,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 48,
+          "gain_flagged_files": 0,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 4
+        }
+      }
+    },
+    "development": {
+      "by_source_group": {
+        "background": {
+          "deliveries": 44,
+          "exact_channel_flagged_files": 4,
+          "exact_channel_useful": 4,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 88,
+          "gain_flagged_files": 16,
+          "gain_useful": 16,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 11
+        },
+        "competing_speech": {
+          "deliveries": 132,
+          "exact_channel_flagged_files": 12,
+          "exact_channel_useful": 12,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 264,
+          "gain_flagged_files": 48,
+          "gain_useful": 48,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 11
+        }
+      },
+      "by_variant": {
+        "amplified": {
+          "deliveries": 16,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 32,
+          "gain_flagged_files": 16,
+          "gain_useful": 16,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 2
+        },
+        "attenuated": {
+          "deliveries": 16,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 32,
+          "gain_flagged_files": 16,
+          "gain_useful": 16,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 2
+        },
+        "clipped_repeat": {
+          "deliveries": 16,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 32,
+          "gain_flagged_files": 0,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 2
+        },
+        "competing_microphone": {
+          "deliveries": 16,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 32,
+          "gain_flagged_files": 0,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 2
+        },
+        "earlier_attenuated": {
+          "deliveries": 16,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 32,
+          "gain_flagged_files": 16,
+          "gain_useful": 16,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 2
+        },
+        "exact_copy": {
+          "deliveries": 16,
+          "exact_channel_flagged_files": 16,
+          "exact_channel_useful": 16,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 32,
+          "gain_flagged_files": 0,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 2
+        },
+        "global_gain": {
+          "deliveries": 16,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 32,
+          "gain_flagged_files": 0,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 2
+        },
+        "inverted": {
+          "deliveries": 16,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 32,
+          "gain_flagged_files": 16,
+          "gain_useful": 16,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 2
+        },
+        "short_repeat": {
+          "deliveries": 16,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 32,
+          "gain_flagged_files": 0,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 2
+        },
+        "unchanged": {
+          "deliveries": 16,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 32,
+          "gain_flagged_files": 0,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 2
+        },
+        "unsupported_gain": {
+          "deliveries": 16,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 32,
+          "gain_flagged_files": 0,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 2
+        }
+      }
+    },
+    "stress": {
+      "by_source_group": {
+        "authored_nonvoice": {
+          "deliveries": 3,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_ambiguous": 2,
+          "gain_channel_measured": 1,
+          "gain_channel_unavailable": 3,
+          "gain_flagged_files": 1,
+          "gain_reason_anchor_pair_budget": 2,
+          "gain_reason_insufficient_signal_variation": 3,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 1,
+          "production_decode_checks": 0
+        }
+      },
+      "by_variant": {
+        "ordinary_scaled_alert": {
+          "deliveries": 1,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 1,
+          "gain_channel_unavailable": 1,
+          "gain_flagged_files": 1,
+          "gain_reason_insufficient_signal_variation": 1,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 1,
+          "production_decode_checks": 0
+        },
+        "periodic_tone": {
+          "deliveries": 1,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_ambiguous": 2,
+          "gain_flagged_files": 0,
+          "gain_reason_anchor_pair_budget": 2,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 0
+        },
+        "silence": {
+          "deliveries": 1,
+          "exact_channel_flagged_files": 0,
+          "exact_channel_useful": 0,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_unavailable": 2,
+          "gain_flagged_files": 0,
+          "gain_reason_insufficient_signal_variation": 2,
+          "gain_useful": 0,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 0
+        }
+      }
+    }
+  },
+  "exact_native_replays": 443,
+  "first_run_seconds": 45.052,
+  "first_run_timing": {
+    "exact_two_channels_and_mono": {
+      "max_ms": 42.355,
+      "median_ms": 21.039
+    },
+    "gain_two_channels": {
+      "max_ms": 47.363,
+      "median_ms": 26.47
+    }
+  },
+  "freeze": {
+    "authored_stress": [
+      "silence",
+      "periodic_tone",
+      "ordinary_scaled_alert"
+    ],
+    "boundary_tolerance_samples": 8,
+    "code_and_intake": {
+      "backend/app/evidence/audio_exact_repetition.py": "71d38ca03d1f5ce98887cdd213544299eac5e1b1c4a07218e21cfc2d3a3c5f58",
+      "backend/app/evidence/audio_gain_repetition.py": "f15d3c66d7f354c7a1c46a07c295120af9fb11f0cbd0378b3c733657355ba96b",
+      "backend/app/evidence/audio_gain_repetition_binding.py": "5b4d8ca67d66a5fc8eb819424b97b41d85dd0ff65bc2275d257100388947090e",
+      "backend/data/independent-evaluation/audio-ami-native-stereo-v291/acquired.json": "9d56f61fed58a5ae34f6f84f96807093014ea0a53ecf57ceab9cdd5a52894d91",
+      "backend/data/independent-evaluation/audio-measured-spatial-transfer-final-2026-11-12/roster.json": "28a3ecbaa264cff9de2f37a510734255fda833a4b057726127d6de0922f41f8a",
+      "backend/scripts/audio_gain_repetition_transfer.py": "e8ffeb30e14fb2d2074f1b5c1b23680f435861bc6322ab26e28fdbb4303591b3"
+    },
+    "confirmation_source_role": "source-time-separated from 60+30i intake, same two known AMI sessions",
+    "confirmation_sources": {
+      "ES2004a.Array1-01.wav": {
+        "bytes": 33579394,
+        "etag": "\"2006182-3f2068f1e86c0\"",
+        "last_modified": "Fri, 11 Mar 2005 09:55:15 GMT",
+        "sha256": "6936edac5d0904fc5c4ab175546c5cc5366601fdc1b1e5183a6ea2c10f05d150",
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Array1-01.wav"
+      },
+      "ES2004a.Array1-05.wav": {
+        "bytes": 33579394,
+        "etag": "\"2006182-3f206905ef600\"",
+        "last_modified": "Fri, 11 Mar 2005 09:55:36 GMT",
+        "sha256": "c6f0eafaedd3632da4cb3f14788ee83a8efae2b456f70eefa8e98b2b6992102a",
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Array1-05.wav"
+      },
+      "IS1009a.Array1-01.wav": {
+        "bytes": 26849383,
+        "etag": "\"199b067-3f022e1fadb40\"",
+        "last_modified": "Tue, 15 Feb 2005 08:52:21 GMT",
+        "sha256": "23fd54fd6dbe23870f10317b256f7c648fe0fd587e56d2f940840309f1578b60",
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/IS1009a/audio/IS1009a.Array1-01.wav"
+      },
+      "IS1009a.Array1-05.wav": {
+        "bytes": 26849383,
+        "etag": "\"199b067-3f022e20a1d80\"",
+        "last_modified": "Tue, 15 Feb 2005 08:52:22 GMT",
+        "sha256": "95403a5ec3baa5bfd3370a98e1bc9c76a77c0c173dbc93d768920b1f8271796c",
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/IS1009a/audio/IS1009a.Array1-05.wav"
+      }
+    },
+    "confirmation_time_starts_s": [
+      75,
+      105,
+      135,
+      165,
+      195,
+      225,
+      255,
+      285,
+      315,
+      345,
+      375,
+      405
+    ],
+    "development_source_files": {
+      "00-unmodified.wav": "6921ac59b94b7a58b571727e9f70e9e4c5872a29cace1918ce80d1784e0f57e4",
+      "01-unmodified.wav": "c231847d18fcd97414e4afb4a9d07ca7bc56360427d3be2cf0b19734eacb6d89",
+      "02-unmodified.wav": "4f9d772300123fe6f66ee87dd86f809733cc64a3c7d1ae80ab37f58ca8ae9bd4",
+      "03-unmodified.wav": "9a8ae8cb506a16ffa3f99997698bf6dcf7bdd4d9c2cc0c2ed3cde5ec5b315684",
+      "04-unmodified.wav": "7bdc38f15a8256f187d4547fce897aee11daab7b9b70008b89da398a37bdf288",
+      "05-unmodified.wav": "9e3597f273ad47bb7a22f3e32bf4a8f89852af65b58e8eac7c62686e27c74c82",
+      "06-unmodified.wav": "a820d3ca96a97e1a9692236eaddc5ae22f81bc0efa347e028ebc758b469eb9c8",
+      "07-unmodified.wav": "17872e2dcdb2c5c7dd38b0c1f33c729579eba17646b4ac50113105d15cb0cf70",
+      "08-unmodified.wav": "2caae17d8356e074c4689cb15a8b424d8e155047ec0299c17c2e86a664e003ec",
+      "09-unmodified.wav": "6cd0fd013583cfe2df40a97bfded8d39145f5c4aa2fac94c3857d765906f331d",
+      "10-unmodified.wav": "c7193e691ba3ac7d67bd1182c182d37339e0ba27fb211b8069460ff60614c868",
+      "11-unmodified.wav": "5051ac01afcb5803f164e3ac10810a693cab1fdff4a053b7b4403af056306794",
+      "12-unmodified.wav": "f9251b11e44cc6cf1996ff6c375efe151c4384824a1040593edb9eb7e8e192ad",
+      "13-unmodified.wav": "be1f82e45ddc3ff5b1323802a6389fc5b8a08f8b5b559d37b1a8dffa0171d319",
+      "14-unmodified.wav": "bd95bd829eadc5ddca978aa7c9ba258c0974f6dcc850aca645095ceef7e3fb1b",
+      "15-unmodified.wav": "559c835f1da3bf21769b4fc3c26c8782c007fb0a969fc7652f5cfd287fbb8b50",
+      "receipt.json": "8ca9126649a648720e0f257f77fd037d88a3d7e98ef300afbf69b12dcfa38f35"
+    },
+    "ffmpeg_sha256": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "gain_variants": {
+      "amplified": [
+        3,
+        2,
+        "second"
+      ],
+      "attenuated": [
+        3,
+        4,
+        "second"
+      ],
+      "earlier_attenuated": [
+        1,
+        2,
+        "first"
+      ],
+      "inverted": [
+        -1,
+        1,
+        "second"
+      ]
+    },
+    "gate": {
+      "correct_in_both_sessions": true,
+      "gain_variant_recall_minimum": 0.8,
+      "no_relation_control_extra_flags_maximum": 0,
+      "wrong_channel_or_gain_or_ranges_maximum": 0
+    },
+    "mono_filter": "aresample=osr=16000:ochl=mono:osf=s16",
+    "numpy": "2.2.6",
+    "other_cases": [
+      "exact_copy",
+      "unchanged",
+      "global_gain",
+      "unsupported_gain",
+      "competing_microphone",
+      "clipped_repeat",
+      "short_repeat"
+    ],
+    "production_decode_checks": {
+      "confirmation": [
+        0,
+        11
+      ],
+      "development": [
+        0,
+        15
+      ]
+    },
+    "reciprocal_orientation": "accept an exact reciprocal in the opposite temporal direction",
+    "schema": "chipmunk.audio.gain-repetition-transfer-freeze/1",
+    "source_pair_core_samples": [
+      [
+        5401,
+        8450
+      ],
+      [
+        28617,
+        31666
+      ]
+    ],
+    "source_pair_geometry": "add index times 13 to first start and 7 to second start, both ends shift with start",
+    "window_samples": 48000
+  },
+  "freeze_sha256": "82d3d18646b6c59ec4d751dd6501879602ddeaa2ceb2ae64bb6f4130573320e1",
+  "passed": true,
+  "private_readout_sha256": "98868662f6c2ab489ed6640236cb4818d60a1e53b43dd9c7739fb4e990486aaf",
+  "production_decode_checks": 66,
+  "replay_seconds": 45.155,
+  "replay_timing": {
+    "exact_two_channels_and_mono": {
+      "max_ms": 37.395,
+      "median_ms": 21.112
+    },
+    "gain_two_channels": {
+      "max_ms": 58.245,
+      "median_ms": 26.588
+    }
+  },
+  "schema": "chipmunk.audio.gain-repetition-transfer/1"
+}

@@ -20,3 +20,11 @@ PYTHONPATH=backend backend/.venv/bin/python -B -m app.cli verify "$package" \
 ```
 
 The ordinary signed-package verifier checks the declared WAV asset and sample hashes without loading a model. Supplying the original enables native channel decode and repeats the exact interval search for both channels. The report never embeds the complete stereo track.
+
+## Gain and polarity
+
+Set `VERITAS_AUDIO_STEREO_GAIN_REPEAT_REVIEW=true` in local development to also check for repeated excerpts at a different level or inverted polarity. It uses the same supported native stereo inputs and 150 ms minimum as the exact repeat check. Each candidate must reproduce the other excerpt sample for sample after applying one tested rational multiplier and rounding to 16-bit precision. The recorded relationship can run in either chronological direction. It does not establish edit order or authorship.
+
+The ordinary evidence view and Standard PDF show the ratio, two source ranges and two waveforms drawn at the same amplitude scale. The evidence view and JSON link both original WAV excerpts. The signed package verifier recomputes their exact gain relationship, and supplying the original recording or video also replays the channel search and both source excerpts. Matching silence may extend a range beyond the active event. A loop, alert or other ordinary repeat can satisfy the check. Mixing separate noise into the same channel, clipping, resampling and lossy encoding can defeat it. The result carries zero AI confidence weight.
+
+The [frozen transfer and replay](audio-gain-repetition-transfer-2026-11-13.md) found 96 of 96 authored gain-related repeats and zero flags on 144 matched controls across 24 new excerpts from two previously used AMI meetings. Local Chrome loaded both WAV intervals with the expected playback duration, rendered both waveforms and downloaded byte-identical JSON and PDF. Three isolated analysis runs each queued only after a simulated $9.99 USD payment. The original-source tests covered a WAV and an offset video soundtrack, including rejection of a changed gain ratio in a re-signed package.

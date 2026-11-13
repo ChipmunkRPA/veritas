@@ -140,6 +140,7 @@ class Settings(BaseSettings):
     # (PL-01, ARCHITECTURE §8.5); `models fetch` and a models-init container set VERITAS_OFFLINE=false explicitly.
     offline: bool | None = None
     audio_waveform_repeat_review: bool = False  # development-only repeat evidence, with no voice confidence weight
+    audio_stereo_gain_repeat_review: bool = False
 
     @model_validator(mode="after")
     def _apply_offline_env(self):

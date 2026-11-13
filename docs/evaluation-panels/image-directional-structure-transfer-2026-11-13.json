@@ -1,0 +1,482 @@
+{
+  "commitments": {
+    "chipmunk-image-three-class-20261112/calibration.json": "6a48bedd195e8f15f46cc626eb6165972073f765490f8f36ed91a52343a7ffab",
+    "chipmunk-image-three-class-fresh-20261112/measurements.json": "7156a513140b338e091230f61a385bd37f9272933b3bff196396eb4a560f353d",
+    "chipmunk-masked-context-new-editors-20261113/intake.json": "6668cc9bd09ca78863d12b0a2df0713d3c004928660133a93c58d48cb9d8476e",
+    "chipmunk-masked-context-new-editors-20261113/plan.json": "318a2b98fb4d62a3a0ebd039cda708d2ee4d575068577de2c63fda742632bd55",
+    "scripts/image_directional_structure_transfer.py": "35b072b90c80a48e66aeaa395c4041865110a97b5c92f0785775b87291ee2a51"
+  },
+  "design": {
+    "arms": [
+      "perpendicular",
+      "paired"
+    ],
+    "cell_px": 16,
+    "confidence_weight": 0,
+    "cue": "At the same source pixel, measure fine-gradient perpendicular energy share and reversal relative to the broad gradient.",
+    "flank_cells": 2,
+    "gates": {
+      "editor_families": 2,
+      "extra_feathered_groups": 3,
+      "extra_ordinary_groups": 2,
+      "misplaced": 4
+    },
+    "gaussian_sigmas": [
+      0.8,
+      4.0
+    ],
+    "gradient_support": {
+      "coarse_breaks": [
+        2.5,
+        6.0
+      ],
+      "coarse_min": 1.0,
+      "fine_min": 1.6,
+      "unclipped": [
+        5,
+        250
+      ]
+    },
+    "matching": "Four coarse orientation bins and three magnitude bins. Require same strata in core and both opposed flanks.",
+    "native_sides": [
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      12
+    ],
+    "point": "Strict exceedance of second-largest group maximum on eight ordinary-only calibration sources.",
+    "ranking": "For each feature use the smaller excess above both flanks; the paired arm requires both features on one shared axis.",
+    "sample_stride": 3,
+    "useful": {
+      "iou": 0.3,
+      "recall": 0.5
+    }
+  },
+  "exact_native_replays": 200,
+  "passes": {
+    "paired": false,
+    "perpendicular": false
+  },
+  "points": {
+    "paired": 0.37879990415516995,
+    "perpendicular": 0.4308058747822485
+  },
+  "replay_seconds": 28.48,
+  "results": {
+    "confirmation": {
+      "advancement": {
+        "paired": {
+          "editor_families": 1,
+          "extra_feathered_groups": 1,
+          "extra_ordinary_groups": 2,
+          "misplaced": 3
+        },
+        "perpendicular": {
+          "editor_families": 0,
+          "extra_feathered_groups": 0,
+          "extra_ordinary_groups": 1,
+          "misplaced": 2
+        }
+      },
+      "strata": {
+        "kandinsky/feathered/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/feathered/paired": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/feathered/perpendicular": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 1,
+          "misplaced": 1,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/ordinary/current_luma": {
+          "assessed": 0,
+          "files": 36,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/ordinary/paired": {
+          "assessed": 36,
+          "files": 36,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/ordinary/perpendicular": {
+          "assessed": 36,
+          "files": 36,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/sharp/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/sharp/paired": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 1,
+          "misplaced": 1,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/sharp/perpendicular": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 1,
+          "misplaced": 1,
+          "useful": 0,
+          "useful_before": 1
+        },
+        "sd15/feathered/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sd15/feathered/paired": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 2,
+          "misplaced": 1,
+          "useful": 1,
+          "useful_before": 1
+        },
+        "sd15/feathered/perpendicular": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 1
+        },
+        "sd15/ordinary/current_luma": {
+          "assessed": 0,
+          "files": 36,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sd15/ordinary/paired": {
+          "assessed": 36,
+          "files": 36,
+          "flags": 7,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sd15/ordinary/perpendicular": {
+          "assessed": 36,
+          "files": 36,
+          "flags": 6,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sd15/sharp/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sd15/sharp/paired": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 1,
+          "misplaced": 1,
+          "useful": 0,
+          "useful_before": 1
+        },
+        "sd15/sharp/perpendicular": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 1
+        }
+      }
+    },
+    "external": {
+      "advancement": {
+        "paired": {
+          "editor_families": 0,
+          "extra_feathered_groups": 0,
+          "extra_ordinary_groups": 0,
+          "misplaced": 0
+        },
+        "perpendicular": {
+          "editor_families": 0,
+          "extra_feathered_groups": 0,
+          "extra_ordinary_groups": 1,
+          "misplaced": 2
+        }
+      },
+      "strata": {
+        "kandinsky/feathered/current_luma": {
+          "assessed": false,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "kandinsky/feathered/paired": {
+          "assessed": true,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "kandinsky/feathered/perpendicular": {
+          "assessed": true,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "kandinsky/ordinary/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/ordinary/paired": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/ordinary/perpendicular": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/sharp/current_luma": {
+          "assessed": false,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "kandinsky/sharp/paired": {
+          "assessed": true,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "kandinsky/sharp/perpendicular": {
+          "assessed": true,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "lama/feathered/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/feathered/paired": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/feathered/perpendicular": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 1,
+          "misplaced": 1,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/ordinary/current_luma": {
+          "assessed": 3,
+          "files": 36,
+          "flags": 3,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/ordinary/paired": {
+          "assessed": 36,
+          "files": 36,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/ordinary/perpendicular": {
+          "assessed": 36,
+          "files": 36,
+          "flags": 4,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/sharp/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/sharp/paired": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/sharp/perpendicular": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 1,
+          "misplaced": 1,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sdxl/feathered/current_luma": {
+          "assessed": false,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "sdxl/feathered/paired": {
+          "assessed": true,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "sdxl/feathered/perpendicular": {
+          "assessed": true,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "sdxl/ordinary/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sdxl/ordinary/paired": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sdxl/ordinary/perpendicular": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sdxl/sharp/current_luma": {
+          "assessed": false,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "sdxl/sharp/paired": {
+          "assessed": true,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "sdxl/sharp/perpendicular": {
+          "assessed": true,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        }
+      }
+    }
+  },
+  "schema": "chipmunk.image-directional-structure-transfer/1",
+  "synthetic": {
+    "altered_direction": [
+      [
+        0.6923076923076923,
+        0.3076923076923077
+      ]
+    ],
+    "flat_regions": 0,
+    "unchanged": [
+      [
+        0.0,
+        0.0
+      ]
+    ]
+  }
+}

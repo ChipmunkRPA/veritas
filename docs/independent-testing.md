@@ -1395,6 +1395,26 @@ This reproduces the arithmetic on another operating system. Source authorship,
 detector accuracy, and the interpretation of findings still need separate review.
 [Linux replay receipt](evaluation-panels/recent-checks-linux-replay-2026-11-12.json)
 
+### Replay four follow-up checks
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/followups.json" --suite evidence-followups
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/followups.json" \
+  --compare docs/evaluation-panels/evidence-followups-linux-replay-2026-11-12.json
+```
+
+The suite covers [HDR perimeter controls](image-gainmap-perimeter-transfer-2026-11-12.md),
+[short mouth-motion repeats](video-mouth-sequence-reuse-transfer-2026-11-12.md),
+[short speech inputs under loud background noise](audio-reflected-local-transfer-2026-11-12.md),
+and [plain-text and HTML email bodies](email-body-alternatives-transfer-2026-11-12.md).
+The reader outputs and input hashes agreed on macOS Python 3.11 and 3.12,
+and in two Linux arm64 runs on Python 3.12.15. The Linux container had a
+read-only checkout of 22 pinned inputs, disabled networking, and no source
+media or weights. A matching receipt reproduces the published arithmetic.
+Source preparation and inference replay require the additional inputs in
+each linked study. [Linux replay receipt](evaluation-panels/evidence-followups-linux-replay-2026-11-12.json)
+
 ### Replay recent evaluations from a clean checkout
 
 From the repository root, use Python 3.11 or later. These commands read the

@@ -1,0 +1,85 @@
+{
+  "checks": {
+    "audio": {
+      "arguments": [
+        "review",
+        "docs/evaluation-panels/audio-reflected-local-transfer-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/audio_reflected_local_transfer.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/audio_dense_evidence_confirmation.py": "de9089f4413ee34fa6aa96eaa7293f6c58f188981d7704e6795836ea60abd995",
+        "backend/scripts/audio_focused_window_transfer.py": "2088802db64f99ddc9279c59f877837908b4dc7dd4490aea2f3884fb62367c2a",
+        "backend/scripts/audio_reflected_local_transfer.py": "c4f551ab726bd74e8a448cec49640f83b66e82ffb522ccfa0fad25df451bcd4a",
+        "backend/scripts/audio_subband_partial_transfer.py": "4088052df618d1b663ba18b605c86d429c715786cde7d97e9e999ebbfed415b1",
+        "backend/scripts/audio_transient_reduction_transfer.py": "268082b7bdeb269985529f0f4c4746657a6fa99f33e8d71180a6db35aa2191ee",
+        "backend/scripts/audio_vocal_event_mixtures.py": "4747813e96bf8d1ffdfd34054fd92df1a09a775d43ce3647f9a61110c1db87ce",
+        "backend/scripts/review_audio_reduced_background_localization.py": "0def90d0e4b116cdf8b54c30e04e052aaf950c9c42d73d4f287e74eca17aa123",
+        "docs/evaluation-panels/audio-focused-window-transfer-2026-11-12.json": "ae15cc9b7f3693a2743b5aac299f2841ab6aa2308eada642be14c9448c7c5e72",
+        "docs/evaluation-panels/audio-noise-window-transfer-2026-11-12.json": "b2cbbccff57fee617b6d956be6d88bedbcb50309eb43e7d3922b7a422431fc7a",
+        "docs/evaluation-panels/audio-reflected-local-transfer-2026-11-12.json": "48ba3840c059eb4d7ecfadb02978bcb7e2698a6c40c195ad9dd3f29d51f4d17a"
+      },
+      "output_sha256": "06d704328a2ae08ce4062caf79f108efbd10938a5ec296437f2a8560a0425269",
+      "status": "matched"
+    },
+    "image": {
+      "arguments": [
+        "review",
+        "docs/evaluation-panels/image-gainmap-perimeter-transfer-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/image_gainmap_perimeter_transfer.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/image_gainmap_cross_camera.py": "c52f8691796b530044943d2cdaca0428030fe4d3c69222022373ce640070584f",
+        "backend/scripts/image_gainmap_iso.py": "ff5b0793d04d7764453cdb4ea7a599305641495084bf7ce6d2daedaf95cc3597",
+        "backend/scripts/image_gainmap_localization_transfer.py": "9f6b693a60e064d24a5b033b5783a66a44b9224e017f314142fc275c0fafce93",
+        "backend/scripts/image_gainmap_perimeter_transfer.py": "a99652d7b3fde179bd47e135ddddde25a1929ba838fbe2f001336054192e8e44",
+        "docs/evaluation-panels/image-gainmap-cross-camera-2026-11-12.json": "5b26d2ec452b7265c13999a77857d00dbf2525fcbfc551b469117166e8f1f3e9",
+        "docs/evaluation-panels/image-gainmap-localization-2026-11-12.json": "3fa970510ecc9c68406533f6a6202e88ce943a313ddee517dfc418730818defd",
+        "docs/evaluation-panels/image-gainmap-perimeter-transfer-2026-11-12.json": "59ce57b1f42b8d4a2801dd624f38c41eef2fc2084590d4cc430bd42ee334fbbc"
+      },
+      "output_sha256": "d2fdbab354ad4741f18dd1d3c652cf65eaa8c58c6aa360feababfbc76218797a",
+      "status": "matched"
+    },
+    "video": {
+      "arguments": [
+        "docs/evaluation-panels/video-mouth-sequence-reuse-transfer-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/review_video_mouth_sequence_transfer.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/review_video_mouth_sequence_transfer.py": "e893f008d00534a94a402c88e2b5161af38871732fa61ecf32df2180a6305a58",
+        "docs/evaluation-panels/video-mouth-sequence-reuse-transfer-2026-11-12.json": "f52161c3d13d20f206d7f09c273db12b2c52eaa19c650ac43aec10a5d325501d"
+      },
+      "output_sha256": "aac5b52609b595b327598b2d8a19a72dddf0864091c0da061c6595a3496b2d5b",
+      "status": "matched"
+    },
+    "writing": {
+      "arguments": [
+        "docs/evaluation-panels/email-body-alternatives-transfer-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/review_email_body_alternatives.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/review_email_body_alternatives.py": "3ebeda997f138401c31484557746ce98375d315ed1fbca3dc83e0b91e0698469",
+        "docs/evaluation-panels/email-body-alternatives-transfer-2026-11-12.json": "2ef68d3dc4bc7adeec688b33b5950cfb861bfbf57bfd60fae456ebe86d1a2a16"
+      },
+      "output_sha256": "00338f65abb6148fca26aa236641d1dabfacae2458349a08b669c0964e31ed54",
+      "status": "matched"
+    }
+  },
+  "environment": {
+    "architecture": "aarch64",
+    "os": "Linux",
+    "python": "3.12.15"
+  },
+  "runner_sha256": "70782de7ab812122fa5f9eb8263dabf5fd3af32edee60d0e7cd8bf040979476d",
+  "schema": "chipmunk.public-evaluation-replay/1",
+  "scope": "Arithmetic replay of published evaluation ledgers",
+  "source_revision": null,
+  "suite": "evidence-followups"
+}

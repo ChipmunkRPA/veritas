@@ -77,7 +77,22 @@ RECENT_CHECKS = {
     )),
     "writing": ("review_writing_paired_center_transfer.py", "writing-paired-center-transfer-2026-11-12.json", (), ()),
 }
-SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks")
+EVIDENCE_FOLLOWUPS = {
+    "image": ("image_gainmap_perimeter_transfer.py", "image-gainmap-perimeter-transfer-2026-11-12.json", ("review",), (
+        f"{SCRIPTS}/image_gainmap_cross_camera.py", f"{SCRIPTS}/image_gainmap_iso.py",
+        f"{SCRIPTS}/image_gainmap_localization_transfer.py",
+        f"{PANELS}/image-gainmap-cross-camera-2026-11-12.json", f"{PANELS}/image-gainmap-localization-2026-11-12.json",
+    )),
+    "video": ("review_video_mouth_sequence_transfer.py", "video-mouth-sequence-reuse-transfer-2026-11-12.json", (), ()),
+    "audio": ("audio_reflected_local_transfer.py", "audio-reflected-local-transfer-2026-11-12.json", ("review",), (
+        f"{SCRIPTS}/audio_transient_reduction_transfer.py", f"{SCRIPTS}/audio_subband_partial_transfer.py",
+        f"{SCRIPTS}/audio_focused_window_transfer.py", f"{SCRIPTS}/audio_dense_evidence_confirmation.py",
+        f"{SCRIPTS}/audio_vocal_event_mixtures.py", f"{SCRIPTS}/review_audio_reduced_background_localization.py",
+        f"{PANELS}/audio-noise-window-transfer-2026-11-12.json", f"{PANELS}/audio-focused-window-transfer-2026-11-12.json",
+    )),
+    "writing": ("review_email_body_alternatives.py", "email-body-alternatives-transfer-2026-11-12.json", (), ()),
+}
+SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -117,6 +132,9 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         panel_names = (panel,)
     elif suite == "recent-checks":
         script, panel, prefix, dependencies = RECENT_CHECKS[modality]
+        panel_names = (panel,)
+    elif suite == "evidence-followups":
+        script, panel, prefix, dependencies = EVIDENCE_FOLLOWUPS[modality]
         panel_names = (panel,)
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]

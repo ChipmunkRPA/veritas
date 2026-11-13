@@ -1,0 +1,7137 @@
+{
+  "freeze": {
+    "cross_sha256": "5b26d2ec452b7265c13999a77857d00dbf2525fcbfc551b469117166e8f1f3e9",
+    "method": {
+      "combine": "Mean of the lowest three of four signed side supports, clipped at zero.",
+      "confidence_weight": 0,
+      "controls": {
+        "local_lift": 1.18,
+        "local_retouch": 0.64
+      },
+      "maximum_map_step_codes": 12,
+      "point": "Strictly above the largest ordinary response in the first four published Pixel 6 Pro groups.",
+      "prior_role": "Previously scored by other cues. Use for transfer diagnostics only.",
+      "sample_step": [
+        4,
+        8
+      ],
+      "side_samples": 12,
+      "side_support_order": 2,
+      "working_long_edge": 384
+    },
+    "prior_sha256": "3fa970510ecc9c68406533f6a6202e88ce943a313ddee517dfc418730818defd",
+    "schema": "chipmunk.image-gainmap-perimeter-transfer/1",
+    "scripts": {
+      "image_gainmap_cross_camera.py": "c52f8691796b530044943d2cdaca0428030fe4d3c69222022373ce640070584f",
+      "image_gainmap_iso.py": "ff5b0793d04d7764453cdb4ea7a599305641495084bf7ce6d2daedaf95cc3597",
+      "image_gainmap_localization_transfer.py": "9f6b693a60e064d24a5b033b5783a66a44b9224e017f314142fc275c0fafce93",
+      "image_gainmap_perimeter_transfer.py": "a99652d7b3fde179bd47e135ddddde25a1929ba838fbe2f001336054192e8e44"
+    },
+    "sources": [
+      {
+        "author": "Semiautonomous",
+        "bytes": 7870833,
+        "description_url": "https://commons.wikimedia.org/wiki/File:View_of_downtown_San_Francisco_at_dusk_from_Twin_Peaks,_California,_USA.jpg",
+        "key": "city",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/View_of_downtown_San_Francisco_at_dusk_from_Twin_Peaks%2C_California%2C_USA.jpg",
+        "publisher_sha1": "91601236c6716558cb642119a6d31a8af141a707",
+        "sha256": "2ef439a6643b8295eac2eef6528f4e9170da1848ac03f2fb0642ce64d4bf8386",
+        "source": "Own work",
+        "title": "View of downtown San Francisco at dusk from Twin Peaks, California, USA.jpg",
+        "upload": "2026-06-01T05:19:41Z"
+      },
+      {
+        "author": "Semiautonomous",
+        "bytes": 11687010,
+        "description_url": "https://commons.wikimedia.org/wiki/File:Cathedral_of_Saint_Mary_of_the_Assumption_and_the_moon,_San_Francisco,_California,_USA.jpg",
+        "key": "cathedral",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/54/Cathedral_of_Saint_Mary_of_the_Assumption_and_the_moon%2C_San_Francisco%2C_California%2C_USA.jpg",
+        "publisher_sha1": "1b5793b00174e43ffde32f368ea81cdbb0c5b964",
+        "sha256": "e5441138eb1030784df32758f59f9613b8aed21d1eb8882adf2a459de4d532f7",
+        "source": "Own work",
+        "title": "Cathedral of Saint Mary of the Assumption and the moon, San Francisco, California, USA.jpg",
+        "upload": "2026-06-01T05:20:10Z"
+      },
+      {
+        "author": "Semiautonomous",
+        "bytes": 13370183,
+        "description_url": "https://commons.wikimedia.org/wiki/File:Tomb_monument_at_Cementiri_de_Montju%C3%AFc,_Barcelona,_Espa%C3%B1a.jpg",
+        "key": "tomb",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Tomb_monument_at_Cementiri_de_Montju%C3%AFc%2C_Barcelona%2C_Espa%C3%B1a.jpg",
+        "publisher_sha1": "7c508a696bb150a52c9736ffb6a772b30ba9f33a",
+        "sha256": "2cc755d11c7b19bb22cccf3d0cfa82878cbcbdb29d241ae50ddd719bddda2f25",
+        "source": "Own work",
+        "title": "Tomb monument at Cementiri de Montju\u00efc, Barcelona, Espa\u00f1a.jpg",
+        "upload": "2026-06-01T05:28:43Z"
+      },
+      {
+        "author": "Clyde Charles Brown",
+        "bytes": 1809690,
+        "description_url": "https://commons.wikimedia.org/wiki/File:Common_puffballs_popping_out_of_the_ground,_Healy,_Alaska,_US.jpg",
+        "key": "puffballs",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Common_puffballs_popping_out_of_the_ground%2C_Healy%2C_Alaska%2C_US.jpg",
+        "publisher_sha1": "40355404830954b0dfe086d6b848209a6d4a9acf",
+        "sha256": "884496e78266effc36546e02abadc25246165b91add83fd3013613a8f65dc5ce",
+        "source": "Own work",
+        "title": "Common puffballs popping out of the ground, Healy, Alaska, US.jpg",
+        "upload": "2026-06-01T05:10:18Z"
+      },
+      {
+        "author": "Clyde Charles Brown",
+        "bytes": 6083245,
+        "description_url": "https://commons.wikimedia.org/wiki/File:Hotel_Adagio,_San_Francisco,_California,_US.jpg",
+        "key": "hotel",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Hotel_Adagio%2C_San_Francisco%2C_California%2C_US.jpg",
+        "publisher_sha1": "70ffd015921313e9e33a970334d1003003f6701b",
+        "sha256": "11fef2ffd6d2906a507273d484009c5d90b7b124343576d838dd55900fbd553c",
+        "source": "Own work",
+        "title": "Hotel Adagio, San Francisco, California, US.jpg",
+        "upload": "2026-06-01T05:31:37Z"
+      },
+      {
+        "author": "Clyde Charles Brown",
+        "bytes": 2355455,
+        "description_url": "https://commons.wikimedia.org/wiki/File:Stony_Hill_seen_from_Bernal_Heights,_San_Francisco,_California,_US.jpg",
+        "key": "stony",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Stony_Hill_seen_from_Bernal_Heights%2C_San_Francisco%2C_California%2C_US.jpg",
+        "publisher_sha1": "a4f0386c1827326538ff33533f107022d04b845f",
+        "sha256": "dfaf1dc224ef2856ad671df89fa7d6f9cdd17b22e04554e3ba4b43e599d36898",
+        "source": "Own work",
+        "title": "Stony Hill seen from Bernal Heights, San Francisco, California, US.jpg",
+        "upload": "2026-06-01T05:33:20Z"
+      },
+      {
+        "author": "Clyde Charles Brown",
+        "bytes": 7075970,
+        "description_url": "https://commons.wikimedia.org/wiki/File:Coso_Square_in_Bernal_Heights,_San_Francisco,_California,_US.jpg",
+        "key": "coso",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Coso_Square_in_Bernal_Heights%2C_San_Francisco%2C_California%2C_US.jpg",
+        "publisher_sha1": "c199a4396a4ac0ab671e07d4dc78a9541cb35ffa",
+        "sha256": "c4997bfae02e23ce95c15d7aae2bcd5da6151be8116173350617339265d169c7",
+        "source": "Own work",
+        "title": "Coso Square in Bernal Heights, San Francisco, California, US.jpg",
+        "upload": "2026-06-01T05:33:30Z"
+      },
+      {
+        "author": "Mihnea Laz\u0103r",
+        "bytes": 5026617,
+        "description_url": "https://commons.wikimedia.org/wiki/File:Dacia_Duster_2025_Rear_1.jpg",
+        "key": "dacia",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Dacia_Duster_2025_Rear_1.jpg",
+        "publisher_sha1": "e6712f2798865fecbfff36ce6e1e3586b561f2e4",
+        "sha256": "dfabe13012057346188a04fd874af1144e0b160c37dcfa022d173aa2f267c2ae",
+        "source": "Own work",
+        "title": "Dacia Duster 2025 Rear 1.jpg",
+        "upload": "2025-09-14T18:47:27Z"
+      },
+      {
+        "author": "Mihnea Laz\u0103r",
+        "bytes": 2851472,
+        "description_url": "https://commons.wikimedia.org/wiki/File:Fiat_Grande_Panda_Hybrid_2025_Rear_1_(cropped).jpg",
+        "key": "fiat",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/18/Fiat_Grande_Panda_Hybrid_2025_Rear_1_%28cropped%29.jpg",
+        "publisher_sha1": "8cd9a1c9f9a78726ed40b8310fa642c9df3f7688",
+        "sha256": "00726b4142076585d700141956d2bac0a44dfd67bb50679b03a852e522adaa76",
+        "source": "Own work",
+        "title": "Fiat Grande Panda Hybrid 2025 Rear 1 (cropped).jpg",
+        "upload": "2025-11-20T22:13:37Z"
+      },
+      {
+        "author": "Qzekrom",
+        "bytes": 2537271,
+        "description_url": "https://commons.wikimedia.org/wiki/File:HeySong_Sarsaparilla_and_noodles_at_886_restaurant_3.jpg",
+        "key": "restaurant",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/33/HeySong_Sarsaparilla_and_noodles_at_886_restaurant_3.jpg",
+        "publisher_sha1": "ed94c3adedb4b7520f44d8b22f86e9ca00843687",
+        "sha256": "349c33fd288a294e1b25b760649f731a775b99298905739c714bac4660c1b5cf",
+        "source": "Own work",
+        "title": "HeySong Sarsaparilla and noodles at 886 restaurant 3.jpg",
+        "upload": "2026-07-13T03:41:24Z"
+      }
+    ]
+  },
+  "fresh": [
+    {
+      "author": "Semiautonomous",
+      "base": null,
+      "baseline": null,
+      "carrier": {
+        "admitted_grayscale": false,
+        "base_dimensions": [
+          6240,
+          4160
+        ],
+        "gain_components": 3,
+        "gain_dimensions": [
+          6240,
+          4160
+        ],
+        "gain_end": 7870833,
+        "gain_sha256": "129aca33d05c9211550b61a686e314a7cddf54cf2c786aeead6f15e21a5bc8e9",
+        "gain_start": 5503621,
+        "iso_gain_flags": 192,
+        "iso_gain_metadata_bytes": 141,
+        "iso_primary_marker": true,
+        "mpf_aux_type": 327680,
+        "mpf_primary_size": 5532144,
+        "primary_end": 5503621
+      },
+      "gain": null,
+      "key": "city",
+      "perimeter": null,
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Semiautonomous",
+      "base": null,
+      "baseline": null,
+      "carrier": {
+        "admitted_grayscale": false,
+        "base_dimensions": [
+          6240,
+          4160
+        ],
+        "gain_components": 3,
+        "gain_dimensions": [
+          6240,
+          4160
+        ],
+        "gain_end": 11687010,
+        "gain_sha256": "16ae399d4395fa62db83417e98dabf1014839c0ee6d106d6d66a4a46a090bd4e",
+        "gain_start": 6429693,
+        "iso_gain_flags": 192,
+        "iso_gain_metadata_bytes": 141,
+        "iso_primary_marker": true,
+        "mpf_aux_type": 327680,
+        "mpf_primary_size": 6450264,
+        "primary_end": 6429693
+      },
+      "gain": null,
+      "key": "cathedral",
+      "perimeter": null,
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Semiautonomous",
+      "base": null,
+      "baseline": null,
+      "carrier": {
+        "admitted_grayscale": false,
+        "base_dimensions": [
+          6240,
+          4160
+        ],
+        "gain_components": 3,
+        "gain_dimensions": [
+          6240,
+          4160
+        ],
+        "gain_end": 13370183,
+        "gain_sha256": "7a4bdadbbbeae4932c9f53cf438bc755689b41f732aaaf6d3c89e0649bc21346",
+        "gain_start": 7042110,
+        "iso_gain_flags": 192,
+        "iso_gain_metadata_bytes": 141,
+        "iso_primary_marker": true,
+        "mpf_aux_type": 327680,
+        "mpf_primary_size": 7081572,
+        "primary_end": 7042110
+      },
+      "gain": null,
+      "key": "tomb",
+      "perimeter": null,
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Clyde Charles Brown",
+      "base": null,
+      "baseline": null,
+      "carrier": {
+        "admitted_grayscale": false,
+        "base_dimensions": [
+          1200,
+          1600
+        ],
+        "gain_components": 3,
+        "gain_dimensions": [
+          1200,
+          1600
+        ],
+        "gain_end": 1809690,
+        "gain_sha256": "f1343d13d9e3bd5cdba92ffbab23f7c2e7e69c65bd5175f52a475b2ea6654750",
+        "gain_start": 774960,
+        "iso_gain_flags": 192,
+        "iso_gain_metadata_bytes": 141,
+        "iso_primary_marker": true,
+        "mpf_aux_type": 327680,
+        "mpf_primary_size": 815668,
+        "primary_end": 774960
+      },
+      "gain": null,
+      "key": "puffballs",
+      "perimeter": null,
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Clyde Charles Brown",
+      "base": null,
+      "baseline": null,
+      "carrier": {
+        "admitted_grayscale": false,
+        "base_dimensions": [
+          2688,
+          4032
+        ],
+        "gain_components": 3,
+        "gain_dimensions": [
+          2688,
+          4032
+        ],
+        "gain_end": 6083245,
+        "gain_sha256": "237c2d00b812cecbb0f990ec86e49d092277a66cbbbd4c121994a70527e811a5",
+        "gain_start": 2891274,
+        "iso_gain_flags": 192,
+        "iso_gain_metadata_bytes": 141,
+        "iso_primary_marker": true,
+        "mpf_aux_type": 327680,
+        "mpf_primary_size": 2921973,
+        "primary_end": 2891274
+      },
+      "gain": null,
+      "key": "hotel",
+      "perimeter": null,
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Clyde Charles Brown",
+      "base": null,
+      "baseline": null,
+      "carrier": {
+        "admitted_grayscale": false,
+        "base_dimensions": [
+          2384,
+          1589
+        ],
+        "gain_components": 3,
+        "gain_dimensions": [
+          2384,
+          1589
+        ],
+        "gain_end": 2355455,
+        "gain_sha256": "a62b962c28bc7422bca5cc946834eb10dfb3c28c913f8d3b938c423652d8815f",
+        "gain_start": 1121733,
+        "iso_gain_flags": 192,
+        "iso_gain_metadata_bytes": 141,
+        "iso_primary_marker": true,
+        "mpf_aux_type": 327680,
+        "mpf_primary_size": 1149713,
+        "primary_end": 1121733
+      },
+      "gain": null,
+      "key": "stony",
+      "perimeter": null,
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Clyde Charles Brown",
+      "base": null,
+      "baseline": null,
+      "carrier": {
+        "admitted_grayscale": false,
+        "base_dimensions": [
+          3947,
+          2631
+        ],
+        "gain_components": 3,
+        "gain_dimensions": [
+          3947,
+          2631
+        ],
+        "gain_end": 7075970,
+        "gain_sha256": "f45b6c041dcb18b8eb5bfe2be35aa3ef20930cdee7f06612af5502c37778694a",
+        "gain_start": 4404573,
+        "iso_gain_flags": 192,
+        "iso_gain_metadata_bytes": 141,
+        "iso_primary_marker": true,
+        "mpf_aux_type": 327680,
+        "mpf_primary_size": 4440049,
+        "primary_end": 4404573
+      },
+      "gain": null,
+      "key": "coso",
+      "perimeter": null,
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mihnea Laz\u0103r",
+      "base": null,
+      "baseline": null,
+      "carrier": {
+        "admitted_grayscale": false,
+        "base_dimensions": [
+          6000,
+          4000
+        ],
+        "gain_components": 3,
+        "gain_dimensions": [
+          6000,
+          4000
+        ],
+        "gain_end": 5026617,
+        "gain_sha256": "06f15e653e81f72d150c14ca878d33f0c131a14c571069e225c06504db3c4428",
+        "gain_start": 3497346,
+        "iso_gain_flags": 192,
+        "iso_gain_metadata_bytes": 141,
+        "iso_primary_marker": true,
+        "mpf_aux_type": 327680,
+        "mpf_primary_size": 3497346,
+        "primary_end": 3497346
+      },
+      "gain": null,
+      "key": "dacia",
+      "perimeter": null,
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mihnea Laz\u0103r",
+      "base": null,
+      "baseline": null,
+      "carrier": {
+        "admitted_grayscale": false,
+        "base_dimensions": [
+          3459,
+          2306
+        ],
+        "gain_components": 3,
+        "gain_dimensions": [
+          3459,
+          2306
+        ],
+        "gain_end": 2851472,
+        "gain_sha256": "cd49cfd94887072d54bd27af063eca6f8c84b61779f4b68d667a8b88e64744ea",
+        "gain_start": 1988147,
+        "iso_gain_flags": 192,
+        "iso_gain_metadata_bytes": 141,
+        "iso_primary_marker": true,
+        "mpf_aux_type": 327680,
+        "mpf_primary_size": 1988147,
+        "primary_end": 1988147
+      },
+      "gain": null,
+      "key": "fiat",
+      "perimeter": null,
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          4080,
+          3072
+        ],
+        "sha256": "84aaa904742f72de40e4425fb929a256bda3e2d7036df8e6563dd8457490a3ca"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            2975,
+            1276,
+            3740,
+            1871
+          ],
+          "hit": 0,
+          "score": "0x1.022dc8128cb26p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            1360,
+            1956,
+            2295,
+            2891
+          ],
+          "hit": 0,
+          "score": "0x1.345b1af814755p-1"
+        }
+      },
+      "carrier": {
+        "admitted_grayscale": true,
+        "base_dimensions": [
+          4080,
+          3072
+        ],
+        "gain_components": 1,
+        "gain_dimensions": [
+          1020,
+          768
+        ],
+        "gain_end": 2537271,
+        "gain_sha256": "03a112f1bbc9be1a9b9ad89c26c777331366cfc3e44ede16ba9821dd50202bc4",
+        "gain_start": 2468829,
+        "iso_gain_flags": null,
+        "iso_gain_metadata_bytes": 0,
+        "iso_primary_marker": false,
+        "mpf_aux_type": 0,
+        "mpf_primary_size": 2461971,
+        "primary_end": 2468829
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "b7cd9a15d62830c8f554d42646033c2643f58cde67caae2355b62fe9c84b9fc7"
+      },
+      "key": "restaurant",
+      "perimeter": {
+        "box": [
+          3485,
+          170,
+          3910,
+          595
+        ],
+        "hit": 0,
+        "score": "0x1.df8ba60000000p-3"
+      },
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "8e03ff53e9c7f9e0e41fbf7745860cc941b85913d0a8463d535bc9b464f64336"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            560,
+            240,
+            704,
+            352
+          ],
+          "hit": 0,
+          "score": "0x1.068088ccc7223p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            256,
+            368,
+            432,
+            544
+          ],
+          "hit": 0,
+          "score": "0x1.20e9964ba3315p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "b7cd9a15d62830c8f554d42646033c2643f58cde67caae2355b62fe9c84b9fc7"
+      },
+      "key": "restaurant",
+      "perimeter": {
+        "box": [
+          656,
+          32,
+          736,
+          112
+        ],
+        "hit": 0,
+        "score": "0x1.e34bc00000000p-3"
+      },
+      "role": "local_lift",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "5b6c5132f25fee177be9a95e9ad4e8c9598cea894d29d3defb8f7b2afe4dd8e7"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            240,
+            336,
+            352,
+            416
+          ],
+          "hit": 0,
+          "score": "0x1.2e44cfac3b54bp+0"
+        },
+        "orphan_edge": {
+          "box": [
+            256,
+            368,
+            432,
+            544
+          ],
+          "hit": 0,
+          "score": "0x1.33c15dbe0f537p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "b7cd9a15d62830c8f554d42646033c2643f58cde67caae2355b62fe9c84b9fc7"
+      },
+      "key": "restaurant",
+      "perimeter": {
+        "box": [
+          656,
+          32,
+          736,
+          112
+        ],
+        "hit": 0,
+        "score": "0x1.e34bc00000000p-3"
+      },
+      "role": "local_retouch",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    }
+  ],
+  "held": [
+    {
+      "author": "AVDLCZ",
+      "base": {
+        "dimensions": [
+          4080,
+          3072
+        ],
+        "sha256": "375796eaf3f747e1b06355218c5e201408ca289c886a180e7cef9029ab8e9534"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            595,
+            425,
+            1360,
+            1191
+          ],
+          "hit": 0,
+          "score": "0x1.116f3c33c33c4p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            2550,
+            2126,
+            2975,
+            2551
+          ],
+          "hit": 0,
+          "score": "0x1.064c2d523219cp-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1010,
+          760
+        ],
+        "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+      },
+      "key": "prague",
+      "perimeter": {
+        "box": [
+          2975,
+          340,
+          3570,
+          935
+        ],
+        "hit": 0,
+        "score": "0x1.0bb65e0000000p-2"
+      },
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "AVDLCZ",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "e0da15e89f96525142411f4755cf75653596067265e3d630ab1183e67907a170"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            288,
+            384,
+            464,
+            528
+          ],
+          "hit": 0,
+          "score": "0x1.102be82714b78p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            480,
+            400,
+            560,
+            480
+          ],
+          "hit": 0,
+          "score": "0x1.1e1cbb78aacf2p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1010,
+          760
+        ],
+        "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+      },
+      "key": "prague",
+      "perimeter": {
+        "box": [
+          560,
+          64,
+          672,
+          176
+        ],
+        "hit": 0,
+        "score": "0x1.1849960000000p-2"
+      },
+      "role": "local_lift",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "AVDLCZ",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "d8a431358851134bf91c83bd3084b9fb52e326f613a065d8e8cddc17c49596d3"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            240,
+            336,
+            320,
+            416
+          ],
+          "hit": 0,
+          "score": "0x1.3debe1b881174p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            480,
+            400,
+            560,
+            480
+          ],
+          "hit": 0,
+          "score": "0x1.064c2d523219cp-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1010,
+          760
+        ],
+        "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+      },
+      "key": "prague",
+      "perimeter": {
+        "box": [
+          560,
+          64,
+          672,
+          176
+        ],
+        "hit": 0,
+        "score": "0x1.1849960000000p-2"
+      },
+      "role": "local_retouch",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "AVDLCZ",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "90404b1265d0ffb069fbdb03849daada7b82d696d8e399217b62f39a98752d96"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            112,
+            80,
+            256,
+            224
+          ],
+          "hit": 0,
+          "score": "0x1.12320c4fd40c5p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            480,
+            400,
+            560,
+            480
+          ],
+          "hit": 0,
+          "score": "0x1.1e1cbb78aacf2p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1010,
+          760
+        ],
+        "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+      },
+      "key": "prague",
+      "perimeter": {
+        "box": [
+          560,
+          64,
+          672,
+          176
+        ],
+        "hit": 0,
+        "score": "0x1.1849960000000p-2"
+      },
+      "role": "jpeg90",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "AVDLCZ",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "104c96e9a25a5028be48e2bab80946644bf8288d441e7d05cae83e8bbd22cfbd"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            112,
+            80,
+            256,
+            224
+          ],
+          "hit": 0,
+          "score": "0x1.11ee6b6e3e6b6p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            64,
+            320,
+            144,
+            400
+          ],
+          "hit": 0,
+          "score": "0x1.078424ef751cap-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1010,
+          760
+        ],
+        "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+      },
+      "key": "prague",
+      "perimeter": {
+        "box": [
+          560,
+          64,
+          672,
+          176
+        ],
+        "hit": 0,
+        "score": "0x1.1260fa0000000p-2"
+      },
+      "role": "jpeg75",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "AVDLCZ",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "905f2e4f9543e1b6e3aedc1c9d02b23eeb0fafba6b79cf357ac470abd7b0b689"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            112,
+            80,
+            256,
+            224
+          ],
+          "hit": 0,
+          "score": "0x1.131f5afb555b0p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            480,
+            400,
+            560,
+            480
+          ],
+          "hit": 0,
+          "score": "0x1.1d2416a715ec7p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1010,
+          760
+        ],
+        "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+      },
+      "key": "prague",
+      "perimeter": {
+        "box": [
+          560,
+          64,
+          672,
+          176
+        ],
+        "hit": 0,
+        "score": "0x1.cde3ca0000000p-3"
+      },
+      "role": "tone",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "AVDLCZ",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "4957238cd6e1849e528951fbefecabca64d3d1addbf8ca2d4f1bcdd8029b45a3"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            112,
+            80,
+            256,
+            224
+          ],
+          "hit": 0,
+          "score": "0x1.136b4f98bd4f9p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            480,
+            400,
+            560,
+            480
+          ],
+          "hit": 0,
+          "score": "0x1.1d2416a715ec7p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1010,
+          760
+        ],
+        "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+      },
+      "key": "prague",
+      "perimeter": {
+        "box": [
+          560,
+          64,
+          672,
+          176
+        ],
+        "hit": 0,
+        "score": "0x1.247a2e0000000p-2"
+      },
+      "role": "resize",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "AVDLCZ",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "bbe0ea3d0558a64d34f46698620c3bfd4f4d4df1b1b05602f88bd9b4cc115e3e"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            112,
+            80,
+            256,
+            224
+          ],
+          "hit": 0,
+          "score": "0x1.0cdf8c07cf8c0p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            480,
+            400,
+            560,
+            480
+          ],
+          "hit": 0,
+          "score": "0x1.2921e22512dacp-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1010,
+          760
+        ],
+        "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+      },
+      "key": "prague",
+      "perimeter": {
+        "box": [
+          560,
+          64,
+          672,
+          176
+        ],
+        "hit": 0,
+        "score": "0x1.1d08420000000p-2"
+      },
+      "role": "sharpen",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "AVDLCZ",
+      "base": {
+        "dimensions": [
+          576,
+          434
+        ],
+        "sha256": "d6812cb42077e6db17431597152a67bc6cecd9783cdff0d5270d671f16039e20"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            324,
+            312,
+            384,
+            372
+          ],
+          "hit": 0,
+          "score": "0x1.130c63aedec66p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            384,
+            324,
+            444,
+            384
+          ],
+          "hit": 0,
+          "score": "0x1.ebfc9b96204c8p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          758,
+          570
+        ],
+        "sha256": "e32c2d4d8dea9f471dfa26be3522c40ca3463fb395147bb551ac2cfff343b470"
+      },
+      "key": "prague",
+      "perimeter": {
+        "box": [
+          492,
+          132,
+          552,
+          216
+        ],
+        "hit": 0,
+        "score": "0x1.108ada0000000p-3"
+      },
+      "role": "aligned_crop",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "AVDLCZ",
+      "base": {
+        "dimensions": [
+          578,
+          768
+        ],
+        "sha256": "5303ea117ec5d68380e955a4e590fb8a7438e1a0fa5758f450e57fa6df5a5099"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            80,
+            512,
+            224,
+            656
+          ],
+          "hit": 0,
+          "score": "0x1.11b17bac0e0bap+0"
+        },
+        "orphan_edge": {
+          "box": [
+            320,
+            624,
+            400,
+            704
+          ],
+          "hit": 0,
+          "score": "0x1.004cbacc4c215p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          760,
+          1010
+        ],
+        "sha256": "2dff55ecf97c06ac86e68dc4fb6a55e3b4ec8d7bfd34adb1dfae48dff11f5841"
+      },
+      "key": "prague",
+      "perimeter": {
+        "box": [
+          64,
+          96,
+          176,
+          208
+        ],
+        "hit": 0,
+        "score": "0x1.0dd5580000000p-2"
+      },
+      "role": "aligned_rotation",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "AVDLCZ",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "86f1a96e8bc0ef027c15ce32005ab7df7f3411c9d16714324847389dc4c006b4"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            288,
+            384,
+            464,
+            528
+          ],
+          "hit": 1008,
+          "score": "0x1.9d83943f90fa7p-1"
+        },
+        "orphan_edge": {
+          "box": [
+            416,
+            304,
+            528,
+            384
+          ],
+          "hit": 8960,
+          "score": "0x1.5a6a4efda99c2p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1010,
+          760
+        ],
+        "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+      },
+      "key": "prague",
+      "perimeter": {
+        "box": [
+          560,
+          64,
+          672,
+          176
+        ],
+        "hit": 0,
+        "score": "0x1.1849960000000p-2"
+      },
+      "role": "highlight_edit",
+      "truth_pixels": 20164,
+      "truth_sha256": "d3ac4b8a2065b10cb35a28cf074de527bf1419cbde20cdb620356c35d1f12ea8"
+    },
+    {
+      "author": "AVDLCZ",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "44c54b6de38966b3b6b44f3b239ce79c12aadba4dfb836df7626be30f7bc5d47"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            176,
+            336,
+            320,
+            448
+          ],
+          "hit": 14218,
+          "score": "0x1.cea8f85ae97a8p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            208,
+            320,
+            320,
+            400
+          ],
+          "hit": 8736,
+          "score": "0x1.b0628b14b5c63p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1010,
+          760
+        ],
+        "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+      },
+      "key": "prague",
+      "perimeter": {
+        "box": [
+          208,
+          368,
+          320,
+          448
+        ],
+        "hit": 8960,
+        "score": "0x1.ca06ca0000000p-2"
+      },
+      "role": "arbitrary_edit",
+      "truth_pixels": 20294,
+      "truth_sha256": "1be0c5ce184b50ca6d2193a9bb9d715d65452c6c01e931ee93bf2a34edd66c8a"
+    },
+    {
+      "author": "AVDLCZ",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "90404b1265d0ffb069fbdb03849daada7b82d696d8e399217b62f39a98752d96"
+      },
+      "baseline": null,
+      "gain": null,
+      "key": "prague",
+      "perimeter": null,
+      "role": "no_gainmap",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          4080,
+          3072
+        ],
+        "sha256": "836d70f9df751e5efd0918db62e4203e24701dd4a2e7bd50f4bca9b210fe5508"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            1020,
+            170,
+            1445,
+            595
+          ],
+          "hit": 0,
+          "score": "0x1.1d49582a7d583p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            765,
+            340,
+            1190,
+            765
+          ],
+          "hit": 0,
+          "score": "0x1.55656ac80126ap-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          512,
+          386
+        ],
+        "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+      },
+      "key": "heysong",
+      "perimeter": {
+        "box": [
+          3060,
+          1786,
+          3485,
+          2211
+        ],
+        "hit": 0,
+        "score": "0x1.8026ba0000000p-2"
+      },
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "bca9d98bff16fdbf67b3b26b7529cdd79e404e6b9f980c387f033c1690df4e1b"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            32,
+            272,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.27b92ead152eap+1"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            64,
+            224,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.55656ac80126ap-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          512,
+          386
+        ],
+        "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+      },
+      "key": "heysong",
+      "perimeter": {
+        "box": [
+          576,
+          336,
+          656,
+          416
+        ],
+        "hit": 0,
+        "score": "0x1.7955180000000p-2"
+      },
+      "role": "local_lift",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "72cf26f01b12b54249be480aa76f096e1649a066cfa5036f0ac0e64496365058"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            160,
+            32,
+            272,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.ca22a7ef9db22p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            64,
+            224,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.4d753b65d8ea2p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          512,
+          386
+        ],
+        "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+      },
+      "key": "heysong",
+      "perimeter": {
+        "box": [
+          576,
+          336,
+          656,
+          416
+        ],
+        "hit": 0,
+        "score": "0x1.7955180000000p-2"
+      },
+      "role": "local_retouch",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "95e10b739c06da50f1c115ac06ba074eb3a3dcee44e31302f894a6a4c8ef1a28"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            32,
+            272,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.1ae0d77288d77p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            64,
+            224,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.55656ac80126ap-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          512,
+          386
+        ],
+        "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+      },
+      "key": "heysong",
+      "perimeter": {
+        "box": [
+          576,
+          336,
+          656,
+          416
+        ],
+        "hit": 0,
+        "score": "0x1.7955180000000p-2"
+      },
+      "role": "jpeg90",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "05a032fa377abbc83cab72b972206fb01714a377cc1aff34db38111919617853"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            32,
+            272,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.196a147eb8148p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            64,
+            224,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.597f27b532c1ap-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          512,
+          386
+        ],
+        "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+      },
+      "key": "heysong",
+      "perimeter": {
+        "box": [
+          576,
+          336,
+          656,
+          416
+        ],
+        "hit": 0,
+        "score": "0x1.885e800000000p-2"
+      },
+      "role": "jpeg75",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "feba46e9f97ad7397e10d8583b0f519186ee97c4cd11743a2ca321f27c5b5578"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            32,
+            272,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.1aaccd9326cd9p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            64,
+            224,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.55656ac80126ap-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          512,
+          386
+        ],
+        "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+      },
+      "key": "heysong",
+      "perimeter": {
+        "box": [
+          576,
+          336,
+          656,
+          416
+        ],
+        "hit": 0,
+        "score": "0x1.35a88a0000000p-2"
+      },
+      "role": "tone",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "edc04076fa42bb2327d3610651b0d4d3282093807b16c67cb989e3bcd523f50c"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            32,
+            272,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.1d657f480b7f4p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            64,
+            224,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.55656ac80126ap-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          512,
+          386
+        ],
+        "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+      },
+      "key": "heysong",
+      "perimeter": {
+        "box": [
+          576,
+          336,
+          656,
+          416
+        ],
+        "hit": 0,
+        "score": "0x1.87480a0000000p-2"
+      },
+      "role": "resize",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "0147956d5e01c30ac54c35ff82ecffd3eccb5818feac20b7e759d72934b6c368"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            32,
+            272,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.16b97dc8237dcp+1"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            64,
+            224,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.55656ac80126ap-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          512,
+          386
+        ],
+        "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+      },
+      "key": "heysong",
+      "perimeter": {
+        "box": [
+          576,
+          336,
+          656,
+          416
+        ],
+        "hit": 0,
+        "score": "0x1.804d260000000p-2"
+      },
+      "role": "sharpen",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          576,
+          434
+        ],
+        "sha256": "85d9a31e38b7d3c910d76440952112c458a8b785833c74142e850122a818ff0c"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            180,
+            60,
+            240,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.33cbca5049c54p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            396,
+            36,
+            456,
+            120
+          ],
+          "hit": 0,
+          "score": "0x1.0e2e1f970955fp-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          384,
+          290
+        ],
+        "sha256": "2ff690d912a1638f3fa4219c461d76ffec68f38f5d76d9f8e7239c812bc53cb4"
+      },
+      "key": "heysong",
+      "perimeter": {
+        "box": [
+          480,
+          276,
+          540,
+          336
+        ],
+        "hit": 0,
+        "score": "0x1.a2a3880000000p-2"
+      },
+      "role": "aligned_crop",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          578,
+          768
+        ],
+        "sha256": "b83c15035a5835984c11fd47db612cf381a6b4b79bbdc25953c78ad76fd6a4da"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            32,
+            496,
+            112,
+            576
+          ],
+          "hit": 0,
+          "score": "0x1.185922e2e2e2fp+1"
+        },
+        "orphan_edge": {
+          "box": [
+            64,
+            544,
+            144,
+            624
+          ],
+          "hit": 0,
+          "score": "0x1.597f27b532c1ap-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          386,
+          512
+        ],
+        "sha256": "a242591828f743b17eed6952b2812ec7b422b21dd5050906f6725cac45cf930f"
+      },
+      "key": "heysong",
+      "perimeter": {
+        "box": [
+          336,
+          112,
+          416,
+          192
+        ],
+        "hit": 0,
+        "score": "0x1.832d800000000p-2"
+      },
+      "role": "aligned_rotation",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "4509d783b5c57985df0cdf2240aa1bab56fe5b8d83267b1171cf003faf89492e"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            32,
+            272,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.d89d69a96569ap+0"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            64,
+            224,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.55656ac80126ap-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          512,
+          386
+        ],
+        "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+      },
+      "key": "heysong",
+      "perimeter": {
+        "box": [
+          576,
+          336,
+          656,
+          416
+        ],
+        "hit": 0,
+        "score": "0x1.7955180000000p-2"
+      },
+      "role": "highlight_edit",
+      "truth_pixels": 20306,
+      "truth_sha256": "bcc6de13e14aa0bb831f034d1544a57da5ff8beadb253a62b86cbb9bfed4db3b"
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "a194329bd7ca6a322671b660b345cf321f716738dee1d8fc426cba80c6edce08"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            112,
+            64,
+            256,
+            240
+          ],
+          "hit": 11297,
+          "score": "0x1.7a29058f0a211p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            112,
+            304,
+            224
+          ],
+          "hit": 8960,
+          "score": "0x1.7dcd61f8aad6bp-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          512,
+          386
+        ],
+        "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+      },
+      "key": "heysong",
+      "perimeter": {
+        "box": [
+          576,
+          336,
+          656,
+          416
+        ],
+        "hit": 0,
+        "score": "0x1.7955180000000p-2"
+      },
+      "role": "arbitrary_edit",
+      "truth_pixels": 20304,
+      "truth_sha256": "b5a979528d1eadcca1f45c43cab264a553162aa7100e68587299101f2e62ecb2"
+    },
+    {
+      "author": "Qzekrom",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "95e10b739c06da50f1c115ac06ba074eb3a3dcee44e31302f894a6a4c8ef1a28"
+      },
+      "baseline": null,
+      "gain": null,
+      "key": "heysong",
+      "perimeter": null,
+      "role": "no_gainmap",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Sikander",
+      "base": {
+        "dimensions": [
+          6144,
+          8160
+        ],
+        "sha256": "7cfb523109a07b9dcea52c983aeeaa79c768f5977c4d00d4c6dff2e743620c4b"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            2211,
+            1020,
+            3061,
+            1870
+          ],
+          "hit": 0,
+          "score": "0x1.1c45f7d837b21p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            2381,
+            2550,
+            3231,
+            3400
+          ],
+          "hit": 0,
+          "score": "0x1.e35a5c78a03a8p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1050,
+          1396
+        ],
+        "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+      },
+      "key": "ontario",
+      "perimeter": {
+        "box": [
+          2211,
+          1190,
+          3061,
+          2040
+        ],
+        "hit": 0,
+        "score": "0x1.8a58480000000p-3"
+      },
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Sikander",
+      "base": {
+        "dimensions": [
+          578,
+          768
+        ],
+        "sha256": "11dcceab5d709a5bd5f5e635e49674e51f22d838ba69e5c32d884384a8c4b1c9"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.1bf4d272f8a3fp+1"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            240,
+            304,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.f59cc6e10af60p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1050,
+          1396
+        ],
+        "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+      },
+      "key": "ontario",
+      "perimeter": {
+        "box": [
+          208,
+          112,
+          288,
+          192
+        ],
+        "hit": 0,
+        "score": "0x1.893dd80000000p-3"
+      },
+      "role": "local_lift",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Sikander",
+      "base": {
+        "dimensions": [
+          578,
+          768
+        ],
+        "sha256": "cc389ae193834d0dcb115eb9c09cc5e085562449772261852c72348d7acc55fb"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.1bf4d272f8a3fp+1"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            240,
+            304,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.e35a5c78a03a8p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1050,
+          1396
+        ],
+        "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+      },
+      "key": "ontario",
+      "perimeter": {
+        "box": [
+          208,
+          112,
+          288,
+          192
+        ],
+        "hit": 0,
+        "score": "0x1.893dd80000000p-3"
+      },
+      "role": "local_retouch",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Sikander",
+      "base": {
+        "dimensions": [
+          578,
+          768
+        ],
+        "sha256": "abb04ef6fe30f8d2d6180feee85e69d92d3a6f346d35514ac008b1f5853f46ae"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.1bf4d272f8a3fp+1"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            240,
+            304,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.f7c82aacf99aep-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1050,
+          1396
+        ],
+        "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+      },
+      "key": "ontario",
+      "perimeter": {
+        "box": [
+          208,
+          112,
+          288,
+          192
+        ],
+        "hit": 0,
+        "score": "0x1.893dd80000000p-3"
+      },
+      "role": "jpeg90",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Sikander",
+      "base": {
+        "dimensions": [
+          578,
+          768
+        ],
+        "sha256": "b4b30182d9f126190c633c38777d330d0bbfb5d26b00f2068e2312a366d4c861"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.1c938f049331fp+1"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            240,
+            304,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.dea13ee62669cp-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1050,
+          1396
+        ],
+        "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+      },
+      "key": "ontario",
+      "perimeter": {
+        "box": [
+          208,
+          112,
+          288,
+          192
+        ],
+        "hit": 0,
+        "score": "0x1.922ff60000000p-3"
+      },
+      "role": "jpeg75",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Sikander",
+      "base": {
+        "dimensions": [
+          578,
+          768
+        ],
+        "sha256": "7fe872559015d8844949488c84fd8871a5a021fc850246ed463ee2753616d298"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.233b5cb16dffap+1"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            240,
+            304,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.f30f0d1a7fca0p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1050,
+          1396
+        ],
+        "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+      },
+      "key": "ontario",
+      "perimeter": {
+        "box": [
+          208,
+          112,
+          288,
+          192
+        ],
+        "hit": 0,
+        "score": "0x1.5f3b780000000p-3"
+      },
+      "role": "tone",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Sikander",
+      "base": {
+        "dimensions": [
+          578,
+          768
+        ],
+        "sha256": "f944042a8576fc26a6dbc1ec61622df17081f4864d75b464ee60a876eaa890c4"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.1c779e229c585p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            240,
+            304,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.f59cc6e10af60p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1050,
+          1396
+        ],
+        "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+      },
+      "key": "ontario",
+      "perimeter": {
+        "box": [
+          208,
+          112,
+          288,
+          192
+        ],
+        "hit": 0,
+        "score": "0x1.8ba26a0000000p-3"
+      },
+      "role": "resize",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Sikander",
+      "base": {
+        "dimensions": [
+          578,
+          768
+        ],
+        "sha256": "a14e0f8af54af1a3293f3519d676bb4a9b30cb4a3eceb993b600d4d0b8eb5ab1"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.1eddff9a282e2p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            240,
+            304,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.f30f0d1a7fca0p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1050,
+          1396
+        ],
+        "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+      },
+      "key": "ontario",
+      "perimeter": {
+        "box": [
+          208,
+          112,
+          288,
+          192
+        ],
+        "hit": 0,
+        "score": "0x1.86dfda0000000p-3"
+      },
+      "role": "sharpen",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Sikander",
+      "base": {
+        "dimensions": [
+          434,
+          576
+        ],
+        "sha256": "0e4a1ccaf57dd81648c2796efc504637b2e4028cad3bf3f1f74692ff10e822f7"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            144,
+            396,
+            204,
+            456
+          ],
+          "hit": 0,
+          "score": "0x1.166ea8eae9182p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            72,
+            216,
+            132,
+            276
+          ],
+          "hit": 0,
+          "score": "0x1.ffb7af35be0a5p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          788,
+          1048
+        ],
+        "sha256": "ec917f91babd2975b1cc272845f8d74a5cf986e4f59511158818f8130d961c7b"
+      },
+      "key": "ontario",
+      "perimeter": {
+        "box": [
+          132,
+          24,
+          216,
+          84
+        ],
+        "hit": 0,
+        "score": "0x1.573e420000000p-3"
+      },
+      "role": "aligned_crop",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Sikander",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "3a7c63cb24ed75888b90354820087cd6679141449d280be7dd8ca6fda02dc6d2"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            96,
+            288,
+            176,
+            368
+          ],
+          "hit": 0,
+          "score": "0x1.16e63e81fc52bp+1"
+        },
+        "orphan_edge": {
+          "box": [
+            240,
+            272,
+            320,
+            352
+          ],
+          "hit": 0,
+          "score": "0x1.df263473cb5dcp-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1396,
+          1050
+        ],
+        "sha256": "cec023551c2723b5a554575f7a8349bf1fc4c87879747b7fda98c92074e34457"
+      },
+      "key": "ontario",
+      "perimeter": {
+        "box": [
+          112,
+          288,
+          192,
+          368
+        ],
+        "hit": 0,
+        "score": "0x1.8cca900000000p-3"
+      },
+      "role": "aligned_rotation",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Sikander",
+      "base": {
+        "dimensions": [
+          578,
+          768
+        ],
+        "sha256": "8da2d247f9dd8c2263e9afbd944f43479a6533f87366737b3be22e33c77e8e16"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.1e546a9defb07p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            320,
+            288,
+            400,
+            368
+          ],
+          "hit": 6400,
+          "score": "0x1.755bd1c945edcp-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1050,
+          1396
+        ],
+        "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+      },
+      "key": "ontario",
+      "perimeter": {
+        "box": [
+          336,
+          288,
+          416,
+          368
+        ],
+        "hit": 6400,
+        "score": "0x1.b3c6f20000000p-2"
+      },
+      "role": "highlight_edit",
+      "truth_pixels": 11236,
+      "truth_sha256": "4c455a5cf7baa066d410a558bfc71b96cc6f084a3a33006a744993a5712d1f12"
+    },
+    {
+      "author": "Sikander",
+      "base": {
+        "dimensions": [
+          578,
+          768
+        ],
+        "sha256": "0d768278ffb857db97ee1951ca55b8bf2f5050fbfe56441dd19aad1eb53644a4"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.1c05b79890ceep+1"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            624,
+            256,
+            704
+          ],
+          "hit": 6400,
+          "score": "0x1.557f24805e122p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1050,
+          1396
+        ],
+        "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+      },
+      "key": "ontario",
+      "perimeter": {
+        "box": [
+          208,
+          112,
+          288,
+          192
+        ],
+        "hit": 0,
+        "score": "0x1.893dd80000000p-3"
+      },
+      "role": "arbitrary_edit",
+      "truth_pixels": 11219,
+      "truth_sha256": "46bf8c344a9718ab7db1503f0cc73c90a996969574240a40f083e61afbdb49df"
+    },
+    {
+      "author": "Sikander",
+      "base": {
+        "dimensions": [
+          578,
+          768
+        ],
+        "sha256": "abb04ef6fe30f8d2d6180feee85e69d92d3a6f346d35514ac008b1f5853f46ae"
+      },
+      "baseline": null,
+      "gain": null,
+      "key": "ontario",
+      "perimeter": null,
+      "role": "no_gainmap",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Lukas Beck",
+      "base": {
+        "dimensions": [
+          4000,
+          3000
+        ],
+        "sha256": "0db0601f8c63673a64e1c0955bfec59f187f5b8361df90f7c2cc4c8d48c5a6e2"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            667,
+            1917,
+            1250,
+            2333
+          ],
+          "hit": 0,
+          "score": "0x1.4953a6479b3ddp-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1000,
+          750
+        ],
+        "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+      },
+      "key": "turbine",
+      "perimeter": {
+        "box": [
+          1750,
+          2417,
+          2167,
+          2833
+        ],
+        "hit": 0,
+        "score": "0x1.d60d800000000p-3"
+      },
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Lukas Beck",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "5de7ed7dbb613b89b9586137d62cfce76dc5d2fea9b40b2e37f5fbdcdff79029"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            128,
+            368,
+            240,
+            448
+          ],
+          "hit": 0,
+          "score": "0x1.4778a2f551dedp-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1000,
+          750
+        ],
+        "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+      },
+      "key": "turbine",
+      "perimeter": {
+        "box": [
+          336,
+          464,
+          416,
+          544
+        ],
+        "hit": 0,
+        "score": "0x1.cf981e0000000p-3"
+      },
+      "role": "local_lift",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Lukas Beck",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "b93fe59df654d3f8a3236f9323e362b36ede820a3a7ac87a0db2940fbfbce993"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            176,
+            576,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.15b2d3e320b7fp+1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1000,
+          750
+        ],
+        "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+      },
+      "key": "turbine",
+      "perimeter": {
+        "box": [
+          448,
+          192,
+          560,
+          304
+        ],
+        "hit": 0,
+        "score": "0x1.bff7be0000000p-2"
+      },
+      "role": "local_retouch",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Lukas Beck",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "36adf4c468694886c8882d5a4ffd81ed1e7a9eb07f2554bb7ea524d97e430d18"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            128,
+            368,
+            240,
+            448
+          ],
+          "hit": 0,
+          "score": "0x1.477898c0a8e29p-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1000,
+          750
+        ],
+        "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+      },
+      "key": "turbine",
+      "perimeter": {
+        "box": [
+          336,
+          464,
+          416,
+          544
+        ],
+        "hit": 0,
+        "score": "0x1.cf981e0000000p-3"
+      },
+      "role": "jpeg90",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Lukas Beck",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "bb93e27fcc3f87641720257631b31984da16fcebab0c40b659ca20487b300b18"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            128,
+            368,
+            240,
+            448
+          ],
+          "hit": 0,
+          "score": "0x1.4872f0c651fecp-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1000,
+          750
+        ],
+        "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+      },
+      "key": "turbine",
+      "perimeter": {
+        "box": [
+          336,
+          464,
+          416,
+          544
+        ],
+        "hit": 0,
+        "score": "0x1.ce79920000000p-3"
+      },
+      "role": "jpeg75",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Lukas Beck",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "499369e05f1949a2af6fa68ecd1c10bf0b64df5ac8f6d282516ec37e2fe45c95"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            128,
+            368,
+            240,
+            448
+          ],
+          "hit": 0,
+          "score": "0x1.2ac41cd1acbd5p-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1000,
+          750
+        ],
+        "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+      },
+      "key": "turbine",
+      "perimeter": {
+        "box": [
+          336,
+          464,
+          416,
+          544
+        ],
+        "hit": 0,
+        "score": "0x1.8b5d080000000p-3"
+      },
+      "role": "tone",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Lukas Beck",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "73eb47b9234f9517cd7a24d2f59a12575da906059fbb76dab526760b50a57c24"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            128,
+            368,
+            240,
+            448
+          ],
+          "hit": 0,
+          "score": "0x1.49ee227685ce7p-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1000,
+          750
+        ],
+        "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+      },
+      "key": "turbine",
+      "perimeter": {
+        "box": [
+          336,
+          464,
+          416,
+          544
+        ],
+        "hit": 0,
+        "score": "0x1.d1f8260000000p-3"
+      },
+      "role": "resize",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Lukas Beck",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "a1ef54d46430f84ea771ad59e329f975928cd7a9d0918377d6989eb0fb7ad02e"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            128,
+            368,
+            240,
+            448
+          ],
+          "hit": 0,
+          "score": "0x1.4907f78f1f0abp-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1000,
+          750
+        ],
+        "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+      },
+      "key": "turbine",
+      "perimeter": {
+        "box": [
+          336,
+          464,
+          416,
+          544
+        ],
+        "hit": 0,
+        "score": "0x1.d6763e0000000p-3"
+      },
+      "role": "sharpen",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Lukas Beck",
+      "base": {
+        "dimensions": [
+          576,
+          432
+        ],
+        "sha256": "b0a4925a5f6841a248ff993145e3f30de6b91f524433de083ea952d6b23598d7"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            36,
+            288,
+            96,
+            348
+          ],
+          "hit": 0,
+          "score": "0x1.e8773215f94b5p-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          750,
+          562
+        ],
+        "sha256": "8587f058ea1b59f619c6e75edfa4d379697b7ff253bf2dcd85596e094e1bb6fa"
+      },
+      "key": "turbine",
+      "perimeter": {
+        "box": [
+          36,
+          288,
+          96,
+          348
+        ],
+        "hit": 0,
+        "score": "0x1.2b0f260000000p-4"
+      },
+      "role": "aligned_crop",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Lukas Beck",
+      "base": {
+        "dimensions": [
+          576,
+          768
+        ],
+        "sha256": "a53d0433697454e49f4c69763f357512d6d77a69022759cf87b97a1c7c5c4125"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            368,
+            528,
+            448,
+            640
+          ],
+          "hit": 0,
+          "score": "0x1.483950abf2d8fp-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          750,
+          1000
+        ],
+        "sha256": "a2fc184abecb30879ddb5764c62440d585797374ba4291ba7ea67b1ff2143456"
+      },
+      "key": "turbine",
+      "perimeter": {
+        "box": [
+          464,
+          352,
+          544,
+          432
+        ],
+        "hit": 0,
+        "score": "0x1.ecf4d80000000p-3"
+      },
+      "role": "aligned_rotation",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Lukas Beck",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "363c384c8ed8c7ba458055099c888bf983488a8b8a95a199c57c6c4d8ec61462"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            304,
+            64,
+            448,
+            208
+          ],
+          "hit": 20164,
+          "score": "0x1.361093f16aecbp+1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1000,
+          750
+        ],
+        "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+      },
+      "key": "turbine",
+      "perimeter": {
+        "box": [
+          320,
+          80,
+          432,
+          192
+        ],
+        "hit": 12544,
+        "score": "0x1.32e45e0000000p-1"
+      },
+      "role": "highlight_edit",
+      "truth_pixels": 20164,
+      "truth_sha256": "a34420b24e175c4cbb1e46406f2aa8c6f410854c45ac262d1433c7193a9629bb"
+    },
+    {
+      "author": "Lukas Beck",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "94b2a7817bb463ae538aae6e5217baa7f9fd703a9468837ef223f7a5ff73b881"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            176,
+            576,
+            320
+          ],
+          "hit": 20162,
+          "score": "0x1.2280084b76488p+1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1000,
+          750
+        ],
+        "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+      },
+      "key": "turbine",
+      "perimeter": {
+        "box": [
+          448,
+          192,
+          560,
+          304
+        ],
+        "hit": 12544,
+        "score": "0x1.204ac60000000p-1"
+      },
+      "role": "arbitrary_edit",
+      "truth_pixels": 20162,
+      "truth_sha256": "13f212d1396851027eb4db8b085681f0df53ac810bced24f1365de97647356a6"
+    },
+    {
+      "author": "Lukas Beck",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "36adf4c468694886c8882d5a4ffd81ed1e7a9eb07f2554bb7ea524d97e430d18"
+      },
+      "baseline": null,
+      "gain": null,
+      "key": "turbine",
+      "perimeter": null,
+      "role": "no_gainmap",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Lukas Beck",
+      "base": null,
+      "baseline": null,
+      "gain": null,
+      "key": "berlin",
+      "perimeter": null,
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Parpan05",
+      "base": {
+        "dimensions": [
+          4032,
+          3024
+        ],
+        "sha256": "38f237b3db7d1386e85bcc4ab55e1cb4290cac988d11ad30c3414670707ee8d5"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            1596,
+            2352,
+            2016,
+            2772
+          ],
+          "hit": 0,
+          "score": "0x1.bf67d04ab77d4p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            924,
+            1512,
+            1344,
+            1932
+          ],
+          "hit": 0,
+          "score": "0x1.0fbdcb670c6a8p-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+      },
+      "key": "ants",
+      "perimeter": {
+        "box": [
+          420,
+          504,
+          840,
+          1092
+        ],
+        "hit": 0,
+        "score": "0x1.e586500000000p-4"
+      },
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Parpan05",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "18241196f6e8f43810e94c011727ece6561b898d7a0c491537720f08c8753875"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            304,
+            448,
+            384,
+            528
+          ],
+          "hit": 0,
+          "score": "0x1.03b24a05414b0p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            288,
+            256,
+            368
+          ],
+          "hit": 0,
+          "score": "0x1.e9226e1fe3262p-4"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+      },
+      "key": "ants",
+      "perimeter": {
+        "box": [
+          80,
+          96,
+          160,
+          208
+        ],
+        "hit": 0,
+        "score": "0x1.e9db660000000p-4"
+      },
+      "role": "local_lift",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Parpan05",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "3b5e64f598bd5faba2a7195799b6bfbd5493af1e3bca2282da8789e811a73570"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            176,
+            320,
+            320,
+            464
+          ],
+          "hit": 0,
+          "score": "0x1.a1ddd0599ca86p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            288,
+            256,
+            368
+          ],
+          "hit": 0,
+          "score": "0x1.98abba353d3a7p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+      },
+      "key": "ants",
+      "perimeter": {
+        "box": [
+          176,
+          352,
+          320,
+          464
+        ],
+        "hit": 0,
+        "score": "0x1.3a39720000000p-3"
+      },
+      "role": "local_retouch",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Parpan05",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "4f9fd1a935ba78f9753e94301c57b15eec81b48496f11c06b87e82b03d9731c4"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            304,
+            448,
+            384,
+            528
+          ],
+          "hit": 0,
+          "score": "0x1.bcd23d9c93048p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            288,
+            256,
+            368
+          ],
+          "hit": 0,
+          "score": "0x1.0fbdcb670c6a8p-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+      },
+      "key": "ants",
+      "perimeter": {
+        "box": [
+          80,
+          96,
+          160,
+          208
+        ],
+        "hit": 0,
+        "score": "0x1.e9db660000000p-4"
+      },
+      "role": "jpeg90",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Parpan05",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "d5c23b191c9d060c41c43d712da4b29af91f0aa366ba933e8ec2aec3b8a18b39"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            304,
+            448,
+            384,
+            528
+          ],
+          "hit": 0,
+          "score": "0x1.b538bcd9ddd20p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            288,
+            256,
+            368
+          ],
+          "hit": 0,
+          "score": "0x1.0fbdcb670c6a8p-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+      },
+      "key": "ants",
+      "perimeter": {
+        "box": [
+          80,
+          96,
+          160,
+          208
+        ],
+        "hit": 0,
+        "score": "0x1.ef06a00000000p-4"
+      },
+      "role": "jpeg75",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Parpan05",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "f644d568ae02a7687559296adcb418ed28a2a8147cbed81054197613153e83a9"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            304,
+            448,
+            384,
+            528
+          ],
+          "hit": 0,
+          "score": "0x1.c59fd3440c6f0p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            288,
+            256,
+            368
+          ],
+          "hit": 0,
+          "score": "0x1.0fbdcb670c6a8p-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+      },
+      "key": "ants",
+      "perimeter": {
+        "box": [
+          80,
+          96,
+          160,
+          208
+        ],
+        "hit": 0,
+        "score": "0x1.a0f4060000000p-4"
+      },
+      "role": "tone",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Parpan05",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "22fba9da923ca342ed198bfa0b9cc4797eef6868e7092d8f6beaaa98951f66f3"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            304,
+            448,
+            384,
+            528
+          ],
+          "hit": 0,
+          "score": "0x1.c3b6340cd1ad4p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            288,
+            256,
+            368
+          ],
+          "hit": 0,
+          "score": "0x1.0fbdcb670c6a8p-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+      },
+      "key": "ants",
+      "perimeter": {
+        "box": [
+          80,
+          96,
+          160,
+          208
+        ],
+        "hit": 0,
+        "score": "0x1.d0ac160000000p-4"
+      },
+      "role": "resize",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Parpan05",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "16c5e76fbdd8dd59e4e79e8b33fdef18d580204ff9919921d717b4afa5cc274b"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            304,
+            448,
+            384,
+            528
+          ],
+          "hit": 0,
+          "score": "0x1.979233e3c5658p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            288,
+            256,
+            368
+          ],
+          "hit": 0,
+          "score": "0x1.0fbdcb670c6a8p-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+      },
+      "key": "ants",
+      "perimeter": {
+        "box": [
+          80,
+          96,
+          160,
+          208
+        ],
+        "hit": 0,
+        "score": "0x1.d712800000000p-4"
+      },
+      "role": "sharpen",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Parpan05",
+      "base": {
+        "dimensions": [
+          576,
+          432
+        ],
+        "sha256": "d4974533a60711c637b1fee3e3ca29b1a8fe1a60ce0bde05f63021f15e675b66"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            336,
+            336,
+            396,
+            396
+          ],
+          "hit": 0,
+          "score": "0x1.0fe596ee6c856p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            84,
+            204,
+            144,
+            288
+          ],
+          "hit": 0,
+          "score": "0x1.1dc47711dc477p-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1512,
+          1134
+        ],
+        "sha256": "0d2ade146f270701356f946158c61ef429badf8c35c6e58ceb220cb2007f237a"
+      },
+      "key": "ants",
+      "perimeter": {
+        "box": [
+          132,
+          324,
+          192,
+          384
+        ],
+        "hit": 0,
+        "score": "0x1.17f35a0000000p-4"
+      },
+      "role": "aligned_crop",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Parpan05",
+      "base": {
+        "dimensions": [
+          576,
+          768
+        ],
+        "sha256": "a7888841583917e4a1ed7ad52a6f4d0afc59e9fd53ce1b6f1e4c75d897d1e1ad"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            448,
+            384,
+            528,
+            464
+          ],
+          "hit": 0,
+          "score": "0x1.c5b1e3668df54p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            288,
+            512,
+            368,
+            592
+          ],
+          "hit": 0,
+          "score": "0x1.df1df5659954bp-4"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1512,
+          2016
+        ],
+        "sha256": "42e244476405b2277ea4552a61801a9c37ab27cd664d02a10feb80043e9b8d5f"
+      },
+      "key": "ants",
+      "perimeter": {
+        "box": [
+          48,
+          208,
+          160,
+          288
+        ],
+        "hit": 0,
+        "score": "0x1.5793000000000p-4"
+      },
+      "role": "aligned_rotation",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Parpan05",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "e2edc28eba4a2919be665e2edaf2bfc24fef8d6b32d6ca987c1eb34a987e444d"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            64,
+            352,
+            208,
+            496
+          ],
+          "hit": 20153,
+          "score": "0x1.07a3ae2466b5fp+1"
+        },
+        "orphan_edge": {
+          "box": [
+            64,
+            352,
+            208,
+            496
+          ],
+          "hit": 20153,
+          "score": "0x1.72b015c91355ap-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+      },
+      "key": "ants",
+      "perimeter": {
+        "box": [
+          80,
+          368,
+          192,
+          480
+        ],
+        "hit": 12544,
+        "score": "0x1.adfa800000000p-2"
+      },
+      "role": "highlight_edit",
+      "truth_pixels": 20153,
+      "truth_sha256": "244f4236bc1b6a306447615c9224cee1b5f99270dca3ef8e310d2bba4c779762"
+    },
+    {
+      "author": "Parpan05",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "d6b1d2c311003c36bea0392875eb62b28428b2e201686e3a0c789adb55ae0834"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            176,
+            320,
+            320,
+            464
+          ],
+          "hit": 20161,
+          "score": "0x1.f44da6902c9c6p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            336,
+            320,
+            448
+          ],
+          "hit": 15904,
+          "score": "0x1.c88b97c88b97dp-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+      },
+      "key": "ants",
+      "perimeter": {
+        "box": [
+          176,
+          352,
+          320,
+          464
+        ],
+        "hit": 15761,
+        "score": "0x1.c1c54a0000000p-3"
+      },
+      "role": "arbitrary_edit",
+      "truth_pixels": 20161,
+      "truth_sha256": "0b6ad36431199f13b8fd324ada7ba3db0039c07848ed3a648d9df1df37141c99"
+    },
+    {
+      "author": "Parpan05",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "4f9fd1a935ba78f9753e94301c57b15eec81b48496f11c06b87e82b03d9731c4"
+      },
+      "baseline": null,
+      "gain": null,
+      "key": "ants",
+      "perimeter": null,
+      "role": "no_gainmap",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Chabe01",
+      "base": {
+        "dimensions": [
+          4032,
+          3024
+        ],
+        "sha256": "95480eacd2cb2a0043105d9cdc265baa8ff5f6e36a3b14013d2cdd51057f1cf8"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            2016,
+            1344,
+            2940,
+            2100
+          ],
+          "hit": 0,
+          "score": "0x1.40de8d9f92264p+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+      },
+      "key": "cable",
+      "perimeter": {
+        "box": [
+          2016,
+          1008,
+          2436,
+          1428
+        ],
+        "hit": 0,
+        "score": "0x1.d05c660000000p-4"
+      },
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Chabe01",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "fd6518af04987c4ad10035d9da64216560cd0f5a427c2ab5b2ac57c2b074517f"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            384,
+            256,
+            560,
+            400
+          ],
+          "hit": 0,
+          "score": "0x1.421db22be7214p+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+      },
+      "key": "cable",
+      "perimeter": {
+        "box": [
+          384,
+          192,
+          464,
+          272
+        ],
+        "hit": 0,
+        "score": "0x1.ea8bf00000000p-4"
+      },
+      "role": "local_lift",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Chabe01",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "53d5782ffcda583946cc02380e4d76e7cf01d53acd2a4507fb53e09b8fab3d18"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            384,
+            256,
+            560,
+            400
+          ],
+          "hit": 0,
+          "score": "0x1.421db22be7214p+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+      },
+      "key": "cable",
+      "perimeter": {
+        "box": [
+          384,
+          192,
+          464,
+          272
+        ],
+        "hit": 0,
+        "score": "0x1.ea8bf00000000p-4"
+      },
+      "role": "local_retouch",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Chabe01",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "95f16e477c1c6e78ba448e035215f5a528e4194a30988dcab46c492f35035a10"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            384,
+            256,
+            560,
+            400
+          ],
+          "hit": 0,
+          "score": "0x1.421db22be7214p+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+      },
+      "key": "cable",
+      "perimeter": {
+        "box": [
+          384,
+          192,
+          464,
+          272
+        ],
+        "hit": 0,
+        "score": "0x1.ea8bf00000000p-4"
+      },
+      "role": "jpeg90",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Chabe01",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "0b0138a517ffe2cace9a44547c8cf2a29f3ccdf83c651b7583b83fc410604706"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            384,
+            256,
+            560,
+            400
+          ],
+          "hit": 0,
+          "score": "0x1.41f2bb08710ecp+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+      },
+      "key": "cable",
+      "perimeter": {
+        "box": [
+          384,
+          192,
+          464,
+          272
+        ],
+        "hit": 0,
+        "score": "0x1.f7c7d60000000p-4"
+      },
+      "role": "jpeg75",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Chabe01",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "6a3ce014f7dfb0165a0d91fd0cd5bdffa6976180955d6cbbe359c44de4944cb1"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            384,
+            256,
+            560,
+            400
+          ],
+          "hit": 0,
+          "score": "0x1.1cc79bb9e61e5p+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+      },
+      "key": "cable",
+      "perimeter": {
+        "box": [
+          384,
+          192,
+          464,
+          272
+        ],
+        "hit": 0,
+        "score": "0x1.980ed00000000p-4"
+      },
+      "role": "tone",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Chabe01",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "8389ece3959b9cc8c0cd8d75a446d5fce35a892bafd0b856b650196960c2a7b4"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            384,
+            256,
+            560,
+            400
+          ],
+          "hit": 0,
+          "score": "0x1.4144a45e089d2p+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+      },
+      "key": "cable",
+      "perimeter": {
+        "box": [
+          384,
+          192,
+          464,
+          272
+        ],
+        "hit": 0,
+        "score": "0x1.ef24700000000p-4"
+      },
+      "role": "resize",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Chabe01",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "6f21cd0dd6fb9931c518ad7e8057beb5e19bc7cd35452e7434868cbdb696d9be"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            384,
+            256,
+            560,
+            400
+          ],
+          "hit": 0,
+          "score": "0x1.41af0c18bceb6p+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+      },
+      "key": "cable",
+      "perimeter": {
+        "box": [
+          384,
+          192,
+          464,
+          272
+        ],
+        "hit": 0,
+        "score": "0x1.e9dca60000000p-4"
+      },
+      "role": "sharpen",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Chabe01",
+      "base": {
+        "dimensions": [
+          576,
+          432
+        ],
+        "sha256": "ab5d2b024a3d9eda35458916881d8d6209aa9070c81a671f52156465233abaf1"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            300,
+            264,
+            432,
+            372
+          ],
+          "hit": 0,
+          "score": "0x1.bd0c041317d4cp-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1512,
+          1134
+        ],
+        "sha256": "dd37f40a4e29b487db5a35e0f639f2ff7a00f6b6d0051cccf46aa1b8692d8f5a"
+      },
+      "key": "cable",
+      "perimeter": {
+        "box": [
+          288,
+          120,
+          372,
+          204
+        ],
+        "hit": 0,
+        "score": "0x1.75764a0000000p-4"
+      },
+      "role": "aligned_crop",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Chabe01",
+      "base": {
+        "dimensions": [
+          576,
+          768
+        ],
+        "sha256": "caaf5b86aab5962a12f847c122f83e1b76acaade10fb8d95acae54c79b5ffa83"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            256,
+            208,
+            400,
+            384
+          ],
+          "hit": 0,
+          "score": "0x1.41c05d03f716ap+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1512,
+          2016
+        ],
+        "sha256": "472a5d4e57fb42499f05ccd287874a2fa139e3e074f7a38570a1317b9350ddb7"
+      },
+      "key": "cable",
+      "perimeter": {
+        "box": [
+          192,
+          304,
+          272,
+          384
+        ],
+        "hit": 0,
+        "score": "0x1.aa37500000000p-4"
+      },
+      "role": "aligned_rotation",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Chabe01",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "baddffd5b4f25993efd6b8d2d587f35f644bde8aceb4f7f65051dd9d3e8e28c6"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            160,
+            64,
+            304,
+            208
+          ],
+          "hit": 20160,
+          "score": "0x1.42a9cd74b8ff0p+1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+      },
+      "key": "cable",
+      "perimeter": {
+        "box": [
+          176,
+          80,
+          288,
+          192
+        ],
+        "hit": 12544,
+        "score": "0x1.4035400000000p-1"
+      },
+      "role": "highlight_edit",
+      "truth_pixels": 20160,
+      "truth_sha256": "ab889870cf550e430d0691a75a7787116b8fd7606bb6776c868ad76ab54cfb0b"
+    },
+    {
+      "author": "Chabe01",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "aa908e9585fbaa6c5c20f53ef5a02876be0bcf25e6eb75cc97b9d5bbcd1114e8"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            384,
+            256,
+            560,
+            400
+          ],
+          "hit": 1440,
+          "score": "0x1.421db22be7214p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            320,
+            400,
+            432,
+            480
+          ],
+          "hit": 7556,
+          "score": "0x1.892c8f4a44267p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+      },
+      "key": "cable",
+      "perimeter": {
+        "box": [
+          384,
+          192,
+          464,
+          272
+        ],
+        "hit": 0,
+        "score": "0x1.ea8bf00000000p-4"
+      },
+      "role": "arbitrary_edit",
+      "truth_pixels": 19433,
+      "truth_sha256": "b4374cc5e9380823ef66f23ec23d0e5c1e878520887d76850b2e983ca5bab13e"
+    },
+    {
+      "author": "Chabe01",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "95f16e477c1c6e78ba448e035215f5a528e4194a30988dcab46c492f35035a10"
+      },
+      "baseline": null,
+      "gain": null,
+      "key": "cable",
+      "perimeter": null,
+      "role": "no_gainmap",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Seasider53",
+      "base": null,
+      "baseline": null,
+      "gain": null,
+      "key": "newman",
+      "perimeter": null,
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          5712,
+          4284
+        ],
+        "sha256": "e04889a977d70624930ecbe273475eb0a638abd399404d5099e42844a576cb62"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            3213,
+            1428,
+            4046,
+            2023
+          ],
+          "hit": 0,
+          "score": "0x1.474d3a7ae1fb4p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            2023,
+            2261,
+            2618,
+            2856
+          ],
+          "hit": 0,
+          "score": "0x1.790d86e0d5db9p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2856,
+          2142
+        ],
+        "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+      },
+      "key": "shovel",
+      "perimeter": {
+        "box": [
+          3451,
+          952,
+          4284,
+          1547
+        ],
+        "hit": 0,
+        "score": "0x1.b2ba5e0000000p-5"
+      },
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "a64d4ea2d736a293f9b25a6dd2ceaf5ee1d128cb9d3292c2e775ef0f8c8aa077"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            192,
+            544,
+            272
+          ],
+          "hit": 0,
+          "score": "0x1.35f190a93c7b5p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            304,
+            352,
+            384
+          ],
+          "hit": 0,
+          "score": "0x1.7127109ab2a0dp-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2856,
+          2142
+        ],
+        "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+      },
+      "key": "shovel",
+      "perimeter": {
+        "box": [
+          400,
+          432,
+          480,
+          512
+        ],
+        "hit": 0,
+        "score": "0x1.b0dd360000000p-5"
+      },
+      "role": "local_lift",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "dc3f9dddb7b70fe0b5b860753fd361c8c0a1ee85306d74cd1b7290ba3cdba2d4"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            128,
+            64,
+            272,
+            208
+          ],
+          "hit": 0,
+          "score": "0x1.c64de2d010ac4p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            192,
+            128,
+            272,
+            208
+          ],
+          "hit": 0,
+          "score": "0x1.9585468d8c9cbp-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2856,
+          2142
+        ],
+        "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+      },
+      "key": "shovel",
+      "perimeter": {
+        "box": [
+          144,
+          80,
+          256,
+          160
+        ],
+        "hit": 0,
+        "score": "0x1.7e290a0000000p-3"
+      },
+      "role": "local_retouch",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "7d60512189ff170920218692215a1fd8f2abcbd645ffd63cc5049c50834e0d42"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            192,
+            544,
+            272
+          ],
+          "hit": 0,
+          "score": "0x1.472dd5c972a9fp-2"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            304,
+            352,
+            384
+          ],
+          "hit": 0,
+          "score": "0x1.790d86e0d5db9p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2856,
+          2142
+        ],
+        "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+      },
+      "key": "shovel",
+      "perimeter": {
+        "box": [
+          400,
+          432,
+          480,
+          512
+        ],
+        "hit": 0,
+        "score": "0x1.b0dd360000000p-5"
+      },
+      "role": "jpeg90",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "6afdd9bfd9de5f6f6535f5cbf18b227e456bd1631c9f4bfc59f8857b02066d58"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            192,
+            544,
+            272
+          ],
+          "hit": 0,
+          "score": "0x1.2ceb064939a15p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            304,
+            352,
+            384
+          ],
+          "hit": 0,
+          "score": "0x1.65a785359c212p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2856,
+          2142
+        ],
+        "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+      },
+      "key": "shovel",
+      "perimeter": {
+        "box": [
+          464,
+          128,
+          576,
+          208
+        ],
+        "hit": 0,
+        "score": "0x1.b6e1c60000000p-5"
+      },
+      "role": "jpeg75",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "eb369d95e3baa467ae4c08c9f84390e53b54e5b8e685bc4b11fb8cf79d05c9a6"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            192,
+            544,
+            272
+          ],
+          "hit": 0,
+          "score": "0x1.3fa01ac30d5c6p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            304,
+            352,
+            384
+          ],
+          "hit": 0,
+          "score": "0x1.6f44f76347ff7p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2856,
+          2142
+        ],
+        "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+      },
+      "key": "shovel",
+      "perimeter": {
+        "box": [
+          464,
+          128,
+          576,
+          208
+        ],
+        "hit": 0,
+        "score": "0x1.97a5c20000000p-5"
+      },
+      "role": "tone",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "d1209278543412a83d2035a303a4aeb527b7bf5211b5cae9eb8b5df2c3f8d1a8"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            192,
+            544,
+            272
+          ],
+          "hit": 0,
+          "score": "0x1.46b76b1c00af8p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            304,
+            352,
+            384
+          ],
+          "hit": 0,
+          "score": "0x1.6f7014b329fd4p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2856,
+          2142
+        ],
+        "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+      },
+      "key": "shovel",
+      "perimeter": {
+        "box": [
+          400,
+          432,
+          480,
+          512
+        ],
+        "hit": 0,
+        "score": "0x1.b62d000000000p-5"
+      },
+      "role": "resize",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "306d9a0eb9aa904f4195ef8c248979b3aa2af7934b3ecee8e634d7a2fb5840d8"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            192,
+            544,
+            272
+          ],
+          "hit": 0,
+          "score": "0x1.2fe822d2ca90bp-2"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            304,
+            352,
+            384
+          ],
+          "hit": 0,
+          "score": "0x1.790d86e0d5db9p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2856,
+          2142
+        ],
+        "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+      },
+      "key": "shovel",
+      "perimeter": {
+        "box": [
+          400,
+          432,
+          480,
+          512
+        ],
+        "hit": 0,
+        "score": "0x1.b5a5200000000p-5"
+      },
+      "role": "sharpen",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          576,
+          432
+        ],
+        "sha256": "72e60ac631dff3664563eab9b08e40b499aa3e864e8282f80f19df6b96d92e8c"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            132,
+            492,
+            192
+          ],
+          "hit": 0,
+          "score": "0x1.d79afe0cf8155p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            276,
+            204,
+            336
+          ],
+          "hit": 0,
+          "score": "0x1.64bd30a6efaa1p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2142,
+          1606
+        ],
+        "sha256": "5d5d63812fd2d8f4855c4547024e3b57944de405f1b615737fb11653be432413"
+      },
+      "key": "shovel",
+      "perimeter": {
+        "box": [
+          396,
+          264,
+          456,
+          324
+        ],
+        "hit": 0,
+        "score": "0x1.f227ba0000000p-4"
+      },
+      "role": "aligned_crop",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          576,
+          768
+        ],
+        "sha256": "0c1727ebbe639654f53fb9354e0e7bb0d44d22fcd5d47e609682e1ad70260ae5"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            224,
+            272,
+            336
+          ],
+          "hit": 0,
+          "score": "0x1.468289403054ap-2"
+        },
+        "orphan_edge": {
+          "box": [
+            304,
+            416,
+            384,
+            496
+          ],
+          "hit": 0,
+          "score": "0x1.7c44c18b688a8p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2142,
+          2856
+        ],
+        "sha256": "164fa31cd65de7ef7bbb3028ffddacf2552cef26406b8da5a19a54c5968920cb"
+      },
+      "key": "shovel",
+      "perimeter": {
+        "box": [
+          432,
+          288,
+          512,
+          368
+        ],
+        "hit": 0,
+        "score": "0x1.aef2f60000000p-5"
+      },
+      "role": "aligned_rotation",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "2ad75722910f07245a486db20b52780eefe33a4921c016b125f2104c4345890b"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            224,
+            304,
+            368,
+            448
+          ],
+          "hit": 20154,
+          "score": "0x1.266e90b91967ap+1"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            320,
+            368,
+            432
+          ],
+          "hit": 15900,
+          "score": "0x1.9f692e3c13780p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2856,
+          2142
+        ],
+        "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+      },
+      "key": "shovel",
+      "perimeter": {
+        "box": [
+          240,
+          336,
+          352,
+          448
+        ],
+        "hit": 12432,
+        "score": "0x1.0d375a0000000p-2"
+      },
+      "role": "highlight_edit",
+      "truth_pixels": 20154,
+      "truth_sha256": "9990fef659cabba4e497d49cc811a89d18bd05aa3f4d3651296a66c12c12c86b"
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "d3a19d6c32a7fd7c6062e9d4795560e78f62ac0d94ae877e5ad738f0989a7397"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            128,
+            64,
+            272,
+            208
+          ],
+          "hit": 20142,
+          "score": "0x1.ff0ab133934b6p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            208,
+            80,
+            288,
+            160
+          ],
+          "hit": 5038,
+          "score": "0x1.961158b0d2655p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2856,
+          2142
+        ],
+        "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+      },
+      "key": "shovel",
+      "perimeter": {
+        "box": [
+          144,
+          80,
+          256,
+          160
+        ],
+        "hit": 8960,
+        "score": "0x1.a553100000000p-2"
+      },
+      "role": "arbitrary_edit",
+      "truth_pixels": 20142,
+      "truth_sha256": "696fee33dc09048a52ce6708163e0ebd97b2e5302faa8ef1bce300662e198e1e"
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "7d60512189ff170920218692215a1fd8f2abcbd645ffd63cc5049c50834e0d42"
+      },
+      "baseline": null,
+      "gain": null,
+      "key": "shovel",
+      "perimeter": null,
+      "role": "no_gainmap",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          4032,
+          3024
+        ],
+        "sha256": "1484c51aa7aa1a181e9bddb382fa4467eb0b5f659d640e3266192acd43448c63"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            504,
+            1260,
+            924,
+            1680
+          ],
+          "hit": 0,
+          "score": "0x1.9f19a1978851bp-3"
+        },
+        "orphan_edge": {
+          "box": [
+            1428,
+            504,
+            2016,
+            1092
+          ],
+          "hit": 0,
+          "score": "0x1.6dbc882d6f122p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+      },
+      "key": "nests",
+      "perimeter": {
+        "box": [
+          1344,
+          2352,
+          1764,
+          2772
+        ],
+        "hit": 0,
+        "score": "0x1.6d70f80000000p-3"
+      },
+      "role": "original",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "ee763d44efe29959235fd56568d9c7b35232fbacf8eab463f8bd79b583580451"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            96,
+            240,
+            176,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.954427f3270bep-3"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            96,
+            384,
+            208
+          ],
+          "hit": 0,
+          "score": "0x1.771bd66a130e1p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+      },
+      "key": "nests",
+      "perimeter": {
+        "box": [
+          256,
+          448,
+          336,
+          528
+        ],
+        "hit": 0,
+        "score": "0x1.732fd80000000p-3"
+      },
+      "role": "local_lift",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "d036d0fc7e319b6195bd1a15562c6343d85271f48d3d0b72cbb528b79269dbcb"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            304,
+            336,
+            416
+          ],
+          "hit": 0,
+          "score": "0x1.bdbc5e3a1bfddp-1"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            96,
+            384,
+            208
+          ],
+          "hit": 0,
+          "score": "0x1.5b5550096f320p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+      },
+      "key": "nests",
+      "perimeter": {
+        "box": [
+          256,
+          448,
+          336,
+          528
+        ],
+        "hit": 0,
+        "score": "0x1.70331a0000000p-3"
+      },
+      "role": "local_retouch",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "43f5790165a8c1796f2110a933faa0136bc59500581fbf7430d7e9d7f9809003"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            96,
+            240,
+            176,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.9e2e483db02dap-3"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            96,
+            384,
+            208
+          ],
+          "hit": 0,
+          "score": "0x1.49cc8ba73e198p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+      },
+      "key": "nests",
+      "perimeter": {
+        "box": [
+          256,
+          448,
+          336,
+          528
+        ],
+        "hit": 0,
+        "score": "0x1.735f3a0000000p-3"
+      },
+      "role": "jpeg90",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "a1b48f1651a0a5ccc6190ceb132de8bc33636190ea72282bea8de0e858e912cc"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            64,
+            208,
+            144,
+            288
+          ],
+          "hit": 0,
+          "score": "0x1.ac69064281178p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            96,
+            384,
+            208
+          ],
+          "hit": 0,
+          "score": "0x1.771bd66a130e1p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+      },
+      "key": "nests",
+      "perimeter": {
+        "box": [
+          256,
+          448,
+          336,
+          528
+        ],
+        "hit": 0,
+        "score": "0x1.71f3560000000p-3"
+      },
+      "role": "jpeg75",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "b8542c19542b8aa5095a33b00ca29927a9ef95aa30557d5f4ecefa391cccf4df"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            96,
+            240,
+            176,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.a436aae1337dcp-3"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            96,
+            384,
+            208
+          ],
+          "hit": 0,
+          "score": "0x1.5abe5cea7e4f0p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+      },
+      "key": "nests",
+      "perimeter": {
+        "box": [
+          256,
+          448,
+          336,
+          528
+        ],
+        "hit": 0,
+        "score": "0x1.4f62360000000p-3"
+      },
+      "role": "tone",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "191cc6b23f77f533edd16bae7b9659dcd5ba2dd8ea08a91951200ca2598045b6"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            64,
+            208,
+            144,
+            288
+          ],
+          "hit": 0,
+          "score": "0x1.aa92bd734c29ap-3"
+        },
+        "orphan_edge": {
+          "box": [
+            256,
+            96,
+            336,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.3bd3bf15a02b3p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+      },
+      "key": "nests",
+      "perimeter": {
+        "box": [
+          256,
+          448,
+          336,
+          528
+        ],
+        "hit": 0,
+        "score": "0x1.72fa860000000p-3"
+      },
+      "role": "resize",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "b52bb1cf9a797a75505ec1bc0a4358b795a2fd01b300e17f3419d44bf629e2bb"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            96,
+            240,
+            176,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.91e6e7f132e1ap-3"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            96,
+            384,
+            208
+          ],
+          "hit": 0,
+          "score": "0x1.771bd66a130e1p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+      },
+      "key": "nests",
+      "perimeter": {
+        "box": [
+          256,
+          448,
+          336,
+          528
+        ],
+        "hit": 0,
+        "score": "0x1.66d27a0000000p-3"
+      },
+      "role": "sharpen",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          576,
+          432
+        ],
+        "sha256": "1b87500bec612773965db8ff5ebd5e58d994890f8447a7ef7e9859846eb796ad"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            72,
+            144,
+            132,
+            204
+          ],
+          "hit": 0,
+          "score": "0x1.06817f73e7648p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            372,
+            264,
+            456,
+            324
+          ],
+          "hit": 0,
+          "score": "0x1.4ec814e14e8c6p-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1512,
+          1134
+        ],
+        "sha256": "c2e1c2372b9d31bdb500ed39247b3f68602331edd06e7b8ed7616368214f55dc"
+      },
+      "key": "nests",
+      "perimeter": {
+        "box": [
+          252,
+          312,
+          312,
+          396
+        ],
+        "hit": 0,
+        "score": "0x1.a65c3a0000000p-3"
+      },
+      "role": "aligned_crop",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          576,
+          768
+        ],
+        "sha256": "53b612c3d98f21401732e1fd18a2f0011019633e01b0ab409f3fc4957875cf9d"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            240,
+            592,
+            320,
+            672
+          ],
+          "hit": 0,
+          "score": "0x1.a8c7aca20d8cbp-3"
+        },
+        "orphan_edge": {
+          "box": [
+            96,
+            384,
+            208,
+            496
+          ],
+          "hit": 0,
+          "score": "0x1.7c5e2f178bc5fp-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1512,
+          2016
+        ],
+        "sha256": "7ec909d088d248b85caf8d8a98e42dda1012e849b41ea84aab6571168f5c3350"
+      },
+      "key": "nests",
+      "perimeter": {
+        "box": [
+          448,
+          432,
+          528,
+          512
+        ],
+        "hit": 0,
+        "score": "0x1.87662e0000000p-3"
+      },
+      "role": "aligned_rotation",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "736c963f4a7af4a6613461abbf189594f804cb8e3fafcc57d5d3868e950cebb1"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            64,
+            64,
+            208,
+            208
+          ],
+          "hit": 20159,
+          "score": "0x1.4214d3e5f4e63p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            64,
+            64,
+            208,
+            208
+          ],
+          "hit": 20159,
+          "score": "0x1.5c3cb00d725e8p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+      },
+      "key": "nests",
+      "perimeter": {
+        "box": [
+          256,
+          448,
+          336,
+          528
+        ],
+        "hit": 0,
+        "score": "0x1.735f3a0000000p-3"
+      },
+      "role": "highlight_edit",
+      "truth_pixels": 20159,
+      "truth_sha256": "1b002c510977c741a45e9069f81ce547d597886e5b283ef69f31b02ba4bae7f2"
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "cd002a76139e64a5b4df1e318d85080f3f2711fb3bd9d12c2621be24ce5bbd8a"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            304,
+            336,
+            416
+          ],
+          "hit": 15900,
+          "score": "0x1.87917e1688225p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            208,
+            304,
+            352,
+            448
+          ],
+          "hit": 16115,
+          "score": "0x1.f2094f2094f21p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          2016,
+          1512
+        ],
+        "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+      },
+      "key": "nests",
+      "perimeter": {
+        "box": [
+          208,
+          304,
+          320,
+          416
+        ],
+        "hit": 12544,
+        "score": "0x1.5c47ee0000000p-2"
+      },
+      "role": "arbitrary_edit",
+      "truth_pixels": 20145,
+      "truth_sha256": "ae2a8bf015f105778017b0eb79b799720764208edb4afd9599c698b4bab7394d"
+    },
+    {
+      "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+      "base": {
+        "dimensions": [
+          768,
+          576
+        ],
+        "sha256": "43f5790165a8c1796f2110a933faa0136bc59500581fbf7430d7e9d7f9809003"
+      },
+      "baseline": null,
+      "gain": null,
+      "key": "nests",
+      "perimeter": null,
+      "role": "no_gainmap",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    }
+  ],
+  "point": "0x1.3a449e0000000p-3",
+  "selection": [
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          4080,
+          3072
+        ],
+        "sha256": "6326de14bcc8d54bbf49b157b328cd6cbdcd8aba2d91d33af2753ca846dd6a60"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            765,
+            1361,
+            1190,
+            1786
+          ],
+          "hit": 0,
+          "score": "0x1.7f4bced811265p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            1190,
+            765,
+            1615,
+            1191
+          ],
+          "hit": 0,
+          "score": "0x1.ad56fa72bcc2fp-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "44b71b9dfaeb3ca9fe4950e3bcf7383df6774a179f7144f3e85e891e5a147a48"
+      },
+      "key": "0",
+      "perimeter": {
+        "box": [
+          425,
+          2381,
+          850,
+          2806
+        ],
+        "hit": 0,
+        "score": "0x1.8e197e0000000p-4"
+      },
+      "role": "untouched_camera",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "6f62fd56571379c237f730f4397198f72487b7d0b2f03a7a743a736eafcc9779"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            144,
+            256,
+            224,
+            336
+          ],
+          "hit": 0,
+          "score": "0x1.7e3a143d9e95ep+0"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            144,
+            304,
+            224
+          ],
+          "hit": 0,
+          "score": "0x1.d187815627e41p-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "44b71b9dfaeb3ca9fe4950e3bcf7383df6774a179f7144f3e85e891e5a147a48"
+      },
+      "key": "0",
+      "perimeter": {
+        "box": [
+          80,
+          448,
+          160,
+          528
+        ],
+        "hit": 0,
+        "score": "0x1.885e020000000p-4"
+      },
+      "role": "clean",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "db858bc61e515ef2c34c3908beeeda71cf6f65bc721883672b56057a4c59af3a"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            144,
+            256,
+            224,
+            336
+          ],
+          "hit": 0,
+          "score": "0x1.818903bd321a6p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            144,
+            304,
+            224
+          ],
+          "hit": 0,
+          "score": "0x1.ac846bbf05f69p-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "44b71b9dfaeb3ca9fe4950e3bcf7383df6774a179f7144f3e85e891e5a147a48"
+      },
+      "key": "0",
+      "perimeter": {
+        "box": [
+          80,
+          448,
+          160,
+          528
+        ],
+        "hit": 0,
+        "score": "0x1.97622e0000000p-4"
+      },
+      "role": "jpeg75",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "8bf4ccfc1a056d556d899ed844dfd1c0c74ca84be2b43a111a8c7db41b553bb9"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            144,
+            256,
+            224,
+            336
+          ],
+          "hit": 0,
+          "score": "0x1.5e56864e7858fp+0"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            144,
+            304,
+            224
+          ],
+          "hit": 0,
+          "score": "0x1.77e0bed152ddbp-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "44b71b9dfaeb3ca9fe4950e3bcf7383df6774a179f7144f3e85e891e5a147a48"
+      },
+      "key": "0",
+      "perimeter": {
+        "box": [
+          80,
+          448,
+          160,
+          528
+        ],
+        "hit": 0,
+        "score": "0x1.72c1260000000p-4"
+      },
+      "role": "tone",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "a13c623be338ee7e8942c3b8d4106c60823efb13c5ce1829d8a63f05058e896c"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            144,
+            256,
+            224,
+            336
+          ],
+          "hit": 0,
+          "score": "0x1.80d8e2bc59239p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            144,
+            304,
+            224
+          ],
+          "hit": 0,
+          "score": "0x1.ac846bbf05f69p-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "44b71b9dfaeb3ca9fe4950e3bcf7383df6774a179f7144f3e85e891e5a147a48"
+      },
+      "key": "0",
+      "perimeter": {
+        "box": [
+          80,
+          448,
+          160,
+          528
+        ],
+        "hit": 0,
+        "score": "0x1.8df2c80000000p-4"
+      },
+      "role": "resize",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "05c0ae0b21605fadf2cb1701b5f1acb27f7961270a5de0602a6970c615174572"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            144,
+            256,
+            224,
+            336
+          ],
+          "hit": 0,
+          "score": "0x1.7e1b346580ac5p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            144,
+            304,
+            224
+          ],
+          "hit": 0,
+          "score": "0x1.a867a23c73f8ap-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "44b71b9dfaeb3ca9fe4950e3bcf7383df6774a179f7144f3e85e891e5a147a48"
+      },
+      "key": "0",
+      "perimeter": {
+        "box": [
+          80,
+          448,
+          160,
+          528
+        ],
+        "hit": 0,
+        "score": "0x1.87b6d80000000p-4"
+      },
+      "role": "sharpen",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          4080,
+          3072
+        ],
+        "sha256": "dd4220e20d5538ecf3fd6dca90f5c1684dec17db3ff7c2861b17a7474f16aa72"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            850,
+            1191,
+            1275,
+            1616
+          ],
+          "hit": 0,
+          "score": "0x1.11cd3fe06e656p-1"
+        },
+        "orphan_edge": {
+          "box": [
+            680,
+            1956,
+            1105,
+            2381
+          ],
+          "hit": 0,
+          "score": "0x1.2d24d73be4ed4p-6"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "e1a2db9dc3e248810b4e36222330ddc510c4e9ee037b14f4b0ceaf681a3f7e71"
+      },
+      "key": "1",
+      "perimeter": {
+        "box": [
+          340,
+          2211,
+          935,
+          2636
+        ],
+        "hit": 0,
+        "score": "0x1.2efe360000000p-3"
+      },
+      "role": "untouched_camera",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "582392b7ff9d8bd4e518f96cca284e34a478d9e21660fe70e60fe256edec4c1a"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            160,
+            224,
+            240,
+            304
+          ],
+          "hit": 0,
+          "score": "0x1.11946db9f1e84p-1"
+        },
+        "orphan_edge": {
+          "box": [
+            128,
+            368,
+            208,
+            448
+          ],
+          "hit": 0,
+          "score": "0x1.2d24d73be4ed4p-6"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "e1a2db9dc3e248810b4e36222330ddc510c4e9ee037b14f4b0ceaf681a3f7e71"
+      },
+      "key": "1",
+      "perimeter": {
+        "box": [
+          64,
+          416,
+          176,
+          496
+        ],
+        "hit": 0,
+        "score": "0x1.2a81aa0000000p-3"
+      },
+      "role": "clean",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "0d635c6ec631cda62e80ed27b6f672df141bd39d07e5ec4638eab9f4eae18b32"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            160,
+            240,
+            240,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.133f7bcc61e3ep-1"
+        },
+        "orphan_edge": {
+          "box": [
+            112,
+            384,
+            192,
+            464
+          ],
+          "hit": 0,
+          "score": "0x1.1e13b97e2f7dcp-5"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "e1a2db9dc3e248810b4e36222330ddc510c4e9ee037b14f4b0ceaf681a3f7e71"
+      },
+      "key": "1",
+      "perimeter": {
+        "box": [
+          64,
+          416,
+          176,
+          496
+        ],
+        "hit": 0,
+        "score": "0x1.3a449e0000000p-3"
+      },
+      "role": "jpeg75",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "5d65dcea1e615517d36eb7d0ad42e9837a8b96f183766d4a2439c7b590d0e1ab"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            160,
+            240,
+            240,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.0df7c036e4aaep-1"
+        },
+        "orphan_edge": {
+          "box": [
+            128,
+            368,
+            208,
+            448
+          ],
+          "hit": 0,
+          "score": "0x1.2d24d73be4ed4p-6"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "e1a2db9dc3e248810b4e36222330ddc510c4e9ee037b14f4b0ceaf681a3f7e71"
+      },
+      "key": "1",
+      "perimeter": {
+        "box": [
+          64,
+          416,
+          176,
+          496
+        ],
+        "hit": 0,
+        "score": "0x1.02799a0000000p-3"
+      },
+      "role": "tone",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "0acd7263ccb4962b734f6e516107e45ed1164d71db5fce20761bea7cf50cfa77"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            160,
+            240,
+            240,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.1593498ee9e63p-1"
+        },
+        "orphan_edge": {
+          "box": [
+            528,
+            96,
+            608,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.d51292feca74cp-6"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "e1a2db9dc3e248810b4e36222330ddc510c4e9ee037b14f4b0ceaf681a3f7e71"
+      },
+      "key": "1",
+      "perimeter": {
+        "box": [
+          64,
+          416,
+          176,
+          496
+        ],
+        "hit": 0,
+        "score": "0x1.2d14380000000p-3"
+      },
+      "role": "resize",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "7570062aa45745925775829f6da6dbcf69dbeb8bd85402bc1bd3837b67f37cd2"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            160,
+            240,
+            240,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.090fb9c79432fp-1"
+        },
+        "orphan_edge": {
+          "box": [
+            112,
+            384,
+            192,
+            464
+          ],
+          "hit": 0,
+          "score": "0x1.1e13b97e2f7dcp-5"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "e1a2db9dc3e248810b4e36222330ddc510c4e9ee037b14f4b0ceaf681a3f7e71"
+      },
+      "key": "1",
+      "perimeter": {
+        "box": [
+          64,
+          416,
+          176,
+          496
+        ],
+        "hit": 0,
+        "score": "0x1.2fa40e0000000p-3"
+      },
+      "role": "sharpen",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          4080,
+          3072
+        ],
+        "sha256": "8ec5cf89c3eaaadd2be19d6e417783fab304de0510a7f91b4bc014290187432b"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            3145,
+            170,
+            3740,
+            595
+          ],
+          "hit": 0,
+          "score": "0x1.996f0a7b03d7ep-1"
+        },
+        "orphan_edge": {
+          "box": [
+            595,
+            1105,
+            1020,
+            1531
+          ],
+          "hit": 0,
+          "score": "0x1.138be5186bfacp-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "cde0dad22264932b19ccc61bd1c1d08052ca9b1edb671021904a0e31167d8972"
+      },
+      "key": "2",
+      "perimeter": {
+        "box": [
+          2465,
+          510,
+          2890,
+          935
+        ],
+        "hit": 0,
+        "score": "0x1.6966960000000p-5"
+      },
+      "role": "untouched_camera",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "d5f2d04a095d520628fe12072cad22f4cf1c8b5234941a0de5035b2d45c3cd6b"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            592,
+            32,
+            704,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.9a28b1550cb8ap-1"
+        },
+        "orphan_edge": {
+          "box": [
+            112,
+            208,
+            192,
+            288
+          ],
+          "hit": 0,
+          "score": "0x1.138be5186bfacp-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "cde0dad22264932b19ccc61bd1c1d08052ca9b1edb671021904a0e31167d8972"
+      },
+      "key": "2",
+      "perimeter": {
+        "box": [
+          464,
+          96,
+          544,
+          176
+        ],
+        "hit": 0,
+        "score": "0x1.5e79160000000p-5"
+      },
+      "role": "clean",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "83a5392b221a8d2c6f2c375ec58c528859a45735ec739f95b568ddcf0a098d02"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            592,
+            32,
+            704,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.93a2e6cc6b800p-1"
+        },
+        "orphan_edge": {
+          "box": [
+            112,
+            208,
+            192,
+            288
+          ],
+          "hit": 0,
+          "score": "0x1.138be5186bfacp-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "cde0dad22264932b19ccc61bd1c1d08052ca9b1edb671021904a0e31167d8972"
+      },
+      "key": "2",
+      "perimeter": {
+        "box": [
+          464,
+          96,
+          544,
+          176
+        ],
+        "hit": 0,
+        "score": "0x1.add06a0000000p-5"
+      },
+      "role": "jpeg75",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "99b3c2ed1091ffa2f6d5340a153130d024c4194428905c4c571295528cb99b37"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            592,
+            32,
+            704,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.94d31ceacc3ffp-1"
+        },
+        "orphan_edge": {
+          "box": [
+            112,
+            208,
+            192,
+            288
+          ],
+          "hit": 0,
+          "score": "0x1.138be5186bfacp-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "cde0dad22264932b19ccc61bd1c1d08052ca9b1edb671021904a0e31167d8972"
+      },
+      "key": "2",
+      "perimeter": {
+        "box": [
+          576,
+          272,
+          656,
+          352
+        ],
+        "hit": 0,
+        "score": "0x1.2e6b360000000p-5"
+      },
+      "role": "tone",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "46a7e9fc3c88d68f30bbfb89512680439f9d9bb1b25f63718ed16456d6f16357"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            592,
+            32,
+            704,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.9ce772dc3f408p-1"
+        },
+        "orphan_edge": {
+          "box": [
+            112,
+            208,
+            192,
+            288
+          ],
+          "hit": 0,
+          "score": "0x1.1d34f39601b72p-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "cde0dad22264932b19ccc61bd1c1d08052ca9b1edb671021904a0e31167d8972"
+      },
+      "key": "2",
+      "perimeter": {
+        "box": [
+          576,
+          272,
+          656,
+          352
+        ],
+        "hit": 0,
+        "score": "0x1.472f560000000p-5"
+      },
+      "role": "resize",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "ac8cb1db5cc136f7f206270117b8cb6df1efcba5ee838c62faefb542d8eea897"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            592,
+            32,
+            704,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.89fd2e9687362p-1"
+        },
+        "orphan_edge": {
+          "box": [
+            112,
+            208,
+            192,
+            288
+          ],
+          "hit": 0,
+          "score": "0x1.1524380944e6dp-1"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "cde0dad22264932b19ccc61bd1c1d08052ca9b1edb671021904a0e31167d8972"
+      },
+      "key": "2",
+      "perimeter": {
+        "box": [
+          464,
+          96,
+          544,
+          176
+        ],
+        "hit": 0,
+        "score": "0x1.9af0400000000p-5"
+      },
+      "role": "sharpen",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          4080,
+          3072
+        ],
+        "sha256": "6a876273aacd5889149a12bb769efd1e3cd0e4e9cd4c21da29ac9c9c65ac130e"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            425,
+            1446,
+            850,
+            1871
+          ],
+          "hit": 0,
+          "score": "0x1.9a2dae1c9796ep-1"
+        },
+        "orphan_edge": {
+          "box": [
+            3315,
+            1786,
+            3740,
+            2381
+          ],
+          "hit": 0,
+          "score": "0x1.e9c9473f1e9cap-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "6277df15fe4195e106f105a76f27ed599a845380728ddebe90951c51b7a43c82"
+      },
+      "key": "3",
+      "perimeter": {
+        "box": [
+          3315,
+          1786,
+          3740,
+          2211
+        ],
+        "hit": 0,
+        "score": "0x1.1926600000000p-4"
+      },
+      "role": "untouched_camera",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "ebab0b380bd2766e3f61493545c5484417cda90cc2262da44faad1841f284d88"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            80,
+            272,
+            160,
+            352
+          ],
+          "hit": 0,
+          "score": "0x1.9a996982a3767p-1"
+        },
+        "orphan_edge": {
+          "box": [
+            624,
+            336,
+            704,
+            448
+          ],
+          "hit": 0,
+          "score": "0x1.e4babd72f3a10p-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "6277df15fe4195e106f105a76f27ed599a845380728ddebe90951c51b7a43c82"
+      },
+      "key": "3",
+      "perimeter": {
+        "box": [
+          624,
+          336,
+          704,
+          416
+        ],
+        "hit": 0,
+        "score": "0x1.1a46d60000000p-4"
+      },
+      "role": "clean",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "c51d3073b4e548fd19e94bd7c3a1b1cf8815b4822840b711b7e0a02a5ca9ca98"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            80,
+            272,
+            160,
+            352
+          ],
+          "hit": 0,
+          "score": "0x1.9b40eba7e44ccp-1"
+        },
+        "orphan_edge": {
+          "box": [
+            624,
+            336,
+            736,
+            416
+          ],
+          "hit": 0,
+          "score": "0x1.03c49960dbdf4p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "6277df15fe4195e106f105a76f27ed599a845380728ddebe90951c51b7a43c82"
+      },
+      "key": "3",
+      "perimeter": {
+        "box": [
+          144,
+          352,
+          224,
+          432
+        ],
+        "hit": 0,
+        "score": "0x1.f2c3160000000p-5"
+      },
+      "role": "jpeg75",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "240f4a67726994861d01f63d5d60ab1076d0444bdd2908fd6970dfc8099b4d93"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            80,
+            272,
+            160,
+            352
+          ],
+          "hit": 0,
+          "score": "0x1.9d2ca1e8f95f5p-1"
+        },
+        "orphan_edge": {
+          "box": [
+            624,
+            336,
+            736,
+            416
+          ],
+          "hit": 0,
+          "score": "0x1.01feab8da1944p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "6277df15fe4195e106f105a76f27ed599a845380728ddebe90951c51b7a43c82"
+      },
+      "key": "3",
+      "perimeter": {
+        "box": [
+          624,
+          336,
+          704,
+          416
+        ],
+        "hit": 0,
+        "score": "0x1.baccaa0000000p-5"
+      },
+      "role": "tone",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "c7782bfd75599989e14fd20e88cc31e1c408b0fff02461d0f4755b1703931180"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            80,
+            272,
+            160,
+            352
+          ],
+          "hit": 0,
+          "score": "0x1.a1cd57adb4587p-1"
+        },
+        "orphan_edge": {
+          "box": [
+            624,
+            336,
+            736,
+            416
+          ],
+          "hit": 0,
+          "score": "0x1.12d6fee44b5c0p-2"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "6277df15fe4195e106f105a76f27ed599a845380728ddebe90951c51b7a43c82"
+      },
+      "key": "3",
+      "perimeter": {
+        "box": [
+          624,
+          336,
+          704,
+          416
+        ],
+        "hit": 0,
+        "score": "0x1.125b160000000p-4"
+      },
+      "role": "resize",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    },
+    {
+      "author": "Mishaal Rahman",
+      "base": {
+        "dimensions": [
+          768,
+          578
+        ],
+        "sha256": "83d0801b005028558b36340605a2bef8bd4f29555be8d652634f49e66abd6154"
+      },
+      "baseline": {
+        "dark_relative_to_gain": {
+          "box": [
+            80,
+            272,
+            160,
+            352
+          ],
+          "hit": 0,
+          "score": "0x1.8f77545e7aed1p-1"
+        },
+        "orphan_edge": {
+          "box": [
+            624,
+            336,
+            704,
+            448
+          ],
+          "hit": 0,
+          "score": "0x1.eed7d10b49982p-3"
+        }
+      },
+      "gain": {
+        "dimensions": [
+          1020,
+          768
+        ],
+        "sha256": "6277df15fe4195e106f105a76f27ed599a845380728ddebe90951c51b7a43c82"
+      },
+      "key": "3",
+      "perimeter": {
+        "box": [
+          624,
+          336,
+          704,
+          416
+        ],
+        "hit": 0,
+        "score": "0x1.24596a0000000p-4"
+      },
+      "role": "sharpen",
+      "truth_pixels": 0,
+      "truth_sha256": null
+    }
+  ],
+  "summary": {
+    "cross_camera_prior_views": {
+      "existing_union": {
+        "files": 90,
+        "misplaced": 8,
+        "ordinary_aligned_crop": 1,
+        "ordinary_aligned_rotation": 2,
+        "ordinary_authors": 3,
+        "ordinary_flags": 17,
+        "ordinary_jpeg75": 2,
+        "ordinary_jpeg90": 3,
+        "ordinary_original": 2,
+        "ordinary_resize": 2,
+        "ordinary_sharpen": 3,
+        "ordinary_tone": 2,
+        "possible_arbitrary_edit": 7,
+        "possible_highlight_edit": 6,
+        "unassessed": 10,
+        "useful_arbitrary_edit": 6,
+        "useful_highlight_edit": 6
+      },
+      "perimeter": {
+        "files": 90,
+        "misplaced": 7,
+        "ordinary_aligned_crop": 3,
+        "ordinary_aligned_rotation": 5,
+        "ordinary_authors": 5,
+        "ordinary_flags": 38,
+        "ordinary_jpeg75": 5,
+        "ordinary_jpeg90": 5,
+        "ordinary_original": 5,
+        "ordinary_resize": 5,
+        "ordinary_sharpen": 5,
+        "ordinary_tone": 5,
+        "possible_arbitrary_edit": 3,
+        "possible_highlight_edit": 5,
+        "unassessed": 10,
+        "useful_arbitrary_edit": 3,
+        "useful_highlight_edit": 5
+      }
+    },
+    "fresh_acquisition": {
+      "existing_union": {
+        "files": 12,
+        "ordinary_authors": 1,
+        "ordinary_flags": 3,
+        "ordinary_local_lift": 1,
+        "ordinary_local_retouch": 1,
+        "ordinary_original": 1,
+        "unassessed": 9
+      },
+      "perimeter": {
+        "files": 12,
+        "ordinary_authors": 1,
+        "ordinary_flags": 3,
+        "ordinary_local_lift": 1,
+        "ordinary_local_retouch": 1,
+        "ordinary_original": 1,
+        "unassessed": 9
+      }
+    },
+    "fresh_carriers": {
+      "admitted_grayscale": 1,
+      "files": 10,
+      "rgb_iso": 9,
+      "rgb_iso_primary_size_mismatch": 7
+    },
+    "new_local_retouches": {
+      "existing_union": {
+        "files": 16,
+        "ordinary_authors": 6,
+        "ordinary_flags": 8,
+        "ordinary_local_lift": 3,
+        "ordinary_local_retouch": 5,
+        "unassessed": 0
+      },
+      "perimeter": {
+        "files": 16,
+        "ordinary_authors": 5,
+        "ordinary_flags": 11,
+        "ordinary_local_lift": 5,
+        "ordinary_local_retouch": 6,
+        "unassessed": 0
+      }
+    }
+  }
+}

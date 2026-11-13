@@ -28,3 +28,7 @@ Set `VERITAS_AUDIO_STEREO_GAIN_REPEAT_REVIEW=true` in local development to also 
 The ordinary evidence view and Standard PDF show the ratio, two source ranges and two waveforms drawn at the same amplitude scale. The evidence view and JSON link both original WAV excerpts. The signed package verifier recomputes their exact gain relationship, and supplying the original recording or video also replays the channel search and both source excerpts. Matching silence may extend a range beyond the active event. A loop, alert or other ordinary repeat can satisfy the check. Mixing separate noise into the same channel, clipping, resampling and lossy encoding can defeat it. The result carries zero AI confidence weight.
 
 The [frozen transfer and replay](audio-gain-repetition-transfer-2026-11-13.md) found 96 of 96 authored gain-related repeats and zero flags on 144 matched controls across 24 new excerpts from two previously used AMI meetings. Local Chrome loaded both WAV intervals with the expected playback duration, rendered both waveforms and downloaded byte-identical JSON and PDF. Three isolated analysis runs each queued only after a simulated $9.99 USD payment. The original-source tests covered a WAV and an offset video soundtrack, including rejection of a changed gain ratio in a re-signed package.
+
+The [public source replay](audio-gain-public-replay-2026-11-13.md) reproduced
+those outcomes directly from the AMI publisher WAVs and confirmed the same
+counts on two additional meetings.

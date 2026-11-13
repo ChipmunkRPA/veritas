@@ -49,6 +49,7 @@ export interface ImageReferenceRecord {
     exact_tiles?: number
     anchor_count?: number
     supported_zones?: [number, number][]
+    reference_minus_submitted?: { x: number; y: number }
   }
   submitted_over_reference_xy?: [[number, number], [number, number]]
   reference_crop_bounds?: NativeImageArea
@@ -83,6 +84,7 @@ export const exactOrientedResizeSchema = 'chipmunk.image-reference-comparison/8'
 export const embeddedPhotoSchema = 'chipmunk.image-reference-comparison/9'
 export const jpegPngEnvelopeSchema = 'chipmunk.image-reference-comparison/10'
 export const exactJpegIdentitySchema = 'chipmunk.image-reference-comparison/11'
+export const shiftedJpegSchema = 'chipmunk.image-reference-comparison/12'
 export const IMAGE_REFERENCE_SECTION_ID = 'earlier-image-comparison'
 export const orientationLabels = {
   rotate_90_clockwise: '90-degree clockwise rotation',
@@ -153,6 +155,34 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
         || !Number.isSafeInteger(alignment.full_tiles) || !Number.isSafeInteger(alignment.exact_tiles)
         || !Number.isSafeInteger(alignment.anchor_count) || !Array.isArray(alignment.supported_zones)) {
       throw new Error('The server returned an incomplete JPEG alignment comparison.')
+    }
+  }
+  if (comparison.schema === shiftedJpegSchema) {
+    const alignment = comparison.alignment
+    const before = alignment?.reference_overlap
+    const after = alignment?.submitted_overlap
+    const shift = alignment?.reference_minus_submitted
+    const full = alignment?.full_tiles ?? 0
+    const exact = alignment?.exact_tiles ?? 0
+    const anchors = alignment?.anchor_count ?? 0
+    if (comparison.status !== 'comparable' || alignment?.method !== 'exact_decoded_jpeg_translated_overlap'
+        || !before || !after || !shift || ![shift.x, shift.y].every(Number.isSafeInteger)
+        || Math.max(Math.abs(shift.x), Math.abs(shift.y)) < 1 || Math.max(Math.abs(shift.x), Math.abs(shift.y)) > 24
+        || comparison.reference.width !== comparison.submitted.width || comparison.reference.height !== comparison.submitted.height
+        || !validAreaWithin(before, comparison.reference.width, comparison.reference.height)
+        || !validAreaWithin(after, comparison.submitted.width, comparison.submitted.height)
+        || before.w !== after.w || before.h !== after.h || before.x !== after.x + shift.x || before.y !== after.y + shift.y
+        || [after.x, after.y, after.w, after.h].some(value => value % 16 !== 0)
+        || ![full, exact, anchors].every(Number.isSafeInteger) || full !== after.w * after.h / 256
+        || full < exact || exact < .65 * full || anchors < 24 || anchors > exact
+        || comparison.regions.some(region => {
+          const original = region.reference_region
+          return !validArea(region) || !validArea(original)
+            || !validAreaWithin({ ...region, x: region.x - after.x, y: region.y - after.y }, after.w, after.h)
+            || original.w !== region.w || original.h !== region.h
+            || original.x !== region.x + shift.x || original.y !== region.y + shift.y
+        })) {
+      throw new Error('The server returned an incomplete shifted JPEG comparison.')
     }
   }
   if (comparison.schema === exactPngCropResizeSchema && (!comparison.reference_crop_bounds

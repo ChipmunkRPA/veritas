@@ -97,6 +97,24 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [public AMI replay](audio-gain-public-replay-2026-11-13.md) independently
+  reconstructs the fixed-gain comparison from eight publisher WAVs. It
+  localized all 96 additional authored repeats across two further meetings
+  and flagged zero of 144 matched controls.
+- The [earlier-copy video trim check](video-trimmed-reference-transfer-2026-11-13.md)
+  measured all 18 known changed ranges after lossless trims and declined all
+  18 wrong-source, lossy, or changed-clock controls.
+- The [earlier-copy JPEG shift check](image-reference-shifted-jpeg-transfer-2026-11-13.md)
+  localized all 24 known edits while separately showing the uncovered margins.
+- [Directional separation for competing voices](audio-spatial-mask-voice-transfer-2026-11-13.md)
+  added two useful locations and two ordinary-group flags while retaining the
+  current mono locations. Both gains came from the same lateral layout. The
+  check stays in evaluation.
+- [Sentence omission](writing-omission-attribution-2026-11-13.md) added one
+  eLife location and no ordinary flags there. On F1000Research it added no
+  useful locations and one ordinary-group flag. It remains experimental.
+- [Cross-fitted JPEG color direction](image-color-line-transfer-2026-11-13.md)
+  missed all 40 known edits across two panels and remains offline.
 - The [single-upload fixed-gain stereo check](stereo-repetition-2026-11-13.md#gain-and-polarity)
   found 96 of 96 level- or polarity-adjusted repeats missed by the exact
   channel and mono searches. It added zero findings on 144 matched controls

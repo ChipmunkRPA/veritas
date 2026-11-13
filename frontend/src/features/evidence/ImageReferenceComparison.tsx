@@ -4,7 +4,7 @@ import { Button } from '../../components/ui'
 import { saveBlob } from '../../lib/api/reports'
 import {
   compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
-  exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema,
+  exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
   IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, orientationLabels, referencePngSrc,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
@@ -72,6 +72,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const embeddedPhoto = comparison.schema === embeddedPhotoSchema ? comparison.embedded_native_photo : undefined
   const delivery = comparison.schema === jpegPngEnvelopeSchema
   const sameJpegFraming = comparison.schema === exactJpegIdentitySchema ? alignment : undefined
+  const shiftedJpeg = comparison.schema === shiftedJpegSchema ? alignment : undefined
   const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' || exact || delivery
     ? comparison.reference_crop_bounds : undefined
   const resized = comparable && (Boolean(cropped) || comparison.schema === 'chipmunk.image-reference-comparison/3')
@@ -124,6 +125,9 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       {' '}{sameJpegFraming.anchor_count?.toLocaleString('en-US')} unique detailed blocks supported the alignment.
       Ordinary edits can produce highlighted differences.
     </p>}
+    {shiftedJpeg && <p className="mt-2 mb-0 text-small text-text-muted">
+      After whole-pixel alignment, {shiftedJpeg.exact_tiles?.toLocaleString('en-US')} of {shiftedJpeg.full_tiles?.toLocaleString('en-US')} complete JPEG blocks matched in the area compared. Ordinary edits can produce highlighted differences.
+    </p>}
     {comparable && exact && <p className="mt-2 mb-0 text-small text-text-muted">
       {completeMatch ? 'The resized area matches every submitted pixel.'
         : `The resized area matches ${exact.matched_pixels.toLocaleString('en-US')} submitted pixels exactly.`}
@@ -162,9 +166,9 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       Coordinates use each image’s own pixels, measured from the top left after correcting its stored orientation.
     </p>}
     {alignment && <dl className="mt-3 mb-0 grid grid-cols-1 gap-2 text-small text-text-muted sm:grid-cols-2">
-      <div><dt className="font-medium text-text">Submitted image overlap</dt><dd className="m-0"><NativeArea area={alignment.submitted_overlap} /></dd></div>
-      <div><dt className="font-medium text-text">Earlier copy overlap</dt><dd className="m-0"><NativeArea area={alignment.reference_overlap} /></dd></div>
-      {!sameJpegFraming && <div className="sm:col-span-2"><dt className="sr-only">Comparison coverage</dt><dd className="m-0">Pixels outside the overlap were unassessed.</dd></div>}
+      <div><dt className="font-medium text-text">{shiftedJpeg ? 'Submitted image area compared' : 'Submitted image overlap'}</dt><dd className="m-0"><NativeArea area={alignment.submitted_overlap} /></dd></div>
+      <div><dt className="font-medium text-text">{shiftedJpeg ? 'Earlier copy area compared' : 'Earlier copy overlap'}</dt><dd className="m-0"><NativeArea area={alignment.reference_overlap} /></dd></div>
+      {!sameJpegFraming && <div className="sm:col-span-2"><dt className="sr-only">Comparison coverage</dt><dd className="m-0">{shiftedJpeg ? 'Margins outside these bounds were unassessed.' : 'Pixels outside the overlap were unassessed.'}</dd></div>}
     </dl>}
     {comparable && regions.length > 0 && <>
       {mask && <div className="mt-4 max-w-xl">

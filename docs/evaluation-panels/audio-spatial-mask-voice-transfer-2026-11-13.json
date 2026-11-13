@@ -1,0 +1,9264 @@
+{
+  "forward_counts": [
+    140,
+    647
+  ],
+  "freeze": {
+    "assets": {
+      "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+      "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+    },
+    "method": {
+      "analysis": "Use the existing sample-clock-preserving 1024-sample square-root Hann transform with 256 sample hop. Propose up to three fixed interchannel lag modes on the submitted six-second track, from -22 through 22 samples. Score summed positive phase agreement cubed over 250\u20132400 Hz, weighted by square root of cross-channel magnitude and capped at its 85th percentile. Require local lag maxima, four samples of separation, a second peak at least 0.38 of the strongest and nondegenerate joint covariance.",
+      "comparison": "Native mono and prior AuxIVA maximum, independently frozen on the ordinary Surrey set. Use the same two-second windows and speech gate for the new direction masks. Score each anonymous output separately and take the largest admitted response. In the additive comparison keep all mono findings.",
+      "gate": "Require at least two net additional useful held edit source groups across two generator families, no added background-only flagged group in any layout, and at most one added ordinary flagged group in each layout. A pass on reused recordings supports fresh transfer only. All outputs are anonymous and no candidate contributes to the service score.",
+      "masks": "Seed per-frequency complex two-channel angular Gaussian scatter matrices with each phase-aligned broadband lag and its weighted relative amplitude, limited to plus or minus 12 dB. Eight weighted EM updates on unit channel vectors. Shrink 20% of normalized covariance back to the fixed frequency-specific seed and blend 15% equal mixture weights. Use masks from 125\u20136400 Hz with nearest fitted edge masks outside. Reconstruct the mixture mean through each mask with unchanged native clock, unity total and no normalizing gain. Decline clipped views and those with less than 1.5% of mixture energy.",
+      "timing": "Pick the strongest admitted response with the earlier window breaking ties. Require at least 0.30 interval IoU and coverage of at least half the authored edit for a useful result. Report repeated source groups by layout, false ordinary clips and groups, misplaced flags, unassessed windows, and equal ordinary-group ranking as retrospective only."
+    },
+    "prior_ledger_sha256": "2559c0f0d3648e89e2d14b50bb19eae08fcea382b7cac1e912c6cb6b99f163de",
+    "reviewer_sha256": "e313928e9b96606ca4e5371b7f55b78344b494b2d014b819b8fbc1f251da73c3",
+    "schema": "chipmunk.audio-spatial-mask-voice/1",
+    "source_code_sha256": "5ef67c11589b7b7c1068bbd8caf5741d65e40baca5786283bc5573e6487d5444",
+    "sources": {
+      "pilot": "28a3ecbaa264cff9de2f37a510734255fda833a4b057726127d6de0922f41f8a",
+      "transfer": "2c327a1f52931510cd07091cb4b7fb38ae868c7895d456e548e660fcc6e47e11"
+    },
+    "windows": [
+      [
+        16000,
+        48000
+      ],
+      [
+        48000,
+        80000
+      ]
+    ]
+  },
+  "freeze_sha256": "5ad34a5d5e1b7600bac99704670af2547b6782e9e723f45857f860b55994093c",
+  "native_audit": {
+    "development": {
+      "cases": 26,
+      "waveforms": 78
+    },
+    "held": {
+      "cases": 134,
+      "waveforms": 387
+    }
+  },
+  "private_ledgers_sha256": [
+    "0b12e6cbb459a1bed3f27be68df5d23e7385692ee9f7c54dd50b62c456ffcad1",
+    "6aea05ddbd872d37065b2199f4be1ded5c9cd9147281ed4d48da763c82a3c21b"
+  ],
+  "results": {
+    "additional_families": [
+      "clone",
+      "stock"
+    ],
+    "additional_held_groups": 2,
+    "advancement": {
+      "at_most_one_new_ordinary_group_per_layout": true,
+      "no_new_background_groups": true,
+      "two_additional_groups_in_two_families": true
+    },
+    "layouts": {
+      "balanced_target": {
+        "acoustic": {
+          "edits_with_candidate": 8,
+          "median_oracle_edit_snr_gain_db": 6.891096,
+          "median_oracle_full_snr_gain_db": 6.535342
+        },
+        "edits": 8,
+        "fixed": {
+          "directional": {
+            "additional_background_groups": 0,
+            "additional_families": [],
+            "additional_locations": 0,
+            "additional_ordinary_groups": 0,
+            "additive_total_locations": 0,
+            "assessed": 36,
+            "background_groups": 0,
+            "edited_flags": 0,
+            "lost_locations": 0,
+            "ordinary_clips": 0,
+            "ordinary_groups": 0,
+            "unassessed": 0,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "earlier_either": {
+            "additional_background_groups": 0,
+            "additional_families": [],
+            "additional_locations": 0,
+            "additional_ordinary_groups": 1,
+            "additive_total_locations": 0,
+            "assessed": 36,
+            "background_groups": 0,
+            "edited_flags": 1,
+            "lost_locations": 0,
+            "ordinary_clips": 4,
+            "ordinary_groups": 2,
+            "unassessed": 0,
+            "useful": 0,
+            "wrong_location": 1
+          },
+          "mono": {
+            "additional_background_groups": 0,
+            "additional_families": [],
+            "additional_locations": 0,
+            "additional_ordinary_groups": 0,
+            "additive_total_locations": 0,
+            "assessed": 36,
+            "background_groups": 1,
+            "edited_flags": 2,
+            "lost_locations": 0,
+            "ordinary_clips": 8,
+            "ordinary_groups": 4,
+            "unassessed": 0,
+            "useful": 0,
+            "wrong_location": 2
+          }
+        },
+        "new_ranges": [],
+        "ordinary": 28,
+        "retrospective_equal_groups": {
+          "0": {
+            "directional": 0,
+            "earlier_either": 0,
+            "mono": 0
+          },
+          "1": {
+            "directional": 1,
+            "earlier_either": 0,
+            "mono": 0
+          },
+          "2": {
+            "directional": 1,
+            "earlier_either": 0,
+            "mono": 0
+          }
+        }
+      },
+      "bbc": {
+        "acoustic": {
+          "edits_with_candidate": 6,
+          "median_oracle_edit_snr_gain_db": 7.865336,
+          "median_oracle_full_snr_gain_db": 7.74886
+        },
+        "edits": 6,
+        "fixed": {
+          "directional": {
+            "additional_background_groups": 0,
+            "additional_families": [],
+            "additional_locations": 0,
+            "additional_ordinary_groups": 1,
+            "additive_total_locations": 0,
+            "assessed": 26,
+            "background_groups": 0,
+            "edited_flags": 1,
+            "lost_locations": 0,
+            "ordinary_clips": 5,
+            "ordinary_groups": 2,
+            "unassessed": 0,
+            "useful": 0,
+            "wrong_location": 1
+          },
+          "earlier_either": {
+            "additional_background_groups": 0,
+            "additional_families": [
+              "clone",
+              "expressive"
+            ],
+            "additional_locations": 2,
+            "additional_ordinary_groups": 1,
+            "additive_total_locations": 2,
+            "assessed": 26,
+            "background_groups": 0,
+            "edited_flags": 3,
+            "lost_locations": 0,
+            "ordinary_clips": 5,
+            "ordinary_groups": 2,
+            "unassessed": 0,
+            "useful": 2,
+            "wrong_location": 1
+          },
+          "mono": {
+            "additional_background_groups": 0,
+            "additional_families": [],
+            "additional_locations": 0,
+            "additional_ordinary_groups": 0,
+            "additive_total_locations": 0,
+            "assessed": 26,
+            "background_groups": 0,
+            "edited_flags": 1,
+            "lost_locations": 0,
+            "ordinary_clips": 4,
+            "ordinary_groups": 2,
+            "unassessed": 0,
+            "useful": 0,
+            "wrong_location": 1
+          }
+        },
+        "new_ranges": [],
+        "ordinary": 20,
+        "retrospective_equal_groups": {
+          "0": {
+            "directional": 0,
+            "earlier_either": 0,
+            "mono": 0
+          },
+          "1": {
+            "directional": 0,
+            "earlier_either": 0,
+            "mono": 0
+          },
+          "2": {
+            "directional": 1,
+            "earlier_either": 2,
+            "mono": 0
+          }
+        }
+      },
+      "lateral_target": {
+        "acoustic": {
+          "edits_with_candidate": 8,
+          "median_oracle_edit_snr_gain_db": 8.282769,
+          "median_oracle_full_snr_gain_db": 9.209493
+        },
+        "edits": 8,
+        "fixed": {
+          "directional": {
+            "additional_background_groups": 0,
+            "additional_families": [
+              "clone",
+              "stock"
+            ],
+            "additional_locations": 2,
+            "additional_ordinary_groups": 1,
+            "additive_total_locations": 2,
+            "assessed": 32,
+            "background_groups": 0,
+            "edited_flags": 2,
+            "lost_locations": 0,
+            "ordinary_clips": 1,
+            "ordinary_groups": 1,
+            "unassessed": 4,
+            "useful": 2,
+            "wrong_location": 0
+          },
+          "earlier_either": {
+            "additional_background_groups": 0,
+            "additional_families": [
+              "clone"
+            ],
+            "additional_locations": 1,
+            "additional_ordinary_groups": 1,
+            "additive_total_locations": 1,
+            "assessed": 36,
+            "background_groups": 0,
+            "edited_flags": 2,
+            "lost_locations": 0,
+            "ordinary_clips": 4,
+            "ordinary_groups": 2,
+            "unassessed": 0,
+            "useful": 1,
+            "wrong_location": 1
+          },
+          "mono": {
+            "additional_background_groups": 0,
+            "additional_families": [],
+            "additional_locations": 0,
+            "additional_ordinary_groups": 0,
+            "additive_total_locations": 0,
+            "assessed": 36,
+            "background_groups": 1,
+            "edited_flags": 0,
+            "lost_locations": 0,
+            "ordinary_clips": 3,
+            "ordinary_groups": 3,
+            "unassessed": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        },
+        "new_ranges": [
+          {
+            "case": 83,
+            "family": "stock",
+            "reported_samples": [
+              16000,
+              48000
+            ],
+            "truth_samples": [
+              29440,
+              42240
+            ]
+          },
+          {
+            "case": 95,
+            "family": "clone",
+            "reported_samples": [
+              16000,
+              48000
+            ],
+            "truth_samples": [
+              26880,
+              42240
+            ]
+          }
+        ],
+        "ordinary": 28,
+        "retrospective_equal_groups": {
+          "0": {
+            "directional": 0,
+            "earlier_either": 0,
+            "mono": 0
+          },
+          "1": {
+            "directional": 2,
+            "earlier_either": 0,
+            "mono": 0
+          },
+          "2": {
+            "directional": 3,
+            "earlier_either": 1,
+            "mono": 0
+          }
+        }
+      },
+      "second_competitor": {
+        "acoustic": {
+          "edits_with_candidate": 8,
+          "median_oracle_edit_snr_gain_db": 6.87817,
+          "median_oracle_full_snr_gain_db": 6.487378
+        },
+        "edits": 8,
+        "fixed": {
+          "directional": {
+            "additional_background_groups": 0,
+            "additional_families": [],
+            "additional_locations": 0,
+            "additional_ordinary_groups": 0,
+            "additive_total_locations": 3,
+            "assessed": 36,
+            "background_groups": 0,
+            "edited_flags": 0,
+            "lost_locations": 3,
+            "ordinary_clips": 0,
+            "ordinary_groups": 0,
+            "unassessed": 0,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "earlier_either": {
+            "additional_background_groups": 1,
+            "additional_families": [],
+            "additional_locations": 0,
+            "additional_ordinary_groups": 1,
+            "additive_total_locations": 3,
+            "assessed": 36,
+            "background_groups": 1,
+            "edited_flags": 0,
+            "lost_locations": 3,
+            "ordinary_clips": 4,
+            "ordinary_groups": 3,
+            "unassessed": 0,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "mono": {
+            "additional_background_groups": 0,
+            "additional_families": [],
+            "additional_locations": 0,
+            "additional_ordinary_groups": 0,
+            "additive_total_locations": 3,
+            "assessed": 35,
+            "background_groups": 0,
+            "edited_flags": 3,
+            "lost_locations": 0,
+            "ordinary_clips": 6,
+            "ordinary_groups": 3,
+            "unassessed": 1,
+            "useful": 3,
+            "wrong_location": 0
+          }
+        },
+        "new_ranges": [],
+        "ordinary": 28,
+        "retrospective_equal_groups": {
+          "0": {
+            "directional": 0,
+            "earlier_either": 0,
+            "mono": 0
+          },
+          "1": {
+            "directional": 0,
+            "earlier_either": 0,
+            "mono": 0
+          },
+          "2": {
+            "directional": 0,
+            "earlier_either": 0,
+            "mono": 0
+          }
+        }
+      },
+      "surrey": {
+        "acoustic": {
+          "edits_with_candidate": 6,
+          "median_oracle_edit_snr_gain_db": 8.834404,
+          "median_oracle_full_snr_gain_db": 8.867145
+        },
+        "edits": 6,
+        "fixed": {
+          "directional": {
+            "additional_background_groups": 0,
+            "additional_families": [],
+            "additional_locations": 0,
+            "additional_ordinary_groups": 0,
+            "additive_total_locations": 0,
+            "assessed": 26,
+            "background_groups": 0,
+            "edited_flags": 0,
+            "lost_locations": 0,
+            "ordinary_clips": 0,
+            "ordinary_groups": 0,
+            "unassessed": 0,
+            "useful": 0,
+            "wrong_location": 0
+          },
+          "earlier_either": {
+            "additional_background_groups": 0,
+            "additional_families": [
+              "clone"
+            ],
+            "additional_locations": 1,
+            "additional_ordinary_groups": 0,
+            "additive_total_locations": 1,
+            "assessed": 26,
+            "background_groups": 0,
+            "edited_flags": 1,
+            "lost_locations": 0,
+            "ordinary_clips": 0,
+            "ordinary_groups": 0,
+            "unassessed": 0,
+            "useful": 1,
+            "wrong_location": 0
+          },
+          "mono": {
+            "additional_background_groups": 0,
+            "additional_families": [],
+            "additional_locations": 0,
+            "additional_ordinary_groups": 0,
+            "additive_total_locations": 0,
+            "assessed": 26,
+            "background_groups": 0,
+            "edited_flags": 0,
+            "lost_locations": 0,
+            "ordinary_clips": 0,
+            "ordinary_groups": 0,
+            "unassessed": 0,
+            "useful": 0,
+            "wrong_location": 0
+          }
+        },
+        "new_ranges": [],
+        "ordinary": 20,
+        "retrospective_equal_groups": {
+          "0": {
+            "directional": 0,
+            "earlier_either": 1,
+            "mono": 0
+          },
+          "1": {
+            "directional": 0,
+            "earlier_either": 1,
+            "mono": 0
+          },
+          "2": {
+            "directional": 0,
+            "earlier_either": 1,
+            "mono": 1
+          }
+        }
+      }
+    },
+    "points": {
+      "directional": 7.068065580780201,
+      "earlier_either": 6.760727907655432,
+      "mono": 5.356589748054317
+    },
+    "standalone_lost_held_groups": 3
+  },
+  "rows": [
+    {
+      "baselines": {
+        "earlier_either": [
+          -2.9326174305421664,
+          -2.020281464876077
+        ],
+        "mono": [
+          -1.8749360346602435,
+          -3.797740885555199
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          4.203374,
+          null
+        ],
+        [
+          0.583572,
+          null
+        ],
+        [
+          -3.219005,
+          null
+        ]
+      ],
+      "case": 0,
+      "family": null,
+      "group": 0,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -1,
+        3,
+        10
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -5.000005,
+        null
+      ],
+      "scores": [
+        [
+          -4.6797771381769175,
+          -3.7817435065685974
+        ],
+        [
+          -4.163156053466657,
+          -4.256164555172017
+        ],
+        [
+          -6.738730395473204,
+          -5.950111381295326
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.133017507743773,
+          -3.9648587848485843
+        ],
+        "mono": [
+          -1.8749360346602435,
+          -4.585593211454031
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          3.9592,
+          null
+        ],
+        [
+          0.727751,
+          null
+        ],
+        [
+          -3.165446,
+          null
+        ]
+      ],
+      "case": 1,
+      "family": null,
+      "group": 0,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -1,
+        3,
+        10
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -5.003686,
+        null
+      ],
+      "scores": [
+        [
+          -4.558909886763694,
+          -6.3986945751308095
+        ],
+        [
+          -4.561658844986875,
+          -5.121786181102582
+        ],
+        [
+          -6.733299282093287,
+          -6.845226286582159
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          1.5132938700597005,
+          -2.09135815044134
+        ],
+        "mono": [
+          -1.8749360346602435,
+          -2.7178304252630743
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          4.17148,
+          null
+        ],
+        [
+          0.08417,
+          null
+        ],
+        [
+          -3.24996,
+          null
+        ]
+      ],
+      "case": 2,
+      "family": null,
+      "group": 0,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -1,
+        4,
+        10
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -5.335466,
+        null
+      ],
+      "scores": [
+        [
+          -4.428479186395471,
+          -5.509725610057927
+        ],
+        [
+          -4.67563339468475,
+          -3.1476631152842325
+        ],
+        [
+          -6.662291494214512,
+          -6.3970770788022655
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          2.2122231449119933,
+          7.004127590861076
+        ],
+        "mono": [
+          -1.8749360346602435,
+          -4.667736496361679
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          3.739801,
+          3.45268
+        ],
+        [
+          0.713609,
+          1.752558
+        ],
+        [
+          -3.159379,
+          -4.186279
+        ]
+      ],
+      "case": 3,
+      "family": "clone",
+      "group": 0,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -1,
+        3,
+        10
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -5.08384,
+        -5.334829
+      ],
+      "scores": [
+        [
+          -4.664194144686426,
+          -4.286750717597662
+        ],
+        [
+          -4.3186015829222075,
+          -5.41217142476575
+        ],
+        [
+          -6.747216190210363,
+          -6.602930076126671
+        ]
+      ],
+      "truth": [
+        58880,
+        71680
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.2738118507544915,
+          4.599537493883419
+        ],
+        "mono": [
+          5.356589748054317,
+          -3.7359721871990548
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.494469,
+          null
+        ],
+        [
+          -0.114365,
+          null
+        ],
+        [
+          1.04699,
+          null
+        ]
+      ],
+      "case": 4,
+      "family": null,
+      "group": 1,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -11,
+        -1,
+        22
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -5.000007,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -4.715368225145732
+        ],
+        [
+          -6.374141651280983,
+          6.336039417897811
+        ],
+        [
+          -3.051911391914222,
+          -5.105241720054299
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.3678647596224955,
+          4.0610677724941455
+        ],
+        "mono": [
+          4.861183811605603,
+          -3.7352510132103403
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.569253,
+          null
+        ],
+        [
+          -0.168005,
+          null
+        ],
+        [
+          1.052667,
+          null
+        ]
+      ],
+      "case": 5,
+      "family": null,
+      "group": 1,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        -1,
+        22
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -5.077747,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          -3.7025852590781207,
+          6.288005351432088
+        ],
+        [
+          -3.922251189024992,
+          -5.349594112717019
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          3.099171936944175,
+          3.7590296293738583
+        ],
+        "mono": [
+          2.8508481522643514,
+          -3.7346519942175878
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.603879,
+          null
+        ],
+        [
+          -0.284345,
+          null
+        ],
+        [
+          1.035127,
+          null
+        ]
+      ],
+      "case": 6,
+      "family": null,
+      "group": 1,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -11,
+        -1,
+        22
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -5.197862,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -4.746904380178885
+        ],
+        [
+          -4.0447692329852165,
+          6.3910800475499725
+        ],
+        [
+          -3.9457318654770415,
+          -5.122833248491065
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.2347032135642255,
+          4.178863711013441
+        ],
+        "mono": [
+          4.627993896511041,
+          -3.736139293366214
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.426873,
+          -1.941003
+        ],
+        [
+          -0.125603,
+          -4.917619
+        ],
+        [
+          1.046891,
+          0.861694
+        ]
+      ],
+      "case": 7,
+      "family": "expressive",
+      "group": 1,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -11,
+        -1,
+        22
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -4.977095,
+        -7.847124
+      ],
+      "scores": [
+        [
+          null,
+          -4.739652605098539
+        ],
+        [
+          -1.5559950549343726,
+          6.1428062223334905
+        ],
+        [
+          -4.624142123059661,
+          -4.897660220113386
+        ]
+      ],
+      "truth": [
+        17920,
+        33280
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.591085158059048,
+          -3.2080436127843943
+        ],
+        "mono": [
+          4.745456535560609,
+          -5.943206797653335
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          4.146096,
+          null
+        ],
+        [
+          -0.809377,
+          null
+        ],
+        [
+          -2.615317,
+          null
+        ]
+      ],
+      "case": 8,
+      "family": null,
+      "group": 2,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -1,
+        4,
+        10
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -5.000016,
+        null
+      ],
+      "scores": [
+        [
+          6.406429448980665,
+          -4.49949451821147
+        ],
+        [
+          -4.643234707065549,
+          -5.362788187772035
+        ],
+        [
+          -5.8676137345687644,
+          -6.043637284052638
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.760727907655432,
+          -4.580440969238704
+        ],
+        "mono": [
+          4.745456535560609,
+          -6.089463273266988
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          4.278793,
+          null
+        ],
+        [
+          -0.890714,
+          null
+        ],
+        [
+          -2.640042,
+          null
+        ]
+      ],
+      "case": 9,
+      "family": null,
+      "group": 2,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -1,
+        4,
+        10
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -5.040034,
+        null
+      ],
+      "scores": [
+        [
+          6.282867909264861,
+          -4.850669885477731
+        ],
+        [
+          -4.641179033767688,
+          -5.565360964781494
+        ],
+        [
+          -5.907776794815293,
+          -6.0147972707101784
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.679906463125389,
+          -5.189640027244224
+        ],
+        "mono": [
+          4.745456535560609,
+          -6.267316795865925
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          4.075185,
+          null
+        ],
+        [
+          -0.850386,
+          null
+        ],
+        [
+          -2.598162,
+          null
+        ]
+      ],
+      "case": 10,
+      "family": null,
+      "group": 2,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -1,
+        4,
+        10
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -5.048086,
+        null
+      ],
+      "scores": [
+        [
+          6.364223799774422,
+          -5.663310069086563
+        ],
+        [
+          -4.559614149834378,
+          -5.571559380066063
+        ],
+        [
+          -5.738351336927013,
+          -5.89671609315854
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.581033150956828,
+          -3.3306774942926687
+        ],
+        "mono": [
+          4.745456535560609,
+          -6.256026219224075
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          4.223335,
+          -1.773221
+        ],
+        [
+          -0.860647,
+          -6.135276
+        ],
+        [
+          -2.600256,
+          -9.919183
+        ]
+      ],
+      "case": 11,
+      "family": "stock",
+      "group": 2,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -1,
+        4,
+        10
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -4.997069,
+        -13.421726
+      ],
+      "scores": [
+        [
+          6.34237426094316,
+          -6.387061042122089
+        ],
+        [
+          -4.698070560622816,
+          -5.429092450641563
+        ],
+        [
+          -5.8925376153799975,
+          -6.053439180024948
+        ]
+      ],
+      "truth": [
+        55040,
+        67840
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.232642134586592,
+          null
+        ],
+        "mono": [
+          -5.379424107254935,
+          null
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "case": 12,
+      "family": null,
+      "group": 3,
+      "kind": "background_only",
+      "lag_modes_samples": [
+        -22,
+        4,
+        10
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [
+        [
+          -6.689905598897958,
+          null
+        ],
+        [
+          -6.07089807092755,
+          null
+        ],
+        [
+          -6.319159008435202,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.0832161614017455,
+          -4.304032291980367
+        ],
+        "mono": [
+          -6.4706658694873305,
+          4.557419856883443
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -3.095265,
+          null
+        ],
+        [
+          2.957269,
+          null
+        ],
+        [
+          0.268819,
+          null
+        ]
+      ],
+      "case": 13,
+      "family": null,
+      "group": 4,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -11,
+        -1,
+        13
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -5.000025,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -4.278654150662018
+        ],
+        [
+          -6.126721417424426,
+          4.8626627208088715
+        ],
+        [
+          null,
+          -5.032615638313457
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.452907575304846,
+          -3.7679000118111334
+        ],
+        "mono": [
+          -6.396322256130054,
+          4.568961938113933
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -3.131532,
+          null
+        ],
+        [
+          3.168916,
+          null
+        ],
+        [
+          0.22791,
+          null
+        ]
+      ],
+      "case": 14,
+      "family": null,
+      "group": 4,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        -1,
+        13
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -4.939297,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -4.3821095792656655
+        ],
+        [
+          -6.441631343866537,
+          4.749539786090811
+        ],
+        [
+          null,
+          -5.139820126249612
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.284945428702376,
+          3.950501000689403
+        ],
+        "mono": [
+          -3.7839252697014265,
+          4.567331843198663
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -3.077151,
+          null
+        ],
+        [
+          3.417029,
+          null
+        ],
+        [
+          0.268669,
+          null
+        ]
+      ],
+      "case": 15,
+      "family": null,
+      "group": 4,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -11,
+        -1,
+        13
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -4.788331,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -4.507144910692238
+        ],
+        [
+          -5.861584656361713,
+          4.793433621452382
+        ],
+        [
+          null,
+          -5.111129810502932
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.367170376976278,
+          0.632045060286458
+        ],
+        "mono": [
+          -6.334054062965405,
+          4.571264920675751
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -3.128409,
+          -2.32343
+        ],
+        [
+          3.775177,
+          4.736823
+        ],
+        [
+          0.293389,
+          0.833834
+        ]
+      ],
+      "case": 16,
+      "family": "clone",
+      "group": 4,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -11,
+        -1,
+        13
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -4.722091,
+        -2.825359
+      ],
+      "scores": [
+        [
+          null,
+          -4.448808623569277
+        ],
+        [
+          -6.5762415101332845,
+          4.850078893434681
+        ],
+        [
+          null,
+          -5.03110891826299
+        ]
+      ],
+      "truth": [
+        30720,
+        46080
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.078625674761677,
+          -5.37385270572405
+        ],
+        "mono": [
+          -2.7501671165812547,
+          -6.595567677250022
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          3.932353,
+          null
+        ],
+        [
+          -0.668621,
+          null
+        ],
+        [
+          -2.495738,
+          null
+        ]
+      ],
+      "case": 17,
+      "family": null,
+      "group": 5,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -1,
+        4,
+        10
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -5.000008,
+        null
+      ],
+      "scores": [
+        [
+          4.507041603988237,
+          -5.271159164165479
+        ],
+        [
+          -1.7736539834011333,
+          -4.663199444416889
+        ],
+        [
+          -6.265964490031608,
+          -6.844077107961014
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.133818167928412,
+          -5.332794672541303
+        ],
+        "mono": [
+          -2.8161024795325362,
+          -6.595305438772388
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          3.961237,
+          null
+        ],
+        [
+          -0.707462,
+          null
+        ],
+        [
+          -2.461088,
+          null
+        ]
+      ],
+      "case": 18,
+      "family": null,
+      "group": 5,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -1,
+        4,
+        10
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -4.930539,
+        null
+      ],
+      "scores": [
+        [
+          1.9479689497925339,
+          -5.392315856895411
+        ],
+        [
+          -2.296889290232864,
+          -4.605218845297811
+        ],
+        [
+          -6.376289360236002,
+          -6.848126443904833
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.5289783530378274,
+          -4.8865985445081295
+        ],
+        "mono": [
+          -2.4690952364816217,
+          -6.591930399151528
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          3.836317,
+          null
+        ],
+        [
+          -0.671031,
+          null
+        ],
+        [
+          -2.376707,
+          null
+        ]
+      ],
+      "case": 19,
+      "family": null,
+      "group": 5,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -1,
+        4,
+        10
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -4.891486,
+        null
+      ],
+      "scores": [
+        [
+          -0.1451630406289932,
+          -5.369579262014491
+        ],
+        [
+          -2.7477622204167442,
+          -4.627752302954235
+        ],
+        [
+          -5.949021308204436,
+          -6.890372737409866
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.259411902446082,
+          -6.004564296867122
+        ],
+        "mono": [
+          -2.870754212954128,
+          -6.6009702448062635
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          3.822931,
+          -2.243434
+        ],
+        [
+          -0.792216,
+          -3.327842
+        ],
+        [
+          -2.503232,
+          -9.183325
+        ]
+      ],
+      "case": 20,
+      "family": "expressive",
+      "group": 5,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -1,
+        4,
+        10
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -5.087717,
+        -12.583692
+      ],
+      "scores": [
+        [
+          5.093180882787111,
+          -5.415152024151376
+        ],
+        [
+          -2.336560246116674,
+          -4.500728590527008
+        ],
+        [
+          -5.930498104905944,
+          -6.865122734371017
+        ]
+      ],
+      "truth": [
+        33280,
+        46080
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.601722944688516,
+          -3.146479115123809
+        ],
+        "mono": [
+          0.36274423452256777,
+          -4.4494900723142266
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.133076,
+          null
+        ],
+        [
+          -3.389943,
+          null
+        ],
+        [
+          3.960309,
+          null
+        ]
+      ],
+      "case": 21,
+      "family": null,
+      "group": 6,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -19,
+        -11,
+        -1
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -4.999987,
+        null
+      ],
+      "scores": [
+        [
+          -5.645467686465151,
+          -6.101575922556144
+        ],
+        [
+          -6.943143394818932,
+          -6.256944617916565
+        ],
+        [
+          7.068065580780201,
+          4.411895714610658
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.18339505404173,
+          -4.764310864683047
+        ],
+        "mono": [
+          0.36274423452256777,
+          -4.997675426033748
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -3.37644,
+          null
+        ],
+        [
+          4.145327,
+          null
+        ],
+        [
+          0.621364,
+          null
+        ]
+      ],
+      "case": 22,
+      "family": null,
+      "group": 6,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        -1,
+        3
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -4.82186,
+        null
+      ],
+      "scores": [
+        [
+          -6.898493791462542,
+          -6.0369796665915185
+        ],
+        [
+          6.780099508201455,
+          5.073854757088625
+        ],
+        [
+          -2.3149335607016477,
+          -5.814543792714529
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.115464266327453,
+          5.650585194518995
+        ],
+        "mono": [
+          0.36274423452256777,
+          -5.876777693711784
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.981329,
+          null
+        ],
+        [
+          3.851794,
+          null
+        ],
+        [
+          0.327929,
+          null
+        ]
+      ],
+      "case": 23,
+      "family": null,
+      "group": 6,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -11,
+        -1,
+        22
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -4.538236,
+        null
+      ],
+      "scores": [
+        [
+          -6.838376042006943,
+          -6.225636015274636
+        ],
+        [
+          6.561268733689829,
+          6.802591636866876
+        ],
+        [
+          -6.6489524636158075,
+          -6.252908731502941
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.185601918253143,
+          -4.337628850443923
+        ],
+        "mono": [
+          0.36274423452256777,
+          -5.768335797188937
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -3.397689,
+          -2.521312
+        ],
+        [
+          3.939375,
+          4.661853
+        ],
+        [
+          0.032788,
+          -0.17257
+        ]
+      ],
+      "case": 24,
+      "family": "expressive",
+      "group": 6,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -11,
+        -1,
+        22
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        -5.067354,
+        -4.219446
+      ],
+      "scores": [
+        [
+          -6.807640078423609,
+          -6.91261860830872
+        ],
+        [
+          6.447842820577039,
+          -3.153543207784249
+        ],
+        [
+          -6.551072543573632,
+          -6.49682186549086
+        ]
+      ],
+      "truth": [
+        60160,
+        75520
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.7571407196353044,
+          -4.738599740418633
+        ],
+        "mono": [
+          -5.273566677047925,
+          -6.472831686026748
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "case": 25,
+      "family": null,
+      "group": 7,
+      "kind": "background_only",
+      "lag_modes_samples": [
+        -19,
+        -11,
+        13
+      ],
+      "location": "surrey",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [
+        [
+          -5.461894091744834,
+          -6.443376522993993
+        ],
+        [
+          -6.336370967488494,
+          -5.143001050139316
+        ],
+        [
+          -6.472202291978103,
+          -6.108696495646762
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.0613837774847297,
+          7.223074051673557
+        ],
+        "mono": [
+          -6.651281348447408,
+          5.310171066271003
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.045886,
+          null
+        ],
+        [
+          4.861177,
+          null
+        ],
+        [
+          -3.788437,
+          null
+        ]
+      ],
+      "case": 26,
+      "family": null,
+      "group": 8,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -16,
+        0,
+        12
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -4.999993,
+        null
+      ],
+      "scores": [
+        [
+          -4.655113260308636,
+          -3.8278140992309764
+        ],
+        [
+          -3.554321847650979,
+          7.110368202810433
+        ],
+        [
+          -7.090575263736194,
+          -5.503761317590055
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.398134201822786,
+          7.179916943275584
+        ],
+        "mono": [
+          -6.885676894356836,
+          5.310171066271003
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.040833,
+          null
+        ],
+        [
+          4.699757,
+          null
+        ],
+        [
+          -3.853842,
+          null
+        ]
+      ],
+      "case": 27,
+      "family": null,
+      "group": 8,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -16,
+        0,
+        12
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -5.12468,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -3.9731321429513193
+        ],
+        [
+          -5.912497513468362,
+          7.114911373154976
+        ],
+        [
+          -7.175902355119148,
+          -5.264704222337342
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.562659405393245,
+          7.2146008107727315
+        ],
+        "mono": [
+          -4.2990303719486,
+          5.310171066271003
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.035695,
+          null
+        ],
+        [
+          4.63578,
+          null
+        ],
+        [
+          -3.822272,
+          null
+        ]
+      ],
+      "case": 28,
+      "family": null,
+      "group": 8,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -16,
+        0,
+        12
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -5.109115,
+        null
+      ],
+      "scores": [
+        [
+          -5.364623553869455,
+          -3.2943758747055347
+        ],
+        [
+          -2.3327293605216535,
+          7.1017780443735425
+        ],
+        [
+          -7.0674714491891155,
+          -5.239456155230618
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.991971389057106,
+          7.204912254194321
+        ],
+        "mono": [
+          -5.497580520462902,
+          5.310171066271003
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.050119,
+          -0.494492
+        ],
+        [
+          4.957617,
+          4.389506
+        ],
+        [
+          -3.79367,
+          -3.251111
+        ]
+      ],
+      "case": 29,
+      "family": "clone",
+      "group": 8,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -16,
+        0,
+        12
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -4.963029,
+        -5.198687
+      ],
+      "scores": [
+        [
+          -4.297639420908517,
+          -4.14793768814583
+        ],
+        [
+          5.2318243554425115,
+          7.125840401785904
+        ],
+        [
+          -7.012664368850097,
+          -5.548168198200613
+        ]
+      ],
+      "truth": [
+        20480,
+        33280
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.005226878547123,
+          -0.07697864596996984
+        ],
+        "mono": [
+          -4.227598163310039,
+          -4.3136453609062535
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.95719,
+          null
+        ],
+        [
+          3.911055,
+          null
+        ],
+        [
+          -0.04874,
+          null
+        ]
+      ],
+      "case": 30,
+      "family": null,
+      "group": 9,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -12,
+        0,
+        11
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -5.000003,
+        null
+      ],
+      "scores": [
+        [
+          -3.625146542500364,
+          -4.125407277892388
+        ],
+        [
+          4.9136130824893405,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.828234312687333,
+          -0.2419363097447944
+        ],
+        "mono": [
+          -4.137530372653445,
+          -4.314613265087741
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -3.121511,
+          null
+        ],
+        [
+          3.70291,
+          null
+        ],
+        [
+          -0.043197,
+          null
+        ]
+      ],
+      "case": 31,
+      "family": null,
+      "group": 9,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -12,
+        0,
+        11
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -5.217296,
+        null
+      ],
+      "scores": [
+        [
+          -3.8972811374331813,
+          -4.125181245471436
+        ],
+        [
+          3.3683276514592873,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.5518892147128565,
+          3.759375153664634
+        ],
+        "mono": [
+          -4.000839239230231,
+          -4.314672989175542
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -3.253486,
+          null
+        ],
+        [
+          3.390241,
+          null
+        ],
+        [
+          -0.189285,
+          null
+        ]
+      ],
+      "case": 32,
+      "family": null,
+      "group": 9,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -12,
+        0,
+        11
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -5.492941,
+        null
+      ],
+      "scores": [
+        [
+          -4.276005774758487,
+          -4.108430878823963
+        ],
+        [
+          1.3340188427266695,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          7.062892474172879,
+          4.501588186349319
+        ],
+        "mono": [
+          -3.299858126486937,
+          -4.314849821447891
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -3.177282,
+          -6.300558
+        ],
+        [
+          3.486843,
+          0.1009
+        ],
+        [
+          -0.110477,
+          -2.131453
+        ]
+      ],
+      "case": 33,
+      "family": "expressive",
+      "group": 9,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -12,
+        0,
+        11
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -5.331407,
+        -9.680944
+      ],
+      "scores": [
+        [
+          -4.236880331687326,
+          -4.058391557210504
+        ],
+        [
+          5.002157705577723,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": [
+        29440,
+        44800
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.622920943977678,
+          2.649328921353298
+        ],
+        "mono": [
+          4.149073155172227,
+          -5.205093431916906
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.20464,
+          null
+        ],
+        [
+          2.016425,
+          null
+        ],
+        [
+          -3.206694,
+          null
+        ]
+      ],
+      "case": 34,
+      "family": null,
+      "group": 10,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -5.000025,
+        null
+      ],
+      "scores": [
+        [
+          -5.970888174064417,
+          -6.419460265307215
+        ],
+        [
+          -3.922038480775554,
+          5.159147682068444
+        ],
+        [
+          -5.261786465101369,
+          -5.499824964799294
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.5894765852046766,
+          -3.14213798861313
+        ],
+        "mono": [
+          4.149073155172227,
+          -5.161032700747246
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.18523,
+          null
+        ],
+        [
+          1.909361,
+          null
+        ],
+        [
+          -3.249405,
+          null
+        ]
+      ],
+      "case": 35,
+      "family": null,
+      "group": 10,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -5.108064,
+        null
+      ],
+      "scores": [
+        [
+          -5.9128203111863575,
+          -6.307700108868789
+        ],
+        [
+          -3.8824176536133965,
+          -2.4648060400922733
+        ],
+        [
+          -5.286190041155327,
+          -6.286771271228976
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          2.6035100051063504,
+          3.0118534158580954
+        ],
+        "mono": [
+          4.149073155172227,
+          -5.117387752580038
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.242352,
+          null
+        ],
+        [
+          2.16216,
+          null
+        ],
+        [
+          -3.116285,
+          null
+        ]
+      ],
+      "case": 36,
+      "family": null,
+      "group": 10,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -4.843884,
+        null
+      ],
+      "scores": [
+        [
+          -5.999699635784416,
+          -6.015065250833154
+        ],
+        [
+          -4.224243208758064,
+          -2.4057922443448168
+        ],
+        [
+          -5.228801220999579,
+          -6.019056320438548
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -2.641283498244608,
+          -3.6568622631466985
+        ],
+        "mono": [
+          4.149073155172227,
+          -5.2584953312519795
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.120881,
+          -0.222445
+        ],
+        [
+          1.618943,
+          -3.89817
+        ],
+        [
+          -2.997983,
+          -4.041498
+        ]
+      ],
+      "case": 37,
+      "family": "stock",
+      "group": 10,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -20,
+        0,
+        12
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -5.048352,
+        -8.979425
+      ],
+      "scores": [
+        [
+          -5.422270759813094,
+          -6.636793157655008
+        ],
+        [
+          -4.845516251232943,
+          6.810310973382667
+        ],
+        [
+          -4.087707563245595,
+          -6.412105530647236
+        ]
+      ],
+      "truth": [
+        51200,
+        64000
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -6.18266632117729,
+          -5.581638258455172
+        ],
+        "mono": [
+          -6.5756492181407635,
+          -6.072372430868171
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "case": 38,
+      "family": null,
+      "group": 11,
+      "kind": "background_only",
+      "lag_modes_samples": [
+        -16,
+        -12,
+        12
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [
+        [
+          -7.074231150350815,
+          -7.0563898264218405
+        ],
+        [
+          -7.157756743556169,
+          -6.6812915828885
+        ],
+        [
+          -6.661915278236886,
+          -6.917715080204134
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.463916087494523,
+          7.191821005765865
+        ],
+        "mono": [
+          3.99982294812129,
+          5.6935785704185395
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.656479,
+          null
+        ],
+        [
+          1.877349,
+          null
+        ],
+        [
+          0.431755,
+          null
+        ]
+      ],
+      "case": 39,
+      "family": null,
+      "group": 12,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -12,
+        0,
+        11
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -4.999996,
+        null
+      ],
+      "scores": [
+        [
+          -6.844574974684704,
+          -6.264355619952213
+        ],
+        [
+          6.603925859453037,
+          7.069608697414597
+        ],
+        [
+          -6.201012578935959,
+          -3.610421452443649
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.04003612384409,
+          7.171644176958447
+        ],
+        "mono": [
+          3.99982294812129,
+          -1.0992829931256605
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.427949,
+          null
+        ],
+        [
+          2.224073,
+          null
+        ],
+        [
+          0.433592,
+          null
+        ]
+      ],
+      "case": 40,
+      "family": null,
+      "group": 12,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -12,
+        0,
+        11
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -4.512867,
+        null
+      ],
+      "scores": [
+        [
+          -6.844207271793966,
+          -6.647219214877854
+        ],
+        [
+          6.658441797637128,
+          7.120508680207174
+        ],
+        [
+          -5.937257831551034,
+          -4.139210633976263
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.651798209287052,
+          3.737774096237883
+        ],
+        "mono": [
+          3.99982294812129,
+          -2.5172638472437847
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.2738,
+          null
+        ],
+        [
+          2.646345,
+          null
+        ],
+        [
+          0.358681,
+          null
+        ]
+      ],
+      "case": 41,
+      "family": null,
+      "group": 12,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -12,
+        0,
+        11
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -4.146843,
+        null
+      ],
+      "scores": [
+        [
+          -6.863600200716655,
+          -6.583918590062252
+        ],
+        [
+          6.7484768494791725,
+          6.187930185030846
+        ],
+        [
+          -6.394375848052276,
+          -4.420808835119481
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.114268378010408,
+          7.171644176958447
+        ],
+        "mono": [
+          3.99982294812129,
+          4.823777990272355
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.264639,
+          -0.724723
+        ],
+        [
+          3.013486,
+          8.986076
+        ],
+        [
+          0.317839,
+          0.177969
+        ]
+      ],
+      "case": 42,
+      "family": "clone",
+      "group": 12,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -12,
+        0,
+        11
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -3.991901,
+        0.487002
+      ],
+      "scores": [
+        [
+          -6.852736523330582,
+          -6.847747767405438
+        ],
+        [
+          6.696795801816729,
+          7.028554726321817
+        ],
+        [
+          -6.357651767498606,
+          -5.681446045685728
+        ]
+      ],
+      "truth": [
+        61440,
+        76800
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.0488820297184724,
+          6.210858656956367
+        ],
+        "mono": [
+          -4.828429250516826,
+          6.391436846066797
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.384112,
+          null
+        ],
+        [
+          3.439223,
+          null
+        ],
+        [
+          -3.640153,
+          null
+        ]
+      ],
+      "case": 43,
+      "family": null,
+      "group": 13,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -5.000002,
+        null
+      ],
+      "scores": [
+        [
+          -6.521289890741455,
+          -5.480628953658785
+        ],
+        [
+          -6.11733534312113,
+          4.54336502305194
+        ],
+        [
+          -6.3641213746042125,
+          -6.350268383747001
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.537364845369145,
+          5.924642305825184
+        ],
+        "mono": [
+          -4.647367541990155,
+          6.391436846066797
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.369654,
+          null
+        ],
+        [
+          3.200354,
+          null
+        ],
+        [
+          -3.691397,
+          null
+        ]
+      ],
+      "case": 44,
+      "family": null,
+      "group": 13,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -5.076407,
+        null
+      ],
+      "scores": [
+        [
+          -4.824564922448573,
+          -5.298682243437422
+        ],
+        [
+          -2.816401955374795,
+          4.522333224189837
+        ],
+        [
+          -6.905502330619059,
+          -6.369549773178989
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.794264937639647,
+          6.062016633212259
+        ],
+        "mono": [
+          4.819776433645319,
+          6.391436846066797
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.443012,
+          null
+        ],
+        [
+          3.004411,
+          null
+        ],
+        [
+          -3.525474,
+          null
+        ]
+      ],
+      "case": 45,
+      "family": null,
+      "group": 13,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -4.960059,
+        null
+      ],
+      "scores": [
+        [
+          -5.380800238754116,
+          -5.364012699362746
+        ],
+        [
+          4.562818705818474,
+          4.436899787136912
+        ],
+        [
+          -4.903414760154116,
+          -6.373186549456194
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.0792987993419345,
+          6.666343405120515
+        ],
+        "mono": [
+          -4.278527218460897,
+          6.391436846066797
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.393219,
+          0.611525
+        ],
+        [
+          3.473261,
+          2.322
+        ],
+        [
+          -3.715903,
+          -3.49968
+        ]
+      ],
+      "case": 46,
+      "family": "expressive",
+      "group": 13,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -5.019071,
+        -4.909599
+      ],
+      "scores": [
+        [
+          -4.989243971494794,
+          -5.395840686179278
+        ],
+        [
+          4.462043376753918,
+          4.109219731352476
+        ],
+        [
+          -6.256348626283429,
+          -6.389803928957794
+        ]
+      ],
+      "truth": [
+        29440,
+        42240
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          3.621350367449102,
+          6.014941743070936
+        ],
+        "mono": [
+          3.2136416295613883,
+          4.855437332650684
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.61083,
+          null
+        ],
+        [
+          1.181972,
+          null
+        ],
+        [
+          0.018355,
+          null
+        ]
+      ],
+      "case": 47,
+      "family": null,
+      "group": 14,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -11,
+        0,
+        11
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -4.999995,
+        null
+      ],
+      "scores": [
+        [
+          -4.3005732635293334,
+          -4.627219192822959
+        ],
+        [
+          4.625788941525644,
+          6.9943127191476435
+        ],
+        [
+          -4.209034863198318,
+          -4.417406096556992
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.632711713979273,
+          5.975878112122755
+        ],
+        "mono": [
+          4.8998820934818985,
+          4.855437332650684
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.722108,
+          null
+        ],
+        [
+          1.164935,
+          null
+        ],
+        [
+          -0.029505,
+          null
+        ]
+      ],
+      "case": 48,
+      "family": null,
+      "group": 14,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        0,
+        11
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -5.142398,
+        null
+      ],
+      "scores": [
+        [
+          -3.928653729203609,
+          -4.778364703599089
+        ],
+        [
+          6.677767683883127,
+          6.959188645840345
+        ],
+        [
+          -5.917061776702935,
+          -4.105117347839233
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.752521665521496,
+          6.004838288055193
+        ],
+        "mono": [
+          4.3122448416661605,
+          4.855437332650684
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.59845,
+          null
+        ],
+        [
+          1.245697,
+          null
+        ],
+        [
+          -0.016679,
+          null
+        ]
+      ],
+      "case": 49,
+      "family": null,
+      "group": 14,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -11,
+        0,
+        11
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -4.964734,
+        null
+      ],
+      "scores": [
+        [
+          -3.849214351715135,
+          -4.60434343035935
+        ],
+        [
+          6.397773268871078,
+          7.017965316881994
+        ],
+        [
+          null,
+          -4.138601330226849
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.7921835446661145,
+          5.80678930106991
+        ],
+        "mono": [
+          5.302234921042061,
+          4.855437332650684
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.410705,
+          -1.3464
+        ],
+        [
+          1.075265,
+          6.33075
+        ],
+        [
+          -0.00603,
+          0.784628
+        ]
+      ],
+      "case": 50,
+      "family": "expressive",
+      "group": 14,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        -4.81597,
+        -0.818869
+      ],
+      "scores": [
+        [
+          -2.565161186381404,
+          -4.6435327719260755
+        ],
+        [
+          5.975689389921442,
+          6.957178829873169
+        ],
+        [
+          -5.0591859267969115,
+          -4.038230917624227
+        ]
+      ],
+      "truth": [
+        25600,
+        40960
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -6.732330315801981,
+          -6.903241170562876
+        ],
+        "mono": [
+          -6.902975049829178,
+          -7.043965339380481
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "case": 51,
+      "family": null,
+      "group": 15,
+      "kind": "background_only",
+      "lag_modes_samples": [
+        -12,
+        -3,
+        12
+      ],
+      "location": "bbc",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [
+        [
+          -6.942183465034779,
+          -7.1234874254967275
+        ],
+        [
+          -7.052372001410093,
+          -6.936082295608406
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          7.157750755039178,
+          5.173252004960298
+        ],
+        "mono": [
+          6.256506608819955,
+          6.178158681047817
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.763349,
+          null
+        ],
+        [
+          0.726905,
+          null
+        ],
+        [
+          0.507636,
+          null
+        ]
+      ],
+      "case": 52,
+      "family": null,
+      "group": 16,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -12,
+        0,
+        10
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.999991,
+        null
+      ],
+      "scores": [
+        [
+          -6.013534596821759,
+          -6.775225585244446
+        ],
+        [
+          6.9557994163773165,
+          6.801946556298499
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          7.134041288302257,
+          5.159850871542293
+        ],
+        "mono": [
+          6.256506608819955,
+          6.225996505706928
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.747424,
+          null
+        ],
+        [
+          0.75228,
+          null
+        ],
+        [
+          0.46387,
+          null
+        ]
+      ],
+      "case": 53,
+      "family": null,
+      "group": 16,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -12,
+        0,
+        9
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -5.079934,
+        null
+      ],
+      "scores": [
+        [
+          -6.181714125302656,
+          -6.6943063702976
+        ],
+        [
+          6.997835005960237,
+          3.3015152957388993
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          7.087027419881356,
+          -2.230490227689778
+        ],
+        "mono": [
+          6.256506608819955,
+          6.417978500403401
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.470875,
+          null
+        ],
+        [
+          0.761532,
+          null
+        ],
+        [
+          0.616995,
+          null
+        ]
+      ],
+      "case": 54,
+      "family": null,
+      "group": 16,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -12,
+        0,
+        9
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.704921,
+        null
+      ],
+      "scores": [
+        [
+          -6.233558626007331,
+          -6.630303885689845
+        ],
+        [
+          7.022643022606245,
+          5.244507461723825
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          7.074816695823725,
+          -2.59578824801898
+        ],
+        "mono": [
+          6.256506608819955,
+          5.239951370316596
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.710989,
+          -2.757373
+        ],
+        [
+          0.756625,
+          -0.240763
+        ],
+        [
+          0.510682,
+          0.140862
+        ]
+      ],
+      "case": 55,
+      "family": "expressive",
+      "group": 16,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -12,
+        0,
+        9
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -5.017481,
+        -6.697841
+      ],
+      "scores": [
+        [
+          -6.215025453560405,
+          -5.829824387192436
+        ],
+        [
+          7.011651736933093,
+          -3.044274387613516
+        ],
+        [
+          null,
+          -5.573594021564769
+        ]
+      ],
+      "truth": [
+        55040,
+        67840
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.618308004254331,
+          5.257398014703889
+        ],
+        "mono": [
+          3.754297520042656,
+          5.909091527346999
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          4.848526,
+          null
+        ],
+        [
+          -4.501106,
+          null
+        ],
+        [
+          1.213038,
+          null
+        ]
+      ],
+      "case": 56,
+      "family": null,
+      "group": 16,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -12,
+        0,
+        9
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -5.000003,
+        null
+      ],
+      "scores": [
+        [
+          4.171452518814266,
+          -5.296173552945887
+        ],
+        [
+          -4.251375253337733,
+          -4.365013044835758
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.172432903974393,
+          6.25264563432519
+        ],
+        "mono": [
+          3.754297520042656,
+          4.049687007592493
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          5.168129,
+          null
+        ],
+        [
+          -4.129218,
+          null
+        ],
+        [
+          0.655226,
+          null
+        ]
+      ],
+      "case": 57,
+      "family": null,
+      "group": 16,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -12,
+        0,
+        7
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -5.216261,
+        null
+      ],
+      "scores": [
+        [
+          2.0603325309569605,
+          -4.706378865675334
+        ],
+        [
+          -4.679235426602105,
+          -5.112806251862538
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.03445776696413,
+          6.378565666190701
+        ],
+        "mono": [
+          3.754297520042656,
+          4.842719458615024
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          4.764227,
+          null
+        ],
+        [
+          -3.845671,
+          null
+        ],
+        [
+          0.638147,
+          null
+        ]
+      ],
+      "case": 58,
+      "family": null,
+      "group": 16,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -12,
+        0,
+        7
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.999673,
+        null
+      ],
+      "scores": [
+        [
+          2.8214893077219574,
+          5.502894703116878
+        ],
+        [
+          null,
+          -5.053755294747381
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.919699628266748,
+          5.442231435082491
+        ],
+        "mono": [
+          3.754297520042656,
+          2.683700764432835
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          4.90089,
+          2.256286
+        ],
+        [
+          -3.986575,
+          -4.182627
+        ],
+        [
+          0.650821,
+          0.584719
+        ]
+      ],
+      "case": 59,
+      "family": "expressive",
+      "group": 16,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -12,
+        0,
+        7
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -5.092186,
+        -6.19636
+      ],
+      "scores": [
+        [
+          4.140499050115409,
+          -4.806073707321524
+        ],
+        [
+          null,
+          -3.6732373945987904
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": [
+        55040,
+        67840
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.175371393441852,
+          5.068247999044247
+        ],
+        "mono": [
+          1.045646132634102,
+          6.8748822656319355
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.410008,
+          null
+        ],
+        [
+          0.992058,
+          null
+        ],
+        [
+          -1.156013,
+          null
+        ]
+      ],
+      "case": 60,
+      "family": null,
+      "group": 16,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -5.000004,
+        null
+      ],
+      "scores": [
+        [
+          -4.033941311134061,
+          -4.811451418362007
+        ],
+        [
+          6.0625308459202785,
+          6.762379642292036
+        ],
+        [
+          6.738742319404173,
+          -6.049366473290302
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.80431388437309,
+          4.481438836866205
+        ],
+        "mono": [
+          1.045646132634102,
+          5.670989576448882
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.397558,
+          null
+        ],
+        [
+          0.929861,
+          null
+        ],
+        [
+          -1.198558,
+          null
+        ]
+      ],
+      "case": 61,
+      "family": null,
+      "group": 16,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -5.079954,
+        null
+      ],
+      "scores": [
+        [
+          -3.696285933755825,
+          -3.8203743103889503
+        ],
+        [
+          6.017520444283437,
+          6.860422406646827
+        ],
+        [
+          6.779153502535525,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          7.0235811905026235,
+          6.85860107446126
+        ],
+        "mono": [
+          1.045646132634102,
+          6.454394927475838
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.183207,
+          null
+        ],
+        [
+          0.931316,
+          null
+        ],
+        [
+          -1.006742,
+          null
+        ]
+      ],
+      "case": 62,
+      "family": null,
+      "group": 16,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.704923,
+        null
+      ],
+      "scores": [
+        [
+          -3.745202550842863,
+          -1.4199984543853374
+        ],
+        [
+          6.157679933644824,
+          6.994964060866644
+        ],
+        [
+          6.721881493828864,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.123896217332067,
+          2.56455991986662
+        ],
+        "mono": [
+          1.045646132634102,
+          5.55049688806513
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.363732,
+          -1.187222
+        ],
+        [
+          0.882762,
+          0.829426
+        ],
+        [
+          -1.135723,
+          0.622718
+        ]
+      ],
+      "case": 63,
+      "family": "expressive",
+      "group": 16,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -5.017492,
+        -4.567153
+      ],
+      "scores": [
+        [
+          -3.8739133193744473,
+          0.5851774668259582
+        ],
+        [
+          6.0612971772861854,
+          5.941326029793593
+        ],
+        [
+          6.766832213920662,
+          null
+        ]
+      ],
+      "truth": [
+        55040,
+        67840
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          3.7288164053593857,
+          -2.374577050116372
+        ],
+        "mono": [
+          1.7929458161457577,
+          -4.403349374398309
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.609936,
+          null
+        ],
+        [
+          0.061816,
+          null
+        ],
+        [
+          -2.063947,
+          null
+        ]
+      ],
+      "case": 64,
+      "family": null,
+      "group": 17,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -5.0,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -3.5011207470408903
+        ],
+        [
+          4.383587802087327,
+          4.091680350122384
+        ],
+        [
+          4.692268977098427,
+          -6.736444411357531
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.899512754383332,
+          0.20042125012332468
+        ],
+        "mono": [
+          1.9363791824083116,
+          -4.3879652359815955
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.583017,
+          null
+        ],
+        [
+          0.035907,
+          null
+        ],
+        [
+          -2.086593,
+          null
+        ]
+      ],
+      "case": 65,
+      "family": null,
+      "group": 17,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -5.114683,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          5.07534098541583,
+          4.531982524001174
+        ],
+        [
+          3.7421895530507747,
+          -6.732395139023211
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.258340931151011,
+          -3.266065845067995
+        ],
+        "mono": [
+          3.9892254513762997,
+          -4.369323731418791
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.636401,
+          null
+        ],
+        [
+          0.203993,
+          null
+        ],
+        [
+          -2.027897,
+          null
+        ]
+      ],
+      "case": 66,
+      "family": null,
+      "group": 17,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.836682,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          4.081714716819645,
+          3.845859290221618
+        ],
+        [
+          4.9363099758470845,
+          -6.803023812670728
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.279301849311743,
+          -1.812567228829108
+        ],
+        "mono": [
+          1.9073835374914907,
+          -4.501940711135208
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.549038,
+          0.343244
+        ],
+        [
+          -0.071305,
+          -1.328851
+        ],
+        [
+          -2.12256,
+          -4.911733
+        ]
+      ],
+      "case": 67,
+      "family": "stock",
+      "group": 17,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -5.111428,
+        -7.781094
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          6.816616786492826,
+          4.016382596002259
+        ],
+        [
+          5.6730127842688205,
+          -6.769370092842618
+        ]
+      ],
+      "truth": [
+        20480,
+        35840
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.944794606500889,
+          4.0216378255654135
+        ],
+        "mono": [
+          -4.542469039719542,
+          -5.9025002059085105
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.775454,
+          null
+        ],
+        [
+          -4.29955,
+          null
+        ],
+        [
+          3.46368,
+          null
+        ]
+      ],
+      "case": 68,
+      "family": null,
+      "group": 17,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -5.000004,
+        null
+      ],
+      "scores": [
+        [
+          -5.369096256154945,
+          -5.58821913568542
+        ],
+        [
+          -2.4454703760472145,
+          -3.9155649715149776
+        ],
+        [
+          5.005676877331253,
+          4.90249293281663
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -1.9093859561678193,
+          -4.121256368568748
+        ],
+        "mono": [
+          -3.937718878914641,
+          -5.782510733288459
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.748061,
+          null
+        ],
+        [
+          -4.186468,
+          null
+        ],
+        [
+          3.4917,
+          null
+        ]
+      ],
+      "case": 69,
+      "family": null,
+      "group": 17,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.92392,
+        null
+      ],
+      "scores": [
+        [
+          -4.057004005246303,
+          -5.64492992461236
+        ],
+        [
+          -3.1321268006455263,
+          -3.7655482184525
+        ],
+        [
+          5.795683919745071,
+          5.047224750843413
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          3.8596852768759335,
+          -4.0109944156078035
+        ],
+        "mono": [
+          -5.557373555635995,
+          -5.820009199096616
+        ]
+      },
+      "candidate_snr_db": [
+        null,
+        [
+          -4.258456,
+          null
+        ],
+        [
+          3.516998,
+          null
+        ]
+      ],
+      "case": 70,
+      "family": null,
+      "group": 17,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -14,
+        0,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.871549,
+        null
+      ],
+      "scores": [
+        null,
+        [
+          3.6534195439684978,
+          -4.052589386851571
+        ],
+        [
+          5.088092129940704,
+          5.81379293652725
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.449122950271371,
+          -4.672060081332685
+        ],
+        "mono": [
+          -3.692846801515194,
+          -5.908534090068793
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -3.063472,
+          -2.896537
+        ],
+        [
+          1.438047,
+          1.968917
+        ],
+        [
+          2.942647,
+          1.807257
+        ]
+      ],
+      "case": 71,
+      "family": "stock",
+      "group": 17,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        0,
+        7,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.487757,
+        -4.454181
+      ],
+      "scores": [
+        [
+          3.1018724761732206,
+          -4.471582355598728
+        ],
+        [
+          -4.747365023661514,
+          -4.23574450369276
+        ],
+        [
+          6.881492810495451,
+          4.470199607459471
+        ]
+      ],
+      "truth": [
+        20480,
+        35840
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.678765213063733,
+          4.558371889721014
+        ],
+        "mono": [
+          5.234386702598991,
+          -3.172751958785645
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.24932,
+          null
+        ],
+        [
+          0.938568,
+          null
+        ],
+        [
+          -0.673158,
+          null
+        ]
+      ],
+      "case": 72,
+      "family": null,
+      "group": 17,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -5.000009,
+        null
+      ],
+      "scores": [
+        [
+          3.8508705343048213,
+          -3.2123540275553863
+        ],
+        [
+          5.00719271236616,
+          4.545748600436232
+        ],
+        [
+          3.187826299056625,
+          -6.805854787643565
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          7.122282769107505,
+          4.38323536688213
+        ],
+        "mono": [
+          6.364849159199125,
+          -3.189413068061703
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.2652,
+          null
+        ],
+        [
+          0.86726,
+          null
+        ],
+        [
+          -0.706887,
+          null
+        ]
+      ],
+      "case": 73,
+      "family": null,
+      "group": 17,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -5.114697,
+        null
+      ],
+      "scores": [
+        [
+          5.247010650538445,
+          -3.1662805203794075
+        ],
+        [
+          6.137277959488019,
+          4.6724364151273425
+        ],
+        [
+          -2.0497374161149624,
+          -6.82154462861951
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.974840578256518,
+          3.5434457376665836
+        ],
+        "mono": [
+          5.522400113392157,
+          -3.0608549451179323
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.170799,
+          null
+        ],
+        [
+          1.083135,
+          null
+        ],
+        [
+          -0.68451,
+          null
+        ]
+      ],
+      "case": 74,
+      "family": null,
+      "group": 17,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.836696,
+        null
+      ],
+      "scores": [
+        [
+          3.3862858976013905,
+          -3.1103203332339535
+        ],
+        [
+          3.412799229603754,
+          4.594169989623572
+        ],
+        [
+          1.0717740340757809,
+          -6.82934093843316
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.004061557559008,
+          4.335533628039245
+        ],
+        "mono": [
+          5.556653119992553,
+          -3.2527110936687724
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.280328,
+          -3.481561
+        ],
+        [
+          0.841702,
+          -1.159656
+        ],
+        [
+          -0.75169,
+          -2.582606
+        ]
+      ],
+      "case": 75,
+      "family": "stock",
+      "group": 17,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -5.111445,
+        -8.250244
+      ],
+      "scores": [
+        [
+          3.9043709914674696,
+          -3.140207033536452
+        ],
+        [
+          -0.2182576151460076,
+          4.5388309796607995
+        ],
+        [
+          4.359281769286862,
+          -6.809917433738734
+        ]
+      ],
+      "truth": [
+        20480,
+        35840
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -2.9771338028191585,
+          -5.498009679576998
+        ],
+        "mono": [
+          -3.005425009549768,
+          -6.06206322289559
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.552548,
+          null
+        ],
+        [
+          1.729166,
+          null
+        ],
+        [
+          0.410078,
+          null
+        ]
+      ],
+      "case": 76,
+      "family": null,
+      "group": 18,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -12,
+        2,
+        10
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -5.000003,
+        null
+      ],
+      "scores": [
+        [
+          -4.321360618044606,
+          -5.218636564797467
+        ],
+        [
+          -3.319340655196357,
+          -5.818275381265881
+        ],
+        [
+          -2.7135691978847665,
+          -5.435476316109243
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          0.7770086416504918,
+          -5.119985591707038
+        ],
+        "mono": [
+          -1.1271521164309837,
+          -6.053442963042643
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.640778,
+          null
+        ],
+        [
+          1.253642,
+          null
+        ],
+        [
+          0.493914,
+          null
+        ]
+      ],
+      "case": 77,
+      "family": null,
+      "group": 18,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -12,
+        2,
+        10
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -5.347038,
+        null
+      ],
+      "scores": [
+        [
+          -3.997818288413653,
+          -5.192791980996365
+        ],
+        [
+          -4.06110580502158,
+          -5.966230354283161
+        ],
+        [
+          -4.4623613819464385,
+          -5.652214051084805
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.595275857650302,
+          -5.106983160587506
+        ],
+        "mono": [
+          0.9554876106317216,
+          -5.79232692731429
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.505799,
+          null
+        ],
+        [
+          1.686349,
+          null
+        ],
+        [
+          0.468869,
+          null
+        ]
+      ],
+      "case": 78,
+      "family": null,
+      "group": 18,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -12,
+        2,
+        10
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.938471,
+        null
+      ],
+      "scores": [
+        [
+          -0.039487962283871636,
+          -5.247016909133964
+        ],
+        [
+          -2.7100935256395244,
+          -5.9294876895597755
+        ],
+        [
+          -2.0410433283073752,
+          -5.63097770830903
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.696256986768314,
+          -5.219690831675409
+        ],
+        "mono": [
+          1.9195922939647763,
+          -5.957738877061096
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -2.647013,
+          -0.31369
+        ],
+        [
+          1.210805,
+          3.361187
+        ],
+        [
+          0.511814,
+          0.895642
+        ]
+      ],
+      "case": 79,
+      "family": "stock",
+      "group": 18,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -12,
+        2,
+        10
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -5.346721,
+        -1.798739
+      ],
+      "scores": [
+        [
+          -4.244226429648232,
+          -5.4173926578098
+        ],
+        [
+          -1.9638122121163466,
+          -5.985032551850539
+        ],
+        [
+          -4.484210064478117,
+          -5.555736499154477
+        ]
+      ],
+      "truth": [
+        29440,
+        42240
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -2.353028544739732,
+          -5.227875757332162
+        ],
+        "mono": [
+          -3.265176321825661,
+          -4.377679820891848
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          2.472039,
+          null
+        ],
+        [
+          -3.721787,
+          null
+        ],
+        [
+          1.028763,
+          null
+        ]
+      ],
+      "case": 80,
+      "family": null,
+      "group": 18,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -13,
+        0,
+        8
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.999981,
+        null
+      ],
+      "scores": [
+        [
+          -1.3543000084598042,
+          6.896321256721244
+        ],
+        [
+          6.447239001771339,
+          -6.528360777826578
+        ],
+        [
+          -5.6142487470027564,
+          -6.322303732986886
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.035208305269774,
+          -2.520360940428782
+        ],
+        "mono": [
+          -2.939354103504414,
+          -4.403632111101927
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          2.446011,
+          null
+        ],
+        [
+          -3.297853,
+          null
+        ],
+        [
+          1.062239,
+          null
+        ]
+      ],
+      "case": 81,
+      "family": null,
+      "group": 18,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -13,
+        0,
+        8
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.578429,
+        null
+      ],
+      "scores": [
+        [
+          6.110866328132495,
+          7.001500875485056
+        ],
+        [
+          5.45183023925317,
+          -6.570272461404784
+        ],
+        [
+          null,
+          -6.3356829231184175
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.210981681737891,
+          2.9507824268594596
+        ],
+        "mono": [
+          4.407150648175835,
+          -4.823822032949392
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          3.029465,
+          null
+        ],
+        [
+          -3.64158,
+          null
+        ],
+        [
+          1.022954,
+          null
+        ]
+      ],
+      "case": 82,
+      "family": null,
+      "group": 18,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -13,
+        0,
+        8
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.75209,
+        null
+      ],
+      "scores": [
+        [
+          3.02863860237899,
+          6.944026593346408
+        ],
+        [
+          5.869525331779815,
+          -6.591515602544437
+        ],
+        [
+          null,
+          -6.648975890598333
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.2891808257634025,
+          -2.7495894825847724
+        ],
+        "mono": [
+          3.834969200418269,
+          -4.616196676833879
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          2.676079,
+          3.395229
+        ],
+        [
+          -3.405283,
+          -0.272126
+        ],
+        [
+          0.999734,
+          1.007103
+        ]
+      ],
+      "case": 83,
+      "family": "stock",
+      "group": 18,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -13,
+        0,
+        8
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.634399,
+        -0.599794
+      ],
+      "scores": [
+        [
+          7.113296920679606,
+          7.026132083957197
+        ],
+        [
+          3.379040603967912,
+          -6.603789327414105
+        ],
+        [
+          null,
+          -6.402672789110272
+        ]
+      ],
+      "truth": [
+        29440,
+        42240
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          3.0839455000680127,
+          -5.6027793961680645
+        ],
+        "mono": [
+          -3.463770120209378,
+          null
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.893171,
+          null
+        ],
+        [
+          1.475094,
+          null
+        ],
+        [
+          -1.049605,
+          null
+        ]
+      ],
+      "case": 84,
+      "family": null,
+      "group": 18,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -11,
+        2,
+        11
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.999998,
+        null
+      ],
+      "scores": [
+        [
+          -4.387338698912359,
+          -6.0176458065151195
+        ],
+        [
+          -2.5650015447877315,
+          -3.5576544052523285
+        ],
+        [
+          -5.2818541667784835,
+          -4.1640920406606385
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          0.1445525973165417,
+          -5.79237745140203
+        ],
+        "mono": [
+          -2.4379506370743367,
+          null
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.012376,
+          null
+        ],
+        [
+          1.18024,
+          null
+        ],
+        [
+          -1.177145,
+          null
+        ]
+      ],
+      "case": 85,
+      "family": null,
+      "group": 18,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        2,
+        11
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -5.34703,
+        null
+      ],
+      "scores": [
+        [
+          -3.421689744470787,
+          -6.054918230659914
+        ],
+        [
+          -3.2162177141179145,
+          -3.536571523420549
+        ],
+        [
+          -4.1279668330695145,
+          -4.327780733489911
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          2.851657370212813,
+          -5.807784579040226
+        ],
+        "mono": [
+          -1.9130192270068203,
+          -4.716553622594007
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.876579,
+          null
+        ],
+        [
+          1.555384,
+          null
+        ],
+        [
+          -1.138671,
+          null
+        ]
+      ],
+      "case": 86,
+      "family": null,
+      "group": 18,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -11,
+        1,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.938469,
+        null
+      ],
+      "scores": [
+        [
+          -1.9866496495878718,
+          -6.2193803559946845
+        ],
+        [
+          0.9743096031968919,
+          -1.6556847987863788
+        ],
+        [
+          2.135172683076176,
+          -5.502853344619569
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          1.803757702708866,
+          -6.090866054070648
+        ],
+        "mono": [
+          4.940435689355286,
+          -4.765514447542091
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.007733,
+          0.494617
+        ],
+        [
+          1.165021,
+          1.436888
+        ],
+        [
+          -1.221361,
+          -1.984342
+        ]
+      ],
+      "case": 87,
+      "family": "stock",
+      "group": 18,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -11,
+        1,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -5.346723,
+        -4.899114
+      ],
+      "scores": [
+        [
+          1.7740241648910327,
+          -6.208622943741674
+        ],
+        [
+          6.388514836866222,
+          -1.0976143584956983
+        ],
+        [
+          0.5598161416507881,
+          -5.351869128438943
+        ]
+      ],
+      "truth": [
+        29440,
+        42240
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -1.9878608908619264,
+          4.232349339852088
+        ],
+        "mono": [
+          5.301401246494546,
+          6.639572811586156
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.320156,
+          null
+        ],
+        [
+          2.444735,
+          null
+        ],
+        [
+          -3.311945,
+          null
+        ]
+      ],
+      "case": 88,
+      "family": null,
+      "group": 19,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -5.000003,
+        null
+      ],
+      "scores": [
+        [
+          -2.5201039337695366,
+          2.2246151303831283
+        ],
+        [
+          4.817122447531224,
+          3.113013752536584
+        ],
+        [
+          5.805892360759419,
+          4.9583467679376225
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -2.639383735157651,
+          4.4737861662529665
+        ],
+        "mono": [
+          -1.0710978160711266,
+          6.5528921233678235
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.36593,
+          null
+        ],
+        [
+          2.497293,
+          null
+        ],
+        [
+          -3.227333,
+          null
+        ]
+      ],
+      "case": 89,
+      "family": null,
+      "group": 19,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.883606,
+        null
+      ],
+      "scores": [
+        [
+          -3.819721725298246,
+          -2.0364966429216222
+        ],
+        [
+          -4.259635003681796,
+          1.1050893299473035
+        ],
+        [
+          -3.435524712169104,
+          5.696862666979057
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.638941529425627,
+          5.089442714289738
+        ],
+        "mono": [
+          3.970240052058492,
+          6.781046407606478
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.34783,
+          null
+        ],
+        [
+          2.33396,
+          null
+        ],
+        [
+          -3.261835,
+          null
+        ]
+      ],
+      "case": 90,
+      "family": null,
+      "group": 19,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.988874,
+        null
+      ],
+      "scores": [
+        [
+          -4.96087267553234,
+          2.7091564899819787
+        ],
+        [
+          -1.8652858765938682,
+          3.091720826088952
+        ],
+        [
+          0.167174208214104,
+          5.3231308552881815
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.53121309952635,
+          4.513485375913624
+        ],
+        "mono": [
+          5.756196685228698,
+          6.620693516352903
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.382061,
+          0.333866
+        ],
+        [
+          2.322904,
+          3.246776
+        ],
+        [
+          -3.203336,
+          -2.150201
+        ]
+      ],
+      "case": 91,
+      "family": "clone",
+      "group": 19,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.921842,
+        -3.959079
+      ],
+      "scores": [
+        [
+          -3.4278959436667873,
+          -0.5092986373571715
+        ],
+        [
+          4.92320103659378,
+          -0.6094730659263273
+        ],
+        [
+          5.2358683754319,
+          5.139654242719079
+        ]
+      ],
+      "truth": [
+        26880,
+        42240
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -2.9750239969557213,
+          -3.0783596515511937
+        ],
+        "mono": [
+          6.675112448421632,
+          4.853968899589886
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.855868,
+          null
+        ],
+        [
+          -4.667336,
+          null
+        ],
+        [
+          4.725836,
+          null
+        ]
+      ],
+      "case": 92,
+      "family": null,
+      "group": 19,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.999996,
+        null
+      ],
+      "scores": [
+        [
+          -4.363036125491997,
+          -4.526527400641672
+        ],
+        [
+          3.3939123976359533,
+          -3.097167020642731
+        ],
+        [
+          -2.6938672248801363,
+          -3.7035564830889616
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.900581632783889,
+          -3.29683115726818
+        ],
+        "mono": [
+          -3.740921559892489,
+          5.08126895080638
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.826277,
+          null
+        ],
+        [
+          -4.649289,
+          null
+        ],
+        [
+          4.723305,
+          null
+        ]
+      ],
+      "case": 93,
+      "family": null,
+      "group": 19,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -5.011836,
+        null
+      ],
+      "scores": [
+        [
+          -5.538195637553118,
+          null
+        ],
+        [
+          -3.8046259855628235,
+          -3.86277486554555
+        ],
+        [
+          6.668787251324579,
+          -3.1306781596570232
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.1421935593356745,
+          -3.5280108293205323
+        ],
+        "mono": [
+          3.6900433424142536,
+          5.114126733771878
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.819323,
+          null
+        ],
+        [
+          -4.528232,
+          null
+        ],
+        [
+          4.561639,
+          null
+        ]
+      ],
+      "case": 94,
+      "family": null,
+      "group": 19,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.970215,
+        null
+      ],
+      "scores": [
+        [
+          -3.3756613548134027,
+          -4.164022896550176
+        ],
+        [
+          -3.691405962932315,
+          -3.56332731148769
+        ],
+        [
+          5.097406589552187,
+          -2.6631875691521967
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.835942606030896,
+          -3.5210343057757676
+        ],
+        "mono": [
+          5.317961339619805,
+          5.331942883499228
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.820663,
+          0.575376
+        ],
+        [
+          -4.517219,
+          -4.600282
+        ],
+        [
+          4.443631,
+          3.209266
+        ]
+      ],
+      "case": 95,
+      "family": "clone",
+      "group": 19,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.953876,
+        -5.678003
+      ],
+      "scores": [
+        [
+          -5.2401938736498765,
+          null
+        ],
+        [
+          3.76830445259993,
+          -3.36838910258799
+        ],
+        [
+          7.095203380910577,
+          2.5035423571002635
+        ]
+      ],
+      "truth": [
+        26880,
+        42240
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -1.8624417819917498,
+          3.7490374449395008
+        ],
+        "mono": [
+          4.54881646390366,
+          3.3283011098936237
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.555006,
+          null
+        ],
+        [
+          2.298667,
+          null
+        ],
+        [
+          -1.557829,
+          null
+        ]
+      ],
+      "case": 96,
+      "family": null,
+      "group": 19,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.999996,
+        null
+      ],
+      "scores": [
+        [
+          -5.141906242476375,
+          -2.305380353173002
+        ],
+        [
+          null,
+          -3.865861398301171
+        ],
+        [
+          3.6910669659182944,
+          6.533833905861912
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.9450399979137925,
+          4.54923657032696
+        ],
+        "mono": [
+          -0.27490691981952986,
+          3.9326437207834792
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.528402,
+          null
+        ],
+        [
+          2.377504,
+          null
+        ],
+        [
+          -1.495213,
+          null
+        ]
+      ],
+      "case": 97,
+      "family": null,
+      "group": 19,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.8836,
+        null
+      ],
+      "scores": [
+        [
+          -5.667008329120975,
+          -2.5377411238425966
+        ],
+        [
+          -2.960752951619213,
+          -3.99052667841014
+        ],
+        [
+          -4.202383933709621,
+          6.50608890268532
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          3.374123942957515,
+          5.2349745875888765
+        ],
+        "mono": [
+          5.943813793392907,
+          4.184556101475004
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.511498,
+          null
+        ],
+        [
+          2.150102,
+          null
+        ],
+        [
+          -1.547938,
+          null
+        ]
+      ],
+      "case": 98,
+      "family": null,
+      "group": 19,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.988865,
+        null
+      ],
+      "scores": [
+        [
+          -4.122798003339752,
+          -2.5176930588079873
+        ],
+        [
+          -1.7869475606790406,
+          -3.882874522488154
+        ],
+        [
+          -3.6675987134029584,
+          6.31657555964985
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.54371284402965,
+          2.747228445363758
+        ],
+        "mono": [
+          3.257609269947634,
+          3.7939209335725317
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.502172,
+          -4.943203
+        ],
+        [
+          2.270079,
+          -0.958855
+        ],
+        [
+          -1.498622,
+          -1.107755
+        ]
+      ],
+      "case": 99,
+      "family": "clone",
+      "group": 19,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.92183,
+        -8.596198
+      ],
+      "scores": [
+        [
+          -5.003640655404003,
+          -2.430173811094377
+        ],
+        [
+          4.946626122318077,
+          -3.709099083454484
+        ],
+        [
+          3.4277699263030064,
+          6.355991594813327
+        ]
+      ],
+      "truth": [
+        26880,
+        42240
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.7250618097285075,
+          1.965566229646008
+        ],
+        "mono": [
+          4.786718832743426,
+          3.1824190637583625
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -3.120548,
+          null
+        ],
+        [
+          2.456559,
+          null
+        ],
+        [
+          0.548991,
+          null
+        ]
+      ],
+      "case": 100,
+      "family": null,
+      "group": 20,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -12,
+        0,
+        9
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.999996,
+        null
+      ],
+      "scores": [
+        [
+          -5.059978945256059,
+          -6.421471583982746
+        ],
+        [
+          6.712843059340565,
+          5.206167150209277
+        ],
+        [
+          null,
+          -4.885323514081025
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.543645492153836,
+          -2.6333627900450325
+        ],
+        "mono": [
+          1.7782396290579794,
+          3.1443740627796894
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -3.077928,
+          null
+        ],
+        [
+          2.430668,
+          null
+        ],
+        [
+          0.527395,
+          null
+        ]
+      ],
+      "case": 101,
+      "family": null,
+      "group": 20,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -12,
+        0,
+        9
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.971278,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -6.401854515616188
+        ],
+        [
+          4.083878732287521,
+          5.219688220961447
+        ],
+        [
+          null,
+          -5.108852927730032
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.7713046536381025,
+          4.611758406174995
+        ],
+        "mono": [
+          4.307551591530597,
+          3.1281163804090033
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -3.115953,
+          null
+        ],
+        [
+          2.482022,
+          null
+        ],
+        [
+          0.532494,
+          null
+        ]
+      ],
+      "case": 102,
+      "family": null,
+      "group": 20,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -12,
+        0,
+        9
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.981251,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -6.404256768787689
+        ],
+        [
+          3.3645423067825795,
+          4.801902864283936
+        ],
+        [
+          null,
+          -4.744543064500149
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.073507641437668,
+          -2.5673581671183388
+        ],
+        "mono": [
+          4.343327575076697,
+          3.1743281641467718
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -3.106281,
+          -3.425235
+        ],
+        [
+          2.564676,
+          0.545149
+        ],
+        [
+          0.518596,
+          1.109263
+        ]
+      ],
+      "case": 103,
+      "family": "clone",
+      "group": 20,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -12,
+        0,
+        9
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.985268,
+        -6.031187
+      ],
+      "scores": [
+        [
+          null,
+          -6.376377105533895
+        ],
+        [
+          6.067558260951424,
+          5.052989938101387
+        ],
+        [
+          null,
+          -4.878703122724978
+        ]
+      ],
+      "truth": [
+        17920,
+        30720
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -2.947609352090636,
+          6.068282216190519
+        ],
+        "mono": [
+          3.4812430076748035,
+          -2.353623897845046
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          4.878496,
+          null
+        ],
+        [
+          -4.707537,
+          null
+        ],
+        [
+          1.000611,
+          null
+        ]
+      ],
+      "case": 104,
+      "family": null,
+      "group": 20,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -12,
+        0,
+        9
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.999992,
+        null
+      ],
+      "scores": [
+        [
+          4.653377687757737,
+          -3.8310671069385274
+        ],
+        [
+          -5.222746852882693,
+          -3.8520875034083866
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          2.8691261147432394,
+          4.8422665358995705
+        ],
+        "mono": [
+          2.9534118046472733,
+          -2.3411760225568448
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          4.946481,
+          null
+        ],
+        [
+          -4.610432,
+          null
+        ],
+        [
+          0.974398,
+          null
+        ]
+      ],
+      "case": 105,
+      "family": null,
+      "group": 20,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -12,
+        0,
+        9
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.919351,
+        null
+      ],
+      "scores": [
+        [
+          7.164056089845443,
+          -2.065980852917116
+        ],
+        [
+          -4.532944677530193,
+          -3.8647127041116702
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.311792395788033,
+          3.3886949528689807
+        ],
+        "mono": [
+          -2.556156153659149,
+          -2.326414414323464
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          4.903206,
+          null
+        ],
+        [
+          -4.665686,
+          null
+        ],
+        [
+          0.987823,
+          null
+        ]
+      ],
+      "case": 106,
+      "family": null,
+      "group": 20,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -12,
+        0,
+        9
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.970974,
+        null
+      ],
+      "scores": [
+        [
+          6.005129716836397,
+          -2.0393070026108675
+        ],
+        [
+          -5.229353005221245,
+          -3.8594393633065627
+        ],
+        [
+          -4.52588565995826,
+          -3.5930418738535512
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -2.6084203338107748,
+          5.5751606074862075
+        ],
+        "mono": [
+          3.4027594349709256,
+          -2.302487609759886
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          4.9278,
+          3.588894
+        ],
+        [
+          -4.616793,
+          -6.310115
+        ],
+        [
+          0.971963,
+          0.851274
+        ]
+      ],
+      "case": 107,
+      "family": "clone",
+      "group": 20,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -12,
+        0,
+        9
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.961996,
+        -7.206626
+      ],
+      "scores": [
+        [
+          4.760117468095744,
+          2.0598646533655702
+        ],
+        [
+          -5.181255808779085,
+          -3.9434142467840876
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": [
+        17920,
+        30720
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -5.619893081286838,
+          -5.872752193986962
+        ],
+        "mono": [
+          -2.32656794916043,
+          2.625015546010603
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.405415,
+          null
+        ],
+        [
+          1.470421,
+          null
+        ],
+        [
+          -0.709573,
+          null
+        ]
+      ],
+      "case": 108,
+      "family": null,
+      "group": 20,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -5.000002,
+        null
+      ],
+      "scores": [
+        [
+          -5.100218325032751,
+          -5.729058251164702
+        ],
+        [
+          3.6922423510705644,
+          3.6955117025518045
+        ],
+        [
+          -6.022605869810677,
+          -5.336661311209416
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -5.624371970630572,
+          -6.087015658262137
+        ],
+        "mono": [
+          0.7770904134144491,
+          2.5557703541532693
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.366827,
+          null
+        ],
+        [
+          1.476222,
+          null
+        ],
+        [
+          -0.712244,
+          null
+        ]
+      ],
+      "case": 109,
+      "family": null,
+      "group": 20,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.971293,
+        null
+      ],
+      "scores": [
+        [
+          -6.036315003392938,
+          -5.638758172146874
+        ],
+        [
+          5.441814953801273,
+          3.501980691141578
+        ],
+        [
+          -5.322394391570735,
+          -5.267632437231718
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -5.781847909547523,
+          -5.1396102636199865
+        ],
+        "mono": [
+          2.545148774565104,
+          2.698632712720122
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.381418,
+          null
+        ],
+        [
+          1.456865,
+          null
+        ],
+        [
+          -0.698744,
+          null
+        ]
+      ],
+      "case": 110,
+      "family": null,
+      "group": 20,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.98124,
+        null
+      ],
+      "scores": [
+        [
+          -5.022407050911236,
+          -5.687744590403988
+        ],
+        [
+          5.549925044596502,
+          3.670355592250948
+        ],
+        [
+          -6.18799688389353,
+          -5.205329859274938
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          null,
+          -5.955803376237858
+        ],
+        "mono": [
+          -3.018176551649057,
+          2.62765415782516
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.366311,
+          -1.371687
+        ],
+        [
+          1.477735,
+          0.773492
+        ],
+        [
+          -0.712428,
+          -1.102611
+        ]
+      ],
+      "case": 111,
+      "family": "clone",
+      "group": 20,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.985277,
+        -5.965445
+      ],
+      "scores": [
+        [
+          -4.814246229236701,
+          -5.631565990756323
+        ],
+        [
+          4.761066514972509,
+          3.8619198579085494
+        ],
+        [
+          -6.1795073147185455,
+          -5.218087209339336
+        ]
+      ],
+      "truth": [
+        17920,
+        30720
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.235074080721101,
+          4.841936566849495
+        ],
+        "mono": [
+          -4.887263266750963,
+          -3.336058146221136
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.372015,
+          null
+        ],
+        [
+          1.721823,
+          null
+        ],
+        [
+          -2.690934,
+          null
+        ]
+      ],
+      "case": 112,
+      "family": null,
+      "group": 21,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -5.000011,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          -2.291430898772877,
+          2.31015563698267
+        ],
+        [
+          3.8837753763397695,
+          4.001464023376262
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.076497080694203,
+          5.729937145101744
+        ],
+        "mono": [
+          -5.83244804886419,
+          -3.2520798913981332
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.395528,
+          null
+        ],
+        [
+          1.676932,
+          null
+        ],
+        [
+          -2.666028,
+          null
+        ]
+      ],
+      "case": 113,
+      "family": null,
+      "group": 21,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -5.000905,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          -3.1975340772315763,
+          2.4591703773667084
+        ],
+        [
+          3.649923318561727,
+          4.093595659758035
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -6.387002889711948,
+          5.507091434074014
+        ],
+        "mono": [
+          -5.6532187642378515,
+          -3.318676724726539
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.38374,
+          null
+        ],
+        [
+          1.772185,
+          null
+        ],
+        [
+          -2.690402,
+          null
+        ]
+      ],
+      "case": 114,
+      "family": null,
+      "group": 21,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.994224,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          4.4046388969993355,
+          1.9860342301517644
+        ],
+        [
+          4.231280824150296,
+          4.386171127270728
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -5.834650524316794,
+          6.165599090994211
+        ],
+        "mono": [
+          -5.498287171319181,
+          -3.2551214683586758
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.427968,
+          -1.614094
+        ],
+        [
+          1.515884,
+          -3.56926
+        ],
+        [
+          -2.58047,
+          -7.885272
+        ]
+      ],
+      "case": 115,
+      "family": "expressive",
+      "group": 21,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.923683,
+        -11.494967
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          -2.6080982995233946,
+          0.786806315421152
+        ],
+        [
+          4.073009493980949,
+          2.87277750007924
+        ]
+      ],
+      "truth": [
+        28160,
+        43520
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.9722638646896975,
+          7.090175150912454
+        ],
+        "mono": [
+          -3.9141325677275858,
+          1.349974368534358
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.480792,
+          null
+        ],
+        [
+          -4.51218,
+          null
+        ],
+        [
+          4.261464,
+          null
+        ]
+      ],
+      "case": 116,
+      "family": null,
+      "group": 21,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -21,
+        0,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -5.000002,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          -4.212267843850434,
+          -2.9702720084024734
+        ],
+        [
+          4.215575959266081,
+          5.416472140872588
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.355105389675566,
+          7.0533851832548535
+        ],
+        "mono": [
+          -3.9802422364550103,
+          1.2725471982803314
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.516173,
+          null
+        ],
+        [
+          -4.538165,
+          null
+        ],
+        [
+          4.274765,
+          null
+        ]
+      ],
+      "case": 117,
+      "family": null,
+      "group": 21,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -21,
+        0,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -5.035311,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          -3.3872775858105744,
+          -2.7155403171393147
+        ],
+        [
+          -4.16185237445771,
+          5.664684469507837
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.67275238309302,
+          6.844428665771183
+        ],
+        "mono": [
+          -5.155696881391265,
+          1.3107323815940186
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.510944,
+          null
+        ],
+        [
+          -4.560818,
+          null
+        ],
+        [
+          4.219668,
+          null
+        ]
+      ],
+      "case": 118,
+      "family": null,
+      "group": 21,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -21,
+        0,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -5.050906,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          -4.605754360113278,
+          -2.403481957016245
+        ],
+        [
+          -3.8058834233921637,
+          5.685043779589734
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.7654266245737826,
+          7.112124405722374
+        ],
+        "mono": [
+          -3.4904035895401,
+          1.268281208231631
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.498434,
+          -0.761829
+        ],
+        [
+          -4.46104,
+          -9.493012
+        ],
+        [
+          4.163089,
+          1.208127
+        ]
+      ],
+      "case": 119,
+      "family": "expressive",
+      "group": 21,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -21,
+        0,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.977248,
+        -10.839875
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          -3.5761041170869974,
+          -3.1784281933518774
+        ],
+        [
+          -2.6399488538720335,
+          5.392027742247366
+        ]
+      ],
+      "truth": [
+        28160,
+        43520
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.9371775973459195,
+          -3.6201339097167735
+        ],
+        "mono": [
+          -4.49413350742444,
+          -3.9597043639999874
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.363364,
+          null
+        ],
+        [
+          0.511937,
+          null
+        ],
+        [
+          -0.871342,
+          null
+        ]
+      ],
+      "case": 120,
+      "family": null,
+      "group": 21,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -11,
+        0,
+        13
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.999997,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          -3.83301543280362,
+          -3.282976162110927
+        ],
+        [
+          -5.299126586768462,
+          -3.806766089762753
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.136345796734195,
+          -2.4054653518177753
+        ],
+        "mono": [
+          -4.815797815272448,
+          -3.9068076136417575
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.383255,
+          null
+        ],
+        [
+          0.491917,
+          null
+        ],
+        [
+          -0.843457,
+          null
+        ]
+      ],
+      "case": 121,
+      "family": null,
+      "group": 21,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        0,
+        13
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -5.000917,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          -4.176569943985663,
+          -3.255161988955845
+        ],
+        [
+          -5.385526664326933,
+          -3.7660660767567564
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          3.42263424727868,
+          -2.746383013685227
+        ],
+        "mono": [
+          -4.162914257923491,
+          -3.999373877809819
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.36473,
+          null
+        ],
+        [
+          0.484113,
+          null
+        ],
+        [
+          -0.842255,
+          null
+        ]
+      ],
+      "case": 122,
+      "family": null,
+      "group": 21,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -11,
+        0,
+        13
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.994238,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -4.206440968451234
+        ],
+        [
+          -4.4722060741067535,
+          -3.285614924259449
+        ],
+        [
+          -4.686340367976484,
+          -3.7973130176296985
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -2.5445327678614116,
+          -3.1401715224892115
+        ],
+        "mono": [
+          -4.3471049573681935,
+          -3.9672033305781835
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.352218,
+          -5.811612
+        ],
+        [
+          0.445776,
+          -5.382137
+        ],
+        [
+          -0.802614,
+          -5.45454
+        ]
+      ],
+      "case": 123,
+      "family": "expressive",
+      "group": 21,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -11,
+        0,
+        13
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.923685,
+        -12.445863
+      ],
+      "scores": [
+        [
+          null,
+          -4.344945898185959
+        ],
+        [
+          -4.653200209899846,
+          -3.158174221555806
+        ],
+        [
+          -4.789199814574446,
+          -3.7681279179065057
+        ]
+      ],
+      "truth": [
+        28160,
+        43520
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.697700554788252,
+          -3.002776624605651
+        ],
+        "mono": [
+          -4.800137481394452,
+          -5.232909667403937
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.598454,
+          null
+        ],
+        [
+          0.82009,
+          null
+        ],
+        [
+          1.437085,
+          null
+        ]
+      ],
+      "case": 124,
+      "family": null,
+      "group": 22,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -12,
+        -2,
+        2
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.999991,
+        null
+      ],
+      "scores": [
+        [
+          -3.9994945595301927,
+          -3.48238489233223
+        ],
+        [
+          -5.776147292659074,
+          -4.039623326202991
+        ],
+        [
+          -5.409769948227601,
+          -2.933102133671633
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.584115029741504,
+          -4.222395871267314
+        ],
+        "mono": [
+          -4.800137481394452,
+          -5.5037426381646
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.871621,
+          null
+        ],
+        [
+          0.314312,
+          null
+        ],
+        [
+          0.994322,
+          null
+        ]
+      ],
+      "case": 125,
+      "family": null,
+      "group": 22,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -12,
+        -3,
+        2
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -5.660965,
+        null
+      ],
+      "scores": [
+        [
+          -3.5777278329143183,
+          -3.6316888352349297
+        ],
+        [
+          -5.08313177361182,
+          -3.3601925563131854
+        ],
+        [
+          -4.75420853971288,
+          -3.9970387912642025
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.770592704816116,
+          -2.9194634307314797
+        ],
+        "mono": [
+          -4.800137481394452,
+          -5.192134788485422
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.568868,
+          null
+        ],
+        [
+          1.026219,
+          null
+        ],
+        [
+          0.398458,
+          null
+        ]
+      ],
+      "case": 126,
+      "family": null,
+      "group": 22,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -12,
+        -1,
+        9
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.733723,
+        null
+      ],
+      "scores": [
+        [
+          -4.228028328844988,
+          -4.10114571055174
+        ],
+        [
+          -4.654128077342838,
+          -3.9657376244874425
+        ],
+        [
+          -6.327550870811341,
+          -2.6991738685614757
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.8170683017288143,
+          -2.559738093893447
+        ],
+        "mono": [
+          -4.800137481394452,
+          -4.711845397271764
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -1.61537,
+          -0.079811
+        ],
+        [
+          0.405671,
+          1.329663
+        ],
+        [
+          1.130722,
+          1.454207
+        ]
+      ],
+      "case": 127,
+      "family": "expressive",
+      "group": 22,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -12,
+        -3,
+        2
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -5.382437,
+        -3.747908
+      ],
+      "scores": [
+        [
+          -3.500730504309949,
+          -4.318630232343876
+        ],
+        [
+          -5.202859882058155,
+          -2.8935818326488554
+        ],
+        [
+          -4.669998142829084,
+          -3.3398266003023944
+        ]
+      ],
+      "truth": [
+        48640,
+        61440
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.11305941971435,
+          -2.6841204647322536
+        ],
+        "mono": [
+          -3.9984841123270094,
+          -5.059805802530146
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          3.661936,
+          null
+        ],
+        [
+          -4.729784,
+          null
+        ],
+        [
+          1.066285,
+          null
+        ]
+      ],
+      "case": 128,
+      "family": null,
+      "group": 22,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -12,
+        0,
+        14
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -5.000005,
+        null
+      ],
+      "scores": [
+        [
+          -2.575833343181851,
+          4.170608451885568
+        ],
+        [
+          5.873715223584179,
+          -5.361922245039847
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          2.4498343060779524,
+          -3.060766235702384
+        ],
+        "mono": [
+          -3.9984841123270094,
+          -4.321657137180775
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          3.686251,
+          null
+        ],
+        [
+          -5.076433,
+          null
+        ],
+        [
+          1.219912,
+          null
+        ]
+      ],
+      "case": 129,
+      "family": null,
+      "group": 22,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -13,
+        0,
+        15
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -5.343952,
+        null
+      ],
+      "scores": [
+        [
+          -3.4326414655952915,
+          4.746189474452134
+        ],
+        [
+          6.356542907889482,
+          -2.4584980560334126
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.1274576340785076,
+          -3.23168852268424
+        ],
+        "mono": [
+          -3.9984841123270094,
+          -3.7241372889423463
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          3.837478,
+          null
+        ],
+        [
+          -3.788273,
+          null
+        ],
+        [
+          0.950072,
+          null
+        ]
+      ],
+      "case": 130,
+      "family": null,
+      "group": 22,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -12,
+        0,
+        9
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.360386,
+        null
+      ],
+      "scores": [
+        [
+          -2.9508400080835453,
+          3.917737691810764
+        ],
+        [
+          5.699243185971632,
+          -4.499652840527717
+        ],
+        [
+          -4.572801538288642,
+          3.753692518538275
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.369901042534937,
+          5.336171628660535
+        ],
+        "mono": [
+          -3.9984841123270094,
+          -3.259814764231835
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          3.154472,
+          1.902876
+        ],
+        [
+          -4.140542,
+          -2.22683
+        ],
+        [
+          1.105259,
+          1.446547
+        ]
+      ],
+      "case": 131,
+      "family": "expressive",
+      "group": 22,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -13,
+        0,
+        9
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.801608,
+        -2.726504
+      ],
+      "scores": [
+        [
+          -3.7514011958111237,
+          5.071475547066654
+        ],
+        [
+          5.692154037034963,
+          -3.919497175388803
+        ],
+        [
+          -4.693685552975135,
+          -0.7948183028883333
+        ]
+      ],
+      "truth": [
+        48640,
+        61440
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.35418129440169,
+          -4.111229843382553
+        ],
+        "mono": [
+          5.1677136163297845,
+          3.151412644054078
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.717655,
+          null
+        ],
+        [
+          1.671933,
+          null
+        ],
+        [
+          -1.201694,
+          null
+        ]
+      ],
+      "case": 132,
+      "family": null,
+      "group": 22,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -11,
+        0,
+        10
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.999992,
+        null
+      ],
+      "scores": [
+        [
+          5.314517404174457,
+          -2.488165367194362
+        ],
+        [
+          -2.7687783494554927,
+          -4.203735296370696
+        ],
+        [
+          null,
+          0.520854132377368
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.235753814875795,
+          -2.936852694850067
+        ],
+        "mono": [
+          5.1677136163297845,
+          -2.6179405023901667
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.847238,
+          null
+        ],
+        [
+          1.036393,
+          null
+        ],
+        [
+          -1.456467,
+          null
+        ]
+      ],
+      "case": 133,
+      "family": null,
+      "group": 22,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        0,
+        10
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -5.660962,
+        null
+      ],
+      "scores": [
+        [
+          5.363681267443678,
+          -2.466452623480324
+        ],
+        [
+          -2.6742379379585723,
+          -4.6982011768975465
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          0.6863825698393415,
+          -1.9164304140870023
+        ],
+        "mono": [
+          5.1677136163297845,
+          4.528485184401891
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.458428,
+          null
+        ],
+        [
+          1.681998,
+          null
+        ],
+        [
+          -1.035878,
+          null
+        ]
+      ],
+      "case": 134,
+      "family": null,
+      "group": 22,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -11,
+        0,
+        10
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.733719,
+        null
+      ],
+      "scores": [
+        [
+          5.469193375516088,
+          -1.3676266316851233
+        ],
+        [
+          -3.0159554596035907,
+          -4.933389646330986
+        ],
+        [
+          null,
+          -1.1400104819469843
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.164162933467265,
+          4.451102938962813
+        ],
+        "mono": [
+          5.1677136163297845,
+          5.695701299992574
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.682163,
+          0.361429
+        ],
+        [
+          1.184797,
+          2.264645
+        ],
+        [
+          -1.277936,
+          0.498255
+        ]
+      ],
+      "case": 135,
+      "family": "expressive",
+      "group": 22,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -11,
+        0,
+        10
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -5.382432,
+        -3.054579
+      ],
+      "scores": [
+        [
+          4.9172506338348425,
+          -1.7343294242791494
+        ],
+        [
+          -2.671810604733404,
+          -4.63007443458464
+        ],
+        [
+          null,
+          3.1209667807923274
+        ]
+      ],
+      "truth": [
+        48640,
+        61440
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.126352293310113,
+          -2.9899926763066893
+        ],
+        "mono": [
+          1.4246571127322145,
+          -4.528567853760524
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.402043,
+          null
+        ],
+        [
+          2.69229,
+          null
+        ],
+        [
+          -3.082449,
+          null
+        ]
+      ],
+      "case": 136,
+      "family": null,
+      "group": 23,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -5.000007,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -4.691829700476722
+        ],
+        [
+          -3.9175482109542386,
+          -3.9428505699909486
+        ],
+        [
+          -4.5136894844911835,
+          -4.038387288249363
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          2.475849601652082,
+          -4.119275071831219
+        ],
+        "mono": [
+          3.9486879149724645,
+          -4.527405720647737
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.434931,
+          null
+        ],
+        [
+          2.793658,
+          null
+        ],
+        [
+          -2.99786,
+          null
+        ]
+      ],
+      "case": 137,
+      "family": null,
+      "group": 23,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.864613,
+        null
+      ],
+      "scores": [
+        [
+          -5.847881286503857,
+          -4.600858723144591
+        ],
+        [
+          4.513168610637043,
+          -3.7898068084075716
+        ],
+        [
+          2.443248151539625,
+          -3.8700727819132203
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -5.571943315361252,
+          -4.260986304832678
+        ],
+        "mono": [
+          5.869780054941165,
+          -4.522029906532673
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          0.460465,
+          null
+        ],
+        [
+          2.575476,
+          null
+        ],
+        [
+          -2.816503,
+          null
+        ]
+      ],
+      "case": 138,
+      "family": null,
+      "group": 23,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.773663,
+        null
+      ],
+      "scores": [
+        [
+          -3.8160603207196457,
+          -4.656250011223383
+        ],
+        [
+          -2.934943212503634,
+          -3.9889599759491623
+        ],
+        [
+          3.0752186607134733,
+          -3.8887634201347363
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -5.556564354786028,
+          -3.6450558098630172
+        ],
+        "mono": [
+          -1.7427136585625704,
+          -4.519267495424053
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          3.241984,
+          2.189226
+        ],
+        [
+          0.913881,
+          1.518094
+        ],
+        [
+          -2.490806,
+          -2.671759
+        ]
+      ],
+      "case": 139,
+      "family": "stock",
+      "group": 23,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        0,
+        4,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        -4.889501,
+        -5.195907
+      ],
+      "scores": [
+        [
+          -4.056936264075522,
+          -3.524868773364037
+        ],
+        [
+          null,
+          -4.200708391599401
+        ],
+        [
+          -4.161269183099487,
+          -2.7599907052488764
+        ]
+      ],
+      "truth": [
+        16640,
+        32000
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          3.1178720318400766,
+          -6.732604031485375
+        ],
+        "mono": [
+          -4.404742207033875,
+          -6.016198129209697
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          1.233046,
+          null
+        ],
+        [
+          -4.524412,
+          null
+        ],
+        [
+          4.389953,
+          null
+        ]
+      ],
+      "case": 140,
+      "family": null,
+      "group": 23,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -5.00001,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -4.574030896453535
+        ],
+        [
+          -4.11622002908738,
+          -6.3963184039482055
+        ],
+        [
+          5.494480166189135,
+          -4.564047318957875
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.2207417372623786,
+          -6.742172736325403
+        ],
+        "mono": [
+          4.281348073765367,
+          -6.046002887450647
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          1.239347,
+          null
+        ],
+        [
+          -4.390764,
+          null
+        ],
+        [
+          4.500853,
+          null
+        ]
+      ],
+      "case": 141,
+      "family": null,
+      "group": 23,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.836451,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          -4.310921698568195,
+          -6.429244928736665
+        ],
+        [
+          6.827362429261338,
+          -3.8653841275458136
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -2.4733736208859067,
+          -6.649259580740527
+        ],
+        "mono": [
+          -2.9541661673565858,
+          -6.016437025057413
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          1.200663,
+          null
+        ],
+        [
+          -4.018474,
+          null
+        ],
+        [
+          4.089133,
+          null
+        ]
+      ],
+      "case": 142,
+      "family": null,
+      "group": 23,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.480574,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -4.946081686748111
+        ],
+        [
+          -2.37444733958074,
+          -6.398272517613717
+        ],
+        [
+          1.2048907758439975,
+          -4.305498070393101
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.020829140252965,
+          -6.845243492651571
+        ],
+        "mono": [
+          4.297940640931018,
+          -6.022269275951315
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          1.196354,
+          0.667655
+        ],
+        [
+          -4.442545,
+          -4.091425
+        ],
+        [
+          4.404089,
+          3.046337
+        ]
+      ],
+      "case": 143,
+      "family": "stock",
+      "group": 23,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -10,
+        0,
+        12
+      ],
+      "location": "lateral_target",
+      "original_snr_db": [
+        -4.87456,
+        -5.066555
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          -3.5516827289338035,
+          -6.490316425716744
+        ],
+        [
+          6.362835505915531,
+          -3.925655834871731
+        ]
+      ],
+      "truth": [
+        16640,
+        32000
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          3.5935904314610356,
+          -3.179088599153963
+        ],
+        "mono": [
+          0.6310785575773881,
+          -2.930175087658951
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.820483,
+          null
+        ],
+        [
+          1.826332,
+          null
+        ],
+        [
+          -1.446941,
+          null
+        ]
+      ],
+      "case": 144,
+      "family": null,
+      "group": 23,
+      "kind": "untouched",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -5.000011,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -4.51990893764353
+        ],
+        [
+          3.990786283542447,
+          5.166687785122932
+        ],
+        [
+          -3.3434458369420517,
+          -4.628329230344477
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.447539267770639,
+          -3.735258376303688
+        ],
+        "mono": [
+          1.308202021043641,
+          -2.8749475455043396
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.767808,
+          null
+        ],
+        [
+          1.896012,
+          null
+        ],
+        [
+          -1.38807,
+          null
+        ]
+      ],
+      "case": 145,
+      "family": null,
+      "group": 23,
+      "kind": "ordinary_same_host",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.864621,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -4.500353848356792
+        ],
+        [
+          6.420069319249142,
+          5.050989130218994
+        ],
+        [
+          -4.273002578135954,
+          -4.617448803520586
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -2.8196173421135162,
+          -3.4892045916665952
+        ],
+        "mono": [
+          -0.4953346357158932,
+          -2.976464556312257
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.573914,
+          null
+        ],
+        [
+          1.606779,
+          null
+        ],
+        [
+          -1.241587,
+          null
+        ]
+      ],
+      "case": 146,
+      "family": null,
+      "group": 23,
+      "kind": "ordinary_other_voice",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.773668,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          -4.135424598648693
+        ],
+        [
+          4.020601169067034,
+          5.024321293056307
+        ],
+        [
+          -4.353703509802332,
+          -4.639639355670795
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          1.9334319198717862,
+          -3.4704342229033065
+        ],
+        "mono": [
+          -2.331876438276261,
+          -2.897020757298541
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          -0.755471,
+          -0.278961
+        ],
+        [
+          1.904279,
+          2.709249
+        ],
+        [
+          -1.407175,
+          -1.392011
+        ]
+      ],
+      "case": 147,
+      "family": "stock",
+      "group": 23,
+      "kind": "synthetic",
+      "lag_modes_samples": [
+        -11,
+        0,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        -4.889517,
+        -4.308154
+      ],
+      "scores": [
+        [
+          null,
+          -4.133913463114003
+        ],
+        [
+          -3.6466373884227448,
+          5.065451436262658
+        ],
+        [
+          -3.5381393481001764,
+          -4.570859906732321
+        ]
+      ],
+      "truth": [
+        16640,
+        32000
+      ]
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          null,
+          -6.603572809354752
+        ],
+        "mono": [
+          null,
+          -6.611496879315884
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        null
+      ],
+      "case": 148,
+      "family": null,
+      "group": 24,
+      "kind": "background_only",
+      "lag_modes_samples": [
+        -12,
+        10,
+        16
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [
+        [
+          -6.8032922042247,
+          -6.88782690569423
+        ],
+        [
+          null,
+          -5.911108934845895
+        ],
+        null
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          null,
+          -5.998242414578242
+        ],
+        "mono": [
+          null,
+          -6.106380425289604
+        ]
+      },
+      "candidate_snr_db": [],
+      "case": 149,
+      "family": null,
+      "group": 24,
+      "kind": "background_only",
+      "lag_modes_samples": [],
+      "location": "lateral_target",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          6.943407529267564,
+          -7.081562074485946
+        ],
+        "mono": [
+          4.834216793623787,
+          -6.702847446445942
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "case": 150,
+      "family": null,
+      "group": 24,
+      "kind": "background_only",
+      "lag_modes_samples": [
+        -11,
+        -3,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [
+        [
+          -6.46001533447238,
+          -5.79687695974379
+        ],
+        [
+          -5.604936652501224,
+          -6.294233283903741
+        ],
+        [
+          6.060167643591456,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.476457557933188,
+          null
+        ],
+        "mono": [
+          5.4235216393860615,
+          null
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "case": 151,
+      "family": null,
+      "group": 25,
+      "kind": "background_only",
+      "lag_modes_samples": [
+        -15,
+        -10,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          -4.7996873854576,
+          null
+        ],
+        [
+          6.570099622982311,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          5.484352929665167,
+          null
+        ],
+        "mono": [
+          5.8458441705708,
+          null
+        ]
+      },
+      "candidate_snr_db": [],
+      "case": 152,
+      "family": null,
+      "group": 25,
+      "kind": "background_only",
+      "lag_modes_samples": [],
+      "location": "lateral_target",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          4.481912972176882,
+          null
+        ],
+        "mono": [
+          -3.2693747745795636,
+          null
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "case": 153,
+      "family": null,
+      "group": 25,
+      "kind": "background_only",
+      "lag_modes_samples": [
+        -11,
+        -3,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [
+        [
+          -5.482806236142874,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          5.290506148917909,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -3.834290528164862,
+          null
+        ],
+        "mono": [
+          -3.4225811645295194,
+          null
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "case": 154,
+      "family": null,
+      "group": 26,
+      "kind": "background_only",
+      "lag_modes_samples": [
+        -12,
+        3,
+        10
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [
+        [
+          -4.591531753660578,
+          null
+        ],
+        [
+          -5.864928287215401,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -2.6444873777995546,
+          null
+        ],
+        "mono": [
+          -2.874604204409083,
+          null
+        ]
+      },
+      "candidate_snr_db": [],
+      "case": 155,
+      "family": null,
+      "group": 26,
+      "kind": "background_only",
+      "lag_modes_samples": [],
+      "location": "lateral_target",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -4.9849557734433905,
+          null
+        ],
+        "mono": [
+          -2.893362990267334,
+          null
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "case": 156,
+      "family": null,
+      "group": 26,
+      "kind": "background_only",
+      "lag_modes_samples": [
+        -11,
+        -3,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [
+        [
+          -5.435830036674462,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          -5.394470703346413,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -5.897965942717209,
+          -6.237437317491159
+        ],
+        "mono": [
+          -6.137427311916286,
+          null
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "case": 157,
+      "family": null,
+      "group": 27,
+      "kind": "background_only",
+      "lag_modes_samples": [
+        -10,
+        12
+      ],
+      "location": "balanced_target",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [
+        [
+          -6.782536481602062,
+          null
+        ],
+        [
+          -5.282658612614983,
+          -5.43047898282094
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -6.175627711085179,
+          null
+        ],
+        "mono": [
+          -6.273372674985325,
+          null
+        ]
+      },
+      "candidate_snr_db": [],
+      "case": 158,
+      "family": null,
+      "group": 27,
+      "kind": "background_only",
+      "lag_modes_samples": [],
+      "location": "lateral_target",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [],
+      "truth": null
+    },
+    {
+      "baselines": {
+        "earlier_either": [
+          -5.831126225292385,
+          -4.67390442008916
+        ],
+        "mono": [
+          null,
+          null
+        ]
+      },
+      "candidate_snr_db": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "case": 159,
+      "family": null,
+      "group": 27,
+      "kind": "background_only",
+      "lag_modes_samples": [
+        -11,
+        -3,
+        12
+      ],
+      "location": "second_competitor",
+      "original_snr_db": [
+        null,
+        null
+      ],
+      "scores": [
+        [
+          -6.710833493858834,
+          -6.283123031587966
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          -6.308499357253793,
+          null
+        ]
+      ],
+      "truth": null
+    }
+  ],
+  "rows_sha256": "5e55985a6d47fec902229cc405d78448c2bde4d60c0178e348badef135458637",
+  "schema": "chipmunk.audio-spatial-mask-voice/1"
+}

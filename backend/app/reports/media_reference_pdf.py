@@ -71,11 +71,18 @@ def _summary(document, record):
         _text(page, MARGIN, 348, "Comparison unassessed", size=16, font="hebo")
         _text(page, MARGIN, 369, PICTURE_STATUS[record["status"]])
         return
-    picture, audio = record["picture"], record["audio"]
+    picture = record["picture"]
     _text(page, MARGIN, 347, "Picture comparison", size=16, font="hebo")
     _text(page, MARGIN, 371, f"{picture['matching_frames']} exact matches and {picture['changed_frames']} changed decoded pictures.")
     if not picture["matching_frames"]:
         _text(page, MARGIN, 390, "Every picture differs. Re-encoding can produce this pattern.", color=MUTED)
+    if alignment := record.get("trim_alignment"):
+        first, stop = alignment["earlier_frames"]
+        _text(page, MARGIN, 408, f"Compared earlier frames [{first}, {stop}) to analyzed frames [0, {stop - first}).", color=MUTED)
+        _text(page, MARGIN, 429, f"Alignment used {alignment['unique_matching_frames']} unique, identical pictures.", color=MUTED)
+        _text(page, MARGIN, 452, "The soundtrack was outside this trimmed picture comparison.", color=MUTED)
+        return
+    audio = record["audio"]
     _text(page, MARGIN, 434, "Soundtrack comparison", size=16, font="hebo")
     if audio["status"] == "measured":
         count = len(audio["ranges"])
@@ -154,7 +161,10 @@ def _picture_page(document, span, assets, source):
     local = "tile" in span
     title = "Local picture difference" if local else "Picture differences"
     page = _page(document, f"{span['id']}  {title}")
-    _text(page, MARGIN, 124, _range(span), color=MUTED)
+    label_range = _range(span)
+    if "earlier_start_s" in span:
+        label_range = f"Analyzed {label_range} / Earlier {span['earlier_start_s']:.3f} to {span['earlier_end_s']:.3f} s"
+    _text(page, MARGIN, 124, label_range, color=MUTED)
     if local:
         box = span["tile"]
         label = "Measured comparison area at"
@@ -171,7 +181,8 @@ def _picture_page(document, span, assets, source):
             continue
         _text(page, MARGIN, y, f"{position.title()}  {sample['time_s']:.3f} s", font="hebo")
         for x, side in zip((MARGIN, 316), LABELS, strict=True):
-            _text(page, x, y + 15, f"{LABELS[side]}  PTS {sample[f'{side}_pts']}", size=9, color=MUTED)
+            clock = f"{sample['earlier_time_s']:.3f} s · " if side == "earlier" and "earlier_time_s" in sample else ""
+            _text(page, x, y + 15, f"{LABELS[side]}  {clock}PTS {sample[f'{side}_pts']}", size=9, color=MUTED)
             available = 146 if local else 250
             scale = min(available / source["width"], 126 / source["height"])
             width, height = source["width"] * scale, source["height"] * scale

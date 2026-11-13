@@ -11,10 +11,12 @@ const names = { earlier: 'Earlier clip', submitted: 'Analyzed clip' }
 type Asset = { file: string; media_type: 'image/png' | 'audio/wav'; sha256: string }
 type Extent = { id: string; start_s: number; end_s: number | null; last_s?: number }
 type Tile = { x: number; y: number; w: number; h: number }
-type PicturePreviews = Record<string, { time_s: number; assets: Record<Side, Asset>; crop_assets?: Record<Side, Asset> }>
+type PicturePreviews = Record<string, { time_s: number; earlier_time_s?: number; assets: Record<Side, Asset>; crop_assets?: Record<Side, Asset> }>
 type PictureRange = Extent & {
   strongest_frame: { changed_pixels: number; difference_bounds: Tile }
   previews: PicturePreviews
+  earlier_start_s?: number
+  earlier_end_s?: number
 }
 type LocalPictureRange = Extent & { tile: Tile; previews: PicturePreviews }
 type LocalComparison = { scope: string; summary: string; range?: LocalPictureRange }
@@ -92,7 +94,7 @@ type Comparison = {
 } & ({
   schema: 'chipmunk.video-reference-comparison/1' | 'chipmunk.video-reference-comparison/2' | 'chipmunk.video-reference-comparison/3'
     | 'chipmunk.video-reference-comparison/4' | 'chipmunk.video-reference-comparison/5' | 'chipmunk.video-reference-comparison/6'
-    | 'chipmunk.video-reference-comparison/7' | 'chipmunk.video-reference-comparison/8'
+    | 'chipmunk.video-reference-comparison/7' | 'chipmunk.video-reference-comparison/8' | 'chipmunk.video-reference-comparison/9'
   submitted: PictureDimensions
   picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
   timing?: TimingComparison
@@ -102,6 +104,7 @@ type Comparison = {
   stereo_comparison?: never
   local_timing?: never
   channel_timing?: ChannelTiming
+  trim_alignment?: { earlier_frames: [number, number]; submitted_frames: [number, number]; unique_matching_frames: number }
 } | {
   schema: 'chipmunk.audio-reference-comparison/1' | 'chipmunk.audio-reference-comparison/2' | 'chipmunk.audio-reference-comparison/3'
     | 'chipmunk.audio-reference-comparison/4' | 'chipmunk.audio-reference-comparison/5' | 'chipmunk.audio-reference-comparison/6'
@@ -114,6 +117,7 @@ type Comparison = {
   stereo_comparison?: StereoComparison
   local_timing?: SoundtrackTiming
   channel_timing?: ChannelTiming
+  trim_alignment?: never
 })
 type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: string | null }
 type Availability = { available: boolean; timing_available?: boolean }
@@ -203,8 +207,11 @@ function Playback({ body, name }: { body?: string; name: string }) {
 
 function PictureEvidence({ span, assets, dimensions }: { span: PictureRange | LocalPictureRange; assets: Result['assets']; dimensions: PictureDimensions }) {
   const box = 'tile' in span ? span.tile : span.strongest_frame.difference_bounds
+  const earlier = 'earlier_start_s' in span && span.earlier_start_s !== undefined && span.earlier_end_s !== undefined
+    ? `${span.earlier_start_s.toFixed(3)}–${span.earlier_end_s.toFixed(3)} s in the earlier clip` : null
   return <details open={Object.keys(span.previews).length > 0} className="border-t border-border pt-3">
     <summary className="cursor-pointer font-medium">{span.id} · {interval(span)}</summary>
+    {earlier && <p className="mt-2 mb-0 text-small">{earlier}.</p>}
     <p className="mt-2 mb-0 text-small text-text-muted">{'tile' in span ? 'Measured comparison area at' :
       `${span.strongest_frame.changed_pixels.toLocaleString()} differing pixels at the strongest change, within`} x {box.x}, y {box.y}, {box.w} × {box.h} px.</p>
     {['before', 'during', 'after'].filter(position => span.previews[position]).map(position => {
@@ -215,17 +222,18 @@ function PictureEvidence({ span, assets, dimensions }: { span: PictureRange | Lo
           {sides.map(side => {
             const body = assetBody(assets, preview.assets[side], 'image/png')
             const crop = preview.crop_assets && assetBody(assets, preview.crop_assets[side], 'image/png')
+            const time = side === 'earlier' ? preview.earlier_time_s ?? preview.time_s : preview.time_s
             return <figure key={side} className="m-0">
               {body && <div className="relative inline-block max-w-full">
                 <img className="block max-h-56 max-w-full rounded" loading="lazy"
-                  src={'data:image/png;base64,' + body} alt={names[side] + ' at ' + preview.time_s.toFixed(3) + ' seconds'} />
+                  src={'data:image/png;base64,' + body} alt={names[side] + ' at ' + time.toFixed(3) + ' seconds'} />
                 {(position === 'during' || 'tile' in span) && <span className="pointer-events-none absolute border-2 border-amber-400"
                   aria-hidden style={{ left: 100 * box.x / dimensions.width + '%', top: 100 * box.y / dimensions.height + '%',
                     width: 100 * box.w / dimensions.width + '%', height: 100 * box.h / dimensions.height + '%' }} />}
               </div>}
               {crop && <img className="mt-2 block h-auto w-24 max-w-full rounded border border-border" loading="lazy"
                 src={'data:image/png;base64,' + crop} alt={names[side] + ' comparison crop at ' + preview.time_s.toFixed(3) + ' seconds'} />}
-              <figcaption className="mt-1 text-caption text-text-muted">{names[side]}</figcaption>
+              <figcaption className="mt-1 text-caption text-text-muted">{names[side]}{preview.earlier_time_s !== undefined && ` · ${time.toFixed(3)} s`}</figcaption>
             </figure>
           })}
         </div>
@@ -409,13 +417,14 @@ function ResultView({ result }: { result: Result }) {
     {comparison.channel_timing && <ChannelTimingEvidence timing={comparison.channel_timing} assets={assets} audioOnly={isAudio} />}
     {comparison.local_timing && (!comparison.channel_timing || comparison.local_timing.range) &&
       <SoundtrackTimingEvidence timing={comparison.local_timing} assets={assets} audioOnly />}
-    {picture && !comparison.soundtrack_alignment && (picture.changed_frames > 0 || audio?.status !== 'measured') &&
+    {picture && !comparison.trim_alignment && !comparison.soundtrack_alignment && (picture.changed_frames > 0 || audio?.status !== 'measured') &&
       <p className="m-0 text-caption text-text-muted">{picture.changed_frames > 0
         ? 'Local soundtrack timing was skipped because the decoded pictures differ.'
         : 'Local soundtrack timing requires two continuous soundtracks with matching start times and sample counts.'}</p>}
     {comparison.level_adjusted && !alignment && <LevelAdjustedEvidence result={comparison.level_adjusted} assets={assets} aligned={false} />}
     {!isAudio && picture && <>
       <h3 className="m-0 text-small font-medium">Pictures</h3>
+      {comparison.trim_alignment && <p className="m-0 text-small">Aligned the analyzed clip to earlier frames [{comparison.trim_alignment.earlier_frames.join(', ')}). The soundtrack was outside this comparison.</p>}
       <p className="m-0 text-small">{picture.matching_frames} exact matches and {picture.changed_frames} changed decoded pictures.</p>
       {!picture.matching_frames && <p className="m-0 text-small text-text-muted">Every picture differs. Re-encoding can produce this pattern.</p>}
       {picture.local_comparison && <section className="space-y-2" aria-label="Local picture differences">
@@ -447,7 +456,8 @@ function ResultView({ result }: { result: Result }) {
     {comparison.stereo_comparison && <StereoEvidence result={comparison.stereo_comparison} assets={assets} />}
     {comparison.status === 'measured' && <p className="m-0 text-caption text-text-muted">{isAudio
       ? `${alignment ? 'Each timeline starts at its file’s first decoded sample. Ends are exclusive. ' : 'Times start at the first decoded sample. '}Ranges group adjacent 20 ms bins containing differing samples.`
-      : 'Times are relative to the first picture. Soundtrack ranges group 20 ms bins containing different samples.'}</p>}
+      : comparison.trim_alignment ? 'Each time is relative to the first picture of its own clip.'
+        : 'Times are relative to the first picture. Soundtrack ranges group 20 ms bins containing different samples.'}</p>}
 
   </div>
 }
@@ -516,7 +526,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8] : [1, 2, 3, 4, 5, 6, 7]
+      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9] : [1, 2, 3, 4, 5, 6, 7]
       if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
@@ -529,6 +539,9 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
       if ((schema === 'chipmunk.audio-reference-comparison/7' || schema === 'chipmunk.video-reference-comparison/8')
           && !response.comparison.channel_timing) {
         throw new Error('The comparison response is missing its stereo timing result.')
+      }
+      if (schema === 'chipmunk.video-reference-comparison/9' && (!response.comparison.trim_alignment || !response.comparison.picture)) {
+        throw new Error('The comparison response is missing its shared picture range.')
       }
       if (!controller.signal.aborted) setResult(response)
     } catch (error) {

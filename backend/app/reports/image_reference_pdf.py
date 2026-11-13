@@ -10,6 +10,7 @@ from app.detectors.image import (
     reference_png_oriented_crop,
     reference_png_oriented_resize,
     reference_png_screenshot,
+    reference_shifted_jpeg,
 )
 from app.evidence.image_reference import CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, RESIZE_SCHEMA
 from app.evidence.image_reference_delivery_envelope import SCHEMA as JPEG_PNG_ENVELOPE_SCHEMA
@@ -81,9 +82,15 @@ def _summary(document, comparison, assets):
               size=10, color=MUTED)
         _text(page, MARGIN, 334, f"{proof['anchor_count']:,} unique detailed blocks supported alignment.", size=10, color=MUTED)
     elif (alignment := comparison.get("alignment")) and "submitted_overlap" in alignment:
-        _text(page, MARGIN, 302, f"Earlier copy overlap: {_area(alignment['reference_overlap'])}", size=10)
-        _text(page, MARGIN, 318, f"Submitted image overlap: {_area(alignment['submitted_overlap'])}", size=10)
-        _text(page, MARGIN, 334, "Areas outside these bounds were unassessed.", size=10, color=MUTED)
+        label = "area compared" if schema == reference_shifted_jpeg.SCHEMA else "overlap"
+        _text(page, MARGIN, 302, f"Earlier copy {label}: {_area(alignment['reference_overlap'])}", size=10)
+        _text(page, MARGIN, 318, f"Submitted image {label}: {_area(alignment['submitted_overlap'])}", size=10)
+        if schema == reference_shifted_jpeg.SCHEMA:
+            count, total = alignment["exact_tiles"], alignment["full_tiles"]
+            _text(page, MARGIN, 334, f"{count:,} of {total:,} complete JPEG blocks matched after whole-pixel alignment.", size=10)
+            _text(page, MARGIN, 350, "Margins outside these bounds were unassessed.", size=10, color=MUTED)
+        else:
+            _text(page, MARGIN, 334, "Areas outside these bounds were unassessed.", size=10, color=MUTED)
     if schema == reference_png_orientation.SCHEMA:
         proof = comparison["exact_orientation"]
         label = reference_png_orientation.LABELS[proof["transform"]]

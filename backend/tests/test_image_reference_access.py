@@ -19,7 +19,7 @@ from sqlalchemy.orm import Session
 
 from app.api import auth, security, v2_image_reference
 from app.core.config import settings
-from app.detectors.image import reference_exact_jpeg, reference_png_orientation
+from app.detectors.image import reference_exact_jpeg, reference_png_orientation, reference_shifted_jpeg
 from app.main import app
 from app.storage.db import Analysis, Artefact, Base, CaseMemberRow, CaseRow
 from app.storage.objects import ObjectStore
@@ -682,3 +682,72 @@ def test_exact_jpeg_identity_replays_only_when_fallback_is_needed(reference_http
     paths[0].write_text(json.dumps({key: clean[key] for key in ("comparison", "pngs")}))
     with pytest.raises(ValueError, match="Exact JPEG source proof"):
         review_oriented_resize(*paths)
+
+
+def test_shifted_jpeg_evidence_keeps_only_the_certified_interior(reference_http, tmp_path, monkeypatch):
+    f = reference_http
+    original = f.reference_pixels
+    before = f.reference
+    changed = original.copy()
+    changed[96:152, 116:181] = (213, 64, 149)
+    dx, dy = 7, -11
+    transform = np.array(((1, 0, dx), (0, 1, dy)), np.float32)
+
+    def submit(pixels, *, border_value=245, interpolation=cv2.INTER_NEAREST, matrix=transform):
+        moved = cv2.warpAffine(pixels, matrix, original.shape[1::-1], flags=interpolation,
+                               borderValue=(border_value, border_value, border_value))
+        with io.BytesIO() as output:
+            Image.fromarray(moved).save(output, "JPEG", quality=75, subsampling=2)
+            body = output.getvalue()
+        item = f.store.put_bytes(body)
+        with Session(f.engine) as db:
+            analysis = db.get(Analysis, "image-a")
+            analysis.sha256, analysis.size_bytes = item.sha256, item.size_bytes
+            db.commit()
+        return body
+
+    def compare():
+        response = f.client.post(_url(), headers=f.viewer, files=_upload(before), data={"include_pdf": "true"})
+        assert response.status_code == 200, response.text
+        return response.json()
+
+    submitted = submit(changed)
+    monkeypatch.setattr(settings, "image_reference_shifted_jpeg", False)
+    assert compare()["comparison"]["status"] == "partial_jpeg_delivery_unassessed"
+    monkeypatch.setattr(settings, "image_reference_shifted_jpeg", True)
+    payload = compare()
+    comparison = payload["comparison"]
+    assert comparison["schema"] == reference_shifted_jpeg.SCHEMA and comparison["status"] == "comparable"
+    assert comparison["affects_overall_confidence"] is False
+    proof = comparison["alignment"]
+    assert proof["method"] == reference_shifted_jpeg.METHOD
+    assert proof["reference_minus_submitted"] == {"x": -dx, "y": -dy}
+    assert proof["exact_tiles"] < proof["full_tiles"] and proof["anchor_count"] >= 24
+    for region in comparison["regions"]:
+        assert region["reference_region"] == {"x": region["x"]-dx, "y": region["y"]-dy, "w": region["w"], "h": region["h"]}
+    paths = [tmp_path / name for name in ("export.json", "earlier.png", "submitted.jpg")]
+    export = {"comparison": comparison, "pngs": payload["pngs"]}
+    paths[0].write_text(json.dumps(export))
+    paths[1].write_bytes(before)
+    paths[2].write_bytes(submitted)
+    assert review_oriented_resize(*paths)["crops_verified"] >= 2
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"], validate=True), filetype="pdf") as pdf:
+        words = " ".join(pdf[0].get_text().split())
+        assert "Margins outside these bounds were unassessed." in words
+        assert "complete JPEG blocks matched after whole-pixel alignment" in words
+        _assert_pdf_assets(pdf, pdf[0], (comparison["mask"],), payload)
+        region = comparison["regions"][0]
+        _assert_pdf_assets(pdf, pdf[1], tuple(region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")), payload)
+    proof["reference_minus_submitted"]["x"] += 1
+    paths[0].write_text(json.dumps(export))
+    with pytest.raises(ValueError, match="Exact JPEG source proof"):
+        review_oriented_resize(*paths)
+
+    submit(original, border_value=71)
+    clean = compare()
+    assert clean["comparison"]["schema"] == reference_shifted_jpeg.SCHEMA
+    assert clean["comparison"]["regions"] == [] and clean["pngs"] == {}
+    fractional = transform.copy()
+    fractional[:, 2] += .5
+    submit(original, interpolation=cv2.INTER_LINEAR, matrix=fractional)
+    assert compare()["comparison"]["schema"] != reference_shifted_jpeg.SCHEMA

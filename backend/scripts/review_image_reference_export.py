@@ -27,6 +27,7 @@ CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/4"
 EXACT_PNG_CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/5"
 JPEG_PNG_ENVELOPE_SCHEMA = "chipmunk.image-reference-comparison/10"
 EXACT_JPEG_IDENTITY_SCHEMA = "chipmunk.image-reference-comparison/11"
+SHIFTED_JPEG_SCHEMA = "chipmunk.image-reference-comparison/12"
 ORIENTATION_SCHEMA = "chipmunk.image-reference-comparison/6"
 CROPPED_RESIZE_SCHEMAS = {CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, JPEG_PNG_ENVELOPE_SCHEMA}
 ORIENTATIONS = {
@@ -350,8 +351,9 @@ def _exact_jpeg_replay(comparison, earlier, submitted, sub):
         evidence = Path(temporary) / "evidence"
         result = inspect(earlier, submitted, evidence_dir=evidence, allow_proportional_resize=True,
                          allow_oriented_crop=True, allow_oriented_resize=True, allow_embedded_photo=True,
-                         allow_exact_jpeg_identity=True)
-        _require(result.get("schema") == EXACT_JPEG_IDENTITY_SCHEMA
+                         allow_exact_jpeg_identity=comparison["schema"] == EXACT_JPEG_IDENTITY_SCHEMA,
+                         allow_shifted_jpeg=comparison["schema"] == SHIFTED_JPEG_SCHEMA)
+        _require(result.get("schema") == comparison["schema"]
                  and _same_replayed_fields(source_fields(comparison), source_fields(result))
                  and all("submitted_overlay" in region for region in comparison["regions"]),
                  "Exact JPEG source proof, regions or artifacts differ from recomputed evidence")
@@ -383,7 +385,7 @@ def review(export, earlier, submitted):
         sub = _source(stack, submitted_bytes, comparison["submitted"])
         resized = comparison["schema"] == RESIZE_SCHEMA or comparison["schema"] in CROPPED_RESIZE_SCHEMAS
         oriented = comparison["schema"] == ORIENTATION_SCHEMA
-        exact_jpeg = comparison["schema"] == EXACT_JPEG_IDENTITY_SCHEMA
+        exact_jpeg = comparison["schema"] in {EXACT_JPEG_IDENTITY_SCHEMA, SHIFTED_JPEG_SCHEMA}
         crop = comparison.get("reference_crop_bounds") if comparison["schema"] in CROPPED_RESIZE_SCHEMAS else None
         if resized:
             carrier = stack.enter_context(Image.open(io.BytesIO(submitted_bytes), formats=["PNG", "JPEG"]))
@@ -398,7 +400,12 @@ def review(export, earlier, submitted):
             overlap = (0, 0, sub.width, sub.height)
         elif exact_jpeg:
             expected_jpeg_mask = _exact_jpeg_replay(comparison, earlier, submitted, sub)
-            dx, dy, overlap = 0, 0, (0, 0, sub.width, sub.height)
+            if comparison["schema"] == SHIFTED_JPEG_SCHEMA:
+                alignment = comparison["alignment"]
+                dx, dy = (alignment["reference_minus_submitted"][axis] for axis in ("x", "y"))
+                overlap = _bounds(alignment["submitted_overlap"], sub.size)
+            else:
+                dx, dy, overlap = 0, 0, (0, 0, sub.width, sub.height)
         else:
             dx, dy, overlap = _geometry(comparison, ref, sub)
         if not regions:

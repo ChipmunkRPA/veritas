@@ -1,0 +1,255 @@
+{
+  "counts": {
+    "additional": {
+      "by_meeting": {
+        "ES2005a": {
+          "deliveries": 132,
+          "exact_channel_flagged_files": 12,
+          "exact_channel_useful": 12,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 264,
+          "gain_flagged_files": 48,
+          "gain_useful": 48,
+          "maximum_useful_boundary_error_samples": 1,
+          "other_gain_spans": 0,
+          "production_decode_checks": 22
+        },
+        "ES2008a": {
+          "deliveries": 132,
+          "exact_channel_flagged_files": 12,
+          "exact_channel_useful": 12,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 264,
+          "gain_flagged_files": 48,
+          "gain_useful": 48,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 22
+        }
+      },
+      "control": {
+        "deliveries": 144,
+        "exact_channel_flagged_files": 0,
+        "exact_channel_useful": 0,
+        "exact_mono_flagged_files": 0,
+        "exact_mono_useful": 0,
+        "gain_channel_measured": 288,
+        "gain_flagged_files": 0,
+        "gain_useful": 0,
+        "maximum_useful_boundary_error_samples": 0,
+        "other_gain_spans": 0,
+        "production_decode_checks": 24
+      },
+      "exact_copy": {
+        "deliveries": 24,
+        "exact_channel_flagged_files": 24,
+        "exact_channel_useful": 24,
+        "exact_mono_flagged_files": 0,
+        "exact_mono_useful": 0,
+        "gain_channel_measured": 48,
+        "gain_flagged_files": 0,
+        "gain_useful": 0,
+        "maximum_useful_boundary_error_samples": 0,
+        "other_gain_spans": 0,
+        "production_decode_checks": 4
+      },
+      "positive": {
+        "deliveries": 96,
+        "exact_channel_flagged_files": 0,
+        "exact_channel_useful": 0,
+        "exact_mono_flagged_files": 0,
+        "exact_mono_useful": 0,
+        "gain_channel_measured": 192,
+        "gain_flagged_files": 96,
+        "gain_useful": 96,
+        "maximum_useful_boundary_error_samples": 1,
+        "other_gain_spans": 0,
+        "production_decode_checks": 16
+      }
+    },
+    "previous": {
+      "by_meeting": {
+        "ES2004a": {
+          "deliveries": 132,
+          "exact_channel_flagged_files": 12,
+          "exact_channel_useful": 12,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 264,
+          "gain_flagged_files": 48,
+          "gain_useful": 48,
+          "maximum_useful_boundary_error_samples": 1,
+          "other_gain_spans": 0,
+          "production_decode_checks": 22
+        },
+        "IS1009a": {
+          "deliveries": 132,
+          "exact_channel_flagged_files": 12,
+          "exact_channel_useful": 12,
+          "exact_mono_flagged_files": 0,
+          "exact_mono_useful": 0,
+          "gain_channel_measured": 264,
+          "gain_flagged_files": 48,
+          "gain_useful": 48,
+          "maximum_useful_boundary_error_samples": 0,
+          "other_gain_spans": 0,
+          "production_decode_checks": 22
+        }
+      },
+      "control": {
+        "deliveries": 144,
+        "exact_channel_flagged_files": 0,
+        "exact_channel_useful": 0,
+        "exact_mono_flagged_files": 0,
+        "exact_mono_useful": 0,
+        "gain_channel_measured": 288,
+        "gain_flagged_files": 0,
+        "gain_useful": 0,
+        "maximum_useful_boundary_error_samples": 0,
+        "other_gain_spans": 0,
+        "production_decode_checks": 24
+      },
+      "exact_copy": {
+        "deliveries": 24,
+        "exact_channel_flagged_files": 24,
+        "exact_channel_useful": 24,
+        "exact_mono_flagged_files": 0,
+        "exact_mono_useful": 0,
+        "gain_channel_measured": 48,
+        "gain_flagged_files": 0,
+        "gain_useful": 0,
+        "maximum_useful_boundary_error_samples": 0,
+        "other_gain_spans": 0,
+        "production_decode_checks": 4
+      },
+      "positive": {
+        "deliveries": 96,
+        "exact_channel_flagged_files": 0,
+        "exact_channel_useful": 0,
+        "exact_mono_flagged_files": 0,
+        "exact_mono_useful": 0,
+        "gain_channel_measured": 192,
+        "gain_flagged_files": 96,
+        "gain_useful": 96,
+        "maximum_useful_boundary_error_samples": 1,
+        "other_gain_spans": 0,
+        "production_decode_checks": 16
+      }
+    }
+  },
+  "deliveries": 528,
+  "ffmpeg_version": "ffmpeg version 7.0.2 Copyright (c) 2000-2024 the FFmpeg developers",
+  "numpy_version": "2.2.6",
+  "plan": {
+    "boundary_tolerance_samples": 8,
+    "code_sha256": {
+      "backend/app/evidence/audio_exact_repetition.py": "71d38ca03d1f5ce98887cdd213544299eac5e1b1c4a07218e21cfc2d3a3c5f58",
+      "backend/app/evidence/audio_gain_repetition.py": "f15d3c66d7f354c7a1c46a07c295120af9fb11f0cbd0378b3c733657355ba96b",
+      "backend/app/evidence/audio_gain_repetition_binding.py": "5b4d8ca67d66a5fc8eb819424b97b41d85dd0ff65bc2275d257100388947090e",
+      "backend/scripts/audio_gain_repetition_transfer.py": "e8ffeb30e14fb2d2074f1b5c1b23680f435861bc6322ab26e28fdbb4303591b3",
+      "backend/scripts/replay_audio_gain_public.py": "632fee536f9edc485f5d1272f361d06e5ff30f7f499a3dc8c3af7b2bfa1f8b50"
+    },
+    "cohorts": {
+      "additional": [
+        "ES2005a",
+        "ES2008a"
+      ],
+      "previous": [
+        "ES2004a",
+        "IS1009a"
+      ]
+    },
+    "prior_receipt_sha256": "795bc30e8251aa5cf7543519a472feaa8c33a82916abdd7b1cd33fc51cef1adc",
+    "production_decode_window_indices_per_session": [
+      0,
+      11
+    ],
+    "schema": "chipmunk.ami-gain-replay-plan/1",
+    "sources": {
+      "ES2004a.Array1-01.wav": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Array1-01.wav",
+      "ES2004a.Array1-05.wav": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Array1-05.wav",
+      "ES2005a.Array1-01.wav": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2005a/audio/ES2005a.Array1-01.wav",
+      "ES2005a.Array1-05.wav": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2005a/audio/ES2005a.Array1-05.wav",
+      "ES2008a.Array1-01.wav": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2008a/audio/ES2008a.Array1-01.wav",
+      "ES2008a.Array1-05.wav": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2008a/audio/ES2008a.Array1-05.wav",
+      "IS1009a.Array1-01.wav": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/IS1009a/audio/IS1009a.Array1-01.wav",
+      "IS1009a.Array1-05.wav": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/IS1009a/audio/IS1009a.Array1-05.wav"
+    },
+    "variants": [
+      "attenuated",
+      "inverted",
+      "amplified",
+      "earlier_attenuated",
+      "exact_copy",
+      "unchanged",
+      "global_gain",
+      "unsupported_gain",
+      "competing_microphone",
+      "clipped_repeat",
+      "short_repeat"
+    ],
+    "window_samples": 48000,
+    "window_starts_s": [
+      75,
+      105,
+      135,
+      165,
+      195,
+      225,
+      255,
+      285,
+      315,
+      345,
+      375,
+      405
+    ]
+  },
+  "production_decode_checks": 88,
+  "readout_sha256": "3ce57cb2bc2f81d2ba7f65cf3f65187dc49c17a6ff86965d2fd097b781912c3d",
+  "readout_without_mono_pcm_sha256": "912f656a7008d29cbd39d8042087717da72ddecc48c8796c5586f943d8269a7c",
+  "schema": "chipmunk.ami-gain-public-replay/1",
+  "sources": {
+    "ES2004a.Array1-01.wav": {
+      "bytes": 33579394,
+      "sha256": "6936edac5d0904fc5c4ab175546c5cc5366601fdc1b1e5183a6ea2c10f05d150",
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Array1-01.wav"
+    },
+    "ES2004a.Array1-05.wav": {
+      "bytes": 33579394,
+      "sha256": "c6f0eafaedd3632da4cb3f14788ee83a8efae2b456f70eefa8e98b2b6992102a",
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Array1-05.wav"
+    },
+    "ES2005a.Array1-01.wav": {
+      "bytes": 15292120,
+      "sha256": "59a785d1a0e5df2e878a6c4b05fd539f06b243b2ff345465387a65cd300b7279",
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2005a/audio/ES2005a.Array1-01.wav"
+    },
+    "ES2005a.Array1-05.wav": {
+      "bytes": 15292120,
+      "sha256": "c62043ea78e5ca79077594a7533cdc14511761073dc9059eaaee62f4eca0f338",
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2005a/audio/ES2005a.Array1-05.wav"
+    },
+    "ES2008a.Array1-01.wav": {
+      "bytes": 33387564,
+      "sha256": "2382b3b7eea81ff6393555680c660f4b00be3f0971aef2a0a71197bb5109eae1",
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2008a/audio/ES2008a.Array1-01.wav"
+    },
+    "ES2008a.Array1-05.wav": {
+      "bytes": 33387564,
+      "sha256": "4bbf75116960323722efc1e6d7d55fd4e2204ee9df72cd7441858072d6a38679",
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2008a/audio/ES2008a.Array1-05.wav"
+    },
+    "IS1009a.Array1-01.wav": {
+      "bytes": 26849383,
+      "sha256": "23fd54fd6dbe23870f10317b256f7c648fe0fd587e56d2f940840309f1578b60",
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/IS1009a/audio/IS1009a.Array1-01.wav"
+    },
+    "IS1009a.Array1-05.wav": {
+      "bytes": 26849383,
+      "sha256": "95403a5ec3baa5bfd3370a98e1bc9c76a77c0c173dbc93d768920b1f8271796c",
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/IS1009a/audio/IS1009a.Array1-05.wav"
+    }
+  }
+}

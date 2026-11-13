@@ -18,6 +18,7 @@ from app.evidence.video_reference import (
     SCHEMA_WITH_SHORT_TIMING,
     SCHEMA_WITH_SOUNDTRACK,
     SCHEMA_WITH_TIMING,
+    SCHEMA_WITH_TRIM,
     compare,
 )
 from app.evidence.video_reference_timing import SHORT_WAVEFORM_BASIS
@@ -61,7 +62,7 @@ def replay(compare, earlier: Path, submitted: Path, output: Path, *, verify: boo
 
 def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds: Fraction | None = None, timing_model: Path | None = None) -> dict:
-    options = {}
+    options = {"include_trimmed": not verify}
     short_fallback = not verify
     local_sound = not verify
     if verify:
@@ -70,6 +71,7 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds = None
         if isinstance(record, dict):
             schema = record.get("schema")
+            options["include_trimmed"] = schema == SCHEMA_WITH_TRIM
             channel_timing = schema == SCHEMA_WITH_CHANNEL_TIMING
             timing = record.get("timing", {})
             local_sound = schema == SCHEMA_WITH_MARKED_SOUND_FALLBACK or (

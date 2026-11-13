@@ -63,6 +63,17 @@ regexes = [
   '''^tokenizers\.tokenizers": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327"$''',
 ]
 
+# Recomputed from the two pinned tokenizer files used by the omission study.
+[[rules.allowlists]]
+description = "Writing omission study tokenizer file SHA-256 commitments"
+condition = "AND"
+paths = ['(^|/)docs/evaluation-panels/writing-omission-attribution-2026-11-13\.json$']
+regexTarget = "match"
+regexes = [
+  '''^tokenizer\.json": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf"$''',
+  '''^tokenizer_config\.json": "d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432"$''',
+]
+
 # Recomputed from the exact acquired v4 tokenizer files before publication.
 # Restrict to these three field/value pairs in this one source file.
 [[rules.allowlists]]

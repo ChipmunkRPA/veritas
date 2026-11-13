@@ -1,0 +1,525 @@
+{
+  "commitments": {
+    "chipmunk-image-three-class-20261112/calibration.json": "6a48bedd195e8f15f46cc626eb6165972073f765490f8f36ed91a52343a7ffab",
+    "chipmunk-image-three-class-fresh-20261112/measurements.json": "7156a513140b338e091230f61a385bd37f9272933b3bff196396eb4a560f353d",
+    "chipmunk-masked-context-new-editors-20261113/intake.json": "6668cc9bd09ca78863d12b0a2df0713d3c004928660133a93c58d48cb9d8476e",
+    "chipmunk-masked-context-new-editors-20261113/plan.json": "318a2b98fb4d62a3a0ebd039cda708d2ee4d575068577de2c63fda742632bd55",
+    "scripts/image_color_line_transfer.py": "533e890027b3c8edaa7d392669c4eef7a984f08f9416d7d8b848ac8b8506239e",
+    "scripts/image_directional_structure_transfer.py": "35b072b90c80a48e66aeaa395c4041865110a97b5c92f0785775b87291ee2a51"
+  },
+  "design": {
+    "arms": {
+      "cross_scale": "Fine error using the fitted coarse axis minus fine error using the fitted fine axis.",
+      "fine_excess": "Independent fine minus coarse axis errors with test-scale normalization."
+    },
+    "candidate_geometry": {
+      "max_area_fraction": 0.1,
+      "max_aspect_ratio": 2,
+      "max_one_per_arm": true,
+      "native_cell_sides": [
+        3,
+        4,
+        5,
+        6,
+        8,
+        10,
+        12
+      ],
+      "surrounding_strips": 3
+    },
+    "cell_px": 16,
+    "confidence_weight": 0,
+    "cross_fit": "Train and test on opposite checkerboard halves of pooled samples, then swap.",
+    "eligibility": {
+      "coarse_luma_edges": [
+        0.12,
+        0.36
+      ],
+      "coarse_rms": 0.012,
+      "coarse_strength_edges": [
+        0.035,
+        0.1
+      ],
+      "fine_rms": 0.015,
+      "max_clipped_fraction": 0.15,
+      "max_coarse_error": 0.32,
+      "min_matched_cells": 4,
+      "min_support": 0.5
+    },
+    "gates": {
+      "editor_families": 2,
+      "extra_feathered_groups": 3,
+      "extra_ordinary_groups": 2,
+      "misplaced": 4
+    },
+    "gaussian_sigma_px": 1.8,
+    "point": "Strict exceedance of second-largest group maximum on eight ordinary-only calibration sources.",
+    "pool_px": 2,
+    "signal": "Held-out linear RGB distance from the fitted local color axis at native and blurred scales.",
+    "useful": {
+      "iou": 0.3,
+      "recall": 0.5
+    }
+  },
+  "exact_native_replays": 200,
+  "passes": {
+    "cross_scale": false,
+    "fine_excess": false
+  },
+  "points": {
+    "cross_scale": 0.04423892964181574,
+    "fine_excess": 0.05844489519327965
+  },
+  "replay_seconds": 31.49,
+  "results": {
+    "confirmation": {
+      "advancement": {
+        "cross_scale": {
+          "editor_families": 0,
+          "extra_feathered_groups": 0,
+          "extra_ordinary_groups": 2,
+          "misplaced": 3
+        },
+        "fine_excess": {
+          "editor_families": 0,
+          "extra_feathered_groups": 0,
+          "extra_ordinary_groups": 1,
+          "misplaced": 2
+        }
+      },
+      "strata": {
+        "kandinsky/feathered/cross_scale": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 1,
+          "misplaced": 1,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/feathered/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/feathered/fine_excess": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 1,
+          "misplaced": 1,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/ordinary/cross_scale": {
+          "assessed": 36,
+          "files": 36,
+          "flags": 6,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/ordinary/current_luma": {
+          "assessed": 0,
+          "files": 36,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/ordinary/fine_excess": {
+          "assessed": 36,
+          "files": 36,
+          "flags": 6,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/sharp/cross_scale": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 2,
+          "misplaced": 2,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/sharp/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/sharp/fine_excess": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 1,
+          "misplaced": 1,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sd15/feathered/cross_scale": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sd15/feathered/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sd15/feathered/fine_excess": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sd15/ordinary/cross_scale": {
+          "assessed": 36,
+          "files": 36,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sd15/ordinary/current_luma": {
+          "assessed": 0,
+          "files": 36,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sd15/ordinary/fine_excess": {
+          "assessed": 36,
+          "files": 36,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sd15/sharp/cross_scale": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sd15/sharp/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sd15/sharp/fine_excess": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        }
+      }
+    },
+    "external": {
+      "advancement": {
+        "cross_scale": {
+          "editor_families": 0,
+          "extra_feathered_groups": 0,
+          "extra_ordinary_groups": 2,
+          "misplaced": 8
+        },
+        "fine_excess": {
+          "editor_families": 0,
+          "extra_feathered_groups": 0,
+          "extra_ordinary_groups": 0,
+          "misplaced": 0
+        }
+      },
+      "strata": {
+        "kandinsky/feathered/cross_scale": {
+          "assessed": true,
+          "files": 1,
+          "flags": true,
+          "misplaced": true,
+          "useful": false,
+          "useful_before": false
+        },
+        "kandinsky/feathered/current_luma": {
+          "assessed": false,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "kandinsky/feathered/fine_excess": {
+          "assessed": true,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "kandinsky/ordinary/cross_scale": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 5,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/ordinary/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/ordinary/fine_excess": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "kandinsky/sharp/cross_scale": {
+          "assessed": true,
+          "files": 1,
+          "flags": true,
+          "misplaced": true,
+          "useful": false,
+          "useful_before": false
+        },
+        "kandinsky/sharp/current_luma": {
+          "assessed": false,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "kandinsky/sharp/fine_excess": {
+          "assessed": true,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "lama/feathered/cross_scale": {
+          "assessed": 5,
+          "files": 6,
+          "flags": 2,
+          "misplaced": 2,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/feathered/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/feathered/fine_excess": {
+          "assessed": 5,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/ordinary/cross_scale": {
+          "assessed": 30,
+          "files": 36,
+          "flags": 9,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/ordinary/current_luma": {
+          "assessed": 3,
+          "files": 36,
+          "flags": 3,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/ordinary/fine_excess": {
+          "assessed": 30,
+          "files": 36,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/sharp/cross_scale": {
+          "assessed": 5,
+          "files": 6,
+          "flags": 2,
+          "misplaced": 2,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/sharp/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "lama/sharp/fine_excess": {
+          "assessed": 5,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sdxl/feathered/cross_scale": {
+          "assessed": true,
+          "files": 1,
+          "flags": true,
+          "misplaced": true,
+          "useful": false,
+          "useful_before": false
+        },
+        "sdxl/feathered/current_luma": {
+          "assessed": false,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "sdxl/feathered/fine_excess": {
+          "assessed": true,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "sdxl/ordinary/cross_scale": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 5,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sdxl/ordinary/current_luma": {
+          "assessed": 0,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sdxl/ordinary/fine_excess": {
+          "assessed": 6,
+          "files": 6,
+          "flags": 0,
+          "misplaced": 0,
+          "useful": 0,
+          "useful_before": 0
+        },
+        "sdxl/sharp/cross_scale": {
+          "assessed": true,
+          "files": 1,
+          "flags": true,
+          "misplaced": true,
+          "useful": false,
+          "useful_before": false
+        },
+        "sdxl/sharp/current_luma": {
+          "assessed": false,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        },
+        "sdxl/sharp/fine_excess": {
+          "assessed": true,
+          "files": 1,
+          "flags": false,
+          "misplaced": false,
+          "useful": false,
+          "useful_before": false
+        }
+      }
+    }
+  },
+  "schema": "chipmunk.image-color-line-transfer/1",
+  "synthetic": {
+    "altered": {
+      "cross_scale": {
+        "box": [
+          160,
+          144,
+          224,
+          240
+        ],
+        "score": 0.4587045293898558
+      },
+      "fine_excess": {
+        "box": [
+          144,
+          144,
+          240,
+          240
+        ],
+        "score": 0.35064101251863944
+      }
+    },
+    "baseline": {
+      "cross_scale": {
+        "box": [
+          48,
+          64,
+          112,
+          160
+        ],
+        "score": 4.7856812627027135e-06
+      },
+      "fine_excess": {
+        "box": [
+          64,
+          160,
+          112,
+          256
+        ],
+        "score": 3.305303096042452e-05
+      }
+    },
+    "flat": {
+      "cross_scale": {
+        "box": null,
+        "score": null
+      },
+      "fine_excess": {
+        "box": null,
+        "score": null
+      }
+    }
+  }
+}

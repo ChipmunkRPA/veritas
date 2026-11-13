@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import io
 import os
+from collections import Counter
 from contextlib import closing
 from fractions import Fraction
 from itertools import pairwise, zip_longest
@@ -17,7 +18,13 @@ from app.core.canonical import canonical_hash
 from app.detectors.audio.decode import SAMPLE_RATE, audio_stream_indices
 from app.detectors.video.decode import DecodeError, FrameTable, decode_frames, probe_frames
 from app.evidence import video_reference_local
-from app.evidence.audio_reference import _read_track, channel_timing, compare_tracks, marked_ranges, read_track
+from app.evidence.audio_reference import (
+    _read_track,
+    channel_timing,
+    compare_tracks,
+    marked_ranges,
+    read_track,
+)
 from app.storage.files import VIDEO_MIMES, sniff
 
 SCHEMA = "chipmunk.video-reference-comparison/1"
@@ -28,6 +35,7 @@ SCHEMA_WITH_SOUNDTRACK = "chipmunk.video-reference-comparison/5"
 SCHEMA_WITH_ADDITIONAL_SOUNDTRACK = "chipmunk.video-reference-comparison/6"
 SCHEMA_WITH_MARKED_SOUND_FALLBACK = "chipmunk.video-reference-comparison/7"
 SCHEMA_WITH_CHANNEL_TIMING = "chipmunk.video-reference-comparison/8"
+SCHEMA_WITH_TRIM = "chipmunk.video-reference-comparison/9"
 MAX_COMPARED_SOUNDTRACKS = 2
 MAX_BYTES = 48 * 1024 * 1024
 MAX_FRAMES = 360
@@ -114,31 +122,85 @@ def _frame_pairs(paths, tables):
             yield first, second
 
 
-def _clock_range(tables, start, end):
-    return {label: {"start_pts": table.pts[start], "last_pts": table.pts[end - 1],
-                    "end_exclusive_pts": table.pts[end] if end < len(table) else None}
-            for label, table in zip(("earlier", "submitted"), tables, strict=True)}
+def _clock_range(tables, start, end, earlier_offset=0):
+    return {label: {"start_pts": table.pts[start + offset], "last_pts": table.pts[end + offset - 1],
+                    "end_exclusive_pts": table.pts[end + offset] if end + offset < len(table) else None}
+            for label, table, offset in zip(("earlier", "submitted"), tables, (earlier_offset, 0), strict=True)}
 
 
-def _picture(paths, tables, assets, *, include_local):
+def _trim_offset(paths, tables):
+    earlier, submitted = tables
+    if not 32 <= len(submitted) < len(earlier) or any(table.rotation for table in tables):
+        return None
+    hashes = []
+    for path, table in zip(paths, tables, strict=True):
+        values = []
+        with closing(decode_frames(path, table, None, timeout_s=40, max_pixels=MAX_PIXELS)) as frames:
+            for frame in frames:
+                if frame.index != len(values) or not frame.pts_verified:
+                    raise DecodeError("Video could not be decoded with verified picture timestamps.")
+                values.append(hashlib.sha256(frame.rgb).digest())
+        if len(values) != len(table):
+            raise DecodeError("Video could not be decoded with every recorded picture.")
+        hashes.append(values)
+    old, new = hashes
+    old_count, new_count = Counter(old), Counter(new)
+    unique_old = {value: i for i, value in enumerate(old) if old_count[value] == 1}
+    votes = Counter(unique_old[value] - i for i, value in enumerate(new) if new_count[value] == 1 and value in unique_old)
+    qualified = [(offset, count) for offset, count in votes.items()
+                 if 0 <= offset <= len(old) - len(new) and count >= max(16, (len(new) + 1) // 2)]
+    if len(qualified) != 1:
+        return None
+    offset, support = qualified[0]
+    if [(pts - earlier.pts[offset]) * earlier.tb for pts in earlier.pts[offset:offset + len(new)]] != _elapsed(submitted):
+        return None
+    matches = np.asarray([a == b for a, b in zip(old[offset:offset + len(new)], new, strict=True)])
+    unique = [same and new_count[value] == old_count[value] == 1 for same, value in zip(matches, new, strict=True)]
+    flank = len(new) // 4
+    if min(sum(unique[:flank]), sum(unique[-flank:])) < 3:
+        return None
+    ranges = marked_ranges(~matches)
+    if len(ranges) > MAX_PRESENTED_RANGES or any(start == 0 or end == len(new) or not unique[start - 1]
+                                               or not unique[end] for start, end in ranges):
+        return None
+    return offset, support
+
+
+def _trimmed_pairs(paths, tables, offset):
+    wanted = range(offset, offset + len(tables[1]))
+    with (closing(decode_frames(paths[0], tables[0], wanted, timeout_s=40, max_pixels=MAX_PIXELS)) as old,
+          closing(decode_frames(paths[1], tables[1], None, timeout_s=40, max_pixels=MAX_PIXELS)) as new):
+        for index, (first, second) in enumerate(zip_longest(old, new)):
+            if (first is None or second is None or first.index != index + offset or second.index != index
+                    or not first.pts_verified or not second.pts_verified):
+                raise DecodeError("Video could not be decoded on its aligned native clocks.")
+            yield first, second
+
+
+def _picture(paths, tables, assets, *, include_local, trim_offset=None):
     clock = _elapsed(tables[1])
+    earlier_clock = _elapsed(tables[0]) if trim_offset is not None else None
+    earlier_offset = trim_offset if trim_offset is not None else 0
     local_check = video_reference_local.eligible(paths, tables, clock) if include_local else None
     rects = video_reference_local.rectangles(tables[0].height, tables[0].width) if local_check else None
     measurements = []
     signals, background_errors = [], []
-    for first, second in _frame_pairs(paths, tables):
+    pairs = _frame_pairs(paths, tables) if trim_offset is None else _trimmed_pairs(paths, tables, earlier_offset)
+    for first, second in pairs:
         difference = first.rgb != second.rgb
         mask = difference[..., 0] | difference[..., 1] | difference[..., 2]
         count = int(np.count_nonzero(mask))
-        measurements.append({"frame": first.index, "earlier_pts": first.pts, "submitted_pts": second.pts,
+        measurements.append({"frame": second.index, "earlier_pts": first.pts, "submitted_pts": second.pts,
                              "earlier_rgb_sha256": hashlib.sha256(first.rgb).hexdigest(),
                              "submitted_rgb_sha256": hashlib.sha256(second.rgb).hexdigest(),
                              "changed_pixels": count, "difference_bounds": _bounds(mask) if count else None})
+        if earlier_clock is not None:
+            measurements[-1].update(earlier_frame=first.index, earlier_time_s=float(earlier_clock[first.index]))
         if rects is not None:
             signal, background = video_reference_local.measure(first.rgb, second.rgb, rects)
             signals.append(signal)
             background_errors.append(background)
-    if len(measurements) != len(tables[0]):
+    if len(measurements) != len(tables[1]):
         raise DecodeError("Video could not be decoded with every recorded picture.")
 
     sizes = [row["changed_pixels"] for row in measurements]
@@ -158,8 +220,11 @@ def _picture(paths, tables, assets, *, include_local):
         output.append({"id": f"V{number:02d}", "start_frame": start, "end_frame_exclusive": end,
                        "start_s": float(clock[start]), "last_s": float(clock[end - 1]),
                        "end_s": float(clock[end]) if end < len(clock) else None,
-                       "source_ranges": _clock_range(tables, start, end), "strongest_frame": measurements[strongest],
+                       "source_ranges": _clock_range(tables, start, end, earlier_offset), "strongest_frame": measurements[strongest],
                        "preview_indices": examples})
+        if earlier_clock is not None:
+            output[-1].update(earlier_start_s=float(earlier_clock[start + earlier_offset]),
+                              earlier_end_s=float(earlier_clock[end + earlier_offset]))
 
     local = choice = None
     if local_check is not None and rects is not None:
@@ -172,13 +237,15 @@ def _picture(paths, tables, assets, *, include_local):
     previews, crops = {}, {}
     crop_indices = set(choice["samples"].values()) if choice else set()
     for side, path, table in zip(("earlier", "submitted"), paths, tables, strict=True):
-        with closing(decode_frames(path, table, sorted(needed), timeout_s=40, max_pixels=MAX_PIXELS)) as frames:
+        offset = earlier_offset if side == "earlier" else 0
+        with closing(decode_frames(path, table, sorted(index + offset for index in needed), timeout_s=40, max_pixels=MAX_PIXELS)) as frames:
             for frame in frames:
+                index = frame.index - offset
                 digest = hashlib.sha256(frame.rgb).hexdigest()
-                if not frame.pts_verified or digest != measurements[frame.index][f"{side}_rgb_sha256"]:
+                if not frame.pts_verified or digest != measurements[index][f"{side}_rgb_sha256"]:
                     raise DecodeError("Video could not be decoded with consistent picture evidence.")
-                previews.setdefault(frame.index, {})[side] = _image(assets, f"{side}-frame-{frame.index:03d}.png", frame.rgb)
-                if choice and frame.index in crop_indices:
+                previews.setdefault(index, {})[side] = _image(assets, f"{side}-frame-{frame.index:03d}.png", frame.rgb)
+                if choice and index in crop_indices:
                     x, y, w, h = (choice["tile"][key] for key in ("x", "y", "w", "h"))
                     crops.setdefault(frame.index, {})[side] = _image(
                         assets, f"{side}-local-crop-{frame.index:03d}.png", frame.rgb[y:y+h, x:x+w]
@@ -235,8 +302,8 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             timing_short_fallback: bool = False, include_soundtrack: bool = True,
             timing_local_sound: bool = False,
             include_additional_soundtrack: bool = True,
-            include_channel_timing: bool = False) -> tuple[dict, dict[str, bytes]]:
-    """Report actual decoded differences at equal relative native picture timestamps."""
+            include_channel_timing: bool = False, include_trimmed: bool = False) -> tuple[dict, dict[str, bytes]]:
+    """Report decoded differences on matching clocks or within a verified trimmed overlap."""
     paths = earlier, submitted
     sources = tuple(_identity(path) for path in paths)
     tables = tuple(probe_frames(path, cap=MAX_FRAMES, timeout_s=30, max_pixels=MAX_PIXELS) for path in paths)
@@ -245,6 +312,17 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
     record = {"schema": SCHEMA, "status": status,
               "earlier": {**sources[0], **_reference(tables[0])}, "submitted": {**sources[1], **_reference(tables[1])},
               "interpretation": INTERPRETATION, "affects_overall_confidence": False}
+    if (include_trimmed and timing_event_s is None and status == "picture_timelines_differ"
+            and (trim := _trim_offset(paths, tables))):
+        offset, support = trim
+        overlap = len(tables[1])
+        record.update(schema=SCHEMA_WITH_TRIM, status="measured",
+                      interpretation="This comparison measures decoded picture changes in a verified shared range after trimming. "
+                                     "It covers the pictured overlap. Ordinary edits can produce these differences.",
+                      trim_alignment={"earlier_frames": [offset, offset + overlap], "submitted_frames": [0, overlap],
+                                      "unique_matching_frames": support, "audio_checked": False},
+                      picture=_picture(paths, tables, assets, include_local=False, trim_offset=offset))
+        return record, assets
     tracks = decoded = None
     if status == "measured":
         record["picture"] = _picture(paths, tables, assets, include_local=include_local)

@@ -1,0 +1,284 @@
+{
+  "design": {
+    "alignment": "Start from the existing corroborated integer offset. On unresolved alignment, the existing phase correlation nominates the only tested offset.",
+    "carrier": "Identical dimensions, earlier upright RGB8 PNG and submitted baseline standard JPEG75 with 4:2:0 sampling.",
+    "confidence_weight": 0,
+    "difference": "Existing paired local difference and prior JPEG envelope run only on the certified submitted-grid interior.",
+    "gate": {
+      "assessed_ordinary_fills": 18,
+      "extra_feathered": 6,
+      "max_added_ordinary_highlights": 2,
+      "max_bad_transforms": 0,
+      "max_unassessed_pixels_reported": 0,
+      "max_wrong_edit_locations": 1
+    },
+    "guard_native_pixels": 16,
+    "max_offset": 24,
+    "phase_nomination": {
+      "maximum_fractional_distance": 0.4,
+      "minimum_response": 0.3
+    },
+    "proof": "Recreate the JPEG on its submitted grid and require the existing exact unique RGB block support on a certified interior. Independent black and white simulations must agree throughout that interior.",
+    "qualification": {
+      "confirmation": 12,
+      "development": 20,
+      "prior_project_exposure": true
+    }
+  },
+  "outcome": {
+    "confirmation": {
+      "gate": {
+        "assessed_ordinary_fills": {
+          "observed": 36,
+          "passed": true
+        },
+        "extra_feathered": {
+          "observed": 12,
+          "passed": true
+        },
+        "max_added_ordinary_highlights": {
+          "observed": 0,
+          "passed": true
+        },
+        "max_bad_transforms": {
+          "observed": 0,
+          "passed": true
+        },
+        "max_unassessed_pixels_reported": {
+          "observed": 0,
+          "passed": true
+        },
+        "max_wrong_edit_locations": {
+          "observed": 0,
+          "passed": true
+        }
+      },
+      "pass": true,
+      "roles": {
+        "black_fill": {
+          "candidate_comparable": 12,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 12,
+          "files": 12,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "feathered": {
+          "candidate_comparable": 12,
+          "candidate_flags": 12,
+          "candidate_useful": 12,
+          "correct_offsets": 12,
+          "files": 12,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "fractional": {
+          "candidate_comparable": 0,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 0,
+          "files": 12,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "mirror_fill": {
+          "candidate_comparable": 12,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 12,
+          "files": 12,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "nonstandard": {
+          "candidate_comparable": 0,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 0,
+          "files": 12,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "recompress": {
+          "candidate_comparable": 0,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 0,
+          "files": 12,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "rotate": {
+          "candidate_comparable": 0,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 0,
+          "files": 12,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "sharp": {
+          "candidate_comparable": 12,
+          "candidate_flags": 12,
+          "candidate_useful": 12,
+          "correct_offsets": 12,
+          "files": 12,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "unrelated": {
+          "candidate_comparable": 0,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 0,
+          "files": 12,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "white_fill": {
+          "candidate_comparable": 12,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 12,
+          "files": 12,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        }
+      }
+    },
+    "development": {
+      "gate": {
+        "assessed_ordinary_fills": {
+          "observed": 60,
+          "passed": true
+        },
+        "extra_feathered": {
+          "observed": 20,
+          "passed": true
+        },
+        "max_added_ordinary_highlights": {
+          "observed": 0,
+          "passed": true
+        },
+        "max_bad_transforms": {
+          "observed": 0,
+          "passed": true
+        },
+        "max_unassessed_pixels_reported": {
+          "observed": 0,
+          "passed": true
+        },
+        "max_wrong_edit_locations": {
+          "observed": 0,
+          "passed": true
+        }
+      },
+      "pass": true,
+      "roles": {
+        "black_fill": {
+          "candidate_comparable": 20,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 20,
+          "files": 20,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "feathered": {
+          "candidate_comparable": 20,
+          "candidate_flags": 20,
+          "candidate_useful": 20,
+          "correct_offsets": 20,
+          "files": 20,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "fractional": {
+          "candidate_comparable": 0,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 0,
+          "files": 20,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "mirror_fill": {
+          "candidate_comparable": 20,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 20,
+          "files": 20,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "nonstandard": {
+          "candidate_comparable": 0,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 0,
+          "files": 20,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "recompress": {
+          "candidate_comparable": 0,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 0,
+          "files": 20,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "rotate": {
+          "candidate_comparable": 0,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 0,
+          "files": 20,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "sharp": {
+          "candidate_comparable": 20,
+          "candidate_flags": 20,
+          "candidate_useful": 20,
+          "correct_offsets": 20,
+          "files": 20,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "unrelated": {
+          "candidate_comparable": 0,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 0,
+          "files": 20,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        },
+        "white_fill": {
+          "candidate_comparable": 20,
+          "candidate_flags": 0,
+          "candidate_useful": 0,
+          "correct_offsets": 20,
+          "files": 20,
+          "incumbent_comparable": 0,
+          "incumbent_useful": 0
+        }
+      }
+    }
+  },
+  "replay_seconds": 51.69,
+  "schema": "chipmunk.image-reference-shifted-jpeg-transfer/1",
+  "sha256": {
+    "chipmunk-image-three-class-20261112/freeze.json": "7041774c64d953496e4b6bafa5ab214f821c12cb8ea78b96d13b2f72bb1e9559",
+    "chipmunk-image-three-class-fresh-20261112/intake.json": "37907b3b65c8d9cfa06fa4eedf795a8bc7597082a7093b10c39d8afceae5abdd",
+    "chipmunk-image-three-class-fresh-20261112/plan.json": "c9c2a8e77c23c98883e92c552c2dfbf7a10ac7cebfe368b77eee070abbfbed95",
+    "image/reference_alignment.py": "5c2504e09d2f6392dbb4e3948016ceb7b8c592947732a29fe2d8f7d401507428",
+    "image/reference_compare.py": "e436052ad1a0b70ab29c180be88c72e868ed8f701031c6e1f10cecda5bb47063",
+    "image/reference_exact_jpeg.py": "04c6390df1c1056daac5a7e5a2edd68bc247f66557bdd0c3256ab3db46a0e00b",
+    "scripts/image_reference_shifted_jpeg_transfer.py": "abcfbcad05d3f55ee26ebb00bb86fe093bc45ffd28f7a5a22fadd1cfe5f46523"
+  },
+  "verified_replays": 320
+}

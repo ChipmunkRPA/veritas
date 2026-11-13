@@ -89,6 +89,30 @@ it('renders the signed local soundtrack shift and exact native picture from the 
   expect(screen.getAllByRole('img', { name: /matched soundtrack waveform/ })).toHaveLength(2)
 })
 
+it('shows the two picture clocks in a trimmed earlier-copy comparison', async () => {
+  const picture = { file: 'frame.png', media_type: 'image/png', sha256: 'a'.repeat(64) }
+  const comparison = {
+    schema: 'chipmunk.video-reference-comparison/9', status: 'measured', interpretation: 'Verified shared picture range.',
+    submitted: { width: 64, height: 48 },
+    trim_alignment: { earlier_frames: [4, 44], submitted_frames: [0, 40], unique_matching_frames: 32 },
+    picture: { matching_frames: 32, changed_frames: 8, ranges: [{
+      id: 'V01', start_s: .4, end_s: .72, earlier_start_s: .56, earlier_end_s: .88,
+      strongest_frame: { changed_pixels: 264, difference_bounds: { x: 10, y: 7, w: 22, h: 12 } },
+      previews: { during: { time_s: .4, earlier_time_s: .56, assets: { earlier: picture, submitted: picture } } },
+    }] },
+  }
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(Response.json({ available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets: { 'frame.png': 'iVBORw0KGgo=' } })))
+  show()
+  fireEvent.change(await screen.findByLabelText('Earlier video'), { target: { files: [new File(['movie'], 'earlier.mov')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
+  expect(await screen.findByText('V01 · 0.400–0.720 s')).toBeTruthy()
+  expect(screen.getByText('0.560–0.880 s in the earlier clip.')).toBeTruthy()
+  expect(screen.getByAltText('Earlier clip at 0.560 seconds')).toBeTruthy()
+  expect(screen.getByAltText('Analyzed clip at 0.400 seconds')).toBeTruthy()
+  expect(screen.getByText(/The soundtrack was outside this comparison/)).toBeTruthy()
+})
+
 it('shows and exports the standalone audio difference waveform on the recording timeline', async () => {
   const clip = { file: 'earlier.wav', media_type: 'audio/wav', sha256: 'c'.repeat(64) }
   const waveform = { low: [-0.4], high: [0.2] }

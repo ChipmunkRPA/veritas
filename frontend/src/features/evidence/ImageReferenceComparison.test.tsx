@@ -85,6 +85,28 @@ describe('earlier-copy comparison', () => {
     expect(screen.queryByText('Pixels outside the overlap were unassessed.')).toBeNull()
   })
 
+  it('shows the certified shifted JPEG interior and leaves its margins unassessed', async () => {
+    const result = structuredClone(comparison)
+    result.comparison.schema = 'chipmunk.image-reference-comparison/12'
+    result.comparison.submitted.width = 384
+    result.comparison.submitted.height = 256
+    result.comparison.alignment = {
+      method: 'exact_decoded_jpeg_translated_overlap',
+      submitted_overlap: { x: 32, y: 32, w: 288, h: 176 },
+      reference_overlap: { x: 48, y: 43, w: 288, h: 176 },
+      reference_minus_submitted: { x: 16, y: 11 },
+      full_tiles: 198, exact_tiles: 165, anchor_count: 120,
+    }
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText(/165 of 198 complete JPEG blocks/)).toBeTruthy()
+    expect(screen.getByText('Margins outside these bounds were unassessed.')).toBeTruthy()
+    expect(screen.getByText('x 48, y 43 · 288 × 176 px')).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Download comparison PDF' })).toBeTruthy()
+  })
+
   it('checks fresh availability before displaying the form, even with a previously available cached value', async () => {
     const query = new QueryClient()
     query.setQueryData(['analysis', 'analysis-1', 'image-reference-comparison'], true)

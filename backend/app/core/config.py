@@ -221,6 +221,7 @@ class Settings(BaseSettings):
     image_reference_comparison_enabled: bool = False  # Development-only comparison of an uploaded earlier copy.
     image_reference_jpeg_png_envelope: bool = False  # Optional earlier standard JPEG to cropped PNG color differences.
     image_reference_exact_jpeg_identity: bool = False  # Optional same-framing PNG to standard JPEG identity comparison.
+    image_reference_shifted_jpeg: bool = False  # Optional bounded comparison of a whole-pixel translated JPEG.
     audio_reference_comparison_enabled: bool = False  # Authenticated comparison of a short earlier recording.
     audio_reference_local_timing: bool = False  # Find localized changes in the timing of matching excerpts.
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.

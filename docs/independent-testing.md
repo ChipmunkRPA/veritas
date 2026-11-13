@@ -51,6 +51,15 @@ uses a signed package and the original audio or video to recompute both
 channels and check the exact WAV excerpts.
 The [gain and polarity check](stereo-repetition-2026-11-13.md#gain-and-polarity)
 also verifies two distinct WAVs and the exact sample relationship between them.
+The [public AMI replay](audio-gain-public-replay-2026-11-13.md) downloads and
+verifies eight publisher WAVs and runs the shipped checks over 528 controlled
+deliveries. It does not require private development audio or model weights.
+When submitting its result through the evaluation form, include the commit,
+`readout_sha256`, FFmpeg version, and any source downloads or counts that
+differed. The receipt and those details are sufficient without the audio.
+The [trimmed video comparison](video-trimmed-reference-transfer-2026-11-13.md#replay)
+and [shifted JPEG comparison](image-reference-shifted-jpeg-transfer-2026-11-13.md)
+can each recheck a downloaded JSON result against the two supplied originals.
 
 The [large-image copy comparison](image-affine-native-scale-2026-11-11.md#reproduce)
 provides a licensed roster, exact source commitments, and a separate reader

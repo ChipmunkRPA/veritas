@@ -1,0 +1,440 @@
+{
+  "elapsed_s": 44.881,
+  "freeze": {
+    "code": {
+      "image_background_patch_score.py": "cb854082628636833e2fd005e954d0bdb7c78362e58ee98632f1ba4153224d5a",
+      "image_bg_real_insertion_score.py": "b8a91de6e686b5037ea65297aac52961ea995d701ca8aacf362b8715f94e303d",
+      "image_boundary_blend_transfer.py": "fc65a5e3f064d74a5cd6fa528d9115aee92cc8eb9e04cb6dee13398e03388aa0",
+      "image_chroma_interpolation_transfer.py": "6e568823de985e48e7a47d72464f63914321f4a0718e8fbd79ca8aa8c4e5895c",
+      "image_edge_spread_transfer.py": "f9d434f1dbd2d04b4292e512e562cae52f7dd049690b45f97ef424b2d971c08c",
+      "image_residual_color_transfer.py": "682fc80861ae3c80b7d80d5efb3edd3cb15635bbdf797c60b894ce4b23f8ece2",
+      "jpeg_dq.py": "3b176132b5c63ac062f2f53aa9d7dc2c766d4c92c1818825d23d40751bbd9f0e"
+    },
+    "method": {
+      "candidate_shapes_in_cells": [
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          10,
+          10
+        ],
+        [
+          12,
+          12
+        ]
+      ],
+      "cell": 16,
+      "confidence_weight": 0,
+      "delivery": [
+        "jpeg100_444",
+        "jpeg95_444",
+        "jpeg95_420"
+      ],
+      "earlier_jpeg": "quality 90, 4:2:0",
+      "gate": {
+        "extra_feathered_per_panel": 2,
+        "extra_ordinary_groups_per_panel": 3,
+        "extra_ordinary_views_per_panel": 4
+      },
+      "minimum_flank_phase": 0.08,
+      "ordinary_roles": [
+        "preserved",
+        "no_prior_chroma_grid",
+        "global_tone",
+        "global_resize",
+        "local_blur",
+        "local_tone",
+        "local_autoencoder"
+      ],
+      "point_floor": 0.06,
+      "point_rule": "second-highest development control-source maximum per delivery, strict exceedance",
+      "positive_roles": [
+        "sharp_edit",
+        "feathered_edit"
+      ],
+      "useful": {
+        "iou": 0.3,
+        "recall": 0.5
+      }
+    },
+    "runtime": {
+      "numpy": "2.2.6",
+      "opencv": "5.0.0",
+      "pillow": "12.3.0"
+    },
+    "schema": "chipmunk.image-chroma-interpolation-transfer/1",
+    "source_records": {
+      "development": {
+        "attempts.jsonl": "59d8591da24d8886cca3ea071eefa5488aa3ac555ff5b21e0542dc267c47fb90",
+        "plan.json": "0d5cd6aadef8162c436c674e00ad835d91d3c7b5807daf0561cb8c58adf47aef",
+        "result.json": "6a8b09a8a4a8585f44faffd5ce18bba7c42a311934ce20bb3a70842aaef4d0b8"
+      },
+      "earlier": {
+        "attempts.jsonl": "3b8291b96634bca1920bddfd9239a53d69e143ea8efc74e565fd7406e749f9ce",
+        "plan.json": "2fc63a2d9f666ce2e593cb7c6b503120661b74a33dbf88f297e34d96ae3c3d7b",
+        "result.json": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731"
+      },
+      "later": {
+        "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+        "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+        "result.json": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86"
+      }
+    }
+  },
+  "freeze_sha256": "0b28150f1bc752ad0fc06ec90e3488124797662a8145b19d1697c227c83d3fa3",
+  "native_readback": {
+    "earlier": {
+      "encoded_views": 324,
+      "native_overlaps": 972
+    },
+    "later": {
+      "encoded_views": 324,
+      "native_overlaps": 972
+    }
+  },
+  "points": {
+    "jpeg100_444": {
+      "point": 0.10159633610419865,
+      "source_maxima": [
+        0.07232178834758136,
+        0.0,
+        0.0,
+        0.0,
+        0.10159633610419865,
+        0.0,
+        0.22184578575257594,
+        0.02869522768427113
+      ]
+    },
+    "jpeg95_420": {
+      "point": 0.3151689778454482,
+      "source_maxima": [
+        0.12064844054542323,
+        0.0,
+        0.0,
+        0.05268007611935714,
+        0.3151689778454482,
+        0.07509303627507799,
+        0.37520036737988,
+        0.20353012571718374
+      ]
+    },
+    "jpeg95_444": {
+      "point": 0.06,
+      "source_maxima": [
+        0.043271132300019326,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.08950869981299765,
+        0.0
+      ]
+    }
+  },
+  "points_sha256": "b184963d0580d5745047532b43ad9692fc3ba4c78c1b53e1907b1b96fa46714a",
+  "result_sha256": "4b82cae570b49aac24d5f7fca6f6475c5e2d9c7f2fa16859187d478ef8ba2765",
+  "summary": {
+    "earlier": {
+      "jpeg100_444": {
+        "advance": false,
+        "baseline": {
+          "assessed": 108,
+          "ordinary_flags": {
+            "global_resize": 0,
+            "global_tone": 1,
+            "local_autoencoder": 9,
+            "local_blur": 8,
+            "local_tone": 3,
+            "no_prior_chroma_grid": 0,
+            "preserved": 2
+          },
+          "ordinary_groups": 9,
+          "useful": {
+            "feathered_edit": 8,
+            "sharp_edit": 7
+          }
+        },
+        "candidate": {
+          "assessed": 63,
+          "ordinary_flags": {
+            "global_resize": 2,
+            "global_tone": 1,
+            "local_autoencoder": 4,
+            "local_blur": 4,
+            "local_tone": 4,
+            "no_prior_chroma_grid": 0,
+            "preserved": 4
+          },
+          "ordinary_groups": 5,
+          "useful": {
+            "feathered_edit": 1,
+            "sharp_edit": 1
+          }
+        },
+        "candidate_rank_useful": 2,
+        "extra": {
+          "feathered": 1,
+          "ordinary_groups": 4,
+          "ordinary_views": 11
+        }
+      },
+      "jpeg95_420": {
+        "advance": false,
+        "baseline": {
+          "assessed": 108,
+          "ordinary_flags": {
+            "global_resize": 2,
+            "global_tone": 4,
+            "local_autoencoder": 9,
+            "local_blur": 8,
+            "local_tone": 3,
+            "no_prior_chroma_grid": 0,
+            "preserved": 0
+          },
+          "ordinary_groups": 9,
+          "useful": {
+            "feathered_edit": 8,
+            "sharp_edit": 7
+          }
+        },
+        "candidate": {
+          "assessed": 90,
+          "ordinary_flags": {
+            "global_resize": 1,
+            "global_tone": 1,
+            "local_autoencoder": 1,
+            "local_blur": 1,
+            "local_tone": 1,
+            "no_prior_chroma_grid": 2,
+            "preserved": 1
+          },
+          "ordinary_groups": 2,
+          "useful": {
+            "feathered_edit": 0,
+            "sharp_edit": 0
+          }
+        },
+        "candidate_rank_useful": 0,
+        "extra": {
+          "feathered": 0,
+          "ordinary_groups": 2,
+          "ordinary_views": 5
+        }
+      },
+      "jpeg95_444": {
+        "advance": false,
+        "baseline": {
+          "assessed": 108,
+          "ordinary_flags": {
+            "global_resize": 2,
+            "global_tone": 4,
+            "local_autoencoder": 9,
+            "local_blur": 8,
+            "local_tone": 3,
+            "no_prior_chroma_grid": 0,
+            "preserved": 0
+          },
+          "ordinary_groups": 9,
+          "useful": {
+            "feathered_edit": 8,
+            "sharp_edit": 7
+          }
+        },
+        "candidate": {
+          "assessed": 19,
+          "ordinary_flags": {
+            "global_resize": 2,
+            "global_tone": 2,
+            "local_autoencoder": 2,
+            "local_blur": 2,
+            "local_tone": 2,
+            "no_prior_chroma_grid": 0,
+            "preserved": 2
+          },
+          "ordinary_groups": 3,
+          "useful": {
+            "feathered_edit": 0,
+            "sharp_edit": 0
+          }
+        },
+        "candidate_rank_useful": 0,
+        "extra": {
+          "feathered": 0,
+          "ordinary_groups": 2,
+          "ordinary_views": 8
+        }
+      }
+    },
+    "later": {
+      "jpeg100_444": {
+        "advance": false,
+        "baseline": {
+          "assessed": 108,
+          "ordinary_flags": {
+            "global_resize": 0,
+            "global_tone": 1,
+            "local_autoencoder": 9,
+            "local_blur": 11,
+            "local_tone": 2,
+            "no_prior_chroma_grid": 0,
+            "preserved": 1
+          },
+          "ordinary_groups": 11,
+          "useful": {
+            "feathered_edit": 7,
+            "sharp_edit": 6
+          }
+        },
+        "candidate": {
+          "assessed": 62,
+          "ordinary_flags": {
+            "global_resize": 1,
+            "global_tone": 2,
+            "local_autoencoder": 5,
+            "local_blur": 5,
+            "local_tone": 5,
+            "no_prior_chroma_grid": 0,
+            "preserved": 6
+          },
+          "ordinary_groups": 6,
+          "useful": {
+            "feathered_edit": 0,
+            "sharp_edit": 0
+          }
+        },
+        "candidate_rank_useful": 0,
+        "extra": {
+          "feathered": 0,
+          "ordinary_groups": 5,
+          "ordinary_views": 15
+        }
+      },
+      "jpeg95_420": {
+        "advance": false,
+        "baseline": {
+          "assessed": 108,
+          "ordinary_flags": {
+            "global_resize": 1,
+            "global_tone": 7,
+            "local_autoencoder": 11,
+            "local_blur": 10,
+            "local_tone": 2,
+            "no_prior_chroma_grid": 0,
+            "preserved": 1
+          },
+          "ordinary_groups": 11,
+          "useful": {
+            "feathered_edit": 10,
+            "sharp_edit": 10
+          }
+        },
+        "candidate": {
+          "assessed": 89,
+          "ordinary_flags": {
+            "global_resize": 0,
+            "global_tone": 0,
+            "local_autoencoder": 0,
+            "local_blur": 0,
+            "local_tone": 0,
+            "no_prior_chroma_grid": 3,
+            "preserved": 0
+          },
+          "ordinary_groups": 3,
+          "useful": {
+            "feathered_edit": 0,
+            "sharp_edit": 0
+          }
+        },
+        "candidate_rank_useful": 0,
+        "extra": {
+          "feathered": 0,
+          "ordinary_groups": 3,
+          "ordinary_views": 3
+        }
+      },
+      "jpeg95_444": {
+        "advance": false,
+        "baseline": {
+          "assessed": 108,
+          "ordinary_flags": {
+            "global_resize": 1,
+            "global_tone": 7,
+            "local_autoencoder": 11,
+            "local_blur": 10,
+            "local_tone": 2,
+            "no_prior_chroma_grid": 0,
+            "preserved": 1
+          },
+          "ordinary_groups": 11,
+          "useful": {
+            "feathered_edit": 10,
+            "sharp_edit": 10
+          }
+        },
+        "candidate": {
+          "assessed": 17,
+          "ordinary_flags": {
+            "global_resize": 1,
+            "global_tone": 2,
+            "local_autoencoder": 2,
+            "local_blur": 2,
+            "local_tone": 2,
+            "no_prior_chroma_grid": 0,
+            "preserved": 2
+          },
+          "ordinary_groups": 2,
+          "useful": {
+            "feathered_edit": 0,
+            "sharp_edit": 0
+          }
+        },
+        "candidate_rank_useful": 0,
+        "extra": {
+          "feathered": 0,
+          "ordinary_groups": 2,
+          "ordinary_views": 8
+        }
+      }
+    }
+  }
+}

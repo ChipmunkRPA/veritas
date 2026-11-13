@@ -1,0 +1,315 @@
+{
+  "audit": {
+    "exact_deliveries_reproduced": 64,
+    "model_replayed": false,
+    "native_measurements": 256
+  },
+  "delivery_calls": {
+    "deliveries": 64,
+    "masked_batches": 832,
+    "tiles": 832,
+    "visible_batches": 208
+  },
+  "design": {
+    "controls": "Untouched, same-site local blur/tone/copy, resized round trip, intermediate JPEG; diffusion includes matched local/global processing.",
+    "delivery": "Same JPEG75 4:2:0 delivery and both frozen context points. No calibration or fitting.",
+    "no_admission_reason": "Small one-family external transfer and one shared diffusion source cannot establish independent cross-family breadth.",
+    "scope": "Six new BG-REAL LaMa neural object-removal photos, plus a single paired diffusion photo across two editor variants if available.",
+    "selection": "Use metadata rights, source overlap and a salted roster order before media or detector scores.",
+    "useful": {
+      "iou": 0.3,
+      "recall": 0.5
+    }
+  },
+  "eligible": {
+    "kandinsky": 1,
+    "lama": 18,
+    "sdxl": 1
+  },
+  "frozen_diffusion_source_count": 1,
+  "intake_sha256": "6668cc9bd09ca78863d12b0a2df0713d3c004928660133a93c58d48cb9d8476e",
+  "intervention_control": {
+    "control_batches": 2,
+    "max_hidden_delta": 0.0,
+    "visible_patch_delta": 7.348008155822754
+  },
+  "measurements_sha256": "2947d22e3c596e253afc7039070f1c3bc3552f1ecba12ab3d0ed9cf292e05b1c",
+  "ordinary_flagged_groups": {
+    "kandinsky/ordinary/masked_context": 1,
+    "kandinsky/ordinary/three_class": 1,
+    "lama/ordinary/current_luma": 3,
+    "lama/ordinary/joint_context": 2,
+    "lama/ordinary/masked_context": 1,
+    "lama/ordinary/three_class": 1,
+    "sdxl/ordinary/masked_context": 1,
+    "sdxl/ordinary/three_class": 1
+  },
+  "plan_sha256": "318a2b98fb4d62a3a0ebd039cda708d2ee4d575068577de2c63fda742632bd55",
+  "point_sha256": "1c3f8fd558ac06c672fb07a3cc59e5cedbb6e30175b12dd0b2fec567536f4a29",
+  "points": {
+    "joint_context": 1.613558987144455,
+    "masked_context": 0.15216147899627686,
+    "three_class": 0.5234852860134196
+  },
+  "qualified": {
+    "kandinsky": 1,
+    "lama": 6,
+    "sdxl": 1
+  },
+  "schema": "chipmunk.image-masked-context-new-editors/1",
+  "seconds": 108.67,
+  "strata": {
+    "kandinsky/feathered/current_luma": {
+      "files": 1,
+      "flags": false,
+      "misplaced": false,
+      "useful": false,
+      "useful_before": false
+    },
+    "kandinsky/feathered/joint_context": {
+      "files": 1,
+      "flags": true,
+      "misplaced": false,
+      "useful": true,
+      "useful_before": true
+    },
+    "kandinsky/feathered/masked_context": {
+      "files": 1,
+      "flags": true,
+      "misplaced": true,
+      "useful": false,
+      "useful_before": false
+    },
+    "kandinsky/feathered/three_class": {
+      "files": 1,
+      "flags": true,
+      "misplaced": false,
+      "useful": true,
+      "useful_before": true
+    },
+    "kandinsky/ordinary/current_luma": {
+      "files": 6,
+      "flags": 0,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "kandinsky/ordinary/joint_context": {
+      "files": 6,
+      "flags": 0,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "kandinsky/ordinary/masked_context": {
+      "files": 6,
+      "flags": 6,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "kandinsky/ordinary/three_class": {
+      "files": 6,
+      "flags": 6,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "kandinsky/sharp/current_luma": {
+      "files": 1,
+      "flags": false,
+      "misplaced": false,
+      "useful": false,
+      "useful_before": false
+    },
+    "kandinsky/sharp/joint_context": {
+      "files": 1,
+      "flags": true,
+      "misplaced": false,
+      "useful": true,
+      "useful_before": true
+    },
+    "kandinsky/sharp/masked_context": {
+      "files": 1,
+      "flags": true,
+      "misplaced": true,
+      "useful": false,
+      "useful_before": false
+    },
+    "kandinsky/sharp/three_class": {
+      "files": 1,
+      "flags": true,
+      "misplaced": false,
+      "useful": true,
+      "useful_before": true
+    },
+    "lama/feathered/current_luma": {
+      "files": 6,
+      "flags": 0,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "lama/feathered/joint_context": {
+      "files": 6,
+      "flags": 2,
+      "misplaced": 2,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "lama/feathered/masked_context": {
+      "files": 6,
+      "flags": 0,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "lama/feathered/three_class": {
+      "files": 6,
+      "flags": 1,
+      "misplaced": 1,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "lama/ordinary/current_luma": {
+      "files": 36,
+      "flags": 3,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "lama/ordinary/joint_context": {
+      "files": 36,
+      "flags": 11,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "lama/ordinary/masked_context": {
+      "files": 36,
+      "flags": 1,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "lama/ordinary/three_class": {
+      "files": 36,
+      "flags": 6,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "lama/sharp/current_luma": {
+      "files": 6,
+      "flags": 0,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "lama/sharp/joint_context": {
+      "files": 6,
+      "flags": 2,
+      "misplaced": 2,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "lama/sharp/masked_context": {
+      "files": 6,
+      "flags": 0,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "lama/sharp/three_class": {
+      "files": 6,
+      "flags": 1,
+      "misplaced": 1,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "sdxl/feathered/current_luma": {
+      "files": 1,
+      "flags": false,
+      "misplaced": false,
+      "useful": false,
+      "useful_before": false
+    },
+    "sdxl/feathered/joint_context": {
+      "files": 1,
+      "flags": false,
+      "misplaced": false,
+      "useful": false,
+      "useful_before": false
+    },
+    "sdxl/feathered/masked_context": {
+      "files": 1,
+      "flags": true,
+      "misplaced": true,
+      "useful": false,
+      "useful_before": false
+    },
+    "sdxl/feathered/three_class": {
+      "files": 1,
+      "flags": false,
+      "misplaced": false,
+      "useful": false,
+      "useful_before": false
+    },
+    "sdxl/ordinary/current_luma": {
+      "files": 6,
+      "flags": 0,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "sdxl/ordinary/joint_context": {
+      "files": 6,
+      "flags": 0,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "sdxl/ordinary/masked_context": {
+      "files": 6,
+      "flags": 6,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "sdxl/ordinary/three_class": {
+      "files": 6,
+      "flags": 6,
+      "misplaced": 0,
+      "useful": 0,
+      "useful_before": 0
+    },
+    "sdxl/sharp/current_luma": {
+      "files": 1,
+      "flags": false,
+      "misplaced": false,
+      "useful": false,
+      "useful_before": false
+    },
+    "sdxl/sharp/joint_context": {
+      "files": 1,
+      "flags": false,
+      "misplaced": false,
+      "useful": false,
+      "useful_before": false
+    },
+    "sdxl/sharp/masked_context": {
+      "files": 1,
+      "flags": true,
+      "misplaced": true,
+      "useful": false,
+      "useful_before": false
+    },
+    "sdxl/sharp/three_class": {
+      "files": 1,
+      "flags": false,
+      "misplaced": false,
+      "useful": false,
+      "useful_before": false
+    }
+  }
+}

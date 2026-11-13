@@ -104,7 +104,10 @@ integration remains unfinished.
   retained three useful feathered locations versus two for the visible-only
   head and reduced flagged ordinary groups from five to one. All three
   locations came from one generator family in the reused confirmation panel.
-  The study stays outside the detector.
+  A [new-source transfer](image-masked-context-new-editors-2026-11-13.md)
+  added no useful locations on six neural object removals or the one
+  independent photograph with two diffusion deliveries. The study stays
+  outside the detector.
 - The [longer writing source study](writing-f1000-revision-spans-2026-11-13.md)
   qualified nine previously unused genuine article revision pairs and bound 274
   passage locations and classifier inputs to official XML. Two retrievals

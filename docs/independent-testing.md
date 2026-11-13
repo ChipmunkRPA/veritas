@@ -149,6 +149,9 @@ The [paired writing check beside a paragraph break](writing-paired-center-transf
 compares changes in exact sentence and context readings. Its replay checks
 both draft positions and reports held genuine revisions separately. A second
 implementation in Node.js verifies the same decisions and source spans.
+The [semantic continuity study](writing-semantic-continuity-transfer-2026-11-12.md)
+recomputes exact passage overlap and false flags for fresh PLOS Biology
+excerpts and two generated rewrite families.
 The [paired writing response comparison](writing-instruct-base-passage-transfer-2026-11-12.md)
 checks response differences on identical target tokens and replays the held
 publisher's false flags and missed rewrites.

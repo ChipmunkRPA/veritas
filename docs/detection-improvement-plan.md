@@ -110,6 +110,10 @@ integration remains unfinished.
   edited windows under train noise passed the speech-activity check.
 - A [separate Node.js replay](writing-paired-center-transfer-2026-11-12.md#replay)
   reproduced the writing study and the exact positions in four app exports.
+- The [fresh PLOS Biology writing study](writing-semantic-continuity-transfer-2026-11-12.md)
+  found two of 17 exact edits with the existing passage check. The simpler
+  semantic cue added one location and flagged five of ten ordinary work
+  groups. Both semantic candidates stay outside the app.
 - The [six-picture face-change study](video-face-unrouted-short-transfer-2026-11-12.md)
   found all 16 exact ranges missed by Full, across eight HEVC source groups.
   Both the bounded shortlist and the dense search added zero ordinary ranges

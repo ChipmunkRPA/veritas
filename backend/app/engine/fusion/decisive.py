@@ -26,7 +26,7 @@ PRECEDENCE = ("decisive_ai", "trusted_capture", "self_declared_ai")
 ACTIVE_PRECEDENCE = ("decisive_ai", "trusted_capture")
 ADVISORY_CAVEAT = ("An unverified origin marker was detected. It does not authenticate AI generation, "
                    "does not change the content estimate and cannot stop further checks.")
-MARKER_DETECTORS = frozenset({"img.meta.generator", "img.watermark.dwtdct", "prov.c2pa", "prov.c2pa.video", "prov.c2pa.audio"})
+MARKER_DETECTORS = frozenset({"img.meta.generator", "img.watermark.dwtdct", "prov.c2pa", "prov.c2pa.video", "prov.c2pa.audio", "prov.c2pa.pdf"})
 H3_INFLUENCE_BOUND = 0.05
 CONFLICT_LOGIT = 3.0  # ML §4.7: a statistical estimate beyond |η'| > 3 in the opposite direction adds a caveat
 SELF_DECLARED_CAVEAT = ("Self-declared: the file's metadata names an AI generator. Metadata can be added or edited by anyone, "
@@ -86,7 +86,7 @@ def fallback_floor_reason(source: str, probability: float, marker: str | None = 
 # unsigned metadata that names a generator, a public watermark message, or Content Credentials that are no trusted
 # declaration, in three forms: a generator named under a signer on the trust list (no AI source type declared); under a
 # signer that is not on it, a declaration of AI, or a generator named
-CREDENTIAL_DETECTORS = ("prov.c2pa", "prov.c2pa.video", "prov.c2pa.audio")
+CREDENTIAL_DETECTORS = ("prov.c2pa", "prov.c2pa.video", "prov.c2pa.audio", "prov.c2pa.pdf")
 METADATA, WATERMARK = "metadata", "watermark"
 CREDENTIALS_LISTED, CREDENTIALS_UNLISTED_DECLARED, CREDENTIALS_UNLISTED_NAMED = (
     "credentials_listed_signer", "credentials_unlisted_signer_declared", "credentials_unlisted_signer_named")

@@ -272,6 +272,7 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
         monkeypatch.setattr(settings, 'environment', 'dev')
         monkeypatch.setattr(settings, 'image_affine_copy_review', True)
         monkeypatch.setattr(settings, 'image_jpeg_offgrid_copy_review', True)
+        monkeypatch.setattr(settings, 'image_small_png_copy_review', False)
         monkeypatch.setattr(settings, 'image_embedded_pair_review', True)
         reflected = Mock(side_effect=AssertionError('Signed record must bypass the reflection matcher'))
         translated = Mock(side_effect=AssertionError('Signed record must bypass the translation matcher'))

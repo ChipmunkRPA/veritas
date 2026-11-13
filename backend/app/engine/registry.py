@@ -128,6 +128,7 @@ class DetectorRegistry:
         boundary_review = detector_id == "img.forensic.sharp_boundary" and settings.image_sharp_boundary_enabled
         writing_review = (detector_id == "txt.review.agreement" and settings.environment == "dev"
                           and text_candidate and settings.text_checkpoint_agreement_review)
+        pdf_credentials = detector_id == "prov.c2pa.pdf" and settings.document_pdf_credentials
         for model_id in self.required_models(det):
             model = self.manifest.model(model_id)
             if model is None:
@@ -136,7 +137,8 @@ class DetectorRegistry:
                 reasons.append(f"model {model_id} has licence class {model.licence.class_}, denied by the "
                                f"{policy.label} licence policy")
         if (not det.default_enabled and not allow_listed and not sequence_review and not regional_review
-                and not boundary_review and not writing_review and not (text_candidate and detector_id == "txt.four_class")):
+                and not boundary_review and not writing_review and not pdf_credentials
+                and not (text_candidate and detector_id == "txt.four_class")):
             reasons.append("not default-enabled and not in allow_detectors")
         if det.superseded_by and self._supersedes(det.superseded_by):
             reasons.append(f"superseded by {det.superseded_by}, which is enabled and installed")

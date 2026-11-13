@@ -40,11 +40,13 @@ stripped, invalid, untrusted, unsupported or inconclusive signals continue norma
 detection and never establish originality. Offline trust uses the bundled
 snapshot; revocation and remote manifests are not checked.
 
-Document bodies and articles have no universal spacing signature. The current
-document pipeline reads supported structured metadata as unverified claims; it
-does not yet validate PDF/Office C2PA or production text watermarks. The installed
-SDK advertises PDF reading, but refused our authored PDF-signing probe, so no
-working PDF credential shortcut is claimed.
+An optional [whole-document PDF credential check](pdf-content-credentials-2026-11-13.md)
+also stops statistical writing checks when a trusted embedded declaration covers
+the submitted PDF. This was verified offline on a pinned public provider PDF.
+The accepted layout requires a single catalog-associated store and a signed byte
+hash covering the file outside that store. Credentials on embedded objects,
+Office documents, ordinary article spacing and production text watermarks do
+not use this shortcut.
 
 The gate remains inside the prepaid analysis pipeline. The initial inventory
 review made no provider-verification calls. A [separate frozen qualification](provider-provenance-v1-result.md)

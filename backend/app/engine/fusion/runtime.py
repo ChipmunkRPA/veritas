@@ -71,7 +71,7 @@ POLICY_LEVELS_CAVEAT = ("The workspace policy sets conformal levels α = {strong
 SUB_FUSERS = {"h1_synthesis": (H1, None), "h2_face_swap": (H2, Lane.FACE_SWAP.value),
               "h2_partial_edit": (H2, Lane.PARTIAL_EDIT.value), "voice": (H2, Lane.VOICE.value)}
 C2PA_DETECTORS = decisive.CREDENTIAL_DETECTORS
-DECLARED_AI_VERBAL = "The file's Content Credentials declare it was created with AI"  # UX §7.1 basis `documentary`
+DECLARED_AI_VERBAL = "The file's signed Content Credentials declare AI involvement"
 SELF_DECLARED_VERBAL = "The file's metadata names an AI generator"  # UX §4.3 (D-33)
 PENDING_REVIEW_CAVEAT = "Fusion model pending human review"  # D-17, D-57
 NOT_RUN_CAVEAT = "A check that this analysis depends on did not run: {name} ({reason})."  # D-46

@@ -239,6 +239,7 @@ class Settings(BaseSettings):
     document_paired_boundary_review: bool = False  # Optional paired TXT and Word check beside one preserved paragraph break.
     document_email_alternatives_review: bool = False  # Compare two bounded body renditions of one EML.
     document_archive_comparison_enabled: bool = False  # Authenticated development-only public archive comparison.
+    document_pdf_credentials: bool = False  # Offline whole-document Content Credentials for qualified PDFs.
     document_gao_archive_path: Path | None = None  # Optional locally built GovReport highlights pack for TXT.
     document_gao_archive_sha256: str | None = None  # Expected SHA-256 of the local GAO highlights pack.
     image_affine_copy_review: bool = False  # Development-only dense masks for same-image geometric copies.

@@ -61,12 +61,13 @@ IMAGE_STAGES: tuple[StageDef, ...] = (
 DOCUMENT_STAGES: tuple[StageDef, ...] = (
     StageDef("ingest", common.ingest, critical=True, weight=0.5),
     StageDef("source_labels", source_labels.stage, after=("ingest",), critical=True, weight=0.1),
-    StageDef("provenance_gate", provenance_gate.run, after=("ingest", "source_labels"), weight=0.1),
+    StageDef("provenance", doc.provenance, after=("ingest",), weight=0.3),
+    StageDef("provenance_gate", provenance_gate.run, after=("provenance", "source_labels"), weight=0.1),
     StageDef("decode", doc.decode, after=("ingest",), critical=True, weight=0.5, reuse_if=doc.current_decode_output),
     # Revalidate stored text on every resume/refusion before any cached result can be reused.
     StageDef("condition", doc.condition, after=("decode",), persist=False, critical=True, weight=0.5),
     StageDef("detect", doc.detect, after=("decode", "condition", "provenance_gate"), lane="mixed", weight=4.0),
-    StageDef("fuse", doc.fuse, after=("decode", "detect", "condition")),
+    StageDef("fuse", doc.fuse, after=("decode", "detect", "condition", "provenance")),
     StageDef("synthesise", doc.synthesise, after=("fuse",), weight=0.5, reuse_if=common.current_synthesis_output),
     StageDef("render", doc.render, after=("fuse", "synthesise"), weight=0.5),
     StageDef("publish", doc.publish, after=("render",), critical=True, weight=0.5),
@@ -122,7 +123,7 @@ REFUSION_REUSED: dict[str, tuple[str, ...]] = {
     "audio": ("ingest", "probe", "provenance", "detect"),
 }
 # Detector-side stages copied only when the source ran them (the deep-only second pass); otherwise the revision skips them
-REFUSION_OPTIONAL: dict[str, tuple[str, ...]] = {"video": ("second_pass",)}
+REFUSION_OPTIONAL: dict[str, tuple[str, ...]] = {"video": ("second_pass",), "document": ("provenance",)}
 
 
 def default_profile() -> Profile:
@@ -189,6 +190,10 @@ def run_analysis(analysis_id: str, *, deadline: Deadline | None = None, profile:
         stages = tuple(dataclasses.replace(s, critical=True) if s.id in REFUSION_REUSED[kind] else s for s in stages)
     elif kind in ("audio", "video"):
         stages = tuple(dataclasses.replace(s, reuse_if=current_voice_detection_output) if s.id == "detect" else s for s in stages)
+    elif kind == "document":
+        expected = provenance_gate.CREDENTIALS[kind] in active_registry.enabled("text", resolved)
+        reuse = partial(doc.current_provenance_output, expected=expected)
+        stages = tuple(dataclasses.replace(s, reuse_if=reuse) if s.id == "provenance" else s for s in stages)
     state: dict[str, Any] = {"registry": active_registry, "run_store": common.DbRunStore(sessions, store),
                              "models": models, "kind": kind, "refusion": refusion, "fuser_pin": fuser_pin,
                              "force_fallback": force_fallback, "policy": policy.as_json()}

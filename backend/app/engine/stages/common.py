@@ -790,6 +790,8 @@ def _profile_omissions(ctx: StageContext, kind: str, detector_entries: list[dict
     selected = set(expected)
     detected = ctx.outputs.get("detect") or {}
     content = (ctx.outputs.get("condition") or {}).get("content") or {}
+    if kind == "document" and (ctx.outputs.get("provenance") or {}).get("out_of_scope") is True:
+        expected.discard(provenance_gate.CREDENTIALS[kind])
     if kind == "audio" and content.get("assessable") is False and detected.get("not_run"):
         # audio.detect deliberately emits no rows after its persisted content-applicability gate.
         exempt = {d for d in expected if registry.detector_family(d) != "provenance"}

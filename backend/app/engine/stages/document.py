@@ -15,6 +15,7 @@ import base64
 import dataclasses
 import hashlib
 import uuid
+from pathlib import Path
 from typing import Any
 
 from app.core.canonical import canonical_hash
@@ -30,6 +31,7 @@ from app.detectors.text.pipeline import (
     sentence_plot,
 )
 from app.detectors.text.segment import Sentence
+from app.engine import provenance_gate
 from app.engine.detector import ON_THIS_SERVER, Modality, StageOutputs, of_the_server
 from app.engine.fusion.registry import Selection
 from app.engine.registry import TEXT_FINETUNE_DETECTOR, TEXT_PRIMARY_DETECTORS
@@ -39,14 +41,15 @@ from app.evidence import document_tracked_changes
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p29"  # p29: source-bound OCR for a disjoint image area on a hybrid PDF page; p28: explicit coverage for mixed text-layer and raster PDF pages; p23: email calibration and passage evidence, without pilot article confidence; p20: frozen paired-token contexts and opposing raw-ratio evidence; p19: local OCR/source mapping; p17: the caveat of a failed step that writes the findings is said in words ("The step that writes the findings failed: this result holds no findings from it."; it named the stage in backticks) (N-19n; browser QA Q4-01); p16: the exhibit of the combined scores is titled "(hand-set weights)", not by the build's name "(legacy fuser)"; the checks that could not run on this server are one caveat with their names, in place of one caveat for each and of their ids in the caveat of a reduced profile; a caveat names a check as the page does, a step of the run and a provenance record in words, never a detector id, a stage name or the value of a kind (browser QA leads 3 and 4, design re-review D2-06); each check that scored and is not counted in the estimate carries the fusion's record of why (`outside_estimate`: not in the model, its gate closed, a weight of zero; browser QA Q2-12); a result of the fallback on an instance that holds a fusion model says that none was used for the analysis, not that none is loaded, and the v1 view of a result outside what was validated gives the reason of its cap (N-19k; browser QA Q2-14 and part 2); p15: a not-assessable result has no caveat or reason that speaks of an estimate or a probability (N-17, D-68); p14: the result names the text classifier that scored the document (N-5, 2026-09-30)
+PIPELINE_VERSION = "doc-2.0-p30"  # p30: optional PDF credentials before writing checks; p29: source-bound hybrid PDF OCR.
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 PRIMARY_DETECTORS = TEXT_PRIMARY_DETECTORS  # v0.3 used the fine-tune whenever it was installed
 SECONDARY_DETECTOR = "txt.hf.hello_simpleai"
 BINOCULARS_DETECTOR = "txt.binoculars"
 STYLOMETRY_DETECTOR = "txt.stylometry"
 FUSER_ID = "legacy.document"
-EXHIBIT_STAGES = ("detect", "fuse")
+ENTRY_STAGES = ("provenance", "detect")
+EXHIBIT_STAGES = (*ENTRY_STAGES, "fuse")
 STYLE_METRIC_KEYS = ("words", "sentences", "mean_sentence_len", "sentence_len_cv", "mattr", "lexicon_weighted_per_1000",
                      "contrast_per_1000", "hedges_per_1000", "transition_opener_pct", "triads_per_1000", "emdash_per_1000")
 # D-62 (QA P1-10): the result names the primary classifier that scored the document
@@ -104,13 +107,34 @@ def condition(ctx: StageContext) -> dict[str, Any]:
     return input_condition.document(ctx)
 
 
+def provenance(ctx: StageContext) -> dict[str, Any]:
+    if ctx.state.get("refusion"):
+        return {"detectors": [], "exhibits": [], "artefacts": []}
+    if Path(ctx.outputs["ingest"]["filename"]).suffix.lower() != ".pdf":
+        return {"detectors": [], "exhibits": [], "artefacts": [], "out_of_scope": True}
+    return common.run_detectors(ctx, (Modality.TEXT,), include={"provenance"})
+
+
+def current_provenance_output(output: Any, *, expected: bool) -> bool:
+    from app.detectors.text.adapters.provenance import PdfCredentialsDetector
+
+    if not isinstance(output, dict) or not isinstance(output.get("detectors"), list):
+        return False
+    spec = PdfCredentialsDetector.spec
+    rows = output["detectors"]
+    if not expected or output.get("out_of_scope") is True:
+        return not rows
+    return (len(rows) == 1 and isinstance(rows[0], dict) and rows[0].get("detector_id") == spec.id
+            and rows[0].get("version") == spec.version)
+
+
 def detect(ctx: StageContext) -> dict[str, Any]:
     from app.detectors.text.adapters import agreement
     from app.engine.boundary import Cancelled
 
     decoded = ctx.outputs["decode"]
     detected = common.run_detectors(ctx, (Modality.TEXT,), outputs=StageOutputs(document=decoded),
-                                    max_units=DOCUMENT_MAX_UNITS, exclude={agreement.FAMILY})
+                                    max_units=DOCUMENT_MAX_UNITS, exclude={agreement.FAMILY, "provenance"})
     if ctx.profile in agreement.FULL_DEEP and agreement.enabled():
         try:
             agreement.record(ctx, detected, decoded)
@@ -277,6 +301,8 @@ def fuse(ctx: StageContext) -> dict[str, Any]:
     pin = ctx.state.get("fuser_pin")
     if pin == document_screening.RETIRED_ARTICLE_PIN:
         raise ValueError(document_screening.RETIRED_ARTICLE_REASON)
+    if (documentary := pdf_documentary_result(ctx)) is not None:
+        return documentary
     local_mode = settings.text_detector_mode == "candidate" and pin is None
     local_email = pin == document_screening.EMAIL_SHA256 or (local_mode and not ctx.state.get("force_fallback"))
     selection = (Selection(kind="document", mode="fallback") if local_mode or local_email
@@ -345,8 +371,36 @@ def fuse(ctx: StageContext) -> dict[str, Any]:
     return enforce_extraction_scope(fused, doc)
 
 
+def pdf_documentary_result(ctx: StageContext) -> dict[str, Any] | None:
+    provenance = ctx.outputs.get("provenance")
+    gate = (provenance_gate.decide(provenance, "document") if ctx.state.get("refusion")
+            else ctx.outputs.get("provenance_gate") or {})
+    if gate.get("action") != "stop_statistical_detection" or (
+        not ctx.state.get("refusion") and not provenance_gate.stop(ctx)
+    ):
+        return None
+    entry = next(row for row in provenance["detectors"] if row["detector_id"] == gate["record_detector_id"])
+    reason = ("The trusted signed record covers this PDF and declares AI generation or editing. "
+              "Statistical writing checks were skipped. The record does not identify which passages were written or edited with AI.")
+    decision, signal = provenance_gate.documentary_fields(
+        entry, {**gate, "source_sha256": ctx.outputs["ingest"]["sha256"]}, modality="text", reason=reason,
+    )
+    doc, sentences = document_input(ctx)
+    legacy = assemble_document(doc, sentences, DocumentScores(n_sentences=len(sentences)), None)
+    caveats = [reason, gate["limitation"]]
+    verdict = common.legacy_verdict(legacy["verdict"], decision)
+    verdict.update(label=decision["verbal"], summary=reason, reasoning=[reason], caveats=caveats,
+                   signals_for_ai=1, signals_for_authentic=0, signals_total=1)
+    return {"decision": decision, "signals": [signal], "caveats": caveats, "calibration": [],
+            "assessments": [*common.LEGACY_ASSESSMENTS, {"hypothesis": "H3_provenance_integrity", "applicable": True, "note": reason}],
+            "condition_profile": {**ctx.outputs["condition"]["profile"], "within_validated_envelope": False,
+                                  "validation_support": "unsupported"},
+            "fusion": {"mode": "fallback", "reason": "Signed provenance"},
+            "v1": {"verdict": verdict, "signals": [], "sentences": [], "stats": legacy["stats"], "document": doc.meta}}
+
+
 def synthesise(ctx: StageContext) -> dict[str, Any]:
-    return common.synthesise_findings(ctx, kind="document", entry_stages=("detect",), exhibit_stages=EXHIBIT_STAGES)
+    return common.synthesise_findings(ctx, kind="document", entry_stages=ENTRY_STAGES, exhibit_stages=EXHIBIT_STAGES)
 
 
 def render(ctx: StageContext) -> dict[str, Any]:
@@ -368,7 +422,7 @@ def v1_view(ctx: StageContext, result: AnalysisResultV2) -> dict[str, Any]:
 
 
 def publish(ctx: StageContext) -> dict[str, Any]:
-    result = common.build_result(ctx, kind="document", pipeline_version=PIPELINE_VERSION, entry_stages=("detect",),
+    result = common.build_result(ctx, kind="document", pipeline_version=PIPELINE_VERSION, entry_stages=ENTRY_STAGES,
                                  exhibit_stages=EXHIBIT_STAGES)
     decoded = ctx.outputs["decode"]
     result.manifest.sampling["document_source"] = {
@@ -387,4 +441,4 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         ctx.check("email body alternatives")
         with common.media_path(ctx).open("rb") as source:
             result.manifest.sampling[email_alternatives.KEY] = email_alternatives.review(source.read(email_alternatives.MAX_FILE + 1))
-    return common.publish(ctx, result, v1_view(ctx, result), pipeline_version=PIPELINE_VERSION, run_stages=("detect",))
+    return common.publish(ctx, result, v1_view(ctx, result), pipeline_version=PIPELINE_VERSION, run_stages=ENTRY_STAGES)

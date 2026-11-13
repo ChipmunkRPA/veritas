@@ -2115,6 +2115,28 @@ detectors:
     admission: {decision: rejected, date: "2026-09-14", evidence: "A-1 audio admission on vb-1.0-core fit ∪ cal (docs/v2/bench/admissions/ablation-aud.mo_thecreator_w2v2.md): A3a / A3b not established (no audio LGO folds), A4 fail (A-bonafide, on its CI); out-of-fold AUC 0.7822 with vs 0.7904 without; decided before the lockbox run; automated record pending human review"}
 
   # ---------------------------------------------------------------- text
+  - id: prov.c2pa.pdf
+    adapter: app.detectors.text.adapters.provenance:PdfCredentialsDetector
+    version: 1.0.0
+    name: Content Credentials on the PDF
+    modality: text
+    family: provenance
+    hypotheses: [H3_provenance_integrity]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    known_limitations: ["Only one catalog-associated uncompressed manifest covering every PDF byte outside its own stream; offline trust, no revocation check"]
+    source_url: https://github.com/contentauth/c2pa-python
+    threat: [ai_text]
+    training_data: "None (signed provenance verification)"
+    coverage_date: "Bundled C2PA Trust List snapshot; see app/provenance/trust/snapshot.json"
+    input_constraints: ["Original PDF, one supported document-level manifest; embedded-object records do not qualify"]
+    contamination_sets: []
+    fp_modes: ["Trusted signer makes an incorrect declaration or loses control of their key"]
+    citation: "C2PA Technical Specification, Appendix A.4"
+    admission: {decision: pending, evidence: "Whole-document documentary verification; opt-in"}
+
   - id: txt.four_class
     adapter: app.detectors.text.adapters.learned:FourClassTextDetector
     version: 1.0.0

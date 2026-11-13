@@ -119,11 +119,12 @@ def _c2pa_exhibits(ctx: RunContext, report: provenance.C2PAReport, official: pro
     return ids
 
 
-def c2pa_result(ctx: RunContext, data: bytes | memoryview) -> DetectorResult:
+def c2pa_result(ctx: RunContext, data: bytes | memoryview, *, mime_override: str | None = None,
+                require_pdf_document: bool = False) -> DetectorResult:
     """Offline C2PA validation as a detector result, shared by the image and video detectors (D-15; IF §4.4)."""
     if not provenance.available():
         return DetectorResult.skipped("c2pa-python is not installed")
-    mime = provenance.sniff_mime(data)
+    mime = mime_override or provenance.sniff_mime(data)
     if mime is None:
         container = provenance.unsupported_container(data)
         if container is not None:
@@ -136,7 +137,15 @@ def c2pa_result(ctx: RunContext, data: bytes | memoryview) -> DetectorResult:
         official, legacy = provenance.load_bundle(provenance.OFFICIAL), provenance.load_bundle(provenance.LEGACY)
     except provenance.TrustBundleError as e:
         return DetectorResult.failed(f"the bundled trust list could not be verified: {e}")
-    report = provenance.read(data, mime, bundle=official, legacy=legacy)
+    if require_pdf_document:
+        from app.provenance import pdf_credentials
+
+        report, bound = pdf_credentials.read(bytes(data))
+        if report.state in {"trusted", "valid"} and not bound:
+            return DetectorResult(status="not_applicable", reason="No qualified whole-document Content Credentials binding",
+                                  metrics={"unsupported_container": 1.0})
+    else:
+        report = provenance.read(data, mime, bundle=official, legacy=legacy)
     if report.state == "absent":
         return DetectorResult.not_applicable("no C2PA manifest")
     if report.state == "unreadable":
@@ -153,6 +162,8 @@ def c2pa_result(ctx: RunContext, data: bytes | memoryview) -> DetectorResult:
                "signing_certificate_expired": float("signingCredential.expired" in report.failure_codes),
                "signer_untrusted": float("signingCredential.untrusted" in report.failure_codes),
                "ingredients": float(max(len(report.chain) - 1, 0))}
+    if require_pdf_document and report.state == "trusted":
+        metrics["pdf_document_binding"] = 1.0
     exhibit_ids = _c2pa_exhibits(ctx, report, official, legacy)
     if state == "remote":
         return DetectorResult(

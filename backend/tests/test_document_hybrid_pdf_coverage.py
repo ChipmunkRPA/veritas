@@ -379,4 +379,4 @@ def test_real_local_hybrid_ocr_preserves_text_geometry_and_frozen_evidence(
     assert (
         not rendered.refused and "Page 1 combines mapped text with text transcribed from image areas" in text
     )
-    assert "PDF page 1, OCR text" in text
+    assert "PDF page 1, recognized text" in text

@@ -337,7 +337,7 @@ export const CAPTURE_ROW = 'Capture record'
  *  sentence that heads its page (`HEADLINE.documentary_declared`). The rows read the code's word ("Indications") beside
  *  "Examiner: …, on the record's step", and the record's step was printed nowhere on them. */
 export const DECLARATION_ROW = 'AI declaration'
-export const DECLARATION_HEADLINE = 'The file’s Content Credentials declare it was created with AI'
+export const DECLARATION_HEADLINE = 'The file’s signed Content Credentials declare AI involvement'
 
 /** A row that a trusted declaration decides with a code short of the declaration's step (the fallback). A marker gives the
  *  same code and hypothesis, so the row says what decides it (`deciding_record`, from the stored result); with a fusion

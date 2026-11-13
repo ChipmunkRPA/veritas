@@ -38,7 +38,7 @@ HEADLINE = {  # UX §7.1 L1 headlines, verbatim (answer.ts HEADLINE)
     "uncertain": "Inconclusive: the evidence does not support a firm assessment",
     "likely_authentic": "No significant indications of AI generation or manipulation",
     "very_likely_authentic": "No indications of AI generation or manipulation found",
-    "documentary_declared": "The file’s Content Credentials declare it was created with AI",
+    "documentary_declared": "The file’s signed Content Credentials declare AI involvement",
     "documentary_metadata": "The file’s metadata names an AI generator",
     "documentary_capture": "The file’s Content Credentials record a capture of these bytes",  # N-19m (D3-01; D-15)
     "insufficient": "Chipmunk Verify could not assess this file reliably",

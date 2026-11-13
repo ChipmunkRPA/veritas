@@ -355,7 +355,7 @@ def unsupported_container(data: bytes | memoryview) -> str | None:
 
 # --- reading --------------------------------------------------------------------------------------------------
 
-def _read_store(data: bytes, mime: str, bundle: TrustBundle | None) -> tuple[dict[str, Any], list[tuple[str, str, bytes]]]:
+def _read_store(data: bytes, mime: str, bundle: TrustBundle | None, *, include_thumbnails: bool = True) -> tuple[dict[str, Any], list[tuple[str, str, bytes]]]:
     import c2pa  # type: ignore
 
     context = c2pa.Context.from_dict(settings(bundle))
@@ -363,7 +363,7 @@ def _read_store(data: bytes, mime: str, bundle: TrustBundle | None) -> tuple[dic
     try:
         reader = c2pa.Reader(mime, io.BytesIO(data), context=context)
         store = json.loads(reader.json())
-        return store, _thumbnails(reader, store)
+        return store, _thumbnails(reader, store) if include_thumbnails else []
     finally:
         with contextlib.suppress(Exception):
             if reader is not None:
@@ -539,7 +539,8 @@ def read(data: bytes | memoryview, mime: str, *, bundle: TrustBundle | None = No
     """Validate the manifest store embedded in `data` offline. Never raises for content errors."""
     payload = bytes(data)
     try:
-        store, thumbs = _read_store(payload, mime, bundle)
+        store, thumbs = (_read_store(payload, mime, bundle) if thumbnails
+                         else _read_store(payload, mime, bundle, include_thumbnails=False))
     except Exception as e:  # c2pa.C2paError subclasses carry the kind as a message prefix
         message = str(e)
         lowered = message.lower()

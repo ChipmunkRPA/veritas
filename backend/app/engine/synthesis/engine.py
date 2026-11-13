@@ -60,7 +60,7 @@ ENVELOPE_PREFIXES = ("no validation metrics", "the measured AUC", "no calibrated
 REGION_FAMILIES = frozenset({"F4_localised_manipulation", "F5_compression_history", "F7_duplication"})
 IOU_CORROBORATION = 0.3
 FACE_DETECTOR_FAMILY = "face-detection"
-C2PA_DETECTORS = frozenset({"prov.c2pa", "prov.c2pa.video", "prov.c2pa.audio"})
+C2PA_DETECTORS = frozenset({"prov.c2pa", "prov.c2pa.video", "prov.c2pa.audio", "prov.c2pa.pdf"})
 LAST_KEYS = {"absent": "~absent", "conditions": "~conditions", "coverage": "~~coverage"}
 STATUS_TEXT = {"not_applicable": "not applicable", "skipped": "skipped", "failed": "failed", "timeout": "timed out"}
 

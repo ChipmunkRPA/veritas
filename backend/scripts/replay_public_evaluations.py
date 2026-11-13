@@ -32,6 +32,22 @@ LOCALIZATION = {
     "audio": ("review_audio_partialedit_dense_transfer.py", "audio-partialedit-dense-transfer-2026-11-12.json"),
     "writing": ("review_writing_source_conditioned.py", "writing-source-conditioned-2026-11-12.json"),
 }
+TRANSFERS = {
+    "image": ("review_image_png_layout_guard.py", "image-png-layout-guard-2026-11-12.json", (), (
+        f"{SCRIPTS}/image_png_layout_guard_transfer.py", f"{SCRIPTS}/capture_image_png_layout_controls.cjs",
+        f"{PANELS}/image-v7-smaug-genuine-operating-point.json", f"{PANELS}/image-whole-png-scope-probe-2026-11-12.json",
+        f"{PANELS}/image-whole-png-transfer-2026-11-12.json", f"{PANELS}/image-whole-fresh-sources-2026-11-12.json",
+    )),
+    "video": ("review_grid_phone_viseme_timing.py", "grid-phone-viseme-timing-2026-11-12.json", (), ()),
+    "audio": ("audio_short_coarse_transfer.py", "audio-short-coarse-transfer-2026-11-12.json", ("review",), (
+        f"{SCRIPTS}/review_audio_reduced_background_localization.py", f"{PANELS}/audio-noise-window-transfer-2026-11-12.json",
+    )),
+    "writing": ("writing_local_lexical_transfer.py", "writing-local-lexical-transfer-2026-11-12.json", ("review",), (
+        f"{PANELS}/writing-elife-exact-sentence-confirmation-2026-11-12.json",
+        f"{PANELS}/writing-multiblock-independent-2026-11-12.json",
+    )),
+}
+SUITES = ("overview", "localization", "transfer")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -65,11 +81,16 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
     if suite == "localization":
         script, panel = LOCALIZATION[modality]
         panel_names, dependencies = (panel,), ()
+        prefix = ()
+    elif suite == "transfer":
+        script, panel, prefix, dependencies = TRANSFERS[modality]
+        panel_names = (panel,)
     else:
         script, panel_names, dependencies = CHECKS[modality]
+        prefix = ("review",) if modality == "audio" else ()
     entry = f"{SCRIPTS}/{script}"
     panels = [f"{PANELS}/{name}" for name in panel_names]
-    arguments = ["review", *panels] if modality == "audio" and suite == "overview" else panels
+    arguments = [*prefix, *panels]
     return entry, arguments, (entry, *panels, *dependencies)
 
 
@@ -101,7 +122,7 @@ def load_receipt(path: Path) -> dict:
         raise ValueError("Unknown replay receipt format")
     suite = receipt.get("suite", "overview")
     checks = receipt.get("checks")
-    if (suite not in ("overview", "localization") or not isinstance(checks, dict) or not checks
+    if (suite not in SUITES or not isinstance(checks, dict) or not checks
             or not checks.keys() <= CHECKS.keys() or not is_sha256(receipt.get("runner_sha256"))):
         raise ValueError("Invalid replay suite, checks or runner commitment")
     for modality, check in checks.items():
@@ -129,11 +150,10 @@ def compare(left: dict, right: dict) -> bool:
     if left.get("suite", "overview") != right.get("suite", "overview"):
         print("Replay suites differ.")
         return False
-    same_runner = left["runner_sha256"] == right["runner_sha256"]
-    if not same_runner:
-        print("Runner commitments differ.")
+    if left["runner_sha256"] != right["runner_sha256"]:
+        print("Runner versions differ. Checking the recorded reader inputs and outputs.")
     first, second = left["checks"], right["checks"]
-    all_matched = same_runner
+    all_matched = True
     for modality in sorted(first.keys() | second.keys()):
         a, b = first.get(modality), second.get(modality)
         if a is None or b is None:
@@ -158,7 +178,7 @@ def main():
     parser.add_argument("receipt", type=Path, help="New JSON receipt path, or the first receipt in a comparison")
     parser.add_argument("--compare", type=Path, help="Compare two saved receipts without running their commands")
     parser.add_argument("--modality", action="append", choices=CHECKS, help="Select a modality (default: all four)")
-    parser.add_argument("--suite", choices=("overview", "localization"), default="overview",
+    parser.add_argument("--suite", choices=SUITES, default="overview",
                         help="Select the published study set (default: overview)")
     args = parser.parse_args()
     if args.compare is not None:

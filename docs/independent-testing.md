@@ -268,6 +268,10 @@ foreground reconstruction recovers short synthetic inserts.
 The [temporal voice-head comparison](audio-partial-residual-transfer-2026-11-12.md)
 replays the fitted and unfitted checks on exact short edits with competing
 speech. The public reader verifies location counts without audio or weights.
+The [environmental sound embedding comparison](environmental-embedding-transfer-2026-11-12.md)
+recounts separate isolated and mixed operating points and held rankings.
+It preserves the trade-off between additional generated-background flags
+and ordinary backgrounds flagged during genuine speech.
 
 The [video tracking evidence fixture](video-face-tracking-context.md) exercises
 the same recorded values in a saved packet and report without downloading
@@ -1226,12 +1230,13 @@ To compare a second machine's receipt with yours, run:
 python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/review.json" --compare other-review.json
 ```
 
-Use the same suite, modalities, and runner version on both machines. The
+Use the same suite and modalities on both machines. The
 command checks the input, result, and diagnostic commitments and identifies
 where they differ. It reports missing modalities and failed runs separately
 and exits successfully only when all selected replays match. Different
 operating systems, Python versions and Git revisions can match when the
-hashed inputs, runner and outputs agree. Comparison reads JSON and runs no
+hashed reader inputs and outputs agree. The command reports a runner version
+difference separately. Comparison reads JSON and runs no
 commands from either receipt. Equal receipts establish that the recorded
 commitments agree. The files do not authenticate who ran the checks or
 establish new detector performance.
@@ -1260,6 +1265,21 @@ It uses saved observations and checks the reported outcomes without downloading
 source files or weights. Each study links to its separate native-source
 instructions. Share the receipt and the claim or discrepancy you reviewed
 through the independent evaluation form.
+
+### Replay four transfer studies
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/transfer.json" --suite transfer
+```
+
+This suite checks a successful [photographic PNG expansion](image-png-layout-guard-2026-11-12.md)
+and three candidates that stayed outside the app. It verifies the saved
+[lip-sync timing](grid-phone-viseme-timing-2026-11-12.md),
+[speech window](audio-short-coarse-transfer-2026-11-12.md) and
+[mixed-writing vocabulary](writing-local-lexical-transfer-2026-11-12.md)
+results. The receipt includes the checked-in data and helper hashes used
+by each reader, plus hashes of its output and diagnostics.
 
 ### Replay recent evaluations from a clean checkout
 

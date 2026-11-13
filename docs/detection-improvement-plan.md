@@ -97,6 +97,12 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [environmental sound comparison](environmental-embedding-transfer-2026-11-12.md)
+  held the voice fixed while changing background origin across 348 exact
+  deliveries. Mixed-condition spectral fitting found 21/36 generated
+  backgrounds under louder speech with 6/18 ordinary flags. The learned
+  and combined checks did not meet the held conditions either. The
+  public replay distinguishes the fixed results and matched-alarm ranking.
 - The [photographic PNG supplement](image-png-layout-guard-2026-11-12.md)
   added 12 indications on pixel-identical PNG deliveries of previously
   tested generated JPEGs across three families. On eight new native

@@ -252,11 +252,12 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
     from app.core.config import settings
     from app.detectors.image import copy_similarity
     from app.engine import pipelines
-    from app.evidence import image_packets_v7, service
+    from app.evidence import image_embedded_pair_binding, image_packets_v7, image_packets_v8, service
     from app.evidence.image_copy_similarity_binding import (
+        JPEG_OFFGRID_AFFINE_VERSION,
         SKIPPED_CREDENTIALS,
+        copy_records,
         credential_skip,
-        validate_copy_scope,
     )
     from app.reports.public_package import public_result
     from app.storage.artefacts import register_artefact
@@ -268,6 +269,10 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
     elif kind == 'image':
         data, _, bundle = request.getfixturevalue('signed_asset')
         mime = 'image/png'
+        monkeypatch.setattr(settings, 'environment', 'dev')
+        monkeypatch.setattr(settings, 'image_affine_copy_review', True)
+        monkeypatch.setattr(settings, 'image_jpeg_offgrid_copy_review', True)
+        monkeypatch.setattr(settings, 'image_embedded_pair_review', True)
         reflected = Mock(side_effect=AssertionError('Signed record must bypass the reflection matcher'))
         translated = Mock(side_effect=AssertionError('Signed record must bypass the translation matcher'))
         monkeypatch.setattr(copy_similarity, 'analyse', reflected)
@@ -324,16 +329,24 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
             reflected.assert_not_called()
             translated.assert_not_called()
             document = service.load_packet_set(db, result, store)
+            assert document['version'] == image_embedded_pair_binding.VERSION
+            base = image_embedded_pair_binding.base_document(document)
+            assert base['version'] == JPEG_OFFGRID_AFFINE_VERSION
             assert (document['source']['width'], document['source']['height']) == (768, 512)
-            assert all(document[key]['status'] == SKIPPED_CREDENTIALS and not document[key]['pairs']
-                       for key in ('copy_similarity', 'copy_translation'))
+            assert all(record['status'] == SKIPPED_CREDENTIALS and not record['pairs']
+                       for record in copy_records(base))
             assert document['copy_translation']['basis'] is None
+            assert document['embedded_pair_difference']['status'] == SKIPPED_CREDENTIALS
             raw = json.loads(store.read_bytes(result.result_hash))
             scope = public_result(raw)['decision']['image_copy_coverage']
             assert scope == credential_skip(digest)
-            validate_copy_scope(document, scope)
-            with pytest.raises(ValueError, match='differs from the source-bound result'):
-                validate_copy_scope(document, None)
+            image_packets_v8.validate_packet_source_mapping(document, raw)
+            wrong_pair = {**document['embedded_pair_difference'], 'status': 'outside_scope'}
+            wrong_copy = {**document['copy_translation'], 'status': 'no_pair'}
+            with pytest.raises(image_packets_v8.PacketIntegrityError, match='Exact two-area coverage differs'):
+                image_packets_v8.validate_packet_source_mapping({**document, 'embedded_pair_difference': wrong_pair}, raw)
+            with pytest.raises(image_packets_v8.PacketIntegrityError, match='Copy check coverage differs'):
+                image_packets_v8.validate_packet_source_mapping({**document, 'copy_translation': wrong_copy}, raw)
             if profile == 'quick':
                 from test_video_nested_evidence import _check_public_zip
 
@@ -346,6 +359,6 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
                 monkeypatch.setattr(image_evidence, 'default_store', lambda: store)
                 pdf = engine.render_pdf(frozen)
                 text = ' '.join(engine.pdf_text(pdf.pdf).split())
-                assert text.count('The two copy checks were skipped.') == 1
+                assert text.count('The image copy checks were skipped.') == 1
                 _check_public_zip(SimpleNamespace(db=db, store=store, analysis=result, frozen=frozen, document=document),
                                   tmp_path, monkeypatch, pdf.pdf)

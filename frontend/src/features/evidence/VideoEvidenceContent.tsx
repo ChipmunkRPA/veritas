@@ -135,6 +135,13 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         : `This check needs verified ${1000 / motionRate} ms spacing throughout the first ${motionLimit} frames.`}</p>
       <p className="mt-2 mb-0 text-caption text-text-muted">Coverage is limited to the first {motionLimit} native {set.source.width} × {set.source.height} frames in supported {motionRate} fps video. A repeat may come from ordinary editing and carries no AI confidence weight.</p>
     </section>}
+    {!!set.coverage?.brief_face_review?.observations.length && <section aria-labelledby="video-brief-face-coverage-heading"
+      className="mt-4 rounded-md border border-border p-4">
+      <h3 id="video-brief-face-coverage-heading" className="m-0 text-body font-medium">Brief face-change check</h3>
+      {set.coverage.brief_face_review.observations.map((observation) => <p key={observation}
+        className="mt-2 mb-0 text-small">{observation}</p>)}
+      <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero AI confidence weight.</p>
+    </section>}
     {set.coverage ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <p className="m-0">{set.coverage.scored_frame_count} frame(s) were inputs to recorded {hasNestedVideoEvidence(set.version) ? 'visual frame or window' : 'frame or window'} checks in a table of {set.coverage.frame_count} frames.
         {' '}{set.coverage.window_check_count} window check(s) cover {set.coverage.window_frame_indices.length} distinct sampled frames.</p>

@@ -149,6 +149,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         face_boundary_binding,
         face_lighting_context,
         face_return_binding,
+        face_return_coverage,
         picture_hold_binding,
         whole_face_binding,
     )
@@ -169,6 +170,15 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
     by_index = {anchor["frame_index"]: anchor for anchor in anchors}
     if len(by_index) != len(anchors):
         raise ObjectIntegrityError("Frozen video frames have ambiguous identities")
+    if result is None and (document.get("coverage") or {}).get(face_return_coverage.KEY) is not None:
+        result = json.loads(_bytes(document["original_result_hash"], store))
+    if result is not None:
+        try:
+            expected = face_return_coverage.from_result(result, len(table))
+            if face_return_coverage.validate(document) != expected:
+                raise ValueError("Coverage differs from the recorded outcome")
+        except (KeyError, TypeError, ValueError) as error:
+            raise ObjectIntegrityError("Brief face-change coverage differs from the frozen analysis") from error
     if repeat := (document.get("coverage") or {}).get("face_detail_repeat"):
         frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
         if face_detail_coverage(frozen, table, by_index) != repeat:
@@ -413,7 +423,12 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
 
 def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.text.extract import text_hash
-    from app.evidence import document_matched_context, document_paragraph_priority, document_passage_coverage
+    from app.evidence import (
+        document_matched_context,
+        document_paragraph_priority,
+        document_passage_coverage,
+        document_unselected_responses,
+    )
     from app.evidence.document_packets import (
         _inspection_anchors,
         _pdf_plates,
@@ -446,6 +461,9 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         if document_passage_coverage.KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             document_passage_coverage.verify_source(document, text, mapping, result=frozen, meta=decoded["meta"])
+        if document_unselected_responses.KEY in coverage:
+            frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+            document_unselected_responses.verify_source(document, text, mapping, result=frozen)
         if document_scope.CHECKPOINT_AGREEMENT_KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             document_scope.validate_checkpoint_agreement(document, text, result=frozen, mapping=mapping)
@@ -548,11 +566,16 @@ def quoted_values(snapshot: ReportSnapshot) -> list[str]:
     """Verbatim submitted text is exempt from generated-prose vocabulary checks."""
     if snapshot.analysis.kind != "document" or snapshot.evidence is None:
         return []
+    from app.evidence.document_unselected_responses import KEY as UNSELECTED_RESPONSES
+    from app.evidence.document_unselected_responses import REPORT_EXCERPT_CHARS
+
     repeats = (snapshot.evidence.get("repeated_passages") or {}).get("groups", [])
+    extra = ((snapshot.evidence.get("coverage") or {}).get(UNSELECTED_RESPONSES) or {}).get("rows", [])
+    excerpts = [row["text"][:REPORT_EXCERPT_CHARS] for row in extra]
     isolated = [input["text"] for packet in snapshot.evidence["packets"]
                 if (review := (packet.get("context_comparison") or {}).get("isolated_paragraph"))
                 for input in (review["context"], review["paragraph"])]
-    return [group["text"] for group in repeats] + isolated + [text for packet in snapshot.evidence["packets"] for text in
+    return [group["text"] for group in repeats] + isolated + excerpts + [text for packet in snapshot.evidence["packets"] for text in
             [packet["focus"]["text"], packet["context"]["text"], *(w["text"] for w in packet["supporting_windows"]),
              *(w["text"] for check in (packet.get("context_comparison") or {}).get("checks", []) for w in check["inputs"])]]
 
@@ -635,6 +658,19 @@ def _passage_coverage_view(coverage: dict) -> dict | None:
             "ranges": [{**row, "label": LABELS[row["state"]]} for row in rows],
             "additional_ranges": len(record["ranges"]) - len(rows),
             "omitted_ranges": record["omitted_ranges"], "pdf_pages": pdf_pages}
+
+
+def _unselected_writing_responses_view(coverage: dict, *, withheld: bool) -> dict | None:
+    from app.evidence.document_unselected_responses import DIRECTIONS, KEY, REPORT_EXCERPT_CHARS
+
+    if (record := coverage.get(KEY)) is None:
+        return None
+    rows = []
+    for row in record["rows"]:
+        excerpt = row["text"] if not withheld else ""
+        rows.append({**{key: value for key, value in row.items() if key != "text"}, "label": DIRECTIONS[row["direction"]],
+                     "excerpt": excerpt[:REPORT_EXCERPT_CHARS], "shortened": len(excerpt) > REPORT_EXCERPT_CHARS})
+    return {**record, "rows": rows}
 
 
 def _writing_agreement_view(coverage: dict) -> dict | None:
@@ -937,6 +973,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "similarity_context_pointer": "/audio/similarity_context" if kind == "video" else "/similarity_context",
             "repeated_passages": repeated_passages,
             "picture_hold": copy.deepcopy(document.get("picture_hold")),
+            "brief_face_review": (document.get("coverage") or {}).get("brief_face_review") if kind == "video" else None,
             "picture_frame_count": document["source"].get("frame_count", 0) if kind == "video" else 0,
             "picture_dimensions": (document["source"]["width"], document["source"]["height"]) if kind == "video" else None,
             "voice_gaps": voice_gaps,
@@ -954,6 +991,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "version": document["version"], "sha256": document["sha256"], "source_sha256": document["source"]["sha256"],
             "withheld": withheld, "packets": packets, "acoustic_contexts": acoustic_contexts, "coverage_note": _coverage(kind, document),
             "passage_coverage": _passage_coverage_view(document.get("coverage") or {}) if kind == "document" else None,
+            "unselected_writing_responses": _unselected_writing_responses_view(document.get("coverage") or {}, withheld=withheld)
+            if kind == "document" else None,
             "writing_agreement": _writing_agreement_view(document.get("coverage") or {}) if kind == "document" else None,
             "coverage_details": ([f"{'Voice evidence' if key == 'audio' else 'Audio/video synchronization evidence'}: {channel['reason']}"
                                   for key, channel in (document.get("coverage", {}).get("channels") or {}).items()]

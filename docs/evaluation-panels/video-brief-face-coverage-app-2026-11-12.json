@@ -1,0 +1,70 @@
+{
+  "schema": "chipmunk.brief-face-coverage-app/1",
+  "isolated_paid_full_analyses": 3,
+  "cases": {
+    "localized": {
+      "passes": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "localized"
+        },
+        "initial": {
+          "measured_face_frames": 32,
+          "reason": null,
+          "scheduled_frames": 32,
+          "status": "no_distinct_range"
+        }
+      },
+      "report_page": 5,
+      "brief_ranges": 2,
+      "signed_native_replay": true,
+      "template": "veritas-report-2.0.r105"
+    },
+    "no_distinct_range": {
+      "passes": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "initial": {
+          "measured_face_frames": 32,
+          "reason": null,
+          "scheduled_frames": 32,
+          "status": "no_distinct_range"
+        }
+      },
+      "report_page": 4,
+      "brief_ranges": 0,
+      "signed_native_replay": true,
+      "template": "veritas-report-2.0.r105"
+    },
+    "unassessed": {
+      "passes": {
+        "initial": {
+          "measured_face_frames": 32,
+          "reason": "sparse_range_outside_profile",
+          "scheduled_frames": 32,
+          "status": "unassessed"
+        }
+      },
+      "report_page": 4,
+      "brief_ranges": 0,
+      "signed_native_replay": true,
+      "template": "veritas-report-2.0.r105"
+    }
+  },
+  "worker_scope": "Full profile production face stages with existing face detector allowlist",
+  "customer_surface_checks": [
+    "persisted worker coverage",
+    "evidence API",
+    "JSON export",
+    "Standard PDF",
+    "signed package original replay"
+  ],
+  "ai_confidence_weight": 0,
+  "checkout": "simulated prepayment with duplicate and unpaid events checked"
+}

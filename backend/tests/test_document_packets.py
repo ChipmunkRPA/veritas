@@ -18,7 +18,7 @@ from sqlalchemy.orm import Session
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.text.extract import extract, text_hash
 from app.detectors.text.segment import segment
-from app.evidence import document_passage_coverage
+from app.evidence import document_passage_coverage, document_unselected_responses
 from app.evidence.document_packets import (
     DocumentPacketIntegrityError,
     build_packet_set,
@@ -134,6 +134,13 @@ def test_short_email_maps_opposing_context_only_and_unassessed_quote_without_car
     evidence = build_packet_set(db, analysis, store, result)
     record = evidence["coverage"][document_passage_coverage.KEY]
     assert evidence["packets"] == []
+    additional = evidence["coverage"][document_unselected_responses.KEY]
+    assert additional["affects_overall_confidence"] is False and additional["omitted_windows"] == 0
+    row, = additional["rows"]
+    assert row["id"] == "U01" and row["direction"] == "opposes_ai" and row["response"] == .2
+    assert row["text"].endswith("The date changed.") and "old message" not in row["text"]
+    assert all(source["quote_role"] == "body" for source in row["sources"])
+    assert document_unselected_responses.verify_source(evidence, decoded["text"], decoded["source_map"], result=result) == 1
     assert record["counts"] == {
         state: sum(not char.isspace() for char in sentence["text"])
         for state, sentence in zip(("response_range", "context_only", "no_local_record"), decoded["sentences"], strict=True)
@@ -152,6 +159,36 @@ def test_short_email_maps_opposing_context_only_and_unassessed_quote_without_car
     forged["sha256"] = packet_hash(forged)
     with pytest.raises(ValueError, match="differs from the frozen responses"):
         document_passage_coverage.verify_source(forged, decoded["text"], decoded["source_map"], result=result)
+
+
+def test_additional_responses_preserve_selected_cards_and_reject_forged_source_or_direction(packet_factory):
+    db, store, analysis, result, decoded, _ = packet_factory(".pdf")
+    evidence = build_packet_set(db, analysis, store, result)
+    rows = evidence["coverage"][document_unselected_responses.KEY]["rows"]
+    assert len(evidence["packets"]) == 1 and len(rows) == 2
+    assert all(row["focus"] != {key: evidence["packets"][0]["focus"][key] for key in ("start", "end")} for row in rows)
+    assert all(row["direction"] == "opposes_ai" and all(source["page"] == 1 for source in row["sources"]) for row in rows)
+    forged = deepcopy(evidence)
+    forged["coverage"][document_unselected_responses.KEY]["rows"][0]["sources"][0]["page"] = 2
+    with pytest.raises(ValueError, match="differs from its original text or location"):
+        document_unselected_responses.verify_source(forged, decoded["text"], decoded["source_map"])
+    forged = deepcopy(evidence)
+    forged["coverage"][document_unselected_responses.KEY]["rows"][0]["direction"] = "supports_ai"
+    with pytest.raises(ValueError, match="differ from the frozen classifier records"):
+        document_unselected_responses.verify_source(forged, decoded["text"], decoded["source_map"], result=result)
+
+
+def test_additional_response_limits_preserve_exact_input_and_drop_incomplete_windows(packet_factory):
+    text = " ".join(f"Paragraph sentence number {index} includes exact recorded writing." for index in range(18))
+    db, store, analysis, result, decoded, _ = packet_factory(scores=(.1,) * 18, text=text)
+    result["signals"][0]["details"]["text_evidence"]["windows"][0]["token_coverage"]["omitted_tokens"] = 1
+    analysis.result_hash = canonical_hash(result)
+    store.put_bytes(canonical_json(result))
+    evidence = build_packet_set(db, analysis, store, result)
+    record = evidence["coverage"][document_unselected_responses.KEY]
+    assert record["eligible_windows"] == 17 and record["omitted_windows"] == 5
+    assert len(record["rows"]) == 12 and record["rows"][0]["focus"]["start"] == decoded["sentences"][1]["start"]
+    assert load_packet_set(db, analysis, store) == evidence
 
 
 def test_partial_classifier_has_no_exact_coverage_and_ratio_keeps_only_committed_token_positions():

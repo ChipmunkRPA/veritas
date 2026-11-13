@@ -69,6 +69,7 @@ export interface VideoEvidenceSet extends SetBase {
     face_detail_repeat?: { status: 'withheld' | 'retained' | 'unassessed'; observation: string;
       start_pts: number; end_pts: number; time_base: string; start_stream_s: number; end_stream_s: number;
       affects_overall_confidence: false };
+    brief_face_review?: { observations: string[]; affects_overall_confidence: false };
     channels?: Partial<Record<'audio' | 'av_sync' | 'av', { status: string; reason: string | null; successful_check_count?: number }>> } | null
   /** Present in video-evidence-3 and later. Both channels belong to this parent set. */
   audio?: VideoAudioChannel
@@ -297,6 +298,15 @@ export interface DocumentPassageCoverage {
     unmapped_page_ranges: [number, number][]
   }
 }
+export interface DocumentUnselectedResponses {
+  schema: 'document-unselected-passage-responses/1'; affects_overall_confidence: false
+  eligible_windows: number; omitted_windows: number
+  rows: { id: string; focus: { start: number; end: number }; spans: { start: number; end: number }[]
+    sources: ({ kind: 'pdf'; page: number; extraction: 'text_layer' | 'ocr' }
+      | { kind: 'email'; mime_part: string; quote_role: string }
+      | { kind: 'text' | 'docx'; paragraph: number })[]
+    check: string; input_sha256: string; direction: 'supports_ai' | 'opposes_ai'; response: number; text: string }[]
+}
 export interface DocumentEvidenceSet extends SetBase {
   schema: 'chipmunk.document-evidence/1'; packets: DocumentEvidencePacket[]; omitted_windows: number
   source: { sha256: string; chars?: number; method?: string; offset_unit: 'unicode_codepoint' }
@@ -307,6 +317,7 @@ export interface DocumentEvidenceSet extends SetBase {
         source_end?: number; mime_part?: string; paragraph_index?: number; page?: number; block?: number; bbox?: number[] } }[] }[] }
   coverage?: { scored_windows?: number; candidate_spans?: number; unmapped_pages?: number[];
     local_passage_coverage?: DocumentPassageCoverage;
+    unselected_passage_responses?: DocumentUnselectedResponses;
     writing_second_check?: { schema: 'document-writing-second-check/1' | 'document-writing-second-check/2' | 'document-writing-second-check/3' | 'document-writing-second-check/4'; authorship_confidence_contribution: 0;
       body_spans?: { start: number; end: number }[];
       ranges: { start: number; end: number; spans: { start: number; end: number }[];

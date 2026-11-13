@@ -265,10 +265,11 @@ def public_view(snapshot: ReportSnapshot, original: dict[str, Any]) -> dict[str,
             sampling = snapshot.result.get('manifest', {}).get('sampling') or {}
             # New immutable source records contain internal check identifiers.
             # Their commitment is public, their nested implementation records are not prose.
-            if {'audio_evidence', 'document_source', 'video_audio_evidence'}.intersection(sampling):
+            bound_records = {'audio_evidence', 'document_source', 'video_audio_evidence', 'brief_face_review'}
+            if bound_records.intersection(sampling):
                 from app.reports.forensic import SAMPLING_WORDS
 
-                visible = {key: value for key, value in sampling.items() if key not in {'audio_evidence', 'document_source', 'video_audio_evidence'}}
+                visible = {key: value for key, value in sampling.items() if key not in bound_records}
                 row['value'] = ' - '.join(f"{SAMPLING_WORDS.get(key, key.replace('_', ' '))} {value}" for key, value in sorted(visible.items()))
                 row['value'] += ('; ' if row['value'] else '') + 'Source-coordinate records are committed by the frozen evidence-set hash.'
     # These are generated exhibit labels, not metadata table cells or analyst annotations.

@@ -242,6 +242,19 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByRole('article')).toBeNull()
   })
 
+  it('distinguishes a measured brief face scan from an unassessed follow-up without a finding', () => {
+    const set = { ...structuredClone(video), packets: [] }
+    set.coverage!.brief_face_review = { affects_overall_confidence: false, observations: [
+      'Initial scan. No distinct brief face-change range was found in this scan. Comparable face inputs: 15 of 16 scheduled pictures.',
+      'Denser scan. More than one face was detected in a sampled picture. Comparable face inputs: 10 of 24 scheduled pictures.',
+    ] }
+    show(set)
+    const coverage = within(screen.getByRole('region', { name: 'Brief face-change check' }))
+    for (const text of set.coverage!.brief_face_review.observations) expect(coverage.getByText(text)).toBeTruthy()
+    expect(coverage.getByText('This check carries zero AI confidence weight.')).toBeTruthy()
+    expect(screen.queryByRole('article')).toBeNull()
+  })
+
   it('shows measured and refined ranges with source crops and playback navigation', () => {
     const set = { ...structuredClone(video), version: 'video-evidence-11' }
     const item = set.packets[0]

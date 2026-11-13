@@ -6,6 +6,7 @@ import DocumentInspectionMap, { passageLocation, RecordedPassage, windowSupports
 import DocumentContextComparison from './DocumentContextComparison'
 import DocumentPassageCoverage from './DocumentPassageCoverage'
 import DocumentRepeatedPassages from './DocumentRepeatedPassages'
+import DocumentUnselectedResponses from './DocumentUnselectedResponses'
 import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow } from './multimediaPackets'
 
 function ScoredContext({ window, index }: { window: DocumentEvidenceWindow; index: number }) {
@@ -111,6 +112,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     <DocumentRepeatedPassages result={set.repeated_passages} />
     <DocumentInspectionMap packets={set.packets} selectedId={selectedId} onSelect={selectPassage} />
     <DocumentPassageCoverage coverage={set.coverage?.local_passage_coverage} />
+    <DocumentUnselectedResponses responses={set.coverage?.unselected_passage_responses} />
     {writingAgreement && <section className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <h3 className="m-0 text-body font-medium text-text">Second writing check</h3>
       <p className="mt-2 mb-0">The second check revisits the exact text behind up to six AI-like responses. This evidence carries zero weight in the overall assessment.</p>

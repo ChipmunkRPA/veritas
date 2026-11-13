@@ -20,6 +20,7 @@ from app.evidence import (
     document_passage_coverage,
     document_repeat,
     document_scope,
+    document_unselected_responses,
 )
 from app.evidence.document_packets import (
     DocumentPacketIntegrityError,
@@ -119,6 +120,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_paragraph_priority.verify_source(evidence, text, mapping)
     document_passage_coverage.verify_source(evidence, text, mapping, meta=doc.meta)
     document_scope.validate_checkpoint_agreement(evidence, text, mapping=mapping)
+    unselected = document_unselected_responses.verify_source(evidence, text, mapping)
 
     pdf_bytes = original.read_bytes() if extension == ".pdf" else None
 
@@ -157,5 +159,6 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("The supplied original changed during document replay")
     image_label = "PDF images, including OCR source rasters" if used_ocr else "native PDF images"
     page_detail = f" Verified mapped text coverage across {page_coverage['page_count']} PDF pages." if page_coverage else ""
+    unselected_detail = f" Verified {unselected} additional recorded response locations and inputs." if unselected else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
-            f"recorded input windows ({window_count}) and {image_label} ({images}).{page_detail}")
+            f"recorded input windows ({window_count}) and {image_label} ({images}).{page_detail}{unselected_detail}")

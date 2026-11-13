@@ -68,6 +68,9 @@ The [subject-context comparison](video-face-subject-context-2026-11-12.md)
 checks whether the area below the face helps recognize ordinary speaker cuts.
 The [near-head transfer](video-face-near-head-transfer-2026-11-12.md) adds
 independent source groups and measures confounds from zoom and brightness.
+The [brief face-check coverage verification](video-brief-face-coverage-2026-11-12.md)
+replays a localized case, a measured scan without a range and an unassessed
+scan through prepaid Full analysis and the signed reports.
 The [compression repeat study](video-face-compression-stability-2026-11-12.md)
 rebuilds single and tandem encodes, checks exact face crops, and reproduces
 both appearance measurements at the original time interval.
@@ -87,6 +90,9 @@ receipt. Native source references and offsets support a separate input audit.
 The [source-conditioned comparison](writing-source-conditioned-2026-11-12.md)
 checks exact edited sentences against unchanged and incorrect earlier context.
 Its public replay compares the resulting regions with a simple lexical control.
+The [additional writing-response verification](writing-unselected-responses-2026-11-12.md)
+checks source locations and actual responses for scored text beyond the
+selected passage cards, including known edits that the detector missed.
 The [paired neural speech edit pilot](audio-partialedit-dense-transfer-2026-11-12.md)
 checks overlapping speech windows across two edit generators, matched genuine
 utterances and two background mixes. The replay recounts localized edits and

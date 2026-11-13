@@ -15,6 +15,11 @@
 <p class="caption">Evidence set {{ evidence.version }} - SHA-256 <span class="mono evidence-hash">{{ evidence.sha256 }}</span></p>
 <p class="caption"{% if evidence.kind == 'audio' %} id="multimedia-evidence-voice-coverage"{% endif %}>{{ evidence.coverage_note }}</p>
 {% for note in evidence.coverage_details %}<p class="caption">{{ note }}</p>{% endfor %}
+{% if evidence.get('brief_face_review') %}
+<h3 id="multimedia-brief-face-review">Brief face-change check</h3>
+{% for observation in evidence.brief_face_review.observations %}<p class="caption">{{ observation }}</p>{% endfor %}
+<p class="caption">This check carries zero AI confidence weight. JSON pointer <span class="mono">/coverage/brief_face_review</span>.</p>
+{% endif %}
 {% if evidence.get('short_voice_review') %}
 {% set review = evidence.short_voice_review %}
 <h3 id="multimedia-short-voice-review">{{ review.title }}</h3>
@@ -78,6 +83,9 @@ Samples [{{ window.start_sample }}, {{ window.end_sample }}) at 16000 Hz.
 </tbody></table>
 <p class="caption">{% if page_coverage.additional_rows %}{{ page_coverage.additional_rows }} more rows appear in the JSON report. {% endif %}JSON pointer <span class="mono">/coverage/local_passage_coverage/pdf_pages</span>.</p>
 {% endif %}
+{% endif %}
+{% if evidence.get('unselected_writing_responses') %}
+{% include 'sections/document_unselected_responses.html.j2' %}
 {% endif %}
 {% if evidence.get('writing_agreement') %}
 <h3>Second writing check</h3>

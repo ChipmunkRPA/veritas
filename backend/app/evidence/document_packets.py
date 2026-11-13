@@ -28,6 +28,7 @@ from app.evidence import (
     document_passage_coverage,
     document_repeat,
     document_scope,
+    document_unselected_responses,
 )
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import Analysis, AnalysisStage, Artefact
@@ -323,6 +324,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_matched_context.validate(document)
         document_paragraph_priority.validate(document)
         document_passage_coverage.validate(document)
+        document_unselected_responses.validate(document)
         document_scope.validate_checkpoint_agreement(document)
     except (ValueError, KeyError, TypeError, AttributeError) as error:
         raise DocumentPacketIntegrityError("Document review evidence has invalid source commitments or positions") from error
@@ -594,6 +596,9 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["limitations"].append("Some successful document-level or heuristic checks do not provide exact local input proof. See check coverage; their aggregate scores are not treated as local authorship evidence.")
     if any(c.get("omitted_windows") for c in check_coverage):
         document["limitations"].append("Some local responses lack enough scored tokens or exceed the bounded input-proof record. These omissions are listed in check coverage and are not negative findings.")
+    unselected = document_unselected_responses.build(result, text, mapping, document["packets"])
+    if unselected is not None:
+        document["coverage"][document_unselected_responses.KEY] = unselected
     if opposing_total > opposing_shown:
         document["limitations"].append(f"{opposing_total - opposing_shown} recorded opposing local response(s) are outside the bounded displayed passages. Their omission is not agreement with an AI-authorship interpretation.")
     document = json.loads(canonical_json(document))
@@ -644,6 +649,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_paragraph_priority.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_passage_coverage.verify_source(document, decoded["text"], decoded["source_map"],
                                                     result=result, meta=decoded["meta"])
+            document_unselected_responses.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_scope.validate_checkpoint_agreement(document, decoded["text"], result=result, mapping=decoded["source_map"])
         except (ValueError, KeyError, TypeError, AttributeError) as error:
             raise DocumentPacketIntegrityError("Document review evidence differs from the frozen text or source mapping") from error

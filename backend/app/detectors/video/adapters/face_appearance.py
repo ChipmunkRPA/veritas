@@ -179,6 +179,7 @@ def _inspect_return(details, inputs, yunet, recognizer, deadline, incumbent):
 def _inspect_standard_return(details, inputs, yunet, recognizer, deadline, incumbent, planned, dense, coverage, stop, context):
     table = inputs.table
     _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planned, coverage, face_return.METHOD, stop)
+    coverage["sparse_context"] = coverage.copy()
     if time.monotonic() >= stop:
         return
     if dense is None:

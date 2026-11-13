@@ -223,6 +223,7 @@ def test_guarded_720p30_only_reports_a_measured_dense_range(monkeypatch, sparse_
     inputs = SequenceInputs(table, None, (), (), ("h264", "yuv420p"))
     monkeypatch.setattr(face_return, "guarded_720p30_schedule", lambda *_: face_return.schedule(original))
     monkeypatch.setattr(face_appearance.settings, "face_min_size", 48)
+    monkeypatch.setattr(face_appearance.settings, "video_face_second_return_review", False)
     called = []
     prior = {"start_pts": 1000, "end_pts": 2000}
 

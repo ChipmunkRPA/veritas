@@ -12,7 +12,7 @@ import struct
 import wave
 
 from app.core.canonical import canonical_hash
-from app.evidence import document_scope
+from app.evidence import document_scope, face_return_coverage
 from app.evidence.face_alignment_context import validate as validate_face_alignment
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.face_interval_binding import validate_packet as validate_face_interval
@@ -77,7 +77,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              and bundle['result'].get('is_projection') is True, 'The result must identify itself as a public projection')
     _require(result.get('original_result_sha256') == analysis['original_result_sha256'], 'The result commits to a different original')
     _require(set(result) <= {'schema', 'is_projection', 'original_result_sha256', 'decision', 'findings', 'checks', 'note',
-                             IMAGE_EDITOR_PREVIEW},
+                             IMAGE_EDITOR_PREVIEW, face_return_coverage.COMMITMENT},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
     binding = bundle['evidence']
@@ -98,6 +98,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
 
         validate_picture_hold(evidence)
         face_return_binding.validate_set(evidence)
+        face_return_coverage.validate_commitment(evidence, result.get(face_return_coverage.COMMITMENT))
         for packet in evidence.get('packets', []):
             validate_clip_binding(packet, evidence['source'])
             validate_face_interval(packet, evidence['source'])
@@ -152,6 +153,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                          'Video voice and alignment evidence use different audio inputs')
         else:
             _require(not {'audio', 'av'}.intersection(evidence), 'Historical video evidence has unexpected nested channels')
+    else:
+        _require(face_return_coverage.COMMITMENT not in result, 'Brief face-change coverage belongs to video evidence')
     if analysis['kind'] == 'image':
         from app.evidence.image_eligibility import validate_inspection_coverage
 
@@ -197,12 +200,14 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         from app.evidence.document_matched_context import validate as validate_matched_context
         from app.evidence.document_paragraph_priority import validate as validate_paragraph_priority
         from app.evidence.document_repeat import validate as validate_repeated_passages
+        from app.evidence.document_unselected_responses import validate as validate_unselected_responses
 
         validate_repeated_passages(evidence)
         validate_matched_context(evidence, published_checks={check['id'] for check in result.get('checks', [])})
         validate_paragraph_priority(evidence)
         document_scope.validate_passage_coverage(evidence)
         document_scope.validate_checkpoint_agreement(evidence)
+        validate_unselected_responses(evidence, published_checks={check.get('display_id') for check in result.get('checks', [])})
     if analysis['kind'] == 'document' and evidence['version'] in document_scope.CONTEXT_VERSIONS:
         from app.evidence.document_context import validate as validate_context_comparison
 

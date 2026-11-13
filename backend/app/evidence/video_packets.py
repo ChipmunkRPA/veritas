@@ -31,6 +31,7 @@ from app.evidence import (
     face_intervals,
     face_lighting_context,
     face_return_binding,
+    face_return_coverage,
     mouth_local_hold_binding,
     picture_hold_binding,
     picture_sequence,
@@ -630,6 +631,11 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                 "The contact sheet shows neighbouring scored samples, not necessarily consecutive video frames."]}
     if repeat := face_detail_coverage(result, table, anchors):
         document["coverage"]["face_detail_repeat"] = repeat
+    try:
+        if brief_review := face_return_coverage.from_result(result, len(table)):
+            document["coverage"][face_return_coverage.KEY] = brief_review
+    except (KeyError, TypeError, ValueError) as error:
+        raise PacketIntegrityError(str(error)) from error
     if VERSION in PICTURE_HOLD_VERSIONS:
         document["picture_hold"] = (hold["coverage"] if hold is not None else picture_hold_binding.coverage(
             "unavailable", picture_hold_binding.HISTORICAL, source["time_base"]))
@@ -914,6 +920,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
     try:
         picture_hold_binding.validate(document)
         face_return_binding.validate_set(document)
+        face_return_coverage.validate(document)
     except (KeyError, TypeError, ValueError) as error:
         raise PacketIntegrityError(str(error)) from error
     table_base = FrameTable(time_base=source["time_base"], pts=(), key_frames=(), pict_types="", width=source["width"],
@@ -1002,6 +1009,13 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
         raise PacketIntegrityError("Video evidence identity differs from its stored object")
     validate_packet_set(document, analysis_id=analysis.id, revision=analysis.revision,
                         original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
+    if (document.get("coverage") or {}).get(face_return_coverage.KEY) is not None:
+        frozen = json.loads(_verified(store, analysis.result_hash))
+        try:
+            expected = face_return_coverage.from_result(frozen, document["source"]["frame_count"])
+            face_return_coverage.validate_commitment(document, canonical_hash(expected) if expected is not None else None)
+        except (KeyError, TypeError, ValueError) as error:
+            raise PacketIntegrityError(str(error)) from error
     store.verify(analysis.sha256)
     if document["version"] in NESTED_VERSIONS:
         for key in ("audio", "av"):

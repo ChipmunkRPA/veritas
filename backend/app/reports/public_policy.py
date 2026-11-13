@@ -8,7 +8,9 @@ _FACE_SCOPE_LEGACY_TEMPLATES = {
     "veritas-report-2.0.r95", "veritas-report-2.0.r96", "veritas-report-2.0.r97", "veritas-report-2.0.r98", "veritas-report-2.0.r99",
     "veritas-report-2.0.r100",
 }
-_PREVIOUS_PUBLIC_TEMPLATES = _FACE_SCOPE_LEGACY_TEMPLATES | {"veritas-report-2.0.r101", "veritas-report-2.0.r102", "veritas-report-2.0.r103"}
+_PREVIOUS_PUBLIC_TEMPLATES = _FACE_SCOPE_LEGACY_TEMPLATES | {
+    "veritas-report-2.0.r101", "veritas-report-2.0.r102", "veritas-report-2.0.r103", "veritas-report-2.0.r104",
+}
 
 
 def downloadable_template(template: str, kind: str | None = None) -> bool:

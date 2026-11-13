@@ -85,7 +85,7 @@ from app.engine.fusion.runtime import DECLARED_AI_VERBAL
 from app.engine.profiles import SAMPLING
 from app.engine.runner import StageContext
 from app.engine.stages import common
-from app.evidence import face_return_binding, picture_hold_binding
+from app.evidence import face_return_binding, face_return_coverage, picture_hold_binding
 from app.evidence.audio_binding import (
     VOICE_CLOCK_LIMIT,
     VOICE_CLOCK_POLICY,
@@ -1073,6 +1073,15 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         result.manifest.sampling["video_audio_mapping_sha256"] = canonical_hash(rendered["audio_mapping"])
     if rendered.get("picture_hold") is not None:
         result.manifest.sampling["picture_hold_sha256"] = canonical_hash(rendered["picture_hold"])
+    for entry in (ctx.outputs.get("detect") or {}).get("detectors", []):
+        if entry["detector_id"] != APPEARANCE_REVIEW:
+            continue
+        coverage = (entry.get("details") or {}).get("face_return_check")
+        if coverage is not None and (coverage.get("sparse_context") is not None
+                                     or not {"dense_fallback", "fine_scene_fallback"} & coverage.keys()):
+            count = len(ctx.outputs["probe"]["frame_table"]["pts"])
+            result.manifest.sampling[face_return_coverage.KEY] = face_return_coverage.from_worker(coverage, count)
+        break
     from app.evidence.video_audio import published_record
 
     result.manifest.sampling["video_audio_evidence"] = published_record(ctx)

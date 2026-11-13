@@ -35,7 +35,14 @@ from app.detectors.video.face_appearance import METHOD, cpp_alignment
 from app.detectors.video.frame_store import FrameStore
 from app.engine.stages import video
 from app.engine.synthesis.engine import SynthesisInput, synthesise
-from app.evidence import face_boundary_binding, face_return_binding, service, video_audio, video_packets
+from app.evidence import (
+    face_boundary_binding,
+    face_return_binding,
+    face_return_coverage,
+    service,
+    video_audio,
+    video_packets,
+)
 from app.evidence.audio_binding import validate_audio_channel
 from app.evidence.image_packets import PacketIntegrityError
 from app.reports import engine, multimedia_evidence, package, signing, snapshot, verify, verify_video_source
@@ -140,6 +147,58 @@ def _freeze_parent(f):
         'media': frozen.media.model_copy(update={'sha256': f.analysis.sha256, 'size_bytes': f.analysis.size_bytes,
                                                 'filename': f.analysis.filename, 'content_type': f.analysis.content_type}),
         'report': frozen.report.model_copy(update={'template_set': engine.TEMPLATE_SET})})
+
+
+def test_brief_face_coverage_without_a_signal_reaches_signed_report(av_fixture, tmp_path, monkeypatch):
+    f = av_fixture
+    incomplete = {'status': 'unassessed', 'reason': 'multiple_faces', 'scheduled_frames': 24,
+                  'measured_face_frames': 10}
+    initial = {'status': 'no_distinct_range', 'reason': None, 'scheduled_frames': 16, 'measured_face_frames': 15}
+    coverage = face_return_coverage.from_worker({**initial, 'dense_fallback': incomplete}, len(f.table))
+    f.result['manifest']['sampling'][face_return_coverage.KEY] = coverage
+    assert not any(s.get('detector_id') == DETECTOR for s in f.result['signals'])
+    _prepare_parent(f, has_audio=False)
+    _freeze_parent(f)
+    f.result = _report_scaffold(f).result
+    f.analysis.result_hash = f.store.put_bytes(canonical_json(f.result)).sha256
+    _freeze_parent(f)
+
+    assert f.document['coverage'][face_return_coverage.KEY] == coverage
+    assert not any(p.get('face_return') for p in f.document['packets'])
+    assert service.load_packet_set(f.db, f.analysis, f.store)['coverage'][face_return_coverage.KEY] == coverage
+    assert project(f.document)['coverage'][face_return_coverage.KEY] == coverage
+    altered = copy.deepcopy(f.document)
+    del altered['coverage'][face_return_coverage.KEY]
+    with pytest.raises(ValueError, match='differs from the signed public result'):
+        face_return_coverage.validate_commitment(altered, canonical_hash(coverage))
+    with pytest.raises(ObjectIntegrityError, match='differs from the frozen analysis'):
+        multimedia_evidence._verify_video(altered, f.store, {}, result=f.result)
+
+    monkeypatch.setattr(multimedia_evidence, 'default_store', lambda: f.store)
+    pdf = engine.render_pdf(f.frozen).pdf
+    (tmp_path / 'brief-face-coverage.pdf').write_bytes(pdf)
+    text = ' '.join(engine.pdf_text(pdf).split())
+    assert 'Brief face-change check' in text
+    assert 'Initial scan. No distinct brief face-change range was found in this scan.' in text
+    assert 'Denser scan. More than one face was detected in a sampled picture.' in text
+    assert '10 of 24 scheduled pictures.' in text and DETECTOR not in text
+    assert '/coverage/brief_face_review' in text and 'measured_face_frames' not in text
+    _check_public_zip(f, tmp_path, monkeypatch, pdf)
+
+
+@pytest.mark.parametrize('status,reason,scheduled,measured', [
+    ('not_applicable', 'native_scope', 0, 0),
+    ('unassessed', 'sparse_range_outside_profile', 32, 32),
+    ('no_distinct_range', None, 32, 31),
+])
+def test_brief_face_coverage_validates_exact_dispositions(status, reason, scheduled, measured):
+    worker = {'status': status, 'reason': reason, 'scheduled_frames': scheduled, 'measured_face_frames': measured}
+    coverage = face_return_coverage.from_worker(worker, 120)
+    document = {'source': {'frame_count': 120}, 'packets': [], 'coverage': {face_return_coverage.KEY: coverage}}
+    face_return_coverage.validate_commitment(document, canonical_hash(coverage))
+    coverage['observations'] = ['No suspicious frames anywhere in the clip.']
+    with pytest.raises(ValueError, match='wording differs'):
+        face_return_coverage.validate(document)
 
 
 def test_parent_builder_capture_assets_and_manifest_are_one_set(nested_case, monkeypatch):
@@ -556,9 +615,12 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.audio_background_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
                         'app.evidence.audio_similarity_binding',
                         'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_boundary_clock','app.evidence.face_alignment_context',
-                        'app.evidence.face_lighting_context','app.evidence.face_return_binding','app.evidence.video_packet_versions','app.evidence.picture_hold_binding', 'app.evidence.picture_sequence',
+                        'app.evidence.face_lighting_context','app.evidence.face_return_binding','app.evidence.face_return_coverage',
+                        'app.evidence.video_packet_versions','app.evidence.picture_hold_binding', 'app.evidence.picture_sequence',
                         'app.evidence.mouth_local_hold_binding','app.evidence.source_geometry',
-                        'app.evidence.image_eligibility','app.evidence.image_copy_similarity_binding','app.evidence.document_scope'):
+                        'app.evidence.image_eligibility','app.evidence.image_copy_similarity_binding',
+                        'app.evidence.image_copy_affine_binding','app.evidence.image_embedded_pair_binding',
+                        'app.evidence.document_scope'):
             return None
         if fullname.startswith(('app.storage','app.core.config','app.detectors','app.evidence','app.api')):
             raise RuntimeError('Offline verifier imported runtime: '+fullname)

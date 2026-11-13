@@ -1,0 +1,15 @@
+{% set readings = evidence.unselected_writing_responses %}
+<h3>Additional recorded passage responses</h3>
+<p class="caption">The listed ranges show what each check read together. Displaying these responses adds no weight to the overall assessment.</p>
+<table class="multimedia-locator">
+<thead><tr><th>Record</th><th>Scored input ranges</th><th>Recorded response</th></tr></thead>
+<tbody>
+{% for row in readings.rows %}
+<tr id="document-response-{{ row.id }}"><td>{{ row.id }}<br>{{ row.check }}</td>
+<td>{% for span in row.spans %}{% set source = row.sources[loop.index0] %}
+{% if source.kind == 'pdf' %}Page {{ source.page }} ({{ 'recognized text' if source.extraction == 'ocr' else 'selectable text' }}){% elif source.kind == 'email' %}Email part {{ source.mime_part }} ({{ source.quote_role }}){% else %}Paragraph {{ source.paragraph }}{% endif %}
+[{{ span.start }}, {{ span.end }}){% if not loop.last %}<br>{% endif %}{% endfor %}</td>
+<td>{{ row.label }}<br>{{ '%.3f' | format(row.response) }} raw{% if row.excerpt %}<br>“{{ row.excerpt }}{% if row.shortened %}…{% endif %}”{% endif %}</td></tr>
+{% endfor %}
+</tbody></table>
+<p class="caption">The raw response applies to the full input. The report gives no authorship conclusion for unchecked text. {% if readings.omitted_windows %}The display limit omitted {{ readings.omitted_windows }} additional eligible responses. {% endif %}Exact input text and hashes are available in the JSON report at <span class="mono">/coverage/unselected_passage_responses</span>.</p>

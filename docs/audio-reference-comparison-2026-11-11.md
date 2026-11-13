@@ -30,7 +30,7 @@ Version 5 also compares the left and right channels of the first audio stream se
 
 Using the 12 retained six-second speech groups with competing room speech, an engineered control applied each generated or ordinary replacement to the left channel and the equal-and-opposite change to the right channel. The mono mix matched in all 48 pairs. Channel comparison recovered all 12 generated replacements, all 24 ordinary replacements, and zero differences in all 12 untouched pairs. A second panel used 26 pairs from the held measured-room stereo mixtures. Channel comparison reproduced the sample-level differences on all 18 edits, including the room response tails, and found zero differences on six untouched copies and two isolated background controls. A lossless FLAC conversion matched both channels. The controlled cancellation tests validate the sample measurement and do not represent prevalence or detection accuracy on random uploads. [Competing speech panel](audio-remote-neighbor-replication-2026-11-12.md) · [Measured-room stereo panel](audio-measured-spatial-transfer-2026-11-12.md)
 
-Local Chrome verified six waveforms, four playable excerpts, and API-equivalent PDF and JSON for the 0.320–0.960 s example. An independent calculation checked the two source hashes, each range and its changed samples, and WAV readback. Offline JSON replay reproduced the exact artifacts. The request created no new job, payment, analysis, or retained evidence object.
+Local Chrome verified six waveforms, four playable excerpts, and API-equivalent PDF and JSON for the 0.320–0.960 s example. An independent calculation checked the two source hashes, each range and its changed samples, and WAV readback. Offline JSON replay reproduced the exact artifacts. The request created no new job, payment, analysis, or retained evidence object. The separate stereo reader also verified FLAC, 44.1 kHz AAC, and 48 kHz Opus deliveries. FLAC preserved the original one range per channel. The lossy AAC and Opus pairs yielded 19 and eight ranges per channel, respectively, which shows why these raw differences do not establish an edit boundary after re-encoding.
 
 ### Volume-adjusted copies with recorded competing speech
 
@@ -71,3 +71,9 @@ python -m scripts.compare_audio_references earlier.wav analyzed.wav chipmunk-ver
 ```
 
 Replay uses the app's measurement implementation and supports all five export versions. Record the FFmpeg version if runs produce different decoded bytes. Keep private audio and exports in your local workspace.
+
+For a measured version 5 stereo section, a separate reader needs only Python 3.11 or newer, FFmpeg and FFprobe. From the repository root, give it both original files and the JSON downloaded from the browser. It checks the original hashes, decoded channel bytes and clocks, every displayed interval, waveform and WAV against the originals. It verifies the channel comparison only.
+
+```sh
+python3 -B -IS backend/scripts/verify_stereo_reference.py earlier.wav analyzed.wav chipmunk-verify-audio-comparison.json
+```

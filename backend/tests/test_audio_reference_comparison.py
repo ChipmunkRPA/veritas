@@ -23,6 +23,7 @@ from app.evidence import audio_reference
 from app.reports.media_reference_pdf import render as render_comparison
 from app.storage.db import Analysis, Artefact, BillingOrderRow, Job, utcnow
 from scripts.compare_audio_references import run
+from scripts.verify_stereo_reference import verify as verify_stereo
 
 pytestmark = pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg required")
 
@@ -75,6 +76,16 @@ def test_stereo_comparison_preserves_changes_hidden_by_downmix_and_exact_tail(tm
                                                "Source ticks [19840, 20123)"))
     output = tmp_path / "stereo-replay"
     assert run(earlier, analyzed, output) == run(earlier, analyzed, output, verify=True) == record
+    browser_export = tmp_path / "browser-export.json"
+    browser_export.write_text(json.dumps({"comparison": record, "assets": {
+        name: base64.b64encode(raw).decode() for name, raw in assets.items()}}))
+    assert verify_stereo(earlier, analyzed, browser_export) == {
+        channel: {"differing_samples": 723, "ranges": 2, "previews_verified": 4} for channel in ("left", "right")}
+    tampered = json.loads(browser_export.read_bytes())
+    tampered["comparison"]["stereo_comparison"]["channels"]["left"]["ranges"][0]["last_differing_sample"] += 1
+    browser_export.write_text(json.dumps(tampered))
+    with pytest.raises(ValueError, match="Measured source range differs"):
+        verify_stereo(earlier, analyzed, browser_export)
     legacy, _ = audio_reference.compare(earlier, analyzed, include_stereo=False)
     historical = tmp_path / "historical.json"
     historical.write_text(json.dumps({"comparison": legacy, "assets": {}}))

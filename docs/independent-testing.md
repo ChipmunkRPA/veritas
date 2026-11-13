@@ -28,7 +28,9 @@ that the signature binds the document itself.
 
 The [fresh video timing study](video-lipsync-repeat-fresh-actors-2026-11-13.md#replay)
 includes two public source plans and runners that recover the exact native
-clip clocks. The [JPEG90 reflection study](image-regional-jpeg90-reflection-2026-11-13.md)
+clip clocks. The [paired soundtrack comparison](video-soundtrack-reencode-2026-11-13.md#replay)
+uses those public sources and checks the original picture and sample positions
+in two differently encoded copies. The [JPEG90 reflection study](image-regional-jpeg90-reflection-2026-11-13.md)
 recounts the original-mask outcomes on both source banks.
 
 The [noisy voice diagnostic](audio-source-isolation-diagnostic-2026-11-13.md#replay)
@@ -41,6 +43,11 @@ downloads about 12.3 MB from the AMI publisher and verifies the exact source
 intervals and all 192 published measurements. The [GAO Word replay](writing-gao-archive-comparison-2026-11-13.md#word-changes-across-paragraphs)
 rebuilds 120 native Word deliveries from the public archive pack and checks
 each reported paragraph and run position.
+
+The [PartialSpoof source audit](audio-partialspoof-source-audit-2026-11-13.md#replay)
+checks publisher protocols, timing annotations and bounded delivery probes
+with standard-library Python. It reports what the labels support before
+any voice model is trained or evaluated.
 
 The [JPEG90 paired-source audit](image-jpeg90-reflection-source-context-2026-11-13.md)
 replays the original regional masks and checks whether highlighted pixels

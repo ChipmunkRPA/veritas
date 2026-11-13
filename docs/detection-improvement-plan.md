@@ -97,6 +97,12 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [re-encoded video soundtrack comparison](video-soundtrack-reencode-2026-11-13.md)
+  found 30 of 40 expressive and eight of 16 conversational timing shifts
+  per audio carrier on matching H.264 pairs. It produced no timing finding
+  on 154 controls per carrier, including synchronized mouth and full-frame
+  changes. The local evidence shows both source timelines and carries
+  zero AI-confidence weight.
 - The [Word paragraph comparison](writing-gao-archive-comparison-2026-11-13.md#word-changes-across-paragraphs)
   localized 38 of 48 authored changes across paragraph breaks on 24
   held report sources. No unchanged reflow, boundary deletion or quote
@@ -113,6 +119,11 @@ integration remains unfinished.
   edited intervals. Combining it with dense speech scores found none of
   12 known edits at the locked point and added no gain at equal ordinary
   group counts. It stays experimental.
+- The [PartialSpoof source audit](audio-partialspoof-source-audit-2026-11-13.md)
+  verified the published protocols and 121,461 timing records. The release
+  supports preparation of a speaker-held training panel, subject to native
+  audio clock checks. It omits per-edit generator identity, so a separate
+  source with named generators is needed for confirmation.
 - The [PDF Content Credentials check](pdf-content-credentials-2026-11-13.md)
   verifies a whole-file AI declaration locally before acquiring writing models.
   Signed document coverage, modified PDF controls and payment-first behavior

@@ -274,13 +274,23 @@ def _soundtrack_timing_page(document, timing, assets):
     if timing["status"] != "local_shift":
         return
     span = timing["range"]
-    picture = span["picture"]
-    _text(page, MARGIN, 235, f"Analyzed clip picture {picture['frame_index']} at {picture['time_s']:.3f} s", font="hebo")
-    _text(page, MARGIN, 252, f"PTS {picture['pts']} at {picture['time_base']} s per tick", size=9, color=MUTED)
-    page.insert_image(pymupdf.Rect(MARGIN, 263, MARGIN + 260, 428), stream=assets[picture["asset"]["file"]])
+    if pictures := span.get("paired_pictures"):
+        width = (RIGHT - MARGIN - 20) / 3
+        for col, role in enumerate(("before", "during", "after")):
+            x = MARGIN + col * (width + 10)
+            _text(page, x, 232, role.capitalize(), font="hebo", size=10)
+            for top, side in zip((253, 346), LABELS, strict=True):
+                picture = pictures[role][side]
+                _text(page, x, top - 9, f"{LABELS[side]} · {picture['time_s']:.3f} s", size=9, color=MUTED)
+                page.insert_image(pymupdf.Rect(x, top, x + width, top + 74), stream=assets[picture["asset"]["file"]])
+    else:
+        picture = span["picture"]
+        _text(page, MARGIN, 235, f"Analyzed clip picture {picture['frame_index']} at {picture['time_s']:.3f} s", font="hebo")
+        _text(page, MARGIN, 252, f"PTS {picture['pts']} at {picture['time_base']} s per tick", size=9, color=MUTED)
+        page.insert_image(pymupdf.Rect(MARGIN, 263, MARGIN + 260, 428), stream=assets[picture["asset"]["file"]])
     maximum = max(.01, *(abs(level) for side in LABELS for field in ("low", "high")
                         for level in span[side]["waveform"][field]))
-    for y, (side, label) in zip((503, 635), LABELS.items(), strict=True):
+    for y, (side, label) in zip((498, 644) if pictures else (503, 635), LABELS.items(), strict=True):
         row = span[side]
         first, end = row["samples"]
         _text(page, MARGIN, y - 61, f"{label}  {row['start_s']:.3f} to {row['end_s']:.3f} s", font="hebo")

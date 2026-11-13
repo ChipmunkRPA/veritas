@@ -1,4 +1,4 @@
-"""Find bounded shifts of matching soundtrack excerpts relative to identical pictures."""
+"""Find bounded soundtrack shifts relative to corresponding pictures."""
 
 from __future__ import annotations
 
@@ -16,6 +16,7 @@ from app.core.canonical import canonical_hash
 from app.detectors.audio.decode import SAMPLE_RATE, wav_bytes
 from app.detectors.audio.waveform import envelope
 from app.detectors.video.decode import DecodeError, decode_frames
+from app.evidence import video_reference_soundtrack_reencode as reencode
 from app.evidence.audio_reference import _wav_asset
 
 WINDOW = 2560  # 160 ms
@@ -124,29 +125,28 @@ def _clip(assets, side, track, interval, origin):
             "audio": _wav_asset(assets, f"soundtrack-shift-{side}.wav", data)}
 
 
-def _picture(assets, path, table, origin, span):
-    clock = [(tick - table.pts[0]) * table.tb for tick in table.pts]
-    middle = origin + Fraction(sum(span), 2 * SAMPLE_RATE)
-    index = max(0, bisect_right(clock, middle) - 1)
+def _picture_at(assets, path, table, index, *, prefix="soundtrack-shift-picture"):
     with closing(decode_frames(path, table, [index], timeout_s=8)) as frames:
         frame = next(frames, None)
         if frame is None or frame.index != index or frame.pts != table.pts[index] or not frame.pts_verified:
             raise DecodeError("Could not retrieve the native picture at the matched sound excerpt.")
-        filename = f"soundtrack-shift-picture-{index:03d}.png"
+        filename = f"{prefix}-{index:03d}.png"
         with Image.fromarray(frame.rgb) as picture, io.BytesIO() as output:
             picture.save(output, "PNG")
             data = output.getvalue()
         assets[filename] = data
         return {"frame_index": index, "pts": frame.pts, "time_base": table.time_base,
-                "time_s": float(clock[index]), "rgb_sha256": sha256(frame.rgb).hexdigest(),
+                "time_s": float((frame.pts - table.pts[0]) * table.tb), "rgb_sha256": sha256(frame.rgb).hexdigest(),
                 "asset": {"file": filename, "sha256": sha256(data).hexdigest(), "media_type": "image/png"}}
 
 
-def assess(path, table, picture, audio, tracks, assets):
-    """Bind the selected audio timing and picture to the original supplied clips."""
-    result = {"status": "unassessed", "scope": SCOPE, "affects_overall_confidence": False}
-    if picture is None or picture["changed_frames"]:
-        return result | {"summary": "This timing check requires identical decoded pictures and matching picture clocks."}
+def _picture(assets, path, table, origin, span):
+    clock = [(tick - table.pts[0]) * table.tb for tick in table.pts]
+    middle = origin + Fraction(sum(span), 2 * SAMPLE_RATE)
+    return _picture_at(assets, path, table, max(0, bisect_right(clock, middle) - 1))
+
+
+def _assess(table, picture, audio, tracks, assets, result, picture_witness, summary_end):
     if audio["status"] != "measured" or not MIN_SAMPLES <= audio["earlier"]["samples"] <= MAX_SAMPLES:
         return result | {"summary": "This timing check needs two matching continuous soundtrack clocks and at least 1.5 seconds of audio."}
     origin = Fraction(audio["earlier"]["relative_start"])
@@ -164,9 +164,45 @@ def assess(path, table, picture, audio, tracks, assets):
         return result | {"summary": "The matched sound excerpts extend beyond the verified picture timeline."}
     direction = "later" if best["shift_samples"] > 0 else "earlier"
     milliseconds = best["shift_samples"] * 1000 / SAMPLE_RATE
-    return result | {"status": "local_shift", "summary": f"Matching soundtrack audio moved {abs(milliseconds):.1f} ms {direction} relative to the same pictures.",
+    return result | {"status": "local_shift",
+                     "summary": f"Matching soundtrack audio moved {abs(milliseconds):.1f} ms {direction} {summary_end}",
                      "offset_ms": milliseconds, "sample_rate": SAMPLE_RATE, "picture_pair_sha256": picture["frame_pairs_sha256"],
                      "range": best | {"earlier": _clip(assets, "earlier", tracks[0], best["earlier_samples"], origin),
                                       "submitted": _clip(assets, "submitted", tracks[1], best["submitted_samples"], origin),
-                                      "picture": _picture(assets, path, table, origin, best["submitted_samples"]),
+                                      **picture_witness(origin, best["submitted_samples"]),
                                       "support_sha256": canonical_hash(best)}}
+
+
+def assess(path, table, picture, audio, tracks, assets):
+    """Bind the selected audio timing and picture to the original supplied clips."""
+    result = {"status": "unassessed", "scope": SCOPE, "affects_overall_confidence": False}
+    if picture is None or picture["changed_frames"]:
+        return result | {"summary": "This timing check requires identical decoded pictures and matching picture clocks."}
+    return _assess(table, picture, audio, tracks, assets, result,
+                   lambda origin, span: {"picture": _picture(assets, path, table, origin, span)},
+                   "relative to the same pictures.")
+
+
+def assess_reencode(paths, tables, picture, audio, tracks, assets):
+    """Measure a shift only when whole-picture and local-grid agreement both hold."""
+    result = {"status": "unassessed", "basis": reencode.BASIS, "scope": reencode.SCOPE,
+              "affects_overall_confidence": False}
+    if not picture["soundtrack_picture_comparison"]["within_bounds"]:
+        return result | {"summary": "Local soundtrack timing could not be assessed because the paired pictures differ too much."}
+    if (audio["earlier"]["relative_start"] != "0" or not reencode.FRAME_COUNT * reencode.HOP
+            <= audio["earlier"]["samples"] <= reencode.FRAME_COUNT * reencode.HOP + 1024):
+        return result | {"summary": "Local soundtrack timing requires matching continuous sound clocks starting at the first picture."}
+
+    def witnesses(_origin, span):
+        start, end = span
+        hop = reencode.HOP
+        positions = {"before": max(0, start // hop - 1), "during": (start + end) // (2 * hop),
+                     "after": (end + hop - 1) // hop}
+        return {"paired_pictures": {
+            role: {side: _picture_at(assets, path, table, index, prefix=f"soundtrack-shift-{side}-{role}")
+                   for side, path, table in zip(("earlier", "submitted"), paths, tables, strict=True)}
+            for role, index in positions.items()
+        }}
+
+    return _assess(tables[1], picture, audio, tracks, assets, result, witnesses,
+                   "between the clips over corresponding pictures.")

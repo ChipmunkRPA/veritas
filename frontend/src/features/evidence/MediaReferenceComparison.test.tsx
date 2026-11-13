@@ -115,6 +115,42 @@ it('renders the signed local soundtrack shift and exact native picture from the 
   expect(screen.getAllByRole('img', { name: /matched soundtrack waveform/ })).toHaveLength(2)
 })
 
+it.each([true, false])('validates paired re-encoded soundtrack pictures, complete = %s', async (complete) => {
+  const picture = { file: 'native.png', media_type: 'image/png', sha256: 'a'.repeat(64) }
+  const audio = { file: 'matched.wav', media_type: 'audio/wav', sha256: 'b'.repeat(64) }
+  const waveform = { low: [-0.4], high: [0.2] }
+  const pair = (frame_index: number) => {
+    const item = { frame_index, time_s: frame_index / 25, asset: picture }
+    return { earlier: item, submitted: item }
+  }
+  const summary = 'Matching soundtrack audio moved 200.0 ms later between the clips over corresponding pictures.'
+  const comparison = {
+    schema: 'chipmunk.video-reference-comparison/11', status: 'measured', interpretation: 'Decoded source differences.',
+    submitted: { width: 480, height: 360 }, picture: { matching_frames: 0, changed_frames: 63, ranges: [] },
+    soundtrack_alignment: { summary, scope: 'Local timing across re-encoded copies.', status: 'local_shift',
+      basis: 'paired_h264_soundtrack_picture_grid/1', range: {
+        earlier: { start_s: .68, end_s: 1.28, audio, waveform }, submitted: { start_s: .88, end_s: 1.48, audio, waveform },
+        paired_pictures: { before: pair(21), during: pair(29), ...(complete ? { after: pair(37) } : {}) },
+      },
+    },
+  }
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(Response.json({ available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets: { 'native.png': 'iVBORw0KGgo=', 'matched.wav': 'UklGRg==' } })))
+  show()
+  fireEvent.change(await screen.findByLabelText('Earlier video'), { target: { files: [new File(['movie'], 'earlier.mp4')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
+  if (complete) {
+    expect(await screen.findByText(summary)).toBeTruthy()
+    expect(screen.getByAltText('before · Earlier clip · 0.840 s')).toBeTruthy()
+    expect(screen.getByAltText('after · Analyzed clip · 1.480 s')).toBeTruthy()
+    expect(screen.getAllByRole('img', { name: /^(before|during|after) ·/ })).toHaveLength(6)
+    expect(screen.getAllByRole('img', { name: /matched soundtrack waveform/ })).toHaveLength(2)
+  } else {
+    expect(await screen.findByText('The comparison response is missing its local soundtrack timing evidence.')).toBeTruthy()
+    expect(screen.queryByText(summary)).toBeNull()
+  }
+})
+
 it('shows the two picture clocks in a trimmed earlier-copy comparison', async () => {
   const picture = { file: 'frame.png', media_type: 'image/png', sha256: 'a'.repeat(64) }
   const comparison = {

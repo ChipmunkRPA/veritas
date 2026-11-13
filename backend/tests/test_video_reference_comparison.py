@@ -413,6 +413,74 @@ def test_picture_identical_soundtrack_shift_has_signed_exact_evidence(tmp_path):
     assert global_record["soundtrack_alignment"]["status"] == "no_local_shift"
 
 
+def test_reencoded_soundtrack_shift_has_exact_paired_evidence_and_rejects_matched_picture_edit(tmp_path):
+    yy, xx = np.indices((360, 480))
+    light = np.uint8(120 + 22 * np.sin(xx / 9) * np.cos(yy / 11) + 11 * np.cos((xx + yy) / 4))
+    frames = np.stack([np.roll(np.repeat(light[..., None], 3, axis=2), i % 6, axis=1) for i in range(63)])
+    rng = np.random.default_rng(488)
+    pcm = rng.integers(-7000, 7000, 40320, dtype=np.int16).astype(np.float32) / 32768
+    start, stop, offset = 14080, 24320, 3200
+    edited = pcm.copy()
+    edited[start:stop] = pcm[start - offset:stop - offset]
+
+    def mux(name, pixels, wave, crf):
+        picture = encode_lossy_comparison(tmp_path / f"{name}-pictures.mov", pixels, lossless=False, crf=crf)
+        audio = tmp_path / f"{name}.wav"
+        audio.write_bytes(wav_bytes(wave))
+        target = tmp_path / f"{name}.mov"
+        subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(picture), "-i", str(audio),
+                        "-map", "0:v:0", "-map", "1:a:0", "-c:v", "copy", "-c:a", "pcm_s16le", str(target)],
+                       capture_output=True, check=True, timeout=20)
+        return target
+
+    earlier, later = mux("earlier", frames, pcm, 23), mux("later", frames, edited, 34)
+    exact_only, _ = video_reference.compare(earlier, later)
+    assert "soundtrack_alignment" not in exact_only
+    assert exact_only["picture"]["changed_frames"] > 0
+    second_track = rng.integers(-3000, 3000, 40320, dtype=np.int16).astype(np.float32) / 32768
+    earlier = add_soundtracks(earlier, tmp_path, "earlier-multi", [second_track])
+    later = add_soundtracks(later, tmp_path, "later-multi", [second_track])
+    result, assets = video_reference.compare(earlier, later, include_soundtrack_reencode=True)
+    assert result["schema"] == video_reference.SCHEMA_WITH_REENCODED_SOUNDTRACK
+    assert result["picture"]["soundtrack_picture_comparison"]["within_bounds"]
+    assert result["additional_soundtrack"]["status"] == "measured"
+    timing = result["soundtrack_alignment"]
+    assert timing["offset_ms"] == 200 and timing["affects_overall_confidence"] is False
+    span = timing["range"]
+    assert span["submitted"]["samples"] == [start, stop] and span["earlier"]["samples"] == [start - offset, stop - offset]
+    np.testing.assert_array_equal(read_wav(assets[span["submitted"]["audio"]["file"]]), edited[start:stop])
+    for side, path in (("earlier", earlier), ("submitted", later)):
+        table = decode.probe_frames(path)
+        witnesses = [span["paired_pictures"][role][side] for role in ("before", "during", "after")]
+        assert [item["frame_index"] for item in witnesses] == [21, 30, 38]
+        for witness, frame in zip(witnesses, decode.decode_frames(path, table, [21, 30, 38]), strict=True):
+            assert frame.pts == witness["pts"] and table.time_base == witness["time_base"]
+            assert witness["rgb_sha256"] == hashlib.sha256(frame.rgb).hexdigest()
+            with Image.open(io.BytesIO(assets[witness["asset"]["file"]])) as image:
+                np.testing.assert_array_equal(np.asarray(image), frame.rgb)
+    with pymupdf.open(stream=render_comparison(result, assets), filetype="pdf") as report:
+        page = next(p for p in report if "Local soundtrack timing" in p.get_text())
+        assert all(label in page.get_text() for label in ("200.0 ms", "Before", "During", "After", "0.840 s", "1.200 s", "1.520 s"))
+        assert len(page.get_images()) == 6
+    exported = tmp_path / "comparison.json"
+    exported.write_text(json.dumps({"comparison": result, "assets": {
+        key: base64.b64encode(raw).decode() for key, raw in assets.items()}}))
+    assert run(earlier, later, exported, verify=True) == result
+    mutated = json.loads(exported.read_bytes())
+    mutated["comparison"]["soundtrack_alignment"]["range"]["paired_pictures"]["during"]["submitted"]["pts"] += 1
+    exported.write_text(json.dumps(mutated))
+    with pytest.raises(ValueError, match="differs"):
+        run(earlier, later, exported, verify=True)
+
+    changed_picture = frames.copy()
+    changed_picture[22:38, 160:208, 208:256] = 230
+    changed = mux("changed", changed_picture, edited, 34)
+    blocked, blocked_assets = video_reference.compare(earlier, changed, include_soundtrack_reencode=True)
+    assert blocked["soundtrack_alignment"]["status"] == "unassessed"
+    assert "differ too much" in blocked["soundtrack_alignment"]["summary"]
+    assert not any(name.startswith("soundtrack-shift-") for name in blocked_assets)
+
+
 @pytest.mark.parametrize(("lossless", "local_area"), [(True, False), (False, False), (False, True)],
                          ids=["earlier-ffv1", "earlier-h264", "earlier-h264-local-area"])
 def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(

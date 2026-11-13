@@ -15,6 +15,7 @@ from app.evidence.video_reference import (
     SCHEMA_WITH_ADDITIONAL_SOUNDTRACK,
     SCHEMA_WITH_CHANNEL_TIMING,
     SCHEMA_WITH_MARKED_SOUND_FALLBACK,
+    SCHEMA_WITH_REENCODED_SOUNDTRACK,
     SCHEMA_WITH_SHORT_TIMING,
     SCHEMA_WITH_SOUNDTRACK,
     SCHEMA_WITH_TIMING,
@@ -63,9 +64,10 @@ def replay(compare, earlier: Path, submitted: Path, output: Path, *, verify: boo
 
 
 def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
-        event_seconds: Fraction | None = None, timing_model: Path | None = None) -> dict:
+        event_seconds: Fraction | None = None, timing_model: Path | None = None,
+        reencoded_soundtrack: bool = False) -> dict:
     options = {"include_trimmed": not verify, "include_local_area": not verify, "include_trim_reencoded": not verify,
-               "include_measured_interval": not verify}
+               "include_measured_interval": not verify, "include_soundtrack_reencode": reencoded_soundtrack}
     short_fallback = not verify
     local_sound = not verify
     if verify:
@@ -74,6 +76,7 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds = None
         if isinstance(record, dict):
             schema = record.get("schema")
+            reencoded_soundtrack = schema == SCHEMA_WITH_REENCODED_SOUNDTRACK
             options["include_trimmed"] = schema in (SCHEMA_WITH_TRIM, SCHEMA_WITH_TRIM_REENCODE)
             options["include_trim_reencoded"] = schema == SCHEMA_WITH_TRIM_REENCODE
             channel_timing = schema == SCHEMA_WITH_CHANNEL_TIMING
@@ -82,14 +85,15 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
                 channel_timing and (timing.get("reason") == "profile" or "changed_audio_samples" in timing)
             )
             additional = schema == SCHEMA_WITH_ADDITIONAL_SOUNDTRACK
-            composite = additional or local_sound or channel_timing
+            composite = additional or local_sound or channel_timing or reencoded_soundtrack
             local = record.get("picture", {}).get("local_comparison", {})
             options["include_local_area"] = local.get("basis") == LOCAL_AREA_BASIS
             options["include_measured_interval"] = "measured_interval" in local
             options.update(include_local=("local_comparison" in record.get("picture", {}) if composite
                                           else schema != SCHEMA),
-                           include_soundtrack=schema == SCHEMA_WITH_SOUNDTRACK
+                           include_soundtrack=schema == SCHEMA_WITH_SOUNDTRACK or reencoded_soundtrack
                            or (composite and "soundtrack_alignment" in record),
+                           include_soundtrack_reencode=reencoded_soundtrack,
                            include_additional_soundtrack=additional or (composite and "additional_soundtrack" in record),
                            include_channel_timing=channel_timing)
             if "timing" in record and schema in (SCHEMA_WITH_TIMING, SCHEMA_WITH_SHORT_TIMING, SCHEMA_WITH_SOUNDTRACK,
@@ -115,11 +119,13 @@ def main(*, description=__doc__, runner=run, marked_timing=False, clean_audio_op
     if marked_timing:
         parser.add_argument("--event-seconds", type=Fraction, help="Marked mouth closure time in the earlier video.")
         parser.add_argument("--timing-model", type=Path, help="Path to the optional pinned local landmark task.")
+        parser.add_argument("--reencoded-soundtrack", action="store_true", help="Check qualified re-encoded clips for local soundtrack shifts.")
     if clean_audio_option:
         parser.add_argument("--clean-speech", action="store_true", help="Use an earlier clean copy of the same native recording.")
     args = parser.parse_args()
     try:
-        options = {"event_seconds": args.event_seconds, "timing_model": args.timing_model} if marked_timing else {}
+        options = ({"event_seconds": args.event_seconds, "timing_model": args.timing_model,
+                    "reencoded_soundtrack": args.reencoded_soundtrack} if marked_timing else {})
         if clean_audio_option:
             options["clean_speech"] = args.clean_speech
         result = runner(args.earlier, args.submitted, args.output, verify=args.verify, **options)

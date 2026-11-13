@@ -44,10 +44,16 @@ type TimingComparison = {
   changed_audio_samples?: [number, number]
 } & Partial<Record<Side, TimingSide>>
 type SoundtrackSide = { start_s: number; end_s: number; audio: Asset; waveform: Waveform }
+type SoundtrackPicture = { frame_index: number; time_s: number; asset: Asset }
 type SoundtrackTiming = {
   summary: string
   scope: string
-  range?: Record<Side, SoundtrackSide> & { picture?: { frame_index: number; time_s: number; asset: Asset } }
+  status?: 'unassessed' | 'no_local_shift' | 'local_shift'
+  basis?: string
+  range?: Record<Side, SoundtrackSide> & {
+    picture?: SoundtrackPicture
+    paired_pictures?: Record<'before' | 'during' | 'after', Record<Side, SoundtrackPicture>>
+  }
 }
 type CleanSpeechComparison = {
   summary: string
@@ -109,7 +115,7 @@ type Comparison = {
   schema: 'chipmunk.video-reference-comparison/1' | 'chipmunk.video-reference-comparison/2' | 'chipmunk.video-reference-comparison/3'
     | 'chipmunk.video-reference-comparison/4' | 'chipmunk.video-reference-comparison/5' | 'chipmunk.video-reference-comparison/6'
     | 'chipmunk.video-reference-comparison/7' | 'chipmunk.video-reference-comparison/8' | 'chipmunk.video-reference-comparison/9'
-    | 'chipmunk.video-reference-comparison/10'
+    | 'chipmunk.video-reference-comparison/10' | 'chipmunk.video-reference-comparison/11'
   submitted: PictureDimensions
   picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
   timing?: TimingComparison
@@ -359,7 +365,7 @@ function TimingEvidence({ timing, assets }: { timing: TimingComparison; assets: 
 }
 
 function SoundtrackTimingEvidence({ timing, assets, audioOnly = false, title: customTitle }: {
-  timing: SoundtrackTiming; assets: Result['assets']; audioOnly?: boolean; title?: string
+  timing: Pick<SoundtrackTiming, 'summary' | 'scope' | 'range'>; assets: Result['assets']; audioOnly?: boolean; title?: string
 }) {
   const span = timing.range
   const picture = span?.picture
@@ -377,6 +383,23 @@ function SoundtrackTimingEvidence({ timing, assets, audioOnly = false, title: cu
           alt={`Analyzed clip picture ${picture.frame_index} at ${sourceSeconds.format(picture.time_s)} seconds`} />
         <figcaption className="text-caption text-text-muted">Picture at {sourceSeconds.format(picture.time_s)} s in the analyzed clip.</figcaption>
       </figure>}
+      {span.paired_pictures && <div className="grid gap-3 lg:grid-cols-3">
+        {(['before', 'during', 'after'] as const).map(role => <div key={role} className="space-y-2">
+          <p className="m-0 text-small font-medium capitalize">{role}</p>
+          <div className="grid grid-cols-2 gap-2">
+            {sides.map(side => {
+              const frame = span.paired_pictures?.[role][side]
+              const body = frame && assetBody(assets, frame.asset, 'image/png')
+              const label = frame && `${names[side]} · ${sourceSeconds.format(frame.time_s)} s`
+              return body && <figure key={side} className="m-0">
+                <img className="h-auto w-full rounded border border-border" loading="lazy"
+                  src={'data:image/png;base64,' + body} alt={`${role} · ${label}`} />
+                <figcaption className="mt-1 text-caption text-text-muted">{label}</figcaption>
+              </figure>
+            })}
+          </div>
+        </div>)}
+      </div>}
       <div className="grid gap-4 sm:grid-cols-2">{sides.map(side => {
         const row = span[side]
         return <div className="min-w-0 space-y-2" key={side}>
@@ -581,7 +604,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, cleanSpeechAvai
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [1, 2, 3, 4, 5, 6, 7, 8, 9]
+      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] : [1, 2, 3, 4, 5, 6, 7, 8, 9]
       if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
@@ -606,6 +629,15 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, cleanSpeechAvai
       if (schema === 'chipmunk.video-reference-comparison/10' &&
           (!trim || !('basis' in trim) || trim.basis !== 'paired_h264_trim_motion/1' || !response.comparison.picture?.local_comparison)) {
         throw new Error('The comparison response is missing its aligned local picture evidence.')
+      }
+      const timing = response.comparison.soundtrack_alignment
+      if (schema === 'chipmunk.video-reference-comparison/11' &&
+          (!response.comparison.picture || timing?.basis !== 'paired_h264_soundtrack_picture_grid/1' ||
+           !timing.summary || !timing.scope || !timing.status ||
+           (timing.status === 'local_shift' &&
+            (!timing.range?.earlier || !timing.range.submitted || !(['before', 'during', 'after'] as const).every(role =>
+              sides.every(side => timing.range?.paired_pictures?.[role]?.[side]?.asset?.file)))))) {
+        throw new Error('The comparison response is missing its local soundtrack timing evidence.')
       }
       if (!controller.signal.aborted) setResult(response)
     } catch (error) {

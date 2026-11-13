@@ -14,16 +14,62 @@ The 136 JPEG75 4:2:0 deliveries contain 15 separate photos, seven LaMa object re
 
 All useful regions occurred on Stable Diffusion insertions. Tiles recovered zero useful LaMa locations across seven sharp and seven feathered removals. The two additional LaMa highlights covered zero edited pixels despite the components passing the shifted-view agreement rule. Tiles also added five ordinary-file highlights across two newly flagged groups. The added computation was 435 crop forwards on top of the 136 whole-image forwards.
 
-## Coverage and replay
+## Second bank and replay
 
-The planned second bank contains 64 deliveries from six additional LaMa photos and one shared SDXL/Kandinsky photo. Its input-binding operation stalled while opening a local file. The worker recorded zero second-bank inference rows. The retained main-bank ledger matched all 136 frozen row identities, and independent readback verified the SHA-256 commitments and measured area of all 408 packed region masks, mask preservation, and the recorded overlap arithmetic. Re-encoding the original assets and regenerating their truth masks for a second audit remain pending. The completed bank supports keeping the tile fallback experimental. No app behavior changed and these regions carry zero authorship-confidence weight. [Main-bank receipt](evaluation-panels/image-regional-tile-rescue-main-bank-2026-11-13.json)
+The second bank contains 64 deliveries from six additional LaMa photos and one shared SDXL/Kandinsky photo. The two diffusion editor variants share a source group. The banks are disjoint by recorded photo ID, author account, credited photographer and original byte hash. The first worker stalled opening a local file before this bank began. After the workspace recovered, the runner matched the original freeze, verified the 136 main-bank rows and masks, and appended the missing 64 deliveries without rewriting the existing rows. [Second-bank sources and rights](image-masked-context-new-editors-2026-11-13.md) · [Historical main-bank receipt](evaluation-panels/image-regional-tile-rescue-main-bank-2026-11-13.json)
+
+| Check | Useful sharp edits | Useful feathered edits | Ordinary highlights | Ordinary groups highlighted | Misplaced edit highlights |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Aligned JPEG luma | 0/8 | 0/8 | 3/48 | 3/7 | 0/16 |
+| Native regional | 1/8 | 0/8 | 5/48 | 2/7 | 2/16 |
+| Native regional with tile fallback | 1/8 | 0/8 | 9/48 | 2/7 | 5/16 |
+
+The native check localized one sharp SDXL edit. The fallback added two LaMa
+highlights with zero edit overlap and one Kandinsky highlight below the
+useful overlap and recall requirements. Across both banks the fallback
+added zero useful locations and raised ordinary highlights from 13/154 to
+22/154, across five and seven source groups respectively. Misplaced
+edited-file highlights rose from four to nine. No useful LaMa locations
+were found on the 26 sharp and feathered deliveries from 13 photos.
+The fallback stays experimental. The test made 200 whole-image forwards
+and 592 additional crop forwards. These observations carry zero
+authorship-confidence weight. [Completed receipt](evaluation-panels/image-regional-tile-rescue-complete-2026-11-13.json)
+
+The local replay rematerialized all 200 JPEGs and their exact changed-pixel
+truth masks, verified all packed selected masks and recomputed every
+intersection and recall value. The offline reader separately recomputes
+both panels, ordinary source-group counts and the paired result from
+anonymous pixel counts.
+
+The frozen advancement criteria required at least two additional useful
+feathered LaMa source groups, at most two newly highlighted ordinary
+source groups and at most three additional misplaced edit highlights.
+The observed counts were zero, two and five. The study kept the fixed
+model response and area rules throughout.
 
 The released FLAME checkpoint remains a separate comparison candidate. Its publisher licenses the exact v0.1.0 checkpoint and configuration under Apache-2.0. The separate Meta SAM 2.1 base checkpoint is Apache-2.0. The FLAME adapter contains 100 tensors and passed an isolated weights-only load. The base-model inference and detection evaluation are pending. [FLAME release](https://github.com/phoenixnir/FLAME/releases/tag/v0.1.0) · [Meta model license](https://github.com/facebookresearch/sam2#license)
 
-Run the standard-library reader to recompute the main-bank table from
-anonymous pixel counts and source groups:
+Run the standard-library reader to recompute both banks from anonymous
+pixel counts and source groups. It can also read the historical main-bank
+receipt.
 
 ```sh
 python3 -B -IS backend/scripts/review_image_regional_tile_rescue_main.py \
-  docs/evaluation-panels/image-regional-tile-rescue-main-bank-2026-11-13.json
+  docs/evaluation-panels/image-regional-tile-rescue-complete-2026-11-13.json
+```
+
+Use the original retained inputs from the [regional JPEG study](image-regional-jpeg-transfer-2026-11-13.md#reproduce-the-study)
+to repeat inference. Use a new private run directory with the frozen
+runner for a full run. The recovery driver requires the exact historical
+freeze and journal prefix and appends only still-missing deliveries.
+
+```sh
+export PYTHONPATH=backend OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+for phase in freeze run review; do
+  backend/.venv/bin/python -B -m scripts.image_regional_tile_rescue_transfer "$phase" \
+    --archive "$archive" --prior-probe "$probe" --residual "$residual" \
+    --early-f5 "$early_f5" --later-f5 "$later_f5" --checkpoint "$checkpoint" \
+    --output-fresh "$fresh_transfer" --external "$new_editor_transfer" \
+    --output "$run" --publication "$receipt" || exit 1
+done
 ```

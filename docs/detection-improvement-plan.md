@@ -101,17 +101,17 @@ integration remains unfinished.
   measured all 39 known edit locations and added zero useful locations. It
   added flags on three eLife control works and stays offline.
 - The [JPEG tile fallback](image-regional-tile-rescue-2026-11-13.md) added no
-  useful locations across 30 edits in the main bank and raised ordinary
-  highlights from eight to 13 of 106 files. It stays experimental. The second
-  bank could not open the local inputs.
+  useful locations across 46 known edits and raised ordinary highlights
+  from 13 to 22 of 154 files. Both source banks completed and all 200 JPEG
+  and mask bindings replayed. The fallback stays experimental.
 - The [paired room and background-voice stress test](audio-room-stress-transfer-2026-11-13.md)
   measured five of seven dry or early-room locations versus three of seven
   with the full room response. Neither tested separator met its held advancement
   gate across background levels.
 - The [mouth luminance detail trial](video-mouth-luma-condition-2026-11-13.md)
-  assessed all 23 held neural edits but localized none at either frozen point.
-  Native frame and crop commitments replayed. Scoring the H.264 copies remains
-  pending.
+  measured all 23 native neural edits and all 17 H.264 redraws. Both arms
+  localized zero edits and flagged zero ordinary files at the frozen points.
+  Frame, crop and carrier-clock commitments replayed. The checks stay offline.
 - The [cross-format draft comparison](document-mixed-format-comparison-2026-11-13.md)
   adds exact wording evidence for TXT, DOCX and supported PDFs. Public source
   replay checked 60 edited and 60 unchanged comparisons in all six directions.

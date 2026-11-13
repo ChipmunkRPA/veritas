@@ -110,8 +110,22 @@ DIFFICULT_EDITS = {
         f"{PANELS}/writing-two-context-transfer-2026-11-12.json",
     )),
 }
+LOCALIZATION_LIMITS = {
+    "image": ("review_image_regional_tile_rescue_main.py", "image-regional-tile-rescue-complete-2026-11-13.json", (), ()),
+    "video": ("review_video_mouth_luma_condition.py", "video-mouth-luma-condition-h264-2026-11-13.json", (), (
+        f"{SCRIPTS}/review_video_mouth_track_cycle.py",
+    )),
+    "audio": ("review_audio_room_stress_transfer.py", "audio-room-stress-transfer-2026-11-13.json", (), ()),
+    "writing": ("writing_entropy_conditioned_transfer.py", "writing-entropy-conditioned-2026-11-13.json", ("verify",), (
+        f"{SCRIPTS}/review_writing_long_position.py",
+        f"{PANELS}/writing-long-position-transfer-2026-11-12.json",
+        f"{PANELS}/writing-f1000-position-transfer-2026-11-13.json",
+        f"{PANELS}/writing-elife-long-position-transfer-2026-11-13.json",
+        f"{PANELS}/writing-f1000-revision-spans-2026-11-13.json",
+    )),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
-          "difficult-edits")
+          "difficult-edits", "localization-limits")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -160,6 +174,9 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         panel_names = (panel,)
     elif suite == "difficult-edits":
         script, panel, prefix, dependencies = DIFFICULT_EDITS[modality]
+        panel_names = (panel,)
+    elif suite == "localization-limits":
+        script, panel, prefix, dependencies = LOCALIZATION_LIMITS[modality]
         panel_names = (panel,)
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]

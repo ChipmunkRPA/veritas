@@ -77,6 +77,19 @@ The [entropy-conditioned writing trial](writing-entropy-conditioned-2026-11-13.m
 replays exact sentence outcomes and genuine-work flags from scalars without
 the text, token IDs or weights.
 
+### Replay the latest localization comparisons
+
+The four-study suite covers the complete JPEG tile trial, native and H.264
+mouth detail, the audio room and competing-speech ladder, and mixed-writing
+token scores. It uses only the published measurements and Python 3.11 or
+later. It does not require model weights, a test account or a paid analysis.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/localization-limits.json" --suite localization-limits
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/localization-limits.json" --format-issue
+```
+
 The [large-image copy comparison](image-affine-native-scale-2026-11-11.md#reproduce)
 provides a licensed roster, exact source commitments, and a separate reader
 for the PNG and JPEG localization and ordinary-control results.

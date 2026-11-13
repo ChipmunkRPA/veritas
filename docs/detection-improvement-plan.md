@@ -97,6 +97,12 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [paired native face edges study](video-face-paired-edge-transfer-2026-11-12.md)
+  refined two of three previously missed H.264 swap ranges to the exact native
+  boundaries. It added no ranges on 79 ordinary deliveries. The fixed H.264
+  advancement gate failed on the number of gains and the share of eligible
+  edits assessed. A model-free reader and native frame verification reproduce
+  the reported results.
 - The [environmental sound comparison](environmental-embedding-transfer-2026-11-12.md)
   held the voice fixed while changing background origin across 348 exact
   deliveries. Mixed-condition spectral fitting found 21/36 generated

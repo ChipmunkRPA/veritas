@@ -71,6 +71,10 @@ the authored edit locations separately from the signed app output.
 The [720p30 extension](video-face-two-returns-hd-2026-11-12.md) independently
 reopens the source clock and both guarded boundaries on the higher-resolution
 delivery, including two successive encodes.
+The [paired native face edges study](video-face-paired-edge-transfer-2026-11-12.md)
+recalculates how a change and return refine an existing face interval. Its
+native replay checks exact before, during and after pictures. Genuine speaker
+cuts remain visible in the baseline counts.
 The [subject-context comparison](video-face-subject-context-2026-11-12.md)
 checks whether the area below the face helps recognize ordinary speaker cuts.
 The [near-head transfer](video-face-near-head-transfer-2026-11-12.md) adds

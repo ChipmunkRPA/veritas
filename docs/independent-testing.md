@@ -228,6 +228,10 @@ The [enhanced-speech comparison](audio-noise-views-transfer-2026-11-12.md)
 keeps the development and held noise recordings separate. Its public
 replay recounts the fixed decisions and shows the best held gain allowed
 by each added genuine false-alarm budget.
+The [staggered speech and noise-reduction comparison](audio-noise-window-transfer-2026-11-12.md)
+separately replays native scheduling and spectral reduction on 18 labeled
+partial edits from six generators. It verifies the original-response
+calibration, localized ranges and additional genuine time highlighted.
 The [two-enhancer replication](audio-nemotron-noise-transfer-2026-11-12.md)
 provides a model-free replay for four held sound scenes and a separate
 confirmation at identical decision points. It distinguishes additional

@@ -1,0 +1,20 @@
+{
+  "base_revision": "8acd5e7abb39761167831e947aea1a8ba26121d6",
+  "dependency_sha256": {
+    "backend/app/detectors/audio/calibration.py": "00294b0c36cb37a06d516a30ea6171e409c6df0f88486660faf758070ab10ba5",
+    "backend/app/detectors/audio/calibrations/local-speech-v3.json": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "backend/app/detectors/audio/content.py": "bc5d3b07e648a103b72e5dc1d188c8da35ac8582d7845a84084607e87c9b6e96",
+    "backend/app/detectors/audio/upgraded.py": "017c396315bdb41f6e419589c6d81081b2a8089e2157c3ce14a8c0accd6f9836",
+    "backend/app/detectors/video/adapters/audio.py": "6f111f7ca382dc203b04a77125220e773b1873bbec281c35d8bb397d3cdf0aa6",
+    "backend/app/engine/profiles.py": "528453333d55385297ff2ae6de6fc03c9ffd04bc911955bf2c98c09dc4bc6ce3",
+    "backend/scripts/audio_gtcrn_traffic.py": "e23291125f3c783e63804ea494dd3b71a238b042ee20b11bfe6cc5bc31b4db90",
+    "backend/scripts/audio_noise_views_transfer.py": "dbf61a795e41698fd8536358ffedb2c4a777365ca6d2da90ad53ab5179f8eb9a",
+    "backend/scripts/audio_partial_publisher_transfer.py": "b4beb1e30170b11b2e0bb0a521dbc1570116a6e088db4dbdd9da5c63efad05a4",
+    "backend/scripts/audio_radar_transfer.py": "52c922ed9d1632f517c97de199ef396dfe8b4bee8bfb055a51e246315b093f7b",
+    "backend/scripts/audio_reduced_background_localization.py": "055c144b6dab6b0368e05fd3980d5eddd295e23d64fdcde5e3ce908b0406fa18",
+    "backend/scripts/audio_vocal_event_mixtures.py": "4747813e96bf8d1ffdfd34054fd92df1a09a775d43ce3647f9a61110c1db87ce",
+    "backend/scripts/review_audio_reduced_background_localization.py": "0def90d0e4b116cdf8b54c30e04e052aaf950c9c42d73d4f287e74eca17aa123",
+    "backend/scripts/run_audio_specialists_v15.py": "ab685e87d8212e290f0b08d4b46f9e343f6778e26eff05f42891929e07e96e5c"
+  },
+  "freeze_sha256": "46b66c7eb4571546559caeaf4608f0986fb7f074af91be6ed4627bf594c3178d"
+}

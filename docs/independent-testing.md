@@ -38,6 +38,20 @@ python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/deliver
 python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/delivery-reference.json" --format-issue
 ```
 
+### Replay the short edit confirmation studies
+
+Recompute published results for [JPEG90 agreement](image-regional-jpeg90-quality-agreement-2026-11-13.md),
+[repeated speech and mouth motion](video-lipsync-repeat-motion-2026-11-13.md),
+[voice resonance under competing speech](audio-formant-local-transfer-2026-11-13.md)
+and [changed-word writing supervision](writing-word-edit-transfer-2026-11-13.md).
+The guides describe the held misses, false flags and native replays.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/short-edits.json" --suite short-edit-checks
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/short-edits.json" --format-issue
+```
+
 ### Replay the single-upload transfer results
 
 Recount the [native image prediction trial](image-bayer-prediction-transfer-2026-11-13.md),

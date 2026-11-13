@@ -258,11 +258,23 @@ DELIVERY_AND_REFERENCE_TRANSFERS = {
         "writing_temperature_transfer", "writing_interval_transfer", "writing_revision_trajectory_transfer",
     ))),
 }
+SHORT_EDIT_CHECKS = {
+    "image": ("review_image_regional_jpeg90_quality_confirmation.py", ("image-regional-jpeg90-quality-confirmation-2026-11-13.json",), (), (
+        f"{SCRIPTS}/review_image_regional_jpeg90_quality_agreement.py", f"{SCRIPTS}/review_image_regional_jpeg90_carrier.py",
+    )),
+    "video": ("review_video_lipsync_repeat_motion.py", ("video-lipsync-repeat-picture-guard-2026-11-13.json",), (), ()),
+    "audio": ("review_audio_formant_local_transfer.py", ("audio-formant-local-transfer-2026-11-13.json",), (), ()),
+    "writing": ("writing_word_edit_transfer.py", ("writing-word-edit-transfer-2026-11-13.json",), ("review",), tuple(
+        f"{SCRIPTS}/{name}.py" for name in (
+            "writing_interval_transfer", "writing_revision_trajectory_transfer", "writing_temperature_transfer", "writing_focus_v3",
+        )
+    )),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
           "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion",
           "short-edit-transfer-2026-11-13", "delivery-and-localization", "reference-and-rotation", "single-upload-transfers",
-          "processing-and-short-edits", "delivery-and-reference-transfers")
+          "processing-and-short-edits", "delivery-and-reference-transfers", "short-edit-checks")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -338,6 +350,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = PROCESSING_AND_SHORT_EDITS[modality]
     elif suite == "delivery-and-reference-transfers":
         script, panel_names, prefix, dependencies = DELIVERY_AND_REFERENCE_TRANSFERS[modality]
+    elif suite == "short-edit-checks":
+        script, panel_names, prefix, dependencies = SHORT_EDIT_CHECKS[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

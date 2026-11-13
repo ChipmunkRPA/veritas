@@ -97,6 +97,26 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [selectable PDF archive comparison](writing-gao-archive-comparison-2026-11-13.md)
+  matches indexed report wording and places verified changes on the original
+  pages, with the source crop in the browser and report. A two-page transfer
+  matched 19 of 20 untouched excerpts and located 37 of 40 provider edits.
+- The [JPEG90 agreement test](image-regional-jpeg90-quality-agreement-2026-11-13.md)
+  removed all 15 ordinary flags in its separate 11-photo confirmation, but
+  retained only two of four useful locations, from one photo. It remains offline.
+- The [repeat-speech video study](video-lipsync-repeat-motion-2026-11-13.md)
+  found 19 of 40 short edits with the combined check versus 16 of 40 for
+  the original experimental arm. Both flagged one of 90 ordinary controls.
+  The panel was reused after the signed-motion trial. No release change.
+- The [voice resonance trial](audio-formant-local-transfer-2026-11-13.md)
+  found zero of 12 competing-speech edits at the fixed points versus one
+  for the current check. The new voice cues stay experimental.
+- The [changed-word supervision test](writing-word-edit-transfer-2026-11-13.md)
+  added no useful report locations to the current eight of 40 and flagged
+  one more ordinary group in each of three held cohorts. No release change.
+- The [exact location replication](independent-testing.md#portable-evaluation-contract)
+  independently compares source-coordinate unions from two runs while
+  keeping both sets of positions and image masks local.
 - The [JPEG90 comparison](image-regional-jpeg90-carrier-2026-11-13.md)
   kept all 11 useful JPEG75 locations after a second save. Direct quality-90
   saves held the useful count at 11 while raising ordinary highlights from

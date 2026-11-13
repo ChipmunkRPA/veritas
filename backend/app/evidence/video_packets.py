@@ -33,6 +33,7 @@ from app.evidence import (
     face_return_binding,
     face_return_coverage,
     face_short_proposal_binding,
+    face_short_window_binding,
     face_spatial_cut_binding,
     mouth_local_hold_binding,
     picture_hold_binding,
@@ -52,6 +53,7 @@ from app.evidence.video_packet_versions import (
     PAIRED_EDGE_VERSION,
     PICTURE_HOLD_VERSIONS,
     SHORT_PROPOSAL_VERSION,
+    SHORT_WINDOW_VERSION,
     SPATIAL_CUT_VERSION,
     VERSIONS,
 )
@@ -373,7 +375,8 @@ def _return_observations(result: dict, table: FrameTable, source: dict, anchors:
     for signal in result.get("signals", []):
         details = signal.get("details") or {}
         primary, second = details.get("face_return"), details.get("face_return_secondary")
-        if primary is None and second is None:
+        windows = details.get("face_short_windows") or []
+        if primary is None and second is None and not windows:
             continue
         if signal.get("status", "ok") != "ok" or signal.get("effective_weight") != 0.0 or candidates:
             raise PacketIntegrityError("Supplemental face evidence needs one confidence-neutral source check")
@@ -382,7 +385,7 @@ def _return_observations(result: dict, table: FrameTable, source: dict, anchors:
             if second.get("method") not in face_return_binding.SECOND_METHODS:
                 raise PacketIntegrityError("The second face range has an unexpected review method")
             face_return_binding.validate_second(second, primary, incumbent, details.get("face_boundary"))
-        for record in (primary, second):
+        for record in (primary, second, *windows):
             if record is None:
                 continue
             record = json.loads(canonical_json(record))
@@ -633,7 +636,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     scored_frames |= window_frames
     set_id = current_set_id(analysis)
     version = face_return_binding.METHOD_VERSIONS[return_candidates[-1]["face_return"]["method"]] if return_candidates else VERSION
-    if version != SHORT_PROPOSAL_VERSION and any(face_boundary_binding.is_paired(item.get("face_boundary")) for item in chosen):
+    if version not in {SHORT_PROPOSAL_VERSION, SHORT_WINDOW_VERSION} and any(face_boundary_binding.is_paired(item.get("face_boundary")) for item in chosen):
         version = PAIRED_EDGE_VERSION
     if any(item.get("face_spatial_cut") for item in chosen):
         version = SPATIAL_CUT_VERSION
@@ -653,6 +656,9 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     try:
         if brief_review := face_return_coverage.from_result(result, len(table)):
             document["coverage"][face_return_coverage.KEY] = brief_review
+        if window_review := face_short_window_binding.from_result(result, len(table)):
+            document["coverage"][face_short_window_binding.KEY] = window_review
+            document["version"] = SHORT_WINDOW_VERSION
     except (KeyError, TypeError, ValueError) as error:
         raise PacketIntegrityError(str(error)) from error
     if VERSION in PICTURE_HOLD_VERSIONS:
@@ -871,7 +877,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             scene_note = ("Background patterns outside the face were similar across both ends of the selected range. "
                           if face_return["method"] in face_return_binding.GUARDED_METHODS else
                           "The surrounding scene remained similar at both sampled boundaries. ")
-            if face_return["method"] == face_short_proposal_binding.METHOD:
+            if face_return["method"] in {face_short_proposal_binding.METHOD, face_short_window_binding.METHOD}:
                 scene_note = "The measured areas near the face showed limited motion at both transitions. "
             packet.update(title="Brief face-change range to review", evidence_type="anomaly", claim_scope="sampled_window",
                           semantics=face_return["method"], face_return=face_return, affects_overall_confidence=False,

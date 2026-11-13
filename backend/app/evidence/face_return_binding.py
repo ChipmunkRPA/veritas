@@ -7,6 +7,7 @@ import re
 from fractions import Fraction
 
 from app.evidence import face_short_proposal_binding as proposal
+from app.evidence import face_short_window_binding as short_windows
 from app.evidence.face_interval_binding import face_context_box, validate_face_input
 from app.evidence.video_packet_versions import (
     DENSE_DURATION_FACE_VERSION,
@@ -18,6 +19,7 @@ from app.evidence.video_packet_versions import (
     SECOND_SHORT_FACE_VERSION,
     SHORT_FACE_VERSION,
     SHORT_PROPOSAL_VERSION,
+    SHORT_WINDOW_VERSION,
 )
 
 METHOD = "face-short-return/1"
@@ -54,7 +56,7 @@ METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VE
                    DENSE_DURATION_METHOD: DENSE_DURATION_FACE_VERSION, FINE_SCENE_METHOD: FINE_SCENE_FACE_VERSION,
                    GUARDED_CODEC_METHOD: GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_METHOD: GUARDED_720P30_FACE_VERSION,
                    SECOND_METHOD: SECOND_SHORT_FACE_VERSION, SECOND_HD_METHOD: SECOND_HD_FACE_VERSION,
-                   proposal.METHOD: SHORT_PROPOSAL_VERSION}
+                   proposal.METHOD: SHORT_PROPOSAL_VERSION, short_windows.METHOD: SHORT_WINDOW_VERSION}
 POINT = 0.10
 SCENE_POINT = 0.55
 ROLES = ("before", "during", "after")
@@ -120,6 +122,21 @@ def validate_second(record, primary, *incumbents):
 def validate_set(document):
     packets = [packet for packet in document["packets"]
                if "face_return" in packet or packet.get("semantics") in METHOD_VERSIONS]
+    window_packets = [packet for packet in packets if packet.get("semantics") == short_windows.METHOD]
+    short_windows.validate_packets(document, window_packets)
+    _require(bool((document.get("coverage") or {}).get(short_windows.KEY)) == (document["version"] == SHORT_WINDOW_VERSION),
+             "The evidence version disagrees with its overlapping face windows")
+    if document["version"] == SHORT_WINDOW_VERSION:
+        legacy = [packet for packet in packets if packet.get("semantics") != short_windows.METHOD]
+        _require(len(legacy) <= 1 and all(packet.get("semantics") == METHOD for packet in legacy)
+                 and all(packet.get("signal_refs") == packets[0].get("signal_refs") for packet in packets),
+                 "Overlapping windows must use the same confidence-neutral review check")
+        incumbents = [packet[key] for packet in document["packets"] for key in ("face_sequence", "face_boundary")
+                      if packet.get(key)] + [packet["face_return"] for packet in legacy]
+        for packet in window_packets:
+            for incumbent in incumbents:
+                validate_distinct(packet["face_return"], incumbent)
+        return
     selected = [packet.get("semantics") for packet in packets]
     if second := SECOND_BY_VERSION.get(document["version"]):
         _require(len(packets) == 2 and selected[0] in PRIMARY_BY_SECOND[second] and selected[1] == second
@@ -199,6 +216,9 @@ def _validate_guarded_scene(record):
 
 def validate_record(record, source, *, table_pts=None, interpolated=(), rotation=0, truncated=False):
     method = record["method"]
+    if method == short_windows.METHOD:
+        short_windows.validate_record(record,source,table_pts=table_pts,interpolated=interpolated,rotation=rotation,truncated=truncated)
+        return
     if method == proposal.METHOD:
         proposal.validate_record(record,source,table_pts=table_pts,interpolated=interpolated,rotation=rotation,truncated=truncated)
         return

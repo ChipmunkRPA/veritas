@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from app.core.canonical import canonical_hash
 from app.evidence import face_short_proposal_binding as proposal
+from app.evidence import face_short_window_binding as windows
 
 KEY = "brief_face_review"
 COMMITMENT = "brief_face_review_sha256"
@@ -101,7 +102,8 @@ def from_result(result, frame_count=None):
 
 def validate(document):
     record = (document.get("coverage") or {}).get(KEY)
-    returns = [packet["face_return"] for packet in document["packets"] if packet.get("face_return")]
+    returns = [packet["face_return"] for packet in document["packets"]
+               if packet.get("face_return") and packet["face_return"]["method"] != windows.METHOD]
     proposed = [item for item in returns if item.get("method") == proposal.METHOD]
     if proposed and (record is None or BOUNDED not in record["passes"]):
         raise ValueError("Brief face proposal is missing its measured coverage")

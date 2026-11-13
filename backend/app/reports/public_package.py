@@ -21,6 +21,7 @@ from app.audit import chain as audit
 from app.cases import review
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
+from app.evidence import face_short_window_binding as face_windows
 from app.evidence import image_editor_preview_binding as editor_preview
 from app.evidence.service import ASSET_TYPES, asset_refs
 from app.reports import package as legacy
@@ -46,6 +47,8 @@ def public_result(result: dict) -> dict:
 
         if brief_review := from_result(result):
             source_coverage[COMMITMENT] = canonical_hash(brief_review)
+        if window_review := face_windows.from_result(result):
+            source_coverage[face_windows.COMMITMENT] = canonical_hash(window_review)
     if result.get('kind') == 'document':
         from app.evidence.email_alternatives import COMMITMENT, result_review
 
@@ -67,6 +70,8 @@ def public_result(result: dict) -> dict:
                                 ("face_return_secondary", "second_short_face_change_measurement_sha256")):
             if record := details.get(key):
                 check[commitment] = canonical_hash(record)
+        if records := details.get("face_short_windows"):
+            check[face_windows.CHECKS_COMMITMENT] = [canonical_hash(record) for record in records]
     return {
         'schema': 'chipmunk.public-result/1', 'is_projection': True,
         'original_result_sha256': canonical_hash(result),

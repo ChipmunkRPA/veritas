@@ -28,17 +28,21 @@ from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.detectors.audio.decode import SAMPLE_RATE, decode_audio
 from app.detectors.video import lipsync
+from app.detectors.video.adapters import face_appearance as face_adapter
 from app.detectors.video.adapters.face_appearance import DETECTOR, record
 from app.detectors.video.adapters.lipsync_xcorr import LandmarkXcorrDetector
 from app.detectors.video.decode import decode_frames, probe_frames
 from app.detectors.video.face_appearance import METHOD, cpp_alignment
 from app.detectors.video.frame_store import FrameStore
+from app.engine.boundary import Deadline
+from app.engine.detector import DetectorResult, UnitScore
 from app.engine.stages import video
 from app.engine.synthesis.engine import SynthesisInput, synthesise
 from app.evidence import (
     face_boundary_binding,
     face_return_binding,
     face_return_coverage,
+    face_short_window_binding,
     face_spatial_cut_binding,
     service,
     video_audio,
@@ -433,6 +437,55 @@ def _report_scaffold(f):
     return f.frozen.model_copy(update={'result':result,'evidence':evidence})
 
 
+def test_overlapping_face_windows_require_matching_scope_and_shared_signal():
+    binding = face_short_window_binding
+    windows = [{"start_frame_index": start, "end_frame_index_exclusive": start + binding.WINDOW,
+                "status": "no_distinct_range", "reason": None, "pixel_frames": binding.WINDOW,
+                "scheduled_frames": 12, "measured_face_frames": 8} for start in binding.WINDOW_STARTS]
+    source = {"frame_count": binding.COUNT}
+    document = {"version": "video-evidence-23", "source": source,
+                "coverage": {binding.KEY: binding.coverage(windows)}, "packets": []}
+    face_return_binding.validate_set(document)
+    with pytest.raises(ValueError, match="evidence version disagrees"):
+        face_return_binding.validate_set({**document, "version": "video-evidence-11"})
+    malformed = copy.deepcopy(document)
+    malformed["coverage"][binding.KEY]["windows"][1]["end_frame_index_exclusive"] += 1
+    with pytest.raises(ValueError, match="invalid measured coverage"):
+        face_return_binding.validate_set(malformed)
+
+    for index in range(2):
+        start = binding.WINDOW_STARTS[index]
+        windows[index].update(status="localized", measured_face_frames=12)
+        document["packets"].append({"semantics": binding.METHOD, "signal_refs": [{"id": f"S{index}"}],
+            "face_return": {"window_start_frame_index": start, "source_first_pts": 0,
+                            "start_pts": (start+15)*1000,"end_pts": (start+21)*1000,
+                            "scene_frame_inputs": [None]*120,"scheduled_frame_indices": [None]*12,"frame_inputs": [None]*12}})
+    document["coverage"][binding.KEY] = binding.coverage(windows)
+    with pytest.raises(ValueError, match="same confidence-neutral review check"):
+        face_return_binding.validate_set(document)
+
+
+def test_overlapping_face_window_timeout_preserves_incumbent_and_reports_unassessed():
+    now = [0.]
+    deadline = Deadline(10., clock=lambda: now[0])
+
+    def timeout_during_read(indices, *, timeout_s):
+        assert list(indices) == list(range(240)) and 0 < timeout_s <= 9
+        now[0] = 9.1
+        yield 0, None
+
+    prior = {"start_pts": 20000, "end_pts": 60000}
+    result = DetectorResult(status="ok", aggregate=UnitScore("global", .7, "score"), observed="Existing review.",
+                            details={"face_sequence": prior, "review_only": True})
+    inputs = SimpleNamespace(table=object(), store=SimpleNamespace(iter_many=timeout_during_read))
+    measured = face_adapter._with_short_windows(result, inputs, None, None, deadline)
+    assert measured is result and measured.aggregate.raw == .7 and measured.details["face_sequence"] == prior
+    assert measured.observed == "Existing review." and "face_short_windows" not in measured.details
+    coverage = face_short_window_binding.coverage(measured.details["face_short_windows_check"])
+    assert all(row["status"] == "unassessed" and row["reason"] == "time_budget" for row in coverage["windows"])
+    assert all("was unassessed" in line for line in coverage["observations"])
+
+
 def test_picture_cut_context_binds_both_native_edges_and_representative_frames():
     binding = face_spatial_cut_binding
     a, b, start, end = 56, 72, 63, 74
@@ -673,13 +726,13 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.audio_background_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
                         'app.evidence.audio_similarity_binding',
                         'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_boundary_clock','app.evidence.face_alignment_context',
-                        'app.evidence.face_paired_edge_binding','app.evidence.face_short_proposal_binding','app.evidence.face_spatial_cut_binding',
+                        'app.evidence.face_paired_edge_binding','app.evidence.face_short_proposal_binding','app.evidence.face_short_window_binding','app.evidence.face_spatial_cut_binding',
                         'app.evidence.face_lighting_context','app.evidence.face_return_binding','app.evidence.face_return_coverage',
                         'app.evidence.video_packet_versions','app.evidence.picture_hold_binding', 'app.evidence.picture_sequence',
                         'app.evidence.mouth_local_hold_binding','app.evidence.source_geometry',
                         'app.evidence.image_eligibility','app.evidence.image_copy_similarity_binding',
                         'app.evidence.image_copy_affine_binding','app.evidence.image_embedded_pair_binding',
-                        'app.evidence.document_scope'):
+                        'app.evidence.document_scope','app.evidence.email_alternatives'):
             return None
         if fullname.startswith(('app.storage','app.core.config','app.detectors','app.evidence','app.api')):
             raise RuntimeError('Offline verifier imported runtime: '+fullname)

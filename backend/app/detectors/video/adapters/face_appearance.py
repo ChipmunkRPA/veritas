@@ -27,6 +27,7 @@ from app.engine.boundary import Deadline, DetectorTimeout
 from app.engine.detector import ActivationUse, Applicability, DetectorResult, InputUnit, UnitScore
 from app.evidence import face_paired_edge_binding as paired
 from app.evidence import face_short_proposal_binding as proposal
+from app.evidence import face_short_window_binding as windows
 from app.evidence import face_spatial_cut_binding as cut
 from app.evidence.face_intervals import bind_tracks
 from app.evidence.face_return_binding import (
@@ -503,6 +504,15 @@ def _short_source(inputs):
     return _qualified_hevc(inputs)
 
 
+def _window_source(inputs):
+    if (not settings.video_face_short_window_review or settings.face_min_size != 48
+            or not isinstance(inputs, SequenceInputs) or (*inputs.encoding, inputs.codec_tag) != paired.ENCODING
+            or len(inputs.table) != windows.COUNT):
+        return False
+    path = getattr(inputs.store, "path", None)
+    return path is not None and windows.supported(inputs.table, paired.ENCODING, face_return.source_carrier(path))
+
+
 def _qualified_hevc(inputs):
     encoding = (*inputs.encoding, inputs.codec_tag)
     if encoding != paired.ENCODING:
@@ -560,10 +570,124 @@ def _with_spatial_cut(result, inputs, yunet, deadline):
 
 
 def _with_short_proposal(result, inputs, yunet, recognizer, deadline):
+    if result.status in {'ok', 'not_applicable'} and _window_source(inputs):
+        return _with_short_windows(result, inputs, yunet, recognizer, deadline)
     if result.status in {'ok', 'not_applicable'} and _short_source(inputs) and not result.details.get("face_return"):
         _propose_short(result.details, inputs, yunet, recognizer, deadline, face_detail_repeat.original_range(result.details))
         return _describe_return(result)
     return result
+
+
+def _with_short_windows(result, inputs, yunet, recognizer, deadline):
+    table = inputs.table
+    detail = result.details
+    coverage = [{"start_frame_index": start, "end_frame_index_exclusive": start+windows.WINDOW,
+                 "status": "unassessed", "reason": "time_budget", "pixel_frames": 0,
+                 "scheduled_frames": 0, "measured_face_frames": 0} for start in windows.WINDOW_STARTS]
+    selected_ranges = []
+    remaining = deadline.remaining() if deadline is not None else None
+    budget = SHORT_PROPOSAL_BUDGET_S if remaining is None else min(SHORT_PROPOSAL_BUDGET_S, remaining-COARSE_RESULT_RESERVE_S)
+    detail["face_short_windows_check"] = coverage
+    if budget <= 0:
+        return result
+    stop = deadline.nested(budget) if deadline is not None else Deadline(budget)
+    anchors = {start+i for start in windows.WINDOW_STARTS for i in proposal.ANCHOR_SAMPLES}
+    scene, reduced, faces = {}, {}, {}
+
+    def read(indices, *, pixels):
+        seen = set()
+        with closing(inputs.store.iter_many(sorted(indices), timeout_s=stop.remaining())) as frames:
+            for i, rgb in frames:
+                stop.check("overlapping brief face windows")
+                if not inputs.store.native_pts_verified(i):
+                    raise DecodeError("Brief face windows need verified native timestamps")
+                seen.add(i)
+                if pixels:
+                    scene[i] = {"frame_index": i, "pts": table.pts[i], "decoded_rgb_sha256": hashlib.sha256(rgb.tobytes()).hexdigest()}
+                    reduced[i] = face_paired_edge.reduced_rgb(rgb)
+                if i in anchors or not pixels:
+                    bgr = cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
+                    observed = detect_faces(bgr, detector=yunet, min_size=48)
+                    if len(observed) == 1 and (measured := _measure(rgb, bgr, i, table, observed[0], recognizer)) is not None:
+                        vector, binding = measured
+                        faces[i] = method.unit(vector), observed[0], binding
+        if seen != set(indices):
+            raise DecodeError("Brief face windows need every scheduled native picture")
+
+    exclusions = [r for r in (face_detail_repeat.original_range(detail), detail.get("face_boundary"),
+                             detail.get("face_return"), detail.get("face_return_secondary")) if r]
+    reason = "time_budget"
+    try:
+        read(range(windows.COUNT), pixels=True)
+        planned = set(anchors)
+        plans = []
+        for item in coverage:
+            offset = item["start_frame_index"]
+            image = {i:reduced[offset+i] for i in range(windows.WINDOW)}
+            observed = [i for i in proposal.ANCHOR_SAMPLES if offset+i in faces]
+            edges = face_short_proposal.shortlist(image, [faces[offset+i][2]["bbox"] for i in observed], stop.check)
+            scheduled = proposal.face_schedule(edges)
+            planned.update(offset+i for i in scheduled)
+            item.update(pixel_frames=windows.WINDOW, scheduled_frames=len(scheduled), measured_face_frames=len(observed))
+            plans.append((image, observed, edges, scheduled))
+        read(planned-anchors, pixels=False)
+        for item, (image, observed, edges, scheduled) in zip(coverage, plans, strict=True):
+            offset = item["start_frame_index"]
+            local = {i:faces[offset+i] for i in scheduled if offset+i in faces}
+            item["measured_face_frames"] = len(local)
+            if len(observed) < 4:
+                item["reason"] = "insufficient_same_shot_context"
+                continue
+
+            def excluded(a, b, offset=offset):
+                left, right = table.pts[offset+a], table.pts[offset+b]
+                return any(2*max(0,min(right,r["end_pts"])-max(left,r["start_pts"])) >=
+                           max(right,r["end_pts"])-min(left,r["start_pts"]) for r in exclusions)
+
+            selected = face_short_proposal.select(edges, local, image, stop.check, excluded)
+            stop.check("overlapping brief face windows")
+            if selected is None:
+                item.update(status="no_distinct_range",reason=None)
+                continue
+            (negative, a, b), proof, gaps = selected
+            middle = min((i for i in local if a<=i<b), key=lambda i: (abs(2*i-a-b), i))
+            start, end = offset+a, offset+b
+            record = {"method":windows.METHOD, "window_start_frame_index":offset,
+                      "time_base":table.time_base,"source_first_pts":table.pts[0],
+                      "source_encoding":list(paired.ENCODING),"source_carrier":"mp4",
+                      "start_frame_index":start,"end_frame_index":end,"start_pts":table.pts[start],"end_pts":table.pts[end],
+                      "start_stream_s":table.seconds(start),"end_stream_s":table.seconds(end),
+                      "response":-negative,"response_hex":(-negative).hex(),"return_hex":[v.hex() for v in gaps],
+                      "edges":{key:{**edge,"frame_indices":[offset+i for i in edge["frame_indices"]]} for key,edge in proof.items()},
+                      "anchors":dict(zip(paired.ROLES,(start-1,offset+middle,end),strict=True)),
+                      "scheduled_frame_indices":[offset+i for i in scheduled],"shortlist_edges":[offset+i for i in edges],
+                      "shortlist_anchor_indices":[offset+i for i in observed],"frame_inputs":[v[2] for v in local.values()],
+                      "scene_frame_inputs":[scene[i] for i in range(offset,offset+windows.WINDOW)]}
+            exclusions.append(record)
+            selected_ranges.append(record)
+            item.update(status="localized",reason=None)
+    except DetectorTimeout:
+        pass
+    except DecodeError:
+        reason = "incomplete_native_decode"
+    except (cv2.error, ValueError):
+        reason = "native_measurement_unavailable"
+    finally:
+        for item in coverage:
+            if item["status"] == "unassessed" and item["reason"] == "time_budget":
+                offset = item["start_frame_index"]
+                item.update(reason=reason, pixel_frames=sum(offset<=i<offset+windows.WINDOW for i in scene))
+    if not selected_ranges:
+        return result
+    detail["face_short_windows"] = selected_ranges
+    observed = " ".join(observation(record) for record in selected_ranges)
+    if result.status == 'ok':
+        result.observed = f"{result.observed} {observed}"
+        return result
+    return DetectorResult(status='ok', aggregate=UnitScore('global',selected_ranges[0]['response'],'score'),
+                          observed=observed, reference="Face appearance was compared within overlapping native picture windows.",
+                          reasoning="Lighting, motion, ordinary edits or compression can cause similar changes.",
+                          details={**detail,'review_only':True}, model_revisions=result.model_revisions)
 
 
 def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent):
@@ -659,7 +783,7 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
     def applicable(self, ctx):
         incumbent = super().applicable(ctx)
         inputs = ctx.outputs.face_review
-        if not incumbent.ok and _short_source(inputs):
+        if not incumbent.ok and (_short_source(inputs) or _window_source(inputs)):
             return Applicability(True)
         if (not incumbent.ok and settings.video_face_short_return_review and settings.face_min_size == 48
                 and isinstance(inputs, SequenceInputs) and (face_return.schedule(inputs.table) is not None
@@ -680,6 +804,8 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
                if settings.video_face_paired_edge_refinement else ()),
              *((f'The enabled brief proposal reads 120 pixel inputs and measures at most {proposal.MAX_FACE_READS} face inputs.',)
                if settings.video_face_unrouted_short_review else ()),
+             *(("The enabled overlapping review reads 240 native pictures and compares three bounded face input sets.",)
+               if settings.video_face_short_window_review else ()),
              *(("The enabled cut context reads up to 77 native pictures and detects at most three face boxes.",)
                if settings.video_face_spatial_cut_context else ()),
              'Face vectors stay in working memory.')))
@@ -688,7 +814,7 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
         inputs: SequenceInputs = ctx.outputs.face_review
         table = inputs.table
         yunet, recognizer = ctx.lease.get(self.YUNET).obj, ctx.lease.get(self.APPEARANCE).obj
-        if (settings.video_face_short_return_review or _short_source(inputs)) and not (incumbent := super().applicable(ctx)).ok:
+        if (settings.video_face_short_return_review or _short_source(inputs) or _window_source(inputs)) and not (incumbent := super().applicable(ctx)).ok:
             result = DetectorResult.not_applicable(incumbent.reason or 'insufficient coarse face context')
             result.details['appearance_check_status'] = 'not_applicable'
             result.model_revisions = revisions(ctx, self.YUNET, self.DINO, self.APPEARANCE)

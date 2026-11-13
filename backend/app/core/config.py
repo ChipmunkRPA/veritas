@@ -246,6 +246,7 @@ class Settings(BaseSettings):
     video_face_boundary_refinement: bool = False  # Refine timing on an existing short appearance review range.
     video_face_paired_edge_refinement: bool = False  # Refine a retained 720p30 HEVC face-appearance range.
     video_face_spatial_cut_context: bool = False  # Explain supported surrounding-picture changes on qualified HEVC clips.
+    video_face_short_window_review: bool = False  # Check overlapping native windows on supported eight-second HEVC clips.
     video_face_unrouted_short_review: bool = False  # Propose a brief face-change range on qualified HEVC sources.
     video_face_short_return_review: bool = False  # Add a distinct, source-bound range to eligible appearance reviews.
     video_face_second_return_review: bool = False  # Check a second disjoint range on tested short H.264 profiles.

@@ -143,6 +143,13 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         className="mt-2 mb-0 text-small">{observation}</p>)}
       <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero AI confidence weight.</p>
     </section>}
+    {!!set.coverage?.brief_face_windows?.observations.length && <section aria-labelledby="video-brief-face-windows-heading"
+      className="mt-4 rounded-md border border-border p-4">
+      <h3 id="video-brief-face-windows-heading" className="m-0 text-body font-medium">Overlapping face-change windows</h3>
+      {set.coverage.brief_face_windows.observations.map((observation) => <p key={observation}
+        className="mt-2 mb-0 text-small">{observation}</p>)}
+      <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero AI confidence weight.</p>
+    </section>}
     {set.coverage ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <p className="m-0">{set.coverage.scored_frame_count} frame(s) were inputs to recorded {hasNestedVideoEvidence(set.version) ? 'visual frame or window' : 'frame or window'} checks in a table of {set.coverage.frame_count} frames.
         {' '}{set.coverage.window_check_count} window check(s) cover {set.coverage.window_frame_indices.length} distinct sampled frames.</p>
@@ -190,7 +197,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         : 'Individual sampled-frame responses. A face crop is context, not a mask of edited pixels.'}</p>
       {packet.window && <details className="mt-3 text-small text-text-muted"><summary className="cursor-pointer">Exact window coverage</summary>
         <p className="mt-2 mb-0">Source timestamps {seconds(packet.window.start_stream_s)}–{seconds(packet.window.end_stream_s)}. {packet.whole_face_review ? 'Planned frame indices' : 'Input frame indices'}: {packet.window.frame_indices.join(', ')}.</p>
-        <p className="mt-2 mb-0">{packet.face_return?.method === 'face-short-return/9'
+        <p className="mt-2 mb-0">{packet.face_return && ['face-short-return/9', 'face-short-return/10'].includes(packet.face_return.method ?? '')
           ? `Nearby motion was reviewed in ${packet.face_return.scene_frame_inputs?.length ?? 0} native pictures. Face appearances were measured in ${packet.face_return.frame_inputs.length} sampled pictures.`
           : packet.mouth_local_hold ? 'The recorded window lists the source frames used for the mouth-region measurement.'
           : packet.whole_face_review ? 'These positions show sample coverage. Some frames may lack a usable face, and intervals between samples were unassessed.'

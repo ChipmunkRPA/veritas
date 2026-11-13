@@ -153,6 +153,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         face_lighting_context,
         face_return_binding,
         face_return_coverage,
+        face_short_window_binding,
         face_spatial_cut_binding,
         picture_hold_binding,
         whole_face_binding,
@@ -174,7 +175,8 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
     by_index = {anchor["frame_index"]: anchor for anchor in anchors}
     if len(by_index) != len(anchors):
         raise ObjectIntegrityError("Frozen video frames have ambiguous identities")
-    if result is None and (document.get("coverage") or {}).get(face_return_coverage.KEY) is not None:
+    coverage = document.get("coverage") or {}
+    if result is None and {face_return_coverage.KEY, face_short_window_binding.KEY} & coverage.keys():
         result = json.loads(_bytes(document["original_result_hash"], store))
     if result is not None:
         try:
@@ -183,6 +185,12 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                 raise ValueError("Coverage differs from the recorded outcome")
         except (KeyError, TypeError, ValueError) as error:
             raise ObjectIntegrityError("Brief face-change coverage differs from the frozen analysis") from error
+        try:
+            windows = [p for p in document["packets"] if p.get("semantics") == face_short_window_binding.METHOD]
+            if face_short_window_binding.validate_packets(document, windows) != face_short_window_binding.from_result(result, len(table)):
+                raise ValueError("Overlapping window coverage differs from the recorded outcome")
+        except (KeyError, TypeError, ValueError) as error:
+            raise ObjectIntegrityError("Overlapping face windows differ from the frozen analysis") from error
     if repeat := (document.get("coverage") or {}).get("face_detail_repeat"):
         frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
         if face_detail_coverage(frozen, table, by_index) != repeat:
@@ -242,10 +250,12 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             commitment = canonical_hash(face_return)
             secondary = face_return["method"] in face_return_binding.SECOND_METHODS
+            window = face_return["method"] == face_short_window_binding.METHOD
             key = "face_return_secondary" if secondary else "face_return"
             signal = next((s for s in frozen.get("signals", []) if s.get("effective_weight") == 0.0
                            and alias_signal(s["id"]) == packet["signal_refs"][0]["id"]
-                           and canonical_hash((s.get("details") or {}).get(key)) == commitment), None)
+                           and (any(canonical_hash(r) == commitment for r in (s.get("details") or {}).get("face_short_windows", []))
+                                if window else canonical_hash((s.get("details") or {}).get(key)) == commitment)), None)
             if signal is None:
                 raise ObjectIntegrityError("Short face-change evidence differs from the frozen review check")
             details = signal["details"]
@@ -1021,6 +1031,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "repeated_passages": repeated_passages,
             "picture_hold": copy.deepcopy(document.get("picture_hold")),
             "brief_face_review": (document.get("coverage") or {}).get("brief_face_review") if kind == "video" else None,
+            "brief_face_windows": (document.get("coverage") or {}).get("brief_face_windows") if kind == "video" else None,
             "picture_frame_count": document["source"].get("frame_count", 0) if kind == "video" else 0,
             "picture_dimensions": (document["source"]["width"], document["source"]["height"]) if kind == "video" else None,
             "voice_gaps": voice_gaps,

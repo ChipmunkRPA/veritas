@@ -17,6 +17,7 @@ from app.evidence import (
     email_alternatives,
     face_boundary_binding,
     face_return_coverage,
+    face_short_window_binding,
     face_spatial_cut_binding,
 )
 from app.evidence.face_alignment_context import validate as validate_face_alignment
@@ -83,7 +84,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              and bundle['result'].get('is_projection') is True, 'The result must identify itself as a public projection')
     _require(result.get('original_result_sha256') == analysis['original_result_sha256'], 'The result commits to a different original')
     _require(set(result) <= {'schema', 'is_projection', 'original_result_sha256', 'decision', 'findings', 'checks', 'note',
-                             IMAGE_EDITOR_PREVIEW, face_return_coverage.COMMITMENT, email_alternatives.COMMITMENT},
+                             IMAGE_EDITOR_PREVIEW, face_return_coverage.COMMITMENT, email_alternatives.COMMITMENT,
+                             face_short_window_binding.COMMITMENT},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
     binding = bundle['evidence']
@@ -107,6 +109,12 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         face_spatial_cut_binding.validate_set(evidence)
         face_return_binding.validate_set(evidence)
         face_return_coverage.validate_commitment(evidence, result.get(face_return_coverage.COMMITMENT))
+        window_packets = [p for p in evidence['packets'] if p.get('semantics') == face_short_window_binding.METHOD]
+        face_short_window_binding.validate_commitment(evidence, window_packets, result.get(face_short_window_binding.COMMITMENT))
+        if window_packets:
+            _require(any(check['id'] == window_packets[0]['signal_refs'][0]['id'] and check.get('status') == 'ok'
+                         and check.get(face_short_window_binding.CHECKS_COMMITMENT) == [canonical_hash(p['face_return']) for p in window_packets]
+                         for check in result.get('checks', [])), 'Overlapping face windows differ from their corresponding public check')
         for packet in evidence.get('packets', []):
             validate_clip_binding(packet, evidence['source'])
             validate_face_interval(packet, evidence['source'])
@@ -125,13 +133,14 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                          'Refined face timing differs from its corresponding public check')
             if packet.get('face_return') is not None or packet.get('semantics') in face_return_binding.METHOD_VERSIONS:
                 face_return_binding.validate_packet(packet, evidence['source'])
-                measurement = canonical_hash(packet['face_return'])
-                commitment = ('second_short_face_change_measurement_sha256' if packet['semantics'] in face_return_binding.SECOND_METHODS
-                              else 'short_face_change_measurement_sha256')
-                _require(any(check['id'] == packet['signal_refs'][0]['id'] and check.get('status') == 'ok'
-                             and check.get(commitment) == measurement
-                             for check in result.get('checks', [])),
-                         'Short face-change evidence differs from its corresponding public check')
+                if packet['semantics'] != face_short_window_binding.METHOD:
+                    measurement = canonical_hash(packet['face_return'])
+                    commitment = ('second_short_face_change_measurement_sha256' if packet['semantics'] in face_return_binding.SECOND_METHODS
+                                  else 'short_face_change_measurement_sha256')
+                    _require(any(check['id'] == packet['signal_refs'][0]['id'] and check.get('status') == 'ok'
+                                 and check.get(commitment) == measurement
+                                 for check in result.get('checks', [])),
+                             'Short face-change evidence differs from its corresponding public check')
             if packet.get('whole_face_review') is not None or packet.get('semantics') == 'paired-whole-face-samples/1':
                 from app.evidence.whole_face_binding import validate_packet as validate_whole_face
 
@@ -169,6 +178,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             _require(not {'audio', 'av'}.intersection(evidence), 'Historical video evidence has unexpected nested channels')
     else:
         _require(face_return_coverage.COMMITMENT not in result, 'Brief face-change coverage belongs to video evidence')
+        _require(face_short_window_binding.COMMITMENT not in result, 'Overlapping face windows belong to video evidence')
     if analysis['kind'] == 'image':
         from app.evidence.image_eligibility import validate_inspection_coverage
 

@@ -38,6 +38,11 @@
 {% for observation in evidence.brief_face_review.observations %}<p class="caption">{{ observation }}</p>{% endfor %}
 <p class="caption">This check carries zero AI confidence weight. JSON pointer <span class="mono">/coverage/brief_face_review</span>.</p>
 {% endif %}
+{% if evidence.get('brief_face_windows') %}
+<h3>Overlapping face-change windows</h3>
+{% for observation in evidence.brief_face_windows.observations %}<p class="caption">{{ observation }}</p>{% endfor %}
+<p class="caption">This check carries zero AI confidence weight. JSON pointer <span class="mono">/coverage/brief_face_windows</span>.</p>
+{% endif %}
 {% if evidence.get('short_voice_review') %}
 {% set review = evidence.short_voice_review %}
 <h3 id="multimedia-short-voice-review">{{ review.title }}</h3>

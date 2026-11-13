@@ -88,6 +88,7 @@ from app.engine.stages import common
 from app.evidence import (
     face_return_binding,
     face_return_coverage,
+    face_short_window_binding,
     face_spatial_cut_binding,
     picture_hold_binding,
 )
@@ -152,7 +153,8 @@ def probe(ctx: StageContext) -> dict[str, Any]:
     """Stream facts, the per-frame pts table and the seeded sampling plan. The output is persisted, so a resumed run decodes
     the same frames (§3.3). A file without decodable video frames gets no table, and `decode` fails the analysis."""
     path = common.media_path(ctx)
-    codec_tag = settings.video_face_paired_edge_refinement or settings.video_face_unrouted_short_review or settings.video_face_spatial_cut_context
+    codec_tag = (settings.video_face_paired_edge_refinement or settings.video_face_unrouted_short_review
+                 or settings.video_face_spatial_cut_context or settings.video_face_short_window_review)
     info = common.json_safe(ffprobe(path, include_codec_tag=True) if codec_tag else ffprobe(path))
     try:
         table = probe_frames(path, check=ctx.check)
@@ -920,6 +922,7 @@ def synthesise(ctx: StageContext) -> dict[str, Any]:
         sequence = details.get("face_sequence")
         short_change = details.get("face_return")
         second_change = details.get("face_return_secondary")
+        window_changes = details.get("face_short_windows") or []
         short_coverage = (details.get("face_return_check") or {}).get("status")
         detail_status = (details.get("face_detail_repeat") or {}).get("status")
         for finding in out["findings"]:
@@ -963,6 +966,10 @@ def synthesise(ctx: StageContext) -> dict[str, Any]:
             if second_change:
                 title = "Brief face-change ranges to review"
                 first += " " + face_return_binding.observation(second_change)
+            if window_changes:
+                title = "Brief face-change ranges to review" if len(window_changes) > 1 or short_change else "Brief face-change range to review"
+                explanation = " ".join(face_return_binding.observation(item) for item in window_changes)
+                first = f"{first} {explanation}" if sequence or short_change else explanation
             second = "Motion, expression, lighting and compression may cause similar changes. This inspection cue has no calibrated AI probability and does not change overall confidence."
             finding.update(title=title,
                            statement=first+" "+second, probability=None, direction="neutral", strength="none",
@@ -1001,6 +1008,10 @@ def _native_render_anchors(ctx: StageContext, frame_store: FrameStore) -> list[d
                 inputs.extend(record["frame_inputs"])
             if measurement := details["face_detail_repeat"].get("measurement"):
                 refined_indices.update(item["frame_index"] for item in measurement["frame_inputs"])
+        for window in details.get("face_short_windows") or []:
+            inputs.extend(window["frame_inputs"])
+            inputs.extend(window["scene_frame_inputs"])
+            refined_indices.update(row["frame_index"] for row in window["scene_frame_inputs"])
         for key in ("face_return", "face_return_secondary"):
             if (face_return := details.get(key)) is None:
                 continue
@@ -1104,6 +1115,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         if coverage is not None or bounded is not None:
             count = len(ctx.outputs["probe"]["frame_table"]["pts"])
             result.manifest.sampling[face_return_coverage.KEY] = face_return_coverage.from_worker(coverage, count, bounded=bounded)
+        if windows := details.get("face_short_windows_check"):
+            result.manifest.sampling[face_short_window_binding.KEY] = face_short_window_binding.coverage(windows)
         break
     from app.evidence.video_audio import published_record
 

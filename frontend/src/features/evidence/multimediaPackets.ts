@@ -43,6 +43,7 @@ export interface VideoEvidencePacket extends PacketBase {
   face_spatial_cut?: { start_stream_s: number; end_stream_s: number; shared_tiles: number; sectors: number; frame_inputs: { frame_index: number }[] }
   face_spatial_cut_frames?: VideoEvidenceFrame[]
   face_return?: { method?: string; start_stream_s: number; end_stream_s: number;
+    window_start_frame_index?: number;
     frame_inputs: { frame_index: number }[]; scene_frame_inputs?: { frame_index: number }[] }
   whole_face_review?: { flagged: boolean; time_base: string;
     samples: { frame_index: number; pts: number; responses_hex: [string | null, string | null] }[] }
@@ -73,6 +74,7 @@ export interface VideoEvidenceSet extends SetBase {
       start_pts: number; end_pts: number; time_base: string; start_stream_s: number; end_stream_s: number;
       affects_overall_confidence: false };
     brief_face_review?: { observations: string[]; affects_overall_confidence: false };
+    brief_face_windows?: { observations: string[]; affects_overall_confidence: false };
     channels?: Partial<Record<'audio' | 'av_sync' | 'av', { status: string; reason: string | null; successful_check_count?: number }>> } | null
   /** Present in video-evidence-3 and later. Both channels belong to this parent set. */
   audio?: VideoAudioChannel
@@ -353,6 +355,7 @@ export type MultimediaEvidenceSet = VideoEvidenceSet | AudioEvidenceSet | Docume
 
 const nestedVideoVersions = new Set(['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6', 'video-evidence-7', 'video-evidence-8', 'video-evidence-9', 'video-evidence-10', 'video-evidence-11', 'video-evidence-12', 'video-evidence-13', 'video-evidence-14', 'video-evidence-15', 'video-evidence-16', 'video-evidence-17', 'video-evidence-18', 'video-evidence-19', 'video-evidence-20', 'video-evidence-21'])
 nestedVideoVersions.add('video-evidence-22')
+nestedVideoVersions.add('video-evidence-23')
 export function hasNestedVideoEvidence(version: string): boolean { return nestedVideoVersions.has(version) }
 
 export async function getMultimediaEvidence(analysisId: string, kind: EvidenceKind): Promise<MultimediaEvidenceSet> {

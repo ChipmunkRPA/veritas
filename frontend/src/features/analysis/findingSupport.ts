@@ -72,7 +72,7 @@ function videoLocation(packet: VideoEvidencePacket): LocatedPacket | null {
       scope: 'video_frames', note: 'Two face transitions with limited nearby pixel motion bracket the range. The end is exclusive.' }
   }
   const short = packet.face_return
-  if (short?.method === 'face-short-return/9'
+  if (short && ['face-short-return/9', 'face-short-return/10'].includes(short.method ?? '')
     && finite(short.start_stream_s) && finite(short.end_stream_s) && short.end_stream_s > short.start_stream_s) {
     return { packet, label: `${packet.id} · Brief face-change range ${seconds(short.start_stream_s)}–${seconds(short.end_stream_s)} (source clock)`,
       scope: 'video_frames', note: 'Three source frames show the face before, during and after the measured change. The end is exclusive.' }

@@ -1,0 +1,313 @@
+{
+  "app_receipt_sha256": "9a1aa2f61f9547ca5c4bc7aa687deece7fcf587e2ef0ed678229e1baf8b48ab1",
+  "browser": {
+    "chrome": "157.0.8103.51",
+    "coverage_windows": 3,
+    "exact_finding_links": 2,
+    "plain_evidence": true,
+    "windows": [
+      {
+        "images": [
+          [
+            1280,
+            720
+          ],
+          [
+            232,
+            329
+          ],
+          [
+            1280,
+            720
+          ],
+          [
+            231,
+            320
+          ],
+          [
+            1280,
+            720
+          ],
+          [
+            232,
+            326
+          ]
+        ],
+        "playback_selected_frame": 74,
+        "source_times_s": [
+          2.367,
+          2.567
+        ]
+      },
+      {
+        "images": [
+          [
+            1280,
+            720
+          ],
+          [
+            231,
+            337
+          ],
+          [
+            1280,
+            720
+          ],
+          [
+            228,
+            304
+          ],
+          [
+            1280,
+            720
+          ],
+          [
+            226,
+            315
+          ]
+        ],
+        "playback_selected_frame": 131,
+        "source_times_s": [
+          4.267,
+          4.467
+        ]
+      }
+    ]
+  },
+  "cases": {
+    "feature_disabled": {
+      "file_sha256": "403e5a87194c7a7a4f1632fb825653ac0499b68d96587e32c68a32634b860df0",
+      "legacy_packets": 0,
+      "version": "video-evidence-11",
+      "window_coverage": null,
+      "window_packets": 0
+    },
+    "genuine_cut": {
+      "different_original_rejected": true,
+      "exact_source_images": [],
+      "file_sha256": "7d38179b078c71b3513b0b70f175933ec1cc5574852d7f9fe42b6514ff421d71",
+      "legacy_packets": 0,
+      "pdf_api_json_agree": true,
+      "public_model_names_absent": true,
+      "signed_original_replay": true,
+      "template_set": "veritas-report-2.0.r113",
+      "version": "video-evidence-23",
+      "window_coverage": {
+        "affects_overall_confidence": false,
+        "observations": [
+          "Window 0.000\u20134.000 s from the start of the picture stream supplied no additional brief face-change range. 12 face samples were measured.",
+          "Window 2.000\u20136.000 s from the start of the picture stream supplied no additional brief face-change range. 12 face samples were measured.",
+          "Window 4.000\u20138.000 s from the start of the picture stream supplied no additional brief face-change range. 12 face samples were measured."
+        ],
+        "windows": [
+          {
+            "end_frame_index_exclusive": 120,
+            "measured_face_frames": 12,
+            "pixel_frames": 120,
+            "reason": null,
+            "scheduled_frames": 12,
+            "start_frame_index": 0,
+            "status": "no_distinct_range"
+          },
+          {
+            "end_frame_index_exclusive": 180,
+            "measured_face_frames": 12,
+            "pixel_frames": 120,
+            "reason": null,
+            "scheduled_frames": 12,
+            "start_frame_index": 60,
+            "status": "no_distinct_range"
+          },
+          {
+            "end_frame_index_exclusive": 240,
+            "measured_face_frames": 12,
+            "pixel_frames": 120,
+            "reason": null,
+            "scheduled_frames": 12,
+            "start_frame_index": 120,
+            "status": "no_distinct_range"
+          }
+        ]
+      },
+      "window_packets": 0
+    },
+    "legacy_four_seconds": {
+      "file_sha256": "e013049884133d9b24da6704b4277350adca5f4ca82d1b87c2d07256bb8fb9e5",
+      "legacy_packets": 1,
+      "version": "video-evidence-21",
+      "window_coverage": null,
+      "window_packets": 0
+    },
+    "two_swaps": {
+      "different_original_rejected": true,
+      "exact_source_images": [
+        {
+          "frame": 70,
+          "kind": "original",
+          "pts": 70000,
+          "role": "before",
+          "sha256": "b433e51b0588e17898cfbf0f6cfbda1ebb00b5a310b803bbbbbf2c0ec1a8d0e8"
+        },
+        {
+          "frame": 70,
+          "kind": "crop",
+          "pts": 70000,
+          "role": "before",
+          "sha256": "fe8279a2ae3acc8f30ac0e08ee37dead8721f843716a955ce840e98c18ea8d11"
+        },
+        {
+          "frame": 74,
+          "kind": "original",
+          "pts": 74000,
+          "role": "during",
+          "sha256": "d11238d0b4ce9d28dc5c7d2ae4fee7ff754fb164aec791055232a6b96b4bcfd1"
+        },
+        {
+          "frame": 74,
+          "kind": "crop",
+          "pts": 74000,
+          "role": "during",
+          "sha256": "8b8a5fdb79d1ab664971f2f3f8aff7c23032b948579582cbc80a16cfe8b814a2"
+        },
+        {
+          "frame": 77,
+          "kind": "original",
+          "pts": 77000,
+          "role": "after",
+          "sha256": "cfd8ac440d2db8002e01401f9deb03fe8534809649985a0967c0bd6347042889"
+        },
+        {
+          "frame": 77,
+          "kind": "crop",
+          "pts": 77000,
+          "role": "after",
+          "sha256": "0e1ca15dcdb8b60aef0ac54df6245864a6ff7d8188f3a715f82373227a7a686c"
+        },
+        {
+          "frame": 127,
+          "kind": "original",
+          "pts": 127000,
+          "role": "before",
+          "sha256": "463024f4a43df47157557966e89c3f3bc6ddbe0a72a54d7b9fd3b3b28bc971ef"
+        },
+        {
+          "frame": 127,
+          "kind": "crop",
+          "pts": 127000,
+          "role": "before",
+          "sha256": "76defd278f5ac9d72341152271df25f826c1d1965c7f09d07e7ed67440768547"
+        },
+        {
+          "frame": 131,
+          "kind": "original",
+          "pts": 131000,
+          "role": "during",
+          "sha256": "e5e95c3ed323fc60a7b12f6c6ec98303de0cb1b5cc596b1ef3323d81179975cd"
+        },
+        {
+          "frame": 131,
+          "kind": "crop",
+          "pts": 131000,
+          "role": "during",
+          "sha256": "a70083eec8d59827f52ffea62cf1f6f711e2d5649b0f015444b509a744f43494"
+        },
+        {
+          "frame": 134,
+          "kind": "original",
+          "pts": 134000,
+          "role": "after",
+          "sha256": "b4d7a519efc6eec62e230d3edbe5de6e06eb3e8766acd66d55c8bf75b96d237d"
+        },
+        {
+          "frame": 134,
+          "kind": "crop",
+          "pts": 134000,
+          "role": "after",
+          "sha256": "83f1f89b79423d188b4f4c4a1223caa85ee102fa0802ca8e7dc956e5becc564c"
+        }
+      ],
+      "file_sha256": "403e5a87194c7a7a4f1632fb825653ac0499b68d96587e32c68a32634b860df0",
+      "known_edit_frames": [
+        [
+          71,
+          77
+        ],
+        [
+          128,
+          134
+        ]
+      ],
+      "legacy_packets": 0,
+      "pdf_api_json_agree": true,
+      "public_model_names_absent": true,
+      "representative_frames": [
+        [
+          70,
+          74,
+          77
+        ],
+        [
+          127,
+          131,
+          134
+        ]
+      ],
+      "signed_original_replay": true,
+      "source_time_s": [
+        [
+          2.367,
+          2.567
+        ],
+        [
+          4.267,
+          4.467
+        ]
+      ],
+      "template_set": "veritas-report-2.0.r113",
+      "version": "video-evidence-23",
+      "window_coverage": {
+        "affects_overall_confidence": false,
+        "observations": [
+          "Window 0.000\u20134.000 s from the start of the picture stream supplied a brief face-change range. 23 face samples were measured.",
+          "Window 2.000\u20136.000 s from the start of the picture stream supplied a brief face-change range. 34 face samples were measured.",
+          "Window 4.000\u20138.000 s from the start of the picture stream supplied no additional brief face-change range. 23 face samples were measured."
+        ],
+        "windows": [
+          {
+            "end_frame_index_exclusive": 120,
+            "measured_face_frames": 23,
+            "pixel_frames": 120,
+            "reason": null,
+            "scheduled_frames": 23,
+            "start_frame_index": 0,
+            "status": "localized"
+          },
+          {
+            "end_frame_index_exclusive": 180,
+            "measured_face_frames": 34,
+            "pixel_frames": 120,
+            "reason": null,
+            "scheduled_frames": 34,
+            "start_frame_index": 60,
+            "status": "localized"
+          },
+          {
+            "end_frame_index_exclusive": 240,
+            "measured_face_frames": 23,
+            "pixel_frames": 120,
+            "reason": null,
+            "scheduled_frames": 23,
+            "start_frame_index": 120,
+            "status": "no_distinct_range"
+          }
+        ]
+      },
+      "window_packets": 2
+    }
+  },
+  "held_receipt_sha256": "2ad036ae9ff72d03b3564ef381c6311e7863bad42f6860894970e3a07387909b",
+  "overall_decision_identical_flag_on_off": true,
+  "schema": "chipmunk.video-face-short-windows-app/1",
+  "simulated_paid_jobs": 4,
+  "unpaid_jobs": 0
+}

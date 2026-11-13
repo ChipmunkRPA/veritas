@@ -1424,6 +1424,19 @@ checks the available earlier sides of the generated-rewrite pairs. The
 generated later sides stay outside this reconstruction.
 [Publisher source replay and commands](writing-word-public-source-replay-2026-11-12.md)
 
+### Replay brief face changes on the eight-second clock
+
+```sh
+PYTHONPATH=backend python3 -B -S -m scripts.review_video_face_short_prefix_transfer \
+  docs/evaluation-panels/video-face-short-prefix-transfer-2026-11-12.json
+```
+
+The reader compares the current Full face checks, a four-second prefix, and
+three overlapping four-second windows on the same 54 held deliveries. The
+native procedure additionally checks original picture timestamps and crop
+pixels. It requires the exact publisher sources described in the study.
+[Face-change study and replay instructions](video-face-short-prefix-transfer-2026-11-12.md)
+
 ### Replay recent evaluations from a clean checkout
 
 From the repository root, use Python 3.11 or later. These commands read the

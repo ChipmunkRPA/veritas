@@ -136,6 +136,9 @@ The [overlapping speech confirmation](audio-dense-evidence-confirmation-2026-11-
 recounts matched gain-only and traffic deliveries from six generator families.
 It reports edit coverage and genuine time separately for the sparse, dense and
 combined window rules.
+The [narrower speech evidence study](audio-focused-window-transfer-2026-11-12.md)
+recounts 98 new exact deliveries with rain and train sound, including isolated
+backgrounds and marked genuine speech in partly edited files.
 The [native word-clock qualification](grid-reserve-word-clocks-2026-11-12.md)
 aligns publisher word intervals with original embedded speech and replays four
 ordinary mouth changes with unchanged soundtracks.

@@ -97,6 +97,12 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [narrower speech evidence study](audio-focused-window-transfer-2026-11-12.md)
+  compared 98 exact deliveries. Replacing a broad displayed range only when
+  it contains a corroborated narrow range preserved every useful sparse
+  location, found 3/18 new rain edits and 0/18 train edits, and marked nearly
+  identical genuine time. It passed its fixed gate. The next serving step
+  is an optional source-bound review with the original readings retained.
 - The [PNG Exif preview comparison](image-png-exif-preview-2026-11-12.md)
   can show a difference between a supported PNG and the thumbnail embedded
   in the same file. It located 11/12 feathered edits in one test group and

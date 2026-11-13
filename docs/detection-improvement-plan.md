@@ -97,6 +97,20 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [positive-only audio combination](audio-selective-fusion-transfer-2026-11-12.md)
+  added ten AI flags and one new genuine false-flag group in the archived
+  confirmation. The same fixed rule added zero flags on 32 unused published
+  RADAR recordings. The serving calibration is unchanged.
+- The [learned JPEG residual check](image-residual-encoder-transfer-2026-11-12.md)
+  found three useful regions across two encodes of the same held photograph.
+  It frequently flagged ordinary deliveries and missed every held LaMa edit.
+- The [mouth-region persistence check](video-mouth-sector-persistence-2026-11-12.md)
+  improved one CREMA-D comparison and missed all nine neural redraws that
+  preserved the measured mouth timing. Listener and phoneme synchrony and
+  broader redraw coverage remain open.
+- The [frozen writing check on Qwen edits](writing-position-qwen-confirmation-2026-11-12.md)
+  found two additional exact rewrite locations across two journal titles
+  and flagged none of the 14 original and genuine revision groups.
 - The [eight-second H.264 and VP9 check](video-face-short-carrier-transfer-2026-11-12.md)
   localized 27 of 30 and 30 of 30 exact face changes, respectively. It added
   zero ordinary flags in either format. The local opt-in passed paid-path,

@@ -1451,6 +1451,9 @@ python3 -B -IS backend/scripts/review_audio_modulation_partial_transfer.py docs/
 PYTHONPATH=backend python3 -B -S -m scripts.review_video_lipsync_repeat_audio docs/evaluation-panels/video-lipsync-repeat-audio-2026-11-12.json
 python3 -B -IS backend/scripts/review_writing_two_context_transfer.py docs/evaluation-panels/writing-two-context-transfer-2026-11-12.json
 python3 -B -IS backend/scripts/review_writing_position_confirmation.py docs/evaluation-panels/writing-position-confirmation-2026-11-12.json
+python3 -B -IS backend/scripts/review_writing_position_qwen.py docs/evaluation-panels/writing-position-qwen-confirmation-2026-11-12.json
+python3 -B -IS backend/scripts/review_audio_selective_fusion_transfer.py docs/evaluation-panels/audio-selective-fusion-transfer-2026-11-12.json docs/evaluation-panels/audio-selective-radar-transfer-2026-11-12.json
+PYTHONPATH=backend python3 -B -S -m scripts.review_video_mouth_sector_persistence docs/evaluation-panels/video-mouth-sector-persistence-2026-11-12.json
 ```
 
 The [image line-pattern audit](image-line-fingerprint-transfer-2026-11-12.md)

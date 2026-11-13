@@ -15,6 +15,7 @@ from app.core.canonical import canonical_hash
 from app.detectors.text.extract import extract, text_hash
 from app.evidence import (
     document_context,
+    document_email_contexts,
     document_matched_context,
     document_native_locations,
     document_paragraph_priority,
@@ -104,9 +105,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         doc = extract(original, extension, allow_ocr=replay_ocr)
     if used_ocr and not doc.source_rasters:
         raise ValueError("The local OCR runtime could not reproduce the original scan. Check that the verified OCR data are installed.")
-    if extension == ".eml" and doc.meta["email"]["body_content_type"] != "text/plain" and not (
-        document_scope.mapped_email_html(doc.meta["email"])
-    ):
+    unassigned_email_roles = (
+        (coverage.get(document_email_contexts.KEY) or {}).get("mapping") == "unmapped"
+        and all(anchor.get("kind") == "markup" for packet in evidence["packets"] for anchor in packet["anchors"])
+    )
+    if (extension == ".eml" and doc.meta["email"]["body_content_type"] != "text/plain"
+            and not document_scope.mapped_email_html(doc.meta["email"]) and not unassigned_email_roles):
         raise ValueError("Original-document replay requires a plain-text or source-mapped HTML EML body.")
     text, mapping = doc.text, doc.source_map
     if (doc.meta["original_sha256"] != source["sha256"] or len(text) != source["chars"]
@@ -125,6 +129,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_passage_coverage.verify_source(evidence, text, mapping, meta=doc.meta)
     document_scope.validate_checkpoint_agreement(evidence, text, mapping=mapping)
     unselected = document_unselected_responses.verify_source(evidence, text, mapping)
+    email_inputs = document_email_contexts.verify_source(evidence, text, mapping)
     position = document_passage_position.verify_source(evidence, text, mapping)
     alternatives = email_alternatives.verify_source(evidence, original.read_bytes()) if email_alternatives.KEY in coverage else None
 
@@ -169,6 +174,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     alternative_detail = " Verified both decoded email body renditions and reported source positions." if alternatives and "parts" in alternatives else ""
     position_detail = " Verified all three writing position inputs and their source ranges." if position else ""
     native_detail = " Verified decoded original text locations for the inspected writing." if document_native_locations.KEY in coverage else ""
+    email_input_detail = f" Verified source roles and text hashes for {email_inputs} classifier inputs." if email_inputs else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
-            f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}")
+            f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}")

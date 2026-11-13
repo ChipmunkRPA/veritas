@@ -14,6 +14,7 @@ import { numberPhrase, resultNumber, scaleNote, statisticalAlone } from './resul
 import { CAPTURE_BASIS, aloneOtherWay, markerBasisWord, markerOf, outsideValidated, recordOf, statisticalWithheld } from './record'
 import { failedSteps, findingsFailed } from './vocabulary'
 import { presentedCustomerAssessment } from './customerAssessment'
+import { IMAGE_REFERENCE_SECTION_ID } from '../evidence/imageReferenceApi'
 
 const STEP_TEXT = ['text-text', 'text-verdict-1', 'text-verdict-2', 'text-verdict-3', 'text-verdict-4', 'text-verdict-5'] as const
 
@@ -61,8 +62,9 @@ const againstInk = (d: NonNullable<AnalysisDetail['decision']>, profile: Analysi
  *  means / does not mean" with the natural-frequency line, and the next step. Only rendered once fusion has finished.
  *  The number follows `resultNumber` (D-68): the large numeral and the scale marker are for a decisive calibrated result in which
  *  two checks scored. `onExpert` is set in the plain view, where the not-validated list is one sentence and a link. */
-export default function AnswerModule({ analysis, findings, signals = [], extra, onExpert, opinion }: {
+export default function AnswerModule({ analysis, findings, signals = [], extra, onExpert, opinion, imageComparisonAvailable }: {
   analysis: AnalysisDetail; findings: readonly Finding[]; signals?: readonly FlagSignal[]; extra?: ReactNode; onExpert?: () => void
+  imageComparisonAvailable?: boolean
   /** N-19 (D-69): the examiner's opinion of a signed record, directly under the machine headline */
   opinion?: ReactNode
 }) {
@@ -106,6 +108,11 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
         <p className="m-0 font-semibold">{customer.scope_label}</p>
         <p className="mt-1 mb-0">{customer.scope_note}</p>
       </div>}
+      {imageComparisonAvailable && analysis.kind === 'image' && customer.applies &&
+        (customer.direction === 'inconclusive' || customer.direction === 'unavailable' || customer.scope === 'image_components') &&
+        <a href={`#${IMAGE_REFERENCE_SECTION_ID}`} className="mt-4 inline-block text-small text-accent underline underline-offset-2">
+          Compare with an earlier copy
+        </a>}
       {customer.soundtrack && <section aria-label="Speech in this soundtrack" className="mt-4 border border-border bg-surface px-4 py-3 max-w-[76ch]">
         <p className="m-0 text-small font-semibold">Speech in this soundtrack</p>
         <p className="mt-1 mb-0 text-body text-text">{customer.soundtrack.headline}</p>

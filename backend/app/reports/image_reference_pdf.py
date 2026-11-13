@@ -5,6 +5,7 @@ from __future__ import annotations
 import pymupdf
 
 from app.detectors.image import (
+    reference_exact_jpeg,
     reference_png_orientation,
     reference_png_oriented_crop,
     reference_png_oriented_resize,
@@ -72,11 +73,17 @@ def _summary(document, comparison, assets):
                              (252, "Submitted image", comparison["submitted"])):
         _text(page, MARGIN, y, f"{label} | {source['width']} x {source['height']} px", font="hebo")
         _text(page, MARGIN, y + 16, f"SHA-256 {source['sha256']}", size=9, font="cour", color=MUTED)
-    if (alignment := comparison.get("alignment")) and "submitted_overlap" in alignment:
+    schema = comparison["schema"]
+    if schema == reference_exact_jpeg.SCHEMA:
+        proof = comparison["alignment"]
+        _text(page, MARGIN, 302, "Same framing supported by exact JPEG block matches.", size=10, font="hebo")
+        _text(page, MARGIN, 318, f"{proof['exact_tiles']:,} of {proof['full_tiles']:,} full blocks matched after JPEG encoding.",
+              size=10, color=MUTED)
+        _text(page, MARGIN, 334, f"{proof['anchor_count']:,} unique detailed blocks supported alignment.", size=10, color=MUTED)
+    elif (alignment := comparison.get("alignment")) and "submitted_overlap" in alignment:
         _text(page, MARGIN, 302, f"Earlier copy overlap: {_area(alignment['reference_overlap'])}", size=10)
         _text(page, MARGIN, 318, f"Submitted image overlap: {_area(alignment['submitted_overlap'])}", size=10)
         _text(page, MARGIN, 334, "Areas outside these bounds were unassessed.", size=10, color=MUTED)
-    schema = comparison["schema"]
     if schema == reference_png_orientation.SCHEMA:
         proof = comparison["exact_orientation"]
         label = reference_png_orientation.LABELS[proof["transform"]]

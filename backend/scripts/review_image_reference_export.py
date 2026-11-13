@@ -13,6 +13,7 @@ from contextlib import ExitStack
 from fractions import Fraction
 from math import ceil, floor
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from PIL import Image, ImageChops, ImageDraw, ImageOps
 
@@ -25,6 +26,7 @@ RESIZE_SCHEMA = "chipmunk.image-reference-comparison/3"
 CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/4"
 EXACT_PNG_CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/5"
 JPEG_PNG_ENVELOPE_SCHEMA = "chipmunk.image-reference-comparison/10"
+EXACT_JPEG_IDENTITY_SCHEMA = "chipmunk.image-reference-comparison/11"
 ORIENTATION_SCHEMA = "chipmunk.image-reference-comparison/6"
 CROPPED_RESIZE_SCHEMAS = {CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, JPEG_PNG_ENVELOPE_SCHEMA}
 ORIENTATIONS = {
@@ -315,6 +317,51 @@ def _image(stack, blobs, asset, filename, mode, dimensions):
     return image
 
 
+def _same_replayed_fields(received, expected):
+    """Allow a browser to serialize an integral measurement as an integer."""
+    if type(expected) is float:
+        return type(received) in (int, float) and received == expected
+    if type(received) is not type(expected):
+        return False
+    if isinstance(expected, dict):
+        return received.keys() == expected.keys() and all(
+            _same_replayed_fields(received[key], value) for key, value in expected.items()
+        )
+    if isinstance(expected, list):
+        return len(received) == len(expected) and all(
+            _same_replayed_fields(a, b) for a, b in zip(received, expected, strict=True)
+        )
+    return received == expected
+
+
+def _exact_jpeg_replay(comparison, earlier, submitted, sub):
+    try:
+        from app.evidence.image_reference import inspect
+    except ImportError as error:
+        raise ValueError("Use the backend Python environment and run this reviewer as a module for exact JPEG exports") from error
+    def source_fields(record):
+        return {key: value for key, value in record.items() if key not in {"mask", "regions"}} | {
+            "regions": [{key: value for key, value in region.items()
+                         if key not in {"reference_crop", "submitted_crop", "submitted_overlay"}}
+                        for region in record["regions"]],
+        }
+
+    with TemporaryDirectory() as temporary:
+        evidence = Path(temporary) / "evidence"
+        result = inspect(earlier, submitted, evidence_dir=evidence, allow_proportional_resize=True,
+                         allow_oriented_crop=True, allow_oriented_resize=True, allow_embedded_photo=True,
+                         allow_exact_jpeg_identity=True)
+        _require(result.get("schema") == EXACT_JPEG_IDENTITY_SCHEMA
+                 and _same_replayed_fields(source_fields(comparison), source_fields(result))
+                 and all("submitted_overlay" in region for region in comparison["regions"]),
+                 "Exact JPEG source proof, regions or artifacts differ from recomputed evidence")
+        if "mask" not in result:
+            return None
+        with Image.open(evidence / result["mask"]["file"], formats=["PNG"]) as mask:
+            _require(mask.size == sub.size and mask.mode == "L", "Exact JPEG mask differs from source dimensions")
+            return mask.tobytes()
+
+
 def review(export, earlier, submitted):
     """Check source and crop bytes, mask geometry and the supported comparison proofs."""
     document = json.loads(_read(export, MAX_JSON_BYTES), object_pairs_hook=_record)
@@ -336,6 +383,7 @@ def review(export, earlier, submitted):
         sub = _source(stack, submitted_bytes, comparison["submitted"])
         resized = comparison["schema"] == RESIZE_SCHEMA or comparison["schema"] in CROPPED_RESIZE_SCHEMAS
         oriented = comparison["schema"] == ORIENTATION_SCHEMA
+        exact_jpeg = comparison["schema"] == EXACT_JPEG_IDENTITY_SCHEMA
         crop = comparison.get("reference_crop_bounds") if comparison["schema"] in CROPPED_RESIZE_SCHEMAS else None
         if resized:
             carrier = stack.enter_context(Image.open(io.BytesIO(submitted_bytes), formats=["PNG", "JPEG"]))
@@ -348,6 +396,9 @@ def review(export, earlier, submitted):
             mismatch, inverse = _orientation_replay(comparison, ref, sub, carrier)
             stack.enter_context(mismatch)
             overlap = (0, 0, sub.width, sub.height)
+        elif exact_jpeg:
+            expected_jpeg_mask = _exact_jpeg_replay(comparison, earlier, submitted, sub)
+            dx, dy, overlap = 0, 0, (0, 0, sub.width, sub.height)
         else:
             dx, dy, overlap = _geometry(comparison, ref, sub)
         if not regions:
@@ -359,6 +410,8 @@ def review(export, earlier, submitted):
         if resized:
             _require(expected_mask is not None and mask.tobytes() == (expected_mask.astype("uint8") * 255).tobytes(),
                      "Difference mask pixels differ from the recomputed resize comparison")
+        if exact_jpeg:
+            _require(mask.tobytes() == expected_jpeg_mask, "Difference mask pixels differ from the recomputed JPEG comparison")
         if oriented:
             with ImageChops.subtract(mask, mismatch) as unsupported:
                 _require(not unsupported.getbbox(), "Difference mask marks a pixel that matches the oriented source")

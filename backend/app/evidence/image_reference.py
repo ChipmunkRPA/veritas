@@ -16,6 +16,7 @@ from app.detectors.image import (
     reference_alignment,
     reference_compare,
     reference_crop_resize,
+    reference_exact_jpeg,
     reference_png_exact_resize,
     reference_png_orientation,
     reference_png_oriented_crop,
@@ -110,7 +111,7 @@ def _write_evidence(directory, comparison, reference, submitted, mask):
 def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | None = None,
             allow_integer_alignment: bool = False, allow_proportional_resize: bool = False,
             allow_oriented_crop: bool = False, allow_oriented_resize: bool = False,
-            allow_embedded_photo: bool = False) -> dict:
+            allow_embedded_photo: bool = False, allow_exact_jpeg_identity: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     before, after = _bytes(reference_path), _bytes(submitted_path)
     with Image.open(io.BytesIO(before)) as original, Image.open(io.BytesIO(after)) as questioned:
@@ -154,6 +155,10 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                     result, mask, schema = embedded_photo, selection, reference_png_screenshot.SCHEMA
         else:
             result, mask = reference_compare.compare_across_deliveries(reference, submitted, questioned)
+        if allow_exact_jpeg_identity and result["status"] == "integer_alignment_unresolved":
+            exact, selection = reference_exact_jpeg.compare(original, questioned, before, after)
+            if exact["status"] == "comparable":
+                result, mask, schema = exact, selection, reference_exact_jpeg.SCHEMA
     aligned = "alignment" in result
     output = {"schema": schema or f"chipmunk.image-reference-comparison/{2 if aligned else 1}",
               "coordinate_space": "exif-oriented-submitted" if aligned or schema else "exif-oriented-original",

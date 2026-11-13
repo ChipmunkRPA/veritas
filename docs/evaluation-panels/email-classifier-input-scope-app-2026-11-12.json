@@ -1,0 +1,72 @@
+{
+  "browser": {
+    "api_json_and_report_download_match": true,
+    "check_count": 1,
+    "page_errors": 0,
+    "per_check_roles_exact": true,
+    "plain_view": true
+  },
+  "focused_backend_tests": 45,
+  "focused_frontend_tests": 16,
+  "frontend_typecheck": true,
+  "historical_signed_source_replay": [
+    "veritas-report-2.0.r112",
+    "veritas-report-2.0.r116"
+  ],
+  "local_simulated_checkout": {
+    "cases": [
+      {
+        "layout": "plain",
+        "retained_check_counts": [
+          {
+            "body": 2,
+            "mixed": 3,
+            "quoted": 0,
+            "signature": 0,
+            "unmapped": 0
+          }
+        ],
+        "signed_source_replay": true,
+        "source_sha256": "1b9fd488066ec378496b44adad28193f3027d3dab244fe9aba1b1fe9be1cfe12"
+      },
+      {
+        "layout": "styled_html",
+        "retained_check_counts": [
+          {
+            "body": 0,
+            "mixed": 0,
+            "quoted": 0,
+            "signature": 0,
+            "unmapped": 4
+          }
+        ],
+        "signed_source_replay": true,
+        "source_sha256": "035c44feb6e59b1573c3fadd90716ec5fca3c851dc9aeb25a8f35677da0626d8"
+      }
+    ],
+    "paid_jobs": 2,
+    "unpaid_jobs": 0
+  },
+  "output_files": [
+    {
+      "file": "report.pdf",
+      "sha256": "084792ed738544b3fd808ece40ea6c0ddf15fb60eb7ba1fa180e0839ab7a1ddd"
+    },
+    {
+      "file": "export.json",
+      "sha256": "885e9d54b288ed730bd2ebd788d57aca1eb41c1509e27544e783b4c7c3d63d24"
+    },
+    {
+      "file": "plain-signed.zip",
+      "sha256": "0a7662cbb7cbad58619a37120b921100cd4ee4d6add5b35ae9400d113e455cce"
+    },
+    {
+      "file": "styled_html-signed.zip",
+      "sha256": "39ee5436d8f0522681cf55580d69d3fd1909b0901995260bc5a38784d57353ba"
+    }
+  ],
+  "schema": "chipmunk.email-classifier-input-scope-app/1",
+  "source_role_and_signed_commitment_mutations_rejected": true,
+  "template": "veritas-report-2.0.r117",
+  "visual_pdf_check_page": 6
+}

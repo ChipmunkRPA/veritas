@@ -71,6 +71,16 @@ describe('automated customer conclusion', () => {
     expect(screen.getByTestId('headline').textContent).not.toContain('original')
     expect(screen.getByTestId('customer-assessment').textContent).not.toContain('Reference-calibrated overall estimate:')
   })
+  it('links inconclusive and scoped image results to the available earlier-copy tool', () => {
+    const { rerender } = render(<AnswerModule analysis={analysis(.01)} findings={[]} imageComparisonAvailable />)
+    const name = 'Compare with an earlier copy'
+    expect(screen.getByRole('link', { name }).getAttribute('href')).toBe('#earlier-image-comparison')
+    rerender(<AnswerModule analysis={analysis(.01)} findings={[]} />)
+    expect(screen.queryByRole('link', { name })).toBeNull()
+    rerender(<AnswerModule analysis={analysis(.126264, { code: 'no_ai_indicators', contributions })}
+      findings={[]} signals={wholeSignals} imageComparisonAvailable />)
+    expect(screen.getByRole('link', { name })).toBeTruthy()
+  })
   it('describes skipped audio beside a supported visual assessment', () => {
     const cases = JSON.parse(readFileSync('../backend/tests/fixtures/customer_assessment_cases.json', 'utf8'))
     const input = cases.find((c: { name: string }) => c.name === 'skipped audio checks retain visual-only scope').input

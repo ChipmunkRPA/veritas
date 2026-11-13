@@ -44,7 +44,7 @@ import { requestRunAgain, unpublishedRevision } from '../../lib/api/rerun'
 import { deletable, mayDelete, mayExamine } from '../../lib/api/roles'
 import RevisionDeltas from './RevisionDeltas'
 import ImageEvidenceCards from '../evidence/ImageEvidenceCards'
-import ImageReferenceComparison from '../evidence/ImageReferenceComparison'
+import ImageReferenceComparison, { useImageReferenceAvailability } from '../evidence/ImageReferenceComparison'
 import DocumentArchiveComparison from '../evidence/DocumentArchiveComparison'
 import DocumentRevisionComparison from '../evidence/DocumentRevisionComparison'
 import MediaReferenceComparison from '../evidence/MediaReferenceComparison'
@@ -93,6 +93,7 @@ export default function AnalysisWorkspace() {
   const a = q.data
   const done = a?.status === 'done'
   const v2 = done && a?.decision != null
+  const imageComparisonAvailable = useImageReferenceAvailability(id, done && a?.kind === 'image')
   const events = useAnalysisEvents(id, !!a && !isTerminal(a.status))
   const legacy = useQuery({ queryKey: qk.legacy(id), queryFn: () => api.get(id), enabled: done, staleTime: Infinity })
   const findings = useFindings(id, done)
@@ -256,7 +257,7 @@ export default function AnalysisWorkspace() {
         </section>
 
   const expertInvitation = done ? <ExpertAnalysisInvitation analysisId={a.id} /> : null
-  const sourceComparison = !done ? null : a.kind === 'image' ? <ImageReferenceComparison key={a.id} analysisId={a.id} />
+  const sourceComparison = !done ? null : a.kind === 'image' ? <ImageReferenceComparison key={a.id} analysisId={a.id} available={imageComparisonAvailable} />
     : a.kind === 'document' ? <>
         <DocumentRevisionComparison key={`draft-${a.id}`} analysisId={a.id} />
         {/\.(txt|docx)$/i.test(a.filename) && <DocumentArchiveComparison key={`archive-${a.id}`} analysisId={a.id} />}
@@ -274,7 +275,9 @@ export default function AnalysisWorkspace() {
       {(a.kind === 'video' || a.kind === 'audio' || a.kind === 'document') && <MultimediaEvidenceCards analysisId={a.id} kind={a.kind} token={t} mediaReady={tokenReady} />}
       {evidenceFirst && <KeyFindings analysis={a} query={findings} signals={signals.data ?? []} exhibits={exhibits.data ?? []} token={t} plain />}
       {findings.isFetched
-        ? <AnswerModule analysis={a} findings={findings.data ?? []} signals={signals.data ?? []} onExpert={view === 'plain' ? () => chooseView('expert') : undefined} extra={a.kind === 'document' && r?.stats ? <DocumentShare stats={r.stats} estimate={a.decision && a.decision.code !== 'not_assessable' ? estimateOf(a.decision) : null} /> : undefined} />
+        ? <AnswerModule analysis={a} findings={findings.data ?? []} signals={signals.data ?? []}
+          onExpert={view === 'plain' ? () => chooseView('expert') : undefined} imageComparisonAvailable={imageComparisonAvailable}
+          extra={a.kind === 'document' && r?.stats ? <DocumentShare stats={r.stats} estimate={a.decision && a.decision.code !== 'not_assessable' ? estimateOf(a.decision) : null} /> : undefined} />
         : <section id="section-summary" className="scroll-mt-14 border-b border-border pb-8"><SkeletonRows /></section>}
       {expertInvitation}
       {view === 'plain' && (

@@ -456,6 +456,7 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
 def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.text.extract import text_hash
     from app.evidence import (
+        document_email_contexts,
         document_matched_context,
         document_native_locations,
         document_paragraph_priority,
@@ -488,6 +489,9 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     try:
         verify_repeated_passages(document, text, mapping)
         document_native_locations.validate(document)
+        if document_email_contexts.KEY in coverage:
+            frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+            document_email_contexts.verify_source(document, text, mapping, result=frozen)
         if document["version"] == document_scope.MATCHED_VERSION:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             document_matched_context.verify_source(document, text, mapping, result=frozen)
@@ -757,6 +761,7 @@ def _voice_interval_view(interval: dict, rate: int, video_origin_s: float | None
 
 
 def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[str, Any] | None:
+    from app.evidence.document_email_contexts import KEY as EMAIL_INPUT_SCOPE
     from app.evidence.document_native_locations import KEY as ORIGINAL_TEXT_LOCATIONS
 
     if snapshot.analysis.kind not in KINDS:
@@ -1085,6 +1090,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             if kind == "document" else None,
             "writing_agreement": _writing_agreement_view(document.get("coverage") or {}) if kind == "document" else None,
             "email_body_alternatives": (document.get("coverage") or {}).get("email_body_alternatives") if kind == "document" else None,
+            "email_classifier_input_scope": (document.get("coverage") or {}).get(EMAIL_INPUT_SCOPE) if kind == "document" else None,
             "coverage_details": ([f"{'Voice evidence' if key == 'audio' else 'Audio/video synchronization evidence'}: {channel['reason']}"
                                   for key, channel in (document.get("coverage", {}).get("channels") or {}).items()]
                                  if kind == "video" else

@@ -202,4 +202,18 @@ describe('ordinary document passage inspection', () => {
     expect(screen.getByText('Highlighted text includes message text and an email quote or signature.')).toBeTruthy()
     expect(screen.queryByText(/The highlight covers an email quote or signature/)).toBeNull()
   })
+
+  it('shows message-only and mixed email classifier inputs without an authorship inference', () => {
+    const set = evidence([])
+    show({ ...set, coverage: { ...set.coverage, email_classifier_input_scope: {
+      schema: 'document-email-classifier-input-scope/1', mime_part: '1.2', mapping: 'mapped',
+      checks: [{ signal_ref: { id: 'check.1', display_id: 'S01' }, unlisted: 1,
+        counts: { body: 2, quoted: 0, signature: 0, mixed: 3, unmapped: 0 }, windows: [] }],
+    } } })
+    const scope = screen.getByRole('region', { name: 'What the email writing checks read' })
+    expect(within(scope).getByText(/Selected MIME part 1.2/)).toBeTruthy()
+    expect(within(scope).getByRole('columnheader', { name: 'Message only' })).toBeTruthy()
+    expect(within(scope).getByRole('columnheader', { name: 'Mixed roles' })).toBeTruthy()
+    expect(within(scope).getAllByRole('cell').map((cell) => cell.textContent)).toEqual(['2', '0', '0', '3', '0', '1'])
+  })
 })

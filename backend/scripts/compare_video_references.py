@@ -13,6 +13,7 @@ from app.core.canonical import canonical_json
 from app.evidence.video_reference import (
     SCHEMA,
     SCHEMA_WITH_ADDITIONAL_SOUNDTRACK,
+    SCHEMA_WITH_CHANNEL_TIMING,
     SCHEMA_WITH_MARKED_SOUND_FALLBACK,
     SCHEMA_WITH_SHORT_TIMING,
     SCHEMA_WITH_SOUNDTRACK,
@@ -69,15 +70,22 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds = None
         if isinstance(record, dict):
             schema = record.get("schema")
-            local_sound = schema == SCHEMA_WITH_MARKED_SOUND_FALLBACK
+            channel_timing = schema == SCHEMA_WITH_CHANNEL_TIMING
+            timing = record.get("timing", {})
+            local_sound = schema == SCHEMA_WITH_MARKED_SOUND_FALLBACK or (
+                channel_timing and (timing.get("reason") == "profile" or "changed_audio_samples" in timing)
+            )
             additional = schema == SCHEMA_WITH_ADDITIONAL_SOUNDTRACK
-            options.update(include_local=("local_comparison" in record.get("picture", {}) if additional or local_sound
+            composite = additional or local_sound or channel_timing
+            options.update(include_local=("local_comparison" in record.get("picture", {}) if composite
                                           else schema != SCHEMA),
                            include_soundtrack=schema == SCHEMA_WITH_SOUNDTRACK
-                           or ((additional or local_sound) and "soundtrack_alignment" in record),
-                           include_additional_soundtrack=additional or (local_sound and "additional_soundtrack" in record))
+                           or (composite and "soundtrack_alignment" in record),
+                           include_additional_soundtrack=additional or (composite and "additional_soundtrack" in record),
+                           include_channel_timing=channel_timing)
             if "timing" in record and schema in (SCHEMA_WITH_TIMING, SCHEMA_WITH_SHORT_TIMING, SCHEMA_WITH_SOUNDTRACK,
-                                                 SCHEMA_WITH_ADDITIONAL_SOUNDTRACK, SCHEMA_WITH_MARKED_SOUND_FALLBACK):
+                                                 SCHEMA_WITH_ADDITIONAL_SOUNDTRACK, SCHEMA_WITH_MARKED_SOUND_FALLBACK,
+                                                 SCHEMA_WITH_CHANNEL_TIMING):
                 event_seconds = Fraction(record["timing"]["requested_earlier_time_s"])
                 short_fallback = (local_sound or schema == SCHEMA_WITH_SHORT_TIMING
                                   or record["timing"].get("waveform_basis") == SHORT_WAVEFORM_BASIS)

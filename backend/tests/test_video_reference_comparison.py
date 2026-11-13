@@ -4,6 +4,7 @@ import io
 import json
 import shutil
 import subprocess
+import wave
 from contextlib import contextmanager
 from copy import deepcopy
 from fractions import Fraction
@@ -72,6 +73,53 @@ def add_soundtracks(source, folder, name, tracks, *, subtitle_first=False):
                     "-c:v", "copy", "-c:a", "pcm_s16le", "-c:s", "mov_text", str(output)],
                    capture_output=True, check=True, timeout=20)
     return output
+
+
+def test_earlier_video_identifies_exact_move_in_one_stereo_channel(tmp_path):
+    generator = np.random.default_rng(766)
+    frames = generator.integers(0, 256, (70, 48, 64, 3), dtype=np.uint8)
+    video = encode(tmp_path, "silent", frames)
+    first = generator.integers(-6000, 6000, (44000, 2), dtype=np.int16)
+    analyzed = first.copy()
+    start, stop, offset = 15031, 22017, 3201
+    analyzed[start:stop, 1] = first[start - offset:stop - offset, 1]
+
+    def mux(name, pcm):
+        audio = tmp_path / f"{name}.wav"
+        with wave.open(str(audio), "wb") as output:
+            output.setparams((2, 2, 16000, 0, "NONE", ""))
+            output.writeframes(pcm.astype("<i2").tobytes())
+        clip = tmp_path / f"{name}.mov"
+        subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(video), "-i", str(audio),
+                        "-map", "0:v:0", "-map", "1:a:0", "-c:v", "copy", "-c:a", "pcm_s16le", str(clip)],
+                       capture_output=True, check=True, timeout=20)
+        return clip
+
+    before, after = mux("stereo-original", first), mux("stereo-edited", analyzed)
+    previous, _ = video_reference.compare(before, after)
+    assert "channel_timing" not in previous
+    result, assets = video_reference.compare(before, after, include_channel_timing=True)
+    assert result["schema"] == video_reference.SCHEMA_WITH_CHANNEL_TIMING
+    assert result["picture"]["changed_frames"] == 0
+    stereo = result["channel_timing"]
+    assert stereo["stream_indices"] == {"earlier": 1, "submitted": 1}
+    assert stereo["affects_overall_confidence"] is False
+    [right] = stereo["ranges"]
+    assert right["channel"] == "right" and right["range"]["shift_samples"] == offset
+    span = right["range"]
+    assert span["submitted_samples"] == span["changed_samples"] == [start, stop]
+    assert span["earlier"]["source_pts"] == [start - offset, stop - offset]
+    actual = read_wav(assets[span["submitted"]["audio"]["file"]])
+    np.testing.assert_array_equal(actual, analyzed[start:stop, 1] / 32768)
+    with pymupdf.open(stream=render_comparison(result, assets), filetype="pdf") as document:
+        assert "Right channel timing" in document[-1].get_text()
+        assert "Analyzed clip" in document[-1].get_text()
+        assert "Earlier stream 1" in document[-1].get_text() and "Analyzed stream 1" in document[-1].get_text()
+        assert "verified picture timeline" in document[-1].get_text()
+    exported = tmp_path / "stereo-export.json"
+    exported.write_text(json.dumps({"comparison": result, "assets": {
+        name: base64.b64encode(raw).decode() for name, raw in assets.items()}}))
+    assert run(before, after, exported, verify=True) == result
 
 
 @pytest.fixture

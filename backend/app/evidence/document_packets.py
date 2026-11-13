@@ -23,6 +23,7 @@ from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
 from app.evidence import (
+    document_email_contexts,
     document_matched_context,
     document_native_locations,
     document_paragraph_priority,
@@ -329,6 +330,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_passage_coverage.validate(document)
         document_passage_position.validate(document)
         document_unselected_responses.validate(document)
+        document_email_contexts.validate(document)
         document_scope.validate_checkpoint_agreement(document)
         if email_alternatives.KEY in document.get("coverage", {}):
             email_alternatives.validate_set(document, canonical_hash(document["coverage"][email_alternatives.KEY]))
@@ -510,6 +512,13 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][email_alternatives.KEY] = alternative_review
         email_alternatives.validate_set(document, canonical_hash(alternative_review))
         email_alternatives.verify_source(document, source)
+    if decoded["meta"].get("method") == "email":
+        try:
+            context_scope = document_email_contexts.build(result, text, mapping, decoded["meta"].get("email"))
+            if context_scope is not None:
+                document["coverage"][document_email_contexts.KEY] = context_scope
+        except (ValueError, KeyError, TypeError) as error:
+            raise DocumentPacketIntegrityError("Email classifier inputs differ from the frozen text or mapping") from error
     if checkpoint_review is not None:
         document["coverage"][document_scope.CHECKPOINT_AGREEMENT_KEY] = checkpoint_review
         document_scope.validate_checkpoint_agreement(document, text, result=result, mapping=mapping)
@@ -675,6 +684,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
                                                     result=result, meta=decoded["meta"])
             document_unselected_responses.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_passage_position.verify_source(document, decoded["text"], decoded["source_map"], result=result)
+            document_email_contexts.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             if document_native_locations.KEY in document["coverage"]:
                 for packet in document["packets"]:
                     if packet["anchors"] != _inspection_anchors(decoded["source_map"], packet["inspection_scope"], len(decoded["text"])):

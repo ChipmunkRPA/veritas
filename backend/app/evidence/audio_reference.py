@@ -108,6 +108,7 @@ def _read_track(path, source, *, max_seconds, origin, video, stream_position=0, 
         channel_info["channels"] == 2 and channel_info["sample_rate"] == AUDIO_RATE and (
             (mapping["source_codec"], container) == ("pcm_s16le", "wav")
             or (mapping["source_codec"], container, mapping.get("source_bit_depth")) == ("flac", "flac", 16)
+            or (video and mapping["source_codec"] == "pcm_s16le")
         )
     )
     stereo = channel_info, decoded.stereo_pcm, stereo_native
@@ -340,12 +341,15 @@ def _timing_excerpt(assets, prefix, side, pcm, pts, interval):
     }
 
 
-def _channel_timing(decoded, stereo, assets):
+def channel_timing(decoded, assets, *, sample_limit=None):
     from app.evidence.audio_exact_channel_timing import locate
 
-    if stereo is None or stereo["status"] != "measured" or not all(item[3][2] for item in decoded):
+    if not all(item[0][0] == "measured" and item[3][1] is not None and item[3][2] for item in decoded):
         return None
-    count = decoded[0][0][2]["samples"]
+    first, last = (item[0][2] for item in decoded)
+    if (first["relative_start"], first["samples"]) != (last["relative_start"], last["samples"]):
+        return None
+    count = first["samples"]
     if not 24000 <= count <= 192000:
         return None
     ranges = []
@@ -353,6 +357,10 @@ def _channel_timing(decoded, stereo, assets):
         values = [item[3][1][:, index] for item in decoded]
         span = locate(*values)
         if span is None:
+            continue
+        if sample_limit is not None and max(span[key][1] for key in (
+            "earlier_samples", "submitted_samples", "changed_samples"
+        )) > sample_limit:
             continue
         milliseconds = span["shift_samples"] * 1000 / AUDIO_RATE
         direction = "later" if milliseconds > 0 else "earlier"
@@ -441,7 +449,7 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
     if include_local_timing:
         record.update(schema=SCHEMA_WITH_LOCAL_TIMING, local_timing=_local_timing((first, second), audio, assets))
         if include_channel_timing:
-            timing = _channel_timing((first, second), stereo, assets)
+            timing = channel_timing((first, second), assets) if stereo and stereo["status"] == "measured" else None
             if timing is not None:
                 record.update(schema=SCHEMA_WITH_CHANNEL_TIMING, channel_timing=timing)
     if sources != tuple(_identity(path, name) for path, name in zip(paths, filenames, strict=True)):

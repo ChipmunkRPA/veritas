@@ -4,8 +4,8 @@ import { Button } from '../../components/ui'
 import { saveBlob } from '../../lib/api/reports'
 import {
   compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
-  exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, jpegPngEnvelopeSchema,
-  imageReferenceExport, orientationLabels, referencePngSrc,
+  exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema,
+  IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, orientationLabels, referencePngSrc,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -71,6 +71,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const orientation = comparison.schema === exactPngOrientationSchema ? comparison.exact_orientation : orientedCrop
   const embeddedPhoto = comparison.schema === embeddedPhotoSchema ? comparison.embedded_native_photo : undefined
   const delivery = comparison.schema === jpegPngEnvelopeSchema
+  const sameJpegFraming = comparison.schema === exactJpegIdentitySchema ? alignment : undefined
   const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' || exact || delivery
     ? comparison.reference_crop_bounds : undefined
   const resized = comparable && (Boolean(cropped) || comparison.schema === 'chipmunk.image-reference-comparison/3')
@@ -117,6 +118,12 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       We compared color differences across plausible resize, tone and compression variations.
       Ordinary processing can still cause highlights. This comparison does not assess AI authorship.
     </p>}
+    {sameJpegFraming && <p className="mt-2 mb-0 text-small text-text-muted">
+      Exact JPEG block matches support the same framing. After encoding the earlier PNG with the submitted JPEG settings,
+      {' '}{sameJpegFraming.exact_tiles?.toLocaleString('en-US')} of {sameJpegFraming.full_tiles?.toLocaleString('en-US')} complete blocks matched.
+      {' '}{sameJpegFraming.anchor_count?.toLocaleString('en-US')} unique detailed blocks supported the alignment.
+      Ordinary edits can produce highlighted differences.
+    </p>}
     {comparable && exact && <p className="mt-2 mb-0 text-small text-text-muted">
       {completeMatch ? 'The resized area matches every submitted pixel.'
         : `The resized area matches ${exact.matched_pixels.toLocaleString('en-US')} submitted pixels exactly.`}
@@ -157,7 +164,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     {alignment && <dl className="mt-3 mb-0 grid grid-cols-1 gap-2 text-small text-text-muted sm:grid-cols-2">
       <div><dt className="font-medium text-text">Submitted image overlap</dt><dd className="m-0"><NativeArea area={alignment.submitted_overlap} /></dd></div>
       <div><dt className="font-medium text-text">Earlier copy overlap</dt><dd className="m-0"><NativeArea area={alignment.reference_overlap} /></dd></div>
-      <div className="sm:col-span-2"><dt className="sr-only">Comparison coverage</dt><dd className="m-0">Pixels outside the overlap were unassessed.</dd></div>
+      {!sameJpegFraming && <div className="sm:col-span-2"><dt className="sr-only">Comparison coverage</dt><dd className="m-0">Pixels outside the overlap were unassessed.</dd></div>}
     </dl>}
     {comparable && regions.length > 0 && <>
       {mask && <div className="mt-4 max-w-xl">
@@ -228,7 +235,8 @@ function ComparisonForm({ analysisId }: { analysisId: string }) {
     }
   }
 
-  return <section aria-labelledby={headingId} className="rounded-md border border-border p-4">
+  return <section id={IMAGE_REFERENCE_SECTION_ID} aria-labelledby={headingId} tabIndex={-1}
+    className="scroll-mt-14 rounded-md border border-border p-4">
     <h2 id={headingId} className="m-0 text-body font-medium text-text">Compare with an earlier copy</h2>
     <p className="mt-2 mb-0 max-w-[75ch] text-small text-text-muted">
       Choose an earlier copy to look for pixel differences. Ordinary processing can produce differences, and establishing how a change was made or which copy came first requires separate evidence.
@@ -251,14 +259,19 @@ function ComparisonForm({ analysisId }: { analysisId: string }) {
   </section>
 }
 
-export default function ImageReferenceComparison({ analysisId }: { analysisId: string }) {
+export function useImageReferenceAvailability(analysisId: string, enabled = true): boolean {
   const availability = useQuery({
     queryKey: ['analysis', analysisId, 'image-reference-comparison'],
     queryFn: ({ signal }) => comparisonAvailability(analysisId, signal),
     refetchOnMount: 'always',
     refetchOnWindowFocus: false,
     retry: false,
+    enabled,
   })
-  return availability.isFetchedAfterMount && availability.data === true && !availability.isError
-    ? <ComparisonForm key={analysisId} analysisId={analysisId} /> : null
+  return enabled && availability.isFetchedAfterMount && availability.data === true && !availability.isError
+}
+
+export default function ImageReferenceComparison({ analysisId, available }: { analysisId: string; available?: boolean }) {
+  const checked = useImageReferenceAvailability(analysisId, available === undefined)
+  return (available ?? checked) ? <ComparisonForm key={analysisId} analysisId={analysisId} /> : null
 }

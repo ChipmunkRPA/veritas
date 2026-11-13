@@ -44,6 +44,11 @@ export interface ImageReferenceRecord {
   alignment?: {
     submitted_overlap: NativeImageArea
     reference_overlap: NativeImageArea
+    method?: string
+    full_tiles?: number
+    exact_tiles?: number
+    anchor_count?: number
+    supported_zones?: [number, number][]
   }
   submitted_over_reference_xy?: [[number, number], [number, number]]
   reference_crop_bounds?: NativeImageArea
@@ -77,6 +82,8 @@ export const exactOrientedCropSchema = 'chipmunk.image-reference-comparison/7'
 export const exactOrientedResizeSchema = 'chipmunk.image-reference-comparison/8'
 export const embeddedPhotoSchema = 'chipmunk.image-reference-comparison/9'
 export const jpegPngEnvelopeSchema = 'chipmunk.image-reference-comparison/10'
+export const exactJpegIdentitySchema = 'chipmunk.image-reference-comparison/11'
+export const IMAGE_REFERENCE_SECTION_ID = 'earlier-image-comparison'
 export const orientationLabels = {
   rotate_90_clockwise: '90-degree clockwise rotation',
   rotate_180: '180-degree rotation',
@@ -136,6 +143,18 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
     throw new Error('The server returned an incomplete image comparison.')
   }
   const proof = comparison.exact_projection
+  if (comparison.schema === exactJpegIdentitySchema) {
+    const alignment = comparison.alignment
+    const { width, height } = comparison.submitted
+    if (comparison.status !== 'comparable' || alignment?.method !== 'exact_decoded_jpeg_delivery_identity'
+        || comparison.reference.width !== width || comparison.reference.height !== height
+        || ![alignment.submitted_overlap, alignment.reference_overlap].every(area =>
+          validArea(area) && area.x === 0 && area.y === 0 && area.w === width && area.h === height)
+        || !Number.isSafeInteger(alignment.full_tiles) || !Number.isSafeInteger(alignment.exact_tiles)
+        || !Number.isSafeInteger(alignment.anchor_count) || !Array.isArray(alignment.supported_zones)) {
+      throw new Error('The server returned an incomplete JPEG alignment comparison.')
+    }
+  }
   if (comparison.schema === exactPngCropResizeSchema && (!comparison.reference_crop_bounds
       || !proof || !Number.isSafeInteger(proof.matched_pixels) || !Array.isArray(proof.matched_tiles)
       || !Array.isArray(comparison.supported_resize_kernels)

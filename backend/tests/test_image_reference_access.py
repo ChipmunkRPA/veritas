@@ -19,7 +19,7 @@ from sqlalchemy.orm import Session
 
 from app.api import auth, security, v2_image_reference
 from app.core.config import settings
-from app.detectors.image import reference_png_orientation
+from app.detectors.image import reference_exact_jpeg, reference_png_orientation
 from app.main import app
 from app.storage.db import Analysis, Artefact, Base, CaseMemberRow, CaseRow
 from app.storage.objects import ObjectStore
@@ -608,3 +608,77 @@ def test_jpeg_png_envelope_is_opt_in_and_replays_native_evidence(reference_http,
     paths[0].write_text(json.dumps(export))
     with pytest.raises(ValueError, match="Resize comparison differs from recomputed"):
         review(*paths)
+
+
+def test_exact_jpeg_identity_replays_only_when_fallback_is_needed(reference_http, tmp_path, monkeypatch):
+    f = reference_http
+    # Smooth broadly distributed detail gives exact JPEG blocks but no distinctive ORB correspondence.
+    y, x = np.indices((320, 384))
+    red = 124 + 40 * np.sin((x + .34*y) / 30) + 30 * np.cos((y + .11*x) / 24)
+    green = 116 + 36 * np.sin((x - .23*y) / 37) + 29 * np.sin((y + .13*x) / 28)
+    blue = 119 + 40 * np.cos((y + .17*x) / 29) + 31 * np.sin((x + .21*y) / 30)
+    original = np.rint(np.stack((red, green, blue), axis=-1)).astype(np.uint8)
+    earlier = _png(original)
+    altered = original.copy()
+    patch = altered[164:196, 134:166]
+    patch[:] = np.clip(patch.astype(np.int16) + [15, -8, 15], 0, 255)
+
+    def question(pixels):
+        with io.BytesIO() as output:
+            Image.fromarray(pixels).save(output, "JPEG", quality=75, subsampling=2)
+            body = output.getvalue()
+        source = f.store.put_bytes(body)
+        with Session(f.engine) as db:
+            analysis = db.get(Analysis, "image-a")
+            analysis.sha256, analysis.size_bytes = source.sha256, source.size_bytes
+            db.commit()
+        return body
+
+    def compare():
+        response = f.client.post(_url(), headers=f.viewer, files=_upload(earlier), data={"include_pdf": "true"})
+        assert response.status_code == 200, response.text
+        return response.json()
+
+    submitted = question(altered)
+    monkeypatch.setattr(settings, "image_reference_exact_jpeg_identity", False)
+    off = compare()
+    assert off["comparison"]["status"] == "integer_alignment_unresolved" and off["pngs"] == {}
+    monkeypatch.setattr(settings, "image_reference_exact_jpeg_identity", True)
+    payload = compare()
+    comparison = payload["comparison"]
+    assert comparison["schema"] == reference_exact_jpeg.SCHEMA and comparison["status"] == "comparable"
+    proof = comparison["alignment"]
+    assert proof["method"] == reference_exact_jpeg.METHOD and proof["reference_minus_submitted"] == {"x": 0, "y": 0}
+    assert proof["anchor_count"] >= 24 and len(proof["anchor_sha256"]) == 64 and "anchors" not in proof
+    paths = [tmp_path / name for name in ("export.json", "earlier.png", "submitted.jpg")]
+    export = {"comparison": comparison, "pngs": payload["pngs"]}
+    paths[0].write_text(json.dumps(export))
+    paths[1].write_bytes(earlier)
+    paths[2].write_bytes(submitted)
+    assert review_oriented_resize(*paths)["crops_verified"] >= 2
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"], validate=True), filetype="pdf") as pdf:
+        text = pdf[0].get_text()
+        assert "Same framing supported by exact JPEG block matches." in text
+        assert f"{proof['exact_tiles']:,} of {proof['full_tiles']:,} full blocks matched" in text
+        _assert_pdf_assets(pdf, pdf[0], (comparison["mask"],), payload)
+        region = comparison["regions"][0]
+        _assert_pdf_assets(pdf, pdf[1], tuple(region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")), payload)
+
+    proof["anchor_sha256"] = "b" * 64
+    paths[0].write_text(json.dumps(export))
+    with pytest.raises(ValueError, match="Exact JPEG source proof"):
+        review_oriented_resize(*paths)
+
+    clean_bytes = question(original)
+    clean = compare()
+    assert clean["comparison"]["schema"] == reference_exact_jpeg.SCHEMA
+    assert clean["comparison"]["status"] == "comparable" and clean["comparison"]["regions"] == [] and clean["pngs"] == {}
+    assert clean["comparison"]["background_fraction"] == 1.
+    clean["comparison"]["background_fraction"] = 1  # Browser JSON.stringify serializes integral measurements as integers.
+    paths[0].write_text(json.dumps({key: clean[key] for key in ("comparison", "pngs")}))
+    paths[2].write_bytes(clean_bytes)
+    assert review_oriented_resize(*paths)["mask_pixels_counted"] == 0
+    clean["comparison"]["background_fraction"] = True
+    paths[0].write_text(json.dumps({key: clean[key] for key in ("comparison", "pngs")}))
+    with pytest.raises(ValueError, match="Exact JPEG source proof"):
+        review_oriented_resize(*paths)

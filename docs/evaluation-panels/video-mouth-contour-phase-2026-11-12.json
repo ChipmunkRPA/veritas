@@ -1,0 +1,4591 @@
+{
+  "development_sha256": "ed718dc8e00399469c8840adec56f07e2f736b254f9a32ea2d380c3768d764f9",
+  "freeze_sha256": "8a457891a8eeb19bcde580b0da54e6056d366ff9492af7cf0dc2a9c7ac5a8151",
+  "held_sha256": "32d8cebdb65023d46c255be2da50ea83b02e6faaa62ed9e45e8f5a57393978dd",
+  "native_audit": {
+    "files": 22,
+    "native_crops": 71,
+    "selected_ranges": 25
+  },
+  "points": {
+    "coarse_adjusted": 0.8016229011118412,
+    "fine_phase": 1.1010133028030396
+  },
+  "protocol": {
+    "candidate": "Scan cores of 8, 12, 16, or 20 pictures with five-picture flanks. Require supported phase losses on at least three common sectors and positive before/after agreement in each. Keep one strongest range per arm.",
+    "gate": "At least four correctly localized independently aligned redraws across three groups, at least 70% coverage on each main held class, at most two ordinary flags total and none on untouched recordings, H.264 recompression or cuts. Temporal IoU >=0.50.",
+    "measurement": "On a rigid eye and lip-corner coordinate system, sample tangential profiles from inner and outer rails of a mouth-centered contour. Compare signed fine-band phase agreement against two off-phase pairings. Subtract a matched outer rail and compare independently to the coarse-band change.",
+    "native": "Band-pass filter decoded native luminance before sampling, require all rail points on observed pixels, no synthesis, no alternate file, no authored mask, no audio. Require a verified picture clock and one shot.",
+    "point": "Third-largest strictly positive ordinary maximum, or .02 if higher, from the earlier GRID development controls only."
+  },
+  "schema": "chipmunk.video-mouth-contour-phase/1",
+  "splits": {
+    "development": {
+      "geometry_frames": 4200,
+      "native_picture_ticks": 4200,
+      "rows": [
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5202533788979053,
+              "seconds": [
+                "31/25",
+                "47/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7259063273668289,
+              "seconds": [
+                "23/25",
+                "43/25"
+              ]
+            }
+          },
+          "clip": 1,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6661011949181557,
+              "seconds": [
+                "41/25",
+                "53/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6661011949181557,
+              "seconds": [
+                "41/25",
+                "53/25"
+              ]
+            }
+          },
+          "clip": 1,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.7012963220477104,
+              "seconds": [
+                "49/25",
+                "13/5"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8678151033818722,
+              "seconds": [
+                "49/25",
+                "13/5"
+              ]
+            }
+          },
+          "clip": 1,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.46815507858991623,
+              "seconds": [
+                "41/25",
+                "53/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9014893919229507,
+              "seconds": [
+                "12/25",
+                "32/25"
+              ]
+            }
+          },
+          "clip": 1,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.28835271298885345,
+              "seconds": [
+                "2",
+                "14/5"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7041291985660791,
+              "seconds": [
+                "12/25",
+                "28/25"
+              ]
+            }
+          },
+          "clip": 1,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.9806814529001713,
+              "seconds": [
+                "43/25",
+                "63/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9917486682534218,
+              "seconds": [
+                "44/25",
+                "64/25"
+              ]
+            }
+          },
+          "clip": 1,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5202533788979053,
+              "seconds": [
+                "31/25",
+                "47/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7259063273668289,
+              "seconds": [
+                "23/25",
+                "43/25"
+              ]
+            }
+          },
+          "clip": 1,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "audio_delay_320ms"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6108686700463295,
+              "seconds": [
+                "6/25",
+                "22/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6935231909155846,
+              "seconds": [
+                "6/25",
+                "22/25"
+              ]
+            }
+          },
+          "clip": 2,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6108686700463295,
+              "seconds": [
+                "6/25",
+                "22/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6935231909155846,
+              "seconds": [
+                "6/25",
+                "22/25"
+              ]
+            }
+          },
+          "clip": 2,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6108686700463295,
+              "seconds": [
+                "6/25",
+                "22/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6935231909155846,
+              "seconds": [
+                "6/25",
+                "22/25"
+              ]
+            }
+          },
+          "clip": 2,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6108686700463295,
+              "seconds": [
+                "6/25",
+                "22/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8614184334874153,
+              "seconds": [
+                "1/5",
+                "1"
+              ]
+            }
+          },
+          "clip": 2,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6108686700463295,
+              "seconds": [
+                "6/25",
+                "22/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6935231909155846,
+              "seconds": [
+                "6/25",
+                "22/25"
+              ]
+            }
+          },
+          "clip": 2,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6108686700463295,
+              "seconds": [
+                "6/25",
+                "22/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7373108118772507,
+              "seconds": [
+                "44/25",
+                "64/25"
+              ]
+            }
+          },
+          "clip": 2,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6108686700463295,
+              "seconds": [
+                "6/25",
+                "22/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6935231909155846,
+              "seconds": [
+                "6/25",
+                "22/25"
+              ]
+            }
+          },
+          "clip": 2,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "audio_delay_320ms"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5614943001419306,
+              "seconds": [
+                "32/25",
+                "8/5"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8081050887703896,
+              "seconds": [
+                "33/25",
+                "41/25"
+              ]
+            }
+          },
+          "clip": 3,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.579949714243412,
+              "seconds": [
+                "32/25",
+                "8/5"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8155094850808382,
+              "seconds": [
+                "33/25",
+                "41/25"
+              ]
+            }
+          },
+          "clip": 3,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4953320473432541,
+              "seconds": [
+                "11/5",
+                "63/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8791065514087677,
+              "seconds": [
+                "43/25",
+                "63/25"
+              ]
+            }
+          },
+          "clip": 3,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5286358892917633,
+              "seconds": [
+                "9/5",
+                "53/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0871036648750305,
+              "seconds": [
+                "38/25",
+                "58/25"
+              ]
+            }
+          },
+          "clip": 3,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5149811431765556,
+              "seconds": [
+                "43/25",
+                "63/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0651958361268044,
+              "seconds": [
+                "43/25",
+                "63/25"
+              ]
+            }
+          },
+          "clip": 3,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4953320473432541,
+              "seconds": [
+                "11/5",
+                "63/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9325180128216743,
+              "seconds": [
+                "46/25",
+                "58/25"
+              ]
+            }
+          },
+          "clip": 3,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5614943001419306,
+              "seconds": [
+                "32/25",
+                "8/5"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8081050887703896,
+              "seconds": [
+                "33/25",
+                "41/25"
+              ]
+            }
+          },
+          "clip": 3,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "audio_delay_320ms"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.7199116684496403,
+              "seconds": [
+                "3/5",
+                "27/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7199116684496403,
+              "seconds": [
+                "3/5",
+                "27/25"
+              ]
+            }
+          },
+          "clip": 4,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.7199116684496403,
+              "seconds": [
+                "3/5",
+                "27/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7591042518615723,
+              "seconds": [
+                "6/5",
+                "46/25"
+              ]
+            }
+          },
+          "clip": 4,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.597642108798027,
+              "seconds": [
+                "11/5",
+                "63/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6740097180008888,
+              "seconds": [
+                "39/25",
+                "59/25"
+              ]
+            }
+          },
+          "clip": 4,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.7199116684496403,
+              "seconds": [
+                "3/5",
+                "27/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8478799890726805,
+              "seconds": [
+                "31/25",
+                "43/25"
+              ]
+            }
+          },
+          "clip": 4,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.597642108798027,
+              "seconds": [
+                "11/5",
+                "63/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7996659409254789,
+              "seconds": [
+                "29/25",
+                "9/5"
+              ]
+            }
+          },
+          "clip": 4,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.7039968073368073,
+              "seconds": [
+                "3/5",
+                "7/5"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8471185117959976,
+              "seconds": [
+                "38/25",
+                "46/25"
+              ]
+            }
+          },
+          "clip": 4,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.7199116684496403,
+              "seconds": [
+                "3/5",
+                "27/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7199116684496403,
+              "seconds": [
+                "3/5",
+                "27/25"
+              ]
+            }
+          },
+          "clip": 4,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "audio_delay_320ms"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5717644095420837,
+              "seconds": [
+                "46/25",
+                "66/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8258126825094223,
+              "seconds": [
+                "42/25",
+                "62/25"
+              ]
+            }
+          },
+          "clip": 5,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5501263961195946,
+              "seconds": [
+                "9/5",
+                "13/5"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8245456144213676,
+              "seconds": [
+                "42/25",
+                "62/25"
+              ]
+            }
+          },
+          "clip": 5,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5072105545550585,
+              "seconds": [
+                "6/25",
+                "18/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7753035202622414,
+              "seconds": [
+                "6/25",
+                "18/25"
+              ]
+            }
+          },
+          "clip": 5,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5072105545550585,
+              "seconds": [
+                "6/25",
+                "18/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8969903662800789,
+              "seconds": [
+                "41/25",
+                "61/25"
+              ]
+            }
+          },
+          "clip": 5,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.570314222946763,
+              "seconds": [
+                "9/5",
+                "13/5"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7753035202622414,
+              "seconds": [
+                "6/25",
+                "18/25"
+              ]
+            }
+          },
+          "clip": 5,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5072105545550585,
+              "seconds": [
+                "6/25",
+                "18/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7753035202622414,
+              "seconds": [
+                "6/25",
+                "18/25"
+              ]
+            }
+          },
+          "clip": 5,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5717644095420837,
+              "seconds": [
+                "46/25",
+                "66/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8258126825094223,
+              "seconds": [
+                "42/25",
+                "62/25"
+              ]
+            }
+          },
+          "clip": 5,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "audio_delay_320ms"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5257714744657278,
+              "seconds": [
+                "59/25",
+                "67/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7711157752200961,
+              "seconds": [
+                "38/25",
+                "2"
+              ]
+            }
+          },
+          "clip": 6,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5257714744657278,
+              "seconds": [
+                "59/25",
+                "67/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7232200130820274,
+              "seconds": [
+                "12/25",
+                "4/5"
+              ]
+            }
+          },
+          "clip": 6,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5257714744657278,
+              "seconds": [
+                "59/25",
+                "67/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7232200130820274,
+              "seconds": [
+                "12/25",
+                "4/5"
+              ]
+            }
+          },
+          "clip": 6,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5257714744657278,
+              "seconds": [
+                "59/25",
+                "67/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7879991233348846,
+              "seconds": [
+                "2/5",
+                "6/5"
+              ]
+            }
+          },
+          "clip": 6,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.8162010237574577,
+              "seconds": [
+                "3/5",
+                "7/5"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8162010237574577,
+              "seconds": [
+                "3/5",
+                "7/5"
+              ]
+            }
+          },
+          "clip": 6,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5490201786160469,
+              "seconds": [
+                "46/25",
+                "66/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7232200130820274,
+              "seconds": [
+                "12/25",
+                "4/5"
+              ]
+            }
+          },
+          "clip": 6,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5257714744657278,
+              "seconds": [
+                "59/25",
+                "67/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7711157752200961,
+              "seconds": [
+                "38/25",
+                "2"
+              ]
+            }
+          },
+          "clip": 6,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "audio_delay_320ms"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5807409062981606,
+              "seconds": [
+                "9/5",
+                "61/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.1010133028030396,
+              "seconds": [
+                "48/25",
+                "12/5"
+              ]
+            }
+          },
+          "clip": 7,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6110631227493286,
+              "seconds": [
+                "9/5",
+                "61/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.128478854894638,
+              "seconds": [
+                "39/25",
+                "59/25"
+              ]
+            }
+          },
+          "clip": 7,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5591776669025421,
+              "seconds": [
+                "9/5",
+                "61/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9971482679247856,
+              "seconds": [
+                "48/25",
+                "12/5"
+              ]
+            }
+          },
+          "clip": 7,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4498300552368164,
+              "seconds": [
+                "26/25",
+                "46/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9510573726147413,
+              "seconds": [
+                "2/5",
+                "26/25"
+              ]
+            }
+          },
+          "clip": 7,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5382690727710724,
+              "seconds": [
+                "21/25",
+                "41/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9057379812002182,
+              "seconds": [
+                "48/25",
+                "12/5"
+              ]
+            }
+          },
+          "clip": 7,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.3272296581417322,
+              "seconds": [
+                "33/25",
+                "41/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.2820854261517525,
+              "seconds": [
+                "47/25",
+                "59/25"
+              ]
+            }
+          },
+          "clip": 7,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5807409062981606,
+              "seconds": [
+                "9/5",
+                "61/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.1010133028030396,
+              "seconds": [
+                "48/25",
+                "12/5"
+              ]
+            }
+          },
+          "clip": 7,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "audio_delay_320ms"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5680084303021431,
+              "seconds": [
+                "36/25",
+                "48/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.765286386013031,
+              "seconds": [
+                "43/25",
+                "63/25"
+              ]
+            }
+          },
+          "clip": 8,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.41744995303452015,
+              "seconds": [
+                "36/25",
+                "48/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7708763182163239,
+              "seconds": [
+                "43/25",
+                "63/25"
+              ]
+            }
+          },
+          "clip": 8,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.3728037253022194,
+              "seconds": [
+                "36/25",
+                "48/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.75146259739995,
+              "seconds": [
+                "13/25",
+                "29/25"
+              ]
+            }
+          },
+          "clip": 8,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6638024132698774,
+              "seconds": [
+                "2",
+                "62/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8273779228329659,
+              "seconds": [
+                "2",
+                "62/25"
+              ]
+            }
+          },
+          "clip": 8,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5861696973443031,
+              "seconds": [
+                "22/25",
+                "38/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.654500275850296,
+              "seconds": [
+                "31/25",
+                "39/25"
+              ]
+            }
+          },
+          "clip": 8,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.8016229011118412,
+              "seconds": [
+                "42/25",
+                "2"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8225555159151554,
+              "seconds": [
+                "42/25",
+                "2"
+              ]
+            }
+          },
+          "clip": 8,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5680084303021431,
+              "seconds": [
+                "36/25",
+                "48/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.765286386013031,
+              "seconds": [
+                "43/25",
+                "63/25"
+              ]
+            }
+          },
+          "clip": 8,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "audio_delay_320ms"
+        }
+      ],
+      "summary": {
+        "coarse_adjusted": {
+          "aligned_groups": 0,
+          "aligned_localized": 0,
+          "by_role": {
+            "grid:audio_delay_320ms": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 0,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:brightness_liveportrait": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 1,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:brightness_musetalk": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 0,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:genuine_frame_retime": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 1,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:original": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 0,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:resample_liveportrait": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 0,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:resample_musetalk": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 0,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            }
+          },
+          "coverage": {},
+          "essential_control_flags": 0,
+          "gate": {
+            "coverage": true,
+            "groups": false,
+            "localized": false,
+            "ordinary": true
+          },
+          "ordinary_flags": 2,
+          "raw_proposal_auc_aligned_vs_ordinary": null
+        },
+        "fine_phase": {
+          "aligned_groups": 0,
+          "aligned_localized": 0,
+          "by_role": {
+            "grid:audio_delay_320ms": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 0,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:brightness_liveportrait": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 0,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:brightness_musetalk": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 0,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:genuine_frame_retime": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 1,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:original": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 0,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:resample_liveportrait": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 0,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:resample_musetalk": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 1,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            }
+          },
+          "coverage": {},
+          "essential_control_flags": 0,
+          "gate": {
+            "coverage": true,
+            "groups": false,
+            "localized": false,
+            "ordinary": true
+          },
+          "ordinary_flags": 2,
+          "raw_proposal_auc_aligned_vs_ordinary": null
+        }
+      }
+    },
+    "held": {
+      "geometry_frames": 6597,
+      "native_picture_ticks": 6597,
+      "rows": [
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.7633262872695923,
+              "seconds": [
+                "31/25",
+                "47/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.3043979033827782,
+              "seconds": [
+                "37/25",
+                "57/25"
+              ]
+            }
+          },
+          "clip": 9,
+          "edit": null,
+          "family": "codec",
+          "group": 5,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5188305359333754,
+              "seconds": [
+                "34/25",
+                "54/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7486196532845497,
+              "seconds": [
+                "37/25",
+                "49/25"
+              ]
+            }
+          },
+          "clip": 9,
+          "edit": null,
+          "family": "codec",
+          "group": 5,
+          "role": "hard_cut"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.42084653675556183,
+              "seconds": [
+                "6/25",
+                "26/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.2080702409148216,
+              "seconds": [
+                "46/25",
+                "58/25"
+              ]
+            }
+          },
+          "clip": 10,
+          "edit": null,
+          "family": "codec",
+          "group": 6,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.31222547264769673,
+              "seconds": [
+                "9/25",
+                "17/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.5558728873729706,
+              "seconds": [
+                "57/25",
+                "69/25"
+              ]
+            }
+          },
+          "clip": 10,
+          "edit": null,
+          "family": "codec",
+          "group": 6,
+          "role": "hard_cut"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6691427640616894,
+              "seconds": [
+                "2/5",
+                "6/5"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6691427640616894,
+              "seconds": [
+                "2/5",
+                "6/5"
+              ]
+            }
+          },
+          "clip": 11,
+          "edit": null,
+          "family": "codec",
+          "group": 7,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.8117491789162159,
+              "seconds": [
+                "33/25",
+                "41/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9707588441669941,
+              "seconds": [
+                "33/25",
+                "41/25"
+              ]
+            }
+          },
+          "clip": 12,
+          "edit": null,
+          "family": "codec",
+          "group": 8,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5604619141668081,
+              "seconds": [
+                "14/25",
+                "26/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8615597561001778,
+              "seconds": [
+                "7/25",
+                "19/25"
+              ]
+            }
+          },
+          "clip": 13,
+          "edit": null,
+          "family": "codec",
+          "group": 9,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4966972917318344,
+              "seconds": [
+                "31/25",
+                "39/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.612219151109457,
+              "seconds": [
+                "43/25",
+                "63/25"
+              ]
+            }
+          },
+          "clip": 14,
+          "edit": null,
+          "family": "codec",
+          "group": 10,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.7600189950317144,
+              "seconds": [
+                "41/25",
+                "57/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.868918664753437,
+              "seconds": [
+                "8/5",
+                "12/5"
+              ]
+            }
+          },
+          "clip": 15,
+          "edit": null,
+          "family": "codec",
+          "group": 11,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6571783199906349,
+              "seconds": [
+                "41/25",
+                "53/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.144719522446394,
+              "seconds": [
+                "3/5",
+                "7/5"
+              ]
+            }
+          },
+          "clip": 16,
+          "edit": null,
+          "family": "codec",
+          "group": 12,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.7494312822818756,
+              "seconds": [
+                "12/25",
+                "24/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0587588623166084,
+              "seconds": [
+                "47/25",
+                "11/5"
+              ]
+            }
+          },
+          "clip": 17,
+          "edit": null,
+          "family": "codec",
+          "group": 13,
+          "role": "hard_cut"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.7483447417616844,
+              "seconds": [
+                "19/25",
+                "31/25"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9167752657085657,
+              "seconds": [
+                "46/25",
+                "62/25"
+              ]
+            }
+          },
+          "clip": 18,
+          "edit": null,
+          "family": "codec",
+          "group": 14,
+          "role": "hard_cut"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6059601996093988,
+              "seconds": [
+                "19019/12000",
+                "23023/12000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8391150124371052,
+              "seconds": [
+                "1001/1000",
+                "1001/750"
+              ]
+            }
+          },
+          "clip": 19,
+          "edit": null,
+          "family": "lombard",
+          "group": 15,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6134205535054207,
+              "seconds": [
+                "1001/4000",
+                "3003/4000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8827012926340103,
+              "seconds": [
+                "1001/4000",
+                "3003/4000"
+              ]
+            }
+          },
+          "clip": 19,
+          "edit": null,
+          "family": "lombard",
+          "group": 15,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6059601996093988,
+              "seconds": [
+                "19019/12000",
+                "23023/12000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7905968353152275,
+              "seconds": [
+                "1001/1000",
+                "11011/6000"
+              ]
+            }
+          },
+          "clip": 19,
+          "edit": null,
+          "family": "lombard",
+          "group": 15,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.674233041703701,
+              "seconds": [
+                "1001/4800",
+                "17017/24000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7935847006738186,
+              "seconds": [
+                "11011/12000",
+                "7007/4000"
+              ]
+            }
+          },
+          "clip": 19,
+          "edit": [
+            "1001/1500",
+            "1001/750"
+          ],
+          "family": "lombard",
+          "group": 15,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4333533179014921,
+              "seconds": [
+                "3003/2000",
+                "7007/3000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8025636300444603,
+              "seconds": [
+                "7007/12000",
+                "13013/12000"
+              ]
+            }
+          },
+          "clip": 20,
+          "edit": null,
+          "family": "lombard",
+          "group": 15,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4676007330417633,
+              "seconds": [
+                "17017/12000",
+                "9009/4000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7792290523648262,
+              "seconds": [
+                "7007/12000",
+                "13013/12000"
+              ]
+            }
+          },
+          "clip": 20,
+          "edit": null,
+          "family": "lombard",
+          "group": 15,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5656786020845175,
+              "seconds": [
+                "19019/24000",
+                "31031/24000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.771641694009304,
+              "seconds": [
+                "3003/8000",
+                "17017/24000"
+              ]
+            }
+          },
+          "clip": 20,
+          "edit": null,
+          "family": "lombard",
+          "group": 15,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4333533179014921,
+              "seconds": [
+                "3003/2000",
+                "7007/3000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6488726958632469,
+              "seconds": [
+                "7007/12000",
+                "11011/12000"
+              ]
+            }
+          },
+          "clip": 20,
+          "edit": [
+            "7007/12000",
+            "1001/800"
+          ],
+          "family": "lombard",
+          "group": 15,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5736936368048191,
+              "seconds": [
+                "264/145",
+                "384/145"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.922235906124115,
+              "seconds": [
+                "132/145",
+                "36/29"
+              ]
+            }
+          },
+          "clip": 21,
+          "edit": null,
+          "family": "lombard",
+          "group": 16,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6337148360908031,
+              "seconds": [
+                "24/29",
+                "192/145"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.885571077466011,
+              "seconds": [
+                "126/145",
+                "198/145"
+              ]
+            }
+          },
+          "clip": 21,
+          "edit": null,
+          "family": "lombard",
+          "group": 16,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.609306126832962,
+              "seconds": [
+                "36/145",
+                "132/145"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8868346139788628,
+              "seconds": [
+                "162/145",
+                "42/29"
+              ]
+            }
+          },
+          "clip": 21,
+          "edit": null,
+          "family": "lombard",
+          "group": 16,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6535674518672749,
+              "seconds": [
+                "144/145",
+                "192/145"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.2153765484690666,
+              "seconds": [
+                "6/29",
+                "78/145"
+              ]
+            }
+          },
+          "clip": 21,
+          "edit": [
+            "48/145",
+            "144/145"
+          ],
+          "family": "lombard",
+          "group": 16,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.3222046047449112,
+              "seconds": [
+                "120/289",
+                "312/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0194676145911217,
+              "seconds": [
+                "372/289",
+                "468/289"
+              ]
+            }
+          },
+          "clip": 22,
+          "edit": null,
+          "family": "lombard",
+          "group": 17,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5327586447820067,
+              "seconds": [
+                "276/289",
+                "516/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.932334192097187,
+              "seconds": [
+                "192/289",
+                "288/289"
+              ]
+            }
+          },
+          "clip": 22,
+          "edit": null,
+          "family": "lombard",
+          "group": 17,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.3253083601593971,
+              "seconds": [
+                "216/289",
+                "360/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9182763919234276,
+              "seconds": [
+                "420/289",
+                "516/289"
+              ]
+            }
+          },
+          "clip": 22,
+          "edit": null,
+          "family": "lombard",
+          "group": 17,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4365839585661888,
+              "seconds": [
+                "240/289",
+                "384/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.733686906285584,
+              "seconds": [
+                "276/289",
+                "516/289"
+              ]
+            }
+          },
+          "clip": 22,
+          "edit": [
+            "192/289",
+            "384/289"
+          ],
+          "family": "lombard",
+          "group": 17,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.534939356148243,
+              "seconds": [
+                "216/287",
+                "312/287"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9077696576714516,
+              "seconds": [
+                "48/41",
+                "576/287"
+              ]
+            }
+          },
+          "clip": 23,
+          "edit": null,
+          "family": "lombard",
+          "group": 17,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.41135801933705807,
+              "seconds": [
+                "144/287",
+                "384/287"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8819843418896198,
+              "seconds": [
+                "120/287",
+                "216/287"
+              ]
+            }
+          },
+          "clip": 23,
+          "edit": null,
+          "family": "lombard",
+          "group": 17,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.34911635145545006,
+              "seconds": [
+                "216/287",
+                "456/287"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8015353921800852,
+              "seconds": [
+                "120/287",
+                "312/287"
+              ]
+            }
+          },
+          "clip": 23,
+          "edit": null,
+          "family": "lombard",
+          "group": 17,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.3458045870065689,
+              "seconds": [
+                "216/287",
+                "312/287"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9956930913031101,
+              "seconds": [
+                "324/287",
+                "564/287"
+              ]
+            }
+          },
+          "clip": 23,
+          "edit": [
+            "216/287",
+            "408/287"
+          ],
+          "family": "lombard",
+          "group": 17,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6186474803835154,
+              "seconds": [
+                "312/287",
+                "456/287"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6983994655311108,
+              "seconds": [
+                "552/287",
+                "648/287"
+              ]
+            }
+          },
+          "clip": 24,
+          "edit": null,
+          "family": "lombard",
+          "group": 18,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6211760230362415,
+              "seconds": [
+                "264/287",
+                "456/287"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.772702731192112,
+              "seconds": [
+                "216/287",
+                "312/287"
+              ]
+            }
+          },
+          "clip": 24,
+          "edit": null,
+          "family": "lombard",
+          "group": 18,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5545680122449994,
+              "seconds": [
+                "372/287",
+                "612/287"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.701783150434494,
+              "seconds": [
+                "384/287",
+                "624/287"
+              ]
+            }
+          },
+          "clip": 24,
+          "edit": null,
+          "family": "lombard",
+          "group": 18,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5015366524457932,
+              "seconds": [
+                "348/287",
+                "444/287"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7161486446857452,
+              "seconds": [
+                "300/287",
+                "444/287"
+              ]
+            }
+          },
+          "clip": 24,
+          "edit": [
+            "204/287",
+            "396/287"
+          ],
+          "family": "lombard",
+          "group": 18,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.3499916400760412,
+              "seconds": [
+                "228/287",
+                "468/287"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8145789057016373,
+              "seconds": [
+                "324/287",
+                "564/287"
+              ]
+            }
+          },
+          "clip": 25,
+          "edit": null,
+          "family": "lombard",
+          "group": 18,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4143504872918129,
+              "seconds": [
+                "216/287",
+                "408/287"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6855428107082844,
+              "seconds": [
+                "264/287",
+                "456/287"
+              ]
+            }
+          },
+          "clip": 25,
+          "edit": null,
+          "family": "lombard",
+          "group": 18,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4550184812396765,
+              "seconds": [
+                "144/287",
+                "48/41"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7169666737318039,
+              "seconds": [
+                "156/287",
+                "348/287"
+              ]
+            }
+          },
+          "clip": 25,
+          "edit": null,
+          "family": "lombard",
+          "group": 18,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6706019937992096,
+              "seconds": [
+                "240/287",
+                "48/41"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8092398829758167,
+              "seconds": [
+                "60/287",
+                "36/41"
+              ]
+            }
+          },
+          "clip": 25,
+          "edit": [
+            "180/287",
+            "372/287"
+          ],
+          "family": "lombard",
+          "group": 18,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4416652247309685,
+              "seconds": [
+                "384/289",
+                "528/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0945023149251938,
+              "seconds": [
+                "684/289",
+                "780/289"
+              ]
+            }
+          },
+          "clip": 26,
+          "edit": null,
+          "family": "lombard",
+          "group": 19,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4425941351801157,
+              "seconds": [
+                "432/289",
+                "672/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0945023149251938,
+              "seconds": [
+                "684/289",
+                "780/289"
+              ]
+            }
+          },
+          "clip": 26,
+          "edit": null,
+          "family": "lombard",
+          "group": 19,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.3856346048414707,
+              "seconds": [
+                "588/289",
+                "684/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0945023149251938,
+              "seconds": [
+                "684/289",
+                "780/289"
+              ]
+            }
+          },
+          "clip": 26,
+          "edit": null,
+          "family": "lombard",
+          "group": 19,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4805370345711708,
+              "seconds": [
+                "180/289",
+                "324/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0945023149251938,
+              "seconds": [
+                "684/289",
+                "780/289"
+              ]
+            }
+          },
+          "clip": 26,
+          "edit": [
+            "228/289",
+            "420/289"
+          ],
+          "family": "lombard",
+          "group": 19,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5542892068624496,
+              "seconds": [
+                "300/289",
+                "492/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0086055621504784,
+              "seconds": [
+                "144/289",
+                "240/289"
+              ]
+            }
+          },
+          "clip": 27,
+          "edit": null,
+          "family": "lombard",
+          "group": 19,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.45486004650592804,
+              "seconds": [
+                "396/289",
+                "540/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8501387527212501,
+              "seconds": [
+                "300/289",
+                "396/289"
+              ]
+            }
+          },
+          "clip": 27,
+          "edit": null,
+          "family": "lombard",
+          "group": 19,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6056655663996935,
+              "seconds": [
+                "360/289",
+                "504/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9540182668715715,
+              "seconds": [
+                "360/289",
+                "504/289"
+              ]
+            }
+          },
+          "clip": 27,
+          "edit": null,
+          "family": "lombard",
+          "group": 19,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.42230459302663803,
+              "seconds": [
+                "264/289",
+                "504/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7734961127862334,
+              "seconds": [
+                "312/289",
+                "552/289"
+              ]
+            }
+          },
+          "clip": 27,
+          "edit": [
+            "216/289",
+            "24/17"
+          ],
+          "family": "lombard",
+          "group": 19,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.849289134144783,
+              "seconds": [
+                "1001/1500",
+                "1001/1000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.260997548699379,
+              "seconds": [
+                "3003/8000",
+                "7007/8000"
+              ]
+            }
+          },
+          "clip": 28,
+          "edit": null,
+          "family": "lombard",
+          "group": 20,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5216459035873413,
+              "seconds": [
+                "11011/12000",
+                "7007/4000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.1375756561756134,
+              "seconds": [
+                "13013/12000",
+                "23023/12000"
+              ]
+            }
+          },
+          "clip": 28,
+          "edit": null,
+          "family": "lombard",
+          "group": 20,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6328797861933708,
+              "seconds": [
+                "17017/12000",
+                "23023/12000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.2727934196591377,
+              "seconds": [
+                "7007/24000",
+                "19019/24000"
+              ]
+            }
+          },
+          "clip": 28,
+          "edit": null,
+          "family": "lombard",
+          "group": 20,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4371166452765465,
+              "seconds": [
+                "23023/24000",
+                "13013/8000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.926040630787611,
+              "seconds": [
+                "1001/1500",
+                "1001/750"
+              ]
+            }
+          },
+          "clip": 28,
+          "edit": [
+            "17017/24000",
+            "11011/8000"
+          ],
+          "family": "lombard",
+          "group": 20,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.511056687682867,
+              "seconds": [
+                "1001/1000",
+                "1001/750"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.036278635263443,
+              "seconds": [
+                "1001/1000",
+                "1001/600"
+              ]
+            }
+          },
+          "clip": 29,
+          "edit": null,
+          "family": "lombard",
+          "group": 20,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.49248848482966423,
+              "seconds": [
+                "1001/2400",
+                "1001/800"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7558869421482086,
+              "seconds": [
+                "1001/1600",
+                "31031/24000"
+              ]
+            }
+          },
+          "clip": 29,
+          "edit": null,
+          "family": "lombard",
+          "group": 20,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4917707145214081,
+              "seconds": [
+                "1001/1500",
+                "1001/1000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0857108905911446,
+              "seconds": [
+                "23023/24000",
+                "7007/4800"
+              ]
+            }
+          },
+          "clip": 29,
+          "edit": null,
+          "family": "lombard",
+          "group": 20,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5258017033338547,
+              "seconds": [
+                "1001/960",
+                "11011/8000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7327671125531197,
+              "seconds": [
+                "1001/1200",
+                "1001/750"
+              ]
+            }
+          },
+          "clip": 29,
+          "edit": [
+            "11011/24000",
+            "9009/8000"
+          ],
+          "family": "lombard",
+          "group": 20,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.516541138291359,
+              "seconds": [
+                "47/24",
+                "21/8"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0098500363528728,
+              "seconds": [
+                "7/6",
+                "2"
+              ]
+            }
+          },
+          "clip": 30,
+          "edit": null,
+          "family": "fresh",
+          "group": 21,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.8103501391597092,
+              "seconds": [
+                "11/8",
+                "41/24"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.5030778497457504,
+              "seconds": [
+                "13/6",
+                "5/2"
+              ]
+            }
+          },
+          "clip": 31,
+          "edit": null,
+          "family": "fresh",
+          "group": 21,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.47832654789090157,
+              "seconds": [
+                "3/4",
+                "13/12"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8368907934054732,
+              "seconds": [
+                "5/4",
+                "7/4"
+              ]
+            }
+          },
+          "clip": 32,
+          "edit": null,
+          "family": "fresh",
+          "group": 21,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.838537061586976,
+              "seconds": [
+                "3/8",
+                "25/24"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.1193732228130102,
+              "seconds": [
+                "3/8",
+                "25/24"
+              ]
+            }
+          },
+          "clip": 33,
+          "edit": null,
+          "family": "fresh",
+          "group": 21,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.7204119730740786,
+              "seconds": [
+                "11/24",
+                "23/24"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.022830531001091,
+              "seconds": [
+                "11/24",
+                "23/24"
+              ]
+            }
+          },
+          "clip": 34,
+          "edit": null,
+          "family": "fresh",
+          "group": 22,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6838100403547287,
+              "seconds": [
+                "11/8",
+                "49/24"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8664251333102584,
+              "seconds": [
+                "19/24",
+                "13/8"
+              ]
+            }
+          },
+          "clip": 35,
+          "edit": null,
+          "family": "fresh",
+          "group": 22,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6649516355246305,
+              "seconds": [
+                "11/12",
+                "7/4"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.1276337057352066,
+              "seconds": [
+                "3/4",
+                "19/12"
+              ]
+            }
+          },
+          "clip": 36,
+          "edit": null,
+          "family": "fresh",
+          "group": 22,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5829897001385689,
+              "seconds": [
+                "5/8",
+                "23/24"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9270450174808502,
+              "seconds": [
+                "13/8",
+                "47/24"
+              ]
+            }
+          },
+          "clip": 37,
+          "edit": null,
+          "family": "fresh",
+          "group": 22,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.26582891028374434,
+              "seconds": [
+                "7007/6000",
+                "1001/600"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.747761707752943,
+              "seconds": [
+                "1001/1500",
+                "3003/2000"
+              ]
+            }
+          },
+          "clip": 38,
+          "edit": null,
+          "family": "fresh",
+          "group": 23,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5692118741571903,
+              "seconds": [
+                "23023/24000",
+                "31031/24000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8506743684411049,
+              "seconds": [
+                "23023/24000",
+                "31031/24000"
+              ]
+            }
+          },
+          "clip": 39,
+          "edit": null,
+          "family": "fresh",
+          "group": 23,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.47442184016108513,
+              "seconds": [
+                "1001/1000",
+                "1001/750"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8338276743888855,
+              "seconds": [
+                "3003/4000",
+                "1001/800"
+              ]
+            }
+          },
+          "clip": 40,
+          "edit": null,
+          "family": "fresh",
+          "group": 23,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5142875164747238,
+              "seconds": [
+                "3003/8000",
+                "7007/8000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7262417823076248,
+              "seconds": [
+                "19019/12000",
+                "23023/12000"
+              ]
+            }
+          },
+          "clip": 41,
+          "edit": null,
+          "family": "fresh",
+          "group": 23,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.37925161607563496,
+              "seconds": [
+                "25/24",
+                "11/8"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6145932525396347,
+              "seconds": [
+                "1/4",
+                "13/12"
+              ]
+            }
+          },
+          "clip": 42,
+          "edit": null,
+          "family": "fresh",
+          "group": 24,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.524257980287075,
+              "seconds": [
+                "7/6",
+                "3/2"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6545970886945724,
+              "seconds": [
+                "7/24",
+                "19/24"
+              ]
+            }
+          },
+          "clip": 43,
+          "edit": null,
+          "family": "fresh",
+          "group": 24,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5998366549611092,
+              "seconds": [
+                "5/24",
+                "25/24"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6855438388884068,
+              "seconds": [
+                "2/3",
+                "7/6"
+              ]
+            }
+          },
+          "clip": 44,
+          "edit": null,
+          "family": "fresh",
+          "group": 24,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.432377852499485,
+              "seconds": [
+                "15/8",
+                "53/24"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9300259537994862,
+              "seconds": [
+                "2/3",
+                "7/6"
+              ]
+            }
+          },
+          "clip": 45,
+          "edit": null,
+          "family": "fresh",
+          "group": 24,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5873570069670677,
+              "seconds": [
+                "312/289",
+                "24/17"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7644381895661354,
+              "seconds": [
+                "324/289",
+                "420/289"
+              ]
+            }
+          },
+          "clip": 46,
+          "edit": null,
+          "family": "fresh",
+          "group": 25,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.3691345136612654,
+              "seconds": [
+                "156/289",
+                "252/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.5854056403040886,
+              "seconds": [
+                "336/289",
+                "432/289"
+              ]
+            }
+          },
+          "clip": 47,
+          "edit": null,
+          "family": "fresh",
+          "group": 25,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5760450381785631,
+              "seconds": [
+                "1/3",
+                "2/3"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8162500690668821,
+              "seconds": [
+                "4/3",
+                "11/6"
+              ]
+            }
+          },
+          "clip": 48,
+          "edit": null,
+          "family": "fresh",
+          "group": 25,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4922735895961523,
+              "seconds": [
+                "13/12",
+                "17/12"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6559310257434845,
+              "seconds": [
+                "9/8",
+                "35/24"
+              ]
+            }
+          },
+          "clip": 49,
+          "edit": null,
+          "family": "fresh",
+          "group": 25,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.49266589619219303,
+              "seconds": [
+                "7/12",
+                "11/12"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7615419998764992,
+              "seconds": [
+                "7/6",
+                "2"
+              ]
+            }
+          },
+          "clip": 50,
+          "edit": null,
+          "family": "fresh",
+          "group": 26,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.3727189563214779,
+              "seconds": [
+                "13013/24000",
+                "7007/8000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0703205289319158,
+              "seconds": [
+                "1001/2000",
+                "1001/1000"
+              ]
+            }
+          },
+          "clip": 51,
+          "edit": null,
+          "family": "fresh",
+          "group": 26,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.30574659956619143,
+              "seconds": [
+                "1001/1000",
+                "1001/750"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.5592959225177765,
+              "seconds": [
+                "1001/500",
+                "1001/400"
+              ]
+            }
+          },
+          "clip": 52,
+          "edit": null,
+          "family": "fresh",
+          "group": 26,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.7599634528160095,
+              "seconds": [
+                "7/6",
+                "11/6"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0567495971918106,
+              "seconds": [
+                "7/6",
+                "11/6"
+              ]
+            }
+          },
+          "clip": 53,
+          "edit": null,
+          "family": "fresh",
+          "group": 26,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4486568495631218,
+              "seconds": [
+                "11011/8000",
+                "53053/24000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6991766169667244,
+              "seconds": [
+                "7007/4000",
+                "29029/12000"
+              ]
+            }
+          },
+          "clip": 54,
+          "edit": null,
+          "family": "fresh",
+          "group": 27,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.43707407265901566,
+              "seconds": [
+                "11011/12000",
+                "1001/800"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6882654130458832,
+              "seconds": [
+                "11011/12000",
+                "1001/800"
+              ]
+            }
+          },
+          "clip": 55,
+          "edit": null,
+          "family": "fresh",
+          "group": 27,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5795882493257523,
+              "seconds": [
+                "1001/3000",
+                "1001/1500"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6657966077327728,
+              "seconds": [
+                "1001/3000",
+                "1001/1500"
+              ]
+            }
+          },
+          "clip": 56,
+          "edit": null,
+          "family": "fresh",
+          "group": 27,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.671250969171524,
+              "seconds": [
+                "23023/24000",
+                "43043/24000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.1234723255038261,
+              "seconds": [
+                "31031/24000",
+                "47047/24000"
+              ]
+            }
+          },
+          "clip": 57,
+          "edit": null,
+          "family": "fresh",
+          "group": 27,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6994387581944466,
+              "seconds": [
+                "288/289",
+                "384/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9500510226935148,
+              "seconds": [
+                "324/289",
+                "564/289"
+              ]
+            }
+          },
+          "clip": 58,
+          "edit": null,
+          "family": "fresh",
+          "group": 28,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5617211051285267,
+              "seconds": [
+                "300/289",
+                "540/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8439332693815231,
+              "seconds": [
+                "396/289",
+                "540/289"
+              ]
+            }
+          },
+          "clip": 59,
+          "edit": null,
+          "family": "fresh",
+          "group": 28,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6181096751242876,
+              "seconds": [
+                "60/289",
+                "300/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9009163826704025,
+              "seconds": [
+                "216/289",
+                "24/17"
+              ]
+            }
+          },
+          "clip": 60,
+          "edit": null,
+          "family": "fresh",
+          "group": 28,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4969454240053892,
+              "seconds": [
+                "564/289",
+                "660/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.6384217906743288,
+              "seconds": [
+                "120/289",
+                "360/289"
+              ]
+            }
+          },
+          "clip": 61,
+          "edit": null,
+          "family": "fresh",
+          "group": 28,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5197441577911377,
+              "seconds": [
+                "384/289",
+                "624/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.139424867928028,
+              "seconds": [
+                "216/289",
+                "360/289"
+              ]
+            }
+          },
+          "clip": 62,
+          "edit": null,
+          "family": "fresh",
+          "group": 29,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.41601546853780746,
+              "seconds": [
+                "108/289",
+                "252/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.1037017479538918,
+              "seconds": [
+                "132/289",
+                "276/289"
+              ]
+            }
+          },
+          "clip": 63,
+          "edit": null,
+          "family": "fresh",
+          "group": 29,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6001225151121616,
+              "seconds": [
+                "60/289",
+                "156/289"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.7380398958921432,
+              "seconds": [
+                "60/289",
+                "156/289"
+              ]
+            }
+          },
+          "clip": 64,
+          "edit": null,
+          "family": "fresh",
+          "group": 29,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.397292910143733,
+              "seconds": [
+                "5/8",
+                "23/24"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.4712744876742363,
+              "seconds": [
+                "1",
+                "4/3"
+              ]
+            }
+          },
+          "clip": 65,
+          "edit": null,
+          "family": "fresh",
+          "group": 29,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6556114060804248,
+              "seconds": [
+                "37037/24000",
+                "3003/1600"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0760890543460846,
+              "seconds": [
+                "23023/24000",
+                "31031/24000"
+              ]
+            }
+          },
+          "clip": 66,
+          "edit": null,
+          "family": "fresh",
+          "group": 30,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.5183211155235767,
+              "seconds": [
+                "396/287",
+                "84/41"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.493033217266202,
+              "seconds": [
+                "468/287",
+                "564/287"
+              ]
+            }
+          },
+          "clip": 67,
+          "edit": null,
+          "family": "fresh",
+          "group": 30,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.45504188537597656,
+              "seconds": [
+                "240/287",
+                "480/287"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9711622893810272,
+              "seconds": [
+                "12/41",
+                "276/287"
+              ]
+            }
+          },
+          "clip": 68,
+          "edit": null,
+          "family": "fresh",
+          "group": 30,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6874374970793724,
+              "seconds": [
+                "13013/6000",
+                "1001/400"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0441772378981113,
+              "seconds": [
+                "41041/24000",
+                "19019/8000"
+              ]
+            }
+          },
+          "clip": 69,
+          "edit": null,
+          "family": "fresh",
+          "group": 30,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6687068538740277,
+              "seconds": [
+                "19/12",
+                "23/12"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.062416598200798,
+              "seconds": [
+                "37/24",
+                "15/8"
+              ]
+            }
+          },
+          "clip": 70,
+          "edit": null,
+          "family": "fresh",
+          "group": 31,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.46479344740509987,
+              "seconds": [
+                "3/4",
+                "5/4"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.9870571848005056,
+              "seconds": [
+                "17/24",
+                "29/24"
+              ]
+            }
+          },
+          "clip": 71,
+          "edit": null,
+          "family": "fresh",
+          "group": 31,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.43686240166425705,
+              "seconds": [
+                "186/143",
+                "258/143"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8680163566023111,
+              "seconds": [
+                "126/143",
+                "174/143"
+              ]
+            }
+          },
+          "clip": 72,
+          "edit": null,
+          "family": "fresh",
+          "group": 31,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.49833816662430763,
+              "seconds": [
+                "192/143",
+                "24/13"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8735315352678299,
+              "seconds": [
+                "192/143",
+                "24/13"
+              ]
+            }
+          },
+          "clip": 73,
+          "edit": null,
+          "family": "fresh",
+          "group": 31,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.7511496357619762,
+              "seconds": [
+                "3003/1600",
+                "13013/4800"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0690035000443459,
+              "seconds": [
+                "3003/1600",
+                "13013/4800"
+              ]
+            }
+          },
+          "clip": 74,
+          "edit": null,
+          "family": "fresh",
+          "group": 32,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6618848778307438,
+              "seconds": [
+                "41041/24000",
+                "49049/24000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.069389220327139,
+              "seconds": [
+                "7007/12000",
+                "17017/12000"
+              ]
+            }
+          },
+          "clip": 75,
+          "edit": null,
+          "family": "fresh",
+          "group": 32,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.4303884357213974,
+              "seconds": [
+                "3003/8000",
+                "1001/960"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 1.0040396973490715,
+              "seconds": [
+                "17017/12000",
+                "9009/4000"
+              ]
+            }
+          },
+          "clip": 76,
+          "edit": null,
+          "family": "fresh",
+          "group": 32,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "coarse_adjusted": {
+              "measured": true,
+              "score": 0.6519689708948135,
+              "seconds": [
+                "9009/8000",
+                "47047/24000"
+              ]
+            },
+            "fine_phase": {
+              "measured": true,
+              "score": 0.8867092207074165,
+              "seconds": [
+                "17017/24000",
+                "29029/24000"
+              ]
+            }
+          },
+          "clip": 77,
+          "edit": null,
+          "family": "fresh",
+          "group": 32,
+          "role": "original"
+        }
+      ],
+      "summary": {
+        "coarse_adjusted": {
+          "aligned_groups": 0,
+          "aligned_localized": 0,
+          "by_role": {
+            "codec:hard_cut": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 0,
+              "localized": 0,
+              "measured": 4,
+              "raw_localized": 0,
+              "rows": 4
+            },
+            "codec:reencode": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 1,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "fresh:original": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 2,
+              "localized": 0,
+              "measured": 48,
+              "raw_localized": 0,
+              "rows": 48
+            },
+            "lombard:delayed_pixels_ordinary": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 0,
+              "localized": 0,
+              "measured": 11,
+              "raw_localized": 0,
+              "rows": 11
+            },
+            "lombard:original": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 1,
+              "localized": 0,
+              "measured": 11,
+              "raw_localized": 0,
+              "rows": 11
+            },
+            "lombard:resample_ordinary": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 0,
+              "localized": 0,
+              "measured": 11,
+              "raw_localized": 0,
+              "rows": 11
+            },
+            "lombard:source_time_neural": {
+              "aligned_measured": 10,
+              "aligned_raw_localized": 3,
+              "aligned_rows": 10,
+              "flags": 0,
+              "localized": 0,
+              "measured": 11,
+              "raw_localized": 4,
+              "rows": 11
+            }
+          },
+          "coverage": {
+            "fresh_measured": 48,
+            "fresh_total": 48,
+            "ordinary_measured": 33,
+            "ordinary_total": 33,
+            "positive_measured": 11,
+            "positive_total": 11
+          },
+          "essential_control_flags": 4,
+          "gate": {
+            "coverage": true,
+            "groups": false,
+            "localized": false,
+            "ordinary": false
+          },
+          "ordinary_flags": 4,
+          "raw_proposal_auc_aligned_vs_ordinary": "163/372"
+        },
+        "fine_phase": {
+          "aligned_groups": 0,
+          "aligned_localized": 0,
+          "by_role": {
+            "codec:hard_cut": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 0,
+              "localized": 0,
+              "measured": 4,
+              "raw_localized": 0,
+              "rows": 4
+            },
+            "codec:reencode": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 3,
+              "localized": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "fresh:original": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 8,
+              "localized": 0,
+              "measured": 48,
+              "raw_localized": 0,
+              "rows": 48
+            },
+            "lombard:delayed_pixels_ordinary": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 1,
+              "localized": 0,
+              "measured": 11,
+              "raw_localized": 0,
+              "rows": 11
+            },
+            "lombard:original": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 1,
+              "localized": 0,
+              "measured": 11,
+              "raw_localized": 0,
+              "rows": 11
+            },
+            "lombard:resample_ordinary": {
+              "aligned_measured": 0,
+              "aligned_raw_localized": 0,
+              "aligned_rows": 0,
+              "flags": 1,
+              "localized": 0,
+              "measured": 11,
+              "raw_localized": 0,
+              "rows": 11
+            },
+            "lombard:source_time_neural": {
+              "aligned_measured": 10,
+              "aligned_raw_localized": 2,
+              "aligned_rows": 10,
+              "flags": 1,
+              "localized": 0,
+              "measured": 11,
+              "raw_localized": 2,
+              "rows": 11
+            }
+          },
+          "coverage": {
+            "fresh_measured": 48,
+            "fresh_total": 48,
+            "ordinary_measured": 33,
+            "ordinary_total": 33,
+            "positive_measured": 11,
+            "positive_total": 11
+          },
+          "essential_control_flags": 12,
+          "gate": {
+            "coverage": true,
+            "groups": false,
+            "localized": false,
+            "ordinary": false
+          },
+          "ordinary_flags": 14,
+          "raw_proposal_auc_aligned_vs_ordinary": "263/620"
+        }
+      }
+    }
+  }
+}

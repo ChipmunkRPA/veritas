@@ -329,6 +329,12 @@ export interface DocumentPassagePosition {
   readings?: { input_sha256: string; response_hex: string; focus_tokens: number; neighbor_tokens: number }[]
   contrast_hex?: string
 }
+export interface EmailClassifierInputScope {
+  schema: 'document-email-classifier-input-scope/1'; mime_part: string; mapping: 'mapped' | 'unmapped'
+  checks: { signal_ref: EvidenceRef; counts: Record<'body' | 'quoted' | 'signature' | 'mixed' | 'unmapped', number>;
+    windows: { spans: [number, number][]; input_sha256: string; role: 'body' | 'quoted' | 'signature' | 'mixed' | 'unmapped' }[];
+    unlisted: number }[]
+}
 export interface DocumentEvidenceSet extends SetBase {
   schema: 'chipmunk.document-evidence/1'; packets: DocumentEvidencePacket[]; omitted_windows: number
   source: { sha256: string; chars?: number; method?: string; offset_unit: 'unicode_codepoint' }
@@ -339,6 +345,7 @@ export interface DocumentEvidenceSet extends SetBase {
         source_end?: number; mime_part?: string; paragraph_index?: number; page?: number; block?: number; bbox?: number[] } }[] }[] }
   coverage?: { scored_windows?: number; candidate_spans?: number; unmapped_pages?: number[];
     email_body_alternatives?: EmailBodyAlternatives;
+    email_classifier_input_scope?: EmailClassifierInputScope;
     local_passage_coverage?: DocumentPassageCoverage;
     unselected_passage_responses?: DocumentUnselectedResponses;
     passage_position_review?: DocumentPassagePosition;

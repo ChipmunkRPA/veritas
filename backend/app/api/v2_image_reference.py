@@ -158,7 +158,8 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
     artifacts = workspace / "evidence"
     try:
         comparison = inspect(reference_path, submitted_path, evidence_dir=artifacts, allow_proportional_resize=True,
-                             allow_oriented_crop=True, allow_oriented_resize=True, allow_embedded_photo=True)
+                             allow_oriented_crop=True, allow_oriented_resize=True, allow_embedded_photo=True,
+                             allow_exact_jpeg_identity=settings.image_reference_exact_jpeg_identity)
         if settings.image_reference_jpeg_png_envelope and comparison["status"] != "comparable":
             from app.evidence.image_reference_delivery_envelope import inspect as compare_delivery
 

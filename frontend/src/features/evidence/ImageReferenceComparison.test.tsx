@@ -66,6 +66,25 @@ afterEach(() => {
 })
 
 describe('earlier-copy comparison', () => {
+  it('shows the exact JPEG alignment proof for the same framing', async () => {
+    const result = structuredClone(comparison)
+    result.comparison.schema = 'chipmunk.image-reference-comparison/11'
+    result.comparison.reference.width = result.comparison.submitted.width
+    result.comparison.reference.height = result.comparison.submitted.height
+    const overlap = { x: 0, y: 0, w: 356, h: 230 }
+    result.comparison.alignment = {
+      method: 'exact_decoded_jpeg_delivery_identity', submitted_overlap: overlap, reference_overlap: overlap,
+      full_tiles: 308, exact_tiles: 268, anchor_count: 122,
+      supported_zones: [[0, 0], [0, 1], [1, 1], [1, 2], [2, 1], [2, 2]],
+    }
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect((await screen.findByText(/Exact JPEG block matches/)).textContent).toContain('268 of 308 complete blocks matched')
+    expect(screen.queryByText('Pixels outside the overlap were unassessed.')).toBeNull()
+  })
+
   it('checks fresh availability before displaying the form, even with a previously available cached value', async () => {
     const query = new QueryClient()
     query.setQueryData(['analysis', 'analysis-1', 'image-reference-comparison'], true)
@@ -88,6 +107,7 @@ describe('earlier-copy comparison', () => {
     vi.stubGlobal('fetch', fetch)
     show('analysis/1')
     await choose()
+    expect(screen.getByRole('region', { name: heading }).id).toBe('earlier-image-comparison')
     expect(screen.getByLabelText('Earlier copy').getAttribute('accept')).toBe('image/png,image/jpeg,.png,.jpg,.jpeg')
     expect(screen.getByText('PNG or JPEG, up to 4 megapixels.')).toBeTruthy()
     fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))

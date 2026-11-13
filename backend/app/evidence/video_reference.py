@@ -14,10 +14,10 @@ import numpy as np
 from PIL import Image
 
 from app.core.canonical import canonical_hash
-from app.detectors.audio.decode import audio_stream_indices
+from app.detectors.audio.decode import SAMPLE_RATE, audio_stream_indices
 from app.detectors.video.decode import DecodeError, FrameTable, decode_frames, probe_frames
 from app.evidence import video_reference_local
-from app.evidence.audio_reference import compare_tracks, marked_ranges, read_track
+from app.evidence.audio_reference import _read_track, channel_timing, compare_tracks, marked_ranges, read_track
 from app.storage.files import VIDEO_MIMES, sniff
 
 SCHEMA = "chipmunk.video-reference-comparison/1"
@@ -27,6 +27,7 @@ SCHEMA_WITH_SHORT_TIMING = "chipmunk.video-reference-comparison/4"
 SCHEMA_WITH_SOUNDTRACK = "chipmunk.video-reference-comparison/5"
 SCHEMA_WITH_ADDITIONAL_SOUNDTRACK = "chipmunk.video-reference-comparison/6"
 SCHEMA_WITH_MARKED_SOUND_FALLBACK = "chipmunk.video-reference-comparison/7"
+SCHEMA_WITH_CHANNEL_TIMING = "chipmunk.video-reference-comparison/8"
 MAX_COMPARED_SOUNDTRACKS = 2
 MAX_BYTES = 48 * 1024 * 1024
 MAX_FRAMES = 360
@@ -233,7 +234,8 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             timing_event_s: Fraction | None = None, timing_model: Path | None = None,
             timing_short_fallback: bool = False, include_soundtrack: bool = True,
             timing_local_sound: bool = False,
-            include_additional_soundtrack: bool = True) -> tuple[dict, dict[str, bytes]]:
+            include_additional_soundtrack: bool = True,
+            include_channel_timing: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Report actual decoded differences at equal relative native picture timestamps."""
     paths = earlier, submitted
     sources = tuple(_identity(path) for path in paths)
@@ -243,13 +245,17 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
     record = {"schema": SCHEMA, "status": status,
               "earlier": {**sources[0], **_reference(tables[0])}, "submitted": {**sources[1], **_reference(tables[1])},
               "interpretation": INTERPRETATION, "affects_overall_confidence": False}
-    tracks = None
+    tracks = decoded = None
     if status == "measured":
         record["picture"] = _picture(paths, tables, assets, include_local=include_local)
         if "local_comparison" in record["picture"]:
             record["schema"] = SCHEMA_WITH_LOCAL
-        tracks = [read_track(path, source, max_seconds=MAX_SECONDS, video=True, origin=table.pts[0] * table.tb)
-                  for path, source, table in zip(paths, sources, tables, strict=True)]
+        decoded = [
+            _read_track(path, source, max_seconds=MAX_SECONDS, video=True, origin=table.pts[0] * table.tb,
+                        include_stereo=include_channel_timing and not record["picture"]["changed_frames"])
+            for path, source, table in zip(paths, sources, tables, strict=True)
+        ]
+        tracks = [item[0] for item in decoded]
         record["audio"] = compare_tracks(*tracks, assets)
     use_marked_sound = False
     if timing_event_s is not None:
@@ -293,6 +299,18 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
         record["schema"] = SCHEMA_WITH_MARKED_SOUND_FALLBACK
         if record["timing"]["status"] == "unassessed":
             record["timing"]["summary"] = video_reference_timing.LOCAL_SOUND_UNASSESSED
+    if (include_channel_timing and decoded is not None and not record["picture"]["changed_frames"]
+            and record["audio"]["status"] == "measured" and record["audio"]["earlier"]["relative_start"] == "0"):
+        limit = int(_elapsed(tables[1])[-1] * SAMPLE_RATE)
+        if (channels := channel_timing(decoded, assets, sample_limit=limit)) is not None:
+            channels["scope"] = (
+                "The decoded pictures match. Only excerpts within the verified picture timeline are considered. "
+                + channels["scope"]
+            )
+            channels["stream_indices"] = {
+                side: item[3][0]["stream_index"] for side, item in zip(("earlier", "submitted"), decoded, strict=True)
+            }
+            record.update(schema=SCHEMA_WITH_CHANNEL_TIMING, channel_timing=channels)
     if sources != tuple(_identity(path) for path in paths):
         raise ValueError("One of the clips changed while the comparison was running.")
     return record, assets

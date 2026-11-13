@@ -7,13 +7,40 @@ import DocumentContextComparison from './DocumentContextComparison'
 import DocumentPassageCoverage from './DocumentPassageCoverage'
 import DocumentRepeatedPassages from './DocumentRepeatedPassages'
 import DocumentUnselectedResponses from './DocumentUnselectedResponses'
-import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentOriginalTextLocation, type DocumentPassagePosition, type EmailBodyAlternatives } from './multimediaPackets'
+import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentOriginalTextLocation, type DocumentPassagePosition, type EmailBodyAlternatives, type EmailClassifierInputScope } from './multimediaPackets'
 
 const originalLocationLabels: Record<DocumentOriginalTextLocation['coordinate'], string> = {
   decoded_text: 'Original decoded text characters',
   word_paragraph: 'Original Word paragraph characters',
   decoded_email: 'Decoded email part characters',
   decoded_email_html: 'Decoded email HTML source characters',
+}
+
+const emailInputRoles = [
+  ['body', 'Message only'], ['quoted', 'Quote only'], ['signature', 'Signature only'],
+  ['mixed', 'Mixed roles'], ['unmapped', 'Role unavailable'],
+] as const
+
+function EmailInputScope({ scope }: { scope: EmailClassifierInputScope }) {
+  return <section className="mt-4 rounded-md border border-border p-4" aria-labelledby="email-input-scope-title">
+    <h3 id="email-input-scope-title" className="m-0 text-body font-medium">What the email writing checks read</h3>
+    <p className="mt-2 mb-0 text-caption text-text-muted">Selected MIME part {scope.mime_part}. Counts cover retained complete classifier inputs. Each input can contain several sentences.</p>
+    {scope.mapping === 'unmapped' && <p className="mt-2 mb-0 text-small">The source mapping could not separate message text, quotes and signatures.</p>}
+    {scope.checks.length > 0 ? <div className="mt-2 overflow-x-auto">
+      <table className="w-full text-left text-small">
+        <thead><tr><th scope="col" className="py-1 pr-3">Check</th>
+          {emailInputRoles.map(([role, label]) => <th key={role} scope="col" className="py-1 pr-3">{label}</th>)}
+          <th scope="col" className="py-1">Unlisted</th>
+        </tr></thead>
+        <tbody>{scope.checks.map((check) => <tr className="border-t border-border" key={check.signal_ref.id}>
+          <th scope="row" className="py-1 pr-3 font-normal">{check.signal_ref.display_id}</th>
+          {emailInputRoles.map(([role]) => <td key={role} className="py-1 pr-3 font-mono">{check.counts[role]}</td>)}
+          <td className="py-1 font-mono">{check.unlisted}</td>
+        </tr>)}</tbody>
+      </table>
+    </div> : <p className="mt-2 mb-0 text-small">No complete local classifier inputs were retained for this email.</p>}
+    <p className="mt-2 mb-0 text-caption text-text-muted">Roles come from the decoded message structure. Unlisted inputs exceed the display bounds or lack complete token records. These counts describe coverage.</p>
+  </section>
 }
 
 function PassagePosition({ review }: { review: DocumentPassagePosition }) {
@@ -159,6 +186,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const usesOcr = ocrPages.some((page) => page.status === 'extracted') || set.packets.some((packet) => packet.anchors.some((anchor) => anchor.extraction === 'ocr'))
   return <div data-testid="document-evidence-content">
     <EmailBodyComparison review={set.coverage?.email_body_alternatives} />
+    {set.coverage?.email_classifier_input_scope && <EmailInputScope scope={set.coverage.email_classifier_input_scope} />}
     <DocumentRepeatedPassages result={set.repeated_passages} />
     <DocumentInspectionMap packets={set.packets} selectedId={selectedId} onSelect={selectPassage} />
     <DocumentPassageCoverage coverage={set.coverage?.local_passage_coverage} />

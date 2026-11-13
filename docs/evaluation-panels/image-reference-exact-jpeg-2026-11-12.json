@@ -1,0 +1,852 @@
+{
+  "baseline_journal_sha256": "098c38e13200d239d71f08e459d38e643824db3662b29fe7860a800320c33111",
+  "code": {
+    "image_patch_proposal_audit.py": "fd6f60f95f7ffd8f33f6b6d7b888449a16c82f15be5cd1f85585a68d19c3b4ec",
+    "image_reference_exact_jpeg_candidate.py": "4aeaa3c160cadaf5fcb2d134e30b277192e81743b724d1a02b73f8663dff89a4",
+    "image_reference_exact_jpeg_transfer.py": "5f59699057c274e3135510b102982780d8545ff311e01275b5fea46bfae0f6c0",
+    "reference_compare.py": "e436052ad1a0b70ab29c180be88c72e868ed8f701031c6e1f10cecda5bb47063"
+  },
+  "design": {
+    "confirmation_requirements": {
+      "maximum_added_misplaced_edits": 0,
+      "maximum_bad_alignment_controls": 0,
+      "maximum_lost_incumbent": 0,
+      "maximum_new_unchanged_or_recompress_highlights": 0,
+      "minimum_added_feathered_groups": 2
+    },
+    "controls": [
+      "untouched",
+      "matched ordinary variants",
+      "different same-size photo",
+      "2px shift",
+      "16px shift",
+      "horizontal flip",
+      "JPEG82 then JPEG75",
+      "JPEG95 then JPEG75",
+      "periodic identical and shifted tiles"
+    ],
+    "difference": "Existing same-framing paired mask routine, full source coordinates. Changed pixel support does not assign authorship.",
+    "identity": {
+      "minimum_anchors_per_zone": 2,
+      "minimum_block_channel_range": 24,
+      "minimum_exact_block_fraction": 0.65,
+      "minimum_supported_zones": 6,
+      "minimum_unique_detail_blocks": 24,
+      "tile_px": 16
+    },
+    "profile": "Same dimensions, upright 8-bit RGB PNG earlier copy and standard baseline JPEG75 4:2:0 submitted. No profile conversion.",
+    "selection": "Only fill cases the existing earlier-copy pipeline did not compare. Preserve all other incumbent results.",
+    "sources": "20 development and 12 source-disjoint confirmation photo groups; previously used in project studies. No rule tuned on either."
+  },
+  "results": {
+    "confirmation": {
+      "deliveries": 168,
+      "journal_sha256": "ef304e552af02e19341d848461f35d2deb3b07ad73787f8d5d4235fdf846edaf",
+      "passes": true,
+      "replay_seconds": 14.92,
+      "rule": {
+        "added_feathered_groups": 3,
+        "added_misplaced_edits": 0,
+        "bad_alignment_controls": 0,
+        "lost_incumbent": 0,
+        "unchanged_or_recompress_highlights": 0
+      },
+      "strata": {
+        "kandinsky/feathered": {
+          "candidate_comparable": 5,
+          "candidate_highlight": 5,
+          "candidate_identity": 5,
+          "candidate_useful": 5,
+          "fallback_compared": 1,
+          "fallback_highlight": 1,
+          "fallback_useful": 1,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "kandinsky/flip": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "kandinsky/global_processing": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "kandinsky/local_blur": {
+          "candidate_comparable": 5,
+          "candidate_highlight": 3,
+          "candidate_identity": 5,
+          "candidate_useful": 0,
+          "fallback_compared": 1,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "kandinsky/local_copy": {
+          "candidate_comparable": 5,
+          "candidate_highlight": 5,
+          "candidate_identity": 5,
+          "candidate_useful": 0,
+          "fallback_compared": 1,
+          "fallback_highlight": 1,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "kandinsky/local_processing": {
+          "candidate_comparable": 5,
+          "candidate_highlight": 4,
+          "candidate_identity": 5,
+          "candidate_useful": 0,
+          "fallback_compared": 1,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "kandinsky/local_tone": {
+          "candidate_comparable": 5,
+          "candidate_highlight": 5,
+          "candidate_identity": 5,
+          "candidate_useful": 0,
+          "fallback_compared": 1,
+          "fallback_highlight": 1,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "kandinsky/original": {
+          "candidate_comparable": 5,
+          "candidate_highlight": 0,
+          "candidate_identity": 5,
+          "candidate_useful": 0,
+          "fallback_compared": 1,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "kandinsky/recompress82": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "kandinsky/recompress95": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "kandinsky/sharp": {
+          "candidate_comparable": 5,
+          "candidate_highlight": 5,
+          "candidate_identity": 5,
+          "candidate_useful": 5,
+          "fallback_compared": 1,
+          "fallback_highlight": 1,
+          "fallback_useful": 1,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "kandinsky/shift16": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "kandinsky/shift2": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "kandinsky/unrelated": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "sd15/feathered": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 6,
+          "candidate_identity": 6,
+          "candidate_useful": 6,
+          "fallback_compared": 2,
+          "fallback_highlight": 2,
+          "fallback_useful": 2,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "sd15/flip": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "sd15/global_processing": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 2
+        },
+        "sd15/local_blur": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 4,
+          "candidate_identity": 6,
+          "candidate_useful": 0,
+          "fallback_compared": 2,
+          "fallback_highlight": 1,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "sd15/local_copy": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 6,
+          "candidate_identity": 6,
+          "candidate_useful": 0,
+          "fallback_compared": 2,
+          "fallback_highlight": 2,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "sd15/local_processing": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 5,
+          "candidate_identity": 6,
+          "candidate_useful": 0,
+          "fallback_compared": 2,
+          "fallback_highlight": 1,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "sd15/local_tone": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 6,
+          "candidate_identity": 6,
+          "candidate_useful": 0,
+          "fallback_compared": 2,
+          "fallback_highlight": 2,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "sd15/original": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 0,
+          "candidate_identity": 6,
+          "candidate_useful": 0,
+          "fallback_compared": 2,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "sd15/recompress82": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "sd15/recompress95": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "sd15/sharp": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 6,
+          "candidate_identity": 6,
+          "candidate_useful": 6,
+          "fallback_compared": 2,
+          "fallback_highlight": 2,
+          "fallback_useful": 2,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "sd15/shift16": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "sd15/shift2": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "sd15/unrelated": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        }
+      },
+      "verified_replays": 168
+    },
+    "development": {
+      "deliveries": 280,
+      "journal_sha256": "b0297d1090f9294829c5a476b09931803e59f5c558e3617b51ba4a06b44d3850",
+      "passes": true,
+      "replay_seconds": 23.12,
+      "rule": {
+        "added_feathered_groups": 6,
+        "added_misplaced_edits": 0,
+        "bad_alignment_controls": 0,
+        "lost_incumbent": 0,
+        "unchanged_or_recompress_highlights": 0
+      },
+      "strata": {
+        "kandinsky/feathered": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 6,
+          "candidate_identity": 6,
+          "candidate_useful": 6,
+          "fallback_compared": 1,
+          "fallback_highlight": 1,
+          "fallback_useful": 1,
+          "files": 6,
+          "prior_comparable": 5
+        },
+        "kandinsky/flip": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "kandinsky/global_processing": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 5
+        },
+        "kandinsky/local_blur": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 4,
+          "candidate_identity": 6,
+          "candidate_useful": 0,
+          "fallback_compared": 1,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 5
+        },
+        "kandinsky/local_copy": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 6,
+          "candidate_identity": 6,
+          "candidate_useful": 0,
+          "fallback_compared": 1,
+          "fallback_highlight": 1,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 5
+        },
+        "kandinsky/local_processing": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 5,
+          "candidate_identity": 6,
+          "candidate_useful": 0,
+          "fallback_compared": 1,
+          "fallback_highlight": 1,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 5
+        },
+        "kandinsky/local_tone": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 6,
+          "candidate_identity": 6,
+          "candidate_useful": 0,
+          "fallback_compared": 1,
+          "fallback_highlight": 1,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 5
+        },
+        "kandinsky/original": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 0,
+          "candidate_identity": 6,
+          "candidate_useful": 0,
+          "fallback_compared": 1,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 5
+        },
+        "kandinsky/recompress82": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "kandinsky/recompress95": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "kandinsky/sharp": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 6,
+          "candidate_identity": 6,
+          "candidate_useful": 6,
+          "fallback_compared": 1,
+          "fallback_highlight": 1,
+          "fallback_useful": 1,
+          "files": 6,
+          "prior_comparable": 5
+        },
+        "kandinsky/shift16": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "kandinsky/shift2": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "kandinsky/unrelated": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "sd15/feathered": {
+          "candidate_comparable": 8,
+          "candidate_highlight": 8,
+          "candidate_identity": 8,
+          "candidate_useful": 8,
+          "fallback_compared": 3,
+          "fallback_highlight": 3,
+          "fallback_useful": 3,
+          "files": 8,
+          "prior_comparable": 5
+        },
+        "sd15/flip": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 8,
+          "prior_comparable": 0
+        },
+        "sd15/global_processing": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 8,
+          "prior_comparable": 5
+        },
+        "sd15/local_blur": {
+          "candidate_comparable": 8,
+          "candidate_highlight": 1,
+          "candidate_identity": 8,
+          "candidate_useful": 0,
+          "fallback_compared": 3,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 8,
+          "prior_comparable": 5
+        },
+        "sd15/local_copy": {
+          "candidate_comparable": 8,
+          "candidate_highlight": 8,
+          "candidate_identity": 8,
+          "candidate_useful": 0,
+          "fallback_compared": 3,
+          "fallback_highlight": 3,
+          "fallback_useful": 0,
+          "files": 8,
+          "prior_comparable": 5
+        },
+        "sd15/local_processing": {
+          "candidate_comparable": 8,
+          "candidate_highlight": 6,
+          "candidate_identity": 8,
+          "candidate_useful": 0,
+          "fallback_compared": 3,
+          "fallback_highlight": 1,
+          "fallback_useful": 0,
+          "files": 8,
+          "prior_comparable": 5
+        },
+        "sd15/local_tone": {
+          "candidate_comparable": 8,
+          "candidate_highlight": 8,
+          "candidate_identity": 8,
+          "candidate_useful": 0,
+          "fallback_compared": 3,
+          "fallback_highlight": 3,
+          "fallback_useful": 0,
+          "files": 8,
+          "prior_comparable": 5
+        },
+        "sd15/original": {
+          "candidate_comparable": 8,
+          "candidate_highlight": 0,
+          "candidate_identity": 8,
+          "candidate_useful": 0,
+          "fallback_compared": 3,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 8,
+          "prior_comparable": 5
+        },
+        "sd15/recompress82": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 8,
+          "prior_comparable": 0
+        },
+        "sd15/recompress95": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 8,
+          "prior_comparable": 0
+        },
+        "sd15/sharp": {
+          "candidate_comparable": 8,
+          "candidate_highlight": 8,
+          "candidate_identity": 8,
+          "candidate_useful": 8,
+          "fallback_compared": 3,
+          "fallback_highlight": 3,
+          "fallback_useful": 3,
+          "files": 8,
+          "prior_comparable": 5
+        },
+        "sd15/shift16": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 8,
+          "prior_comparable": 0
+        },
+        "sd15/shift2": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 8,
+          "prior_comparable": 0
+        },
+        "sd15/unrelated": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 8,
+          "prior_comparable": 0
+        },
+        "sdxl/feathered": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 6,
+          "candidate_identity": 6,
+          "candidate_useful": 6,
+          "fallback_compared": 2,
+          "fallback_highlight": 2,
+          "fallback_useful": 2,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "sdxl/flip": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "sdxl/global_processing": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 5
+        },
+        "sdxl/local_blur": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 5,
+          "candidate_identity": 6,
+          "candidate_useful": 0,
+          "fallback_compared": 1,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 5
+        },
+        "sdxl/local_copy": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 6,
+          "candidate_identity": 6,
+          "candidate_useful": 0,
+          "fallback_compared": 2,
+          "fallback_highlight": 2,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "sdxl/local_processing": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 5,
+          "candidate_identity": 6,
+          "candidate_useful": 0,
+          "fallback_compared": 1,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 5
+        },
+        "sdxl/local_tone": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 6,
+          "candidate_identity": 6,
+          "candidate_useful": 0,
+          "fallback_compared": 1,
+          "fallback_highlight": 1,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 5
+        },
+        "sdxl/original": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 0,
+          "candidate_identity": 6,
+          "candidate_useful": 0,
+          "fallback_compared": 1,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 5
+        },
+        "sdxl/recompress82": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "sdxl/recompress95": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "sdxl/sharp": {
+          "candidate_comparable": 6,
+          "candidate_highlight": 6,
+          "candidate_identity": 6,
+          "candidate_useful": 6,
+          "fallback_compared": 2,
+          "fallback_highlight": 2,
+          "fallback_useful": 2,
+          "files": 6,
+          "prior_comparable": 4
+        },
+        "sdxl/shift16": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "sdxl/shift2": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        },
+        "sdxl/unrelated": {
+          "candidate_comparable": 0,
+          "candidate_highlight": 0,
+          "candidate_identity": 0,
+          "candidate_useful": 0,
+          "fallback_compared": 0,
+          "fallback_highlight": 0,
+          "fallback_useful": 0,
+          "files": 6,
+          "prior_comparable": 0
+        }
+      },
+      "verified_replays": 280
+    }
+  },
+  "schema": "chipmunk.image-reference-exact-jpeg-transfer/1",
+  "synthetic": {
+    "mirrored_identical": "delivery_identity_unresolved",
+    "periodic_shift16": "delivery_identity_unresolved",
+    "periodic_unchanged": "delivery_identity_unresolved",
+    "periodic_with_local_change": "delivery_identity_unresolved"
+  }
+}

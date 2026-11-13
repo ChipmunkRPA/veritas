@@ -47,7 +47,7 @@ type ChannelTimingRange = Omit<SoundtrackTiming, 'scope' | 'range'> & {
   channel: 'left' | 'right'
   range: Record<Side, SoundtrackSide> & { changed_samples: [number, number] }
 }
-type ChannelTiming = { scope: string; ranges: ChannelTimingRange[] }
+type ChannelTiming = { scope: string; ranges: ChannelTimingRange[]; stream_indices?: Record<Side, number> }
 type AdditionalSoundtrack = {
   scope: string
   status: string
@@ -92,7 +92,7 @@ type Comparison = {
 } & ({
   schema: 'chipmunk.video-reference-comparison/1' | 'chipmunk.video-reference-comparison/2' | 'chipmunk.video-reference-comparison/3'
     | 'chipmunk.video-reference-comparison/4' | 'chipmunk.video-reference-comparison/5' | 'chipmunk.video-reference-comparison/6'
-    | 'chipmunk.video-reference-comparison/7'
+    | 'chipmunk.video-reference-comparison/7' | 'chipmunk.video-reference-comparison/8'
   submitted: PictureDimensions
   picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
   timing?: TimingComparison
@@ -101,7 +101,7 @@ type Comparison = {
   level_adjusted?: never
   stereo_comparison?: never
   local_timing?: never
-  channel_timing?: never
+  channel_timing?: ChannelTiming
 } | {
   schema: 'chipmunk.audio-reference-comparison/1' | 'chipmunk.audio-reference-comparison/2' | 'chipmunk.audio-reference-comparison/3'
     | 'chipmunk.audio-reference-comparison/4' | 'chipmunk.audio-reference-comparison/5' | 'chipmunk.audio-reference-comparison/6'
@@ -362,17 +362,20 @@ function SoundtrackTimingEvidence({ timing, assets, audioOnly = false, title: cu
   </section>
 }
 
-function ChannelTimingEvidence({ timing, assets }: { timing: ChannelTiming; assets: Result['assets'] }) {
+function ChannelTimingEvidence({ timing, assets, audioOnly }: { timing: ChannelTiming; assets: Result['assets']; audioOnly: boolean }) {
   return <section aria-label="Stereo channel timing" className="space-y-3">
     <h3 className="m-0 text-small font-medium">Stereo channel timing</h3>
+    {timing.stream_indices && <p className="m-0 text-caption text-text-muted">
+      First soundtrack · Earlier stream {timing.stream_indices.earlier} · Analyzed stream {timing.stream_indices.submitted}
+    </p>}
     {timing.ranges.length === 0 && <p className="m-0 text-small">No qualifying local move was found in either channel.</p>}
     {timing.ranges.map(row => {
       const [start, end] = row.range.changed_samples
       return <div key={row.channel} className="space-y-2 rounded-md border border-border p-3">
-        <SoundtrackTimingEvidence timing={{ ...row, scope: '' }} assets={assets} audioOnly
+        <SoundtrackTimingEvidence timing={{ ...row, scope: '' }} assets={assets} audioOnly={audioOnly}
           title={row.channel === 'left' ? 'Left channel timing' : 'Right channel timing'} />
         <p className="m-0 text-caption text-text-muted">
-          Changed interval in the analyzed recording {sourceSeconds.format(start / 16000)}–{sourceSeconds.format(end / 16000)} s.
+          Changed interval in the analyzed {audioOnly ? 'recording' : 'clip'} {sourceSeconds.format(start / 16000)}–{sourceSeconds.format(end / 16000)} s.
         </p>
       </div>
     })}
@@ -401,8 +404,9 @@ function ResultView({ result }: { result: Result }) {
     {comparison.status !== 'measured' && <p className="m-0 text-small">{notes[comparison.status] ?? 'The files could not be compared.'}</p>}
     {comparison.timing && <TimingEvidence timing={comparison.timing} assets={assets} />}
     {comparison.soundtrack_alignment && !comparison.timing?.changed_audio_samples &&
+      (!comparison.channel_timing?.ranges.length || comparison.soundtrack_alignment.range) &&
       <SoundtrackTimingEvidence timing={comparison.soundtrack_alignment} assets={assets} />}
-    {comparison.channel_timing && <ChannelTimingEvidence timing={comparison.channel_timing} assets={assets} />}
+    {comparison.channel_timing && <ChannelTimingEvidence timing={comparison.channel_timing} assets={assets} audioOnly={isAudio} />}
     {comparison.local_timing && (!comparison.channel_timing || comparison.local_timing.range) &&
       <SoundtrackTimingEvidence timing={comparison.local_timing} assets={assets} audioOnly />}
     {picture && !comparison.soundtrack_alignment && (picture.changed_frames > 0 || audio?.status !== 'measured') &&
@@ -512,7 +516,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = [1, 2, 3, 4, 5, 6, 7]
+      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8] : [1, 2, 3, 4, 5, 6, 7]
       if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
@@ -522,7 +526,8 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
       if (schema === 'chipmunk.audio-reference-comparison/6' && !response.comparison.local_timing) {
         throw new Error('The comparison response is missing its local audio timing result.')
       }
-      if (schema === 'chipmunk.audio-reference-comparison/7' && !response.comparison.channel_timing) {
+      if ((schema === 'chipmunk.audio-reference-comparison/7' || schema === 'chipmunk.video-reference-comparison/8')
+          && !response.comparison.channel_timing) {
         throw new Error('The comparison response is missing its stereo timing result.')
       }
       if (!controller.signal.aborted) setResult(response)

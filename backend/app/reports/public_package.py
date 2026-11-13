@@ -173,6 +173,11 @@ def build_public(db, package, *, store, key: signing.InstanceKey, exported_at: d
         from app.reports.multimedia_evidence import verify_assets
 
         verify_assets(evidence, store, result=frozen.result)
+    if analysis.kind == 'document':
+        from app.evidence import document_email_contexts
+
+        if scope := (evidence.get("coverage") or {}).get(document_email_contexts.KEY):
+            result[document_email_contexts.COMMITMENT] = canonical_hash(scope)
     files = {'report.pdf': legacy._verified(db, store, report.artefact_id, analysis.id),
              'evidence.json': canonical_json(evidence), 'result.json': canonical_json(result)}
     if (hashlib.sha256(files['report.pdf']).hexdigest() != report.sha256 or report.signing_key_id != key.key_id

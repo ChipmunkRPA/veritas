@@ -263,18 +263,20 @@ def _soundtrack_timing_page(document, timing, assets):
     _text(page, MARGIN, 720, "Waveforms share one scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
 
 
-def _audio_local_timing_page(document, timing, *, scope=None):
+def _audio_local_timing_page(document, timing, *, scope=None, stream_indices=None):
     channel = timing.get("channel")
     title = f"{channel.capitalize()} channel timing" if channel else "Local audio timing"
     page = _page(document, title)
     page.insert_textbox((MARGIN, 124, RIGHT, 167), timing["summary"], fontsize=12, fontname="hebo", color=INK)
     page.insert_textbox((MARGIN, 176, RIGHT, 231), scope or timing["scope"], fontsize=11, fontname="helv", color=MUTED)
+    if stream_indices:
+        _text(page, MARGIN, 246, _first_soundtrack(stream_indices), size=9, color=MUTED)
     if timing["status"] != "local_shift":
         return
     span = timing["range"]
     maximum = max(.01, *(abs(level) for side in LABELS for field in ("low", "high")
                         for level in span[side]["waveform"][field]))
-    rows = (("earlier", "Earlier recording"), ("submitted", "Analyzed recording"))
+    rows = LABELS.items() if stream_indices else (("earlier", "Earlier recording"), ("submitted", "Analyzed recording"))
     for y, (side, label) in zip((343, 512), rows, strict=True):
         row = span[side]
         first, end = row["samples"]
@@ -283,10 +285,15 @@ def _audio_local_timing_page(document, timing, *, scope=None):
         _text(page, MARGIN, y + 55, f"Decoded samples [{first}, {end}) at 16 kHz.", size=9, color=MUTED)
     if channel:
         start, end = span["changed_samples"]
-        _text(page, MARGIN, 628, f"Changed interval in analyzed recording  {start / AUDIO_RATE:.3f} to {end / AUDIO_RATE:.3f} s", color=MUTED)
+        item = "clip" if stream_indices else "recording"
+        _text(page, MARGIN, 628, f"Changed interval in analyzed {item}  {start / AUDIO_RATE:.3f} to {end / AUDIO_RATE:.3f} s", color=MUTED)
     else:
         _text(page, MARGIN, 628, f"{span['supporting_windows']} matching windows support the time difference.", color=MUTED)
     _text(page, MARGIN, 650, "Waveforms share one scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
+
+
+def _first_soundtrack(indices):
+    return f"First soundtrack   Earlier stream {indices['earlier']}   Analyzed stream {indices['submitted']}"
 
 
 def _sound_page(document, span, *, level_adjusted=False, track_title=None):
@@ -444,19 +451,24 @@ def render(record, assets):
         _remaining_ranges(document, remaining)
         if "timing" in record:
             _timing_page(document, record["timing"], assets)
-        if "soundtrack_alignment" in record and "changed_audio_samples" not in record.get("timing", {}):
+        if ("soundtrack_alignment" in record and "changed_audio_samples" not in record.get("timing", {})
+                and (not record.get("channel_timing", {}).get("ranges")
+                     or record["soundtrack_alignment"]["status"] == "local_shift")):
             _soundtrack_timing_page(document, record["soundtrack_alignment"], assets)
         if "additional_soundtrack" in record:
             _additional_soundtrack_pages(document, record["additional_soundtrack"])
         if "stereo_comparison" in record:
             _stereo_pages(document, record["stereo_comparison"])
         if (channel_timing := record.get("channel_timing")) is not None:
+            stream_indices = channel_timing.get("stream_indices")
             for row in channel_timing["ranges"]:
-                _audio_local_timing_page(document, row, scope=channel_timing["scope"])
+                _audio_local_timing_page(document, row, scope=channel_timing["scope"], stream_indices=stream_indices)
             if not channel_timing["ranges"]:
                 page = _page(document, "Stereo channel timing")
                 _text(page, MARGIN, 136, "No qualifying local move was found in either channel.")
                 page.insert_textbox((MARGIN, 164, RIGHT, 230), channel_timing["scope"], fontsize=11, fontname="helv", color=MUTED)
+                if stream_indices:
+                    _text(page, MARGIN, 246, _first_soundtrack(stream_indices), size=9, color=MUTED)
         if "local_timing" in record and (channel_timing is None or record["local_timing"]["status"] == "local_shift"):
             _audio_local_timing_page(document, record["local_timing"])
         return document.tobytes(deflate=True, garbage=4)

@@ -97,6 +97,28 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [generated-image replacement pilot](image-native-generated-stencil-transfer-2026-11-13.md)
+  compared the shipped interpolation shift check with two phase-loss checks.
+  The shift check found 0/12 generated replacements. Phase loss found 12/12
+  and flagged 11/30 ordinary edits. Requiring supporting texture retained
+  10/12 useful locations and reduced ordinary flags to 6/30. Both phase-loss
+  arms remain offline pending transfer beyond the tested generator and profile.
+- The [earlier-copy mouth comparison](video-paired-native-mouth-transfer-2026-11-13.md)
+  found 15/17 time windows and 11/17 useful time-and-pixel locations with
+  luminance alone. Texture corroboration found 16/17 time windows and 10/17
+  combined locations. Neither arm passed the frozen rule because the tile
+  was too small on the independently timing-qualified second-family edit.
+  The comparison remains offline.
+- The [stereo recording-path study](audio-stereo-path-return-transfer-2026-11-13.md)
+  located no synthetic insert under the fixed rule and flagged four gradual
+  movement controls. All 203 input and decision replays matched. The check
+  remains offline.
+- The [USWDS writing study](writing-uswds-revision-transfer-2026-11-13.md)
+  tested real editorial revisions and two generated rewrite families. Using
+  the paired reading alongside the incumbent localized 5/9 rewrites versus
+  4/9 with the incumbent and flagged 1/6 genuine revisions in both cases.
+  The one added location came from a single source and generator. The paired
+  reading remains offline.
 - [Word tracked text changes](document-word-track-changes-2026-11-13.md)
   displays the original inserted and deleted wording with exact XML locations.
   The browser, Standard PDF, JSON and signed source replay agree. These

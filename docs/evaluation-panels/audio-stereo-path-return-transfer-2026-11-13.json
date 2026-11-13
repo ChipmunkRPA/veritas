@@ -1,0 +1,5860 @@
+{
+  "assessment": [
+    {
+      "case": "paired-0-0:None:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            65600,
+            83200
+          ],
+          "score": 0.0801582
+        },
+        "level_only": {
+          "range_samples": [
+            65600,
+            83200
+          ],
+          "score": 0.1025016
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "9f3df8b2380eef85d883b81040dd6349de58e2a7d24b377f01e328eb6b5320eb",
+      "kind": "untouched",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-0:None:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": null,
+        "level_only": {
+          "range_samples": [
+            11200,
+            28800
+          ],
+          "score": 0.0
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "c50e76579cce6e0cec4b60a71012ba340bdc05441a5e11d53362f6e5fb6c06cc",
+      "kind": "gradual_move",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-0:None:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            25600,
+            36800
+          ],
+          "score": 0.217921
+        },
+        "level_only": {
+          "range_samples": [
+            65600,
+            83200
+          ],
+          "score": 0.1025016
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "bc5caa744ad33b74ecb5d3b3ad8da5b0a12fe46be48b17f76089f019e4053a61",
+      "kind": "ordinary_same_path",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:None:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            24000,
+            35200
+          ],
+          "score": 2.8750816
+        },
+        "level_only": {
+          "range_samples": [
+            24000,
+            38400
+          ],
+          "score": 0.8929923
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "06d4b1cfe60bbea316c73f17dd276f8d5da98b6d0bc353307a75f5be78261283",
+      "kind": "ordinary_path_change",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:None:synthetic_same_path",
+      "donor_family": "xttsv2",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            25600,
+            36800
+          ],
+          "score": 0.1974977
+        },
+        "level_only": {
+          "range_samples": [
+            33600,
+            51200
+          ],
+          "score": 0.124401
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "84691879d8b1398463d707b97ad2ba4b0fbdea99b19736bb84d13f2d69f0a9dd",
+      "kind": "synthetic_same_path",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:None:synthetic_path_change",
+      "donor_family": "xttsv2",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            25600,
+            36800
+          ],
+          "score": 3.5613079
+        },
+        "level_only": {
+          "range_samples": [
+            25600,
+            36800
+          ],
+          "score": 1.1205349
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "3e75de9d8e2315cdddc71e5df796db5dd49419fbb5341efbba3cf5e399c224f0",
+      "kind": "synthetic_path_change",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:5:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            14400,
+            32000
+          ],
+          "score": 2.7915825
+        },
+        "level_only": {
+          "range_samples": [
+            22400,
+            33600
+          ],
+          "score": 0.6335909
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "73b689a95e51af563d80072e17b999aba0c4aec5c74051f7e9c93ef3fadd7081",
+      "kind": "untouched",
+      "level_db": 5,
+      "measured_snr_db": 5.000004,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-0:5:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            67200,
+            84800
+          ],
+          "score": 5.3135644
+        },
+        "level_only": {
+          "range_samples": [
+            67200,
+            84800
+          ],
+          "score": 0.8077749
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "b21abc63f13432207fb920f184fe1e3f82080bb66ff74ef85528bf7e22bbad35",
+      "kind": "gradual_move",
+      "level_db": 5,
+      "measured_snr_db": 5.000004,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-0:5:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            75200,
+            86400
+          ],
+          "score": 0.8501021
+        },
+        "level_only": {
+          "range_samples": [
+            27200,
+            38400
+          ],
+          "score": 0.3449739
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "9fd9393ee91c4d5034cb0c858fc68d471019f2f3d30561d46afdad878bce3811",
+      "kind": "ordinary_same_path",
+      "level_db": 5,
+      "measured_snr_db": 5.000004,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:5:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            22400,
+            36800
+          ],
+          "score": 1.8513865
+        },
+        "level_only": {
+          "range_samples": [
+            24000,
+            35200
+          ],
+          "score": 0.2447573
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "b80373651f4ba5dc375c41b97a4caa529e6f508a89ad8bc95d19826db9341960",
+      "kind": "ordinary_path_change",
+      "level_db": 5,
+      "measured_snr_db": 5.000004,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:5:synthetic_same_path",
+      "donor_family": "xttsv2",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            22400,
+            36800
+          ],
+          "score": 2.0204619
+        },
+        "level_only": {
+          "range_samples": [
+            22400,
+            33600
+          ],
+          "score": 0.5889472
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "d3b7fd364f828a46226c4ed5b23f57a5a009cd60f7e8e450f97f566b2fe59a0b",
+      "kind": "synthetic_same_path",
+      "level_db": 5,
+      "measured_snr_db": 5.000004,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:5:synthetic_path_change",
+      "donor_family": "xttsv2",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            24000,
+            35200
+          ],
+          "score": 2.277622
+        },
+        "level_only": {
+          "range_samples": [
+            22400,
+            33600
+          ],
+          "score": 0.5080328
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "4b6a83caaf23721fcea776c17e34e9945b4b37c4e1977c4a653f432fff131fdd",
+      "kind": "synthetic_path_change",
+      "level_db": 5,
+      "measured_snr_db": 5.000004,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:5:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            11200,
+            22400
+          ],
+          "score": 0.0176247
+        },
+        "level_only": {
+          "range_samples": [
+            11200,
+            22400
+          ],
+          "score": 0.0492882
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "8520e0d18cd258d01e2b3a091b41b482034d855603fb90e80a3dc1761a93e709",
+      "kind": "room_only",
+      "level_db": 5,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-0:0:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            14400,
+            32000
+          ],
+          "score": 2.7672076
+        },
+        "level_only": {
+          "range_samples": [
+            73600,
+            84800
+          ],
+          "score": 0.6817037
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "d6be4ffec6f8f48bf1092f4c7dbdc2a7fc7cbe73cb40bae9e93eb55d5f531d91",
+      "kind": "untouched",
+      "level_db": 0,
+      "measured_snr_db": 5e-06,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-0:0:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            72000,
+            86400
+          ],
+          "score": 1.6662167
+        },
+        "level_only": {
+          "range_samples": [
+            14400,
+            32000
+          ],
+          "score": 0.6805981
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "60aaae9e58add69d6a09bed3d29d94075f3ff8b5ae4e3ef2e8d7e1b01982f7b8",
+      "kind": "gradual_move",
+      "level_db": 0,
+      "measured_snr_db": 5e-06,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-0:0:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            65600,
+            83200
+          ],
+          "score": 2.3050314
+        },
+        "level_only": {
+          "range_samples": [
+            73600,
+            84800
+          ],
+          "score": 0.6817037
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "7f8a981baa4216115a2aa34fd245073197788b67550458f4672321a640a1535b",
+      "kind": "ordinary_same_path",
+      "level_db": 0,
+      "measured_snr_db": 5e-06,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:0:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            65600,
+            83200
+          ],
+          "score": 2.3050314
+        },
+        "level_only": {
+          "range_samples": [
+            73600,
+            84800
+          ],
+          "score": 0.6817037
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "0271552068d4a213239bf899542537ba5997760a6380a5c9ba1582fed9d5cd67",
+      "kind": "ordinary_path_change",
+      "level_db": 0,
+      "measured_snr_db": 5e-06,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:0:synthetic_same_path",
+      "donor_family": "xttsv2",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            65600,
+            83200
+          ],
+          "score": 2.3050314
+        },
+        "level_only": {
+          "range_samples": [
+            73600,
+            84800
+          ],
+          "score": 0.6817037
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "5d3b051ef224e23810d39b341dbaaa52c4943c287905931a3684e384eb4c26b8",
+      "kind": "synthetic_same_path",
+      "level_db": 0,
+      "measured_snr_db": 5e-06,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:0:synthetic_path_change",
+      "donor_family": "xttsv2",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            65600,
+            83200
+          ],
+          "score": 2.3050314
+        },
+        "level_only": {
+          "range_samples": [
+            73600,
+            84800
+          ],
+          "score": 0.6817037
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "69591f76f9f6560ab8639ee7c5e337b958f1fda1ca67fca2d6ca803fd6089f9e",
+      "kind": "synthetic_path_change",
+      "level_db": 0,
+      "measured_snr_db": 5e-06,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:0:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            11200,
+            22400
+          ],
+          "score": 0.0179769
+        },
+        "level_only": {
+          "range_samples": [
+            11200,
+            22400
+          ],
+          "score": 0.0492921
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "db482e98bc9415db5eb5eea167e83dcd527269449eae2cff8ad360124da45db7",
+      "kind": "room_only",
+      "level_db": 0,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-0:-5:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            14400,
+            32000
+          ],
+          "score": 1.8423708
+        },
+        "level_only": {
+          "range_samples": [
+            9600,
+            27200
+          ],
+          "score": 0.5945154
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "ab5848e6c43aaf9e203b23bca6dd9b63289e9615f04994f767b474437b828659",
+      "kind": "untouched",
+      "level_db": -5,
+      "measured_snr_db": -5.000005,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-0:-5:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            16000,
+            30400
+          ],
+          "score": 0.0443432
+        },
+        "level_only": {
+          "range_samples": [
+            9600,
+            27200
+          ],
+          "score": 0.7063886
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "039529b4ce2d9b6d9ff508ea233a686af4e73042a0db83804009be3c277f01ab",
+      "kind": "gradual_move",
+      "level_db": -5,
+      "measured_snr_db": -5.000005,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-0:-5:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            16000,
+            33600
+          ],
+          "score": 0.8808449
+        },
+        "level_only": {
+          "range_samples": [
+            14400,
+            32000
+          ],
+          "score": 0.4425082
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "5b29f96d221ce6593000c1f2710682e9784f93d55a509e6a5871cda47de822bb",
+      "kind": "ordinary_same_path",
+      "level_db": -5,
+      "measured_snr_db": -5.000005,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:-5:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            16000,
+            33600
+          ],
+          "score": 0.6530353
+        },
+        "level_only": {
+          "range_samples": [
+            11200,
+            22400
+          ],
+          "score": 0.6638821
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "bc42227ea1cf7c6bcdad399cd3bc37ebbb965b372bc681905a7fa09a82c828c5",
+      "kind": "ordinary_path_change",
+      "level_db": -5,
+      "measured_snr_db": -5.000005,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:-5:synthetic_same_path",
+      "donor_family": "xttsv2",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            16000,
+            33600
+          ],
+          "score": 0.6572264
+        },
+        "level_only": {
+          "range_samples": [
+            9600,
+            27200
+          ],
+          "score": 0.6790902
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "3e7386aba981deab274503a967edabb99275c7d37d574c58fba2ea4b65387785",
+      "kind": "synthetic_same_path",
+      "level_db": -5,
+      "measured_snr_db": -5.000005,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:-5:synthetic_path_change",
+      "donor_family": "xttsv2",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            16000,
+            33600
+          ],
+          "score": 0.5656398
+        },
+        "level_only": {
+          "range_samples": [
+            9600,
+            24000
+          ],
+          "score": 0.7250486
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "db474ee849d0acd33dd6e264c504d32f382322779506fd5fae998a5bb62f6270",
+      "kind": "synthetic_path_change",
+      "level_db": -5,
+      "measured_snr_db": -5.000005,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-0-0:-5:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            11200,
+            22400
+          ],
+          "score": 0.0176918
+        },
+        "level_only": {
+          "range_samples": [
+            11200,
+            22400
+          ],
+          "score": 0.049294
+        }
+      },
+      "group": "paired-0-0",
+      "input_sha256": "40311da9389aa2ccbf49bbc6c292b6e3817567b8ed87c6b47b17fc7dce33565e",
+      "kind": "room_only",
+      "level_db": -5,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-1:None:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            65600,
+            83200
+          ],
+          "score": 0.0800818
+        },
+        "level_only": {
+          "range_samples": [
+            65600,
+            83200
+          ],
+          "score": 0.1021643
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "ce29c4975b9dbee641483ea13424f710c22910783fb4a6cfa63eaf3b1acc3939",
+      "kind": "untouched",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-1:None:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            11200,
+            28800
+          ],
+          "score": 0.0
+        },
+        "level_only": {
+          "range_samples": [
+            11200,
+            28800
+          ],
+          "score": 0.0
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "8b12796e8d0f0c694c7a61ee5e5c1574fb626bc572ac840fb6fdea12c8f587c3",
+      "kind": "gradual_move",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-1:None:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            70400,
+            81600
+          ],
+          "score": 0.0636682
+        },
+        "level_only": {
+          "range_samples": [
+            11200,
+            28800
+          ],
+          "score": 0.0
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "394f3f018bacdd2ffa7a1e6d227921dc37f8d3f689e0e0988b973536f318fd5e",
+      "kind": "ordinary_same_path",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:None:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            48000,
+            65600
+          ],
+          "score": 3.0428313
+        },
+        "level_only": {
+          "range_samples": [
+            49600,
+            67200
+          ],
+          "score": 0.2198221
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "4d2c3438f80a28e267800568bd5f90bd1c45f1890b1caee92724ed5c623ff67a",
+      "kind": "ordinary_path_change",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:None:synthetic_same_path",
+      "donor_family": "gptsovits",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            68800,
+            83200
+          ],
+          "score": 0.0471848
+        },
+        "level_only": {
+          "range_samples": [
+            70400,
+            81600
+          ],
+          "score": 0.0187519
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "612e9d6086b367fb453510c9ff984253cb734030cc14d3000e736988be3240e9",
+      "kind": "synthetic_same_path",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:None:synthetic_path_change",
+      "donor_family": "gptsovits",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            48000,
+            65600
+          ],
+          "score": 2.591774
+        },
+        "level_only": {
+          "range_samples": [
+            11200,
+            28800
+          ],
+          "score": 0.0
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "d56a3799ac51531d494f4accc4eeea8d51000a643aa8320a77f7dcc9df619568",
+      "kind": "synthetic_path_change",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:5:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            12800,
+            30400
+          ],
+          "score": 2.5739203
+        },
+        "level_only": {
+          "range_samples": [
+            11200,
+            28800
+          ],
+          "score": 0.5679112
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "f8aa3cdb79d72a33fc747965053f8b48380f2398af4e6fe937c5089e05b88e67",
+      "kind": "untouched",
+      "level_db": 5,
+      "measured_snr_db": 4.999999,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-1:5:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            12800,
+            30400
+          ],
+          "score": 2.5922921
+        },
+        "level_only": {
+          "range_samples": [
+            11200,
+            28800
+          ],
+          "score": 0.5404539
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "04de9541be477b667bf563a7499f71009a4c01cc959d785d1656ebbee93adb1b",
+      "kind": "gradual_move",
+      "level_db": 5,
+      "measured_snr_db": 4.999999,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-1:5:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            12800,
+            30400
+          ],
+          "score": 2.5739203
+        },
+        "level_only": {
+          "range_samples": [
+            11200,
+            28800
+          ],
+          "score": 0.5679112
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "a6c438780a9b2e48f5ec9a72773053f957f488418bcb5df16f3f0ef24f10ebe2",
+      "kind": "ordinary_same_path",
+      "level_db": 5,
+      "measured_snr_db": 4.999999,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:5:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            32000,
+            49600
+          ],
+          "score": 2.7816544
+        },
+        "level_only": {
+          "range_samples": [
+            11200,
+            28800
+          ],
+          "score": 0.5404539
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "37341ca887d04212377f7eedd05d1dce8750882c6d38a2558ae244bd05d72109",
+      "kind": "ordinary_path_change",
+      "level_db": 5,
+      "measured_snr_db": 4.999999,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:5:synthetic_same_path",
+      "donor_family": "gptsovits",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            12800,
+            30400
+          ],
+          "score": 2.5739203
+        },
+        "level_only": {
+          "range_samples": [
+            11200,
+            28800
+          ],
+          "score": 0.5679112
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "4932ee76c1b19d0fe2467010201e7a07d3d434dadf0cd2c47eb4905402441da7",
+      "kind": "synthetic_same_path",
+      "level_db": 5,
+      "measured_snr_db": 4.999999,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:5:synthetic_path_change",
+      "donor_family": "gptsovits",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            12800,
+            30400
+          ],
+          "score": 2.5898882
+        },
+        "level_only": {
+          "range_samples": [
+            32000,
+            49600
+          ],
+          "score": 0.7052536
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "49874e066b12f20d99af80cc7ba94a185304ab259a5121901b8049baca033dbc",
+      "kind": "synthetic_path_change",
+      "level_db": 5,
+      "measured_snr_db": 4.999999,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:5:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            19200,
+            36800
+          ],
+          "score": 0.1209806
+        },
+        "level_only": {
+          "range_samples": [
+            9600,
+            20800
+          ],
+          "score": 0.0
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "41c63a4479e73d47589e1a571994f3731547524abf02a29410740eee2a31daf5",
+      "kind": "room_only",
+      "level_db": 5,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-1:0:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            12800,
+            30400
+          ],
+          "score": 2.1303936
+        },
+        "level_only": {
+          "range_samples": [
+            14400,
+            32000
+          ],
+          "score": 0.027382
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "b4439d473b41f746f4275fad3679f2278ce9af71541ee7d20b648a7fa829238e",
+      "kind": "untouched",
+      "level_db": 0,
+      "measured_snr_db": -2e-06,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-1:0:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            12800,
+            30400
+          ],
+          "score": 2.1253753
+        },
+        "level_only": {
+          "range_samples": [
+            14400,
+            32000
+          ],
+          "score": 0.0284346
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "321b5aca6225db78e02a387f3aef40a304768d9380c236a328ebe2995be7929e",
+      "kind": "gradual_move",
+      "level_db": 0,
+      "measured_snr_db": -2e-06,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-1:0:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            12800,
+            30400
+          ],
+          "score": 2.1303936
+        },
+        "level_only": {
+          "range_samples": [
+            14400,
+            32000
+          ],
+          "score": 0.027382
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "149db6cfd65aca5b6ea112547cc5f8fb47a16bdf2b776fd353f96a5d4bf2d699",
+      "kind": "ordinary_same_path",
+      "level_db": 0,
+      "measured_snr_db": -2e-06,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:0:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            12800,
+            30400
+          ],
+          "score": 2.1303936
+        },
+        "level_only": {
+          "range_samples": [
+            14400,
+            32000
+          ],
+          "score": 0.027382
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "a1098775d4255007f5ff875cc90bae5cf87b361c17d377602399d4554f0e7638",
+      "kind": "ordinary_path_change",
+      "level_db": 0,
+      "measured_snr_db": -2e-06,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:0:synthetic_same_path",
+      "donor_family": "gptsovits",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            12800,
+            30400
+          ],
+          "score": 2.1303936
+        },
+        "level_only": {
+          "range_samples": [
+            14400,
+            32000
+          ],
+          "score": 0.027382
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "aed5d1197c50efd509c7b26b2d116580f92c8194d0fd15a683a943c543e29b49",
+      "kind": "synthetic_same_path",
+      "level_db": 0,
+      "measured_snr_db": -2e-06,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:0:synthetic_path_change",
+      "donor_family": "gptsovits",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            32000,
+            49600
+          ],
+          "score": 2.298627
+        },
+        "level_only": {
+          "range_samples": [
+            32000,
+            49600
+          ],
+          "score": 0.5658339
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "49ab73ebe961d9a1a39b3aba86d235da710aebe96ff258156b5f6301bb1de26a",
+      "kind": "synthetic_path_change",
+      "level_db": 0,
+      "measured_snr_db": -2e-06,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:0:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            19200,
+            36800
+          ],
+          "score": 0.1210839
+        },
+        "level_only": {
+          "range_samples": [
+            9600,
+            20800
+          ],
+          "score": 0.0
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "e66d671f9037e01263d3412f19f256e7bd83fb17bb8ccde17c709d567f99cc33",
+      "kind": "room_only",
+      "level_db": 0,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-1:-5:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            19200,
+            33600
+          ],
+          "score": 0.0387315
+        },
+        "level_only": {
+          "range_samples": [
+            9600,
+            20800
+          ],
+          "score": 0.1834918
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "ce8448c29e408e28817b60eed1efec6e838d315cc1d5d035962b7f1bcb062985",
+      "kind": "untouched",
+      "level_db": -5,
+      "measured_snr_db": -5.00001,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-1:-5:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            20800,
+            35200
+          ],
+          "score": 0.0408715
+        },
+        "level_only": {
+          "range_samples": [
+            9600,
+            20800
+          ],
+          "score": 0.1834918
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "176b84a0cf33f2e809e359df70e7093891ae51079a848d6554ccb1683934b3bd",
+      "kind": "gradual_move",
+      "level_db": -5,
+      "measured_snr_db": -5.00001,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-0-1:-5:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            19200,
+            33600
+          ],
+          "score": 0.0387315
+        },
+        "level_only": {
+          "range_samples": [
+            9600,
+            20800
+          ],
+          "score": 0.1834918
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "ef9cd3c3a6d5e314481b0ca0e374c1a2393088de7b09c0e28b279636bbaabf6f",
+      "kind": "ordinary_same_path",
+      "level_db": -5,
+      "measured_snr_db": -5.00001,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:-5:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            19200,
+            33600
+          ],
+          "score": 0.0387315
+        },
+        "level_only": {
+          "range_samples": [
+            9600,
+            20800
+          ],
+          "score": 0.1834918
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "82c024a41aab6e6af993220fafed70c01d764cfd7312c07bfc66df531066fc92",
+      "kind": "ordinary_path_change",
+      "level_db": -5,
+      "measured_snr_db": -5.00001,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:-5:synthetic_same_path",
+      "donor_family": "gptsovits",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            19200,
+            33600
+          ],
+          "score": 0.0387315
+        },
+        "level_only": {
+          "range_samples": [
+            9600,
+            20800
+          ],
+          "score": 0.1834918
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "9a0f4353896106a8c66b13cd8664b7519e8bfc67b0febc7be83262d1efae7c62",
+      "kind": "synthetic_same_path",
+      "level_db": -5,
+      "measured_snr_db": -5.00001,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:-5:synthetic_path_change",
+      "donor_family": "gptsovits",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            19200,
+            33600
+          ],
+          "score": 0.0387315
+        },
+        "level_only": {
+          "range_samples": [
+            9600,
+            20800
+          ],
+          "score": 0.1834918
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "558d99bbf089a5d8f84bdae8ba9fae4b6cc289dd459809e584a526f85bdda043",
+      "kind": "synthetic_path_change",
+      "level_db": -5,
+      "measured_snr_db": -5.00001,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-0-1:-5:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            19200,
+            36800
+          ],
+          "score": 0.1208388
+        },
+        "level_only": {
+          "range_samples": [
+            9600,
+            20800
+          ],
+          "score": 0.0
+        }
+      },
+      "group": "paired-0-1",
+      "input_sha256": "5fc57ec1bed518eb0b508e244c0a336696b708f029296409ee2e0df6a2d46fe7",
+      "kind": "room_only",
+      "level_db": -5,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-0:None:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            19200,
+            30400
+          ],
+          "score": 0.2789961
+        },
+        "level_only": {
+          "range_samples": [
+            19200,
+            30400
+          ],
+          "score": 0.2234797
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "160ec74abcf67aa1c72d17b845d539676efabf3e9112f4576798ad57ea6b18cd",
+      "kind": "untouched",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-0:None:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            65600,
+            80000
+          ],
+          "score": 0.257773
+        },
+        "level_only": {
+          "range_samples": [
+            70400,
+            84800
+          ],
+          "score": 0.2131561
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "c5ca68bec7a89db833093bfcc4611a9c2fdfecb4cd7e478a3aff8ba998ea9211",
+      "kind": "gradual_move",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-0:None:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            48000,
+            65600
+          ],
+          "score": 0.2868711
+        },
+        "level_only": {
+          "range_samples": [
+            9600,
+            20800
+          ],
+          "score": 0.2716684
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "86bfde73c196285c6c7d4c3073cea8b0206b7494efc1e6c073c103469c04bf40",
+      "kind": "ordinary_same_path",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:None:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            24000,
+            35200
+          ],
+          "score": 3.2929334
+        },
+        "level_only": {
+          "range_samples": [
+            27200,
+            38400
+          ],
+          "score": 0.8178376
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "10f2775386ff198b7ad7e42bb82786113f88b0f3daf682364e1af7f97c7ef8fe",
+      "kind": "ordinary_path_change",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:None:synthetic_same_path",
+      "donor_family": "elevenlab",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            49600,
+            64000
+          ],
+          "score": 0.2778325
+        },
+        "level_only": {
+          "range_samples": [
+            49600,
+            67200
+          ],
+          "score": 0.162731
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "a6929d017a8614062324f31c175a6a857af3702bf9f9069560b70da8310de740",
+      "kind": "synthetic_same_path",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:None:synthetic_path_change",
+      "donor_family": "elevenlab",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            25600,
+            36800
+          ],
+          "score": 3.3624022
+        },
+        "level_only": {
+          "range_samples": [
+            24000,
+            35200
+          ],
+          "score": 1.5328365
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "7e4f1179cce99ef56a17c4b15762ad2bce6e62fe5fc477c13a5dcadf28507b04",
+      "kind": "synthetic_path_change",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:5:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            72000,
+            83200
+          ],
+          "score": 0.4160684
+        },
+        "level_only": {
+          "range_samples": [
+            20800,
+            32000
+          ],
+          "score": 0.2125095
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "ac4ed7e994dc01e4419ef01cc55686360d3fa0082a52815261d4f3a2fa20e413",
+      "kind": "untouched",
+      "level_db": 5,
+      "measured_snr_db": 5.000018,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-0:5:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            65600,
+            80000
+          ],
+          "score": 0.2479247
+        },
+        "level_only": {
+          "range_samples": [
+            49600,
+            67200
+          ],
+          "score": 0.1466983
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "1c99c0f13ad50081059bce0417929f8e35573d1d9c922fbe6b2af347f3d060e2",
+      "kind": "gradual_move",
+      "level_db": 5,
+      "measured_snr_db": 5.000018,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-0:5:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            72000,
+            83200
+          ],
+          "score": 0.4160684
+        },
+        "level_only": {
+          "range_samples": [
+            75200,
+            86400
+          ],
+          "score": 0.1437424
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "a4a35881ee1ab3c3caca1705236f84f658ce9d5e99bb8ccfd9dbdb27ca6093ab",
+      "kind": "ordinary_same_path",
+      "level_db": 5,
+      "measured_snr_db": 5.000018,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:5:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            24000,
+            35200
+          ],
+          "score": 3.3329194
+        },
+        "level_only": {
+          "range_samples": [
+            24000,
+            38400
+          ],
+          "score": 0.8151263
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "2cd36648c4e1b9f0bb5d6ae2ce76e1a1d38df838ea9c9d816a1b607e4d7783c6",
+      "kind": "ordinary_path_change",
+      "level_db": 5,
+      "measured_snr_db": 5.000018,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:5:synthetic_same_path",
+      "donor_family": "elevenlab",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            72000,
+            83200
+          ],
+          "score": 0.4160684
+        },
+        "level_only": {
+          "range_samples": [
+            20800,
+            32000
+          ],
+          "score": 0.2786435
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "ab2d1dc6426dae8140a288bc8d80949929aba3cc2db56f11b1864e214e4ab629",
+      "kind": "synthetic_same_path",
+      "level_db": 5,
+      "measured_snr_db": 5.000018,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:5:synthetic_path_change",
+      "donor_family": "elevenlab",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            25600,
+            36800
+          ],
+          "score": 3.384883
+        },
+        "level_only": {
+          "range_samples": [
+            25600,
+            36800
+          ],
+          "score": 1.2586035
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "edbf3e923017dc08340b1eb2a7f44e7b4d06307aa1052d12099f36da91523131",
+      "kind": "synthetic_path_change",
+      "level_db": 5,
+      "measured_snr_db": 5.000018,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:5:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            9600,
+            24000
+          ],
+          "score": 0.275485
+        },
+        "level_only": {
+          "range_samples": [
+            46400,
+            64000
+          ],
+          "score": 0.1097302
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "2c3b7e4ab6be89bdf4a166dc17b62551761cdabc02b2f3000ccf18e42c6a471b",
+      "kind": "room_only",
+      "level_db": 5,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-0:0:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            46400,
+            57600
+          ],
+          "score": 2.8802705
+        },
+        "level_only": {
+          "range_samples": [
+            59200,
+            73600
+          ],
+          "score": 0.6370805
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "5dc00ff5fa25b1eff533ab103804e7c474c2e6083e0dda049057f5a8ad9ed1b2",
+      "kind": "untouched",
+      "level_db": 0,
+      "measured_snr_db": 1e-06,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-0:0:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            68800,
+            83200
+          ],
+          "score": 2.7107881
+        },
+        "level_only": {
+          "range_samples": [
+            49600,
+            67200
+          ],
+          "score": 0.0375453
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "5ecb95ce36d061e70f7b5973ab1d0c19d41b2f702e8fcc3e587d11f51f84d88d",
+      "kind": "gradual_move",
+      "level_db": 0,
+      "measured_snr_db": 1e-06,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-0:0:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            44800,
+            56000
+          ],
+          "score": 3.5116407
+        },
+        "level_only": {
+          "range_samples": [
+            44800,
+            56000
+          ],
+          "score": 0.8801862
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "b89ece896b022c2bd1139c118e2ec0fbf6fc135faa7de9e9f47940d7fe331340",
+      "kind": "ordinary_same_path",
+      "level_db": 0,
+      "measured_snr_db": 1e-06,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:0:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            24000,
+            35200
+          ],
+          "score": 3.271312
+        },
+        "level_only": {
+          "range_samples": [
+            24000,
+            35200
+          ],
+          "score": 0.6374314
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "9c0ef56893158088af0ad7a4dd62c3b85a7bffec63c84fe5526d17fb581b1468",
+      "kind": "ordinary_path_change",
+      "level_db": 0,
+      "measured_snr_db": 1e-06,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:0:synthetic_same_path",
+      "donor_family": "elevenlab",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            46400,
+            57600
+          ],
+          "score": 2.9692935
+        },
+        "level_only": {
+          "range_samples": [
+            59200,
+            73600
+          ],
+          "score": 0.6370805
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "c33f6c2b29432b6f0cb54c63ee033f64727ff8a7bfcbfbe726511da9d3e73c4f",
+      "kind": "synthetic_same_path",
+      "level_db": 0,
+      "measured_snr_db": 1e-06,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:0:synthetic_path_change",
+      "donor_family": "elevenlab",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            46400,
+            57600
+          ],
+          "score": 2.9657696
+        },
+        "level_only": {
+          "range_samples": [
+            59200,
+            73600
+          ],
+          "score": 0.6370805
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "213d9161e7b2c39144ad53f6cbeafd16c62fa4f11a51d4ce693c8e8a791aeb84",
+      "kind": "synthetic_path_change",
+      "level_db": 0,
+      "measured_snr_db": 1e-06,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:0:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            9600,
+            24000
+          ],
+          "score": 0.2745211
+        },
+        "level_only": {
+          "range_samples": [
+            46400,
+            64000
+          ],
+          "score": 0.1091483
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "df788d74064a3986e0c692b7286b4e8c3eceedf26ee6557b479c9fb41a3c94b5",
+      "kind": "room_only",
+      "level_db": 0,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-0:-5:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            46400,
+            57600
+          ],
+          "score": 2.7317291
+        },
+        "level_only": {
+          "range_samples": [
+            46400,
+            57600
+          ],
+          "score": 0.7257722
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "24f9133b1c9e23a9633c3bba9726ecfe305b402b17cc1f641e84fe24d9bbaf03",
+      "kind": "untouched",
+      "level_db": -5,
+      "measured_snr_db": -4.999999,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-0:-5:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            56000,
+            73600
+          ],
+          "score": 5.9225724
+        },
+        "level_only": {
+          "range_samples": [
+            59200,
+            76800
+          ],
+          "score": 1.7387988
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "e19a4a3f76f54a54ce8a5439a9030160bd9b24723690226ade96f07a7dda83f9",
+      "kind": "gradual_move",
+      "level_db": -5,
+      "measured_snr_db": -4.999999,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-0:-5:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            46400,
+            57600
+          ],
+          "score": 3.299741
+        },
+        "level_only": {
+          "range_samples": [
+            46400,
+            57600
+          ],
+          "score": 0.6957142
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "0341393292c1d7a4cb0994ad3fcd3aafa60dc35e74f5257663281f254f5c176d",
+      "kind": "ordinary_same_path",
+      "level_db": -5,
+      "measured_snr_db": -4.999999,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:-5:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            24000,
+            35200
+          ],
+          "score": 3.3353579
+        },
+        "level_only": {
+          "range_samples": [
+            16000,
+            33600
+          ],
+          "score": 1.0247084
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "606eb05f42ea80f25253669ed8d5077f0ad89b0cd74cde1d07c3e39ac6b11305",
+      "kind": "ordinary_path_change",
+      "level_db": -5,
+      "measured_snr_db": -4.999999,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:-5:synthetic_same_path",
+      "donor_family": "elevenlab",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            54400,
+            65600
+          ],
+          "score": 2.6572672
+        },
+        "level_only": {
+          "range_samples": [
+            57600,
+            68800
+          ],
+          "score": 0.5628077
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "313a3703ec25df9708aa8878162a2aa6e7872769ca25edd9a54c0e08147fe723",
+      "kind": "synthetic_same_path",
+      "level_db": -5,
+      "measured_snr_db": -4.999999,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:-5:synthetic_path_change",
+      "donor_family": "elevenlab",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            54400,
+            65600
+          ],
+          "score": 2.6572672
+        },
+        "level_only": {
+          "range_samples": [
+            20800,
+            35200
+          ],
+          "score": 0.8541476
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "6212ca2c83e7dc3a5a757b280dde04e83ab8ec4e783681c059e73aa7c150d265",
+      "kind": "synthetic_path_change",
+      "level_db": -5,
+      "measured_snr_db": -4.999999,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "paired-1-0:-5:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            9600,
+            24000
+          ],
+          "score": 0.2751643
+        },
+        "level_only": {
+          "range_samples": [
+            46400,
+            64000
+          ],
+          "score": 0.1095423
+        }
+      },
+      "group": "paired-1-0",
+      "input_sha256": "7c9852a173a15d0d7f4ce1cd06a43fd676f313b02068853cbe56fd8bc47a6a77",
+      "kind": "room_only",
+      "level_db": -5,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-1:None:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            19200,
+            30400
+          ],
+          "score": 0.2790075
+        },
+        "level_only": {
+          "range_samples": [
+            19200,
+            30400
+          ],
+          "score": 0.2234499
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "21705dcccf8ff7d0e2d8f112f41dccc1c4ffa6b75465d3e394c90ab39ff973ab",
+      "kind": "untouched",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-1:None:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            73600,
+            84800
+          ],
+          "score": 0.4885944
+        },
+        "level_only": {
+          "range_samples": [
+            64000,
+            78400
+          ],
+          "score": 0.573646
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "2e14ca4cf4cbad7351d18ee4490b6550b1cd65a3183cb22a140ccec4834b350a",
+      "kind": "gradual_move",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-1:None:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            19200,
+            30400
+          ],
+          "score": 0.2790075
+        },
+        "level_only": {
+          "range_samples": [
+            19200,
+            30400
+          ],
+          "score": 0.2234499
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "e8daba2ef4bfdea054ae117ef34b629421fc0e88e0fc4fe30fd6aa28c14c1f59",
+      "kind": "ordinary_same_path",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:None:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            48000,
+            65600
+          ],
+          "score": 1.4108702
+        },
+        "level_only": {
+          "range_samples": [
+            48000,
+            62400
+          ],
+          "score": 0.4307091
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "92ac307c469cb40f317a550bea17ae384eb659259b9484181b3e1debbb5300d7",
+      "kind": "ordinary_path_change",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:None:synthetic_same_path",
+      "donor_family": "ljjets",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            19200,
+            30400
+          ],
+          "score": 0.2790075
+        },
+        "level_only": {
+          "range_samples": [
+            19200,
+            30400
+          ],
+          "score": 0.2234499
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "aa5ab0e07b49c17799bfc8d9384f0fed4cea3a7dcb43cd42f8f8d0d18f5fa143",
+      "kind": "synthetic_same_path",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:None:synthetic_path_change",
+      "donor_family": "ljjets",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            19200,
+            30400
+          ],
+          "score": 0.2731973
+        },
+        "level_only": {
+          "range_samples": [
+            19200,
+            30400
+          ],
+          "score": 0.1581517
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "f59ca0145161ee5be719ea2f6e30f466b324296a75a43cda7229ecc2bf2cf495",
+      "kind": "synthetic_path_change",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:5:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            57600,
+            72000
+          ],
+          "score": 3.3827612
+        },
+        "level_only": {
+          "range_samples": [
+            57600,
+            72000
+          ],
+          "score": 1.2843225
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "dcb977e946b7b50944581eb7505e64b3b137659878611245032c835d8965ec6c",
+      "kind": "untouched",
+      "level_db": 5,
+      "measured_snr_db": 4.999997,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-1:5:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            11200,
+            25600
+          ],
+          "score": 1.2560745
+        },
+        "level_only": {
+          "range_samples": [
+            25600,
+            40000
+          ],
+          "score": 0.4445507
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "b07414c8886090aa2871d87850971da0c42fc75e500436a5892c170d1f57d025",
+      "kind": "gradual_move",
+      "level_db": 5,
+      "measured_snr_db": 4.999997,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-1:5:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            57600,
+            72000
+          ],
+          "score": 3.3539351
+        },
+        "level_only": {
+          "range_samples": [
+            56000,
+            70400
+          ],
+          "score": 1.1450419
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "be3c0fe36348fb2171e577301ea0c10e63518b4837a3649000cadba53d4e0335",
+      "kind": "ordinary_same_path",
+      "level_db": 5,
+      "measured_snr_db": 4.999997,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:5:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            11200,
+            25600
+          ],
+          "score": 1.2560745
+        },
+        "level_only": {
+          "range_samples": [
+            64000,
+            75200
+          ],
+          "score": 0.6986388
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "6c1ff388ce9b8373df4e1a0cc67735bf6435cc61d4155e5e97c5d9ae4e166860",
+      "kind": "ordinary_path_change",
+      "level_db": 5,
+      "measured_snr_db": 4.999997,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:5:synthetic_same_path",
+      "donor_family": "ljjets",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            57600,
+            72000
+          ],
+          "score": 3.3808783
+        },
+        "level_only": {
+          "range_samples": [
+            57600,
+            72000
+          ],
+          "score": 1.0693821
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "1d6f6b9d79d5670a5cc17676ab119100ecd6c3db11eadc1d4d3e43b87c1ce839",
+      "kind": "synthetic_same_path",
+      "level_db": 5,
+      "measured_snr_db": 4.999997,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:5:synthetic_path_change",
+      "donor_family": "ljjets",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            51200,
+            68800
+          ],
+          "score": 2.5064662
+        },
+        "level_only": {
+          "range_samples": [
+            62400,
+            73600
+          ],
+          "score": 0.8882051
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "20cb121632e2cf36f99bfec77b66696bc3591b51d2498df76ace781dc3c596d9",
+      "kind": "synthetic_path_change",
+      "level_db": 5,
+      "measured_snr_db": 4.999997,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:5:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            30400,
+            41600
+          ],
+          "score": 0.6353332
+        },
+        "level_only": {
+          "range_samples": [
+            20800,
+            32000
+          ],
+          "score": 0.3237746
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "9a8446811e2a3fdc5fd3c62bfe69ed570e642a8696d6c9914ced3e7bf9ef9c07",
+      "kind": "room_only",
+      "level_db": 5,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-1:0:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            57600,
+            72000
+          ],
+          "score": 3.404469
+        },
+        "level_only": {
+          "range_samples": [
+            56000,
+            70400
+          ],
+          "score": 1.105971
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "2c054bde91505e5cf7631f49be4659099cf91b028ba42cd586a026a355eff60d",
+      "kind": "untouched",
+      "level_db": 0,
+      "measured_snr_db": -1.2e-05,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-1:0:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            14400,
+            32000
+          ],
+          "score": 2.6868047
+        },
+        "level_only": {
+          "range_samples": [
+            16000,
+            30400
+          ],
+          "score": 0.6264343
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "70e5128bf1a5f3cfeb9d40763f7b6b08536c85fe787c3a0dcb46b09f6490558b",
+      "kind": "gradual_move",
+      "level_db": 0,
+      "measured_snr_db": -1.2e-05,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-1:0:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            57600,
+            72000
+          ],
+          "score": 3.31888
+        },
+        "level_only": {
+          "range_samples": [
+            56000,
+            73600
+          ],
+          "score": 0.9632124
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "8c5fbed399c19412cabe00040c9cda4543feb7156f9e6c6baac9bbb03db6ac79",
+      "kind": "ordinary_same_path",
+      "level_db": 0,
+      "measured_snr_db": -1.2e-05,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:0:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            14400,
+            32000
+          ],
+          "score": 2.6869415
+        },
+        "level_only": {
+          "range_samples": [
+            16000,
+            30400
+          ],
+          "score": 0.6264343
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "93ffe08ea7dd01860d626e2b595610150c90d93554e3d0258c23e596380953d1",
+      "kind": "ordinary_path_change",
+      "level_db": 0,
+      "measured_snr_db": -1.2e-05,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:0:synthetic_same_path",
+      "donor_family": "ljjets",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            57600,
+            72000
+          ],
+          "score": 3.3427212
+        },
+        "level_only": {
+          "range_samples": [
+            57600,
+            68800
+          ],
+          "score": 0.9789818
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "a45097c90fefa84f1f6ff8a7ec9456c07fd92edc135b75e27f9f5ffa58d87e41",
+      "kind": "synthetic_same_path",
+      "level_db": 0,
+      "measured_snr_db": -1.2e-05,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:0:synthetic_path_change",
+      "donor_family": "ljjets",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            14400,
+            32000
+          ],
+          "score": 2.6869415
+        },
+        "level_only": {
+          "range_samples": [
+            62400,
+            73600
+          ],
+          "score": 0.6825004
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "0d5bcb19bce1a8dbe492c251f3d9cec6f6c55f602384e129e341be7f8bc61369",
+      "kind": "synthetic_path_change",
+      "level_db": 0,
+      "measured_snr_db": -1.2e-05,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:0:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            30400,
+            41600
+          ],
+          "score": 0.6355281
+        },
+        "level_only": {
+          "range_samples": [
+            20800,
+            32000
+          ],
+          "score": 0.323884
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "bbdc55ea4993fb1b42c63f747ca23b123f0c4f9c2ce0318b4791050fd9835f2c",
+      "kind": "room_only",
+      "level_db": 0,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-1:-5:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            57600,
+            72000
+          ],
+          "score": 3.4145753
+        },
+        "level_only": {
+          "range_samples": [
+            56000,
+            70400
+          ],
+          "score": 1.117201
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "49232a873c6a66bad6ec922e0af759c60d127f0dbd1622869e1dbfc30186417a",
+      "kind": "untouched",
+      "level_db": -5,
+      "measured_snr_db": -5.000008,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-1:-5:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            27200,
+            38400
+          ],
+          "score": 1.4336598
+        },
+        "level_only": {
+          "range_samples": [
+            20800,
+            32000
+          ],
+          "score": 0.3926353
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "010a8b065183bcdd699f933563b13542f8eb65f8ad2f105818a54f56d7ee409b",
+      "kind": "gradual_move",
+      "level_db": -5,
+      "measured_snr_db": -5.000008,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "paired-1-1:-5:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            59200,
+            76800
+          ],
+          "score": 3.3219827
+        },
+        "level_only": {
+          "range_samples": [
+            57600,
+            75200
+          ],
+          "score": 0.9805076
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "8d5b42e2c2c7b9d5b8580b2343cbfa673a6ce977718ea1380c935bbc92f7bdd9",
+      "kind": "ordinary_same_path",
+      "level_db": -5,
+      "measured_snr_db": -5.000008,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:-5:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            27200,
+            38400
+          ],
+          "score": 1.4370212
+        },
+        "level_only": {
+          "range_samples": [
+            27200,
+            38400
+          ],
+          "score": 0.4955261
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "f0a7fe60f22cfc41093e95cec46dcf90199f5c8d575f0b74fad56d3a354d0777",
+      "kind": "ordinary_path_change",
+      "level_db": -5,
+      "measured_snr_db": -5.000008,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:-5:synthetic_same_path",
+      "donor_family": "ljjets",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            57600,
+            72000
+          ],
+          "score": 3.3304409
+        },
+        "level_only": {
+          "range_samples": [
+            57600,
+            68800
+          ],
+          "score": 0.923722
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "4db088f38f92024f0d40180d0ffe6a1c21b457ab3c763be8d133c6c92847714f",
+      "kind": "synthetic_same_path",
+      "level_db": -5,
+      "measured_snr_db": -5.000008,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:-5:synthetic_path_change",
+      "donor_family": "ljjets",
+      "findings": {
+        "joint": {
+          "range_samples": [
+            27200,
+            38400
+          ],
+          "score": 1.4370212
+        },
+        "level_only": {
+          "range_samples": [
+            62400,
+            73600
+          ],
+          "score": 0.9128211
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "511543c08ba0ae27c109b5aeb130eb1f0c6c6b52a749c64a12e4d2128371cf2f",
+      "kind": "synthetic_path_change",
+      "level_db": -5,
+      "measured_snr_db": -5.000008,
+      "role": "assessment",
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "case": "paired-1-1:-5:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            30400,
+            41600
+          ],
+          "score": 0.6356091
+        },
+        "level_only": {
+          "range_samples": [
+            20800,
+            32000
+          ],
+          "score": 0.3237939
+        }
+      },
+      "group": "paired-1-1",
+      "input_sha256": "b83a3db174e2948aabee8d1dd33d9ba98f6eb77cbdd5dd3516af9b02e2ca294a",
+      "kind": "room_only",
+      "level_db": -5,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-3-0:None:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            19200,
+            36800
+          ],
+          "score": 0.4437805
+        },
+        "level_only": {
+          "range_samples": [
+            32000,
+            46400
+          ],
+          "score": 0.1630943
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "3375c7a76f056b706382ce968cb550c0a68897879019b48463b735fba2e65953",
+      "kind": "untouched",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-3-0:None:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            60800,
+            75200
+          ],
+          "score": 0.5249037
+        },
+        "level_only": {
+          "range_samples": [
+            60800,
+            75200
+          ],
+          "score": 0.5257276
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "68ff4ca57dadbe1d1e338181cbfe8dbf0df1a6627455e0d6fbe40098f656db30",
+      "kind": "gradual_move",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-3-0:None:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            49600,
+            60800
+          ],
+          "score": 0.3482773
+        },
+        "level_only": {
+          "range_samples": [
+            9600,
+            24000
+          ],
+          "score": 0.1503162
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "a5b3eacbec84ff4e95c932ce9aa06e6d317c4a3b21f7259c6a927008bd2ca4cf",
+      "kind": "ordinary_same_path",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-3-0:None:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            24000,
+            38400
+          ],
+          "score": 3.2746252
+        },
+        "level_only": {
+          "range_samples": [
+            24000,
+            35200
+          ],
+          "score": 0.4744237
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "47bfa6273374ad0aad85c56fa013706c5e04d5c80c65df4579bcc555b7e1056c",
+      "kind": "ordinary_path_change",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-3-0:5:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            52800,
+            64000
+          ],
+          "score": 2.0740432
+        },
+        "level_only": {
+          "range_samples": [
+            48000,
+            59200
+          ],
+          "score": 0.6805748
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "dd1f73e2de47a3104df44866ee5795629b965324c2f30a678395b92f4c40e942",
+      "kind": "untouched",
+      "level_db": 5,
+      "measured_snr_db": 5.000002,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-3-0:5:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            51200,
+            62400
+          ],
+          "score": 5.2837544
+        },
+        "level_only": {
+          "range_samples": [
+            44800,
+            59200
+          ],
+          "score": 1.8666545
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "18def5808ddd8022fc914dc3e02d40e65840155be5ac4eab8fb5286c71fc2e6e",
+      "kind": "gradual_move",
+      "level_db": 5,
+      "measured_snr_db": 5.000002,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-3-0:5:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            52800,
+            64000
+          ],
+          "score": 2.0740432
+        },
+        "level_only": {
+          "range_samples": [
+            48000,
+            59200
+          ],
+          "score": 0.6982425
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "2fe66344f36bd587e3aa1296c9314664f42a57b91250cbdb82e8184cd17d154b",
+      "kind": "ordinary_same_path",
+      "level_db": 5,
+      "measured_snr_db": 5.000002,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-3-0:5:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            27200,
+            38400
+          ],
+          "score": 4.8119062
+        },
+        "level_only": {
+          "range_samples": [
+            25600,
+            43200
+          ],
+          "score": 0.923567
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "15f6086993ca9a4453be936b8e339e80c8ac83557ef28785e47833f96b1fc5f2",
+      "kind": "ordinary_path_change",
+      "level_db": 5,
+      "measured_snr_db": 5.000002,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-3-0:5:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            24000,
+            41600
+          ],
+          "score": 0.8829023
+        },
+        "level_only": {
+          "range_samples": [
+            48000,
+            59200
+          ],
+          "score": 0.3403173
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "9ad7fb31cbf97629728fe2e122cf21b7788e3cde0057f7755aeb8cf6fb564467",
+      "kind": "room_only",
+      "level_db": 5,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-3-0:0:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            72000,
+            86400
+          ],
+          "score": 0.927021
+        },
+        "level_only": {
+          "range_samples": [
+            43200,
+            60800
+          ],
+          "score": 0.7597673
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "06464dd244fc0f15a8d2b57ff977d2fe3c2e41509e91dcb0fe1231a3a6e8eb33",
+      "kind": "untouched",
+      "level_db": 0,
+      "measured_snr_db": -8e-06,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-3-0:0:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            46400,
+            64000
+          ],
+          "score": 4.1885815
+        },
+        "level_only": {
+          "range_samples": [
+            68800,
+            86400
+          ],
+          "score": 1.3511677
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "6d702b989a4b53e0efe7924172ed9123d7418dd4047e5cb207d6d6381273bf02",
+      "kind": "gradual_move",
+      "level_db": 0,
+      "measured_snr_db": -8e-06,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-3-0:0:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            72000,
+            86400
+          ],
+          "score": 0.927021
+        },
+        "level_only": {
+          "range_samples": [
+            49600,
+            60800
+          ],
+          "score": 0.6092665
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "cc20e8882146dc65330c7a625ae9a9416a98fe9c8a6c053986aaf8c63c8a5d0f",
+      "kind": "ordinary_same_path",
+      "level_db": 0,
+      "measured_snr_db": -8e-06,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-3-0:0:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            16000,
+            27200
+          ],
+          "score": 2.4269063
+        },
+        "level_only": {
+          "range_samples": [
+            49600,
+            60800
+          ],
+          "score": 0.6091052
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "4555f485a49fe223f66031ab999a41e4f7e64d672bee2e2feaf35c52ff33f63d",
+      "kind": "ordinary_path_change",
+      "level_db": 0,
+      "measured_snr_db": -8e-06,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-3-0:0:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            24000,
+            41600
+          ],
+          "score": 0.882812
+        },
+        "level_only": {
+          "range_samples": [
+            48000,
+            59200
+          ],
+          "score": 0.3406
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "ed503a597253b44cd583805981af85fb3a506a1e48a1aa6941cd37381066e7b0",
+      "kind": "room_only",
+      "level_db": 0,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-3-0:-5:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            43200,
+            57600
+          ],
+          "score": 0.7639838
+        },
+        "level_only": {
+          "range_samples": [
+            43200,
+            60800
+          ],
+          "score": 0.9123143
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "a42722c20673c8ea0bc51eb0b99499f9e273898d0f61c44f5c69935e905e35e8",
+      "kind": "untouched",
+      "level_db": -5,
+      "measured_snr_db": -5.000002,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-3-0:-5:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            49600,
+            60800
+          ],
+          "score": 0.4020297
+        },
+        "level_only": {
+          "range_samples": [
+            46400,
+            57600
+          ],
+          "score": 0.2944629
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "15417cb0b9beab16bd2c29c1bd16fd281bcec64a04cc24e14ed8414cb6a576bf",
+      "kind": "gradual_move",
+      "level_db": -5,
+      "measured_snr_db": -5.000002,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-3-0:-5:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            43200,
+            60800
+          ],
+          "score": 0.5249074
+        },
+        "level_only": {
+          "range_samples": [
+            46400,
+            60800
+          ],
+          "score": 0.6438785
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "6fa7bacfe74b134b9c48ee91d11b143a504a8effa93c33a151be7f8c41789891",
+      "kind": "ordinary_same_path",
+      "level_db": -5,
+      "measured_snr_db": -5.000002,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-3-0:-5:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            44800,
+            59200
+          ],
+          "score": 0.5110824
+        },
+        "level_only": {
+          "range_samples": [
+            46400,
+            60800
+          ],
+          "score": 0.680021
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "145a0165fcb76c92d3b5a0a42c9fb436cbccd6baadf944dcc873e65dcc7ab61c",
+      "kind": "ordinary_path_change",
+      "level_db": -5,
+      "measured_snr_db": -5.000002,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-3-0:-5:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            24000,
+            41600
+          ],
+          "score": 0.882754
+        },
+        "level_only": {
+          "range_samples": [
+            48000,
+            59200
+          ],
+          "score": 0.3407101
+        }
+      },
+      "group": "genuine-3-0",
+      "input_sha256": "c82e22c094b2616e6c76df65e8bf51e8453bb06b01c300fc98067ea3e7b20a84",
+      "kind": "room_only",
+      "level_db": -5,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-4-0:None:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            40000,
+            51200
+          ],
+          "score": 0.1660121
+        },
+        "level_only": {
+          "range_samples": [
+            44800,
+            56000
+          ],
+          "score": 0.1390854
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "8276b7092100c11edc663d466ece0817fa131352b9e77cf3115bb5a1e8691a1e",
+      "kind": "untouched",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-4-0:None:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            43200,
+            54400
+          ],
+          "score": 0.348625
+        },
+        "level_only": {
+          "range_samples": [
+            57600,
+            68800
+          ],
+          "score": 0.2569587
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "acbf48bceedb3823cbf3cf87cc4567b75568406499ed645594823e56f171a917",
+      "kind": "gradual_move",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-4-0:None:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            40000,
+            51200
+          ],
+          "score": 0.1926181
+        },
+        "level_only": {
+          "range_samples": [
+            32000,
+            43200
+          ],
+          "score": 0.2035721
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "f90bdf03d6e41679bfb9ff380a389c2f6ff7dba4cb3f8ce1a9c87224e15dd776",
+      "kind": "ordinary_same_path",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-4-0:None:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            17600,
+            35200
+          ],
+          "score": 2.4359886
+        },
+        "level_only": {
+          "range_samples": [
+            17600,
+            35200
+          ],
+          "score": 0.5192913
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "76952dfb79377efa7b7f87d0e413091228d2f26bb96bd766249db4ec243b6d7c",
+      "kind": "ordinary_path_change",
+      "level_db": null,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-4-0:5:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            75200,
+            86400
+          ],
+          "score": 2.8289958
+        },
+        "level_only": {
+          "range_samples": [
+            52800,
+            70400
+          ],
+          "score": 1.0438666
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "6256d8bd2bc5b234e73bd85a0e6bb02d2a949be0c43bf0e98a47d093cadbd426",
+      "kind": "untouched",
+      "level_db": 5,
+      "measured_snr_db": 4.999984,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-4-0:5:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            44800,
+            56000
+          ],
+          "score": 4.5521438
+        },
+        "level_only": {
+          "range_samples": [
+            75200,
+            86400
+          ],
+          "score": 1.4403183
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "373e0f60d609ccb380b44470073b4c9f4a6d545cdf0dc6240a196e253de72a29",
+      "kind": "gradual_move",
+      "level_db": 5,
+      "measured_snr_db": 4.999984,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-4-0:5:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            75200,
+            86400
+          ],
+          "score": 2.8289958
+        },
+        "level_only": {
+          "range_samples": [
+            52800,
+            70400
+          ],
+          "score": 1.0438666
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "bd5acc0b9d69690c18eae0ea58ebb014dc4c18a7b787888a5637ea7c898b3915",
+      "kind": "ordinary_same_path",
+      "level_db": 5,
+      "measured_snr_db": 4.999984,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-4-0:5:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            17600,
+            35200
+          ],
+          "score": 2.9560732
+        },
+        "level_only": {
+          "range_samples": [
+            52800,
+            70400
+          ],
+          "score": 0.9861911
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "bbbf98a78754817b007d4b6c3356e9b96ce54de23b868ef92540fd2cd10cc397",
+      "kind": "ordinary_path_change",
+      "level_db": 5,
+      "measured_snr_db": 4.999984,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-4-0:5:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            60800,
+            78400
+          ],
+          "score": 0.580876
+        },
+        "level_only": {
+          "range_samples": [
+            70400,
+            84800
+          ],
+          "score": 0.2494652
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "a01a57b84bab364d8d3ac21d8a68737245912917b599b5493fd25a4906a5a422",
+      "kind": "room_only",
+      "level_db": 5,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-4-0:0:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            73600,
+            84800
+          ],
+          "score": 1.9379852
+        },
+        "level_only": {
+          "range_samples": [
+            73600,
+            84800
+          ],
+          "score": 0.8243052
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "01b6cfe7ceb67fc73d216d55dab00d6407f40f237d80791f4b58bcc090bc0080",
+      "kind": "untouched",
+      "level_db": 0,
+      "measured_snr_db": -1.3e-05,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-4-0:0:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            72000,
+            83200
+          ],
+          "score": 4.759103
+        },
+        "level_only": {
+          "range_samples": [
+            75200,
+            86400
+          ],
+          "score": 1.164682
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "0965710382481b9b1c58efa6df798924191f47cfd61f72ea0f10bfd5efd02f75",
+      "kind": "gradual_move",
+      "level_db": 0,
+      "measured_snr_db": -1.3e-05,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-4-0:0:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            73600,
+            84800
+          ],
+          "score": 1.9379852
+        },
+        "level_only": {
+          "range_samples": [
+            73600,
+            84800
+          ],
+          "score": 0.8243052
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "c04a70c7d9cafcd64479b03c3dd5c68e4eebdcf8237ac4d9a6772daa52096ae4",
+      "kind": "ordinary_same_path",
+      "level_db": 0,
+      "measured_snr_db": -1.3e-05,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-4-0:0:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            73600,
+            84800
+          ],
+          "score": 1.9379852
+        },
+        "level_only": {
+          "range_samples": [
+            73600,
+            84800
+          ],
+          "score": 0.8243052
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "0d315f681547541b076aef1207dc632152f9db146192565c0bbe6bd31ef2916f",
+      "kind": "ordinary_path_change",
+      "level_db": 0,
+      "measured_snr_db": -1.3e-05,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-4-0:0:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            60800,
+            78400
+          ],
+          "score": 0.5811342
+        },
+        "level_only": {
+          "range_samples": [
+            70400,
+            84800
+          ],
+          "score": 0.2494447
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "1d85d72510ff4232af066c10a5ae3f6c2a9f0328508758da73cf7760514ac1e7",
+      "kind": "room_only",
+      "level_db": 0,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-4-0:-5:untouched",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            75200,
+            86400
+          ],
+          "score": 1.6163687
+        },
+        "level_only": {
+          "range_samples": [
+            73600,
+            84800
+          ],
+          "score": 0.7668952
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "4fc89d5dcbf920eca132530a63b6db2f1f1914f2bd05b7bae9fa9893f8552fb1",
+      "kind": "untouched",
+      "level_db": -5,
+      "measured_snr_db": -5.000006,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-4-0:-5:gradual_move",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            75200,
+            86400
+          ],
+          "score": 4.8223537
+        },
+        "level_only": {
+          "range_samples": [
+            75200,
+            86400
+          ],
+          "score": 0.9554955
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "ee3a94d117f1dbafea501642d3cea4aaf010e0c4df5389c0d98ae43408f56c08",
+      "kind": "gradual_move",
+      "level_db": -5,
+      "measured_snr_db": -5.000006,
+      "role": "assessment",
+      "truth": null
+    },
+    {
+      "case": "genuine-4-0:-5:ordinary_same_path",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            75200,
+            86400
+          ],
+          "score": 1.6163687
+        },
+        "level_only": {
+          "range_samples": [
+            73600,
+            84800
+          ],
+          "score": 0.7668952
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "9879ba8030209b188de09c53dbd07824392271ef55ca07f0c96c3b718ad7416e",
+      "kind": "ordinary_same_path",
+      "level_db": -5,
+      "measured_snr_db": -5.000006,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-4-0:-5:ordinary_path_change",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            75200,
+            86400
+          ],
+          "score": 1.6163687
+        },
+        "level_only": {
+          "range_samples": [
+            73600,
+            84800
+          ],
+          "score": 0.7668952
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "ca861318dcdb0f73ef6819bcb5328dc88bfe931b77b291f1af0fce72f7efa474",
+      "kind": "ordinary_path_change",
+      "level_db": -5,
+      "measured_snr_db": -5.000006,
+      "role": "assessment",
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "case": "genuine-4-0:-5:room_only",
+      "donor_family": null,
+      "findings": {
+        "joint": {
+          "range_samples": [
+            60800,
+            78400
+          ],
+          "score": 0.5809784
+        },
+        "level_only": {
+          "range_samples": [
+            70400,
+            84800
+          ],
+          "score": 0.2494944
+        }
+      },
+      "group": "genuine-4-0",
+      "input_sha256": "cb23fd1e26b1dbbfb0d70b68d3c4224423e566edcff12b7e486e60c958d19c1c",
+      "kind": "room_only",
+      "level_db": -5,
+      "measured_snr_db": null,
+      "role": "assessment",
+      "truth": null
+    }
+  ],
+  "development": {
+    "points": {
+      "joint": 4.7723162,
+      "level_only": 2.0741159
+    },
+    "rows": [
+      {
+        "case": "genuine-0-0:None:untouched",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              65600,
+              76800
+            ],
+            "score": 0.4305256
+          },
+          "level_only": {
+            "range_samples": [
+              24000,
+              35200
+            ],
+            "score": 0.1918809
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "3551afc9201d84b8d7a7c0c6fd93c50833e064bd1934854c076c7b73a8ffc01d",
+        "kind": "untouched",
+        "level_db": null,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-0-0:None:gradual_move",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              70400,
+              84800
+            ],
+            "score": 0.3046358
+          },
+          "level_only": {
+            "range_samples": [
+              65600,
+              76800
+            ],
+            "score": 0.375075
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "d5f024377cdec3bb47bb6efd7c71093f589db24f39c661addbd508b490fed4db",
+        "kind": "gradual_move",
+        "level_db": null,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-0-0:None:ordinary_same_path",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              65600,
+              76800
+            ],
+            "score": 0.4305686
+          },
+          "level_only": {
+            "range_samples": [
+              65600,
+              83200
+            ],
+            "score": 0.1685633
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "4f552badc3bb022eaf2826c190a4977ea97ca5d65f09e6f2de779e50338ad921",
+        "kind": "ordinary_same_path",
+        "level_db": null,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-0-0:None:ordinary_path_change",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              25600,
+              36800
+            ],
+            "score": 2.9186446
+          },
+          "level_only": {
+            "range_samples": [
+              24000,
+              35200
+            ],
+            "score": 0.9337128
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "63d30e71df831861835292440d9ae06fe3bbb08c07cf71223df258df32c8d70c",
+        "kind": "ordinary_path_change",
+        "level_db": null,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-0-0:5:untouched",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              44800,
+              56000
+            ],
+            "score": 2.0189563
+          },
+          "level_only": {
+            "range_samples": [
+              44800,
+              56000
+            ],
+            "score": 0.3405834
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "a58011f92529938e4bbed45c3605052615f138b63b217ecebc2273bbbc8bee08",
+        "kind": "untouched",
+        "level_db": 5,
+        "measured_snr_db": 5.0,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-0-0:5:gradual_move",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              48000,
+              65600
+            ],
+            "score": 2.6654967
+          },
+          "level_only": {
+            "range_samples": [
+              40000,
+              51200
+            ],
+            "score": 0.8426996
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "dd703f98ddfe82819014792ff8058ef8a9084278b3ebb3ad3b5da52d5ef1991c",
+        "kind": "gradual_move",
+        "level_db": 5,
+        "measured_snr_db": 5.0,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-0-0:5:ordinary_same_path",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              40000,
+              51200
+            ],
+            "score": 2.7223143
+          },
+          "level_only": {
+            "range_samples": [
+              36800,
+              51200
+            ],
+            "score": 0.7295931
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "4dc7a10aa0fd8d0e24ffd12ee03c2d3e452999a7462caff35388dcc941b8ab9a",
+        "kind": "ordinary_same_path",
+        "level_db": 5,
+        "measured_snr_db": 5.0,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-0-0:5:ordinary_path_change",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              44800,
+              56000
+            ],
+            "score": 1.0664237
+          },
+          "level_only": {
+            "range_samples": [
+              36800,
+              51200
+            ],
+            "score": 0.6216554
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "e99a428788807be75c1235df5d8a02ee406e25c5a10122022a8a725086264b5f",
+        "kind": "ordinary_path_change",
+        "level_db": 5,
+        "measured_snr_db": 5.0,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-0-0:5:room_only",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              24000,
+              41600
+            ],
+            "score": 0.7675834
+          },
+          "level_only": {
+            "range_samples": [
+              27200,
+              44800
+            ],
+            "score": 0.3019241
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "ae344bcb7af0b68214177459345469462bba8bf96c163f7877e16b9cd13889f9",
+        "kind": "room_only",
+        "level_db": 5,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-0-0:0:untouched",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              51200,
+              68800
+            ],
+            "score": 1.0776343
+          },
+          "level_only": {
+            "range_samples": [
+              33600,
+              51200
+            ],
+            "score": 0.6100266
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "0bcc3cfb2b67449ac81fe8fd111b36c2af468528dc3c9a0faad8c800096c02a9",
+        "kind": "untouched",
+        "level_db": 0,
+        "measured_snr_db": -0.0,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-0-0:0:gradual_move",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              51200,
+              62400
+            ],
+            "score": 3.6363224
+          },
+          "level_only": {
+            "range_samples": [
+              51200,
+              62400
+            ],
+            "score": 1.0583554
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "05a1930a7fa56ae2e0c5d11ed4076bae069899b44e9da5c9d14bac7ea6054ce5",
+        "kind": "gradual_move",
+        "level_db": 0,
+        "measured_snr_db": -0.0,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-0-0:0:ordinary_same_path",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              51200,
+              68800
+            ],
+            "score": 1.0772957
+          },
+          "level_only": {
+            "range_samples": [
+              38400,
+              52800
+            ],
+            "score": 0.7566172
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "4aee3f7fa253d6a11b9d21524ba36840074fd50a9df1f7f3557fa1d1b7840985",
+        "kind": "ordinary_same_path",
+        "level_db": 0,
+        "measured_snr_db": -0.0,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-0-0:0:ordinary_path_change",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              51200,
+              68800
+            ],
+            "score": 1.0783378
+          },
+          "level_only": {
+            "range_samples": [
+              40000,
+              51200
+            ],
+            "score": 0.9992591
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "8a651170b979b919e6c665b88df6dd36b0a49acf74bdae51c2240e5230b2aa4c",
+        "kind": "ordinary_path_change",
+        "level_db": 0,
+        "measured_snr_db": -0.0,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-0-0:0:room_only",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              24000,
+              41600
+            ],
+            "score": 0.7676345
+          },
+          "level_only": {
+            "range_samples": [
+              27200,
+              44800
+            ],
+            "score": 0.3020549
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "3cd26ae03f571264f5db2c145175da93583f27ef2881c9dffa8c53938949a958",
+        "kind": "room_only",
+        "level_db": 0,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-0-0:-5:untouched",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              49600,
+              67200
+            ],
+            "score": 1.6743578
+          },
+          "level_only": {
+            "range_samples": [
+              64000,
+              75200
+            ],
+            "score": 0.5456639
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "8467e69e378670457bf4adf4435d69fae21d6d911c425ff717f1543c905c72ba",
+        "kind": "untouched",
+        "level_db": -5,
+        "measured_snr_db": -5.000002,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-0-0:-5:gradual_move",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              51200,
+              62400
+            ],
+            "score": 4.2480643
+          },
+          "level_only": {
+            "range_samples": [
+              51200,
+              62400
+            ],
+            "score": 2.0741159
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "35938e743d1ab016306e7aa4c55d7e92d379266b7cc33d165cad0b62eafff3a0",
+        "kind": "gradual_move",
+        "level_db": -5,
+        "measured_snr_db": -5.000002,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-0-0:-5:ordinary_same_path",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              49600,
+              67200
+            ],
+            "score": 1.6743465
+          },
+          "level_only": {
+            "range_samples": [
+              38400,
+              52800
+            ],
+            "score": 0.6632784
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "d2c92faf5dc7296198dde48460f93855a28461bc5e92f3192c7a9c30befa104d",
+        "kind": "ordinary_same_path",
+        "level_db": -5,
+        "measured_snr_db": -5.000002,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-0-0:-5:ordinary_path_change",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              49600,
+              67200
+            ],
+            "score": 1.6753733
+          },
+          "level_only": {
+            "range_samples": [
+              38400,
+              52800
+            ],
+            "score": 0.9185269
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "ce43f6a4b768569e145f2b0c7d4218b419ed4d53e66ad219c669da4dfcbb4d3b",
+        "kind": "ordinary_path_change",
+        "level_db": -5,
+        "measured_snr_db": -5.000002,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-0-0:-5:room_only",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              24000,
+              41600
+            ],
+            "score": 0.7675431
+          },
+          "level_only": {
+            "range_samples": [
+              27200,
+              44800
+            ],
+            "score": 0.3020246
+          }
+        },
+        "group": "genuine-0-0",
+        "input_sha256": "95c4daeb0fcf7d53b81310be546cdcb202023fef30143482d5c1f56c44bb1495",
+        "kind": "room_only",
+        "level_db": -5,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-1-0:None:untouched",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              59200,
+              76800
+            ],
+            "score": 0.4624757
+          },
+          "level_only": {
+            "range_samples": [
+              28800,
+              40000
+            ],
+            "score": 0.1588056
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "001fee661da4f59a80adecbdf51415497a00282f962f4ded7db3f85c8a703b87",
+        "kind": "untouched",
+        "level_db": null,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-1-0:None:gradual_move",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              60800,
+              72000
+            ],
+            "score": 0.714351
+          },
+          "level_only": {
+            "range_samples": [
+              62400,
+              73600
+            ],
+            "score": 0.3616198
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "d78fa29a3d0be31a06d57aa0402a00875f3a7faf228c209d651425915c0c0e62",
+        "kind": "gradual_move",
+        "level_db": null,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-1-0:None:ordinary_same_path",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              59200,
+              76800
+            ],
+            "score": 0.4620837
+          },
+          "level_only": {
+            "range_samples": [
+              57600,
+              75200
+            ],
+            "score": 0.1261902
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "a4970a3d831e859f70c8be25e3471a6624e42ac4c4b80bccd99e3f8ed6c3cd79",
+        "kind": "ordinary_same_path",
+        "level_db": null,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-1-0:None:ordinary_path_change",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              27200,
+              38400
+            ],
+            "score": 2.5699136
+          },
+          "level_only": {
+            "range_samples": [
+              25600,
+              40000
+            ],
+            "score": 0.7319784
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "5fc3f220d9a8313a98ab89e7e3d224b1c93d96b11fd5f1b1921d7888e54949db",
+        "kind": "ordinary_path_change",
+        "level_db": null,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-1-0:5:untouched",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              60800,
+              75200
+            ],
+            "score": 2.3488525
+          },
+          "level_only": {
+            "range_samples": [
+              16000,
+              27200
+            ],
+            "score": 0.6755761
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "b7890a8fda8f30f3bafca94a9bee2e1d4900d90d961f7aace1bba84b447535fe",
+        "kind": "untouched",
+        "level_db": 5,
+        "measured_snr_db": 4.999989,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-1-0:5:gradual_move",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              52800,
+              70400
+            ],
+            "score": 4.7723162
+          },
+          "level_only": {
+            "range_samples": [
+              38400,
+              52800
+            ],
+            "score": 1.5576421
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "6adb1b10496ab28b4f5e922f575e82bd049fefef9d936029dc9355fb0bf8ce27",
+        "kind": "gradual_move",
+        "level_db": 5,
+        "measured_snr_db": 4.999989,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-1-0:5:ordinary_same_path",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              60800,
+              75200
+            ],
+            "score": 2.3485968
+          },
+          "level_only": {
+            "range_samples": [
+              59200,
+              73600
+            ],
+            "score": 0.510146
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "287ed183d429aff5a9440d2f5bfbb44341ab854bb8a2f11dbf785532c8802161",
+        "kind": "ordinary_same_path",
+        "level_db": 5,
+        "measured_snr_db": 4.999989,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-1-0:5:ordinary_path_change",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              25600,
+              40000
+            ],
+            "score": 2.5418133
+          },
+          "level_only": {
+            "range_samples": [
+              24000,
+              35200
+            ],
+            "score": 0.7882516
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "837303b940a18d825bb439fad22b93011e5d9ccc8b7b2725f192752debab0ce5",
+        "kind": "ordinary_path_change",
+        "level_db": 5,
+        "measured_snr_db": 4.999989,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-1-0:5:room_only",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              14400,
+              25600
+            ],
+            "score": 0.3049876
+          },
+          "level_only": {
+            "range_samples": [
+              11200,
+              22400
+            ],
+            "score": 0.3251489
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "44029597637ab6203996470da41b0126822e960223cde8c10a6ea6e21ada66ac",
+        "kind": "room_only",
+        "level_db": 5,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-1-0:0:untouched",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              59200,
+              76800
+            ],
+            "score": 2.2604653
+          },
+          "level_only": {
+            "range_samples": [
+              22400,
+              36800
+            ],
+            "score": 0.935919
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "f29b190ac3408a0d98c2ea52a42cbb9eb15a97163cc5c5ba455e96fd8b72115a",
+        "kind": "untouched",
+        "level_db": 0,
+        "measured_snr_db": 1.7e-05,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-1-0:0:gradual_move",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              60800,
+              75200
+            ],
+            "score": 4.573732
+          },
+          "level_only": {
+            "range_samples": [
+              38400,
+              52800
+            ],
+            "score": 1.5377731
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "314361c6f3e7236b5c30464cf2f2bb60fbe60dcd85988a4dfecce6ee2e6c964b",
+        "kind": "gradual_move",
+        "level_db": 0,
+        "measured_snr_db": 1.7e-05,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-1-0:0:ordinary_same_path",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              59200,
+              76800
+            ],
+            "score": 2.2603645
+          },
+          "level_only": {
+            "range_samples": [
+              59200,
+              73600
+            ],
+            "score": 0.4774816
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "519406e1500f99cfb08223779a6ab7aa17eea1234b7aeb151ff410df34c3669d",
+        "kind": "ordinary_same_path",
+        "level_db": 0,
+        "measured_snr_db": 1.7e-05,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-1-0:0:ordinary_path_change",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              30400,
+              44800
+            ],
+            "score": 2.6605858
+          },
+          "level_only": {
+            "range_samples": [
+              59200,
+              73600
+            ],
+            "score": 0.4775368
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "bab4bab5e8d77deb46ef6eee151d3faed4a854debcf683a7b6c37141f76cbe31",
+        "kind": "ordinary_path_change",
+        "level_db": 0,
+        "measured_snr_db": 1.7e-05,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-1-0:0:room_only",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              14400,
+              25600
+            ],
+            "score": 0.3048578
+          },
+          "level_only": {
+            "range_samples": [
+              11200,
+              22400
+            ],
+            "score": 0.3257817
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "e5a490ed424aa075d71c69094f3a9612f80d091b53a9500263e1efc35a67685f",
+        "kind": "room_only",
+        "level_db": 0,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-1-0:-5:untouched",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              27200,
+              44800
+            ],
+            "score": 1.6136032
+          },
+          "level_only": {
+            "range_samples": [
+              22400,
+              36800
+            ],
+            "score": 1.3894098
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "de1114e03148b4944aa8fb2b9a337e34a62dac115507996cabd8700aa1686d19",
+        "kind": "untouched",
+        "level_db": -5,
+        "measured_snr_db": -4.999996,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-1-0:-5:gradual_move",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              59200,
+              76800
+            ],
+            "score": 2.3936722
+          },
+          "level_only": {
+            "range_samples": [
+              57600,
+              72000
+            ],
+            "score": 0.6211139
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "9897ac2f8f5e79149a839b62e3ee7f27dcfa50567f95744a01c07a1d2f11d85a",
+        "kind": "gradual_move",
+        "level_db": -5,
+        "measured_snr_db": -4.999996,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-1-0:-5:ordinary_same_path",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              16000,
+              27200
+            ],
+            "score": 1.1099087
+          },
+          "level_only": {
+            "range_samples": [
+              16000,
+              27200
+            ],
+            "score": 0.6975554
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "93423bbb33330e0c377adb8587bf2691bc5b06667e1fd22174c9e4b2f8bda219",
+        "kind": "ordinary_same_path",
+        "level_db": -5,
+        "measured_snr_db": -4.999996,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-1-0:-5:ordinary_path_change",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              25600,
+              40000
+            ],
+            "score": 1.318765
+          },
+          "level_only": {
+            "range_samples": [
+              16000,
+              27200
+            ],
+            "score": 0.581386
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "be3c6a1d4dd4bf7b7ac9b1fd6577ccf94915d2c23cd9ff61545767f9179f9a7b",
+        "kind": "ordinary_path_change",
+        "level_db": -5,
+        "measured_snr_db": -4.999996,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-1-0:-5:room_only",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              14400,
+              25600
+            ],
+            "score": 0.3048987
+          },
+          "level_only": {
+            "range_samples": [
+              11200,
+              22400
+            ],
+            "score": 0.3257301
+          }
+        },
+        "group": "genuine-1-0",
+        "input_sha256": "8df8c291703f0dc982be1caf22040694c56e8c1caea2eb732f333848767f2719",
+        "kind": "room_only",
+        "level_db": -5,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-2-0:None:untouched",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              44800,
+              56000
+            ],
+            "score": 0.3515648
+          },
+          "level_only": {
+            "range_samples": [
+              54400,
+              68800
+            ],
+            "score": 0.1021682
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "5501f36c411e11060d86686f00990669ae74f901205c02567bff1f8ed5199145",
+        "kind": "untouched",
+        "level_db": null,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-2-0:None:gradual_move",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              67200,
+              78400
+            ],
+            "score": 0.3683188
+          },
+          "level_only": {
+            "range_samples": [
+              67200,
+              78400
+            ],
+            "score": 0.5359455
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "72fea66f698947af185339553020472d3199d4b6c0d1e8dda50112afed37e5f7",
+        "kind": "gradual_move",
+        "level_db": null,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-2-0:None:ordinary_same_path",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              38400,
+              56000
+            ],
+            "score": 0.4332849
+          },
+          "level_only": {
+            "range_samples": [
+              25600,
+              43200
+            ],
+            "score": 0.1238401
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "dff6211199932e545c171de00a5e684e9c5c370cef5e5a4866f21e8c50b0d31b",
+        "kind": "ordinary_same_path",
+        "level_db": null,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-2-0:None:ordinary_path_change",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              25600,
+              36800
+            ],
+            "score": 2.9992738
+          },
+          "level_only": {
+            "range_samples": [
+              24000,
+              35200
+            ],
+            "score": 1.0957111
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "09e7d605f35a86c2cbaf38413b2abb518c9b0d57af565c72b7f4fd8743e378f8",
+        "kind": "ordinary_path_change",
+        "level_db": null,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-2-0:5:untouched",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              52800,
+              64000
+            ],
+            "score": 2.5173392
+          },
+          "level_only": {
+            "range_samples": [
+              52800,
+              64000
+            ],
+            "score": 0.4346613
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "9e2df678dcfdf94c8edd9a214a4b8c9b36353fe0cf991aa7994f813f994901a9",
+        "kind": "untouched",
+        "level_db": 5,
+        "measured_snr_db": 4.999984,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-2-0:5:gradual_move",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              14400,
+              25600
+            ],
+            "score": 1.8937333
+          },
+          "level_only": {
+            "range_samples": [
+              30400,
+              44800
+            ],
+            "score": 1.3821392
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "7f28f4c93102bd3892340f7b142cd68f36adaad18ae0c3dcbaf3e8cdaeb45be1",
+        "kind": "gradual_move",
+        "level_db": 5,
+        "measured_snr_db": 4.999984,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-2-0:5:ordinary_same_path",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              57600,
+              75200
+            ],
+            "score": 1.5859961
+          },
+          "level_only": {
+            "range_samples": [
+              46400,
+              57600
+            ],
+            "score": 0.3662252
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "da87c32bab1539fc2ec8425651556445f71439851d6d02a87f178d01866805db",
+        "kind": "ordinary_same_path",
+        "level_db": 5,
+        "measured_snr_db": 4.999984,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-2-0:5:ordinary_path_change",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              57600,
+              75200
+            ],
+            "score": 1.5858649
+          },
+          "level_only": {
+            "range_samples": [
+              46400,
+              57600
+            ],
+            "score": 0.3646936
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "aeb48d99fed3178ba7def6047d87e7a83e996ece1c600dae56c7add55e29ddd5",
+        "kind": "ordinary_path_change",
+        "level_db": 5,
+        "measured_snr_db": 4.999984,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-2-0:5:room_only",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              68800,
+              86400
+            ],
+            "score": 0.2924918
+          },
+          "level_only": {
+            "range_samples": [
+              68800,
+              86400
+            ],
+            "score": 0.3459954
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "5a4d48a366f0b087060c35693753076a22e159b0db14882b8440e201f0d8e8a2",
+        "kind": "room_only",
+        "level_db": 5,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-2-0:0:untouched",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              51200,
+              65600
+            ],
+            "score": 2.4669961
+          },
+          "level_only": {
+            "range_samples": [
+              48000,
+              59200
+            ],
+            "score": 0.7523762
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "fe0db10f570bd6daeba0cd66976aa8bec807aa445f36cf82c45d3157fab03bf4",
+        "kind": "untouched",
+        "level_db": 0,
+        "measured_snr_db": -7e-06,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-2-0:0:gradual_move",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              12800,
+              24000
+            ],
+            "score": 1.388886
+          },
+          "level_only": {
+            "range_samples": [
+              11200,
+              22400
+            ],
+            "score": 0.3671046
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "fa9dd56da8a1234e7d17b7413e01cf3bc826709f1afe93e63e61ebb101928d41",
+        "kind": "gradual_move",
+        "level_db": 0,
+        "measured_snr_db": -7e-06,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-2-0:0:ordinary_same_path",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              51200,
+              65600
+            ],
+            "score": 2.4673719
+          },
+          "level_only": {
+            "range_samples": [
+              48000,
+              59200
+            ],
+            "score": 0.748873
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "d5fbc2a31fc51c2f4b29eb7fbb2bb40683250b6f61e5ad7decfc7567989244b1",
+        "kind": "ordinary_same_path",
+        "level_db": 0,
+        "measured_snr_db": -7e-06,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-2-0:0:ordinary_path_change",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              51200,
+              65600
+            ],
+            "score": 2.4666414
+          },
+          "level_only": {
+            "range_samples": [
+              46400,
+              57600
+            ],
+            "score": 0.7426937
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "d11c0df097b2f7f92f226d55229e79ac06ab2766f1ba2d219ebc85c83c38bdce",
+        "kind": "ordinary_path_change",
+        "level_db": 0,
+        "measured_snr_db": -7e-06,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-2-0:0:room_only",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              68800,
+              86400
+            ],
+            "score": 0.2929983
+          },
+          "level_only": {
+            "range_samples": [
+              68800,
+              86400
+            ],
+            "score": 0.3454766
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "65c78cb1bdb80196e59f7d3da5f86e4966d1b07472d1e8d06cff7b1779351c6c",
+        "kind": "room_only",
+        "level_db": 0,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-2-0:-5:untouched",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              57600,
+              75200
+            ],
+            "score": 1.6968052
+          },
+          "level_only": {
+            "range_samples": [
+              14400,
+              28800
+            ],
+            "score": 0.2916574
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "4339047057a179f5de6412e3c6d5332047cb8061f5ea683038510e017754f878",
+        "kind": "untouched",
+        "level_db": -5,
+        "measured_snr_db": -4.999999,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-2-0:-5:gradual_move",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              60800,
+              78400
+            ],
+            "score": 0.0
+          },
+          "level_only": {
+            "range_samples": [
+              60800,
+              78400
+            ],
+            "score": 0.5845916
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "9caaab5dd100070750a74b3ab7beee8b71629aa118a64b455301bc571f03fa73",
+        "kind": "gradual_move",
+        "level_db": -5,
+        "measured_snr_db": -4.999999,
+        "role": "development",
+        "truth": null
+      },
+      {
+        "case": "genuine-2-0:-5:ordinary_same_path",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              14400,
+              25600
+            ],
+            "score": 1.9636039
+          },
+          "level_only": {
+            "range_samples": [
+              28800,
+              46400
+            ],
+            "score": 0.2836875
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "24e77bc61491ff895f620cb14a82f2090224ffe9b82651f4db82ab4b17a21167",
+        "kind": "ordinary_same_path",
+        "level_db": -5,
+        "measured_snr_db": -4.999999,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-2-0:-5:ordinary_path_change",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              57600,
+              75200
+            ],
+            "score": 1.6963672
+          },
+          "level_only": {
+            "range_samples": [
+              57600,
+              72000
+            ],
+            "score": 0.1958735
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "0b99878ef62e1284f233279ef9637b9e8de82c5f6da1a2527d4f7a54e4efdc58",
+        "kind": "ordinary_path_change",
+        "level_db": -5,
+        "measured_snr_db": -4.999999,
+        "role": "development",
+        "truth": [
+          23200,
+          38560
+        ]
+      },
+      {
+        "case": "genuine-2-0:-5:room_only",
+        "donor_family": null,
+        "findings": {
+          "joint": {
+            "range_samples": [
+              68800,
+              86400
+            ],
+            "score": 0.2929104
+          },
+          "level_only": {
+            "range_samples": [
+              68800,
+              86400
+            ],
+            "score": 0.3457794
+          }
+        },
+        "group": "genuine-2-0",
+        "input_sha256": "d6035672c38607012081101a2032e7264ec9eb48e003ca06242a4d9eb22f00df",
+        "kind": "room_only",
+        "level_db": -5,
+        "measured_snr_db": null,
+        "role": "development",
+        "truth": null
+      }
+    ]
+  },
+  "freeze": {
+    "ami_pins": {
+      "ES2007c": "895904c48583d74c311e42cf0bf49554e998cd5ab87b67268c97de09b856e619",
+      "IS1004c": "d9c81453ea85a228bf4b82e9757a19edfc760203d1a3af1c353473b3030613b6"
+    },
+    "ancestral_exclusion_count": 107,
+    "clock_hz": 16000,
+    "code_sha256": "f780d78d1c752092ed001d7e03fecda63a24483ca438fe70a5f2811dd31b4955",
+    "delivery_roster_sha256": "da1f6d874d7974ff4d6c6939dc8e1722b6805a0b4f414e82449ed245a404b7ab",
+    "levels_db": [
+      null,
+      5,
+      0,
+      -5
+    ],
+    "method": {
+      "decision": "Keep the strongest range in each view. Evaluate 0.30 interval IoU and 50% edit coverage and count additional range flags separately on each control. The range describes a temporary change in the recorded stereo field.",
+      "measurement": "On 80 ms Hann windows every 20 ms, band-limit both channels to 300\u20132400 Hz. In each frame measure the strongest positive normalized cross-correlation at lags \u221216 through +16 samples, and the signed left/right RMS level ratio. Aggregate median lag, level and correlation over each 100 ms cell, using only energetic positively coherent frames.",
+      "return": "Scan 0.7, 0.9 and 1.1 second candidate intervals on the 100 ms grid. Require matching five-cell flanks on both sides, with a one-cell guard. Compare the inside against both flanks; subtract any inside fluctuation beyond the flanks and half the flank distance. Compare level alone and equal-unit delay, level and correlation distance. Fit both points to the strict maximum of eligible unedited, room-only and same-path ordinary development views, including all noise levels.",
+      "sources": "Use previously licensed and analyzed speech from separate reader groups. Author new matched path interventions using pinned Surrey and BBC measured stereo responses. Match ordinary and published synthetic donor durations and local gain, apply the same 20 ms fades, and reuse each background segment, level, and peak gain across versions. Include unchanged, masker-only, ordinary same-path and ordinary gradual-move controls. Synthetic and ordinary wrong-path inserts are both localization positives. Same-path synthetic inserts are separately reported as coverage probes, with no origin inference from this cue."
+    },
+    "private_source_roster_sha256": "2d4d055d233ad8581658fdc76437db285f2e0a83ca867d2633c9a237b5f36fc6",
+    "room_pins": {
+      "assessment": [
+        {
+          "bytes": 131160,
+          "filename": "BBCRD_LR_M+000.wav",
+          "git_blob_sha1": "0fc8a92eb335e372d91eeb28f00e23dd5eac5d43",
+          "sha256": "711ca5d7388310148d5b7b25e00739060cc143ffcc8ac63a405657b6bcaebb7a",
+          "url": "https://raw.githubusercontent.com/bbc/bbcrd-brirs/c88a293ed81f4aa820bcbc4138f951552819e001/ambix-configs/irs/BBCRD_LR_M+000.wav"
+        },
+        {
+          "bytes": 131160,
+          "filename": "BBCRD_LR_M+090.wav",
+          "git_blob_sha1": "a5307acc7f13da3c24a85487262e59adcb58995b",
+          "sha256": "765cde5f7a0c2784fdab640f9a95cdfa811200efe2478d0375c34746ff1e4325",
+          "url": "https://raw.githubusercontent.com/bbc/bbcrd-brirs/c88a293ed81f4aa820bcbc4138f951552819e001/ambix-configs/irs/BBCRD_LR_M+090.wav"
+        },
+        {
+          "bytes": 131160,
+          "filename": "BBCRD_LR_M-090.wav",
+          "git_blob_sha1": "650f383bfac67c7bdf93c5454c4aaf1d005dbb2b",
+          "sha256": "ffb81d6fe73cdd450b58e48b7dd8191818404b46d064fc6db17559e1f55ad718",
+          "url": "https://raw.githubusercontent.com/bbc/bbcrd-brirs/c88a293ed81f4aa820bcbc4138f951552819e001/ambix-configs/irs/BBCRD_LR_M-090.wav"
+        }
+      ],
+      "development": [
+        {
+          "bytes": 14282074,
+          "filename": "angle_0.0.mat",
+          "git_blob_sha1": "9214e19a94dca7609c9e8aad4805bc277f5b33a6",
+          "sha256": "d944089e3c872b27dc9dcbf9112978b7fa170c483c3b240a8a3d62a3293c994a",
+          "url": "https://raw.githubusercontent.com/IoSR-Surrey/IoSR_ListeningRoom_BRIRs/d36af1bbd0f4083a9f9ee678ff8f499044e851a7/IoSR_ListeningRoom_BRIRs_MATLAB/angle_0.0.mat"
+        }
+      ]
+    },
+    "schema": "chipmunk.audio-stereo-path-return/1",
+    "source_ancestry": "ef8e66c39f0948cdec5e0b76e0fbd60121e3cb0e89e8ba8be6ad035c4fa27f0b",
+    "source_code_sha256": "cfd11b611121f9632044def10567189dc1cabc14fd764b2d382fdc2a4de4d3c0",
+    "waveform_samples": 96000
+  }
+}

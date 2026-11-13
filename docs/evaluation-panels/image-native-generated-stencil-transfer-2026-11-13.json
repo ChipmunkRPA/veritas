@@ -1,0 +1,253 @@
+{
+  "bound_generated_outputs": [
+    {
+      "freeze_sha256": "05c96a32bb94d4904360c6dc5d987b9c9de41bcd0beedd83b8223e0026b1f92f",
+      "generated_sha256": "7d8816d5403e5d24ca6b3329d6d48b91a092a863fa4d77b508759bdf5f062cb9",
+      "key": 1079,
+      "reference_sha256": "db7e2d054d435d55d08ed6aa38269e3f168ca76a3601c1b0a3344fc7f49ba941",
+      "seed": 271004
+    },
+    {
+      "freeze_sha256": "05c96a32bb94d4904360c6dc5d987b9c9de41bcd0beedd83b8223e0026b1f92f",
+      "generated_sha256": "c53f08e19ac2dcf7fd01e8b11ec5fc3067dce880f976b45f3cc63d40298cba60",
+      "key": 1114,
+      "reference_sha256": "7b5ed6041dcc57966be901c04fc4103d9335114bd6e132650fde7cc3cfd45289",
+      "seed": 271005
+    },
+    {
+      "freeze_sha256": "05c96a32bb94d4904360c6dc5d987b9c9de41bcd0beedd83b8223e0026b1f92f",
+      "generated_sha256": "6d6e0f035fbc8a33498c60173a6a1c297af310ad4e52eb2672bbbaf9b23db9cf",
+      "key": 1121,
+      "reference_sha256": "6552a827768746c0fcf8c8bc42693653887bd13f61633a5fa0de977697e7a80c",
+      "seed": 271006
+    },
+    {
+      "freeze_sha256": "05c96a32bb94d4904360c6dc5d987b9c9de41bcd0beedd83b8223e0026b1f92f",
+      "generated_sha256": "ab0f18a53d7964cb76d187fcb82e12eda45a949c8a7d441f4d0d02346d0d4074",
+      "key": 1325,
+      "reference_sha256": "d49ec09daf4bf3795b090fbc7154b56b1121ebe375d5c232c3e2b28c9a82ee66",
+      "seed": 271007
+    },
+    {
+      "freeze_sha256": "05c96a32bb94d4904360c6dc5d987b9c9de41bcd0beedd83b8223e0026b1f92f",
+      "generated_sha256": "6de3a281c2197d7960d9c960a46b0b060528e9e963691c5af52a5eb848b00eaf",
+      "key": 1694,
+      "reference_sha256": "fad5c61b8d1f1193902afa40e4b6af357fe6b498f34ba7d7d34062d13791200e",
+      "seed": 271008
+    },
+    {
+      "freeze_sha256": "05c96a32bb94d4904360c6dc5d987b9c9de41bcd0beedd83b8223e0026b1f92f",
+      "generated_sha256": "b36c97d179fab6c7420a5826fd30174b87ec88cfffe3c970c7f93e491a97afe0",
+      "key": 2088,
+      "reference_sha256": "41ba9529e3c4cb5a81599cc73dee4d9480613660e900e7b36f14c825ef29edb4",
+      "seed": 271009
+    }
+  ],
+  "design": {
+    "admission": "At least four useful generated sharp and four useful generated feathered regions with zero flags on untouched and at most one of 30 ordinary edit controls. Study only; any passing check needs separate generator and camera validation.",
+    "arms": {
+      "phase_loss": 2.4346873354224834,
+      "phase_shift": 0.25,
+      "textured_phase_loss": 2.4346873354224834
+    },
+    "confidence_weight": 0,
+    "edit": "Generate a 256\u00d7256 RGB reference edit, lift code values to 16-bit by the fixed square transfer, and copy only a centered 128\u00d7128 source-coordinate area. Also deliver a feathered exact variant with an 8-pixel cosine ramp.",
+    "generator": {
+      "guidance": 1.0,
+      "prompt": "Add a small matte red paper disk at the exact center of this photograph, with a slight natural shadow. Preserve the framing and the rest of the photo.",
+      "scheduler": "flow_match_euler_discrete",
+      "size": 256,
+      "source_revision": "860e87183ceb29e39627c0612ebd66d8ea66e68c",
+      "steps": 4,
+      "use_kv_cache": false
+    },
+    "metrics": "A location is useful with 0.30 exact changed-pixel IoU and 0.50 recall. Record ordinary flags by role and all top proposals before the cutoff. Keep a separate prompt-semantic audit.",
+    "scope": "CC0, checksum-matched RAW sources from six camera models. These cameras previously contributed conventional edits; these generated outputs and cases are new. Test losses on fixed linear 16-bit RGB, not a common JPEG workflow.",
+    "texture_gate": "For the third arm require fine luma edge activity at least half the median in the surrounding nine-cell neighborhood; this tests whether blur suppression preserves textured synthesized replacements."
+  },
+  "exact_replay_rows": 48,
+  "freeze_sha256": "05c96a32bb94d4904360c6dc5d987b9c9de41bcd0beedd83b8223e0026b1f92f",
+  "generator_inventory_sha256": "f27d41114e0853b407a794f683a9151566f2a415502cb91beea50c86c6b374b3",
+  "measurements": {
+    "phase_loss": {
+      "blur": {
+        "files": 6,
+        "flags": 5,
+        "supported": 6,
+        "top_useful": 6,
+        "useful": 5
+      },
+      "classical_fill": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 2,
+        "useful": 0
+      },
+      "even_copy": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 0,
+        "useful": 0
+      },
+      "fractional_interpolation": {
+        "files": 6,
+        "flags": 6,
+        "supported": 6,
+        "top_useful": 6,
+        "useful": 6
+      },
+      "generated_feathered": {
+        "files": 6,
+        "flags": 6,
+        "supported": 6,
+        "top_useful": 6,
+        "useful": 6
+      },
+      "generated_hard": {
+        "files": 6,
+        "flags": 6,
+        "supported": 6,
+        "top_useful": 6,
+        "useful": 6
+      },
+      "original": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 0,
+        "useful": 0
+      },
+      "tone": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 0,
+        "useful": 0
+      }
+    },
+    "phase_shift": {
+      "blur": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 0,
+        "useful": 0
+      },
+      "classical_fill": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 0,
+        "useful": 0
+      },
+      "even_copy": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 0,
+        "useful": 0
+      },
+      "fractional_interpolation": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 0,
+        "useful": 0
+      },
+      "generated_feathered": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 0,
+        "useful": 0
+      },
+      "generated_hard": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 0,
+        "useful": 0
+      },
+      "original": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 0,
+        "useful": 0
+      },
+      "tone": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 0,
+        "useful": 0
+      }
+    },
+    "textured_phase_loss": {
+      "blur": {
+        "files": 6,
+        "flags": 1,
+        "supported": 6,
+        "top_useful": 4,
+        "useful": 1
+      },
+      "classical_fill": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 0,
+        "useful": 0
+      },
+      "even_copy": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 0,
+        "useful": 0
+      },
+      "fractional_interpolation": {
+        "files": 6,
+        "flags": 5,
+        "supported": 6,
+        "top_useful": 6,
+        "useful": 5
+      },
+      "generated_feathered": {
+        "files": 6,
+        "flags": 5,
+        "supported": 6,
+        "top_useful": 6,
+        "useful": 5
+      },
+      "generated_hard": {
+        "files": 6,
+        "flags": 5,
+        "supported": 6,
+        "top_useful": 6,
+        "useful": 5
+      },
+      "original": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 0,
+        "useful": 0
+      },
+      "tone": {
+        "files": 6,
+        "flags": 0,
+        "supported": 6,
+        "top_useful": 0,
+        "useful": 0
+      }
+    }
+  },
+  "prior_measure_sha256": "223607cf9d0b59eac4ff496f1c59afd5756afa39afbc301e3f06c6760da0c2e9",
+  "roster_sha256": "21963fa357e5495db2a4e64cdd14dca80db2996bdc548a794a93eb87642fd4ad",
+  "runner_sha256": "1d38bb6e056b41e2886681966cfce6c709f2ca28048535ec85a00578c86446c3",
+  "schema": "chipmunk.image-native-generated-stencil-transfer/1",
+  "scored_sha256": "a1f0be59f94992868e5dfb137654526253e32ab59c4a64aba76f2d67e1a430fe",
+  "sources": 6
+}

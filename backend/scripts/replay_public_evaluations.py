@@ -144,8 +144,20 @@ LOCAL_EVIDENCE_2026_11_13 = {
     ), ("review",), (f"{SCRIPTS}/writing_revision_worker_priority.py", f"{SCRIPTS}/writing_revision_worker_transfer.py",
                     f"{SCRIPTS}/writing_revision_trajectory_transfer.py", f"{SCRIPTS}/review_writing_revision_trajectory_transfer.py")),
 }
+EVIDENCE_TRANSFER_2026_11_13 = {
+    "image": LOCAL_EVIDENCE_2026_11_13["image"],
+    "video": ("review_video_paired_native_mouth_transfer.py", ("video-paired-native-mouth-transfer-2026-11-13.json",), (), ()),
+    "audio": ("review_audio_flank_background_transfer.py", (
+        "audio-flank-background-transfer-2026-11-13.json", "audio-odss-matched-room-2026-11-13.json",
+        "audio-phonemedf-matched-transfer-2026-11-13.json",
+    ), (), (f"{SCRIPTS}/review_audio_odss_matched_room.py", f"{SCRIPTS}/review_audio_phonemedf_matched_transfer.py")),
+    "writing": ("review_writing_revision_worker_transfer.py", (
+        "writing-revision-worker-complete-2026-11-13.json", "writing-revision-trajectory-2026-11-13.json",
+    ), *LOCAL_EVIDENCE_2026_11_13["writing"][2:]),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
-          "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13")
+          "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
+          "evidence-transfer-2026-11-13")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -203,6 +215,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         prefix = ()
     elif suite == "local-evidence-2026-11-13":
         script, panel_names, prefix, dependencies = LOCAL_EVIDENCE_2026_11_13[modality]
+    elif suite == "evidence-transfer-2026-11-13":
+        script, panel_names, prefix, dependencies = EVIDENCE_TRANSFER_2026_11_13[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

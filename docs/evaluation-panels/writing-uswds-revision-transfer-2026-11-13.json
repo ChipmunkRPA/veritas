@@ -1,0 +1,4668 @@
+{
+  "freeze": {
+    "attempts": 2,
+    "code_sha256": "22ec8c6ff39761c84f733e4c65a7b904e64381ca3e7f88e5b578f3f5e558717e",
+    "intake_sha256": "e28aa0a7ea60ce99e77047a9d220fae493d448c696d52fca7bfc0ec6039d4677",
+    "license_sha256": "3b2d52ce75f04547eb3fccf52992c57f98760326b6fb255ca18a6b65c29d6e64",
+    "models": {
+      "granite": {
+        "assets": {
+          "README.md": "9e4fa0f08ae1b0675d6372ea1a226798b46e0b4e14fd09797ec287d618fe68db",
+          "added_tokens.json": "bb33d55934aa82d29cc62f3d19cdbc60f315763f6ccee21bdfd8b3bde2f33d3b",
+          "config.json": "ff28d67485d1a40022f0eb0c19b983c2680e90c25b690032e59e645f604f67d1",
+          "merges.txt": "303127a244b0078878156c17229f36d11b7a3a3f8e47b7cfdbb304ff46be5030",
+          "model.safetensors": "f37ff14b14f2db07b4fc476e57e619b038b264fcc9f0681bc13274772698ac93",
+          "model.safetensors.index.json": "3fe2357794653e58654f56c0378e78e2a34bd6c9eac6b37563bc7896ccb54906",
+          "special_tokens_map.json": "21ce694081bb9ae1bd4bc64549e72e0799ebb74705e6b650e3585d85b71ebdc1",
+          "tokenizer.json": "91168e938f05796aa6dcca7e485e4b30ab52785320c7a6391ecef86e6c84681e",
+          "tokenizer_config.json": "042af89a5a0e0a183ebd104a875b1bf4435a091b19f2b62aaa58af1c5ea97600",
+          "vocab.json": "80ab859339a2525fdfbda14bc39df02dffb824aefdaf86426217bbb146d17e01"
+        },
+        "license": "Apache-2.0",
+        "loader_aliases": {},
+        "quantized": "mlx-community/granite-3.3-2b-instruct-4bit",
+        "revision": "58246c5498495c14599525c852cfadb66c9f3084",
+        "typed_config_overrides": {},
+        "upstream": "ibm-granite/granite-3.3-2b-instruct",
+        "upstream_revision": "707f574c62054322f6b5b04b6d075f0a8f05e0f0"
+      },
+      "olmo": {
+        "assets": {
+          "README.md": "47770c83c8b55a3df787804cefdab1be8534b0966340078b35a397981530d33a",
+          "config.json": "9b29aa9ff2372207aee4a6ef36e39d439df10518b172401f12c320334140f9cc",
+          "generation_config.json": "437b97826bb4430c205083a0986fbe31f4959cffbe445e47fb7c5192fdcb8d58",
+          "merges.txt": "b6fe424e334903f7fb84d3a106d9730455f4744b9fe3c21ee136d97a00e72502",
+          "model.safetensors": "bd4ee5b47150d425258009e43d1e69d224d95b67bdee9d846c71780c4bed078d",
+          "special_tokens_map.json": "78afb564e81264029b25f9caf24bda2521d5bdaeff5cd3fdbc01d3da2e8ce2f2",
+          "tokenizer.json": "73fd5254624f39a88e3faac6a8e11300fc3c735ed37880d4f4f08db898eaecca",
+          "tokenizer_config.json": "50c412c57d832057a3d5db42064c741f751e570f7c8788f037bfb0d2dd6e5f49",
+          "vocab.json": "9e14712c91b37c7aab74b1306baa46ac342d620637a4b44523cdc3aec7d24195"
+        },
+        "license": "Apache-2.0",
+        "loader_aliases": {},
+        "quantized": "ekryski/OLMo-2-0425-1B-Instruct-4bit",
+        "revision": "bb6c2410107c9b1d0f50126955378bc0aa2237cb",
+        "typed_config_overrides": {
+          "attention_bias": false,
+          "tie_word_embeddings": false,
+          "use_cache": false
+        },
+        "upstream": "allenai/OLMo-2-0425-1B-Instruct",
+        "upstream_revision": "48d788eca847d4d7548f375ad03d3c9312f6139e"
+      }
+    },
+    "native_cutoff": 0.5,
+    "paired_log_odds": 0.6931471805599453,
+    "prompt": "Rewrite this text as one complete English sentence in different words. Preserve its meaning, names and facts. Use 12 to 35 words. Return the replacement alone, with no heading or explanation.\n\n{}",
+    "protocol": {
+      "change_intersection": "Keep a primary range only where it intersects a changed token in the exact paired draft.",
+      "draft_comparison": "Exact changed tokens as factual version evidence. It does not attribute the edit to AI.",
+      "paired_direction": "Same-count drafts with a changed native context and overlapping exact changed token. Both independent detector odds must at least double.",
+      "primary": "First six native three-sentence primary responses at or above the incumbent point.",
+      "useful": "At least one proposal has 0.30 IoU and covers half the replaced sentence, ignoring whitespace."
+    },
+    "roster_sha256": "0d72a8c6fd487dd1d1498063610d227404bdf2b93d8b0da905b0688c864ab635",
+    "schema": "chipmunk.writing-uswds-revision-transfer/1",
+    "seeds": {
+      "granite": 862301,
+      "olmo": 975483
+    },
+    "source_commit": "37f277bbdce08fbcf9bd463fa0c4b33516ceed61",
+    "source_license": "CC0-1.0"
+  },
+  "freeze_sha256": "01a46b375095272f903e6d0f89bbf7dff560fe9ba1291c429067b220cded1913",
+  "generation_sha256": {
+    "granite": "66edfea7d5e873e54eafc35aa181c6815ff62f7c2f0e220e7d3a9a976b13d067",
+    "olmo": "d3b9a54c6f2223af661e346a255ac442311f7d591f40ab43dd0f8948585cd756"
+  },
+  "inputs": 84,
+  "results": {
+    "after": {
+      "change_intersection": {
+        "files": 6,
+        "flags": 1,
+        "labeled_characters": 0,
+        "ordinary_characters": 270,
+        "useful": 0
+      },
+      "draft_comparison": {
+        "files": 6,
+        "flags": 6,
+        "labeled_characters": 0,
+        "ordinary_characters": 219,
+        "useful": 0
+      },
+      "paired_direction": {
+        "files": 6,
+        "flags": 0,
+        "labeled_characters": 0,
+        "ordinary_characters": 0,
+        "useful": 0
+      },
+      "primary": {
+        "files": 6,
+        "flags": 1,
+        "labeled_characters": 0,
+        "ordinary_characters": 270,
+        "useful": 0
+      }
+    },
+    "before": {
+      "change_intersection": {
+        "files": 6,
+        "flags": 0,
+        "labeled_characters": 0,
+        "ordinary_characters": 0,
+        "useful": 0
+      },
+      "draft_comparison": {
+        "files": 6,
+        "flags": 0,
+        "labeled_characters": 0,
+        "ordinary_characters": 0,
+        "useful": 0
+      },
+      "paired_direction": {
+        "files": 6,
+        "flags": 0,
+        "labeled_characters": 0,
+        "ordinary_characters": 0,
+        "useful": 0
+      },
+      "primary": {
+        "files": 6,
+        "flags": 2,
+        "labeled_characters": 0,
+        "ordinary_characters": 499,
+        "useful": 0
+      }
+    },
+    "granite": {
+      "change_intersection": {
+        "files": 5,
+        "flags": 3,
+        "labeled_characters": 241,
+        "ordinary_characters": 456,
+        "useful": 2
+      },
+      "draft_comparison": {
+        "files": 5,
+        "flags": 5,
+        "labeled_characters": 355,
+        "ordinary_characters": 0,
+        "useful": 5
+      },
+      "paired_direction": {
+        "files": 5,
+        "flags": 2,
+        "labeled_characters": 163,
+        "ordinary_characters": 283,
+        "useful": 2
+      },
+      "primary": {
+        "files": 5,
+        "flags": 3,
+        "labeled_characters": 241,
+        "ordinary_characters": 546,
+        "useful": 2
+      }
+    },
+    "olmo": {
+      "change_intersection": {
+        "files": 4,
+        "flags": 2,
+        "labeled_characters": 189,
+        "ordinary_characters": 382,
+        "useful": 2
+      },
+      "draft_comparison": {
+        "files": 4,
+        "flags": 4,
+        "labeled_characters": 201,
+        "ordinary_characters": 0,
+        "useful": 3
+      },
+      "paired_direction": {
+        "files": 4,
+        "flags": 1,
+        "labeled_characters": 99,
+        "ordinary_characters": 125,
+        "useful": 1
+      },
+      "primary": {
+        "files": 4,
+        "flags": 2,
+        "labeled_characters": 189,
+        "ordinary_characters": 382,
+        "useful": 2
+      }
+    }
+  },
+  "rows": [
+    {
+      "characters": 314,
+      "family": "before",
+      "group": "dc854e4a7b05731d",
+      "locations": [],
+      "native": [
+        {
+          "modernbert": "0x1.55f63c0000000p-1",
+          "sha256": "15ff1085a9554765d3db116110c1222f4c715c38eb72d6fc2f8fcf06d79c94c2",
+          "span": [
+            0,
+            90
+          ],
+          "tropa": "0x1.88c6000000000p-8"
+        },
+        {
+          "modernbert": "0x1.211a7c0000000p-1",
+          "sha256": "d0e09046cc633aef60bf3d6ca7113b6077d48364dfbb7d358385a4303d0754fe",
+          "span": [
+            0,
+            143
+          ],
+          "tropa": "0x1.c848000000000p-9"
+        },
+        {
+          "modernbert": "0x1.5707d20000000p-2",
+          "sha256": "74e3abf8fb5d216ea83c7fdfa91fd9a0804360aae5e03209e0a5f2051599ee8a",
+          "span": [
+            19,
+            210
+          ],
+          "tropa": "0x1.36b9000000000p-8"
+        },
+        {
+          "modernbert": "0x1.9c78400000000p-4",
+          "sha256": "0370ede22ab066d34179c976ce34681354be41428cf297c26b22bda63f24538e",
+          "span": [
+            91,
+            244
+          ],
+          "tropa": "0x1.cdb2000000000p-9"
+        },
+        {
+          "modernbert": "0x1.a0cd000000000p-1",
+          "sha256": "e8e96e10daae2003e326f908768a7ccd877cb9875ad04e0cca0eadd63655b7ce",
+          "span": [
+            144,
+            314
+          ],
+          "tropa": "0x1.1ba2400000000p-6"
+        },
+        {
+          "modernbert": "0x1.708db40000000p-1",
+          "sha256": "3075edb0d9913492f8ba7870111767267b5477547ca16f6a1b5e1ebe3cbbe43a",
+          "span": [
+            211,
+            314
+          ],
+          "tropa": "0x1.0ccda00000000p-5"
+        }
+      ],
+      "spaces": [
+        3,
+        9,
+        18,
+        23,
+        31,
+        34,
+        39,
+        49,
+        57,
+        61,
+        64,
+        73,
+        80,
+        83,
+        90,
+        94,
+        102,
+        110,
+        114,
+        122,
+        127,
+        130,
+        132,
+        137,
+        143,
+        147,
+        157,
+        165,
+        169,
+        177,
+        182,
+        189,
+        192,
+        196,
+        204,
+        210,
+        215,
+        220,
+        228,
+        233,
+        244,
+        248,
+        254,
+        265,
+        268,
+        280,
+        288,
+        295,
+        299,
+        306
+      ],
+      "target": 2,
+      "text_sha256": "e224f5fa9e843f568b4a2d153b00226231cbda89df649a8cb6c24dd0152848cf",
+      "truth_indices": []
+    },
+    {
+      "characters": 313,
+      "family": "after",
+      "group": "dc854e4a7b05731d",
+      "locations": [
+        [
+          95,
+          103
+        ],
+        [
+          149,
+          156
+        ]
+      ],
+      "native": [
+        {
+          "modernbert": "0x1.55f63c0000000p-1",
+          "sha256": "15ff1085a9554765d3db116110c1222f4c715c38eb72d6fc2f8fcf06d79c94c2",
+          "span": [
+            0,
+            90
+          ],
+          "tropa": "0x1.88c6000000000p-8"
+        },
+        {
+          "modernbert": "0x1.02199e0000000p-1",
+          "sha256": "64ef11e84f9edfc41ffc178f92af4f24ca13adeb5363d44096cc7a9c112dac3c",
+          "span": [
+            0,
+            144
+          ],
+          "tropa": "0x1.6f50000000000p-9"
+        },
+        {
+          "modernbert": "0x1.8b6ea40000000p-3",
+          "sha256": "178cb3531ea6c9298e6832c68179a17622dab22977d636e30d35bce3b40b7c62",
+          "span": [
+            19,
+            209
+          ],
+          "tropa": "0x1.a270000000000p-9"
+        },
+        {
+          "modernbert": "0x1.bbb24c0000000p-4",
+          "sha256": "42e9516522ac29c630191eefba608dba50554a5a33685e19f08aeedc676337f6",
+          "span": [
+            91,
+            243
+          ],
+          "tropa": "0x1.39c8000000000p-9"
+        },
+        {
+          "modernbert": "0x1.ab92680000000p-1",
+          "sha256": "cc9dc1bbd27a52448215415230917fe30bc0fed18ff33784040e91dd2fc37344",
+          "span": [
+            145,
+            313
+          ],
+          "tropa": "0x1.e392800000000p-7"
+        },
+        {
+          "modernbert": "0x1.708db40000000p-1",
+          "sha256": "3075edb0d9913492f8ba7870111767267b5477547ca16f6a1b5e1ebe3cbbe43a",
+          "span": [
+            210,
+            313
+          ],
+          "tropa": "0x1.0ccda00000000p-5"
+        }
+      ],
+      "spaces": [
+        3,
+        9,
+        18,
+        23,
+        31,
+        34,
+        39,
+        49,
+        57,
+        61,
+        64,
+        73,
+        80,
+        83,
+        90,
+        94,
+        103,
+        111,
+        115,
+        123,
+        128,
+        131,
+        133,
+        138,
+        144,
+        148,
+        156,
+        164,
+        168,
+        176,
+        181,
+        188,
+        191,
+        195,
+        203,
+        209,
+        214,
+        219,
+        227,
+        232,
+        243,
+        247,
+        253,
+        264,
+        267,
+        279,
+        287,
+        294,
+        298,
+        305
+      ],
+      "target": 2,
+      "text_sha256": "dcdf4f8b921aba6109d72396ed99d6b6ae5f9debac095b8cf2f2e24eed1505ae",
+      "truth_indices": []
+    },
+    {
+      "characters": 421,
+      "family": "before",
+      "group": "57ed9b29705b6bba",
+      "locations": [],
+      "native": [
+        {
+          "modernbert": "0x1.716cc60000000p-1",
+          "sha256": "32f00d09d01a0465ef6734f959daf839a2dc098c212955a3395d3e07b2ff58bf",
+          "span": [
+            0,
+            183
+          ],
+          "tropa": "0x1.f288000000000p-9"
+        },
+        {
+          "modernbert": "0x1.c021960000000p-3",
+          "sha256": "e789d231dde6e9f05a0c069e21a3e9e37ed030abb2d911009b3bba3198e9f3a3",
+          "span": [
+            0,
+            233
+          ],
+          "tropa": "0x1.0cba000000000p-9"
+        },
+        {
+          "modernbert": "0x1.eec5320000000p-1",
+          "sha256": "7140a1065547b8daf797bf0d27826005eabbf1e0fbf0f94c440371063e4b16a7",
+          "span": [
+            152,
+            330
+          ],
+          "tropa": "0x1.48d4000000000p-8"
+        },
+        {
+          "modernbert": "0x1.fec6440000000p-1",
+          "sha256": "dcd10e58fe66da4bf17bf19fb1557733b4362920c6afbe5cc9d40f4a947e6fc9",
+          "span": [
+            184,
+            375
+          ],
+          "tropa": "0x1.f013000000000p-8"
+        },
+        {
+          "modernbert": "0x1.fceb120000000p-1",
+          "sha256": "4284c45f49ea7a35e0806f4089cc2e57551e17f3dc972c8585665a814c13c41c",
+          "span": [
+            234,
+            421
+          ],
+          "tropa": "0x1.0b71000000000p-8"
+        },
+        {
+          "modernbert": "0x1.47441c0000000p-2",
+          "sha256": "61c21feae4a4a778b5a1756aeb39c67d75a61612ca92ba20d78859558da69d9c",
+          "span": [
+            331,
+            421
+          ],
+          "tropa": "0x1.703c800000000p-7"
+        }
+      ],
+      "spaces": [
+        2,
+        6,
+        12,
+        17,
+        20,
+        23,
+        28,
+        31,
+        37,
+        41,
+        45,
+        56,
+        63,
+        66,
+        69,
+        78,
+        87,
+        95,
+        101,
+        106,
+        110,
+        117,
+        125,
+        130,
+        134,
+        140,
+        145,
+        151,
+        156,
+        162,
+        166,
+        175,
+        183,
+        189,
+        193,
+        199,
+        204,
+        208,
+        212,
+        219,
+        223,
+        233,
+        236,
+        246,
+        250,
+        256,
+        261,
+        267,
+        275,
+        288,
+        293,
+        298,
+        304,
+        308,
+        314,
+        324,
+        330,
+        338,
+        343,
+        349,
+        353,
+        364,
+        368,
+        375,
+        380,
+        390,
+        398,
+        400,
+        411,
+        415
+      ],
+      "target": 3,
+      "text_sha256": "89408d1473654c92192f9e126c68aada04b759c86830992e154d7d93fb6e067f",
+      "truth_indices": []
+    },
+    {
+      "characters": 476,
+      "family": "after",
+      "group": "57ed9b29705b6bba",
+      "locations": [
+        [
+          152,
+          157
+        ],
+        [
+          158,
+          162
+        ],
+        [
+          163,
+          166
+        ],
+        [
+          167,
+          175
+        ],
+        [
+          176,
+          182
+        ],
+        [
+          182,
+          183
+        ],
+        [
+          184,
+          188
+        ],
+        [
+          189,
+          192
+        ],
+        [
+          202,
+          208
+        ],
+        [
+          209,
+          216
+        ],
+        [
+          239,
+          251
+        ],
+        [
+          252,
+          258
+        ],
+        [
+          271,
+          272
+        ],
+        [
+          273,
+          278
+        ],
+        [
+          279,
+          288
+        ]
+      ],
+      "native": [
+        {
+          "modernbert": "0x1.e6d5ba0000000p-1",
+          "sha256": "fa0a0f0bac359aa737b86df3f28f7eefc0972c114024cc7fecad43028734d24b",
+          "span": [
+            0,
+            183
+          ],
+          "tropa": "0x1.60b1000000000p-8"
+        },
+        {
+          "modernbert": "0x1.fb9dcc0000000p-1",
+          "sha256": "48e0d09423cd11f4b6d3dce753e034dc548137e723cf9f152afb8a0d7f4546e0",
+          "span": [
+            0,
+            217
+          ],
+          "tropa": "0x1.5b54000000000p-9"
+        },
+        {
+          "modernbert": "0x1.e688d40000000p-1",
+          "sha256": "975e4eec8b77e1ae639a664751154008401deba0140a95e2599deb7dcbed6acf",
+          "span": [
+            152,
+            272
+          ],
+          "tropa": "0x1.78be000000000p-8"
+        },
+        {
+          "modernbert": "0x1.fd4b820000000p-1",
+          "sha256": "4fbc0f9da5719f96134b5ca7f62d639714e199deeb158f5335e6b7ff4003e01a",
+          "span": [
+            184,
+            385
+          ],
+          "tropa": "0x1.d249000000000p-8"
+        },
+        {
+          "modernbert": "0x1.feaa020000000p-1",
+          "sha256": "3a13af6718e3eeac5d7120a22f284511a17f66b2b612af061034ec41d88a9124",
+          "span": [
+            218,
+            430
+          ],
+          "tropa": "0x1.749c000000000p-9"
+        },
+        {
+          "modernbert": "0x1.fdcc280000000p-1",
+          "sha256": "b918142e7dce9eee5a94e387d4fa866cd6d27e285b98d9b116e7bbf32b656fe8",
+          "span": [
+            273,
+            476
+          ],
+          "tropa": "0x1.c558000000000p-10"
+        },
+        {
+          "modernbert": "0x1.47441c0000000p-2",
+          "sha256": "61c21feae4a4a778b5a1756aeb39c67d75a61612ca92ba20d78859558da69d9c",
+          "span": [
+            386,
+            476
+          ],
+          "tropa": "0x1.703c800000000p-7"
+        }
+      ],
+      "spaces": [
+        2,
+        6,
+        12,
+        17,
+        20,
+        23,
+        28,
+        31,
+        37,
+        41,
+        45,
+        56,
+        63,
+        66,
+        69,
+        78,
+        87,
+        95,
+        101,
+        106,
+        110,
+        117,
+        125,
+        130,
+        134,
+        140,
+        145,
+        151,
+        157,
+        162,
+        166,
+        175,
+        183,
+        188,
+        192,
+        201,
+        208,
+        217,
+        223,
+        227,
+        233,
+        238,
+        251,
+        258,
+        262,
+        272,
+        278,
+        291,
+        301,
+        305,
+        311,
+        316,
+        322,
+        330,
+        343,
+        348,
+        353,
+        359,
+        363,
+        369,
+        379,
+        385,
+        393,
+        398,
+        404,
+        408,
+        419,
+        423,
+        430,
+        435,
+        445,
+        453,
+        455,
+        466,
+        470
+      ],
+      "target": 3,
+      "text_sha256": "8af403a28be2dff6e327671a21b9f308815c05965822e51150a1525fc9a1d8fb",
+      "truth_indices": []
+    },
+    {
+      "characters": 427,
+      "family": "granite",
+      "group": "57ed9b29705b6bba",
+      "locations": [
+        [
+          234,
+          239
+        ],
+        [
+          246,
+          248
+        ],
+        [
+          249,
+          254
+        ],
+        [
+          261,
+          268
+        ],
+        [
+          282,
+          290
+        ],
+        [
+          291,
+          295
+        ],
+        [
+          321,
+          325
+        ],
+        [
+          326,
+          335
+        ]
+      ],
+      "native": [
+        {
+          "modernbert": "0x1.716cc60000000p-1",
+          "sha256": "32f00d09d01a0465ef6734f959daf839a2dc098c212955a3395d3e07b2ff58bf",
+          "span": [
+            0,
+            183
+          ],
+          "tropa": "0x1.f288000000000p-9"
+        },
+        {
+          "modernbert": "0x1.c021960000000p-3",
+          "sha256": "e789d231dde6e9f05a0c069e21a3e9e37ed030abb2d911009b3bba3198e9f3a3",
+          "span": [
+            0,
+            233
+          ],
+          "tropa": "0x1.0cba000000000p-9"
+        },
+        {
+          "modernbert": "0x1.fc2fcc0000000p-1",
+          "sha256": "ab78d6a54ab85bd64c254f19ece0bbfd716a34596d4cc55fa4a0aacfa21534fa",
+          "span": [
+            152,
+            336
+          ],
+          "tropa": "0x1.4f44000000000p-10"
+        },
+        {
+          "modernbert": "0x1.fdcb8c0000000p-1",
+          "sha256": "c351a9fc8aac1108be45867f06ca64ebd69e8483755efde3a27ca3a4c1a0ff93",
+          "span": [
+            184,
+            381
+          ],
+          "tropa": "0x1.5024000000000p-7"
+        },
+        {
+          "modernbert": "0x1.fc505c0000000p-1",
+          "sha256": "76d8436ef7654a615eb1fa9b32088177f2c4c8df23caddad27eeb1a5da717173",
+          "span": [
+            234,
+            427
+          ],
+          "tropa": "0x1.643f800000000p-7"
+        },
+        {
+          "modernbert": "0x1.47441c0000000p-2",
+          "sha256": "61c21feae4a4a778b5a1756aeb39c67d75a61612ca92ba20d78859558da69d9c",
+          "span": [
+            337,
+            427
+          ],
+          "tropa": "0x1.703c800000000p-7"
+        }
+      ],
+      "spaces": [
+        2,
+        6,
+        12,
+        17,
+        20,
+        23,
+        28,
+        31,
+        37,
+        41,
+        45,
+        56,
+        63,
+        66,
+        69,
+        78,
+        87,
+        95,
+        101,
+        106,
+        110,
+        117,
+        125,
+        130,
+        134,
+        140,
+        145,
+        151,
+        156,
+        162,
+        166,
+        175,
+        183,
+        189,
+        193,
+        199,
+        204,
+        208,
+        212,
+        219,
+        223,
+        233,
+        239,
+        245,
+        248,
+        254,
+        260,
+        268,
+        281,
+        290,
+        295,
+        299,
+        305,
+        315,
+        320,
+        325,
+        336,
+        344,
+        349,
+        355,
+        359,
+        370,
+        374,
+        381,
+        386,
+        396,
+        404,
+        406,
+        417,
+        421
+      ],
+      "target": 3,
+      "text_sha256": "60cd9c9faa201de001ea89c4203c826a1bb31c26e022ff486abf82a58dabb6ce",
+      "truth_indices": [
+        234,
+        235,
+        236,
+        237,
+        238,
+        240,
+        241,
+        242,
+        243,
+        244,
+        246,
+        247,
+        249,
+        250,
+        251,
+        252,
+        253,
+        255,
+        256,
+        257,
+        258,
+        259,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        291,
+        292,
+        293,
+        294,
+        296,
+        297,
+        298,
+        300,
+        301,
+        302,
+        303,
+        304,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        316,
+        317,
+        318,
+        319,
+        321,
+        322,
+        323,
+        324,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334,
+        335
+      ]
+    },
+    {
+      "characters": 423,
+      "family": "olmo",
+      "group": "57ed9b29705b6bba",
+      "locations": [
+        [
+          234,
+          238
+        ],
+        [
+          239,
+          247
+        ],
+        [
+          248,
+          251
+        ],
+        [
+          252,
+          257
+        ],
+        [
+          258,
+          267
+        ],
+        [
+          268,
+          272
+        ],
+        [
+          295,
+          300
+        ],
+        [
+          314,
+          321
+        ],
+        [
+          322,
+          331
+        ]
+      ],
+      "native": [
+        {
+          "modernbert": "0x1.716cc60000000p-1",
+          "sha256": "32f00d09d01a0465ef6734f959daf839a2dc098c212955a3395d3e07b2ff58bf",
+          "span": [
+            0,
+            183
+          ],
+          "tropa": "0x1.f288000000000p-9"
+        },
+        {
+          "modernbert": "0x1.c021960000000p-3",
+          "sha256": "e789d231dde6e9f05a0c069e21a3e9e37ed030abb2d911009b3bba3198e9f3a3",
+          "span": [
+            0,
+            233
+          ],
+          "tropa": "0x1.0cba000000000p-9"
+        },
+        {
+          "modernbert": "0x1.f8eca20000000p-1",
+          "sha256": "e944238feab177bbcde75dcace084ad8d6b63c63a2d09882e76f823a9fe9cb1d",
+          "span": [
+            152,
+            332
+          ],
+          "tropa": "0x1.0b58000000000p-9"
+        },
+        {
+          "modernbert": "0x1.fe38ae0000000p-1",
+          "sha256": "01e42395cbd3ad10cfcf00893feb16bb33f0a2557af8517793b07dce77b1ab57",
+          "span": [
+            184,
+            377
+          ],
+          "tropa": "0x1.81d7000000000p-7"
+        },
+        {
+          "modernbert": "0x1.fd68940000000p-1",
+          "sha256": "f6d7b9617e9f1acb23ca449aea80706195f510929ed2dd9a236f784c809cc32d",
+          "span": [
+            234,
+            423
+          ],
+          "tropa": "0x1.e7c2000000000p-9"
+        },
+        {
+          "modernbert": "0x1.47441c0000000p-2",
+          "sha256": "61c21feae4a4a778b5a1756aeb39c67d75a61612ca92ba20d78859558da69d9c",
+          "span": [
+            333,
+            423
+          ],
+          "tropa": "0x1.703c800000000p-7"
+        }
+      ],
+      "spaces": [
+        2,
+        6,
+        12,
+        17,
+        20,
+        23,
+        28,
+        31,
+        37,
+        41,
+        45,
+        56,
+        63,
+        66,
+        69,
+        78,
+        87,
+        95,
+        101,
+        106,
+        110,
+        117,
+        125,
+        130,
+        134,
+        140,
+        145,
+        151,
+        156,
+        162,
+        166,
+        175,
+        183,
+        189,
+        193,
+        199,
+        204,
+        208,
+        212,
+        219,
+        223,
+        233,
+        238,
+        247,
+        251,
+        257,
+        267,
+        273,
+        277,
+        283,
+        288,
+        294,
+        300,
+        313,
+        321,
+        332,
+        340,
+        345,
+        351,
+        355,
+        366,
+        370,
+        377,
+        382,
+        392,
+        400,
+        402,
+        413,
+        417
+      ],
+      "target": 3,
+      "text_sha256": "d34cd799f1e499c9d5e6def18d5875798b6dcf81114efe4c253351cd884769fe",
+      "truth_indices": [
+        234,
+        235,
+        236,
+        237,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        248,
+        249,
+        250,
+        252,
+        253,
+        254,
+        255,
+        256,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        268,
+        269,
+        270,
+        271,
+        272,
+        274,
+        275,
+        276,
+        278,
+        279,
+        280,
+        281,
+        282,
+        284,
+        285,
+        286,
+        287,
+        289,
+        290,
+        291,
+        292,
+        293,
+        295,
+        296,
+        297,
+        298,
+        299,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331
+      ]
+    },
+    {
+      "characters": 459,
+      "family": "before",
+      "group": "48b9e14bae4c5106",
+      "locations": [],
+      "native": [
+        {
+          "modernbert": "0x1.ed479c0000000p-1",
+          "sha256": "5c60b339e80df0188289a60c7b8fc533394273f44f4c287c2cab7757192c552d",
+          "span": [
+            0,
+            192
+          ],
+          "tropa": "0x1.b0c7f00000000p-4"
+        },
+        {
+          "modernbert": "0x1.fa3db60000000p-1",
+          "sha256": "da9c846597eb2a9bd4c7a8cb0a26421446b7eb2f91e86cfe996218317a14fd98",
+          "span": [
+            0,
+            289
+          ],
+          "tropa": "0x1.31c5580000000p-3"
+        },
+        {
+          "modernbert": "0x1.fac6200000000p-1",
+          "sha256": "cec10014c1e88acf916b8677e63badce7877d2356aaf0ba206557be394e5bc1e",
+          "span": [
+            91,
+            459
+          ],
+          "tropa": "0x1.1159c00000000p-6"
+        },
+        {
+          "modernbert": "0x1.fc75cc0000000p-1",
+          "sha256": "ceb6d8492ee934caebfe9c672082ba84fd5cd43bccff222347058c5544584a8f",
+          "span": [
+            193,
+            459
+          ],
+          "tropa": "0x1.8685a00000000p-4"
+        }
+      ],
+      "spaces": [
+        5,
+        9,
+        18,
+        31,
+        36,
+        45,
+        51,
+        59,
+        63,
+        71,
+        80,
+        83,
+        90,
+        96,
+        102,
+        108,
+        117,
+        123,
+        132,
+        146,
+        151,
+        154,
+        158,
+        163,
+        168,
+        171,
+        177,
+        185,
+        192,
+        196,
+        201,
+        210,
+        213,
+        222,
+        236,
+        240,
+        247,
+        256,
+        267,
+        270,
+        280,
+        289,
+        292,
+        296,
+        306,
+        311,
+        316,
+        326,
+        331,
+        336,
+        339,
+        349,
+        352,
+        359,
+        363,
+        377,
+        388,
+        392,
+        397,
+        407,
+        411,
+        415,
+        429,
+        440,
+        444,
+        449
+      ],
+      "target": 2,
+      "text_sha256": "ded555f367ccda23af5f2b0b7c35cc6e291df54bdad73f67ac5797f33d71be3d",
+      "truth_indices": []
+    },
+    {
+      "characters": 503,
+      "family": "after",
+      "group": "48b9e14bae4c5106",
+      "locations": [
+        [
+          193,
+          197
+        ],
+        [
+          198,
+          203
+        ],
+        [
+          204,
+          213
+        ],
+        [
+          213,
+          214
+        ],
+        [
+          310,
+          311
+        ],
+        [
+          312,
+          321
+        ],
+        [
+          322,
+          332
+        ]
+      ],
+      "native": [
+        {
+          "modernbert": "0x1.ed479c0000000p-1",
+          "sha256": "5c60b339e80df0188289a60c7b8fc533394273f44f4c287c2cab7757192c552d",
+          "span": [
+            0,
+            192
+          ],
+          "tropa": "0x1.b0c7f00000000p-4"
+        },
+        {
+          "modernbert": "0x1.44b0a40000000p-2",
+          "sha256": "cc71da5f9d09187ff372c60e853e4e419a1eeb470ee85cecdeb085819d053a60",
+          "span": [
+            0,
+            311
+          ],
+          "tropa": "0x1.6f55400000000p-6"
+        },
+        {
+          "modernbert": "0x1.17c7e80000000p-5",
+          "sha256": "b8a9f3355da338dc48ec919980df88515ea4026cae3d86deba42334617f34c6f",
+          "span": [
+            91,
+            333
+          ],
+          "tropa": "0x1.cd8b000000000p-6"
+        },
+        {
+          "modernbert": "0x1.2208ee0000000p-3",
+          "sha256": "c02c10f4623611d7fc5439484ffc60f96fbcab5377c67636d435575ad857ecba",
+          "span": [
+            193,
+            503
+          ],
+          "tropa": "0x1.2bcd800000000p-7"
+        },
+        {
+          "modernbert": "0x1.cded120000000p-1",
+          "sha256": "00ac99d9828852827a530cc4d731531cf14d56e2566d7918a8362312d85a3c18",
+          "span": [
+            312,
+            503
+          ],
+          "tropa": "0x1.5fb0e00000000p-5"
+        }
+      ],
+      "spaces": [
+        5,
+        9,
+        18,
+        31,
+        36,
+        45,
+        51,
+        59,
+        63,
+        71,
+        80,
+        83,
+        90,
+        96,
+        102,
+        108,
+        117,
+        123,
+        132,
+        146,
+        151,
+        154,
+        158,
+        163,
+        168,
+        171,
+        177,
+        185,
+        192,
+        197,
+        203,
+        214,
+        218,
+        223,
+        232,
+        235,
+        244,
+        258,
+        262,
+        269,
+        278,
+        289,
+        292,
+        302,
+        311,
+        321,
+        333,
+        336,
+        340,
+        350,
+        355,
+        360,
+        370,
+        375,
+        380,
+        383,
+        393,
+        396,
+        403,
+        407,
+        421,
+        432,
+        436,
+        441,
+        451,
+        455,
+        459,
+        473,
+        484,
+        488,
+        493
+      ],
+      "target": 2,
+      "text_sha256": "c22b3fd7c053c249c6c4b351b9ca2265876e0d26f6ef9362346f4870aebc8232",
+      "truth_indices": []
+    },
+    {
+      "characters": 478,
+      "family": "granite",
+      "group": "48b9e14bae4c5106",
+      "locations": [
+        [
+          193,
+          195
+        ],
+        [
+          196,
+          201
+        ],
+        [
+          202,
+          207
+        ],
+        [
+          217,
+          227
+        ],
+        [
+          229,
+          234
+        ],
+        [
+          235,
+          237
+        ],
+        [
+          255,
+          256
+        ],
+        [
+          257,
+          262
+        ],
+        [
+          263,
+          272
+        ],
+        [
+          273,
+          276
+        ],
+        [
+          277,
+          285
+        ],
+        [
+          289,
+          299
+        ],
+        [
+          300,
+          307
+        ]
+      ],
+      "native": [
+        {
+          "modernbert": "0x1.ed479c0000000p-1",
+          "sha256": "5c60b339e80df0188289a60c7b8fc533394273f44f4c287c2cab7757192c552d",
+          "span": [
+            0,
+            192
+          ],
+          "tropa": "0x1.b0c7f00000000p-4"
+        },
+        {
+          "modernbert": "0x1.fdced60000000p-1",
+          "sha256": "db76a9e84c038a16726711065ebfe8e37f3aad22a94449d279092015f4961c47",
+          "span": [
+            0,
+            308
+          ],
+          "tropa": "0x1.f02f5a0000000p-1"
+        },
+        {
+          "modernbert": "0x1.fd3de40000000p-1",
+          "sha256": "b460ae9c66cf67d17bbe6bb604f7dba6513607fd7ebbf9fca5b99d5cf5099bf1",
+          "span": [
+            91,
+            478
+          ],
+          "tropa": "0x1.0986a00000000p-3"
+        },
+        {
+          "modernbert": "0x1.fba1d60000000p-1",
+          "sha256": "40febfcf4188b5407cbc757d9e041ac02b18760023a1346a4b501710a3448597",
+          "span": [
+            193,
+            478
+          ],
+          "tropa": "0x1.59be380000000p-2"
+        }
+      ],
+      "spaces": [
+        5,
+        9,
+        18,
+        31,
+        36,
+        45,
+        51,
+        59,
+        63,
+        71,
+        80,
+        83,
+        90,
+        96,
+        102,
+        108,
+        117,
+        123,
+        132,
+        146,
+        151,
+        154,
+        158,
+        163,
+        168,
+        171,
+        177,
+        185,
+        192,
+        195,
+        201,
+        207,
+        216,
+        228,
+        234,
+        237,
+        244,
+        253,
+        256,
+        262,
+        272,
+        276,
+        285,
+        288,
+        299,
+        308,
+        311,
+        315,
+        325,
+        330,
+        335,
+        345,
+        350,
+        355,
+        358,
+        368,
+        371,
+        378,
+        382,
+        396,
+        407,
+        411,
+        416,
+        426,
+        430,
+        434,
+        448,
+        459,
+        463,
+        468
+      ],
+      "target": 2,
+      "text_sha256": "31f7a758e068482abb5bb78101267e9627d02c52b9a056bc086257e472d1822b",
+      "truth_indices": [
+        193,
+        194,
+        196,
+        197,
+        198,
+        199,
+        200,
+        202,
+        203,
+        204,
+        205,
+        206,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        229,
+        230,
+        231,
+        232,
+        233,
+        235,
+        236,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        254,
+        255,
+        257,
+        258,
+        259,
+        260,
+        261,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        273,
+        274,
+        275,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        286,
+        287,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307
+      ]
+    },
+    {
+      "characters": 489,
+      "family": "before",
+      "group": "3ce7b858d437ccf5",
+      "locations": [],
+      "native": [
+        {
+          "modernbert": "0x1.84ae740000000p-3",
+          "sha256": "9dc0f2f78dd0253b919eb279b5ce3e79887f923d6fae90df7f297fea536af67f",
+          "span": [
+            0,
+            143
+          ],
+          "tropa": "0x1.2861e00000000p-5"
+        },
+        {
+          "modernbert": "0x1.fdefd80000000p-7",
+          "sha256": "6267017384825389038661e813405d02cccd8e0fa7108f31511cf6ebbecc8953",
+          "span": [
+            0,
+            204
+          ],
+          "tropa": "0x1.7857800000000p-7"
+        },
+        {
+          "modernbert": "0x1.abc15c0000000p-8",
+          "sha256": "d06e7c046663949aaeff96350f829af7417df0038c2c6f1533e6f9515e1035cb",
+          "span": [
+            66,
+            279
+          ],
+          "tropa": "0x1.89ed800000000p-6"
+        },
+        {
+          "modernbert": "0x1.4bb2b40000000p-7",
+          "sha256": "3223932adee280d1a79e738f8eb5881e13ed4903612eba54e893557a253e3d2e",
+          "span": [
+            144,
+            429
+          ],
+          "tropa": "0x1.8fc58c0000000p-1"
+        },
+        {
+          "modernbert": "0x1.3018ca0000000p-7",
+          "sha256": "ea3b2fc59d022071057174d746fcdb57f4dc9ddbda8ce6e6ba117bbbadf70e32",
+          "span": [
+            205,
+            489
+          ],
+          "tropa": "0x1.5792c00000000p-5"
+        },
+        {
+          "modernbert": "0x1.43e3a60000000p-1",
+          "sha256": "8c99f83eee8f6f03d4bdcec199a47915152fedeba5d972223c6e356c0d8c88c4",
+          "span": [
+            280,
+            489
+          ],
+          "tropa": "0x1.8148c00000000p-6"
+        }
+      ],
+      "spaces": [
+        2,
+        11,
+        15,
+        22,
+        25,
+        29,
+        32,
+        39,
+        45,
+        52,
+        54,
+        65,
+        69,
+        78,
+        81,
+        90,
+        94,
+        101,
+        104,
+        111,
+        118,
+        125,
+        127,
+        136,
+        143,
+        148,
+        154,
+        158,
+        165,
+        168,
+        176,
+        178,
+        185,
+        189,
+        194,
+        196,
+        204,
+        208,
+        217,
+        222,
+        226,
+        230,
+        238,
+        241,
+        245,
+        250,
+        255,
+        258,
+        262,
+        267,
+        270,
+        279,
+        282,
+        287,
+        297,
+        300,
+        304,
+        307,
+        315,
+        324,
+        333,
+        342,
+        346,
+        357,
+        363,
+        366,
+        370,
+        377,
+        384,
+        387,
+        398,
+        403,
+        412,
+        416,
+        421,
+        429,
+        434,
+        440,
+        448,
+        455,
+        463,
+        466,
+        469,
+        477
+      ],
+      "target": 2,
+      "text_sha256": "fed7561c322b64d0d50b99edf5dfaa27aad07aa147fee7a52e81a987f55de3e2",
+      "truth_indices": []
+    },
+    {
+      "characters": 474,
+      "family": "after",
+      "group": "3ce7b858d437ccf5",
+      "locations": [
+        [
+          144,
+          153
+        ],
+        [
+          159,
+          166
+        ],
+        [
+          168,
+          173
+        ],
+        [
+          174,
+          178
+        ],
+        [
+          179,
+          181
+        ],
+        [
+          182,
+          186
+        ],
+        [
+          187,
+          192
+        ],
+        [
+          193,
+          199
+        ],
+        [
+          239,
+          240
+        ],
+        [
+          241,
+          244
+        ],
+        [
+          245,
+          247
+        ],
+        [
+          248,
+          255
+        ],
+        [
+          256,
+          263
+        ]
+      ],
+      "native": [
+        {
+          "modernbert": "0x1.84ae740000000p-3",
+          "sha256": "9dc0f2f78dd0253b919eb279b5ce3e79887f923d6fae90df7f297fea536af67f",
+          "span": [
+            0,
+            143
+          ],
+          "tropa": "0x1.2861e00000000p-5"
+        },
+        {
+          "modernbert": "0x1.0a2a940000000p-4",
+          "sha256": "d5bfc8f398ec13e13ea94f44d208422f6b95db0574b72f0eaed151e16aac5233",
+          "span": [
+            0,
+            167
+          ],
+          "tropa": "0x1.ee42000000000p-9"
+        },
+        {
+          "modernbert": "0x1.63667c0000000p-7",
+          "sha256": "6c7f3631c1a2561196234debd520d62e24dc8d60c63ddd0bf8a52e09205cc826",
+          "span": [
+            66,
+            240
+          ],
+          "tropa": "0x1.19ab000000000p-8"
+        },
+        {
+          "modernbert": "0x1.99a6960000000p-3",
+          "sha256": "0519e562eed8b3260d0aa5cc9e23a3a9c6f569872d593f5cc0ebe4ac417f6e65",
+          "span": [
+            144,
+            264
+          ],
+          "tropa": "0x1.d872000000000p-9"
+        },
+        {
+          "modernbert": "0x1.2c3e700000000p-6",
+          "sha256": "cd40ed1d933342b632d56f3cf136b38f58c4ab2e850b04092047864850cb7cb3",
+          "span": [
+            168,
+            414
+          ],
+          "tropa": "0x1.9a62000000000p-8"
+        },
+        {
+          "modernbert": "0x1.24d97c0000000p-6",
+          "sha256": "4cc8d5fc5b94cb5eef78e7f167490b129e7408ce8d781d6d2b6498d170833e90",
+          "span": [
+            241,
+            474
+          ],
+          "tropa": "0x1.8f30600000000p-5"
+        },
+        {
+          "modernbert": "0x1.43e3a60000000p-1",
+          "sha256": "8c99f83eee8f6f03d4bdcec199a47915152fedeba5d972223c6e356c0d8c88c4",
+          "span": [
+            265,
+            474
+          ],
+          "tropa": "0x1.8148c00000000p-6"
+        }
+      ],
+      "spaces": [
+        2,
+        11,
+        15,
+        22,
+        25,
+        29,
+        32,
+        39,
+        45,
+        52,
+        54,
+        65,
+        69,
+        78,
+        81,
+        90,
+        94,
+        101,
+        104,
+        111,
+        118,
+        125,
+        127,
+        136,
+        143,
+        153,
+        158,
+        167,
+        173,
+        178,
+        181,
+        186,
+        192,
+        199,
+        202,
+        206,
+        211,
+        216,
+        219,
+        223,
+        228,
+        231,
+        240,
+        244,
+        247,
+        255,
+        264,
+        267,
+        272,
+        282,
+        285,
+        289,
+        292,
+        300,
+        309,
+        318,
+        327,
+        331,
+        342,
+        348,
+        351,
+        355,
+        362,
+        369,
+        372,
+        383,
+        388,
+        397,
+        401,
+        406,
+        414,
+        419,
+        425,
+        433,
+        440,
+        448,
+        451,
+        454,
+        462
+      ],
+      "target": 2,
+      "text_sha256": "2307c9ca2aa12602f1e9440828a7adc1f80f4309b34495728204c35fc17cd850",
+      "truth_indices": []
+    },
+    {
+      "characters": 506,
+      "family": "granite",
+      "group": "3ce7b858d437ccf5",
+      "locations": [
+        [
+          144,
+          149
+        ],
+        [
+          150,
+          155
+        ],
+        [
+          156,
+          159
+        ],
+        [
+          160,
+          162
+        ],
+        [
+          176,
+          179
+        ],
+        [
+          188,
+          189
+        ],
+        [
+          190,
+          197
+        ],
+        [
+          198,
+          200
+        ],
+        [
+          201,
+          210
+        ],
+        [
+          211,
+          220
+        ]
+      ],
+      "native": [
+        {
+          "modernbert": "0x1.84ae740000000p-3",
+          "sha256": "9dc0f2f78dd0253b919eb279b5ce3e79887f923d6fae90df7f297fea536af67f",
+          "span": [
+            0,
+            143
+          ],
+          "tropa": "0x1.2861e00000000p-5"
+        },
+        {
+          "modernbert": "0x1.42344e0000000p-5",
+          "sha256": "a67d8782d8ea5275c856ab27603c3909cea609f529104f78d6e24c3ef161b1fd",
+          "span": [
+            0,
+            221
+          ],
+          "tropa": "0x1.d3c4400000000p-6"
+        },
+        {
+          "modernbert": "0x1.97ec3a0000000p-7",
+          "sha256": "91bd35f557a02375fb27c56c20e2ea06f420f27df72a81f9986347f6bfca3d31",
+          "span": [
+            66,
+            296
+          ],
+          "tropa": "0x1.caf1400000000p-5"
+        },
+        {
+          "modernbert": "0x1.b5389e0000000p-5",
+          "sha256": "f9fd5536b56631e786574a23b3d0bc9590d339ca3ac04972966581c19d6c5f37",
+          "span": [
+            144,
+            446
+          ],
+          "tropa": "0x1.21dd000000000p-1"
+        },
+        {
+          "modernbert": "0x1.3018ca0000000p-7",
+          "sha256": "ea3b2fc59d022071057174d746fcdb57f4dc9ddbda8ce6e6ba117bbbadf70e32",
+          "span": [
+            222,
+            506
+          ],
+          "tropa": "0x1.5792c00000000p-5"
+        },
+        {
+          "modernbert": "0x1.43e3a60000000p-1",
+          "sha256": "8c99f83eee8f6f03d4bdcec199a47915152fedeba5d972223c6e356c0d8c88c4",
+          "span": [
+            297,
+            506
+          ],
+          "tropa": "0x1.8148c00000000p-6"
+        }
+      ],
+      "spaces": [
+        2,
+        11,
+        15,
+        22,
+        25,
+        29,
+        32,
+        39,
+        45,
+        52,
+        54,
+        65,
+        69,
+        78,
+        81,
+        90,
+        94,
+        101,
+        104,
+        111,
+        118,
+        125,
+        127,
+        136,
+        143,
+        149,
+        155,
+        159,
+        162,
+        164,
+        171,
+        175,
+        179,
+        181,
+        189,
+        197,
+        200,
+        210,
+        221,
+        225,
+        234,
+        239,
+        243,
+        247,
+        255,
+        258,
+        262,
+        267,
+        272,
+        275,
+        279,
+        284,
+        287,
+        296,
+        299,
+        304,
+        314,
+        317,
+        321,
+        324,
+        332,
+        341,
+        350,
+        359,
+        363,
+        374,
+        380,
+        383,
+        387,
+        394,
+        401,
+        404,
+        415,
+        420,
+        429,
+        433,
+        438,
+        446,
+        451,
+        457,
+        465,
+        472,
+        480,
+        483,
+        486,
+        494
+      ],
+      "target": 2,
+      "text_sha256": "28a7d543bce31c2ff798fb5a8f2899428bf4a11ba0e39f9ededf58d3d261d301",
+      "truth_indices": [
+        144,
+        145,
+        146,
+        147,
+        148,
+        150,
+        151,
+        152,
+        153,
+        154,
+        156,
+        157,
+        158,
+        160,
+        161,
+        163,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        172,
+        173,
+        174,
+        176,
+        177,
+        178,
+        180,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        198,
+        199,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220
+      ]
+    },
+    {
+      "characters": 546,
+      "family": "olmo",
+      "group": "3ce7b858d437ccf5",
+      "locations": [
+        [
+          203,
+          204
+        ],
+        [
+          205,
+          211
+        ],
+        [
+          212,
+          216
+        ],
+        [
+          217,
+          228
+        ],
+        [
+          229,
+          236
+        ],
+        [
+          237,
+          246
+        ],
+        [
+          247,
+          249
+        ],
+        [
+          250,
+          260
+        ]
+      ],
+      "native": [
+        {
+          "modernbert": "0x1.84ae740000000p-3",
+          "sha256": "9dc0f2f78dd0253b919eb279b5ce3e79887f923d6fae90df7f297fea536af67f",
+          "span": [
+            0,
+            143
+          ],
+          "tropa": "0x1.2861e00000000p-5"
+        },
+        {
+          "modernbert": "0x1.b2d9d40000000p-6",
+          "sha256": "c75d1a2fe7e8e01d56618c7b06c4431171499f670ab841903b183b265332909d",
+          "span": [
+            0,
+            261
+          ],
+          "tropa": "0x1.2ca0800000000p-6"
+        },
+        {
+          "modernbert": "0x1.c807f80000000p-6",
+          "sha256": "11f71e8b5ce9861fe00c53aa310bf0a6063475038dad83921b503b2b72a72251",
+          "span": [
+            66,
+            336
+          ],
+          "tropa": "0x1.ba6f600000000p-5"
+        },
+        {
+          "modernbert": "0x1.8f40340000000p-4",
+          "sha256": "de56a55da522f3a280279364061d574c4c95fb610d668f6be704d27e43e3adcf",
+          "span": [
+            144,
+            486
+          ],
+          "tropa": "0x1.40dc100000000p-1"
+        },
+        {
+          "modernbert": "0x1.3018ca0000000p-7",
+          "sha256": "ea3b2fc59d022071057174d746fcdb57f4dc9ddbda8ce6e6ba117bbbadf70e32",
+          "span": [
+            262,
+            546
+          ],
+          "tropa": "0x1.5792c00000000p-5"
+        },
+        {
+          "modernbert": "0x1.43e3a60000000p-1",
+          "sha256": "8c99f83eee8f6f03d4bdcec199a47915152fedeba5d972223c6e356c0d8c88c4",
+          "span": [
+            337,
+            546
+          ],
+          "tropa": "0x1.8148c00000000p-6"
+        }
+      ],
+      "spaces": [
+        2,
+        11,
+        15,
+        22,
+        25,
+        29,
+        32,
+        39,
+        45,
+        52,
+        54,
+        65,
+        69,
+        78,
+        81,
+        90,
+        94,
+        101,
+        104,
+        111,
+        118,
+        125,
+        127,
+        136,
+        143,
+        148,
+        154,
+        158,
+        165,
+        168,
+        176,
+        178,
+        185,
+        189,
+        194,
+        196,
+        204,
+        211,
+        216,
+        228,
+        236,
+        246,
+        249,
+        261,
+        265,
+        274,
+        279,
+        283,
+        287,
+        295,
+        298,
+        302,
+        307,
+        312,
+        315,
+        319,
+        324,
+        327,
+        336,
+        339,
+        344,
+        354,
+        357,
+        361,
+        364,
+        372,
+        381,
+        390,
+        399,
+        403,
+        414,
+        420,
+        423,
+        427,
+        434,
+        441,
+        444,
+        455,
+        460,
+        469,
+        473,
+        478,
+        486,
+        491,
+        497,
+        505,
+        512,
+        520,
+        523,
+        526,
+        534
+      ],
+      "target": 2,
+      "text_sha256": "d64ee358d89331d08ff9b61e3414832991834bd12b3c9d43af995a0337b8e4cd",
+      "truth_indices": [
+        144,
+        145,
+        146,
+        147,
+        149,
+        150,
+        151,
+        152,
+        153,
+        155,
+        156,
+        157,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        166,
+        167,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        177,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        186,
+        187,
+        188,
+        190,
+        191,
+        192,
+        193,
+        195,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        212,
+        213,
+        214,
+        215,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        247,
+        248,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260
+      ]
+    },
+    {
+      "characters": 411,
+      "family": "before",
+      "group": "21b46d94ddca4a49",
+      "locations": [],
+      "native": [
+        {
+          "modernbert": "0x1.4457ea0000000p-6",
+          "sha256": "52a15ef4ad3d87d7977a9788c93003db4a2c69bc5159ba55a3c317704281a1fb",
+          "span": [
+            0,
+            129
+          ],
+          "tropa": "0x1.4234000000000p-9"
+        },
+        {
+          "modernbert": "0x1.0748160000000p-6",
+          "sha256": "be491916c73a4a82c3ba4c0a9bdbd671d2fb99820c461d98ebf5ac5467dcc04d",
+          "span": [
+            0,
+            214
+          ],
+          "tropa": "0x1.fb9aa00000000p-5"
+        },
+        {
+          "modernbert": "0x1.f4faf00000000p-8",
+          "sha256": "f4aa4a098b44d7fe8548bf083fe3e0ef342b55d2417f98b152de9e575bcd57b4",
+          "span": [
+            86,
+            301
+          ],
+          "tropa": "0x1.fb3d5c0000000p-1"
+        },
+        {
+          "modernbert": "0x1.6c74880000000p-7",
+          "sha256": "9a97b6d6c6d39783f0a73d5be07c93c15c40d1081067ed5f619f75a657dbd406",
+          "span": [
+            130,
+            411
+          ],
+          "tropa": "0x1.c9b90e0000000p-1"
+        },
+        {
+          "modernbert": "0x1.7d61600000000p-6",
+          "sha256": "53d8b5a12237b041ab9ff9bc3622776faf6a15c53c48eb9f049a1e5b68ab427e",
+          "span": [
+            215,
+            411
+          ],
+          "tropa": "0x1.dd7cca0000000p-1"
+        }
+      ],
+      "spaces": [
+        2,
+        14,
+        17,
+        22,
+        28,
+        35,
+        39,
+        43,
+        46,
+        51,
+        54,
+        58,
+        63,
+        71,
+        73,
+        80,
+        85,
+        90,
+        94,
+        100,
+        103,
+        109,
+        112,
+        123,
+        129,
+        135,
+        139,
+        146,
+        150,
+        153,
+        156,
+        159,
+        164,
+        167,
+        177,
+        181,
+        183,
+        191,
+        194,
+        197,
+        208,
+        214,
+        219,
+        226,
+        232,
+        235,
+        241,
+        250,
+        257,
+        263,
+        267,
+        273,
+        276,
+        281,
+        284,
+        288,
+        292,
+        295,
+        301,
+        305,
+        310,
+        316,
+        320,
+        324,
+        330,
+        337,
+        344,
+        348,
+        355,
+        358,
+        361,
+        364,
+        372,
+        380,
+        384,
+        391,
+        397,
+        404
+      ],
+      "target": 2,
+      "text_sha256": "bb549689e95ed7a0fc5b05bc98e25d802b73b6d8c93d8497c2e67377b104dd5a",
+      "truth_indices": []
+    },
+    {
+      "characters": 417,
+      "family": "after",
+      "group": "21b46d94ddca4a49",
+      "locations": [
+        [
+          147,
+          156
+        ]
+      ],
+      "native": [
+        {
+          "modernbert": "0x1.4457ea0000000p-6",
+          "sha256": "52a15ef4ad3d87d7977a9788c93003db4a2c69bc5159ba55a3c317704281a1fb",
+          "span": [
+            0,
+            129
+          ],
+          "tropa": "0x1.4234000000000p-9"
+        },
+        {
+          "modernbert": "0x1.5dd9740000000p-5",
+          "sha256": "6b539e7ff12c87a75937f803f41a838548b2c508d8056b48919d40eae4b7b998",
+          "span": [
+            0,
+            220
+          ],
+          "tropa": "0x1.0e2f400000000p-6"
+        },
+        {
+          "modernbert": "0x1.6286460000000p-7",
+          "sha256": "ba2ab4a654272dfa351459295b59effd3fdee17168f77f5b6bf6c85191d9e9d4",
+          "span": [
+            86,
+            307
+          ],
+          "tropa": "0x1.d1ffec0000000p-1"
+        },
+        {
+          "modernbert": "0x1.92d9240000000p-7",
+          "sha256": "c649603e6334a70fa33a8e7109622d620d2b33349f1936a0bc8e701ccfd0fb0d",
+          "span": [
+            130,
+            417
+          ],
+          "tropa": "0x1.a927fa0000000p-1"
+        },
+        {
+          "modernbert": "0x1.7d61600000000p-6",
+          "sha256": "53d8b5a12237b041ab9ff9bc3622776faf6a15c53c48eb9f049a1e5b68ab427e",
+          "span": [
+            221,
+            417
+          ],
+          "tropa": "0x1.dd7cca0000000p-1"
+        }
+      ],
+      "spaces": [
+        2,
+        14,
+        17,
+        22,
+        28,
+        35,
+        39,
+        43,
+        46,
+        51,
+        54,
+        58,
+        63,
+        71,
+        73,
+        80,
+        85,
+        90,
+        94,
+        100,
+        103,
+        109,
+        112,
+        123,
+        129,
+        135,
+        139,
+        146,
+        156,
+        159,
+        162,
+        165,
+        170,
+        173,
+        183,
+        187,
+        189,
+        197,
+        200,
+        203,
+        214,
+        220,
+        225,
+        232,
+        238,
+        241,
+        247,
+        256,
+        263,
+        269,
+        273,
+        279,
+        282,
+        287,
+        290,
+        294,
+        298,
+        301,
+        307,
+        311,
+        316,
+        322,
+        326,
+        330,
+        336,
+        343,
+        350,
+        354,
+        361,
+        364,
+        367,
+        370,
+        378,
+        386,
+        390,
+        397,
+        403,
+        410
+      ],
+      "target": 2,
+      "text_sha256": "d6539b30a0517d5bf5386b4b0ab8f0c403daf06e3c4fabd1b0fbd9cf16e41dc2",
+      "truth_indices": []
+    },
+    {
+      "characters": 421,
+      "family": "granite",
+      "group": "21b46d94ddca4a49",
+      "locations": [
+        [
+          130,
+          134
+        ],
+        [
+          150,
+          157
+        ],
+        [
+          158,
+          164
+        ],
+        [
+          168,
+          172
+        ],
+        [
+          173,
+          178
+        ],
+        [
+          182,
+          190
+        ],
+        [
+          192,
+          194
+        ],
+        [
+          195,
+          199
+        ],
+        [
+          200,
+          204
+        ]
+      ],
+      "native": [
+        {
+          "modernbert": "0x1.4457ea0000000p-6",
+          "sha256": "52a15ef4ad3d87d7977a9788c93003db4a2c69bc5159ba55a3c317704281a1fb",
+          "span": [
+            0,
+            129
+          ],
+          "tropa": "0x1.4234000000000p-9"
+        },
+        {
+          "modernbert": "0x1.4835a80000000p-4",
+          "sha256": "5ca3cd9d8d9bea546392ec51f0b348699a66c7eb7d5cc347285674c3db06bc49",
+          "span": [
+            0,
+            224
+          ],
+          "tropa": "0x1.5c8b800000000p-6"
+        },
+        {
+          "modernbert": "0x1.5042640000000p-4",
+          "sha256": "7a917201f820fa0a0ae71905f6436e765562effac6635fa1b31dae525bdc3419",
+          "span": [
+            86,
+            311
+          ],
+          "tropa": "0x1.a8749e0000000p-1"
+        },
+        {
+          "modernbert": "0x1.0602920000000p-1",
+          "sha256": "7bed98c6119e4094ee5fab55c74dea43ae906a35bc65121366b633a86be0ef80",
+          "span": [
+            130,
+            421
+          ],
+          "tropa": "0x1.bd0c400000000p-2"
+        },
+        {
+          "modernbert": "0x1.7d61600000000p-6",
+          "sha256": "53d8b5a12237b041ab9ff9bc3622776faf6a15c53c48eb9f049a1e5b68ab427e",
+          "span": [
+            225,
+            421
+          ],
+          "tropa": "0x1.dd7cca0000000p-1"
+        }
+      ],
+      "spaces": [
+        2,
+        14,
+        17,
+        22,
+        28,
+        35,
+        39,
+        43,
+        46,
+        51,
+        54,
+        58,
+        63,
+        71,
+        73,
+        80,
+        85,
+        90,
+        94,
+        100,
+        103,
+        109,
+        112,
+        123,
+        129,
+        134,
+        138,
+        145,
+        149,
+        157,
+        164,
+        167,
+        172,
+        178,
+        181,
+        191,
+        194,
+        199,
+        204,
+        207,
+        218,
+        224,
+        229,
+        236,
+        242,
+        245,
+        251,
+        260,
+        267,
+        273,
+        277,
+        283,
+        286,
+        291,
+        294,
+        298,
+        302,
+        305,
+        311,
+        315,
+        320,
+        326,
+        330,
+        334,
+        340,
+        347,
+        354,
+        358,
+        365,
+        368,
+        371,
+        374,
+        382,
+        390,
+        394,
+        401,
+        407,
+        414
+      ],
+      "target": 2,
+      "text_sha256": "460f78b2dd13072d759b5370ea7d2f6aa37998185a03f96a6d3d054b4dab19ec",
+      "truth_indices": [
+        130,
+        131,
+        132,
+        133,
+        135,
+        136,
+        137,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        146,
+        147,
+        148,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        165,
+        166,
+        168,
+        169,
+        170,
+        171,
+        173,
+        174,
+        175,
+        176,
+        177,
+        179,
+        180,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        192,
+        193,
+        195,
+        196,
+        197,
+        198,
+        200,
+        201,
+        202,
+        203,
+        205,
+        206,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        219,
+        220,
+        221,
+        222,
+        223
+      ]
+    },
+    {
+      "characters": 434,
+      "family": "olmo",
+      "group": "21b46d94ddca4a49",
+      "locations": [
+        [
+          130,
+          136
+        ],
+        [
+          137,
+          141
+        ],
+        [
+          142,
+          143
+        ],
+        [
+          155,
+          167
+        ],
+        [
+          178,
+          183
+        ],
+        [
+          201,
+          203
+        ],
+        [
+          204,
+          209
+        ],
+        [
+          210,
+          213
+        ],
+        [
+          214,
+          221
+        ],
+        [
+          222,
+          228
+        ],
+        [
+          229,
+          236
+        ]
+      ],
+      "native": [
+        {
+          "modernbert": "0x1.4457ea0000000p-6",
+          "sha256": "52a15ef4ad3d87d7977a9788c93003db4a2c69bc5159ba55a3c317704281a1fb",
+          "span": [
+            0,
+            129
+          ],
+          "tropa": "0x1.4234000000000p-9"
+        },
+        {
+          "modernbert": "0x1.4c3a0e0000000p-2",
+          "sha256": "0f08c79f2c920c707d739302cef38d33ab0b75374f012f98f55e294ac9181190",
+          "span": [
+            0,
+            237
+          ],
+          "tropa": "0x1.8280000000000p-7"
+        },
+        {
+          "modernbert": "0x1.653abe0000000p-1",
+          "sha256": "1e834c152b5371b82f9df9a7df43c030caa167209354b8ca2dbef7fcc179d7e6",
+          "span": [
+            86,
+            324
+          ],
+          "tropa": "0x1.56e2c80000000p-1"
+        },
+        {
+          "modernbert": "0x1.fa59120000000p-1",
+          "sha256": "79b8953d6b6c992271be197949a47ee414b63d4f3a6e2b95da303fdaedca5c17",
+          "span": [
+            130,
+            434
+          ],
+          "tropa": "0x1.0a67020000000p-1"
+        },
+        {
+          "modernbert": "0x1.7d61600000000p-6",
+          "sha256": "53d8b5a12237b041ab9ff9bc3622776faf6a15c53c48eb9f049a1e5b68ab427e",
+          "span": [
+            238,
+            434
+          ],
+          "tropa": "0x1.dd7cca0000000p-1"
+        }
+      ],
+      "spaces": [
+        2,
+        14,
+        17,
+        22,
+        28,
+        35,
+        39,
+        43,
+        46,
+        51,
+        54,
+        58,
+        63,
+        71,
+        73,
+        80,
+        85,
+        90,
+        94,
+        100,
+        103,
+        109,
+        112,
+        123,
+        129,
+        136,
+        141,
+        143,
+        150,
+        154,
+        167,
+        169,
+        177,
+        183,
+        186,
+        189,
+        200,
+        203,
+        209,
+        213,
+        221,
+        228,
+        237,
+        242,
+        249,
+        255,
+        258,
+        264,
+        273,
+        280,
+        286,
+        290,
+        296,
+        299,
+        304,
+        307,
+        311,
+        315,
+        318,
+        324,
+        328,
+        333,
+        339,
+        343,
+        347,
+        353,
+        360,
+        367,
+        371,
+        378,
+        381,
+        384,
+        387,
+        395,
+        403,
+        407,
+        414,
+        420,
+        427
+      ],
+      "target": 2,
+      "text_sha256": "4d1862be964ab0ad5b4feddddd95335f9225ba755369d0a480d54135dd124851",
+      "truth_indices": [
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        137,
+        138,
+        139,
+        140,
+        142,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        151,
+        152,
+        153,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        168,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        178,
+        179,
+        180,
+        181,
+        182,
+        184,
+        185,
+        187,
+        188,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        201,
+        202,
+        204,
+        205,
+        206,
+        207,
+        208,
+        210,
+        211,
+        212,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236
+      ]
+    },
+    {
+      "characters": 555,
+      "family": "before",
+      "group": "ae543c1bb1e2a296",
+      "locations": [],
+      "native": [
+        {
+          "modernbert": "0x1.0a10b40000000p-1",
+          "sha256": "8a4cf914fbee8b7b726a592570be95d470f2e9311410f3ab641b5facdb977ba8",
+          "span": [
+            0,
+            271
+          ],
+          "tropa": "0x1.9056000000000p-8"
+        },
+        {
+          "modernbert": "0x1.ef06a80000000p-5",
+          "sha256": "a71e27d01faa8ee593137aac7b1e9b7d27028e5da63ec1345869e5c9338053cb",
+          "span": [
+            0,
+            437
+          ],
+          "tropa": "0x1.ca05000000000p-7"
+        },
+        {
+          "modernbert": "0x1.e360940000000p-1",
+          "sha256": "ad253a21a92a1bef9c9e1badeef164e91a7864e2e2bdcfe83987fa776faea307",
+          "span": [
+            116,
+            465
+          ],
+          "tropa": "0x1.6201000000000p-7"
+        },
+        {
+          "modernbert": "0x1.fbb1fc0000000p-1",
+          "sha256": "382d32cd2de31f08ff4a5e5ea876a8bbb7aa20c9f971378d3e9a16196d2b6487",
+          "span": [
+            272,
+            555
+          ],
+          "tropa": "0x1.5f18600000000p-5"
+        },
+        {
+          "modernbert": "0x1.ebbdac0000000p-1",
+          "sha256": "199963ee90cc78be00f3e11c9fdf20cdd4083869a9d48f096b91a8be55646607",
+          "span": [
+            438,
+            555
+          ],
+          "tropa": "0x1.3d59c00000000p-5"
+        }
+      ],
+      "spaces": [
+        6,
+        16,
+        20,
+        34,
+        40,
+        48,
+        53,
+        57,
+        62,
+        68,
+        73,
+        77,
+        81,
+        83,
+        89,
+        94,
+        97,
+        103,
+        107,
+        115,
+        121,
+        125,
+        132,
+        139,
+        143,
+        147,
+        154,
+        163,
+        170,
+        173,
+        180,
+        187,
+        197,
+        203,
+        210,
+        221,
+        225,
+        233,
+        240,
+        245,
+        249,
+        255,
+        264,
+        271,
+        277,
+        279,
+        286,
+        292,
+        298,
+        303,
+        313,
+        317,
+        328,
+        334,
+        339,
+        344,
+        352,
+        362,
+        366,
+        371,
+        376,
+        384,
+        389,
+        397,
+        411,
+        415,
+        422,
+        426,
+        437,
+        443,
+        451,
+        454,
+        465,
+        475,
+        486,
+        496,
+        506,
+        510,
+        520,
+        526,
+        534,
+        544
+      ],
+      "target": 2,
+      "text_sha256": "4405a77fa10085e557377304718c99133afb9e0fa8e22f0087af3ab3329e980f",
+      "truth_indices": []
+    },
+    {
+      "characters": 546,
+      "family": "after",
+      "group": "ae543c1bb1e2a296",
+      "locations": [
+        [
+          272,
+          274
+        ],
+        [
+          275,
+          280
+        ],
+        [
+          288,
+          294
+        ],
+        [
+          294,
+          295
+        ]
+      ],
+      "native": [
+        {
+          "modernbert": "0x1.0a10b40000000p-1",
+          "sha256": "8a4cf914fbee8b7b726a592570be95d470f2e9311410f3ab641b5facdb977ba8",
+          "span": [
+            0,
+            271
+          ],
+          "tropa": "0x1.9056000000000p-8"
+        },
+        {
+          "modernbert": "0x1.6ff1320000000p-2",
+          "sha256": "b5bba66dcb7fa169ad3828998244c27907ff7764a1c480689cf71edd52856767",
+          "span": [
+            0,
+            428
+          ],
+          "tropa": "0x1.d12d000000000p-7"
+        },
+        {
+          "modernbert": "0x1.e5898c0000000p-1",
+          "sha256": "d417a4d8a0f4e3f0639361910d23adfddc159638579af34eeb0bfc90c0943840",
+          "span": [
+            116,
+            456
+          ],
+          "tropa": "0x1.a608800000000p-7"
+        },
+        {
+          "modernbert": "0x1.f6fd4e0000000p-1",
+          "sha256": "611447da88c448d00ffa6ddb7efdf9e54fbd0e27e3c1a414c336c792f77a5b37",
+          "span": [
+            272,
+            546
+          ],
+          "tropa": "0x1.de4a400000000p-5"
+        },
+        {
+          "modernbert": "0x1.ebbdac0000000p-1",
+          "sha256": "199963ee90cc78be00f3e11c9fdf20cdd4083869a9d48f096b91a8be55646607",
+          "span": [
+            429,
+            546
+          ],
+          "tropa": "0x1.3d59c00000000p-5"
+        }
+      ],
+      "spaces": [
+        6,
+        16,
+        20,
+        34,
+        40,
+        48,
+        53,
+        57,
+        62,
+        68,
+        73,
+        77,
+        81,
+        83,
+        89,
+        94,
+        97,
+        103,
+        107,
+        115,
+        121,
+        125,
+        132,
+        139,
+        143,
+        147,
+        154,
+        163,
+        170,
+        173,
+        180,
+        187,
+        197,
+        203,
+        210,
+        221,
+        225,
+        233,
+        240,
+        245,
+        249,
+        255,
+        264,
+        271,
+        274,
+        280,
+        287,
+        295,
+        305,
+        309,
+        320,
+        326,
+        331,
+        336,
+        344,
+        353,
+        357,
+        362,
+        367,
+        375,
+        380,
+        388,
+        402,
+        406,
+        413,
+        417,
+        428,
+        434,
+        442,
+        445,
+        456,
+        466,
+        477,
+        487,
+        497,
+        501,
+        511,
+        517,
+        525,
+        535
+      ],
+      "target": 2,
+      "text_sha256": "4c53ac2427dacc5276b707333b686b537a4a9ffc0aeed40786f412a2be742391",
+      "truth_indices": []
+    },
+    {
+      "characters": 619,
+      "family": "granite",
+      "group": "ae543c1bb1e2a296",
+      "locations": [
+        [
+          272,
+          281
+        ],
+        [
+          289,
+          295
+        ],
+        [
+          296,
+          303
+        ],
+        [
+          329,
+          331
+        ],
+        [
+          332,
+          340
+        ],
+        [
+          351,
+          353
+        ],
+        [
+          354,
+          369
+        ],
+        [
+          371,
+          377
+        ],
+        [
+          378,
+          382
+        ],
+        [
+          383,
+          395
+        ],
+        [
+          396,
+          405
+        ],
+        [
+          406,
+          416
+        ],
+        [
+          417,
+          422
+        ],
+        [
+          423,
+          429
+        ],
+        [
+          431,
+          436
+        ],
+        [
+          437,
+          448
+        ],
+        [
+          449,
+          452
+        ],
+        [
+          468,
+          474
+        ],
+        [
+          475,
+          486
+        ],
+        [
+          487,
+          491
+        ],
+        [
+          492,
+          500
+        ]
+      ],
+      "native": [
+        {
+          "modernbert": "0x1.0a10b40000000p-1",
+          "sha256": "8a4cf914fbee8b7b726a592570be95d470f2e9311410f3ab641b5facdb977ba8",
+          "span": [
+            0,
+            271
+          ],
+          "tropa": "0x1.9056000000000p-8"
+        },
+        {
+          "modernbert": "0x1.c865e40000000p-1",
+          "sha256": "cf94993f80723a35c5ec0afae783d8b3edcec4151fc6db433713297f3a51039e",
+          "span": [
+            0,
+            501
+          ],
+          "tropa": "0x1.27cb000000000p-7"
+        },
+        {
+          "modernbert": "0x1.fcf3f80000000p-1",
+          "sha256": "31a6581b3d2365f0bc9eefdc365685a8e6caa10e006a78d52b172826dd0c7b56",
+          "span": [
+            116,
+            529
+          ],
+          "tropa": "0x1.556c000000000p-8"
+        },
+        {
+          "modernbert": "0x1.feb5e20000000p-1",
+          "sha256": "18ef51a8bcb0edd56730e00d087e93a18f6a91d6c40fa01efb0464a68c382c81",
+          "span": [
+            272,
+            619
+          ],
+          "tropa": "0x1.3f74c00000000p-6"
+        },
+        {
+          "modernbert": "0x1.ebbdac0000000p-1",
+          "sha256": "199963ee90cc78be00f3e11c9fdf20cdd4083869a9d48f096b91a8be55646607",
+          "span": [
+            502,
+            619
+          ],
+          "tropa": "0x1.3d59c00000000p-5"
+        }
+      ],
+      "spaces": [
+        6,
+        16,
+        20,
+        34,
+        40,
+        48,
+        53,
+        57,
+        62,
+        68,
+        73,
+        77,
+        81,
+        83,
+        89,
+        94,
+        97,
+        103,
+        107,
+        115,
+        121,
+        125,
+        132,
+        139,
+        143,
+        147,
+        154,
+        163,
+        170,
+        173,
+        180,
+        187,
+        197,
+        203,
+        210,
+        221,
+        225,
+        233,
+        240,
+        245,
+        249,
+        255,
+        264,
+        271,
+        281,
+        288,
+        295,
+        303,
+        313,
+        317,
+        328,
+        331,
+        340,
+        345,
+        350,
+        353,
+        370,
+        377,
+        382,
+        395,
+        405,
+        416,
+        422,
+        430,
+        436,
+        448,
+        452,
+        456,
+        463,
+        467,
+        474,
+        486,
+        491,
+        501,
+        507,
+        515,
+        518,
+        529,
+        539,
+        550,
+        560,
+        570,
+        574,
+        584,
+        590,
+        598,
+        608
+      ],
+      "target": 2,
+      "text_sha256": "c3a46a43a52fd1b23b88c224da55e2b49ff88001921437e164ef6b93792522bc",
+      "truth_indices": [
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        314,
+        315,
+        316,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        329,
+        330,
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338,
+        339,
+        341,
+        342,
+        343,
+        344,
+        346,
+        347,
+        348,
+        349,
+        351,
+        352,
+        354,
+        355,
+        356,
+        357,
+        358,
+        359,
+        360,
+        361,
+        362,
+        363,
+        364,
+        365,
+        366,
+        367,
+        368,
+        369,
+        371,
+        372,
+        373,
+        374,
+        375,
+        376,
+        378,
+        379,
+        380,
+        381,
+        383,
+        384,
+        385,
+        386,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        396,
+        397,
+        398,
+        399,
+        400,
+        401,
+        402,
+        403,
+        404,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        417,
+        418,
+        419,
+        420,
+        421,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        431,
+        432,
+        433,
+        434,
+        435,
+        437,
+        438,
+        439,
+        440,
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        449,
+        450,
+        451,
+        453,
+        454,
+        455,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        464,
+        465,
+        466,
+        468,
+        469,
+        470,
+        471,
+        472,
+        473,
+        475,
+        476,
+        477,
+        478,
+        479,
+        480,
+        481,
+        482,
+        483,
+        484,
+        485,
+        487,
+        488,
+        489,
+        490,
+        492,
+        493,
+        494,
+        495,
+        496,
+        497,
+        498,
+        499,
+        500
+      ]
+    },
+    {
+      "characters": 556,
+      "family": "olmo",
+      "group": "ae543c1bb1e2a296",
+      "locations": [
+        [
+          272,
+          281
+        ],
+        [
+          330,
+          332
+        ],
+        [
+          333,
+          338
+        ],
+        [
+          339,
+          340
+        ],
+        [
+          341,
+          347
+        ],
+        [
+          348,
+          353
+        ],
+        [
+          355,
+          364
+        ],
+        [
+          365,
+          367
+        ]
+      ],
+      "native": [
+        {
+          "modernbert": "0x1.0a10b40000000p-1",
+          "sha256": "8a4cf914fbee8b7b726a592570be95d470f2e9311410f3ab641b5facdb977ba8",
+          "span": [
+            0,
+            271
+          ],
+          "tropa": "0x1.9056000000000p-8"
+        },
+        {
+          "modernbert": "0x1.5e6ade0000000p-5",
+          "sha256": "30f3ea31988a4dc0eccc54e164da8294b77ff33e511b2f2914083462efd6c6b2",
+          "span": [
+            0,
+            438
+          ],
+          "tropa": "0x1.d6cd000000000p-7"
+        },
+        {
+          "modernbert": "0x1.f114fa0000000p-1",
+          "sha256": "686b15bface10f7800d1deb0b17137301eb7b174351ecc930882df6fe58312bd",
+          "span": [
+            116,
+            466
+          ],
+          "tropa": "0x1.5cae000000000p-7"
+        },
+        {
+          "modernbert": "0x1.febd240000000p-1",
+          "sha256": "8341ef996568fde369ccbc2216a69eb253579acb4982e9c2c0b2b47a9710d2ae",
+          "span": [
+            272,
+            556
+          ],
+          "tropa": "0x1.42eb600000000p-5"
+        },
+        {
+          "modernbert": "0x1.ebbdac0000000p-1",
+          "sha256": "199963ee90cc78be00f3e11c9fdf20cdd4083869a9d48f096b91a8be55646607",
+          "span": [
+            439,
+            556
+          ],
+          "tropa": "0x1.3d59c00000000p-5"
+        }
+      ],
+      "spaces": [
+        6,
+        16,
+        20,
+        34,
+        40,
+        48,
+        53,
+        57,
+        62,
+        68,
+        73,
+        77,
+        81,
+        83,
+        89,
+        94,
+        97,
+        103,
+        107,
+        115,
+        121,
+        125,
+        132,
+        139,
+        143,
+        147,
+        154,
+        163,
+        170,
+        173,
+        180,
+        187,
+        197,
+        203,
+        210,
+        221,
+        225,
+        233,
+        240,
+        245,
+        249,
+        255,
+        264,
+        271,
+        281,
+        285,
+        296,
+        302,
+        307,
+        312,
+        320,
+        329,
+        332,
+        338,
+        340,
+        347,
+        354,
+        364,
+        367,
+        372,
+        377,
+        385,
+        390,
+        398,
+        412,
+        416,
+        423,
+        427,
+        438,
+        444,
+        452,
+        455,
+        466,
+        476,
+        487,
+        497,
+        507,
+        511,
+        521,
+        527,
+        535,
+        545
+      ],
+      "target": 2,
+      "text_sha256": "1e9422bfddce0de0dbb4ab479412913832b124dfc12bf07ae10a6323e5b3d0b0",
+      "truth_indices": [
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        282,
+        283,
+        284,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        297,
+        298,
+        299,
+        300,
+        301,
+        303,
+        304,
+        305,
+        306,
+        308,
+        309,
+        310,
+        311,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        330,
+        331,
+        333,
+        334,
+        335,
+        336,
+        337,
+        339,
+        341,
+        342,
+        343,
+        344,
+        345,
+        346,
+        348,
+        349,
+        350,
+        351,
+        352,
+        353,
+        355,
+        356,
+        357,
+        358,
+        359,
+        360,
+        361,
+        362,
+        363,
+        365,
+        366,
+        368,
+        369,
+        370,
+        371,
+        373,
+        374,
+        375,
+        376,
+        378,
+        379,
+        380,
+        381,
+        382,
+        383,
+        384,
+        386,
+        387,
+        388,
+        389,
+        391,
+        392,
+        393,
+        394,
+        395,
+        396,
+        397,
+        399,
+        400,
+        401,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        413,
+        414,
+        415,
+        417,
+        418,
+        419,
+        420,
+        421,
+        422,
+        424,
+        425,
+        426,
+        428,
+        429,
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        437
+      ]
+    }
+  ],
+  "schema": "chipmunk.writing-uswds-revision-transfer/1",
+  "sources": [
+    {
+      "after": "ae4a4432670e0559a424cc0650b98210c7e21ae8",
+      "after_blob": "e2a22d7c09e8bd9081abb6f7b2159fdd9172cefdc8e945c578c96ecd4d2bce50",
+      "before": "6b6ed06a2785ae98695d1303b76d7fa18919aed3",
+      "before_blob": "5dad8810766fedc371988a6a04ab3e2cf480161bc4621176998882e6d6e76e0e",
+      "date": "2019-03-18T22:55:06Z",
+      "group": "dc854e4a7b05731d",
+      "path": "_components/buttons.md"
+    },
+    {
+      "after": "0c3845a8ea7a918a37f2d2c6c8f49e60e0793256",
+      "after_blob": "9e03db0b179f80e9ae60bf445c807f06158f8cb524f9193138309126929a1ce6",
+      "before": "2312769dc1457429f78b2cba7775c1da114e92f4",
+      "before_blob": "090b13dc8ceb0e3c21339e87954c8995ea6dc960cd59ebf885a7a0e8a5a9ac3c",
+      "date": "2019-03-19T23:55:00Z",
+      "group": "57ed9b29705b6bba",
+      "path": "_components/form-templates/02-address-form.md"
+    },
+    {
+      "after": "0c3845a8ea7a918a37f2d2c6c8f49e60e0793256",
+      "after_blob": "f173f25942286ef949838b8d7299928ff5fee18bd1f7acabdb6ab90ff06ed0d0",
+      "before": "2312769dc1457429f78b2cba7775c1da114e92f4",
+      "before_blob": "80f7b2504b06f84c18ab396a488cca7a9da55d0189aad78924f9307a4a576d04",
+      "date": "2019-03-19T23:55:00Z",
+      "group": "48b9e14bae4c5106",
+      "path": "_components/form-templates/04-password-reset-form.md"
+    },
+    {
+      "after": "0c3845a8ea7a918a37f2d2c6c8f49e60e0793256",
+      "after_blob": "6275a4de75f01aac2d806393740e2a034d3a15a233661d31b0e245bb6ef473b9",
+      "before": "2312769dc1457429f78b2cba7775c1da114e92f4",
+      "before_blob": "759142c67b9007239f91852ec89b533b5cd2dec033776953fa98b2392b61d196",
+      "date": "2019-03-19T23:55:00Z",
+      "group": "3ce7b858d437ccf5",
+      "path": "_components/labels.md"
+    },
+    {
+      "after": "9e3558909148808bbeb914143a8f03580f83d94e",
+      "after_blob": "4249c2698756cd10f7543cc205a99686715b82b73c18b32786c34a0b1f65e0aa",
+      "before": "d11eb96aa87e4a27543c19f9c1c1c7ad15a6c215",
+      "before_blob": "fc426e7990d486b8be266e5c64aec50747921f3243a1835e7f49d0484ed3d53f",
+      "date": "2019-03-24T21:27:10Z",
+      "group": "21b46d94ddca4a49",
+      "path": "_components/search-bar.md"
+    },
+    {
+      "after": "e4304f8352fd74af612812b789d26c6884ebb172",
+      "after_blob": "8a0bc166d136a33c7b14d9e891b7870a3f67ff93583b0e57929fe746c1b4ac0f",
+      "before": "56abe8177b6a8cc07061b545ab7f45fa5c70c2da",
+      "before_blob": "42e522616bbf861ce83f7343728a312fe39605e76bb457cd791cddcc437aeea7",
+      "date": "2019-04-08T06:00:10Z",
+      "group": "ae543c1bb1e2a296",
+      "path": "_posts/2019-04-08-introducing-uswds-2-0.md"
+    }
+  ]
+}

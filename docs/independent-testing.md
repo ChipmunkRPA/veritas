@@ -112,12 +112,28 @@ and two competing-speech levels.
 The [Aachen flank comparison](audio-flank-background-transfer-2026-11-13.md#reproduce)
 publishes paired detection outcomes from a separate room and source
 speakers and tests whether adjacent audio can help estimate competing speech.
-Run these four studies together from a clean checkout to save a shareable
-receipt of the scalar checks.
+The [stereo path comparison](audio-stereo-path-return-transfer-2026-11-13.md#replay)
+recounts recording-path flags under competing speech from an anonymous ledger.
+The [earlier-copy mouth comparison](video-paired-native-mouth-transfer-2026-11-13.md#replay)
+recomputes time and changed-pixel overlap independently on timing-preserving redraws.
+The [public design-system revisions](writing-uswds-revision-transfer-2026-11-13.md)
+replay passage-location flags against pinned source positions and genuine editorial controls.
+The [generated image replacement pilot](image-native-generated-stencil-transfer-2026-11-13.md)
+rebuilds all 48 regions and exact masks using the source captures and retained
+generated outputs. Independent generation requires the pinned local runtime.
+
+### Replay the latest evidence transfer results
+
+The suite checks the earlier-copy JPEG comparison, timing-preserving mouth
+redraws, background estimation, and all 140 writing worker deliveries. It
+replays the published decisions and misses using only the standard library.
+Use two interpreters or two checkouts to compare their receipts. Python 3.11
+and 3.12 matched on all four local reader outputs.
 
 ```sh
 review_dir=$(mktemp -d)
-python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/local-evidence.json" --suite local-evidence-2026-11-13
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/evidence-transfer.json" --suite evidence-transfer-2026-11-13
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/evidence-transfer.json" --format-issue
 ```
 
 Use `--suite specialist-transfer` in the replay command below to check these

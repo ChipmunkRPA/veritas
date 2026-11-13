@@ -54,14 +54,15 @@ def test_position_is_bound_to_exact_source_and_public_result(tmp_path):
         review.validate_commitment(mutated, expected)
 
 
-def test_position_timeout_keeps_source_scope_and_no_responses(tmp_path, monkeypatch):
+@pytest.mark.parametrize("device", ["cpu", "mps"])
+def test_position_timeout_keeps_source_scope_and_no_responses(tmp_path, monkeypatch, device):
     doc, sentences = setup_source(tmp_path)
     monkeypatch.setattr(settings, "text_passage_position_review", True)
     monkeypatch.setattr(settings, "text_detector_mode", "candidate")
     monkeypatch.setattr(settings, "text_window_sentences", 3)
     spec = SimpleNamespace(id=document_matched_context.DETECTOR, version="1.0.0")
     revisions = {document_matched_context.MODEL: document_matched_context.REVISION}
-    ctx = SimpleNamespace(device="cpu", deadline=Deadline(30))
+    ctx = SimpleNamespace(device=device, deadline=Deadline(30))
 
     def timed_out(*args):
         raise DetectorTimeout("test")

@@ -4,7 +4,7 @@ The optional check marks an exact middle sentence when its AI-like writing respo
 
 ## Local setup
 
-For a CPU instance with the existing pinned candidate writing checkpoint installed, set the following and restart the worker. The check is off by default. It runs on new analyses of mapped, single-paragraph English plain text with exactly three sentences and complete tokenizer coverage. PDFs, email, longer documents, and other languages are outside this check's evaluated scope. An otherwise eligible analysis retains its normal result when the optional responses are unavailable.
+For an instance using CPU or Apple GPU (MPS) with the existing pinned candidate writing checkpoint installed, set the following and restart the worker. The check is off by default. It runs on new analyses of mapped, single-paragraph English plain text with exactly three sentences and complete tokenizer coverage. PDFs, email, longer documents, and other languages are outside this check's evaluated scope. An otherwise eligible analysis retains its normal result when the optional responses are unavailable.
 
 ```dotenv
 VERITAS_TEXT_DETECTOR_MODE=candidate
@@ -19,6 +19,8 @@ The worker reuses the loaded encoder to read three complete inputs. The middle r
 Across three frozen historical publisher evaluations, the check located six additional known edits from two generator families and added zero flagged ordinary work groups. In the most recent test, it found two of 13 edits missed by the current check and flagged zero of 14 originals and zero of 14 genuine publisher revisions. Its low recovery rate and the misses on other tested generators limit what the response can establish. [Earlier confirmation](writing-position-confirmation-2026-11-12.md) · [Second-generator confirmation](writing-position-qwen-confirmation-2026-11-12.md)
 
 The signed package binds the coverage record to the projected result. With the original text, the verifier reconstructs the exact excerpt, all three positions, and input hashes. It also recalculates the direction from the recorded readings. The source replay uses the saved model responses. It does not repeat inference. [Local application receipt](evaluation-panels/writing-position-app-2026-11-12.json)
+
+The Apple GPU replay reused 68 eligible passages from the two retained publisher panels. It reproduced all 68 CPU decisions at the existing point. The largest change in the raw contrast was 0.000029. Four separate worker runs with simulated prepaid checkout exercised the Apple GPU path. Both known rewrites flagged, the ordinary revision did not flag, and the disabled run omitted the check while preserving the same assessment and findings. No job ran before payment. Chrome showed the exact sentence and all three source ranges, the JSON and PDF downloads matched the API, and signed source verification reproduced the selected text and positions.
 
 ## Assets and attribution
 

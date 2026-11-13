@@ -45,8 +45,11 @@ def _scores(classifier, inputs, deadline):
     active = encoded["attention_mask"].bool()
     ordinary = active & ~encoded["special_tokens_mask"].bool()
     with torch.inference_mode():
-        hidden = classifier.model.model(input_ids=encoded["input_ids"], attention_mask=encoded["attention_mask"],
-                                        return_dict=True).last_hidden_state
+        hidden = classifier.model.model(
+            input_ids=encoded["input_ids"].to(classifier.device),
+            attention_mask=encoded["attention_mask"].to(classifier.device),
+            return_dict=True,
+        ).last_hidden_state.cpu()
         deadline.check("writing position response")
         if hidden.shape[:2] != active.shape or hidden.shape[-1] != 1024 or not torch.isfinite(hidden).all():
             raise ValueError("Unexpected native writing response")
@@ -84,7 +87,7 @@ def _scores(classifier, inputs, deadline):
 
 def capture(classifier, doc, sentences, ctx, spec, revisions):
     if (not settings.text_passage_position_review or settings.text_detector_mode != "candidate"
-            or settings.text_window_sentences != 3 or str(ctx.device) != "cpu"
+            or settings.text_window_sentences != 3 or str(ctx.device) not in {"cpu", "mps"}
             or not document_matched_context.matches(spec.id, spec.version, revisions)):
         return None
     spans = document_passage_position.geometry(doc.text, doc.source_map, doc.meta.get("method"), sentences)

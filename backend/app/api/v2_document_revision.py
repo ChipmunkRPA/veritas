@@ -20,7 +20,7 @@ from app.api.v2_evidence import _analysis
 from app.cases import review
 from app.core.config import settings
 from app.core.logging import get_logger
-from app.evidence.document_revision import FORMATS, MAX_BYTES, SUPPORTED_DRAFTS
+from app.evidence.document_revision import FORMATS, MAX_BYTES, MIXED_DRAFTS
 from app.storage.db import get_session
 from app.storage.objects import ObjectNotFound, ObjectStoreError, default_store
 
@@ -37,6 +37,7 @@ class DocumentRevisionAvailability(BaseModel):
     available: bool
     extension: Literal[".eml", ".txt", ".docx", ".pdf"] | None = None
     paired_check_available: bool | None = None
+    earlier_extensions: list[Literal[".eml", ".txt", ".docx", ".pdf"]] | None = None
 
 
 class DraftSource(BaseModel):
@@ -47,6 +48,9 @@ class DraftSource(BaseModel):
     mime_part: str | None
     decoded_html_sha256: str | None = None
     decoded_html_characters: int | None = None
+    format: Literal["plain_text", "docx", "pdf"] | None = None
+    coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint",
+                              "pdf_native_text_unicode_codepoint"] | None = None
 
 
 class DraftParagraph(BaseModel):
@@ -136,10 +140,12 @@ class DraftPairedCheck(BaseModel):
 
 
 class DraftComparison(BaseModel):
-    schema_name: Literal["chipmunk.document-revision-comparison/1", "chipmunk.document-revision-comparison/2"] = Field(alias="schema")
-    format: Literal["email", "plain_text", "docx", "pdf"]
+    schema_name: Literal["chipmunk.document-revision-comparison/1", "chipmunk.document-revision-comparison/2",
+                         "chipmunk.document-revision-comparison/3"] = Field(alias="schema")
+    format: Literal["email", "plain_text", "docx", "pdf", "mixed"]
     coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint",
-                              "pdf_native_text_unicode_codepoint", "email_html_extracted_text_unicode_codepoint"]
+                              "pdf_native_text_unicode_codepoint", "email_html_extracted_text_unicode_codepoint",
+                              "per_source_unicode_codepoint"]
     earlier: DraftSource
     later: DraftSource
     changes: list[DraftChange]
@@ -212,12 +218,14 @@ def availability(aid: str, request: Request):
         except (OSError, ObjectStoreError):
             pass
     payload = {"available": extension is not None, "extension": extension}
+    if extension in MIXED_DRAFTS:
+        payload["earlier_extensions"] = list(MIXED_DRAFTS)
     if _paired_enabled(extension):
         payload["paired_check_available"] = True
     return JSONResponse(payload, headers=NO_STORE)
 
 
-def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_pdf: bool,
+def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_extension: str, include_pdf: bool,
              include_paired_check: bool = False) -> JSONResponse:
     from app.evidence.document_revision import compare_with_sources
 
@@ -231,13 +239,14 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_p
         raise ProblemError(409, "Original integrity check failed", "The retained document could not be read.") from None
     if len(later) != size or hashlib.sha256(later).hexdigest() != sha256:
         raise ProblemError(409, "Original integrity check failed", "The retained document no longer matches its recorded hash and size.")
-    paired_enabled = include_paired_check and _paired_enabled(extension)
+    paired_enabled = include_paired_check and earlier_extension == extension and _paired_enabled(extension)
     try:
         comparison, old_text, new_text, word_layouts = compare_with_sources(
-            earlier, later, extension, email_body_only=paired_enabled, pdf_paired_text_only=paired_enabled,
+            earlier, later, extension, earlier_extension=earlier_extension,
+            email_body_only=paired_enabled, pdf_paired_text_only=paired_enabled,
         )
     except (UnicodeError, LookupError, RecursionError):
-        raise ProblemError(422, "Could not compare drafts", f"Use readable {SUPPORTED_DRAFTS}.") from None
+        raise ProblemError(422, "Could not compare drafts", "Use readable files in a supported draft format.") from None
     except ValueError as error:
         raise ProblemError(422, "Could not compare drafts", str(error)) from None
     except OSError:
@@ -279,7 +288,7 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_p
     ROUTE, response_model=DocumentRevisionResponse, responses=problem_responses(400, 401, 404, 409, 413, 422, 429, 500),
     openapi_extra={"requestBody": {"required": True, "content": {"multipart/form-data": {"schema": {
         "type": "object", "required": ["earlier"], "properties": {
-            "earlier": {"type": "string", "format": "binary", "description": f"Earlier version. Use {SUPPORTED_DRAFTS}."},
+            "earlier": {"type": "string", "format": "binary", "description": "Earlier version. TXT, DOCX and PDF may be mixed. Use EML with EML."},
             "include_pdf": {"type": "string", "enum": ["true", "false"], "default": "false"},
             "include_paired_check": {"type": "string", "enum": ["true", "false"], "default": "false"},
         },
@@ -303,12 +312,13 @@ async def comparison(aid: str, request: Request):
                     or set(form) - {"earlier", "include_pdf", "include_paired_check"}
                     or any(len(form.getlist(key)) > 1 for key in form)):
                 raise ProblemError(422, "Earlier draft required", "Upload a single earlier draft to compare.")
-            if Path(earlier.filename or "").suffix.lower() != original[2]:
+            earlier_extension = Path(earlier.filename or "").suffix.lower()
+            if earlier_extension != original[2] and any(suffix not in MIXED_DRAFTS for suffix in (earlier_extension, original[2])):
                 raise ProblemError(422, "Draft formats differ", f"Choose an earlier {original[2]} file to match the retained document.")
             limit = upload_limit()
             data = await earlier.read(limit + 1)
             if len(data) > limit:
                 raise ProblemError(413, "Draft exceeds the limit", "The earlier draft is larger than the allowed upload size.")
-        return await run_in_threadpool(_compare, aid, original, data, include_pdf == "true", include_paired == "true")
+        return await run_in_threadpool(_compare, aid, original, data, earlier_extension, include_pdf == "true", include_paired == "true")
     finally:
         _slot.release()

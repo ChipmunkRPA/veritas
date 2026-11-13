@@ -1,0 +1,44 @@
+{
+  "application": {
+    "chrome": {
+      "json_pdf_match": true,
+      "page_errors": 0,
+      "pdf_crop": true,
+      "real_chrome": true,
+      "word_location": true
+    },
+    "paid": {
+      "body_paragraph_ranges_verified": 1,
+      "changed_token_ranges_verified": 42,
+      "changes_by_role": {
+        "body": 1
+      },
+      "coordinate_space": "per_source_unicode_codepoint",
+      "pdf_previews_verified": 1,
+      "pdf_word_regions_verified": 20,
+      "recorded_result_preserved": true,
+      "simulated_paid_jobs": 1,
+      "source_hashes_verified": 2,
+      "unpaid_jobs": 0
+    }
+  },
+  "cases": {
+    "ordinary": 60,
+    "original": 60
+  },
+  "edits_exact": 60,
+  "fresh_publisher_downloads": 10,
+  "full_readout_sha256": "fafb43a002bbd2327937c852825359223e034fe6f6570d4b6a19e03d8953a9e1",
+  "native_replays": 120,
+  "pdf_crops_verified": 44,
+  "pymupdf": "1.28.2",
+  "schema": "chipmunk.document-mixed-formats-public-evaluation/1",
+  "source_study_and_replay_sha256": {
+    "replay_document_mixed_formats.py": "f326576e20334c0434b3076409405409666d5d74a11f34dd0a9b3d606f8deaab",
+    "writing-semantic-continuity-transfer-2026-11-12.json": "02e0c0602872fce2215d8f2d290c0de048f830fc5672e768849162fe60b3576b",
+    "writing-word-boundary-transfer-2026-11-12.json": "b30f6addc5aab45792b479d8bf3c5edd434f59737985d4ae78a5538a500b8033"
+  },
+  "source_works": 10,
+  "unchanged_zero_flags": 60,
+  "word_paragraphs_verified": 44
+}

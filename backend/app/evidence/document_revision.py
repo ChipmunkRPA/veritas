@@ -21,7 +21,9 @@ from app.storage.files import check_docx_safe
 
 SCHEMA = "chipmunk.document-revision-comparison/1"
 HTML_SCHEMA = "chipmunk.document-revision-comparison/2"
+MIXED_SCHEMA = "chipmunk.document-revision-comparison/3"
 HTML_COORDINATES = "email_html_extracted_text_unicode_codepoint"
+MIXED_COORDINATES = "per_source_unicode_codepoint"
 TOKENS = re.compile(r"\w+(?:[’'-]\w+)*|[^\w\s]")
 MAX_BYTES = 1024 * 1024
 MAX_CHARS = 30_000
@@ -29,12 +31,18 @@ MAX_TOKENS = 2_000
 MAX_DOCX_XML_BYTES = 2 * 1024 * 1024
 ROLES = ("body", "quoted", "signature")
 FORMATS = {".eml": "email", ".txt": "plain_text", ".docx": "docx", ".pdf": "pdf"}
+MIXED_DRAFTS = (".txt", ".docx", ".pdf")
+TEXT_COORDINATES = "decoded_source_unicode_codepoint"
+WORD_COORDINATES = "docx_body_unicode_codepoint"
 SUPPORTED_DRAFTS = "matching .eml, .txt, .docx or .pdf files"
 SCOPE = "Compares words and punctuation in the decoded text. Email body, quoted text and signatures are mapped separately."
 HTML_SCOPE = ("Compares visible words and punctuation in the reply body. Quoted text, attachments, headers and "
               "formatting are outside this comparison.")
 DOCX_SCOPE = ("Compares words and punctuation in top-level Word body paragraphs. Tables, headers, footers, text boxes, "
               "embedded content, formatting and tracked revision markup are outside this comparison.")
+MIXED_SCOPE = "Compares words and punctuation across file formats. Formatting is outside the comparison."
+MIXED_WORD_SCOPE = "Word coverage includes top-level body paragraphs. Word tables, headers, footers and text boxes are excluded."
+MIXED_PDF_SCOPE = "PDF coverage includes the selectable text on one upright page with a clear reading order. Scanned text is excluded."
 DOCX_PART = "word/document.xml"
 INTERPRETATION = "This comparison locates changes between the supplied versions. The revision sequence and authorship require independent evidence."
 WordParagraphs = list[tuple[int, int, int, int]]
@@ -288,21 +296,32 @@ def compare_with_text(earlier: bytes, later: bytes, extension: str, *,
 
 
 def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
-                         email_body_only: bool = False, pdf_paired_text_only: bool = False
+                         email_body_only: bool = False, pdf_paired_text_only: bool = False, earlier_extension: str | None = None,
                          ) -> tuple[dict, str, str, WordLayouts | None]:
     """Keep the native Word paragraph locations available for exact paired sentence mapping."""
     if extension not in FORMATS:
         raise ValueError(f"Choose two {SUPPORTED_DRAFTS}.")
+    old_extension = extension if earlier_extension is None else earlier_extension
+    mixed = old_extension != extension
+    if mixed and any(value not in MIXED_DRAFTS for value in (old_extension, extension)):
+        raise ValueError("Use TXT, DOCX or PDF when comparing drafts across formats. Email drafts require matching EML files.")
     if any(not 0 < len(item) <= MAX_BYTES for item in (earlier, later)):
         raise ValueError("Each version must be nonempty and at most 1 MiB.")
     changes = []
     schema = SCHEMA
-    scope, coordinates = SCOPE, "decoded_source_unicode_codepoint"
+    scope, coordinates = SCOPE, TEXT_COORDINATES
     with TemporaryDirectory(prefix="document-revision-") as staging:
         directory = Path(staging)
-        earlier_path, later_path = directory / f"earlier{extension}", directory / f"later{extension}"
-        old_text, old_tokens, old_source, old_layout = _source(earlier_path, earlier, extension)
+        earlier_path, later_path = directory / f"earlier{old_extension}", directory / f"later{extension}"
+        old_text, old_tokens, old_source, old_layout = _source(earlier_path, earlier, old_extension)
         new_text, new_tokens, new_source, new_layout = _source(later_path, later, extension)
+        if mixed:
+            spaces = {".txt": TEXT_COORDINATES, ".docx": WORD_COORDINATES, ".pdf": document_revision_pdf.COORDINATES}
+            for suffix, text, layout, source in ((old_extension, old_text, old_layout, old_source),
+                                                 (extension, new_text, new_layout, new_source)):
+                if suffix == ".pdf" and not document_revision_pdf.paired_text(text, layout):
+                    raise ValueError("For drafts in different formats, use one upright PDF page with selectable text in a clear reading order.")
+                source.update(format=FORMATS[suffix], coordinate_space=spaces[suffix])
         if extension == ".eml":
             if (old_layout is None) != (new_layout is None):
                 raise ValueError("Use two email drafts with the same body type. Both must use plain text or supported HTML.")
@@ -310,18 +329,24 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                 schema, scope, coordinates = HTML_SCHEMA, HTML_SCOPE, HTML_COORDINATES
         for role in ROLES:
             for change in differences(old_tokens[role], new_tokens[role]):
-                before = _excerpt(old_text, change["earlier"], change["earlier_changed_tokens"], old_layout, extension)
+                before = _excerpt(old_text, change["earlier"], change["earlier_changed_tokens"], old_layout, old_extension)
                 after = _excerpt(new_text, change["later"], change["later_changed_tokens"], new_layout, extension)
                 changes.append({"id": f"C{len(changes) + 1:02d}", "role": role, "earlier": before, "later": after})
-        if extension == ".pdf":
+        if ".pdf" in (extension, old_extension):
             changes = document_revision_pdf.render_previews(changes, earlier_path, later_path)
             scope, coordinates = document_revision_pdf.SCOPE, document_revision_pdf.COORDINATES
     if extension == ".docx":
-        scope, coordinates = DOCX_SCOPE, "docx_body_unicode_codepoint"
-    result = {"schema": schema, "format": FORMATS[extension],
+        scope, coordinates = DOCX_SCOPE, WORD_COORDINATES
+    if mixed:
+        schema, coordinates = MIXED_SCHEMA, MIXED_COORDINATES
+        scopes = {".docx": MIXED_WORD_SCOPE, ".pdf": MIXED_PDF_SCOPE}
+        scope = " ".join([MIXED_SCOPE, *(scopes[suffix] for suffix in (old_extension, extension) if suffix in scopes)])
+    result = {"schema": schema, "format": "mixed" if mixed else FORMATS[extension],
             "coordinate_space": coordinates,
             "earlier": old_source, "later": new_source, "changes": changes,
             "scope": scope, "interpretation": INTERPRETATION}
+    if mixed:
+        return result, old_text, new_text, None
     if extension == ".eml" and email_body_only:
         return result, _email_body_prefix(old_text, old_tokens), _email_body_prefix(new_text, new_tokens), None
     if extension == ".pdf" and pdf_paired_text_only:

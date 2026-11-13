@@ -8,10 +8,13 @@ export type DocumentRevisionResponse = components['schemas']['DocumentRevisionRe
 
 const route = '/api/v2/analyses/{aid}/document-revision-comparison'
 
-export async function draftAvailability(analysisId: string, signal: AbortSignal) {
+export async function draftAvailability(analysisId: string, signal: AbortSignal): Promise<{
+  extension: DraftExtension; earlierExtensions?: DraftExtension[]; pairedCheckAvailable: boolean
+} | null> {
   const result = await unwrap(apiClient.GET(route, { params: { path: { aid: analysisId } }, signal }))
   return result.available && result.extension
-    ? { extension: result.extension, pairedCheckAvailable: result.paired_check_available === true } : null
+    ? { extension: result.extension, earlierExtensions: result.earlier_extensions ?? [result.extension],
+      pairedCheckAvailable: result.paired_check_available === true } : null
 }
 
 export async function compareDraft(analysisId: string, file: File, signal: AbortSignal, includePairedCheck = false): Promise<DocumentRevisionResponse> {
@@ -27,7 +30,8 @@ export async function compareDraft(analysisId: string, file: File, signal: Abort
   const result = await unwrap(Promise.resolve({ response, data: response.ok ? data as DocumentRevisionResponse : undefined,
     error: response.ok ? undefined : data }))
   const schema = result?.comparison?.schema
-  if ((schema !== 'chipmunk.document-revision-comparison/1' && schema !== 'chipmunk.document-revision-comparison/2')
+  if ((schema !== 'chipmunk.document-revision-comparison/1' && schema !== 'chipmunk.document-revision-comparison/2'
+      && schema !== 'chipmunk.document-revision-comparison/3')
       || !Array.isArray(result.comparison.changes)) {
     throw new Error('The server returned an incomplete draft comparison.')
   }

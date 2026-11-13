@@ -241,7 +241,9 @@ def test_pdf_comparison_binds_repeated_text_to_both_original_pages(reference_htt
     earlier, later = _pdf_draft("amber", 90), _pdf_draft("green", 0)
     retained = _saved(f, "pdf-draft", ".pdf", later)
     url = _url("pdf-draft")
-    assert f.client.get(url, headers=f.viewer).json() == {"available": True, "extension": ".pdf"}
+    assert f.client.get(url, headers=f.viewer).json() == {
+        "available": True, "extension": ".pdf", "earlier_extensions": [".txt", ".docx", ".pdf"],
+    }
     response = f.client.post(url, headers=f.viewer, files=_upload(earlier, ".pdf"), data={"include_pdf": "true"})
     assert response.status_code == 200, response.text
     assert response.headers["cache-control"] == "no-store"
@@ -475,7 +477,9 @@ def test_word_comparison_uses_exact_body_paragraph_coordinates_in_api_pdf_and_re
     earlier, later = (_word(text, f"Excluded{index}") for index, text in enumerate(texts))
     _saved(f, "word-draft", ".DOCX", later)
     url = _url("word-draft")
-    assert f.client.get(url, headers=f.viewer).json() == {"available": True, "extension": ".docx"}
+    assert f.client.get(url, headers=f.viewer).json() == {
+        "available": True, "extension": ".docx", "earlier_extensions": [".txt", ".docx", ".pdf"],
+    }
     wrong = f.client.post(url, headers=f.viewer, files=_upload(earlier, ".txt"))
     assert wrong.status_code == 422
     bad = f.client.post(url, headers=f.viewer, files=_upload(b"Not a Word document", ".docx"))
@@ -730,6 +734,53 @@ def test_auth_scope_format_mismatch_and_retained_later_integrity(reference_http,
     retained.path.unlink()
     assert not f.client.get(url, headers=f.viewer).json()["available"]
     assert f.client.post(url, headers=f.viewer, files=earlier).status_code == 404
+
+
+def test_cross_format_word_to_pdf_comparison_replays_both_source_locations(reference_http, monkeypatch, tmp_path):
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    from scripts.rebuild_writing_word_boundary_sources import docx
+
+    earlier = docx("The shipment will use amber packaging.")
+    with pymupdf.open() as document:
+        page = document.new_page()
+        page.insert_text((60, 80), "The shipment will use green packaging.")
+        later = document.tobytes()
+    _saved(f, "mixed-draft", ".pdf", later)
+    response = f.client.post(_url("mixed-draft"), headers=f.viewer, files=_upload(earlier, ".docx"),
+                             data={"include_pdf": "true", "include_paired_check": "true"})
+    assert response.status_code == 200, response.text
+    payload = response.json()
+    result = payload["comparison"]
+    assert result["schema"] == "chipmunk.document-revision-comparison/3" and result["format"] == "mixed"
+    assert result["earlier"]["coordinate_space"] == "docx_body_unicode_codepoint"
+    assert result["later"]["coordinate_space"] == "pdf_native_text_unicode_codepoint"
+    assert "paired_check" not in result
+    [change] = result["changes"]
+    assert change["earlier"]["text"] == "amber" and change["later"]["text"] == "green"
+    assert change["earlier"]["paragraphs"] == [{"paragraph": 1, "body_index": 0, "start": 22, "end": 27}]
+    [location] = change["later"]["pdf_pages"]
+    assert location["page"] == 1 and location["word_regions"][0]["start"] == 22
+    assert hashlib.sha256(base64.b64decode(location["preview"]["crop_png"])).hexdigest() == location["preview"]["crop_sha256"]
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as report:
+        report_text = " ".join(" ".join(page.get_text().split()) for page in report)
+        assert "Earlier draft · Word body text" in report_text and "Analyzed version · PDF text layer" in report_text
+        assert "Page 1 · highlighted source crop" in report_text
+    earlier_path, later_path, export = (tmp_path / name for name in ("earlier.docx", "later.pdf", "draft.json"))
+    earlier_path.write_bytes(earlier)
+    later_path.write_bytes(later)
+    export.write_text(json.dumps(result))
+    assert review(export, earlier_path, later_path)["body_paragraph_ranges_verified"] == 1
+    assert review(export, earlier_path, later_path)["pdf_previews_verified"] == 1
+    result["earlier"]["coordinate_space"] = "decoded_source_unicode_codepoint"
+    export.write_text(json.dumps(result))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(export, earlier_path, later_path)
+    refused = f.client.post(_url("mixed-draft"), headers=f.viewer, files=_upload(_email("A message")))
+    assert refused.status_code == 422
+    _saved(f, "multipage-mixed", ".pdf", _pdf_draft("green", 0))
+    refused = f.client.post(_url("multipage-mixed"), headers=f.viewer, files=_upload(earlier, ".docx"))
+    assert refused.status_code == 422
 
 
 def test_refuses_an_attachment_selected_as_the_email_body(reference_http, monkeypatch):

@@ -5,6 +5,7 @@ import { saveBlob } from '../../lib/api/reports'
 import { compareDraft, draftAvailability, type DraftExcerpt, type DraftExtension, type DocumentRevisionResponse } from './documentRevisionApi'
 
 const labels = { body: 'Message body', quoted: 'Quoted text', signature: 'Signature' }
+const sourceFormats = { plain_text: 'Plain text', docx: 'Word body text', pdf: 'PDF text layer' }
 const contextLabels = ['Previous sentence', 'Changed sentence', 'Next sentence']
 
 function MarkedExcerpt({ excerpt }: { excerpt: DraftExcerpt }) {
@@ -56,10 +57,11 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
   const anchorPrefix = useId()
   const { comparison, pdf } = result
   const paired = comparison.paired_check
+  const mixed = comparison.format === 'mixed'
   const docx = comparison.format === 'docx'
   const pdfText = comparison.format === 'pdf'
   const html = comparison.coordinate_space === 'email_html_extracted_text_unicode_codepoint'
-  const formatLabel = docx ? 'Word body text' : pdfText ? 'PDF text' : comparison.format === 'plain_text' ? 'Text' : null
+  const formatLabel = mixed ? 'Wording change' : docx ? 'Word body text' : pdfText ? 'PDF text' : comparison.format === 'plain_text' ? 'Text' : null
   const downloadJson = () => saveBlob(new Blob([JSON.stringify(comparison, null, 2) + '\n'], { type: 'application/json' }),
     'chipmunk-verify-draft-comparison.json')
   const downloadPdf = (body: string) => {
@@ -78,6 +80,9 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
       </div>
     </div>
     <p className="mt-2 mb-0 text-small text-text-muted">{comparison.scope} {comparison.interpretation}</p>
+    {mixed && comparison.earlier.format && comparison.later.format && <p className="mt-2 mb-0 text-caption text-text-muted">
+      Earlier draft · {sourceFormats[comparison.earlier.format]}. Analyzed version · {sourceFormats[comparison.later.format]}.
+    </p>}
     {comparison.format === 'email' && <p className="mt-2 mb-0 text-caption text-text-muted">
       Earlier MIME part {comparison.earlier.mime_part} · Analyzed MIME part {comparison.later.mime_part}
     </p>}
@@ -127,6 +132,7 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
         ? 'Word offsets count Unicode code points in the body text. Two line breaks separate included paragraphs. Paragraph ranges start within each paragraph.'
         : html ? 'The first range gives the position in the extracted reply. The ranges after the arrow give the positions in the decoded HTML MIME part. Both count Unicode code points.'
         : pdfText ? 'Offsets count Unicode code points in the extracted text. Page previews cover selected regions.'
+        : mixed ? 'Each side uses its own Unicode character offsets and source positions.'
         : 'Offsets count decoded Unicode code points.'} The end of each range is excluded.</p>
       <ol className="mt-3 mb-0 list-none space-y-3 p-0">
         {comparison.changes.map(change => <li key={change.id} className="rounded-md border border-border p-3">
@@ -141,8 +147,8 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
   </div>
 }
 
-function DraftForm({ analysisId, extension, pairedCheckAvailable }: {
-  analysisId: string; extension: DraftExtension; pairedCheckAvailable: boolean
+function DraftForm({ analysisId, extension, earlierExtensions = [extension], pairedCheckAvailable }: {
+  analysisId: string; extension: DraftExtension; earlierExtensions?: DraftExtension[]; pairedCheckAvailable: boolean
 }) {
   const headingId = useId()
   const inputId = useId()
@@ -151,6 +157,7 @@ function DraftForm({ analysisId, extension, pairedCheckAvailable }: {
   const [error, setError] = useState<string | null>(null)
   const [pending, setPending] = useState(false)
   const [includePairedCheck, setIncludePairedCheck] = useState(false)
+  const sameFormat = !file || file.name.toLowerCase().endsWith(extension)
   const active = useRef<AbortController | null>(null)
   useEffect(() => () => active.current?.abort(), [])
 
@@ -163,7 +170,7 @@ function DraftForm({ analysisId, extension, pairedCheckAvailable }: {
     setError(null)
     setResult(null)
     try {
-      const comparison = await compareDraft(analysisId, file, request.signal, pairedCheckAvailable && includePairedCheck)
+      const comparison = await compareDraft(analysisId, file, request.signal, pairedCheckAvailable && sameFormat && includePairedCheck)
       if (!request.signal.aborted) setResult(comparison)
     } catch (error) {
       if (!request.signal.aborted) setError(error instanceof Error ? error.message : 'Please try again.')
@@ -177,15 +184,16 @@ function DraftForm({ analysisId, extension, pairedCheckAvailable }: {
 
   return <section aria-labelledby={headingId} className="rounded-md border border-border p-4">
     <h2 id={headingId} className="m-0 text-body font-medium">Compare with an earlier draft</h2>
-    <p className="mt-2 mb-0 text-small text-text-muted">Choose an earlier {extension} file, up to 1 MiB, to see where the wording changed.</p>
+    <p className="mt-2 mb-0 text-small text-text-muted">Choose an earlier {earlierExtensions.length > 1 ? 'TXT, DOCX or PDF' : extension} file, up to 1 MiB, to see where the wording changed.</p>
     {extension === '.docx' && <p className="mt-2 mb-0 text-small text-text-muted">Checks wording and punctuation in body paragraphs.</p>}
     {extension === '.eml' && <p className="mt-2 mb-0 text-small text-text-muted">Use two plain-text emails or two HTML-only replies with two, three, five or six simple body paragraphs and a trailing blockquote.</p>}
     {extension === '.pdf' && <p className="mt-2 mb-0 text-small text-text-muted">Use unlocked PDFs with selectable text on every page, up to 12 pages each.</p>}
+    {earlierExtensions.length > 1 && <p className="mt-2 mb-0 text-small text-text-muted">For drafts in different formats, use a single upright PDF page with selectable text.</p>}
     {extension === '.pdf' && pairedCheckAvailable && <p className="mt-2 mb-0 text-small text-text-muted">The paired writing check covers one upright page per draft with selectable text and an unambiguous reading order.</p>}
     <form onSubmit={event => void submit(event)} className="mt-4 flex flex-wrap items-end gap-3">
       <div className="min-w-0">
         <label htmlFor={inputId} className="mb-1 block text-small font-medium">Earlier draft</label>
-        <input id={inputId} type="file" accept={extension} className="block max-w-full text-small"
+        <input id={inputId} type="file" accept={earlierExtensions.join(',')} className="block max-w-full text-small"
           onChange={event => {
             active.current?.abort()
             active.current = null
@@ -196,7 +204,7 @@ function DraftForm({ analysisId, extension, pairedCheckAvailable }: {
           }} />
       </div>
       <Button type="submit" variant="primary" disabled={!file || pending}>{pending ? 'Comparing…' : 'Compare drafts'}</Button>
-      {pairedCheckAvailable && <label className="flex w-full items-center gap-2 text-small text-text-muted">
+      {pairedCheckAvailable && sameFormat && <label className="flex w-full items-center gap-2 text-small text-text-muted">
         <input type="checkbox" checked={includePairedCheck} disabled={pending}
           onChange={event => setIncludePairedCheck(event.currentTarget.checked)} />
         Include experimental paired writing check

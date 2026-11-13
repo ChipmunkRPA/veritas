@@ -27,6 +27,7 @@ a { color: #285f50; }
 .page-preview figcaption { color: #526658; font-size: 8.5pt; }
 """
 LABELS = {"body": "Message body", "quoted": "Quoted text", "signature": "Signature"}
+FILE_LABELS = {"plain_text": "Plain text", "docx": "Word body text", "pdf": "PDF text layer"}
 PNG_URL = "data:image/png;base64,"
 
 
@@ -105,7 +106,8 @@ def render(comparison: dict) -> bytes:
     paired = comparison.get("paired_check")
     change_class = ' class="word-paired-change"' if paired and paired.get("earlier", {}).get("context_paragraphs") else ""
     html_reply = comparison["coordinate_space"] == HTML_COORDINATES
-    format_label = {"plain_text": "Text", "docx": "Word body text", "pdf": "PDF text"}.get(comparison["format"])
+    mixed = comparison["format"] == "mixed"
+    format_label = {"plain_text": "Text", "docx": "Word body text", "pdf": "PDF text", "mixed": "Wording change"}.get(comparison["format"])
     for change in comparison["changes"]:
         label = format_label or LABELS[change["role"]]
         anchor = escape(change["id"])
@@ -115,6 +117,8 @@ def render(comparison: dict) -> bytes:
     for key, label in (("earlier", "Earlier draft"), ("later", "Analyzed version")):
         source = comparison[key]
         part = f' · MIME part {escape(source["mime_part"])}' if source["mime_part"] else ""
+        if mixed:
+            part = f' · {FILE_LABELS[source["format"]]}'
         sources.append(f'<p><strong>{label}</strong>{part}<br>SHA-256 <span class="hash">{escape(source["sha256"])}</span></p>')
     positions = ("Word offsets count Unicode code points in the body text. Two line breaks separate included paragraphs. "
                  "Each paragraph range uses offsets within that paragraph." if docx else "Ranges use decoded Unicode code points.")
@@ -124,6 +128,9 @@ def render(comparison: dict) -> bytes:
     if html_reply:
         positions = ("The first range gives the position in the extracted reply. The ranges after the arrow give the positions "
                      "in the decoded HTML MIME part. Both count Unicode code points.")
+    if mixed:
+        positions = ("Each side uses its own Unicode character offsets. Word paragraph offsets start within the paragraph. "
+                     "PDF source boxes use unrotated page coordinates.")
     no_changes = "No word or punctuation changes found in the reply body." if html_reply else "No word or punctuation changes found."
     content = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Earlier-draft comparison</title>
 <meta name="author" content="Chipmunk Verify"><style>{STYLE}</style></head><body>

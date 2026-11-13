@@ -97,6 +97,12 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [cross-format draft comparison](document-mixed-format-comparison-2026-11-13.md)
+  adds exact wording evidence for TXT, DOCX and supported PDFs. Public source
+  replay checked 60 edited and 60 unchanged comparisons in all six directions.
+- The [mouth chroma-grid trial](video-mouth-chroma-grid-2026-11-13.md)
+  localized zero of 23 held neural mouth edits and zero of 17 after H.264
+  re-encoding. The candidate remains offline.
 - The [public AMI replay](audio-gain-public-replay-2026-11-13.md) independently
   reconstructs the fixed-gain comparison from eight publisher WAVs. It
   localized all 96 additional authored repeats across two further meetings

@@ -3467,6 +3467,8 @@ export interface components {
         DocumentRevisionAvailability: {
             /** Available */
             available: boolean;
+            /** Earlier Extensions */
+            earlier_extensions?: (".eml" | ".txt" | ".docx" | ".pdf")[] | null;
             /** Extension */
             extension?: (".eml" | ".txt" | ".docx" | ".pdf") | null;
             /** Paired Check Available */
@@ -3498,13 +3500,13 @@ export interface components {
              * Coordinate Space
              * @enum {string}
              */
-            coordinate_space: "decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint" | "email_html_extracted_text_unicode_codepoint";
+            coordinate_space: "decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint" | "email_html_extracted_text_unicode_codepoint" | "per_source_unicode_codepoint";
             earlier: components["schemas"]["DraftSource"];
             /**
              * Format
              * @enum {string}
              */
-            format: "email" | "plain_text" | "docx" | "pdf";
+            format: "email" | "plain_text" | "docx" | "pdf" | "mixed";
             /** Interpretation */
             interpretation: string;
             later: components["schemas"]["DraftSource"];
@@ -3513,7 +3515,7 @@ export interface components {
              * Schema
              * @enum {string}
              */
-            schema: "chipmunk.document-revision-comparison/1" | "chipmunk.document-revision-comparison/2";
+            schema: "chipmunk.document-revision-comparison/1" | "chipmunk.document-revision-comparison/2" | "chipmunk.document-revision-comparison/3";
             /** Scope */
             scope: string;
         };
@@ -3649,6 +3651,8 @@ export interface components {
         DraftSource: {
             /** Bytes */
             bytes: number;
+            /** Coordinate Space */
+            coordinate_space?: ("decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint") | null;
             /** Decoded Characters */
             decoded_characters: number;
             /** Decoded Html Characters */
@@ -3657,6 +3661,8 @@ export interface components {
             decoded_html_sha256?: string | null;
             /** Decoded Text Sha256 */
             decoded_text_sha256: string;
+            /** Format */
+            format?: ("plain_text" | "docx" | "pdf") | null;
             /** Mime Part */
             mime_part: string | null;
             /** Sha256 */
@@ -7568,7 +7574,7 @@ export interface operations {
                 "multipart/form-data": {
                     /**
                      * Format: binary
-                     * @description Earlier version. Use matching .eml, .txt, .docx or .pdf files.
+                     * @description Earlier version. TXT, DOCX and PDF may be mixed. Use EML with EML.
                      */
                     earlier: string;
                     /**

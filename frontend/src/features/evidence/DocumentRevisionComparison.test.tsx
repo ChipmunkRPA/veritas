@@ -121,6 +121,35 @@ it('offers Word uploads and shows the server paragraph and body offsets', async 
   expect(screen.getByText('café').tagName).toBe('MARK')
 })
 
+it('shows separate Word and PDF locations for an earlier draft in another format', async () => {
+  const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64), decoded_characters: 20, mime_part: null }
+  const comparison: DraftComparison = {
+    schema: 'chipmunk.document-revision-comparison/3', format: 'mixed', coordinate_space: 'per_source_unicode_codepoint',
+    earlier: { ...source, format: 'docx', coordinate_space: 'docx_body_unicode_codepoint' },
+    later: { ...source, format: 'pdf', coordinate_space: 'pdf_native_text_unicode_codepoint' },
+    scope: 'Words and punctuation.', interpretation: 'Source comparison only.',
+    changes: [{ id: 'C01', role: 'body',
+      earlier: { start: 4, end: 9, text: 'amber', changed_tokens: [[4, 9]], paragraphs: [{ paragraph: 2, body_index: 1, start: 0, end: 5 }] },
+      later: { start: 4, end: 9, text: 'green', changed_tokens: [[4, 9]], pdf_pages: [{ page: 1, page_width: 612,
+        page_height: 792, page_rotation: 0, word_regions: [{ start: 4, end: 9, bbox: [20, 40, 72, 60] }] }] } }],
+  }
+  vi.mocked(draftAvailability).mockResolvedValue({ extension: '.pdf', earlierExtensions: ['.txt', '.docx', '.pdf'], pairedCheckAvailable: true })
+  vi.mocked(compareDraft).mockResolvedValue({ comparison })
+  show()
+  const input = await screen.findByLabelText('Earlier draft')
+  expect(input.getAttribute('accept')).toBe('.txt,.docx,.pdf')
+  fireEvent.click(screen.getByRole('checkbox', { name: /Include experimental paired/ }))
+  const file = new File(['word'], 'earlier.docx')
+  fireEvent.change(input, { target: { files: [file] } })
+  expect(screen.queryByRole('checkbox', { name: /Include experimental paired/ })).toBeNull()
+  fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
+  expect(await screen.findByText('C01 · Wording change')).toBeTruthy()
+  expect(screen.getByText('Paragraph 2 [0, 5)')).toBeTruthy()
+  expect(screen.getByText('Page 1')).toBeTruthy()
+  expect(screen.getByText('Earlier draft · Word body text. Analyzed version · PDF text layer.')).toBeTruthy()
+  expect(compareDraft).toHaveBeenCalledWith('draft-analysis', file, expect.any(AbortSignal), false)
+})
+
 it('links highlighted HTML reply words to their decoded MIME positions', async () => {
   const source = { sha256: '0'.repeat(64), bytes: 400, decoded_text_sha256: '1'.repeat(64), decoded_characters: 80,
     decoded_html_sha256: '2'.repeat(64), decoded_html_characters: 140, mime_part: '1.1' }

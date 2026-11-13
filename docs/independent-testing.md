@@ -60,6 +60,10 @@ differed. The receipt and those details are sufficient without the audio.
 The [trimmed video comparison](video-trimmed-reference-transfer-2026-11-13.md#replay)
 and [shifted JPEG comparison](image-reference-shifted-jpeg-transfer-2026-11-13.md)
 can each recheck a downloaded JSON result against the two supplied originals.
+The [cross-format draft comparison](document-mixed-format-comparison-2026-11-13.md#reproduce)
+rebuilds all six TXT, Word and PDF directions from public publisher sources.
+It verifies both source locations and checks that a format change alone
+produces no wording highlights.
 
 The [large-image copy comparison](image-affine-native-scale-2026-11-11.md#reproduce)
 provides a licensed roster, exact source commitments, and a separate reader

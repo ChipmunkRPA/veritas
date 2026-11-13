@@ -152,5 +152,5 @@ def _add_previews(changes: list[dict], earlier: bytes, later: bytes) -> None:
 if __name__ == "__main__":
     located = json.load(sys.stdin)
     old_path, new_path = map(Path, sys.argv[1:])
-    _add_previews(located, old_path.read_bytes(), new_path.read_bytes())
+    _add_previews(located, *(path.read_bytes() if path.suffix == ".pdf" else b"" for path in (old_path, new_path)))
     json.dump(located, sys.stdout)

@@ -5237,6 +5237,26 @@
             "title": "Available",
             "type": "boolean"
           },
+          "earlier_extensions": {
+            "anyOf": [
+              {
+                "items": {
+                  "enum": [
+                    ".eml",
+                    ".txt",
+                    ".docx",
+                    ".pdf"
+                  ],
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Earlier Extensions"
+          },
           "extension": {
             "anyOf": [
               {
@@ -5354,7 +5374,8 @@
               "decoded_source_unicode_codepoint",
               "docx_body_unicode_codepoint",
               "pdf_native_text_unicode_codepoint",
-              "email_html_extracted_text_unicode_codepoint"
+              "email_html_extracted_text_unicode_codepoint",
+              "per_source_unicode_codepoint"
             ],
             "title": "Coordinate Space",
             "type": "string"
@@ -5367,7 +5388,8 @@
               "email",
               "plain_text",
               "docx",
-              "pdf"
+              "pdf",
+              "mixed"
             ],
             "title": "Format",
             "type": "string"
@@ -5392,7 +5414,8 @@
           "schema": {
             "enum": [
               "chipmunk.document-revision-comparison/1",
-              "chipmunk.document-revision-comparison/2"
+              "chipmunk.document-revision-comparison/2",
+              "chipmunk.document-revision-comparison/3"
             ],
             "title": "Schema",
             "type": "string"
@@ -5836,6 +5859,22 @@
             "title": "Bytes",
             "type": "integer"
           },
+          "coordinate_space": {
+            "anyOf": [
+              {
+                "enum": [
+                  "decoded_source_unicode_codepoint",
+                  "docx_body_unicode_codepoint",
+                  "pdf_native_text_unicode_codepoint"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coordinate Space"
+          },
           "decoded_characters": {
             "title": "Decoded Characters",
             "type": "integer"
@@ -5865,6 +5904,22 @@
           "decoded_text_sha256": {
             "title": "Decoded Text Sha256",
             "type": "string"
+          },
+          "format": {
+            "anyOf": [
+              {
+                "enum": [
+                  "plain_text",
+                  "docx",
+                  "pdf"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Format"
           },
           "mime_part": {
             "anyOf": [
@@ -15036,7 +15091,7 @@
               "schema": {
                 "properties": {
                   "earlier": {
-                    "description": "Earlier version. Use matching .eml, .txt, .docx or .pdf files.",
+                    "description": "Earlier version. TXT, DOCX and PDF may be mixed. Use EML with EML.",
                     "format": "binary",
                     "type": "string"
                   },

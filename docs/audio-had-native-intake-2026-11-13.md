@@ -74,7 +74,8 @@ shows that shorter, more frequent windows recovered location on these
 positives. All eight files were already detected by either route. Genuine
 controls are still required before the dense check could affect an AI
 verdict or be interpreted as a general detection improvement. No files in
-this test include new injected noise. [Scalar result and exact windows](evaluation-panels/audio-had-positive-transfer-2026-11-13.json)
+this test include new injected noise. A second full local scoring run
+reproduced the scalar receipt byte for byte. [Scalar result and exact windows](evaluation-panels/audio-had-positive-transfer-2026-11-13.json)
 
 ## Replay the intake
 

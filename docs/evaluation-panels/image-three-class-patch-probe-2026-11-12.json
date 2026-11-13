@@ -1,0 +1,598 @@
+{
+  "audit": {
+    "exact_input_and_mask_bindings": 200,
+    "fit_deliveries_and_token_coordinates": 54,
+    "native_overlap_readbacks": 560
+  },
+  "calibration_rows": 40,
+  "checkpoint_sha256": "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1",
+  "commitments": {
+    "calibration.json": "6a48bedd195e8f15f46cc626eb6165972073f765490f8f36ed91a52343a7ffab",
+    "fit-inputs.json": "414f3583dbb07f2d8d9fa67b57f5c2345a2ff719378737d7e1dbbb7f1e815221",
+    "freeze.json": "7041774c64d953496e4b6bafa5ab214f821c12cb8ea78b96d13b2f72bb1e9559",
+    "heads.json": "5c17bdc8f5ba93e4ca942cc1dd68caf937b509e819b726c09a7239c27a9e3956",
+    "held.json": "bc095ae83ad88730a0692c3074cc5cc7436976a2497bd7653297961b1a5cc372",
+    "points.json": "a6e9abc477534ecca746a6f96b2b7aca8d8f1f4b5f18336e5d0b5e7f86f8cb52"
+  },
+  "counts": {
+    "batches": 789,
+    "deliveries": 254,
+    "tiles": 3156
+  },
+  "design": {
+    "calibration": "Score the original and the exact-site plus full-frame autoencoder controls, with local blur and conventional copy. Strictly above second-largest ordinary source maximum per arm.",
+    "comparator": "Current JPEG aligned luma check on identical deliveries.",
+    "confidence_weight": 0,
+    "delivery": "standard 4:2:0 JPEG75, same output recipe for every case",
+    "features": {
+      "conditioning": "Unit-normalize each hidden patch token before concatenation. Fixed reflect padding at bottom and right.",
+      "layers_one_based": [
+        3,
+        7
+      ],
+      "native": true,
+      "patch_px": 14,
+      "tile_px": 224
+    },
+    "fit": {
+      "arms": {
+        "binary": "Fit original and processing as one negative class.",
+        "three_class": "Fit original, processing and inpainting as separate labels. Compare inpainted logit with logsumexp of both negative logits."
+      },
+      "balanced_triplets": true,
+      "minimum_edit_occupancy": 0.75,
+      "minimum_matched_processing_occupancy": 0.6,
+      "ridge": 0.03,
+      "sites_per_source": 12,
+      "source_roles": [
+        [
+          "fit",
+          "bounded_fit",
+          "image-background-patch-transfer-2026-11-11/intake",
+          "bounded"
+        ],
+        [
+          "fit",
+          "sd15_fit",
+          "image-bg-real-small-insertions-2026-11-11/trial",
+          "insertion"
+        ],
+        [
+          "calibration",
+          "sd15_cal",
+          "image-bg-real-remote-context-2026-11-11/trial",
+          "insertion"
+        ],
+        [
+          "held",
+          "bounded_held",
+          "image-wavelet-region-transfer-2026-11-11/holdout",
+          "bounded"
+        ],
+        [
+          "held",
+          "sd15_held",
+          null,
+          "later"
+        ]
+      ]
+    },
+    "gate": {
+      "additional_ordinary_groups": 2,
+      "additional_useful_feathered_groups": 3,
+      "minimum_families": 2,
+      "misplaced_edit_flags": 4
+    },
+    "geometry": {
+      "maximum_area_share": 0.1,
+      "maximum_aspect_ratio": 2,
+      "patch_sides": [
+        3,
+        4,
+        5,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "score": "Mean patch score in region minus higher of image median or adjacent ring, same for both heads."
+    },
+    "held": "Score sharp/feathered edits with unchanged, exact-site processing, full processing, matched blur, same-photo copy and color adjustments.",
+    "useful": {
+      "iou": 0.3,
+      "recall": 0.5
+    }
+  },
+  "fit": {
+    "binary": {
+      "iterations": 10,
+      "loss": 0.5820761453967256
+    },
+    "three_class": {
+      "iterations": 13,
+      "loss": 1.0524671343420615
+    }
+  },
+  "held_rows": 160,
+  "outcome": {
+    "binary": {
+      "actual": {
+        "additional_ordinary_groups": 5,
+        "additional_useful_feathered_groups": 3,
+        "minimum_families": 1,
+        "misplaced_edit_flags": 6
+      },
+      "ordinary_groups": 5,
+      "passes": false,
+      "useful_feathered_vs_binary": 0
+    },
+    "three_class": {
+      "actual": {
+        "additional_ordinary_groups": 3,
+        "additional_useful_feathered_groups": 3,
+        "minimum_families": 1,
+        "misplaced_edit_flags": 6
+      },
+      "ordinary_groups": 3,
+      "passes": false,
+      "useful_feathered_vs_binary": 0
+    }
+  },
+  "points": {
+    "binary": 0.6112154889273517,
+    "three_class": 0.5234852860134196
+  },
+  "runner_sha256": "5e4c90b21f16056c843d0d85806fe3910ee8910fc1525b5545277e13ee39005f",
+  "schema": "chipmunk.image-three-class-patch-probe/1",
+  "seconds": 101.53,
+  "sources": {
+    "calibration": {
+      "sd15": 8
+    },
+    "fit": {
+      "kandinsky": 6,
+      "sd15": 8,
+      "sdxl": 6
+    },
+    "held": {
+      "kandinsky": 6,
+      "sd15": 8,
+      "sdxl": 6
+    }
+  },
+  "strata": {
+    "kandinsky/feathered/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/feathered/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/feathered/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/global_processing/binary": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/global_processing/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/global_processing/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_blur/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_blur/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_blur/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_copy/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_copy/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_copy/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_processing/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_processing/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_processing/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_tone/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_tone/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_tone/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/original/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/original/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/original/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/sharp/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/sharp/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/sharp/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/feathered/binary": {
+      "flagged": 4,
+      "useful": 3,
+      "useful_before_point": 4,
+      "views": 8
+    },
+    "sd15/feathered/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/feathered/three_class": {
+      "flagged": 4,
+      "useful": 3,
+      "useful_before_point": 3,
+      "views": 8
+    },
+    "sd15/global_processing/binary": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/global_processing/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/global_processing/three_class": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/local_blur/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/local_blur/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/local_blur/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/local_copy/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/local_copy/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/local_copy/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/local_processing/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/local_processing/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/local_processing/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/local_tone/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/local_tone/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/local_tone/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/original/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/original/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/original/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/sharp/binary": {
+      "flagged": 4,
+      "useful": 3,
+      "useful_before_point": 4,
+      "views": 8
+    },
+    "sd15/sharp/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 8
+    },
+    "sd15/sharp/three_class": {
+      "flagged": 4,
+      "useful": 3,
+      "useful_before_point": 4,
+      "views": 8
+    },
+    "sdxl/feathered/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/feathered/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/feathered/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/global_processing/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/global_processing/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/global_processing/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/local_blur/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/local_blur/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/local_blur/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/local_copy/binary": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/local_copy/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/local_copy/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/local_processing/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/local_processing/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/local_processing/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/local_tone/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/local_tone/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/local_tone/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/original/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/original/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/original/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/sharp/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/sharp/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sdxl/sharp/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    }
+  }
+}

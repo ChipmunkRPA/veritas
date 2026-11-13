@@ -162,7 +162,7 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                 else:
                     record, assets = video_reference.compare(reference, submitted, timing_event_s=timing_event_s,
                                                               timing_model=settings.video_reference_timing_model_path,
-                                                              timing_short_fallback=True)
+                                                              timing_short_fallback=True, timing_local_sound=True)
             except ValueError as error:
                 raise ProblemError(422, f"Could not compare {kind} files", str(error)) from None
             if (record["submitted"]["sha256"], record["submitted"]["bytes"]) != expected:

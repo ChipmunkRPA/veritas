@@ -416,13 +416,16 @@ def test_authenticated_video_comparison_exports_exact_evidence_without_new_analy
     timing = optional.json()["comparison"]["timing"]
     assert timing["status"] == "unassessed" and timing["reason"] == "profile"
     assert timing["requested_earlier_time_s"] == "6/25" and timing["affects_overall_confidence"] is False
-    assert optional.json()["comparison"]["schema"] == video_reference.SCHEMA_WITH_TIMING
+    assert optional.json()["comparison"]["schema"] == video_reference.SCHEMA_WITH_MARKED_SOUND_FALLBACK
     assert optional.json()["assets"] == payload["assets"]
     with pymupdf.open(stream=base64.b64decode(optional.json()["pdf"]), filetype="pdf") as document:
         assert len(document) == 4
         timing_text = " ".join(document[-1].get_text().split())
         assert "Marked mouth and speech timing" in timing_text
         assert "continuous sound" in timing_text
+    optional_json = tmp_path / "comparison-marked-unassessed.json"
+    optional_json.write_text(json.dumps({key: optional.json()[key] for key in ("comparison", "assets")}))
+    assert run(earlier, later, optional_json, verify=True) == optional.json()["comparison"]
     assert state() == before
     with sessions() as db:
         db.get(Analysis, "other-kind").withdrawn_at = utcnow()
@@ -464,3 +467,26 @@ def test_short_marked_timing_recovers_a_shift_only_when_existing_match_lacks_sup
     previous = video_reference_timing.compare(None, None, earlier, earlier, anchor)
     assert previous["status"] == "no_large_timing_difference"
     assert video_reference_timing.compare(None, None, earlier, earlier, anchor, short_fallback=True) == previous
+
+
+def test_marked_local_sound_requires_exact_excerpt_and_unchanged_flanks():
+    generator = np.random.default_rng(1356)
+    earlier = generator.integers(-2000, 2000, 43200, dtype=np.int16)
+    anchor, offset = 14400, 3200
+    start, stop = 12800, 22400
+    submitted = earlier.copy()
+    submitted[start:stop] = earlier[start - offset:stop - offset]
+    sound, short, changed = video_reference_timing.local_sound_match(earlier, submitted, anchor)
+    assert changed == [start, stop]
+    assert not short
+    assert sound["source_samples"] == [15040, 17600]
+    assert sound["submitted_samples"] == [18240, 20800]
+    assert sound["offset_samples"] == offset
+    assert sound["source_pcm_sha256"] == sound["submitted_pcm_sha256"]
+
+    altered = submitted.copy()
+    altered[sound["submitted_samples"][0]:sound["submitted_samples"][1]] += 1
+    assert video_reference_timing.local_sound_match(earlier, altered, anchor) is None
+    shifted = np.r_[np.zeros(offset, dtype=np.int16), earlier[:-offset]]
+    assert video_reference_timing.local_sound_match(earlier, shifted, anchor) is None
+    assert video_reference_timing.local_sound_match(earlier, earlier, anchor) is None

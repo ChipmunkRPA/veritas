@@ -13,11 +13,13 @@ from app.core.canonical import canonical_json
 from app.evidence.video_reference import (
     SCHEMA,
     SCHEMA_WITH_ADDITIONAL_SOUNDTRACK,
+    SCHEMA_WITH_MARKED_SOUND_FALLBACK,
     SCHEMA_WITH_SHORT_TIMING,
     SCHEMA_WITH_SOUNDTRACK,
     SCHEMA_WITH_TIMING,
     compare,
 )
+from app.evidence.video_reference_timing import SHORT_WAVEFORM_BASIS
 
 
 def _same_json_value(actual, expected):
@@ -60,24 +62,30 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds: Fraction | None = None, timing_model: Path | None = None) -> dict:
     options = {}
     short_fallback = not verify
+    local_sound = not verify
     if verify:
         exported = json.loads((output if output.is_file() else output / "comparison.json").read_bytes())
         record = exported.get("comparison", exported) if isinstance(exported, dict) else None
         event_seconds = None
         if isinstance(record, dict):
             schema = record.get("schema")
+            local_sound = schema == SCHEMA_WITH_MARKED_SOUND_FALLBACK
             additional = schema == SCHEMA_WITH_ADDITIONAL_SOUNDTRACK
-            options.update(include_local=("local_comparison" in record.get("picture", {}) if additional else schema != SCHEMA),
-                           include_soundtrack=schema == SCHEMA_WITH_SOUNDTRACK or additional and "soundtrack_alignment" in record,
-                           include_additional_soundtrack=additional)
-            if schema in (SCHEMA_WITH_TIMING, SCHEMA_WITH_SHORT_TIMING) or ((schema == SCHEMA_WITH_SOUNDTRACK or additional) and "timing" in record):
+            options.update(include_local=("local_comparison" in record.get("picture", {}) if additional or local_sound
+                                          else schema != SCHEMA),
+                           include_soundtrack=schema == SCHEMA_WITH_SOUNDTRACK
+                           or ((additional or local_sound) and "soundtrack_alignment" in record),
+                           include_additional_soundtrack=additional or (local_sound and "additional_soundtrack" in record))
+            if "timing" in record and schema in (SCHEMA_WITH_TIMING, SCHEMA_WITH_SHORT_TIMING, SCHEMA_WITH_SOUNDTRACK,
+                                                 SCHEMA_WITH_ADDITIONAL_SOUNDTRACK, SCHEMA_WITH_MARKED_SOUND_FALLBACK):
                 event_seconds = Fraction(record["timing"]["requested_earlier_time_s"])
-                short_fallback = schema == SCHEMA_WITH_SHORT_TIMING or record["timing"].get("waveform_basis") == "short_marked_excerpt"
+                short_fallback = (local_sound or schema == SCHEMA_WITH_SHORT_TIMING
+                                  or record["timing"].get("waveform_basis") == SHORT_WAVEFORM_BASIS)
     if event_seconds is not None:
         from app.core.config import settings
 
         options.update(timing_event_s=event_seconds, timing_model=timing_model or settings.video_reference_timing_model_path,
-                       timing_short_fallback=short_fallback)
+                       timing_short_fallback=short_fallback, timing_local_sound=local_sound)
     return replay(partial(compare, **options), earlier, submitted, output, verify=verify)
 
 

@@ -531,6 +531,7 @@ def test_authenticated_audio_comparison_pdf_json_and_temporary_storage(
     earlier, analyzed, _, _ = aligned_audio_pair
     stored = f.store.put_file(analyzed)
     monkeypatch.setattr(settings, "audio_reference_comparison_enabled", True)
+    monkeypatch.setattr(settings, "audio_reference_local_timing", False)
 
     @contextmanager
     def sessions():

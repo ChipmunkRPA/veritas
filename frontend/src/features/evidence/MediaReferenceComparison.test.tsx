@@ -201,7 +201,7 @@ it('accepts the scoped video comparison and shows native crops linked to the rev
   expect(screen.getByText('Ordinary edits may produce this evidence.')).toBeTruthy()
 })
 
-it.each([3, 4])('renders exact timing evidence from marked comparison format %i', async (version) => {
+it.each([3, 4, 7])('renders exact timing evidence from marked comparison format %i', async (version) => {
   const crop = { file: 'mouth.png', media_type: 'image/png', sha256: 'd'.repeat(64) }
   const speech = { file: 'speech.wav', media_type: 'audio/wav', sha256: 'e'.repeat(64) }
   const evidence = (frame_index: number, picture_time_s: number, pcm_start_s: number, pcm_end_s: number) => ({
@@ -213,10 +213,14 @@ it.each([3, 4])('renders exact timing evidence from marked comparison format %i'
   }
   const speechStart = version === 4 ? .72 : .7600625
   const speechEnd = version === 4 ? .78 : .9200625
-  const marked = { ...comparison, schema: `chipmunk.video-reference-comparison/${version}`, timing: {
+  const localSound = version === 7
+  const marked = { ...comparison, schema: `chipmunk.video-reference-comparison/${version}`,
+    ...(localSound ? { soundtrack_alignment: { summary: 'No qualifying local soundtrack shift was found.' } } : {}),
+    timing: {
     status: 'timing_difference', summary: 'The picture event moved 320 ms later relative to speech.',
     scope: version === 4 ? 'The timing check used a shorter speech excerpt beginning at the marked frame.'
       : 'The measured timing difference can come from ordinary editing.', offset_ms: 320, event_range_s: [.72, 1.04],
+    ...(localSound ? { changed_audio_samples: [9600, 19200] } : {}),
     earlier: evidence(18, .72, speechStart, speechEnd), submitted: evidence(26, 1.04, speechStart, speechEnd),
   } }
   const fetch = vi.fn().mockResolvedValueOnce(Response.json({ available: true, timing_available: true }))
@@ -239,7 +243,9 @@ it.each([3, 4])('renders exact timing evidence from marked comparison format %i'
   fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
   expect(await screen.findByText(marked.timing.summary)).toBeTruthy()
   expect((fetch.mock.calls[2][1].body as FormData).get('timing_event_s')).toBe('0.720')
-  expect(screen.getByText('Compared event times 0.720–1.040 s.')).toBeTruthy()
+  expect(screen.getByText(localSound ? 'Changed sound in the analyzed clip 0.600–1.200 s.'
+    : 'Compared event times 0.720–1.040 s.')).toBeTruthy()
+  expect(screen.queryByText('No qualifying local soundtrack shift was found.')).toBeNull()
   expect(screen.getByAltText('Earlier clip mouth crop at 0.720 seconds').getAttribute('src')).toBe('data:image/png;base64,iVBORw0KGgo=')
   expect(screen.getByAltText('Analyzed clip mouth crop at 1.040 seconds')).toBeTruthy()
   expect(screen.getByText('Frame 26 at 1.040 s')).toBeTruthy()

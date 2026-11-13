@@ -35,6 +35,7 @@ type TimingComparison = {
   scope: string
   offset_ms?: number
   event_range_s?: number[]
+  changed_audio_samples?: [number, number]
 } & Partial<Record<Side, TimingSide>>
 type SoundtrackSide = { start_s: number; end_s: number; audio: Asset; waveform: Waveform }
 type SoundtrackTiming = {
@@ -86,6 +87,7 @@ type Comparison = {
 } & ({
   schema: 'chipmunk.video-reference-comparison/1' | 'chipmunk.video-reference-comparison/2' | 'chipmunk.video-reference-comparison/3'
     | 'chipmunk.video-reference-comparison/4' | 'chipmunk.video-reference-comparison/5' | 'chipmunk.video-reference-comparison/6'
+    | 'chipmunk.video-reference-comparison/7'
   submitted: PictureDimensions
   picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
   timing?: TimingComparison
@@ -290,10 +292,13 @@ function TimingEvidence({ timing, assets }: { timing: TimingComparison; assets: 
   })
   const peak = Math.max(.01, ...matched.flatMap(({ evidence }) => [...evidence.waveform.low, ...evidence.waveform.high].map(Math.abs)))
   const range = timing.event_range_s
+  const changedSound = timing.changed_audio_samples
   return <section className="space-y-2" aria-label="Mouth and speech timing">
     <h3 className="m-0 text-small font-medium">Mouth and speech timing</h3>
     <p className="m-0 text-small">{timing.summary}</p>
-    {timing.status === 'timing_difference' && range?.length === 2 && <p className="m-0 text-small">
+    {changedSound ? <p className="m-0 text-small">
+      Changed sound in the analyzed clip {sourceSeconds.format(changedSound[0] / 16000)}–{sourceSeconds.format(changedSound[1] / 16000)} s.
+    </p> : timing.status === 'timing_difference' && range?.length === 2 && <p className="m-0 text-small">
       Compared event times {sourceSeconds.format(range[0])}–{sourceSeconds.format(range[1])} s.
     </p>}
     {matched.length > 0 && <div className="grid gap-3 sm:grid-cols-2">
@@ -369,7 +374,8 @@ function ResultView({ result }: { result: Result }) {
     <p className="m-0 text-small text-text-muted">{comparison.interpretation}</p>
     {comparison.status !== 'measured' && <p className="m-0 text-small">{notes[comparison.status] ?? 'The files could not be compared.'}</p>}
     {comparison.timing && <TimingEvidence timing={comparison.timing} assets={assets} />}
-    {comparison.soundtrack_alignment && <SoundtrackTimingEvidence timing={comparison.soundtrack_alignment} assets={assets} />}
+    {comparison.soundtrack_alignment && !comparison.timing?.changed_audio_samples &&
+      <SoundtrackTimingEvidence timing={comparison.soundtrack_alignment} assets={assets} />}
     {comparison.local_timing && <SoundtrackTimingEvidence timing={comparison.local_timing} assets={assets} audioOnly />}
     {picture && !comparison.soundtrack_alignment && (picture.changed_frames > 0 || audio?.status !== 'measured') &&
       <p className="m-0 text-caption text-text-muted">{picture.changed_frames > 0
@@ -478,7 +484,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = [1, 2, 3, 4, 5, 6]
+      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7] : [1, 2, 3, 4, 5, 6]
       if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
@@ -522,7 +528,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
           value={timingEvent} disabled={pending || !file} className="w-32 rounded border border-border bg-surface px-2 py-1 text-small"
           onChange={event => { setTimingEvent(event.currentTarget.value); setResult(null); setError('') }} />
         <p id={timingInput + '-hint'} className="mt-1 mb-0 text-caption text-text-muted">
-          Optional. Mark a moment in the earlier clip when the lips close just before reopening. This check supports matching 360 × 288 clips with 75 pictures at 25 fps and continuous audio.
+          Optional. Mark when the lips close just before reopening in the earlier clip. This supports matching 360 × 288 clips at 25 fps with 75 pictures and continuous audio, and some short 720 × 480 pairs with identical pictures.
         </p>
       </div>}
       <Button type="submit" variant="primary" disabled={!file || pending}>{pending ? 'Comparing…' : kind === 'audio' ? 'Compare recordings' : 'Compare videos'}</Button>

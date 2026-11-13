@@ -209,13 +209,20 @@ def _draw_waveform(page, wave, y, maximum, duration):
 def _timing_page(document, timing, assets):
     page = _page(document, "Marked mouth and speech timing")
     page.insert_textbox((MARGIN, 124, RIGHT, 167), timing["summary"], fontsize=12, fontname="hebo", color=INK)
-    short_excerpt = timing.get("waveform_basis") == "short_marked_excerpt"
-    scope_bottom, interval_y = (226, 236) if short_excerpt else (213, 221)
-    page.insert_textbox((MARGIN, 176, RIGHT, scope_bottom), timing["scope"], fontsize=10, fontname="helv", color=MUTED)
+    extended_scope = timing.get("waveform_basis") == "short_marked_excerpt" or "changed_audio_samples" in timing
     if timing["status"] == "unassessed":
+        page.insert_textbox((MARGIN, 124, RIGHT, 188), timing["summary"], fontsize=11, fontname="hebo", color=INK)
+        page.insert_textbox((MARGIN, 196, RIGHT, 252), timing["scope"], fontsize=10, fontname="helv", color=MUTED)
         return
+    scope_bottom, interval_y = (226, 236) if extended_scope else (213, 221)
+    page.insert_textbox((MARGIN, 176, RIGHT, scope_bottom), timing["scope"], fontsize=10, fontname="helv", color=MUTED)
     low, high = timing["event_range_s"]
-    _text(page, MARGIN, interval_y, f"Compared interval in analyzed clip  {low:.3f} to {high:.3f} s", color=MUTED)
+    if "changed_audio_samples" in timing:
+        start, end = timing["changed_audio_samples"]
+        interval = f"Changed sound in analyzed clip  {start / AUDIO_RATE:.3f} to {end / AUDIO_RATE:.3f} s"
+    else:
+        interval = f"Compared interval in analyzed clip  {low:.3f} to {high:.3f} s"
+    _text(page, MARGIN, interval_y, interval, color=MUTED)
     for x, (side, label) in zip((MARGIN, 316), LABELS.items(), strict=True):
         row = timing[side]
         _text(page, x, 253, label, font="hebo")
@@ -429,7 +436,7 @@ def render(record, assets):
         _remaining_ranges(document, remaining)
         if "timing" in record:
             _timing_page(document, record["timing"], assets)
-        if "soundtrack_alignment" in record:
+        if "soundtrack_alignment" in record and "changed_audio_samples" not in record.get("timing", {}):
             _soundtrack_timing_page(document, record["soundtrack_alignment"], assets)
         if "additional_soundtrack" in record:
             _additional_soundtrack_pages(document, record["additional_soundtrack"])

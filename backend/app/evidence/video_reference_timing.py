@@ -7,6 +7,7 @@ import hashlib
 import importlib
 import importlib.metadata
 import importlib.util
+from contextlib import contextmanager
 from fractions import Fraction
 
 import numpy as np
@@ -37,6 +38,16 @@ SHORT_AUDIO_SPEC = SPEC | {
     "minimum_audio_margin": 0.08,
 }
 SHORT_WAVEFORM_BASIS = "short_marked_excerpt"
+LOCAL_SOUND_METHOD = "marked_local_sound_shift/1"
+LOCAL_SOUND_SCOPE = (
+    "The decoded pictures match. A marked mouth event anchors a distinctive sound excerpt that moved within "
+    "the analyzed clip, with identical decoded sound before and after the change. Ordinary editing can cause "
+    "this result. This evidence carries no AI confidence weight."
+)
+LOCAL_SOUND_UNASSESSED = (
+    "The marked timing check needs matching upright 360 x 288 clips with 75 native pictures at 25 fps and continuous sound. "
+    "For some short 720 x 480 pairs, it can also report a locally moved sound excerpt when every picture matches."
+)
 
 
 def aperture(series):
@@ -275,6 +286,98 @@ def _assets(side, frame_index, table, pixels, sound, sample_range, assets, save_
     }
 
 
+def local_sound_match(first, last, mark_sample):
+    """Find an exact moved excerpt inside a short change with identical flanks."""
+    if len(first) != len(last):
+        return None
+    changed = np.flatnonzero(first != last)
+    if not changed.size:
+        return None
+    begin, end = int(changed[0]), int(changed[-1]) + 1
+    rate = SPEC["sample_rate"]
+    flank = 60 * rate // 1000
+    if begin < flank or end > len(first) - flank or end - begin > 800 * rate // 1000:
+        return None
+    for spec in (SPEC, SHORT_AUDIO_SPEC):
+        offsets = [mark_sample + offset for offset in spec["audio_offsets_samples"]]
+        sound = audio_shift(first, last, 0, spec=spec | {"audio_offsets_samples": offsets})
+        if sound is None or not Fraction(SPEC["review_offset_minimum_seconds"]) * rate <= abs(sound["offset_samples"]) <= 360 * rate // 1000:
+            continue
+        a, b = sound["source_samples"]
+        c, d = sound["submitted_samples"]
+        if begin <= c < d <= end and np.array_equal(first[a:b], last[c:d]):
+            return sound, spec is SHORT_AUDIO_SPEC, [begin, end]
+    return None
+
+
+def assess_local_sound(paths, tables, tracks, earlier_time, model, assets, save_image):
+    """Measure one local audio move in a short pair of identical pictures."""
+    earlier, submitted = tables
+    if not 48 <= len(earlier) <= 75 or any(
+        table.rotation or table.pts[0] or (table.width, table.height) != (720, 480) for table in tables
+    ):
+        return None
+    clock = [tick * earlier.tb for tick in earlier.pts]
+    step = clock[1]
+    if not Fraction(1, 25) <= step <= Fraction(2, 47) or any(
+        t != i * step for i, t in enumerate(clock)
+    ):
+        return None
+    if any(status != "measured" or info["relative_start"] != "0" or not 24000 <= info["samples"] <= 54400
+           for status, _, info in tracks):
+        return None
+    anchor = min(range(len(clock)), key=lambda i: (abs(clock[i] - earlier_time), i))
+    if not 2 <= anchor < len(clock) - 4 or abs(clock[anchor] - earlier_time) > step / 2:
+        return None
+    first, last = (np.rint(values * 32768).astype("<i2") for _, values, _ in tracks)
+    match = local_sound_match(first, last, round(clock[anchor] * SPEC["sample_rate"]))
+    if match is None or not available(model):
+        return None
+    sound, short, changed = match
+    audio_end = max(sound["source_samples"][1], sound["submitted_samples"][1])
+    if Fraction(audio_end, SPEC["sample_rate"]) > clock[-1]:
+        return None
+    try:
+        with _landmarker(model) as (mp, task):
+            wanted = range(max(0, anchor - 12), min(len(clock), anchor + 15))
+            motion, pixels = _measure(paths[0], earlier, wanted, task, mp)
+    except (AttributeError, OSError, ImportError, RuntimeError, ValueError):
+        return None
+    visual = visual_shift(motion, motion, anchor)
+    if visual is None or visual["submitted_frame"] != anchor:
+        return None
+    shift = Fraction(sound["offset_samples"], SPEC["sample_rate"])
+    direction = "later" if shift > 0 else "earlier"
+    return {
+        "status": "timing_difference",
+        "method": LOCAL_SOUND_METHOD,
+        "summary": f"Matching sound moved {float(abs(shift) * 1000):.1f} ms {direction} while the marked mouth event stayed in the same frame.",
+        "scope": LOCAL_SOUND_SCOPE,
+        "requested_earlier_time_s": str(earlier_time),
+        "affects_overall_confidence": False,
+        "offset_ms": float(-shift * 1000),
+        "event_range_s": [sample / SPEC["sample_rate"] for sample in sound["submitted_samples"]],
+        "changed_audio_samples": changed,
+        "waveform_basis": SHORT_WAVEFORM_BASIS if short else "standard_marked_excerpt",
+        "earlier": _assets("earlier", anchor, earlier, pixels, first, sound["source_samples"], assets, save_image),
+        "submitted": _assets("submitted", anchor, submitted, pixels, last, sound["submitted_samples"], assets, save_image),
+    }
+
+
+@contextmanager
+def _landmarker(model):
+    mp = importlib.import_module("mediapipe")
+    options = mp.tasks.vision.FaceLandmarkerOptions(
+        base_options=mp.tasks.BaseOptions(
+            model_asset_buffer=_model_bytes(model), delegate=mp.tasks.BaseOptions.Delegate.CPU
+        ),
+        running_mode=mp.tasks.vision.RunningMode.IMAGE,
+        num_faces=2,
+    )
+    with mp.tasks.vision.FaceLandmarker.create_from_options(options) as task:
+        yield mp, task
+
+
 def assess(paths, tables, tracks, matching_pictures, earlier_time, model, assets, save_image, *, short_fallback=False):
     def unavailable(reason):
         return {
@@ -310,16 +413,7 @@ def assess(paths, tables, tracks, matching_pictures, earlier_time, model, assets
     if not available(model):
         return unavailable("runtime")
     try:
-        payload = _model_bytes(model)
-        mp = importlib.import_module("mediapipe")
-        options = mp.tasks.vision.FaceLandmarkerOptions(
-            base_options=mp.tasks.BaseOptions(
-                model_asset_buffer=payload, delegate=mp.tasks.BaseOptions.Delegate.CPU
-            ),
-            running_mode=mp.tasks.vision.RunningMode.IMAGE,
-            num_faces=2,
-        )
-        with mp.tasks.vision.FaceLandmarker.create_from_options(options) as task:
+        with _landmarker(model) as (mp, task):
             original, left = _measure(paths[0], tables[0], range(anchor - 2, anchor + 5), task, mp)
             lower, upper = max(0, anchor - 12), min(75, anchor + 15)
             submitted, right = _measure(paths[1], tables[1], range(lower, upper), task, mp)

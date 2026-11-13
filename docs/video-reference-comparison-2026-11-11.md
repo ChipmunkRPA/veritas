@@ -24,6 +24,8 @@ On a local development instance with the optional timing dependency installed, e
 
 This option requires two upright 360 × 288 clips with 75 native pictures at exactly 25 fps, a zero-origin continuous soundtrack with 47,648 decoded 16 kHz mono samples, and at least 57 exact shared pictures. The local availability check requires MediaPipe 0.10.32 and the pinned face landmark task at `VERITAS_VIDEO_REFERENCE_TIMING_MODEL_PATH` with SHA-256 `64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff`. Install the runtime in the backend environment or add its local module directory to `PYTHONPATH`. The marked check is opt-in on each comparison. [Held timing study and asset terms](grid-paired-closure-timing-2026-11-12.md)
 
+For some matching upright 720 × 480 pairs, the marked check can recover a locally moved soundtrack excerpt when the automatic comparison finds no move. Both clips need identical decoded pictures, 48–75 native pictures at a common constant cadence between 23.5 and 25 fps, and matching continuous sound clocks. A result needs an exact moved excerpt with identical decoded sound before and after the changed range. [Short-video held test](video-marked-sound-fallback-2026-11-12.md)
+
 ## Local verification
 
 Four retained licensed CREMA-D videos supplied moving pictures and speech. The test prepared each pair with lossless RGB video and mono PCM at 25 pictures per second. A rectangular replacement used pixels from other frames of the same recording at frame indices `[12, 24)`. A sound-only replacement within the same pair used samples from elsewhere in that soundtrack at `[12800, 22400)`. All four comparisons recovered both intervals and the exact changed-pixel and sample counts at the measured locations. Four metadata-only remux controls showed no picture or sound differences. All four ordinary H.264 re-encodes changed every decoded picture and preserved the PCM. Four trims were unassessed because picture timestamps differed.
@@ -46,7 +48,7 @@ The replay uses the same measurement implementation as the app. Record your FFmp
 
 Version 5 includes the automatic soundtrack timing comparison. It requires no additional weights. A version 5 export that also includes marked mouth evidence needs the same pinned timing runtime for replay.
 
-Version 6 also records the second soundtrack comparison. The same replay command checks the separate source clocks, ranges, and waveforms. No additional weights are needed for the second soundtrack.
+Version 6 also records the second soundtrack comparison. The same replay command checks the separate source clocks, ranges, and waveforms. No additional weights are needed for the second soundtrack. Version 7 supports the marked soundtrack fallback and uses the same pinned landmark task as the original marked comparison.
 
 To verify a downloaded version 2 JSON with a measured local range using only Python 3.11 or later, FFmpeg, and FFprobe, run from the repository root.
 

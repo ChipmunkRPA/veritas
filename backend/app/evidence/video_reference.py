@@ -26,6 +26,7 @@ SCHEMA_WITH_TIMING = "chipmunk.video-reference-comparison/3"
 SCHEMA_WITH_SHORT_TIMING = "chipmunk.video-reference-comparison/4"
 SCHEMA_WITH_SOUNDTRACK = "chipmunk.video-reference-comparison/5"
 SCHEMA_WITH_ADDITIONAL_SOUNDTRACK = "chipmunk.video-reference-comparison/6"
+SCHEMA_WITH_MARKED_SOUND_FALLBACK = "chipmunk.video-reference-comparison/7"
 MAX_COMPARED_SOUNDTRACKS = 2
 MAX_BYTES = 48 * 1024 * 1024
 MAX_FRAMES = 360
@@ -231,6 +232,7 @@ def _additional_soundtracks(paths, sources, tables, assets):
 def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             timing_event_s: Fraction | None = None, timing_model: Path | None = None,
             timing_short_fallback: bool = False, include_soundtrack: bool = True,
+            timing_local_sound: bool = False,
             include_additional_soundtrack: bool = True) -> tuple[dict, dict[str, bytes]]:
     """Report actual decoded differences at equal relative native picture timestamps."""
     paths = earlier, submitted
@@ -249,6 +251,7 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
         tracks = [read_track(path, source, max_seconds=MAX_SECONDS, video=True, origin=table.pts[0] * table.tb)
                   for path, source, table in zip(paths, sources, tables, strict=True)]
         record["audio"] = compare_tracks(*tracks, assets)
+    use_marked_sound = False
     if timing_event_s is not None:
         from app.evidence import video_reference_timing
 
@@ -260,6 +263,8 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
         )
         if record["timing"].get("waveform_basis") == video_reference_timing.SHORT_WAVEFORM_BASIS:
             record["schema"] = SCHEMA_WITH_SHORT_TIMING
+        use_marked_sound = (timing_local_sound and status == "measured"
+                            and record["timing"].get("reason") == "profile")
     if (include_soundtrack and tracks is not None and not record["picture"]["changed_frames"]
             and record["audio"]["status"] == "measured"):
         from app.evidence import video_reference_soundtrack
@@ -273,11 +278,21 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
         else:
             assets.update(timing_assets)
         record.update(schema=SCHEMA_WITH_SOUNDTRACK, soundtrack_alignment=alignment)
+        if use_marked_sound and alignment["status"] != "local_shift" and record["audio"]["changed_samples"] > 0:
+            local_sound = video_reference_timing.assess_local_sound(
+                paths, tables, tracks, timing_event_s, timing_model, assets, _image,
+            )
+            if local_sound is not None:
+                record["timing"] = local_sound
     if include_additional_soundtrack and status == "measured":
         additional = _additional_soundtracks(paths, sources, tables, assets)
         if additional is not None:
             record.update(schema=SCHEMA_WITH_ADDITIONAL_SOUNDTRACK, additional_soundtrack=additional,
                           interpretation=INTERPRETATION.replace("the first soundtrack", "the available soundtracks checked below"))
+    if use_marked_sound:
+        record["schema"] = SCHEMA_WITH_MARKED_SOUND_FALLBACK
+        if record["timing"]["status"] == "unassessed":
+            record["timing"]["summary"] = video_reference_timing.LOCAL_SOUND_UNASSESSED
     if sources != tuple(_identity(path) for path in paths):
         raise ValueError("One of the clips changed while the comparison was running.")
     return record, assets

@@ -12,9 +12,23 @@ Source selection used file hashes and publisher clocks before opening any model 
 
 The trial compares rounded stereo mono, the highest response across the prior blind-separation outputs, and the highest response across eligible directional-mask outputs. Each uses the same two windows, 1.000–3.000 s and 3.000–5.000 s. The three prior genuine-reference maxima are 5.356590, 6.760728, and 7.068066 in native model log-odds. A located edit requires the strongest admitted window to exceed its route's frozen point, cover at least half of a publisher-labeled interval, and overlap at least 30% of the union of the window and that interval. The advance rule requires two additions in two synthesis families, no added background-only group, and at most one added ordinary group per room. [Commercial model audit](commercial-model-audit.md)
 
+## Results
+
+Each cell gives localized edits and flagged ordinary groups. Ordinary groups include the background-only controls.
+
+| Measured room | Mono | Prior blind separator | Directional mask | Mono plus directional mask |
+| --- | ---: | ---: | ---: | ---: |
+| Stairway, 4 edits and 9 controls | 0 / 2 | 1 / 2 | 0 / 0 | 0 / 2 |
+| Aula Carolina, 3 edits and 9 controls | 0 / 2 | 0 / 0 | 0 / 0 | 0 / 2 |
+| Pooled, 7 edits and 18 controls | 0 / 4 | 1 / 2 | 0 / 0 | 0 / 4 |
+
+The prior separator selected **3.000–5.000 s** in the stairway for a labeled insert at **3.267–4.292 s**. The window covers the full insert and has interval IoU of **0.5125**. The directional mask recovered no above-point edit location in either room and added no ordinary or background-only flags. Mono flagged two of six background-only excerpts and the prior blind separator flagged zero. Mono and the directional arm each left one ordinary case unassessed, on different inputs. There were no above-point flags at the wrong edit location in any arm. The frozen advancement gate failed. The tested directional route remains a research check. The single prior-separator gain does not establish its transfer across rooms or generator families.
+
+The test uses new impulse responses, held-out readers and overlapping real background voices in a controlled render. All positive edits come from one publisher and one type of boundary mixing. The positive cases use a single foreground-to-background ratio and independent ordinary controls. These results cannot establish performance on uploaded room recordings or on routine edits to the same utterance. Repeating each matched utterance and ordinary edit across rooms and several background levels would distinguish room transfer from source variability.
+
 ## Replay
 
-The published ledger contains anonymous scalar responses, native truth ranges, and commitments. Public verification recomputes location counts and the gate with Python's standard library. Native replay additionally requires the earlier directional run and publisher roster, the first 288 MiB of the part A archive, the complete AIR 1.4 archive, the two original AMI microphone WAVs, and the pinned local weights. Native audit checks waveforms and speech admission with NumPy's FFT after the SciPy run. The private roster stays local. [Scalar ledger](evaluation-panels/audio-spatial-mask-aachen-transfer-2026-11-13.json)
+The published ledger contains anonymous scalar responses, native truth ranges, and commitments. Public verification recomputes location counts and the gate with Python's standard library. Native replay additionally requires the earlier directional run and publisher roster, the first 288 MiB of the part A archive, the complete AIR 1.4 archive, the two original AMI microphone WAVs, and the pinned local weights. After 236 local model forwards, the native audit reproduced the exact window PCM and speech admission across all 25 cases using NumPy's FFT after the SciPy run. The audit reuses the locked scalar scores. The private roster stays local. [Scalar ledger](evaluation-panels/audio-spatial-mask-aachen-transfer-2026-11-13.json)
 
 ```sh
 python3 -B -IS backend/scripts/review_audio_spatial_mask_aachen_transfer.py \

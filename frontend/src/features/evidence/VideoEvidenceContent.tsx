@@ -197,7 +197,10 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       {packet.face_boundary && packet.face_boundary_frames && <section className="mt-5 rounded-md border border-border p-3">
         <h4 className="m-0 text-small font-medium">Refined boundary estimate</h4>
         <p className="mt-2 mb-0 text-small text-text-muted"><strong>{seconds(packet.face_boundary.start_stream_s)}–{seconds(packet.face_boundary.end_stream_s)}</strong> on the source clock.
-          {' '}{packet.face_boundary.frame_inputs.length} denser samples on the same tracked face support this estimate. It carries no weight in overall AI confidence.</p>
+          {packet.face_boundary.method === 'face-appearance-paired-edge/1'
+            ? ' The end is exclusive. Two appearance transitions on the same tracked face bracket the interval, with limited motion measured in nearby pixels.'
+            : ` ${packet.face_boundary.frame_inputs.length} denser samples on the same tracked face support this estimate.`}
+          {' '}It carries no weight in overall AI confidence.</p>
         {renderFrames(packet, packet.face_boundary_frames, true)}
       </section>}
       {renderFrames(packet, packet.frames, false)}

@@ -11,12 +11,19 @@ from app.core.config import settings
 from app.detectors.image.adapters.common import revisions
 from app.detectors.image.faces import detect_faces
 from app.detectors.video import face_appearance as method
-from app.detectors.video import face_boundary, face_detail_repeat, face_return, face_return_fine_scene
+from app.detectors.video import (
+    face_boundary,
+    face_detail_repeat,
+    face_paired_edge,
+    face_return,
+    face_return_fine_scene,
+)
 from app.detectors.video.adapters.common import CPU_ONLY, FULL_DEEP, video_spec
 from app.detectors.video.adapters.face_sequence import FAMILY, FaceSequenceReviewDetector, SequenceInputs
 from app.detectors.video.decode import DecodeError
 from app.engine.boundary import Deadline, DetectorTimeout
 from app.engine.detector import ActivationUse, Applicability, DetectorResult, InputUnit, UnitScore
+from app.evidence import face_paired_edge_binding as paired
 from app.evidence.face_intervals import bind_tracks
 from app.evidence.face_return_binding import (
     DENSE_FRAME_PROFILES,
@@ -36,6 +43,7 @@ DETECTOR = "vid.review.face_appearance"
 BOUNDARY_BUDGET_S = 8.0
 RETURN_BUDGET_S = 12.0
 DETAIL_REPEAT_BUDGET_S = 4.0
+PAIRED_EDGE_BUDGET_S = 8.0
 COARSE_RESULT_RESERVE_S = 1.0
 
 
@@ -416,6 +424,67 @@ def _repeat_face_detail(result, inputs, recognizer, deadline):
     return result
 
 
+def _with_paired_boundary(result: DetectorResult, inputs: SequenceInputs, yunet, recognizer, deadline) -> DetectorResult:
+    if not settings.video_face_paired_edge_refinement or settings.face_min_size != 48:
+        return result
+    details = result.details
+    coarse = details.get("face_sequence")
+    if not coarse or any(details.get(key) for key in ("face_boundary", "face_return", "face_return_secondary")):
+        return result
+    table = inputs.table
+    path = getattr(inputs.store, "path", None)
+    encoding = (*inputs.encoding, inputs.codec_tag)
+    if path is None or encoding != paired.ENCODING or not paired.supported(table, encoding, face_return.source_carrier(path)):
+        return result
+    first, last = (table.pts.index(coarse[key]) for key in ("start_pts", "end_pts"))
+    if last - first != paired.COARSE_FRAMES:
+        return result
+    remaining = deadline.remaining() if deadline is not None else None
+    budget = PAIRED_EDGE_BUDGET_S if remaining is None else min(PAIRED_EDGE_BUDGET_S, remaining - COARSE_RESULT_RESERVE_S)
+    if budget <= 0:
+        return result
+    stop = deadline.nested(budget) if deadline is not None else Deadline(budget)
+    planned = paired.schedule(first, last)
+    scheduled = set(planned)
+    faces, reduced, source = {}, {}, {}
+    try:
+        with closing(inputs.store.iter_many(planned, timeout_s=budget)) as frames:
+            for i, rgb in frames:
+                stop.check("paired face timing")
+                if not inputs.store.native_pts_verified(i):
+                    return result
+                source[i] = {"frame_index": i, "pts": table.pts[i], "decoded_rgb_sha256": hashlib.sha256(rgb.tobytes()).hexdigest()}
+                reduced[i] = face_paired_edge.reduced_rgb(rgb)
+                bgr = cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
+                detected = detect_faces(bgr, detector=yunet, min_size=48)
+                if len(detected) == 1 and (measured := _measure(rgb, bgr, i, table, detected[0], recognizer)) is not None:
+                    vector, binding = measured
+                    faces[i] = method.unit(vector), detected[0], binding
+        if set(reduced) != scheduled:
+            return result
+        selected = face_paired_edge.estimate((first, last), faces, reduced, stop.check)
+        stop.check("paired face timing")
+    except (DecodeError, DetectorTimeout, cv2.error, ValueError):
+        return result
+    if selected is None:
+        return result
+    (start, end), proof, return_hex = selected
+    if (start, end) == (first, last):
+        return result
+    middle = min((i for i in faces if start <= i < end), key=lambda i: (abs(2*i-start-end), i))
+    indices = set(paired.motion_inputs(start, scheduled)) | set(paired.motion_inputs(end, scheduled))
+    details["face_boundary"] = {
+        "method": paired.METHOD, "time_base": table.time_base, "track_id": coarse["track_id"],
+        "start_pts": table.pts[start], "end_pts": table.pts[end], "start_stream_s": table.seconds(start), "end_stream_s": table.seconds(end),
+        "source_first_pts": table.pts[0], "source_encoding": list(encoding), "source_carrier": "mp4",
+        "start_frame_index": start, "end_frame_index": end, "scheduled_frame_indices": planned,
+        "anchors": dict(zip(paired.ROLES, (start-1, middle, end), strict=True)),
+        "frame_inputs": [faces[i][2] for i in sorted(faces)], "scene_frame_inputs": [source[i] for i in sorted(indices)],
+        "edges": proof, "return_hex": return_hex,
+    }
+    return result
+
+
 class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
     APPEARANCE = 'opencv.sface.2021dec'
     spec = video_spec(DETECTOR, 'Face appearance transition review', InputUnit.FRAME_BATCH, (), ('series',),
@@ -440,6 +509,8 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
             'One native aligned face at a time; 128 float32 appearance values per retained frame',
             (f'At most 192 coarse face inputs and {face_boundary.MAX_FRAMES} optional timing inputs.{return_inputs}',
              'An enabled lower-detail repeat reads the same input frames from the selected coarse range.',
+             *((f'The enabled paired-edge timing refinement reads at most {paired.MAX_READS} additional native frames.',)
+               if settings.video_face_paired_edge_refinement else ()),
              'Face vectors stay in working memory.')))
 
     def run(self, ctx):
@@ -502,4 +573,5 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
             details=details,
             exhibit_ids=[exhibit], model_revisions=revisions(ctx, self.YUNET, self.DINO, self.APPEARANCE))
         result = _with_return(result, inputs, yunet, recognizer, ctx.deadline)
-        return _repeat_face_detail(result, inputs, recognizer, ctx.deadline)
+        result = _repeat_face_detail(result, inputs, recognizer, ctx.deadline)
+        return _with_paired_boundary(result, inputs, yunet, recognizer, ctx.deadline)

@@ -47,6 +47,7 @@ from app.evidence.video_packet_versions import (
     CONTINUITY_VERSIONS,
     LIGHTING_CONTEXT_VERSIONS,
     NESTED_VERSIONS,
+    PAIRED_EDGE_VERSION,
     PICTURE_HOLD_VERSIONS,
     VERSIONS,
 )
@@ -344,7 +345,7 @@ def _sequence_observations(result: dict, table: FrameTable, source: dict, anchor
             face_boundary_binding.validate_record(boundary, record, source, table_pts=table.pts, interpolated=table.interpolated)
             if signal.get("effective_weight") != 0.0:
                 raise PacketIntegrityError("Refined face timing is limited to a confidence-neutral review check")
-            for item in boundary["frame_inputs"]:
+            for item in face_boundary_binding.source_inputs(boundary):
                 index = item["frame_index"]
                 if index not in anchors or any(item[key] != anchors[index][key] for key in ("pts", "decoded_rgb_sha256")):
                     raise PacketIntegrityError("Refined face timing differs from committed decoded source frames")
@@ -618,6 +619,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     scored_frames |= window_frames
     set_id = current_set_id(analysis)
     version = face_return_binding.METHOD_VERSIONS[return_candidates[-1]["face_return"]["method"]] if return_candidates else VERSION
+    if any(face_boundary_binding.is_paired(item.get("face_boundary")) for item in chosen):
+        version = PAIRED_EDGE_VERSION
     document = {"schema": SCHEMA, "version": version, "id": set_id, "status": "ready", "analysis_id": analysis.id,
                 "revision": analysis.revision, "original_result_hash": analysis.result_hash, "source": source, "packets": [],
                 "coverage": {"kind": "point_and_window_samples" if window_frames else "point_samples", "frame_count": len(table), "decoded_frame_indices": sorted(anchors),
@@ -920,6 +923,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
     try:
         picture_hold_binding.validate(document)
         face_return_binding.validate_set(document)
+        face_boundary_binding.validate_set(document)
         face_return_coverage.validate(document)
     except (KeyError, TypeError, ValueError) as error:
         raise PacketIntegrityError(str(error)) from error

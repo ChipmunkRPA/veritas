@@ -17,11 +17,17 @@ from PIL import Image
 
 from app.core.canonical import canonical_hash
 from app.detectors.image.faces import Face
-from app.detectors.video import face_return, face_return_fine_scene, picture_motion
+from app.detectors.video import face_paired_edge, face_return, face_return_fine_scene, picture_motion
 from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, probe_frames
 from app.detectors.video.frames import probe as probe_container
 from app.detectors.video.lipsync import source_mouth_patch
-from app.evidence import mouth_local_hold_binding, picture_hold_binding, picture_sequence
+from app.evidence import (
+    face_boundary_binding,
+    face_paired_edge_binding,
+    mouth_local_hold_binding,
+    picture_hold_binding,
+    picture_sequence,
+)
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.face_return_binding import DENSE_ENCODING, FINE_SCENE_METHOD, GUARDED_METHODS
 from app.evidence.face_return_binding import validate_packet as validate_face_return
@@ -30,6 +36,7 @@ from app.evidence.video_packet_versions import (
     DENSE_FACE_VERSIONS,
     GUARDED_720P30_FACE_VERSION,
     GUARDED_CODEC_FACE_VERSION,
+    PAIRED_EDGE_VERSION,
     SECOND_HD_FACE_VERSION,
     SECOND_SHORT_FACE_VERSION,
 )
@@ -142,6 +149,22 @@ def _verify_guarded_scene(record, frames) -> None:
                 raise ValueError("Guarded background support differs from the original video")
 
 
+def _verify_paired_motion(record, frames) -> None:
+    reduced = {row["frame_index"]:face_paired_edge.reduced_rgb(frames[row["frame_index"]]) for row in record["scene_frame_inputs"]}
+    boxes = {row["frame_index"]:row["bbox"] for row in record["frame_inputs"]}
+    planned = set(record["scheduled_frame_indices"])
+    for label, edge in (("entry",record["start_frame_index"]),("exit",record["end_frame_index"])):
+        inputs = face_paired_edge_binding.motion_inputs(edge,planned)
+        observed = face_paired_edge.motion(edge,{i:reduced[i] for i in inputs},boxes[edge-1])
+        committed = record["edges"][label]
+        if observed is None or observed["sector_ids"] != committed["sector_ids"] or any(
+            not math.isclose(float.fromhex(a),float.fromhex(b),abs_tol=.000001,rel_tol=0)
+            for a,b in zip([observed["central_hex"],*observed["sectors_hex"]],
+                           [committed["central_hex"],*committed["sectors_hex"]],strict=True)
+        ):
+            raise ValueError("Paired face boundary motion differs from the original video")
+
+
 def _verify_picture_hold(evidence, table, observations) -> None:
     """Recompute the scoped longest equal-picture run from the supplied source."""
     coverage = evidence["picture_hold"]
@@ -189,6 +212,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     guarded_codec = evidence["version"] in {
         GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_FACE_VERSION, SECOND_SHORT_FACE_VERSION, SECOND_HD_FACE_VERSION,
     }
+    paired = evidence["version"] == PAIRED_EDGE_VERSION
     if evidence["version"] in DENSE_FACE_VERSIONS:
         delivery = probe_container(original)
         encoding = delivery.get("codec"), delivery.get("pix_fmt")
@@ -202,6 +226,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                (source["width"], source["height"], source["time_base"], source["frame_count"])
             or canonical_hash(table.to_json()) != source["frame_table_sha256"]):
         raise ValueError("The decoded frame table differs from its commitment. Check the local FFmpeg version.")
+    if paired:
+        delivery = probe_container(original, include_codec_tag=True)
+        if not face_paired_edge_binding.supported(table, (delivery.get("codec"),delivery.get("pix_fmt"),delivery.get("codec_tag")),
+                                                  face_return.source_carrier(original)):
+            raise ValueError("The original video differs from the paired face timing source profile")
 
     picture_hold_binding.validate(evidence)
     hold = evidence.get("picture_hold") or {}
@@ -231,7 +260,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         picture_hold_binding.validate_source_clock(evidence, table.pts, table.interpolated)
         hold_frames = hold["frames_scanned"]
     pictures, mouths, faces, scenes = defaultdict(list), defaultdict(list), defaultdict(list), defaultdict(list)
-    fine_records, guarded_records, background_indices, background_frames = [], [], set(), {}
+    fine_records, guarded_records, paired_records, background_indices, background_frames = [], [], [], set(), {}
     interpolated = set(table.interpolated)
     packets = [*evidence["packets"], *(evidence.get("av") or {}).get("packets", [])]
     for packet in packets:
@@ -248,6 +277,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             for row in (packet.get(key) or {}).get("frame_inputs", []):
                 if row not in faces[row["frame_index"]]:
                     faces[row["frame_index"]].append(row)
+        if face_boundary_binding.is_paired(boundary := packet.get("face_boundary")):
+            paired_records.append(boundary)
+            for row in boundary["scene_frame_inputs"]:
+                scenes[row["frame_index"]].append(row)
+                background_indices.add(row["frame_index"])
         record = packet.get("face_return") or {}
         for row in record.get("scene_frame_inputs", []):
             scenes[row["frame_index"]].append(row)
@@ -332,11 +366,14 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     fine_edges = sum(_verify_scene_support(record, background_frames) for record in fine_records)
     for record in guarded_records:
         _verify_guarded_scene(record, background_frames)
+    for record in paired_records:
+        _verify_paired_motion(record, background_frames)
     return (f"Original SHA-256 and the source frame clock matched. Verified native frames ({len(found)}), "
             f"original images or crops ({images}), mouth patches ({patches}), and aligned face inputs ({alignments})."
             + (f" Recomputed fine background boundaries ({fine_edges})." if fine_edges else "")
             + (" Recomputed 4 guarded background boundaries and verified the source carrier." if len(guarded_records) == 2 else
                " Recomputed both guarded background boundaries and verified the source carrier." if guarded_codec else "")
+            + (" Recomputed both paired face boundary motion measurements and verified the source carrier." if paired_records else "")
             + (f" Replayed every frame in the repeated-picture inspection ({hold_frames})." if hold_frames else "")
             + (" Recomputed the held mouth-region pixel measurements." if local_mouth and local_mouth["match"] else "")
             + (" Recomputed the exact moving-sequence comparison." if sequence is not None else "")

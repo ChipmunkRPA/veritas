@@ -12,7 +12,7 @@ import struct
 import wave
 
 from app.core.canonical import canonical_hash
-from app.evidence import document_scope, face_return_coverage
+from app.evidence import document_scope, face_boundary_binding, face_return_coverage
 from app.evidence.face_alignment_context import validate as validate_face_alignment
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.face_interval_binding import validate_packet as validate_face_interval
@@ -97,6 +97,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         from app.evidence.picture_hold_binding import validate as validate_picture_hold
 
         validate_picture_hold(evidence)
+        face_boundary_binding.validate_set(evidence)
         face_return_binding.validate_set(evidence)
         face_return_coverage.validate_commitment(evidence, result.get(face_return_coverage.COMMITMENT))
         for packet in evidence.get('packets', []):

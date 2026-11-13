@@ -142,6 +142,17 @@ describe('findingSupport', () => {
     expect(item.scopeNote).toContain('does not identify which individual frames')
   })
 
+  it('uses verified paired boundaries for a linked face finding', () => {
+    const packet = videoPacket()
+    packet.face_boundary = { method: 'face-appearance-paired-edge/1', start_stream_s: 2.35, end_stream_s: 2.56,
+      frame_inputs: [{ frame_index: 17 }] }
+    packet.face_boundary_frames = [{ ...packet.frames[0], id: 'V01.B1', interval_role: 'before' }]
+    const set = { ...video([packet]), version: 'video-evidence-20' }
+    const item = findingSupport({ analysisId, finding: finding(), signals: [signal()], evidence: set }).packets[0]
+    expect(item.label).toBe('V01 · Refined face-change range 2.350 s–2.560 s (source clock)')
+    expect(item.scopeNote).toContain('The end is exclusive.')
+  })
+
   it('routes nested video voice and timing packets to their own real packet hashes', () => {
     const set = nestedVideo()
     const voice = findingSupport({ analysisId, finding: finding({ id: 'F4' }), signals: [], evidence: set })

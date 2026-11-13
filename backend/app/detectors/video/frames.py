@@ -15,7 +15,7 @@ from app.detectors.video.decode import _input
 log = get_logger(__name__)
 
 
-def probe(path: Path) -> dict:
+def probe(path: Path, *, include_codec_tag: bool = False) -> dict:
     if not shutil.which("ffprobe"):
         log.warning("ffprobe.missing")
         return {}
@@ -41,6 +41,7 @@ def probe(path: Path) -> dict:
         "duration": float(fmt.get("duration", 0) or 0),
         "bit_rate": int(fmt.get("bit_rate", 0) or 0),
         "codec": v.get("codec_name"),
+        **({"codec_tag": v.get("codec_tag_string")} if include_codec_tag else {}),
         "profile": v.get("profile"),
         "width": v.get("width"),
         "height": v.get("height"),

@@ -196,7 +196,11 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% for frame in packet.frames %}
 {% if frame.first_refined %}
 <h4>Refined boundary estimate</h4>
+{% if packet.face_boundary.method == 'face-appearance-paired-edge/1' %}
+<p class="caption">Two nearby face transitions support <strong>{{ '%.3f' | format(packet.face_boundary.start_stream_s) }}–{{ '%.3f' | format(packet.face_boundary.end_stream_s) }} s</strong> on the source clock, with an exclusive end. Nearby image areas had limited motion at both transitions. Compare the original before, during and after crops. This timing estimate carries no weight in overall AI confidence.</p>
+{% else %}
 <p class="caption">Denser samples suggest a range of <strong>{{ '%.3f' | format(packet.face_boundary.start_stream_s) }}–{{ '%.3f' | format(packet.face_boundary.end_stream_s) }} s</strong> on the source clock. The same tracked face was measured at {{ packet.face_boundary.frame_inputs | length }} denser sample positions. This estimate helps locate the change for review and carries no weight in overall AI confidence.</p>
+{% endif %}
 {% endif %}
 <div class="multimedia-frame">
 <p class="caption"><strong>{{ frame.id }}{% if frame.interval_role %} - {{ frame.interval_role | capitalize }} {% if frame.refined %}refined range{% else %}flagged range{% endif %}{% endif %}</strong> - source frame {{ frame.anchor.frame_index }}, PTS {{ frame.anchor.pts }} at time base {{ frame.anchor.time_base }}; source time {{ '%.6f' | format(frame.anchor.stream_time_s) }} s{% if frame.anchor.playback_time_s is not none %}; playback {{ '%.6f' | format(frame.anchor.playback_time_s) }} s{% endif %}{% if frame.score is not none %}; response {{ '%.4f' | format(frame.score) }} (uncalibrated){% endif %}.</p>

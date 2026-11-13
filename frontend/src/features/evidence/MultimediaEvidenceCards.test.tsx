@@ -302,14 +302,14 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByRole('article')).toBeNull()
   })
 
-  it('shows measured and refined ranges with source crops and playback navigation', () => {
-    const set = { ...structuredClone(video), version: 'video-evidence-11' }
+  it.each(['video-evidence-11', 'video-evidence-20'])('shows measured and refined ranges with source crops and playback navigation in %s', (version) => {
+    const set = { ...structuredClone(video), version }
     const item = set.packets[0]
     item.claim_scope = 'sampled_window'
     item.frames[0].score = null
     item.face_sequence = { start_stream_s: 12, end_stream_s: 12.52, response: .2,
       centers: { before: [1, 2], during: [6, 8, 10], after: [12, 14] }, frame_inputs: [] }
-    item.face_boundary = { start_stream_s: 11.84, end_stream_s: 12.56,
+    item.face_boundary = { method: version === 'video-evidence-20' ? 'face-appearance-paired-edge/1' : 'face-appearance-boundary/1', start_stream_s: 11.84, end_stream_s: 12.56,
       frame_inputs: [{ frame_index: 4 }, { frame_index: 8 }, { frame_index: 11 }] }
     item.face_boundary_frames = (['before', 'during', 'after'] as const).map((role, i) => ({
       ...item.frames[0], id: `V01.B${i + 1}`, interval_role: role, is_peak: false,
@@ -323,6 +323,16 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getAllByAltText(/V01\.B\d: source face crop for context/)).toHaveLength(3)
     fireEvent.click(screen.getByRole('button', { name: 'Go to frame 4 in playback' }))
     expect(screen.getByText(/Selected frame 4 · source 11\.760 s · player 1\.760 s/)).toBeTruthy()
+    const refinedNavigation = screen.queryByRole('button', { name: 'Inspect V01.B1 at source 11.760 s' })
+    if (version === 'video-evidence-20') {
+      expect(screen.getByText(/Two appearance transitions on the same tracked face/)).toBeTruthy()
+      expect(refinedNavigation).toBeTruthy()
+      fireEvent.click(refinedNavigation!)
+      expect(refinedNavigation!.getAttribute('aria-pressed')).toBe('true')
+    } else {
+      expect(screen.getByText(/3 denser samples on the same tracked face/)).toBeTruthy()
+      expect(refinedNavigation).toBeNull()
+    }
   })
 
   it.each(['video-evidence-12', 'video-evidence-13', 'video-evidence-14', 'video-evidence-15', 'video-evidence-16', 'video-evidence-17'])('shows the distinct brief face-change interval in %s', (version) => {

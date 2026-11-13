@@ -240,6 +240,7 @@ class Settings(BaseSettings):
     audio_background_review_packages: Path | None = None  # Local Apple Silicon dependency overlay.
     video_face_review_mode: Literal["legacy", "sequence", "appearance"] = "legacy"
     video_face_boundary_refinement: bool = False  # Refine timing on an existing short appearance review range.
+    video_face_paired_edge_refinement: bool = False  # Refine a retained 720p30 HEVC face-appearance range.
     video_face_short_return_review: bool = False  # Add a distinct, source-bound range to eligible appearance reviews.
     video_face_second_return_review: bool = False  # Check a second disjoint range on tested short H.264 profiles.
     video_face_detail_repeat_review: bool = False  # Repeat a selected coarse appearance range at lower image detail.

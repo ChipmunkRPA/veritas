@@ -1,0 +1,107 @@
+{
+  "browser": {
+    "exact_crops": 3,
+    "exact_images": 3,
+    "frame_seek_controls": 3,
+    "page_errors": 0,
+    "plain_view": true,
+    "range": [
+      2.9,
+      3.233
+    ]
+  },
+  "cases": {
+    "feature_disabled": {
+      "coarse_packets": 1,
+      "file_sha256": "e8fdce5ddd63fb40c927e3789dc69e28c934c2bae0662a324e6bbe7579c34dd4",
+      "paired_edge_packets": 0,
+      "version": "video-evidence-11"
+    },
+    "held_swap": {
+      "coarse_packets": 1,
+      "different_original_rejected": true,
+      "exact_source_images": [
+        {
+          "frame": 86,
+          "kind": "original",
+          "pts": 86000,
+          "role": "before",
+          "sha256": "26cdfb58e9a0303de86fda712ae22e566b46441f9b8d51c53e742c98d53c1b04"
+        },
+        {
+          "frame": 86,
+          "kind": "crop",
+          "pts": 86000,
+          "role": "before",
+          "sha256": "376d74bb0a4bfbf411631699737152185a159345163b3e089e62967c57d0a449"
+        },
+        {
+          "frame": 92,
+          "kind": "original",
+          "pts": 92000,
+          "role": "during",
+          "sha256": "d30c232bf38f2f72ac77f9e715755df6fd5425381bea152cae2676392df45015"
+        },
+        {
+          "frame": 92,
+          "kind": "crop",
+          "pts": 92000,
+          "role": "during",
+          "sha256": "51dc6bb1daaf8b8fe35fe409c94cc94d084e614c2ccea081e6c1ae25db883a59"
+        },
+        {
+          "frame": 97,
+          "kind": "original",
+          "pts": 97000,
+          "role": "after",
+          "sha256": "f120ddeaee32aecc5356e2a0c0368d983558e92a77c9b0ab54d1e6308468a889"
+        },
+        {
+          "frame": 97,
+          "kind": "crop",
+          "pts": 97000,
+          "role": "after",
+          "sha256": "f6acd8a419f2277e5f6d16da126e2824e603cbadeef4aa00221d60030f0a3c0c"
+        }
+      ],
+      "file_sha256": "e8fdce5ddd63fb40c927e3789dc69e28c934c2bae0662a324e6bbe7579c34dd4",
+      "known_edit_frames": [
+        87,
+        97
+      ],
+      "measured_frames": [
+        87,
+        97
+      ],
+      "paired_edge_packets": 1,
+      "pdf_api_json_agree": true,
+      "representative_frames": {
+        "after": 97,
+        "before": 86,
+        "during": 92
+      },
+      "signed_original_replay": true,
+      "source_time_s": [
+        2.9,
+        3.233
+      ],
+      "template_set": "veritas-report-2.0.r109",
+      "version": "video-evidence-20"
+    },
+    "ordinary_cut": {
+      "coarse_packets": 1,
+      "file_sha256": "57c727a9895b3498d6199d3b2ade273b50b8d12044f651b80d6c76e4a5458bf2",
+      "paired_edge_packets": 0,
+      "version": "video-evidence-11"
+    },
+    "short_swap": {
+      "coarse_packets": 0,
+      "file_sha256": "15c58e9a344f014a3fdbb7b8dc72624313d818d17ca92f1bb920f3dcd0fd0734",
+      "paired_edge_packets": 0,
+      "version": "video-evidence-11"
+    }
+  },
+  "overall_decision_identical_flag_on_off": true,
+  "simulated_paid_jobs": 4,
+  "unpaid_jobs": 0
+}

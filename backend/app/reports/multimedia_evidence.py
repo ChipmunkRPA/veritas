@@ -217,7 +217,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         if boundary := packet.get("face_boundary"):
             from app.api.public_projection import alias_signal
 
-            for item in boundary["frame_inputs"]:
+            for item in face_boundary_binding.source_inputs(boundary):
                 committed = by_index.get(item["frame_index"])
                 if committed is None or any(item[key] != committed[key] for key in ("pts", "decoded_rgb_sha256")):
                     raise ObjectIntegrityError("Refined face timing differs from committed decoded source frames")

@@ -58,6 +58,13 @@ function videoLocation(packet: VideoEvidencePacket): LocatedPacket | null {
   const frames = (packet.frames ?? []).filter(validFrame)
   const frame = frames.find((item) => item.is_peak) ?? frames[0]
   if (!frame) return null
+  const boundary = packet.face_boundary
+  if (boundary?.method === 'face-appearance-paired-edge/1'
+    && finite(boundary.start_stream_s) && finite(boundary.end_stream_s) && boundary.end_stream_s > boundary.start_stream_s
+    && packet.face_boundary_frames?.some(validFrame)) {
+    return { packet, label: `${packet.id} · Refined face-change range ${seconds(boundary.start_stream_s)}–${seconds(boundary.end_stream_s)} (source clock)`,
+      scope: 'video_frames', note: 'Two face transitions with limited nearby pixel motion bracket the range. The end is exclusive.' }
+  }
   const face = packet.face_sequence ?? packet.face_interval
   if (face && finite(face.start_stream_s) && finite(face.end_stream_s) && face.end_stream_s > face.start_stream_s) {
     return { packet, label: `${packet.id} · Face review ${seconds(face.start_stream_s)}–${seconds(face.end_stream_s)} (source clock)`,

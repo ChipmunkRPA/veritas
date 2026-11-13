@@ -93,6 +93,8 @@ from app.evidence.audio_binding import (
     limit_voice_screening,
     source_clock_breaks,
 )
+from app.evidence.face_boundary_binding import is_paired
+from app.evidence.face_boundary_binding import source_inputs as face_boundary_source_inputs
 from app.evidence.face_interval_binding import sequence_observation
 from app.schemas.evidence import AnalysisResultV2, Decision, SignalV2, TimeSegment
 from app.schemas.legacy import BAND_CODE, FALLBACK_CAVEAT
@@ -145,7 +147,7 @@ def probe(ctx: StageContext) -> dict[str, Any]:
     """Stream facts, the per-frame pts table and the seeded sampling plan. The output is persisted, so a resumed run decodes
     the same frames (§3.3). A file without decodable video frames gets no table, and `decode` fails the analysis."""
     path = common.media_path(ctx)
-    info = common.json_safe(ffprobe(path))
+    info = common.json_safe(ffprobe(path, include_codec_tag=True) if settings.video_face_paired_edge_refinement else ffprobe(path))
     try:
         table = probe_frames(path, check=ctx.check)
     except DecodeError as e:
@@ -369,7 +371,8 @@ def detect(ctx: StageContext) -> dict[str, Any]:
     centers = tuple(sorted(f.frame_index for f in sampled if f.index < len(faces) and faces[f.index]))
     probe = outputs.probe or {}
     encoding = probe.get("codec"), probe.get("pix_fmt")
-    inputs = (SequenceInputs(store.table, store, centers, tuple(common.stage_exhibit_list(ctx, ("tracks",))), encoding)
+    inputs = (SequenceInputs(store.table, store, centers, tuple(common.stage_exhibit_list(ctx, ("tracks",))), encoding,
+                             probe.get("codec_tag"))
               if store is not None else None)
     review = common.run_detectors(ctx, (Modality.VIDEO,), include={SEQUENCE_FAMILY, WHOLE_FACE_FAMILY},
                                   outputs=dataclasses.replace(outputs, face_review=inputs),
@@ -931,6 +934,10 @@ def synthesise(ctx: StageContext) -> dict[str, Any]:
                     first += " The separate brief face-change check could not assess this clip."
             elif sequence:
                 title, first = "Possible face-change range", sequence_observation(sequence)
+                if is_paired(boundary := details.get("face_boundary")):
+                    title = "Refined face-change range to review"
+                    first = (f"Two nearby face transitions narrow the review to {boundary['start_stream_s']:.3f}–"
+                             f"{boundary['end_stream_s']:.3f} s on the source clock. The broader face check supplies context.")
                 if detail_status == "retained":
                     first += " The change remained when the same frames were checked at lower detail."
                 if short_change:
@@ -973,8 +980,10 @@ def _native_render_anchors(ctx: StageContext, frame_store: FrameStore) -> list[d
         details = entry.get("details") or {}
         inputs = []
         if boundary := details.get("face_boundary"):
-            refined_indices.update(item["frame_index"] for item in boundary["frame_inputs"])
-            for record in (boundary, details["face_sequence"], *details.get("face_sequence_windows", [])):
+            boundary_inputs = face_boundary_source_inputs(boundary)
+            refined_indices.update(item["frame_index"] for item in boundary_inputs)
+            inputs.extend(boundary_inputs)
+            for record in (details["face_sequence"], *details.get("face_sequence_windows", [])):
                 inputs.extend(record["frame_inputs"])
         elif details.get("face_detail_repeat"):
             for record in details.get("face_sequence_windows", []):

@@ -47,9 +47,11 @@ The authenticated **Compare with an earlier copy** feature offers this check whe
 
 An isolated worker completed three Full analyses after simulated prepaid checkout. The held feathered edit selected 10,244 pixels, with 10,243 inside the 11,194-pixel truth mask. A recompression of that source selected zero pixels. The global contrast nuisance produced the expected 6,892 selected pixels. The API, PDF and standalone JSON replay agreed on all three. Each unpaid event queued zero analyses. Chrome displayed three evidence images and the interactive overlay, downloaded the PDF and exported matching JSON. [Public receipts](evaluation-panels/image-reference-delivery-envelope-2026-11-12.json)
 
+The serving comparison also reproduced admission, all four crop edges, and the exact native mask digest on every one of the 184 held pairs. It admitted 57 of 120 FLUX and ordinary pairs and 46 of 64 LaMa pairs. [Serving replay counts](evaluation-panels/image-reference-delivery-envelope-2026-11-12.json)
+
 ## Reproduce
 
-Use the retained first and later publisher intakes from the previous cross-format study, the pinned FLUX archive, and the eight-file public JPEG replay cache. Set `earlier`, `development`, `public_photos`, and `run` to the two publisher intakes, the public cache, and a new scratch directory respectively. The native replay reconstructs the sources and masks and checks rendered crops and overlays. The standalone reader independently checks source commitments, localization arithmetic, the development selection, and the held gate.
+Use the retained first and later publisher intakes from the previous cross-format study, the pinned FLUX archive, and the eight-file public JPEG replay cache. Set `earlier`, `development`, `public_photos`, and `run` to the two publisher intakes, the public cache, and a new scratch directory respectively. The native replay reconstructs the sources and masks and checks rendered crops and overlays. The standalone reader independently checks source commitments, localization arithmetic, the development selection, and the held gate. The public receipt omits media, per-file source identities, and private paths.
 
 ```sh
 export PYTHONPATH=backend PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1

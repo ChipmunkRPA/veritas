@@ -860,6 +860,20 @@
     "submitted": "upright single-frame RGB PNG, crop plus proportional resize",
     "submitted_max_side": 845
   },
+  "release_candidate_native_parity": {
+    "FLUX_and_ordinary": {
+      "admitted_pairs": 57,
+      "delivered_pairs": 120,
+      "highlighted_pairs": 20,
+      "same_native_mask": true
+    },
+    "LaMa": {
+      "admitted_pairs": 46,
+      "delivered_pairs": 64,
+      "highlighted_pairs": 15,
+      "same_native_mask": true
+    }
+  },
   "schema": "chipmunk.image-reference-delivery-envelope-public/1",
   "source_group_counts": {
     "development_kandinsky": 6,

@@ -31,6 +31,21 @@ not measured provider-watermark robustness.
 
 ## Audio: preserve the mixture and separate the targets
 
+The November [VeriSpoof report](https://arxiv.org/html/2611.04634v1) grounds
+its explanatory output in measured channel properties and labeled time spans.
+Its inference package and checkpoints carry CC BY-NC 4.0, so they are excluded
+from commercial evaluation and deployment here. We use the methodological
+distinction between measured source time, a model response and a subsequent
+explanation. [Publisher's code and weight terms](https://github.com/swagshaw/verispoof#license)
+
+The [split-and-conquer study](https://arxiv.org/html/2604.02913v1) separates
+boundary estimation from segment classification. The
+[out-of-domain comparison](https://arxiv.org/html/2507.03468v1) measures
+false flags and localization at fixed points across corpora. These inform
+the staggered speech-window experiment. It compares unchanged native
+responses with a separately calibrated noise-reduced view, commits
+locations to the original sample clock and counts genuine time highlighted.
+
 October's [MixedTruth / TruMix](https://arxiv.org/html/2610.14141v1) keeps original
 mixture information while using estimated components as soft evidence. It uses
 distinct speech/background streams and structured component predictions rather

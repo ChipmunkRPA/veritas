@@ -1,0 +1,969 @@
+{
+  "archive_bytes": 8073665280,
+  "bytes_acquired": 4340498,
+  "declared_parent_utterance_ids": false,
+  "declared_speaker_ids": false,
+  "detector_forwards": 0,
+  "eligible_positives": 8,
+  "generator": "GST-Tacotron / LPCNet",
+  "incomplete_next_member": "test/HAD_test_00000042.wav",
+  "label_resolution_samples": 160,
+  "labels_sha256": "fb1c571720f93c7bc6ecc06befd10a7d62fcc01c58082eaa751aa14543f12e14",
+  "language": "Mandarin",
+  "license": "CC BY 4.0",
+  "method": {
+    "minimum_genuine_flank_samples": 6400,
+    "native_audio_format": "16000 Hz mono PCM16",
+    "one_splice_samples": [
+      8000,
+      19200
+    ],
+    "samples": [
+      64000,
+      144000
+    ]
+  },
+  "native_complete": 41,
+  "publisher_archive_md5": "4daef62a7cf20c71b052635c968ece1c",
+  "publisher_test_counts": {
+    "fully_synthetic": 234,
+    "partial": 8838
+  },
+  "readme_sha256": "95f1d464273eaa8fac0645d7d0787b32c8d529d70ef18deb7b14f0026fedb1fb",
+  "record": 10377492,
+  "rows": [
+    {
+      "eligible": false,
+      "id": "HAD_test_00000001",
+      "labels": [
+        [
+          0,
+          44320,
+          "T"
+        ],
+        [
+          44320,
+          65120,
+          "F"
+        ],
+        [
+          65120,
+          87520,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "bc5a8dce63352c85178413dca14048bca7491412b55b5073ff6e576c5f9191be",
+      "samples": 87632,
+      "unlabeled_tail_samples": 112,
+      "wav_sha256": "5288d37e02a8ffe9a1e0cff4ea8ef270d2771e8aff7b41e5817e08b1c87930f1"
+    },
+    {
+      "eligible": true,
+      "id": "HAD_test_00000002",
+      "labels": [
+        [
+          0,
+          22880,
+          "T"
+        ],
+        [
+          22880,
+          41280,
+          "F"
+        ],
+        [
+          41280,
+          75680,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "49254653c2cfa520858e1ce2ce2c69b3c96a484d5e8812dd7df90f5a85974935",
+      "samples": 75792,
+      "unlabeled_tail_samples": 112,
+      "wav_sha256": "143883a0ad9ae7782b2492f969b416dd9a7b57eca9db32b56d1c9a15df4e4a01"
+    },
+    {
+      "eligible": true,
+      "id": "HAD_test_00000003",
+      "labels": [
+        [
+          0,
+          22880,
+          "T"
+        ],
+        [
+          22880,
+          32320,
+          "F"
+        ],
+        [
+          32320,
+          64480,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "d6169d52eb57ce23c7b680866889607d062ee0d6337843c8188ae397e3c0473e",
+      "samples": 64624,
+      "unlabeled_tail_samples": 144,
+      "wav_sha256": "fdd37a492774375a0c3b389521aadd2301a9bfe348577346ee7c1e00ada3aaeb"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000004",
+      "labels": [
+        [
+          0,
+          12640,
+          "F"
+        ],
+        [
+          12640,
+          42080,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "b05e27b581cd672dc82a34b6d56ff36208981893325f0adc75ba43e4afa9b261",
+      "samples": 42144,
+      "unlabeled_tail_samples": 64,
+      "wav_sha256": "3131cf0237a6d0aaff451ccca70b4eb537a7f6738622193b473708e228a2e929"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000005",
+      "labels": [
+        [
+          0,
+          38240,
+          "F"
+        ],
+        [
+          38240,
+          65760,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "1acafc835970dc394f7dc36906b44a345d0a311bd56f10272cab8c34c3a430ba",
+      "samples": 65792,
+      "unlabeled_tail_samples": 32,
+      "wav_sha256": "48023256d975fcd1a26ff0828739af8551e28004aa36433e5d3d513ececb3108"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000006",
+      "labels": [
+        [
+          0,
+          7520,
+          "F"
+        ],
+        [
+          7520,
+          49920,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "1b2b6e586f54c174c400258f7b695edf37d9835c67c67539fbb6765dddf2a634",
+      "samples": 50032,
+      "unlabeled_tail_samples": 112,
+      "wav_sha256": "8a2aba5c51201493cf76bafb8c9af4de21923de2b34b7425b7141b4be7448635"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000007",
+      "labels": [
+        [
+          0,
+          10560,
+          "F"
+        ],
+        [
+          10560,
+          59040,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "8e22498010e64f57a8bfe0c78c1f8c2d5aafa7cf89d37f495bfc7acd3ce63af4",
+      "samples": 59056,
+      "unlabeled_tail_samples": 16,
+      "wav_sha256": "c75d5f776f80f9d3c9886d3bd33589f53743497717c4238d870928cdae19e2f9"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000008",
+      "labels": [
+        [
+          0,
+          23360,
+          "F"
+        ],
+        [
+          23360,
+          52800,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "8eb3b84a8acab6c58c81258b24e520e1bbfb9ffd1bd4934be14634b1623dc837",
+      "samples": 52864,
+      "unlabeled_tail_samples": 64,
+      "wav_sha256": "81b46c7dc17d388e70b55995bab081c19458b7c7dafe1ebf55db7beab971c648"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000009",
+      "labels": [
+        [
+          0,
+          9120,
+          "T"
+        ],
+        [
+          9120,
+          21760,
+          "F"
+        ],
+        [
+          21760,
+          46880,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "eae580e2c87ba6ebafaa6ec21955f7624e6855f65e98d097fef40a22d730bc97",
+      "samples": 46944,
+      "unlabeled_tail_samples": 64,
+      "wav_sha256": "3b4d65345043284ec5ed0b09a0e358e8aea7b9f1bec7c8d02d228ed71df0bb00"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000010",
+      "labels": [
+        [
+          0,
+          11040,
+          "T"
+        ],
+        [
+          11040,
+          23840,
+          "F"
+        ],
+        [
+          23840,
+          40480,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "6dd6840dafc18470823ec19da6fcc9d63cfd57a709d98a25f80c3f9b2fb49426",
+      "samples": 40624,
+      "unlabeled_tail_samples": 144,
+      "wav_sha256": "46c700683efa67326c40a29517ac438335b76bd5dfbc48b49ff7e0ff3560bc88"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000011",
+      "labels": [
+        [
+          0,
+          21920,
+          "F"
+        ],
+        [
+          21920,
+          56000,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "abcd223a65836a403b95cb1fe058977d8a7d12f3a69c21dad3d11051496e7c15",
+      "samples": 56048,
+      "unlabeled_tail_samples": 48,
+      "wav_sha256": "f37b3a35707c22cb8af6ab5d80692a842f38efb020039a32e30f2ec6b539f876"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000012",
+      "labels": [
+        [
+          0,
+          7040,
+          "F"
+        ],
+        [
+          7040,
+          60160,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "48bb20efae8c0ba37589ca3ff6020aecd19018c23cb7256bfda2e8b80bb35459",
+      "samples": 60160,
+      "unlabeled_tail_samples": 0,
+      "wav_sha256": "90da5b31f5f478f6f4ce227abb4bf5b3488725796465afee4768b025467df9a6"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000013",
+      "labels": [
+        [
+          0,
+          16800,
+          "F"
+        ],
+        [
+          16800,
+          73120,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "b8a4ed9f5d6ca50a9d598ba87024ae3359f57a1636a88dae5c36d962ebeae713",
+      "samples": 73168,
+      "unlabeled_tail_samples": 48,
+      "wav_sha256": "fb302d7f717c184e0299a25983d1ab1d6f52b525a1a5464c350ff5844739362f"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000014",
+      "labels": [
+        [
+          0,
+          11040,
+          "T"
+        ],
+        [
+          11040,
+          34880,
+          "F"
+        ]
+      ],
+      "pcm_sha256": "847c5b5ada912c2405460058656c6fcdaebe2d3c7ccff1798bf595672cc9388a",
+      "samples": 34880,
+      "unlabeled_tail_samples": 0,
+      "wav_sha256": "7e6230609b6c4fb3ea8adc071789ff659dcc2838531442c2d67e3a5b28236d81"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000015",
+      "labels": [
+        [
+          0,
+          19360,
+          "F"
+        ],
+        [
+          19360,
+          43680,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "490e49b822016ce81b2d135b7c4e555cce4d77252b246729d2e3189f5c564a7e",
+      "samples": 43808,
+      "unlabeled_tail_samples": 128,
+      "wav_sha256": "c8cdf98fa91fdf84145ae5f9fb8f2869fb2693dc4e535bd27dd5c285ef999318"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000016",
+      "labels": [
+        [
+          0,
+          24640,
+          "T"
+        ],
+        [
+          24640,
+          48960,
+          "F"
+        ]
+      ],
+      "pcm_sha256": "4cfac2222bb2997f3238a66506cee87db8f549369d1cb732bcd2f4a043131f0c",
+      "samples": 48960,
+      "unlabeled_tail_samples": 0,
+      "wav_sha256": "6a43d8bfd7f51fe5336fbe504d242102762bc3c0b48bb58ec6bd2863e6155c28"
+    },
+    {
+      "eligible": true,
+      "id": "HAD_test_00000017",
+      "labels": [
+        [
+          0,
+          18240,
+          "T"
+        ],
+        [
+          18240,
+          27520,
+          "F"
+        ],
+        [
+          27520,
+          73440,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "f6080fb4b1d6b67aca5ffa4cf8224668b23e71e1f71e83cd487d9397a40cf8b9",
+      "samples": 73520,
+      "unlabeled_tail_samples": 80,
+      "wav_sha256": "4b6c1846cc7b99eb5c52538e4419efd5634892aaf6d93b8773041dc7705972ba"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000018",
+      "labels": [
+        [
+          0,
+          12800,
+          "F"
+        ],
+        [
+          12800,
+          41760,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "10ebd3aed208e142082c7c37fa963e51df0b38b1c82699ea8306df71578813f2",
+      "samples": 41824,
+      "unlabeled_tail_samples": 64,
+      "wav_sha256": "c99612bb7ac49b6c1f3fb7f21227d3154b28b612cb27dc718a280ef145b397d1"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000019",
+      "labels": [
+        [
+          0,
+          27520,
+          "F"
+        ],
+        [
+          27520,
+          73280,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "b4b96797bd0b3889b556a1b54e8c2f4de10fd4a3f8cf4399d8c1c290b01126fe",
+      "samples": 73392,
+      "unlabeled_tail_samples": 112,
+      "wav_sha256": "6211f64131b81f291d7ab3db8d7aee55f0ea4a1e0b23c591903dc50792a47be6"
+    },
+    {
+      "eligible": true,
+      "id": "HAD_test_00000020",
+      "labels": [
+        [
+          0,
+          14720,
+          "T"
+        ],
+        [
+          14720,
+          31520,
+          "F"
+        ],
+        [
+          31520,
+          66880,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "c56a9ea71a24740ba1fb243898b381d96b764b7492e8bd0c20a7913ea28dfb70",
+      "samples": 66912,
+      "unlabeled_tail_samples": 32,
+      "wav_sha256": "6647ce70b8631acf7fa4232579ff346473142258c71c307ae551ed6daf14f020"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000021",
+      "labels": [
+        [
+          0,
+          20800,
+          "T"
+        ],
+        [
+          20800,
+          38080,
+          "F"
+        ]
+      ],
+      "pcm_sha256": "e8cdf2876a89114dab0ef97f3c437f4090751178f7ae0ae152aea051b53d6085",
+      "samples": 38080,
+      "unlabeled_tail_samples": 0,
+      "wav_sha256": "e58c9f874fee289dd627570b3a6521a20d38aca58b92c6cb0c7c77b29be9a054"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000022",
+      "labels": [
+        [
+          0,
+          8320,
+          "F"
+        ],
+        [
+          8320,
+          43200,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "bdb375efbd61f8039e77dca2ca1745fa96530a2ef7a10f6a14d451442c615c1c",
+      "samples": 43200,
+      "unlabeled_tail_samples": 0,
+      "wav_sha256": "e3111ac825621ba769645cfc8e5b481a18b2a81cd82a6a646899a2d07057a6d4"
+    },
+    {
+      "eligible": true,
+      "id": "HAD_test_00000023",
+      "labels": [
+        [
+          0,
+          39680,
+          "T"
+        ],
+        [
+          39680,
+          48000,
+          "F"
+        ],
+        [
+          48000,
+          92800,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "216480b65d74fe8b27e91c6425c29fa814c80c0f1d84834affda7207496ea58a",
+      "samples": 92848,
+      "unlabeled_tail_samples": 48,
+      "wav_sha256": "179a881de557a3b4ad5a7ebd09573beb777b800c963eb43d7faa5eec7296891e"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000024",
+      "labels": [
+        [
+          0,
+          13120,
+          "F"
+        ],
+        [
+          13120,
+          38400,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "358d9b7a2ffc06f6ff92d02d5f05b3380a4ee6ff7c16a86263428794dcb035f1",
+      "samples": 38544,
+      "unlabeled_tail_samples": 144,
+      "wav_sha256": "ba26b211f3f2255488e39f090060a7697065a0b1b27abd43b00ea56d5f800151"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000025",
+      "labels": [
+        [
+          0,
+          8160,
+          "F"
+        ],
+        [
+          8160,
+          35040,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "da6e518cd54361d0e99716283618c499394692cfa381318d3873053c0e88eba8",
+      "samples": 35104,
+      "unlabeled_tail_samples": 64,
+      "wav_sha256": "a95cc060ff0d63577a9b2f519e784c58e3d0ab97217c615ec38fb5f289f5383e"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000026",
+      "labels": [
+        [
+          0,
+          7040,
+          "F"
+        ],
+        [
+          7040,
+          41440,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "91131c150c0c1d9183f375e6e60b2db215d70075bac86e76a6f3a23a5f532350",
+      "samples": 41456,
+      "unlabeled_tail_samples": 16,
+      "wav_sha256": "0003acacafa2ba44d17e5434b02729f7eaae916448bf379cf69a717645ac3927"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000027",
+      "labels": [
+        [
+          0,
+          12000,
+          "T"
+        ],
+        [
+          12000,
+          20160,
+          "F"
+        ],
+        [
+          20160,
+          36960,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "86f41c1e0e42ba4de2db130d4877e1cf8487ba8567a67e262a4828b32bc420a4",
+      "samples": 37024,
+      "unlabeled_tail_samples": 64,
+      "wav_sha256": "979000b5dd92e94a8280f0649e05b42794ef80864fa7e5d2fee0faf1e538b74e"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000028",
+      "labels": [
+        [
+          0,
+          8480,
+          "F"
+        ],
+        [
+          8480,
+          49120,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "aa0df4d1a5e0bd80c12b83fa50a134aba82fdf8b1ed8df471850fff88b67b1f8",
+      "samples": 49152,
+      "unlabeled_tail_samples": 32,
+      "wav_sha256": "14f18a30de5ab2f97413960abfdf2fd9b14a68480cdaad16ffa571a431963642"
+    },
+    {
+      "eligible": true,
+      "id": "HAD_test_00000029",
+      "labels": [
+        [
+          0,
+          14400,
+          "T"
+        ],
+        [
+          14400,
+          24000,
+          "F"
+        ],
+        [
+          24000,
+          76160,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "27db19e4bee1dd1eb7f2e31ff42f13d1917ca854f60b77707bf9a9ccff800793",
+      "samples": 76224,
+      "unlabeled_tail_samples": 64,
+      "wav_sha256": "404b9024af4b6b2dc20a810ac44cddf0c2a13d8e684a70dbbd79fd6c3fe21154"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000030",
+      "labels": [
+        [
+          0,
+          4800,
+          "T"
+        ],
+        [
+          4800,
+          11200,
+          "F"
+        ],
+        [
+          11200,
+          55200,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "95017e1404cc87e078e513886c1440ed8b005d20f342c82d3048763df0b2d127",
+      "samples": 55232,
+      "unlabeled_tail_samples": 32,
+      "wav_sha256": "4bfefd8612167cf19c4a39de8c489f50df1657e97ff63f36ed85ae1daee5faf8"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000031",
+      "labels": [
+        [
+          0,
+          14400,
+          "T"
+        ],
+        [
+          14400,
+          22080,
+          "F"
+        ],
+        [
+          22080,
+          59360,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "668062d58aac2ec83767ad3df32d8019be47c6c201f3018e976f941b08372030",
+      "samples": 59472,
+      "unlabeled_tail_samples": 112,
+      "wav_sha256": "06d36a4db48f3c582ec10cc25ed2fa55d98e6a542bd9e9a37211403e019c2fe0"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000032",
+      "labels": [
+        [
+          0,
+          18880,
+          "T"
+        ],
+        [
+          18880,
+          31520,
+          "F"
+        ],
+        [
+          31520,
+          41440,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "7968cedf562feabcf3eed0fa29d79628e9eea76ccbec635e4e2694045967aeee",
+      "samples": 41568,
+      "unlabeled_tail_samples": 128,
+      "wav_sha256": "9bf5ecd07dd84006de026a8b62b48e3a8810fe273c5b024352f4733db4d37a85"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000033",
+      "labels": [
+        [
+          0,
+          8000,
+          "T"
+        ],
+        [
+          8000,
+          20160,
+          "F"
+        ],
+        [
+          20160,
+          41440,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "26b43e60b26ed4d38daf5afb07bd4894d93984414ab424085c8277d1e649e05c",
+      "samples": 41456,
+      "unlabeled_tail_samples": 16,
+      "wav_sha256": "8bafb837fa07410aef8d471a16668bda620a9fbc79620a3bae986f9811205c30"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000034",
+      "labels": [
+        [
+          0,
+          13280,
+          "F"
+        ],
+        [
+          13280,
+          42560,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "e1e8c077ffbbb4810af0d0b47b0d998f0489e033937e0090f8b1ce085fea20f5",
+      "samples": 42592,
+      "unlabeled_tail_samples": 32,
+      "wav_sha256": "f1b16d9d1ad72b205fc28479fc643dcea937936992f5896b0f4c6439928593ef"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000035",
+      "labels": [
+        [
+          0,
+          46240,
+          "T"
+        ],
+        [
+          46240,
+          52960,
+          "F"
+        ],
+        [
+          52960,
+          74080,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "c698edc2733bb510df48d9d60c0b8303bf791f2a0a05d02ad02e229fbd032e94",
+      "samples": 74080,
+      "unlabeled_tail_samples": 0,
+      "wav_sha256": "bdefe1048718588e425a1854ac69a64b268b01d5163bda27ea36bfcc72566bdf"
+    },
+    {
+      "eligible": true,
+      "id": "HAD_test_00000036",
+      "labels": [
+        [
+          0,
+          18400,
+          "T"
+        ],
+        [
+          18400,
+          26400,
+          "F"
+        ],
+        [
+          26400,
+          72160,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "82746b87311d84de209e74eac867eed29d9ada9da890a46079d7b6bd66ad12fd",
+      "samples": 72176,
+      "unlabeled_tail_samples": 16,
+      "wav_sha256": "6cec9fa890b2bd9dcc1c23fdacad856bc280f0bcc87a9b814284d5b111fc34f3"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000037",
+      "labels": [
+        [
+          0,
+          16480,
+          "T"
+        ],
+        [
+          16480,
+          28960,
+          "F"
+        ],
+        [
+          28960,
+          50080,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "072882fa1f7d17232255bd41a74c1b948c259e001c8f0cdb2584e3383dcb12d6",
+      "samples": 50224,
+      "unlabeled_tail_samples": 144,
+      "wav_sha256": "8cde97220e7d74818981be97d7696a4f2595c5c93a587d5c920d847f2cec509b"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000038",
+      "labels": [
+        [
+          0,
+          14080,
+          "F"
+        ],
+        [
+          14080,
+          31840,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "eaf1985ade14979bdebc5e87735694145d7000b1b3bdec6db03ec06220fa3f3f",
+      "samples": 31936,
+      "unlabeled_tail_samples": 96,
+      "wav_sha256": "7b2f0fcf53bf967a5b533fc3a352f156c05af44e64cb8229179f9a75a5f0deff"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000039",
+      "labels": [
+        [
+          0,
+          43360,
+          "T"
+        ],
+        [
+          43360,
+          67680,
+          "F"
+        ],
+        [
+          67680,
+          91200,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "8b654fa8e2335a6b09f79da8d0cb6302c7c25c65111600a8f7d091ae8d4799c6",
+      "samples": 91328,
+      "unlabeled_tail_samples": 128,
+      "wav_sha256": "02ee69b7071e783bf3287598c846070af5f7926abd92d9c17a1bbe09ea91e383"
+    },
+    {
+      "eligible": false,
+      "id": "HAD_test_00000040",
+      "labels": [
+        [
+          0,
+          12640,
+          "F"
+        ],
+        [
+          12640,
+          50240,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "63206eea35accc3f384337b0c436fbcc074acaedcbbf45f4a5740de6924caddf",
+      "samples": 50336,
+      "unlabeled_tail_samples": 96,
+      "wav_sha256": "88065351487a6351e84a929545e314bf2013e4ffeb695e0f917c4e19e8710374"
+    },
+    {
+      "eligible": true,
+      "id": "HAD_test_00000041",
+      "labels": [
+        [
+          0,
+          9600,
+          "T"
+        ],
+        [
+          9600,
+          22720,
+          "F"
+        ],
+        [
+          22720,
+          66240,
+          "T"
+        ]
+      ],
+      "pcm_sha256": "5daab73c67fbe6fc3bfbcab8fb2bbf5bb50d031c23599953774a9c94744fc607",
+      "samples": 66320,
+      "unlabeled_tail_samples": 80,
+      "wav_sha256": "35e3ff8cc4d5f9727a7ce7ed381250975fb48eec3a0810d9718db814789f9911"
+    }
+  ],
+  "schema": "chipmunk.audio-had-native-intake/1",
+  "source_ranges": {
+    "tail": {
+      "first_byte": 8073599723,
+      "last_byte": 8073665279,
+      "sha256": "1b64c86810f356e324c25e6ce621378c16c15097e27b543a61bdc4b9be244f5b"
+    },
+    "testlabels": {
+      "first_byte": 1719034985,
+      "last_byte": 1719115621,
+      "sha256": "01a5141ef889f0bd50c24058ae3a2d776c7d9d45679d55d468d7046ee0a83a35"
+    },
+    "testprefix": {
+      "first_byte": 1719115622,
+      "last_byte": 1723309925,
+      "sha256": "ef7cb9e326a3eb4a8a2dba6853c07c63fdd8b8b7925fa18c38fb1b474b80cd5f"
+    }
+  }
+}

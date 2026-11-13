@@ -1,0 +1,673 @@
+{
+  "assets": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+  },
+  "forwards": {
+    "dense": 16,
+    "stock": 9
+  },
+  "inputs": {
+    "intake_sha256": "db7d08d89fdb5df66be0d884ec0f76a38892b05dfcf417dcf2045fabc2a6bda3",
+    "parent_sha256": "b431596eb48f1c7339427873e45a4d4f583dc455ff50be3624873d2053f0daf9"
+  },
+  "method": {
+    "admission": "Existing half-window speech gate. No score or annotation determines the windows.",
+    "decisions": "Strict exceedance of each previously fixed point. Report the strongest measured window, including below the point. Useful requires 0.30 IoU and half of the publisher-marked edit covered.",
+    "dense": "Native one-second windows every half second. Keep fully contained windows from four-second contexts at the start and end. Apply the previous dense affine frame reduction, keeping the lower of qualifying context medians.",
+    "scope": "Publisher-positive-only Mandarin test prefix. No new fitting, artificial backgrounds, false-alarm estimate or serving change.",
+    "stock": "Native two-second windows at source seconds 1 and 3. Omit a window when it cannot fit completely."
+  },
+  "points": {
+    "dense": 7.024354934692383,
+    "stock": 6.400866488004889
+  },
+  "rows": [
+    {
+      "id": "HAD_test_00000002",
+      "pcm_sha256": "49254653c2cfa520858e1ce2ce2c69b3c96a484d5e8812dd7df90f5a85974935",
+      "routes": {
+        "dense": [
+          {
+            "score": 7.238288879394531,
+            "span": [
+              0,
+              16000
+            ]
+          },
+          {
+            "score": 7.352476596832275,
+            "span": [
+              8000,
+              24000
+            ]
+          },
+          {
+            "score": 7.526132583618164,
+            "span": [
+              16000,
+              32000
+            ]
+          },
+          {
+            "score": 7.554375171661377,
+            "span": [
+              24000,
+              40000
+            ]
+          },
+          {
+            "score": 7.399590015411377,
+            "span": [
+              32000,
+              48000
+            ]
+          },
+          {
+            "score": 7.32199239730835,
+            "span": [
+              40000,
+              56000
+            ]
+          },
+          {
+            "score": 7.312500476837158,
+            "span": [
+              48000,
+              64000
+            ]
+          },
+          {
+            "score": 7.288012504577637,
+            "span": [
+              56000,
+              72000
+            ]
+          }
+        ],
+        "stock": [
+          {
+            "score": 7.427200673822382,
+            "span": [
+              16000,
+              48000
+            ]
+          }
+        ]
+      },
+      "truth": [
+        22880,
+        41280
+      ]
+    },
+    {
+      "id": "HAD_test_00000003",
+      "pcm_sha256": "d6169d52eb57ce23c7b680866889607d062ee0d6337843c8188ae397e3c0473e",
+      "routes": {
+        "dense": [
+          {
+            "score": null,
+            "span": [
+              0,
+              16000
+            ]
+          },
+          {
+            "score": 7.188066482543945,
+            "span": [
+              8000,
+              24000
+            ]
+          },
+          {
+            "score": 7.385447025299072,
+            "span": [
+              16000,
+              32000
+            ]
+          },
+          {
+            "score": 7.334214210510254,
+            "span": [
+              24000,
+              40000
+            ]
+          },
+          {
+            "score": 7.211269378662109,
+            "span": [
+              32000,
+              48000
+            ]
+          },
+          {
+            "score": 7.177346229553223,
+            "span": [
+              40000,
+              56000
+            ]
+          },
+          {
+            "score": 7.184058666229248,
+            "span": [
+              48000,
+              64000
+            ]
+          }
+        ],
+        "stock": [
+          {
+            "score": 7.184945108071443,
+            "span": [
+              16000,
+              48000
+            ]
+          }
+        ]
+      },
+      "truth": [
+        22880,
+        32320
+      ]
+    },
+    {
+      "id": "HAD_test_00000017",
+      "pcm_sha256": "f6080fb4b1d6b67aca5ffa4cf8224668b23e71e1f71e83cd487d9397a40cf8b9",
+      "routes": {
+        "dense": [
+          {
+            "score": 7.236169338226318,
+            "span": [
+              0,
+              16000
+            ]
+          },
+          {
+            "score": 7.454768180847168,
+            "span": [
+              8000,
+              24000
+            ]
+          },
+          {
+            "score": 7.491542339324951,
+            "span": [
+              16000,
+              32000
+            ]
+          },
+          {
+            "score": 7.294772148132324,
+            "span": [
+              24000,
+              40000
+            ]
+          },
+          {
+            "score": 7.268454551696777,
+            "span": [
+              32000,
+              48000
+            ]
+          },
+          {
+            "score": 7.180760383605957,
+            "span": [
+              40000,
+              56000
+            ]
+          },
+          {
+            "score": 7.117330551147461,
+            "span": [
+              48000,
+              64000
+            ]
+          },
+          {
+            "score": 7.193096160888672,
+            "span": [
+              56000,
+              72000
+            ]
+          }
+        ],
+        "stock": [
+          {
+            "score": 7.366574282280634,
+            "span": [
+              16000,
+              48000
+            ]
+          }
+        ]
+      },
+      "truth": [
+        18240,
+        27520
+      ]
+    },
+    {
+      "id": "HAD_test_00000020",
+      "pcm_sha256": "c56a9ea71a24740ba1fb243898b381d96b764b7492e8bd0c20a7913ea28dfb70",
+      "routes": {
+        "dense": [
+          {
+            "score": null,
+            "span": [
+              0,
+              16000
+            ]
+          },
+          {
+            "score": 7.4767374992370605,
+            "span": [
+              8000,
+              24000
+            ]
+          },
+          {
+            "score": 7.563060760498047,
+            "span": [
+              16000,
+              32000
+            ]
+          },
+          {
+            "score": 7.488279342651367,
+            "span": [
+              24000,
+              40000
+            ]
+          },
+          {
+            "score": 7.316041946411133,
+            "span": [
+              32000,
+              48000
+            ]
+          },
+          {
+            "score": 7.292860984802246,
+            "span": [
+              40000,
+              56000
+            ]
+          },
+          {
+            "score": 7.298573017120361,
+            "span": [
+              48000,
+              64000
+            ]
+          }
+        ],
+        "stock": [
+          {
+            "score": 7.391915154328758,
+            "span": [
+              16000,
+              48000
+            ]
+          }
+        ]
+      },
+      "truth": [
+        14720,
+        31520
+      ]
+    },
+    {
+      "id": "HAD_test_00000023",
+      "pcm_sha256": "216480b65d74fe8b27e91c6425c29fa814c80c0f1d84834affda7207496ea58a",
+      "routes": {
+        "dense": [
+          {
+            "score": 7.154476165771484,
+            "span": [
+              0,
+              16000
+            ]
+          },
+          {
+            "score": 7.178409576416016,
+            "span": [
+              8000,
+              24000
+            ]
+          },
+          {
+            "score": 7.170182228088379,
+            "span": [
+              16000,
+              32000
+            ]
+          },
+          {
+            "score": 7.260461807250977,
+            "span": [
+              24000,
+              40000
+            ]
+          },
+          {
+            "score": 7.396520614624023,
+            "span": [
+              32000,
+              48000
+            ]
+          },
+          {
+            "score": 7.403703689575195,
+            "span": [
+              40000,
+              56000
+            ]
+          },
+          {
+            "score": 7.2568254470825195,
+            "span": [
+              48000,
+              64000
+            ]
+          },
+          {
+            "score": 7.1849589347839355,
+            "span": [
+              56000,
+              72000
+            ]
+          },
+          {
+            "score": 7.1583356857299805,
+            "span": [
+              64000,
+              80000
+            ]
+          },
+          {
+            "score": 7.204082489013672,
+            "span": [
+              72000,
+              88000
+            ]
+          }
+        ],
+        "stock": [
+          {
+            "score": 7.256094699951405,
+            "span": [
+              16000,
+              48000
+            ]
+          },
+          {
+            "score": -7.2043609503105595,
+            "span": [
+              48000,
+              80000
+            ]
+          }
+        ]
+      },
+      "truth": [
+        39680,
+        48000
+      ]
+    },
+    {
+      "id": "HAD_test_00000029",
+      "pcm_sha256": "27db19e4bee1dd1eb7f2e31ff42f13d1917ca854f60b77707bf9a9ccff800793",
+      "routes": {
+        "dense": [
+          {
+            "score": 7.206061363220215,
+            "span": [
+              0,
+              16000
+            ]
+          },
+          {
+            "score": 7.525566577911377,
+            "span": [
+              8000,
+              24000
+            ]
+          },
+          {
+            "score": 7.439994812011719,
+            "span": [
+              16000,
+              32000
+            ]
+          },
+          {
+            "score": 7.249646186828613,
+            "span": [
+              24000,
+              40000
+            ]
+          },
+          {
+            "score": 7.2434163093566895,
+            "span": [
+              32000,
+              48000
+            ]
+          },
+          {
+            "score": 7.212161064147949,
+            "span": [
+              40000,
+              56000
+            ]
+          },
+          {
+            "score": 7.248107433319092,
+            "span": [
+              48000,
+              64000
+            ]
+          },
+          {
+            "score": 7.345255374908447,
+            "span": [
+              56000,
+              72000
+            ]
+          }
+        ],
+        "stock": [
+          {
+            "score": 7.234098269018512,
+            "span": [
+              16000,
+              48000
+            ]
+          }
+        ]
+      },
+      "truth": [
+        14400,
+        24000
+      ]
+    },
+    {
+      "id": "HAD_test_00000036",
+      "pcm_sha256": "82746b87311d84de209e74eac867eed29d9ada9da890a46079d7b6bd66ad12fd",
+      "routes": {
+        "dense": [
+          {
+            "score": null,
+            "span": [
+              0,
+              16000
+            ]
+          },
+          {
+            "score": 7.360232830047607,
+            "span": [
+              8000,
+              24000
+            ]
+          },
+          {
+            "score": 7.45999813079834,
+            "span": [
+              16000,
+              32000
+            ]
+          },
+          {
+            "score": 7.249269485473633,
+            "span": [
+              24000,
+              40000
+            ]
+          },
+          {
+            "score": 7.104715347290039,
+            "span": [
+              32000,
+              48000
+            ]
+          },
+          {
+            "score": 7.19088077545166,
+            "span": [
+              40000,
+              56000
+            ]
+          },
+          {
+            "score": 7.1748948097229,
+            "span": [
+              48000,
+              64000
+            ]
+          },
+          {
+            "score": 7.264325141906738,
+            "span": [
+              56000,
+              72000
+            ]
+          }
+        ],
+        "stock": [
+          {
+            "score": 7.272979513553232,
+            "span": [
+              16000,
+              48000
+            ]
+          }
+        ]
+      },
+      "truth": [
+        18400,
+        26400
+      ]
+    },
+    {
+      "id": "HAD_test_00000041",
+      "pcm_sha256": "5daab73c67fbe6fc3bfbcab8fb2bbf5bb50d031c23599953774a9c94744fc607",
+      "routes": {
+        "dense": [
+          {
+            "score": 7.430892467498779,
+            "span": [
+              0,
+              16000
+            ]
+          },
+          {
+            "score": 7.558945655822754,
+            "span": [
+              8000,
+              24000
+            ]
+          },
+          {
+            "score": 7.463865756988525,
+            "span": [
+              16000,
+              32000
+            ]
+          },
+          {
+            "score": 7.373081684112549,
+            "span": [
+              24000,
+              40000
+            ]
+          },
+          {
+            "score": 7.334210395812988,
+            "span": [
+              32000,
+              48000
+            ]
+          },
+          {
+            "score": 7.318478107452393,
+            "span": [
+              40000,
+              56000
+            ]
+          },
+          {
+            "score": 7.302431583404541,
+            "span": [
+              48000,
+              64000
+            ]
+          }
+        ],
+        "stock": [
+          {
+            "score": 7.296649013778136,
+            "span": [
+              16000,
+              48000
+            ]
+          }
+        ]
+      },
+      "truth": [
+        9600,
+        22720
+      ]
+    }
+  ],
+  "runtime": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "torch": "2.13.0",
+    "transformers": "5.15.1"
+  },
+  "schema": "chipmunk.audio-had-positive-transfer/1",
+  "summary": {
+    "dense": {
+      "admitted_reachable": 8,
+      "assessed": 8,
+      "flags": 8,
+      "geometrically_reachable": 8,
+      "misplaced": 0,
+      "planned": 8,
+      "useful": 8,
+      "useful_before_point": 8
+    },
+    "stock": {
+      "admitted_reachable": 2,
+      "assessed": 8,
+      "flags": 8,
+      "geometrically_reachable": 2,
+      "misplaced": 6,
+      "planned": 8,
+      "useful": 2,
+      "useful_before_point": 2
+    }
+  }
+}

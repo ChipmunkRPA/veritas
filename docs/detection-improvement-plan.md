@@ -95,6 +95,11 @@ are not public screening promises or calibrated population probabilities.
   genuine deliveries. Checking the original voice band removed one false flag and
   lost four hits, plus two clean synthetic flags. Reversing signal polarity removed
   no false flags. The study preserves the measured limits and keeps both probes offline.
+- [Persistence of noisy speech flags](audio-background-persistence-2026-11-13.md)
+  tested 116 held uploads. Requiring both halves to agree cut false flags on
+  noisy genuine clips from three to two and cut synthetic flags from eight
+  to six. Overlapping windows and restricted frequency bands removed no
+  false flags. All three probes remain offline.
 - [Grammatical attachment changes](writing-dependency-transfer-2026-11-13.md)
   added zero locations on 40 held sentence edits. A part-of-speech comparison added
   one location and one false alert. Both remain experimental.

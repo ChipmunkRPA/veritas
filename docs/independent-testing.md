@@ -51,6 +51,10 @@ splice flags, untouched files and isolated background observations.
 The [short speech coverage verifier](audio-interval-learning-2026-11-13.md#app-coverage)
 recomputes all five speech-activity measurements from a signed analysis
 and the supplied original, including windows the voice check skipped.
+The [resynthesis and competing speech replay](audio-sine-resynthesis-transfer-2026-11-14.md#replay)
+recounts 152 held deliveries at the same frozen speech points. Native
+replay reconstructs each waveform and checks matched resynthesized words,
+synthetic splices, infill deliveries, and isolated meeting-room controls.
 
 The latest single-upload comparisons cover [localized image residuals](image-residual-third-order-transfer-2026-11-13.md),
 [motion around the mouth](video-mouth-motion-transport-2026-11-13.md),

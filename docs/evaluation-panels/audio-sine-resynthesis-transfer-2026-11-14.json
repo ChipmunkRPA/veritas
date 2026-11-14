@@ -1,0 +1,5949 @@
+{
+  "assets": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+  },
+  "freeze": {
+    "annotations_sha256": "b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d",
+    "backgrounds": [
+      {
+        "byte_size": 36689964,
+        "header_sha256": "1515b214a72653ef18c4786813c3def978a7e8d8d7cad5e299726a968aa810db",
+        "overlap_samples": 47520,
+        "pcm_sha256": "de2b04877314e0fbaba0661fc4eba0813ab2292a9ce2408a4d070a8795f3621a",
+        "room": "ES2015a",
+        "speech_samples": 87680,
+        "start_sample": 7536000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2015a/audio/ES2015a.Array1-01.wav"
+      },
+      {
+        "byte_size": 44294104,
+        "header_sha256": "50662862a0b6631dc009547deb39cc3bb1e913590d9fc68329cb76f913d22882",
+        "overlap_samples": 53120,
+        "pcm_sha256": "12369b952aae7dfaea311030d09ceb9408fe6fc76002678c723efbb441526804",
+        "room": "ES2016a",
+        "speech_samples": 87040,
+        "start_sample": 6096000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2016a/audio/ES2016a.Array1-01.wav"
+      },
+      {
+        "byte_size": 40092714,
+        "header_sha256": "d3560f9867b480b65decd1c3961007e1d3c16e036289386b918c2c9565405d0e",
+        "overlap_samples": 57280,
+        "pcm_sha256": "faefcacffb60a0c3a79ca9763d06ae7106eb9b0968c15efc5c383ecf97550a27",
+        "room": "TS3006a",
+        "speech_samples": 96000,
+        "start_sample": 11568000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3006a/audio/TS3006a.Array1-01.wav"
+      },
+      {
+        "byte_size": 43272574,
+        "header_sha256": "e9c124fcfdc94409802b3775fa2982b259a926a8dae032c919a79864e0563512",
+        "overlap_samples": 47360,
+        "pcm_sha256": "91fb01979f9d03731e57a73639f280a8476d37c53ff84bf09ab091edd149e4f4",
+        "room": "TS3008a",
+        "speech_samples": 96000,
+        "start_sample": 9888000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3008a/audio/TS3008a.Array1-01.wav"
+      },
+      {
+        "byte_size": 48191870,
+        "header_sha256": "dbbcf6a76095c44c3d7c1aeac87e61b3ae8e9e89fbe267429505a31e64a7bb19",
+        "overlap_samples": 40320,
+        "pcm_sha256": "1923f27457d37d39d0b9db8ec209fede58bbf759ef3e477bcd90db0e2098d1ea",
+        "room": "TS3009a",
+        "speech_samples": 96000,
+        "start_sample": 9648000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3009a/audio/TS3009a.Array1-01.wav"
+      },
+      {
+        "byte_size": 33313834,
+        "header_sha256": "15ac2013f6570e30cf90c55877a45f3dcdba37b952d356598a72c70fa82e531f",
+        "overlap_samples": 34880,
+        "pcm_sha256": "877ac3b3afc4be53e6bb34f6d42cf70832ca6a14b20b16434b70f529042557d4",
+        "room": "TS3010a",
+        "speech_samples": 95040,
+        "start_sample": 4368000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3010a/audio/TS3010a.Array1-01.wav"
+      },
+      {
+        "byte_size": 48313386,
+        "header_sha256": "2e7baeb04d65066c4dbe9ac9156ffd8bd3d2cd3e23caaa038d1632cd61150171",
+        "overlap_samples": 32320,
+        "pcm_sha256": "319b13dcf4f561cdd5fea709d8aa5ac8250aec6d5b2ddb2a82390d4b673fc6c4",
+        "room": "TS3011a",
+        "speech_samples": 86240,
+        "start_sample": 8832000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3011a/audio/TS3011a.Array1-01.wav"
+      },
+      {
+        "byte_size": 27500244,
+        "header_sha256": "28969a7502e9676e3765eab5f5d908c33e376ee586172546a2a8d881c7d1e1c9",
+        "overlap_samples": 32320,
+        "pcm_sha256": "09644b648eef4d2adf4f8ed95f36378c61546804bb11e21a7c605a49af3c7244",
+        "room": "TS3012a",
+        "speech_samples": 96000,
+        "start_sample": 5328000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3012a/audio/TS3012a.Array1-01.wav"
+      }
+    ],
+    "fit_sha256": "8b40a4ba5fc3315c6b27fd235bcffff2a7273575dafa9f8aa41fe3443ea93926",
+    "method": {
+      "background": "Use distinct six-second AMI ranges from eight rooms with no shared declared participants among the named earlier room bank at commit 2fdcae31. Select by hash on a three-second start grid, with at least five seconds of annotated speech and two seconds of simultaneous words by different speakers. Add one identical PCM background to each matched pair with its amplitude fixed from the original at nominal -5 dB. Apply one common peak-safe scale and quantize the two stems separately.",
+      "clock": "Use one six-second view of each member. For cut-and-paste use the publisher's single interior region, require 0.20\u20131.00 s edit length and use an edit-containing crop chosen by hash on a 100 ms grid within both matched clocks. Target is supplied only to fixture preparation and evaluation. For resynthesis and infill use a common start at 0 s. Report infill clip-level flags only: the bounded prefix does not supply medium_edit.txt, and the cut-and-paste label is not assigned to infill.",
+      "comparison": "Compare the stored five two-second window point and both frozen interval heads. Use no new training or point selection. Report flag counts separately from useful source locations and report paired original/variant transitions by condition. Reuse the earlier overlap criterion. Include each AMI background alone as a control.",
+      "sources": "Take first 192 MiB from each of six pinned SINE shards. Find exact filename-stem matches between originals and each of the three treatments in its own shard. Exclude reader 100. Use hash order to select up to 12 pairs per treatment, at most one per reader within each treatment and no reused utterance across treatments. A reader may recur across treatments."
+    },
+    "pairs": [
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "0131948eadea3e7deb6a0a3d7714a78cb1a3c46618599db0b20951f18fb5d07c",
+            "samples": 182376,
+            "wav_sha256": "a4febe214daf478afd06ff7b5cdf8fea91dde3c54e694c24de7401e6592dcecb"
+          },
+          "variant": {
+            "pcm_sha256": "78014f7398b412604d56801b1a0983571f938014ac0233ec8d17cd194619ecb0",
+            "samples": 182376,
+            "wav_sha256": "50890a8d7bfc3038842f9a7e0cbc817e2e19bf98723224734c676c07825e3a7b"
+          }
+        },
+        "id": 0,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "1259",
+        "role": "resyn",
+        "room": "ES2015a",
+        "shard": 3,
+        "stem": "1259-my_brilliant_career_0909_librivox_64kb_mp3-mybrilliantcareer_07_franklin_64kb_8",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "7fa349b61739241b7e0a1538f02424919607357aa429f17053915379e418a189",
+            "samples": 147816,
+            "wav_sha256": "2f916b0b3bbf04e75aabc2ca2efc0a37d71f2a78588ae45226f7e3e8754aafdd"
+          },
+          "variant": {
+            "pcm_sha256": "8ce9a208478e862d3301c3dc3489a3f6573b3fdf5ac7b1f9df97515b421653d6",
+            "samples": 147816,
+            "wav_sha256": "9f0718ac0de0196bc4887fea56dfa70c64da8a2b0e0d565c86538963a2f64d3f"
+          }
+        },
+        "id": 1,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "2162",
+        "role": "resyn",
+        "room": "ES2016a",
+        "shard": 13,
+        "stem": "2162-napoleon_notting_hill_0807_km_librivox1_64kb_mp3-nottinghill_14_gkchesterton_64kb_56",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "508bcadf664b6199477998f450b66925f029f299165d4249144cb4d8f5d06fe8",
+            "samples": 169896,
+            "wav_sha256": "a90e21a55c3c167c58113f55945cacfe0bfc99ca88022e3e52f7dc54a7ef4b11"
+          },
+          "variant": {
+            "pcm_sha256": "64d0ec7e591a95cd5c20b236b28ce53e91bab5cfeb608685595404a48202de66",
+            "samples": 169896,
+            "wav_sha256": "40eaef619bfae573c9b12a9b7a5913faa73b3b3a7c2ebdcef130c4816cbdb1d5"
+          }
+        },
+        "id": 2,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "2198",
+        "role": "resyn",
+        "room": "TS3006a",
+        "shard": 13,
+        "stem": "2198-light_princess_cc_librivox_64kb_mp3-fairytales_07_macdonald_64kb_121",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "597f38382ba04aeb9053b0bea364bf539e2750c3a4cc255e223712a99e0289a7",
+            "samples": 181416,
+            "wav_sha256": "7f184184d9ce498b34d87b220c62bdfe9a4029e520dc1aec8bc13de4272166ff"
+          },
+          "variant": {
+            "pcm_sha256": "096c9d0c9e8f188905889f3f6d37e3e3cdf3a3da90df09506da35fad3a393175",
+            "samples": 181416,
+            "wav_sha256": "ca84bf02050db1e3a40e2dc78d8d2b9c92ed70c7820556fb77e1f4799ea8c148"
+          }
+        },
+        "id": 3,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "2195",
+        "role": "resyn",
+        "room": "TS3008a",
+        "shard": 13,
+        "stem": "2195-aeneid_0810_librivox1_64kb_mp3-aeneid_02_vergil_64kb_2",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "dfdbe5b72b2b8052f94ab78ef5d15ea76a869b448ad9977258d9741d4b26775a",
+            "samples": 157416,
+            "wav_sha256": "e8bad05848753da2daa2e4b9ca04367aa535a5eb9b80ab476319df8933379956"
+          },
+          "variant": {
+            "pcm_sha256": "62b26bbde8add3125c19b49f2ee5b5cf5958d298d28a96899e164083abb816c1",
+            "samples": 157416,
+            "wav_sha256": "f42cbfb1973c5e5b6579fc53cea5a792aac0bc0d5932afbd45dc586291a692d5"
+          }
+        },
+        "id": 4,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "3020",
+        "role": "resyn",
+        "room": "TS3009a",
+        "shard": 17,
+        "stem": "3020-babbitt_0903_librivox_64kb_mp3-babbitt_31_lewis_64kb_57",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "ac84b6405e36cc84a47919af4c984a2048b95f7c0a2dd5ba925bed6d3f4e041f",
+            "samples": 190080,
+            "wav_sha256": "3fdfb97bd3e431eaf6d9d6dfe37ee8764bfcd4d1f0a84b2295baa7d91ea1cafc"
+          },
+          "variant": {
+            "pcm_sha256": "9867d85c7005903d21c29e1ab19cb7626612a69f86bc48594f46fdbbfab40eeb",
+            "samples": 190080,
+            "wav_sha256": "1be5f90d4d9fceed74d996282a393f950bd1ff6cf029d4847aa6ebca3eb11f00"
+          }
+        },
+        "id": 5,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "4191",
+        "role": "resyn",
+        "room": "TS3010a",
+        "shard": 25,
+        "stem": "4191-prester_john_gh_librivox_64kb_mp3-presterjohn_09_buchan_64kb_47",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "2e16c58cf380650c51e4f8794434b6c0d96c99a501b3b5b5e116a9a7fdab872a",
+            "samples": 156480,
+            "wav_sha256": "1d97db1c16390bdcbf58aef3f3585653d40aa8051a70d18b6430fa33b514496b"
+          },
+          "variant": {
+            "pcm_sha256": "f10e4dec7fb84777d9d05cb479de64d776c856f5f6d6c7c586ff9596a7b621c8",
+            "samples": 156480,
+            "wav_sha256": "0ae8e1ddac3ce511679d83389fe066119180076d59cde80e6ec02d925c72c564"
+          }
+        },
+        "id": 6,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "1331",
+        "role": "resyn",
+        "room": "TS3011a",
+        "shard": 3,
+        "stem": "1331-midshipman_easy_1001_librivox_64kb_mp3-midshipmaneasy_20_marryat_64kb_10",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "31b52caf3e875f8560a42248b1b243071636990cbfdecf7202a586555661a0a7",
+            "samples": 180456,
+            "wav_sha256": "5b4ba37805e2fda72de0b9cdf5aa46a621ad506174872978d9ce81db208293ff"
+          },
+          "variant": {
+            "pcm_sha256": "8d9a2f59c1005d5192063ceaac4f4f4e90b252f85ec75ab2eb4553527daf1a1f",
+            "samples": 180456,
+            "wav_sha256": "1da98fe052a17ad2e9319a187af220b3e670c060a8641cea963fcc4cf0e7debb"
+          }
+        },
+        "id": 7,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "2234",
+        "role": "resyn",
+        "room": "TS3012a",
+        "shard": 13,
+        "stem": "2234-story_gosta_berling_0912_librivox_64kb_mp3-storyofgoestaberling_19_lagerloef_64kb_22",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "6fdeae6a5619f795485e8da3177bb8cace538c17c772d31598aa6ecff83c41c3",
+            "samples": 157416,
+            "wav_sha256": "179fb15e416819ddfe0d84a9412e17ddcec2651b767d313f5a8dd7ecd09e5c14"
+          },
+          "variant": {
+            "pcm_sha256": "c5c098c77fd4b625bfb926c75786c809b4ef157cf244ccb16bcc411cde2499cd",
+            "samples": 157416,
+            "wav_sha256": "48eae0cebd071593f605588b66e4cd4b2f752cd2d87a8d64c7a475ff48fdadd6"
+          }
+        },
+        "id": 8,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "3006",
+        "role": "resyn",
+        "room": "ES2015a",
+        "shard": 17,
+        "stem": "3006-cecilia_0906_librivox_64kb_mp3-cecilia_055_burney_64kb_14",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "a175a29eee4d64b3ce6f4a9a873f764cbc9dfcb522562475a7279f50e939cac2",
+            "samples": 158376,
+            "wav_sha256": "fd51d5848d32f30af700bd93fc8417c53716b354152700d5ea83d66d0202fc87"
+          },
+          "variant": {
+            "pcm_sha256": "e00925d681c5265221c8618d28c6a69a489f84f5a189a5ca90668f4b43f58f6c",
+            "samples": 158376,
+            "wav_sha256": "b80380753a8e54a4314df6b5a710895907073ed3b53b011fd3b9446e7aeda7c4"
+          }
+        },
+        "id": 9,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "14",
+        "role": "resyn",
+        "room": "ES2016a",
+        "shard": 3,
+        "stem": "14-aesop_fables_volume_four_librivox_64kb_mp3-fables_04_06_aesop_64kb_1",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "6103823e57e03a189da66e5c984bada64afe70a1df57897ba670db003e074732",
+            "samples": 170856,
+            "wav_sha256": "5fdd6b9b3deeb036147ed4c9ec7d881faf7aafc604db2f117869ce198602df5f"
+          },
+          "variant": {
+            "pcm_sha256": "740e4cdb1df1e259707c39cfbd8dc64e82889fa14f314a68ceaec5de958ecfd6",
+            "samples": 170856,
+            "wav_sha256": "73c63e1b0d11391349b6b2fc2aef09fbeaaf04eacde3c91f017d574cd0d08e10"
+          }
+        },
+        "id": 10,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "688",
+        "role": "resyn",
+        "room": "TS3006a",
+        "shard": 29,
+        "stem": "688-pioneersofscience_1008_librivox_64kb_mp3-pioneersofscience_17_lodge_64kb_32",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "1505e5d4712a3b6259de4b42a4e859418655775b1ca4e0096b80c7c871ddef2d",
+            "samples": 156456,
+            "wav_sha256": "24d241117c296f28c770067e23b5ca4274e069f2a0bbc6f61b14c3f6aa64cf38"
+          },
+          "variant": {
+            "pcm_sha256": "c3972b99f36ae8f9026c87fac0143d629fbbf2e8b13c554d225f81e6b3e31c0e",
+            "samples": 156456,
+            "wav_sha256": "a7198fe167a1ab08c911bc930cc3b231e430409e657a56a3a17171c6719182a4"
+          }
+        },
+        "id": 11,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "1370",
+        "role": "resyn",
+        "room": "TS3008a",
+        "shard": 3,
+        "stem": "1370-highest_treason_0806_librivox_64kb_mp3-highesttreason_02_garrett_64kb_62",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "d40bf38b5ec51ec987854284f4cff50397eb3743ee30a86674e2f4588d1bf5c5",
+            "samples": 168000,
+            "wav_sha256": "a25671d4ee2e933493ba4d004bbef2058b0579b2f5a8841643edcbcaf5c07f4c"
+          },
+          "variant": {
+            "pcm_sha256": "867247f8480f788052d6cc343b654bff2b743ee05b3e4c34b9cb8a78e510b20d",
+            "samples": 164864,
+            "wav_sha256": "f69cc34b543d42973947a1c3b8e9b17d16a37b4a797e1a2aba642d9a8d18995b"
+          }
+        },
+        "id": 12,
+        "native_start": 7200,
+        "publisher_cut_paste_clock": "0.00-3.03-T/3.03-3.42-F/3.42-6.87-T",
+        "reader": "688",
+        "role": "cut_paste",
+        "room": "TS3009a",
+        "shard": 29,
+        "stem": "688-brotherhood_seven_kings_jms_librivox_64kb_mp3-brotherhoodsevenkings_11_meade_64kb_6",
+        "truth": [
+          43680,
+          49920
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "cd5c8a103edcf321dbcbce97815bc3e287da69f66f65c4e5cb3332536dea95ca",
+            "samples": 180456,
+            "wav_sha256": "466dd664e2d1dc48d5b2c978a6f3337d933bdcb47c46babe30b3cdacdfdcc94f"
+          },
+          "variant": {
+            "pcm_sha256": "1fb4eb2ebe0f9754444d4e3608e49efb77fddf1ef04f457e19823eaee1648e1f",
+            "samples": 183040,
+            "wav_sha256": "f5961c8cbc77bd8c7cd355a5f7b7e4fdd84ea2f1c1e2c65823e3b270e94be511"
+          }
+        },
+        "id": 13,
+        "native_start": 31200,
+        "publisher_cut_paste_clock": "0.00-3.69-T/3.69-4.32-F/4.32-7.63-T",
+        "reader": "2234",
+        "role": "cut_paste",
+        "room": "TS3010a",
+        "shard": 13,
+        "stem": "2234-miracle_mongers_0903_librivox_64kb_mp3-miraclemongers_05_houdini_64kb_28",
+        "truth": [
+          38240,
+          48320
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "483e5b79470458e29c11347077571cb857c80bec5575df7fc536723bd9666af7",
+            "samples": 177600,
+            "wav_sha256": "8878162e9b59e3161112bf30b9dbba9ebb9c440fb6727a9da11046a91cccae22"
+          },
+          "variant": {
+            "pcm_sha256": "13ebaf713dfaa0f84194fd83761e380a6c8af480fc19c141a5a778463d92812c",
+            "samples": 178944,
+            "wav_sha256": "88d43cd85dc1eb34de5d94c8b5c80d3ea7a5a1703ea073eca65789e387eef199"
+          }
+        },
+        "id": 14,
+        "native_start": 28800,
+        "publisher_cut_paste_clock": "0.00-2.50-T/2.50-2.78-F/2.78-7.46-T",
+        "reader": "1212",
+        "role": "cut_paste",
+        "room": "TS3011a",
+        "shard": 2,
+        "stem": "1212-in_bishops_carriage_1001_librivox_64kb_mp3-inthebishopscarriage_07_michelson_64kb_81",
+        "truth": [
+          20800,
+          25280
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "d771618586ac93de1cc7696ed751dc30287e34fb110b48f48133f50af133c232",
+            "samples": 183360,
+            "wav_sha256": "705e038f0d557bd45e6f77122f9dafc80f324a0fec6b37ccd23afae83c233f53"
+          },
+          "variant": {
+            "pcm_sha256": "9a88496002c564e470155aa8c40e397e5bff541cb9aeee746c5857a9f4b08bcc",
+            "samples": 185856,
+            "wav_sha256": "6b3fe24081bcf5e8d104200713c6ed3e3744618ee0e07d700960421e99650223"
+          }
+        },
+        "id": 15,
+        "native_start": 36000,
+        "publisher_cut_paste_clock": "0.00-3.40-T/3.40-3.75-F/3.75-7.74-T",
+        "reader": "1166",
+        "role": "cut_paste",
+        "room": "TS3012a",
+        "shard": 2,
+        "stem": "1166-they_and_i_0909_dl_librivox1_64kb_mp3-theyandi_02_jerome_64kb_27",
+        "truth": [
+          30400,
+          36000
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "23abb112ba60bc6786631c7484e8a955e9b671cd81a6e5897f1d56130acce952",
+            "samples": 150696,
+            "wav_sha256": "acdfbce8c6509ed8f95cd04887d1aad2de80b16465d167659f4bb2e61451c201"
+          },
+          "variant": {
+            "pcm_sha256": "07411e7fdb6885047e087977e91e6749e61c267e4bd8c135a19a3b1b23a0232b",
+            "samples": 151552,
+            "wav_sha256": "8acbed548d28cb35f0e8e22798aa0ab3f512c2004934e7050161d95f9ec6e56e"
+          }
+        },
+        "id": 16,
+        "native_start": 2400,
+        "publisher_cut_paste_clock": "0.00-2.24-T/2.24-2.81-F/2.81-6.31-T",
+        "reader": "4218",
+        "role": "cut_paste",
+        "room": "ES2015a",
+        "shard": 25,
+        "stem": "4218-voyage_south_pole_dc_librivox_64kb_mp3-voyage01_34_cook_64kb_81",
+        "truth": [
+          34240,
+          43360
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "ed47639a277ea38ef3c84ec2e6976b7ee07c0e1c2186243bba67a5580fe1aa08",
+            "samples": 186240,
+            "wav_sha256": "704d16a6c1a9a27f37d4f18f1d940352d8dbceb964fb51ad2118249b9f378c27"
+          },
+          "variant": {
+            "pcm_sha256": "8db33c8b816dd77dd58573fa4e558bc4f1ace29a1b3a05655c3ed613159d5677",
+            "samples": 185344,
+            "wav_sha256": "e12bfa3cca17943f211c95f956790239498ddb5f0d3d9b54860b44b960790216"
+          }
+        },
+        "id": 17,
+        "native_start": 31200,
+        "publisher_cut_paste_clock": "0.00-5.99-T/5.99-6.31-F/6.31-7.72-T",
+        "reader": "1335",
+        "role": "cut_paste",
+        "room": "ES2016a",
+        "shard": 3,
+        "stem": "1335-sammie_susie_littletail_c_librivox_64kb_mp3-sammieandsusielittletail_21_garis_64kb_18",
+        "truth": [
+          75040,
+          80160
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "00c85abcbddee53487d05f3f42d871305a9c88994cd44239995a8bfd79ac4546",
+            "samples": 151680,
+            "wav_sha256": "dafe58998c74ddc722abfe404fe2c9692654dce97acad9dd57f15247954f05ff"
+          },
+          "variant": {
+            "pcm_sha256": "bd05dcd406a580ff30949c4822e60b7f46620fc511b7f12710ac1e3bc272b092",
+            "samples": 150016,
+            "wav_sha256": "f0688e3ff5ebdf8d36c0d67bc5a8996fe22a38da5f075970b0e034ab9e00e23c"
+          }
+        },
+        "id": 18,
+        "native_start": 4800,
+        "publisher_cut_paste_clock": "0.00-1.89-T/1.89-2.42-F/2.42-6.25-T",
+        "reader": "2269",
+        "role": "cut_paste",
+        "room": "TS3006a",
+        "shard": 13,
+        "stem": "2269-easter_1916_0904_librivox_64kb_mp3-easter1916_yeats_ref_64kb_5",
+        "truth": [
+          27040,
+          35520
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "ba0a48ed0327b73893928869716bb9fe867affe012c570a147f160656f11e826",
+            "samples": 190080,
+            "wav_sha256": "b7f07570f99f2ff8fa04f36d90c2ae309933fb4df45865ee28f30d45019ac523"
+          },
+          "variant": {
+            "pcm_sha256": "5846256d40188f322bcd252cbf648501a6f6fa033f84429616ea4d227d07f385",
+            "samples": 187392,
+            "wav_sha256": "549c11b7798c94a9671a2be46be03ac684654878ad63e43fe032f32a62ab9453"
+          }
+        },
+        "id": 19,
+        "native_start": 40800,
+        "publisher_cut_paste_clock": "0.00-5.06-T/5.06-5.43-F/5.43-7.81-T",
+        "reader": "128",
+        "role": "cut_paste",
+        "room": "TS3008a",
+        "shard": 3,
+        "stem": "128-buddhism_0707_librivox_64kb_mp3-buddhisminchina_05_hodus_64kb_60",
+        "truth": [
+          53760,
+          59680
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "ad9ce0169f813e983d8a98dc5579683e7384711e63b0bccd4df81c0251f739c7",
+            "samples": 147840,
+            "wav_sha256": "d84a737ab9d2c72ed0dbcf9173fb367d72f19d6585c12246a96fededaba20ef5"
+          },
+          "variant": {
+            "pcm_sha256": "3ffebde8e1a2340f697ab6b48678401b2942b83edefdaf5a8f44cbc7e3fef467",
+            "samples": 148736,
+            "wav_sha256": "f56496d6d2e4336ede3695f91aef4c3eb9a1fc046d5b6e114d541041e967edd2"
+          }
+        },
+        "id": 20,
+        "native_start": 0,
+        "publisher_cut_paste_clock": "0.00-4.81-T/4.81-5.42-F/5.42-6.20-T",
+        "reader": "2162",
+        "role": "cut_paste",
+        "room": "TS3009a",
+        "shard": 13,
+        "stem": "2162-heretics_0801rc_librivox1_64kb_mp3-heretics_16_chesterton_64kb_50",
+        "truth": [
+          76960,
+          86720
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "c79617151489922ac30eef2d134c9bc975f10c63ca653b67ac53ce7c9daa0cd8",
+            "samples": 188160,
+            "wav_sha256": "417834e6f829f82ddcf47a6648d80a7c49210213adef0b2275218e6c57c58320"
+          },
+          "variant": {
+            "pcm_sha256": "68312c1729597ac21909888224900c07934f64afb224457ccbcca3e16134dd6e",
+            "samples": 192000,
+            "wav_sha256": "e4f8a7412cfa26a95058c1a4107269eb3b165f000bfe2a619a34d17758e4857d"
+          }
+        },
+        "id": 21,
+        "native_start": 38400,
+        "publisher_cut_paste_clock": "0.00-3.11-T/3.11-3.45-F/3.45-8.00-T",
+        "reader": "4263",
+        "role": "cut_paste",
+        "room": "TS3010a",
+        "shard": 25,
+        "stem": "4263-book_1001_nights3_1005_librivox_64kb_mp3-thousand_nights_vol03_03_burton_64kb_64",
+        "truth": [
+          24160,
+          29600
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "bc3d7b8b1795cb800ba6827fbe22cec2b6758eeaeb4f5cb1114c8f48403d89a9",
+            "samples": 145920,
+            "wav_sha256": "3ddf7a48f7d3e0f9f8ae534f881f22c07f7d0fedcd91e5c3f99ee49af4a3b952"
+          },
+          "variant": {
+            "pcm_sha256": "1db2cb22d251be8d552cbfcfed2863a9a08115e3789ba0d128ded642b8d29aa0",
+            "samples": 144896,
+            "wav_sha256": "0ff145cae150a0c802cc7a467a3ec72a23d957e142c822fa14f635662cd111e4"
+          }
+        },
+        "id": 22,
+        "native_start": 0,
+        "publisher_cut_paste_clock": "0.00-1.95-T/1.95-2.52-F/2.52-6.04-T",
+        "reader": "3009",
+        "role": "cut_paste",
+        "room": "TS3011a",
+        "shard": 17,
+        "stem": "3009-summa_1_02_jr_0907_librivox_64kb_mp3-summa_theologica1_02_40_aquinas_64kb_104",
+        "truth": [
+          31200,
+          40320
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "fc14c4d015fae153e2afe759147585ba9841b03f75ced13fecebb11d59f89da9",
+            "samples": 154560,
+            "wav_sha256": "426982b58f99561d6c3d16816c3bb5256c3c987c09c86f17d3a213667d245d82"
+          },
+          "variant": {
+            "pcm_sha256": "f7a273014f3dfd0342a62c221b2d6d19dfa95035dd7f9765e91eb5dae8c76863",
+            "samples": 164352,
+            "wav_sha256": "cf60412db91a44df9bfda86b570e839da3e6bc773cd0856ea0345697c31f65b1"
+          }
+        },
+        "id": 23,
+        "native_start": 7200,
+        "publisher_cut_paste_clock": "0.00-2.95-T/2.95-3.72-F/3.72-6.85-T",
+        "reader": "3006",
+        "role": "cut_paste",
+        "room": "TS3012a",
+        "shard": 17,
+        "stem": "3006-anatomy_of_melancholy_1005_librivox_64kb_mp3-anatomyofmelancholy1_28_burton_64kb_50",
+        "truth": [
+          42400,
+          54720
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "7cfd67619a5558f037656e05637a98f1023a452195655e57418c3826ec94062a",
+            "samples": 179496,
+            "wav_sha256": "457ba98cd1c25235db68a333a98618916dd091e0d9a3f9d5376d11e584a694a2"
+          },
+          "variant": {
+            "pcm_sha256": "3daa89fda6e2bdc9143baa77ed15bda0ab379107885a770259de70bd29368148",
+            "samples": 183808,
+            "wav_sha256": "84e28c01af2ea46d54fa6c879276c1118978083dbfcfd8aad74e7e7b81e353ad"
+          }
+        },
+        "id": 24,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "30",
+        "role": "edit",
+        "room": "ES2015a",
+        "shard": 17,
+        "stem": "30-ulysses_2007_librivox_64kb_mp3-ulysses_08a_joyce_64kb_124",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "88bcafd813249f73de3a111a0242fc1f93f4e7519619f3b587fbedd0aeff4f2c",
+            "samples": 155520,
+            "wav_sha256": "f0cf5f8ba4b0e0c7806bce50959cf92c270df5997ebde32b38292358cc4e9dd3"
+          },
+          "variant": {
+            "pcm_sha256": "b722a8788eebfbb8999fc802eb2409f8c00a1454d54f2acd447cd48ee104e756",
+            "samples": 157184,
+            "wav_sha256": "8346ac652795cee506aa34466ccc41996ddd5ececb435bea312554bbf17e5b55"
+          }
+        },
+        "id": 25,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "126",
+        "role": "edit",
+        "room": "ES2016a",
+        "shard": 3,
+        "stem": "126-bible_kjv_nt_03_luke_0812_librivox_64kb_mp3-luke_09-10_kjv_64kb_9",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "beedd1756e4ab8ed6ae896de6ba534d768fa5716cac81dac934dcffb95f0d38a",
+            "samples": 152640,
+            "wav_sha256": "b66b1fb686169a64e45d25eca406eb785cfca8415f1ecc668a63c3ad1b0b7dca"
+          },
+          "variant": {
+            "pcm_sha256": "cfe76457402cab5e87be7921002b67f89bc90da69f5b57949b871e2137268f6e",
+            "samples": 153856,
+            "wav_sha256": "0a269a89137aa2f5bd0ca0238df1a6b8e4a2e7beee07f252a023a137bf7b728f"
+          }
+        },
+        "id": 26,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "684",
+        "role": "edit",
+        "room": "TS3006a",
+        "shard": 29,
+        "stem": "684-the_princess_and_curdie_librivox_64kb_mp3-princessandcurdie_07_macdonald_64kb_46",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "9889579eef350c2d61798198dbb7d32d68ddb7aaf15360bf4aab451801af30d3",
+            "samples": 165120,
+            "wav_sha256": "9247735450aaabf244592bec89882b0c11bfa42f3d4530650180d96254a31b85"
+          },
+          "variant": {
+            "pcm_sha256": "2a147d7493daf3a1cda6c30e78f8ac8c07baa703564233f3e7de9fbb7c84e8cf",
+            "samples": 162048,
+            "wav_sha256": "0a22e5e426aba545336b58023a92d244329f8494b65cf2a9d17163fb4b606a5b"
+          }
+        },
+        "id": 27,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "1365",
+        "role": "edit",
+        "room": "TS3008a",
+        "shard": 3,
+        "stem": "1365-les_mis_vol01_0810_librivox_64kb_mp3-lesmiserables_vol1_42_hugo_64kb_2",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "a16e0c3291bc53715bcf986cbc0cfb841b42b3956044a411c4f61a12a6f7ada6",
+            "samples": 159336,
+            "wav_sha256": "bbdaee2ca1a15878c49b50c2c043d9c1531c81cbce741417fda3da3d08e655b9"
+          },
+          "variant": {
+            "pcm_sha256": "6a454601b9e043e39abbd89b520bc0cafbd4d78c6271e61a721dc4b1b8dc5212",
+            "samples": 154112,
+            "wav_sha256": "c99f67401bf0af6dde685fda399a5604dd897fce31359c21e94608d68a6e16ef"
+          }
+        },
+        "id": 28,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "4179",
+        "role": "edit",
+        "room": "TS3009a",
+        "shard": 25,
+        "stem": "4179-whitecat_rk_1002_librivox_64kb_mp3-windowwhitecat_03_rinehart_64kb_32",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "58b0fcfe45529db57637bf4b041cf4ee5bb547a67f80518870e038300fb5a56c",
+            "samples": 176616,
+            "wav_sha256": "dad05b33f95db549806cdd449179180fdbc98946406875bbdcac0f92464d84ab"
+          },
+          "variant": {
+            "pcm_sha256": "1cd5633458ce4c0ff7c637a88c8ac6ff1d1b36d4b2d017e79f0610bd239a9f76",
+            "samples": 171776,
+            "wav_sha256": "5ddaa874a6d1a96bc736b2d0355fde22d24c253df049bda09cb13ccd4436f529"
+          }
+        },
+        "id": 29,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "2234",
+        "role": "edit",
+        "room": "TS3010a",
+        "shard": 13,
+        "stem": "2234-aeneid_0810_librivox1_64kb_mp3-aeneid_05_vergil_64kb_90",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "179cba7f28648538b991ac0871019fb56c8bee5a23f730dc762a8d759c997113",
+            "samples": 185256,
+            "wav_sha256": "3c07a09400913ffde381a3fd620e1a82087f12ff95d19a714591fe86e8ca1a2b"
+          },
+          "variant": {
+            "pcm_sha256": "cb48b2286328020d526b6e765db727531c314e0744df19edf9be509d77c36e90",
+            "samples": 179456,
+            "wav_sha256": "4e2ab22375a8e1e5f64c3144d80fdcfce181f3efb837675fff969b1178ddbb43"
+          }
+        },
+        "id": 30,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "4267",
+        "role": "edit",
+        "room": "TS3011a",
+        "shard": 25,
+        "stem": "4267-short_scifi_27_0909_librivox_64kb_mp3-dearest_piper_rf_64kb_34",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "52189bae38abc9d382b06e1acc3aebb025b58afe8dd92932f917379ea71dc852",
+            "samples": 187200,
+            "wav_sha256": "81911ba5c49ee95d1d520ff3392e32f4f1ccdb969f0af52471e5dca353a44487"
+          },
+          "variant": {
+            "pcm_sha256": "c0762676e5ec8fafe843bb5c3de32f1995dae75cc89b3f819fbc555a9d2005e5",
+            "samples": 199168,
+            "wav_sha256": "06c926252b4101be2c50bace7274442ab8b79d92a5b597efa3f3a7150713c004"
+          }
+        },
+        "id": 31,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "4191",
+        "role": "edit",
+        "room": "TS3012a",
+        "shard": 25,
+        "stem": "4191-prester_john_gh_librivox_64kb_mp3-presterjohn_05_buchan_64kb_20",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "ee087001e9b1878817fb242c7b7ab0e5083d1c07050af81209189a12e20cad4b",
+            "samples": 153600,
+            "wav_sha256": "5c6da0110476e1115c1afd663f5619daddcdd260a58983699ec3bee67d4acbc9"
+          },
+          "variant": {
+            "pcm_sha256": "217cc90410d51bd43bed304782fbdbec2f7d973904529eddea9e6a484115ab6f",
+            "samples": 159232,
+            "wav_sha256": "b44ac8a8d0487003283d6fa3fd6d537312578652883b5122ddd903391adb80db"
+          }
+        },
+        "id": 32,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "1166",
+        "role": "edit",
+        "room": "ES2015a",
+        "shard": 2,
+        "stem": "1166-they_and_i_0909_dl_librivox1_64kb_mp3-theyandi_07_jerome_64kb_33",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "c57a2f4a4ee93df440f85f9979932f38e1855a34847608ae48d93adecbfcce7e",
+            "samples": 167040,
+            "wav_sha256": "f2eb14cc8d126a1c6bb9ec685fd5009fe97528f4aced536b3165234e7acb792d"
+          },
+          "variant": {
+            "pcm_sha256": "7f0bb9ea3faad3800b7cb0cb1afe781148a3d67b3294670f848d6aba2a81ce76",
+            "samples": 175360,
+            "wav_sha256": "42daeb31fe120846cfc48df9ffe11dda00a896a99dd8f5acb839fd902e305e0c"
+          }
+        },
+        "id": 33,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "3020",
+        "role": "edit",
+        "room": "ES2016a",
+        "shard": 17,
+        "stem": "3020-babbitt_0903_librivox_64kb_mp3-babbitt_15_lewis_64kb_19",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "5a4bc9493ec9014cfe2fc38ef75606f0169ca0d08c8a308abaa249260bb62d90",
+            "samples": 155496,
+            "wav_sha256": "33b3d4699ff9ee256dee285d77d5940a14c6599780e32118d1cf25fc296b4abf"
+          },
+          "variant": {
+            "pcm_sha256": "d1d60106421b913664f509a2fa691d1b50d16e946e38fce555abece75ee5722a",
+            "samples": 157696,
+            "wav_sha256": "73544810ee7fc69035e09f8981c50cee013cbe8bfd4d393a4a405e67d1d1069d"
+          }
+        },
+        "id": 34,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "688",
+        "role": "edit",
+        "room": "TS3006a",
+        "shard": 29,
+        "stem": "688-mystery_four_fingers_1001_librivox_64kb_mp3-mysteryoffourfingers_06_white_64kb_34",
+        "truth": null
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "bee4b59179394cf10fda54790365297b9d4a84133c56876d8ccb4e727186dc65",
+            "samples": 172776,
+            "wav_sha256": "a894e9ca5ff82a593042fc32f36f6992be860c6af20bbedf702f108705a0986b"
+          },
+          "variant": {
+            "pcm_sha256": "359955fd83cd0545bed37302d9f8173a4be5609aa41d67978a42c891d0cf89e4",
+            "samples": 177152,
+            "wav_sha256": "8af424dcfe0d39444c7f4734a18038c3de12ba351e871f4320c990645da9752f"
+          }
+        },
+        "id": 35,
+        "native_start": 0,
+        "publisher_cut_paste_clock": null,
+        "reader": "4218",
+        "role": "edit",
+        "room": "TS3008a",
+        "shard": 25,
+        "stem": "4218-voyage_south_pole_dc_librivox_64kb_mp3-voyage01_15_cook_64kb_15",
+        "truth": null
+      }
+    ],
+    "points_parent_sha256": "1d91608178c942d3f30f0605fb8b2a7df288e332659410c12e113d92785cdba9",
+    "revision": "81be5d5e6a7d5d0f9bbbb613abed7b700f43d793",
+    "schema": "chipmunk.audio-sine-resynthesis-transfer/1",
+    "shards": [
+      {
+        "complete_wavs": 737,
+        "prefix_sha256": "e7bb2f4ea0739ed190b8386f4ab390191d5921aab23f135463595ef6327a4e3b",
+        "publisher_bytes": 3077653544,
+        "publisher_etag": "df48225f774ee72500a078c95eff9114b1352e42582aff827fb0bd3838df4f68",
+        "publisher_sha256": "e11518a064658d230dc51fd2df5a19cf7c8b7af15b3aaf2d839b1673d8c20140",
+        "shard": 2
+      },
+      {
+        "complete_wavs": 757,
+        "prefix_sha256": "e341fd57d542058aa72072a09890320776eb2f6c2ca354913479e852b8e38f22",
+        "publisher_bytes": 2866530927,
+        "publisher_etag": "81161595355ac74e5a4ce7d6f2a82872e269ee5f70c466d1559cb001d5caf341",
+        "publisher_sha256": "a42bb14edf464ce1b3d2f17ac9d7c3a4ac293c0c52d7c440475bce54b1e6f85f",
+        "shard": 3
+      },
+      {
+        "complete_wavs": 747,
+        "prefix_sha256": "6df322735db15c3509cab66a5ec47f07a69f1324ca3ddc69173f2c20d9ae2b31",
+        "publisher_bytes": 2878947254,
+        "publisher_etag": "d2c548d1ca02823aee78dc356452d36555e02e2d59e558459717f709b8401875",
+        "publisher_sha256": "d62d7199cc5a5544fc6f5fc69f0c272e35662feb7044bbbda50aa1daa05cac54",
+        "shard": 13
+      },
+      {
+        "complete_wavs": 793,
+        "prefix_sha256": "a7f449a7541c28b1752d88be08da4609569bb5069dcc3d2c57806e8009b45a51",
+        "publisher_bytes": 2786763851,
+        "publisher_etag": "276235c722f742695eb122f5bf29e8670ec135bd6509529688138d2717215327",
+        "publisher_sha256": "b593384cf303dd9d39d3fe0855cfdb6ff3c47717ab7bbf645ba413037488f0e7",
+        "shard": 17
+      },
+      {
+        "complete_wavs": 782,
+        "prefix_sha256": "38a4d235f77a793adfc4bf62709d18e914be415a9e07012c85c9b34ddb88da4a",
+        "publisher_bytes": 2877484303,
+        "publisher_etag": "3d884becf8d8b9630e864b76f90f52a65cd9b4cbb9da197739280e084f79b9a7",
+        "publisher_sha256": "06d29831c203683cc84e50c852ca0c9a91558e06addcb041f081bb807071accd",
+        "shard": 25
+      },
+      {
+        "complete_wavs": 769,
+        "prefix_sha256": "81d3210c627a68b0daeac0dd54544157d5ee39d0eed4a230f722c8c4ba691bdb",
+        "publisher_bytes": 2900965512,
+        "publisher_etag": "f18af3a4647fe2555f775e0a02f35a48c874c758ea44772c0295a7373e252c59",
+        "publisher_sha256": "d27c6788e3989bc8a6a7b482350d0774f3931b3b8d39b358dc02502772735d69",
+        "shard": 29
+      }
+    ],
+    "source_prefix_bytes": 201326592
+  },
+  "points": {
+    "clock": 0.0767023922,
+    "existing": 6.822523597593649,
+    "paired": 0.167395278
+  },
+  "records": [
+    {
+      "condition": "clean",
+      "id": 0,
+      "pcm_sha256": "37eda8719f970ae5c89709aa83c6efc9fe91ceda815d81e4a8cacc349f931059",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0210279447,
+          [
+            35200,
+            48000
+          ]
+        ],
+        "existing": [
+          -6.676628123596304,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          -0.0396556275,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 0,
+      "pcm_sha256": "0b5a70102ff03aa93945ac186b3a3ab70f9ec955e0cb81ef9808956c1687a6da",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0507007242,
+          [
+            35200,
+            48000
+          ]
+        ],
+        "existing": [
+          7.424795876591495,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.1372496503,
+          [
+            35200,
+            48000
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 0,
+      "pcm_sha256": "4af13105935f04cbfa7dfebf3cd28d80ad68a4a174d234d02bfd5f4893cbe6ce",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.062030875,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.682383637561559,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1487146422,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 0,
+      "pcm_sha256": "be280fa5005ae6f777c0c06d05ee569fd08c534e8b5c392dca8121271f1832ee",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0518657548,
+          [
+            12800,
+            25600
+          ]
+        ],
+        "existing": [
+          6.817598840519695,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1431359169,
+          [
+            12800,
+            25600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 1,
+      "pcm_sha256": "4db6c92c12b8cd67e393282b275ec7577d6ad00134c5f0ae60843c6f14267f48",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0206247576,
+          [
+            67200,
+            80000
+          ]
+        ],
+        "existing": [
+          -6.763529720404627,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0423598894,
+          [
+            48000,
+            60800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 1,
+      "pcm_sha256": "ded98912d554207d2fa31af8cd706da1dbeb28a84ffb6f36675946bfc2a1dd64",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0515637311,
+          [
+            41600,
+            54400
+          ]
+        ],
+        "existing": [
+          6.316641803520671,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.1381347999,
+          [
+            41600,
+            54400
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 1,
+      "pcm_sha256": "5a7ec7a04317419353a09775d490498ccde100ff5b32400f8f23a448dc8ca078",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0354387861,
+          [
+            35200,
+            48000
+          ]
+        ],
+        "existing": [
+          3.2868714532538363,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.0053084408,
+          [
+            35200,
+            48000
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 1,
+      "pcm_sha256": "158444252bf0bd324f9d6c5708729626445a73c2870edafd2572a328152ef9dd",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0626776489,
+          [
+            16000,
+            28800
+          ]
+        ],
+        "existing": [
+          6.565929225603222,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1288936642,
+          [
+            19200,
+            32000
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 2,
+      "pcm_sha256": "5c184328f7e809378ff4405e01d55ff70a9bc4d67a54473ee6d493a5bb2f143e",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0211326654,
+          [
+            64000,
+            76800
+          ]
+        ],
+        "existing": [
+          -6.7603779290216615,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0430500074,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 2,
+      "pcm_sha256": "3c013a40796f549987632ce2df114bf633f36db4b2ca0c6295e0db1888db3c7d",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.1029539844,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          7.127475216138318,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.249699153,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 2,
+      "pcm_sha256": "391b8103d959da68d6abcdd38fa3773018a41692b6412674b753d8c2268d4383",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0289746789,
+          [
+            16000,
+            28800
+          ]
+        ],
+        "existing": [
+          5.583432653031972,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0077830826,
+          [
+            16000,
+            28800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 2,
+      "pcm_sha256": "e4171c33478886a1416dbc98e7c3e96d51566f26cdd5dcb1ee7bda154b8dccfe",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.031100644,
+          [
+            3200,
+            16000
+          ]
+        ],
+        "existing": [
+          5.787865028607561,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0020647414,
+          [
+            3200,
+            16000
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 3,
+      "pcm_sha256": "f6ee2ac036163bab2bc3b4190fa75f23d0cd12fe92cb10faf35c8f073406b9e9",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0211595919,
+          [
+            67200,
+            80000
+          ]
+        ],
+        "existing": [
+          -6.992612830572828,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.039698258,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 3,
+      "pcm_sha256": "8f707cd0ea9a86b71b7fade66730f1f32d61838f7dc2a40a7fa6ab8a8f7b6e91",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0505646323,
+          [
+            12800,
+            25600
+          ]
+        ],
+        "existing": [
+          7.231289569185184,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.1369239687,
+          [
+            12800,
+            25600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 3,
+      "pcm_sha256": "dac9ec0c8e67090161cf32d58ad43b9f55ab539e515879f46e1a368938609330",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0600742213,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          6.707546892305416,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.162060683,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 3,
+      "pcm_sha256": "162c26372ac23b6ab38161852e11541b8e1fac317982b51cc9e796ec228c956f",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.049871822,
+          [
+            6400,
+            19200
+          ]
+        ],
+        "existing": [
+          6.431703085798966,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.1178618478,
+          [
+            6400,
+            19200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 4,
+      "pcm_sha256": "c9a401c25b5c44cf793e8f48c7b67dc31d4f3ae94f83693f7d848c5f161df218",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.019854605,
+          [
+            51200,
+            64000
+          ]
+        ],
+        "existing": [
+          -3.8219671184449373,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          -0.027236418,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 4,
+      "pcm_sha256": "9813f869e241da0036a1b89c4511e3e32834d3934bf0559f05d710edfa217d83",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0844643431,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.439534562075792,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.2127059934,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 4,
+      "pcm_sha256": "5fb4151a3943781965c9718f6f42747e1b06c32cae0d491e17500f03842a0b97",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0300370085,
+          [
+            6400,
+            19200
+          ]
+        ],
+        "existing": [
+          -3.9070131812050812,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0108181966,
+          [
+            6400,
+            19200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 4,
+      "pcm_sha256": "78ff3c6e1cd28cef5130bc4197ebb5dac0da7d0841d3f915488a5c9f0dd7e687",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0273778919,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          -2.3131420096077098,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0130833237,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 5,
+      "pcm_sha256": "345e30065a227480e40d2b030a782507f66670a776ce61b3c68b854b72775b5b",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0219519299,
+          [
+            25600,
+            38400
+          ]
+        ],
+        "existing": [
+          -5.89133829278964,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0304577924,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 5,
+      "pcm_sha256": "ebf868db514d6f0f26caadb09f637de323716282728a48bb10f49a4c4fb34d04",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0486300318,
+          [
+            6400,
+            19200
+          ]
+        ],
+        "existing": [
+          6.233865377532528,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1213858004,
+          [
+            6400,
+            19200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 5,
+      "pcm_sha256": "624606ea8269f982634de1d7aaf06e09c3f9e25715e1d5f2caa842acbd88b1b5",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.049769763,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          5.721602730797764,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.1214830869,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 5,
+      "pcm_sha256": "ad610c7e13ca8c4d450b3f38018ffb861bdb603bb27ce732e7941eb9dd2dd19a",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0487128989,
+          [
+            6400,
+            19200
+          ]
+        ],
+        "existing": [
+          5.553391990393373,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.1156519935,
+          [
+            6400,
+            19200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 6,
+      "pcm_sha256": "404cedcfa0af7d9c0cf035745af4e643e79bf4ca3bd7fba6e98a68915a5c1fe8",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0203397123,
+          [
+            28800,
+            41600
+          ]
+        ],
+        "existing": [
+          -6.860487944686562,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.034762939,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 6,
+      "pcm_sha256": "8c0d50ff2ced3610cf152f781d1d8152201c0f039a6dfebf16688f80d84acb08",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0215186728,
+          [
+            28800,
+            41600
+          ]
+        ],
+        "existing": [
+          -0.46356216023765745,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          -0.0293376096,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 6,
+      "pcm_sha256": "8dbe2968b62d4b975be8f1a1763ce4ab4f1e32c1e303da8e1f833c5dfc6c517d",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0372899022,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          -2.072569643366965,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.0186123951,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 6,
+      "pcm_sha256": "6643c077dc4ca2c0f767c835e6cf9f316780a9945fa5a56ebc71f39d84c8bd5e",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.089804314,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          5.7261753553592225,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.2068596928,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 7,
+      "pcm_sha256": "6db882c98bb03b1fccdb2a6f953dd47bf7e8a34c81b4a5e21ebe95b26fcef2db",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0219376572,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          4.735561356555537,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          -0.0227286212,
+          [
+            48000,
+            60800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 7,
+      "pcm_sha256": "c50d7ac8e7b9a0a05a5ee3fc7ebf3ff5658e189e38bdb42b35a93e46f71bd0e7",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0499621191,
+          [
+            6400,
+            19200
+          ]
+        ],
+        "existing": [
+          7.40478118190251,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.1364538493,
+          [
+            6400,
+            19200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 7,
+      "pcm_sha256": "68d999dbd721dce056cf9076894178402c096f1dfdda2e8cb36e8c3defb5d0d4",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0405331071,
+          [
+            64000,
+            76800
+          ]
+        ],
+        "existing": [
+          6.113352010656951,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.0344705482,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 7,
+      "pcm_sha256": "0d02237fe0c7e19e9e80c48c225b6199442910dd75dabb2557aa9d8c40823436",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0775268861,
+          [
+            64000,
+            76800
+          ]
+        ],
+        "existing": [
+          6.198180311054206,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.1812476221,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 8,
+      "pcm_sha256": "afcbbb768c374cd830f4aea0a3b3ac6f8ef546bfbe647f642d6d32706551e208",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0213805744,
+          [
+            83200,
+            96000
+          ]
+        ],
+        "existing": [
+          5.131587082250393,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0419330139,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 8,
+      "pcm_sha256": "3efad6eb9d4b65d7bd6d1db1f7d599dee75ce1fff72ab73aa4f43d6c3ad0e818",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0998135046,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          7.115940108535332,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.2428027443,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 8,
+      "pcm_sha256": "6678239bef25811a834210371416d0d494f946651138ac7f989cf6cfe38d628a",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0251291323,
+          [
+            28800,
+            41600
+          ]
+        ],
+        "existing": [
+          4.327608324647406,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          -0.0080703618,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 8,
+      "pcm_sha256": "df86f70bf2b06e64d4d41d1231888e3de347c8a8744187b4018a1fd7cc8ab09a",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0261157171,
+          [
+            35200,
+            48000
+          ]
+        ],
+        "existing": [
+          2.526555162881863,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.004093565,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 9,
+      "pcm_sha256": "1e95f2461c9ec0c2af3cb5ef06bbcd5fbce97b5e3338315a8eb313def209e5ba",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0219518607,
+          [
+            35200,
+            48000
+          ]
+        ],
+        "existing": [
+          -7.075737451997275,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0393512147,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 9,
+      "pcm_sha256": "84af1431c0da279b6638f5461e1991c196c7a1ba2e1b6ac4034d157fee940f64",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0984290787,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.953921453373883,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.2245264819,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 9,
+      "pcm_sha256": "ff7e110eda2350b015b6c68ffb9b0490695ba01d62de403e388c5feae3a853fc",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0786092349,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          5.829619503574848,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1666653242,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 9,
+      "pcm_sha256": "b27d798f17ac32f4f51d10f321c136c3c086b6bc82bee8baa7daf0562b236c36",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0584495121,
+          [
+            12800,
+            25600
+          ]
+        ],
+        "existing": [
+          6.097863188178935,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1343175862,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 10,
+      "pcm_sha256": "d7277d6dc17dcfc11dbb8144b85df43b020bad69c1d82bb05eb8197ada181695",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0209891904,
+          [
+            57600,
+            70400
+          ]
+        ],
+        "existing": [
+          -6.891954441963894,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0446068576,
+          [
+            25600,
+            38400
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 10,
+      "pcm_sha256": "0a1a9a468eb12b917387a16c8eafa334e2b558e5bce7ec21a994040da6d30302",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0608111183,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          7.237578750561375,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.1558030315,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 10,
+      "pcm_sha256": "016d0685ebf960897f20388ad1770f69fc0d15363cab8cde42dc5f1d6ed9a00d",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.053570719,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.401010591011692,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1374578521,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 10,
+      "pcm_sha256": "e1aa3811f98189132485a6d05bbff030669a9d0dc97af7bf340d708ac26ea1e8",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0512169805,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.36151840344438,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1287277646,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 11,
+      "pcm_sha256": "92aa70b003dc637ae3602d28bcbee539d82555ef3d1ff243772a7dab4489f0bf",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0202532127,
+          [
+            25600,
+            38400
+          ]
+        ],
+        "existing": [
+          -7.060085215513843,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          -0.0385362227,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 11,
+      "pcm_sha256": "c8ccd248371f92e32a6f25902b00b5de06bb07f77f06ef86fe60f7936b043665",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0510471018,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          7.221275646951759,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.1351532564,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 11,
+      "pcm_sha256": "a3c45b506378422ba6aa177d06d48b40ee8c63d3ff0aa7463fe65f4b3ce624de",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0841806725,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          2.8513744816504465,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1864579404,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 11,
+      "pcm_sha256": "f781390ae1c52e20c1f8d9b573e38d72126f75c6c87e773dec818b314a0cdeaf",
+      "role": "resyn",
+      "scores": {
+        "clock": [
+          0.0508622298,
+          [
+            6400,
+            19200
+          ]
+        ],
+        "existing": [
+          7.322245709216735,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1400898685,
+          [
+            6400,
+            19200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 12,
+      "pcm_sha256": "783781b4bf64c34eb69fa72d265d298e909567a6f93408042e7d5780375a1f88",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.020680382,
+          [
+            16000,
+            28800
+          ]
+        ],
+        "existing": [
+          -7.025588018947427,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          -0.0420983655,
+          [
+            57600,
+            70400
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 12,
+      "pcm_sha256": "3063ecde52f4505825d5bc2245ece49b81c773c36f2fbf2ee88ebc7524ff140c",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0488965861,
+          [
+            3200,
+            16000
+          ]
+        ],
+        "existing": [
+          7.2304649779342105,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.1403370046,
+          [
+            41600,
+            54400
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        43680,
+        49920
+      ]
+    },
+    {
+      "condition": "competing_speech",
+      "id": 12,
+      "pcm_sha256": "1fefb8c5d696853b17f8b090a5bbbac3f14609c9d18202439ca24a0e64e7dd3f",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0363210708,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          -3.785456690970699,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.0063031835,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 12,
+      "pcm_sha256": "9506ba77e6cd35bc9af2357b32f29ae0493cef82575944581a5a4c4abea85367",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.041686335,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          -3.4712352839361422,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.0244353826,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        43680,
+        49920
+      ]
+    },
+    {
+      "condition": "clean",
+      "id": 13,
+      "pcm_sha256": "df18646d6d280fda7d71a4da1ad2bf916311f7808984ec50070a39e9754b9d84",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0216399881,
+          [
+            44800,
+            57600
+          ]
+        ],
+        "existing": [
+          -7.032540325275379,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          -0.0405375045,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 13,
+      "pcm_sha256": "02b1d80517e6bd9880e2078b6e38fdacf7c727b6ee0e41bd3ed1fc9db00076ee",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0599064944,
+          [
+            38400,
+            51200
+          ]
+        ],
+        "existing": [
+          6.588823344337383,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.1583190765,
+          [
+            35200,
+            48000
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        38240,
+        48320
+      ]
+    },
+    {
+      "condition": "competing_speech",
+      "id": 13,
+      "pcm_sha256": "d9fcc6459dd914d26d38742469af801e446e72c06fbc45bdb53456e71c20519c",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.032582779,
+          [
+            0,
+            12800
+          ]
+        ],
+        "existing": [
+          -2.8465595082908157,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.008728593,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 13,
+      "pcm_sha256": "925c9beb4903227f0d6e1f4164392160eef46f086ec830dae1ee94804e54d212",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0316210354,
+          [
+            0,
+            12800
+          ]
+        ],
+        "existing": [
+          -2.8465595082908157,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.0076082308,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        38240,
+        48320
+      ]
+    },
+    {
+      "condition": "clean",
+      "id": 14,
+      "pcm_sha256": "aa12de1aad1e52be5608eafb11b0a7e46380a5ed08ad0ad4af9937aa9269dfb9",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0206241301,
+          [
+            70400,
+            83200
+          ]
+        ],
+        "existing": [
+          -7.225879643312304,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          -0.0453314225,
+          [
+            32000,
+            44800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 14,
+      "pcm_sha256": "032f54101c898611090cd6aa38b0fc22751c4225d577f750f8994760335af3e1",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0333739103,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          -4.121118607916789,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.0070151354,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        20800,
+        25280
+      ]
+    },
+    {
+      "condition": "competing_speech",
+      "id": 14,
+      "pcm_sha256": "ef444ce72eef51744726d08d9948c8252a846d35785e38356cc386998ed7307e",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0243063416,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          -3.412555692897698,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          -0.0319039463,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 14,
+      "pcm_sha256": "bfbd00f39a8a3f04a180a627181816dbd363c0af1c99f9f018935f07efaa449b",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0245552388,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          -4.1547851049146365,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.030839308,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        20800,
+        25280
+      ]
+    },
+    {
+      "condition": "clean",
+      "id": 15,
+      "pcm_sha256": "9aef63130160492bb42b7af4d7caced9b54c62fc2ab2ffc4786967cdd0ebbaa7",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0207774473,
+          [
+            0,
+            12800
+          ]
+        ],
+        "existing": [
+          -6.955763743862651,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          -0.0422795473,
+          [
+            25600,
+            38400
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 15,
+      "pcm_sha256": "a281546d34147648f668e088d95e3261f7b62476b01ab479dd2514168c078898",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0438657198,
+          [
+            32000,
+            44800
+          ]
+        ],
+        "existing": [
+          7.141253712251952,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1262468253,
+          [
+            25600,
+            38400
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        30400,
+        36000
+      ]
+    },
+    {
+      "condition": "competing_speech",
+      "id": 15,
+      "pcm_sha256": "b97c639a20e4f8ed5f8d92c793de1e994d4db24215afa3e319800414396b238e",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0427619967,
+          [
+            3200,
+            16000
+          ]
+        ],
+        "existing": [
+          5.016900711680014,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.0592560885,
+          [
+            64000,
+            76800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 15,
+      "pcm_sha256": "05fd19451c30ee48640797fd50c36a1ef6a26699b5565f2444c76208743ba0a9",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0412195555,
+          [
+            6400,
+            19200
+          ]
+        ],
+        "existing": [
+          4.601862108962762,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.0360765513,
+          [
+            6400,
+            19200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        30400,
+        36000
+      ]
+    },
+    {
+      "condition": "clean",
+      "id": 16,
+      "pcm_sha256": "b0ac8f510e8c9247e5657ae1bb5e8c2a02618031de9f38ac18dade00efe8bf99",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0212332885,
+          [
+            64000,
+            76800
+          ]
+        ],
+        "existing": [
+          -6.196812580932679,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0421063947,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 16,
+      "pcm_sha256": "338a83632f5b33c2678ce92f5cff60a66187fc1462617321100be0667d9a1c1e",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0587485893,
+          [
+            32000,
+            44800
+          ]
+        ],
+        "existing": [
+          6.366344652845058,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1592684826,
+          [
+            35200,
+            48000
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        34240,
+        43360
+      ]
+    },
+    {
+      "condition": "competing_speech",
+      "id": 16,
+      "pcm_sha256": "c3f3b4f05ff7bc49028730f48189bf04f057d6e4eab8a8e8eed399eb8a1d037a",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.075759821,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.529360819648023,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.1735160258,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 16,
+      "pcm_sha256": "56621f0a7aba4e118c0bc87c5d425306f3808f24479a792b12707f0d5798300a",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0770356558,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.529360819648023,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.1803347465,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        34240,
+        43360
+      ]
+    },
+    {
+      "condition": "clean",
+      "id": 17,
+      "pcm_sha256": "336c43958c78de3d1b24c280174c0891a884dea5c31e0dd60e708701457dc97b",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0226814597,
+          [
+            51200,
+            64000
+          ]
+        ],
+        "existing": [
+          -6.467970405199404,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.037791648,
+          [
+            12800,
+            25600
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 17,
+      "pcm_sha256": "cc7fee3bd0d8c51464e6e913595af8d69f21c379fb71337bb0d58d9aabebe6e1",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.1044996447,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          6.7892374966011095,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.244360503,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        75040,
+        80160
+      ]
+    },
+    {
+      "condition": "competing_speech",
+      "id": 17,
+      "pcm_sha256": "aab7533268db8fbc609e5c35650047a2772e98baad97d865c4ccb7ac98ca2dd6",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0253031121,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          -4.251775709308104,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0246489663,
+          [
+            32000,
+            44800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 17,
+      "pcm_sha256": "5d99a2d36d6fc9fb40814c4446c14d8eeda4159cb15091df05624d15b0498947",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0216370938,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          -4.917120883798209,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0258361576,
+          [
+            83200,
+            96000
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        75040,
+        80160
+      ]
+    },
+    {
+      "condition": "clean",
+      "id": 18,
+      "pcm_sha256": "7e59b415a52096d25f0d0cde5a2b79eab42eed835d7c89f0d2d9413f889a224f",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0219881324,
+          [
+            12800,
+            25600
+          ]
+        ],
+        "existing": [
+          -6.27351569753477,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0370106224,
+          [
+            41600,
+            54400
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 18,
+      "pcm_sha256": "eebf96f5a38f4c0ccb68178cc4c9cb56efc139f94dfac259dd2c6dd49c1f8c35",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0626461575,
+          [
+            25600,
+            38400
+          ]
+        ],
+        "existing": [
+          5.39654296403798,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1502835966,
+          [
+            25600,
+            38400
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        27040,
+        35520
+      ]
+    },
+    {
+      "condition": "competing_speech",
+      "id": 18,
+      "pcm_sha256": "208a842fee87fb0573d8b3eb105281d5f81f0b3c6176a3e285cc8496b8f181b9",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0307885631,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          4.93798692293334,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0063704949,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 18,
+      "pcm_sha256": "256f64aaca33afc795d088806308020c65939e3720e1422d06814a09211e1754",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0429065397,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          5.512659792058368,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.0443410873,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        27040,
+        35520
+      ]
+    },
+    {
+      "condition": "clean",
+      "id": 19,
+      "pcm_sha256": "625e2f4b8b53dc906986c86dd64a0c2d30454b0bd8f694775b5bc7fa87ff75dc",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0205015687,
+          [
+            51200,
+            64000
+          ]
+        ],
+        "existing": [
+          -6.997041704315093,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0401740572,
+          [
+            6400,
+            19200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 19,
+      "pcm_sha256": "12b149620dde462d157ad1b62691699950603ef992d49f6e95dacdb1133ee302",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0551741752,
+          [
+            51200,
+            64000
+          ]
+        ],
+        "existing": [
+          6.685919434250851,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.1312289331,
+          [
+            51200,
+            64000
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        53760,
+        59680
+      ]
+    },
+    {
+      "condition": "competing_speech",
+      "id": 19,
+      "pcm_sha256": "fbfe2eaf9a892c8f6efb3b36f9e7f0d7d4d419add59c2df68496faaad597ed7a",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0264740174,
+          [
+            83200,
+            96000
+          ]
+        ],
+        "existing": [
+          -2.921975895581443,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          -0.0180699181,
+          [
+            83200,
+            96000
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 19,
+      "pcm_sha256": "b37d3ed19abc5d892c4bd4e061796f9a71355c1fc9488a2045f8972644981209",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.031338545,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          5.353889151185021,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.0128114279,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        53760,
+        59680
+      ]
+    },
+    {
+      "condition": "clean",
+      "id": 20,
+      "pcm_sha256": "8ce133817cf3d98371fb8b1c14ce01679178d3349f57b814228a0bc42fdb4160",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0210806544,
+          [
+            48000,
+            60800
+          ]
+        ],
+        "existing": [
+          3.7070059003450786,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0373120142,
+          [
+            67200,
+            80000
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 20,
+      "pcm_sha256": "61ad0b5e682361fc5a7a72955f8770b39461a7ffcdaddd6e1cb285f84c38f525",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0711631769,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          5.33362477556038,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.1775068877,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        76960,
+        86720
+      ]
+    },
+    {
+      "condition": "competing_speech",
+      "id": 20,
+      "pcm_sha256": "1a44c1bbf9bc1fac85604debf7e353620e8cd8f5f81eae49e2753b01af068e95",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0365592011,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.334352363274201,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.0136833248,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 20,
+      "pcm_sha256": "cb3500a24a8dca7a25ba5a47fcfe43aed49503436b76117259f563552eadeb52",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0355538142,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.334352363274201,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.0113538678,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        76960,
+        86720
+      ]
+    },
+    {
+      "condition": "clean",
+      "id": 21,
+      "pcm_sha256": "ee1d6c38d61f360f9d7e4c6b997439c7baba098fb57de979d7d83d70c7fa90b1",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.021403211,
+          [
+            28800,
+            41600
+          ]
+        ],
+        "existing": [
+          -7.1078023967896415,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          -0.0415141033,
+          [
+            51200,
+            64000
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 21,
+      "pcm_sha256": "36016aa8e809fe064087252f3e5c1f7bee0eb5f34d185195445fcc2dfca35108",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0924863066,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          5.007508796902215,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.2223892302,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        24160,
+        29600
+      ]
+    },
+    {
+      "condition": "competing_speech",
+      "id": 21,
+      "pcm_sha256": "7ba53b8903490fca6dc44df490a416fe7d9057183dfe5e77ab754c1608123591",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0313906422,
+          [
+            3200,
+            16000
+          ]
+        ],
+        "existing": [
+          -2.0492904506461387,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.0136586506,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 21,
+      "pcm_sha256": "4eebcb4ba1345c8eb1e8b039473056912b3a9c67dcd381754586fb6049522f96",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.1016988701,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.8637320323483735,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.2411835292,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        24160,
+        29600
+      ]
+    },
+    {
+      "condition": "clean",
+      "id": 22,
+      "pcm_sha256": "6ee3dcdb5674e876c3f8b284a2adcadb4cec700b0fc8f82e4f1ac3b01b598e97",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0214368184,
+          [
+            28800,
+            41600
+          ]
+        ],
+        "existing": [
+          -6.904055530234644,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          -0.0375274763,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 22,
+      "pcm_sha256": "f867b91587cec02130b0a44b2e6f2d8d0471e40816e3b8cbd8616cb12315e604",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0583760337,
+          [
+            28800,
+            41600
+          ]
+        ],
+        "existing": [
+          5.170288059345548,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.1438119131,
+          [
+            28800,
+            41600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        31200,
+        40320
+      ]
+    },
+    {
+      "condition": "competing_speech",
+      "id": 22,
+      "pcm_sha256": "9d1974dc763d166e54279f83785b973174d4f3de66d0f31f8a37f2cd89afa8ac",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0737697971,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          5.728995378784857,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.1416687226,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 22,
+      "pcm_sha256": "beb4be01fcb94c8367de5bd3a50e28ac9b33dabb9386ceb4a5d952cdff72ad3b",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0332391734,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          -2.812332622009846,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.0067651561,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        31200,
+        40320
+      ]
+    },
+    {
+      "condition": "clean",
+      "id": 23,
+      "pcm_sha256": "c7528dbd4212497ffe9fb58542f92034d7ecbc206333224bbec680aed3366a81",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0211807025,
+          [
+            35200,
+            48000
+          ]
+        ],
+        "existing": [
+          -6.674576735028815,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          -0.0432616066,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 23,
+      "pcm_sha256": "0d51ea0021a42f6892c6f8f5b88693289db3778fdf7e21fa0af654b8ca561b9f",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0548175359,
+          [
+            41600,
+            54400
+          ]
+        ],
+        "existing": [
+          6.361587681544137,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.1549204528,
+          [
+            41600,
+            54400
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        42400,
+        54720
+      ]
+    },
+    {
+      "condition": "competing_speech",
+      "id": 23,
+      "pcm_sha256": "feabad182cb8524fe63fe54391dac8c1edad8747c6681d97b7d011ee360359ab",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0266729775,
+          [
+            3200,
+            16000
+          ]
+        ],
+        "existing": [
+          -3.2366595756630647,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0198616641,
+          [
+            3200,
+            16000
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 23,
+      "pcm_sha256": "609c2fe42272e246785b5a38c9b677d52f98f04a5d7e9f73571b51d9231a5f75",
+      "role": "cut_paste",
+      "scores": {
+        "clock": [
+          0.0248542822,
+          [
+            3200,
+            16000
+          ]
+        ],
+        "existing": [
+          -2.706455245154294,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          -0.0233126436,
+          [
+            67200,
+            80000
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": [
+        42400,
+        54720
+      ]
+    },
+    {
+      "condition": "clean",
+      "id": 24,
+      "pcm_sha256": "c9d16fb065fea7b3650be7ce26ae4b298a80451d60895982950e8453db8c60af",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0201297375,
+          [
+            51200,
+            64000
+          ]
+        ],
+        "existing": [
+          -6.102865216764521,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          -0.0385036438,
+          [
+            28800,
+            41600
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 24,
+      "pcm_sha256": "5060824659f3440c4e57a4e942b6ab5ceb908ebe8131fcd6aa362259070ae998",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0495142848,
+          [
+            83200,
+            96000
+          ]
+        ],
+        "existing": [
+          7.358861137601998,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.134465744,
+          [
+            83200,
+            96000
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 24,
+      "pcm_sha256": "e31dfded861cefdc1419d5bf8cf35d549143b20011ebff4066a711da0ab9c1ee",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.024899063,
+          [
+            32000,
+            44800
+          ]
+        ],
+        "existing": [
+          3.922045916024996,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0175638952,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 24,
+      "pcm_sha256": "3988c67bcd9dd53d5bd505845db1bf409bdd6e00570f8640cf601d09a1bca439",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.089105097,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          7.354000483425972,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.2112597717,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 25,
+      "pcm_sha256": "c00f0559ab0ebb6137857a803446d750e8c90c0a57e5e5ce6565391d9118b99a",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0218107688,
+          [
+            57600,
+            70400
+          ]
+        ],
+        "existing": [
+          -6.629242874152164,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          -0.0387814747,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 25,
+      "pcm_sha256": "289e6b9c3a9eebd7fd332abdb46c1af005141b81fff7742815acd5b95fa7444e",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.052862251,
+          [
+            57600,
+            70400
+          ]
+        ],
+        "existing": [
+          7.267832772411591,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.1410398499,
+          [
+            57600,
+            70400
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 25,
+      "pcm_sha256": "d3123fbcdfa904dfbc1b687792d5a9f57047ed77d3ad1bdc6b162e60a684e090",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0328912483,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          4.944306645368163,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          -0.0004792917,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 25,
+      "pcm_sha256": "dd565583c2662eaaaee5a98caf898be65820c134acd25e205a1017389c9aa967",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0621876107,
+          [
+            32000,
+            44800
+          ]
+        ],
+        "existing": [
+          4.857780339972853,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1331875046,
+          [
+            32000,
+            44800
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 26,
+      "pcm_sha256": "f3b2b6fd22375febed671dae5efe8e600c123aaa620d7786ec11608301fbfe91",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0211811051,
+          [
+            16000,
+            28800
+          ]
+        ],
+        "existing": [
+          -7.195116970890218,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0445308318,
+          [
+            48000,
+            60800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 26,
+      "pcm_sha256": "6d187eefe5e63fa06faa56ddd3ec4d823d3da3aa57c91e2a5576529c0c99ae8f",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0984545048,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          7.322968664500124,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.2363309245,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 26,
+      "pcm_sha256": "d6e2a2a29869b44fd50f4e6ab4e76ea04ae68553a541e91cf76f9490bd43a771",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0579839205,
+          [
+            48000,
+            60800
+          ]
+        ],
+        "existing": [
+          6.077114985076191,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1033910372,
+          [
+            48000,
+            60800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 26,
+      "pcm_sha256": "781e67f8afa857c899a5fab012d452c031a3ef719bd56889c613181a3a039366",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0517653726,
+          [
+            48000,
+            60800
+          ]
+        ],
+        "existing": [
+          6.037638889758131,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.1179898846,
+          [
+            48000,
+            60800
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 27,
+      "pcm_sha256": "8acaadeb98dacfe40d9fccac05044adf9dbe463e53e59af738dbcd518b94e73c",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0202093383,
+          [
+            48000,
+            60800
+          ]
+        ],
+        "existing": [
+          -7.090914683565572,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0452643525,
+          [
+            3200,
+            16000
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 27,
+      "pcm_sha256": "09bc8273cc89b5ec496dcc52a8e365308799347ae4d196f659d136a473b8cd9e",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0548288678,
+          [
+            6400,
+            19200
+          ]
+        ],
+        "existing": [
+          6.604984980070646,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.1172194097,
+          [
+            48000,
+            60800
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 27,
+      "pcm_sha256": "832f9d3c352b63d9d73cc9f586cc8d850beda1af23442fdf88e38c5d66ed4bdb",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0251686734,
+          [
+            57600,
+            70400
+          ]
+        ],
+        "existing": [
+          -4.228874196472552,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          -0.0255780952,
+          [
+            57600,
+            70400
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 27,
+      "pcm_sha256": "6da90429e6e8863d1361c5b8a46e793d531f8b0b9640ae61bbd396f74007e15c",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0241899746,
+          [
+            83200,
+            96000
+          ]
+        ],
+        "existing": [
+          -4.759766558302377,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.030142526,
+          [
+            83200,
+            96000
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 28,
+      "pcm_sha256": "85dec5f4aef3cfa08695be49a24a5e716160c07ce86f9569be16de9c8e43d69c",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0204823278,
+          [
+            12800,
+            25600
+          ]
+        ],
+        "existing": [
+          -6.994997529896469,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          -0.0402063173,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 28,
+      "pcm_sha256": "798bd621594232485586742d1c96cb3d365f83f69be68b1160de42f5386c4616",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0509688627,
+          [
+            76800,
+            89600
+          ]
+        ],
+        "existing": [
+          7.382660807902798,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.1346795859,
+          [
+            76800,
+            89600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 28,
+      "pcm_sha256": "f1f71caa5e3bed072ca126ec03114d20fb27be74605b99b6e73b9f1f213204fa",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0649217951,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          4.650595778898714,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.127476376,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 28,
+      "pcm_sha256": "2dea254e74ad39f6238b79c2ba332a760984cee2e8fab60fec803071d0e02cdd",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0525746283,
+          [
+            6400,
+            19200
+          ]
+        ],
+        "existing": [
+          4.938585902279972,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.1301316479,
+          [
+            6400,
+            19200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 29,
+      "pcm_sha256": "457774f03e500aaa0e1bb7796e811fb6bbb7153da73aeb3ed33fafa32e607d1b",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.022788778,
+          [
+            28800,
+            41600
+          ]
+        ],
+        "existing": [
+          -6.635545743319401,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          -0.0379529997,
+          [
+            51200,
+            64000
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 29,
+      "pcm_sha256": "81a6e79c07ca4f2fb80c2bdcf7cd85e6040d3067b46d647a43196680b77df2b6",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.1018558202,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          6.795411698401965,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.2430539618,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 29,
+      "pcm_sha256": "5f5a5a6cf00dfdb41ad19479e33545a67a7903ea671ec4ec259fdf7940169d90",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0868442602,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          5.6648576361302725,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.2059412968,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 29,
+      "pcm_sha256": "e5b9e564b1d2e3e31569e9d1f909eaf20b649689a4ea7f6cacefaffa45453804",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0551910053,
+          [
+            19200,
+            32000
+          ]
+        ],
+        "existing": [
+          6.032309325674594,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.1278263999,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 30,
+      "pcm_sha256": "8e5fb461de0810dad008ef83d2d0c695e3c94927305a8d57db64c7f7d3bae585",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0215278108,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          -7.035600146174422,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          -0.0422157008,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 30,
+      "pcm_sha256": "53c63094ac89b481d8098e1d03b07d8bd469b7fdfe60dc0e831df71591f20384",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0283145103,
+          [
+            9600,
+            22400
+          ]
+        ],
+        "existing": [
+          3.528538258354694,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          -0.006871067,
+          [
+            9600,
+            22400
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 30,
+      "pcm_sha256": "e39e8c196901a1940681fdbcce34e8a8073717d8017edae3891a44b34439fe4f",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0259746026,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          3.7148487191942503,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          -0.0184847673,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 30,
+      "pcm_sha256": "62cb3180eec58868316659e5a1f08dbedc400f15143f24830c310f26a083c894",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0287482856,
+          [
+            16000,
+            28800
+          ]
+        ],
+        "existing": [
+          -2.2499866589112085,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          -0.012162928,
+          [
+            12800,
+            25600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 31,
+      "pcm_sha256": "1189dde6dc614b7a737f6eba42b8a1be771255ac36b381bfa75d73db7aeff6c7",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0212286034,
+          [
+            38400,
+            51200
+          ]
+        ],
+        "existing": [
+          -3.1468808351309505,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          -0.0321585992,
+          [
+            64000,
+            76800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 31,
+      "pcm_sha256": "268a5707388da8b5e37a751d57f36a43d8cdd7c0fd16dc6c76eb9b12e6851b0c",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0503830561,
+          [
+            6400,
+            19200
+          ]
+        ],
+        "existing": [
+          7.154689327146643,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.1366531587,
+          [
+            6400,
+            19200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 31,
+      "pcm_sha256": "7c039783ccf519054c231258b957f62c6032104f0f8c81a6325026e5a265fa8c",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0525270185,
+          [
+            6400,
+            19200
+          ]
+        ],
+        "existing": [
+          7.137641008234403,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.128122427,
+          [
+            6400,
+            19200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 31,
+      "pcm_sha256": "05160eb5fba97eca4cd15c2cd82e27cb17939d4eb436c0a0f5905f5f31a2fd7f",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0857345716,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          7.001369720328727,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.1990407482,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 32,
+      "pcm_sha256": "b0306bfcb87b6fa9b9b6975e91c6755e6e8f1a63af16b7988c856a7e65e8e17d",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0207614256,
+          [
+            57600,
+            70400
+          ]
+        ],
+        "existing": [
+          -7.13145736365758,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0455106862,
+          [
+            25600,
+            38400
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 32,
+      "pcm_sha256": "401024810497be46fd30f40ccd85ed6dc81e35f64ead07e1107f37cc60da1cfe",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0489550816,
+          [
+            6400,
+            19200
+          ]
+        ],
+        "existing": [
+          7.1461667796400965,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.1353895603,
+          [
+            6400,
+            19200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 32,
+      "pcm_sha256": "a5872fc9f5a67448724a7f0f3ece106c985b842a5381bfaf7086e184e7dd9c4e",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0325576038,
+          [
+            35200,
+            48000
+          ]
+        ],
+        "existing": [
+          4.259607138804822,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.004560001,
+          [
+            35200,
+            48000
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 32,
+      "pcm_sha256": "004136a398c35c3e09ae4cc0efd37b67135e7949bcaf79ebf51f5a5cbcb2d77b",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0543163139,
+          [
+            64000,
+            76800
+          ]
+        ],
+        "existing": [
+          6.692257661020692,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.1332612297,
+          [
+            64000,
+            76800
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 33,
+      "pcm_sha256": "48ac1f73625f68c063b03533dceee8360f4bdcc672d4b8e22a4411abdab7b6c0",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0218900036,
+          [
+            48000,
+            60800
+          ]
+        ],
+        "existing": [
+          -6.632444882055153,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0374986726,
+          [
+            19200,
+            32000
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 33,
+      "pcm_sha256": "1a58eec186c3833c45c3630c33e07f0a83256e71a18f90ccefff29434db14b34",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0482877064,
+          [
+            38400,
+            51200
+          ]
+        ],
+        "existing": [
+          7.386313765245539,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.135531174,
+          [
+            19200,
+            32000
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 33,
+      "pcm_sha256": "72c4741828149bc383f888c4a3148ef3120935b1a4f638614054523cd6edafdd",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0676703011,
+          [
+            35200,
+            48000
+          ]
+        ],
+        "existing": [
+          4.404718857898932,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.1203004614,
+          [
+            35200,
+            48000
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 33,
+      "pcm_sha256": "e333b8f9bd794f505fee7073ed842890f7eb0924ea41e3877a3cafa82d8d4f94",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.051400988,
+          [
+            25600,
+            38400
+          ]
+        ],
+        "existing": [
+          7.074957829023978,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.1401694351,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 34,
+      "pcm_sha256": "03948b32795d90e56148d14490f3a983ee71c1a3877f23e4a04b1a41cd88c92d",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0223688649,
+          [
+            64000,
+            76800
+          ]
+        ],
+        "existing": [
+          -7.12525846927186,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          -0.0371160425,
+          [
+            28800,
+            41600
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 34,
+      "pcm_sha256": "488f1d28f038d370f4874db26af00229fb9f6bd49ba3d06d2ca931fa1381c53b",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0555968722,
+          [
+            12800,
+            25600
+          ]
+        ],
+        "existing": [
+          6.846561456502741,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.1425200532,
+          [
+            12800,
+            25600
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 34,
+      "pcm_sha256": "4d5da4a2a4a1285d9ddd25c583b8c80430806de46c3f4fc47cb44805577c3482",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0571981257,
+          [
+            19200,
+            32000
+          ]
+        ],
+        "existing": [
+          6.307771027653345,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.137947042,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 34,
+      "pcm_sha256": "7bbbb713ac26d5fd45a819980fb9a1e5630bd8709c4306f219367d9178e14ddb",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0453348612,
+          [
+            83200,
+            96000
+          ]
+        ],
+        "existing": [
+          5.413282807772593,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.1055639058,
+          [
+            83200,
+            96000
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 35,
+      "pcm_sha256": "fafce19c11f1ba135619bd2e60d6a0db4226afc5e0cf81842243f3f0357a3e8b",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0221874922,
+          [
+            70400,
+            83200
+          ]
+        ],
+        "existing": [
+          -6.909315641899926,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0377537152,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "clean",
+      "id": 35,
+      "pcm_sha256": "189374ad7e7736c8ce52e3c742860dd467ae47674c442a86f22c72f40a3a5021",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0503455321,
+          [
+            67200,
+            80000
+          ]
+        ],
+        "existing": [
+          7.056913859314087,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.1356450435,
+          [
+            67200,
+            80000
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 35,
+      "pcm_sha256": "4eecd84e2b5b964529d235cd5e1fb067ea86d4446ad3f07af36a141969aa113f",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.0786173187,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          5.894364821998001,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.1698944704,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "original",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 35,
+      "pcm_sha256": "19b1eac525830530143d3e775de2c12ba4c8fe73d7f588a117cc068cb6568ab4",
+      "role": "edit",
+      "scores": {
+        "clock": [
+          0.049322226,
+          [
+            19200,
+            32000
+          ]
+        ],
+        "existing": [
+          6.462712751286894,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.1251681952,
+          [
+            19200,
+            32000
+          ]
+        ]
+      },
+      "side": "variant",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 0,
+      "pcm_sha256": "de2b04877314e0fbaba0661fc4eba0813ab2292a9ce2408a4d070a8795f3621a",
+      "role": "background_only",
+      "scores": {
+        "clock": [
+          0.0065047013,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": null,
+        "paired": [
+          -0.0415695741,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "side": "ES2015a",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 1,
+      "pcm_sha256": "12369b952aae7dfaea311030d09ceb9408fe6fc76002678c723efbb441526804",
+      "role": "background_only",
+      "scores": {
+        "clock": [
+          0.0221681095,
+          [
+            48000,
+            60800
+          ]
+        ],
+        "existing": [
+          -6.895895913985221,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          -0.0402146925,
+          [
+            48000,
+            60800
+          ]
+        ]
+      },
+      "side": "ES2016a",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 2,
+      "pcm_sha256": "faefcacffb60a0c3a79ca9763d06ae7106eb9b0968c15efc5c383ecf97550a27",
+      "role": "background_only",
+      "scores": {
+        "clock": [
+          0.0216890772,
+          [
+            51200,
+            64000
+          ]
+        ],
+        "existing": [
+          -5.981012340344597,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          -0.0346510253,
+          [
+            35200,
+            48000
+          ]
+        ]
+      },
+      "side": "TS3006a",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 3,
+      "pcm_sha256": "91fb01979f9d03731e57a73639f280a8476d37c53ff84bf09ab091edd149e4f4",
+      "role": "background_only",
+      "scores": {
+        "clock": null,
+        "existing": null,
+        "paired": null
+      },
+      "side": "TS3008a",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 4,
+      "pcm_sha256": "1923f27457d37d39d0b9db8ec209fede58bbf759ef3e477bcd90db0e2098d1ea",
+      "role": "background_only",
+      "scores": {
+        "clock": null,
+        "existing": null,
+        "paired": null
+      },
+      "side": "TS3009a",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 5,
+      "pcm_sha256": "877ac3b3afc4be53e6bb34f6d42cf70832ca6a14b20b16434b70f529042557d4",
+      "role": "background_only",
+      "scores": {
+        "clock": [
+          0.0165935602,
+          [
+            38400,
+            51200
+          ]
+        ],
+        "existing": null,
+        "paired": [
+          -0.0207250049,
+          [
+            35200,
+            48000
+          ]
+        ]
+      },
+      "side": "TS3010a",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 6,
+      "pcm_sha256": "319b13dcf4f561cdd5fea709d8aa5ac8250aec6d5b2ddb2a82390d4b673fc6c4",
+      "role": "background_only",
+      "scores": {
+        "clock": [
+          0.0228737526,
+          [
+            32000,
+            44800
+          ]
+        ],
+        "existing": [
+          -5.242648107139676,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          -0.0375113934,
+          [
+            32000,
+            44800
+          ]
+        ]
+      },
+      "side": "TS3011a",
+      "truth": null
+    },
+    {
+      "condition": "competing_speech",
+      "id": 7,
+      "pcm_sha256": "09644b648eef4d2adf4f8ed95f36378c61546804bb11e21a7c605a49af3c7244",
+      "role": "background_only",
+      "scores": {
+        "clock": [
+          0.0213336824,
+          [
+            76800,
+            89600
+          ]
+        ],
+        "existing": [
+          -5.7887554442323825,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.040745398,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "side": "TS3012a",
+      "truth": null
+    }
+  ],
+  "runtime": {
+    "numpy": "2.2.6",
+    "pyloudnorm": "0.1.1",
+    "scipy": "1.18.1",
+    "torch": "2.13.0",
+    "transformers": "5.15.1"
+  },
+  "summary": {
+    "clock": {
+      "background_only/competing_speech": {
+        "background_no_flag": 6,
+        "background_unassessed": 2
+      },
+      "cut_paste/clean": {
+        "misplaced": 1,
+        "new_flag_after_treatment": 2,
+        "original_no_flag": 12,
+        "paired_assessed": 12,
+        "useful": 1,
+        "variant_flag": 2,
+        "variant_no_flag": 10,
+        "variant_score_higher": 12
+      },
+      "cut_paste/competing_speech": {
+        "misplaced": 1,
+        "new_flag_after_treatment": 2,
+        "original_no_flag": 12,
+        "paired_assessed": 12,
+        "useful": 1,
+        "variant_flag": 2,
+        "variant_no_flag": 10,
+        "variant_score_higher": 6
+      },
+      "edit/clean": {
+        "new_flag_after_treatment": 2,
+        "original_no_flag": 12,
+        "paired_assessed": 12,
+        "variant_flag": 2,
+        "variant_no_flag": 10,
+        "variant_score_higher": 12
+      },
+      "edit/competing_speech": {
+        "new_flag_after_treatment": 2,
+        "original_flag": 2,
+        "original_no_flag": 10,
+        "paired_assessed": 12,
+        "variant_flag": 2,
+        "variant_no_flag": 10,
+        "variant_score_higher": 5
+      },
+      "resyn/clean": {
+        "new_flag_after_treatment": 4,
+        "original_no_flag": 12,
+        "paired_assessed": 12,
+        "variant_flag": 4,
+        "variant_no_flag": 8,
+        "variant_score_higher": 12
+      },
+      "resyn/competing_speech": {
+        "new_flag_after_treatment": 2,
+        "original_flag": 2,
+        "original_no_flag": 10,
+        "paired_assessed": 12,
+        "variant_flag": 2,
+        "variant_no_flag": 10,
+        "variant_score_higher": 5
+      }
+    },
+    "existing": {
+      "background_only/competing_speech": {
+        "background_no_flag": 4,
+        "background_unassessed": 4
+      },
+      "cut_paste/clean": {
+        "misplaced": 2,
+        "new_flag_after_treatment": 2,
+        "original_no_flag": 12,
+        "paired_assessed": 12,
+        "variant_flag": 2,
+        "variant_no_flag": 10,
+        "variant_score_higher": 12
+      },
+      "cut_paste/competing_speech": {
+        "misplaced": 1,
+        "new_flag_after_treatment": 1,
+        "original_no_flag": 12,
+        "paired_assessed": 12,
+        "variant_flag": 1,
+        "variant_no_flag": 11,
+        "variant_score_higher": 5
+      },
+      "edit/clean": {
+        "new_flag_after_treatment": 9,
+        "original_no_flag": 12,
+        "paired_assessed": 12,
+        "variant_flag": 9,
+        "variant_no_flag": 3,
+        "variant_score_higher": 12
+      },
+      "edit/competing_speech": {
+        "new_flag_after_treatment": 2,
+        "original_flag": 1,
+        "original_no_flag": 11,
+        "paired_assessed": 12,
+        "variant_flag": 3,
+        "variant_no_flag": 9,
+        "variant_score_higher": 6
+      },
+      "resyn/clean": {
+        "new_flag_after_treatment": 8,
+        "original_no_flag": 12,
+        "paired_assessed": 12,
+        "variant_flag": 8,
+        "variant_no_flag": 4,
+        "variant_score_higher": 12
+      },
+      "resyn/competing_speech": {
+        "new_flag_after_treatment": 1,
+        "original_no_flag": 12,
+        "paired_assessed": 12,
+        "variant_flag": 1,
+        "variant_no_flag": 11,
+        "variant_score_higher": 8
+      }
+    },
+    "paired": {
+      "background_only/competing_speech": {
+        "background_no_flag": 6,
+        "background_unassessed": 2
+      },
+      "cut_paste/clean": {
+        "misplaced": 2,
+        "new_flag_after_treatment": 3,
+        "original_no_flag": 12,
+        "paired_assessed": 12,
+        "useful": 1,
+        "variant_flag": 3,
+        "variant_no_flag": 9,
+        "variant_score_higher": 12
+      },
+      "cut_paste/competing_speech": {
+        "misplaced": 1,
+        "new_flag_after_treatment": 1,
+        "original_flag": 1,
+        "original_no_flag": 11,
+        "paired_assessed": 12,
+        "useful": 1,
+        "variant_flag": 2,
+        "variant_no_flag": 10,
+        "variant_score_higher": 6
+      },
+      "edit/clean": {
+        "new_flag_after_treatment": 2,
+        "original_no_flag": 12,
+        "paired_assessed": 12,
+        "variant_flag": 2,
+        "variant_no_flag": 10,
+        "variant_score_higher": 12
+      },
+      "edit/competing_speech": {
+        "new_flag_after_treatment": 2,
+        "original_flag": 2,
+        "original_no_flag": 10,
+        "paired_assessed": 12,
+        "variant_flag": 2,
+        "variant_no_flag": 10,
+        "variant_score_higher": 8
+      },
+      "resyn/clean": {
+        "new_flag_after_treatment": 4,
+        "original_no_flag": 12,
+        "paired_assessed": 12,
+        "variant_flag": 4,
+        "variant_no_flag": 8,
+        "variant_score_higher": 12
+      },
+      "resyn/competing_speech": {
+        "new_flag_after_treatment": 2,
+        "original_flag": 1,
+        "original_no_flag": 11,
+        "paired_assessed": 12,
+        "variant_flag": 2,
+        "variant_no_flag": 10,
+        "variant_score_higher": 5
+      }
+    }
+  }
+}

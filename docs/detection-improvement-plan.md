@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Matched resynthesis and competing-speech controls](audio-sine-resynthesis-transfer-2026-11-14.md)
+  measured 152 new deliveries. The current review flagged 8 of 12 clean
+  resyntheses that preserve the words. The two interval-trained heads located
+  the same short edit in clean and mixed deliveries and added three noisy
+  original flags. The serving voice calibration stays in place.
+
 - [Interval-trained noisy speech review](audio-interval-learning-2026-11-13.md)
   added three useful locations across two test banks at −5 dB, and nine
   additional false flags on ordinary files. Both trained heads stay offline.

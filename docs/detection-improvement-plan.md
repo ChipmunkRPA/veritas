@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Adjacent soundtrack repeats](video-adjacent-sound-transfer-2026-11-14.md)
+  brought the combined short-video result from seven to 15 of 44 known
+  repeat pairs without adding ordinary flags. The AAC transfer added no
+  useful clean cases and found one noisy edit shared by both carriers.
+  The method remains outside the app.
+
 - [PDF copyable text vs. glyph text](document-pdf-copyable-text-2026-11-14.md)
   located changed amounts, omissions, inserts, and replacements even when
   the rendered page was identical. It also reported a legitimate OCR

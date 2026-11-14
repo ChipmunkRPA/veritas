@@ -51,6 +51,10 @@ uses those public sources and checks the original picture and sample positions
 in two differently encoded copies. The [JPEG90 reflection study](image-regional-jpeg90-reflection-2026-11-13.md)
 recounts the original-mask outcomes on both source banks.
 
+The [adjacent speech replay](video-adjacent-sound-transfer-2026-11-14.md#replay)
+recounts useful and misplaced repeat pairs, synchronized controls, and a
+four-recording AAC transfer with matched competing speech.
+
 The [noisy voice diagnostic](audio-source-isolation-diagnostic-2026-11-13.md#replay)
 includes separate readers for acoustic recovery and classifier localization.
 The readers recount published scalar records. Native replay additionally

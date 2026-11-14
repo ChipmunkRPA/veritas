@@ -1,0 +1,5653 @@
+{
+  "freeze": {
+    "schema": "chipmunk.video-adjacent-sound/1",
+    "sources": [
+      {
+        "bank": "acted",
+        "group": 1,
+        "file": "source-01.flv",
+        "sha256": "6498108f3b93c00e9e9a4bd8ef2178712e31fef29330b55dac3bd9c1cc3d594d",
+        "split": "development",
+        "offset_s": null
+      },
+      {
+        "bank": "acted",
+        "group": 2,
+        "file": "source-02.flv",
+        "sha256": "8802132b4e10f9f2a73f99c2abffce200200434606344d6cd684925db49a8c3e",
+        "split": "development",
+        "offset_s": null
+      },
+      {
+        "bank": "acted",
+        "group": 3,
+        "file": "source-03.flv",
+        "sha256": "9730e2819154b5cc5f1efab1392f968c9196f7d4da26ee317bc991b7238e50f2",
+        "split": "development",
+        "offset_s": null
+      },
+      {
+        "bank": "acted",
+        "group": 4,
+        "file": "source-04.flv",
+        "sha256": "f7565be8dba72ea43e4dbbf04216ac4730f579db23e0d8eb08bdde2f85d55cc4",
+        "split": "development",
+        "offset_s": null
+      },
+      {
+        "bank": "acted",
+        "group": 5,
+        "file": "source-05.flv",
+        "sha256": "c37ad95ab47a1b19e870ef4e862704d7d936608da28e323eff21c09e65e20c28",
+        "split": "held",
+        "offset_s": null
+      },
+      {
+        "bank": "acted",
+        "group": 6,
+        "file": "source-06.flv",
+        "sha256": "e07b8ff982671950291f41af3019881cd95df86dda5c55e31e1159971506e257",
+        "split": "held",
+        "offset_s": null
+      },
+      {
+        "bank": "acted",
+        "group": 7,
+        "file": "source-07.flv",
+        "sha256": "086b809b6f73eb380c84c57bfe7d2ac802adbfb9354b8f0272142f321932da50",
+        "split": "held",
+        "offset_s": null
+      },
+      {
+        "bank": "acted",
+        "group": 8,
+        "file": "source-08.flv",
+        "sha256": "eb2af28b9dd90368626096982364c475e792ba5b4bccdf60ac988d3c53f561f1",
+        "split": "held",
+        "offset_s": null
+      },
+      {
+        "bank": "acted",
+        "group": 9,
+        "file": "source-09.flv",
+        "sha256": "09cf8994de83114e49d78adb651fcebb6b9298a18936306acdc519874afd6aab",
+        "split": "held",
+        "offset_s": null
+      },
+      {
+        "bank": "acted",
+        "group": 10,
+        "file": "source-10.flv",
+        "sha256": "c77c09b54b52db63fc08e6700b673f6ae8559ee5b7fa80fa22153565a63fc0cb",
+        "split": "held",
+        "offset_s": null
+      },
+      {
+        "bank": "acted",
+        "group": 11,
+        "file": "source-11.flv",
+        "sha256": "1d3b4d077e24ae4aa8593fee14b6222170cbaf624f7008f9820ddb1e534ab516",
+        "split": "held",
+        "offset_s": null
+      },
+      {
+        "bank": "acted",
+        "group": 12,
+        "file": "source-12.flv",
+        "sha256": "f05439b0c50e1388ef3fdfcd738ff3c48f6742b00a8915cfa923d6234f3b93fc",
+        "split": "held",
+        "offset_s": null
+      },
+      {
+        "bank": "acted",
+        "group": 13,
+        "file": "source-13.flv",
+        "sha256": "d92b1e800fdc344613b4c102ab14dde786a7b3ccb254b382ce2d2914f00da0c3",
+        "split": "held",
+        "offset_s": null
+      },
+      {
+        "bank": "acted",
+        "group": 14,
+        "file": "source-14.flv",
+        "sha256": "8e5df28eae31b9eaccfb621cc1e39221cfa5a8292a79db9534a403b84e1864e3",
+        "split": "held",
+        "offset_s": null
+      },
+      {
+        "bank": "acted",
+        "group": 15,
+        "file": "source-15.flv",
+        "sha256": "56967cf69c14e18a8e31077b8a05da289764e5a62febf461114b96b7c437dcdb",
+        "split": "held",
+        "offset_s": null
+      },
+      {
+        "bank": "conversation",
+        "group": 1,
+        "file": "diego.webm",
+        "sha256": "e459b43ebc099d2cb6700cd5815d1e0ca1899ae714b7f3d15a1102220de26099",
+        "offset_s": 20,
+        "split": "held"
+      },
+      {
+        "bank": "conversation",
+        "group": 2,
+        "file": "ioanna.webm",
+        "sha256": "8275dec02a8ae560c17e3f0786c7cdb71ade72641468c9f6d7c06519ca8fb134",
+        "offset_s": 28,
+        "split": "held"
+      },
+      {
+        "bank": "conversation",
+        "group": 3,
+        "file": "james.webm",
+        "sha256": "29729329886bf8bd7f7029482a9b20a538ad5331b9d1dfc7e627c559dce6cf99",
+        "offset_s": 20,
+        "split": "held"
+      },
+      {
+        "bank": "conversation",
+        "group": 4,
+        "file": "jan.webm",
+        "sha256": "80babb6fc1e1442448ec990f1083aab2a4e903836a66617430772fecb482dc07",
+        "offset_s": 28,
+        "split": "held"
+      },
+      {
+        "bank": "conversation",
+        "group": 5,
+        "file": "mckensie.webm",
+        "sha256": "f8ade3762e451da6cf680a03222f603ca5535230bc39c87720f57552436b2fa3",
+        "offset_s": 52,
+        "split": "held"
+      },
+      {
+        "bank": "conversation",
+        "group": 6,
+        "file": "paison.webm",
+        "sha256": "3be9af6eb452adf8d37d77bb1c6a724e502db43b6511d7f0834dd21a0255e7c8",
+        "offset_s": 20,
+        "split": "held"
+      },
+      {
+        "bank": "conversation",
+        "group": 7,
+        "file": "piotr.webm",
+        "sha256": "9be8fa1a9bb4da8014cb6d2d3bc961e8081a3a920cc3dffc6c226ae4c7ee31d6",
+        "offset_s": 20,
+        "split": "held"
+      },
+      {
+        "bank": "conversation",
+        "group": 8,
+        "file": "priscilla.webm",
+        "sha256": "69ade821b419b62ffa97c3a3b73d0db1449c9bd5c453caed0a96e7955f74fc52",
+        "offset_s": 28,
+        "split": "held"
+      },
+      {
+        "bank": "conversation",
+        "group": 9,
+        "file": "regina.webm",
+        "sha256": "a04c5cc5c0c3c4286e211a3b86aa3766d5fef7a030104554d7d6e1821c642555",
+        "offset_s": 28,
+        "split": "held"
+      },
+      {
+        "bank": "conversation",
+        "group": 10,
+        "file": "sara.webm",
+        "sha256": "e7c310405acc0aa2b4ceeb197a84d29ce2190a6ca8ff7211abba6dadb455268b",
+        "offset_s": 20,
+        "split": "held"
+      },
+      {
+        "bank": "conversation",
+        "group": 11,
+        "file": "simon.webm",
+        "sha256": "67c892eeaf869119bf8fab229bd8b731e427b176473e70fec1380ea2aa8a6812",
+        "offset_s": 20,
+        "split": "held"
+      }
+    ],
+    "plans": {
+      "acted_receipt_sha256": "1d2cb7f65ab2a87a287f2b09c1809b06bf60bf85b9dadb93bb924968a858c2b8",
+      "conversation_receipt_sha256": "cf11ddbef4419819a84c23977ecdf4164e9126d321e2a8f2e5c4c0d1fdc52958"
+    },
+    "design": {
+      "input": "Same verified picture and decoded sound clock as the prior 26-source comparison. All groups are already exposed.",
+      "comparison": "Current two-band audio calls and adjacent local-band audio calls, each with the same mouth measurement. This compares nominations, independently of the incumbent app's previously recorded timing result.",
+      "new_controls": "Move the corresponding mouth crops and sound together in both directions. Add the same independent speech-band bed under each of two adjacent segments of ordinary audio.",
+      "truth": "Both witnesses reach 0.50 temporal IoU. The first or second range may contain the reused samples. The match cannot determine which changed, or the full edit interval.",
+      "rule": "At least four added useful pairs across at least three held groups, both banks represented, no lost useful pairs, at most two additional ordinary flags and zero synchronized or global flags."
+    },
+    "bindings": {
+      "video_adjacent_sound_transfer.py": "72929ea2f9f2c26ce8442e7b07c614defc79efeda1c392132c676ceaf813d0cc",
+      "video_adjacent_sound_witness.py": "23a22f52ad91809383f41ecd4a239e8e901a0ba40b1bd4b2d929528a458cb49f",
+      "review_video_adjacent_sound.py": "78a0ab5717bac394290c409f7fc027a18d70ea0397d2210dac0273c5efd89c4f",
+      "video_lipsync_window_schedule.py": "6d808bf09a623dec43f54ddd2cf96c92f39494f575162d98a22d45db92ceff44",
+      "audio_similarity.py": "ff1693f0eccfb72ba21e286d7d95f748e68adaedf425c82b06e1ef0470555f36",
+      "face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4"
+    },
+    "runtime": {
+      "opencv": "5.0.0",
+      "numpy": "2.2.6",
+      "ffmpeg": "ffmpeg version 7.0.2 Copyright (c) 2000-2024 the FFmpeg developers"
+    }
+  },
+  "rows": [
+    {
+      "bank": "acted",
+      "group": 1,
+      "source_sha256": "6498108f3b93c00e9e9a4bd8ef2178712e31fef29330b55dac3bd9c1cc3d594d",
+      "samples": 40534,
+      "picture_pts_sha256": "8c70e30f042c3ab45115da563a41326e02900d7071823d7fa74800105a3a60de",
+      "picture_time_base": "1/1000",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 62,
+      "last_verified_frame": 74,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "58db9ee8db392548b05110f3a2c5004aee50c5e30989c1dd89727d8ea3dbcb5a",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "a8d18f0bd87223b692a8ad2fe5e1e80aeb681c8560828977aed8190ee4fde407",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "0bf245944ee35ee10c4cd917e9a5a05df206839d9b6f5625dbcba265e87744fd",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "806429df4d8a19dd63305fccc758e47dc4acd3e3cbc3c326e3a6adfb0975108e",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "8eb9b32f100d71adc1266eb6ca44e9db8ba40585f5cfe482a95584ffa6cc2f37",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              23680,
+              28160
+            ],
+            [
+              28160,
+              32640
+            ]
+          ],
+          "pcm_sha256": "308c024384582a17de11d032ddef40151552f8adb1734eb20c310b697d37f363",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "beea4b40114a5c549d681073fc00c58ef17eac8737a763ebd062ccb2831036f9",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              9600,
+              14080
+            ],
+            [
+              14080,
+              18560
+            ]
+          ],
+          "pcm_sha256": "7facddc57edf8f198390456e5dc09ca5688753cedf1c48c2d13e3ab3c57e448d",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "308c024384582a17de11d032ddef40151552f8adb1734eb20c310b697d37f363",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "7facddc57edf8f198390456e5dc09ca5688753cedf1c48c2d13e3ab3c57e448d",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "0951d0310d795be82583b81caeb0a69739322b208539d751f51490cd209e48ee",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  10240,
+                  13440
+                ],
+                [
+                  14720,
+                  17920
+                ]
+              ]
+            ],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "acted",
+      "group": 2,
+      "source_sha256": "8802132b4e10f9f2a73f99c2abffce200200434606344d6cd684925db49a8c3e",
+      "samples": 42624,
+      "picture_pts_sha256": "a552f77cafba9eb67914005b6316552e3192302310d1d2e6201ebaf1e9f77e48",
+      "picture_time_base": "1/1000",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 65,
+      "last_verified_frame": 77,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "dbf98a69881daa2b42c0463b7bab0fcf06747ffc3b5066657e74ba53010c37c4",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "9f1a079066e63c3ceaff39f5edda5e03ff1ed8f84f04b89924946f5c890e4798",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "624207b5c15525d65026d60f98ca47cc55d06d000d92eddeaaea5da05dd06317",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "0994a00826f050e4b363609f69770bffa6032bc7a74992dc7d920c39137bec10",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "ac94872e4757e3d0736a6c6130c1b3afd06e22256bf444fea904cc8c0688015a",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              23040,
+              26240
+            ],
+            [
+              26240,
+              29440
+            ]
+          ],
+          "pcm_sha256": "c92806d62fcafb731bf76cce956d58cb869081e95dbbefa2d3342e73437cd24e",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "8c4740b8d5b9664894791479c850822bcb4d8336b8e777fdc8053258b27387d2",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              12800,
+              16000
+            ],
+            [
+              16000,
+              19200
+            ]
+          ],
+          "pcm_sha256": "8e6d47890761a073b3eda20881835754fd0d5c342d75cb98508eacc9f0557e41",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  12480,
+                  15680
+                ],
+                [
+                  15680,
+                  18880
+                ]
+              ]
+            ],
+            "adjacent_audio": [
+              [
+                [
+                  12480,
+                  15360
+                ],
+                [
+                  15680,
+                  18560
+                ]
+              ]
+            ],
+            "existing_mouth": [
+              {
+                "ranges": [
+                  [
+                    12480,
+                    15680
+                  ],
+                  [
+                    15680,
+                    18880
+                  ]
+                ],
+                "pcm_sha256": [
+                  "8413c244ac87ff72cfaa01ab457aa6e06a0d0d976de512ec8818c2b4aee3b0e9",
+                  "7ba1ea2d1bbc562f7a48c1ce1fef5739f711dfb8146df36d44c775832deaeba0"
+                ],
+                "frame_pairs": [
+                  [
+                    22,
+                    28
+                  ],
+                  [
+                    23,
+                    29
+                  ],
+                  [
+                    24,
+                    30
+                  ],
+                  [
+                    26,
+                    32
+                  ],
+                  [
+                    27,
+                    33
+                  ]
+                ],
+                "mouth_difference_median": 16.158566,
+                "motion_maxima": [
+                  19.135944,
+                  11.325954
+                ]
+              }
+            ],
+            "adjacent_mouth": [
+              {
+                "ranges": [
+                  [
+                    12480,
+                    15360
+                  ],
+                  [
+                    15680,
+                    18560
+                  ]
+                ],
+                "pcm_sha256": [
+                  "e9a5fe77ccd27c4c5deb59f37eb01c6c16d8e89efc7c626d2aafcc0cef1034fd",
+                  "32951117d8a958001cdbaaf56bc3a17d0a9d96d544f311342f4d4bdc0eaf96b6"
+                ],
+                "frame_pairs": [
+                  [
+                    22,
+                    28
+                  ],
+                  [
+                    23,
+                    29
+                  ],
+                  [
+                    24,
+                    30
+                  ],
+                  [
+                    26,
+                    32
+                  ],
+                  [
+                    27,
+                    33
+                  ]
+                ],
+                "mouth_difference_median": 16.158566,
+                "motion_maxima": [
+                  19.135944,
+                  11.325954
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "c92806d62fcafb731bf76cce956d58cb869081e95dbbefa2d3342e73437cd24e",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "8e6d47890761a073b3eda20881835754fd0d5c342d75cb98508eacc9f0557e41",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  12480,
+                  15680
+                ],
+                [
+                  15680,
+                  18880
+                ]
+              ]
+            ],
+            "adjacent_audio": [
+              [
+                [
+                  12480,
+                  15360
+                ],
+                [
+                  15680,
+                  18560
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "aafd6245d69c94643eff56aa18586350e63761948801c64afe2bfac622dea5a7",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "acted",
+      "group": 3,
+      "source_sha256": "9730e2819154b5cc5f1efab1392f968c9196f7d4da26ee317bc991b7238e50f2",
+      "samples": 40534,
+      "picture_pts_sha256": "8c70e30f042c3ab45115da563a41326e02900d7071823d7fa74800105a3a60de",
+      "picture_time_base": "1/1000",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 62,
+      "last_verified_frame": 74,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "c2b2f2caaba6f4349c5b7e4b9b37e9523d7f2b58c9975aebb01e88fcad2324ae",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "aa95e15a61674b0206df9bd068cc94a0d8be754fd831fb786334dbec20bb8071",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "c7802b39e3c55c8cdfa767584ccd9da2defbafcb29075fde68a5b981b77383a3",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "ed9cbd8fcc9056892450f8411dac595a486f8d2f4a06273b141f2b075963a357",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "1f80f4858fb38c075e60b3335a30003a6704188a5d8f42d805890b3447669c5c",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              24960,
+              29440
+            ],
+            [
+              29440,
+              33920
+            ]
+          ],
+          "pcm_sha256": "d4ad6243ec5dd33250b76f0de43f6fdf67f4ba40343b930f1a172b2fea215673",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "1d3a8e1d93335d2c97570f742e0cf223dec88c60abfb26568833ed0cd2123d96",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              10880,
+              15360
+            ],
+            [
+              15360,
+              19840
+            ]
+          ],
+          "pcm_sha256": "ded3cb818b2706c5a52daa084bdb6bfd4f28dfc12f2c45f21d28a9bb679f03a7",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  13120,
+                  15680
+                ],
+                [
+                  17600,
+                  20160
+                ]
+              ]
+            ],
+            "adjacent_audio": [],
+            "existing_mouth": [
+              {
+                "ranges": [
+                  [
+                    13120,
+                    15680
+                  ],
+                  [
+                    17600,
+                    20160
+                  ]
+                ],
+                "pcm_sha256": [
+                  "a8f1fb4c6cfd7f203976f9a456fa4bc8ecb15ba9d303be2ae0a69bb3e76a6609",
+                  "b06729c0e97b9c1c72f4e851e76ffe8bfa9f9bbc1a3b20f02377ef468ba0c648"
+                ],
+                "frame_pairs": [
+                  [
+                    23,
+                    32
+                  ],
+                  [
+                    24,
+                    33
+                  ],
+                  [
+                    26,
+                    34
+                  ],
+                  [
+                    27,
+                    35
+                  ]
+                ],
+                "mouth_difference_median": 9.729697,
+                "motion_maxima": [
+                  7.676792,
+                  4.605903
+                ]
+              }
+            ],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "d4ad6243ec5dd33250b76f0de43f6fdf67f4ba40343b930f1a172b2fea215673",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "ded3cb818b2706c5a52daa084bdb6bfd4f28dfc12f2c45f21d28a9bb679f03a7",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  13120,
+                  15680
+                ],
+                [
+                  17600,
+                  20160
+                ]
+              ]
+            ],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "0d629c52aa8b9ce2962467fa09bd251aac929b8537d62c344be93659d781c2dd",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  11520,
+                  15040
+                ],
+                [
+                  16000,
+                  19520
+                ]
+              ]
+            ],
+            "adjacent_audio": [],
+            "existing_mouth": [
+              {
+                "ranges": [
+                  [
+                    11520,
+                    15040
+                  ],
+                  [
+                    16000,
+                    19520
+                  ]
+                ],
+                "pcm_sha256": [
+                  "57c11301e36bba8ee6b7103695a4bede13c921ad14ec9df323c68f41d98b3408",
+                  "699363fdf5138a49cee1e212086730535db788ed56019a942ce67bb64c6ea2a0"
+                ],
+                "frame_pairs": [
+                  [
+                    21,
+                    29
+                  ],
+                  [
+                    22,
+                    30
+                  ],
+                  [
+                    23,
+                    32
+                  ],
+                  [
+                    24,
+                    33
+                  ],
+                  [
+                    26,
+                    34
+                  ]
+                ],
+                "mouth_difference_median": 10.294564,
+                "motion_maxima": [
+                  7.676792,
+                  9.585091
+                ]
+              }
+            ],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "acted",
+      "group": 4,
+      "source_sha256": "f7565be8dba72ea43e4dbbf04216ac4730f579db23e0d8eb08bdde2f85d55cc4",
+      "samples": 42206,
+      "picture_pts_sha256": "f704e4f1b022004f4c57bc25bc068952ce19a10b0e1142dbacbc28af571cbacf",
+      "picture_time_base": "1/1000",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 64,
+      "last_verified_frame": 76,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "e2e94fb2723c9b9ae77d16b5c33ae1a143bcf5ffb21a38a0af5d5fba670c6a51",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "f52b798503fa272e2b651233fbd6f98ff639d42efcb88af61224a6c443995abd",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "27b899ba7abbc028a591df3a13ab60df3770f5fcadca7c478d7b6c9cf6510be7",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "ad23d3684146e117c997155fd025a5b735f67f45506cb05011be9de55788bc08",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "df5526358442a961fd1961f1928e91175869a8f9028411c7c05895ac00faaa23",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              23680,
+              26880
+            ],
+            [
+              26880,
+              30080
+            ]
+          ],
+          "pcm_sha256": "1e5b95f50aadacee24dfc3e02b375169fb2ae459087094cda793c768331587a4",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "94fb406f89c9c854d9cd16059d5263db6bb6847e8f5fc62947518aee22297849",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              13440,
+              16640
+            ],
+            [
+              16640,
+              19840
+            ]
+          ],
+          "pcm_sha256": "087151e36c28ec387827c015ca226df8d56d1a9a6a6bff2e17d08e3ba9e406fb",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  13280,
+                  16480
+                ],
+                [
+                  16480,
+                  19680
+                ]
+              ]
+            ],
+            "adjacent_audio": [
+              [
+                [
+                  13440,
+                  16640
+                ],
+                [
+                  16640,
+                  19840
+                ]
+              ]
+            ],
+            "existing_mouth": [
+              {
+                "ranges": [
+                  [
+                    13280,
+                    16480
+                  ],
+                  [
+                    16480,
+                    19680
+                  ]
+                ],
+                "pcm_sha256": [
+                  "43714539e581b9f0f33b5e0329b50d7c36220683d7259eb27bfcfdaaefaf3620",
+                  "2b1d0414994e348c9775748f9cea2f224bd193150d1496a0d3db9f1380f7d55e"
+                ],
+                "frame_pairs": [
+                  [
+                    24,
+                    30
+                  ],
+                  [
+                    26,
+                    32
+                  ],
+                  [
+                    27,
+                    33
+                  ],
+                  [
+                    28,
+                    34
+                  ],
+                  [
+                    29,
+                    35
+                  ]
+                ],
+                "mouth_difference_median": 14.341799,
+                "motion_maxima": [
+                  12.847486,
+                  9.212145
+                ]
+              }
+            ],
+            "adjacent_mouth": [
+              {
+                "ranges": [
+                  [
+                    13440,
+                    16640
+                  ],
+                  [
+                    16640,
+                    19840
+                  ]
+                ],
+                "pcm_sha256": [
+                  "23e5e20ee3be74b148962546317a651d602e12e0068a51d3f442f313f7ca972d",
+                  "07e3bf08f4f40622d25068f57c228dca3092adcad682dfe6cf51a33b2aceb2c9"
+                ],
+                "frame_pairs": [
+                  [
+                    24,
+                    30
+                  ],
+                  [
+                    26,
+                    32
+                  ],
+                  [
+                    27,
+                    33
+                  ],
+                  [
+                    28,
+                    34
+                  ],
+                  [
+                    29,
+                    35
+                  ]
+                ],
+                "mouth_difference_median": 14.341799,
+                "motion_maxima": [
+                  12.847486,
+                  9.212145
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "1e5b95f50aadacee24dfc3e02b375169fb2ae459087094cda793c768331587a4",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "087151e36c28ec387827c015ca226df8d56d1a9a6a6bff2e17d08e3ba9e406fb",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  13280,
+                  16480
+                ],
+                [
+                  16480,
+                  19680
+                ]
+              ]
+            ],
+            "adjacent_audio": [
+              [
+                [
+                  13440,
+                  16640
+                ],
+                [
+                  16640,
+                  19840
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "cbc1b50e3a9bb49bc5d01773a46729291bd057abbd9de5fd2e0a2ee5df1a1b01",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "acted",
+      "group": 5,
+      "source_sha256": "c37ad95ab47a1b19e870ef4e862704d7d936608da28e323eff21c09e65e20c28",
+      "unavailable": "duration"
+    },
+    {
+      "bank": "acted",
+      "group": 6,
+      "source_sha256": "e07b8ff982671950291f41af3019881cd95df86dda5c55e31e1159971506e257",
+      "samples": 38026,
+      "picture_pts_sha256": "39a7848d3f4d392868d0b003f1941d12d54c30bf99749745c50586935ce9b910",
+      "picture_time_base": "1/1000",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 58,
+      "last_verified_frame": 69,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "2d7cdad56093c159c1971cece28e8fee0ce2c7052fdafeac08f92aa82f98d1c8",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "ebad3e4dfacaaaf9cf5531a4ded2e336ed040374d9adebdba6f0572d2ae6c2bd",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "8992a8deeaf040a799f2c5c3919ed96e1636f9d0df0fe8296db86255159513fd",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "1787d9ba08c275bead96491808aea007e5b3c141345e7621bdbc5035fee284f5",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "9b6cbd56192a7b7906d42a2d4e906c71dc555e041ed2303b6d11d3dd3c9e596b",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              19840,
+              23040
+            ],
+            [
+              23040,
+              26240
+            ]
+          ],
+          "pcm_sha256": "6ec8ca62885da5d9c807bfc0ecb8ea9719b9bddb371e66a386cbce5ee87d4e07",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "dd227a41ae504fa0755f251bceaab5b61026fce5b4d2841a88c5450d7cfb4114",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              9600,
+              12800
+            ],
+            [
+              12800,
+              16000
+            ]
+          ],
+          "pcm_sha256": "0d74658fd4f2ff33e39a98da11e0e4a1e19a67d90e785b9a1ceaf589622d97a3",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [
+              [
+                [
+                  9120,
+                  12160
+                ],
+                [
+                  12320,
+                  15360
+                ]
+              ]
+            ],
+            "existing_mouth": null,
+            "adjacent_mouth": [
+              {
+                "ranges": [
+                  [
+                    9120,
+                    12160
+                  ],
+                  [
+                    12320,
+                    15360
+                  ]
+                ],
+                "pcm_sha256": [
+                  "d37a4fd97be2bb1f65e95b9dd8803cccc8246317eed69f4e18569b2cd1e03755",
+                  "506ca1d34f06c383dd86df860d600fa7e44ab37beae9f424f0e7fb3fbea04e31"
+                ],
+                "frame_pairs": [
+                  [
+                    16,
+                    22
+                  ],
+                  [
+                    17,
+                    23
+                  ],
+                  [
+                    18,
+                    24
+                  ],
+                  [
+                    20,
+                    26
+                  ],
+                  [
+                    21,
+                    27
+                  ]
+                ],
+                "mouth_difference_median": 13.480035,
+                "motion_maxima": [
+                  14.57176,
+                  6.84006
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "6ec8ca62885da5d9c807bfc0ecb8ea9719b9bddb371e66a386cbce5ee87d4e07",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "0d74658fd4f2ff33e39a98da11e0e4a1e19a67d90e785b9a1ceaf589622d97a3",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [
+              [
+                [
+                  9120,
+                  12160
+                ],
+                [
+                  12320,
+                  15360
+                ]
+              ]
+            ],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "64222589079d63ee38b0260f6f222b937da00a17db7e443210da02d037d14ca2",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "acted",
+      "group": 7,
+      "source_sha256": "086b809b6f73eb380c84c57bfe7d2ac802adbfb9354b8f0272142f321932da50",
+      "samples": 45132,
+      "picture_pts_sha256": "797d8e83819d0c0cdbb6b068ac938bcc4188cca1e0aed883427b639011859c21",
+      "picture_time_base": "1/1000",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 68,
+      "last_verified_frame": 81,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "b850e5abd0b5ee4ea856ecf0f068d059b6f7cba839c11032933762e7039faf01",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "f1c7267b48eadcd59d75cc0c5d5404f39c4d5006fcc9df2bc421fdb7eb63b7f2",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "8cc8cf759dc38f6fc886b850b4806e86ee95695ccce1e1bacacf7b603797f948",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "de9197035109b1b5967dd825d099b8bfed138e305c653caf4d0797a5020a2c66",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "4ad1f4818c36f6366beda1890945383a84d8b9305e819640421693f748b0249a",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              26240,
+              30720
+            ],
+            [
+              30720,
+              35200
+            ]
+          ],
+          "pcm_sha256": "26b22f0049628cbaec96e8fde43530496e697a0f55eed26de695ec497ff265cb",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "7057b2e3d7e0989335f059a2b83abe8df683d6a9657e09e3d5a842e6a485da60",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              12160,
+              16640
+            ],
+            [
+              16640,
+              21120
+            ]
+          ],
+          "pcm_sha256": "44bafe1b4ea1825bfaa88d1e8fcb64542ffec7e4749106d48310f6f987ce58b8",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  12320,
+                  16800
+                ],
+                [
+                  16800,
+                  21280
+                ]
+              ]
+            ],
+            "adjacent_audio": [],
+            "existing_mouth": [
+              {
+                "ranges": [
+                  [
+                    12320,
+                    16800
+                  ],
+                  [
+                    16800,
+                    21280
+                  ]
+                ],
+                "pcm_sha256": [
+                  "9efbf8bc2b6dd9439e99952957ba0720c672af337b97f4d6e74460c866815329",
+                  "1a9736dd5a6db2651264b9c2b07a4ae0170ae9f8edd92b26ec121ebcacab2030"
+                ],
+                "frame_pairs": [
+                  [
+                    22,
+                    30
+                  ],
+                  [
+                    23,
+                    32
+                  ],
+                  [
+                    24,
+                    33
+                  ],
+                  [
+                    26,
+                    34
+                  ],
+                  [
+                    27,
+                    35
+                  ],
+                  [
+                    28,
+                    36
+                  ],
+                  [
+                    29,
+                    38
+                  ]
+                ],
+                "mouth_difference_median": 12.211709,
+                "motion_maxima": [
+                  7.304325,
+                  7.450088
+                ]
+              }
+            ],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "26b22f0049628cbaec96e8fde43530496e697a0f55eed26de695ec497ff265cb",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "44bafe1b4ea1825bfaa88d1e8fcb64542ffec7e4749106d48310f6f987ce58b8",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  12320,
+                  16800
+                ],
+                [
+                  16800,
+                  21280
+                ]
+              ]
+            ],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "db00ef72b7202877f7bd92cdd62cdf38cb03c1c3fe109d61db3b0fbd3b45229b",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  13120,
+                  15520
+                ],
+                [
+                  17600,
+                  20000
+                ]
+              ]
+            ],
+            "adjacent_audio": [],
+            "existing_mouth": [
+              {
+                "ranges": [
+                  [
+                    13120,
+                    15520
+                  ],
+                  [
+                    17600,
+                    20000
+                  ]
+                ],
+                "pcm_sha256": [
+                  "2db757ae841395f1a99710aa187b150e89d297c9c0c19bb667c2b7dcad6888e9",
+                  "942cce460bd3f8dc2ba4876452223454b368f4af10ec781dbe7e05fca176fbd8"
+                ],
+                "frame_pairs": [
+                  [
+                    23,
+                    32
+                  ],
+                  [
+                    24,
+                    33
+                  ],
+                  [
+                    26,
+                    34
+                  ],
+                  [
+                    27,
+                    35
+                  ]
+                ],
+                "mouth_difference_median": 11.908396,
+                "motion_maxima": [
+                  4.80423,
+                  7.450088
+                ]
+              }
+            ],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "acted",
+      "group": 8,
+      "source_sha256": "eb2af28b9dd90368626096982364c475e792ba5b4bccdf60ac988d3c53f561f1",
+      "unavailable": "duration"
+    },
+    {
+      "bank": "acted",
+      "group": 9,
+      "source_sha256": "09cf8994de83114e49d78adb651fcebb6b9298a18936306acdc519874afd6aab",
+      "samples": 35937,
+      "picture_pts_sha256": "92173259e28ef7cb1bfc0eb1b4d27c0c1188f477b18298dd660246c58d5f8029",
+      "picture_time_base": "1/1000",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 54,
+      "last_verified_frame": 64,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "ac0b3c3daf7f622a73a71099312a336646e3ca13ab6222eaef78f41e3ef88d35",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "8d67914fe56ce4da540c998115fd1b8539a9493d09877446e7ea35d61b9f5d4d",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "4a9731a77eadd5130dcec66f17c128b4f49bfddd8410b686ce0b0c1e9159dbd6",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "4033fb6308a4b6fb73be985eeeb7079edf2ea4fda3cc3c074f32bb45ab37ab89",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "1f94f9015ef30c189df5fdeed4a98b1bb0e03c8ac749a1ddf7938735bec61dea",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              23040,
+              27520
+            ],
+            [
+              27520,
+              32000
+            ]
+          ],
+          "pcm_sha256": "3e419def1cb4a949bba55303f65c203a830e64f271e3cd39b08dc1bf754bd480",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "a372f05d30e79afef44f83e5594ac02a4cc1274f3112312d6a768d01a04af175",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              8960,
+              13440
+            ],
+            [
+              13440,
+              17920
+            ]
+          ],
+          "pcm_sha256": "f81ad268e684aabf66fd7e17fccba7ecf6010c4ff4c65d2c5294d49b6f1cec04",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "3e419def1cb4a949bba55303f65c203a830e64f271e3cd39b08dc1bf754bd480",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "f81ad268e684aabf66fd7e17fccba7ecf6010c4ff4c65d2c5294d49b6f1cec04",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "15920fec9f1a2f25bdcf7edc46553db4d3a43ddc586738e88cec201f9407f59d",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "acted",
+      "group": 10,
+      "source_sha256": "c77c09b54b52db63fc08e6700b673f6ae8559ee5b7fa80fa22153565a63fc0cb",
+      "unavailable": "duration"
+    },
+    {
+      "bank": "acted",
+      "group": 11,
+      "source_sha256": "1d3b4d077e24ae4aa8593fee14b6222170cbaf624f7008f9820ddb1e534ab516",
+      "samples": 45550,
+      "picture_pts_sha256": "49c1109a505afe180bd7d8faacee3e80d2115482b6a5aa042e11c7388cb5ffaf",
+      "picture_time_base": "1/1000",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 69,
+      "last_verified_frame": 82,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "589bb7ee3f5889ec7ca638595bcfc656f185a707a9ba801a26b39968ebaf9417",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "c63217e1d25f99c7a1a6a5ef6775782088f45c628185c63d0422c88058b3138b",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "47119a57ef5ae8f8e700189a8884eb51d6533d79c2b2e9a3ef3348b9b303913a",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "997344a9ea5f3337581ad183a5319adcbca839790ebde9136bdeab99cb634e47",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "ba19691e74685b23e613e113b3eff4fee8c9a3e576586e6eb9e3ba76d1c441a7",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              26240,
+              30720
+            ],
+            [
+              30720,
+              35200
+            ]
+          ],
+          "pcm_sha256": "62ec859ed13ad82f329741cffe8aba33692503a8786d179372d79b0ccb7b0e79",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "5efbd39a4ad401e8b8adb8aba07dfd4fc690f0b7d37a7e10cc14dc468ae7db96",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              12160,
+              16640
+            ],
+            [
+              16640,
+              21120
+            ]
+          ],
+          "pcm_sha256": "70706f6756bacdeccca4b9566221199111b0062987939d1a3276ede0923076d8",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  13120,
+                  17120
+                ],
+                [
+                  17600,
+                  21600
+                ]
+              ]
+            ],
+            "adjacent_audio": [
+              [
+                [
+                  12960,
+                  17120
+                ],
+                [
+                  17440,
+                  21600
+                ]
+              ]
+            ],
+            "existing_mouth": [
+              {
+                "ranges": [
+                  [
+                    13120,
+                    17120
+                  ],
+                  [
+                    17600,
+                    21600
+                  ]
+                ],
+                "pcm_sha256": [
+                  "275c3ed8183f4e3e73fb9c4ebc004a975008f3a96fc35c41fbeedbefbc3e140d",
+                  "85e9b68547039c8d75ca0a9b97522302aacede9a1702d7e916db128e2c2a674c"
+                ],
+                "frame_pairs": [
+                  [
+                    23,
+                    32
+                  ],
+                  [
+                    24,
+                    33
+                  ],
+                  [
+                    26,
+                    34
+                  ],
+                  [
+                    27,
+                    35
+                  ],
+                  [
+                    28,
+                    36
+                  ],
+                  [
+                    29,
+                    38
+                  ],
+                  [
+                    30,
+                    39
+                  ]
+                ],
+                "mouth_difference_median": 17.057871,
+                "motion_maxima": [
+                  8.739462,
+                  12.007475
+                ]
+              }
+            ],
+            "adjacent_mouth": [
+              {
+                "ranges": [
+                  [
+                    12960,
+                    17120
+                  ],
+                  [
+                    17440,
+                    21600
+                  ]
+                ],
+                "pcm_sha256": [
+                  "d887b10167a2f524cb4184d05bb6b34f5b12a04bb90a0b297ecae84478fa5384",
+                  "a5b7e7aab45372465dd60798399a28d751003d498060a65b599b7df4e610dc34"
+                ],
+                "frame_pairs": [
+                  [
+                    23,
+                    32
+                  ],
+                  [
+                    24,
+                    33
+                  ],
+                  [
+                    26,
+                    34
+                  ],
+                  [
+                    27,
+                    35
+                  ],
+                  [
+                    28,
+                    36
+                  ],
+                  [
+                    29,
+                    38
+                  ],
+                  [
+                    30,
+                    39
+                  ]
+                ],
+                "mouth_difference_median": 17.057871,
+                "motion_maxima": [
+                  8.739462,
+                  12.007475
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "62ec859ed13ad82f329741cffe8aba33692503a8786d179372d79b0ccb7b0e79",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "70706f6756bacdeccca4b9566221199111b0062987939d1a3276ede0923076d8",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  13120,
+                  17120
+                ],
+                [
+                  17600,
+                  21600
+                ]
+              ]
+            ],
+            "adjacent_audio": [
+              [
+                [
+                  12960,
+                  17120
+                ],
+                [
+                  17440,
+                  21600
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "1539d8584e36d86f874b50d76183574d07f10e8c5b95097165829fd49db8766c",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "acted",
+      "group": 12,
+      "source_sha256": "f05439b0c50e1388ef3fdfcd738ff3c48f6742b00a8915cfa923d6234f3b93fc",
+      "samples": 38444,
+      "picture_pts_sha256": "2fa3339c45e6a4c3f4584e1ba71b5c05e2bafa6794aea33467078184eadf3bb7",
+      "picture_time_base": "1/1000",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 58,
+      "last_verified_frame": 69,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "75d915435981a67e333715da4ada71fd1fa1943245e2f2d80c60377a31d69227",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "58973d157b4f39c73ca27feeea4b7adb5ccdc5804699810ecdb5b41762dd0944",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "49527919665ac9975fa4db06b429b30f97bdcdcc433d8246b0741f161dc9912b",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "9cc853462053e8eb1927611ab13cc6c1d2ea240644163f7a3512fed7945d5976",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "1646ca87d8e4a07c5465cd920b03baa52a65a7e8d17378ef833593fda3929ee5",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              20480,
+              23680
+            ],
+            [
+              23680,
+              26880
+            ]
+          ],
+          "pcm_sha256": "4e1f115f8de5dec333ef7a0482a530daebbbdc0b1ca76f44e71e627af6465112",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "b52feaf2e4a54fa508ddf38c04493d3efe137cce4ad7d9ddbbe7591313dd0e25",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              10240,
+              13440
+            ],
+            [
+              13440,
+              16640
+            ]
+          ],
+          "pcm_sha256": "ca46eb1dcffea207e956594b5d8649699493fa0114e584bd6a5b6f71be7dc92f",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [
+              [
+                [
+                  11040,
+                  13920
+                ],
+                [
+                  14240,
+                  17120
+                ]
+              ]
+            ],
+            "existing_mouth": null,
+            "adjacent_mouth": [
+              {
+                "ranges": [
+                  [
+                    11040,
+                    13920
+                  ],
+                  [
+                    14240,
+                    17120
+                  ]
+                ],
+                "pcm_sha256": [
+                  "b8122418f96ad1fe280b1665e18d4f7796eb5cb9a02447c89d84ba486992b988",
+                  "768327de4aca750575bc6d74015caa5a80f5583ef60c2c1b56a97f1a49a89274"
+                ],
+                "frame_pairs": [
+                  [
+                    20,
+                    26
+                  ],
+                  [
+                    21,
+                    27
+                  ],
+                  [
+                    22,
+                    28
+                  ],
+                  [
+                    23,
+                    29
+                  ],
+                  [
+                    24,
+                    30
+                  ]
+                ],
+                "mouth_difference_median": 15.921078,
+                "motion_maxima": [
+                  7.70023,
+                  11.930701
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "4e1f115f8de5dec333ef7a0482a530daebbbdc0b1ca76f44e71e627af6465112",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "ca46eb1dcffea207e956594b5d8649699493fa0114e584bd6a5b6f71be7dc92f",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [
+              [
+                [
+                  11040,
+                  13920
+                ],
+                [
+                  14240,
+                  17120
+                ]
+              ]
+            ],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "2ab33eb9305c62f6336da2e0ea5734963387f72ad25b23bbe8004b8bcebab6eb",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "acted",
+      "group": 13,
+      "source_sha256": "d92b1e800fdc344613b4c102ab14dde786a7b3ccb254b382ce2d2914f00da0c3",
+      "unavailable": "duration"
+    },
+    {
+      "bank": "acted",
+      "group": 14,
+      "source_sha256": "8e5df28eae31b9eaccfb621cc1e39221cfa5a8292a79db9534a403b84e1864e3",
+      "unavailable": "duration"
+    },
+    {
+      "bank": "acted",
+      "group": 15,
+      "source_sha256": "56967cf69c14e18a8e31077b8a05da289764e5a62febf461114b96b7c437dcdb",
+      "samples": 35937,
+      "picture_pts_sha256": "92173259e28ef7cb1bfc0eb1b4d27c0c1188f477b18298dd660246c58d5f8029",
+      "picture_time_base": "1/1000",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 54,
+      "last_verified_frame": 64,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "c1f2be5c6dcb194771f36327d90ab78e985455f381e6faa89bbdda54c8968f11",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "238be9d4f5a246c24b0c238833609bbd6ecb79703aba6bc67f39800d12c3bbab",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "b61442cc18935f8791dbe9c63124daba8b624f59a03bcdf400f1979038ca268e",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "a338dd837de688cb275511d8100ff9b94ab408a950473779c165c76f536497d4",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "f361fcd805934d440d9a19f2d38f674053660d7a8c86c3214509e5bc68409b40",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              20480,
+              24960
+            ],
+            [
+              24960,
+              29440
+            ]
+          ],
+          "pcm_sha256": "a331d650e4175e939e5bc61206784878fc14e33c18a7bd783b649c9039cf58a7",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "8e80f6bf36e9e7709e25e126396cf8f17ff706c731944425553edd27ede2e63c",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              6400,
+              10880
+            ],
+            [
+              10880,
+              15360
+            ]
+          ],
+          "pcm_sha256": "eff394d2538bc345492af9b376ff3b5a6f2805c6b21474a2e378c6f488a6c355",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "a331d650e4175e939e5bc61206784878fc14e33c18a7bd783b649c9039cf58a7",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "eff394d2538bc345492af9b376ff3b5a6f2805c6b21474a2e378c6f488a6c355",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "2fdb2f20eafa9e033e7ef639ffaec1e78b01b9629e6a9b686bed2eb9d2f09dd7",
+          "arms": {
+            "existing_audio": null,
+            "adjacent_audio": [],
+            "existing_mouth": null,
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "conversation",
+      "group": 1,
+      "source_sha256": "e459b43ebc099d2cb6700cd5815d1e0ca1899ae714b7f3d15a1102220de26099",
+      "samples": 56320,
+      "picture_pts_sha256": "841f3acc3fd995090ed9e8b6d1177ba8d5acd65659d1b809d04401972dcdb22c",
+      "picture_time_base": "1/12800",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 88,
+      "last_verified_frame": 87,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "cae3ead560ea91c7cd8b488ea24ee8e4739649fc67e4a5d95b722342275a1a11",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "46683e931b040aff69508b755f668cfeb9215c67d4e10b11fc302551961da184",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "a80e5e28be9aa25e22831fa5e6514d74002a5a42e30f61b76c799403a5a59603",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "7e20691c2b60cf85b0424c0973cbe170782658d6914df2454ae5790aa3c73c87",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "df7be44cff8d87ffad52650e54096495182569d3b2a7c7c7913f47946292a991",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              32000,
+              36480
+            ],
+            [
+              36480,
+              40960
+            ]
+          ],
+          "pcm_sha256": "a7c389bfe3cc914430935dc09a5c45c8d86c6a1b628e6821d0380076bca316dc",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  31520,
+                  36000
+                ],
+                [
+                  36000,
+                  40480
+                ]
+              ]
+            ],
+            "adjacent_audio": [
+              [
+                [
+                  31680,
+                  36160
+                ],
+                [
+                  36160,
+                  40640
+                ]
+              ]
+            ],
+            "existing_mouth": [
+              {
+                "ranges": [
+                  [
+                    31520,
+                    36000
+                  ],
+                  [
+                    36000,
+                    40480
+                  ]
+                ],
+                "pcm_sha256": [
+                  "45bbf7a1ad9f2e4d022d65433c66232a1c5bc3aba06fa283bac8617d9e792a54",
+                  "361fdb88ae140a6e3f5a5b035db30ec74f6792efddf67cb3b0bd34afc1858ad1"
+                ],
+                "frame_pairs": [
+                  [
+                    49,
+                    56
+                  ],
+                  [
+                    50,
+                    57
+                  ],
+                  [
+                    51,
+                    58
+                  ],
+                  [
+                    52,
+                    59
+                  ],
+                  [
+                    53,
+                    60
+                  ],
+                  [
+                    54,
+                    61
+                  ],
+                  [
+                    55,
+                    62
+                  ]
+                ],
+                "mouth_difference_median": 8.106191,
+                "motion_maxima": [
+                  6.175348,
+                  6.927494
+                ]
+              }
+            ],
+            "adjacent_mouth": [
+              {
+                "ranges": [
+                  [
+                    31680,
+                    36160
+                  ],
+                  [
+                    36160,
+                    40640
+                  ]
+                ],
+                "pcm_sha256": [
+                  "caf1c25f548ad3fbf5a3a9141cac2e5a5dcda64cbcceb06983281d599969a643",
+                  "edcebe380c6bff3e15e0039a28dcd0dfc45aa0ad0cc1ebde63382c4c1f958b75"
+                ],
+                "frame_pairs": [
+                  [
+                    49,
+                    56
+                  ],
+                  [
+                    50,
+                    57
+                  ],
+                  [
+                    51,
+                    58
+                  ],
+                  [
+                    52,
+                    59
+                  ],
+                  [
+                    53,
+                    60
+                  ],
+                  [
+                    54,
+                    61
+                  ],
+                  [
+                    55,
+                    62
+                  ]
+                ],
+                "mouth_difference_median": 8.106191,
+                "motion_maxima": [
+                  6.175348,
+                  6.927494
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "70199cea73b10e36a110b62326a1572102cb11dac42fbbe3ce0e72a0c1d75dde",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              17920,
+              22400
+            ],
+            [
+              22400,
+              26880
+            ]
+          ],
+          "pcm_sha256": "ca944746d5342e22dfd66d69d2abdea9c2b1ed5e145bb4b186976532c57904ce",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  17920,
+                  22400
+                ],
+                [
+                  22400,
+                  26880
+                ]
+              ]
+            ],
+            "adjacent_audio": [],
+            "existing_mouth": [
+              {
+                "ranges": [
+                  [
+                    17920,
+                    22400
+                  ],
+                  [
+                    22400,
+                    26880
+                  ]
+                ],
+                "pcm_sha256": [
+                  "389394c4d0174ca2d67e4ee0b04d76fce3241698528747994a12dfc201bbca8f",
+                  "b6334eec107fa817499796245cf83cd2003a9679fc0aed718e9de4a37a8a6eeb"
+                ],
+                "frame_pairs": [
+                  [
+                    28,
+                    35
+                  ],
+                  [
+                    29,
+                    36
+                  ],
+                  [
+                    30,
+                    37
+                  ],
+                  [
+                    31,
+                    38
+                  ],
+                  [
+                    32,
+                    39
+                  ],
+                  [
+                    33,
+                    40
+                  ],
+                  [
+                    34,
+                    41
+                  ]
+                ],
+                "mouth_difference_median": 7.268663,
+                "motion_maxima": [
+                  6.317467,
+                  2.47825
+                ]
+              }
+            ],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "a7c389bfe3cc914430935dc09a5c45c8d86c6a1b628e6821d0380076bca316dc",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  31520,
+                  36000
+                ],
+                [
+                  36000,
+                  40480
+                ]
+              ]
+            ],
+            "adjacent_audio": [
+              [
+                [
+                  31680,
+                  36160
+                ],
+                [
+                  36160,
+                  40640
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "ca944746d5342e22dfd66d69d2abdea9c2b1ed5e145bb4b186976532c57904ce",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  17920,
+                  22400
+                ],
+                [
+                  22400,
+                  26880
+                ]
+              ]
+            ],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "07cbda39b8b9acc20e534640927bcb50b61d34488f078256dc6779d9dfa4b6e9",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "conversation",
+      "group": 2,
+      "source_sha256": "8275dec02a8ae560c17e3f0786c7cdb71ade72641468c9f6d7c06519ca8fb134",
+      "samples": 56314,
+      "picture_pts_sha256": "841f3acc3fd995090ed9e8b6d1177ba8d5acd65659d1b809d04401972dcdb22c",
+      "picture_time_base": "1/12800",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 87,
+      "last_verified_frame": 86,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "383fbc84de4b7fe040faa08f8daf71d2f683ebed95a82e50bc8291004eddf369",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "57567c75821466d4690a90ec0344663fdf8ca90a0f134e620a1c4099bb4c4d1b",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "75df0ce375f277f1daea38735606f49ab6220228b117a9a510507612b1c851fe",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "876d207f55fece5eebe944fe379af17ce1b222ab627fac5364fd63ce75c1800d",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "fdf4b72d2d3159a22aac1872c9e262a57d9ee33b934281149130487e6be09c21",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              29440,
+              32640
+            ],
+            [
+              32640,
+              35840
+            ]
+          ],
+          "pcm_sha256": "b563456443ddd33db34301abc625da0a4454724cd8b3c8249717539c2fc6b9c5",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "0c75e7a172162c07ee1126bdbae766fa208b1be3dfded62b8f8276157641768b",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              19200,
+              22400
+            ],
+            [
+              22400,
+              25600
+            ]
+          ],
+          "pcm_sha256": "92558a8766c29ab14b56f75fab757b6d7fe5ef51f3fa7de67d5c2752ec504a47",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  19200,
+                  22400
+                ],
+                [
+                  22400,
+                  25600
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "b563456443ddd33db34301abc625da0a4454724cd8b3c8249717539c2fc6b9c5",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "92558a8766c29ab14b56f75fab757b6d7fe5ef51f3fa7de67d5c2752ec504a47",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  19200,
+                  22400
+                ],
+                [
+                  22400,
+                  25600
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "888b3aaae6522c6d63f32a7ef6b45653977f9f69619e4dd1910ee75c7ad2cb64",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "conversation",
+      "group": 3,
+      "source_sha256": "29729329886bf8bd7f7029482a9b20a538ad5331b9d1dfc7e627c559dce6cf99",
+      "samples": 56320,
+      "picture_pts_sha256": "841f3acc3fd995090ed9e8b6d1177ba8d5acd65659d1b809d04401972dcdb22c",
+      "picture_time_base": "1/12800",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 88,
+      "last_verified_frame": 87,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "4e19ef17026d7f286e8e1901a952555de50d76fd540da7fbf00a92d8c5534bd9",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "4d600ea4c649bfe047b66f00ab0afbe99cff3fb47f7819489d6350660afbfe4c",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "f7c4b49ff11e7b54abd46cf975902639ae050d8ffca381ea8c03ade8a4c7ab43",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "4d5a6bff4b3491456404c7d796e184869273c989355913b2f0b72b1a3443fd51",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "f6a3666a34224a9262c84ae0c9086ceee4f8c6bef88d82176a5c465ac6c5d907",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              33280,
+              37760
+            ],
+            [
+              37760,
+              42240
+            ]
+          ],
+          "pcm_sha256": "59ce22624b7bc7e5a56a00cb7ec7c5762ffdd83146a75e73e0c05124774bc3c1",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  33120,
+                  37600
+                ],
+                [
+                  37600,
+                  42080
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "7973cc44b51ecafc28be2c12cfe79b4379b69cc82461cfa7f848448344f6fdbb",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              19200,
+              23680
+            ],
+            [
+              23680,
+              28160
+            ]
+          ],
+          "pcm_sha256": "eaf0f35f190a7e92488d18d81df631e53f9a43b14c8a7c6072cb92ca51e06d17",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  19200,
+                  23680
+                ],
+                [
+                  23680,
+                  28160
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": [
+              {
+                "ranges": [
+                  [
+                    19200,
+                    23680
+                  ],
+                  [
+                    23680,
+                    28160
+                  ]
+                ],
+                "pcm_sha256": [
+                  "16d07fe4fc53b8857ba7db50c2ab1dc4899f84623b1fb0ad2635050cb76c8c1b",
+                  "3ce894111e02d5d86c2fcf60b7d1f50af68abbd723b83cef06e026a360bb34c0"
+                ],
+                "frame_pairs": [
+                  [
+                    30,
+                    37
+                  ],
+                  [
+                    31,
+                    38
+                  ],
+                  [
+                    32,
+                    39
+                  ],
+                  [
+                    33,
+                    40
+                  ],
+                  [
+                    34,
+                    41
+                  ],
+                  [
+                    35,
+                    42
+                  ],
+                  [
+                    36,
+                    43
+                  ]
+                ],
+                "mouth_difference_median": 7.601804,
+                "motion_maxima": [
+                  9.207369,
+                  6.854023
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "59ce22624b7bc7e5a56a00cb7ec7c5762ffdd83146a75e73e0c05124774bc3c1",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  33120,
+                  37600
+                ],
+                [
+                  37600,
+                  42080
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "eaf0f35f190a7e92488d18d81df631e53f9a43b14c8a7c6072cb92ca51e06d17",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  19200,
+                  23680
+                ],
+                [
+                  23680,
+                  28160
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "d4854db3a0de9989a5c2ae814478e91a9161b4b70764dd776a7c72d0487ca751",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "conversation",
+      "group": 4,
+      "source_sha256": "80babb6fc1e1442448ec990f1083aab2a4e903836a66617430772fecb482dc07",
+      "samples": 56320,
+      "picture_pts_sha256": "841f3acc3fd995090ed9e8b6d1177ba8d5acd65659d1b809d04401972dcdb22c",
+      "picture_time_base": "1/12800",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 88,
+      "last_verified_frame": 87,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "db9424eba173c868ad8c7709862f18ca8a23ab137d6b1b7b05655a76055db30f",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "8bdaddaac36c344a3e380f990dfb18606fb9b6ccbaaaffa2cec481c71fa5d95f",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "f6db8204a7b562920f22836efece6c73467aba147c1da66ed7365a8a59986ce3",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "be25ebfae4983e260267466cef1a9971fd0d6f476d1c1a81b241562aa3e209ad",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "7030378f63f738253e924ee6a4926705d137a3859c0e049cc48f20e34194da68",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              31360,
+              34560
+            ],
+            [
+              34560,
+              37760
+            ]
+          ],
+          "pcm_sha256": "a4e29c38663e01868e7232cac71f7dc49a3eb1e7adea27d332779715f4b284ee",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  31200,
+                  34400
+                ],
+                [
+                  34400,
+                  37600
+                ]
+              ]
+            ],
+            "adjacent_audio": [
+              [
+                [
+                  31360,
+                  34561
+                ],
+                [
+                  34561,
+                  37762
+                ]
+              ]
+            ],
+            "existing_mouth": [
+              {
+                "ranges": [
+                  [
+                    31200,
+                    34400
+                  ],
+                  [
+                    34400,
+                    37600
+                  ]
+                ],
+                "pcm_sha256": [
+                  "2fbcc498f394764fb82684ff7a46535e80a4c703b60312a70ef3ae95e99fb92a",
+                  "7755786cccad075a5a5fe62ff7d66aff8de3e0c0d36743ee8b351a5d2ade7ea9"
+                ],
+                "frame_pairs": [
+                  [
+                    49,
+                    54
+                  ],
+                  [
+                    50,
+                    55
+                  ],
+                  [
+                    51,
+                    56
+                  ],
+                  [
+                    52,
+                    57
+                  ],
+                  [
+                    53,
+                    58
+                  ]
+                ],
+                "mouth_difference_median": 10.930701,
+                "motion_maxima": [
+                  6.366705,
+                  10.60272
+                ]
+              }
+            ],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "d5e7b72ea7cc9dd65eab3879e1e3ce4323d18140196e8990c9e135fb2643c218",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              21120,
+              24320
+            ],
+            [
+              24320,
+              27520
+            ]
+          ],
+          "pcm_sha256": "391ef6b7b557d94e968513f62f8246131fa256decb60e4de5df09262d1b749b2",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "a4e29c38663e01868e7232cac71f7dc49a3eb1e7adea27d332779715f4b284ee",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  31200,
+                  34400
+                ],
+                [
+                  34400,
+                  37600
+                ]
+              ]
+            ],
+            "adjacent_audio": [
+              [
+                [
+                  31360,
+                  34561
+                ],
+                [
+                  34561,
+                  37762
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "391ef6b7b557d94e968513f62f8246131fa256decb60e4de5df09262d1b749b2",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "f69a68d86f3d2cc96dcea5ac5a6f275a25c5342cb66951cc7976439c69bde047",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  21440,
+                  24480
+                ],
+                [
+                  24640,
+                  27680
+                ]
+              ]
+            ],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "conversation",
+      "group": 5,
+      "source_sha256": "f8ade3762e451da6cf680a03222f603ca5535230bc39c87720f57552436b2fa3",
+      "samples": 56320,
+      "picture_pts_sha256": "841f3acc3fd995090ed9e8b6d1177ba8d5acd65659d1b809d04401972dcdb22c",
+      "picture_time_base": "1/12800",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 88,
+      "last_verified_frame": 87,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "f24d61149f08079d93241eb7548b2e41920239f16c8b10b94fda83c0276ebf63",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "cebda67bfb27d9e225548a4d9f867cffbb235bc816e6721b52bf09747554b2c1",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "9500ba3bb16c051b34d28f6dd8994c428b0a098d25ce17bc5de284a4ebd1db72",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "1464a3c3d26ecf24213a0364929a2000166977e147b43596a3adc542365e7873",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "49ce644906b42b8dad01f9f6f088c6df94c768cd76b965811f759cccb53b8fd5",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              31360,
+              35840
+            ],
+            [
+              35840,
+              40320
+            ]
+          ],
+          "pcm_sha256": "15682a61370d9bfab2410f9a1e629cabd0c17ac25ead08ff96b380b7a9c7a150",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "71955ac786675d81827d02b2430094c883cd79bcf4768be2a0364f51c10f6e29",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              17280,
+              21760
+            ],
+            [
+              21760,
+              26240
+            ]
+          ],
+          "pcm_sha256": "2fa2d08d7b2288a0f5e4b314c66fb36155c87db580718bc80e7fb8ef06f75092",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  17280,
+                  21760
+                ],
+                [
+                  21760,
+                  26240
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "15682a61370d9bfab2410f9a1e629cabd0c17ac25ead08ff96b380b7a9c7a150",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "2fa2d08d7b2288a0f5e4b314c66fb36155c87db580718bc80e7fb8ef06f75092",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  17280,
+                  21760
+                ],
+                [
+                  21760,
+                  26240
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "7300aabe14e80f75c854b4c8bf7efb4332e7e81ec713a48ec6531536f047e229",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "conversation",
+      "group": 6,
+      "source_sha256": "3be9af6eb452adf8d37d77bb1c6a724e502db43b6511d7f0834dd21a0255e7c8",
+      "samples": 56320,
+      "picture_pts_sha256": "841f3acc3fd995090ed9e8b6d1177ba8d5acd65659d1b809d04401972dcdb22c",
+      "picture_time_base": "1/12800",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 88,
+      "last_verified_frame": 87,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "b20c391511a47fab75d1ce794938985bd291f1c5262603b17da63e700a4a4fa4",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "60e9509a69396f6e333be6ae5edeccbff18969a49b81c0d9d232f42e6cde9d22",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "b406a3cef4d7a17a77d6f37dc627c23f88805184b63db2f7f1e274eb9efcb240",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "024155114f099001b2f2aa25bae75bfb3c88091ab42f459f0df97965d8e1dbaa",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "bf718a3374e59d4b627c076f923d64aba1dd82429a30604887607b92188c94c3",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              29440,
+              32640
+            ],
+            [
+              32640,
+              35840
+            ]
+          ],
+          "pcm_sha256": "b2e43b98183008cca1cf7dc1049beaff101e8b2d4aa95ce78a42e1b1d33357ae",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "fdfd1c419ca6c652059cad6268d28e19f0f2a46c1a1d354a759e9e210dbaefeb",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              19200,
+              22400
+            ],
+            [
+              22400,
+              25600
+            ]
+          ],
+          "pcm_sha256": "137d4506001ea265927b17f4b54c9c3768df2aeba4b54c6260d4733fc68f0bbb",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  19200,
+                  22400
+                ],
+                [
+                  22400,
+                  25600
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "b2e43b98183008cca1cf7dc1049beaff101e8b2d4aa95ce78a42e1b1d33357ae",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "137d4506001ea265927b17f4b54c9c3768df2aeba4b54c6260d4733fc68f0bbb",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  19200,
+                  22400
+                ],
+                [
+                  22400,
+                  25600
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "9caafd8c6e4d9091fa4d0e5a15ac5a35556af8bb129dfb308945b864e11b0ec1",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "conversation",
+      "group": 7,
+      "source_sha256": "9be8fa1a9bb4da8014cb6d2d3bc961e8081a3a920cc3dffc6c226ae4c7ee31d6",
+      "samples": 56320,
+      "picture_pts_sha256": "841f3acc3fd995090ed9e8b6d1177ba8d5acd65659d1b809d04401972dcdb22c",
+      "picture_time_base": "1/12800",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 88,
+      "last_verified_frame": 87,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "05dbc8012587016e093cc002366ae49b4370c6a83101ef047b79798ef08a10a2",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "18a942940a86d171697ad4292b480027494f9924985b75ccb31fba37f75981f6",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "936968f65982f4a44316b8f82f732fa923af417c54c81d473396b6b80ae04de6",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "463756a9f82b3afadb48d2ff63cd0ac7842c4f5123c0ca96c7947bc67d304cfb",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "03b9ec8447c050e19d0803e79275a3b784165184b0dd1a4baf419933a50389e1",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              32640,
+              37120
+            ],
+            [
+              37120,
+              41600
+            ]
+          ],
+          "pcm_sha256": "7335af9f5ad3856c2a55670c5f534297a0805e6aeef57c0461b3a49573c65a4f",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  32160,
+                  36640
+                ],
+                [
+                  36640,
+                  41120
+                ]
+              ]
+            ],
+            "adjacent_audio": [
+              [
+                [
+                  32480,
+                  36960
+                ],
+                [
+                  36960,
+                  41440
+                ]
+              ]
+            ],
+            "existing_mouth": [
+              {
+                "ranges": [
+                  [
+                    32160,
+                    36640
+                  ],
+                  [
+                    36640,
+                    41120
+                  ]
+                ],
+                "pcm_sha256": [
+                  "d180a565d1d94a7189b7c1f1a87ce2b486879b4024c5d272625ee1737979852e",
+                  "4d6ce37ed484400235f1882f3c65d29aca8f6ded44b28f2dd913ded053c32a07"
+                ],
+                "frame_pairs": [
+                  [
+                    50,
+                    57
+                  ],
+                  [
+                    51,
+                    58
+                  ],
+                  [
+                    52,
+                    59
+                  ],
+                  [
+                    53,
+                    60
+                  ],
+                  [
+                    54,
+                    61
+                  ],
+                  [
+                    55,
+                    62
+                  ],
+                  [
+                    56,
+                    63
+                  ]
+                ],
+                "mouth_difference_median": 7.324797,
+                "motion_maxima": [
+                  9.847656,
+                  6.178241
+                ]
+              }
+            ],
+            "adjacent_mouth": [
+              {
+                "ranges": [
+                  [
+                    32480,
+                    36960
+                  ],
+                  [
+                    36960,
+                    41440
+                  ]
+                ],
+                "pcm_sha256": [
+                  "6ae16d3b66714909e30a3d6037faea1adde14cb79658f1c428cc07b790674e77",
+                  "431cee0a1474f6f0d9de034e0fa43f8460a327da7fce353098f561b4d8e79a41"
+                ],
+                "frame_pairs": [
+                  [
+                    51,
+                    58
+                  ],
+                  [
+                    52,
+                    59
+                  ],
+                  [
+                    53,
+                    60
+                  ],
+                  [
+                    54,
+                    61
+                  ],
+                  [
+                    55,
+                    62
+                  ],
+                  [
+                    56,
+                    63
+                  ],
+                  [
+                    57,
+                    64
+                  ]
+                ],
+                "mouth_difference_median": 7.324797,
+                "motion_maxima": [
+                  9.847656,
+                  9.472416
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "beaa0833a8594b2b3b123bba4466fbfd742fc4c50a1ad230bddcd4cbb7e2c142",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              18560,
+              23040
+            ],
+            [
+              23040,
+              27520
+            ]
+          ],
+          "pcm_sha256": "caf8deb4d104692f1f9bb4f7aa426e88dfe7c529d719e30ba3fcd2079cc06c41",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  18560,
+                  23040
+                ],
+                [
+                  23040,
+                  27520
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": [
+              {
+                "ranges": [
+                  [
+                    18560,
+                    23040
+                  ],
+                  [
+                    23040,
+                    27520
+                  ]
+                ],
+                "pcm_sha256": [
+                  "95fd14de2561a806e986c4d6e7685c6fcf9efb68dc6369a64229f7cb1cef5c34",
+                  "4af26db8bf1df060ab88ea028c3b4af0f44b9b6558e6607237b16e62f9d9a034"
+                ],
+                "frame_pairs": [
+                  [
+                    29,
+                    36
+                  ],
+                  [
+                    30,
+                    37
+                  ],
+                  [
+                    31,
+                    38
+                  ],
+                  [
+                    32,
+                    39
+                  ],
+                  [
+                    33,
+                    40
+                  ],
+                  [
+                    34,
+                    41
+                  ],
+                  [
+                    35,
+                    42
+                  ]
+                ],
+                "mouth_difference_median": 6.102671,
+                "motion_maxima": [
+                  6.143229,
+                  10.464074
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "7335af9f5ad3856c2a55670c5f534297a0805e6aeef57c0461b3a49573c65a4f",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  32160,
+                  36640
+                ],
+                [
+                  36640,
+                  41120
+                ]
+              ]
+            ],
+            "adjacent_audio": [
+              [
+                [
+                  32480,
+                  36960
+                ],
+                [
+                  36960,
+                  41440
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "caf8deb4d104692f1f9bb4f7aa426e88dfe7c529d719e30ba3fcd2079cc06c41",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  18560,
+                  23040
+                ],
+                [
+                  23040,
+                  27520
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "3e6aa90c99139bf87bdbac0fa57c6b35aac3ff1bba62f6e62b105f568f586a86",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  19680,
+                  23040
+                ],
+                [
+                  24160,
+                  27520
+                ]
+              ]
+            ],
+            "adjacent_audio": [],
+            "existing_mouth": [
+              {
+                "ranges": [
+                  [
+                    19680,
+                    23040
+                  ],
+                  [
+                    24160,
+                    27520
+                  ]
+                ],
+                "pcm_sha256": [
+                  "e89eee13c366957c5d6e05ae653f6419de698ab7c7e506a906a78514004608e6",
+                  "19e5462deea77e2d944849eab038573dc625402a3bd5d2d4076a1f84606128c7"
+                ],
+                "frame_pairs": [
+                  [
+                    31,
+                    38
+                  ],
+                  [
+                    32,
+                    39
+                  ],
+                  [
+                    33,
+                    40
+                  ],
+                  [
+                    34,
+                    41
+                  ],
+                  [
+                    35,
+                    42
+                  ]
+                ],
+                "mouth_difference_median": 6.102671,
+                "motion_maxima": [
+                  3.809027,
+                  10.464074
+                ]
+              }
+            ],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "conversation",
+      "group": 8,
+      "source_sha256": "69ade821b419b62ffa97c3a3b73d0db1449c9bd5c453caed0a96e7955f74fc52",
+      "samples": 56313,
+      "picture_pts_sha256": "841f3acc3fd995090ed9e8b6d1177ba8d5acd65659d1b809d04401972dcdb22c",
+      "picture_time_base": "1/12800",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 87,
+      "last_verified_frame": 86,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "f1716d801e89d3cc11b6e29c7e9ecae300b6d93397b22132abe3175a70f0fc70",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "4cbd968c8c0a9dda3232fac80f43650c0cacd4e0afb53d655c171e9e8fb7d849",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "4538e74e0def63883a8cc51be671923a8a5e3fb8b3297c0fced493ec9bd1f58e",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "5cda163957a6b817f13e0e3a87e2b674044e1a8c7a2b3f0495c21eeaa0cc313e",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "e7ce8b49c849a34e501822d6c962502ad6dfb5a2478ad714fd6b85ecc6bf0989",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              30080,
+              33280
+            ],
+            [
+              33280,
+              36480
+            ]
+          ],
+          "pcm_sha256": "35c4e8c4442ac91757f4124b0257fe419cb5689ee658e1c639119530700460c0",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  29760,
+                  32960
+                ],
+                [
+                  32960,
+                  36160
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "7ca88e7de6fe53654aee049a7672f05311d237069e4f6c2e8781847a2f6e044e",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              19840,
+              23040
+            ],
+            [
+              23040,
+              26240
+            ]
+          ],
+          "pcm_sha256": "b901c574495dbc53dd62c49cd82da1828fb1407c2cbd57a215634e0e7ed05576",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  20000,
+                  23200
+                ],
+                [
+                  23200,
+                  26400
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": [
+              {
+                "ranges": [
+                  [
+                    20000,
+                    23200
+                  ],
+                  [
+                    23200,
+                    26400
+                  ]
+                ],
+                "pcm_sha256": [
+                  "9c594bbc69e7bdcfa4461dcdf544a3fc414cc04eb27d68afa2704248d4e37ed2",
+                  "5be2b7c0959cab046d4a996c4434dab19d688eda5a27e5ef3f120394a65b7e55"
+                ],
+                "frame_pairs": [
+                  [
+                    31,
+                    36
+                  ],
+                  [
+                    32,
+                    37
+                  ],
+                  [
+                    33,
+                    38
+                  ],
+                  [
+                    34,
+                    39
+                  ],
+                  [
+                    35,
+                    40
+                  ]
+                ],
+                "mouth_difference_median": 14.30218,
+                "motion_maxima": [
+                  10.529273,
+                  3.354456
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "35c4e8c4442ac91757f4124b0257fe419cb5689ee658e1c639119530700460c0",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  29760,
+                  32960
+                ],
+                [
+                  32960,
+                  36160
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "b901c574495dbc53dd62c49cd82da1828fb1407c2cbd57a215634e0e7ed05576",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  20000,
+                  23200
+                ],
+                [
+                  23200,
+                  26400
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "9292723a648872d96eb2de1574d5ba3e47423f78489b97932b5ecfae7d0de0e4",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "conversation",
+      "group": 9,
+      "source_sha256": "a04c5cc5c0c3c4286e211a3b86aa3766d5fef7a030104554d7d6e1821c642555",
+      "samples": 56313,
+      "picture_pts_sha256": "841f3acc3fd995090ed9e8b6d1177ba8d5acd65659d1b809d04401972dcdb22c",
+      "picture_time_base": "1/12800",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 87,
+      "last_verified_frame": 86,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "63787bc1f4cd8ea9bbd47c0e273df03580cbb7ced726ac5c4f44ac370122dd29",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "4c96d6eb3d4f8de3585f0be8b5845d4793b093f4bad0dac4b2afce8ec60bf9f8",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "2369eed1b62daf1f441046cdf3b6d7ef8f3d735dbd1db1538e069770a6e665c6",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "64bee397e984f604d3943ad0df51b0f6f38f0ff0c3dd250cfd3646cf24861f0a",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "cdbb6d009296de1cf7991276c2da4db9660bc0cc0f159f3118f6cad7838ce378",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              33280,
+              37760
+            ],
+            [
+              37760,
+              42240
+            ]
+          ],
+          "pcm_sha256": "a479d425a81323e4a01643c5226a789f15215ffb5232d731a2f2ee09c68b0a17",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "f3763fa2f3bba6251fe5412f77de2b9ca0d8a239625fb235f03643f48d16f22f",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              19200,
+              23680
+            ],
+            [
+              23680,
+              28160
+            ]
+          ],
+          "pcm_sha256": "20a32cb4dc8c34d8b0855911e33df1fecbf8238b4704aa6022fdc88befa24c18",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  19200,
+                  23680
+                ],
+                [
+                  23680,
+                  28160
+                ]
+              ]
+            ],
+            "adjacent_audio": [],
+            "existing_mouth": [
+              {
+                "ranges": [
+                  [
+                    19200,
+                    23680
+                  ],
+                  [
+                    23680,
+                    28160
+                  ]
+                ],
+                "pcm_sha256": [
+                  "f30642fecc26a4e93fa3276f1b944ec7ff8c91f6e9cd9a5c51c2646767777936",
+                  "a2e56692d998726276a18b1355e52b96072301aa8e35245ced15f7a4ab1faa72"
+                ],
+                "frame_pairs": [
+                  [
+                    30,
+                    37
+                  ],
+                  [
+                    31,
+                    38
+                  ],
+                  [
+                    32,
+                    39
+                  ],
+                  [
+                    33,
+                    40
+                  ],
+                  [
+                    34,
+                    41
+                  ],
+                  [
+                    35,
+                    42
+                  ],
+                  [
+                    36,
+                    43
+                  ]
+                ],
+                "mouth_difference_median": 8.595269,
+                "motion_maxima": [
+                  4.58507,
+                  5.527199
+                ]
+              }
+            ],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "a479d425a81323e4a01643c5226a789f15215ffb5232d731a2f2ee09c68b0a17",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "20a32cb4dc8c34d8b0855911e33df1fecbf8238b4704aa6022fdc88befa24c18",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  19200,
+                  23680
+                ],
+                [
+                  23680,
+                  28160
+                ]
+              ]
+            ],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "60e2cf26a78d9a8d140fbef30cd3d58c4f688c148d216447dd2b569bbbd5a7a6",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  20160,
+                  22880
+                ],
+                [
+                  24640,
+                  27360
+                ]
+              ]
+            ],
+            "adjacent_audio": [],
+            "existing_mouth": [
+              {
+                "ranges": [
+                  [
+                    20160,
+                    22880
+                  ],
+                  [
+                    24640,
+                    27360
+                  ]
+                ],
+                "pcm_sha256": [
+                  "f1565a3b10d5b6922ada722ce693f40d755d94935181ae016fdfb3fb242c6d13",
+                  "60975698de59c59178785d5f9f22e89a8f799935741a89b03229788282a9ed81"
+                ],
+                "frame_pairs": [
+                  [
+                    31,
+                    38
+                  ],
+                  [
+                    32,
+                    39
+                  ],
+                  [
+                    33,
+                    40
+                  ],
+                  [
+                    34,
+                    41
+                  ],
+                  [
+                    35,
+                    42
+                  ]
+                ],
+                "mouth_difference_median": 8.595269,
+                "motion_maxima": [
+                  4.58507,
+                  5.527199
+                ]
+              }
+            ],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "conversation",
+      "group": 10,
+      "source_sha256": "e7c310405acc0aa2b4ceeb197a84d29ce2190a6ca8ff7211abba6dadb455268b",
+      "samples": 56320,
+      "picture_pts_sha256": "841f3acc3fd995090ed9e8b6d1177ba8d5acd65659d1b809d04401972dcdb22c",
+      "picture_time_base": "1/12800",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 88,
+      "last_verified_frame": 87,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "bcd31ef59f8be6e134decd0e587f1ef4da3ac777ca14f4a9ea797eca7ac27d17",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "709671618d324b52a109d2d3ce747f4561cdcc3f46597cb5ed1f64090ac377c2",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "a9c3a7808155f62b761d9ce7e490341266c335b08fae2bfc2c659087ed3f9074",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "316829d302537a810e88544715ad1c0d9d16b19570516322b52739391535e825",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "50a7f3d9e1f487980777494b39cafc67a9bd267c73e5d6dfeed2f95312e4934d",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              28800,
+              32000
+            ],
+            [
+              32000,
+              35200
+            ]
+          ],
+          "pcm_sha256": "a9faef93c43bc53d5d23047d905c4cd538b56c5fbbb0d04fc335704c7406c76b",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  28800,
+                  32000
+                ],
+                [
+                  32000,
+                  35200
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": [
+              {
+                "ranges": [
+                  [
+                    28800,
+                    32000
+                  ],
+                  [
+                    32000,
+                    35200
+                  ]
+                ],
+                "pcm_sha256": [
+                  "fd7f91f89ff44d02b360d208d91634de7b2ba3353a8aec6c89d428633320e63d",
+                  "5da2259092197e23183e4a0d3aa5685aaf2f41adecc69e3b2a467f09e8c1cd19"
+                ],
+                "frame_pairs": [
+                  [
+                    45,
+                    50
+                  ],
+                  [
+                    46,
+                    51
+                  ],
+                  [
+                    47,
+                    52
+                  ],
+                  [
+                    48,
+                    53
+                  ],
+                  [
+                    49,
+                    54
+                  ]
+                ],
+                "mouth_difference_median": 6.26794,
+                "motion_maxima": [
+                  5.149305,
+                  8.923901
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "6b4531fca15cff002e526991cac54c382c04352d82f3c893f328182302d4c877",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              18560,
+              21760
+            ],
+            [
+              21760,
+              24960
+            ]
+          ],
+          "pcm_sha256": "7a381cf472d0296ee097222c6ee5c0a6c36bd99b5a74651c03b2af616a0fa415",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  18560,
+                  21760
+                ],
+                [
+                  21760,
+                  24960
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": [
+              {
+                "ranges": [
+                  [
+                    18560,
+                    21760
+                  ],
+                  [
+                    21760,
+                    24960
+                  ]
+                ],
+                "pcm_sha256": [
+                  "7eeb7b96a8e3743d26a1bcf2b99567648e9abec21bc65c87e58fa2a719ae7820",
+                  "8621b17e711a96209bfcdd722c75670330308e7a03755c44ca290777fe2b2f78"
+                ],
+                "frame_pairs": [
+                  [
+                    29,
+                    34
+                  ],
+                  [
+                    30,
+                    35
+                  ],
+                  [
+                    31,
+                    36
+                  ],
+                  [
+                    32,
+                    37
+                  ],
+                  [
+                    33,
+                    38
+                  ]
+                ],
+                "mouth_difference_median": 8.002122,
+                "motion_maxima": [
+                  5.498143,
+                  4.446567
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "a9faef93c43bc53d5d23047d905c4cd538b56c5fbbb0d04fc335704c7406c76b",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  28800,
+                  32000
+                ],
+                [
+                  32000,
+                  35200
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "7a381cf472d0296ee097222c6ee5c0a6c36bd99b5a74651c03b2af616a0fa415",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  18560,
+                  21760
+                ],
+                [
+                  21760,
+                  24960
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "8f135920add662ad3b1ce46f09a6f3cf4ab2aa3704510c2918a31ba4d9cd8e48",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    },
+    {
+      "bank": "conversation",
+      "group": 11,
+      "source_sha256": "67c892eeaf869119bf8fab229bd8b731e427b176473e70fec1380ea2aa8a6812",
+      "samples": 56320,
+      "picture_pts_sha256": "841f3acc3fd995090ed9e8b6d1177ba8d5acd65659d1b809d04401972dcdb22c",
+      "picture_time_base": "1/12800",
+      "audio_origin_s": "0",
+      "observed_mouth_ticks": 88,
+      "last_verified_frame": 87,
+      "cases": [
+        {
+          "id": "original",
+          "truth_samples": null,
+          "pcm_sha256": "2cc1b7908e1c30362dad59fa4324780988210c2a77eaa083131305a5961d8962",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "gain",
+          "truth_samples": null,
+          "pcm_sha256": "1a4399a66bbca8bd997ae1c59c2b49447359e7d5398bd3b73e865981ca6d6f45",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "lowpass",
+          "truth_samples": null,
+          "pcm_sha256": "6acfa019ee2ce7fc4ae1f2b7af7814aebbd65671c7b8b9e1bda24fb2b58f5065",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "noise",
+          "truth_samples": null,
+          "pcm_sha256": "576a5a93e28509df472a7bc46dc5318283c938edececea38975607ae17bbdfe3",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_early",
+          "truth_samples": null,
+          "pcm_sha256": "af6f37406aca10045aaf79d73b9b00d2e1485c5204136a85903db96984c1f082",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_early",
+          "truth_samples": [
+            [
+              32000,
+              36480
+            ],
+            [
+              36480,
+              40960
+            ]
+          ],
+          "pcm_sha256": "541fdf13799c3014392ce1dc71261ccb7da98875059364af01cbf38f36d79ce4",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  32000,
+                  36480
+                ],
+                [
+                  36480,
+                  40960
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "global_late",
+          "truth_samples": null,
+          "pcm_sha256": "b909a2669b02b3f87cb8d322f20d66d240be01dd74c15811200e3e3c8c5d580f",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "local_late",
+          "truth_samples": [
+            [
+              17920,
+              22400
+            ],
+            [
+              22400,
+              26880
+            ]
+          ],
+          "pcm_sha256": "6443808551a1e2a5864b7b96785f3f0d7961a2f14d507041c5adc80f889df3ba",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  18080,
+                  22560
+                ],
+                [
+                  22560,
+                  27040
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": [
+              {
+                "ranges": [
+                  [
+                    18080,
+                    22560
+                  ],
+                  [
+                    22560,
+                    27040
+                  ]
+                ],
+                "pcm_sha256": [
+                  "aa2deb6bc0e246553af1f293df50304aa370003976686ab89e42f51cc9a46f05",
+                  "caa8b888ef9bdff2306c4269d079a5d86e243faad3e7f4ce0ec76cde17865e33"
+                ],
+                "frame_pairs": [
+                  [
+                    28,
+                    35
+                  ],
+                  [
+                    29,
+                    36
+                  ],
+                  [
+                    30,
+                    37
+                  ],
+                  [
+                    31,
+                    38
+                  ],
+                  [
+                    32,
+                    39
+                  ],
+                  [
+                    33,
+                    40
+                  ],
+                  [
+                    34,
+                    41
+                  ]
+                ],
+                "mouth_difference_median": 5.097222,
+                "motion_maxima": [
+                  5.254341,
+                  3.134452
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "matched_picture_early",
+          "truth_samples": null,
+          "pcm_sha256": "541fdf13799c3014392ce1dc71261ccb7da98875059364af01cbf38f36d79ce4",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  32000,
+                  36480
+                ],
+                [
+                  36480,
+                  40960
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "matched_picture_late",
+          "truth_samples": null,
+          "pcm_sha256": "6443808551a1e2a5864b7b96785f3f0d7961a2f14d507041c5adc80f889df3ba",
+          "arms": {
+            "existing_audio": [],
+            "adjacent_audio": [
+              [
+                [
+                  18080,
+                  22560
+                ],
+                [
+                  22560,
+                  27040
+                ]
+              ]
+            ],
+            "existing_mouth": [],
+            "adjacent_mouth": []
+          }
+        },
+        {
+          "id": "repeated_bed",
+          "truth_samples": null,
+          "pcm_sha256": "eaf284d490e056c49b1406273ced58c7408ceb7a4b0b6c9752fbf4145e97840c",
+          "arms": {
+            "existing_audio": [
+              [
+                [
+                  19520,
+                  21920
+                ],
+                [
+                  24000,
+                  26400
+                ]
+              ]
+            ],
+            "adjacent_audio": [],
+            "existing_mouth": [
+              {
+                "ranges": [
+                  [
+                    19520,
+                    21920
+                  ],
+                  [
+                    24000,
+                    26400
+                  ]
+                ],
+                "pcm_sha256": [
+                  "3245204c7989d5e21f5cc65040e4a049930d36765bd5bf318a67e03a41ba53d9",
+                  "7bf39fba3dcc7bef809adc8763e82f47f7dde848be18c04343b57cde763b5997"
+                ],
+                "frame_pairs": [
+                  [
+                    30,
+                    37
+                  ],
+                  [
+                    31,
+                    38
+                  ],
+                  [
+                    32,
+                    39
+                  ],
+                  [
+                    33,
+                    40
+                  ]
+                ],
+                "mouth_difference_median": 5.351985,
+                "motion_maxima": [
+                  5.254341,
+                  2.997396
+                ]
+              }
+            ],
+            "adjacent_mouth": []
+          }
+        }
+      ]
+    }
+  ],
+  "outcome": {
+    "acted_development": {
+      "scope": {
+        "groups": 4,
+        "edits": 8,
+        "controls": 36,
+        "measured_groups": 4
+      },
+      "arms": {
+        "existing_audio": {
+          "checked_controls": 28,
+          "checked_edits": 6,
+          "useful": 2,
+          "wrong_pairs": 1,
+          "control_flags": 5,
+          "flags_repeated_bed": 2,
+          "flags_matched_picture_late": 3
+        },
+        "adjacent_audio": {
+          "checked_controls": 36,
+          "checked_edits": 8,
+          "useful": 2,
+          "wrong_pairs": 0,
+          "control_flags": 2,
+          "flags_matched_picture_late": 2
+        },
+        "existing_mouth": {
+          "checked_controls": 28,
+          "checked_edits": 6,
+          "useful": 2,
+          "wrong_pairs": 1,
+          "control_flags": 1,
+          "flags_repeated_bed": 1
+        },
+        "adjacent_mouth": {
+          "checked_controls": 36,
+          "checked_edits": 8,
+          "useful": 2,
+          "wrong_pairs": 0
+        }
+      }
+    },
+    "acted_held": {
+      "scope": {
+        "groups": 11,
+        "edits": 22,
+        "controls": 99,
+        "unavailable_groups": 5,
+        "measured_groups": 6
+      },
+      "arms": {
+        "existing_audio": {
+          "checked_controls": 18,
+          "checked_edits": 4,
+          "useful": 2,
+          "wrong_pairs": 0,
+          "control_flags": 3,
+          "flags_matched_picture_late": 2,
+          "flags_repeated_bed": 1
+        },
+        "adjacent_audio": {
+          "checked_controls": 54,
+          "checked_edits": 12,
+          "useful": 3,
+          "wrong_pairs": 0,
+          "control_flags": 3,
+          "flags_matched_picture_late": 3
+        },
+        "existing_mouth": {
+          "checked_controls": 18,
+          "checked_edits": 4,
+          "useful": 2,
+          "wrong_pairs": 0,
+          "control_flags": 1,
+          "flags_repeated_bed": 1
+        },
+        "adjacent_mouth": {
+          "checked_controls": 54,
+          "checked_edits": 12,
+          "useful": 3,
+          "wrong_pairs": 0
+        }
+      }
+    },
+    "conversation_held": {
+      "scope": {
+        "groups": 11,
+        "edits": 22,
+        "controls": 99,
+        "measured_groups": 11
+      },
+      "arms": {
+        "existing_audio": {
+          "checked_controls": 99,
+          "checked_edits": 22,
+          "useful": 5,
+          "wrong_pairs": 0,
+          "control_flags": 9,
+          "flags_matched_picture_early": 3,
+          "flags_matched_picture_late": 2,
+          "flags_repeated_bed": 4
+        },
+        "adjacent_audio": {
+          "checked_controls": 99,
+          "checked_edits": 22,
+          "useful": 15,
+          "wrong_pairs": 0,
+          "control_flags": 15,
+          "flags_matched_picture_early": 7,
+          "flags_matched_picture_late": 8
+        },
+        "existing_mouth": {
+          "checked_controls": 99,
+          "checked_edits": 22,
+          "useful": 5,
+          "wrong_pairs": 0,
+          "control_flags": 3,
+          "flags_repeated_bed": 3
+        },
+        "adjacent_mouth": {
+          "checked_controls": 99,
+          "checked_edits": 22,
+          "useful": 8,
+          "wrong_pairs": 0
+        }
+      }
+    },
+    "decision": {
+      "added_useful": 8,
+      "lost_useful": 4,
+      "additional_groups": 7,
+      "new_control_flags": 0,
+      "combined_useful": 15,
+      "synchronized_flags": 0,
+      "advances": false
+    }
+  }
+}

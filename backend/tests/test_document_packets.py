@@ -156,6 +156,26 @@ def test_skipped_writing_check_is_bound_without_a_model_name_or_local_vote(packe
                             original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
 
 
+def test_writing_check_reasons_use_safe_enumerated_values():
+    from app.reports.multimedia_evidence import _document_coverage_details
+
+    entries = [
+        {"detector_id": "txt.desklib", "status": "ok"},
+        {"detector_id": "txt.binoculars", "status": "skipped", "reason": "memory budget"},
+    ]
+    record = document_check_coverage.capture(entries, {"txt.desklib"}, "txt.binoculars")
+    assert record == {"schema": document_check_coverage.REASONS_SCHEMA, "checks": {
+        "passage_classifier": "completed", "writing_pattern_ratio": "skipped",
+    }, "reasons": {"writing_pattern_ratio": "memory_budget"}}
+    coverage = {document_check_coverage.KEY: record}
+    document_check_coverage.verify({"coverage": coverage}, canonical_hash(record))
+    [_, note] = _document_coverage_details(coverage)
+    assert note == "Writing-pattern ratio. Skipped. Available analysis memory was too low to run this check."
+    record["reasons"]["passage_classifier"] = "verified_credentials"
+    with pytest.raises(ValueError, match="writing check coverage reason"):
+        document_check_coverage.commitment(record)
+
+
 def test_short_email_maps_opposing_context_only_and_unassessed_quote_without_cards(packet_factory):
     body = "Please send the agenda. The date changed.\n\n> This was in the old message."
     db, store, analysis, result, decoded, _ = packet_factory(".eml", scores=(.2,), text=body)

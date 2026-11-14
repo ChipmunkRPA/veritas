@@ -212,11 +212,15 @@ def test_new_paid_document_publishes_without_loading_writing_models(billing):
         assert raw["decision"]["verbal"] == headline
         assert raw["decision"]["code"] == "not_assessable"
         assert analysis.probability_ai is None
+        writing = raw["manifest"]["sampling"]["writing_check_coverage"]
+        assert writing["reasons"]["passage_classifier"] == "unsupported_language"
         frozen = reports_snapshot.build(db, analysis, raw, report_id=str(uuid.uuid4()), revision=1, profile="standard",
             redacted=False, supersedes_report_id=None, revision_reason=None, requested_at=datetime.now(UTC),
             requested_by="authored-language-test", template_set=engine.TEMPLATE_SET,
             veritas_version=settings.version, store=billing.store)
         report = engine.render_pdf(frozen)
         assert not report.refused
-        assert reason in " ".join(engine.pdf_text(report.pdf).split())
+        text = " ".join(engine.pdf_text(report.pdf).split())
+        assert reason in text
+        assert "The extracted writing was outside English coverage." in text
         assert public_package.public_result(raw)["decision"]["reason"] == reason

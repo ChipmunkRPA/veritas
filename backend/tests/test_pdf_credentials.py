@@ -179,6 +179,8 @@ def test_signed_provider_pdf_waits_for_payment_and_skips_writing_models(billing,
         assert public["decision"]["code"] == "ai_supported"
         assert "Statistical writing checks were skipped" in json.dumps(public)
         assert not any(name in json.dumps(public).lower() for name in ("deberta", "binoculars", "tropa", "desklib"))
+        writing = raw["manifest"]["sampling"]["writing_check_coverage"]
+        assert writing["reasons"]["passage_classifier"] == "verified_credentials"
         if profile == "quick":
             frozen = snapshot.build(db, analysis, raw, report_id=str(uuid.uuid4()), revision=1, profile="standard",
                 redacted=False, supersedes_report_id=None, revision_reason=None, requested_at=datetime.now(UTC),
@@ -187,6 +189,7 @@ def test_signed_provider_pdf_waits_for_payment_and_skips_writing_models(billing,
             pdf = engine.render_pdf(frozen).pdf
             text = " ".join(engine.pdf_text(pdf).split())
             assert "Statistical writing checks were skipped" in text
+            assert "Verified Content Credentials established AI involvement." in text
             assert not any(name in text.lower() for name in ("deberta", "binoculars", "tropa", "desklib"))
             _verify_public_package(billing, analysis, db, frozen, pdf, tmp_path)
             if path := os.environ.get("CHIPMUNK_PDF_CREDENTIALS_SMOKE_DIR"):

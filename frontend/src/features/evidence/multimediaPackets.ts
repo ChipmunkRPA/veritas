@@ -449,14 +449,19 @@ export interface DocumentEvidenceSet extends SetBase {
       locations: { text_offset: number; source_start: number; source_end: number; codepoint: string; looks_like?: string;
         body_path?: (number | 'row' | 'cell')[]; mime_part?: string }[] };
     checks?: { signal_ref: EvidenceRef; status: 'recorded' | 'partial' | 'context_not_recorded'; scored_windows: number; limitation?: string }[];
-    writing_check_coverage?: {
-      schema: 'document-writing-check-coverage/1';
-      checks: Partial<Record<'passage_classifier' | 'writing_pattern_ratio', 'completed' | 'not_applicable' | 'skipped' | 'failed' | 'timed_out'>>;
-    };
+    writing_check_coverage?: WritingCheckCoverage;
     ocr?: { status?: string; pages?: { page: number; status: string; coverage_scope?: 'image_region'; reason?: string | null; mean_recognition_confidence?: number;
       language?: { status?: string; language?: string; reason?: string }; [key: string]: unknown }[]; unchecked_pages?: number[] } | null
     email?: { body_part?: string; body_content_type?: 'text/plain' | 'text/html'; attachments?: unknown[]; [key: string]: unknown } | boolean | null }
 }
+type WritingCheck = 'passage_classifier' | 'writing_pattern_ratio'
+type WritingCheckState = 'completed' | 'not_applicable' | 'skipped' | 'failed' | 'timed_out'
+export type WritingCheckReason = 'memory_budget' | 'unavailable' | 'verified_credentials'
+  | 'unsupported_language' | 'mixed_language' | 'language_unclear' | 'no_text'
+type WritingCheckCoverage =
+  | { schema: 'document-writing-check-coverage/1'; checks: Partial<Record<WritingCheck, WritingCheckState>> }
+  | { schema: 'document-writing-check-coverage/2'; checks: Partial<Record<WritingCheck, WritingCheckState>>;
+      reasons: Partial<Record<WritingCheck, WritingCheckReason>> }
 export interface EmailBodyAlternatives {
   status: 'difference' | 'equivalent' | 'unsupported'
   parts?: Record<'plain' | 'html', { id: string }>

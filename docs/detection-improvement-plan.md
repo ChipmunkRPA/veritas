@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Exact focus inside an existing writing finding](writing-focus-inside-context-2026-11-14.md)
+  added no correct locations on 34 new Qwen and GPT-5.4 rewrites.
+  The app keeps the scored context. New local reports explain why core
+  writing checks skipped when the worker records a recognized reason.
+
 - [Contextual sentence pooling at varied positions](writing-context-pool-transfer-2026-11-14.md)
   located 29 of 60 held essay edits versus 14 for the current proxy.
   It also flagged 19 of 30 genuine essays and misplaced 21 locations

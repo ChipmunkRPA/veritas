@@ -517,8 +517,10 @@ def publish(ctx: StageContext) -> dict[str, Any]:
     }
     if tracked := decoded.get(document_tracked_changes.KEY):
         result.manifest.sampling[document_tracked_changes.COMMITMENT] = canonical_hash(tracked)
+    detected = ctx.outputs.get("detect") or {}
     if writing_checks := document_check_coverage.capture(
-        (ctx.outputs.get("detect") or {}).get("detectors", []), PRIMARY_DETECTORS, BINOCULARS_DETECTOR,
+        detected.get("detectors", []), PRIMARY_DETECTORS, BINOCULARS_DETECTOR,
+        language=detected.get(language_scope.KEY), verified_credentials=provenance_gate.stop(ctx),
     ):
         result.manifest.sampling[document_check_coverage.KEY] = writing_checks
     if word_visibility := decoded.get("meta", {}).get(document_word_visibility.KEY):

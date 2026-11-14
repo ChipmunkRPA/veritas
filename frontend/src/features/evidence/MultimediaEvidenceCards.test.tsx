@@ -48,6 +48,17 @@ describe('ordinary multimedia evidence', () => {
     expect(section.getByText('Writing-pattern ratio · Skipped')).toBeTruthy()
   })
 
+  it('explains why a writing check was skipped without labeling a passage', () => {
+    show({ ...document, packets: [], coverage: { writing_check_coverage: {
+      schema: 'document-writing-check-coverage/2',
+      checks: { passage_classifier: 'completed', writing_pattern_ratio: 'skipped' },
+      reasons: { writing_pattern_ratio: 'memory_budget' },
+    } } })
+    const section = within(screen.getByRole('region', { name: 'Writing check coverage' }))
+    expect(section.getByText('Available analysis memory was too low to run this check.')).toBeTruthy()
+    expect(screen.queryByRole('region', { name: 'Passages to inspect' })).toBeNull()
+  })
+
   it.each([
     [{ kind: 'docx', paragraph_index: 0, body_path: [0] }, /Word body paragraph 1/],
     [{ kind: 'email', mime_part: '1.2' }, /decoded email MIME part 1\.2/],

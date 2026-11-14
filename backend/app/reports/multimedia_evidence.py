@@ -766,10 +766,13 @@ def _document_coverage_details(coverage: dict) -> list[str]:
         + check.get('limitation', 'Some input contexts were omitted by the bounded evidence capture; missing context is not a negative finding.')
         for check in coverage.get("checks", []) if check["status"] != "recorded"
     ]
-    checks = (coverage.get(document_check_coverage.KEY) or {}).get("checks", {})
+    writing = coverage.get(document_check_coverage.KEY) or {}
+    checks = writing.get("checks", {})
+    reasons = writing.get("reasons", {})
     for key, title in (("passage_classifier", "Passage classifier"), ("writing_pattern_ratio", "Writing-pattern ratio")):
         if key in checks:
-            notes.append(f"{title}. {document_check_coverage.LABELS[checks[key]]}.")
+            reason = f" {document_check_coverage.REASONS[reasons[key]][1]}" if key in reasons else ""
+            notes.append(f"{title}. {document_check_coverage.LABELS[checks[key]]}.{reason}")
     if review := coverage.get("matched_context_review"):
         notes.append(f"Short-passage review selected {review['selected_sentences']} of {review['eligible_sentences']} "
                      "eligible sentences. This evidence has zero weight in the overall assessment.")

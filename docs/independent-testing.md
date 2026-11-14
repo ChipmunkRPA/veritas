@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [writing focus replay](writing-focus-inside-context-2026-11-14.md#replay)
+recounts three ways of narrowing an existing context finding. It includes
+held Qwen3-8B and full GPT-5.4 rewrites and paired genuine source text.
+The published receipt has character offsets and measurements without prose.
+
 The [short local evidence replay](writing-context-pool-transfer-2026-11-14.md#reproduce)
 recounts the image-padding controls, paired video soundtrack shifts, stereo
 intervals and writing edits at varying sentence positions. It uses only the

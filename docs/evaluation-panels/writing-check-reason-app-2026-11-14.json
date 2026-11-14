@@ -1,0 +1,97 @@
+{
+  "no_jobs_before_simulated_payment": true,
+  "rows": [
+    {
+      "group": "609a9ac12a531dd7bd297edb9c32c987c509b0c43cb2363648d3ac58d36b522e",
+      "source_sha256": "d373dc064060143c6e8b22b5057f68a42fec606e2f4863548226a82f7e26b74e",
+      "family": "gemini-2.5-flash",
+      "truth": [
+        391,
+        463
+      ],
+      "document_outcome": "inconclusive",
+      "passages": [
+        {
+          "focus": [
+            0,
+            226
+          ],
+          "spans": [
+            [
+              0,
+              226
+            ],
+            [
+              227,
+              390
+            ]
+          ],
+          "primary_support": true
+        },
+        {
+          "focus": [
+            227,
+            390
+          ],
+          "spans": [
+            [
+              0,
+              226
+            ],
+            [
+              227,
+              390
+            ],
+            [
+              391,
+              463
+            ]
+          ],
+          "primary_support": true
+        },
+        {
+          "focus": [
+            391,
+            463
+          ],
+          "spans": [
+            [
+              227,
+              390
+            ],
+            [
+              391,
+              463
+            ],
+            [
+              464,
+              515
+            ]
+          ],
+          "primary_support": true
+        }
+      ],
+      "primary_scores": [
+        "0x1.8fb0d51f81a58p-1",
+        "0x1.b51d68c692f6fp-1",
+        "0x1.82ccf6be37de9p-1",
+        "0x1.93a4f8726d04ep-2",
+        "0x1.b8198f1d3ed52p-2"
+      ],
+      "writing_check_coverage": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "skipped"
+      },
+      "skip_reasons": {
+        "writing_pattern_ratio": "memory_budget"
+      },
+      "same_status_in_api_and_json": true,
+      "same_status_in_standard_pdf": true,
+      "signed_replay_verified": true,
+      "learned_checks": {
+        "passage_classifier": "ok",
+        "writing_pattern_ratio": "skipped"
+      }
+    }
+  ]
+}

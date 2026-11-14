@@ -7,7 +7,7 @@ import DocumentContextComparison from './DocumentContextComparison'
 import DocumentPassageCoverage from './DocumentPassageCoverage'
 import DocumentRepeatedPassages from './DocumentRepeatedPassages'
 import DocumentUnselectedResponses from './DocumentUnselectedResponses'
-import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentOriginalTextLocation, type DocumentPassagePosition, type EmailBodyAlternatives, type EmailClassifierInputScope } from './multimediaPackets'
+import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentOriginalTextLocation, type DocumentPassagePosition, type EmailBodyAlternatives, type EmailClassifierInputScope, type WritingCheckReason } from './multimediaPackets'
 
 const originalLocationLabels: Record<DocumentOriginalTextLocation['coordinate'], string> = {
   decoded_text: 'Original decoded text characters',
@@ -32,6 +32,16 @@ const writingCheckLabels = {
   skipped: 'Skipped',
   failed: 'Failed',
   timed_out: 'Timed out',
+}
+
+const writingCheckReasons: Record<WritingCheckReason, string> = {
+  memory_budget: 'Available analysis memory was too low to run this check.',
+  unavailable: 'This check was unavailable on the analysis server.',
+  verified_credentials: 'Verified Content Credentials established AI involvement.',
+  unsupported_language: 'The extracted writing was outside English coverage.',
+  mixed_language: 'The extracted text contained English and another language.',
+  language_unclear: 'The check could not establish the language of the extracted writing.',
+  no_text: 'There was no extracted text for this check to read.',
 }
 
 function EmailInputScope({ scope }: { scope: EmailClassifierInputScope }) {
@@ -254,6 +264,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const ocrPages = set.coverage?.ocr?.pages ?? []
   const matched = set.coverage?.matched_context_review
   const writingAgreement = set.coverage?.writing_second_check
+  const writingChecks = set.coverage?.writing_check_coverage
   const tracked = set.coverage?.word_tracked_changes
   const selectablePages = [...new Set(writingAgreement?.pdf_spans?.map((span) => span.page) ?? [])]
   const usesOcr = ocrPages.some((page) => page.status === 'extracted') || set.packets.some((packet) => packet.anchors.some((anchor) => anchor.extraction === 'ocr'))
@@ -353,13 +364,16 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         <p className="mt-2 mb-0 text-small text-text-muted">PDF accessibility and OCR corrections can legitimately change copyable text. This check carries zero AI-authorship weight.</p>
       </>}
     </section>}
-    {set.coverage?.writing_check_coverage && <section className="mt-4 rounded-md border border-border p-4" aria-labelledby="writing-check-coverage-title">
+    {writingChecks && <section className="mt-4 rounded-md border border-border p-4" aria-labelledby="writing-check-coverage-title">
       <h3 id="writing-check-coverage-title" className="m-0 text-body font-medium">Writing check coverage</h3>
       <ul className="mt-2 mb-0 list-disc pl-5 text-small">
         {([['passage_classifier', 'Passage classifier'], ['writing_pattern_ratio', 'Writing-pattern ratio']] as const)
           .map(([key, name]) => {
-            const state = set.coverage?.writing_check_coverage?.checks[key]
-            return state && <li key={key}>{name} · {writingCheckLabels[state]}</li>
+            const state = writingChecks.checks[key]
+            const reason = writingChecks.schema === 'document-writing-check-coverage/2' && writingChecks.reasons[key]
+            return state && <li key={key}>{name} · {writingCheckLabels[state]}
+              {reason && <span className="ml-1 text-text-muted">{writingCheckReasons[reason]}</span>}
+            </li>
           })}
       </ul>
     </section>}

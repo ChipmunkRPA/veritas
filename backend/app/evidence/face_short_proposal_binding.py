@@ -11,7 +11,11 @@ from app.evidence import scene_return_binding as webm
 METHOD = "face-short-return/9"
 WEBM_METHOD = "face-short-return/12"
 WEBM_ENCODING = webm.WEBM_ENCODING
-METHODS = frozenset({METHOD, WEBM_METHOD})
+AVC_METHOD = "face-short-return/13"
+AVC_ENCODING = ("h264", "yuv420p", "avc1")
+SOURCE_PROFILES = {METHOD: (paired.ENCODING, "mp4"), WEBM_METHOD: (WEBM_ENCODING, "webm"),
+                   AVC_METHOD: (AVC_ENCODING, "mp4")}
+METHODS = frozenset(SOURCE_PROFILES)
 POINT = 0.10
 ANCHOR_SAMPLES = tuple(range(4, 120, 10))
 EDGE_SCAN = range(6, 115)
@@ -28,6 +32,18 @@ def webm_source(table, encoding, carrier):
             and webm.valid_webm_clock(table.time_base, table.pts, table.pts[0]))
 
 
+def avc_source(table, encoding, carrier):
+    return (tuple(encoding) == AVC_ENCODING and carrier == "mp4"
+            and (table.width, table.height) == (table.coded_width, table.coded_height) == paired.SIZE
+            and len(table) == paired.FRAME_COUNT and not (table.rotation or table.truncated or table.interpolated)
+            and exact_clock(table.tb, table.pts, table.pts[0]))
+
+
+def exact_clock(base, pts, first):
+    return len(pts) == paired.FRAME_COUNT and all(
+        (tick - first) * base == Fraction(i, paired.RATE) for i, tick in enumerate(pts))
+
+
 def edge_frames(edge):
     return list(range(edge - 3, edge + 3))
 
@@ -41,13 +57,11 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     base = Fraction(source["time_base"])
     first_pts = record["source_first_pts"]
     is_webm = record["method"] == WEBM_METHOD
-    encoding = WEBM_ENCODING if is_webm else paired.ENCODING
-    carrier = "webm" if is_webm else "mp4"
+    encoding, carrier = SOURCE_PROFILES.get(record["method"], ((), None))
     if is_webm:
         clock = base == webm.WEBM_TIME_BASE and (table_pts is None or webm.valid_webm_clock(base, table_pts, first_pts))
     else:
-        clock = table_pts is None or (len(table_pts) == paired.FRAME_COUNT
-            and all((pts - first_pts) * base == Fraction(i, paired.RATE) for i, pts in enumerate(table_pts)))
+        clock = table_pts is None or exact_clock(base, table_pts, first_pts)
     require(
         set(record)
         == {

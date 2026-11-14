@@ -1,0 +1,60 @@
+{
+  "schema": "chipmunk.native-png-paid-smoke/1",
+  "same_raw_decision_on_edited_input": true,
+  "paired_raw_authorship_tendency": "original",
+  "github_actions_used": false,
+  "source_disjoint_accuracy_test": false,
+  "cases": [
+    {
+      "case": "legacy-ai",
+      "localization_count": 0,
+      "packets": 4,
+      "verified_evidence_assets": 12,
+      "pdf_pages": 32,
+      "public_direction": "original",
+      "raw_decision_sha256": "a92ff0cebefcea86e266be5c8c7fe6dbb600502c64c0620ca73b94c96dd6a6ea",
+      "input_sha256": "894ef5665ae4cb3c3e44a2025da05d37ec0eac3f42fd87af7151a1886ae30331",
+      "simulated_payment_before_work_and_model_loads": true,
+      "all_enabled_checks_recorded": true,
+      "evidence_matches_api_json_and_pdf": true,
+      "tested_model_names_hidden": true,
+      "browser_source_crop_verified": true,
+      "browser_measured_mask_verified": false,
+      "candidate_pdf_cover_and_region_visually_verified": false
+    },
+    {
+      "case": "candidate-ai",
+      "localization_count": 1,
+      "packets": 5,
+      "verified_evidence_assets": 16,
+      "pdf_pages": 37,
+      "public_direction": "inconclusive",
+      "raw_decision_sha256": "a92ff0cebefcea86e266be5c8c7fe6dbb600502c64c0620ca73b94c96dd6a6ea",
+      "input_sha256": "894ef5665ae4cb3c3e44a2025da05d37ec0eac3f42fd87af7151a1886ae30331",
+      "simulated_payment_before_work_and_model_loads": true,
+      "all_enabled_checks_recorded": true,
+      "evidence_matches_api_json_and_pdf": true,
+      "tested_model_names_hidden": true,
+      "browser_source_crop_verified": true,
+      "browser_measured_mask_verified": true,
+      "candidate_pdf_cover_and_region_visually_verified": true
+    },
+    {
+      "case": "candidate-original",
+      "localization_count": 0,
+      "packets": 4,
+      "verified_evidence_assets": 12,
+      "pdf_pages": 35,
+      "public_direction": "original",
+      "raw_decision_sha256": "d20dfeb170c833545138655fff47ae691bd0c8c938680c5096fc421c677007af",
+      "input_sha256": "2630abb84e94fc3581e7fd95f0f8283f965854045e9d2a87423c9529e0625f55",
+      "simulated_payment_before_work_and_model_loads": true,
+      "all_enabled_checks_recorded": true,
+      "evidence_matches_api_json_and_pdf": true,
+      "tested_model_names_hidden": true,
+      "browser_source_crop_verified": true,
+      "browser_measured_mask_verified": false,
+      "candidate_pdf_cover_and_region_visually_verified": false
+    }
+  ]
+}

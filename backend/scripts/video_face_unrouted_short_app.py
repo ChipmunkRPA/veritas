@@ -57,15 +57,15 @@ def fixture_plan(study: Path) -> dict:
     return result
 
 
-def native_frames(client, packet, source, commitment, folder):
+def native_frames(client, packet, source, commitment, folder, *, representatives=REPRESENTATIVES):
     from app.detectors.video.decode import decode_frames, probe_frames
 
     table = probe_frames(source)
     assert list(table.pts) == commitment["clock"]["pts"]
     assert table.rotation == 0 and not table.truncated and not table.interpolated
-    originals = {item.index: item for item in decode_frames(source, table, sorted(REPRESENTATIVES.values()))}
+    originals = {item.index: item for item in decode_frames(source, table, sorted(representatives.values()))}
     signatures, assets = set(), []
-    for item, (role, index) in zip(packet["frames"], REPRESENTATIVES.items(), strict=True):
+    for item, (role, index) in zip(packet["frames"], representatives.items(), strict=True):
         anchor = item["anchor"]
         assert item["interval_role"] == role and item["score"] is None
         assert anchor["frame_index"] == index and anchor["pts"] == table.pts[index]
@@ -90,7 +90,8 @@ def native_frames(client, packet, source, commitment, folder):
     return signatures, assets
 
 
-def verified_surfaces(client, aid, source, commitment, evidence, packet, folder):
+def verified_surfaces(client, aid, source, commitment, evidence, packet, folder, *, representatives=REPRESENTATIVES,
+                      initial_coverage="Initial scan. This clip is outside the supported frame or face-size profile."):
     import pymupdf
 
     from app.reports import engine
@@ -98,7 +99,7 @@ def verified_surfaces(client, aid, source, commitment, evidence, packet, folder)
     from scripts.verify_multimedia_exports import scan
 
     folder.mkdir(mode=0o700)
-    images, assets = native_frames(client, packet, source, commitment, folder)
+    images, assets = native_frames(client, packet, source, commitment, folder, representatives=representatives)
     exported = fetch(client, f"/api/analyses/{aid}/export.json")
     assert json.loads(exported)["evidence"] == evidence
     scan(exported.decode())
@@ -110,9 +111,10 @@ def verified_surfaces(client, aid, source, commitment, evidence, packet, folder)
         words = " ".join(" ".join(page.get_text().split()) for page in document)
         scan(words)
         assert "brief face-change range spans 2.067-2.267 s" in words and "with an exclusive end" in words
-        assert "Initial scan. This clip is outside the supported frame or face-size profile." in words
+        if initial_coverage is not None:
+            assert initial_coverage in words
         assert "Bounded native scan. A brief face-change range was recorded." in words
-        assert all(f"source frame {index}" in words for index in REPRESENTATIVES.values())
+        assert all(f"source frame {index}" in words for index in representatives.values())
         xrefs = {item[0] for page in document for item in page.get_images(full=True)}
         embedded = {image_signature(document.extract_image(xref)["image"]) for xref in xrefs}
         assert images <= embedded

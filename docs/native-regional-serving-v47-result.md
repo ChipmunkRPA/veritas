@@ -31,8 +31,18 @@ false; no GPU, other dtype or higher concurrency qualification is implied.
 `VERITAS_IMAGE_REGION_MODE=candidate` enables the sensitive regional check and
 retains the older recompression check for separate comparison. Explicit policy
 denials still apply, and missing weights remain missing-check outcomes. The
-repository and current local default remain `legacy`; no automatic rollout or
-old-weight deletion occurred.
+repository and the local instance initially defaulted to `legacy`.
+
+On 13 November the development instance selected `candidate` after replaying
+the held edited PNG in both modes and the untouched PNG in candidate mode.
+The candidate added one source-aligned region on the edit and none on the
+untouched photo. The same edited file produced the same whole-image estimate
+in both modes. With the added regional evidence, the customer-facing result
+reported that AI origin was inconclusive. Chrome displayed the measured mask,
+and the API, PDF and JSON retained the same source evidence. Those three
+simulated checkouts verify the application flow on previously tested inputs.
+The repository configuration still defaults to `legacy`.
+[Local activation receipt](evaluation-panels/image-native-png-current-paid-smoke-2026-11-13.json)
 
 The loader reads a pinned complete 410-tensor safetensors state. It does not
 download, deserialize pickle, change global imports/model factories/sockets,
@@ -53,10 +63,9 @@ passed. Stripe uses test doubles; no live payment was attempted.
 
 Regional scores remain **uncalibrated editing cues with zero overall authorship
 confidence weight**. Empty, skipped or failed checks do not establish an original
-file. The preserved shared-mask helper and parity result do not mean a dedicated
-shared-pixel UI has been completed. Full paid end-to-end app/browser verification
-and that presentation remain before any local default. Ordinary non-AI spatial
-edits and additional generators still need separate validation before an
+file. The later [shared pixel evidence replay](native-regional-evidence-replay-v51-result.md)
+records the browser, PDF and JSON presentation and its limits. Ordinary non-AI
+spatial edits and additional generators still need separate validation before an
 AI-specific confidence contribution.
 
 The runtime dependency extension adds only the already installed MIT helper

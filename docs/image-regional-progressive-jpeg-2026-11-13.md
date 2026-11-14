@@ -46,8 +46,13 @@ PYTHONPATH=backend OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 \
   backend/.venv/bin/python -B -m scripts.image_regional_progressive_transfer run --output "$new_receipt"
 ```
 
-The separate checkout test accepts the retained progressive JPEG with the
-source digest in the application receipt:
+For the checkout test, use slot 02 of the retained BG-REAL insertion trial
+described in the [source intake](image-bg-real-insertions-2026-11-11.md).
+Its 768 × 576 edited PNG has SHA-256
+`6724fe39e584fc6f66d1f318384e9785b6eb9c881034091d8a231caba81f4520`.
+Save its RGB pixels without resizing using Pillow JPEG quality 75 and
+`subsampling=2`, then run `jpegtran -copy all -progressive`. The result
+must have the source digest in the application receipt.
 
 ```sh
 cd backend

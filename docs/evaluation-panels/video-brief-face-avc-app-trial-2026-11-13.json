@@ -1,0 +1,91 @@
+{
+  "bounded_proposal_budget_seconds": 12.0,
+  "browser": {
+    "page_errors": 0,
+    "plain_view": true,
+    "shown_start_and_end_measurements": true,
+    "source_originals_and_crops_loaded": 6
+  },
+  "cases": {
+    "cross_recording_cuts": {
+      "bounded_proposal": {
+        "measured_face_frames": 23,
+        "pixel_frames": 120,
+        "reason": null,
+        "scheduled_frames": 23,
+        "status": "no_distinct_range"
+      },
+      "bounded_proposal_seconds": 1.477,
+      "overall_assessment_equal": true,
+      "scene_return_status": "matched"
+    },
+    "original": {
+      "bounded_proposal": {
+        "measured_face_frames": 12,
+        "pixel_frames": 120,
+        "reason": null,
+        "scheduled_frames": 12,
+        "status": "no_distinct_range"
+      },
+      "bounded_proposal_seconds": 1.252,
+      "overall_assessment_equal": true,
+      "scene_return_status": "no_match"
+    },
+    "tandem_two_swaps": {
+      "bounded_proposal": {
+        "measured_face_frames": 35,
+        "pixel_frames": 120,
+        "reason": null,
+        "scheduled_frames": 35,
+        "status": "localized"
+      },
+      "bounded_proposal_seconds": 1.644,
+      "different_original_rejected": true,
+      "exact_source_exhibit_count": 6,
+      "overall_assessment_equal": true,
+      "pdf_api_json_agree": true,
+      "range_frames": [
+        62,
+        68
+      ],
+      "scene_return_status": "no_match",
+      "signed_original_replay": true,
+      "source_frames": [
+        61,
+        65,
+        68
+      ]
+    },
+    "two_swaps": {
+      "bounded_proposal": {
+        "measured_face_frames": 35,
+        "pixel_frames": 120,
+        "reason": null,
+        "scheduled_frames": 35,
+        "status": "localized"
+      },
+      "bounded_proposal_seconds": 1.722,
+      "different_original_rejected": true,
+      "exact_source_exhibit_count": 6,
+      "overall_assessment_equal": true,
+      "pdf_api_json_agree": true,
+      "range_frames": [
+        62,
+        68
+      ],
+      "scene_return_status": "no_match",
+      "signed_original_replay": true,
+      "source_frames": [
+        61,
+        65,
+        68
+      ]
+    }
+  },
+  "default_off": true,
+  "duplicate_paid_webhooks_checked": true,
+  "schema": "chipmunk.video-brief-face-avc-app-trial/1",
+  "scope": "Two encodes of one previously evaluated edit and two matching ordinary controls.",
+  "simulated_paid_runs": 8,
+  "unpaid_jobs": 0
+}

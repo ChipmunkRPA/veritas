@@ -120,8 +120,9 @@ def test_paired_edge_rejects_altered_proof(change, reason):
         face_boundary_binding.validate_record(value, coarse, source, table_pts=table.pts)
 
 
-@pytest.mark.parametrize("webm", [False, True])
-def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(webm):
+@pytest.mark.parametrize("carrier", ["hevc", "webm", "avc"])
+def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(carrier):
+    webm = carrier == "webm"
     table, source, _, value = record()
     if webm:
         ticks = tuple(420 + scene_return_binding.webm_tick(i) for i in range(120))
@@ -129,6 +130,15 @@ def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(webm
         source.update(time_base=table.time_base)
         assert face_short_proposal_binding.webm_source(table, scene_return_binding.WEBM_ENCODING, "webm")
         assert not face_short_proposal_binding.webm_source(table, scene_return_binding.WEBM_ENCODING, "mp4")
+    if carrier == "avc":
+        assert face_short_proposal_binding.avc_source(table, face_short_proposal_binding.AVC_ENCODING, "mp4")
+        assert not face_short_proposal_binding.avc_source(table, paired.ENCODING, "mp4")
+        assert not face_short_proposal_binding.avc_source(table, face_short_proposal_binding.AVC_ENCODING, "webm")
+        irregular = replace(table, pts=(*table.pts[:70], table.pts[70] + 1, *table.pts[71:]))
+        assert not face_short_proposal_binding.avc_source(irregular, face_short_proposal_binding.AVC_ENCODING, "mp4")
+    method = {"hevc": face_short_proposal_binding.METHOD, "webm": face_short_proposal_binding.WEBM_METHOD,
+              "avc": face_short_proposal_binding.AVC_METHOD}[carrier]
+    encoding, container = face_short_proposal_binding.SOURCE_PROFILES[method]
     old_faces = {row["frame_index"]: row for row in value["frame_inputs"]}
     sample = list(face_short_proposal_binding.ANCHOR_SAMPLES)
     proposed = [87, 93]
@@ -141,11 +151,11 @@ def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(webm
     edges["exit"]["frame_indices"] = face_short_proposal_binding.edge_frames(93)
     value.pop("track_id")
     value.update(
-        method=face_short_proposal_binding.WEBM_METHOD if webm else face_short_proposal_binding.METHOD,
+        method=method,
         time_base=table.time_base,
         source_first_pts=table.pts[0],
-        source_encoding=list(scene_return_binding.WEBM_ENCODING if webm else paired.ENCODING),
-        source_carrier="webm" if webm else "mp4",
+        source_encoding=list(encoding),
+        source_carrier=container,
         start_frame_index=87,
         end_frame_index=93,
         start_pts=table.pts[87],
@@ -163,6 +173,7 @@ def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(webm
     response = paired.edge_response(value, {row["frame_index"]: row for row in value["frame_inputs"]}, 87, 93)
     value.update(response=response, response_hex=response.hex())
     assert type(settings).model_fields["video_face_unrouted_short_review"].default is False
+    assert type(settings).model_fields["video_face_short_avc_review"].default is False
     face_return_binding.validate_record(value, source, table_pts=table.pts)
     assert [(item["label"], item["value"]) for item in face_return_binding.proposal_boundary_measurements(value)] == [
         ("Start face change above nearby variation", 0.38),
@@ -177,6 +188,9 @@ def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(webm
             face_return_binding.validate_record(bad, source, table_pts=table.pts)
         with pytest.raises(ValueError, match="measured carrier"):
             face_return_binding.validate_record({**value, "source_carrier": "mp4"}, source, table_pts=table.pts)
+    if carrier == "avc":
+        with pytest.raises(ValueError, match="measured carrier"):
+            face_return_binding.validate_record({**value, "source_encoding": list(paired.ENCODING)}, source, table_pts=table.pts)
     for key, changed, reason in (
         ("shortlist_edges", [87, 93, 93], "edge shortlist"),
         ("scheduled_frame_indices", planned[:-1], "face sample budget"),

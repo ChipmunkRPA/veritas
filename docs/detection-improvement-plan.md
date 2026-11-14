@@ -60,6 +60,9 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Native PNG regional review](native-regional-serving-v47-result.md#optional-app-integration)
+  is enabled on the local instance. The paid-flow replay added one location
+  to a previously evaluated edit and none to the matching untouched photo.
 - [Progressive JPEG regional evidence](image-regional-progressive-jpeg-2026-11-13.md)
   adds support for standard quality-75 progressive files in the existing
   development profile. All 90 matched decodes and six paired regional runs
@@ -108,9 +111,10 @@ are not public screening promises or calibrated population probabilities.
   untouched highlights from 11 to 12 of 20. It remains experimental.
 - [Short H.264 face localization](video-brief-face-avc-clock-confirmation-2026-11-13.md)
   increased correct ranges from nine to ten on 16 edited deliveries from eight
-  source groups. Neither route flagged any of the 40 ordinary clips. The additional
-  H.264 route remains experimental. The existing short WebM review now explains both
-  boundary readings alongside the original frames in the browser, PDF and JSON.
+  source groups. Neither route flagged any of the 40 ordinary clips. The new
+  route is a local trial with zero confidence weight. Both this trial and the
+  existing short WebM review explain the two boundary readings and show the
+  original frames in the browser, PDF and JSON.
 - [JPEG75 and JPEG85 detail loss](image-jpeg-detail-quality-transfer-2026-11-13.md)
   adds 19 useful local blur ranges per format, without adding any highlight
   on 306 controls per format. It requires an earlier matching copy and

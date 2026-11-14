@@ -15,7 +15,7 @@ A candidate only runs on a delivery without an existing supplemental short range
 | Ordinary uploads flagged | 0/40 | 0/40 |
 | Routed clips measured by the bounded proposal | — | 47/47 |
 
-The one added range exactly matched the authored **2.767–2.967 s** change after tandem compression of a 29.97 fps source, from frame 83 through frame 88. The before, during and after images correspond to frames **82, 86 and 89**. There were no misplaced additional ranges. The candidate remains experimental on this H.264 delivery profile. This comparison improves localization by one delivery, with insufficient gains to justify a serving change. The incidence on unmodified footage remains uncertain beyond these 40 controls.
+The one added range exactly matched the authored **2.767–2.967 s** change after tandem compression of a 29.97 fps source, from frame 83 through frame 88. The before, during and after images correspond to frames **82, 86 and 89**. There were no misplaced additional ranges. This comparison improves localization by one delivery. The performance on everyday footage remains uncertain beyond these 40 controls, and the default stays off.
 
 The independent checks reopen all 6,720 presentation times and native RGB frames and confirm the three selected original frames. The public receipt preserves source and output commitments, conditions and decisions. It contains no media, source identities or model files. [Case and native timing ledger](evaluation-panels/video-brief-face-avc-clock-confirmation-2026-11-13.json)
 
@@ -30,6 +30,18 @@ PYTHONPATH=backend python3 -B -S -m scripts.review_video_brief_face_avc_confirma
 ```
 
 The signed evidence for the separate WebM application smoke tested the same five-to-seven-picture method using a known range at 2.067–2.267 s. The customer view and report now display the measured appearance change and counts of nearby regions with substantial motion for each endpoint. A simulated paid checkout yielded three matching source frames and crops across Chrome, PDF, JSON and signed original replay. Those measurements carry zero weight in the AI assessment. This WebM evidence improvement is already available through the existing optional short carrier setting. The separate H.264 comparison leaves lip synchronization and generalization to other deliveries unmeasured.
+
+## Local H.264 trial
+
+To try the check locally, use `VERITAS_VIDEO_FACE_REVIEW_MODE=appearance` and `VERITAS_VIDEO_FACE_SHORT_AVC_REVIEW=true` and restart the worker. It runs on Full and Deep analyses of upright 1280 × 720, 8-bit 4:2:0 `avc1` MP4 with 120 verified pictures at exactly 30 fps. The check looks for a five- to seven-picture appearance change that returns toward its earlier appearance. It can supply a distinct range when the current review has no supplemental short range. The ordinary view, PDF and JSON show both boundary measurements and the before, during and after pictures and face crops. The trial carries zero overall AI confidence weight.
+
+The real local worker ran with the flag both off and on using two encodes of one previously evaluated edit, an unchanged clip and a genuine picture-cut control. Both encodes added the same **2.067–2.267 s** range, with source pictures **61, 65 and 68**. Neither control added a face range. All four pairs kept their overall assessment. Chrome loaded both boundary measurements and all six images. The API, JSON and Standard PDF agreed on the six exact exhibits per positive, and signed replay verified the range and both boundary measurements from the submitted video. The face check took **1.25–1.72 s** per clip against a 12-second limit. The standalone picture-return check still found the genuine cut in both modes. This test had no clip with a simultaneous positive face and picture-return result. [Local trial receipt](evaluation-panels/video-brief-face-avc-app-trial-2026-11-13.json)
+
+Use the retained four-second source bank with `media.json` and `media/`. The runner uses an isolated database, verifies the source hashes against the earlier carrier study and simulates payment before running each analysis.
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python -m scripts.video_brief_face_avc_app "$retained_four_second_bank" "$new_private_run"
+```
 
 To recreate the H.264 experiment, supply a new local run directory and the archived freezes for the prior eight-second HEVC, eight-second AVC/VP9 and four-second AVC comparisons. The authoring step checks each decoded source timestamp and RGB commitment before writing the exact 30 fps delivery. The verification step checks each delivered picture and timestamp through an independent FFmpeg process.
 

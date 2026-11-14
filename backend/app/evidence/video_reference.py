@@ -405,6 +405,7 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             include_trim_reencoded: bool = False, include_soundtrack_reencode: bool = False,
             include_hd_soundtrack_reencode: bool = False,
             include_quiet_soundtrack: bool = False,
+            include_short_soundtrack: bool = False,
             include_picture_insertion: bool = False,
             verify_picture_insertion_retention: bool = True) -> tuple[dict, dict[str, bytes]]:
     """Report decoded differences on matching clocks or within a verified trimmed overlap."""
@@ -503,7 +504,7 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             if reencoded_pictures:
                 alignment = video_reference_soundtrack.assess_reencode(paths, tables, record["picture"],
                                                                        record["audio"], tracks, timing_assets,
-                                                                       quiet=include_quiet_soundtrack)
+                                                                       quiet=include_quiet_soundtrack, short=include_short_soundtrack)
             else:
                 alignment = video_reference_soundtrack.assess(submitted, tables[1], record["picture"], record["audio"],
                                                              tracks, timing_assets)

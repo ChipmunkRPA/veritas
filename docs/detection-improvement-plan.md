@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Short soundtrack shifts on corresponding pictures](video-short-soundtrack-2026-11-14.md)
+  raised useful localization from 14/20 to 20/20 in each of two
+  carriers, with no flags across 90 controls per carrier. The trial
+  applies to paired four-second 720p25 exports.
+
 - [Local loss of stereo differences](audio-identical-stereo-intervals-2026-11-14.md)
   located 47 of 48 lossless edits exactly across two held meetings
   and flagged none of 144 matched controls. AAC preserved one useful

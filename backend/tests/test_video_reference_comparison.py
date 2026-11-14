@@ -481,9 +481,10 @@ def test_reencoded_soundtrack_shift_has_exact_paired_evidence_and_rejects_matche
     assert not any(name.startswith("soundtrack-shift-") for name in blocked_assets)
 
 
-@pytest.mark.parametrize(("rate", "movement"), [(24, -3200), (25, 3200), (30, 3200)])
+@pytest.mark.parametrize(("rate", "movement", "short"), [(24, -3200, False), (25, 3200, False),
+                                                        (30, 3200, False), (25, -3200, True)])
 def test_hd_reencode_profile_reaches_authorized_comparison_and_original_replay(
-    tmp_path, reference_http, monkeypatch, rate, movement,
+    tmp_path, reference_http, monkeypatch, rate, movement, short,
 ):
     from scripts.video_reference_soundtrack_panel import remux
 
@@ -493,8 +494,9 @@ def test_hd_reencode_profile_reaches_authorized_comparison_and_original_replay(
     pcm = np.random.default_rng(3172).integers(-7200, 7200, 64000, dtype=np.int16).astype(np.float32) / 32768
     if rate == 24:
         pcm *= .01  # Below the first-pass level floor, with enough variation for the quiet pass.
+    start, stop = (24320, 28160) if short else (24000, 38400)
     edited = pcm.copy()
-    edited[24000:38400] = pcm[24000 - movement:38400 - movement]
+    edited[start:stop] = pcm[start - movement:stop - movement]
     clips = []
     for name, crf, signal in (("earlier", 18, pcm), ("submitted", 34, edited)):
         picture = encode_lossy_comparison(tmp_path / f"{name}-picture.mov", frames, lossless=False, crf=crf, rate=rate)
@@ -515,6 +517,7 @@ def test_hd_reencode_profile_reaches_authorized_comparison_and_original_replay(
     monkeypatch.setattr(v2_media_reference, "default_store", lambda: f.store)
     monkeypatch.setattr(v2_media_reference, "get_session", sessions)
     monkeypatch.setattr(settings, "video_reference_soundtrack_reencode", True)
+    monkeypatch.setattr(settings, "video_reference_short_soundtrack", short)
     with sessions() as db:
         analysis = db.get(Analysis, "other-kind")
         analysis.kind, analysis.status, analysis.filename = "video", "done", submitted.name
@@ -531,14 +534,15 @@ def test_hd_reencode_profile_reaches_authorized_comparison_and_original_replay(
     assert record["picture"]["soundtrack_picture_comparison"]["fine_grid"]["compared_pictures"] == 4 * rate
     timing = record["soundtrack_alignment"]
     assert timing["status"] == "local_shift" and timing["offset_ms"] == movement / 16
-    assert timing.get("waveform_basis") == ("quiet_soundtrack_waveform/1" if rate == 24 else None)
+    basis = "short_soundtrack_waveform/1" if short else "quiet_soundtrack_waveform/1" if rate == 24 else None
+    assert timing.get("waveform_basis") == basis
     assert timing["picture_profile"] == {"width": 1280, "height": 720, "frames_per_second": rate, "pictures": 4 * rate}
     recorded_profile = record["picture"]["soundtrack_picture_comparison"].get("picture_profile")
     assert recorded_profile == (timing["picture_profile"] if rate != 30 else None)
     assert timing["affects_overall_confidence"] is False
     span = timing["range"]
     a, b = span["submitted"]["samples"]
-    assert 24000 <= a <= 24640 and 37760 <= b <= 38400
+    assert start <= a <= start + 640 and stop - 640 <= b <= stop
     assert span["earlier"]["samples"] == [a - movement, b - movement]
     assert [span["paired_pictures"][role]["submitted"]["frame_index"]
             for role in ("before", "during", "after")] == [
@@ -548,6 +552,7 @@ def test_hd_reencode_profile_reaches_authorized_comparison_and_original_replay(
         page = next(p for p in report if "Local soundtrack timing" in p.get_text())
         assert f"Compared {4 * rate} corresponding 1280×720 pictures at {rate} fps." in page.get_text()
         assert ("second pass checks quieter sound" in page.get_text()) == (rate == 24)
+        assert ("shorter scan uses 80 ms windows" in page.get_text()) == short
         assert len(page.get_images()) == 6
     export = tmp_path / "hd-export.json"
     export.write_text(json.dumps({"comparison": record, "assets": payload["assets"]}))

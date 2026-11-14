@@ -27,6 +27,10 @@ MIN_RMS = .003
 QUIET_RMS = .00075
 QUIET_BASIS = "quiet_soundtrack_waveform/1"
 QUIET_EXPLANATION = "The second pass checks quieter sound and still requires matching sound on either side."
+SHORT_WINDOW = 1280  # 80 ms
+SHORT_STEP = 320  # 20 ms
+SHORT_BASIS = "short_soundtrack_waveform/1"
+SHORT_EXPLANATION = "The shorter scan uses 80 ms windows and still requires matching sound on either side."
 MIN_CORRELATION = .86
 MIN_MARGIN = .06
 ALTERNATIVE = 96  # treat peaks within 6 ms as one local correlation peak
@@ -150,7 +154,7 @@ def _picture(assets, path, table, origin, span):
     return _picture_at(assets, path, table, max(0, bisect_right(clock, middle) - 1))
 
 
-def _assess(table, picture, audio, tracks, assets, result, picture_witness, summary_end, *, quiet=False):
+def _assess(table, picture, audio, tracks, assets, result, picture_witness, summary_end, *, quiet=False, short=False):
     if audio["status"] != "measured" or not MIN_SAMPLES <= audio["earlier"]["samples"] <= MAX_SAMPLES:
         return result | {"summary": "This timing check needs two matching continuous soundtrack clocks and at least 1.5 seconds of audio."}
     origin = Fraction(audio["earlier"]["relative_start"])
@@ -159,6 +163,9 @@ def _assess(table, picture, audio, tracks, assets, result, picture_witness, summ
     if quiet and best is None:
         best, support = measure(tracks[0][1], tracks[1][1], min_rms=QUIET_RMS)
         result.update(waveform_basis=QUIET_BASIS, matched_windows=support, waveform_note=QUIET_EXPLANATION)
+    if short and best is None:
+        best, support = measure(tracks[0][1], tracks[1][1], window=SHORT_WINDOW, step=SHORT_STEP, min_rms=QUIET_RMS)
+        result.update(waveform_basis=SHORT_BASIS, matched_windows=support, waveform_note=SHORT_EXPLANATION)
     if support < 2 * FLANK_WINDOWS + MIN_WINDOWS:
         return result | {"summary": "Too few distinctive sound excerpts could be matched to assess a local timing change."}
     if best is None:
@@ -190,7 +197,7 @@ def assess(path, table, picture, audio, tracks, assets):
                    "relative to the same pictures.")
 
 
-def assess_reencode(paths, tables, picture, audio, tracks, assets, *, quiet=False):
+def assess_reencode(paths, tables, picture, audio, tracks, assets, *, quiet=False, short=False):
     """Measure a shift only when whole-picture and local-grid agreement both hold."""
     result = {"status": "unassessed", "basis": reencode.BASIS, "scope": reencode.scope(picture),
               "affects_overall_confidence": False, **reencode.report_profile(picture)}
@@ -216,4 +223,5 @@ def assess_reencode(paths, tables, picture, audio, tracks, assets, *, quiet=Fals
 
     return _assess(tables[1], picture, audio, tracks, assets, result, witnesses,
                    "between the clips over corresponding pictures.", quiet=quiet and profile["rate"] in {24, 25}
-                   and profile["size"] == reencode.HD_PICTURE_SIZE)
+                   and profile["size"] == reencode.HD_PICTURE_SIZE,
+                   short=short and profile["rate"] == 25 and profile["size"] == reencode.HD_PICTURE_SIZE)

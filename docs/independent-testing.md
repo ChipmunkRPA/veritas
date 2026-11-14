@@ -1895,6 +1895,15 @@ and the source pixels behind the crop. The replay does not score authorship.
 
 ## Choose a review to reproduce
 
+### Review short soundtrack timing on corresponding video
+
+Use the [five-recording source manifest and replay commands](video-short-soundtrack-2026-11-14.md#app-and-independent-replay).
+The ledger recounts signed timing errors and picture correspondence
+separately for PCM, AAC, and synchronized controls. A native replay
+uses the public publisher bytes and compares the same source frames
+and sound excerpts. Share scalar review results or source-page links
+with the [independent evaluation form](https://github.com/ChipmunkRPA/veritas/issues/new?template=independent-evaluation.yml).
+
 ### Review recent stereo and face evidence
 
 ```sh

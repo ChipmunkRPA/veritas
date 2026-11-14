@@ -381,6 +381,7 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 </div>
 {% endfor %}
 {% for packet in evidence.packets %}
+{% set concise_av = packet.kind == 'av' and s.report.profile == 'standard' and (packet.get('comparison_context') or packet.get('comparison_windows')) %}
 <article class="multimedia-evidence-packet" id="multimedia-evidence-{{ packet.id }}">
 <h3>{{ packet.id }} - {{ packet.title }}</h3>
 {% if packet.get('customer_inference') %}<p class="finding-inference"><strong>Inference:</strong> {{ packet.customer_inference }}</p>{% endif %}
@@ -388,6 +389,8 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 <p class="caption">{% if packet.finding_ids %}Findings {{ packet.finding_ids | join(', ') }}{% endif %}{% if packet.signal_refs %} - Checks {% for ref in packet.signal_refs %}{{ ref.display_id or 'recorded check' }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</p>
 <p><strong>Observed:</strong> {{ packet.observation }}</p>
 <p><strong>Interpretation:</strong> {{ packet.interpretation }}</p>
+{% if packet.get('comparison_context') %}<p class="caption">Flagged window <a href="#multimedia-evidence-{{ packet.comparison_context.reference_packet_id }}">{{ packet.comparison_context.reference_packet_id }}</a>.</p>{% endif %}
+{% for comparison in packet.get('comparison_windows', []) %}<p class="caption">Measured window {{ comparison.role }} the flagged window <a href="#multimedia-evidence-{{ comparison.id }}">{{ comparison.id }}</a>.</p>{% endfor %}
 {% if packet.kind in ['video', 'av'] %}
 {% if packet.face_interval %}<p class="caption">The flagged range covers {{ packet.face_interval.samples.during | length }} scored samples. The before and after frames show the nearest scored samples on the same track.</p>{% endif %}
 {% if packet.face_sequence %}<p class="caption">The measured review range spans {{ '%.3f' | format(packet.face_sequence.start_stream_s) }}-{{ '%.3f' | format(packet.face_sequence.end_stream_s) }} s on the source clock. Three consecutive source crops support each of {{ packet.face_sequence.centers.during | length }} centers in this range. Before and after groups provide comparison context. The sequence response is not an individual-frame confidence.</p>{% endif %}
@@ -396,10 +399,10 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 <h4>Source frames compared at each boundary</h4>
 <p class="caption">Start of change · frames {{ packet.face_return.edges.entry.frame_indices | join(', ') }}<br>End of change · frames {{ packet.face_return.edges.exit.frame_indices | join(', ') }}. At each boundary the check compared the first three frames with the last three.</p>
 {% endif %}
-{{ plates(packet.images, true) }}
-{% if packet.clip and packet.clip.status == 'ready' %}<p class="caption">A silent video context clip is included in the JSON evidence assets and evidence ZIP, source frames [{{ packet.clip.start_frame_index }}, {{ packet.clip.end_frame_index_exclusive }}). It is a re-encoded viewing aid; extra context frames have no additional detection score. The PDF provides the corresponding frozen source frames and clip checksum below.</p>{% endif %}
+{% if concise_av %}{% for image in packet.images if image.role in ['waveform', 'lag_profile'] %}{{ plates([image], true) }}{% endfor %}{% else %}{{ plates(packet.images, true) }}{% endif %}
+{% if packet.clip and packet.clip.status == 'ready' %}{% if concise_av %}<p class="caption">The evidence ZIP includes a silent context clip covering source frames [{{ packet.clip.start_frame_index }}, {{ packet.clip.end_frame_index_exclusive }}).</p>{% else %}<p class="caption">A silent video context clip is included in the JSON evidence assets and evidence ZIP, source frames [{{ packet.clip.start_frame_index }}, {{ packet.clip.end_frame_index_exclusive }}). It is a re-encoded viewing aid; extra context frames have no additional detection score. The PDF provides the corresponding frozen source frames and clip checksum below.</p>{% endif %}{% endif %}
 {% if packet.clip and packet.clip.status == 'unavailable' and not packet.get('picture_hold') and not packet.get('picture_sequence') and not packet.get('whole_face_review') and not packet.get('scene_return') %}<p class="caption">Context clip unavailable: {{ packet.clip.reason }}. The exact recorded frame images remain available below.</p>{% endif %}
-{% if packet.kind == 'av' %}<p class="caption">These 25 measurement ticks used the exact gray patches shown below. A source frame can repeat at multiple ticks; the three full-size frames are representatives.</p>{% elif packet.get('whole_face_review') %}<p class="caption">Planned native frame indices {{ packet.window.frame_indices | join(', ') }}. Three usable source frames are shown. The response describes the sampled positions.</p>{% elif packet.window %}<p class="caption">This window used {{ packet.window.frame_indices | length }} recorded input frames. The displayed frames are representatives; the window measurement is not a per-frame score.</p>{% endif %}
+{% if concise_av %}<p class="caption">Three source frames and crops represent the 25 measured ticks. The JSON and evidence ZIP retain all measured inputs and asset hashes.</p>{% elif packet.kind == 'av' %}<p class="caption">These 25 measurement ticks used the exact gray patches shown below. A source frame can repeat at multiple ticks; the three full-size frames are representatives.</p>{% elif packet.get('whole_face_review') %}<p class="caption">Planned native frame indices {{ packet.window.frame_indices | join(', ') }}. Three usable source frames are shown. The response describes the sampled positions.</p>{% elif packet.window %}<p class="caption">This window used {{ packet.window.frame_indices | length }} recorded input frames. The displayed frames are representatives; the window measurement is not a per-frame score.</p>{% endif %}
 {% for frame in packet.frames %}
 {% if frame.first_cut %}
 <h4>Picture-cut context</h4>
@@ -431,7 +434,7 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 </div>
 <p class="caption">Unshifted audio window: samples [{{ packet.audio.interval.start_sample }}, {{ packet.audio.interval.end_sample }}) at {{ packet.audio.sample_rate }} Hz. Full lag-search audio: samples [{{ packet.audio.context_interval.start_sample }}, {{ packet.audio.context_interval.end_sample }}). The silent MP4 is visual context; these WAV samples retain the actual audio inputs.</p>
 {% for range in packet.audio.source_ranges %}<p class="caption">Source audio PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.</p>{% endfor %}
-{% if not evidence.withheld %}<div class="multimedia-mouth-inputs">{% for input in packet.measured_inputs %}<figure><img src="{{ input.image.uri }}" alt="{{ input.image.label }}"><figcaption>{{ input.image.label }}<br>PTS {{ input.frame_pts }}</figcaption></figure>{% endfor %}</div>{% endif %}
+{% if not evidence.withheld and not concise_av %}<div class="multimedia-mouth-inputs">{% for input in packet.measured_inputs %}<figure><img src="{{ input.image.uri }}" alt="{{ input.image.label }}"><figcaption>{{ input.image.label }}<br>PTS {{ input.frame_pts }}</figcaption></figure>{% endfor %}</div>{% endif %}
 <p class="caption">Gray mouth crops are the actual 32 by 24 inputs after grayscale and area resizing; they are not an edit mask. Correlation can be affected by ordinary timing offsets, occlusion, facial hair or unrelated speech.</p>
 {% endif %}
 {% elif packet.kind == 'sound' %}
@@ -516,7 +519,7 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% endif %}
 {% if packet.measurements %}<dl class="evidence-measurements">{% for measure in packet.measurements %}<div><dt>{{ measure.label }}</dt><dd>{{ measure.value }}{% if measure.get('unit') %} {{ measure.unit }}{% endif %}</dd></div>{% endfor %}</dl>{% endif %}
 {% if packet.limitations %}<p class="evidence-limits"><strong>Limits:</strong> {{ packet.limitations | join(' ') }}</p>{% endif %}
-{% if packet.assets %}<details open class="multimedia-asset-list"><summary>Frozen evidence assets</summary>{% for asset in packet.assets %}<p class="caption evidence-hash">{{ asset.role | replace('_', ' ') }} ({{ asset.media_type }}) - SHA-256 <span class="mono">{{ asset.sha256 }}</span></p>{% endfor %}</details>{% endif %}
+{% if packet.assets and not concise_av %}<details open class="multimedia-asset-list"><summary>Frozen evidence assets</summary>{% for asset in packet.assets %}<p class="caption evidence-hash">{{ asset.role | replace('_', ' ') }} ({{ asset.media_type }}) - SHA-256 <span class="mono">{{ asset.sha256 }}</span></p>{% endfor %}</details>{% endif %}
 </article>
 {% else %}
 {% set stereo_repeats = namespace(found=false) %}

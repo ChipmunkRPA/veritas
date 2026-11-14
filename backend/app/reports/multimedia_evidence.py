@@ -1146,6 +1146,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 row["windows"].append(context_window)
         if packet_kind == "av":
             row["images"].extend(plate(role, packet["artifacts"][role]) for role in ("lag_profile", "alignment", "waveform"))
+            row["comparison_context"] = copy.deepcopy(packet.get("comparison_context"))
+            row["comparison_windows"] = [{"id": other["id"], "role": context["role"]} for other in part["packets"]
+                                         if (context := other.get("comparison_context")) and context["reference_packet_id"] == packet["id"]]
             row["measurement"] = copy.deepcopy(packet["measurement"])
             row["audio"] = {"interval": copy.deepcopy(packet["interval"]), "context_interval": copy.deepcopy(packet["context_interval"]),
                             "sample_rate": part["source"]["sample_rate"],

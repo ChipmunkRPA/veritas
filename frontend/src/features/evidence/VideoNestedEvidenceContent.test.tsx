@@ -179,6 +179,20 @@ describe('video v3 nested source-bound evidence', () => {
     expect(screen.getByText(/This window cannot support a reliable timing estimate/)).toBeTruthy()
   })
 
+  it('links the flagged window to measured before and after comparisons', () => {
+    const set = fixture()
+    const primary = set.av!.packets[0]
+    const before: VideoAVPacket = { ...primary, id: 'AV02', comparison_context: { role: 'before', reference_packet_id: 'AV01' } }
+    const after: VideoAVPacket = { ...primary, id: 'AV03', comparison_context: { role: 'after', reference_packet_id: 'AV01' } }
+    primary.measurement = { ...primary.measurement, overlaps_offset_step: true }
+    set.av!.packets = [primary, before, after]
+    show(set)
+    const heading = screen.getByRole('link', { name: 'Measured window before this change (AV02)' })
+    expect(heading.getAttribute('href')).toBe('#media-evidence-AV02')
+    expect(screen.getByRole('link', { name: 'Measured window after this change (AV03)' }).getAttribute('href')).toBe('#media-evidence-AV03')
+    expect(within(document.getElementById('media-evidence-AV03')!).getByRole('link', { name: 'AV01' }).getAttribute('href')).toBe('#media-evidence-AV01')
+  })
+
   it('distinguishes missing audio and unsupported alignment from negative findings', () => {
     const set = fixture()
     set.audio = { status: 'absent', reason: 'The source has no audio stream.', source: set.audio!.source, packets: [], limitations: [] }

@@ -19,6 +19,9 @@ from app.detectors.video.decode import decode_frames
 from app.evidence import audio_packets
 from app.evidence.av_binding import (
     AUDIO_CLOCK_BREAKS,
+    AV_CONTEXT_GAP_TICKS,
+    AV_CONTEXT_SELECTION,
+    AV_LEGACY_SELECTION,
     LEGACY_AUDIO_CLOCK_REASON,
     TIMING_WINDOWS,
     InvalidAV,
@@ -34,6 +37,37 @@ from app.storage.artefacts import register_artefact
 
 MAX_PACKETS = 4
 CREATOR = 'video-av-evidence/1'
+
+
+def _flagged(window):
+    return window['overlaps_offset_step'] or window['overlaps_correlation_collapse']
+
+
+def _select_windows(candidates, policy):
+    ordered = sorted(candidates, key=lambda item: (not _flagged(item['window']), item['window']['start_tick'],
+                                                  item['track']['track_id']))
+    selected = []
+    if policy == AV_CONTEXT_SELECTION and ordered and _flagged(ordered[0]['window']):
+        primary = ordered[0]
+        window = primary['window']
+        selected.append((primary, None))
+        before, after = [], []
+        for item in ordered[1:]:
+            other = item['window']
+            if (_flagged(other) or item['track']['track_id'] != primary['track']['track_id']
+                    or item['raw_output_sha256'] != primary['raw_output_sha256']):
+                continue
+            if 0 <= window['start_tick'] - other['end_tick'] <= AV_CONTEXT_GAP_TICKS:
+                before.append(item)
+            if 0 <= other['start_tick'] - window['end_tick'] <= AV_CONTEXT_GAP_TICKS:
+                after.append(item)
+        if before:
+            selected.append((before[-1], {'role': 'before', 'reference_packet_id': 'AV01'}))
+        if after:
+            selected.append((after[0], {'role': 'after', 'reference_packet_id': 'AV01'}))
+    picked = {id(item) for item, _ in selected}
+    selected.extend((item, None) for item in ordered if id(item) not in picked)
+    return selected[:MAX_PACKETS]
 
 
 def _signals(result, entry, track_id):
@@ -199,23 +233,21 @@ def build_channel(db, analysis, store, result, *, set_id, video_source, table, a
               'frame_anchor_sha256': video_source['frame_anchor_sha256'], 'video_time_base': video_source['time_base'],
               'tick_rate': 25, 'samples_per_tick': 640}
     candidates, unsupported = _sources(record, result, store, source, table, anchors)
-    candidates.sort(key=lambda item: (not (item['window']['overlaps_offset_step'] or item['window']['overlaps_correlation_collapse']),
-                                      item['window']['start_tick'], item['track']['track_id']))
-    selected = candidates[:MAX_PACKETS]
-    decoded,measured_patches = (_decoded_inputs(store.path_for(analysis.sha256),table,selected,anchors)
+    selected = _select_windows(candidates, AV_CONTEXT_SELECTION)
+    decoded,measured_patches = (_decoded_inputs(store.path_for(analysis.sha256),table,[item for item, _ in selected],anchors)
                                if selected else ({},{}))
     channel = {'status': 'ready' if candidates else ('unavailable' if any(r['status']=='unavailable' for r in unsupported) else 'not_assessed'),
                'reason': None if candidates else 'No source-bound correlation windows were recorded; absent evidence does not establish synchronization.',
                'source': source, 'coverage': {'recorded_windows': len(candidates), 'selected_windows': len(selected),
                     'omitted_windows': max(0, len(candidates)-MAX_PACKETS), 'unsupported_checks': unsupported,
-                    'selection': 'flagged windows first, then chronological informational measured examples',
+                    'selection': AV_CONTEXT_SELECTION,
                     **_timing_windows(record, store, source, candidates)},
                'packets': [], 'limitations': ['Audio/video misalignment is not proof of AI generation or a deepfake.',
                    'Constant offsets can be container timing; changing offsets can also reflect dropped frames or clock jitter.',
                    'Mouth shading, facial hair, occlusion and speech from another person can alter correlation.',
                    'The nearest source frame is selected at each 25 Hz tick; repeated frames and timestamp errors are retained.',
                    'A track labels measurements, not a verified person or speaker identity.']}
-    for number, item in enumerate(selected, 1):
+    for number, (item, comparison) in enumerate(selected, 1):
         window, track = item['window'], item['track']
         packet_id, artifacts = f'AV{number:02d}', {}
         def add(role, data, media_type='image/png', *, target=artifacts, **metadata):
@@ -266,7 +298,7 @@ def build_channel(db, analysis, store, result, *, set_id, video_source, table, a
             labels.append(f"Frame {index}, measured tick {row['tick']}")
         sheet=_contact(images,labels)
         add('contact_sheet',_png(sheet),width=sheet.width,height=sheet.height)
-        flagged=window['overlaps_offset_step'] or window['overlaps_correlation_collapse']
+        flagged = _flagged(window)
         competing_lag = av_lag_support.compare(window['lag_profile'], window['offset_ticks'])
         refs=item['signal_refs']
         ids={r['id'] for r in refs}
@@ -289,6 +321,11 @@ def build_channel(db, analysis, store, result, *, set_id, video_source, table, a
             'limitations':['The 31 measured lag candidates are retained; a high correlation does not establish authenticity.',
                            'Selected audio is the unshifted source-time window. Search context includes the additional ±600 ms actually compared.',
                            'Gray mouth patches are the exact measured downsampled input, not an edit mask.']}
+        if comparison:
+            side, reference = comparison['role'], comparison['reference_packet_id']
+            packet.update(comparison_context=comparison, title=f'Measured timing {side} {reference}',
+                          interpretation=(f'This separate measured window is {side} {reference} on the same face track. '
+                                          'It provides a timing comparison for the flagged window.'))
         try:
             data,metadata,description=build_clip(store.path_for(analysis.sha256),table,source_sha256=analysis.sha256,
                 focus_index=inputs[12]['frame_index'],sampled_frame_indices=packet['window']['frame_indices'],timeline_origin_s=video_source['timeline_origin_s'])
@@ -341,13 +378,15 @@ def verify_source_assets(channel, *, video_source, result, store, table, anchors
     if channel['coverage'].get(TIMING_WINDOWS) != _timing_windows(
             record, store, channel['source'], candidates).get(TIMING_WINDOWS):
         raise PacketIntegrityError('Frozen timing coverage differs from the recorded run')
-    candidates.sort(key=lambda item:(not (item['window']['overlaps_offset_step'] or item['window']['overlaps_correlation_collapse']),
-                                     item['window']['start_tick'],item['track']['track_id']))
+    policy = channel['coverage'].get('selection', AV_LEGACY_SELECTION)
+    selected = _select_windows(candidates, policy)
     if (channel['coverage']['recorded_windows']!=len(candidates) or channel['coverage']['omitted_windows']!=max(0,len(candidates)-MAX_PACKETS)
             or len(channel['packets'])!=min(len(candidates),MAX_PACKETS)
             or canonical_hash(channel['coverage']['unsupported_checks'])!=canonical_hash(unsupported)):
         raise PacketIntegrityError('Frozen AV coverage differs from its actual supported runs')
-    for packet,expected in zip(channel['packets'],candidates[:MAX_PACKETS],strict=True):
+    for packet,(expected, context) in zip(channel['packets'],selected,strict=True):
+        if packet.get('comparison_context') != context:
+            raise PacketIntegrityError('Frozen AV comparison window differs from its raw run')
         raw,track=expected['window'],expected['track']
         if packet['source_record']!={'raw_output_sha256':expected['raw_output_sha256'],'unit_ref':raw['unit_ref'],'track_id':track['track_id']}:
             raise PacketIntegrityError('Frozen AV packet selection differs from its raw run')

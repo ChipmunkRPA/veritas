@@ -301,6 +301,7 @@ export interface VideoAVPacket extends PacketBase {
   frames: (VideoEvidenceFrame & { av_tick: number; artifact_refs: VideoEvidenceFrame['artifact_refs'] & { measured_patch: string } })[]
   clip?: VideoEvidencePacket['clip']
   window: { start_tick: number; end_tick: number; frame_indices: number[]; frame_inputs: VideoAVFrameInput[] }
+  comparison_context?: { role: 'before' | 'after'; reference_packet_id: string }
   measurement: { offset_ticks: number; offset_ms: number; peak_correlation: number; low_correlation: boolean
     lag_profile: { offset_ticks: number; correlation: number }[]
     audio_curve: { tick: number; sample_start: number; sample_end: number; rms: number; speech: boolean }[]

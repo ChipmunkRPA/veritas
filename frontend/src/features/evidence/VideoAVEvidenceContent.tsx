@@ -107,10 +107,19 @@ export default function VideoAVEvidenceContent({ set, channel, token, mediaReady
       const measurement = packet.measurement
       const flagged = hasTimingChange(packet)
       const sampleRate = packet.anchor.sample_rate
+      const context = packet.comparison_context
+      const comparisons = channel.packets.filter(item => item.comparison_context?.reference_packet_id === packet.id)
       return <article key={packet.id} id={`media-evidence-${packet.id}`} className={evidenceCard}>
         <h4 className="m-0 text-body font-medium"><span className="font-mono text-accent mr-3">{packet.id}</span>{packet.title}</h4>
         <p className="mt-2 mb-0 text-body">{packet.observation}</p>
-        <p className="mt-2 mb-0 text-small text-text-muted">{flagged ? 'This window overlaps a recorded timing or correlation change.' : 'Informational measured example; no recorded timing-change or correlation-collapse segment overlaps this window.'}</p>
+        {context ? <p className="mt-2 mb-0 text-small text-text-muted">Comparison {context.role}{' '}
+          <a className="text-accent underline" href={`#media-evidence-${context.reference_packet_id}`}>{context.reference_packet_id}</a>{' '}
+          on the same face track.</p> : <p className="mt-2 mb-0 text-small text-text-muted">{flagged ? 'This window overlaps a recorded timing or correlation change.' : 'Informational measured example outside the flagged timing ranges.'}</p>}
+        {comparisons.length > 0 && <ul className="mt-2 mb-0 space-y-1 pl-4 text-small">
+          {comparisons.map(item => <li key={item.id}>
+            <a className="text-accent underline" href={`#media-evidence-${item.id}`}>Measured window {item.comparison_context?.role} this change ({item.id})</a>
+          </li>)}
+        </ul>}
         <SourceInterval packet={packet} />
         <EvidenceMeasurements values={packet.measurements} />
         <p className="mt-2 mb-0 text-small text-text-muted">The selected lag is the best match among {measurement.lag_profile.length} tested shifts. Positive means the audio is later than the picture. The correlation does not estimate the probability of manipulation.</p>

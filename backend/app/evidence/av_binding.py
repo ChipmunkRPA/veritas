@@ -14,6 +14,9 @@ from app.evidence.mp4 import validate_clip_binding
 LEGACY_AUDIO_CLOCK_REASON = 'Audio timestamps contain gaps; audio/video correlation does not support this timeline.'
 AUDIO_CLOCK_BREAKS = 'audio_clock_breaks'
 AV_CLOCK_DISPLAY_LIMIT = 8
+AV_LEGACY_SELECTION = 'flagged windows first, then chronological informational measured examples'
+AV_CONTEXT_SELECTION = 'first flagged window with nearby measured context before and after, then other measured windows'
+AV_CONTEXT_GAP_TICKS = 25
 TIMING_WINDOWS = 'timing_windows'
 TIMING_COMMITMENT = 'av_timing_windows_sha256'
 TIMING_REASONS = {
@@ -174,6 +177,10 @@ def _validate(channel: dict, video: dict) -> None:
         require(all(packet['interval']['start_sample'] in measured_starts for packet in channel['packets']
                     if packet['source_record']['raw_output_sha256'] == timing['raw_output_sha256']),
                 'A published AV packet differs from the timing coverage')
+    selection = channel['coverage'].get('selection', AV_LEGACY_SELECTION)
+    require(selection in {AV_CONTEXT_SELECTION, AV_LEGACY_SELECTION}, 'Unknown AV packet selection policy')
+    roles = set()
+    primary = channel['packets'][0] if channel['packets'] else None
     ids = set()
     for packet in channel['packets']:
         require(packet['id'] not in ids and packet['id'].startswith('AV'), 'AV packet identities are invalid')
@@ -240,6 +247,22 @@ def _validate(channel: dict, video: dict) -> None:
                     'AV displayed frame playback origin differs from the original video')
             require(frame['context_region'] == recorded['mouth_region'], 'Displayed AV crop differs from its actual input region')
         require(sha(packet['source_record']['raw_output_sha256']), 'AV packet has no immutable run reference')
+        if 'comparison_context' in packet:
+            context = packet['comparison_context']
+            require(selection == AV_CONTEXT_SELECTION and primary and packet is not primary
+                    and isinstance(context, dict) and set(context) == {'role', 'reference_packet_id'}
+                    and context['reference_packet_id'] == primary['id'] == 'AV01'
+                    and context['role'] in {'before', 'after'} and context['role'] not in roles,
+                    'AV comparison window has an invalid role or reference')
+            first = primary['measurement']
+            require((first['overlaps_offset_step'] or first['overlaps_correlation_collapse'])
+                    and not (measure['overlaps_offset_step'] or measure['overlaps_correlation_collapse'])
+                    and all(packet['source_record'][key] == primary['source_record'][key] for key in ('raw_output_sha256', 'track_id')),
+                    'AV comparison window must use the same face track and run as a flagged window')
+            gap = (primary['window']['start_tick'] - end if context['role'] == 'before'
+                   else start - primary['window']['end_tick'])
+            require(0 <= gap <= AV_CONTEXT_GAP_TICKS, 'AV comparison window overlaps its reference or is too far away')
+            roles.add(context['role'])
         validate_clip_binding(packet, video)
     require(channel['coverage']['selected_windows'] == len(channel['packets']) and channel['coverage']['recorded_windows'] >= len(channel['packets']), 'AV coverage differs from its selected packets')
     require((channel['status'] == 'ready') == bool(channel['coverage']['recorded_windows']), 'AV availability differs from recorded measurements')

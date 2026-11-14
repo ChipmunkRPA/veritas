@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Temporary lag within a continuous shot](video-lip-offset-path-2026-11-14.md)
+  measured five of 20 held local timing shifts and located none. It added
+  no alerts on 100 ordinary controls and stays offline. The app and PDF
+  now link nearby measured windows before and after a flag on the same
+  face track when that evidence exists.
+
 - [JPEG compression-history regions](image-jpeg-history-evidence-2026-11-14.md)
   now display only the connected blocks selected by the aligned JPEG check.
   In the staged pre-save workflow the existing check located 34/36 edits at

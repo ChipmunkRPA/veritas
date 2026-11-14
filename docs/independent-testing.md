@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [single-track timing replay](video-lip-offset-path-2026-11-14.md#replay)
+compares 20 local shifts with 100 held ordinary views, including rendered
+short camera-cut controls and dubbed sound. The report regression verifies
+the measured pictures and sound around a flagged timing window.
+
 The [JPEG compression-history replay](image-jpeg-history-evidence-2026-11-14.md#replay)
 recreates 768 deliveries from 26 attributed photographs. It separately
 reports direct exports and edits made after an earlier JPEG save, including

@@ -9,6 +9,7 @@ from copy import deepcopy
 from types import SimpleNamespace
 
 import numpy as np
+import pymupdf
 import pytest
 from PIL import Image
 from sqlalchemy import create_engine
@@ -23,7 +24,7 @@ from app.detectors.video.adapters.lipsync_xcorr import LandmarkXcorrDetector
 from app.detectors.video.av_evidence import capture_correlation
 from app.detectors.video.decode import probe_frames
 from app.detectors.video.frame_store import FrameStore
-from app.evidence import video_audio, video_av
+from app.evidence import video_audio, video_av, video_packets
 from app.evidence.av_binding import (
     LEGACY_AUDIO_CLOCK_REASON,
     InvalidAV,
@@ -32,26 +33,28 @@ from app.evidence.av_binding import (
     validate_av_channel,
 )
 from app.evidence.image_packets import PacketIntegrityError
-from app.storage.db import Analysis, Base
+from app.reports import engine, multimedia_evidence, signing
+from app.reports.specimens import specimen
+from app.storage.artefacts import register_artefact
+from app.storage.db import Analysis, AnalysisStage, Base
 from app.storage.objects import ObjectStore
 
 
-@pytest.fixture(scope='module')
-def av_source(tmp_path_factory):
-    path = tmp_path_factory.mktemp('av-source')
+def _make_av_source(path, frame_count=100):
     landmarks = [[30,22],[66,22],[48,34],[35,42],[61,42]]
     face = {'bbox': {'x':12,'y':8,'w':72,'h':52},'landmarks':landmarks}
     values = []
     rng=np.random.default_rng(31)
-    for index,level in enumerate(rng.integers(10,115,100)):
+    for index,level in enumerate(rng.integers(10,115,frame_count)):
         rgb=np.full((64,96,3),160,dtype=np.uint8)
         rgb[33:51,35:61]=int(level)
         Image.fromarray(rgb).save(path/f'f{index:03}.png')
         values.append(xcorr.aperture(lipsync.mouth_patch(rgb,face)))
     # Source audio starts400ms after source video. Its envelope is a controlled
     # +200ms copy of the mouth signal, so raw lag accounting is measurable.
-    levels=np.asarray([.15+.6*values[max(0,10+tick-5)] for tick in range(90)])
-    time=np.arange(90*640)/16000
+    ticks = frame_count - 10
+    levels=np.asarray([.15+.6*values[max(0,10+tick-5)] for tick in range(ticks)])
+    time=np.arange(ticks*640)/16000
     pcm=(np.repeat(levels,640)*np.sin(2*np.pi*400*time)).astype(np.float32)
     (path/'audio.wav').write_bytes(wav_bytes(pcm))
     source=path/'source.mkv'
@@ -64,8 +67,13 @@ def av_source(tmp_path_factory):
     return source,table,decoded,face
 
 
+@pytest.fixture(scope='module')
+def av_source(tmp_path_factory):
+    return _make_av_source(tmp_path_factory.mktemp('av-source'))
+
+
 @pytest.fixture
-def av_fixture(tmp_path,av_source):
+def av_fixture(tmp_path,av_source, window_indices=(2, 3, 4)):
     path,table,decoded,face=av_source
     engine=create_engine('sqlite://');Base.metadata.create_all(engine);store=ObjectStore(tmp_path/'objects')
     with Session(engine) as db:
@@ -80,12 +88,13 @@ def av_fixture(tmp_path,av_source):
         by_frame={i:{**face,'frame_index':i,'pts':table.pts[i]} for i in range(len(table))}
         inputs=AVInputs(table,({'track_id':'track:0'},),{'track:0':list(by_frame.values())},audio,frames,decoded.mapping)
         grid=lipsync.tick_grid(table.times(),sampling.duration_s(table),len(decoded.pcm),audio_start_s=source_audio_origin(inputs))
-        ticks=range(25,75);pixels=frames.get_many({grid.frames[t] for t in ticks})
+        windows=[lipsync.Window('track:0',j,1.0,52,12.5) for j in window_indices]
+        ticks=sorted({tick for window in windows for tick in window.ticks})
+        pixels=frames.get_many({grid.frames[t] for t in ticks})
         patches={'track:0':{t:lipsync.mouth_patch(pixels[grid.frames[t]],by_frame[grid.frames[t]]) for t in ticks}}
         aperture={'track:0':{t:xcorr.aperture(p) for t,p in patches['track:0'].items()}}
         level=np.sqrt(np.mean(np.asarray(decoded.pcm,np.float64).reshape(-1,640)**2,axis=1))
-        speech=lipsync.Speech(20*np.log10(np.maximum(level,1e-5)),level,np.zeros(90),np.ones(90,dtype=bool),-50)
-        windows=[lipsync.Window('track:0',j,1.0,52,12.5) for j in (2,3,4)]
+        speech=lipsync.Speech(20*np.log10(np.maximum(level,1e-5)),level,np.zeros(len(level)),np.ones(len(level),dtype=bool),-50)
         sync=lipsync.track_sync([xcorr.window_sync(w,aperture['track:0'],level) for w in windows],xcorr.SETTINGS)
         proof=capture_correlation(inputs,grid,speech,{'track:0':sync},patches,aperture,{'track:0':by_frame},{'track:0':.9})
         units=[{'unit_ref':f'track:0@window={w.window.index}','raw':w.confidence,'raw_kind':'score',
@@ -190,6 +199,83 @@ def test_exact_voice_and_measured_av_inputs_share_parent_authority(av_fixture):
     # joins remain compatible; actual model identities are still opaque.
     assert av['packets'][0]['signal_refs'][0]['id']==alias_signal('vid.lipsync.landmark_xcorr:track:0')
     assert 'gustking' not in json.dumps(audio)
+
+
+def test_flagged_av_window_shares_nonoverlapping_source_context(tmp_path, monkeypatch):
+    directory = tmp_path / 'long-source'
+    directory.mkdir()
+    fixture = av_fixture.__wrapped__(tmp_path, _make_av_source(directory, 155), tuple(range(2, 9)))
+    try:
+        f = next(fixture)
+        # Commit a controlled selection on real measured inputs. This test
+        # exercises evidence ordering independent of detector accuracy.
+        raw = deepcopy(f.raw)
+        measured = raw['details']['av_input']['tracks'][0]['windows']
+        for window in measured:
+            window['overlaps_offset_step'] = window['window_index'] == 4
+            window['overlaps_correlation_collapse'] = False
+        sha = f.store.put_bytes(canonical_json(raw)).sha256
+        sample = f.result['manifest']['sampling']
+        sample['video_audio_evidence']['av_checks'][0]['raw_output_sha256'] = sha
+        sample['video_audio_evidence']['voice_checks'] = []
+        f.result['signals'] = [s for s in f.result['signals'] if s['family'] == 'av-sync']
+        sample.update(frame_anchor_version=video_packets.ANCHOR_VERSION, frame_table_sha256=f.source['frame_table_sha256'],
+                      frame_anchor_sha256=f.source['frame_anchor_sha256'], timeline_origin_s=f.source['timeline_origin_s'])
+        probe = {'frame_table': f.table.to_json(), 'info': {'timeline_origin_s': f.source['timeline_origin_s']}}
+        render = {'frame_anchor_version': video_packets.ANCHOR_VERSION, 'frame_anchors': list(f.anchors.values())}
+        for stage, row in (('probe', probe), ('render', render)):
+            artifact = register_artefact(f.db, f.store, canonical_json(row), media_type='application/json',
+                                         role='stage_output', created_by=stage, analysis_id=f.analysis.id)
+            f.db.add(AnalysisStage(analysis_id=f.analysis.id, stage=stage, status='done', output_artefact_id=artifact.id))
+        f.db.flush()
+        f.result['exhibits'] = []
+        f.analysis.result_hash = canonical_hash(f.result)
+        packet_set = video_packets.build_packet_set(f.db, f.analysis, f.store, f.result)
+        av = json.loads(canonical_json(packet_set))['av']
+        primary, before, after, other = av['packets']
+        assert [p['window']['start_tick'] for p in (primary, before, after, other)] == [50, 25, 75, 37]
+        assert primary['measurement']['overlaps_offset_step'] and 'comparison_context' not in other
+        for packet, side in ((before, 'before'), (after, 'after')):
+            assert packet['comparison_context'] == {'role': side, 'reference_packet_id': primary['id']}
+            assert packet['title'] == f"Measured timing {side} AV01"
+            assert packet['anchor']['source_timestamp_ranges'][0]['source_start_pts'] == 86400 + packet['window']['start_tick'] * 640
+            assert len(packet['frames']) == 3 and 'selected_clip' in packet['artifacts']
+            assert len(packet['window']['frame_inputs']) == 25
+        assets = {a['sha256']: f.store.read_bytes(a['sha256']) for p in av['packets'] for a in p['artifacts'].values()}
+        video_av.verify_source_assets(av, video_source=f.source, result=f.result, store=f.store,
+                                      table=f.table, anchors=f.anchors, assets=assets)
+        altered = deepcopy(av)
+        altered['packets'][1]['comparison_context']['role'] = 'after'
+        with pytest.raises(InvalidAV, match='overlaps its reference'):
+            validate_av_channel(altered, f.source)
+
+        report = specimen('video', 'standard')
+        result = deepcopy(report.result)
+        result['input']['sha256'] = f.analysis.sha256
+        result['manifest']['sampling'] = sample
+        result['signals'].extend({**result['signals'][0], **signal, 'name': 'Measured mouth and audio timing'}
+                                 for signal in f.result['signals'])
+        archived = {**packet_set, 'analysis_id': report.analysis.id, 'revision': report.analysis.revision,
+                    'original_result_hash': canonical_hash(result)}
+        archived['sha256'] = video_packets.packet_hash(archived)
+        report = report.model_copy(update={'result': result, 'evidence': archived,
+                                           'media': report.media.model_copy(update={'sha256': f.analysis.sha256})})
+        monkeypatch.setattr(multimedia_evidence, 'default_store', lambda: f.store)
+        pdf = engine.render_pdf(report).pdf
+        text = ' '.join(engine.pdf_text(pdf).split())
+        assert 'Measured window before the flagged window AV02.' in text
+        assert 'Measured window after the flagged window AV03.' in text
+        assert text.count('Three source frames and crops represent the 25 measured ticks.') == 3
+        (tmp_path / 'av-context-standard.pdf').write_bytes(pdf)
+        with pymupdf.open(stream=pdf, filetype='pdf') as pages:
+            expected = {f'multimedia-evidence-AV{i:02d}' for i in (1, 2, 3)}
+            assert expected <= pages.resolve_names().keys()
+            destinations = {link.get('nameddest') for page in pages for link in page.get_links()}
+            assert expected <= destinations
+        key = signing.instance_key(tmp_path / 'fixture-key.pem')
+        assert signing.verify(key.public, pdf, key.sign(pdf))
+    finally:
+        fixture.close()
 
 
 @pytest.mark.parametrize('mutation',['lag','missing_lag','alternative_lag','tick','source_pts','frame','pcm','sample_interval','patch','clip'])

@@ -60,6 +60,18 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [PNG padding transfer across three editor families](image-edge-context-new-sources-2026-11-14.md)
+  compared 156 deliveries from 26 photo groups. Requiring a padding repeat
+  alongside the local flip check reduced ordinary highlights from 50 to 45
+  of 104, but lost two of six useful locations and added none. The local app
+  retains the existing flip check.
+
+- [Earlier-copy lossless WebP comparison](image-reference-webp-2026-11-14.md)
+  locates exact source-pixel differences on 44 of 52 generated-edit pairs.
+  All 26 unchanged pairs matched and all 26 translated pairs stayed
+  unassessed. It also found 22 of 26 ordinary tone edits. The comparison
+  shows the source crops and adds zero AI-confidence weight.
+
 - [Image regions supported under two padding treatments](image-edge-context-transfer-2026-11-14.md)
   improved useful locations from 45 to 46 of 59 PNG edits and reduced
   ordinary highlights from 34 to 26 of 177. The same support rule added no

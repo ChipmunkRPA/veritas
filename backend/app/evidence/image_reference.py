@@ -18,6 +18,7 @@ from app.detectors.image import (
     reference_crop_resize,
     reference_exact_jpeg,
     reference_jpeg_detail_loss,
+    reference_lossless_webp,
     reference_png_exact_resize,
     reference_png_opacity,
     reference_png_orientation,
@@ -158,7 +159,8 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
         if max(image.width * image.height for image in (original, questioned)) > reference_compare.MAX_PIXELS:
             raise ValueError("Reference comparison supports images up to 16 megapixels")
         schema = None
-        opacity = _opacity_pair(original, questioned, before, after) if allow_png_opacity else None
+        webp = "WEBP" in {original.format, questioned.format}
+        opacity = _opacity_pair(original, questioned, before, after) if allow_png_opacity and not webp else None
         if opacity is not None:
             result, mask, earlier_preview, submitted_preview = opacity
             schema = reference_png_opacity.SCHEMA
@@ -166,7 +168,15 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                                     else (_oriented_rgb(original), _oriented_rgb(questioned)))
         else:
             reference, submitted = _oriented_rgb(original), _oriented_rgb(questioned)
-        if opacity is None and (allow_integer_alignment or allow_proportional_resize or allow_oriented_crop
+        if webp:
+            schema = reference_lossless_webp.SCHEMA
+            result = {"status": reference_lossless_webp.UNASSESSED, "regions": []}
+            mask = None
+            if (reference_lossless_webp.supported(original, before, png=True)
+                    and reference_lossless_webp.supported(questioned, after, png=True)):
+                result, mask = reference_lossless_webp.compare(reference, submitted)
+            result["affects_overall_confidence"] = False
+        elif opacity is None and (allow_integer_alignment or allow_proportional_resize or allow_oriented_crop
                                 or allow_oriented_resize or allow_embedded_photo
                 ) and not np.array_equal(reference, submitted):
             result, mask = (reference_png_orientation.compare(reference, submitted, questioned)
@@ -201,23 +211,23 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                     result, mask, schema = embedded_photo, selection, reference_png_screenshot.SCHEMA
         elif opacity is None:
             result, mask = reference_compare.compare_across_deliveries(reference, submitted, questioned)
-        if allow_exact_jpeg_identity and result["status"] == "integer_alignment_unresolved":
+        if not webp and allow_exact_jpeg_identity and result["status"] == "integer_alignment_unresolved":
             exact, selection = reference_exact_jpeg.compare(original, questioned, before, after)
             if exact["status"] == "comparable":
                 result, mask, schema = exact, selection, reference_exact_jpeg.SCHEMA
-        if allow_shifted_jpeg and result["status"] != "comparable":
+        if not webp and allow_shifted_jpeg and result["status"] != "comparable":
             shifted, selection = reference_shifted_jpeg.compare(original, questioned, before, after, result)
             if shifted is not None:
                 result, mask, schema = shifted, selection, reference_shifted_jpeg.SCHEMA
-        if allow_structure_jpeg and result["status"] != "comparable":
+        if not webp and allow_structure_jpeg and result["status"] != "comparable":
             structured, selection = reference_structure_jpeg.compare(original, questioned, before, after)
             if structured is not None:
                 result, mask, schema = structured, selection, reference_structure_jpeg.SCHEMA
-        if allow_same_jpeg and result["status"] != "comparable":
+        if not webp and allow_same_jpeg and result["status"] != "comparable":
             exact, selection = reference_same_jpeg.compare(original, questioned, before, after)
             if exact is not None:
                 result, mask, schema = exact, selection, reference_same_jpeg.SCHEMA
-        if allow_jpeg_detail_loss and not result["regions"]:
+        if not webp and allow_jpeg_detail_loss and not result["regions"]:
             detailed, selection = reference_jpeg_detail_loss.compare(original, questioned, before, after)
             if detailed is not None:
                 result, mask, schema = detailed, selection, reference_jpeg_detail_loss.SCHEMA
@@ -232,6 +242,8 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
     aligned = "alignment" in result
     interpretation = {reference_structure_jpeg.SCHEMA: reference_structure_jpeg.INTERPRETATION,
                       reference_same_jpeg.SCHEMA: reference_same_jpeg.INTERPRETATION,
+                      reference_lossless_webp.SCHEMA: (reference_lossless_webp.INTERPRETATION
+                                                       if result["status"] == "comparable" else reference_lossless_webp.LIMITATION),
                       reference_png_opacity.SCHEMA: (reference_png_opacity.INTERPRETATION if result["status"] == "comparable"
                                                     else reference_png_opacity.UNASSESSED_INTERPRETATION),
                       **dict.fromkeys(reference_jpeg_detail_loss.SCHEMAS, reference_jpeg_detail_loss.INTERPRETATION)}

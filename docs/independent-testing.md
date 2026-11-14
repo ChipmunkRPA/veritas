@@ -13,6 +13,16 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [three-editor PNG replay](image-edge-context-new-sources-2026-11-14.md#replay)
+recounts 156 edited and ordinary files. It can download the exact public
+publisher inputs afresh and verify every changed-pixel mask before model
+inference. The receipt contains file paths, hashes and region counts.
+
+The [earlier-copy WebP replay](image-reference-webp-2026-11-14.md#replay)
+compares 130 public-source image pairs and distinguishes exact matches,
+ordinary tone changes and unsupported framing. Verify a downloaded
+comparison against the two original files using the same source masks.
+
 The [image padding replay](image-edge-context-transfer-2026-11-14.md#replay)
 compares ordinary flags, misplaced regions and correctly localized edits
 across 308 PNG and JPEG deliveries. The recorded source-pixel counts can be

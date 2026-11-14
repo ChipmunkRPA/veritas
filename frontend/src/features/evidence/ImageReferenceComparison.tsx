@@ -6,7 +6,7 @@ import {
   compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
   IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
-  pngOpacitySchema,
+  pngOpacitySchema, exactWebpSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -27,6 +27,7 @@ const unassessed: Record<string, string> = {
   same_framing_unresolved: 'The copies could not be reliably matched to the same framing after resizing.',
   resize_delivery_unresolved: 'Too few resize comparisons agreed on the image delivery.',
   png_opacity_unassessed: 'The opacity comparison requires two matched 8-bit RGB or RGBA PNGs with the same framing and color profile.',
+  webp_framing_unassessed: 'Exact WebP comparison needs compatible opaque images with matching dimensions and enough exact shared detail.',
 }
 
 function NativeArea({ area }: { area: NativeImageArea }) {
@@ -76,6 +77,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const sameJpegFraming = comparison.schema === exactJpegIdentitySchema ? alignment : undefined
   const detailLoss = isJpegDetailLoss(comparison.schema)
   const opacity = comparison.schema === pngOpacitySchema ? comparison.png_opacity : undefined
+  const exactWebp = comparison.schema === exactWebpSchema ? comparison.exact_webp : undefined
   const sameJpegBlocks = (comparison.schema === sameJpegSchema || detailLoss) ? alignment : undefined
   const shiftedJpeg = comparison.schema === shiftedJpegSchema ? alignment : undefined
   const sameStructureFraming = comparison.schema === structureJpegSchema ? comparison.same_framing_structure : undefined
@@ -84,6 +86,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const resized = comparable && (Boolean(cropped) || comparison.schema === 'chipmunk.image-reference-comparison/3')
   const completeMatch = (exact ?? orientation)?.matched_pixels === submitted.width * submitted.height
     || opacity?.matched_pixels === submitted.width * submitted.height
+    || exactWebp?.changed_pixels === 0
     || (embeddedPhoto && embeddedPhoto.exact_pixels === embeddedPhoto.submitted_bounds.w * embeddedPhoto.submitted_bounds.h)
   const kernels = (orientedResize?.kernels ?? comparison.supported_resize_kernels)?.map(kernel => kernel === 'opencv_area' ? 'area' : kernel).join(', ')
   const maskDescription = delivery ? 'White marks color differences outside the expected delivery range.'
@@ -129,6 +132,11 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     {opacity && <p className="mt-2 mb-0 text-small text-text-muted">
       {opacity.opacity_changed_pixels.toLocaleString('en-US')} pixels changed opacity.
       {' '}{opacity.matched_tiles.length} matching textured areas supported the framing. Crops are shown on white.
+      {' '}Ordinary edits can produce these differences. This check carries no weight in the AI assessment.
+    </p>}
+    {exactWebp && <p className="mt-2 mb-0 text-small text-text-muted">
+      {exactWebp.changed_pixels === 0 ? 'All decoded RGB pixels match.' :
+        `${exactWebp.changed_pixels.toLocaleString('en-US')} decoded pixels differ. ${exactWebp.matched_tiles.length} matching detailed areas supported the framing.`}
       {' '}Ordinary edits can produce these differences. This check carries no weight in the AI assessment.
     </p>}
     {sameJpegFraming && <p className="mt-2 mb-0 text-small text-text-muted">
@@ -276,10 +284,12 @@ function ComparisonForm({ analysisId }: { analysisId: string }) {
     <form onSubmit={event => void compare(event)} className="mt-4 flex flex-wrap items-end gap-3">
       <div className="min-w-0">
         <label htmlFor={fileId} className="mb-1 block text-small font-medium text-text">Earlier copy</label>
-        <input id={fileId} type="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg" aria-describedby={formatId}
+        <input id={fileId} type="file" accept="image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp" aria-describedby={formatId}
           onChange={event => chooseFile(event.currentTarget.files?.[0] ?? null)}
           className="block max-w-full text-small text-text file:mr-2 file:cursor-pointer file:rounded-sm file:border file:border-border file:bg-surface-2 file:px-2 file:py-1 file:text-text" />
-        <p id={formatId} className="mt-1 mb-0 text-caption text-text-muted">PNG or JPEG, up to 4 megapixels.</p>
+        <p id={formatId} className="mt-1 mb-0 text-caption text-text-muted">
+          PNG or JPEG up to 4 megapixels. Opaque lossless WebP from 512 to 1,024 pixels per side.
+        </p>
       </div>
       <Button type="submit" variant="primary" disabled={!file || state.status === 'pending'}>
         {state.status === 'pending' ? 'Comparing…' : state.status === 'error' ? 'Retry comparison' : 'Compare images'}

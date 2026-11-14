@@ -66,6 +66,30 @@ afterEach(() => {
 })
 
 describe('earlier-copy comparison', () => {
+  it('shows exact WebP pixel differences with the source crop and mask', async () => {
+    const result = structuredClone(comparison)
+    const record = result.comparison
+    record.schema = 'chipmunk.image-reference-comparison/18'
+    record.submitted = { ...record.submitted, width: 768, height: 512 }
+    record.reference = { ...record.submitted, sha256: 'b'.repeat(64) }
+    record.affects_overall_confidence = false
+    record.exact_webp = { changed_pixels: 1728, matched_tiles: Array.from({ length: 12 }, (_, index) =>
+      [Math.floor(index / 5), index % 5]), earlier_rgb_sha256: hash, submitted_rgb_sha256: 'd'.repeat(64) }
+    record.mask = artifact('difference-mask.png', 768, 512)
+    delete record.alignment
+    delete record.regions[0].reference_region
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText(/1,728 decoded pixels differ/)).toBeTruthy()
+    expect(screen.getByAltText('Earlier copy crop for region 1')).toBeTruthy()
+    expect(screen.getByAltText('Difference mask in submitted image coordinates')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
+    const [download] = vi.mocked(saveBlob).mock.calls[0]
+    expect(JSON.parse(await blobText(download))).toEqual({ comparison: record, pngs: result.pngs })
+  })
+
   it('shows opacity changes and retains the native mask in the JSON download', async () => {
     const result = structuredClone(comparison)
     const record = result.comparison
@@ -243,8 +267,8 @@ describe('earlier-copy comparison', () => {
     show('analysis/1')
     await choose()
     expect(screen.getByRole('region', { name: heading }).id).toBe('earlier-image-comparison')
-    expect(screen.getByLabelText('Earlier copy').getAttribute('accept')).toBe('image/png,image/jpeg,.png,.jpg,.jpeg')
-    expect(screen.getByText('PNG or JPEG, up to 4 megapixels.')).toBeTruthy()
+    expect(screen.getByLabelText('Earlier copy').getAttribute('accept')).toContain('image/webp')
+    expect(screen.getByText(/Opaque lossless WebP from 512 to 1,024 pixels per side/)).toBeTruthy()
     fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
     await screen.findByText('1 difference region found')
     expect(fetch.mock.calls[0][0]).toBe('/api/v2/analyses/analysis%2F1/image-reference-comparison')

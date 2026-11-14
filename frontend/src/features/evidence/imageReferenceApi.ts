@@ -85,6 +85,7 @@ export interface ImageReferenceRecord {
     background_support: [number, number]
   }
   png_opacity?: { opacity_changed_pixels: number; matched_pixels: number; matched_tiles: [number, number][] }
+  exact_webp?: { changed_pixels: number; matched_tiles: [number, number][]; earlier_rgb_sha256: string; submitted_rgb_sha256: string }
   affects_overall_confidence?: boolean
   additional_regions?: number
 }
@@ -102,6 +103,7 @@ export const sameJpegSchema = 'chipmunk.image-reference-comparison/14'
 export const jpegDetailLossSchema = 'chipmunk.image-reference-comparison/15'
 export const extendedJpegDetailLossSchema = 'chipmunk.image-reference-comparison/16'
 export const pngOpacitySchema = 'chipmunk.image-reference-comparison/17'
+export const exactWebpSchema = 'chipmunk.image-reference-comparison/18'
 export const isJpegDetailLoss = (schema: string) =>
   schema === jpegDetailLossSchema || schema === extendedJpegDetailLossSchema
 export const IMAGE_REFERENCE_SECTION_ID = 'earlier-image-comparison'
@@ -201,6 +203,20 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
     throw new Error('The server returned an incomplete image comparison.')
   }
   const proof = comparison.exact_projection
+  if (comparison.schema === exactWebpSchema && comparison.status === 'comparable') {
+    const webp = comparison.exact_webp
+    const { width, height } = comparison.submitted
+    if (!webp || comparison.affects_overall_confidence !== false || ![width, height].every(
+      side => Number.isSafeInteger(side) && side >= 512 && side <= 1024)
+        || comparison.reference.width !== width || comparison.reference.height !== height
+        || !Number.isSafeInteger(webp.changed_pixels) || webp.changed_pixels < 0 || webp.changed_pixels > .35 * width * height
+        || !Array.isArray(webp.matched_tiles) || (webp.changed_pixels > 0 && webp.matched_tiles.length < 12)
+        || (webp.changed_pixels === 0 && (comparison.regions.length > 0 || comparison.mask))
+        || ![webp.earlier_rgb_sha256, webp.submitted_rgb_sha256].every(digest => /^[a-f0-9]{64}$/.test(digest))
+        || comparison.regions.some(region => !validAreaWithin(region, width, height))) {
+      throw new Error('The server returned an incomplete lossless WebP comparison.')
+    }
+  }
   if (comparison.schema === pngOpacitySchema && comparison.status === 'comparable') {
     const opacity = comparison.png_opacity
     const { width, height } = comparison.submitted

@@ -65,11 +65,16 @@ def _original(aid: str) -> tuple[str, int] | None:
 
 
 def _check_image(path: Path) -> None:
-    with Image.open(path, formats=["PNG", "JPEG"]) as image:
+    with Image.open(path, formats=["PNG", "JPEG", "WEBP"]) as image:
         if image.width * image.height > MAX_PIXELS:
             raise ProblemError(413, "Image dimensions exceed the limit", "Each image must be 4 megapixels or smaller.")
         if getattr(image, "n_frames", 1) != 1:
-            raise ProblemError(422, "Unsupported image", "Comparison requires a single-frame JPEG or PNG image.")
+            raise ProblemError(422, "Unsupported image", "Comparison requires a single-frame JPEG, PNG or lossless WebP image.")
+        if image.format == "WEBP":
+            from app.detectors.image.lossless_webp import lossless_webp_size
+
+            if image.mode != "RGB" or lossless_webp_size(path.read_bytes()) != image.size:
+                raise ProblemError(422, "Unsupported WebP", "Use a simple opaque lossless WebP with each side between 512 and 1,024 pixels.")
 
 
 def _unavailable() -> ProblemError:
@@ -130,6 +135,7 @@ def _comparison_pdf(comparison: dict, assets: dict[str, bytes]) -> str | None:
 def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool, workspace: Path) -> JSONResponse:
     from cv2 import error as OpenCVError
 
+    from app.detectors.image.reference_lossless_webp import UNASSESSED as WEBP_UNASSESSED
     from app.detectors.image.reference_png_opacity import UNASSESSED
     from app.evidence.image_reference import inspect
 
@@ -154,7 +160,7 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
     try:
         _check_image(reference_path)
     except _image_errors:
-        raise ProblemError(422, "Unsupported earlier copy", "Upload a readable, single-frame JPEG or PNG image.") from None
+        raise ProblemError(422, "Unsupported earlier copy", "Upload a readable, single-frame JPEG, PNG or lossless WebP image.") from None
 
     artifacts = workspace / "evidence"
     try:
@@ -166,7 +172,7 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
                              allow_same_jpeg=settings.image_reference_same_jpeg,
                              allow_jpeg_detail_loss=settings.image_reference_jpeg_detail_loss,
                              allow_jpeg_detail_loss_extra_qualities=settings.image_reference_jpeg_detail_loss_extra_qualities)
-        if settings.image_reference_jpeg_png_envelope and comparison["status"] not in {"comparable", UNASSESSED}:
+        if settings.image_reference_jpeg_png_envelope and comparison["status"] not in {"comparable", UNASSESSED, WEBP_UNASSESSED}:
             from app.evidence.image_reference_delivery_envelope import inspect as compare_delivery
 
             delivery_artifacts = workspace / "delivery-evidence"

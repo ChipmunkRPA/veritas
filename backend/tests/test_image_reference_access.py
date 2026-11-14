@@ -21,6 +21,7 @@ from app.api import auth, security, v2_image_reference
 from app.core.config import settings
 from app.detectors.image import (
     reference_exact_jpeg,
+    reference_lossless_webp,
     reference_png_opacity,
     reference_png_orientation,
     reference_same_jpeg,
@@ -129,6 +130,67 @@ def _assert_pdf_assets(pdf, page, assets, payload):
             else:
                 assert pixmap.samples == png.tobytes()
         assert asset["sha256"] in page.get_text()
+
+
+@pytest.mark.parametrize("scenario", ["edited", "webp_earlier", "identical", "wrong_framing", "other_photo", "lossy", "jpeg_earlier"])
+def test_lossless_webp_uses_exact_pixels_and_bound_sources(reference_http, tmp_path, scenario):
+    f = reference_http
+    rng = np.random.default_rng(890)
+    before = cv2.resize(f.reference_pixels, (768, 512))
+    after = before.copy()
+    if scenario in {"edited", "webp_earlier"}:
+        after[155:191, 240:288] ^= 51
+    elif scenario == "wrong_framing":
+        after = np.roll(after, 2, axis=0)
+    elif scenario == "other_photo":
+        after = rng.integers(20, 235, after.shape, dtype=np.uint8)
+    earlier = io.BytesIO()
+    earlier_format = {"jpeg_earlier": "JPEG", "webp_earlier": "WEBP"}.get(scenario, "PNG")
+    Image.fromarray(before).save(earlier, format=earlier_format, lossless=True)
+    later = io.BytesIO()
+    Image.fromarray(after).save(later, format="PNG" if scenario == "webp_earlier" else "WEBP", lossless=scenario != "lossy")
+    stored = f.store.put_bytes(later.getvalue())
+    with Session(f.engine) as db:
+        analysis = db.get(Analysis, "image-a")
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        db.commit()
+    available = f.client.get(_url(), headers=f.viewer)
+    assert available.status_code == 200 and available.json()["available"] == (scenario != "lossy")
+    reply = f.client.post(_url(), files=_upload(earlier.getvalue()), headers=f.viewer, data={"include_pdf": "true"})
+    if scenario == "lossy":
+        assert reply.status_code == 404
+        return
+    assert reply.status_code == 200, reply.text[:300]
+    payload = reply.json()
+    comp = payload["comparison"]
+    assert comp["schema"] == reference_lossless_webp.SCHEMA and not comp["affects_overall_confidence"]
+    if scenario in {"edited", "webp_earlier", "identical"}:
+        changed = 0 if scenario == "identical" else 1728
+        assert comp["status"] == "comparable" and comp["exact_webp"]["changed_pixels"] == changed
+        assert len(comp["regions"]) == bool(changed)
+        if changed:
+            box = comp["regions"][0]
+            assert [box[key] for key in ("x", "y", "w", "h", "selected_pixels")] == [240, 155, 48, 36, changed]
+            with Image.open(io.BytesIO(_asset_bytes(payload, comp["mask"]))) as mask:
+                assert np.array_equal(np.asarray(mask) == 255, np.any(before != after, axis=2))
+            with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as pdf:
+                assert "1,728 decoded pixels differ." in pdf[0].get_text()
+                _assert_pdf_assets(pdf, pdf[1], [box[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")], payload)
+    else:
+        assert comp["status"] == reference_lossless_webp.UNASSESSED and comp["regions"] == []
+        assert not payload["pngs"]
+    reference_path, submitted_path, export = (tmp_path / name for name in ("earlier", "submitted.webp", "comparison.json"))
+    reference_path.write_bytes(earlier.getvalue())
+    submitted_path.write_bytes(later.getvalue())
+    payload.pop("pdf")
+    export.write_text(json.dumps(payload))
+    audited = review_oriented_resize(export, reference_path, submitted_path)
+    assert audited["source_hashes_verified"] == 2
+    if scenario == "edited":
+        comp["exact_webp"]["changed_pixels"] += 1
+        export.write_text(json.dumps(payload))
+        with pytest.raises(ValueError, match="Exact WebP measurements differ"):
+            review_oriented_resize(export, reference_path, submitted_path)
 
 
 def test_rotated_png_keeps_exact_native_pixels_in_both_exports(reference_http, tmp_path):

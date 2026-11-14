@@ -250,6 +250,7 @@ def test_paid_lossless_webp_matches_png_regions(billing, monkeypatch, tmp_path):
 
     for key, value in {"environment": "dev", "device": "cpu", "image_region_mode": "candidate",
                        "image_region_jpeg_review": False, "image_region_flip_review": False,
+                       "image_reference_comparison_enabled": True,
                        "model_memory_budget_mb": "4096", "worker_threads": 1, "job_timeout_s": 600,
                        "run_worker": False, "offline": True, "webhooks_enabled": False}.items():
         monkeypatch.setattr(settings, key, value)
@@ -394,8 +395,11 @@ def test_paid_lossless_webp_matches_png_regions(billing, monkeypatch, tmp_path):
         try:
             wait_for(lambda: server.started, bool, "isolated browser server", 20)
             packet = packets[1][0]
+            before = Path(source_path).with_name("original.png")
+            assert hashlib.sha256(before.read_bytes()).hexdigest() == "2630abb84e94fc3581e7fd95f0f8283f965854045e9d2a87423c9529e0625f55"
             credentials = tmp_path / "browser-input.json"
             credentials.write_text(json.dumps({"analysis_id": aid, "headers": f.headers, "packet_id": packet["id"],
+                                               "earlier_png": str(before), "matching_png": source_path,
                                                **{f"{role}_sha256": packet["artifacts"][role]["sha256"]
                                                   for role in ("context", "crop", "mask")}}))
             credentials.chmod(0o600)
@@ -409,6 +413,7 @@ def test_paid_lossless_webp_matches_png_regions(billing, monkeypatch, tmp_path):
                   "source_rgb_and_model_map_exact": True, "matched_regions": len(packets[1]), "payment_first": True,
                   "simulated_price_minor_usd": 999, "signed_pdf_and_json_snapshot_match": True, "browser_verified": True,
                   "signed_package_crop_replayed": True,
+                  "browser_earlier_copy_verified": True,
                   "regions": [{"source_box": p["region"], "asset_sha256": {r: a["sha256"] for r, a in p["artifacts"].items()}}
                               for p in packets[1]]}
         if proof := os.getenv("CHIPMUNK_REGIONAL_WEBP_FLOW_PROOF"):

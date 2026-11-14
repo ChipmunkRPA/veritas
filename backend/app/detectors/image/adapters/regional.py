@@ -12,6 +12,7 @@ from app.detectors.image import jpeg_bitstream, regional
 from app.detectors.image import localiser as loc
 from app.detectors.image.adapters.common import H2, image_spec, original_bytes
 from app.detectors.image.adapters.localisers import PNG_SIGNATURE, LocaliserDetector
+from app.detectors.image.lossless_webp import lossless_webp_size
 from app.detectors.image.regional_support import readout
 from app.engine.detector import Applicability, InputUnit, RunContext
 from app.evidence.image_eligibility import FLIP_CONSISTENCY, LOSSLESS_WEBP_SCOPE
@@ -27,22 +28,6 @@ def evaluated_jpeg(data: bytes) -> bool:
                 and all(structure.table_bits.get(c.table_id) == 8 for c in structure.components)
                 and structure.ijg_quality == 75 and structure.table(2) == structure.table(1)
                 and (structure.frame == "baseline" or jpeg_bitstream.progressive_frame(data) is not None))
-
-
-def lossless_webp_size(data: bytes) -> tuple[int, int] | None:
-    """Accept the simple still-image RIFF layout with one opaque VP8L chunk."""
-    if (len(data) < 26 or data[:4] != b"RIFF" or data[8:16] != b"WEBPVP8L"
-            or int.from_bytes(data[4:8], "little") != len(data) - 8 or data[20] != 0x2F):
-        return None
-    size = int.from_bytes(data[16:20], "little")
-    padding = size % 2
-    if size < 6 or 20 + size + padding != len(data) or (padding and data[-1] != 0):
-        return None
-    fields = int.from_bytes(data[21:25], "little")
-    width, height = (fields & 0x3FFF) + 1, ((fields >> 14) & 0x3FFF) + 1
-    if fields >> 28 or min(width, height) < 512 or max(width, height) > 1024:
-        return None
-    return width, height
 
 
 def flip_components(measured, aligned):

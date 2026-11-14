@@ -6,6 +6,7 @@ import {
   compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
   IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
+  pngOpacitySchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -25,6 +26,7 @@ const unassessed: Record<string, string> = {
   unsupported_resize_geometry: 'The copies are outside the supported size and proportion limits for a resize comparison.',
   same_framing_unresolved: 'The copies could not be reliably matched to the same framing after resizing.',
   resize_delivery_unresolved: 'Too few resize comparisons agreed on the image delivery.',
+  png_opacity_unassessed: 'The opacity comparison requires two matched 8-bit RGB or RGBA PNGs with the same framing and color profile.',
 }
 
 function NativeArea({ area }: { area: NativeImageArea }) {
@@ -73,6 +75,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const delivery = comparison.schema === jpegPngEnvelopeSchema
   const sameJpegFraming = comparison.schema === exactJpegIdentitySchema ? alignment : undefined
   const detailLoss = isJpegDetailLoss(comparison.schema)
+  const opacity = comparison.schema === pngOpacitySchema ? comparison.png_opacity : undefined
   const sameJpegBlocks = (comparison.schema === sameJpegSchema || detailLoss) ? alignment : undefined
   const shiftedJpeg = comparison.schema === shiftedJpegSchema ? alignment : undefined
   const sameStructureFraming = comparison.schema === structureJpegSchema ? comparison.same_framing_structure : undefined
@@ -80,6 +83,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     ? comparison.reference_crop_bounds : undefined
   const resized = comparable && (Boolean(cropped) || comparison.schema === 'chipmunk.image-reference-comparison/3')
   const completeMatch = (exact ?? orientation)?.matched_pixels === submitted.width * submitted.height
+    || opacity?.matched_pixels === submitted.width * submitted.height
     || (embeddedPhoto && embeddedPhoto.exact_pixels === embeddedPhoto.submitted_bounds.w * embeddedPhoto.submitted_bounds.h)
   const kernels = (orientedResize?.kernels ?? comparison.supported_resize_kernels)?.map(kernel => kernel === 'opencv_area' ? 'area' : kernel).join(', ')
   const maskDescription = delivery ? 'White marks color differences outside the expected delivery range.'
@@ -121,6 +125,11 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     {delivery && <p className="mt-2 mb-0 text-caption text-text-muted">
       We compared color differences across plausible resize, tone and compression variations.
       Ordinary processing can still cause highlights. This comparison does not assess AI authorship.
+    </p>}
+    {opacity && <p className="mt-2 mb-0 text-small text-text-muted">
+      {opacity.opacity_changed_pixels.toLocaleString('en-US')} pixels changed opacity.
+      {' '}{opacity.matched_tiles.length} matching textured areas supported the framing. Crops are shown on white.
+      {' '}Ordinary edits can produce these differences. This check carries no weight in the AI assessment.
     </p>}
     {sameJpegFraming && <p className="mt-2 mb-0 text-small text-text-muted">
       Exact JPEG block matches support the same framing. After encoding the earlier PNG with the submitted JPEG settings,

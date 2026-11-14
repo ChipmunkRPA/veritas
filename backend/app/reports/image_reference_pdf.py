@@ -7,6 +7,7 @@ import pymupdf
 from app.detectors.image import (
     reference_exact_jpeg,
     reference_jpeg_detail_loss,
+    reference_png_opacity,
     reference_png_orientation,
     reference_png_oriented_crop,
     reference_png_oriented_resize,
@@ -29,6 +30,7 @@ RESIZE_UNASSESSED = {
     "unsupported_resize_geometry": "Comparison unassessed. Image dimensions are outside the proportional resize limits.",
     "same_framing_unresolved": "Comparison unassessed. Matching framing could not be established after resizing.",
     "resize_delivery_unresolved": "Comparison unassessed. Too few resize comparisons agreed on the image delivery.",
+    reference_png_opacity.UNASSESSED: "Comparison unassessed. Shared PNG framing or color settings could not be established.",
 }
 
 
@@ -78,6 +80,12 @@ def _summary(document, comparison, assets):
         _text(page, MARGIN, y, f"{label} | {source['width']} x {source['height']} px", font="hebo")
         _text(page, MARGIN, y + 16, f"SHA-256 {source['sha256']}", size=9, font="cour", color=MUTED)
     schema = comparison["schema"]
+    if proof := comparison.get("png_opacity"):
+        _text(page, MARGIN, 302, f"{proof['opacity_changed_pixels']:,} pixels changed opacity.", size=10, font="hebo")
+        _text(page, MARGIN, 318, f"{len(proof['matched_tiles'])} matching textured areas supported the framing.",
+              size=10, color=MUTED)
+        _text(page, MARGIN, 334, "Crops are shown on white. This comparison carries no weight in AI assessment.",
+              size=10, color=MUTED)
     if schema == reference_exact_jpeg.SCHEMA:
         proof = comparison["alignment"]
         _text(page, MARGIN, 302, "Same framing supported by exact JPEG block matches.", size=10, font="hebo")

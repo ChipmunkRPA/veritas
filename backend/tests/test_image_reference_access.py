@@ -21,6 +21,7 @@ from app.api import auth, security, v2_image_reference
 from app.core.config import settings
 from app.detectors.image import (
     reference_exact_jpeg,
+    reference_png_opacity,
     reference_png_orientation,
     reference_same_jpeg,
     reference_shifted_jpeg,
@@ -388,6 +389,68 @@ def test_comparison_binds_hashes_and_native_crops_without_persistence(reference_
         np.testing.assert_array_equal(np.asarray(overlay.getchannel("A")) == 144, np.asarray(mask)[y:y+h, x:x+w] == 255)
         assert hashlib.sha256(_asset_bytes(payload, region["submitted_overlay"])).hexdigest() == region["submitted_overlay"]["sha256"]
     assert snapshot() == before
+
+
+def test_png_opacity_change_survives_browser_pdf_and_source_replay(reference_http, tmp_path):
+    f = reference_http
+    earlier_pixels = f.reference_pixels
+    submitted = np.dstack((earlier_pixels, np.full(earlier_pixels.shape[:2], 255, dtype=np.uint8)))
+    submitted[71:92, 104:127, 3] = 96
+    before, after = _png(earlier_pixels), _png(submitted)
+    stored = f.store.put_bytes(after)
+    with Session(f.engine) as db:
+        analysis = db.get(Analysis, "image-a")
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        db.commit()
+    response = f.client.post(_url(), headers=f.viewer, files=_upload(before), data={"include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    payload = response.json()
+    comparison = payload["comparison"]
+    assert comparison["schema"] == reference_png_opacity.SCHEMA
+    assert comparison["affects_overall_confidence"] is False
+    pixels = 21 * 23
+    assert comparison["png_opacity"]["opacity_changed_pixels"] == pixels
+    region, = comparison["regions"]
+    assert [region[key] for key in ("x", "y", "w", "h", "selected_pixels")] == [104, 71, 23, 21, pixels]
+    with Image.open(io.BytesIO(_asset_bytes(payload, comparison["mask"]))) as mask:
+        assert mask.getbbox() == (104, 71, 127, 92) and mask.histogram()[255] == pixels
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as report:
+        assert "483 pixels changed opacity" in report[0].get_text()
+        _assert_pdf_assets(report, report[1], [region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")],
+                           payload)
+    earlier_file, submitted_file, export_file = (tmp_path / name for name in ("earlier.png", "submitted.png", "comparison.json"))
+    earlier_file.write_bytes(before)
+    submitted_file.write_bytes(after)
+    del payload["pdf"]
+    export_file.write_text(json.dumps(payload))
+    assert review(export_file, earlier_file, submitted_file)["mask_pixels_counted"] == pixels
+    comparison["png_opacity"]["opacity_changed_pixels"] -= 1
+    export_file.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="opacity measurements differ"):
+        review(export_file, earlier_file, submitted_file)
+
+
+def test_png_opacity_excludes_hidden_rgb_and_refuses_whole_image_change(reference_http):
+    f = reference_http
+    earlier = np.dstack((f.reference_pixels, np.full(f.reference_pixels.shape[:2], 255, dtype=np.uint8)))
+    earlier[71:92, 104:127, 3] = 0
+
+    def response(pixels):
+        stored = f.store.put_bytes(_png(pixels))
+        with Session(f.engine) as db:
+            analysis = db.get(Analysis, "image-a")
+            analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+            db.commit()
+        return f.client.post(_url(), headers=f.viewer, files=_upload(_png(earlier))).json()["comparison"]
+
+    hidden = earlier.copy()
+    hidden[71:92, 104:127, :3] = 255
+    unchanged = response(hidden)
+    assert unchanged["status"] == "comparable" and unchanged["regions"] == []
+    assert unchanged["png_opacity"]["matched_pixels"] == earlier.shape[0] * earlier.shape[1]
+    hidden[:, :, 3] = 100
+    unassessed = response(hidden)
+    assert unassessed["status"] == reference_png_opacity.UNASSESSED and unassessed["regions"] == []
 
 
 def test_tampered_original_and_unsupported_uploads_are_refused(reference_http, monkeypatch):

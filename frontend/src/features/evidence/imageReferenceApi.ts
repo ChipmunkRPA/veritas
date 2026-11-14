@@ -84,6 +84,7 @@ export interface ImageReferenceRecord {
     aligned_tiles: [number, number][]
     background_support: [number, number]
   }
+  png_opacity?: { opacity_changed_pixels: number; matched_pixels: number; matched_tiles: [number, number][] }
   affects_overall_confidence?: boolean
   additional_regions?: number
 }
@@ -100,6 +101,7 @@ export const structureJpegSchema = 'chipmunk.image-reference-comparison/13'
 export const sameJpegSchema = 'chipmunk.image-reference-comparison/14'
 export const jpegDetailLossSchema = 'chipmunk.image-reference-comparison/15'
 export const extendedJpegDetailLossSchema = 'chipmunk.image-reference-comparison/16'
+export const pngOpacitySchema = 'chipmunk.image-reference-comparison/17'
 export const isJpegDetailLoss = (schema: string) =>
   schema === jpegDetailLossSchema || schema === extendedJpegDetailLossSchema
 export const IMAGE_REFERENCE_SECTION_ID = 'earlier-image-comparison'
@@ -199,6 +201,20 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
     throw new Error('The server returned an incomplete image comparison.')
   }
   const proof = comparison.exact_projection
+  if (comparison.schema === pngOpacitySchema && comparison.status === 'comparable') {
+    const opacity = comparison.png_opacity
+    const { width, height } = comparison.submitted
+    if (!opacity || comparison.affects_overall_confidence !== false
+        || comparison.reference.width !== width || comparison.reference.height !== height
+        || !Number.isSafeInteger(opacity.opacity_changed_pixels) || opacity.opacity_changed_pixels < 0
+        || !Number.isSafeInteger(opacity.matched_pixels) || opacity.matched_pixels < .65 * width * height
+        || opacity.matched_pixels > width * height
+        || opacity.opacity_changed_pixels > width * height - opacity.matched_pixels
+        || !Array.isArray(opacity.matched_tiles) || opacity.matched_tiles.length < 12
+        || comparison.regions.some(region => !validAreaWithin(region, width, height))) {
+      throw new Error('The server returned an incomplete PNG opacity comparison.')
+    }
+  }
   if (comparison.schema === exactJpegIdentitySchema) {
     const alignment = comparison.alignment
     const { width, height } = comparison.submitted

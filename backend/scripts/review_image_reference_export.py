@@ -32,6 +32,7 @@ STRUCTURE_JPEG_SCHEMA = "chipmunk.image-reference-comparison/13"
 SAME_JPEG_SCHEMA = "chipmunk.image-reference-comparison/14"
 JPEG_DETAIL_LOSS_SCHEMA = "chipmunk.image-reference-comparison/15"
 EXTENDED_JPEG_DETAIL_LOSS_SCHEMA = "chipmunk.image-reference-comparison/16"
+PNG_OPACITY_SCHEMA = "chipmunk.image-reference-comparison/17"
 ORIENTATION_SCHEMA = "chipmunk.image-reference-comparison/6"
 CROPPED_RESIZE_SCHEMAS = {CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, JPEG_PNG_ENVELOPE_SCHEMA}
 ORIENTATIONS = {
@@ -68,13 +69,18 @@ def _record(pairs):
     return record
 
 
-def _source(stack, data, record):
+def _source(stack, data, record, *, composite=False):
     _require(record["sha256"] == _hash(data), "Original source SHA-256 differs")
     raw = stack.enter_context(Image.open(io.BytesIO(data), formats=["PNG", "JPEG"]))
     _require(getattr(raw, "n_frames", 1) == 1 and raw.width * raw.height <= MAX_PIXELS,
              "Unsupported original source dimensions or frames")
     with ImageOps.exif_transpose(raw) as oriented:
-        image = stack.enter_context(oriented.convert("RGB"))
+        if composite:
+            with oriented.convert("RGBA") as rgba, Image.new("RGBA", rgba.size, "white") as white:
+                white.alpha_composite(rgba)
+                image = stack.enter_context(white.convert("RGB"))
+        else:
+            image = stack.enter_context(oriented.convert("RGB"))
     dimensions = record["width"], record["height"]
     _require(all(type(item) is int for item in dimensions) and image.size == dimensions,
              "Original source dimensions differ after orientation")
@@ -385,6 +391,19 @@ def _jpeg_replay(comparison, earlier, submitted, sub):
             return mask.tobytes()
 
 
+def _opacity_replay(comparison, earlier, submitted):
+    from app.evidence.image_reference import inspect
+
+    with TemporaryDirectory() as temporary:
+        evidence = Path(temporary) / "evidence"
+        regenerated = inspect(earlier, submitted, evidence_dir=evidence, allow_png_opacity=True)
+        _require(_same_replayed_fields(comparison, regenerated), "PNG opacity measurements differ from the supplied sources")
+        if "mask" in regenerated:
+            with Image.open(evidence / regenerated["mask"]["file"], formats=["PNG"]) as image:
+                return image.tobytes()
+        return None
+
+
 def review(export, earlier, submitted):
     """Check source and crop bytes, mask geometry and the supported comparison proofs."""
     document = json.loads(_read(export, MAX_JSON_BYTES), object_pairs_hook=_record)
@@ -396,20 +415,25 @@ def review(export, earlier, submitted):
     status = comparison["status"]
     _require(status in {"comparable", "integer_alignment_unresolved", "different_dimensions", "unsupported_dimensions",
                         "unaligned", "insufficient_common_background", "uncertain_delivery", "partial_jpeg_delivery_unassessed",
-                        "unsupported_resize_geometry", "same_framing_unresolved", "resize_delivery_unresolved"},
+                        "unsupported_resize_geometry", "same_framing_unresolved", "resize_delivery_unresolved",
+                        "png_opacity_unassessed"},
              "Unknown comparison status")
     _require(not regions or status == "comparable", "An unassessed comparison contains difference regions")
     with ExitStack() as stack:
         earlier_bytes = _read(earlier, MAX_SOURCE_BYTES)
         submitted_bytes = _read(submitted, MAX_SOURCE_BYTES)
-        ref = _source(stack, earlier_bytes, comparison["reference"])
-        sub = _source(stack, submitted_bytes, comparison["submitted"])
+        opacity = comparison["schema"] == PNG_OPACITY_SCHEMA
+        ref = _source(stack, earlier_bytes, comparison["reference"], composite=opacity)
+        sub = _source(stack, submitted_bytes, comparison["submitted"], composite=opacity)
         resized = comparison["schema"] == RESIZE_SCHEMA or comparison["schema"] in CROPPED_RESIZE_SCHEMAS
         oriented = comparison["schema"] == ORIENTATION_SCHEMA
         jpeg = comparison["schema"] in {EXACT_JPEG_IDENTITY_SCHEMA, SHIFTED_JPEG_SCHEMA, STRUCTURE_JPEG_SCHEMA,
                                         SAME_JPEG_SCHEMA, JPEG_DETAIL_LOSS_SCHEMA, EXTENDED_JPEG_DETAIL_LOSS_SCHEMA}
         crop = comparison.get("reference_crop_bounds") if comparison["schema"] in CROPPED_RESIZE_SCHEMAS else None
-        if resized:
+        if opacity:
+            expected_opacity_mask = _opacity_replay(comparison, earlier, submitted)
+            dx, dy, overlap = 0, 0, (0, 0, sub.width, sub.height)
+        elif resized:
             carrier = stack.enter_context(Image.open(io.BytesIO(submitted_bytes), formats=["PNG", "JPEG"]))
             earlier_carrier = stack.enter_context(Image.open(io.BytesIO(earlier_bytes), formats=["PNG", "JPEG"]))
             expected_mask = _resize_replay(comparison, ref, sub, carrier, earlier_carrier,
@@ -441,6 +465,8 @@ def review(export, earlier, submitted):
                      "Difference mask pixels differ from the recomputed resize comparison")
         if jpeg:
             _require(mask.tobytes() == expected_jpeg_mask, "Difference mask pixels differ from the recomputed JPEG comparison")
+        if opacity:
+            _require(mask.tobytes() == expected_opacity_mask, "Difference mask pixels differ from the recomputed PNG comparison")
         if oriented:
             with ImageChops.subtract(mask, mismatch) as unsupported:
                 _require(not unsupported.getbbox(), "Difference mask marks a pixel that matches the oriented source")

@@ -19,6 +19,7 @@ from app.detectors.image import (
     reference_exact_jpeg,
     reference_jpeg_detail_loss,
     reference_png_exact_resize,
+    reference_png_opacity,
     reference_png_orientation,
     reference_png_oriented_crop,
     reference_png_oriented_resize,
@@ -28,6 +29,7 @@ from app.detectors.image import (
     reference_shifted_jpeg,
     reference_structure_jpeg,
 )
+from app.engine.media import refuse_truncated_images
 
 MAX_INPUT_BYTES = 60 * 1024 * 1024
 RESIZE_SCHEMA = "chipmunk.image-reference-comparison/3"
@@ -114,23 +116,58 @@ def _write_evidence(directory, comparison, reference, submitted, mask):
         staged.rename(directory)
 
 
+def _opacity_pair(original, questioned, before, after):
+    if not (original.format == questioned.format == "PNG"
+            and any("A" in image.getbands() or "transparency" in image.info for image in (original, questioned))):
+        return None
+    unassessed = {"status": reference_png_opacity.UNASSESSED, "regions": [], "affects_overall_confidence": False}
+    if (max(image.width * image.height for image in (original, questioned)) > reference_png_opacity.MAX_PIXELS
+            or not reference_png_opacity.supported_png(original, before)
+            or not reference_png_opacity.supported_png(questioned, after)
+            or any(original.info.get(key) != questioned.info.get(key)
+                   for key in ("icc_profile", "gamma", "srgb", "chromaticity"))):
+        return unassessed, None, None, None
+    pixels = []
+    for image in (original, questioned):
+        with ImageOps.exif_transpose(image) as oriented, oriented.convert("RGBA") as rgba:
+            pixels.append(np.array(rgba))
+    if all((rgba[:, :, 3] == 255).all() for rgba in pixels):
+        return None
+    result, mask = reference_png_opacity.compare(*pixels)
+    if result is None:
+        return unassessed, None, None, None
+    return result, mask, *(reference_png_opacity.on_white(rgba) for rgba in pixels)
+
+
+def _oriented_rgb(image):
+    with ImageOps.exif_transpose(image) as oriented, oriented.convert("RGB") as rgb:
+        return np.array(rgb)
+
+
 def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | None = None,
             allow_integer_alignment: bool = False, allow_proportional_resize: bool = False,
             allow_oriented_crop: bool = False, allow_oriented_resize: bool = False,
             allow_embedded_photo: bool = False, allow_exact_jpeg_identity: bool = False,
             allow_shifted_jpeg: bool = False, allow_structure_jpeg: bool = False,
             allow_same_jpeg: bool = False, allow_jpeg_detail_loss: bool = False,
-            allow_jpeg_detail_loss_extra_qualities: bool = False) -> dict:
+            allow_jpeg_detail_loss_extra_qualities: bool = False, allow_png_opacity: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
+    refuse_truncated_images()
     before, after = _bytes(reference_path), _bytes(submitted_path)
     with Image.open(io.BytesIO(before)) as original, Image.open(io.BytesIO(after)) as questioned:
         if max(image.width * image.height for image in (original, questioned)) > reference_compare.MAX_PIXELS:
             raise ValueError("Reference comparison supports images up to 16 megapixels")
-        with ImageOps.exif_transpose(original) as oriented_before, ImageOps.exif_transpose(questioned) as oriented_after:
-            reference = np.array(oriented_before.convert("RGB"))
-            submitted = np.array(oriented_after.convert("RGB"))
         schema = None
-        if (allow_integer_alignment or allow_proportional_resize or allow_oriented_crop or allow_oriented_resize or allow_embedded_photo
+        opacity = _opacity_pair(original, questioned, before, after) if allow_png_opacity else None
+        if opacity is not None:
+            result, mask, earlier_preview, submitted_preview = opacity
+            schema = reference_png_opacity.SCHEMA
+            reference, submitted = ((earlier_preview, submitted_preview) if earlier_preview is not None
+                                    else (_oriented_rgb(original), _oriented_rgb(questioned)))
+        else:
+            reference, submitted = _oriented_rgb(original), _oriented_rgb(questioned)
+        if opacity is None and (allow_integer_alignment or allow_proportional_resize or allow_oriented_crop
+                                or allow_oriented_resize or allow_embedded_photo
                 ) and not np.array_equal(reference, submitted):
             result, mask = (reference_png_orientation.compare(reference, submitted, questioned)
                             if allow_proportional_resize else (None, None))
@@ -162,7 +199,7 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                 embedded_photo, selection = reference_png_screenshot.compare(reference, submitted, questioned)
                 if embedded_photo is not None:
                     result, mask, schema = embedded_photo, selection, reference_png_screenshot.SCHEMA
-        else:
+        elif opacity is None:
             result, mask = reference_compare.compare_across_deliveries(reference, submitted, questioned)
         if allow_exact_jpeg_identity and result["status"] == "integer_alignment_unresolved":
             exact, selection = reference_exact_jpeg.compare(original, questioned, before, after)
@@ -195,6 +232,8 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
     aligned = "alignment" in result
     interpretation = {reference_structure_jpeg.SCHEMA: reference_structure_jpeg.INTERPRETATION,
                       reference_same_jpeg.SCHEMA: reference_same_jpeg.INTERPRETATION,
+                      reference_png_opacity.SCHEMA: (reference_png_opacity.INTERPRETATION if result["status"] == "comparable"
+                                                    else reference_png_opacity.UNASSESSED_INTERPRETATION),
                       **dict.fromkeys(reference_jpeg_detail_loss.SCHEMAS, reference_jpeg_detail_loss.INTERPRETATION)}
     output = {"schema": schema or f"chipmunk.image-reference-comparison/{2 if aligned else 1}",
               "coordinate_space": "exif-oriented-submitted" if aligned or schema else "exif-oriented-original",

@@ -66,6 +66,28 @@ afterEach(() => {
 })
 
 describe('earlier-copy comparison', () => {
+  it('shows opacity changes and retains the native mask in the JSON download', async () => {
+    const result = structuredClone(comparison)
+    const record = result.comparison
+    record.schema = 'chipmunk.image-reference-comparison/17'
+    record.reference = { ...record.submitted, sha256: 'b'.repeat(64) }
+    record.affects_overall_confidence = false
+    record.png_opacity = { opacity_changed_pixels: 483, matched_pixels: 356 * 230 - 483,
+      matched_tiles: Array.from({ length: 12 }, (_, index) => [Math.floor(index / 5), index % 5]) }
+    delete record.alignment
+    delete record.regions[0].reference_region
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText(/483 pixels changed opacity/)).toBeTruthy()
+    expect(screen.getByText(/Crops are shown on white/)).toBeTruthy()
+    expect(screen.getByAltText('Difference mask in submitted image coordinates')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
+    const [download] = vi.mocked(saveBlob).mock.calls[0]
+    expect(JSON.parse(await blobText(download))).toEqual({ comparison: record, pngs: result.pngs })
+  })
+
   it('shows the exact JPEG alignment proof for the same framing', async () => {
     const result = structuredClone(comparison)
     result.comparison.schema = 'chipmunk.image-reference-comparison/11'

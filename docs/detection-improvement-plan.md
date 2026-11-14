@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Earlier-copy PNG opacity comparison](image-reference-png-opacity-2026-11-14.md)
+  locates local cutouts, reveals and partial transparency changes. It
+  found the exact boundary of 21 of 24 authored edits where RGB-only
+  comparison found none, and suppressed seven hidden-color highlights.
+  The local app, PDF and JSON show the same opacity count, mask and crops.
+
 - [Exact silence in one stereo channel](audio-stereo-channel-silence-2026-11-14.md)
   reports exact sample intervals, a waveform and separate channel playback
   in new audio and video analyses. It recovered 19 of 48 lossless

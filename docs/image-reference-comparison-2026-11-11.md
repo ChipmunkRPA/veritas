@@ -2,6 +2,9 @@
 
 If you have an independently obtained earlier copy, you can compare it with the submitted image on your own machine. Ordinary processing can produce differences. Establishing the earlier file's provenance or the cause of a difference requires separate evidence.
 
+The [PNG opacity comparison](image-reference-png-opacity-2026-11-14.md)
+also measures local transparency differences in a matching earlier copy.
+
 ## Local app
 
 Set `VERITAS_IMAGE_REFERENCE_COMPARISON_ENABLED=true` in `backend/.env` and restart the local API. Open a completed image analysis in the normal view, select **Compare with an earlier copy**, then choose a single-frame PNG or JPEG. Each image may have up to 4 million pixels. The submitted source must still be available and match its recorded SHA-256.

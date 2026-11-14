@@ -130,6 +130,7 @@ def _comparison_pdf(comparison: dict, assets: dict[str, bytes]) -> str | None:
 def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool, workspace: Path) -> JSONResponse:
     from cv2 import error as OpenCVError
 
+    from app.detectors.image.reference_png_opacity import UNASSESSED
     from app.evidence.image_reference import inspect
 
     sha256, size = original
@@ -158,14 +159,14 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
     artifacts = workspace / "evidence"
     try:
         comparison = inspect(reference_path, submitted_path, evidence_dir=artifacts, allow_proportional_resize=True,
-                             allow_oriented_crop=True, allow_oriented_resize=True, allow_embedded_photo=True,
+                             allow_oriented_crop=True, allow_oriented_resize=True, allow_embedded_photo=True, allow_png_opacity=True,
                              allow_exact_jpeg_identity=settings.image_reference_exact_jpeg_identity,
                              allow_shifted_jpeg=settings.image_reference_shifted_jpeg,
                              allow_structure_jpeg=settings.image_reference_structure_jpeg,
                              allow_same_jpeg=settings.image_reference_same_jpeg,
                              allow_jpeg_detail_loss=settings.image_reference_jpeg_detail_loss,
                              allow_jpeg_detail_loss_extra_qualities=settings.image_reference_jpeg_detail_loss_extra_qualities)
-        if settings.image_reference_jpeg_png_envelope and comparison["status"] != "comparable":
+        if settings.image_reference_jpeg_png_envelope and comparison["status"] not in {"comparable", UNASSESSED}:
             from app.evidence.image_reference_delivery_envelope import inspect as compare_delivery
 
             delivery_artifacts = workspace / "delivery-evidence"

@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Three-band repeated soundtrack comparison](video-repeated-speech-bands-2026-11-14.md)
+  added one clean AAC location, zero noisy AAC locations and one new
+  synchronized PCM flag. Both new rules stay offline. The app reports how
+  many distinct seconds the single-track timing check measured.
+
 - [Paired sound transients around speech edits](audio-transient-edges-2026-11-14.md)
   located one clean splice and zero of 45 noisy splices. Neither cue recovered
   both endpoints. The cues remain offline. Earlier-copy reports now show how

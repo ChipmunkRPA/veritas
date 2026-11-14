@@ -139,6 +139,7 @@ def test_unmeasured_timing_windows_reach_the_pdf_and_signed_export(av_fixture, t
     pdf_text = ' '.join(engine.pdf_text(pdf).split())
     assert 'Speech and mouth timing coverage' in pdf_text
     assert '0 of 6 scheduled one-second windows reached a timing measurement' in pdf_text
+    assert 'Timing measurements covered 0.000 s of 3.480 s scheduled.' in pdf_text
     assert 'Too little speech was detected for this window.' in pdf_text
     assert '5.400–6.400 s' in pdf_text
     assert '/av/coverage/timing_windows' in pdf_text and detector.spec.id not in pdf_text

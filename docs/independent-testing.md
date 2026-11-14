@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [three-band soundtrack repeat replay](video-repeated-speech-bands-2026-11-14.md#replay)
+recounts timing witnesses across PCM and AAC, including actual retimed picture
+controls. It records where the same sound recurred separately from whether
+the staged clip had an audio-only delay.
+
 The [paired speech transient replay](audio-transient-edges-2026-11-14.md#replay)
 rebuilds two control-only decision points and recounts 604 deliveries, including
 ordinary speech cuts and background-only controls. The published receipt has

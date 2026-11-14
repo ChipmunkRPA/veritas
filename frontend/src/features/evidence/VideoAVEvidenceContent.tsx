@@ -1,6 +1,6 @@
 import { EvidenceAudio, EvidenceLimits, EvidenceMeasurements, EvidencePicture, EvidenceReferences, evidenceCard, evidenceGrid } from './EvidenceMedia'
 import { ContextClip } from './VideoEvidenceContent'
-import { rationalSeconds, seconds, type VideoAVChannel, type VideoAVPacket, type VideoEvidenceSet, type VideoTimingStatus } from './multimediaPackets'
+import { rationalSeconds, seconds, type SampleInterval, type VideoAVChannel, type VideoAVPacket, type VideoEvidenceSet, type VideoTimingStatus } from './multimediaPackets'
 
 const signed = (value: number) => `${value > 0 ? '+' : ''}${value}`
 const hasTimingChange = (packet: VideoAVPacket) => packet.measurement.overlaps_offset_step || packet.measurement.overlaps_correlation_collapse
@@ -23,6 +23,16 @@ function intervalLabel(range: VideoAVPacket['anchor']['source_timestamp_ranges']
   return start !== null && end !== null ? `${seconds(start)}–${seconds(end)}` : 'time conversion unavailable'
 }
 
+function distinctTimingSamples(rows: { interval: SampleInterval }[]) {
+  let end = 0
+  let total = 0
+  for (const { interval } of rows) {
+    total += Math.max(0, interval.end_sample - Math.max(interval.start_sample, end))
+    end = Math.max(end, interval.end_sample)
+  }
+  return total
+}
+
 function SourceInterval({ packet }: { packet: VideoAVPacket }) {
   return <div className="mt-3 text-caption text-text-muted">
     {packet.anchor.source_timestamp_ranges.map((range, index) => <p key={index} className="mt-1 mb-0 font-mono">Selected source interval: {intervalLabel(range)}
@@ -38,6 +48,8 @@ export default function VideoAVEvidenceContent({ set, channel, token, mediaReady
   const coverage = channel.coverage
   const timingWindows = coverage?.timing_windows?.windows
   const unmeasured = timingWindows?.filter((row) => row.status !== 'measured')
+  const measured = timingWindows?.filter((row) => row.status === 'measured')
+  const sampleRate = channel.source.sample_rate ?? 0
   const flaggedWindows = channel.packets.filter(hasTimingChange)
   return <div data-testid="video-av-evidence">
     <p className="mt-2 mb-0 text-small text-text-muted">Compare measured mouth appearance and audio energy on their original clocks. Correlation and timing differences do not prove AI generation, editing, or who is speaking.</p>
@@ -56,9 +68,11 @@ export default function VideoAVEvidenceContent({ set, channel, token, mediaReady
         : 'No measured alignment window is available.'} Repeated frames and gaps do not establish continuous analysis coverage.</p>
       {coverage.unsupported_checks.map((check, index) => <p key={index} className="mt-2 mb-0">Unmapped check: {check.reason} It does not establish synchronization.</p>)}
     </div> : <p className="mt-3 text-small text-text-muted">Alignment coverage is unavailable. Unmeasured intervals have not been cleared.</p>}
-    {timingWindows && unmeasured && <section aria-labelledby="speech-mouth-timing-coverage" className="mt-4 rounded-md border border-border p-4 text-small">
+    {timingWindows && measured && unmeasured && <section aria-labelledby="speech-mouth-timing-coverage" className="mt-4 rounded-md border border-border p-4 text-small">
       <h4 id="speech-mouth-timing-coverage" className="m-0 font-medium">Speech and mouth timing coverage</h4>
       <p className="mt-2 mb-0 text-text-muted">{timingWindows.length - unmeasured.length} of {timingWindows.length} scheduled one-second windows reached a timing measurement. These overlapping windows are scheduled within the decoded soundtrack. A measurement can still yield an inconclusive timing result.</p>
+      {sampleRate > 0 && <p className="mt-2 mb-0 text-text-muted">Timing measurements covered {seconds(distinctTimingSamples(measured) / sampleRate)} of{' '}
+        {seconds(distinctTimingSamples(timingWindows) / sampleRate)} scheduled. Overlapping time is counted once.</p>}
       {unmeasured.length > 0 && <details open={unmeasured.length <= 12} className="mt-3">
         <summary className="cursor-pointer">Unassessed windows on the source clock ({unmeasured.length})</summary>
         <ul className="mt-2 mb-0 space-y-2 text-text-muted">{unmeasured.map((row) => <li key={row.interval.start_sample}>

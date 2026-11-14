@@ -15,6 +15,7 @@ import numpy as np
 from PIL import Image
 
 from app.core.canonical import canonical_hash, canonical_json
+from app.detectors.audio.coverage import coverage_seconds
 from app.evidence import document_scope, service
 from app.evidence.av_binding import (
     AUDIO_CLOCK_BREAKS,
@@ -1315,7 +1316,11 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     if timing := (document.get("av", {}).get("coverage") or {}).get(TIMING_WINDOWS):
         rows = timing["windows"]
         unmeasured = [row for row in rows if row["status"] != "measured"]
+        spans = [(row["interval"]["start_sample"] / 16000, row["interval"]["end_sample"] / 16000) for row in rows]
+        measured_spans = [span for row, span in zip(rows, spans, strict=True) if row["status"] == "measured"]
         timing_view = {"total": len(rows), "measured": len(rows) - len(unmeasured),
+                       "scheduled_seconds": f"{coverage_seconds(spans):.3f}",
+                       "measured_seconds": f"{coverage_seconds(measured_spans):.3f}",
                        "unlisted": max(0, len(unmeasured) - TIMING_DISPLAY_LIMIT), "unmeasured": []}
         for row in unmeasured[:TIMING_DISPLAY_LIMIT]:
             interval = row["interval"]

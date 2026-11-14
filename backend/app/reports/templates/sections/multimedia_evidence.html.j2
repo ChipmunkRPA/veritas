@@ -61,6 +61,7 @@
 {% if timing %}
 <h3 id="multimedia-av-timing-coverage">Speech and mouth timing coverage</h3>
 <p>{{ timing.measured }} of {{ timing.total }} scheduled one-second windows reached a timing measurement. These overlapping windows are scheduled within the decoded soundtrack. A measurement can still yield an inconclusive timing result.</p>
+<p>Timing measurements covered {{ timing.measured_seconds }} s of {{ timing.scheduled_seconds }} s scheduled. Overlapping time is counted once.</p>
 {% if timing.unmeasured %}
 <table class="multimedia-locator">
 <thead><tr><th>Original video time</th><th>Why timing was unassessed</th></tr></thead>

@@ -108,6 +108,8 @@ def test_historical_packet_keeps_its_supported_format_without_new_fields(packet_
     doc = build_packet_set(db, analysis, store, result)
     doc["version"] = version
     del doc["repeated_passages"]
+    if version != "document-evidence-4":
+        doc["coverage"].pop("original_text_locations", None)
     for packet in doc["packets"]:
         if version != "document-evidence-4":
             del packet["inspection_scope"]

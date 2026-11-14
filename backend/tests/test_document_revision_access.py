@@ -1340,7 +1340,7 @@ def test_relocation_skips_native_style_checks_when_unchanged_word_paragraphs_kee
     def reject_extra_checks(_):
         pytest.fail("Unchanged paragraph order does not need native style traversal")
 
-    monkeypatch.setattr(document_archive_word, "_ordinary_boundary", reject_extra_checks)
+    monkeypatch.setattr(document_archive_word, "ordinary_body_paragraph", reject_extra_checks)
     word = _reorder_document([f"Paragraph {i} gives the old dates and the complete outcome." for i in range(100)], ".docx")
     result = document_revision.compare(word, word, ".docx")
     assert "relocated_passages" not in result and result["changes"] == []

@@ -307,10 +307,10 @@ def _relocated_paragraph(earlier, later, old_layout, new_layout, extension, word
         from docx.oxml.ns import qn
         from docx.text.paragraph import Paragraph
 
-        from app.evidence.document_archive_word import _ordinary_boundary
+        from app.evidence.document_archive_word import ordinary_body_paragraph
 
         visibility = [{i for i, paragraph in enumerate(body)
-                       if paragraph.tag == qn("w:p") and _ordinary_boundary(Paragraph(paragraph, None))}
+                       if paragraph.tag == qn("w:p") and ordinary_body_paragraph(Paragraph(paragraph, None))}
                       for body in word_bodies]
         common = {key for key in common if old_layout[old[key][1]][1] in visibility[0]
                   and new_layout[new[key][1]][1] in visibility[1]}

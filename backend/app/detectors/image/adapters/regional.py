@@ -1,4 +1,4 @@
-"""Optional source-aligned regional evidence for PNG and a bounded JPEG profile."""
+"""Optional source-aligned regional evidence for PNG, JPEG and lossless WebP."""
 from __future__ import annotations
 
 import hashlib
@@ -14,7 +14,7 @@ from app.detectors.image.adapters.common import H2, image_spec, original_bytes
 from app.detectors.image.adapters.localisers import PNG_SIGNATURE, LocaliserDetector
 from app.detectors.image.regional_support import readout
 from app.engine.detector import Applicability, InputUnit, RunContext
-from app.evidence.image_eligibility import FLIP_CONSISTENCY
+from app.evidence.image_eligibility import FLIP_CONSISTENCY, LOSSLESS_WEBP_SCOPE
 
 JPEG_SIGNATURE = b"\xff\xd8"
 
@@ -27,6 +27,22 @@ def evaluated_jpeg(data: bytes) -> bool:
                 and all(structure.table_bits.get(c.table_id) == 8 for c in structure.components)
                 and structure.ijg_quality == 75 and structure.table(2) == structure.table(1)
                 and (structure.frame == "baseline" or jpeg_bitstream.progressive_frame(data) is not None))
+
+
+def lossless_webp_size(data: bytes) -> tuple[int, int] | None:
+    """Accept the simple still-image RIFF layout with one opaque VP8L chunk."""
+    if (len(data) < 26 or data[:4] != b"RIFF" or data[8:16] != b"WEBPVP8L"
+            or int.from_bytes(data[4:8], "little") != len(data) - 8 or data[20] != 0x2F):
+        return None
+    size = int.from_bytes(data[16:20], "little")
+    padding = size % 2
+    if size < 6 or 20 + size + padding != len(data) or (padding and data[-1] != 0):
+        return None
+    fields = int.from_bytes(data[21:25], "little")
+    width, height = (fields & 0x3FFF) + 1, ((fields >> 14) & 0x3FFF) + 1
+    if fields >> 28 or min(width, height) < 512 or max(width, height) > 1024:
+        return None
+    return width, height
 
 
 def flip_components(measured, aligned):
@@ -58,7 +74,7 @@ class RegionalDetector(LocaliserDetector):
                  "previous check. Highlights are editing cues; AI authorship remains inconclusive from this check alone. "
                  "Unmarked areas are not confirmed original. The response is not an authorship confidence score.")
     spec = image_spec("loc.native_regional", METHOD, "localiser", InputUnit.IMAGE, (H2,), ("heatmap", "regions"),
-                      model_ids=(MODEL,), devices=("cpu",), lane="cpu", timeout_s=180., version="0.1.1")
+                      model_ids=(MODEL,), devices=("cpu",), lane="cpu", timeout_s=180., version="0.1.2")
 
     def applicable(self, ctx: RunContext) -> Applicability:
         data = original_bytes(ctx)
@@ -74,7 +90,12 @@ class RegionalDetector(LocaliserDetector):
             info = ctx.media.info()
             if info["mode"] == "RGB" and info["exif_orientation"] == 1:
                 return super().applicable(ctx)
-        return Applicability(False, "This local editing check covers PNG and a limited JPEG review profile")
+        if settings.image_region_mode == "candidate" and (size := lossless_webp_size(data)) is not None:
+            info = ctx.media.info()
+            if (info["format"] == "WEBP" and info["mode"] == "RGB" and info["n_frames"] == 1
+                    and info["exif_orientation"] == 1 and (info["width"], info["height"]) == size):
+                return super().applicable(ctx)
+        return Applicability(False, "This local editing check covers PNG and selected JPEG and lossless WebP profiles")
 
     def predict(self, model: Any, images: list[np.ndarray], device: Any) -> list[np.ndarray]:
         return [model.predict(Image.fromarray(pixels)).raw_mask for pixels in images]
@@ -86,12 +107,12 @@ class RegionalDetector(LocaliserDetector):
         if prediction.raw_mask.shape != (height, width):
             raise ValueError("Regional response is not registered to this source")
         data = original_bytes(ctx)
-        jpeg = data.startswith(JPEG_SIGNATURE)
+        container = "JPEG" if data.startswith(JPEG_SIGNATURE) else "WebP" if lossless_webp_size(data) else None
         measured = readout(prediction.raw_mask, prediction.candidate_eligibility["eligible"],
                            self.REGION_THRESHOLD, data, pixels)
         regions, stats = measured.regions, measured.stats
         repeat = {}
-        if (not jpeg and settings.environment == "dev" and settings.image_region_flip_review and regions
+        if (data.startswith(PNG_SIGNATURE) and settings.environment == "dev" and settings.image_region_flip_review and regions
                 and max(width, height) == 768 and min(width, height) >= 512):
             ctx.deadline.check("regional repeatability check")
             reflected = np.ascontiguousarray(pixels[:, ::-1])
@@ -116,7 +137,7 @@ class RegionalDetector(LocaliserDetector):
                                "canvas_size": [1024, 1024], "padding_position": "top_left",
                                "source_rgb_sha256": prediction.geometry["source_rgb_sha256"],
                                "input_float32_sha256": prediction.geometry["input_float32_sha256"],
-                               **({"source_format": "JPEG"} if jpeg else {}),
+                               **({"source_format": container} if container else {}),
                                "native_binding": prediction.binding, **repeat})
 
     def run(self, ctx: RunContext):
@@ -132,17 +153,19 @@ class RegionalDetector(LocaliserDetector):
               "Highlights are aligned to the oriented source and exclude areas where measurement is less reliable. "
               "Ordinary edits and untouched images can produce similar cues. AI authorship is inconclusive from "
               "this check alone, and its uncalibrated response does not change the overall authorship confidence.")
+        policy = result.details["localisation"]["resolution_policy"]
+        webp_scope = " " + LOSSLESS_WEBP_SCOPE if policy.get("source_format") == "WebP" else ""
         for exhibit in ctx.exhibits.exhibits:
             if exhibit.id not in result.exhibit_ids:
                 continue
             exhibit.caption = ("Highlighted pixels are candidates for local editing, aligned to the oriented original. "
                                "The image was fitted without stretching and padded; padding is excluded. "
-                               "These uncalibrated cues cannot determine who or what edited the image.")
+                               "These uncalibrated cues cannot determine who or what edited the image." + webp_scope)
         result.details["authorship_confidence_contribution"] = 0.
         result.details["localisation"]["validation_status"] = "limited_local_evaluation"
-        policy = result.details["localisation"]["resolution_policy"]
         if policy.get("source_format") == "JPEG":
             result.reasoning += " JPEG compression can obscure small or softly blended edits."
+        result.reasoning += webp_scope
         if (review := policy.get("flip_consistency")) is not None:
             result.reasoning += (f" A horizontally flipped repeat pass supported {review['supported_components']} "
                                  f"of {review['inspected_components']} inspected regions on the original pixel grid.")

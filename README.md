@@ -12,8 +12,9 @@ are not prepared for use as court evidence or expert testimony.
 ## What the application provides
 
 - **Images:** original crops, region overlays, provenance and metadata observations,
-  and visual-generation and editing checks. An overlay is an inspection location,
-  not proof that every highlighted pixel was edited.
+  and visual-generation and editing checks. Optional regional review also covers
+  [supported lossless WebP stills](docs/image-regional-webp-2026-11-14.md).
+  Overlays identify areas to inspect and can also highlight ordinary processing.
 - **Video:** sampled frames, tracked-face review intervals with before/during/after
   context where available, voice evidence, and audio/picture timing observations.
 - **Audio:** selected source-bound speech windows, waveforms, spectrograms, and

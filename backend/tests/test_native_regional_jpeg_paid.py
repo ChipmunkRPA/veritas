@@ -27,6 +27,7 @@ from app.detectors.image import regional, regional_support
 from app.engine import models, pipelines
 from app.engine.registry import reset_registry
 from app.evidence import image_packets_v4
+from app.evidence.image_eligibility import LOSSLESS_WEBP_SCOPE
 from app.reports import signing, snapshot
 from app.storage import db as storage_db
 from app.storage.db import Analysis, BillingOrderRow, DetectorRun, ReportRow
@@ -222,6 +223,175 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
                            "pdf_signature_verified": True, "browser_crop_and_mask_verified": True,
                            "json_and_pdf_snapshot_match": True, "model_names_hidden": True}, output, indent=2)
                 output.write("\n")
+    finally:
+        worker.stop(timeout=30)
+        models.reset_model_manager()
+        reset_registry()
+
+
+@pytest.mark.slow
+def test_paid_lossless_webp_matches_png_regions(billing, monkeypatch, tmp_path):
+    """Replay a known held edit through both upload formats and the report worker."""
+    import fitz
+    import torch
+    import uvicorn
+
+    source_path = os.getenv("CHIPMUNK_REGIONAL_WEBP_FLOW_INPUT")
+    if not source_path:
+        pytest.skip("Supply the published-digest held PNG for lossless format replay")
+    source = Path(source_path).read_bytes()
+    assert hashlib.sha256(source).hexdigest() == "894ef5665ae4cb3c3e44a2025da05d37ec0eac3f42fd87af7151a1886ae30331"
+    packed = io.BytesIO()
+    with Image.open(io.BytesIO(source)) as png:
+        assert png.mode == "RGB"
+        png.save(packed, format="WEBP", lossless=True)
+        with Image.open(packed) as webp:
+            assert webp.tobytes() == png.tobytes()
+
+    for key, value in {"environment": "dev", "device": "cpu", "image_region_mode": "candidate",
+                       "image_region_jpeg_review": False, "image_region_flip_review": False,
+                       "model_memory_budget_mb": "4096", "worker_threads": 1, "job_timeout_s": 600,
+                       "run_worker": False, "offline": True, "webhooks_enabled": False}.items():
+        monkeypatch.setattr(settings, key, value)
+    f = billing
+    monkeypatch.setattr(storage_db, "_engine", f.engine)
+    monkeypatch.setattr(storage_db, "_SessionLocal", sessionmaker(f.engine, expire_on_commit=False))
+    monkeypatch.setattr(jobs, "get_session", f.sessions)
+    monkeypatch.setattr(pipelines, "get_session", f.sessions)
+    monkeypatch.setattr(pipelines, "default_store", lambda: f.store)
+    reset_registry()
+    models.reset_model_manager()
+    torch.set_num_threads(2)
+    with f.engine.connect() as connection:
+        connection.exec_driver_sql("PRAGMA journal_mode=WAL")
+        connection.commit()
+
+    forwards = []
+    native_predict = regional.RegionalModel.predict
+
+    @functools.wraps(native_predict)
+    def predict(self, image):
+        with f.sessions() as db:
+            paid = db.query(BillingOrderRow).filter_by(status="fulfilled").all()
+            assert len(paid) > len(forwards)
+            assert all(order.paid_at and (order.amount_minor, order.currency, order.mode) == (999, "usd", "test") for order in paid)
+        result = native_predict(self, image)
+        forwards.append(result.binding["complete_canvas_float32_sha256"])
+        return result
+
+    monkeypatch.setattr(regional.RegionalModel, "predict", predict)
+    from app.main import app
+
+    f.client.close()
+    f.client = TestClient(app)
+    worker = jobs.build_worker()
+    worker.start()
+    try:
+        packets = []
+        for index, (extension, payload) in enumerate((("png", source), ("webp", packed.getvalue()))):
+            data = {"kind": "image", "profile": "full", "risk_accepted": "true",
+                    "risk_notice_version": purchase_notice.VERSION, "risk_notice_sha256": purchase_notice.SHA256}
+            checkout = f.client.post("/api/v2/billing/checkout", headers={**f.headers, "Idempotency-Key": str(uuid.uuid4())},
+                                     data=data, files={"file": (f"held.{extension}", payload, f"image/{extension}")})
+            assert checkout.status_code == 201, checkout.text
+            before_payment = counts(f)
+            order_id = checkout.json()["order_id"]
+            with f.sessions() as db:
+                session_id = db.get(BillingOrderRow, order_id).stripe_session_id
+            f.remote[session_id]["payment_intent"] = f"pi_{extension}_format_test"
+            assert len(forwards) == index
+            event_id = f"evt_format_{extension}"
+            assert signed(f, event_for(f, order_id, event_id=event_id, paid=False)).status_code == 200
+            assert counts(f) == before_payment and len(forwards) == index
+            with f.sessions() as db:
+                assert db.get(BillingOrderRow, order_id).analysis_id is None
+            assert signed(f, event_for(f, order_id, event_id=event_id)).status_code == 200
+            with f.sessions() as db:
+                aid = db.get(BillingOrderRow, order_id).analysis_id
+                assert aid is not None
+
+            def terminal(analysis_id=aid):
+                with f.sessions() as db:
+                    row = db.get(Analysis, analysis_id)
+                    return row.status, row.error, row.result_hash
+
+            status, error, result_hash = wait_for(terminal, lambda row: row[0] in {"done", "failed"}, extension)
+            assert status == "done", error
+            assert len(forwards) == index + 1
+            result = json.loads(f.store.read_bytes(result_hash))
+            response = f.client.get(f"/api/v2/analyses/{aid}/evidence-packets", headers=f.headers)
+            exported = f.client.get(f"/api/analyses/{aid}/export.json", headers=f.headers)
+            detail = f.client.get(f"/api/v2/analyses/{aid}", headers=f.headers)
+            for item in (response, exported, detail):
+                assert item.status_code == 200 and FORBIDDEN.search(item.text) is None, item.text
+            document = response.json()
+            assert document == exported.json()["image_evidence"]
+            image_packets_v4.validate_packet_source_mapping(document, result)
+            regions = [p for p in document["packets"] if p.get("localisation", {}).get("candidate_eligibility", {})
+                       .get("schema") == "image-candidate-eligibility/2"]
+            assert regions
+            for packet in regions:
+                assert packet["anchor"]["original_sha256"] == hashlib.sha256(payload).hexdigest()
+                for role in ("context", "crop", "overlay", "mask"):
+                    asset = packet["artifacts"][role]
+                    retrieved = f.client.get(asset["url"], headers=f.headers)
+                    assert retrieved.status_code == 200 and hashlib.sha256(retrieved.content).hexdigest() == asset["sha256"]
+            packets.append(regions)
+
+        assert forwards[0] == forwards[1]
+        assert len(packets[0]) == len(packets[1])
+        for png_region, webp_region in zip(*packets, strict=True):
+            assert png_region["region"] == webp_region["region"]
+            assert {role: obj["sha256"] for role, obj in png_region["artifacts"].items()} == {
+                role: obj["sha256"] for role, obj in webp_region["artifacts"].items()}
+            assert webp_region["localisation"]["resolution_policy"]["source_format"] == "WebP"
+            assert LOSSLESS_WEBP_SCOPE in webp_region["limitations"]
+
+        requested = f.client.post(f"/api/v2/analyses/{aid}/reports", headers=f.headers, json={"profile": "standard"})
+        assert requested.status_code == 202, requested.text
+        report_id = requested.json()["id"]
+        report = wait_for(lambda: f.client.get(f"/api/v2/reports/{report_id}", headers=f.headers).json(),
+                          lambda report: report["status"] in {"done", "failed"}, "signed WebP PDF")
+        assert report["status"] == "done", report
+        pdf = f.client.get(f"/api/v2/reports/{report_id}/file", headers=f.headers)
+        assert pdf.status_code == 200
+        key = f.client.get("/api/v2/instance/public-key", headers=f.headers)
+        assert key.status_code == 200
+        assert signing.verify(signing.load_public_key(key.json()["public_key_pem"].encode()),
+                              pdf.content, report["signature"])
+        (tmp_path / "webp-standard.pdf").write_bytes(pdf.content)
+        with fitz.open(stream=pdf.content, filetype="pdf") as rendered:
+            pdf_text = " ".join(" ".join(page.get_text().split()) for page in rendered)
+        assert LOSSLESS_WEBP_SCOPE in pdf_text and FORBIDDEN.search(pdf_text) is None
+        with f.sessions() as db:
+            frozen = snapshot.load(f.store.read_bytes(db.get(ReportRow, report_id).snapshot_hash))
+        assert frozen.image_evidence == document
+
+        server = uvicorn.Server(uvicorn.Config(app, host="127.0.0.1", port=8164, lifespan="off",
+                                               log_config=None, access_log=False))
+        thread = threading.Thread(target=server.run, daemon=True)
+        thread.start()
+        try:
+            wait_for(lambda: server.started, bool, "isolated browser server", 20)
+            packet = packets[1][0]
+            credentials = tmp_path / "browser-input.json"
+            credentials.write_text(json.dumps({"analysis_id": aid, "headers": f.headers, "packet_id": packet["id"],
+                                               **{f"{role}_sha256": packet["artifacts"][role]["sha256"]
+                                                  for role in ("context", "crop", "mask")}}))
+            credentials.chmod(0o600)
+            browser = subprocess.run(["node", str(ROOT / "frontend/e2e/native-regional-jpeg-paid.mjs"), str(tmp_path)],
+                                     check=False, timeout=90, capture_output=True, text=True)
+            assert browser.returncode == 0, browser.stdout + browser.stderr
+        finally:
+            server.should_exit = True
+            thread.join(timeout=15)
+        deltas = {"png_sha256": hashlib.sha256(source).hexdigest(), "webp_sha256": hashlib.sha256(packed.getvalue()).hexdigest(),
+                  "source_rgb_and_model_map_exact": True, "matched_regions": len(packets[1]), "payment_first": True,
+                  "simulated_price_minor_usd": 999, "signed_pdf_and_json_snapshot_match": True, "browser_verified": True,
+                  "regions": [{"source_box": p["region"], "asset_sha256": {r: a["sha256"] for r, a in p["artifacts"].items()}}
+                              for p in packets[1]]}
+        if proof := os.getenv("CHIPMUNK_REGIONAL_WEBP_FLOW_PROOF"):
+            Path(proof).write_text(json.dumps(deltas, indent=2, sort_keys=True) + "\n")
     finally:
         worker.stop(timeout=30)
         models.reset_model_manager()

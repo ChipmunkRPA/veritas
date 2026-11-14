@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [lossless WebP replay](image-regional-webp-2026-11-14.md#replay) checks
+whether a PNG and a lossless WebP with exactly the same decoded pixels
+produce the same local evidence. It verifies the source coordinates,
+browser crop, signed PDF and JSON in two simulated prepaid uploads.
+
 The [soundtrack flank-ranking replay](video-sound-difference-guards-2026-11-14.md#replay)
 compares three checks on the same edits and controls. It recounts paired gains,
 lost locations and flags by underlying cause and carrier, including local

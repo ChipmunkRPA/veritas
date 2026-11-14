@@ -19,6 +19,7 @@ from sqlalchemy.orm import Session
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.evidence import image_packets as legacy
+from app.evidence.image_eligibility import LOSSLESS_WEBP_SCOPE
 from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
@@ -269,6 +270,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             packet["limitations"] = [note if line == old else line for line in packet["limitations"]]
         if policy.get("source_format") == "JPEG":
             packet["limitations"].append("JPEG compression can obscure small or softly blended edits.")
+        elif policy.get("source_format") == "WebP":
+            packet["limitations"].append(LOSSLESS_WEBP_SCOPE)
     assets = [*(document.get("overview") or {}).values(),
               *(art for packet in document["packets"] for art in packet["artifacts"].values())]
     for asset in assets:

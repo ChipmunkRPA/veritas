@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Regional editing evidence in lossless WebP](image-regional-webp-2026-11-14.md)
+  extends the existing candidate check to qualified opaque stills in Full and
+  Deep analysis. A held file transferred exactly from PNG, including the
+  measured region, four evidence assets, and the browser and signed report.
+  The check contributes zero to authorship confidence.
+
 - [Stronger flanks before ranking a soundtrack difference](video-sound-difference-guards-2026-11-14.md)
   added 13 useful AAC and ten PCM locations without losing earlier locations.
   It also added three AAC and four PCM flags on real local-delay controls.

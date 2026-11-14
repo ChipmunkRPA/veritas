@@ -15,7 +15,7 @@ from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.detectors.image import regional
-from app.detectors.image.adapters.regional import RegionalDetector
+from app.detectors.image.adapters.regional import RegionalDetector, lossless_webp_size
 from app.engine.detector import Profile
 from app.engine.exhibits import ExhibitWriter
 from app.engine.manifest import card_gaps, lint, load_manifest
@@ -125,6 +125,44 @@ def test_jpeg_scope_requires_opt_in_and_evaluated_encoding(monkeypatch, quality,
     monkeypatch.setattr(settings, "image_region_mode", "candidate")
     monkeypatch.setattr(settings, "environment", "prod")
     assert not detector.applicable(ctx).ok
+
+
+@pytest.mark.parametrize(("kind", "supported"), [
+    ("lossless", True), ("lossy", False), ("alpha", False), ("animated", False),
+    ("exif", False), ("too_small", False), ("trailing", False), ("truncated", False),
+])
+def test_webp_scope_is_limited_to_simple_lossless_stills(monkeypatch, kind, supported):
+    output = io.BytesIO()
+    size = (511 if kind == "too_small" else 512, 768)
+    image = Image.new("RGBA", size, (90, 100, 110, 127)) if kind == "alpha" else Image.new("RGB", size, "blue")
+    options = {}
+    if kind == "animated":
+        options.update(save_all=True, append_images=[Image.new("RGB", size, "red")], duration=100)
+    elif kind == "exif":
+        exif = Image.Exif()
+        exif[274] = 6
+        options["exif"] = exif
+    image.save(output, format="WEBP", lossless=kind != "lossy", **options)
+    data = output.getvalue()
+    if kind == "trailing":
+        data += b"extra"
+    elif kind == "truncated":
+        data = data[:-3]
+    ctx = SimpleNamespace(media=SimpleNamespace(original_bytes=lambda: data, native_pixels=lambda: np.asarray(image),
+        info=lambda: {"format": "WEBP", "mode": "RGB", "n_frames": 1, "exif_orientation": 1,
+                      "width": size[0], "height": size[1]}))
+    detector = RegionalDetector()
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "image_region_jpeg_review", True)
+    monkeypatch.setattr(settings, "image_region_mode", "legacy")
+    assert not detector.applicable(ctx).ok
+    monkeypatch.setattr(settings, "image_region_mode", "candidate")
+    assert lossless_webp_size(data) == (size if supported else None)
+    assert detector.applicable(ctx).ok is supported
+    if supported:
+        ctx.media.info = lambda: {"format": "WEBP", "mode": "RGBA", "n_frames": 1, "exif_orientation": 1,
+                                  "width": size[0], "height": size[1]}
+        assert not detector.applicable(ctx).ok
 
 
 def test_progressive_jpeg_rejects_truncated_scans_and_table_changes():

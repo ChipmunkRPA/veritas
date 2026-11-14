@@ -13,6 +13,7 @@ RESPONSE_GATE = "image-candidate-eligibility/1"
 AREA_GATE = "image-candidate-eligibility/2"
 FLIP_CONSISTENCY = "image-flip-consistency/1"
 SOURCE_QUALITY = "image-source-quality/1"
+LOSSLESS_WEBP_SCOPE = "This check reviewed the decoded pixels of a single lossless WebP image."
 QUALITY_LABELS = {
     "clipped": "Clipped highlights or very dark pixels",
     "flat": "Low local contrast",

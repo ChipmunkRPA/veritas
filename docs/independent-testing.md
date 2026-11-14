@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [single-upload editorial replay](writing-editorial-worker-audit-2026-11-14.md#replay)
+recounts actual worker decisions, selected evidence and how much of the
+known changed wording each selection covers. It distinguishes ordinary
+journal revisions from two generator families, using positions and hashes
+without publishing the prose.
+
 The [three-band soundtrack repeat replay](video-repeated-speech-bands-2026-11-14.md#replay)
 recounts timing witnesses across PCM and AAC, including actual retimed picture
 controls. It records where the same sound recurred separately from whether

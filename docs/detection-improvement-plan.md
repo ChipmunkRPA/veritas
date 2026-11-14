@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Single-upload writing on dated journal revisions](writing-editorial-worker-audit-2026-11-14.md)
+  found passage cards on 16 of 21 ordinary revisions and useful middle-sentence
+  coverage on 18 of 32 model rewrites. All 74 overall results were inconclusive.
+  The app and Standard PDF now explain how ordinary editing can produce a
+  similar passage response.
+
 - [Three-band repeated soundtrack comparison](video-repeated-speech-bands-2026-11-14.md)
   added one clean AAC location, zero noisy AAC locations and one new
   synchronized PCM flag. Both new rules stay offline. The app reports how

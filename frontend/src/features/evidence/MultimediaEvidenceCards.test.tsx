@@ -69,6 +69,11 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByText(/The writing checks selected no passages/)).toBeNull()
   })
 
+  it('explains that ordinary editing can produce a flagged writing response', () => {
+    show(document)
+    expect(screen.getByText(/Ordinary editing and polished writing can produce a similar response/)).toBeTruthy()
+  })
+
   it.each([
     [{ kind: 'docx', paragraph_index: 0, body_path: [0] }, /Word body paragraph 1/],
     [{ kind: 'email', mime_part: '1.2' }, /decoded email MIME part 1\.2/],

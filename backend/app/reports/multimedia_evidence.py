@@ -749,8 +749,11 @@ def _coverage(kind: str, document: dict) -> str:
     candidates = coverage.get("candidate_spans", 0)
     if contexts:
         summary = f"Recorded {contexts} scored {'context' if contexts == 1 else 'contexts'}."
-        summary += (f" Selected {candidates} candidate {'passage' if candidates == 1 else 'passages'} for review."
-                    if candidates else " The writing checks selected no passages for review. AI editing may still be present.")
+        if candidates:
+            summary += (f" Selected {candidates} candidate {'passage' if candidates == 1 else 'passages'} for review."
+                        " Ordinary editing and polished writing can produce a similar response.")
+        else:
+            summary += " The writing checks selected no passages for review. AI editing may still be present."
     else:
         summary = "No local writing responses were recorded."
     if unmapped := coverage.get("unmapped_pages"):

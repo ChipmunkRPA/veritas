@@ -421,7 +421,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         : `Recorded ${scoredWindows} scored ${scoredWindows === 1 ? 'context' : 'contexts'}.`}
         {!!scoredWindows && set.coverage?.candidate_spans === 0
           && ' The writing checks selected no passages for review. AI editing may still be present.'}
-        {set.packets.length > 0 && ' The marked ranges show the text behind the recorded measurements. The responses do not determine the origin of individual words.'}</p>
+        {set.packets.length > 0 && ' The marked text shows where the checks measured a pattern. Ordinary editing and polished writing can produce a similar response.'}</p>
       {matched && <p className="mt-2 mb-0">Short-passage review selected {matched.selected_sentences} of {matched.eligible_sentences} eligible sentences. This evidence has zero weight in the overall assessment.</p>}
       {unmapped.length > 0 && <p className="mt-2 mb-0">Pages without mapped text: {unmapped.join(', ')}. Those pages have not been cleared.</p>}
       {partialPages.length > 0 && <>

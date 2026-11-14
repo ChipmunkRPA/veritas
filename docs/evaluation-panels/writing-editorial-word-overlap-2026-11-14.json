@@ -1,0 +1,2124 @@
+{
+  "results": {
+    "before": {
+      "changed_words": 0,
+      "covered_changed_words": 0,
+      "files": 21,
+      "files_with_any_changed_word_covered": 0,
+      "files_with_changed_words": 0,
+      "files_with_half_words_covered": 0,
+      "marked_changed_word_characters": 0,
+      "marked_characters": 3452
+    },
+    "edited": {
+      "changed_words": 63,
+      "covered_changed_words": 12,
+      "files": 21,
+      "files_with_any_changed_word_covered": 4,
+      "files_with_changed_words": 16,
+      "files_with_half_words_covered": 4,
+      "marked_changed_word_characters": 67,
+      "marked_characters": 3091
+    },
+    "qwen": {
+      "changed_words": 145,
+      "covered_changed_words": 82,
+      "files": 16,
+      "files_with_any_changed_word_covered": 9,
+      "files_with_changed_words": 16,
+      "files_with_half_words_covered": 9,
+      "marked_changed_word_characters": 493,
+      "marked_characters": 3775
+    },
+    "smol2": {
+      "changed_words": 188,
+      "covered_changed_words": 101,
+      "files": 16,
+      "files_with_any_changed_word_covered": 9,
+      "files_with_changed_words": 16,
+      "files_with_half_words_covered": 9,
+      "marked_changed_word_characters": 568,
+      "marked_characters": 3524
+    }
+  },
+  "rows": [
+    {
+      "changed_words": [],
+      "group": "wellcome-14765",
+      "role": "before",
+      "text_sha256": "81f6dccbab19ceced5335dc3d6214f5a7c75beeb6546e94503eedc2d7bb45d78"
+    },
+    {
+      "changed_words": [
+        [
+          473,
+          476
+        ],
+        [
+          477,
+          484
+        ],
+        [
+          485,
+          487
+        ]
+      ],
+      "group": "wellcome-14765",
+      "role": "edited",
+      "text_sha256": "1b5eb82f6a5bad2209ac17014fd9aa8ed0aa372ea56758837344394df445d908"
+    },
+    {
+      "changed_words": [
+        [
+          337,
+          344
+        ],
+        [
+          345,
+          353
+        ],
+        [
+          354,
+          356
+        ],
+        [
+          357,
+          363
+        ],
+        [
+          364,
+          366
+        ],
+        [
+          367,
+          373
+        ],
+        [
+          374,
+          377
+        ],
+        [
+          378,
+          390
+        ],
+        [
+          391,
+          400
+        ],
+        [
+          401,
+          403
+        ],
+        [
+          404,
+          408
+        ],
+        [
+          409,
+          416
+        ],
+        [
+          417,
+          420
+        ],
+        [
+          421,
+          426
+        ],
+        [
+          427,
+          434
+        ],
+        [
+          435,
+          444
+        ],
+        [
+          446,
+          448
+        ],
+        [
+          459,
+          461
+        ],
+        [
+          499,
+          505
+        ],
+        [
+          522,
+          530
+        ],
+        [
+          531,
+          538
+        ],
+        [
+          539,
+          551
+        ],
+        [
+          552,
+          556
+        ]
+      ],
+      "group": "wellcome-14765",
+      "role": "qwen",
+      "text_sha256": "a14252cd86330c861462d2b9cce0a1bfa6ae97963282da183866aff3e2d33f50"
+    },
+    {
+      "changed_words": [
+        [
+          337,
+          340
+        ],
+        [
+          341,
+          349
+        ],
+        [
+          350,
+          352
+        ],
+        [
+          409,
+          414
+        ],
+        [
+          415,
+          423
+        ],
+        [
+          424,
+          425
+        ],
+        [
+          426,
+          435
+        ],
+        [
+          481,
+          491
+        ],
+        [
+          492,
+          499
+        ],
+        [
+          500,
+          505
+        ],
+        [
+          506,
+          508
+        ],
+        [
+          509,
+          516
+        ],
+        [
+          517,
+          521
+        ],
+        [
+          522,
+          529
+        ],
+        [
+          531,
+          539
+        ],
+        [
+          540,
+          543
+        ],
+        [
+          544,
+          556
+        ]
+      ],
+      "group": "wellcome-14765",
+      "role": "smol2",
+      "text_sha256": "678f90fe4a07d4adbc28f146421c75b10c0c7be9b6911449f2cc3dd857fada08"
+    },
+    {
+      "changed_words": [],
+      "group": "wellcome-12429",
+      "role": "before",
+      "text_sha256": "d8fe81ccd976a48f7b0e99c40c6a4640b994651c7022269279d70474afdb256e"
+    },
+    {
+      "changed_words": [],
+      "group": "wellcome-12429",
+      "role": "edited",
+      "text_sha256": "d19c04546ad61f11cae0bb9a9f548241f41b5b8b02b3422e366218df7ce843fc"
+    },
+    {
+      "changed_words": [
+        [
+          148,
+          158
+        ],
+        [
+          241,
+          246
+        ],
+        [
+          247,
+          254
+        ],
+        [
+          264,
+          269
+        ],
+        [
+          270,
+          273
+        ],
+        [
+          274,
+          280
+        ]
+      ],
+      "group": "wellcome-12429",
+      "role": "qwen",
+      "text_sha256": "80f4818395e42e8c3db5755efc37614828e1fa8b15b691cf99f609367c9c0c8e"
+    },
+    {
+      "changed_words": [
+        [
+          148,
+          157
+        ],
+        [
+          158,
+          167
+        ],
+        [
+          168,
+          175
+        ],
+        [
+          176,
+          186
+        ],
+        [
+          188,
+          192
+        ],
+        [
+          193,
+          201
+        ],
+        [
+          202,
+          206
+        ]
+      ],
+      "group": "wellcome-12429",
+      "role": "smol2",
+      "text_sha256": "5385924ff3878c50bde52452cff4654f9a51a765b2536aa76077246fa7714fd4"
+    },
+    {
+      "changed_words": [],
+      "group": "wellcome-14838",
+      "role": "before",
+      "text_sha256": "1732cde62340e6fa35ab31b2b24962f9691b375a1e7ce695320350804d10e9b8"
+    },
+    {
+      "changed_words": [
+        [
+          166,
+          172
+        ],
+        [
+          173,
+          179
+        ]
+      ],
+      "group": "wellcome-14838",
+      "role": "edited",
+      "text_sha256": "be72f82dc877854ee192c53a0f9bc75b14110262ffb6f87c01b033222c93d25f"
+    },
+    {
+      "changed_words": [],
+      "group": "wellcome-14700",
+      "role": "before",
+      "text_sha256": "be3e03232cd2fc8a2ec85bc4906abff4880e11d418a0cfeecdf566235c4d4566"
+    },
+    {
+      "changed_words": [],
+      "group": "wellcome-14700",
+      "role": "edited",
+      "text_sha256": "f03f611a6b68324540b779859099cb36339fd877524f6f0d046b0c0afae69961"
+    },
+    {
+      "changed_words": [
+        [
+          254,
+          261
+        ],
+        [
+          262,
+          268
+        ],
+        [
+          269,
+          278
+        ],
+        [
+          285,
+          289
+        ],
+        [
+          305,
+          310
+        ],
+        [
+          312,
+          316
+        ],
+        [
+          317,
+          320
+        ],
+        [
+          321,
+          332
+        ],
+        [
+          352,
+          361
+        ]
+      ],
+      "group": "wellcome-14700",
+      "role": "qwen",
+      "text_sha256": "fc4f3e2f91fb428dbc95969bdab326ec8f813ba43f4e65210b1f093382d5e9d1"
+    },
+    {
+      "changed_words": [
+        [
+          254,
+          261
+        ],
+        [
+          262,
+          268
+        ],
+        [
+          269,
+          275
+        ],
+        [
+          310,
+          314
+        ],
+        [
+          315,
+          322
+        ],
+        [
+          323,
+          327
+        ]
+      ],
+      "group": "wellcome-14700",
+      "role": "smol2",
+      "text_sha256": "8d93a5dff260ea7537e8ea2fcbb7cf04b207e562d94403d721f70b3c7629499f"
+    },
+    {
+      "changed_words": [],
+      "group": "wellcome-15100",
+      "role": "before",
+      "text_sha256": "610d2da11f8a1137de36cd5e8a8d061afec6b372256088ce4eeabbf585de6816"
+    },
+    {
+      "changed_words": [
+        [
+          323,
+          328
+        ],
+        [
+          329,
+          337
+        ]
+      ],
+      "group": "wellcome-15100",
+      "role": "edited",
+      "text_sha256": "af8f1503c1f07f92e12c64d576f86b1a8debd13089016e9644f8814aa6ece85e"
+    },
+    {
+      "changed_words": [
+        [
+          230,
+          232
+        ],
+        [
+          233,
+          237
+        ],
+        [
+          238,
+          240
+        ],
+        [
+          241,
+          250
+        ],
+        [
+          251,
+          254
+        ],
+        [
+          270,
+          282
+        ]
+      ],
+      "group": "wellcome-15100",
+      "role": "qwen",
+      "text_sha256": "84fb779229d6790e3fc40a2f9d14c8532dfac98ce492276b690e27377c66340b"
+    },
+    {
+      "changed_words": [
+        [
+          194,
+          197
+        ],
+        [
+          198,
+          206
+        ],
+        [
+          207,
+          211
+        ],
+        [
+          229,
+          239
+        ],
+        [
+          241,
+          246
+        ],
+        [
+          247,
+          249
+        ],
+        [
+          250,
+          251
+        ],
+        [
+          252,
+          256
+        ],
+        [
+          257,
+          259
+        ],
+        [
+          260,
+          270
+        ],
+        [
+          271,
+          280
+        ],
+        [
+          281,
+          284
+        ],
+        [
+          300,
+          312
+        ],
+        [
+          322,
+          330
+        ]
+      ],
+      "group": "wellcome-15100",
+      "role": "smol2",
+      "text_sha256": "0f6caf5ead6bab6aee877eb16d88e3f70be4e6cb816930f197499c9abb37f550"
+    },
+    {
+      "changed_words": [],
+      "group": "wellcome-15229",
+      "role": "before",
+      "text_sha256": "734a7091d7a42023b1419a4739e88bfe630fe0604fce00a22f92af3ff87bcc03"
+    },
+    {
+      "changed_words": [
+        [
+          176,
+          182
+        ],
+        [
+          248,
+          254
+        ]
+      ],
+      "group": "wellcome-15229",
+      "role": "edited",
+      "text_sha256": "f869ddd3bc5f803a2e69df87b7e89e34ede9bdb719a8d6a4c06f8e5ab3d9ba8d"
+    },
+    {
+      "changed_words": [
+        [
+          191,
+          201
+        ],
+        [
+          229,
+          233
+        ],
+        [
+          235,
+          244
+        ],
+        [
+          245,
+          249
+        ],
+        [
+          250,
+          252
+        ],
+        [
+          258,
+          260
+        ],
+        [
+          261,
+          269
+        ],
+        [
+          270,
+          274
+        ],
+        [
+          275,
+          281
+        ],
+        [
+          282,
+          288
+        ]
+      ],
+      "group": "wellcome-15229",
+      "role": "qwen",
+      "text_sha256": "02511d572a5090631db0b8e82277df7c3526678a9840a751e38596de35e56747"
+    },
+    {
+      "changed_words": [
+        [
+          151,
+          153
+        ],
+        [
+          192,
+          196
+        ],
+        [
+          197,
+          201
+        ],
+        [
+          202,
+          208
+        ],
+        [
+          209,
+          212
+        ],
+        [
+          213,
+          222
+        ],
+        [
+          224,
+          233
+        ],
+        [
+          258,
+          262
+        ]
+      ],
+      "group": "wellcome-15229",
+      "role": "smol2",
+      "text_sha256": "0981d41df8036c010ae3fc86a5abd86531ebf7066311f8f492aefc9ea0e39429"
+    },
+    {
+      "changed_words": [],
+      "group": "wellcome-11386",
+      "role": "before",
+      "text_sha256": "f78ca7c8a6babe7e3c7de61405a4db10540aac12450a23b21a465ecc5d8a409e"
+    },
+    {
+      "changed_words": [
+        [
+          424,
+          427
+        ],
+        [
+          428,
+          432
+        ],
+        [
+          433,
+          447
+        ],
+        [
+          448,
+          450
+        ],
+        [
+          451,
+          458
+        ]
+      ],
+      "group": "wellcome-11386",
+      "role": "edited",
+      "text_sha256": "22c6fa6795dfadaf66ec747f663a8fa3f95b3a1e449b84193fe52d9b22f9c09b"
+    },
+    {
+      "changed_words": [
+        [
+          272,
+          280
+        ],
+        [
+          281,
+          291
+        ],
+        [
+          292,
+          295
+        ],
+        [
+          296,
+          298
+        ],
+        [
+          299,
+          306
+        ],
+        [
+          307,
+          311
+        ],
+        [
+          312,
+          324
+        ],
+        [
+          330,
+          332
+        ],
+        [
+          386,
+          394
+        ],
+        [
+          396,
+          408
+        ],
+        [
+          409,
+          412
+        ],
+        [
+          413,
+          427
+        ],
+        [
+          428,
+          430
+        ]
+      ],
+      "group": "wellcome-11386",
+      "role": "qwen",
+      "text_sha256": "5a2895595cd49376e00b95bcb6c0ba0538a92dad1ecaa47205e384ae24e48585"
+    },
+    {
+      "changed_words": [
+        [
+          250,
+          254
+        ],
+        [
+          255,
+          266
+        ],
+        [
+          267,
+          277
+        ],
+        [
+          278,
+          280
+        ],
+        [
+          307,
+          314
+        ],
+        [
+          315,
+          322
+        ],
+        [
+          323,
+          327
+        ],
+        [
+          328,
+          340
+        ],
+        [
+          368,
+          374
+        ],
+        [
+          384,
+          393
+        ],
+        [
+          414,
+          422
+        ],
+        [
+          424,
+          430
+        ],
+        [
+          431,
+          434
+        ],
+        [
+          435,
+          449
+        ],
+        [
+          450,
+          452
+        ]
+      ],
+      "group": "wellcome-11386",
+      "role": "smol2",
+      "text_sha256": "786011c3d960381a8e4491af9300e6565547863d806f7a98d970795bafb969cf"
+    },
+    {
+      "changed_words": [],
+      "group": "wellcome-13531",
+      "role": "before",
+      "text_sha256": "f417860400d387ecae4e8e326122ea8fccc91deb3139fd915a630b6254624f9c"
+    },
+    {
+      "changed_words": [
+        [
+          465,
+          470
+        ],
+        [
+          492,
+          498
+        ]
+      ],
+      "group": "wellcome-13531",
+      "role": "edited",
+      "text_sha256": "7afa42ed692be469bf3b02b97ec97f5a7540001909040b77bde978a8b4ef589a"
+    },
+    {
+      "changed_words": [
+        [
+          400,
+          407
+        ],
+        [
+          423,
+          428
+        ],
+        [
+          429,
+          439
+        ],
+        [
+          441,
+          445
+        ],
+        [
+          446,
+          455
+        ],
+        [
+          456,
+          458
+        ],
+        [
+          459,
+          462
+        ],
+        [
+          463,
+          469
+        ],
+        [
+          470,
+          478
+        ],
+        [
+          499,
+          506
+        ],
+        [
+          507,
+          516
+        ],
+        [
+          524,
+          532
+        ]
+      ],
+      "group": "wellcome-13531",
+      "role": "qwen",
+      "text_sha256": "ba2e25777d6a052af831c2f1d728247fd5d83fd49a258f9a55c51b8f81e6cbe9"
+    },
+    {
+      "changed_words": [
+        [
+          400,
+          408
+        ],
+        [
+          409,
+          410
+        ],
+        [
+          411,
+          415
+        ],
+        [
+          416,
+          421
+        ],
+        [
+          441,
+          446
+        ],
+        [
+          447,
+          455
+        ],
+        [
+          505,
+          509
+        ],
+        [
+          513,
+          522
+        ],
+        [
+          523,
+          533
+        ],
+        [
+          553,
+          555
+        ],
+        [
+          556,
+          560
+        ],
+        [
+          561,
+          574
+        ],
+        [
+          575,
+          587
+        ],
+        [
+          588,
+          590
+        ],
+        [
+          591,
+          597
+        ],
+        [
+          598,
+          601
+        ],
+        [
+          602,
+          608
+        ],
+        [
+          609,
+          611
+        ],
+        [
+          612,
+          625
+        ]
+      ],
+      "group": "wellcome-13531",
+      "role": "smol2",
+      "text_sha256": "01aaeaa1f335fc3758b7ee4b375e45e1c127e0d387a1901d75d1603bb843849a"
+    },
+    {
+      "changed_words": [],
+      "group": "wellcome-14770",
+      "role": "before",
+      "text_sha256": "9046a4df1b683b13ae8f39bc3cac2f3ffa10b425a18f58119f34b0048716e810"
+    },
+    {
+      "changed_words": [
+        [
+          879,
+          881
+        ],
+        [
+          882,
+          885
+        ],
+        [
+          886,
+          890
+        ]
+      ],
+      "group": "wellcome-14770",
+      "role": "edited",
+      "text_sha256": "66016c28e983a8a8fd08b4151fa2c1bd56727d6f90673151a8444d170b225d45"
+    },
+    {
+      "changed_words": [
+        [
+          795,
+          802
+        ],
+        [
+          831,
+          833
+        ],
+        [
+          834,
+          837
+        ],
+        [
+          855,
+          857
+        ]
+      ],
+      "group": "wellcome-14770",
+      "role": "qwen",
+      "text_sha256": "68d2b39c53a5995c7297f7cdde84e8f00743670ecd6159115fe302f445a37840"
+    },
+    {
+      "changed_words": [
+        [
+          771,
+          774
+        ],
+        [
+          775,
+          780
+        ],
+        [
+          781,
+          786
+        ],
+        [
+          787,
+          792
+        ],
+        [
+          793,
+          795
+        ],
+        [
+          796,
+          806
+        ],
+        [
+          807,
+          817
+        ],
+        [
+          819,
+          821
+        ],
+        [
+          823,
+          826
+        ],
+        [
+          827,
+          837
+        ],
+        [
+          838,
+          843
+        ],
+        [
+          845,
+          847
+        ],
+        [
+          849,
+          851
+        ]
+      ],
+      "group": "wellcome-14770",
+      "role": "smol2",
+      "text_sha256": "d7ff3aa52fa14083eae39d268f76dab687fcb2eef2192cb1a97a10bda8a27bd6"
+    },
+    {
+      "changed_words": [],
+      "group": "wellcome-15013",
+      "role": "before",
+      "text_sha256": "9ce189257e194adec83dcce68a0561e7b986d701bc2d4863de060c68f60e100b"
+    },
+    {
+      "changed_words": [
+        [
+          116,
+          123
+        ],
+        [
+          124,
+          128
+        ]
+      ],
+      "group": "wellcome-15013",
+      "role": "edited",
+      "text_sha256": "cb774d2debc70843af3ee1df1503d79fb9c67a49f61355284012307d5f938150"
+    },
+    {
+      "changed_words": [
+        [
+          69,
+          74
+        ],
+        [
+          75,
+          83
+        ],
+        [
+          84,
+          85
+        ],
+        [
+          86,
+          90
+        ],
+        [
+          92,
+          96
+        ],
+        [
+          97,
+          104
+        ],
+        [
+          105,
+          109
+        ],
+        [
+          110,
+          114
+        ],
+        [
+          115,
+          119
+        ],
+        [
+          124,
+          129
+        ],
+        [
+          131,
+          138
+        ],
+        [
+          141,
+          146
+        ],
+        [
+          147,
+          155
+        ],
+        [
+          156,
+          158
+        ],
+        [
+          161,
+          162
+        ],
+        [
+          163,
+          169
+        ]
+      ],
+      "group": "wellcome-15013",
+      "role": "smol2",
+      "text_sha256": "9d661f851620666238204fc6282bab35047ab607dc2604ef3da2a40d93f96685"
+    },
+    {
+      "changed_words": [],
+      "group": "gates-12903",
+      "role": "before",
+      "text_sha256": "6a16236be084b1e7f0e4949bf0c4b93c078107fb3bb11874a6e5c3d1042eb9ce"
+    },
+    {
+      "changed_words": [
+        [
+          471,
+          473
+        ],
+        [
+          474,
+          479
+        ],
+        [
+          480,
+          487
+        ]
+      ],
+      "group": "gates-12903",
+      "role": "edited",
+      "text_sha256": "2cc694bdb18ab60b7b5f4570780f96bd7bb8d6f8f63aea17a80487e6f527fac2"
+    },
+    {
+      "changed_words": [],
+      "group": "gates-12958",
+      "role": "before",
+      "text_sha256": "02091029e4b1575f346ed11cb997ad8fccd00404c12e9cbc945c243f0047ee21"
+    },
+    {
+      "changed_words": [
+        [
+          658,
+          662
+        ],
+        [
+          663,
+          671
+        ]
+      ],
+      "group": "gates-12958",
+      "role": "edited",
+      "text_sha256": "ca5db9cf613d1b5e30f5245b32d5d6f000ca2b318b574157904f0af161398f7a"
+    },
+    {
+      "changed_words": [
+        [
+          442,
+          454
+        ],
+        [
+          455,
+          464
+        ],
+        [
+          474,
+          478
+        ],
+        [
+          530,
+          537
+        ],
+        [
+          539,
+          543
+        ],
+        [
+          553,
+          556
+        ],
+        [
+          609,
+          616
+        ],
+        [
+          637,
+          649
+        ]
+      ],
+      "group": "gates-12958",
+      "role": "qwen",
+      "text_sha256": "d70a3ff58bff3e7a058778b15028fdf3c6bde52042e29dbadc1d91fb3bf782e5"
+    },
+    {
+      "changed_words": [],
+      "group": "gates-12820",
+      "role": "before",
+      "text_sha256": "b1383f2500dc33c60966acfa7400cd97e20726319638abe8efdecd00ca2a2c3a"
+    },
+    {
+      "changed_words": [],
+      "group": "gates-12820",
+      "role": "edited",
+      "text_sha256": "83ccda547f12c665fee4257858f7444553a92afc1676dc1a5797e0672d067513"
+    },
+    {
+      "changed_words": [],
+      "group": "gates-12957",
+      "role": "before",
+      "text_sha256": "cf77acc33e9574dc2035fb6757dc79f92e29c8b364d808e744bda77337a4e877"
+    },
+    {
+      "changed_words": [
+        [
+          239,
+          249
+        ],
+        [
+          255,
+          258
+        ],
+        [
+          259,
+          268
+        ],
+        [
+          269,
+          276
+        ],
+        [
+          337,
+          341
+        ],
+        [
+          342,
+          343
+        ],
+        [
+          344,
+          345
+        ],
+        [
+          346,
+          350
+        ],
+        [
+          351,
+          359
+        ],
+        [
+          360,
+          364
+        ],
+        [
+          407,
+          410
+        ],
+        [
+          419,
+          421
+        ],
+        [
+          422,
+          425
+        ],
+        [
+          426,
+          436
+        ]
+      ],
+      "group": "gates-12957",
+      "role": "edited",
+      "text_sha256": "b4315a4ce2ac830f07abe227ecb603b322352ad52641e91df68452bb0cb60dda"
+    },
+    {
+      "changed_words": [
+        [
+          239,
+          241
+        ],
+        [
+          253,
+          262
+        ],
+        [
+          263,
+          267
+        ],
+        [
+          315,
+          320
+        ],
+        [
+          366,
+          371
+        ],
+        [
+          399,
+          406
+        ],
+        [
+          407,
+          409
+        ]
+      ],
+      "group": "gates-12957",
+      "role": "qwen",
+      "text_sha256": "c90ced0d7148ff984aee8b48fb2b8d3edc82f93d115c734dadb86ad6109bcb7f"
+    },
+    {
+      "changed_words": [
+        [
+          239,
+          243
+        ],
+        [
+          259,
+          263
+        ],
+        [
+          284,
+          289
+        ],
+        [
+          290,
+          292
+        ],
+        [
+          293,
+          295
+        ],
+        [
+          296,
+          305
+        ],
+        [
+          334,
+          337
+        ],
+        [
+          363,
+          371
+        ]
+      ],
+      "group": "gates-12957",
+      "role": "smol2",
+      "text_sha256": "ba8db5fc7ee2b988d524f8fa2baa3ca19865b204c03df5c56b1b30794640a5a6"
+    },
+    {
+      "changed_words": [],
+      "group": "gates-12891",
+      "role": "before",
+      "text_sha256": "6fa397c78acf2fb7390573bd34a5d3132f571314643543fafcfef2edc8ad271c"
+    },
+    {
+      "changed_words": [
+        [
+          173,
+          178
+        ],
+        [
+          194,
+          200
+        ]
+      ],
+      "group": "gates-12891",
+      "role": "edited",
+      "text_sha256": "b3b49731d5bb1b9c9e30f7ea503359d118630ab717b0a1802d7faa2f1402c9ad"
+    },
+    {
+      "changed_words": [
+        [
+          173,
+          179
+        ],
+        [
+          184,
+          187
+        ],
+        [
+          188,
+          190
+        ],
+        [
+          191,
+          194
+        ],
+        [
+          195,
+          203
+        ]
+      ],
+      "group": "gates-12891",
+      "role": "qwen",
+      "text_sha256": "f49cd1122f1d733f627a483de24a293cee13e599d46497c25373e2cbf8c24015"
+    },
+    {
+      "changed_words": [
+        [
+          174,
+          177
+        ],
+        [
+          178,
+          184
+        ],
+        [
+          200,
+          201
+        ],
+        [
+          209,
+          215
+        ],
+        [
+          231,
+          240
+        ],
+        [
+          241,
+          243
+        ],
+        [
+          244,
+          252
+        ],
+        [
+          253,
+          264
+        ]
+      ],
+      "group": "gates-12891",
+      "role": "smol2",
+      "text_sha256": "afe231a902e705f068e1530302309649839a2947a02ba8c5e9359f28496d160b"
+    },
+    {
+      "changed_words": [],
+      "group": "gates-12825",
+      "role": "before",
+      "text_sha256": "dd2bb52056201818c42aed453bf3764a6a382fc4f67c0936c28ea7b75be8d73b"
+    },
+    {
+      "changed_words": [
+        [
+          320,
+          326
+        ],
+        [
+          401,
+          403
+        ],
+        [
+          404,
+          411
+        ],
+        [
+          412,
+          418
+        ],
+        [
+          419,
+          429
+        ]
+      ],
+      "group": "gates-12825",
+      "role": "edited",
+      "text_sha256": "8786f8c52140d1bdaea8515ac2c665561eaca73150dd9075a164d1c775fa036f"
+    },
+    {
+      "changed_words": [
+        [
+          347,
+          350
+        ],
+        [
+          358,
+          360
+        ],
+        [
+          361,
+          365
+        ]
+      ],
+      "group": "gates-12825",
+      "role": "qwen",
+      "text_sha256": "45ff8c6a3b36944f035dfcb3f40a5397ab2624ca9573173257f51870398b5203"
+    },
+    {
+      "changed_words": [],
+      "group": "gates-12797",
+      "role": "before",
+      "text_sha256": "1abbe620125e2db25133646611b6d7890fdec7b1f3c0ee18210cc56cbb01e363"
+    },
+    {
+      "changed_words": [
+        [
+          299,
+          301
+        ],
+        [
+          302,
+          309
+        ],
+        [
+          310,
+          322
+        ],
+        [
+          323,
+          330
+        ],
+        [
+          331,
+          334
+        ],
+        [
+          335,
+          339
+        ],
+        [
+          340,
+          342
+        ],
+        [
+          343,
+          352
+        ],
+        [
+          353,
+          362
+        ]
+      ],
+      "group": "gates-12797",
+      "role": "edited",
+      "text_sha256": "5e4dc3fddf3c50d4fc0eaea6cc93c300152cde4d00b1da273b678a6675f06f90"
+    },
+    {
+      "changed_words": [
+        [
+          299,
+          310
+        ],
+        [
+          318,
+          329
+        ],
+        [
+          338,
+          347
+        ],
+        [
+          355,
+          364
+        ]
+      ],
+      "group": "gates-12797",
+      "role": "qwen",
+      "text_sha256": "9647780b8e606a2c944a6db015278aafa4f90f200310694a62236b7c0f2395dc"
+    },
+    {
+      "changed_words": [
+        [
+          299,
+          307
+        ],
+        [
+          308,
+          314
+        ],
+        [
+          315,
+          318
+        ],
+        [
+          319,
+          330
+        ],
+        [
+          374,
+          379
+        ],
+        [
+          407,
+          414
+        ]
+      ],
+      "group": "gates-12797",
+      "role": "smol2",
+      "text_sha256": "56a64b945e73db5f508f04ccc1f08a56b7263743f12b13f0c53c0a6def25d5f7"
+    },
+    {
+      "changed_words": [],
+      "group": "gates-12783",
+      "role": "before",
+      "text_sha256": "de434867620f3392f934873a24f64899db0c2d393586cf4fefa66788dc0feb68"
+    },
+    {
+      "changed_words": [
+        [
+          382,
+          385
+        ],
+        [
+          386,
+          394
+        ],
+        [
+          395,
+          399
+        ],
+        [
+          400,
+          408
+        ]
+      ],
+      "group": "gates-12783",
+      "role": "edited",
+      "text_sha256": "aa2602ee2e75cab2350e952ace4c4fb3e01aca0c2ab562b02ecfb2ceb6e9b8ae"
+    },
+    {
+      "changed_words": [
+        [
+          256,
+          263
+        ],
+        [
+          264,
+          265
+        ],
+        [
+          267,
+          273
+        ],
+        [
+          274,
+          285
+        ],
+        [
+          286,
+          292
+        ],
+        [
+          299,
+          312
+        ],
+        [
+          313,
+          321
+        ],
+        [
+          323,
+          332
+        ],
+        [
+          422,
+          425
+        ],
+        [
+          426,
+          432
+        ]
+      ],
+      "group": "gates-12783",
+      "role": "smol2",
+      "text_sha256": "b77e19f3fe456c79f981479784451215cb7faac084c464e885533d1193405221"
+    },
+    {
+      "changed_words": [],
+      "group": "gates-12998",
+      "role": "before",
+      "text_sha256": "d438ee03bf5db24596879126ef442c73a3e55ef1e23f2b910954d2c7c2ba46f4"
+    },
+    {
+      "changed_words": [],
+      "group": "gates-12998",
+      "role": "edited",
+      "text_sha256": "ef42c30662c3bbbfc1608ae47a6d4759886abae5ee99e6f0b2495e8888d71754"
+    },
+    {
+      "changed_words": [
+        [
+          565,
+          570
+        ],
+        [
+          574,
+          580
+        ],
+        [
+          642,
+          650
+        ],
+        [
+          667,
+          678
+        ]
+      ],
+      "group": "gates-12998",
+      "role": "qwen",
+      "text_sha256": "c47ce7a90069cfaaaf9f60d882771dcb44581510ca6ccd23be27a97e172677dc"
+    },
+    {
+      "changed_words": [
+        [
+          557,
+          562
+        ],
+        [
+          566,
+          572
+        ],
+        [
+          573,
+          576
+        ],
+        [
+          577,
+          585
+        ],
+        [
+          586,
+          588
+        ],
+        [
+          601,
+          606
+        ],
+        [
+          607,
+          614
+        ],
+        [
+          649,
+          657
+        ],
+        [
+          658,
+          663
+        ],
+        [
+          664,
+          667
+        ],
+        [
+          668,
+          671
+        ],
+        [
+          672,
+          680
+        ]
+      ],
+      "group": "gates-12998",
+      "role": "smol2",
+      "text_sha256": "30c7a4df07c7e42f418a43c262b706d6a2d128f4dca30f302483e4a0b4a7d2ed"
+    },
+    {
+      "changed_words": [],
+      "group": "gates-13029",
+      "role": "before",
+      "text_sha256": "efe5a01fa43cc5aa36e3e99e104d1eda636106b735760ed863a24a532be858c0"
+    },
+    {
+      "changed_words": [],
+      "group": "gates-13029",
+      "role": "edited",
+      "text_sha256": "e5c02a070578cd5b2543b8e0ae954507bb4f76791e8f7a9f1d55b239b74d2384"
+    },
+    {
+      "changed_words": [
+        [
+          353,
+          357
+        ],
+        [
+          364,
+          370
+        ],
+        [
+          375,
+          381
+        ],
+        [
+          385,
+          389
+        ],
+        [
+          390,
+          394
+        ],
+        [
+          395,
+          403
+        ],
+        [
+          404,
+          407
+        ],
+        [
+          408,
+          416
+        ],
+        [
+          431,
+          433
+        ],
+        [
+          434,
+          443
+        ],
+        [
+          444,
+          447
+        ],
+        [
+          448,
+          453
+        ],
+        [
+          454,
+          464
+        ]
+      ],
+      "group": "gates-13029",
+      "role": "qwen",
+      "text_sha256": "7b6c12b89b8447b863265b47bed40c41777b605c346bcc7c95b8a8473fd70880"
+    },
+    {
+      "changed_words": [
+        [
+          352,
+          354
+        ],
+        [
+          382,
+          388
+        ],
+        [
+          390,
+          395
+        ],
+        [
+          400,
+          407
+        ],
+        [
+          408,
+          411
+        ],
+        [
+          415,
+          417
+        ],
+        [
+          418,
+          422
+        ],
+        [
+          423,
+          425
+        ],
+        [
+          443,
+          450
+        ],
+        [
+          472,
+          474
+        ],
+        [
+          475,
+          491
+        ],
+        [
+          492,
+          498
+        ],
+        [
+          499,
+          502
+        ],
+        [
+          503,
+          509
+        ],
+        [
+          510,
+          520
+        ]
+      ],
+      "group": "gates-13029",
+      "role": "smol2",
+      "text_sha256": "95a4aa99120e922e0ed83a089097aefc0644b4ddb9d0f4f2210b79c6a5b5feb2"
+    },
+    {
+      "changed_words": [],
+      "group": "gates-12808",
+      "role": "before",
+      "text_sha256": "5fe45167b1645bfdf13b96ff70ae9c2ef220943a24aaed7cbce098cd3b2d1a1d"
+    },
+    {
+      "changed_words": [
+        [
+          189,
+          197
+        ],
+        [
+          198,
+          203
+        ],
+        [
+          204,
+          212
+        ]
+      ],
+      "group": "gates-12808",
+      "role": "edited",
+      "text_sha256": "86573d4181a7c09490fc187a42e6f436aab830bcd2ba6666aed2fb7d3578958b"
+    },
+    {
+      "changed_words": [
+        [
+          136,
+          141
+        ],
+        [
+          142,
+          147
+        ],
+        [
+          148,
+          161
+        ],
+        [
+          166,
+          168
+        ],
+        [
+          169,
+          178
+        ],
+        [
+          188,
+          196
+        ],
+        [
+          198,
+          201
+        ],
+        [
+          212,
+          215
+        ],
+        [
+          224,
+          227
+        ],
+        [
+          235,
+          238
+        ],
+        [
+          244,
+          247
+        ],
+        [
+          268,
+          271
+        ],
+        [
+          284,
+          287
+        ],
+        [
+          297,
+          300
+        ],
+        [
+          316,
+          319
+        ],
+        [
+          338,
+          341
+        ],
+        [
+          348,
+          351
+        ],
+        [
+          363,
+          366
+        ]
+      ],
+      "group": "gates-12808",
+      "role": "qwen",
+      "text_sha256": "7797d25a61f98a32026259cf26a7b7f97629f4d9e7e054dd15396e87f2b1b45c"
+    },
+    {
+      "changed_words": [
+        [
+          135,
+          138
+        ],
+        [
+          139,
+          150
+        ],
+        [
+          151,
+          158
+        ],
+        [
+          159,
+          168
+        ],
+        [
+          280,
+          283
+        ],
+        [
+          291,
+          296
+        ],
+        [
+          297,
+          310
+        ],
+        [
+          311,
+          316
+        ],
+        [
+          317,
+          324
+        ],
+        [
+          325,
+          328
+        ],
+        [
+          329,
+          336
+        ],
+        [
+          337,
+          339
+        ],
+        [
+          340,
+          347
+        ],
+        [
+          348,
+          358
+        ]
+      ],
+      "group": "gates-12808",
+      "role": "smol2",
+      "text_sha256": "be8be7652fa7b48df1d63d94c5da1c5f11a7683b5fdac9d2d2e51a2a6c2af7bc"
+    }
+  ],
+  "schema": "chipmunk.writing-editorial-word-overlap/1",
+  "worker_sha256": "5629ff7684add2e2d78f24ba6a3c5f227f1d12631d13a4f1aa033dfe9fef9242"
+}

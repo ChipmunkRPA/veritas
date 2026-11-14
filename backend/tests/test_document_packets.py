@@ -176,16 +176,17 @@ def test_writing_check_reasons_use_safe_enumerated_values():
         document_check_coverage.commitment(record)
 
 
-@pytest.mark.parametrize(("scores", "message"), [
-    ((.2, .1, .15), "The writing checks selected no passages for review. AI editing may still be present."),
-    ((), "No local writing responses were recorded."),
+@pytest.mark.parametrize(("scores", "candidates", "message"), [
+    ((.2, .1, .15), 0, "The writing checks selected no passages for review. AI editing may still be present."),
+    ((), 0, "No local writing responses were recorded."),
+    ((.1, .9, .2), 1, "Ordinary editing and polished writing can produce a similar response."),
 ])
-def test_report_distinguishes_unflagged_passages_from_missing_local_evidence(packet_factory, scores, message):
+def test_report_explains_passage_selections_and_coverage(packet_factory, scores, candidates, message):
     from app.reports.multimedia_evidence import _coverage
 
     db, store, analysis, result, _, _ = packet_factory(scores=scores)
     evidence = build_packet_set(db, analysis, store, result)
-    assert evidence["coverage"]["candidate_spans"] == 0
+    assert evidence["coverage"]["candidate_spans"] == candidates
     assert message in _coverage("document", evidence)
 
 

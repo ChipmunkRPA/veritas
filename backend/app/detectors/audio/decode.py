@@ -26,6 +26,7 @@ from app.detectors.video.decode import _input
 from app.evidence.stereo_binding import MAX_SECONDS as STEREO_MAX_SECONDS
 
 SAMPLE_RATE = 16_000
+VIDEO_AUDIO_MAX_SECONDS = 120
 VERSION = "audio-input/1"
 _FRAME = re.compile(r"\bn:(\d+)\s+pts:(-?\d+).*?\bnb_samples:(\d+)")
 

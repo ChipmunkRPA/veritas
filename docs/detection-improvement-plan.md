@@ -66,6 +66,11 @@ are not public screening promises or calibrated population probabilities.
   explain the scope before checkout. The language check samples up to 48
   passages in addition to the complete extract, so short language changes can
   escape it. Verified signed provenance is evaluated separately.
+- [Sound during a measured mouth hold](video-mouth-hold-sound-2026-11-13.md)
+  binds a playable mono excerpt, waveform and periodicity measurements to
+  an existing verified HD picture interval. A controlled clear-speech insert
+  registered on seven of seven intervals. None of the same inserts registered
+  with strong added noise. This evidence carries zero weight in AI confidence.
 - [Blind pixel prediction](image-crossfit-prediction-2026-11-13.md) measured
   900 held deliveries against exact local image masks. It added at most two
   useful masks per encoding on the primary set, added ordinary-processing

@@ -761,7 +761,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.face_lighting_context','app.evidence.face_return_binding','app.evidence.face_return_coverage',
                         'app.evidence.video_packet_versions','app.evidence.picture_hold_binding', 'app.evidence.picture_sequence',
                         'app.evidence.scene_return_binding',
-                        'app.evidence.mouth_local_hold_binding','app.evidence.source_geometry',
+                        'app.evidence.mouth_hold_sound', 'app.evidence.mouth_local_hold_binding','app.evidence.source_geometry',
                         'app.evidence.image_eligibility','app.evidence.image_copy_similarity_binding','app.evidence.image_interpolation_binding',
                         'app.evidence.image_copy_affine_binding','app.evidence.image_embedded_pair_binding',
                         'app.evidence.document_scope','app.evidence.email_alternatives'):

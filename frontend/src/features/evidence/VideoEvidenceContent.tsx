@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Button } from '../../components/ui'
-import { EvidenceLimits, EvidenceMeasurements, EvidencePicture, EvidenceReferences, evidenceCard, evidenceGrid } from './EvidenceMedia'
+import { EvidenceAudio, EvidenceLimits, EvidenceMeasurements, EvidencePicture, EvidenceReferences, evidenceCard, evidenceGrid } from './EvidenceMedia'
 import { evidenceAssetUrl, evidenceSourceMediaUrl, hasNestedVideoEvidence, seconds, type VideoEvidenceFrame, type VideoEvidencePacket, type VideoEvidenceSet } from './multimediaPackets'
 import VideoFrameNavigator from './VideoFrameNavigator'
 
@@ -248,6 +248,13 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         {renderFrames(packet, packet.face_boundary_frames, true)}
       </section>}
       {renderFrames(packet, packet.frames, false)}
+      {packet.mouth_local_hold && packet.artifacts.mouth_hold_waveform && packet.artifacts.mouth_hold_audio &&
+        <div className="mt-4 space-y-3">
+          <EvidencePicture set={set} artifact={packet.artifacts.mouth_hold_waveform} token={token} ready={mediaReady}
+            alt="Waveform during the measured mouth-region hold" chart />
+          <EvidenceAudio set={set} artifact={packet.artifacts.mouth_hold_audio} token={token} ready={mediaReady}
+            alt="Listen to the measured mouth-region hold" />
+        </div>}
       <p className="mt-4 mb-0 text-small">{packet.interpretation}</p><EvidenceMeasurements values={packet.measurements} />
       <EvidenceLimits lines={packet.limitations} /><EvidenceReferences packet={packet} />
     </article>)}</div>

@@ -168,6 +168,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         face_short_carrier_binding,
         face_short_window_binding,
         face_spatial_cut_binding,
+        mouth_hold_sound,
         picture_hold_binding,
         scene_return_binding,
         whole_face_binding,
@@ -344,6 +345,22 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                             raise ObjectIntegrityError("Video crop is not from its recorded source region")
         if packet.get("face_lighting") and face_lighting_context.record(packet, source, brightness_inputs) != packet["face_lighting"]:
             raise ObjectIntegrityError("Video brightness differs from the displayed source pixels")
+        if sound := packet.get("mouth_hold_sound"):
+            from app.detectors.audio.decode import read_wav, wav_bytes
+            from app.detectors.video.mouth_hold_sound import measure
+            from app.evidence.audio_packets import _chart
+
+            audio = document["audio"]["source"]
+            pcm = read_wav(_bytes(audio["wav_sha256"], store))
+            review = document["picture_hold"]["mouth_local_hold"]
+            if measure(pcm, audio, review, table.time_base) != sound:
+                raise ObjectIntegrityError("Mouth-hold sound differs from the frozen audio measurement")
+            start, stop = sound["samples"]
+            expected = {mouth_hold_sound.WAV: wav_bytes(pcm[start:stop]),
+                        mouth_hold_sound.WAVEFORM: _chart(pcm, [], start=start, end=stop, selected=(start, stop),
+                                                          scores=False, title=mouth_hold_sound.WAVEFORM_TITLE)}
+            if any(assets[packet["artifacts"][role]["sha256"]] != data for role, data in expected.items()):
+                raise ObjectIntegrityError("Mouth-hold audio or waveform differs from the frozen soundtrack")
     if document.get("version") in NESTED_VIDEO_VERSIONS:
         from app.evidence import video_audio, video_av
 
@@ -895,6 +912,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 caption = ("Endpoints of both repeated ranges" if repeated_sequence else "Endpoints of the verified hold"
                            if hold else "Sampled frames (not continuous playback)")
                 row["images"] = [plate("contact_sheet", sheet, caption)]
+            if waveform := packet["artifacts"].get("mouth_hold_waveform"):
+                row["images"].append(plate("mouth_hold_waveform", waveform, "Mono soundtrack during these measured pictures"))
             row["window"] = copy.deepcopy(packet.get("window"))
             row["face_interval"] = copy.deepcopy(packet.get("face_interval"))
             row["face_sequence"] = copy.deepcopy(packet.get("face_sequence"))

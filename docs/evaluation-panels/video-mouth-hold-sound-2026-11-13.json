@@ -1,0 +1,1008 @@
+{
+  "schema": "chipmunk.video-mouth-hold-sound-study/1",
+  "source_plan_sha256": "bd38781bf455afa904993eb3dbc6faba697286a39e3e39a026eb4a9533c3478d",
+  "method": "Apply the product acoustic calculation at two preparation-defined time slots with no video input to the acoustic measurement.",
+  "limit": "Clean donor selection maximizes voiced support and does not establish real-world accuracy.",
+  "statistics": {
+    "natural_quiet_measured": 9,
+    "natural_quiet_sustained": 0,
+    "natural_quiet_plus_noise_measured": 9,
+    "natural_quiet_plus_noise_sustained": 0,
+    "original_400ms_measured": 7,
+    "original_400ms_sustained": 2,
+    "insert_400ms_measured": 7,
+    "insert_400ms_sustained": 7,
+    "insert_400ms_plus_noise_measured": 7,
+    "insert_400ms_plus_noise_sustained": 0,
+    "original_200ms_measured": 7,
+    "original_200ms_sustained": 0,
+    "insert_200ms_measured": 7,
+    "insert_200ms_sustained": 7,
+    "insert_200ms_plus_noise_measured": 7,
+    "insert_200ms_plus_noise_sustained": 0
+  },
+  "group_rows": [
+    {
+      "group": 1,
+      "split": "held",
+      "control_only": false,
+      "windows": [
+        {
+          "condition": "natural_quiet",
+          "samples": [
+            26560,
+            29760
+          ],
+          "blocks": 9,
+          "periodic_blocks": 2,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "natural_quiet_plus_noise",
+          "samples": [
+            26560,
+            29760
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 17,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_400ms_plus_noise",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 8,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_200ms",
+          "samples": [
+            26560,
+            29760
+          ],
+          "blocks": 9,
+          "periodic_blocks": 2,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_200ms",
+          "samples": [
+            26560,
+            29760
+          ],
+          "blocks": 9,
+          "periodic_blocks": 9,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_200ms_plus_noise",
+          "samples": [
+            26560,
+            29760
+          ],
+          "blocks": 9,
+          "periodic_blocks": 3,
+          "sustained_periodicity": false
+        }
+      ]
+    },
+    {
+      "group": 2,
+      "split": "held",
+      "control_only": true,
+      "windows": [
+        {
+          "condition": "natural_quiet",
+          "samples": [
+            42880,
+            46080
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "natural_quiet_plus_noise",
+          "samples": [
+            42880,
+            46080
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 6,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 17,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_400ms_plus_noise",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 8,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_200ms",
+          "samples": [
+            42880,
+            46080
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_200ms",
+          "samples": [
+            42880,
+            46080
+          ],
+          "blocks": 9,
+          "periodic_blocks": 9,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_200ms_plus_noise",
+          "samples": [
+            42880,
+            46080
+          ],
+          "blocks": 9,
+          "periodic_blocks": 3,
+          "sustained_periodicity": false
+        }
+      ]
+    },
+    {
+      "group": 3,
+      "split": "held",
+      "control_only": true,
+      "windows": [
+        {
+          "condition": "natural_quiet",
+          "samples": [
+            48640,
+            51840
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "natural_quiet_plus_noise",
+          "samples": [
+            48640,
+            51840
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 9,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 17,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_400ms_plus_noise",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 8,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_200ms",
+          "samples": [
+            48640,
+            51840
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_200ms",
+          "samples": [
+            48640,
+            51840
+          ],
+          "blocks": 9,
+          "periodic_blocks": 9,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_200ms_plus_noise",
+          "samples": [
+            48640,
+            51840
+          ],
+          "blocks": 9,
+          "periodic_blocks": 3,
+          "sustained_periodicity": false
+        }
+      ]
+    },
+    {
+      "group": 4,
+      "split": "held",
+      "control_only": false,
+      "windows": [
+        {
+          "condition": "natural_quiet",
+          "samples": [
+            18560,
+            21760
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "natural_quiet_plus_noise",
+          "samples": [
+            18560,
+            21760
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 1,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 17,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_400ms_plus_noise",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 8,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_200ms",
+          "samples": [
+            18560,
+            21760
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_200ms",
+          "samples": [
+            18560,
+            21760
+          ],
+          "blocks": 9,
+          "periodic_blocks": 9,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_200ms_plus_noise",
+          "samples": [
+            18560,
+            21760
+          ],
+          "blocks": 9,
+          "periodic_blocks": 3,
+          "sustained_periodicity": false
+        }
+      ]
+    },
+    {
+      "group": 5,
+      "split": "held",
+      "control_only": false,
+      "windows": [
+        {
+          "condition": "natural_quiet",
+          "samples": [
+            48960,
+            52160
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "natural_quiet_plus_noise",
+          "samples": [
+            48960,
+            52160
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 6,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 17,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_400ms_plus_noise",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 8,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_200ms",
+          "samples": [
+            48960,
+            52160
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_200ms",
+          "samples": [
+            48960,
+            52160
+          ],
+          "blocks": 9,
+          "periodic_blocks": 9,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_200ms_plus_noise",
+          "samples": [
+            48960,
+            52160
+          ],
+          "blocks": 9,
+          "periodic_blocks": 3,
+          "sustained_periodicity": false
+        }
+      ]
+    },
+    {
+      "group": 6,
+      "split": "held",
+      "control_only": false,
+      "windows": [
+        {
+          "condition": "natural_quiet",
+          "samples": [
+            21440,
+            24640
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "natural_quiet_plus_noise",
+          "samples": [
+            21440,
+            24640
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 17,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_400ms_plus_noise",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 8,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_200ms",
+          "samples": [
+            21440,
+            24640
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_200ms",
+          "samples": [
+            21440,
+            24640
+          ],
+          "blocks": 9,
+          "periodic_blocks": 9,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_200ms_plus_noise",
+          "samples": [
+            21440,
+            24640
+          ],
+          "blocks": 9,
+          "periodic_blocks": 3,
+          "sustained_periodicity": false
+        }
+      ]
+    },
+    {
+      "group": 7,
+      "split": "development",
+      "control_only": false,
+      "windows": [
+        {
+          "condition": "natural_quiet",
+          "samples": [
+            4800,
+            8000
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "natural_quiet_plus_noise",
+          "samples": [
+            4800,
+            8000
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 9,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 18,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_400ms_plus_noise",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 13,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "original_200ms",
+          "samples": [
+            4800,
+            8000
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_200ms",
+          "samples": [
+            4800,
+            8000
+          ],
+          "blocks": 9,
+          "periodic_blocks": 9,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_200ms_plus_noise",
+          "samples": [
+            4800,
+            8000
+          ],
+          "blocks": 9,
+          "periodic_blocks": 9,
+          "sustained_periodicity": true
+        }
+      ]
+    },
+    {
+      "group": 8,
+      "split": "development",
+      "control_only": false,
+      "windows": [
+        {
+          "condition": "natural_quiet",
+          "samples": [
+            46720,
+            49920
+          ],
+          "blocks": 9,
+          "periodic_blocks": 4,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "natural_quiet_plus_noise",
+          "samples": [
+            46720,
+            49920
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 8,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 17,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_400ms_plus_noise",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 8,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_200ms",
+          "samples": [
+            46720,
+            49920
+          ],
+          "blocks": 9,
+          "periodic_blocks": 4,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_200ms",
+          "samples": [
+            46720,
+            49920
+          ],
+          "blocks": 9,
+          "periodic_blocks": 9,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_200ms_plus_noise",
+          "samples": [
+            46720,
+            49920
+          ],
+          "blocks": 9,
+          "periodic_blocks": 7,
+          "sustained_periodicity": true
+        }
+      ]
+    },
+    {
+      "group": 9,
+      "split": "held",
+      "control_only": false,
+      "windows": [
+        {
+          "condition": "natural_quiet",
+          "samples": [
+            11520,
+            14720
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "natural_quiet_plus_noise",
+          "samples": [
+            11520,
+            14720
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 14,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 17,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_400ms_plus_noise",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 8,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_200ms",
+          "samples": [
+            11520,
+            14720
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_200ms",
+          "samples": [
+            11520,
+            14720
+          ],
+          "blocks": 9,
+          "periodic_blocks": 9,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_200ms_plus_noise",
+          "samples": [
+            11520,
+            14720
+          ],
+          "blocks": 9,
+          "periodic_blocks": 3,
+          "sustained_periodicity": false
+        }
+      ]
+    },
+    {
+      "group": 10,
+      "split": "held",
+      "control_only": false,
+      "windows": [
+        {
+          "condition": "natural_quiet",
+          "samples": [
+            37120,
+            40320
+          ],
+          "blocks": 9,
+          "periodic_blocks": 1,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "natural_quiet_plus_noise",
+          "samples": [
+            37120,
+            40320
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 13,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 17,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_400ms_plus_noise",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_200ms",
+          "samples": [
+            37120,
+            40320
+          ],
+          "blocks": 9,
+          "periodic_blocks": 1,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_200ms",
+          "samples": [
+            37120,
+            40320
+          ],
+          "blocks": 9,
+          "periodic_blocks": 9,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_200ms_plus_noise",
+          "samples": [
+            37120,
+            40320
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        }
+      ]
+    },
+    {
+      "group": 11,
+      "split": "held",
+      "control_only": false,
+      "windows": [
+        {
+          "condition": "natural_quiet",
+          "samples": [
+            37440,
+            40640
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "natural_quiet_plus_noise",
+          "samples": [
+            37440,
+            40640
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 6,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_400ms",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 17,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_400ms_plus_noise",
+          "samples": [
+            52800,
+            59200
+          ],
+          "blocks": 19,
+          "periodic_blocks": 8,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "original_200ms",
+          "samples": [
+            37440,
+            40640
+          ],
+          "blocks": 9,
+          "periodic_blocks": 0,
+          "sustained_periodicity": false
+        },
+        {
+          "condition": "insert_200ms",
+          "samples": [
+            37440,
+            40640
+          ],
+          "blocks": 9,
+          "periodic_blocks": 9,
+          "sustained_periodicity": true
+        },
+        {
+          "condition": "insert_200ms_plus_noise",
+          "samples": [
+            37440,
+            40640
+          ],
+          "blocks": 9,
+          "periodic_blocks": 3,
+          "sustained_periodicity": false
+        }
+      ]
+    }
+  ],
+  "application_smoke": {
+    "prepaid_simulation_cases": 2,
+    "source_seconds": [
+      3.3,
+      3.7
+    ],
+    "native_frames": [
+      98,
+      105,
+      111
+    ],
+    "audio_samples": [
+      52800,
+      59200
+    ],
+    "time_base": "1/16000",
+    "quiet_periodic_blocks": 0,
+    "voiced_periodic_blocks": 19,
+    "blocks": 19,
+    "chrome": true,
+    "standard_pdf": true,
+    "api_json_parity": true,
+    "exact_original_replay": true,
+    "appearance_inference_weight": 0
+  }
+}

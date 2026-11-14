@@ -36,6 +36,7 @@ from app.evidence import (
     face_short_proposal_binding,
     face_short_window_binding,
     face_spatial_cut_binding,
+    mouth_hold_sound,
     mouth_local_hold_binding,
     picture_hold_binding,
     picture_sequence,
@@ -587,7 +588,7 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
 
 
 def _mouth_hold_packet(db: Session, store: ObjectStore, analysis: Analysis, set_id: str,
-                       source: dict, table: FrameTable, review: dict, decoded: dict) -> dict:
+                       source: dict, table: FrameTable, review: dict, decoded: dict, audio_input: dict | None) -> dict:
     match = review["match"]
     packet_id = mouth_local_hold_binding.PACKET_ID
     bounds = mouth_local_hold_binding.region(match["box"])
@@ -612,16 +613,41 @@ def _mouth_hold_packet(db: Session, store: ObjectStore, analysis: Analysis, set_
             "artifact_refs": {"original": original, "context": original, "crop": crop}})
     start, end = match["frames"]
     first, last = table.seconds(start), table.seconds(end)
+    observation = mouth_local_hold_binding.observation(review, table.tb)
+    measurements = mouth_local_hold_binding.measurements(match)
+    limitations = ["The box is the measured area. The check compares consecutive picture brightness within the box and surrounding face areas."]
+    sound = review.get("sound_context")
+    if sound:
+        from app.detectors.audio.decode import wav_bytes
+        from app.detectors.video.mouth_hold_sound import measure
+        from app.evidence import audio_packets
+
+        if not audio_input:
+            raise PacketIntegrityError("Mouth-hold sound is missing its frozen input")
+        pcm, mapping = audio_packets._input(store, analysis, audio_input)
+        if measure(pcm, mapping, review, table.time_base) != sound:
+            raise PacketIntegrityError("Mouth-hold sound differs from its recorded input")
+        a, b = sound["samples"]
+        assets[mouth_hold_sound.WAV] = audio_packets._asset(db, store, analysis, set_id, wav_bytes(pcm[a:b]),
+            "audio/wav", samples=b - a, sample_rate=mouth_hold_sound.RATE, channels=1)
+        waveform = audio_packets._chart(pcm, [], start=a, end=b, selected=(a, b), scores=False,
+                                       title=mouth_hold_sound.WAVEFORM_TITLE)
+        assets[mouth_hold_sound.WAVEFORM] = audio_packets._asset(db, store, analysis, set_id, waveform, "image/png", width=960, height=280)
+        observation += " " + mouth_hold_sound.observation(sound)
+        measurements.extend(mouth_hold_sound.measurements(sound))
+        limitations.append(mouth_hold_sound.LIMITATION)
+    elif review["schema"] == mouth_local_hold_binding.HD_SCHEMA:
+        limitations.append("The soundtrack was not measured alongside these pictures.")
     return {"id": packet_id, "title": "Mouth-region picture hold", "evidence_type": "anomaly", "claim_scope": "sampled_window",
             "semantics": review["schema"], "mouth_local_hold": match, "affects_overall_confidence": False,
+            **({"mouth_hold_sound": sound} if sound else {}),
             "finding_ids": [], "signal_refs": [], "exhibit_refs": [], "frames": frames, "artifacts": assets,
             "window": {"frame_indices": list(range(start - 1, end + 1)), "time_base": table.time_base,
                        "start_pts": table.pts[start], "end_pts": table.pts[end], "start_stream_s": first, "end_stream_s": last,
                        "start_playback_s": None if origin is None else first - origin,
                        "end_playback_s": None if origin is None else last - origin},
-            "observation": mouth_local_hold_binding.observation(review, table.tb), "interpretation": mouth_local_hold_binding.CONTEXT,
-            "measurements": mouth_local_hold_binding.measurements(match),
-            "limitations": ["The box is the measured area. The check compares consecutive picture brightness within the box and surrounding face areas."],
+            "observation": observation, "interpretation": mouth_local_hold_binding.CONTEXT,
+            "measurements": measurements, "limitations": limitations,
             "clip": {"status": "unavailable", "reason": "Use the original video to play the measured range."},
             "derivation": {"version": VERSION, "selection": "longest_qualified_mouth_region_hold", "decoder": "ffmpeg-rgb24-display-v1",
                            "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
@@ -974,7 +1000,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if pair is not None:
         document["packets"].append(_picture_sequence_packet(db, store, analysis, set_id, source, review, decoded))
     if mouth_match is not None:
-        document["packets"].append(_mouth_hold_packet(db, store, analysis, set_id, source, table, mouth_review, decoded))
+        audio_input = (result.get("manifest", {}).get("sampling", {}).get("video_audio_evidence") or {}).get("input")
+        document["packets"].append(_mouth_hold_packet(db, store, analysis, set_id, source, table, mouth_review, decoded, audio_input))
     if scene is not None:
         document["packets"].append(_scene_return_packet(db, store, analysis, set_id, source, scene, decoded))
     if VERSION in NESTED_VERSIONS:
@@ -1032,9 +1059,11 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
             raise PacketIntegrityError("Video evidence has duplicate or misrepresented observations")
         ids.add(packet["id"])
         artifacts = packet["artifacts"]
-        for asset in artifacts.values():
-            if (not _SHA.fullmatch(str(asset.get("sha256", ""))) or asset.get("media_type") not in {"image/png", "video/mp4"}
-                    or min(asset.get("width", 0), asset.get("height", 0)) <= 0):
+        for name, asset in artifacts.items():
+            held_sound = (name == mouth_hold_sound.WAV and packet.get("id") == mouth_local_hold_binding.PACKET_ID
+                          and packet.get("mouth_hold_sound") and asset.get("media_type") == "audio/wav")
+            if (not _SHA.fullmatch(str(asset.get("sha256", ""))) or (not held_sound and
+                    (asset.get("media_type") not in {"image/png", "video/mp4"} or min(asset.get("width", 0), asset.get("height", 0)) <= 0))):
                 raise PacketIntegrityError("Video evidence has invalid image references")
         try:
             validate_clip_binding(packet, source)

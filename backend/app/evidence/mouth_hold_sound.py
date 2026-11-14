@@ -1,0 +1,75 @@
+# SPDX-License-Identifier: Apache-2.0
+"""Bind a bounded sound measurement to the picture clock of a held mouth region."""
+
+from __future__ import annotations
+
+import math
+from fractions import Fraction
+
+SCHEMA = "chipmunk.video-mouth-hold-sound/1"
+RATE = 16000
+HOP = 320
+WAV = "mouth_hold_audio"
+WAVEFORM = "mouth_hold_waveform"
+WAVEFORM_TITLE = "Sound during the mouth-region hold"
+LIMITATION = ("The mixed soundtrack can include a different speaker, ordinary dubbing or music. "
+              "Strong background noise can mask voice-like periodicity. This observation carries zero AI confidence weight.")
+
+
+def bounds(review, audio, time_base):
+    if review.get("schema") != "chipmunk.video-mouth-local-hold/2" or review.get("status") != "matched":
+        return None
+    timeline = audio.get("timeline") or []
+    if audio.get("timeline_time_base") != f"1/{RATE}" or len(timeline) != 1:
+        return None
+    block = timeline[0]
+    if block["start_sample"] != 0 or block["end_sample"] != audio["samples"]:
+        return None
+    left, right = review["match"]["frames"]
+    clock = Fraction(time_base)
+    first = math.ceil(review["pts"][left] * clock * RATE)
+    last = math.floor(review["pts"][right] * clock * RATE)
+    start, stop = first - block["source_pts"], last - block["source_pts"]
+    if not 0 <= start < stop <= audio["samples"]:
+        return None
+    return start, stop, first, last
+
+
+def measurements(record):
+    count, periodic = record["blocks"], record["periodic_blocks"]
+    return [{"label": "Audio blocks with voice-like periodicity", "value": f"{periodic} of {count}",
+             "unit": "40 ms blocks"}]
+
+
+def observation(record):
+    if record["sustained_periodicity"]:
+        return "The soundtrack has sustained voice-like periodicity during the measured mouth-region hold."
+    return "The soundtrack did not show sustained voice-like periodicity during the measured mouth-region hold."
+
+
+def validate(review, packet, audio, time_base):
+    record = review.get("sound_context")
+    if record is None:
+        if "mouth_hold_sound" in packet or {WAV, WAVEFORM} & packet["artifacts"].keys():
+            raise ValueError("Mouth-hold sound has no committed measurement")
+        return
+    located = bounds(review, audio, time_base)
+    if located is None:
+        raise ValueError("Mouth-hold sound has no continuous source coverage")
+    start, stop, first, last = located
+    offset = (start + HOP - 1) // HOP * HOP
+    count = len(range(offset, stop - 2 * HOP + 1, HOP))
+    if (set(record) != {"schema", "samples", "source_pts", "time_base", "blocks", "periodic_blocks", "sustained_periodicity"}
+            or record["schema"] != SCHEMA or record["samples"] != [start, stop] or record["source_pts"] != [first, last]
+            or record["time_base"] != f"1/{RATE}" or type(record["blocks"]) is not int or record["blocks"] != count or count < 6
+            or type(record["periodic_blocks"]) is not int or not 0 <= record["periodic_blocks"] <= count
+            or record["sustained_periodicity"] is not (3 * record["periodic_blocks"] >= 2 * count)
+            or packet["mouth_hold_sound"] != record
+            or LIMITATION not in packet["limitations"]):
+        raise ValueError("Mouth-hold sound differs from its source interval or recorded measurement")
+    wav, waveform = (packet["artifacts"][key] for key in (WAV, WAVEFORM))
+    if (wav.get("media_type") != "audio/wav" or wav.get("samples") != stop - start
+            or wav.get("sample_rate") != RATE or wav.get("channels") != 1
+            or waveform.get("media_type") != "image/png"
+            or (waveform.get("width"), waveform.get("height")) != (960, 280)):
+        raise ValueError("Mouth-hold sound assets differ from their source interval")

@@ -8,6 +8,7 @@ from fractions import Fraction
 from itertools import pairwise
 
 from app.core.canonical import canonical_hash
+from app.evidence import mouth_hold_sound
 from app.evidence.source_geometry import pixel_bounds
 
 SCHEMA = "chipmunk.video-mouth-local-hold/1"
@@ -102,7 +103,8 @@ def validate(cover, document):
         _require("assessed_window_starts" not in review, "Historical mouth hold includes undeclared windows")
     match = review["match"]
     if status != "matched":
-        _require(match is None and not packets and review["packet_id"] is None, "Mouth hold evidence differs from its status")
+        _require(match is None and not packets and review["packet_id"] is None and "sound_context" not in review,
+                 "Mouth hold evidence differs from its status")
         return
     _require(len(packets) == 1 and review["packet_id"] == PACKET_ID, "Mouth hold omits its recorded evidence")
     packet, = packets
@@ -127,7 +129,11 @@ def validate(cover, document):
     for box in [match["box"], *match["context_boxes"]]:
         _require(all(type(value) is int for value in box), "Mouth hold requires exact native pixel coordinates")
         pixel_bounds(region(box), source["width"], source["height"])
-    _require(packet["observation"] == observation(review, tb) and packet["measurements"] == measurements(match),
+    spoken = review.get("sound_context")
+    mouth_hold_sound.validate(review, packet, document.get("audio", {}).get("source", {}), source["time_base"])
+    text = observation(review, tb) + (" " + mouth_hold_sound.observation(spoken) if spoken else "")
+    numbers = measurements(match) + (mouth_hold_sound.measurements(spoken) if spoken else [])
+    _require(packet["observation"] == text and packet["measurements"] == numbers,
              "Mouth hold wording differs from its measured source range")
     window = packet["window"]
     _require(window["frame_indices"] == list(range(start - 1, end + 1)) and window["time_base"] == source["time_base"]

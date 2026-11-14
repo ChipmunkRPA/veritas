@@ -241,7 +241,8 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       <p className="m-0">{shortReview || longReview || backgroundReview ? 'Primary voice checks' : 'Voice checks'} cover {seconds(set.coverage.scored_samples / rate)} of the {seconds(set.coverage.decoded_samples / rate)} decoded input.
         {' '}{seconds(set.coverage.unscored_samples / rate)} of that input has no window score. Overlapping windows are counted once in this coverage.</p>
       <p className="mt-2 mb-0">{set.coverage.windows.length} scored windows. Responses apply to complete windows, normally four seconds; they do not identify individual words or exact voice-replacement boundaries.</p>
-      {set.coverage.speech_window_selection && <details className="mt-3" open={set.coverage.windows.length === 0 || undefined}>
+      {set.coverage.speech_window_selection && <details className="mt-3"
+        open={set.coverage.windows.length === 0 || hash === '#media-evidence-voice-coverage' || undefined}>
         <summary className="cursor-pointer font-medium">How speech windows were selected</summary>
         <SpeechWindowSelection selection={set.coverage.speech_window_selection} rate={rate} videoOriginS={videoOriginS} />
       </details>}

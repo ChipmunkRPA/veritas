@@ -89,6 +89,12 @@ describe('automated customer conclusion', () => {
     expect(screen.getByTestId('assessment-scope').textContent).toContain('voice/audio checks were skipped')
     expect(screen.getByTestId('assessment-scope').textContent).not.toContain('checked separately')
   })
+  it('links a completed audio assessment without a conclusion to its speech coverage', () => {
+    const dto = { ...analysis(.5, { code: 'not_assessable', probability_ai_calibrated: null }), kind: 'audio' as const, status: 'done' as const }
+    render(<MemoryRouter><AnswerModule analysis={dto} findings={[]} /></MemoryRouter>)
+    expect(screen.getByRole('link', { name: 'Review speech coverage' }).getAttribute('href'))
+      .toBe('/analyses/fixture/media-evidence?view=plain#media-evidence-voice-coverage')
+  })
   it('presents a separate speech estimate and links to the matching video evidence lane', () => {
     const input = { ...analysis(.126264), kind: 'video' as const }
     const soundtrack = { direction: 'ai' as const, headline: 'Leaning towards AI-generated speech', confidence_pct: 95.6,

@@ -113,6 +113,10 @@ export default function AnswerModule({ analysis, findings, signals = [], extra, 
         <a href={`#${IMAGE_REFERENCE_SECTION_ID}`} className="mt-4 inline-block text-small text-accent underline underline-offset-2">
           Compare with an earlier copy
         </a>}
+      {analysis.kind === 'audio' && analysis.status === 'done' && customer.applies &&
+        (customer.direction === 'inconclusive' || customer.direction === 'unavailable') &&
+        <Link to={`/analyses/${encodeURIComponent(analysis.id)}/media-evidence?view=plain#media-evidence-voice-coverage`}
+          className="mt-4 inline-block text-small text-accent underline underline-offset-2">Review speech coverage</Link>}
       {customer.soundtrack && <section aria-label="Speech in this soundtrack" className="mt-4 border border-border bg-surface px-4 py-3 max-w-[76ch]">
         <p className="m-0 text-small font-semibold">Speech in this soundtrack</p>
         <p className="mt-1 mb-0 text-body text-text">{customer.soundtrack.headline}</p>

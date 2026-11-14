@@ -1,0 +1,3069 @@
+{
+  "freeze": {
+    "schema": "chipmunk.audio-gain-gate-voice-transfer/1",
+    "method": {
+      "inputs": "All 116 retained environmental-noise cases and all 77 retained competing-voice cases. Restore exact stored mono samples, original labels and prior primary results. These source files have prior project exposure.",
+      "comparison": "Hold the three-second half-speech admission rule and the primary voice calibration frozen. For an originally unassessed window, try only the same speech-activity gate on a clip-free +6 dB copy. When that gate admits, score the ORIGINAL samples with the current voice detector and its stability check.",
+      "advance": "At least two additional correct synthetic detections from separate source groups and named generator families, with no more than one new noisy genuine false AI flag, no new clean false AI flag and no AI flag on isolated background. A separate fresh test would still be required for adoption.",
+      "confidence": "Record both alternative directions. Extrapolation of the incumbent calibration to these windows is diagnostic only."
+    },
+    "runner_sha256": "9cb351d720d994ac5be31023016137a3684c50edc7d8470401cc9864440b1fbd",
+    "parents": {
+      "audio-background-persistence-2026-11-13.json": "0c3b2396a3c770f3d730de9b46727071ec3accb4df240ea19df1a9d43472834f",
+      "audio-spectra-recovery-comparison-2026-11-11.json": "338fe07802acd1a683b2a8171258adb0d5b3c339e6c1504588fe894ebf10cfca"
+    },
+    "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "rows": [
+      {
+        "bank": "environmental",
+        "id": 0,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 0,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "9542e76ff50820c83652b416fefd7a048be1ec2ffcbf6d5448b7b767225bd078"
+      },
+      {
+        "bank": "environmental",
+        "id": 1,
+        "scene": "street",
+        "label": "genuine",
+        "group": 0,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "0865ccbe5ef073335f637387d452283fcacce0338e17722bd1e2b6e8d977bc16"
+      },
+      {
+        "bank": "environmental",
+        "id": 2,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 0,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "a0df25dfe0b60382fc0baf8df078e77a6d90749ea7e3f01b8c65aaff781a6db1"
+      },
+      {
+        "bank": "environmental",
+        "id": 3,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 1,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "af8a0a43c5b04aefe7da15eae6155db165eace158ba948427b1ef2d3494879c9"
+      },
+      {
+        "bank": "environmental",
+        "id": 4,
+        "scene": "street",
+        "label": "genuine",
+        "group": 1,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "3469fa3f71d94eedbfbde0cc25f05730c0e9d2649c2705cc93aa06986235da6a"
+      },
+      {
+        "bank": "environmental",
+        "id": 5,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 1,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "9c06821d16f1fac0fa1feb20ea6833ad7cb798f4dc3b6d62ec3fdbbbc94645cc"
+      },
+      {
+        "bank": "environmental",
+        "id": 6,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 2,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "3381cc59f7af790daa349e6c470717e319c08ab292816d06d6b7a47ea198b4f3"
+      },
+      {
+        "bank": "environmental",
+        "id": 7,
+        "scene": "street",
+        "label": "genuine",
+        "group": 2,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "8db712c609f2772c97a1c4d955b3ac224356163f64433972ead1798fb879ede7"
+      },
+      {
+        "bank": "environmental",
+        "id": 8,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 2,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "963ce2c4e3462c1daeb590f001e447a2e4f97b2d1d75802fe8705a927fad4b3e"
+      },
+      {
+        "bank": "environmental",
+        "id": 9,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 3,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "4591d990b1ed562f77127c2ad1d64ba0dcd6dcc96751e8ad11d4dcccb246c1f3"
+      },
+      {
+        "bank": "environmental",
+        "id": 10,
+        "scene": "street",
+        "label": "genuine",
+        "group": 3,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "b8b0adbbb2675469c14d7cc2e3f3266b22fa64c555a59f0974cc99315582b2ea"
+      },
+      {
+        "bank": "environmental",
+        "id": 11,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 3,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "adca8bfc02fd1ab56e52dce1e28e00ed791480ce9d23630a08b757e598795443"
+      },
+      {
+        "bank": "environmental",
+        "id": 12,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 4,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "fd0cee14a4fc4277c64bec4b26f2f069ec4a1da0b7ac9d013da3a2b506bd7a4c"
+      },
+      {
+        "bank": "environmental",
+        "id": 13,
+        "scene": "street",
+        "label": "genuine",
+        "group": 4,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "679385652651a35cef0eea5dab79d755c46dc10a9e8fab3a01bc73e75f37b7ce"
+      },
+      {
+        "bank": "environmental",
+        "id": 14,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 4,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "189aefc08ff4a4bf3ea6bbe4cd325f08bb658c38b8fb6647c72c49af230eea30"
+      },
+      {
+        "bank": "environmental",
+        "id": 15,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 5,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "0e744bc5c4ba9c79936de61d9794d827254359ac57caf4af533ab1cf0435b888"
+      },
+      {
+        "bank": "environmental",
+        "id": 16,
+        "scene": "street",
+        "label": "genuine",
+        "group": 5,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "b91e525b0eef7c2cde20778a89bbaaa0b3c25fc646bdff602ca50c8d0e71b9c1"
+      },
+      {
+        "bank": "environmental",
+        "id": 17,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 5,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "36e2ba744e136a133ae1becca2695bceec621f0dd33c1e6f56f963cfe87f4059"
+      },
+      {
+        "bank": "environmental",
+        "id": 18,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 6,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "6e70f6bbb5eed7b4f58074748b63418e35ed3b798c3b6fdd347e56810a888c9c"
+      },
+      {
+        "bank": "environmental",
+        "id": 19,
+        "scene": "street",
+        "label": "genuine",
+        "group": 6,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "f7d53c5e91a093a3335377668c9916d5752f63c66205a57c065b6d2bb1d5cb50"
+      },
+      {
+        "bank": "environmental",
+        "id": 20,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 6,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "c162c59ead0be0d5ab569973ccbb33b8710f61615efebfa282975d04ccbaad2a"
+      },
+      {
+        "bank": "environmental",
+        "id": 21,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 7,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "80c0386a72fc0dda0aadcff184084a209c7ffcacc47db8974a14fb9d584e7740"
+      },
+      {
+        "bank": "environmental",
+        "id": 22,
+        "scene": "street",
+        "label": "genuine",
+        "group": 7,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "711a686ab77d1921a9db6275c95d16549836eb01d8c95eb8975624585450fe12"
+      },
+      {
+        "bank": "environmental",
+        "id": 23,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 7,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "ab25c153f83f97ac7e2bcb249dcbd3a5569405e93bf639733291740e55ece9e6"
+      },
+      {
+        "bank": "environmental",
+        "id": 24,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 8,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "7c95b0e09a85d81fa36afefd3e6745fb6cbba9d833be713a650cba6fc7cc6d73"
+      },
+      {
+        "bank": "environmental",
+        "id": 25,
+        "scene": "street",
+        "label": "genuine",
+        "group": 8,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "553dd57f7ef2e12eacc4f22bc9a9cbcd94a76487aeda3cd4ef903cbedfcbde8b"
+      },
+      {
+        "bank": "environmental",
+        "id": 26,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 8,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "2e0ac5b4203fb0602f013a204c48fae6fb1f3996812d8fe65fca51d7195b9ad0"
+      },
+      {
+        "bank": "environmental",
+        "id": 27,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 9,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "a06007870ac433357f2d325aa3ba4468c1ffadce81db4f9ae052ae5d71182b30"
+      },
+      {
+        "bank": "environmental",
+        "id": 28,
+        "scene": "street",
+        "label": "genuine",
+        "group": 9,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "56b752ddd65a97355a64b406745231f8ec43f762612075f907fbec40ec4bd1e9"
+      },
+      {
+        "bank": "environmental",
+        "id": 29,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 9,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "587959aa4499b95a0a95735a4d04a53a7eab9cd38e1e8bcf2e2143efb07cf769"
+      },
+      {
+        "bank": "environmental",
+        "id": 30,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 10,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "e70f1a52a8b35fffd9892dad2170192934e805c4e5466f29c41e17973facf432"
+      },
+      {
+        "bank": "environmental",
+        "id": 31,
+        "scene": "street",
+        "label": "genuine",
+        "group": 10,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "2f2d5c4254b387b4bc82966430eed5698527251a5005637065cbde1cb0510528"
+      },
+      {
+        "bank": "environmental",
+        "id": 32,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 10,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "2a95efe467c9ad6febcf23c7948adad03dec70abc59069d8b8b844f7efd62fc8"
+      },
+      {
+        "bank": "environmental",
+        "id": 33,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 11,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "1ae55c76670b1f8a942adb3fcc62618b98ea3c22a53b3abcc8f367c3536d4a9a"
+      },
+      {
+        "bank": "environmental",
+        "id": 34,
+        "scene": "street",
+        "label": "genuine",
+        "group": 11,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "d0417778937a6159a27c4c2683a2ab01936ad71717f5743a9247f6d6fb26fce6"
+      },
+      {
+        "bank": "environmental",
+        "id": 35,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 11,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "de70edc00d48074c1d0c73d128b61d2967a5d6dfab7ebd0d7ac9a3aff1cf72ed"
+      },
+      {
+        "bank": "environmental",
+        "id": 36,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 12,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "933d87d874b38eab56d7ec481417d9bc6338eee494e14ef17ce78bf228c32987"
+      },
+      {
+        "bank": "environmental",
+        "id": 37,
+        "scene": "street",
+        "label": "genuine",
+        "group": 12,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "13e3a980cf2638109e1f26a0770fc1f7afdc5702c968fa3a213a326403644953"
+      },
+      {
+        "bank": "environmental",
+        "id": 38,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 12,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "c3b12eef22edc7a153a194438e92894c159149133145e304b21b856727715ecf"
+      },
+      {
+        "bank": "environmental",
+        "id": 39,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 13,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "af5760806a36e08d2da75719f94d618f8c4ec983f32f7fca657ef06494d03a23"
+      },
+      {
+        "bank": "environmental",
+        "id": 40,
+        "scene": "street",
+        "label": "genuine",
+        "group": 13,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "1d09689abe995e36af923ce8f8f7748a4897457e1af8e3ff7c8c2b6fa6d8708d"
+      },
+      {
+        "bank": "environmental",
+        "id": 41,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 13,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "f0381c68ad660ee9794f6a2a163dcba696c6de381e8f913fe4859d402c254837"
+      },
+      {
+        "bank": "environmental",
+        "id": 42,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 14,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "241854eebcdde167099bfa261103f7d741ab9c1706b89fbaba6c521b2537f369"
+      },
+      {
+        "bank": "environmental",
+        "id": 43,
+        "scene": "street",
+        "label": "genuine",
+        "group": 14,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "ce89f2057815d2c25886b5306644b054ea3e24f14caf8a718cf3dd79b3b9002c"
+      },
+      {
+        "bank": "environmental",
+        "id": 44,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 14,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "d4a749d6d1cf76b72d4503a8f77b80846b49c653efecbef4fb9fad7b6549dc55"
+      },
+      {
+        "bank": "environmental",
+        "id": 45,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 15,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "1ad782338d4ce8392e2039fe52531d79425431c2a8a56f9433b1d33ddabf5fee"
+      },
+      {
+        "bank": "environmental",
+        "id": 46,
+        "scene": "street",
+        "label": "genuine",
+        "group": 15,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "a23b1137cd9991c6a292f9c7d86350c3a2e43df4d1c06fc1f831439689e02599"
+      },
+      {
+        "bank": "environmental",
+        "id": 47,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 15,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "9b496b8d562f867a92c3b09e25b52eca14a92864c6237cbf0dca8104a87f0d9a"
+      },
+      {
+        "bank": "environmental",
+        "id": 48,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 16,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "d5c543931fd3d80edb77fcd8f0749d61f58665b436546d2fa608ed4163257252"
+      },
+      {
+        "bank": "environmental",
+        "id": 49,
+        "scene": "street",
+        "label": "genuine",
+        "group": 16,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "fd79cba97183e5e14275236265c2e5ec1789f966fae9ce1183df194aabdddccd"
+      },
+      {
+        "bank": "environmental",
+        "id": 50,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 16,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "dfa3f5f48da72f5e8d311ed3f94aab73efcb5d8430780066a83d4786b5547aa9"
+      },
+      {
+        "bank": "environmental",
+        "id": 51,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 17,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "6b1ac5c599ff13572965c5a09c07c05b85fb14acf82a4e78d15d300558f4a130"
+      },
+      {
+        "bank": "environmental",
+        "id": 52,
+        "scene": "street",
+        "label": "genuine",
+        "group": 17,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "2482e116dc6293dd7c1a550ed19aad3922bfc777bce231431b7836ceb80db2fb"
+      },
+      {
+        "bank": "environmental",
+        "id": 53,
+        "scene": "washroom",
+        "label": "genuine",
+        "group": 17,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "f259925d3bbe07a8712274cdb62a1b75b7650c22db32444d3502da21511405b0"
+      },
+      {
+        "bank": "environmental",
+        "id": 54,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 18,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "76bd300c260d9e300c74acf39d2ac3e1f3b9ea9b1e56a2e18c0952e092f1de6c"
+      },
+      {
+        "bank": "environmental",
+        "id": 55,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 18,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "e0ef5071617698841671eadaf70eba9207fa2cd2bc251638e4f5e4d9d82d056c"
+      },
+      {
+        "bank": "environmental",
+        "id": 56,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 18,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "ac2995e1cdab85bd28cb1618919543520f3640a15d01645c05d6e2196284b69e"
+      },
+      {
+        "bank": "environmental",
+        "id": 57,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 19,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "d5022be1d6027669348e82520654b0c5c8616fd0e1a6edacba3ec65bdbb625bf"
+      },
+      {
+        "bank": "environmental",
+        "id": 58,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 19,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "e9bf861621097fed507825705ca7fe0ed961feb07eb1a6a83840af41747f357b"
+      },
+      {
+        "bank": "environmental",
+        "id": 59,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 19,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "6e8b744a39c864b3bd963315c28cd594952d4fd9686014ec088b4b3d6555e2da"
+      },
+      {
+        "bank": "environmental",
+        "id": 60,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 20,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "13df752599b3ead0c78596907c346905f563eede32505e5f6de0639d61d7a162"
+      },
+      {
+        "bank": "environmental",
+        "id": 61,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 20,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "b3e26ef81656c130356a8947b39e512de30ec01a880a189f7c5c7e90efa25e37"
+      },
+      {
+        "bank": "environmental",
+        "id": 62,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 20,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "bf0db321b6fd8bf5587d1524e3acce19d5e06d29e37c743eb001b114c39c1629"
+      },
+      {
+        "bank": "environmental",
+        "id": 63,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 21,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "76c3e7921e0b95c0e00a6badd5377442120c9adf3d7864acd96915aee70e0c59"
+      },
+      {
+        "bank": "environmental",
+        "id": 64,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 21,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "4327d9f9857af20fc6fe5fda02f328a7062a8d81de6294586210d494ee608d13"
+      },
+      {
+        "bank": "environmental",
+        "id": 65,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 21,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "7df2fc4577caf18b287a3bbd809db8d2a465a6d1bec431f885cbd713e74e81f8"
+      },
+      {
+        "bank": "environmental",
+        "id": 66,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 22,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "59e1d1cf5e1d87964d1a82b47c0b6ba2169394f0136db87d01ac423801bec408"
+      },
+      {
+        "bank": "environmental",
+        "id": 67,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 22,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "bda154d0034b339c869cb7c16a6283818a1a979a48b159ec988f1e5f4919209f"
+      },
+      {
+        "bank": "environmental",
+        "id": 68,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 22,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "943f414a00f36e826be83d499daa850c629b460cd8547d61019aaf94de7c8da8"
+      },
+      {
+        "bank": "environmental",
+        "id": 69,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 23,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "62a31e05cb3374773a3e1a304b27150c1cffba9dbe99efef9032c00cbb62e2a0"
+      },
+      {
+        "bank": "environmental",
+        "id": 70,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 23,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "97035b125973430588b096f8bd7c16d25f20749a2c67cf30c5b4c33d8622a9a8"
+      },
+      {
+        "bank": "environmental",
+        "id": 71,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 23,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "dd59399b7227a1e71ad012769bf8974a763ee145e1a1b513a0b5d20f1dd24fb8"
+      },
+      {
+        "bank": "environmental",
+        "id": 72,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 24,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "e2858b3b34dc14b41d04b04ce8b884a86c6c6eb27ddd776b458b85f940b5264e"
+      },
+      {
+        "bank": "environmental",
+        "id": 73,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 24,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "764c44886bde4b8fe48f9776c515650781989065d0762fe90ba95ae00fffeb95"
+      },
+      {
+        "bank": "environmental",
+        "id": 74,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 24,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "df54e4edce718d3845b70dade573f9e4c8427e26c33ec7efb9f94d5ac7f3a192"
+      },
+      {
+        "bank": "environmental",
+        "id": 75,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 25,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "1207051917c6421d90d9dce369e1d43000e5996262529cd701262155cf7aa9b4"
+      },
+      {
+        "bank": "environmental",
+        "id": 76,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 25,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "a9019146852d29f0dceb94a4433715aac5a57d2fc4ee17147e6f66939d114564"
+      },
+      {
+        "bank": "environmental",
+        "id": 77,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 25,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "e8679e2888bf35b2c4eb1e468c067e0c0aee1fc84267eac9909970830a608a6d"
+      },
+      {
+        "bank": "environmental",
+        "id": 78,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 26,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "ec9a25026627ea3bece62acdb7eb4419450a7d20171cfbf2eea50d3ef4fbbd24"
+      },
+      {
+        "bank": "environmental",
+        "id": 79,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 26,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "775af5141543f8c01c845de35422fedcd765e6ec2b3d6f56307b79bce64b0c51"
+      },
+      {
+        "bank": "environmental",
+        "id": 80,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 26,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "3e6de85510548555ba991468d2f4eaf1440ed7789eb2fad1d07243de4a196614"
+      },
+      {
+        "bank": "environmental",
+        "id": 81,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 27,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "1c4334bd8b1fbb3aafe0d23604f7d8c587e37ee8562dd3227ea1377e8d744d61"
+      },
+      {
+        "bank": "environmental",
+        "id": 82,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 27,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "8edacf5ca143414e31962f612201678e40ac8177108cad2678b759c4fddafe4d"
+      },
+      {
+        "bank": "environmental",
+        "id": 83,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 27,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "aa59b4682a04ae635ca27d074edb197acc60801982204433c358a0f9fc73f64d"
+      },
+      {
+        "bank": "environmental",
+        "id": 84,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 28,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "fc0495b1767b286ba9f4997791ac1610484544f24ffd0bdae4062e5c234556b4"
+      },
+      {
+        "bank": "environmental",
+        "id": 85,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 28,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "1765424c15e4e5a10267207427490e0c9ebcff397f72e7b92709c632d1f76f4e"
+      },
+      {
+        "bank": "environmental",
+        "id": 86,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 28,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "5740c193b73ea9bd0128dd59b9089e9f76ffd3f669e83f53493a427bf876e945"
+      },
+      {
+        "bank": "environmental",
+        "id": 87,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 29,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "b83ffc910b6188ef542e73212d2efbd01a43c99ffc1871d4330866062c06d1d1"
+      },
+      {
+        "bank": "environmental",
+        "id": 88,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 29,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "11a652357b07abf0d05895dd04a169ea30fd8dd5240d04c11ec4fc6219d5f7cb"
+      },
+      {
+        "bank": "environmental",
+        "id": 89,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 29,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "0e1ca2ab801e605980ac659998372250f2beb5dff4ba7aad53bbc49bb3a69501"
+      },
+      {
+        "bank": "environmental",
+        "id": 90,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 30,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "cd57d475379a373eab24d1cde119571d314c2aa8a295755225f8fcb8220c2ca8"
+      },
+      {
+        "bank": "environmental",
+        "id": 91,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 30,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "6457168fd5038e13efb6d4d64360e40a5e750fb42596122321bb583026020399"
+      },
+      {
+        "bank": "environmental",
+        "id": 92,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 30,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "9f2aa9e95bfa346760472664082124139f45001b3be911f454dbab44b29a2786"
+      },
+      {
+        "bank": "environmental",
+        "id": 93,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 31,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "9dbd59d97ec6332a118a7e255543f212d716f7f06b59ed8fecbdef5cbbb2e8d0"
+      },
+      {
+        "bank": "environmental",
+        "id": 94,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 31,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "8cfa3d35b2ce9d8c661cb50a85a9190b4faef6f61f86186dc39242e53d2b58a9"
+      },
+      {
+        "bank": "environmental",
+        "id": 95,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 31,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "b886e8b9fd3be82bb2a0da7d8ea7d8a7553b1d70a353e5c474be647f0325fc8c"
+      },
+      {
+        "bank": "environmental",
+        "id": 96,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 32,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "a8db7cc3cfbb9e9a59062db08c89b8b723eea8a611af66fb62062dabe7d20664"
+      },
+      {
+        "bank": "environmental",
+        "id": 97,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 32,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "052923724e735ef37bfa3709137bbd8037096a0f8d33fbb217fd6204c9432a57"
+      },
+      {
+        "bank": "environmental",
+        "id": 98,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 32,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "9fef26a6c79a34c76d893d4e963977550fa938744ad2125b3f8631289cea0e0d"
+      },
+      {
+        "bank": "environmental",
+        "id": 99,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 33,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "bb6a34629e5b840fb29f85480b2b4ec754cb25fbdf4488d73465520440afee25"
+      },
+      {
+        "bank": "environmental",
+        "id": 100,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 33,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "ce045eaccf0880e8e44c1a558d1698a2a9019b5515affa8b8da439457c344551"
+      },
+      {
+        "bank": "environmental",
+        "id": 101,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 33,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "bc899ed753b1e24478637720e0bd0578a58c613d7fe658aa4673abe000a32252"
+      },
+      {
+        "bank": "environmental",
+        "id": 102,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 34,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "6012acb08817298b166b0af40403f34d4106a49dde6bce97210ec600d4424856"
+      },
+      {
+        "bank": "environmental",
+        "id": 103,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 34,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "aeea5618b7a93e226cf44963a45055542898065d77c515075538f181c54e0cf2"
+      },
+      {
+        "bank": "environmental",
+        "id": 104,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 34,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "9edd7de10e62d26df356d5195b36dadd8e3b00c58b177bd044eaa6d79c866655"
+      },
+      {
+        "bank": "environmental",
+        "id": 105,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 35,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "c44c0d0616e5fb8b5a81ce15622ce5894f52e1a9206a2e9e9ecb917c6357a775"
+      },
+      {
+        "bank": "environmental",
+        "id": 106,
+        "scene": "street",
+        "label": "synthetic",
+        "group": 35,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "631445583c2ede7e267a56abe61f4c783cfd7a9aa17785e70cf510d014f78487"
+      },
+      {
+        "bank": "environmental",
+        "id": 107,
+        "scene": "washroom",
+        "label": "synthetic",
+        "group": 35,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "6aa40dfc1aab430569ff93de23f8bd3fd8129bcd6cc9afa9dd8118fd371ddfcf"
+      },
+      {
+        "bank": "environmental",
+        "id": 108,
+        "scene": "street",
+        "label": "background",
+        "group": null,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "b64c6c6c939107be13ccca21f5497a3c2ad2ca4090b88b6a103013a699b3d008"
+      },
+      {
+        "bank": "environmental",
+        "id": 109,
+        "scene": "street",
+        "label": "background",
+        "group": null,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "1319b50dbcf8bae8af4142826dccddd3dfef5cd83a862f0093981e089879737f"
+      },
+      {
+        "bank": "environmental",
+        "id": 110,
+        "scene": "street",
+        "label": "background",
+        "group": null,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "46f6cd62d074af5fb0692ea03bdd9021d05f4400fc8636be8efe79b68392f074"
+      },
+      {
+        "bank": "environmental",
+        "id": 111,
+        "scene": "street",
+        "label": "background",
+        "group": null,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "d8cfb3ab6c94b8c5fa7750a36f176f2b80c5455362dfdc3d51142a05a1777c09"
+      },
+      {
+        "bank": "environmental",
+        "id": 112,
+        "scene": "washroom",
+        "label": "background",
+        "group": null,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "9149945a023363ffe855b3a868463806ca531b1ad55cd05f07e582b609659060"
+      },
+      {
+        "bank": "environmental",
+        "id": 113,
+        "scene": "washroom",
+        "label": "background",
+        "group": null,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "69d32ad96e515ffcee88180044493dc9f227c90c16f9ec8fba3b8200de39380f"
+      },
+      {
+        "bank": "environmental",
+        "id": 114,
+        "scene": "washroom",
+        "label": "background",
+        "group": null,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "95fe1f9707b377a22b20515bdcede6c6f684529528e0a092a4e292f658166830"
+      },
+      {
+        "bank": "environmental",
+        "id": 115,
+        "scene": "washroom",
+        "label": "background",
+        "group": null,
+        "generator_family": null,
+        "before": "unassessed",
+        "pcm_sha256": "5d18cfd6eb3e771d569feddc7a3ae27e51e086166bc0dcbb43754fed65c5cb4f"
+      },
+      {
+        "bank": "competing",
+        "id": 115,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 36,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "00a6a9e550f2efd234e8326bcecec47e9f3c6b4ac761554ca4a7924d97ac4a60"
+      },
+      {
+        "bank": "competing",
+        "id": 116,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 36,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "345d72b905445a426681e991c4cfe32c27e56cd949607bafa458dcd9084152d3"
+      },
+      {
+        "bank": "competing",
+        "id": 117,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 36,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "9a06ba0fa3e87580c6c49fe19732919268f7475bb67e6523d97ab841dec212f9"
+      },
+      {
+        "bank": "competing",
+        "id": 118,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 36,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "29e13ec09f7fbdf8986a49be9444e53ea5e7ca947b3ccc7e7194954853224bed"
+      },
+      {
+        "bank": "competing",
+        "id": 119,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 36,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "290882fe63a7a47086e2b16a5565de3fbba929a4bcf5b8989501abb792f041b3"
+      },
+      {
+        "bank": "competing",
+        "id": 120,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 36,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "fb6546b649ad24584c9146f31de6026e518eb52b389784ec8b942f72eebc10d2"
+      },
+      {
+        "bank": "competing",
+        "id": 121,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 37,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "1512ed6e1b41711548f8e1b4fe3b7e9dbfb95007634dab486ef7d5fe478ead42"
+      },
+      {
+        "bank": "competing",
+        "id": 122,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 37,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "52bc6538c2b2af3d18461f263019e182abdf7b896481aba5355ec463c6d097ee"
+      },
+      {
+        "bank": "competing",
+        "id": 123,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 37,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "9508168904f5c206113feb697c4bfeaed236305f2d55eca2677d620340dc37bd"
+      },
+      {
+        "bank": "competing",
+        "id": 124,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 37,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "bd5a47c20c9038b441cbc4414d148fba96666c44646396d153969a6be9eec86a"
+      },
+      {
+        "bank": "competing",
+        "id": 125,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 37,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "b2fcacef0f111e12f7b1a69f758c3fa7357a0825aa43a55901a375210db6e7dc"
+      },
+      {
+        "bank": "competing",
+        "id": 126,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 37,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "78ae76274302fde510b294addc8186197028e60eb3940c55aa36e9199d613a3e"
+      },
+      {
+        "bank": "competing",
+        "id": 127,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 38,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "d0aa44837299a8afa7bc305c27ebcb13fe0faeed1888f8cabd90ea42bd8d5803"
+      },
+      {
+        "bank": "competing",
+        "id": 128,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 38,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "042be79f03e61a3fce9c2bf74c569036699c242e75bd7b4f4a9e6463c6d91c15"
+      },
+      {
+        "bank": "competing",
+        "id": 129,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 38,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "17dcc470f83045736c84ea4f2cc4d9ec0a41151847eb88a43a070e942f929951"
+      },
+      {
+        "bank": "competing",
+        "id": 130,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 38,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "c50b853f955f8842ae84f44567f45c8c9b3c75f84e742fc31701e456fc396763"
+      },
+      {
+        "bank": "competing",
+        "id": 131,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 38,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "f839c30f490c77fd7784d6fdfd2cb62e1cf0f6555e5adecbbf3aa2b0f1f3747d"
+      },
+      {
+        "bank": "competing",
+        "id": 132,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 38,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "230488b1dd1304afc274d6d4b3c2a618840c07ac51a29a2657fec4a1f0e07ea0"
+      },
+      {
+        "bank": "competing",
+        "id": 133,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 39,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "cfa2f2492144d69f6e1762866ec9bfc016ff903f6bcdaad2a00c09d3305a96b0"
+      },
+      {
+        "bank": "competing",
+        "id": 134,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 39,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "7a42c0c70fcbdd6b5a4fcb2b2942bc876c1e422189d74ea60ce702600e68db69"
+      },
+      {
+        "bank": "competing",
+        "id": 135,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 39,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "e41b730faa2b333d739d301d14243b2834b93490b7ade761ffded4267c8ec0d6"
+      },
+      {
+        "bank": "competing",
+        "id": 136,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 39,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "e2aa99ede01d8a417f9769188bf83cdacb91b90335efc236e7da6b81e5f438b8"
+      },
+      {
+        "bank": "competing",
+        "id": 137,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 39,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "b42ed1beb9f4198d8cf5ed08fc8b453d466c7b84450030dab0f3f4e4070e1ecc"
+      },
+      {
+        "bank": "competing",
+        "id": 138,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 39,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "0db7b26174e9df58abbd95e71ddd60fa2a84482c44fcff2875f74b2cbc1b3314"
+      },
+      {
+        "bank": "competing",
+        "id": 139,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 40,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "0239101fd6922c345ef8b684fa1972e0005459f446d5844a38be48d512111a66"
+      },
+      {
+        "bank": "competing",
+        "id": 140,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 40,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "921d8aa6ba1915d2a65988b5c998efb18db52556231115aac8f0d767b417d044"
+      },
+      {
+        "bank": "competing",
+        "id": 141,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 40,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "f2c986d789e2ea73bc1eb12cbbd16b67c7ab16b1b7b0037c0ddadc4455928db3"
+      },
+      {
+        "bank": "competing",
+        "id": 142,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 40,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "70507786802d3c8df29304e9535c4b03e0ce53458e3995da7bc0df5cfdd1df0e"
+      },
+      {
+        "bank": "competing",
+        "id": 143,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 40,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "cbebd9ae6363c615cc3f2df51a256f6ffdca4db5cfad7f878b33ae03e13637fe"
+      },
+      {
+        "bank": "competing",
+        "id": 144,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 40,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "708c11ddc13c68df0e11cfadb2f5ddb9a55e6b004db65caaaf77b7fa47771c46"
+      },
+      {
+        "bank": "competing",
+        "id": 145,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 41,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "3ab987049dbf002cd851de0dea865dc25a9e76607a0c5a2898ba56b854710237"
+      },
+      {
+        "bank": "competing",
+        "id": 146,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 41,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "65b13421c59b91b5580a4affb5bce0dc9b69ddf9d56dfd3cb3a454ce64f6398c"
+      },
+      {
+        "bank": "competing",
+        "id": 147,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 41,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "59b7f6d560a04c56bdb50534afeb7a2b552c2c0bffe6cef9cba5628eabd3aef7"
+      },
+      {
+        "bank": "competing",
+        "id": 148,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 41,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "d0a062e4e0c2a065d3a4a203e553bc8b5cbae263a48bc0469dfd8fb59e81b810"
+      },
+      {
+        "bank": "competing",
+        "id": 149,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 41,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "4850e0dad0a0c0430254f1484f132cdd6438e22176e8420842922f35e26589c1"
+      },
+      {
+        "bank": "competing",
+        "id": 150,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 41,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "e97e481f600ff98de546f5b8b8c5ba7a86328f0e39960a383d18bbba63f632ab"
+      },
+      {
+        "bank": "competing",
+        "id": 151,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 42,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "3fe3dda8bd6d937caf09daec433f8bede4d80dedc0efa780ad3f0ceeb97fa0e3"
+      },
+      {
+        "bank": "competing",
+        "id": 152,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 42,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "a1315604719872ef9385edad083ac3a460bb4b5e3944383b9a66cdee1b22bcf1"
+      },
+      {
+        "bank": "competing",
+        "id": 153,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 42,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "e2ed48a7c34d8d5b9b7caf247e28bb09a728b7ace70f7e6bcad8e794e38487ab"
+      },
+      {
+        "bank": "competing",
+        "id": 154,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 42,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "e579b9993a52cd06dcce5c410bf8f9ab769904fc2cab24319c444074697d0863"
+      },
+      {
+        "bank": "competing",
+        "id": 155,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 42,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "1588728c880dfe9d7bf8a8281aaa3740a87c8c47fd5b278784ff6c02da25c32a"
+      },
+      {
+        "bank": "competing",
+        "id": 156,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 42,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "331c06605a52d7c1c0b6e285de4d08a1f8069870a3363c6ae37be3464475aa7b"
+      },
+      {
+        "bank": "competing",
+        "id": 157,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 43,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "5a6ebaa1768e61bb21c6774940c28896865158a4b11b193b9fe6ea67ec9a7857"
+      },
+      {
+        "bank": "competing",
+        "id": 158,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 43,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "59cf7550f45c9527435f7e0a0ffdc7c15a1c40f8460535e7ea7536589585d0fb"
+      },
+      {
+        "bank": "competing",
+        "id": 159,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 43,
+        "generator_family": null,
+        "before": "ai",
+        "pcm_sha256": "5741821bc74cf01dc246addd46b49d5b14c74bfdbe7ae828af8d14d73899681e"
+      },
+      {
+        "bank": "competing",
+        "id": 160,
+        "scene": "clean",
+        "label": "genuine",
+        "group": 43,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "472d8ea6294109ce31dd50c8348dc661d64b7577d5690a95aadce33977b5d481"
+      },
+      {
+        "bank": "competing",
+        "id": 161,
+        "scene": "mostly_single_interferer",
+        "label": "genuine",
+        "group": 43,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "6b8e2d7707b1387a4a8e8d1c4d18a49f73c600d0401bb13d35ecaaa299ae2ea9"
+      },
+      {
+        "bank": "competing",
+        "id": 162,
+        "scene": "overlapping_interferers",
+        "label": "genuine",
+        "group": 43,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "f8f8f2f344dc9c8d74752e0d36434e774336cf6a47f15694e3c7497c2645cda8"
+      },
+      {
+        "bank": "competing",
+        "id": 163,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 44,
+        "generator_family": "clone",
+        "before": "ai",
+        "pcm_sha256": "1f6f87f3fa109eb385869721f035a374cad73322cf0f7a56c737db677d3bb977"
+      },
+      {
+        "bank": "competing",
+        "id": 164,
+        "scene": "mostly_single_interferer",
+        "label": "synthetic",
+        "group": 44,
+        "generator_family": "clone",
+        "before": "inconclusive",
+        "pcm_sha256": "b95bdc175b57a013807f155668abf4631eeb7c38be2a15168dc56dcbf3f29609"
+      },
+      {
+        "bank": "competing",
+        "id": 165,
+        "scene": "overlapping_interferers",
+        "label": "synthetic",
+        "group": 44,
+        "generator_family": "clone",
+        "before": "ai",
+        "pcm_sha256": "d6f835d698686e790982266abf9535898c8d87c8470bd4d29ced206a21aee9b6"
+      },
+      {
+        "bank": "competing",
+        "id": 166,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 45,
+        "generator_family": "clone",
+        "before": "ai",
+        "pcm_sha256": "d20aa47224b0b0ad868d521492b11adcb73a4c0f0fe920303900c715c49a33a5"
+      },
+      {
+        "bank": "competing",
+        "id": 167,
+        "scene": "mostly_single_interferer",
+        "label": "synthetic",
+        "group": 45,
+        "generator_family": "clone",
+        "before": "ai",
+        "pcm_sha256": "6af908500d1c1798b11b4964291bf7d4cbb5ed3ac486acf26980fbd7ef8139a3"
+      },
+      {
+        "bank": "competing",
+        "id": 168,
+        "scene": "overlapping_interferers",
+        "label": "synthetic",
+        "group": 45,
+        "generator_family": "clone",
+        "before": "ai",
+        "pcm_sha256": "9bcaec73e06acbe8dfc0dbc8e6f523f69d713a7ed42c77aef456509cb7b95531"
+      },
+      {
+        "bank": "competing",
+        "id": 169,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 46,
+        "generator_family": "clone",
+        "before": "ai",
+        "pcm_sha256": "105e00c6387454133fe3962e78261821b1d5eab246d5eccba11d327265221c64"
+      },
+      {
+        "bank": "competing",
+        "id": 170,
+        "scene": "mostly_single_interferer",
+        "label": "synthetic",
+        "group": 46,
+        "generator_family": "clone",
+        "before": "ai",
+        "pcm_sha256": "ede1014b26aa0bcbe23fa5b5c5450d3dd13ce33938b3297931268b93e64f8f24"
+      },
+      {
+        "bank": "competing",
+        "id": 171,
+        "scene": "overlapping_interferers",
+        "label": "synthetic",
+        "group": 46,
+        "generator_family": "clone",
+        "before": "ai",
+        "pcm_sha256": "827030b815862fa036d72d86e50aca492c19650a8d252715893153333f5ba52c"
+      },
+      {
+        "bank": "competing",
+        "id": 172,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 47,
+        "generator_family": "expressive",
+        "before": "unassessed",
+        "pcm_sha256": "28bfdad029848de54b092bf21f7438b5064d1beb4b3e7644ff9317607f13f42c"
+      },
+      {
+        "bank": "competing",
+        "id": 173,
+        "scene": "mostly_single_interferer",
+        "label": "synthetic",
+        "group": 47,
+        "generator_family": "expressive",
+        "before": "inconclusive",
+        "pcm_sha256": "e499967be0beaa8099fef67bd13aa62c9ef734ca2959dc0d706522ac59c4e167"
+      },
+      {
+        "bank": "competing",
+        "id": 174,
+        "scene": "overlapping_interferers",
+        "label": "synthetic",
+        "group": 47,
+        "generator_family": "expressive",
+        "before": "inconclusive",
+        "pcm_sha256": "473bf8cdd4207d82e5f39b3f9065378e0952d83ce6f9691319c27be5a2a2f87b"
+      },
+      {
+        "bank": "competing",
+        "id": 175,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 48,
+        "generator_family": "expressive",
+        "before": "unassessed",
+        "pcm_sha256": "b8b9ad689456b593e11606a2ae3c60c0e4b435dc9db8bebf2c445db7ed3e527b"
+      },
+      {
+        "bank": "competing",
+        "id": 176,
+        "scene": "mostly_single_interferer",
+        "label": "synthetic",
+        "group": 48,
+        "generator_family": "expressive",
+        "before": "inconclusive",
+        "pcm_sha256": "206d88f2c3679027246d0fe4b5c11260f61efd71ca3f24bb52da66eb56de82a0"
+      },
+      {
+        "bank": "competing",
+        "id": 177,
+        "scene": "overlapping_interferers",
+        "label": "synthetic",
+        "group": 48,
+        "generator_family": "expressive",
+        "before": "inconclusive",
+        "pcm_sha256": "07030b37af9d6534a81da2fb089dc865450df66e45d964af83527d951d6fceb8"
+      },
+      {
+        "bank": "competing",
+        "id": 178,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 49,
+        "generator_family": "expressive",
+        "before": "ai",
+        "pcm_sha256": "263f7019cb5b3653df72ceafdf5901f6eecb81913b4978bf8b3bd54bce170c2c"
+      },
+      {
+        "bank": "competing",
+        "id": 179,
+        "scene": "mostly_single_interferer",
+        "label": "synthetic",
+        "group": 49,
+        "generator_family": "expressive",
+        "before": "ai",
+        "pcm_sha256": "e3f47c876d8e56858a0e15cfa3857d2b7b1b7e196714987303b62e07bceb5508"
+      },
+      {
+        "bank": "competing",
+        "id": 180,
+        "scene": "overlapping_interferers",
+        "label": "synthetic",
+        "group": 49,
+        "generator_family": "expressive",
+        "before": "inconclusive",
+        "pcm_sha256": "864145d31e977b5ee9ece3411c8111c2f562bf793ea408cd71c787f97663e0d3"
+      },
+      {
+        "bank": "competing",
+        "id": 181,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 50,
+        "generator_family": "stock",
+        "before": "ai",
+        "pcm_sha256": "9a92b630492392518913c36c4e3df21777a4d7acd1a188d4ba108feeb431cdc4"
+      },
+      {
+        "bank": "competing",
+        "id": 182,
+        "scene": "mostly_single_interferer",
+        "label": "synthetic",
+        "group": 50,
+        "generator_family": "stock",
+        "before": "ai",
+        "pcm_sha256": "049fa97bb6d70250234bd6bcae5f11b9c639305cc54e3573959c5a5097445f5e"
+      },
+      {
+        "bank": "competing",
+        "id": 183,
+        "scene": "overlapping_interferers",
+        "label": "synthetic",
+        "group": 50,
+        "generator_family": "stock",
+        "before": "inconclusive",
+        "pcm_sha256": "0e1e2d08ba6fa336f5fc333e59885851c1b213812fc9814c95cdeb66cfa65534"
+      },
+      {
+        "bank": "competing",
+        "id": 184,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 51,
+        "generator_family": "stock",
+        "before": "ai",
+        "pcm_sha256": "c250af0a8f7d3c910e0e29ac6a4a4589fbd39edcb38513e59e45a7409f1bba3b"
+      },
+      {
+        "bank": "competing",
+        "id": 185,
+        "scene": "mostly_single_interferer",
+        "label": "synthetic",
+        "group": 51,
+        "generator_family": "stock",
+        "before": "inconclusive",
+        "pcm_sha256": "fe7ab77f31023d3d71ff805b774fb9b563dd073cd0084b81e233f851b570dd47"
+      },
+      {
+        "bank": "competing",
+        "id": 186,
+        "scene": "overlapping_interferers",
+        "label": "synthetic",
+        "group": 51,
+        "generator_family": "stock",
+        "before": "ai",
+        "pcm_sha256": "04e0dacb58dfae6e10517f2ba2f9aa2dffdf1158803ef4975601152bb9a60a4c"
+      },
+      {
+        "bank": "competing",
+        "id": 187,
+        "scene": "clean",
+        "label": "synthetic",
+        "group": 52,
+        "generator_family": "stock",
+        "before": "ai",
+        "pcm_sha256": "b73ede88347de0bfa83fc2a586a6952634a310039fc429db84e9036410a67477"
+      },
+      {
+        "bank": "competing",
+        "id": 188,
+        "scene": "mostly_single_interferer",
+        "label": "synthetic",
+        "group": 52,
+        "generator_family": "stock",
+        "before": "inconclusive",
+        "pcm_sha256": "0d89961d58b989c4d93c27a91674ead08cdb1ca6d8cd2a81d2030bc7f53a595c"
+      },
+      {
+        "bank": "competing",
+        "id": 189,
+        "scene": "overlapping_interferers",
+        "label": "synthetic",
+        "group": 52,
+        "generator_family": "stock",
+        "before": "ai",
+        "pcm_sha256": "247ea29c9c89c1bdd2b281c8d7c83c3475f2e08433417b2d6be0dcc641faddd7"
+      },
+      {
+        "bank": "competing",
+        "id": 190,
+        "scene": "isolated_mostly_single_interferer",
+        "label": "background",
+        "group": null,
+        "generator_family": null,
+        "before": "original",
+        "pcm_sha256": "efed693d7671b37338150a9da86be42dfe465c06784ec14ee10850e121ce78b8"
+      },
+      {
+        "bank": "competing",
+        "id": 191,
+        "scene": "isolated_overlapping_interferers",
+        "label": "background",
+        "group": null,
+        "generator_family": null,
+        "before": "inconclusive",
+        "pcm_sha256": "36deaf205eb669b1905f8a09c74b5f7f93081ade33e360df2b8a17f787fa08b3"
+      }
+    ]
+  },
+  "observations": [
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": 21952,
+      "gain_speech_samples": 21952,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": 21440,
+      "gain_speech_samples": 21440,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": 21952,
+      "gain_speech_samples": 21952,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": 22976,
+      "gain_speech_samples": 22976,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": 21888,
+      "gain_speech_samples": 22400,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": 0,
+      "gain_speech_samples": 0,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": 19904,
+      "gain_speech_samples": 23488,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": 8128,
+      "gain_speech_samples": 12736,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": 18368,
+      "gain_speech_samples": 19392,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": 16160,
+      "gain_speech_samples": 15136,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": 0,
+      "gain_speech_samples": 0,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": 0,
+      "gain_speech_samples": 0,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": 0,
+      "gain_speech_samples": 0,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": 0,
+      "gain_speech_samples": 0,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": 0,
+      "gain_speech_samples": 0,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": 0,
+      "gain_speech_samples": 0,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": 0,
+      "gain_speech_samples": 0,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": 0,
+      "gain_speech_samples": 0,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": 23904,
+      "gain_speech_samples": 23904,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": 18208,
+      "gain_speech_samples": 11616,
+      "after": "unassessed"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "ai"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "original"
+    },
+    {
+      "original_speech_samples": null,
+      "gain_speech_samples": null,
+      "after": "inconclusive"
+    }
+  ],
+  "model_files": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "summary": {
+    "by_condition": {
+      "environmental/clean/genuine": {
+        "files": 18,
+        "old_original": 15,
+        "new_original": 15,
+        "newly_scored": 0,
+        "old_unassessed": 1,
+        "new_unassessed": 1,
+        "old_inconclusive": 2,
+        "new_inconclusive": 2
+      },
+      "environmental/street/genuine": {
+        "files": 18,
+        "old_inconclusive": 9,
+        "new_inconclusive": 9,
+        "newly_scored": 0,
+        "old_original": 5,
+        "new_original": 5,
+        "old_unassessed": 3,
+        "new_unassessed": 3,
+        "old_ai": 1,
+        "new_ai": 1
+      },
+      "environmental/washroom/genuine": {
+        "files": 18,
+        "old_original": 16,
+        "new_original": 16,
+        "newly_scored": 0,
+        "old_unassessed": 1,
+        "new_unassessed": 1,
+        "old_inconclusive": 1,
+        "new_inconclusive": 1
+      },
+      "environmental/clean/synthetic": {
+        "files": 18,
+        "old_ai": 13,
+        "new_ai": 13,
+        "newly_scored": 0,
+        "old_inconclusive": 3,
+        "new_inconclusive": 3,
+        "old_unassessed": 1,
+        "new_unassessed": 1,
+        "old_original": 1,
+        "new_original": 1
+      },
+      "environmental/street/synthetic": {
+        "files": 18,
+        "old_inconclusive": 11,
+        "new_inconclusive": 11,
+        "newly_scored": 0,
+        "old_unassessed": 3,
+        "new_unassessed": 3,
+        "old_ai": 4,
+        "new_ai": 4
+      },
+      "environmental/washroom/synthetic": {
+        "files": 18,
+        "old_ai": 11,
+        "new_ai": 11,
+        "newly_scored": 0,
+        "old_inconclusive": 4,
+        "new_inconclusive": 4,
+        "old_unassessed": 1,
+        "new_unassessed": 1,
+        "old_original": 2,
+        "new_original": 2
+      },
+      "environmental/street/background": {
+        "files": 4,
+        "old_unassessed": 4,
+        "new_unassessed": 4,
+        "newly_scored": 0
+      },
+      "environmental/washroom/background": {
+        "files": 4,
+        "old_unassessed": 4,
+        "new_unassessed": 4,
+        "newly_scored": 0
+      },
+      "competing/clean/genuine": {
+        "files": 16,
+        "old_original": 14,
+        "new_original": 14,
+        "newly_scored": 0,
+        "old_inconclusive": 2,
+        "new_inconclusive": 2
+      },
+      "competing/mostly_single_interferer/genuine": {
+        "files": 16,
+        "old_inconclusive": 13,
+        "new_inconclusive": 13,
+        "newly_scored": 0,
+        "old_ai": 3,
+        "new_ai": 3
+      },
+      "competing/overlapping_interferers/genuine": {
+        "files": 16,
+        "old_inconclusive": 4,
+        "new_inconclusive": 4,
+        "newly_scored": 0,
+        "old_ai": 12,
+        "new_ai": 12
+      },
+      "competing/clean/synthetic": {
+        "files": 9,
+        "old_ai": 7,
+        "new_ai": 7,
+        "newly_scored": 0,
+        "old_unassessed": 2,
+        "new_unassessed": 2
+      },
+      "competing/mostly_single_interferer/synthetic": {
+        "files": 9,
+        "old_inconclusive": 5,
+        "new_inconclusive": 5,
+        "newly_scored": 0,
+        "old_ai": 4,
+        "new_ai": 4
+      },
+      "competing/overlapping_interferers/synthetic": {
+        "files": 9,
+        "old_ai": 5,
+        "new_ai": 5,
+        "newly_scored": 0,
+        "old_inconclusive": 4,
+        "new_inconclusive": 4
+      },
+      "competing/isolated_mostly_single_interferer/background": {
+        "files": 1,
+        "old_original": 1,
+        "new_original": 1,
+        "newly_scored": 0
+      },
+      "competing/isolated_overlapping_interferers/background": {
+        "files": 1,
+        "old_inconclusive": 1,
+        "new_inconclusive": 1,
+        "newly_scored": 0
+      }
+    },
+    "gained_synthetic_source_groups": 0,
+    "gained_named_families": [],
+    "added_false_noisy": 0,
+    "added_false_clean": 0,
+    "added_false_background": 0,
+    "advance": false
+  }
+}

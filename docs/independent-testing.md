@@ -2600,3 +2600,8 @@ The [speech-window coverage replay](audio-speech-admission-transfer-2026-11-13.m
 recounts admission on 96 manually stratified excerpts from four AMI meetings.
 It gives the byte-range recovery procedure for the original publisher
 samples. The public receipt contains coordinates, hashes and measured durations.
+
+The [gain retry replays](audio-gain-gate-voice-transfer-2026-11-13.md#application-and-replay)
+recount 261 downstream decisions, with separate labels for quiet genuine
+speech, three synthetic families, matched room mixtures, and isolated room
+sound. They include native commands for recovering the prepared inputs.

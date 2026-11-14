@@ -1,0 +1,1199 @@
+{
+  "freeze": {
+    "schema": "chipmunk.audio-quiet-gain-transfer/1",
+    "method": {
+      "inputs": "One hash-ordered qualified three-second holdout delivery per voice. Mix with the first zero-word archived AMI excerpt from each of four rooms, selected by case number and assigned round-robin by family.",
+      "conditions": "Normalize the foreground to -36 dBFS RMS. Set each room background to -31 dBFS RMS for a matched -5 dB signal-to-background ratio and PCM16 quantize. Include both quiet unoverlaid speech and the assigned quiet mixture, plus one isolated room control per room.",
+      "comparison": "Use the unchanged speech activity gate, then retry with up to +6 dB without clipping on originally unassessed windows only. Feed the original samples to the calibrated classifier when the gain view admits them.",
+      "advance": "At least two added AI detections in the noisy condition across two generator families, at most one additional noisy genuine AI flag, and zero new clean genuine or isolated background AI flags. Retain all existing decisions."
+    },
+    "rows": [
+      {
+        "id": 0,
+        "label": "clone",
+        "condition": "quiet",
+        "group": 1,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "d07d40215a144da2da98fa994ded89951cd334db657e3a554db339e6cd28a872",
+        "pcm_sha256": "badd943acee7d66c5658530dd73582fba2dafa5cfd30323692d7dd5679fd4327"
+      },
+      {
+        "id": 1,
+        "label": "clone",
+        "condition": "quiet_mixed",
+        "group": 1,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "d07d40215a144da2da98fa994ded89951cd334db657e3a554db339e6cd28a872",
+        "pcm_sha256": "1cd2a5e6a2402c41a0b5b1f4e9f6a0ac6cc1e8de273e15f842340ea665b2b861"
+      },
+      {
+        "id": 2,
+        "label": "stock",
+        "condition": "quiet",
+        "group": 2,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "9ae95657226acd376850b05a73dc4642e1b40ea8a0b9eb7c48a150d1114797a5",
+        "pcm_sha256": "31e5c7d3f0a92aead81e44d679bc7e451a5cb356930973414639fec1e3bf8d92"
+      },
+      {
+        "id": 3,
+        "label": "stock",
+        "condition": "quiet_mixed",
+        "group": 2,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "9ae95657226acd376850b05a73dc4642e1b40ea8a0b9eb7c48a150d1114797a5",
+        "pcm_sha256": "c7d6eb5012bb06f93b1ce87e98417ba60964d5d252ac8885726a5c6f848375e2"
+      },
+      {
+        "id": 4,
+        "label": "stock",
+        "condition": "quiet",
+        "group": 3,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "3ba78a84f1fd61b8571e01223b09c16675448b806b374905a57364176040d907",
+        "pcm_sha256": "092de54071e7ec1db98378835e8acf2951e6a7ec773c28765550eace80fc92e6"
+      },
+      {
+        "id": 5,
+        "label": "stock",
+        "condition": "quiet_mixed",
+        "group": 3,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "3ba78a84f1fd61b8571e01223b09c16675448b806b374905a57364176040d907",
+        "pcm_sha256": "0dedc1c45cb07e3cd6b39f61aa1db840145928c2f567ae04e230143b7050cc3e"
+      },
+      {
+        "id": 6,
+        "label": "genuine",
+        "condition": "quiet",
+        "group": 4,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "22f06258116f231f2c8e98a13b5bd079b49148432c527661c9e8adfbd7b2deaa",
+        "pcm_sha256": "eea0525de27f32f4963a361479e756b61c9e24fffa38acb3f7be19085c3b746e"
+      },
+      {
+        "id": 7,
+        "label": "genuine",
+        "condition": "quiet_mixed",
+        "group": 4,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "22f06258116f231f2c8e98a13b5bd079b49148432c527661c9e8adfbd7b2deaa",
+        "pcm_sha256": "41e034bfe877046429987c8b19f836cfaf7210eb70cfc22006faed2cc0bc875e"
+      },
+      {
+        "id": 8,
+        "label": "stock",
+        "condition": "quiet",
+        "group": 5,
+        "room": "TS3005a",
+        "noise_case": 54,
+        "source_pcm_sha256": "363346925327b1b33025516168d988aff210ae4ad006163d2eb12bf26f0e95d2",
+        "pcm_sha256": "f6428ef44f98e6a58426a2980a66ddc5d20082ad5e7bc57d6280c01813fd449d"
+      },
+      {
+        "id": 9,
+        "label": "stock",
+        "condition": "quiet_mixed",
+        "group": 5,
+        "room": "TS3005a",
+        "noise_case": 54,
+        "source_pcm_sha256": "363346925327b1b33025516168d988aff210ae4ad006163d2eb12bf26f0e95d2",
+        "pcm_sha256": "f16fb52ac8a06944c3fbe0e0222588ebf7e25a66b1a79f6c3b6729ef3117f0dc"
+      },
+      {
+        "id": 10,
+        "label": "expressive",
+        "condition": "quiet",
+        "group": 6,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "74ef52e6272b456b7ea395d1df971c7e09e428fa61278182524bda9e4c5ae5bf",
+        "pcm_sha256": "936a63155f5e970c7baa7c0a0221783c71a27483d236bcd6e3e0f0fe66e96221"
+      },
+      {
+        "id": 11,
+        "label": "expressive",
+        "condition": "quiet_mixed",
+        "group": 6,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "74ef52e6272b456b7ea395d1df971c7e09e428fa61278182524bda9e4c5ae5bf",
+        "pcm_sha256": "785cc58b39254e826dcf86c84d24e6291398a07e5faea32a79a3c28f3627ef48"
+      },
+      {
+        "id": 12,
+        "label": "genuine",
+        "condition": "quiet",
+        "group": 7,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "7eab2adea4fece5b4fb027331dcc708b1a2b3ea192f55effe5b0ad8e6ba21704",
+        "pcm_sha256": "023a30a6c0fc5f8345b8643a7820609f7de8bb02ca79a8d86de542a29f4c25da"
+      },
+      {
+        "id": 13,
+        "label": "genuine",
+        "condition": "quiet_mixed",
+        "group": 7,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "7eab2adea4fece5b4fb027331dcc708b1a2b3ea192f55effe5b0ad8e6ba21704",
+        "pcm_sha256": "8e3dabfa74b7257c5ccc4d91568364f889bc395f0cf9c67d1f9617812b443495"
+      },
+      {
+        "id": 14,
+        "label": "stock",
+        "condition": "quiet",
+        "group": 8,
+        "room": "TS3004a",
+        "noise_case": 78,
+        "source_pcm_sha256": "5d4422b0d1a7a8fc6ea40430e0eaec9be699f302b6ad629129f94d5b9062bf21",
+        "pcm_sha256": "08f25bdc07dfcf4e828ad3d1fa4eefe8be713cc21756193f2c1a662956697c73"
+      },
+      {
+        "id": 15,
+        "label": "stock",
+        "condition": "quiet_mixed",
+        "group": 8,
+        "room": "TS3004a",
+        "noise_case": 78,
+        "source_pcm_sha256": "5d4422b0d1a7a8fc6ea40430e0eaec9be699f302b6ad629129f94d5b9062bf21",
+        "pcm_sha256": "e86c05514f984b11566033abb3b32e52fcad07b8587cbee7f036b11fae3a7f37"
+      },
+      {
+        "id": 16,
+        "label": "expressive",
+        "condition": "quiet",
+        "group": 9,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "0d6b3b02a1d0276860f6730693934022046d98a52ed08926e55767f16c547761",
+        "pcm_sha256": "0fcf7abd19a7c73f09deda8ddc9b7e533bf263a26161ed79e2ebe92a9fa71e79"
+      },
+      {
+        "id": 17,
+        "label": "expressive",
+        "condition": "quiet_mixed",
+        "group": 9,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "0d6b3b02a1d0276860f6730693934022046d98a52ed08926e55767f16c547761",
+        "pcm_sha256": "5c43ea0b20a94cd7259dcbf87d3207b7c322201e89c4d8508bc167cfd102c6e1"
+      },
+      {
+        "id": 18,
+        "label": "stock",
+        "condition": "quiet",
+        "group": 10,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "a349d2b0b1345285b2d2ab0c2433b3fa591e348dc66a7ac6a02f1b1e38471fff",
+        "pcm_sha256": "e89007bb9f7aa7adfda17574f003db126ebc903dd3aaec043fdbe7c4abd4753f"
+      },
+      {
+        "id": 19,
+        "label": "stock",
+        "condition": "quiet_mixed",
+        "group": 10,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "a349d2b0b1345285b2d2ab0c2433b3fa591e348dc66a7ac6a02f1b1e38471fff",
+        "pcm_sha256": "9a352c5e247dea6137fcf70d7ebfe85ae47788d0c17e17939caf3069c4209337"
+      },
+      {
+        "id": 20,
+        "label": "genuine",
+        "condition": "quiet",
+        "group": 11,
+        "room": "TS3005a",
+        "noise_case": 54,
+        "source_pcm_sha256": "b90a08b650794272020494d01d71a77dd89ef9509ae8e75bee0c9ebbe87a3a7c",
+        "pcm_sha256": "1f11eeac414b42cfc6569d85f58bad753237c53991162a04896ddfab8f085e07"
+      },
+      {
+        "id": 21,
+        "label": "genuine",
+        "condition": "quiet_mixed",
+        "group": 11,
+        "room": "TS3005a",
+        "noise_case": 54,
+        "source_pcm_sha256": "b90a08b650794272020494d01d71a77dd89ef9509ae8e75bee0c9ebbe87a3a7c",
+        "pcm_sha256": "8b8e061e478060a0e29734d5da52dd3d0ac542e3d5475dda3a2d6cbd555eece9"
+      },
+      {
+        "id": 22,
+        "label": "expressive",
+        "condition": "quiet",
+        "group": 12,
+        "room": "TS3005a",
+        "noise_case": 54,
+        "source_pcm_sha256": "1b62e38cb0efb637a05900a026a60ca6da9e33824f0c5107b4b180b891c8b9d6",
+        "pcm_sha256": "c7334b4cb06800916c64a806afe38f286b1f1b0d43042ef31e32e0b4ecd43684"
+      },
+      {
+        "id": 23,
+        "label": "expressive",
+        "condition": "quiet_mixed",
+        "group": 12,
+        "room": "TS3005a",
+        "noise_case": 54,
+        "source_pcm_sha256": "1b62e38cb0efb637a05900a026a60ca6da9e33824f0c5107b4b180b891c8b9d6",
+        "pcm_sha256": "8e6537c0835d914248d47fd88e7da78b5dbb5c2ae5f83f4569658618da3e2540"
+      },
+      {
+        "id": 24,
+        "label": "expressive",
+        "condition": "quiet",
+        "group": 13,
+        "room": "TS3004a",
+        "noise_case": 78,
+        "source_pcm_sha256": "aa52d426404283ed3af2af8940759097ad17108e2261d3de970f492974cf3f57",
+        "pcm_sha256": "34dd2ba44abd0920eea7be0804b6287ebe726102464073b3b019db6c86e8fe4a"
+      },
+      {
+        "id": 25,
+        "label": "expressive",
+        "condition": "quiet_mixed",
+        "group": 13,
+        "room": "TS3004a",
+        "noise_case": 78,
+        "source_pcm_sha256": "aa52d426404283ed3af2af8940759097ad17108e2261d3de970f492974cf3f57",
+        "pcm_sha256": "5e3db953c0b6b02bb357b430e193cdd048d90a626dcd18b45d9f8a76bbe0142d"
+      },
+      {
+        "id": 26,
+        "label": "clone",
+        "condition": "quiet",
+        "group": 14,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "fb725670fb38aca22d35b3e618bf7c5154539ebfc03ef9bf4a4682a229e4ef37",
+        "pcm_sha256": "a900aa9153fd22f5e9013e2763f298021835b81506ab2fa0e5db98993fd3fb91"
+      },
+      {
+        "id": 27,
+        "label": "clone",
+        "condition": "quiet_mixed",
+        "group": 14,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "fb725670fb38aca22d35b3e618bf7c5154539ebfc03ef9bf4a4682a229e4ef37",
+        "pcm_sha256": "28f024abb16cb32581a8829dda5055d4c56b7a5f1015323e40bae54b4fbc52e5"
+      },
+      {
+        "id": 28,
+        "label": "clone",
+        "condition": "quiet",
+        "group": 15,
+        "room": "TS3005a",
+        "noise_case": 54,
+        "source_pcm_sha256": "87ec8f28674a69e8422aff8e8de7fa8c9b2460d2e5b0f8e74c9168375dc1a3d7",
+        "pcm_sha256": "8c15c44fb82f7886891d792976a42d95e7993c8ddfe77e3f2d6b396816f52b96"
+      },
+      {
+        "id": 29,
+        "label": "clone",
+        "condition": "quiet_mixed",
+        "group": 15,
+        "room": "TS3005a",
+        "noise_case": 54,
+        "source_pcm_sha256": "87ec8f28674a69e8422aff8e8de7fa8c9b2460d2e5b0f8e74c9168375dc1a3d7",
+        "pcm_sha256": "3d2e049d7edf362cc826f807f7dd16b4a9aa790f7d23cd92a8f2f370729c3117"
+      },
+      {
+        "id": 30,
+        "label": "expressive",
+        "condition": "quiet",
+        "group": 16,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "e0dac0e1da9a10d65b621e34ead34df579c74cd1ac78349e4a78940a11c222e6",
+        "pcm_sha256": "1503ed366ec2865e8583b7434b41190a48ebcf58ac2490eb843b529281124b43"
+      },
+      {
+        "id": 31,
+        "label": "expressive",
+        "condition": "quiet_mixed",
+        "group": 16,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "e0dac0e1da9a10d65b621e34ead34df579c74cd1ac78349e4a78940a11c222e6",
+        "pcm_sha256": "5bbf8cb0789cead7ea589571128fe3cdc39f48ccd62383263699642caa9d05a4"
+      },
+      {
+        "id": 32,
+        "label": "expressive",
+        "condition": "quiet",
+        "group": 17,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "e1c8a6189c84470702edd85eabc4cc7772507920ca60eda6cca54b0f7d34fb81",
+        "pcm_sha256": "a45f87e9acb74c6c6aaf4580a79f38da2290ebac71d0918b16afb9fada514c19"
+      },
+      {
+        "id": 33,
+        "label": "expressive",
+        "condition": "quiet_mixed",
+        "group": 17,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "e1c8a6189c84470702edd85eabc4cc7772507920ca60eda6cca54b0f7d34fb81",
+        "pcm_sha256": "f66a226e176b9b777abfdc2455126f99e993ab4dafa4afb58ec3d20f48098da2"
+      },
+      {
+        "id": 34,
+        "label": "genuine",
+        "condition": "quiet",
+        "group": 18,
+        "room": "TS3004a",
+        "noise_case": 78,
+        "source_pcm_sha256": "6657e9da0e3c76985d0533e2ce828a8837f2ca7d71ce84bf63bd6b434a751ec0",
+        "pcm_sha256": "0f7f323c7d3792ff3dc6700a1817b13c97468ae12c97da79ed382af1aa6b71d3"
+      },
+      {
+        "id": 35,
+        "label": "genuine",
+        "condition": "quiet_mixed",
+        "group": 18,
+        "room": "TS3004a",
+        "noise_case": 78,
+        "source_pcm_sha256": "6657e9da0e3c76985d0533e2ce828a8837f2ca7d71ce84bf63bd6b434a751ec0",
+        "pcm_sha256": "5f1a0250e7cdb17c2ccd0b8efffc8e3844cc7f2457b61c4f5900ff616cc8488c"
+      },
+      {
+        "id": 36,
+        "label": "clone",
+        "condition": "quiet",
+        "group": 19,
+        "room": "TS3004a",
+        "noise_case": 78,
+        "source_pcm_sha256": "b83bbc7113d948682e28eaa73972ab709a217790af314e5d19ada58fc658b8ef",
+        "pcm_sha256": "a1109393351986c759a4433b68b90ece0517ea6678edca1217a627deeae57e75"
+      },
+      {
+        "id": 37,
+        "label": "clone",
+        "condition": "quiet_mixed",
+        "group": 19,
+        "room": "TS3004a",
+        "noise_case": 78,
+        "source_pcm_sha256": "b83bbc7113d948682e28eaa73972ab709a217790af314e5d19ada58fc658b8ef",
+        "pcm_sha256": "f792a277026202e1d47cf6b27ab111a8ee7dbeaf94d8615be9d49a8c0e23b031"
+      },
+      {
+        "id": 38,
+        "label": "genuine",
+        "condition": "quiet",
+        "group": 20,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "8ba4a56eaa044baa85ba8512ce8bc117db9017efe63ec4e2b24fca47daf1f57d",
+        "pcm_sha256": "bc2aa64b69a8ddf3ec1229773b98986fd09297b5bd8d7770ee744b44d19de94d"
+      },
+      {
+        "id": 39,
+        "label": "genuine",
+        "condition": "quiet_mixed",
+        "group": 20,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "8ba4a56eaa044baa85ba8512ce8bc117db9017efe63ec4e2b24fca47daf1f57d",
+        "pcm_sha256": "396fb1ac797ef059dbdc58785a22d0c28cb50ab352c6c08524e5574cc17dcf11"
+      },
+      {
+        "id": 40,
+        "label": "expressive",
+        "condition": "quiet",
+        "group": 21,
+        "room": "TS3005a",
+        "noise_case": 54,
+        "source_pcm_sha256": "841cba99b19303462ca2ddba86ba957c2efcb6e5a157da6a93c303cffce9547b",
+        "pcm_sha256": "1bcc7338034a721ddf580d7b102b6fc675ec07cc5f7d403261bcbac77b7d1983"
+      },
+      {
+        "id": 41,
+        "label": "expressive",
+        "condition": "quiet_mixed",
+        "group": 21,
+        "room": "TS3005a",
+        "noise_case": 54,
+        "source_pcm_sha256": "841cba99b19303462ca2ddba86ba957c2efcb6e5a157da6a93c303cffce9547b",
+        "pcm_sha256": "60d9db519c0e6dd5a21730b99da0aa117fdf851738566d1f583faa0958dfa809"
+      },
+      {
+        "id": 42,
+        "label": "genuine",
+        "condition": "quiet",
+        "group": 22,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "5ebf59139c9c54e3bb4588b649e764edf6f642a7cdbca0f0b7e35589deb7582a",
+        "pcm_sha256": "a08f70322d31a5c52b9593263a9f042d399d5ae6cc7e6aa6250872755b2992d2"
+      },
+      {
+        "id": 43,
+        "label": "genuine",
+        "condition": "quiet_mixed",
+        "group": 22,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "5ebf59139c9c54e3bb4588b649e764edf6f642a7cdbca0f0b7e35589deb7582a",
+        "pcm_sha256": "178d40ab61af57091b0fcd327785b24ffdc2a79c777f834beb74cff3dde0e5a9"
+      },
+      {
+        "id": 44,
+        "label": "expressive",
+        "condition": "quiet",
+        "group": 23,
+        "room": "TS3004a",
+        "noise_case": 78,
+        "source_pcm_sha256": "2ebac7816f3dd41b62f25f9a016112b5de48b787d7be26b99e5e08057fa97fe7",
+        "pcm_sha256": "a3dbcd2506497104b18c7a00a908b8e7aa96e20666fe899b57bd794d77c6e043"
+      },
+      {
+        "id": 45,
+        "label": "expressive",
+        "condition": "quiet_mixed",
+        "group": 23,
+        "room": "TS3004a",
+        "noise_case": 78,
+        "source_pcm_sha256": "2ebac7816f3dd41b62f25f9a016112b5de48b787d7be26b99e5e08057fa97fe7",
+        "pcm_sha256": "856c343d0d943c36f8807b95fa5d774a291e9f1cc4837771e9d2e68e3d36cef8"
+      },
+      {
+        "id": 46,
+        "label": "genuine",
+        "condition": "quiet",
+        "group": 24,
+        "room": "TS3005a",
+        "noise_case": 54,
+        "source_pcm_sha256": "d3c8a896a7d358d6776be6dc34670633e0e8c2cb34b96ee0aec03a491205ada4",
+        "pcm_sha256": "6b36bdf3552739c61337752fadf54206cc2d419eae23358c8d173d924c33a4d2"
+      },
+      {
+        "id": 47,
+        "label": "genuine",
+        "condition": "quiet_mixed",
+        "group": 24,
+        "room": "TS3005a",
+        "noise_case": 54,
+        "source_pcm_sha256": "d3c8a896a7d358d6776be6dc34670633e0e8c2cb34b96ee0aec03a491205ada4",
+        "pcm_sha256": "0ce46ea031c5b28b1d9369bac49f32e6c3d23ca63a7d915e146cb93c1230565a"
+      },
+      {
+        "id": 48,
+        "label": "expressive",
+        "condition": "quiet",
+        "group": 25,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "599eeb5cdbc3aa1ce0c2e6556209f99c9282d080c8b19ddc677aee2a1b3d8017",
+        "pcm_sha256": "081de0513e124fa94b8d2a0bf56a22c477f4154b1e27263be2ea7f4bff71ad13"
+      },
+      {
+        "id": 49,
+        "label": "expressive",
+        "condition": "quiet_mixed",
+        "group": 25,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "599eeb5cdbc3aa1ce0c2e6556209f99c9282d080c8b19ddc677aee2a1b3d8017",
+        "pcm_sha256": "bc4a55c9736cfe16cb96af3f96507bb3a8208fd0b3f2627b7fc79004c520a98b"
+      },
+      {
+        "id": 50,
+        "label": "genuine",
+        "condition": "quiet",
+        "group": 26,
+        "room": "TS3004a",
+        "noise_case": 78,
+        "source_pcm_sha256": "4a2427fd8c0ca72dc909ed891361336dd27fe62df5f7306360ab3e67c64410db",
+        "pcm_sha256": "a6aedbc9836ceddb225e498b8804bcf2270761e1e6b6d6e0dec35fe499025b53"
+      },
+      {
+        "id": 51,
+        "label": "genuine",
+        "condition": "quiet_mixed",
+        "group": 26,
+        "room": "TS3004a",
+        "noise_case": 78,
+        "source_pcm_sha256": "4a2427fd8c0ca72dc909ed891361336dd27fe62df5f7306360ab3e67c64410db",
+        "pcm_sha256": "ac00ba7618ffa020226b2d6db6139c471bbc8c9774eb0e39a7acf84d17f6a359"
+      },
+      {
+        "id": 52,
+        "label": "expressive",
+        "condition": "quiet",
+        "group": 27,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "ffc0d48df001d60cf0f3d052a0fd5ac7f44e898460508c7050f30c68fdc70513",
+        "pcm_sha256": "38fae1b9a2ab6456d21ac18b3695ca49887a8e6b28fa2494517f55bef1bc624e"
+      },
+      {
+        "id": 53,
+        "label": "expressive",
+        "condition": "quiet_mixed",
+        "group": 27,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "ffc0d48df001d60cf0f3d052a0fd5ac7f44e898460508c7050f30c68fdc70513",
+        "pcm_sha256": "440a8ac5cd0a745a728aff26eafca788001f3f6f9805a75db1e6cba2b06e1910"
+      },
+      {
+        "id": 54,
+        "label": "expressive",
+        "condition": "quiet",
+        "group": 28,
+        "room": "TS3005a",
+        "noise_case": 54,
+        "source_pcm_sha256": "b3afc24ba6183c1fa352a37d30d5607786e826be4a780e5307079b090c7312a1",
+        "pcm_sha256": "ec75d6efe5c9b7106eabdab654bfc19e1f9aa8beaa10aabae25567daf298dcfa"
+      },
+      {
+        "id": 55,
+        "label": "expressive",
+        "condition": "quiet_mixed",
+        "group": 28,
+        "room": "TS3005a",
+        "noise_case": 54,
+        "source_pcm_sha256": "b3afc24ba6183c1fa352a37d30d5607786e826be4a780e5307079b090c7312a1",
+        "pcm_sha256": "1d26fa5f111281b0767d2bb2eb59e6a85d7e4b9713f6232545366d425e527e6e"
+      },
+      {
+        "id": 56,
+        "label": "clone",
+        "condition": "quiet",
+        "group": 29,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "68fd98d2067960838ce5c0f4f7e0de349c7be63796fda8ac5e81b002c896d075",
+        "pcm_sha256": "9274ddea733612783a5d991afbc9f85579fae9b4d23e95065924467a98ae1745"
+      },
+      {
+        "id": 57,
+        "label": "clone",
+        "condition": "quiet_mixed",
+        "group": 29,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": "68fd98d2067960838ce5c0f4f7e0de349c7be63796fda8ac5e81b002c896d075",
+        "pcm_sha256": "ae60e4b1a2f33c4057b1877e2179d5989e92b0cb11823f76c1403bbc6a2ebf02"
+      },
+      {
+        "id": 58,
+        "label": "clone",
+        "condition": "quiet",
+        "group": 30,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "5dbc4c00c91fb7a8a20bcaa3db355ac24af104f6d62c6bdaba402f78d030a152",
+        "pcm_sha256": "8910e641b9312644bcefc9167e9a10d6a4df8970cd673b567b95b77fa52ae4ef"
+      },
+      {
+        "id": 59,
+        "label": "clone",
+        "condition": "quiet_mixed",
+        "group": 30,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "5dbc4c00c91fb7a8a20bcaa3db355ac24af104f6d62c6bdaba402f78d030a152",
+        "pcm_sha256": "47a8ba667bac36acb3c5d901c6561a1f90a21163c8c1e4afe4b39bb18d5795b0"
+      },
+      {
+        "id": 60,
+        "label": "expressive",
+        "condition": "quiet",
+        "group": 31,
+        "room": "TS3004a",
+        "noise_case": 78,
+        "source_pcm_sha256": "2e33e0ad3af51cc1c709ebaa9e0bb3d48393476b1ad3e76fb2af481919741f77",
+        "pcm_sha256": "5afd5e20c0bb7e29a97922bdc399c6a00022eb7b89b98aec0da65da1c78f14b1"
+      },
+      {
+        "id": 61,
+        "label": "expressive",
+        "condition": "quiet_mixed",
+        "group": 31,
+        "room": "TS3004a",
+        "noise_case": 78,
+        "source_pcm_sha256": "2e33e0ad3af51cc1c709ebaa9e0bb3d48393476b1ad3e76fb2af481919741f77",
+        "pcm_sha256": "88cfe6c3ea9cf003eb31eca7fc45d282b1092dfacd68c8c30e55ec698cc6a9e7"
+      },
+      {
+        "id": 62,
+        "label": "stock",
+        "condition": "quiet",
+        "group": 32,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "f8de91e4b2fba4b10ca0269316f95b667ccd3c0d8fbb1caf53eaf2422cdd5291",
+        "pcm_sha256": "07a8f27d9549c7588f5bedadbd8b8a465338bcba38e27651536ef7918826bf5f"
+      },
+      {
+        "id": 63,
+        "label": "stock",
+        "condition": "quiet_mixed",
+        "group": 32,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": "f8de91e4b2fba4b10ca0269316f95b667ccd3c0d8fbb1caf53eaf2422cdd5291",
+        "pcm_sha256": "6751e74e5fc9bc750baf66f8f9291047ae94f27758c4c909dd2cc4d1f966bcea"
+      },
+      {
+        "id": 64,
+        "label": "background",
+        "condition": "isolated",
+        "group": null,
+        "room": "TS3007b",
+        "noise_case": 6,
+        "source_pcm_sha256": null,
+        "pcm_sha256": "c86774830e8cf68d2b6aa50b54387451bba912a7312453d0f71416d6473f5288"
+      },
+      {
+        "id": 65,
+        "label": "background",
+        "condition": "isolated",
+        "group": null,
+        "room": "TS3003a",
+        "noise_case": 30,
+        "source_pcm_sha256": null,
+        "pcm_sha256": "fabd4d07a00b0b4f9800bc8acc89dbac8261b8e57c339ee33eaeba4c1a093ed6"
+      },
+      {
+        "id": 66,
+        "label": "background",
+        "condition": "isolated",
+        "group": null,
+        "room": "TS3005a",
+        "noise_case": 54,
+        "source_pcm_sha256": null,
+        "pcm_sha256": "27f0e0c5c18a7199934c41c3c233c4ecb3224017cd940ff1ae15e89e02775ece"
+      },
+      {
+        "id": 67,
+        "label": "background",
+        "condition": "isolated",
+        "group": null,
+        "room": "TS3004a",
+        "noise_case": 78,
+        "source_pcm_sha256": null,
+        "pcm_sha256": "b2cdd5d5175953398226734da8f0c159b68ffc84bef487e6e08c9f2622b3b5c6"
+      }
+    ],
+    "source_manifest_sha256": "409d0dd8614dbc70ed27986bfdb4c0597e61cf04f29297ea874cec39ad8e8843",
+    "room_panel_sha256": "eeb3e0b175ae8535e326f4d69f516490e31fb2c31f9316b50a1f812b124483c1",
+    "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "runner_sha256": "5a254cf6ee396127a80a83932e4de685e9382784ec414a6d59c8135840a052e8"
+  },
+  "observations": [
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "original",
+      "after": "original",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "unassessed",
+      "after": "unassessed",
+      "original_speech": 13184,
+      "gain_speech": 12672
+    },
+    {
+      "before": "unassessed",
+      "after": "unassessed",
+      "original_speech": 0,
+      "gain_speech": 0
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "unassessed",
+      "after": "inconclusive",
+      "original_speech": 19392,
+      "gain_speech": 27008
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "original",
+      "after": "original",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "original",
+      "after": "original",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "original",
+      "after": "original",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "unassessed",
+      "after": "unassessed",
+      "original_speech": 21888,
+      "gain_speech": 21888
+    },
+    {
+      "before": "unassessed",
+      "after": "unassessed",
+      "original_speech": 14272,
+      "gain_speech": 9152
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "original",
+      "after": "original",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "original",
+      "after": "original",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "unassessed",
+      "after": "unassessed",
+      "original_speech": 18208,
+      "gain_speech": 18208
+    },
+    {
+      "before": "unassessed",
+      "after": "unassessed",
+      "original_speech": 15136,
+      "gain_speech": 15136
+    },
+    {
+      "before": "original",
+      "after": "original",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "unassessed",
+      "after": "unassessed",
+      "original_speech": 15712,
+      "gain_speech": 15712
+    },
+    {
+      "before": "original",
+      "after": "original",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "original",
+      "after": "original",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "unassessed",
+      "after": "unassessed",
+      "original_speech": 11136,
+      "gain_speech": 12672
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "unassessed",
+      "after": "inconclusive",
+      "original_speech": 20832,
+      "gain_speech": 28448
+    },
+    {
+      "before": "unassessed",
+      "after": "unassessed",
+      "original_speech": 14688,
+      "gain_speech": 15200
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "unassessed",
+      "after": "inconclusive",
+      "original_speech": 23392,
+      "gain_speech": 24416
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "inconclusive",
+      "after": "inconclusive",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "unassessed",
+      "after": "unassessed",
+      "original_speech": 21856,
+      "gain_speech": 21856
+    },
+    {
+      "before": "ai",
+      "after": "ai",
+      "original_speech": null,
+      "gain_speech": null
+    },
+    {
+      "before": "unassessed",
+      "after": "unassessed",
+      "original_speech": 23392,
+      "gain_speech": 23392
+    },
+    {
+      "before": "unassessed",
+      "after": "unassessed",
+      "original_speech": 0,
+      "gain_speech": 0
+    },
+    {
+      "before": "unassessed",
+      "after": "unassessed",
+      "original_speech": 0,
+      "gain_speech": 0
+    },
+    {
+      "before": "unassessed",
+      "after": "unassessed",
+      "original_speech": 0,
+      "gain_speech": 0
+    },
+    {
+      "before": "unassessed",
+      "after": "unassessed",
+      "original_speech": 0,
+      "gain_speech": 0
+    }
+  ],
+  "model_files": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720"
+  },
+  "summary": {
+    "by_condition": {
+      "quiet/clone": {
+        "files": 6,
+        "before_ai": 6,
+        "after_ai": 6,
+        "newly_scored": 0,
+        "new_ai": 0
+      },
+      "quiet_mixed/clone": {
+        "files": 6,
+        "before_inconclusive": 4,
+        "after_inconclusive": 4,
+        "newly_scored": 0,
+        "new_ai": 0,
+        "before_ai": 2,
+        "after_ai": 2
+      },
+      "quiet/stock": {
+        "files": 6,
+        "before_ai": 6,
+        "after_ai": 6,
+        "newly_scored": 0,
+        "new_ai": 0
+      },
+      "quiet_mixed/stock": {
+        "files": 6,
+        "before_inconclusive": 5,
+        "after_inconclusive": 5,
+        "newly_scored": 0,
+        "new_ai": 0,
+        "before_unassessed": 1,
+        "after_unassessed": 1
+      },
+      "quiet/genuine": {
+        "files": 8,
+        "before_original": 6,
+        "after_original": 6,
+        "newly_scored": 0,
+        "new_ai": 0,
+        "before_ai": 1,
+        "after_ai": 1,
+        "before_inconclusive": 1,
+        "after_inconclusive": 1
+      },
+      "quiet_mixed/genuine": {
+        "files": 8,
+        "before_inconclusive": 6,
+        "after_inconclusive": 6,
+        "newly_scored": 0,
+        "new_ai": 0,
+        "before_original": 2,
+        "after_original": 2
+      },
+      "quiet/expressive": {
+        "files": 12,
+        "before_unassessed": 4,
+        "after_unassessed": 3,
+        "newly_scored": 1,
+        "new_ai": 0,
+        "before_ai": 7,
+        "after_ai": 7,
+        "after_inconclusive": 2,
+        "before_inconclusive": 1
+      },
+      "quiet_mixed/expressive": {
+        "files": 12,
+        "before_unassessed": 9,
+        "after_unassessed": 7,
+        "newly_scored": 2,
+        "new_ai": 0,
+        "after_inconclusive": 4,
+        "before_original": 1,
+        "after_original": 1,
+        "before_inconclusive": 2
+      },
+      "isolated/background": {
+        "files": 4,
+        "before_unassessed": 4,
+        "after_unassessed": 4,
+        "newly_scored": 0,
+        "new_ai": 0
+      }
+    },
+    "gained_noisy_families": [],
+    "advance": false
+  }
+}

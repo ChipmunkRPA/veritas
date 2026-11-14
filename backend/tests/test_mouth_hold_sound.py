@@ -58,6 +58,27 @@ def test_mouth_hold_sound_binds_local_samples_and_rejects_unverified_clock():
     assert measure(wave, trailing, review, review["time_base"]) is None
 
 
+@pytest.mark.parametrize(("blocks", "expected"), [
+    ([(0, 12_800, 0), (12_800, 32_000, 16_000)], (12_800, 19_200, 16_000, 22_400)),
+    ([(0, 23_000, 0), (23_000, 32_000, 24_000)], (16_000, 22_400, 16_000, 22_400)),
+    ([(0, 20_000, 0), (20_000, 32_000, 19_999)], None),
+    ([(0, 20_000, 0), (20_000, 32_000, 20_001)], None),
+    ([(0, 20_000, 0), (20_000, 32_000, 20_000)], (16_000, 22_400, 16_000, 22_400)),
+    ([(0, 25_000, 0), (25_000, 32_000, 16_000)], None),
+    ([(0, 24_000, 24_000), (24_000, 32_000, 16_000)], (24_000, 30_400, 16_000, 22_400)),
+    ([(0, 23_000, 0), (23_000, 24_000, 26_000), (24_000, 32_000, 20_000)], None),
+    ([(0, 25_000, 0), (25_001, 32_000, 30_000)], None),
+    ([(0, 25_000, 0)], None),
+])
+def test_mouth_hold_requires_unambiguous_clock_only_in_selected_range(blocks, expected):
+    review = {"schema": "chipmunk.video-mouth-local-hold/2", "status": "matched",
+              "match": {"frames": [0, 1]}, "pts": [30, 42]}
+    audio = {"timeline_time_base": "1/16000", "samples": 32_000, "timeline": [
+        {"start_sample": start, "end_sample": end, "source_pts": pts} for start, end, pts in blocks
+    ]}
+    assert binding.bounds(review, audio, "1/30") == expected
+
+
 def test_mouth_hold_waveform_keeps_archived_axis_and_matches_nonzero_audio_origin(monkeypatch):
     from PIL import ImageDraw
 

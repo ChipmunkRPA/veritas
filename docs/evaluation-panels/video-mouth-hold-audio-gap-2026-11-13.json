@@ -1,0 +1,122 @@
+{
+  "browser": {
+    "audio_duration_ms": 400,
+    "case": "before",
+    "page_errors": 0,
+    "source_clock_legend_visible": true,
+    "waveform_width_px": 960
+  },
+  "cases": {
+    "after": {
+      "decoded_samples": [
+        44800,
+        51200
+      ],
+      "json_pdf_and_signed_replay": true,
+      "measured_blocks": 19,
+      "periodic_blocks": 19,
+      "sound_measured": true,
+      "source_frames": [
+        98,
+        105,
+        111
+      ],
+      "source_picture_range_s": [
+        3.3,
+        3.7
+      ],
+      "source_pts": [
+        52800,
+        59200
+      ],
+      "source_sha256": "5e6c612be2654a4e2f0a30ad666a5e9318c53256cea813648fb83737b484456a",
+      "timeline": [
+        {
+          "end_sample": 65536,
+          "source_pts": 8000,
+          "start_sample": 0
+        },
+        {
+          "end_sample": 112000,
+          "source_pts": 76736,
+          "start_sample": 65536
+        }
+      ],
+      "verified_pdf_images": 7,
+      "weight_in_overall_confidence": 0
+    },
+    "before": {
+      "decoded_samples": [
+        41600,
+        48000
+      ],
+      "json_pdf_and_signed_replay": true,
+      "measured_blocks": 19,
+      "periodic_blocks": 19,
+      "sound_measured": true,
+      "source_frames": [
+        98,
+        105,
+        111
+      ],
+      "source_picture_range_s": [
+        3.3,
+        3.7
+      ],
+      "source_pts": [
+        52800,
+        59200
+      ],
+      "source_sha256": "4c40b021f8836fb8d513e779f43e64b5f172dd9c70a33388a9f88304f785e4c8",
+      "timeline": [
+        {
+          "end_sample": 40960,
+          "source_pts": 8000,
+          "start_sample": 0
+        },
+        {
+          "end_sample": 112000,
+          "source_pts": 52160,
+          "start_sample": 40960
+        }
+      ],
+      "verified_pdf_images": 7,
+      "weight_in_overall_confidence": 0
+    },
+    "inside": {
+      "json_pdf_and_signed_replay": true,
+      "sound_measured": false,
+      "source_frames": [
+        98,
+        105,
+        111
+      ],
+      "source_picture_range_s": [
+        3.3,
+        3.7
+      ],
+      "source_sha256": "10164c598d01e028f39db4862f956ae2f714b2d0e023dae1d6ba4d46c6335458",
+      "timeline": [
+        {
+          "end_sample": 49152,
+          "source_pts": 8000,
+          "start_sample": 0
+        },
+        {
+          "end_sample": 112000,
+          "source_pts": 60352,
+          "start_sample": 49152
+        }
+      ],
+      "verified_pdf_images": 6,
+      "weight_in_overall_confidence": 0
+    }
+  },
+  "duplicate_paid_webhooks_checked": true,
+  "missing_samples": 3200,
+  "sample_time_base": "1/16000",
+  "schema": "chipmunk.video-mouth-hold-audio-gap/1",
+  "scope": "Same archived test pictures and authored periodic tone in every delivery.",
+  "simulated_paid_runs": 3,
+  "unpaid_jobs": 0
+}

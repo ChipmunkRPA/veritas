@@ -155,6 +155,11 @@ another run with `--compare` or provide it in an
 The separate [fresh report replay](writing-context-margin-transfer-2026-11-13.md#replay)
 recomputes two internal points from prior authentic excerpts and reports
 every edited and untouched result on the later holdout.
+The [mouth-hold sound replay](video-mouth-hold-sound-2026-11-13.md#timestamp-breaks-outside-the-selected-sound)
+uses an existing public-source fixture to independently regenerate three
+timestamp-break placements, replay the paid worker and check the signed
+exports against the original video. Its background-sound study also has
+a standard-library reader linked below the results.
 
 ### Replay delivery and earlier-copy comparisons
 

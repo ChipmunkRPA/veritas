@@ -21,18 +21,35 @@ LIMITATION = ("The mixed soundtrack can include a different speaker, ordinary du
 def bounds(review, audio, time_base):
     if review.get("schema") != "chipmunk.video-mouth-local-hold/2" or review.get("status") != "matched":
         return None
-    timeline = audio.get("timeline") or []
-    if audio.get("timeline_time_base") != f"1/{RATE}" or len(timeline) != 1:
-        return None
-    block = timeline[0]
-    if block["start_sample"] != 0 or block["end_sample"] != audio["samples"]:
+    samples = audio.get("samples")
+    if audio.get("timeline_time_base") != f"1/{RATE}" or type(samples) is not int or samples < 1:
         return None
     left, right = review["match"]["frames"]
     clock = Fraction(time_base)
     first = math.ceil(review["pts"][left] * clock * RATE)
     last = math.floor(review["pts"][right] * clock * RATE)
-    start, stop = first - block["source_pts"], last - block["source_pts"]
-    if not 0 <= start < stop <= audio["samples"]:
+    if first >= last:
+        return None
+
+    # Intersect with every decoded block. Only one continuous, unambiguous
+    # source interval may supply sound, even when other parts of the file jump.
+    cursor, expected_pts = 0, first
+    start = stop = None
+    for block in audio.get("timeline") or []:
+        a, b, pts = (block.get(key) for key in ("start_sample", "end_sample", "source_pts"))
+        if any(type(value) is not int for value in (a, b, pts)) or not cursor == a < b <= samples:
+            return None
+        cursor = b
+        lo, hi = max(first, pts), min(last, pts + b - a)
+        if lo >= hi:
+            continue
+        decoded_start = a + lo - pts
+        if lo != expected_pts or (stop is not None and decoded_start != stop):
+            return None
+        if start is None:
+            start = decoded_start
+        stop, expected_pts = a + hi - pts, hi
+    if cursor != samples or start is None or expected_pts != last:
         return None
     return start, stop, first, last
 

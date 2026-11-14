@@ -79,6 +79,11 @@ are not public screening promises or calibrated population probabilities.
   an existing verified HD picture interval. A controlled clear-speech insert
   registered on seven of seven intervals. None of the same inserts registered
   with strong added noise. This evidence carries zero weight in AI confidence.
+- [Mouth-hold sound with a timestamp break](video-mouth-hold-sound-2026-11-13.md#timestamp-breaks-outside-the-selected-sound)
+  keeps usable audio before or after a gap, and leaves sound unassessed
+  when a gap crosses the selected pictures. Three real MP4s matched in the
+  local worker and signed exports. A separate filter probe gained two of
+  20 noisy periodic observations at best and lost four of ten clean ones.
 - [Blind pixel prediction](image-crossfit-prediction-2026-11-13.md) measured
   900 held deliveries against exact local image masks. It added at most two
   useful masks per encoding on the primary set, added ordinary-processing

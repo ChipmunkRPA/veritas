@@ -1,0 +1,1331 @@
+{
+  "method": {
+    "advance": "At least six added noisy locations on six original files, at most one newly flagged noise-only excerpt, and preservation of at least 90% of the raw clean flags. This diagnostic has zero confidence weight.",
+    "comparison": "Raw decoded waveform versus fourth-order Butterworth high-pass at 100 Hz or 180 Hz, both applied in both directions to the complete three-second waveform. All views use the same existing block rule.",
+    "outcome": "Recover sustained periodicity in noisy pairs that had it on their matched clean original. Keep clean-concordance and isolated background outcomes separately.",
+    "source": "All 116 deliveries in the retained noise-confirmation ledger. Use exact samples 20800\u201327200 (1.300\u20131.700 s)."
+  },
+  "prior_sha256": "0c3b2396a3c770f3d730de9b46727071ec3accb4df240ea19df1a9d43472834f",
+  "rows": [
+    {
+      "group": "b747e31fee63e9d1d6954f5abac94f7b464bfb64879daac96a4536c4264c3d48",
+      "id": 0,
+      "periodic_blocks": {
+        "highpass_100": 14,
+        "highpass_180": 11,
+        "raw": 14
+      },
+      "scene": "clean",
+      "source_wav_sha256": "ed2aabf09e15503557f8d5f03348b1c053f24be84b1d549cd29e70786cd9bf0a"
+    },
+    {
+      "group": "b747e31fee63e9d1d6954f5abac94f7b464bfb64879daac96a4536c4264c3d48",
+      "id": 1,
+      "periodic_blocks": {
+        "highpass_100": 1,
+        "highpass_180": 2,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "dc6aa685967c0ca7e9b9e9109847f5683c3fdeaf335d996276d441bd853e634d"
+    },
+    {
+      "group": "b747e31fee63e9d1d6954f5abac94f7b464bfb64879daac96a4536c4264c3d48",
+      "id": 2,
+      "periodic_blocks": {
+        "highpass_100": 11,
+        "highpass_180": 10,
+        "raw": 4
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "94e490d7ac147bbb5a12cc26da14b498b228a623a4a91a5439f74961dd3b203f"
+    },
+    {
+      "group": "58fffa9c9b1e31469a9eb8c7a08b61345c7861ec8f1fa3c95d31900b15b1f246",
+      "id": 3,
+      "periodic_blocks": {
+        "highpass_100": 11,
+        "highpass_180": 11,
+        "raw": 11
+      },
+      "scene": "clean",
+      "source_wav_sha256": "a8b2c84f2242a9629526c079cd25a7d0d35b4a206557884a008f559d8521fcca"
+    },
+    {
+      "group": "58fffa9c9b1e31469a9eb8c7a08b61345c7861ec8f1fa3c95d31900b15b1f246",
+      "id": 4,
+      "periodic_blocks": {
+        "highpass_100": 1,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "919dc81fb187663da23a335ab0f8321a848df9148d360834163d6a104705135e"
+    },
+    {
+      "group": "58fffa9c9b1e31469a9eb8c7a08b61345c7861ec8f1fa3c95d31900b15b1f246",
+      "id": 5,
+      "periodic_blocks": {
+        "highpass_100": 11,
+        "highpass_180": 11,
+        "raw": 11
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "20b6a02f03c3176cc587e0f33a20da9e844d1f482b00bbd382bbf83eb178aceb"
+    },
+    {
+      "group": "ed93a3c3948cd9c01b428fa90b8a40d3726929136256d8371e8773952bc4b13e",
+      "id": 6,
+      "periodic_blocks": {
+        "highpass_100": 11,
+        "highpass_180": 11,
+        "raw": 11
+      },
+      "scene": "clean",
+      "source_wav_sha256": "af9ddd725b461f627c34d0f72a73a936d547d6034288f3b077cba95c2dcb1cbf"
+    },
+    {
+      "group": "ed93a3c3948cd9c01b428fa90b8a40d3726929136256d8371e8773952bc4b13e",
+      "id": 7,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "37eb932ccb9e411c0bdef2c982cb2ad0d9f5103b40cb37c74c237e2cff396139"
+    },
+    {
+      "group": "ed93a3c3948cd9c01b428fa90b8a40d3726929136256d8371e8773952bc4b13e",
+      "id": 8,
+      "periodic_blocks": {
+        "highpass_100": 11,
+        "highpass_180": 11,
+        "raw": 9
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "460c977edcfdc7cbe3f02385789165acdabff9cf32105dcdf84ea734185b432c"
+    },
+    {
+      "group": "a4e8ac8da56d20aa13dc7a0a74aa8a378951729722a26c46be8263b622d9964c",
+      "id": 9,
+      "periodic_blocks": {
+        "highpass_100": 11,
+        "highpass_180": 11,
+        "raw": 10
+      },
+      "scene": "clean",
+      "source_wav_sha256": "9aa2a89ad0c954060672b53ac5669e40654e7c8bec8dfb99dcb125d92afe9edc"
+    },
+    {
+      "group": "a4e8ac8da56d20aa13dc7a0a74aa8a378951729722a26c46be8263b622d9964c",
+      "id": 10,
+      "periodic_blocks": {
+        "highpass_100": 1,
+        "highpass_180": 4,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "5648cb7e8a7846bafab1e99bb534c56b50a74ba794b4d930b2b9f16f13ea0aca"
+    },
+    {
+      "group": "a4e8ac8da56d20aa13dc7a0a74aa8a378951729722a26c46be8263b622d9964c",
+      "id": 11,
+      "periodic_blocks": {
+        "highpass_100": 11,
+        "highpass_180": 11,
+        "raw": 9
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "bd9268b5775edf4d31b3a952ed5ea0741f1f72ee644157dbb83961b1d8843107"
+    },
+    {
+      "group": "c3d929cfb831a631235a0bc7ed5bd8574d400a22f4a7bc7c2c391bda02b89a53",
+      "id": 12,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "clean",
+      "source_wav_sha256": "4a24d12eb9d41a9cd7474ebff460194a00ae115ee697a9b25b93c97935797b62"
+    },
+    {
+      "group": "c3d929cfb831a631235a0bc7ed5bd8574d400a22f4a7bc7c2c391bda02b89a53",
+      "id": 13,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "7a32303cac81bf89f39e060f79e35f7304db7cf0f86bfa71e068d7da77799efc"
+    },
+    {
+      "group": "c3d929cfb831a631235a0bc7ed5bd8574d400a22f4a7bc7c2c391bda02b89a53",
+      "id": 14,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 3
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "39632deddbf007a6474880701ef9d3cb27d0b89dbb19fca808d0ef35007c081c"
+    },
+    {
+      "group": "54fa914af036b826befe87a540a6547cae4cb12540056c8e441fa7f50e7e4d17",
+      "id": 15,
+      "periodic_blocks": {
+        "highpass_100": 4,
+        "highpass_180": 0,
+        "raw": 4
+      },
+      "scene": "clean",
+      "source_wav_sha256": "c82e6356cc7b45c924d4378587fc7f3175e8aba2e41a5cb2b82c9489b1ae09f9"
+    },
+    {
+      "group": "54fa914af036b826befe87a540a6547cae4cb12540056c8e441fa7f50e7e4d17",
+      "id": 16,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "6acc3a7636acfb893a10cd3ce32cbbaf70e49d40ac73a6e46e750740fb5a221e"
+    },
+    {
+      "group": "54fa914af036b826befe87a540a6547cae4cb12540056c8e441fa7f50e7e4d17",
+      "id": 17,
+      "periodic_blocks": {
+        "highpass_100": 4,
+        "highpass_180": 0,
+        "raw": 4
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "08afe4e81da8c47440e0328f2c6ad07910d1d70345c59eadd9b57efd4e26b487"
+    },
+    {
+      "group": "57631b0341e6e21a631725f345fd73b08071678fd708679d29b061c7ab9ec7a8",
+      "id": 18,
+      "periodic_blocks": {
+        "highpass_100": 1,
+        "highpass_180": 1,
+        "raw": 0
+      },
+      "scene": "clean",
+      "source_wav_sha256": "c694f1d7db98379d8c60432111f13a1003893448b4cd5a8a2fde94bc60b1110b"
+    },
+    {
+      "group": "57631b0341e6e21a631725f345fd73b08071678fd708679d29b061c7ab9ec7a8",
+      "id": 19,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "b90da9f086feeac623eb7901d6df426a363466c5dd700736d5ea4f7bc508f9aa"
+    },
+    {
+      "group": "57631b0341e6e21a631725f345fd73b08071678fd708679d29b061c7ab9ec7a8",
+      "id": 20,
+      "periodic_blocks": {
+        "highpass_100": 1,
+        "highpass_180": 1,
+        "raw": 4
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "ff65caf8d6ddcdc8328e9581037207dde3ca88a43212b261ee9e99026cfb42b5"
+    },
+    {
+      "group": "a25da01d2c98e38bbd879293c3e3368614fed68ac354aefc0b8fe1650cabbde7",
+      "id": 21,
+      "periodic_blocks": {
+        "highpass_100": 8,
+        "highpass_180": 6,
+        "raw": 8
+      },
+      "scene": "clean",
+      "source_wav_sha256": "db89da79a49dedeef9a07682dffd18bb2c7ce4f2ad8698977a25df1be08162c5"
+    },
+    {
+      "group": "a25da01d2c98e38bbd879293c3e3368614fed68ac354aefc0b8fe1650cabbde7",
+      "id": 22,
+      "periodic_blocks": {
+        "highpass_100": 3,
+        "highpass_180": 3,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "00213e0352d7469ba009e9ee9f03ebb49fe98f391fa66548da127283992a5073"
+    },
+    {
+      "group": "a25da01d2c98e38bbd879293c3e3368614fed68ac354aefc0b8fe1650cabbde7",
+      "id": 23,
+      "periodic_blocks": {
+        "highpass_100": 8,
+        "highpass_180": 6,
+        "raw": 9
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "fc44270f1376dba774f38d9025293e98638c3f51b734d4d42ca4a335a2509b5b"
+    },
+    {
+      "group": "cead101fa3c54144f076fd049f8a803f399ebc7b6c24c0697b66da128113deb3",
+      "id": 24,
+      "periodic_blocks": {
+        "highpass_100": 17,
+        "highpass_180": 16,
+        "raw": 17
+      },
+      "scene": "clean",
+      "source_wav_sha256": "61a26625b7822ad9d8bbe556db21bb6d756a4eca8074d340e82c29e9e656b6c8"
+    },
+    {
+      "group": "cead101fa3c54144f076fd049f8a803f399ebc7b6c24c0697b66da128113deb3",
+      "id": 25,
+      "periodic_blocks": {
+        "highpass_100": 11,
+        "highpass_180": 5,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "2697cb8a5af27db369133bf26ba52ab18c8e4ee6dbc6f1321ea575a15325a9ef"
+    },
+    {
+      "group": "cead101fa3c54144f076fd049f8a803f399ebc7b6c24c0697b66da128113deb3",
+      "id": 26,
+      "periodic_blocks": {
+        "highpass_100": 16,
+        "highpass_180": 16,
+        "raw": 16
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "b7f251120362e0c4bd1378857f730c7085f97306d38f920f55cb48c8e07c6c2e"
+    },
+    {
+      "group": "5a8bf8b5b9455afe516f47027691c5cd912c24dfc8302bbd1e330c873bc94746",
+      "id": 27,
+      "periodic_blocks": {
+        "highpass_100": 7,
+        "highpass_180": 6,
+        "raw": 7
+      },
+      "scene": "clean",
+      "source_wav_sha256": "5e903d7694f51af2b873a1209adbe833f0354cd940bf5b0e10adbb00f89c3a33"
+    },
+    {
+      "group": "5a8bf8b5b9455afe516f47027691c5cd912c24dfc8302bbd1e330c873bc94746",
+      "id": 28,
+      "periodic_blocks": {
+        "highpass_100": 6,
+        "highpass_180": 5,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "8cf2fd75a45512e703d8b7078abab58e491a2df1ad56afca5895c397d2ec06bd"
+    },
+    {
+      "group": "5a8bf8b5b9455afe516f47027691c5cd912c24dfc8302bbd1e330c873bc94746",
+      "id": 29,
+      "periodic_blocks": {
+        "highpass_100": 7,
+        "highpass_180": 6,
+        "raw": 8
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "a2a27a106dd1aafb255d889440ccdc4009a65b071e9c1bd8618cc4e8b71d88e6"
+    },
+    {
+      "group": "e303bbe219934d3bd197048271de11ba868e956cc7ede3b76d6d844d9bdbda23",
+      "id": 30,
+      "periodic_blocks": {
+        "highpass_100": 16,
+        "highpass_180": 16,
+        "raw": 16
+      },
+      "scene": "clean",
+      "source_wav_sha256": "63f08a1eef17029ed9e27b6fd4838d0ccbd1e45c11b019f7b6543756db4429d3"
+    },
+    {
+      "group": "e303bbe219934d3bd197048271de11ba868e956cc7ede3b76d6d844d9bdbda23",
+      "id": 31,
+      "periodic_blocks": {
+        "highpass_100": 15,
+        "highpass_180": 15,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "3f6b3f8254e0c972f37759b9175d9e8fc5daaf62af9e1389be5340a8e1fa7913"
+    },
+    {
+      "group": "e303bbe219934d3bd197048271de11ba868e956cc7ede3b76d6d844d9bdbda23",
+      "id": 32,
+      "periodic_blocks": {
+        "highpass_100": 16,
+        "highpass_180": 16,
+        "raw": 16
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "4fb5c9040a5dabe7a509e951fb50c42f158cdf0e27b62633f724349f32ef66b9"
+    },
+    {
+      "group": "929047be4a8440b229b5335271aba047f866916bec83fa00a0f3d4e1793b787e",
+      "id": 33,
+      "periodic_blocks": {
+        "highpass_100": 10,
+        "highpass_180": 12,
+        "raw": 9
+      },
+      "scene": "clean",
+      "source_wav_sha256": "50e1327587828b5cb7f86633fe1a8202b5c48571e8c73b50bb93951020acabf2"
+    },
+    {
+      "group": "929047be4a8440b229b5335271aba047f866916bec83fa00a0f3d4e1793b787e",
+      "id": 34,
+      "periodic_blocks": {
+        "highpass_100": 1,
+        "highpass_180": 3,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "bccd89de1262e2188dd34a47613b0c7c86c077092241af341367292561163154"
+    },
+    {
+      "group": "929047be4a8440b229b5335271aba047f866916bec83fa00a0f3d4e1793b787e",
+      "id": 35,
+      "periodic_blocks": {
+        "highpass_100": 7,
+        "highpass_180": 7,
+        "raw": 14
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "c5e3d39e57591f8fc5d16685ef97ab7ec6f1cacef21e338eda3fd216196f6729"
+    },
+    {
+      "group": "126668d017d3cbc18ea5e706e467abf68795be49e15153c78700ad94b4e6f91c",
+      "id": 36,
+      "periodic_blocks": {
+        "highpass_100": 5,
+        "highpass_180": 3,
+        "raw": 5
+      },
+      "scene": "clean",
+      "source_wav_sha256": "499c97cc9636998e04e06292e3ee182c23991ace3200db26ece78a311c4c79f0"
+    },
+    {
+      "group": "126668d017d3cbc18ea5e706e467abf68795be49e15153c78700ad94b4e6f91c",
+      "id": 37,
+      "periodic_blocks": {
+        "highpass_100": 1,
+        "highpass_180": 1,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "ce7fc46600e3e74a62b454438ab1dae4bfd60ebe96ee976b4471e8b399512c45"
+    },
+    {
+      "group": "126668d017d3cbc18ea5e706e467abf68795be49e15153c78700ad94b4e6f91c",
+      "id": 38,
+      "periodic_blocks": {
+        "highpass_100": 5,
+        "highpass_180": 3,
+        "raw": 6
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "6f283ed60329f38ab5941531555b393189c9e10823d84150a44f9ac68f8b8321"
+    },
+    {
+      "group": "b2068e99e0cd0ea1776c51d54ba1ef6daea83b25fde503afc55bac077ff6ba9e",
+      "id": 39,
+      "periodic_blocks": {
+        "highpass_100": 9,
+        "highpass_180": 7,
+        "raw": 13
+      },
+      "scene": "clean",
+      "source_wav_sha256": "e559d7e0b7b6a6551d0a195c2d16e16f24dac6745f580bd507f253c40d509242"
+    },
+    {
+      "group": "b2068e99e0cd0ea1776c51d54ba1ef6daea83b25fde503afc55bac077ff6ba9e",
+      "id": 40,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "b2dedaafa864d35124c0db8dd4b00c56b821016b66bddc9e9f6504ea7dc513e5"
+    },
+    {
+      "group": "b2068e99e0cd0ea1776c51d54ba1ef6daea83b25fde503afc55bac077ff6ba9e",
+      "id": 41,
+      "periodic_blocks": {
+        "highpass_100": 9,
+        "highpass_180": 6,
+        "raw": 4
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "21d40fc5fdffc679a6dbbdb61f18a01214729d1f61b65a1655b6527a65dab813"
+    },
+    {
+      "group": "5796ffea73fe9437da62f4b246e290d43d4600a015a1e25cdd425aeb193748f8",
+      "id": 42,
+      "periodic_blocks": {
+        "highpass_100": 8,
+        "highpass_180": 7,
+        "raw": 8
+      },
+      "scene": "clean",
+      "source_wav_sha256": "5313619cd11c434a2670ea96c44c4c632864f17adcb261911feffab0bd7f16e0"
+    },
+    {
+      "group": "5796ffea73fe9437da62f4b246e290d43d4600a015a1e25cdd425aeb193748f8",
+      "id": 43,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "1d7025c4d1ed806780a7280f100c75d09d531056c32358d69e6341835f9ebe2c"
+    },
+    {
+      "group": "5796ffea73fe9437da62f4b246e290d43d4600a015a1e25cdd425aeb193748f8",
+      "id": 44,
+      "periodic_blocks": {
+        "highpass_100": 8,
+        "highpass_180": 7,
+        "raw": 8
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "cb45eb2c089b386fdcc0cb02a7d6597365ba5c511b77f8a705fc91da60a5fb76"
+    },
+    {
+      "group": "f5c1680358513bafed2391eb73c3d0ddc6487869c014a7455ef4fd86e0a61344",
+      "id": 45,
+      "periodic_blocks": {
+        "highpass_100": 13,
+        "highpass_180": 10,
+        "raw": 13
+      },
+      "scene": "clean",
+      "source_wav_sha256": "c3351132907faea4cef4feddcfb174eeb815e7dc3b9e279c03d4d99daa44a57e"
+    },
+    {
+      "group": "f5c1680358513bafed2391eb73c3d0ddc6487869c014a7455ef4fd86e0a61344",
+      "id": 46,
+      "periodic_blocks": {
+        "highpass_100": 1,
+        "highpass_180": 3,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "bdd08770f0d01fda164036dbec8355ae9a5d892bcbe7b8e811f827dc6429179f"
+    },
+    {
+      "group": "f5c1680358513bafed2391eb73c3d0ddc6487869c014a7455ef4fd86e0a61344",
+      "id": 47,
+      "periodic_blocks": {
+        "highpass_100": 12,
+        "highpass_180": 10,
+        "raw": 11
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "c959f9bf96a6af6284b08602b7b4a45106576ceca06507a8ffe762a1acf7ec09"
+    },
+    {
+      "group": "975e9aee927ccbeea5a5bebcadaa50bbf96e65dfb7c5c11641ea1a98526d9d95",
+      "id": 48,
+      "periodic_blocks": {
+        "highpass_100": 14,
+        "highpass_180": 14,
+        "raw": 13
+      },
+      "scene": "clean",
+      "source_wav_sha256": "535f29d4d04098a35f9a623b2babfe55b3e9757a67591386bf642b1cf24da767"
+    },
+    {
+      "group": "975e9aee927ccbeea5a5bebcadaa50bbf96e65dfb7c5c11641ea1a98526d9d95",
+      "id": 49,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 2,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "5a49763cc749e67af10cee66473f70d45345766536a1dfc595d3f5ae26107043"
+    },
+    {
+      "group": "975e9aee927ccbeea5a5bebcadaa50bbf96e65dfb7c5c11641ea1a98526d9d95",
+      "id": 50,
+      "periodic_blocks": {
+        "highpass_100": 14,
+        "highpass_180": 14,
+        "raw": 8
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "fb3551bac4fe6b4735d0420b5d22beb14a94755ddc5149f9f21ac8797954a052"
+    },
+    {
+      "group": "2a6d609f39da8b9afdeb69141ef82ccf079707a1328c0a98a0550f7bf9a0aca1",
+      "id": 51,
+      "periodic_blocks": {
+        "highpass_100": 4,
+        "highpass_180": 4,
+        "raw": 4
+      },
+      "scene": "clean",
+      "source_wav_sha256": "374d94c2f3c5aeec29a96daf66ecabf9504b5ad870e9b8034a3637f13a02ee22"
+    },
+    {
+      "group": "2a6d609f39da8b9afdeb69141ef82ccf079707a1328c0a98a0550f7bf9a0aca1",
+      "id": 52,
+      "periodic_blocks": {
+        "highpass_100": 2,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "f577606816a5763ee3ec35f5fccc4ab551cb6ac465042fbc47128ae95d717c66"
+    },
+    {
+      "group": "2a6d609f39da8b9afdeb69141ef82ccf079707a1328c0a98a0550f7bf9a0aca1",
+      "id": 53,
+      "periodic_blocks": {
+        "highpass_100": 4,
+        "highpass_180": 4,
+        "raw": 10
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "e8eec3695ab2f4a28e869450d8721868c922a6dfcecc0bef3adab15cf09feda8"
+    },
+    {
+      "group": "e863a0bf8d1eec9b33d8e2252220ee47e20be08d2a92aee382d75a2e99daf579",
+      "id": 54,
+      "periodic_blocks": {
+        "highpass_100": 15,
+        "highpass_180": 14,
+        "raw": 15
+      },
+      "scene": "clean",
+      "source_wav_sha256": "88d5b03dd686312ff43d308ba45eae483c9348c566e948640d72fcb5807c055b"
+    },
+    {
+      "group": "e863a0bf8d1eec9b33d8e2252220ee47e20be08d2a92aee382d75a2e99daf579",
+      "id": 55,
+      "periodic_blocks": {
+        "highpass_100": 7,
+        "highpass_180": 9,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "e87cc36f02f63e7131ca4f9db16115b3004379cef3954ab33bc96284cd2fff79"
+    },
+    {
+      "group": "e863a0bf8d1eec9b33d8e2252220ee47e20be08d2a92aee382d75a2e99daf579",
+      "id": 56,
+      "periodic_blocks": {
+        "highpass_100": 14,
+        "highpass_180": 14,
+        "raw": 14
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "85cd03cdd2ab31e716aa8d2ba4a359122c0b0ad39f14f690126bfabd87959f59"
+    },
+    {
+      "group": "9178bae49ec6dd20f37740707348b5e9bd07be1fd0b29159d57bfab0555ccb83",
+      "id": 57,
+      "periodic_blocks": {
+        "highpass_100": 9,
+        "highpass_180": 6,
+        "raw": 8
+      },
+      "scene": "clean",
+      "source_wav_sha256": "f7001b8a01bd806f9a60df1bbd38f647bdff693bf5d047309f3f024c5577f805"
+    },
+    {
+      "group": "9178bae49ec6dd20f37740707348b5e9bd07be1fd0b29159d57bfab0555ccb83",
+      "id": 58,
+      "periodic_blocks": {
+        "highpass_100": 1,
+        "highpass_180": 3,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "51369ef8227d1b3d70c490f60de48c2b6c1fbc12faab2b7f2cb19e60308534c7"
+    },
+    {
+      "group": "9178bae49ec6dd20f37740707348b5e9bd07be1fd0b29159d57bfab0555ccb83",
+      "id": 59,
+      "periodic_blocks": {
+        "highpass_100": 9,
+        "highpass_180": 6,
+        "raw": 6
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "5b64f978756c4bc592bff9327679917dd8193ca59462e3eaf124ce5492e66c91"
+    },
+    {
+      "group": "d420465868f5dcf7a81e4fe4dff5a38561d0743ee0bcbf06dfe1eec730b4668f",
+      "id": 60,
+      "periodic_blocks": {
+        "highpass_100": 2,
+        "highpass_180": 2,
+        "raw": 2
+      },
+      "scene": "clean",
+      "source_wav_sha256": "f1d5f6f550dd64329fe9a37f05124ae1c04175eb3285610031b8bc185c7cca39"
+    },
+    {
+      "group": "d420465868f5dcf7a81e4fe4dff5a38561d0743ee0bcbf06dfe1eec730b4668f",
+      "id": 61,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "588e5e5774b3c5bbdc4bde9168e8d6f83552d37b4afac5415e77f37796845762"
+    },
+    {
+      "group": "d420465868f5dcf7a81e4fe4dff5a38561d0743ee0bcbf06dfe1eec730b4668f",
+      "id": 62,
+      "periodic_blocks": {
+        "highpass_100": 2,
+        "highpass_180": 1,
+        "raw": 13
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "781b2c7ad119c63f314561a6f19ec982f1a383a8643b6cf490dab0188d1752e9"
+    },
+    {
+      "group": "e7e4169e57e9f681a72f38cf30bd411b92990b4dd5e8f2532d73c01ed4a12e97",
+      "id": 63,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 4
+      },
+      "scene": "clean",
+      "source_wav_sha256": "bfa65544a5dd428b6bd38c3f338dd32085c559b25e98de62d8ebdacb088047f1"
+    },
+    {
+      "group": "e7e4169e57e9f681a72f38cf30bd411b92990b4dd5e8f2532d73c01ed4a12e97",
+      "id": 64,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "90aad18a90835af3541d759e3010124d18127e236bd632d874462c94a5ec2fe5"
+    },
+    {
+      "group": "e7e4169e57e9f681a72f38cf30bd411b92990b4dd5e8f2532d73c01ed4a12e97",
+      "id": 65,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 2
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "90cf0474e9e4997ce6ebc8b4d73a0927d7c7d50b6c1e3914ef720e1d188b2e35"
+    },
+    {
+      "group": "b59bc8590b818ada1d32e2bf81f51ad31e8331421c02e9c61dbf34b8d3679b16",
+      "id": 66,
+      "periodic_blocks": {
+        "highpass_100": 12,
+        "highpass_180": 12,
+        "raw": 12
+      },
+      "scene": "clean",
+      "source_wav_sha256": "a1377aa7b3f29e81331fa79dcb3ae817693635adaef161ba4fd0eabf379ac96a"
+    },
+    {
+      "group": "b59bc8590b818ada1d32e2bf81f51ad31e8331421c02e9c61dbf34b8d3679b16",
+      "id": 67,
+      "periodic_blocks": {
+        "highpass_100": 12,
+        "highpass_180": 12,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "bece7928b2f1431a7140964927d1e4d08fca83f9bd17a4532b506337e16db894"
+    },
+    {
+      "group": "b59bc8590b818ada1d32e2bf81f51ad31e8331421c02e9c61dbf34b8d3679b16",
+      "id": 68,
+      "periodic_blocks": {
+        "highpass_100": 12,
+        "highpass_180": 12,
+        "raw": 10
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "09863f7527639cdc744fcab161fd5c77a51b24871168cc8826cb7bfe45900d36"
+    },
+    {
+      "group": "d9b329b421253be86934840de5e52fec103a762120fbd1d819d7816c77b03d33",
+      "id": 69,
+      "periodic_blocks": {
+        "highpass_100": 3,
+        "highpass_180": 3,
+        "raw": 3
+      },
+      "scene": "clean",
+      "source_wav_sha256": "c91d52d5e38dc41d2719a9d3158f5c27f68e0649e342a70ff725f5cf9106ab38"
+    },
+    {
+      "group": "d9b329b421253be86934840de5e52fec103a762120fbd1d819d7816c77b03d33",
+      "id": 70,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 2,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "53d3a455ee70cde7028db85d0c806ed5d59b67b55d1cb64682f08865ff5a85bb"
+    },
+    {
+      "group": "d9b329b421253be86934840de5e52fec103a762120fbd1d819d7816c77b03d33",
+      "id": 71,
+      "periodic_blocks": {
+        "highpass_100": 3,
+        "highpass_180": 3,
+        "raw": 9
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "5af1368fe6b6fde13f873b102dfe4823b4af82ea080c1bbeda7e8b6164f624a4"
+    },
+    {
+      "group": "01230bdd89310faee1ab58f81143621aab7fdf05f24dc6ad9c1bd9bc7c8b5f1d",
+      "id": 72,
+      "periodic_blocks": {
+        "highpass_100": 15,
+        "highpass_180": 15,
+        "raw": 15
+      },
+      "scene": "clean",
+      "source_wav_sha256": "dbb3d9f5faa837439e5003d0dce7a907f2970d8a9142be7b0cc94f04aceeacc6"
+    },
+    {
+      "group": "01230bdd89310faee1ab58f81143621aab7fdf05f24dc6ad9c1bd9bc7c8b5f1d",
+      "id": 73,
+      "periodic_blocks": {
+        "highpass_100": 9,
+        "highpass_180": 13,
+        "raw": 8
+      },
+      "scene": "street",
+      "source_wav_sha256": "8b935bbe25d9c3b204c06d12d56b89a48ed22bf026390ae9123dd075e7f050b5"
+    },
+    {
+      "group": "01230bdd89310faee1ab58f81143621aab7fdf05f24dc6ad9c1bd9bc7c8b5f1d",
+      "id": 74,
+      "periodic_blocks": {
+        "highpass_100": 14,
+        "highpass_180": 14,
+        "raw": 14
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "8fcbad2ffe186d06c81bc0670397ff6bc67473b591734f9e9d289869b6c5ad8a"
+    },
+    {
+      "group": "9a08a210f3e5616408f2135cf670f07ce4f331efe18ad449db3758cced11bec8",
+      "id": 75,
+      "periodic_blocks": {
+        "highpass_100": 13,
+        "highpass_180": 13,
+        "raw": 13
+      },
+      "scene": "clean",
+      "source_wav_sha256": "edcaca767b1f29d9ae0793d01c72a8560a851ab2ee7804032a467ef8b7a5746e"
+    },
+    {
+      "group": "9a08a210f3e5616408f2135cf670f07ce4f331efe18ad449db3758cced11bec8",
+      "id": 76,
+      "periodic_blocks": {
+        "highpass_100": 4,
+        "highpass_180": 8,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "a93e76f964236e3ab2369678df20ae6485b219c3595df20712a0b9d47012cc21"
+    },
+    {
+      "group": "9a08a210f3e5616408f2135cf670f07ce4f331efe18ad449db3758cced11bec8",
+      "id": 77,
+      "periodic_blocks": {
+        "highpass_100": 13,
+        "highpass_180": 13,
+        "raw": 16
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "f8c56b908d719b48c55a778e5e2610d8215c6d1a4519ca92b4b3a843efb54900"
+    },
+    {
+      "group": "dc8fd224713e256c552ba32d7cb5f0e1e8566e81d1cca56d2351b97bdf7602b5",
+      "id": 78,
+      "periodic_blocks": {
+        "highpass_100": 6,
+        "highpass_180": 6,
+        "raw": 6
+      },
+      "scene": "clean",
+      "source_wav_sha256": "7320255ffbaaa573716422b1b0c687dfe60ddedbe301b0ee1fb792b0c72bcc8a"
+    },
+    {
+      "group": "dc8fd224713e256c552ba32d7cb5f0e1e8566e81d1cca56d2351b97bdf7602b5",
+      "id": 79,
+      "periodic_blocks": {
+        "highpass_100": 2,
+        "highpass_180": 2,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "8e7cb72e5f2a7c8fd6d5ca1ed3523b0790fb02a700bab1e8a15c9664d9737aea"
+    },
+    {
+      "group": "dc8fd224713e256c552ba32d7cb5f0e1e8566e81d1cca56d2351b97bdf7602b5",
+      "id": 80,
+      "periodic_blocks": {
+        "highpass_100": 4,
+        "highpass_180": 4,
+        "raw": 7
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "eb86050c802be36c538eb64757676a695d5ab87bdf1ccf916a6e8845f471e602"
+    },
+    {
+      "group": "8ef99c4f03c0d785d1eabfa8961ef5dc3ddd25782a3e2ca68877fd1439ba9311",
+      "id": 81,
+      "periodic_blocks": {
+        "highpass_100": 7,
+        "highpass_180": 6,
+        "raw": 7
+      },
+      "scene": "clean",
+      "source_wav_sha256": "558f4702c732336c7c80a1fc09e83d08063fa8e25b0a3db49648e2b3e51aeb16"
+    },
+    {
+      "group": "8ef99c4f03c0d785d1eabfa8961ef5dc3ddd25782a3e2ca68877fd1439ba9311",
+      "id": 82,
+      "periodic_blocks": {
+        "highpass_100": 6,
+        "highpass_180": 1,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "0762a04c09f3c4884fd0c97005db0296cc55d3e3a62d082ac1222078b2c93784"
+    },
+    {
+      "group": "8ef99c4f03c0d785d1eabfa8961ef5dc3ddd25782a3e2ca68877fd1439ba9311",
+      "id": 83,
+      "periodic_blocks": {
+        "highpass_100": 7,
+        "highpass_180": 6,
+        "raw": 10
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "a2474cc965c3489b255aba30e0ec13a1b0a758615dd9d42ddd6ef0dfb8f19d8a"
+    },
+    {
+      "group": "43cfe16f3e24be958210790392c0a34875d58e56d75fcc6d15a8a4c03c33574b",
+      "id": 84,
+      "periodic_blocks": {
+        "highpass_100": 9,
+        "highpass_180": 9,
+        "raw": 9
+      },
+      "scene": "clean",
+      "source_wav_sha256": "01c75b5c835df5c038c3953572b21c8027a3ada78d588972fdf14b52e9e6340c"
+    },
+    {
+      "group": "43cfe16f3e24be958210790392c0a34875d58e56d75fcc6d15a8a4c03c33574b",
+      "id": 85,
+      "periodic_blocks": {
+        "highpass_100": 9,
+        "highpass_180": 9,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "b248400ec924eb0abd88455687d3b936efc3f9f0444e90170f48fd66bc985217"
+    },
+    {
+      "group": "43cfe16f3e24be958210790392c0a34875d58e56d75fcc6d15a8a4c03c33574b",
+      "id": 86,
+      "periodic_blocks": {
+        "highpass_100": 9,
+        "highpass_180": 9,
+        "raw": 13
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "2ae73da0352e67a03121d83532b38e355363e4b405dbe88fab34a785592253ec"
+    },
+    {
+      "group": "16c0e484a47a411224e8ffca620396e22097bf1482acbd8d3bed8b4fcb87834c",
+      "id": 87,
+      "periodic_blocks": {
+        "highpass_100": 5,
+        "highpass_180": 3,
+        "raw": 5
+      },
+      "scene": "clean",
+      "source_wav_sha256": "99e93d6f40e1a46b741b9efec8e75440e7cb982edc27b72172e96b27d3d7fc6c"
+    },
+    {
+      "group": "16c0e484a47a411224e8ffca620396e22097bf1482acbd8d3bed8b4fcb87834c",
+      "id": 88,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "692ef6626fcba15be4a67d00c9749a7bc3fdcf754917a1c137362417b91f2e82"
+    },
+    {
+      "group": "16c0e484a47a411224e8ffca620396e22097bf1482acbd8d3bed8b4fcb87834c",
+      "id": 89,
+      "periodic_blocks": {
+        "highpass_100": 2,
+        "highpass_180": 2,
+        "raw": 6
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "b5290538a86bf1e5c4c73d5006e541d55778ac89a5e1e8975b4dfdc510deb5c9"
+    },
+    {
+      "group": "00a07fb4e2cc63ed82cef7b0c23b6a283c6e346d212431229f7a799f5d022096",
+      "id": 90,
+      "periodic_blocks": {
+        "highpass_100": 2,
+        "highpass_180": 2,
+        "raw": 2
+      },
+      "scene": "clean",
+      "source_wav_sha256": "be3dc92f3bc084c91ef92c359063cb41cc81659f8919a9d6a145f4fefa04e025"
+    },
+    {
+      "group": "00a07fb4e2cc63ed82cef7b0c23b6a283c6e346d212431229f7a799f5d022096",
+      "id": 91,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "7c488bfc9f347bcb12930ae707f6ab6a4cd2a170181f389b84ed1a8b8c9bbec9"
+    },
+    {
+      "group": "00a07fb4e2cc63ed82cef7b0c23b6a283c6e346d212431229f7a799f5d022096",
+      "id": 92,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 5
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "35f3ba95da1e7e1307867d84c7695adcd19cdd13f47f014acb617c2dafaa53ad"
+    },
+    {
+      "group": "f145bba0cf353d7f7daa375cdd1fef5bf3df3b8e320492c2545bf08f94e1cff3",
+      "id": 93,
+      "periodic_blocks": {
+        "highpass_100": 3,
+        "highpass_180": 2,
+        "raw": 2
+      },
+      "scene": "clean",
+      "source_wav_sha256": "b5785105a990586173d84ddbb2654fefc75d1ac42a7d275e0f6fa1e3f9d8cd66"
+    },
+    {
+      "group": "f145bba0cf353d7f7daa375cdd1fef5bf3df3b8e320492c2545bf08f94e1cff3",
+      "id": 94,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "beb1de971e69d85ecf023d7f68c780029447e6b5c503057c35674fc577e9e465"
+    },
+    {
+      "group": "f145bba0cf353d7f7daa375cdd1fef5bf3df3b8e320492c2545bf08f94e1cff3",
+      "id": 95,
+      "periodic_blocks": {
+        "highpass_100": 3,
+        "highpass_180": 2,
+        "raw": 7
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "6b56bf6750b7d42ce1909e8b83c84269e5aea72c0c0c4d75c509942f5dad1c67"
+    },
+    {
+      "group": "e117bfd5918a916c15ef79850087229962050ba7add4a71ddc9a313308954fb0",
+      "id": 96,
+      "periodic_blocks": {
+        "highpass_100": 5,
+        "highpass_180": 4,
+        "raw": 5
+      },
+      "scene": "clean",
+      "source_wav_sha256": "c8087f7934c338d13e2c07366190e124c476811b04413833218e68c201a318cf"
+    },
+    {
+      "group": "e117bfd5918a916c15ef79850087229962050ba7add4a71ddc9a313308954fb0",
+      "id": 97,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 1,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "b7945a063b4ee51bc81fb38f9101bc5e32bd40c8038bd3828134457170e37225"
+    },
+    {
+      "group": "e117bfd5918a916c15ef79850087229962050ba7add4a71ddc9a313308954fb0",
+      "id": 98,
+      "periodic_blocks": {
+        "highpass_100": 5,
+        "highpass_180": 4,
+        "raw": 13
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "6b9b366b7c5a144fcb003e6d19389b88691b7fe9e2d9896f585e0aaf33173754"
+    },
+    {
+      "group": "d7b59f82625bebba6dadc1ebd88fdab6d00723bd0f11828a6ccf642af2de4f94",
+      "id": 99,
+      "periodic_blocks": {
+        "highpass_100": 12,
+        "highpass_180": 11,
+        "raw": 13
+      },
+      "scene": "clean",
+      "source_wav_sha256": "817370347ed408340d3d2b1777b837d3a9273a5c34e0afa66f01c7b82c7e5731"
+    },
+    {
+      "group": "d7b59f82625bebba6dadc1ebd88fdab6d00723bd0f11828a6ccf642af2de4f94",
+      "id": 100,
+      "periodic_blocks": {
+        "highpass_100": 1,
+        "highpass_180": 7,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "f8dc429bc47887e5d3cde3d27f7cbcfef5e5686e146f2974664df43cf6ed9469"
+    },
+    {
+      "group": "d7b59f82625bebba6dadc1ebd88fdab6d00723bd0f11828a6ccf642af2de4f94",
+      "id": 101,
+      "periodic_blocks": {
+        "highpass_100": 12,
+        "highpass_180": 11,
+        "raw": 17
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "61bba1900b20d19f7822c171d5bc027cf5b6fecfb8f1c442bc2a7b4e1cc241c9"
+    },
+    {
+      "group": "cddd277a3df3d159cdf8c786a7e7abd21696fbbad3c9b065637de7e18be78197",
+      "id": 102,
+      "periodic_blocks": {
+        "highpass_100": 10,
+        "highpass_180": 10,
+        "raw": 10
+      },
+      "scene": "clean",
+      "source_wav_sha256": "e3b4bcb30556f837134a4cf521707cff885e78325994d424e2e0cbccbbac356f"
+    },
+    {
+      "group": "cddd277a3df3d159cdf8c786a7e7abd21696fbbad3c9b065637de7e18be78197",
+      "id": 103,
+      "periodic_blocks": {
+        "highpass_100": 5,
+        "highpass_180": 4,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "12870ab527e531e456d34ca97a853ef2b6db2dcb3b03abbe6aed4b18a2fa07ee"
+    },
+    {
+      "group": "cddd277a3df3d159cdf8c786a7e7abd21696fbbad3c9b065637de7e18be78197",
+      "id": 104,
+      "periodic_blocks": {
+        "highpass_100": 10,
+        "highpass_180": 10,
+        "raw": 6
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "bcf9e520b9ab7c7962ca76e0a5fbeff5da480f5c1afea4935dd30cd0ddcbfeae"
+    },
+    {
+      "group": "cacac048fe7ad3206a0794c20a4be18f3e6673bedb2080e1392da1066cbe5865",
+      "id": 105,
+      "periodic_blocks": {
+        "highpass_100": 8,
+        "highpass_180": 7,
+        "raw": 8
+      },
+      "scene": "clean",
+      "source_wav_sha256": "fa64f80e8e667cd0e45a139564589c2a5b3afb00706d717e95ba57df160ba5e2"
+    },
+    {
+      "group": "cacac048fe7ad3206a0794c20a4be18f3e6673bedb2080e1392da1066cbe5865",
+      "id": 106,
+      "periodic_blocks": {
+        "highpass_100": 3,
+        "highpass_180": 3,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "c13dde141c8d50f65a866ad30f5b4a8a5654796da12c5eaa124e8b5d1228925c"
+    },
+    {
+      "group": "cacac048fe7ad3206a0794c20a4be18f3e6673bedb2080e1392da1066cbe5865",
+      "id": 107,
+      "periodic_blocks": {
+        "highpass_100": 8,
+        "highpass_180": 7,
+        "raw": 6
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "0da756b1b0139f6f185f466a8871df60cf711fba4468454ad1f371d4b4dd1bdc"
+    },
+    {
+      "group": null,
+      "id": 108,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "e153edbd56e5ef0ee25067a2e3bc2577012495b9acc6eba0153bdfaa1f345362"
+    },
+    {
+      "group": null,
+      "id": 109,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "2812e9945ca2f31b876c0751bc37a41d90bb7162a7598915ebf50bde1e6ae1d4"
+    },
+    {
+      "group": null,
+      "id": 110,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "fc31eef3612e1e13f15c7e42798bd97c3b542d55b0b1b93fe7b372bb9a599c41"
+    },
+    {
+      "group": null,
+      "id": 111,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "street",
+      "source_wav_sha256": "58a56532624ecc26a121f6cc96d9e2ff94f938094aa9efd241ad368160fa79d6"
+    },
+    {
+      "group": null,
+      "id": 112,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "d98e077ee7aa0713321ff1c80a79aed1352fa39ed58e95fc71f25a62f1b4c1f7"
+    },
+    {
+      "group": null,
+      "id": 113,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "46ddadf2e4f53581c8fde100c51f9d995d2f0a02604f10b424e10c36fee6c4e0"
+    },
+    {
+      "group": null,
+      "id": 114,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "743bc6a1aa3c775f1bbe8befed6fdeb2a2b71a33ed1ac800f3f30894f7ac724c"
+    },
+    {
+      "group": null,
+      "id": 115,
+      "periodic_blocks": {
+        "highpass_100": 0,
+        "highpass_180": 0,
+        "raw": 0
+      },
+      "scene": "washroom",
+      "source_wav_sha256": "f846519c03018cb1562d53f669c8ff7098f28b3c33dfc5cc88e78c87db2cc918"
+    }
+  ],
+  "schema": "chipmunk.video-mouth-hold-noise-probe/1",
+  "summary": {
+    "highpass_100": {
+      "background_only_flags": 0,
+      "clean_expected": 10,
+      "clean_retained": 8,
+      "lost_noisy": 1,
+      "new_background_only_flags": 0,
+      "new_clean": 0,
+      "new_noisy": 2,
+      "new_noisy_groups": 2,
+      "noisy_recovered": 7,
+      "qualifies": false,
+      "street_recovered": 1,
+      "washroom_recovered": 6
+    },
+    "highpass_180": {
+      "background_only_flags": 0,
+      "clean_expected": 10,
+      "clean_retained": 6,
+      "lost_noisy": 1,
+      "new_background_only_flags": 0,
+      "new_clean": 0,
+      "new_noisy": 3,
+      "new_noisy_groups": 3,
+      "noisy_recovered": 8,
+      "qualifies": false,
+      "street_recovered": 2,
+      "washroom_recovered": 6
+    },
+    "raw": {
+      "background_only_flags": 0,
+      "clean_expected": 10,
+      "clean_retained": 10,
+      "lost_noisy": 0,
+      "new_background_only_flags": 0,
+      "new_clean": 0,
+      "new_noisy_groups": 0,
+      "noisy_recovered": 6,
+      "qualifies": false,
+      "street_recovered": 0,
+      "washroom_recovered": 6
+    }
+  }
+}

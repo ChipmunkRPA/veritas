@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Image regions supported under two padding treatments](image-edge-context-transfer-2026-11-14.md)
+  improved useful locations from 45 to 46 of 59 PNG edits and reduced
+  ordinary highlights from 34 to 26 of 177. The same support rule added no
+  useful locations on 28 JPEG edits. It is an offline PNG candidate pending
+  transfer to new photo groups and editing methods.
+
 - [Regional editing evidence in lossless WebP](image-regional-webp-2026-11-14.md)
   extends the existing candidate check to qualified opaque stills in Full and
   Deep analysis. A held file transferred exactly from PNG, including the

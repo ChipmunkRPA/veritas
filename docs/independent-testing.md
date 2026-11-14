@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [image padding replay](image-edge-context-transfer-2026-11-14.md#replay)
+compares ordinary flags, misplaced regions and correctly localized edits
+across 308 PNG and JPEG deliveries. The recorded source-pixel counts can be
+reviewed with standard-library Python.
+
 The [lossless WebP replay](image-regional-webp-2026-11-14.md#replay) checks
 whether a PNG and a lossless WebP with exactly the same decoded pixels
 produce the same local evidence. It verifies the source coordinates,

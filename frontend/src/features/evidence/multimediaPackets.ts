@@ -346,6 +346,7 @@ export interface DocumentEvidenceWindow {
   matched_context_selected?: boolean; score_exact_hex?: string
   token_coverage: { tokens?: number; token_windows?: number; [key: string]: unknown }
   scored_spans?: { start: number; end: number }[]; tokens_scored?: number; neighbor_expansion?: boolean
+  mean_negative_log_likelihood?: number; mean_cross_entropy?: number
   inference_contexts?: { id: string; source_token_range: [number, number]; scored_token_range: [number, number];
     spans: { start: number; end: number }[]; text: string; input_sha256: string; token_ids_sha256: string;
     anchor_token_count: number; context_limit: number; stride: number }[]

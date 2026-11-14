@@ -1114,7 +1114,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 context_window.update(score_kind=window.get("score_kind", "classifier_probability"),
                                       input_semantics=window.get("input_semantics"),
                                       scored_spans=copy.deepcopy(window.get("scored_spans", [])),
-                                      tokens_scored=window.get("tokens_scored"), neighbor_expansion=window.get("neighbor_expansion"))
+                                      tokens_scored=window.get("tokens_scored"), neighbor_expansion=window.get("neighbor_expansion"),
+                                      mean_negative_log_likelihood=window.get("mean_negative_log_likelihood"),
+                                      mean_cross_entropy=window.get("mean_cross_entropy"))
                 cutoff = window.get("threshold", 0.5)  # Older packets may not have an explicit direction.
                 lower_supports = window.get("ai_when", "lt" if context_window["score_kind"] == "perplexity_ratio" else "gte") == "lt"
                 supports = (window["direction"] == "supports_ai" if window.get("direction") else

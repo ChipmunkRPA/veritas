@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [writing ratio calibration replay](writing-ratio-context-review-2026-11-14.md#replay)
+recounts eight frozen absolute, context and length comparisons. It distinguishes
+correct added locations, genuine flags and unrelated locations in edited files.
+It uses recorded measurements and runs without model weights.
+
 The [missed writing passage replay](writing-missed-passage-transfer-2026-11-14.md#independent-replay)
 rebuilds genuine-only operating points and recounts which edits escaped
 both local writing checks. It uses the public numeric receipt and

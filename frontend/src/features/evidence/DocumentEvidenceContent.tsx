@@ -180,6 +180,12 @@ function ScoredContext({ window, index }: { window: DocumentEvidenceWindow; inde
       : 'This response was recorded for the original writing check. Short-passage review covers only eligible middle sentences.')
       : ratio ? 'This ratio compares how predictable the text was with a reference based on token predictions. It carries no passage-level authorship confidence.'
       : 'This raw response measures writing patterns across the input. It carries no passage-level authorship confidence.'}</p>
+    {ratio && typeof window.mean_negative_log_likelihood === 'number' && typeof window.mean_cross_entropy === 'number'
+      && <p className="mt-2 mb-0 text-caption text-text-muted">
+        Mean surprise for the observed tokens <span className="font-mono">{window.mean_negative_log_likelihood.toFixed(4)}</span>
+        {' '}÷ mean reference cross-entropy <span className="font-mono">{window.mean_cross_entropy.toFixed(4)}</span>.
+        Values are rounded for display.
+      </p>}
     {ratio && <p className="mt-3 mb-0 text-caption text-text-muted">Source text covering the actual token contexts is shown below. The recorded token sequences and scored token ranges are preserved in JSON; the excerpt alone does not reproduce the token input.</p>}
     {ratio ? <details className="mt-3 text-small"><summary className="cursor-pointer text-text-muted">Full source text for the recorded token contexts ({Array.from(window.text).length.toLocaleString()} characters)</summary>
       <blockquote className="m-0 mt-3 pl-3 border-l border-border whitespace-pre-wrap break-words">{window.text}</blockquote>

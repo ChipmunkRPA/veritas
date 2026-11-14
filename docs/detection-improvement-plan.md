@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Writing-pattern ratio calibration by length and context](writing-ratio-context-review-2026-11-14.md)
+  added three correct locations with two extra ordinary flags on the
+  parent panel. It recovered no new edits on the separate transfer.
+  The app now shows the measured terms behind the ratio in the browser
+  and Standard PDF, with the same terms in JSON.
+
 - [Exact likelihood on missed writing passages](writing-missed-passage-transfer-2026-11-14.md)
   found useful locations in 62 of 132 held rewrites when either proxy
   could flag, up from 22 with the classifier alone. Genuine flags rose

@@ -939,6 +939,7 @@ describe('ordinary multimedia evidence', () => {
     set.packets[0].limitations = ['Each check uses its own recorded operating threshold. Threshold direction is not a validated probability or proof of authorship.']
     set.packets[0].supporting_windows = [{ ...document.packets[0].supporting_windows[0], score: 1.2,
       score_kind: 'perplexity_ratio', threshold: 0.9, ai_when: 'lt', direction: 'opposes_ai',
+      mean_negative_log_likelihood: 2.4, mean_cross_entropy: 2,
       inference_contexts: [{ id: 'context-1', source_token_range: [0, 200], scored_token_range: [0, 200],
         spans: [{ start: 0, end: 30 }], text: 'Exact source context.', input_sha256: 'a'.repeat(64),
         token_ids_sha256: 'b'.repeat(64), anchor_token_count: 1, context_limit: 1024, stride: 768 }] }]
@@ -947,6 +948,9 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText('1.200')).toBeTruthy()
     expect(screen.getByText(/No AI-like flag for this input/)).toBeTruthy()
     expect(screen.getByText(/carries no passage-level authorship confidence/)).toBeTruthy()
+    expect(screen.getByText(/Mean surprise for the observed tokens/)).toBeTruthy()
+    expect(screen.getByText('2.4000')).toBeTruthy()
+    expect(screen.getByText('2.0000')).toBeTruthy()
     expect(screen.getByText(/Actual token context \[0, 200\)/)).toBeTruthy()
     expect(screen.queryByText(/Ratios below 0.9|recorded operating threshold|Disagreement is retained/)).toBeNull()
     expect(screen.queryByText(/120%/)).toBeNull()

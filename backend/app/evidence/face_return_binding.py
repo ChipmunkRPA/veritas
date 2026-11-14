@@ -97,6 +97,22 @@ def observation(record):
     )
 
 
+def proposal_boundary_measurements(record):
+    """Describe the face transition and nearby motion recorded at each endpoint."""
+    measurements = []
+    for label, name in (("Start", "entry"), ("End", "exit")):
+        edge = record["edges"][name]
+        separation = float.fromhex(edge["separation_hex"]) - float.fromhex(edge["dispersion_hex"])
+        motion_floor = max(6.0, float.fromhex(edge["central_hex"]) * 0.5)
+        motion = [float.fromhex(value) for value in edge["sectors_hex"]]
+        measurements.extend([
+            {"label": f"{label} face change above nearby variation", "value": round(separation, 4), "unit": "feature distance"},
+            {"label": f"{label} nearby regions with substantial motion",
+             "value": f"{sum(value >= motion_floor for value in motion)} of {len(motion)}", "unit": "regions"},
+        ])
+    return measurements
+
+
 def validate_distinct(record, incumbent):
     if incumbent is None:
         return
@@ -347,6 +363,9 @@ def validate_packet(packet, source, *, table_pts=None, interpolated=(), rotation
              and packet.get("claim_scope") == "sampled_window" and len(packet["signal_refs"]) == 1,
              "Supplemental face evidence must remain a confidence-neutral sampled window")
     validate_record(record, source, table_pts=table_pts, interpolated=interpolated, rotation=rotation, truncated=truncated)
+    if semantics in proposal.METHODS and len(measurements := packet.get("measurements", [])) > 2:
+        _require(measurements[2:] == proposal_boundary_measurements(record),
+                 "Displayed transitions differ from their recorded face and nearby motion measurements")
     _require(len(packet["frames"]) == 3, "Supplemental face evidence needs three original frame views")
     inputs = {row["frame_index"]: row for row in record["frame_inputs"]}
     window = packet["window"]

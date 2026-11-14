@@ -164,6 +164,12 @@ def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(webm
     value.update(response=response, response_hex=response.hex())
     assert type(settings).model_fields["video_face_unrouted_short_review"].default is False
     face_return_binding.validate_record(value, source, table_pts=table.pts)
+    assert [(item["label"], item["value"]) for item in face_return_binding.proposal_boundary_measurements(value)] == [
+        ("Start face change above nearby variation", 0.38),
+        ("Start nearby regions with substantial motion", "0 of 4"),
+        ("End face change above nearby variation", 0.38),
+        ("End nearby regions with substantial motion", "0 of 4"),
+    ]
     if webm:
         bad = deepcopy(value)
         bad["scene_frame_inputs"][70]["pts"] += 1

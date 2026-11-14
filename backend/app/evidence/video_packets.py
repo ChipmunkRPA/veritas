@@ -943,6 +943,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                           limitations=["This observation covers sampled frames and carries zero weight in the overall assessment.",
                                        "The source crops locate the inspected area. The cause of the change remains undetermined."],
                           derivation={**packet["derivation"], "selection": "distinct_short_face_change_with_surrounding_scene_check"})
+            if face_return["method"] in face_short_proposal_binding.METHODS:
+                packet["interpretation"] += (" At each endpoint, the check compares three face views on each side and measures motion "
+                                             "in the nearby picture. The start and end measurements below show the support for both transitions.")
+                packet["measurements"].extend(face_return_binding.proposal_boundary_measurements(face_return))
             if face_return["method"] == face_return_binding.FINE_SCENE_METHOD:
                 packet["interpretation"] += " Smaller areas outside the face supplied background detail at one or both boundaries."
                 for name, edge in zip(("Entry", "Exit"), face_return["fine_scene_edges"], strict=True):

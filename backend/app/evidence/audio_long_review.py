@@ -59,8 +59,7 @@ def build(record, *, store, source, pcm, mapping, asset, waveform):
 
     windows = []
     for reading in raw["windows"]:
-        if set(reading) != {"start_sample", "end_sample", "pcm_sha256", "direction"}:
-            raise ValueError("Unexpected long speech-window receipt fields")
+        binding.validate_window_fields(reading)
         witness = _sample_witness(reading, pcm, mapping)
         assets = artifacts(reading) if not focused and raw["status"] == "corroborated" and reading["direction"] == "ai" else {}
         windows.append({**reading, "source_timestamp_ranges": witness, "artifacts": assets})

@@ -1,0 +1,5367 @@
+{
+  "method": {
+    "activity": "Compare a reset activity pass per window with one continuous pass per recording.",
+    "admission": "Keep the existing half-speech minimum. The additive arm rescues only windows the reset pass skipped.",
+    "classifier": "Score newly admitted original samples with the unchanged three-second classifier and calibration.",
+    "panels": "Keep the 98 control and edited deliveries and all focused windows from the exact parent roster."
+  },
+  "parent_sha256": "ae15cc9b7f3693a2743b5aac299f2841ab6aa2308eada642be14c9448c7c5e72",
+  "recordings": [
+    {
+      "case": 0,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            90064,
+            138064
+          ]
+        }
+      ]
+    },
+    {
+      "case": 1,
+      "windows": [
+        {
+          "continuous_samples": 42848,
+          "recovered_direction": null,
+          "reset_samples": 42432,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 41280,
+          "recovered_direction": null,
+          "reset_samples": 37664,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 36608,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 6592,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 43328,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 47632,
+          "recovered_direction": null,
+          "reset_samples": 40320,
+          "span": [
+            90064,
+            138064
+          ]
+        }
+      ]
+    },
+    {
+      "case": 2,
+      "windows": [
+        {
+          "continuous_samples": 39872,
+          "recovered_direction": null,
+          "reset_samples": 39872,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 41216,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 9664,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 22624,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 22272,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 29504,
+          "recovered_direction": null,
+          "reset_samples": 27008,
+          "span": [
+            90064,
+            138064
+          ]
+        }
+      ]
+    },
+    {
+      "case": 3,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 45920,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 47895,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            77513,
+            125513
+          ]
+        }
+      ]
+    },
+    {
+      "case": 4,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 44896,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": null,
+          "reset_samples": 45920,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": null,
+          "reset_samples": 40736,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": null,
+          "reset_samples": 28448,
+          "span": [
+            77513,
+            125513
+          ]
+        }
+      ]
+    },
+    {
+      "case": 5,
+      "windows": [
+        {
+          "continuous_samples": 5568,
+          "recovered_direction": null,
+          "reset_samples": 5568,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 5568,
+          "recovered_direction": null,
+          "reset_samples": 7616,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 8928,
+          "recovered_direction": null,
+          "reset_samples": 6496,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 32928,
+          "recovered_direction": null,
+          "reset_samples": 33120,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 38441,
+          "recovered_direction": null,
+          "reset_samples": 38752,
+          "span": [
+            77513,
+            125513
+          ]
+        }
+      ]
+    },
+    {
+      "case": 6,
+      "windows": [
+        {
+          "continuous_samples": 42944,
+          "recovered_direction": null,
+          "reset_samples": 42944,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 44352,
+          "recovered_direction": null,
+          "reset_samples": 42784,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 40608,
+          "recovered_direction": null,
+          "reset_samples": 37312,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 40768,
+          "recovered_direction": null,
+          "reset_samples": 41280,
+          "span": [
+            56564,
+            104564
+          ]
+        },
+        {
+          "continuous_samples": 40768,
+          "recovered_direction": null,
+          "reset_samples": 40768,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 47608,
+          "recovered_direction": null,
+          "reset_samples": 47584,
+          "span": [
+            113128,
+            161128
+          ]
+        }
+      ]
+    },
+    {
+      "case": 7,
+      "windows": [
+        {
+          "continuous_samples": 42432,
+          "recovered_direction": null,
+          "reset_samples": 42432,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 43840,
+          "recovered_direction": null,
+          "reset_samples": 39712,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 40096,
+          "recovered_direction": null,
+          "reset_samples": 37824,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 39084,
+          "recovered_direction": null,
+          "reset_samples": 39328,
+          "span": [
+            56564,
+            104564
+          ]
+        },
+        {
+          "continuous_samples": 37120,
+          "recovered_direction": null,
+          "reset_samples": 37088,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 41728,
+          "recovered_direction": null,
+          "reset_samples": 42784,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": null,
+          "reset_samples": 36192,
+          "span": [
+            113128,
+            161128
+          ]
+        }
+      ]
+    },
+    {
+      "case": 8,
+      "windows": [
+        {
+          "continuous_samples": 45408,
+          "recovered_direction": null,
+          "reset_samples": 45408,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 16768,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 42592,
+          "recovered_direction": null,
+          "reset_samples": 32704,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 41132,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 22912,
+          "span": [
+            56564,
+            104564
+          ]
+        },
+        {
+          "continuous_samples": 34560,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 39968,
+          "recovered_direction": null,
+          "reset_samples": 31584,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 45560,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 17856,
+          "span": [
+            113128,
+            161128
+          ]
+        }
+      ]
+    },
+    {
+      "case": 9,
+      "windows": [
+        {
+          "continuous_samples": 44992,
+          "recovered_direction": null,
+          "reset_samples": 44992,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 44864,
+          "recovered_direction": null,
+          "reset_samples": 45344,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 47328,
+          "recovered_direction": null,
+          "reset_samples": 42944,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 47264,
+          "recovered_direction": null,
+          "reset_samples": 47040,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 46784,
+          "recovered_direction": null,
+          "reset_samples": 47040,
+          "span": [
+            72480,
+            120480
+          ]
+        }
+      ]
+    },
+    {
+      "case": 10,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 46944,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 46752,
+          "recovered_direction": null,
+          "reset_samples": 46016,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 46272,
+          "recovered_direction": null,
+          "reset_samples": 36736,
+          "span": [
+            72480,
+            120480
+          ]
+        }
+      ]
+    },
+    {
+      "case": 11,
+      "windows": [
+        {
+          "continuous_samples": 40384,
+          "recovered_direction": null,
+          "reset_samples": 40384,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 41280,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 7104,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 39360,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 5056,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 34912,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 14272,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 34432,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 15808,
+          "span": [
+            72480,
+            120480
+          ]
+        }
+      ]
+    },
+    {
+      "case": 12,
+      "windows": [
+        {
+          "continuous_samples": 43808,
+          "recovered_direction": null,
+          "reset_samples": 43808,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            78115,
+            126115
+          ]
+        }
+      ]
+    },
+    {
+      "case": 13,
+      "windows": [
+        {
+          "continuous_samples": 42784,
+          "recovered_direction": null,
+          "reset_samples": 42784,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 42336,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 32608,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 27072,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 43360,
+          "span": [
+            78115,
+            126115
+          ]
+        }
+      ]
+    },
+    {
+      "case": 14,
+      "windows": [
+        {
+          "continuous_samples": 36224,
+          "recovered_direction": null,
+          "reset_samples": 36224,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 27968,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 28320,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 41056,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 10176,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 38077,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 10176,
+          "span": [
+            78115,
+            126115
+          ]
+        }
+      ]
+    },
+    {
+      "case": 15,
+      "windows": [
+        {
+          "continuous_samples": 43808,
+          "recovered_direction": null,
+          "reset_samples": 43808,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 44128,
+          "recovered_direction": null,
+          "reset_samples": 42432,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 43840,
+          "recovered_direction": null,
+          "reset_samples": 44352,
+          "span": [
+            59279,
+            107279
+          ]
+        },
+        {
+          "continuous_samples": 43840,
+          "recovered_direction": null,
+          "reset_samples": 44352,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 47712,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 45761,
+          "recovered_direction": null,
+          "reset_samples": 46016,
+          "span": [
+            118559,
+            166559
+          ]
+        }
+      ]
+    },
+    {
+      "case": 16,
+      "windows": [
+        {
+          "continuous_samples": 43808,
+          "recovered_direction": null,
+          "reset_samples": 43808,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 40992,
+          "recovered_direction": null,
+          "reset_samples": 40384,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 43328,
+          "recovered_direction": null,
+          "reset_samples": 43328,
+          "span": [
+            59279,
+            107279
+          ]
+        },
+        {
+          "continuous_samples": 43328,
+          "recovered_direction": null,
+          "reset_samples": 44352,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 47712,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 44737,
+          "recovered_direction": null,
+          "reset_samples": 33664,
+          "span": [
+            118559,
+            166559
+          ]
+        }
+      ]
+    },
+    {
+      "case": 17,
+      "windows": [
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 28960,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 9455,
+          "recovered_direction": null,
+          "reset_samples": 10080,
+          "span": [
+            59279,
+            107279
+          ]
+        },
+        {
+          "continuous_samples": 22176,
+          "recovered_direction": null,
+          "reset_samples": 22368,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 36288,
+          "recovered_direction": null,
+          "reset_samples": 34240,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 22145,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            118559,
+            166559
+          ]
+        }
+      ]
+    },
+    {
+      "case": 18,
+      "windows": [
+        {
+          "continuous_samples": 44832,
+          "recovered_direction": null,
+          "reset_samples": 44832,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 44144,
+          "recovered_direction": null,
+          "reset_samples": 44480,
+          "span": [
+            67440,
+            115440
+          ]
+        }
+      ]
+    },
+    {
+      "case": 19,
+      "windows": [
+        {
+          "continuous_samples": 30496,
+          "recovered_direction": null,
+          "reset_samples": 30496,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 42304,
+          "recovered_direction": null,
+          "reset_samples": 26464,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 39776,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 45680,
+          "recovered_direction": null,
+          "reset_samples": 41408,
+          "span": [
+            67440,
+            115440
+          ]
+        }
+      ]
+    },
+    {
+      "case": 20,
+      "windows": [
+        {
+          "continuous_samples": 41312,
+          "recovered_direction": null,
+          "reset_samples": 41312,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 38656,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 38656,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 35776,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 9152,
+          "span": [
+            67440,
+            115440
+          ]
+        }
+      ]
+    },
+    {
+      "case": 21,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 46016,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 44128,
+          "recovered_direction": null,
+          "reset_samples": 43456,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 44006,
+          "recovered_direction": null,
+          "reset_samples": 43456,
+          "span": [
+            48122,
+            96122
+          ]
+        }
+      ]
+    },
+    {
+      "case": 22,
+      "windows": [
+        {
+          "continuous_samples": 44992,
+          "recovered_direction": null,
+          "reset_samples": 44992,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": null,
+          "reset_samples": 45408,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 47552,
+          "recovered_direction": null,
+          "reset_samples": 46944,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 47552,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            48122,
+            96122
+          ]
+        }
+      ]
+    },
+    {
+      "case": 23,
+      "windows": [
+        {
+          "continuous_samples": 42336,
+          "recovered_direction": null,
+          "reset_samples": 42336,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 10624,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 36448,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 13696,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 36326,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 8128,
+          "span": [
+            48122,
+            96122
+          ]
+        }
+      ]
+    },
+    {
+      "case": 24,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 47417,
+          "recovered_direction": null,
+          "reset_samples": 47552,
+          "span": [
+            50343,
+            98343
+          ]
+        }
+      ]
+    },
+    {
+      "case": 25,
+      "windows": [
+        {
+          "continuous_samples": 42272,
+          "recovered_direction": null,
+          "reset_samples": 40896,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 42816,
+          "recovered_direction": null,
+          "reset_samples": 40224,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 44992,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 45881,
+          "recovered_direction": null,
+          "reset_samples": 46016,
+          "span": [
+            50343,
+            98343
+          ]
+        }
+      ]
+    },
+    {
+      "case": 26,
+      "windows": [
+        {
+          "continuous_samples": 38336,
+          "recovered_direction": null,
+          "reset_samples": 38336,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 37856,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 41120,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 41280,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            50343,
+            98343
+          ]
+        }
+      ]
+    },
+    {
+      "case": 27,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 44384,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            76068,
+            124068
+          ]
+        }
+      ]
+    },
+    {
+      "case": 28,
+      "windows": [
+        {
+          "continuous_samples": 47040,
+          "recovered_direction": null,
+          "reset_samples": 47040,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 43328,
+          "recovered_direction": null,
+          "reset_samples": 41248,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 43744,
+          "recovered_direction": null,
+          "reset_samples": 40288,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 40736,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 47804,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            76068,
+            124068
+          ]
+        }
+      ]
+    },
+    {
+      "case": 29,
+      "windows": [
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 23936,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 8128,
+          "recovered_direction": null,
+          "reset_samples": 31104,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 21088,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 24960,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            76068,
+            124068
+          ]
+        }
+      ]
+    },
+    {
+      "case": 30,
+      "windows": [
+        {
+          "continuous_samples": 46944,
+          "recovered_direction": null,
+          "reset_samples": 46944,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 47681,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            50079,
+            98079
+          ]
+        }
+      ]
+    },
+    {
+      "case": 31,
+      "windows": [
+        {
+          "continuous_samples": 35712,
+          "recovered_direction": null,
+          "reset_samples": 35712,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 40704,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 9568,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 39296,
+          "recovered_direction": null,
+          "reset_samples": 33632,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 39296,
+          "recovered_direction": null,
+          "reset_samples": 35680,
+          "span": [
+            50079,
+            98079
+          ]
+        }
+      ]
+    },
+    {
+      "case": 32,
+      "windows": [
+        {
+          "continuous_samples": 22912,
+          "recovered_direction": null,
+          "reset_samples": 22912,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 17632,
+          "recovered_direction": null,
+          "reset_samples": 7616,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 17856,
+          "recovered_direction": null,
+          "reset_samples": 13760,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 17856,
+          "recovered_direction": null,
+          "reset_samples": 11712,
+          "span": [
+            50079,
+            98079
+          ]
+        }
+      ]
+    },
+    {
+      "case": 33,
+      "windows": [
+        {
+          "continuous_samples": 47968,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 47677,
+          "recovered_direction": null,
+          "reset_samples": 47040,
+          "span": [
+            65443,
+            113443
+          ]
+        }
+      ]
+    },
+    {
+      "case": 34,
+      "windows": [
+        {
+          "continuous_samples": 46944,
+          "recovered_direction": null,
+          "reset_samples": 46944,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 47136,
+          "recovered_direction": null,
+          "reset_samples": 47040,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 43328,
+          "recovered_direction": null,
+          "reset_samples": 44320,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 43328,
+          "recovered_direction": null,
+          "reset_samples": 35168,
+          "span": [
+            65443,
+            113443
+          ]
+        }
+      ]
+    },
+    {
+      "case": 35,
+      "windows": [
+        {
+          "continuous_samples": 45920,
+          "recovered_direction": null,
+          "reset_samples": 45920,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 31008,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 36576,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 47165,
+          "recovered_direction": null,
+          "reset_samples": 26464,
+          "span": [
+            65443,
+            113443
+          ]
+        }
+      ]
+    },
+    {
+      "case": 36,
+      "windows": [
+        {
+          "continuous_samples": 44320,
+          "recovered_direction": null,
+          "reset_samples": 40384,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 44864,
+          "recovered_direction": null,
+          "reset_samples": 43808,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 42304,
+          "recovered_direction": null,
+          "reset_samples": 41760,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 42304,
+          "recovered_direction": null,
+          "reset_samples": 42272,
+          "span": [
+            61744,
+            109744
+          ]
+        },
+        {
+          "continuous_samples": 42304,
+          "recovered_direction": null,
+          "reset_samples": 42272,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 46944,
+          "span": [
+            120000,
+            168000
+          ]
+        },
+        {
+          "continuous_samples": 47488,
+          "recovered_direction": null,
+          "reset_samples": 47584,
+          "span": [
+            123488,
+            171488
+          ]
+        }
+      ]
+    },
+    {
+      "case": 37,
+      "windows": [
+        {
+          "continuous_samples": 43808,
+          "recovered_direction": null,
+          "reset_samples": 39872,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 44352,
+          "recovered_direction": null,
+          "reset_samples": 42272,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 40768,
+          "recovered_direction": null,
+          "reset_samples": 34752,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 40768,
+          "recovered_direction": null,
+          "reset_samples": 37600,
+          "span": [
+            61744,
+            109744
+          ]
+        },
+        {
+          "continuous_samples": 40768,
+          "recovered_direction": null,
+          "reset_samples": 26976,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 44864,
+          "recovered_direction": null,
+          "reset_samples": 25312,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 44864,
+          "recovered_direction": null,
+          "reset_samples": 46432,
+          "span": [
+            120000,
+            168000
+          ]
+        },
+        {
+          "continuous_samples": 44864,
+          "recovered_direction": null,
+          "reset_samples": 40736,
+          "span": [
+            123488,
+            171488
+          ]
+        }
+      ]
+    },
+    {
+      "case": 38,
+      "windows": [
+        {
+          "continuous_samples": 24224,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 22336,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 28128,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 17344,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 21088,
+          "recovered_direction": null,
+          "reset_samples": 12224,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 7344,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            61744,
+            109744
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 7776,
+          "recovered_direction": null,
+          "reset_samples": 7008,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 31776,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 20256,
+          "span": [
+            120000,
+            168000
+          ]
+        },
+        {
+          "continuous_samples": 35264,
+          "recovered_direction": null,
+          "reset_samples": 35680,
+          "span": [
+            123488,
+            171488
+          ]
+        }
+      ]
+    },
+    {
+      "case": 39,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 44576,
+          "recovered_direction": null,
+          "reset_samples": 43456,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 40992,
+          "recovered_direction": null,
+          "reset_samples": 38784,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 40962,
+          "recovered_direction": null,
+          "reset_samples": 39296,
+          "span": [
+            48030,
+            96030
+          ]
+        }
+      ]
+    },
+    {
+      "case": 40,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 32288,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 6592,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 25120,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 11712,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 25090,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 12736,
+          "span": [
+            48030,
+            96030
+          ]
+        }
+      ]
+    },
+    {
+      "case": 41,
+      "windows": [
+        {
+          "continuous_samples": 17856,
+          "recovered_direction": null,
+          "reset_samples": 17856,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48030,
+            96030
+          ]
+        }
+      ]
+    },
+    {
+      "case": 42,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 46432,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 46944,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 47066,
+          "recovered_direction": null,
+          "reset_samples": 46528,
+          "span": [
+            65030,
+            113030
+          ]
+        }
+      ]
+    },
+    {
+      "case": 43,
+      "windows": [
+        {
+          "continuous_samples": 5056,
+          "recovered_direction": null,
+          "reset_samples": 5056,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 18144,
+          "recovered_direction": null,
+          "reset_samples": 29472,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 28768,
+          "recovered_direction": null,
+          "reset_samples": 31520,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 26458,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 13760,
+          "span": [
+            65030,
+            113030
+          ]
+        }
+      ]
+    },
+    {
+      "case": 44,
+      "windows": [
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 6592,
+          "recovered_direction": null,
+          "reset_samples": 22912,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 11648,
+          "recovered_direction": null,
+          "reset_samples": 10176,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 7578,
+          "recovered_direction": null,
+          "reset_samples": 13760,
+          "span": [
+            65030,
+            113030
+          ]
+        }
+      ]
+    },
+    {
+      "case": 45,
+      "windows": [
+        {
+          "continuous_samples": 41920,
+          "recovered_direction": null,
+          "reset_samples": 41920,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 38720,
+          "recovered_direction": null,
+          "reset_samples": 39232,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 43232,
+          "recovered_direction": null,
+          "reset_samples": 42848,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            59354,
+            107354
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 46944,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 36395,
+          "recovered_direction": null,
+          "reset_samples": 34752,
+          "span": [
+            118709,
+            166709
+          ]
+        }
+      ]
+    },
+    {
+      "case": 46,
+      "windows": [
+        {
+          "continuous_samples": 44480,
+          "recovered_direction": null,
+          "reset_samples": 44480,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 41280,
+          "recovered_direction": null,
+          "reset_samples": 40224,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 43744,
+          "recovered_direction": null,
+          "reset_samples": 42336,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 45408,
+          "span": [
+            59354,
+            107354
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 46432,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 46944,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 38443,
+          "recovered_direction": null,
+          "reset_samples": 30656,
+          "span": [
+            118709,
+            166709
+          ]
+        }
+      ]
+    },
+    {
+      "case": 47,
+      "windows": [
+        {
+          "continuous_samples": 44480,
+          "recovered_direction": null,
+          "reset_samples": 44480,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 43328,
+          "recovered_direction": "ai",
+          "reset_samples": 19744,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 38048,
+          "recovered_direction": null,
+          "reset_samples": 28608,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 40768,
+          "recovered_direction": null,
+          "reset_samples": 36128,
+          "span": [
+            59354,
+            107354
+          ]
+        },
+        {
+          "continuous_samples": 40768,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 20928,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 40608,
+          "recovered_direction": "ai",
+          "reset_samples": 6080,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 23979,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            118709,
+            166709
+          ]
+        }
+      ]
+    },
+    {
+      "case": 48,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47072,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            51720,
+            99720
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 45408,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 45792,
+          "recovered_direction": null,
+          "reset_samples": 46048,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 38352,
+          "recovered_direction": null,
+          "reset_samples": 38368,
+          "span": [
+            103440,
+            151440
+          ]
+        }
+      ]
+    },
+    {
+      "case": 49,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 45088,
+          "recovered_direction": null,
+          "reset_samples": 46432,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 42816,
+          "recovered_direction": null,
+          "reset_samples": 28448,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 42816,
+          "recovered_direction": null,
+          "reset_samples": 30080,
+          "span": [
+            51720,
+            99720
+          ]
+        },
+        {
+          "continuous_samples": 45728,
+          "recovered_direction": null,
+          "reset_samples": 28960,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 47328,
+          "recovered_direction": null,
+          "reset_samples": 41312,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 39888,
+          "recovered_direction": null,
+          "reset_samples": 42432,
+          "span": [
+            103440,
+            151440
+          ]
+        }
+      ]
+    },
+    {
+      "case": 50,
+      "windows": [
+        {
+          "continuous_samples": 41312,
+          "recovered_direction": null,
+          "reset_samples": 41312,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 47648,
+          "recovered_direction": null,
+          "reset_samples": 34080,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 35136,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 34200,
+          "recovered_direction": "ai",
+          "reset_samples": 0,
+          "span": [
+            51720,
+            99720
+          ]
+        },
+        {
+          "continuous_samples": 28768,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 12640,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 38048,
+          "recovered_direction": null,
+          "reset_samples": 30080,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 35264,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 5568,
+          "span": [
+            103440,
+            151440
+          ]
+        }
+      ]
+    },
+    {
+      "case": 51,
+      "windows": [
+        {
+          "continuous_samples": 43808,
+          "recovered_direction": null,
+          "reset_samples": 43808,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 44864,
+          "recovered_direction": null,
+          "reset_samples": 45344,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 44864,
+          "recovered_direction": null,
+          "reset_samples": 45376,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 44864,
+          "recovered_direction": null,
+          "reset_samples": 45376,
+          "span": [
+            48600,
+            96600
+          ]
+        },
+        {
+          "continuous_samples": 43328,
+          "recovered_direction": null,
+          "reset_samples": 43328,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 43328,
+          "recovered_direction": null,
+          "reset_samples": 43296,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 42991,
+          "recovered_direction": null,
+          "reset_samples": 36288,
+          "span": [
+            97201,
+            145201
+          ]
+        }
+      ]
+    },
+    {
+      "case": 52,
+      "windows": [
+        {
+          "continuous_samples": 43296,
+          "recovered_direction": null,
+          "reset_samples": 43296,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 45920,
+          "span": [
+            48600,
+            96600
+          ]
+        },
+        {
+          "continuous_samples": 40768,
+          "recovered_direction": null,
+          "reset_samples": 42784,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 40096,
+          "recovered_direction": null,
+          "reset_samples": 35680,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 38895,
+          "recovered_direction": null,
+          "reset_samples": 35776,
+          "span": [
+            97201,
+            145201
+          ]
+        }
+      ]
+    },
+    {
+      "case": 53,
+      "windows": [
+        {
+          "continuous_samples": 42272,
+          "recovered_direction": null,
+          "reset_samples": 42272,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": null,
+          "reset_samples": 24000,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            48600,
+            96600
+          ]
+        },
+        {
+          "continuous_samples": 40256,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 11104,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 30368,
+          "recovered_direction": null,
+          "reset_samples": 35168,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 29167,
+          "recovered_direction": null,
+          "reset_samples": 35264,
+          "span": [
+            97201,
+            145201
+          ]
+        }
+      ]
+    },
+    {
+      "case": 54,
+      "windows": [
+        {
+          "continuous_samples": 46944,
+          "recovered_direction": null,
+          "reset_samples": 46944,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 46432,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            71520,
+            119520
+          ]
+        }
+      ]
+    },
+    {
+      "case": 55,
+      "windows": [
+        {
+          "continuous_samples": 40384,
+          "recovered_direction": null,
+          "reset_samples": 40384,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 41792,
+          "recovered_direction": null,
+          "reset_samples": 42784,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 38048,
+          "recovered_direction": null,
+          "reset_samples": 43360,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 42816,
+          "recovered_direction": null,
+          "reset_samples": 37216,
+          "span": [
+            71520,
+            119520
+          ]
+        }
+      ]
+    },
+    {
+      "case": 56,
+      "windows": [
+        {
+          "continuous_samples": 38176,
+          "recovered_direction": null,
+          "reset_samples": 38176,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 44384,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 43104,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 5568,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 33856,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            71520,
+            119520
+          ]
+        }
+      ]
+    },
+    {
+      "case": 57,
+      "windows": [
+        {
+          "continuous_samples": 46528,
+          "recovered_direction": null,
+          "reset_samples": 46528,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 40768,
+          "recovered_direction": null,
+          "reset_samples": 40768,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 34976,
+          "recovered_direction": null,
+          "reset_samples": 34592,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 40641,
+          "recovered_direction": null,
+          "reset_samples": 39296,
+          "span": [
+            65759,
+            113759
+          ]
+        }
+      ]
+    },
+    {
+      "case": 58,
+      "windows": [
+        {
+          "continuous_samples": 44384,
+          "recovered_direction": null,
+          "reset_samples": 44384,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 38144,
+          "recovered_direction": null,
+          "reset_samples": 30496,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 39105,
+          "recovered_direction": null,
+          "reset_samples": 36736,
+          "span": [
+            65759,
+            113759
+          ]
+        }
+      ]
+    },
+    {
+      "case": 59,
+      "windows": [
+        {
+          "continuous_samples": 42336,
+          "recovered_direction": null,
+          "reset_samples": 42336,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 44864,
+          "recovered_direction": null,
+          "reset_samples": 29472,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 38656,
+          "recovered_direction": null,
+          "reset_samples": 28448,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 40641,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 6592,
+          "span": [
+            65759,
+            113759
+          ]
+        }
+      ]
+    },
+    {
+      "case": 60,
+      "windows": [
+        {
+          "continuous_samples": 45920,
+          "recovered_direction": null,
+          "reset_samples": 45920,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 36672,
+          "recovered_direction": null,
+          "reset_samples": 37184,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 36672,
+          "recovered_direction": null,
+          "reset_samples": 37152,
+          "span": [
+            51360,
+            99360
+          ]
+        },
+        {
+          "continuous_samples": 36672,
+          "recovered_direction": null,
+          "reset_samples": 34144,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            102720,
+            150720
+          ]
+        }
+      ]
+    },
+    {
+      "case": 61,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 25440,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 44896,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            51360,
+            99360
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 28512,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 46944,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 46944,
+          "span": [
+            102720,
+            150720
+          ]
+        }
+      ]
+    },
+    {
+      "case": 62,
+      "windows": [
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 9056,
+          "span": [
+            51360,
+            99360
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 32096,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 6080,
+          "span": [
+            102720,
+            150720
+          ]
+        }
+      ]
+    },
+    {
+      "case": 63,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 44352,
+          "recovered_direction": null,
+          "reset_samples": 44352,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 44352,
+          "recovered_direction": null,
+          "reset_samples": 44320,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 47679,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            78241,
+            126241
+          ]
+        }
+      ]
+    },
+    {
+      "case": 64,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 45408,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 35168,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 40736,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 16672,
+          "span": [
+            78241,
+            126241
+          ]
+        }
+      ]
+    },
+    {
+      "case": 65,
+      "windows": [
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 16320,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            78241,
+            126241
+          ]
+        }
+      ]
+    },
+    {
+      "case": 66,
+      "windows": [
+        {
+          "continuous_samples": 46944,
+          "recovered_direction": null,
+          "reset_samples": 46944,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 46944,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 42336,
+          "span": [
+            59280,
+            107280
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 47808,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            118560,
+            166560
+          ]
+        }
+      ]
+    },
+    {
+      "case": 67,
+      "windows": [
+        {
+          "continuous_samples": 46432,
+          "recovered_direction": null,
+          "reset_samples": 46432,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": null,
+          "reset_samples": 42272,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": null,
+          "reset_samples": 40224,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 45376,
+          "recovered_direction": null,
+          "reset_samples": 41824,
+          "span": [
+            59280,
+            107280
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 43360,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 42688,
+          "recovered_direction": null,
+          "reset_samples": 47040,
+          "span": [
+            118560,
+            166560
+          ]
+        }
+      ]
+    },
+    {
+      "case": 68,
+      "windows": [
+        {
+          "continuous_samples": 44896,
+          "recovered_direction": null,
+          "reset_samples": 44896,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": "ai",
+          "reset_samples": 6080,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 25984,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 31104,
+          "span": [
+            59280,
+            107280
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 44352,
+          "recovered_direction": null,
+          "reset_samples": 31008,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 42112,
+          "recovered_direction": null,
+          "reset_samples": 27584,
+          "span": [
+            118560,
+            166560
+          ]
+        }
+      ]
+    },
+    {
+      "case": 69,
+      "windows": [
+        {
+          "continuous_samples": 43968,
+          "recovered_direction": null,
+          "reset_samples": 43968,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 40256,
+          "recovered_direction": null,
+          "reset_samples": 40768,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 43232,
+          "recovered_direction": null,
+          "reset_samples": 43360,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            61759,
+            109759
+          ]
+        }
+      ]
+    },
+    {
+      "case": 70,
+      "windows": [
+        {
+          "continuous_samples": 44480,
+          "recovered_direction": null,
+          "reset_samples": 44480,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 41280,
+          "recovered_direction": null,
+          "reset_samples": 43296,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 43744,
+          "recovered_direction": null,
+          "reset_samples": 42848,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 46753,
+          "recovered_direction": null,
+          "reset_samples": 42848,
+          "span": [
+            61759,
+            109759
+          ]
+        }
+      ]
+    },
+    {
+      "case": 71,
+      "windows": [
+        {
+          "continuous_samples": 46016,
+          "recovered_direction": null,
+          "reset_samples": 46016,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 44352,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 40896,
+          "recovered_direction": null,
+          "reset_samples": 34176,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 43328,
+          "recovered_direction": null,
+          "reset_samples": 32032,
+          "span": [
+            61759,
+            109759
+          ]
+        }
+      ]
+    },
+    {
+      "case": 72,
+      "windows": [
+        {
+          "continuous_samples": 46432,
+          "recovered_direction": null,
+          "reset_samples": 46432,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 46752,
+          "recovered_direction": null,
+          "reset_samples": 46528,
+          "span": [
+            74560,
+            122560
+          ]
+        }
+      ]
+    },
+    {
+      "case": 73,
+      "windows": [
+        {
+          "continuous_samples": 46432,
+          "recovered_direction": null,
+          "reset_samples": 46432,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 45920,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 28512,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 46240,
+          "recovered_direction": null,
+          "reset_samples": 30144,
+          "span": [
+            74560,
+            122560
+          ]
+        }
+      ]
+    },
+    {
+      "case": 74,
+      "windows": [
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 8640,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 14208,
+          "span": [
+            74560,
+            122560
+          ]
+        }
+      ]
+    },
+    {
+      "case": 75,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 41792,
+          "recovered_direction": null,
+          "reset_samples": 41760,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 37120,
+          "recovered_direction": null,
+          "reset_samples": 35264,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 43328,
+          "recovered_direction": null,
+          "reset_samples": 43296,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 43328,
+          "recovered_direction": null,
+          "reset_samples": 37152,
+          "span": [
+            73121,
+            121121
+          ]
+        }
+      ]
+    },
+    {
+      "case": 76,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 40736,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 39968,
+          "recovered_direction": null,
+          "reset_samples": 30080,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 35360,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 18784,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 34239,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 15808,
+          "span": [
+            73121,
+            121121
+          ]
+        }
+      ]
+    },
+    {
+      "case": 77,
+      "windows": [
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 34688,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 18784,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 10176,
+          "span": [
+            73121,
+            121121
+          ]
+        }
+      ]
+    },
+    {
+      "case": 78,
+      "windows": [
+        {
+          "continuous_samples": 43808,
+          "recovered_direction": null,
+          "reset_samples": 39872,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 44352,
+          "recovered_direction": null,
+          "reset_samples": 44352,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 45648,
+          "recovered_direction": null,
+          "reset_samples": 45536,
+          "span": [
+            59280,
+            107280
+          ]
+        },
+        {
+          "continuous_samples": 44352,
+          "recovered_direction": null,
+          "reset_samples": 44352,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 38144,
+          "recovered_direction": null,
+          "reset_samples": 38624,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 41088,
+          "recovered_direction": null,
+          "reset_samples": 35264,
+          "span": [
+            118560,
+            166560
+          ]
+        }
+      ]
+    },
+    {
+      "case": 79,
+      "windows": [
+        {
+          "continuous_samples": 43296,
+          "recovered_direction": null,
+          "reset_samples": 40896,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 43840,
+          "recovered_direction": null,
+          "reset_samples": 42784,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 44112,
+          "recovered_direction": null,
+          "reset_samples": 45024,
+          "span": [
+            59280,
+            107280
+          ]
+        },
+        {
+          "continuous_samples": 42816,
+          "recovered_direction": null,
+          "reset_samples": 40224,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 36096,
+          "recovered_direction": null,
+          "reset_samples": 36576,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 37504,
+          "recovered_direction": null,
+          "reset_samples": 36704,
+          "span": [
+            118560,
+            166560
+          ]
+        }
+      ]
+    },
+    {
+      "case": 80,
+      "windows": [
+        {
+          "continuous_samples": 43872,
+          "recovered_direction": null,
+          "reset_samples": 43872,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 13152,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 38784,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 44624,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 0,
+          "span": [
+            59280,
+            107280
+          ]
+        },
+        {
+          "continuous_samples": 43328,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 8128,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 35584,
+          "recovered_direction": null,
+          "reset_samples": 25888,
+          "span": [
+            96000,
+            144000
+          ]
+        },
+        {
+          "continuous_samples": 39552,
+          "recovered_direction": null,
+          "reset_samples": 33728,
+          "span": [
+            118560,
+            166560
+          ]
+        }
+      ]
+    },
+    {
+      "case": 81,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 46432,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 47743,
+          "recovered_direction": null,
+          "reset_samples": 47552,
+          "span": [
+            63841,
+            111841
+          ]
+        }
+      ]
+    },
+    {
+      "case": 82,
+      "windows": [
+        {
+          "continuous_samples": 47456,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 40800,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 44384,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            63841,
+            111841
+          ]
+        }
+      ]
+    },
+    {
+      "case": 83,
+      "windows": [
+        {
+          "continuous_samples": 31168,
+          "recovered_direction": null,
+          "reset_samples": 31168,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 11296,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            63841,
+            111841
+          ]
+        }
+      ]
+    },
+    {
+      "case": 84,
+      "windows": [
+        {
+          "continuous_samples": 41760,
+          "recovered_direction": null,
+          "reset_samples": 41760,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 37120,
+          "recovered_direction": null,
+          "reset_samples": 33056,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 41280,
+          "recovered_direction": null,
+          "reset_samples": 41280,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 45920,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 47489,
+          "recovered_direction": null,
+          "reset_samples": 47584,
+          "span": [
+            75359,
+            123359
+          ]
+        }
+      ]
+    },
+    {
+      "case": 85,
+      "windows": [
+        {
+          "continuous_samples": 32992,
+          "recovered_direction": null,
+          "reset_samples": 32992,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 30464,
+          "recovered_direction": null,
+          "reset_samples": 27936,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 40256,
+          "recovered_direction": null,
+          "reset_samples": 40224,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 32096,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 45953,
+          "recovered_direction": null,
+          "reset_samples": 32704,
+          "span": [
+            75359,
+            123359
+          ]
+        }
+      ]
+    },
+    {
+      "case": 86,
+      "windows": [
+        {
+          "continuous_samples": 16832,
+          "recovered_direction": null,
+          "reset_samples": 16832,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 3360,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 18592,
+          "recovered_direction": null,
+          "reset_samples": 19232,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 37472,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 22912,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 34113,
+          "recovered_direction": "inconclusive",
+          "reset_samples": 17280,
+          "span": [
+            75359,
+            123359
+          ]
+        }
+      ]
+    },
+    {
+      "case": 87,
+      "windows": [
+        {
+          "continuous_samples": 46432,
+          "recovered_direction": null,
+          "reset_samples": 46432,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 48000,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47968,
+          "span": [
+            66720,
+            114720
+          ]
+        }
+      ]
+    },
+    {
+      "case": 88,
+      "windows": [
+        {
+          "continuous_samples": 43872,
+          "recovered_direction": null,
+          "reset_samples": 43872,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 47456,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 43872,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 48000,
+          "recovered_direction": null,
+          "reset_samples": 33504,
+          "span": [
+            66720,
+            114720
+          ]
+        }
+      ]
+    },
+    {
+      "case": 89,
+      "windows": [
+        {
+          "continuous_samples": 5056,
+          "recovered_direction": null,
+          "reset_samples": 5056,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 18368,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            66720,
+            114720
+          ]
+        }
+      ]
+    },
+    {
+      "case": 90,
+      "windows": [
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            80000,
+            128000
+          ]
+        }
+      ]
+    },
+    {
+      "case": 91,
+      "windows": [
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            80000,
+            128000
+          ]
+        }
+      ]
+    },
+    {
+      "case": 92,
+      "windows": [
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            80000,
+            128000
+          ]
+        }
+      ]
+    },
+    {
+      "case": 93,
+      "windows": [
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            80000,
+            128000
+          ]
+        }
+      ]
+    },
+    {
+      "case": 94,
+      "windows": [
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            80000,
+            128000
+          ]
+        }
+      ]
+    },
+    {
+      "case": 95,
+      "windows": [
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            80000,
+            128000
+          ]
+        }
+      ]
+    },
+    {
+      "case": 96,
+      "windows": [
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            80000,
+            128000
+          ]
+        }
+      ]
+    },
+    {
+      "case": 97,
+      "windows": [
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            0,
+            48000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            24000,
+            72000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            48000,
+            96000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            72000,
+            120000
+          ]
+        },
+        {
+          "continuous_samples": 0,
+          "recovered_direction": null,
+          "reset_samples": 0,
+          "span": [
+            80000,
+            128000
+          ]
+        }
+      ]
+    }
+  ],
+  "results": {
+    "gain_control/genuine": {
+      "additive_files_assessed": 12,
+      "additive_flags": 0,
+      "additive_gained": 0,
+      "additive_genuine_samples_marked": 0,
+      "additive_lost": 0,
+      "additive_reachable_with_admission": 0,
+      "additive_useful": 0,
+      "baseline_files_assessed": 12,
+      "baseline_flags": 0,
+      "baseline_gained": 0,
+      "baseline_genuine_samples_marked": 0,
+      "baseline_lost": 0,
+      "baseline_reachable_with_admission": 0,
+      "baseline_useful": 0,
+      "continued_files_assessed": 12,
+      "continued_flags": 0,
+      "continued_gained": 0,
+      "continued_genuine_samples_marked": 0,
+      "continued_lost": 0,
+      "continued_reachable_with_admission": 0,
+      "continued_useful": 0,
+      "continuous_admitted": 61,
+      "dense_geometry_reachable": 0,
+      "files": 12,
+      "lost_windows": 0,
+      "new_windows": 0,
+      "previous_admitted": 61,
+      "recovered_ai": 0,
+      "recovered_inconclusive": 0,
+      "recovered_original": 0,
+      "windows": 61
+    },
+    "gain_control/partial": {
+      "additive_files_assessed": 18,
+      "additive_flags": 16,
+      "additive_gained": 0,
+      "additive_genuine_samples_marked": 782007,
+      "additive_lost": 0,
+      "additive_reachable_with_admission": 15,
+      "additive_useful": 13,
+      "baseline_files_assessed": 18,
+      "baseline_flags": 16,
+      "baseline_gained": 0,
+      "baseline_genuine_samples_marked": 782007,
+      "baseline_lost": 0,
+      "baseline_reachable_with_admission": 15,
+      "baseline_useful": 13,
+      "continued_files_assessed": 18,
+      "continued_flags": 16,
+      "continued_gained": 0,
+      "continued_genuine_samples_marked": 782007,
+      "continued_lost": 0,
+      "continued_reachable_with_admission": 15,
+      "continued_useful": 13,
+      "continuous_admitted": 96,
+      "dense_geometry_reachable": 15,
+      "files": 18,
+      "lost_windows": 0,
+      "new_windows": 0,
+      "previous_admitted": 96,
+      "recovered_ai": 0,
+      "recovered_inconclusive": 0,
+      "recovered_original": 0,
+      "windows": 96
+    },
+    "rain/genuine": {
+      "additive_files_assessed": 12,
+      "additive_flags": 0,
+      "additive_gained": 0,
+      "additive_genuine_samples_marked": 0,
+      "additive_lost": 0,
+      "additive_reachable_with_admission": 0,
+      "additive_useful": 0,
+      "baseline_files_assessed": 12,
+      "baseline_flags": 0,
+      "baseline_gained": 0,
+      "baseline_genuine_samples_marked": 0,
+      "baseline_lost": 0,
+      "baseline_reachable_with_admission": 0,
+      "baseline_useful": 0,
+      "continued_files_assessed": 12,
+      "continued_flags": 0,
+      "continued_gained": 0,
+      "continued_genuine_samples_marked": 0,
+      "continued_lost": 0,
+      "continued_reachable_with_admission": 0,
+      "continued_useful": 0,
+      "continuous_admitted": 61,
+      "dense_geometry_reachable": 0,
+      "files": 12,
+      "lost_windows": 0,
+      "new_windows": 3,
+      "previous_admitted": 58,
+      "recovered_ai": 0,
+      "recovered_inconclusive": 3,
+      "recovered_original": 0,
+      "windows": 61
+    },
+    "rain/isolated": {
+      "additive_files_assessed": 0,
+      "additive_flags": 0,
+      "additive_gained": 0,
+      "additive_genuine_samples_marked": 0,
+      "additive_lost": 0,
+      "additive_reachable_with_admission": 0,
+      "additive_useful": 0,
+      "baseline_files_assessed": 0,
+      "baseline_flags": 0,
+      "baseline_gained": 0,
+      "baseline_genuine_samples_marked": 0,
+      "baseline_lost": 0,
+      "baseline_reachable_with_admission": 0,
+      "baseline_useful": 0,
+      "continued_files_assessed": 0,
+      "continued_flags": 0,
+      "continued_gained": 0,
+      "continued_genuine_samples_marked": 0,
+      "continued_lost": 0,
+      "continued_reachable_with_admission": 0,
+      "continued_useful": 0,
+      "continuous_admitted": 0,
+      "dense_geometry_reachable": 0,
+      "files": 4,
+      "lost_windows": 0,
+      "new_windows": 0,
+      "previous_admitted": 0,
+      "recovered_ai": 0,
+      "recovered_inconclusive": 0,
+      "recovered_original": 0,
+      "windows": 20
+    },
+    "rain/partial": {
+      "additive_files_assessed": 18,
+      "additive_flags": 3,
+      "additive_gained": 0,
+      "additive_genuine_samples_marked": 62080,
+      "additive_lost": 0,
+      "additive_reachable_with_admission": 15,
+      "additive_useful": 3,
+      "baseline_files_assessed": 18,
+      "baseline_flags": 3,
+      "baseline_gained": 0,
+      "baseline_genuine_samples_marked": 62080,
+      "baseline_lost": 0,
+      "baseline_reachable_with_admission": 13,
+      "baseline_useful": 3,
+      "continued_files_assessed": 18,
+      "continued_flags": 3,
+      "continued_gained": 0,
+      "continued_genuine_samples_marked": 62080,
+      "continued_lost": 0,
+      "continued_reachable_with_admission": 15,
+      "continued_useful": 3,
+      "continuous_admitted": 94,
+      "dense_geometry_reachable": 15,
+      "files": 18,
+      "lost_windows": 1,
+      "new_windows": 7,
+      "previous_admitted": 88,
+      "recovered_ai": 0,
+      "recovered_inconclusive": 7,
+      "recovered_original": 0,
+      "windows": 96
+    },
+    "train/genuine": {
+      "additive_files_assessed": 9,
+      "additive_flags": 1,
+      "additive_gained": 0,
+      "additive_genuine_samples_marked": 24000,
+      "additive_lost": 0,
+      "additive_reachable_with_admission": 0,
+      "additive_useful": 0,
+      "baseline_files_assessed": 8,
+      "baseline_flags": 0,
+      "baseline_gained": 0,
+      "baseline_genuine_samples_marked": 0,
+      "baseline_lost": 0,
+      "baseline_reachable_with_admission": 0,
+      "baseline_useful": 0,
+      "continued_files_assessed": 7,
+      "continued_flags": 1,
+      "continued_gained": 0,
+      "continued_genuine_samples_marked": 24000,
+      "continued_lost": 0,
+      "continued_reachable_with_admission": 0,
+      "continued_useful": 0,
+      "continuous_admitted": 29,
+      "dense_geometry_reachable": 0,
+      "files": 12,
+      "lost_windows": 2,
+      "new_windows": 11,
+      "previous_admitted": 20,
+      "recovered_ai": 1,
+      "recovered_inconclusive": 10,
+      "recovered_original": 0,
+      "windows": 61
+    },
+    "train/isolated": {
+      "additive_files_assessed": 0,
+      "additive_flags": 0,
+      "additive_gained": 0,
+      "additive_genuine_samples_marked": 0,
+      "additive_lost": 0,
+      "additive_reachable_with_admission": 0,
+      "additive_useful": 0,
+      "baseline_files_assessed": 0,
+      "baseline_flags": 0,
+      "baseline_gained": 0,
+      "baseline_genuine_samples_marked": 0,
+      "baseline_lost": 0,
+      "baseline_reachable_with_admission": 0,
+      "baseline_useful": 0,
+      "continued_files_assessed": 0,
+      "continued_flags": 0,
+      "continued_gained": 0,
+      "continued_genuine_samples_marked": 0,
+      "continued_lost": 0,
+      "continued_reachable_with_admission": 0,
+      "continued_useful": 0,
+      "continuous_admitted": 0,
+      "dense_geometry_reachable": 0,
+      "files": 4,
+      "lost_windows": 0,
+      "new_windows": 0,
+      "previous_admitted": 0,
+      "recovered_ai": 0,
+      "recovered_inconclusive": 0,
+      "recovered_original": 0,
+      "windows": 20
+    },
+    "train/partial": {
+      "additive_files_assessed": 15,
+      "additive_flags": 1,
+      "additive_gained": 0,
+      "additive_genuine_samples_marked": 24000,
+      "additive_lost": 0,
+      "additive_reachable_with_admission": 10,
+      "additive_useful": 0,
+      "baseline_files_assessed": 15,
+      "baseline_flags": 0,
+      "baseline_gained": 0,
+      "baseline_genuine_samples_marked": 0,
+      "baseline_lost": 0,
+      "baseline_reachable_with_admission": 1,
+      "baseline_useful": 0,
+      "continued_files_assessed": 15,
+      "continued_flags": 1,
+      "continued_gained": 0,
+      "continued_genuine_samples_marked": 24000,
+      "continued_lost": 0,
+      "continued_reachable_with_admission": 10,
+      "continued_useful": 0,
+      "continuous_admitted": 64,
+      "dense_geometry_reachable": 15,
+      "files": 18,
+      "lost_windows": 2,
+      "new_windows": 36,
+      "previous_admitted": 30,
+      "recovered_ai": 3,
+      "recovered_inconclusive": 33,
+      "recovered_original": 0,
+      "windows": 96
+    }
+  },
+  "schema": "chipmunk.audio-continuous-activity-transfer/1"
+}

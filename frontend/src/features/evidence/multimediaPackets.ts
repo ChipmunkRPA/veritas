@@ -215,6 +215,7 @@ export interface LongVoiceReview {
   reason: string; limitation: string; affects_overall_confidence: false
   windows: (SampleInterval & {
     pcm_sha256: string; direction: 'ai' | 'original' | 'inconclusive' | 'unassessed'
+    speech_samples?: number
     source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
     artifacts: Partial<Record<'selected_clip' | 'waveform', EvidenceAsset>>
   })[]

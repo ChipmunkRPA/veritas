@@ -1947,6 +1947,9 @@ with the [independent evaluation form](https://github.com/ChipmunkRPA/veritas/is
 The [48 kHz speech replay](audio-focused-48k-transfer-2026-11-14.md#reproduce-locally)
 recounts partial-edit localization and unassessed windows by background,
 and can reproduce the sample hashes and clocks from exact WAV deliveries.
+The [speech activity comparison](audio-continuous-activity-2026-11-14.md#replay)
+recounts skipped and recovered windows and shows how to verify the
+speech counts in a signed customer export.
 
 ### Review recent stereo and face evidence
 

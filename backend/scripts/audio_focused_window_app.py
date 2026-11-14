@@ -171,6 +171,7 @@ def verify_exports(client, aid, source, evidence, assets, output):
     from app.reports import engine
     from app.reports.verify import verify_package
     from scripts.verify_multimedia_exports import scan
+    from scripts.verify_short_speech_coverage import verify_coverage
 
     output.mkdir(mode=0o700)
     exported = fetch(client, f"/api/analyses/{aid}/export.json")
@@ -194,6 +195,9 @@ def verify_exports(client, aid, source, evidence, assets, output):
         if evidence["source"]["source_sample_rate"] == 48_000:
             assert "The source was recorded or exported at 48 kHz." in text
             assert "decoded 16 kHz mono audio" in text
+        for window in evidence["long_voice_review"]["windows"]:
+            if "speech_samples" in window:
+                assert f"Detected speech {window['speech_samples'] / RATE:.3f} of 3.000 s." in text
         images = {item[0] for page in doc for item in page.get_images(full=True)}
         assert signature(png) in {signature(doc.extract_image(xref)["image"]) for xref in images}
     package = body(client.post(f"/api/v2/analyses/{aid}/packages",
@@ -217,8 +221,14 @@ def verify_exports(client, aid, source, evidence, assets, output):
     wrong = output / "wrong-original.wav"
     wrong.write_bytes(source.read_bytes() + b"\n")
     assert not verify_package(path, public_key_pem=key, source_audio=wrong).ok
-    return {"pdf_api_json_agree": True, "template_set": engine.TEMPLATE_SET, "signed_source_replay": True,
+    result = {"pdf_api_json_agree": True, "template_set": engine.TEMPLATE_SET, "signed_source_replay": True,
             "wrong_original_rejected": True, "selected_clip_sha256": digest(wav), "waveform_sha256": digest(png)}
+    if all("speech_samples" in window for window in evidence["long_voice_review"]["windows"]):
+        key_path = output / "instance-public-key.pem"
+        key_path.write_bytes(key)
+        checked = verify_coverage(path, source, key_path, ROOT / "models/weights/audio-upgrade/silero_vad.jit", long_review=True)
+        result["signed_speech_counts_recomputed"] = checked["windows"]
+    return result
 
 
 def assess(client, aid, media, expected, enabled):
@@ -369,7 +379,8 @@ def run_resampled(study, output):
                 readings = {tuple(item["span"]): item["direction"] for item in receipt["responses"][index]["windows"]}
                 windows = verify_windows(review, readings, pcm, focused=True)
                 summary = {"case": index, "file_sha256": case["wav_sha256"], "pcm_sha256": case["pcm_sha256"],
-                           "status": review["status"], "windows": len(windows), "regions": []}
+                           "status": review["status"], "windows": len(windows), "regions": [],
+                           "speech_samples": [window["speech_samples"] for window in windows]}
                 if label == "rain_edit":
                     assert review["status"] == "corroborated"
                     [region] = review["regions"]
@@ -382,6 +393,17 @@ def run_resampled(study, output):
                     assert review["status"] == "no_corroboration" and not review["regions"]
                     assert any(window["direction"] != "unassessed" for window in windows) == (label == "genuine_rain")
                     assert json.loads(fetch(client, f"/api/analyses/{aid}/export.json"))["evidence"] == evidence
+                    if label == "isolated_rain":
+                        import pymupdf
+
+                        report = body(client.post(f"/api/v2/analyses/{aid}/reports", json={"profile": "standard"}))
+                        report = wait(client, f"/api/v2/reports/{report['id']}", timeout=120)
+                        pdf = fetch(client, f"/api/v2/reports/{report['id']}/file")
+                        with pymupdf.open(stream=pdf, filetype="pdf") as document:
+                            text = " ".join(" ".join(page.get_text().split()) for page in document)
+                        assert text.count("Detected speech 0.000 of 3.000 s. Below the 1.500 s speech minimum. Samples") == len(windows)
+                        (output / "isolated-rain.pdf").write_bytes(pdf)
+                        summary["skipped_windows_in_pdf"] = len(windows)
                 results[label] = summary
                 print(label, summary, flush=True)
     write_json(output / "receipt.json", {"cases": results, "original_sample_rate": 48_000,

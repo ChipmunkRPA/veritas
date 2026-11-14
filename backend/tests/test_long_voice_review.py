@@ -152,6 +152,9 @@ def test_focused_review_retains_input_readings_and_binds_narrower_playback(schem
     directions = ("ai", "ai", "inconclusive", "ai", "unassessed", "inconclusive", "inconclusive")
     windows = [{"start_sample": a, "end_sample": b, "direction": direction, "pcm_sha256": pin(a, b)}
                for (a, b), direction in zip(schedule, directions, strict=True)]
+    if schema == binding.RESAMPLED_FOCUSED_SCHEMA:
+        for window in windows:
+            window["speech_samples"] = 12000 if window["direction"] == "unassessed" else 24000
     regions = binding.focused_regions(len(pcm), windows)
     assert regions == [{"start_sample": 24000, "end_sample": 48000, "basis": "overlap", "supporting_windows": [0, 1]},
                        {"start_sample": 56000, "end_sample": 104000, "basis": "sparse", "supporting_windows": [0, 3]}]
@@ -182,6 +185,15 @@ def test_focused_review_retains_input_readings_and_binds_narrower_playback(schem
     audio_long_review.verify_source(review, pcm=pcm, mapping=source, waveform=audio_packets._chart)
     if schema == binding.RESAMPLED_FOCUSED_SCHEMA:
         assert "decoded 16 kHz mono audio" in review["limitation"]
+        assert [window["speech_samples"] for window in review["windows"]] == [24000, 24000, 24000, 24000, 12000, 24000, 24000]
+        wrong_count = deepcopy(review)
+        wrong_count["windows"][0]["speech_samples"] = 23999
+        with pytest.raises(ValueError, match="disagrees with long speech-window admission"):
+            binding.validate(wrong_count, source)
+        missing_count = deepcopy(review)
+        del missing_count["windows"][0]["speech_samples"]
+        with pytest.raises(ValueError, match="Incomplete measured speech coverage"):
+            binding.validate(missing_count, source)
         for altered in ({"source_sample_rate": 44100}, {"source_channels": 2},
                         {"timeline": [{"start_sample": 0, "end_sample": len(pcm), "source_pts": 1}]}):
             with pytest.raises(ValueError, match="source scope"):

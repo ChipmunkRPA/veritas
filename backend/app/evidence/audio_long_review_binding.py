@@ -38,6 +38,7 @@ SKIPPED_UNAVAILABLE = "The optional long-window review could not complete."
 SKIPPED_RECEIPT = "The optional long-window response could not be saved."
 SKIP_REASONS = {SKIPPED_BUDGET, SKIPPED_TIMEOUT, SKIPPED_UNAVAILABLE, SKIPPED_RECEIPT}
 SHA = re.compile(r"[0-9a-f]{64}")
+WINDOW_FIELDS = frozenset({"start_sample", "end_sample", "pcm_sha256", "direction"})
 
 
 def supported_source(source: dict) -> bool:
@@ -115,6 +116,18 @@ def _require(valid, message):
         raise ValueError(message)
 
 
+def validate_window_fields(window, *extra):
+    # These additive fields are absent from evidence created by earlier workers.
+    required = WINDOW_FIELDS | set(extra)
+    _require(set(window) in (required, required | {"speech_samples"}), "Invalid long speech-window fields")
+    if "speech_samples" in window:
+        speech = window["speech_samples"]
+        span = window["end_sample"] - window["start_sample"]
+        _require(type(speech) is int and 0 <= speech <= span
+                 and (2 * speech < span) == (window["direction"] == "unassessed"),
+                 "Detected speech duration disagrees with long speech-window admission")
+
+
 def validate(review: dict, source: dict) -> None:
     try:
         _validate(review, source)
@@ -138,13 +151,14 @@ def _validate(review, source):
     _require(review["status"] == expected and review["reason"] == REASONS[expected]
              and [(window["start_sample"], window["end_sample"]) for window in windows] == intervals(source["samples"]),
              "Long speech-window status or sampled geometry differs from the fixed rule")
+    _validate_coverage_presence(windows)
     for window in windows:
+        validate_window_fields(window, "source_timestamp_ranges", "artifacts")
         a, b = window["start_sample"], window["end_sample"]
         ranges = [{"start_sample": a, "end_sample": b, "source_start_pts": a, "source_end_pts": b, "time_base": "1/16000"}]
         assets = window["artifacts"]
         media_expected = expected == "corroborated" and window["direction"] == "ai"
-        _require(set(window) == {"start_sample", "end_sample", "pcm_sha256", "direction", "source_timestamp_ranges", "artifacts"}
-                 and type(a) is type(b) is int and SHA.fullmatch(window["pcm_sha256"]) is not None
+        _require(type(a) is type(b) is int and SHA.fullmatch(window["pcm_sha256"]) is not None
                  and window["direction"] in DIRECTIONS and window["source_timestamp_ranges"] == ranges
                  and set(assets) == ({"selected_clip", "waveform"} if media_expected else set()),
                  "Long speech-window media or clock differs from its measured range")
@@ -163,6 +177,10 @@ def _source_ranges(start, end):
     return [{"start_sample": start, "end_sample": end, "source_start_pts": start, "source_end_pts": end, "time_base": "1/16000"}]
 
 
+def _validate_coverage_presence(windows):
+    _require(len({"speech_samples" in window for window in windows}) <= 1, "Incomplete measured speech coverage")
+
+
 def _validate_focused(review, source):
     windows, regions = review["windows"], review["regions"]
     _require(set(review) == {"schema", "title", "status", "reason", "limitation", "affects_overall_confidence", "windows", "regions"}
@@ -176,10 +194,11 @@ def _validate_focused(review, source):
     samples = source["samples"]
     _require([(window["start_sample"], window["end_sample"]) for window in windows] == focused_intervals(samples),
              "Focused speech-window schedule differs")
+    _validate_coverage_presence(windows)
     for window in windows:
+        validate_window_fields(window, "source_timestamp_ranges", "artifacts")
         start, end = window["start_sample"], window["end_sample"]
-        _require(set(window) == {"start_sample", "end_sample", "direction", "pcm_sha256", "source_timestamp_ranges", "artifacts"}
-                 and type(start) is type(end) is int and window["direction"] in DIRECTIONS
+        _require(type(start) is type(end) is int and window["direction"] in DIRECTIONS
                  and SHA.fullmatch(window["pcm_sha256"]) and window["source_timestamp_ranges"] == _source_ranges(start, end)
                  and window["artifacts"] == {}, "Invalid focused speech-window reading")
     expected = focused_regions(samples, windows)

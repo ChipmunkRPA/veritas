@@ -9,6 +9,7 @@ from app.detectors.video.adapters.audio import PellaVoiceDetector
 from app.detectors.video.adapters.common import AudioTrack, video_spec
 from app.engine.detector import Applicability, Detector, DetectorResult, InputUnit, Modality
 from app.evidence import audio_long_review_binding as binding
+from app.evidence.audio_binding import SPEECH_SELECTION
 
 BUDGET_S = 20.0
 PIPELINE_RESERVE_S = 25.0
@@ -33,7 +34,9 @@ class LongVoiceReview(Detector):
         self.schema = schema
         self.focused = schema in binding.FOCUSED_SCHEMAS
         if self.focused:
-            self.spec = replace(self.spec, version="3.0.0" if schema == binding.RESAMPLED_FOCUSED_SCHEMA else "2.0.0")
+            self.spec = replace(self.spec, version="3.1.0" if schema == binding.RESAMPLED_FOCUSED_SCHEMA else "2.1.0")
+        else:
+            self.spec = replace(self.spec, version="1.1.0")
 
     def intervals(self, samples):
         return binding.focused_intervals(samples) if self.focused else binding.intervals(samples)
@@ -56,6 +59,10 @@ class LongVoiceReview(Detector):
             context = replace(ctx, outputs=replace(ctx.outputs, audio=AudioTrack("analysed", pcm, len(pcm))),
                               exhibits=_UnpublishedSeries())
             result = checker.run(context)
+            [admission] = result.details[SPEECH_SELECTION]
+            if (admission["start_sample"] != 0 or admission["end_sample"] != end - start
+                    or admission["admitted"] != (result.status == "ok")):
+                raise ValueError("Unexpected speech admission for the three-second window")
             if result.status == "not_applicable":
                 direction = "unassessed"
             else:
@@ -67,6 +74,7 @@ class LongVoiceReview(Detector):
                     raise ValueError("Unexpected scoped voice response")
                 direction = screening["decision"]
             windows.append({"start_sample": start, "end_sample": end, "direction": direction,
+                            "speech_samples": admission["speech_samples"],
                             "pcm_sha256": hashlib.sha256(pcm.astype("<f4").tobytes()).hexdigest()})
         ctx.deadline.check("long voice review")
         if self.focused:

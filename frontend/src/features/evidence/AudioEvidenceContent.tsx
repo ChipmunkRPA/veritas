@@ -216,6 +216,10 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
             <p className="mt-2 mb-0 font-mono text-caption text-text-muted">
               Analyzed input {span} · samples [{window.start_sample}, {window.end_sample})
             </p>
+            {window.speech_samples !== undefined && <p className="mt-1 mb-0 text-caption">
+              Detected speech {seconds(window.speech_samples / longVoiceSampleRate)} of 3.000 s.
+              {window.direction === 'unassessed' && ' Below the 1.500 s speech minimum.'}
+            </p>}
             <SourceTimestamps ranges={window.source_timestamp_ranges} showSeconds />
             {showMedia && window.artifacts.waveform && <div className="mt-3">
               <EvidencePicture set={set} artifact={window.artifacts.waveform} token={token} ready={mediaReady} chart

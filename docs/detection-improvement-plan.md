@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Continuous speech activity under background noise](audio-continuous-activity-2026-11-14.md)
+  admitted 36 additional windows on train-masked edits. It located no
+  additional edits and added one false range on a genuine recording.
+  The app keeps its existing admission rule and records detected speech
+  duration for each long-review window.
+
 - [Short speech review for 48 kHz WAV](audio-focused-48k-transfer-2026-11-14.md)
   extends the overlapping review to a new delivery profile. On 98
   matched re-deliveries, it retained all 13 useful gain-only locations

@@ -19,6 +19,38 @@ function show(kind: 'audio' | 'video' = 'video') {
   </QueryClientProvider>)
 }
 
+it.each([true, false])('requires both audio excerpts and the six soundtrack-difference pictures (%s)', async (complete) => {
+  const image = { file: 'picture.png', media_type: 'image/png', sha256: 'a'.repeat(64) }
+  const audio = { file: 'sound.wav', media_type: 'audio/wav', sha256: 'b'.repeat(64) }
+  const picture = { asset: image, frame_index: 40, time_s: 1.6 }
+  const clip = { start_s: 1.4, end_s: 1.8, audio, waveform: { low: [-.3], high: [.3] } }
+  const pair = { earlier: picture, submitted: picture }
+  const comparison = { schema: 'chipmunk.video-reference-comparison/14', status: 'measured', interpretation: 'Compared copies.',
+    submitted: { width: 1280, height: 720 }, picture: { matching_frames: 100, changed_frames: 0, ranges: [] },
+    sound_difference: { status: 'localized_difference', affects_overall_confidence: false, summary: 'The two soundtracks differ locally.',
+      scope: 'The comparison carries zero weight in the AI estimate.', range: { earlier: clip, submitted: clip,
+        bands: [{ band_hz: [300, 900] }, { band_hz: [900, 1750] }], paired_pictures: { before: pair, during: pair, after: pair } } } }
+  const assets = complete ? { 'picture.png': 'iVBORw0KGgo=', 'sound.wav': 'UklGRg==' } : { 'picture.png': 'iVBORw0KGgo=' }
+  const fetch = vi.fn().mockResolvedValueOnce(Response.json({ available: true, sound_difference_available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets }))
+  vi.stubGlobal('fetch', fetch)
+  show()
+  fireEvent.change(await screen.findByLabelText('Earlier video'), { target: { files: [new File(['movie'], 'earlier.mp4')] } })
+  const trial = screen.getByRole('checkbox', { name: 'Include experimental soundtrack comparison' }) as HTMLInputElement
+  expect(trial.checked).toBe(false)
+  fireEvent.click(trial)
+  fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
+  if (complete) {
+    const section = await screen.findByRole('region', { name: 'Soundtrack difference over matching pictures' })
+    expect(within(section).getAllByRole('img', { name: /clip · 1.600 s/ })).toHaveLength(6)
+    expect(within(section).getByText(/300–900, 900–1750 Hz/)).toBeTruthy()
+    expect(within(section).getByText('Analyzed clip · 1.400–1.800 s')).toBeTruthy()
+  } else {
+    expect(await screen.findByText('The comparison response is missing the source pictures or soundtrack excerpts.')).toBeTruthy()
+  }
+  expect((fetch.mock.calls[1][1].body as FormData).get('include_sound_difference')).toBe('true')
+})
+
 it('shows matching source times and waveform previews and exports their JSON and PDF', async () => {
   const picture = { file: 'earlier.png', media_type: 'image/png', sha256: 'a'.repeat(64) }
   const sound = { file: 'earlier.wav', media_type: 'audio/wav', sha256: 'b'.repeat(64) }

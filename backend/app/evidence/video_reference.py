@@ -47,6 +47,7 @@ SCHEMA_WITH_TRIM_REENCODE = "chipmunk.video-reference-comparison/10"
 SCHEMA_WITH_REENCODED_SOUNDTRACK = "chipmunk.video-reference-comparison/11"
 SCHEMA_WITH_PICTURE_INSERTION = "chipmunk.video-reference-comparison/12"
 SCHEMA_WITH_INSERTION_RETENTION = "chipmunk.video-reference-comparison/13"
+SCHEMA_WITH_SOUND_DIFFERENCE = "chipmunk.video-reference-comparison/14"
 MAX_COMPARED_SOUNDTRACKS = 2
 MAX_BYTES = 48 * 1024 * 1024
 MAX_FRAMES = 360
@@ -406,6 +407,7 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             include_hd_soundtrack_reencode: bool = False,
             include_quiet_soundtrack: bool = False,
             include_short_soundtrack: bool = False,
+            include_sound_difference: bool = False,
             include_picture_insertion: bool = False,
             verify_picture_insertion_retention: bool = True) -> tuple[dict, dict[str, bytes]]:
     """Report decoded differences on matching clocks or within a verified trimmed overlap."""
@@ -555,6 +557,11 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             record.update(schema=SCHEMA_WITH_CHANNEL_TIMING, channel_timing=channels)
     if reencoded_pictures:
         record["schema"] = SCHEMA_WITH_REENCODED_SOUNDTRACK
+    if include_sound_difference and timing_event_s is None and tracks is not None:
+        from app.evidence.video_reference_soundtrack import assess_difference
+
+        if difference := assess_difference(paths, tables, record, tracks, assets):
+            record.update(schema=SCHEMA_WITH_SOUND_DIFFERENCE, sound_difference=difference)
     if sources != tuple(_identity(path) for path in paths):
         raise ValueError("One of the clips changed while the comparison was running.")
     return record, assets

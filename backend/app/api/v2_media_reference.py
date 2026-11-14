@@ -49,6 +49,7 @@ class AudioReferenceAvailability(MediaReferenceAvailability):
 class VideoReferenceAvailability(MediaReferenceAvailability):
     timing_available: bool | None = None
     picture_insertion_available: bool | None = None
+    sound_difference_available: bool | None = None
 
 
 class MediaReferenceResponse(BaseModel):
@@ -115,6 +116,8 @@ def availability(aid: str, request: Request):
             result["long_clean_speech_available"] = True
     if available and kind == "video" and settings.video_reference_picture_insertion:
         result["picture_insertion_available"] = True
+    if available and kind == "video" and settings.video_reference_sound_difference:
+        result["sound_difference_available"] = True
     if available and kind == "video" and settings.video_reference_timing_model_path is not None:
         from app.evidence.video_reference_timing import available as timing_available
 
@@ -145,7 +148,8 @@ def _base64(data: bytes) -> str:
 
 
 def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: UploadFile, include_pdf: bool,
-             timing_event_s: Fraction | None = None, earlier_has_clean_speech: bool = False) -> JSONResponse:
+             timing_event_s: Fraction | None = None, earlier_has_clean_speech: bool = False,
+             include_sound_difference: bool = False) -> JSONResponse:
     expected = original[:2]
 
     try:
@@ -185,6 +189,7 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         include_hd_soundtrack_reencode=settings.video_reference_soundtrack_reencode,
                         include_quiet_soundtrack=settings.video_reference_soundtrack_reencode,
                         include_short_soundtrack=settings.video_reference_short_soundtrack,
+                        include_sound_difference=include_sound_difference,
                         include_picture_insertion=settings.video_reference_picture_insertion,
                     )
                 else:
@@ -224,6 +229,10 @@ def _upload_body(kind):
     }
     if kind == "video":
         properties["timing_event_s"] = {"type": "string", "description": "Optional marked mouth closure time in the earlier clip, in seconds."}
+        properties["include_sound_difference"] = {
+            "type": "string", "enum": ["true", "false"], "default": "false",
+            "description": "Opt into the experimental earlier-copy soundtrack comparison when available.",
+        }
     else:
         properties["earlier_has_clean_speech"] = {
             "type": "string", "enum": ["true", "false"], "default": "false",
@@ -247,7 +256,7 @@ async def comparison(aid: str, request: Request):
     if not _slot.acquire(blocking=False):
         raise ProblemError(429, "Source comparison busy", "Try again after the active source comparison finishes.")
     try:
-        async with request.form(max_files=1, max_fields=2, max_part_size=1024) as form:
+        async with request.form(max_files=1, max_fields=3, max_part_size=1024) as form:
             earlier = form.get("earlier")
             include_pdf = form.get("include_pdf", "false")
             if not isinstance(earlier, UploadFile) or include_pdf not in ("true", "false"):
@@ -261,6 +270,11 @@ async def comparison(aid: str, request: Request):
             clean = form.getlist("earlier_has_clean_speech")
             if clean and (kind != "audio" or len(clean) != 1 or clean[0] not in ("true", "false")):
                 raise ProblemError(422, "Invalid earlier recording option", "Confirm the optional earlier clean recording with true or false.")
-            return await run_in_threadpool(_compare, aid, kind, original, earlier, include_pdf == "true", event, clean == ["true"])
+            sound = form.getlist("include_sound_difference")
+            if sound and (kind != "video" or len(sound) != 1 or sound[0] not in ("true", "false")
+                          or sound == ["true"] and (event is not None or not settings.video_reference_sound_difference)):
+                raise ProblemError(422, "Soundtrack comparison unavailable", "Use the optional soundtrack trial on its own without a marked time.")
+            return await run_in_threadpool(_compare, aid, kind, original, earlier, include_pdf == "true", event,
+                                           clean == ["true"], sound == ["true"])
     finally:
         _slot.release()

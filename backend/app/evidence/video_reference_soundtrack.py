@@ -123,7 +123,7 @@ def measure(earlier, submitted, *, window=WINDOW, step=STEP, min_rms=MIN_RMS):
     return best, sum(shift is not None for _, shift, _ in matches)
 
 
-def _clip(assets, side, track, interval, origin):
+def _clip(assets, side, track, interval, origin, *, prefix="soundtrack-shift"):
     a, b = interval
     pcm = track[1][a:b]
     data = wav_bytes(pcm)
@@ -131,7 +131,7 @@ def _clip(assets, side, track, interval, origin):
     return {"samples": interval, "start_s": float(origin + Fraction(a, SAMPLE_RATE)),
             "end_s": float(origin + Fraction(b, SAMPLE_RATE)), "source_pts": [pts + a, pts + b],
             "pcm_sha256": sha256((pcm * 32768).astype("<i2").tobytes()).hexdigest(), "waveform": envelope(pcm),
-            "audio": _wav_asset(assets, f"soundtrack-shift-{side}.wav", data)}
+            "audio": _wav_asset(assets, f"{prefix}-{side}.wav", data)}
 
 
 def _picture_at(assets, path, table, index, *, prefix="soundtrack-shift-picture"):
@@ -153,6 +153,17 @@ def _picture(assets, path, table, origin, span):
     clock = [(tick - table.pts[0]) * table.tb for tick in table.pts]
     middle = origin + Fraction(sum(span), 2 * SAMPLE_RATE)
     return _picture_at(assets, path, table, max(0, bisect_right(clock, middle) - 1))
+
+
+def _paired_pictures(assets, paths, tables, span, *, prefix="soundtrack-shift"):
+    clock = [(tick - tables[1].pts[0]) * tables[1].tb for tick in tables[1].pts]
+    start, end = span
+    positions = {"before": max(0, bisect_right(clock, Fraction(start, SAMPLE_RATE)) - 2),
+                 "during": bisect_right(clock, Fraction(start + end, 2 * SAMPLE_RATE)) - 1,
+                 "after": bisect_left(clock, Fraction(end, SAMPLE_RATE))}
+    return {role: {side: _picture_at(assets, path, table, index, prefix=f"{prefix}-{side}-{role}")
+                   for side, path, table in zip(("earlier", "submitted"), paths, tables, strict=True)}
+            for role, index in positions.items()}
 
 
 def _assess(table, picture, audio, tracks, assets, result, picture_witness, summary_end, *, quiet=False, short=False):
@@ -209,20 +220,52 @@ def assess_reencode(paths, tables, picture, audio, tracks, assets, *, quiet=Fals
             <= audio["earlier"]["samples"] <= profile["samples"] + 1024):
         return result | {"summary": "Local soundtrack timing requires matching continuous sound clocks starting at the first picture."}
 
-    clock = [(tick - tables[1].pts[0]) * tables[1].tb for tick in tables[1].pts]
-
     def witnesses(_origin, span):
-        start, end = span
-        positions = {"before": max(0, bisect_right(clock, Fraction(start, SAMPLE_RATE)) - 2),
-                     "during": bisect_right(clock, Fraction(start + end, 2 * SAMPLE_RATE)) - 1,
-                     "after": bisect_left(clock, Fraction(end, SAMPLE_RATE))}
-        return {"paired_pictures": {
-            role: {side: _picture_at(assets, path, table, index, prefix=f"soundtrack-shift-{side}-{role}")
-                   for side, path, table in zip(("earlier", "submitted"), paths, tables, strict=True)}
-            for role, index in positions.items()
-        }}
+        return {"paired_pictures": _paired_pictures(assets, paths, tables, span)}
 
     return _assess(tables[1], picture, audio, tracks, assets, result, witnesses,
                    "between the clips over corresponding pictures.", quiet=quiet and profile["rate"] in {24, 25}
                    and profile["size"] == reencode.HD_PICTURE_SIZE,
                    short=short and profile["rate"] == 25 and profile["size"] == reencode.HD_PICTURE_SIZE)
+
+
+DIFFERENCE_SCOPE = ("This compares the first soundtrack in two supplied clips. Matching sound was measured on either side. "
+                    "A loss of matching sound can come from a replacement, other editing, or recording conditions. "
+                    "This comparison carries zero weight in the AI estimate.")
+
+
+def assess_difference(paths, tables, comparison, tracks, assets):
+    """Attach a corroborated acoustic difference to exact clock-matched pictures."""
+    from app.evidence import video_reference_sound_difference as difference
+
+    qualified = reencode.profile(tables, allow_hd=True)
+    if (not qualified or qualified["size"] != reencode.HD_PICTURE_SIZE or qualified["rate"] != 25
+            or not reencode.eligible(paths, tables, allow_hd=True) or comparison["picture"]["changed_frames"]
+            or comparison["audio"]["status"] != "measured"
+            or any(track[2]["relative_start"] != "0" or not difference.SAMPLES <= len(track[1]) <= difference.SAMPLES + 1024 for track in tracks)
+            or comparison.get("soundtrack_alignment", {}).get("status") == "local_shift"):
+        return None
+    # Use the short timing search independently of the configured display profile.
+    decoded = [track[1][:difference.SAMPLES] for track in tracks]
+    shifted, _ = measure(*decoded, window=SHORT_WINDOW, step=SHORT_STEP, min_rms=QUIET_RMS)
+    if shifted:
+        return None
+    status, reading = difference.measure(*[(pcm * 32768).astype("<i2") for pcm in decoded])
+    if reading is None or not difference.strong_flanks(reading):
+        return None
+    interval = reading["samples"]
+    pending = {}
+    prefix = "soundtrack-difference"
+    try:
+        witnesses = _paired_pictures(pending, paths, tables, interval, prefix=prefix)
+    except DecodeError:
+        return None
+    clips = {side: _clip(pending, side, track, interval, Fraction(0), prefix=prefix)
+             for side, track in zip(("earlier", "submitted"), tracks, strict=True)}
+    assets.update(pending)
+    start, end = interval
+    return {"status": status, "scope": DIFFERENCE_SCOPE, "affects_overall_confidence": False, "sample_rate": SAMPLE_RATE,
+            "picture_pair_sha256": comparison["picture"]["frame_pairs_sha256"],
+            "summary": f"The two soundtracks differ from {start / SAMPLE_RATE:.3f} to {end / SAMPLE_RATE:.3f} s while the decoded pictures match.",
+            "picture_profile": reencode.hd_report_profile(tables),
+            "range": {**reading, **clips, "paired_pictures": witnesses, "support_sha256": canonical_hash(reading)}}

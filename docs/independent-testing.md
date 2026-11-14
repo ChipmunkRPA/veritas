@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [earlier-copy soundtrack difference replay](video-reference-sound-difference-2026-11-14.md#optional-local-trial-and-replay)
+recounts acoustic replacements, timing changes, ordinary processing, and
+background-only controls. The comparison export can be verified against the
+two supplied clips, including six pictures and both excerpts.
+
 The [background-downweighted soundtrack replay](video-whitened-sound-transfer-2026-11-14.md#replay)
 recounts fixed-frequency and reweighted comparisons in clean, rain, train
 and competing-speech deliveries. It includes actual retimed pictures and

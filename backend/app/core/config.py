@@ -244,6 +244,7 @@ class Settings(BaseSettings):
     video_reference_measured_interval: bool = False  # Show strongly supported frame boundaries for qualified local picture ranges.
     video_reference_soundtrack_reencode: bool = False  # Compare local sound timing in qualified SD and 720p H.264 re-encodes.
     video_reference_short_soundtrack: bool = False  # Additional short-window pass for qualified 720p25 pairs.
+    video_reference_sound_difference: bool = False  # Local soundtrack difference on identical 720p25 picture pairs.
     video_reference_picture_insertion: bool = False  # Locate one longer picture interval across matching H.264 copies.
     video_reference_timing_model_path: Path | None = None  # Optional pinned local landmark task for a marked earlier closure.
     document_revision_comparison_enabled: bool = False  # Authenticated development-only earlier-draft comparison.

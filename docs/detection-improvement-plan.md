@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Local soundtrack differences over matching pictures](video-reference-sound-difference-2026-11-14.md)
+  found six of 16 clean replacements and zero of 48 noisy replacements per
+  carrier on the transfer, with no flags on 256 controls. It stays outside
+  standard analysis. An optional local comparison shows exact paired frames,
+  playable excerpts and waveforms.
+
 - [Background downweighting for a single soundtrack](video-whitened-sound-transfer-2026-11-14.md)
   found zero added useful locations across 60 noisy edits per carrier and
   added two ordinary control flags per carrier. Both candidates stay offline.

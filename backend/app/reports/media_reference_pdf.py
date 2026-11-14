@@ -308,8 +308,8 @@ def _timing_page(document, timing, assets):
     _text(page, MARGIN, 721, "Waveforms share one scale. The JSON includes both playable speech excerpts.", size=9, color=MUTED)
 
 
-def _soundtrack_timing_page(document, timing, assets):
-    page = _page(document, "Local soundtrack timing")
+def _soundtrack_timing_page(document, timing, assets, *, title="Local soundtrack timing"):
+    page = _page(document, title)
     page.insert_textbox((MARGIN, 124, RIGHT, 165), timing["summary"], fontsize=12, fontname="hebo", color=INK)
     page.insert_textbox((MARGIN, 169, RIGHT, 217), timing["scope"], fontsize=10, fontname="helv", color=MUTED)
     if profile := timing.get("picture_profile"):
@@ -317,7 +317,7 @@ def _soundtrack_timing_page(document, timing, assets):
               f"pictures at {profile['frames_per_second']} fps.", size=9, color=MUTED)
     if note := timing.get("waveform_note"):
         _text(page, MARGIN, 234, note, size=8, color=MUTED)
-    if timing["status"] != "local_shift":
+    if timing["status"] not in {"local_shift", "localized_difference"}:
         return
     span = timing["range"]
     if pictures := span.get("paired_pictures"):
@@ -345,6 +345,9 @@ def _soundtrack_timing_page(document, timing, assets):
         _draw_waveform(page, row["waveform"], y, maximum, (end - first) / timing["sample_rate"])
         _text(page, MARGIN, y + 51, f"Decoded samples [{first}, {end}) at 16 kHz.", size=9, color=MUTED)
     _text(page, MARGIN, 720, "Waveforms share one scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
+    if bands := span.get("bands"):
+        frequencies = ", ".join(f"{band['band_hz'][0]}-{band['band_hz'][1]}" for band in bands)
+        _text(page, MARGIN, 736, f"Matching sound fell in the {frequencies} Hz bands.", size=9, color=MUTED)
 
 
 def _audio_local_timing_page(document, timing, *, scope=None, stream_indices=None):
@@ -610,6 +613,8 @@ def render(record, assets):
                 and (not record.get("channel_timing", {}).get("ranges")
                      or record["soundtrack_alignment"]["status"] == "local_shift")):
             _soundtrack_timing_page(document, record["soundtrack_alignment"], assets)
+        if difference := record.get("sound_difference"):
+            _soundtrack_timing_page(document, difference, assets, title="Soundtrack difference over matching pictures")
         if "additional_soundtrack" in record:
             _additional_soundtrack_pages(document, record["additional_soundtrack"])
         if "stereo_comparison" in record:

@@ -66,6 +66,11 @@ type SoundtrackTiming = {
     paired_pictures?: Record<'before' | 'during' | 'after', Record<Side, SoundtrackPicture>>
   }
 }
+type SoundtrackDifference = Pick<SoundtrackTiming, 'summary' | 'scope' | 'picture_profile'> & {
+  status: 'localized_difference'
+  affects_overall_confidence: false
+  range: NonNullable<SoundtrackTiming['range']> & { bands: { band_hz: [number, number] }[] }
+}
 type CleanSpeechComparison = {
   summary: string
   scope: string
@@ -135,13 +140,14 @@ type Comparison = {
     | 'chipmunk.video-reference-comparison/4' | 'chipmunk.video-reference-comparison/5' | 'chipmunk.video-reference-comparison/6'
     | 'chipmunk.video-reference-comparison/7' | 'chipmunk.video-reference-comparison/8' | 'chipmunk.video-reference-comparison/9'
     | 'chipmunk.video-reference-comparison/10' | 'chipmunk.video-reference-comparison/11' | 'chipmunk.video-reference-comparison/12'
-    | 'chipmunk.video-reference-comparison/13'
+    | 'chipmunk.video-reference-comparison/13' | 'chipmunk.video-reference-comparison/14'
   submitted: PictureDimensions
   picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
   picture_insertion?: PictureInsertion
   insertion_retention?: { window_frames: number }
   timing?: TimingComparison
   soundtrack_alignment?: SoundtrackTiming
+  sound_difference?: SoundtrackDifference
   additional_soundtrack?: AdditionalSoundtrack
   level_adjusted?: never
   stereo_comparison?: never
@@ -161,6 +167,7 @@ type Comparison = {
   insertion_retention?: never
   timing?: never
   soundtrack_alignment?: never
+  sound_difference?: never
   additional_soundtrack?: never
   level_adjusted?: LevelAdjustedAudio
   stereo_comparison?: StereoComparison
@@ -170,7 +177,7 @@ type Comparison = {
   trim_alignment?: never
 })
 type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: string | null }
-type Availability = { available: boolean; timing_available?: boolean; picture_insertion_available?: boolean
+type Availability = { available: boolean; timing_available?: boolean; picture_insertion_available?: boolean; sound_difference_available?: boolean
   clean_speech_available?: boolean; long_clean_speech_available?: boolean }
 const sourceSeconds = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 7, useGrouping: false })
 const trimSampleRate = 16000
@@ -393,15 +400,15 @@ function TimingEvidence({ timing, assets }: { timing: TimingComparison; assets: 
   </section>
 }
 
-function SoundtrackTimingEvidence({ timing, assets, audioOnly = false, title: customTitle }: {
-  timing: Pick<SoundtrackTiming, 'summary' | 'scope' | 'range' | 'aac_presentation' | 'picture_profile' | 'waveform_note'>; assets: Result['assets']; audioOnly?: boolean; title?: string
+function SoundtrackTimingEvidence({ timing, assets, audioOnly = false, title: customTitle, excerpt: customExcerpt }: {
+  timing: Pick<SoundtrackTiming, 'summary' | 'scope' | 'range' | 'aac_presentation' | 'picture_profile' | 'waveform_note'>; assets: Result['assets']; audioOnly?: boolean; title?: string; excerpt?: string
 }) {
   const span = timing.range
   const picture = span?.picture
   const image = picture && assetBody(assets, picture.asset, 'image/png')
   const title = customTitle ?? (audioOnly ? 'Local audio timing' : 'Local soundtrack timing')
   const labels = audioOnly ? { earlier: 'Earlier recording', submitted: 'Analyzed recording' } : names
-  const excerpt = audioOnly ? 'matched excerpt' : 'matched soundtrack'
+  const excerpt = customExcerpt ?? (audioOnly ? 'matched excerpt' : 'matched soundtrack')
   const aac = timing.aac_presentation
   const profile = timing.picture_profile
   const maximum = span ? Math.max(.01, ...sides.flatMap(side => [...span[side].waveform.low, ...span[side].waveform.high].map(Math.abs))) : 1
@@ -529,6 +536,9 @@ function ResultView({ result }: { result: Result }) {
     {comparison.soundtrack_alignment && !comparison.timing?.changed_audio_samples &&
       (!comparison.channel_timing?.ranges.length || comparison.soundtrack_alignment.range) &&
       <SoundtrackTimingEvidence timing={comparison.soundtrack_alignment} assets={assets} />}
+    {comparison.sound_difference && <SoundtrackTimingEvidence timing={{ ...comparison.sound_difference,
+      waveform_note: `Matching sound fell in the ${comparison.sound_difference.range.bands.map(({ band_hz: [low, high] }) => `${low}–${high}`).join(', ')} Hz bands.` }}
+      assets={assets} title="Soundtrack difference over matching pictures" excerpt="soundtrack excerpt" />}
     {comparison.channel_timing && <ChannelTimingEvidence timing={comparison.channel_timing} assets={assets} audioOnly={isAudio} />}
     {comparison.local_timing && (!comparison.channel_timing || comparison.local_timing.range) &&
       <SoundtrackTimingEvidence timing={comparison.local_timing} assets={assets} audioOnly />}
@@ -675,17 +685,19 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
   </div>
 }
 
-function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertionAvailable, cleanSpeechAvailable, longCleanSpeechAvailable }: {
+function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertionAvailable, cleanSpeechAvailable, longCleanSpeechAvailable, soundDifferenceAvailable }: {
   analysisId: string; kind: Kind; timingAvailable: boolean; pictureInsertionAvailable: boolean
-  cleanSpeechAvailable: boolean; longCleanSpeechAvailable: boolean
+  cleanSpeechAvailable: boolean; longCleanSpeechAvailable: boolean; soundDifferenceAvailable: boolean
 }) {
   const heading = useId()
   const input = useId()
   const timingInput = useId()
   const cleanInput = useId()
+  const soundInput = useId()
   const [file, setFile] = useState<File | null>(null)
   const [timingEvent, setTimingEvent] = useState('')
   const [cleanSpeech, setCleanSpeech] = useState(false)
+  const [soundDifference, setSoundDifference] = useState(false)
   const [pending, setPending] = useState(false)
   const [error, setError] = useState('')
   const [result, setResult] = useState<Result | null>(null)
@@ -705,11 +717,12 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
     body.append('include_pdf', 'true')
     if (timingAvailable && timingEvent) body.append('timing_event_s', timingEvent)
     if (cleanSpeechAvailable && cleanSpeech) body.append('earlier_has_clean_speech', 'true')
+    if (soundDifferenceAvailable && soundDifference && !timingEvent) body.append('include_sound_difference', 'true')
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-      if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
+      const accepted = kind === 'video' ? 14 : 13
+      if (!Array.from({ length: accepted }, (_, index) => index + 1).some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
       if (schema === 'chipmunk.audio-reference-comparison/3' && !response.comparison.audio?.trim_alignment) {
@@ -761,6 +774,20 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
         throw new Error('The comparison response is missing its local soundtrack timing evidence.')
       }
       const insertion = response.comparison.picture_insertion
+      if (schema === 'chipmunk.video-reference-comparison/14') {
+        const difference = response.comparison.sound_difference
+        if (!difference || difference.status !== 'localized_difference' || difference.affects_overall_confidence !== false ||
+            !difference.range?.bands?.length || !sides.every(side => {
+              const span = difference.range
+              const audio = span[side]?.audio
+              return !!audio && !!assetBody(response.assets, audio, 'audio/wav') && insertionRoles.every(role => {
+                const frame = span.paired_pictures?.[role]?.[side]
+                return !!frame && !!assetBody(response.assets, frame.asset, 'image/png')
+              })
+            })) {
+          throw new Error('The comparison response is missing the source pictures or soundtrack excerpts.')
+        }
+      }
       const retention = schema === 'chipmunk.video-reference-comparison/13'
       const insertionUncertain = retention && response.comparison.status === 'insertion_retention_uncertain'
       if (retention && (response.comparison.insertion_retention?.window_frames !== 8 ||
@@ -803,12 +830,12 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       <div className="min-w-0">
         <label htmlFor={input} className="mb-1 block text-small font-medium">Earlier {kind}</label>
         <input id={input} type="file" accept={kind === 'audio' ? 'audio/*,.wav,.mp3,.m4a,.flac,.ogg,.opus' : 'video/*,.mov,.mkv,.mp4,.webm' + (timingAvailable ? ',.mpg,.mpeg' : '')} className="block max-w-full text-small" disabled={pending}
-          onChange={event => { setFile(event.currentTarget.files?.[0] ?? null); setTimingEvent(''); setCleanSpeech(false); setResult(null); setError('') }} />
+          onChange={event => { setFile(event.currentTarget.files?.[0] ?? null); setTimingEvent(''); setCleanSpeech(false); setSoundDifference(false); setResult(null); setError('') }} />
       </div>
       {timingAvailable && <div className="min-w-0 basis-full">
         <label htmlFor={timingInput} className="mb-1 block text-small font-medium">Earlier mouth closure (seconds)</label>
         <input id={timingInput} type="number" min="0" step="0.001" aria-describedby={timingInput + '-hint'}
-          value={timingEvent} disabled={pending || !file} className="w-32 rounded border border-border bg-surface px-2 py-1 text-small"
+          value={timingEvent} disabled={pending || !file || soundDifference} className="w-32 rounded border border-border bg-surface px-2 py-1 text-small"
           onChange={event => { setTimingEvent(event.currentTarget.value); setResult(null); setError('') }} />
         <p id={timingInput + '-hint'} className="mt-1 mb-0 text-caption text-text-muted">
           Optional. Mark when the lips close just before reopening in the earlier clip. This supports matching 360 × 288 clips at 25 fps with 75 pictures and continuous audio, and some short 720 × 480 pairs with identical pictures.
@@ -824,10 +851,24 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
           Compare short changes with background speech. Both files need exactly {longCleanSpeechAvailable ? 'six or twelve' : 'six'} seconds of continuous 16 kHz mono 16-bit WAV or FLAC with the same start and timing.
         </p>
       </div>}
+      {soundDifferenceAvailable && <div className="min-w-0 basis-full">
+        <label htmlFor={soundInput} className="flex items-start gap-2 text-small font-medium">
+          <input id={soundInput} type="checkbox" checked={soundDifference} disabled={pending || !file || !!timingEvent}
+            aria-describedby={soundInput + '-hint'}
+            onChange={event => { setSoundDifference(event.currentTarget.checked); setResult(null); setError('') }} />
+          Include experimental soundtrack comparison
+        </label>
+        <p id={soundInput + '-hint'} className="mt-1 mb-0 text-caption text-text-muted">
+          Requires two four-second 720p25 H.264 clips with identical pictures and matching audio clocks. Background noise can hide differences.
+        </p>
+      </div>}
       <Button type="submit" variant="primary" disabled={!file || pending}>{pending ? 'Comparing…' : kind === 'audio' ? 'Compare recordings' : 'Compare videos'}</Button>
     </form>
     {pending && <p role="status" className="mt-3 mb-0 text-small text-text-muted">{kind === 'audio' ? 'Comparing decoded audio…' : 'Comparing pictures and soundtracks…'}</p>}
     {error && <p role="alert" className="mt-3 mb-0 text-small text-danger">{error}</p>}
+    {result && soundDifference && !result.comparison.sound_difference && <p className="mt-3 mb-0 text-small text-text-muted">
+      The experimental comparison produced no supported soundtrack range. Only reported measurements describe what the check could establish.
+    </p>}
     {result && <ResultView result={result} />}
   </section>
 }
@@ -840,6 +881,7 @@ export default function MediaReferenceComparison({ analysisId, kind }: { analysi
     ? <MediaReferenceForm key={kind + analysisId} analysisId={analysisId} kind={kind}
       timingAvailable={kind === 'video' && availability.data.timing_available === true}
       pictureInsertionAvailable={kind === 'video' && availability.data.picture_insertion_available === true}
+      soundDifferenceAvailable={kind === 'video' && availability.data.sound_difference_available === true}
       cleanSpeechAvailable={kind === 'audio' && availability.data.clean_speech_available === true}
       longCleanSpeechAvailable={kind === 'audio' && availability.data.long_clean_speech_available === true} /> : null
 }

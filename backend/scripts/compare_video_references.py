@@ -19,6 +19,7 @@ from app.evidence.video_reference import (
     SCHEMA_WITH_PICTURE_INSERTION,
     SCHEMA_WITH_REENCODED_SOUNDTRACK,
     SCHEMA_WITH_SHORT_TIMING,
+    SCHEMA_WITH_SOUND_DIFFERENCE,
     SCHEMA_WITH_SOUNDTRACK,
     SCHEMA_WITH_TIMING,
     SCHEMA_WITH_TRIM,
@@ -68,12 +69,14 @@ def replay(compare, earlier: Path, submitted: Path, output: Path, *, verify: boo
 
 def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds: Fraction | None = None, timing_model: Path | None = None,
-        reencoded_soundtrack: bool = False, picture_insertion: bool = False, short_soundtrack: bool = False) -> dict:
+        reencoded_soundtrack: bool = False, picture_insertion: bool = False, short_soundtrack: bool = False,
+        sound_difference: bool = False) -> dict:
     options = {"include_trimmed": not verify, "include_local_area": not verify, "include_trim_reencoded": not verify,
                "include_measured_interval": not verify, "include_soundtrack_reencode": reencoded_soundtrack,
                "include_hd_soundtrack_reencode": reencoded_soundtrack,
                "include_quiet_soundtrack": reencoded_soundtrack,
                "include_short_soundtrack": short_soundtrack,
+               "include_sound_difference": sound_difference,
                "include_picture_insertion": picture_insertion}
     short_fallback = not verify
     local_sound = not verify
@@ -86,16 +89,20 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
             options["include_picture_insertion"] = schema in (SCHEMA_WITH_PICTURE_INSERTION, SCHEMA_WITH_INSERTION_RETENTION)
             options["verify_picture_insertion_retention"] = schema == SCHEMA_WITH_INSERTION_RETENTION
             reencoded_soundtrack = schema == SCHEMA_WITH_REENCODED_SOUNDTRACK
+            difference = schema == SCHEMA_WITH_SOUND_DIFFERENCE
+            options["include_sound_difference"] = difference
+            if difference:
+                reencoded_soundtrack = "soundtrack_picture_comparison" in record.get("picture", {})
             options["include_trimmed"] = schema in (SCHEMA_WITH_TRIM, SCHEMA_WITH_TRIM_REENCODE)
             options["include_trim_reencoded"] = schema == SCHEMA_WITH_TRIM_REENCODE
-            channel_timing = schema == SCHEMA_WITH_CHANNEL_TIMING
+            channel_timing = schema == SCHEMA_WITH_CHANNEL_TIMING or (difference and "channel_timing" in record)
             timing = record.get("timing", {})
             waveform = (record.get("soundtrack_alignment") or {}).get("waveform_basis")
             local_sound = schema == SCHEMA_WITH_MARKED_SOUND_FALLBACK or (
                 channel_timing and (timing.get("reason") == "profile" or "changed_audio_samples" in timing)
             )
             additional = schema == SCHEMA_WITH_ADDITIONAL_SOUNDTRACK
-            composite = additional or local_sound or channel_timing or reencoded_soundtrack
+            composite = additional or local_sound or channel_timing or reencoded_soundtrack or difference
             local = record.get("picture", {}).get("local_comparison", {})
             options["include_local_area"] = local.get("basis") == LOCAL_AREA_BASIS
             options["include_measured_interval"] = "measured_interval" in local
@@ -135,6 +142,7 @@ def main(*, description=__doc__, runner=run, marked_timing=False, clean_audio_op
         parser.add_argument("--timing-model", type=Path, help="Path to the optional pinned local landmark task.")
         parser.add_argument("--reencoded-soundtrack", action="store_true", help="Check qualified re-encoded clips for local soundtrack shifts.")
         parser.add_argument("--short-soundtrack", action="store_true", help="Also check short shifts in qualified 720p25 pairs.")
+        parser.add_argument("--sound-difference", action="store_true", help="Check for locally different sound over matching 720p25 pictures.")
         parser.add_argument("--picture-insertion", action="store_true", help="Locate extra pictures between matches in a supported clip pair.")
     if clean_audio_option:
         parser.add_argument("--clean-speech", action="store_true", help="Use an earlier clean copy of the same native recording.")
@@ -142,7 +150,8 @@ def main(*, description=__doc__, runner=run, marked_timing=False, clean_audio_op
     try:
         options = ({"event_seconds": args.event_seconds, "timing_model": args.timing_model,
                     "reencoded_soundtrack": args.reencoded_soundtrack or args.short_soundtrack,
-                    "short_soundtrack": args.short_soundtrack, "picture_insertion": args.picture_insertion} if marked_timing else {})
+                    "short_soundtrack": args.short_soundtrack, "picture_insertion": args.picture_insertion,
+                    "sound_difference": args.sound_difference} if marked_timing else {})
         if clean_audio_option:
             options["clean_speech"] = args.clean_speech
         result = runner(args.earlier, args.submitted, args.output, verify=args.verify, **options)

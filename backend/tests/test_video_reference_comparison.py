@@ -413,6 +413,80 @@ def test_picture_identical_soundtrack_shift_has_signed_exact_evidence(tmp_path):
     assert global_record["soundtrack_alignment"]["status"] == "no_local_shift"
 
 
+def test_matching_pictures_bind_a_local_soundtrack_difference_and_replay(tmp_path, reference_http, monkeypatch):
+    rng = np.random.default_rng(553)
+    pcm = rng.integers(-7200, 7200, 64000, dtype=np.int16).astype(np.float32) / 32768
+    changed = pcm.copy()
+    changed[23680:33920] = rng.integers(-7200, 7200, 10240, dtype=np.int16).astype(np.float32) / 32768
+    yy, xx = np.indices((720, 1280))
+    frame = np.uint8(125 + 24 * np.sin(xx / 11) * np.cos(yy / 9))
+    frames = np.stack([np.roll(np.repeat(frame[..., None], 3, axis=2), i % 12, axis=1) for i in range(100)])
+    picture = encode_lossy_comparison(tmp_path / 'shared-picture.mov', frames, lossless=False, crf=20, rate=25)
+    from scripts.video_soundtrack_cadence import _remux_wave
+
+    earlier, submitted, same = [tmp_path / f'{name}.mp4' for name in ('earlier', 'submitted', 'same')]
+    for path, signal in ((earlier, pcm), (submitted, changed), (same, pcm * .7)):
+        _remux_wave(picture, signal, path, 'AAC')
+    normal, _ = video_reference.compare(earlier, same, include_sound_difference=True)
+    assert 'sound_difference' not in normal
+
+    fixture = reference_http
+    retained = fixture.store.put_bytes(submitted.read_bytes())
+
+    @contextmanager
+    def sessions():
+        with Session(fixture.engine) as db:
+            yield db
+
+    monkeypatch.setattr(v2_media_reference, 'default_store', lambda: fixture.store)
+    monkeypatch.setattr(v2_media_reference, 'get_session', sessions)
+    monkeypatch.setattr(settings, 'video_reference_sound_difference', True)
+    with sessions() as db:
+        analysis = db.get(Analysis, 'other-kind')
+        analysis.kind, analysis.status, analysis.filename = 'video', 'done', submitted.name
+        analysis.content_type = 'video/mp4'
+        analysis.sha256, analysis.size_bytes = retained.sha256, retained.size_bytes
+        db.commit()
+    endpoint = '/api/v2/analyses/other-kind/video-reference-comparison'
+    upload = {'earlier': (earlier.name, earlier.read_bytes(), 'video/mp4')}
+    assert fixture.client.get(endpoint, headers=fixture.viewer).json()['sound_difference_available'] is True
+    normal = fixture.client.post(endpoint, headers=fixture.viewer, files=upload)
+    assert normal.status_code == 200 and 'sound_difference' not in normal.json()['comparison']
+    conflicting = fixture.client.post(endpoint, headers=fixture.viewer, files=upload,
+                                      data={'timing_event_s': '1', 'include_sound_difference': 'true'})
+    assert conflicting.status_code == 422
+    response = fixture.client.post(endpoint, headers=fixture.viewer, files=upload,
+                                   data={'include_pdf': 'true', 'include_sound_difference': 'true'})
+    assert response.status_code == 200, response.text
+    exported = response.json()
+    record = exported['comparison']
+    assert record['schema'] == video_reference.SCHEMA_WITH_SOUND_DIFFERENCE
+    assert record['picture']['matching_frames'] == 100
+    difference = record['sound_difference']
+    assert difference['affects_overall_confidence'] is False
+    result = difference['range']
+    start, end = result['samples']
+    assert 2 * (min(end, 33920) - max(start, 23680)) >= max(end, 33920) - min(start, 23680)
+    assert result['earlier']['samples'] == result['submitted']['samples'] == result['samples']
+    assert all(pair['earlier']['rgb_sha256'] == pair['submitted']['rgb_sha256'] for pair in result['paired_pictures'].values())
+    assert result['earlier']['pcm_sha256'] != result['submitted']['pcm_sha256']
+    pdf = base64.b64decode(exported.pop('pdf'))
+    with pymupdf.open(stream=pdf, filetype='pdf') as report:
+        page = next(p for p in report if 'Soundtrack difference over matching pictures' in p.get_text())
+        assert len(page.get_images()) == 6
+        words = ' '.join(page.get_text().split())
+        assert 'Matching sound fell' in words
+        assert 'zero weight in the AI estimate' in words
+    (tmp_path / 'sound-difference.pdf').write_bytes(pdf)
+    target = tmp_path / 'sound-difference.json'
+    target.write_text(json.dumps(exported))
+    assert run(earlier, submitted, target, verify=True) == record
+    result['bands'][0]['correlation'][0] -= .01
+    target.write_text(json.dumps(exported))
+    with pytest.raises(ValueError, match='differs from the re-decoded sources'):
+        run(earlier, submitted, target, verify=True)
+
+
 def test_reencoded_soundtrack_shift_has_exact_paired_evidence_and_rejects_matched_picture_edit(tmp_path):
     yy, xx = np.indices((360, 480))
     light = np.uint8(120 + 22 * np.sin(xx / 9) * np.cos(yy / 11) + 11 * np.cos((xx + yy) / 4))

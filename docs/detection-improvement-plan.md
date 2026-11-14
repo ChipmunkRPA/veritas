@@ -67,7 +67,8 @@ are not public screening promises or calibrated population probabilities.
 - [Video insertion verification](video-insert-retention-2026-11-13.md)
   withholds a single range when the pictures outside it do not reliably
   match. Across two held collections it retained 20 correct ranges and
-  withheld 32 incorrect single ranges on multiple or mixed edits.
+  withheld 32 incorrect single ranges on multiple or mixed edits. It also
+  withheld two of 29 previously correct ranges, both on the same source.
 - [Single-upload public replay](independent-testing.md) now reproduces the
   latest four media studies in one command on macOS and Linux. The replay
   verifies recorded measurements and decisions. Independent external

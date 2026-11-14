@@ -46,6 +46,18 @@ retention and false-report gates. [Held ledger](evaluation-panels/video-insert-r
 · [Public transfer ledger](evaluation-panels/video-insert-retention-public-2026-11-13.json)
 · [Development ledger](evaluation-panels/video-insert-retention-development-2026-11-13.json)
 
+Replaying the original 72-delivery single-insertion confirmation recovered
+all 29 previously correct ranges under the original rule. With the stricter
+check, 27 of 29 remained measured, including 15 of 16 generated and 12 of 13
+ordinary insertions. Both newly unassessed deliveries came from one original
+source and the same exact [80, 110) frame interval. The eight-picture
+median mismatch of 0.03713 exceeded the fixed 0.035 limit in the retained
+section after the edit. Both passed the alternate-offset test. This is a
+loss of correct coverage under the stricter comparison. It shows why an
+unassessed pair can still contain a single insertion. The same frozen
+check was used for this replay.
+[Historical regression ledger](evaluation-panels/video-insert-retention-regression-2026-11-13.json)
+
 The scope is an earlier copy and an analyzed H.264 pair on the same verified
 24 fps clock, with matching geometry and a 480-pixel long side. The check
 may abstain if normal changes to the retained pictures compete with the match.
@@ -73,6 +85,8 @@ for bank in development held public; do
   python3 -B -S -m scripts.video_insert_retention_transfer review \
     "docs/evaluation-panels/video-insert-retention-${bank}-2026-11-13.json"
 done
+python3 -B -S -m scripts.review_video_insert_retention_regression \
+  docs/evaluation-panels/video-insert-retention-regression-2026-11-13.json
 ```
 
 The full comparison requires Python with NumPy and the app's video probe,
@@ -90,4 +104,6 @@ export PYTHONPATH=backend OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 VECLIB_MAXIMU
 backend/.venv/bin/python -B -m scripts.video_insert_retention_transfer development "$native_cache" --write "$dev_receipt"
 backend/.venv/bin/python -B -m scripts.video_insert_retention_transfer held "$confirmation_cache" --write "$held_receipt"
 backend/.venv/bin/python -B -m scripts.video_insert_retention_transfer public "$public_source" --write "$public_receipt"
+backend/.venv/bin/python -B -m scripts.review_video_insert_retention_regression "$new_regression_receipt" \
+  --native-cache "$confirmation_cache" --preflight "$native_cache"
 ```

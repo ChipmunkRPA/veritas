@@ -653,6 +653,7 @@ def test_authenticated_video_comparison_exports_exact_evidence_without_new_analy
     earlier, later, _, _ = aligned_pair
     stored = f.store.put_file(later)
     monkeypatch.setattr(settings, "video_reference_comparison_enabled", True)
+    monkeypatch.setattr(settings, "video_reference_picture_insertion", False)
 
     @contextmanager
     def sessions():

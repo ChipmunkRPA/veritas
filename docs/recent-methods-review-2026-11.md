@@ -29,6 +29,27 @@ were imported. Private keyed-watermark methods remain unavailable unless a
 real supported verifier is connected. This is applied software validation,
 not measured provider-watermark robustness.
 
+## Image editing under real delivery formats
+
+The published Relative Patch Response Learning comparison reports
+file-level balanced accuracy on locally edited photos across JPEG
+qualities. That result leaves precise region localization unverified.
+Its public code carries Apache-2.0 and the released adapter requires the
+separately licensed, access-gated DINOv3 backbone. The existing project
+transfer tested the relative response principle with a commercially
+reviewed checkpoint and recovered no exact region on six held sources.
+FUSED separately reports native mask metrics, including tests that
+restore original pixels outside edits. The released weights are MIT-tagged
+and the separately reviewed app implementation remains optional. Its
+published results further motivate keeping intact and recompressed edits
+separate in evaluations and measuring pixels before crediting a gain.
+[PRL evaluation](https://arxiv.org/html/2610.11876#S4.SS3) ·
+[PRL code and dependency](https://github.com/wittyuu/Relative-Patch-Response-Learning) ·
+[DINOv3 backbone access and terms](https://huggingface.co/facebook/dinov3-vitl16-pretrain-lvd1689m) ·
+[Local patch response transfer](image-relative-patch-transfer-2026-11-11.md) ·
+[FUSED evaluation](https://arxiv.org/abs/2608.28302) ·
+[Commercial model audit](commercial-model-audit.md)
+
 ## Audio: preserve the mixture and separate the targets
 
 The November [VeriSpoof report](https://arxiv.org/html/2611.04634v1) grounds

@@ -54,6 +54,13 @@ support the result, and the exact selected mask. The JSON proof records
 the measured quality. The comparison PDF and JSON export preserve the
 same crop and mask evidence. The earlier JPEG90 format remains readable.
 
+The app replay produced the same routes and masks on all 816 frozen pairs.
+Two isolated prepaid cases used Stripe test doubles and verified the
+original and submitted crops, rendered PDF pixels and exact JSON source
+replay. No analysis was created before the paid event. Chrome displayed
+the crops and overlay and downloaded matching JSON and a PDF for both
+profiles.
+
 Use the 34-source qualification paths described in the JPEG90 study.
 The native runner rebuilds the original and submitted bytes and the
 exact native truth. The standard-library reviewer independently verifies

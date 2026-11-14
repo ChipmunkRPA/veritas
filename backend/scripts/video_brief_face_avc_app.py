@@ -105,6 +105,8 @@ def run(bank, output):
                 result = {'bounded_proposal': bounded, 'scene_return_status': scene['status'],
                           'overall_assessment_equal': True, 'bounded_proposal_seconds': round(timings[-1], 3)}
                 if packets:
+                    import pymupdf
+
                     [packet] = packets
                     proof = packet['face_return']
                     assert [proof['start_frame_index'], proof['end_frame_index']] == expected['proposal']['frames']
@@ -115,8 +117,15 @@ def run(bank, output):
                                        zip(('before', 'during', 'after'), expected['proposal']['anchors'], strict=True)}
                     verified = verified_surfaces(client, aid, source, reference, evidence, packet, output / case,
                                                  representatives=representatives, initial_coverage=None)
+                    with pymupdf.open(output / case / 'report.pdf') as document:
+                        report = ' '.join(' '.join(page.get_text().split()) for page in document)
+                    assert 'Source frames compared at each boundary' in report
+                    for label, side in (('Start', 'entry'), ('End', 'exit')):
+                        frames = ', '.join(map(str, proof['edges'][side]['frame_indices']))
+                        assert f'{label} of change · frames {frames}' in report
                     result.update(range_frames=expected['proposal']['frames'], source_frames=list(representatives.values()),
                                   exact_source_exhibit_count=len(verified['exact_source_images']),
+                                  boundary_frame_lists_match_pdf_json=True,
                                   pdf_api_json_agree=verified['pdf_api_json_agree'],
                                   signed_original_replay=verified['signed_original_replay'],
                                   different_original_rejected=verified['different_original_rejected'])

@@ -232,6 +232,12 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
           : packet.whole_face_review ? 'These positions show sample coverage. Some frames may lack a usable face, and intervals between samples were unassessed.'
           : 'Only these frames were input to this window. This does not establish continuous coverage between them.'}</p>
       </details>}
+      {packet.face_return?.edges && <div className="mt-4 rounded-md border border-border p-3 text-small">
+        <h4 className="m-0 font-medium">Source frames compared at each boundary</h4>
+        <p className="mt-2 mb-0">Start of change · frames {packet.face_return.edges.entry.frame_indices.join(', ')}</p>
+        <p className="mt-1 mb-0">End of change · frames {packet.face_return.edges.exit.frame_indices.join(', ')}</p>
+        <p className="mt-2 mb-0 text-caption text-text-muted">At each boundary the check compared the first three frames with the last three.</p>
+      </div>}
       {!packet.picture_hold && !packet.picture_sequence && !packet.whole_face_review && !packet.scene_return && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
       {packet.face_spatial_cut && packet.face_spatial_cut_frames && <section className="mt-5 rounded-md border border-border p-3">
         <h4 className="m-0 text-small font-medium">Picture-cut context</h4>

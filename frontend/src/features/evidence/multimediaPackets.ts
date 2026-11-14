@@ -45,7 +45,8 @@ export interface VideoEvidencePacket extends PacketBase {
   face_spatial_cut_frames?: VideoEvidenceFrame[]
   face_return?: { method?: string; start_stream_s: number; end_stream_s: number;
     window_start_frame_index?: number;
-    frame_inputs: { frame_index: number }[]; scene_frame_inputs?: { frame_index: number }[] }
+    frame_inputs: { frame_index: number }[]; scene_frame_inputs?: { frame_index: number }[];
+    edges?: Record<'entry' | 'exit', { frame_indices: number[] }> }
   whole_face_review?: { flagged: boolean; time_base: string;
     samples: { frame_index: number; pts: number; responses_hex: [string | null, string | null] }[] }
   clip?: { status: 'unavailable'; reason: string } | { status: 'ready'; artifact_ref: string;

@@ -110,6 +110,10 @@ without exposing the original passages.
 The [four-second H.264 face comparison](video-brief-face-avc-confirmation-2026-11-13.md#local-replay)
 recounts exact source-frame ranges and control outcomes for six recordings
 and their paired deliveries.
+The [paired shortlist replay](video-brief-face-paired-shortlist-2026-11-13.md#replay)
+recounts both approaches on 56 retained deliveries and verifies the
+presentation ticks of the selected intervals and before, during and
+after frames.
 
 ### Reproduce the boundaries of four checks
 

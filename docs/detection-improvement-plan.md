@@ -163,6 +163,12 @@ are not public screening promises or calibrated population probabilities.
   route is a local trial with zero confidence weight. Both this trial and the
   existing short WebM review explain the two boundary readings and show the
   original frames in the browser, PDF and JSON.
+- [Scheduling both boundaries together](video-brief-face-paired-shortlist-2026-11-13.md)
+  added no edit locations or ordinary flags on 56 retained H.264 files.
+  All 11 missed edits were in clips already carrying one short range.
+  The app and Standard PDF now show the six source frames compared at
+  each boundary, matching the JSON. Simulated checkout and signed replay
+  verified those lists on both encodes of the known edit.
 - [JPEG75 and JPEG85 detail loss](image-jpeg-detail-quality-transfer-2026-11-13.md)
   adds 19 useful local blur ranges per format, without adding any highlight
   on 306 controls per format. It requires an earlier matching copy and

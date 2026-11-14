@@ -1,5 +1,5 @@
 import { EvidenceAudio, EvidencePicture } from './EvidenceMedia'
-import { rationalSeconds, seconds, type AudioEvidenceSet, type StereoChannelContext } from './multimediaPackets'
+import { rationalSeconds, seconds, type AudioEvidenceSet, type SampleInterval } from './multimediaPackets'
 
 const unassessed = {
   mono: 'The first audio stream is mono. Channel comparison does not apply.',
@@ -23,7 +23,7 @@ export default function AudioStereoContext({ set, token, mediaReady, videoOrigin
     && context.source_stream_index === set.source.source_stream_index
     && context.source_channel_count === set.source.source_channels
     && context.sample_rate === set.source.sample_rate && context.sample_rate > 0
-  const range = (window: StereoChannelContext['windows'][number]) =>
+  const range = (window: SampleInterval) =>
     seconds(window.start_sample / context.sample_rate) + '–' + seconds(window.end_sample / context.sample_rate)
   const strong = context.windows.filter((window) => window.status === 'strong_imbalance')
   const attenuated = hasDownmix ? context.windows.filter((window) => window.downmix?.strong_attenuation) : []
@@ -33,6 +33,9 @@ export default function AudioStereoContext({ set, token, mediaReady, videoOrigin
       const window = context.windows[stereo_window_index]
       return window ? [{ window, artifacts }] : []
     }) : []
+  const silence = context.channel_silence
+  const silenceAssets = listening?.schema === 'chipmunk.stereo-listening/1'
+    && listening.affects_overall_confidence === false ? listening.channel_silence : undefined
   return <section id="media-evidence-stereo" aria-labelledby="media-evidence-stereo-heading" className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
     <h3 id="media-evidence-stereo-heading" className="m-0 text-body font-medium">Stereo channel comparison</h3>
     {!bound ? <p role="alert" className="mt-2 mb-0 text-small text-text-muted">The channel measurements do not match this analyzed audio input.</p>
@@ -46,6 +49,46 @@ export default function AudioStereoContext({ set, token, mediaReady, videoOrigin
           Decoded audio {attenuated.slice(0, 3).map(range).join(', ')}{attenuated.length > 3 ? ', with more in the table.' : '.'}{' '}
           Sounds present in stereo may be harder to hear in the analyzed copy.
         </p>}
+        {silence?.schema === 'chipmunk.stereo-channel-silence/1' && silence.affects_overall_confidence === false
+          && <div className="mt-4 text-small">
+            <h4 className="m-0 font-medium">Exact silence in one channel</h4>
+            <p className="mt-2 mb-0 text-text-muted">{silence.checked_samples > 0
+              ? <>Checked {seconds(silence.checked_samples / context.sample_rate)} of aligned stereo audio. Found{' '}
+                {silence.qualifying_intervals} qualifying {silence.qualifying_intervals === 1 ? 'interval' : 'intervals'}
+                {silence.qualifying_intervals > silence.selected.length ? ', with the three longest shown.' : '.'}</>
+              : 'No continuous stereo segment was long enough for this check.'}</p>
+            {silence.selected.length > 0 && <p className="mt-2 mb-0 text-text-muted">One decoded channel reached exact zero while the other retained measurable sound. Channel automation, a noise gate, or an ordinary edit can cause this. Lossy encoding and resampling can change the zero samples and their boundaries. This check carries no weight in the AI assessment.</p>}
+            {silence.selected.map((row, index) => {
+              const assets = silenceAssets?.[index]?.artifacts
+              return <article key={row.silent_channel + row.start_sample} className="mt-4 border-t border-border pt-3"
+                onPlayCapture={(event) => {
+                  if (event.target instanceof HTMLAudioElement) pauseAudio(event.target)
+                }}>
+                <h5 className="m-0 font-medium"><span className="capitalize">{row.silent_channel}</span> channel silent, decoded audio {range(row)}</h5>
+                <p className="mt-1 mb-0 text-caption text-text-muted">Samples [{row.start_sample}, {row.end_sample}) at {context.sample_rate} Hz. The lowest measured 100 ms RMS in the other channel was {row.minimum_other_rms_dbfs} dBFS.</p>
+                {row.source_timestamp_ranges.map((item) => {
+                  const start = rationalSeconds(item.source_start_pts, item.time_base)
+                  const end = rationalSeconds(item.source_end_pts, item.time_base)
+                  return <p key={item.start_sample} className="m-0 text-caption text-text-muted">
+                    Source PTS [{item.source_start_pts}, {item.source_end_pts}) at {item.time_base}.
+                    {typeof videoOriginS === 'number' && Number.isFinite(videoOriginS) && start !== null && end !== null
+                      && start >= videoOriginS && ` Video playback ${seconds(start - videoOriginS)}–${seconds(end - videoOriginS)}.`}
+                  </p>
+                })}
+                {assets && <>
+                  <figure className="m-0 mt-3">
+                    <EvidencePicture set={set} artifact={assets.waveform} token={token} ready={mediaReady} chart
+                      alt={`Stereo waveform with ${row.silent_channel} channel silence highlighted at ${range(row)}`} />
+                    <figcaption className="text-caption text-text-muted">The waveform and playback include 100 ms before and after the highlighted interval.</figcaption>
+                  </figure>
+                  <div className="mt-3 grid gap-3 min-[900px]:grid-cols-3">
+                    {(['left', 'right', 'mono'] as const).map((channel) => <EvidenceAudio key={channel} set={set}
+                      artifact={assets[channel]} token={token} ready={mediaReady} alt={channels[channel]} />)}
+                  </div>
+                </>}
+              </article>
+            })}
+          </div>}
         {comparisons.length > 0 && <details className="mt-3 text-small"
           onPlayCapture={(event) => {
             if (event.target instanceof HTMLAudioElement) pauseAudio(event.target)

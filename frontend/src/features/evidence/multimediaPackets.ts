@@ -129,6 +129,14 @@ export interface StereoChannelContext {
   source_sha256: string; source_stream_index: number; source_channel_count: number
   sample_rate: number; max_seconds: number; quiet_floor_dbfs: number; strong_level_gap_db: number; silence_floor_dbfs: number
   mono_pcm_sha256?: string; strong_downmix_attenuation_db?: number
+  channel_silence?: {
+    schema: 'chipmunk.stereo-channel-silence/1'; affects_overall_confidence: false
+    checked_samples: number; qualifying_intervals: number
+    selected: (SampleInterval & {
+      silent_channel: 'left' | 'right'; flank_rms_dbfs: [number, number]; minimum_other_rms_dbfs: number
+      source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
+    })[]
+  }
   windows: (SampleInterval & {
     status: 'strong_imbalance' | 'measured' | 'quiet'
     left_rms_dbfs: number; right_rms_dbfs: number; level_gap_db: number | null; correlation: number | null
@@ -140,6 +148,7 @@ export interface StereoChannelContext {
 interface StereoListeningContext {
   schema: 'chipmunk.stereo-listening/1'; affects_overall_confidence: false
   windows: { stereo_window_index: number; artifacts: Record<'left' | 'right' | 'mono' | 'waveform', EvidenceAsset> }[]
+  channel_silence?: { artifacts: Record<'left' | 'right' | 'mono' | 'waveform', EvidenceAsset> }[]
 }
 type AudioRepeatSpan = SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] }
 interface AudioRepeatPair {

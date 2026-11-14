@@ -6,6 +6,8 @@ import re
 from collections.abc import Callable
 from typing import Any
 
+from app.evidence.audio_silence_binding import FLANK, MIN_FLANK_DBFS, MINIMUM, continuous_spans
+
 SAMPLE_RATE = 16_000
 SourceRanges = Callable[[int, int], list[dict[str, Any]]]
 
@@ -19,6 +21,17 @@ LEGACY_SILENCE_FLOOR_DBFS = -120
 # A one-sample, one-LSB pulse in one second of signed 16-bit PCM is about -132 dBFS.
 SILENCE_FLOOR_DBFS = -140
 _HASH = re.compile(r"[a-f0-9]{64}")
+CHANNEL_SILENCE = "channel_silence"
+CHANNEL_SILENCE_SCHEMA = "chipmunk.stereo-channel-silence/1"
+MAXIMUM_SILENCE = 2 * SAMPLE_RATE
+MAXIMUM_SILENCE_EVENTS = 3
+CHANNEL_SILENCE_METHOD = {
+    "minimum_zero_samples": MINIMUM,
+    "maximum_zero_samples": MAXIMUM_SILENCE,
+    "flank_samples": FLANK,
+    "minimum_rms_dbfs": MIN_FLANK_DBFS,
+    "maximum_events": MAXIMUM_SILENCE_EVENTS,
+}
 
 
 def unsupported_status(channels: int, layout: str | None) -> str | None:
@@ -93,7 +106,8 @@ def _validate(context: dict[str, Any], source: dict[str, Any], ranges: SourceRan
     windows = context["windows"]
     pcm_sha = context["stereo_pcm_sha256"]
     if reason or count == 0 or status == "unavailable":
-        if status != (reason or ("too_short" if count == 0 else "unavailable")) or windows != [] or pcm_sha is not None:
+        if (status != (reason or ("too_short" if count == 0 else "unavailable"))
+                or windows != [] or pcm_sha is not None or CHANNEL_SILENCE in context):
             raise ValueError("Unassessed stereo evidence contains inconsistent measurements")
         return
     if not _HASH.fullmatch(str(pcm_sha)) or not isinstance(windows, list) or len(windows) != count:
@@ -125,8 +139,46 @@ def _validate(context: dict[str, Any], source: dict[str, Any], ranges: SourceRan
         audible |= window_status != "quiet"
     if status != ("measured" if audible else "quiet"):
         raise ValueError("Stereo evidence summary differs from its measured windows")
+    if CHANNEL_SILENCE in context:
+        if schema != SCHEMA:
+            raise ValueError("Legacy stereo context cannot contain exact channel silence")
+        _validate_channel_silence(context[CHANNEL_SILENCE], source["timeline"], count * SAMPLE_RATE, ranges)
 
 
 def _valid_level(value: Any, silence_floor: int) -> bool:
     return (isinstance(value, (int, float)) and not isinstance(value, bool)
             and silence_floor <= value <= 0)
+
+
+def channel_silence_spans(timeline, limit):
+    return [(start, min(end, limit)) for start, end in continuous_spans(timeline)
+            if min(end, limit) - start >= MINIMUM + 2 * FLANK]
+
+
+def _validate_channel_silence(record, timeline, limit, ranges):
+    spans = channel_silence_spans(timeline, limit)
+    coverage = sum(end - start for start, end in spans)
+    count = record["qualifying_intervals"]
+    selected = record["selected"]
+    if (record["schema"] != CHANNEL_SILENCE_SCHEMA or record["affects_overall_confidence"] is not False
+            or record["method"] != CHANNEL_SILENCE_METHOD
+            or type(record["checked_samples"]) is not int or record["checked_samples"] != coverage
+            or type(count) is not int or not 0 <= count <= 2 * coverage // MINIMUM
+            or not isinstance(selected, list) or len(selected) != min(count, MAXIMUM_SILENCE_EVENTS)):
+        raise ValueError("Exact channel silence has invalid coverage")
+    previous = None
+    channel_ends = {}
+    for row in selected:
+        start, end, channel = row["start_sample"], row["end_sample"], row["silent_channel"]
+        levels = row["flank_rms_dbfs"]
+        if (type(start) is not int or type(end) is not int or channel not in ("left", "right")
+                or not MINIMUM <= end - start <= MAXIMUM_SILENCE
+                or not any(a <= start - FLANK and end + FLANK <= b for a, b in spans)
+                or row["source_timestamp_ranges"] != ranges(start, end)
+                or not isinstance(levels, list) or len(levels) != 2
+                or not all(_valid_level(level, MIN_FLANK_DBFS) for level in [*levels, row["minimum_other_rms_dbfs"]])
+                or previous is not None and previous >= (start, end, channel)
+                or channel_ends.get(channel, 0) > start):
+            raise ValueError("Exact channel silence differs from its measured scope or source timestamps")
+        previous = (start, end, channel)
+        channel_ends[channel] = end

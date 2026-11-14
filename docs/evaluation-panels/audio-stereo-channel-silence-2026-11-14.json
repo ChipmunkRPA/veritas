@@ -1,0 +1,49 @@
+{
+  "schema": "chipmunk.stereo-channel-silence-transfer/1",
+  "meeting_sessions": 2,
+  "source_excerpts": 24,
+  "rows": {
+    "original": {
+      "total": 24,
+      "flags": 0,
+      "exact": 0,
+      "mono_exact": 0,
+      "one_second_flags": 0
+    },
+    "left_120ms": {
+      "total": 24,
+      "flags": 9,
+      "exact": 9,
+      "mono_exact": 0,
+      "one_second_flags": 0
+    },
+    "right_240ms": {
+      "total": 24,
+      "flags": 10,
+      "exact": 10,
+      "mono_exact": 0,
+      "one_second_flags": 0
+    },
+    "attenuation": {
+      "total": 24,
+      "flags": 0,
+      "exact": 0,
+      "mono_exact": 0,
+      "one_second_flags": 0
+    },
+    "both_muted": {
+      "total": 24,
+      "flags": 0,
+      "exact": 0,
+      "mono_exact": 12,
+      "one_second_flags": 0
+    },
+    "right_240ms_aac": {
+      "total": 24,
+      "flags": 5,
+      "exact": 0,
+      "mono_exact": 0,
+      "one_second_flags": 0
+    }
+  }
+}

@@ -1230,6 +1230,9 @@ counts the directions that a fixed mono-plus-channel rule would change. The
 with mono on separate sources and reports the effects by noise condition.
 The [AMI intake](audio-ami-native-stereo-v291-result.md) adds 24 naturally
 recorded two-microphone windows for a separate genuine-audio test.
+The [single-channel silence test](audio-stereo-channel-silence-2026-11-14.md)
+reuses those windows to compare exact edit locations, ordinary recording
+controls, and AAC compression in 144 matched deliveries.
 Its [stereo transfer comparison](audio-ami-stereo-transfer-v293-result.md)
 reports identical decisions and unchanged coverage across both rules.
 The [room-transfer preflight](audio-room-transfer-preflight-v296-method.md)

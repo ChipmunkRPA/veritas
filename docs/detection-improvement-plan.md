@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Exact silence in one stereo channel](audio-stereo-channel-silence-2026-11-14.md)
+  reports exact sample intervals, a waveform and separate channel playback
+  in new audio and video analyses. It recovered 19 of 48 lossless
+  one-channel mutes with no flags on 72 matched controls. AAC changed
+  the measured boundaries. The check carries zero AI-confidence weight.
+
 - [Quieter earlier-copy soundtrack timing](video-soundtrack-quiet-2026-11-14.md)
   adds four useful locations on the prior 720p panel and six on quieter
   excerpts from the same source roster. Neither panel added control

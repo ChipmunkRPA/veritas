@@ -125,7 +125,9 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
                 raise ObjectIntegrityError("The evidence has an invalid background-reduced speech review")
             groups.append(review["artifacts"])
         if listening := part.get("stereo_listening"):
-            groups.extend(window["artifacts"] for window in listening["windows"])
+            from app.evidence.stereo_listening_binding import all_artifacts
+
+            groups.extend(all_artifacts(listening))
         if "stereo_repetition" in part:
             from app.evidence.stereo_repetition_binding import pairs, validate
 

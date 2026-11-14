@@ -140,3 +140,38 @@ it('plays only the committed comparison and anchors all four assets to its sampl
   expect(region.queryByText('Compare stereo and analyzed mono')).toBeNull()
   expect(region.queryByLabelText('Exact analyzed mono')).toBeNull()
 })
+
+it('shows the short channel-silence interval and contextual playback on the corresponding video clock', () => {
+  const set = fixture()
+  const context = set.stereo_context!
+  set.source.pcm_sha256 = 'd'.repeat(64)
+  set.stereo_context = {
+    ...context, schema: 'chipmunk.stereo-channel-context/2', mono_pcm_sha256: set.source.pcm_sha256,
+    channel_silence: {
+      schema: 'chipmunk.stereo-channel-silence/1', affects_overall_confidence: false,
+      checked_samples: 16000, qualifying_intervals: 1,
+      selected: [{
+        start_sample: 4800, end_sample: 8000, silent_channel: 'right',
+        flank_rms_dbfs: [-20, -19], minimum_other_rms_dbfs: -24,
+        source_timestamp_ranges: [{
+          start_sample: 4800, end_sample: 8000, source_start_pts: 36800, source_end_pts: 40000, time_base: '1/16000',
+        }],
+      }],
+    },
+  }
+  const clip = (hash: string): EvidenceAsset => ({
+    sha256: hash.repeat(64), media_type: 'audio/wav', url: '', samples: 6400, channels: 1, sample_rate: 16000,
+  })
+  set.stereo_listening = {
+    schema: 'chipmunk.stereo-listening/1', affects_overall_confidence: false, windows: [],
+    channel_silence: [{ artifacts: { left: clip('1'), right: clip('2'), mono: clip('3'),
+      waveform: { sha256: '4'.repeat(64), media_type: 'image/png', url: '', width: 960, height: 290 } } }],
+  }
+  render(<MemoryRouter><AudioEvidenceContent set={set} token="signed token" mediaReady videoOriginS={1.5} /></MemoryRouter>)
+  const item = within(screen.getByText(/channel silent, decoded audio/).closest('article')!)
+  expect(item.getByText(/Samples \[4800, 8000\)/)).toBeTruthy()
+  expect(item.getByText(/Video playback 0\.800 s–1\.000 s/)).toBeTruthy()
+  expect(item.getByAltText(/right channel silence highlighted/)).toBeTruthy()
+  expect(item.getByLabelText('Decoded right channel').getAttribute('src')).toContain(`/${'2'.repeat(64)}.wav?`)
+  expect(screen.getByText(/carries no weight in the AI assessment/)).toBeTruthy()
+})

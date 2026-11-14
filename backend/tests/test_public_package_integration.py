@@ -602,6 +602,10 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
         extra = ({('app.core.canonical', 'canonical_hash'), ('app.evidence', 'face_short_carrier_binding')}
                  if name == 'face_short_window_binding.py' else {('app.evidence', 'face_short_window_binding')})
         assert local == shared | extra
+    elif name == 'stereo_binding.py':
+        assert imports <= sys.stdlib_module_names | {'app'}
+        assert local == {('app.evidence.audio_silence_binding', item)
+                         for item in ('FLANK', 'MIN_FLANK_DBFS', 'MINIMUM', 'continuous_spans')}
     else:
         assert imports <= sys.stdlib_module_names
 

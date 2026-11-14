@@ -9,6 +9,27 @@
 {% else %}
 <p>Compared {{ stereo.windows | length }} complete one-second windows in the first {{ stereo.max_seconds }} seconds {% if has_downmix %}using the decoded stereo channels and the analyzed mono mix{% else %}before mono mixing{% endif %}. Stereo placement, mixing and microphone position can all affect these readings. They do not contribute to the AI assessment.</p>
 {% if stereo.status == 'quiet' %}<p>All measured windows fell below the {{ stereo.quiet_floor_dbfs }} dBFS review floor.</p>{% endif %}
+{% if stereo.channel_silence is defined %}
+{% set silence = stereo.channel_silence %}
+<h4>Exact silence in one channel</h4>
+{% if silence.checked_samples %}
+<p>Checked {{ '%.3f' | format(silence.checked_samples / stereo.sample_rate) }} s of aligned stereo audio. Found {{ silence.qualifying_intervals }} qualifying {{ 'interval' if silence.qualifying_intervals == 1 else 'intervals' }}{% if silence.qualifying_intervals > evidence.channel_silence | length %}, with the three longest shown{% endif %}.</p>
+{% else %}<p>No continuous stereo segment was long enough for this check.</p>{% endif %}
+{% if evidence.channel_silence %}
+<p>Each highlighted interval contains all-zero samples in one decoded channel. The opposite channel retained measurable sound. Channel automation, a noise gate, or an ordinary edit can cause this. Lossy encoding and resampling can change the zero samples and their boundaries. The check carries no weight in the AI assessment.</p>
+{% for row in evidence.channel_silence %}
+<article class="multimedia-evidence-packet multimedia-repeat-pair">
+<h4>{{ row.silent_channel | capitalize }} channel silent, decoded audio {{ '%.3f' | format(row.start_s) }}–{{ '%.3f' | format(row.end_s) }} s</h4>
+<p class="caption">Samples [{{ row.start_sample }}, {{ row.end_sample }}) at {{ stereo.sample_rate }} Hz.
+{% for range in row.ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% if range.playback %} Video playback {{ '%.3f' | format(range.playback[0]) }}–{{ '%.3f' | format(range.playback[1]) }} s.{% endif %}{% endfor %}
+The lowest measured 100 ms RMS in the other channel was {{ row.minimum_other_rms_dbfs }} dBFS. The waveform includes 100 ms before and after the highlighted interval.</p>
+{{ plates([row.waveform], true) }}
+<p class="caption evidence-hash">Waveform SHA-256 <span class="mono">{{ row.waveform.sha256 }}</span>.<br>
+JSON pointer <span class="mono">{{ row.json_pointer }}</span>.</p>
+</article>
+{% endfor %}
+{% endif %}
+{% endif %}
 {% if has_downmix %}
 {% set attenuated = stereo.windows | selectattr('downmix.strong_attenuation') | list %}
 {% if attenuated %}<p><strong>Strong level drop in the analyzed mono mix.</strong> {{ attenuated | length }} complete window{% if attenuated | length != 1 %}s{% endif %} met this review condition. Sounds present in stereo may be harder to hear in the analyzed copy.</p>{% endif %}

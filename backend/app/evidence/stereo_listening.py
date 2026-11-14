@@ -8,18 +8,33 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 from app.detectors.audio.decode import SAMPLE_RATE, wav_bytes
-from app.evidence.stereo_listening_binding import CHANNELS, DIMENSIONS, SCHEMA, select_windows, validate
+from app.evidence.audio_silence_binding import FLANK
+from app.evidence.stereo_binding import CHANNEL_SILENCE
+from app.evidence.stereo_listening_binding import (
+    CHANNELS,
+    DIMENSIONS,
+    SCHEMA,
+    all_artifacts,
+    channel_silence_intervals,
+    select_windows,
+    validate,
+)
 from app.storage.artefacts import register_artefact
 from app.storage.objects import ObjectIntegrityError
 
 PLOT_BOX = (108, 32, 933, 262)
 
 
+def _excerpts(stereo):
+    for index in select_windows(stereo):
+        window = stereo["windows"][index]
+        yield index, window["start_sample"], window["end_sample"]
+    for start, end in channel_silence_intervals(stereo):
+        yield None, start, end
+
+
 def selected_pcm(stereo: dict, pcm: np.ndarray) -> bytes:
-    return b"".join(
-        pcm[stereo["windows"][i]["start_sample"]:stereo["windows"][i]["end_sample"]].astype("<i2", copy=False).tobytes()
-        for i in select_windows(stereo)
-    )
+    return b"".join(pcm[start:end].astype("<i2", copy=False).tobytes() for _, start, end in _excerpts(stereo))
 
 
 def freeze(db, store, analysis_id: str, decoded):
@@ -33,40 +48,46 @@ def freeze(db, store, analysis_id: str, decoded):
                              created_by=SCHEMA, analysis_id=analysis_id)
 
 
-def _waveform(tracks: tuple[np.ndarray, ...]) -> bytes:
+def _waveform(tracks: tuple[np.ndarray, ...], *, mark_silence: bool = False) -> bytes:
     im = Image.new("RGB", DIMENSIONS, "#faf9f5")
     draw = ImageDraw.Draw(im)
     x0, x1 = PLOT_BOX[0], PLOT_BOX[2] - 1
     draw.text((x0, 10), "Same amplitude scale | Time within clip", fill="#203b30")
     labels = ("Left channel", "Right channel", "Analyzed mono")
     colors = ("#176853", "#315b96", "#9b511e")
+    sample_count = len(tracks[0])
     for index, (track, label, color) in enumerate(zip(tracks, labels, colors, strict=True)):
         mid = 67 + 80 * index
         draw.text((10, mid - 7), label, fill="#203b30")
         draw.rectangle((x0, mid - 34, x1, mid + 34), outline="#c6cbc0")
+        if mark_silence:
+            margin = round((x1 - x0) * FLANK / sample_count)
+            draw.rectangle((x0 + margin, mid - 33, x1 - margin, mid + 33), fill="#f0e4ca")
         draw.line((x0, mid, x1, mid), fill="#c6cbc0")
         for i, chunk in enumerate(np.array_split(track, x1 - x0)):
             draw.line((x0+i, mid-float(chunk.max())*32, x0+i, mid-float(chunk.min())*32), fill=color)
     for i in range(5):
-        draw.text((x0 - 12 + i * (x1 - x0) / 4, 267), f"{i/4:.2f}s", fill="#203b30")
+        draw.text((x0 - 12 + i * (x1 - x0) / 4, 267), f"{i * sample_count / (4 * SAMPLE_RATE):.2f}s", fill="#203b30")
     out = io.BytesIO()
     im.save(out, "PNG")
     return out.getvalue()
 
 
 def payloads(data: bytes, stereo: dict, pcm: np.ndarray, *, waveform: bool = True):
-    selected = select_windows(stereo)
-    if len(data) != len(selected) * 4 * SAMPLE_RATE or not selected:
+    excerpts = list(_excerpts(stereo))
+    if not excerpts or len(data) != 4 * sum(end - start for _, start, end in excerpts):
         raise ObjectIntegrityError("Stereo listening data does not cover the selected sample intervals")
-    pairs = np.frombuffer(data, dtype="<i2").reshape(len(selected), SAMPLE_RATE, 2)
-    for index, pair in zip(selected, pairs, strict=True):
-        window = stereo["windows"][index]
-        start, end = window["start_sample"], window["end_sample"]
+    values = np.frombuffer(data, dtype="<i2").reshape(-1, 2)
+    offset = 0
+    for index, start, end in excerpts:
+        count = end - start
+        pair = values[offset:offset + count]
+        offset += count
         tracks = (pair[:, 0].astype(np.float32) / 32768, pair[:, 1].astype(np.float32) / 32768, pcm[start:end])
         files = {name: wav_bytes(track) for name, track in zip(CHANNELS, tracks, strict=True)}
         if waveform:
-            files["waveform"] = _waveform(tracks)
-        yield index, files
+            files["waveform"] = _waveform(tracks, mark_silence=index is None)
+        yield index, count, files
 
 
 def _frozen_data(store, digest: str) -> bytes:
@@ -79,13 +100,16 @@ def build(store, digest: str | None, stereo: dict | None, pcm: np.ndarray, asset
         return None
     if not stereo:
         raise ObjectIntegrityError("Stereo listening requires its source-clock measurements")
-    rows = []
-    for index, files in payloads(_frozen_data(store, digest), stereo, pcm):
-        artifacts = {name: asset(files[name], "audio/wav", samples=SAMPLE_RATE, sample_rate=SAMPLE_RATE, channels=1)
+    result = {"schema": SCHEMA, "affects_overall_confidence": False, "windows": []}
+    for index, count, files in payloads(_frozen_data(store, digest), stereo, pcm):
+        artifacts = {name: asset(files[name], "audio/wav", samples=count, sample_rate=SAMPLE_RATE, channels=1)
                      for name in CHANNELS}
         artifacts["waveform"] = asset(files["waveform"], "image/png", width=DIMENSIONS[0], height=DIMENSIONS[1])
-        rows.append({"stereo_window_index": index, "artifacts": artifacts})
-    return {"schema": SCHEMA, "affects_overall_confidence": False, "windows": rows}
+        if index is None:
+            result.setdefault(CHANNEL_SILENCE, []).append({"artifacts": artifacts})
+        else:
+            result["windows"].append({"stereo_window_index": index, "artifacts": artifacts})
+    return result
 
 
 def verify_payloads(listening: dict, stereo: dict, pcm: np.ndarray, data: bytes, *, read_waveform=None) -> set[str]:
@@ -94,9 +118,9 @@ def verify_payloads(listening: dict, stereo: dict, pcm: np.ndarray, data: bytes,
     except ValueError as error:
         raise ObjectIntegrityError(str(error)) from error
     wav_digests = set()
-    for row, (_, files) in zip(listening["windows"], payloads(data, stereo, pcm, waveform=read_waveform is not None), strict=True):
+    for assets, (_, _, files) in zip(all_artifacts(listening), payloads(data, stereo, pcm, waveform=read_waveform is not None), strict=True):
         for name, body in files.items():
-            recorded = row["artifacts"][name]["sha256"]
+            recorded = assets[name]["sha256"]
             if name == "waveform":
                 # Replay plot pixels independent of font rendering and PNG encoding.
                 try:

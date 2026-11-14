@@ -827,7 +827,9 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.mouth_hold_sound', 'app.evidence.mouth_local_hold_binding','app.evidence.source_geometry',
                         'app.evidence.image_eligibility','app.evidence.image_copy_similarity_binding','app.evidence.image_interpolation_binding',
                         'app.evidence.image_copy_affine_binding','app.evidence.image_embedded_pair_binding',
-                        'app.evidence.document_scope','app.evidence.email_alternatives'):
+                        'app.evidence.image_animation_binding','app.evidence.image_transparency_binding',
+                        'app.evidence.document_scope','app.evidence.email_alternatives',
+                        'app.evidence.document_invisible_characters','app.evidence.document_native_locations'):
             return None
         if fullname.startswith(('app.storage','app.core.config','app.detectors','app.evidence','app.api')):
             raise RuntimeError('Offline verifier imported runtime: '+fullname)
@@ -898,6 +900,7 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
     stereo_path = tmp_path / 'stereo.wav'
     left = np.rint(original.pcm * 32768).astype('<i2')
     right = left.copy()
+    right[8202:11402] = 0
     right[2 * SAMPLE_RATE:3 * SAMPLE_RATE] *= -1
     with wave.open(str(stereo_path), 'wb') as stereo_wav:
         stereo_wav.setparams((2, 2, SAMPLE_RATE, 0, 'NONE', ''))
@@ -940,7 +943,7 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         assert mapping == reference.mapping
         assert binding['mapping_sha256'] == canonical_hash(reference.mapping)
         listening_pcm_sha = binding['stereo_listening_pcm_sha256']
-        assert len(f.store.read_bytes(listening_pcm_sha)) == 4 * SAMPLE_RATE
+        assert len(f.store.read_bytes(listening_pcm_sha)) == 4 * (SAMPLE_RATE + 6400)
         assert binding['pcm_sha256'] == reference.mapping['pcm_sha256']
         assert f.store.read_bytes(binding['wav_sha256']) == reference.wav
         np.testing.assert_array_equal(ctx.state['audio'].pcm, reference.pcm)
@@ -990,6 +993,10 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         listening = f.document['audio']['stereo_listening']
         assert [row['stereo_window_index'] for row in listening['windows']] == [2]
         assert listening['affects_overall_confidence'] is False
+        (selected,) = stereo['channel_silence']['selected']
+        assert (selected['start_sample'], selected['end_sample'], selected['silent_channel']) == (8202, 11402, 'right')
+        assert selected['source_timestamp_ranges'][0]['source_start_pts'] == 94602
+        assert listening['channel_silence'][0]['artifacts']['right']['samples'] == 6400
 
         monkeypatch.setattr(v2_evidence_packets, 'get_session', sessions)
         monkeypatch.setattr(v2_evidence_packets, 'default_store', lambda: f.store)
@@ -1003,6 +1010,9 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         assert 'Stereo soundtrack comparison' in text and 'Mono is digitally silent' in text
         assert '[118400, 134400)' in text and '/audio/stereo_context' in text
         assert '/audio/stereo_listening/windows/0' in text
+        assert '/audio/stereo_context/channel_silence/selected/0' in text
+        assert 'Right channel silent, decoded audio 0.513–0.713 s' in ' '.join(text.split())
+        assert 'Video playback 0.913–1.113 s' in ' '.join(text.split())
         assert 'Video playback 2.400–3.400 s' in ' '.join(text.split())
         assert 'Unscored voice intervals' in text and '/audio/coverage/unscored_intervals' in text
         assert 'Unscored voice during a mono level drop' in text and '/audio/coverage/stereo_attenuation_overlaps' in text

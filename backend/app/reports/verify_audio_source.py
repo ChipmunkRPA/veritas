@@ -12,6 +12,7 @@ from app.detectors.audio.decode import decode_audio, source_ranges, wav_bytes
 from app.evidence import mouth_hold_sound, mouth_local_hold_binding
 from app.evidence.audio_binding import SPEECH_SELECTION
 from app.evidence.av_binding import TIMING_WINDOWS
+from app.evidence.stereo_binding import CHANNEL_SILENCE
 from app.evidence.stereo_binding import SCHEMA as STEREO_CONTEXT_SCHEMA
 from app.reports.public_verify import SCHEMA
 
@@ -104,9 +105,15 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 raise ValueError("Speech window selection differs from the original source timeline")
         replay_detail += f" Verified source times for {len(selection['windows'])} recorded speech windows."
     if stereo and stereo["schema"] == STEREO_CONTEXT_SCHEMA and stereo["stereo_pcm_sha256"] is not None:
-        if stereo != decoded.mapping.get("stereo_context"):
+        measured = dict(decoded.mapping.get("stereo_context", {}))
+        if CHANNEL_SILENCE not in stereo:
+            measured.pop(CHANNEL_SILENCE, None)  # Earlier signed exports predate this measurement.
+        if stereo != measured:
             raise ValueError("Stereo channel and mono-downmix evidence differs from the original audio samples")
         replay_detail += f" Recomputed stereo channel and mono-downmix evidence for {len(stereo['windows'])} windows."
+        if CHANNEL_SILENCE in stereo:
+            count = len(stereo[CHANNEL_SILENCE]["selected"])
+            replay_detail += f" Recomputed exact channel silence and validated {count} selected intervals."
     covered = set()
     intervals = 0
     for label, span, timestamps, asset in _clips(audio, alignment):
@@ -145,7 +152,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                                            read_waveform=lambda sha: archive.read(plots[sha])))
         except ObjectIntegrityError as error:
             raise ValueError(str(error)) from error
-        intervals += 3 * len(listening["windows"])
+        intervals += 3 * (len(listening["windows"]) + len(listening.get(CHANNEL_SILENCE, [])))
     if repeated is not None:
         from app.evidence.audio_gain_repetition_binding import GAIN_VERSION
         from app.evidence.stereo_repetition import native_pcm, verify

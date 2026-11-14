@@ -33,6 +33,24 @@ function distinctTimingSamples(rows: { interval: SampleInterval }[]) {
   return total
 }
 
+function unmeasuredSourceRanges(rows: { interval: SampleInterval }[], source: VideoAVChannel['source']) {
+  const track = source.timeline?.[0]
+  if (source.timeline?.length !== 1 || !track || !source.sample_rate || !source.timeline_time_base || source.samples == null) return []
+  const ranges: string[] = []
+  let end = 0
+  for (const { start_sample, end_sample } of [...rows.map(({ interval }) => interval),
+    { start_sample: source.samples, end_sample: source.samples }]) {
+    if (start_sample > end) {
+      const start = rationalSeconds(track.source_pts + end, source.timeline_time_base)
+      const stop = rationalSeconds(track.source_pts + start_sample, source.timeline_time_base)
+      const digits = (start_sample - end) * 1000 < source.sample_rate ? 6 : 3
+      if (start !== null && stop !== null) ranges.push(`${start.toFixed(digits)} s–${stop.toFixed(digits)} s`)
+    }
+    end = Math.max(end, end_sample)
+  }
+  return ranges
+}
+
 function SourceInterval({ packet }: { packet: VideoAVPacket }) {
   return <div className="mt-3 text-caption text-text-muted">
     {packet.anchor.source_timestamp_ranges.map((range, index) => <p key={index} className="mt-1 mb-0 font-mono">Selected source interval: {intervalLabel(range)}
@@ -50,6 +68,7 @@ export default function VideoAVEvidenceContent({ set, channel, token, mediaReady
   const unmeasured = timingWindows?.filter((row) => row.status !== 'measured')
   const measured = timingWindows?.filter((row) => row.status === 'measured')
   const sampleRate = channel.source.sample_rate ?? 0
+  const timingGaps = measured ? unmeasuredSourceRanges(measured, channel.source) : []
   const flaggedWindows = channel.packets.filter(hasTimingChange)
   return <div data-testid="video-av-evidence">
     <p className="mt-2 mb-0 text-small text-text-muted">Compare measured mouth appearance and audio energy on their original clocks. Correlation and timing differences do not prove AI generation, editing, or who is speaking.</p>
@@ -73,6 +92,10 @@ export default function VideoAVEvidenceContent({ set, channel, token, mediaReady
       <p className="mt-2 mb-0 text-text-muted">{timingWindows.length - unmeasured.length} of {timingWindows.length} scheduled one-second windows reached a timing measurement. These overlapping windows are scheduled within the decoded soundtrack. A measurement can still yield an inconclusive timing result.</p>
       {sampleRate > 0 && <p className="mt-2 mb-0 text-text-muted">Timing measurements covered {seconds(distinctTimingSamples(measured) / sampleRate)} of{' '}
         {seconds(distinctTimingSamples(timingWindows) / sampleRate)} scheduled. Overlapping time is counted once.</p>}
+      {timingGaps.length > 0 && <details open={timingGaps.length <= 12} className="mt-3">
+        <summary className="cursor-pointer">Soundtrack time without a timing measurement ({timingGaps.length})</summary>
+        <ul className="mt-2 mb-0 space-y-2 font-mono text-text-muted">{timingGaps.map((range) => <li key={range}>{range}</li>)}</ul>
+      </details>}
       {unmeasured.length > 0 && <details open={unmeasured.length <= 12} className="mt-3">
         <summary className="cursor-pointer">Unassessed windows on the source clock ({unmeasured.length})</summary>
         <ul className="mt-2 mb-0 space-y-2 text-text-muted">{unmeasured.map((row) => <li key={row.interval.start_sample}>

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [background-downweighted soundtrack replay](video-whitened-sound-transfer-2026-11-14.md#replay)
+recounts fixed-frequency and reweighted comparisons in clean, rain, train
+and competing-speech deliveries. It includes actual retimed pictures and
+checks whether both repeated soundtrack locations match the staged truth.
+
 The [single-upload editorial replay](writing-editorial-worker-audit-2026-11-14.md#replay)
 recounts actual worker decisions, selected evidence and how much of the
 known changed wording each selection covers. It distinguishes ordinary

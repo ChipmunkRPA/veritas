@@ -16,6 +16,17 @@ the number of speech ticks. Silence, an absent or too-short soundtrack,
 and discontinuous audio clocks still use the channel-level coverage
 message where this schedule cannot run.
 
+The browser and Standard PDF also list the parts of the decoded soundtrack
+that no measured window covered. A window may be unassessed even though a
+neighboring measured window covers some of the same time. The separate
+list excludes that overlap and includes unscheduled time at the start or
+end of the decoded soundtrack. Its ranges use the same source timestamps
+as the window rows. To reproduce them, merge the sample ranges of the
+`measured` rows in `/av/coverage/timing_windows/windows`, then take the
+complement inside `[0, /av/source/samples)`. Add the decoded track's
+`/av/source/timeline/0/source_pts` to the bounds before converting its
+ticks to seconds.
+
 ## Local comparison
 
 Three deliveries use one archived CREMA-D recording. The moving and held

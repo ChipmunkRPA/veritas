@@ -15,7 +15,7 @@ import numpy as np
 from PIL import Image
 
 from app.core.canonical import canonical_hash, canonical_json
-from app.detectors.audio.coverage import coverage_seconds
+from app.detectors.audio.coverage import interval_union
 from app.evidence import document_scope, service
 from app.evidence.av_binding import (
     AUDIO_CLOCK_BREAKS,
@@ -1319,11 +1319,21 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     if timing := (document.get("av", {}).get("coverage") or {}).get(TIMING_WINDOWS):
         rows = timing["windows"]
         unmeasured = [row for row in rows if row["status"] != "measured"]
-        spans = [(row["interval"]["start_sample"] / 16000, row["interval"]["end_sample"] / 16000) for row in rows]
-        measured_spans = [span for row, span in zip(rows, spans, strict=True) if row["status"] == "measured"]
+        source = document["av"]["source"]
+        rate, origin = source["sample_rate"], source["timeline"][0]["source_pts"]
+        spans = [(row["interval"]["start_sample"], row["interval"]["end_sample"]) for row in rows]
+        measured_spans = interval_union(span for row, span in zip(rows, spans, strict=True) if row["status"] == "measured")
+        gaps, cursor = [], 0
+        for start, end in (*measured_spans, (source["samples"], source["samples"])):
+            if start > cursor:
+                digits = 6 if (start - cursor) * 1000 < rate else 3
+                gaps.append({"start_s": f"{(origin + cursor) / rate:.{digits}f}", "end_s": f"{(origin + start) / rate:.{digits}f}"})
+            cursor = end
         timing_view = {"total": len(rows), "measured": len(rows) - len(unmeasured),
-                       "scheduled_seconds": f"{coverage_seconds(spans):.3f}",
-                       "measured_seconds": f"{coverage_seconds(measured_spans):.3f}",
+                       "scheduled_seconds": f"{sum(end - start for start, end in interval_union(spans)) / rate:.3f}",
+                       "measured_seconds": f"{sum(end - start for start, end in measured_spans) / rate:.3f}",
+                       "audio_seconds": f"{source['samples'] / rate:.3f}", "gaps": gaps[:TIMING_DISPLAY_LIMIT],
+                       "unlisted_gaps": max(0, len(gaps) - TIMING_DISPLAY_LIMIT),
                        "unlisted": max(0, len(unmeasured) - TIMING_DISPLAY_LIMIT), "unmeasured": []}
         for row in unmeasured[:TIMING_DISPLAY_LIMIT]:
             interval = row["interval"]

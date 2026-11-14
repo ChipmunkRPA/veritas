@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Background downweighting for a single soundtrack](video-whitened-sound-transfer-2026-11-14.md)
+  found zero added useful locations across 60 noisy edits per carrier and
+  added two ordinary control flags per carrier. Both candidates stay offline.
+  The app and Standard PDF now show the decoded soundtrack intervals that
+  lacked any timing measurement.
+
 - [Single-upload writing on dated journal revisions](writing-editorial-worker-audit-2026-11-14.md)
   found passage cards on 16 of 21 ordinary revisions and useful middle-sentence
   coverage on 18 of 32 model rewrites. All 74 overall results were inconclusive.

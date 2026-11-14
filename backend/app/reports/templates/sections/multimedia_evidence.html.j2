@@ -62,6 +62,12 @@
 <h3 id="multimedia-av-timing-coverage">Speech and mouth timing coverage</h3>
 <p>{{ timing.measured }} of {{ timing.total }} scheduled one-second windows reached a timing measurement. These overlapping windows are scheduled within the decoded soundtrack. A measurement can still yield an inconclusive timing result.</p>
 <p>Timing measurements covered {{ timing.measured_seconds }} s of {{ timing.scheduled_seconds }} s scheduled. Overlapping time is counted once.</p>
+{% if timing.gaps %}
+<h4>Soundtrack time without a timing measurement</h4>
+<p>These ranges are within {{ timing.audio_seconds }} s of decoded audio.</p>
+<ul>{% for gap in timing.gaps %}<li>{{ gap.start_s }}–{{ gap.end_s }} s</li>{% endfor %}</ul>
+{% if timing.unlisted_gaps %}<p class="caption">{{ timing.unlisted_gaps }} more ranges can be reconstructed from the JSON's measured windows and decoded sample count.</p>{% endif %}
+{% endif %}
 {% if timing.unmeasured %}
 <table class="multimedia-locator">
 <thead><tr><th>Original video time</th><th>Why timing was unassessed</th></tr></thead>

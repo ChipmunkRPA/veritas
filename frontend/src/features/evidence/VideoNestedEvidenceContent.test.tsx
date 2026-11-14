@@ -104,12 +104,16 @@ describe('video v3 nested source-bound evidence', () => {
     const set = fixture()
     const av = set.av!
     av.coverage = { ...av.coverage!, timing_windows: { windows: [0, 7680, 16000].map((start, index) => ({
-      status: index === 2 ? 'no_face_track' : 'measured', speech_ticks: 16,
+      status: index === 0 ? 'insufficient_audio_context' : index === 2 ? 'no_face_track' : 'measured', speech_ticks: 16,
       interval: { start_sample: start, end_sample: start + 16000, source_start_pts: 86400 + start,
         source_end_pts: 102400 + start, time_base: '1/16000' },
     })) } }
     show(set)
-    expect(screen.getByText(/Timing measurements covered 1.480 s of 2.000 s scheduled/)).toBeTruthy()
+    expect(screen.getByText(/Timing measurements covered 1.000 s of 2.000 s scheduled/)).toBeTruthy()
+    const gaps = screen.getByText('Soundtrack time without a timing measurement (2)').parentElement!
+    expect(within(gaps).getAllByRole('listitem').map((item) => item.textContent)).toEqual([
+      '5.400 s–5.880 s', '6.880 s–9.000 s',
+    ])
   })
 
   it('shares parent media authority and preserves differing source and clip clocks', () => {

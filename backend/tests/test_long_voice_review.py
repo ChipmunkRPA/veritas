@@ -136,9 +136,12 @@ def test_auxiliary_run_only_copies_the_detect_stage_pin(tmp_path):
         assert {row.id for row in runs.current(db, "input", store, include_auxiliary=True)} == {"primary", "attempt-a"}
 
 
-def test_focused_review_retains_input_readings_and_binds_narrower_playback():
+@pytest.mark.parametrize("schema", [binding.FOCUSED_SCHEMA, binding.RESAMPLED_FOCUSED_SCHEMA])
+def test_focused_review_retains_input_readings_and_binds_narrower_playback(schema):
     pcm = np.arange(160_001, dtype=np.int32).astype("<i2").astype("<f4") / 32768
     source = native_source(len(pcm)) | {"pcm_sha256": sha256(pcm.tobytes()).hexdigest()}
+    if schema == binding.RESAMPLED_FOCUSED_SCHEMA:
+        source.update(source_sample_rate=48_000, source_container="wav", source_codec="pcm_s16le")
     schedule = binding.focused_intervals(len(pcm))
     assert schedule == [(0, 48000), (24000, 72000), (48000, 96000), (56000, 104000),
                         (72000, 120000), (96000, 144000), (112001, 160001)]
@@ -154,7 +157,7 @@ def test_focused_review_retains_input_readings_and_binds_narrower_playback():
                        {"start_sample": 56000, "end_sample": 104000, "basis": "sparse", "supporting_windows": [0, 3]}]
     for region in regions:
         region["pcm_sha256"] = pin(region["start_sample"], region["end_sample"])
-    receipt = {"schema": binding.FOCUSED_SCHEMA, "status": "corroborated", "reason": binding.FOCUSED_REASONS["corroborated"],
+    receipt = {"schema": schema, "status": "corroborated", "reason": binding.FOCUSED_REASONS["corroborated"],
                "windows": windows, "regions": regions}
     raw = canonical_json({"detector_id": binding.DETECTOR_ID, "status": "ok",
                           "details": {"pcm_sha256": source["pcm_sha256"], "long_voice_review": receipt}})
@@ -177,6 +180,12 @@ def test_focused_review_retains_input_readings_and_binds_narrower_playback():
     audio_long_review.verify(review, record, store=store, source=source, pcm=pcm, mapping=source,
                              read_asset=assets.__getitem__, waveform=audio_packets._chart)
     audio_long_review.verify_source(review, pcm=pcm, mapping=source, waveform=audio_packets._chart)
+    if schema == binding.RESAMPLED_FOCUSED_SCHEMA:
+        assert "decoded 16 kHz mono audio" in review["limitation"]
+        for altered in ({"source_sample_rate": 44100}, {"source_channels": 2},
+                        {"timeline": [{"start_sample": 0, "end_sample": len(pcm), "source_pts": 1}]}):
+            with pytest.raises(ValueError, match="source scope"):
+                binding.validate(review, source | altered)
     changed = deepcopy(review)
     changed["regions"][0]["supporting_windows"] = [0, 2]
     with pytest.raises(ValueError, match="region or source clock"):

@@ -44,11 +44,12 @@ def _waveform(window, pcm, waveform):
 
 def build(record, *, store, source, pcm, mapping, asset, waveform):
     raw = _receipt(record, store, source)
-    focused = raw.get("schema") == binding.FOCUSED_SCHEMA
+    schema = raw.get("schema")
+    focused = schema in binding.FOCUSED_SCHEMAS
     fields = {"schema", "status", "reason", "windows", "regions"} if focused else {"schema", "status", "reason", "windows"}
-    if (set(raw) != fields or not binding.supported_source(mapping)
-            or not binding.supported_source(source)):
-        raise ValueError("Long speech-window receipt is outside its native source profile")
+    if (set(raw) != fields or schema not in binding.LIMITATIONS or not binding.supported_review_source(mapping, schema)
+            or not binding.supported_review_source(source, schema)):
+        raise ValueError("Long speech-window receipt is outside its source profile")
 
     def artifacts(reading):
         start, end = reading["start_sample"], reading["end_sample"]
@@ -63,7 +64,7 @@ def build(record, *, store, source, pcm, mapping, asset, waveform):
         witness = _sample_witness(reading, pcm, mapping)
         assets = artifacts(reading) if not focused and raw["status"] == "corroborated" and reading["direction"] == "ai" else {}
         windows.append({**reading, "source_timestamp_ranges": witness, "artifacts": assets})
-    document = {**raw, "title": binding.TITLE, "limitation": binding.FOCUSED_LIMITATION if focused else binding.LIMITATION,
+    document = {**raw, "title": binding.TITLE, "limitation": binding.LIMITATIONS[schema],
                 "affects_overall_confidence": False, "windows": windows}
     if focused:
         regions = []

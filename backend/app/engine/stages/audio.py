@@ -40,8 +40,8 @@ from app.detectors.audio.coverage import content_rows, coverage_seconds, scored_
 from app.detectors.audio.decode import decode_audio
 from app.detectors.common.fusion import fuse as legacy_fuse
 from app.detectors.common.fusion import fuse_probability, prob_to_signal_fields
-from app.detectors.video.adapters.audio import NO_ADMITTED_VOICE
 from app.detectors.video import segments as temporal_segments
+from app.detectors.video.adapters.audio import NO_ADMITTED_VOICE
 from app.detectors.video.audio import SR, VOICE_WINDOW_S, limit_voice_signal
 from app.detectors.video.decode import _input
 from app.engine import provenance_gate
@@ -174,6 +174,7 @@ def decode(ctx: StageContext) -> dict[str, Any]:
             "short_voice_review_source_supported": supported_source(decoded.mapping),
             "short_voice_review_source_codec": decoded.mapping.get("source_codec"),
             "long_voice_review_source_supported": audio_long_review_binding.supported_source(decoded.mapping),
+            "long_voice_review_resampled_source_supported": audio_long_review_binding.supported_resampled_source(decoded.mapping),
             "background_voice_review_source_supported": background_binding.supported_source(decoded.mapping),
             "sha256": hashlib.sha256(pcm.tobytes()).hexdigest(), "evidence_input": binding, "artefacts": objects,
             "source_clock_break_count": len(clock_breaks)}
@@ -232,18 +233,24 @@ def _background_voice_review(ctx: StageContext, track, entries: list[dict]) -> d
 def _long_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict | None:
     from app.core.config import settings
 
-    if (settings.audio_detector_mode != "candidate" or Profile(ctx.profile) is not Profile.FULL
-            or not ctx.outputs["decode"].get("long_voice_review_source_supported") or provenance_gate.stop(ctx)):
+    if (settings.audio_detector_mode != "candidate" or Profile(ctx.profile) is not Profile.FULL or provenance_gate.stop(ctx)):
         return None
+    decoded = ctx.outputs["decode"]
     focused = (settings.audio_focused_long_review and track is not None and track.pcm is not None
                and audio_long_review_binding.focused_scope(len(track.pcm)))
+    if focused and settings.audio_focused_long_48k_review and decoded.get("long_voice_review_resampled_source_supported"):
+        schema = audio_long_review_binding.RESAMPLED_FOCUSED_SCHEMA
+    elif decoded.get("long_voice_review_source_supported"):
+        schema = audio_long_review_binding.FOCUSED_SCHEMA if focused else audio_long_review_binding.SCHEMA
+    else:
+        return None
     if not any(entry.get("detector_id") == long_voice_review.PellaVoiceDetector.spec.id
                and entry.get("status") in {"ok", "not_applicable"} for entry in entries):
-        return long_voice_review.skipped(audio_long_review_binding.SKIPPED_UNAVAILABLE, focused=focused)
+        return long_voice_review.skipped(audio_long_review_binding.SKIPPED_UNAVAILABLE, schema=schema)
     remaining = ctx.deadline.remaining()
     if remaining is not None and remaining < long_voice_review.BUDGET_S + long_voice_review.PIPELINE_RESERVE_S:
-        return long_voice_review.skipped(audio_long_review_binding.SKIPPED_BUDGET, focused=focused)
-    detector = long_voice_review.LongVoiceReview(focused=focused)
+        return long_voice_review.skipped(audio_long_review_binding.SKIPPED_BUDGET, schema=schema)
+    detector = long_voice_review.LongVoiceReview(schema=schema)
     run_ctx = RunContext(analysis_id=ctx.analysis_id, media=common.media(ctx), profile=ctx.profile, device="cpu",
                          dtype=None, lease=None, outputs=StageOutputs(audio=track), deadline=ctx.deadline,
                          exhibits=ctx.exhibits.bind(detector.spec.id), log=ctx.log.bind(detector_id=detector.spec.id))
@@ -251,10 +258,10 @@ def _long_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict | 
     review = run_detector(detector, run_ctx, store=store, models=ctx.state.get("models"), timeout_s=long_voice_review.BUDGET_S)
     ctx.check("long voice review")
     if review.status == "ok" and (run_id := store.run_id(ctx.analysis_id, detector.spec.id)):
-        return {"run_id": run_id, **({"schema": audio_long_review_binding.FOCUSED_SCHEMA} if focused else {})}
+        return {"run_id": run_id, **({"schema": schema} if focused else {})}
     reason = (audio_long_review_binding.SKIPPED_TIMEOUT if review.status == "timeout"
               else audio_long_review_binding.SKIPPED_UNAVAILABLE)
-    return long_voice_review.skipped(reason, focused=focused)
+    return long_voice_review.skipped(reason, schema=schema)
 
 
 def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
@@ -532,7 +539,7 @@ def publish(ctx: StageContext) -> dict[str, Any]:
             long_result = detect_output.get("long_voice_review")
             long = _published_review(db, ctx, long_result, long_voice_review.skipped(
                 audio_long_review_binding.SKIPPED_RECEIPT,
-                focused=(long_result or {}).get("schema") == audio_long_review_binding.FOCUSED_SCHEMA))
+                schema=(long_result or {}).get("schema", audio_long_review_binding.SCHEMA)))
             background_result = detect_output.get(background_binding.KEY)
             background = _published_review(db, ctx, background_result,
                                            background_voice_review.skipped(background_binding.SKIPPED_RECEIPT))

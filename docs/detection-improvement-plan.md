@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Short speech review for 48 kHz WAV](audio-focused-48k-transfer-2026-11-14.md)
+  extends the overlapping review to a new delivery profile. On 98
+  matched re-deliveries, it retained all 13 useful gain-only locations
+  and all three rain-masked locations, with no ordinary flags. It
+  located no train-masked edits.
+
 - [Brief face changes on opposite sides](video-face-opposite-pane-2026-11-14.md)
   located 30 of 32 staged ranges versus 16 before, with no extra
   findings on 32 ordinary and single-swap controls. The local trial

@@ -8,6 +8,9 @@ RATE = 16_000
 SPAN = 3 * RATE
 SCHEMA = "chipmunk.long-voice-review/1"
 FOCUSED_SCHEMA = "chipmunk.long-voice-review/2"
+RESAMPLED_FOCUSED_SCHEMA = "chipmunk.long-voice-review/3"
+FOCUSED_SCHEMAS = frozenset({FOCUSED_SCHEMA, RESAMPLED_FOCUSED_SCHEMA})
+RESAMPLED_RATE = 48_000
 FOCUSED_HOP = SPAN // 2
 DETECTOR_ID = "aud.long_voice_review"
 TITLE = "Long speech-window review"
@@ -17,6 +20,11 @@ LIMITATION = ("The responses apply to the three-second windows shown. Gaps betwe
 FOCUSED_LIMITATION = ("A shorter range marks the overlap of two AI-leaning three-second responses. A full window can remain "
                       "when there is no shorter range wholly inside it. These ranges cannot establish how speech was made or "
                       "where an edit begins or ends. This review carries no weight in the overall assessment.")
+RESAMPLED_FOCUSED_LIMITATION = (
+    "The source was recorded or exported at 48 kHz. Sample numbers, playback clips and waveforms in this section use "
+    "the decoded 16 kHz mono audio. " + FOCUSED_LIMITATION
+)
+LIMITATIONS = {SCHEMA: LIMITATION, FOCUSED_SCHEMA: FOCUSED_LIMITATION, RESAMPLED_FOCUSED_SCHEMA: RESAMPLED_FOCUSED_LIMITATION}
 DIRECTIONS = {"ai", "original", "inconclusive", "unassessed"}
 LABELS = {"ai": "Leans AI-generated in this window", "original": "Leans original in this window",
           "inconclusive": "Inconclusive window", "unassessed": "No usable speech response"}
@@ -33,13 +41,27 @@ SHA = re.compile(r"[0-9a-f]{64}")
 
 
 def supported_source(source: dict) -> bool:
+    return _supported_audio(source, RATE, {("flac", "flac"), ("pcm_s16le", "wav")})
+
+
+def supported_resampled_source(source: dict) -> bool:
+    return _supported_audio(source, RESAMPLED_RATE, {("pcm_s16le", "wav")}) and focused_scope(source["samples"])
+
+
+def _supported_audio(source, source_rate, formats):
     samples = source.get("samples")
     return (type(samples) is int and 6 * RATE <= samples <= 14 * RATE
-            and (source.get("source_codec"), source.get("source_container")) in (("flac", "flac"), ("pcm_s16le", "wav"))
+            and (source.get("source_codec"), source.get("source_container")) in formats
             and source.get("source_bit_depth") == 16 and source.get("source_channels") == source.get("channels") == 1
-            and source.get("source_sample_rate") == source.get("sample_rate") == RATE
+            and source.get("source_sample_rate") == source_rate and source.get("sample_rate") == RATE
             and len(source.get("audio_stream_indices", [0])) == 1 and source.get("timeline_time_base") == "1/16000"
             and source.get("timeline") == [{"start_sample": 0, "end_sample": samples, "source_pts": 0}])
+
+
+def supported_review_source(source, schema):
+    if schema == RESAMPLED_FOCUSED_SCHEMA:
+        return supported_resampled_source(source)
+    return supported_source(source)
 
 
 def intervals(samples: int) -> list[tuple[int, int]]:
@@ -101,7 +123,7 @@ def validate(review: dict, source: dict) -> None:
 
 
 def _validate(review, source):
-    if review["schema"] == FOCUSED_SCHEMA:
+    if review["schema"] in FOCUSED_SCHEMAS:
         _validate_focused(review, source)
         return
     windows = review["windows"]
@@ -144,9 +166,10 @@ def _source_ranges(start, end):
 def _validate_focused(review, source):
     windows, regions = review["windows"], review["regions"]
     _require(set(review) == {"schema", "title", "status", "reason", "limitation", "affects_overall_confidence", "windows", "regions"}
-             and review["title"] == TITLE and review["limitation"] == FOCUSED_LIMITATION and review["affects_overall_confidence"] is False
-             and supported_source(source) and focused_scope(source["samples"]) and isinstance(windows, list) and isinstance(regions, list),
-             "Focused speech review is outside its native source scope")
+             and review["title"] == TITLE and review["limitation"] == LIMITATIONS[review["schema"]]
+             and review["affects_overall_confidence"] is False and supported_review_source(source, review["schema"])
+             and focused_scope(source["samples"]) and isinstance(windows, list) and isinstance(regions, list),
+             "Focused speech review is outside its source scope")
     if review["status"] == "skipped":
         _require(not windows and not regions and review["reason"] in SKIP_REASONS, "Skipped focused review carries measurements")
         return
@@ -174,4 +197,4 @@ def _validate_focused(review, source):
 
 
 def media_windows(review):
-    return review.get("regions") if review.get("schema") == FOCUSED_SCHEMA else review.get("windows")
+    return review.get("regions") if review.get("schema") in FOCUSED_SCHEMAS else review.get("windows")

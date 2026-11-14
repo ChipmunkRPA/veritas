@@ -73,7 +73,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       event.interval.start_sample < shortInterval.end_sample && event.interval.end_sample > shortInterval.start_sample)
     : []
   const longReview = standalone ? set.long_voice_review : undefined
-  const focusedSpeech = longReview?.schema === 'chipmunk.long-voice-review/2'
+  const focusedSpeech = Array.isArray(longReview?.regions)
   const hasMeasuredSpeech = longReview?.windows.some((window) => window.direction !== 'unassessed')
   const backgroundReview = standalone ? set.background_reduced_voice_review : undefined
   const intervals = standalone && set.packets.length === 0 ? [...new Map(set.coverage?.windows?.map((window) =>

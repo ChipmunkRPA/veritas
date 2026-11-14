@@ -210,7 +210,7 @@ export interface ShortVoiceReview {
   artifacts: Partial<Record<'selected_clip' | 'waveform', EvidenceAsset>>
 }
 export interface LongVoiceReview {
-  schema: 'chipmunk.long-voice-review/1' | 'chipmunk.long-voice-review/2'; title: 'Long speech-window review'
+  schema: 'chipmunk.long-voice-review/1' | 'chipmunk.long-voice-review/2' | 'chipmunk.long-voice-review/3'; title: 'Long speech-window review'
   status: 'corroborated' | 'no_corroboration' | 'skipped'
   reason: string; limitation: string; affects_overall_confidence: false
   windows: (SampleInterval & {

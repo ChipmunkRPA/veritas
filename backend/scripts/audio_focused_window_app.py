@@ -191,6 +191,9 @@ def verify_exports(client, aid, source, evidence, assets, output):
         scan(text)
         assert ("Overlap of two AI-leaning windows. 3.000–4.500 s. Samples [48000, 72000) at 16000 Hz. "
                 "Source PTS [48000, 72000) at 1/16000." in text)
+        if evidence["source"]["source_sample_rate"] == 48_000:
+            assert "The source was recorded or exported at 48 kHz." in text
+            assert "decoded 16 kHz mono audio" in text
         images = {item[0] for page in doc for item in page.get_images(full=True)}
         assert signature(png) in {signature(doc.extract_image(xref)["image"]) for xref in images}
     package = body(client.post(f"/api/v2/analyses/{aid}/packages",
@@ -310,6 +313,82 @@ def run(study, output):
         "exact_wav_flac_parity": True, "overall_decision_identical_flag_on_off": True})
 
 
+def run_resampled(study, output):
+    from scripts.audio_focused_48k_transfer import delivery
+
+    configure(output, ROOT)
+    os.environ.update(VERITAS_ENVIRONMENT="dev", VERITAS_AUDIO_DETECTOR_MODE="candidate",
+                      VERITAS_AUDIO_FOCUSED_LONG_REVIEW="true", VERITAS_AUDIO_FOCUSED_LONG_48K_REVIEW="false",
+                      VERITAS_JOB_TIMEOUT_S="240", OMP_NUM_THREADS="2", OPENBLAS_NUM_THREADS="1")
+
+    import torch
+    from fastapi.testclient import TestClient
+
+    from app.api import auth
+    from app.billing import service
+    from app.core.config import settings
+    from app.evidence.audio_long_review_binding import RESAMPLED_FOCUSED_SCHEMA
+    from app.main import app
+    from app.storage.db import Analysis, get_session
+    from app.storage.objects import default_store
+
+    torch.set_num_threads(2)
+    torch.set_num_interop_threads(1)
+    stub = PaymentStub()
+    service._stripe = stub
+    receipt = read(study / "receipt.json")
+    decisions, results = {}, {}
+    with TestClient(app, client=("127.0.0.1", 50000)) as client:
+        with get_session() as db:
+            owner = auth.new_principal("focused-audio-48k-test", "examiner")
+            db.add(owner)
+            db.flush()
+            key, _ = auth.issue_api_key(db, owner)
+            db.commit()
+        client.headers["X-API-Key"] = key
+        for enabled in (False, True):
+            settings.audio_focused_long_48k_review = enabled
+            for label, index in (("rain_edit", 19), ("genuine_rain", 55), ("isolated_rain", 90)):
+                case = receipt["cases"][index]
+                source = study / "wav" / f"{index:03}.wav"
+                pcm, mapping = delivery(source, case["wav_sha256"], case["samples"])
+                assert mapping["pcm_sha256"] == case["pcm_sha256"]
+                aid, _ = checkout(client, stub, source)
+                with get_session() as db:
+                    analysis = db.get(Analysis, aid)
+                    decision = json.loads(default_store().read_bytes(analysis.result_hash))["decision"]
+                evidence = body(client.get(f"/api/v2/analyses/{aid}/evidence-packets"))
+                if not enabled:
+                    assert "long_voice_review" not in evidence
+                    decisions[label] = decision
+                    continue
+                assert decisions[label] == decision and evidence["source"]["source_sample_rate"] == 48_000
+                review = evidence["long_voice_review"]
+                assert review["schema"] == RESAMPLED_FOCUSED_SCHEMA and review["affects_overall_confidence"] is False
+                assert "decoded 16 kHz mono audio" in review["limitation"]
+                readings = {tuple(item["span"]): item["direction"] for item in receipt["responses"][index]["windows"]}
+                windows = verify_windows(review, readings, pcm, focused=True)
+                summary = {"case": index, "file_sha256": case["wav_sha256"], "pcm_sha256": case["pcm_sha256"],
+                           "status": review["status"], "windows": len(windows), "regions": []}
+                if label == "rain_edit":
+                    assert review["status"] == "corroborated"
+                    [region] = review["regions"]
+                    assets = focused_asset_proof(client, review, region, "overlap", FOCUS,
+                                                [(24_000, 72_000), (48_000, 96_000)], pcm,
+                                                (pcm * 32768).astype("<i2").tobytes())
+                    summary["regions"] = [list(span(region))]
+                    summary.update(verify_exports(client, aid, source, evidence, assets, output / label))
+                else:
+                    assert review["status"] == "no_corroboration" and not review["regions"]
+                    assert any(window["direction"] != "unassessed" for window in windows) == (label == "genuine_rain")
+                    assert json.loads(fetch(client, f"/api/analyses/{aid}/export.json"))["evidence"] == evidence
+                results[label] = summary
+                print(label, summary, flush=True)
+    write_json(output / "receipt.json", {"cases": results, "original_sample_rate": 48_000,
+        "analyzed_sample_rate": RATE, "simulated_paid_jobs": 6, "unpaid_jobs": 0,
+        "overall_decision_identical_flag_on_off": True})
+
+
 def browser(output, frontend_port):
     target = read(output / "browser-input.json")
     receipt = read(output / "receipt.json")
@@ -385,12 +464,17 @@ def main():
     paid = subparsers.add_parser("paid", help="Create a new isolated paid replay")
     paid.add_argument("study", type=Path, help="Retained PCM and frozen evaluation receipt")
     paid.add_argument("output", type=Path, help="New isolated run directory")
+    resampled = subparsers.add_parser("paid-48k", help="Exercise resampled WAV evidence in the prepaid worker")
+    resampled.add_argument("study", type=Path, help="Completed 48 kHz WAV comparison and receipt")
+    resampled.add_argument("output", type=Path, help="New isolated run directory")
     chrome = subparsers.add_parser("browser", help="Open a completed paid replay on localhost")
     chrome.add_argument("output", type=Path, help="Completed isolated run directory")
     chrome.add_argument("--port", type=int, default=5268)
     args = parser.parse_args()
     if args.phase == "paid":
         run(args.study.resolve(), args.output.resolve())
+    elif args.phase == "paid-48k":
+        run_resampled(args.study.resolve(), args.output.resolve())
     else:
         browser(args.output.resolve(), args.port)
 

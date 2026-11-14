@@ -365,12 +365,13 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByTestId('multimedia-evidence-empty')).toBeTruthy()
   })
 
-  it('shows selected speech playback separately from the windows that support it', () => {
+  it.each(['chipmunk.long-voice-review/2', 'chipmunk.long-voice-review/3'] as const)(
+    'shows selected speech playback and supporting windows for %s', (schema) => {
     const set = { ...structuredClone(audio), packets: [] }
     const timestamps = (start_sample: number, end_sample: number) => [{ start_sample, end_sample, source_start_pts: start_sample,
       source_end_pts: end_sample, time_base: '1/16000' }]
     set.long_voice_review = {
-      schema: 'chipmunk.long-voice-review/2', title: 'Long speech-window review', status: 'corroborated',
+      schema, title: 'Long speech-window review', status: 'corroborated',
       reason: 'The sampled windows support the speech ranges shown below.', limitation: 'This review carries no weight in the overall assessment.',
       affects_overall_confidence: false,
       windows: [24000, 48000].map((start_sample) => ({ start_sample, end_sample: start_sample + 48000,

@@ -14,9 +14,9 @@ BUDGET_S = 20.0
 PIPELINE_RESERVE_S = 25.0
 
 
-def skipped(reason: str, *, focused: bool = False) -> dict:
-    return {"schema": binding.FOCUSED_SCHEMA if focused else binding.SCHEMA, "status": "skipped", "reason": reason, "windows": [],
-            **({"regions": []} if focused else {})}
+def skipped(reason: str, *, schema: str = binding.SCHEMA) -> dict:
+    return {"schema": schema, "status": "skipped", "reason": reason, "windows": [],
+            **({"regions": []} if schema in binding.FOCUSED_SCHEMAS else {})}
 
 
 class _UnpublishedSeries:
@@ -29,10 +29,11 @@ class LongVoiceReview(Detector):
                       model_ids=PellaVoiceDetector.spec.requirements.model_ids, needs=("audio",),
                       modality=Modality.AUDIO, devices=("cpu",), timeout_s=BUDGET_S, version="1.0.0")
 
-    def __init__(self, *, focused: bool = False):
-        self.focused = focused
-        if focused:
-            self.spec = replace(self.spec, version="2.0.0")
+    def __init__(self, *, schema: str = binding.SCHEMA):
+        self.schema = schema
+        self.focused = schema in binding.FOCUSED_SCHEMAS
+        if self.focused:
+            self.spec = replace(self.spec, version="3.0.0" if schema == binding.RESAMPLED_FOCUSED_SCHEMA else "2.0.0")
 
     def intervals(self, samples):
         return binding.focused_intervals(samples) if self.focused else binding.intervals(samples)
@@ -74,7 +75,7 @@ class LongVoiceReview(Detector):
                 pcm = source[region["start_sample"]:region["end_sample"]]
                 region["pcm_sha256"] = hashlib.sha256(pcm.astype("<f4").tobytes()).hexdigest()
             status = "corroborated" if regions else "no_corroboration"
-            review = {"schema": binding.FOCUSED_SCHEMA, "status": status, "reason": binding.FOCUSED_REASONS[status],
+            review = {"schema": self.schema, "status": status, "reason": binding.FOCUSED_REASONS[status],
                       "windows": windows, "regions": regions}
         else:
             status = binding.status(windows)

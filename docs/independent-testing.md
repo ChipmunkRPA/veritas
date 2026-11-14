@@ -1942,6 +1942,12 @@ uses the public publisher bytes and compares the same source frames
 and sound excerpts. Share scalar review results or source-page links
 with the [independent evaluation form](https://github.com/ChipmunkRPA/veritas/issues/new?template=independent-evaluation.yml).
 
+### Review speech localization on 48 kHz WAV
+
+The [48 kHz speech replay](audio-focused-48k-transfer-2026-11-14.md#reproduce-locally)
+recounts partial-edit localization and unassessed windows by background,
+and can reproduce the sample hashes and clocks from exact WAV deliveries.
+
 ### Review recent stereo and face evidence
 
 The [opposite-side face trial](video-face-opposite-pane-2026-11-14.md)

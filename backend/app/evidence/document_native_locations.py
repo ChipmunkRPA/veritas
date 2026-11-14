@@ -9,7 +9,7 @@ SCHEMA = "document-original-text-locations/1"
 MAX_RANGES = 16
 
 
-def _clip(ranges, start, end):
+def clip_source_ranges(ranges, start, end):
     """Clip one mapped interval and preserve any gaps in original HTML."""
     if not 0 <= start < end:
         return []
@@ -67,7 +67,7 @@ def build(document):
             if not coordinate:
                 continue
             start, end = anchor["selected_start"], anchor["selected_end"]
-            ranges = _clip(anchor.get("source_ranges") or [], start, end)
+            ranges = clip_source_ranges(anchor.get("source_ranges") or [], start, end)
             if ranges:
                 rows.append({"anchor_index": index, "coordinate": coordinate, "ranges": ranges})
         if rows:

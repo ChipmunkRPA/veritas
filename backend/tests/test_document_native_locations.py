@@ -148,9 +148,9 @@ def test_original_text_locations_follow_native_source_in_exports_and_replay(
 
 
 def test_location_malformed_gaps_abstain_and_drift_is_rejected(packet_factory):
-    assert locations._clip([[0, 5, 2, 7], [6, 9, 8, 11]], 3, 9) == []
-    assert locations._clip([[0, 2, 0, 5]], 1, 2) == []
-    assert locations._clip([[0, 1, 0, 5], [1, 2, 8, 9]], 0, 2) == [[0, 5], [8, 9]]
+    assert locations.clip_source_ranges([[0, 5, 2, 7], [6, 9, 8, 11]], 3, 9) == []
+    assert locations.clip_source_ranges([[0, 2, 0, 5]], 1, 2) == []
+    assert locations.clip_source_ranges([[0, 1, 0, 5], [1, 2, 8, 9]], 0, 2) == [[0, 5], [8, 9]]
     db, store, analysis, result, _, _ = packet_factory()
     evidence = build_packet_set(db, analysis, store, result)
     forged = deepcopy(evidence)

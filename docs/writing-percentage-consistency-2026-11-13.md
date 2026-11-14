@@ -8,10 +8,14 @@ cohort, denominator or citation remain part of the comparison. The check
 omits marked quotes, ranges and approximate numbers in its supported syntax.
 
 Enable `VERITAS_DOCUMENT_PERCENTAGE_CONSISTENCY=true` in a local development
-instance and run a new TXT, Word, plain-text email or selectable PDF analysis.
+instance and run a new TXT, Word, mapped email or selectable PDF analysis.
 The evidence page, PDF and JSON retain both complete sentences and the exact
 Unicode ranges for the values in the extracted text. Mapped documents also
-identify the PDF page, Word body paragraph or decoded email part. PDF input
+identify the PDF page and value's text boxes or the exact decoded Word or
+email value range. Plain-text email and a limited, source-mapped HTML
+structure are eligible. Word and email reports display the native offsets,
+and their JSON exports retain any gaps caused by intervening HTML markup.
+PDF input
 must be at most 12 pages. Pages with hidden or transparent text, OCR text,
 Word tables and quoted or hidden runs, and email quotes and signatures are
 outside this check. The PDF ruling uses the native text trace. The main Word

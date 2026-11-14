@@ -75,10 +75,14 @@ def test_configured_percentage_check_remains_local(packet_factory, monkeypatch, 
     (".docx", "docx", [{"paragraph_index": 2, "body_paragraph": 2}, {"paragraph_index": 4, "body_paragraph": 4}], "Word body paragraph"),
     (".eml", "email", [{"mime_part": "1"}, {"mime_part": "1"}], "Email body part 1"),
     (".pdf", "pdf", [{"page": 1}, {"page": 2}], "PDF page"),
+    (".eml-html", "email", [{"mime_part": "1"}, {"mime_part": "1"}], "Email body part 1"),
 ])
 def test_mapped_percentages_have_native_anchors_in_evidence_and_pdf(packet_factory, tmp_path, monkeypatch,
                                                             extension, kind, locations, caption):
     first, second, excluded = (STATEMENT.replace("café", "cafe").format(value) for value in (47, 37, 27))
+    html = extension == ".eml-html"
+    if html:
+        extension = ".eml"
     path = tmp_path / ("percentages" + extension)
     if extension == ".docx":
         from docx import Document
@@ -96,7 +100,11 @@ def test_mapped_percentages_have_native_anchors_in_evidence_and_pdf(packet_facto
         from email.message import EmailMessage
 
         message = EmailMessage()
-        message.set_content(f"{first}\n\n{second}\n\n> {excluded}")
+        if html:
+            marked = first.replace("47", "4<strong>7</strong>")
+            message.set_content(f"<p>{marked}</p><p>{second}</p><blockquote><p>{excluded}</p></blockquote>", subtype="html")
+        else:
+            message.set_content(f"{first}\n\n{second}\n\n> {excluded}")
         path.write_bytes(message.as_bytes())
     else:
         import pymupdf
@@ -119,23 +127,44 @@ def test_mapped_percentages_have_native_anchors_in_evidence_and_pdf(packet_facto
     monkeypatch.setattr(settings, "data_dir", tmp_path / "data")
     evidence = build_packet_set(db, analysis, store, result)
     review = evidence[percentages.KEY]
-    assert review["schema"] == percentages.MAPPED_SCHEMA and review["authorship_confidence_contribution"] == 0
+    assert review["schema"] == percentages.NATIVE_VALUE_SCHEMA and review["authorship_confidence_contribution"] == 0
     assert review["checked_sentences"] == 2 and review["different_claims"] == 1
     (positions,) = review["groups"]
     for row, expected in zip(positions, locations, strict=True):
         assert row["anchor"]["kind"] == kind
         assert row["anchor"] | expected == row["anchor"]
+        value_location = row["value_location"]
+        if kind == "pdf":
+            [box] = value_location["boxes"]
+            assert box[0] < box[2] and box[2] - box[0] < 20
+        else:
+            ranges = value_location["ranges"]
+            assert sum(end - start for start, end in ranges) == 2
     assert [decoded["text"][row["quantity_start"]:row["quantity_end"]] for row in positions] == ["47", "37"]
     percentages.verify_source(evidence, decoded["text"], decoded["source_map"], decoded["sentences"], meta=decoded["meta"])
     altered = deepcopy(evidence)
-    altered[percentages.KEY]["groups"][0][0]["anchor"] = positions[1]["anchor"]
+    altered[percentages.KEY]["groups"][0][0].update(anchor=positions[1]["anchor"], value_location=positions[1]["value_location"])
     with pytest.raises(ValueError, match="separate source blocks"):
         percentages.validate(altered)
-    if extension == ".eml":
-        message = EmailMessage()
-        message.set_content(f"<p>{first}</p><p>{second}</p>", subtype="html")
-        path.write_bytes(message.as_bytes())
+    wrong_offset = deepcopy(evidence)
+    value = wrong_offset[percentages.KEY]["groups"][0][0]["value_location"]
+    if kind == "pdf":
+        value["boxes"][0][0] += .1
+    else:
+        value["ranges"][0][0] -= 1
+    with pytest.raises(ValueError, match="differs from the committed extracted text"):
+        percentages.verify_source(wrong_offset, decoded["text"], decoded["source_map"], decoded["sentences"], meta=decoded["meta"])
+    if html:
+        ranges = positions[0]["value_location"]["ranges"]
+        assert len(ranges) == 2
+        body = message.get_content()
+        assert "".join(body[start:end] for start, end in ranges) == "47"
         assert not percentages.supported("email", {"body_content_type": "text/html"})
+    else:
+        legacy = percentages.build(evidence["source"], decoded["text"], decoded["source_map"], decoded["sentences"],
+                                   meta=decoded["meta"], legacy=True)
+        percentages.verify_source(evidence | {percentages.KEY: legacy}, decoded["text"], decoded["source_map"],
+                                  decoded["sentences"], meta=decoded["meta"])
 
     frozen = sample.model_copy(update={
         "result": result, "evidence": evidence, "case": None, "model_cards": [], "detector_names": {},
@@ -149,4 +178,6 @@ def test_mapped_percentages_have_native_anchors_in_evidence_and_pdf(packet_facto
         assert not rendered.refused
         report_text = " ".join(engine.pdf_text(rendered.pdf).split())
         assert report_text.count(caption) >= 2
+        if kind != "pdf":
+            assert report_text.count("Original value position") == 2
         assert (first in report_text and second in report_text) is not redacted

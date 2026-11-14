@@ -40,6 +40,9 @@
 {% for row in group %}
 {% if not evidence.withheld %}<blockquote>{{ row.before }}<mark>{{ row.quantity }}</mark>{{ row.after }}</blockquote>{% endif %}
 <p class="caption">{% if row.anchor is defined %}{% if row.anchor.kind == 'pdf' %}PDF page {{ row.anchor.page }} · {% elif row.anchor.kind == 'docx' %}Word body paragraph {{ row.anchor.body_paragraph }} · {% elif row.anchor.kind == 'email' %}Email body part {{ row.anchor.mime_part }} · {% endif %}{% endif %}Statement [{{ row.start }}, {{ row.end }}) · Value [{{ row.quantity_start }}, {{ row.quantity_end }})</p>
+{% if row.value_location is defined and row.value_location.ranges is defined %}
+<p class="caption">Original value position {% for start, end in row.value_location.ranges %}[{{ start }}, {{ end }}){% if not loop.last %}, {% endif %}{% endfor %}</p>
+{% endif %}
 {% endfor %}
 {% endfor %}
 {% if quantities.different_claims > (quantities.groups | length) %}<p class="caption">{{ quantities.different_claims - (quantities.groups | length) }} additional statements exceed the display limit.</p>{% endif %}

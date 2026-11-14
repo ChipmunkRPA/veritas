@@ -7,16 +7,20 @@ from collections import defaultdict
 from decimal import Decimal
 
 from app.core.canonical import FLOAT_DP
+from app.evidence.document_native_locations import clip_source_ranges
 from app.evidence.document_repeat import block_anchor, validate_block_anchor
+from app.evidence.document_scope import mapped_email_html
 
 KEY = "percentage_consistency"
 SCHEMA = "document-percentage-consistency/1"
 MAPPED_SCHEMA = "document-percentage-consistency/2"
+NATIVE_VALUE_SCHEMA = "document-percentage-consistency/3"
 MAPPED_METHODS = {"python-docx": "docx", "email": "email", "pymupdf": "pdf"}
 OCCURRENCE_FIELDS = {"start", "end", "quantity_start", "quantity_end", "text"}
 SCOPE = "Compares complete body sentences with the same wording, punctuation and unit apart from one percentage value. The comparison ignores letter case and spacing."
 LIMITATION = "Compare the surrounding context before interpreting a difference. The sentences could refer to different unstated dates, groups or denominators. This check carries zero AI-authorship weight."
 MAPPED_LIMITATION = LIMITATION + " Locations refer to the extracted text and its page, paragraph or email body. Check the submitted document to confirm how it displays the text."
+NATIVE_LIMITATION = LIMITATION + " PDF boxes locate the printed text containing each value. Word and email offsets refer to the original paragraph or decoded message part. Check the submitted document to confirm how it displays the text."
 MAX_BLOCK_LENGTH = 6000
 MAX_TEXT_LENGTH = 40_000
 MAX_SENTENCE_LENGTH = 500
@@ -51,9 +55,10 @@ def percentage(text):
     return (key, (start, end), value) if 0 <= value <= 100 else None
 
 
-def supported(method, email):
+def supported(method, email, *, legacy=False):
+    email = email or {}
     return method in {"plain", "pymupdf", "python-docx"} or (
-        method == "email" and (email or {}).get("body_content_type") == "text/plain"
+        method == "email" and (email.get("body_content_type") == "text/plain" or not legacy and mapped_email_html(email))
     )
 
 
@@ -77,12 +82,26 @@ def source_block(row, method, eligibility):
     return anchor
 
 
-def build(source, text, mapping, sentences, *, meta=None):
+def value_location(block, start, end):
+    if block["kind"] == "pdf":
+        boxes = [[round(value, FLOAT_DP) for value in fragment["bbox"]] for fragment in block.get("fragments", ())
+                 if fragment["start"] < end and start < fragment["end"]]
+        bounds = block["bbox"]
+        return {"boxes": boxes} if boxes and all(
+            bounds[0] - .01 <= x < right <= bounds[2] + .01 and bounds[1] - .01 <= y < bottom <= bounds[3] + .01
+            for x, y, right, bottom in boxes
+        ) else None
+    ranges = clip_source_ranges(block["source_ranges"], start, end)
+    return {"ranges": ranges} if ranges else None
+
+
+def build(source, text, mapping, sentences, *, meta=None, legacy=False):
     records = defaultdict(list)
     skipped = 0
     candidates = {}
     method = source["method"]
     mapped = method != "plain"
+    native_value = mapped and not legacy
     meta = meta or {}
     if method == "python-docx":
         eligibility = {index: ordinal for ordinal, index in enumerate(meta.get("percentage_body_paragraphs", ()), 1)
@@ -111,11 +130,16 @@ def build(source, text, mapping, sentences, *, meta=None):
             raise ValueError("Percentage evidence needs the frozen mapped sentence positions")
         if (hit := percentage(unit["text"])) is None:
             continue
-        checked += 1
         key, (lo, hi), value = hit
         occurrence = {"start": start, "end": end, "text": unit["text"], "quantity_start": start + lo, "quantity_end": start + hi}
+        if native_value:
+            location = value_location(block, start + lo, start + hi)
+            if location is None:
+                continue
+            occurrence["value_location"] = location
         if mapped:
             occurrence["anchor"] = candidates[index]
+        checked += 1
         records[key].append((value, index, occurrence))
     results = []
     for group in records.values():
@@ -133,9 +157,10 @@ def build(source, text, mapping, sentences, *, meta=None):
                               key=lambda entry: entry[2]["start"])
         results.append([row for _, _, row in observations])
     comparable = sum(len({entry[1] for entry in group}) >= 2 for group in records.values())
-    return {"schema": MAPPED_SCHEMA if mapped else SCHEMA,
+    return {"schema": NATIVE_VALUE_SCHEMA if native_value else MAPPED_SCHEMA if mapped else SCHEMA,
             "status": "different_values" if results else "checked" if comparable else "not_assessed",
-            "scope": SCOPE, "limitation": MAPPED_LIMITATION if mapped else LIMITATION, "authorship_confidence_contribution": 0,
+            "scope": SCOPE, "limitation": NATIVE_LIMITATION if native_value else MAPPED_LIMITATION if mapped else LIMITATION,
+            "authorship_confidence_contribution": 0,
             "extracted_text_sha256": source["extracted_text_sha256"], "source_map_sha256": source["source_map_sha256"],
             "checked_sentences": checked, "comparable_claims": comparable, "excluded_blocks": skipped, "different_claims": len(results),
             "groups": results[:MAX_GROUPS]}
@@ -148,11 +173,14 @@ def validate(document):
     source = document["source"]
     method = source.get("method")
     mapped = method in MAPPED_METHODS
+    native_value = mapped and record["schema"] == NATIVE_VALUE_SCHEMA
     email = (document.get("coverage") or {}).get("email") or {}
     groups = record["groups"]
     checked, comparable, skipped, found = (record[key] for key in ("checked_sentences", "comparable_claims", "excluded_blocks", "different_claims"))
-    if (not supported(method, email) or record["schema"] != (MAPPED_SCHEMA if mapped else SCHEMA)
-            or record["scope"] != SCOPE or record["limitation"] != (MAPPED_LIMITATION if mapped else LIMITATION)
+    schema = NATIVE_VALUE_SCHEMA if native_value else MAPPED_SCHEMA if mapped else SCHEMA
+    limitation = NATIVE_LIMITATION if native_value else MAPPED_LIMITATION if mapped else LIMITATION
+    if (not supported(method, email, legacy=not native_value) or record["schema"] != schema
+            or record["scope"] != SCOPE or record["limitation"] != limitation
             or type(record["authorship_confidence_contribution"]) is not int or record["authorship_confidence_contribution"] != 0
             or not all(record[k] == source[k] for k in ("extracted_text_sha256", "source_map_sha256"))
             or not all(type(x) is int and 0 <= x <= source["chars"] for x in (checked, comparable, skipped, found))
@@ -161,6 +189,8 @@ def validate(document):
         raise ValueError("Invalid percentage consistency record")
     used = set()
     fields = OCCURRENCE_FIELDS | {"anchor"} if mapped else OCCURRENCE_FIELDS
+    if native_value:
+        fields = fields | {"value_location"}
     for group in groups:
         readings = set()
         locations = defaultdict(set)
@@ -187,16 +217,44 @@ def validate(document):
                     raise ValueError("Percentage reading has the wrong source location")
                 identity = tuple(anchor.get(key) for key in ("page", "block", "paragraph_index", "source_start", "source_end"))
                 locations[hit[2]].add(identity)
+                if native_value:
+                    validate_value_location(occurrence["value_location"], anchor, hi - lo)
             used.add((start, end))
             previous_end = end
             readings.add((hit[0], hit[2]))
         if len({key for key, _ in readings}) != 1 or len(readings) < 2:
             raise ValueError("Percentages do not differ in one repeated sentence")
-        if mapped and len(set().union(*locations.values())) < 2:
+        if mapped and not any(len(anchors | other) > 1 for value, anchors in locations.items()
+                              for distinct, other in locations.items() if value != distinct):
             raise ValueError("Different readings require separate source blocks")
+
+
+def validate_value_location(location, anchor, width):
+    if not isinstance(location, dict):
+        raise ValueError("Invalid native percentage value location")
+    if anchor["kind"] == "pdf":
+        bbox = anchor["bbox"]
+        boxes = location.get("boxes")
+        valid = location.keys() == {"boxes"} and isinstance(boxes, list) and 1 <= len(boxes) <= 16 and all(
+            isinstance(box, list) and len(box) == 4 and all(type(side) in (float, int) for side in box)
+            and bbox[0] - .01 <= box[0] < box[2] <= bbox[2] + .01
+            and bbox[1] - .01 <= box[1] < box[3] <= bbox[3] + .01 for box in boxes
+        )
+    else:
+        ranges = location.get("ranges")
+        start, end = anchor.get("source_start", 0), anchor.get("source_end", float("inf"))
+        valid = location.keys() == {"ranges"} and isinstance(ranges, list) and 1 <= len(ranges) <= 16 and all(
+            isinstance(span, list) and len(span) == 2 and all(type(value) is int for value in span)
+            and start <= span[0] < span[1] <= end for span in ranges
+        ) and all(left[1] < right[0] for left, right in zip(ranges, ranges[1:])) and sum(b - a for a, b in ranges) >= width
+    if not valid:
+        raise ValueError("Invalid native percentage value location")
 
 
 def verify_source(document, text, mapping, sentences, *, meta=None):
     validate(document)
-    if KEY in document and document[KEY] != build(document["source"], text, mapping, sentences, meta=meta):
+    if KEY not in document:
+        return
+    record = document[KEY]
+    if record != build(document["source"], text, mapping, sentences, meta=meta, legacy=record["schema"] == MAPPED_SCHEMA):
         raise ValueError("Percentage evidence differs from the committed extracted text")

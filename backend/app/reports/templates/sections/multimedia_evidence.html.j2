@@ -106,6 +106,20 @@ Samples [{{ review.interval.start_sample }}, {{ review.interval.end_sample }}) a
 {% if review.get('recording_context') %}<p class="caption">Overlapping recording observations {% for id in review.recording_context %}<a href="#multimedia-evidence-{{ id }}">{{ id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}. They describe the same time in the mixed track. The cause of the speech response is undetermined.</p>{% endif %}
 {% if review.get('waveform') %}{{ plates([review.waveform]) }}{% endif %}
 {% endif %}
+{% if review.get('window_coverage') %}
+<h4>Two-second window coverage</h4>
+<p class="caption">Each window requires at least one second of detected speech in the mixed track.</p>
+<table class="grid">
+<thead><tr><th>Analyzed window</th><th>Detected speech</th><th>Coverage</th><th>Source PTS at 1/16000</th></tr></thead>
+<tbody>{% for window in review.window_coverage %}
+{% set source_range = window.source_timestamp_ranges[0] %}
+<tr><td>{{ '%.3f' | format(window.start_sample / 16000) }}–{{ '%.3f' | format(window.end_sample / 16000) }} s</td>
+<td>{{ '%.3f' | format(window.speech_samples / 16000) }} s</td>
+<td>{{ 'Checked' if window.status == 'checked' else 'Below the speech minimum' }}</td>
+<td class="mono">[{{ source_range.source_start_pts }}, {{ source_range.source_end_pts }})</td></tr>
+{% endfor %}</tbody>
+</table>
+{% endif %}
 <p class="caption">{{ review.limitation }} JSON pointer <span class="mono">/short_voice_review</span>.</p>
 {% endif %}
 {% if evidence.get('long_voice_review') %}

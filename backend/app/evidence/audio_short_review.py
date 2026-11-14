@@ -12,7 +12,8 @@ from app.evidence import audio_short_review_binding as binding
 
 def _receipt(record, store, source):
     if not (pin := record.get("raw_output_sha256")):
-        if record.get("status") != "skipped" or record.get("responses") or record.get("selected") is not None:
+        if (record.get("schema") != binding.SCHEMA or record.get("status") != "skipped"
+                or record.get("responses") or record.get("selected") is not None):
             raise ValueError("Unbound short speech-window response")
         return record
     raw = store.read_bytes(pin)
@@ -30,16 +31,19 @@ def build(record, *, store, source, pcm, mapping, asset, waveform):
     raw = _receipt(record, store, source)
     responses = raw["responses"]
     checked = [{key: row[key] for key in ("start_sample", "end_sample")} for row in responses]
-    if raw["schema"] != binding.SCHEMA or any(type(row["logit"]) not in (int, float) or not math.isfinite(row["logit"]) for row in responses):
+    if raw["schema"] not in {binding.SCHEMA, binding.COVERAGE_SCHEMA} or any(
+            type(row["logit"]) not in (int, float) or not math.isfinite(row["logit"]) for row in responses):
         raise ValueError("Short speech-window response is invalid")
     selected = binding.selected_range(responses, source.get("source_codec"))
     if raw["selected"] != selected or (selected is not None) != (raw["status"] == "flagged"):
         raise ValueError("Short speech-window flag differs from its frozen response")
     document = {
-        "schema": binding.SCHEMA, "title": binding.TITLE, "status": raw["status"], "reason": raw["reason"],
+        "schema": raw["schema"], "title": binding.TITLE, "status": raw["status"], "reason": raw["reason"],
         "limitation": binding.LIMITATION, "affects_overall_confidence": False, "checked_windows": checked,
         "interval": selected, "start_s": None, "end_s": None, "source_timestamp_ranges": [], "artifacts": {},
     }
+    if raw["schema"] == binding.COVERAGE_SCHEMA:
+        document["window_coverage"] = binding.window_coverage(raw["speech_counts"], source)
     if selected:
         a, b = selected["start_sample"], selected["end_sample"]
         document.update(start_s=a / binding.RATE, end_s=b / binding.RATE, source_timestamp_ranges=source_ranges(mapping, a, b))

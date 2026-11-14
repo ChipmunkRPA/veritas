@@ -124,9 +124,9 @@ def test_optional_boundary_failure_does_not_change_completed_primary(monkeypatch
 def test_flagged_packet_anchors_exact_slice_without_public_raw_score():
     pcm = np.arange(binding.SAMPLES, dtype=np.int32).astype("<i2").astype(np.float32) / 32768
     mapping = source(pcm)
-    p = iter([.1, .2, .3, .4, .9999])
+    p = iter([.9999])
     model = SimpleNamespace(predict=lambda chunks: [next(p)])
-    review = short_voice_review.scan(pcm, [(0, 6)], model, Deadline(None))
+    review = short_voice_review.scan(pcm, [(4.5, 6)], model, Deadline(None))
     raw = canonical_json({"detector_id": binding.DETECTOR_ID, "status": "ok",
                           "details": {"pcm_sha256": mapping["pcm_sha256"], "short_voice_review": review}})
     pin = sha256(raw).hexdigest()
@@ -144,6 +144,9 @@ def test_flagged_packet_anchors_exact_slice_without_public_raw_score():
     assert result["status"] == "flagged" and result["affects_overall_confidence"] is False
     assert result["interval"] == {"start_sample": 64000, "end_sample": 96000}
     assert result["start_s"] == 4.0 and result["end_s"] == 6.0
+    assert result["schema"] == binding.COVERAGE_SCHEMA
+    assert [row["speech_samples"] for row in result["window_coverage"]] == [0, 0, 0, 8000, 24000]
+    assert [row["status"] for row in result["window_coverage"]] == ["below_speech_minimum"] * 4 + ["checked"]
     assert b"logit" not in canonical_json(result)
     np.testing.assert_array_equal(read_wav(assets[result["artifacts"]["selected_clip"]["sha256"]]), pcm[64000:96000])
     audio_short_review.verify(result, record, store=store, source=mapping, pcm=pcm, mapping=mapping,
@@ -152,6 +155,32 @@ def test_flagged_packet_anchors_exact_slice_without_public_raw_score():
     changed["source_timestamp_ranges"][0]["source_end_pts"] -= 1
     with pytest.raises(ValueError):
         binding.validate(changed, mapping)
+    changed = deepcopy(result)
+    changed["window_coverage"][0]["source_timestamp_ranges"][0]["source_end_pts"] -= 1
+    with pytest.raises(ValueError, match="coverage disagrees"):
+        binding.validate(changed, mapping)
+    changed = deepcopy(result)
+    changed["window_coverage"][0]["speech_samples"] = 120
+    with pytest.raises(ValueError, match="differs from its frozen response"):
+        audio_short_review.verify(changed, record, store=store, source=mapping, pcm=pcm, mapping=mapping,
+                                  read_asset=assets.__getitem__, waveform=audio_packets._chart)
+    # Archived packets rebuild their original schema and contain no inferred coverage.
+    old = deepcopy(review)
+    old["schema"] = binding.SCHEMA
+    del old["speech_counts"]
+    archived = canonical_json({"detector_id": binding.DETECTOR_ID, "status": "ok",
+                              "details": {"pcm_sha256": mapping["pcm_sha256"], "short_voice_review": old}})
+    old_pin = sha256(archived).hexdigest()
+    legacy = audio_short_review.build({"raw_output_sha256": old_pin}, store=SimpleNamespace(read_bytes={old_pin: archived}.__getitem__),
+                                       source=mapping, pcm=pcm, mapping=mapping, asset=asset, waveform=audio_packets._chart)
+    assert "window_coverage" not in legacy and legacy["interval"] == result["interval"]
+
+
+def test_insufficient_speech_maps_all_short_windows_without_inference():
+    pcm = np.zeros(binding.SAMPLES, np.float32)
+    review = short_voice_review.scan(pcm, [(3.5, 4)], None, Deadline(None))
+    assert review["status"] == "skipped" and review["reason"] == binding.NO_SPEECH_REASON
+    assert review["responses"] == [] and review["speech_counts"] == [0, 0, 8000, 8000, 0]
 
 
 def test_watchdog_discards_slow_optional_run_without_losing_primary(monkeypatch):

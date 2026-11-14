@@ -210,6 +210,28 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
   })
 
+  it('shows measured short-window coverage when the speech review has no eligible window', () => {
+    const set = { ...structuredClone(audio), packets: [] }
+    set.short_voice_review = {
+      schema: 'chipmunk.short-voice-review/2', status: 'skipped', title: 'Short speech-window review',
+      reason: 'No two-second interval contained enough detected speech.', limitation: 'For review.', affects_overall_confidence: false,
+      checked_windows: [], interval: null, start_s: null, end_s: null, source_timestamp_ranges: [], artifacts: {},
+      window_coverage: Array.from({ length: 5 }, (_, i) => {
+        const interval = { start_sample: i * 16000, end_sample: (i + 2) * 16000 }
+        return { ...interval, speech_samples: i === 2 ? 8000 : 0, status: 'below_speech_minimum',
+          source_timestamp_ranges: [{ ...interval, source_start_pts: 1105 + interval.start_sample,
+            source_end_pts: 1105 + interval.end_sample, time_base: '1/16000' }] }
+      }),
+    }
+    show(set)
+    const review = within(screen.getByRole('region', { name: 'Short speech-window review' }))
+    expect(review.getByText('Two-second window coverage')).toBeTruthy()
+    expect(review.getByText(/2\.000 s–4\.000 s · Below the speech minimum/)).toBeTruthy()
+    expect(review.getByText('Detected speech 0.500 s.')).toBeTruthy()
+    expect(review.getByText('Source PTS [33105, 65105) at 1/16000.')).toBeTruthy()
+    expect(review.queryByLabelText('Flagged two-second speech window')).toBeNull()
+  })
+
   it('shows the exact background-reduced interval with distinct original and processed playback', () => {
     const set = { ...structuredClone(audio), packets: [] }
     const interval = { start_sample: 0, end_sample: 48000 }

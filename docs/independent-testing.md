@@ -44,6 +44,10 @@ The [competing-voice interval replay](audio-competing-speech-localization-2026-1
 fetches the exact 128 native excerpts from the publisher and can regenerate
 all of their predicted sample ranges with the pinned local model. The
 standard-library review also verifies the archived false-alarm tradeoff.
+The [interval-trained speech replay](audio-interval-learning-2026-11-13.md#replay)
+recounts 95 held single-upload decisions and verifies both fixed points from
+the recorded calibration responses. It separates misplaced flags, genuine
+splice flags, untouched files and isolated background observations.
 
 The latest single-upload comparisons cover [localized image residuals](image-residual-third-order-transfer-2026-11-13.md),
 [motion around the mouth](video-mouth-motion-transport-2026-11-13.md),

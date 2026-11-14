@@ -1,0 +1,4566 @@
+{
+  "assets": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+  },
+  "calibration": [
+    {
+      "family": null,
+      "group": 0,
+      "kind": "untouched",
+      "pcm_sha256": "af3e9cf734e607cc6587d1861c9fe95c7deadff6fad2096d290a5cd1643bd0f7",
+      "scores": {
+        "clock": [
+          0.0697509285,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          6.4418584501148635,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.159210507,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 0,
+      "kind": "same_reader_splice",
+      "pcm_sha256": "ec3f837fa59addfc62af12deb81487c6755d78a54cea6c822987b8f471e2ad0b",
+      "scores": {
+        "clock": [
+          0.0482206577,
+          [
+            57600,
+            70400
+          ]
+        ],
+        "existing": [
+          6.5629609530856525,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.1152087764,
+          [
+            57600,
+            70400
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 0,
+      "kind": "different_reader_splice",
+      "pcm_sha256": "294bc2b8a0665701214628740ecac2d62b33d2fbbbfa7165e5bbe216bcc81a34",
+      "scores": {
+        "clock": [
+          0.066877062,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          6.4418584501148635,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.1391622259,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": "piper",
+      "group": 0,
+      "kind": "piper",
+      "pcm_sha256": "e83f15339a79d48f77656a159f43f1f35e372f240c69ae372a813d24edbb7767",
+      "scores": {
+        "clock": [
+          0.0536272938,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          6.4418584501148635,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.1267755697,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "family": "kitten",
+      "group": 0,
+      "kind": "kitten",
+      "pcm_sha256": "3736618047aa94f5b0c456942824338f271bc778fcc7384a0bba202a67822147",
+      "scores": {
+        "clock": [
+          0.0480877731,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.4418584501148635,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.1153803887,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "family": null,
+      "group": 1,
+      "kind": "untouched",
+      "pcm_sha256": "b1cddc75194cf7759745ee438f3f8973082db55f1210912e882f39699cf79d96",
+      "scores": {
+        "clock": [
+          0.0738971884,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          6.405632849348604,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.163385848,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 1,
+      "kind": "same_reader_splice",
+      "pcm_sha256": "b571171b3cc26cf6a9535b851553cf3c495fdee14ea7ef5c799e6f3b114959a0",
+      "scores": {
+        "clock": [
+          0.0330428163,
+          [
+            67200,
+            80000
+          ]
+        ],
+        "existing": [
+          5.132935669890011,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.0149767973,
+          [
+            70400,
+            83200
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 1,
+      "kind": "different_reader_splice",
+      "pcm_sha256": "5feec13069b9716ec719c9dc15f9c3fd8590eb642cd4b3a06135f10b34fa3f2b",
+      "scores": {
+        "clock": [
+          0.0688142183,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          5.384748079308765,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.1416255215,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": "piper",
+      "group": 1,
+      "kind": "piper",
+      "pcm_sha256": "35af64b873dd2ec8efa0e608f3fcce5aa13a8418340164321cd12ffe0494ae64",
+      "scores": {
+        "clock": [
+          0.0457983671,
+          [
+            64000,
+            76800
+          ]
+        ],
+        "existing": [
+          6.520717595161118,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.0971847751,
+          [
+            28800,
+            41600
+          ]
+        ]
+      },
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "family": "kitten",
+      "group": 1,
+      "kind": "kitten",
+      "pcm_sha256": "e1010b4c75f7989d4afeb69946c8be33f5be1f08d6d55930aa5249dfc20df476",
+      "scores": {
+        "clock": [
+          0.0468928301,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          7.158364165150624,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.1144722436,
+          [
+            51200,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "family": null,
+      "group": 2,
+      "kind": "untouched",
+      "pcm_sha256": "9d46397ecbc5c641546c4b4bed49ab4991a7459d3bea2dc50806cf317705a45c",
+      "scores": {
+        "clock": [
+          0.0740988997,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          5.952258622270204,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.1608814744,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 2,
+      "kind": "same_reader_splice",
+      "pcm_sha256": "eeee52989e475c2b5c31a954dea8ca9dc06d2d213a84e85ad5900deead288dfc",
+      "scores": {
+        "clock": [
+          0.0567548747,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          5.316391115250476,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.1158066088,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 2,
+      "kind": "different_reader_splice",
+      "pcm_sha256": "42cdfe1c70ca1fd5491d6fd2deb1aa34f700bfd43b8a405b99eef7c05e686c2e",
+      "scores": {
+        "clock": [
+          0.0573933866,
+          [
+            12800,
+            25600
+          ]
+        ],
+        "existing": [
+          5.711394181353251,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "paired": [
+          0.1096286757,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": "piper",
+      "group": 2,
+      "kind": "piper",
+      "pcm_sha256": "3cfc6c51aec4cee71299d4fc8ac49b238af79b4c70236e1e7484d636880496fc",
+      "scores": {
+        "clock": [
+          0.0913545245,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.639024525223796,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.2121545841,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "family": "kitten",
+      "group": 2,
+      "kind": "kitten",
+      "pcm_sha256": "4bff9f7edaba0918a7c9a466d28ad80fd2dc7625954c257aafd22f9e074801bc",
+      "scores": {
+        "clock": [
+          0.0801708355,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          5.508158175789385,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.1750551759,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "family": null,
+      "group": 3,
+      "kind": "untouched",
+      "pcm_sha256": "477094f4a231e842f5eeb6a8e75ca1e45c78acfd2a2644bd0efdeff25cd321cf",
+      "scores": {
+        "clock": [
+          0.0257758628,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          4.136968284441614,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0238510503,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 3,
+      "kind": "same_reader_splice",
+      "pcm_sha256": "98ff8f001cdf6ba22d7ac712e643a6a79137199eb4701f47f73b468208166345",
+      "scores": {
+        "clock": [
+          0.0248058643,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          4.136968284441614,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0268159462,
+          [
+            25600,
+            38400
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 3,
+      "kind": "different_reader_splice",
+      "pcm_sha256": "ebba9f22b2bbcb7bea24dd2f7b098014b8429bf3fc36abc0852ce16ae27581b6",
+      "scores": {
+        "clock": [
+          0.0264493982,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          4.136968284441614,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0210402459,
+          [
+            25600,
+            38400
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": "piper",
+      "group": 3,
+      "kind": "piper",
+      "pcm_sha256": "37e892c7f8a93893832f7cc8145113cf96703753a7945cb91daef405c45b47dd",
+      "scores": {
+        "clock": [
+          0.0283025755,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          4.136968284441614,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          -0.0122389597,
+          [
+            25600,
+            38400
+          ]
+        ]
+      },
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "family": "kitten",
+      "group": 3,
+      "kind": "kitten",
+      "pcm_sha256": "facab722007cf3d59bc46d760723c0543cd80037646fb6b64da43a12388d7586",
+      "scores": {
+        "clock": [
+          0.0322478411,
+          [
+            51200,
+            64000
+          ]
+        ],
+        "existing": [
+          4.136968284441614,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.0038261343,
+          [
+            51200,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "family": null,
+      "group": 4,
+      "kind": "untouched",
+      "pcm_sha256": "3f43115a8fc7737e9c4254eb5bc217d881ded510c727c2fff4cfa2ec617b2aba",
+      "scores": {
+        "clock": [
+          0.099646591,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.614434023921587,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.2328035811,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 4,
+      "kind": "same_reader_splice",
+      "pcm_sha256": "198924fc34a3af12812e0cf30cecb0ae64c400d2ec507d7486c7d17727acb8e8",
+      "scores": {
+        "clock": [
+          0.0913189548,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.964736519012124,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.2094418013,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 4,
+      "kind": "different_reader_splice",
+      "pcm_sha256": "d9757a850252576950d06aab2919a8963eba25854e4f70492670e034537db7f3",
+      "scores": {
+        "clock": [
+          0.0959278962,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.582240991036857,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          0.2233218444,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": "piper",
+      "group": 4,
+      "kind": "piper",
+      "pcm_sha256": "aeb5f63443c4cbb791ea2ded25f8185515248eda4250f20eb353bce2d63f3864",
+      "scores": {
+        "clock": [
+          0.1007630716,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.22451471322994,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.2329338048,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "family": "kitten",
+      "group": 4,
+      "kind": "kitten",
+      "pcm_sha256": "8cf173706083659eb82a7a6367a56ec180dda5878ee8ae49ebe44dc425727713",
+      "scores": {
+        "clock": [
+          0.1006056734,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.38716361508908,
+          [
+            0,
+            32000
+          ]
+        ],
+        "paired": [
+          0.2238677666,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "family": null,
+      "group": 5,
+      "kind": "untouched",
+      "pcm_sha256": "6655bd9d86ae2f983cae32c909c8ea6ad1de1c8658600b8727bed48c9acbe9c5",
+      "scores": {
+        "clock": [
+          0.0286576418,
+          [
+            64000,
+            76800
+          ]
+        ],
+        "existing": [
+          4.7252003995319525,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          -0.0125086806,
+          [
+            64000,
+            76800
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 5,
+      "kind": "same_reader_splice",
+      "pcm_sha256": "b9ac6b9948e5835e394c52327cbb071f3e2734e18cfd72b73838d1c11d1f7987",
+      "scores": {
+        "clock": [
+          0.0259746341,
+          [
+            73600,
+            86400
+          ]
+        ],
+        "existing": [
+          5.422200354823198,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0220711697,
+          [
+            32000,
+            44800
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 5,
+      "kind": "different_reader_splice",
+      "pcm_sha256": "955c43a32e25d23cc7f1f552471eb4bcb3a57e72bafd6b5927dabdc73a3927d3",
+      "scores": {
+        "clock": [
+          0.0304145399,
+          [
+            64000,
+            76800
+          ]
+        ],
+        "existing": [
+          6.052143538246272,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0035102533,
+          [
+            64000,
+            76800
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": "piper",
+      "group": 5,
+      "kind": "piper",
+      "pcm_sha256": "9cb03bcf628fb7d605626f5a11fe8fc5ed2a7ba01c1777b0336b3081cfc94bc7",
+      "scores": {
+        "clock": [
+          0.0681339723,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          4.705500517799074,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.1253865535,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "family": "kitten",
+      "group": 5,
+      "kind": "kitten",
+      "pcm_sha256": "352d165900f372fb3c948bd1cd3684558e05d80f163c0c78eef9e8bbea1726df",
+      "scores": {
+        "clock": [
+          0.0507887609,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          5.848064765362752,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.0620580257,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "family": null,
+      "group": 6,
+      "kind": "untouched",
+      "pcm_sha256": "0fead6b79fa80ffaefaa70b4481586c8fb3cc634c80d8a4911ae68aa6bb930b1",
+      "scores": {
+        "clock": [
+          0.0278402966,
+          [
+            32000,
+            44800
+          ]
+        ],
+        "existing": [
+          6.873265272136951,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0131640343,
+          [
+            70400,
+            83200
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 6,
+      "kind": "same_reader_splice",
+      "pcm_sha256": "dd36b002478eb213041f2f93311b5713fe9576ffd205249e568238298606dacf",
+      "scores": {
+        "clock": [
+          0.0315712009,
+          [
+            35200,
+            48000
+          ]
+        ],
+        "existing": [
+          6.873265272136951,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          -0.0015898472,
+          [
+            35200,
+            48000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 6,
+      "kind": "different_reader_splice",
+      "pcm_sha256": "2e88955bbbc9bf328436f6f93d7565dad0bfde56be63559c3cdfacf76fc22ce1",
+      "scores": {
+        "clock": [
+          0.0328008547,
+          [
+            70400,
+            83200
+          ]
+        ],
+        "existing": [
+          6.873265272136951,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.0050761864,
+          [
+            67200,
+            80000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": "piper",
+      "group": 6,
+      "kind": "piper",
+      "pcm_sha256": "f5e571ae3d631d21b76c50ae2f0819e29c9dc20aace5f82a05cc1ac8c38873c9",
+      "scores": {
+        "clock": [
+          0.0351054129,
+          [
+            35200,
+            48000
+          ]
+        ],
+        "existing": [
+          6.873265272136951,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.0205507599,
+          [
+            35200,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "family": "kitten",
+      "group": 6,
+      "kind": "kitten",
+      "pcm_sha256": "25dda421ebf5fa11848921f0740fa65046d801ddcc42824f40c4a680df04fa49",
+      "scores": {
+        "clock": [
+          0.0496825458,
+          [
+            22400,
+            35200
+          ]
+        ],
+        "existing": [
+          6.873265272136951,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.111790769,
+          [
+            22400,
+            35200
+          ]
+        ]
+      },
+      "truth": [
+        23200,
+        38560
+      ]
+    },
+    {
+      "family": null,
+      "group": 7,
+      "kind": "untouched",
+      "pcm_sha256": "374ee0e48740e965afedddc50f7e4e0b8f3eb3fcc25ecaba902bdfe3aa68ffa8",
+      "scores": {
+        "clock": [
+          0.0767023922,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          4.5062024189878125,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.167395278,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 7,
+      "kind": "same_reader_splice",
+      "pcm_sha256": "d7df1595b3ee7f2b1db347d93c7067f517ea3b87e673998f6b37000c485cda70",
+      "scores": {
+        "clock": [
+          0.0315990074,
+          [
+            35200,
+            48000
+          ]
+        ],
+        "existing": [
+          4.331542387351366,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.0044553041,
+          [
+            35200,
+            48000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": 7,
+      "kind": "different_reader_splice",
+      "pcm_sha256": "b296d307c4a1f90f221665d551ac51ca0a5855ab0ab6fbc8e6003dbb78152fc3",
+      "scores": {
+        "clock": [
+          0.0345556711,
+          [
+            35200,
+            48000
+          ]
+        ],
+        "existing": [
+          5.756689844761029,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "paired": [
+          0.016328216,
+          [
+            35200,
+            48000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": "piper",
+      "group": 7,
+      "kind": "piper",
+      "pcm_sha256": "d5b8c1ada53d02af7561a4ee1b32de150cc7c330a0a1cdb350340580ae94d8f2",
+      "scores": {
+        "clock": [
+          0.0551855736,
+          [
+            35200,
+            48000
+          ]
+        ],
+        "existing": [
+          7.227830839336863,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.1461753906,
+          [
+            35200,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "family": "kitten",
+      "group": 7,
+      "kind": "kitten",
+      "pcm_sha256": "4f0950422dfd774c272c0924ff8990cd6085c0c735e0736c27325113314c2066",
+      "scores": {
+        "clock": [
+          0.0581671976,
+          [
+            60800,
+            73600
+          ]
+        ],
+        "existing": [
+          7.2146008107727315,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          0.1510260359,
+          [
+            60800,
+            73600
+          ]
+        ]
+      },
+      "truth": [
+        55200,
+        70560
+      ]
+    },
+    {
+      "family": null,
+      "group": "background-0-0",
+      "kind": "background",
+      "pcm_sha256": "04cdebc58cc6bcc48b2cf9ece6b0339547204f96bdc405295f9a0c11572078ea",
+      "scores": {
+        "clock": [
+          0.0205509308,
+          [
+            41600,
+            54400
+          ]
+        ],
+        "existing": [
+          -6.76181417328347,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          -0.0297439941,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": "background-0-1",
+      "kind": "background",
+      "pcm_sha256": "3a502ff118cbc47c0c033d0a3087c32a337a4ce5743dea453ad13d9a90d602cb",
+      "scores": {
+        "clock": [
+          0.0242340627,
+          [
+            28800,
+            41600
+          ]
+        ],
+        "existing": [
+          -5.010104132403408,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          -0.0317730695,
+          [
+            28800,
+            41600
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": "background-1-0",
+      "kind": "background",
+      "pcm_sha256": "a1b37b264c5acad889cd960feaab5b768cfbc48221d858070dd7fb439703be27",
+      "scores": {
+        "clock": [
+          0.0210819841,
+          [
+            73600,
+            86400
+          ]
+        ],
+        "existing": [
+          -5.57984922997515,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "paired": [
+          -0.027041974,
+          [
+            0,
+            12800
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "family": null,
+      "group": "background-1-1",
+      "kind": "background",
+      "pcm_sha256": "52d1e6431a9132d57f899dde111272eeb7b29b089e0c1b6380192555cc83da9c",
+      "scores": {
+        "clock": [
+          0.0199201817,
+          [
+            41600,
+            54400
+          ]
+        ],
+        "existing": [
+          -6.002775186224749,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "paired": [
+          -0.0398656764,
+          [
+            70400,
+            83200
+          ]
+        ]
+      },
+      "truth": null
+    }
+  ],
+  "code_sha256": {
+    "audio_interval_learning.py": "32bca258db6584f59d555fd602f1824b1c498d7170412bbc0c48150661efca56",
+    "audio_source_isolation_diagnostic.py": "14f271b77b8de477b69b51bf5e74f302774b8dc77e3133d69a1818874e3d39f9",
+    "audio_voice_attenuation_transfer.py": "6b6f24605968d97f1e40604cbfa1e50518fcba434d6e03e541498df7da8bbb71",
+    "review_audio_stock_voice_transfer.py": "45c4c289dd55214bf2248fb9b8ff3f245c62a03dffb9d6d1a142c2fee1d10662",
+    "upgraded.py": "017c396315bdb41f6e419589c6d81081b2a8089e2157c3ce14a8c0accd6f9836"
+  },
+  "held": {
+    "families": [
+      {
+        "family": null,
+        "group": "replicate-0-0-early",
+        "kind": "untouched",
+        "pcm_sha256": "5c4c8cadad443fd4c07210259a8a4eee8f36c86c68478491b6266f6e5eab19bc",
+        "scores": {
+          "clock": [
+            0.0329556323,
+            [
+              16000,
+              28800
+            ]
+          ],
+          "existing": [
+            -3.4847812730768597,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            0.0175681548,
+            [
+              0,
+              12800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-0-0-early",
+        "kind": "ordinary_same_host",
+        "pcm_sha256": "0a498c27acec27e03639afd01b735ee0aeca039dd486c5caef2d6efb2be61909",
+        "scores": {
+          "clock": [
+            0.0748761961,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            -3.227519027787775,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            0.1671046576,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-0-0-early",
+        "kind": "ordinary_other_voice",
+        "pcm_sha256": "ca5def6bcf4dea9ff31700b7d6a0d760a77a961113b98fca99fdef962cdcb4dc",
+        "scores": {
+          "clock": [
+            0.0655309668,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            -3.4847812730768597,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            0.1270718073,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "Chatterbox",
+        "group": "replicate-0-0-early",
+        "kind": "synthetic",
+        "pcm_sha256": "325134a9f2c67cb9a0733fdf393a2a480f0820064fe02dea2c7ae0f69c5551f3",
+        "scores": {
+          "clock": [
+            0.0797594232,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            5.021963877668789,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            0.1815044691,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": [
+          5120,
+          15360
+        ]
+      },
+      {
+        "family": null,
+        "group": "replicate-0-1-interior",
+        "kind": "untouched",
+        "pcm_sha256": "8882721fb72676cd8b8d16ad2b34046590d1ff10455f26b2ea4736ec670d75ca",
+        "scores": {
+          "clock": [
+            0.0501264437,
+            [
+              70400,
+              83200
+            ]
+          ],
+          "existing": [
+            6.678527616071818,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            0.127163061,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-0-1-interior",
+        "kind": "ordinary_same_host",
+        "pcm_sha256": "cb767c9545974da72706357e3f08364d82a2fd263418503879ddf865c74b7dcc",
+        "scores": {
+          "clock": [
+            0.0504083941,
+            [
+              70400,
+              83200
+            ]
+          ],
+          "existing": [
+            6.76062476456098,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            0.1262980284,
+            [
+              9600,
+              22400
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-0-1-interior",
+        "kind": "ordinary_other_voice",
+        "pcm_sha256": "b683731a921ff17d07d933a20acece13eb8bf7883c7df6988a6bde8be7da3c64",
+        "scores": {
+          "clock": [
+            0.050101348,
+            [
+              70400,
+              83200
+            ]
+          ],
+          "existing": [
+            6.822523597593649,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            0.1257413586,
+            [
+              70400,
+              83200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "ElevenLabs v4",
+        "group": "replicate-0-1-interior",
+        "kind": "synthetic",
+        "pcm_sha256": "c074cb79396fa2c4465d6d381307abc16006088f05fc4d0739e3b7ea0e620681",
+        "scores": {
+          "clock": [
+            0.048517853,
+            [
+              70400,
+              83200
+            ]
+          ],
+          "existing": [
+            6.54987854482451,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.1204509405,
+            [
+              9600,
+              22400
+            ]
+          ]
+        },
+        "truth": [
+          55040,
+          67840
+        ]
+      },
+      {
+        "family": null,
+        "group": "replicate-0-2-interior",
+        "kind": "untouched",
+        "pcm_sha256": "8502023018e0ca9c3007fb86863c51d2fcd10aa84c1d7e0ff2d33cb19eb93d2e",
+        "scores": {
+          "clock": [
+            0.0273464181,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            -3.276306189071533,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            -0.0192197479,
+            [
+              0,
+              12800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-0-2-interior",
+        "kind": "ordinary_same_host",
+        "pcm_sha256": "46d80f1734dc8f0c02c9a6e25a7dbd459261922998de3f63b142054fe3de6347",
+        "scores": {
+          "clock": [
+            0.0273840025,
+            [
+              3200,
+              16000
+            ]
+          ],
+          "existing": [
+            0.9046120621188916,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            -0.0159817494,
+            [
+              0,
+              12800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-0-2-interior",
+        "kind": "ordinary_other_voice",
+        "pcm_sha256": "2ce02f8d8e2cedaaea6567b1b432b0fed7f0e061bb4abb69811923b5895e067b",
+        "scores": {
+          "clock": [
+            0.0284610253,
+            [
+              3200,
+              16000
+            ]
+          ],
+          "existing": [
+            -3.2471765712870204,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            -0.0151527288,
+            [
+              3200,
+              16000
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "Kokoro",
+        "group": "replicate-0-2-interior",
+        "kind": "synthetic",
+        "pcm_sha256": "e154eee8d04d9dc764cd1aa7d0bb1006dd047b4724917b46f84890a44e3529b3",
+        "scores": {
+          "clock": [
+            0.0325171245,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            5.302742712227657,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            0.0007297247,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": [
+          20480,
+          35840
+        ]
+      },
+      {
+        "family": null,
+        "group": "replicate-1-0-late",
+        "kind": "untouched",
+        "pcm_sha256": "cd499af493666b894f55a4e4a7e2ed9cfa46db22b57d5f921c14ab1c346cdfd6",
+        "scores": {
+          "clock": [
+            0.0850703989,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            7.049524822776123,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.1937042646,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-1-0-late",
+        "kind": "ordinary_same_host",
+        "pcm_sha256": "d13a7d27aa9fad18bf1178f974ce69a0ced638e901064bb04e25d0c3090aea2a",
+        "scores": {
+          "clock": [
+            0.0854784634,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            7.049524822776123,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.1946404979,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-1-0-late",
+        "kind": "ordinary_other_voice",
+        "pcm_sha256": "58e24137b34f233fbb07d5985411c2fb371c2b8f120f0456813a1da4e1bcf4a9",
+        "scores": {
+          "clock": [
+            0.0848326448,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            7.049524822776123,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.1931061837,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "ElevenLabs v4",
+        "group": "replicate-1-0-late",
+        "kind": "synthetic",
+        "pcm_sha256": "b815e5c2f687666d65533025e628489f0d5abdf11282549f479f26017d2e99a1",
+        "scores": {
+          "clock": [
+            0.0780399848,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            7.049524822776123,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.1777299002,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": [
+          80640,
+          90880
+        ]
+      },
+      {
+        "family": null,
+        "group": "replicate-1-1-interior",
+        "kind": "untouched",
+        "pcm_sha256": "2d83eb6072c9b452ce03ba6b8e736813542dbd5af769a58b2c56a8e2632f5d82",
+        "scores": {
+          "clock": [
+            0.0244646883,
+            [
+              32000,
+              44800
+            ]
+          ],
+          "existing": [
+            -4.171591251263912,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            -0.02908259,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-1-1-interior",
+        "kind": "ordinary_same_host",
+        "pcm_sha256": "404437b1b71df0c9be4e05c4add1d94837cbb773591b636667bc2e2cf53f6ee8",
+        "scores": {
+          "clock": [
+            0.0272896368,
+            [
+              60800,
+              73600
+            ]
+          ],
+          "existing": [
+            -2.400877756794253,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            -0.0135862436,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-1-1-interior",
+        "kind": "ordinary_other_voice",
+        "pcm_sha256": "2d686d43d1b3dd89d9e3507bc821f5124e43b05c6469dfccebc3e774bfd6c56f",
+        "scores": {
+          "clock": [
+            0.028089881,
+            [
+              60800,
+              73600
+            ]
+          ],
+          "existing": [
+            -3.7872328602996648,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            -0.0143037361,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "Kokoro",
+        "group": "replicate-1-1-interior",
+        "kind": "synthetic",
+        "pcm_sha256": "c8e6fe1a89542f5ae4725c26552c8439e112a562ff0dc0e615d95fc13b7b2f37",
+        "scores": {
+          "clock": [
+            0.0324419278,
+            [
+              60800,
+              73600
+            ]
+          ],
+          "existing": [
+            4.255808858868008,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            0.0052195736,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": [
+          29440,
+          42240
+        ]
+      },
+      {
+        "family": null,
+        "group": "replicate-1-2-interior",
+        "kind": "untouched",
+        "pcm_sha256": "ffc515c68685312e70cb3148c2da7bcf5a4606f7deb251ded67dcca837e5e4c2",
+        "scores": {
+          "clock": [
+            0.0480953071,
+            [
+              64000,
+              76800
+            ]
+          ],
+          "existing": [
+            7.209421919045076,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            0.1275260935,
+            [
+              64000,
+              76800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-1-2-interior",
+        "kind": "ordinary_same_host",
+        "pcm_sha256": "2fdedea4b93e2f9f88a77801402c3d91f9503147607bab5ed2fbf08173ced896",
+        "scores": {
+          "clock": [
+            0.0483630082,
+            [
+              32000,
+              44800
+            ]
+          ],
+          "existing": [
+            7.093764166298116,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            0.129364987,
+            [
+              32000,
+              44800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-1-2-interior",
+        "kind": "ordinary_other_voice",
+        "pcm_sha256": "47b6e95b01416a58e07d4266a62f115eb9a29a454c7fbfa5cda57bedb9354ffa",
+        "scores": {
+          "clock": [
+            0.0469116158,
+            [
+              6400,
+              19200
+            ]
+          ],
+          "existing": [
+            6.095096668895762,
+            [
+              64000,
+              96000
+            ]
+          ],
+          "paired": [
+            0.116478739,
+            [
+              6400,
+              19200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "Chatterbox",
+        "group": "replicate-1-2-interior",
+        "kind": "synthetic",
+        "pcm_sha256": "4df8252c3a3000d7ef018e671ec31a785493237acdf88aab59b16e47b2e2a915",
+        "scores": {
+          "clock": [
+            0.0489104716,
+            [
+              6400,
+              19200
+            ]
+          ],
+          "existing": [
+            7.181642529065125,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            0.1300072322,
+            [
+              6400,
+              19200
+            ]
+          ]
+        },
+        "truth": [
+          26880,
+          42240
+        ]
+      },
+      {
+        "family": null,
+        "group": "replicate-2-0-early",
+        "kind": "untouched",
+        "pcm_sha256": "824c632753d4b3ef4cb4b4e6cf780cd5ff27f097efe6be847b86a4fcd9d33791",
+        "scores": {
+          "clock": [
+            0.0309483275,
+            [
+              9600,
+              22400
+            ]
+          ],
+          "existing": [
+            6.3717189664696425,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.0026502763,
+            [
+              83200,
+              96000
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-2-0-early",
+        "kind": "ordinary_same_host",
+        "pcm_sha256": "7c8cde46f9abc59c69a99dc99b46b57c1e87f9ea1088303e9e984153301fb345",
+        "scores": {
+          "clock": [
+            0.076076651,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            6.3717189664696425,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.1470800344,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-2-0-early",
+        "kind": "ordinary_other_voice",
+        "pcm_sha256": "13cbfee614d32b8c232bb93d21cb99bbf9ce0de46e9758997289d285af3a2603",
+        "scores": {
+          "clock": [
+            0.0306357429,
+            [
+              83200,
+              96000
+            ]
+          ],
+          "existing": [
+            6.3717189664696425,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.0022680021,
+            [
+              83200,
+              96000
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "Kokoro",
+        "group": "replicate-2-0-early",
+        "kind": "synthetic",
+        "pcm_sha256": "facff443caaa71274de2d748e2f4375833f6299b0b9f88a9e87f09bed0cf291d",
+        "scores": {
+          "clock": [
+            0.0333539175,
+            [
+              9600,
+              22400
+            ]
+          ],
+          "existing": [
+            6.3717189664696425,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.0103782586,
+            [
+              9600,
+              22400
+            ]
+          ]
+        },
+        "truth": [
+          5120,
+          15360
+        ]
+      },
+      {
+        "family": null,
+        "group": "replicate-2-1-interior",
+        "kind": "untouched",
+        "pcm_sha256": "f633ffb9943454ea3bfcfe5ca7a3c7f97c5466f97da0ba35577e92a3328075e5",
+        "scores": {
+          "clock": [
+            0.0328110201,
+            [
+              64000,
+              76800
+            ]
+          ],
+          "existing": [
+            5.410399475306106,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.0128407885,
+            [
+              64000,
+              76800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-2-1-interior",
+        "kind": "ordinary_same_host",
+        "pcm_sha256": "b93464aca558218f3a5ffd721ccd729a2921a239ca0322fc464b79b59cc5a5f3",
+        "scores": {
+          "clock": [
+            0.0336890611,
+            [
+              64000,
+              76800
+            ]
+          ],
+          "existing": [
+            3.9077004687771373,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.0136513324,
+            [
+              64000,
+              76800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-2-1-interior",
+        "kind": "ordinary_other_voice",
+        "pcm_sha256": "313414ce9ac1f3ef84b32f23ddd60aa131a650e0162ca31805848b8bdd0e3e65",
+        "scores": {
+          "clock": [
+            0.0341307189,
+            [
+              64000,
+              76800
+            ]
+          ],
+          "existing": [
+            -1.5409455611735972,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            0.0143665346,
+            [
+              64000,
+              76800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "Chatterbox",
+        "group": "replicate-2-1-interior",
+        "kind": "synthetic",
+        "pcm_sha256": "8b24acf0caa7fd0a23340c56e756976a78cbdafc3aeee0709563e80269eb924f",
+        "scores": {
+          "clock": [
+            0.0324030118,
+            [
+              64000,
+              76800
+            ]
+          ],
+          "existing": [
+            5.0579238756639056,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            0.0122466992,
+            [
+              64000,
+              76800
+            ]
+          ]
+        },
+        "truth": [
+          17920,
+          30720
+        ]
+      },
+      {
+        "family": null,
+        "group": "replicate-2-2-interior",
+        "kind": "untouched",
+        "pcm_sha256": "60c7417427e3ee5db297c8f566b8dce1170a9b7017d68b1c01f84464f93214f6",
+        "scores": {
+          "clock": [
+            0.0247469671,
+            [
+              6400,
+              19200
+            ]
+          ],
+          "existing": [
+            -3.7506523150386615,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            -0.0284874278,
+            [
+              6400,
+              19200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-2-2-interior",
+        "kind": "ordinary_same_host",
+        "pcm_sha256": "19955add901a012527d1f3b8e8a8761ac51c9db3948ff8d6509595e3989d7bc3",
+        "scores": {
+          "clock": [
+            0.0253282187,
+            [
+              6400,
+              19200
+            ]
+          ],
+          "existing": [
+            -3.7506523150386615,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            -0.0260504625,
+            [
+              6400,
+              19200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-2-2-interior",
+        "kind": "ordinary_other_voice",
+        "pcm_sha256": "b198a73145251f0ecb9fe508cb993fefc7ad10f56b81a0e35b709b634102758f",
+        "scores": {
+          "clock": [
+            0.0248179817,
+            [
+              6400,
+              19200
+            ]
+          ],
+          "existing": [
+            -3.7506523150386615,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            -0.0285941882,
+            [
+              6400,
+              19200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "ElevenLabs v4",
+        "group": "replicate-2-2-interior",
+        "kind": "synthetic",
+        "pcm_sha256": "d51f026f79118b110ceefd4cbc6d28ff166809908a7f556748af4d6110453797",
+        "scores": {
+          "clock": [
+            0.0256663485,
+            [
+              44800,
+              57600
+            ]
+          ],
+          "existing": [
+            -3.7506523150386615,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            -0.0244443341,
+            [
+              6400,
+              19200
+            ]
+          ]
+        },
+        "truth": [
+          28160,
+          43520
+        ]
+      },
+      {
+        "family": null,
+        "group": "replicate-3-0-late",
+        "kind": "untouched",
+        "pcm_sha256": "be9bef622e0f9c49c8957cf3c9468c18359994da1a65c87170774a1b75192de1",
+        "scores": {
+          "clock": [
+            0.0795526087,
+            [
+              60800,
+              73600
+            ]
+          ],
+          "existing": [
+            6.548625554897006,
+            [
+              64000,
+              96000
+            ]
+          ],
+          "paired": [
+            0.179830343,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-3-0-late",
+        "kind": "ordinary_same_host",
+        "pcm_sha256": "42e45a417ac5b3e5d4fd4f468b9ba3201350073a4dc9d7dc99a4ec1d6221bd8e",
+        "scores": {
+          "clock": [
+            0.0723653975,
+            [
+              60800,
+              73600
+            ]
+          ],
+          "existing": [
+            5.418531638296682,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            0.1572423654,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-3-0-late",
+        "kind": "ordinary_other_voice",
+        "pcm_sha256": "3933a9bf20142cbe7a5b6f72bc43168da434b97248eefe83a155f95a61e9c639",
+        "scores": {
+          "clock": [
+            0.0698151,
+            [
+              60800,
+              73600
+            ]
+          ],
+          "existing": [
+            5.418531638296682,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            0.1482106784,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "Chatterbox",
+        "group": "replicate-3-0-late",
+        "kind": "synthetic",
+        "pcm_sha256": "1f55572028e952a74d5e5a7bd390185c60c17159a4d2bf4f0374fa4d255b15b4",
+        "scores": {
+          "clock": [
+            0.079689622,
+            [
+              60800,
+              73600
+            ]
+          ],
+          "existing": [
+            6.701208766357198,
+            [
+              64000,
+              96000
+            ]
+          ],
+          "paired": [
+            0.1793269181,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": [
+          83200,
+          93440
+        ]
+      },
+      {
+        "family": null,
+        "group": "replicate-3-1-interior",
+        "kind": "untouched",
+        "pcm_sha256": "db6843d9cfaec3bbb26de35781ba4f86d92cbd7bd9da99d08bcab59a1c0dca0a",
+        "scores": {
+          "clock": [
+            0.0966537282,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            6.557261120103794,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            0.2248919325,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-3-1-interior",
+        "kind": "ordinary_same_host",
+        "pcm_sha256": "7568f888ef246f95cd54f92c6740e0680bc668058ea73485f4fbde4756736b6c",
+        "scores": {
+          "clock": [
+            0.0953123459,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            6.557261120103794,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            0.227791299,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-3-1-interior",
+        "kind": "ordinary_other_voice",
+        "pcm_sha256": "1e545ce54cdfa9f19f6048dd71d84cde58c54027a30398e4a3cc937ba72ca9c8",
+        "scores": {
+          "clock": [
+            0.0939521248,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            6.557261120103794,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            0.2228979439,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "ElevenLabs v4",
+        "group": "replicate-3-1-interior",
+        "kind": "synthetic",
+        "pcm_sha256": "448072cdedf5fad751ada155e26a9a115ac27860dc7e6f25677de971f249838f",
+        "scores": {
+          "clock": [
+            0.0952846485,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            6.557261120103794,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            0.2249049525,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": [
+          48640,
+          61440
+        ]
+      },
+      {
+        "family": null,
+        "group": "replicate-3-2-interior",
+        "kind": "untouched",
+        "pcm_sha256": "1b75d7afd967102e5db1044b3e377c6a144f5da4c62796bb3f91369b75684884",
+        "scores": {
+          "clock": [
+            0.0867961196,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            5.090589187959132,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            0.1948558057,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-3-2-interior",
+        "kind": "ordinary_same_host",
+        "pcm_sha256": "911d99332cae503c3bfa018889c588fa55ad556257de78b09a54dc0912edb543",
+        "scores": {
+          "clock": [
+            0.0976365702,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            6.504130474721358,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            0.230586267,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "replicate-3-2-interior",
+        "kind": "ordinary_other_voice",
+        "pcm_sha256": "02b63241ae1400028ec43b59cdf2088b99249decd4f1ad6eb4326a8821dccd22",
+        "scores": {
+          "clock": [
+            0.0867848592,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            5.090589187959132,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            0.1978608994,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "Kokoro",
+        "group": "replicate-3-2-interior",
+        "kind": "synthetic",
+        "pcm_sha256": "3d731c3dde0e26463365b89c1951b5c6da63a781f5c213c8c0ba434a935a8ecc",
+        "scores": {
+          "clock": [
+            0.0995071611,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            6.698006220633924,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            0.2401020031,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": [
+          16640,
+          32000
+        ]
+      },
+      {
+        "family": null,
+        "group": "room-ES2004a",
+        "kind": "background_only",
+        "pcm_sha256": "383b999cdfe89922f0fc8f0cafd9152a6d4297626a6189ec080ea8fb6a688eb2",
+        "scores": {
+          "clock": [
+            0.0216637078,
+            [
+              80000,
+              92800
+            ]
+          ],
+          "existing": [
+            -6.747822803282444,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            -0.0393338775,
+            [
+              80000,
+              92800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "room-IS1009a",
+        "kind": "background_only",
+        "pcm_sha256": "9716f7585ec812565467ecd0ac407637611d2f680b46ac6e96f3a5db5bc169cf",
+        "scores": {
+          "clock": [
+            0.031338354,
+            [
+              25600,
+              38400
+            ]
+          ],
+          "existing": [
+            4.771342979353299,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            -0.0053423464,
+            [
+              25600,
+              38400
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "room-ES2010d",
+        "kind": "background_only",
+        "pcm_sha256": "60edd679f4bca740eea5c143594c5b9298afb016d1ac04d477294906302f5884",
+        "scores": {
+          "clock": [
+            0.0279116394,
+            [
+              35200,
+              48000
+            ]
+          ],
+          "existing": [
+            -3.387156268653541,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            -0.0180726409,
+            [
+              35200,
+              48000
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "room-IS1007a",
+        "kind": "background_only",
+        "pcm_sha256": "26fa7862293b1a5213fbd61e9925ae4a3f9c8316323d9fd74367a5c6812fb781",
+        "scores": {
+          "clock": [
+            0.0209245099,
+            [
+              28800,
+              41600
+            ]
+          ],
+          "existing": [
+            -5.440608021304078,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            -0.0184520711,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      }
+    ],
+    "random_placement": [
+      {
+        "family": null,
+        "group": 0,
+        "kind": "untouched",
+        "pcm_sha256": "7fd8ab8c9c69387f44b6c7bda075b128d332ec6f5145e0cb1e4ba3dd026358c7",
+        "scores": {
+          "clock": [
+            0.0418550443,
+            [
+              0,
+              12800
+            ]
+          ],
+          "existing": [
+            -4.556556665482175,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            0.0215483344,
+            [
+              0,
+              12800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 0,
+        "kind": "same_reader_splice",
+        "pcm_sha256": "ea57507b2aafb3b8578a2c80768e57c684d8779b2996b63bff82388607a7d42d",
+        "scores": {
+          "clock": [
+            0.0391991516,
+            [
+              0,
+              12800
+            ]
+          ],
+          "existing": [
+            -5.115821893507836,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            0.0150852022,
+            [
+              0,
+              12800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 0,
+        "kind": "different_reader_splice",
+        "pcm_sha256": "51d914fb8c95453937f41e16dd4fa4e1cb80e03e841e706dbe3180f5a3ad3142",
+        "scores": {
+          "clock": [
+            0.0411641434,
+            [
+              0,
+              12800
+            ]
+          ],
+          "existing": [
+            -5.44696230598439,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            0.0208956927,
+            [
+              0,
+              12800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "piper",
+        "group": 0,
+        "kind": "piper",
+        "pcm_sha256": "2250554ac8ba1249f1d4c00f5ef0bcb27d21702e548177e1ea5a23443fa04c9c",
+        "scores": {
+          "clock": [
+            0.0426391632,
+            [
+              0,
+              12800
+            ]
+          ],
+          "existing": [
+            -4.926648107319838,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            0.0271676871,
+            [
+              0,
+              12800
+            ]
+          ]
+        },
+        "truth": [
+          30116,
+          45476
+        ]
+      },
+      {
+        "family": "kitten",
+        "group": 0,
+        "kind": "kitten",
+        "pcm_sha256": "1adbd6e336d32db9f0f8876cdfef5e5f141c3a394c20a1c5c34c7ece34b87f72",
+        "scores": {
+          "clock": [
+            0.0475859919,
+            [
+              0,
+              12800
+            ]
+          ],
+          "existing": [
+            -4.718654651695455,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            0.0489279419,
+            [
+              0,
+              12800
+            ]
+          ]
+        },
+        "truth": [
+          30116,
+          45476
+        ]
+      },
+      {
+        "family": null,
+        "group": 1,
+        "kind": "untouched",
+        "pcm_sha256": "333f008b6ea77a1f517e2f426bd61e84e923df472f7f5ce37a13c28330758d86",
+        "scores": {
+          "clock": [
+            0.0682680874,
+            [
+              48000,
+              60800
+            ]
+          ],
+          "existing": [
+            5.766623290656758,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            0.1362148356,
+            [
+              48000,
+              60800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 1,
+        "kind": "same_reader_splice",
+        "pcm_sha256": "d140bf53b4994755b50011fc28fd1eace091924ca24a73a6caf72920287edb0e",
+        "scores": {
+          "clock": [
+            0.0724368139,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            6.101786598632506,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.1587680805,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 1,
+        "kind": "different_reader_splice",
+        "pcm_sha256": "1cc60ca6a593f781db5891d532a1a4048f7b84ce6dd28d9bedb7833cf4817dca",
+        "scores": {
+          "clock": [
+            0.0883978214,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            6.549544261076637,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.2140373697,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "piper",
+        "group": 1,
+        "kind": "piper",
+        "pcm_sha256": "0eb7ebc3be58a26c1123a5e1905802ed83eaa727efcfb7e9a3f63c18609b31dc",
+        "scores": {
+          "clock": [
+            0.081619817,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            5.852625064759624,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.1959763575,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": [
+          19752,
+          35112
+        ]
+      },
+      {
+        "family": "kitten",
+        "group": 1,
+        "kind": "kitten",
+        "pcm_sha256": "5abf956d14b7af2a8c87df7061883f633613b001672bf3c3a2804fe8421dc68b",
+        "scores": {
+          "clock": [
+            0.0777072202,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            5.6842313403217375,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            0.1896711577,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": [
+          19752,
+          35112
+        ]
+      },
+      {
+        "family": null,
+        "group": 2,
+        "kind": "untouched",
+        "pcm_sha256": "1e58f975187bf21827ca0ee25df0478280ebdff68eab75550f1a95bed20a4ced",
+        "scores": {
+          "clock": [
+            0.0510409397,
+            [
+              64000,
+              76800
+            ]
+          ],
+          "existing": [
+            6.925983918560165,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.1233774241,
+            [
+              64000,
+              76800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 2,
+        "kind": "same_reader_splice",
+        "pcm_sha256": "07f70aea00b32c194e5727f9a80d1c9216f63de43eaf45dee41f02f2fd95f001",
+        "scores": {
+          "clock": [
+            0.052254589,
+            [
+              35200,
+              48000
+            ]
+          ],
+          "existing": [
+            7.121099694097015,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.1317770664,
+            [
+              64000,
+              76800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 2,
+        "kind": "different_reader_splice",
+        "pcm_sha256": "5b344c98b0f98622fea60a5aa3d5cf123a979e09344dddfe102e3dcae775c3ab",
+        "scores": {
+          "clock": [
+            0.0485169544,
+            [
+              35200,
+              48000
+            ]
+          ],
+          "existing": [
+            6.7899806438102805,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.1175840609,
+            [
+              64000,
+              76800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "piper",
+        "group": 2,
+        "kind": "piper",
+        "pcm_sha256": "dd7a070e31e9028717679f8635237e0c614e1094c589b5ea070810c6155a81e9",
+        "scores": {
+          "clock": [
+            0.0509270718,
+            [
+              6400,
+              19200
+            ]
+          ],
+          "existing": [
+            7.2429057112301525,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            0.1371782402,
+            [
+              6400,
+              19200
+            ]
+          ]
+        },
+        "truth": [
+          45769,
+          61129
+        ]
+      },
+      {
+        "family": "kitten",
+        "group": 2,
+        "kind": "kitten",
+        "pcm_sha256": "90439db12b314db37f44293d49ef7d48bc7e0daa0d2d83fb5f76de557e824002",
+        "scores": {
+          "clock": [
+            0.0507000263,
+            [
+              35200,
+              48000
+            ]
+          ],
+          "existing": [
+            7.018498807683953,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            0.1287825136,
+            [
+              35200,
+              48000
+            ]
+          ]
+        },
+        "truth": [
+          45769,
+          61129
+        ]
+      },
+      {
+        "family": null,
+        "group": 3,
+        "kind": "untouched",
+        "pcm_sha256": "71b997126d8f34ddf5a2beb1f48dc315bd3a1b4c1a8c57319b45d0ab42e21bf4",
+        "scores": {
+          "clock": [
+            0.0255893558,
+            [
+              54400,
+              67200
+            ]
+          ],
+          "existing": [
+            -4.2890968245649805,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            -0.0122471071,
+            [
+              12800,
+              25600
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 3,
+        "kind": "same_reader_splice",
+        "pcm_sha256": "c1c3d4ccb2f9b816f7eccbc2d1a9510f66123da597abc7cef7432aea02572168",
+        "scores": {
+          "clock": [
+            0.0736545487,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            5.529794124905774,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            0.1658932834,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 3,
+        "kind": "different_reader_splice",
+        "pcm_sha256": "c91760f3915c066a49c8ecbe57bff05a6201d0195568a975d65554faacff9bea",
+        "scores": {
+          "clock": [
+            0.0266107386,
+            [
+              0,
+              12800
+            ]
+          ],
+          "existing": [
+            -4.632415819720475,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            -0.0121550262,
+            [
+              0,
+              12800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "piper",
+        "group": 3,
+        "kind": "piper",
+        "pcm_sha256": "a152dadfb576e08d093f340b946289694d888f54174d803aa7b75d55adc43c99",
+        "scores": {
+          "clock": [
+            0.031885834,
+            [
+              0,
+              12800
+            ]
+          ],
+          "existing": [
+            -3.2878258714540736,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            0.0056550557,
+            [
+              0,
+              12800
+            ]
+          ]
+        },
+        "truth": [
+          9949,
+          25309
+        ]
+      },
+      {
+        "family": "kitten",
+        "group": 3,
+        "kind": "kitten",
+        "pcm_sha256": "fdb60716200b446b1ab9b89c9a3e6dbc47cd90ce37db0363d53a66fbd649651b",
+        "scores": {
+          "clock": [
+            0.0373050933,
+            [
+              12800,
+              25600
+            ]
+          ],
+          "existing": [
+            4.787009543801184,
+            [
+              0,
+              32000
+            ]
+          ],
+          "paired": [
+            0.0175016615,
+            [
+              12800,
+              25600
+            ]
+          ]
+        },
+        "truth": [
+          9949,
+          25309
+        ]
+      },
+      {
+        "family": null,
+        "group": 4,
+        "kind": "untouched",
+        "pcm_sha256": "4e54241a21398661ebdff6fce1332d6119a999d2d56424a720c74dd041f1a712",
+        "scores": {
+          "clock": [
+            0.0243326299,
+            [
+              64000,
+              76800
+            ]
+          ],
+          "existing": [
+            1.1297960586173663,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            -0.0208716157,
+            [
+              32000,
+              44800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 4,
+        "kind": "same_reader_splice",
+        "pcm_sha256": "cf4e814550ea0bab38a70a69d87fde3f89bc70dc06d8f046192d3f210a1881e5",
+        "scores": {
+          "clock": [
+            0.0244927184,
+            [
+              64000,
+              76800
+            ]
+          ],
+          "existing": [
+            1.1422868390102054,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            -0.0009168426,
+            [
+              19200,
+              32000
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 4,
+        "kind": "different_reader_splice",
+        "pcm_sha256": "9a2da75f6d5ec240f6ce2e93d781e9dfbe8e65a29fbd931c28283a4759f3a507",
+        "scores": {
+          "clock": [
+            0.0242998344,
+            [
+              64000,
+              76800
+            ]
+          ],
+          "existing": [
+            1.20230685264414,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            -0.0147960041,
+            [
+              19200,
+              32000
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "piper",
+        "group": 4,
+        "kind": "piper",
+        "pcm_sha256": "ee659213dbce2b25184939cfe9066996d7fa3578c515502368108330eb6f9485",
+        "scores": {
+          "clock": [
+            0.0281010301,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            3.1174021146850004,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            -0.003652199,
+            [
+              32000,
+              44800
+            ]
+          ]
+        },
+        "truth": [
+          32715,
+          48075
+        ]
+      },
+      {
+        "family": "kitten",
+        "group": 4,
+        "kind": "kitten",
+        "pcm_sha256": "0dc945a5bbb07d372eae08505aa5f3bb92886d83bafd21a0d7be1d17c1a5c9ea",
+        "scores": {
+          "clock": [
+            0.0765959819,
+            [
+              22400,
+              35200
+            ]
+          ],
+          "existing": [
+            1.1375728838352344,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            0.1709010221,
+            [
+              22400,
+              35200
+            ]
+          ]
+        },
+        "truth": [
+          32715,
+          48075
+        ]
+      },
+      {
+        "family": null,
+        "group": 5,
+        "kind": "untouched",
+        "pcm_sha256": "f273f321b7fcf59fd0e1f6119e64dcc80d1d0246718cd971ec9821e8354cf1f0",
+        "scores": {
+          "clock": [
+            0.0268637235,
+            [
+              60800,
+              73600
+            ]
+          ],
+          "existing": [
+            -3.6555425658282474,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            -0.0162771469,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 5,
+        "kind": "same_reader_splice",
+        "pcm_sha256": "cfd782e4c4d6c75944bd533d4a2e1534b79b115a782c8906a86c6648022cf98a",
+        "scores": {
+          "clock": [
+            0.0310770843,
+            [
+              64000,
+              76800
+            ]
+          ],
+          "existing": [
+            -3.558865138229631,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            -0.0013152777,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 5,
+        "kind": "different_reader_splice",
+        "pcm_sha256": "d81484fa22dc8b38af27320249f031b52e7bdaa761ef9c0953608c041a6c4e8f",
+        "scores": {
+          "clock": [
+            0.0260796869,
+            [
+              60800,
+              73600
+            ]
+          ],
+          "existing": [
+            -4.144226124924271,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            -0.0208587166,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "piper",
+        "group": 5,
+        "kind": "piper",
+        "pcm_sha256": "c70657456d0cc8875804da63a6ba7d69ccb832a9a03092f148c49d7122f9da9a",
+        "scores": {
+          "clock": [
+            0.0262365785,
+            [
+              35200,
+              48000
+            ]
+          ],
+          "existing": [
+            -3.5987368276900837,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            -0.0192382728,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": [
+          58652,
+          74012
+        ]
+      },
+      {
+        "family": "kitten",
+        "group": 5,
+        "kind": "kitten",
+        "pcm_sha256": "f83ec35d452e2e84500b16ab7e6373d93f6cff8e9b2bddc53a2dcabbbe61dd75",
+        "scores": {
+          "clock": [
+            0.0274251693,
+            [
+              57600,
+              70400
+            ]
+          ],
+          "existing": [
+            -3.7025771699767644,
+            [
+              32000,
+              64000
+            ]
+          ],
+          "paired": [
+            -0.0179155108,
+            [
+              57600,
+              70400
+            ]
+          ]
+        },
+        "truth": [
+          58652,
+          74012
+        ]
+      },
+      {
+        "family": null,
+        "group": 6,
+        "kind": "untouched",
+        "pcm_sha256": "b475d1d5011a18d7d14a0064015a9eb223fcd58385c759c846f789e2792e944e",
+        "scores": {
+          "clock": [
+            0.0489301781,
+            [
+              67200,
+              80000
+            ]
+          ],
+          "existing": [
+            4.797641060375774,
+            [
+              64000,
+              96000
+            ]
+          ],
+          "paired": [
+            0.0781041363,
+            [
+              70400,
+              83200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 6,
+        "kind": "same_reader_splice",
+        "pcm_sha256": "cb41447e322734eed7d8ad2a26270db13d552a898349f3a3eec6f43ec3377b99",
+        "scores": {
+          "clock": [
+            0.094583096,
+            [
+              60800,
+              73600
+            ]
+          ],
+          "existing": [
+            7.161744652669846,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            0.2282449956,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 6,
+        "kind": "different_reader_splice",
+        "pcm_sha256": "6b91bf54e7f867cda34b2fd38283614cfbc18b1da732b308efb123a54834aa5a",
+        "scores": {
+          "clock": [
+            0.0355045692,
+            [
+              70400,
+              83200
+            ]
+          ],
+          "existing": [
+            5.570087904255561,
+            [
+              64000,
+              96000
+            ]
+          ],
+          "paired": [
+            0.023196929,
+            [
+              70400,
+              83200
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "piper",
+        "group": 6,
+        "kind": "piper",
+        "pcm_sha256": "c5a4dc548bc207d1a28c56a6649529e3c8228c589c98e2c95f981817c2cf6395",
+        "scores": {
+          "clock": [
+            0.0325045616,
+            [
+              60800,
+              73600
+            ]
+          ],
+          "existing": [
+            3.7742736277158078,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            0.0097081392,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": [
+          63052,
+          78412
+        ]
+      },
+      {
+        "family": "kitten",
+        "group": 6,
+        "kind": "kitten",
+        "pcm_sha256": "6b7b62b67194e7609d248e258951eff31b1d93ef4a3b107bce05e7ab25445280",
+        "scores": {
+          "clock": [
+            0.0748258401,
+            [
+              60800,
+              73600
+            ]
+          ],
+          "existing": [
+            6.498000192713746,
+            [
+              64000,
+              96000
+            ]
+          ],
+          "paired": [
+            0.1667329392,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": [
+          63052,
+          78412
+        ]
+      },
+      {
+        "family": null,
+        "group": 7,
+        "kind": "untouched",
+        "pcm_sha256": "9bfc2133e0f472a427458a8d9bc542030254bc1b932e8a166db6a7d59464c106",
+        "scores": {
+          "clock": [
+            0.0311438414,
+            [
+              73600,
+              86400
+            ]
+          ],
+          "existing": [
+            4.024087210166704,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            0.0116832778,
+            [
+              0,
+              12800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 7,
+        "kind": "same_reader_splice",
+        "pcm_sha256": "0b7a9ca8fb8179211b0c137eb782a097f49ec18b7d29ba0f2c1f3b45814ba668",
+        "scores": {
+          "clock": [
+            0.0304621492,
+            [
+              73600,
+              86400
+            ]
+          ],
+          "existing": [
+            3.8571700957887085,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            0.0112896951,
+            [
+              0,
+              12800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": 7,
+        "kind": "different_reader_splice",
+        "pcm_sha256": "aecf47bb4380a63d0bf93a682e5dc2730671fec94ab1f730572f426181279499",
+        "scores": {
+          "clock": [
+            0.0822808121,
+            [
+              60800,
+              73600
+            ]
+          ],
+          "existing": [
+            3.0514123260453814,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            0.1816650412,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": "piper",
+        "group": 7,
+        "kind": "piper",
+        "pcm_sha256": "ae67b1e758425f3517f22327adb5e04b537e975132fb29bfa48a4162a2b29b2d",
+        "scores": {
+          "clock": [
+            0.0827585943,
+            [
+              60800,
+              73600
+            ]
+          ],
+          "existing": [
+            4.01130055936202,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            0.186679193,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": [
+          79677,
+          95037
+        ]
+      },
+      {
+        "family": "kitten",
+        "group": 7,
+        "kind": "kitten",
+        "pcm_sha256": "832cbde59cb0178cbcfa6517d7e0a57ccc62f9a15e7062b02e86fa47a928fcde",
+        "scores": {
+          "clock": [
+            0.081179374,
+            [
+              60800,
+              73600
+            ]
+          ],
+          "existing": [
+            4.244275121355398,
+            [
+              48000,
+              80000
+            ]
+          ],
+          "paired": [
+            0.1786273746,
+            [
+              60800,
+              73600
+            ]
+          ]
+        },
+        "truth": [
+          79677,
+          95037
+        ]
+      },
+      {
+        "family": null,
+        "group": "isolated-0",
+        "kind": "isolated",
+        "pcm_sha256": "d6a6cd5a4fedd3eb0c8fead8e53d67f11208abd47988256383a4f9a4a7124612",
+        "scores": {
+          "clock": [
+            0.0218824589,
+            [
+              76800,
+              89600
+            ]
+          ],
+          "existing": [
+            -6.416568742109088,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            -0.0410213448,
+            [
+              12800,
+              25600
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "isolated-1",
+        "kind": "isolated",
+        "pcm_sha256": "9aa3dbe52a874165423ac79d862c817c86d71cbf517871d11401e1fd329bcf2f",
+        "scores": {
+          "clock": [
+            0.0221453288,
+            [
+              16000,
+              28800
+            ]
+          ],
+          "existing": [
+            -5.265359909337211,
+            [
+              64000,
+              96000
+            ]
+          ],
+          "paired": [
+            -0.0397481915,
+            [
+              0,
+              12800
+            ]
+          ]
+        },
+        "truth": null
+      },
+      {
+        "family": null,
+        "group": "isolated-2",
+        "kind": "isolated",
+        "pcm_sha256": "8c18212eb07bf20a57613cb5087cc55d071de74ebaf12f529c8307ce8e5c1cf1",
+        "scores": {
+          "clock": [
+            0.0232836544,
+            [
+              19200,
+              32000
+            ]
+          ],
+          "existing": [
+            -5.356903109034436,
+            [
+              16000,
+              48000
+            ]
+          ],
+          "paired": [
+            -0.0342324657,
+            [
+              19200,
+              32000
+            ]
+          ]
+        },
+        "truth": null
+      }
+    ]
+  },
+  "method": {
+    "decision": "For a new-source follow-up, require at least two additional useful locations across two named generator checkpoints, at most one additional ordinary group in either held bank, and zero additional isolated-background flags. This replay cannot establish generalization to production recordings.",
+    "features": "Mean and 20th/80th response percentiles inside the proposed range, mean minus available near flanks and outside median, difference between the half-range means, and speech occupancy. No absolute position, source identity or known mix level enters the head.",
+    "fit": "Fit clip-balanced ridge regression with penalty 0.1, an unpenalized intercept and scale floor 0.001. The clock head learns known overlap as IoU if the candidate covers at least half the edit, else zero. The paired head adds a unit-weight loss on feature differences between each edited range and the identical clock of its matched ordinary splices. Fit uses only the 40 separate development recordings from the isolation diagnostic.",
+    "held": "Verify both previously exposed held PCM banks. Reuse exact serving two-second scores on randomized stock clips. Rerun the five-window serving response on the 52 clips with three generators because their saved earlier comparator used only two windows. Report added and standalone useful locations, misses, wrong ranges, assessment, ordinary false flags and isolated backgrounds. A useful location covers half the edit and reaches 0.30 IoU.",
+    "input": "Six seconds of continuous 16 kHz mono PCM. Two original four-second contexts start at zero and two seconds. Align native affine frame responses at 280 + 320i samples from each context origin. Drop the 200 ms nearest an internal context boundary, then average duplicate frame centers. Check 800 ms ranges every 200 ms with at least half detected speech.",
+    "point": "Use 44 severe-noise or isolated recordings from the first stock-voice test. Preserve current flags. Set the strict candidate point at the larger of the second-highest unflagged genuine group maximum and the highest unflagged isolated background response. Fit and seal points before computing held features."
+  },
+  "points": {
+    "clock": 0.0767023922,
+    "paired": 0.167395278
+  },
+  "results": {
+    "eligible_for_new_sources": {
+      "clock": false,
+      "paired": false
+    },
+    "panels": {
+      "families": {
+        "clock": {
+          "standalone": {
+            "additional_useful": [],
+            "background": 4,
+            "edit": 12,
+            "flagged_ordinary": 10,
+            "misplaced": 4,
+            "ordinary": 36,
+            "ordinary_groups": 4,
+            "unflagged_background": 4,
+            "unflagged_edit": 7,
+            "unflagged_ordinary": 26,
+            "useful": 1
+          },
+          "supplement": {
+            "additional_useful": [
+              {
+                "family": "Kokoro",
+                "group": "replicate-3-2-interior",
+                "range": [
+                  22400,
+                  35200
+                ]
+              }
+            ],
+            "background": 4,
+            "edit": 12,
+            "flagged_ordinary": 12,
+            "misplaced": 5,
+            "ordinary": 36,
+            "ordinary_groups": 5,
+            "unflagged_background": 4,
+            "unflagged_edit": 6,
+            "unflagged_ordinary": 24,
+            "useful": 1
+          }
+        },
+        "current": {
+          "additional_useful": [],
+          "background": 4,
+          "edit": 12,
+          "flagged_ordinary": 5,
+          "misplaced": 2,
+          "ordinary": 36,
+          "ordinary_groups": 2,
+          "unflagged_background": 4,
+          "unflagged_edit": 10,
+          "unflagged_ordinary": 31
+        },
+        "paired": {
+          "standalone": {
+            "additional_useful": [],
+            "background": 4,
+            "edit": 12,
+            "flagged_ordinary": 10,
+            "misplaced": 4,
+            "ordinary": 36,
+            "ordinary_groups": 4,
+            "unflagged_background": 4,
+            "unflagged_edit": 7,
+            "unflagged_ordinary": 26,
+            "useful": 1
+          },
+          "supplement": {
+            "additional_useful": [
+              {
+                "family": "Kokoro",
+                "group": "replicate-3-2-interior",
+                "range": [
+                  22400,
+                  35200
+                ]
+              }
+            ],
+            "background": 4,
+            "edit": 12,
+            "flagged_ordinary": 12,
+            "misplaced": 5,
+            "ordinary": 36,
+            "ordinary_groups": 5,
+            "unflagged_background": 4,
+            "unflagged_edit": 6,
+            "unflagged_ordinary": 24,
+            "useful": 1
+          }
+        }
+      },
+      "random_placement": {
+        "clock": {
+          "standalone": {
+            "additional_useful": [],
+            "background": 3,
+            "edit": 16,
+            "flagged_ordinary": 3,
+            "misplaced": 2,
+            "ordinary": 24,
+            "ordinary_groups": 3,
+            "unflagged_background": 3,
+            "unflagged_edit": 12,
+            "unflagged_ordinary": 21,
+            "useful": 2
+          },
+          "supplement": {
+            "additional_useful": [
+              {
+                "family": "piper",
+                "group": 1,
+                "range": [
+                  22400,
+                  35200
+                ]
+              },
+              {
+                "family": "kitten",
+                "group": 1,
+                "range": [
+                  22400,
+                  35200
+                ]
+              }
+            ],
+            "background": 3,
+            "edit": 16,
+            "flagged_ordinary": 5,
+            "misplaced": 3,
+            "ordinary": 24,
+            "ordinary_groups": 4,
+            "unflagged_background": 3,
+            "unflagged_edit": 10,
+            "unflagged_ordinary": 19,
+            "useful": 3
+          }
+        },
+        "current": {
+          "additional_useful": [],
+          "background": 3,
+          "edit": 16,
+          "flagged_ordinary": 3,
+          "misplaced": 1,
+          "ordinary": 24,
+          "ordinary_groups": 2,
+          "unflagged_background": 3,
+          "unflagged_edit": 14,
+          "unflagged_ordinary": 21,
+          "useful": 1
+        },
+        "paired": {
+          "standalone": {
+            "additional_useful": [],
+            "background": 3,
+            "edit": 16,
+            "flagged_ordinary": 3,
+            "misplaced": 3,
+            "ordinary": 24,
+            "ordinary_groups": 3,
+            "unflagged_background": 3,
+            "unflagged_edit": 11,
+            "unflagged_ordinary": 21,
+            "useful": 2
+          },
+          "supplement": {
+            "additional_useful": [
+              {
+                "family": "piper",
+                "group": 1,
+                "range": [
+                  22400,
+                  35200
+                ]
+              },
+              {
+                "family": "kitten",
+                "group": 1,
+                "range": [
+                  22400,
+                  35200
+                ]
+              }
+            ],
+            "background": 3,
+            "edit": 16,
+            "flagged_ordinary": 5,
+            "misplaced": 4,
+            "ordinary": 24,
+            "ordinary_groups": 4,
+            "unflagged_background": 3,
+            "unflagged_edit": 9,
+            "unflagged_ordinary": 19,
+            "useful": 3
+          }
+        }
+      }
+    }
+  },
+  "roster_sha256": "21e8126701824b904c8d466a97e99884f1c20568adfd8d8a2f4414c7964f7c51",
+  "runtime": {
+    "numpy": "2.2.6",
+    "pyloudnorm": "0.1.1",
+    "scipy": "1.18.1",
+    "torch": "2.13.0",
+    "transformers": "5.15.1"
+  },
+  "schema": "chipmunk.audio-interval-learning/1",
+  "source_commitments": {
+    "audio-remote-neighbor-final-2026-11-12": {
+      "freeze_sha256": "beb2b2b34483494b032d77da0d74fabbfb491c45c0f6fa6d15a2f36209a6e254",
+      "public_sha256": "c7d6f6d82bbe6a30574c34a02cdc759a97d74fd52b573fe94a20b9b9914d17e9",
+      "roster_sha256": "8dbb962d728780081b1c821f72f4f007025a938d8007a18c37fbcf06ba227e17"
+    },
+    "audio-remote-neighbor-replication-2026-11-12": {
+      "freeze_sha256": "eee9606871765541279af149a26876e0d7cf17dfab890f9ebde1a400afa2cfe3",
+      "incumbent_sha256": "e3dc4ea541a4417a1ffe5eb50fec179362dd67a71255db20c5e252c9f582e59f",
+      "public_sha256": "3d3c27c859e60c86fcb583e017b3e4fda4397ef81110c42b8c1773ec7edd1599",
+      "roster_sha256": "72cddb5d4dd8621d8d179d474b79a3f48262a887100dcc6a87658dfee05d605f"
+    },
+    "audio-variable-boundary-2026-11-12": {
+      "freeze_sha256": "b74032598f6ff8e378a5655509ef89e7e098b49bf34d6d0d227e1c8a5b81e571",
+      "public_sha256": "60dede3b6e5df7d7ed183313cb8d18a307d230f42d355b85e9e3c023e2197484",
+      "roster_sha256": "fde7922defc1b5556bca919288b8d6a71f72731fb1d579cf805e9c8eee15fa75"
+    },
+    "calibration": "db70ce6a6a3b939ca1ebe57d57ee0a0b96ed650f6b440bd3e364dae164ec5c55",
+    "random_placement": "407d4743f816d293045ca53a86ea4125e136744694061f6805e9f86dae23c4dd"
+  }
+}

@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Interval-trained noisy speech review](audio-interval-learning-2026-11-13.md)
+  added three useful locations across two test banks at −5 dB, and nine
+  additional false flags on ordinary files. Both trained heads stay offline.
+  The existing short voice review now shows checked and below-speech-minimum
+  windows with native source timestamps in the browser, PDF and JSON.
+
 - [Side-by-side face tracking](video-face-split-track-2026-11-13.md)
   measures both sides of the picture separately. The study compares
   individual tracks, the largest face, and a guard for changes outside the face.

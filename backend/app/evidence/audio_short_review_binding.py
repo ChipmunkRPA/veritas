@@ -8,6 +8,7 @@ RATE = 16000
 SAMPLES = 6 * RATE
 GRID = tuple((start, start + 2 * RATE) for start in range(0, 5 * RATE, RATE))
 SCHEMA = "chipmunk.short-voice-review/1"
+COVERAGE_SCHEMA = "chipmunk.short-voice-review/2"
 DETECTOR_ID = "aud.short_voice_review"
 REVIEW_POINT = 6.822523597593649
 MP3_REVIEW_POINT = 7.085599896496718
@@ -17,6 +18,7 @@ LIMITATION = ("This is a clue for the complete two-second window. It cannot esta
               "of an edit. It carries no weight in the overall assessment.")
 SCOPE_REASON = ("This check requires Full analysis of six continuous decoded seconds at 16 kHz. "
                 "It supports 16-bit mono WAV and FLAC and a verified 48 kb/s mono MP3 profile.")
+NO_SPEECH_REASON = "No two-second interval contained enough detected speech."
 
 
 def source_metadata(mapping: dict) -> dict:
@@ -55,6 +57,25 @@ def selected_range(responses: list[dict], codec: str | None = None) -> dict | No
     return {key: best[key] for key in ("start_sample", "end_sample")}
 
 
+def source_range(source: dict, start: int, end: int) -> dict:
+    origin = source["timeline"][0]["source_pts"]
+    return {"start_sample": start, "end_sample": end, "source_start_pts": origin + start,
+            "source_end_pts": origin + end, "time_base": "1/16000"}
+
+
+def window_coverage(speech_counts: list[int], source: dict) -> list[dict]:
+    if not supported_source(source) or not isinstance(speech_counts, list) or len(speech_counts) != len(GRID):
+        raise ValueError("Short speech-window coverage does not match a supported source")
+    coverage = []
+    for (start, end), speech in zip(GRID, speech_counts, strict=True):
+        if type(speech) is not int or not 0 <= speech <= end - start:
+            raise ValueError("Invalid short speech-window activity count")
+        coverage.append({"start_sample": start, "end_sample": end, "speech_samples": speech,
+                         "status": "checked" if 2 * speech >= end - start else "below_speech_minimum",
+                         "source_timestamp_ranges": [source_range(source, start, end)]})
+    return coverage
+
+
 def validate(review: dict, source: dict) -> None:
     try:
         _validate(review, source)
@@ -63,9 +84,13 @@ def validate(review: dict, source: dict) -> None:
 
 
 def _validate(review: dict, source: dict) -> None:
-    if (set(review) != {"schema", "title", "status", "reason", "limitation", "affects_overall_confidence", "checked_windows",
-                        "interval", "start_s", "end_s", "source_timestamp_ranges", "artifacts"}
-            or review["schema"] != SCHEMA or review["title"] != TITLE or review["limitation"] != LIMITATION
+    fields = {"schema", "title", "status", "reason", "limitation", "affects_overall_confidence", "checked_windows",
+              "interval", "start_s", "end_s", "source_timestamp_ranges", "artifacts"}
+    measured_coverage = review["schema"] == COVERAGE_SCHEMA
+    if measured_coverage:
+        fields.add("window_coverage")
+    if (set(review) != fields or review["schema"] not in {SCHEMA, COVERAGE_SCHEMA}
+            or review["title"] != TITLE or review["limitation"] != LIMITATION
             or review["affects_overall_confidence"] is not False or review["status"] not in {"flagged", "no_flag", "skipped"}
             or not isinstance(review["reason"], str) or not review["reason"]):
         raise ValueError("Invalid short speech-window evidence status")
@@ -75,6 +100,13 @@ def _validate(review: dict, source: dict) -> None:
             or any(type(a) is not int or type(b) is not int for a, b in windows)
             or (windows and not supported_source(source)) or (review["status"] != "skipped" and not windows)):
         raise ValueError("Invalid short speech-window sample coordinates")
+    if measured_coverage:
+        coverage = review["window_coverage"]
+        expected = window_coverage([row["speech_samples"] for row in coverage], source)
+        admitted = [(row["start_sample"], row["end_sample"]) for row in expected if row["status"] == "checked"]
+        if (coverage != expected or windows != admitted or (review["status"] == "skipped") != (not admitted)
+                or (not admitted and review["reason"] != NO_SPEECH_REASON)):
+            raise ValueError("Short speech-window coverage disagrees with the analysis")
     interval = review["interval"]
     assets = review["artifacts"]
     if review["status"] != "flagged":
@@ -82,9 +114,7 @@ def _validate(review: dict, source: dict) -> None:
             raise ValueError("An unflagged short-window result includes a selected interval")
         return
     a, b = interval["start_sample"], interval["end_sample"]
-    origin = source["timeline"][0]["source_pts"]
-    ranges = [{"start_sample": a, "end_sample": b, "source_start_pts": origin + a,
-               "source_end_pts": origin + b, "time_base": "1/16000"}]
+    ranges = [source_range(source, a, b)]
     if (type(a) is not int or type(b) is not int or (a, b) not in windows
             or review["start_s"] != a / RATE or review["end_s"] != b / RATE or review["source_timestamp_ranges"] != ranges
             or set(assets) != {"selected_clip", "waveform"}):

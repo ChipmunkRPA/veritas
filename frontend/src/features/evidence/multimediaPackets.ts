@@ -182,9 +182,11 @@ export interface AudioSourceClockContext {
     scored_windows_crossing: number }[]
 }
 export interface ShortVoiceReview {
-  schema: 'chipmunk.short-voice-review/1'; status: 'flagged' | 'no_flag' | 'skipped'
+  schema: 'chipmunk.short-voice-review/1' | 'chipmunk.short-voice-review/2'; status: 'flagged' | 'no_flag' | 'skipped'
   title: string; reason: string; limitation: string; affects_overall_confidence: false
   checked_windows: SampleInterval[]; interval: SampleInterval | null; start_s: number | null; end_s: number | null
+  window_coverage?: (SampleInterval & { speech_samples: number; status: 'checked' | 'below_speech_minimum';
+    source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] })[]
   source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
   artifacts: Partial<Record<'selected_clip' | 'waveform', EvidenceAsset>>
 }

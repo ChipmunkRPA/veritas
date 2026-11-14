@@ -5,13 +5,14 @@ from __future__ import annotations
 import hashlib
 
 from app.detectors.audio import calibration
-from app.detectors.audio.content import window_in_speech
 from app.detectors.video.adapters.audio import PellaVoiceDetector
 from app.detectors.video.adapters.common import video_spec
 from app.engine.detector import ActivationUse, Applicability, Detector, DetectorResult, InputUnit, Modality
 from app.evidence.audio_short_review_binding import (
+    COVERAGE_SCHEMA,
     DETECTOR_ID,
     GRID,
+    NO_SPEECH_REASON,
     RATE,
     SAMPLES,
     SCHEMA,
@@ -29,21 +30,26 @@ def skipped(reason: str) -> dict:
 
 
 def scan(pcm, spans, classifier, deadline, *, codec=None) -> dict:
-    intervals = [(a, b) for a, b in GRID if window_in_speech(spans, a / RATE, b / RATE)]
-    if not intervals:
-        return skipped("No two-second interval contained enough detected speech.")
+    # The activity pass produces disjoint spans on this same sample clock.
+    sample_spans = [(round(a * RATE), round(b * RATE)) for a, b in spans]
+    speech_counts = [sum(max(0, min(end, b) - max(start, a)) for a, b in sample_spans) for start, end in GRID]
     responses = []
-    for a, b in intervals:
+    for (a, b), speech in zip(GRID, speech_counts, strict=True):
+        if 2 * speech < b - a:
+            continue
         deadline.check("short voice review")
         probability, = classifier.predict([pcm[a:b]])
         responses.append({"start_sample": a, "end_sample": b, "logit": calibration.logit(probability)})
     deadline.check("short voice review")
     selected = selected_range(responses, codec)
-    if selected:
+    if not responses:
+        status, reason = "skipped", NO_SPEECH_REASON
+    elif selected:
         status, reason = "flagged", "A two-second speech window returned an elevated response for review."
     else:
         status, reason = "no_flag", "No checked two-second speech window was flagged. The recording could still contain an edit."
-    return {"schema": SCHEMA, "status": status, "reason": reason, "responses": responses, "selected": selected}
+    return {"schema": COVERAGE_SCHEMA, "status": status, "reason": reason, "responses": responses,
+            "selected": selected, "speech_counts": speech_counts}
 
 
 class ShortVoiceReview(Detector):
@@ -51,7 +57,7 @@ class ShortVoiceReview(Detector):
 
     spec = video_spec(DETECTOR_ID, TITLE, InputUnit.AUDIO_WINDOW, (),
                       family="voice-review", model_ids=(PellaVoiceDetector.MODEL_ID, ACTIVITY_MODEL),
-                      needs=("audio",), modality=Modality.AUDIO, devices=("cpu",), timeout_s=BUDGET_S, version="1.0.0")
+                      needs=("audio",), modality=Modality.AUDIO, devices=("cpu",), timeout_s=BUDGET_S, version="1.1.0")
 
     def activation_plan(self, ctx):
         return (ActivationUse(PellaVoiceDetector.MODEL_ID, 1, "audio window", "One padded two-second speech window"),

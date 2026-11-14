@@ -153,7 +153,18 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
           </span>)}. They describe the same time in the mixed track. The cause of the speech response is undetermined.
         </p>}
       </>}
-      {rate && shortReview.checked_windows.length > 0 && <details className="mt-3 text-small text-text-muted">
+      {rate && shortReview.window_coverage ? <div className="mt-4 text-small">
+        <h4 className="m-0 font-medium">Two-second window coverage</h4>
+        <p className="mt-1 mb-2 text-caption text-text-muted">Each window requires at least one second of detected speech in the mixed track.</p>
+        <ul className="mb-0 grid gap-2 list-none p-0 sm:grid-cols-2">
+          {shortReview.window_coverage.map((window) => <li key={window.start_sample} className="rounded-md border border-border p-2">
+            <p className="m-0 font-medium">{seconds(window.start_sample / rate)}–{seconds(window.end_sample / rate)}
+              {' · '}{window.status === 'checked' ? 'Checked' : 'Below the speech minimum'}</p>
+            <p className="m-0 text-caption">Detected speech {seconds(window.speech_samples / rate)}.</p>
+            <SourceTimestamps ranges={window.source_timestamp_ranges} />
+          </li>)}
+        </ul>
+      </div> : rate && shortReview.checked_windows.length > 0 && <details className="mt-3 text-small text-text-muted">
         <summary className="cursor-pointer font-medium">Checked two-second windows</summary>
         <ul className="mt-2 mb-0 list-disc pl-4">{shortReview.checked_windows.map((window) =>
           <li key={window.start_sample}>{seconds(window.start_sample / rate)}–{seconds(window.end_sample / rate)}</li>)}</ul>

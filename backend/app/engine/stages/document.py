@@ -518,7 +518,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         result.manifest.sampling[document_tracked_changes.COMMITMENT] = canonical_hash(tracked)
     if word_visibility := decoded.get("meta", {}).get(document_word_visibility.KEY):
         result.manifest.sampling[document_word_visibility.COMMITMENT] = canonical_hash(word_visibility)
-    if invisible := document_invisible_characters.measure(decoded["text"], decoded["source_map"], decoded["meta"]):
+    if invisible := document_invisible_characters.measure(decoded["text"], decoded["source_map"], decoded["meta"],
+                                                        schema=document_invisible_characters.GLYPH_SCHEMA):
         result.manifest.sampling[document_invisible_characters.COMMITMENT] = canonical_hash(invisible)
     if settings.document_email_alternatives_review and decoded.get("meta", {}).get("method") == "email":
         from app.evidence import email_alternatives

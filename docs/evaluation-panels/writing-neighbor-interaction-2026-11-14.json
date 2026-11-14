@@ -1,0 +1,2865 @@
+{
+  "advance": {
+    "side_agreement": false,
+    "triple_agreement": false
+  },
+  "freeze_sha256": "b0138e71fcae6672443252a4cec17f0c4a628e24627978445f7a5a95df120d93",
+  "results": {
+    "elife": {
+      "rows": [
+        {
+          "group": "42179",
+          "measures": {
+            "omission": {
+              "maximum": -0.29500069163595316,
+              "selected": null,
+              "unique_top": [
+                1467,
+                1653
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.9071754975328836,
+              "selected": null,
+              "unique_top": [
+                1467,
+                1653
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.661958266977178,
+              "selected": null,
+              "unique_top": [
+                329,
+                430
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "42179",
+          "measures": {
+            "omission": {
+              "maximum": 0.11683410382446348,
+              "selected": null,
+              "unique_top": [
+                1467,
+                1610
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.7671045026775992,
+              "selected": null,
+              "unique_top": [
+                1467,
+                1610
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.661958266977178,
+              "selected": null,
+              "unique_top": [
+                329,
+                430
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "11853",
+          "measures": {
+            "omission": {
+              "maximum": 0.3685943255499286,
+              "selected": null,
+              "unique_top": [
+                474,
+                618
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.09197894483164153,
+              "selected": null,
+              "unique_top": [
+                1322,
+                1486
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.5935303226870744,
+              "selected": null,
+              "unique_top": [
+                1322,
+                1486
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "11853",
+          "measures": {
+            "omission": {
+              "maximum": 0.3685943255499286,
+              "selected": null,
+              "unique_top": [
+                474,
+                618
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.09197894483164153,
+              "selected": null,
+              "unique_top": [
+                1335,
+                1499
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.5935303226870744,
+              "selected": null,
+              "unique_top": [
+                1335,
+                1499
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "11853",
+          "measures": {
+            "omission": {
+              "maximum": 0.3685943255499286,
+              "selected": null,
+              "unique_top": [
+                474,
+                618
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.09197894483164153,
+              "selected": null,
+              "unique_top": [
+                1326,
+                1490
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.5935303226870744,
+              "selected": null,
+              "unique_top": [
+                1326,
+                1490
+              ]
+            }
+          },
+          "truth": [
+            1000,
+            1077
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "32696",
+          "measures": {
+            "omission": {
+              "maximum": -0.4384643346659766,
+              "selected": null,
+              "unique_top": [
+                449,
+                612
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.753173439343697,
+              "selected": null,
+              "unique_top": [
+                449,
+                612
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -2.0614979455030933,
+              "selected": null,
+              "unique_top": [
+                449,
+                612
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "32696",
+          "measures": {
+            "omission": {
+              "maximum": 1.0529137816915115,
+              "selected": null,
+              "unique_top": [
+                303,
+                453
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.6215248913786933,
+              "selected": null,
+              "unique_top": [
+                162,
+                302
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.564827468000286,
+              "selected": null,
+              "unique_top": [
+                162,
+                302
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "32696",
+          "measures": {
+            "omission": {
+              "maximum": -0.4384643346659766,
+              "selected": null,
+              "unique_top": [
+                452,
+                615
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.7983651797199702,
+              "selected": null,
+              "unique_top": [
+                452,
+                615
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.8930334309784695,
+              "selected": null,
+              "unique_top": [
+                452,
+                615
+              ]
+            }
+          },
+          "truth": [
+            303,
+            451
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "32696",
+          "measures": {
+            "omission": {
+              "maximum": 0.2220650542178928,
+              "selected": null,
+              "unique_top": [
+                303,
+                488
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.7521151363601057,
+              "selected": null,
+              "unique_top": [
+                489,
+                652
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.713814813653626,
+              "selected": null,
+              "unique_top": [
+                303,
+                488
+              ]
+            }
+          },
+          "truth": [
+            303,
+            488
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "27240",
+          "measures": {
+            "omission": {
+              "maximum": 1.030486435476209,
+              "selected": null,
+              "unique_top": [
+                1570,
+                1676
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.13855945707422124,
+              "selected": null,
+              "unique_top": [
+                1570,
+                1676
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.5674182054194576,
+              "selected": null,
+              "unique_top": [
+                1570,
+                1676
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "27240",
+          "measures": {
+            "omission": {
+              "maximum": 1.030486435476209,
+              "selected": null,
+              "unique_top": [
+                1563,
+                1669
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.13855945707422124,
+              "selected": null,
+              "unique_top": [
+                1563,
+                1669
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.5674182054194576,
+              "selected": null,
+              "unique_top": [
+                1563,
+                1669
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "27240",
+          "measures": {
+            "omission": {
+              "maximum": 1.030486435476209,
+              "selected": null,
+              "unique_top": [
+                1583,
+                1689
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.13855945707422124,
+              "selected": null,
+              "unique_top": [
+                1583,
+                1689
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.5674182054194576,
+              "selected": null,
+              "unique_top": [
+                1583,
+                1689
+              ]
+            }
+          },
+          "truth": [
+            166,
+            290
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "27240",
+          "measures": {
+            "omission": {
+              "maximum": 1.030486435476209,
+              "selected": null,
+              "unique_top": [
+                1585,
+                1691
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.13855945707422124,
+              "selected": null,
+              "unique_top": [
+                1585,
+                1691
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.5674182054194576,
+              "selected": null,
+              "unique_top": [
+                1585,
+                1691
+              ]
+            }
+          },
+          "truth": [
+            166,
+            292
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "06659",
+          "measures": {
+            "omission": {
+              "maximum": 0.33686173459249397,
+              "selected": null,
+              "unique_top": [
+                945,
+                1079
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.011088160750499676,
+              "selected": null,
+              "unique_top": [
+                945,
+                1079
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.9776093940110542,
+              "selected": null,
+              "unique_top": [
+                945,
+                1079
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "06659",
+          "measures": {
+            "omission": {
+              "maximum": 0.33686173459249397,
+              "selected": null,
+              "unique_top": [
+                945,
+                1079
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.011088160750499676,
+              "selected": null,
+              "unique_top": [
+                945,
+                1079
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.9776093940110542,
+              "selected": null,
+              "unique_top": [
+                945,
+                1079
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "06659",
+          "measures": {
+            "omission": {
+              "maximum": 0.33686173459249397,
+              "selected": null,
+              "unique_top": [
+                945,
+                1079
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.011088160750499676,
+              "selected": null,
+              "unique_top": [
+                945,
+                1079
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.9776093940110542,
+              "selected": null,
+              "unique_top": [
+                945,
+                1079
+              ]
+            }
+          },
+          "truth": [
+            1336,
+            1531
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "06659",
+          "measures": {
+            "omission": {
+              "maximum": 0.49579475586981214,
+              "selected": null,
+              "unique_top": [
+                1336,
+                1596
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.3428630655346546,
+              "selected": null,
+              "unique_top": [
+                1336,
+                1596
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.2096619729809056,
+              "selected": null,
+              "unique_top": [
+                1336,
+                1596
+              ]
+            }
+          },
+          "truth": [
+            1336,
+            1596
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "26147",
+          "measures": {
+            "omission": {
+              "maximum": 0.328818850174071,
+              "selected": null,
+              "unique_top": [
+                2861,
+                2998
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.33148561424725165,
+              "selected": null,
+              "unique_top": [
+                1468,
+                1607
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.3282749277930455,
+              "selected": null,
+              "unique_top": [
+                2861,
+                2998
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "26147",
+          "measures": {
+            "omission": {
+              "maximum": 0.328818850174071,
+              "selected": null,
+              "unique_top": [
+                2812,
+                2949
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.9401545980474759,
+              "selected": null,
+              "unique_top": [
+                2812,
+                2949
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.3282749277930455,
+              "selected": null,
+              "unique_top": [
+                2812,
+                2949
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "26147",
+          "measures": {
+            "omission": {
+              "maximum": 0.328818850174071,
+              "selected": null,
+              "unique_top": [
+                2822,
+                2959
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.9401545980474759,
+              "selected": null,
+              "unique_top": [
+                2822,
+                2959
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.3282749277930455,
+              "selected": null,
+              "unique_top": [
+                2822,
+                2959
+              ]
+            }
+          },
+          "truth": [
+            1468,
+            1568
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "26147",
+          "measures": {
+            "omission": {
+              "maximum": 0.328818850174071,
+              "selected": null,
+              "unique_top": [
+                2857,
+                2994
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.9401545980474759,
+              "selected": null,
+              "unique_top": [
+                2857,
+                2994
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.3282749277930455,
+              "selected": null,
+              "unique_top": [
+                2857,
+                2994
+              ]
+            }
+          },
+          "truth": [
+            1468,
+            1603
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "13964",
+          "measures": {
+            "omission": {
+              "maximum": -0.25274898431497844,
+              "selected": null,
+              "unique_top": [
+                154,
+                311
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.8624316064160589,
+              "selected": null,
+              "unique_top": [
+                154,
+                311
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.5856367599778562,
+              "selected": null,
+              "unique_top": [
+                154,
+                311
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "13964",
+          "measures": {
+            "omission": {
+              "maximum": 0.668372051796859,
+              "selected": null,
+              "unique_top": [
+                312,
+                490
+              ]
+            },
+            "side_agreement": {
+              "maximum": -1.7954580937495044,
+              "selected": null,
+              "unique_top": [
+                154,
+                311
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -2.3898506414796605,
+              "selected": null,
+              "unique_top": [
+                312,
+                490
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "13964",
+          "measures": {
+            "omission": {
+              "maximum": -0.25274898431497844,
+              "selected": null,
+              "unique_top": [
+                154,
+                311
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.5958157329813085,
+              "selected": null,
+              "unique_top": [
+                154,
+                311
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.3762989061155788,
+              "selected": null,
+              "unique_top": [
+                154,
+                311
+              ]
+            }
+          },
+          "truth": [
+            312,
+            477
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "13964",
+          "measures": {
+            "omission": {
+              "maximum": 0.4567285775679535,
+              "selected": null,
+              "unique_top": [
+                312,
+                501
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.17746421204245255,
+              "selected": null,
+              "unique_top": [
+                312,
+                501
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.21775672062861906,
+              "selected": null,
+              "unique_top": [
+                312,
+                501
+              ]
+            }
+          },
+          "truth": [
+            312,
+            501
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "32660",
+          "measures": {
+            "omission": {
+              "maximum": 1.2694281076912852,
+              "selected": null,
+              "unique_top": [
+                656,
+                833
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.938165203548484,
+              "selected": [
+                656,
+                833
+              ],
+              "unique_top": [
+                656,
+                833
+              ]
+            },
+            "triple_agreement": {
+              "maximum": 0.5554662119254679,
+              "selected": [
+                656,
+                833
+              ],
+              "unique_top": [
+                656,
+                833
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "32660",
+          "measures": {
+            "omission": {
+              "maximum": 1.2694281076912852,
+              "selected": null,
+              "unique_top": [
+                641,
+                818
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.938165203548484,
+              "selected": [
+                641,
+                818
+              ],
+              "unique_top": [
+                641,
+                818
+              ]
+            },
+            "triple_agreement": {
+              "maximum": 0.5554662119254679,
+              "selected": [
+                641,
+                818
+              ],
+              "unique_top": [
+                641,
+                818
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "32660",
+          "measures": {
+            "omission": {
+              "maximum": 2.222674352836129,
+              "selected": [
+                370,
+                458
+              ],
+              "unique_top": [
+                370,
+                458
+              ]
+            },
+            "side_agreement": {
+              "maximum": 1.9759233821037094,
+              "selected": [
+                370,
+                458
+              ],
+              "unique_top": [
+                370,
+                458
+              ]
+            },
+            "triple_agreement": {
+              "maximum": 0.828558268489979,
+              "selected": [
+                370,
+                458
+              ],
+              "unique_top": [
+                370,
+                458
+              ]
+            }
+          },
+          "truth": [
+            370,
+            458
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "32660",
+          "measures": {
+            "omission": {
+              "maximum": 1.2694281076912852,
+              "selected": null,
+              "unique_top": [
+                660,
+                837
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.938165203548484,
+              "selected": [
+                660,
+                837
+              ],
+              "unique_top": [
+                660,
+                837
+              ]
+            },
+            "triple_agreement": {
+              "maximum": 0.5554662119254679,
+              "selected": [
+                660,
+                837
+              ],
+              "unique_top": [
+                660,
+                837
+              ]
+            }
+          },
+          "truth": [
+            370,
+            480
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "25155",
+          "measures": {
+            "omission": {
+              "maximum": 0.9876504020402094,
+              "selected": null,
+              "unique_top": [
+                2462,
+                2557
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.6603958152124414,
+              "selected": null,
+              "unique_top": [
+                375,
+                482
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.4177356275314945,
+              "selected": null,
+              "unique_top": [
+                2212,
+                2324
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "25155",
+          "measures": {
+            "omission": {
+              "maximum": 0.9876504020402094,
+              "selected": null,
+              "unique_top": [
+                2443,
+                2538
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.6603958152124414,
+              "selected": null,
+              "unique_top": [
+                375,
+                482
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.4177356275314945,
+              "selected": null,
+              "unique_top": [
+                2193,
+                2305
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "25155",
+          "measures": {
+            "omission": {
+              "maximum": 0.9876504020402094,
+              "selected": null,
+              "unique_top": [
+                2454,
+                2549
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.5057923927678231,
+              "selected": null,
+              "unique_top": [
+                1621,
+                1755
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.4177356275314945,
+              "selected": null,
+              "unique_top": [
+                2204,
+                2316
+              ]
+            }
+          },
+          "truth": [
+            1621,
+            1755
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "25155",
+          "measures": {
+            "omission": {
+              "maximum": 0.9876504020402094,
+              "selected": null,
+              "unique_top": [
+                2480,
+                2575
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.03311990024375702,
+              "selected": null,
+              "unique_top": [
+                1621,
+                1781
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.4177356275314945,
+              "selected": null,
+              "unique_top": [
+                2230,
+                2342
+              ]
+            }
+          },
+          "truth": [
+            1621,
+            1781
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "09066",
+          "measures": {
+            "omission": {
+              "maximum": -0.08239594419041608,
+              "selected": null,
+              "unique_top": [
+                1035,
+                1321
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.6047048851504202,
+              "selected": null,
+              "unique_top": [
+                1035,
+                1321
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.6921943024218948,
+              "selected": null,
+              "unique_top": [
+                1035,
+                1321
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "09066",
+          "measures": {
+            "omission": {
+              "maximum": -0.13098127127638065,
+              "selected": null,
+              "unique_top": [
+                1035,
+                1321
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.7018755393223495,
+              "selected": null,
+              "unique_top": [
+                1035,
+                1321
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.2749393223964687,
+              "selected": null,
+              "unique_top": [
+                1493,
+                1765
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "09066",
+          "measures": {
+            "omission": {
+              "maximum": -0.07635849066513321,
+              "selected": null,
+              "unique_top": [
+                1035,
+                1321
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.5926299780998545,
+              "selected": null,
+              "unique_top": [
+                1035,
+                1321
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -2.077385240844782,
+              "selected": null,
+              "unique_top": [
+                1035,
+                1321
+              ]
+            }
+          },
+          "truth": [
+            1322,
+            1458
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "09066",
+          "measures": {
+            "omission": {
+              "maximum": 0.1146512961233764,
+              "selected": null,
+              "unique_top": [
+                1035,
+                1321
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.21061040452283528,
+              "selected": null,
+              "unique_top": [
+                1035,
+                1321
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.3830602601339201,
+              "selected": null,
+              "unique_top": [
+                1035,
+                1321
+              ]
+            }
+          },
+          "truth": [
+            1322,
+            1494
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "21715",
+          "measures": {
+            "omission": {
+              "maximum": 1.5181351076299059,
+              "selected": null,
+              "unique_top": [
+                1418,
+                1569
+              ]
+            },
+            "side_agreement": {
+              "maximum": 1.2950955163744213,
+              "selected": [
+                1418,
+                1569
+              ],
+              "unique_top": [
+                1418,
+                1569
+              ]
+            },
+            "triple_agreement": {
+              "maximum": 0.2013294561800181,
+              "selected": [
+                1036,
+                1295
+              ],
+              "unique_top": [
+                1036,
+                1295
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "21715",
+          "measures": {
+            "omission": {
+              "maximum": 1.5181351076299059,
+              "selected": null,
+              "unique_top": [
+                1415,
+                1566
+              ]
+            },
+            "side_agreement": {
+              "maximum": 1.2950955163744213,
+              "selected": [
+                1415,
+                1566
+              ],
+              "unique_top": [
+                1415,
+                1566
+              ]
+            },
+            "triple_agreement": {
+              "maximum": 0.2013294561800181,
+              "selected": [
+                1033,
+                1292
+              ],
+              "unique_top": [
+                1033,
+                1292
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "21715",
+          "measures": {
+            "omission": {
+              "maximum": 1.5181351076299059,
+              "selected": null,
+              "unique_top": [
+                1389,
+                1540
+              ]
+            },
+            "side_agreement": {
+              "maximum": 1.2950955163744213,
+              "selected": [
+                1389,
+                1540
+              ],
+              "unique_top": [
+                1389,
+                1540
+              ]
+            },
+            "triple_agreement": {
+              "maximum": 0.2013294561800181,
+              "selected": [
+                1007,
+                1266
+              ],
+              "unique_top": [
+                1007,
+                1266
+              ]
+            }
+          },
+          "truth": [
+            715,
+            873
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "21715",
+          "measures": {
+            "omission": {
+              "maximum": 1.5181351076299059,
+              "selected": null,
+              "unique_top": [
+                1402,
+                1553
+              ]
+            },
+            "side_agreement": {
+              "maximum": 1.2950955163744213,
+              "selected": [
+                1402,
+                1553
+              ],
+              "unique_top": [
+                1402,
+                1553
+              ]
+            },
+            "triple_agreement": {
+              "maximum": 0.2013294561800181,
+              "selected": [
+                1020,
+                1279
+              ],
+              "unique_top": [
+                1020,
+                1279
+              ]
+            }
+          },
+          "truth": [
+            715,
+            886
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "40818",
+          "measures": {
+            "omission": {
+              "maximum": 0.48825318209383983,
+              "selected": null,
+              "unique_top": [
+                800,
+                927
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.3753079411852911,
+              "selected": null,
+              "unique_top": [
+                1884,
+                2095
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.5734761818769204,
+              "selected": null,
+              "unique_top": [
+                677,
+                799
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "40818",
+          "measures": {
+            "omission": {
+              "maximum": 0.48825318209383983,
+              "selected": null,
+              "unique_top": [
+                823,
+                950
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.3753079411852911,
+              "selected": null,
+              "unique_top": [
+                1907,
+                2118
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.9193979664982566,
+              "selected": null,
+              "unique_top": [
+                823,
+                950
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "40818",
+          "measures": {
+            "omission": {
+              "maximum": 0.5393657576311407,
+              "selected": null,
+              "unique_top": [
+                677,
+                824
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.3753079411852911,
+              "selected": null,
+              "unique_top": [
+                1909,
+                2120
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.1063539963808617,
+              "selected": null,
+              "unique_top": [
+                2314,
+                2602
+              ]
+            }
+          },
+          "truth": [
+            677,
+            824
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "40818",
+          "measures": {
+            "omission": {
+              "maximum": 0.48825318209383983,
+              "selected": null,
+              "unique_top": [
+                831,
+                958
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.3375544275039728,
+              "selected": null,
+              "unique_top": [
+                831,
+                958
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.1063539963808617,
+              "selected": null,
+              "unique_top": [
+                2320,
+                2608
+              ]
+            }
+          },
+          "truth": [
+            677,
+            830
+          ],
+          "variant": "granite"
+        }
+      ],
+      "summary": {
+        "omission": {
+          "additional_generators": [
+            "qwen"
+          ],
+          "additional_ordinary_works": [],
+          "additional_works": [
+            "32660"
+          ],
+          "centers_measured": 429,
+          "combined_locations": 1,
+          "combined_ordinary_works": 2,
+          "edits": 21,
+          "exact_locations": 1,
+          "existing_locations": 0,
+          "existing_ordinary_works": 2,
+          "files": 45,
+          "files_assessed": 45,
+          "ordinary_files": 24,
+          "ordinary_flags": 0,
+          "target_assessed": 21,
+          "target_unique_top": 5,
+          "wrong_locations": 0
+        },
+        "side_agreement": {
+          "additional_generators": [
+            "qwen"
+          ],
+          "additional_ordinary_works": [
+            "21715",
+            "32660"
+          ],
+          "additional_works": [
+            "32660"
+          ],
+          "centers_measured": 429,
+          "combined_locations": 1,
+          "combined_ordinary_works": 4,
+          "edits": 21,
+          "exact_locations": 1,
+          "existing_locations": 0,
+          "existing_ordinary_works": 2,
+          "files": 45,
+          "files_assessed": 45,
+          "ordinary_files": 24,
+          "ordinary_flags": 4,
+          "target_assessed": 21,
+          "target_unique_top": 5,
+          "wrong_locations": 3
+        },
+        "triple_agreement": {
+          "additional_generators": [
+            "qwen"
+          ],
+          "additional_ordinary_works": [
+            "21715",
+            "32660"
+          ],
+          "additional_works": [
+            "32660"
+          ],
+          "centers_measured": 429,
+          "combined_locations": 1,
+          "combined_ordinary_works": 4,
+          "edits": 21,
+          "exact_locations": 1,
+          "existing_locations": 0,
+          "existing_ordinary_works": 2,
+          "files": 45,
+          "files_assessed": 45,
+          "ordinary_files": 24,
+          "ordinary_flags": 4,
+          "target_assessed": 21,
+          "target_unique_top": 4,
+          "wrong_locations": 3
+        }
+      }
+    },
+    "f1000": {
+      "rows": [
+        {
+          "group": "9026",
+          "measures": {
+            "omission": {
+              "maximum": -1.3979789613764537,
+              "selected": null,
+              "unique_top": [
+                1028,
+                1195
+              ]
+            },
+            "side_agreement": {
+              "maximum": -2.2966597540672344,
+              "selected": null,
+              "unique_top": [
+                365,
+                548
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -2.7660261460116526,
+              "selected": null,
+              "unique_top": [
+                365,
+                548
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "9026",
+          "measures": {
+            "omission": {
+              "maximum": -1.309581677809597,
+              "selected": null,
+              "unique_top": [
+                1027,
+                1195
+              ]
+            },
+            "side_agreement": {
+              "maximum": -2.2966597540672344,
+              "selected": null,
+              "unique_top": [
+                365,
+                548
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -2.7660261460116526,
+              "selected": null,
+              "unique_top": [
+                365,
+                548
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "9026",
+          "measures": {
+            "omission": {
+              "maximum": -1.3979789613764537,
+              "selected": null,
+              "unique_top": [
+                1014,
+                1181
+              ]
+            },
+            "side_agreement": {
+              "maximum": -2.2966597540672344,
+              "selected": null,
+              "unique_top": [
+                351,
+                534
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -2.7660261460116526,
+              "selected": null,
+              "unique_top": [
+                351,
+                534
+              ]
+            }
+          },
+          "truth": [
+            125,
+            257
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "9026",
+          "measures": {
+            "omission": {
+              "maximum": -1.3979789613764537,
+              "selected": null,
+              "unique_top": [
+                1077,
+                1244
+              ]
+            },
+            "side_agreement": {
+              "maximum": -2.2966597540672344,
+              "selected": null,
+              "unique_top": [
+                414,
+                597
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -2.7660261460116526,
+              "selected": null,
+              "unique_top": [
+                414,
+                597
+              ]
+            }
+          },
+          "truth": [
+            125,
+            320
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "12989",
+          "measures": {
+            "omission": {
+              "maximum": 1.8958242335047095,
+              "selected": [
+                626,
+                811
+              ],
+              "unique_top": [
+                626,
+                811
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.3373906129071944,
+              "selected": null,
+              "unique_top": [
+                2180,
+                2310
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.4177055262428127,
+              "selected": null,
+              "unique_top": [
+                271,
+                506
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "12989",
+          "measures": {
+            "omission": {
+              "maximum": 1.241907026063918,
+              "selected": null,
+              "unique_top": [
+                2301,
+                2431
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.3373906129071944,
+              "selected": null,
+              "unique_top": [
+                2301,
+                2431
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.5863049638267006,
+              "selected": null,
+              "unique_top": [
+                300,
+                696
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "12989",
+          "measures": {
+            "omission": {
+              "maximum": 1.8958242335047095,
+              "selected": [
+                626,
+                811
+              ],
+              "unique_top": [
+                626,
+                811
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.3373906129071944,
+              "selected": null,
+              "unique_top": [
+                2177,
+                2307
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.4177055262428127,
+              "selected": null,
+              "unique_top": [
+                271,
+                506
+              ]
+            }
+          },
+          "truth": [
+            1209,
+            1302
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "12989",
+          "measures": {
+            "omission": {
+              "maximum": 1.8958242335047095,
+              "selected": [
+                626,
+                811
+              ],
+              "unique_top": [
+                626,
+                811
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.30909903157123547,
+              "selected": null,
+              "unique_top": [
+                1209,
+                1318
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.4177055262428127,
+              "selected": null,
+              "unique_top": [
+                271,
+                506
+              ]
+            }
+          },
+          "truth": [
+            1209,
+            1318
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "12039",
+          "measures": {
+            "omission": {
+              "maximum": -0.9032785312561904,
+              "selected": null,
+              "unique_top": [
+                231,
+                323
+              ]
+            },
+            "side_agreement": {
+              "maximum": -1.117310163581927,
+              "selected": null,
+              "unique_top": [
+                231,
+                323
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.140761411313882,
+              "selected": null,
+              "unique_top": [
+                231,
+                323
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "12039",
+          "measures": {
+            "omission": {
+              "maximum": -1.1170481802650556,
+              "selected": null,
+              "unique_top": [
+                231,
+                323
+              ]
+            },
+            "side_agreement": {
+              "maximum": -1.3308178292739208,
+              "selected": null,
+              "unique_top": [
+                231,
+                323
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.347207621226624,
+              "selected": null,
+              "unique_top": [
+                231,
+                323
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "12039",
+          "measures": {
+            "omission": {
+              "maximum": 2.4339170744535688,
+              "selected": [
+                880,
+                1095
+              ],
+              "unique_top": [
+                880,
+                1095
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.5458432801314159,
+              "selected": null,
+              "unique_top": [
+                880,
+                1095
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.30824091690733035,
+              "selected": null,
+              "unique_top": [
+                880,
+                1095
+              ]
+            }
+          },
+          "truth": [
+            880,
+            1095
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "12039",
+          "measures": {
+            "omission": {
+              "maximum": -0.18305046177828854,
+              "selected": null,
+              "unique_top": [
+                880,
+                1093
+              ]
+            },
+            "side_agreement": {
+              "maximum": -1.117310163581927,
+              "selected": null,
+              "unique_top": [
+                231,
+                323
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.140761411313882,
+              "selected": null,
+              "unique_top": [
+                231,
+                323
+              ]
+            }
+          },
+          "truth": [
+            880,
+            1093
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "12687",
+          "measures": {
+            "omission": {
+              "maximum": -0.45330927115189823,
+              "selected": null,
+              "unique_top": [
+                2498,
+                2663
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.8475089562640757,
+              "selected": null,
+              "unique_top": [
+                2664,
+                2764
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.9158128827650691,
+              "selected": null,
+              "unique_top": [
+                2923,
+                3063
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "12687",
+          "measures": {
+            "omission": {
+              "maximum": -0.436947176257307,
+              "selected": null,
+              "unique_top": [
+                939,
+                1214
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.7486788417077871,
+              "selected": null,
+              "unique_top": [
+                1489,
+                1637
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.9158128827650691,
+              "selected": null,
+              "unique_top": [
+                3107,
+                3247
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "12687",
+          "measures": {
+            "omission": {
+              "maximum": -0.45330927115189823,
+              "selected": null,
+              "unique_top": [
+                2499,
+                2664
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.8475089562640757,
+              "selected": null,
+              "unique_top": [
+                2665,
+                2765
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.9158128827650691,
+              "selected": null,
+              "unique_top": [
+                2924,
+                3064
+              ]
+            }
+          },
+          "truth": [
+            181,
+            292
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "12687",
+          "measures": {
+            "omission": {
+              "maximum": 1.6783273351983872,
+              "selected": null,
+              "unique_top": [
+                181,
+                320
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.27258782105327706,
+              "selected": null,
+              "unique_top": [
+                181,
+                320
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.7770892304466288,
+              "selected": null,
+              "unique_top": [
+                181,
+                320
+              ]
+            }
+          },
+          "truth": [
+            181,
+            320
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "12647",
+          "measures": {
+            "omission": {
+              "maximum": -0.21992625147371161,
+              "selected": null,
+              "unique_top": [
+                578,
+                747
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.6069284099924055,
+              "selected": null,
+              "unique_top": [
+                578,
+                747
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.9918388054359766,
+              "selected": null,
+              "unique_top": [
+                578,
+                747
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "12647",
+          "measures": {
+            "omission": {
+              "maximum": -0.2823015503514104,
+              "selected": null,
+              "unique_top": [
+                1742,
+                1914
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.7576547134987108,
+              "selected": null,
+              "unique_top": [
+                880,
+                1046
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -2.270527923120159,
+              "selected": null,
+              "unique_top": [
+                880,
+                1046
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "12647",
+          "measures": {
+            "omission": {
+              "maximum": 0.8740285178865551,
+              "selected": null,
+              "unique_top": [
+                2295,
+                2432
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.5405133437664986,
+              "selected": null,
+              "unique_top": [
+                2295,
+                2432
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.9918388054359766,
+              "selected": null,
+              "unique_top": [
+                578,
+                747
+              ]
+            }
+          },
+          "truth": [
+            2217,
+            2294
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "12647",
+          "measures": {
+            "omission": {
+              "maximum": 0.034818373296056054,
+              "selected": null,
+              "unique_top": [
+                2313,
+                2450
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.6069284099924055,
+              "selected": null,
+              "unique_top": [
+                578,
+                747
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -1.9918388054359766,
+              "selected": null,
+              "unique_top": [
+                578,
+                747
+              ]
+            }
+          },
+          "truth": [
+            2217,
+            2312
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "13723",
+          "measures": {
+            "omission": {
+              "maximum": 1.5254870056961503,
+              "selected": null,
+              "unique_top": [
+                137,
+                350
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.84544200782581,
+              "selected": [
+                137,
+                350
+              ],
+              "unique_top": [
+                137,
+                350
+              ]
+            },
+            "triple_agreement": {
+              "maximum": 0.4586600943765768,
+              "selected": [
+                137,
+                350
+              ],
+              "unique_top": [
+                137,
+                350
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "13723",
+          "measures": {
+            "omission": {
+              "maximum": -0.7171519160138496,
+              "selected": null,
+              "unique_top": [
+                1138,
+                1477
+              ]
+            },
+            "side_agreement": {
+              "maximum": -1.1176345277135227,
+              "selected": null,
+              "unique_top": [
+                1138,
+                1477
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -2.959672839329195,
+              "selected": null,
+              "unique_top": [
+                1138,
+                1477
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "13723",
+          "measures": {
+            "omission": {
+              "maximum": 1.5254870056961503,
+              "selected": null,
+              "unique_top": [
+                137,
+                350
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.84544200782581,
+              "selected": [
+                137,
+                350
+              ],
+              "unique_top": [
+                137,
+                350
+              ]
+            },
+            "triple_agreement": {
+              "maximum": 0.4586600943765768,
+              "selected": [
+                137,
+                350
+              ],
+              "unique_top": [
+                137,
+                350
+              ]
+            }
+          },
+          "truth": [
+            2093,
+            2226
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "13723",
+          "measures": {
+            "omission": {
+              "maximum": 1.5254870056961503,
+              "selected": null,
+              "unique_top": [
+                137,
+                350
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.84544200782581,
+              "selected": [
+                137,
+                350
+              ],
+              "unique_top": [
+                137,
+                350
+              ]
+            },
+            "triple_agreement": {
+              "maximum": 0.4586600943765768,
+              "selected": [
+                137,
+                350
+              ],
+              "unique_top": [
+                137,
+                350
+              ]
+            }
+          },
+          "truth": [
+            2093,
+            2307
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "13610",
+          "measures": {
+            "omission": {
+              "maximum": -1.1454698262982312,
+              "selected": null,
+              "unique_top": [
+                1075,
+                1273
+              ]
+            },
+            "side_agreement": {
+              "maximum": -1.2731301135383333,
+              "selected": null,
+              "unique_top": [
+                1075,
+                1273
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -2.4168222653042886,
+              "selected": null,
+              "unique_top": [
+                1075,
+                1273
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "13610",
+          "measures": {
+            "omission": {
+              "maximum": -1.1454698262982312,
+              "selected": null,
+              "unique_top": [
+                1070,
+                1268
+              ]
+            },
+            "side_agreement": {
+              "maximum": -1.2019629478391363,
+              "selected": null,
+              "unique_top": [
+                1070,
+                1268
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -2.314918051350487,
+              "selected": null,
+              "unique_top": [
+                1070,
+                1268
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "13610",
+          "measures": {
+            "omission": {
+              "maximum": -0.7516734810293111,
+              "selected": null,
+              "unique_top": [
+                1274,
+                1400
+              ]
+            },
+            "side_agreement": {
+              "maximum": -1.9203164969799358,
+              "selected": null,
+              "unique_top": [
+                1274,
+                1400
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -4.500472722885173,
+              "selected": null,
+              "unique_top": [
+                339,
+                707
+              ]
+            }
+          },
+          "truth": [
+            1274,
+            1400
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "13610",
+          "measures": {
+            "omission": {
+              "maximum": -1.6539324945874772,
+              "selected": null,
+              "unique_top": [
+                339,
+                707
+              ]
+            },
+            "side_agreement": {
+              "maximum": -2.378569160357509,
+              "selected": null,
+              "unique_top": [
+                1075,
+                1273
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -3.3720441708006206,
+              "selected": null,
+              "unique_top": [
+                1075,
+                1273
+              ]
+            }
+          },
+          "truth": [
+            1274,
+            1426
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "11917",
+          "measures": {
+            "omission": {
+              "maximum": -0.2838034435683799,
+              "selected": null,
+              "unique_top": [
+                846,
+                1003
+              ]
+            },
+            "side_agreement": {
+              "maximum": -2.5965460700555494,
+              "selected": null,
+              "unique_top": [
+                846,
+                1003
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -3.7440759903224485,
+              "selected": null,
+              "unique_top": [
+                471,
+                634
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "11917",
+          "measures": {
+            "omission": {
+              "maximum": -0.2838034435683799,
+              "selected": null,
+              "unique_top": [
+                846,
+                1003
+              ]
+            },
+            "side_agreement": {
+              "maximum": -2.5965460700555494,
+              "selected": null,
+              "unique_top": [
+                846,
+                1003
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -3.7440759903224485,
+              "selected": null,
+              "unique_top": [
+                471,
+                634
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "11917",
+          "measures": {
+            "omission": {
+              "maximum": 0.675908725534787,
+              "selected": null,
+              "unique_top": [
+                846,
+                996
+              ]
+            },
+            "side_agreement": {
+              "maximum": -3.450549147086755,
+              "selected": null,
+              "unique_top": [
+                471,
+                634
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -3.7440759903224485,
+              "selected": null,
+              "unique_top": [
+                471,
+                634
+              ]
+            }
+          },
+          "truth": [
+            846,
+            996
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "11917",
+          "measures": {
+            "omission": {
+              "maximum": 0.3775172912875769,
+              "selected": null,
+              "unique_top": [
+                846,
+                1015
+              ]
+            },
+            "side_agreement": {
+              "maximum": -1.6712017204449654,
+              "selected": null,
+              "unique_top": [
+                846,
+                1015
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -2.093593064182846,
+              "selected": null,
+              "unique_top": [
+                846,
+                1015
+              ]
+            }
+          },
+          "truth": [
+            846,
+            1015
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "13783",
+          "measures": {
+            "omission": {
+              "maximum": -0.3829102811026009,
+              "selected": null,
+              "unique_top": [
+                2402,
+                2668
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.4142059646515549,
+              "selected": null,
+              "unique_top": [
+                2402,
+                2668
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.6104561881742971,
+              "selected": null,
+              "unique_top": [
+                2402,
+                2668
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "before"
+        },
+        {
+          "group": "13783",
+          "measures": {
+            "omission": {
+              "maximum": -0.3829102811026009,
+              "selected": null,
+              "unique_top": [
+                2417,
+                2683
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.4142059646515549,
+              "selected": null,
+              "unique_top": [
+                2417,
+                2683
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.6104561881742971,
+              "selected": null,
+              "unique_top": [
+                2417,
+                2683
+              ]
+            }
+          },
+          "truth": null,
+          "variant": "after"
+        },
+        {
+          "group": "13783",
+          "measures": {
+            "omission": {
+              "maximum": -0.3829102811026009,
+              "selected": null,
+              "unique_top": [
+                2373,
+                2639
+              ]
+            },
+            "side_agreement": {
+              "maximum": -0.4142059646515549,
+              "selected": null,
+              "unique_top": [
+                2373,
+                2639
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.6104561881742971,
+              "selected": null,
+              "unique_top": [
+                2373,
+                2639
+              ]
+            }
+          },
+          "truth": [
+            2092,
+            2233
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "13783",
+          "measures": {
+            "omission": {
+              "maximum": 0.3954406996390136,
+              "selected": null,
+              "unique_top": [
+                2092,
+                2247
+              ]
+            },
+            "side_agreement": {
+              "maximum": 0.2443660213533596,
+              "selected": null,
+              "unique_top": [
+                2092,
+                2247
+              ]
+            },
+            "triple_agreement": {
+              "maximum": -0.6104561881742971,
+              "selected": null,
+              "unique_top": [
+                2387,
+                2653
+              ]
+            }
+          },
+          "truth": [
+            2092,
+            2247
+          ],
+          "variant": "granite"
+        }
+      ],
+      "summary": {
+        "omission": {
+          "additional_generators": [],
+          "additional_ordinary_works": [
+            "12989"
+          ],
+          "additional_works": [],
+          "centers_measured": 292,
+          "combined_locations": 4,
+          "combined_ordinary_works": 3,
+          "edits": 18,
+          "exact_locations": 1,
+          "existing_locations": 4,
+          "existing_ordinary_works": 2,
+          "files": 36,
+          "files_assessed": 36,
+          "ordinary_files": 18,
+          "ordinary_flags": 1,
+          "target_assessed": 18,
+          "target_unique_top": 7,
+          "wrong_locations": 2
+        },
+        "side_agreement": {
+          "additional_generators": [],
+          "additional_ordinary_works": [],
+          "additional_works": [],
+          "centers_measured": 292,
+          "combined_locations": 4,
+          "combined_ordinary_works": 2,
+          "edits": 18,
+          "exact_locations": 0,
+          "existing_locations": 4,
+          "existing_ordinary_works": 2,
+          "files": 36,
+          "files_assessed": 36,
+          "ordinary_files": 18,
+          "ordinary_flags": 1,
+          "target_assessed": 18,
+          "target_unique_top": 6,
+          "wrong_locations": 2
+        },
+        "triple_agreement": {
+          "additional_generators": [],
+          "additional_ordinary_works": [],
+          "additional_works": [],
+          "centers_measured": 292,
+          "combined_locations": 4,
+          "combined_ordinary_works": 2,
+          "edits": 18,
+          "exact_locations": 0,
+          "existing_locations": 4,
+          "existing_ordinary_works": 2,
+          "files": 36,
+          "files_assessed": 36,
+          "ordinary_files": 18,
+          "ordinary_flags": 1,
+          "target_assessed": 18,
+          "target_unique_top": 3,
+          "wrong_locations": 2
+        }
+      }
+    }
+  },
+  "schema": "chipmunk.writing-neighbor-interaction/1"
+}

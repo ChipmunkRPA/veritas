@@ -32,6 +32,13 @@ Under `backend/app/third_party`, each package with its unchanged licence file.
 | `latentsync` | <https://github.com/bytedance/LatentSync> | commit a229c3948406bc2cf6eaf4873e662e70c6a04746 | Apache-2.0 ([text](backend/app/third_party/latentsync/LICENSE)) | Copyright (c) 2024 Bytedance Ltd. and/or its affiliates | `stable_syncnet.py`: StableSyncNet and its attention class; diffusers' feed-forward block re-implemented with the same parameter names, gradient checkpointing, the attention-mask path, einops and the OmegaConf file removed (the file's docstring) |
 | SFace alignment reference | [OpenCV face_recognize.cpp](https://github.com/opencv/opencv/blob/40738fb16ceddb5fb3fea747585f7ce6abb0605b/modules/objdetect/src/face_recognize.cpp) | tag 5.0.0, commit 40738fb16ceddb5fb3fea747585f7ce6abb0605b | Apache-2.0 ([text](docs/third-party/opencv-sface-v15-Apache-2.0.txt)) | OpenCV project; the upstream file refers to the distribution license | `backend/scripts/sface_native_v15.py` and opt-in `backend/app/detectors/video/face_appearance.py`: explicit Python transcription of float/double similarity alignment, with degenerate-input refusal. The production copy preserves the qualified research functions. Native contract checks and source-disjoint v17 confirmation precede local integration; this is a bounded appearance cue, not identity recognition or an AI probability. |
 
+## Unicode data
+
+The document character check uses 77 Greek and Cyrillic single-letter
+mappings derived from Unicode 17.0
+[`confusables.txt`](https://www.unicode.org/Public/17.0.0/security/confusables.txt).
+Copyright © 1991–2026 Unicode, Inc. [Unicode License V3](backend/app/evidence/data/unicode-license-v3.txt)
+
 ## Fonts
 
 The reports use the families in `backend/app/reports/fonts`. The web application also bundles Manrope and DM Sans;

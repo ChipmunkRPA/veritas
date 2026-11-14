@@ -242,6 +242,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const textVisibility = set.coverage?.pdf_text_visibility
   const wordVisibility = set.coverage?.word_text_visibility
   const invisible = set.coverage?.invisible_characters
+  const lookalikes = invisible?.schema === 'document-invisible-characters/2'
   const ocrPages = set.coverage?.ocr?.pages ?? []
   const matched = set.coverage?.matched_context_review
   const writingAgreement = set.coverage?.writing_second_check
@@ -269,15 +270,20 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     <DocumentRepeatedPassages result={set.repeated_passages} />
     {set.percentage_consistency && <PercentageConsistency review={set.percentage_consistency} />}
     {invisible && <section aria-labelledby="document-invisible-characters" className="mt-4 rounded-md border border-border p-4">
-      <h3 id="document-invisible-characters" className="m-0 text-body font-medium">Invisible characters in the source text</h3>
+      <h3 id="document-invisible-characters" className="m-0 text-body font-medium">
+        {lookalikes ? 'Invisible and look-alike characters in the source text' : 'Invisible characters in the source text'}
+      </h3>
       <p className="mt-2 mb-0 text-small">Checked {invisible.checked_chars} extracted characters across {invisible.checked_blocks} mapped blocks.
         {' '}Found {invisible.matches} marked {invisible.matches === 1 ? 'character' : 'characters'}.</p>
       <p className="mt-2 mb-0 text-small text-text-muted">Direction overrides, embedded byte order marks, and selected invisible breaks
-        or joiners inside basic Latin letters or digits are in scope. Ordinary formatting and copy and paste can introduce them.
+        or joiners inside basic Latin letters or digits are in scope.
+        {lookalikes ? ' This also checks listed Greek and Cyrillic look-alikes in mostly basic Latin words. Ordinary multilingual text, technical notation and copy and paste can introduce these characters.'
+          : ' Ordinary formatting and copy and paste can introduce them.'}
         {' '}This observation carries zero AI-authorship weight.</p>
       {invisible.locations.length > 0 && <ul className="mt-2 mb-0 pl-5 text-small">
         {invisible.locations.map(row => <li key={row.text_offset}>
-          {invisibleCharacterNames[row.codepoint]} <span className="font-mono">{row.codepoint}</span> · {row.body_path
+          {row.looks_like ? <>Looks like <span className="font-mono">{row.looks_like}</span></> : invisibleCharacterNames[row.codepoint]}
+          {' '}<span className="font-mono">{row.codepoint}</span> · {row.body_path
             ? `Word body path ${row.body_path.join(' / ')}, paragraph characters`
             : row.mime_part ? `Email part ${row.mime_part}, ${invisible.coordinate_space === 'decoded_email_html'
               ? 'decoded HTML source characters' : 'decoded source characters'}` : 'Decoded source characters'}

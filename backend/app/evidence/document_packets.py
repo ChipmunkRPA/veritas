@@ -526,8 +526,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][document_word_visibility.KEY] = decoded["meta"].get(document_word_visibility.KEY)
     if invisible := document_invisible_characters.from_result(result):
         document["source"][document_invisible_characters.COMMITMENT] = invisible
-        document["coverage"][document_invisible_characters.KEY] = document_invisible_characters.measure(
-            text, mapping, decoded["meta"])
+        document["coverage"][document_invisible_characters.KEY] = document_invisible_characters.rebuild(
+            text, mapping, decoded["meta"], invisible)
         document_invisible_characters.validate(document, invisible)
     if tracked_commitment := document_tracked_changes.from_result(result):
         document["source"][document_tracked_changes.COMMITMENT] = tracked_commitment

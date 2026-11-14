@@ -1,0 +1,95 @@
+{
+  "cutoffs": {
+    "omission": 1.7221808973863402,
+    "side_agreement": 0.7071592590710567,
+    "triple_agreement": 0
+  },
+  "implementation_sha256": "62683cd8f8cbec299f93c017bece432036ea1d3bee7f521db8a12acff5dcba23",
+  "inputs": {
+    "elife": "227d5287d17e3f8cf92cbccfedc30c6e134b4e04767be56805d024538bd15e99",
+    "f1000": "2de36e115c061e9cf4e353a567a6987ccf116adb00d49a18478c2cf12e5a6b3d",
+    "omission": "0c8721669f689ad8cba9344600c2757a3a5ce4835155836911dc380533dfd51d",
+    "point": "1b4713fb1fc38053a1f28d2c4e564fa587cb16950d261070e8dd7ab6d6871801"
+  },
+  "protocol": {
+    "advance": "Add at least three exact locations on different held works across both publishers and both generators, with at most one additional flagged ordinary work per publisher and no more than two wrong locations per additional exact location. Require fresh confirmation before serving.",
+    "baseline": "Reuse the raw two-sided omission and both incumbent context and position checks at their measured source locations.",
+    "choice": "Select one unique strongest complete native center strictly above the second-highest maximum of 14 ordinary F1000Research works, with a floor at zero. Count both dated versions under each work maximum.",
+    "inputs": "Use the isolated focus and left and right sentences, both adjacent pairs and the full native triple from the pinned checkpoint.",
+    "side_agreement": "Discount the smaller left and right focus-omission effects by their absolute difference.",
+    "triple_agreement": "Also subtract the absolute difference between the measured triple log odds and its estimate from the two adjacent pairs minus the isolated focus. All terms are normalized by the square root of focus words over 24."
+  },
+  "schema": "chipmunk.writing-neighbor-interaction/1",
+  "work_maxima": {
+    "10245": {
+      "omission": -0.7083846450218463,
+      "side_agreement": -1.4245116642827373,
+      "triple_agreement": -2.460498436081109
+    },
+    "10336": {
+      "omission": 0.6467988076490846,
+      "side_agreement": -0.6223676589123613,
+      "triple_agreement": -1.8879136334389375
+    },
+    "10427": {
+      "omission": 1.7221808973863402,
+      "side_agreement": 0.7071592590710567,
+      "triple_agreement": 0.4189335071307053
+    },
+    "10569": {
+      "omission": 0.01464290785481241,
+      "side_agreement": -0.836171735977632,
+      "triple_agreement": -0.856087828268654
+    },
+    "11045": {
+      "omission": -0.12813447269149736,
+      "side_agreement": -0.4420965011113028,
+      "triple_agreement": -3.675445968655029
+    },
+    "11241": {
+      "omission": -0.1388262271208354,
+      "side_agreement": -2.200017380894336,
+      "triple_agreement": -3.081373033110652
+    },
+    "11519": {
+      "omission": 0.15570264151387464,
+      "side_agreement": -0.24368524186678653,
+      "triple_agreement": -0.8296293068488706
+    },
+    "8729": {
+      "omission": 0.0784124107377967,
+      "side_agreement": -0.12888115308498274,
+      "triple_agreement": -1.2792206804249766
+    },
+    "8841": {
+      "omission": -0.28455162137415574,
+      "side_agreement": -0.7887245060279211,
+      "triple_agreement": -1.1833504446325696
+    },
+    "8996": {
+      "omission": 0.27596624466090725,
+      "side_agreement": 0.013445799990810692,
+      "triple_agreement": -1.1239078258006605
+    },
+    "9203": {
+      "omission": 1.6486549803788841,
+      "side_agreement": 0.7633763644004793,
+      "triple_agreement": -0.6428281165513908
+    },
+    "9277": {
+      "omission": 0.44437721786840617,
+      "side_agreement": -0.14923256309017324,
+      "triple_agreement": -1.2309853216253013
+    },
+    "9742": {
+      "omission": 0.47225176010729264,
+      "side_agreement": 0.35184837596520513,
+      "triple_agreement": -2.7713304169264656
+    },
+    "9938": {
+      "omission": 1.873206045136111,
+      "side_agreement": 0.22467766816937718,
+      "triple_agreement": -1.7210973473506759
+    }
+  }
+}

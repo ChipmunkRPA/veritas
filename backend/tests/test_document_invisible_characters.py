@@ -14,9 +14,9 @@ from app.evidence import document_packets
 from app.reports import multimedia_evidence
 
 
-def measure(source):
+def measure(source, *, schema=controls.SCHEMA):
     document = extract(source, source.suffix)
-    return controls.measure(document.text, document.source_map, document.meta)
+    return controls.measure(document.text, document.source_map, document.meta, schema=schema)
 
 
 def test_plain_coordinates_are_decoded_codepoints_and_preserve_original(tmp_path):
@@ -44,6 +44,26 @@ def test_normal_unicode_formatting_and_bounded_locations(tmp_path):
     assert record["locations"][-1]["source_start"] == controls.MAX_LOCATIONS
 
 
+def test_mixed_lookalikes_require_a_mostly_basic_latin_letter_run(tmp_path):
+    source = tmp_path / "glyphs.txt"
+    raw = "🧪 It shows the c\u0430se, later \u03bfption and an in\u200bvoice. café c\u0430fé c\u0430\u0301se A\u03b1 δelta \u0441лово αλφα."
+    source.write_text(raw)
+    report = measure(source, schema=controls.GLYPH_SCHEMA)
+    assert [(row["codepoint"], row.get("looks_like"), row["source_start"]) for row in report["locations"]] == [
+        ("U+0430", "a", raw.index("\u0430")), ("U+03BF", "o", raw.index("\u03bf")), ("U+200B", None, raw.index("\u200b")),
+    ]
+    assert report["authorship_confidence_contribution"] == 0
+    assert measure(source)["matches"] == 1
+
+
+@pytest.mark.parametrize("codepoint,ascii_letter", controls.LOOKALIKES.items())
+def test_each_pinned_lookalike_preserves_the_terminal_token_and_excludes_whole_script(codepoint, ascii_letter):
+    letter = chr(codepoint)
+    assert list(controls._lookalikes("nav" + letter)) == [(3, letter)]
+    assert not list(controls._lookalikes(letter * 4))
+    assert controls.GLYPHS[f"U+{codepoint:04X}"] == ascii_letter
+
+
 def test_word_paragraph_and_email_html_entity_keep_native_locations(tmp_path):
     word = tmp_path / "report.docx"
     content = docx.Document()
@@ -69,12 +89,13 @@ def test_word_paragraph_and_email_html_entity_keep_native_locations(tmp_path):
     assert measure(email) is None
 
 
-def test_evidence_binding_and_report_reject_rehashed_forged_positions(packet_factory):
+@pytest.mark.parametrize("schema", [controls.SCHEMA, controls.GLYPH_SCHEMA])
+def test_evidence_binding_and_report_reject_rehashed_forged_positions(packet_factory, schema):
     db, store, analysis, result, decoded, _ = packet_factory(
-        text="First sentence contains Acct\u200bNumber and the required terms. Second sentence has more words. Third sentence confirms.")
+        text="First sentence contains Acct\u200bNumber and the c\u0430se terms. Second sentence has more words. Third sentence confirms.")
     baseline = document_packets.build_packet_set(db, analysis, store, result)
     assert controls.KEY not in baseline["coverage"]
-    record = controls.measure(decoded["text"], decoded["source_map"], decoded["meta"])
+    record = controls.measure(decoded["text"], decoded["source_map"], decoded["meta"], schema=schema)
     result["manifest"]["sampling"][controls.COMMITMENT] = canonical_hash(record)
     analysis.result_hash = canonical_hash(result)
     store.put_bytes(canonical_json(result))
@@ -84,6 +105,9 @@ def test_evidence_binding_and_report_reject_rehashed_forged_positions(packet_fac
     report = multimedia_evidence._invisible_characters_view(evidence["coverage"])
     assert report["locations"][0]["name"] == "Zero-width space"
     assert report["locations"][0]["codepoint"] == "U+200B"
+    if schema == controls.GLYPH_SCHEMA:
+        assert report["locations"][1]["name"] == "Cyrillic small letter a"
+        assert report["locations"][1]["looks_like"] == "a"
     assert "zero AI-authorship weight" in report["limitation"]
     assert "\u200b" not in str(report)
     forged = deepcopy(evidence)

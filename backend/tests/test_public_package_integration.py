@@ -215,18 +215,20 @@ def multimedia_package(request, tmp_path, monkeypatch):
 
         source_docx = tmp_path / "hidden.docx"
         word = Document()
-        paragraph = word.add_paragraph("This body contains enough visible words to exercise the writing evi\u200bdence export. ")
+        paragraph = word.add_paragraph("This body contains enough visible words to exercise the writing evi\u200bdence c\u0430se. ")
         paragraph.add_run("This Word run is directly marked hidden.").font.hidden = True
         word.save(source_docx)
         db, store, analysis, result, decoded, _ = request.getfixturevalue("packet_factory")(".docx", scores=(), source_pdf=source_docx)
         result["kind"] = "document"
         result["manifest"]["sampling"][document_word_visibility.COMMITMENT] = canonical_hash(decoded["meta"][document_word_visibility.KEY])
-        invisible = document_invisible_characters.measure(decoded["text"], decoded["source_map"], decoded["meta"])
+        invisible = document_invisible_characters.measure(decoded["text"], decoded["source_map"], decoded["meta"],
+                                                         schema=document_invisible_characters.GLYPH_SCHEMA)
         result["manifest"]["sampling"][document_invisible_characters.COMMITMENT] = canonical_hash(invisible)
         analysis.result_hash = store.put_bytes(canonical_json(result)).sha256
         document = document_packets.build_packet_set(db, analysis, store, result)
         assert document["coverage"][document_word_visibility.KEY]["hidden_runs"] == 1
-        assert document["coverage"][document_invisible_characters.KEY]["matches"] == 1
+        assert document["coverage"][document_invisible_characters.KEY]["matches"] == 2
+        assert invisible["locations"][1]["looks_like"] == "a"
     elif agreement:
         db, store, analysis, result, *_ = request.getfixturevalue("packet_factory")(".txt", scores=(.91, .93, .81))
         signal = result["signals"][0]
@@ -370,6 +372,7 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
         original.write_bytes(f.store.read_bytes(f.analysis.sha256))
         checked = verify.verify_package(built.path, public_key_pem=f.key.public_pem(), source_document=original)
         assert checked.ok, checked.as_dict()
+        assert "Verified invisible and look-alike Unicode characters" in checked.checks[-1].detail
     if f.analysis.kind == "image":
         original = tmp_path / "submitted.png"
         original.write_bytes(f.store.read_bytes(f.analysis.sha256))

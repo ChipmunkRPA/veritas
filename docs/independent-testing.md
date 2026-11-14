@@ -496,6 +496,9 @@ can each recheck a downloaded JSON result against the two supplied originals.
 The [PNG opacity comparison](image-reference-png-opacity-2026-11-14.md#reproduce)
 can be reproduced on the pinned public photo deliveries and rechecked from
 the two source images and the downloaded comparison JSON.
+The [writing neighbor-sensitivity replay](writing-neighbor-interaction-2026-11-14.md#replay)
+rebuilds three sentence selection rules on pinned measurements from both
+journal panels, including each wrong location and ordinary flag.
 The [cross-format draft comparison](document-mixed-format-comparison-2026-11-13.md#reproduce)
 rebuilds all six TXT, Word and PDF directions from public publisher sources.
 It verifies both source locations and checks that a format change alone

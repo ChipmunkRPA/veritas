@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Look-alike letters in uploaded text](document-invisible-characters-2026-11-14.md#look-alike-letters)
+  adds source positions for selected mixed-script characters in TXT,
+  Word and mapped email. The observation carries zero AI-authorship
+  weight. [Neighbor-adjusted sentence scores](writing-neighbor-interaction-2026-11-14.md)
+  found no rewrite beyond the earlier omission check and stay offline.
+
 - [Earlier-copy PNG opacity comparison](image-reference-png-opacity-2026-11-14.md)
   locates local cutouts, reveals and partial transparency changes. It
   found the exact boundary of 21 of 24 authored edits where RGB-only

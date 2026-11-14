@@ -102,6 +102,19 @@ describe('ordinary document passage inspection', () => {
     expect(within(section).getByText(/zero AI-authorship weight/)).toBeTruthy()
   })
 
+  it('shows a look-alike character and its exact source position', () => {
+    const set = evidence([])
+    show({ ...set, coverage: { ...set.coverage, invisible_characters: {
+      schema: 'document-invisible-characters/2', coordinate_space: 'word_paragraph',
+      checked_chars: 110, checked_blocks: 2, matches: 1, authorship_confidence_contribution: 0,
+      locations: [{ text_offset: 95, source_start: 32, source_end: 33, codepoint: 'U+0430', looks_like: 'a', body_path: [1] }],
+    } } })
+    const section = screen.getByRole('region', { name: 'Invisible and look-alike characters in the source text' })
+    expect(within(section).getByText('U+0430')).toBeTruthy()
+    expect(within(section).getByText('a')).toBeTruthy()
+    expect(within(section).getByText(/Word body path 1, paragraph characters \[32, 33\)/)).toBeTruthy()
+  })
+
   it('marks exact percentage values after a supplementary Unicode character', () => {
     const text = (value: string) => `The review 🧪 found ${value} percent of submitted applications qualified.`
     const readings = [['47', 50], ['37.0', 150]] as const

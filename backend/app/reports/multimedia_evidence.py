@@ -741,8 +741,11 @@ def _invisible_characters_view(coverage: dict) -> dict | None:
     record = coverage.get(invisible.KEY)
     if not record:
         return None
-    return {**record, "title": invisible.TITLE, "scope": invisible.SCOPE, "limitation": invisible.LIMITATION,
-            "locations": [{**row, "name": invisible.NAMES[row["codepoint"]],
+    glyphs = record["schema"] == invisible.GLYPH_SCHEMA
+    return {**record, "title": invisible.GLYPH_TITLE if glyphs else invisible.TITLE,
+            "scope": invisible.GLYPH_SCOPE if glyphs else invisible.SCOPE,
+            "limitation": invisible.GLYPH_LIMITATION if glyphs else invisible.LIMITATION,
+            "locations": [{**row, "name": invisible.character_name(row),
                            "label": invisible.location_label(row, record["coordinate_space"])}
                           for row in record["locations"]]}
 

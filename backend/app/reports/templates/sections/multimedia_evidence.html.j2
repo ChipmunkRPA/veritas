@@ -39,7 +39,7 @@
 <colgroup><col style="width: 23%"><col style="width: 60%"><col style="width: 17%"></colgroup>
 <thead><tr><th>Character</th><th>Source location</th><th>Extracted offset</th></tr></thead>
 <tbody>{% for row in invisible.locations %}
-<tr><td><span class="mono" style="white-space: nowrap">{{ row.codepoint }}</span><br>{{ row.name }}</td><td>{{ row.label }} [{{ row.source_start }}, {{ row.source_end }})</td><td>{{ row.text_offset }}</td></tr>
+<tr><td><span class="mono" style="white-space: nowrap">{{ row.codepoint }}</span><br>{{ row.name }}{% if row.looks_like is defined %}<br>Looks like <span class="mono">{{ row.looks_like }}</span>{% endif %}</td><td>{{ row.label }} [{{ row.source_start }}, {{ row.source_end }})</td><td>{{ row.text_offset }}</td></tr>
 {% endfor %}</tbody></table>
 <p class="caption">Positions are zero-based. End offsets are exclusive.</p>
 {% endif %}

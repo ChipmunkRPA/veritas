@@ -434,10 +434,10 @@ export interface DocumentEvidenceSet extends SetBase {
     word_text_visibility?: { schema: 'document-word-text-visibility/1'; part: string; checked_paragraphs: number; hidden_runs: number;
       locations: { body_path: (number | 'row' | 'cell')[]; body_paragraph: number | null; run: number; source_start: number; source_end: number }[];
       authorship_confidence_contribution: 0 };
-    invisible_characters?: { schema: 'document-invisible-characters/1';
+    invisible_characters?: { schema: 'document-invisible-characters/1' | 'document-invisible-characters/2';
       coordinate_space: 'decoded_text' | 'word_paragraph' | 'decoded_email' | 'decoded_email_html';
       checked_blocks: number; checked_chars: number; matches: number; authorship_confidence_contribution: 0;
-      locations: { text_offset: number; source_start: number; source_end: number; codepoint: string;
+      locations: { text_offset: number; source_start: number; source_end: number; codepoint: string; looks_like?: string;
         body_path?: (number | 'row' | 'cell')[]; mime_part?: string }[] };
     checks?: { signal_ref: EvidenceRef; status: 'recorded' | 'partial' | 'context_not_recorded'; scored_windows: number; limitation?: string }[];
     ocr?: { status?: string; pages?: { page: number; status: string; coverage_scope?: 'image_region'; reason?: string | null; mean_recognition_confidence?: number;

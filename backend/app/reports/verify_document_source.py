@@ -199,8 +199,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     email_input_detail = f" Verified source roles and text hashes for {email_inputs} classifier inputs." if email_inputs else ""
     tracked_detail = f" Verified {tracked} retained tracked Word edit locations against the source XML." if tracked else ""
     word_visibility_detail = " Verified direct Word hidden formatting and retained run locations." if document_word_visibility.KEY in coverage else ""
-    invisible_detail = (" Verified invisible Unicode characters and retained source positions."
-                        if document_invisible_characters.KEY in coverage else "")
+    characters = coverage.get(document_invisible_characters.KEY) or {}
+    invisible_detail = (
+        " Verified invisible and look-alike Unicode characters and retained source positions."
+        if characters.get("schema") == document_invisible_characters.GLYPH_SCHEMA
+        else " Verified invisible Unicode characters and retained source positions." if characters else ""
+    )
     pdf_visibility = coverage.get(document_pdf_visibility.KEY, {})
     pdf_replacement_detail = (" Verified the PDF copyable-text comparison and retained page locations."
                               if pdf_visibility.get("schema") == document_pdf_visibility.SCHEMA else "")

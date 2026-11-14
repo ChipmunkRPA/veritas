@@ -28,7 +28,7 @@ export function eligibilityView(gate?: CandidateEligibility) {
       return { status: 'unavailable' as const, title: 'Image eligibility unavailable', score: null, threshold: null,
         explanation: 'The recorded response cell counts could not be verified.' }
     }
-    return { status: gate.eligible ? 'eligible' as const : 'withheld' as const, areaCells: true,
+    return { status: gate.eligible ? 'eligible' as const : 'withheld' as const, totalCells: String(total),
       title: gate.eligible ? 'Eligible for region inspection' : 'Regions withheld by the image gate',
       score: String(active), threshold: String(minimum), explanation: gate.eligible
         ? 'The map met the minimum area rule for showing candidates. Normal processing can also create a highlight.'

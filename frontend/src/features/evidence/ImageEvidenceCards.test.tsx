@@ -604,7 +604,8 @@ describe('image evidence cards', () => {
       threshold: .25, threshold_exact_decimal: '0.25', active_cells: 128, minimum_active_cells: 256, input_cells: 1024 }
     show({ ...evidence, packets: [], coverage: { inspection_checks: [check({ candidate_eligibility: area })] } })
     const note = screen.getByTestId('image-candidate-eligibility')
-    expect(note.textContent).toContain('Active screening cells 128 · minimum 256')
+    expect(note.textContent).toContain('Measured positions above the response cutoff 128 of 1024.')
+    expect(note.textContent).toContain('Minimum for showing candidates 256 positions.')
     expect(note.textContent).toContain('Small or weak edits may be missed.')
     expect(note.textContent).not.toContain('0.125')
   })

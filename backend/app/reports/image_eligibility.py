@@ -29,13 +29,13 @@ def eligibility_view(gate: dict | None) -> dict:
     if gate.get("schema") == AREA_GATE:
         try:
             validate_gate(gate)
-            active, minimum, _ = area_counts(gate)
+            active, minimum, total = area_counts(gate)
         except ValueError:
             return {"status": "unavailable", "title": "Image eligibility unavailable", "score": None, "threshold": None,
                     "explanation": "The recorded response cell counts could not be verified."}
         return {"status": "eligible" if gate["eligible"] else "withheld", "score_kind": "area_cells",
                 "title": "Eligible for region inspection" if gate["eligible"] else "Regions withheld by the image gate",
-                "score": str(active), "threshold": str(minimum),
+                "score": str(active), "threshold": str(minimum), "total_cells": str(total),
                 "explanation": ("The map met the minimum area rule for showing candidates. Normal processing can also create a highlight."
                                 if gate["eligible"] else
                                 "The map was below the minimum area rule. Small or weak edits may be missed.")}

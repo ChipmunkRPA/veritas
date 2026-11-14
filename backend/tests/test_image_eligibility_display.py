@@ -11,6 +11,7 @@ import pytest
 from PIL import Image
 from test_image_evidence_reports import packet_snapshot
 
+from app.evidence.image_eligibility import area_gate
 from app.reports import engine, image_evidence
 from app.reports.image_eligibility import eligibility_view, inspection_check_view
 from app.reports.snapshot import snapshot_hash
@@ -40,6 +41,21 @@ def test_exact_gate_response_remains_below_threshold_after_canonical_rounding():
     assert eligibility_view(None)["status"] == "not_recorded"
     value["score_hex"] = "nan"
     assert eligibility_view(value)["status"] == "unavailable"
+
+
+def test_pdf_area_rule_uses_the_recorded_measurement_denominator(tmp_path, monkeypatch):
+    snapshot, store = packet_snapshot(tmp_path, "standard")
+    frozen = copy.deepcopy(snapshot.image_evidence)
+    frozen.update(version="image-evidence-3", packets=[], coverage={"inspection_checks": [
+        {**check(), "candidate_eligibility": area_gate(128, 256, 25600)},
+    ]})
+    snapshot = snapshot.model_copy(update={"image_evidence": frozen})
+    monkeypatch.setattr(image_evidence, "verified_set", lambda value: value.image_evidence)
+    monkeypatch.setattr(image_evidence, "default_store", lambda: store)
+    rendered = engine.render_pdf(snapshot)
+    words = " ".join(engine.pdf_text(rendered.pdf).split())
+    assert "Measured positions above the response cutoff 128 of 25600." in words
+    assert "Minimum for showing candidates 256 positions." in words
 
 
 def test_coverage_keeps_gate_suppression_separate_from_display_caps():

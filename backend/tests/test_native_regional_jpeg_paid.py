@@ -152,6 +152,8 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
         image_packets_v4.validate_packet_source_mapping(document, result)
         packet = next(p for p in document["packets"]
                       if p.get("localisation", {}).get("resolution_policy", {}).get("source_format") == "JPEG")
+        gate = packet["localisation"]["candidate_eligibility"]
+        active, minimum, total = (gate[key] for key in ("active_cells", "minimum_active_cells", "input_cells"))
         assert packet["anchor"]["original_sha256"] == source_hash
         assert "JPEG compression can obscure" in " ".join(packet["limitations"])
         assert set(packet["artifacts"]) == {"context", "crop", "overlay", "mask"}
@@ -185,6 +187,8 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
         with fitz.open(stream=pdf.content, filetype="pdf") as rendered:
             pdf_text = " ".join(" ".join(page.get_text().split()) for page in rendered)
         assert "JPEG compression can obscure small or softly blended edits" in pdf_text
+        assert f"Measured positions above the response cutoff {active} of {total}." in pdf_text
+        assert f"Minimum for showing candidates {minimum} positions." in pdf_text
         assert FORBIDDEN.search(pdf_text) is None
         with f.sessions() as db:
             frozen = snapshot.load(f.store.read_bytes(db.get(ReportRow, report_id).snapshot_hash))

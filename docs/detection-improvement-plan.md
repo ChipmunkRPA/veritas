@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Small JPEG regions below the area rule](image-small-region-repeat-2026-11-14.md)
+  found one useful edit and eight additional ordinary highlights when the
+  area rule was removed. The horizontal repeat recovered no additional
+  edits. The browser and PDF now show the recorded area denominator.
+
 - [Progressive JPEG earlier-copy comparison](image-reference-progressive-2026-11-14.md)
   located four additional object removals across two photographs and six
   more deliberate local retouches on the same photos. The comparison added

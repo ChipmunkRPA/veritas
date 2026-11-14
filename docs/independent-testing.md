@@ -36,6 +36,10 @@ recounts coverage gains and control highlights on 12 photos. Native replay
 also verifies that lossless coefficient transcoding preserves all decoded
 pixels and the evidence from the baseline pairs.
 
+The [small JPEG edit replay](image-small-region-repeat-2026-11-14.md#replay)
+recounts the existing area rule, its removal, and a stricter repeat
+comparison on 186 single-upload JPEG deliveries from 30 photos.
+
 The [fresh video timing study](video-lipsync-repeat-fresh-actors-2026-11-13.md#replay)
 includes two public source plans and runners that recover the exact native
 clip clocks. The [paired soundtrack comparison](video-soundtrack-reencode-2026-11-13.md#replay)

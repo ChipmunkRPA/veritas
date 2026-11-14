@@ -1152,6 +1152,69 @@ def test_pdf_marks_only_changed_code_points_and_escapes_excerpt():
     assert "<mark>🙂</mark> Déjà &lt;<mark>début</mark>" in _side("Analyzed version", later)
 
 
+def test_separate_sentence_checks_preserve_exact_ranges_and_incomplete_readings(reference_http, monkeypatch, tmp_path):
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_detector_mode", "candidate")
+    monkeypatch.setattr(settings, "text_window_sentences", 3)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    old_first = "The audit checked how each agency handled emergencies."
+    new_first = "The report describes how each agency prepares for emergencies."
+    old_second = "The group discussed which expenses had been approved."
+    new_second = "The members also reviewed the approved payments."
+
+    def source(first, second):
+        return ("The committee met on Monday morning. " + first + " The final minutes are public.\r\n\r\n"
+                "The café closed before the meeting. " + second + " The discussion ended before noon.").encode()
+
+    old, new = source(old_first, old_second), source(new_first, new_second)
+    aid = "separate-draft-revisions"
+    _saved(f, aid, ".txt", new)
+    kwargs = {"headers": f.viewer, "files": _upload(old, ".txt"),
+              "data": {"include_paired_check": "true", "include_pdf": "true"}}
+    response = f.client.post(_url(aid), **kwargs)
+    assert response.json()["comparison"]["paired_check"]["status"] == "outside_scope"
+    monkeypatch.setattr(settings, "document_paired_separate_review", True)
+
+    def measure(inputs, *, allow_partial):
+        assert allow_partial and len(inputs) == 4
+        assert [part in value for part, value in zip((old_first, new_first, old_second, new_second), inputs)] == [True] * 4
+        return [[.1, .5, .4, .2], [.2, .6, .3, None]]
+
+    monkeypatch.setattr(paired, "_score", measure)
+    response = f.client.post(_url(aid), **kwargs)
+    assert response.status_code == 200
+    payload = response.json()
+    comparison = payload["comparison"]
+    check = comparison["paired_check"]
+    assert check["schema"] == paired.MULTIPLE_SCHEMA and check["status"] == "joint_increase"
+    assert check["authorship_confidence_contribution"] == 0
+    first, second = check["revisions"]
+    assert first["status"] == "joint_increase" and second["status"] == "unavailable"
+    assert "responses" not in second
+    assert first["change_ids"] + second["change_ids"] == [change["id"] for change in comparison["changes"]]
+    for side, raw, excerpts in (("earlier", old, (old_first, old_second)), ("later", new, (new_first, new_second))):
+        for row, expected in zip(check["revisions"], excerpts, strict=True):
+            position = row[side]
+            assert raw.decode()[position["start"]:position["end"]] == position["text"] == expected
+            assert position["context_spans"][1] == [position["start"], position["end"]]
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as report:
+        text = " ".join(" ".join(page.get_text().split()) for page in report)
+        assert "Changed sentence 1" in text and "Changed sentence 2" in text
+        assert "zero authorship confidence weight" in text and "could not complete" in text
+        assert "ModernBERT" not in text and "Tropa" not in text
+        assert sum(len(page.get_links()) for page in report) >= len(comparison["changes"])
+
+    earlier_path, later_path, json_path = (tmp_path / name for name in ("old.txt", "new.txt", "comparison.json"))
+    earlier_path.write_bytes(old)
+    later_path.write_bytes(new)
+    json_path.write_text(json.dumps(comparison))
+    assert review(json_path, earlier_path, later_path)["paired_scope_and_saved_response_arithmetic"] == "joint_increase"
+    second["later"]["context_spans"][1][0] += 1
+    json_path.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="Mapped revisions differ from the source positions"):
+        review(json_path, earlier_path, later_path)
+
+
 def test_adjacent_sentence_pair_uses_exact_text_exports_and_preserves_legacy_replay(reference_http, monkeypatch, tmp_path):
     f = _install(reference_http, monkeypatch)
     monkeypatch.setattr(settings, "text_detector_mode", "candidate")

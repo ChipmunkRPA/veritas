@@ -148,6 +148,29 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
       <h3 className="m-0 text-small font-medium">Experimental paired writing check</h3>
       <p className="mt-2 mb-0 text-small">{paired.summary}</p>
       <p className="mt-1 mb-0 text-caption text-text-muted">{paired.scope}</p>
+      {paired.revisions?.map((revision, index) => <article key={revision.later.start} className="mt-3 border-t border-border pt-3">
+        <h4 className="m-0 text-small font-medium">Changed sentence {index + 1}</h4>
+        <p className="mt-1 mb-0 text-small">{revision.status === 'joint_increase'
+          ? 'Both writing checks gave a stronger AI-like response in the analyzed version.'
+          : revision.status === 'unavailable' ? 'This mapped revision could not be scored.'
+            : 'The writing responses did not show a shared increase at the review level.'}</p>
+        <p className="mt-2 mb-0 text-caption text-text-muted">Linked wording changes{' '}
+          {revision.change_ids.map((id, position) => <span key={id}>{position > 0 && ', '}
+            <a className="underline" href={`#${anchorPrefix}-${id}`}>{id}</a>
+          </span>)}
+        </p>
+        <div className="mt-2 grid gap-4 sm:grid-cols-2">
+          {(['earlier', 'later'] as const).map(side => <div key={side}>
+            <p className="m-0 font-mono text-caption text-text-muted">
+              {side === 'earlier' ? 'Earlier' : 'Analyzed'} sentence [{revision[side].start}, {revision[side].end})
+            </p>
+            <p className="mt-1 mb-0 whitespace-pre-wrap break-words text-small">{revision[side].text}</p>
+          </div>)}
+        </div>
+        {revision.responses?.map((response, i) => <p key={i} className="mt-1 mb-0 text-caption">
+          Check {i + 1} · {response.earlier.toPrecision(4)} → {response.later.toPrecision(4)}
+        </p>)}
+      </article>)}
       {paired.earlier && paired.later && paired.responses?.length === 2 && <>
         <p className="mt-2 mb-0 text-caption text-text-muted">Linked wording changes{' '}
           {paired.change_ids?.map((id, index) => <span key={id}>{index > 0 && ', '}

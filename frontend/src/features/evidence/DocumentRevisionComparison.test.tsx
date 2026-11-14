@@ -296,3 +296,42 @@ it.each(['single', 'wide', 'interior'] as const)('opts in to the %s paired respo
   expect(screen.queryByText(/ModernBERT|Tropa/)).toBeNull()
   expect(screen.getByText(interior ? /Check 2 · Centered context 0.3000 → 0.6000/ : /Check 2 · 0.3000 → 0.6000/)).toBeTruthy()
 })
+
+it('shows separate revision outcomes with links to the correct wording changes', async () => {
+  type Revision = NonNullable<NonNullable<DraftComparison['paired_check']>['revisions']>[number]
+  const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64), decoded_characters: 100, mime_part: null }
+  const first: Revision['later'] = {
+    start: 20, end: 26, text: 'First.', context_spans: [[0, 19], [20, 26], [27, 40]], input_sha256: 'a'.repeat(64),
+  }
+  const second: Revision['later'] = {
+    start: 60, end: 67, text: 'Second.', context_spans: [[42, 59], [60, 67], [68, 90]], input_sha256: 'b'.repeat(64),
+  }
+  const comparison: DraftComparison = {
+    schema: 'chipmunk.document-revision-comparison/1', format: 'plain_text', coordinate_space: 'decoded_source_unicode_codepoint',
+    earlier: source, later: source, scope: 'Words and punctuation.', interpretation: 'Shows wording changes.',
+    changes: [{ id: 'C01', role: 'body', earlier: null, later: { ...first, changed_tokens: [[20, 25]] } },
+      { id: 'C02', role: 'body', earlier: null, later: { ...second, changed_tokens: [[60, 66]] } }],
+    paired_check: {
+      schema: 'chipmunk.paired-writing-review/6', status: 'joint_increase', scope: 'Zero authorship confidence weight.',
+      summary: 'Checked 1 of 2 mapped revisions.', authorship_confidence_contribution: 0,
+      revisions: [{ earlier: first, later: first, status: 'joint_increase', change_ids: ['C01'],
+        responses: [{ earlier: .1, later: .4 }, { earlier: .3, later: .6 }] },
+      { earlier: second, later: second, status: 'unavailable', change_ids: ['C02'] }],
+    },
+  }
+  vi.mocked(draftAvailability).mockResolvedValue({ extension: '.txt', pairedCheckAvailable: true })
+  vi.mocked(compareDraft).mockResolvedValue({ comparison })
+  show()
+  const input = await screen.findByLabelText('Earlier draft')
+  fireEvent.click(screen.getByRole('checkbox', { name: 'Include experimental paired writing check' }))
+  fireEvent.change(input, { target: { files: [new File(['earlier'], 'earlier.txt')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
+  expect(await screen.findByText('Analyzed sentence [20, 26)')).toBeTruthy()
+  expect(screen.getByText('Analyzed sentence [60, 67)')).toBeTruthy()
+  expect(screen.getByText('Both writing checks gave a stronger AI-like response in the analyzed version.')).toBeTruthy()
+  expect(screen.getByText('This mapped revision could not be scored.')).toBeTruthy()
+  for (const id of ['C01', 'C02']) {
+    const change = screen.getByRole('heading', { name: `${id} · Text` })
+    expect(screen.getByRole('link', { name: id }).getAttribute('href')).toBe(`#${change.id}`)
+  }
+})

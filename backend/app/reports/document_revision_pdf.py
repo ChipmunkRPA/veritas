@@ -5,6 +5,7 @@ from __future__ import annotations
 from html import escape
 
 from app.evidence.document_revision import HTML_COORDINATES
+from app.evidence.document_revision_writing import STATUS_TEXT
 from app.reports.engine import _restricted_fetcher, load_weasyprint
 
 STYLE = """
@@ -83,6 +84,17 @@ def _paired(review: dict | None) -> str:
         return ""
     output = [f'<section><h2>Experimental paired writing check</h2><p>{escape(review["summary"])}</p>'
               f'<p>{escape(review["scope"])}</p>']
+    for number, revision in enumerate(review.get("revisions", ()), 1):
+        heading = f"Changed sentence {number}"
+        output.append(f'<h2>{heading}</h2><p>{escape(STATUS_TEXT[revision["status"]])}</p>')
+        links = ", ".join(f'<a href="#draft-change-{escape(value)}">{escape(value)}</a>' for value in revision["change_ids"])
+        output.append(f'<p class="coordinates">Linked wording changes {links}</p>')
+        for side, label in (("earlier", "Earlier"), ("later", "Analyzed")):
+            item = revision[side]
+            output.append(f'<div class="side"><p class="coordinates">{label} sentence [{item["start"]}, {item["end"]})</p>'
+                          f'<p class="excerpt">{escape(item["text"])}</p></div>')
+        for i, row in enumerate(revision.get("responses", ()), 1):
+            output.append(f'<p>Check {i} · {row["earlier"]:.4g} → {row["later"]:.4g}</p>')
     if review.get("responses"):
         links = ", ".join(f'<a href="#draft-change-{escape(value)}">{escape(value)}</a>' for value in review["change_ids"])
         output.append(f'<p class="coordinates">Linked wording changes {links}</p>')

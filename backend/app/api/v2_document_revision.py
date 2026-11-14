@@ -135,10 +135,19 @@ class DraftNeighboringWritingContext(BaseModel):
     status: Literal["no_joint_increase", "joint_increase"]
 
 
+class DraftSeparateWritingRevision(BaseModel):
+    earlier: DraftWritingFocus
+    later: DraftWritingFocus
+    change_ids: list[str]
+    responses: list[DraftWritingResponse] | None = None
+    status: Literal["unavailable", "no_joint_increase", "joint_increase"]
+
+
 class DraftPairedCheck(BaseModel):
     schema_name: Literal[
         "chipmunk.paired-writing-review/1", "chipmunk.paired-writing-review/2",
         "chipmunk.paired-writing-review/3", "chipmunk.paired-writing-review/4", "chipmunk.paired-writing-review/5",
+        "chipmunk.paired-writing-review/6",
     ] = Field(alias="schema")
     status: Literal["outside_scope", "unavailable", "no_joint_increase", "joint_increase"]
     scope: str
@@ -150,6 +159,7 @@ class DraftPairedCheck(BaseModel):
     responses: list[DraftWritingResponse] | None = None
     center_responses: list[DraftWritingResponse] | None = None
     neighboring_contexts: list[DraftNeighboringWritingContext] | None = None
+    revisions: list[DraftSeparateWritingRevision] | None = None
 
 
 class DraftWordCellParagraph(BaseModel):
@@ -328,23 +338,31 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
         from app.evidence import document_revision_writing as paired
 
         candidate = None
+        separate = []
         draft_format = comparison["format"]
         boundary_enabled = settings.document_paired_boundary_review
         try:
             candidate = paired.paired_input(comparison, old_text, new_text, allow_boundary=boundary_enabled,
                                            allow_interior=True, word_layouts=word_layouts)
+            if candidate is None and settings.document_paired_separate_review:
+                separate = paired.separate_revisions(comparison, old_text, new_text)
             center_responses = neighboring_responses = None
-            if candidate is not None and candidate.across_paragraphs:
+            if separate:
+                comparison["paired_check"] = paired.multiple_result(separate, paired.score_separate(separate))
+            elif candidate is not None and candidate.across_paragraphs:
                 responses, center_responses = paired.score_boundary(candidate)
             elif candidate is not None and candidate.neighboring_contexts:
                 responses, neighboring_responses = paired.score_interior(candidate)
             else:
                 responses = paired.score(candidate) if candidate is not None else None
-            comparison["paired_check"] = paired.result(candidate, responses, draft_format=draft_format,
-                                                       center_responses=center_responses, neighboring_responses=neighboring_responses)
+            if not separate:
+                comparison["paired_check"] = paired.result(candidate, responses, draft_format=draft_format,
+                                                           center_responses=center_responses, neighboring_responses=neighboring_responses)
         except Exception as error:
             log.warning("document_revision.paired_check_unavailable", exception=type(error).__name__)
-            comparison["paired_check"] = paired.result(candidate, draft_format=draft_format)
+            comparison["paired_check"] = (
+                paired.multiple_result(separate) if separate else paired.result(candidate, draft_format=draft_format)
+            )
     payload: dict = {"comparison": comparison}
     if include_pdf:
         from app.reports.document_revision_pdf import render

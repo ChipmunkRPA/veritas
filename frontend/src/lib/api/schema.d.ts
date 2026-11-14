@@ -3632,11 +3632,13 @@ export interface components {
             neighboring_contexts?: components["schemas"]["DraftNeighboringWritingContext"][] | null;
             /** Responses */
             responses?: components["schemas"]["DraftWritingResponse"][] | null;
+            /** Revisions */
+            revisions?: components["schemas"]["DraftSeparateWritingRevision"][] | null;
             /**
              * Schema
              * @enum {string}
              */
-            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2" | "chipmunk.paired-writing-review/3" | "chipmunk.paired-writing-review/4" | "chipmunk.paired-writing-review/5";
+            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2" | "chipmunk.paired-writing-review/3" | "chipmunk.paired-writing-review/4" | "chipmunk.paired-writing-review/5" | "chipmunk.paired-writing-review/6";
             /** Scope */
             scope: string;
             /**
@@ -3717,6 +3719,20 @@ export interface components {
         DraftRelocatedPassage: {
             earlier: components["schemas"]["DraftExcerpt"];
             later: components["schemas"]["DraftExcerpt"];
+        };
+        /** DraftSeparateWritingRevision */
+        DraftSeparateWritingRevision: {
+            /** Change Ids */
+            change_ids: string[];
+            earlier: components["schemas"]["DraftWritingFocus"];
+            later: components["schemas"]["DraftWritingFocus"];
+            /** Responses */
+            responses?: components["schemas"]["DraftWritingResponse"][] | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "unavailable" | "no_joint_increase" | "joint_increase";
         };
         /** DraftSource */
         DraftSource: {

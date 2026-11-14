@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Separate writing revisions in an earlier-draft pair](writing-separate-revisions-2026-11-14.md)
+  maps each eligible changed sentence and gives it a distinct reading.
+  On the composed panel it found five exact generated edits and flagged
+  zero of 11 assessed ordinary works. It assessed 36 of 80 generated
+  edits, so it is an optional local trial with zero authorship weight.
+
 - [Short soundtrack shifts on corresponding pictures](video-short-soundtrack-2026-11-14.md)
   raised useful localization from 14/20 to 20/20 in each of two
   carriers, with no flags across 90 controls per carrier. The trial

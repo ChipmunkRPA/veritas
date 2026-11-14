@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [separate writing revision replay](writing-separate-revisions-2026-11-14.md#try-and-replay)
+checks exact sentence positions and linked edits on an earlier-draft export.
+The local panel records generated revisions, ordinary journal revisions and
+cases where the two drafts could not be assessed.
+
 The [four-modality receipt example](#four-modality-receipt-example) runs with
 the Python standard library and fictional inputs. It shows how to reproduce a
 comparison and detect a changed operating point.

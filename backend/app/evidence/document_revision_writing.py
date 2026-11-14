@@ -15,6 +15,10 @@ WIDE_SCHEMA = "chipmunk.paired-writing-review/2"
 BOUNDARY_SCHEMA = "chipmunk.paired-writing-review/3"
 WORD_BOUNDARY_SCHEMA = "chipmunk.paired-writing-review/4"
 INTERIOR_SCHEMA = "chipmunk.paired-writing-review/5"
+MULTIPLE_SCHEMA = "chipmunk.paired-writing-review/6"
+MAX_REVISIONS = 4
+MULTIPLE_SCOPE = ("Checks separate changed sentences in short English text drafts. Each comparison requires its own "
+                  "unchanged neighbors. The responses are uncalibrated and carry zero authorship confidence weight.")
 # Second-highest genuine work response in the frozen paired center transfer.
 BOUNDARY_POINT = 0.12844311183234092
 MAX_WORDS = 420
@@ -101,8 +105,7 @@ def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool
     old, new = _source(earlier), _source(later)
     if old is None or new is None:
         return None
-    old_doc, old_units = old
-    new_doc, new_units = new
+    old_units, new_units = old[1], new[1]
     if [unit.paragraph for unit in old_units] != [unit.paragraph for unit in new_units]:
         return None
     changed = [i for i, (a, b) in enumerate(zip(old_units, new_units, strict=True)) if a.text != b.text]
@@ -110,6 +113,14 @@ def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool
             and changed[1] == changed[0] + 1)
     if len(changed) != 1 and not wide:
         return None
+    return _pair(comparison, changes, earlier, later, old, new, changed, wide=wide,
+                 allow_boundary=allow_boundary, allow_interior=allow_interior, word_layouts=word_layouts)
+
+
+def _pair(comparison, changes, earlier, later, old, new, changed, *, wide=False,
+          allow_boundary=False, allow_interior=False, word_layouts=None, assign_changes=False):
+    old_doc, old_units = old
+    new_doc, new_units = new
     if changed[0] == 0 or changed[-1] == len(old_units) - 1:
         return None
     index = changed[0]
@@ -153,9 +164,10 @@ def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool
         item = change[side]
         return item is not None and expected["start"] <= item["start"] <= item["end"] <= expected["end"]
 
-    if (any(change["role"] != "body" or not contained(change, "earlier", before)
-            or not contained(change, "later", after) for change in changes)
-            or not all(any(change[side]["changed_tokens"] for change in changes) for side in ("earlier", "later"))):
+    linked = [change for change in changes if change["role"] == "body"
+              and contained(change, "earlier", before) and contained(change, "later", after)]
+    if ((not assign_changes and len(linked) != len(changes))
+            or not all(any(change[side]["changed_tokens"] for change in linked) for side in ("earlier", "later"))):
         return None
     if across_paragraphs and word_boundary:
         assert word_layouts is not None
@@ -215,8 +227,48 @@ def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool
             new_geometry, new_window = context(new_doc, new_units[window], later, full_range=True)
             neighboring_contexts.append(PairedInput(old_window, new_window, {"earlier": old_geometry, "later": new_geometry}))
     return PairedInput(old_input, new_input, {"earlier": before, "later": after,
-                                             "change_ids": [change["id"] for change in changes]}, across_paragraphs,
+                                             "change_ids": [change["id"] for change in linked]}, across_paragraphs,
                        tuple(neighboring_contexts))
+
+
+def separate_revisions(comparison: dict, earlier: str, later: str) -> list[PairedInput]:
+    if comparison["format"] != "plain_text" or comparison.get("relocated_passages"):
+        return []
+    old, new = _source(earlier), _source(later)
+    if old is None or new is None:
+        return []
+    old_units, new_units = old[1], new[1]
+    if [unit.paragraph for unit in old_units] != [unit.paragraph for unit in new_units]:
+        return []
+    changed = [i for i, (left, right) in enumerate(zip(old_units, new_units, strict=True)) if left.text != right.text]
+    if not 2 <= len(changed) <= MAX_REVISIONS or any(b - a < 3 for a, b in zip(changed, changed[1:])):
+        return []
+    candidates = [_pair(comparison, comparison["changes"], earlier, later, old, new, [i], assign_changes=True)
+                  for i in changed]
+    if any(item is None for item in candidates):
+        return []
+    linked = [change_id for candidate in candidates for change_id in candidate.geometry["change_ids"]]
+    if sorted(linked) != sorted(change["id"] for change in comparison["changes"]):
+        return []
+    return candidates
+
+
+def multiple_result(candidates: list[PairedInput], measured: list[list[dict] | None] | None = None) -> dict:
+    if not candidates or (measured is not None and len(measured) != len(candidates)):
+        raise ValueError("Expected individually mapped paired revisions")
+    reviews = []
+    for candidate, responses in zip(candidates, measured if measured is not None else [None] * len(candidates), strict=True):
+        status = result(candidate, responses)["status"]
+        review = {"status": status, **candidate.geometry}
+        if responses is not None:
+            review["responses"] = responses
+        reviews.append(review)
+    increases = sum(row["status"] == "joint_increase" for row in reviews)
+    checked = sum(row["status"] != "unavailable" for row in reviews)
+    return {"schema": MULTIPLE_SCHEMA, "status": "joint_increase" if increases else
+            "no_joint_increase" if checked == len(candidates) else "unavailable",
+            "summary": f"Checked {checked} of {len(candidates)} mapped revisions. Both writing responses increased at {increases}.",
+            "scope": MULTIPLE_SCOPE, "authorship_confidence_contribution": 0, "revisions": reviews}
 
 
 def _increases(responses: list[dict], *, floor: float = 1e-7) -> list[float]:
@@ -291,6 +343,16 @@ def verify(comparison: dict, earlier: str, later: str, recorded: dict, *,
            word_layouts: WordLayouts | None = None) -> str:
     """Rebuild the source scope and check saved response arithmetic without inference."""
     schema = recorded.get("schema")
+    if schema == MULTIPLE_SCHEMA:
+        candidates = separate_revisions(comparison, earlier, later)
+        revisions = recorded.get("revisions")
+        if (not isinstance(revisions, list) or len(revisions) != len(candidates) or not candidates
+                or any(not isinstance(row, dict) for row in revisions)):
+            raise ValueError("The draft comparison does not contain all mapped revisions")
+        expected = multiple_result(candidates, [row.get("responses") for row in revisions])
+        if json.dumps(recorded, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
+            raise ValueError("Mapped revisions differ from the source positions or saved responses")
+        return expected["status"]
     allow_wide = schema in (WIDE_SCHEMA, BOUNDARY_SCHEMA, INTERIOR_SCHEMA)
     candidate = paired_input(comparison, earlier, later, allow_wide=allow_wide,
                              allow_boundary=schema in (BOUNDARY_SCHEMA, WORD_BOUNDARY_SCHEMA),
@@ -315,6 +377,18 @@ def score(candidate: PairedInput) -> list[dict] | None:
     """Use the two pinned local checks, one resident lease at a time."""
     measured = _score([candidate.earlier, candidate.later])
     return [{"earlier": row[0], "later": row[1]} for row in measured] if measured is not None else None
+
+
+def score_separate(candidates: list[PairedInput]) -> list[list[dict] | None] | None:
+    texts = [text for candidate in candidates for text in (candidate.earlier, candidate.later)]
+    measured = _score(texts, allow_partial=True)
+    if measured is None:
+        return None
+    readings = []
+    for i in range(0, len(texts), 2):
+        pairs = [{"earlier": row[i], "later": row[i + 1]} for row in measured]
+        readings.append(pairs if all(None not in pair.values() for pair in pairs) else None)
+    return readings
 
 
 def score_boundary(candidate: PairedInput) -> tuple[list[dict] | None, list[dict] | None]:

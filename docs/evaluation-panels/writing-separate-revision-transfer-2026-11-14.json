@@ -1,0 +1,6673 @@
+{
+  "schema": "chipmunk.writing-separate-revision-transfer/1",
+  "method": "Join two source-native paragraphs with a blank line. Combine a historical journal revision with each known generated revision on a different work. Alternate the order by sorted group rank. Form additional journal-only pairs from successive groups. Use every registered case, and count unsupported input separately. Keep the existing decision of at least double the odds on both complete responses. Count exact matches to independently recorded center offsets and deduplicate ordinary flags by journal work. Advance to optional local use only with at least four exact added generated edits, across at least three works and both generators, and no more than 20 percent of assessed ordinary works flagged.",
+  "inputs": {
+    "ordinary": "978a6cf0e516d8367f5208787233aca4e0f0bc0725febc889ca4647b72fb48d5",
+    "generated_1": "c5cd799ce64f4973050458f42dc5b7ce89fae2837fbc8c83a0d4b9cb8c856f14",
+    "generated_2": "978a6cf0e516d8367f5208787233aca4e0f0bc0725febc889ca4647b72fb48d5"
+  },
+  "runner_sha256": "751b9172b099273e66016ba4da7201ad01427b5ce91d1028819335edd78d9df2",
+  "rows": [
+    {
+      "bank": "journal_pair",
+      "draft_sha256": [
+        "f45f2e0cc55b5af3ac7d63ad4e033e41cd0fe7347c23fcb04813cf334e697046",
+        "664bf58745505c1e3229e948b6cd42793dd6e3eb1a7f4994e121298615b85dfb"
+      ],
+      "truth": [
+        {
+          "group": "gates-12783",
+          "family": "ordinary",
+          "later": [
+            140,
+            350
+          ]
+        },
+        {
+          "group": "gates-12797",
+          "family": "ordinary",
+          "later": [
+            589,
+            712
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "journal_pair",
+      "draft_sha256": [
+        "aacd4aad2e692e34ddf1b6004ce7cf8c0a3ce7dea70508e6b07fc738717481ea",
+        "4026726771cda702a7aaf9609ff6d26f615776a05ce97b73598aa655a3ee923f"
+      ],
+      "truth": [
+        {
+          "group": "gates-12808",
+          "family": "ordinary",
+          "later": [
+            64,
+            258
+          ]
+        },
+        {
+          "group": "gates-12820",
+          "family": "ordinary",
+          "later": [
+            426,
+            611
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "journal_pair",
+      "draft_sha256": [
+        "bbf8f7477cc61a375531cfb68ebde2c92a2bf973140393b47921429790c83866",
+        "d93d63a705f83af5d0e9395c384baca3d27aa5156a086ceff90238c9c537f07b"
+      ],
+      "truth": [
+        {
+          "group": "gates-12825",
+          "family": "ordinary",
+          "later": [
+            83,
+            232
+          ]
+        },
+        {
+          "group": "gates-12891",
+          "family": "ordinary",
+          "later": [
+            508,
+            581
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "journal_pair",
+      "draft_sha256": [
+        "b97df65ec1eeaf1af4dd5d62b68e9712f691c180f78b2d600b4da64c1c8e6442",
+        "314a51ef75bb1ffb1328773c8a48e7d74d8cd1939c57ea78549dbc43d51d7a80"
+      ],
+      "truth": [
+        {
+          "group": "gates-12903",
+          "family": "ordinary",
+          "later": [
+            112,
+            311
+          ]
+        },
+        {
+          "group": "gates-12957",
+          "family": "ordinary",
+          "later": [
+            390,
+            588
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "journal_pair",
+      "draft_sha256": [
+        "9e27ded15a611c55bed3b18b2d2e94f16e5cf30b34278b2c29445d406f67d1a8",
+        "8d300ffeca2e48cbc154f35826e0d980ed594d05d03fa352ab49209a998a4df3"
+      ],
+      "truth": [
+        {
+          "group": "gates-12958",
+          "family": "ordinary",
+          "later": [
+            253,
+            576
+          ]
+        },
+        {
+          "group": "gates-12998",
+          "family": "ordinary",
+          "later": [
+            910,
+            1061
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 253,
+            "end": 574,
+            "context_spans": [
+              [
+                0,
+                252
+              ],
+              [
+                253,
+                574
+              ],
+              [
+                575,
+                699
+              ]
+            ],
+            "input_sha256": "e18637b76a11beec211ceb68d5bd0df93580d6505276f07c11c7b445d1e34f5a"
+          },
+          "later": {
+            "start": 253,
+            "end": 576,
+            "context_spans": [
+              [
+                0,
+                252
+              ],
+              [
+                253,
+                576
+              ],
+              [
+                577,
+                701
+              ]
+            ],
+            "input_sha256": "76e00a2f904704c372daf1b94bb56e3258dbad70ff221793b24ee6257b0eff5f"
+          }
+        },
+        {
+          "earlier": {
+            "start": 908,
+            "end": 1059,
+            "context_spans": [
+              [
+                701,
+                907
+              ],
+              [
+                908,
+                1059
+              ],
+              [
+                1060,
+                1260
+              ]
+            ],
+            "input_sha256": "fb9d13e7b52e8215932165ee1a9a11cce45410368ea6c62be407608328ea69e3"
+          },
+          "later": {
+            "start": 910,
+            "end": 1061,
+            "context_spans": [
+              [
+                703,
+                909
+              ],
+              [
+                910,
+                1061
+              ],
+              [
+                1062,
+                1262
+              ]
+            ],
+            "input_sha256": "2398b05d4dac71452f4612698ba8602995f35c83d575a4ad7740f5324f3a23f9"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.09172946214675903,
+            "later": 0.044917166233062744
+          },
+          {
+            "earlier": 0.9938666224479675,
+            "later": 0.9918256998062134
+          }
+        ],
+        [
+          {
+            "earlier": 0.009293973445892334,
+            "later": 0.005270242691040039
+          },
+          {
+            "earlier": 0.998490571975708,
+            "later": 0.9984134435653687
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "journal_pair",
+      "draft_sha256": [
+        "014eb679b1ac43bce0f7e4282b22ba2118744b46185e786c61ff19eba9b700f6",
+        "f2a7927e26dd616f1e72552da513647d02534e1ac8d9a17e35d8658da1591e76"
+      ],
+      "truth": [
+        {
+          "group": "gates-13029",
+          "family": "ordinary",
+          "later": [
+            175,
+            336
+          ]
+        },
+        {
+          "group": "wellcome-11386",
+          "family": "ordinary",
+          "later": [
+            649,
+            890
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 175,
+            "end": 336,
+            "context_spans": [
+              [
+                0,
+                174
+              ],
+              [
+                175,
+                336
+              ],
+              [
+                337,
+                524
+              ]
+            ],
+            "input_sha256": "28a21749835acf206d56679e2138d689995532e31010380c27717e4a80877c9a"
+          },
+          "later": {
+            "start": 175,
+            "end": 336,
+            "context_spans": [
+              [
+                0,
+                174
+              ],
+              [
+                175,
+                336
+              ],
+              [
+                337,
+                524
+              ]
+            ],
+            "input_sha256": "cb3eb514cb44353dcfbf72af641b5c477a7803427b2d1f10b8e3b79e401011d7"
+          }
+        },
+        {
+          "earlier": {
+            "start": 649,
+            "end": 881,
+            "context_spans": [
+              [
+                526,
+                648
+              ],
+              [
+                649,
+                881
+              ],
+              [
+                882,
+                1063
+              ]
+            ],
+            "input_sha256": "b77bcd590205112ec08d944b0aee0502068958494010755044caec966e84713f"
+          },
+          "later": {
+            "start": 649,
+            "end": 890,
+            "context_spans": [
+              [
+                526,
+                648
+              ],
+              [
+                649,
+                890
+              ],
+              [
+                891,
+                1072
+              ]
+            ],
+            "input_sha256": "b51017e875a11739d3e026b698660db3a4a218995bfd70d78b04e4c4209d37b6"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.02432781457901001,
+            "later": 0.007703125476837158
+          },
+          {
+            "earlier": 0.0008384662796743214,
+            "later": 0.0008553491206839681
+          }
+        ],
+        [
+          {
+            "earlier": 0.0011064410209655762,
+            "later": 0.0015971064567565918
+          },
+          {
+            "earlier": 0.01506761647760868,
+            "later": 0.002138872630894184
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "journal_pair",
+      "draft_sha256": [
+        "de6b2526e5997ffda5728dd1d280671f0733f6e8ff22120a7912c003a6fd226e",
+        "bd9873a7190e0fa3b722f4137146ebbdf37a235df60835b1f4b3958786ab1fbb"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-12429",
+          "family": "ordinary",
+          "later": [
+            102,
+            235
+          ]
+        },
+        {
+          "group": "wellcome-13531",
+          "family": "ordinary",
+          "later": [
+            686,
+            902
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "journal_pair",
+      "draft_sha256": [
+        "d8371d4010db5407c6e4f8db1b61f0e666c09d57edfafc84e8095940ee79f6b8",
+        "c13ac3d5f0416d111a61278f72bbd0ca109720540f7ee0ff143009f44a578cb1"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14700",
+          "family": "ordinary",
+          "later": [
+            103,
+            211
+          ]
+        },
+        {
+          "group": "wellcome-14765",
+          "family": "ordinary",
+          "later": [
+            496,
+            696
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "journal_pair",
+      "draft_sha256": [
+        "2ba5b59afa62011eb43555bb36155de8ac62d24231dc88ef571ebfa4cdf7b91a",
+        "28bc8ed91daf66ed71b24d8135a0ef3f67267e19c024a3974624012dc620134f"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14770",
+          "family": "ordinary",
+          "later": [
+            268,
+            388
+          ]
+        },
+        {
+          "group": "wellcome-14838",
+          "family": "ordinary",
+          "later": [
+            502,
+            600
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "journal_pair",
+      "draft_sha256": [
+        "8bd2d790fcbbd2f95b033c0c7ba071bd21b69646564711aae69557a09dab37e2",
+        "ecf45e071eece4b57183c3a35077803daa5158b6aaa62c1a995a52d17555599b"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-15013",
+          "family": "ordinary",
+          "later": [
+            56,
+            189
+          ]
+        },
+        {
+          "group": "wellcome-15100",
+          "family": "ordinary",
+          "later": [
+            414,
+            559
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 56,
+            "end": 182,
+            "context_spans": [
+              [
+                0,
+                55
+              ],
+              [
+                56,
+                182
+              ],
+              [
+                183,
+                273
+              ]
+            ],
+            "input_sha256": "7882c2bc80e562446df68755104f938eca63f9cc2c302118d8863697a1a1c00f"
+          },
+          "later": {
+            "start": 56,
+            "end": 189,
+            "context_spans": [
+              [
+                0,
+                55
+              ],
+              [
+                56,
+                189
+              ],
+              [
+                190,
+                280
+              ]
+            ],
+            "input_sha256": "3b629b09f7a317ff62513d45d9b888366e3072943ca8a216b2c90329378415ae"
+          }
+        },
+        {
+          "earlier": {
+            "start": 407,
+            "end": 555,
+            "context_spans": [
+              [
+                275,
+                406
+              ],
+              [
+                407,
+                555
+              ],
+              [
+                556,
+                653
+              ]
+            ],
+            "input_sha256": "0948629d2244f237633c76727acdbe5277eaf5b6ea2d48dd4068ac4db8be1439"
+          },
+          "later": {
+            "start": 414,
+            "end": 559,
+            "context_spans": [
+              [
+                282,
+                413
+              ],
+              [
+                414,
+                559
+              ],
+              [
+                560,
+                657
+              ]
+            ],
+            "input_sha256": "5f8e7e20b74388c131ff54374c29e212d5f8141e0536a370e1824053b3caed42"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.009084641933441162,
+            "later": 0.0075914859771728516
+          },
+          {
+            "earlier": 0.0018980101449415088,
+            "later": 0.001752672833390534
+          }
+        ],
+        [
+          {
+            "earlier": 0.002626776695251465,
+            "later": 0.0005645155906677246
+          },
+          {
+            "earlier": 0.0019751284271478653,
+            "later": 0.0024102278985083103
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "380a63e8910d2102651b887b31bd7f66e1cd3035ba08410c184974958674b397",
+        "d1629b4be7c138f1e224178a1e655dc1c4c420549d5326d0c3a0fcd3c6dcda47"
+      ],
+      "truth": [
+        {
+          "group": "gates-12783",
+          "family": "ordinary",
+          "later": [
+            140,
+            350
+          ]
+        },
+        {
+          "group": "0b5a530f4cf70c06f25329acd1ec0f2863f4c1427e7ed1ae16997fdadc7e6f08",
+          "family": "gemini-2.5-flash",
+          "later": [
+            567,
+            682
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "380a63e8910d2102651b887b31bd7f66e1cd3035ba08410c184974958674b397",
+        "fbc8907788bf9c6b5e1b789e19848121edbe7bd99a8c8acab021acf8f5b78755"
+      ],
+      "truth": [
+        {
+          "group": "gates-12783",
+          "family": "ordinary",
+          "later": [
+            140,
+            350
+          ]
+        },
+        {
+          "group": "0b5a530f4cf70c06f25329acd1ec0f2863f4c1427e7ed1ae16997fdadc7e6f08",
+          "family": "gpt-5.4-nano",
+          "later": [
+            567,
+            682
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "6927d942566a78be94e298f1f31296bdf9c48255b483c33bc7816116b502e33a",
+        "eff6b8de03d19eab9373471bca51503cb45b93456a83260e8dc7b4e2cafa3a91"
+      ],
+      "truth": [
+        {
+          "group": "0bd8e9a90d60afb04fdedaf021e74c61d00490477406e4e85a771725ea0c9a4b",
+          "family": "gemini-2.5-flash",
+          "later": [
+            65,
+            200
+          ]
+        },
+        {
+          "group": "gates-12797",
+          "family": "ordinary",
+          "later": [
+            580,
+            703
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 65,
+            "end": 187,
+            "context_spans": [
+              [
+                0,
+                64
+              ],
+              [
+                65,
+                187
+              ],
+              [
+                188,
+                413
+              ]
+            ],
+            "input_sha256": "4b30d12b5129d4aecdccfc617f21dea6627e6c6d9524eb1375a2430d4431be6c"
+          },
+          "later": {
+            "start": 65,
+            "end": 200,
+            "context_spans": [
+              [
+                0,
+                64
+              ],
+              [
+                65,
+                200
+              ],
+              [
+                201,
+                426
+              ]
+            ],
+            "input_sha256": "0e0b9f0245487c60e1876ffe34de64038210b980528869aede925ef25243ae26"
+          }
+        },
+        {
+          "earlier": {
+            "start": 567,
+            "end": 667,
+            "context_spans": [
+              [
+                415,
+                566
+              ],
+              [
+                567,
+                667
+              ],
+              [
+                668,
+                801
+              ]
+            ],
+            "input_sha256": "307b1a6e9d52abd4aa2d43dcba7d1f1e9ce54743789a59a0160b96851a72faed"
+          },
+          "later": {
+            "start": 580,
+            "end": 703,
+            "context_spans": [
+              [
+                428,
+                579
+              ],
+              [
+                580,
+                703
+              ],
+              [
+                704,
+                837
+              ]
+            ],
+            "input_sha256": "bbcc160055037278a20856615bb414f1d8759cf8bb12b9e366c77c586039f1a3"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.17585515975952148,
+            "later": 0.2699735164642334
+          },
+          {
+            "earlier": 0.9922203421592712,
+            "later": 0.994554877281189
+          }
+        ],
+        [
+          {
+            "earlier": 0.00638049840927124,
+            "later": 0.00832134485244751
+          },
+          {
+            "earlier": 0.0026624060701578856,
+            "later": 0.0018238965421915054
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "6927d942566a78be94e298f1f31296bdf9c48255b483c33bc7816116b502e33a",
+        "e4a56cb5efe5968eb925e3c22b779a69b281441d36af92e7e042531304472e91"
+      ],
+      "truth": [
+        {
+          "group": "0bd8e9a90d60afb04fdedaf021e74c61d00490477406e4e85a771725ea0c9a4b",
+          "family": "gpt-5.4-nano",
+          "later": [
+            65,
+            188
+          ]
+        },
+        {
+          "group": "gates-12797",
+          "family": "ordinary",
+          "later": [
+            568,
+            691
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 65,
+            "end": 187,
+            "context_spans": [
+              [
+                0,
+                64
+              ],
+              [
+                65,
+                187
+              ],
+              [
+                188,
+                413
+              ]
+            ],
+            "input_sha256": "4b30d12b5129d4aecdccfc617f21dea6627e6c6d9524eb1375a2430d4431be6c"
+          },
+          "later": {
+            "start": 65,
+            "end": 188,
+            "context_spans": [
+              [
+                0,
+                64
+              ],
+              [
+                65,
+                188
+              ],
+              [
+                189,
+                414
+              ]
+            ],
+            "input_sha256": "c4c261f89229ac509cecbf27dd8ed82218698914a0f5d1fbef88f3080611799c"
+          }
+        },
+        {
+          "earlier": {
+            "start": 567,
+            "end": 667,
+            "context_spans": [
+              [
+                415,
+                566
+              ],
+              [
+                567,
+                667
+              ],
+              [
+                668,
+                801
+              ]
+            ],
+            "input_sha256": "307b1a6e9d52abd4aa2d43dcba7d1f1e9ce54743789a59a0160b96851a72faed"
+          },
+          "later": {
+            "start": 568,
+            "end": 691,
+            "context_spans": [
+              [
+                416,
+                567
+              ],
+              [
+                568,
+                691
+              ],
+              [
+                692,
+                825
+              ]
+            ],
+            "input_sha256": "bbcc160055037278a20856615bb414f1d8759cf8bb12b9e366c77c586039f1a3"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.17585498094558716,
+            "later": 0.23768514394760132
+          },
+          {
+            "earlier": 0.9922203421592712,
+            "later": 0.9947145581245422
+          }
+        ],
+        [
+          {
+            "earlier": 0.00638049840927124,
+            "later": 0.00832134485244751
+          },
+          {
+            "earlier": 0.0026624060701578856,
+            "later": 0.0018238965421915054
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "8f2e36fb76a0c270f504094c073ecb9d03d71399baec3085144d530d6ff73993",
+        "5cd1162018de7874e6d6ead0ac9687240a18486751245e32caac6f02123cdfcc"
+      ],
+      "truth": [
+        {
+          "group": "gates-12808",
+          "family": "ordinary",
+          "later": [
+            64,
+            258
+          ]
+        },
+        {
+          "group": "146b52bfce2d21deb2cf3b9dd9773e975f93fff53535317476ea0840b7ff33cc",
+          "family": "gemini-2.5-flash",
+          "later": [
+            397,
+            492
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "8f2e36fb76a0c270f504094c073ecb9d03d71399baec3085144d530d6ff73993",
+        "91e4a9302b721c5d9d9b5240f0ea0ff9e04c9a450ed122e3bf78a87bb26b2a63"
+      ],
+      "truth": [
+        {
+          "group": "gates-12808",
+          "family": "ordinary",
+          "later": [
+            64,
+            258
+          ]
+        },
+        {
+          "group": "146b52bfce2d21deb2cf3b9dd9773e975f93fff53535317476ea0840b7ff33cc",
+          "family": "gpt-5.4-nano",
+          "later": [
+            397,
+            506
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "192576214a53badbeb05762f99b0dc7e9148da7d5d408dc181943ac3502ba2dc",
+        "1539d8c85d25ab0f6e14170f220c366af82403e70256830c768b4892425c1cd3"
+      ],
+      "truth": [
+        {
+          "group": "1dd299025159bfa18f0f69d91de259dc49037e1538441e4074df51b115e33f2d",
+          "family": "gemini-2.5-flash",
+          "later": [
+            213,
+            337
+          ]
+        },
+        {
+          "group": "gates-12820",
+          "family": "ordinary",
+          "later": [
+            696,
+            881
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "192576214a53badbeb05762f99b0dc7e9148da7d5d408dc181943ac3502ba2dc",
+        "d5875ea029f66e22e72d307e541a71635d528c1a1f365f1200bf9989d033e041"
+      ],
+      "truth": [
+        {
+          "group": "1dd299025159bfa18f0f69d91de259dc49037e1538441e4074df51b115e33f2d",
+          "family": "gpt-5.4-nano",
+          "later": [
+            213,
+            343
+          ]
+        },
+        {
+          "group": "gates-12820",
+          "family": "ordinary",
+          "later": [
+            702,
+            887
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "838a68b06187905e5f7c4309fdec129b2f49a31b61b39a7fc54b6c623f1f6f0e",
+        "4d074c6454eb142a1e454877c0e778698bccdb4297c415e0471a15237965c2a3"
+      ],
+      "truth": [
+        {
+          "group": "gates-12825",
+          "family": "ordinary",
+          "later": [
+            83,
+            232
+          ]
+        },
+        {
+          "group": "285d0194601e17b8e2922a849fbb0c50e10353174d331593f6e6ec4188c7141e",
+          "family": "gemini-2.5-flash",
+          "later": [
+            547,
+            734
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "838a68b06187905e5f7c4309fdec129b2f49a31b61b39a7fc54b6c623f1f6f0e",
+        "22f71403995d23b316d0d5a559b873765886b21773e23a373c7e5488e6ad82a3"
+      ],
+      "truth": [
+        {
+          "group": "gates-12825",
+          "family": "ordinary",
+          "later": [
+            83,
+            232
+          ]
+        },
+        {
+          "group": "285d0194601e17b8e2922a849fbb0c50e10353174d331593f6e6ec4188c7141e",
+          "family": "gpt-5.4-nano",
+          "later": [
+            547,
+            734
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "d4949d706bfc9a1735370594dd428032cfc067a6177bcc20ccfc719054305d3a",
+        "fa0c28e21dfc5d0ff4a69a2177e6490368e1740e458acc87c4225b85f585abde"
+      ],
+      "truth": [
+        {
+          "group": "301f0ba185b5d1ecd53988376fadd35ef38c463800d4149a27eb5767a33e2b67",
+          "family": "gemini-2.5-flash",
+          "later": [
+            185,
+            323
+          ]
+        },
+        {
+          "group": "gates-12891",
+          "family": "ordinary",
+          "later": [
+            652,
+            725
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 185,
+            "end": 319,
+            "context_spans": [
+              [
+                0,
+                184
+              ],
+              [
+                185,
+                319
+              ],
+              [
+                320,
+                539
+              ]
+            ],
+            "input_sha256": "1ef58fed88256a856e64575b0333e1dcfd61df8a8771c344fd411fee50203a24"
+          },
+          "later": {
+            "start": 185,
+            "end": 323,
+            "context_spans": [
+              [
+                0,
+                184
+              ],
+              [
+                185,
+                323
+              ],
+              [
+                324,
+                543
+              ]
+            ],
+            "input_sha256": "e3aa05f9697f280531fa5fa0a8a423d883333d6eb0d3cd18e67ae0445945bb49"
+          }
+        },
+        {
+          "earlier": {
+            "start": 648,
+            "end": 725,
+            "context_spans": [
+              [
+                541,
+                647
+              ],
+              [
+                648,
+                725
+              ],
+              [
+                726,
+                921
+              ]
+            ],
+            "input_sha256": "07a004fc4793aed48e97fca3af0186b2a0b933d4182949b44541403d2fed6a3b"
+          },
+          "later": {
+            "start": 652,
+            "end": 725,
+            "context_spans": [
+              [
+                545,
+                651
+              ],
+              [
+                652,
+                725
+              ],
+              [
+                726,
+                921
+              ]
+            ],
+            "input_sha256": "d980133e99c719327974e685d34de58a8e7f427fe44bda4399fdf22953e3cec2"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.005494892597198486,
+            "later": 0.005727112293243408
+          },
+          {
+            "earlier": 0.04279549419879913,
+            "later": 0.1323300153017044
+          }
+        ],
+        [
+          {
+            "earlier": 0.00020188093185424805,
+            "later": 0.00019103288650512695
+          },
+          {
+            "earlier": 0.00023869208234827965,
+            "later": 0.0002534118830226362
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "d4949d706bfc9a1735370594dd428032cfc067a6177bcc20ccfc719054305d3a",
+        "b2ebd6e3fd0aa6a1db25be5103ba2e0109751de786cd7cd1ca0f4cff4dc5c413"
+      ],
+      "truth": [
+        {
+          "group": "301f0ba185b5d1ecd53988376fadd35ef38c463800d4149a27eb5767a33e2b67",
+          "family": "gpt-5.4-nano",
+          "later": [
+            185,
+            330
+          ]
+        },
+        {
+          "group": "gates-12891",
+          "family": "ordinary",
+          "later": [
+            659,
+            732
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 185,
+            "end": 319,
+            "context_spans": [
+              [
+                0,
+                184
+              ],
+              [
+                185,
+                319
+              ],
+              [
+                320,
+                539
+              ]
+            ],
+            "input_sha256": "1ef58fed88256a856e64575b0333e1dcfd61df8a8771c344fd411fee50203a24"
+          },
+          "later": {
+            "start": 185,
+            "end": 330,
+            "context_spans": [
+              [
+                0,
+                184
+              ],
+              [
+                185,
+                330
+              ],
+              [
+                331,
+                550
+              ]
+            ],
+            "input_sha256": "aa7f056a806fe9c6bed7902d3323e4392f11a251ea0fc23d59a1df92978aa879"
+          }
+        },
+        {
+          "earlier": {
+            "start": 648,
+            "end": 725,
+            "context_spans": [
+              [
+                541,
+                647
+              ],
+              [
+                648,
+                725
+              ],
+              [
+                726,
+                921
+              ]
+            ],
+            "input_sha256": "07a004fc4793aed48e97fca3af0186b2a0b933d4182949b44541403d2fed6a3b"
+          },
+          "later": {
+            "start": 659,
+            "end": 732,
+            "context_spans": [
+              [
+                552,
+                658
+              ],
+              [
+                659,
+                732
+              ],
+              [
+                733,
+                928
+              ]
+            ],
+            "input_sha256": "d980133e99c719327974e685d34de58a8e7f427fe44bda4399fdf22953e3cec2"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.005494892597198486,
+            "later": 0.005544602870941162
+          },
+          {
+            "earlier": 0.04279549419879913,
+            "later": 0.1186564639210701
+          }
+        ],
+        [
+          {
+            "earlier": 0.00020188093185424805,
+            "later": 0.00019103288650512695
+          },
+          {
+            "earlier": 0.00023869208234827965,
+            "later": 0.0002534118830226362
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "1f5c9ff4b2c73e6ce32fa1de66417bd8af6b72f64b639f3551844ee46bc022db",
+        "c28c2a4dba97917aaef8a4e08ae8c12b128dd8d45d959f5d2d2a29c9a9c2346f"
+      ],
+      "truth": [
+        {
+          "group": "gates-12903",
+          "family": "ordinary",
+          "later": [
+            112,
+            311
+          ]
+        },
+        {
+          "group": "72ef4ed5372617d0ef6eb756b3147fe10cfdb4336cb406ae1b23639c2244a3ab",
+          "family": "gemini-2.5-flash",
+          "later": [
+            562,
+            726
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "1f5c9ff4b2c73e6ce32fa1de66417bd8af6b72f64b639f3551844ee46bc022db",
+        "1b13e1e158c6dd358bbb06e6577dfac4bc63180a43a15811c399647c3a90f837"
+      ],
+      "truth": [
+        {
+          "group": "gates-12903",
+          "family": "ordinary",
+          "later": [
+            112,
+            311
+          ]
+        },
+        {
+          "group": "72ef4ed5372617d0ef6eb756b3147fe10cfdb4336cb406ae1b23639c2244a3ab",
+          "family": "gpt-5.4-nano",
+          "later": [
+            562,
+            726
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "1c4ef89c1669e1ab2097a0f7e2a4f8c9f1e2dcf0bff3bf9e99dc0f0a65331045",
+        "b91f676f7647a2c3f24ee029eecf9ba699996653406f38d0ea0a9ec0d995359e"
+      ],
+      "truth": [
+        {
+          "group": "8191f35f2a84be3546db68eb3d5089b58eb96405bfdbde9e5a9660768bca4054",
+          "family": "gemini-2.5-flash",
+          "later": [
+            270,
+            405
+          ]
+        },
+        {
+          "group": "gates-12957",
+          "family": "ordinary",
+          "later": [
+            589,
+            787
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 270,
+            "end": 410,
+            "context_spans": [
+              [
+                0,
+                269
+              ],
+              [
+                270,
+                410
+              ],
+              [
+                411,
+                579
+              ]
+            ],
+            "input_sha256": "de847fa5fb258aaff01015aff235e372ac31460c12120d5692b646e4dc4f9f7b"
+          },
+          "later": {
+            "start": 270,
+            "end": 405,
+            "context_spans": [
+              [
+                0,
+                269
+              ],
+              [
+                270,
+                405
+              ],
+              [
+                406,
+                574
+              ]
+            ],
+            "input_sha256": "ec1c764bef9f34ba981fa6d23ad496c076aa7643225f537d18e270c715ee0c04"
+          }
+        },
+        {
+          "earlier": {
+            "start": 594,
+            "end": 772,
+            "context_spans": [
+              [
+                581,
+                593
+              ],
+              [
+                594,
+                772
+              ],
+              [
+                773,
+                1041
+              ]
+            ],
+            "input_sha256": "0f65a3c9f509a9be07d02aadb6c3f28a10a59c52a60b4865b6356d297aaf2032"
+          },
+          "later": {
+            "start": 589,
+            "end": 787,
+            "context_spans": [
+              [
+                576,
+                588
+              ],
+              [
+                589,
+                787
+              ],
+              [
+                788,
+                1056
+              ]
+            ],
+            "input_sha256": "adcb968daf34c3f873fd94c490f2391a081e116d0d5171d41a23bfaba61bb9a9"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.053648531436920166,
+            "later": 0.060422301292419434
+          },
+          {
+            "earlier": 0.9947667121887207,
+            "later": 0.994869589805603
+          }
+        ],
+        [
+          {
+            "earlier": 0.0006835460662841797,
+            "later": 0.0004965066909790039
+          },
+          {
+            "earlier": 0.00026372616412118077,
+            "later": 0.00038524705450981855
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "1c4ef89c1669e1ab2097a0f7e2a4f8c9f1e2dcf0bff3bf9e99dc0f0a65331045",
+        "4d40dda31b053c2e113a521fec39a2e58061744440594381ea05fe3b435816f9"
+      ],
+      "truth": [
+        {
+          "group": "8191f35f2a84be3546db68eb3d5089b58eb96405bfdbde9e5a9660768bca4054",
+          "family": "gpt-5.4-nano",
+          "later": [
+            270,
+            418
+          ]
+        },
+        {
+          "group": "gates-12957",
+          "family": "ordinary",
+          "later": [
+            602,
+            800
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 270,
+            "end": 410,
+            "context_spans": [
+              [
+                0,
+                269
+              ],
+              [
+                270,
+                410
+              ],
+              [
+                411,
+                579
+              ]
+            ],
+            "input_sha256": "de847fa5fb258aaff01015aff235e372ac31460c12120d5692b646e4dc4f9f7b"
+          },
+          "later": {
+            "start": 270,
+            "end": 418,
+            "context_spans": [
+              [
+                0,
+                269
+              ],
+              [
+                270,
+                418
+              ],
+              [
+                419,
+                587
+              ]
+            ],
+            "input_sha256": "b5a5006ba1fc32936e461d28fbe425cf5a63ef69052ef984f06df333e16352a6"
+          }
+        },
+        {
+          "earlier": {
+            "start": 594,
+            "end": 772,
+            "context_spans": [
+              [
+                581,
+                593
+              ],
+              [
+                594,
+                772
+              ],
+              [
+                773,
+                1041
+              ]
+            ],
+            "input_sha256": "0f65a3c9f509a9be07d02aadb6c3f28a10a59c52a60b4865b6356d297aaf2032"
+          },
+          "later": {
+            "start": 602,
+            "end": 800,
+            "context_spans": [
+              [
+                589,
+                601
+              ],
+              [
+                602,
+                800
+              ],
+              [
+                801,
+                1069
+              ]
+            ],
+            "input_sha256": "adcb968daf34c3f873fd94c490f2391a081e116d0d5171d41a23bfaba61bb9a9"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.053648531436920166,
+            "later": 0.06589221954345703
+          },
+          {
+            "earlier": 0.9947667121887207,
+            "later": 0.9961150884628296
+          }
+        ],
+        [
+          {
+            "earlier": 0.0006835460662841797,
+            "later": 0.0004965066909790039
+          },
+          {
+            "earlier": 0.00026372616412118077,
+            "later": 0.00038524705450981855
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "2cf52bb00d8c5fb0bc9b8aab7ea550c0e95fa3f834fc2277ae28b1e6d471c700",
+        "a68e4801ad5de110a0b14edba689dc76d6b2c40259637f79aad81f2e11a389cf"
+      ],
+      "truth": [
+        {
+          "group": "gates-12958",
+          "family": "ordinary",
+          "later": [
+            253,
+            576
+          ]
+        },
+        {
+          "group": "82e40a7be4f560f2315f84751a68397220a1ef5274bb19919e65baa5a0461674",
+          "family": "gemini-2.5-flash",
+          "later": [
+            856,
+            1096
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 253,
+            "end": 574,
+            "context_spans": [
+              [
+                0,
+                252
+              ],
+              [
+                253,
+                574
+              ],
+              [
+                575,
+                699
+              ]
+            ],
+            "input_sha256": "e18637b76a11beec211ceb68d5bd0df93580d6505276f07c11c7b445d1e34f5a"
+          },
+          "later": {
+            "start": 253,
+            "end": 576,
+            "context_spans": [
+              [
+                0,
+                252
+              ],
+              [
+                253,
+                576
+              ],
+              [
+                577,
+                701
+              ]
+            ],
+            "input_sha256": "76e00a2f904704c372daf1b94bb56e3258dbad70ff221793b24ee6257b0eff5f"
+          }
+        },
+        {
+          "earlier": {
+            "start": 854,
+            "end": 1088,
+            "context_spans": [
+              [
+                701,
+                853
+              ],
+              [
+                854,
+                1088
+              ],
+              [
+                1089,
+                1214
+              ]
+            ],
+            "input_sha256": "a14510d448290ea5e9e9dec88dd07995115b233dd2f85903cf74168e1f373c7b"
+          },
+          "later": {
+            "start": 856,
+            "end": 1096,
+            "context_spans": [
+              [
+                703,
+                855
+              ],
+              [
+                856,
+                1096
+              ],
+              [
+                1097,
+                1222
+              ]
+            ],
+            "input_sha256": "6f4a74c5f3e8d807a2f801c67a022d82aa45b680b1b9fab227d17a8c839c2e9e"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.09172946214675903,
+            "later": 0.044917166233062744
+          },
+          {
+            "earlier": 0.9938666224479675,
+            "later": 0.9918256998062134
+          }
+        ],
+        [
+          {
+            "earlier": 0.00769960880279541,
+            "later": 0.005213022232055664
+          },
+          {
+            "earlier": 0.0011083605932071805,
+            "later": 0.001524557126685977
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "2cf52bb00d8c5fb0bc9b8aab7ea550c0e95fa3f834fc2277ae28b1e6d471c700",
+        "021b5092b2d9893cfee87501d444013e65e14c374c0bb9a158a4a431ecbbe438"
+      ],
+      "truth": [
+        {
+          "group": "gates-12958",
+          "family": "ordinary",
+          "later": [
+            253,
+            576
+          ]
+        },
+        {
+          "group": "82e40a7be4f560f2315f84751a68397220a1ef5274bb19919e65baa5a0461674",
+          "family": "gpt-5.4-nano",
+          "later": [
+            856,
+            1099
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 253,
+            "end": 574,
+            "context_spans": [
+              [
+                0,
+                252
+              ],
+              [
+                253,
+                574
+              ],
+              [
+                575,
+                699
+              ]
+            ],
+            "input_sha256": "e18637b76a11beec211ceb68d5bd0df93580d6505276f07c11c7b445d1e34f5a"
+          },
+          "later": {
+            "start": 253,
+            "end": 576,
+            "context_spans": [
+              [
+                0,
+                252
+              ],
+              [
+                253,
+                576
+              ],
+              [
+                577,
+                701
+              ]
+            ],
+            "input_sha256": "76e00a2f904704c372daf1b94bb56e3258dbad70ff221793b24ee6257b0eff5f"
+          }
+        },
+        {
+          "earlier": {
+            "start": 854,
+            "end": 1088,
+            "context_spans": [
+              [
+                701,
+                853
+              ],
+              [
+                854,
+                1088
+              ],
+              [
+                1089,
+                1214
+              ]
+            ],
+            "input_sha256": "a14510d448290ea5e9e9dec88dd07995115b233dd2f85903cf74168e1f373c7b"
+          },
+          "later": {
+            "start": 856,
+            "end": 1099,
+            "context_spans": [
+              [
+                703,
+                855
+              ],
+              [
+                856,
+                1099
+              ],
+              [
+                1100,
+                1225
+              ]
+            ],
+            "input_sha256": "fc1d544051e5f1536ddda52c49b05f961602a283c0e46918a2c52bb127a77449"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.09172946214675903,
+            "later": 0.044917166233062744
+          },
+          {
+            "earlier": 0.9938666224479675,
+            "later": 0.9918256998062134
+          }
+        ],
+        [
+          {
+            "earlier": 0.00769960880279541,
+            "later": 0.006772339344024658
+          },
+          {
+            "earlier": 0.0011083605932071805,
+            "later": 0.0009080630843527615
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "2f415e4024ea58fa1e56e98d9238964e6940e220c2b62a6f99e412488c074364",
+        "95bad18acd6fc0f7f2e571ceb7eb3b28764fc592c9abf10028880aaf7db11bca"
+      ],
+      "truth": [
+        {
+          "group": "84cbba1cab22b15d67fdb4c75e548137ab72244bc54d7d1977369c53f882b4ee",
+          "family": "gemini-2.5-flash",
+          "later": [
+            253,
+            433
+          ]
+        },
+        {
+          "group": "gates-12998",
+          "family": "ordinary",
+          "later": [
+            806,
+            957
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 253,
+            "end": 434,
+            "context_spans": [
+              [
+                0,
+                252
+              ],
+              [
+                253,
+                434
+              ],
+              [
+                435,
+                598
+              ]
+            ],
+            "input_sha256": "0a7f7211b8163f6802c3808fbcc30c73218b15a57f78dddd7867b9839205789a"
+          },
+          "later": {
+            "start": 253,
+            "end": 433,
+            "context_spans": [
+              [
+                0,
+                252
+              ],
+              [
+                253,
+                433
+              ],
+              [
+                434,
+                597
+              ]
+            ],
+            "input_sha256": "2bbc38d33e3ae7aa9ae0983d69ad6571502a21ad9987e44a7fe7b1183016382b"
+          }
+        },
+        {
+          "earlier": {
+            "start": 807,
+            "end": 958,
+            "context_spans": [
+              [
+                600,
+                806
+              ],
+              [
+                807,
+                958
+              ],
+              [
+                959,
+                1159
+              ]
+            ],
+            "input_sha256": "fb9d13e7b52e8215932165ee1a9a11cce45410368ea6c62be407608328ea69e3"
+          },
+          "later": {
+            "start": 806,
+            "end": 957,
+            "context_spans": [
+              [
+                599,
+                805
+              ],
+              [
+                806,
+                957
+              ],
+              [
+                958,
+                1158
+              ]
+            ],
+            "input_sha256": "2398b05d4dac71452f4612698ba8602995f35c83d575a4ad7740f5324f3a23f9"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.003763854503631592,
+            "later": 0.00491565465927124
+          },
+          {
+            "earlier": 0.004554182756692171,
+            "later": 0.11056092381477356
+          }
+        ],
+        [
+          {
+            "earlier": 0.009293973445892334,
+            "later": 0.005270242691040039
+          },
+          {
+            "earlier": 0.998490571975708,
+            "later": 0.9984134435653687
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "2f415e4024ea58fa1e56e98d9238964e6940e220c2b62a6f99e412488c074364",
+        "987304fe0231e8c40a48f0d8d1cb96eda4feb286162c9799cbb098197f004c07"
+      ],
+      "truth": [
+        {
+          "group": "84cbba1cab22b15d67fdb4c75e548137ab72244bc54d7d1977369c53f882b4ee",
+          "family": "gpt-5.4-nano",
+          "later": [
+            253,
+            436
+          ]
+        },
+        {
+          "group": "gates-12998",
+          "family": "ordinary",
+          "later": [
+            809,
+            960
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 253,
+            "end": 434,
+            "context_spans": [
+              [
+                0,
+                252
+              ],
+              [
+                253,
+                434
+              ],
+              [
+                435,
+                598
+              ]
+            ],
+            "input_sha256": "0a7f7211b8163f6802c3808fbcc30c73218b15a57f78dddd7867b9839205789a"
+          },
+          "later": {
+            "start": 253,
+            "end": 436,
+            "context_spans": [
+              [
+                0,
+                252
+              ],
+              [
+                253,
+                436
+              ],
+              [
+                437,
+                600
+              ]
+            ],
+            "input_sha256": "4df135f28f23b0262449eafbe19ede8dc787a8a953af25fa94b975debe275ddd"
+          }
+        },
+        {
+          "earlier": {
+            "start": 807,
+            "end": 958,
+            "context_spans": [
+              [
+                600,
+                806
+              ],
+              [
+                807,
+                958
+              ],
+              [
+                959,
+                1159
+              ]
+            ],
+            "input_sha256": "fb9d13e7b52e8215932165ee1a9a11cce45410368ea6c62be407608328ea69e3"
+          },
+          "later": {
+            "start": 809,
+            "end": 960,
+            "context_spans": [
+              [
+                602,
+                808
+              ],
+              [
+                809,
+                960
+              ],
+              [
+                961,
+                1161
+              ]
+            ],
+            "input_sha256": "2398b05d4dac71452f4612698ba8602995f35c83d575a4ad7740f5324f3a23f9"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.003763854503631592,
+            "later": 0.006396949291229248
+          },
+          {
+            "earlier": 0.004554182756692171,
+            "later": 0.13935525715351105
+          }
+        ],
+        [
+          {
+            "earlier": 0.009293973445892334,
+            "later": 0.005270242691040039
+          },
+          {
+            "earlier": 0.998490571975708,
+            "later": 0.9984134435653687
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "af77eedab950e0f9dbf1ba38e60f16db27518ac7e9eaf79ec6f848c967ce14a5",
+        "93a923f98b68faa45d53764a704edd4bb5a2d9a19dd8e997f5679bb582994063"
+      ],
+      "truth": [
+        {
+          "group": "gates-13029",
+          "family": "ordinary",
+          "later": [
+            175,
+            336
+          ]
+        },
+        {
+          "group": "8ac58eef5882ab11a5f6aa7c267c3892551399d827e632d3b74ae5cdb7d71677",
+          "family": "gemini-2.5-flash",
+          "later": [
+            747,
+            1049
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 175,
+            "end": 336,
+            "context_spans": [
+              [
+                0,
+                174
+              ],
+              [
+                175,
+                336
+              ],
+              [
+                337,
+                524
+              ]
+            ],
+            "input_sha256": "28a21749835acf206d56679e2138d689995532e31010380c27717e4a80877c9a"
+          },
+          "later": {
+            "start": 175,
+            "end": 336,
+            "context_spans": [
+              [
+                0,
+                174
+              ],
+              [
+                175,
+                336
+              ],
+              [
+                337,
+                524
+              ]
+            ],
+            "input_sha256": "cb3eb514cb44353dcfbf72af641b5c477a7803427b2d1f10b8e3b79e401011d7"
+          }
+        },
+        {
+          "earlier": {
+            "start": 747,
+            "end": 1053,
+            "context_spans": [
+              [
+                526,
+                746
+              ],
+              [
+                747,
+                1053
+              ],
+              [
+                1054,
+                1176
+              ]
+            ],
+            "input_sha256": "6fbc36a024076dc87b0eaa926ce5de6900c9edca4e7ad58db7e8b9d857fa5103"
+          },
+          "later": {
+            "start": 747,
+            "end": 1049,
+            "context_spans": [
+              [
+                526,
+                746
+              ],
+              [
+                747,
+                1049
+              ],
+              [
+                1050,
+                1172
+              ]
+            ],
+            "input_sha256": "442dbac81774ef25323b00b73a3ec1eef257357b9a5e77a1c4873b0b48ed7918"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.02432781457901001,
+            "later": 0.007703125476837158
+          },
+          {
+            "earlier": 0.0008384662796743214,
+            "later": 0.0008553491206839681
+          }
+        ],
+        [
+          {
+            "earlier": 0.013279199600219727,
+            "later": 0.06079477071762085
+          },
+          {
+            "earlier": 0.017978202551603317,
+            "later": 0.07841210067272186
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "af77eedab950e0f9dbf1ba38e60f16db27518ac7e9eaf79ec6f848c967ce14a5",
+        "61e8c8b10cdd8fd4ddb136e17b68690fab1cd972076565d3054e6b474c10c243"
+      ],
+      "truth": [
+        {
+          "group": "gates-13029",
+          "family": "ordinary",
+          "later": [
+            175,
+            336
+          ]
+        },
+        {
+          "group": "8ac58eef5882ab11a5f6aa7c267c3892551399d827e632d3b74ae5cdb7d71677",
+          "family": "gpt-5.4-nano",
+          "later": [
+            747,
+            1049
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 175,
+            "end": 336,
+            "context_spans": [
+              [
+                0,
+                174
+              ],
+              [
+                175,
+                336
+              ],
+              [
+                337,
+                524
+              ]
+            ],
+            "input_sha256": "28a21749835acf206d56679e2138d689995532e31010380c27717e4a80877c9a"
+          },
+          "later": {
+            "start": 175,
+            "end": 336,
+            "context_spans": [
+              [
+                0,
+                174
+              ],
+              [
+                175,
+                336
+              ],
+              [
+                337,
+                524
+              ]
+            ],
+            "input_sha256": "cb3eb514cb44353dcfbf72af641b5c477a7803427b2d1f10b8e3b79e401011d7"
+          }
+        },
+        {
+          "earlier": {
+            "start": 747,
+            "end": 1053,
+            "context_spans": [
+              [
+                526,
+                746
+              ],
+              [
+                747,
+                1053
+              ],
+              [
+                1054,
+                1176
+              ]
+            ],
+            "input_sha256": "6fbc36a024076dc87b0eaa926ce5de6900c9edca4e7ad58db7e8b9d857fa5103"
+          },
+          "later": {
+            "start": 747,
+            "end": 1049,
+            "context_spans": [
+              [
+                526,
+                746
+              ],
+              [
+                747,
+                1049
+              ],
+              [
+                1050,
+                1172
+              ]
+            ],
+            "input_sha256": "1eda2c5437bbe3707723df82ed9856d1755de4638736928a4ef57def51d73fd4"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.02432781457901001,
+            "later": 0.007703125476837158
+          },
+          {
+            "earlier": 0.0008384662796743214,
+            "later": 0.0008553491206839681
+          }
+        ],
+        [
+          {
+            "earlier": 0.013279199600219727,
+            "later": 0.02315962314605713
+          },
+          {
+            "earlier": 0.017978202551603317,
+            "later": 0.025300949811935425
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "beb7f64d25a2aff502eb5e837f7ee166a17555e323eb06b58822ba8e527791c1",
+        "7e8fc6b2124249072d7e7026d02e0dda34bbf347f39016878284189fcfeb1726"
+      ],
+      "truth": [
+        {
+          "group": "962dfb7d212767c55a9d4e016bc2ce25ce0d4e746ef67f55e1c0bc0e3a261634",
+          "family": "gemini-2.5-flash",
+          "later": [
+            113,
+            303
+          ]
+        },
+        {
+          "group": "wellcome-11386",
+          "family": "ordinary",
+          "later": [
+            609,
+            850
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 113,
+            "end": 298,
+            "context_spans": [
+              [
+                0,
+                112
+              ],
+              [
+                113,
+                298
+              ],
+              [
+                299,
+                479
+              ]
+            ],
+            "input_sha256": "e20d23501d1cdb1d9ce1a3697384cedd59cf128fa8d3a82012c895f0573cabf8"
+          },
+          "later": {
+            "start": 113,
+            "end": 303,
+            "context_spans": [
+              [
+                0,
+                112
+              ],
+              [
+                113,
+                303
+              ],
+              [
+                304,
+                484
+              ]
+            ],
+            "input_sha256": "b6d18d8200e11634647b61269f6d441d0c227f4db1f211a6ec993f15436d7437"
+          }
+        },
+        {
+          "earlier": {
+            "start": 604,
+            "end": 836,
+            "context_spans": [
+              [
+                481,
+                603
+              ],
+              [
+                604,
+                836
+              ],
+              [
+                837,
+                1018
+              ]
+            ],
+            "input_sha256": "b77bcd590205112ec08d944b0aee0502068958494010755044caec966e84713f"
+          },
+          "later": {
+            "start": 609,
+            "end": 850,
+            "context_spans": [
+              [
+                486,
+                608
+              ],
+              [
+                609,
+                850
+              ],
+              [
+                851,
+                1032
+              ]
+            ],
+            "input_sha256": "b51017e875a11739d3e026b698660db3a4a218995bfd70d78b04e4c4209d37b6"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.005394160747528076,
+            "later": 0.005746185779571533
+          },
+          {
+            "earlier": 0.9932275414466858,
+            "later": 0.9933604598045349
+          }
+        ],
+        [
+          {
+            "earlier": 0.0011064410209655762,
+            "later": 0.0015971064567565918
+          },
+          {
+            "earlier": 0.01506761647760868,
+            "later": 0.002138872630894184
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "beb7f64d25a2aff502eb5e837f7ee166a17555e323eb06b58822ba8e527791c1",
+        "65d055ec17655ff399d6f3da309f06581c80c1d0b9058e4f93cd179d4a23ad2c"
+      ],
+      "truth": [
+        {
+          "group": "962dfb7d212767c55a9d4e016bc2ce25ce0d4e746ef67f55e1c0bc0e3a261634",
+          "family": "gpt-5.4-nano",
+          "later": [
+            113,
+            305
+          ]
+        },
+        {
+          "group": "wellcome-11386",
+          "family": "ordinary",
+          "later": [
+            611,
+            852
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 113,
+            "end": 298,
+            "context_spans": [
+              [
+                0,
+                112
+              ],
+              [
+                113,
+                298
+              ],
+              [
+                299,
+                479
+              ]
+            ],
+            "input_sha256": "e20d23501d1cdb1d9ce1a3697384cedd59cf128fa8d3a82012c895f0573cabf8"
+          },
+          "later": {
+            "start": 113,
+            "end": 305,
+            "context_spans": [
+              [
+                0,
+                112
+              ],
+              [
+                113,
+                305
+              ],
+              [
+                306,
+                486
+              ]
+            ],
+            "input_sha256": "3e37a64a2073f4529924a43a55cc1a7f2f8e1e7e884c02ef53919575a0e81dff"
+          }
+        },
+        {
+          "earlier": {
+            "start": 604,
+            "end": 836,
+            "context_spans": [
+              [
+                481,
+                603
+              ],
+              [
+                604,
+                836
+              ],
+              [
+                837,
+                1018
+              ]
+            ],
+            "input_sha256": "b77bcd590205112ec08d944b0aee0502068958494010755044caec966e84713f"
+          },
+          "later": {
+            "start": 611,
+            "end": 852,
+            "context_spans": [
+              [
+                488,
+                610
+              ],
+              [
+                611,
+                852
+              ],
+              [
+                853,
+                1034
+              ]
+            ],
+            "input_sha256": "b51017e875a11739d3e026b698660db3a4a218995bfd70d78b04e4c4209d37b6"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.005394160747528076,
+            "later": 0.006727099418640137
+          },
+          {
+            "earlier": 0.9932942986488342,
+            "later": 0.9928836822509766
+          }
+        ],
+        [
+          {
+            "earlier": 0.0011064410209655762,
+            "later": 0.0015971064567565918
+          },
+          {
+            "earlier": 0.01506761647760868,
+            "later": 0.002138872630894184
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "2cb87b9e74e34c4678ea3fb525fa6271d0d37ce0e13f3da4f84c072f1db1526f",
+        "21d8c00bbaa7f3ed5cf1623612d0b2403a076df6e601ef01f38a1e2236d5d75e"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-12429",
+          "family": "ordinary",
+          "later": [
+            102,
+            235
+          ]
+        },
+        {
+          "group": "99d6fa8d08ba5f788c76d436eb38a10ac08f17b7bc190c850af6c29d10ebecae",
+          "family": "gemini-2.5-flash",
+          "later": [
+            614,
+            748
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "2cb87b9e74e34c4678ea3fb525fa6271d0d37ce0e13f3da4f84c072f1db1526f",
+        "21d8c00bbaa7f3ed5cf1623612d0b2403a076df6e601ef01f38a1e2236d5d75e"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-12429",
+          "family": "ordinary",
+          "later": [
+            102,
+            235
+          ]
+        },
+        {
+          "group": "99d6fa8d08ba5f788c76d436eb38a10ac08f17b7bc190c850af6c29d10ebecae",
+          "family": "gpt-5.4-nano",
+          "later": [
+            614,
+            748
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "3e02a852be400864dbd0e1ac37baa71d5fd684f8fca1278af9ba0c3d86d042a7",
+        "534c58daab3bf3ef71dfd6234abd9647eac4ac236304e6ce4973d7b8e68e908f"
+      ],
+      "truth": [
+        {
+          "group": "ab7fcb06eb0ed0e019f40db6782d860d23230a39be70aef8000a69dc733ede3e",
+          "family": "gemini-2.5-flash",
+          "later": [
+            232,
+            398
+          ]
+        },
+        {
+          "group": "wellcome-13531",
+          "family": "ordinary",
+          "later": [
+            823,
+            1039
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "3e02a852be400864dbd0e1ac37baa71d5fd684f8fca1278af9ba0c3d86d042a7",
+        "93f3bbd3203332d2b1e264e8ca84cb1b468dbe37484f234a2ee10c0b46435323"
+      ],
+      "truth": [
+        {
+          "group": "ab7fcb06eb0ed0e019f40db6782d860d23230a39be70aef8000a69dc733ede3e",
+          "family": "gpt-5.4-nano",
+          "later": [
+            232,
+            412
+          ]
+        },
+        {
+          "group": "wellcome-13531",
+          "family": "ordinary",
+          "later": [
+            837,
+            1053
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "7f49901fdfabe5f8ea8949de20a18317be82c7719cd7991829b6e2a0aea99d07",
+        "52e87ae07820fb30350c41504ad719d5a09405343c1e5a6ecff590e2ce1929d8"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14700",
+          "family": "ordinary",
+          "later": [
+            103,
+            211
+          ]
+        },
+        {
+          "group": "ba5f0ee754987b0f33f404316bc0ef2c1b0b2b559e2f985fb8f0f0f155d2e2b6",
+          "family": "gemini-2.5-flash",
+          "later": [
+            507,
+            723
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "7f49901fdfabe5f8ea8949de20a18317be82c7719cd7991829b6e2a0aea99d07",
+        "69047a8b02ce1524f3b11e1f83619aa38d8603561daec7ab19502e53ec91800b"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14700",
+          "family": "ordinary",
+          "later": [
+            103,
+            211
+          ]
+        },
+        {
+          "group": "ba5f0ee754987b0f33f404316bc0ef2c1b0b2b559e2f985fb8f0f0f155d2e2b6",
+          "family": "gpt-5.4-nano",
+          "later": [
+            507,
+            718
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "37eeaa9183cf440fc5928fa2aa40ad164223d33abb2ac5199858061e788e8f48",
+        "b11f7ea600290586c8536a027a4c3b0e5bba7a8377b3e3a68994f52d2cacf128"
+      ],
+      "truth": [
+        {
+          "group": "baabbbc168819fb53f2a96af58218161ae425f055e550f62d45f12e6d711aab1",
+          "family": "gemini-2.5-flash",
+          "later": [
+            109,
+            217
+          ]
+        },
+        {
+          "group": "wellcome-14765",
+          "family": "ordinary",
+          "later": [
+            846,
+            1046
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "37eeaa9183cf440fc5928fa2aa40ad164223d33abb2ac5199858061e788e8f48",
+        "9088cf4189b8b02747a1ab2a5e03ddd3aac66769169cc57abf8fb4304caedadb"
+      ],
+      "truth": [
+        {
+          "group": "baabbbc168819fb53f2a96af58218161ae425f055e550f62d45f12e6d711aab1",
+          "family": "gpt-5.4-nano",
+          "later": [
+            109,
+            235
+          ]
+        },
+        {
+          "group": "wellcome-14765",
+          "family": "ordinary",
+          "later": [
+            864,
+            1064
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "88e5b588ab272587d152faebdf7369bc56fcd1fe247a4e24bb0598c2e314b4ca",
+        "7476732d6957218a2c678f9a585658bb4df9f76fb156052ee9e8388f4af8f3be"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14770",
+          "family": "ordinary",
+          "later": [
+            268,
+            388
+          ]
+        },
+        {
+          "group": "c4b81b4f1543a4ae54aecf02e75b9b0fcdaf59dd30e5ceef199eba934ff3cab5",
+          "family": "gemini-2.5-flash",
+          "later": [
+            528,
+            726
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "88e5b588ab272587d152faebdf7369bc56fcd1fe247a4e24bb0598c2e314b4ca",
+        "8a8a3131e07bac33ab87764c915908c9800e19a723d4ea48d845b3dac1a05be7"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14770",
+          "family": "ordinary",
+          "later": [
+            268,
+            388
+          ]
+        },
+        {
+          "group": "c4b81b4f1543a4ae54aecf02e75b9b0fcdaf59dd30e5ceef199eba934ff3cab5",
+          "family": "gpt-5.4-nano",
+          "later": [
+            528,
+            721
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "e1c70dcbf7086fc30f1ee09a8a5e362fddeae9f2f845f7a87b11de29ad9bfdf8",
+        "bc5d1661acfd51fbc74c9c1b983f87acbc1b00cb1afeac1e6a3b72786e8edcb5"
+      ],
+      "truth": [
+        {
+          "group": "dc0387d2b492da7f1f530f2ed94277c0ee704253735415dc2c28ccd979047c3d",
+          "family": "gemini-2.5-flash",
+          "later": [
+            91,
+            235
+          ]
+        },
+        {
+          "group": "wellcome-14838",
+          "family": "ordinary",
+          "later": [
+            403,
+            501
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "e1c70dcbf7086fc30f1ee09a8a5e362fddeae9f2f845f7a87b11de29ad9bfdf8",
+        "b326bb4a146afff8ebede8b5ebdb779aaf3fc7b35f6ba2abfa69a52c08a7bbd5"
+      ],
+      "truth": [
+        {
+          "group": "dc0387d2b492da7f1f530f2ed94277c0ee704253735415dc2c28ccd979047c3d",
+          "family": "gpt-5.4-nano",
+          "later": [
+            91,
+            236
+          ]
+        },
+        {
+          "group": "wellcome-14838",
+          "family": "ordinary",
+          "later": [
+            404,
+            502
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "6cc63dd1e59eb2380d0c9cb94f224547fe362f238d4736ec7c0288a29ba53dc7",
+        "c7a775acb1abbc42f3a7a325302d25682cd7b57f52a9f5bce58fe4abef76cdf6"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-15013",
+          "family": "ordinary",
+          "later": [
+            56,
+            189
+          ]
+        },
+        {
+          "group": "e6453f530ab2cbb504bc97f0a687ab416481f5731398127be8c54c30850c2501",
+          "family": "gemini-2.5-flash",
+          "later": [
+            483,
+            713
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "6cc63dd1e59eb2380d0c9cb94f224547fe362f238d4736ec7c0288a29ba53dc7",
+        "bd2f10ef955aff5c5e30a5ef5e23524bd86f95a61afa98e379a0de6775aa37b4"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-15013",
+          "family": "ordinary",
+          "later": [
+            56,
+            189
+          ]
+        },
+        {
+          "group": "e6453f530ab2cbb504bc97f0a687ab416481f5731398127be8c54c30850c2501",
+          "family": "gpt-5.4-nano",
+          "later": [
+            483,
+            724
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "ce247ffbeef87fe2046128b31f0a57f3b2e56f0197f9f1e193b7c7f4f694bc34",
+        "c65ad018d9646ca44d43b37885e41843bd8f4a0c081e80e72b94346cc3b48f30"
+      ],
+      "truth": [
+        {
+          "group": "fde4c77adabeddae772a40968f48f58f32db8a2af205622542ee63fa36ad5679",
+          "family": "gemini-2.5-flash",
+          "later": [
+            292,
+            419
+          ]
+        },
+        {
+          "group": "wellcome-15100",
+          "family": "ordinary",
+          "later": [
+            702,
+            847
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_1",
+      "draft_sha256": [
+        "ce247ffbeef87fe2046128b31f0a57f3b2e56f0197f9f1e193b7c7f4f694bc34",
+        "4e4b905616e36b029ed4cae40148b21b4e04a589914c505095a929bd7847003a"
+      ],
+      "truth": [
+        {
+          "group": "fde4c77adabeddae772a40968f48f58f32db8a2af205622542ee63fa36ad5679",
+          "family": "gpt-5.4-nano",
+          "later": [
+            292,
+            417
+          ]
+        },
+        {
+          "group": "wellcome-15100",
+          "family": "ordinary",
+          "later": [
+            700,
+            845
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 292,
+            "end": 417,
+            "context_spans": [
+              [
+                0,
+                291
+              ],
+              [
+                292,
+                417
+              ],
+              [
+                418,
+                566
+              ]
+            ],
+            "input_sha256": "2f53fa634b01b1e8afe630bf626ca737464d565dd8fa8cad6ec112ba42832a15"
+          },
+          "later": {
+            "start": 292,
+            "end": 417,
+            "context_spans": [
+              [
+                0,
+                291
+              ],
+              [
+                292,
+                417
+              ],
+              [
+                418,
+                566
+              ]
+            ],
+            "input_sha256": "d7c590443e44e8610328133146dac73162c18b8bdcb8b35df3ce50d5c175e4e8"
+          }
+        },
+        {
+          "earlier": {
+            "start": 700,
+            "end": 848,
+            "context_spans": [
+              [
+                568,
+                699
+              ],
+              [
+                700,
+                848
+              ],
+              [
+                849,
+                946
+              ]
+            ],
+            "input_sha256": "0948629d2244f237633c76727acdbe5277eaf5b6ea2d48dd4068ac4db8be1439"
+          },
+          "later": {
+            "start": 700,
+            "end": 845,
+            "context_spans": [
+              [
+                568,
+                699
+              ],
+              [
+                700,
+                845
+              ],
+              [
+                846,
+                943
+              ]
+            ],
+            "input_sha256": "5f8e7e20b74388c131ff54374c29e212d5f8141e0536a370e1824053b3caed42"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.006132304668426514,
+            "later": 0.005739688873291016
+          },
+          {
+            "earlier": 0.049128975719213486,
+            "later": 0.0058948504738509655
+          }
+        ],
+        [
+          {
+            "earlier": 0.002626776695251465,
+            "later": 0.0005645155906677246
+          },
+          {
+            "earlier": 0.0019751284271478653,
+            "later": 0.0024102278985083103
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "bf90cf162f381f3a39cb5d124494ff4d5e93cb87d8b6c9f636a99a63e7c80cc7",
+        "490127efe9a809a33941ee2965e92cabf3c2655047af1dd455ee28832183ee2c"
+      ],
+      "truth": [
+        {
+          "group": "gates-12957",
+          "family": "ordinary",
+          "later": [
+            13,
+            211
+          ]
+        },
+        {
+          "group": "08c081cb3dc0a45b6e50ebcaaa9d24e55a3e181c685f895c19e859666e5800bd",
+          "family": "gemini-2.5-flash",
+          "later": [
+            543,
+            699
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 13,
+            "end": 191,
+            "context_spans": [
+              [
+                0,
+                12
+              ],
+              [
+                13,
+                191
+              ],
+              [
+                192,
+                460
+              ]
+            ],
+            "input_sha256": "0f65a3c9f509a9be07d02aadb6c3f28a10a59c52a60b4865b6356d297aaf2032"
+          },
+          "later": {
+            "start": 13,
+            "end": 211,
+            "context_spans": [
+              [
+                0,
+                12
+              ],
+              [
+                13,
+                211
+              ],
+              [
+                212,
+                480
+              ]
+            ],
+            "input_sha256": "adcb968daf34c3f873fd94c490f2391a081e116d0d5171d41a23bfaba61bb9a9"
+          }
+        },
+        {
+          "earlier": {
+            "start": 523,
+            "end": 665,
+            "context_spans": [
+              [
+                462,
+                522
+              ],
+              [
+                523,
+                665
+              ],
+              [
+                666,
+                766
+              ]
+            ],
+            "input_sha256": "c9e68ea5af63daad396bf561290221dab4b59cb7ff16a6e667b42189d45bf3ab"
+          },
+          "later": {
+            "start": 543,
+            "end": 699,
+            "context_spans": [
+              [
+                482,
+                542
+              ],
+              [
+                543,
+                699
+              ],
+              [
+                700,
+                800
+              ]
+            ],
+            "input_sha256": "a86cfdd52a96516e591673e370ce253fcf982a32194cda50669f004b66cb3efb"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.0006835460662841797,
+            "later": 0.0004965066909790039
+          },
+          {
+            "earlier": 0.00026372616412118077,
+            "later": 0.00038524705450981855
+          }
+        ],
+        [
+          {
+            "earlier": 0.6278434991836548,
+            "later": 0.9830907583236694
+          },
+          {
+            "earlier": 0.01982686296105385,
+            "later": 0.7759182453155518
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "bf90cf162f381f3a39cb5d124494ff4d5e93cb87d8b6c9f636a99a63e7c80cc7",
+        "00b21f8cc9b5f3c5989674f8b765e6be0d85249f937ba1f492187cc9d6bd3fcc"
+      ],
+      "truth": [
+        {
+          "group": "gates-12957",
+          "family": "ordinary",
+          "later": [
+            13,
+            211
+          ]
+        },
+        {
+          "group": "08c081cb3dc0a45b6e50ebcaaa9d24e55a3e181c685f895c19e859666e5800bd",
+          "family": "gpt-5.4-nano",
+          "later": [
+            543,
+            693
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 13,
+            "end": 191,
+            "context_spans": [
+              [
+                0,
+                12
+              ],
+              [
+                13,
+                191
+              ],
+              [
+                192,
+                460
+              ]
+            ],
+            "input_sha256": "0f65a3c9f509a9be07d02aadb6c3f28a10a59c52a60b4865b6356d297aaf2032"
+          },
+          "later": {
+            "start": 13,
+            "end": 211,
+            "context_spans": [
+              [
+                0,
+                12
+              ],
+              [
+                13,
+                211
+              ],
+              [
+                212,
+                480
+              ]
+            ],
+            "input_sha256": "adcb968daf34c3f873fd94c490f2391a081e116d0d5171d41a23bfaba61bb9a9"
+          }
+        },
+        {
+          "earlier": {
+            "start": 523,
+            "end": 665,
+            "context_spans": [
+              [
+                462,
+                522
+              ],
+              [
+                523,
+                665
+              ],
+              [
+                666,
+                766
+              ]
+            ],
+            "input_sha256": "c9e68ea5af63daad396bf561290221dab4b59cb7ff16a6e667b42189d45bf3ab"
+          },
+          "later": {
+            "start": 543,
+            "end": 693,
+            "context_spans": [
+              [
+                482,
+                542
+              ],
+              [
+                543,
+                693
+              ],
+              [
+                694,
+                794
+              ]
+            ],
+            "input_sha256": "952b5425356e974192bb4ea20d54ffd68dbe91811acdafdcd54ddf85d55397dc"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.0006835460662841797,
+            "later": 0.0004965066909790039
+          },
+          {
+            "earlier": 0.00026372616412118077,
+            "later": 0.00038524705450981855
+          }
+        ],
+        [
+          {
+            "earlier": 0.6278434991836548,
+            "later": 0.8671585321426392
+          },
+          {
+            "earlier": 0.01982686296105385,
+            "later": 0.521497905254364
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "dc943930b017dc93e01bca8a6847d3661b6e175f4f58a3965abf22fdcd4920dd",
+        "fec6cdb75ee0536284de8d6a738383f5bf2e517e090a7d1fb811a37718630360"
+      ],
+      "truth": [
+        {
+          "group": "0b495f2246bb73806638adea46180ce059751177f81872bc209789d71c405ffa",
+          "family": "gemini-2.5-flash",
+          "later": [
+            323,
+            612
+          ]
+        },
+        {
+          "group": "gates-12958",
+          "family": "ordinary",
+          "later": [
+            1113,
+            1436
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 323,
+            "end": 628,
+            "context_spans": [
+              [
+                0,
+                322
+              ],
+              [
+                323,
+                628
+              ],
+              [
+                629,
+                874
+              ]
+            ],
+            "input_sha256": "f712fbe226fa03ea7c56b1393b4491cbe6181d11300f73b09222a7d2cd1c087d"
+          },
+          "later": {
+            "start": 323,
+            "end": 612,
+            "context_spans": [
+              [
+                0,
+                322
+              ],
+              [
+                323,
+                612
+              ],
+              [
+                613,
+                858
+              ]
+            ],
+            "input_sha256": "662adf72c95b39888af405dd6685aa65cca7b9c11f80c1acf26c05b4e1b5c347"
+          }
+        },
+        {
+          "earlier": {
+            "start": 1129,
+            "end": 1450,
+            "context_spans": [
+              [
+                876,
+                1128
+              ],
+              [
+                1129,
+                1450
+              ],
+              [
+                1451,
+                1575
+              ]
+            ],
+            "input_sha256": "e18637b76a11beec211ceb68d5bd0df93580d6505276f07c11c7b445d1e34f5a"
+          },
+          "later": {
+            "start": 1113,
+            "end": 1436,
+            "context_spans": [
+              [
+                860,
+                1112
+              ],
+              [
+                1113,
+                1436
+              ],
+              [
+                1437,
+                1561
+              ]
+            ],
+            "input_sha256": "76e00a2f904704c372daf1b94bb56e3258dbad70ff221793b24ee6257b0eff5f"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.016331136226654053,
+            "later": 0.0047338008880615234
+          },
+          {
+            "earlier": 0.8539328575134277,
+            "later": 0.9906119704246521
+          }
+        ],
+        [
+          {
+            "earlier": 0.09172946214675903,
+            "later": 0.044917166233062744
+          },
+          {
+            "earlier": 0.9938666224479675,
+            "later": 0.9918256998062134
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "dc943930b017dc93e01bca8a6847d3661b6e175f4f58a3965abf22fdcd4920dd",
+        "0c09e6bc1c40054dc4e496e0e9cedacea6c3970dbb84ecff7eef0d928b09c69f"
+      ],
+      "truth": [
+        {
+          "group": "0b495f2246bb73806638adea46180ce059751177f81872bc209789d71c405ffa",
+          "family": "gpt-5.4-nano",
+          "later": [
+            323,
+            613
+          ]
+        },
+        {
+          "group": "gates-12958",
+          "family": "ordinary",
+          "later": [
+            1114,
+            1437
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 323,
+            "end": 628,
+            "context_spans": [
+              [
+                0,
+                322
+              ],
+              [
+                323,
+                628
+              ],
+              [
+                629,
+                874
+              ]
+            ],
+            "input_sha256": "f712fbe226fa03ea7c56b1393b4491cbe6181d11300f73b09222a7d2cd1c087d"
+          },
+          "later": {
+            "start": 323,
+            "end": 613,
+            "context_spans": [
+              [
+                0,
+                322
+              ],
+              [
+                323,
+                613
+              ],
+              [
+                614,
+                859
+              ]
+            ],
+            "input_sha256": "148525cfc7929c930d1f7e69e47df8707a0723b3b91fb736b8db095edbd29528"
+          }
+        },
+        {
+          "earlier": {
+            "start": 1129,
+            "end": 1450,
+            "context_spans": [
+              [
+                876,
+                1128
+              ],
+              [
+                1129,
+                1450
+              ],
+              [
+                1451,
+                1575
+              ]
+            ],
+            "input_sha256": "e18637b76a11beec211ceb68d5bd0df93580d6505276f07c11c7b445d1e34f5a"
+          },
+          "later": {
+            "start": 1114,
+            "end": 1437,
+            "context_spans": [
+              [
+                861,
+                1113
+              ],
+              [
+                1114,
+                1437
+              ],
+              [
+                1438,
+                1562
+              ]
+            ],
+            "input_sha256": "76e00a2f904704c372daf1b94bb56e3258dbad70ff221793b24ee6257b0eff5f"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.016331136226654053,
+            "later": 0.007173895835876465
+          },
+          {
+            "earlier": 0.8539328575134277,
+            "later": 0.6081579923629761
+          }
+        ],
+        [
+          {
+            "earlier": 0.09172946214675903,
+            "later": 0.044917166233062744
+          },
+          {
+            "earlier": 0.9938666224479675,
+            "later": 0.9918256998062134
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "bfcae9bf8c04400ccb038275428a37a9fe8174fe2c7aaf3df2b34f0de653b366",
+        "9a49ca5350884b1026356e991fd36475f5c1af3c3bf5293f266f615cb4df9120"
+      ],
+      "truth": [
+        {
+          "group": "gates-12998",
+          "family": "ordinary",
+          "later": [
+            207,
+            358
+          ]
+        },
+        {
+          "group": "3c4058b2261c6fb723f9f5f857d5f2b4909f5060512be181ed2c52153ab71cd9",
+          "family": "gemini-2.5-flash",
+          "later": [
+            686,
+            854
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 207,
+            "end": 358,
+            "context_spans": [
+              [
+                0,
+                206
+              ],
+              [
+                207,
+                358
+              ],
+              [
+                359,
+                559
+              ]
+            ],
+            "input_sha256": "fb9d13e7b52e8215932165ee1a9a11cce45410368ea6c62be407608328ea69e3"
+          },
+          "later": {
+            "start": 207,
+            "end": 358,
+            "context_spans": [
+              [
+                0,
+                206
+              ],
+              [
+                207,
+                358
+              ],
+              [
+                359,
+                559
+              ]
+            ],
+            "input_sha256": "2398b05d4dac71452f4612698ba8602995f35c83d575a4ad7740f5324f3a23f9"
+          }
+        },
+        {
+          "earlier": {
+            "start": 686,
+            "end": 854,
+            "context_spans": [
+              [
+                561,
+                685
+              ],
+              [
+                686,
+                854
+              ],
+              [
+                855,
+                1058
+              ]
+            ],
+            "input_sha256": "1b79ffa83973db453e1ebfbb107702fd13b4ffd772e989d40fab87488cdb00d3"
+          },
+          "later": {
+            "start": 686,
+            "end": 854,
+            "context_spans": [
+              [
+                561,
+                685
+              ],
+              [
+                686,
+                854
+              ],
+              [
+                855,
+                1058
+              ]
+            ],
+            "input_sha256": "fdcbef8b7c34cd2249cd55f119a6d262c337119024a8312fefa9377256d8bfb0"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.009293973445892334,
+            "later": 0.005270242691040039
+          },
+          {
+            "earlier": 0.998490571975708,
+            "later": 0.9984134435653687
+          }
+        ],
+        [
+          {
+            "earlier": 0.007847368717193604,
+            "later": 0.03337264060974121
+          },
+          {
+            "earlier": 0.04820523411035538,
+            "later": 0.9754266738891602
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "bfcae9bf8c04400ccb038275428a37a9fe8174fe2c7aaf3df2b34f0de653b366",
+        "ca08cb065bc61a77850366cd53aa75bcf3201b8c6b0e4f9d64e6a6ec67636d9e"
+      ],
+      "truth": [
+        {
+          "group": "gates-12998",
+          "family": "ordinary",
+          "later": [
+            207,
+            358
+          ]
+        },
+        {
+          "group": "3c4058b2261c6fb723f9f5f857d5f2b4909f5060512be181ed2c52153ab71cd9",
+          "family": "gpt-5.4-nano",
+          "later": [
+            686,
+            847
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 207,
+            "end": 358,
+            "context_spans": [
+              [
+                0,
+                206
+              ],
+              [
+                207,
+                358
+              ],
+              [
+                359,
+                559
+              ]
+            ],
+            "input_sha256": "fb9d13e7b52e8215932165ee1a9a11cce45410368ea6c62be407608328ea69e3"
+          },
+          "later": {
+            "start": 207,
+            "end": 358,
+            "context_spans": [
+              [
+                0,
+                206
+              ],
+              [
+                207,
+                358
+              ],
+              [
+                359,
+                559
+              ]
+            ],
+            "input_sha256": "2398b05d4dac71452f4612698ba8602995f35c83d575a4ad7740f5324f3a23f9"
+          }
+        },
+        {
+          "earlier": {
+            "start": 686,
+            "end": 854,
+            "context_spans": [
+              [
+                561,
+                685
+              ],
+              [
+                686,
+                854
+              ],
+              [
+                855,
+                1058
+              ]
+            ],
+            "input_sha256": "1b79ffa83973db453e1ebfbb107702fd13b4ffd772e989d40fab87488cdb00d3"
+          },
+          "later": {
+            "start": 686,
+            "end": 847,
+            "context_spans": [
+              [
+                561,
+                685
+              ],
+              [
+                686,
+                847
+              ],
+              [
+                848,
+                1051
+              ]
+            ],
+            "input_sha256": "215c498e3617095aaa916d53b1bc5d460985316aba5186aa63bb6bb773c1a692"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.009293973445892334,
+            "later": 0.005270242691040039
+          },
+          {
+            "earlier": 0.998490571975708,
+            "later": 0.9984134435653687
+          }
+        ],
+        [
+          {
+            "earlier": 0.007847368717193604,
+            "later": 0.01887214183807373
+          },
+          {
+            "earlier": 0.04820523411035538,
+            "later": 0.8781777620315552
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "f5ee8e319681eef0237ad06a1f5b68ce6408bd04a3ddccb00594e5ceb5ea824f",
+        "f3714463527c56916942792820ad299e0b4df7d389092840a046d8a84a057b0c"
+      ],
+      "truth": [
+        {
+          "group": "41c435f02364df161f6105c2cd5e1eb5c8a09b870d77ce5f0ee04ba98263aaa5",
+          "family": "gemini-2.5-flash",
+          "later": [
+            182,
+            459
+          ]
+        },
+        {
+          "group": "gates-13029",
+          "family": "ordinary",
+          "later": [
+            828,
+            989
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 182,
+            "end": 456,
+            "context_spans": [
+              [
+                0,
+                181
+              ],
+              [
+                182,
+                456
+              ],
+              [
+                457,
+                648
+              ]
+            ],
+            "input_sha256": "7bbb7cabc5c21a21282f259e9da4da42de15e658ce1b727aa71d70984603f42c"
+          },
+          "later": {
+            "start": 182,
+            "end": 459,
+            "context_spans": [
+              [
+                0,
+                181
+              ],
+              [
+                182,
+                459
+              ],
+              [
+                460,
+                651
+              ]
+            ],
+            "input_sha256": "fe3e4aa219cbeecb14d280299e711acacd6c3a23b7440c7364560815ad49f6c5"
+          }
+        },
+        {
+          "earlier": {
+            "start": 825,
+            "end": 986,
+            "context_spans": [
+              [
+                650,
+                824
+              ],
+              [
+                825,
+                986
+              ],
+              [
+                987,
+                1174
+              ]
+            ],
+            "input_sha256": "28a21749835acf206d56679e2138d689995532e31010380c27717e4a80877c9a"
+          },
+          "later": {
+            "start": 828,
+            "end": 989,
+            "context_spans": [
+              [
+                653,
+                827
+              ],
+              [
+                828,
+                989
+              ],
+              [
+                990,
+                1177
+              ]
+            ],
+            "input_sha256": "cb3eb514cb44353dcfbf72af641b5c477a7803427b2d1f10b8e3b79e401011d7"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.980755090713501,
+            "later": 0.9725554585456848
+          },
+          {
+            "earlier": 0.007330987136811018,
+            "later": 0.1272600144147873
+          }
+        ],
+        [
+          {
+            "earlier": 0.02432781457901001,
+            "later": 0.007703125476837158
+          },
+          {
+            "earlier": 0.0008384662796743214,
+            "later": 0.0008553491206839681
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "f5ee8e319681eef0237ad06a1f5b68ce6408bd04a3ddccb00594e5ceb5ea824f",
+        "bcc8ea4f61c3e98e4808f60e83ccba269264db720b9f4e763adf0c699d196938"
+      ],
+      "truth": [
+        {
+          "group": "41c435f02364df161f6105c2cd5e1eb5c8a09b870d77ce5f0ee04ba98263aaa5",
+          "family": "gpt-5.4-nano",
+          "later": [
+            182,
+            442
+          ]
+        },
+        {
+          "group": "gates-13029",
+          "family": "ordinary",
+          "later": [
+            811,
+            972
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 182,
+            "end": 456,
+            "context_spans": [
+              [
+                0,
+                181
+              ],
+              [
+                182,
+                456
+              ],
+              [
+                457,
+                648
+              ]
+            ],
+            "input_sha256": "7bbb7cabc5c21a21282f259e9da4da42de15e658ce1b727aa71d70984603f42c"
+          },
+          "later": {
+            "start": 182,
+            "end": 442,
+            "context_spans": [
+              [
+                0,
+                181
+              ],
+              [
+                182,
+                442
+              ],
+              [
+                443,
+                634
+              ]
+            ],
+            "input_sha256": "6a72b125f8a1618f2d927b7b860f0d779c0f24be825c6e9da9616aff9826e46b"
+          }
+        },
+        {
+          "earlier": {
+            "start": 825,
+            "end": 986,
+            "context_spans": [
+              [
+                650,
+                824
+              ],
+              [
+                825,
+                986
+              ],
+              [
+                987,
+                1174
+              ]
+            ],
+            "input_sha256": "28a21749835acf206d56679e2138d689995532e31010380c27717e4a80877c9a"
+          },
+          "later": {
+            "start": 811,
+            "end": 972,
+            "context_spans": [
+              [
+                636,
+                810
+              ],
+              [
+                811,
+                972
+              ],
+              [
+                973,
+                1160
+              ]
+            ],
+            "input_sha256": "cb3eb514cb44353dcfbf72af641b5c477a7803427b2d1f10b8e3b79e401011d7"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.980755090713501,
+            "later": 0.595655083656311
+          },
+          {
+            "earlier": 0.007330987136811018,
+            "later": 0.023866023868322372
+          }
+        ],
+        [
+          {
+            "earlier": 0.02432781457901001,
+            "later": 0.007703125476837158
+          },
+          {
+            "earlier": 0.0008384662796743214,
+            "later": 0.0008553491206839681
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "05f07e71eb2dd36aa945fa8a45b67b75938fb62d189d9a6138b90bdc18dbc564",
+        "df9941eae2a7428bede6bc05b022ac413f6b6d9b5155682fefe9bc0537210d68"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-11386",
+          "family": "ordinary",
+          "later": [
+            123,
+            364
+          ]
+        },
+        {
+          "group": "76d965e813424a6b8372167d3ead356577be068e2dc5289fecb33805ab7fc303",
+          "family": "gemini-2.5-flash",
+          "later": [
+            763,
+            958
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 123,
+            "end": 355,
+            "context_spans": [
+              [
+                0,
+                122
+              ],
+              [
+                123,
+                355
+              ],
+              [
+                356,
+                537
+              ]
+            ],
+            "input_sha256": "b77bcd590205112ec08d944b0aee0502068958494010755044caec966e84713f"
+          },
+          "later": {
+            "start": 123,
+            "end": 364,
+            "context_spans": [
+              [
+                0,
+                122
+              ],
+              [
+                123,
+                364
+              ],
+              [
+                365,
+                546
+              ]
+            ],
+            "input_sha256": "b51017e875a11739d3e026b698660db3a4a218995bfd70d78b04e4c4209d37b6"
+          }
+        },
+        {
+          "earlier": {
+            "start": 754,
+            "end": 950,
+            "context_spans": [
+              [
+                539,
+                753
+              ],
+              [
+                754,
+                950
+              ],
+              [
+                951,
+                1245
+              ]
+            ],
+            "input_sha256": "51eae4772e119606109902b32522277ed0df654f2f4d5335b82dfaac03a4ec68"
+          },
+          "later": {
+            "start": 763,
+            "end": 958,
+            "context_spans": [
+              [
+                548,
+                762
+              ],
+              [
+                763,
+                958
+              ],
+              [
+                959,
+                1253
+              ]
+            ],
+            "input_sha256": "8146c5e4ce4df0ae95855d127817f365e447c86ff5888fe14d77ea03d2768b3c"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.0011064410209655762,
+            "later": 0.0015971064567565918
+          },
+          {
+            "earlier": 0.01506761647760868,
+            "later": 0.002138872630894184
+          }
+        ],
+        [
+          {
+            "earlier": 0.13054382801055908,
+            "later": 0.10589402914047241
+          },
+          {
+            "earlier": 0.9968156218528748,
+            "later": 0.9953545331954956
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "05f07e71eb2dd36aa945fa8a45b67b75938fb62d189d9a6138b90bdc18dbc564",
+        "d799c09e31ef7479ead7db8472ccd7c50b4c8759ba59766fb8fa40eb121da039"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-11386",
+          "family": "ordinary",
+          "later": [
+            123,
+            364
+          ]
+        },
+        {
+          "group": "76d965e813424a6b8372167d3ead356577be068e2dc5289fecb33805ab7fc303",
+          "family": "gpt-5.4-nano",
+          "later": [
+            763,
+            964
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "b091b4ed6fbbb5606d34ee1e9ca40c60e11357d68241c5f958013f2ae9df3c37",
+        "617f23cf27452f4fd3642c4b53f8b12ca8e4aa17709dfa9b237c94fc5a9e74ef"
+      ],
+      "truth": [
+        {
+          "group": "8cf0b3f8056bb2165662e995e6d97354d306d72f9605946cc2509e3b57036b59",
+          "family": "gemini-2.5-flash",
+          "later": [
+            221,
+            395
+          ]
+        },
+        {
+          "group": "wellcome-12429",
+          "family": "ordinary",
+          "later": [
+            634,
+            767
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 221,
+            "end": 383,
+            "context_spans": [
+              [
+                0,
+                220
+              ],
+              [
+                221,
+                383
+              ],
+              [
+                384,
+                518
+              ]
+            ],
+            "input_sha256": "bedf93ec51d9d2d4562781a44d4414faf3cfdde6b8e0700ca9bbe55047bc4418"
+          },
+          "later": {
+            "start": 221,
+            "end": 395,
+            "context_spans": [
+              [
+                0,
+                220
+              ],
+              [
+                221,
+                395
+              ],
+              [
+                396,
+                530
+              ]
+            ],
+            "input_sha256": "a4830de05dcfd3e4a4900006914c46aeaef281aebeab9454211a221af08f5928"
+          }
+        },
+        {
+          "earlier": {
+            "start": 622,
+            "end": 755,
+            "context_spans": [
+              [
+                520,
+                621
+              ],
+              [
+                622,
+                755
+              ],
+              [
+                756,
+                959
+              ]
+            ],
+            "input_sha256": "08be2dfab09e09ff4ca2a51cc2a4834edaab6e43d67ccfe3b0374e945d880d1b"
+          },
+          "later": {
+            "start": 634,
+            "end": 767,
+            "context_spans": [
+              [
+                532,
+                633
+              ],
+              [
+                634,
+                767
+              ],
+              [
+                768,
+                971
+              ]
+            ],
+            "input_sha256": "f9ad78f93afb23309cc75ff04cdb33f3e88d55afecf8f55e70efa6902b7d0a7a"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.6403471231460571,
+            "later": 0.5591784119606018
+          },
+          {
+            "earlier": 0.8594439625740051,
+            "later": 0.9278354644775391
+          }
+        ],
+        [
+          {
+            "earlier": 0.0012912750244140625,
+            "later": 0.001217663288116455
+          },
+          {
+            "earlier": 0.0012999287573620677,
+            "later": 0.001352779334411025
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "b091b4ed6fbbb5606d34ee1e9ca40c60e11357d68241c5f958013f2ae9df3c37",
+        "a3b3d7dddeb3511bab73d03b789a9cbf60ed7182721a99291a56cb7f6ad2f2c1"
+      ],
+      "truth": [
+        {
+          "group": "8cf0b3f8056bb2165662e995e6d97354d306d72f9605946cc2509e3b57036b59",
+          "family": "gpt-5.4-nano",
+          "later": [
+            221,
+            387
+          ]
+        },
+        {
+          "group": "wellcome-12429",
+          "family": "ordinary",
+          "later": [
+            626,
+            759
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 221,
+            "end": 383,
+            "context_spans": [
+              [
+                0,
+                220
+              ],
+              [
+                221,
+                383
+              ],
+              [
+                384,
+                518
+              ]
+            ],
+            "input_sha256": "bedf93ec51d9d2d4562781a44d4414faf3cfdde6b8e0700ca9bbe55047bc4418"
+          },
+          "later": {
+            "start": 221,
+            "end": 387,
+            "context_spans": [
+              [
+                0,
+                220
+              ],
+              [
+                221,
+                387
+              ],
+              [
+                388,
+                522
+              ]
+            ],
+            "input_sha256": "2091987ea139ada17531059c9cba9481138929fb2436b5a634f016bda92d63c7"
+          }
+        },
+        {
+          "earlier": {
+            "start": 622,
+            "end": 755,
+            "context_spans": [
+              [
+                520,
+                621
+              ],
+              [
+                622,
+                755
+              ],
+              [
+                756,
+                959
+              ]
+            ],
+            "input_sha256": "08be2dfab09e09ff4ca2a51cc2a4834edaab6e43d67ccfe3b0374e945d880d1b"
+          },
+          "later": {
+            "start": 626,
+            "end": 759,
+            "context_spans": [
+              [
+                524,
+                625
+              ],
+              [
+                626,
+                759
+              ],
+              [
+                760,
+                963
+              ]
+            ],
+            "input_sha256": "f9ad78f93afb23309cc75ff04cdb33f3e88d55afecf8f55e70efa6902b7d0a7a"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.6403470039367676,
+            "later": 0.4638524651527405
+          },
+          {
+            "earlier": 0.8594439625740051,
+            "later": 0.6089006662368774
+          }
+        ],
+        [
+          {
+            "earlier": 0.0012912750244140625,
+            "later": 0.001217663288116455
+          },
+          {
+            "earlier": 0.0012999287573620677,
+            "later": 0.001352779334411025
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "3c12a93adbcc74875447507133ea1bd18374f74111f1b50ffe278e460bf7dac2",
+        "fdad9d33f5cadf5e701b023f4e50326941f4b9a1e24a4a6e7f59b88038fa1453"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-13531",
+          "family": "ordinary",
+          "later": [
+            245,
+            461
+          ]
+        },
+        {
+          "group": "96866435e19dca0ae1023cde746ccda2f50b73480a07ad0ff5ee084673bd08df",
+          "family": "gemini-2.5-flash",
+          "later": [
+            684,
+            842
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "3c12a93adbcc74875447507133ea1bd18374f74111f1b50ffe278e460bf7dac2",
+        "62125f5dd8fc95bc589705ef2c3b689213047a15d35e1cbc4031d74ee33fb65b"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-13531",
+          "family": "ordinary",
+          "later": [
+            245,
+            461
+          ]
+        },
+        {
+          "group": "96866435e19dca0ae1023cde746ccda2f50b73480a07ad0ff5ee084673bd08df",
+          "family": "gpt-5.4-nano",
+          "later": [
+            684,
+            852
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "99c6306fc4e9e72054b821f1f6895dbc6af4bbfa300c4541ed10b87ccaa16d0b",
+        "a1cacacb0e83719e98457c726071b580d951c19989062e46baecb031db7c6142"
+      ],
+      "truth": [
+        {
+          "group": "b3ba8b298d2c56e7060b5bc6ff30e2851cc2beeb6e77c679c3e57ac6548ef3ee",
+          "family": "gemini-2.5-flash",
+          "later": [
+            151,
+            261
+          ]
+        },
+        {
+          "group": "wellcome-14700",
+          "family": "ordinary",
+          "later": [
+            583,
+            691
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "99c6306fc4e9e72054b821f1f6895dbc6af4bbfa300c4541ed10b87ccaa16d0b",
+        "ea4414d2eb97fb9d001b9fdc641981871f3ba987f4f152ca0762b684e2697763"
+      ],
+      "truth": [
+        {
+          "group": "b3ba8b298d2c56e7060b5bc6ff30e2851cc2beeb6e77c679c3e57ac6548ef3ee",
+          "family": "gpt-5.4-nano",
+          "later": [
+            151,
+            258
+          ]
+        },
+        {
+          "group": "wellcome-14700",
+          "family": "ordinary",
+          "later": [
+            580,
+            688
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "786e07db4304d1c5e082fdd8476c45b90f5ae7078d1bd0142e163057e6bc0299",
+        "ac165f005a8e9681c1efcc78d632d82f25d59656154ccb5386dfddf9da78fa95"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14765",
+          "family": "ordinary",
+          "later": [
+            147,
+            347
+          ]
+        },
+        {
+          "group": "b9602108e1363c07a43c13163e793db9172453e487d8c71fa856775197ad2431",
+          "family": "gemini-2.5-flash",
+          "later": [
+            667,
+            806
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "786e07db4304d1c5e082fdd8476c45b90f5ae7078d1bd0142e163057e6bc0299",
+        "b57946948a1611c5af9a87a1a9c799d8436dccfc353f6e44126078e622661258"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14765",
+          "family": "ordinary",
+          "later": [
+            147,
+            347
+          ]
+        },
+        {
+          "group": "b9602108e1363c07a43c13163e793db9172453e487d8c71fa856775197ad2431",
+          "family": "gpt-5.4-nano",
+          "later": [
+            667,
+            823
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "baa7a61820a31f4dfd44202f3337142cbc26590858583fd58af3d71a534dbb62",
+        "d531f433aab0f42c9ab36f56549864a0c0e1c564e458bdd2e11898a23df843d4"
+      ],
+      "truth": [
+        {
+          "group": "bbb1c5f2bbd61e4ea10cd5bc8cdb5bba6d1ba735b3d44bf0c401c202f4d3f2ea",
+          "family": "gemini-2.5-flash",
+          "later": [
+            266,
+            467
+          ]
+        },
+        {
+          "group": "wellcome-14770",
+          "family": "ordinary",
+          "later": [
+            1084,
+            1204
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "baa7a61820a31f4dfd44202f3337142cbc26590858583fd58af3d71a534dbb62",
+        "3bd28819a3f1753a2eb7efd462ee6fd988a4320d93db5b64becf37be23b05651"
+      ],
+      "truth": [
+        {
+          "group": "bbb1c5f2bbd61e4ea10cd5bc8cdb5bba6d1ba735b3d44bf0c401c202f4d3f2ea",
+          "family": "gpt-5.4-nano",
+          "later": [
+            266,
+            468
+          ]
+        },
+        {
+          "group": "wellcome-14770",
+          "family": "ordinary",
+          "later": [
+            1085,
+            1205
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "1f08d87b2424728154d3c48e6f26605d75cf133fccebdaf8f7f45ccebb75d38b",
+        "b50ad52f2fdb8c0cce576ea31e5e771dfb26e6dd4c9f59da1c59ff8df5bc4da3"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14838",
+          "family": "ordinary",
+          "later": [
+            68,
+            166
+          ]
+        },
+        {
+          "group": "c05e003ed1125d0619d53f3bd343f3b4a0d36667abd2f7268811228e0e05a7d6",
+          "family": "gemini-2.5-flash",
+          "later": [
+            429,
+            587
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "1f08d87b2424728154d3c48e6f26605d75cf133fccebdaf8f7f45ccebb75d38b",
+        "df77a38b59c081842a7e1a084314936b5e40b4a8f5be5d8fef32b5e0c1e92637"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14838",
+          "family": "ordinary",
+          "later": [
+            68,
+            166
+          ]
+        },
+        {
+          "group": "c05e003ed1125d0619d53f3bd343f3b4a0d36667abd2f7268811228e0e05a7d6",
+          "family": "gpt-5.4-nano",
+          "later": [
+            429,
+            586
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "76d5e96b6c0be35490690c2885c645661321845d7146bd46823d55328f87ee8c",
+        "6de5cb3878cb87ef264aa093b733680c3449c123d3baf4e8585000b3805b97b5"
+      ],
+      "truth": [
+        {
+          "group": "c69504e71c654e29671538148d6d25f3b90470d711c869369abb6ce89a8ebbe9",
+          "family": "gemini-2.5-flash",
+          "later": [
+            122,
+            267
+          ]
+        },
+        {
+          "group": "wellcome-15013",
+          "family": "ordinary",
+          "later": [
+            494,
+            627
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 122,
+            "end": 276,
+            "context_spans": [
+              [
+                0,
+                121
+              ],
+              [
+                122,
+                276
+              ],
+              [
+                277,
+                445
+              ]
+            ],
+            "input_sha256": "e5d3cee60f2b427680768a4ebd9eed8b65df840f66f3dceb8b6a68c3fcab9d25"
+          },
+          "later": {
+            "start": 122,
+            "end": 267,
+            "context_spans": [
+              [
+                0,
+                121
+              ],
+              [
+                122,
+                267
+              ],
+              [
+                268,
+                436
+              ]
+            ],
+            "input_sha256": "01e2a1a0232739696557a28bbb856b94d51efb57f105fb93f11ef62b7ec0019a"
+          }
+        },
+        {
+          "earlier": {
+            "start": 503,
+            "end": 629,
+            "context_spans": [
+              [
+                447,
+                502
+              ],
+              [
+                503,
+                629
+              ],
+              [
+                630,
+                720
+              ]
+            ],
+            "input_sha256": "7882c2bc80e562446df68755104f938eca63f9cc2c302118d8863697a1a1c00f"
+          },
+          "later": {
+            "start": 494,
+            "end": 627,
+            "context_spans": [
+              [
+                438,
+                493
+              ],
+              [
+                494,
+                627
+              ],
+              [
+                628,
+                718
+              ]
+            ],
+            "input_sha256": "3b629b09f7a317ff62513d45d9b888366e3072943ca8a216b2c90329378415ae"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.0054666996002197266,
+            "later": 0.004382133483886719
+          },
+          {
+            "earlier": 0.3860626816749573,
+            "later": 0.971016526222229
+          }
+        ],
+        [
+          {
+            "earlier": 0.009084641933441162,
+            "later": 0.0075914859771728516
+          },
+          {
+            "earlier": 0.0018980101449415088,
+            "later": 0.001752672833390534
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "76d5e96b6c0be35490690c2885c645661321845d7146bd46823d55328f87ee8c",
+        "0e5566dd7e346e6b77cb6747c6154f9aff55aaaaaf899affc5e017097e7880f1"
+      ],
+      "truth": [
+        {
+          "group": "c69504e71c654e29671538148d6d25f3b90470d711c869369abb6ce89a8ebbe9",
+          "family": "gpt-5.4-nano",
+          "later": [
+            122,
+            279
+          ]
+        },
+        {
+          "group": "wellcome-15013",
+          "family": "ordinary",
+          "later": [
+            506,
+            639
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 122,
+            "end": 276,
+            "context_spans": [
+              [
+                0,
+                121
+              ],
+              [
+                122,
+                276
+              ],
+              [
+                277,
+                445
+              ]
+            ],
+            "input_sha256": "e5d3cee60f2b427680768a4ebd9eed8b65df840f66f3dceb8b6a68c3fcab9d25"
+          },
+          "later": {
+            "start": 122,
+            "end": 279,
+            "context_spans": [
+              [
+                0,
+                121
+              ],
+              [
+                122,
+                279
+              ],
+              [
+                280,
+                448
+              ]
+            ],
+            "input_sha256": "a191e512bc92d0bf3500c3a9665f99079ce7d02339542a9b8da9db3defaca6bd"
+          }
+        },
+        {
+          "earlier": {
+            "start": 503,
+            "end": 629,
+            "context_spans": [
+              [
+                447,
+                502
+              ],
+              [
+                503,
+                629
+              ],
+              [
+                630,
+                720
+              ]
+            ],
+            "input_sha256": "7882c2bc80e562446df68755104f938eca63f9cc2c302118d8863697a1a1c00f"
+          },
+          "later": {
+            "start": 506,
+            "end": 639,
+            "context_spans": [
+              [
+                450,
+                505
+              ],
+              [
+                506,
+                639
+              ],
+              [
+                640,
+                730
+              ]
+            ],
+            "input_sha256": "3b629b09f7a317ff62513d45d9b888366e3072943ca8a216b2c90329378415ae"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.0054666996002197266,
+            "later": 0.006438016891479492
+          },
+          {
+            "earlier": 0.3860626816749573,
+            "later": 0.49220675230026245
+          }
+        ],
+        [
+          {
+            "earlier": 0.009084641933441162,
+            "later": 0.0075914859771728516
+          },
+          {
+            "earlier": 0.0018980101449415088,
+            "later": 0.001752672833390534
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "29e66ff4c08bd9ff46d45dd6824b5bd4d3a5d9eeeefe5550092544c36e0f7bef",
+        "68c0d4fd5be9a24e62509f4d3e692e2cee532ed214b461591e71bcd1d490afbe"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-15100",
+          "family": "ordinary",
+          "later": [
+            132,
+            277
+          ]
+        },
+        {
+          "group": "db3e20f23f159b181693e45c1af21124e662e7ccde7800991dccbeacabe0f279",
+          "family": "gemini-2.5-flash",
+          "later": [
+            497,
+            643
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 132,
+            "end": 280,
+            "context_spans": [
+              [
+                0,
+                131
+              ],
+              [
+                132,
+                280
+              ],
+              [
+                281,
+                378
+              ]
+            ],
+            "input_sha256": "0948629d2244f237633c76727acdbe5277eaf5b6ea2d48dd4068ac4db8be1439"
+          },
+          "later": {
+            "start": 132,
+            "end": 277,
+            "context_spans": [
+              [
+                0,
+                131
+              ],
+              [
+                132,
+                277
+              ],
+              [
+                278,
+                375
+              ]
+            ],
+            "input_sha256": "5f8e7e20b74388c131ff54374c29e212d5f8141e0536a370e1824053b3caed42"
+          }
+        },
+        {
+          "earlier": {
+            "start": 500,
+            "end": 645,
+            "context_spans": [
+              [
+                380,
+                499
+              ],
+              [
+                500,
+                645
+              ],
+              [
+                646,
+                868
+              ]
+            ],
+            "input_sha256": "b3358f09158f073b8c2c5329caec416cf8ef52a1e93ae76119dd1f0ff5c7782e"
+          },
+          "later": {
+            "start": 497,
+            "end": 643,
+            "context_spans": [
+              [
+                377,
+                496
+              ],
+              [
+                497,
+                643
+              ],
+              [
+                644,
+                866
+              ]
+            ],
+            "input_sha256": "14c77932ebebb8d1312926193beb68eba445380aa0d6e13466ce01e71e261252"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.002626776695251465,
+            "later": 0.0005645155906677246
+          },
+          {
+            "earlier": 0.0019751284271478653,
+            "later": 0.0024102278985083103
+          }
+        ],
+        [
+          {
+            "earlier": 0.00875091552734375,
+            "later": 0.014030039310455322
+          },
+          {
+            "earlier": 0.01099495030939579,
+            "later": 0.40769949555397034
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "29e66ff4c08bd9ff46d45dd6824b5bd4d3a5d9eeeefe5550092544c36e0f7bef",
+        "290215f9576bbf52b410f6e73a984688c41baf1472d28fdcf2ba7d2496e5f413"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-15100",
+          "family": "ordinary",
+          "later": [
+            132,
+            277
+          ]
+        },
+        {
+          "group": "db3e20f23f159b181693e45c1af21124e662e7ccde7800991dccbeacabe0f279",
+          "family": "gpt-5.4-nano",
+          "later": [
+            497,
+            645
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 132,
+            "end": 280,
+            "context_spans": [
+              [
+                0,
+                131
+              ],
+              [
+                132,
+                280
+              ],
+              [
+                281,
+                378
+              ]
+            ],
+            "input_sha256": "0948629d2244f237633c76727acdbe5277eaf5b6ea2d48dd4068ac4db8be1439"
+          },
+          "later": {
+            "start": 132,
+            "end": 277,
+            "context_spans": [
+              [
+                0,
+                131
+              ],
+              [
+                132,
+                277
+              ],
+              [
+                278,
+                375
+              ]
+            ],
+            "input_sha256": "5f8e7e20b74388c131ff54374c29e212d5f8141e0536a370e1824053b3caed42"
+          }
+        },
+        {
+          "earlier": {
+            "start": 500,
+            "end": 645,
+            "context_spans": [
+              [
+                380,
+                499
+              ],
+              [
+                500,
+                645
+              ],
+              [
+                646,
+                868
+              ]
+            ],
+            "input_sha256": "b3358f09158f073b8c2c5329caec416cf8ef52a1e93ae76119dd1f0ff5c7782e"
+          },
+          "later": {
+            "start": 497,
+            "end": 645,
+            "context_spans": [
+              [
+                377,
+                496
+              ],
+              [
+                497,
+                645
+              ],
+              [
+                646,
+                868
+              ]
+            ],
+            "input_sha256": "a3b30a827ca9ad1bafffc12ec86ae25cddba30f30d4ee4b9fe703c11f8e81d60"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.002626776695251465,
+            "later": 0.0005645155906677246
+          },
+          {
+            "earlier": 0.0019751284271478653,
+            "later": 0.0024102278985083103
+          }
+        ],
+        [
+          {
+            "earlier": 0.00875091552734375,
+            "later": 0.013334870338439941
+          },
+          {
+            "earlier": 0.01099495030939579,
+            "later": 0.1186564639210701
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "8904c68572096f864a24c1a630cb28d0868176e6723ec142e8de99e0436ecea4",
+        "cdc9ba5d6679682ec50bfa6efaf670569935701d0a7aa97d0d13dab942b79911"
+      ],
+      "truth": [
+        {
+          "group": "dfea7e137b365483c06773cc4fa7b269dc6505add5285ba28146182efc54ddf1",
+          "family": "gemini-2.5-flash",
+          "later": [
+            142,
+            321
+          ]
+        },
+        {
+          "group": "wellcome-15229",
+          "family": "ordinary",
+          "later": [
+            663,
+            866
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 142,
+            "end": 310,
+            "context_spans": [
+              [
+                0,
+                141
+              ],
+              [
+                142,
+                310
+              ],
+              [
+                311,
+                623
+              ]
+            ],
+            "input_sha256": "3059c62147c0a3616ee66bf6d0c74e82c9ad4c44f3c1c3bb1091fa253b6f3c5e"
+          },
+          "later": {
+            "start": 142,
+            "end": 321,
+            "context_spans": [
+              [
+                0,
+                141
+              ],
+              [
+                142,
+                321
+              ],
+              [
+                322,
+                634
+              ]
+            ],
+            "input_sha256": "50130cdabf29b5e6a8580dcd6c5de7bebe5c9f4a0b4e06f6e25defe7a9872b12"
+          }
+        },
+        {
+          "earlier": {
+            "start": 652,
+            "end": 865,
+            "context_spans": [
+              [
+                625,
+                651
+              ],
+              [
+                652,
+                865
+              ],
+              [
+                866,
+                947
+              ]
+            ],
+            "input_sha256": "46c5131f77f1fefa07a7ee78980337d37cf1c6405fa2bb88bc606f4571dae8dd"
+          },
+          "later": {
+            "start": 663,
+            "end": 866,
+            "context_spans": [
+              [
+                636,
+                662
+              ],
+              [
+                663,
+                866
+              ],
+              [
+                867,
+                948
+              ]
+            ],
+            "input_sha256": "e949471bb3dfd06cb11ef250aaff12075844445c71bcb7922dca122720ddd94a"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.0021139979362487793,
+            "later": 0.002377450466156006
+          },
+          {
+            "earlier": 0.018514281138777733,
+            "later": 0.01551828347146511
+          }
+        ],
+        [
+          {
+            "earlier": 0.01657259464263916,
+            "later": 0.012794852256774902
+          },
+          {
+            "earlier": 0.0008901410037651658,
+            "later": 0.0007439356995746493
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "8904c68572096f864a24c1a630cb28d0868176e6723ec142e8de99e0436ecea4",
+        "aa2e711c53c68b396c3c23cf775de3585f68dc00fd8cd012c85f7cabb747969e"
+      ],
+      "truth": [
+        {
+          "group": "dfea7e137b365483c06773cc4fa7b269dc6505add5285ba28146182efc54ddf1",
+          "family": "gpt-5.4-nano",
+          "later": [
+            142,
+            318
+          ]
+        },
+        {
+          "group": "wellcome-15229",
+          "family": "ordinary",
+          "later": [
+            660,
+            863
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 142,
+            "end": 310,
+            "context_spans": [
+              [
+                0,
+                141
+              ],
+              [
+                142,
+                310
+              ],
+              [
+                311,
+                623
+              ]
+            ],
+            "input_sha256": "3059c62147c0a3616ee66bf6d0c74e82c9ad4c44f3c1c3bb1091fa253b6f3c5e"
+          },
+          "later": {
+            "start": 142,
+            "end": 318,
+            "context_spans": [
+              [
+                0,
+                141
+              ],
+              [
+                142,
+                318
+              ],
+              [
+                319,
+                631
+              ]
+            ],
+            "input_sha256": "178b9e3a18ff3837e1d8593c4d464d43c1656b60408fdd9116ad2d4260e9a670"
+          }
+        },
+        {
+          "earlier": {
+            "start": 652,
+            "end": 865,
+            "context_spans": [
+              [
+                625,
+                651
+              ],
+              [
+                652,
+                865
+              ],
+              [
+                866,
+                947
+              ]
+            ],
+            "input_sha256": "46c5131f77f1fefa07a7ee78980337d37cf1c6405fa2bb88bc606f4571dae8dd"
+          },
+          "later": {
+            "start": 660,
+            "end": 863,
+            "context_spans": [
+              [
+                633,
+                659
+              ],
+              [
+                660,
+                863
+              ],
+              [
+                864,
+                945
+              ]
+            ],
+            "input_sha256": "e949471bb3dfd06cb11ef250aaff12075844445c71bcb7922dca122720ddd94a"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.0021139979362487793,
+            "later": 0.002251923084259033
+          },
+          {
+            "earlier": 0.018514281138777733,
+            "later": 0.03042069636285305
+          }
+        ],
+        [
+          {
+            "earlier": 0.01657259464263916,
+            "later": 0.012794852256774902
+          },
+          {
+            "earlier": 0.0008901410037651658,
+            "later": 0.0007439356995746493
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "98ec7c319fddd938aebf19a3dbff26587f87fff7c01cdd51fd98bbc2e7953105",
+        "662c252e3c077e55cb9ccb35861c2c4cc737a2095ff9a48de6cc7af87349d135"
+      ],
+      "truth": [
+        {
+          "group": "gates-12783",
+          "family": "ordinary",
+          "later": [
+            140,
+            350
+          ]
+        },
+        {
+          "group": "f001c1c7d654353a04cf88ac6419a1b79267064989db05716da3f00851f61804",
+          "family": "gemini-2.5-flash",
+          "later": [
+            857,
+            1062
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "98ec7c319fddd938aebf19a3dbff26587f87fff7c01cdd51fd98bbc2e7953105",
+        "b494a3a5d3e3a48f19b7c91350460f4ff6897519bb307916de3277ef7e3316b0"
+      ],
+      "truth": [
+        {
+          "group": "gates-12783",
+          "family": "ordinary",
+          "later": [
+            140,
+            350
+          ]
+        },
+        {
+          "group": "f001c1c7d654353a04cf88ac6419a1b79267064989db05716da3f00851f61804",
+          "family": "gpt-5.4-nano",
+          "later": [
+            857,
+            1060
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "0f74e3bd5a1e4ede35d839041e7529738711cc8485992db2609b826aab5e0717",
+        "f2cf11dac58f457ce6829af5b60047674cd2a5185b9dd6761ddd6dc0c598e1e1"
+      ],
+      "truth": [
+        {
+          "group": "f027eaeca61ed412060bab14ac3bb9d78e6ddab55dece5e55c44874abdf507d2",
+          "family": "gemini-2.5-flash",
+          "later": [
+            151,
+            475
+          ]
+        },
+        {
+          "group": "gates-12797",
+          "family": "ordinary",
+          "later": [
+            804,
+            927
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 151,
+            "end": 478,
+            "context_spans": [
+              [
+                0,
+                150
+              ],
+              [
+                151,
+                478
+              ],
+              [
+                479,
+                653
+              ]
+            ],
+            "input_sha256": "41ab49e388a17bb152f7aa45d249237be96b2f2c9d53c94da65abbb3abba17dd"
+          },
+          "later": {
+            "start": 151,
+            "end": 475,
+            "context_spans": [
+              [
+                0,
+                150
+              ],
+              [
+                151,
+                475
+              ],
+              [
+                476,
+                650
+              ]
+            ],
+            "input_sha256": "fa628891d19834c36d5a1f8baf46a44a83a9c917b62f53e95a208bb194f315ea"
+          }
+        },
+        {
+          "earlier": {
+            "start": 807,
+            "end": 907,
+            "context_spans": [
+              [
+                655,
+                806
+              ],
+              [
+                807,
+                907
+              ],
+              [
+                908,
+                1041
+              ]
+            ],
+            "input_sha256": "307b1a6e9d52abd4aa2d43dcba7d1f1e9ce54743789a59a0160b96851a72faed"
+          },
+          "later": {
+            "start": 804,
+            "end": 927,
+            "context_spans": [
+              [
+                652,
+                803
+              ],
+              [
+                804,
+                927
+              ],
+              [
+                928,
+                1061
+              ]
+            ],
+            "input_sha256": "bbcc160055037278a20856615bb414f1d8759cf8bb12b9e366c77c586039f1a3"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.004591166973114014,
+            "later": 0.0040125250816345215
+          },
+          {
+            "earlier": 0.025548139587044716,
+            "later": 0.08476313948631287
+          }
+        ],
+        [
+          {
+            "earlier": 0.00638049840927124,
+            "later": 0.00832134485244751
+          },
+          {
+            "earlier": 0.0026624060701578856,
+            "later": 0.0018238965421915054
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "0f74e3bd5a1e4ede35d839041e7529738711cc8485992db2609b826aab5e0717",
+        "29b3a47e68af404512be14d16ede172561b15698eafb4e38c58f464639c76099"
+      ],
+      "truth": [
+        {
+          "group": "f027eaeca61ed412060bab14ac3bb9d78e6ddab55dece5e55c44874abdf507d2",
+          "family": "gpt-5.4-nano",
+          "later": [
+            151,
+            473
+          ]
+        },
+        {
+          "group": "gates-12797",
+          "family": "ordinary",
+          "later": [
+            802,
+            925
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 151,
+            "end": 478,
+            "context_spans": [
+              [
+                0,
+                150
+              ],
+              [
+                151,
+                478
+              ],
+              [
+                479,
+                653
+              ]
+            ],
+            "input_sha256": "41ab49e388a17bb152f7aa45d249237be96b2f2c9d53c94da65abbb3abba17dd"
+          },
+          "later": {
+            "start": 151,
+            "end": 473,
+            "context_spans": [
+              [
+                0,
+                150
+              ],
+              [
+                151,
+                473
+              ],
+              [
+                474,
+                648
+              ]
+            ],
+            "input_sha256": "4d405e865bc6c33e10560dfba5a6ff116127b9ed1b65c43be7884a86befdac67"
+          }
+        },
+        {
+          "earlier": {
+            "start": 807,
+            "end": 907,
+            "context_spans": [
+              [
+                655,
+                806
+              ],
+              [
+                807,
+                907
+              ],
+              [
+                908,
+                1041
+              ]
+            ],
+            "input_sha256": "307b1a6e9d52abd4aa2d43dcba7d1f1e9ce54743789a59a0160b96851a72faed"
+          },
+          "later": {
+            "start": 802,
+            "end": 925,
+            "context_spans": [
+              [
+                650,
+                801
+              ],
+              [
+                802,
+                925
+              ],
+              [
+                926,
+                1059
+              ]
+            ],
+            "input_sha256": "bbcc160055037278a20856615bb414f1d8759cf8bb12b9e366c77c586039f1a3"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.004591166973114014,
+            "later": 0.004288673400878906
+          },
+          {
+            "earlier": 0.025548139587044716,
+            "later": 0.014774353243410587
+          }
+        ],
+        [
+          {
+            "earlier": 0.00638049840927124,
+            "later": 0.00832134485244751
+          },
+          {
+            "earlier": 0.0026624060701578856,
+            "later": 0.0018238965421915054
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "82fc8c802ad4d9c4ea43b9b87df75f92a9f6023d81a57dd5b72bead6f51004b0",
+        "cd4e5710238aa5c5e1346528151ac6c76dc4ee586ca839d8541efaa2c9423571"
+      ],
+      "truth": [
+        {
+          "group": "gates-12808",
+          "family": "ordinary",
+          "later": [
+            64,
+            258
+          ]
+        },
+        {
+          "group": "f04ea4e74b0b9b640aa14e4bb5cc4d7cd4c39a79cf7dd3e8b1ef5589e76ea484",
+          "family": "gemini-2.5-flash",
+          "later": [
+            399,
+            605
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "82fc8c802ad4d9c4ea43b9b87df75f92a9f6023d81a57dd5b72bead6f51004b0",
+        "11bd4a5f9948f90b1c5c4bde060dda933c5aad8bcbe5a9d5a6b76764d6626c08"
+      ],
+      "truth": [
+        {
+          "group": "gates-12808",
+          "family": "ordinary",
+          "later": [
+            64,
+            258
+          ]
+        },
+        {
+          "group": "f04ea4e74b0b9b640aa14e4bb5cc4d7cd4c39a79cf7dd3e8b1ef5589e76ea484",
+          "family": "gpt-5.4-nano",
+          "later": [
+            399,
+            620
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "946807bc4707735c38ee4dcdcbe2d1e60f8b05b8085d956c9e3a771949b9e40b",
+        "f2469e68052b1830058596b6ec6b1494c586f56c492f3d60b6bddee8ead11ec6"
+      ],
+      "truth": [
+        {
+          "group": "f0de1bbb6c2592b090035be2700f8e58640d89e3213baca0ed69106cc26eebf4",
+          "family": "gemini-2.5-flash",
+          "later": [
+            233,
+            480
+          ]
+        },
+        {
+          "group": "gates-12820",
+          "family": "ordinary",
+          "later": [
+            872,
+            1057
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "946807bc4707735c38ee4dcdcbe2d1e60f8b05b8085d956c9e3a771949b9e40b",
+        "1bd2a986ed7fc0a2617e4fec26b9c8eb5c70c6c13bc12995248a4b0a283bd8e2"
+      ],
+      "truth": [
+        {
+          "group": "f0de1bbb6c2592b090035be2700f8e58640d89e3213baca0ed69106cc26eebf4",
+          "family": "gpt-5.4-nano",
+          "later": [
+            233,
+            476
+          ]
+        },
+        {
+          "group": "gates-12820",
+          "family": "ordinary",
+          "later": [
+            868,
+            1053
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "33cf110702cce82ef347f771c48f97cef9fb690c3ad0877ccf0f63d7290eced7",
+        "fd871808e0c6a8119a91ef2680af53cb7a4b5bd73fe0964f3e006c2a81c4cf76"
+      ],
+      "truth": [
+        {
+          "group": "gates-12825",
+          "family": "ordinary",
+          "later": [
+            83,
+            232
+          ]
+        },
+        {
+          "group": "f87aafe2a8c004a66cf9c3e09a815a55ef31d120f10eba4aca3f6cd131b6b05d",
+          "family": "gemini-2.5-flash",
+          "later": [
+            576,
+            789
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "33cf110702cce82ef347f771c48f97cef9fb690c3ad0877ccf0f63d7290eced7",
+        "c5223174418849d7c390550564f5f9ffc9e5bf09a6caf864777f2003eda05bec"
+      ],
+      "truth": [
+        {
+          "group": "gates-12825",
+          "family": "ordinary",
+          "later": [
+            83,
+            232
+          ]
+        },
+        {
+          "group": "f87aafe2a8c004a66cf9c3e09a815a55ef31d120f10eba4aca3f6cd131b6b05d",
+          "family": "gpt-5.4-nano",
+          "later": [
+            576,
+            790
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": []
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "cc68e4b7237315c7663fc57df4fa6f305defda80ae5cbdf5a8169fe3f55eb9c4",
+        "ac788d475fc965e77408909c17bef04189b3e67914205aa2eb253db60e3932e9"
+      ],
+      "truth": [
+        {
+          "group": "fe13c28b55bae3d612cd5dbc4b58c504f4ca18f6179c836251b3a11a2cefa4ae",
+          "family": "gemini-2.5-flash",
+          "later": [
+            191,
+            604
+          ]
+        },
+        {
+          "group": "gates-12891",
+          "family": "ordinary",
+          "later": [
+            874,
+            947
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 191,
+            "end": 620,
+            "context_spans": [
+              [
+                0,
+                190
+              ],
+              [
+                191,
+                620
+              ],
+              [
+                621,
+                781
+              ]
+            ],
+            "input_sha256": "d3b763bf8cb882e1aabbe052bf685e35e761cf86544d33a951315e400304c0c1"
+          },
+          "later": {
+            "start": 191,
+            "end": 604,
+            "context_spans": [
+              [
+                0,
+                190
+              ],
+              [
+                191,
+                604
+              ],
+              [
+                605,
+                765
+              ]
+            ],
+            "input_sha256": "28244d9f1560c1c371913027d02ff68cd0885635d5f7eb624c7e0d8463f04494"
+          }
+        },
+        {
+          "earlier": {
+            "start": 890,
+            "end": 967,
+            "context_spans": [
+              [
+                783,
+                889
+              ],
+              [
+                890,
+                967
+              ],
+              [
+                968,
+                1163
+              ]
+            ],
+            "input_sha256": "07a004fc4793aed48e97fca3af0186b2a0b933d4182949b44541403d2fed6a3b"
+          },
+          "later": {
+            "start": 874,
+            "end": 947,
+            "context_spans": [
+              [
+                767,
+                873
+              ],
+              [
+                874,
+                947
+              ],
+              [
+                948,
+                1143
+              ]
+            ],
+            "input_sha256": "d980133e99c719327974e685d34de58a8e7f427fe44bda4399fdf22953e3cec2"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.010315775871276855,
+            "later": 0.006097316741943359
+          },
+          {
+            "earlier": 0.003060255665332079,
+            "later": 0.0032484130933880806
+          }
+        ],
+        [
+          {
+            "earlier": 0.00020188093185424805,
+            "later": 0.00019103288650512695
+          },
+          {
+            "earlier": 0.00023869208234827965,
+            "later": 0.0002534118830226362
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    },
+    {
+      "bank": "generated_2",
+      "draft_sha256": [
+        "cc68e4b7237315c7663fc57df4fa6f305defda80ae5cbdf5a8169fe3f55eb9c4",
+        "b4fa78317d09bea96eebd640b9ba52e32bd436de53479c3477e90decc84fa209"
+      ],
+      "truth": [
+        {
+          "group": "fe13c28b55bae3d612cd5dbc4b58c504f4ca18f6179c836251b3a11a2cefa4ae",
+          "family": "gpt-5.4-nano",
+          "later": [
+            191,
+            624
+          ]
+        },
+        {
+          "group": "gates-12891",
+          "family": "ordinary",
+          "later": [
+            894,
+            967
+          ]
+        }
+      ],
+      "incumbent_scope": false,
+      "mapping": [
+        {
+          "earlier": {
+            "start": 191,
+            "end": 620,
+            "context_spans": [
+              [
+                0,
+                190
+              ],
+              [
+                191,
+                620
+              ],
+              [
+                621,
+                781
+              ]
+            ],
+            "input_sha256": "d3b763bf8cb882e1aabbe052bf685e35e761cf86544d33a951315e400304c0c1"
+          },
+          "later": {
+            "start": 191,
+            "end": 624,
+            "context_spans": [
+              [
+                0,
+                190
+              ],
+              [
+                191,
+                624
+              ],
+              [
+                625,
+                785
+              ]
+            ],
+            "input_sha256": "a583f984fa77375ce76470c007dff5e47ee3d4c1da9f581a75b22041b5dd1691"
+          }
+        },
+        {
+          "earlier": {
+            "start": 890,
+            "end": 967,
+            "context_spans": [
+              [
+                783,
+                889
+              ],
+              [
+                890,
+                967
+              ],
+              [
+                968,
+                1163
+              ]
+            ],
+            "input_sha256": "07a004fc4793aed48e97fca3af0186b2a0b933d4182949b44541403d2fed6a3b"
+          },
+          "later": {
+            "start": 894,
+            "end": 967,
+            "context_spans": [
+              [
+                787,
+                893
+              ],
+              [
+                894,
+                967
+              ],
+              [
+                968,
+                1163
+              ]
+            ],
+            "input_sha256": "d980133e99c719327974e685d34de58a8e7f427fe44bda4399fdf22953e3cec2"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "earlier": 0.010315775871276855,
+            "later": 0.016542673110961914
+          },
+          {
+            "earlier": 0.003060255665332079,
+            "later": 0.00351734459400177
+          }
+        ],
+        [
+          {
+            "earlier": 0.00020188093185424805,
+            "later": 0.00019103288650512695
+          },
+          {
+            "earlier": 0.00023869208234827965,
+            "later": 0.0002534118830226362
+          }
+        ]
+      ],
+      "statuses": [
+        "no_joint_increase",
+        "no_joint_increase"
+      ]
+    }
+  ],
+  "summary": {
+    "counts": {
+      "journal_pair/ordinary": {
+        "total": 20,
+        "unavailable": 14,
+        "incumbent_in_scope": 0,
+        "no_joint_increase": 6
+      },
+      "generated_1/ordinary": {
+        "total": 40,
+        "unavailable": 25,
+        "incumbent_in_scope": 0,
+        "no_joint_increase": 15
+      },
+      "generated_1/gemini-2.5-flash": {
+        "total": 20,
+        "unavailable": 13,
+        "incumbent_in_scope": 0,
+        "no_joint_increase": 6,
+        "joint_increase": 1
+      },
+      "generated_1/gpt-5.4-nano": {
+        "total": 20,
+        "unavailable": 12,
+        "incumbent_in_scope": 0,
+        "no_joint_increase": 8
+      },
+      "generated_2/ordinary": {
+        "total": 40,
+        "no_joint_increase": 21,
+        "incumbent_in_scope": 0,
+        "unavailable": 19
+      },
+      "generated_2/gemini-2.5-flash": {
+        "total": 20,
+        "joint_increase": 2,
+        "incumbent_in_scope": 0,
+        "no_joint_increase": 9,
+        "unavailable": 9
+      },
+      "generated_2/gpt-5.4-nano": {
+        "total": 20,
+        "joint_increase": 2,
+        "incumbent_in_scope": 0,
+        "no_joint_increase": 8,
+        "unavailable": 10
+      }
+    },
+    "unique_assessed_ordinary_works": 11,
+    "unique_flagged_ordinary_works": 0,
+    "exact_added_ranges": 5,
+    "unique_edited_works_hit": 3,
+    "generators_with_hits": [
+      "gemini-2.5-flash",
+      "gpt-5.4-nano"
+    ],
+    "passes_local_trial_rule": true
+  }
+}

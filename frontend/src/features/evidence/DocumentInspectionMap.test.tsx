@@ -30,6 +30,19 @@ const show = (set: DocumentEvidenceSet) => render(<MemoryRouter><DocumentEvidenc
 afterEach(cleanup)
 
 describe('ordinary document passage inspection', () => {
+  it.each(['document-local-passage-coverage/1', 'document-local-passage-coverage/2'] as const)(
+    'explains completed position readings only for %s', (schema) => {
+      const set = evidence([])
+      show({ ...set, coverage: { ...set.coverage, local_passage_coverage: {
+        schema, count_unit: 'non_whitespace_unicode_codepoint', mapped_characters: 15, omitted_ranges: 0,
+        counts: { no_local_record: 0, context_only: 0, response_range: 15 }, ranges: [],
+      } } })
+      const region = screen.getByRole('region', { name: 'Recorded passage coverage' })
+      expect(within(region).getByText('15')).toBeTruthy()
+      expect(Boolean(within(region).queryByText(/Counts include completed sentence-position readings/)))
+        .toBe(schema === 'document-local-passage-coverage/2')
+    })
+
   it.each([
     { schema: 'document-pdf-text-visibility/1', examined: 2, page: 2 },
     { schema: 'document-pdf-text-visibility/2', examined: 15, page: 15 },

@@ -52,7 +52,7 @@ METHOD = {
 }
 
 
-def intake(cache, history):
+def intake(cache, history, *, target_works=20):
     source.require(all(source.digest(cache / name) == checksum for name, checksum in source.METADATA.items()),
                    "Publisher metadata differs")
     source.require("released under Apache-2.0" in (cache / "README.md").read_text(), "Publisher license differs")
@@ -72,7 +72,7 @@ def intake(cache, history):
     rows, stats = [], Counter(eligible=len(order))
     counts = Counter({1: 0, 2: 0, 3: 0})
     for work in order:
-        if stats["admitted"] == 20:
+        if stats["admitted"] == target_works:
             break
         stats["examined"] += 1
         original = gem[work]["v0"]
@@ -118,7 +118,7 @@ def intake(cache, history):
             break
         else:
             stats["no_isolated_match"] += 1
-    source.require(stats["admitted"] == 20, f"Too few fresh works {stats}")
+    source.require(stats["admitted"] == target_works, f"Too few fresh works {stats}")
     return rows, {"counts": dict(stats), "target_positions": {str(k): v for k, v in counts.items()}}
 
 

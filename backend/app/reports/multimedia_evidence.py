@@ -772,6 +772,7 @@ def _passage_coverage_view(coverage: dict) -> dict | None:
         page_rows.sort(key=lambda row: row["start"])
         pdf_pages = {"page_count": pdf["page_count"], "rows": page_rows[:20], "additional_rows": max(0, len(page_rows) - 20)}
     return {"mapped_characters": record["mapped_characters"],
+            "includes_sentence_positions": record["schema"] == document_scope.PASSAGE_POSITION_COVERAGE_SCHEMA,
             "counts": [(LABELS[state], record["counts"][state]) for state in reversed(STATES)],
             "ranges": [{**row, "label": LABELS[row["state"]]} for row in rows],
             "additional_ranges": len(record["ranges"]) - len(rows),
@@ -807,7 +808,7 @@ def _passage_position_view(coverage: dict, *, withheld: bool) -> dict | None:
                  for label, span, reading in zip(("Previous", "Selected", "Following"), context["sentences"],
                                                  context["readings"], strict=True)]}
     readings = record.get("readings")
-    return {"status": record["status"], "text": None if withheld else record["focus_text"],
+    return {"longer": False, "status": record["status"], "text": None if withheld else record["focus_text"],
             "rows": [{"label": label.capitalize(), **span,
                       "response": float.fromhex(readings[i]["response_hex"]) if readings is not None else None}
                      for i, (label, span) in enumerate(zip(LABELS, record["sentences"], strict=True))]}

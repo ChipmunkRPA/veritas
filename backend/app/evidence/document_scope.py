@@ -17,6 +17,7 @@ VERSIONS = frozenset({"document-evidence-1", "document-evidence-2", *CONTEXT_VER
 
 PASSAGE_COVERAGE_KEY = "local_passage_coverage"
 PASSAGE_COVERAGE_SCHEMA = "document-local-passage-coverage/1"
+PASSAGE_POSITION_COVERAGE_SCHEMA = "document-local-passage-coverage/2"
 PASSAGE_COVERAGE_MAX_RANGES = 256
 PASSAGE_COVERAGE_STATES = ("no_local_record", "context_only", "response_range")
 PDF_PAGE_COVERAGE_KEY = "pdf_pages"
@@ -343,13 +344,18 @@ def validate_passage_coverage(document: dict) -> None:
         return
     size = document["source"]["chars"]
     ranges, counts, omitted = (record[key] for key in ("ranges", "counts", "omitted_ranges"))
-    if (record["schema"] != PASSAGE_COVERAGE_SCHEMA or record["count_unit"] != "non_whitespace_unicode_codepoint"
+    if (record["schema"] not in {PASSAGE_COVERAGE_SCHEMA, PASSAGE_POSITION_COVERAGE_SCHEMA}
+            or record["count_unit"] != "non_whitespace_unicode_codepoint"
             or not isinstance(ranges, list) or len(ranges) > PASSAGE_COVERAGE_MAX_RANGES or type(omitted) is not int
             or omitted < 0 or omitted and len(ranges) != PASSAGE_COVERAGE_MAX_RANGES or not isinstance(counts, dict) or set(counts) != set(PASSAGE_COVERAGE_STATES)
             or any(type(value) is not int or value < 0 for value in counts.values())
             or type(record["mapped_characters"]) is not int
             or not 0 <= record["mapped_characters"] == sum(counts.values()) <= size):
         raise ValueError("Invalid document passage coverage summary")
+    if record["schema"] == PASSAGE_POSITION_COVERAGE_SCHEMA:
+        position = (document.get("coverage") or {}).get("passage_position_review") or {}
+        if position.get("status") not in {"flagged", "no_flag"}:
+            raise ValueError("Passage coverage includes an unmeasured writing position review")
     displayed = Counter()
     previous_end, previous_block = 0, 0
     for row in ranges:

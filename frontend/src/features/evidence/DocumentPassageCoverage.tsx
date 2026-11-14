@@ -47,6 +47,7 @@ export default function DocumentPassageCoverage({ coverage }: { coverage: Covera
     <h3 className="m-0 text-body font-medium">Recorded passage coverage</h3>
     <p className="mt-2 mb-0 text-small text-text-muted">
       See where this analysis has exact local records. Counts use extracted characters excluding whitespace.
+      {coverage.schema === 'document-local-passage-coverage/2' && ' Counts include completed sentence-position readings.'}
     </p>
     <dl className="mt-3 mb-0 grid gap-3 sm:grid-cols-3">
       {states.map((state) => <div key={state}>

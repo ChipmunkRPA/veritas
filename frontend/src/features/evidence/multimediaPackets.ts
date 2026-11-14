@@ -319,7 +319,7 @@ export interface DocumentEvidenceWindow {
 }
 export type DocumentCoverageState = 'response_range' | 'context_only' | 'no_local_record'
 export interface DocumentPassageCoverage {
-  schema: 'document-local-passage-coverage/1'
+  schema: 'document-local-passage-coverage/1' | 'document-local-passage-coverage/2'
   count_unit: 'non_whitespace_unicode_codepoint'
   mapped_characters: number
   counts: Record<DocumentCoverageState, number>

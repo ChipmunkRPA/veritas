@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from app.detectors.text.extract import text_hash
+from app.evidence import document_long_passage_position, document_passage_position
 from app.evidence.document_scope import (
     PASSAGE_COVERAGE_KEY as KEY,
 )
@@ -16,6 +17,7 @@ from app.evidence.document_scope import (
     PASSAGE_COVERAGE_STATES as STATES,
 )
 from app.evidence.document_scope import (
+    PASSAGE_POSITION_COVERAGE_SCHEMA,
     PDF_PAGE_COVERAGE_KEY,
     PDF_PAGE_COVERAGE_SCHEMA,
     check_range,
@@ -59,10 +61,11 @@ def _complete(window: dict) -> bool:
             and coverage.get("covered_tokens", tokens) == tokens)
 
 
-def _marks(result: dict, text: str) -> tuple[bytearray, bytearray]:
+def _marks(result: dict, text: str, *, include_position: bool) -> tuple[bytearray, bytearray, bool]:
     size = len(text)
     context, response = bytearray(size), bytearray(size)
     source_hash = text_hash(text)
+    position_measured = False
     for signal in result.get("signals", []):
         record = (signal.get("details") or {}).get("text_evidence") or {}
         if signal.get("status") != "ok" or record.get("version") not in {"scored-context/1", "scored-context/2"}:
@@ -97,7 +100,28 @@ def _marks(result: dict, text: str) -> tuple[bytearray, bytearray]:
             if text_hash(text[start:end]) != window["input_sha256"]:
                 raise ValueError("Isolated paragraph coverage refers to another text input")
             _fill(response, start, end)
-    return context, response
+        if not include_position:
+            continue
+        position = record.get(document_passage_position.KEY) or {}
+        if position.get("status") not in {"flagged", "no_flag"}:
+            continue
+        if position.get("schema") == document_passage_position.SCHEMA:
+            groups = [position]
+        elif position.get("schema") == document_long_passage_position.SCHEMA:
+            groups = position["contexts"]
+        else:
+            raise ValueError("Unknown writing position evidence")
+        for group in groups:
+            spans = group["sentences"]
+            ranges = [check_range(span, size) for span in spans]
+            inputs = document_passage_position.inputs(text, spans)
+            readings = document_passage_position.validate_readings(group["readings"])
+            for (start, end), (value, _, _), reading in zip(ranges, inputs, readings, strict=True):
+                if text_hash(value) != reading["input_sha256"]:
+                    raise ValueError("Writing position coverage refers to another text input")
+                _fill(response, start, end)
+            position_measured = True
+    return context, response, position_measured
 
 
 def _page_sources(meta: dict, mapping: list[dict]) -> dict[int, str]:
@@ -114,8 +138,9 @@ def _page_sources(meta: dict, mapping: list[dict]) -> dict[int, str]:
     return {page: "mixed" if len(found) > 1 else next(iter(found)) for page, found in sorted(modes.items())}
 
 
-def build(result: dict, text: str, mapping: list[dict], *, pdf_meta: dict | None = None) -> dict:
-    context, response = _marks(result, text)
+def build(result: dict, text: str, mapping: list[dict], *, pdf_meta: dict | None = None,
+          include_position: bool = True) -> dict:
+    context, response, position_measured = _marks(result, text, include_position=include_position)
     ranges: list[dict] = []
     counts = dict.fromkeys(STATES, 0)
     sources = _page_sources(pdf_meta, mapping) if pdf_meta is not None else {}
@@ -141,7 +166,8 @@ def build(result: dict, text: str, mapping: list[dict], *, pdf_meta: dict | None
             total += 1
             if len(ranges) < MAX_RANGES:
                 ranges.append(current)
-    record = {"schema": SCHEMA, "count_unit": "non_whitespace_unicode_codepoint",
+    record = {"schema": PASSAGE_POSITION_COVERAGE_SCHEMA if position_measured else SCHEMA,
+              "count_unit": "non_whitespace_unicode_codepoint",
               "mapped_characters": sum(counts.values()), "counts": counts, "ranges": ranges,
               "omitted_ranges": total - len(ranges)}
     if pdf_meta is not None:
@@ -162,7 +188,8 @@ def verify_source(document: dict, text: str, mapping: list[dict], *, result: dic
     pdf = record.get(PDF_PAGE_COVERAGE_KEY)
     if pdf is not None and meta is None:
         raise ValueError("PDF page coverage has no source extraction metadata")
-    if result is not None and record != build(result, text, mapping, pdf_meta=meta if pdf is not None else None):
+    if result is not None and record != build(result, text, mapping, pdf_meta=meta if pdf is not None else None,
+                                             include_position=record["schema"] == PASSAGE_POSITION_COVERAGE_SCHEMA):
         raise ValueError("Document passage coverage differs from the frozen responses")
     blocks = [check_range(block, len(text)) for block in mapping]
     if record["mapped_characters"] != sum(not char.isspace() for start, end in blocks for char in text[start:end]):

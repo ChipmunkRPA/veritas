@@ -139,6 +139,12 @@ are not public screening promises or calibrated population probabilities.
   with no flags on 20 ordinary excerpts. The existing check found ten and
   flagged eight ordinary excerpts. This rules out adding the candidate at
   either tested point.
+- [Sentence rotation](writing-sentence-rotation-transfer-2026-11-13.md)
+  added no useful locations on 64 known single-sentence rewrites from two
+  generators and stays offline. New analyses count completed sentence-position
+  readings in the passage coverage map. Standard PDF reports and JSON carry
+  the same counts and source ranges. Short-passage PDF rendering now handles
+  the three-sentence record alongside the existing longer variant.
 - [Short H.264 face localization](video-brief-face-avc-clock-confirmation-2026-11-13.md)
   increased correct ranges from nine to ten on 16 edited deliveries from eight
   source groups. Neither route flagged any of the 40 ordinary clips. The new

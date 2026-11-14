@@ -11,8 +11,10 @@ from app.detectors.text import passage_position
 from app.detectors.text.extract import extract, text_hash
 from app.detectors.text.segment import segment
 from app.engine.boundary import Deadline, DetectorTimeout
-from app.evidence import document_long_passage_position, document_matched_context
+from app.evidence import document_long_passage_position, document_matched_context, document_passage_coverage
 from app.evidence import document_passage_position as review
+from app.evidence.document_scope import PASSAGE_POSITION_COVERAGE_SCHEMA
+from app.reports.multimedia_evidence import _passage_position_view
 
 TEXT = ("The committee distributed its original recommendation and reviewed the supporting material. "
         "The published instructions include a detailed record of who authorized every major change in the final draft. "
@@ -45,6 +47,7 @@ def test_position_is_bound_to_exact_source_and_public_result(tmp_path):
     review.validate_commitment(package, expected)
     assert review.verify_source(package, doc.text, doc.source_map)
     assert review.validate(package)["status"] == "flagged"
+    assert _passage_position_view(package["coverage"], withheld=False)["longer"] is False
     mutated = deepcopy(package)
     mutated["coverage"][review.KEY]["readings"][1]["input_sha256"] = "0" * 64
     with pytest.raises(ValueError, match="differs from the original"):
@@ -140,3 +143,32 @@ def test_longer_writing_unassessed_without_complete_responses(tmp_path, monkeypa
     assert not review.verify_source(document(doc, row), doc.text, doc.source_map)
     doc, sentences = setup_source(tmp_path, LONG_TEXT.replace("major change", "major  change", 1))
     assert document_long_passage_position.geometry(doc.text, doc.source_map, "plain", sentences) is None
+
+
+@pytest.mark.parametrize("long", [False, True])
+def test_passage_coverage_counts_frozen_focus_readings_and_replays_older_maps(tmp_path, long):
+    doc, sentences = setup_source(tmp_path, LONG_TEXT if long else TEXT)
+    module = document_long_passage_position if long else review
+    scope = module.geometry(doc.text, doc.source_map, "plain", sentences)
+    groups = [row["sentences"] for row in scope["contexts"]] if long else [scope]
+    readings = [[{"input_sha256": text_hash(value), "response_hex": float(score).hex(),
+                  "focus_tokens": 12, "neighbor_tokens": 20}
+                 for (value, _, _), score in zip(review.inputs(doc.text, spans), (0, 5, 0), strict=True)]
+                for spans in groups]
+    record = module.record(scope, readings=readings, text=doc.text) if long else module.record(scope, readings[0], sentences[1].text)
+    result = {"signals": [{"status": "ok", "details": {"text_evidence": {
+        "version": "scored-context/1", "offset_unit": "unicode_codepoint",
+        "extracted_text_sha256": text_hash(doc.text), "windows": [], review.KEY: record,
+    }}}]}
+    coverage = document_passage_coverage.build(result, doc.text, doc.source_map)
+    assert coverage["schema"] == PASSAGE_POSITION_COVERAGE_SCHEMA
+    assert coverage["counts"]["response_range"] == sum(not char.isspace() for char in doc.text)
+    legacy = document_passage_coverage.build(result, doc.text, doc.source_map, include_position=False)
+    assert legacy["counts"]["response_range"] == 0
+    for entry in (coverage, legacy):
+        packet = document(doc, record)
+        packet["coverage"][document_passage_coverage.KEY] = entry
+        document_passage_coverage.verify_source(packet, doc.text, doc.source_map, result=result)
+    readings[0][0]["input_sha256"] = "0" * 64
+    with pytest.raises(ValueError, match="another text input"):
+        document_passage_coverage.build(result, doc.text, doc.source_map)

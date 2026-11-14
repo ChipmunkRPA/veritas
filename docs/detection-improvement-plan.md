@@ -84,6 +84,12 @@ are not public screening promises or calibrated population probabilities.
   reproduced five false alerts on 12 genuine speakers in loud traffic at both native
   48 kHz and the existing supported 16 kHz. The evidence view and PDF disclose this
   concrete failure mode of the optional background-reduced check.
+- [Background-reduced speech safeguards](audio-background-safeguard-2026-11-13.md)
+  tested 204 uploads over rain, train, road traffic and clean speech. The optional
+  review added 24 hits on 63 noisy synthetic deliveries and 11 flags on 81 noisy
+  genuine deliveries. Checking the original voice band removed one false flag and
+  lost four hits, plus two clean synthetic flags. Reversing signal polarity removed
+  no false flags. The study preserves the measured limits and keeps both probes offline.
 - [Grammatical attachment changes](writing-dependency-transfer-2026-11-13.md)
   added zero locations on 40 held sentence edits. A part-of-speech comparison added
   one location and one false alert. Both remain experimental.

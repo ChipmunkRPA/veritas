@@ -780,3 +780,68 @@ def test_marked_local_sound_requires_exact_excerpt_and_unchanged_flanks():
     shifted = np.r_[np.zeros(offset, dtype=np.int16), earlier[:-offset]]
     assert video_reference_timing.local_sound_match(earlier, shifted, anchor) is None
     assert video_reference_timing.local_sound_match(earlier, earlier, anchor) is None
+
+
+def test_added_pictures_preserve_native_timestamps_and_exports(tmp_path, reference_http, monkeypatch):
+    f = reference_http
+    rng = np.random.default_rng(813)
+    seeds = rng.integers(12, 244, size=(100, 15, 30, 3), dtype=np.uint8)
+    pictures = seeds.repeat(16, axis=1).repeat(16, axis=2)
+    start, stop = 33, 63
+    earlier = encode_lossy_comparison(tmp_path / "earlier.mp4", pictures[:70], lossless=False, rate=24)
+    after = encode_lossy_comparison(tmp_path / "submitted.mp4",
+                                   np.concatenate((pictures[:start], pictures[70:], pictures[start:70])),
+                                   lossless=False, rate=24)
+    stored = f.store.put_file(after)
+    monkeypatch.setattr(settings, "video_reference_comparison_enabled", True)
+    assert video_reference.compare(earlier, after)[0]["status"] == "picture_timelines_differ"
+
+    @contextmanager
+    def sessions():
+        with Session(f.engine) as db:
+            yield db
+
+    monkeypatch.setattr(v2_media_reference, "get_session", sessions)
+    monkeypatch.setattr(v2_media_reference, "default_store", lambda: f.store)
+    monkeypatch.setattr(settings, "video_reference_picture_insertion", True)
+    with sessions() as db:
+        analysis = db.get(Analysis, "other-kind")
+        analysis.filename, analysis.content_type = "submitted.mp4", "video/mp4"
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        db.commit()
+    url = "/api/v2/analyses/other-kind/video-reference-comparison"
+    assert f.client.get(url, headers=f.viewer).json()["picture_insertion_available"] is True
+    response = f.client.post(url, headers=f.viewer, data={"include_pdf": "true"},
+                             files={"earlier": ("earlier.mp4", earlier.read_bytes(), "video/mp4")})
+    assert response.status_code == 200, response.text[:300]
+    payload = response.json()
+    record = payload["comparison"]
+    assert record["schema"] == video_reference.SCHEMA_WITH_PICTURE_INSERTION
+    assert record["affects_overall_confidence"] is False
+    edit = record["picture_insertion"]
+    assert edit["audio_checked"] is False
+    assert (edit["start_frame"], edit["end_frame_exclusive"], edit["inserted_frames"]) == (start, stop, 30)
+    tick = edit["source_ticks"]
+    assert tick["start_pts"] * Fraction(tick["time_base"]) == Fraction(start, 24)
+    assert tick["end_exclusive_pts"] * Fraction(tick["time_base"]) == Fraction(stop, 24)
+    assert {role: {side: row["frame_index"] for side, row in item.items()} for role, item in edit["witnesses"].items()} == {
+        "before": {"earlier": start - 1, "submitted": start - 1},
+        "during": {"submitted": (start + stop) // 2},
+        "after": {"earlier": start, "submitted": stop},
+    }
+    for sides in edit["witnesses"].values():
+        for row in sides.values():
+            asset = row["asset"]
+            body = base64.b64decode(payload["assets"][asset["file"]])
+            assert hashlib.sha256(body).hexdigest() == asset["sha256"]
+            assert row["pts"] * Fraction(row["time_base"]) == Fraction(row["frame_index"], 24)
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as pdf:
+        assert len(pdf) == 2
+        assert "1.375 to 2.625 s" in pdf[0].get_text()
+        assert "The soundtrack was outside this comparison." in pdf[0].get_text()
+        assert "No corresponding picture in the earlier copy." in pdf[1].get_text()
+        assert len(pdf[1].get_images()) == 5
+    exported = tmp_path / "insertion.json"
+    exported.write_text(json.dumps({key: payload[key] for key in ("comparison", "assets")}))
+    assert run(earlier, after, exported, verify=True) == record
+    assert "picture_insertion" not in video_reference.compare(after, earlier, include_picture_insertion=True)[0]

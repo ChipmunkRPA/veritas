@@ -15,6 +15,30 @@ The text check locates changed words and punctuation, ignoring reflow and
 spacing. Selectable page numbers and running headers are compared as text.
 It uses no model and assigns no authorship confidence.
 
+## Reordered paragraphs in matching TXT or Word files
+
+The earlier-draft comparison can locate one unchanged body paragraph whose
+position changed relative to the other matching paragraphs. It requires the
+same wording and punctuation in both versions, ignoring whitespace, and
+withholds the label for ambiguous swaps, repeated passages or quoted blocks.
+The analysis view, comparison PDF and JSON include the paragraph text and its
+exact character range in each version. Word also reports both native paragraph
+positions. The ordinary wording comparison still reports actual text edits.
+The reorder finding needs both drafts and contributes no AI-authorship score.
+
+The local test wrapped excerpts from 16 previously unused GAO test reports
+as TXT and Word, excluding IDs in the earlier GAO archive-comparison panels.
+In each format, all 32 known reorder pairs returned the exact
+earlier and later ranges. Across both formats, 208 controls produced no reorder
+finding. These included unchanged text, added introductions, ambiguous adjacent
+swaps, duplicate passages, edited wording, quotations and hidden Word text.
+These controlled pairs verify the feature's defined geometry. [GovReport sources and terms](https://gov-report-data.github.io/)
+
+Taking the first four eligible sentences as separate paragraphs makes the
+expected range replayable. The earlier sequence is `A, B, C, D` and the
+later sequence is `A, C, D, B`, with the reverse direction tested separately.
+The controls keep the same excerpts and change only the tested condition.
+
 ## Public validation
 
 The replay rebuilds ten pairs of PLOS Biology excerpts from the pinned

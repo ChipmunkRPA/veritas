@@ -15,6 +15,7 @@ from app.evidence.video_reference import (
     SCHEMA_WITH_ADDITIONAL_SOUNDTRACK,
     SCHEMA_WITH_CHANNEL_TIMING,
     SCHEMA_WITH_MARKED_SOUND_FALLBACK,
+    SCHEMA_WITH_PICTURE_INSERTION,
     SCHEMA_WITH_REENCODED_SOUNDTRACK,
     SCHEMA_WITH_SHORT_TIMING,
     SCHEMA_WITH_SOUNDTRACK,
@@ -65,9 +66,10 @@ def replay(compare, earlier: Path, submitted: Path, output: Path, *, verify: boo
 
 def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds: Fraction | None = None, timing_model: Path | None = None,
-        reencoded_soundtrack: bool = False) -> dict:
+        reencoded_soundtrack: bool = False, picture_insertion: bool = False) -> dict:
     options = {"include_trimmed": not verify, "include_local_area": not verify, "include_trim_reencoded": not verify,
-               "include_measured_interval": not verify, "include_soundtrack_reencode": reencoded_soundtrack}
+               "include_measured_interval": not verify, "include_soundtrack_reencode": reencoded_soundtrack,
+               "include_picture_insertion": picture_insertion}
     short_fallback = not verify
     local_sound = not verify
     if verify:
@@ -76,6 +78,7 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds = None
         if isinstance(record, dict):
             schema = record.get("schema")
+            options["include_picture_insertion"] = schema == SCHEMA_WITH_PICTURE_INSERTION
             reencoded_soundtrack = schema == SCHEMA_WITH_REENCODED_SOUNDTRACK
             options["include_trimmed"] = schema in (SCHEMA_WITH_TRIM, SCHEMA_WITH_TRIM_REENCODE)
             options["include_trim_reencoded"] = schema == SCHEMA_WITH_TRIM_REENCODE
@@ -120,12 +123,13 @@ def main(*, description=__doc__, runner=run, marked_timing=False, clean_audio_op
         parser.add_argument("--event-seconds", type=Fraction, help="Marked mouth closure time in the earlier video.")
         parser.add_argument("--timing-model", type=Path, help="Path to the optional pinned local landmark task.")
         parser.add_argument("--reencoded-soundtrack", action="store_true", help="Check qualified re-encoded clips for local soundtrack shifts.")
+        parser.add_argument("--picture-insertion", action="store_true", help="Locate extra pictures between matches in a supported clip pair.")
     if clean_audio_option:
         parser.add_argument("--clean-speech", action="store_true", help="Use an earlier clean copy of the same native recording.")
     args = parser.parse_args()
     try:
         options = ({"event_seconds": args.event_seconds, "timing_model": args.timing_model,
-                    "reencoded_soundtrack": args.reencoded_soundtrack} if marked_timing else {})
+                    "reencoded_soundtrack": args.reencoded_soundtrack, "picture_insertion": args.picture_insertion} if marked_timing else {})
         if clean_audio_option:
             options["clean_speech"] = args.clean_speech
         result = runner(args.earlier, args.submitted, args.output, verify=args.verify, **options)

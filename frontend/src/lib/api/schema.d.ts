@@ -3560,11 +3560,13 @@ export interface components {
             interpretation: string;
             later: components["schemas"]["DraftSource"];
             paired_check?: components["schemas"]["DraftPairedCheck"] | null;
+            /** Relocated Passages */
+            relocated_passages?: components["schemas"]["DraftRelocatedPassage"][] | null;
             /**
              * Schema
              * @enum {string}
              */
-            schema: "chipmunk.document-revision-comparison/1" | "chipmunk.document-revision-comparison/2" | "chipmunk.document-revision-comparison/3" | "chipmunk.document-revision-comparison/4" | "chipmunk.document-revision-comparison/5";
+            schema: "chipmunk.document-revision-comparison/1" | "chipmunk.document-revision-comparison/2" | "chipmunk.document-revision-comparison/3" | "chipmunk.document-revision-comparison/4" | "chipmunk.document-revision-comparison/5" | "chipmunk.document-revision-comparison/6";
             /** Scope */
             scope: string;
             word_tables?: components["schemas"]["DraftWordTables"] | null;
@@ -3710,6 +3712,11 @@ export interface components {
             end: number;
             /** Start */
             start: number;
+        };
+        /** DraftRelocatedPassage */
+        DraftRelocatedPassage: {
+            earlier: components["schemas"]["DraftExcerpt"];
+            later: components["schemas"]["DraftExcerpt"];
         };
         /** DraftSource */
         DraftSource: {
@@ -6143,6 +6150,8 @@ export interface components {
         VideoReferenceAvailability: {
             /** Available */
             available: boolean;
+            /** Picture Insertion Available */
+            picture_insertion_available?: boolean | null;
             /** Timing Available */
             timing_available?: boolean | null;
         };

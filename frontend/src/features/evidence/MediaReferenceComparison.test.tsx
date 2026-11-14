@@ -452,3 +452,35 @@ it.each([3, 4, 7])('renders exact timing evidence from marked comparison format 
   page.unmount()
   expect(revokeObjectURL).toHaveBeenCalledTimes(2)
 })
+
+it('shows both insertion clocks and before, during and after pictures', async () => {
+  const asset = { file: 'preview.png', media_type: 'image/png', sha256: 'a'.repeat(64) }
+  const witness = (frame: number) => ({ frame_index: frame, pts: frame * 512, time_base: '1/12288', time_s: frame / 24, asset })
+  const comparison = {
+    schema: 'chipmunk.video-reference-comparison/12', status: 'measured',
+    interpretation: 'Ordinary edits can also add pictures.',
+    picture_insertion: { start_frame: 33, end_frame_exclusive: 63, inserted_frames: 30, start_s: 33 / 24,
+      end_s: 63 / 24, plausible_start_frames: [32, 33], audio_checked: false,
+      witnesses: { before: { earlier: witness(32), submitted: witness(32) }, during: { submitted: witness(48) },
+        after: { earlier: witness(33), submitted: witness(63) } } },
+    submitted: { width: 480, height: 240 },
+  }
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(Response.json({ available: true, picture_insertion_available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets: { 'preview.png': 'iVBORw0KGgo=' }, pdf: 'JVBERi0xLjQK' })))
+  show()
+  fireEvent.change(await screen.findByLabelText('Earlier video'), { target: { files: [new File(['movie'], 'earlier.mp4')] } })
+  expect(screen.getByText(/some pairs of 24 fps H.264 clips/)).toBeTruthy()
+  fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
+  expect(await screen.findByText(/Frames \[33, 63\) contain 30 additional pictures/)).toBeTruthy()
+  expect(screen.getByText(/start frames 32 through 33/)).toBeTruthy()
+  expect(screen.getByAltText('Earlier clip before the insertion')).toBeTruthy()
+  expect(screen.getByAltText('Analyzed clip during the insertion')).toBeTruthy()
+  expect(screen.getByAltText('Analyzed clip after the insertion')).toBeTruthy()
+  expect(screen.getByText(/Earlier clip at 1.375 s · Frame 33 · PTS 16896/)).toBeTruthy()
+  expect(screen.getByText(/Analyzed clip at 2.625 s · Frame 63 · PTS 32256/)).toBeTruthy()
+  fireEvent.click(screen.getByRole('button', { name: 'Download JSON evidence' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Download PDF' }))
+  expect(vi.mocked(saveBlob).mock.calls.map(([, name]) => name)).toEqual([
+    'chipmunk-verify-video-comparison.json', 'chipmunk-verify-video-comparison.pdf',
+  ])
+})

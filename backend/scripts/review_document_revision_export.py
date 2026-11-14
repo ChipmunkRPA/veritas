@@ -12,6 +12,7 @@ from app.evidence.document_revision import (
     FORMATS,
     HTML_COORDINATES,
     MAX_BYTES,
+    RELOCATION_SCHEMA,
     compare_with_sources,
 )
 from app.evidence.document_revision_word_alignment import SCHEMA as ALIGNED_WORD_TABLES_SCHEMA
@@ -52,8 +53,10 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
     expected, old_text, new_text, word_layouts = compare_with_sources(
         _read(earlier, MAX_BYTES), _read(later, MAX_BYTES), extension, earlier_extension=old_extension,
         email_body_only=paired is not None, pdf_paired_text_only=paired is not None,
-        include_word_tables=received.get("schema") in {WORD_TABLES_SCHEMA, ALIGNED_WORD_TABLES_SCHEMA},
+        include_word_tables=(received.get("schema") in {WORD_TABLES_SCHEMA, ALIGNED_WORD_TABLES_SCHEMA}
+                             or received.get("schema") == RELOCATION_SCHEMA and "word_tables" in received),
         strict_word_tables=received.get("schema") == WORD_TABLES_SCHEMA,
+        include_relocations=received.get("schema") == RELOCATION_SCHEMA,
     )
     if json.dumps(received, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
         raise ValueError("The comparison does not replay from these source bytes and decoded positions")
@@ -61,6 +64,9 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
     excerpts = [row[side] for row in expected["changes"] for side in ("earlier", "later") if row[side] is not None]
     result = {"source_hashes_verified": 2, "coordinate_space": expected["coordinate_space"], "changes_by_role": dict(roles),
               "changed_token_ranges_verified": sum(len(excerpt["changed_tokens"]) for excerpt in excerpts)}
+    if passages := expected.get("relocated_passages"):
+        result["relocated_passages_verified"] = len(passages)
+        excerpts.extend(passage[side] for passage in passages for side in ("earlier", "later"))
     if ".docx" in (extension, old_extension):
         result["body_paragraph_ranges_verified"] = sum(len(excerpt.get("paragraphs", ())) for excerpt in excerpts)
     if ".pdf" in (extension, old_extension):

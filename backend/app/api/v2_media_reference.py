@@ -48,6 +48,7 @@ class AudioReferenceAvailability(MediaReferenceAvailability):
 
 class VideoReferenceAvailability(MediaReferenceAvailability):
     timing_available: bool | None = None
+    picture_insertion_available: bool | None = None
 
 
 class MediaReferenceResponse(BaseModel):
@@ -112,6 +113,8 @@ def availability(aid: str, request: Request):
         result["clean_speech_available"] = True
         if settings.audio_reference_long_clean_speech:
             result["long_clean_speech_available"] = True
+    if available and kind == "video" and settings.video_reference_picture_insertion:
+        result["picture_insertion_available"] = True
     if available and kind == "video" and settings.video_reference_timing_model_path is not None:
         from app.evidence.video_reference_timing import available as timing_available
 
@@ -177,6 +180,7 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         include_measured_interval=settings.video_reference_measured_interval,
                         include_trim_reencoded=settings.video_reference_local_area,
                         include_soundtrack_reencode=settings.video_reference_soundtrack_reencode,
+                        include_picture_insertion=settings.video_reference_picture_insertion,
                     )
                 else:
                     record, assets = video_reference.compare(reference, submitted, timing_event_s=timing_event_s,

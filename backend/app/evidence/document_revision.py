@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import re
 from bisect import bisect_right
+from collections import Counter
 from difflib import SequenceMatcher
 from email import policy
 from email.parser import BytesParser
@@ -22,6 +23,7 @@ from app.storage.files import check_docx_safe
 SCHEMA = "chipmunk.document-revision-comparison/1"
 HTML_SCHEMA = "chipmunk.document-revision-comparison/2"
 MIXED_SCHEMA = "chipmunk.document-revision-comparison/3"
+RELOCATION_SCHEMA = "chipmunk.document-revision-comparison/6"
 HTML_COORDINATES = "email_html_extracted_text_unicode_codepoint"
 MIXED_COORDINATES = "per_source_unicode_codepoint"
 TOKENS = re.compile(r"\w+(?:[’'-]\w+)*|[^\w\s]")
@@ -46,6 +48,7 @@ MIXED_PDF_SCOPE = "PDF coverage includes the selectable text on one upright page
 MIXED_MULTIPAGE_PDF_SCOPE = "PDF coverage includes selectable text on all {pages} upright, single-column pages. Scanned text is excluded."
 DOCX_PART = "word/document.xml"
 INTERPRETATION = "This comparison locates changes between the supplied versions. The revision sequence and authorship require independent evidence."
+RELOCATION_SCOPE = "The reordered passage has the same wording and punctuation in both versions. Its position changed relative to other matching paragraphs."
 WordParagraphs = list[tuple[int, int, int, int]]
 WordLayouts = tuple[WordParagraphs, WordParagraphs]
 
@@ -263,7 +266,7 @@ def _source(path: Path, data: bytes, extension: str, *, mixed: bool = False, wor
     role_tokens = {role: tokens(decoded, ranges) for role, ranges in offsets.items()}
     if sum(len(rows) for rows in role_tokens.values()) > MAX_TOKENS:
         raise ValueError(f"Each version can contain up to {MAX_TOKENS:,} words and punctuation tokens.")
-    return decoded, role_tokens, _source_record(data, decoded, mime_part), None
+    return decoded, role_tokens, _source_record(data, decoded, mime_part), offsets["body"] if extension == ".txt" else None
 
 
 def _excerpt(text: str, extent: list[int] | None, changed_tokens: list[list[int]], layout, extension: str) -> dict | None:
@@ -282,6 +285,56 @@ def _excerpt(text: str, extent: list[int] | None, changed_tokens: list[list[int]
     elif extension == ".eml" and layout is not None:
         result["html_tokens"] = _html_token_sources(text, layout, changed_tokens)
     return result
+
+
+def _relocated_paragraph(earlier, later, old_layout, new_layout, extension, word_bodies):
+    """Locate one unambiguous paragraph reorder among uniquely matched body paragraphs."""
+    word = extension == ".docx"
+
+    def paragraph_index(text, layout):
+        rows = [(tuple(text[start:end].split()), [start, end], index)
+                for index, (*_, start, end) in enumerate(layout)]
+        counts = Counter(key for key, _, _ in rows)
+        return {key: (position, index, words) for key, position, index in rows if counts[key] == 1
+                and (words := sum(any(char.isalnum() for char in token) for token in key)) >= 4}
+
+    old, new = paragraph_index(earlier, old_layout), paragraph_index(later, new_layout)
+    common = old.keys() & new.keys()
+    if len(common) < 3 or [key for key in old if key in common] == [key for key in new if key in common]:
+        return None
+
+    if word:
+        from docx.oxml.ns import qn
+        from docx.text.paragraph import Paragraph
+
+        from app.evidence.document_archive_word import _ordinary_boundary
+
+        visibility = [{i for i, paragraph in enumerate(body)
+                       if paragraph.tag == qn("w:p") and _ordinary_boundary(Paragraph(paragraph, None))}
+                      for body in word_bodies]
+        common = {key for key in common if old_layout[old[key][1]][1] in visibility[0]
+                  and new_layout[new[key][1]][1] in visibility[1]}
+    else:
+        def unquoted(text, position):
+            return all(not line.lstrip().startswith(">") for line in text[slice(*position)].splitlines())
+
+        common = {key for key in common if unquoted(earlier, old[key][0]) and unquoted(later, new[key][0])}
+    if len(common) < 3:
+        return None
+
+    old_order = [key for key in old if key in common]
+    new_order = [key for key in new if key in common]
+    if old_order == new_order:
+        return None
+    # A one-paragraph reorder must involve one of the first two differing entries.
+    index = next(i for i, (a, b) in enumerate(zip(old_order, new_order, strict=True)) if a != b)
+    candidates = [key for key in (old_order[index], new_order[index])
+                  if [value for value in old_order if value != key] == [value for value in new_order if value != key]]
+    if len(candidates) != 1 or old[candidates[0]][2] < 8:
+        return None
+    key = candidates[0]
+    return {"earlier": _excerpt(earlier, old[key][0], [], old_layout, extension),
+            "later": _excerpt(later, new[key][0], [], new_layout, extension)}
 
 
 def compare(earlier: bytes, later: bytes, extension: str) -> dict:
@@ -311,6 +364,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                          email_body_only: bool = False, pdf_paired_text_only: bool = False, earlier_extension: str | None = None,
                          include_word_tables: bool = True,
                          strict_word_tables: bool = False,
+                         include_relocations: bool = True,
                          ) -> tuple[dict, str, str, WordLayouts | None]:
     """Keep the native Word paragraph locations available for exact paired sentence mapping."""
     if extension not in FORMATS:
@@ -322,12 +376,15 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     if any(not 0 < len(item) <= MAX_BYTES for item in (earlier, later)):
         raise ValueError("Each version must be nonempty and at most 1 MiB.")
     changes = []
+    relocation = None
     schema = SCHEMA
     scope, coordinates = SCOPE, TEXT_COORDINATES
     mixed_pdf_scope = MIXED_PDF_SCOPE
-    word_bodies = ((docx_body(earlier), docx_body(later)) if extension == ".docx" and not mixed and include_word_tables else (None, None))
+    compare_word = extension == ".docx" and not mixed
+    check_relocation = include_relocations and not strict_word_tables and not mixed and extension in {".txt", ".docx"}
+    word_bodies = (docx_body(earlier), docx_body(later)) if compare_word and (include_word_tables or check_relocation) else (None, None)
     word_tables = None
-    if word_bodies[0] is not None:
+    if include_word_tables and word_bodies[0] is not None:
         if strict_word_tables:
             from app.evidence import document_revision_word_tables as word_table_comparator
         else:
@@ -358,6 +415,13 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                 raise ValueError("Use two email drafts with the same body type. Both must use plain text or supported HTML.")
             if old_layout is not None:
                 schema, scope, coordinates = HTML_SCHEMA, HTML_SCOPE, HTML_COORDINATES
+        if check_relocation:
+            relocation = _relocated_paragraph(old_text, new_text, old_layout, new_layout, extension, word_bodies)
+            if relocation:
+                for side, by_role in (("earlier", old_tokens), ("later", new_tokens)):
+                    excerpt = relocation[side]
+                    by_role["body"] = [token for token in by_role["body"]
+                                       if token[2] <= excerpt["start"] or token[1] >= excerpt["end"]]
         for role in ROLES:
             for change in differences(old_tokens[role], new_tokens[role]):
                 before = _excerpt(old_text, change["earlier"], change["earlier_changed_tokens"], old_layout, old_extension)
@@ -380,6 +444,9 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
         return result, old_text, new_text, None
     if word_tables is not None:
         result.update(schema=word_table_comparator.SCHEMA, scope=word_table_comparator.SCOPE, word_tables=word_tables)
+    if relocation:
+        result.update(schema=RELOCATION_SCHEMA, scope=scope + " " + RELOCATION_SCOPE,
+                      relocated_passages=[relocation])
     if extension == ".eml" and email_body_only:
         return result, _email_body_prefix(old_text, old_tokens), _email_body_prefix(new_text, new_tokens), None
     if extension == ".pdf" and pdf_paired_text_only:

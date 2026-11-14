@@ -16,6 +16,9 @@ from concurrent.futures import ThreadPoolExecutor
 from fractions import Fraction
 from pathlib import Path
 
+from app.evidence.video_reference_insertion import frame_error as frame_error
+from app.evidence.video_reference_insertion import normalized as normalized
+from app.evidence.video_reference_insertion import pair_interval as pair_interval
 from scripts import review_video_temporal_insert_sources as source
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -102,12 +105,6 @@ def native_clip(path):
     return table, pixels, hashes, info
 
 
-def frame_error(first, second):
-    import numpy as np
-
-    return np.mean(np.abs(first.astype(np.float32) - second.astype(np.float32)), axis=(1, 2))
-
-
 def bind_published(case, genuine, generated, merged):
     import numpy as np
 
@@ -128,39 +125,6 @@ def bind_published(case, genuine, generated, merged):
                    and sum(row["mean_luma_errors"] == strongest["mean_luma_errors"] for row in trials) == 1,
                    "Publisher interval could not be bound to the three native sources")
     return {"expected_from_one_based_paper": [expected-1, stop-1], "native_frames": strongest["bounds"], "trials": trials}
-
-
-def normalized(pixels):
-    import numpy as np
-
-    luma = pixels.astype(np.float32)
-    low, mid, high = np.percentile(luma, (20, 50, 80), axis=(1, 2), keepdims=True)
-    return ((luma - mid) / np.maximum(high - low, 24)).astype(np.float32)
-
-
-def pair_interval(first, second):
-    import numpy as np
-
-    added = len(second) - len(first)
-    if not 24 <= added <= 240 or len(first) < 49:
-        return {"status": "not_a_longer_pair", "bounds": None}
-    a, b = normalized(first), normalized(second)
-    before = frame_error(a, b[:len(a)])
-    after = frame_error(a, b[added:])
-    positions = np.arange(24, len(a) - 23)
-    profile = np.r_[0., np.cumsum(before - after, dtype=np.float64)]
-    best = int(positions[np.argmin(profile[positions])])
-    before_stats, after_stats = ([round(float(value), 6) for value in np.percentile(values, (50, 90))]
-                                 for values in (before[:best], after[best:]))
-    close = positions[profile[positions] <= profile[best] + 0.035]
-    selected = [best, best + added]
-    details = {"best": selected, "uncertain_starts": [int(close.min()), int(close.max())],
-               "before_error_p50_p90": before_stats, "after_error_p50_p90": after_stats}
-    if any(mid > .10 or upper > .22 for mid, upper in (before_stats, after_stats)):
-        return {"status": "insufficient_matching_frames", "bounds": None, **details}
-    if int(close.max() - close.min()) > 3:
-        return {"status": "ambiguous_insertion", "bounds": None, **details}
-    return {"status": "paired_insertion", "bounds": selected, **details}
 
 
 def standalone(path, table, pixels):

@@ -18,6 +18,7 @@ from app.core.canonical import canonical_hash
 from app.detectors.audio.decode import SAMPLE_RATE, audio_stream_indices
 from app.detectors.video.decode import DecodeError, FrameTable, decode_frames, probe_frames
 from app.evidence import (
+    video_reference_insertion,
     video_reference_local,
     video_reference_measured_interval,
     video_reference_photometric,
@@ -44,6 +45,7 @@ SCHEMA_WITH_CHANNEL_TIMING = "chipmunk.video-reference-comparison/8"
 SCHEMA_WITH_TRIM = "chipmunk.video-reference-comparison/9"
 SCHEMA_WITH_TRIM_REENCODE = "chipmunk.video-reference-comparison/10"
 SCHEMA_WITH_REENCODED_SOUNDTRACK = "chipmunk.video-reference-comparison/11"
+SCHEMA_WITH_PICTURE_INSERTION = "chipmunk.video-reference-comparison/12"
 MAX_COMPARED_SOUNDTRACKS = 2
 MAX_BYTES = 48 * 1024 * 1024
 MAX_FRAMES = 360
@@ -135,6 +137,37 @@ def _clock_range(tables, start, end, earlier_offset=0):
     return {label: {"start_pts": table.pts[start + offset], "last_pts": table.pts[end + offset - 1],
                     "end_exclusive_pts": table.pts[end + offset] if end + offset < len(table) else None}
             for label, table, offset in zip(("earlier", "submitted"), tables, (earlier_offset, 0), strict=True)}
+
+
+def _insertion_evidence(paths, tables, assets, located):
+    start, stop = located["bounds"]
+    witnesses = {}
+    frame_ranges = ((start - 1, start), (start - 1, (start + stop) // 2, stop))
+    for side, path, table, indices in zip(("earlier", "submitted"), paths, tables, frame_ranges, strict=True):
+        roles = ("before", "after") if side == "earlier" else video_reference_insertion.EVIDENCE_ROLES
+        selected = {}
+        with closing(decode_frames(path, table, indices, timeout_s=30, max_pixels=MAX_PIXELS)) as frames:
+            for frame in frames:
+                if frame.index not in indices or frame.index in selected or not frame.pts_verified:
+                    raise DecodeError("Video could not be decoded with verified insertion witnesses.")
+                selected[frame.index] = frame
+        if selected.keys() != set(indices):
+            raise DecodeError("Video could not be decoded with every insertion witness.")
+        for role, index in zip(roles, indices, strict=True):
+            frame = selected[index]
+            witnesses.setdefault(role, {})[side] = {
+                "frame_index": index, "pts": frame.pts, "time_base": table.time_base,
+                "time_s": float((frame.pts - table.pts[0]) * table.tb),
+                "asset": _image(assets, f"insertion-{role}-{side}.png", frame.rgb),
+            }
+    return {"start_frame": start, "end_frame_exclusive": stop, "inserted_frames": stop - start,
+            "start_s": tables[1].seconds(start), "end_s": tables[1].seconds(stop),
+            "source_ticks": {"start_pts": tables[1].pts[start], "end_exclusive_pts": tables[1].pts[stop],
+                             "time_base": tables[1].time_base},
+            "earlier_join_frame": start, "plausible_start_frames": located["uncertain_starts"],
+            "before_error_p50_p90": located["before_error_p50_p90"],
+            "after_error_p50_p90": located["after_error_p50_p90"],
+            "witnesses": witnesses, "audio_checked": False}
 
 
 def _trim_offset(paths, tables):
@@ -355,7 +388,8 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             timing_local_sound: bool = False,
             include_additional_soundtrack: bool = True,
             include_channel_timing: bool = False, include_trimmed: bool = False,
-            include_trim_reencoded: bool = False, include_soundtrack_reencode: bool = False) -> tuple[dict, dict[str, bytes]]:
+            include_trim_reencoded: bool = False, include_soundtrack_reencode: bool = False,
+            include_picture_insertion: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Report decoded differences on matching clocks or within a verified trimmed overlap."""
     paths = earlier, submitted
     sources = tuple(_identity(path) for path in paths)
@@ -365,6 +399,14 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
     record = {"schema": SCHEMA, "status": status,
               "earlier": {**sources[0], **_reference(tables[0])}, "submitted": {**sources[1], **_reference(tables[1])},
               "interpretation": INTERPRETATION, "affects_overall_confidence": False}
+    if (include_picture_insertion and timing_event_s is None and status in {"picture_timelines_differ", "comparison_limit"}
+            and (insertion := video_reference_insertion.locate(paths, tables, MAX_PIXELS)) is not None):
+        evidence = _insertion_evidence(paths, tables, assets, insertion)
+        if sources != tuple(_identity(path) for path in paths):
+            raise ValueError("One of the clips changed while the comparison was running.")
+        record.update(schema=SCHEMA_WITH_PICTURE_INSERTION, status="measured",
+                      interpretation=video_reference_insertion.INTERPRETATION, picture_insertion=evidence)
+        return record, assets
     if include_trimmed and timing_event_s is None and status == "picture_timelines_differ":
         if trim := _trim_offset(paths, tables):
             offset, support = trim

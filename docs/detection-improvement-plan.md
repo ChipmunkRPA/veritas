@@ -58,6 +58,34 @@ the current adopt/retain/defer judgment; do not retrospectively tune consumed
 test cases or rewrite a failure as a pass. Internal predeclared research settings
 are not public screening promises or calibrated population probabilities.
 
+## Latest checks added and evaluated locally
+
+- [Video insertion localization](video-temporal-insert-confirmation-2026-11-13.md)
+  adds a short earlier-copy comparison. It recovered both boundaries of all
+  16 held generated insertions and 13 of 16 conventional insertions. The
+  existing route assessed none of those insertions. The new check issued no
+  insertion report on 40 unchanged, equal-length or wrong-reference controls.
+  Source timestamps and pictures before, during and after appear in the
+  browser, PDF and JSON. It makes a physical comparison with zero AI weight.
+- [Paragraph relocation](document-mixed-format-comparison-2026-11-13.md#reordered-paragraphs-in-matching-txt-or-word-files)
+  links the same body paragraph across matching TXT or Word drafts. The
+  replay verifies 64 exact locations and 208 controls with no relocation
+  reported. The standalone writing comparison based on overlapping model
+  responses added zero useful locations across 200 known edits and stayed
+  outside the application.
+- [JPEG fine-detail differences](image-jpeg-ac-difference-2026-11-13.md)
+  on an earlier copy improved generated edit localization from 65 to 66 of
+  68 confirmation pairs. Its strongest measured result was conventional
+  local blur, from 1 to 26 of 34. One source contributed the generated
+  improvement, so the method stays in evaluation for now.
+- [Stock-voice splices under competing speech](audio-stock-voice-transfer-2026-11-13.md)
+  tested the same speech classifier with different window schedules and
+  points on 124 fresh deliveries. At the current point, the two-window
+  schedule recovered 7 of 16 edits at 0 dB versus 5 of 16 for five windows,
+  with 2 versus 7 flags across 24 ordinary controls. Both recovered 3 of 16
+  edits at −5 dB. The authored edit positions favor the two-window schedule.
+  The current audio setting stays in use while randomized positions are tested.
+
 ## First new image comparison: original predeclared design
 
 - Candidate: official IML-ViT checkpoint, subject to source, checkpoint, and

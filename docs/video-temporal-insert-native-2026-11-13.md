@@ -102,9 +102,9 @@ for the unchanged controls, authentic inserts, equal-length
 replacements and unrelated references. Measure whether a result
 binds both physical edges, retains the two earlier-copy flanks, and
 preserves unchanged and wrong-source controls. Report findings by
-independent source as well as by render. Keep the current paired check's
-settings fixed through confirmation. The confirmation roster has been
-frozen from publisher metadata and remains unscored.
+independent source as well as by render. The fixed paired method recovered
+16 of 16 generated inserts and 13 of 16 ordinary inserts exactly.
+[Confirmation results and replay](video-temporal-insert-confirmation-2026-11-13.md) ·
 [Confirmation source plan](evaluation-panels/video-temporal-insert-confirmation-plan-2026-11-13.json)
 
 ## Replay

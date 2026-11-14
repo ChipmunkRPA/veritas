@@ -162,6 +162,9 @@ def render(comparison: dict) -> bytes:
         anchor = escape(change["id"])
         changes.append(f'<section{change_class}><h2 id="draft-change-{anchor}">{anchor} · {label}</h2>'
                        f'{_side("Earlier draft", change["earlier"])}{_side("Analyzed version", change["later"])}</section>')
+    relocations = [f'<section><h2>Reordered body passage</h2>{_side("Earlier draft", passage["earlier"])}'
+                   f'{_side("Analyzed version", passage["later"])}</section>'
+                   for passage in comparison.get("relocated_passages", ())]
     sources = []
     for key, label in (("earlier", "Earlier draft"), ("later", "Analyzed version")):
         source = comparison[key]
@@ -189,7 +192,7 @@ def render(comparison: dict) -> bytes:
 <p>{escape(comparison['scope'])}</p><p>{escape(comparison['interpretation'])}</p>
 <p>Highlights mark changed words and punctuation. {positions} Each range includes its start and excludes its end.</p>
 <div class="sources">{''.join(sources)}</div>{_paired(paired)}
-{''.join(changes) or f'<p>{no_changes}</p>'}{_word_tables(word_tables)}
+{''.join(changes) or f'<p>{no_changes}</p>'}{''.join(relocations)}{_word_tables(word_tables)}
 </body></html>'''
 
     return load_weasyprint().HTML(string=content, url_fetcher=_restricted_fetcher(())).write_pdf()

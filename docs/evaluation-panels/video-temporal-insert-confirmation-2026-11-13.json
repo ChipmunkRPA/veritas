@@ -1,0 +1,6195 @@
+{
+  "groups": [
+    {
+      "example": 2,
+      "native": {
+        "authentic": {
+          "codec": "h264",
+          "color_space": "bt709",
+          "frames": 225,
+          "height": 2160,
+          "luma_sha256": "06e0a8e43f536d57376c406c9b4979555a548d9b36147ff52ebe1a655929e31a",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "ff5ee15fe1a469503823144d4941792a9146204a0fe67e3704191d85acf21e22",
+          "sha256": "19b64ee35fd057a630050b15b7f66f2dab1427970ca60d4496af6cfeaeaf84d0",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 3840
+        },
+        "fake_segments": {
+          "codec": "h264",
+          "color_space": null,
+          "frames": 125,
+          "height": 464,
+          "luma_sha256": "c57c2e098fecb8c297965a834abcce260b53a6bd25e1ac9a346cadc8ef7cad3e",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "bfc6f10ed2db1ef71e277527445487030130d35090f240515d04a4c7a5be853e",
+          "sha256": "de6d68e3563d773cb3aeaa7afbd72103de8cbd365491a8576ea69d6777c02ffe",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 832
+        }
+      },
+      "renders": [
+        {
+          "render": 0,
+          "replacement_start": 48,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  48
+                ],
+                "error_p50_p90": [
+                  0.00066,
+                  0.003308
+                ]
+              },
+              {
+                "bounds": [
+                  48,
+                  78
+                ],
+                "error_p50_p90": [
+                  0.007221,
+                  0.008979
+                ]
+              },
+              {
+                "bounds": [
+                  78,
+                  225
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.005042
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  48
+                ],
+                "error_p50_p90": [
+                  0.00066,
+                  0.003308
+                ]
+              },
+              {
+                "bounds": [
+                  48,
+                  78
+                ],
+                "error_p50_p90": [
+                  0.007298,
+                  0.009091
+                ]
+              },
+              {
+                "bounds": [
+                  78,
+                  255
+                ],
+                "error_p50_p90": [
+                  0.004992,
+                  0.007668
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  48
+                ],
+                "error_p50_p90": [
+                  0.000157,
+                  0.002835
+                ]
+              },
+              {
+                "bounds": [
+                  48,
+                  78
+                ],
+                "error_p50_p90": [
+                  0.003977,
+                  0.004168
+                ]
+              },
+              {
+                "bounds": [
+                  78,
+                  255
+                ],
+                "error_p50_p90": [
+                  0.005078,
+                  0.007668
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "render": 1,
+          "replacement_start": 99,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  99
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.005398
+                ]
+              },
+              {
+                "bounds": [
+                  99,
+                  201
+                ],
+                "error_p50_p90": [
+                  0.007414,
+                  0.008803
+                ]
+              },
+              {
+                "bounds": [
+                  201,
+                  225
+                ],
+                "error_p50_p90": [
+                  0.006212,
+                  0.006955
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  122
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.00496
+                ]
+              },
+              {
+                "bounds": [
+                  122,
+                  224
+                ],
+                "error_p50_p90": [
+                  0.007554,
+                  0.009051
+                ]
+              },
+              {
+                "bounds": [
+                  224,
+                  327
+                ],
+                "error_p50_p90": [
+                  0.005076,
+                  0.006838
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  122
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.005145
+                ]
+              },
+              {
+                "bounds": [
+                  122,
+                  224
+                ],
+                "error_p50_p90": [
+                  0.004621,
+                  0.007932
+                ]
+              },
+              {
+                "bounds": [
+                  224,
+                  327
+                ],
+                "error_p50_p90": [
+                  0.005048,
+                  0.006838
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "rows": [
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 225,
+            "height": 270,
+            "luma_sha256": "c48d2452e44a799af9f0dd4c77f17a24f59b80d89ffa11888ab5edb267c75e02",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "ff5ee15fe1a469503823144d4941792a9146204a0fe67e3704191d85acf21e22",
+            "sha256": "b018995dbc8ea8d473a1f27f75680828e9ae49b4ff558a574b40ae4347486eb7",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": null,
+          "role": "untouched_delivery",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 225,
+            "height": 270,
+            "luma_sha256": "c48d2452e44a799af9f0dd4c77f17a24f59b80d89ffa11888ab5edb267c75e02",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "ff5ee15fe1a469503823144d4941792a9146204a0fe67e3704191d85acf21e22",
+            "sha256": "b018995dbc8ea8d473a1f27f75680828e9ae49b4ff558a574b40ae4347486eb7",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 225,
+            "height": 270,
+            "luma_sha256": "c48d2452e44a799af9f0dd4c77f17a24f59b80d89ffa11888ab5edb267c75e02",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "ff5ee15fe1a469503823144d4941792a9146204a0fe67e3704191d85acf21e22",
+            "sha256": "b018995dbc8ea8d473a1f27f75680828e9ae49b4ff558a574b40ae4347486eb7",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.004992,
+              0.007668
+            ],
+            "before_error_p50_p90": [
+              0.00066,
+              0.003308
+            ],
+            "best": [
+              48,
+              78
+            ],
+            "bounds": [
+              48,
+              78
+            ],
+            "evidence": [
+              {
+                "frame": 47,
+                "gray_96_sha256": "ba099f7b86350b249f19823040c467804a9094198259f683f4a4f63f2bad8c21",
+                "pts": 24064
+              },
+              {
+                "frame": 63,
+                "gray_96_sha256": "a4a3e7523b4abd41f6698677b1bbbc45204627c79533c711176464d9c0e3d21b",
+                "pts": 32256
+              },
+              {
+                "frame": 78,
+                "gray_96_sha256": "edae4308547418545d7f6638f4c428eb6dd1dc5bc7fb7ddf467a5edfea039668",
+                "pts": 39936
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              48,
+              48
+            ]
+          },
+          "render": 0,
+          "role": "generated_insert",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 255,
+            "height": 270,
+            "luma_sha256": "1b82d49bb7c6ceda4c6f13caf4db97a0df4716ecc918466bd0b688e7d20fb382",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "337dfc838fa7b58cebb5c5cc99a412e79caac1920569702df0225a98ebb2422e",
+            "sha256": "f7e7b7c2c951c385cceed57f527c553352ccf5b42c67eedc766160822bd3b515",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            48,
+            78
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 225,
+            "height": 270,
+            "luma_sha256": "c48d2452e44a799af9f0dd4c77f17a24f59b80d89ffa11888ab5edb267c75e02",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "ff5ee15fe1a469503823144d4941792a9146204a0fe67e3704191d85acf21e22",
+            "sha256": "b018995dbc8ea8d473a1f27f75680828e9ae49b4ff558a574b40ae4347486eb7",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.005078,
+              0.007668
+            ],
+            "before_error_p50_p90": [
+              0.000157,
+              0.002835
+            ],
+            "best": [
+              48,
+              78
+            ],
+            "bounds": null,
+            "status": "ambiguous_insertion",
+            "uncertain_starts": [
+              43,
+              51
+            ]
+          },
+          "render": 0,
+          "role": "matched_ordinary_insertion",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 255,
+            "height": 270,
+            "luma_sha256": "6ff17be20e86f5e0086344726c9e1dbe0b2dac84abae88010fb68f6cfd00ec4a",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "337dfc838fa7b58cebb5c5cc99a412e79caac1920569702df0225a98ebb2422e",
+            "sha256": "e82e21d89d3a614daa7564c6dfbdc310c8ddf8c96986c65f27640e7a86f8cc19",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            48,
+            78
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 225,
+            "height": 270,
+            "luma_sha256": "91e1b5223b0d773ec097ed6ad585a32513ef3ec1401b6507ef04fc36d51a1739",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "ff5ee15fe1a469503823144d4941792a9146204a0fe67e3704191d85acf21e22",
+            "sha256": "ded376d08b7ac6e294bddff0154428c2e4632772bdc16c465c92951aaf505603",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.496652,
+              0.505117
+            ],
+            "before_error_p50_p90": [
+              0.497423,
+              0.510568
+            ],
+            "best": [
+              78,
+              108
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              24,
+              115
+            ]
+          },
+          "render": 0,
+          "role": "wrong_reference",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 255,
+            "height": 270,
+            "luma_sha256": "1b82d49bb7c6ceda4c6f13caf4db97a0df4716ecc918466bd0b688e7d20fb382",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "337dfc838fa7b58cebb5c5cc99a412e79caac1920569702df0225a98ebb2422e",
+            "sha256": "f7e7b7c2c951c385cceed57f527c553352ccf5b42c67eedc766160822bd3b515",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 225,
+            "height": 270,
+            "luma_sha256": "c48d2452e44a799af9f0dd4c77f17a24f59b80d89ffa11888ab5edb267c75e02",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "ff5ee15fe1a469503823144d4941792a9146204a0fe67e3704191d85acf21e22",
+            "sha256": "b018995dbc8ea8d473a1f27f75680828e9ae49b4ff558a574b40ae4347486eb7",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [
+            [
+              19,
+              96
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 0,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 225,
+            "height": 270,
+            "luma_sha256": "5d5c16397315eefc5e469cd3b9580a99ecb91e00b7a378ad50c07284d83dd370",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "ff5ee15fe1a469503823144d4941792a9146204a0fe67e3704191d85acf21e22",
+            "sha256": "6530913ea95f4564375aa80bb3e63ccaa3a942a3bc944c03c58498cd60a0a057",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 225,
+            "height": 270,
+            "luma_sha256": "c48d2452e44a799af9f0dd4c77f17a24f59b80d89ffa11888ab5edb267c75e02",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "ff5ee15fe1a469503823144d4941792a9146204a0fe67e3704191d85acf21e22",
+            "sha256": "b018995dbc8ea8d473a1f27f75680828e9ae49b4ff558a574b40ae4347486eb7",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.005076,
+              0.006838
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.00496
+            ],
+            "best": [
+              122,
+              224
+            ],
+            "bounds": [
+              122,
+              224
+            ],
+            "evidence": [
+              {
+                "frame": 121,
+                "gray_96_sha256": "fc85052b42978362ddc5e7b96be02de0453c5be7b04a03ce0ed834cbdf934c42",
+                "pts": 61952
+              },
+              {
+                "frame": 173,
+                "gray_96_sha256": "c656969e0483cdca1de322ba52fcc6d793d3a93bdb6d2369584431c49b3be96d",
+                "pts": 88576
+              },
+              {
+                "frame": 224,
+                "gray_96_sha256": "cfd5a616a462faeb646198eca66f9702b6ee8da597f79f86bb218fe1c8c96438",
+                "pts": 114688
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              122,
+              123
+            ]
+          },
+          "render": 1,
+          "role": "generated_insert",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 327,
+            "height": 270,
+            "luma_sha256": "ce4993ddad4eab3fd405df7f002fa016aa6c2ca0c67730613a146e15aa9dcee8",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "02b1f0b6fabd1330d0c7ecb87b99fc5822f46047767f189c607907b548b143b5",
+            "sha256": "41728252e990c5246902045e9c68f52fa63254e0cd89339c60814b70ef63c34c",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            122,
+            224
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 225,
+            "height": 270,
+            "luma_sha256": "c48d2452e44a799af9f0dd4c77f17a24f59b80d89ffa11888ab5edb267c75e02",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "ff5ee15fe1a469503823144d4941792a9146204a0fe67e3704191d85acf21e22",
+            "sha256": "b018995dbc8ea8d473a1f27f75680828e9ae49b4ff558a574b40ae4347486eb7",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.005048,
+              0.006838
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.005145
+            ],
+            "best": [
+              122,
+              224
+            ],
+            "bounds": [
+              122,
+              224
+            ],
+            "evidence": [
+              {
+                "frame": 121,
+                "gray_96_sha256": "f53a3a237902b7aa0e855d605218a288df9859e05df0123b0f25a8c9a1ef6ccc",
+                "pts": 61952
+              },
+              {
+                "frame": 173,
+                "gray_96_sha256": "84bedc004d1cd073b98a6bfeff953cde504da100cfffb008dbf15f69723d7514",
+                "pts": 88576
+              },
+              {
+                "frame": 224,
+                "gray_96_sha256": "95ed368fd620ec67179329fe863d43298a183ab4dc422f07364746c3df976149",
+                "pts": 114688
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              121,
+              122
+            ]
+          },
+          "render": 1,
+          "role": "matched_ordinary_insertion",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 327,
+            "height": 270,
+            "luma_sha256": "60b8e66be1eef3689247fdc74ff05335eb2ab9989f35bc2ce4fd018ee57eb48b",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "02b1f0b6fabd1330d0c7ecb87b99fc5822f46047767f189c607907b548b143b5",
+            "sha256": "4fef6c92b66e031aa7167b5ba092ad938cb6e4227b554a80d64aca4572050514",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            122,
+            224
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 225,
+            "height": 270,
+            "luma_sha256": "91e1b5223b0d773ec097ed6ad585a32513ef3ec1401b6507ef04fc36d51a1739",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "ff5ee15fe1a469503823144d4941792a9146204a0fe67e3704191d85acf21e22",
+            "sha256": "ded376d08b7ac6e294bddff0154428c2e4632772bdc16c465c92951aaf505603",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.489126,
+              0.498289
+            ],
+            "before_error_p50_p90": [
+              0.49804,
+              0.500401
+            ],
+            "best": [
+              37,
+              139
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              24,
+              42
+            ]
+          },
+          "render": 1,
+          "role": "wrong_reference",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 327,
+            "height": 270,
+            "luma_sha256": "ce4993ddad4eab3fd405df7f002fa016aa6c2ca0c67730613a146e15aa9dcee8",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "02b1f0b6fabd1330d0c7ecb87b99fc5822f46047767f189c607907b548b143b5",
+            "sha256": "41728252e990c5246902045e9c68f52fa63254e0cd89339c60814b70ef63c34c",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 225,
+            "height": 270,
+            "luma_sha256": "c48d2452e44a799af9f0dd4c77f17a24f59b80d89ffa11888ab5edb267c75e02",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "ff5ee15fe1a469503823144d4941792a9146204a0fe67e3704191d85acf21e22",
+            "sha256": "b018995dbc8ea8d473a1f27f75680828e9ae49b4ff558a574b40ae4347486eb7",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [
+            [
+              70,
+              225
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 1,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 225,
+            "height": 270,
+            "luma_sha256": "762f2138b90d8664175fadde43ee5cafb9164f17ef5961c950e80e663676b983",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "ff5ee15fe1a469503823144d4941792a9146204a0fe67e3704191d85acf21e22",
+            "sha256": "a029dfb016b08de7b2206e3a372b15fe4abd12630a9d0585a33b78c8c5559023",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        }
+      ],
+      "wrong_example": 81
+    },
+    {
+      "example": 81,
+      "native": {
+        "authentic": {
+          "codec": "h264",
+          "color_space": "bt709",
+          "frames": 188,
+          "height": 2160,
+          "luma_sha256": "a2e0ff61915644bf1ec321fe0092a4018340c8f27431cfdf4502cc0dc22dc41f",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "763c40d80d503dcf4c3a3af54f7f0e93bbcefc960807c1ce01822130b162a8c9",
+          "sha256": "1578019af169e7e5ce6e0dcfef623e9196883c654ef68f36485f629096681609",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 3840
+        },
+        "fake_segments": {
+          "codec": "h264",
+          "color_space": null,
+          "frames": 125,
+          "height": 464,
+          "luma_sha256": "140ce8b7272577538c21eb89afa409b0e5079ffcbec9040f605971307573977c",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "bfc6f10ed2db1ef71e277527445487030130d35090f240515d04a4c7a5be853e",
+          "sha256": "00c1f1937640af9c982aa1bb507e22b3bbde36e923074f9aea5f94c01459e647",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 832
+        }
+      },
+      "renders": [
+        {
+          "render": 0,
+          "replacement_start": 56,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  56
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.003833
+                ]
+              },
+              {
+                "bounds": [
+                  56,
+                  110
+                ],
+                "error_p50_p90": [
+                  0.007333,
+                  0.008896
+                ]
+              },
+              {
+                "bounds": [
+                  110,
+                  188
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.006765
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  56
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.003833
+                ]
+              },
+              {
+                "bounds": [
+                  56,
+                  110
+                ],
+                "error_p50_p90": [
+                  0.007374,
+                  0.00894
+                ]
+              },
+              {
+                "bounds": [
+                  110,
+                  242
+                ],
+                "error_p50_p90": [
+                  0.00588,
+                  0.007892
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  56
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.00538
+                ]
+              },
+              {
+                "bounds": [
+                  56,
+                  110
+                ],
+                "error_p50_p90": [
+                  0.006005,
+                  0.008299
+                ]
+              },
+              {
+                "bounds": [
+                  110,
+                  242
+                ],
+                "error_p50_p90": [
+                  0.005881,
+                  0.00796
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "render": 1,
+          "replacement_start": 92,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  92
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.003818
+                ]
+              },
+              {
+                "bounds": [
+                  92,
+                  164
+                ],
+                "error_p50_p90": [
+                  0.007766,
+                  0.009097
+                ]
+              },
+              {
+                "bounds": [
+                  164,
+                  188
+                ],
+                "error_p50_p90": [
+                  0.006681,
+                  0.008018
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  126
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.002986
+                ]
+              },
+              {
+                "bounds": [
+                  126,
+                  198
+                ],
+                "error_p50_p90": [
+                  0.008033,
+                  0.008889
+                ]
+              },
+              {
+                "bounds": [
+                  198,
+                  260
+                ],
+                "error_p50_p90": [
+                  0.005841,
+                  0.008092
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  126
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.002855
+                ]
+              },
+              {
+                "bounds": [
+                  126,
+                  198
+                ],
+                "error_p50_p90": [
+                  0.006192,
+                  0.008417
+                ]
+              },
+              {
+                "bounds": [
+                  198,
+                  260
+                ],
+                "error_p50_p90": [
+                  0.005928,
+                  0.008567
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "rows": [
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 188,
+            "height": 270,
+            "luma_sha256": "0685f18ccd63def610a8d6a04a13641b7adbb36a1e980bc1f9c1f0c9f64dd39f",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "763c40d80d503dcf4c3a3af54f7f0e93bbcefc960807c1ce01822130b162a8c9",
+            "sha256": "6dda502e2b8ce182a2405f89147e0e0b56a3415ff1f5b7cc2fbbde392b7ccede",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": null,
+          "role": "untouched_delivery",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 188,
+            "height": 270,
+            "luma_sha256": "0685f18ccd63def610a8d6a04a13641b7adbb36a1e980bc1f9c1f0c9f64dd39f",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "763c40d80d503dcf4c3a3af54f7f0e93bbcefc960807c1ce01822130b162a8c9",
+            "sha256": "6dda502e2b8ce182a2405f89147e0e0b56a3415ff1f5b7cc2fbbde392b7ccede",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 188,
+            "height": 270,
+            "luma_sha256": "0685f18ccd63def610a8d6a04a13641b7adbb36a1e980bc1f9c1f0c9f64dd39f",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "763c40d80d503dcf4c3a3af54f7f0e93bbcefc960807c1ce01822130b162a8c9",
+            "sha256": "6dda502e2b8ce182a2405f89147e0e0b56a3415ff1f5b7cc2fbbde392b7ccede",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.00588,
+              0.007892
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.003833
+            ],
+            "best": [
+              56,
+              110
+            ],
+            "bounds": [
+              56,
+              110
+            ],
+            "evidence": [
+              {
+                "frame": 55,
+                "gray_96_sha256": "d92ababfdf56c7ceaa47aa8cbdd8970b9d52092220792c64e3e796cded7f52b0",
+                "pts": 28160
+              },
+              {
+                "frame": 83,
+                "gray_96_sha256": "8278af250585082d7a0f28369d3876539872f438a1222aaca70502ca3793143e",
+                "pts": 42496
+              },
+              {
+                "frame": 110,
+                "gray_96_sha256": "9a589467d200b7edde30656b9e6c7da280ab53de221ca4b1c6a7c6378922d541",
+                "pts": 56320
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              56,
+              56
+            ]
+          },
+          "render": 0,
+          "role": "generated_insert",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 242,
+            "height": 270,
+            "luma_sha256": "63bd839f23c07b26fe3d7cf328ea5df126888d58267855d6ec53707a6b1c6239",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "597262177a432f57ba5634495a49c7bcc6628cb66077a8dbdd42827e9626ba02",
+            "sha256": "403e61a033fa93a0f64e5da9b8344936ee1a5e6f71efd20c7d72a3dbc6ea0e7e",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            56,
+            110
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 188,
+            "height": 270,
+            "luma_sha256": "0685f18ccd63def610a8d6a04a13641b7adbb36a1e980bc1f9c1f0c9f64dd39f",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "763c40d80d503dcf4c3a3af54f7f0e93bbcefc960807c1ce01822130b162a8c9",
+            "sha256": "6dda502e2b8ce182a2405f89147e0e0b56a3415ff1f5b7cc2fbbde392b7ccede",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.005881,
+              0.00796
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.00538
+            ],
+            "best": [
+              56,
+              110
+            ],
+            "bounds": null,
+            "status": "ambiguous_insertion",
+            "uncertain_starts": [
+              50,
+              56
+            ]
+          },
+          "render": 0,
+          "role": "matched_ordinary_insertion",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 242,
+            "height": 270,
+            "luma_sha256": "e06dd618cffa39bc2ba7dda1c3353af254ff61f7ba4f6eec1d2b4814a4dbf0ec",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "597262177a432f57ba5634495a49c7bcc6628cb66077a8dbdd42827e9626ba02",
+            "sha256": "78c766257e1a72763a8a4ee36e847a5531e5847dd6f0eb40b1e4c8eeb10df9cb",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            56,
+            110
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 188,
+            "height": 270,
+            "luma_sha256": "791f0b4d5af3e71227243a90662efe07000dbc623bb196d9aab49fbde103445c",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "763c40d80d503dcf4c3a3af54f7f0e93bbcefc960807c1ce01822130b162a8c9",
+            "sha256": "3874caaf154d3f92850bbb6eee3ecf3130f2dd571646852bab1c889fc0acd260",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.595173,
+              0.603276
+            ],
+            "before_error_p50_p90": [
+              0.609797,
+              0.614492
+            ],
+            "best": [
+              24,
+              78
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              24,
+              27
+            ]
+          },
+          "render": 0,
+          "role": "wrong_reference",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 242,
+            "height": 270,
+            "luma_sha256": "63bd839f23c07b26fe3d7cf328ea5df126888d58267855d6ec53707a6b1c6239",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "597262177a432f57ba5634495a49c7bcc6628cb66077a8dbdd42827e9626ba02",
+            "sha256": "403e61a033fa93a0f64e5da9b8344936ee1a5e6f71efd20c7d72a3dbc6ea0e7e",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 188,
+            "height": 270,
+            "luma_sha256": "0685f18ccd63def610a8d6a04a13641b7adbb36a1e980bc1f9c1f0c9f64dd39f",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "763c40d80d503dcf4c3a3af54f7f0e93bbcefc960807c1ce01822130b162a8c9",
+            "sha256": "6dda502e2b8ce182a2405f89147e0e0b56a3415ff1f5b7cc2fbbde392b7ccede",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [
+            [
+              29,
+              144
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 0,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 188,
+            "height": 270,
+            "luma_sha256": "41609a1f5cdf4fef0cc445025067482685b06a3748b99cc5c069ad7d3155ccd9",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "763c40d80d503dcf4c3a3af54f7f0e93bbcefc960807c1ce01822130b162a8c9",
+            "sha256": "139a2ed98a4a5d7a558cc77decc4be96b5d35ca80c77ea50c31a68ae8d487a0b",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 188,
+            "height": 270,
+            "luma_sha256": "0685f18ccd63def610a8d6a04a13641b7adbb36a1e980bc1f9c1f0c9f64dd39f",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "763c40d80d503dcf4c3a3af54f7f0e93bbcefc960807c1ce01822130b162a8c9",
+            "sha256": "6dda502e2b8ce182a2405f89147e0e0b56a3415ff1f5b7cc2fbbde392b7ccede",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.005841,
+              0.008092
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.002986
+            ],
+            "best": [
+              126,
+              198
+            ],
+            "bounds": [
+              126,
+              198
+            ],
+            "evidence": [
+              {
+                "frame": 125,
+                "gray_96_sha256": "641a5c896fdb5f04f9d45087915f296cf59cf5f106cfdce978bbe092294ad4c2",
+                "pts": 64000
+              },
+              {
+                "frame": 162,
+                "gray_96_sha256": "4cc2b07d0df6b0eef78574d7e1c52249ad7db37eb4996874e65a6fcf2c13a1d8",
+                "pts": 82944
+              },
+              {
+                "frame": 198,
+                "gray_96_sha256": "a3c181f6ef809b6c64621bc47114b3ee191547753b54612f205c5396d236c4d4",
+                "pts": 101376
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              126,
+              126
+            ]
+          },
+          "render": 1,
+          "role": "generated_insert",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 260,
+            "height": 270,
+            "luma_sha256": "330f0ed56ff38e7402e1b155f4a4c820cc6f95b300a15ba5d5a446d45d1314d5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6490eefbbca65ae09726201ffa2c70aefc968fb3306aee4df158a73b43de1ac9",
+            "sha256": "64d472801cc2002fbddee16633021708b5f894f1a73c5a0f195b8ecb786144ac",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            126,
+            198
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 188,
+            "height": 270,
+            "luma_sha256": "0685f18ccd63def610a8d6a04a13641b7adbb36a1e980bc1f9c1f0c9f64dd39f",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "763c40d80d503dcf4c3a3af54f7f0e93bbcefc960807c1ce01822130b162a8c9",
+            "sha256": "6dda502e2b8ce182a2405f89147e0e0b56a3415ff1f5b7cc2fbbde392b7ccede",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.005928,
+              0.008567
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.002855
+            ],
+            "best": [
+              126,
+              198
+            ],
+            "bounds": [
+              126,
+              198
+            ],
+            "evidence": [
+              {
+                "frame": 125,
+                "gray_96_sha256": "faae0dff929038b613d2d00b47f43676e4da23ee3339cc23f3f3fdb280fb063e",
+                "pts": 64000
+              },
+              {
+                "frame": 162,
+                "gray_96_sha256": "aaf5eb53459bfb077cb4f9736f74d2e6ccca3dae81c925cf55e3a8de7e1f6c08",
+                "pts": 82944
+              },
+              {
+                "frame": 198,
+                "gray_96_sha256": "197d464cbf5c4f6634b9f5a7a970bb9153b472567e6c73c28c215925793b32ef",
+                "pts": 101376
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              126,
+              126
+            ]
+          },
+          "render": 1,
+          "role": "matched_ordinary_insertion",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 260,
+            "height": 270,
+            "luma_sha256": "7c94fdbd5b4954bb5240a6df45325406159d6a81be96f36aebd700d8e1dd573d",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6490eefbbca65ae09726201ffa2c70aefc968fb3306aee4df158a73b43de1ac9",
+            "sha256": "d3fa682ea76067cabab4aa6f9ef35fad076ad3399f733527d1a3ebe9ee7cbf55",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            126,
+            198
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 188,
+            "height": 270,
+            "luma_sha256": "791f0b4d5af3e71227243a90662efe07000dbc623bb196d9aab49fbde103445c",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "763c40d80d503dcf4c3a3af54f7f0e93bbcefc960807c1ce01822130b162a8c9",
+            "sha256": "3874caaf154d3f92850bbb6eee3ecf3130f2dd571646852bab1c889fc0acd260",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.593045,
+              0.601238
+            ],
+            "before_error_p50_p90": [
+              0.609797,
+              0.614492
+            ],
+            "best": [
+              24,
+              96
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              24,
+              31
+            ]
+          },
+          "render": 1,
+          "role": "wrong_reference",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 260,
+            "height": 270,
+            "luma_sha256": "330f0ed56ff38e7402e1b155f4a4c820cc6f95b300a15ba5d5a446d45d1314d5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6490eefbbca65ae09726201ffa2c70aefc968fb3306aee4df158a73b43de1ac9",
+            "sha256": "64d472801cc2002fbddee16633021708b5f894f1a73c5a0f195b8ecb786144ac",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 188,
+            "height": 270,
+            "luma_sha256": "0685f18ccd63def610a8d6a04a13641b7adbb36a1e980bc1f9c1f0c9f64dd39f",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "763c40d80d503dcf4c3a3af54f7f0e93bbcefc960807c1ce01822130b162a8c9",
+            "sha256": "6dda502e2b8ce182a2405f89147e0e0b56a3415ff1f5b7cc2fbbde392b7ccede",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [
+            [
+              65,
+              188
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 1,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 188,
+            "height": 270,
+            "luma_sha256": "39ce85c2f7a3915e97db6aee0cf7e7bc72efaba9a094190547045109fcbca90b",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "763c40d80d503dcf4c3a3af54f7f0e93bbcefc960807c1ce01822130b162a8c9",
+            "sha256": "f517abd4e768b07354d746c67ce8623f8ee334eb6d6f4c7431bb9b99cdad8a5d",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        }
+      ],
+      "wrong_example": 97
+    },
+    {
+      "example": 97,
+      "native": {
+        "authentic": {
+          "codec": "h264",
+          "color_space": "bt709",
+          "frames": 200,
+          "height": 2160,
+          "luma_sha256": "38294aa9e3b9940e913f0e1d76f6281b0e708ffd9c61e5d328f25903e349b6dd",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "0cce818d47be912a9e3ea0ab3761be512029b21ff3eea2e557f1305f971809a5",
+          "sha256": "4012598f56474f4cf5d799381b456a54b1a8d47c42901b2af767e326c2708ec0",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 3840
+        },
+        "fake_segments": {
+          "codec": "h264",
+          "color_space": null,
+          "frames": 125,
+          "height": 464,
+          "luma_sha256": "c125731e83444b91ce280254b3f60d1f0736630ed90c7395a1697856f341bbf1",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "bfc6f10ed2db1ef71e277527445487030130d35090f240515d04a4c7a5be853e",
+          "sha256": "bce73ec79674616e3976e1b34c7aefd3280127566f19098b45912954fdda6d05",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 832
+        }
+      },
+      "renders": [
+        {
+          "render": 0,
+          "replacement_start": 64,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  64
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.011738
+                ]
+              },
+              {
+                "bounds": [
+                  64,
+                  136
+                ],
+                "error_p50_p90": [
+                  0.012962,
+                  0.015281
+                ]
+              },
+              {
+                "bounds": [
+                  136,
+                  200
+                ],
+                "error_p50_p90": [
+                  0.008667,
+                  0.013071
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  64
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.011738
+                ]
+              },
+              {
+                "bounds": [
+                  64,
+                  136
+                ],
+                "error_p50_p90": [
+                  0.01288,
+                  0.015257
+                ]
+              },
+              {
+                "bounds": [
+                  136,
+                  272
+                ],
+                "error_p50_p90": [
+                  0.011571,
+                  0.014732
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  64
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.010276
+                ]
+              },
+              {
+                "bounds": [
+                  64,
+                  136
+                ],
+                "error_p50_p90": [
+                  0.011673,
+                  0.014679
+                ]
+              },
+              {
+                "bounds": [
+                  136,
+                  272
+                ],
+                "error_p50_p90": [
+                  0.011486,
+                  0.014556
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "render": 1,
+          "replacement_start": 122,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  122
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.009714
+                ]
+              },
+              {
+                "bounds": [
+                  122,
+                  176
+                ],
+                "error_p50_p90": [
+                  0.012959,
+                  0.01566
+                ]
+              },
+              {
+                "bounds": [
+                  176,
+                  200
+                ],
+                "error_p50_p90": [
+                  0.012196,
+                  0.01434
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  130
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.008597
+                ]
+              },
+              {
+                "bounds": [
+                  130,
+                  184
+                ],
+                "error_p50_p90": [
+                  0.012891,
+                  0.01529
+                ]
+              },
+              {
+                "bounds": [
+                  184,
+                  254
+                ],
+                "error_p50_p90": [
+                  0.011972,
+                  0.014327
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  130
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.007372
+                ]
+              },
+              {
+                "bounds": [
+                  130,
+                  184
+                ],
+                "error_p50_p90": [
+                  0.011237,
+                  0.014381
+                ]
+              },
+              {
+                "bounds": [
+                  184,
+                  254
+                ],
+                "error_p50_p90": [
+                  0.011799,
+                  0.013947
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "rows": [
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 200,
+            "height": 270,
+            "luma_sha256": "e48fcef79a7f76bf9a5aabca259bb0bfa692bc198af299738c004f99e78d58ac",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "0cce818d47be912a9e3ea0ab3761be512029b21ff3eea2e557f1305f971809a5",
+            "sha256": "a7493420fae46785cb282dde0402db8b900c630757d660de0412eb1a8e17cbed",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": null,
+          "role": "untouched_delivery",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 200,
+            "height": 270,
+            "luma_sha256": "e48fcef79a7f76bf9a5aabca259bb0bfa692bc198af299738c004f99e78d58ac",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "0cce818d47be912a9e3ea0ab3761be512029b21ff3eea2e557f1305f971809a5",
+            "sha256": "a7493420fae46785cb282dde0402db8b900c630757d660de0412eb1a8e17cbed",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 200,
+            "height": 270,
+            "luma_sha256": "e48fcef79a7f76bf9a5aabca259bb0bfa692bc198af299738c004f99e78d58ac",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "0cce818d47be912a9e3ea0ab3761be512029b21ff3eea2e557f1305f971809a5",
+            "sha256": "a7493420fae46785cb282dde0402db8b900c630757d660de0412eb1a8e17cbed",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.011571,
+              0.014732
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.011738
+            ],
+            "best": [
+              64,
+              136
+            ],
+            "bounds": [
+              64,
+              136
+            ],
+            "evidence": [
+              {
+                "frame": 63,
+                "gray_96_sha256": "19faed78edbb65cd0ddd66bcfcc4d794188253dacf54a536b39ca31bae0edd1d",
+                "pts": 32256
+              },
+              {
+                "frame": 100,
+                "gray_96_sha256": "fcfbfebf836b9eb03d93f366c497eac33e74776f2f0ebc54de45883013c26be7",
+                "pts": 51200
+              },
+              {
+                "frame": 136,
+                "gray_96_sha256": "40326700d2443e9a2cfdc0e014cd2554645f9f154a8fa612a80a01f8da64cf49",
+                "pts": 69632
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              64,
+              64
+            ]
+          },
+          "render": 0,
+          "role": "generated_insert",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 272,
+            "height": 270,
+            "luma_sha256": "4871820b1916cd6763899f099e0232b7eb688c91ca23e4b7ab8c915af316071e",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "85e2bfa89bcf6f8dc596b14a74f0f0931b4d4c2e41cc8d754198fbd1e76452d5",
+            "sha256": "9ae680a1aeedbad0bd0d1dfe243d835a4d029aa229cd3b3fc36b937e339a2b7c",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            64,
+            136
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 200,
+            "height": 270,
+            "luma_sha256": "e48fcef79a7f76bf9a5aabca259bb0bfa692bc198af299738c004f99e78d58ac",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "0cce818d47be912a9e3ea0ab3761be512029b21ff3eea2e557f1305f971809a5",
+            "sha256": "a7493420fae46785cb282dde0402db8b900c630757d660de0412eb1a8e17cbed",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.011486,
+              0.014556
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.010276
+            ],
+            "best": [
+              64,
+              136
+            ],
+            "bounds": [
+              64,
+              136
+            ],
+            "evidence": [
+              {
+                "frame": 63,
+                "gray_96_sha256": "37219b53dba96b71ab560cacd2276721b40f04a7ad9ab29f56cbfd33791bbcdc",
+                "pts": 32256
+              },
+              {
+                "frame": 100,
+                "gray_96_sha256": "878cd8e87b28e614ab1976d3745e18294c7a9898c498b18a2911ceb77f67dd9a",
+                "pts": 51200
+              },
+              {
+                "frame": 136,
+                "gray_96_sha256": "c47aa31a0052a316bc75434018ee4c01975376a56b644615a18f9888fe6766ad",
+                "pts": 69632
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              63,
+              64
+            ]
+          },
+          "render": 0,
+          "role": "matched_ordinary_insertion",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 272,
+            "height": 270,
+            "luma_sha256": "cd29609ee261ede765eac07d424dc4b1236008bc481284e703a0434d0e841959",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "85e2bfa89bcf6f8dc596b14a74f0f0931b4d4c2e41cc8d754198fbd1e76452d5",
+            "sha256": "9579831292c7107031399d7f8991e33caed62b5413511cba4a2005d19b4eb0bf",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            64,
+            136
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 200,
+            "height": 270,
+            "luma_sha256": "8880fe9afac4a1d3773e30603e5d2b1530a9c6f47f8eca43a03e7a6cd77cf646",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "0cce818d47be912a9e3ea0ab3761be512029b21ff3eea2e557f1305f971809a5",
+            "sha256": "c2bacae6966a9fcc8ad52637b8897d34fa538b3726f51c8768b0132a33b5a917",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.67046,
+              0.675439
+            ],
+            "before_error_p50_p90": [
+              0.666597,
+              0.671214
+            ],
+            "best": [
+              64,
+              136
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              59,
+              95
+            ]
+          },
+          "render": 0,
+          "role": "wrong_reference",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 272,
+            "height": 270,
+            "luma_sha256": "4871820b1916cd6763899f099e0232b7eb688c91ca23e4b7ab8c915af316071e",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "85e2bfa89bcf6f8dc596b14a74f0f0931b4d4c2e41cc8d754198fbd1e76452d5",
+            "sha256": "9ae680a1aeedbad0bd0d1dfe243d835a4d029aa229cd3b3fc36b937e339a2b7c",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 200,
+            "height": 270,
+            "luma_sha256": "e48fcef79a7f76bf9a5aabca259bb0bfa692bc198af299738c004f99e78d58ac",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "0cce818d47be912a9e3ea0ab3761be512029b21ff3eea2e557f1305f971809a5",
+            "sha256": "a7493420fae46785cb282dde0402db8b900c630757d660de0412eb1a8e17cbed",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [
+            [
+              35,
+              192
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 0,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 200,
+            "height": 270,
+            "luma_sha256": "494bef34f3eb8dd146344c610bde9ca1c66417fc7d7f00948611dcb2b9c22d2e",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "0cce818d47be912a9e3ea0ab3761be512029b21ff3eea2e557f1305f971809a5",
+            "sha256": "6095505be2240404af2b299d016239ff04c1b4d4a2b3742a2d72f73793bf6334",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 200,
+            "height": 270,
+            "luma_sha256": "e48fcef79a7f76bf9a5aabca259bb0bfa692bc198af299738c004f99e78d58ac",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "0cce818d47be912a9e3ea0ab3761be512029b21ff3eea2e557f1305f971809a5",
+            "sha256": "a7493420fae46785cb282dde0402db8b900c630757d660de0412eb1a8e17cbed",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.011972,
+              0.014327
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.008597
+            ],
+            "best": [
+              130,
+              184
+            ],
+            "bounds": [
+              130,
+              184
+            ],
+            "evidence": [
+              {
+                "frame": 129,
+                "gray_96_sha256": "17e3ff7896f22f238c7a6f9f127e218887e3179d8fec46669dbcc0746fc71c8b",
+                "pts": 66048
+              },
+              {
+                "frame": 157,
+                "gray_96_sha256": "d534a7e08b96253d70844d33cd865b3a29195c37426f98db7409431804022d9e",
+                "pts": 80384
+              },
+              {
+                "frame": 184,
+                "gray_96_sha256": "0eecd3d221112aecd5a4784e8fc557e7099e973ffca203c26c5a237eb6fad0ca",
+                "pts": 94208
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              130,
+              130
+            ]
+          },
+          "render": 1,
+          "role": "generated_insert",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 254,
+            "height": 270,
+            "luma_sha256": "574b43b4e0f658913cfc101deacd54a5f21dd592fd2758bdb1482e96dc95f199",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "42ec34c9fc90ae8268ca9692fa804edd167589a499a15e2b021db9e591d272c8",
+            "sha256": "a20849a6184f560e3655cfc9828112bad487d5df0c29bc979a354b34576afcd4",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            130,
+            184
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 200,
+            "height": 270,
+            "luma_sha256": "e48fcef79a7f76bf9a5aabca259bb0bfa692bc198af299738c004f99e78d58ac",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "0cce818d47be912a9e3ea0ab3761be512029b21ff3eea2e557f1305f971809a5",
+            "sha256": "a7493420fae46785cb282dde0402db8b900c630757d660de0412eb1a8e17cbed",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.011799,
+              0.013947
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.007372
+            ],
+            "best": [
+              130,
+              184
+            ],
+            "bounds": [
+              130,
+              184
+            ],
+            "evidence": [
+              {
+                "frame": 129,
+                "gray_96_sha256": "2310227b003b332249f5eeb0744fef9867df401752bface18a20f79b779e1a2c",
+                "pts": 66048
+              },
+              {
+                "frame": 157,
+                "gray_96_sha256": "e9af355872dd772834696a890dd8554a8a0a94e9240ca42801389925d074f6a0",
+                "pts": 80384
+              },
+              {
+                "frame": 184,
+                "gray_96_sha256": "ad243363ee00449642225c920cecb3555bf644d7e26268598a927d82dbf93647",
+                "pts": 94208
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              130,
+              130
+            ]
+          },
+          "render": 1,
+          "role": "matched_ordinary_insertion",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 254,
+            "height": 270,
+            "luma_sha256": "a515cebe5f2cdd00fc672904f2297d14af16bf32aa7f7e30636367ad113864ac",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "42ec34c9fc90ae8268ca9692fa804edd167589a499a15e2b021db9e591d272c8",
+            "sha256": "4fa8035a1477fd875503842cbc79e3e3c72cafde30921f6aeeb63165777fe33d",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            130,
+            184
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 200,
+            "height": 270,
+            "luma_sha256": "8880fe9afac4a1d3773e30603e5d2b1530a9c6f47f8eca43a03e7a6cd77cf646",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "0cce818d47be912a9e3ea0ab3761be512029b21ff3eea2e557f1305f971809a5",
+            "sha256": "c2bacae6966a9fcc8ad52637b8897d34fa538b3726f51c8768b0132a33b5a917",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.67031,
+              0.675966
+            ],
+            "before_error_p50_p90": [
+              0.668318,
+              0.672875
+            ],
+            "best": [
+              130,
+              184
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              120,
+              135
+            ]
+          },
+          "render": 1,
+          "role": "wrong_reference",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 254,
+            "height": 270,
+            "luma_sha256": "574b43b4e0f658913cfc101deacd54a5f21dd592fd2758bdb1482e96dc95f199",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "42ec34c9fc90ae8268ca9692fa804edd167589a499a15e2b021db9e591d272c8",
+            "sha256": "a20849a6184f560e3655cfc9828112bad487d5df0c29bc979a354b34576afcd4",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 200,
+            "height": 270,
+            "luma_sha256": "e48fcef79a7f76bf9a5aabca259bb0bfa692bc198af299738c004f99e78d58ac",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "0cce818d47be912a9e3ea0ab3761be512029b21ff3eea2e557f1305f971809a5",
+            "sha256": "a7493420fae46785cb282dde0402db8b900c630757d660de0412eb1a8e17cbed",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [
+            [
+              96,
+              192
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 1,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 200,
+            "height": 270,
+            "luma_sha256": "39ce2cfc31e66102505d0685d2d89ed416d391fbe69ae8bda51cd101315a2011",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "0cce818d47be912a9e3ea0ab3761be512029b21ff3eea2e557f1305f971809a5",
+            "sha256": "32e921ad470053059465a3b0f25a3a057f48bedcb8a9b09637c61013ba1d810f",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        }
+      ],
+      "wrong_example": 91
+    },
+    {
+      "example": 91,
+      "native": {
+        "authentic": {
+          "codec": "h264",
+          "color_space": "bt709",
+          "frames": 203,
+          "height": 2160,
+          "luma_sha256": "4cb47b856638b01027cdf52c58d8263456cb61586fd634278eb71f1e92249988",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+          "sha256": "b7079fbebf76ca8f01d32f49120f6b1cfd2b29fb2fbd12239d526af15af3f7c6",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 3840
+        },
+        "fake_segments": {
+          "codec": "h264",
+          "color_space": null,
+          "frames": 125,
+          "height": 464,
+          "luma_sha256": "f736161680d8122e38987be231d2c82ce0ef4dc492a092031a2b0b4d83ece394",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "bfc6f10ed2db1ef71e277527445487030130d35090f240515d04a4c7a5be853e",
+          "sha256": "c738df73cd0bd02a3ef405909233ed6818d2708658b459b2eb209ad2160a48cd",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 832
+        }
+      },
+      "renders": [
+        {
+          "render": 0,
+          "replacement_start": 72,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  72
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.006644
+                ]
+              },
+              {
+                "bounds": [
+                  72,
+                  174
+                ],
+                "error_p50_p90": [
+                  0.020562,
+                  0.022047
+                ]
+              },
+              {
+                "bounds": [
+                  174,
+                  203
+                ],
+                "error_p50_p90": [
+                  0.008646,
+                  0.011213
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  72
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.006644
+                ]
+              },
+              {
+                "bounds": [
+                  72,
+                  174
+                ],
+                "error_p50_p90": [
+                  0.020512,
+                  0.021882
+                ]
+              },
+              {
+                "bounds": [
+                  174,
+                  305
+                ],
+                "error_p50_p90": [
+                  0.008338,
+                  0.010507
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  72
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.00716
+                ]
+              },
+              {
+                "bounds": [
+                  72,
+                  174
+                ],
+                "error_p50_p90": [
+                  0.008091,
+                  0.010725
+                ]
+              },
+              {
+                "bounds": [
+                  174,
+                  305
+                ],
+                "error_p50_p90": [
+                  0.008322,
+                  0.010474
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "render": 1,
+          "replacement_start": 134,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  134
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.005485
+                ]
+              },
+              {
+                "bounds": [
+                  134,
+                  164
+                ],
+                "error_p50_p90": [
+                  0.020561,
+                  0.021131
+                ]
+              },
+              {
+                "bounds": [
+                  164,
+                  203
+                ],
+                "error_p50_p90": [
+                  0.007775,
+                  0.010595
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  134
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.005485
+                ]
+              },
+              {
+                "bounds": [
+                  134,
+                  164
+                ],
+                "error_p50_p90": [
+                  0.020389,
+                  0.022073
+                ]
+              },
+              {
+                "bounds": [
+                  164,
+                  233
+                ],
+                "error_p50_p90": [
+                  0.008535,
+                  0.010558
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  134
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.005609
+                ]
+              },
+              {
+                "bounds": [
+                  134,
+                  164
+                ],
+                "error_p50_p90": [
+                  0.008086,
+                  0.010545
+                ]
+              },
+              {
+                "bounds": [
+                  164,
+                  233
+                ],
+                "error_p50_p90": [
+                  0.008909,
+                  0.01022
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "rows": [
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "4a7e0b48daec5e3fe5cce6c013ca1838e116c68658778d4a0e35eb25212fae28",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "51a054a6c286b780d745e16802b18782f845f8f4478a59eab40d59f979a78d59",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": null,
+          "role": "untouched_delivery",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "4a7e0b48daec5e3fe5cce6c013ca1838e116c68658778d4a0e35eb25212fae28",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "51a054a6c286b780d745e16802b18782f845f8f4478a59eab40d59f979a78d59",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "4a7e0b48daec5e3fe5cce6c013ca1838e116c68658778d4a0e35eb25212fae28",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "51a054a6c286b780d745e16802b18782f845f8f4478a59eab40d59f979a78d59",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.008338,
+              0.010507
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.006644
+            ],
+            "best": [
+              72,
+              174
+            ],
+            "bounds": [
+              72,
+              174
+            ],
+            "evidence": [
+              {
+                "frame": 71,
+                "gray_96_sha256": "fbae6375f75927eb9c66bd9844149524089ced5dbaade68cea255cbf0d2659f9",
+                "pts": 36352
+              },
+              {
+                "frame": 123,
+                "gray_96_sha256": "5b34b782b1a3abff219d6fc1c531495d1402d9f9fa76dcd8670055cd125cc670",
+                "pts": 62976
+              },
+              {
+                "frame": 174,
+                "gray_96_sha256": "97d878525db11c36fe6530406065748950bcc22383756da29ed76004372cb415",
+                "pts": 89088
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              72,
+              72
+            ]
+          },
+          "render": 0,
+          "role": "generated_insert",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 305,
+            "height": 270,
+            "luma_sha256": "28a2857896bc9f318ece9d024f142aad7bea5b0a8709270b0546cfbdf727b36b",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "2b999f8c4a52ff30129af55ac134bfd70d7464c27e82a1a45f26089775463d8a",
+            "sha256": "a810b789afb40693f0050f8e6dcd1fa4d891053cf5e2f87f69e51128d20b1310",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            72,
+            174
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "4a7e0b48daec5e3fe5cce6c013ca1838e116c68658778d4a0e35eb25212fae28",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "51a054a6c286b780d745e16802b18782f845f8f4478a59eab40d59f979a78d59",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.008322,
+              0.010474
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.00716
+            ],
+            "best": [
+              72,
+              174
+            ],
+            "bounds": [
+              72,
+              174
+            ],
+            "evidence": [
+              {
+                "frame": 71,
+                "gray_96_sha256": "6fbcd2b29d5bc501015a4e5f2eccf613e96d693bbcf37a092585465d51535fa7",
+                "pts": 36352
+              },
+              {
+                "frame": 123,
+                "gray_96_sha256": "90a6ee86e371d49bdcf53fdf5db8bbd91a2c320062d300be2d8a8cf814b3651f",
+                "pts": 62976
+              },
+              {
+                "frame": 174,
+                "gray_96_sha256": "7871921c244633779b29a5e1283b0e51c548e07a6bc63f93c8d2bf47fb72f457",
+                "pts": 89088
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              72,
+              72
+            ]
+          },
+          "render": 0,
+          "role": "matched_ordinary_insertion",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 305,
+            "height": 270,
+            "luma_sha256": "c55fe6d93b12b5fab4c848fb386dc068469a55a57239040be29cf1b399f4dd5d",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "2b999f8c4a52ff30129af55ac134bfd70d7464c27e82a1a45f26089775463d8a",
+            "sha256": "8c515247d368a9baabd44af5a5e2f7114737977a75d1aa90c060729391264e13",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            72,
+            174
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "8e49ce457f17907316d175b811680a32d8cbba7a51439050267a90505e304ae8",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "d0301d1c78f43f20e7f4980b9f52d431fc8c93e2ff891f2e6f0bab8f4d4e72fb",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.663987,
+              0.667272
+            ],
+            "before_error_p50_p90": [
+              0.660555,
+              0.66953
+            ],
+            "best": [
+              165,
+              267
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              156,
+              176
+            ]
+          },
+          "render": 0,
+          "role": "wrong_reference",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 305,
+            "height": 270,
+            "luma_sha256": "28a2857896bc9f318ece9d024f142aad7bea5b0a8709270b0546cfbdf727b36b",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "2b999f8c4a52ff30129af55ac134bfd70d7464c27e82a1a45f26089775463d8a",
+            "sha256": "a810b789afb40693f0050f8e6dcd1fa4d891053cf5e2f87f69e51128d20b1310",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "4a7e0b48daec5e3fe5cce6c013ca1838e116c68658778d4a0e35eb25212fae28",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "51a054a6c286b780d745e16802b18782f845f8f4478a59eab40d59f979a78d59",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [
+            [
+              43,
+              203
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 0,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "b910dab399c29886c0ba99b3ffef6263b6ddf148b6baa8e1da4dd46cf4584886",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "4877d2c04a3ee8d33cca0bcab67f65ca647918af5797903049f1c3f89a403baa",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "4a7e0b48daec5e3fe5cce6c013ca1838e116c68658778d4a0e35eb25212fae28",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "51a054a6c286b780d745e16802b18782f845f8f4478a59eab40d59f979a78d59",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.008535,
+              0.010558
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.005485
+            ],
+            "best": [
+              134,
+              164
+            ],
+            "bounds": [
+              134,
+              164
+            ],
+            "evidence": [
+              {
+                "frame": 133,
+                "gray_96_sha256": "79eb8f5d8ec461e427380156b284a042d8bb287b3c54d21efe4d7b52d866faf7",
+                "pts": 68096
+              },
+              {
+                "frame": 149,
+                "gray_96_sha256": "7de18455cd32cb19bac8622f317737066c124e2966565847c246d9a4d22fd8ba",
+                "pts": 76288
+              },
+              {
+                "frame": 164,
+                "gray_96_sha256": "b59754dd81a6d055e7dd480d5a1d176bd907aba8fa904dc1ed28beaaa124e62a",
+                "pts": 83968
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              134,
+              134
+            ]
+          },
+          "render": 1,
+          "role": "generated_insert",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 233,
+            "height": 270,
+            "luma_sha256": "b2a3199765534b52837874284622cce365e4f7ffa370b7682b90de403ca603a3",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "91a5dc4435c15f92247fee82cb359884af9fae25d0d0a9d4758d8b71aaf7f6e8",
+            "sha256": "73e6c9added9c7b29e26a2d4665e38cb4c28304b3f473976dce9b52d56459cf8",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            134,
+            164
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "4a7e0b48daec5e3fe5cce6c013ca1838e116c68658778d4a0e35eb25212fae28",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "51a054a6c286b780d745e16802b18782f845f8f4478a59eab40d59f979a78d59",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.008909,
+              0.01022
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.005609
+            ],
+            "best": [
+              134,
+              164
+            ],
+            "bounds": [
+              134,
+              164
+            ],
+            "evidence": [
+              {
+                "frame": 133,
+                "gray_96_sha256": "ef0f4f9907353431880a22051d46f11b931a056c1e4fe67e28be1ee042c96bc1",
+                "pts": 68096
+              },
+              {
+                "frame": 149,
+                "gray_96_sha256": "be343abdc4c5a4a1606772b0300db751f785125a1373601f8e420ff2722e6138",
+                "pts": 76288
+              },
+              {
+                "frame": 164,
+                "gray_96_sha256": "b5b2b4bfeb0fe8df7f2563f444ad0b4d3e3ecd55ee2b78b8dcdc638ed8e6d753",
+                "pts": 83968
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              134,
+              134
+            ]
+          },
+          "render": 1,
+          "role": "matched_ordinary_insertion",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 233,
+            "height": 270,
+            "luma_sha256": "d0b768ecefe9b6101b2198ea5553927e86a9e9d5172b2bdf2190de0a18f6b76f",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "91a5dc4435c15f92247fee82cb359884af9fae25d0d0a9d4758d8b71aaf7f6e8",
+            "sha256": "345720681d92d80549cfadeb6b35dc9d0b125a4e8de1544704b29c9c8078bf1a",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            134,
+            164
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "8e49ce457f17907316d175b811680a32d8cbba7a51439050267a90505e304ae8",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "d0301d1c78f43f20e7f4980b9f52d431fc8c93e2ff891f2e6f0bab8f4d4e72fb",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.66493,
+              0.671669
+            ],
+            "before_error_p50_p90": [
+              0.66102,
+              0.668714
+            ],
+            "best": [
+              70,
+              100
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              62,
+              78
+            ]
+          },
+          "render": 1,
+          "role": "wrong_reference",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 233,
+            "height": 270,
+            "luma_sha256": "b2a3199765534b52837874284622cce365e4f7ffa370b7682b90de403ca603a3",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "91a5dc4435c15f92247fee82cb359884af9fae25d0d0a9d4758d8b71aaf7f6e8",
+            "sha256": "73e6c9added9c7b29e26a2d4665e38cb4c28304b3f473976dce9b52d56459cf8",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "4a7e0b48daec5e3fe5cce6c013ca1838e116c68658778d4a0e35eb25212fae28",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "51a054a6c286b780d745e16802b18782f845f8f4478a59eab40d59f979a78d59",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [
+            [
+              105,
+              192
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 1,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "6845a19b260c3c2d97643ff2a44b537fb7772319716bf4095275c895583cd268",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "ea8e8a284a0996696dbf1ba65ebfc2dffda2299cff9dfa28854a64a8cecd29ee",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        }
+      ],
+      "wrong_example": 82
+    },
+    {
+      "example": 82,
+      "native": {
+        "authentic": {
+          "codec": "h264",
+          "color_space": "bt709",
+          "frames": 203,
+          "height": 3840,
+          "luma_sha256": "7763eb661332bd24593d29b1af5b81f81b94db82babb4d22316f5922d0dc3427",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+          "sha256": "ebadb7c879f37797a3b1a4df8b6e692f81be0d179999c01fa18611db5fd9d5f5",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 2160
+        },
+        "fake_segments": {
+          "codec": "h264",
+          "color_space": null,
+          "frames": 125,
+          "height": 832,
+          "luma_sha256": "4bbb15f02fcba9c063f29bcca3f16365ba0707e7a85d35e9d5e96fe30cef63b0",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "bfc6f10ed2db1ef71e277527445487030130d35090f240515d04a4c7a5be853e",
+          "sha256": "09670650302e97d05d5c9501db746fd4b728a298456b0973591507083804f867",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 464
+        }
+      },
+      "renders": [
+        {
+          "render": 0,
+          "replacement_start": 80,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  80
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.011365
+                ]
+              },
+              {
+                "bounds": [
+                  80,
+                  110
+                ],
+                "error_p50_p90": [
+                  0.024502,
+                  0.035932
+                ]
+              },
+              {
+                "bounds": [
+                  110,
+                  203
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.018767
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  80
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.011365
+                ]
+              },
+              {
+                "bounds": [
+                  80,
+                  110
+                ],
+                "error_p50_p90": [
+                  0.0248,
+                  0.035571
+                ]
+              },
+              {
+                "bounds": [
+                  110,
+                  233
+                ],
+                "error_p50_p90": [
+                  0.018551,
+                  0.034231
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  80
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.011367
+                ]
+              },
+              {
+                "bounds": [
+                  80,
+                  110
+                ],
+                "error_p50_p90": [
+                  0.017104,
+                  0.025473
+                ]
+              },
+              {
+                "bounds": [
+                  110,
+                  233
+                ],
+                "error_p50_p90": [
+                  0.018573,
+                  0.034231
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "render": 1,
+          "replacement_start": 77,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  77
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.01374
+                ]
+              },
+              {
+                "bounds": [
+                  77,
+                  179
+                ],
+                "error_p50_p90": [
+                  0.024733,
+                  0.030954
+                ]
+              },
+              {
+                "bounds": [
+                  179,
+                  203
+                ],
+                "error_p50_p90": [
+                  0.025364,
+                  0.034231
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  138
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.005413
+                ]
+              },
+              {
+                "bounds": [
+                  138,
+                  240
+                ],
+                "error_p50_p90": [
+                  0.025602,
+                  0.034764
+                ]
+              },
+              {
+                "bounds": [
+                  240,
+                  305
+                ],
+                "error_p50_p90": [
+                  0.017717,
+                  0.025877
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  138
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.002401
+                ]
+              },
+              {
+                "bounds": [
+                  138,
+                  240
+                ],
+                "error_p50_p90": [
+                  0.017694,
+                  0.025965
+                ]
+              },
+              {
+                "bounds": [
+                  240,
+                  305
+                ],
+                "error_p50_p90": [
+                  0.017717,
+                  0.025877
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "rows": [
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 480,
+            "luma_sha256": "1734d50011c03131d72a35090c8727804676b8c3c9c8f9117b139139e2ebb068",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "b9764f139f9c798f083de5a0c880b313bef879786ffc578e1f7c291583f9d2c5",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": null,
+          "role": "untouched_delivery",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 480,
+            "luma_sha256": "1734d50011c03131d72a35090c8727804676b8c3c9c8f9117b139139e2ebb068",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "b9764f139f9c798f083de5a0c880b313bef879786ffc578e1f7c291583f9d2c5",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 480,
+            "luma_sha256": "1734d50011c03131d72a35090c8727804676b8c3c9c8f9117b139139e2ebb068",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "b9764f139f9c798f083de5a0c880b313bef879786ffc578e1f7c291583f9d2c5",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.018551,
+              0.034231
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.011365
+            ],
+            "best": [
+              80,
+              110
+            ],
+            "bounds": [
+              80,
+              110
+            ],
+            "evidence": [
+              {
+                "frame": 79,
+                "gray_96_sha256": "1af42852b710d4d9feb160c59d542e0d55b45681246b2c342e4375e4af1a2772",
+                "pts": 40448
+              },
+              {
+                "frame": 95,
+                "gray_96_sha256": "a89c72bf721b07587383909c992f0c980556559fa7603b3d3016ed9b91a2c3bd",
+                "pts": 48640
+              },
+              {
+                "frame": 110,
+                "gray_96_sha256": "a9c186a4350d7dd4b01cab802863a9d388dfc3aa1352156e78b9c2319132f695",
+                "pts": 56320
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              80,
+              81
+            ]
+          },
+          "render": 0,
+          "role": "generated_insert",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 233,
+            "height": 480,
+            "luma_sha256": "efa1c39d7094757887e95e26ec98f38c21b74d9e46ff4ad7569a27f0ef020108",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "91a5dc4435c15f92247fee82cb359884af9fae25d0d0a9d4758d8b71aaf7f6e8",
+            "sha256": "e548106e5d1c807e69d68974487bc95a2a3271c7678c3df778154770ead5689f",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "truth": [
+            80,
+            110
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 480,
+            "luma_sha256": "1734d50011c03131d72a35090c8727804676b8c3c9c8f9117b139139e2ebb068",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "b9764f139f9c798f083de5a0c880b313bef879786ffc578e1f7c291583f9d2c5",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.018573,
+              0.034231
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.011367
+            ],
+            "best": [
+              80,
+              110
+            ],
+            "bounds": [
+              80,
+              110
+            ],
+            "evidence": [
+              {
+                "frame": 79,
+                "gray_96_sha256": "ab80d859fc06756efb8888bb4885937002b581aeefd04d6a4170f2465eeea8ba",
+                "pts": 40448
+              },
+              {
+                "frame": 95,
+                "gray_96_sha256": "13fe13560a5159b32db7e53e9ca8a2a1e5e5aca821a7756bfbd9412be77fd5ad",
+                "pts": 48640
+              },
+              {
+                "frame": 110,
+                "gray_96_sha256": "3f13c1b4c75fe5c4858103095d721dc5c756fa3e4e147b504ca61f62b0ae4112",
+                "pts": 56320
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              79,
+              82
+            ]
+          },
+          "render": 0,
+          "role": "matched_ordinary_insertion",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 233,
+            "height": 480,
+            "luma_sha256": "7292485d8fab1a9ccf646aa633f6adfbbe3b6a3ba3229c8eae7609237526f6f0",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "91a5dc4435c15f92247fee82cb359884af9fae25d0d0a9d4758d8b71aaf7f6e8",
+            "sha256": "741bff982f110326c0b76a2a6a949b3bbfd4a487041b72f3fe507d729113062d",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "truth": [
+            80,
+            110
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 480,
+            "luma_sha256": "b9e5d95ef6e474ef81fc81081404f91b6d8714e4785927c7b1c0e2551f028f3d",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "40a83c9cd582130133789b4a647e1700a524379265972b9d4b6a15bde498eef5",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.534686,
+              0.540248
+            ],
+            "before_error_p50_p90": [
+              0.542795,
+              0.54845
+            ],
+            "best": [
+              80,
+              110
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              80,
+              82
+            ]
+          },
+          "render": 0,
+          "role": "wrong_reference",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 233,
+            "height": 480,
+            "luma_sha256": "efa1c39d7094757887e95e26ec98f38c21b74d9e46ff4ad7569a27f0ef020108",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "91a5dc4435c15f92247fee82cb359884af9fae25d0d0a9d4758d8b71aaf7f6e8",
+            "sha256": "e548106e5d1c807e69d68974487bc95a2a3271c7678c3df778154770ead5689f",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 480,
+            "luma_sha256": "1734d50011c03131d72a35090c8727804676b8c3c9c8f9117b139139e2ebb068",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "b9764f139f9c798f083de5a0c880b313bef879786ffc578e1f7c291583f9d2c5",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "existing_picture_ranges": [
+            [
+              53,
+              144
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 0,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 480,
+            "luma_sha256": "3e48b8f2548caaa63ac6a7d709258481db8f240a5ce51b5355d474e1700a5962",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "ca2a01bce810e11afb54e71d8635bcdb1fc128c3965ad72d188d313dd856586a",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 480,
+            "luma_sha256": "1734d50011c03131d72a35090c8727804676b8c3c9c8f9117b139139e2ebb068",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "b9764f139f9c798f083de5a0c880b313bef879786ffc578e1f7c291583f9d2c5",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.017717,
+              0.025877
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.005413
+            ],
+            "best": [
+              138,
+              240
+            ],
+            "bounds": [
+              138,
+              240
+            ],
+            "evidence": [
+              {
+                "frame": 137,
+                "gray_96_sha256": "84f535541c3f7ca67ad266e9ec0731ed8d4cdf7a5920e51d70834011fa382a74",
+                "pts": 70144
+              },
+              {
+                "frame": 189,
+                "gray_96_sha256": "6e3c0f533c5d500e6305a2578801180ae23e41e0ca1ce8fa53cdf8fa98347c46",
+                "pts": 96768
+              },
+              {
+                "frame": 240,
+                "gray_96_sha256": "9704c5760ba3107115a3667801a11fa6b0ca909af5a684ba39bcbf4b552c22f8",
+                "pts": 122880
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              138,
+              140
+            ]
+          },
+          "render": 1,
+          "role": "generated_insert",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 305,
+            "height": 480,
+            "luma_sha256": "7e0a81820218d97170c6d73efec73b1d43a3abed81c66839c72f7795f6273572",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "2b999f8c4a52ff30129af55ac134bfd70d7464c27e82a1a45f26089775463d8a",
+            "sha256": "e72d1303b85e88e077c08a78faadffe2030308d560aae257a5d8bf45689a0633",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "truth": [
+            138,
+            240
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 480,
+            "luma_sha256": "1734d50011c03131d72a35090c8727804676b8c3c9c8f9117b139139e2ebb068",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "b9764f139f9c798f083de5a0c880b313bef879786ffc578e1f7c291583f9d2c5",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.017625,
+              0.025249
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.003103
+            ],
+            "best": [
+              139,
+              241
+            ],
+            "bounds": null,
+            "status": "ambiguous_insertion",
+            "uncertain_starts": [
+              137,
+              145
+            ]
+          },
+          "render": 1,
+          "role": "matched_ordinary_insertion",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 305,
+            "height": 480,
+            "luma_sha256": "be439a843e98c0c297bf1d569212bea0bb211d2e0cd69c0a269e5bce894cac17",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "2b999f8c4a52ff30129af55ac134bfd70d7464c27e82a1a45f26089775463d8a",
+            "sha256": "d9cdc695e2172e19b39c3ef4e1e86d6bd31c287459e1d6707d406a839ee392d8",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "truth": [
+            138,
+            240
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 480,
+            "luma_sha256": "b9e5d95ef6e474ef81fc81081404f91b6d8714e4785927c7b1c0e2551f028f3d",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "40a83c9cd582130133789b4a647e1700a524379265972b9d4b6a15bde498eef5",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.532399,
+              0.537275
+            ],
+            "before_error_p50_p90": [
+              0.540252,
+              0.54664
+            ],
+            "best": [
+              139,
+              241
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              137,
+              142
+            ]
+          },
+          "render": 1,
+          "role": "wrong_reference",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 305,
+            "height": 480,
+            "luma_sha256": "7e0a81820218d97170c6d73efec73b1d43a3abed81c66839c72f7795f6273572",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "2b999f8c4a52ff30129af55ac134bfd70d7464c27e82a1a45f26089775463d8a",
+            "sha256": "e72d1303b85e88e077c08a78faadffe2030308d560aae257a5d8bf45689a0633",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 480,
+            "luma_sha256": "1734d50011c03131d72a35090c8727804676b8c3c9c8f9117b139139e2ebb068",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "b9764f139f9c798f083de5a0c880b313bef879786ffc578e1f7c291583f9d2c5",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "existing_picture_ranges": [
+            [
+              48,
+              203
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 1,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 480,
+            "luma_sha256": "06bddaf229d379f2ae3a21ff8bc48e3a2c1e296d0649f5eacb6c761a797e6a08",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "b6443c5332db35223a24782b8c9bf652e76faba1cc3ae02093cb927e72f985cc",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 270
+          },
+          "truth": null
+        }
+      ],
+      "wrong_example": 71
+    },
+    {
+      "example": 71,
+      "native": {
+        "authentic": {
+          "codec": "h264",
+          "color_space": "bt709",
+          "frames": 229,
+          "height": 2160,
+          "luma_sha256": "b566999c512853ab3a60225ed84ef57f3b620dda28ec67c01524cee40f251624",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "e5df92b8f0eae70b095a1868433ca223ed5728e36fd0de946c2ad7658038d370",
+          "sha256": "d0a09d469936a4224f9b499784d1a147484a0469ace1848d71b31a3244af30bc",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 3840
+        },
+        "fake_segments": {
+          "codec": "h264",
+          "color_space": null,
+          "frames": 125,
+          "height": 464,
+          "luma_sha256": "60503758866bb0dea478a0aadf6f5426024b05a140e91613f1be47c0a6694e06",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "bfc6f10ed2db1ef71e277527445487030130d35090f240515d04a4c7a5be853e",
+          "sha256": "ca9122448531f9d726dc99eab4b51a62099d3168df5d85e2be2d898ac772c1ce",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 832
+        }
+      },
+      "renders": [
+        {
+          "render": 0,
+          "replacement_start": 88,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  88
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.004617
+                ]
+              },
+              {
+                "bounds": [
+                  88,
+                  142
+                ],
+                "error_p50_p90": [
+                  0.008154,
+                  0.008596
+                ]
+              },
+              {
+                "bounds": [
+                  142,
+                  229
+                ],
+                "error_p50_p90": [
+                  0.002521,
+                  0.004672
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  88
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.004617
+                ]
+              },
+              {
+                "bounds": [
+                  88,
+                  142
+                ],
+                "error_p50_p90": [
+                  0.008167,
+                  0.008571
+                ]
+              },
+              {
+                "bounds": [
+                  142,
+                  283
+                ],
+                "error_p50_p90": [
+                  0.005383,
+                  0.007339
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  88
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.005029
+                ]
+              },
+              {
+                "bounds": [
+                  88,
+                  142
+                ],
+                "error_p50_p90": [
+                  0.005712,
+                  0.007401
+                ]
+              },
+              {
+                "bounds": [
+                  142,
+                  283
+                ],
+                "error_p50_p90": [
+                  0.00536,
+                  0.007263
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "render": 1,
+          "replacement_start": 133,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  133
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.003624
+                ]
+              },
+              {
+                "bounds": [
+                  133,
+                  205
+                ],
+                "error_p50_p90": [
+                  0.007999,
+                  0.008543
+                ]
+              },
+              {
+                "bounds": [
+                  205,
+                  229
+                ],
+                "error_p50_p90": [
+                  0.006673,
+                  0.00827
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  142
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.003624
+                ]
+              },
+              {
+                "bounds": [
+                  142,
+                  214
+                ],
+                "error_p50_p90": [
+                  0.008004,
+                  0.008484
+                ]
+              },
+              {
+                "bounds": [
+                  214,
+                  301
+                ],
+                "error_p50_p90": [
+                  0.005353,
+                  0.007362
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  142
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.003365
+                ]
+              },
+              {
+                "bounds": [
+                  142,
+                  214
+                ],
+                "error_p50_p90": [
+                  0.0054,
+                  0.007026
+                ]
+              },
+              {
+                "bounds": [
+                  214,
+                  301
+                ],
+                "error_p50_p90": [
+                  0.005627,
+                  0.007384
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "rows": [
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 229,
+            "height": 270,
+            "luma_sha256": "f65fd2e161b16a4cf589e2dabc3449bdeb5655a631565e1d181f6d62661d8509",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e5df92b8f0eae70b095a1868433ca223ed5728e36fd0de946c2ad7658038d370",
+            "sha256": "ae69ac3e102c0702ca19a42954fe34f21cc9e2a893c0d6385819deba4b9c6a5f",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": null,
+          "role": "untouched_delivery",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 229,
+            "height": 270,
+            "luma_sha256": "f65fd2e161b16a4cf589e2dabc3449bdeb5655a631565e1d181f6d62661d8509",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e5df92b8f0eae70b095a1868433ca223ed5728e36fd0de946c2ad7658038d370",
+            "sha256": "ae69ac3e102c0702ca19a42954fe34f21cc9e2a893c0d6385819deba4b9c6a5f",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 229,
+            "height": 270,
+            "luma_sha256": "f65fd2e161b16a4cf589e2dabc3449bdeb5655a631565e1d181f6d62661d8509",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e5df92b8f0eae70b095a1868433ca223ed5728e36fd0de946c2ad7658038d370",
+            "sha256": "ae69ac3e102c0702ca19a42954fe34f21cc9e2a893c0d6385819deba4b9c6a5f",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.005383,
+              0.007339
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.004617
+            ],
+            "best": [
+              88,
+              142
+            ],
+            "bounds": [
+              88,
+              142
+            ],
+            "evidence": [
+              {
+                "frame": 87,
+                "gray_96_sha256": "1ff4fe54d9f851a513921c1dbdd884acf19f7f3875847db8f9cea0593192fda4",
+                "pts": 44544
+              },
+              {
+                "frame": 115,
+                "gray_96_sha256": "a2a91afde62bd329df4bafa6ac21cbf7aab6ab1d0862bab6c674dea0a548fc8c",
+                "pts": 58880
+              },
+              {
+                "frame": 142,
+                "gray_96_sha256": "8203b1199f0e57bde2b0674b45376adf09640661df4cca616eb081ad471522f2",
+                "pts": 72704
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              88,
+              89
+            ]
+          },
+          "render": 0,
+          "role": "generated_insert",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 283,
+            "height": 270,
+            "luma_sha256": "a80cde74a178ea46fa72ed616062a196c00ba656f2071200fa2b01b8c2bfb72e",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "2ad5f368cfe63c817d580029ef3cc48110c50300dcf0dbad255898e4b3f4c327",
+            "sha256": "db4d4c616596eef977fc2ea6f5a3979fdbbb103b321a8e441f6777d97b47b819",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            88,
+            142
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 229,
+            "height": 270,
+            "luma_sha256": "f65fd2e161b16a4cf589e2dabc3449bdeb5655a631565e1d181f6d62661d8509",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e5df92b8f0eae70b095a1868433ca223ed5728e36fd0de946c2ad7658038d370",
+            "sha256": "ae69ac3e102c0702ca19a42954fe34f21cc9e2a893c0d6385819deba4b9c6a5f",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.00536,
+              0.007263
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.005029
+            ],
+            "best": [
+              88,
+              142
+            ],
+            "bounds": [
+              88,
+              142
+            ],
+            "evidence": [
+              {
+                "frame": 87,
+                "gray_96_sha256": "bd06542799d3bd8412e37760edcaf78642624714842d478e1b75af51203659c4",
+                "pts": 44544
+              },
+              {
+                "frame": 115,
+                "gray_96_sha256": "b4f86b61997885ebd0dbe1e1cf71bcdb4ba16f80161456ba018d4d85ad812d4f",
+                "pts": 58880
+              },
+              {
+                "frame": 142,
+                "gray_96_sha256": "c7dd413c3644ed683bed8c8d167a427db1e1f9a1aab51419ba44421cab48774b",
+                "pts": 72704
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              88,
+              88
+            ]
+          },
+          "render": 0,
+          "role": "matched_ordinary_insertion",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 283,
+            "height": 270,
+            "luma_sha256": "8ae9166c6feca1c5fd5cdcb1ed8041345b439dcf390d8b8e2bd9417e9e357da9",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "2ad5f368cfe63c817d580029ef3cc48110c50300dcf0dbad255898e4b3f4c327",
+            "sha256": "09bc710603d90ebd0cdd534215e3bb4e385e64e78df53cf2380a66bf9c8c023b",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            88,
+            142
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 229,
+            "height": 270,
+            "luma_sha256": "3fcd53244e028c72a57e504e6c68df8aa00611f037d0bfdf76a3e5efd76c94a1",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e5df92b8f0eae70b095a1868433ca223ed5728e36fd0de946c2ad7658038d370",
+            "sha256": "e322897f3d178dbd7363b537fffcd6ac81a05c665bd91d7847c9e19764098269",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.461764,
+              0.464367
+            ],
+            "before_error_p50_p90": [
+              0.458895,
+              0.463447
+            ],
+            "best": [
+              205,
+              259
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              198,
+              205
+            ]
+          },
+          "render": 0,
+          "role": "wrong_reference",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 283,
+            "height": 270,
+            "luma_sha256": "a80cde74a178ea46fa72ed616062a196c00ba656f2071200fa2b01b8c2bfb72e",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "2ad5f368cfe63c817d580029ef3cc48110c50300dcf0dbad255898e4b3f4c327",
+            "sha256": "db4d4c616596eef977fc2ea6f5a3979fdbbb103b321a8e441f6777d97b47b819",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 229,
+            "height": 270,
+            "luma_sha256": "f65fd2e161b16a4cf589e2dabc3449bdeb5655a631565e1d181f6d62661d8509",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e5df92b8f0eae70b095a1868433ca223ed5728e36fd0de946c2ad7658038d370",
+            "sha256": "ae69ac3e102c0702ca19a42954fe34f21cc9e2a893c0d6385819deba4b9c6a5f",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [
+            [
+              58,
+              192
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 0,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 229,
+            "height": 270,
+            "luma_sha256": "06e61c8653e5ff0244511f71fcb81e6b3b5144f534bcab40d653252e656b6a0c",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e5df92b8f0eae70b095a1868433ca223ed5728e36fd0de946c2ad7658038d370",
+            "sha256": "022c6a20a9aea0464d8c1d0963f3dac746fce30af088587e14bede0c4558d2b0",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 229,
+            "height": 270,
+            "luma_sha256": "f65fd2e161b16a4cf589e2dabc3449bdeb5655a631565e1d181f6d62661d8509",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e5df92b8f0eae70b095a1868433ca223ed5728e36fd0de946c2ad7658038d370",
+            "sha256": "ae69ac3e102c0702ca19a42954fe34f21cc9e2a893c0d6385819deba4b9c6a5f",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.005353,
+              0.007362
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.003624
+            ],
+            "best": [
+              142,
+              214
+            ],
+            "bounds": [
+              142,
+              214
+            ],
+            "evidence": [
+              {
+                "frame": 141,
+                "gray_96_sha256": "21c1bedf9a7e7d4af2ee22538ab311bc3abc002690623ac767d09e2fdf9b9370",
+                "pts": 72192
+              },
+              {
+                "frame": 178,
+                "gray_96_sha256": "39ce57940997deff0357604d912bf12a66c0f41de1a7d1b7cbe9dd64b76bd0b0",
+                "pts": 91136
+              },
+              {
+                "frame": 214,
+                "gray_96_sha256": "42acca1c7e92b5d58999767710fd75acc6d6c5230475d725a5b693ccff681ca5",
+                "pts": 109568
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              142,
+              142
+            ]
+          },
+          "render": 1,
+          "role": "generated_insert",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 301,
+            "height": 270,
+            "luma_sha256": "e0872a6ff7b4e566d825b2feb8533a12df27a924144de5611c7a808d58d8713e",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "35d23576bb16efb49256764a77b34b654f37065aa296f6f5ae73cb9e1b72ddbb",
+            "sha256": "bc3d705f151631d39e840f73903dcdc6f8ae1ab21435297a04cee1be43becfbe",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            142,
+            214
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 229,
+            "height": 270,
+            "luma_sha256": "f65fd2e161b16a4cf589e2dabc3449bdeb5655a631565e1d181f6d62661d8509",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e5df92b8f0eae70b095a1868433ca223ed5728e36fd0de946c2ad7658038d370",
+            "sha256": "ae69ac3e102c0702ca19a42954fe34f21cc9e2a893c0d6385819deba4b9c6a5f",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.005627,
+              0.007384
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.003365
+            ],
+            "best": [
+              142,
+              214
+            ],
+            "bounds": [
+              142,
+              214
+            ],
+            "evidence": [
+              {
+                "frame": 141,
+                "gray_96_sha256": "adc0f7e0a94a5e1bffbf030ab3a93891f3c82dfacbe90e12baea47da3b65aeb0",
+                "pts": 72192
+              },
+              {
+                "frame": 178,
+                "gray_96_sha256": "249c5a98f4ef99a8bc54c9b35a050d293983c5c7a2fb9d82058e3d3ebbbc1bc0",
+                "pts": 91136
+              },
+              {
+                "frame": 214,
+                "gray_96_sha256": "ea1719d7893b114ac8159bd888346d8e6758bf07521fd3af4adfc8ea434373f0",
+                "pts": 109568
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              142,
+              142
+            ]
+          },
+          "render": 1,
+          "role": "matched_ordinary_insertion",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 301,
+            "height": 270,
+            "luma_sha256": "d4403f88308ed77df37f5f47d6e487691a163b28eb212efb56c071884aafea67",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "35d23576bb16efb49256764a77b34b654f37065aa296f6f5ae73cb9e1b72ddbb",
+            "sha256": "9bf58342146fd0a45a824e07243c500412d628440a1e084ed1f19c004b3a2a92",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            142,
+            214
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 229,
+            "height": 270,
+            "luma_sha256": "3fcd53244e028c72a57e504e6c68df8aa00611f037d0bfdf76a3e5efd76c94a1",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e5df92b8f0eae70b095a1868433ca223ed5728e36fd0de946c2ad7658038d370",
+            "sha256": "e322897f3d178dbd7363b537fffcd6ac81a05c665bd91d7847c9e19764098269",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.461514,
+              0.465064
+            ],
+            "before_error_p50_p90": [
+              0.45946,
+              0.463508
+            ],
+            "best": [
+              205,
+              277
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              185,
+              205
+            ]
+          },
+          "render": 1,
+          "role": "wrong_reference",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 301,
+            "height": 270,
+            "luma_sha256": "e0872a6ff7b4e566d825b2feb8533a12df27a924144de5611c7a808d58d8713e",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "35d23576bb16efb49256764a77b34b654f37065aa296f6f5ae73cb9e1b72ddbb",
+            "sha256": "bc3d705f151631d39e840f73903dcdc6f8ae1ab21435297a04cee1be43becfbe",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 229,
+            "height": 270,
+            "luma_sha256": "f65fd2e161b16a4cf589e2dabc3449bdeb5655a631565e1d181f6d62661d8509",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e5df92b8f0eae70b095a1868433ca223ed5728e36fd0de946c2ad7658038d370",
+            "sha256": "ae69ac3e102c0702ca19a42954fe34f21cc9e2a893c0d6385819deba4b9c6a5f",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [
+            [
+              106,
+              229
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 1,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 229,
+            "height": 270,
+            "luma_sha256": "fd474e2c55fe9721f8c033499021be1d96e5ea9ff6684980979e2101ea964012",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e5df92b8f0eae70b095a1868433ca223ed5728e36fd0de946c2ad7658038d370",
+            "sha256": "6df59e92d4dcded7d9294a3f16221b67a8970c2caf6ef0c6fc18a2a2ce4fdc12",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        }
+      ],
+      "wrong_example": 70
+    },
+    {
+      "example": 70,
+      "native": {
+        "authentic": {
+          "codec": "h264",
+          "color_space": "bt709",
+          "frames": 235,
+          "height": 2160,
+          "luma_sha256": "43b17face57fdde9ace402b515920b87d85f1a996bc9a73466d4c3016c86577a",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "e96b8a735a891d7ffba26f1358ac3327e327a70e19a1d9c57fd5bc1dd9415264",
+          "sha256": "611edd85e3b49b05ec6fc4ee411609e721682ab00b0a9c13d643458f4dfe2fc6",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 3840
+        },
+        "fake_segments": {
+          "codec": "h264",
+          "color_space": null,
+          "frames": 125,
+          "height": 464,
+          "luma_sha256": "633147310bba86db6f3b53d9043e22a7ffce37e2fc06b1d48d647357620bb2d9",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "bfc6f10ed2db1ef71e277527445487030130d35090f240515d04a4c7a5be853e",
+          "sha256": "01ccf47c326c0b6afddaccb74d3451ad1c030666a8537654270d832016955d21",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 832
+        }
+      },
+      "renders": [
+        {
+          "render": 0,
+          "replacement_start": 96,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  96
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.003264
+                ]
+              },
+              {
+                "bounds": [
+                  96,
+                  168
+                ],
+                "error_p50_p90": [
+                  0.01134,
+                  0.018796
+                ]
+              },
+              {
+                "bounds": [
+                  168,
+                  235
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.006917
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  96
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.003264
+                ]
+              },
+              {
+                "bounds": [
+                  96,
+                  168
+                ],
+                "error_p50_p90": [
+                  0.01134,
+                  0.019131
+                ]
+              },
+              {
+                "bounds": [
+                  168,
+                  307
+                ],
+                "error_p50_p90": [
+                  0.004677,
+                  0.006815
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  96
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.003192
+                ]
+              },
+              {
+                "bounds": [
+                  96,
+                  168
+                ],
+                "error_p50_p90": [
+                  0.004093,
+                  0.006965
+                ]
+              },
+              {
+                "bounds": [
+                  168,
+                  307
+                ],
+                "error_p50_p90": [
+                  0.004676,
+                  0.006688
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "render": 1,
+          "replacement_start": 146,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  146
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.002644
+                ]
+              },
+              {
+                "bounds": [
+                  146,
+                  200
+                ],
+                "error_p50_p90": [
+                  0.009533,
+                  0.016748
+                ]
+              },
+              {
+                "bounds": [
+                  200,
+                  235
+                ],
+                "error_p50_p90": [
+                  0.004409,
+                  0.006122
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  146
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.002644
+                ]
+              },
+              {
+                "bounds": [
+                  146,
+                  200
+                ],
+                "error_p50_p90": [
+                  0.01,
+                  0.016793
+                ]
+              },
+              {
+                "bounds": [
+                  200,
+                  289
+                ],
+                "error_p50_p90": [
+                  0.004852,
+                  0.006581
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  146
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.002879
+                ]
+              },
+              {
+                "bounds": [
+                  146,
+                  200
+                ],
+                "error_p50_p90": [
+                  0.005033,
+                  0.007301
+                ]
+              },
+              {
+                "bounds": [
+                  200,
+                  289
+                ],
+                "error_p50_p90": [
+                  0.004714,
+                  0.006232
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "rows": [
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 235,
+            "height": 270,
+            "luma_sha256": "9e2b2ba6a0ebfd3302bf567874ea3a1fecf6244e603e7d90439636a45db8fd46",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e96b8a735a891d7ffba26f1358ac3327e327a70e19a1d9c57fd5bc1dd9415264",
+            "sha256": "c74e62f3941ce3dd82b19decb9ad5845607a9291449329b5be85f9376b32c851",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": null,
+          "role": "untouched_delivery",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 235,
+            "height": 270,
+            "luma_sha256": "9e2b2ba6a0ebfd3302bf567874ea3a1fecf6244e603e7d90439636a45db8fd46",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e96b8a735a891d7ffba26f1358ac3327e327a70e19a1d9c57fd5bc1dd9415264",
+            "sha256": "c74e62f3941ce3dd82b19decb9ad5845607a9291449329b5be85f9376b32c851",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 235,
+            "height": 270,
+            "luma_sha256": "9e2b2ba6a0ebfd3302bf567874ea3a1fecf6244e603e7d90439636a45db8fd46",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e96b8a735a891d7ffba26f1358ac3327e327a70e19a1d9c57fd5bc1dd9415264",
+            "sha256": "c74e62f3941ce3dd82b19decb9ad5845607a9291449329b5be85f9376b32c851",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.004677,
+              0.006815
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.003264
+            ],
+            "best": [
+              96,
+              168
+            ],
+            "bounds": [
+              96,
+              168
+            ],
+            "evidence": [
+              {
+                "frame": 95,
+                "gray_96_sha256": "bc24699ba3e8032a0fc702573bc5072ecf6b5a2782436a22aa9cf8325e98536d",
+                "pts": 48640
+              },
+              {
+                "frame": 132,
+                "gray_96_sha256": "d8019e0df217513c0d87a302e332f9871d9f72bea40af677be0eece8caeb76fc",
+                "pts": 67584
+              },
+              {
+                "frame": 168,
+                "gray_96_sha256": "e5ceb3297044f8dd26e5509bd7080cb6ea182858f312bf1b4f4734fefa4e71cf",
+                "pts": 86016
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              96,
+              98
+            ]
+          },
+          "render": 0,
+          "role": "generated_insert",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 307,
+            "height": 270,
+            "luma_sha256": "aed7e09a969db74c83ae4da2c7aa5e9d85e64dd35368db8966bc0c4e1aad2598",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "699ffb076a6ebf2ea9143899d48ff292286dd5be2c2ca1f77d885ffdbca062c9",
+            "sha256": "15492f888b80c3122e774ede2f297ac6d0caf3ae56410a8cbbe4421ececf2710",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            96,
+            168
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 235,
+            "height": 270,
+            "luma_sha256": "9e2b2ba6a0ebfd3302bf567874ea3a1fecf6244e603e7d90439636a45db8fd46",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e96b8a735a891d7ffba26f1358ac3327e327a70e19a1d9c57fd5bc1dd9415264",
+            "sha256": "c74e62f3941ce3dd82b19decb9ad5845607a9291449329b5be85f9376b32c851",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.004676,
+              0.006688
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.003192
+            ],
+            "best": [
+              96,
+              168
+            ],
+            "bounds": [
+              96,
+              168
+            ],
+            "evidence": [
+              {
+                "frame": 95,
+                "gray_96_sha256": "3f2d1d9fc387047f9b3d21a2b4240162c77b4d2c71a8e873e88c9507de0a7761",
+                "pts": 48640
+              },
+              {
+                "frame": 132,
+                "gray_96_sha256": "125f72c889074c21813614dc55d25c857f584f27181e2ec62c6c0313730166e6",
+                "pts": 67584
+              },
+              {
+                "frame": 168,
+                "gray_96_sha256": "818d394e940edf74b6493f8e46a56b1696db2dcae0968301d0b01e031bd5e7ea",
+                "pts": 86016
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              96,
+              96
+            ]
+          },
+          "render": 0,
+          "role": "matched_ordinary_insertion",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 307,
+            "height": 270,
+            "luma_sha256": "2ec0cea26792ee6ba0e408861b805551667d324e925aca38bdb3b6b018e9ee23",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "699ffb076a6ebf2ea9143899d48ff292286dd5be2c2ca1f77d885ffdbca062c9",
+            "sha256": "0acd6d83b8a232e16aae4b814a8b6e71e9e42ac3ca5fe023c39325bcecfaa04a",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            96,
+            168
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 235,
+            "height": 270,
+            "luma_sha256": "3e1cdd36ecbd4a31c5e61a2c688b537fbf7dda02171749c1b2993d932cb2b0fd",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e96b8a735a891d7ffba26f1358ac3327e327a70e19a1d9c57fd5bc1dd9415264",
+            "sha256": "5f779004cf3d16669f3dcd82fbcc1419e406e44bd983ac5c262e701a107ba9c2",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.675752,
+              0.686691
+            ],
+            "before_error_p50_p90": [
+              0.702967,
+              0.705207
+            ],
+            "best": [
+              24,
+              96
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              24,
+              26
+            ]
+          },
+          "render": 0,
+          "role": "wrong_reference",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 307,
+            "height": 270,
+            "luma_sha256": "aed7e09a969db74c83ae4da2c7aa5e9d85e64dd35368db8966bc0c4e1aad2598",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "699ffb076a6ebf2ea9143899d48ff292286dd5be2c2ca1f77d885ffdbca062c9",
+            "sha256": "15492f888b80c3122e774ede2f297ac6d0caf3ae56410a8cbbe4421ececf2710",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 235,
+            "height": 270,
+            "luma_sha256": "9e2b2ba6a0ebfd3302bf567874ea3a1fecf6244e603e7d90439636a45db8fd46",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e96b8a735a891d7ffba26f1358ac3327e327a70e19a1d9c57fd5bc1dd9415264",
+            "sha256": "c74e62f3941ce3dd82b19decb9ad5845607a9291449329b5be85f9376b32c851",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [
+            [
+              66,
+              192
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 0,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 235,
+            "height": 270,
+            "luma_sha256": "ba3f10a6e09eab8611e29473aaaf5da0f28453c9457141b14eb8b14847fb1c3c",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e96b8a735a891d7ffba26f1358ac3327e327a70e19a1d9c57fd5bc1dd9415264",
+            "sha256": "b8ec1893da807e9f0f841112e28ebe3366cef20ef01f63c19757d7d9abcffed6",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 235,
+            "height": 270,
+            "luma_sha256": "9e2b2ba6a0ebfd3302bf567874ea3a1fecf6244e603e7d90439636a45db8fd46",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e96b8a735a891d7ffba26f1358ac3327e327a70e19a1d9c57fd5bc1dd9415264",
+            "sha256": "c74e62f3941ce3dd82b19decb9ad5845607a9291449329b5be85f9376b32c851",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.004852,
+              0.006581
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.002644
+            ],
+            "best": [
+              146,
+              200
+            ],
+            "bounds": [
+              146,
+              200
+            ],
+            "evidence": [
+              {
+                "frame": 145,
+                "gray_96_sha256": "95855e8f417a2942cc644aac5a774affedb4b42860eba4a5fcf0bca780fdd96a",
+                "pts": 74240
+              },
+              {
+                "frame": 173,
+                "gray_96_sha256": "14aee176b5dac1d075f03451d28ba34688f4a23e73bcb3c89bb8609157c2db85",
+                "pts": 88576
+              },
+              {
+                "frame": 200,
+                "gray_96_sha256": "d64a100ad095ac70664f5189428f21e5e5ebec2662ffc25f5f4b1f12deee1853",
+                "pts": 102400
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              146,
+              146
+            ]
+          },
+          "render": 1,
+          "role": "generated_insert",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 289,
+            "height": 270,
+            "luma_sha256": "9220b734e408101cce14cb08321996b3cc2fe198a0f21b5a69a367b12ad3938a",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "487dded654caa68f5b541373ff27db0cc68cc04d082038eb61f56aeb2a289cb0",
+            "sha256": "8749cbdd88b370910170bfa7803cae88ab6565e5524b8e289421785de25cd5e9",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            146,
+            200
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 235,
+            "height": 270,
+            "luma_sha256": "9e2b2ba6a0ebfd3302bf567874ea3a1fecf6244e603e7d90439636a45db8fd46",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e96b8a735a891d7ffba26f1358ac3327e327a70e19a1d9c57fd5bc1dd9415264",
+            "sha256": "c74e62f3941ce3dd82b19decb9ad5845607a9291449329b5be85f9376b32c851",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.004714,
+              0.006232
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.002879
+            ],
+            "best": [
+              146,
+              200
+            ],
+            "bounds": [
+              146,
+              200
+            ],
+            "evidence": [
+              {
+                "frame": 145,
+                "gray_96_sha256": "eb98096fb19beaa49335fe50d6983699441e0a1579f77f9576243cb928acffd4",
+                "pts": 74240
+              },
+              {
+                "frame": 173,
+                "gray_96_sha256": "bad7851feb9f51b54f5a561fda3deb64980ac983510fd147cda6176dc6423065",
+                "pts": 88576
+              },
+              {
+                "frame": 200,
+                "gray_96_sha256": "58be7c201028ca7d95ad99d721e329f5381aca7306620387f6ef483b7f564de9",
+                "pts": 102400
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              146,
+              146
+            ]
+          },
+          "render": 1,
+          "role": "matched_ordinary_insertion",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 289,
+            "height": 270,
+            "luma_sha256": "1cae6f79e5147433f734d6d31de4beac188f2f97f7b6d58474bedaa2ab3f6afa",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "487dded654caa68f5b541373ff27db0cc68cc04d082038eb61f56aeb2a289cb0",
+            "sha256": "cdf586c6cd6650c30a5096778d4a63d804a964f390559f97b1961ca98cca2625",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            146,
+            200
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 235,
+            "height": 270,
+            "luma_sha256": "3e1cdd36ecbd4a31c5e61a2c688b537fbf7dda02171749c1b2993d932cb2b0fd",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e96b8a735a891d7ffba26f1358ac3327e327a70e19a1d9c57fd5bc1dd9415264",
+            "sha256": "5f779004cf3d16669f3dcd82fbcc1419e406e44bd983ac5c262e701a107ba9c2",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.676641,
+              0.688287
+            ],
+            "before_error_p50_p90": [
+              0.702967,
+              0.705207
+            ],
+            "best": [
+              24,
+              78
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              24,
+              26
+            ]
+          },
+          "render": 1,
+          "role": "wrong_reference",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 289,
+            "height": 270,
+            "luma_sha256": "9220b734e408101cce14cb08321996b3cc2fe198a0f21b5a69a367b12ad3938a",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "487dded654caa68f5b541373ff27db0cc68cc04d082038eb61f56aeb2a289cb0",
+            "sha256": "8749cbdd88b370910170bfa7803cae88ab6565e5524b8e289421785de25cd5e9",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 235,
+            "height": 270,
+            "luma_sha256": "9e2b2ba6a0ebfd3302bf567874ea3a1fecf6244e603e7d90439636a45db8fd46",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e96b8a735a891d7ffba26f1358ac3327e327a70e19a1d9c57fd5bc1dd9415264",
+            "sha256": "c74e62f3941ce3dd82b19decb9ad5845607a9291449329b5be85f9376b32c851",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [
+            [
+              117,
+              235
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 1,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 235,
+            "height": 270,
+            "luma_sha256": "55a05320b04bd274c8232b67ae2ed0ee013bac709e52346f9481d5a995196dac",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "e96b8a735a891d7ffba26f1358ac3327e327a70e19a1d9c57fd5bc1dd9415264",
+            "sha256": "d40292e3ea9b57074a19e99b176e0600b2fffc45487678f40eafd26f0bfbaf6c",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        }
+      ],
+      "wrong_example": 72
+    },
+    {
+      "example": 72,
+      "native": {
+        "authentic": {
+          "codec": "h264",
+          "color_space": "bt709",
+          "frames": 203,
+          "height": 2160,
+          "luma_sha256": "7b194899f4f01ebd78353dbdff7a1a4ed83046ea26eed503c21d71b8af51ab31",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+          "sha256": "9e37303803ca92b6694f4a605273f8f1b8fe15ac9bcb5094797caca3a8f4b075",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 3840
+        },
+        "fake_segments": {
+          "codec": "h264",
+          "color_space": null,
+          "frames": 125,
+          "height": 464,
+          "luma_sha256": "dd47dc4d22f2fa77fdc7eed806b7f723fac9faef2791e851f1f2dd77b0cee36e",
+          "pixel_format": "yuv420p",
+          "pts_sha256": "bfc6f10ed2db1ef71e277527445487030130d35090f240515d04a4c7a5be853e",
+          "sha256": "3fd96f8a5fff8859087409fcaeaa01b466b576dca179ac222057f74ba713ae63",
+          "tick_step": 512,
+          "time_base": "1/12288",
+          "width": 832
+        }
+      },
+      "renders": [
+        {
+          "render": 0,
+          "replacement_start": 77,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  77
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.00645
+                ]
+              },
+              {
+                "bounds": [
+                  77,
+                  179
+                ],
+                "error_p50_p90": [
+                  0.010409,
+                  0.012886
+                ]
+              },
+              {
+                "bounds": [
+                  179,
+                  203
+                ],
+                "error_p50_p90": [
+                  0.006707,
+                  0.010107
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  104
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.00478
+                ]
+              },
+              {
+                "bounds": [
+                  104,
+                  206
+                ],
+                "error_p50_p90": [
+                  0.010356,
+                  0.012547
+                ]
+              },
+              {
+                "bounds": [
+                  206,
+                  305
+                ],
+                "error_p50_p90": [
+                  0.007265,
+                  0.009132
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  104
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.005669
+                ]
+              },
+              {
+                "bounds": [
+                  104,
+                  206
+                ],
+                "error_p50_p90": [
+                  0.006499,
+                  0.008774
+                ]
+              },
+              {
+                "bounds": [
+                  206,
+                  305
+                ],
+                "error_p50_p90": [
+                  0.007177,
+                  0.009232
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "render": 1,
+          "replacement_start": 149,
+          "verification": {
+            "equal_length_replacement": [
+              {
+                "bounds": [
+                  0,
+                  149
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.003911
+                ]
+              },
+              {
+                "bounds": [
+                  149,
+                  179
+                ],
+                "error_p50_p90": [
+                  0.009932,
+                  0.010982
+                ]
+              },
+              {
+                "bounds": [
+                  179,
+                  203
+                ],
+                "error_p50_p90": [
+                  0.006166,
+                  0.00872
+                ]
+              }
+            ],
+            "generated_insert": [
+              {
+                "bounds": [
+                  0,
+                  150
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.004058
+                ]
+              },
+              {
+                "bounds": [
+                  150,
+                  180
+                ],
+                "error_p50_p90": [
+                  0.009627,
+                  0.011371
+                ]
+              },
+              {
+                "bounds": [
+                  180,
+                  233
+                ],
+                "error_p50_p90": [
+                  0.006564,
+                  0.008255
+                ]
+              }
+            ],
+            "matched_ordinary_insertion": [
+              {
+                "bounds": [
+                  0,
+                  150
+                ],
+                "error_p50_p90": [
+                  0.0,
+                  0.004329
+                ]
+              },
+              {
+                "bounds": [
+                  150,
+                  180
+                ],
+                "error_p50_p90": [
+                  0.006397,
+                  0.008864
+                ]
+              },
+              {
+                "bounds": [
+                  180,
+                  233
+                ],
+                "error_p50_p90": [
+                  0.006676,
+                  0.008232
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "rows": [
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "1bdff5708552c2dfa3863075327535df151a6f623832ec39776343b5bd5193c5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "af5534d5031f5d58e3c795cfb1e04474b18ab2ef532db66c6df4a86d6af5b3f9",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": null,
+          "role": "untouched_delivery",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "1bdff5708552c2dfa3863075327535df151a6f623832ec39776343b5bd5193c5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "af5534d5031f5d58e3c795cfb1e04474b18ab2ef532db66c6df4a86d6af5b3f9",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "1bdff5708552c2dfa3863075327535df151a6f623832ec39776343b5bd5193c5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "af5534d5031f5d58e3c795cfb1e04474b18ab2ef532db66c6df4a86d6af5b3f9",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.007265,
+              0.009132
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.00478
+            ],
+            "best": [
+              104,
+              206
+            ],
+            "bounds": [
+              104,
+              206
+            ],
+            "evidence": [
+              {
+                "frame": 103,
+                "gray_96_sha256": "7cb6982ed9b124bae49a885e351156fae3daaabd40ee2132af4c089242c51085",
+                "pts": 52736
+              },
+              {
+                "frame": 155,
+                "gray_96_sha256": "ee15721962d935e9aca271fb2962dc20fda4bdf3349efe84e37593493a311e4f",
+                "pts": 79360
+              },
+              {
+                "frame": 206,
+                "gray_96_sha256": "b072cdbae0bcbef5ba4770d31935ab83609a594cf99ac755b47d4c4ae2fb22bf",
+                "pts": 105472
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              103,
+              105
+            ]
+          },
+          "render": 0,
+          "role": "generated_insert",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 305,
+            "height": 270,
+            "luma_sha256": "d5bc55264e0b68f59540645802c01dda46cf15c2c8f083722bc02e13da49a296",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "2b999f8c4a52ff30129af55ac134bfd70d7464c27e82a1a45f26089775463d8a",
+            "sha256": "ebe16180b503b81429113d04f1a4199fbd7f2d0e734c41a61cf8d8407c548559",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            104,
+            206
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "1bdff5708552c2dfa3863075327535df151a6f623832ec39776343b5bd5193c5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "af5534d5031f5d58e3c795cfb1e04474b18ab2ef532db66c6df4a86d6af5b3f9",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.007177,
+              0.009232
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.005669
+            ],
+            "best": [
+              104,
+              206
+            ],
+            "bounds": [
+              104,
+              206
+            ],
+            "evidence": [
+              {
+                "frame": 103,
+                "gray_96_sha256": "8b43d23e821a2b7d879de6ad0ca431a27520e694b7e1749994b3d47c2d8946cf",
+                "pts": 52736
+              },
+              {
+                "frame": 155,
+                "gray_96_sha256": "c241a0c1c524a7dbf0fede8b6f0aa125fe88b1ab8ed09f9b5da21e998bcefdbe",
+                "pts": 79360
+              },
+              {
+                "frame": 206,
+                "gray_96_sha256": "cb284764d059a40741c7364faf284f8265a2472c4d93dc2b82ba2ec0deeac7b3",
+                "pts": 105472
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              101,
+              104
+            ]
+          },
+          "render": 0,
+          "role": "matched_ordinary_insertion",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 305,
+            "height": 270,
+            "luma_sha256": "5f2fda525d99fc313214d67627e49facf3f2e1f02f2430dd632796be225a3d62",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "2b999f8c4a52ff30129af55ac134bfd70d7464c27e82a1a45f26089775463d8a",
+            "sha256": "21512819e727fce8dcf5f3dd2c38a61cfba3e5f3e32afc88cbe178638324ff17",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            104,
+            206
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "5bbd5ba604900c3c6404c1fe003eb3c4c64d4950a4a9130ea9761aed8911aeb5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "b607019d5d4376d2ba3f2392e379455a1c0f56d2bc2fdd3eb7b83dd693c50cbf",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.565506,
+              0.57079
+            ],
+            "before_error_p50_p90": [
+              0.570669,
+              0.573999
+            ],
+            "best": [
+              77,
+              179
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              76,
+              81
+            ]
+          },
+          "render": 0,
+          "role": "wrong_reference",
+          "status": "comparison_limit",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 305,
+            "height": 270,
+            "luma_sha256": "d5bc55264e0b68f59540645802c01dda46cf15c2c8f083722bc02e13da49a296",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "2b999f8c4a52ff30129af55ac134bfd70d7464c27e82a1a45f26089775463d8a",
+            "sha256": "ebe16180b503b81429113d04f1a4199fbd7f2d0e734c41a61cf8d8407c548559",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "1bdff5708552c2dfa3863075327535df151a6f623832ec39776343b5bd5193c5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "af5534d5031f5d58e3c795cfb1e04474b18ab2ef532db66c6df4a86d6af5b3f9",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [
+            [
+              48,
+              192
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 0,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "e780d8986085a3738038e1be45611f14757aa753d4eb2b596aa0ab891f210305",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "a56f0728402a4cc6dabf052f2e32f129d3feb20f9542ab3cb2882650994de530",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "1bdff5708552c2dfa3863075327535df151a6f623832ec39776343b5bd5193c5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "af5534d5031f5d58e3c795cfb1e04474b18ab2ef532db66c6df4a86d6af5b3f9",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.006564,
+              0.008255
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.004058
+            ],
+            "best": [
+              150,
+              180
+            ],
+            "bounds": [
+              150,
+              180
+            ],
+            "evidence": [
+              {
+                "frame": 149,
+                "gray_96_sha256": "f52ae04935d96a0c9ace9e6a210266996189af6305042c15d72c0e24f2566a4a",
+                "pts": 76288
+              },
+              {
+                "frame": 165,
+                "gray_96_sha256": "f131063f6e15575c9af176eef9a40156ed703749268ddc57afa2e0ff4d15543b",
+                "pts": 84480
+              },
+              {
+                "frame": 180,
+                "gray_96_sha256": "9f5584345f9b069a2defc7e9dc9aa7c37c7be8cc3d9ef389f29a45d2c01a5909",
+                "pts": 92160
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              150,
+              150
+            ]
+          },
+          "render": 1,
+          "role": "generated_insert",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 233,
+            "height": 270,
+            "luma_sha256": "f3a733b4d1ca889d632c7b0df96e4b99881a54f65f9b136371814b336f50f303",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "91a5dc4435c15f92247fee82cb359884af9fae25d0d0a9d4758d8b71aaf7f6e8",
+            "sha256": "b57de5066ef135323de3e5d0af7c7abd723b92c1a1af72f1818106695c03637b",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            150,
+            180
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "1bdff5708552c2dfa3863075327535df151a6f623832ec39776343b5bd5193c5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "af5534d5031f5d58e3c795cfb1e04474b18ab2ef532db66c6df4a86d6af5b3f9",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.006676,
+              0.008232
+            ],
+            "before_error_p50_p90": [
+              0.0,
+              0.004329
+            ],
+            "best": [
+              150,
+              180
+            ],
+            "bounds": [
+              150,
+              180
+            ],
+            "evidence": [
+              {
+                "frame": 149,
+                "gray_96_sha256": "bc19c5c79a95ebb5f393d34ae49147e7d50e9e7e8638697458d6bc9904e9b676",
+                "pts": 76288
+              },
+              {
+                "frame": 165,
+                "gray_96_sha256": "83c9f414f651ceb75f2064a3dbdb706b358790115f385c10fd741bdb8c99aef3",
+                "pts": 84480
+              },
+              {
+                "frame": 180,
+                "gray_96_sha256": "4ef285944a5ff62217f2e090ca43ed129a378118378d1c3f2c773a52b1e0d8b7",
+                "pts": 92160
+              }
+            ],
+            "status": "paired_insertion",
+            "uncertain_starts": [
+              150,
+              150
+            ]
+          },
+          "render": 1,
+          "role": "matched_ordinary_insertion",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 233,
+            "height": 270,
+            "luma_sha256": "51794c9f7e32b3fc170f297c0a02bf2e8bce9b7d4178bf56bde4555cd304bc0c",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "91a5dc4435c15f92247fee82cb359884af9fae25d0d0a9d4758d8b71aaf7f6e8",
+            "sha256": "270c206698c635aa1205711c61e316e92e8f5bd422499ea040b9693d303dbc45",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": [
+            150,
+            180
+          ]
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "5bbd5ba604900c3c6404c1fe003eb3c4c64d4950a4a9130ea9761aed8911aeb5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "b607019d5d4376d2ba3f2392e379455a1c0f56d2bc2fdd3eb7b83dd693c50cbf",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [],
+          "paired": {
+            "after_error_p50_p90": [
+              0.564464,
+              0.570464
+            ],
+            "before_error_p50_p90": [
+              0.569605,
+              0.573377
+            ],
+            "best": [
+              150,
+              180
+            ],
+            "bounds": null,
+            "status": "insufficient_matching_frames",
+            "uncertain_starts": [
+              149,
+              161
+            ]
+          },
+          "render": 1,
+          "role": "wrong_reference",
+          "status": "picture_timelines_differ",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 233,
+            "height": 270,
+            "luma_sha256": "f3a733b4d1ca889d632c7b0df96e4b99881a54f65f9b136371814b336f50f303",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "91a5dc4435c15f92247fee82cb359884af9fae25d0d0a9d4758d8b71aaf7f6e8",
+            "sha256": "b57de5066ef135323de3e5d0af7c7abd723b92c1a1af72f1818106695c03637b",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        },
+        {
+          "earlier": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "1bdff5708552c2dfa3863075327535df151a6f623832ec39776343b5bd5193c5",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "af5534d5031f5d58e3c795cfb1e04474b18ab2ef532db66c6df4a86d6af5b3f9",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "existing_picture_ranges": [
+            [
+              122,
+              192
+            ]
+          ],
+          "paired": {
+            "bounds": null,
+            "status": "not_a_longer_pair"
+          },
+          "render": 1,
+          "role": "equal_length_replacement",
+          "status": "measured",
+          "submitted": {
+            "codec": "h264",
+            "color_space": "bt709",
+            "frames": 203,
+            "height": 270,
+            "luma_sha256": "4abbb731798432cb487bc99edc5a05635d9e955d28687a976e953c573b08a6ea",
+            "pixel_format": "yuv420p",
+            "pts_sha256": "6aa6435aae80fad79685cd4b07bcd376b875706c305eed80f2df32e60b403dc3",
+            "sha256": "f38c62f1069bc11ad36189de4dcf9d8fa22437462e96c236be8745bfe7a9f733",
+            "tick_step": 512,
+            "time_base": "1/12288",
+            "width": 480
+          },
+          "truth": null
+        }
+      ],
+      "wrong_example": 2
+    }
+  ],
+  "method": {
+    "candidate": "Compare an earlier video with a longer submitted video. Fit one frame insertion and preserve all earlier frames in order. Use 96-square luma standardized per frame. Require at least 24 authentic frames on each side, a median retained difference no greater than .10, and a 90th percentile no greater than .22 on each side. Withhold if the candidate split is ambiguous by over 3 frames at the fixed profile-distance tolerance.",
+    "confirmed_deliveries": "Render a matching 480-pixel-long-side H.264 picture stream at exact 24 fps. Use the frozen generated slice and insertion split. Ordinary insertion prepends a repeated authentic part from the reference at that split. The equal-length replacement uses the same generated slice and clamps the split when needed to preserve an authentic 24-frame suffix.",
+    "measurement": "Keep candidate settings unchanged and report exact, within three frames and outside-three results. Run the existing earlier-copy app comparison with all locally enabled picture options on the same delivered pairs. Count ordinary insertions as physical edits, regardless of generation.",
+    "release_gates": {
+      "maximum_generated_outside_three": 0,
+      "maximum_unchanged_replacement_wrong_reports": 0,
+      "minimum_generated_exact": 8,
+      "minimum_generated_groups": 6,
+      "minimum_generated_within_three": 12,
+      "minimum_ordinary_within_three": 8
+    },
+    "scope": "Physical insertion between two copies. Zero AI-confidence weight. Authored deliveries use new source groups from one publisher, no sound, and no learned weights.",
+    "source_separation": "Check exact file and decoded luma commitments against the eight candidates and all eight preflight original/generated clips. Search for exact 96-square frames and close 24-square downsampled sequences. A run of at least 12 nearly identical detailed pictures at the same relative offset counts as a possible near-duplicate. Retain any rejected candidate in the denominator.",
+    "unchanged_and_wrong": "One unchanged control per source, with independent re-encoding settings identical to the earlier delivery. For each generated delivery, use the next source in plan order as a wrong reference. Match its geometry, cadence and earlier length, looping if needed."
+  },
+  "plan_sha256": "f1e40d833f0ac3861cc7a63913a0b264c6d0c711429785bba8631b2b6b47abfd",
+  "results": {
+    "checks": {
+      "generated_exact": true,
+      "generated_groups": true,
+      "generated_outside_three": true,
+      "generated_within_three": true,
+      "ordinary_insertions": true,
+      "unchanged_replacement_wrong": true
+    },
+    "counts": {
+      "equal_length_replacement": {
+        "baseline_measured": 16,
+        "candidate_not_a_longer_pair": 16,
+        "planned": 16,
+        "seen": 16
+      },
+      "generated_insert": {
+        "baseline_comparison_limit": 6,
+        "baseline_picture_timelines_differ": 10,
+        "candidate_paired_insertion": 16,
+        "exact": 16,
+        "outside_three": 0,
+        "planned": 16,
+        "reported": 16,
+        "seen": 16,
+        "within_three": 16
+      },
+      "matched_ordinary_insertion": {
+        "baseline_comparison_limit": 6,
+        "baseline_picture_timelines_differ": 10,
+        "candidate_ambiguous_insertion": 3,
+        "candidate_paired_insertion": 13,
+        "exact": 13,
+        "outside_three": 0,
+        "planned": 16,
+        "reported": 13,
+        "seen": 16,
+        "within_three": 13
+      },
+      "untouched_delivery": {
+        "baseline_measured": 8,
+        "candidate_not_a_longer_pair": 8,
+        "planned": 8,
+        "seen": 8
+      },
+      "wrong_reference": {
+        "baseline_comparison_limit": 6,
+        "baseline_picture_timelines_differ": 10,
+        "candidate_insufficient_matching_frames": 16,
+        "planned": 16,
+        "seen": 16
+      }
+    },
+    "generated_source_groups_within_three": [
+      2,
+      70,
+      71,
+      72,
+      81,
+      82,
+      91,
+      97
+    ],
+    "supports_local_evidence": true
+  },
+  "schema": "chipmunk.video-temporal-insert-confirmation/1"
+}

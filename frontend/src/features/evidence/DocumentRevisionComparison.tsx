@@ -117,6 +117,7 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
   const pdfText = comparison.format === 'pdf'
   const html = comparison.coordinate_space === 'email_html_extracted_text_unicode_codepoint'
   const wordTables = comparison.word_tables
+  const relocated = comparison.relocated_passages ?? []
   const changeCount = comparison.changes.length + (wordTables?.compared.reduce((sum, table) => sum + table.changes.length, 0) ?? 0)
   const formatLabel = mixed ? 'Wording change' : docx ? 'Word body text' : pdfText ? 'PDF text' : comparison.format === 'plain_text' ? 'Text' : null
   const downloadJson = () => saveBlob(new Blob([JSON.stringify(comparison, null, 2) + '\n'], { type: 'application/json' }),
@@ -129,7 +130,7 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
     <div className="flex flex-wrap items-baseline justify-between gap-3">
       <p className="m-0 text-small font-medium" role="status">
         {changeCount === 0 ? `No word or punctuation changes found${html ? ' in the reply body' : wordTables ? ' in the compared Word text' : ''}`
-          : `${changeCount} ${changeCount === 1 ? 'change' : 'changes'} found`}
+          : `${changeCount} ${changeCount === 1 ? 'change' : 'changes'} found`}{relocated.length > 0 && '. One reordered body passage found.'}
       </p>
       <div className="flex flex-wrap gap-x-4 gap-y-1">
         {pdf?.startsWith('JVBERi0') && <Button variant="text" onClick={() => downloadPdf(pdf)}>Download comparison PDF</Button>}
@@ -207,6 +208,13 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
         </div>)}
       </div>}
     </section>}
+    {relocated.map(passage => <section key={passage.later.start} className="mt-3 rounded-md border border-border p-3">
+      <h3 className="m-0 text-small font-medium">Reordered body passage</h3>
+      <div className="mt-3 grid gap-4 sm:grid-cols-2">
+        <Excerpt label="Earlier draft" excerpt={passage.earlier} />
+        <Excerpt label="Analyzed version" excerpt={passage.later} />
+      </div>
+    </section>)}
     {!!comparison.changes.length && <>
       <p className="mt-2 mb-0 text-caption text-text-muted">Highlights mark changed words and punctuation. {docx
         ? 'Word offsets count Unicode code points in the body text. Two line breaks separate included paragraphs. Paragraph ranges start within each paragraph.'
@@ -267,6 +275,7 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
     <h2 id={headingId} className="m-0 text-body font-medium">Compare with an earlier draft</h2>
     <p className="mt-2 mb-0 text-small text-text-muted">Choose an earlier {earlierExtensions.length > 1 ? 'TXT, DOCX or PDF' : extension} file, up to 1 MiB, to see where the wording changed.</p>
     {extension === '.docx' && <p className="mt-2 mb-0 text-small text-text-muted">Checks body wording and matches simple Word tables by exact row and column labels. A moved table needs the same unique Word caption.</p>}
+    {(extension === '.txt' || extension === '.docx') && sameFormat && <p className="mt-2 mb-0 text-small text-text-muted">Matching file formats can also show where an unchanged body paragraph moved.</p>}
     {extension === '.eml' && <p className="mt-2 mb-0 text-small text-text-muted">Use two plain-text emails or two HTML-only replies with two, three, five or six simple body paragraphs and a trailing blockquote.</p>}
     {extension === '.pdf' && <p className="mt-2 mb-0 text-small text-text-muted">Use unlocked PDFs with selectable text on every page, up to 12 pages each.</p>}
     {earlierExtensions.length > 1 && <p className="mt-2 mb-0 text-small text-text-muted">For drafts in different formats, use an upright PDF with selectable text. Multi-page PDFs need a single column per page and can have up to 12 pages.</p>}

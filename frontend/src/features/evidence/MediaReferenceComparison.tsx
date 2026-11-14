@@ -26,6 +26,14 @@ type PictureTrimAlignment = { earlier_frames: [number, number]; submitted_frames
 )
 type Waveform = { low: number[]; high: number[] }
 type PictureDimensions = { width: number; height: number }
+const insertionRoles = ['before', 'during', 'after'] as const
+type InsertionWitness = { frame_index: number; pts: number; time_base: string; time_s: number; asset: Asset }
+type PictureInsertion = {
+  start_frame: number; end_frame_exclusive: number; inserted_frames: number
+  start_s: number; end_s: number; plausible_start_frames: [number, number]
+  witnesses: Record<(typeof insertionRoles)[number], Partial<Record<Side, InsertionWitness>>>
+  audio_checked: false
+}
 type TimingSide = {
   frame_index: number
   picture_time_s: number
@@ -116,9 +124,10 @@ type Comparison = {
   schema: 'chipmunk.video-reference-comparison/1' | 'chipmunk.video-reference-comparison/2' | 'chipmunk.video-reference-comparison/3'
     | 'chipmunk.video-reference-comparison/4' | 'chipmunk.video-reference-comparison/5' | 'chipmunk.video-reference-comparison/6'
     | 'chipmunk.video-reference-comparison/7' | 'chipmunk.video-reference-comparison/8' | 'chipmunk.video-reference-comparison/9'
-    | 'chipmunk.video-reference-comparison/10' | 'chipmunk.video-reference-comparison/11'
+    | 'chipmunk.video-reference-comparison/10' | 'chipmunk.video-reference-comparison/11' | 'chipmunk.video-reference-comparison/12'
   submitted: PictureDimensions
   picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
+  picture_insertion?: PictureInsertion
   timing?: TimingComparison
   soundtrack_alignment?: SoundtrackTiming
   additional_soundtrack?: AdditionalSoundtrack
@@ -134,6 +143,7 @@ type Comparison = {
     | 'chipmunk.audio-reference-comparison/7' | 'chipmunk.audio-reference-comparison/8' | 'chipmunk.audio-reference-comparison/9'
     | 'chipmunk.audio-reference-comparison/10'
   picture?: never
+  picture_insertion?: never
   timing?: never
   soundtrack_alignment?: never
   additional_soundtrack?: never
@@ -145,7 +155,8 @@ type Comparison = {
   trim_alignment?: never
 })
 type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: string | null }
-type Availability = { available: boolean; timing_available?: boolean; clean_speech_available?: boolean; long_clean_speech_available?: boolean }
+type Availability = { available: boolean; timing_available?: boolean; picture_insertion_available?: boolean
+  clean_speech_available?: boolean; long_clean_speech_available?: boolean }
 const sourceSeconds = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 7, useGrouping: false })
 const trimSampleRate = 16000
 
@@ -441,6 +452,29 @@ function ChannelTimingEvidence({ timing, assets, audioOnly }: { timing: ChannelT
   </section>
 }
 
+function InsertionEvidence({ insertion, assets }: { insertion: PictureInsertion; assets: Result['assets'] }) {
+  const [low, high] = insertion.plausible_start_frames
+  return <section aria-label="Additional pictures" className="space-y-3">
+    <h3 className="m-0 text-small font-medium">Additional pictures</h3>
+    <p className="m-0 text-small">Analyzed clip at {sourceSeconds.format(insertion.start_s)} to {sourceSeconds.format(insertion.end_s)} s.
+      {' '}Frames [{insertion.start_frame}, {insertion.end_frame_exclusive}) contain {insertion.inserted_frames} additional pictures. The end time is exclusive.</p>
+    {low !== high && <p className="m-0 text-caption text-text-muted">The matching comparison also supports start frames {low} through {high}.</p>}
+    <p className="m-0 text-caption text-text-muted">The soundtrack was outside this comparison.</p>
+    {insertionRoles.map(role => <div key={role} className="space-y-2 rounded-md border border-border p-3">
+      <h4 className="m-0 text-small font-medium capitalize">{role}</h4>
+      <div className="grid gap-3 sm:grid-cols-2">{sides.map(side => {
+        const picture = insertion.witnesses[role][side]
+        if (!picture) return <p key={side} className="m-0 text-caption text-text-muted">No corresponding picture in the earlier copy.</p>
+        return <figure key={side} className="m-0 space-y-1">
+          <img className="h-auto w-full rounded border border-border" src={'data:image/png;base64,' + assets[picture.asset.file]}
+            alt={names[side] + ' ' + role + ' the insertion'} />
+          <figcaption className="text-caption text-text-muted">{names[side]} at {sourceSeconds.format(picture.time_s)} s · Frame {picture.frame_index} · PTS {picture.pts} at {picture.time_base} s per tick</figcaption>
+        </figure>
+      })}</div>
+    </div>)}
+  </section>
+}
+
 function ResultView({ result }: { result: Result }) {
   const { comparison, assets, pdf } = result
   const { picture, audio } = comparison
@@ -466,6 +500,7 @@ function ResultView({ result }: { result: Result }) {
       {notes[comparison.status] ?? 'The files could not be compared.'}
     </p>}
     {comparison.clean_speech && <CleanSpeechEvidence result={comparison.clean_speech} assets={assets} />}
+    {comparison.picture_insertion && <InsertionEvidence insertion={comparison.picture_insertion} assets={assets} />}
     {comparison.timing && <TimingEvidence timing={comparison.timing} assets={assets} />}
     {comparison.soundtrack_alignment && !comparison.timing?.changed_audio_samples &&
       (!comparison.channel_timing?.ranges.length || comparison.soundtrack_alignment.range) &&
@@ -582,8 +617,9 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
   </div>
 }
 
-function MediaReferenceForm({ analysisId, kind, timingAvailable, cleanSpeechAvailable, longCleanSpeechAvailable }: {
-  analysisId: string; kind: Kind; timingAvailable: boolean; cleanSpeechAvailable: boolean; longCleanSpeechAvailable: boolean
+function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertionAvailable, cleanSpeechAvailable, longCleanSpeechAvailable }: {
+  analysisId: string; kind: Kind; timingAvailable: boolean; pictureInsertionAvailable: boolean
+  cleanSpeechAvailable: boolean; longCleanSpeechAvailable: boolean
 }) {
   const heading = useId()
   const input = useId()
@@ -614,7 +650,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, cleanSpeechAvai
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
       if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
@@ -652,6 +688,14 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, cleanSpeechAvai
               sides.every(side => timing.range?.paired_pictures?.[role]?.[side]?.asset?.file)))))) {
         throw new Error('The comparison response is missing its local soundtrack timing evidence.')
       }
+      const insertion = response.comparison.picture_insertion
+      if (schema === 'chipmunk.video-reference-comparison/12' && (!insertion || insertion.audio_checked !== false ||
+        !insertionRoles.every(role => (role === 'during' ? ['submitted'] as const : sides).every(side => {
+          const name = insertion.witnesses?.[role]?.[side]?.asset?.file
+          return !!name && !!response.assets?.[name]
+        })))) {
+        throw new Error('The comparison response is missing its insertion pictures.')
+      }
       if (!controller.signal.aborted) setResult(response)
     } catch (error) {
       if (!controller.signal.aborted) setError(error instanceof Error ? error.message : 'Could not compare the files.')
@@ -673,6 +717,9 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, cleanSpeechAvai
     </p>}
     {kind === 'video' && <p className="mt-2 mb-0 text-caption text-text-muted">
       When present in both clips, a second soundtrack is compared separately. Local timing on the first soundtrack requires identical decoded pictures and matching soundtrack clocks.
+    </p>}
+    {pictureInsertionAvailable && <p className="mt-2 mb-0 text-caption text-text-muted">
+      The picture comparison can also locate an insertion in some pairs of 24 fps H.264 clips with a 480-pixel long side and up to 360 pictures per clip.
     </p>}
     <form onSubmit={event => void submit(event)} className="mt-4 flex flex-wrap items-end gap-3">
       <div className="min-w-0">
@@ -714,6 +761,7 @@ export default function MediaReferenceComparison({ analysisId, kind }: { analysi
   return availability.isFetchedAfterMount && availability.data?.available && !availability.isError
     ? <MediaReferenceForm key={kind + analysisId} analysisId={analysisId} kind={kind}
       timingAvailable={kind === 'video' && availability.data.timing_available === true}
+      pictureInsertionAvailable={kind === 'video' && availability.data.picture_insertion_available === true}
       cleanSpeechAvailable={kind === 'audio' && availability.data.clean_speech_available === true}
       longCleanSpeechAvailable={kind === 'audio' && availability.data.long_clean_speech_available === true} /> : null
 }

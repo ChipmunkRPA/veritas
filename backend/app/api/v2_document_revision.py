@@ -108,6 +108,11 @@ class DraftChange(BaseModel):
     later: DraftExcerpt | None
 
 
+class DraftRelocatedPassage(BaseModel):
+    earlier: DraftExcerpt
+    later: DraftExcerpt
+
+
 class DraftWritingFocus(BaseModel):
     start: int
     end: int
@@ -207,7 +212,7 @@ class DraftWordTables(BaseModel):
 class DraftComparison(BaseModel):
     schema_name: Literal["chipmunk.document-revision-comparison/1", "chipmunk.document-revision-comparison/2",
                          "chipmunk.document-revision-comparison/3", "chipmunk.document-revision-comparison/4",
-                         "chipmunk.document-revision-comparison/5"] = Field(alias="schema")
+                         "chipmunk.document-revision-comparison/5", "chipmunk.document-revision-comparison/6"] = Field(alias="schema")
     format: Literal["email", "plain_text", "docx", "pdf", "mixed"]
     coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint",
                               "pdf_native_text_unicode_codepoint", "email_html_extracted_text_unicode_codepoint",
@@ -219,6 +224,7 @@ class DraftComparison(BaseModel):
     interpretation: str
     paired_check: DraftPairedCheck | None = None
     word_tables: DraftWordTables | None = None
+    relocated_passages: list[DraftRelocatedPassage] | None = None
 
 
 class DocumentRevisionResponse(BaseModel):

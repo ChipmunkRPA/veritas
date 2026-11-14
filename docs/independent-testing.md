@@ -107,6 +107,17 @@ This replay checks published decisions and overlap counts without source media.
 The linked guides cover native replay, the separate audio equalization test
 and the Word extraction scope.
 
+The [video insertion confirmation](video-temporal-insert-confirmation-2026-11-13.md#replay)
+replays 72 pairs and checks submitted frame ranges and five before, during
+and after source pictures against the opt-in comparison. The
+[JPEG fine-detail comparison](image-jpeg-ac-difference-2026-11-13.md#replay)
+recounts useful local regions and ordinary controls across 630 paired
+deliveries. The [draft comparison](document-mixed-format-comparison-2026-11-13.md#reordered-paragraphs-in-matching-txt-or-word-files)
+verifies both locations of a reordered paragraph using both source drafts.
+The [stock-voice comparison](audio-stock-voice-transfer-2026-11-13.md)
+recounts clip-level and position-level results under three sound conditions
+for two stock-voice generators, with controls for real speech splices.
+
 ```sh
 review_dir=$(mktemp -d)
 python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/delivery-reference.json" --suite delivery-and-reference-transfers

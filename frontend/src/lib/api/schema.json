@@ -5639,13 +5639,28 @@
               }
             ]
           },
+          "relocated_passages": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DraftRelocatedPassage"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Relocated Passages"
+          },
           "schema": {
             "enum": [
               "chipmunk.document-revision-comparison/1",
               "chipmunk.document-revision-comparison/2",
               "chipmunk.document-revision-comparison/3",
               "chipmunk.document-revision-comparison/4",
-              "chipmunk.document-revision-comparison/5"
+              "chipmunk.document-revision-comparison/5",
+              "chipmunk.document-revision-comparison/6"
             ],
             "title": "Schema",
             "type": "string"
@@ -6139,6 +6154,22 @@
           "bbox"
         ],
         "title": "DraftPdfWordRegion",
+        "type": "object"
+      },
+      "DraftRelocatedPassage": {
+        "properties": {
+          "earlier": {
+            "$ref": "#/components/schemas/DraftExcerpt"
+          },
+          "later": {
+            "$ref": "#/components/schemas/DraftExcerpt"
+          }
+        },
+        "required": [
+          "earlier",
+          "later"
+        ],
+        "title": "DraftRelocatedPassage",
         "type": "object"
       },
       "DraftSource": {
@@ -13370,6 +13401,17 @@
           "available": {
             "title": "Available",
             "type": "boolean"
+          },
+          "picture_insertion_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Picture Insertion Available"
           },
           "timing_available": {
             "anyOf": [

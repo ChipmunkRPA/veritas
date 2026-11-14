@@ -90,6 +90,42 @@ it('shows exact changes in Word table cells and explains skipped table coverage'
   expect(screen.getByRole('button', { name: 'Download comparison PDF' })).toBeTruthy()
 })
 
+it('shows both locations of a reordered body passage and exports the exact comparison', async () => {
+  const source = { sha256: '0'.repeat(64), bytes: 588, decoded_text_sha256: '1'.repeat(64), decoded_characters: 240, mime_part: null }
+  const text = 'The archivist retained café notes 🦊 for the annual public records review.'
+  const comparison: DraftComparison = {
+    schema: 'chipmunk.document-revision-comparison/6', format: 'docx', coordinate_space: 'docx_body_unicode_codepoint',
+    earlier: source, later: source, scope: 'The passage changed its relative position.', interpretation: 'Source comparison only.',
+    changes: [], relocated_passages: [{
+      earlier: { start: 23, end: 95, text, changed_tokens: [], paragraphs: [{ paragraph: 2, body_index: 1, start: 0, end: 72 }] },
+      later: { start: 116, end: 188, text, changed_tokens: [], paragraphs: [{ paragraph: 4, body_index: 3, start: 0, end: 72 }] },
+    }],
+  }
+  vi.mocked(draftAvailability).mockResolvedValue({ extension: '.docx', pairedCheckAvailable: false })
+  vi.mocked(compareDraft).mockResolvedValue({ comparison, pdf: 'JVBERi0xLjQK' })
+  show()
+  const input = await screen.findByLabelText('Earlier draft')
+  fireEvent.change(input, { target: { files: [new File(['earlier'], 'earlier.docx')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
+  await screen.findByRole('heading', { name: 'Reordered body passage' })
+  expect(screen.getByRole('heading', { name: 'Earlier draft' })).toBeTruthy()
+  expect(screen.getByRole('heading', { name: 'Analyzed version' })).toBeTruthy()
+  expect(screen.getByText('[23, 95)')).toBeTruthy()
+  expect(screen.getByText('[116, 188)')).toBeTruthy()
+  expect(screen.getByText('Paragraph 2 [0, 72)')).toBeTruthy()
+  expect(screen.getByText('Paragraph 4 [0, 72)')).toBeTruthy()
+  expect(screen.getAllByText(text)).toHaveLength(2)
+  expect(screen.getAllByText(text).every(excerpt => !excerpt.querySelector('mark'))).toBeTruthy()
+  fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
+  const file = vi.mocked(saveBlob).mock.calls[0][0]
+  const exported = await new Promise<string>((resolve) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(String(reader.result))
+    reader.readAsText(file)
+  })
+  expect(JSON.parse(exported)).toEqual(comparison)
+})
+
 it('displays the exact server excerpts and Unicode ranges and downloads both reports', async () => {
   const source = { sha256: '0'.repeat(64), bytes: 20, decoded_text_sha256: '1'.repeat(64), decoded_characters: 40, mime_part: '1.1' }
   const comparison: DraftComparison = {

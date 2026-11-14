@@ -75,6 +75,17 @@ def _summary(document, record):
         _text(page, MARGIN, 348, "Comparison unassessed", size=16, font="hebo")
         _text(page, MARGIN, 369, PICTURE_STATUS[record["status"]])
         return
+    if insertion := record.get("picture_insertion"):
+        start, stop = insertion["start_frame"], insertion["end_frame_exclusive"]
+        _text(page, MARGIN, 347, "Additional pictures", size=16, font="hebo")
+        _text(page, MARGIN, 371, f"Analyzed clip at {_range(insertion)}. The end time is exclusive.")
+        _text(page, MARGIN, 392, f"Frames [{start}, {stop}) contain {insertion['inserted_frames']} additional pictures.")
+        low, high = insertion["plausible_start_frames"]
+        if low != high:
+            _text(page, MARGIN, 413, f"The matching comparison also supports start frames {low} through {high}.")
+        _text(page, MARGIN, 446, "The next page shows the matching pictures on both sides of the insertion.")
+        _text(page, MARGIN, 467, "The soundtrack was outside this comparison.", color=MUTED)
+        return
     picture = record["picture"]
     _text(page, MARGIN, 347, "Picture comparison", size=16, font="hebo")
     if record["schema"] == SCHEMA_WITH_TRIM_REENCODE:
@@ -173,6 +184,26 @@ def _level_adjusted_summary(document, result):
     _text(page, MARGIN, 303, "Times start at each file's first decoded sample. Excerpts use the original levels." if aligned else
           "Times start at the first decoded sample. Waveform excerpts use the original levels.", color=MUTED)
     _text(page, MARGIN, 324, "The JSON export includes the supporting sample ranges and playable excerpts.", color=MUTED)
+
+
+def _insertion_page(document, insertion, assets):
+    page = _page(document, "Before, during and after")
+    tick = insertion["source_ticks"]
+    _text(page, MARGIN, 129, f"Analyzed clip source ticks [{tick['start_pts']}, {tick['end_exclusive_pts']}) at {tick['time_base']} s per tick.",
+          size=10, color=MUTED)
+    for row, role in enumerate(("before", "during", "after")):
+        top = 156 + row * 185
+        _text(page, MARGIN, top, role.capitalize(), font="hebo")
+        for column, (side, label) in enumerate(LABELS.items()):
+            x = MARGIN + column * 260
+            picture = insertion["witnesses"][role].get(side)
+            if picture is None:
+                _text(page, x, top + 38, "No corresponding picture in the earlier copy.", size=10, color=MUTED)
+                continue
+            _text(page, x, top + 18, f"{label} at {picture['time_s']:.3f} s", size=10)
+            _text(page, x, top + 33, f"Frame {picture['frame_index']} · PTS {picture['pts']} at {picture['time_base']} s",
+                  size=9, color=MUTED)
+            page.insert_image(pymupdf.Rect(x, top + 43, x + 240, top + 167), stream=assets[picture["asset"]["file"]])
 
 
 def _picture_page(document, span, assets, source, *, title=None, measured=False):
@@ -508,6 +539,8 @@ def render(record, assets):
         if adjusted and not trimmed:
             _level_adjusted_pages(document, adjusted)
         (_audio_summary if is_audio else _summary)(document, record)
+        if insertion := record.get("picture_insertion"):
+            _insertion_page(document, insertion, assets)
         if adjusted and trimmed:
             _level_adjusted_pages(document, adjusted)
         if "clean_speech" in record:

@@ -1233,3 +1233,114 @@ def test_adjacent_sentence_pair_uses_exact_text_exports_and_preserves_legacy_rep
         check = result.json()["comparison"]["paired_check"]
         assert check["schema"] == paired.SCHEMA and check["status"] == "outside_scope"
     assert len(measured) == 1
+
+
+_REORDER_PARAGRAPHS = (
+    "The opening committee report gives the review background and meeting dates.",
+    "The archivist retained café notes 🦊 for the annual public records review.",
+    "A local contractor supplied hardware during the first phase of delivery.",
+    "The final evaluation verified the budget against published estimates and accounts.",
+)
+
+
+def _reorder_document(paragraphs, extension, *, quoted=None, hidden=None):
+    if extension == ".txt":
+        return "\n\n".join("> " + text if i == quoted else text for i, text in enumerate(paragraphs)).encode()
+    word = Document()
+    for i, text in enumerate(paragraphs):
+        p = word.add_paragraph(text, style="Quote" if i == quoted else None)
+        if i == hidden:
+            p.runs[0].font.hidden = True
+    data = BytesIO()
+    word.save(data)
+    return data.getvalue()
+
+
+@pytest.mark.parametrize("extension", [".txt", ".docx"])
+def test_distinguishes_reordered_passage_from_wording_change_in_api_pdf_and_replay(reference_http, monkeypatch, tmp_path, extension):
+    f = _install(reference_http, monkeypatch)
+    a, moved, b, c = _REORDER_PARAGRAPHS
+    revised = "A new sentence records the editor's follow-up recommendation."
+    earlier = _reorder_document([a, moved, b, c], extension)
+    later = _reorder_document([a, b, c, moved, revised], extension)
+    _saved(f, "reordered-draft", extension, later)
+    response = f.client.post(_url("reordered-draft"), headers=f.viewer, files=_upload(earlier, extension), data={"include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    payload = response.json()
+    report = payload["comparison"]
+    assert report["schema"] == document_revision.RELOCATION_SCHEMA
+    passage, = report["relocated_passages"]
+    for side, paragraphs in (("earlier", [a, moved, b, c]), ("later", [a, b, c, moved, revised])):
+        text = "\n\n".join(paragraphs)
+        start = text.index(moved)
+        excerpt = passage[side]
+        assert (excerpt["start"], excerpt["end"], excerpt["text"], excerpt["changed_tokens"]) == (start, start + len(moved), moved, [])
+        if extension == ".docx":
+            index = paragraphs.index(moved)
+            assert excerpt["paragraphs"] == [{"paragraph": index + 1, "body_index": index, "start": 0, "end": len(moved)}]
+    assert [change["later"]["text"] for change in report["changes"]] == [revised]
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as pdf:
+        text = " ".join(" ".join(p.get_text().split()) for p in pdf)
+        assert "Reordered body passage" in text and "café notes" in text
+        for side, label in (("earlier", "Earlier draft"), ("later", "Analyzed version")):
+            excerpt = passage[side]
+            assert f'{label} [{excerpt["start"]}, {excerpt["end"]})' in text
+    earlier_path, later_path = (tmp_path / (name + extension) for name in ("old", "new"))
+    export_path = tmp_path / "comparison.json"
+    earlier_path.write_bytes(earlier)
+    later_path.write_bytes(later)
+    export_path.write_text(json.dumps(report))
+    assert review(export_path, earlier_path, later_path)["relocated_passages_verified"] == 1
+    legacy, *_ = document_revision.compare_with_sources(earlier, later, extension, include_relocations=False)
+    export_path.write_text(json.dumps(legacy))
+    assert "relocated_passages_verified" not in review(export_path, earlier_path, later_path)
+    passage["later"]["start"] -= 1
+    export_path.write_text(json.dumps(report))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(export_path, earlier_path, later_path)
+
+
+@pytest.mark.parametrize("extension", [".txt", ".docx"])
+def test_reordered_passage_abstains_on_offset_only_duplicates_ambiguous_swaps_and_quotes(extension):
+    a, moved, b, c = _REORDER_PARAGRAPHS
+    controls = [
+        ([a, moved, b, c], ["Editorial note", a, moved, b, c], None, None),
+        ([a, moved, b, c], [a, moved.replace("café", "library"), b, c], None, None),
+        ([a, moved, b, c], [a, b, moved, c], None, None),
+        ([a, moved, b, c, moved], [a, b, moved, c, moved], None, None),
+        ([a, moved, b, c], [a, b, c, moved], 1, 3),
+    ]
+    for left, right, quoted_old, quoted_new in controls:
+        earlier = _reorder_document(left, extension, quoted=quoted_old)
+        later = _reorder_document(right, extension, quoted=quoted_new)
+        assert "relocated_passages" not in document_revision.compare(earlier, later, extension)
+    if extension == ".docx":
+        earlier = _reorder_document([a, moved, b, c], extension, hidden=1)
+        later = _reorder_document([a, b, c, moved], extension, hidden=3)
+        assert "relocated_passages" not in document_revision.compare(earlier, later, extension)
+
+
+@pytest.mark.parametrize("extension", [".txt", ".docx"])
+def test_reordered_passage_preserves_each_sources_spacing_and_detects_normalized_duplicates(extension):
+    a, moved, b, c = _REORDER_PARAGRAPHS
+    reflowed = moved.replace("café notes", "café\nnotes").replace("annual public", "annual   public")
+    earlier = _reorder_document([a, moved, b, c], extension)
+    later = _reorder_document([a, b, c, reflowed], extension)
+    result = document_revision.compare(earlier, later, extension)
+    passage, = result["relocated_passages"]
+    assert passage["earlier"]["text"] == moved and passage["later"]["text"] == reflowed
+    assert result["changes"] == []
+    copied = _reorder_document([a, b, c, reflowed, moved], extension)
+    assert "relocated_passages" not in document_revision.compare(earlier, copied, extension)
+
+
+def test_relocation_skips_native_style_checks_when_unchanged_word_paragraphs_keep_their_order(monkeypatch):
+    from app.evidence import document_archive_word
+
+    def reject_extra_checks(_):
+        pytest.fail("Unchanged paragraph order does not need native style traversal")
+
+    monkeypatch.setattr(document_archive_word, "_ordinary_boundary", reject_extra_checks)
+    word = _reorder_document([f"Paragraph {i} gives the old dates and the complete outcome." for i in range(100)], ".docx")
+    result = document_revision.compare(word, word, ".docx")
+    assert "relocated_passages" not in result and result["changes"] == []

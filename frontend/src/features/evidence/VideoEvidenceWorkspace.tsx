@@ -13,7 +13,7 @@ const lanes: { id: Lane; title: string; description: string }[] = [
 ]
 export function videoLaneForHash(hash: string): Lane | null {
   if (/^#media-evidence-(?:timing|AV\d+)/.test(hash)) return 'timing'
-  if (/^#media-evidence-(?:voice|background|sounds|stereo|repetition|similar-audio|(?:left|right)-(?:gain-)?repetition|[LR][RG]\d+|[ABC]\d+|RS?\d+)/.test(hash)) return 'voice'
+  if (/^#media-evidence-(?:voice|background|sounds|stereo|soundtrack-pair|repetition|similar-audio|(?:left|right)-(?:gain-)?repetition|[LR][RG]\d+|[ABC]\d+|RS?\d+)/.test(hash)) return 'voice'
   if (/^#media-evidence-(?:visual|V(?:PH)?\d+)/.test(hash)) return 'visual'
   if (hash === '#media-evidence-all') return 'all'
   return null
@@ -35,11 +35,13 @@ export default function VideoEvidenceWorkspace({ set, token, mediaReady }: {
       const acoustic = set.audio?.acoustic_context
       const drops = set.audio?.stereo_context?.windows.filter((window) => window.downmix?.strong_attenuation).length ?? 0
       const repeats = repeatedAudioCount(set.audio)
-      if (acoustic || drops || repeats) {
+      const shift = set.audio?.soundtrack_pair?.status === 'local_shift'
+      if (acoustic || drops || repeats || shift) {
         const summary = [`${counts.voice} voice intervals`]
         if (acoustic) summary.push(`${acoustic.events.length} acoustic observations`)
         if (drops) summary.push(`${drops} mono level ${drops === 1 ? 'drop' : 'drops'}`)
         if (repeats) summary.push(`${repeats} repeated audio ${repeats === 1 ? 'pair' : 'pairs'}`)
+        if (shift) summary.push('1 soundtrack timing difference')
         return summary.join(' · ')
       }
     }

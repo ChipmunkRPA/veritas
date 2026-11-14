@@ -263,6 +263,14 @@ export interface AudioEvidenceSet extends SetBase {
   background_reduced_voice_review?: BackgroundVoiceReview
 }
 export type VideoChannelStatus = 'ready' | 'absent' | 'unavailable' | 'not_assessed' | 'not_applicable'
+export interface SoundtrackPair {
+  status: 'duration_outside_scope' | 'second_stream_unavailable' | 'unsupported_clock' | 'insufficient_same_time_support' | 'no_local_shift' | 'local_shift'
+  stream_indices: [number, number]; limitation: string
+  coverage: Partial<Record<'candidate_windows' | 'matched_windows' | 'same_time_windows' | 'sections_with_same_time_matches', number>>
+  location: { shift_samples: number; supporting_windows: number; minimum_correlation: number
+    excerpts: (SampleInterval & { stream_index: number; source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'];
+      clip: EvidenceAsset; waveform: EvidenceAsset })[] } | null
+}
 export interface VideoAudioChannel {
   status: VideoChannelStatus; reason: string | null; source: AudioEvidenceSet['source']
   packets: AudioEvidencePacket[]; omitted_windows?: number; limitations: string[]
@@ -274,6 +282,7 @@ export interface VideoAudioChannel {
   repetition_context?: AudioRepetitionContext
   stereo_repetition?: StereoRepetitionContext
   similarity_context?: AudioSimilarityContext
+  soundtrack_pair?: SoundtrackPair
 }
 export interface VideoAVFrameInput {
   tick: number; frame_index: number; frame_pts: number; source_audio_pts: number; source_audio_time_base: string

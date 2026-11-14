@@ -60,8 +60,8 @@ function SpeechWindowSelection({ selection, rate, videoOriginS }: {
   </>
 }
 
-export default function AudioEvidenceContent({ set, token, mediaReady, videoOriginS, standalone = true }: {
-  set: AudioEvidenceSet; token: string; mediaReady: boolean; videoOriginS?: number | null; standalone?: boolean
+export default function AudioEvidenceContent({ set, token, mediaReady, videoOriginS, standalone = true, hasTrackComparison = false }: {
+  set: AudioEvidenceSet; token: string; mediaReady: boolean; videoOriginS?: number | null; standalone?: boolean; hasTrackComparison?: boolean
 }) {
   const rate = set.source.sample_rate
   const tracks = set.source.audio_stream_indices
@@ -122,7 +122,8 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
     {tracks && tracks.length > 1 && <section aria-label="Audio track coverage" className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <h3 className="m-0 font-medium">Audio track coverage</h3>
       <p className="mt-2 mb-0">The file contains {tracks.length} audio tracks. Audio checks used the first track (source stream index {tracks[0]}).{' '}
-        {tracks.length === 2 ? 'The second track was unassessed.' : `The other ${tracks.length - 1} tracks were unassessed.`}</p>
+        {hasTrackComparison ? 'See the timing comparison between tracks below.'
+          : tracks.length === 2 ? 'The second track was unassessed.' : `The other ${tracks.length - 1} tracks were unassessed.`}</p>
     </section>}
     <AudioSoundEvents set={set} token={token} mediaReady={mediaReady} pauseAudio={pauseAudio} />
     <AudioBackgroundContext set={set} token={token} mediaReady={mediaReady} pauseAudio={pauseAudio} />

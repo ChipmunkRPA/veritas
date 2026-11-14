@@ -1933,6 +1933,13 @@ and the source pixels behind the crop. The replay does not score authorship.
 
 ## Choose a review to reproduce
 
+### Review short timing differences between audio streams in one video
+
+The [two-track source and replay instructions](video-soundtrack-pair-2026-11-14.md#run-and-reproduce)
+include the portable result ledger, pinned source recordings, and native
+commands to reproduce both tracks' intervals and exhibits. The same
+original verifies both streams of a downloaded signed package.
+
 ### Review short soundtrack timing on corresponding video
 
 Use the [five-recording source manifest and replay commands](video-short-soundtrack-2026-11-14.md#app-and-independent-replay).

@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Timing between two audio streams in one video](video-soundtrack-pair-2026-11-14.md)
+  located 27 of 40 staged changes in each tested PCM and AAC delivery, with
+  zero locations on 120 controls in each format. The local trial shows the
+  two source positions and excerpts, and leaves single-track lip-sync
+  localization as a separate gap.
+
 - [Frequency balance in a clean earlier recording pair](audio-reference-variable-window-2026-11-14.md)
   explains two spurious local flags as broad processing across 448 held
   ordinary pairs, leaving one flag. It kept the 14 of 16 synthetic speech

@@ -1,9 +1,12 @@
 """Frozen audio inputs and voice presentation inside one parent video evidence set."""
 from __future__ import annotations
 
+from copy import deepcopy
+
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.evidence import audio_packets, stereo_listening, stereo_repetition
+from app.evidence import video_soundtrack_pair_binding as soundtrack_binding
 from app.evidence.audio_binding import SPEECH_SELECTION, VOICE_CLOCK_POLICY
 from app.evidence.audio_gain_repetition_binding import GAIN_INPUT, GAIN_VERSION
 from app.evidence.av_binding import TIMING_WINDOWS
@@ -12,8 +15,8 @@ from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import DetectorRun
 
 
-def freeze_input(ctx, decoded) -> dict:
-    """Persist the already-decoded PCM once; never decode again to invent evidence."""
+def freeze_input(ctx, decoded, *, path=None) -> dict:
+    """Persist the analyzed PCM and any bounded comparison with a second source stream."""
     source_mapping = dict(decoded.mapping)
     stereo_context = source_mapping.pop('stereo_context', None)
     with ctx.sessions() as db:
@@ -35,6 +38,20 @@ def freeze_input(ctx, decoded) -> dict:
             if settings.environment == 'dev' and settings.audio_stereo_gain_repeat_review:
                 binding[GAIN_INPUT] = GAIN_VERSION
             objects.append(repeated)
+        if (path is not None and settings.environment == 'dev' and settings.video_soundtrack_pair_review
+                and len(source_mapping.get('audio_stream_indices', [])) == 2):
+            from app.evidence import video_soundtrack_pair as pair
+
+            reading, secondary = pair.analyze(path, source_mapping['source_sha256'], decoded)
+            source = source_mapping | {'sha256': source_mapping['source_sha256']}
+            # Use the same metadata in the frozen result and customer evidence, adding URLs only at presentation time.
+            def store_media(data, media_type, **metadata):
+                art = register_artefact(db, ctx.store, data, media_type=media_type, role='preview',
+                                        created_by='video-soundtrack-pair/1', analysis_id=ctx.analysis_id)
+                objects.append(art)
+                return {'sha256': art.sha256, 'media_type': media_type, **metadata}
+
+            binding[soundtrack_binding.KEY] = pair.describe(source, reading, decoded, secondary, store_media)
         output = {'input': binding}
         if stereo_context is not None:
             stereo = register_artefact(db, ctx.store, canonical_json(stereo_context), media_type='application/json',
@@ -101,6 +118,12 @@ def build_channel(db, analysis, store, result: dict, *, set_id: str) -> dict:
                 'voice_clock_policy': record.get('voice_clock_policy'),
                 SPEECH_SELECTION: record.get(SPEECH_SELECTION),
                 'stereo_context_sha256': record.get('stereo_context_sha256')}, set_id=set_id)
+    if (pair := record['input'].get(soundtrack_binding.KEY)) is not None:
+        comparison = deepcopy(pair)
+        for asset in soundtrack_binding.assets(comparison).values():
+            extension = 'wav' if asset['media_type'] == 'audio/wav' else 'png'
+            asset['url'] = f"/api/v2/analyses/{analysis.id}/evidence-packets/{set_id}/assets/{asset['sha256']}.{extension}"
+        content[soundtrack_binding.KEY] = comparison
     assessed = bool(content['coverage']['windows'])
     return {'status': 'ready' if assessed else 'not_assessed',
             'reason': None if assessed else 'No voice-check windows were scored. Frozen audio context is not a synthesis finding.',
@@ -120,6 +143,8 @@ def validate_channel(channel: dict, *, source_sha256: str) -> None:
             raise audio_packets.PacketIntegrityError('Unavailable video audio channel contains unexplained evidence')
         return
     audio_packets.validate_content(channel)
+    if pair := channel.get(soundtrack_binding.KEY):
+        soundtrack_binding.validate(pair, channel['source'], soundtrack_binding.commitment(pair))
     if (channel['status'] == 'ready') != bool(channel['coverage']['windows']):
         raise audio_packets.PacketIntegrityError('Video audio status differs from its measured coverage')
 
@@ -142,6 +167,8 @@ def verify_source_content(channel: dict, *, result: dict, store, source_sha256: 
                           for key in ('pcm_sha256', 'wav_sha256', 'mapping_sha256', 'samples', 'sample_rate')):
         raise audio_packets.PacketIntegrityError('Video voice input differs from its published commitment')
     pcm, mapping = audio_packets._input(store, SimpleNamespace(sha256=source_sha256), binding)
+    soundtrack_binding.validate(channel.get(soundtrack_binding.KEY), channel['source'],
+                                soundtrack_binding.commitment(binding.get(soundtrack_binding.KEY)))
     if channel.get('stereo_context_sha256') != record.get('stereo_context_sha256'):
         raise audio_packets.PacketIntegrityError('Video stereo context differs from its published commitment')
     stereo_listening.verify(store, channel, binding.get('stereo_listening_pcm_sha256'), pcm, read_waveform=read_waveform)

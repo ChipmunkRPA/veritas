@@ -238,6 +238,7 @@ class Settings(BaseSettings):
     audio_reference_dense_clean_speech: bool = False  # Trial: denser comparison of six-second clean-copy pairs.
     audio_reference_clean_speech_eq_guard: bool = False  # Trial: explain consistent frequency changes in six-second pairs.
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.
+    video_soundtrack_pair_review: bool = False  # Compare two matching audio streams in one short video.
     video_reference_local_area: bool = False  # Qualified short 720 x 480 earlier-copy picture evidence.
     video_reference_measured_interval: bool = False  # Show strongly supported frame boundaries for qualified local picture ranges.
     video_reference_soundtrack_reencode: bool = False  # Compare local sound timing in qualified SD and 720p H.264 re-encodes.

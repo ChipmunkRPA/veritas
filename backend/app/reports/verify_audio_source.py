@@ -89,6 +89,22 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("Decoded audio duration disagrees with the recorded coverage limit")
 
     replay_detail = ""
+    covered = set()
+    intervals = 0
+    if comparison := audio.get("soundtrack_pair"):
+        from app.evidence import video_soundtrack_pair as pair
+        from app.evidence import video_soundtrack_pair_binding as binding
+
+        if kind != "video":
+            raise ValueError("Soundtrack pair evidence requires a video original")
+        reading, secondary = pair.analyze(original, source_sha256, decoded)
+        measured = pair.describe(source, reading, decoded, secondary, pair.digested_asset)
+        if binding.commitment(comparison) != binding.commitment(measured):
+            raise ValueError("Soundtrack comparison differs from the original audio streams")
+        for excerpt in (measured["location"] or {}).get("excerpts", []):
+            covered.add(excerpt["clip"]["sha256"])
+            intervals += 1
+        replay_detail += " Recomputed the comparison of two audio streams and its source excerpts."
     if timing := (alignment.get("coverage") or {}).get(TIMING_WINDOWS):
         from app.detectors.video import lipsync
 
@@ -119,8 +135,6 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if IDENTICAL_CHANNEL_INTERVAL in stereo:
             count = len(stereo[IDENTICAL_CHANNEL_INTERVAL]["selected"])
             replay_detail += f" Recomputed identical-channel audio and validated {count} selected intervals."
-    covered = set()
-    intervals = 0
     for label, span, timestamps, asset in _clips(audio, alignment):
         start, end = span["start_sample"], span["end_sample"]
         if any(type(i) is not int for i in (start, end)) or not 0 <= start < end <= len(decoded.pcm):

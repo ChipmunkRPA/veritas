@@ -1185,6 +1185,12 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
                     store.verify(source["mapping_sha256"])
         if stereo_sha := document["audio"].get("stereo_context_sha256"):
             store.verify(stereo_sha)
+        from app.evidence import video_soundtrack_pair_binding as soundtrack_pair
+
+        if pair := document["audio"].get(soundtrack_pair.KEY):
+            frozen = json.loads(_verified(store, analysis.result_hash))
+            binding = frozen["manifest"]["sampling"]["video_audio_evidence"]["input"]
+            soundtrack_pair.validate(pair, document["audio"]["source"], soundtrack_pair.commitment(binding.get(soundtrack_pair.KEY)))
     return document
 
 

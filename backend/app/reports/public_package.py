@@ -58,10 +58,14 @@ def public_result(result: dict) -> dict:
     if result.get('kind') == 'video':
         from app.evidence.av_binding import TIMING_COMMITMENT, TIMING_WINDOWS
         from app.evidence.face_return_coverage import COMMITMENT, from_result
+        from app.evidence.video_soundtrack_pair_binding import COMMITMENT as SOUNDTRACK_PAIR_COMMITMENT
+        from app.evidence.video_soundtrack_pair_binding import KEY as SOUNDTRACK_PAIR
 
         record = result.get('manifest', {}).get('sampling', {}).get('video_audio_evidence') or {}
         if timing := record.get(TIMING_WINDOWS):
             source_coverage[TIMING_COMMITMENT] = timing['windows_sha256']
+        if pair := (record.get('input') or {}).get(SOUNDTRACK_PAIR):
+            source_coverage[SOUNDTRACK_PAIR_COMMITMENT] = canonical_hash(pair)
         if brief_review := from_result(result):
             source_coverage[COMMITMENT] = canonical_hash(brief_review)
         if window_review := face_windows.from_result(result):

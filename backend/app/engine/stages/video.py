@@ -241,7 +241,7 @@ def decode(ctx: StageContext) -> dict[str, Any]:
 
     audio_evidence = {}
     audio, audio_mapping = _audio(path, bool(probed["info"].get("has_audio")), source_sha256=ctx.outputs["ingest"]["sha256"],
-                                  capture=lambda decoded: audio_evidence.update(freeze_input(ctx, decoded)))
+                                  capture=lambda decoded: audio_evidence.update(freeze_input(ctx, decoded, path=path)))
     ctx.state["frames"], ctx.state["frame_store"], ctx.state["audio"] = frames, store, audio
     ctx.state["video_audio_mapping"] = audio_mapping
     height, width = frames[0].rgb.shape[:2]

@@ -128,6 +128,12 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
             from app.evidence.stereo_listening_binding import all_artifacts
 
             groups.extend(all_artifacts(listening))
+        if "soundtrack_pair" in part:
+            from app.evidence.video_soundtrack_pair_binding import assets
+
+            if part is not document.get("audio"):
+                raise ObjectIntegrityError("Soundtrack comparison is outside the video audio evidence")
+            groups.append(assets(part["soundtrack_pair"]))
         if "stereo_repetition" in part:
             from app.evidence.stereo_repetition_binding import pairs, validate
 

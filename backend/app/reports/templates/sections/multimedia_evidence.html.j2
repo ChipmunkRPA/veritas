@@ -254,9 +254,24 @@ XML body index {{ row.body_index }}, paragraph child index {{ row.inline_index }
 <div class="multimedia-acoustic-summary">
 <h3>Audio track coverage</h3>
 {% set count = evidence.audio_tracks | length %}
-<p>The file contains {{ count }} audio tracks. Audio checks used the first track (source stream index {{ evidence.audio_tracks[0] }}). {% if count == 2 %}The second track was unassessed.{% else %}The other {{ count - 1 }} tracks were unassessed.{% endif %}</p>
+{% set pair = evidence.get('soundtrack_comparison') %}
+<p>The file contains {{ count }} audio tracks. Voice and mouth timing checks used the first track (source stream index {{ evidence.audio_tracks[0] }}). {% if not pair %}{% if count == 2 %}The second track was unassessed.{% else %}The other {{ count - 1 }} tracks were unassessed.{% endif %}{% endif %}</p>
 <p class="caption">The track list is recorded at JSON pointer <span class="mono">{{ evidence.audio_tracks_pointer }}</span>.</p>
 </div>
+{% if pair %}
+<div class="multimedia-acoustic-summary" id="multimedia-evidence-soundtrack-pair">
+<h3>Timing between audio tracks</h3>
+<p>{{ pair.summary }}</p>
+{% if pair.coverage %}<p class="caption">{{ pair.coverage.same_time_windows }} same-time matches among {{ pair.coverage.matched_windows }} matched windows. {{ pair.coverage.candidate_windows }} windows checked.</p>{% endif %}
+{% if pair.location %}
+<p>The matching excerpt is {{ '%.1f' | format(pair.location.offset_ms | abs) }} ms {{ 'later' if pair.location.offset_ms > 0 else 'earlier' }} in the second track (stream {{ pair.stream_indices[1] }}).</p>
+{% if evidence.withheld %}
+{% for track in pair.location.excerpts %}<p class="caption">{{ track.label }}</p>{% endfor %}
+{% else %}{{ plates(pair.location.excerpts | map(attribute='image') | list, wide=true) }}{% endif %}
+{% endif %}
+<p class="caption">{{ pair.limitation }} JSON pointer <span class="mono">/audio/soundtrack_pair</span>.</p>
+</div>
+{% endif %}
 {% endif %}
 {% if evidence.get('audio_source_clock') %}
 {% set clock = evidence.audio_source_clock %}

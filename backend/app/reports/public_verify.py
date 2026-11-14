@@ -52,6 +52,7 @@ from app.evidence.video_packet_versions import (
     NESTED_VERSIONS,
 )
 from app.evidence.video_packet_versions import VERSIONS as VIDEO_VERSIONS
+from app.evidence.video_soundtrack_pair_binding import COMMITMENT as SOUNDTRACK_PAIR_COMMITMENT
 
 SCHEMA = 'chipmunk.public-evidence/1'
 _SHA = re.compile(r'[a-f0-9]{64}')
@@ -103,7 +104,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              IMAGE_INTERPOLATION, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
                              image_animation_binding.KEY,
                              document_invisible_characters.COMMITMENT,
-                             TIMING_COMMITMENT},
+                             TIMING_COMMITMENT, SOUNDTRACK_PAIR_COMMITMENT},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
     binding = bundle['evidence']
@@ -181,11 +182,14 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             if evidence['version'] in LIGHTING_CONTEXT_VERSIONS:
                 validate_face_lighting(packet, evidence['source'])
         if evidence['version'] in NESTED_VERSIONS:
+            from app.evidence import video_soundtrack_pair_binding as soundtrack_pair
             from app.evidence.audio_binding import validate_audio_channel
             from app.evidence.audio_silence_binding import CONTEXT_SCHEMA
             from app.evidence.av_binding import validate_audio_clock_coverage, validate_av_channel
 
             validate_audio_channel(evidence['audio'], source['sha256'])
+            soundtrack_pair.validate(evidence['audio'].get(soundtrack_pair.KEY), evidence['audio']['source'],
+                                     result.get(soundtrack_pair.COMMITMENT))
             if evidence['version'] in ACOUSTIC_VERSIONS and evidence['audio']['coverage'] is not None:
                 _require(bool(evidence['audio'].get('acoustic_context')), 'Video acoustic context is missing')
             if evidence['version'] in CONTINUITY_VERSIONS and evidence['audio']['coverage'] is not None:
@@ -362,6 +366,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             validate_acoustic_context(acoustic, source=evidence['source'], voice_packets=evidence['packets'])
     groups = [group for part in parts for group in
               [part.get('overview') or {}, *(p.get('artifacts') or {} for p in part.get('packets', []))]]
+    if SOUNDTRACK_PAIR_COMMITMENT in result:
+        from app.evidence.video_soundtrack_pair_binding import KEY as SOUNDTRACK_PAIR
+        from app.evidence.video_soundtrack_pair_binding import assets
+
+        _require(analysis['kind'] == 'video' and evidence['version'] in NESTED_VERSIONS,
+                 'Soundtrack comparison belongs to nested video audio evidence')
+        groups.append(assets(evidence['audio'][SOUNDTRACK_PAIR]))
     if analysis['kind'] == 'image':
         groups.append(interpolation.assets(evidence))
     thumbnail_assets = set()

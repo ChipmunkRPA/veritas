@@ -1,0 +1,49 @@
+{
+  "cases": {
+    "different_speech": {
+      "coverage": {
+        "candidate_windows": 198,
+        "matched_windows": 0,
+        "same_time_windows": 0,
+        "sections_with_same_time_matches": 0
+      },
+      "exhibits_verified": 0,
+      "original_replay_verified": true,
+      "shift_samples": null,
+      "source_intervals": [],
+      "source_sha256": "009ad756b6def7649a1b49f3c11d833a69e649cb1b7464749015941797a308e7",
+      "status": "insufficient_same_time_support"
+    },
+    "later": {
+      "coverage": {
+        "candidate_windows": 198,
+        "matched_windows": 194,
+        "same_time_windows": 180,
+        "sections_with_same_time_matches": 3
+      },
+      "exhibits_verified": 4,
+      "original_replay_verified": true,
+      "shift_samples": 3200,
+      "source_intervals": [
+        {
+          "end_sample": 22400,
+          "source_end_pts": 22400,
+          "source_start_pts": 17600,
+          "start_sample": 17600,
+          "time_base": "1/16000"
+        },
+        {
+          "end_sample": 25600,
+          "source_end_pts": 25600,
+          "source_start_pts": 20800,
+          "start_sample": 20800,
+          "time_base": "1/16000"
+        }
+      ],
+      "source_sha256": "f43d0afaf1d2cddc0e12d4437d695e2b0166cb1a16cc581460d382c130ded9ef",
+      "status": "local_shift"
+    }
+  },
+  "simulated_paid_runs": 2,
+  "unpaid_jobs": 0
+}

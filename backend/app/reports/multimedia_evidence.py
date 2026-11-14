@@ -78,6 +78,10 @@ def asset_items(document: dict[str, Any]):
     for channel, part in parts:
         for role, asset in sorted((part.get("overview") or {}).items()):
             yield None, f"{channel}_{role}" if channel else role, asset
+        if pair := part.get("soundtrack_pair"):
+            from app.evidence.video_soundtrack_pair_binding import assets
+
+            yield from ((None, f"soundtrack_pair_{role}", asset) for role, asset in sorted(assets(pair).items()))
         for packet in part["packets"]:
             for role, asset in sorted(packet.get("artifacts", {}).items()):
                 yield packet["id"], role, asset
@@ -1187,6 +1191,19 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         packets.append(row)
     stereo_source = (document.get("audio") or {}) if kind == "video" else document
     audio_tracks = (stereo_source.get("source") or {}).get("audio_stream_indices") if kind in {"audio", "video"} else None
+    soundtrack_comparison = copy.deepcopy(stereo_source.get("soundtrack_pair")) if kind == "video" else None
+    if soundtrack_comparison:
+        from app.evidence.video_soundtrack_pair_binding import RATE, REASONS
+
+        soundtrack_comparison["summary"] = REASONS[soundtrack_comparison["status"]]
+        if location := soundtrack_comparison["location"]:
+            location["offset_ms"] = location["shift_samples"] * 1000 / RATE
+            for track in location["excerpts"]:
+                span, = track["source_timestamp_ranges"]
+                track["start_s"], track["end_s"] = (span[key] / RATE for key in ("source_start_pts", "source_end_pts"))
+                label = f"Stream {track['stream_index']} | source {track['start_s']:.3f}-{track['end_s']:.3f} s"
+                track["label"] = f"{label} | samples [{track['start_sample']}, {track['end_sample']})"
+                track["image"] = plate("waveform", track["waveform"], track["label"])
     stereo_context = copy.deepcopy(stereo_source.get("stereo_context"))
     stereo_repeated = copy.deepcopy(stereo_source.get("stereo_repetition"))
     if stereo_repeated:
@@ -1315,6 +1332,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "speech_windows": speech_windows,
             "speech_selection_pointer": ("/audio" if kind == "video" else "") + "/coverage/speech_window_selection",
             "audio_tracks": audio_tracks,
+            "soundtrack_comparison": soundtrack_comparison,
             "audio_tracks_pointer": ("/audio" if kind == "video" else "") + "/source/audio_stream_indices",
             "audio_source_clock": voice_coverage.get("source_clock_context"),
             "audio_source_clock_rate": rate,

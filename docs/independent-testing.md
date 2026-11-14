@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short speech transfer and rumble replay](audio-noisy-window-transfer-2026-11-14.md#replay)
+checks which exact SINE splices the staggered windows could reach and measures
+the separate effect of a 240 Hz filter on the original noisy-speech panel.
+Both recounts use standard-library Python.
+
 The [staggered speech window replay](audio-staggered-voice-2026-11-14.md#replay)
 distinguishes gaps in the window schedule, misses caused by speech admission,
 and misses after scoring. It recounts 98 matched deliveries with standard-library Python.

@@ -1,0 +1,2021 @@
+{
+  "freeze": {
+    "method": {
+      "cutoff_hz": 240,
+      "decision": "Retain all current results. Require at least three added useful noisy groups across at least two generators, no gain-only or isolated flags, and at most one additional genuine source group. Filtered scores reuse the existing AI-leaning decision region for screening this experiment only.",
+      "order": 3,
+      "scope": "For original three-second windows below the speech minimum, rerun speech activity after fixed zero-phase high-pass filtering of the recording. Score each newly admitted window on its original and filtered samples."
+    },
+    "parent_sha256": "ae15cc9b7f3693a2743b5aac299f2841ab6aa2308eada642be14c9448c7c5e72",
+    "schema": "chipmunk.low-frequency-speech-admission/1"
+  },
+  "results": {
+    "cells": {
+      "gain_control/genuine": {
+        "current_flags": 0,
+        "current_useful": 0,
+        "files": 12,
+        "filtered_samples_added": 0,
+        "filtered_samples_flags": 0,
+        "filtered_samples_new_flags": 0,
+        "filtered_samples_useful": 0,
+        "original_samples_added": 0,
+        "original_samples_flags": 0,
+        "original_samples_new_flags": 0,
+        "original_samples_useful": 0,
+        "skipped_windows": 0
+      },
+      "gain_control/partial": {
+        "current_flags": 16,
+        "current_useful": 13,
+        "files": 18,
+        "filtered_samples_added": 0,
+        "filtered_samples_flags": 16,
+        "filtered_samples_new_flags": 0,
+        "filtered_samples_useful": 13,
+        "original_samples_added": 0,
+        "original_samples_flags": 16,
+        "original_samples_new_flags": 0,
+        "original_samples_useful": 13,
+        "skipped_windows": 0
+      },
+      "rain/genuine": {
+        "added_windows": 2,
+        "current_flags": 0,
+        "current_useful": 0,
+        "files": 12,
+        "filtered_samples_added": 0,
+        "filtered_samples_flags": 0,
+        "filtered_samples_new_ai_windows": 0,
+        "filtered_samples_new_flags": 0,
+        "filtered_samples_useful": 0,
+        "original_samples_added": 0,
+        "original_samples_flags": 0,
+        "original_samples_new_ai_windows": 0,
+        "original_samples_new_flags": 0,
+        "original_samples_useful": 0,
+        "skipped_windows": 3
+      },
+      "rain/isolated": {
+        "added_windows": 0,
+        "current_flags": 0,
+        "current_useful": 0,
+        "files": 4,
+        "filtered_samples_added": 0,
+        "filtered_samples_flags": 0,
+        "filtered_samples_new_ai_windows": 0,
+        "filtered_samples_new_flags": 0,
+        "filtered_samples_useful": 0,
+        "original_samples_added": 0,
+        "original_samples_flags": 0,
+        "original_samples_new_ai_windows": 0,
+        "original_samples_new_flags": 0,
+        "original_samples_useful": 0,
+        "skipped_windows": 20
+      },
+      "rain/partial": {
+        "added_windows": 0,
+        "current_flags": 3,
+        "current_useful": 3,
+        "files": 18,
+        "filtered_samples_added": 0,
+        "filtered_samples_flags": 3,
+        "filtered_samples_new_ai_windows": 0,
+        "filtered_samples_new_flags": 0,
+        "filtered_samples_useful": 3,
+        "original_samples_added": 0,
+        "original_samples_flags": 3,
+        "original_samples_new_ai_windows": 0,
+        "original_samples_new_flags": 0,
+        "original_samples_useful": 3,
+        "skipped_windows": 8
+      },
+      "train/genuine": {
+        "added_windows": 0,
+        "current_flags": 0,
+        "current_useful": 0,
+        "files": 12,
+        "filtered_samples_added": 0,
+        "filtered_samples_flags": 0,
+        "filtered_samples_new_ai_windows": 0,
+        "filtered_samples_new_flags": 0,
+        "filtered_samples_useful": 0,
+        "original_samples_added": 0,
+        "original_samples_flags": 0,
+        "original_samples_new_ai_windows": 0,
+        "original_samples_new_flags": 0,
+        "original_samples_useful": 0,
+        "skipped_windows": 41
+      },
+      "train/isolated": {
+        "added_windows": 0,
+        "current_flags": 0,
+        "current_useful": 0,
+        "files": 4,
+        "filtered_samples_added": 0,
+        "filtered_samples_flags": 0,
+        "filtered_samples_new_ai_windows": 0,
+        "filtered_samples_new_flags": 0,
+        "filtered_samples_useful": 0,
+        "original_samples_added": 0,
+        "original_samples_flags": 0,
+        "original_samples_new_ai_windows": 0,
+        "original_samples_new_flags": 0,
+        "original_samples_useful": 0,
+        "skipped_windows": 20
+      },
+      "train/partial": {
+        "added_windows": 2,
+        "current_flags": 0,
+        "current_useful": 0,
+        "files": 18,
+        "filtered_samples_added": 0,
+        "filtered_samples_flags": 0,
+        "filtered_samples_new_ai_windows": 0,
+        "filtered_samples_new_flags": 0,
+        "filtered_samples_useful": 0,
+        "original_samples_added": 0,
+        "original_samples_flags": 0,
+        "original_samples_new_ai_windows": 0,
+        "original_samples_new_flags": 0,
+        "original_samples_useful": 0,
+        "skipped_windows": 66
+      }
+    },
+    "summary": {
+      "filtered_samples": {
+        "added_genuine_groups": 0,
+        "added_isolated": 0,
+        "new_noisy_families": [],
+        "new_noisy_groups": 0,
+        "passes": false
+      },
+      "original_samples": {
+        "added_genuine_groups": 0,
+        "added_isolated": 0,
+        "new_noisy_families": [],
+        "new_noisy_groups": 0,
+        "passes": false
+      }
+    }
+  },
+  "rows": [
+    {
+      "case": 0,
+      "windows": []
+    },
+    {
+      "case": 1,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 15136
+        }
+      ]
+    },
+    {
+      "case": 2,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 6080
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 3,
+      "windows": []
+    },
+    {
+      "case": 4,
+      "windows": []
+    },
+    {
+      "case": 5,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 5984
+        }
+      ]
+    },
+    {
+      "case": 6,
+      "windows": []
+    },
+    {
+      "case": 7,
+      "windows": []
+    },
+    {
+      "case": 8,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 10688
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            56564,
+            104564
+          ],
+          "speech_samples": 5056
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            113128,
+            161128
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 9,
+      "windows": []
+    },
+    {
+      "case": 10,
+      "windows": []
+    },
+    {
+      "case": 11,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 15808
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72480,
+            120480
+          ],
+          "speech_samples": 17344
+        }
+      ]
+    },
+    {
+      "case": 12,
+      "windows": []
+    },
+    {
+      "case": 13,
+      "windows": []
+    },
+    {
+      "case": 14,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            78115,
+            126115
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 15,
+      "windows": []
+    },
+    {
+      "case": 16,
+      "windows": []
+    },
+    {
+      "case": 17,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            59279,
+            107279
+          ],
+          "speech_samples": 9568
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 22368
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            118559,
+            166559
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 18,
+      "windows": []
+    },
+    {
+      "case": 19,
+      "windows": []
+    },
+    {
+      "case": 20,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            67440,
+            115440
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 21,
+      "windows": []
+    },
+    {
+      "case": 22,
+      "windows": []
+    },
+    {
+      "case": 23,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 16256
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 7616
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48122,
+            96122
+          ],
+          "speech_samples": 7616
+        }
+      ]
+    },
+    {
+      "case": 24,
+      "windows": []
+    },
+    {
+      "case": 25,
+      "windows": []
+    },
+    {
+      "case": 26,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            50343,
+            98343
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 27,
+      "windows": []
+    },
+    {
+      "case": 28,
+      "windows": []
+    },
+    {
+      "case": 29,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 9152
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            76068,
+            124068
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 30,
+      "windows": []
+    },
+    {
+      "case": 31,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 32,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 5056
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            50079,
+            98079
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 33,
+      "windows": []
+    },
+    {
+      "case": 34,
+      "windows": []
+    },
+    {
+      "case": 35,
+      "windows": []
+    },
+    {
+      "case": 36,
+      "windows": []
+    },
+    {
+      "case": 37,
+      "windows": []
+    },
+    {
+      "case": 38,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 18368
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 14272
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            61744,
+            109744
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            96000,
+            144000
+          ],
+          "speech_samples": 7520
+        },
+        {
+          "filtered_samples": "inconclusive",
+          "original_samples": "inconclusive",
+          "span": [
+            120000,
+            168000
+          ],
+          "speech_samples": 26400
+        }
+      ]
+    },
+    {
+      "case": 39,
+      "windows": []
+    },
+    {
+      "case": 40,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 10176
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 17344
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48030,
+            96030
+          ],
+          "speech_samples": 18784
+        }
+      ]
+    },
+    {
+      "case": 41,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 6080
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48030,
+            96030
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 42,
+      "windows": []
+    },
+    {
+      "case": 43,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            65030,
+            113030
+          ],
+          "speech_samples": 12224
+        }
+      ]
+    },
+    {
+      "case": 44,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            65030,
+            113030
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 45,
+      "windows": []
+    },
+    {
+      "case": 46,
+      "windows": []
+    },
+    {
+      "case": 47,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 23328
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 20416
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            96000,
+            144000
+          ],
+          "speech_samples": 22912
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            118709,
+            166709
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 48,
+      "windows": []
+    },
+    {
+      "case": 49,
+      "windows": []
+    },
+    {
+      "case": 50,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            51720,
+            99720
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 7520
+        },
+        {
+          "filtered_samples": "inconclusive",
+          "original_samples": "inconclusive",
+          "span": [
+            103440,
+            151440
+          ],
+          "speech_samples": 25472
+        }
+      ]
+    },
+    {
+      "case": 51,
+      "windows": []
+    },
+    {
+      "case": 52,
+      "windows": []
+    },
+    {
+      "case": 53,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48600,
+            96600
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 54,
+      "windows": []
+    },
+    {
+      "case": 55,
+      "windows": []
+    },
+    {
+      "case": 56,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 5568
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            71520,
+            119520
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 57,
+      "windows": []
+    },
+    {
+      "case": 58,
+      "windows": []
+    },
+    {
+      "case": 59,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            65759,
+            113759
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 60,
+      "windows": []
+    },
+    {
+      "case": 61,
+      "windows": []
+    },
+    {
+      "case": 62,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            51360,
+            99360
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            96000,
+            144000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            102720,
+            150720
+          ],
+          "speech_samples": 6080
+        }
+      ]
+    },
+    {
+      "case": 63,
+      "windows": []
+    },
+    {
+      "case": 64,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            78241,
+            126241
+          ],
+          "speech_samples": 19232
+        }
+      ]
+    },
+    {
+      "case": 65,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            78241,
+            126241
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 66,
+      "windows": []
+    },
+    {
+      "case": 67,
+      "windows": []
+    },
+    {
+      "case": 68,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 69,
+      "windows": []
+    },
+    {
+      "case": 70,
+      "windows": []
+    },
+    {
+      "case": 71,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 72,
+      "windows": []
+    },
+    {
+      "case": 73,
+      "windows": []
+    },
+    {
+      "case": 74,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            74560,
+            122560
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 75,
+      "windows": []
+    },
+    {
+      "case": 76,
+      "windows": [
+        {
+          "filtered_samples": "inconclusive",
+          "original_samples": "inconclusive",
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 39264
+        },
+        {
+          "filtered_samples": "inconclusive",
+          "original_samples": "inconclusive",
+          "span": [
+            73121,
+            121121
+          ],
+          "speech_samples": 40288
+        }
+      ]
+    },
+    {
+      "case": 77,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 18272
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            73121,
+            121121
+          ],
+          "speech_samples": 19296
+        }
+      ]
+    },
+    {
+      "case": 78,
+      "windows": []
+    },
+    {
+      "case": 79,
+      "windows": []
+    },
+    {
+      "case": 80,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 11200
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            59280,
+            107280
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 7616
+        }
+      ]
+    },
+    {
+      "case": 81,
+      "windows": []
+    },
+    {
+      "case": 82,
+      "windows": []
+    },
+    {
+      "case": 83,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            63841,
+            111841
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 84,
+      "windows": []
+    },
+    {
+      "case": 85,
+      "windows": []
+    },
+    {
+      "case": 86,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 15296
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 18720
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            75359,
+            123359
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 87,
+      "windows": []
+    },
+    {
+      "case": 88,
+      "windows": []
+    },
+    {
+      "case": 89,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 8640
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            66720,
+            114720
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 90,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            80000,
+            128000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 91,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            80000,
+            128000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 92,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            80000,
+            128000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 93,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            80000,
+            128000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 94,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            80000,
+            128000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 95,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            80000,
+            128000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 96,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            80000,
+            128000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 97,
+      "windows": [
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            0,
+            48000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            24000,
+            72000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            48000,
+            96000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            72000,
+            120000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "filtered_samples": null,
+          "original_samples": null,
+          "span": [
+            80000,
+            128000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    }
+  ]
+}

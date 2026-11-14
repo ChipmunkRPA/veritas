@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Staggered SINE splices and low-frequency admission](audio-noisy-window-transfer-2026-11-14.md)
+  added no correct locations on 45 noisy SINE edits. A separate 240 Hz filter
+  admitted two more train-masked windows on the earlier panel, neither of
+  which gave an AI-leaning response. Both additions remain offline.
+
 - [Staggered speech windows under loud noise](audio-staggered-voice-2026-11-14.md)
   added one rain-masked and zero train-masked locations. Neither alternative
   met the noise requirement. New long speech reports show contiguous source

@@ -1,0 +1,79 @@
+{
+  "checks": {
+    "audio": {
+      "arguments": [
+        "review",
+        "docs/evaluation-panels/audio-background-rate-diagnostic-2026-11-13.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/audio_background_rate_diagnostic.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/audio_background_lossless_rate_transfer.py": "fd3c6087c43635c8488d50645966bf3377caddbca25175220e0c8d1ca7c1a30b",
+        "backend/scripts/audio_background_rate_diagnostic.py": "102608521627e793d5ffb518656891efcf583013324b992d78cf3b17f897e8fa",
+        "docs/evaluation-panels/audio-background-lossless-rate-transfer-2026-11-13.json": "b105b951395574123fbea1471863f3319793d9a623592dcc2c16b70d3cb9aef9",
+        "docs/evaluation-panels/audio-background-rate-diagnostic-2026-11-13.json": "c12b8ca1ef829ec08c6a617e85588d2d604fa97e853cbd391de3aa9234250e18"
+      },
+      "output_sha256": "55cc61491d3ddce3b90cddc43fff313c3a15e6eb6adeabf2553ef3ad06337c03",
+      "status": "matched"
+    },
+    "image": {
+      "arguments": [
+        "docs/evaluation-panels/image-crossfit-prediction-2026-11-13.json.gz",
+        "docs/evaluation-panels/image-residual-third-order-transfer-2026-11-13.json.gz"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/review_image_crossfit_prediction.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/image_crossfit_prediction.py": "d67f9568ae166ec9937c2fa5cb9f19169ae6a53ee621b884fa4cc2db9ccf2e7e",
+        "backend/scripts/image_residual_third_order_transfer.py": "8b344b66a5190254b49254117d895a218b1504b7c06cc351ef10113722f7a5e0",
+        "backend/scripts/review_image_crossfit_prediction.py": "5585e96cf088f9a0e9c850a5dca6400c3e90f056a1f27886589707c31709042e",
+        "docs/evaluation-panels/image-crossfit-prediction-2026-11-13.json.gz": "2ea847ca5b7dd9872679f538cb680059d1c9398753232c6cc683a99c99155531",
+        "docs/evaluation-panels/image-residual-third-order-transfer-2026-11-13.json.gz": "92bd639280e6e1af39dad0f6b98f51455e3cbdbd9d553dd69e61f455e1332080"
+      },
+      "output_sha256": "0b41e0e573a8313a72b42ed21f4db67f9bc0fe5bb4662b611c59910c8c8fe137",
+      "status": "matched"
+    },
+    "video": {
+      "arguments": [
+        "docs/evaluation-panels/video-brief-face-avc-clock-confirmation-2026-11-13.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/review_video_brief_face_avc_confirmation.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/review_video_brief_face_120_carrier.py": "f4040bd8d1e8fe7d06fae08fc8d3741508f686da19acdf99f02c8f4a92cdc540",
+        "backend/scripts/review_video_brief_face_avc_confirmation.py": "a47bd29f994b738a8c0673726523c6487cb41eb9655183a8c935a6481f039ec1",
+        "docs/evaluation-panels/video-brief-face-avc-clock-confirmation-2026-11-13.json": "2b0fe0869da7b3ccf7641ce3f1dc433a418da679e65f08d2b040e3ddd7a611b6"
+      },
+      "output_sha256": "5bec0f16307c350b5e2e90974ff0b1c7d767196a9cf131e23864680663037006",
+      "status": "matched"
+    },
+    "writing": {
+      "arguments": [
+        "docs/evaluation-panels/writing-dependency-transfer-2026-11-13.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/review_writing_dependency_transfer.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/review_writing_dependency_transfer.py": "831ba612f74ea891d52266b3ca252b365f51a0e96c7fa86520fd894f2f33bf07",
+        "backend/scripts/writing_dependency_transfer.py": "7a17f535e8ae8d3691d6ab1c55472ec8b9eb2ea21d4cc2f6c62880b03e080266",
+        "docs/evaluation-panels/writing-dependency-transfer-2026-11-13.json": "8a6b5e0bb2fdaee0a57383031102cd854768f467802d601c599dee3817d85d86"
+      },
+      "output_sha256": "cb19fce46abe8e272617e330d1ff915a9b0bff115db7eb474f2ec8af039dd4ff",
+      "status": "matched"
+    }
+  },
+  "environment": {
+    "architecture": "aarch64",
+    "os": "Linux",
+    "python": "3.12.15"
+  },
+  "runner_sha256": "7359cecda4e2516988e5ee191512e437ed71c17c9177ea34ceff8d802ebcef6c",
+  "schema": "chipmunk.public-evaluation-replay/1",
+  "scope": "Arithmetic replay of published evaluation ledgers",
+  "source_revision": null,
+  "suite": "check-boundaries"
+}

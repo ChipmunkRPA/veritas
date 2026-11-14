@@ -120,6 +120,11 @@ python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/check-b
 python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/check-boundaries.json" --format-issue
 ```
 
+Compare with the [local Linux reference receipt](evaluation-panels/check-boundaries-linux-reference-2026-11-13.json)
+using `--compare`. The container used the committed readers and ledgers through
+a read-only mount with networking disabled. It lacked Git, so the receipt
+identifies those exact inputs by hash. All four outputs matched the macOS run.
+
 ### Replay delivery and earlier-copy comparisons
 
 Recount the [two JPEG90 delivery histories](image-regional-jpeg90-carrier-2026-11-13.md),

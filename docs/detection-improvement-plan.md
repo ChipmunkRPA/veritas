@@ -72,6 +72,11 @@ are not public screening promises or calibrated population probabilities.
 - [Grammatical attachment changes](writing-dependency-transfer-2026-11-13.md)
   added zero locations on 40 held sentence edits. A part-of-speech comparison added
   one location and one false alert. Both remain experimental.
+- [Short H.264 face localization](video-brief-face-avc-clock-confirmation-2026-11-13.md)
+  increased correct ranges from nine to ten on 16 edited deliveries from eight
+  source groups. Neither route flagged any of the 40 ordinary clips. The additional
+  H.264 route remains experimental. The existing short WebM review now explains both
+  boundary readings alongside the original frames in the browser, PDF and JSON.
 - [JPEG75 and JPEG85 detail loss](image-jpeg-detail-quality-transfer-2026-11-13.md)
   adds 19 useful local blur ranges per format, without adding any highlight
   on 306 controls per format. It requires an earlier matching copy and

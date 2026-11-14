@@ -28,8 +28,8 @@ GATES = {
 }
 
 
-def summarize(rows):
-    ordered = [(group, condition) for group in range(1, 7) for condition in ROLES]
+def summarize(rows, *, placements=PLACEMENTS):
+    ordered = [(group, condition) for group in range(1, len(placements) + 1) for condition in ROLES]
     require([(row["group"], row["condition"]) for row in rows] == ordered, "Held source-role roster is incomplete")
     require(len({row["sha256"] for row in rows}) == len(rows), "Repeated delivery commitment")
     keys = ("files", "baseline_flags", "baseline_useful", "eligible", "measured", "additional_ranges", "additional_useful",
@@ -39,7 +39,7 @@ def summarize(rows):
     gained = set()
     for row in rows:
         group, condition, truth, prior, proposal = (row[key] for key in ("group", "condition", "truth", "prior", "proposal"))
-        start = PLACEMENTS[group - 1]
+        start = placements[group - 1]
         require(truth == ([[start, start + 6]] if condition in POSITIVES else []), "Known edit differs from frozen construction")
         require(type(row["first_pts"]) is int and SHA.fullmatch(row["sha256"]), "Invalid source commitment")
         require(type(row["eligible"]) is bool and isinstance(row["baseline_status"], str)

@@ -22,6 +22,11 @@ replays a PNG seam or video frame schedule directly from a supplied original
 and its signed evidence record. Start there to check those measurements on a
 local export.
 
+The [signed lip-sync transition replay](video-lipsync-signed-transitions-2026-11-14.md#replay)
+recomputes the published operating points and before, during, and after
+evidence ranges for short timing hypotheses. It includes unchanged,
+ordinary processing, constant-offset and synchronized controls.
+
 The [PDF credential replay](pdf-content-credentials-2026-11-13.md#independent-local-replay)
 checks a pinned public signed PDF with the bundled trust list and verifies
 that the signature binds the document itself.

@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Signed mouth and speech transitions](video-lipsync-signed-transitions-2026-11-14.md)
+  measured 40 of 66 planned short timing edits. Neither transitions
+  alone nor agreement with aperture and level correctly located any at
+  the frozen points. Agreement flagged nine of 264 ordinary controls,
+  including five constant or synchronized shifts. The app retains its
+  current timing check.
+
 - [Animated PNG opening comparison](image-animation-opening-2026-11-14.md)
   compares the separate fallback and the first full replacement frame.
   It shows the source coordinates, pixel count and preview pair in the

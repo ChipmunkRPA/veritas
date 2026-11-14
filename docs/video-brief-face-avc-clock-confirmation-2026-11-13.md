@@ -21,6 +21,14 @@ The independent checks reopen all 6,720 presentation times and native RGB frames
 
 ## Replay
 
+Recount the ordinary and edited results, frame-rate strata and all published
+timestamp commitments using the standard library.
+
+```sh
+PYTHONPATH=backend python3 -B -S -m scripts.review_video_brief_face_avc_confirmation \
+  docs/evaluation-panels/video-brief-face-avc-clock-confirmation-2026-11-13.json
+```
+
 The signed evidence for the separate WebM application smoke tested the same five-to-seven-picture method using a known range at 2.067–2.267 s. The customer view and report now display the measured appearance change and counts of nearby regions with substantial motion for each endpoint. A simulated paid checkout yielded three matching source frames and crops across Chrome, PDF, JSON and signed original replay. Those measurements carry zero weight in the AI assessment. This WebM evidence improvement is already available through the existing optional short carrier setting. The separate H.264 comparison leaves lip synchronization and generalization to other deliveries unmeasured.
 
 To recreate the H.264 experiment, supply a new local run directory and the archived freezes for the prior eight-second HEVC, eight-second AVC/VP9 and four-second AVC comparisons. The authoring step checks each decoded source timestamp and RGB commitment before writing the exact 30 fps delivery. The verification step checks each delivered picture and timestamp through an independent FFmpeg process.

@@ -14,6 +14,9 @@ from pathlib import Path
 from scripts.review_video_brief_face_120_carrier import SHA, expected_tick, overlap, require
 
 SCHEMA = "chipmunk.video-brief-face-avc-confirmation/1"
+CLOCK_SCHEMA = "chipmunk.video-brief-face-avc-clock-confirmation/1"
+CLOCK_PLACEMENTS = (62, 69, 76, 83, 90, 97, 104, 111)
+CLOCK_RATES = ("30", "30", "30000/1001", "30000/1001", "25", "25", "50", "50")
 ROLES = ("original", "tandem_original", "swap", "tandem_swap", "lighting", "same_recording_jump", "cross_recording_cut")
 POSITIVES = {"swap", "tandem_swap"}
 PLACEMENTS = (63, 72, 81, 90, 99, 108)
@@ -142,6 +145,8 @@ def assemble(folder, repeated):
 
 
 def verify(document):
+    if document.get("schema") == CLOCK_SCHEMA:
+        return verify_clock_transfer(document)
     require(document["schema"] == SCHEMA and document["protocol"]["point"] == .10 and document["protocol"]["gates"] == GATES
             and SHA.fullmatch(document["private_freeze_sha256"]), "Incorrect protocol commitment")
     rows = document["rows"]
@@ -152,6 +157,37 @@ def verify(document):
                 "repeated_authoring_files": len(rows)}
     require(document["independent_native"] == expected and document["result"] == result, "Reported counts differ")
     return result
+
+
+def verify_clock_transfer(document):
+    protocol = document["protocol"]
+    require(protocol["point"] == .10 and protocol["gates"] == GATES
+            and protocol["placements"] == list(CLOCK_PLACEMENTS)
+            and all(SHA.fullmatch(document[key]) for key in ("private_freeze_sha256", "private_media_manifest_sha256")),
+            "Incorrect clock transfer protocol")
+    rows = document["rows"]
+    result = summarize(rows, placements=CLOCK_PLACEMENTS)
+    require(document["source_input_rates_hz"] == list(CLOCK_RATES), "Unexpected source-rate allocation")
+    by_rate = {}
+    for rate in dict.fromkeys(CLOCK_RATES):
+        counts = Counter(dict.fromkeys(("ordinary", "ordinary_baseline_flags", "additional_ordinary_flags",
+                                         "edited", "baseline_found", "found_with_candidate"), 0))
+        for row in rows:
+            if CLOCK_RATES[row["group"] - 1] != rate:
+                continue
+            truth, prior, proposal = row["truth"], row["prior"], row["proposal"]
+            if truth:
+                already = any(overlap(region, truth[0]) for region in prior)
+                additional = bool(proposal and overlap(proposal["frames"], truth[0]))
+                counts.update(edited=1, baseline_found=already, found_with_candidate=already or additional)
+            else:
+                counts.update(ordinary=1, ordinary_baseline_flags=bool(prior), additional_ordinary_flags=bool(proposal))
+        by_rate[rate] = dict(counts)
+    expected_native = {"verified_clock_ticks": 120 * len(rows), "verified_rgb_frames": 120 * len(rows),
+                       "verified_representative_anchors": sum(len(row["proposal"]["anchors"]) for row in rows if row["proposal"])}
+    require(document["independent_native"] == expected_native and document["result"] == result
+            and document["by_native_input_rate_hz"] == by_rate, "Reported native-rate counts differ")
+    return {**result, "by_native_input_rate_hz": by_rate}
 
 
 def main():

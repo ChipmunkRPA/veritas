@@ -104,6 +104,22 @@ The [four-second H.264 face comparison](video-brief-face-avc-confirmation-2026-1
 recounts exact source-frame ranges and control outcomes for six recordings
 and their paired deliveries.
 
+### Reproduce the boundaries of four checks
+
+The `check-boundaries` suite recounts the [blind pixel-prediction transfer](image-crossfit-prediction-2026-11-13.md),
+the [four-source-clock face comparison](video-brief-face-avc-clock-confirmation-2026-11-13.md),
+the [matched-rate speech diagnostic](audio-background-rate-diagnostic-2026-11-13.md),
+and the [grammatical-attachment trial](writing-dependency-transfer-2026-11-13.md).
+Use Python 3.11 or later. The command reproduces published measurements and
+decisions, including misses and false flags. The linked study procedures
+cover opening original media and running inference.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/check-boundaries.json" --suite check-boundaries
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/check-boundaries.json" --format-issue
+```
+
 ### Replay delivery and earlier-copy comparisons
 
 Recount the [two JPEG90 delivery histories](image-regional-jpeg90-carrier-2026-11-13.md),

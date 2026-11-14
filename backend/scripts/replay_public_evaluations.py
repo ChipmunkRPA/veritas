@@ -310,12 +310,27 @@ SINGLE_UPLOAD_CUES = {
         f"{SCRIPTS}/writing_interval_transfer.py", f"{SCRIPTS}/writing_focus_v3.py",
     )),
 }
+CHECK_BOUNDARIES = {
+    "image": ("review_image_crossfit_prediction.py", (
+        "image-crossfit-prediction-2026-11-13.json.gz", "image-residual-third-order-transfer-2026-11-13.json.gz",
+    ), (), (f"{SCRIPTS}/image_crossfit_prediction.py", f"{SCRIPTS}/image_residual_third_order_transfer.py")),
+    "video": ("review_video_brief_face_avc_confirmation.py", ("video-brief-face-avc-clock-confirmation-2026-11-13.json",), (), (
+        f"{SCRIPTS}/review_video_brief_face_120_carrier.py",
+    )),
+    "audio": ("audio_background_rate_diagnostic.py", ("audio-background-rate-diagnostic-2026-11-13.json",), ("review",), (
+        f"{SCRIPTS}/audio_background_lossless_rate_transfer.py",
+        f"{PANELS}/audio-background-lossless-rate-transfer-2026-11-13.json",
+    )),
+    "writing": ("review_writing_dependency_transfer.py", ("writing-dependency-transfer-2026-11-13.json",), (), (
+        f"{SCRIPTS}/writing_dependency_transfer.py",
+    )),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
           "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion",
           "short-edit-transfer-2026-11-13", "delivery-and-localization", "reference-and-rotation", "single-upload-transfers",
           "processing-and-short-edits", "delivery-and-reference-transfers", "short-edit-checks", "edit-position-transfers",
-          "single-upload-cues")
+          "single-upload-cues", "check-boundaries")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -397,6 +412,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = EDIT_POSITION_TRANSFERS[modality]
     elif suite == "single-upload-cues":
         script, panel_names, prefix, dependencies = SINGLE_UPLOAD_CUES[modality]
+    elif suite == "check-boundaries":
+        script, panel_names, prefix, dependencies = CHECK_BOUNDARIES[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

@@ -60,6 +60,10 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Blind pixel prediction](image-crossfit-prediction-2026-11-13.md) measured
+  900 held deliveries against exact local image masks. It added at most two
+  useful masks per encoding on the primary set, added ordinary-processing
+  alerts and found no edits in the independent-source set. It stays offline.
 - PDF text visibility checks up to 12 pages for searchable text that the PDF explicitly
   does not draw. The evidence view, report and JSON retain page numbers and locations in
   unrotated PDF coordinates. The presence of this layer withholds whole-document writing

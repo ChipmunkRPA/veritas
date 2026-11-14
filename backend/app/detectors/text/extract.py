@@ -475,18 +475,17 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True) -> Document:
             parts = []
             page_parts.append(parts)
             blocks = page.get_text("rawdict")["blocks"]
-            if page.number < document_pdf_visibility.MAX_PAGES:
-                try:
-                    spans = page.get_texttrace()
-                except (ValueError, RuntimeError):
-                    spans = None
-                if spans is not None:
-                    visibility_examined.append(page.number + 1)
-                    if location := document_pdf_visibility.inspect_page(page, spans):
-                        invisible_text.append(location)
-                if len(doc) <= NATIVE_COMPARISON_MAX_PAGES and spans and all(
-                        span["type"] != 3 and span["opacity"] > 0 for span in spans):
-                    percentage_text_pages.append(page.number + 1)
+            try:
+                spans = page.get_texttrace()
+            except (ValueError, RuntimeError):
+                spans = None
+            if spans is not None:
+                visibility_examined.append(page.number + 1)
+                if location := document_pdf_visibility.inspect_page(page, spans):
+                    invisible_text.append(location)
+            if len(doc) <= NATIVE_COMPARISON_MAX_PAGES and spans and all(
+                    span["type"] != 3 and span["opacity"] > 0 for span in spans):
+                percentage_text_pages.append(page.number + 1)
             blocks.sort(key=lambda b: (round(b["bbox"][1] / 5), b["bbox"][0]))
             page_chars = 0
             native_lines = []

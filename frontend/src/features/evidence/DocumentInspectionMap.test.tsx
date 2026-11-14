@@ -30,16 +30,19 @@ const show = (set: DocumentEvidenceSet) => render(<MemoryRouter><DocumentEvidenc
 afterEach(cleanup)
 
 describe('ordinary document passage inspection', () => {
-  it('shows the PDF pages checked and the location of invisible searchable text', () => {
+  it.each([
+    { schema: 'document-pdf-text-visibility/1', examined: 2, page: 2 },
+    { schema: 'document-pdf-text-visibility/2', examined: 15, page: 15 },
+  ] as const)('shows visibility coverage and the recorded page for $schema', ({ schema, examined, page }) => {
     const set = evidence([])
     show({ ...set, coverage: { ...set.coverage, pdf_text_visibility: {
-      schema: 'document-pdf-text-visibility/1', total_pages: 15, examined_pages: [1, 2],
-      locations: [{ page: 2, invisible_spans: 1, boxes: [[70, 81, 330, 92]] }],
+      schema, total_pages: 15, examined_pages: Array.from({ length: examined }, (_, index) => index + 1),
+      locations: [{ page, invisible_spans: 1, boxes: [[70, 81, 330, 92]] }],
       coordinate_space: 'unrotated-page-points', authorship_confidence_contribution: 0,
     } } })
     const section = screen.getByRole('region', { name: 'PDF text visibility' })
-    expect(within(section).getByText('Checked 2 of 15 pages for explicitly invisible text.')).toBeTruthy()
-    expect(within(section).getByText('Page 2 · 1 invisible text span')).toBeTruthy()
+    expect(within(section).getByText(`Checked ${examined} of 15 pages for explicitly invisible text.`)).toBeTruthy()
+    expect(within(section).getByText(`Page ${page} · 1 invisible text span`)).toBeTruthy()
     expect(within(section).getByText('[70, 81, 330, 92]')).toBeTruthy()
   })
 

@@ -5,6 +5,7 @@ import json
 from contextlib import nullcontext
 from copy import deepcopy
 from types import SimpleNamespace
+from zipfile import ZipFile
 
 import pymupdf
 import pytest
@@ -24,7 +25,7 @@ from app.evidence.document_packets import (
     load_packet_set,
     packet_hash,
 )
-from app.reports import engine, multimedia_evidence, public_package
+from app.reports import engine, multimedia_evidence, public_package, public_verify, verify_document_source
 from app.reports.specimens import specimen
 from app.storage.objects import ObjectIntegrityError, ObjectStore
 
@@ -106,11 +107,15 @@ def test_small_figure_and_searchable_scan_keep_mapped_coverage(tmp_path, overlay
     assert len(visibility["locations"]) == int(overlay)
 
 
-def test_pdf_invisible_layer_is_located_and_limits_the_actual_assessment(packet_factory, tmp_path, monkeypatch):
+@pytest.mark.parametrize("last_page", [2, 15])
+def test_pdf_invisible_layer_is_located_and_limits_the_actual_assessment(last_page, packet_factory, tmp_path, monkeypatch):
     path = tmp_path / "text-visibility.pdf"
     with pymupdf.open() as pdf:
         page = pdf.new_page()
         page.insert_text((50, 50), "This writing displays on the first page in the normal text layer.")
+        for number in range(2, last_page):
+            page = pdf.new_page()
+            page.insert_text((50, 50), f"This is visible native text on page number {number} of the document.")
         page = pdf.new_page()
         page.insert_text((50, 50), "These native words remain visible through their painted outlines.",
                          render_mode=2, fill_opacity=0)
@@ -123,9 +128,11 @@ def test_pdf_invisible_layer_is_located_and_limits_the_actual_assessment(packet_
     evidence = build_packet_set(db, analysis, store, result)
     key = document_pdf_visibility.KEY
     review = evidence["coverage"][key]
-    assert review["examined_pages"] == [1, 2] and review["authorship_confidence_contribution"] == 0
+    assert stage.current_decode_output(decoded)
+    assert review["schema"] == document_pdf_visibility.SCHEMA
+    assert review["examined_pages"] == list(range(1, last_page + 1)) and review["authorship_confidence_contribution"] == 0
     row, = review["locations"]
-    assert row["page"] == 2 and row["invisible_spans"] == 2
+    assert row["page"] == last_page and row["invisible_spans"] == 2
     assert [(x0, y0) for x0, y0, _, _ in row["boxes"]] == [(70., pytest.approx(y, abs=1)) for y in (81, 101)]
     assert load_packet_set(db, analysis, store) == evidence
     assert document_pdf_visibility.verify_source(evidence, extraction.extract(path, ".pdf").meta) is None
@@ -147,7 +154,7 @@ def test_pdf_invisible_layer_is_located_and_limits_the_actual_assessment(packet_
                 "probability_ai_calibrated": score}}, extraction.Document(decoded["text"], [], decoded["meta"]))
             assessment = customer_assessment({**report_result, "kind": "document"})
             assert assessment["headline"] == document_pdf_visibility.ASSESSMENT_HEADLINE
-            assert "PDF page 2" in assessment["meaning"]
+            assert f"PDF page {last_page}" in assessment["meaning"]
             assert assessment["direction"] == "unavailable" and assessment["confidence_pct"] is None
 
     snapshot = specimen("document", "standard")
@@ -160,13 +167,58 @@ def test_pdf_invisible_layer_is_located_and_limits_the_actual_assessment(packet_
     snapshot = snapshot.model_copy(update={"result": report_result, "evidence": evidence,
         "media": snapshot.media.model_copy(update={"sha256": analysis.sha256})})
     monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
-    assert public_package._evidence(snapshot)["coverage"][key] == review
+    export = public_package._evidence(snapshot)
+    assert export["coverage"][key] == review
     rendered = engine.render_pdf(snapshot)
     assert not rendered.refused
     pdf_text = " ".join(engine.pdf_text(rendered.pdf).split())
-    assert "Checked 2 of 2 pages for explicitly invisible text" in pdf_text
-    assert "Page 2. 2 invisible text spans" in pdf_text
+    assert f"Checked {last_page} of {last_page} pages for explicitly invisible text" in pdf_text
+    assert f"Page {last_page}. 2 invisible text spans" in pdf_text
     assert "unrotated PDF points" in pdf_text
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"sha256": analysis.sha256, "bytes": analysis.size_bytes}}
+    archived = deepcopy(export)
+    archived["coverage"][key] = {**review, "schema": document_pdf_visibility.LEGACY_SCHEMA,
+        "examined_pages": list(range(1, min(last_page, 12) + 1)), "locations": [row] if last_page <= 12 else []}
+    old_decode = {**decoded, "meta": {**decoded["meta"], key: archived["coverage"][key]}}
+    assert not stage.current_decode_output(old_decode)
+    for exported in (export, archived):
+        zip_path = tmp_path / "evidence.zip"
+        with ZipFile(zip_path, "w") as archive:
+            archive.writestr("evidence.json", json.dumps(exported))
+        with ZipFile(zip_path) as archive:
+            assert "extracted text and source mapping matched" in verify_document_source.check(archive, bundle, path)
+
+
+def test_pdf_incomplete_visibility_withholds_either_direction(tmp_path, monkeypatch):
+    path = tmp_path / "visible.pdf"
+    with pymupdf.open() as pdf:
+        for number in range(1, 3):
+            pdf.new_page().insert_text((50, 50), f"Page {number} contains writing that appears in the visible PDF.")
+        pdf.save(path)
+    base = {"decision": {"code": "ai_supported", "verbal": "Fixture estimate", "reason": "Fixture", "band": "uncertain",
+                         "confidence": "medium", "fusion_mode": "fallback", "probability_ai_calibrated": .96}}
+    clean = extraction.extract(path, ".pdf")
+    assert stage.enforce_extraction_scope(base, clean) == base
+
+    real_texttrace = pymupdf.Page.get_texttrace
+
+    def fail_last_page(page):
+        if page.number == 1:
+            raise RuntimeError("Text trace unavailable")
+        return real_texttrace(page)
+
+    monkeypatch.setattr(pymupdf.Page, "get_texttrace", fail_last_page)
+    partial = extraction.extract(path, ".pdf")
+    review = partial.meta[document_pdf_visibility.KEY]
+    assert review["examined_pages"] == [1] and review["locations"] == [] and clean.text == partial.text
+    for code, score in (("ai_supported", .96), ("no_ai_indicators", .04)):
+        base["decision"].update(code=code, probability_ai_calibrated=score)
+        result = stage.enforce_extraction_scope(base, partial)
+        assessment = customer_assessment({**result, "kind": "document"})
+        assert assessment["headline"] == document_pdf_visibility.INCOMPLETE_HEADLINE
+        assert "completed on 1 of 2 pages" in assessment["meaning"]
+        assert assessment["direction"] == "unavailable" and assessment["confidence_pct"] is None
 
 
 def test_decode_error_explains_the_unchecked_scan_when_caption_is_too_short(tmp_path, monkeypatch):

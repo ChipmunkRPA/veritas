@@ -92,11 +92,12 @@ are not public screening promises or calibrated population probabilities.
   900 held deliveries against exact local image masks. It added at most two
   useful masks per encoding on the primary set, added ordinary-processing
   alerts and found no edits in the independent-source set. It stays offline.
-- PDF text visibility checks up to 12 pages for searchable text that the PDF explicitly
-  does not draw. The evidence view, report and JSON retain page numbers and locations in
-  unrotated PDF coordinates. The presence of this layer withholds whole-document writing
-  confidence because extracted text can differ from the visible page. Searchable scans
-  can contain such a layer, so its presence supplies zero evidence of AI authorship.
+- PDF text visibility checks every page during document extraction for searchable text
+  that the PDF explicitly does not draw. The evidence view, report and JSON retain page
+  coverage and locations in unrotated PDF coordinates. Whole-document writing confidence
+  is withheld when this layer is present or any page could not be checked for visibility.
+  Searchable scans can contain such a layer, so its presence supplies zero evidence of AI
+  authorship. Original-file replay still supports archived first-12-page checks.
 - [Matched-rate speech diagnostic](audio-background-rate-diagnostic-2026-11-13.md)
   reproduced five false alerts on 12 genuine speakers in loud traffic at both native
   48 kHz and the existing supported 16 kHz. The evidence view and PDF disclose this

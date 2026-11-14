@@ -5,10 +5,12 @@ from __future__ import annotations
 import math
 
 KEY = "pdf_text_visibility"
-MAX_PAGES = 12
+LEGACY_MAX_PAGES = 12
 MAX_BOXES = 4
-SCHEMA = "document-pdf-text-visibility/1"
+LEGACY_SCHEMA = "document-pdf-text-visibility/1"
+SCHEMA = "document-pdf-text-visibility/2"
 ASSESSMENT_HEADLINE = "PDF writing assessment limited by invisible text"
+INCOMPLETE_HEADLINE = "PDF writing assessment limited by incomplete text visibility checks"
 LIMITATION = ("Searchable scans and accessibility overlays can contain invisible text. "
               "The recorded locations describe the PDF text layer and carry zero AI-authorship weight.")
 
@@ -48,11 +50,13 @@ def validate(document):
     if record is None:
         return
     total, examined = record["total_pages"], record["examined_pages"]
-    if (document["source"]["method"] != "pymupdf" or record["schema"] != SCHEMA
+    schema = record["schema"]
+    if (document["source"]["method"] != "pymupdf" or schema not in (LEGACY_SCHEMA, SCHEMA)
             or record["coordinate_space"] != "unrotated-page-points"
             or type(record["authorship_confidence_contribution"]) is not int or record["authorship_confidence_contribution"] != 0
             or type(total) is not int or total < 1 or not isinstance(examined, list)
-            or any(type(page) is not int or not 1 <= page <= min(total, MAX_PAGES) for page in examined)
+            or any(type(page) is not int or not 1 <= page <= total for page in examined)
+            or schema == LEGACY_SCHEMA and any(page > LEGACY_MAX_PAGES for page in examined)
             or examined != sorted(set(examined))):
         raise ValueError("Invalid PDF text visibility coverage")
     previous = 0
@@ -69,5 +73,11 @@ def validate(document):
 def verify_source(document, meta, *, frozen=False):
     validate(document)
     record = document.get("coverage", {}).get(KEY)
-    if (record is not None or frozen) and record != meta.get(KEY):
+    source = meta.get(KEY)
+    if not frozen and record is not None and record["schema"] == LEGACY_SCHEMA and source and source["schema"] == SCHEMA:
+        # Original-file replay reruns extraction. Archived results examined only the first 12 pages.
+        source = {**source, "schema": LEGACY_SCHEMA,
+                  "examined_pages": [page for page in source["examined_pages"] if page <= LEGACY_MAX_PAGES],
+                  "locations": [row for row in source["locations"] if row["page"] <= LEGACY_MAX_PAGES]}
+    if (record is not None or frozen) and record != source:
         raise ValueError("PDF visibility evidence differs from the source extraction")

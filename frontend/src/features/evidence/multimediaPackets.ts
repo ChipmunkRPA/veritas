@@ -397,7 +397,7 @@ export interface DocumentEvidenceSet extends SetBase {
       signal_ref: EvidenceRef; authorship_confidence_contribution: 0 };
     partially_checked_pages?: { page: number; image_boxes: [number, number, number, number][];
       coordinate_space: 'unrotated-page-points'; reason: string }[];
-    pdf_text_visibility?: { schema: 'document-pdf-text-visibility/1'; total_pages: number; examined_pages: number[];
+    pdf_text_visibility?: { schema: 'document-pdf-text-visibility/1' | 'document-pdf-text-visibility/2'; total_pages: number; examined_pages: number[];
       locations: { page: number; invisible_spans: number; boxes: [number, number, number, number][] }[];
       coordinate_space: 'unrotated-page-points'; authorship_confidence_contribution: 0 };
     checks?: { signal_ref: EvidenceRef; status: 'recorded' | 'partial' | 'context_not_recorded'; scored_windows: number; limitation?: string }[];

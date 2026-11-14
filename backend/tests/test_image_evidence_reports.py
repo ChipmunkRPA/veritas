@@ -9,13 +9,14 @@ import cv2
 import numpy as np
 import pymupdf
 import pytest
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageOps
 from test_image_packets import _bytes
 from test_image_packets import packet_fixture as packet_fixture
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.detectors.image import local_jpeg_grid
+from app.detectors.image.adapters.forensic import JpegDoubleCompressionDetector
 from app.engine.detector import Modality, Profile, StageOutputs
 from app.engine.exhibits import ExhibitWriter
 from app.engine.manifest import load_manifest
@@ -303,6 +304,83 @@ def test_png_prior_grid_uses_original_crops_and_is_outside_ai_confidence(packet_
     assert "Ordinary cropping, separate saves or compositing can produce this pattern." in report
     assert "carries zero weight in AI confidence" in report
     assert detector_id not in report
+
+
+def test_jpeg_history_publishes_the_selected_original_blocks(packet_fixture, monkeypatch):
+    db, store, analysis, _, _ = packet_fixture
+    registry = DetectorRegistry(load_manifest(), parse_policy("commercial"))
+    detector_id = JpegDoubleCompressionDetector.spec.id
+    detector = registry.instance(detector_id)
+    pixels = cv2.GaussianBlur(np.random.default_rng(815).integers(0, 256, (512, 768, 3), dtype=np.uint8), (5, 5), .7)
+
+    def run(rgb, edited, orientation):
+        with Image.open(io.BytesIO(_bytes(Image.fromarray(rgb), format="JPEG", quality=55, subsampling=2))) as earlier:
+            delivered = np.array(earlier.convert("RGB"))
+        if edited:
+            delivered[112:248, 296:480] = rgb[112:248, 296:480]
+        exif = Image.Exif()
+        exif[274] = orientation
+        data = _bytes(Image.fromarray(delivered), format="JPEG", quality=90, subsampling=2, exif=exif)
+        source = store.put_bytes(data)
+        writer = ExhibitWriter(analysis.id, store, created_by=detector_id)
+        with closing(StoredMedia(source.sha256, "image", store)) as media:
+            output = detector.run(SimpleNamespace(media=media, exhibits=writer))
+        exhibits = [item.model_dump(mode="json") for item in writer.exhibits]
+        context = SimpleNamespace(outputs={"detect": {"exhibits": exhibits}}, exhibits=writer, store=store)
+        assert image.localise(context)["exhibits"] == []
+        return source, writer, output, exhibits
+
+    _, _, control, quiet = run(pixels, False, 1)
+    assert control.metrics["double_compression"] and control.aggregate is None and quiet[1]["regions"] == []
+    assert all(not exhibit["source_signal_ids"] for exhibit in quiet)
+    _, _, partial, uneven = run(pixels[:509, :767], True, 1)
+    assert partial.metrics["dq_region_blocks"] > 0 and uneven[1]["regions"] == []
+    assert "partial edge blocks" in partial.reasoning
+
+    source, writer, output, exhibits = run(pixels, True, 6)
+    assert output.metrics["dq_region_blocks"] > 0
+    analysis.sha256, analysis.size_bytes = source.sha256, source.size_bytes
+    for asset in writer.artefacts:
+        index_object(db, asset.sha256, asset.size_bytes, media_type=asset.media_type, role=asset.role,
+                     created_by=asset.created_by, analysis_id=analysis.id, artefact_id=asset.id)
+    original = specimen("image", "standard")
+    result = copy.deepcopy(original.result)
+    result["input"]["sha256"] = source.sha256
+    entry = common.detector_entry(detector.spec, output, None)
+    context = SimpleNamespace(state={"registry": registry}, outputs={"detect": {"detectors": [entry], "exhibits": exhibits}})
+    fused = image.legacy_fusion(context)
+    context.outputs.update(fuse=fused, decode={"width": 512, "height": 768})
+    result.update(decision=fused["decision"], signals=fused["signals"], exhibits=exhibits,
+                  findings=image.synthesise(context)["findings"])
+    analysis.result_hash = canonical_hash(result)
+    store.put_bytes(canonical_json(result))
+    evidence = service.persist_packet_set(db, analysis, store, result=result)
+    packet, = evidence["packets"]
+    assert packet["finding_ids"]
+    assert packet["region"] == {"x": 264, "y": 296, "w": 136, "h": 184}
+    assert packet["derivation"]["selection"] == "recorded_jpeg_history_component"
+    assert packet["measurements"][0]["value"] == output.metrics["dq_region_blocks"]
+    with Image.open(io.BytesIO(store.read_bytes(packet["artifacts"]["mask"]["sha256"]))) as block_mask:
+        selected = np.asarray(block_mask.convert("L")) == 255
+        assert selected.shape == (96, 64) and selected.sum() == output.metrics["dq_region_blocks"]
+        assert selected[37:60, 33:50].sum() == selected.sum()
+    crop = packet["crop_region"]
+    with (Image.open(io.BytesIO(store.read_bytes(source.sha256))) as jpeg,
+          Image.open(io.BytesIO(store.read_bytes(packet["artifacts"]["crop"]["sha256"]))) as recorded):
+        oriented = ImageOps.exif_transpose(jpeg)
+        frame = oriented.crop((crop["x"], crop["y"], crop["x"] + crop["w"], crop["y"] + crop["h"]))
+        np.testing.assert_array_equal(np.asarray(recorded), np.asarray(frame))
+    snapshot = original.model_copy(update={
+        "result": result, "image_evidence": evidence,
+        "analysis": original.analysis.model_copy(update={"id": analysis.id, "revision": analysis.revision}),
+        "media": original.media.model_copy(update={"sha256": source.sha256}),
+    })
+    monkeypatch.setattr(image_evidence, "default_store", lambda: store)
+    manifest = public_manifest(snapshot, "weasyprint test", engine.TEMPLATE_SET)["image_evidence"]
+    assert {"packet_id": packet["id"], "role": "crop", "sha256": packet["artifacts"]["crop"]["sha256"]} in manifest["artifacts"]
+    report = " ".join(engine.pdf_text(engine.render_pdf(snapshot).pdf).split())
+    assert "x 264, y 296" in report and "Selected source JPEG blocks" in report
+    assert "The cause of the difference is unresolved." in report and detector_id not in report
 
 
 @pytest.mark.parametrize("profile", ["standard", "forensic", "summary", "newsroom"])

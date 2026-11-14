@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [JPEG compression-history replay](image-jpeg-history-evidence-2026-11-14.md#replay)
+recreates 768 deliveries from 26 attributed photographs. It separately
+reports direct exports and edits made after an earlier JPEG save, including
+ordinary local blur, copying, resizing and re-export controls.
+
 The [Word draft replay](document-word-independent-anchor-2026-11-14.md#replay)
 checks two Word renderings of 216 earlier-draft pairs. It verifies the
 paragraph positions and the input equality needed to reuse the previously

@@ -1332,7 +1332,7 @@ detectors:
 
   - id: img.forensic.jpeg_dq
     adapter: app.detectors.image.adapters.forensic:JpegDoubleCompressionDetector
-    version: 0.4.0
+    version: 0.4.1
     name: Aligned double-JPEG map and grid origin
     modality: image
     family: forensic

@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [JPEG compression-history regions](image-jpeg-history-evidence-2026-11-14.md)
+  now display only the connected blocks selected by the aligned JPEG check.
+  In the staged pre-save workflow the existing check located 34/36 edits at
+  each delivery quality. It also highlighted 57/108 and 58/108 ordinary
+  controls. The new score-based experiment found no additional regions and
+  stays offline. The app shows the measured source blocks and leaves the
+  cause unresolved.
+
 - [Independently matched Word revisions](document-word-independent-anchor-2026-11-14.md)
   retain 13 useful rewrite locations and zero flags on mapped ordinary
   revisions in the version with an extra paragraph. The app, PDF and JSON

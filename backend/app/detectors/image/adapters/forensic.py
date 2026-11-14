@@ -9,6 +9,8 @@
 """
 from __future__ import annotations
 
+import numpy as np
+
 from app.detectors.image import (
     copy_move,
     forensics,
@@ -131,9 +133,9 @@ class NoiseResidualDetector(Detector):
             details={"display_mapping_version": native_forensics.DISPLAY_MAPPING_VERSION})
 
 
-DQ_VERSION = "0.4.0"
+DQ_VERSION = "0.4.1"
 DQ_REGION_SCORE = 0.75  # IF §6.4 classical-heuristic cap; hand-set and uncalibrated (legacy_weight 0 on the fallback path)
-DQ_REFERENCE = "A file compressed once shows no double-quantisation periodicity; a re-saved file shows it in every textured block"
+DQ_REFERENCE = "Repeated JPEG saves can leave a common pattern in textured areas when the two block grids align."
 
 
 def _grid_metrics(grid: jpeg_dq.GridOrigin) -> dict[str, float]:
@@ -144,7 +146,7 @@ class JpegDoubleCompressionDetector(Detector):
     """I-4: aligned double-JPEG map and the global grid origin (`jpeg_dq`), from the original bytes only."""
 
     spec = image_spec("img.forensic.jpeg_dq", "Aligned double-JPEG map and grid origin", "forensic", InputUnit.IMAGE, (H2,),
-                      ("heatmap",), lane="cpu", devices=CPU_ONLY, timeout_s=60.0, version=DQ_VERSION)
+                      ("heatmap", "regions"), lane="cpu", devices=CPU_ONLY, timeout_s=60.0, version=DQ_VERSION)
 
     def run(self, ctx: RunContext) -> DetectorResult:
         data = original_bytes(ctx)
@@ -171,33 +173,50 @@ class JpegDoubleCompressionDetector(Detector):
         orientation = native_forensics.exif_orientation(data)
         posterior = native_forensics.orient(result.posterior(), orientation)
         reliable = native_forensics.orient(result.reliable, orientation)
-        width = result.width if orientation < 5 else result.height
-        exhibit = ctx.exhibits.heatmap(
-            posterior, semantics="p_manipulated", title="Double-JPEG map", value_range=(0.0, 1.0), mask=reliable,
-            caption="Per 8 × 8 block: how likely the block lacks the double-compression periodicity found in the rest of the file "
-                    "(uncalibrated). Blocks too smooth to measure are masked.",
-            media_ref="original",
-            coordinate_space={"width": int(posterior.shape[1]), "height": int(posterior.shape[0]),
-                              "scale_to_original": width / posterior.shape[1]})
-        earlier = f", earlier quality ≈ {result.earlier_quality} (libjpeg scaling)" if result.earlier_quality is not None else ""
+        width, height = (result.width, result.height) if orientation < 5 else (result.height, result.width)
+        grid_space = {"width": posterior.shape[1], "height": posterior.shape[0], "scale_to_original": width / posterior.shape[1]}
         region = result.localised
+        sources = [f"{self.spec.id}:global"] if region is not None else []
+        exhibit = ctx.exhibits.heatmap(
+            posterior, semantics="p_manipulated", title="JPEG compression-history map", value_range=(0.0, 1.0), mask=reliable,
+            caption="Brighter blocks give weaker support for the earlier JPEG pattern. The map is an uncalibrated comparison. "
+                    "Blocks with too little detail are excluded.",
+            source_signal_ids=sources, media_ref="original", coordinate_space=grid_space)
+        earlier = f", earlier quality ≈ {result.earlier_quality} (libjpeg scaling)" if result.earlier_quality is not None else ""
+        boxes = []
+        exact_grid = (width, height) == (8 * posterior.shape[1], 8 * posterior.shape[0])
+        if region is not None and exact_grid:
+            bounds = np.zeros(result.reliable.shape, dtype=bool)
+            bounds[region.y:region.y + region.h, region.x:region.x + region.w] = True
+            oriented = native_forensics.orient(bounds, orientation)
+            x = int(np.flatnonzero(oriented.any(axis=0))[0])
+            y = int(np.flatnonzero(oriented.any(axis=1))[0])
+            w, h = (region.w, region.h) if orientation < 5 else (region.h, region.w)
+            boxes.append({"region": {"kind": "bbox", "bbox": {"x": x, "y": y, "w": w, "h": h}},
+                          "label": "Area with weaker support for the earlier JPEG pattern"})
+        # An empty dedicated selection prevents the generic heatmap stage from
+        # inventing a region when no component passed this check's own rules.
+        region_exhibit = ctx.exhibits.regions(boxes, title="Selected JPEG compression-history area", source_signal_ids=sources,
+                                             coordinate_space=grid_space, media_ref="original")
+        exhibits = [exhibit, region_exhibit]
         if region is None:
             return DetectorResult(
-                status="ok", metrics=metrics, exhibit_ids=[exhibit], reference=DQ_REFERENCE,
-                observed=f"compressed at least twice{earlier}; {len(supporting)} of {tested} tested frequencies show the trace "
-                         "and no region lacks it",
-                reasoning="The file was saved as JPEG at least twice. Re-saving is common and is not deception, and no area "
-                          "stands out from the rest." + crop)
+                status="ok", metrics=metrics, exhibit_ids=exhibits, reference=DQ_REFERENCE,
+                observed=f"An earlier JPEG pattern was measured in {len(supporting)} of {tested} tested frequencies{earlier}. "
+                         "No area met the local selection rule.",
+                reasoning="Re-saving is common. This check can miss changes after resizing or when the file carries too little "
+                          "detail from its earlier save." + crop)
         metrics |= {"dq_region_blocks": float(region.blocks), "dq_region_share": region.share}
         aggregate = UnitScore("global", DQ_REGION_SCORE, "probability", quality={})
         return DetectorResult(
-            status="ok", unit_scores=[aggregate], aggregate=aggregate, metrics=metrics, exhibit_ids=[exhibit],
+            status="ok", unit_scores=[aggregate], aggregate=aggregate, metrics=metrics, exhibit_ids=exhibits,
             reference=DQ_REFERENCE,
-            observed=f"compressed at least twice{earlier}; a region of {region.blocks} blocks ({region.share:.1%} of the measurable "
-                     "area) lacks the trace",
-            reasoning="Most of the file carries the periodicity of an earlier compression but one region does not, so that region "
-                      "has a different compression history, as when content is pasted or regenerated before the last save. Smooth "
-                      "or saturated areas can also lose the trace." + crop)
+            observed=f"An area covering {region.blocks} blocks ({region.share:.1%} of measurable blocks) had weaker support "
+                     f"for the earlier JPEG pattern{earlier}.",
+            reasoning="Local blur, copying, a change in texture or a generated edit can weaken the pattern. This measurement leaves "
+                      "the cause unresolved. "
+            + ("The outline shows the selected area's bounds at the original JPEG block scale." if boxes else
+               "This file has partial edge blocks, so the exact area outline is unavailable.") + crop)
 
     @staticmethod
     def _grid_only(data: bytes) -> DetectorResult:

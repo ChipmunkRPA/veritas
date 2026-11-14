@@ -1,0 +1,29 @@
+{
+  "simulated_stripe_usd_minor": 999,
+  "before_payment_checked": true,
+  "paid_detector_calls": 2,
+  "evidence_matches_json_and_signed_pdf": true,
+  "cases": {
+    "ordinary_reexport": {
+      "source_sha256": "c2ab8ece98ebe0cf394a440564792481fe2f9a4c789d34c64a6ccd5eda61db1d",
+      "packets": 0
+    },
+    "edited": {
+      "source_sha256": "5b423f210a788057f7b6d4f42bca1551c19f3b9e813c67eb9852c77f85da4044",
+      "packets": 1,
+      "region": {
+        "h": 184,
+        "w": 136,
+        "x": 264,
+        "y": 296
+      },
+      "blocks": 383,
+      "artifact_hashes": {
+        "context": "8182d2d769c706db4c771e68007f17ecdf28a394e0929ac83e874933a977c560",
+        "crop": "1bf3378bd3ccce3144edd2cb630415a0f86b0007eeda8706b3fa3617bc5b2d53",
+        "mask": "9eba45ec1cbe88357f18fd4b314ae26de998cd0a529b8960b912e684786689f5",
+        "overlay": "dfe9f73c8ffe14957aef792a0fc6cf038b3e6783577d097b46683f0d5550359e"
+      }
+    }
+  }
+}

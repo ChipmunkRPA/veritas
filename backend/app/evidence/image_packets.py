@@ -24,7 +24,7 @@ from sqlalchemy.orm import Session
 
 from app.api.public_projection import alias_signal
 from app.core.canonical import FLOAT_DP, canonical_hash, canonical_json
-from app.detectors.image import sharp_boundary
+from app.detectors.image import jpeg_dq, sharp_boundary
 from app.engine.media import MAX_PIXELS, MAX_SIDE, refuse_truncated_images
 from app.evidence import image_flip_mask
 from app.evidence import image_interpolation_binding as interpolation
@@ -104,6 +104,11 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
             mask = artifacts.get("mask", {})
             if localisation.get("grid") != [mask.get("width"), mask.get("height")]:
                 raise PacketIntegrityError("Localisation mask dimensions differ from the measured grid")
+        if (packet.get("derivation") or {}).get("selection") == "recorded_jpeg_history_component":
+            required.add("mask")
+            mask = artifacts.get("mask", {})
+            if (width, height) != (8 * (mask.get("width") or 0), 8 * (mask.get("height") or 0)):
+                raise PacketIntegrityError("JPEG history mask dimensions differ from the source block grid")
         if set(artifacts) != required:
             raise PacketIntegrityError("Image evidence is missing a required plate")
         for art in artifacts.values():
@@ -352,6 +357,21 @@ def _copy_for(semantics: str, creator: str) -> tuple[str, str, str, str]:
             "A local editing check marked this region. The response is not a calibrated pixel probability, and ordinary edits or unfamiliar images may also trigger it.")
 
 
+def _jpeg_history_component(signals, values, reliable, rect, width, height):
+    gh, gw = values.shape
+    if (width, height) != (8 * gw, 8 * gh) or any(value % 8 for value in rect) or len(signals) != 1:
+        raise PacketIntegrityError("The JPEG history selection must align to complete source blocks")
+    left, top, right, bottom = (value // 8 for value in rect)
+    blocks = (signals[0].get("metrics") or {}).get("dq_region_blocks")
+    support = ((values >= jpeg_dq.REGION_POSTERIOR) & reliable).astype(np.uint8)
+    _, labels, stats, _ = cv2.connectedComponentsWithStats(support, connectivity=8)
+    matches = [label for label, row in enumerate(stats[1:], 1)
+               if tuple(row) == (left, top, right - left, bottom - top, blocks)]
+    if len(matches) != 1:
+        raise PacketIntegrityError("The JPEG history selection differs from the recorded blocks")
+    return labels == matches[0]
+
+
 def _sharp_boundary_measurements(signals: list[dict]) -> list[dict]:
     if len(signals) != 1:
         raise PacketIntegrityError("Sharp boundary evidence requires one supporting check")
@@ -557,6 +577,14 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                         diagnostics.append("A local editing region without a reproducible component mask was omitted; reanalysis is required.")
                         document["omitted_regions"] += 1
                         continue
+                jpeg_history = heat.get("created_by") == regions.get("created_by") == "img.forensic.jpeg_dq"
+                if jpeg_history:
+                    try:
+                        component = _jpeg_history_component(signals, values, reliable, rect, width, height)
+                    except PacketIntegrityError:
+                        diagnostics.append("A JPEG history region without reproducible source blocks was omitted.")
+                        document["omitted_regions"] += 1
+                        continue
                 packet_id = f"E{len(document['packets']) + 1:02d}"
                 plates, crop_region = _plates(source, rect, values, reliable, packet_id, component)
                 x0, y0, x1, y1 = rect
@@ -610,6 +638,14 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                     observation += f", compared with {nearby:.3f} in the surrounding crop"
                     limits.append("The surrounding crop is context, not a matched control; texture and lighting may differ.")
                 observation += "."
+                if jpeg_history:
+                    blocks = int(component.sum())
+                    measurements.insert(0, {"label": "Selected source JPEG blocks", "value": blocks, "unit": "blocks"})
+                    observation = (f"{blocks} connected 8 × 8 blocks had weaker support for the earlier JPEG pattern. "
+                                   "The crop shows their location in the submitted image.")
+                    interpretation = ("Local blur, copying, ordinary re-export and generated edits can all produce this difference. "
+                                      "The cause of the difference is unresolved.")
+                    limits = ["The selected blocks are a compression-history measurement. The cause and exact altered pixels remain unknown."]
                 boundary_cue = heat.get("created_by") == sharp_boundary.DETECTOR_ID
                 if boundary_cue:
                     if (gw, gh, sx, sy) != (width, height, 1.0, 1.0):
@@ -646,6 +682,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                          "crop_padding": "12% of region long side, minimum 24 source pixels"}}
                 if boundary_cue:
                     packet["overlay_legend"] = "Orange shows the recorded four sides and their relative contrast. The outlined interior gives location context."
+                if jpeg_history:
+                    packet["overlay_legend"] = "Orange marks the selected 8 × 8 JPEG blocks. The outline encloses their source location."
+                    packet["derivation"]["selection"] = "recorded_jpeg_history_component"
+                    packet["derivation"]["overlay"] = "threshold_component_orange_nearest_neighbour"
                 if localisation:
                     packet["localisation"] = localisation
                     packet["derivation"]["selection"] = "recorded_connected_component"

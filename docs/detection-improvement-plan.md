@@ -128,6 +128,11 @@ are not public screening promises or calibrated population probabilities.
   flags removed three genuine-foreground false flags and eight or nine
   correct synthetic flags. Both approaches remain in evaluation. The two
   public replays recover the original PCM ranges from the publisher.
+- [Speech-window coverage](audio-speech-admission-transfer-2026-11-13.md)
+  now shows measured selection reasons and exact timestamps in new audio
+  and video analyses. In a four-room, 96-clip study, gain admitted 15 of
+  24 speech-heavy excerpts versus 12 on original audio. The gain view
+  remains experimental pending a matched voice-origin comparison.
 - [Grammatical attachment changes](writing-dependency-transfer-2026-11-13.md)
   added zero locations on 40 held sentence edits. A part-of-speech comparison added
   one location and one false alert. Both remain experimental.

@@ -231,6 +231,17 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% endif %}
 <p class="caption">JSON pointer <span class="mono">{{ evidence.audio_source_clock_pointer }}</span>.</p>
 {% endif %}
+{% if evidence.get('speech_window_selection') %}
+{% set selection = evidence.speech_window_selection %}
+<h3>How speech windows were selected</h3>
+<p class="caption">{{ selection.counts.scored }} scored. {{ selection.counts.below_speech_minimum }} below the speech minimum. {{ selection.counts.outside_window_limit }} outside the window limit.</p>
+<p class="caption">The voice check requires detected speech in at least half of each candidate window. These measurements describe speech coverage in the mixed track and carry zero weight in the AI estimate.</p>
+{% for window in evidence.speech_windows %}
+<p class="caption">Analyzed audio {{ '%.3f' | format(window.start_s) }}–{{ '%.3f' | format(window.end_s) }} s. Detected speech {{ '%.1f' | format(window.speech_percent) }}%. {{ 'Below the speech minimum.' if window.status == 'below_speech_minimum' else 'Outside the window limit.' }}
+{% for range in window.ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% if range.playback %} Video playback {{ '%.3f' | format(range.playback[0]) }}–{{ '%.3f' | format(range.playback[1]) }} s.{% endif %}{% endfor %}</p>
+{% endfor %}
+<p class="caption">All measured windows and source timestamps are recorded in JSON at <span class="mono">{{ evidence.speech_selection_pointer }}</span>.</p>
+{% endif %}
 {% if evidence.get('voice_gaps') %}
 <h3>Unscored voice intervals</h3>
 <p class="caption">These times have no recorded voice response. Background sound can affect coverage, and the gap alone does not establish its cause.</p>

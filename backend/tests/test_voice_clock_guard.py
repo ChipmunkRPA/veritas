@@ -15,6 +15,7 @@ from app.detectors.video.audio import voice_windows
 from app.engine.boundary import Deadline
 from app.engine.detector import Profile, StageOutputs
 from app.engine.stages import audio, video
+from app.evidence import audio_binding
 from app.evidence.audio_binding import (
     VOICE_CLOCK_LIMIT,
     current_voice_detection_output,
@@ -69,6 +70,9 @@ def test_real_pcm_clock_reaches_both_voice_pipelines(tmp_path, monkeypatch, shif
                           deadline=Deadline(30), exhibits=SimpleNamespace(series=lambda *a, **k: "series"))
     result = PellaVoiceDetector().run(ctx)
     assert result.status == "ok"
+    plan = result.details[audio_binding.SPEECH_SELECTION]
+    assert [row["start_sample"] for row in plan] == ([0, boundary] if breaks else [0])
+    assert all(row["admitted"] for row in plan)
     screen = result.details["audio_screening"]
     if breaks:
         assert gate_calls == [boundary, samples - boundary]
@@ -81,6 +85,33 @@ def test_real_pcm_clock_reaches_both_voice_pipelines(tmp_path, monkeypatch, shif
         assert gate_calls == [samples]
         assert screen["decision"] == "original" and screen["scope_supported"]
         assert screen["probability_ai"] is not None
+
+
+def test_candidate_records_rejected_and_outside_budget_speech_windows(monkeypatch):
+    monkeypatch.setattr(settings, "audio_detector_mode", "legacy")
+    pcm = np.ones(256_000, np.float32)
+    track = AudioTrack("analysed", pcm, len(pcm), max_windows=1)
+    vad = SimpleNamespace(spans=lambda values: [(2, 6), (10, 11)])
+    classifier = SimpleNamespace(predict=lambda windows: [.1] * len(windows))
+    ctx = SimpleNamespace(outputs=StageOutputs(audio=track), profile=Profile.FULL,
+                          lease={PellaVoiceDetector.MODEL_ID: SimpleNamespace(obj=classifier, revision="test"),
+                                 "silero.speech_activity": SimpleNamespace(obj=vad)},
+                          exhibits=SimpleNamespace(series=lambda *a, **k: "series"))
+    result = PellaVoiceDetector().run(ctx)
+    checksum = "a" * 64
+    source = {"samples": len(pcm), "timeline_time_base": "1/16000",
+              "timeline": [{"start_sample": 0, "end_sample": len(pcm), "source_pts": 8000}]}
+    windows = [{"start_sample": int(unit.quality["start_sample"]), "end_sample": int(unit.quality["end_sample"]),
+                "raw_output_sha256": checksum} for unit in result.unit_scores]
+    key = audio_binding.SPEECH_SELECTION
+    coverage = {"windows": windows, key: audio_binding.speech_window_selection(result.details[key], checksum, windows, source)}
+    assert coverage[key]["counts"] == {"scored": 1, "below_speech_minimum": 4, "outside_window_limit": 2}
+    assert coverage[key]["windows"][0]["speech_samples"] == 32000
+    assert coverage[key]["windows"][0]["source_timestamp_ranges"][0]["source_start_pts"] == 8000
+    audio_binding.validate_speech_window_selection(coverage, source)
+    coverage[key]["windows"][0]["speech_samples"] -= 1
+    with pytest.raises(ValueError, match="speech window selection"):
+        audio_binding.validate_speech_window_selection(coverage, source)
 
 
 def test_window_cap_ranks_continuous_pieces_together_and_can_keep_a_short_tail():

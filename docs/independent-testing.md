@@ -2595,3 +2595,8 @@ against separately written scalar equations. It does not replay private audio
 or train the small head. The [actual Linux math receipt](evaluation-panels/mouth-audio-context-v14-linux-math-review.json)
 also passes. The complete local 272-track/6,373-window study rejects
 the candidate for excess ordinary flags. Outside human review remains pending.
+
+The [speech-window coverage replay](audio-speech-admission-transfer-2026-11-13.md#replay)
+recounts admission on 96 manually stratified excerpts from four AMI meetings.
+It gives the byte-range recovery procedure for the original publisher
+samples. The public receipt contains coordinates, hashes and measured durations.

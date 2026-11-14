@@ -389,6 +389,12 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
     if source.get("audio_stream_indices") != mapping.get("audio_stream_indices"):
         raise ObjectIntegrityError("Audio track coverage differs from the frozen audio input mapping")
     source_ranges(mapping, 0, len(pcm))
+    if "schema" in document:
+        from app.evidence import audio_packets
+
+        result = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+        audio_record = result.get("manifest", {}).get("sampling", {}).get("audio_evidence") or {}
+        audio_packets.verify_speech_selection(document, store, audio_record)
     stereo_context = document.get("stereo_context")
     if stereo_sha := document.get("stereo_context_sha256"):
         if canonical_json(stereo_context) != _bytes(stereo_sha, store):
@@ -1128,6 +1134,13 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "json_pointer": f"{stereo_prefix}/stereo_listening/windows/{index}",
         })
     gaps = voice_coverage.get("unscored_intervals", [])
+    speech_selection = voice_coverage.get("speech_window_selection")
+    speech_windows = []
+    if speech_selection:
+        unscored = [row for row in speech_selection["windows"] if row["status"] != "scored"]
+        for row in unscored[:8]:
+            speech_windows.append({**_voice_interval_view(row, rate, video_origin_s), "status": row["status"],
+                                   "speech_percent": 100 * row["speech_samples"] / (row["end_sample"] - row["start_sample"])})
     overlaps = voice_coverage.get("stereo_attenuation_overlaps", [])
     voice_gaps = [_voice_interval_view(gap, rate, video_origin_s) for gap in gaps[:8]]
     voice_stereo_overlaps = []
@@ -1187,6 +1200,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "voice_gaps": voice_gaps,
             "voice_gap_count": len(gaps),
             "voice_gap_pointer": "/audio/coverage/unscored_intervals" if kind == "video" else "/coverage/unscored_intervals",
+            "speech_window_selection": speech_selection,
+            "speech_windows": speech_windows,
+            "speech_selection_pointer": ("/audio" if kind == "video" else "") + "/coverage/speech_window_selection",
             "audio_tracks": audio_tracks,
             "audio_tracks_pointer": ("/audio" if kind == "video" else "") + "/source/audio_stream_indices",
             "audio_source_clock": voice_coverage.get("source_clock_context"),

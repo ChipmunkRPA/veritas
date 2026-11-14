@@ -9,6 +9,7 @@ from pathlib import Path
 from zipfile import ZipFile
 
 from app.detectors.audio.decode import decode_audio, source_ranges, wav_bytes
+from app.evidence.audio_binding import SPEECH_SELECTION
 from app.evidence.stereo_binding import SCHEMA as STEREO_CONTEXT_SCHEMA
 from app.reports.public_verify import SCHEMA
 
@@ -84,10 +85,15 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("Decoded audio duration disagrees with the recorded coverage limit")
 
     replay_detail = ""
+    if selection := audio["coverage"].get(SPEECH_SELECTION):
+        for row in selection["windows"]:
+            if row["source_timestamp_ranges"] != source_ranges(decoded.mapping, row["start_sample"], row["end_sample"]):
+                raise ValueError("Speech window selection differs from the original source timeline")
+        replay_detail += f" Verified source times for {len(selection['windows'])} recorded speech windows."
     if stereo and stereo["schema"] == STEREO_CONTEXT_SCHEMA and stereo["stereo_pcm_sha256"] is not None:
         if stereo != decoded.mapping.get("stereo_context"):
             raise ValueError("Stereo channel and mono-downmix evidence differs from the original audio samples")
-        replay_detail = f" Recomputed stereo channel and mono-downmix evidence for {len(stereo['windows'])} windows."
+        replay_detail += f" Recomputed stereo channel and mono-downmix evidence for {len(stereo['windows'])} windows."
     covered = set()
     intervals = 0
     for label, span, timestamps, asset in _clips(audio, alignment):

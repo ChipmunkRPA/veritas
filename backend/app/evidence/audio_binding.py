@@ -7,6 +7,11 @@ from bisect import bisect_left, bisect_right
 
 from app.core.canonical import canonical_hash
 
+SPEECH_SELECTION = "speech_window_selection"
+SPEECH_SELECTION_COMMITMENT = "speech_window_selection_run_sha256"
+SPEECH_SELECTION_SCHEMA = "audio-speech-window-selection/1"
+SPEECH_SELECTION_STATES = ("scored", "below_speech_minimum", "outside_window_limit")
+
 _CLOCK_BREAK_MIN_SAMPLES = 320
 _CLOCK_BREAK_MAX_ROWS = 8
 VOICE_CLOCK_LIMIT = (
@@ -169,6 +174,53 @@ def _timeline_ranges(source: dict, start: int, end: int) -> list[dict]:
     return output
 
 
+def speech_window_selection(candidates, checksum, windows, source):
+    scored = {(row["start_sample"], row["end_sample"]) for row in windows if row["raw_output_sha256"] == checksum}
+    rows = []
+    counts = dict.fromkeys(SPEECH_SELECTION_STATES, 0)
+    last_start = -1
+    for candidate in candidates:
+        start, end, speech, admitted = (candidate[key] for key in ("start_sample", "end_sample", "speech_samples", "admitted"))
+        if (any(type(value) is not int for value in (start, end, speech)) or type(admitted) is not bool
+                or not last_start < start < end <= source["samples"] or start < 0
+                or not 16000 <= end - start <= 64000 or not 0 <= speech <= end - start
+                or admitted != (2 * speech >= end - start)):
+            raise ValueError("Invalid recorded speech window selection")
+        ranges = _timeline_ranges(source, start, end)
+        if (not ranges or ranges[0]["start_sample"] != start or ranges[-1]["end_sample"] != end
+                or any(abs(second["source_start_pts"] - first["source_end_pts"]) >= _CLOCK_BREAK_MIN_SAMPLES
+                       for first, second in zip(ranges, ranges[1:]))):
+            raise ValueError("Speech window selection crosses a source timestamp break")
+        last_start = start
+        status = ("scored" if (start, end) in scored else "outside_window_limit") if admitted else "below_speech_minimum"
+        if status == "scored":
+            scored.remove((start, end))
+        counts[status] += 1
+        rows.append({"start_sample": start, "end_sample": end, "speech_samples": speech,
+                     "status": status, "source_timestamp_ranges": ranges})
+    if scored:
+        raise ValueError("A scored voice window has no corresponding speech measurement")
+    return {"schema": SPEECH_SELECTION_SCHEMA, "minimum_speech_fraction": 0.5, "affects_overall_confidence": False,
+            "raw_output_sha256": checksum, "counts": counts, "windows": rows}
+
+
+def validate_speech_window_selection(coverage: dict, source: dict) -> None:
+    if SPEECH_SELECTION not in coverage:
+        return
+    try:
+        record = coverage[SPEECH_SELECTION]
+        checksum, rows = record["raw_output_sha256"], record["windows"]
+        if (not isinstance(checksum, str) or not re.fullmatch(r"[a-f0-9]{64}", checksum)
+                or source["timeline_time_base"] != "1/16000" or not isinstance(rows, list) or not 0 < len(rows) <= 600):
+            raise ValueError("Invalid speech selection source or coverage")
+        candidates = [{"start_sample": row["start_sample"], "end_sample": row["end_sample"],
+                       "speech_samples": row["speech_samples"], "admitted": row["status"] != "below_speech_minimum"} for row in rows]
+        if canonical_hash(record) != canonical_hash(speech_window_selection(candidates, checksum, coverage["windows"], source)):
+            raise ValueError("Speech selection differs from its source clock or scored windows")
+    except (KeyError, TypeError, AttributeError) as error:
+        raise ValueError("Speech selection has an invalid structure") from error
+
+
 def validate_audio_stream_scope(source: dict) -> None:
     if "audio_stream_indices" not in source:
         return
@@ -181,6 +233,7 @@ def validate_audio_stream_scope(source: dict) -> None:
 
 
 def validate_unscored_voice_coverage(coverage: dict, source: dict, stereo: dict | None = None) -> None:
+    validate_speech_window_selection(coverage, source)
     if not {"unscored_intervals", "stereo_attenuation_overlaps", "source_clock_context"}.intersection(coverage):
         return
     gaps = unscored_voice_intervals(coverage, source)

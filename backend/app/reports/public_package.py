@@ -38,6 +38,13 @@ def public_result(result: dict) -> dict:
     decision = public.get('decision') or {}
     copy_coverage = {}
     source_coverage = {}
+    if result.get('kind') in {'audio', 'video'}:
+        from app.evidence.audio_binding import SPEECH_SELECTION, SPEECH_SELECTION_COMMITMENT
+
+        key = 'video_audio_evidence' if result['kind'] == 'video' else 'audio_evidence'
+        record = result.get('manifest', {}).get('sampling', {}).get(key) or {}
+        if selection := record.get(SPEECH_SELECTION):
+            source_coverage[SPEECH_SELECTION_COMMITMENT] = selection['raw_output_sha256']
     if result.get('kind') == 'image':
         from app.evidence import image_interpolation_binding as interpolation
         from app.evidence.image_copy_similarity_binding import result_skip

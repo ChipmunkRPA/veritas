@@ -33,6 +33,33 @@ function SourceTimestamps({ ranges, videoOriginS, showSeconds = false }: {
   })}</>
 }
 
+const selectionLabels = {
+  scored: 'Scored',
+  below_speech_minimum: 'Below the speech minimum',
+  outside_window_limit: 'Outside the window limit',
+}
+
+function SpeechWindowSelection({ selection, rate, videoOriginS }: {
+  selection: NonNullable<NonNullable<AudioEvidenceSet['coverage']>['speech_window_selection']>
+  rate: number
+  videoOriginS?: number | null
+}) {
+  const { counts, windows } = selection
+  const unscored = windows.filter((window) => window.status !== 'scored')
+  return <>
+    <p className="mt-2 mb-0">{counts.scored} scored · {counts.below_speech_minimum} below the speech minimum · {counts.outside_window_limit} outside the window limit</p>
+    <p className="mt-2 mb-0">The voice check requires detected speech in at least half of each candidate window. This measures speech coverage in the mixed track and carries zero weight in the AI estimate.</p>
+    {unscored.length > 0 && <ul className="mt-2 mb-0 space-y-2 pl-4 list-disc">
+      {unscored.map((window) => <li key={window.start_sample}>
+        <p className="m-0">Analyzed audio {seconds(window.start_sample / rate)}–{seconds(window.end_sample / rate)}.
+          {' '}Detected speech {measurementValue(100 * window.speech_samples / (window.end_sample - window.start_sample))}%.
+          {' '}{selectionLabels[window.status]}.</p>
+        <SourceTimestamps ranges={window.source_timestamp_ranges} videoOriginS={videoOriginS} />
+      </li>)}
+    </ul>}
+  </>
+}
+
 export default function AudioEvidenceContent({ set, token, mediaReady, videoOriginS, standalone = true }: {
   set: AudioEvidenceSet; token: string; mediaReady: boolean; videoOriginS?: number | null; standalone?: boolean
 }) {
@@ -214,6 +241,10 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       <p className="m-0">{shortReview || longReview || backgroundReview ? 'Primary voice checks' : 'Voice checks'} cover {seconds(set.coverage.scored_samples / rate)} of the {seconds(set.coverage.decoded_samples / rate)} decoded input.
         {' '}{seconds(set.coverage.unscored_samples / rate)} of that input has no window score. Overlapping windows are counted once in this coverage.</p>
       <p className="mt-2 mb-0">{set.coverage.windows.length} scored windows. Responses apply to complete windows, normally four seconds; they do not identify individual words or exact voice-replacement boundaries.</p>
+      {set.coverage.speech_window_selection && <details className="mt-3" open={set.coverage.windows.length === 0 || undefined}>
+        <summary className="cursor-pointer font-medium">How speech windows were selected</summary>
+        <SpeechWindowSelection selection={set.coverage.speech_window_selection} rate={rate} videoOriginS={videoOriginS} />
+      </details>}
       {intervals.length > 0 && <details className="mt-3" open={hash === '#media-evidence-voice-coverage' || undefined}>
         <summary className="cursor-pointer font-medium">Scored voice intervals</summary>
         <ul className="mt-2 mb-0 pl-4 list-disc">{intervals.map((window) => <li key={`${window.start_sample}:${window.end_sample}`}>

@@ -219,6 +219,11 @@ export interface AudioEvidenceSet extends SetBase {
   coverage?: { decoded_samples: number; scored_samples: number; unscored_samples: number; decode_limit_reached: boolean;
     selection_threshold: number; windows: (SampleInterval & { score: number; signal_refs: EvidenceRef[] })[];
     source_clock_context?: AudioSourceClockContext;
+    speech_window_selection?: { schema: 'audio-speech-window-selection/1'; minimum_speech_fraction: 0.5;
+      affects_overall_confidence: false; raw_output_sha256: string;
+      counts: Record<'scored' | 'below_speech_minimum' | 'outside_window_limit', number>;
+      windows: (SampleInterval & { speech_samples: number; status: 'scored' | 'below_speech_minimum' | 'outside_window_limit';
+        source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] })[] };
     unscored_intervals?: (SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] })[];
     stereo_attenuation_overlaps?: (SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'];
       unscored_interval_index: number; stereo_window_index: number })[] }

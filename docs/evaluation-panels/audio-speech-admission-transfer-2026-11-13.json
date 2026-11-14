@@ -1,0 +1,2030 @@
+{
+  "freeze": {
+    "schema": "chipmunk.audio-speech-admission-transfer/1",
+    "method": {
+      "sampling": "Four participant-disjoint AMI meeting cohorts unseen in the repository at freeze. Six excerpts per room and stratum at least eight seconds apart, selected by fixed hashes from mixer-independent manual word timings.",
+      "strata": "High has at least 75% annotated speech, low has at most 25%. Two boundary strata bracket 50% with 40\u201349% and 50\u201359%.",
+      "comparison": "Run the existing three-second speech-activity gate at original volume and on a clipped-sample-free +6 dB copy. The union admits if either does. The intersection requires both. Keep the established half-window rule in both views.",
+      "interpretation": "Manual words are only a proxy for audible speech. This test measures window admission, not AI classification. Gain copies do not enter analysis."
+    },
+    "base": "e3d0d2b",
+    "annotations_sha256": "b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d",
+    "study_sha256": "35271d3090f8a0303dfaa3e8c9fdafc78a3ede996b1fd57612a17661ef9f16e7",
+    "runner_sha256": "a00a88a24df462118f072ff2a6f0143ccf7d54414671825d55b4ca412d9c8301",
+    "rooms": [
+      "TS3007b",
+      "TS3003a",
+      "TS3005a",
+      "TS3004a"
+    ],
+    "cases": [
+      {
+        "room": "TS3007b",
+        "start_sample": 5312000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 0
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 12032000,
+        "stratum": "high",
+        "word_cells": 243,
+        "id": 1
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 13952000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 2
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 6912000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 3
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 2112000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 4
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 4736000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 5
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 3072000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 6
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 576000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 7
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 256000,
+        "stratum": "low",
+        "word_cells": 21,
+        "id": 8
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 9728000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 9
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 9600000,
+        "stratum": "low",
+        "word_cells": 50,
+        "id": 10
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 9920000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 11
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 1280000,
+        "stratum": "near_below",
+        "word_cells": 125,
+        "id": 12
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 7680000,
+        "stratum": "near_below",
+        "word_cells": 131,
+        "id": 13
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 3904000,
+        "stratum": "near_below",
+        "word_cells": 124,
+        "id": 14
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 8640000,
+        "stratum": "near_below",
+        "word_cells": 140,
+        "id": 15
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 3328000,
+        "stratum": "near_below",
+        "word_cells": 148,
+        "id": 16
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 3456000,
+        "stratum": "near_below",
+        "word_cells": 126,
+        "id": 17
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 6528000,
+        "stratum": "near_above",
+        "word_cells": 153,
+        "id": 18
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 7488000,
+        "stratum": "near_above",
+        "word_cells": 163,
+        "id": 19
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 7936000,
+        "stratum": "near_above",
+        "word_cells": 159,
+        "id": 20
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 5760000,
+        "stratum": "near_above",
+        "word_cells": 173,
+        "id": 21
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 7168000,
+        "stratum": "near_above",
+        "word_cells": 159,
+        "id": 22
+      },
+      {
+        "room": "TS3007b",
+        "start_sample": 5120000,
+        "stratum": "near_above",
+        "word_cells": 157,
+        "id": 23
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 8000000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 24
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 11200000,
+        "stratum": "high",
+        "word_cells": 276,
+        "id": 25
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 4608000,
+        "stratum": "high",
+        "word_cells": 281,
+        "id": 26
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 7040000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 27
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 640000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 28
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 4928000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 29
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 8896000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 30
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 10624000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 31
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 9920000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 32
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 10880000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 33
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 12928000,
+        "stratum": "low",
+        "word_cells": 33,
+        "id": 34
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 9088000,
+        "stratum": "low",
+        "word_cells": 38,
+        "id": 35
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 1600000,
+        "stratum": "near_below",
+        "word_cells": 145,
+        "id": 36
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 11520000,
+        "stratum": "near_below",
+        "word_cells": 123,
+        "id": 37
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 11648000,
+        "stratum": "near_below",
+        "word_cells": 136,
+        "id": 38
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 13312000,
+        "stratum": "near_below",
+        "word_cells": 121,
+        "id": 39
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 1024000,
+        "stratum": "near_below",
+        "word_cells": 142,
+        "id": 40
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 11072000,
+        "stratum": "near_below",
+        "word_cells": 123,
+        "id": 41
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 4160000,
+        "stratum": "near_above",
+        "word_cells": 169,
+        "id": 42
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 1792000,
+        "stratum": "near_above",
+        "word_cells": 175,
+        "id": 43
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 4032000,
+        "stratum": "near_above",
+        "word_cells": 173,
+        "id": 44
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 8128000,
+        "stratum": "near_above",
+        "word_cells": 171,
+        "id": 45
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 4480000,
+        "stratum": "near_above",
+        "word_cells": 175,
+        "id": 46
+      },
+      {
+        "room": "TS3003a",
+        "start_sample": 192000,
+        "stratum": "near_above",
+        "word_cells": 154,
+        "id": 47
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 4736000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 48
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 13952000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 49
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 2176000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 50
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 1792000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 51
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 13184000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 52
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 6208000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 53
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 11200000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 54
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 8448000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 55
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 64000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 56
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 10432000,
+        "stratum": "low",
+        "word_cells": 10,
+        "id": 57
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 1024000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 58
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 10240000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 59
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 1280000,
+        "stratum": "near_below",
+        "word_cells": 120,
+        "id": 60
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 13376000,
+        "stratum": "near_below",
+        "word_cells": 122,
+        "id": 61
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 9664000,
+        "stratum": "near_below",
+        "word_cells": 141,
+        "id": 62
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 11840000,
+        "stratum": "near_below",
+        "word_cells": 123,
+        "id": 63
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 9536000,
+        "stratum": "near_below",
+        "word_cells": 131,
+        "id": 64
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 8960000,
+        "stratum": "near_below",
+        "word_cells": 143,
+        "id": 65
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 12096000,
+        "stratum": "near_above",
+        "word_cells": 167,
+        "id": 66
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 7488000,
+        "stratum": "near_above",
+        "word_cells": 160,
+        "id": 67
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 832000,
+        "stratum": "near_above",
+        "word_cells": 168,
+        "id": 68
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 6912000,
+        "stratum": "near_above",
+        "word_cells": 158,
+        "id": 69
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 5184000,
+        "stratum": "near_above",
+        "word_cells": 155,
+        "id": 70
+      },
+      {
+        "room": "TS3005a",
+        "start_sample": 2816000,
+        "stratum": "near_above",
+        "word_cells": 177,
+        "id": 71
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 2432000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 72
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 4736000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 73
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 11840000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 74
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 7936000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 75
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 12544000,
+        "stratum": "high",
+        "word_cells": 240,
+        "id": 76
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 2688000,
+        "stratum": "high",
+        "word_cells": 300,
+        "id": 77
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 7680000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 78
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 7168000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 79
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 1984000,
+        "stratum": "low",
+        "word_cells": 0,
+        "id": 80
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 6080000,
+        "stratum": "low",
+        "word_cells": 45,
+        "id": 81
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 14144000,
+        "stratum": "low",
+        "word_cells": 51,
+        "id": 82
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 7424000,
+        "stratum": "low",
+        "word_cells": 39,
+        "id": 83
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 6656000,
+        "stratum": "near_below",
+        "word_cells": 143,
+        "id": 84
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 5376000,
+        "stratum": "near_below",
+        "word_cells": 146,
+        "id": 85
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 9728000,
+        "stratum": "near_below",
+        "word_cells": 142,
+        "id": 86
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 4544000,
+        "stratum": "near_below",
+        "word_cells": 149,
+        "id": 87
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 1216000,
+        "stratum": "near_below",
+        "word_cells": 130,
+        "id": 88
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 1024000,
+        "stratum": "near_below",
+        "word_cells": 138,
+        "id": 89
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 5632000,
+        "stratum": "near_above",
+        "word_cells": 150,
+        "id": 90
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 8448000,
+        "stratum": "near_above",
+        "word_cells": 154,
+        "id": 91
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 192000,
+        "stratum": "near_above",
+        "word_cells": 156,
+        "id": 92
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 9536000,
+        "stratum": "near_above",
+        "word_cells": 152,
+        "id": 93
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 9920000,
+        "stratum": "near_above",
+        "word_cells": 156,
+        "id": 94
+      },
+      {
+        "room": "TS3004a",
+        "start_sample": 10688000,
+        "stratum": "near_above",
+        "word_cells": 170,
+        "id": 95
+      }
+    ]
+  },
+  "captures": {
+    "TS3007b": {
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3007b/audio/TS3007b.Array1-01.wav",
+      "bytes": 107358590,
+      "header_sha256": "7834cfa16bae5bae8ee6d0fecb6222b53f0838d7c593d179a7d06c8adb3e31fd",
+      "samples": 53677738
+    },
+    "TS3003a": {
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3003a/audio/TS3003a.Array1-01.wav",
+      "bytes": 48183678,
+      "header_sha256": "5b3128b2de11eae11587a27242babfcab7d5e31c305102099427b3ddc187c41a",
+      "samples": 24090282
+    },
+    "TS3005a": {
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3005a/audio/TS3005a.Array1-01.wav",
+      "bytes": 42206250,
+      "header_sha256": "1fa5e5f90bda2697b76bf19276bd1e972ae97daf7f2aaac69f5f64d1e7780d67",
+      "samples": 21101568
+    },
+    "TS3004a": {
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3004a/audio/TS3004a.Array1-01.wav",
+      "bytes": 43051390,
+      "header_sha256": "a04ab1dd1fc2eee69ed84809c345059f4d8623c2c028c19e8a5d103187f7f9b3",
+      "samples": 21525162
+    }
+  },
+  "checkpoint_sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+  "rows": [
+    {
+      "room": "TS3007b",
+      "start_sample": 5312000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 0,
+      "pcm_sha256": "29b1a8540fdf6a546ec71ad490100465dccc0e6a512f6b4323dd816047fde51e",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 12032000,
+      "stratum": "high",
+      "word_cells": 243,
+      "id": 1,
+      "pcm_sha256": "c40ce0156b5e1594ac5c6e8ec68e6f526584cc4a92d0cbd80b21a82b4de4a889",
+      "admitted_speech_samples": [
+        23392,
+        31008
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 13952000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 2,
+      "pcm_sha256": "935ce434ff5dc871a357831630824913d80303d977cf56178b70f116f3703c48",
+      "admitted_speech_samples": [
+        44992,
+        45504
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 6912000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 3,
+      "pcm_sha256": "44d1f04f25149b183946547297249ebebe52e7ad25545b1b486fd1fa3a25f1c6",
+      "admitted_speech_samples": [
+        18208,
+        19232
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 2112000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 4,
+      "pcm_sha256": "577e6906d4f3ce726cd59b95a9c74fe4089a5d552a5bb37d3a6f40a50715eec8",
+      "admitted_speech_samples": [
+        25888,
+        29472
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 4736000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 5,
+      "pcm_sha256": "2367af6d32904832af0672ac83c8be170a39409549bf1047ea11a06ee12a84d4",
+      "admitted_speech_samples": [
+        18272,
+        23840
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 3072000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 6,
+      "pcm_sha256": "e4ed2e6961aac1dd86d7353e7c15278f20a751518f7f0eca4e9b6f17a3d8af68",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 576000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 7,
+      "pcm_sha256": "55cbdd7b9c8008c0d3cc59983af5868a97c8761be444f3e63deda01018b6405f",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 256000,
+      "stratum": "low",
+      "word_cells": 21,
+      "id": 8,
+      "pcm_sha256": "cfb45d8b4476ce5df54cd83708b59398d724cf24fc5e50df3511bd63b8755d81",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 9728000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 9,
+      "pcm_sha256": "ee86c592c61d2b0c258a7b723aac2e218b2cc86a6e05673d9810499082fc97cf",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 9600000,
+      "stratum": "low",
+      "word_cells": 50,
+      "id": 10,
+      "pcm_sha256": "61cde4e260fe6cfb0b13d64028b2138129ab88148bb425887cc32050dc8a11ac",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 9920000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 11,
+      "pcm_sha256": "596976aa3ef470d0a4fb5ea71af7787ec1591a3ba65508e2e83f6ef3bceea62e",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 1280000,
+      "stratum": "near_below",
+      "word_cells": 125,
+      "id": 12,
+      "pcm_sha256": "fd001512ef40d04d64322b9d86b0f2f1176f742bcf7cc92bbbaabecb67cb07f4",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 7680000,
+      "stratum": "near_below",
+      "word_cells": 131,
+      "id": 13,
+      "pcm_sha256": "7200caba33813bb5f5d334636029a602bfe92ef5409c15684b4b1488b972586c",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 3904000,
+      "stratum": "near_below",
+      "word_cells": 124,
+      "id": 14,
+      "pcm_sha256": "fe30100f5503268cd8f13ef87a4d647006597849312978b3ee17eabb1fd1555d",
+      "admitted_speech_samples": [
+        0,
+        5568
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 8640000,
+      "stratum": "near_below",
+      "word_cells": 140,
+      "id": 15,
+      "pcm_sha256": "8ca1552e85570f31f4b9b168c1880811e39d34483ce1358271fb3179cb4288ab",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 3328000,
+      "stratum": "near_below",
+      "word_cells": 148,
+      "id": 16,
+      "pcm_sha256": "1f6e0c4491843426095de18783df0357f75a886c6c8c0f44c0e369b6def125c9",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 3456000,
+      "stratum": "near_below",
+      "word_cells": 126,
+      "id": 17,
+      "pcm_sha256": "a05cfce1582ba710faf140d692e4dfb947e0742e41aca55f70aceac3e2e61273",
+      "admitted_speech_samples": [
+        0,
+        6592
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 6528000,
+      "stratum": "near_above",
+      "word_cells": 153,
+      "id": 18,
+      "pcm_sha256": "f079f28cd597f79c600bc1c2d64673a4d255ece6cd3d8afff58338f54d40ec91",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 7488000,
+      "stratum": "near_above",
+      "word_cells": 163,
+      "id": 19,
+      "pcm_sha256": "30b334dc23f768d2e7aa40899dc013ebea19dc6c5eb2d67694e53883140f3844",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 7936000,
+      "stratum": "near_above",
+      "word_cells": 159,
+      "id": 20,
+      "pcm_sha256": "e311753738627fbcd9fd5b98dcaccdde13e06fed5b0199edb67a6949ec6fd4ba",
+      "admitted_speech_samples": [
+        16736,
+        16736
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 5760000,
+      "stratum": "near_above",
+      "word_cells": 173,
+      "id": 21,
+      "pcm_sha256": "9b9cf576d10d6c29b620c32227a2a4f9eb806e92e9ee44ec079679c336f3eee7",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 7168000,
+      "stratum": "near_above",
+      "word_cells": 159,
+      "id": 22,
+      "pcm_sha256": "0af2d5629c6c88785d156a84f26c6d6eca81dc2501e727ffee90a5f1cffbccb6",
+      "admitted_speech_samples": [
+        7008,
+        6496
+      ]
+    },
+    {
+      "room": "TS3007b",
+      "start_sample": 5120000,
+      "stratum": "near_above",
+      "word_cells": 157,
+      "id": 23,
+      "pcm_sha256": "a49f3f64cd06154da4383e9fc9d6f0dcc84415c724367dfb5ad593c65032b03f",
+      "admitted_speech_samples": [
+        6080,
+        15744
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 8000000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 24,
+      "pcm_sha256": "56cc3b3c3550e219c2f27862aef6ac05a1f50ba8ee3031021702f84880766f57",
+      "admitted_speech_samples": [
+        28960,
+        28960
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 11200000,
+      "stratum": "high",
+      "word_cells": 276,
+      "id": 25,
+      "pcm_sha256": "ed2366852cc9aff00fbc07b48ff02954d92d062aacd14111443ede825818dd4d",
+      "admitted_speech_samples": [
+        31008,
+        29472
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 4608000,
+      "stratum": "high",
+      "word_cells": 281,
+      "id": 26,
+      "pcm_sha256": "3963989f2cde67e2d1a4e893693b623fd64014c5b3969c0137ac3bf80d66e698",
+      "admitted_speech_samples": [
+        32640,
+        35200
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 7040000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 27,
+      "pcm_sha256": "ae6e7ef8e67060c15db5ca98c29949ba3737d7742ef84018561d3a94956782d2",
+      "admitted_speech_samples": [
+        7104,
+        19264
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 640000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 28,
+      "pcm_sha256": "38b8ef28cd7446d956f0537ec6085cae2bcc211db35803c4af317982239e1fdd",
+      "admitted_speech_samples": [
+        0,
+        7616
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 4928000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 29,
+      "pcm_sha256": "b97c7d79310329683d90da9faf80b3ca20b950942ee87438afa8b6c44bb7b1e9",
+      "admitted_speech_samples": [
+        29120,
+        29120
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 8896000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 30,
+      "pcm_sha256": "543ea54dabe4bd17bf881713a684487928c85cfba68f8cdd80b52fb59d74a9c0",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 10624000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 31,
+      "pcm_sha256": "25398aa529db27c265dcba768ab603c71afb43638fcf887ae40311429f899c63",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 9920000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 32,
+      "pcm_sha256": "fe3d7e729b406af9b29daac8ce0b74423aa39403a6fccf7ba9d46b0d11e8fccf",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 10880000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 33,
+      "pcm_sha256": "a8593298da4fb94ef659f390d01e16ee3b8ed88ea780b7dd2b2fb9cb648fc4d9",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 12928000,
+      "stratum": "low",
+      "word_cells": 33,
+      "id": 34,
+      "pcm_sha256": "b8ffeaca2bb0736204b41be2ddc2182beb8c9a834993a3e5a26df79078902828",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 9088000,
+      "stratum": "low",
+      "word_cells": 38,
+      "id": 35,
+      "pcm_sha256": "3d3d06a49fe5440bfbc74fc3a0a877f5f070679a2d194705d5e2316a774b6601",
+      "admitted_speech_samples": [
+        0,
+        5056
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 1600000,
+      "stratum": "near_below",
+      "word_cells": 145,
+      "id": 36,
+      "pcm_sha256": "7656b2861d0b6e509b4f6fd6db63d0a951528b9a178cdc46de2c79db9a5af4d4",
+      "admitted_speech_samples": [
+        13760,
+        13760
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 11520000,
+      "stratum": "near_below",
+      "word_cells": 123,
+      "id": 37,
+      "pcm_sha256": "f8ae791aed3fdc6771551a7fda5ff652cd6adcec35472f1359fd1f56492a5fad",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 11648000,
+      "stratum": "near_below",
+      "word_cells": 136,
+      "id": 38,
+      "pcm_sha256": "3391e0014468a10de7d2e97c2b8d71d190a26480c8f1686d4194a8bd3ca0ad54",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 13312000,
+      "stratum": "near_below",
+      "word_cells": 121,
+      "id": 39,
+      "pcm_sha256": "dd6425a9106d2b7b5024aa36d3ff1bbab47916be3c22dbc17030d472904c1158",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 1024000,
+      "stratum": "near_below",
+      "word_cells": 142,
+      "id": 40,
+      "pcm_sha256": "950e56240b1f8549fb0ab6322f57b673e3722b4c5a9d9f5c49f8a381da422729",
+      "admitted_speech_samples": [
+        14176,
+        14688
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 11072000,
+      "stratum": "near_below",
+      "word_cells": 123,
+      "id": 41,
+      "pcm_sha256": "76a0ba6645fdb14a159830ecfa5cfa3bb3a63a6af0fc26fbb200371260413d83",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 4160000,
+      "stratum": "near_above",
+      "word_cells": 169,
+      "id": 42,
+      "pcm_sha256": "333cae1acd9a6ffe69d27ceed73e609bae15e4aef2c7a45650cf250e925067f8",
+      "admitted_speech_samples": [
+        25536,
+        27584
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 1792000,
+      "stratum": "near_above",
+      "word_cells": 175,
+      "id": 43,
+      "pcm_sha256": "7f71ce096ce75a6579b5b4f104b653d75d1d7621a04dd53230a26370e5965b83",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 4032000,
+      "stratum": "near_above",
+      "word_cells": 173,
+      "id": 44,
+      "pcm_sha256": "ac7d6550865a6e36d0530df3427736cfdcf33111f8dbd2cbfc607c281188c7b9",
+      "admitted_speech_samples": [
+        7616,
+        10176
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 8128000,
+      "stratum": "near_above",
+      "word_cells": 171,
+      "id": 45,
+      "pcm_sha256": "5308b35a810754096ac072f2a7f2077e626724aa2d5407fbff4281074afb3397",
+      "admitted_speech_samples": [
+        12224,
+        12224
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 4480000,
+      "stratum": "near_above",
+      "word_cells": 175,
+      "id": 46,
+      "pcm_sha256": "a7c39bba038ded024ef94127582eb74079e99fb33c69fb70749a7f60e9be7233",
+      "admitted_speech_samples": [
+        6592,
+        7104
+      ]
+    },
+    {
+      "room": "TS3003a",
+      "start_sample": 192000,
+      "stratum": "near_above",
+      "word_cells": 154,
+      "id": 47,
+      "pcm_sha256": "fd2a399ee10563589e0e1cd601bb455ebf7a7cddbcbb6d46cc1fb81c11940910",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 4736000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 48,
+      "pcm_sha256": "ecdc4b8fd7d2402d04a5ff890ee12cf179814ded5e45c5b4c70de420f4ff4039",
+      "admitted_speech_samples": [
+        31072,
+        39200
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 13952000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 49,
+      "pcm_sha256": "0116ecb74b5d5817ba6d62125182c4c94467a7dffc3d843f9594133dd1b0cab3",
+      "admitted_speech_samples": [
+        23392,
+        23392
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 2176000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 50,
+      "pcm_sha256": "eee10e189fdf4a8cc5cfefe20b95246b640a27f3a5a2d2c1b637a2c50e9f994f",
+      "admitted_speech_samples": [
+        42848,
+        42848
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 1792000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 51,
+      "pcm_sha256": "3a5de8092c94b956f0d265fb0c6f40c192c4ad90cb3245f518c5235c7b357dba",
+      "admitted_speech_samples": [
+        29056,
+        39296
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 13184000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 52,
+      "pcm_sha256": "f62bd26daecf9d2b6d5a4a0184ce009487e9cefe55a93d74fd0831b00f5e827a",
+      "admitted_speech_samples": [
+        27424,
+        27936
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 6208000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 53,
+      "pcm_sha256": "62bf7efd1761a92546d8066b740c6627010941a344a6e9f31d453971eb555c09",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 11200000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 54,
+      "pcm_sha256": "bd4c1fe0c1e18b163fb1694d0f4f0a8ce18fcb63425b0d27e5b7bea036230f07",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 8448000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 55,
+      "pcm_sha256": "c3f56ee3834a535afbb6b4ed97dcc05af8e97779994a16153dedd8475740c2a8",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 64000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 56,
+      "pcm_sha256": "e7efa3f14707c3bfc79ab97f08ed679eb583ef1c7a959a6c081e91161ebdd62d",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 10432000,
+      "stratum": "low",
+      "word_cells": 10,
+      "id": 57,
+      "pcm_sha256": "58f6d9573134967c4d4a94fb7edac57675508c63d8edbd8ceadea7caf998cb93",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 1024000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 58,
+      "pcm_sha256": "4b1f7b37266663b248b9cdf4e104ce2b43ecb074b6cf5b6765dc1bc6ae3278d7",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 10240000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 59,
+      "pcm_sha256": "b9bebb9338f4b5e40f11b075e3a45879861eff4ecefc202ebae8f8018be6536a",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 1280000,
+      "stratum": "near_below",
+      "word_cells": 120,
+      "id": 60,
+      "pcm_sha256": "be37888e5429d4c1f8ad87d76caea0877b49b676b6cc51c784b67e4443b3d1b0",
+      "admitted_speech_samples": [
+        0,
+        8128
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 13376000,
+      "stratum": "near_below",
+      "word_cells": 122,
+      "id": 61,
+      "pcm_sha256": "53298144fd89c5094f1d4f829a713e87f68518ab8ecc56a88dc4d8409710b8ea",
+      "admitted_speech_samples": [
+        22912,
+        23936
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 9664000,
+      "stratum": "near_below",
+      "word_cells": 141,
+      "id": 62,
+      "pcm_sha256": "bf9c1b2600840e287335a846b1ffef3c3d6de255788b36b3ba43bbba3448e20c",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 11840000,
+      "stratum": "near_below",
+      "word_cells": 123,
+      "id": 63,
+      "pcm_sha256": "79a1e42d80c278d81cd06e52209d447b01e04115ced7a3f5119db4672f1bc01a",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 9536000,
+      "stratum": "near_below",
+      "word_cells": 131,
+      "id": 64,
+      "pcm_sha256": "53dfdcffa72c29a69eb3c249fa3ddd81f39822df1beb0f7f15138c3e3e9ad84e",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 8960000,
+      "stratum": "near_below",
+      "word_cells": 143,
+      "id": 65,
+      "pcm_sha256": "63118ec8618ed4f77f0e14777af2fa878d257c230e27c1dc0d9d1208d3e98700",
+      "admitted_speech_samples": [
+        6496,
+        6496
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 12096000,
+      "stratum": "near_above",
+      "word_cells": 167,
+      "id": 66,
+      "pcm_sha256": "f1aef9c7ed533d6117cad69a218008e67f6bf9573061c104e31292ebb62d52ed",
+      "admitted_speech_samples": [
+        9152,
+        9152
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 7488000,
+      "stratum": "near_above",
+      "word_cells": 160,
+      "id": 67,
+      "pcm_sha256": "9a8d2517bfc4512946226a5be58d2444dba464212ee489df41e75ac885c118dd",
+      "admitted_speech_samples": [
+        16672,
+        17696
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 832000,
+      "stratum": "near_above",
+      "word_cells": 168,
+      "id": 68,
+      "pcm_sha256": "b7cc61652b854747004a7e88d17bf8f96a6bc6086dbe11c2b72bc9e97c112ef8",
+      "admitted_speech_samples": [
+        26464,
+        34592
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 6912000,
+      "stratum": "near_above",
+      "word_cells": 158,
+      "id": 69,
+      "pcm_sha256": "1294cd2f46213f0a26cc89288fbd47aaa0af82923a721f2184e71ca62aa7f454",
+      "admitted_speech_samples": [
+        6080,
+        14272
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 5184000,
+      "stratum": "near_above",
+      "word_cells": 155,
+      "id": 70,
+      "pcm_sha256": "23ec536e313d76c2242f97d3aedae5106c1c2ee0bb4f8cc34f9cd3d119492c50",
+      "admitted_speech_samples": [
+        13760,
+        10176
+      ]
+    },
+    {
+      "room": "TS3005a",
+      "start_sample": 2816000,
+      "stratum": "near_above",
+      "word_cells": 177,
+      "id": 71,
+      "pcm_sha256": "575abf63fcd17b5b361fcd67904958af5388eff6286bb4a9bf31d0f65e8695dc",
+      "admitted_speech_samples": [
+        31008,
+        31008
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 2432000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 72,
+      "pcm_sha256": "195f461a1f73a89129c342dd98429315c83035828c2b6faef45eb15c6f9b4b0b",
+      "admitted_speech_samples": [
+        0,
+        11104
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 4736000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 73,
+      "pcm_sha256": "e97272b62083e04d319b097c44cb323d64dafe2313b89e193b6a79e5dd56d60a",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 11840000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 74,
+      "pcm_sha256": "85bbb2ee5577cf612b94c7a5c504769738f5282d30b6fcca41cb74f4c8853800",
+      "admitted_speech_samples": [
+        14624,
+        24864
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 7936000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 75,
+      "pcm_sha256": "07f3eb07e60b2abdcd5f7b66557b4e5ad8c85d7ca2e2b9b29b9b1d0ddbbac9a5",
+      "admitted_speech_samples": [
+        38176,
+        41760
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 12544000,
+      "stratum": "high",
+      "word_cells": 240,
+      "id": 76,
+      "pcm_sha256": "e36293d287f558374a87e7a11370178f9f43b7112c0e39e5aefd3dd7590940f0",
+      "admitted_speech_samples": [
+        23840,
+        31520
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 2688000,
+      "stratum": "high",
+      "word_cells": 300,
+      "id": 77,
+      "pcm_sha256": "b9d2f59c015295d91f236b722ffd6b0752af12499f043446a6bd2bf0627d1d64",
+      "admitted_speech_samples": [
+        27488,
+        38752
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 7680000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 78,
+      "pcm_sha256": "3217337acc3825ec56eecccf42727f6b84723e6e2ca1e4fdd8e16482523c7f83",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 7168000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 79,
+      "pcm_sha256": "c288830bc4ec4b47660edadf434269d38cd0b2497d5d2005b32c47c9b22e7027",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 1984000,
+      "stratum": "low",
+      "word_cells": 0,
+      "id": 80,
+      "pcm_sha256": "cf861989bb0acf9dfa1077a2ca090e6af01ef91e5bf2b80a78b9e4ac25af2bb6",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 6080000,
+      "stratum": "low",
+      "word_cells": 45,
+      "id": 81,
+      "pcm_sha256": "87b47757685aac6cb541b302273000724503047232bb88234941d5dda1f68107",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 14144000,
+      "stratum": "low",
+      "word_cells": 51,
+      "id": 82,
+      "pcm_sha256": "62e330faf80cf57053cfe2d08e73efb19a6a9d31898823e869ecad4f73ce6de8",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 7424000,
+      "stratum": "low",
+      "word_cells": 39,
+      "id": 83,
+      "pcm_sha256": "f553c452c01657765009544067b8580db73c92587a81f19b5fac1a279076c19c",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 6656000,
+      "stratum": "near_below",
+      "word_cells": 143,
+      "id": 84,
+      "pcm_sha256": "d172a6d4d190364e7eaa96954b836d3db751906192d34e2b4bf3dc2b3d3c8750",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 5376000,
+      "stratum": "near_below",
+      "word_cells": 146,
+      "id": 85,
+      "pcm_sha256": "ece18a32353de3389aa19d1f7fb9c466fb92c8fdcf42c94c7e701de346815dea",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 9728000,
+      "stratum": "near_below",
+      "word_cells": 142,
+      "id": 86,
+      "pcm_sha256": "a51397030f1277cfc61326c9227644dabd2686e46b4f30a206bbbde76101360f",
+      "admitted_speech_samples": [
+        18272,
+        18784
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 4544000,
+      "stratum": "near_below",
+      "word_cells": 149,
+      "id": 87,
+      "pcm_sha256": "5fcaa501c50feb81ec1bdbb9a4b0628fdc337411d4606289a0f1df8e0d0df820",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 1216000,
+      "stratum": "near_below",
+      "word_cells": 130,
+      "id": 88,
+      "pcm_sha256": "51936cf3f633399daffb572483db34b87c8be132d140db75da1b002905fb0711",
+      "admitted_speech_samples": [
+        10592,
+        15200
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 1024000,
+      "stratum": "near_below",
+      "word_cells": 138,
+      "id": 89,
+      "pcm_sha256": "87833e3abed888cecd8235a4625dd6a656cfbf87b153deac2dea9469f0358509",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 5632000,
+      "stratum": "near_above",
+      "word_cells": 150,
+      "id": 90,
+      "pcm_sha256": "7a2a4a711ae1a0a348579f8a69d031a9eb4dfeb2364815c01c27e5a69d8b2d0e",
+      "admitted_speech_samples": [
+        0,
+        5056
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 8448000,
+      "stratum": "near_above",
+      "word_cells": 154,
+      "id": 91,
+      "pcm_sha256": "d7fb04df6876d99b1f56ccd6d54675c55f679bde85faabcb7da1457292b03072",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 192000,
+      "stratum": "near_above",
+      "word_cells": 156,
+      "id": 92,
+      "pcm_sha256": "b1ed0c2cac30248de4be937c3f1289e5279278e6736d2f89c87f1289e5c8a2fb",
+      "admitted_speech_samples": [
+        0,
+        9664
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 9536000,
+      "stratum": "near_above",
+      "word_cells": 152,
+      "id": 93,
+      "pcm_sha256": "b165020de6da1140c6ccf58238a7902de9b76aca9cd3adbf2a384437b220a4d2",
+      "admitted_speech_samples": [
+        29120,
+        35776
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 9920000,
+      "stratum": "near_above",
+      "word_cells": 156,
+      "id": 94,
+      "pcm_sha256": "3e67a74f351e3b0e04dd6392e141380b230eb2a15c420514e5cdaa745f27f92a",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    },
+    {
+      "room": "TS3004a",
+      "start_sample": 10688000,
+      "stratum": "near_above",
+      "word_cells": 170,
+      "id": 95,
+      "pcm_sha256": "d476cb97022953d975062785d97cce7872f6ba76615bab3c174fa9a8b0ff091f",
+      "admitted_speech_samples": [
+        0,
+        0
+      ]
+    }
+  ],
+  "summary": {
+    "total": {
+      "high": {
+        "planned": 24,
+        "original": 12,
+        "gain": 15,
+        "union": 15,
+        "intersection": 12
+      },
+      "low": {
+        "planned": 24,
+        "original": 0,
+        "gain": 0,
+        "union": 0,
+        "intersection": 0
+      },
+      "near_below": {
+        "planned": 24,
+        "original": 0,
+        "gain": 0,
+        "union": 0,
+        "intersection": 0
+      },
+      "near_above": {
+        "planned": 24,
+        "original": 4,
+        "gain": 4,
+        "union": 4,
+        "intersection": 4
+      }
+    },
+    "rooms": {
+      "TS3007b": {
+        "high": {
+          "planned": 6,
+          "original": 2,
+          "gain": 3,
+          "union": 3,
+          "intersection": 2
+        },
+        "low": {
+          "planned": 6,
+          "original": 0,
+          "gain": 0,
+          "union": 0,
+          "intersection": 0
+        },
+        "near_below": {
+          "planned": 6,
+          "original": 0,
+          "gain": 0,
+          "union": 0,
+          "intersection": 0
+        },
+        "near_above": {
+          "planned": 6,
+          "original": 0,
+          "gain": 0,
+          "union": 0,
+          "intersection": 0
+        }
+      },
+      "TS3003a": {
+        "high": {
+          "planned": 6,
+          "original": 4,
+          "gain": 4,
+          "union": 4,
+          "intersection": 4
+        },
+        "low": {
+          "planned": 6,
+          "original": 0,
+          "gain": 0,
+          "union": 0,
+          "intersection": 0
+        },
+        "near_below": {
+          "planned": 6,
+          "original": 0,
+          "gain": 0,
+          "union": 0,
+          "intersection": 0
+        },
+        "near_above": {
+          "planned": 6,
+          "original": 1,
+          "gain": 1,
+          "union": 1,
+          "intersection": 1
+        }
+      },
+      "TS3005a": {
+        "high": {
+          "planned": 6,
+          "original": 4,
+          "gain": 4,
+          "union": 4,
+          "intersection": 4
+        },
+        "low": {
+          "planned": 6,
+          "original": 0,
+          "gain": 0,
+          "union": 0,
+          "intersection": 0
+        },
+        "near_below": {
+          "planned": 6,
+          "original": 0,
+          "gain": 0,
+          "union": 0,
+          "intersection": 0
+        },
+        "near_above": {
+          "planned": 6,
+          "original": 2,
+          "gain": 2,
+          "union": 2,
+          "intersection": 2
+        }
+      },
+      "TS3004a": {
+        "high": {
+          "planned": 6,
+          "original": 2,
+          "gain": 4,
+          "union": 4,
+          "intersection": 2
+        },
+        "low": {
+          "planned": 6,
+          "original": 0,
+          "gain": 0,
+          "union": 0,
+          "intersection": 0
+        },
+        "near_below": {
+          "planned": 6,
+          "original": 0,
+          "gain": 0,
+          "union": 0,
+          "intersection": 0
+        },
+        "near_above": {
+          "planned": 6,
+          "original": 1,
+          "gain": 1,
+          "union": 1,
+          "intersection": 1
+        }
+      }
+    }
+  }
+}

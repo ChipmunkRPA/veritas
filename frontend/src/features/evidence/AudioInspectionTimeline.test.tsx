@@ -43,6 +43,23 @@ const show = (set: AudioEvidenceSet, entry = '/analysis', ready = true) => rende
 afterEach(() => { cleanup(); vi.restoreAllMocks() })
 
 describe('audio interval inspection', () => {
+  it('shows speech admission and the matching original timestamp when a window was skipped', () => {
+    const set = fixture()
+    const coverage = set.coverage!
+    const range = { start_sample: 12000, end_sample: 16000 }
+    coverage.speech_window_selection = {
+      schema: 'audio-speech-window-selection/1', minimum_speech_fraction: .5,
+      affects_overall_confidence: false, raw_output_sha256: 'a'.repeat(64),
+      counts: { scored: 3, below_speech_minimum: 1, outside_window_limit: 0 },
+      windows: [{ ...range, speech_samples: 1000, status: 'below_speech_minimum',
+        source_timestamp_ranges: [{ ...range, source_start_pts: 22000, source_end_pts: 26000, time_base: '1/1000' }] }],
+    }
+    show(set)
+    expect(screen.getByText('How speech windows were selected')).toBeTruthy()
+    expect(screen.getByText(/Detected speech 25%\. Below the speech minimum/)).toBeTruthy()
+    expect(screen.getByText(/Source PTS \[22000, 26000\)/)).toBeTruthy()
+  })
+
   it('lists the exact checked intervals from an overview-only coverage link and keeps it scoped to standalone audio', () => {
     const set = fixture()
     set.packets = []

@@ -24,9 +24,11 @@ from app.core.config import settings
 from app.detectors.audio.coverage import interval_union
 from app.detectors.audio.decode import SAMPLE_RATE, read_wav, source_ranges, wav_bytes
 from app.evidence.audio_binding import (
+    SPEECH_SELECTION,
     VOICE_CLOCK_POLICY,
     attach_stereo_attenuation_overlaps,
     source_clock_context,
+    speech_window_selection,
     unscored_voice_intervals,
     validate_audio_stream_scope,
     validate_unscored_voice_coverage,
@@ -246,6 +248,27 @@ def _windows(store: ObjectStore, result: dict[str, Any], record: dict[str, Any],
     return out
 
 
+def _speech_selection(store, record, source, windows):
+    if not (ref := record.get(SPEECH_SELECTION)):
+        return None
+    checksum = ref["raw_output_sha256"]
+    entry = json.loads(_verified(store, checksum))
+    details = entry["details"]
+    audio_input = details["audio_input"]
+    if (entry["detector_id"] != "aud.pella_v2" or entry["status"] not in {"ok", "not_applicable"}
+            or audio_input["version"] != "audio-input/1"
+            or any(audio_input[key] != source[key] for key in ("pcm_sha256", "samples", "sample_rate"))):
+        raise PacketIntegrityError("Speech activity was recorded from a different audio input")
+    return speech_window_selection(details[SPEECH_SELECTION], checksum, windows, source)
+
+
+def verify_speech_selection(document, store, record):
+    coverage = document["coverage"]
+    expected = _speech_selection(store, record, document["source"], coverage["windows"])
+    if canonical_hash(expected) != canonical_hash(coverage.get(SPEECH_SELECTION)):
+        raise PacketIntegrityError("Speech window selection differs from the recorded check")
+
+
 def _chart(pcm: np.ndarray, windows: list[dict[str, Any]], *, start: int, end: int,
            selected: tuple[int, int] | None, scores: bool, title: str | None = None,
            source_offset: int = 0, time_precision: int = 2) -> bytes:
@@ -357,6 +380,8 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
                         "The mono input mixes source channels. Compression, noise, speakers and unfamiliar synthesis methods can affect responses.",
                         "Waveforms and exported audio are context for inspection; they are not independent evidence of synthesis.",
                         "Unscored audio and audio beyond the decoded duration have not received a voice-check result."]}
+    if selection := _speech_selection(store, record, document["source"], windows):
+        document["coverage"][SPEECH_SELECTION] = selection
     if "audio_stream_indices" in mapping:
         document["source"]["audio_stream_indices"] = mapping["audio_stream_indices"]
     if analysis.kind == "audio" and (review := record.get("short_voice_review")):

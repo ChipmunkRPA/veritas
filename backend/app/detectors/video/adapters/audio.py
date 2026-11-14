@@ -38,7 +38,7 @@ from app.engine.detector import (
     UnitScore,
 )
 from app.engine.profiles import SAMPLING
-from app.evidence.audio_binding import VOICE_CLOCK_LIMIT
+from app.evidence.audio_binding import SPEECH_SELECTION, VOICE_CLOCK_LIMIT
 
 NOT_ANALYSABLE = {"absent": "no audio track", "unreadable": "the sound track could not be decoded", "silent": "silent sound track",
                   "short": "the sound track is shorter than 1 s"}
@@ -81,10 +81,12 @@ class _VoiceClassifier(Detector):
                 else "the sound track is shorter than 1 s")
 
     def run(self, ctx: RunContext) -> DetectorResult:
-        hop = SAMPLING[Profile(ctx.profile)].voice_hop_s or VOICE_WINDOW_S
-        windows = self._windows(ctx)
+        return self._score_windows(ctx, self._windows(ctx))
+
+    def _score_windows(self, ctx, windows):
         if not windows:
             return DetectorResult.not_applicable(self._no_window(ctx))
+        hop = SAMPLING[Profile(ctx.profile)].voice_hop_s or VOICE_WINDOW_S
         clf = self.classifier(ctx)
         preds = [float(p) for p in clf.predict([c for _, c in windows])]
         units = [UnitScore(f"window:{k}", p, "probability", quality={"start_s": start, "end_s": start + len(c) / SR,
@@ -161,20 +163,45 @@ class PellaVoiceDetector(_VoiceClassifier):
                 ActivationUse("silero.speech_activity", 1, "audio stream", "Independent speech activity for video sound tracks"))
 
     def _windows(self, ctx):
+        return self._window_plan(ctx)[0]
+
+    def run(self, ctx):
+        windows, candidates = self._window_plan(ctx)
+        result = self._score_windows(ctx, windows)
+        if candidates:
+            audio = ctx.outputs.audio
+            if "audio_input" not in result.details:
+                result.details["audio_input"] = {"version": "audio-input/1", "sample_rate": SR, "samples": audio.samples,
+                                                 "pcm_sha256": hashlib.sha256(audio.pcm.astype("<f4").tobytes()).hexdigest()}
+            result.details[SPEECH_SELECTION] = candidates
+        return result
+
+    def _window_plan(self, ctx):
         # Preserve the previous detector's original gate and calibration path.
         # This independent candidate alone uses learned speech activity.
         params = SAMPLING[Profile(ctx.profile)]
         audio = ctx.outputs.audio
-        spans = None
-        if ctx.lease is not None:
-            vad = ctx.lease.get("silero.speech_activity").obj
-            spans = [(start / SR + a, start / SR + b)
-                     for start, end in continuous_audio_ranges(len(audio.pcm), audio.clock_breaks) if end - start >= SR
-                     for a, b in vad.spans(audio.pcm[start:end])]
-        return voice_windows(audio.pcm, params.voice_hop_s or VOICE_WINDOW_S,
-            max_windows=params.audio_windows or audio.max_windows or MAX_VOICE_WINDOWS,
-            keep=None if spans is None else functools.partial(window_in_speech, spans),
-            clock_breaks=audio.clock_breaks)
+        hop = params.voice_hop_s or VOICE_WINDOW_S
+        limit = params.audio_windows or audio.max_windows or MAX_VOICE_WINDOWS
+        if ctx.lease is None:
+            return voice_windows(audio.pcm, hop, max_windows=limit, clock_breaks=audio.clock_breaks), []
+        vad = ctx.lease.get("silero.speech_activity").obj
+        spans = [(start / SR + a, start / SR + b)
+                 for start, end in continuous_audio_ranges(len(audio.pcm), audio.clock_breaks) if end - start >= SR
+                 for a, b in vad.spans(audio.pcm[start:end])]
+        sample_spans = [(round(a * SR), round(b * SR)) for a, b in spans]
+        candidates = []
+
+        def keep(start_s, end_s):
+            start, end = round(start_s * SR), round(end_s * SR)
+            speech = sum(max(0, min(end, b) - max(start, a)) for a, b in sample_spans)
+            admitted = window_in_speech(spans, start_s, end_s)
+            candidates.append({"start_sample": start, "end_sample": end, "speech_samples": speech, "admitted": admitted})
+            return admitted
+
+        windows = voice_windows(audio.pcm, hop,
+            max_windows=limit, keep=keep, clock_breaks=audio.clock_breaks)
+        return windows, candidates
 
     @staticmethod
     def _no_window(ctx):

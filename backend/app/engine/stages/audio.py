@@ -52,7 +52,12 @@ from app.engine.stages import common
 from app.engine.stages import video as vid
 from app.evidence import audio_background_review_binding as background_binding
 from app.evidence import audio_long_review_binding
-from app.evidence.audio_binding import VOICE_CLOCK_LIMIT, VOICE_CLOCK_POLICY, source_clock_breaks
+from app.evidence.audio_binding import (
+    SPEECH_SELECTION,
+    VOICE_CLOCK_LIMIT,
+    VOICE_CLOCK_POLICY,
+    source_clock_breaks,
+)
 from app.evidence.audio_short_review_binding import SCOPE_REASON, supported_source
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
@@ -502,9 +507,12 @@ def publish(ctx: StageContext) -> dict[str, Any]:
     binding = (ctx.outputs.get("decode") or {}).get("evidence_input")
     if binding is not None:
         records, sound_records = [], []
+        speech_selection = None
         detect_output = ctx.outputs.get("detect") or {}
         with ctx.sessions() as db:
             for entry in common.entries(ctx, ("detect",)):
+                if entry.get("status") in {"ok", "not_applicable"} and entry.get("details", {}).get(SPEECH_SELECTION):
+                    speech_selection = _published_review(db, ctx, entry, None)
                 if entry.get("status") != "ok" or entry.get("family") not in {"voice", "acoustic-context"} or not entry.get("run_id"):
                     continue
                 run = db.get(DetectorRun, entry["run_id"])
@@ -528,6 +536,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
                 else:
                     background = background_voice_review.skipped(background_binding.SKIPPED_RECEIPT)
         evidence = {"input": binding, "checks": records, "sound_checks": sound_records}
+        if speech_selection:
+            evidence[SPEECH_SELECTION] = speech_selection
         if short is not None:
             evidence["short_voice_review"] = short
         if long is not None:

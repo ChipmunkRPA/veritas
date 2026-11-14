@@ -21,6 +21,7 @@ from app.evidence import (
     face_spatial_cut_binding,
     scene_return_binding,
 )
+from app.evidence.audio_binding import SPEECH_SELECTION, SPEECH_SELECTION_COMMITMENT
 from app.evidence.face_alignment_context import validate as validate_face_alignment
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.face_interval_binding import validate_packet as validate_face_interval
@@ -92,7 +93,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              IMAGE_EDITOR_PREVIEW, face_return_coverage.COMMITMENT, email_alternatives.COMMITMENT,
                              face_short_window_binding.COMMITMENT, scene_return_binding.COMMITMENT,
                              scene_return_binding.COVERAGE_COMMITMENT, WRITING_POSITION,
-                             EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, IMAGE_INTERPOLATION},
+                             EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, IMAGE_INTERPOLATION, SPEECH_SELECTION_COMMITMENT},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
     binding = bundle['evidence']
@@ -300,6 +301,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     parts = [evidence]
     if evidence['version'] in NESTED_VERSIONS:
         parts.extend(evidence[key] for key in ('audio', 'av'))
+    _require(analysis['kind'] in {'audio', 'video'} or SPEECH_SELECTION_COMMITMENT not in result,
+             'Speech window selection requires audio evidence')
+    if analysis['kind'] in {'audio', 'video'}:
+        channel = evidence.get('audio', {}) if analysis['kind'] == 'video' else evidence
+        selection = (channel.get('coverage') or {}).get(SPEECH_SELECTION) or {}
+        _require(selection.get('raw_output_sha256') == result.get(SPEECH_SELECTION_COMMITMENT),
+                 'Speech window selection differs from the published result')
     if analysis['kind'] == 'audio':
         from app.evidence.audio_bandwidth_binding import BANDWIDTH_SCHEMAS
         from app.evidence.audio_binding import validate_audio_stream_scope, validate_unscored_voice_coverage

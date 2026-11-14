@@ -4,7 +4,7 @@ from __future__ import annotations
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.evidence import audio_packets, stereo_listening, stereo_repetition
-from app.evidence.audio_binding import VOICE_CLOCK_POLICY
+from app.evidence.audio_binding import SPEECH_SELECTION, VOICE_CLOCK_POLICY
 from app.evidence.audio_gain_repetition_binding import GAIN_INPUT, GAIN_VERSION
 from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
 from app.storage.artefacts import get_artefact, register_artefact
@@ -61,14 +61,19 @@ def published_record(ctx) -> dict:
     with ctx.sessions() as db:
         for entry in common.entries(ctx, ('detect',)):
             family = entry.get('family')
-            if family not in {'voice', 'av-sync', 'acoustic-context'} or entry.get('status') != 'ok' or not entry.get('run_id'):
+            selection = entry.get('status') in {'ok', 'not_applicable'} and bool(entry.get('details', {}).get(SPEECH_SELECTION))
+            scored = family in {'voice', 'av-sync', 'acoustic-context'} and entry.get('status') == 'ok'
+            if not (selection or scored) or not entry.get('run_id'):
                 continue
             run = db.get(DetectorRun, entry['run_id'])
             if run is None or run.analysis_id != ctx.analysis_id or not run.raw_output_artefact_id:
                 raise ValueError('A video audio check has no stored raw input record')
             raw = get_artefact(db, run.raw_output_artefact_id, analysis_id=ctx.analysis_id)
-            record[{'voice': 'voice_checks', 'av-sync': 'av_checks', 'acoustic-context': 'sound_checks'}[family]].append(
-                {'detector_id': entry['detector_id'], 'raw_output_sha256': raw.sha256})
+            if selection:
+                record[SPEECH_SELECTION] = {'raw_output_sha256': raw.sha256}
+            if scored:
+                record[{'voice': 'voice_checks', 'av-sync': 'av_checks', 'acoustic-context': 'sound_checks'}[family]].append(
+                    {'detector_id': entry['detector_id'], 'raw_output_sha256': raw.sha256})
     return record
 
 
@@ -88,6 +93,7 @@ def build_channel(db, analysis, store, result: dict, *, set_id: str) -> dict:
     content = audio_packets.build_content(db, analysis, store, result,
         record={'input': record['input'], 'checks': record['voice_checks'], 'sound_checks': record.get('sound_checks', []),
                 'voice_clock_policy': record.get('voice_clock_policy'),
+                SPEECH_SELECTION: record.get(SPEECH_SELECTION),
                 'stereo_context_sha256': record.get('stereo_context_sha256')}, set_id=set_id)
     assessed = bool(content['coverage']['windows'])
     return {'status': 'ready' if assessed else 'not_assessed',
@@ -148,6 +154,7 @@ def verify_source_content(channel: dict, *, result: dict, store, source_sha256: 
             or coverage['unscored_samples'] != len(pcm)-sum(b-a for a,b in union)
             or coverage['decode_limit_reached'] != (len(pcm) >= mapping['limit_samples'])):
         raise audio_packets.PacketIntegrityError('Video voice coverage differs from actual scored windows')
+    audio_packets.verify_speech_selection(channel, store, record)
     grouped = {}
     for window in windows:
         grouped.setdefault((window['start_sample'], window['end_sample']), []).append(window)

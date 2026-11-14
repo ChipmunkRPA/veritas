@@ -325,12 +325,31 @@ CHECK_BOUNDARIES = {
         f"{SCRIPTS}/writing_dependency_transfer.py",
     )),
 }
+LOCAL_TRIALS = {
+    "image": ("image_regional_progressive_transfer.py", ("--output", "image-regional-progressive-2026-11-13.json"), ("review",), ()),
+    "video": CHECK_BOUNDARIES["video"],
+    "audio": ("audio_background_persistence.py", ("audio-background-persistence-2026-11-13.json",), ("review",), (
+        f"{SCRIPTS}/audio_background_confirmation.py", f"{SCRIPTS}/audio_background_rate_diagnostic.py",
+        f"{SCRIPTS}/audio_background_lossless_rate_transfer.py",
+        f"{PANELS}/audio-background-safeguard-2026-11-13.json",
+        f"{PANELS}/audio-partial-publisher-transfer-2026-11-12.json",
+        f"{PANELS}/audio-radar-transfer-2026-11-12.json",
+        f"{PANELS}/audio-nemotron-noise-transfer-2026-11-12.json",
+        f"{PANELS}/audio-nemotron-noise-confirmation-2026-11-12.json",
+    )),
+    "writing": ("writing_typed_decision_transfer.py", ("writing-typed-decision-transfer-2026-11-13.json",), ("review",), tuple(
+        f"{SCRIPTS}/{name}.py" for name in (
+            "writing_bidirectional_transfer", "writing_dependency_transfer", "writing_interval_transfer",
+            "writing_revision_trajectory_transfer", "writing_temperature_transfer", "writing_focus_v3",
+        )
+    )),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
           "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion",
           "short-edit-transfer-2026-11-13", "delivery-and-localization", "reference-and-rotation", "single-upload-transfers",
           "processing-and-short-edits", "delivery-and-reference-transfers", "short-edit-checks", "edit-position-transfers",
-          "single-upload-cues", "check-boundaries")
+          "single-upload-cues", "check-boundaries", "local-trials")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -414,6 +433,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = SINGLE_UPLOAD_CUES[modality]
     elif suite == "check-boundaries":
         script, panel_names, prefix, dependencies = CHECK_BOUNDARIES[modality]
+    elif suite == "local-trials":
+        script, panel_names, prefix, dependencies = LOCAL_TRIALS[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

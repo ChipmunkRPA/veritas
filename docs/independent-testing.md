@@ -129,6 +129,29 @@ The [progressive JPEG replay](image-regional-progressive-jpeg-2026-11-13.md#repl
 checks exact decoded-image and mask parity for a lossless carrier change. Its
 ledger covers 90 image pairs and six paired model runs.
 
+### Replay the recent local trials
+
+Use `local-trials` to reproduce the published image carrier comparison,
+four-second H.264 face-localization counts, background-noise experiments,
+and sentence-context writing results in one receipt. Python 3.11 or later
+is sufficient. The readers recount saved measurements and operating-point
+decisions. The linked studies provide separate instructions for running the
+detectors or checking evidence against media.
+[Images](image-regional-progressive-jpeg-2026-11-13.md)
+· [Video](video-brief-face-avc-clock-confirmation-2026-11-13.md)
+· [Audio](audio-background-persistence-2026-11-13.md)
+· [Writing](writing-typed-decision-transfer-2026-11-13.md)
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/local-trials.json" --suite local-trials
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/local-trials.json" --format-issue
+```
+
+The JSON contains file hashes and outcomes. A reviewer can compare it against
+another run with `--compare` or provide it in an
+[independent evaluation issue](https://github.com/ChipmunkRPA/veritas/issues/new?template=independent-evaluation.yml).
+
 ### Replay delivery and earlier-copy comparisons
 
 Recount the [two JPEG90 delivery histories](image-regional-jpeg90-carrier-2026-11-13.md),

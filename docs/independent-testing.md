@@ -13,6 +13,10 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [draft sentence-anchor replay](writing-sentence-anchor-transfer-2026-11-14.md#replay)
+recounts the frozen two-generator transfer and checks that each recorded
+wording change lies within its own mapped sentence. It runs without models.
+
 The [separate writing revision replay](writing-separate-revisions-2026-11-14.md#try-and-replay)
 checks exact sentence positions and linked edits on an earlier-draft export.
 The local panel records generated revisions, ordinary journal revisions and

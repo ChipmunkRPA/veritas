@@ -17,6 +17,7 @@ from app.evidence.document_revision import (
 )
 from app.evidence.document_revision_word_alignment import SCHEMA as ALIGNED_WORD_TABLES_SCHEMA
 from app.evidence.document_revision_word_tables import SCHEMA as WORD_TABLES_SCHEMA
+from app.evidence.document_revision_writing import ANCHORED_DRAFT_SCHEMA, refine_wording
 
 MAX_EXPORT = 2 * 1024 * 1024
 MAX_PDF_EXPORT = 4 * 1024 * 1024
@@ -48,6 +49,9 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
     if "paired_check" in received and not isinstance(received["paired_check"], dict):
         raise ValueError("The optional paired writing check has invalid fields")
     paired = received.pop("paired_check", None)
+    anchored = received.get("schema") == ANCHORED_DRAFT_SCHEMA
+    if anchored and paired is not None and paired.get("status") != "outside_scope":
+        raise ValueError("Anchored wording changes cannot carry statistical sentence responses")
     if paired is not None and old_extension != extension:
         raise ValueError("Paired writing responses require both drafts to have the same format")
     expected, old_text, new_text, word_layouts = compare_with_sources(
@@ -56,12 +60,13 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
         include_word_tables=(received.get("schema") in {WORD_TABLES_SCHEMA, ALIGNED_WORD_TABLES_SCHEMA}
                              or received.get("schema") == RELOCATION_SCHEMA and "word_tables" in received),
         strict_word_tables=received.get("schema") == WORD_TABLES_SCHEMA,
-        include_relocations=received.get("schema") == RELOCATION_SCHEMA,
+        include_relocations=anchored or received.get("schema") == RELOCATION_SCHEMA,
     )
-    if json.dumps(received, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
+    rebuilt = refine_wording(expected, old_text, new_text) if anchored else expected
+    if json.dumps(received, sort_keys=True, allow_nan=False) != json.dumps(rebuilt, sort_keys=True, allow_nan=False):
         raise ValueError("The comparison does not replay from these source bytes and decoded positions")
-    roles = Counter(row["role"] for row in expected["changes"])
-    excerpts = [row[side] for row in expected["changes"] for side in ("earlier", "later") if row[side] is not None]
+    roles = Counter(row["role"] for row in rebuilt["changes"])
+    excerpts = [row[side] for row in rebuilt["changes"] for side in ("earlier", "later") if row[side] is not None]
     result = {"source_hashes_verified": 2, "coordinate_space": expected["coordinate_space"], "changes_by_role": dict(roles),
               "changed_token_ranges_verified": sum(len(excerpt["changed_tokens"]) for excerpt in excerpts)}
     if passages := expected.get("relocated_passages"):

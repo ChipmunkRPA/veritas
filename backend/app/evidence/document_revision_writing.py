@@ -4,11 +4,12 @@ from __future__ import annotations
 
 import json
 import math
+from collections import Counter
 from dataclasses import dataclass
 
 from app.detectors.text.extract import _normalise, _ocr_language, from_string, text_hash
 from app.detectors.text.segment import segment
-from app.evidence.document_revision import WordLayouts, WordParagraphs
+from app.evidence.document_revision import WordLayouts, WordParagraphs, differences, tokens
 
 SCHEMA = "chipmunk.paired-writing-review/1"
 WIDE_SCHEMA = "chipmunk.paired-writing-review/2"
@@ -16,6 +17,7 @@ BOUNDARY_SCHEMA = "chipmunk.paired-writing-review/3"
 WORD_BOUNDARY_SCHEMA = "chipmunk.paired-writing-review/4"
 INTERIOR_SCHEMA = "chipmunk.paired-writing-review/5"
 MULTIPLE_SCHEMA = "chipmunk.paired-writing-review/6"
+ANCHORED_DRAFT_SCHEMA = "chipmunk.document-revision-comparison/7"
 MAX_REVISIONS = 4
 MULTIPLE_SCOPE = ("Checks separate changed sentences in short English text drafts. Each comparison requires its own "
                   "unchanged neighbors. The responses are uncalibrated and carry zero authorship confidence weight.")
@@ -117,6 +119,29 @@ def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool
                  allow_boundary=allow_boundary, allow_interior=allow_interior, word_layouts=word_layouts)
 
 
+def _context(document, units, raw_text, *, full_range=False):
+    origins_by_paragraph = {}
+    spans = []
+    for unit in units:
+        block = document.source_map[unit.paragraph]
+        if unit.paragraph not in origins_by_paragraph:
+            ranges = block["source_ranges"]
+            offset, stop = ranges[0][2], ranges[-1][3]
+            normalized, origins = _normalise(raw_text[offset:stop])
+            if normalized != document.text[block["start"]:block["end"]]:
+                raise ValueError("Writing comparison paragraph differs from its decoded source")
+            origins_by_paragraph[unit.paragraph] = offset, origins
+        offset, origins = origins_by_paragraph[unit.paragraph]
+        spans.append([offset + origins[unit.start - block["start"]][0],
+                      offset + origins[unit.end - block["start"] - 1][1]])
+    if [_normalise(raw_text[start:end])[0] for start, end in spans] != [unit.text for unit in units]:
+        raise ValueError("Writing comparison context differs from its decoded source")
+    start, end = (spans[0][0], spans[-1][1]) if full_range else (spans[1][0], spans[-2][1])
+    model_input = " ".join(unit.text for unit in units)
+    return {"start": start, "end": end, "text": raw_text[start:end],
+            "context_spans": spans, "input_sha256": text_hash(model_input)}, model_input
+
+
 def _pair(comparison, changes, earlier, later, old, new, changed, *, wide=False,
           allow_boundary=False, allow_interior=False, word_layouts=None, assign_changes=False):
     old_doc, old_units = old
@@ -132,33 +157,11 @@ def _pair(comparison, changes, earlier, later, old, new, changed, *, wide=False,
                               or paragraphs[-1] - paragraphs[0] != 1):
         return None
 
-    def context(document, units, raw_text, *, full_range=False):
-        origins_by_paragraph = {}
-        spans = []
-        for unit in units:
-            block = document.source_map[unit.paragraph]
-            if unit.paragraph not in origins_by_paragraph:
-                ranges = block["source_ranges"]
-                offset, stop = ranges[0][2], ranges[-1][3]
-                normalized, origins = _normalise(raw_text[offset:stop])
-                if normalized != document.text[block["start"]:block["end"]]:
-                    raise ValueError("Writing comparison paragraph differs from its decoded source")
-                origins_by_paragraph[unit.paragraph] = offset, origins
-            offset, origins = origins_by_paragraph[unit.paragraph]
-            spans.append([offset + origins[unit.start - block["start"]][0],
-                          offset + origins[unit.end - block["start"] - 1][1]])
-        if [_normalise(raw_text[start:end])[0] for start, end in spans] != [unit.text for unit in units]:
-            raise ValueError("Writing comparison context differs from its decoded source")
-        start, end = (spans[0][0], spans[-1][1]) if full_range else (spans[1][0], spans[-2][1])
-        model_input = " ".join(unit.text for unit in units)
-        focus = {"start": start, "end": end, "text": raw_text[start:end],
-                 "context_spans": spans, "input_sha256": text_hash(model_input)}
-        if across_paragraphs:
+    before, old_input = _context(old_doc, old_units[selected], earlier)
+    after, new_input = _context(new_doc, new_units[selected], later)
+    if across_paragraphs:
+        for focus in (before, after):
             focus["center_input_sha256"] = text_hash(_normalise(focus["text"])[0])
-        return focus, model_input
-
-    before, old_input = context(old_doc, old_units[selected], earlier)
-    after, new_input = context(new_doc, new_units[selected], later)
 
     def contained(change, side, expected):
         item = change[side]
@@ -223,26 +226,34 @@ def _pair(comparison, changes, earlier, later, old, new, changed, *, wide=False,
             window = slice(center - 1, center + 2)
             if any(unit.paragraph != paragraphs[0] for unit in old_units[window]):
                 continue
-            old_geometry, old_window = context(old_doc, old_units[window], earlier, full_range=True)
-            new_geometry, new_window = context(new_doc, new_units[window], later, full_range=True)
+            old_geometry, old_window = _context(old_doc, old_units[window], earlier, full_range=True)
+            new_geometry, new_window = _context(new_doc, new_units[window], later, full_range=True)
             neighboring_contexts.append(PairedInput(old_window, new_window, {"earlier": old_geometry, "later": new_geometry}))
     return PairedInput(old_input, new_input, {"earlier": before, "later": after,
                                              "change_ids": [change["id"] for change in linked]}, across_paragraphs,
                        tuple(neighboring_contexts))
 
 
-def separate_revisions(comparison: dict, earlier: str, later: str) -> list[PairedInput]:
+def _separated_centers(comparison, earlier, later):
     if comparison["format"] != "plain_text" or comparison.get("relocated_passages"):
-        return []
+        return None
     old, new = _source(earlier), _source(later)
     if old is None or new is None:
-        return []
+        return None
     old_units, new_units = old[1], new[1]
     if [unit.paragraph for unit in old_units] != [unit.paragraph for unit in new_units]:
-        return []
+        return None
     changed = [i for i, (left, right) in enumerate(zip(old_units, new_units, strict=True)) if left.text != right.text]
     if not 2 <= len(changed) <= MAX_REVISIONS or any(b - a < 3 for a, b in zip(changed, changed[1:])):
+        return None
+    return old, new, changed
+
+
+def separate_revisions(comparison: dict, earlier: str, later: str) -> list[PairedInput]:
+    centers = _separated_centers(comparison, earlier, later)
+    if centers is None:
         return []
+    old, new, changed = centers
     candidates = [_pair(comparison, comparison["changes"], earlier, later, old, new, [i], assign_changes=True)
                   for i in changed]
     if any(item is None for item in candidates):
@@ -251,6 +262,76 @@ def separate_revisions(comparison: dict, earlier: str, later: str) -> list[Paire
     if sorted(linked) != sorted(change["id"] for change in comparison["changes"]):
         return []
     return candidates
+
+
+def anchor_revisions(comparison: dict, earlier: str, later: str) -> tuple[dict, list[PairedInput]] | None:
+    """Confine wording differences to exact sentence ranges between unchanged neighbors."""
+    centers = _separated_centers(comparison, earlier, later)
+    if centers is None:
+        return None
+    old, new, changed = centers
+    old_units, new_units = old[1], new[1]
+    if not all(0 < index < len(old_units) - 1 for index in changed):
+        return None
+
+    def same_paragraph(units, index):
+        return units[index - 1].paragraph == units[index].paragraph == units[index + 1].paragraph
+
+    def neighbors(units, index):
+        return units[index - 1].text, units[index + 1].text
+
+    for units in (old_units, new_units):
+        counts = Counter(neighbors(units, i) for i in range(1, len(units) - 1) if same_paragraph(units, i))
+        if any(not same_paragraph(units, i) or counts[neighbors(units, i)] != 1 for i in changed):
+            return None
+    if {old_units[i].text for i in changed} & {new_units[i].text for i in changed}:
+        return None
+
+    candidates, edits = [], []
+    old_end = new_end = 0
+    for i in changed:
+        old_focus, old_input = _context(old[0], old_units[i - 1:i + 2], earlier)
+        new_focus, new_input = _context(new[0], new_units[i - 1:i + 2], later)
+        if _word_sequence(earlier, old_end, old_focus["start"]) != _word_sequence(later, new_end, new_focus["start"]):
+            return None
+        rows = differences(tokens(earlier, [(old_focus["start"], old_focus["end"])]),
+                           tokens(later, [(new_focus["start"], new_focus["end"])]))
+        if not rows:
+            return None
+        change_ids = []
+        for row in rows:
+            edit = {"id": f"C{len(edits) + 1:02d}", "role": "body"}
+            for side, text in (("earlier", earlier), ("later", later)):
+                start, end = row[side]
+                edit[side] = {"start": start, "end": end, "text": text[start:end], "changed_tokens": row[f"{side}_changed_tokens"]}
+            change_ids.append(edit["id"])
+            edits.append(edit)
+        candidates.append(PairedInput(old_input, new_input, {"earlier": old_focus, "later": new_focus,
+                                                               "change_ids": change_ids}))
+        old_end, new_end = old_focus["end"], new_focus["end"]
+    if _word_sequence(earlier, old_end, len(earlier)) != _word_sequence(later, new_end, len(later)):
+        return None
+    return comparison | {
+        "schema": ANCHORED_DRAFT_SCHEMA,
+        "scope": comparison["scope"] + " Unchanged neighboring sentences anchor these wording changes.",
+        "changes": edits,
+    }, candidates
+
+
+def _word_sequence(text, start, end):
+    return [value for value, _, _ in tokens(text, [(start, end)])]
+
+
+def refine_wording(comparison: dict, earlier: str, later: str) -> dict:
+    """Improve exact wording links where the prior diff could not map separate changes."""
+    try:
+        anchored = anchor_revisions(comparison, earlier, later)
+        if (anchored is not None and anchored[0]["changes"] != comparison["changes"]
+                and not separate_revisions(comparison, earlier, later)):
+            return anchored[0]
+    except ValueError:
+        return comparison
+    return comparison
 
 
 def multiple_result(candidates: list[PairedInput], measured: list[list[dict] | None] | None = None) -> dict:

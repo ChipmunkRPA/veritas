@@ -1157,6 +1157,7 @@ def test_separate_sentence_checks_preserve_exact_ranges_and_incomplete_readings(
     monkeypatch.setattr(settings, "text_detector_mode", "candidate")
     monkeypatch.setattr(settings, "text_window_sentences", 3)
     monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    monkeypatch.setattr(settings, "document_paired_separate_review", False)
     old_first = "The audit checked how each agency handled emergencies."
     new_first = "The report describes how each agency prepares for emergencies."
     old_second = "The group discussed which expenses had been approved."
@@ -1213,6 +1214,69 @@ def test_separate_sentence_checks_preserve_exact_ranges_and_incomplete_readings(
     json_path.write_text(json.dumps(comparison))
     with pytest.raises(ValueError, match="Mapped revisions differ from the source positions"):
         review(json_path, earlier_path, later_path)
+
+
+def test_sentence_anchors_bind_wording_without_scoring_the_recovered_ranges(reference_http, monkeypatch, tmp_path):
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_detector_mode", "candidate")
+    monkeypatch.setattr(settings, "text_window_sentences", 3)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    monkeypatch.setattr(settings, "document_paired_separate_review", True)
+    opening = "The committee met on Monday morning to review the budget."
+    ending = "The final minutes will be available after the next meeting."
+    other_opening = "The audit included reports from all eight regional offices."
+    other_ending = "The membership roster is available on the committee website."
+
+    def source(first, second, start=other_opening, end=other_ending):
+        return f"{opening} {first} {ending}\r\n\r\n{start} {second} {end}".encode()
+
+    old = source("Reviewers confirmed the permit (R. Lane, personal communication).", "Staff listed the dates of each inspection.")
+    new = source("Reviewers confirmed the permit.", "The reviewers documented the timeline of each inspection.")
+    aid = "sentence-anchors"
+    _saved(f, aid, ".txt", new)
+    standard, a, b = document_revision.compare_with_text(old, new, ".txt")
+    assert paired.separate_revisions(standard, a, b) == []
+
+    def score(candidates):
+        pytest.fail("A new deterministic wording range must not trigger writing inference")
+
+    monkeypatch.setattr(paired, "score_separate", score)
+    response = f.client.post(_url(aid), headers=f.viewer, files=_upload(old, ".txt"),
+                             data={"include_paired_check": "true", "include_pdf": "true"})
+    assert response.status_code == 200
+    payload = response.json()
+    comparison = payload["comparison"]
+    assert comparison["schema"] == paired.ANCHORED_DRAFT_SCHEMA
+    assert comparison["paired_check"]["status"] == "outside_scope"
+    assert "responses" not in comparison["paired_check"]
+    assert "Unchanged neighboring sentences" in comparison["scope"]
+    change = comparison["changes"][0]
+    assert change["earlier"]["text"] == "(R. Lane, personal communication)."
+    assert change["earlier"]["end"] == old.decode().index(" " + ending)
+    assert change["later"]["text"] == "."
+    assert change["later"]["end"] == new.decode().index(" " + ending)
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as report:
+        assert any("personal communication" in page.get_text() for page in report)
+        assert any("Unchanged neighboring sentences" in page.get_text() for page in report)
+
+    earlier_path, later_path, json_path = (tmp_path / name for name in ("old.txt", "new.txt", "comparison.json"))
+    earlier_path.write_bytes(old)
+    later_path.write_bytes(new)
+    json_path.write_text(json.dumps(comparison))
+    assert review(json_path, earlier_path, later_path)["paired_scope_and_saved_response_arithmetic"] == "outside_scope"
+    change["earlier"]["start"] -= 1
+    json_path.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(json_path, earlier_path, later_path)
+    unscored = f.client.post(_url(aid), headers=f.viewer, files=_upload(old, ".txt")).json()["comparison"]
+    assert unscored["schema"] == paired.ANCHORED_DRAFT_SCHEMA
+    json_path.write_text(json.dumps(unscored))
+    assert review(json_path, earlier_path, later_path)["source_hashes_verified"] == 2
+
+    repeated_old = source("The first session ended at noon.", "Staff listed the dates of each inspection.", opening, ending)
+    repeated_new = source("The first session ended at noon yesterday.", "The reviewers listed inspection dates.", opening, ending)
+    comparison, a, b = document_revision.compare_with_text(repeated_old, repeated_new, ".txt")
+    assert paired.anchor_revisions(comparison, a, b) is None
 
 
 def test_adjacent_sentence_pair_uses_exact_text_exports_and_preserves_legacy_replay(reference_http, monkeypatch, tmp_path):

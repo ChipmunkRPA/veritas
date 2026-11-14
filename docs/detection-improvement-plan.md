@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Sentence-anchored wording differences](writing-sentence-anchor-transfer-2026-11-14.md)
+  correct eligible earlier-draft highlights. A held trial recovered four
+  more assessable rewrites on 32 new source works but added no AI-like
+  findings. The app ships the wording correction only.
+
 - [Separate writing revisions in an earlier-draft pair](writing-separate-revisions-2026-11-14.md)
   maps each eligible changed sentence and gives it a distinct reading.
   On the composed panel it found five exact generated edits and flagged

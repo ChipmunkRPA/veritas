@@ -222,7 +222,8 @@ class DraftWordTables(BaseModel):
 class DraftComparison(BaseModel):
     schema_name: Literal["chipmunk.document-revision-comparison/1", "chipmunk.document-revision-comparison/2",
                          "chipmunk.document-revision-comparison/3", "chipmunk.document-revision-comparison/4",
-                         "chipmunk.document-revision-comparison/5", "chipmunk.document-revision-comparison/6"] = Field(alias="schema")
+                         "chipmunk.document-revision-comparison/5", "chipmunk.document-revision-comparison/6",
+                         "chipmunk.document-revision-comparison/7"] = Field(alias="schema")
     format: Literal["email", "plain_text", "docx", "pdf", "mixed"]
     coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint",
                               "pdf_native_text_unicode_codepoint", "email_html_extracted_text_unicode_codepoint",
@@ -310,6 +311,7 @@ def availability(aid: str, request: Request):
 
 def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_extension: str, include_pdf: bool,
              include_paired_check: bool = False) -> JSONResponse:
+    from app.evidence import document_revision_writing as paired
     from app.evidence.document_revision import compare_with_sources
 
     sha256, size, extension = original
@@ -335,8 +337,6 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
     except OSError:
         raise ProblemError(500, "Earlier-draft comparison unavailable", "The local service could not stage the comparison.") from None
     if paired_enabled:
-        from app.evidence import document_revision_writing as paired
-
         candidate = None
         separate = []
         draft_format = comparison["format"]
@@ -363,6 +363,8 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
             comparison["paired_check"] = (
                 paired.multiple_result(separate) if separate else paired.result(candidate, draft_format=draft_format)
             )
+    if comparison.get("paired_check", {}).get("status") in (None, "outside_scope"):
+        comparison = paired.refine_wording(comparison, old_text, new_text)
     payload: dict = {"comparison": comparison}
     if include_pdf:
         from app.reports.document_revision_pdf import render

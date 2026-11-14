@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Short speech after a longer-window skip](audio-short-admission-transfer-2026-11-14.md)
+  adds an optional local inspection path for brief speech. On the matched
+  source panel it found one noisy edit and flagged three ordinary noisy
+  recordings. The new route carries zero weight in the overall assessment.
+
 - [Matched resynthesis and competing-speech controls](audio-sine-resynthesis-transfer-2026-11-14.md)
   measured 152 new deliveries. The current review flagged 8 of 12 clean
   resyntheses that preserve the words. The two interval-trained heads located

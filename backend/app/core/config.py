@@ -263,6 +263,7 @@ class Settings(BaseSettings):
     audio_enabled: bool = True  # score the sound track of a video with audio_classifiers
     # Local rollout switch; the legacy weights/calibration remain installed for rollback.
     audio_detector_mode: Literal["legacy", "candidate"] = "legacy"
+    audio_short_admission_review: bool = False  # Local inspection of short speech after a primary coverage skip.
     audio_focused_long_review: bool = False  # Optional source-clock review with overlapping native speech windows.
     audio_bandwidth_return_review: bool = False  # Optional native short lossless audio processing context.
     audio_background_review_model: Path | None = None  # Local pinned enhancement assets.

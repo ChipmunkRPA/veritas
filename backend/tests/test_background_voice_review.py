@@ -26,7 +26,7 @@ def source(pcm):
 
 def primary(direction, pcm_sha256):
     if direction == "unassessed":
-        return {"detector_id": detector.PRIMARY_ID, "status": "not_applicable", "reason": detector.NO_SPEECH}
+        return {"detector_id": detector.PRIMARY_ID, "status": "not_applicable", "reason": detector.NO_ADMITTED_VOICE}
     return {"detector_id": detector.PRIMARY_ID, "status": "ok",
             "unit_scores": [{"quality": binding.INTERVAL}],
             "details": {"audio_screening": {"scope_supported": True, "decision": direction},

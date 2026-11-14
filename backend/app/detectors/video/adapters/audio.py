@@ -43,6 +43,7 @@ from app.evidence.audio_binding import SPEECH_SELECTION, VOICE_CLOCK_LIMIT
 NOT_ANALYSABLE = {"absent": "no audio track", "unreadable": "the sound track could not be decoded", "silent": "silent sound track",
                   "short": "the sound track is shorter than 1 s"}
 NO_CONTINUOUS_VOICE = "No continuous source interval of at least one second contains enough speech to score."
+NO_ADMITTED_VOICE = "No source window of at least one second contains at least half detected speech."
 
 
 class _VoiceClassifier(Detector):
@@ -207,7 +208,7 @@ class PellaVoiceDetector(_VoiceClassifier):
     def _no_window(ctx):
         if ctx.outputs.audio.clock_breaks:
             return NO_CONTINUOUS_VOICE
-        return "No source window of at least one second contains at least half detected speech."
+        return NO_ADMITTED_VOICE
 
     def classifier(self, ctx):
         return ctx.lease.get(self.MODEL_ID).obj

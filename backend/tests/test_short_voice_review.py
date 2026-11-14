@@ -13,6 +13,7 @@ from app.core.canonical import canonical_json
 from app.core.config import settings
 from app.detectors.audio import short_voice_review
 from app.detectors.audio.decode import decode_audio, read_wav, wav_bytes
+from app.detectors.video.adapters.audio import NO_ADMITTED_VOICE
 from app.detectors.video.adapters.common import AudioTrack
 from app.engine import boundary
 from app.engine.boundary import Cancelled, Deadline
@@ -181,6 +182,42 @@ def test_insufficient_speech_maps_all_short_windows_without_inference():
     review = short_voice_review.scan(pcm, [(3.5, 4)], None, Deadline(None))
     assert review["status"] == "skipped" and review["reason"] == binding.NO_SPEECH_REASON
     assert review["responses"] == [] and review["speech_counts"] == [0, 0, 8000, 8000, 0]
+
+
+@pytest.mark.parametrize("status,reason,documentary,enabled,expected", [
+    ("not_applicable", NO_ADMITTED_VOICE, False, True, True),
+    ("not_applicable", NO_ADMITTED_VOICE, False, False, False),
+    ("not_applicable", "no audio track", False, True, False),
+    ("failed", NO_ADMITTED_VOICE, False, True, False),
+    ("timeout", None, False, True, False),
+    ("not_applicable", NO_ADMITTED_VOICE, True, True, False),
+])
+def test_short_review_only_recovers_an_admission_skip(monkeypatch, status, reason, documentary, enabled, expected):
+    calls = []
+    ctx = SimpleNamespace(
+        profile=Profile.FULL, analysis_id="test", deadline=Deadline(100), check=lambda *_: None,
+        outputs={"probe": {"facts": {"container": "wav"}}, "decode": {"short_voice_review_source_supported": True}},
+        state={"run_store": SimpleNamespace(run_id=lambda *_: "short-review")},
+        exhibits=SimpleNamespace(bind=lambda *_: None), log=SimpleNamespace(bind=lambda **_: None),
+    )
+
+    def record(detector, run_ctx, **_kwargs):
+        calls.append(detector.spec.id)
+        assert run_ctx.outputs.probe["primary_coverage_skip"] is True
+        return DetectorResult(status="ok")
+
+    monkeypatch.setattr(settings, "audio_detector_mode", "candidate")
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "audio_short_admission_review", enabled)
+    monkeypatch.setattr(audio.provenance_gate, "stop", lambda _: documentary)
+    monkeypatch.setattr(audio.common, "media", lambda _: None)
+    monkeypatch.setattr(audio, "run_detector", record)
+    entry = {"detector_id": short_voice_review.PellaVoiceDetector.spec.id, "status": status, "reason": reason}
+    result = audio._short_voice_review(ctx, None, [entry])
+    assert calls == ([binding.DETECTOR_ID] if expected else [])
+    assert result.get("run_id") == ("short-review" if expected else None)
+    if documentary:
+        assert result["reason"] == audio.provenance_gate.SKIP_REASON
 
 
 def test_watchdog_discards_slow_optional_run_without_losing_primary(monkeypatch):

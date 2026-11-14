@@ -1,0 +1,49 @@
+{
+  "checks": {
+    "known edit": {
+      "fixture": "23-mixture",
+      "decision": "not_assessable",
+      "short_status": "flagged",
+      "short_checked": 1,
+      "interval": {
+        "end_sample": 64000,
+        "start_sample": 32000
+      },
+      "checked_windows": [
+        {
+          "end_sample": 64000,
+          "start_sample": 32000
+        }
+      ],
+      "verified": true
+    },
+    "matched original": {
+      "fixture": "20-mixture",
+      "decision": "not_assessable",
+      "short_status": "flagged",
+      "short_checked": 1,
+      "interval": {
+        "end_sample": 64000,
+        "start_sample": 32000
+      },
+      "checked_windows": [
+        {
+          "end_sample": 64000,
+          "start_sample": 32000
+        }
+      ],
+      "verified": true
+    },
+    "silence": {
+      "fixture": "48-foreground",
+      "decision": "not_assessable",
+      "short_status": "skipped",
+      "short_checked": 0,
+      "interval": null,
+      "checked_windows": [],
+      "verified": true
+    }
+  },
+  "queue_before_payment": 0,
+  "simulated_price_cents": 999
+}

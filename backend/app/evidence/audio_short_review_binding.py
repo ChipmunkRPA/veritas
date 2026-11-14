@@ -19,6 +19,13 @@ LIMITATION = ("This is a clue for the complete two-second window. It cannot esta
 SCOPE_REASON = ("This check requires Full analysis of six continuous decoded seconds at 16 kHz. "
                 "It supports 16-bit mono WAV and FLAC and a verified 48 kb/s mono MP3 profile.")
 NO_SPEECH_REASON = "No two-second interval contained enough detected speech."
+AFTER_COVERAGE_SKIP = {
+    "flagged": "The main voice check skipped its longer windows. A shorter window returned an elevated response. "
+               "Brief ordinary speech and edits can also trigger this response.",
+    "no_flag": "The main voice check skipped its longer windows. No checked two-second window was flagged. "
+               "The recording could still contain an edit.",
+    "skipped": "The main voice check skipped its longer windows. No two-second interval contained enough detected speech.",
+}
 
 
 def source_metadata(mapping: dict) -> dict:
@@ -111,7 +118,7 @@ def _validate(review: dict, source: dict) -> None:
         expected = window_coverage([row["speech_samples"] for row in coverage], source)
         admitted = [(row["start_sample"], row["end_sample"]) for row in expected if row["status"] == "checked"]
         if (coverage != expected or windows != admitted or (review["status"] == "skipped") != (not admitted)
-                or (not admitted and review["reason"] != NO_SPEECH_REASON)):
+                or (not admitted and review["reason"] not in {NO_SPEECH_REASON, AFTER_COVERAGE_SKIP["skipped"]})):
             raise ValueError("Short speech-window coverage disagrees with the analysis")
     interval = review["interval"]
     assets = review["artifacts"]

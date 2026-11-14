@@ -9,6 +9,7 @@ from app.detectors.video.adapters.audio import PellaVoiceDetector
 from app.detectors.video.adapters.common import video_spec
 from app.engine.detector import ActivationUse, Applicability, Detector, DetectorResult, InputUnit, Modality
 from app.evidence.audio_short_review_binding import (
+    AFTER_COVERAGE_SKIP,
     COVERAGE_SCHEMA,
     DETECTOR_ID,
     GRID,
@@ -56,7 +57,7 @@ class ShortVoiceReview(Detector):
 
     spec = video_spec(DETECTOR_ID, TITLE, InputUnit.AUDIO_WINDOW, (),
                       family="voice-review", model_ids=(PellaVoiceDetector.MODEL_ID, ACTIVITY_MODEL),
-                      needs=("audio",), modality=Modality.AUDIO, devices=("cpu",), timeout_s=BUDGET_S, version="1.1.0")
+                      needs=("audio",), modality=Modality.AUDIO, devices=("cpu",), timeout_s=BUDGET_S, version="1.2.0")
 
     def activation_plan(self, ctx):
         return (ActivationUse(PellaVoiceDetector.MODEL_ID, 1, "audio window", "One padded two-second speech window"),
@@ -71,8 +72,10 @@ class ShortVoiceReview(Detector):
         pcm = ctx.outputs.audio.pcm
         spans = ctx.lease.get(ACTIVITY_MODEL).obj.spans(pcm)
         model = ctx.lease.get(PellaVoiceDetector.MODEL_ID).obj
-        codec = (ctx.outputs.probe or {}).get("source_codec")
-        review = scan(pcm, spans, model, ctx.deadline, codec=codec)
+        probe = ctx.outputs.probe or {}
+        review = scan(pcm, spans, model, ctx.deadline, codec=probe.get("source_codec"))
+        if probe.get("primary_coverage_skip") is True:
+            review["reason"] = AFTER_COVERAGE_SKIP[review["status"]]
         return DetectorResult(status="ok", details={
             "short_voice_review": review,
             "pcm_sha256": hashlib.sha256(pcm.astype("<f4").tobytes()).hexdigest(),

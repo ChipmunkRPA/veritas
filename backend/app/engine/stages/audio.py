@@ -40,6 +40,7 @@ from app.detectors.audio.coverage import content_rows, coverage_seconds, scored_
 from app.detectors.audio.decode import decode_audio
 from app.detectors.common.fusion import fuse as legacy_fuse
 from app.detectors.common.fusion import fuse_probability, prob_to_signal_fields
+from app.detectors.video.adapters.audio import NO_ADMITTED_VOICE
 from app.detectors.video import segments as temporal_segments
 from app.detectors.video.audio import SR, VOICE_WINDOW_S, limit_voice_signal
 from app.detectors.video.decode import _input
@@ -261,11 +262,16 @@ def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
 
     if settings.audio_detector_mode != "candidate":
         return short_voice_review.skipped("The short-window check is unavailable in this audio configuration.")
+    if provenance_gate.stop(ctx):
+        return short_voice_review.skipped(provenance_gate.SKIP_REASON)
     facts = ctx.outputs["probe"]["facts"]
     if (Profile(ctx.profile) is not Profile.FULL or facts.get("container") not in {"wav", "flac", "mp3"}
             or not ctx.outputs["decode"].get("short_voice_review_source_supported")):
         return short_voice_review.skipped(SCOPE_REASON)
-    if not any(e.get("detector_id") == short_voice_review.PellaVoiceDetector.spec.id and e.get("status") == "ok" for e in entries):
+    primary = next((e for e in entries if e.get("detector_id") == short_voice_review.PellaVoiceDetector.spec.id), {})
+    coverage_skip = (settings.environment == "dev" and settings.audio_short_admission_review
+                     and primary.get("status") == "not_applicable" and primary.get("reason") == NO_ADMITTED_VOICE)
+    if primary.get("status") != "ok" and not coverage_skip:
         return short_voice_review.skipped("The primary voice check did not produce a usable speech response.")
     remaining = ctx.deadline.remaining()
     if remaining is not None and remaining < short_voice_review.BUDGET_S + short_voice_review.PIPELINE_RESERVE_S:
@@ -273,7 +279,8 @@ def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
     detector = short_voice_review.ShortVoiceReview()
     source_codec = ctx.outputs["decode"].get("short_voice_review_source_codec")
     run_ctx = RunContext(analysis_id=ctx.analysis_id, media=common.media(ctx), profile=ctx.profile, device="cpu",
-                         dtype=None, lease=None, outputs=StageOutputs(audio=track, probe={"source_codec": source_codec}), deadline=ctx.deadline,
+                         dtype=None, lease=None, outputs=StageOutputs(audio=track, probe={"source_codec": source_codec,
+                             "primary_coverage_skip": coverage_skip}), deadline=ctx.deadline,
                          exhibits=ctx.exhibits.bind(detector.spec.id), log=ctx.log.bind(detector_id=detector.spec.id))
     store = ctx.state["run_store"]
     review = run_detector(detector, run_ctx, store=store, models=ctx.state.get("models"), timeout_s=short_voice_review.BUDGET_S)

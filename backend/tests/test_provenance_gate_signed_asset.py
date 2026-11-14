@@ -23,7 +23,7 @@ from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.x509.oid import ExtendedKeyUsageOID, NameOID
 from PIL import Image
 
-from app.engine.provenance_gate import decide
+from app.engine.provenance_gate import SKIP_REASON, decide
 from app.provenance import c2pa as verifier
 
 
@@ -286,6 +286,7 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
     monkeypatch.setattr(settings, 'data_dir', tmp_path)
     monkeypatch.setattr(settings, 'min_free_bytes', 0)
     monkeypatch.setattr(settings, 'audio_detector_mode', audio_mode)
+    monkeypatch.setattr(settings, 'audio_short_admission_review', True)
     db_engine = create_engine(f'sqlite:///{tmp_path / "authored.sqlite"}', connect_args={'check_same_thread': False})
     Base.metadata.create_all(db_engine)
     store = ObjectStore(tmp_path / 'objects')
@@ -318,6 +319,8 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
     assert outcome.status == 'done', (outcome.status, outcome.error, outcome.stages)
     assert outcome.outputs['provenance_gate']['action'] == 'stop_statistical_detection'
     assert all(r['status'] == 'skipped' for r in outcome.outputs['detect']['detectors'])
+    if kind == 'audio' and audio_mode == 'candidate':
+        assert outcome.outputs['detect']['short_voice_review']['reason'] == SKIP_REASON
     assert outcome.outputs['fuse']['decision']['provenance_record'] is not None
     from app.engine.customer_assessment import customer_assessment
 

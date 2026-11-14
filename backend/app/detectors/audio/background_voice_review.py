@@ -16,7 +16,7 @@ from app.core.config import settings
 from app.detectors.audio import calibration
 from app.detectors.audio.content import window_in_speech
 from app.detectors.audio.short_voice_review import ACTIVITY_MODEL
-from app.detectors.video.adapters.audio import PellaVoiceDetector
+from app.detectors.video.adapters.audio import NO_ADMITTED_VOICE, PellaVoiceDetector
 from app.detectors.video.adapters.common import video_spec
 from app.engine.detector import ActivationUse, Applicability, Detector, DetectorResult, InputUnit, Modality
 from app.evidence import audio_background_review_binding as binding
@@ -25,14 +25,13 @@ BUDGET_S = 20.0
 PIPELINE_RESERVE_S = 25.0
 OPERATING_POINT = 7.422796281843017
 PRIMARY_ID = PellaVoiceDetector.spec.id
-NO_SPEECH = "No source window of at least one second contains at least half detected speech."
 _ENHANCER = threading.BoundedSemaphore()
 
 
 def primary_direction(entry):
     if entry.get("detector_id") != PRIMARY_ID:
         return None
-    if entry.get("status") == "not_applicable" and entry.get("reason") == NO_SPEECH:
+    if entry.get("status") == "not_applicable" and entry.get("reason") == NO_ADMITTED_VOICE:
         return "unassessed"
     if entry.get("status") != "ok":
         return None

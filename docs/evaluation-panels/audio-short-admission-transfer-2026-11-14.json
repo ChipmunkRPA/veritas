@@ -1,0 +1,2734 @@
+{
+  "input_parent": "3d3c27c859e60c86fcb583e017b3e4fda4397ef81110c42b8c1773ec7edd1599",
+  "method": {
+    "comparison": "Hold the model, raw flag point, source clock and short-window admission rule fixed. The current path requires one admitted four-second window. The proposed path permits the independent two-second check when the primary explicitly reports a speech-admission skip. Record every skipped window and distinguish checked, elevated, and useful exact-time coverage. The overall result is outside this comparison.",
+    "input": "From each retained six-second matched source group, take the same 1.65 s region in all four foreground and original-mix versions. Center on the known edit subject to source bounds, then put the excerpt at 2.200 s in a six-second file with silence outside it. Room-only controls use the centered excerpt at the same destination. This is a bounded sparse-speech test, with labels used to prepare fixtures before inference only.",
+    "sources": "Replay the previously bound three-generator panel. Each of its twelve groups contains a synthetic edit, an untouched file and same-speaker and other-speaker human edits. Eight additional deliveries comprise foreground and mixed routes for the four isolated room inputs. Controlled excerpt placement and earlier project source exposure apply."
+  },
+  "observations": [
+    {
+      "family": null,
+      "group": "replicate-0-0-early",
+      "id": 0,
+      "kind": "untouched",
+      "pcm_sha256": "9d7efe9487173810d99e8bed493d5cd6111ccecc9c247cffda29ca31f696a0bc",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -6.686510072749815,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        9056,
+        23488,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-0-early",
+      "id": 0,
+      "kind": "untouched",
+      "pcm_sha256": "3bb9ac60da4d66cf2e00fc8c1fb11a97d92362f42c58c36ac8dabb050d2f1e98",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -3.482775733983144,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        7520,
+        21952,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-0-early",
+      "id": 1,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "f0f9cc91ecc2760122b319c021ea1b1cd1ae43f572e97cdec776b87cc369e6c0",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        3.87157126619474,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        9056,
+        23488,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-0-early",
+      "id": 1,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "838a05e1298c2144c44fa11d35a39f4abdda16319abd7590640b44ac65316b18",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.303904361981061,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        7008,
+        21440,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-0-early",
+      "id": 2,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "2a95a94333a6e2af6ae01ccf66a31105bfb5fed6543e2dfa6ed6dfefb435dde6",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        5.54551576250598,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        9056,
+        23488,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-0-early",
+      "id": 2,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "c4fe8bb7375fc4b852e0b24dc0ccf9cbf9475af9306f7f372b0c0a0944d61aa3",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -4.2826385795781405,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        8032,
+        22464,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": "clone",
+      "group": "replicate-0-0-early",
+      "id": 3,
+      "kind": "synthetic",
+      "pcm_sha256": "d8e0c0f4b08e5268467d11f9a61805d7ede1da7b4e41187502a66f6c2019f17d",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.206842481672103,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        9056,
+        23488,
+        14432,
+        0
+      ],
+      "truth": [
+        40320,
+        50560
+      ],
+      "view": "foreground"
+    },
+    {
+      "family": "clone",
+      "group": "replicate-0-0-early",
+      "id": 3,
+      "kind": "synthetic",
+      "pcm_sha256": "07def3c612eec923de64e1193c5d6dc18dd6522ab170675fef63b3f5469fb525",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        5.55367110265265,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        7520,
+        21952,
+        14432,
+        0
+      ],
+      "truth": [
+        40320,
+        50560
+      ],
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-1-interior",
+      "id": 4,
+      "kind": "untouched",
+      "pcm_sha256": "66052933f32283bc803f948a71f06cce8c501958addc4e9ec64f1ff1b871f9b1",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -6.3116626898535335,
+        null,
+        null
+      ],
+      "source_start_sample": 48240,
+      "speech_samples": [
+        0,
+        12640,
+        27072,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-1-interior",
+      "id": 4,
+      "kind": "untouched",
+      "pcm_sha256": "271f978e87e99faec4b9a1a3d168e925c6a77e895139393d7267f9b327dee2cd",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        4.7828819764840445,
+        null,
+        null
+      ],
+      "source_start_sample": 48240,
+      "speech_samples": [
+        0,
+        12128,
+        26560,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-1-interior",
+      "id": 5,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "98d6f6a11adc6cb7998cc8e0a47014482b31a3153224562f76a2246109851aca",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.857407621698687,
+        null,
+        null
+      ],
+      "source_start_sample": 48240,
+      "speech_samples": [
+        0,
+        12640,
+        27072,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-1-interior",
+      "id": 5,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "52d4d544439cba575cad87976fc6b028e11ffebc23afeabecc0f9f3dca98c5a8",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.127244030101028,
+        null,
+        null
+      ],
+      "source_start_sample": 48240,
+      "speech_samples": [
+        0,
+        12128,
+        26560,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-1-interior",
+      "id": 6,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "b2e5f463f33716203379d163af6d61c55aae3c3d4a7bca93acf844c512ba340f",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        3.7188617940150177,
+        null,
+        null
+      ],
+      "source_start_sample": 48240,
+      "speech_samples": [
+        0,
+        12640,
+        27072,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-1-interior",
+      "id": 6,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "f47f1ab24c6fdc198437ab179abebdcf9eabb2d8397ef7e2458c0e9a21a0ab0a",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -3.692121267123995,
+        null,
+        null
+      ],
+      "source_start_sample": 48240,
+      "speech_samples": [
+        0,
+        12128,
+        26560,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": "expressive",
+      "group": "replicate-0-1-interior",
+      "id": 7,
+      "kind": "synthetic",
+      "pcm_sha256": "492f69436dcb438d4470c1dab7074e91a2faf0466d9b35885ad107484ca504e1",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.079910060487667,
+        null,
+        null
+      ],
+      "source_start_sample": 48240,
+      "speech_samples": [
+        0,
+        12640,
+        28096,
+        15456,
+        0
+      ],
+      "truth": [
+        42000,
+        54800
+      ],
+      "view": "foreground"
+    },
+    {
+      "family": "expressive",
+      "group": "replicate-0-1-interior",
+      "id": 7,
+      "kind": "synthetic",
+      "pcm_sha256": "c8158000047aa74fac589f56f704a93f2e1c1cbc167fd22c6e955aa4ad54af3b",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -3.0786934306649276,
+        null,
+        null
+      ],
+      "source_start_sample": 48240,
+      "speech_samples": [
+        0,
+        12128,
+        26560,
+        14432,
+        0
+      ],
+      "truth": [
+        42000,
+        54800
+      ],
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-2-interior",
+      "id": 8,
+      "kind": "untouched",
+      "pcm_sha256": "6c0c8e783efa9e6cd26e7d5c401579b1f8819451f41b129383ac02713026675c",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -6.735745404603222,
+        null,
+        null
+      ],
+      "source_start_sample": 14960,
+      "speech_samples": [
+        0,
+        13152,
+        27584,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-2-interior",
+      "id": 8,
+      "kind": "untouched",
+      "pcm_sha256": "8da2db1a63d9f49edba5a3ac5e09bb8a90012c861d75799fb00b2327df5f85f1",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -4.437956360368946,
+        null,
+        null
+      ],
+      "source_start_sample": 14960,
+      "speech_samples": [
+        0,
+        13152,
+        27584,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-2-interior",
+      "id": 9,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "3519125facf2fda50f30fe54ae21dea897f95fc46c5dc4e53c83175e5c07b7dd",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.078492637158035,
+        null,
+        null
+      ],
+      "source_start_sample": 14960,
+      "speech_samples": [
+        0,
+        13152,
+        27584,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-2-interior",
+      "id": 9,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "45dc3d24f458309298b03afb8b7680d48d21a43410b4395518042bbbfbb9572f",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -5.332630193552485,
+        null,
+        null
+      ],
+      "source_start_sample": 14960,
+      "speech_samples": [
+        0,
+        13152,
+        27584,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-2-interior",
+      "id": 10,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "2da90acc23907b98aa87dadc18466e8b9118041a2eb03324904f2984aa404040",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.558440647839652,
+        null,
+        null
+      ],
+      "source_start_sample": 14960,
+      "speech_samples": [
+        0,
+        8128,
+        21888,
+        13760,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-0-2-interior",
+      "id": 10,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "cdd1865364299e040efba88f6f75ee38c80b71fd2e2902a69f2c49e8ac78ddf0",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -4.674334507792263,
+        null,
+        null
+      ],
+      "source_start_sample": 14960,
+      "speech_samples": [
+        0,
+        13152,
+        27584,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": "stock",
+      "group": "replicate-0-2-interior",
+      "id": 11,
+      "kind": "synthetic",
+      "pcm_sha256": "633284a5d615309c654d2f392cb470f9094eb5aea001d785479c6ee755ac5de6",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.4433819856491725,
+        null,
+        null
+      ],
+      "source_start_sample": 14960,
+      "speech_samples": [
+        0,
+        13152,
+        27584,
+        14432,
+        0
+      ],
+      "truth": [
+        40720,
+        56080
+      ],
+      "view": "foreground"
+    },
+    {
+      "family": "stock",
+      "group": "replicate-0-2-interior",
+      "id": 11,
+      "kind": "synthetic",
+      "pcm_sha256": "54fe53ce8c739ad04140c164bff681456f62d75f57536c4f06f7616c003d7e9d",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -4.591778326980007,
+        null,
+        null
+      ],
+      "source_start_sample": 14960,
+      "speech_samples": [
+        0,
+        13152,
+        27584,
+        14432,
+        0
+      ],
+      "truth": [
+        40720,
+        56080
+      ],
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-0-late",
+      "id": 12,
+      "kind": "untouched",
+      "pcm_sha256": "be265289a0f08d408294ed9ba28e2b1ebc94469d2215893eee3aa2ae75c61cc5",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -6.952328618524285,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        12640,
+        17344,
+        4704,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-0-late",
+      "id": 12,
+      "kind": "untouched",
+      "pcm_sha256": "da6729c3bde564253907bfabf653e1de874c5083868b0b274337d6f5f2f1741b",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -4.3232364379243275,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        13152,
+        27072,
+        13920,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-0-late",
+      "id": 13,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "5f18469694444284c5991da89c2b870c6ea3880b38ec34bce01243ea61ec26ee",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        5.769443837597975,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        12640,
+        28096,
+        15456,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-0-late",
+      "id": 13,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "61fada831dce41e1ac9d04ca07d9b685b50b0a899972e48d065f05536815ebe4",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -3.3883814970721513,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        13152,
+        27072,
+        13920,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-0-late",
+      "id": 14,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "d26bba8c5254c7bf4da2d5a13b932ff74dc247f9ac4d83fbc35801380fa54759",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.089888584447845,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        12640,
+        17856,
+        5216,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-0-late",
+      "id": 14,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "8bb4024e01f5329024e03a957963abbffb66556121e124423179424cc315bd0a",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -4.910757967664561,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        13152,
+        27072,
+        13920,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": "expressive",
+      "group": "replicate-1-0-late",
+      "id": 15,
+      "kind": "synthetic",
+      "pcm_sha256": "cf230f99bb9f09d119085bd76315960e61d940624aba5ef111a5f0f62af06abd",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.2304649779342105,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        12640,
+        28096,
+        15456,
+        0
+      ],
+      "truth": [
+        46240,
+        56480
+      ],
+      "view": "foreground"
+    },
+    {
+      "family": "expressive",
+      "group": "replicate-1-0-late",
+      "id": 15,
+      "kind": "synthetic",
+      "pcm_sha256": "18430bbf9514be0d14daa5706dcc0e5903e226c10ff71de6d6209af831c83166",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -4.755830803648271,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        13152,
+        27584,
+        14432,
+        0
+      ],
+      "truth": [
+        46240,
+        56480
+      ],
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-1-interior",
+      "id": 16,
+      "kind": "untouched",
+      "pcm_sha256": "2f55a292cf007b60b24b5497247efadc5a5aeb9f3796dfca9b12646f5eebbf86",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -6.855104435010824,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        13152,
+        27584,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-1-interior",
+      "id": 16,
+      "kind": "untouched",
+      "pcm_sha256": "86a3dc2b82be258409da54ba64058dc6e44de901326a7461b1aa93562730ea60",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        1.025249426926929,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        12128,
+        26560,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-1-interior",
+      "id": 17,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "07cbb88d6e6494b0182e8d2e815c61c195946bbd1dbf06dbf6ed7cdaaed2584c",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.987046477270112,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        13152,
+        27584,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-1-interior",
+      "id": 17,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "3627d99c697c1d445a4653d229642b7a80eadc5757515e0ef7e6d0d6d94a15d9",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        5.8674263238401645,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        12128,
+        26560,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-1-interior",
+      "id": 18,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "58f46e041556cd909c549a5dd0da7457d716dbf46b6badd780ac69ff4a4fe81c",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.131648642393605,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        13152,
+        27584,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-1-interior",
+      "id": 18,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "6fcfad07855146b94a7445f3c8e98cf676f490c7d4352f493e865bcb71515c7a",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        4.934879600250601,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        12128,
+        26560,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": "stock",
+      "group": "replicate-1-1-interior",
+      "id": 19,
+      "kind": "synthetic",
+      "pcm_sha256": "53b2dac47fa1b4c533db2838fb03c81e46e5aebf3048e93cc0395c1e9b9e2625",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.3102131642488954,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        13152,
+        28096,
+        14944,
+        0
+      ],
+      "truth": [
+        42000,
+        54800
+      ],
+      "view": "foreground"
+    },
+    {
+      "family": "stock",
+      "group": "replicate-1-1-interior",
+      "id": 19,
+      "kind": "synthetic",
+      "pcm_sha256": "675cf82ec875108bdfee59d11d9f51fde499edc936aa486e2eb3dc93df0b937f",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        5.245615415197245,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        12128,
+        26560,
+        14432,
+        0
+      ],
+      "truth": [
+        42000,
+        54800
+      ],
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-2-interior",
+      "id": 20,
+      "kind": "untouched",
+      "pcm_sha256": "55b61dde436cf25a85ff0c8aaebcefae11008ce01c69bd6ff5cac009564b952f",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "source_start_sample": 21360,
+      "speech_samples": [
+        0,
+        0,
+        14272,
+        14272,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-2-interior",
+      "id": 20,
+      "kind": "untouched",
+      "pcm_sha256": "4b8099d28d832354a38e04b4b46d9d9a5d82719da3c5bcf847687efc7d30918e",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.338456170424306,
+        null,
+        null
+      ],
+      "source_start_sample": 21360,
+      "speech_samples": [
+        0,
+        11616,
+        26048,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-2-interior",
+      "id": 21,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "c80a2002c07ac40cba742a233eee0f9bb7140c4dc4d945c8eda601524ce638fe",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        5.948968639011905,
+        null,
+        null
+      ],
+      "source_start_sample": 21360,
+      "speech_samples": [
+        0,
+        7008,
+        21440,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-2-interior",
+      "id": 21,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "6eeabd346f4b464152060b35d1ca63965691dee601ae805ad72c183f82c703d2",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.135839531098022,
+        null,
+        null
+      ],
+      "source_start_sample": 21360,
+      "speech_samples": [
+        0,
+        11616,
+        26048,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-2-interior",
+      "id": 22,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "34900679ec4ce5017f48c66981fc22ca660f2c68c35de90b5d72104276c95c2b",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.742381698521497,
+        null,
+        null
+      ],
+      "source_start_sample": 21360,
+      "speech_samples": [
+        0,
+        7520,
+        21952,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-1-2-interior",
+      "id": 22,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "3793ba4e1960ad0228b8df588ba3b59763e79b9aac168f198f35cbecfee8b9c7",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.853326540651184,
+        null,
+        null
+      ],
+      "source_start_sample": 21360,
+      "speech_samples": [
+        0,
+        11616,
+        26048,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": "clone",
+      "group": "replicate-1-2-interior",
+      "id": 23,
+      "kind": "synthetic",
+      "pcm_sha256": "b7763cdfd4dd3d9f6b259c3850fd9ec89458509259a9e65c0cdf13406576fe64",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.412264592208327,
+        null,
+        null
+      ],
+      "source_start_sample": 21360,
+      "speech_samples": [
+        0,
+        7520,
+        21952,
+        14432,
+        0
+      ],
+      "truth": [
+        40720,
+        56080
+      ],
+      "view": "foreground"
+    },
+    {
+      "family": "clone",
+      "group": "replicate-1-2-interior",
+      "id": 23,
+      "kind": "synthetic",
+      "pcm_sha256": "2acba7e30fca92eac144f7894addf9b2a71b1c3cbf2720416e1c28369e149b08",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.352509632226797,
+        null,
+        null
+      ],
+      "source_start_sample": 21360,
+      "speech_samples": [
+        0,
+        11616,
+        26048,
+        14432,
+        0
+      ],
+      "truth": [
+        40720,
+        56080
+      ],
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-0-early",
+      "id": 24,
+      "kind": "untouched",
+      "pcm_sha256": "a8e430cbb33a2c6078c877428243042d17a740d1facf03a41b4654497817dcfe",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -6.495546331043264,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        3936,
+        18368,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-0-early",
+      "id": 24,
+      "kind": "untouched",
+      "pcm_sha256": "f9482632a532c16631367d3b1a5196097043a7e8ff6608484c361bfa70029d30",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -4.364373268119136,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        10080,
+        24512,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-0-early",
+      "id": 25,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "02f4ebedb1d11a971e7f0227941a18df38e28a1801e1aa88210cd349876ee0f1",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        5.263021444900244,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        7520,
+        21952,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-0-early",
+      "id": 25,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "9967305dfdfd2049e5ea444e08b18b86a35a1613d17788600ea2288be893c1fd",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        4.298440687997851,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        10080,
+        24512,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-0-early",
+      "id": 26,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "1b838b17494482d4b6fdffd61ae16330c779a569d5539b4220839db127b4c9ba",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        4.393475841868014,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        4960,
+        19392,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-0-early",
+      "id": 26,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "bc76998913177ef450ce967c2edeee7a57de79ee95f035edc0e850ef5ea0fd6f",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -4.5225410351702635,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        10080,
+        24512,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": "stock",
+      "group": "replicate-2-0-early",
+      "id": 27,
+      "kind": "synthetic",
+      "pcm_sha256": "fef6b6a0cd840422cb0641e0236d97728552cbf1a075e3537346e3d3d56d6b20",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.319719468371068,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        8032,
+        22464,
+        14432,
+        0
+      ],
+      "truth": [
+        40320,
+        50560
+      ],
+      "view": "foreground"
+    },
+    {
+      "family": "stock",
+      "group": "replicate-2-0-early",
+      "id": 27,
+      "kind": "synthetic",
+      "pcm_sha256": "491da328c1252445cdb4a0d99b8526b58605c271fd68bf4fa43b36729593bc55",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -1.3399511877106622,
+        null,
+        null
+      ],
+      "source_start_sample": 0,
+      "speech_samples": [
+        0,
+        10080,
+        24512,
+        14432,
+        0
+      ],
+      "truth": [
+        40320,
+        50560
+      ],
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-1-interior",
+      "id": 28,
+      "kind": "untouched",
+      "pcm_sha256": "76e2742bc24cc63598ee741ad77a992025c9754433215e6020f62cffc2c5831a",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -6.641813243706972,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        12640,
+        27072,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-1-interior",
+      "id": 28,
+      "kind": "untouched",
+      "pcm_sha256": "8e9bd6327691a37fddc3d3416a4adae95a05d1f6947f456c945d9fe3e7236146",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        5.948187987115711,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        12640,
+        27072,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-1-interior",
+      "id": 29,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "fe00528793f11b513e45ecba29a26861abcaffa284a18e52fb8f3e7262801976",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.699169599299436,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        12640,
+        27072,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-1-interior",
+      "id": 29,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "6e3ce7f24f360395ffb9c0de759ff4486ca674975b20e812a6a44a03ae41d922",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.06864438953774,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        10016,
+        24448,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-1-interior",
+      "id": 30,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "ac958b63c0fc510e4c04ac1f9d3e6c84efc1d1e24291ebed2ac9f4f512249f2e",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -1.4962025876233738,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        12640,
+        27072,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-1-interior",
+      "id": 30,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "38254e0d583d4c9df5d590b19ced0dba250c8e5aa6823e7c355dd6d18aabf2d1",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        4.501527755921514,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        12640,
+        27072,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": "clone",
+      "group": "replicate-2-1-interior",
+      "id": 31,
+      "kind": "synthetic",
+      "pcm_sha256": "f7f23b6366329e34ae0916f7626cc6681c637fa968337db0bb95dcf746201f48",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.281443163643665,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        12640,
+        27072,
+        14432,
+        0
+      ],
+      "truth": [
+        42000,
+        54800
+      ],
+      "view": "foreground"
+    },
+    {
+      "family": "clone",
+      "group": "replicate-2-1-interior",
+      "id": 31,
+      "kind": "synthetic",
+      "pcm_sha256": "c12aee9b0a6e1523394dabadbe6b7a289fb25b981596d4ad4fc0444857de9703",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.708623474129508,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        12640,
+        27072,
+        14432,
+        0
+      ],
+      "truth": [
+        42000,
+        54800
+      ],
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-2-interior",
+      "id": 32,
+      "kind": "untouched",
+      "pcm_sha256": "708373130cd82b2cdea09243bd832142efbaa91ccc8559b5b340ba12fa1034ae",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -6.354507476335951,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        13152,
+        18880,
+        5728,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-2-interior",
+      "id": 32,
+      "kind": "untouched",
+      "pcm_sha256": "01f2d7002f3a35005da11c626062f5ad5acd4c3aa928c4f547fa02fb81240e36",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -5.307897578424331,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        8544,
+        22976,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-2-interior",
+      "id": 33,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "590e19ea548b6e74736460ad32361ce1d22b72271df7c8ef3c4c8594ddc96395",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -5.070943368288043,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        13152,
+        20416,
+        7264,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-2-interior",
+      "id": 33,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "5ffdff10bce7c203c69a064175300e5764d46778f96688cb53f00f46b9499434",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -4.888992366273035,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        8544,
+        22976,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-2-interior",
+      "id": 34,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "8ece9aa0451564c83f1f38af5827a7c39ec5b6730d507b9f4f92c9b50f929f43",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        5.8438974048038554,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        13152,
+        20416,
+        7264,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-2-2-interior",
+      "id": 34,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "e816050f471164fcdcc58d6f02416c8889da159c451569e96a64624f03d5a7cc",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -5.6268386412736655,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        8544,
+        22976,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": "expressive",
+      "group": "replicate-2-2-interior",
+      "id": 35,
+      "kind": "synthetic",
+      "pcm_sha256": "b92f966a36c478f22078d5e7bc8f5f2d80f2a288bea939cf28f829d9580fa52d",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.375871054870482,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        13152,
+        27584,
+        14432,
+        0
+      ],
+      "truth": [
+        40720,
+        56080
+      ],
+      "view": "foreground"
+    },
+    {
+      "family": "expressive",
+      "group": "replicate-2-2-interior",
+      "id": 35,
+      "kind": "synthetic",
+      "pcm_sha256": "8e0e3c7fc04817736b73df42920df44922b2b5f5b10688c94865197184f6191d",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -3.833537344308054,
+        null,
+        null
+      ],
+      "source_start_sample": 22640,
+      "speech_samples": [
+        0,
+        8544,
+        22976,
+        14432,
+        0
+      ],
+      "truth": [
+        40720,
+        56080
+      ],
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-0-late",
+      "id": 36,
+      "kind": "untouched",
+      "pcm_sha256": "48deb877f9227fcb17ba1b429398684745e2ec8f51843635e6c506867804137e",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -6.122140850964124,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        13152,
+        25536,
+        12384,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-0-late",
+      "id": 36,
+      "kind": "untouched",
+      "pcm_sha256": "9a2656157f4eb2e81f4f3ad25a1aafd0ced7ee4d5d0a4deb7d8718f36d49b13c",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.369412163683215,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        12128,
+        26560,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-0-late",
+      "id": 37,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "b0cac0148ad6d911fc64475dd097f7bc12435955d97fed1c0a11e585be8b8643",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.082324292828084,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        13152,
+        25536,
+        12384,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-0-late",
+      "id": 37,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "21fb6d7b26b8d8239571b7b5255cb4e693e1ad3c3dfd6793dc775c708a1c76f0",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.5748871256120465,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        12128,
+        26560,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-0-late",
+      "id": 38,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "92379e81d906ae2f77766a1a754e1b77830477ba726bc7c403e14c1a18015397",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.319719468371068,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        13152,
+        26048,
+        12896,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-0-late",
+      "id": 38,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "35a52d4a3df66d7ab04d5044e6b41e1899a601ae21163d329d99a986465e54a4",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        5.486222297565709,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        12128,
+        26560,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": "clone",
+      "group": "replicate-3-0-late",
+      "id": 39,
+      "kind": "synthetic",
+      "pcm_sha256": "fdd52e08b53c3822be810fc99387cde99c049d442364298aa90d7d17e851f8ef",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.405173654242456,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        13152,
+        25536,
+        12384,
+        0
+      ],
+      "truth": [
+        48800,
+        59040
+      ],
+      "view": "foreground"
+    },
+    {
+      "family": "clone",
+      "group": "replicate-3-0-late",
+      "id": 39,
+      "kind": "synthetic",
+      "pcm_sha256": "bf784261d69fbbb5e0862592427b40371acc952dec9f1305c096499841e4a8c4",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.225542663444782,
+        null,
+        null
+      ],
+      "source_start_sample": 69600,
+      "speech_samples": [
+        0,
+        12128,
+        26560,
+        14432,
+        0
+      ],
+      "truth": [
+        48800,
+        59040
+      ],
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-1-interior",
+      "id": 40,
+      "kind": "untouched",
+      "pcm_sha256": "e67a157009050924ffaf70494b392db5d7c9a6fd84f7af709195dbd4a98010b4",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -6.879080835691005,
+        null,
+        null
+      ],
+      "source_start_sample": 41840,
+      "speech_samples": [
+        0,
+        13152,
+        28096,
+        14944,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-1-interior",
+      "id": 40,
+      "kind": "untouched",
+      "pcm_sha256": "7c833ea8ccb36e885258ee9b6348e999958ffb86e12004c713ad3bfbaa760a09",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        4.369656474850158,
+        null,
+        null
+      ],
+      "source_start_sample": 41840,
+      "speech_samples": [
+        0,
+        11104,
+        25536,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-1-interior",
+      "id": 41,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "e9a4400599cd7dea329963f2674ede4dcda9953f3d76f9cb4bd44dd775cec1e4",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -4.057867982450276,
+        null,
+        null
+      ],
+      "source_start_sample": 41840,
+      "speech_samples": [
+        0,
+        13152,
+        28096,
+        14944,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-1-interior",
+      "id": 41,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "307b9534246321ce6a3debd32264e554100de9c97b23b7ac427b7f4d63b4e3aa",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        4.980398073796293,
+        null,
+        null
+      ],
+      "source_start_sample": 41840,
+      "speech_samples": [
+        0,
+        11104,
+        25536,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-1-interior",
+      "id": 42,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "93c1820ecd1d33723917fb9d235092607e2073846d961056020433d7eb798794",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        5.7400565287889185,
+        null,
+        null
+      ],
+      "source_start_sample": 41840,
+      "speech_samples": [
+        0,
+        13152,
+        28096,
+        14944,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-1-interior",
+      "id": 42,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "96b65192d79997b2675e019e5b7de4dcad407465598a4803845a204f3aa8b11a",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        4.703844678409741,
+        null,
+        null
+      ],
+      "source_start_sample": 41840,
+      "speech_samples": [
+        0,
+        11104,
+        25536,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": "expressive",
+      "group": "replicate-3-1-interior",
+      "id": 43,
+      "kind": "synthetic",
+      "pcm_sha256": "24278d60179f4fd1eb2e6b61a7c1afc58e69e19e3bc704850e14cbbe3227c4ff",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.9844641100877745,
+        null,
+        null
+      ],
+      "source_start_sample": 41840,
+      "speech_samples": [
+        0,
+        13152,
+        28096,
+        14944,
+        0
+      ],
+      "truth": [
+        42000,
+        54800
+      ],
+      "view": "foreground"
+    },
+    {
+      "family": "expressive",
+      "group": "replicate-3-1-interior",
+      "id": 43,
+      "kind": "synthetic",
+      "pcm_sha256": "1200b9ebcbaea5a4da49c59114a4dc87507b17401a3979cf77d1a2b9739365c4",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        4.583929756135974,
+        null,
+        null
+      ],
+      "source_start_sample": 41840,
+      "speech_samples": [
+        0,
+        11104,
+        25536,
+        14432,
+        0
+      ],
+      "truth": [
+        42000,
+        54800
+      ],
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-2-interior",
+      "id": 44,
+      "kind": "untouched",
+      "pcm_sha256": "caf3c445439e69baf74df5656e696302f56025eaf2656030da8bc28bb0875a23",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -6.9776688025824924,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        12128,
+        22464,
+        10336,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-2-interior",
+      "id": 44,
+      "kind": "untouched",
+      "pcm_sha256": "2ef5c6c7be6b89c5ebf01f7ed6cbdb8030dcf4b96a39b41e46bfd78a60fe8900",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -0.9150637441120308,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        11104,
+        25536,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-2-interior",
+      "id": 45,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "a1a7f403a991fec3bd45289f5d02fa8c8d5d504f8043190e1ae75269ee1080f9",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -3.8211798691913237,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        12128,
+        22976,
+        10848,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-2-interior",
+      "id": 45,
+      "kind": "ordinary_same_host",
+      "pcm_sha256": "3692d0fe7a8063927080e2e60a2b07661be906eead97fe2f49172fca642b4acf",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.761037400637369,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        11104,
+        25536,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-2-interior",
+      "id": 46,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "dac359d4582098efb90160d4f98b45a4d69f74fb5985b9404ea6e6dccd2d323d",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.871650883699601,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        12128,
+        22976,
+        10848,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "replicate-3-2-interior",
+      "id": 46,
+      "kind": "ordinary_other_voice",
+      "pcm_sha256": "921f861c74e6441cb72f47bbce685be19b32e032d12962163640844ae7b854c9",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        4.539041817374083,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        11104,
+        25536,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": "stock",
+      "group": "replicate-3-2-interior",
+      "id": 47,
+      "kind": "synthetic",
+      "pcm_sha256": "f503efd52114498da4b2b98d58b907038a35ea7c16ba8be6e5009251c79c1c23",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        7.462943276091292,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        12128,
+        23488,
+        11360,
+        0
+      ],
+      "truth": [
+        40720,
+        56080
+      ],
+      "view": "foreground"
+    },
+    {
+      "family": "stock",
+      "group": "replicate-3-2-interior",
+      "id": 47,
+      "kind": "synthetic",
+      "pcm_sha256": "3802327663d95f0304f892fa64477640f2efdd7fe56b23394b2bae298b96f5b5",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.483149199074272,
+        null,
+        null
+      ],
+      "source_start_sample": 11120,
+      "speech_samples": [
+        0,
+        11104,
+        25536,
+        14432,
+        0
+      ],
+      "truth": [
+        40720,
+        56080
+      ],
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "room-ES2004a",
+      "id": 48,
+      "kind": "background_only",
+      "pcm_sha256": "ea0787f65f73b0013d03b359490e3125211b28ad5c1502ffb1544c0ded4192f5",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "source_start_sample": 34800,
+      "speech_samples": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "room-ES2004a",
+      "id": 48,
+      "kind": "background_only",
+      "pcm_sha256": "5c0a8e44eb1093e7a70314980f372cc36367e856ddf71c75d47e9bef0044e156",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        -6.699789046904179,
+        null,
+        null
+      ],
+      "source_start_sample": 34800,
+      "speech_samples": [
+        0,
+        8032,
+        22464,
+        14432,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "room-IS1009a",
+      "id": 49,
+      "kind": "background_only",
+      "pcm_sha256": "ea0787f65f73b0013d03b359490e3125211b28ad5c1502ffb1544c0ded4192f5",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "source_start_sample": 34800,
+      "speech_samples": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "room-IS1009a",
+      "id": 49,
+      "kind": "background_only",
+      "pcm_sha256": "35062834a8e5bccef1a3e9eb0f383742a634a7c7582150d202dcd773403c36ac",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        6.69858774120202,
+        null,
+        null
+      ],
+      "source_start_sample": 34800,
+      "speech_samples": [
+        0,
+        13152,
+        19904,
+        6752,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "room-ES2010d",
+      "id": 50,
+      "kind": "background_only",
+      "pcm_sha256": "ea0787f65f73b0013d03b359490e3125211b28ad5c1502ffb1544c0ded4192f5",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "source_start_sample": 34800,
+      "speech_samples": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "room-ES2010d",
+      "id": 50,
+      "kind": "background_only",
+      "pcm_sha256": "8bc584c6abbca227f246f417faaa321814d8bc8d1848eefb6efc2057aa6dcf52",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "source_start_sample": 34800,
+      "speech_samples": [
+        0,
+        1376,
+        15296,
+        13920,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    },
+    {
+      "family": null,
+      "group": "room-IS1007a",
+      "id": 51,
+      "kind": "background_only",
+      "pcm_sha256": "ea0787f65f73b0013d03b359490e3125211b28ad5c1502ffb1544c0ded4192f5",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "source_start_sample": 34800,
+      "speech_samples": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "truth": null,
+      "view": "foreground"
+    },
+    {
+      "family": null,
+      "group": "room-IS1007a",
+      "id": 51,
+      "kind": "background_only",
+      "pcm_sha256": "d0c1e67ece99006100c3947155d41f04a05934eac76b285b17fb2d1e70b4910a",
+      "primary_admitted": 0,
+      "scores": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "source_start_sample": 34800,
+      "speech_samples": [
+        0,
+        9056,
+        14272,
+        5216,
+        0
+      ],
+      "truth": null,
+      "view": "mixture"
+    }
+  ],
+  "results": {
+    "foreground": {
+      "current": {
+        "planned_background": 4,
+        "planned_edited": 12,
+        "planned_ordinary": 36,
+        "unassessed_background": 4,
+        "unassessed_edited": 12,
+        "unassessed_ordinary": 36
+      },
+      "rescue": {
+        "checked_edited": 12,
+        "checked_ordinary": 35,
+        "edited_flagged": 12,
+        "ordinary_flagged": 8,
+        "planned_background": 4,
+        "planned_edited": 12,
+        "planned_ordinary": 36,
+        "unassessed_background": 4,
+        "unassessed_ordinary": 1,
+        "usefully_located": 12
+      }
+    },
+    "mixture": {
+      "current": {
+        "planned_background": 4,
+        "planned_edited": 12,
+        "planned_ordinary": 36,
+        "unassessed_background": 4,
+        "unassessed_edited": 12,
+        "unassessed_ordinary": 36
+      },
+      "rescue": {
+        "checked_background": 2,
+        "checked_edited": 12,
+        "checked_ordinary": 36,
+        "edited_flagged": 1,
+        "ordinary_flagged": 3,
+        "planned_background": 4,
+        "planned_edited": 12,
+        "planned_ordinary": 36,
+        "unassessed_background": 2,
+        "usefully_located": 1
+      }
+    }
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "torch": "2.13.0",
+    "transformers": "5.15.1"
+  },
+  "stock_point": 6.822523597593649
+}

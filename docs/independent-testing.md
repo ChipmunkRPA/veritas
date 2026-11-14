@@ -1550,6 +1550,11 @@ recompute the recorded speech counts and the eligibility of source frame
 timestamps. The signed result also commits to the reported reasons for
 each window. [Supported coverage and replay fixture](video-timing-window-coverage-2026-11-14.md#independent-replay)
 
+The [short-video schedule replay](video-lipsync-window-schedule-2026-11-14.md#replay)
+recomputes held edit locations, false ranges and coverage for three alternatives
+to the current timing check. It can run on the published scalar ledger using
+only the standard library.
+
 ### Recompute selected image and video measurements
 
 After the trusted-key verification above, extract the signed `evidence.json`

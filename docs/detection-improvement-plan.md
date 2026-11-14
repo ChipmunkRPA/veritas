@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Denser and narrower lip-sync timing](video-lipsync-window-schedule-2026-11-14.md)
+  tested the two schedule changes separately and together on acted and
+  conversational speech. They all measured more edited clips and located
+  zero of 44 local audio shifts. The denser-only and combined changes
+  flagged 18 and 27 of 132 ordinary controls, respectively. The timing
+  schedule stays unchanged.
+
 - [Speech and mouth timing coverage](video-timing-window-coverage-2026-11-14.md)
   records which exact video windows could not be assessed and why. A held
   mouth and an off-camera speaker retained their own dispositions through

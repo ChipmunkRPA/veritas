@@ -750,6 +750,23 @@ def test_nested_public_zip_offline_verifier_without_runtime(nested_case, tmp_pat
     _check_public_zip(nested_case, tmp_path, monkeypatch, pdf_bytes)
 
 
+def test_competing_lag_reaches_pdf_json_and_source_replay(av_fixture, tmp_path, monkeypatch):
+    f = av_fixture
+    _prepare_parent(f)
+    _freeze_parent(f)
+    f.result = _report_scaffold(f).result
+    f.analysis.result_hash = f.store.put_bytes(canonical_json(f.result)).sha256
+    _freeze_parent(f)
+    alternative = project(f.document)['av']['packets'][0]['measurement']['competing_lag']
+    monkeypatch.setattr(multimedia_evidence, 'default_store', lambda: f.store)
+    pdf = engine.render_pdf(f.frozen).pdf
+    pdf_text = ' '.join(engine.pdf_text(pdf).split())
+    assert f"The strongest alternative at least 120 ms away was {alternative['offset_ms']:+d} ms" in pdf_text
+    assert f"a difference of {alternative['correlation_difference']:.4f} from the selected peak" in pdf_text
+    source = f.store.path_for(f.analysis.sha256)
+    _check_public_zip(f, tmp_path, monkeypatch, pdf, source_audio=source, source_video=source)
+
+
 def _check_public_zip(f, tmp_path, monkeypatch, pdf_bytes, *, source_audio=None, source_video=None):
     monkeypatch.setattr(settings, 'data_dir', tmp_path/'data')
     key = signing.instance_key(tmp_path/'key.pem')
@@ -820,7 +837,8 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.audio_gain_repetition_binding',
                         'app.evidence.audio_background_binding','app.evidence.audio_bandwidth_binding', 'app.evidence.audio_silence_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
                         'app.evidence.audio_similarity_binding',
-                        'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_boundary_clock','app.evidence.face_alignment_context',
+                        'app.evidence.av_binding','app.evidence.av_lag_support','app.evidence.video_soundtrack_pair_binding',
+                        'app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_boundary_clock','app.evidence.face_alignment_context',
                         'app.evidence.face_paired_edge_binding','app.evidence.face_short_proposal_binding','app.evidence.face_primary_track_binding','app.evidence.face_short_window_binding','app.evidence.face_short_carrier_binding','app.evidence.face_spatial_cut_binding',
                         'app.evidence.face_lighting_context','app.evidence.face_return_binding','app.evidence.face_return_coverage',
                         'app.evidence.video_packet_versions','app.evidence.picture_hold_binding', 'app.evidence.picture_sequence',
@@ -898,6 +916,7 @@ def test_video_clock_break_survives_pdf_json_and_signed_audio_replay(av_fixture,
 
 
 def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, tmp_path, monkeypatch):
+    monkeypatch.setattr(settings, 'video_soundtrack_pair_review', False)
     source, _, original, face = av_source
     stereo_path = tmp_path / 'stereo.wav'
     left = np.rint(original.pcm * 32768).astype('<i2')

@@ -1933,6 +1933,13 @@ and the source pixels behind the crop. The replay does not score authorship.
 
 ## Choose a review to reproduce
 
+### Compare alternative timing offsets in single-track video
+
+The [single-track timing ledger and replay](video-lip-lag-prominence-2026-11-14.md#recompute-the-results-and-report)
+recount misses and control flags for both bracket rules. The signed-export
+fixture checks the displayed competing offset against the full recorded
+correlation profile and replays both the video and audio source clocks.
+
 ### Review short timing differences between audio streams in one video
 
 The [two-track source and replay instructions](video-soundtrack-pair-2026-11-14.md#run-and-reproduce)

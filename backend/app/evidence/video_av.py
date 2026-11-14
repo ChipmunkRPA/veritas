@@ -177,6 +177,7 @@ def _plot(window, inputs, *, lag):
 
 
 def build_channel(db, analysis, store, result, *, set_id, video_source, table, anchors, audio_channel):
+    from app.evidence import av_lag_support
     from app.evidence.video_packets import _contact, _context
 
     record = result.get('manifest', {}).get('sampling', {}).get('video_audio_evidence') or {}
@@ -261,6 +262,7 @@ def build_channel(db, analysis, store, result, *, set_id, video_source, table, a
         sheet=_contact(images,labels)
         add('contact_sheet',_png(sheet),width=sheet.width,height=sheet.height)
         flagged=window['overlaps_offset_step'] or window['overlaps_correlation_collapse']
+        competing_lag = av_lag_support.compare(window['lag_profile'], window['offset_ticks'])
         refs=item['signal_refs']
         ids={r['id'] for r in refs}
         packet={'id':packet_id,'title':'Audio/video correlation anomaly' if flagged else 'Measured audio/video alignment',
@@ -273,7 +275,8 @@ def build_channel(db, analysis, store, result, *, set_id, video_source, table, a
                       'source_timestamp_ranges':source_ranges(mapping,start*640,end*640)},
             'window':{'start_tick':start,'end_tick':end,'frame_indices':[row['frame_index'] for row in inputs],'frame_inputs':inputs},
             'measurement':{**{key:copy.deepcopy(window[key]) for key in ['offset_ticks','peak_correlation','lag_profile','audio_curve','low_correlation','overlaps_offset_step','overlaps_correlation_collapse']},
-                'offset_ms':window['offset_ticks']*40,**{key:track[key] for key in ['baseline_offset_ticks','collapse_threshold','minimum_trusted_peak','reading']}},
+                'offset_ms':window['offset_ticks']*40, av_lag_support.KEY: competing_lag,
+                **{key:track[key] for key in ['baseline_offset_ticks','collapse_threshold','minimum_trusted_peak','reading']}},
             'measurements':[{'label':'Selected audio lag','value':window['offset_ticks']*40,'unit':'ms; positive is audio later'},
                             {'label':'Peak mouth/audio correlation','value':window['peak_correlation'],'unit':'Pearson correlation, not probability'}],
             'frames':frames,'artifacts':artifacts,'source_record':{'raw_output_sha256':item['raw_output_sha256'],'unit_ref':window['unit_ref'],'track_id':track['track_id']},

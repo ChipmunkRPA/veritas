@@ -127,7 +127,11 @@ describe('video v3 nested source-bound evidence', () => {
   })
 
   it('retains alternatives and exact measured frame inputs without inventing AI scores or speaker identity', () => {
-    show(fixture())
+    const set = fixture()
+    set.av!.packets[0].measurement.competing_lag = { method: 'strongest-at-least-three-ticks-away/1',
+      offset_ms: 80, correlation: -.1, correlation_difference: 1.05 }
+    show(set)
+    expect(screen.getByText(/strongest alternative at least 120 ms away was \+80 ms/)).toBeTruthy()
     expect(screen.getByText('All 31 measured lag candidates')).toBeTruthy()
     const tables = screen.getAllByRole('table', { hidden: true })
     expect(within(tables[0]).getAllByRole('row', { hidden: true })).toHaveLength(32)

@@ -176,6 +176,10 @@ def test_exact_voice_and_measured_av_inputs_share_parent_authority(av_fixture):
     for packet in av['packets']:
         assert packet['clip']['status']=='ready' and packet['clip']['artifact_ref']=='context_clip_video'
         assert len(packet['measurement']['lag_profile'])==31 and len(packet['measurement']['audio_curve'])==55
+        measurement = packet['measurement']
+        alternative = measurement['competing_lag']
+        assert abs(alternative['offset_ms'] - measurement['offset_ms']) >= 120
+        assert alternative['correlation_difference'] == round(measurement['peak_correlation'] - alternative['correlation'], 6)
         for row in packet['window']['frame_inputs']:
             image=Image.open(io.BytesIO(f.store.read_bytes(packet['artifacts'][row['artifact_ref']]['sha256']))).convert('L')
             assert hashlib.sha256(np.asarray(image,dtype='<f4').tobytes()).hexdigest()==row['mouth_patch_sha256']
@@ -188,11 +192,13 @@ def test_exact_voice_and_measured_av_inputs_share_parent_authority(av_fixture):
     assert 'gustking' not in json.dumps(audio)
 
 
-@pytest.mark.parametrize('mutation',['lag','missing_lag','tick','source_pts','frame','pcm','sample_interval','patch','clip'])
+@pytest.mark.parametrize('mutation',['lag','missing_lag','alternative_lag','tick','source_pts','frame','pcm','sample_interval','patch','clip'])
 def test_public_av_binding_rejects_invented_measurements_and_clocks(av_fixture,mutation):
     f=av_fixture;_,av=_channels(f);packet=av['packets'][0]
     if mutation=='lag':packet['measurement']['offset_ms']+=40
     elif mutation=='missing_lag':packet['measurement']['lag_profile'].pop()
+    elif mutation == 'alternative_lag':
+        packet['measurement']['competing_lag']['offset_ms'] += 40
     elif mutation=='tick':packet['window']['frame_inputs'][0]['tick']+=1
     elif mutation=='source_pts':packet['window']['frame_inputs'][0]['source_audio_pts']+=1
     elif mutation=='frame':packet['frames'][0]['anchor']['pts']+=1

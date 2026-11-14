@@ -299,7 +299,8 @@ export interface VideoAVPacket extends PacketBase {
     lag_profile: { offset_ticks: number; correlation: number }[]
     audio_curve: { tick: number; sample_start: number; sample_end: number; rms: number; speech: boolean }[]
     overlaps_offset_step: boolean; overlaps_correlation_collapse: boolean
-    baseline_offset_ticks: number | null; collapse_threshold: number | null; minimum_trusted_peak: number; reading: string }
+    baseline_offset_ticks: number | null; collapse_threshold: number | null; minimum_trusted_peak: number; reading: string
+    competing_lag?: { method: 'strongest-at-least-three-ticks-away/1'; offset_ms: number; correlation: number; correlation_difference: number } }
 }
 export interface VideoAVChannel {
   status: VideoChannelStatus; reason: string | null; limitations: string[]; packets: VideoAVPacket[]

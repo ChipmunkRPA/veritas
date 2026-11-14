@@ -395,7 +395,13 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 </div>
 {% endfor %}
 {% if packet.kind == 'av' %}
+<div class="multimedia-scored-context">
 <p class="caption">The selected lag is {{ packet.measurement.offset_ms }} ms; positive means audio later than the picture. All 31 lag candidates from -600 to +600 ms are retained in JSON. Peak correlation {{ '%.4f' | format(packet.measurement.peak_correlation) }} is a correspondence measure, not an AI probability.</p>
+{% if packet.measurement.get('competing_lag') %}
+{% set alternative = packet.measurement.competing_lag %}
+<p class="caption">The strongest alternative at least 120 ms away was {{ '%+d' | format(alternative.offset_ms) }} ms. It had correlation {{ '%.4f' | format(alternative.correlation) }}, a difference of {{ '%.4f' | format(alternative.correlation_difference) }} from the selected peak. A small difference leaves the timing ambiguous.</p>
+{% endif %}
+</div>
 <p class="caption">Unshifted audio window: samples [{{ packet.audio.interval.start_sample }}, {{ packet.audio.interval.end_sample }}) at {{ packet.audio.sample_rate }} Hz. Full lag-search audio: samples [{{ packet.audio.context_interval.start_sample }}, {{ packet.audio.context_interval.end_sample }}). The silent MP4 is visual context; these WAV samples retain the actual audio inputs.</p>
 {% for range in packet.audio.source_ranges %}<p class="caption">Source audio PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.</p>{% endfor %}
 {% if not evidence.withheld %}<div class="multimedia-mouth-inputs">{% for input in packet.measured_inputs %}<figure><img src="{{ input.image.uri }}" alt="{{ input.image.label }}"><figcaption>{{ input.image.label }}<br>PTS {{ input.frame_pts }}</figcaption></figure>{% endfor %}</div>{% endif %}

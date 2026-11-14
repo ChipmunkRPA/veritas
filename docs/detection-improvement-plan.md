@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Competing offsets in single-track video](video-lip-lag-prominence-2026-11-14.md)
+  tests whether isolated peaks improve short timing localization. The rule
+  finds two of 64 staged edits and flags 44 of 256 controls, so it stays
+  offline. New timing exhibits show the strongest competing offset.
+
 - [Timing between two audio streams in one video](video-soundtrack-pair-2026-11-14.md)
   located 27 of 40 staged changes in each tested PCM and AAC delivery, with
   zero locations on 120 controls in each format. The local trial shows the

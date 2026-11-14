@@ -77,6 +77,11 @@ export default function VideoAVEvidenceContent({ set, channel, token, mediaReady
         <SourceInterval packet={packet} />
         <EvidenceMeasurements values={packet.measurements} />
         <p className="mt-2 mb-0 text-small text-text-muted">The selected lag is the best match among {measurement.lag_profile.length} tested shifts. Positive means the audio is later than the picture. The correlation does not estimate the probability of manipulation.</p>
+        {measurement.competing_lag && <p className="mt-2 mb-0 text-small text-text-muted">
+          The strongest alternative at least 120 ms away was {signed(measurement.competing_lag.offset_ms)} ms, with correlation{' '}
+          {measurement.competing_lag.correlation.toFixed(4)}. The difference from the selected peak was{' '}
+          {measurement.competing_lag.correlation_difference.toFixed(4)}. A small difference leaves the timing ambiguous.
+        </p>}
         {measurement.peak_correlation < measurement.minimum_trusted_peak && <p className="mt-2 mb-0 text-small text-text-muted">The strongest match is below the recorded threshold of {measurement.minimum_trusted_peak}. This window cannot support a reliable timing estimate.</p>}
         <div className={`${evidenceGrid} mt-4`}>
           <EvidenceAudio set={set} artifact={packet.artifacts.selected_clip} token={token} ready={mediaReady} alt={`${packet.id}: exact unshifted source audio window`} />

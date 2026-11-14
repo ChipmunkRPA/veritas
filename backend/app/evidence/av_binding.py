@@ -8,6 +8,7 @@ from decimal import Decimal
 from fractions import Fraction
 from itertools import pairwise
 
+from app.evidence import av_lag_support
 from app.evidence.mp4 import validate_clip_binding
 
 LEGACY_AUDIO_CLOCK_REASON = 'Audio timestamps contain gaps; audio/video correlation does not support this timeline.'
@@ -176,6 +177,15 @@ def _validate(channel: dict, video: dict) -> None:
         lag, peak = measure['offset_ticks'], measure['peak_correlation']
         require(integer(lag) and -15 <= lag <= 15 and numeric(peak) and measure['offset_ms'] == lag * 40, 'AV selected lag or units are invalid')
         require(abs(profile[lag + 15]['correlation'] - peak) <= 0.000002 and max(p['correlation'] for p in profile) - peak <= 0.000002, 'AV selected lag is not supported by its measured profile')
+        if av_lag_support.KEY in measure:
+            expected = av_lag_support.compare(profile, lag)
+            actual = measure[av_lag_support.KEY]
+            require(isinstance(actual, dict) and set(actual) == set(expected)
+                    and actual['method'] == expected['method'] and integer(actual['offset_ms'])
+                    and actual['offset_ms'] == expected['offset_ms'] and numeric(actual['correlation'])
+                    and actual['correlation'] == expected['correlation'] and numeric(actual['correlation_difference'])
+                    and actual['correlation_difference'] == expected['correlation_difference'],
+                    'AV alternative lag differs from the measured profile')
         curve = measure['audio_curve']
         require(len(curve) == 55 and [r['tick'] for r in curve] == list(range(start - 15, end + 15)), 'AV audio curve omits lag-search input ticks')
         require(all(row['sample_start'] == row['tick'] * 640 and row['sample_end'] == (row['tick'] + 1) * 640

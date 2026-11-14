@@ -48,6 +48,9 @@ The [interval-trained speech replay](audio-interval-learning-2026-11-13.md#repla
 recounts 95 held single-upload decisions and verifies both fixed points from
 the recorded calibration responses. It separates misplaced flags, genuine
 splice flags, untouched files and isolated background observations.
+The [short speech coverage verifier](audio-interval-learning-2026-11-13.md#app-coverage)
+recomputes all five speech-activity measurements from a signed analysis
+and the supplied original, including windows the voice check skipped.
 
 The latest single-upload comparisons cover [localized image residuals](image-residual-third-order-transfer-2026-11-13.md),
 [motion around the mouth](video-mouth-motion-transport-2026-11-13.md),

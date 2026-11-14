@@ -63,6 +63,12 @@ def source_range(source: dict, start: int, end: int) -> dict:
             "source_end_pts": origin + end, "time_base": "1/16000"}
 
 
+def speech_counts(spans) -> list[int]:
+    """Count the activity pass's disjoint spans on the source sample clock."""
+    sample_spans = [(round(a * RATE), round(b * RATE)) for a, b in spans]
+    return [sum(max(0, min(end, b) - max(start, a)) for a, b in sample_spans) for start, end in GRID]
+
+
 def window_coverage(speech_counts: list[int], source: dict) -> list[dict]:
     if not supported_source(source) or not isinstance(speech_counts, list) or len(speech_counts) != len(GRID):
         raise ValueError("Short speech-window coverage does not match a supported source")

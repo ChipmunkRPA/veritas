@@ -18,6 +18,7 @@ from app.evidence.audio_short_review_binding import (
     SCHEMA,
     TITLE,
     selected_range,
+    speech_counts,
 )
 
 BUDGET_S = 15.0
@@ -30,11 +31,9 @@ def skipped(reason: str) -> dict:
 
 
 def scan(pcm, spans, classifier, deadline, *, codec=None) -> dict:
-    # The activity pass produces disjoint spans on this same sample clock.
-    sample_spans = [(round(a * RATE), round(b * RATE)) for a, b in spans]
-    speech_counts = [sum(max(0, min(end, b) - max(start, a)) for a, b in sample_spans) for start, end in GRID]
+    counts = speech_counts(spans)
     responses = []
-    for (a, b), speech in zip(GRID, speech_counts, strict=True):
+    for (a, b), speech in zip(GRID, counts, strict=True):
         if 2 * speech < b - a:
             continue
         deadline.check("short voice review")
@@ -49,7 +48,7 @@ def scan(pcm, spans, classifier, deadline, *, codec=None) -> dict:
     else:
         status, reason = "no_flag", "No checked two-second speech window was flagged. The recording could still contain an edit."
     return {"schema": COVERAGE_SCHEMA, "status": status, "reason": reason, "responses": responses,
-            "selected": selected, "speech_counts": speech_counts}
+            "selected": selected, "speech_counts": counts}
 
 
 class ShortVoiceReview(Detector):

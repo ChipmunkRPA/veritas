@@ -99,6 +99,19 @@ PDF showed all five source ranges, and the signed package replayed from
 the original upload. The browser tests also cover an eligible clip with
 no checked windows and an offset source clock.
 
+An independent reviewer can rerun the speech-activity measurement for all
+five windows from the submitted original. Obtain the instance public key
+separately from the signed ZIP. The verifier checks the signature and the
+source PCM, then reruns only the pinned speech-activity pass to compare
+each reported speech count and source clock. It does not require the
+voice-origin weights or a running service.
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python -B -m scripts.verify_short_speech_coverage \
+  "$signed_package" "$original" --public-key "$trusted_key" \
+  --activity-weights models/weights/audio-upgrade/silero_vad.jit
+```
+
 ## Replay
 
 The standard-library command checks the two published stock bank

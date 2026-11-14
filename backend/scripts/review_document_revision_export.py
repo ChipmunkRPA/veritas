@@ -17,7 +17,7 @@ from app.evidence.document_revision import (
 )
 from app.evidence.document_revision_word_alignment import SCHEMA as ALIGNED_WORD_TABLES_SCHEMA
 from app.evidence.document_revision_word_tables import SCHEMA as WORD_TABLES_SCHEMA
-from app.evidence.document_revision_writing import ANCHORED_DRAFT_SCHEMA, refine_wording
+from app.evidence.document_revision_writing import ANCHORED_DRAFT_SCHEMA, INDEPENDENT_SCHEMA, refine_wording
 
 MAX_EXPORT = 2 * 1024 * 1024
 MAX_PDF_EXPORT = 4 * 1024 * 1024
@@ -50,7 +50,8 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
         raise ValueError("The optional paired writing check has invalid fields")
     paired = received.pop("paired_check", None)
     anchored = received.get("schema") == ANCHORED_DRAFT_SCHEMA
-    if anchored and paired is not None and paired.get("status") != "outside_scope":
+    if (anchored and paired is not None and paired.get("status") != "outside_scope"
+            and paired.get("schema") != INDEPENDENT_SCHEMA):
         raise ValueError("Anchored wording changes cannot carry statistical sentence responses")
     if paired is not None and old_extension != extension:
         raise ValueError("Paired writing responses require both drafts to have the same format")

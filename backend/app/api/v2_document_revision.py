@@ -135,10 +135,18 @@ class DraftNeighboringWritingContext(BaseModel):
     status: Literal["no_joint_increase", "joint_increase"]
 
 
+class DraftSentenceWordingChange(BaseModel):
+    earlier: tuple[int, int]
+    later: tuple[int, int]
+    earlier_changed_tokens: list[tuple[int, int]]
+    later_changed_tokens: list[tuple[int, int]]
+
+
 class DraftSeparateWritingRevision(BaseModel):
     earlier: DraftWritingFocus
     later: DraftWritingFocus
-    change_ids: list[str]
+    change_ids: list[str] | None = None
+    wording_changes: list[DraftSentenceWordingChange] | None = None
     responses: list[DraftWritingResponse] | None = None
     status: Literal["unavailable", "no_joint_increase", "joint_increase"]
 
@@ -147,7 +155,7 @@ class DraftPairedCheck(BaseModel):
     schema_name: Literal[
         "chipmunk.paired-writing-review/1", "chipmunk.paired-writing-review/2",
         "chipmunk.paired-writing-review/3", "chipmunk.paired-writing-review/4", "chipmunk.paired-writing-review/5",
-        "chipmunk.paired-writing-review/6",
+        "chipmunk.paired-writing-review/6", "chipmunk.paired-writing-review/7",
     ] = Field(alias="schema")
     status: Literal["outside_scope", "unavailable", "no_joint_increase", "joint_increase"]
     scope: str
@@ -339,6 +347,7 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
     if paired_enabled:
         candidate = None
         separate = []
+        independent = False
         draft_format = comparison["format"]
         boundary_enabled = settings.document_paired_boundary_review
         try:
@@ -346,9 +355,14 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
                                            allow_interior=True, word_layouts=word_layouts)
             if candidate is None and settings.document_paired_separate_review:
                 separate = paired.separate_revisions(comparison, old_text, new_text)
+                if not separate and settings.document_paired_independent_review:
+                    separate = paired.independently_anchored_revisions(comparison, old_text, new_text)
+                    independent = bool(separate)
             center_responses = neighboring_responses = None
             if separate:
-                comparison["paired_check"] = paired.multiple_result(separate, paired.score_separate(separate))
+                comparison["paired_check"] = paired.multiple_result(
+                    separate, paired.score_separate(separate), independent=independent,
+                )
             elif candidate is not None and candidate.across_paragraphs:
                 responses, center_responses = paired.score_boundary(candidate)
             elif candidate is not None and candidate.neighboring_contexts:
@@ -361,9 +375,11 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
         except Exception as error:
             log.warning("document_revision.paired_check_unavailable", exception=type(error).__name__)
             comparison["paired_check"] = (
-                paired.multiple_result(separate) if separate else paired.result(candidate, draft_format=draft_format)
+                paired.multiple_result(separate, independent=independent) if separate
+                else paired.result(candidate, draft_format=draft_format)
             )
-    if comparison.get("paired_check", {}).get("status") in (None, "outside_scope"):
+    check = comparison.get("paired_check", {})
+    if check.get("status") in (None, "outside_scope") or check.get("schema") == paired.INDEPENDENT_SCHEMA:
         comparison = paired.refine_wording(comparison, old_text, new_text)
     payload: dict = {"comparison": comparison}
     if include_pdf:

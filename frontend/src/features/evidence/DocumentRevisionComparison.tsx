@@ -154,17 +154,20 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
           ? 'Both writing checks gave a stronger AI-like response in the analyzed version.'
           : revision.status === 'unavailable' ? 'This mapped revision could not be scored.'
             : 'The writing responses did not show a shared increase at the review level.'}</p>
-        <p className="mt-2 mb-0 text-caption text-text-muted">Linked wording changes{' '}
+        {!!revision.change_ids?.length && <p className="mt-2 mb-0 text-caption text-text-muted">Linked wording changes{' '}
           {revision.change_ids.map((id, position) => <span key={id}>{position > 0 && ', '}
             <a className="underline" href={`#${anchorPrefix}-${id}`}>{id}</a>
           </span>)}
-        </p>
+        </p>}
         <div className="mt-2 grid gap-4 sm:grid-cols-2">
           {(['earlier', 'later'] as const).map(side => <div key={side}>
             <p className="m-0 font-mono text-caption text-text-muted">
               {side === 'earlier' ? 'Earlier' : 'Analyzed'} sentence [{revision[side].start}, {revision[side].end})
             </p>
-            <p className="mt-1 mb-0 whitespace-pre-wrap break-words text-small">{revision[side].text}</p>
+            <p className="mt-1 mb-0 whitespace-pre-wrap break-words text-small">
+              <MarkedExcerpt excerpt={{ ...revision[side],
+                changed_tokens: revision.wording_changes?.flatMap(change => change[`${side}_changed_tokens`]) ?? [] }} />
+            </p>
           </div>)}
         </div>
         {revision.responses?.map((response, i) => <p key={i} className="mt-1 mb-0 text-caption">

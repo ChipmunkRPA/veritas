@@ -3638,7 +3638,7 @@ export interface components {
              * Schema
              * @enum {string}
              */
-            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2" | "chipmunk.paired-writing-review/3" | "chipmunk.paired-writing-review/4" | "chipmunk.paired-writing-review/5" | "chipmunk.paired-writing-review/6";
+            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2" | "chipmunk.paired-writing-review/3" | "chipmunk.paired-writing-review/4" | "chipmunk.paired-writing-review/5" | "chipmunk.paired-writing-review/6" | "chipmunk.paired-writing-review/7";
             /** Scope */
             scope: string;
             /**
@@ -3720,10 +3720,33 @@ export interface components {
             earlier: components["schemas"]["DraftExcerpt"];
             later: components["schemas"]["DraftExcerpt"];
         };
+        /** DraftSentenceWordingChange */
+        DraftSentenceWordingChange: {
+            /** Earlier */
+            earlier: [
+                number,
+                number
+            ];
+            /** Earlier Changed Tokens */
+            earlier_changed_tokens: [
+                number,
+                number
+            ][];
+            /** Later */
+            later: [
+                number,
+                number
+            ];
+            /** Later Changed Tokens */
+            later_changed_tokens: [
+                number,
+                number
+            ][];
+        };
         /** DraftSeparateWritingRevision */
         DraftSeparateWritingRevision: {
             /** Change Ids */
-            change_ids: string[];
+            change_ids?: string[] | null;
             earlier: components["schemas"]["DraftWritingFocus"];
             later: components["schemas"]["DraftWritingFocus"];
             /** Responses */
@@ -3733,6 +3756,8 @@ export interface components {
              * @enum {string}
              */
             status: "unavailable" | "no_joint_increase" | "joint_increase";
+            /** Wording Changes */
+            wording_changes?: components["schemas"]["DraftSentenceWordingChange"][] | null;
         };
         /** DraftSource */
         DraftSource: {

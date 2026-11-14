@@ -335,3 +335,36 @@ it('shows separate revision outcomes with links to the correct wording changes',
     expect(screen.getByRole('link', { name: id }).getAttribute('href')).toBe(`#${change.id}`)
   }
 })
+
+it('marks wording inside an independently matched sentence and shows partial scope', async () => {
+  const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64), decoded_characters: 100, mime_part: null }
+  const comparison: DraftComparison = {
+    schema: 'chipmunk.document-revision-comparison/1', format: 'plain_text', coordinate_space: 'decoded_source_unicode_codepoint',
+    earlier: source, later: source, scope: 'Compares the wording.', interpretation: 'Shows wording changes.', changes: [],
+    paired_check: {
+      schema: 'chipmunk.paired-writing-review/7', status: 'joint_increase', authorship_confidence_contribution: 0,
+      summary: 'Checked 1 of 1 mapped revisions.', scope: 'Other edits may remain unchecked.',
+      revisions: [{
+        earlier: { start: 20, end: 31, text: 'Early rain.', context_spans: [[0, 19], [20, 31], [32, 40]],
+          input_sha256: 'a'.repeat(64) },
+        later: { start: 23, end: 33, text: 'Heavy fog.', context_spans: [[3, 22], [23, 33], [34, 42]],
+          input_sha256: 'b'.repeat(64) },
+        wording_changes: [{ earlier: [20, 30], later: [23, 32],
+          earlier_changed_tokens: [[20, 25], [26, 30]], later_changed_tokens: [[23, 28], [29, 32]] }],
+        responses: [{ earlier: .2, later: .5 }, { earlier: .3, later: .8 }], status: 'joint_increase',
+      }],
+    },
+  }
+  vi.mocked(draftAvailability).mockResolvedValue({ extension: '.txt', pairedCheckAvailable: true })
+  vi.mocked(compareDraft).mockResolvedValue({ comparison })
+  show()
+  const input = await screen.findByLabelText('Earlier draft')
+  fireEvent.click(screen.getByRole('checkbox', { name: 'Include experimental paired writing check' }))
+  fireEvent.change(input, { target: { files: [new File(['earlier'], 'earlier.txt')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
+  expect(await screen.findByText('Other edits may remain unchecked.')).toBeTruthy()
+  expect(screen.getByText('Analyzed sentence [23, 33)')).toBeTruthy()
+  for (const word of ['Early', 'rain', 'Heavy', 'fog']) {
+    expect(screen.getByText(word).tagName).toBe('MARK')
+  }
+})

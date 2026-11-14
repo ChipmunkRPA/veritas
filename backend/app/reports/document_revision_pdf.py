@@ -87,12 +87,14 @@ def _paired(review: dict | None) -> str:
     for number, revision in enumerate(review.get("revisions", ()), 1):
         heading = f"Changed sentence {number}"
         output.append(f'<h2>{heading}</h2><p>{escape(STATUS_TEXT[revision["status"]])}</p>')
-        links = ", ".join(f'<a href="#draft-change-{escape(value)}">{escape(value)}</a>' for value in revision["change_ids"])
-        output.append(f'<p class="coordinates">Linked wording changes {links}</p>')
+        if change_ids := revision.get("change_ids"):
+            links = ", ".join(f'<a href="#draft-change-{escape(value)}">{escape(value)}</a>' for value in change_ids)
+            output.append(f'<p class="coordinates">Linked wording changes {links}</p>')
         for side, label in (("earlier", "Earlier"), ("later", "Analyzed")):
             item = revision[side]
-            output.append(f'<div class="side"><p class="coordinates">{label} sentence [{item["start"]}, {item["end"]})</p>'
-                          f'<p class="excerpt">{escape(item["text"])}</p></div>')
+            changed_tokens = [span for change in revision.get("wording_changes", ())
+                              for span in change[f"{side}_changed_tokens"]]
+            output.append(_side(f"{label} sentence", item | {"changed_tokens": changed_tokens}))
         for i, row in enumerate(revision.get("responses", ()), 1):
             output.append(f'<p>Check {i} · {row["earlier"]:.4g} → {row["later"]:.4g}</p>')
     if review.get("responses"):

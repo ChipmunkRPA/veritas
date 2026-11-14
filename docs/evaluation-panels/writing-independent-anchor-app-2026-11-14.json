@@ -1,0 +1,62 @@
+{
+  "draft_sha256": [
+    "8cb43d02e0334586be7e571216e0515952e1e0c71c911f3767ecb92a02875404",
+    "ff83c66829f6515ee18527aa66d964f52a311edf6428f090ff1a2a3511ef50de"
+  ],
+  "source_sentence": [
+    164,
+    230
+  ],
+  "status_with_fallback": "joint_increase",
+  "status_without_fallback": "outside_scope",
+  "wording_ranges": [
+    {
+      "earlier": [
+        173,
+        173
+      ],
+      "later": [
+        172,
+        173
+      ],
+      "earlier_changed_tokens": [],
+      "later_changed_tokens": [
+        [
+          172,
+          173
+        ]
+      ]
+    },
+    {
+      "earlier": [
+        198,
+        198
+      ],
+      "later": [
+        199,
+        200
+      ],
+      "earlier_changed_tokens": [],
+      "later_changed_tokens": [
+        [
+          199,
+          200
+        ]
+      ]
+    }
+  ],
+  "pdf_range_verified": true,
+  "model_names_omitted": true,
+  "no_jobs_before_simulated_payment": true,
+  "json_range_and_response_replay": {
+    "source_hashes_verified": 2,
+    "coordinate_space": "decoded_source_unicode_codepoint",
+    "changes_by_role": {
+      "body": 3
+    },
+    "changed_token_ranges_verified": 145,
+    "paired_scope_and_saved_response_arithmetic": "joint_increase"
+  },
+  "billing_minor_units": 999,
+  "billing_currency": "USD"
+}

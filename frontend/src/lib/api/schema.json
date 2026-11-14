@@ -5950,7 +5950,8 @@
               "chipmunk.paired-writing-review/3",
               "chipmunk.paired-writing-review/4",
               "chipmunk.paired-writing-review/5",
-              "chipmunk.paired-writing-review/6"
+              "chipmunk.paired-writing-review/6",
+              "chipmunk.paired-writing-review/7"
             ],
             "title": "Schema",
             "type": "string"
@@ -6188,14 +6189,95 @@
         "title": "DraftRelocatedPassage",
         "type": "object"
       },
+      "DraftSentenceWordingChange": {
+        "properties": {
+          "earlier": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Earlier",
+            "type": "array"
+          },
+          "earlier_changed_tokens": {
+            "items": {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            "title": "Earlier Changed Tokens",
+            "type": "array"
+          },
+          "later": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Later",
+            "type": "array"
+          },
+          "later_changed_tokens": {
+            "items": {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            "title": "Later Changed Tokens",
+            "type": "array"
+          }
+        },
+        "required": [
+          "earlier",
+          "later",
+          "earlier_changed_tokens",
+          "later_changed_tokens"
+        ],
+        "title": "DraftSentenceWordingChange",
+        "type": "object"
+      },
       "DraftSeparateWritingRevision": {
         "properties": {
           "change_ids": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Change Ids",
-            "type": "array"
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Change Ids"
           },
           "earlier": {
             "$ref": "#/components/schemas/DraftWritingFocus"
@@ -6225,12 +6307,25 @@
             ],
             "title": "Status",
             "type": "string"
+          },
+          "wording_changes": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DraftSentenceWordingChange"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Wording Changes"
           }
         },
         "required": [
           "earlier",
           "later",
-          "change_ids",
           "status"
         ],
         "title": "DraftSeparateWritingRevision",

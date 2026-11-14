@@ -17,10 +17,15 @@ BOUNDARY_SCHEMA = "chipmunk.paired-writing-review/3"
 WORD_BOUNDARY_SCHEMA = "chipmunk.paired-writing-review/4"
 INTERIOR_SCHEMA = "chipmunk.paired-writing-review/5"
 MULTIPLE_SCHEMA = "chipmunk.paired-writing-review/6"
+INDEPENDENT_SCHEMA = "chipmunk.paired-writing-review/7"
 ANCHORED_DRAFT_SCHEMA = "chipmunk.document-revision-comparison/7"
 MAX_REVISIONS = 4
 MULTIPLE_SCOPE = ("Checks separate changed sentences in short English text drafts. Each comparison requires its own "
                   "unchanged neighbors. The responses are uncalibrated and carry zero authorship confidence weight.")
+INDEPENDENT_SCOPE = (
+    "Only the listed changed sentences were matched between drafts using two unchanged neighbors. Other edits may "
+    "remain unchecked. The responses are uncalibrated and carry zero authorship confidence weight."
+)
 # Second-highest genuine work response in the frozen paired center transfer.
 BOUNDARY_POINT = 0.12844311183234092
 MAX_WORDS = 420
@@ -334,7 +339,56 @@ def refine_wording(comparison: dict, earlier: str, later: str) -> dict:
     return comparison
 
 
-def multiple_result(candidates: list[PairedInput], measured: list[list[dict] | None] | None = None) -> dict:
+def independently_anchored_revisions(comparison: dict, earlier: str, later: str) -> list[PairedInput]:
+    """Map one changed sentence without requiring unrelated revisions to share its layout."""
+    if comparison["format"] != "plain_text" or comparison.get("relocated_passages"):
+        return []
+    old, new = _source(earlier), _source(later)
+    if old is None or new is None:
+        return []
+
+    def windows(units):
+        grouped = {}
+        for i, (left, middle, right) in enumerate(zip(units, units[1:], units[2:]), 1):
+            if left.paragraph == middle.paragraph == right.paragraph:
+                grouped.setdefault((left.text, right.text), []).append(i)
+        return grouped
+
+    old_doc, old_units = old
+    new_doc, new_units = new
+    prior, current = windows(old_units), windows(new_units)
+    earlier_sentences = {unit.text for unit in old_units}
+    later_sentences = {unit.text for unit in new_units}
+    positions = []
+    for neighbors, later_indices in current.items():
+        earlier_indices = prior.get(neighbors, ())
+        if len(later_indices) != 1 or len(earlier_indices) != 1:
+            continue
+        i, j = earlier_indices[0], later_indices[0]
+        if old_units[i].text not in later_sentences and new_units[j].text not in earlier_sentences:
+            positions.append((i, j))
+    if not 1 <= len(positions) <= MAX_REVISIONS:
+        return []
+    if any(i1 - i0 < 3 or j1 - j0 < 3 for (i0, j0), (i1, j1) in zip(positions, positions[1:])):
+        return []
+
+    candidates = []
+    for i, j in positions:
+        before, old_input = _context(old_doc, old_units[i - 1:i + 2], earlier)
+        after, new_input = _context(new_doc, new_units[j - 1:j + 2], later)
+        old_tokens = tokens(earlier, [(before["start"], before["end"])])
+        new_tokens = tokens(later, [(after["start"], after["end"])])
+        local_changes = differences(old_tokens, new_tokens)
+        if not local_changes:
+            continue
+        candidates.append(PairedInput(old_input, new_input, {
+            "earlier": before, "later": after, "wording_changes": local_changes,
+        }))
+    return candidates
+
+
+def multiple_result(candidates: list[PairedInput], measured: list[list[dict] | None] | None = None, *,
+                    independent: bool = False) -> dict:
     if not candidates or (measured is not None and len(measured) != len(candidates)):
         raise ValueError("Expected individually mapped paired revisions")
     reviews = []
@@ -346,10 +400,12 @@ def multiple_result(candidates: list[PairedInput], measured: list[list[dict] | N
         reviews.append(review)
     increases = sum(row["status"] == "joint_increase" for row in reviews)
     checked = sum(row["status"] != "unavailable" for row in reviews)
-    return {"schema": MULTIPLE_SCHEMA, "status": "joint_increase" if increases else
+    return {"schema": INDEPENDENT_SCHEMA if independent else MULTIPLE_SCHEMA,
+            "status": "joint_increase" if increases else
             "no_joint_increase" if checked == len(candidates) else "unavailable",
             "summary": f"Checked {checked} of {len(candidates)} mapped revisions. Both writing responses increased at {increases}.",
-            "scope": MULTIPLE_SCOPE, "authorship_confidence_contribution": 0, "revisions": reviews}
+            "scope": INDEPENDENT_SCOPE if independent else MULTIPLE_SCOPE,
+            "authorship_confidence_contribution": 0, "revisions": reviews}
 
 
 def _increases(responses: list[dict], *, floor: float = 1e-7) -> list[float]:
@@ -424,13 +480,15 @@ def verify(comparison: dict, earlier: str, later: str, recorded: dict, *,
            word_layouts: WordLayouts | None = None) -> str:
     """Rebuild the source scope and check saved response arithmetic without inference."""
     schema = recorded.get("schema")
-    if schema == MULTIPLE_SCHEMA:
-        candidates = separate_revisions(comparison, earlier, later)
+    if schema in (MULTIPLE_SCHEMA, INDEPENDENT_SCHEMA):
+        independent = schema == INDEPENDENT_SCHEMA
+        candidates = (independently_anchored_revisions(comparison, earlier, later) if independent
+                      else separate_revisions(comparison, earlier, later))
         revisions = recorded.get("revisions")
         if (not isinstance(revisions, list) or len(revisions) != len(candidates) or not candidates
                 or any(not isinstance(row, dict) for row in revisions)):
             raise ValueError("The draft comparison does not contain all mapped revisions")
-        expected = multiple_result(candidates, [row.get("responses") for row in revisions])
+        expected = multiple_result(candidates, [row.get("responses") for row in revisions], independent=independent)
         if json.dumps(recorded, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
             raise ValueError("Mapped revisions differ from the source positions or saved responses")
         return expected["status"]

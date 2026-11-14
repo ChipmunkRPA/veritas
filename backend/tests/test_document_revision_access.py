@@ -1222,6 +1222,7 @@ def test_sentence_anchors_bind_wording_without_scoring_the_recovered_ranges(refe
     monkeypatch.setattr(settings, "text_window_sentences", 3)
     monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
     monkeypatch.setattr(settings, "document_paired_separate_review", True)
+    monkeypatch.setattr(settings, "document_paired_independent_review", False)
     opening = "The committee met on Monday morning to review the budget."
     ending = "The final minutes will be available after the next meeting."
     other_opening = "The audit included reports from all eight regional offices."
@@ -1277,6 +1278,61 @@ def test_sentence_anchors_bind_wording_without_scoring_the_recovered_ranges(refe
     repeated_new = source("The first session ended at noon yesterday.", "The reviewers listed inspection dates.", opening, ending)
     comparison, a, b = document_revision.compare_with_text(repeated_old, repeated_new, ".txt")
     assert paired.anchor_revisions(comparison, a, b) is None
+    assert paired.independently_anchored_revisions(comparison, a, b) == []
+
+
+def test_independent_draft_review_preserves_other_edits_and_checks_its_own_ranges(reference_http, monkeypatch, tmp_path):
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_detector_mode", "candidate")
+    monkeypatch.setattr(settings, "text_window_sentences", 3)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    monkeypatch.setattr(settings, "document_paired_separate_review", True)
+    monkeypatch.setattr(settings, "document_paired_independent_review", False)
+    lead = ("The meeting took place on Monday morning. The clerk shared the early schedule. "
+            "The chair opened the discussion after lunch.")
+    tail = "The audit included reports from eight regional offices. {center} The records are kept at the city office."
+    before = "Staff listed the inspection dates in a long table."
+    after = "The reviewers documented the dates of each inspection."
+    old = (lead + "\n\n" + tail.format(center=before)).encode()
+    new = (lead.replace("The chair", "The visitors left at three. The chair") +
+           "\n\n" + tail.format(center=after)).encode()
+    aid = "independently-anchored-draft"
+    _saved(f, aid, ".txt", new)
+    form = {"include_paired_check": "true", "include_pdf": "true"}
+    original = f.client.post(_url(aid), headers=f.viewer, files=_upload(old, ".txt"), data=form).json()["comparison"]
+    assert original["paired_check"]["status"] == "outside_scope"
+    monkeypatch.setattr(settings, "document_paired_independent_review", True)
+
+    def score(candidates):
+        assert len(candidates) == 1
+        assert after in candidates[0].later and "visitors" not in candidates[0].later
+        return [[{"earlier": .2, "later": .5}, {"earlier": .3, "later": .8}]]
+
+    monkeypatch.setattr(paired, "score_separate", score)
+    response = f.client.post(_url(aid), headers=f.viewer, files=_upload(old, ".txt"), data=form)
+    assert response.status_code == 200
+    payload = response.json()
+    comparison = payload["comparison"]
+    assert comparison["changes"] == original["changes"]
+    review_result = comparison["paired_check"]
+    assert review_result["schema"] == paired.INDEPENDENT_SCHEMA
+    assert review_result["status"] == "joint_increase" and review_result["authorship_confidence_contribution"] == 0
+    revision, = review_result["revisions"]
+    assert revision["earlier"]["text"] == before and revision["later"]["text"] == after
+    assert revision["wording_changes"] and "change_ids" not in revision
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as report:
+        text = " ".join(" ".join(page.get_text().split()) for page in report)
+        assert "Other edits may remain unchecked" in text and after in text
+        assert "ModernBERT" not in text and "Tropa" not in text
+    older, newer, comparison_file = (tmp_path / name for name in ("before.txt", "after.txt", "result.json"))
+    older.write_bytes(old)
+    newer.write_bytes(new)
+    comparison_file.write_text(json.dumps(comparison))
+    assert review(comparison_file, older, newer)["paired_scope_and_saved_response_arithmetic"] == "joint_increase"
+    revision["wording_changes"][0]["later_changed_tokens"][0][0] -= 1
+    comparison_file.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="Mapped revisions differ"):
+        review(comparison_file, older, newer)
 
 
 def test_adjacent_sentence_pair_uses_exact_text_exports_and_preserves_legacy_replay(reference_http, monkeypatch, tmp_path):

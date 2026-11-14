@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Independent sentence matching between drafts](writing-independent-anchor-transfer-2026-11-14.md)
+  assessed 151 of 160 rewrites across news and abstracts, up from 25.
+  The local opt-in found 13 exact rewrites, up from four, and did not
+  flag any additional assessed ordinary work. It uses a supplied earlier
+  draft and preserves exact wording differences.
+
 - [Sentence-anchored wording differences](writing-sentence-anchor-transfer-2026-11-14.md)
   correct eligible earlier-draft highlights. A held trial recovered four
   more assessable rewrites on 32 new source works but added no AI-like

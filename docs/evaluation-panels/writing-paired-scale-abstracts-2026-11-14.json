@@ -1,0 +1,4733 @@
+{
+  "schema": "chipmunk.writing-paired-scale-transfer/1",
+  "protocol": {
+    "source": "Use new English news or scientific abstracts in deterministic digest order with an exact labeled center and unchanged native neighbors for both generators. Exclude prior public writing work hashes and overlapping 12-word phrases against excluded seeds. Use the first 40 eligible works, or all if fewer qualify. For abstracts, verify character tags and native sentence geometry directly because the separately published sentence array does not reproduce the clean text for the shared seeds.",
+    "control": "Combine each news rewrite with an archival ordinary revision or same-work human-prose substitution. Also score ordinary-only pairs. Report flags by distinct ordinary work.",
+    "comparison": "Use both classifiers after verifying that their weights match the app pins. Measure the exact center alone and its three-sentence context. Retain the existing context decisions. The added rule needs every log-odds change to exceed the previously frozen single-boundary point. Measure existing app scope and the optional sentence-anchored expansion separately.",
+    "decision": "For local opt-in on an arm require five added exact locations across three source works and both generators, with at most two additional ordinary works flagged. Keep the earlier signal weight at zero."
+  },
+  "point": 0.12844311183234092,
+  "sources": {
+    "ordinary_rosters": {
+      "writing-journal-body-transfer-2026-11-11": "e8633d587e1943f1f9dd7c7dc1d93f7809590fcb82a7956ddaa6621e2499ea69",
+      "writing-archive-prospective-transfer-2026-11-12": "cad88dc7f901078c2ac494b0af8a852bff56e9842f0e744c9c97e829e7b16650"
+    },
+    "earlier_ledgers": {
+      "writing-adaptive-word-transfer-2026-11-12.json": "1f4553813fb6e750b146738c16965198f001ce49f21a8423f086d2d6dc4c84d5",
+      "writing-agreement-document-format-transfer-2026-11-12.json": "25764698f8121aa94fafe994488a02018461e00ce91688d65fb215cd6ddc61ba",
+      "writing-agreement-focus-replay-2026-11-11.json": "efeeade6056dba866ab6f8ad28e6c5a5c3ce1230353f0f927a094fc63e6b97f7",
+      "writing-agreement-ordinary-edit-2026-11-11.json": "f72cfa1a4967900e7c7294632d847f4441822b874d75a248f0826b979a20c272",
+      "writing-archive-changed-edge-2026-11-12.json": "d5ba0e37ffc4f6d855ec8b09fc904a06ca15ad8e6274f78316de392ff89e2671",
+      "writing-archive-changed-edge-app-2026-11-12.json": "1edf00802c746cb259eaa6e8f698256ced7e26e20867d7bffee4a7446d4be141",
+      "writing-archive-joined-layout-2026-11-12.json": "0cd2f90bf6cf93d1aaa729f218ad6c7c71d9e254f593f0d8841260d2b7099f2f",
+      "writing-archive-source-evidence-2026-11-12.json": "2c78a2be04d2b82a95b5065cefca932cfcfe51c0a7b620693d7dc625cda39da3",
+      "writing-archive-word-transfer-2026-11-12.json": "37f31b24c36f62b85686391a390161a51149d59998b466ffddb869330e708c54",
+      "writing-archived-passage-transfer-2026-11-12.json": "9092cd90163cccf2afc9fafc44f791adb0fb04b3945a824955a65e536a58875c",
+      "writing-article-context-transfer-2026-11-11.json": "95aa4bfccf503ec149357343ca5c467efae64dd1dc023f0fe8ea645b1fa346ad",
+      "writing-assisted-class-transfer-2026-11-12.json": "a1d9744e0e55111f371c1c9c1b15d6de78928205959c71e806bdeb39b9ba38b1",
+      "writing-bidirectional-transfer-2026-11-13.json": "567b78b2a27471d0ef6dd15ac079588e92e9e4c46dc5dfca01cb6d1909e23215",
+      "writing-blind-rewrite-probe-2026-11-11.json": "c9279588b0fa6728b3ebf837685212dbbc544afcd74beac885e2c3d873ea09b4",
+      "writing-checkpoint-agreement-2026-11-11.json": "01b68553cea6bec6be21e71abd7a657de4b2719c75f3dcb83a069f8248c9ec29",
+      "writing-clipped-rank-transfer-2026-11-12.json": "ab9e4e89c88636b82890489440bf770c5e06eb76d4bf2df313b1653a555c49fc",
+      "writing-conditional-context-transfer-2026-11-12.json": "678901ec73ed0ef418f72af837b35d051b7c596f26a1f41ac6ba0de22d9b442b",
+      "writing-context-agreement-2026-11-14.json": "0c1ea4b9351cdee50da9666c33666ce0f255ab233408e18c34eb95e2c8550ff6",
+      "writing-context-agreement-freeze-2026-11-14.json": "c310eee641885a4ce7fa1146882a08e7fa1acbae4ecee56fc09afba847ce049a",
+      "writing-context-margin-transfer-2026-11-13.json": "16edc17a490fb29e12032583c8a1285e232aad2c488fcfaedd7671961b459edc",
+      "writing-context-mixture-transfer-2026-11-12.json": "139dfa7e4fde14d5705a77214adbb2426a2d9f06d8b44aae177c493db552df2b",
+      "writing-context-token-transfer-2026-11-11.json": "08452b6593c10d5596645496aa5fef7db21bf5c7fbd10973defddfcdd498ba61",
+      "writing-copernicus-body-intake-2026-11-11.json": "c484266470a095c465338435511cf7ff129e81bef42d845b4a9a11d049fe1110",
+      "writing-correspondence-transfer-2026-11-11.json": "0b44119ee2fb6d9b4a97c119427707266e2abc17b088b625ec2d736d348270ef",
+      "writing-dependency-transfer-2026-11-13.json": "8a6b5e0bb2fdaee0a57383031102cd854768f467802d601c599dee3817d85d86",
+      "writing-draft-grammar-2026-11-12.json": "20076eb4a1109a02e7aec3f3e25dc7995c907851fb6f585b5d72c7b349d9e5ec",
+      "writing-edit-intensity-transfer-2026-11-13.json": "2a142c0ecfc5aacfe0f685af7fd52b19b2e7900a11e76f3210c8a65f67427443",
+      "writing-editorial-transfer-2026-11-11.json": "2b1eee6be51d44d14d15f697998e3f232c4ed648b5e36b72731fe17f1c4e27c7",
+      "writing-elife-exact-sentence-confirmation-2026-11-12.json": "30745ac2911d92a0cd2b9f9b494c0a5dda595ce91c53eaf9914bef4ec627548a",
+      "writing-elife-long-position-transfer-2026-11-13.json": "227d5287d17e3f8cf92cbccfedc30c6e134b4e04767be56805d024538bd15e99",
+      "writing-email-body-scope-transfer-2026-11-12.json": "4333c0829539eec8f5f3735cf57cffc765a1e4b82c69e31f1fc56c605e8e8aa1",
+      "writing-email-phrase-persistence-2026-11-11.json": "9b26a355cd6f839250661fee79e35a27d7b9917cb703db8d60e8f1a9bef1b3f9",
+      "writing-entropy-conditioned-2026-11-13.json": "da2b818f0e1d43ee5fbb759bb0bd5049819110d791213bf3f861420bf3f49a6d",
+      "writing-expression-ore-transfer-2026-11-12.json": "3502e260077983c5e5e3451cf05c6f3e8a9d173c8716eb0fb283763f8c1f41cd",
+      "writing-expression-plos-transfer-2026-11-12.json": "f93ba5bf4af717b01a63e5ac0dd992d3e852d65566db107f52e6f108215a8ee2",
+      "writing-f1000-position-app-2026-11-13.json": "2069ffa3be952fd9559af56b2b1715cbab7574f4aaa7ef4b1895194b462c887f",
+      "writing-f1000-position-transfer-2026-11-13.json": "2de36e115c061e9cf4e353a567a6987ccf116adb00d49a18478c2cf12e5a6b3d",
+      "writing-f1000-revision-spans-2026-11-13.json": "5fcf0a071ef547c2fc55a50e4c96baa91afba1122a474c283cd472f46ade6b47",
+      "writing-fiction-paragraph-transfer-2026-11-11.json": "a7defca3efef15d489888b86aeb52471b55639637d1347633753c1f70648cb5c",
+      "writing-focus-publisher-transfer-2026-11-11.json": "ba428cf4810c97a86288721cbf9ddd96b6ed0d747c3f405535c1a5ec23ea3a73",
+      "writing-forum-revision-transfer-2026-11-13.json": "43196c6c18fb8f578af8bf4ca8d16f7cd80b22388a6f38ac31e8a60c8a3f0cd8",
+      "writing-gao-archive-transfer-2026-11-13.json": "12909cdd241e7c37e965efc7f82c4f805476a62e1a8475a22767ccd94799edf0",
+      "writing-gao-exact-excerpt-2026-11-13.json": "b2152d2a1535a44af8801d69ab5900679dd0d7e0fc6fa945f0a3f531b6fdf3a2",
+      "writing-gao-word-boundary-deletions-2026-11-13.json": "962c17c87beb8fcb3243e5f752567b856271390b190634f840d9a32047d5b267",
+      "writing-gao-word-paragraphs-2026-11-13.json": "566e5263cbd0b053dc6d93945abba64ab8acbedaaf3b97e327b97c9e5a1a4ac8",
+      "writing-grammar-seams-2026-11-11.json": "4aa69d2df55a8a1db9080992272e370c827368337fae0a7469528e39724b38f7",
+      "writing-html-reply-app-2026-11-12.json": "09827a9b52f9e6736d10291545a4e6c9c5cb7bfc7419ca7a74cd555d4bfcaabc",
+      "writing-html-reply-short-app-2026-11-12.json": "84e3607cab4bbeb8f407c2edf9dd575e2ad54327121ab0cedd8f52aead47b49c",
+      "writing-html-reply-short-layouts-2026-11-12.json": "ea8ef804e1e85cf457dc027ea85b80e840a1d22a0da8c5465aa020821d29e24e",
+      "writing-html-reply-transfer-2026-11-12.json": "2a23f35067a60cc39484630c01605f015541048d75d20f6a4e6e267ec73b7426",
+      "writing-instruct-base-passage-transfer-2026-11-12.json": "2d5103473ab547f01c911a4610616e637904461a86424cc38732027b6e53da32",
+      "writing-interval-transfer-2026-11-13.json": "92fa746a81c2e60a2241080de36eb5fd80d2799bf14882b675d910995257b71e",
+      "writing-journal-body-transfer-2026-11-11.json": "32436a126304d62db8c4b9b2648fc3f21df0e84b2c50aab542dec8ae5027cd0e",
+      "writing-local-lexical-transfer-2026-11-12.json": "a754851f9a99a572af97ed3a9cbdb70801d8e499546683dad3259c5b29823bd5",
+      "writing-long-position-publisher-replay-2026-11-12.json": "862eeeb3ba3d53962c6aea395b33739c8e2f7282b4688f86fd25c33acbaee267",
+      "writing-long-position-transfer-2026-11-12.json": "1b4713fb1fc38053a1f28d2c4e564fa587cb16950d261070e8dd7ab6d6871801",
+      "writing-mixed-pdf-page-transfer-2026-11-12.json": "001a8005f0ff451d3f954f2c1cfae9d9d0e12527bacf50e7788afaafe30b348c",
+      "writing-mixed-pdf-page-transfer-app-2026-11-12.json": "abcdd9cfa9b2450fcd653f47aa1f8c110407f7ce06d4f515f3f2029bb8776dd7",
+      "writing-modern-bulletin-transfer-2026-11-11.json": "af828f7aed7ce3a68813089d31ed32274224c9616ca15738e432c0bb6749d207",
+      "writing-multiblock-independent-2026-11-12.json": "18e456bcf4aa66b24ee1a528ad1bc0dd9068efa5bb0c19a18b78dd5431fe9326",
+      "writing-multiparagraph-localization-transfer-2026-11-12.json": "623301c07a75042ee1c0c3ba84c83cb8784d1563161c13892cb267e8aa9e5d79",
+      "writing-neighbor-interaction-2026-11-14.json": "4f3a32a4a37599ec0a9e43fbf9158f7c533161f50010ee5bf2286fb36de36c1b",
+      "writing-neighbor-interaction-freeze-2026-11-14.json": "b0138e71fcae6672443252a4cec17f0c4a628e24627978445f7a5a95df120d93",
+      "writing-ocr-agreement-transfer-2026-11-12.json": "7b3475c1427945104b1eadb6e874220988382f672fa2f494de0d26ee1b9f35ef",
+      "writing-ocr-scan-app-2026-11-12.json": "2e4f5a1f30d3a93ca3dc9c3b7b4ac0d02831dc7e41e5a4e24a21416ddf14ab19",
+      "writing-ocr-scan-transfer-2026-11-12.json": "b7e81487ab8c17d402a5702a605aef993c4e9802f9ac17fe5a9f6ad5ad7235f0",
+      "writing-omission-attribution-2026-11-13.json": "0c8721669f689ad8cba9344600c2757a3a5ce4835155836911dc380533dfd51d",
+      "writing-option-order-transfer-2026-11-11.json": "906bb2a8b0d1567eeb144b1e93e1ed58996a36cb40c19300aac413f39aca4e76",
+      "writing-paired-center-transfer-2026-11-12.json": "0dcc670ef5c398004b5d820176eabd6060bca549a14a14c86dac166df1e09e2a",
+      "writing-paired-center-transfer-app-2026-11-12.json": "92d53e9f8aad34d27af8f8327dc7319f916750a984b454a527f202ba13e6391b",
+      "writing-paired-center-transfer-node-2026-11-12.json": "daf19849771bbea5dd6bd0be0c0124fd81de25776c78a18db17c138ef7bf0745",
+      "writing-paired-email-revision-2026-11-11.json": "4ed07ef95b9a20dc580b0a39fddd713510acc97d451c76c35489db538d2bc011",
+      "writing-paired-revision-replication-2026-11-11.json": "ee45589adf1557c5c851fd613c1374817ec4090e477509db3677f43cc93cfbb5",
+      "writing-paragraph-context-transfer-2026-11-11.json": "49a23d4d9053df849fd3037da59d9168182203b6fb60644e703c6672232fe5b9",
+      "writing-paragraph-priority-2026-11-11.json": "ee970247d1f62f1352d23f6c1e47afb43ed24fa08552a2831234762c9bc7f97f",
+      "writing-paragraph-replication-2026-11-11.json": "511b6fecc232571e30c02622de92b730826a003ae723c20975041eb235d35a0a",
+      "writing-pdf-page-coverage-app-2026-11-12.json": "1590f50278c2274fbe9d9d2d4a5fd73b347e947ec05bbde9f2a80d82196c410a",
+      "writing-pep-editorial-intake-2026-11-11.json": "5b5b19a32dfd189baeb368eab9fb603ae15729e72ebc637f537bc8ff8706550f",
+      "writing-pep-phrase-replication-2026-11-12.json": "9ba1b098b8a7347ff869be2b4a978681846ba7299a72d30511dc9c2ac90ec57b",
+      "writing-percentage-consistency-2026-11-13.json": "ea751ba425958c7b275f2d7dc6daf69622a4c688667d825d720444ef285b8eff",
+      "writing-phrase-context-stability-2026-11-12.json": "d7fb56bf1115dbaaef37d84c98244e9b136fc7ac5e3aa088ed5ac4ffa6e705b0",
+      "writing-position-app-2026-11-12.json": "73ba973300a0cb8961617fc0b4cfa44146df2f7a852d728e3671a2de1ff031a7",
+      "writing-position-confirmation-2026-11-12.json": "f498a1a0979317d5df6562306f482fe58459d5ecb8ecc8732d8fab9c0630e0fc",
+      "writing-position-qwen-admission-2026-11-12.json": "dad933eff51759a81ab2cdc9e04d56965aed4e8e2a4673a76f6fdda11d1de79a",
+      "writing-position-qwen-confirmation-2026-11-12.json": "bcf34e91fc5871803fcb2fb2409cfe7fa745ed92a9b32bb07be8fea1b72d1c31",
+      "writing-practical-notice-transfer-2026-11-11.json": "cf8a7a2b023f3b3e130ff1e03177987371319455742c960570c6362e6b6d0eae",
+      "writing-punctuation-stability-2026-11-12.json": "0de5ac66398d152f90e1e5519d568d7f70756ecf3fbf551a77fbeca466c243ec",
+      "writing-reference-revision-transfer-2026-11-11.json": "4d44505d06e3cd41b8f52b16c58ca48032dd75835e3a4e43978a48443da97e68",
+      "writing-reply-layout-app-2026-11-12.json": "03f6b7546ccea652730be721856ff1276a52e1447124e9e385dab28dff8ab54c",
+      "writing-reply-native-batches-2026-11-12.json": "051fbbe2c54a2e852184e37fcf8baf1ab5ba1472bd5f8423f174e60be111fede",
+      "writing-reply-paragraph-transfer-2026-11-12.json": "b153db238810f1ece0bbd43c92d05b4711a15191495b8b9de7547308be07f928",
+      "writing-revision-trajectory-2026-11-13.json": "2f905e55222da0b0e024cbaa955feb4fc053d0124f2c3ce4f0c86c4d09c36657",
+      "writing-revision-worker-complete-2026-11-13.json": "d8ad68988199c61fe9538887bfb0c2256c367ac44219f74c94ef55169ccaa8cf",
+      "writing-revision-worker-fit-2026-11-13.json": "65872a195cb26a29fe70966d6b6dd470ac93abf13de8613a64263019c6ca6c88",
+      "writing-revision-worker-held-batch0-2026-11-13.json": "2d7688f9ddc14fe4406f9cff09e8b3ed5fe44ac80ab12a45b043ec6e8b91421c",
+      "writing-revision-worker-held-batches0-2-2026-11-13.json": "1ae86b8f527af4c74401109049815cefce08886f8ef5019ee42d962fa19d275e",
+      "writing-semantic-continuity-transfer-2026-11-12.json": "02e0c0602872fce2215d8f2d290c0de048f830fc5672e768849162fe60b3576b",
+      "writing-sentence-anchor-app-2026-11-14.json": "0fbc5e55a82264c16cf2574d1b37220e3b459765102d8dbeacf8473aa7d28c93",
+      "writing-sentence-anchor-transfer-2026-11-14.json": "a4b6118983c6371c479033949cb2b0739f744119be806c1e1c8c744f00f7305b",
+      "writing-sentence-context-head-2026-11-12.json": "bf399d0c728f5564e1827c2464f900a02b5e42b39107e848551f354576cc5b64",
+      "writing-sentence-rotation-transfer-2026-11-13.json": "dcf4a72d727944cbf8bd2b40481e4523b0142f8a89d72eed1d50f07998a38138",
+      "writing-separate-revision-app-2026-11-14.json": "066b7fe9419e0720808ea443a2b2948e1a82c50de01dceeffff82aee318ed075",
+      "writing-separate-revision-transfer-2026-11-14.json": "6ec8f68f26a702d5e8e771d08143298c92da66b897155945c121d05cd1260a18",
+      "writing-shared-anchor-ranking-2026-11-11.json": "2140848693f887de1d688de9a9706a00730b9206a5a7d2f3d51030df8a667b3e",
+      "writing-shared-sentence-transfer-2026-11-12.json": "5ad0b5853dbff7c46e33b9b096b245e5854532819fdfdf9cb82370ade2b2059d",
+      "writing-short-email-comparison-2026-11-11.json": "adafd5bb1725d93429010cc9e9a5b510fb0fe6e7753f66623c290526fcd5d453",
+      "writing-short-email-contrast-transfer-2026-11-11.json": "ce0a11a697d78a679a7756213215a1c354bd2d5333490dd2a4bd9ed36e6a5116",
+      "writing-source-aligned-transfer-2026-11-12.json": "2fca1d91ea72b13687a2dfacbba703ac1d6b389416a58f9a593120b643e9a851",
+      "writing-source-conditioned-2026-11-12.json": "e95815abb53e086206e5f0907f4457f5c5252c171a3727cfc6915669b512e131",
+      "writing-spans-v7-freeze.json": "ad06dc910351c080bf8f3f8b879427105d9f1c6fd15f37cbf18c914eba2a1df9",
+      "writing-spans-v7-result.json": "eaf7ed4ef8cef0a8bc44a4d6d52e68a96ed1885223df9b03eee6e6e253cce5e1",
+      "writing-specialists-v5-baseline-confirmation-native.json": "bfb96a53ea3c7aeea4045502f9d3373d46c6831779ebd612a06c419e1ac58763",
+      "writing-specialists-v5-baseline-training-native.json": "e89732cb1c310ca1008ef24930205f854dc8bbc00197c117afa0c5b61522e0de",
+      "writing-specialists-v5-candidate-confirmation-native.json": "cc1a1dd3e0e50d0eb23ce9606fc0dfa7e44f3796a057a6b71b47e24f8110acab",
+      "writing-specialists-v5-candidate-training-native.json": "da23e40c2cdc8eebaaf0558a25932721d9c3753d3e044ddd5cc7b1ddf6eea823",
+      "writing-specialists-v5-commercial-source-review.json": "042e362948283ca8872d911f58cb93f90a0dc4c167908e8f5d6e5e1a45414b9f",
+      "writing-specialists-v5-linux-review.json": "d68557be42795960cab423dab52ec684ba15b7dc90e7893bf4f1b98189b56583",
+      "writing-specialists-v5-original-source-audit.json": "c82fa4acc4bc8fc625da592442585931c619d9d6b033e4b6b5f60ef612d9ca9a",
+      "writing-specialists-v5-release.json": "a70a59c5db577f8c0c5dba45e29e54b33d5b122663c47ee306b79cc86aa60f4c",
+      "writing-specialists-v5-result.json": "b737b1b3410d77152112bddaa97a6374df420731aee14864db4a6545edd8939e",
+      "writing-speech-paragraph-transfer-2026-11-11.json": "e5987ca31670f7ee08ae99d1169210c47427992a35d115cf3dba4040ece8cd09",
+      "writing-surprisal-dynamics-2026-11-13.json": "157eea47ab989440608a0d0f91f19a38dab2a1dd795a6024032b4adc33032900",
+      "writing-sustained-response-2026-11-13.json": "c7cb92a25ee91bcb17e3c1bd36ce06ebea9acaec13fa77a25f4c21c2b512bdb3",
+      "writing-temperature-transfer-2026-11-13.json": "d95deabfbe775cf79bfaf7235dc1f901153b8c5f8762b2dfb6b9ca6d8f77ddf5",
+      "writing-token-curvature-2026-11-11.json": "eb3bf3dfefebed40307e304147b7abf1247ad810e2f36a29f480083463c42d09",
+      "writing-two-context-transfer-2026-11-12.json": "c9c38c3c5535980749d98d5ced85505a71c4598f24f76b4a0bdd987931489527",
+      "writing-two-sided-context-2026-11-11.json": "cef7982606dbf0ee5ca02a71154a665c30a3ef4e6d327ac2d6c38fd22a5facf9",
+      "writing-two-sided-usgs-transfer-2026-11-11.json": "7f6f9f485f6c04ac4174390541eb127fce9818cf05cdd2b5c186e6a3b6beeba2",
+      "writing-typed-decision-transfer-2026-11-13.json": "51afd722fb27bb7d124009e48dbaa6dc704e70c4faa7866c8269a8f3335e3c7c",
+      "writing-typography-frus-2026-11-13.json": "7d4a8cc84fef20581c8f671b171bebca52e064d1eb64d32b49b0024752289541",
+      "writing-typography-transfer-2026-11-13.json": "4a5243d1cf6479a17dd92c57035c95e679a103301c3d38e8801410bd842d68a3",
+      "writing-unselected-responses-app-2026-11-12.json": "be24318475ca7d34d2cda3e4662bea236f7f5d569762365fbf6371e331e19d4e",
+      "writing-uswds-revision-intake-2026-11-13.json": "e28aa0a7ea60ce99e77047a9d220fae493d448c696d52fca7bfc0ec6039d4677",
+      "writing-uswds-revision-transfer-2026-11-13.json": "d2080c36a78bd940c5c3733244c7865ce014c4c263b4d54f2d70475d3e0f46d1",
+      "writing-v2-institutional-source-review.json": "8953f8a07758b68e5ec400de0b641daa3d6feb19fc9d1740a15b19910e6ef374",
+      "writing-v2-source-preflight.json": "719bd71788936a06332a99d159fb5ff094ed4b73c8697c9d40f035a232a87c02",
+      "writing-v3-focus-development.json": "b434cac7e5ae4a6ac1ee201c2e32f1e3b53d99f7c2373a978bcecdc752552f17",
+      "writing-v3-focus-freeze.json": "4ad40ded39bc8c25b82770e28db9fd259103f21010b111a4bdf9a8a1c25bc67b",
+      "writing-v3-focus-numerical-review.json": "f455607524d25e6d772269b6017c505627e64aea018ec8bd23c7eafc4983033a",
+      "writing-v3-focus-preparation.json": "9f5ca7dbe5a184ae0ce84b8f8c0a3f1fe2e64abd851c247ad852196889e842a7",
+      "writing-v4-comparison-code-preflight.json": "681158742d8aede1d007f1a272a97dd1d40653ce63bf7f0ca75cec89ef0586c1",
+      "writing-v4-evaluator-compatibility.json": "dc96ed2c671bba9d335a92d85bebab3f4ef9244b282be380bb1df74e36ffea93",
+      "writing-v4-human-control-source-audit.json": "aa142fbc127341de649e677a318e205ecdad677f3ee8f975d72d4ad8714d9232",
+      "writing-v4-modernbert-acquisition.json": "2855773b7e5ec88260df973cb8ede7b9f9d9016081e194100e9fca22722c1bfc",
+      "writing-v4-modernbert-baseline-native-summary.json": "da48d17bf92d64e3b4edc90a3f1f928a27c3eeacc64d8bb4bcc56c79cc458232",
+      "writing-v4-modernbert-candidate-native-summary.json": "512b5abc435fbbf23f183efeb88c79f02a068f5a6e05dbdf1a8944bb06d02676",
+      "writing-v4-modernbert-freeze.json": "ae27d1a250b4269cd85eee0ba192fa9540ff1b0ef86e8ebc1c290c8eda36155f",
+      "writing-v4-modernbert-numerical-review.json": "fd3884b7d223d38519650ae591db7ba2cf573b4e217fc31844be52a13fbad7d3",
+      "writing-v4-modernbert-synthetic-runtime.json": "56bae3a83caabd09297dbec0f77cbb06b223ba29ef63f191d6cff608401d18fe",
+      "writing-v4-publication-metadata-review.json": "287d33ce5fa19f95e036d33d6f47f22dcf92ed2542aa20eb5552d2eada3ecbcc",
+      "writing-word-boundary-transfer-2026-11-12.json": "b30f6addc5aab45792b479d8bf3c5edd434f59737985d4ae78a5538a500b8033",
+      "writing-word-edit-transfer-2026-11-13.json": "86837d924e3c5256f1bd731ffb56fcf0363090df48f3883bce3ac8a9da4367ec",
+      "writing-workplace-email-transfer-2026-11-11.json": "11cfacc354bfc3316c53ebc03fa6cdef60c0f884ac7033cc5f1dd668a8347033"
+    },
+    "admission": {
+      "reserved_by_id": 266,
+      "no_matched_edit": 1,
+      "selected": 40
+    },
+    "shards": {
+      "gemini-2.5-flash": "2c626b0597f6082908a0183b31c48884a45d310fea8bb1a84043ed2432568b30",
+      "gpt-5.4-nano": "9b8873c000ee712f0d1a7bf325cba9ea8245bab5b34b206fbad79968b4af4ea9"
+    }
+  },
+  "runner_sha256": "c673a4036d7d5648d256f74b7b181694be276bb3a05fcff0bf6513f2666c8d5a",
+  "calibration_sha256": "0dcc670ef5c398004b5d820176eabd6060bca549a14a14c86dac166df1e09e2a",
+  "prior_report_geometry_sha256": "a4b6118983c6371c479033949cb2b0739f744119be806c1e1c8c744f00f7305b",
+  "rows": [
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "5662c8c97c5724eb9d113a90404a49dfb440bb07f0967130e6b99d955a8baaf2",
+        "599f2b761675dbda2393551a19903c8bc9accfb75e8512bedde8ef5294b4599b"
+      ],
+      "truth": [
+        {
+          "group": "gates-12783",
+          "family": "ordinary",
+          "later": [
+            140,
+            350
+          ]
+        },
+        {
+          "group": "ddfd6fc758f9bdcdc44ed254df28f9b57d7e6ac8e253ff94cef3f98e420335cf",
+          "family": "gemini-2.5-flash",
+          "later": [
+            517,
+            740
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": "anchored",
+      "ranges": [
+        {
+          "earlier": [
+            140,
+            323
+          ],
+          "later": [
+            140,
+            350
+          ]
+        },
+        {
+          "earlier": [
+            490,
+            704
+          ],
+          "later": [
+            517,
+            740
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.0002772212028503418,
+              "later": 0.0003358125686645508
+            },
+            {
+              "earlier": 0.001770214643329382,
+              "later": 0.006772451102733612
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.00027364492416381836,
+              "later": 0.0002986788749694824
+            },
+            {
+              "earlier": 0.004785996396094561,
+              "later": 0.004420495592057705
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.00020653009414672852,
+              "later": 0.00023347139358520508
+            },
+            {
+              "earlier": 0.008935362100601196,
+              "later": 0.011437452398240566
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.00033593177795410156,
+              "later": 0.00041228532791137695
+            },
+            {
+              "earlier": 0.2288878858089447,
+              "later": 0.3313524127006531
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "191be533a1c27e7ae614c61654f3370397abc98e929c20888342198d3c56e851",
+        "269cb6f40ba83add2c446437c01e7046830ada23ee685de67567ea5481dc6d4b"
+      ],
+      "truth": [
+        {
+          "group": "ddfd6fc758f9bdcdc44ed254df28f9b57d7e6ac8e253ff94cef3f98e420335cf",
+          "family": "gpt-5.4-nano",
+          "later": [
+            80,
+            294
+          ]
+        },
+        {
+          "group": "wellcome-14838",
+          "family": "ordinary",
+          "later": [
+            428,
+            526
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "a35087286efcaa6efaaebef779ac9077d9110c412649fcc35530c682be8b069c",
+        "ad153e1bf6e9bbb4ee006f1374604d236564cbd5d146768476a4cb379a2a8b0d"
+      ],
+      "truth": [
+        {
+          "group": "gates-12797",
+          "family": "ordinary",
+          "later": [
+            152,
+            275
+          ]
+        },
+        {
+          "group": "3564e9e0d1dc3175178dad80b8d7f4496f56aff7b1ad2f62ef081cea2409a819",
+          "family": "gemini-2.5-flash",
+          "later": [
+            518,
+            607
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            152,
+            252
+          ],
+          "later": [
+            152,
+            275
+          ]
+        },
+        {
+          "earlier": [
+            495,
+            584
+          ],
+          "later": [
+            518,
+            607
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.00638049840927124,
+              "later": 0.00832134485244751
+            },
+            {
+              "earlier": 0.0026624060701578856,
+              "later": 0.0018980092136189342
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.05720043182373047,
+              "later": 0.03468596935272217
+            },
+            {
+              "earlier": 0.7017109990119934,
+              "later": 0.6766104698181152
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.0015973448753356934,
+              "later": 0.0020477771759033203
+            },
+            {
+              "earlier": 0.22364842891693115,
+              "later": 0.17097504436969757
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.013811767101287842,
+              "later": 0.03097432851791382
+            },
+            {
+              "earlier": 0.8386971950531006,
+              "later": 0.8254607915878296
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "98c967692a5d2abbdca4b4ca5a72ea283f94c2f0280d24d4b6ab6498d15a57f1",
+        "3b751d09793bea3d3a21c0405702a3149cab962e0b4af2f4edec1645e8440f41"
+      ],
+      "truth": [
+        {
+          "group": "3564e9e0d1dc3175178dad80b8d7f4496f56aff7b1ad2f62ef081cea2409a819",
+          "family": "gpt-5.4-nano",
+          "later": [
+            107,
+            199
+          ]
+        },
+        {
+          "group": "wellcome-15013",
+          "family": "ordinary",
+          "later": [
+            381,
+            514
+          ]
+        }
+      ],
+      "variant": "v2",
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            107,
+            196
+          ],
+          "later": [
+            107,
+            199
+          ]
+        },
+        {
+          "earlier": [
+            378,
+            504
+          ],
+          "later": [
+            381,
+            514
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.0015973448753356934,
+              "later": 0.0031965970993041992
+            },
+            {
+              "earlier": 0.22364842891693115,
+              "later": 0.02505609020590782
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.013811767101287842,
+              "later": 0.018412351608276367
+            },
+            {
+              "earlier": 0.8386971950531006,
+              "later": 0.8618369698524475
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.009084641933441162,
+              "later": 0.0075914859771728516
+            },
+            {
+              "earlier": 0.0018980101449415088,
+              "later": 0.0018238965421915054
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.07363218069076538,
+              "later": 0.04864466190338135
+            },
+            {
+              "earlier": 0.9406659603118896,
+              "later": 0.9698721766471863
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "cea10704598a71faae1ff252892bb23d28c655e0bc3504fd353e0c1285223abf",
+        "c834b8e75e118e60c251c66f0e13a739b789d4eb21becccb5c49713f574c08e5"
+      ],
+      "truth": [
+        {
+          "group": "gates-12808",
+          "family": "ordinary",
+          "later": [
+            64,
+            258
+          ]
+        },
+        {
+          "group": "5e18688b31841628e977eb4e1e07d96d49c097252ff8f064c4e9bd3b90fe0f04",
+          "family": "gemini-2.5-flash",
+          "later": [
+            387,
+            517
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "3cf5225c19b74d005ae71f974d7a6ee925a796750247eb788947d0a73cabd578",
+        "e91a93a415668a8d91a0432819389d0525595c982b97f86a737918632545811a"
+      ],
+      "truth": [
+        {
+          "group": "5e18688b31841628e977eb4e1e07d96d49c097252ff8f064c4e9bd3b90fe0f04",
+          "family": "gpt-5.4-nano",
+          "later": [
+            109,
+            238
+          ]
+        },
+        {
+          "group": "wellcome-15100",
+          "family": "ordinary",
+          "later": [
+            486,
+            631
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            109,
+            240
+          ],
+          "later": [
+            109,
+            238
+          ]
+        },
+        {
+          "earlier": [
+            488,
+            636
+          ],
+          "later": [
+            486,
+            631
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.0003854036331176758,
+              "later": 0.00037479400634765625
+            },
+            {
+              "earlier": 0.0006094550481066108,
+              "later": 0.003733500838279724
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.0010799169540405273,
+              "later": 0.004100382328033447
+            },
+            {
+              "earlier": 0.014065591618418694,
+              "later": 0.14328953623771667
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.002626776695251465,
+              "later": 0.0005645155906677246
+            },
+            {
+              "earlier": 0.0019751284271478653,
+              "later": 0.0024102278985083103
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.015596866607666016,
+              "later": 0.0035114288330078125
+            },
+            {
+              "earlier": 0.9592018723487854,
+              "later": 0.008760389871895313
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "a0b83faf191f8c2f5994e50a1446ca650580da998c97fa1ce57bc93a3dd8b6f5",
+        "31ee41e1d2aee977dcf7c3d40a0b6fc25c6161008d11e2fcce65fa419375ae16"
+      ],
+      "truth": [
+        {
+          "group": "gates-12820",
+          "family": "ordinary",
+          "later": [
+            148,
+            333
+          ]
+        },
+        {
+          "group": "ff0b651c1e40c7438c4ed680560d23e490490047de21e44064dd80049eb2ff46",
+          "family": "gemini-2.5-flash",
+          "later": [
+            461,
+            678
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": "anchored",
+      "ranges": [
+        {
+          "earlier": [
+            148,
+            367
+          ],
+          "later": [
+            148,
+            333
+          ]
+        },
+        {
+          "earlier": [
+            495,
+            711
+          ],
+          "later": [
+            461,
+            678
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.0002945065498352051,
+              "later": 0.0003083944320678711
+            },
+            {
+              "earlier": 0.0007897889008745551,
+              "later": 0.0008219159208238125
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.0010001063346862793,
+              "later": 0.01950526237487793
+            },
+            {
+              "earlier": 0.001524557126685977,
+              "later": 0.026560621336102486
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.00930720567703247,
+              "later": 0.008905589580535889
+            },
+            {
+              "earlier": 0.0013800043379887938,
+              "later": 0.0013800043379887938
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.24310189485549927,
+              "later": 0.4518570899963379
+            },
+            {
+              "earlier": 0.00549942534416914,
+              "later": 0.004599635023623705
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "257469e105311ed8e55ceba943004bf31b24138806fa6decb12c0f0fcc88c3d7",
+        "92035de3010e04a1aaa5cc6a4010e68a40e10f61a1cf01fdefc17a31616dc3d6"
+      ],
+      "truth": [
+        {
+          "group": "ff0b651c1e40c7438c4ed680560d23e490490047de21e44064dd80049eb2ff46",
+          "family": "gpt-5.4-nano",
+          "later": [
+            52,
+            257
+          ]
+        },
+        {
+          "group": "wellcome-15229",
+          "family": "ordinary",
+          "later": [
+            397,
+            600
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            52,
+            268
+          ],
+          "later": [
+            52,
+            257
+          ]
+        },
+        {
+          "earlier": [
+            408,
+            621
+          ],
+          "later": [
+            397,
+            600
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.00930720567703247,
+              "later": 0.005726516246795654
+            },
+            {
+              "earlier": 0.0013800043379887938,
+              "later": 0.0018980092136189342
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.24310189485549927,
+              "later": 0.09000802040100098
+            },
+            {
+              "earlier": 0.00549942534416914,
+              "later": 0.049832768738269806
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.01657259464263916,
+              "later": 0.012794733047485352
+            },
+            {
+              "earlier": 0.0008901410037651658,
+              "later": 0.0007439356995746493
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.010151684284210205,
+              "later": 0.0032219290733337402
+            },
+            {
+              "earlier": 0.0036600169260054827,
+              "later": 0.002316159661859274
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "9dcf9d38531b296cdcac81e48d36d1dcd1f6552fef9ab4fffad7e31af38a7fd6",
+        "d6dac69d9d747cb13f613cc1b6ffb7e47afe2a5ecd9ef2b7de103c652ea68b99"
+      ],
+      "truth": [
+        {
+          "group": "gates-12825",
+          "family": "ordinary",
+          "later": [
+            83,
+            232
+          ]
+        },
+        {
+          "group": "396f1fba12d869449bd53bf6be3643a089d580cf3126ac93734dc58d0c93f1ea",
+          "family": "gemini-2.5-flash",
+          "later": [
+            508,
+            624
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "0200ccfa75fc59a5902b7adc1692ffaf89c0f48d50058b3c0001bb9b30455e93",
+        "39de03e23cf8a4ae1190fa1994508b22e7ed507c6cfe82328565261f6bde469d"
+      ],
+      "truth": [
+        {
+          "group": "396f1fba12d869449bd53bf6be3643a089d580cf3126ac93734dc58d0c93f1ea",
+          "family": "gpt-5.4-nano",
+          "later": [
+            107,
+            221
+          ]
+        },
+        {
+          "group": "blog-04a69d44522bb6af",
+          "family": "ordinary",
+          "later": [
+            662,
+            740
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "3e0ec58a944b0d4db4e6c3ad82cf9e9d0494cdf3a25ad1f66a4bfa03e00a1bec",
+        "f8360dc8f883f82f23900dc11faafb03122a137523525e8bcf83082d1226be5c"
+      ],
+      "truth": [
+        {
+          "group": "gates-12891",
+          "family": "ordinary",
+          "later": [
+            107,
+            180
+          ]
+        },
+        {
+          "group": "5d1c22c5d88e9507d7a8e9476b881f0ae84ab8c2c4d396eac9cccd354a9d8c13",
+          "family": "gemini-2.5-flash",
+          "later": [
+            447,
+            572
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            107,
+            184
+          ],
+          "later": [
+            107,
+            180
+          ]
+        },
+        {
+          "earlier": [
+            451,
+            572
+          ],
+          "later": [
+            447,
+            572
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.00020188093185424805,
+              "later": 0.00019103288650512695
+            },
+            {
+              "earlier": 0.00023869208234827965,
+              "later": 0.00026372616412118077
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.004133820533752441,
+              "later": 0.0025787353515625
+            },
+            {
+              "earlier": 0.016139859333634377,
+              "later": 0.02842712216079235
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.01766836643218994,
+              "later": 0.025847971439361572
+            },
+            {
+              "earlier": 0.0755765289068222,
+              "later": 0.3291458487510681
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.005148947238922119,
+              "later": 0.007282853126525879
+            },
+            {
+              "earlier": 0.9522504210472107,
+              "later": 0.9323737621307373
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "20f7777da219b681a53b322497bd8123b0b56a45e4439770829213ec7e4dc6df",
+        "1bd3226791e01c82c10ddaf66a4abf7963cb8f3c85dd788ee1c8fd707b011124"
+      ],
+      "truth": [
+        {
+          "group": "5d1c22c5d88e9507d7a8e9476b881f0ae84ab8c2c4d396eac9cccd354a9d8c13",
+          "family": "gpt-5.4-nano",
+          "later": [
+            69,
+            190
+          ]
+        },
+        {
+          "group": "blog-0575679df6664607",
+          "family": "ordinary",
+          "later": [
+            385,
+            505
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "962fec6d6e223179b8014829fcdc22ed24eb3eba4c4f93faeb043f0037eec014",
+        "95ab4fb3f3cff42564c88135f040dd5af3d031e7a5ea531851232884764cc0f9"
+      ],
+      "truth": [
+        {
+          "group": "gates-12903",
+          "family": "ordinary",
+          "later": [
+            112,
+            311
+          ]
+        },
+        {
+          "group": "f2547f3c2a11f6db38b6f7e21bf98cdee5f5b814ca9717dbf9c8a6a125a2de04",
+          "family": "gemini-2.5-flash",
+          "later": [
+            446,
+            630
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "b2fe239b6d79b7410bc42617cedb2474a534471746d55508fcc1ac969512d1c6",
+        "dfa96723bdfab806313e6b1861df4bc5637b1b2a9e982402f1ca39d675aa2b35"
+      ],
+      "truth": [
+        {
+          "group": "f2547f3c2a11f6db38b6f7e21bf98cdee5f5b814ca9717dbf9c8a6a125a2de04",
+          "family": "gpt-5.4-nano",
+          "later": [
+            69,
+            255
+          ]
+        },
+        {
+          "group": "blog-0578a0bf6775698d",
+          "family": "ordinary",
+          "later": [
+            535,
+            653
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "7abcdaaf2d7824fe3a2c375d1334463f1f9805a297045e5c4db8a71c65acea8c",
+        "48f54fa1e5b50cf916dfb06a49fb31e931908f84328b38676272ff009593d39c"
+      ],
+      "truth": [
+        {
+          "group": "gates-12957",
+          "family": "ordinary",
+          "later": [
+            13,
+            211
+          ]
+        },
+        {
+          "group": "33d79ab2dd18e09009e27ff4687076bff3f76101bd85bb946b76e27887eee5e2",
+          "family": "gemini-2.5-flash",
+          "later": [
+            599,
+            698
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            13,
+            191
+          ],
+          "later": [
+            13,
+            211
+          ]
+        },
+        {
+          "earlier": [
+            579,
+            688
+          ],
+          "later": [
+            599,
+            698
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.0006835460662841797,
+              "later": 0.0004965066909790039
+            },
+            {
+              "earlier": 0.00026372616412118077,
+              "later": 0.00038524705450981855
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.001885056495666504,
+              "later": 0.005210757255554199
+            },
+            {
+              "earlier": 0.30697351694107056,
+              "later": 0.001718109124340117
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.00032639503479003906,
+              "later": 0.0004845857620239258
+            },
+            {
+              "earlier": 0.0029702894389629364,
+              "later": 0.0029999813996255398
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.003950297832489014,
+              "later": 0.006141006946563721
+            },
+            {
+              "earlier": 0.8653621673583984,
+              "later": 0.8397067785263062
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "6d20171989d67f7d9b76b9c9f0d1a3df734992c0d9cd09486e06c411c2c6d880",
+        "f87f637d42f665117b571dc77d7289336e710c4e668c2f9e1b82be25eda7e51d"
+      ],
+      "truth": [
+        {
+          "group": "33d79ab2dd18e09009e27ff4687076bff3f76101bd85bb946b76e27887eee5e2",
+          "family": "gpt-5.4-nano",
+          "later": [
+            117,
+            216
+          ]
+        },
+        {
+          "group": "blog-062b86202af2a108",
+          "family": "ordinary",
+          "later": [
+            570,
+            809
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "6d98dda5cc533068c0d768eb5d9b275656343147c203f25eb156e7cccf30a161",
+        "6b05c9f02d2070831312757a7fe0a1a9bfbe410e6c19438f3d613c088b009dd4"
+      ],
+      "truth": [
+        {
+          "group": "gates-12958",
+          "family": "ordinary",
+          "later": [
+            253,
+            576
+          ]
+        },
+        {
+          "group": "d5ccaa405e19f489e08c6f0ce21e2936eadc7fee25136398234fa3a4794a90b3",
+          "family": "gemini-2.5-flash",
+          "later": [
+            933,
+            1164
+          ]
+        }
+      ],
+      "variant": "v2",
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            253,
+            574
+          ],
+          "later": [
+            253,
+            576
+          ]
+        },
+        {
+          "earlier": [
+            931,
+            1137
+          ],
+          "later": [
+            933,
+            1164
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.09172934293746948,
+              "later": 0.044917166233062744
+            },
+            {
+              "earlier": 0.9938666224479675,
+              "later": 0.9918256998062134
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.014740824699401855,
+              "later": 0.009498000144958496
+            },
+            {
+              "earlier": 0.9950692653656006,
+              "later": 0.9883347749710083
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.00016355514526367188,
+              "later": 0.00020748376846313477
+            },
+            {
+              "earlier": 0.002940892241895199,
+              "later": 0.009575458243489265
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.00032830238342285156,
+              "later": 0.004353225231170654
+            },
+            {
+              "earlier": 0.5096632242202759,
+              "later": 0.9966198205947876
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "2977f1196fd422ae95b28bd4132f19bb4a0dbb4439ab1304e27458e5763c8e42",
+        "c0534f4c9ecaf9f1ab7fe7898f75501701d6d2b1fe47b32f7efb6bca5cf50e69"
+      ],
+      "truth": [
+        {
+          "group": "d5ccaa405e19f489e08c6f0ce21e2936eadc7fee25136398234fa3a4794a90b3",
+          "family": "gpt-5.4-nano",
+          "later": [
+            230,
+            419
+          ]
+        },
+        {
+          "group": "blog-07f64291ad7bacbf",
+          "family": "ordinary",
+          "later": [
+            620,
+            745
+          ]
+        }
+      ],
+      "variant": "v2",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "28669dfbbde8d933f8807b040ba7861223a4c3138b16016ba6549816ad20f1ad",
+        "0ea1c04cd00a6b73e65a0d6883eb6c42c1d0148e0858907baa87602ce5022e9e"
+      ],
+      "truth": [
+        {
+          "group": "gates-12998",
+          "family": "ordinary",
+          "later": [
+            207,
+            358
+          ]
+        },
+        {
+          "group": "6a8cee52c04c653418b241eb664a7e0ff2c0cc169de125d291e6f4045710a8ed",
+          "family": "gemini-2.5-flash",
+          "later": [
+            734,
+            855
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            207,
+            358
+          ],
+          "later": [
+            207,
+            358
+          ]
+        },
+        {
+          "earlier": [
+            734,
+            857
+          ],
+          "later": [
+            734,
+            855
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.009293973445892334,
+              "later": 0.005270242691040039
+            },
+            {
+              "earlier": 0.9984754920005798,
+              "later": 0.9983489513397217
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.31057941913604736,
+              "later": 0.11149203777313232
+            },
+            {
+              "earlier": 0.980366051197052,
+              "later": 0.9774894118309021
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.0006447434425354004,
+              "later": 0.0006435513496398926
+            },
+            {
+              "earlier": 0.030716322362422943,
+              "later": 0.034487947821617126
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.001993715763092041,
+              "later": 0.0040397047996521
+            },
+            {
+              "earlier": 0.9677633047103882,
+              "later": 0.9616652727127075
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "e9d973b8022fed8873e4622e9ace20383fd4df057d1829aeeab178d7bff326b1",
+        "b0f26add89e67b098789a8f48c3ba10817fcd6f008ccab9c9b0ce13e2c04e5e7"
+      ],
+      "truth": [
+        {
+          "group": "6a8cee52c04c653418b241eb664a7e0ff2c0cc169de125d291e6f4045710a8ed",
+          "family": "gpt-5.4-nano",
+          "later": [
+            173,
+            306
+          ]
+        },
+        {
+          "group": "blog-08419d3e08b1594e",
+          "family": "ordinary",
+          "later": [
+            623,
+            727
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "3f5facf0930859bdced37ba86ba41bca0c064a5cddd0dcb8f572dfac2a5c6db9",
+        "3d69915476c76f7a90419b16c1d4e56616fa1a7f1316d58f977972e52ce4cf7f"
+      ],
+      "truth": [
+        {
+          "group": "gates-13029",
+          "family": "ordinary",
+          "later": [
+            175,
+            336
+          ]
+        },
+        {
+          "group": "8dbdbc183f8e24706af05ef1b6b8163c1ae2c0f687a54d836a8b608fff800013",
+          "family": "gemini-2.5-flash",
+          "later": [
+            591,
+            730
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            175,
+            336
+          ],
+          "later": [
+            175,
+            336
+          ]
+        },
+        {
+          "earlier": [
+            591,
+            739
+          ],
+          "later": [
+            591,
+            730
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.02432781457901001,
+              "later": 0.007703125476837158
+            },
+            {
+              "earlier": 0.0008384662796743214,
+              "later": 0.0008553491206839681
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.579461932182312,
+              "later": 0.3134775757789612
+            },
+            {
+              "earlier": 0.9913257956504822,
+              "later": 0.9896373152732849
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.0002537369728088379,
+              "later": 0.00027626752853393555
+            },
+            {
+              "earlier": 0.047297991812229156,
+              "later": 0.11970372498035431
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.00046813488006591797,
+              "later": 0.0005380511283874512
+            },
+            {
+              "earlier": 0.9531495571136475,
+              "later": 0.9729185700416565
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "90f4e3f4ab7cfd9da22a3bb3c6755553ce2e8d59d9dd185b658881c81d5da05d",
+        "478ed0237823adb1327f32edf4d24187a8616ee086cf228515ec2d2d0fe09f61"
+      ],
+      "truth": [
+        {
+          "group": "8dbdbc183f8e24706af05ef1b6b8163c1ae2c0f687a54d836a8b608fff800013",
+          "family": "gpt-5.4-nano",
+          "later": [
+            65,
+            207
+          ]
+        },
+        {
+          "group": "blog-12323f6f96fc7125",
+          "family": "ordinary",
+          "later": [
+            352,
+            420
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "2996e0d20345d0f01d70a5df14679d1476b43f4c92e6cef65499a4c0e6c48640",
+        "2061cd82f87dacf8a5f29b9119a650f20313aad3d1fdcf5e098fb4dd949dd89b"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-11386",
+          "family": "ordinary",
+          "later": [
+            123,
+            364
+          ]
+        },
+        {
+          "group": "8e5baa1e248383fd7f9d49d4d25d8f0ff50d8f1ec0e857bb62ad5a0c60416293",
+          "family": "gemini-2.5-flash",
+          "later": [
+            656,
+            741
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "f2fb1ae87b8580b68c678fcad863c472dc94bc9b74d83e377771b2789d120e88",
+        "9418a7b19c05646150f45d584c3dcc2446789a62fb9245bb94cddbc3e99a3660"
+      ],
+      "truth": [
+        {
+          "group": "8e5baa1e248383fd7f9d49d4d25d8f0ff50d8f1ec0e857bb62ad5a0c60416293",
+          "family": "gpt-5.4-nano",
+          "later": [
+            108,
+            193
+          ]
+        },
+        {
+          "group": "blog-1c353ae23a890b86",
+          "family": "ordinary",
+          "later": [
+            411,
+            537
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "28155ca6ec0ec8161357a6d0ed0f9d940675674aa36310832eb2106938034096",
+        "1dd6f438c437269ed760c06486c956e4655b50bc9fd1ff9000c2985105df1cd0"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-12429",
+          "family": "ordinary",
+          "later": [
+            102,
+            235
+          ]
+        },
+        {
+          "group": "0ee100f9da91063adc383e168a6cb0877dac80f65c750c7e53672763b669e8d7",
+          "family": "gemini-2.5-flash",
+          "later": [
+            525,
+            601
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            102,
+            235
+          ],
+          "later": [
+            102,
+            235
+          ]
+        },
+        {
+          "earlier": [
+            525,
+            595
+          ],
+          "later": [
+            525,
+            601
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.0012912750244140625,
+              "later": 0.001217663288116455
+            },
+            {
+              "earlier": 0.0012742819963023067,
+              "later": 0.0013260917039588094
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.005851387977600098,
+              "later": 0.006127595901489258
+            },
+            {
+              "earlier": 0.5782265067100525,
+              "later": 0.7452976107597351
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.0011827349662780762,
+              "later": 0.0025634169578552246
+            },
+            {
+              "earlier": 0.00344809889793396,
+              "later": 0.0022705085575580597
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.6160739064216614,
+              "later": 0.802794873714447
+            },
+            {
+              "earlier": 0.17634320259094238,
+              "later": 0.3019561171531677
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "f6544c7be9b4830a4ae81590e0587eac647e429f068a20eb01e5291620e3776e",
+        "58da0394227265cc6237c230b822bfe95947c24a9b7875d05da490f4c1b48110"
+      ],
+      "truth": [
+        {
+          "group": "0ee100f9da91063adc383e168a6cb0877dac80f65c750c7e53672763b669e8d7",
+          "family": "gpt-5.4-nano",
+          "later": [
+            84,
+            154
+          ]
+        },
+        {
+          "group": "blog-22b7f1074d0f57d1",
+          "family": "ordinary",
+          "later": [
+            592,
+            673
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "4bd078be5910e329e4ee3ace36a0cceaf6df500401f2e92d8710300c8c1401fe",
+        "c97bfa36746161cf5a87fd82e30464f9d5b57e09b1d4e9e7457ba446b3276904"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-13531",
+          "family": "ordinary",
+          "later": [
+            245,
+            461
+          ]
+        },
+        {
+          "group": "1351963e8a95c81516a51ea4811097c049e636beb999288f231640797ed460ec",
+          "family": "gemini-2.5-flash",
+          "later": [
+            685,
+            874
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "800352399c7474e4a350425079fdd210d75ad1975a8d033a73cdd54c3dfe5df9",
+        "790f3d11dd765e17b26726c0a9cc301ff2dc2fb1f2774acb2c67f0f85aa7c277"
+      ],
+      "truth": [
+        {
+          "group": "1351963e8a95c81516a51ea4811097c049e636beb999288f231640797ed460ec",
+          "family": "gpt-5.4-nano",
+          "later": [
+            96,
+            300
+          ]
+        },
+        {
+          "group": "blog-26fed517b34cbba4",
+          "family": "ordinary",
+          "later": [
+            596,
+            768
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "3aaa92e7f455d7f7c1b576960098166b0e93a0fe1ef61babcd06cb6dd8aae1c0",
+        "6d1ab2d751435b296514d4e8007d3f988b768c9fafd3e1bd7d26c9ec28ff8443"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14700",
+          "family": "ordinary",
+          "later": [
+            103,
+            211
+          ]
+        },
+        {
+          "group": "cf03bdc006e0a69ba9638835b7b053f644d2ba5d666d9001472208f6f8421953",
+          "family": "gemini-2.5-flash",
+          "later": [
+            417,
+            574
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": "anchored",
+      "ranges": [
+        {
+          "earlier": [
+            103,
+            261
+          ],
+          "later": [
+            103,
+            211
+          ]
+        },
+        {
+          "earlier": [
+            467,
+            632
+          ],
+          "later": [
+            417,
+            574
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.024531126022338867,
+              "later": 0.08839273452758789
+            },
+            {
+              "earlier": 0.0012003342853859067,
+              "later": 0.0012003342853859067
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.2664905786514282,
+              "later": 0.6159337759017944
+            },
+            {
+              "earlier": 0.025548139587044716,
+              "later": 0.1176171526312828
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.06884521245956421,
+              "later": 0.11043363809585571
+            },
+            {
+              "earlier": 0.004833748564124107,
+              "later": 0.007116370368748903
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.006575107574462891,
+              "later": 0.0049704909324646
+            },
+            {
+              "earlier": 0.07317293435335159,
+              "later": 0.12208928167819977
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "0cf9d2e0ab5ab41392ce0eceacf65c725290b2ffcd5932994ef3616510e2a4d3",
+        "53dc944f292c2c948b437397417cd9854cad10069514995bdbbe83a14cd5afa3"
+      ],
+      "truth": [
+        {
+          "group": "cf03bdc006e0a69ba9638835b7b053f644d2ba5d666d9001472208f6f8421953",
+          "family": "gpt-5.4-nano",
+          "later": [
+            68,
+            226
+          ]
+        },
+        {
+          "group": "blog-289bbac352d06ffa",
+          "family": "ordinary",
+          "later": [
+            537,
+            637
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "c12d115081d1a80fcdb2532d78c70eb91dbb41542a857781d0c2b0ff4f59bfc7",
+        "f1a8e94b0a8b9d58cf980c6cd00f539f3fb9bfca6d09c461e9a5d0125e683ff3"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14765",
+          "family": "ordinary",
+          "later": [
+            147,
+            347
+          ]
+        },
+        {
+          "group": "c0edc51a92a0c0fcf4fd725157c40c7ced9ebbea913f4c51cafd03961390701f",
+          "family": "gemini-2.5-flash",
+          "later": [
+            682,
+            871
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "49e941e8efa3c47cc2eb43205dfaceefce65e6061fe5632e97d759b5763cf0b5",
+        "4d761b3758f8aa47381937a107d1c5c8f79347c9db490768b10fe9946d4b07b1"
+      ],
+      "truth": [
+        {
+          "group": "c0edc51a92a0c0fcf4fd725157c40c7ced9ebbea913f4c51cafd03961390701f",
+          "family": "gpt-5.4-nano",
+          "later": [
+            171,
+            365
+          ]
+        },
+        {
+          "group": "blog-2ef42ff27c384743",
+          "family": "ordinary",
+          "later": [
+            672,
+            849
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "285ffc169f6393aed03a719157fff8cfaf35f4e1aebe9a75c16c2c2db9ca9722",
+        "f25b97c2167f799564e8e1bdd9a37f929f3babcc070c7ae2cb2438fbf75145eb"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14770",
+          "family": "ordinary",
+          "later": [
+            268,
+            388
+          ]
+        },
+        {
+          "group": "0a4e8cb32917cafc611a70e833dd01e19aced4e1072f729a2400d9045713a907",
+          "family": "gemini-2.5-flash",
+          "later": [
+            517,
+            579
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "a0cd6131e305cfb060bfcc04cc0b63151fa23d4fa994ad12d4d3cc72847e03ed",
+        "e7912a04e37341cb9d71cf4c2a4ad3e2370753ee8fca09d458383d2b09cee448"
+      ],
+      "truth": [
+        {
+          "group": "0a4e8cb32917cafc611a70e833dd01e19aced4e1072f729a2400d9045713a907",
+          "family": "gpt-5.4-nano",
+          "later": [
+            83,
+            153
+          ]
+        },
+        {
+          "group": "blog-32cb9f1c53754254",
+          "family": "ordinary",
+          "later": [
+            393,
+            473
+          ]
+        }
+      ],
+      "variant": "v2",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "2efe8a5a1d887fb9549732fa365c8bb6d2976d2744ad1c68f12d72ae0c5cc881",
+        "ffbb30b72041ddb5174d303121d73c3aebbfb67426972742878dc8fe41fb2421"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14838",
+          "family": "ordinary",
+          "later": [
+            68,
+            166
+          ]
+        },
+        {
+          "group": "366c6afc55ac5099e72545c30c25c1c07c7645f2e19e193ac15c13cc858c0cd6",
+          "family": "gemini-2.5-flash",
+          "later": [
+            442,
+            680
+          ]
+        }
+      ],
+      "variant": "v4",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "60896375fca117db32f970219f356286c4724842af2154115c76eb652797549e",
+        "982fef57109179173a2a5868a238132e5dea0bceb9cbdccaa55fd24258f3336e"
+      ],
+      "truth": [
+        {
+          "group": "366c6afc55ac5099e72545c30c25c1c07c7645f2e19e193ac15c13cc858c0cd6",
+          "family": "gpt-5.4-nano",
+          "later": [
+            149,
+            372
+          ]
+        },
+        {
+          "group": "blog-343cfeb9ce95ae6c",
+          "family": "ordinary",
+          "later": [
+            766,
+            917
+          ]
+        }
+      ],
+      "variant": "v4",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "8be99bc73e06459307628f926ce0fc41a305f072ef809b2bdb81219529e12c4b",
+        "188315cdc197d7e4617ad94681fe3e9a58791c8a2b3267d9819a4139144b677a"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-15013",
+          "family": "ordinary",
+          "later": [
+            56,
+            189
+          ]
+        },
+        {
+          "group": "ebfae316d80a19c52a0995a42724f245c9a3881e1b7071b1c2fae96997656a9c",
+          "family": "gemini-2.5-flash",
+          "later": [
+            429,
+            611
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            56,
+            182
+          ],
+          "later": [
+            56,
+            189
+          ]
+        },
+        {
+          "earlier": [
+            422,
+            598
+          ],
+          "later": [
+            429,
+            611
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.009084641933441162,
+              "later": 0.0075914859771728516
+            },
+            {
+              "earlier": 0.0018980101449415088,
+              "later": 0.0018238965421915054
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.07363218069076538,
+              "later": 0.04864466190338135
+            },
+            {
+              "earlier": 0.9406659603118896,
+              "later": 0.9698721766471863
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.4795446991920471,
+              "later": 0.8712456822395325
+            },
+            {
+              "earlier": 0.9878656268119812,
+              "later": 0.9941633343696594
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.21141839027404785,
+              "later": 0.9702600836753845
+            },
+            {
+              "earlier": 0.8899286389350891,
+              "later": 0.9383992552757263
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "b7e3ee1b8bad46c2c9f21fdacaba5a8bf02d985c7c5161f23665857978628c6d",
+        "a08c77aa142e8512b5d0d2672cf82c53616538f70731e8dbdcc28df7561a375e"
+      ],
+      "truth": [
+        {
+          "group": "ebfae316d80a19c52a0995a42724f245c9a3881e1b7071b1c2fae96997656a9c",
+          "family": "gpt-5.4-nano",
+          "later": [
+            147,
+            328
+          ]
+        },
+        {
+          "group": "blog-35a4cc3251f64ea3",
+          "family": "ordinary",
+          "later": [
+            602,
+            717
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "5311891a19fcd26a071bc956d20f95b34f1e9db392ab5cb09cff07856747a898",
+        "857fcfd592845f440ed37ede70f5e51fdd45725b453ab18f76d1fa782eec0904"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-15100",
+          "family": "ordinary",
+          "later": [
+            132,
+            277
+          ]
+        },
+        {
+          "group": "8c8269398cf3a6d4937f7d43c96f3338c716f2441132961c0d078d39ae856473",
+          "family": "gemini-2.5-flash",
+          "later": [
+            518,
+            724
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            132,
+            280
+          ],
+          "later": [
+            132,
+            277
+          ]
+        },
+        {
+          "earlier": [
+            521,
+            715
+          ],
+          "later": [
+            518,
+            724
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.002626776695251465,
+              "later": 0.0005645155906677246
+            },
+            {
+              "earlier": 0.0019751284271478653,
+              "later": 0.0024102278985083103
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.015596866607666016,
+              "later": 0.0035114288330078125
+            },
+            {
+              "earlier": 0.9592018723487854,
+              "later": 0.008760389871895313
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.0017814040184020996,
+              "later": 0.0017604827880859375
+            },
+            {
+              "earlier": 0.011214044876396656,
+              "later": 0.01944279856979847
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.0029654502868652344,
+              "later": 0.002725064754486084
+            },
+            {
+              "earlier": 0.9754266738891602,
+              "later": 0.9636375904083252
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "2e2858c984a06d7b995df2c6d78d2cb345d4ae97bcc2c142fe6b36a635337348",
+        "518f8d92f690943f668ebbf5a8d16743c033f248be1c3bd9b10bcd47b66c9337"
+      ],
+      "truth": [
+        {
+          "group": "8c8269398cf3a6d4937f7d43c96f3338c716f2441132961c0d078d39ae856473",
+          "family": "gpt-5.4-nano",
+          "later": [
+            141,
+            334
+          ]
+        },
+        {
+          "group": "blog-403c4f16ac7094f0",
+          "family": "ordinary",
+          "later": [
+            640,
+            756
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "c2e47384d14c7a5022238e1c2af5c966b136e770f36fa7fbfdf27834b4571d5f",
+        "d42a57e66231121e8363d928386ac80adf76d39c920a238accda433693756bf6"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-15229",
+          "family": "ordinary",
+          "later": [
+            27,
+            230
+          ]
+        },
+        {
+          "group": "9b8389db46185a0c35452ef7524384f9041140c8b04198fcc1f6d5df483a917a",
+          "family": "gemini-2.5-flash",
+          "later": [
+            399,
+            504
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            27,
+            240
+          ],
+          "later": [
+            27,
+            230
+          ]
+        },
+        {
+          "earlier": [
+            409,
+            508
+          ],
+          "later": [
+            399,
+            504
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.01657259464263916,
+              "later": 0.012794733047485352
+            },
+            {
+              "earlier": 0.0008901410037651658,
+              "later": 0.0007439356995746493
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.010151684284210205,
+              "later": 0.0032219290733337402
+            },
+            {
+              "earlier": 0.0036600169260054827,
+              "later": 0.002316159661859274
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.00022238492965698242,
+              "later": 0.00025659799575805664
+            },
+            {
+              "earlier": 0.0026624060701578856,
+              "later": 0.0021818827372044325
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.002531886100769043,
+              "later": 0.0048482418060302734
+            },
+            {
+              "earlier": 0.025548139587044716,
+              "later": 0.02081981487572193
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "42f49f64076d1f90598fc44e43f9e702eb297fd2471237f3659cc5ac7dce26fd",
+        "574df7957ccb6c921174ec7ae2de12eb870d71842d5971ec9df8367d2c44cf46"
+      ],
+      "truth": [
+        {
+          "group": "9b8389db46185a0c35452ef7524384f9041140c8b04198fcc1f6d5df483a917a",
+          "family": "gpt-5.4-nano",
+          "later": [
+            85,
+            190
+          ]
+        },
+        {
+          "group": "blog-4192bcfb33fd5e73",
+          "family": "ordinary",
+          "later": [
+            401,
+            640
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "6fd679c698a214bdf2cd8ee632cbca5e6e83aa11a6b2e569e0464367c70546ec",
+        "349cb7621424b7dc76295fe2a27877b981b6576ee2f5ba6d919667b50efe9894"
+      ],
+      "truth": [
+        {
+          "group": "blog-04a69d44522bb6af",
+          "family": "ordinary",
+          "later": [
+            136,
+            214
+          ]
+        },
+        {
+          "group": "bc6055a4169dd27a45efdc8634902ae5ee11ea38548dda33b5116a1d082e1897",
+          "family": "gemini-2.5-flash",
+          "later": [
+            572,
+            720
+          ]
+        }
+      ],
+      "variant": "v2",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "70fe11d6911c2c94671d0f998d2e81c96c5e642cb58439a95096be629c983216",
+        "0d5a2ad0973f214926931da4b0ff95ef8478353aef7c3fb00fc44ed0b11a09de"
+      ],
+      "truth": [
+        {
+          "group": "bc6055a4169dd27a45efdc8634902ae5ee11ea38548dda33b5116a1d082e1897",
+          "family": "gpt-5.4-nano",
+          "later": [
+            194,
+            327
+          ]
+        },
+        {
+          "group": "blog-45d7537f260951ab",
+          "family": "ordinary",
+          "later": [
+            576,
+            678
+          ]
+        }
+      ],
+      "variant": "v2",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "72cd781d4cced96e7ce4651731fefef407778bfc3d7a5f0f934f1a07f13c0890",
+        "108098ac84d60c38c48501a4e047d87206f249d41747c68b84945ddd44bab64f"
+      ],
+      "truth": [
+        {
+          "group": "blog-0575679df6664607",
+          "family": "ordinary",
+          "later": [
+            77,
+            197
+          ]
+        },
+        {
+          "group": "adfca5fd2ded71ce1b9c9a0540940daf61562811fe0995f843dbe2461a93a3df",
+          "family": "gemini-2.5-flash",
+          "later": [
+            440,
+            609
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "3fea6b80d5029b34b0eb11eda649186290b97a86c43d7a0f8fd4c6f15e2b2bc9",
+        "9b2d667e4dbf26c60a1c72d8f4f35cd5e991804d1bc85ccec72670c1468926e7"
+      ],
+      "truth": [
+        {
+          "group": "adfca5fd2ded71ce1b9c9a0540940daf61562811fe0995f843dbe2461a93a3df",
+          "family": "gpt-5.4-nano",
+          "later": [
+            150,
+            315
+          ]
+        },
+        {
+          "group": "blog-4e84fe6264df3f07",
+          "family": "ordinary",
+          "later": [
+            655,
+            834
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "53dc5a724c64e23a8ef2889b593731bb82fe3d04ff81c4cf7ca0fb91c30f6a1e",
+        "353a25087cbd36ccb2029d37c56487c9b8600d2ed416d080256cac69e40ca7e4"
+      ],
+      "truth": [
+        {
+          "group": "blog-0578a0bf6775698d",
+          "family": "ordinary",
+          "later": [
+            135,
+            253
+          ]
+        },
+        {
+          "group": "df925f9bc04c42648e33133c2d5eff75833f5f86537f460f20c95d444dc23c83",
+          "family": "gemini-2.5-flash",
+          "later": [
+            573,
+            640
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "d1cd656d3ee8e7928dac02eff3b8421d68f39b9d002834307945bb0fa0c5d5ad",
+        "ac6ca8371223aaf47bf93dc134d6918d4c5c1fe34980ca3b085b2ed879375221"
+      ],
+      "truth": [
+        {
+          "group": "df925f9bc04c42648e33133c2d5eff75833f5f86537f460f20c95d444dc23c83",
+          "family": "gpt-5.4-nano",
+          "later": [
+            118,
+            175
+          ]
+        },
+        {
+          "group": "blog-501302cbc3905297",
+          "family": "ordinary",
+          "later": [
+            386,
+            499
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "fac4eb7e01902e517734494a3437f1ad5862560ef47e85929a399a621149821e",
+        "72aa3c060b9330614eb26d7f9aa42f566e33654a48890dfe96f2165efd650bdc"
+      ],
+      "truth": [
+        {
+          "group": "blog-062b86202af2a108",
+          "family": "ordinary",
+          "later": [
+            74,
+            313
+          ]
+        },
+        {
+          "group": "256d53fdb78ee4c6ed853d8d0c89de364127b42f39ae9002303df7ad8ed080f3",
+          "family": "gemini-2.5-flash",
+          "later": [
+            692,
+            776
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "3dfedef732fe083f02d8f00267f064abd722d39c15478cb702d56c6359b42f4d",
+        "75ee708afa566f6e6ccfc01b0cad5548100d8d777d523606e0d62871ba9ed524"
+      ],
+      "truth": [
+        {
+          "group": "256d53fdb78ee4c6ed853d8d0c89de364127b42f39ae9002303df7ad8ed080f3",
+          "family": "gpt-5.4-nano",
+          "later": [
+            300,
+            381
+          ]
+        },
+        {
+          "group": "blog-511f685ac6c46668",
+          "family": "ordinary",
+          "later": [
+            726,
+            873
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "1250b098ba34eb48ae7c78d33c0250b705ab24c18681446c19aef13bd144234c",
+        "e9f32c1b3791e4348b4e28c3c15c80f9099c58c0e05fc51d0b2ade81c75677e6"
+      ],
+      "truth": [
+        {
+          "group": "blog-07f64291ad7bacbf",
+          "family": "ordinary",
+          "later": [
+            32,
+            157
+          ]
+        },
+        {
+          "group": "665e8706e5f8c55a8e99e9d34db2b9c0981d1e959dd378fca08dab60b04b4754",
+          "family": "gemini-2.5-flash",
+          "later": [
+            379,
+            515
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "fdc1d37e666b84b162ac3a75d10ef1193938ac95f63182afe164898f67efc365",
+        "befc11846be7bbff69a827bc051f7095d44d66ac8b9af168416b2f9ba25dd713"
+      ],
+      "truth": [
+        {
+          "group": "665e8706e5f8c55a8e99e9d34db2b9c0981d1e959dd378fca08dab60b04b4754",
+          "family": "gpt-5.4-nano",
+          "later": [
+            108,
+            262
+          ]
+        },
+        {
+          "group": "blog-5a9b9892bf9ab76b",
+          "family": "ordinary",
+          "later": [
+            474,
+            567
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "85ac98b99e8be95f83f26832135ec03e5c27c4fde48c2d18bad203f5f5c71b48",
+        "db4996b9b503f48b6a02ad65526ef5215840e89da9da65e23c9746c5feff4da8"
+      ],
+      "truth": [
+        {
+          "group": "blog-08419d3e08b1594e",
+          "family": "ordinary",
+          "later": [
+            108,
+            212
+          ]
+        },
+        {
+          "group": "0581f13465321d1fc3fa83a10ebfca547841e86e5e86a2ba27512f2730bfbfa5",
+          "family": "gemini-2.5-flash",
+          "later": [
+            469,
+            693
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "bd9241f2d33a05d3e2e6c7432ac09a6b1a916b88897c6ac1c88914128dac9eab",
+        "0766c78ae5b60a41b80838356093719d819e30341e12a6e54cf6436877678afc"
+      ],
+      "truth": [
+        {
+          "group": "0581f13465321d1fc3fa83a10ebfca547841e86e5e86a2ba27512f2730bfbfa5",
+          "family": "gpt-5.4-nano",
+          "later": [
+            58,
+            312
+          ]
+        },
+        {
+          "group": "blog-5df93bb0a9e9bb06",
+          "family": "ordinary",
+          "later": [
+            494,
+            598
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "701621e812ffb0cc8e06120d48fddb08c743c7d8e0921baa32dcee7f99e0adb7",
+        "5708c435f097debddf1e0d8235117a429580e2286ea98fd95e3d145f92107db7"
+      ],
+      "truth": [
+        {
+          "group": "blog-12323f6f96fc7125",
+          "family": "ordinary",
+          "later": [
+            46,
+            114
+          ]
+        },
+        {
+          "group": "e3586896d2ea1011ecfb723af71d6e9daa17fc627e073a3b56d14768be794bb6",
+          "family": "gemini-2.5-flash",
+          "later": [
+            424,
+            579
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "7091a6038477e09f8b9aa54d687258ec4f01afed9db08f025367c3534e9e1208",
+        "e48f79abc1270fe371d9a22e071d35a29c19ef108467567fd08717820696c2c8"
+      ],
+      "truth": [
+        {
+          "group": "e3586896d2ea1011ecfb723af71d6e9daa17fc627e073a3b56d14768be794bb6",
+          "family": "gpt-5.4-nano",
+          "later": [
+            191,
+            345
+          ]
+        },
+        {
+          "group": "blog-6b65b01af7536341",
+          "family": "ordinary",
+          "later": [
+            613,
+            774
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "1c526f9af2c33437fafdf8426a07f9d8ca850df38c1efe9d18f2b23f817c469b",
+        "22e4eaf8d587951b5c05648fc087c820cdc44739b906c192d20db28dfb4de63b"
+      ],
+      "truth": [
+        {
+          "group": "blog-1c353ae23a890b86",
+          "family": "ordinary",
+          "later": [
+            79,
+            205
+          ]
+        },
+        {
+          "group": "17867d661cfcbb524eccbf13caf1e3ed45438fd24705ccbf8781788f0ca20f8c",
+          "family": "gemini-2.5-flash",
+          "later": [
+            420,
+            563
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "22dbcc307577ee8b9e2d7562637529ba01120eb3b1e07a7a09c2e18274f2991f",
+        "532df920f40ccae0b82fc5b0648dc2bd5ba5e3a63e220b2bda9f580a86cee63b"
+      ],
+      "truth": [
+        {
+          "group": "17867d661cfcbb524eccbf13caf1e3ed45438fd24705ccbf8781788f0ca20f8c",
+          "family": "gpt-5.4-nano",
+          "later": [
+            86,
+            229
+          ]
+        },
+        {
+          "group": "blog-7988c024801f182f",
+          "family": "ordinary",
+          "later": [
+            503,
+            613
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "42d10992b9ef6663ba20c3f20c4c2f74160ffd97b6baf022c851a51129f18b3e",
+        "01625d3f81b8524cc178d4b6e82dbf8bbd6770af1f2f460384216f06f4602bab"
+      ],
+      "truth": [
+        {
+          "group": "blog-22b7f1074d0f57d1",
+          "family": "ordinary",
+          "later": [
+            242,
+            323
+          ]
+        },
+        {
+          "group": "9f56c526339d7fc93303fdaec3bca72d3941d92d2546adfc0a932188061b5788",
+          "family": "gemini-2.5-flash",
+          "later": [
+            578,
+            693
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "0dd9ba37ef62a1e647d7faff830a45fce1cf07037bd01d019d775cbe4722b440",
+        "a57b334feac67d52527b74073d04603b2ab490fc8c1e4ab98f37df7f58527bee"
+      ],
+      "truth": [
+        {
+          "group": "9f56c526339d7fc93303fdaec3bca72d3941d92d2546adfc0a932188061b5788",
+          "family": "gpt-5.4-nano",
+          "later": [
+            84,
+            202
+          ]
+        },
+        {
+          "group": "blog-90be1152316ad39b",
+          "family": "ordinary",
+          "later": [
+            421,
+            599
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "a3fe6a3c94d8ae64d38265b5d33c9c32e1baf6628a73a1d14a1a6394d3267234",
+        "1a4c5787d81068a21ab194ba4ecaed45c847deac713783e5d272773b62c21f9e"
+      ],
+      "truth": [
+        {
+          "group": "blog-26fed517b34cbba4",
+          "family": "ordinary",
+          "later": [
+            228,
+            400
+          ]
+        },
+        {
+          "group": "46fd6e0421b22b83622aef100aea16842a1a74b9282293a66963e3abf71891da",
+          "family": "gemini-2.5-flash",
+          "later": [
+            558,
+            681
+          ]
+        }
+      ],
+      "variant": "v4",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "04ba1bb1923f8ef634f5072360021aa043ac5a898a5b52e3e751460a329ff05b",
+        "39723e8e2fcac20fd83ca07f156d41cf2c946b4452aadfb11837fed62a8bb12c"
+      ],
+      "truth": [
+        {
+          "group": "46fd6e0421b22b83622aef100aea16842a1a74b9282293a66963e3abf71891da",
+          "family": "gpt-5.4-nano",
+          "later": [
+            70,
+            208
+          ]
+        },
+        {
+          "group": "blog-98a84cb5f76e3de4",
+          "family": "ordinary",
+          "later": [
+            483,
+            656
+          ]
+        }
+      ],
+      "variant": "v4",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "08676e049a87bb8acd2e3c2703cdef53b9197449f47ba406137db3e2800ac8cb",
+        "c4ce9c678745dbfaa7d0c98060a564ade41ef904058a5f94fc4008c25320991d"
+      ],
+      "truth": [
+        {
+          "group": "blog-289bbac352d06ffa",
+          "family": "ordinary",
+          "later": [
+            121,
+            221
+          ]
+        },
+        {
+          "group": "31d25cb841b4cdad9d0c3f5484b131c5ed48721978c1ca55e2e9349dce3b73ff",
+          "family": "gemini-2.5-flash",
+          "later": [
+            460,
+            584
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "27113c02570d4dc72f218c0f1fbf0d894ca41b10a7f49387503d4c84834b00ee",
+        "99957ae2b4312bddcd2a04b579f975a93f52e7f0daf924640b4428c4e6fb1a2f"
+      ],
+      "truth": [
+        {
+          "group": "31d25cb841b4cdad9d0c3f5484b131c5ed48721978c1ca55e2e9349dce3b73ff",
+          "family": "gpt-5.4-nano",
+          "later": [
+            112,
+            223
+          ]
+        },
+        {
+          "group": "blog-a64d789ef2e9ded3",
+          "family": "ordinary",
+          "later": [
+            414,
+            552
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "573758e50a50e6bb075a939e07f2d2f958d5c2e8d646494275e658e716f5d896",
+        "dc11aaa56dcf84d2172975a6910fc12f20298e4478a5ff14228aa5139e141359"
+      ],
+      "truth": [
+        {
+          "group": "blog-2ef42ff27c384743",
+          "family": "ordinary",
+          "later": [
+            138,
+            315
+          ]
+        },
+        {
+          "group": "52894d0f01e38da735435beae87d7274ca12ee031531e7a5846f04498c2cc067",
+          "family": "gemini-2.5-flash",
+          "later": [
+            589,
+            667
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "dd4246407080932de5a599da9ac962e55cabb7717b9379b10e58c504d6530923",
+        "ea2d2560d9b23303b3ee2b5c2e3e10c096ba3eccb91d1a087ff51a1eb305c764"
+      ],
+      "truth": [
+        {
+          "group": "52894d0f01e38da735435beae87d7274ca12ee031531e7a5846f04498c2cc067",
+          "family": "gpt-5.4-nano",
+          "later": [
+            172,
+            243
+          ]
+        },
+        {
+          "group": "blog-ae7dd71913d8e49e",
+          "family": "ordinary",
+          "later": [
+            478,
+            680
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "1c8e202ff9006d5bd0f63d3cac4855fd87c427f16fc6623ecaee15a5bebc68f9",
+        "3ab807743ad78e8435a5b081baee190eaa2422eaf03acc2b91bbe99da8b4dcb4"
+      ],
+      "truth": [
+        {
+          "group": "blog-32cb9f1c53754254",
+          "family": "ordinary",
+          "later": [
+            174,
+            254
+          ]
+        },
+        {
+          "group": "107eede57287a833e5e26b25ab2f7216be1a9ccfbccc41d39b70729a8d7a1eef",
+          "family": "gemini-2.5-flash",
+          "later": [
+            578,
+            761
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "27bb784634c0011ea7cb6c2b23238cd8f6e4b47d73aa8bdc15020314f5edf642",
+        "fdf145f7403a926a509bfdfeab332c3e5a8dd2ee5084d1105eed4cacaeb3e036"
+      ],
+      "truth": [
+        {
+          "group": "107eede57287a833e5e26b25ab2f7216be1a9ccfbccc41d39b70729a8d7a1eef",
+          "family": "gpt-5.4-nano",
+          "later": [
+            181,
+            362
+          ]
+        },
+        {
+          "group": "blog-b1ad3b4682187491",
+          "family": "ordinary",
+          "later": [
+            660,
+            738
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "81a39cf37c536342b8dbdeba84e7fe4801d10d6f58907081034bc8d75518e56b",
+        "4d9b2232b03d6bc29e1a7203a7729bcff57a74660fa2c1938fee8e2f3276f50b"
+      ],
+      "truth": [
+        {
+          "group": "blog-343cfeb9ce95ae6c",
+          "family": "ordinary",
+          "later": [
+            101,
+            252
+          ]
+        },
+        {
+          "group": "8299c67014a5c7f7e3a1039cfba09c4b80cbe2922090bcdbb663ddf24f5bdb30",
+          "family": "gemini-2.5-flash",
+          "later": [
+            467,
+            591
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "3f8202489a960d34d7cf0a4849b89010579bf44d8edb6e27aa0282f8c3a0e6d6",
+        "22542cfa26789ffffdba8cf0cf35d712b2dfe5320e5f153e0f77b4043fac9a9c"
+      ],
+      "truth": [
+        {
+          "group": "8299c67014a5c7f7e3a1039cfba09c4b80cbe2922090bcdbb663ddf24f5bdb30",
+          "family": "gpt-5.4-nano",
+          "later": [
+            143,
+            272
+          ]
+        },
+        {
+          "group": "blog-b8bc067475431d75",
+          "family": "ordinary",
+          "later": [
+            487,
+            635
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "95b840bc9fecbc41907eceda60dc84fa625862493df8328fc486eb7aa6e9d197",
+        "7fa1d23317162664e2464665f2868171b157812043af15d8d8c764172e8821ec"
+      ],
+      "truth": [
+        {
+          "group": "blog-35a4cc3251f64ea3",
+          "family": "ordinary",
+          "later": [
+            90,
+            205
+          ]
+        },
+        {
+          "group": "8a6244ae0027bfd0a42c00cb500b52cc5c12538c133858e71ac330addeca836d",
+          "family": "gemini-2.5-flash",
+          "later": [
+            446,
+            654
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "ed4d5d51493d0536d0d4830cae3177a04cfeedea66e9d11aa7f542b6467677c1",
+        "07c2fc8cba7d10be4a37b40f7e0cbc17dda630eeb98e5ddc19a689265040fba4"
+      ],
+      "truth": [
+        {
+          "group": "8a6244ae0027bfd0a42c00cb500b52cc5c12538c133858e71ac330addeca836d",
+          "family": "gpt-5.4-nano",
+          "later": [
+            118,
+            316
+          ]
+        },
+        {
+          "group": "blog-bb5ccc7edfb3cc4d",
+          "family": "ordinary",
+          "later": [
+            606,
+            705
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "ff059a1c14bcdc32821e8eafc39fbbfff12b751aeb6852d8f3cb79297f578bbb",
+        "ba0a16a7fa188fb0227cda6e087b8aca7d95d4b245049caa0ea39d45dbf4a0e5"
+      ],
+      "truth": [
+        {
+          "group": "blog-403c4f16ac7094f0",
+          "family": "ordinary",
+          "later": [
+            128,
+            244
+          ]
+        },
+        {
+          "group": "44ee836f312c4ff47ffd074cb2d58c6552d421a0ebf58685a154d4aedf6135d1",
+          "family": "gemini-2.5-flash",
+          "later": [
+            548,
+            716
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "21f59be14478d6fae7df85ba48589520df50dbca4ecd8dbbfcab3973602fe8f0",
+        "2089ddd8b34a20166cc6576b617fe9bffab7873d1bab6371ef3cddc37aa83d66"
+      ],
+      "truth": [
+        {
+          "group": "44ee836f312c4ff47ffd074cb2d58c6552d421a0ebf58685a154d4aedf6135d1",
+          "family": "gpt-5.4-nano",
+          "later": [
+            199,
+            365
+          ]
+        },
+        {
+          "group": "blog-bd5ae606c3843072",
+          "family": "ordinary",
+          "later": [
+            589,
+            774
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "37b977291dbf2cd287866016c98fd3564ac650568919c878663c9286c057570c",
+        "79a875e1058b6f0d4826cb203c2dd0a7039f9e0017308e4779f2dff73f26321a"
+      ],
+      "truth": [
+        {
+          "group": "blog-4192bcfb33fd5e73",
+          "family": "ordinary",
+          "later": [
+            119,
+            358
+          ]
+        },
+        {
+          "group": "9ef3b1b580430906cc42827b0e14c6d16564cfbfd90c100f63788ef51e6573b1",
+          "family": "gemini-2.5-flash",
+          "later": [
+            612,
+            779
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "66fd7b5825337c701feb790cd44856d0f013b6e1e8abcd653568585ea17a1fb3",
+        "887f50f6dd528c91ff0c0623d34097a6b9bed1e473947a24b453fb4ad3d08a5c"
+      ],
+      "truth": [
+        {
+          "group": "9ef3b1b580430906cc42827b0e14c6d16564cfbfd90c100f63788ef51e6573b1",
+          "family": "gpt-5.4-nano",
+          "later": [
+            167,
+            346
+          ]
+        },
+        {
+          "group": "blog-be5578cd4e55abe6",
+          "family": "ordinary",
+          "later": [
+            725,
+            922
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "89d5998d17c2d157f0bb25f7ac99a1b1d92ddad0e4bd3ae3142b8fe3d4ad1d1e",
+        "72700927d7385cd00af786a0c07ffd753eafd095962c32f79a6ea02405f965a4"
+      ],
+      "truth": [
+        {
+          "group": "blog-45d7537f260951ab",
+          "family": "ordinary",
+          "later": [
+            41,
+            143
+          ]
+        },
+        {
+          "group": "bfd1aa8a78f0f6bc8c6b3c86881215405fada34b1e67ff5d6d529aa843350b9c",
+          "family": "gemini-2.5-flash",
+          "later": [
+            431,
+            557
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "044de98796f82ef5929b29a5782902bbe5109193c6ca5251a1dff16dc2226663",
+        "07c7ec4690bfc6fb51eb539b76c2af0a8a51f927a7a9c5854b187c503ba482c2"
+      ],
+      "truth": [
+        {
+          "group": "bfd1aa8a78f0f6bc8c6b3c86881215405fada34b1e67ff5d6d529aa843350b9c",
+          "family": "gpt-5.4-nano",
+          "later": [
+            135,
+            275
+          ]
+        },
+        {
+          "group": "blog-c3aef5e6490ff545",
+          "family": "ordinary",
+          "later": [
+            624,
+            740
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "402260a5cf0210b91f6a931c840f96245643a5c412507fda09ba764301e6f374",
+        "6017e257a22910eea0c6dc45751382cbfb1679190a2256b5c57e90698ad12ca1"
+      ],
+      "truth": [
+        {
+          "group": "blog-4e84fe6264df3f07",
+          "family": "ordinary",
+          "later": [
+            145,
+            324
+          ]
+        },
+        {
+          "group": "7baccf8bd89a0ae8ac689e32ab071af42d75ea9aa9528cefb235fc70635b55f0",
+          "family": "gemini-2.5-flash",
+          "later": [
+            597,
+            753
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "abstracts",
+      "source_sha256": [
+        "b796d8979398243bf307f6c6381c216360620ae49a5d33a9eabbd0b8915578b9",
+        "31af6c7c36ddc55dbe54a5f044b63fb70600b4cf8ea637de61bc41574403fa2d"
+      ],
+      "truth": [
+        {
+          "group": "7baccf8bd89a0ae8ac689e32ab071af42d75ea9aa9528cefb235fc70635b55f0",
+          "family": "gpt-5.4-nano",
+          "later": [
+            144,
+            300
+          ]
+        },
+        {
+          "group": "kubernetes-e1a8fe859faf9700",
+          "family": "ordinary",
+          "later": [
+            457,
+            667
+          ]
+        }
+      ],
+      "variant": "v1",
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            144,
+            299
+          ],
+          "later": [
+            144,
+            300
+          ]
+        },
+        {
+          "earlier": [
+            456,
+            692
+          ],
+          "later": [
+            457,
+            667
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.0001347064971923828,
+              "later": 0.0001366138458251953
+            },
+            {
+              "earlier": 0.02884335070848465,
+              "later": 0.06794136017560959
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.005660712718963623,
+              "later": 0.014106154441833496
+            },
+            {
+              "earlier": 0.925117552280426,
+              "later": 0.9588097333908081
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.0021721720695495605,
+              "later": 0.0008210539817810059
+            },
+            {
+              "earlier": 0.0012003342853859067,
+              "later": 0.0009640229982323945
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.028451621532440186,
+              "later": 0.009183406829833984
+            },
+            {
+              "earlier": 0.006381477694958448,
+              "later": 0.009204324334859848
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "f45f2e0cc55b5af3ac7d63ad4e033e41cd0fe7347c23fcb04813cf334e697046",
+        "664bf58745505c1e3229e948b6cd42793dd6e3eb1a7f4994e121298615b85dfb"
+      ],
+      "truth": [
+        {
+          "group": "gates-12783",
+          "family": "ordinary",
+          "later": [
+            140,
+            350
+          ]
+        },
+        {
+          "group": "gates-12797",
+          "family": "ordinary",
+          "later": [
+            589,
+            712
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": "anchored",
+      "ranges": [
+        {
+          "earlier": [
+            140,
+            323
+          ],
+          "later": [
+            140,
+            350
+          ]
+        },
+        {
+          "earlier": [
+            562,
+            662
+          ],
+          "later": [
+            589,
+            712
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.0002772212028503418,
+              "later": 0.0003358125686645508
+            },
+            {
+              "earlier": 0.001770214643329382,
+              "later": 0.006772451102733612
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.00027364492416381836,
+              "later": 0.0002986788749694824
+            },
+            {
+              "earlier": 0.004785996396094561,
+              "later": 0.004420495592057705
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.00638049840927124,
+              "later": 0.00832134485244751
+            },
+            {
+              "earlier": 0.0026624060701578856,
+              "later": 0.0018980092136189342
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.05720043182373047,
+              "later": 0.03468596935272217
+            },
+            {
+              "earlier": 0.7017109990119934,
+              "later": 0.6766104698181152
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "aacd4aad2e692e34ddf1b6004ce7cf8c0a3ce7dea70508e6b07fc738717481ea",
+        "4026726771cda702a7aaf9609ff6d26f615776a05ce97b73598aa655a3ee923f"
+      ],
+      "truth": [
+        {
+          "group": "gates-12808",
+          "family": "ordinary",
+          "later": [
+            64,
+            258
+          ]
+        },
+        {
+          "group": "gates-12820",
+          "family": "ordinary",
+          "later": [
+            426,
+            611
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "bbf8f7477cc61a375531cfb68ebde2c92a2bf973140393b47921429790c83866",
+        "d93d63a705f83af5d0e9395c384baca3d27aa5156a086ceff90238c9c537f07b"
+      ],
+      "truth": [
+        {
+          "group": "gates-12825",
+          "family": "ordinary",
+          "later": [
+            83,
+            232
+          ]
+        },
+        {
+          "group": "gates-12891",
+          "family": "ordinary",
+          "later": [
+            508,
+            581
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "b97df65ec1eeaf1af4dd5d62b68e9712f691c180f78b2d600b4da64c1c8e6442",
+        "314a51ef75bb1ffb1328773c8a48e7d74d8cd1939c57ea78549dbc43d51d7a80"
+      ],
+      "truth": [
+        {
+          "group": "gates-12903",
+          "family": "ordinary",
+          "later": [
+            112,
+            311
+          ]
+        },
+        {
+          "group": "gates-12957",
+          "family": "ordinary",
+          "later": [
+            390,
+            588
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "9e27ded15a611c55bed3b18b2d2e94f16e5cf30b34278b2c29445d406f67d1a8",
+        "8d300ffeca2e48cbc154f35826e0d980ed594d05d03fa352ab49209a998a4df3"
+      ],
+      "truth": [
+        {
+          "group": "gates-12958",
+          "family": "ordinary",
+          "later": [
+            253,
+            576
+          ]
+        },
+        {
+          "group": "gates-12998",
+          "family": "ordinary",
+          "later": [
+            910,
+            1061
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            253,
+            574
+          ],
+          "later": [
+            253,
+            576
+          ]
+        },
+        {
+          "earlier": [
+            908,
+            1059
+          ],
+          "later": [
+            910,
+            1061
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.09172934293746948,
+              "later": 0.044917166233062744
+            },
+            {
+              "earlier": 0.9938666224479675,
+              "later": 0.9918256998062134
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.014740824699401855,
+              "later": 0.009498000144958496
+            },
+            {
+              "earlier": 0.9950692653656006,
+              "later": 0.9883347749710083
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.009293973445892334,
+              "later": 0.005270242691040039
+            },
+            {
+              "earlier": 0.9984754920005798,
+              "later": 0.9983489513397217
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.31057941913604736,
+              "later": 0.11149203777313232
+            },
+            {
+              "earlier": 0.980366051197052,
+              "later": 0.9774894118309021
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "014eb679b1ac43bce0f7e4282b22ba2118744b46185e786c61ff19eba9b700f6",
+        "f2a7927e26dd616f1e72552da513647d02534e1ac8d9a17e35d8658da1591e76"
+      ],
+      "truth": [
+        {
+          "group": "gates-13029",
+          "family": "ordinary",
+          "later": [
+            175,
+            336
+          ]
+        },
+        {
+          "group": "wellcome-11386",
+          "family": "ordinary",
+          "later": [
+            649,
+            890
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            175,
+            336
+          ],
+          "later": [
+            175,
+            336
+          ]
+        },
+        {
+          "earlier": [
+            649,
+            881
+          ],
+          "later": [
+            649,
+            890
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.02432781457901001,
+              "later": 0.007703125476837158
+            },
+            {
+              "earlier": 0.0008384662796743214,
+              "later": 0.0008553491206839681
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.579461932182312,
+              "later": 0.3134775757789612
+            },
+            {
+              "earlier": 0.9913257956504822,
+              "later": 0.9896373152732849
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.0011064410209655762,
+              "later": 0.0015971064567565918
+            },
+            {
+              "earlier": 0.01506761647760868,
+              "later": 0.002138872630894184
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.010669529438018799,
+              "later": 0.08559900522232056
+            },
+            {
+              "earlier": 0.9601667523384094,
+              "later": 0.8603453636169434
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "de6b2526e5997ffda5728dd1d280671f0733f6e8ff22120a7912c003a6fd226e",
+        "bd9873a7190e0fa3b722f4137146ebbdf37a235df60835b1f4b3958786ab1fbb"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-12429",
+          "family": "ordinary",
+          "later": [
+            102,
+            235
+          ]
+        },
+        {
+          "group": "wellcome-13531",
+          "family": "ordinary",
+          "later": [
+            686,
+            902
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "d8371d4010db5407c6e4f8db1b61f0e666c09d57edfafc84e8095940ee79f6b8",
+        "c13ac3d5f0416d111a61278f72bbd0ca109720540f7ee0ff143009f44a578cb1"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14700",
+          "family": "ordinary",
+          "later": [
+            103,
+            211
+          ]
+        },
+        {
+          "group": "wellcome-14765",
+          "family": "ordinary",
+          "later": [
+            496,
+            696
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "2ba5b59afa62011eb43555bb36155de8ac62d24231dc88ef571ebfa4cdf7b91a",
+        "28bc8ed91daf66ed71b24d8135a0ef3f67267e19c024a3974624012dc620134f"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-14770",
+          "family": "ordinary",
+          "later": [
+            268,
+            388
+          ]
+        },
+        {
+          "group": "wellcome-14838",
+          "family": "ordinary",
+          "later": [
+            502,
+            600
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "8bd2d790fcbbd2f95b033c0c7ba071bd21b69646564711aae69557a09dab37e2",
+        "ecf45e071eece4b57183c3a35077803daa5158b6aaa62c1a995a52d17555599b"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-15013",
+          "family": "ordinary",
+          "later": [
+            56,
+            189
+          ]
+        },
+        {
+          "group": "wellcome-15100",
+          "family": "ordinary",
+          "later": [
+            414,
+            559
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": "current",
+      "ranges": [
+        {
+          "earlier": [
+            56,
+            182
+          ],
+          "later": [
+            56,
+            189
+          ]
+        },
+        {
+          "earlier": [
+            407,
+            555
+          ],
+          "later": [
+            414,
+            559
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "context": [
+            {
+              "earlier": 0.009084641933441162,
+              "later": 0.0075914859771728516
+            },
+            {
+              "earlier": 0.0018980101449415088,
+              "later": 0.0018238965421915054
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.07363218069076538,
+              "later": 0.04864466190338135
+            },
+            {
+              "earlier": 0.9406659603118896,
+              "later": 0.9698721766471863
+            }
+          ]
+        },
+        {
+          "context": [
+            {
+              "earlier": 0.002626776695251465,
+              "later": 0.0005645155906677246
+            },
+            {
+              "earlier": 0.0019751284271478653,
+              "later": 0.0024102278985083103
+            }
+          ],
+          "center": [
+            {
+              "earlier": 0.015596866607666016,
+              "later": 0.0035114288330078125
+            },
+            {
+              "earlier": 0.9592018723487854,
+              "later": 0.008760389871895313
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "9a7663f38693e3490bf3f9f39c091a94202d217a1f5fc2b37cc4e8420f58f9eb",
+        "cbf550c667ac48b0ccdee060270271c0a0297378e4e68bff7ee676bbebb05596"
+      ],
+      "truth": [
+        {
+          "group": "wellcome-15229",
+          "family": "ordinary",
+          "later": [
+            27,
+            230
+          ]
+        },
+        {
+          "group": "blog-04a69d44522bb6af",
+          "family": "ordinary",
+          "later": [
+            450,
+            528
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "ee15394d529c83c04c5d5a6b299377a077619cacc4429d5f9071f00790816291",
+        "c5315151cd1e48c473f24a5f9f3593df1208d990284693bc4f247446474ba807"
+      ],
+      "truth": [
+        {
+          "group": "blog-0575679df6664607",
+          "family": "ordinary",
+          "later": [
+            77,
+            197
+          ]
+        },
+        {
+          "group": "blog-0578a0bf6775698d",
+          "family": "ordinary",
+          "later": [
+            425,
+            543
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "52efb23f4352f9390c70b52367c8bb43be23ccf66473960e3a7a062f1552224e",
+        "2ddd2fc222f3c97918bc831e26efcee1a58081aa6afc3ee5998f9eccc7ea6ebb"
+      ],
+      "truth": [
+        {
+          "group": "blog-062b86202af2a108",
+          "family": "ordinary",
+          "later": [
+            74,
+            313
+          ]
+        },
+        {
+          "group": "blog-07f64291ad7bacbf",
+          "family": "ordinary",
+          "later": [
+            424,
+            549
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "115f854d3a6d3f2fd90d821d706c3e64758565b58158c1a89afd7b01829132d4",
+        "d3108913f58197e38eaba5b1fff79dee51bcc3902ba04262e225d9dc8ccbd3ff"
+      ],
+      "truth": [
+        {
+          "group": "blog-08419d3e08b1594e",
+          "family": "ordinary",
+          "later": [
+            108,
+            212
+          ]
+        },
+        {
+          "group": "blog-12323f6f96fc7125",
+          "family": "ordinary",
+          "later": [
+            457,
+            525
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "0099bf383406ecf097f29c60e5620587144ee39e3f62432f475445d08074cce7",
+        "1f5343e87e25d6a2318ebd408740ce21995eafb557c71b4cbfb2f9021cfba1ac"
+      ],
+      "truth": [
+        {
+          "group": "blog-1c353ae23a890b86",
+          "family": "ordinary",
+          "later": [
+            79,
+            205
+          ]
+        },
+        {
+          "group": "blog-22b7f1074d0f57d1",
+          "family": "ordinary",
+          "later": [
+            576,
+            657
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "bdb30c98be8762e34f7869149589e4300991471c887c0817b75763e38b072dff",
+        "706a7550280c5437d25f8f8b6476f0184fd0913bd3f5871f4caf168f87b45db0"
+      ],
+      "truth": [
+        {
+          "group": "blog-26fed517b34cbba4",
+          "family": "ordinary",
+          "later": [
+            228,
+            400
+          ]
+        },
+        {
+          "group": "blog-289bbac352d06ffa",
+          "family": "ordinary",
+          "later": [
+            609,
+            709
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "5ad38a0b351ac510c8405b484364498d5c5b6ec28deac75f24ca2f257b4e4ccb",
+        "7035c39f7fd92a64d29b7a73c2fb94ebfff34bcf59cba109746a4bcc6eb20415"
+      ],
+      "truth": [
+        {
+          "group": "blog-2ef42ff27c384743",
+          "family": "ordinary",
+          "later": [
+            138,
+            315
+          ]
+        },
+        {
+          "group": "blog-32cb9f1c53754254",
+          "family": "ordinary",
+          "later": [
+            591,
+            671
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "6d1ed8102a3a12cd45a0c861e481999c25a0b6843b054f5ca26f292b21713308",
+        "d590e4c564cd25297b3482ef4f19d825427598e7c863d8a3ce852ccd93f49ed2"
+      ],
+      "truth": [
+        {
+          "group": "blog-343cfeb9ce95ae6c",
+          "family": "ordinary",
+          "later": [
+            101,
+            252
+          ]
+        },
+        {
+          "group": "blog-35a4cc3251f64ea3",
+          "family": "ordinary",
+          "later": [
+            414,
+            529
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "f9c8f2b4105755f43813101426557301d905f8b4519267b7d5d795ed1fbbe197",
+        "4448f13718f2cba68eeca3f9ed5256f4d1c193341c41d786ac34c183a6064170"
+      ],
+      "truth": [
+        {
+          "group": "blog-403c4f16ac7094f0",
+          "family": "ordinary",
+          "later": [
+            128,
+            244
+          ]
+        },
+        {
+          "group": "blog-4192bcfb33fd5e73",
+          "family": "ordinary",
+          "later": [
+            468,
+            707
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "6f4cd07f7e05bccc1e28c7bce3737549a83c4978499560b8977795d8e06f1be1",
+        "7860367dae58da4a5b799f82f7b21061127f75f0523f06d8d42de0923cbd6b16"
+      ],
+      "truth": [
+        {
+          "group": "blog-45d7537f260951ab",
+          "family": "ordinary",
+          "later": [
+            41,
+            143
+          ]
+        },
+        {
+          "group": "blog-4e84fe6264df3f07",
+          "family": "ordinary",
+          "later": [
+            457,
+            636
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "6cb8921efa2ea82c275f4ebc7f0ac0bfa5af300549ae9bc6b94c77361dd80a1f",
+        "91137b0afad5f71dd4d01131f5a0b6c7b6eb3b45b487134eeae9b309b9f05ce7"
+      ],
+      "truth": [
+        {
+          "group": "blog-501302cbc3905297",
+          "family": "ordinary",
+          "later": [
+            112,
+            225
+          ]
+        },
+        {
+          "group": "blog-511f685ac6c46668",
+          "family": "ordinary",
+          "later": [
+            544,
+            691
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "a4e35cb1a409d4daaed965e6ffc17ebb4c54c68a869a8b2253f8c6a87cf6f0d7",
+        "767ddf14d343d2d970dd6ed4146fd2fed21331bb7d8a2120c53e390fea194dd2"
+      ],
+      "truth": [
+        {
+          "group": "blog-5a9b9892bf9ab76b",
+          "family": "ordinary",
+          "later": [
+            63,
+            156
+          ]
+        },
+        {
+          "group": "blog-5df93bb0a9e9bb06",
+          "family": "ordinary",
+          "later": [
+            337,
+            441
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "5bf75f9147efd3419753172f026189b1eb20a02da6bb0d93e4a731af1e51b2dd",
+        "e064c7cca1c792ce160af851bf6a5441b0d96018655297f5687edb9d05fcb61f"
+      ],
+      "truth": [
+        {
+          "group": "blog-6b65b01af7536341",
+          "family": "ordinary",
+          "later": [
+            138,
+            299
+          ]
+        },
+        {
+          "group": "blog-7988c024801f182f",
+          "family": "ordinary",
+          "later": [
+            646,
+            756
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "b8e7ab54868040fec871dc1b619fd8d0d850f06fe41a2fa2780de7e0e45f4e13",
+        "13efe8205eedb0f0b163e639c6ba4770eb452a6ffb57ee9532825ed18fbb4b88"
+      ],
+      "truth": [
+        {
+          "group": "blog-90be1152316ad39b",
+          "family": "ordinary",
+          "later": [
+            112,
+            290
+          ]
+        },
+        {
+          "group": "blog-98a84cb5f76e3de4",
+          "family": "ordinary",
+          "later": [
+            652,
+            825
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "a78278a3ba90666d756a64c561bc152902c99cde4f2c5900f786ec79bcfb7937",
+        "9bd257feef9e4d220cc21670c78d2717fa03bf827376af3e2dc6211d65c52230"
+      ],
+      "truth": [
+        {
+          "group": "blog-a64d789ef2e9ded3",
+          "family": "ordinary",
+          "later": [
+            57,
+            195
+          ]
+        },
+        {
+          "group": "blog-ae7dd71913d8e49e",
+          "family": "ordinary",
+          "later": [
+            436,
+            638
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "27d1a9e884e72046b9b83e7b6600e5cfd4181bf7086ecd12497075594d0b0093",
+        "c7ac985f029e982c64a1532c213c3d7eb401ef2adb85354f01f58bbaad986086"
+      ],
+      "truth": [
+        {
+          "group": "blog-b1ad3b4682187491",
+          "family": "ordinary",
+          "later": [
+            190,
+            268
+          ]
+        },
+        {
+          "group": "blog-b8bc067475431d75",
+          "family": "ordinary",
+          "later": [
+            493,
+            641
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "ca57f44919f4a81262b42ef79551885a2029f59723754e05da55cc33e340a93f",
+        "66b71816bac3569601b2afa41bd0d0c2e8a90a6b87707f3c348735c33d2729ae"
+      ],
+      "truth": [
+        {
+          "group": "blog-bb5ccc7edfb3cc4d",
+          "family": "ordinary",
+          "later": [
+            170,
+            269
+          ]
+        },
+        {
+          "group": "blog-bd5ae606c3843072",
+          "family": "ordinary",
+          "later": [
+            457,
+            642
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    },
+    {
+      "bank": "ordinary",
+      "source_sha256": [
+        "f2f91690041096057fcb45a08fe58aa68a0d83a4a2447064d569a46f3fa7442d",
+        "f37ae7a1ad276b750d0354fa15e786dac5f290310ee9e20b36e6120f23d7733e"
+      ],
+      "truth": [
+        {
+          "group": "blog-be5578cd4e55abe6",
+          "family": "ordinary",
+          "later": [
+            232,
+            429
+          ]
+        },
+        {
+          "group": "blog-c3aef5e6490ff545",
+          "family": "ordinary",
+          "later": [
+            605,
+            721
+          ]
+        }
+      ],
+      "variant": null,
+      "scope": null,
+      "ranges": [],
+      "readings": []
+    }
+  ],
+  "result": {
+    "current/added_exact": 1,
+    "generated": 80,
+    "generated/anchored/context_assessed": 3,
+    "generated/anchored/joint_assessed": 3,
+    "generated/current/context_assessed": 14,
+    "generated/current/joint_assessed": 14,
+    "incumbent_exact": 1,
+    "ordinary/anchored/context_assessed": 5,
+    "ordinary/anchored/joint_assessed": 5,
+    "ordinary/current/context_assessed": 20,
+    "ordinary/current/joint_assessed": 20,
+    "ordinary_incumbent_flags": 0,
+    "current": {
+      "new_varied_works": 1,
+      "generator_families": [
+        "gemini-2.5-flash"
+      ],
+      "ordinary_works_assessed": 12,
+      "additional_ordinary_works": 0,
+      "passes_local_trial": false
+    },
+    "anchored": {
+      "new_varied_works": 0,
+      "generator_families": [],
+      "ordinary_works_assessed": 4,
+      "additional_ordinary_works": 0,
+      "passes_local_trial": false
+    }
+  }
+}

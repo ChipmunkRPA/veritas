@@ -13,6 +13,10 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [news and abstracts draft replay](writing-independent-anchor-transfer-2026-11-14.md#replay)
+recounts the additional exact locations, assessed coverage, and ordinary
+controls when individual sentences can be reviewed between supplied drafts.
+
 The [draft sentence-anchor replay](writing-sentence-anchor-transfer-2026-11-14.md#replay)
 recounts the frozen two-generator transfer and checks that each recorded
 wording change lies within its own mapped sentence. It runs without models.

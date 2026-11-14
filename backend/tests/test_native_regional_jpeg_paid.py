@@ -367,6 +367,26 @@ def test_paid_lossless_webp_matches_png_regions(billing, monkeypatch, tmp_path):
             frozen = snapshot.load(f.store.read_bytes(db.get(ReportRow, report_id).snapshot_hash))
         assert frozen.image_evidence == document
 
+        from app.reports.verify import verify_package
+
+        created = f.client.post(f"/api/v2/analyses/{aid}/packages", headers=f.headers,
+                                json={"report_id": report_id, "kind": "draft"})
+        assert created.status_code == 202, created.text
+        package_id = created.json()["id"]
+        package = wait_for(lambda: f.client.get(f"/api/v2/packages/{package_id}", headers=f.headers).json(),
+                           lambda row: row["status"] in {"done", "failed"}, "WebP evidence package")
+        assert package["status"] == "done", package
+        archive = f.client.get(f"/api/v2/packages/{package_id}/file", headers=f.headers)
+        assert archive.status_code == 200
+        package_path, webp_path = tmp_path / "webp-evidence.zip", tmp_path / "held.webp"
+        package_path.write_bytes(archive.content)
+        webp_path.write_bytes(packed.getvalue())
+        verified = verify_package(package_path, public_key_pem=key.json()["public_key_pem"].encode(),
+                                  source_image=webp_path)
+        assert verified.outcome == "verified", verified.as_dict()
+        assert any(check.name == "original image crops" and "unannotated crops matched" in check.detail
+                   for check in verified.checks)
+
         server = uvicorn.Server(uvicorn.Config(app, host="127.0.0.1", port=8164, lifespan="off",
                                                log_config=None, access_log=False))
         thread = threading.Thread(target=server.run, daemon=True)
@@ -388,6 +408,7 @@ def test_paid_lossless_webp_matches_png_regions(billing, monkeypatch, tmp_path):
         deltas = {"png_sha256": hashlib.sha256(source).hexdigest(), "webp_sha256": hashlib.sha256(packed.getvalue()).hexdigest(),
                   "source_rgb_and_model_map_exact": True, "matched_regions": len(packets[1]), "payment_first": True,
                   "simulated_price_minor_usd": 999, "signed_pdf_and_json_snapshot_match": True, "browser_verified": True,
+                  "signed_package_crop_replayed": True,
                   "regions": [{"source_box": p["region"], "asset_sha256": {r: a["sha256"] for r, a in p["artifacts"].items()}}
                               for p in packets[1]]}
         if proof := os.getenv("CHIPMUNK_REGIONAL_WEBP_FLOW_PROOF"):

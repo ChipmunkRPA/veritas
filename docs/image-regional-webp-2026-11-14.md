@@ -24,8 +24,10 @@ pixels, model response and regional evidence. Both located the same region
 at x 229, y 372, spanning 125 × 156 pixels. The original crop, source overview,
 mask and overlay matched byte for byte. The browser displayed the checked
 crop and mask, the report signature verified, and the frozen report evidence
-matched the Evidence API and JSON. Both $9.99 checkouts used local test
-doubles, and neither job existed before verified payment.
+matched the Evidence API and JSON. A separate replay of the signed evidence
+package verified the source crops against the submitted WebP. Both $9.99
+checkouts used local test doubles, and neither job existed before verified
+payment.
 [Verification receipt](evaluation-panels/image-regional-webp-app-2026-11-14.json)
 
 This is a file-format transfer of an existing editing check, with zero

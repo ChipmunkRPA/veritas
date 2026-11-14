@@ -152,6 +152,10 @@ The JSON contains file hashes and outcomes. A reviewer can compare it against
 another run with `--compare` or provide it in an
 [independent evaluation issue](https://github.com/ChipmunkRPA/veritas/issues/new?template=independent-evaluation.yml).
 
+The separate [fresh report replay](writing-context-margin-transfer-2026-11-13.md#replay)
+recomputes two internal points from prior authentic excerpts and reports
+every edited and untouched result on the later holdout.
+
 ### Replay delivery and earlier-copy comparisons
 
 Recount the [two JPEG90 delivery histories](image-regional-jpeg90-carrier-2026-11-13.md),

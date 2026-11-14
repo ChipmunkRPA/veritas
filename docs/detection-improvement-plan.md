@@ -109,6 +109,11 @@ are not public screening promises or calibrated population probabilities.
 - [Typed contextual sentence review](writing-typed-decision-transfer-2026-11-13.md)
   increased useful locations from 10 to 13 across 40 held English edits and
   untouched highlights from 11 to 12 of 20. It remains experimental.
+- [Fresh report calibration and contrast](writing-context-margin-transfer-2026-11-13.md)
+  found zero known locations out of 40 at both frozen context points, even
+  with no flags on 20 ordinary excerpts. The existing check found ten and
+  flagged eight ordinary excerpts. This rules out adding the candidate at
+  either tested point.
 - [Short H.264 face localization](video-brief-face-avc-clock-confirmation-2026-11-13.md)
   increased correct ranges from nine to ten on 16 edited deliveries from eight
   source groups. Neither route flagged any of the 40 ordinary clips. The new

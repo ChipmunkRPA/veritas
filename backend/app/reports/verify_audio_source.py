@@ -9,6 +9,7 @@ from pathlib import Path
 from zipfile import ZipFile
 
 from app.detectors.audio.decode import decode_audio, source_ranges, wav_bytes
+from app.evidence import mouth_hold_sound, mouth_local_hold_binding
 from app.evidence.audio_binding import SPEECH_SELECTION
 from app.evidence.av_binding import TIMING_WINDOWS
 from app.evidence.stereo_binding import SCHEMA as STEREO_CONTEXT_SCHEMA
@@ -119,6 +120,19 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError(f"{label} differs from the samples at its recorded source interval")
         covered.add(asset["sha256"])
         intervals += 1
+    mouth_hold = (evidence.get("picture_hold") or {}).get("mouth_local_hold") or {}
+    if mouth_hold.get("sound_context"):
+        from app.detectors.video.mouth_hold_sound import source_assets
+
+        packet = next(item for item in evidence["packets"] if item["id"] == mouth_local_hold_binding.PACKET_ID)
+        assets = packet["artifacts"]
+        measured = source_assets(decoded.pcm, decoded.mapping, mouth_hold, evidence["source"]["time_base"],
+                                 time_axis=assets[mouth_hold_sound.WAVEFORM].get("time_axis"))
+        if any(hashlib.sha256(data).hexdigest() != assets[role]["sha256"] for role, data in measured.items()):
+            raise ValueError("The mouth-hold audio or waveform differs from the supplied soundtrack")
+        covered.add(assets[mouth_hold_sound.WAV]["sha256"])
+        intervals += 1
+        replay_detail += " Recomputed the soundtrack measurement and waveform during the mouth-region hold."
     if listening := audio.get("stereo_listening"):
         from app.evidence.stereo_listening import selected_pcm, verify_payloads
         from app.storage.objects import ObjectIntegrityError

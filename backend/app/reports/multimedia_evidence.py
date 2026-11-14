@@ -346,20 +346,18 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                             raise ObjectIntegrityError("Video crop is not from its recorded source region")
         if packet.get("face_lighting") and face_lighting_context.record(packet, source, brightness_inputs) != packet["face_lighting"]:
             raise ObjectIntegrityError("Video brightness differs from the displayed source pixels")
-        if sound := packet.get("mouth_hold_sound"):
-            from app.detectors.audio.decode import read_wav, wav_bytes
-            from app.detectors.video.mouth_hold_sound import measure
-            from app.evidence.audio_packets import mouth_hold_waveform
+        if packet.get("mouth_hold_sound"):
+            from app.detectors.audio.decode import read_wav
+            from app.detectors.video.mouth_hold_sound import source_assets
 
             audio = document["audio"]["source"]
             pcm = read_wav(_bytes(audio["wav_sha256"], store))
             review = document["picture_hold"]["mouth_local_hold"]
-            if measure(pcm, audio, review, table.time_base) != sound:
-                raise ObjectIntegrityError("Mouth-hold sound differs from the frozen audio measurement")
-            start, stop = sound["samples"]
-            expected = {mouth_hold_sound.WAV: wav_bytes(pcm[start:stop]),
-                        mouth_hold_sound.WAVEFORM: mouth_hold_waveform(pcm, sound,
-                            time_axis=packet["artifacts"][mouth_hold_sound.WAVEFORM].get("time_axis"))}
+            try:
+                expected = source_assets(pcm, audio, review, table.time_base,
+                    time_axis=packet["artifacts"][mouth_hold_sound.WAVEFORM].get("time_axis"))
+            except ValueError as error:
+                raise ObjectIntegrityError("Mouth-hold sound differs from the frozen audio measurement") from error
             if any(assets[packet["artifacts"][role]["sha256"]] != data for role, data in expected.items()):
                 raise ObjectIntegrityError("Mouth-hold audio or waveform differs from the frozen soundtrack")
     if document.get("version") in NESTED_VIDEO_VERSIONS:

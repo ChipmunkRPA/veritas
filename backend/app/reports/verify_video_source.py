@@ -507,21 +507,15 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if len(mouth_pictures) != mouth_limit:
             raise ValueError("The source is missing a verified mouth-region input")
         verify_measurements(mouth_pictures, local_mouth["match"], hd=local_mouth["schema"] == mouth_local_hold_binding.HD_SCHEMA)
-        if sound := local_mouth.get("sound_context"):
-            from app.detectors.audio.decode import VIDEO_AUDIO_MAX_SECONDS, decode_audio, wav_bytes
-            from app.detectors.video.mouth_hold_sound import measure
-            from app.evidence.audio_packets import mouth_hold_waveform
+        if local_mouth.get("sound_context"):
+            from app.detectors.audio.decode import VIDEO_AUDIO_MAX_SECONDS, decode_audio
+            from app.detectors.video.mouth_hold_sound import source_assets
 
-            decoded_audio = decode_audio(original, source_sha256=digest, max_seconds=VIDEO_AUDIO_MAX_SECONDS,
-                                         inspect_stereo=True, retain_stereo=True)
-            if measure(decoded_audio.pcm, decoded_audio.mapping, local_mouth, table.time_base) != sound:
-                raise ValueError("The supplied soundtrack does not reproduce the measured mouth-hold interval")
+            decoded_audio = decode_audio(original, source_sha256=digest, max_seconds=VIDEO_AUDIO_MAX_SECONDS)
             packet = next(packet for packet in packets if packet["id"] == mouth_local_hold_binding.PACKET_ID)
-            start, stop = sound["samples"]
-            audio = wav_bytes(decoded_audio.pcm[start:stop])
-            waveform = mouth_hold_waveform(decoded_audio.pcm, sound,
+            measured = source_assets(decoded_audio.pcm, decoded_audio.mapping, local_mouth, table.time_base,
                 time_axis=packet["artifacts"][mouth_hold_sound.WAVEFORM].get("time_axis"))
-            for role, content in ((mouth_hold_sound.WAV, audio), (mouth_hold_sound.WAVEFORM, waveform)):
+            for role, content in measured.items():
                 if hashlib.sha256(content).hexdigest() != packet["artifacts"][role]["sha256"]:
                     raise ValueError("The sound clip or waveform differs from the supplied soundtrack")
     fine_edges = sum(_verify_scene_support(record, background_frames) for record in fine_records)

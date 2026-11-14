@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Sound during a short mouth hold](video-mouth-hold-sound-2026-11-13.md#sound-evidence-on-two-second-clips)
+  extends source-clock audio evidence to an existing two-second H.264
+  picture check. Simulated checkout, signed original replay and the
+  report matched on a held interval with a shifted audio stream.
+
 - [Denser and narrower lip-sync timing](video-lipsync-window-schedule-2026-11-14.md)
   tested the two schedule changes separately and together on acted and
   conversational speech. They all measured more edited clips and located

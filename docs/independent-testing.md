@@ -1545,6 +1545,10 @@ python -m app.cli verify evidence.zip --public-key instance-key.pem \
   --source-video original.mkv --source-audio original.mkv
 ```
 
+For a [measured mouth hold with audio](video-mouth-hold-sound-2026-11-13.md#sound-evidence-on-two-second-clips),
+both verifiers re-decode the soundtrack and reconstruct the exact WAV and
+waveform. The video comparison additionally checks the picture measurements.
+
 When the evidence includes a timing window schedule, these two checks
 recompute the recorded speech counts and the eligibility of source frame
 timestamps. The signed result also commits to the reported reasons for

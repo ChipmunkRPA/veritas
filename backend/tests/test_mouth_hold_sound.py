@@ -8,12 +8,13 @@ from app.evidence import mouth_hold_sound as binding
 from app.evidence.audio_packets import mouth_hold_waveform
 
 
-def test_mouth_hold_sound_binds_local_samples_and_rejects_unverified_clock():
+@pytest.mark.parametrize("schema", sorted(binding.HOLD_SCHEMAS))
+def test_mouth_hold_sound_binds_local_samples_and_rejects_unverified_clock(schema):
     rate = binding.RATE
     source_origin = 800
     samples = 2 * rate
     review = {
-        "schema": "chipmunk.video-mouth-local-hold/2",
+        "schema": schema,
         "status": "matched",
         "match": {"frames": [24, 36]},
         "pts": [i * 1000 + 3000 for i in range(60)],

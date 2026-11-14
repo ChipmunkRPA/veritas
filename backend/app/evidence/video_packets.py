@@ -624,25 +624,26 @@ def _mouth_hold_packet(db: Session, store: ObjectStore, analysis: Analysis, set_
     limitations = ["The box is the measured area. The check compares consecutive picture brightness within the box and surrounding face areas."]
     sound = review.get("sound_context")
     if sound:
-        from app.detectors.audio.decode import wav_bytes
-        from app.detectors.video.mouth_hold_sound import measure
+        from app.detectors.video.mouth_hold_sound import source_assets
         from app.evidence import audio_packets
 
         if not audio_input:
             raise PacketIntegrityError("Mouth-hold sound is missing its frozen input")
         pcm, mapping = audio_packets._input(store, analysis, audio_input)
-        if measure(pcm, mapping, review, table.time_base) != sound:
-            raise PacketIntegrityError("Mouth-hold sound differs from its recorded input")
+        try:
+            sound_assets = source_assets(pcm, mapping, review, table.time_base, time_axis=mouth_hold_sound.SOURCE_CLOCK)
+        except ValueError as error:
+            raise PacketIntegrityError("Mouth-hold sound differs from its recorded input") from error
         a, b = sound["samples"]
-        assets[mouth_hold_sound.WAV] = audio_packets._asset(db, store, analysis, set_id, wav_bytes(pcm[a:b]),
+        assets[mouth_hold_sound.WAV] = audio_packets._asset(db, store, analysis, set_id, sound_assets[mouth_hold_sound.WAV],
             "audio/wav", samples=b - a, sample_rate=mouth_hold_sound.RATE, channels=1)
-        waveform = audio_packets.mouth_hold_waveform(pcm, sound, time_axis=mouth_hold_sound.SOURCE_CLOCK)
-        assets[mouth_hold_sound.WAVEFORM] = audio_packets._asset(db, store, analysis, set_id, waveform, "image/png",
+        assets[mouth_hold_sound.WAVEFORM] = audio_packets._asset(db, store, analysis, set_id,
+            sound_assets[mouth_hold_sound.WAVEFORM], "image/png",
             width=960, height=280, time_axis=mouth_hold_sound.SOURCE_CLOCK)
         observation += " " + mouth_hold_sound.observation(sound)
         measurements.extend(mouth_hold_sound.measurements(sound))
         limitations.append(mouth_hold_sound.LIMITATION)
-    elif review["schema"] == mouth_local_hold_binding.HD_SCHEMA:
+    else:
         limitations.append("The soundtrack was not measured alongside these pictures.")
     return {"id": packet_id, "title": "Mouth-region picture hold", "evidence_type": "anomaly", "claim_scope": "sampled_window",
             "semantics": review["schema"], "mouth_local_hold": match, "affects_overall_confidence": False,

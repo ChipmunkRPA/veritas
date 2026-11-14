@@ -14,12 +14,14 @@ WAVEFORM = "mouth_hold_waveform"
 WAVEFORM_TITLE = "Sound during the mouth-region hold"
 SOURCE_CLOCK = "source_pts"
 SOURCE_WAVEFORM_TITLE = "Sound during the mouth-region hold (source time)"
+MIN_BLOCKS = 6
+HOLD_SCHEMAS = frozenset({"chipmunk.video-mouth-local-hold/1", "chipmunk.video-mouth-local-hold/2"})
 LIMITATION = ("The mixed soundtrack can include a different speaker, ordinary dubbing or music. "
               "Strong background noise can mask voice-like periodicity. This observation carries zero AI confidence weight.")
 
 
 def bounds(review, audio, time_base):
-    if review.get("schema") != "chipmunk.video-mouth-local-hold/2" or review.get("status") != "matched":
+    if review.get("schema") not in HOLD_SCHEMAS or review.get("status") != "matched":
         return None
     samples = audio.get("samples")
     if audio.get("timeline_time_base") != f"1/{RATE}" or type(samples) is not int or samples < 1:
@@ -54,6 +56,11 @@ def bounds(review, audio, time_base):
     return start, stop, first, last
 
 
+def block_starts(start: int, stop: int) -> range:
+    offset = (start + HOP - 1) // HOP * HOP
+    return range(offset, stop - 2 * HOP + 1, HOP)
+
+
 def measurements(record):
     count, periodic = record["blocks"], record["periodic_blocks"]
     return [{"label": "Audio blocks with voice-like periodicity", "value": f"{periodic} of {count}",
@@ -76,11 +83,11 @@ def validate(review, packet, audio, time_base):
     if located is None:
         raise ValueError("Mouth-hold sound has no continuous source coverage")
     start, stop, first, last = located
-    offset = (start + HOP - 1) // HOP * HOP
-    count = len(range(offset, stop - 2 * HOP + 1, HOP))
+    count = len(block_starts(start, stop))
     if (set(record) != {"schema", "samples", "source_pts", "time_base", "blocks", "periodic_blocks", "sustained_periodicity"}
             or record["schema"] != SCHEMA or record["samples"] != [start, stop] or record["source_pts"] != [first, last]
-            or record["time_base"] != f"1/{RATE}" or type(record["blocks"]) is not int or record["blocks"] != count or count < 6
+            or record["time_base"] != f"1/{RATE}" or type(record["blocks"]) is not int
+            or record["blocks"] != count or count < MIN_BLOCKS
             or type(record["periodic_blocks"]) is not int or not 0 <= record["periodic_blocks"] <= count
             or record["sustained_periodicity"] is not (3 * record["periodic_blocks"] >= 2 * count)
             or packet["mouth_hold_sound"] != record

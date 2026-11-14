@@ -14,13 +14,15 @@ def measure(pcm, mapping, review, time_base):
         return None
     start, stop, first, last = clock
     hop = binding.HOP
-    offset = (start + hop - 1) // hop * hop
-    periodic, measured = 0, 0
+    starts = binding.block_starts(start, stop)
+    measured = len(starts)
+    if measured < binding.MIN_BLOCKS:
+        return None
+    periodic = 0
     lags = np.arange(35, 221)
-    for i in range(offset, stop - 2 * hop + 1, hop):
+    for i in starts:
         values = np.asarray(pcm[i:i + 2 * hop], dtype=np.float64)
         signal = values - values.mean()
-        measured += 1
         if np.sqrt(np.mean(signal ** 2)) < .007:
             continue
         # Mean-centered periodicity for 73–457 Hz, with local peaks to reject slowly changing backgrounds.
@@ -30,8 +32,19 @@ def measure(pcm, mapping, review, time_base):
         values = lagged / (1e-12 + norm)
         if np.any((values[1:-1] >= .78) & (values[1:-1] > values[:-2]) & (values[1:-1] >= values[2:])):
             periodic += 1
-    if measured < 6:
-        return None
     return {"schema": binding.SCHEMA, "samples": [start, stop], "source_pts": [first, last],
             "time_base": f"1/{binding.RATE}", "blocks": measured, "periodic_blocks": periodic,
             "sustained_periodicity": 3 * periodic >= 2 * measured}
+
+
+def source_assets(pcm, mapping, review, time_base, *, time_axis):
+    """Reproduce the waveform and sound clip from the committed source samples."""
+    from app.detectors.audio.decode import wav_bytes
+    from app.evidence.audio_packets import mouth_hold_waveform
+
+    sound = review["sound_context"]
+    if measure(pcm, mapping, review, time_base) != sound:
+        raise ValueError("The soundtrack does not reproduce the measured mouth-hold interval")
+    start, stop = sound["samples"]
+    return {binding.WAV: wav_bytes(pcm[start:stop]),
+            binding.WAVEFORM: mouth_hold_waveform(pcm, sound, time_axis=time_axis)}

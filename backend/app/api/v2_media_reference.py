@@ -182,6 +182,7 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         include_trim_reencoded=settings.video_reference_local_area,
                         include_soundtrack_reencode=settings.video_reference_soundtrack_reencode,
                         include_hd_soundtrack_reencode=settings.video_reference_soundtrack_reencode,
+                        include_quiet_soundtrack=settings.video_reference_soundtrack_reencode,
                         include_picture_insertion=settings.video_reference_picture_insertion,
                     )
                 else:

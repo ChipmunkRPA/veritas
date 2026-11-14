@@ -24,6 +24,9 @@ STEP = 640  # 40 ms
 SEARCH = 5760  # 360 ms on either side
 MIN_SHIFT = 1920  # 120 ms
 MIN_RMS = .003
+QUIET_RMS = .00075
+QUIET_BASIS = "quiet_soundtrack_waveform/1"
+QUIET_EXPLANATION = "The second pass checks quieter sound and still requires matching sound on either side."
 MIN_CORRELATION = .86
 MIN_MARGIN = .06
 ALTERNATIVE = 96  # treat peaks within 6 ms as one local correlation peak
@@ -40,23 +43,24 @@ SCOPE = ("For clips with identical decoded pictures and picture timing, this che
          "This comparison carries zero weight in the AI estimate.")
 
 
-def _matches(earlier, submitted):
+def _matches(earlier, submitted, *, window=WINDOW, step=STEP, min_rms=MIN_RMS):
     base = np.asarray(earlier, dtype=np.float64)
     sums = np.r_[0, np.cumsum(base)]
     squares = np.r_[0, np.cumsum(base * base)]
-    energy = np.maximum(0.0, squares[WINDOW:] - squares[:-WINDOW] - (sums[WINDOW:] - sums[:-WINDOW]) ** 2 / WINDOW)
-    for start in range(0, len(submitted) - WINDOW + 1, STEP):
-        query = np.asarray(submitted[start:start + WINDOW], dtype=np.float64)
+    energy = np.maximum(0.0, squares[window:] - squares[:-window] - (sums[window:] - sums[:-window]) ** 2 / window)
+    min_energy = window * min_rms ** 2
+    for start in range(0, len(submitted) - window + 1, step):
+        query = np.asarray(submitted[start:start + window], dtype=np.float64)
         query = query - query.mean()
         power = np.dot(query, query)
-        if power < WINDOW * MIN_RMS ** 2:
+        if power < min_energy:
             yield start, None, None
             continue
-        low, high = max(0, start - SEARCH), min(len(base) - WINDOW, start + SEARCH)
+        low, high = max(0, start - SEARCH), min(len(base) - window, start + SEARCH)
         options = energy[low:high + 1]
-        numerator = correlate(base[low:high + WINDOW], query, mode="valid", method="fft")
+        numerator = correlate(base[low:high + window], query, mode="valid", method="fft")
         correlation = np.clip(numerator / np.sqrt(np.maximum(options * power, 1e-20)), -1, 1)
-        correlation[options < WINDOW * MIN_RMS ** 2] = 0
+        correlation[options < min_energy] = 0
         index = int(correlation.argmax())
         best = float(correlation[index])
         distinct = max(float(correlation[:max(0, index - ALTERNATIVE + 1)].max(initial=0)),
@@ -67,13 +71,13 @@ def _matches(earlier, submitted):
             yield start, start - (low + index), best
 
 
-def _shift_runs(matches):
+def _shift_runs(matches, *, step=STEP):
     run = []
     for row in matches:
         start, shift, _ = row
         if shift is None:
             continue
-        if run and (abs(shift - run[0][1]) > STABLE or start - run[-1][0] > (MAX_SKIPPED_WINDOWS + 1) * STEP):
+        if run and (abs(shift - run[0][1]) > STABLE or start - run[-1][0] > MAX_SKIPPED_WINDOWS * STEP + step):
             yield run
             run = []
         if abs(shift) >= MIN_SHIFT:
@@ -82,21 +86,21 @@ def _shift_runs(matches):
         yield run
 
 
-def _brackets(matches):
+def _brackets(matches, *, window=WINDOW, step=STEP):
     zeros = [start for start, shift, _ in matches if shift is not None and abs(shift) <= STABLE]
-    for candidate in _shift_runs(matches):
+    for candidate in _shift_runs(matches, step=step):
         if len(candidate) < MIN_WINDOWS:
             continue
-        start, end = candidate[0][0], candidate[-1][0] + WINDOW
-        if Fraction(len(candidate), (end - WINDOW - start) // STEP + 1) < MIN_WINDOW_FRACTION:
+        start, end = candidate[0][0], candidate[-1][0] + window
+        if Fraction(len(candidate), (end - window - start) // step + 1) < MIN_WINDOW_FRACTION:
             continue
         shifts = [row[1] for row in candidate]
-        before = [tick for tick in zeros if start - FLANK_SEARCH <= tick <= start - WINDOW // 2]
-        after = [tick for tick in zeros if end - WINDOW // 2 <= tick <= end + FLANK_SEARCH]
+        before = [tick for tick in zeros if start - FLANK_SEARCH <= tick <= start - window // 2]
+        after = [tick for tick in zeros if end - window // 2 <= tick <= end + FLANK_SEARCH]
         if len(before) < FLANK_WINDOWS or len(after) < FLANK_WINDOWS:
             continue
-        start, end = max(start, before[-1] + WINDOW), min(end, after[0])
-        if end - start < WINDOW + (MIN_WINDOWS - 1) * STEP:
+        start, end = max(start, before[-1] + window), min(end, after[0])
+        if end - start < window + (MIN_WINDOWS - 1) * step:
             continue
         offset = sorted(shifts)[len(shifts) // 2]
         yield {"submitted_samples": [start, end], "earlier_samples": [start - offset, end - offset],
@@ -106,10 +110,10 @@ def _brackets(matches):
                "same_time_support": {"before": before[-FLANK_WINDOWS:], "after": after[:FLANK_WINDOWS]}}
 
 
-def measure(earlier, submitted):
+def measure(earlier, submitted, *, window=WINDOW, step=STEP, min_rms=MIN_RMS):
     """Return the longest locally bracketed shift, plus assessed waveform support."""
-    matches = list(_matches(earlier, submitted))
-    candidates = list(_brackets(matches))
+    matches = list(_matches(earlier, submitted, window=window, step=step, min_rms=min_rms))
+    candidates = list(_brackets(matches, window=window, step=step))
     best = min(candidates, key=lambda span: (-span["supporting_windows"], span["submitted_samples"][0]), default=None)
     return best, sum(shift is not None for _, shift, _ in matches)
 
@@ -146,12 +150,15 @@ def _picture(assets, path, table, origin, span):
     return _picture_at(assets, path, table, max(0, bisect_right(clock, middle) - 1))
 
 
-def _assess(table, picture, audio, tracks, assets, result, picture_witness, summary_end):
+def _assess(table, picture, audio, tracks, assets, result, picture_witness, summary_end, *, quiet=False):
     if audio["status"] != "measured" or not MIN_SAMPLES <= audio["earlier"]["samples"] <= MAX_SAMPLES:
         return result | {"summary": "This timing check needs two matching continuous soundtrack clocks and at least 1.5 seconds of audio."}
     origin = Fraction(audio["earlier"]["relative_start"])
     best, support = measure(tracks[0][1], tracks[1][1])
     result["matched_windows"] = support
+    if quiet and best is None:
+        best, support = measure(tracks[0][1], tracks[1][1], min_rms=QUIET_RMS)
+        result.update(waveform_basis=QUIET_BASIS, matched_windows=support, waveform_note=QUIET_EXPLANATION)
     if support < 2 * FLANK_WINDOWS + MIN_WINDOWS:
         return result | {"summary": "Too few distinctive sound excerpts could be matched to assess a local timing change."}
     if best is None:
@@ -183,7 +190,7 @@ def assess(path, table, picture, audio, tracks, assets):
                    "relative to the same pictures.")
 
 
-def assess_reencode(paths, tables, picture, audio, tracks, assets):
+def assess_reencode(paths, tables, picture, audio, tracks, assets, *, quiet=False):
     """Measure a shift only when whole-picture and local-grid agreement both hold."""
     result = {"status": "unassessed", "basis": reencode.BASIS, "scope": reencode.scope(picture),
               "affects_overall_confidence": False, **reencode.report_profile(picture)}
@@ -208,4 +215,5 @@ def assess_reencode(paths, tables, picture, audio, tracks, assets):
         }}
 
     return _assess(tables[1], picture, audio, tracks, assets, result, witnesses,
-                   "between the clips over corresponding pictures.")
+                   "between the clips over corresponding pictures.", quiet=quiet and profile["rate"] in {24, 25}
+                   and profile["size"] == reencode.HD_PICTURE_SIZE)

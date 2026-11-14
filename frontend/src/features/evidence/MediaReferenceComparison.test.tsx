@@ -125,10 +125,12 @@ it.each([[true, 24], [true, 25], [true, 30], [false, 30]] as const)(
     return { earlier: item, submitted: item }
   }
   const summary = 'Matching soundtrack audio moved 200.0 ms later between the clips over corresponding pictures.'
+  const quietNote = 'The second pass checks quieter sound and still requires matching sound on either side.'
   const comparison = {
     schema: 'chipmunk.video-reference-comparison/11', status: 'measured', interpretation: 'Decoded source differences.',
     submitted: { width: 1280, height: 720 }, picture: { matching_frames: 0, changed_frames: 4 * rate, ranges: [] },
     soundtrack_alignment: { summary, scope: 'Local timing across re-encoded copies.', status: 'local_shift',
+      ...(rate === 24 ? { waveform_note: quietNote } : {}),
       basis: 'paired_h264_soundtrack_picture_grid/1',
       picture_profile: { width: 1280, height: 720, pictures: 4 * rate, frames_per_second: rate }, range: {
         earlier: { start_s: .68, end_s: 1.28, audio, waveform }, submitted: { start_s: .88, end_s: 1.48, audio, waveform },
@@ -143,6 +145,7 @@ it.each([[true, 24], [true, 25], [true, 30], [false, 30]] as const)(
   fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
   if (complete) {
     expect(await screen.findByText(summary)).toBeTruthy()
+    expect(Boolean(screen.queryByText(quietNote))).toBe(rate === 24)
     expect(screen.getByText(`Compared ${4 * rate} corresponding 1280×720 pictures at ${rate} fps.`)).toBeTruthy()
     const clock = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 7 })
     expect(screen.getByAltText(`before · Earlier clip · ${clock.format(21 / rate)} s`)).toBeTruthy()

@@ -26,6 +26,7 @@ from app.evidence.video_reference import (
     compare,
 )
 from app.evidence.video_reference_photometric import BASIS as LOCAL_AREA_BASIS
+from app.evidence.video_reference_soundtrack import QUIET_BASIS
 from app.evidence.video_reference_timing import SHORT_WAVEFORM_BASIS
 
 
@@ -71,6 +72,7 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
     options = {"include_trimmed": not verify, "include_local_area": not verify, "include_trim_reencoded": not verify,
                "include_measured_interval": not verify, "include_soundtrack_reencode": reencoded_soundtrack,
                "include_hd_soundtrack_reencode": reencoded_soundtrack,
+               "include_quiet_soundtrack": reencoded_soundtrack,
                "include_picture_insertion": picture_insertion}
     short_fallback = not verify
     local_sound = not verify
@@ -102,6 +104,7 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
                            include_soundtrack_reencode=reencoded_soundtrack,
                            include_hd_soundtrack_reencode=(reencoded_soundtrack and "fine_grid" in
                                record.get("picture", {}).get("soundtrack_picture_comparison", {})),
+                           include_quiet_soundtrack=((record.get("soundtrack_alignment") or {}).get("waveform_basis") == QUIET_BASIS),
                            include_additional_soundtrack=additional or (composite and "additional_soundtrack" in record),
                            include_channel_timing=channel_timing)
             if "timing" in record and schema in (SCHEMA_WITH_TIMING, SCHEMA_WITH_SHORT_TIMING, SCHEMA_WITH_SOUNDTRACK,

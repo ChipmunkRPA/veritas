@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Quieter earlier-copy soundtrack timing](video-soundtrack-quiet-2026-11-14.md)
+  adds four useful locations on the prior 720p panel and six on quieter
+  excerpts from the same source roster. Neither panel added control
+  flags. A quieter second pass is enabled on qualified 24 and 25 fps pairs.
+
 - [Earlier-copy 720p soundtrack timing at 24 and 25 fps](video-soundtrack-cadence-2026-11-14.md)
   located 21 of 28 short shifts in each cadence and carrier, with zero
   flags on 112 controls per delivery set. The local app reports the

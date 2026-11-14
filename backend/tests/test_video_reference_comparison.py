@@ -491,6 +491,8 @@ def test_hd_reencode_profile_reaches_authorized_comparison_and_original_replay(
     light = np.uint8(118 + 18 * np.sin(x / 12) * np.cos(y / 15) + 11 * np.cos((x + y) / 8))
     frames = np.stack([np.roll(np.repeat(light[..., None], 3, axis=2), index % 8, axis=1) for index in range(4 * rate)])
     pcm = np.random.default_rng(3172).integers(-7200, 7200, 64000, dtype=np.int16).astype(np.float32) / 32768
+    if rate == 24:
+        pcm *= .01  # Below the first-pass level floor, with enough variation for the quiet pass.
     edited = pcm.copy()
     edited[24000:38400] = pcm[24000 - movement:38400 - movement]
     clips = []
@@ -529,6 +531,7 @@ def test_hd_reencode_profile_reaches_authorized_comparison_and_original_replay(
     assert record["picture"]["soundtrack_picture_comparison"]["fine_grid"]["compared_pictures"] == 4 * rate
     timing = record["soundtrack_alignment"]
     assert timing["status"] == "local_shift" and timing["offset_ms"] == movement / 16
+    assert timing.get("waveform_basis") == ("quiet_soundtrack_waveform/1" if rate == 24 else None)
     assert timing["picture_profile"] == {"width": 1280, "height": 720, "frames_per_second": rate, "pictures": 4 * rate}
     recorded_profile = record["picture"]["soundtrack_picture_comparison"].get("picture_profile")
     assert recorded_profile == (timing["picture_profile"] if rate != 30 else None)
@@ -544,6 +547,7 @@ def test_hd_reencode_profile_reaches_authorized_comparison_and_original_replay(
     with pymupdf.open(stream=report_pdf, filetype="pdf") as report:
         page = next(p for p in report if "Local soundtrack timing" in p.get_text())
         assert f"Compared {4 * rate} corresponding 1280×720 pictures at {rate} fps." in page.get_text()
+        assert ("second pass checks quieter sound" in page.get_text()) == (rate == 24)
         assert len(page.get_images()) == 6
     export = tmp_path / "hd-export.json"
     export.write_text(json.dumps({"comparison": record, "assets": payload["assets"]}))

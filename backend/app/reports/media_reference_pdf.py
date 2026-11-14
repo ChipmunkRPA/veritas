@@ -313,6 +313,8 @@ def _soundtrack_timing_page(document, timing, assets):
     if profile := timing.get("picture_profile"):
         _text(page, MARGIN, 222, f"Compared {profile['pictures']} corresponding {profile['width']}×{profile['height']} "
               f"pictures at {profile['frames_per_second']} fps.", size=9, color=MUTED)
+    if note := timing.get("waveform_note"):
+        _text(page, MARGIN, 234, note, size=8, color=MUTED)
     if timing["status"] != "local_shift":
         return
     span = timing["range"]
@@ -320,7 +322,7 @@ def _soundtrack_timing_page(document, timing, assets):
         width = (RIGHT - MARGIN - 20) / 3
         for col, role in enumerate(("before", "during", "after")):
             x = MARGIN + col * (width + 10)
-            name_y = 240 if timing.get("picture_profile") else 232
+            name_y = 248 if note else 240 if timing.get("picture_profile") else 232
             _text(page, x, name_y, role.capitalize(), font="hebo", size=10)
             for top, side in zip((name_y + 21, name_y + 114), LABELS, strict=True):
                 picture = pictures[role][side]
@@ -333,7 +335,8 @@ def _soundtrack_timing_page(document, timing, assets):
         page.insert_image(pymupdf.Rect(MARGIN, 263, MARGIN + 260, 428), stream=assets[picture["asset"]["file"]])
     maximum = max(.01, *(abs(level) for side in LABELS for field in ("low", "high")
                         for level in span[side]["waveform"][field]))
-    for y, (side, label) in zip((498, 644) if pictures else (503, 635), LABELS.items(), strict=True):
+    picture_rows = (513, 644) if note else (498, 644)
+    for y, (side, label) in zip(picture_rows if pictures else (503, 635), LABELS.items(), strict=True):
         row = span[side]
         first, end = row["samples"]
         _text(page, MARGIN, y - 61, f"{label}  {row['start_s']:.3f} to {row['end_s']:.3f} s", font="hebo")

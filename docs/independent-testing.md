@@ -32,6 +32,10 @@ recounts results for 24 and 25 fps. It checks that both signed shifts
 use distinct audio from the untouched reference and includes separate
 PCM and AAC deliveries and synchronized picture controls.
 
+The [quiet soundtrack replay](video-soundtrack-quiet-2026-11-14.md#replay)
+recreates the original decoded inputs by hash, then tests shorter windows
+and a quieter signal floor separately on additional excerpts.
+
 The [PDF credential replay](pdf-content-credentials-2026-11-13.md#independent-local-replay)
 checks a pinned public signed PDF with the bundled trust list and verifies
 that the signature binds the document itself.

@@ -89,6 +89,19 @@ describe('ordinary document passage inspection', () => {
     expect(within(section).getByText(/zero AI-authorship weight/)).toBeTruthy()
   })
 
+  it('shows an invisible character as a code point with its decoded source position', () => {
+    const set = evidence([])
+    show({ ...set, coverage: { ...set.coverage, invisible_characters: {
+      schema: 'document-invisible-characters/1', coordinate_space: 'decoded_email_html',
+      checked_chars: 95, checked_blocks: 2, matches: 1, authorship_confidence_contribution: 0,
+      locations: [{ text_offset: 11, source_start: 29, source_end: 37, codepoint: 'U+200B', mime_part: '1.1' }],
+    } } })
+    const section = screen.getByRole('region', { name: 'Invisible characters in the source text' })
+    expect(within(section).getByText('U+200B')).toBeTruthy()
+    expect(within(section).getByText(/Email part 1.1, decoded HTML source characters \[29, 37\)/)).toBeTruthy()
+    expect(within(section).getByText(/zero AI-authorship weight/)).toBeTruthy()
+  })
+
   it('marks exact percentage values after a supplementary Unicode character', () => {
     const text = (value: string) => `The review 🧪 found ${value} percent of submitted applications qualified.`
     const readings = [['47', 50], ['37.0', 150]] as const

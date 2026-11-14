@@ -194,7 +194,11 @@ def _document(path: Path, extension: str) -> None:
             raise PreflightError("This email body could not be decoded as text. Re-export it before paying.")
     else:
         text = raw.decode("utf-16") if raw.startswith((b"\xff\xfe", b"\xfe\xff")) else raw.decode("utf-8-sig")
-    if not text.strip() or "\x00" in text or sum(not (char.isprintable() or char.isspace()) for char in text) > max(1, len(text) // 100):
+    from app.evidence.document_invisible_characters import ENCODED_FORMATTING
+
+    readable = sum(char.isprintable() and not char.isspace() for char in text)
+    unusual = sum(not (char.isprintable() or char.isspace() or char in ENCODED_FORMATTING) for char in text)
+    if not readable or "\x00" in text or unusual > max(1, len(text) // 100):
         raise PreflightError("This document has no readable text. Export it as UTF-8 text, PDF or DOCX before paying.")
 
 

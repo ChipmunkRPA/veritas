@@ -16,6 +16,11 @@ const originalLocationLabels: Record<DocumentOriginalTextLocation['coordinate'],
   decoded_email_html: 'Decoded email HTML source characters',
 }
 
+const invisibleCharacterNames: Record<string, string> = {
+  'U+202D': 'Left-to-right override', 'U+202E': 'Right-to-left override', 'U+FEFF': 'Embedded byte order mark',
+  'U+00AD': 'Soft hyphen', 'U+200B': 'Zero-width space', 'U+2060': 'Word joiner',
+}
+
 const emailInputRoles = [
   ['body', 'Message only'], ['quoted', 'Quote only'], ['signature', 'Signature only'],
   ['mixed', 'Mixed roles'], ['unmapped', 'Role unavailable'],
@@ -236,6 +241,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const partialPages = set.coverage?.partially_checked_pages ?? []
   const textVisibility = set.coverage?.pdf_text_visibility
   const wordVisibility = set.coverage?.word_text_visibility
+  const invisible = set.coverage?.invisible_characters
   const ocrPages = set.coverage?.ocr?.pages ?? []
   const matched = set.coverage?.matched_context_review
   const writingAgreement = set.coverage?.writing_second_check
@@ -262,6 +268,27 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     </section>}
     <DocumentRepeatedPassages result={set.repeated_passages} />
     {set.percentage_consistency && <PercentageConsistency review={set.percentage_consistency} />}
+    {invisible && <section aria-labelledby="document-invisible-characters" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="document-invisible-characters" className="m-0 text-body font-medium">Invisible characters in the source text</h3>
+      <p className="mt-2 mb-0 text-small">Checked {invisible.checked_chars} extracted characters across {invisible.checked_blocks} mapped blocks.
+        {' '}Found {invisible.matches} marked {invisible.matches === 1 ? 'character' : 'characters'}.</p>
+      <p className="mt-2 mb-0 text-small text-text-muted">Direction overrides, embedded byte order marks, and selected invisible breaks
+        or joiners inside basic Latin letters or digits are in scope. Ordinary formatting and copy and paste can introduce them.
+        {' '}This observation carries zero AI-authorship weight.</p>
+      {invisible.locations.length > 0 && <ul className="mt-2 mb-0 pl-5 text-small">
+        {invisible.locations.map(row => <li key={row.text_offset}>
+          {invisibleCharacterNames[row.codepoint]} <span className="font-mono">{row.codepoint}</span> · {row.body_path
+            ? `Word body path ${row.body_path.join(' / ')}, paragraph characters`
+            : row.mime_part ? `Email part ${row.mime_part}, ${invisible.coordinate_space === 'decoded_email_html'
+              ? 'decoded HTML source characters' : 'decoded source characters'}` : 'Decoded source characters'}
+          {' '}[{row.source_start}, {row.source_end}) · Extracted offset {row.text_offset}
+        </li>)}
+      </ul>}
+      {!!invisible.locations.length && <p className="mt-2 mb-0 text-caption text-text-muted">Positions are zero-based. End offsets are exclusive.</p>}
+      {invisible.matches > invisible.locations.length && <p className="mt-2 mb-0 text-caption text-text-muted">
+        {invisible.matches - invisible.locations.length} additional characters exceed the location display limit.
+      </p>}
+    </section>}
     {wordVisibility && <section aria-labelledby="document-word-text-visibility" className="mt-4 rounded-md border border-border p-4">
       <h3 id="document-word-text-visibility" className="m-0 text-body font-medium">Word text visibility</h3>
       <p className="mt-2 mb-0 text-small">Checked {wordVisibility.checked_paragraphs} extracted paragraphs.

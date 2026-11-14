@@ -25,6 +25,7 @@ from app.core.config import settings
 from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
 from app.evidence import (
     document_email_contexts,
+    document_invisible_characters,
     document_matched_context,
     document_native_locations,
     document_paragraph_priority,
@@ -333,6 +334,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_percentage_consistency.validate(document)
         document_pdf_visibility.validate(document)
         document_word_visibility.validate(document, document["source"].get(document_word_visibility.COMMITMENT))
+        document_invisible_characters.validate(document, document["source"].get(document_invisible_characters.COMMITMENT))
         document_matched_context.validate(document)
         document_paragraph_priority.validate(document)
         document_passage_coverage.validate(document)
@@ -522,6 +524,11 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if word_visibility := document_word_visibility.from_result(result):
         document["source"][document_word_visibility.COMMITMENT] = word_visibility
         document["coverage"][document_word_visibility.KEY] = decoded["meta"].get(document_word_visibility.KEY)
+    if invisible := document_invisible_characters.from_result(result):
+        document["source"][document_invisible_characters.COMMITMENT] = invisible
+        document["coverage"][document_invisible_characters.KEY] = document_invisible_characters.measure(
+            text, mapping, decoded["meta"])
+        document_invisible_characters.validate(document, invisible)
     if tracked_commitment := document_tracked_changes.from_result(result):
         document["source"][document_tracked_changes.COMMITMENT] = tracked_commitment
         document["coverage"][document_tracked_changes.KEY] = decoded.get(document_tracked_changes.KEY)
@@ -703,6 +710,9 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             if document["source"].get(document_word_visibility.COMMITMENT) != document_word_visibility.from_result(result):
                 raise ValueError("Word visibility evidence differs from the published result")
             document_word_visibility.verify_source(document, decoded["meta"].get(document_word_visibility.KEY), frozen=True)
+            if document["source"].get(document_invisible_characters.COMMITMENT) != document_invisible_characters.from_result(result):
+                raise ValueError("Invisible-character evidence differs from the published result")
+            document_invisible_characters.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])
             document_repeat.verify_source(document, decoded["text"], decoded["source_map"])
             document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()),
                                                           meta=decoded["meta"])

@@ -13,6 +13,7 @@ import wave
 
 from app.core.canonical import canonical_hash
 from app.evidence import (
+    document_invisible_characters,
     document_scope,
     email_alternatives,
     face_boundary_binding,
@@ -98,6 +99,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              scene_return_binding.COVERAGE_COMMITMENT, WRITING_POSITION,
                              EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, WORD_TEXT_VISIBILITY,
                              IMAGE_INTERPOLATION, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
+                             document_invisible_characters.COMMITMENT,
                              TIMING_COMMITMENT},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
@@ -261,6 +263,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              'Tracked Word edits require document evidence')
     _require(analysis['kind'] == 'document' or WORD_TEXT_VISIBILITY not in result,
              'Word text visibility requires document evidence')
+    _require(analysis["kind"] == "document" or document_invisible_characters.COMMITMENT not in result,
+             "Invisible-character measurements require document evidence")
     _require(analysis['kind'] == 'document' or EMAIL_CLASSIFIER_SCOPE not in result,
              'Email classifier input commitments require document evidence')
     if analysis['kind'] == 'document':
@@ -295,6 +299,10 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         _require(evidence["source"].get(WORD_TEXT_VISIBILITY) == word_visibility,
                  "Word visibility differs from the public result")
         document_word_visibility.validate(evidence, word_visibility)
+        invisible = result.get(document_invisible_characters.COMMITMENT)
+        _require(evidence["source"].get(document_invisible_characters.COMMITMENT) == invisible,
+                 "Invisible-character evidence differs from the public result")
+        document_invisible_characters.validate(evidence, invisible)
         document_email_contexts.validate_commitment(evidence, result.get(document_email_contexts.COMMITMENT),
                                                     published_checks={check["id"] for check in result.get("checks", [])})
         document_scope.validate_checkpoint_agreement(evidence)

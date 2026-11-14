@@ -140,13 +140,18 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
                 for key in ("pcm_sha256", "wav_sha256", "mapping_sha256", "samples", "sample_rate")):
             raise ObjectIntegrityError("Audio evidence does not match the published sample commitments")
     else:
-        from app.evidence import document_tracked_changes, document_word_visibility
+        from app.evidence import (
+            document_invisible_characters,
+            document_tracked_changes,
+            document_word_visibility,
+        )
 
         binding = sampling.get("document_source", {})
         if binding.get("source_sha256") != source_sha256 or any(source.get(key) != binding.get(key) or not source.get(key)
                 for key in ("extracted_text_sha256", "source_map_sha256", "decode_sha256")) or (
                 source.get(document_tracked_changes.COMMITMENT) != document_tracked_changes.from_result(result)
-                or source.get(document_word_visibility.COMMITMENT) != document_word_visibility.from_result(result)):
+                or source.get(document_word_visibility.COMMITMENT) != document_word_visibility.from_result(result)
+                or source.get(document_invisible_characters.COMMITMENT) != document_invisible_characters.from_result(result)):
             raise ObjectIntegrityError("Document evidence does not match the published extraction commitments")
 
 
@@ -508,6 +513,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     from app.detectors.text.extract import text_hash
     from app.evidence import (
         document_email_contexts,
+        document_invisible_characters,
         document_matched_context,
         document_native_locations,
         document_paragraph_priority,
@@ -548,6 +554,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_percentage_consistency.verify_source(document, text, mapping, decoded.get("sentences", ()), meta=decoded["meta"])
         document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
         document_word_visibility.verify_source(document, decoded["meta"].get(document_word_visibility.KEY), frozen=True)
+        document_invisible_characters.verify_source(document, text, mapping, decoded["meta"])
         document_native_locations.validate(document)
         if document_email_contexts.KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
@@ -723,6 +730,18 @@ def _coverage(kind: str, document: dict) -> str:
         page_count = "1 source page has" if partial_count == 1 else f"{partial_count} source pages have"
         summary += f" {page_count} mapped text and unchecked image areas."
     return summary
+
+
+def _invisible_characters_view(coverage: dict) -> dict | None:
+    from app.evidence import document_invisible_characters as invisible
+
+    record = coverage.get(invisible.KEY)
+    if not record:
+        return None
+    return {**record, "title": invisible.TITLE, "scope": invisible.SCOPE, "limitation": invisible.LIMITATION,
+            "locations": [{**row, "name": invisible.NAMES[row["codepoint"]],
+                           "label": invisible.location_label(row, record["coordinate_space"])}
+                          for row in record["locations"]]}
 
 
 def _document_coverage_details(coverage: dict) -> list[str]:
@@ -1273,6 +1292,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "email_body_alternatives": (document.get("coverage") or {}).get("email_body_alternatives") if kind == "document" else None,
             "email_classifier_input_scope": (document.get("coverage") or {}).get(EMAIL_INPUT_SCOPE) if kind == "document" else None,
             "word_tracked_changes": (document.get("coverage") or {}).get(TRACKED) if kind == "document" and not withheld else None,
+            "invisible_characters": _invisible_characters_view(document.get("coverage") or {}) if kind == "document" else None,
             "coverage_details": ([f"{'Voice evidence' if key == 'audio' else 'Audio/video synchronization evidence'}: {channel['reason']}"
                                   for key, channel in (document.get("coverage", {}).get("channels") or {}).items()]
                                  if kind == "video" else

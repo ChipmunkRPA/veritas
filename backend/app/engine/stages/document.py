@@ -39,11 +39,16 @@ from app.engine.fusion.registry import Selection
 from app.engine.registry import TEXT_FINETUNE_DETECTOR, TEXT_PRIMARY_DETECTORS
 from app.engine.runner import StageContext
 from app.engine.stages import common, document_screening
-from app.evidence import document_pdf_visibility, document_tracked_changes, document_word_visibility
+from app.evidence import (
+    document_invisible_characters,
+    document_pdf_visibility,
+    document_tracked_changes,
+    document_word_visibility,
+)
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p34"
+PIPELINE_VERSION = "doc-2.0-p35"
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 PRIMARY_DETECTORS = TEXT_PRIMARY_DETECTORS  # v0.3 used the fine-tune whenever it was installed
 SECONDARY_DETECTOR = "txt.hf.hello_simpleai"
@@ -513,6 +518,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         result.manifest.sampling[document_tracked_changes.COMMITMENT] = canonical_hash(tracked)
     if word_visibility := decoded.get("meta", {}).get(document_word_visibility.KEY):
         result.manifest.sampling[document_word_visibility.COMMITMENT] = canonical_hash(word_visibility)
+    if invisible := document_invisible_characters.measure(decoded["text"], decoded["source_map"], decoded["meta"]):
+        result.manifest.sampling[document_invisible_characters.COMMITMENT] = canonical_hash(invisible)
     if settings.document_email_alternatives_review and decoded.get("meta", {}).get("method") == "email":
         from app.evidence import email_alternatives
 

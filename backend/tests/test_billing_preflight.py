@@ -113,7 +113,9 @@ def test_docx_requires_a_readable_document_package():
 def test_text_checks_encoding_and_readability_without_running_models():
     verify("A UTF-8 document — with punctuation.".encode(), "article.txt", "document")
     verify("A UTF-16 document with punctuation.".encode("utf-16"), "article.txt", "document")
-    for data in (b" \r\n\t", b"\x00\xff\xfe\x80", b""):
+    verify("Readable 👩\u200d🔬 text includes Acct\u200bNumber, a word\u00adbreak and \u2067עברית\u2069.".encode(),
+           "article.txt", "document")
+    for data in (b" \r\n\t", b"\x00\xff\xfe\x80", b"", "\u2067\u2069\u202e\u202c".encode()):
         with pytest.raises(preflight.PreflightError):
             verify(data, "article.txt", "document")
 

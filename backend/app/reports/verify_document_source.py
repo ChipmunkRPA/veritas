@@ -17,6 +17,7 @@ from app.detectors.text.extract import extract, text_hash
 from app.evidence import (
     document_context,
     document_email_contexts,
+    document_invisible_characters,
     document_matched_context,
     document_native_locations,
     document_paragraph_priority,
@@ -130,6 +131,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_repeat.verify_source(evidence, text, mapping)
     document_pdf_visibility.verify_source(evidence, doc.meta)
     document_word_visibility.verify_source(evidence, doc.meta.get(document_word_visibility.KEY))
+    document_invisible_characters.verify_source(evidence, text, mapping, doc.meta)
     if document_percentage_consistency.KEY in evidence:
         from app.detectors.text.pipeline import segment_within
 
@@ -197,6 +199,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     email_input_detail = f" Verified source roles and text hashes for {email_inputs} classifier inputs." if email_inputs else ""
     tracked_detail = f" Verified {tracked} retained tracked Word edit locations against the source XML." if tracked else ""
     word_visibility_detail = " Verified direct Word hidden formatting and retained run locations." if document_word_visibility.KEY in coverage else ""
+    invisible_detail = (" Verified invisible Unicode characters and retained source positions."
+                        if document_invisible_characters.KEY in coverage else "")
     pdf_visibility = coverage.get(document_pdf_visibility.KEY, {})
     pdf_replacement_detail = (" Verified the PDF copyable-text comparison and retained page locations."
                               if pdf_visibility.get("schema") == document_pdf_visibility.SCHEMA else "")
@@ -204,4 +208,4 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
-            f"{tracked_detail}{word_visibility_detail}{pdf_replacement_detail}{percentage_detail}")
+            f"{tracked_detail}{word_visibility_detail}{invisible_detail}{pdf_replacement_detail}{percentage_detail}")

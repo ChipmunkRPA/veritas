@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Invisible Unicode characters](document-invisible-characters-2026-11-14.md)
+  are now source-linked evidence in TXT, Word, and mapped email body text.
+  The analysis, PDF, JSON, and signed replay use the same code points
+  and offsets. The observation carries zero AI-authorship weight.
+
 - [One-second refinement of existing speech flags](audio-narrow-flag-transfer-2026-11-14.md)
   improved one clean location and zero noisy locations on 15 new SINE
   readers. All three variants preserved the two useful clean locations.

@@ -29,6 +29,9 @@ that the signature binds the document itself.
 The [PDF copyable-text replay](document-pdf-copyable-text-2026-11-14.md#replay)
 recreates page locations for differences and tests a legitimate accessibility
 correction from a pinned publisher fixture.
+The [invisible Unicode replay](document-invisible-characters-2026-11-14.md#verify-the-record)
+re-extracts TXT, Word or a mapped email body to recompute the saved code
+points and source offsets, including HTML entities.
 
 The [longer writing replay](writing-context-agreement-2026-11-14.md#replay)
 checks source alignment between two saved measurement methods, rebuilds a

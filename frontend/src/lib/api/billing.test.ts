@@ -32,7 +32,7 @@ describe('payment client boundaries', () => {
     expect(body.get('client_sha256')).toBe('a'.repeat(64))
     expect(body.get('kind')).toBe('document')
     expect(body.get('risk_accepted')).toBe('true')
-    expect(body.get('risk_notice_version')).toBe('purchase-risk/v2')
+    expect(body.get('risk_notice_version')).toBe('purchase-risk/v3')
     expect(body.get('risk_notice_sha256')).toMatch(/^[a-f0-9]{64}$/)
     expect(body.has('amount_minor')).toBe(false)
     expect(body.has('currency')).toBe(false)

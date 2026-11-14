@@ -20,6 +20,7 @@ from typing import Any
 
 from app.core.canonical import canonical_hash
 from app.core.config import settings
+from app.detectors.text import language_scope
 from app.detectors.text.adapters.stylometry import LEXICON_TITLE, SPANS_TITLE
 from app.detectors.text.extract import EXTRACTION_VERSION, Document, hybrid_ocr_notice, partial_pdf_notice
 from app.detectors.text.pipeline import (
@@ -29,6 +30,7 @@ from app.detectors.text.pipeline import (
     check_document_size,
     decode_document,
     sentence_plot,
+    unassessed_language_document,
 )
 from app.detectors.text.segment import Sentence
 from app.engine import provenance_gate
@@ -41,7 +43,7 @@ from app.evidence import document_pdf_visibility, document_tracked_changes
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p31"  # p31: separate invisible PDF text from whole-document authorship.
+PIPELINE_VERSION = "doc-2.0-p32"  # English coverage gate for statistical writing checks.
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 PRIMARY_DETECTORS = TEXT_PRIMARY_DETECTORS  # v0.3 used the fine-tune whenever it was installed
 SECONDARY_DETECTOR = "txt.hf.hello_simpleai"
@@ -135,9 +137,16 @@ def detect(ctx: StageContext) -> dict[str, Any]:
     from app.engine.boundary import Cancelled
 
     decoded = ctx.outputs["decode"]
-    detected = common.run_detectors(ctx, (Modality.TEXT,), outputs=StageOutputs(document=decoded),
+    scope = None
+    if not provenance_gate.stop(ctx):
+        doc, sentences = document_input(ctx)
+        ctx.check("before identifying writing language")
+        scope = language_scope.classify(doc.text, sentences)
+        ctx.check("after identifying writing language")
+    detected = common.run_detectors(ctx, (Modality.TEXT,),
+                                    outputs=StageOutputs(document={**decoded, language_scope.KEY: scope}),
                                     max_units=DOCUMENT_MAX_UNITS, exclude={agreement.FAMILY, "provenance"})
-    if ctx.profile in agreement.FULL_DEEP and agreement.enabled():
+    if scope == language_scope.ENGLISH and ctx.profile in agreement.FULL_DEEP and agreement.enabled():
         try:
             agreement.record(ctx, detected, decoded)
         except Cancelled:
@@ -145,7 +154,14 @@ def detect(ctx: StageContext) -> dict[str, Any]:
         except Exception as error:
             ctx.check("after the optional second writing check")
             ctx.log.warning("writing_review.omitted", error_type=type(error).__name__)
-    return detected
+    return {**detected, language_scope.KEY: scope}
+
+
+def current_detect_output(output: Any) -> bool:
+    """Require an explicit coverage decision before reusing fresh detector outputs."""
+    return (isinstance(output, dict) and isinstance(output.get("detectors"), list)
+            and language_scope.KEY in output
+            and output[language_scope.KEY] in (None, language_scope.ENGLISH, *language_scope.MESSAGES))
 
 
 # --- legacy fuser ------------------------------------------------------------------------------------------
@@ -315,12 +331,14 @@ def fuse(ctx: StageContext) -> dict[str, Any]:
         raise ValueError(document_screening.RETIRED_ARTICLE_REASON)
     if (documentary := pdf_documentary_result(ctx)) is not None:
         return documentary
+    detected = ctx.outputs.get("detect") or {}
+    doc, sents = document_input(ctx)
+    if (scope := detected.get(language_scope.KEY)) in language_scope.MESSAGES:
+        return enforce_extraction_scope(unassessed_language_fusion(ctx, doc, sents, scope), doc)
     local_mode = settings.text_detector_mode == "candidate" and pin is None
     local_email = pin == document_screening.EMAIL_SHA256 or (local_mode and not ctx.state.get("force_fallback"))
     selection = (Selection(kind="document", mode="fallback") if local_mode or local_email
                  else common.select_fusion(ctx, "document"))
-    doc, sents = document_input(ctx)
-    detected = ctx.outputs.get("detect") or {}
     scores, sources, notes = document_scores(detected, len(sents))
     legacy = assemble_document(doc, sents, scores, None)
     if sources.get("classifier_document") == document_screening.DETECTOR:
@@ -381,6 +399,21 @@ def fuse(ctx: StageContext) -> dict[str, Any]:
         if local_email:
             fused = document_screening.apply(ctx, doc, fused)
     return enforce_extraction_scope(fused, doc)
+
+
+def unassessed_language_fusion(ctx: StageContext, doc: Document, sents: list[Sentence], scope: str) -> dict[str, Any]:
+    headline, reason = language_scope.MESSAGES[scope]
+    decision = Decision(code="not_assessable", verbal=headline, reason=reason,
+                        band="uncertain", confidence="low", fusion_mode="fallback").model_dump(mode="json")
+    legacy = unassessed_language_document(doc, sents, scope)
+    assessments = [{**row, "note": reason} if row["hypothesis"] == "H1_whole_content_synthesis" else row
+                   for row in common.LEGACY_ASSESSMENTS]
+    profile = {**ctx.outputs["condition"]["profile"], "within_validated_envelope": False,
+               "validation_support": "unsupported", "validation_measured_at": None}
+    profile["limiting_conditions"] = [*profile.get("limiting_conditions", []), reason]
+    return {"decision": decision, "signals": [], "assessments": assessments, "caveats": [reason], "calibration": [],
+            "condition_profile": profile, "fusion": {"mode": "fallback", "reason": reason},
+            "v1": {key: legacy[key] for key in ("verdict", "signals", "sentences", "stats", "document")}}
 
 
 def pdf_documentary_result(ctx: StageContext) -> dict[str, Any] | None:

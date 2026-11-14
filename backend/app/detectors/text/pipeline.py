@@ -33,8 +33,8 @@ from app.core.evidence import Signal
 from app.core.logging import get_logger
 from app.detectors.common.fusion import fuse, fuse_probability, prob_to_signal_fields
 from app.detectors.text import extract as extract_module
+from app.detectors.text import language_scope, stylometry
 from app.detectors.text import segment as segment_module
-from app.detectors.text import stylometry
 from app.detectors.text.binoculars import Binoculars, borrow_binoculars, document_score, sentence_scores
 from app.detectors.text.classifier import borrow_primary, borrow_secondary
 from app.detectors.text.extract import Document, from_string
@@ -414,8 +414,23 @@ def assemble_document(doc: Document, sents: list[Sentence], scores: DocumentScor
 
 def _analyze_segmented(doc: Document, sents: list[Sentence], art_dir: Path | None, t0: float) -> dict:
     check_document_length(doc, sents)
+    scope = language_scope.classify(doc.text, sents)
+    if scope in language_scope.MESSAGES:
+        return unassessed_language_document(doc, sents, scope)
     scores, timings = score_document(doc, sents)
     return assemble_document(doc, sents, scores, art_dir, timings=timings, t0=t0)
+
+
+def unassessed_language_document(doc: Document, sents: list[Sentence], scope: str) -> dict:
+    headline, reason = language_scope.MESSAGES[scope]
+    result = assemble_document(doc, sents, DocumentScores(n_sentences=len(sents)), None)
+    result["verdict"].update(probability_ai=None, label="Not assessable", confidence="low",
+                             summary=headline, reasoning=[reason], caveats=[reason])
+    result["document"] = {**doc.meta, language_scope.KEY: scope}
+    result["signals"] = []
+    for sentence in result["sentences"]:
+        sentence["reasons"] = [reason]
+    return result
 
 
 def analyze_document_obj(doc: Document, art_dir: Path | None) -> dict:

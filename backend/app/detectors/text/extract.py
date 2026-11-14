@@ -210,7 +210,7 @@ def _ocr_runtime() -> dict:
         return {"available": False, "reason": "Verified local OCR language data or executable is unavailable."}
 
 
-_LANGUAGE_IDENTIFIER = None
+_LANGUAGE_IDENTIFIER = None  # Published only after construction. Classify reads the model without mutating it.
 
 
 def _ocr_language(text: str) -> dict:

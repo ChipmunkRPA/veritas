@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- New analyses apply an English-language coverage check before statistical
+  writing models run. Clearly unsupported, detected mixed, or uncertain
+  language yields an unassessed authorship result. Purchase disclosures
+  explain the scope before checkout. The language check samples up to 48
+  passages in addition to the complete extract, so short language changes can
+  escape it. Verified signed provenance is evaluated separately.
 - [Blind pixel prediction](image-crossfit-prediction-2026-11-13.md) measured
   900 held deliveries against exact local image masks. It added at most two
   useful masks per encoding on the primary set, added ordinary-processing

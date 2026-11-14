@@ -10,6 +10,7 @@ import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -25,6 +26,7 @@ from app.api.v2 import install_problem_handlers
 from app.audit import chain as audit
 from app.billing import purchase_notice, service
 from app.cases import intake
+from app.core.canonical import canonical_hash
 from app.core.config import settings
 from app.engine.queue import JobQueue
 from app.storage.db import Analysis, Base, BillingEventRow, BillingOrderRow, Job
@@ -138,6 +140,24 @@ def test_purchase_receipt_and_hosted_warning_are_bound_to_the_order(billing):
     with billing.sessions() as db:
         assert db.get(BillingOrderRow, oid).purchase_acknowledgement == receipt
     assert len(billing.created) == 1
+
+
+def test_saved_v2_receipt_remains_valid_when_new_checkout_requires_v3(billing):
+    archived = json.loads(Path(purchase_notice.__file__).with_name("purchase_notice_v2.json").read_text())
+    digest = canonical_hash(archived)
+    assert digest == "22024573c8f354c278dd20bdf387c7cf3de9efcaf8a425629c56f409f4d6d826"
+    assert upload(billing, notice_version=archived["version"], notice_sha256=digest).status_code == 422
+
+    order_id = upload(billing).json()["order_id"]
+    with billing.sessions() as db:
+        order = db.get(BillingOrderRow, order_id)
+        old_receipt = {**order.purchase_acknowledgement, "notice": archived, "notice_sha256": digest}
+        order.purchase_acknowledgement = old_receipt
+        db.commit()
+    path = f"/api/v2/billing/orders/{order_id}/checkout"
+    assert billing.client.post(path, headers=billing.headers).status_code == 200
+    with billing.sessions() as db:
+        assert db.get(BillingOrderRow, order_id).purchase_acknowledgement == old_receipt
 
 
 def test_old_checkout_requires_acknowledgement_on_resume(billing):

@@ -1,6 +1,7 @@
 """Shared helpers for the document adapters: detector specs and the extracted document from the decode stage."""
 from __future__ import annotations
 
+from app.detectors.text import language_scope
 from app.detectors.text.extract import Document
 from app.detectors.text.segment import Sentence
 from app.engine.detector import (
@@ -42,7 +43,11 @@ def document_input(ctx: RunContext) -> tuple[Document, list[Sentence]]:
 
 def has_sentences(ctx: RunContext) -> Applicability:
     d = ctx.outputs.document
-    return Applicability(True) if d and d.get("sentences") else Applicability(False, "no extracted text")
+    if not d or not d.get("sentences"):
+        return Applicability(False, "no extracted text")
+    if message := language_scope.MESSAGES.get(d.get(language_scope.KEY)):
+        return Applicability(False, message[1])
+    return Applicability(True)
 
 
 def revisions(ctx: RunContext, *model_ids: str) -> dict[str, str]:

@@ -7,7 +7,7 @@ from pathlib import Path
 
 from app.core.canonical import canonical_hash
 
-VERSION = "purchase-risk/v2"
+VERSION = "purchase-risk/v3"
 NOTICE = {
     "version": VERSION,
     "title": "Before you pay",
@@ -22,6 +22,8 @@ NOTICE = {
     ],
     "acknowledgement_label": "I understand and accept these analysis limitations before paying US$9.99.",
     "document_notice": (
+        "Automated writing checks currently cover English. Documents may be left unassessed when they contain multiple languages "
+        "or the language is unclear. "
         "Article checks currently provide inspection evidence without a calibrated whole-article authorship conclusion. "
         "Email-body screening is a separate, limited check."
     ),
@@ -36,7 +38,8 @@ SHA256 = canonical_hash(NOTICE)
 # Historical orders retain the disclosure they actually accepted. New checkout
 # requests must accept VERSION; changing wording must not strand a paid order.
 _V1_NOTICE = json.loads(Path(__file__).with_name("purchase_notice_v1.json").read_text())
-_RECORDED_NOTICES = {canonical_hash(_V1_NOTICE): _V1_NOTICE, SHA256: NOTICE}
+_V2_NOTICE = json.loads(Path(__file__).with_name("purchase_notice_v2.json").read_text())
+_RECORDED_NOTICES = {canonical_hash(value): value for value in (_V1_NOTICE, _V2_NOTICE, NOTICE)}
 
 
 def public_notice() -> dict:

@@ -21,6 +21,12 @@ CASES = {
 
 
 def run(output, bank, sounds):
+    fixtures = {row[:3]: row[3:] for row in pairs("assessment", bank, sounds) if row[:3] in CASES}
+    assert fixtures.keys() == CASES.keys()
+    run_cases(output, fixtures)
+
+
+def run_cases(output, fixtures):
     configure(output, ROOT)
     os.environ.update(VERITAS_ENVIRONMENT="dev", VERITAS_AUDIO_DETECTOR_MODE="candidate",
                       VERITAS_AUDIO_REFERENCE_COMPARISON_ENABLED="true", VERITAS_AUDIO_REFERENCE_CLEAN_SPEECH="true",
@@ -34,7 +40,7 @@ def run(output, bank, sounds):
     from app.api import auth
     from app.billing import service
     from app.core.config import settings
-    from app.evidence.audio_reference import SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD
+    from app.evidence.audio_reference import SCHEMA_WITH_CLEAN_SPEECH_SUPPORT
     from app.main import app
     from app.storage.db import Analysis, get_session
     from scripts.compare_audio_references import run as replay
@@ -45,8 +51,6 @@ def run(output, bank, sounds):
     torch.set_num_interop_threads(1)
     stub = PaymentStub()
     service._stripe = stub
-    fixtures = {row[:3]: row[3:] for row in pairs("assessment", bank, sounds) if row[:3] in CASES}
-    assert fixtures.keys() == CASES.keys()
     results = {}
     with TestClient(app, client=("127.0.0.1", 50000)) as client:
         with get_session() as db:
@@ -77,7 +81,8 @@ def run(output, bank, sounds):
                 observed.append(check)
                 if not active:
                     continue
-                assert comparison["schema"] == SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD
+                assert comparison["schema"] == SCHEMA_WITH_CLEAN_SPEECH_SUPPORT
+                assert check["match_support"]["admitted"] is True
                 scan(json.dumps(comparison))
                 exported = output / f"{kind}.json"
                 save(exported, {name: payload[name] for name in ("comparison", "assets")})
@@ -89,6 +94,8 @@ def run(output, bank, sounds):
                     page = " ".join(report[1].get_text().split())
                     scan(page)
                     assert "Local speech comparison" in page and "zero weight" in page
+                    support = check["match_support"]
+                    assert f"Matching sound in {support['matching_windows']} of {support['active_windows']} active windows" in page
                     if status == "broad_processing_difference":
                         assert "Frequency balance across the recording" in page and "4 to 6 s" in page
                         assert "Selected interval" not in page and "range" not in check
@@ -98,7 +105,7 @@ def run(output, bank, sounds):
                         assert "Selected interval" in page and verification["excerpts_verified"] == 2
                 with get_session() as db:
                     assert db.get(Analysis, aid).result_hash == frozen
-                results[kind] = {"truth_samples": truth, "before": expected[0], "after": status,
+                results[kind] = {"truth_samples": truth, "before": expected[0], "after": status, "match_support": check["match_support"],
                                  "source_replay": verification, "frequency_balance": check.get("frequency_balance"),
                                  "earlier_sha256": digest(original.tobytes()), "submitted_sha256": digest(noisy.tobytes())}
     save(output / "receipt.json", {"cases": results, "paid_runs": len(results), "unpaid_jobs": 0,

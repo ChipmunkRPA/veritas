@@ -1,0 +1,59 @@
+{
+  "cases": {
+    "eq": {
+      "earlier_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "match_support": {
+        "active_windows": 55,
+        "admitted": true,
+        "checked_windows": 73,
+        "matching_windows": 46,
+        "upper_correlation": 0.448831
+      },
+      "source_replay": {
+        "excerpts_verified": 0,
+        "reason": "consistent_frequency_balance_change",
+        "status": "broad_processing_difference"
+      },
+      "submitted_sha256": "f6c742e80d445087e5f253075a623635a53c1c3c619aa5c4bac520b423fd80dc"
+    },
+    "piper": {
+      "earlier_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "match_support": {
+        "active_windows": 55,
+        "admitted": true,
+        "checked_windows": 73,
+        "matching_windows": 43,
+        "upper_correlation": 0.409645
+      },
+      "source_replay": {
+        "excerpts_verified": 2,
+        "reason": "local_change",
+        "samples": [
+          44800,
+          60160
+        ],
+        "status": "localized_difference"
+      },
+      "submitted_sha256": "066d26d82a56495d66067c74eb60b50a4e51ed3d90cb04ef7c9d48c6d2b9cbd3"
+    },
+    "untouched": {
+      "earlier_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "match_support": {
+        "active_windows": 55,
+        "admitted": true,
+        "checked_windows": 73,
+        "matching_windows": 47,
+        "upper_correlation": 0.451653
+      },
+      "source_replay": {
+        "excerpts_verified": 0,
+        "reason": "no_local_change",
+        "status": "no_local_difference"
+      },
+      "submitted_sha256": "aa029833c1388e67ca6a676b831be27913dc58d28f5c7b106596ff41d769e0dc"
+    }
+  },
+  "overall_assessments_preserved": true,
+  "paid_runs": 3,
+  "unpaid_jobs": 0
+}

@@ -12,6 +12,7 @@ HOP = 1_280
 POINT = 0.12831161
 RANGE_SAMPLES = 9 * HOP
 BANDS = ((300, 900), (900, 1750), (1750, 3400))
+MIN_ACTIVE, MIN_MATCHES, MATCH_POINT, MIN_UPPER_CORRELATION = 36, 18, .22, .30
 
 
 def _frames(pcm, frequency, weight, *, hop):
@@ -21,7 +22,7 @@ def _frames(pcm, frequency, weight, *, hop):
     return frames - (frames @ weight / weight.sum())[:, None]
 
 
-def matched(before, after, weight):
+def match_support(before, after, weight):
     earlier, submitted = (_frames(pcm, (250, 3800), weight, hop=HOP) * np.sqrt(weight) for pcm in (before, after))
     ref = np.einsum("ij,ij->i", earlier, earlier)
     sub = np.einsum("ij,ij->i", submitted, submitted)
@@ -29,8 +30,16 @@ def matched(before, after, weight):
     strength = np.sqrt(ref / weight.sum())
     active = (strength >= max(12, float(np.quantile(strength, .8)) * .25)) & (sub > 0)
     corr = joint / np.sqrt(np.maximum(ref * sub, 1e-10))
-    return (np.count_nonzero(active) >= 36 and np.count_nonzero(active & (corr >= .22)) >= 18
-            and np.quantile(corr[active], .7) >= .30)
+    count = int(np.count_nonzero(active))
+    matches = int(np.count_nonzero(active & (corr >= MATCH_POINT)))
+    upper = float(np.quantile(corr[active], .7)) if count else None
+    admitted = count >= MIN_ACTIVE and matches >= MIN_MATCHES and upper >= MIN_UPPER_CORRELATION
+    return {"checked_windows": len(active), "active_windows": count, "matching_windows": matches,
+            "upper_correlation": round(upper, 6) if upper is not None else None, "admitted": admitted}
+
+
+def matched(before, after, weight):
+    return match_support(before, after, weight)["admitted"]
 
 
 def band_stats(before, after, weight, *, hop=HOP):

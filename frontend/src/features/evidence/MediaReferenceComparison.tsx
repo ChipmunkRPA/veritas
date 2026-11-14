@@ -72,6 +72,7 @@ type CleanSpeechComparison = {
   status: 'localized_difference' | 'no_local_difference' | 'unassessed' | 'broad_processing_difference'
   reason: string
   basis?: 'dense_clean_reference_v1' | 'dense_clean_reference_frequency_balance_v1'
+  match_support?: { checked_windows: number; active_windows: number; matching_windows: number; upper_correlation: number | null; admitted: boolean }
   frequency_balance?: {
     bands_hz: [number, number][]
     section_start_samples: number[]
@@ -154,6 +155,7 @@ type Comparison = {
     | 'chipmunk.audio-reference-comparison/7' | 'chipmunk.audio-reference-comparison/8' | 'chipmunk.audio-reference-comparison/9'
     | 'chipmunk.audio-reference-comparison/10' | 'chipmunk.audio-reference-comparison/11'
     | 'chipmunk.audio-reference-comparison/12'
+    | 'chipmunk.audio-reference-comparison/13'
   picture?: never
   picture_insertion?: never
   insertion_retention?: never
@@ -627,8 +629,13 @@ function SecondSoundtrack({ result, assets }: { result: AdditionalSoundtrack; as
 function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison; assets: Result['assets'] }) {
   const span = result.range
   const balance = result.frequency_balance
+  const support = result.match_support
   return <div className="space-y-2 rounded-md border border-border p-3">
     <SoundtrackTimingEvidence timing={result} assets={assets} audioOnly title="Local speech comparison" />
+    {support && <p className="m-0 text-caption text-text-muted">
+      Matching sound in {support.matching_windows} of {support.active_windows} active windows.{' '}
+      {support.checked_windows} overlapping windows checked across the pair.
+    </p>}
     {span
       ? <p className="m-0 text-caption text-text-muted">{span.bands.length} frequency bands had matching sound on both sides.
         The matched excerpts use source ticks {span.submitted.source_pts[0]} to {span.submitted.source_pts[1]} at 16 kHz in both files.</p>
@@ -701,7 +708,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      const accepted = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
       if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
@@ -714,8 +721,10 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       if (schema === 'chipmunk.audio-reference-comparison/10' && !response.comparison.local_timing?.aac_presentation) {
         throw new Error('The comparison response is missing its AAC timing evidence.')
       }
+      const reportsMatchSupport = schema === 'chipmunk.audio-reference-comparison/13'
+      const usesFrequencyBalance = reportsMatchSupport || schema === 'chipmunk.audio-reference-comparison/12'
       if ((schema === 'chipmunk.audio-reference-comparison/8' || schema === 'chipmunk.audio-reference-comparison/9'
-          || schema === 'chipmunk.audio-reference-comparison/11' || schema === 'chipmunk.audio-reference-comparison/12')
+          || schema === 'chipmunk.audio-reference-comparison/11' || usesFrequencyBalance)
           && !response.comparison.clean_speech) {
         throw new Error('The comparison response is missing its local speech result.')
       }
@@ -723,9 +732,12 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
           && response.comparison.clean_speech?.basis !== 'dense_clean_reference_v1') {
         throw new Error('The comparison response is missing its local speech measurement method.')
       }
-      if (schema === 'chipmunk.audio-reference-comparison/12'
+      if (usesFrequencyBalance
           && response.comparison.clean_speech?.basis !== 'dense_clean_reference_frequency_balance_v1') {
         throw new Error('The comparison response is missing its frequency-balance measurement method.')
+      }
+      if (reportsMatchSupport && !response.comparison.clean_speech?.match_support) {
+        throw new Error('The comparison response is missing its matching sound counts.')
       }
       if ((schema === 'chipmunk.audio-reference-comparison/7' || schema === 'chipmunk.video-reference-comparison/8')
           && !response.comparison.channel_timing) {

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [paired speech transient replay](audio-transient-edges-2026-11-14.md#replay)
+rebuilds two control-only decision points and recounts 604 deliveries, including
+ordinary speech cuts and background-only controls. The published receipt has
+measurements and sample hashes without recordings.
+
 The [short speech transfer and rumble replay](audio-noisy-window-transfer-2026-11-14.md#replay)
 checks which exact SINE splices the staggered windows could reach and measures
 the separate effect of a 240 Hz filter on the original noisy-speech panel.

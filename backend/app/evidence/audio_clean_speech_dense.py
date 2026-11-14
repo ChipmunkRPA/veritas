@@ -64,16 +64,18 @@ def _strongest(first, second):
             "bands": bands}
 
 
-def measure(first, second):
+def measure(first, second, *, support=None):
     """Return a disposition and strongest supported measurement before the operating point."""
-    if not earlier.matched(first, second, np.hanning(earlier.WIDTH)):
+    if support is None:
+        support = earlier.match_support(first, second, np.hanning(earlier.WIDTH))
+    if not support["admitted"]:
         return "reference_match_not_supported", None
     result = _strongest(first, second)
     return ("local_support_not_available", None) if result is None else ("measured", result)
 
 
-def locate(first, second):
-    status, result = measure(first, second)
+def locate(first, second, *, support=None):
+    status, result = measure(first, second, support=support)
     if result is None:
         return status, None
     if result["relative_drop"] <= POINT:
@@ -81,13 +83,18 @@ def locate(first, second):
     return "local_change", result
 
 
-def locate_with_frequency_balance(first, second):
+def locate_with_frequency_balance(first, second, *, support=None):
     from app.evidence.audio_clean_speech_long import frequency_balance
 
-    reason, result = locate(first, second)
+    reason, result = locate(first, second, support=support)
     if reason == "reference_match_not_supported":
         return reason, result, None
     explained, profile = frequency_balance(first, second, section_samples=2 * earlier.RATE)
     if explained:
         return "consistent_frequency_balance_change", None, profile
     return reason, result, None
+
+
+def locate_with_match_support(first, second):
+    support = earlier.match_support(first, second, np.hanning(earlier.WIDTH))
+    return (*locate_with_frequency_balance(first, second, support=support), support)

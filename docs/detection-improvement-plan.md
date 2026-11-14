@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Paired sound transients around speech edits](audio-transient-edges-2026-11-14.md)
+  located one clean splice and zero of 45 noisy splices. Neither cue recovered
+  both endpoints. The cues remain offline. Earlier-copy reports now show how
+  much matching sound supported the comparison.
+
 - [Staggered SINE splices and low-frequency admission](audio-noisy-window-transfer-2026-11-14.md)
   added no correct locations on 45 noisy SINE edits. A separate 240 Hz filter
   admitted two more train-masked windows on the earlier panel, neither of

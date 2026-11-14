@@ -795,6 +795,34 @@ def test_clean_speech_lane_localizes_and_falls_back_with_source_clips(tmp_path, 
     assert record["clean_speech"]["reason"] == "native_format_required"
 
 
+def test_clean_speech_match_support_records_admission_and_replays_older_exports(tmp_path, clean_speech_pair):
+    first = clean_speech_pair["earlier"]
+    output = tmp_path / "match-support.json"
+    options = {"include_clean_speech": True, "use_dense_clean_speech": True, "use_clean_speech_eq_guard": True}
+    for kind, admitted in (("altered", True), ("other", False)):
+        second = clean_speech_pair[kind]
+        record, assets = audio_reference.compare(first, second, **options)
+        legacy, old_assets = audio_reference.compare(first, second, include_clean_speech_match_support=False, **options)
+        assert record["schema"] == audio_reference.SCHEMA_WITH_CLEAN_SPEECH_SUPPORT
+        assert legacy["schema"] == audio_reference.SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD
+        speech = record["clean_speech"]
+        support = speech["match_support"]
+        assert support["admitted"] is admitted
+        assert 0 <= support["matching_windows"] <= support["active_windows"] <= support["checked_windows"] == 73
+        assert {key: value for key, value in speech.items() if key != "match_support"} == legacy["clean_speech"]
+        assert assets == old_assets
+        for comparison in (record, legacy):
+            payload = {"comparison": comparison, "assets": {key: base64.b64encode(value).decode() for key, value in assets.items()}}
+            output.write_text(json.dumps(payload))
+            assert run(first, second, output, verify=True) == comparison
+            assert verify_clean_speech(first, second, output)["reason"] == speech["reason"]
+        payload["comparison"] = record
+        support["matching_windows"] += 1
+        output.write_text(json.dumps(payload))
+        with pytest.raises(ValueError, match="Matching sound coverage differs"):
+            verify_clean_speech(first, second, output)
+
+
 @pytest.mark.parametrize("dense", [False, True])
 def test_clean_speech_lane_api_is_opt_in_and_renders_source_ranges(reference_http, monkeypatch, tmp_path, clean_speech_pair, dense):
     f = reference_http

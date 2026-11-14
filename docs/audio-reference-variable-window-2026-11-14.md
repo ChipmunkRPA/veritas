@@ -8,6 +8,17 @@ bands and three two-second sections. Supported local changes still show the
 source times, both waveforms and both excerpts. The comparison contributes
 zero weight to the overall AI estimate.
 
+New six-second comparisons also show the number of matching windows, the
+number with measurable sound and the total number checked. The 240 ms
+windows overlap at 80 ms steps, so the counts describe support across the
+pair. The JSON records the matching-sound admission decision and the 70th
+percentile correlation among the active windows. The exact-source reviewer
+recomputes these values and still reads earlier exports. The counts add
+context to the existing measurement and carry no AI-confidence weight.
+The prepaid local replay showed 43 matching windows out of 55 active and
+73 checked in a train-masked replacement, with the same **2.800–3.760 s**
+range and two verified excerpts. [Matching-sound replay receipt](evaluation-panels/audio-reference-match-support-app-2026-11-14.json)
+
 Both files need six seconds of continuous 16 kHz mono PCM16 WAV or FLAC
 on the same sample clock. The recordings must first pass the existing
 matching-sound rule. The check divides each band's matching-sound gain by

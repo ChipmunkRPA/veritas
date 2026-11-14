@@ -337,7 +337,7 @@ it('shows exact moved sound in the reported stereo channel', async () => {
   expect(screen.queryByRole('region', { name: 'Right channel timing' })).toBeNull()
 })
 
-it.each([8, 11, 12])('shows both source excerpts for local speech comparison version %s', async (version) => {
+it.each([8, 11, 12, 13])('shows both source excerpts for local speech comparison version %s', async (version) => {
   const dense = version !== 8
   const audio = { file: 'excerpt.wav', media_type: 'audio/wav', sha256: 'c'.repeat(64) }
   const excerpt = { start_s: 2, end_s: dense ? 2.96 : 2.72, source_pts: [32000, dense ? 47360 : 43520],
@@ -345,7 +345,9 @@ it.each([8, 11, 12])('shows both source excerpts for local speech comparison ver
   const comparison = {
     schema: `chipmunk.audio-reference-comparison/${version}`, status: 'measured', interpretation: 'Decoded audio differences.',
     clean_speech: { status: 'localized_difference', summary: 'Matching sound became weaker.', scope: 'Ordinary edits can cause this.',
-      ...(dense ? { basis: version === 12 ? 'dense_clean_reference_frequency_balance_v1' : 'dense_clean_reference_v1' } : {}),
+      ...(dense ? { basis: version >= 12 ? 'dense_clean_reference_frequency_balance_v1' : 'dense_clean_reference_v1' } : {}),
+      ...(version === 13 ? { match_support: { checked_windows: 73, active_windows: 63, matching_windows: 51,
+        upper_correlation: .72, admitted: true } } : {}),
       range: { earlier: excerpt, submitted: excerpt, relative_drop: .5,
         bands: [[300, 900], [900, 1750]].map(band_hz => ({ band_hz, before: 1, within: .5, after: 1 })) } },
   }
@@ -360,6 +362,7 @@ it.each([8, 11, 12])('shows both source excerpts for local speech comparison ver
   expect(screen.getByText(`Analyzed recording · 2.000–${dense ? '2.960' : '2.720'} s`)).toBeTruthy()
   expect(screen.getByText(new RegExp(`source ticks 32000 to ${dense ? 47360 : 43520}`))).toBeTruthy()
   expect(Boolean(screen.queryByText('Matching sound gain by frequency band'))).toBe(dense)
+  expect(Boolean(screen.queryByText(/Matching sound in 51 of 63 active windows/))).toBe(version === 13)
   expect(screen.getAllByRole('img', { name: /matched excerpt waveform/ })).toHaveLength(2)
   expect((fetch.mock.calls[1][1].body as FormData).get('earlier_has_clean_speech')).toBe('true')
   expect(screen.getByRole('button', { name: 'Download PDF' })).toBeTruthy()

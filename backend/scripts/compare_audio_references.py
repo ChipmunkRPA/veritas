@@ -12,6 +12,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_CHANNEL_TIMING,
     SCHEMA_WITH_CLEAN_SPEECH,
     SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD,
+    SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
     SCHEMA_WITH_LOCAL_TIMING,
@@ -25,6 +26,7 @@ from scripts.compare_video_references import main, replay
 
 def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False, clean_speech: bool = False) -> dict:
     compare_source = partial(compare, include_clean_speech=True) if clean_speech else compare
+    eq_schemas = {SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD, SCHEMA_WITH_CLEAN_SPEECH_SUPPORT}
     if verify:
         exported = json.loads((output if output.is_file() else output / "comparison.json").read_bytes())
         record = exported.get("comparison", exported) if isinstance(exported, dict) else None
@@ -44,14 +46,15 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False, c
                                      allow_long_clean_speech=record.get("local_timing", {}).get("twelve_second_speech_option", True))
         elif isinstance(record, dict) and record.get("schema") in {
             SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH, SCHEMA_WITH_DENSE_CLEAN_SPEECH,
-            SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD,
+            *eq_schemas,
         }:
             compare_source = partial(compare, include_clean_speech=True, include_local_timing="local_timing" in record,
                                      include_channel_timing="channel_timing" in record,
                                      allow_long_clean_speech=record["schema"] == SCHEMA_WITH_LONG_CLEAN_SPEECH,
                                      use_dense_clean_speech=record["schema"] in {
-                                         SCHEMA_WITH_DENSE_CLEAN_SPEECH, SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD},
-                                     use_clean_speech_eq_guard=record["schema"] == SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD)
+                                         SCHEMA_WITH_DENSE_CLEAN_SPEECH, *eq_schemas},
+                                     use_clean_speech_eq_guard=record["schema"] in eq_schemas,
+                                     include_clean_speech_match_support=record["schema"] == SCHEMA_WITH_CLEAN_SPEECH_SUPPORT)
     return replay(compare_source, earlier, submitted, output, verify=verify)
 
 

@@ -11,6 +11,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_CHANNEL_TIMING,
     SCHEMA_WITH_CLEAN_SPEECH,
     SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD,
+    SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
     SCHEMA_WITH_LOCAL_TIMING,
@@ -389,38 +390,46 @@ def _clean_speech_page(document, result):
     page.insert_textbox((MARGIN, 125, RIGHT, 170), result["summary"], fontsize=12, fontname="hebo", color=INK)
     page.insert_textbox((MARGIN, 177, RIGHT, 242), result["scope"], fontsize=11, fontname="helv", color=MUTED)
     span = result.get("range")
+    offset = 0
+    if (support := result.get("match_support")) is not None:
+        offset = 36
+        _text(page, MARGIN, 245, f"Matching sound in {support['matching_windows']} of {support['active_windows']} "
+              f"active windows. {support['checked_windows']} windows checked.", size=9, color=MUTED)
+        outcome = "The pair met the matching-sound rule." if support["admitted"] else "The pair had too little matching sound."
+        _text(page, MARGIN, 259, f"{outcome} Windows overlap.", size=9, color=MUTED)
     if not span:
-        _text(page, MARGIN, 259, "The decoded sample comparison is reported separately.")
+        _text(page, MARGIN, 259 + offset, "The decoded sample comparison is reported separately.")
         if (balance := result.get("frequency_balance")) is not None:
-            _text(page, MARGIN, 290, "Frequency balance across the recording", font="hebo")
+            _text(page, MARGIN, 290 + offset, "Frequency balance across the recording", font="hebo")
             starts = balance["section_start_samples"]
             duration = (starts[1] - starts[0]) / AUDIO_RATE
             columns = [MARGIN + 68 + 82 * i for i in range(len(balance["bands_hz"]))]
-            _text(page, MARGIN, 314, "Section", size=9, font="hebo")
+            _text(page, MARGIN, 314 + offset, "Section", size=9, font="hebo")
             for x, (low, high) in zip(columns, balance["bands_hz"], strict=True):
-                _text(page, x, 314, f"{low}-{high} Hz", size=9, font="hebo")
+                _text(page, x, 314 + offset, f"{low}-{high} Hz", size=9, font="hebo")
             for i, (start, gains) in enumerate(zip(starts, balance["relative_gains"], strict=True)):
-                y = 334 + 19 * i
+                y = 334 + offset + 19 * i
                 _text(page, MARGIN, y, f"{start / AUDIO_RATE:.0f} to {start / AUDIO_RATE + duration:.0f} s", size=10)
                 if gains is None:
                     _text(page, columns[0], y, "Too little matching sound", size=10, color=MUTED)
                     continue
                 for x, gain in zip(columns, gains, strict=True):
                     _text(page, x, y, f"{gain:.3f}", size=10)
-            _text(page, MARGIN, 400, "Gains are relative to the two lowest frequency bands.", size=9, color=MUTED)
+            _text(page, MARGIN, 400 + offset, "Gains are relative to the two lowest frequency bands.", size=9, color=MUTED)
         return
     first, end = span["samples"]
     rate = result["sample_rate"]
-    _text(page, MARGIN, 253, f"Selected interval  {first / rate:.3f} to {end / rate:.3f} s", font="hebo")
-    _text(page, MARGIN, 274, f"{len(span['bands'])} frequency bands had matching sound on both sides.", size=10, color=MUTED)
+    _text(page, MARGIN, 253 + offset, f"Selected interval  {first / rate:.3f} to {end / rate:.3f} s", font="hebo")
+    _text(page, MARGIN, 274 + offset, f"{len(span['bands'])} frequency bands had matching sound on both sides.", size=10, color=MUTED)
     if "supporting_window_starts" in span:
         first_window, last_window = (x / rate for x in span["supporting_window_starts"])
-        _text(page, MARGIN, 291, f"Two six-second checks starting at {first_window:.3f} s and {last_window:.3f} s agreed.", size=9, color=MUTED)
+        _text(page, MARGIN, 291 + offset, f"Two six-second checks starting at {first_window:.3f} s and {last_window:.3f} s agreed.", size=9, color=MUTED)
     if "basis" in result:
-        _text(page, MARGIN, 291, f"Drop in signed matching-sound gain  {span['relative_drop']:.3f}", size=9, color=MUTED)
+        _text(page, MARGIN, 291 + offset, f"Drop in signed matching-sound gain  {span['relative_drop']:.3f}", size=9, color=MUTED)
     maximum = max(.01, *(abs(level) for side in LABELS for field in ("low", "high")
                         for level in span[side]["waveform"][field]))
-    for y, (side, label) in zip((379, 565), (("earlier", "Earlier recording"), ("submitted", "Analyzed recording")), strict=True):
+    centers = (408, 565) if offset else (379, 565)
+    for y, (side, label) in zip(centers, (("earlier", "Earlier recording"), ("submitted", "Analyzed recording")), strict=True):
         row = span[side]
         source_start, source_end = row["source_pts"]
         _text(page, MARGIN, y - 63, f"{label}  {row['start_s']:.3f} to {row['end_s']:.3f} s", font="hebo")
@@ -564,7 +573,7 @@ def render(record, assets):
                                         SCHEMA_WITH_TRIM_AND_LEVEL, SCHEMA_WITH_STEREO, SCHEMA_WITH_LOCAL_TIMING,
                                         SCHEMA_WITH_CHANNEL_TIMING, SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH,
                                         SCHEMA_WITH_AAC_TIMING, SCHEMA_WITH_DENSE_CLEAN_SPEECH,
-                                        SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD)
+                                        SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD, SCHEMA_WITH_CLEAN_SPEECH_SUPPORT)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
         adjusted = record.get("level_adjusted")
         trimmed = is_audio and "trim_alignment" in record.get("audio", {})

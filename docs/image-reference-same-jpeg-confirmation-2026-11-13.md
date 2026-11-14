@@ -82,8 +82,10 @@ and `VERITAS_IMAGE_REFERENCE_SAME_JPEG`. From a completed image
 analysis, choose **Compare with an earlier copy** and upload the earlier
 JPEG. The route applies only if earlier comparisons could not assess
 the pair, the dimensions match and each side is 512–768 pixels, and
-both files are upright, unprofiled, baseline RGB JPEG90 with matching
-4:2:0 sampling and standard quantization. Matching detailed blocks
+both files are upright, unprofiled RGB JPEG90 with matching 4:2:0 sampling
+and standard quantization. Supported encoding now includes
+[single-frame progressive JPEG](image-reference-progressive-2026-11-14.md).
+Matching detailed blocks
 support the common framing and selected differences are drawn on the
 delivered pixels. The browser, PDF and JSON share exact native crops,
 an overlay and the alignment counts. The finding contributes zero AI

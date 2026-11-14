@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Progressive JPEG earlier-copy comparison](image-reference-progressive-2026-11-14.md)
+  located four additional object removals across two photographs and six
+  more deliberate local retouches on the same photos. The comparison added
+  no highlights on unchanged or globally processed controls. It carries
+  zero AI-authorship weight.
+
 - [Agreement between three views of a sentence](writing-context-agreement-2026-11-14.md)
   added no useful locations on the two journal panels. The optional
   longer-passage check now retains complete centers when some inputs fail or

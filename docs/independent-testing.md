@@ -31,6 +31,11 @@ checks source alignment between two saved measurement methods, rebuilds a
 combined operating point and recounts all 39 known edits and 42 ordinary
 files. It requires standard-library Python and the checked-in scalar receipts.
 
+The [progressive JPEG earlier-copy replay](image-reference-progressive-2026-11-14.md#replay)
+recounts coverage gains and control highlights on 12 photos. Native replay
+also verifies that lossless coefficient transcoding preserves all decoded
+pixels and the evidence from the baseline pairs.
+
 The [fresh video timing study](video-lipsync-repeat-fresh-actors-2026-11-13.md#replay)
 includes two public source plans and runners that recover the exact native
 clip clocks. The [paired soundtrack comparison](video-soundtrack-reencode-2026-11-13.md#replay)

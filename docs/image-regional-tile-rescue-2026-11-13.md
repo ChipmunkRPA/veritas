@@ -47,7 +47,10 @@ source groups and at most three additional misplaced edit highlights.
 The observed counts were zero, two and five. The study kept the fixed
 model response and area rules throughout.
 
-The released FLAME checkpoint remains a separate comparison candidate. Its publisher licenses the exact v0.1.0 checkpoint and configuration under Apache-2.0. The separate Meta SAM 2.1 base checkpoint is Apache-2.0. The FLAME adapter contains 100 tensors and passed an isolated weights-only load. The base-model inference and detection evaluation are pending. [FLAME release](https://github.com/phoenixnir/FLAME/releases/tag/v0.1.0) · [Meta model license](https://github.com/facebookresearch/sam2#license)
+The separate [released FLAME evaluation](image-flame-jpeg-transfer-2026-11-13.md)
+ran the exact Apache-2.0 weights with the matching SAM 2.1 base on both
+banks. Its ordinary-control operating point recovered no additional
+object-removal location. The candidate remains experimental.
 
 Run the standard-library reader to recompute both banks from anonymous
 pixel counts and source groups. It can also read the historical main-bank

@@ -1,0 +1,4547 @@
+{
+  "plan": {
+    "pairs": [
+      "baseline",
+      "earlier_progressive",
+      "submitted_progressive",
+      "both_progressive"
+    ],
+    "parity": "Require identical RGB, exact-block evidence and masks across lossless coefficient transcodes.",
+    "roles": [
+      "unchanged",
+      "sharp",
+      "feathered",
+      "local_blur",
+      "local_tone",
+      "local_copy",
+      "global_resize",
+      "second_jpeg",
+      "unrelated",
+      "shifted",
+      "reflection"
+    ],
+    "scope": "Compare baseline and progressive standard quality-90 RGB JPEG pairs with matching dimensions.",
+    "source": "First six supported CC BY 2.0 LaMa sources by original SHA-256 from each previously measured BG-REAL roster."
+  },
+  "rows": [
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 1,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9"
+      ],
+      "progressive_pairs": 3,
+      "role": "unchanged",
+      "source_sha256": "049f1a3b3f1f856bdb5fd24decf778fd03afc1c268d43378f18c9ad817d37150"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        13272,
+        13023
+      ],
+      "baseline_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "1ca267513df68b8d6421651c6b83f25337a6b8e129cea51551efc0174f88c88a"
+      ],
+      "changed": 13748,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        13272,
+        13023
+      ],
+      "group": 1,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        13272,
+        13023
+      ],
+      "progressive_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "1ca267513df68b8d6421651c6b83f25337a6b8e129cea51551efc0174f88c88a"
+      ],
+      "progressive_pairs": 3,
+      "role": "sharp",
+      "source_sha256": "049f1a3b3f1f856bdb5fd24decf778fd03afc1c268d43378f18c9ad817d37150"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        12271,
+        12158
+      ],
+      "baseline_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "46eed2f4acc11e09fb4ddd4921e6355d41158c4bec077eb8533ef00cf041478d"
+      ],
+      "changed": 13006,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        12271,
+        12158
+      ],
+      "group": 1,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        12271,
+        12158
+      ],
+      "progressive_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "46eed2f4acc11e09fb4ddd4921e6355d41158c4bec077eb8533ef00cf041478d"
+      ],
+      "progressive_pairs": 3,
+      "role": "feathered",
+      "source_sha256": "049f1a3b3f1f856bdb5fd24decf778fd03afc1c268d43378f18c9ad817d37150"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3378,
+        3342
+      ],
+      "baseline_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "782ca7334dc18abc10cd3861694bb34285e553ba819c1e31bde7d5843d3c9bda"
+      ],
+      "changed": 12700,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3378,
+        3342
+      ],
+      "group": 1,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3378,
+        3342
+      ],
+      "progressive_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "782ca7334dc18abc10cd3861694bb34285e553ba819c1e31bde7d5843d3c9bda"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_blur",
+      "source_sha256": "049f1a3b3f1f856bdb5fd24decf778fd03afc1c268d43378f18c9ad817d37150"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        10849,
+        10849
+      ],
+      "baseline_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "4894e2e53a4f36f34968d621a386fc9e9b48a4844b3debfef7666d3deafbc5f9"
+      ],
+      "changed": 13374,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        10849,
+        10849
+      ],
+      "group": 1,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        10849,
+        10849
+      ],
+      "progressive_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "4894e2e53a4f36f34968d621a386fc9e9b48a4844b3debfef7666d3deafbc5f9"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_tone",
+      "source_sha256": "049f1a3b3f1f856bdb5fd24decf778fd03afc1c268d43378f18c9ad817d37150"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        13656,
+        13427
+      ],
+      "baseline_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "4b93b1ca06e1c455393e2a8466613417a32fef82e14f14e4ea37ee2c644fb93c"
+      ],
+      "changed": 13734,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        13656,
+        13427
+      ],
+      "group": 1,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        13656,
+        13427
+      ],
+      "progressive_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "4b93b1ca06e1c455393e2a8466613417a32fef82e14f14e4ea37ee2c644fb93c"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_copy",
+      "source_sha256": "049f1a3b3f1f856bdb5fd24decf778fd03afc1c268d43378f18c9ad817d37150"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "c5110a3e5a99c1bfb20659acc60b732de34228d5e40542a9c502674574b5a15b"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 1,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "c5110a3e5a99c1bfb20659acc60b732de34228d5e40542a9c502674574b5a15b"
+      ],
+      "progressive_pairs": 3,
+      "role": "global_resize",
+      "source_sha256": "049f1a3b3f1f856bdb5fd24decf778fd03afc1c268d43378f18c9ad817d37150"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "e6c5dca82898ea6610b6b18c49e7b204abdb9d797ec51747de5f5cc3629e2b85"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 1,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "e6c5dca82898ea6610b6b18c49e7b204abdb9d797ec51747de5f5cc3629e2b85"
+      ],
+      "progressive_pairs": 3,
+      "role": "second_jpeg",
+      "source_sha256": "049f1a3b3f1f856bdb5fd24decf778fd03afc1c268d43378f18c9ad817d37150"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 1,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa"
+      ],
+      "progressive_pairs": 3,
+      "role": "unrelated",
+      "source_sha256": "049f1a3b3f1f856bdb5fd24decf778fd03afc1c268d43378f18c9ad817d37150"
+    },
+    {
+      "baseline": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "fc0ef7ba289bba90751439492fd5d2d5b87e9696f073e546be423f8b50bc43dd"
+      ],
+      "changed": 0,
+      "extended": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 1,
+      "pixels": 442368,
+      "previous": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "fc0ef7ba289bba90751439492fd5d2d5b87e9696f073e546be423f8b50bc43dd"
+      ],
+      "progressive_pairs": 3,
+      "role": "shifted",
+      "source_sha256": "049f1a3b3f1f856bdb5fd24decf778fd03afc1c268d43378f18c9ad817d37150"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "712706a60a1ed3b50e24d301056e54e8b8c6b16ec73e7bb5ffe21db6d18b97f6"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 1,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9",
+        "712706a60a1ed3b50e24d301056e54e8b8c6b16ec73e7bb5ffe21db6d18b97f6"
+      ],
+      "progressive_pairs": 3,
+      "role": "reflection",
+      "source_sha256": "049f1a3b3f1f856bdb5fd24decf778fd03afc1c268d43378f18c9ad817d37150"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 2,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa"
+      ],
+      "progressive_pairs": 3,
+      "role": "unchanged",
+      "source_sha256": "10a6860020728d576ec40abe77f092ad6ed200736ab67fe2bdfd3d2dba678865"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        22700,
+        22698
+      ],
+      "baseline_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "0e06868f9cbcac9ed65863b7d0461999b4d051896d24a6fc9b2c905254e18757"
+      ],
+      "changed": 24875,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        22700,
+        22698
+      ],
+      "group": 2,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "0e06868f9cbcac9ed65863b7d0461999b4d051896d24a6fc9b2c905254e18757"
+      ],
+      "progressive_pairs": 3,
+      "role": "sharp",
+      "source_sha256": "10a6860020728d576ec40abe77f092ad6ed200736ab67fe2bdfd3d2dba678865"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        22268,
+        22264
+      ],
+      "baseline_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "dab51011565cf9970a97c5f479922f9177ee987ba9bf280d94a8d10c26ea4e6a"
+      ],
+      "changed": 23881,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        22268,
+        22264
+      ],
+      "group": 2,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "dab51011565cf9970a97c5f479922f9177ee987ba9bf280d94a8d10c26ea4e6a"
+      ],
+      "progressive_pairs": 3,
+      "role": "feathered",
+      "source_sha256": "10a6860020728d576ec40abe77f092ad6ed200736ab67fe2bdfd3d2dba678865"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        15446,
+        15350
+      ],
+      "baseline_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "cdfa845f8a308d6df9c31fcb455b42f0238a55ed5a46e5b50007d75ef3c3fee8"
+      ],
+      "changed": 23246,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        15446,
+        15350
+      ],
+      "group": 2,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "cdfa845f8a308d6df9c31fcb455b42f0238a55ed5a46e5b50007d75ef3c3fee8"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_blur",
+      "source_sha256": "10a6860020728d576ec40abe77f092ad6ed200736ab67fe2bdfd3d2dba678865"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        22611,
+        22611
+      ],
+      "baseline_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "dbd08bcefe3fd698bbd233b562eb66470e5a49cbe4c44518cd7e042c1dd820b3"
+      ],
+      "changed": 24321,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        22611,
+        22611
+      ],
+      "group": 2,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "dbd08bcefe3fd698bbd233b562eb66470e5a49cbe4c44518cd7e042c1dd820b3"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_tone",
+      "source_sha256": "10a6860020728d576ec40abe77f092ad6ed200736ab67fe2bdfd3d2dba678865"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        23912,
+        23847
+      ],
+      "baseline_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "c268bfd29208dc5c193ef30bd4e88669176fc6d38bdba725e83d4723bb655479"
+      ],
+      "changed": 24579,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        23912,
+        23847
+      ],
+      "group": 2,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "c268bfd29208dc5c193ef30bd4e88669176fc6d38bdba725e83d4723bb655479"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_copy",
+      "source_sha256": "10a6860020728d576ec40abe77f092ad6ed200736ab67fe2bdfd3d2dba678865"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "d0acbbb51b42b0d553581a43a7f498aec7c154b1e13e5fdefa445d4aad3e6c5a"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 2,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "d0acbbb51b42b0d553581a43a7f498aec7c154b1e13e5fdefa445d4aad3e6c5a"
+      ],
+      "progressive_pairs": 3,
+      "role": "global_resize",
+      "source_sha256": "10a6860020728d576ec40abe77f092ad6ed200736ab67fe2bdfd3d2dba678865"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "b154c66510f8178b9425bdbe9ec2ade8dd747b54b099a5d4db3e86e8d36f7dee"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 2,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "b154c66510f8178b9425bdbe9ec2ade8dd747b54b099a5d4db3e86e8d36f7dee"
+      ],
+      "progressive_pairs": 3,
+      "role": "second_jpeg",
+      "source_sha256": "10a6860020728d576ec40abe77f092ad6ed200736ab67fe2bdfd3d2dba678865"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "fe08d9946f81257db8a6e09e860705c2aa55c26f4edff73886566fa904e1b3eb"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 2,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "fe08d9946f81257db8a6e09e860705c2aa55c26f4edff73886566fa904e1b3eb"
+      ],
+      "progressive_pairs": 3,
+      "role": "unrelated",
+      "source_sha256": "10a6860020728d576ec40abe77f092ad6ed200736ab67fe2bdfd3d2dba678865"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "2c9e4a2344e58a6134c405fd6c4d9eb5a0e977e2e5000387960715fabdf81e3f"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 2,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "2c9e4a2344e58a6134c405fd6c4d9eb5a0e977e2e5000387960715fabdf81e3f"
+      ],
+      "progressive_pairs": 3,
+      "role": "shifted",
+      "source_sha256": "10a6860020728d576ec40abe77f092ad6ed200736ab67fe2bdfd3d2dba678865"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "ade9c95aca322a8cd89428cbcdf21e38606e33785b02033978d6608a0af70eda"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 2,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "16399eeb7346c41d83c45455a71f4fa0fc73b33e9cced02d587491e9e68a0baa",
+        "ade9c95aca322a8cd89428cbcdf21e38606e33785b02033978d6608a0af70eda"
+      ],
+      "progressive_pairs": 3,
+      "role": "reflection",
+      "source_sha256": "10a6860020728d576ec40abe77f092ad6ed200736ab67fe2bdfd3d2dba678865"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 3,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a"
+      ],
+      "progressive_pairs": 3,
+      "role": "unchanged",
+      "source_sha256": "2b1a5723f8237597c382afda66a21a6ed29930cb62f5ea983c631f108977b3f9"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4126,
+        4004
+      ],
+      "baseline_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "736152d2a7e1dcb88e0e3181964517cb9a2eb8fc6eb4b319c3d6b4715996b322"
+      ],
+      "changed": 4300,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4126,
+        4004
+      ],
+      "group": 3,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4126,
+        4004
+      ],
+      "progressive_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "736152d2a7e1dcb88e0e3181964517cb9a2eb8fc6eb4b319c3d6b4715996b322"
+      ],
+      "progressive_pairs": 3,
+      "role": "sharp",
+      "source_sha256": "2b1a5723f8237597c382afda66a21a6ed29930cb62f5ea983c631f108977b3f9"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3534,
+        3515
+      ],
+      "baseline_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "eff3985cf985168b9fb59bc7dabce7741a42523fd5e6aee7bd91111ac87f2c15"
+      ],
+      "changed": 3906,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3534,
+        3515
+      ],
+      "group": 3,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3534,
+        3515
+      ],
+      "progressive_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "eff3985cf985168b9fb59bc7dabce7741a42523fd5e6aee7bd91111ac87f2c15"
+      ],
+      "progressive_pairs": 3,
+      "role": "feathered",
+      "source_sha256": "2b1a5723f8237597c382afda66a21a6ed29930cb62f5ea983c631f108977b3f9"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        741,
+        739
+      ],
+      "baseline_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "5dd1e59b1419ff1ecdae3393495e2701d6ae0050dc1b735c6749f05300eb640c"
+      ],
+      "changed": 3733,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        741,
+        739
+      ],
+      "group": 3,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        741,
+        739
+      ],
+      "progressive_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "5dd1e59b1419ff1ecdae3393495e2701d6ae0050dc1b735c6749f05300eb640c"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_blur",
+      "source_sha256": "2b1a5723f8237597c382afda66a21a6ed29930cb62f5ea983c631f108977b3f9"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2954,
+        2954
+      ],
+      "baseline_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "4e09b8ec85ecd9f3fd458b148f2db1ecc35d89834bea0f004b3fbdeff6885956"
+      ],
+      "changed": 4092,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2954,
+        2954
+      ],
+      "group": 3,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2954,
+        2954
+      ],
+      "progressive_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "4e09b8ec85ecd9f3fd458b148f2db1ecc35d89834bea0f004b3fbdeff6885956"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_tone",
+      "source_sha256": "2b1a5723f8237597c382afda66a21a6ed29930cb62f5ea983c631f108977b3f9"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4353,
+        4228
+      ],
+      "baseline_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "32c60049d630be7bcce32fcaf9af7de2bf079e155dd9413411a107672eb6816e"
+      ],
+      "changed": 4298,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4353,
+        4228
+      ],
+      "group": 3,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4353,
+        4228
+      ],
+      "progressive_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "32c60049d630be7bcce32fcaf9af7de2bf079e155dd9413411a107672eb6816e"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_copy",
+      "source_sha256": "2b1a5723f8237597c382afda66a21a6ed29930cb62f5ea983c631f108977b3f9"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "0f3fceea2088caf3165458640e1e52a4ecd4d2b0a927a0bdeefd76fcc31fdf35"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 3,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "0f3fceea2088caf3165458640e1e52a4ecd4d2b0a927a0bdeefd76fcc31fdf35"
+      ],
+      "progressive_pairs": 3,
+      "role": "global_resize",
+      "source_sha256": "2b1a5723f8237597c382afda66a21a6ed29930cb62f5ea983c631f108977b3f9"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "10d4a16f386ec6047d77ac0ab30eafbfaafff3fd15d641fb18f27918b168405a"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 3,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "10d4a16f386ec6047d77ac0ab30eafbfaafff3fd15d641fb18f27918b168405a"
+      ],
+      "progressive_pairs": 3,
+      "role": "second_jpeg",
+      "source_sha256": "2b1a5723f8237597c382afda66a21a6ed29930cb62f5ea983c631f108977b3f9"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 3,
+      "pixels": 393216,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301"
+      ],
+      "progressive_pairs": 3,
+      "role": "unrelated",
+      "source_sha256": "2b1a5723f8237597c382afda66a21a6ed29930cb62f5ea983c631f108977b3f9"
+    },
+    {
+      "baseline": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "24b13f6a31a12db768afeba78f847cdeb7bd96d57c4b6f6721d7d8ffcfa5e72e"
+      ],
+      "changed": 0,
+      "extended": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 3,
+      "pixels": 393216,
+      "previous": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "24b13f6a31a12db768afeba78f847cdeb7bd96d57c4b6f6721d7d8ffcfa5e72e"
+      ],
+      "progressive_pairs": 3,
+      "role": "shifted",
+      "source_sha256": "2b1a5723f8237597c382afda66a21a6ed29930cb62f5ea983c631f108977b3f9"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "18bbd80eb6c13bdeb512fa32a8f45fd55803116ebbc08e27104b89bf7260bd48"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 3,
+      "pixels": 393216,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8dd94a61027da8243cc856d110c4d1fc8c61f82cded9254f1b54d301b2c7799a",
+        "18bbd80eb6c13bdeb512fa32a8f45fd55803116ebbc08e27104b89bf7260bd48"
+      ],
+      "progressive_pairs": 3,
+      "role": "reflection",
+      "source_sha256": "2b1a5723f8237597c382afda66a21a6ed29930cb62f5ea983c631f108977b3f9"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 4,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301"
+      ],
+      "progressive_pairs": 3,
+      "role": "unchanged",
+      "source_sha256": "32c99f60c8df0bf68366039667d07f636a865c0084a7691517ab5e8b3b895dbc"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        21577,
+        21534
+      ],
+      "baseline_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "1ed120c625fb597b9d8e580a15e754ece9af7966bc80adb7cd2cf1d485074d4f"
+      ],
+      "changed": 22302,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        21577,
+        21534
+      ],
+      "group": 4,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        21577,
+        21534
+      ],
+      "progressive_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "1ed120c625fb597b9d8e580a15e754ece9af7966bc80adb7cd2cf1d485074d4f"
+      ],
+      "progressive_pairs": 3,
+      "role": "sharp",
+      "source_sha256": "32c99f60c8df0bf68366039667d07f636a865c0084a7691517ab5e8b3b895dbc"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        20966,
+        20966
+      ],
+      "baseline_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "89e162e743d7e523c592a319aa8a78f431c8cccf516e92133614f87b6e9fec59"
+      ],
+      "changed": 21790,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        20966,
+        20966
+      ],
+      "group": 4,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        20966,
+        20966
+      ],
+      "progressive_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "89e162e743d7e523c592a319aa8a78f431c8cccf516e92133614f87b6e9fec59"
+      ],
+      "progressive_pairs": 3,
+      "role": "feathered",
+      "source_sha256": "32c99f60c8df0bf68366039667d07f636a865c0084a7691517ab5e8b3b895dbc"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        725,
+        722
+      ],
+      "baseline_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "981b85bc63563456e9206c71de97fce9d906ac60e622d9c60cbcff14a4dec3e0"
+      ],
+      "changed": 21302,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        725,
+        722
+      ],
+      "group": 4,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        725,
+        722
+      ],
+      "progressive_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "981b85bc63563456e9206c71de97fce9d906ac60e622d9c60cbcff14a4dec3e0"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_blur",
+      "source_sha256": "32c99f60c8df0bf68366039667d07f636a865c0084a7691517ab5e8b3b895dbc"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        20840,
+        20840
+      ],
+      "baseline_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "7400c4c713306a6e4714c062e11aea9b9e5d58b4b808eade78c7475301ba06ea"
+      ],
+      "changed": 21967,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        20840,
+        20840
+      ],
+      "group": 4,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        20840,
+        20840
+      ],
+      "progressive_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "7400c4c713306a6e4714c062e11aea9b9e5d58b4b808eade78c7475301ba06ea"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_tone",
+      "source_sha256": "32c99f60c8df0bf68366039667d07f636a865c0084a7691517ab5e8b3b895dbc"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        21989,
+        21969
+      ],
+      "baseline_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "0014aba8c3cbbc8bb286f1ec53678327005ad45bb82e298250f2fba84672799d"
+      ],
+      "changed": 22280,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        21989,
+        21969
+      ],
+      "group": 4,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        21989,
+        21969
+      ],
+      "progressive_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "0014aba8c3cbbc8bb286f1ec53678327005ad45bb82e298250f2fba84672799d"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_copy",
+      "source_sha256": "32c99f60c8df0bf68366039667d07f636a865c0084a7691517ab5e8b3b895dbc"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "7b4f0b25fef2c8eef1c21f7b80040286923875fc904e2f88541566bc44cdef57"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 4,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "7b4f0b25fef2c8eef1c21f7b80040286923875fc904e2f88541566bc44cdef57"
+      ],
+      "progressive_pairs": 3,
+      "role": "global_resize",
+      "source_sha256": "32c99f60c8df0bf68366039667d07f636a865c0084a7691517ab5e8b3b895dbc"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "48b87fb5201d5b05677df89656585eb39c3e869d78262fba1264318ecee38108"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 4,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "48b87fb5201d5b05677df89656585eb39c3e869d78262fba1264318ecee38108"
+      ],
+      "progressive_pairs": 3,
+      "role": "second_jpeg",
+      "source_sha256": "32c99f60c8df0bf68366039667d07f636a865c0084a7691517ab5e8b3b895dbc"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "e09bccbbb1ce08943c57fbefd2f10fb3c279875027bc0461eb40e85f86160ae5"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 4,
+      "pixels": 393216,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "e09bccbbb1ce08943c57fbefd2f10fb3c279875027bc0461eb40e85f86160ae5"
+      ],
+      "progressive_pairs": 3,
+      "role": "unrelated",
+      "source_sha256": "32c99f60c8df0bf68366039667d07f636a865c0084a7691517ab5e8b3b895dbc"
+    },
+    {
+      "baseline": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "6ab35400298cae85c3f2e828b9e51513e7d39a601f5ef4fa4aa6b55953118d04"
+      ],
+      "changed": 0,
+      "extended": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 4,
+      "pixels": 393216,
+      "previous": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "6ab35400298cae85c3f2e828b9e51513e7d39a601f5ef4fa4aa6b55953118d04"
+      ],
+      "progressive_pairs": 3,
+      "role": "shifted",
+      "source_sha256": "32c99f60c8df0bf68366039667d07f636a865c0084a7691517ab5e8b3b895dbc"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "1c59cf20c1cd8e93597f92a08c33416f1970ee1faa311f587d5a1a96aee3c465"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 4,
+      "pixels": 393216,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "24ddd64d837f6f4ef645815420c313be30d9a46881483429c1b7c454e9eb4301",
+        "1c59cf20c1cd8e93597f92a08c33416f1970ee1faa311f587d5a1a96aee3c465"
+      ],
+      "progressive_pairs": 3,
+      "role": "reflection",
+      "source_sha256": "32c99f60c8df0bf68366039667d07f636a865c0084a7691517ab5e8b3b895dbc"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 5,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f"
+      ],
+      "progressive_pairs": 3,
+      "role": "unchanged",
+      "source_sha256": "3408ca3bc109ce6ef5bc71a233c3b7b727d2c6239142f23688a8241eb923a213"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4213,
+        3945
+      ],
+      "baseline_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "5bbd1f53d9b2b68d167a2f1b6405d803a6856f5b3317ffbc13b73199bb790349"
+      ],
+      "changed": 4103,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4213,
+        3945
+      ],
+      "group": 5,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4213,
+        3945
+      ],
+      "progressive_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "5bbd1f53d9b2b68d167a2f1b6405d803a6856f5b3317ffbc13b73199bb790349"
+      ],
+      "progressive_pairs": 3,
+      "role": "sharp",
+      "source_sha256": "3408ca3bc109ce6ef5bc71a233c3b7b727d2c6239142f23688a8241eb923a213"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3487,
+        3466
+      ],
+      "baseline_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "1d791b697819263de1f5e3e50b45c3b752149bf76e29aa97f556b36ac7d3a70b"
+      ],
+      "changed": 3891,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3487,
+        3466
+      ],
+      "group": 5,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3487,
+        3466
+      ],
+      "progressive_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "1d791b697819263de1f5e3e50b45c3b752149bf76e29aa97f556b36ac7d3a70b"
+      ],
+      "progressive_pairs": 3,
+      "role": "feathered",
+      "source_sha256": "3408ca3bc109ce6ef5bc71a233c3b7b727d2c6239142f23688a8241eb923a213"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        786,
+        786
+      ],
+      "baseline_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "d7aa951e69ecb29ecdb8c948ff314c84a299c1053ecea9b42be2634a49442b05"
+      ],
+      "changed": 3881,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        786,
+        786
+      ],
+      "group": 5,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        786,
+        786
+      ],
+      "progressive_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "d7aa951e69ecb29ecdb8c948ff314c84a299c1053ecea9b42be2634a49442b05"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_blur",
+      "source_sha256": "3408ca3bc109ce6ef5bc71a233c3b7b727d2c6239142f23688a8241eb923a213"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3189,
+        3181
+      ],
+      "baseline_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "1e939e815a1bc17b957bd0534311471e97a4ded3bfa0ab533ed2610b99fd12dc"
+      ],
+      "changed": 3921,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3189,
+        3181
+      ],
+      "group": 5,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3189,
+        3181
+      ],
+      "progressive_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "1e939e815a1bc17b957bd0534311471e97a4ded3bfa0ab533ed2610b99fd12dc"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_tone",
+      "source_sha256": "3408ca3bc109ce6ef5bc71a233c3b7b727d2c6239142f23688a8241eb923a213"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4224,
+        4035
+      ],
+      "baseline_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "1e205e7f863201354c800410972b4fb4c3ed413cf50cecf410ec20eddf1f5000"
+      ],
+      "changed": 4103,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4224,
+        4035
+      ],
+      "group": 5,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4224,
+        4035
+      ],
+      "progressive_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "1e205e7f863201354c800410972b4fb4c3ed413cf50cecf410ec20eddf1f5000"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_copy",
+      "source_sha256": "3408ca3bc109ce6ef5bc71a233c3b7b727d2c6239142f23688a8241eb923a213"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1184,
+        0
+      ],
+      "baseline_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "45dbe0f468caaefb2fbe5c4a8abc31853096f88132b09f00a72f130fca091651"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1184,
+        0
+      ],
+      "group": 5,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1184,
+        0
+      ],
+      "progressive_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "45dbe0f468caaefb2fbe5c4a8abc31853096f88132b09f00a72f130fca091651"
+      ],
+      "progressive_pairs": 3,
+      "role": "global_resize",
+      "source_sha256": "3408ca3bc109ce6ef5bc71a233c3b7b727d2c6239142f23688a8241eb923a213"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1777,
+        0
+      ],
+      "baseline_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "d850322a0eae885cb1e14f1ac526171d98b44538e00f82f4d7799adee8488d3e"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1777,
+        0
+      ],
+      "group": 5,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1777,
+        0
+      ],
+      "progressive_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "d850322a0eae885cb1e14f1ac526171d98b44538e00f82f4d7799adee8488d3e"
+      ],
+      "progressive_pairs": 3,
+      "role": "second_jpeg",
+      "source_sha256": "3408ca3bc109ce6ef5bc71a233c3b7b727d2c6239142f23688a8241eb923a213"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "5d2cbb7ab177cf7cc97e5ccc545dcdba488b146a408c4e6c820f7d4747cd1ce9"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 5,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "5d2cbb7ab177cf7cc97e5ccc545dcdba488b146a408c4e6c820f7d4747cd1ce9"
+      ],
+      "progressive_pairs": 3,
+      "role": "unrelated",
+      "source_sha256": "3408ca3bc109ce6ef5bc71a233c3b7b727d2c6239142f23688a8241eb923a213"
+    },
+    {
+      "baseline": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "020cf49a6e4014072d9273b8bdf56c9c742dc54e08fd9fc091713eb91d4ab736"
+      ],
+      "changed": 0,
+      "extended": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 5,
+      "pixels": 442368,
+      "previous": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "020cf49a6e4014072d9273b8bdf56c9c742dc54e08fd9fc091713eb91d4ab736"
+      ],
+      "progressive_pairs": 3,
+      "role": "shifted",
+      "source_sha256": "3408ca3bc109ce6ef5bc71a233c3b7b727d2c6239142f23688a8241eb923a213"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "18ae604f89ac99f37e6af5340b26a89b9a9d8d9b46c36c851b92cbeeb1bbc9b8"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 5,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "b0f19e7b0ac9acbe9b73e9273b2fe541a053f7730dd8689d34e72b890b032a8f",
+        "18ae604f89ac99f37e6af5340b26a89b9a9d8d9b46c36c851b92cbeeb1bbc9b8"
+      ],
+      "progressive_pairs": 3,
+      "role": "reflection",
+      "source_sha256": "3408ca3bc109ce6ef5bc71a233c3b7b727d2c6239142f23688a8241eb923a213"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 6,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3"
+      ],
+      "progressive_pairs": 3,
+      "role": "unchanged",
+      "source_sha256": "3e255557192e2322a2d06dfaf3452e7453e88b7617def4f0469ebcd088d706f5"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1771,
+        1721
+      ],
+      "baseline_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "28f760b41a15db7304ce056b399beb3c836691cd6b6d43208057a9b6e4b35cbb"
+      ],
+      "changed": 2244,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1771,
+        1721
+      ],
+      "group": 6,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1771,
+        1721
+      ],
+      "progressive_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "28f760b41a15db7304ce056b399beb3c836691cd6b6d43208057a9b6e4b35cbb"
+      ],
+      "progressive_pairs": 3,
+      "role": "sharp",
+      "source_sha256": "3e255557192e2322a2d06dfaf3452e7453e88b7617def4f0469ebcd088d706f5"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1352,
+        1342
+      ],
+      "baseline_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "5dc60bee25c2514cc111f677f36d898be3963462ef891f46b8cc2b21988c9635"
+      ],
+      "changed": 1978,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1352,
+        1342
+      ],
+      "group": 6,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1352,
+        1342
+      ],
+      "progressive_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "5dc60bee25c2514cc111f677f36d898be3963462ef891f46b8cc2b21988c9635"
+      ],
+      "progressive_pairs": 3,
+      "role": "feathered",
+      "source_sha256": "3e255557192e2322a2d06dfaf3452e7453e88b7617def4f0469ebcd088d706f5"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "734a752a0991cbfd0a81d70458c1ab12a935b41d621cf4cc641903b16e6da2db"
+      ],
+      "changed": 1695,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 6,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "734a752a0991cbfd0a81d70458c1ab12a935b41d621cf4cc641903b16e6da2db"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_blur",
+      "source_sha256": "3e255557192e2322a2d06dfaf3452e7453e88b7617def4f0469ebcd088d706f5"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1561,
+        1551
+      ],
+      "baseline_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "7c6ccec874bea36f4316af5b7c849427fffde05bacda5a10982f54b3e81dd7c1"
+      ],
+      "changed": 2072,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1561,
+        1551
+      ],
+      "group": 6,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1561,
+        1551
+      ],
+      "progressive_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "7c6ccec874bea36f4316af5b7c849427fffde05bacda5a10982f54b3e81dd7c1"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_tone",
+      "source_sha256": "3e255557192e2322a2d06dfaf3452e7453e88b7617def4f0469ebcd088d706f5"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2013,
+        1969
+      ],
+      "baseline_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "4190168ebf536728775f7cae0daceb41834a36404b12c93f7d19cd586056dcdd"
+      ],
+      "changed": 2215,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2013,
+        1969
+      ],
+      "group": 6,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2013,
+        1969
+      ],
+      "progressive_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "4190168ebf536728775f7cae0daceb41834a36404b12c93f7d19cd586056dcdd"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_copy",
+      "source_sha256": "3e255557192e2322a2d06dfaf3452e7453e88b7617def4f0469ebcd088d706f5"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "7ad3f4f58b703812e57030f885757671adf7120a62e070b0f632c510c6216717"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 6,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "7ad3f4f58b703812e57030f885757671adf7120a62e070b0f632c510c6216717"
+      ],
+      "progressive_pairs": 3,
+      "role": "global_resize",
+      "source_sha256": "3e255557192e2322a2d06dfaf3452e7453e88b7617def4f0469ebcd088d706f5"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "6eb6d3eeaf4488aa84e2bd4dacaa79679860338aaef2e5cdbe2b39e497932ed4"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 6,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "6eb6d3eeaf4488aa84e2bd4dacaa79679860338aaef2e5cdbe2b39e497932ed4"
+      ],
+      "progressive_pairs": 3,
+      "role": "second_jpeg",
+      "source_sha256": "3e255557192e2322a2d06dfaf3452e7453e88b7617def4f0469ebcd088d706f5"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 6,
+      "pixels": 393216,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876"
+      ],
+      "progressive_pairs": 3,
+      "role": "unrelated",
+      "source_sha256": "3e255557192e2322a2d06dfaf3452e7453e88b7617def4f0469ebcd088d706f5"
+    },
+    {
+      "baseline": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "198f768259a0b6511dd0e6d6d6b30f07201c8dccf0706d664965381ea9d71c50"
+      ],
+      "changed": 0,
+      "extended": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 6,
+      "pixels": 393216,
+      "previous": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "198f768259a0b6511dd0e6d6d6b30f07201c8dccf0706d664965381ea9d71c50"
+      ],
+      "progressive_pairs": 3,
+      "role": "shifted",
+      "source_sha256": "3e255557192e2322a2d06dfaf3452e7453e88b7617def4f0469ebcd088d706f5"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "13e514079739d5f973df11a6561478928f11594d38689fe48ac235baaaa14a58"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 6,
+      "pixels": 393216,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "dce71781b6a03e911604792b989bce069105401175d36d8fd0f86b189370efb3",
+        "13e514079739d5f973df11a6561478928f11594d38689fe48ac235baaaa14a58"
+      ],
+      "progressive_pairs": 3,
+      "role": "reflection",
+      "source_sha256": "3e255557192e2322a2d06dfaf3452e7453e88b7617def4f0469ebcd088d706f5"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 7,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876"
+      ],
+      "progressive_pairs": 3,
+      "role": "unchanged",
+      "source_sha256": "0016548217c289683115b35c2d7c73fe96bebcf1f60f348d427ed468631567a6"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3607,
+        3398
+      ],
+      "baseline_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "b21398fc571b3814104a541ab920231d01027f508c417661efa9a475851586e6"
+      ],
+      "changed": 3436,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3607,
+        3398
+      ],
+      "group": 7,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3607,
+        3398
+      ],
+      "progressive_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "b21398fc571b3814104a541ab920231d01027f508c417661efa9a475851586e6"
+      ],
+      "progressive_pairs": 3,
+      "role": "sharp",
+      "source_sha256": "0016548217c289683115b35c2d7c73fe96bebcf1f60f348d427ed468631567a6"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3219,
+        3162
+      ],
+      "baseline_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "b9662aedc211c41c188f928eb897665d0938e4988b811609c9143da30bf09d1b"
+      ],
+      "changed": 3314,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3219,
+        3162
+      ],
+      "group": 7,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3219,
+        3162
+      ],
+      "progressive_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "b9662aedc211c41c188f928eb897665d0938e4988b811609c9143da30bf09d1b"
+      ],
+      "progressive_pairs": 3,
+      "role": "feathered",
+      "source_sha256": "0016548217c289683115b35c2d7c73fe96bebcf1f60f348d427ed468631567a6"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2827,
+        2827
+      ],
+      "baseline_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "03c1d82f1ea02954483c7da16ec9138a77d1d3b573da49e110e801ce6fad8949"
+      ],
+      "changed": 3290,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2827,
+        2827
+      ],
+      "group": 7,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2827,
+        2827
+      ],
+      "progressive_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "03c1d82f1ea02954483c7da16ec9138a77d1d3b573da49e110e801ce6fad8949"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_blur",
+      "source_sha256": "0016548217c289683115b35c2d7c73fe96bebcf1f60f348d427ed468631567a6"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2823,
+        2817
+      ],
+      "baseline_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "e6f2614b9984491a1466ce3242ac875af2b37ade6279acfcc779d4b81b67a19a"
+      ],
+      "changed": 3396,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2823,
+        2817
+      ],
+      "group": 7,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2823,
+        2817
+      ],
+      "progressive_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "e6f2614b9984491a1466ce3242ac875af2b37ade6279acfcc779d4b81b67a19a"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_tone",
+      "source_sha256": "0016548217c289683115b35c2d7c73fe96bebcf1f60f348d427ed468631567a6"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3586,
+        3435
+      ],
+      "baseline_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "f637e58f3e38a9d95560ed8b7fa656147ad01e2bc269cff0dfdeb6c9215621e5"
+      ],
+      "changed": 3436,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3586,
+        3435
+      ],
+      "group": 7,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3586,
+        3435
+      ],
+      "progressive_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "f637e58f3e38a9d95560ed8b7fa656147ad01e2bc269cff0dfdeb6c9215621e5"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_copy",
+      "source_sha256": "0016548217c289683115b35c2d7c73fe96bebcf1f60f348d427ed468631567a6"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "bef3ff349d883884115ed82bc4f0a038313dc94501a09c4ee675d65fef92b084"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 7,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "bef3ff349d883884115ed82bc4f0a038313dc94501a09c4ee675d65fef92b084"
+      ],
+      "progressive_pairs": 3,
+      "role": "global_resize",
+      "source_sha256": "0016548217c289683115b35c2d7c73fe96bebcf1f60f348d427ed468631567a6"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "12d9743297011a9dddbdd25ee6918e56467daf5959c42f92149c5de814e6fa58"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 7,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "12d9743297011a9dddbdd25ee6918e56467daf5959c42f92149c5de814e6fa58"
+      ],
+      "progressive_pairs": 3,
+      "role": "second_jpeg",
+      "source_sha256": "0016548217c289683115b35c2d7c73fe96bebcf1f60f348d427ed468631567a6"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "d63f97ea4ae606e18438a6673134d2f47860673241150850e9d0f3665db74f2d"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 7,
+      "pixels": 393216,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "d63f97ea4ae606e18438a6673134d2f47860673241150850e9d0f3665db74f2d"
+      ],
+      "progressive_pairs": 3,
+      "role": "unrelated",
+      "source_sha256": "0016548217c289683115b35c2d7c73fe96bebcf1f60f348d427ed468631567a6"
+    },
+    {
+      "baseline": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "c447e70dadbafc98e3b98b4fdf51cd82e70813f9882bb391c5d894ce8345b1cc"
+      ],
+      "changed": 0,
+      "extended": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 7,
+      "pixels": 393216,
+      "previous": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "c447e70dadbafc98e3b98b4fdf51cd82e70813f9882bb391c5d894ce8345b1cc"
+      ],
+      "progressive_pairs": 3,
+      "role": "shifted",
+      "source_sha256": "0016548217c289683115b35c2d7c73fe96bebcf1f60f348d427ed468631567a6"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "5091ff90ad624bd9ad35515e00212699641951239bb544b64910b009d7a610ec"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 7,
+      "pixels": 393216,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c01a66b5b84b7f4ded79a2bcc381fb7e774284005ef752ca0add993a36175876",
+        "5091ff90ad624bd9ad35515e00212699641951239bb544b64910b009d7a610ec"
+      ],
+      "progressive_pairs": 3,
+      "role": "reflection",
+      "source_sha256": "0016548217c289683115b35c2d7c73fe96bebcf1f60f348d427ed468631567a6"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 8,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed"
+      ],
+      "progressive_pairs": 3,
+      "role": "unchanged",
+      "source_sha256": "1cbae63cc83776494c7ffae25b77a505997c96b288171db0e873abe38a37cc0b"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        27875,
+        27872
+      ],
+      "baseline_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "bcbb63f3fdde649025d256c7fd7d7899d7eeabf60a301c3e6b965bb50e84ace0"
+      ],
+      "changed": 29980,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        27875,
+        27872
+      ],
+      "group": 8,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "bcbb63f3fdde649025d256c7fd7d7899d7eeabf60a301c3e6b965bb50e84ace0"
+      ],
+      "progressive_pairs": 3,
+      "role": "sharp",
+      "source_sha256": "1cbae63cc83776494c7ffae25b77a505997c96b288171db0e873abe38a37cc0b"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        27159,
+        27153
+      ],
+      "baseline_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "73b0c168a60c4e032e96f9b1af9c593590abd1da0e0255bad745cd672ff8d3d1"
+      ],
+      "changed": 28865,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        27159,
+        27153
+      ],
+      "group": 8,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "73b0c168a60c4e032e96f9b1af9c593590abd1da0e0255bad745cd672ff8d3d1"
+      ],
+      "progressive_pairs": 3,
+      "role": "feathered",
+      "source_sha256": "1cbae63cc83776494c7ffae25b77a505997c96b288171db0e873abe38a37cc0b"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        5976,
+        5908
+      ],
+      "baseline_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "81b0f658a00f2a510a8eda0efef4a9c25de6ded3bc01fa00757ac8941efb464f"
+      ],
+      "changed": 26787,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        5976,
+        5908
+      ],
+      "group": 8,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "81b0f658a00f2a510a8eda0efef4a9c25de6ded3bc01fa00757ac8941efb464f"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_blur",
+      "source_sha256": "1cbae63cc83776494c7ffae25b77a505997c96b288171db0e873abe38a37cc0b"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        27475,
+        27475
+      ],
+      "baseline_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "cf9e51e615f007cc406b67a1ffbf14b9c7a07db42b503914b844d9bc648da201"
+      ],
+      "changed": 29287,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        27475,
+        27475
+      ],
+      "group": 8,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "cf9e51e615f007cc406b67a1ffbf14b9c7a07db42b503914b844d9bc648da201"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_tone",
+      "source_sha256": "1cbae63cc83776494c7ffae25b77a505997c96b288171db0e873abe38a37cc0b"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        29273,
+        29185
+      ],
+      "baseline_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "c8f40335f03ec26844303d1eebcb0da0c04031e67ea846d8899b3cb434ff6d0a"
+      ],
+      "changed": 29857,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/14",
+        29273,
+        29185
+      ],
+      "group": 8,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "c8f40335f03ec26844303d1eebcb0da0c04031e67ea846d8899b3cb434ff6d0a"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_copy",
+      "source_sha256": "1cbae63cc83776494c7ffae25b77a505997c96b288171db0e873abe38a37cc0b"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "f646e092d641f3c639a0650c943a48f054cdcdb7085165e5d1b0df2c15052bf7"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 8,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "f646e092d641f3c639a0650c943a48f054cdcdb7085165e5d1b0df2c15052bf7"
+      ],
+      "progressive_pairs": 3,
+      "role": "global_resize",
+      "source_sha256": "1cbae63cc83776494c7ffae25b77a505997c96b288171db0e873abe38a37cc0b"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "f3d9206e19fe8b89e4da9b07ad90583a08b1aa20cb30601d6a53938a99e4c0d8"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 8,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "f3d9206e19fe8b89e4da9b07ad90583a08b1aa20cb30601d6a53938a99e4c0d8"
+      ],
+      "progressive_pairs": 3,
+      "role": "second_jpeg",
+      "source_sha256": "1cbae63cc83776494c7ffae25b77a505997c96b288171db0e873abe38a37cc0b"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 8,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342"
+      ],
+      "progressive_pairs": 3,
+      "role": "unrelated",
+      "source_sha256": "1cbae63cc83776494c7ffae25b77a505997c96b288171db0e873abe38a37cc0b"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "78551719c96c64018e0dd9a8695465fd506f4305aac430a18582e54c515f0502"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 8,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "78551719c96c64018e0dd9a8695465fd506f4305aac430a18582e54c515f0502"
+      ],
+      "progressive_pairs": 3,
+      "role": "shifted",
+      "source_sha256": "1cbae63cc83776494c7ffae25b77a505997c96b288171db0e873abe38a37cc0b"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "b6652cb556b1e15c2ed7c44ef28e84f9fa2a5ebbab048ff125500cd444dd25fd"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 8,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "8a113e560d02fd643e8ba0630b4a88de91b18067954074759f32392c771454ed",
+        "b6652cb556b1e15c2ed7c44ef28e84f9fa2a5ebbab048ff125500cd444dd25fd"
+      ],
+      "progressive_pairs": 3,
+      "role": "reflection",
+      "source_sha256": "1cbae63cc83776494c7ffae25b77a505997c96b288171db0e873abe38a37cc0b"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 9,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342"
+      ],
+      "progressive_pairs": 3,
+      "role": "unchanged",
+      "source_sha256": "391e8428bf53a111045ac70a443f252dbfdd9e435bb8fde532b3c24aad120980"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4751,
+        4724
+      ],
+      "baseline_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "f2010a4b890b7f8404b6240007e78002d09df49319b1d7771304fb6bfd1bb8c2"
+      ],
+      "changed": 5230,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4751,
+        4724
+      ],
+      "group": 9,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4751,
+        4724
+      ],
+      "progressive_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "f2010a4b890b7f8404b6240007e78002d09df49319b1d7771304fb6bfd1bb8c2"
+      ],
+      "progressive_pairs": 3,
+      "role": "sharp",
+      "source_sha256": "391e8428bf53a111045ac70a443f252dbfdd9e435bb8fde532b3c24aad120980"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4360,
+        4347
+      ],
+      "baseline_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "eda629be0902a6e82dc92fc2bb7e72da6600633950d9b202c66b454de47efa1c"
+      ],
+      "changed": 4849,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4360,
+        4347
+      ],
+      "group": 9,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4360,
+        4347
+      ],
+      "progressive_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "eda629be0902a6e82dc92fc2bb7e72da6600633950d9b202c66b454de47efa1c"
+      ],
+      "progressive_pairs": 3,
+      "role": "feathered",
+      "source_sha256": "391e8428bf53a111045ac70a443f252dbfdd9e435bb8fde532b3c24aad120980"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        681,
+        680
+      ],
+      "baseline_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "fb98110591cced983db784759b6c067761e25c91c3c0115958b6004fba056bc2"
+      ],
+      "changed": 4765,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        681,
+        680
+      ],
+      "group": 9,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        681,
+        680
+      ],
+      "progressive_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "fb98110591cced983db784759b6c067761e25c91c3c0115958b6004fba056bc2"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_blur",
+      "source_sha256": "391e8428bf53a111045ac70a443f252dbfdd9e435bb8fde532b3c24aad120980"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4200,
+        4200
+      ],
+      "baseline_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "25b29b114321a29c7dbce4105cf499e6ba2c7cb9a70e899733be62237cf32143"
+      ],
+      "changed": 4994,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4200,
+        4200
+      ],
+      "group": 9,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        4200,
+        4200
+      ],
+      "progressive_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "25b29b114321a29c7dbce4105cf499e6ba2c7cb9a70e899733be62237cf32143"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_tone",
+      "source_sha256": "391e8428bf53a111045ac70a443f252dbfdd9e435bb8fde532b3c24aad120980"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        5102,
+        5075
+      ],
+      "baseline_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "838076cbe97904acacd4afde4cf15197f774941e1e2a518d9c3a99c6a049d0dd"
+      ],
+      "changed": 5225,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        5102,
+        5075
+      ],
+      "group": 9,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        5102,
+        5075
+      ],
+      "progressive_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "838076cbe97904acacd4afde4cf15197f774941e1e2a518d9c3a99c6a049d0dd"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_copy",
+      "source_sha256": "391e8428bf53a111045ac70a443f252dbfdd9e435bb8fde532b3c24aad120980"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "5ca2a1886acd0b0f16e077dd611a732275ef05fdc19b2135018b936bd43b0001"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 9,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "5ca2a1886acd0b0f16e077dd611a732275ef05fdc19b2135018b936bd43b0001"
+      ],
+      "progressive_pairs": 3,
+      "role": "global_resize",
+      "source_sha256": "391e8428bf53a111045ac70a443f252dbfdd9e435bb8fde532b3c24aad120980"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "934f6a5f9f8b8808b92052c5e2dc60c20106e139335285d2a979d13b43c81ecc"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 9,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "934f6a5f9f8b8808b92052c5e2dc60c20106e139335285d2a979d13b43c81ecc"
+      ],
+      "progressive_pairs": 3,
+      "role": "second_jpeg",
+      "source_sha256": "391e8428bf53a111045ac70a443f252dbfdd9e435bb8fde532b3c24aad120980"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 9,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064"
+      ],
+      "progressive_pairs": 3,
+      "role": "unrelated",
+      "source_sha256": "391e8428bf53a111045ac70a443f252dbfdd9e435bb8fde532b3c24aad120980"
+    },
+    {
+      "baseline": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "c5b4a9a75be563380e4aec53b59335bb7a9bb1b632b947f38dd3a73f4f0b666f"
+      ],
+      "changed": 0,
+      "extended": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 9,
+      "pixels": 442368,
+      "previous": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "c5b4a9a75be563380e4aec53b59335bb7a9bb1b632b947f38dd3a73f4f0b666f"
+      ],
+      "progressive_pairs": 3,
+      "role": "shifted",
+      "source_sha256": "391e8428bf53a111045ac70a443f252dbfdd9e435bb8fde532b3c24aad120980"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "686a069b8950df526366f03e362a20e434ded2c649c741f9c2f77de119a110c1"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 9,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "1794646a692f19999734e0007b8bdeb5b700750905482d074789adafca193342",
+        "686a069b8950df526366f03e362a20e434ded2c649c741f9c2f77de119a110c1"
+      ],
+      "progressive_pairs": 3,
+      "role": "reflection",
+      "source_sha256": "391e8428bf53a111045ac70a443f252dbfdd9e435bb8fde532b3c24aad120980"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 10,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064"
+      ],
+      "progressive_pairs": 3,
+      "role": "unchanged",
+      "source_sha256": "4fdda61019455647f45c841afd7feb9ba62d2c5fc0faeefd86c44cab2b666d79"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        18657,
+        18471
+      ],
+      "baseline_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "2217c493c2b999af1ee58fb0e76076e95131d7a7f02144bbf4fb8d028bfa4e3a"
+      ],
+      "changed": 19617,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        18657,
+        18471
+      ],
+      "group": 10,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        18657,
+        18471
+      ],
+      "progressive_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "2217c493c2b999af1ee58fb0e76076e95131d7a7f02144bbf4fb8d028bfa4e3a"
+      ],
+      "progressive_pairs": 3,
+      "role": "sharp",
+      "source_sha256": "4fdda61019455647f45c841afd7feb9ba62d2c5fc0faeefd86c44cab2b666d79"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        18020,
+        17868
+      ],
+      "baseline_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "861afd269c1b583c81260fe440d751ceef9d7d2ff8b3ce767084cb0d47b0d36b"
+      ],
+      "changed": 19000,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        18020,
+        17868
+      ],
+      "group": 10,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        18020,
+        17868
+      ],
+      "progressive_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "861afd269c1b583c81260fe440d751ceef9d7d2ff8b3ce767084cb0d47b0d36b"
+      ],
+      "progressive_pairs": 3,
+      "role": "feathered",
+      "source_sha256": "4fdda61019455647f45c841afd7feb9ba62d2c5fc0faeefd86c44cab2b666d79"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1201,
+        1201
+      ],
+      "baseline_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "bb5107a8629a588d40ccd3f9dfa64173a7d25a1ff37b392119f5a609b2bd297f"
+      ],
+      "changed": 18809,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1201,
+        1201
+      ],
+      "group": 10,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        1201,
+        1201
+      ],
+      "progressive_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "bb5107a8629a588d40ccd3f9dfa64173a7d25a1ff37b392119f5a609b2bd297f"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_blur",
+      "source_sha256": "4fdda61019455647f45c841afd7feb9ba62d2c5fc0faeefd86c44cab2b666d79"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        17757,
+        17757
+      ],
+      "baseline_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "10d2dc0e201c14a296c7ba4ae398f016d5781119543910670c768e1795f1239a"
+      ],
+      "changed": 19229,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        17757,
+        17757
+      ],
+      "group": 10,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        17757,
+        17757
+      ],
+      "progressive_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "10d2dc0e201c14a296c7ba4ae398f016d5781119543910670c768e1795f1239a"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_tone",
+      "source_sha256": "4fdda61019455647f45c841afd7feb9ba62d2c5fc0faeefd86c44cab2b666d79"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        19613,
+        19330
+      ],
+      "baseline_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "deeaf0b71451cab2f12b0e4976153ef5370639ec4d4611963aeb0be8204a7901"
+      ],
+      "changed": 19612,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        19613,
+        19330
+      ],
+      "group": 10,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        19613,
+        19330
+      ],
+      "progressive_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "deeaf0b71451cab2f12b0e4976153ef5370639ec4d4611963aeb0be8204a7901"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_copy",
+      "source_sha256": "4fdda61019455647f45c841afd7feb9ba62d2c5fc0faeefd86c44cab2b666d79"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "c3448efa827dfcd1edfb3a1e55d1aa4f4e98e898c84842980931c4ca9f62d9eb"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 10,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "c3448efa827dfcd1edfb3a1e55d1aa4f4e98e898c84842980931c4ca9f62d9eb"
+      ],
+      "progressive_pairs": 3,
+      "role": "global_resize",
+      "source_sha256": "4fdda61019455647f45c841afd7feb9ba62d2c5fc0faeefd86c44cab2b666d79"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "fb728d3d5ae6f701157d68afc7eed56523c9bae26b64e609f4cb6ec56f7d7a19"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 10,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "fb728d3d5ae6f701157d68afc7eed56523c9bae26b64e609f4cb6ec56f7d7a19"
+      ],
+      "progressive_pairs": 3,
+      "role": "second_jpeg",
+      "source_sha256": "4fdda61019455647f45c841afd7feb9ba62d2c5fc0faeefd86c44cab2b666d79"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "b14564309425b75c2ea26af6fbcc7e3e74f40c99a82531ad033cd9a955d56b84"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 10,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "b14564309425b75c2ea26af6fbcc7e3e74f40c99a82531ad033cd9a955d56b84"
+      ],
+      "progressive_pairs": 3,
+      "role": "unrelated",
+      "source_sha256": "4fdda61019455647f45c841afd7feb9ba62d2c5fc0faeefd86c44cab2b666d79"
+    },
+    {
+      "baseline": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "714e3c9441b99366d368e92e7665d584721b72e1946564cdbbbc37578c190e3c"
+      ],
+      "changed": 0,
+      "extended": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 10,
+      "pixels": 442368,
+      "previous": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "714e3c9441b99366d368e92e7665d584721b72e1946564cdbbbc37578c190e3c"
+      ],
+      "progressive_pairs": 3,
+      "role": "shifted",
+      "source_sha256": "4fdda61019455647f45c841afd7feb9ba62d2c5fc0faeefd86c44cab2b666d79"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "293a005f34160f22807acfc1032b58f0d8c92cbf069dd33adafaf2e97ec066bf"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 10,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "c80b16420963da0fb73ecffbe2ca570565e1087ccedfd7b0b045b5f0b6193064",
+        "293a005f34160f22807acfc1032b58f0d8c92cbf069dd33adafaf2e97ec066bf"
+      ],
+      "progressive_pairs": 3,
+      "role": "reflection",
+      "source_sha256": "4fdda61019455647f45c841afd7feb9ba62d2c5fc0faeefd86c44cab2b666d79"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 11,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312"
+      ],
+      "progressive_pairs": 3,
+      "role": "unchanged",
+      "source_sha256": "5a161c7eb80ba74b82fb36c32b83933c4508e1da355d6dec7e93aaaf69560452"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2429,
+        2403
+      ],
+      "baseline_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "ba235058983361878c84438c0be657396abc17f307e12c7696c3debed725e0a4"
+      ],
+      "changed": 2479,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2429,
+        2403
+      ],
+      "group": 11,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2429,
+        2403
+      ],
+      "progressive_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "ba235058983361878c84438c0be657396abc17f307e12c7696c3debed725e0a4"
+      ],
+      "progressive_pairs": 3,
+      "role": "sharp",
+      "source_sha256": "5a161c7eb80ba74b82fb36c32b83933c4508e1da355d6dec7e93aaaf69560452"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2281,
+        2277
+      ],
+      "baseline_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "d3563347dcb11e57c4f6c767201192d2055f76715f41e60b2eb5d07d027b03af"
+      ],
+      "changed": 2353,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2281,
+        2277
+      ],
+      "group": 11,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2281,
+        2277
+      ],
+      "progressive_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "d3563347dcb11e57c4f6c767201192d2055f76715f41e60b2eb5d07d027b03af"
+      ],
+      "progressive_pairs": 3,
+      "role": "feathered",
+      "source_sha256": "5a161c7eb80ba74b82fb36c32b83933c4508e1da355d6dec7e93aaaf69560452"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "4cedd686ff48199ae1140ce0e4ca93dd8c8faa681c79c0066a52725fa1a7fa23"
+      ],
+      "changed": 2217,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 11,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "4cedd686ff48199ae1140ce0e4ca93dd8c8faa681c79c0066a52725fa1a7fa23"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_blur",
+      "source_sha256": "5a161c7eb80ba74b82fb36c32b83933c4508e1da355d6dec7e93aaaf69560452"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2126,
+        2125
+      ],
+      "baseline_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "7c713de41fc571fd8f7337aaad5577d9f23da75f84fbacd14bff79337f646903"
+      ],
+      "changed": 2459,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2126,
+        2125
+      ],
+      "group": 11,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2126,
+        2125
+      ],
+      "progressive_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "7c713de41fc571fd8f7337aaad5577d9f23da75f84fbacd14bff79337f646903"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_tone",
+      "source_sha256": "5a161c7eb80ba74b82fb36c32b83933c4508e1da355d6dec7e93aaaf69560452"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2411,
+        2407
+      ],
+      "baseline_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "b52a903abac5414207f640a33411f0bda28ba79168000f436fc7405525a019e3"
+      ],
+      "changed": 2477,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2411,
+        2407
+      ],
+      "group": 11,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2411,
+        2407
+      ],
+      "progressive_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "b52a903abac5414207f640a33411f0bda28ba79168000f436fc7405525a019e3"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_copy",
+      "source_sha256": "5a161c7eb80ba74b82fb36c32b83933c4508e1da355d6dec7e93aaaf69560452"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        615,
+        0
+      ],
+      "baseline_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "4c21c8dd7b0ce408c734c2e9333d1b2c714f8064971c46950f6b3231a142972e"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        615,
+        0
+      ],
+      "group": 11,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        615,
+        0
+      ],
+      "progressive_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "4c21c8dd7b0ce408c734c2e9333d1b2c714f8064971c46950f6b3231a142972e"
+      ],
+      "progressive_pairs": 3,
+      "role": "global_resize",
+      "source_sha256": "5a161c7eb80ba74b82fb36c32b83933c4508e1da355d6dec7e93aaaf69560452"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2296,
+        0
+      ],
+      "baseline_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "441c83f4787dab86da3728356ded8a32da5dfd49c18e6a417bfe9eb2e5e1e102"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2296,
+        0
+      ],
+      "group": 11,
+      "pixels": 393216,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        2296,
+        0
+      ],
+      "progressive_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "441c83f4787dab86da3728356ded8a32da5dfd49c18e6a417bfe9eb2e5e1e102"
+      ],
+      "progressive_pairs": 3,
+      "role": "second_jpeg",
+      "source_sha256": "5a161c7eb80ba74b82fb36c32b83933c4508e1da355d6dec7e93aaaf69560452"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "eb1832589204ff0094a574133b0c9c12d5f81fe04c420b966d7d6df3f6225a32"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 11,
+      "pixels": 393216,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "eb1832589204ff0094a574133b0c9c12d5f81fe04c420b966d7d6df3f6225a32"
+      ],
+      "progressive_pairs": 3,
+      "role": "unrelated",
+      "source_sha256": "5a161c7eb80ba74b82fb36c32b83933c4508e1da355d6dec7e93aaaf69560452"
+    },
+    {
+      "baseline": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "47dcb22890a5a45d7712d1b97bc89a3fabc06679cbbdbb691950ae2f8812fa98"
+      ],
+      "changed": 0,
+      "extended": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 11,
+      "pixels": 393216,
+      "previous": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "47dcb22890a5a45d7712d1b97bc89a3fabc06679cbbdbb691950ae2f8812fa98"
+      ],
+      "progressive_pairs": 3,
+      "role": "shifted",
+      "source_sha256": "5a161c7eb80ba74b82fb36c32b83933c4508e1da355d6dec7e93aaaf69560452"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "4f9b35c81a717f07016e6919fd1a930ea2ecbea3e006a94c6fec8ff23558af2b"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 11,
+      "pixels": 393216,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "b3cbd7cc420cf531ddd48b16294359e6817c3fc85bfbe0f73e8069c8e0b01312",
+        "4f9b35c81a717f07016e6919fd1a930ea2ecbea3e006a94c6fec8ff23558af2b"
+      ],
+      "progressive_pairs": 3,
+      "role": "reflection",
+      "source_sha256": "5a161c7eb80ba74b82fb36c32b83933c4508e1da355d6dec7e93aaaf69560452"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 12,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db"
+      ],
+      "progressive_pairs": 3,
+      "role": "unchanged",
+      "source_sha256": "6572c90ac80f23e3139b0aad8288a4a3b53a9039eb7b3f07f3f493f171366ac8"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        14272,
+        14266
+      ],
+      "baseline_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "9187d8023b30877c95b09dc22cab8843e8d8af516eba1985a2c4e7a31c8658a4"
+      ],
+      "changed": 14857,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        14272,
+        14266
+      ],
+      "group": 12,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        14272,
+        14266
+      ],
+      "progressive_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "9187d8023b30877c95b09dc22cab8843e8d8af516eba1985a2c4e7a31c8658a4"
+      ],
+      "progressive_pairs": 3,
+      "role": "sharp",
+      "source_sha256": "6572c90ac80f23e3139b0aad8288a4a3b53a9039eb7b3f07f3f493f171366ac8"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        13912,
+        13910
+      ],
+      "baseline_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "5f4b80313c47ea89a40f709d8e1449e8cf36cd5b8931b5f95374067d65562fa4"
+      ],
+      "changed": 14434,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        13912,
+        13910
+      ],
+      "group": 12,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        13912,
+        13910
+      ],
+      "progressive_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "5f4b80313c47ea89a40f709d8e1449e8cf36cd5b8931b5f95374067d65562fa4"
+      ],
+      "progressive_pairs": 3,
+      "role": "feathered",
+      "source_sha256": "6572c90ac80f23e3139b0aad8288a4a3b53a9039eb7b3f07f3f493f171366ac8"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3184,
+        3182
+      ],
+      "baseline_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "56e048f57cd2e6baba91cc7e51bff81996ce1ade164bf2dfc0707fa4f65f8bbc"
+      ],
+      "changed": 14231,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3184,
+        3182
+      ],
+      "group": 12,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        3184,
+        3182
+      ],
+      "progressive_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "56e048f57cd2e6baba91cc7e51bff81996ce1ade164bf2dfc0707fa4f65f8bbc"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_blur",
+      "source_sha256": "6572c90ac80f23e3139b0aad8288a4a3b53a9039eb7b3f07f3f493f171366ac8"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        13625,
+        13625
+      ],
+      "baseline_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "22bd7a930a53ddc561217e7e313ce10ff131995fb3dc45960c0742587a1ff8d4"
+      ],
+      "changed": 14541,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        13625,
+        13625
+      ],
+      "group": 12,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        13625,
+        13625
+      ],
+      "progressive_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "22bd7a930a53ddc561217e7e313ce10ff131995fb3dc45960c0742587a1ff8d4"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_tone",
+      "source_sha256": "6572c90ac80f23e3139b0aad8288a4a3b53a9039eb7b3f07f3f493f171366ac8"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        14568,
+        14504
+      ],
+      "baseline_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "d488acf0f39fa5fbfb09da2f4e6444ad6ad5dd7cc33bb97d1b3dd74a36d8f803"
+      ],
+      "changed": 14761,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        14568,
+        14504
+      ],
+      "group": 12,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        14568,
+        14504
+      ],
+      "progressive_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "d488acf0f39fa5fbfb09da2f4e6444ad6ad5dd7cc33bb97d1b3dd74a36d8f803"
+      ],
+      "progressive_pairs": 3,
+      "role": "local_copy",
+      "source_sha256": "6572c90ac80f23e3139b0aad8288a4a3b53a9039eb7b3f07f3f493f171366ac8"
+    },
+    {
+      "baseline": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "9dec667dcb83973dfb42dc2204e80463d5161b89e079c3e7377d666cd3446bb4"
+      ],
+      "changed": 0,
+      "extended": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 12,
+      "pixels": 442368,
+      "previous": [
+        "comparable",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "9dec667dcb83973dfb42dc2204e80463d5161b89e079c3e7377d666cd3446bb4"
+      ],
+      "progressive_pairs": 3,
+      "role": "global_resize",
+      "source_sha256": "6572c90ac80f23e3139b0aad8288a4a3b53a9039eb7b3f07f3f493f171366ac8"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "cc5a04833e93d965773e8a630a12de3f5b0a3d42011ccbfeba5406fcb11068f0"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 12,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "cc5a04833e93d965773e8a630a12de3f5b0a3d42011ccbfeba5406fcb11068f0"
+      ],
+      "progressive_pairs": 3,
+      "role": "second_jpeg",
+      "source_sha256": "6572c90ac80f23e3139b0aad8288a4a3b53a9039eb7b3f07f3f493f171366ac8"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 12,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "c2db415f97908cd6bfc75b7068bb589b46c042de28bbca006214ecae102906a9"
+      ],
+      "progressive_pairs": 3,
+      "role": "unrelated",
+      "source_sha256": "6572c90ac80f23e3139b0aad8288a4a3b53a9039eb7b3f07f3f493f171366ac8"
+    },
+    {
+      "baseline": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "115516312bc99c3de2e2be424daa0e9613bf165265a6edfe069dc365b8da40b9"
+      ],
+      "changed": 0,
+      "extended": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "group": 12,
+      "pixels": 442368,
+      "previous": [
+        "partial_jpeg_delivery_unassessed",
+        "chipmunk.image-reference-comparison/2",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "115516312bc99c3de2e2be424daa0e9613bf165265a6edfe069dc365b8da40b9"
+      ],
+      "progressive_pairs": 3,
+      "role": "shifted",
+      "source_sha256": "6572c90ac80f23e3139b0aad8288a4a3b53a9039eb7b3f07f3f493f171366ac8"
+    },
+    {
+      "baseline": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "baseline_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "6af0095e6794741d516dd241f0665246d4835cb11eb41c744a7726d79c5b3117"
+      ],
+      "changed": 0,
+      "extended": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "group": 12,
+      "pixels": 442368,
+      "previous": [
+        "integer_alignment_unresolved",
+        "chipmunk.image-reference-comparison/1",
+        0,
+        0
+      ],
+      "progressive_decode": [
+        "7a317f5e10cf6373e44c62f9b7f8c8873d14844a740b495adcccf0ac4c7fe4db",
+        "6af0095e6794741d516dd241f0665246d4835cb11eb41c744a7726d79c5b3117"
+      ],
+      "progressive_pairs": 3,
+      "role": "reflection",
+      "source_sha256": "6572c90ac80f23e3139b0aad8288a4a3b53a9039eb7b3f07f3f493f171366ac8"
+    }
+  ],
+  "schema": "chipmunk.image-reference-progressive-transfer/1",
+  "sources": [
+    "049f1a3b3f1f856bdb5fd24decf778fd03afc1c268d43378f18c9ad817d37150",
+    "10a6860020728d576ec40abe77f092ad6ed200736ab67fe2bdfd3d2dba678865",
+    "2b1a5723f8237597c382afda66a21a6ed29930cb62f5ea983c631f108977b3f9",
+    "32c99f60c8df0bf68366039667d07f636a865c0084a7691517ab5e8b3b895dbc",
+    "3408ca3bc109ce6ef5bc71a233c3b7b727d2c6239142f23688a8241eb923a213",
+    "3e255557192e2322a2d06dfaf3452e7453e88b7617def4f0469ebcd088d706f5",
+    "0016548217c289683115b35c2d7c73fe96bebcf1f60f348d427ed468631567a6",
+    "1cbae63cc83776494c7ffae25b77a505997c96b288171db0e873abe38a37cc0b",
+    "391e8428bf53a111045ac70a443f252dbfdd9e435bb8fde532b3c24aad120980",
+    "4fdda61019455647f45c841afd7feb9ba62d2c5fc0faeefd86c44cab2b666d79",
+    "5a161c7eb80ba74b82fb36c32b83933c4508e1da355d6dec7e93aaaf69560452",
+    "6572c90ac80f23e3139b0aad8288a4a3b53a9039eb7b3f07f3f493f171366ac8"
+  ],
+  "summary": {
+    "extended": {
+      "incompatible_highlights": 0,
+      "known_edits_located": 24,
+      "local_ordinary_highlights": 34,
+      "measured": 91,
+      "ordinary_highlights": 4
+    },
+    "previous": {
+      "incompatible_highlights": 0,
+      "known_edits_located": 20,
+      "local_ordinary_highlights": 28,
+      "measured": 81,
+      "ordinary_highlights": 4
+    }
+  }
+}

@@ -22,7 +22,7 @@ INTERPRETATION = (
 def compare(earlier, submitted, earlier_bytes, submitted_bytes):
     """Locate differences only after independently matching the original JPEG grids."""
     if (earlier.size != submitted.size or not MIN_SIDE <= min(earlier.size) <= max(earlier.size) <= MAX_SIDE
-            or not all(reference_structure_jpeg._jpeg_profile(image, payload, (QUALITY,)) for image, payload in
+            or not all(reference_structure_jpeg._jpeg_profile(image, payload, (QUALITY,), allow_progressive=True) for image, payload in
                        ((earlier, earlier_bytes), (submitted, submitted_bytes)))
             or earlier.quantization != submitted.quantization):
         return None, None

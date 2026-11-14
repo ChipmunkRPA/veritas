@@ -26,12 +26,21 @@ STRUCTURE_WINDOW = 4.5
 STRUCTURE_RADIUS = 9
 
 
-def _jpeg_profile(image, payload, qualities):
+def _jpeg_profile(image, payload, qualities, *, allow_progressive=False):
     if (image.mode != "RGB" or image.format != "JPEG" or image.getexif().get(274, 1) != 1
-            or {"icc_profile", "progressive", "progression"} & image.info.keys()):
+            or "icc_profile" in image.info):
         return False
-    spec = jpeg_bitstream.read(payload)
-    return bool(spec and spec.frame == "baseline" and spec.precision == 8 and spec.ijg_quality in qualities
+    progressive = bool({"progressive", "progression"} & image.info.keys())
+    if progressive:
+        parsed = jpeg_bitstream.progressive_frame(payload) if allow_progressive else None
+        if parsed is None:
+            return False
+        spec, _ = parsed
+    else:
+        spec = jpeg_bitstream.read(payload)
+        if spec is None or spec.frame != "baseline":
+            return False
+    return bool(spec.precision == 8 and (spec.width, spec.height) == image.size and spec.ijg_quality in qualities
                 and [(c.id, c.h, c.v) for c in spec.components] == [(1, 2, 2), (2, 1, 1), (3, 1, 1)]
                 and all(spec.table_bits.get(c.table_id) == 8 for c in spec.components)
                 and spec.table(1) == spec.table(2))

@@ -821,7 +821,12 @@ def test_tone_adjusted_jpeg_keeps_source_structure_evidence(reference_http, tmp_
         assert db.get(Analysis, "image-a").result_hash == "a" * 64
 
 
-def test_exact_jpeg_block_fallback_preserves_completed_analysis_and_exports(reference_http, tmp_path, monkeypatch):
+@pytest.mark.parametrize("earlier_progressive, submitted_progressive", [
+    (False, False), (True, False), (False, True), (True, True),
+])
+def test_exact_jpeg_block_fallback_preserves_completed_analysis_and_exports(
+    reference_http, tmp_path, monkeypatch, earlier_progressive, submitted_progressive,
+):
     f = reference_http
     tiles = np.random.default_rng(661).integers(30, 220, (32, 48, 3), dtype=np.uint8)
     original = cv2.resize(tiles, (768, 512), interpolation=cv2.INTER_CUBIC)
@@ -829,9 +834,9 @@ def test_exact_jpeg_block_fallback_preserves_completed_analysis_and_exports(refe
     changed = original.copy()
     changed[210:280, 349:404] = [204, 108, 77]
 
-    def jpeg(pixels, quality=90):
+    def jpeg(pixels, quality=90, *, progressive=submitted_progressive):
         with io.BytesIO() as output:
-            Image.fromarray(pixels).save(output, "JPEG", quality=quality, subsampling=2)
+            Image.fromarray(pixels).save(output, "JPEG", quality=quality, subsampling=2, progressive=progressive)
             return output.getvalue()
 
     def compare(content):
@@ -845,7 +850,7 @@ def test_exact_jpeg_block_fallback_preserves_completed_analysis_and_exports(refe
         assert response.status_code == 200 and response.headers["Cache-Control"] == "no-store"
         return response.json()
 
-    earlier, submitted = jpeg(original), jpeg(changed)
+    earlier, submitted = jpeg(original, progressive=earlier_progressive), jpeg(changed)
     for name in ("image_reference_exact_jpeg_identity", "image_reference_shifted_jpeg", "image_reference_structure_jpeg"):
         monkeypatch.setattr(settings, name, True)
     monkeypatch.setattr(settings, "image_reference_same_jpeg", False)
@@ -883,6 +888,8 @@ def test_exact_jpeg_block_fallback_preserves_completed_analysis_and_exports(refe
     assert compare(earlier)["comparison"]["regions"] == []
     assert compare(jpeg(changed, 85))["comparison"]["schema"] != reference_same_jpeg.SCHEMA
     assert compare(jpeg(np.roll(changed, 16, axis=1)))["comparison"]["schema"] != reference_same_jpeg.SCHEMA
+    if submitted_progressive:
+        assert compare(submitted + b"trailing data")["comparison"]["schema"] != reference_same_jpeg.SCHEMA
     monkeypatch.setattr(settings, "image_reference_same_jpeg", False)
     assert compare(submitted)["comparison"] == baseline
     with Session(f.engine) as db:

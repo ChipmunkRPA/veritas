@@ -1,0 +1,73 @@
+{
+  "cases": {
+    "g1-left_only.mp4": {
+      "additional_ranges": 0,
+      "ranges_kept": 1
+    },
+    "g1-ordinary_cuts.mp4": {
+      "additional_ranges": 0,
+      "ranges_kept": 0
+    },
+    "g2-left_then_right.mp4": {
+      "additional_ranges": 1,
+      "exact_source_images": 12,
+      "exhibit_frames": [
+        88,
+        93,
+        97
+      ],
+      "frames": [
+        89,
+        97
+      ],
+      "off_face_motion_tiles": [
+        0,
+        0
+      ],
+      "primary_exhibit_frames": [
+        66,
+        71,
+        75
+      ],
+      "primary_frames": [
+        67,
+        75
+      ],
+      "primary_side": "left",
+      "side": "right",
+      "signed_source_verified": true
+    },
+    "g2-right_then_left.mp4": {
+      "additional_ranges": 1,
+      "exact_source_images": 12,
+      "exhibit_frames": [
+        94,
+        98,
+        101
+      ],
+      "frames": [
+        95,
+        101
+      ],
+      "off_face_motion_tiles": [
+        0,
+        0
+      ],
+      "primary_exhibit_frames": [
+        61,
+        65,
+        68
+      ],
+      "primary_frames": [
+        62,
+        68
+      ],
+      "primary_side": "right",
+      "side": "left",
+      "signed_source_verified": true
+    }
+  },
+  "overall_assessment_retained": true,
+  "simulated_paid_runs": 8,
+  "unpaid_jobs": 0
+}

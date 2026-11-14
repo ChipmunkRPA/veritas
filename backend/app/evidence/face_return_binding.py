@@ -18,6 +18,7 @@ from app.evidence.video_packet_versions import (
     GUARDED_720P30_FACE_VERSION,
     GUARDED_CODEC_FACE_VERSION,
     MOVING_AVC_PROPOSAL_VERSION,
+    OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION,
     PANE_TRACK_AVC_PROPOSAL_VERSION,
     POSITION_TRACK_AVC_PROPOSAL_VERSION,
     PRIMARY_TRACK_AVC_PROPOSAL_VERSION,
@@ -48,10 +49,12 @@ SECOND_MIN_GAP = 2
 GUARDED_METHODS = frozenset({GUARDED_CODEC_METHOD, GUARDED_720P30_METHOD, SECOND_METHOD, SECOND_HD_METHOD})
 SECOND_BY_VERSION = {SECOND_SHORT_FACE_VERSION: SECOND_METHOD, SECOND_HD_FACE_VERSION: SECOND_HD_METHOD,
                      SECOND_AVC_PROPOSAL_VERSION: SECOND_AVC_METHOD,
-                     SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION: proposal.SECOND_PANE_TRACK_AVC_METHOD}
+                     SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION: proposal.SECOND_PANE_TRACK_AVC_METHOD,
+                     OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION: proposal.OPPOSITE_PANE_TRACK_AVC_METHOD}
 PRIMARY_BY_SECOND = {SECOND_METHOD: SECOND_PRIOR_METHODS, SECOND_HD_METHOD: frozenset({GUARDED_720P30_METHOD}),
                      SECOND_AVC_METHOD: frozenset({GUARDED_720P30_METHOD, proposal.AVC_METHOD}),
-                     proposal.SECOND_PANE_TRACK_AVC_METHOD: frozenset({proposal.PANE_TRACK_AVC_METHOD})}
+                     proposal.SECOND_PANE_TRACK_AVC_METHOD: frozenset({proposal.PANE_TRACK_AVC_METHOD}),
+                     proposal.OPPOSITE_PANE_TRACK_AVC_METHOD: frozenset({proposal.PANE_TRACK_AVC_METHOD})}
 GUARDED_720P30_DIMENSIONS = (1280, 720)
 GUARDED_720P30_STEP = Fraction(1, 30)
 FINE_SCENE_FRAME_COUNT = 120
@@ -79,7 +82,8 @@ METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VE
                    proposal.PRIMARY_TRACK_AVC_METHOD: PRIMARY_TRACK_AVC_PROPOSAL_VERSION,
                    proposal.POSITION_TRACK_AVC_METHOD: POSITION_TRACK_AVC_PROPOSAL_VERSION,
                    proposal.PANE_TRACK_AVC_METHOD: PANE_TRACK_AVC_PROPOSAL_VERSION,
-                   proposal.SECOND_PANE_TRACK_AVC_METHOD: SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION}
+                   proposal.SECOND_PANE_TRACK_AVC_METHOD: SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION,
+                   proposal.OPPOSITE_PANE_TRACK_AVC_METHOD: OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION}
 WINDOW_METHODS = frozenset((short_windows.METHOD, carriers.METHOD))
 POINT = 0.10
 SCENE_POINT = 0.55
@@ -165,7 +169,15 @@ def validate_second(record, primary, *incumbents):
         _require(primary["time_base"] == record["time_base"]
                  and max(a - right, left - b) * base >= proposal.SECOND_AVC_GAP,
                  "The second AVC face range is too close to the first brief range")
-        if primary["method"] in {proposal.AVC_METHOD, proposal.PANE_TRACK_AVC_METHOD}:
+        if record["method"] == proposal.OPPOSITE_PANE_TRACK_AVC_METHOD:
+            _require({record["pane"], primary["pane"]} == {"left", "right"}
+                     and record["scene_frame_inputs"] == primary["scene_frame_inputs"],
+                     "Opposite-side face ranges must follow different sides on the same native pictures")
+            earlier_boxes = {row["frame_index"]: row["boxes"] for row in primary["face_detection_boxes"]}
+            _require(all(earlier_boxes.get(row["frame_index"], row["boxes"]) == row["boxes"]
+                         for row in record["face_detection_boxes"]),
+                     "Opposite-side face ranges disagree on face detections in the same frame")
+        elif primary["method"] in {proposal.AVC_METHOD, proposal.PANE_TRACK_AVC_METHOD}:
             _require(all(record[key] == primary[key] for key in (
                 "scheduled_frame_indices", "shortlist_edges", "shortlist_anchor_indices", "frame_inputs",
                 "scene_frame_inputs",

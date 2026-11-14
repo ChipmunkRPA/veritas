@@ -54,6 +54,7 @@ from app.evidence.video_packet_versions import (
     LIGHTING_CONTEXT_VERSIONS,
     MOVING_AVC_PROPOSAL_VERSION,
     NESTED_VERSIONS,
+    OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION,
     PAIRED_EDGE_VERSION,
     PANE_TRACK_AVC_PROPOSAL_VERSION,
     PICTURE_HOLD_VERSIONS,
@@ -715,7 +716,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     proposal_versions = {SHORT_PROPOSAL_VERSION, SHORT_WEBM_PROPOSAL_VERSION, SHORT_AVC_PROPOSAL_VERSION,
                          SECOND_AVC_PROPOSAL_VERSION, MOVING_AVC_PROPOSAL_VERSION, PRIMARY_TRACK_AVC_PROPOSAL_VERSION,
                          POSITION_TRACK_AVC_PROPOSAL_VERSION, PANE_TRACK_AVC_PROPOSAL_VERSION,
-                         SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION}
+                         SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION, OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION}
     if version not in proposal_versions | {SHORT_WINDOW_VERSION, SHORT_CARRIER_VERSION} and any(
             face_boundary_binding.is_paired(item.get("face_boundary")) for item in chosen):
         version = PAIRED_EDGE_VERSION
@@ -995,6 +996,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 packet["interpretation"] += f" The check followed the face on the {pane} side independently of the other face."
             if face_return["method"] == face_short_proposal_binding.SECOND_PANE_TRACK_AVC_METHOD:
                 packet["title"] = "Additional brief face change on the same side"
+            if face_return["method"] == face_short_proposal_binding.OPPOSITE_PANE_TRACK_AVC_METHOD:
+                packet["title"] = "Additional brief face change on the other side"
             if face_return["method"] == face_return_binding.FINE_SCENE_METHOD:
                 packet["interpretation"] += " Smaller areas outside the face supplied background detail at one or both boundaries."
                 for name, edge in zip(("Entry", "Exit"), face_return["fine_scene_edges"], strict=True):

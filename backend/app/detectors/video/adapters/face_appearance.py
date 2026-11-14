@@ -882,7 +882,7 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
     def recover_panes():
         nonlocal pane, reference_faces, faces, anchor_indices, edges, planned
         sampled = {i: detections[i] for i in proposal.ANCHOR_SAMPLES}
-        best = None
+        proposals = []
         measured_pair = False
         best_coverage = (0, 0)
         for side in ("left", "right"):
@@ -918,19 +918,19 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
             if selected is None:
                 continue
             rank = (*selected[0], side)
-            if best is None or rank < best[0]:
-                _, start, end = selected[0]
-                value = {
-                    **record(selected, proposal.PANE_TRACK_AVC_METHOD),
-                    "pane": side, "off_face_motion_tiles": [counts[start], counts[end]],
-                    "face_detection_boxes": [
-                        {"frame_index": i, "boxes": [list(face.box()) for face in detections[i]]}
-                        for i in planned
-                    ],
-                }
-                best = rank, value, faces, counts, stable
-        if best is not None:
-            _, value, faces, counts, stable = best
+            _, start, end = selected[0]
+            value = {
+                **record(selected, proposal.PANE_TRACK_AVC_METHOD),
+                "pane": side, "off_face_motion_tiles": [counts[start], counts[end]],
+                "face_detection_boxes": [
+                    {"frame_index": i, "boxes": [list(face.box()) for face in detections[i]]}
+                    for i in planned
+                ],
+            }
+            proposals.append((rank, value, faces, counts, stable))
+        if proposals:
+            proposals.sort(key=lambda item: item[0])
+            _, value, faces, counts, stable = proposals[0]
             planned = value["scheduled_frame_indices"]
             details["face_return"] = value
             coverage.update(status="localized", reason=None, scheduled_frames=len(planned))
@@ -947,15 +947,24 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
                     durations=proposal.SECOND_AVC_DURATIONS, extra_edge_check=stable,
                 )
                 stop.check("second pane face proposal")
+                secondary = None
                 if selected is not None:
                     _, start, end = selected[0]
-                    details["face_return_secondary"] = {
+                    secondary = {
                         **record(selected, proposal.SECOND_PANE_TRACK_AVC_METHOD),
                         "pane": value["pane"],
                         "off_face_motion_tiles": [counts[start], counts[end]],
                         "face_detection_boxes": value["face_detection_boxes"],
                     }
-                followup.update(status="localized" if selected is not None else "no_distinct_range", reason=None)
+                elif settings.video_face_opposite_pane_avc_review and len(proposals) == 2:
+                    _, other, _, _, _ = proposals[1]
+                    if not distinct_from_first(value)(other["start_frame_index"], other["end_frame_index"]):
+                        secondary = {**other, "method": proposal.OPPOSITE_PANE_TRACK_AVC_METHOD}
+                        followup.update(scheduled_frames=len(other["scheduled_frame_indices"]),
+                                        measured_face_frames=len(other["frame_inputs"]))
+                if secondary is not None:
+                    details["face_return_secondary"] = secondary
+                followup.update(status="localized" if secondary is not None else "no_distinct_range", reason=None)
         elif best_coverage[1]:
             coverage.update(status="no_distinct_range" if measured_pair else "unassessed",
                             reason=None if measured_pair else "insufficient_face_track_context",
@@ -1084,6 +1093,9 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
              *(("The optional second range on the selected side reuses the same pictures and face measurements.",)
                if settings.video_face_short_avc_review and settings.video_face_pane_track_avc_review
                and settings.video_face_second_pane_avc_review else ()),
+             *(("The other side can supply a separate range from its already measured pictures.",)
+               if settings.video_face_short_avc_review and settings.video_face_pane_track_avc_review
+               and settings.video_face_second_pane_avc_review and settings.video_face_opposite_pane_avc_review else ()),
              *(("The enabled overlapping review reads 240 native pictures and compares three bounded face input sets.",)
                if settings.video_face_short_window_review or settings.video_face_short_carrier_review else ()),
              *(("The enabled cut context reads up to 77 native pictures and detects at most three face boxes.",)

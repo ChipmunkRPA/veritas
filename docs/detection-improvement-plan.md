@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Brief face changes on opposite sides](video-face-opposite-pane-2026-11-14.md)
+  located 30 of 32 staged ranges versus 16 before, with no extra
+  findings on 32 ordinary and single-swap controls. The local trial
+  uses the existing face measurements and adds side-specific source
+  frames and time ranges without changing the AI confidence.
+
 - [Writing-pattern ratio calibration by length and context](writing-ratio-context-review-2026-11-14.md)
   added three correct locations with two extra ordinary flags on the
   parent panel. It recovered no new edits on the separate transfer.

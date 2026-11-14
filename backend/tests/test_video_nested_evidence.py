@@ -830,7 +830,8 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.image_copy_affine_binding','app.evidence.image_embedded_pair_binding',
                         'app.evidence.image_animation_binding','app.evidence.image_transparency_binding',
                         'app.evidence.document_scope','app.evidence.email_alternatives',
-                        'app.evidence.document_invisible_characters','app.evidence.document_native_locations'):
+                        'app.evidence.document_invisible_characters','app.evidence.document_native_locations',
+                        'app.evidence.document_check_coverage'):
             return None
         if fullname.startswith(('app.storage','app.core.config','app.detectors','app.evidence','app.api')):
             raise RuntimeError('Offline verifier imported runtime: '+fullname)

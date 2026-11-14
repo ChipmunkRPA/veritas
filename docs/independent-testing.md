@@ -1944,6 +1944,10 @@ with the [independent evaluation form](https://github.com/ChipmunkRPA/veritas/is
 
 ### Review recent stereo and face evidence
 
+The [opposite-side face trial](video-face-opposite-pane-2026-11-14.md)
+has separate replay commands. Its receipt tracks each side and both
+edit boundaries on matched two-swap, single-swap and ordinary clips.
+
 ```sh
 review_dir=$(mktemp -d)
 python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/review.json" --suite stereo-and-face

@@ -21,15 +21,18 @@ from scripts.video_short_return_encoded_app import (
 )
 
 
-def run(bank, output, *, primary_track=False, position_track=False, pane_track=False, second_pane=False):
+def run(bank, output, *, primary_track=False, position_track=False, pane_track=False, second_pane=False,
+        opposite_receipt=None):
     configure(output, ROOT)
-    pane_track |= second_pane
+    two_ranges = second_pane or opposite_receipt is not None
+    pane_track |= two_ranges
     os.environ.update(
         BASE_FLAGS, VERITAS_VIDEO_FACE_SECOND_AVC_REVIEW="true", VERITAS_VIDEO_FACE_MOVING_AVC_REVIEW="false",
         VERITAS_VIDEO_FACE_PRIMARY_TRACK_AVC_REVIEW="false",
         VERITAS_VIDEO_FACE_POSITION_TRACK_AVC_REVIEW=str(pane_track).lower(),
-        VERITAS_VIDEO_FACE_PANE_TRACK_AVC_REVIEW=str(second_pane).lower(),
-        VERITAS_VIDEO_FACE_SECOND_PANE_AVC_REVIEW="false",
+        VERITAS_VIDEO_FACE_PANE_TRACK_AVC_REVIEW=str(two_ranges).lower(),
+        VERITAS_VIDEO_FACE_SECOND_PANE_AVC_REVIEW=str(opposite_receipt is not None).lower(),
+        VERITAS_VIDEO_FACE_OPPOSITE_PANE_AVC_REVIEW="false",
     )
 
     import cv2
@@ -43,6 +46,7 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
     from app.engine.registry import get_registry
     from app.evidence.face_short_proposal_binding import (
         MOVING_AVC_METHOD,
+        OPPOSITE_PANE_TRACK_AVC_METHOD,
         PANE_TRACK_AVC_METHOD,
         POSITION_TRACK_AVC_METHOD,
         PRIMARY_TRACK_AVC_METHOD,
@@ -65,7 +69,24 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
     stub = PaymentStub()
     service._stripe = stub
     roster = {row["file"]: row for row in json.loads((bank / "media.json").read_text())["rows"]}
-    if second_pane:
+    if opposite_receipt:
+        rows = json.loads(opposite_receipt.read_bytes())["rows"]
+        positives = []
+        controls = []
+        for condition, side in (("left_then_right", "right"), ("right_then_left", "left")):
+            row = next(row for row in rows if row["condition"] == condition and row["opposite"]
+                       and row["opposite"]["pane"] == side
+                       and all({"pane": row[key]["pane"], "frames": row[key]["frames"]} in row["truth"]
+                               for key in ("first", "opposite")))
+            positives.append(f"g{row['group']}-{condition}.mp4")
+        for condition in ("left_only", "ordinary_cuts"):
+            row = next(row for row in rows if row["condition"] == condition and not (row["same"] or row["opposite"])
+                       and bool(row["first"]) == bool(row["truth"]))
+            controls.append(f"g{row['group']}-{condition}.mp4")
+        cases = (*positives, *controls)
+        serving_mode = "video_face_opposite_pane_avc_review"
+        review_method, packet_version = OPPOSITE_PANE_TRACK_AVC_METHOD, "video-evidence-33"
+    elif second_pane:
         cases = ("g2-swaps_left.mp4", "g3-swaps_right.mp4", "g1-swaps_left.mp4", "g2-ordinary_speaker_cut.mp4")
         serving_mode = "video_face_second_pane_avc_review"
         review_method, packet_version = SECOND_PANE_TRACK_AVC_METHOD, "video-evidence-32"
@@ -118,7 +139,7 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                 scan(exported.decode())
                 if not recovered:
                     results[case] = {"ranges_kept": len(existing), "additional_ranges": 0}
-                    if second_pane:
+                    if two_ranges:
                         assert len(existing) == int(case == cases[2])
                         followup = evidence["coverage"]["brief_face_review"]["passes"].get("second_avc")
                         assert (followup or {}).get("status") == ("no_distinct_range" if existing else None)
@@ -132,7 +153,9 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                 assert evidence["version"] == packet_version
                 change = packet["face_return"]
                 interval = [change["start_frame_index"], change["end_frame_index"]]
-                if pane_track:
+                if opposite_receipt:
+                    assert {"pane": change["pane"], "frames": interval} in row["truth"]
+                elif pane_track:
                     assert interval in row["truth"] and change["pane"] == row["expected_pane"]
                 else:
                     assert interval == row["truth"][1]
@@ -141,11 +164,16 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                 case_output.mkdir(exist_ok=True)
                 images, _ = native_frames(client, packet, source, row, case_output, representatives=anchors)
                 primary_images = set()
-                if second_pane:
+                if two_ranges:
                     [primary] = [r for r in evidence["packets"] if r.get("semantics") == PANE_TRACK_AVC_METHOD]
                     [first] = existing
                     first_interval = [first["start_frame_index"], first["end_frame_index"]]
-                    assert interval != first_interval and sorted([interval, first_interval]) == sorted(row["truth"])
+                    assert interval != first_interval
+                    if opposite_receipt:
+                        assert change["pane"] != first["pane"]
+                        assert {"pane": first["pane"], "frames": first_interval} in row["truth"]
+                    else:
+                        assert sorted([interval, first_interval]) == sorted(row["truth"])
                     first_folder = case_output / "primary"
                     first_folder.mkdir()
                     primary_images, _ = native_frames(
@@ -176,8 +204,9 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                         assert f"followed the face on the {change['pane']} side" in words
                         for label, count in zip(("Start", "End"), change["off_face_motion_tiles"], strict=True):
                             assert f"{label} abrupt changes outside the face on the {change['pane']} {count}" in words
-                    if second_pane:
-                        assert "Additional brief face change on the same side" in words
+                    if two_ranges:
+                        side_label = "other side" if opposite_receipt else "same side"
+                        assert f"Additional brief face change on the {side_label}" in words
                         assert f"brief face-change range spans {first['start_stream_s']:.3f}-{first['end_stream_s']:.3f} s" in words
                     assert images | primary_images <= {
                         image_signature(document.extract_image(xref)["image"])
@@ -200,11 +229,16 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                     source_video=source,
                 )
                 assert replay.outcome == "verified" and replay.signer_authenticated, replay.as_dict()
+                replay_detail = (
+                    "off-face motion counts on each tracked side at both boundaries of its range" if opposite_receipt else
+                    "off-face motion counts on the tracked side at both boundaries of each range" if second_pane else
+                    "bounded face shortlist"
+                )
                 assert any(
                     item.ok
                     and item.name == "original video frames"
                     and "bounded face shortlist" in item.detail
-                    and (not second_pane or "off-face motion counts on the tracked side at both boundaries of each range" in item.detail)
+                    and replay_detail in item.detail
                     for item in replay.checks
                 ), replay.as_dict()
                 with ZipFile(signed) as archive:
@@ -227,12 +261,14 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                 if pane_track:
                     results[case]["side"] = change["pane"]
                     results[case]["off_face_motion_tiles"] = change["off_face_motion_tiles"]
-                if second_pane:
+                if two_ranges:
                     results[case]["primary_frames"] = first_interval
                     results[case]["primary_exhibit_frames"] = [
                         first["anchors"][role] for role in ("before", "during", "after")
                     ]
                     results[case]["exact_source_images"] += len(primary_images)
+                if opposite_receipt:
+                    results[case]["primary_side"] = first["pane"]
     receipt = {
         "cases": results,
         "simulated_paid_runs": 2 * len(cases),
@@ -251,6 +287,8 @@ if __name__ == "__main__":
     mode.add_argument("--position-track", action="store_true")
     mode.add_argument("--pane-track", action="store_true")
     mode.add_argument("--second-pane", action="store_true")
+    mode.add_argument("--opposite-receipt", type=Path, help="Check selected positives and controls from the opposite-side trial")
     args = parser.parse_args()
     run(args.bank.resolve(), args.output.resolve(), primary_track=args.primary_track,
-        position_track=args.position_track, pane_track=args.pane_track, second_pane=args.second_pane)
+        position_track=args.position_track, pane_track=args.pane_track, second_pane=args.second_pane,
+        opposite_receipt=args.opposite_receipt)

@@ -1,0 +1,7223 @@
+{
+  "media_sha256": "d82b74278d96de5c434f6fef88576f71e83c2a75e2fdc5eb198f9fa88ab1d207",
+  "parent_sha256": "bc69f939ba4872cd110f2c89e7fa4bfbcb4474ace3f61c8ff9ed74ee37215db6",
+  "protocol": "Preserve both same-side selections. If there is no same-side follow-up, take the strongest guarded result already measured on the other side when at least three native frames separate the two ranges. Compare exact side and both boundaries; count wrong additional ranges on edits, unmodified pictures and single-swap controls separately.",
+  "results": {
+    "additional_correct_people": [
+      1,
+      2,
+      3,
+      5,
+      7,
+      8
+    ],
+    "by_case": {
+      "left_only": {
+        "baseline_exact": 8,
+        "baseline_extras": 0,
+        "baseline_flagged_files": 8,
+        "candidate_exact": 8,
+        "candidate_extras": 0,
+        "candidate_flagged_files": 8,
+        "files": 8,
+        "truth": 8
+      },
+      "left_then_right": {
+        "baseline_exact": 8,
+        "baseline_extras": 0,
+        "baseline_flagged_files": 8,
+        "candidate_exact": 15,
+        "candidate_extras": 0,
+        "candidate_flagged_files": 8,
+        "files": 8,
+        "truth": 16
+      },
+      "ordinary": {
+        "baseline_exact": 0,
+        "baseline_extras": 0,
+        "baseline_flagged_files": 0,
+        "candidate_exact": 0,
+        "candidate_extras": 0,
+        "candidate_flagged_files": 0,
+        "files": 8,
+        "truth": 0
+      },
+      "ordinary_cuts": {
+        "baseline_exact": 0,
+        "baseline_extras": 0,
+        "baseline_flagged_files": 0,
+        "candidate_exact": 0,
+        "candidate_extras": 0,
+        "candidate_flagged_files": 0,
+        "files": 8,
+        "truth": 0
+      },
+      "right_only": {
+        "baseline_exact": 7,
+        "baseline_extras": 0,
+        "baseline_flagged_files": 7,
+        "candidate_exact": 7,
+        "candidate_extras": 0,
+        "candidate_flagged_files": 7,
+        "files": 8,
+        "truth": 8
+      },
+      "right_then_left": {
+        "baseline_exact": 8,
+        "baseline_extras": 0,
+        "baseline_flagged_files": 8,
+        "candidate_exact": 15,
+        "candidate_extras": 0,
+        "candidate_flagged_files": 8,
+        "files": 8,
+        "truth": 16
+      }
+    }
+  },
+  "rows": [
+    {
+      "condition": "left_then_right",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "ce61e088db406f1d2a79d2771d1712828740137a370bde28c61e4a09601edc63",
+            "frame_index": 101,
+            "pts": 101000
+          },
+          {
+            "decoded_rgb_sha256": "a778b6babfc3ea02423e28fee76849d5f6bc2d743fd66c278aa9a1f22fbe55ed",
+            "frame_index": 105,
+            "pts": 105000
+          },
+          {
+            "decoded_rgb_sha256": "3a151a1a2086940abc78db336773e0ee91daccc42206d4c4dc101f651cc9383f",
+            "frame_index": 108,
+            "pts": 108000
+          }
+        ],
+        "edges": [
+          [
+            99,
+            100,
+            101,
+            102,
+            103,
+            104
+          ],
+          [
+            105,
+            106,
+            107,
+            108,
+            109,
+            110
+          ]
+        ],
+        "frames": [
+          102,
+          108
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          102000,
+          108000
+        ],
+        "response": 0.8403376584254474
+      },
+      "first_pts": 0,
+      "group": 1,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 28,
+          "pane_changes": [
+            [
+              61,
+              0
+            ],
+            [
+              67,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "d600a3000a8f954d27232ad6dd97caf06868479f0c0086c9518e5afc99c0f5dd",
+                "frame_index": 60,
+                "pts": 60000
+              },
+              {
+                "decoded_rgb_sha256": "04b5af9bf851d36d80738f26e51655018554204f596b72c2ca51192b84a3b9e9",
+                "frame_index": 64,
+                "pts": 64000
+              },
+              {
+                "decoded_rgb_sha256": "b2f60590cd36cdcb36b7282c5baf3ae41b9bd5c1a23afea32a3a5eeb4314be65",
+                "frame_index": 67,
+                "pts": 67000
+              }
+            ],
+            "edges": [
+              [
+                58,
+                59,
+                60,
+                61,
+                62,
+                63
+              ],
+              [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69
+              ]
+            ],
+            "frames": [
+              61,
+              67
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              61000,
+              67000
+            ],
+            "response": 0.6363239907733246
+          },
+          "scheduled": 28
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 36,
+          "pane_changes": [
+            [
+              102,
+              0
+            ],
+            [
+              108,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "ce61e088db406f1d2a79d2771d1712828740137a370bde28c61e4a09601edc63",
+                "frame_index": 101,
+                "pts": 101000
+              },
+              {
+                "decoded_rgb_sha256": "a778b6babfc3ea02423e28fee76849d5f6bc2d743fd66c278aa9a1f22fbe55ed",
+                "frame_index": 105,
+                "pts": 105000
+              },
+              {
+                "decoded_rgb_sha256": "3a151a1a2086940abc78db336773e0ee91daccc42206d4c4dc101f651cc9383f",
+                "frame_index": 108,
+                "pts": 108000
+              }
+            ],
+            "edges": [
+              [
+                99,
+                100,
+                101,
+                102,
+                103,
+                104
+              ],
+              [
+                105,
+                106,
+                107,
+                108,
+                109,
+                110
+              ]
+            ],
+            "frames": [
+              102,
+              108
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              102000,
+              108000
+            ],
+            "response": 0.8403376584254474
+          },
+          "scheduled": 36
+        }
+      },
+      "opposite": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "d600a3000a8f954d27232ad6dd97caf06868479f0c0086c9518e5afc99c0f5dd",
+            "frame_index": 60,
+            "pts": 60000
+          },
+          {
+            "decoded_rgb_sha256": "04b5af9bf851d36d80738f26e51655018554204f596b72c2ca51192b84a3b9e9",
+            "frame_index": 64,
+            "pts": 64000
+          },
+          {
+            "decoded_rgb_sha256": "b2f60590cd36cdcb36b7282c5baf3ae41b9bd5c1a23afea32a3a5eeb4314be65",
+            "frame_index": 67,
+            "pts": 67000
+          }
+        ],
+        "edges": [
+          [
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ],
+          [
+            64,
+            65,
+            66,
+            67,
+            68,
+            69
+          ]
+        ],
+        "frames": [
+          61,
+          67
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          61000,
+          67000
+        ],
+        "response": 0.6363239907733246
+      },
+      "participants": [
+        1,
+        4
+      ],
+      "same": null,
+      "sha256": "366ed8e787d01b3a6bc0904ba06fe9f74ba40e729af7d2fc908fb4554a48f98a",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            61,
+            67
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            102,
+            108
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "right_then_left",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "cf3d7ba64cb2ee0db3ffa5fa9c065d9e0dc3e2b6c45592f50f05a3658f839ba0",
+            "frame_index": 71,
+            "pts": 71000
+          },
+          {
+            "decoded_rgb_sha256": "5ddf2f6399cd0a1e40d16d024f7e22ad522d2dd0ad5b0d8124ee7fe9e74b2597",
+            "frame_index": 77,
+            "pts": 77000
+          },
+          {
+            "decoded_rgb_sha256": "fe3f177ca3e3ac416b075c5686d15d541015f8add6860df94814ff825b317f33",
+            "frame_index": 80,
+            "pts": 80000
+          }
+        ],
+        "edges": [
+          [
+            69,
+            70,
+            71,
+            72,
+            73,
+            74
+          ],
+          [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82
+          ]
+        ],
+        "frames": [
+          72,
+          80
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          72000,
+          80000
+        ],
+        "response": 0.8065355888155006
+      },
+      "first_pts": 0,
+      "group": 1,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 22,
+          "pane_changes": [
+            [
+              86,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 22
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 36,
+          "pane_changes": [
+            [
+              72,
+              0
+            ],
+            [
+              80,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "cf3d7ba64cb2ee0db3ffa5fa9c065d9e0dc3e2b6c45592f50f05a3658f839ba0",
+                "frame_index": 71,
+                "pts": 71000
+              },
+              {
+                "decoded_rgb_sha256": "5ddf2f6399cd0a1e40d16d024f7e22ad522d2dd0ad5b0d8124ee7fe9e74b2597",
+                "frame_index": 77,
+                "pts": 77000
+              },
+              {
+                "decoded_rgb_sha256": "fe3f177ca3e3ac416b075c5686d15d541015f8add6860df94814ff825b317f33",
+                "frame_index": 80,
+                "pts": 80000
+              }
+            ],
+            "edges": [
+              [
+                69,
+                70,
+                71,
+                72,
+                73,
+                74
+              ],
+              [
+                77,
+                78,
+                79,
+                80,
+                81,
+                82
+              ]
+            ],
+            "frames": [
+              72,
+              80
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              72000,
+              80000
+            ],
+            "response": 0.8065355888155006
+          },
+          "scheduled": 36
+        }
+      },
+      "opposite": null,
+      "participants": [
+        1,
+        4
+      ],
+      "same": null,
+      "sha256": "e99eeb07b81126efd15ebe8fdb5c90268f90a50540adb541cf70f19a1ec2720e",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            86,
+            94
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            72,
+            80
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "left_only",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "d600a3000a8f954d27232ad6dd97caf06868479f0c0086c9518e5afc99c0f5dd",
+            "frame_index": 60,
+            "pts": 60000
+          },
+          {
+            "decoded_rgb_sha256": "04b5af9bf851d36d80738f26e51655018554204f596b72c2ca51192b84a3b9e9",
+            "frame_index": 64,
+            "pts": 64000
+          },
+          {
+            "decoded_rgb_sha256": "b2f60590cd36cdcb36b7282c5baf3ae41b9bd5c1a23afea32a3a5eeb4314be65",
+            "frame_index": 67,
+            "pts": 67000
+          }
+        ],
+        "edges": [
+          [
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ],
+          [
+            64,
+            65,
+            66,
+            67,
+            68,
+            69
+          ]
+        ],
+        "frames": [
+          61,
+          67
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          61000,
+          67000
+        ],
+        "response": 0.6363239907733246
+      },
+      "first_pts": 0,
+      "group": 1,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 28,
+          "pane_changes": [
+            [
+              61,
+              0
+            ],
+            [
+              67,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "d600a3000a8f954d27232ad6dd97caf06868479f0c0086c9518e5afc99c0f5dd",
+                "frame_index": 60,
+                "pts": 60000
+              },
+              {
+                "decoded_rgb_sha256": "04b5af9bf851d36d80738f26e51655018554204f596b72c2ca51192b84a3b9e9",
+                "frame_index": 64,
+                "pts": 64000
+              },
+              {
+                "decoded_rgb_sha256": "b2f60590cd36cdcb36b7282c5baf3ae41b9bd5c1a23afea32a3a5eeb4314be65",
+                "frame_index": 67,
+                "pts": 67000
+              }
+            ],
+            "edges": [
+              [
+                58,
+                59,
+                60,
+                61,
+                62,
+                63
+              ],
+              [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69
+              ]
+            ],
+            "frames": [
+              61,
+              67
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              61000,
+              67000
+            ],
+            "response": 0.6363239907733246
+          },
+          "scheduled": 28
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 25,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 25
+        }
+      },
+      "opposite": null,
+      "participants": [
+        1,
+        4
+      ],
+      "same": null,
+      "sha256": "ee91d51160905d9c23bd1af8ab7edf4c6eb0e7abcbea1e568095e0f7b7e2bc1b",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            61,
+            67
+          ],
+          "pane": "left"
+        }
+      ]
+    },
+    {
+      "condition": "right_only",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "06444a17581549346d29d284047380229ffd9baa848ba4db9458ccae4011e954",
+            "frame_index": 71,
+            "pts": 71000
+          },
+          {
+            "decoded_rgb_sha256": "81ae847dfbc20068f6c1839ebfe221e623d3a7c3d5bd1828713bbee0d3db80fc",
+            "frame_index": 77,
+            "pts": 77000
+          },
+          {
+            "decoded_rgb_sha256": "1717a0b8c51e98388f00d37cb077ae18630f99ab58129018261f8e869d59be4e",
+            "frame_index": 80,
+            "pts": 80000
+          }
+        ],
+        "edges": [
+          [
+            69,
+            70,
+            71,
+            72,
+            73,
+            74
+          ],
+          [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82
+          ]
+        ],
+        "frames": [
+          72,
+          80
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          72000,
+          80000
+        ],
+        "response": 0.7991767282606773
+      },
+      "first_pts": 0,
+      "group": 1,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 17,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 17
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 36,
+          "pane_changes": [
+            [
+              72,
+              0
+            ],
+            [
+              80,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "06444a17581549346d29d284047380229ffd9baa848ba4db9458ccae4011e954",
+                "frame_index": 71,
+                "pts": 71000
+              },
+              {
+                "decoded_rgb_sha256": "81ae847dfbc20068f6c1839ebfe221e623d3a7c3d5bd1828713bbee0d3db80fc",
+                "frame_index": 77,
+                "pts": 77000
+              },
+              {
+                "decoded_rgb_sha256": "1717a0b8c51e98388f00d37cb077ae18630f99ab58129018261f8e869d59be4e",
+                "frame_index": 80,
+                "pts": 80000
+              }
+            ],
+            "edges": [
+              [
+                69,
+                70,
+                71,
+                72,
+                73,
+                74
+              ],
+              [
+                77,
+                78,
+                79,
+                80,
+                81,
+                82
+              ]
+            ],
+            "frames": [
+              72,
+              80
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              72000,
+              80000
+            ],
+            "response": 0.7991767282606773
+          },
+          "scheduled": 36
+        }
+      },
+      "opposite": null,
+      "participants": [
+        1,
+        4
+      ],
+      "same": null,
+      "sha256": "b4e21bf0b4eb3bad8ff5622c939de866c19faa3ef31d148f4296da7892f1e009",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            72,
+            80
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "ordinary",
+      "first": null,
+      "first_pts": 0,
+      "group": 1,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 17,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 17
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 25,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 25
+        }
+      },
+      "opposite": null,
+      "participants": [
+        1,
+        4
+      ],
+      "same": null,
+      "sha256": "4f1184c578146774999ee80e14e66a273bc367fcc774a0d0d05dd450d0d1993f",
+      "time_base": "1/30000",
+      "truth": []
+    },
+    {
+      "condition": "ordinary_cuts",
+      "first": null,
+      "first_pts": 0,
+      "group": 1,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        }
+      },
+      "opposite": null,
+      "participants": [
+        1,
+        4
+      ],
+      "same": null,
+      "sha256": "fa115937b1c19c4a8acbf7e9198ebf3149ff534d7c591a0e2ba9e059d5f2a797",
+      "time_base": "1/30000",
+      "truth": []
+    },
+    {
+      "condition": "left_then_right",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "279afc682a14955b7810c767608fa7609087fec5e39f5e39a35111efa70309b6",
+            "frame_index": 66,
+            "pts": 66000
+          },
+          {
+            "decoded_rgb_sha256": "ce463792dded7b96481c194ae7e8e40a67020787df7fe3775c3d7b90414f4db8",
+            "frame_index": 71,
+            "pts": 71000
+          },
+          {
+            "decoded_rgb_sha256": "8637b8e67ee9535f5f65c59828b49e1d2407126c2972a3ea5935572dab619ef1",
+            "frame_index": 75,
+            "pts": 75000
+          }
+        ],
+        "edges": [
+          [
+            64,
+            65,
+            66,
+            67,
+            68,
+            69
+          ],
+          [
+            72,
+            73,
+            74,
+            75,
+            76,
+            77
+          ]
+        ],
+        "frames": [
+          67,
+          75
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          67000,
+          75000
+        ],
+        "response": 0.6842299970906656
+      },
+      "first_pts": 0,
+      "group": 2,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 34,
+          "pane_changes": [
+            [
+              67,
+              0
+            ],
+            [
+              75,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "279afc682a14955b7810c767608fa7609087fec5e39f5e39a35111efa70309b6",
+                "frame_index": 66,
+                "pts": 66000
+              },
+              {
+                "decoded_rgb_sha256": "ce463792dded7b96481c194ae7e8e40a67020787df7fe3775c3d7b90414f4db8",
+                "frame_index": 71,
+                "pts": 71000
+              },
+              {
+                "decoded_rgb_sha256": "8637b8e67ee9535f5f65c59828b49e1d2407126c2972a3ea5935572dab619ef1",
+                "frame_index": 75,
+                "pts": 75000
+              }
+            ],
+            "edges": [
+              [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69
+              ],
+              [
+                72,
+                73,
+                74,
+                75,
+                76,
+                77
+              ]
+            ],
+            "frames": [
+              67,
+              75
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              67000,
+              75000
+            ],
+            "response": 0.6842299970906656
+          },
+          "scheduled": 34
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 54,
+          "pane_changes": [
+            [
+              6,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              89,
+              0
+            ],
+            [
+              96,
+              0
+            ],
+            [
+              97,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "190729100934b04603cfa24b80f2c8cb90ebee677f46c5d4541c29ab14ad9415",
+                "frame_index": 88,
+                "pts": 88000
+              },
+              {
+                "decoded_rgb_sha256": "63ea646c368864eb2b32951f81ac151da5788b614b14a7b5c23d68ad81e03971",
+                "frame_index": 93,
+                "pts": 93000
+              },
+              {
+                "decoded_rgb_sha256": "724796e118758e70dfec0ed0e7f2467dd22bca44092b8b633a334976f9a16f62",
+                "frame_index": 97,
+                "pts": 97000
+              }
+            ],
+            "edges": [
+              [
+                86,
+                87,
+                88,
+                89,
+                90,
+                91
+              ],
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ]
+            ],
+            "frames": [
+              89,
+              97
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              89000,
+              97000
+            ],
+            "response": 0.6793050161971356
+          },
+          "scheduled": 54
+        }
+      },
+      "opposite": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "190729100934b04603cfa24b80f2c8cb90ebee677f46c5d4541c29ab14ad9415",
+            "frame_index": 88,
+            "pts": 88000
+          },
+          {
+            "decoded_rgb_sha256": "63ea646c368864eb2b32951f81ac151da5788b614b14a7b5c23d68ad81e03971",
+            "frame_index": 93,
+            "pts": 93000
+          },
+          {
+            "decoded_rgb_sha256": "724796e118758e70dfec0ed0e7f2467dd22bca44092b8b633a334976f9a16f62",
+            "frame_index": 97,
+            "pts": 97000
+          }
+        ],
+        "edges": [
+          [
+            86,
+            87,
+            88,
+            89,
+            90,
+            91
+          ],
+          [
+            94,
+            95,
+            96,
+            97,
+            98,
+            99
+          ]
+        ],
+        "frames": [
+          89,
+          97
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          89000,
+          97000
+        ],
+        "response": 0.6793050161971356
+      },
+      "participants": [
+        2,
+        5
+      ],
+      "same": null,
+      "sha256": "61ea057a65edeae3cd624ce2077ac845e3cebddfd09bbc2433058bd00c34f513",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            67,
+            75
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            89,
+            97
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "right_then_left",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "d2a2a1873aba7ae6128af3d5350f80c5dd1e1669083e1c36106aa0afa0910601",
+            "frame_index": 61,
+            "pts": 61000
+          },
+          {
+            "decoded_rgb_sha256": "588d32758bd4c12afa242850db70f21daad054cb494a9ee1554836ac4ed5a694",
+            "frame_index": 65,
+            "pts": 65000
+          },
+          {
+            "decoded_rgb_sha256": "1e7e36929073dafe8ec13f1e057840cf979806aab2dc0da9685a10e8c568a58a",
+            "frame_index": 68,
+            "pts": 68000
+          }
+        ],
+        "edges": [
+          [
+            59,
+            60,
+            61,
+            62,
+            63,
+            64
+          ],
+          [
+            65,
+            66,
+            67,
+            68,
+            69,
+            70
+          ]
+        ],
+        "frames": [
+          62,
+          68
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          62000,
+          68000
+        ],
+        "response": 0.6845419271351956
+      },
+      "first_pts": 0,
+      "group": 2,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 38,
+          "pane_changes": [
+            [
+              95,
+              0
+            ],
+            [
+              101,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "c3d2816bad005828f8fa9ed405d57e0346c72903d4f711509e2ee7c1269fa0eb",
+                "frame_index": 94,
+                "pts": 94000
+              },
+              {
+                "decoded_rgb_sha256": "70a5d98629f8dad936897fb39688c8cf62a4080cf15eed3476fc927766629685",
+                "frame_index": 98,
+                "pts": 98000
+              },
+              {
+                "decoded_rgb_sha256": "c005855c384bc6496f18b4800c8ca5ce57f8f19c7dac8e055f72b01a64c05998",
+                "frame_index": 101,
+                "pts": 101000
+              }
+            ],
+            "edges": [
+              [
+                92,
+                93,
+                94,
+                95,
+                96,
+                97
+              ],
+              [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103
+              ]
+            ],
+            "frames": [
+              95,
+              101
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              95000,
+              101000
+            ],
+            "response": 0.5718076886821192
+          },
+          "scheduled": 38
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 65,
+          "pane_changes": [
+            [
+              6,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              62,
+              0
+            ],
+            [
+              68,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "d2a2a1873aba7ae6128af3d5350f80c5dd1e1669083e1c36106aa0afa0910601",
+                "frame_index": 61,
+                "pts": 61000
+              },
+              {
+                "decoded_rgb_sha256": "588d32758bd4c12afa242850db70f21daad054cb494a9ee1554836ac4ed5a694",
+                "frame_index": 65,
+                "pts": 65000
+              },
+              {
+                "decoded_rgb_sha256": "1e7e36929073dafe8ec13f1e057840cf979806aab2dc0da9685a10e8c568a58a",
+                "frame_index": 68,
+                "pts": 68000
+              }
+            ],
+            "edges": [
+              [
+                59,
+                60,
+                61,
+                62,
+                63,
+                64
+              ],
+              [
+                65,
+                66,
+                67,
+                68,
+                69,
+                70
+              ]
+            ],
+            "frames": [
+              62,
+              68
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              62000,
+              68000
+            ],
+            "response": 0.6845419271351956
+          },
+          "scheduled": 65
+        }
+      },
+      "opposite": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "c3d2816bad005828f8fa9ed405d57e0346c72903d4f711509e2ee7c1269fa0eb",
+            "frame_index": 94,
+            "pts": 94000
+          },
+          {
+            "decoded_rgb_sha256": "70a5d98629f8dad936897fb39688c8cf62a4080cf15eed3476fc927766629685",
+            "frame_index": 98,
+            "pts": 98000
+          },
+          {
+            "decoded_rgb_sha256": "c005855c384bc6496f18b4800c8ca5ce57f8f19c7dac8e055f72b01a64c05998",
+            "frame_index": 101,
+            "pts": 101000
+          }
+        ],
+        "edges": [
+          [
+            92,
+            93,
+            94,
+            95,
+            96,
+            97
+          ],
+          [
+            98,
+            99,
+            100,
+            101,
+            102,
+            103
+          ]
+        ],
+        "frames": [
+          95,
+          101
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          95000,
+          101000
+        ],
+        "response": 0.5718076886821192
+      },
+      "participants": [
+        2,
+        5
+      ],
+      "same": null,
+      "sha256": "73fd31961ba6d255b43642d46beffa5ca50566eb9abc2a0ce6916902aaaec3c3",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            95,
+            101
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            62,
+            68
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "left_only",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "f169746236d2e8f24d1f346669806d63dc1fc6e3bb407d84fd819b172d05a8c4",
+            "frame_index": 94,
+            "pts": 94000
+          },
+          {
+            "decoded_rgb_sha256": "2ae82444921d415d2eff7b31576db72cb7786c7b8bb66dcabc47ac7cfbfb84d3",
+            "frame_index": 98,
+            "pts": 98000
+          },
+          {
+            "decoded_rgb_sha256": "3e10456c8ee2665c734d3b9e3e91abd7633a64e89845586a5d3de7d58cd64fc8",
+            "frame_index": 101,
+            "pts": 101000
+          }
+        ],
+        "edges": [
+          [
+            92,
+            93,
+            94,
+            95,
+            96,
+            97
+          ],
+          [
+            98,
+            99,
+            100,
+            101,
+            102,
+            103
+          ]
+        ],
+        "frames": [
+          95,
+          101
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          95000,
+          101000
+        ],
+        "response": 0.5746798451906714
+      },
+      "first_pts": 0,
+      "group": 2,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 38,
+          "pane_changes": [
+            [
+              95,
+              0
+            ],
+            [
+              101,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "f169746236d2e8f24d1f346669806d63dc1fc6e3bb407d84fd819b172d05a8c4",
+                "frame_index": 94,
+                "pts": 94000
+              },
+              {
+                "decoded_rgb_sha256": "2ae82444921d415d2eff7b31576db72cb7786c7b8bb66dcabc47ac7cfbfb84d3",
+                "frame_index": 98,
+                "pts": 98000
+              },
+              {
+                "decoded_rgb_sha256": "3e10456c8ee2665c734d3b9e3e91abd7633a64e89845586a5d3de7d58cd64fc8",
+                "frame_index": 101,
+                "pts": 101000
+              }
+            ],
+            "edges": [
+              [
+                92,
+                93,
+                94,
+                95,
+                96,
+                97
+              ],
+              [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103
+              ]
+            ],
+            "frames": [
+              95,
+              101
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              95000,
+              101000
+            ],
+            "response": 0.5746798451906714
+          },
+          "scheduled": 38
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 54,
+          "pane_changes": [
+            [
+              6,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 54
+        }
+      },
+      "opposite": null,
+      "participants": [
+        2,
+        5
+      ],
+      "same": null,
+      "sha256": "3134b12f1858ba7500c9fc6b9be0df20f56519d3a8bf138925ce94a60c6734f1",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            95,
+            101
+          ],
+          "pane": "left"
+        }
+      ]
+    },
+    {
+      "condition": "right_only",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "72eef9b49f212038f6be03fe70a544b94617c0738466422108a7e851dc586a2b",
+            "frame_index": 88,
+            "pts": 88000
+          },
+          {
+            "decoded_rgb_sha256": "f535bcf67e13d3d97b6cd8f016ae8bcc8b6397db8b9ecd592c681d17853586fc",
+            "frame_index": 93,
+            "pts": 93000
+          },
+          {
+            "decoded_rgb_sha256": "23d762baa1a7dd73a5459367ec6118de15e502db94e5055002fc16ffc9cdf345",
+            "frame_index": 97,
+            "pts": 97000
+          }
+        ],
+        "edges": [
+          [
+            86,
+            87,
+            88,
+            89,
+            90,
+            91
+          ],
+          [
+            94,
+            95,
+            96,
+            97,
+            98,
+            99
+          ]
+        ],
+        "frames": [
+          89,
+          97
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          89000,
+          97000
+        ],
+        "response": 0.6576860975691997
+      },
+      "first_pts": 0,
+      "group": 2,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 27,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 27
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 54,
+          "pane_changes": [
+            [
+              6,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              89,
+              0
+            ],
+            [
+              96,
+              0
+            ],
+            [
+              97,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "72eef9b49f212038f6be03fe70a544b94617c0738466422108a7e851dc586a2b",
+                "frame_index": 88,
+                "pts": 88000
+              },
+              {
+                "decoded_rgb_sha256": "f535bcf67e13d3d97b6cd8f016ae8bcc8b6397db8b9ecd592c681d17853586fc",
+                "frame_index": 93,
+                "pts": 93000
+              },
+              {
+                "decoded_rgb_sha256": "23d762baa1a7dd73a5459367ec6118de15e502db94e5055002fc16ffc9cdf345",
+                "frame_index": 97,
+                "pts": 97000
+              }
+            ],
+            "edges": [
+              [
+                86,
+                87,
+                88,
+                89,
+                90,
+                91
+              ],
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ]
+            ],
+            "frames": [
+              89,
+              97
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              89000,
+              97000
+            ],
+            "response": 0.6576860975691997
+          },
+          "scheduled": 54
+        }
+      },
+      "opposite": null,
+      "participants": [
+        2,
+        5
+      ],
+      "same": null,
+      "sha256": "dac9bf5634843c95442d6081ed448aca34be60134e28796eadcf1df18e029dc3",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            89,
+            97
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "ordinary",
+      "first": null,
+      "first_pts": 0,
+      "group": 2,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 27,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 27
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 54,
+          "pane_changes": [
+            [
+              6,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 54
+        }
+      },
+      "opposite": null,
+      "participants": [
+        2,
+        5
+      ],
+      "same": null,
+      "sha256": "06aa1aa9c2674deab2d4d3ff7936e240c2e765376d01aec427c3c40e55a4acab",
+      "time_base": "1/30000",
+      "truth": []
+    },
+    {
+      "condition": "ordinary_cuts",
+      "first": null,
+      "first_pts": 0,
+      "group": 2,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        }
+      },
+      "opposite": null,
+      "participants": [
+        2,
+        5
+      ],
+      "same": null,
+      "sha256": "9dfe7ca3d015d36513e2480c8523cd5a48275b0a2b49733d98a4b87300170c5a",
+      "time_base": "1/30000",
+      "truth": []
+    },
+    {
+      "condition": "left_then_right",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "e11344fb78c7cba09e658ded445365687e1af00eada443727b35c6546c369938",
+            "frame_index": 96,
+            "pts": 96000
+          },
+          {
+            "decoded_rgb_sha256": "5c799a5eaa33d6313b64b9e83db006bc5b191549489b5b6122ddcf9b78c44fe7",
+            "frame_index": 100,
+            "pts": 100000
+          },
+          {
+            "decoded_rgb_sha256": "0a74b6dcb80aeb277c24a9b6c07badcf4eeb5539b87159bfaf8bd892ff59b6f1",
+            "frame_index": 103,
+            "pts": 103000
+          }
+        ],
+        "edges": [
+          [
+            94,
+            95,
+            96,
+            97,
+            98,
+            99
+          ],
+          [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ]
+        ],
+        "frames": [
+          97,
+          103
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          97000,
+          103000
+        ],
+        "response": 0.6750606185599554
+      },
+      "first_pts": 0,
+      "group": 3,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 80,
+          "pane_changes": [
+            [
+              64,
+              0
+            ],
+            [
+              70,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "379dc719127d63dc723ca5d4f1a09cf78ec333dab89b64e82f5845ad933b0d2e",
+                "frame_index": 63,
+                "pts": 63000
+              },
+              {
+                "decoded_rgb_sha256": "36147a0797804a5b2726d95ab606758887ae490dd9abadeba0208333f9eecb20",
+                "frame_index": 67,
+                "pts": 67000
+              },
+              {
+                "decoded_rgb_sha256": "ddb7c291b3c8d5f69e09229020418de4d278467e6f06316141d48d2703508956",
+                "frame_index": 70,
+                "pts": 70000
+              }
+            ],
+            "edges": [
+              [
+                61,
+                62,
+                63,
+                64,
+                65,
+                66
+              ],
+              [
+                67,
+                68,
+                69,
+                70,
+                71,
+                72
+              ]
+            ],
+            "frames": [
+              64,
+              70
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              64000,
+              70000
+            ],
+            "response": 0.6639240837313598
+          },
+          "scheduled": 80
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 27,
+          "pane_changes": [
+            [
+              56,
+              0
+            ],
+            [
+              97,
+              0
+            ],
+            [
+              103,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "e11344fb78c7cba09e658ded445365687e1af00eada443727b35c6546c369938",
+                "frame_index": 96,
+                "pts": 96000
+              },
+              {
+                "decoded_rgb_sha256": "5c799a5eaa33d6313b64b9e83db006bc5b191549489b5b6122ddcf9b78c44fe7",
+                "frame_index": 100,
+                "pts": 100000
+              },
+              {
+                "decoded_rgb_sha256": "0a74b6dcb80aeb277c24a9b6c07badcf4eeb5539b87159bfaf8bd892ff59b6f1",
+                "frame_index": 103,
+                "pts": 103000
+              }
+            ],
+            "edges": [
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ],
+              [
+                100,
+                101,
+                102,
+                103,
+                104,
+                105
+              ]
+            ],
+            "frames": [
+              97,
+              103
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              97000,
+              103000
+            ],
+            "response": 0.6750606185599554
+          },
+          "scheduled": 27
+        }
+      },
+      "opposite": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "379dc719127d63dc723ca5d4f1a09cf78ec333dab89b64e82f5845ad933b0d2e",
+            "frame_index": 63,
+            "pts": 63000
+          },
+          {
+            "decoded_rgb_sha256": "36147a0797804a5b2726d95ab606758887ae490dd9abadeba0208333f9eecb20",
+            "frame_index": 67,
+            "pts": 67000
+          },
+          {
+            "decoded_rgb_sha256": "ddb7c291b3c8d5f69e09229020418de4d278467e6f06316141d48d2703508956",
+            "frame_index": 70,
+            "pts": 70000
+          }
+        ],
+        "edges": [
+          [
+            61,
+            62,
+            63,
+            64,
+            65,
+            66
+          ],
+          [
+            67,
+            68,
+            69,
+            70,
+            71,
+            72
+          ]
+        ],
+        "frames": [
+          64,
+          70
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          64000,
+          70000
+        ],
+        "response": 0.6639240837313598
+      },
+      "participants": [
+        3,
+        6
+      ],
+      "same": null,
+      "sha256": "cbf48ee1cf191f1b06dc515d9b41f7fe76f3514f4f20d79d4e6c7a94b480a8fc",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            64,
+            70
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            97,
+            103
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "right_then_left",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "3a3093a0ad101de493f40b1415ac6185bdbfddb5b15143bc7f9d80aac6990027",
+            "frame_index": 67,
+            "pts": 67000
+          },
+          {
+            "decoded_rgb_sha256": "eb448b1947a6adb1b34a35c49e3084e5c87910562263cfa5faa8d7f8fc720d41",
+            "frame_index": 73,
+            "pts": 73000
+          },
+          {
+            "decoded_rgb_sha256": "050e5c318ad74281a2075046e75a655f57cafeb7101e34c5ba4dec6680a4223a",
+            "frame_index": 76,
+            "pts": 76000
+          }
+        ],
+        "edges": [
+          [
+            65,
+            66,
+            67,
+            68,
+            69,
+            70
+          ],
+          [
+            73,
+            74,
+            75,
+            76,
+            77,
+            78
+          ]
+        ],
+        "frames": [
+          68,
+          76
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          68000,
+          76000
+        ],
+        "response": 0.6865601364134761
+      },
+      "first_pts": 0,
+      "group": 3,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 73,
+          "pane_changes": [
+            [
+              85,
+              0
+            ],
+            [
+              96,
+              0
+            ],
+            [
+              97,
+              0
+            ],
+            [
+              105,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "2afbde7ded770543f100b4f2a9e7d6d6fd44484451836b10463c44fa8f6ca181",
+                "frame_index": 96,
+                "pts": 96000
+              },
+              {
+                "decoded_rgb_sha256": "217951b403aa871b0ceacf6293dae0ceedf626d7847fabe8ae9fa49ed5178cc6",
+                "frame_index": 102,
+                "pts": 102000
+              },
+              {
+                "decoded_rgb_sha256": "4ee453d5243e8a0a1a0bc53d0ba0e57c42cfd4314ad9bf1cae98ff480d73dc1b",
+                "frame_index": 105,
+                "pts": 105000
+              }
+            ],
+            "edges": [
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ],
+              [
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            ],
+            "frames": [
+              97,
+              105
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              97000,
+              105000
+            ],
+            "response": 0.6263266759181255
+          },
+          "scheduled": 73
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 28,
+          "pane_changes": [
+            [
+              56,
+              0
+            ],
+            [
+              68,
+              0
+            ],
+            [
+              76,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "3a3093a0ad101de493f40b1415ac6185bdbfddb5b15143bc7f9d80aac6990027",
+                "frame_index": 67,
+                "pts": 67000
+              },
+              {
+                "decoded_rgb_sha256": "eb448b1947a6adb1b34a35c49e3084e5c87910562263cfa5faa8d7f8fc720d41",
+                "frame_index": 73,
+                "pts": 73000
+              },
+              {
+                "decoded_rgb_sha256": "050e5c318ad74281a2075046e75a655f57cafeb7101e34c5ba4dec6680a4223a",
+                "frame_index": 76,
+                "pts": 76000
+              }
+            ],
+            "edges": [
+              [
+                65,
+                66,
+                67,
+                68,
+                69,
+                70
+              ],
+              [
+                73,
+                74,
+                75,
+                76,
+                77,
+                78
+              ]
+            ],
+            "frames": [
+              68,
+              76
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              68000,
+              76000
+            ],
+            "response": 0.6865601364134761
+          },
+          "scheduled": 28
+        }
+      },
+      "opposite": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "2afbde7ded770543f100b4f2a9e7d6d6fd44484451836b10463c44fa8f6ca181",
+            "frame_index": 96,
+            "pts": 96000
+          },
+          {
+            "decoded_rgb_sha256": "217951b403aa871b0ceacf6293dae0ceedf626d7847fabe8ae9fa49ed5178cc6",
+            "frame_index": 102,
+            "pts": 102000
+          },
+          {
+            "decoded_rgb_sha256": "4ee453d5243e8a0a1a0bc53d0ba0e57c42cfd4314ad9bf1cae98ff480d73dc1b",
+            "frame_index": 105,
+            "pts": 105000
+          }
+        ],
+        "edges": [
+          [
+            94,
+            95,
+            96,
+            97,
+            98,
+            99
+          ],
+          [
+            102,
+            103,
+            104,
+            105,
+            106,
+            107
+          ]
+        ],
+        "frames": [
+          97,
+          105
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          97000,
+          105000
+        ],
+        "response": 0.6263266759181255
+      },
+      "participants": [
+        3,
+        6
+      ],
+      "same": null,
+      "sha256": "c721a5f532cb8452a735d9e0c16b34b2e1821555bfbeced7b0e9346db6e60c3d",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            97,
+            105
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            68,
+            76
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "left_only",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "379dc719127d63dc723ca5d4f1a09cf78ec333dab89b64e82f5845ad933b0d2e",
+            "frame_index": 63,
+            "pts": 63000
+          },
+          {
+            "decoded_rgb_sha256": "f68e4be90cd3c04d94f5c5eedb5aba57e98b9b333ae7d316241bebe6fa24a8e8",
+            "frame_index": 67,
+            "pts": 67000
+          },
+          {
+            "decoded_rgb_sha256": "fdfbf893f670f884331d8749ea186dc0e78a3bdb9285a76ede991f2f670945ee",
+            "frame_index": 70,
+            "pts": 70000
+          }
+        ],
+        "edges": [
+          [
+            61,
+            62,
+            63,
+            64,
+            65,
+            66
+          ],
+          [
+            67,
+            68,
+            69,
+            70,
+            71,
+            72
+          ]
+        ],
+        "frames": [
+          64,
+          70
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          64000,
+          70000
+        ],
+        "response": 0.6462768536204884
+      },
+      "first_pts": 0,
+      "group": 3,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 80,
+          "pane_changes": [
+            [
+              64,
+              0
+            ],
+            [
+              70,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "379dc719127d63dc723ca5d4f1a09cf78ec333dab89b64e82f5845ad933b0d2e",
+                "frame_index": 63,
+                "pts": 63000
+              },
+              {
+                "decoded_rgb_sha256": "f68e4be90cd3c04d94f5c5eedb5aba57e98b9b333ae7d316241bebe6fa24a8e8",
+                "frame_index": 67,
+                "pts": 67000
+              },
+              {
+                "decoded_rgb_sha256": "fdfbf893f670f884331d8749ea186dc0e78a3bdb9285a76ede991f2f670945ee",
+                "frame_index": 70,
+                "pts": 70000
+              }
+            ],
+            "edges": [
+              [
+                61,
+                62,
+                63,
+                64,
+                65,
+                66
+              ],
+              [
+                67,
+                68,
+                69,
+                70,
+                71,
+                72
+              ]
+            ],
+            "frames": [
+              64,
+              70
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              64000,
+              70000
+            ],
+            "response": 0.6462768536204884
+          },
+          "scheduled": 80
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 17,
+          "pane_changes": [
+            [
+              56,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 17
+        }
+      },
+      "opposite": null,
+      "participants": [
+        3,
+        6
+      ],
+      "same": null,
+      "sha256": "c30a7ee523caa2a69d2ed9d1f1c28f1ca40890cc4ec6f34558ae86042e797e39",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            64,
+            70
+          ],
+          "pane": "left"
+        }
+      ]
+    },
+    {
+      "condition": "right_only",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "6e6619707f36701efc20ccc432140951a6f3f8dec847e0bd74afe28b3cd2c367",
+            "frame_index": 67,
+            "pts": 67000
+          },
+          {
+            "decoded_rgb_sha256": "ccfd1841ccc64c4379ad86dba35d6b2631303fbea2f1a2e407fbf56e261a2537",
+            "frame_index": 73,
+            "pts": 73000
+          },
+          {
+            "decoded_rgb_sha256": "8706f8143f6398cf84bbb66b00b85dc7e822d02ecd243d6843a7e6c246084de4",
+            "frame_index": 76,
+            "pts": 76000
+          }
+        ],
+        "edges": [
+          [
+            65,
+            66,
+            67,
+            68,
+            69,
+            70
+          ],
+          [
+            73,
+            74,
+            75,
+            76,
+            77,
+            78
+          ]
+        ],
+        "frames": [
+          68,
+          76
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          68000,
+          76000
+        ],
+        "response": 0.6792516515718281
+      },
+      "first_pts": 0,
+      "group": 3,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 78,
+          "pane_changes": [
+            [
+              85,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 78
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 28,
+          "pane_changes": [
+            [
+              56,
+              0
+            ],
+            [
+              68,
+              0
+            ],
+            [
+              76,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "6e6619707f36701efc20ccc432140951a6f3f8dec847e0bd74afe28b3cd2c367",
+                "frame_index": 67,
+                "pts": 67000
+              },
+              {
+                "decoded_rgb_sha256": "ccfd1841ccc64c4379ad86dba35d6b2631303fbea2f1a2e407fbf56e261a2537",
+                "frame_index": 73,
+                "pts": 73000
+              },
+              {
+                "decoded_rgb_sha256": "8706f8143f6398cf84bbb66b00b85dc7e822d02ecd243d6843a7e6c246084de4",
+                "frame_index": 76,
+                "pts": 76000
+              }
+            ],
+            "edges": [
+              [
+                65,
+                66,
+                67,
+                68,
+                69,
+                70
+              ],
+              [
+                73,
+                74,
+                75,
+                76,
+                77,
+                78
+              ]
+            ],
+            "frames": [
+              68,
+              76
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              68000,
+              76000
+            ],
+            "response": 0.6792516515718281
+          },
+          "scheduled": 28
+        }
+      },
+      "opposite": null,
+      "participants": [
+        3,
+        6
+      ],
+      "same": null,
+      "sha256": "50ac1b484e050b058b6315a36b94baf3ed1e10a47a3f1489c8a31941ef11eea3",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            68,
+            76
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "ordinary",
+      "first": null,
+      "first_pts": 0,
+      "group": 3,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 78,
+          "pane_changes": [
+            [
+              85,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 78
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 17,
+          "pane_changes": [
+            [
+              56,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 17
+        }
+      },
+      "opposite": null,
+      "participants": [
+        3,
+        6
+      ],
+      "same": null,
+      "sha256": "3655c3a038cde827d990ebe56c7e85ca88b4bf708a7b9d92e5a6e69f94c2ddda",
+      "time_base": "1/30000",
+      "truth": []
+    },
+    {
+      "condition": "ordinary_cuts",
+      "first": null,
+      "first_pts": 0,
+      "group": 3,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        }
+      },
+      "opposite": null,
+      "participants": [
+        3,
+        6
+      ],
+      "same": null,
+      "sha256": "82f70152635bfee7c8d3cdb64f4c71b78667533836d8f47cfb48bcf79e7e260a",
+      "time_base": "1/30000",
+      "truth": []
+    },
+    {
+      "condition": "left_then_right",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "d1ee2d6d143e7065efd1233797d58c706c2612e94c20b2cd6da8f750d2819a27",
+            "frame_index": 71,
+            "pts": 71000
+          },
+          {
+            "decoded_rgb_sha256": "cf17e07be8b6a5e2f479ff6aec53dd29f097f2c151af750be2a1bb36a382b80b",
+            "frame_index": 77,
+            "pts": 77000
+          },
+          {
+            "decoded_rgb_sha256": "8879509f608c85bd0b2470551134d7c3c0c5243525777670b62e3a878a9f54d7",
+            "frame_index": 80,
+            "pts": 80000
+          }
+        ],
+        "edges": [
+          [
+            69,
+            70,
+            71,
+            72,
+            73,
+            74
+          ],
+          [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82
+          ]
+        ],
+        "frames": [
+          72,
+          80
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          72000,
+          80000
+        ],
+        "response": 0.7872421704718288
+      },
+      "first_pts": 0,
+      "group": 4,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 36,
+          "pane_changes": [
+            [
+              72,
+              0
+            ],
+            [
+              80,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "d1ee2d6d143e7065efd1233797d58c706c2612e94c20b2cd6da8f750d2819a27",
+                "frame_index": 71,
+                "pts": 71000
+              },
+              {
+                "decoded_rgb_sha256": "cf17e07be8b6a5e2f479ff6aec53dd29f097f2c151af750be2a1bb36a382b80b",
+                "frame_index": 77,
+                "pts": 77000
+              },
+              {
+                "decoded_rgb_sha256": "8879509f608c85bd0b2470551134d7c3c0c5243525777670b62e3a878a9f54d7",
+                "frame_index": 80,
+                "pts": 80000
+              }
+            ],
+            "edges": [
+              [
+                69,
+                70,
+                71,
+                72,
+                73,
+                74
+              ],
+              [
+                77,
+                78,
+                79,
+                80,
+                81,
+                82
+              ]
+            ],
+            "frames": [
+              72,
+              80
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              72000,
+              80000
+            ],
+            "response": 0.7872421704718288
+          },
+          "scheduled": 36
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 60,
+          "pane_changes": [
+            [
+              33,
+              0
+            ],
+            [
+              34,
+              0
+            ],
+            [
+              40,
+              0
+            ],
+            [
+              41,
+              0
+            ],
+            [
+              42,
+              0
+            ],
+            [
+              94,
+              0
+            ],
+            [
+              95,
+              0
+            ],
+            [
+              103,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "e90be07acf370dbc1be4dbd3292369a1c8dbb43d517e6451b7b2b078ead45a85",
+                "frame_index": 94,
+                "pts": 94000
+              },
+              {
+                "decoded_rgb_sha256": "056d3d080d98fd9197c63cb60ef0c106c1040c4ec16fdb55a673772f0dbaefd4",
+                "frame_index": 100,
+                "pts": 100000
+              },
+              {
+                "decoded_rgb_sha256": "fef70cb800cc4f911f0adcc2320a94f9429b630b205ecf0f62dc4f191722d679",
+                "frame_index": 103,
+                "pts": 103000
+              }
+            ],
+            "edges": [
+              [
+                92,
+                93,
+                94,
+                95,
+                96,
+                97
+              ],
+              [
+                100,
+                101,
+                102,
+                103,
+                104,
+                105
+              ]
+            ],
+            "frames": [
+              95,
+              103
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              95000,
+              103000
+            ],
+            "response": 0.49152988095556926
+          },
+          "scheduled": 60
+        }
+      },
+      "opposite": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "e90be07acf370dbc1be4dbd3292369a1c8dbb43d517e6451b7b2b078ead45a85",
+            "frame_index": 94,
+            "pts": 94000
+          },
+          {
+            "decoded_rgb_sha256": "056d3d080d98fd9197c63cb60ef0c106c1040c4ec16fdb55a673772f0dbaefd4",
+            "frame_index": 100,
+            "pts": 100000
+          },
+          {
+            "decoded_rgb_sha256": "fef70cb800cc4f911f0adcc2320a94f9429b630b205ecf0f62dc4f191722d679",
+            "frame_index": 103,
+            "pts": 103000
+          }
+        ],
+        "edges": [
+          [
+            92,
+            93,
+            94,
+            95,
+            96,
+            97
+          ],
+          [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ]
+        ],
+        "frames": [
+          95,
+          103
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          95000,
+          103000
+        ],
+        "response": 0.49152988095556926
+      },
+      "participants": [
+        4,
+        7
+      ],
+      "same": null,
+      "sha256": "9c2fbd67fa620cbb7af3b837e4bdc759ea34f087a06a91f087d7ec6975b95d04",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            72,
+            80
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            95,
+            103
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "right_then_left",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "dc88138abf4c395e6ce6c77e8fa7ae127f6f9a35a6f6b267f2a101b7fb9f9532",
+            "frame_index": 101,
+            "pts": 101000
+          },
+          {
+            "decoded_rgb_sha256": "87a0b323b6e7100973a16484bb1eda26e5513d3a8820cb3af8779f9c56b61e79",
+            "frame_index": 105,
+            "pts": 105000
+          },
+          {
+            "decoded_rgb_sha256": "29a6eb7f72bc559d9ba4f19035598072d61c6e0b263473d5257a1cc74f7fef38",
+            "frame_index": 108,
+            "pts": 108000
+          }
+        ],
+        "edges": [
+          [
+            99,
+            100,
+            101,
+            102,
+            103,
+            104
+          ],
+          [
+            105,
+            106,
+            107,
+            108,
+            109,
+            110
+          ]
+        ],
+        "frames": [
+          102,
+          108
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          102000,
+          108000
+        ],
+        "response": 0.8294554154613191
+      },
+      "first_pts": 0,
+      "group": 4,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 36,
+          "pane_changes": [
+            [
+              102,
+              0
+            ],
+            [
+              108,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "dc88138abf4c395e6ce6c77e8fa7ae127f6f9a35a6f6b267f2a101b7fb9f9532",
+                "frame_index": 101,
+                "pts": 101000
+              },
+              {
+                "decoded_rgb_sha256": "87a0b323b6e7100973a16484bb1eda26e5513d3a8820cb3af8779f9c56b61e79",
+                "frame_index": 105,
+                "pts": 105000
+              },
+              {
+                "decoded_rgb_sha256": "29a6eb7f72bc559d9ba4f19035598072d61c6e0b263473d5257a1cc74f7fef38",
+                "frame_index": 108,
+                "pts": 108000
+              }
+            ],
+            "edges": [
+              [
+                99,
+                100,
+                101,
+                102,
+                103,
+                104
+              ],
+              [
+                105,
+                106,
+                107,
+                108,
+                109,
+                110
+              ]
+            ],
+            "frames": [
+              102,
+              108
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              102000,
+              108000
+            ],
+            "response": 0.8294554154613191
+          },
+          "scheduled": 36
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 62,
+          "pane_changes": [
+            [
+              33,
+              0
+            ],
+            [
+              34,
+              0
+            ],
+            [
+              40,
+              0
+            ],
+            [
+              41,
+              0
+            ],
+            [
+              42,
+              0
+            ],
+            [
+              64,
+              0
+            ],
+            [
+              70,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "57256c8ffe0edbad0c58fac6540174e7b51963ce52bd131e1cb5e36fa62924bc",
+                "frame_index": 63,
+                "pts": 63000
+              },
+              {
+                "decoded_rgb_sha256": "1a8319cb2346a121ec4bb4cbb30c0823d4fb66ebd33c4435499a864e9e493333",
+                "frame_index": 67,
+                "pts": 67000
+              },
+              {
+                "decoded_rgb_sha256": "c256f0b06ac9076189d7728f8f32756452b838ce98e0c415ab7b44c9cad1e588",
+                "frame_index": 70,
+                "pts": 70000
+              }
+            ],
+            "edges": [
+              [
+                61,
+                62,
+                63,
+                64,
+                65,
+                66
+              ],
+              [
+                67,
+                68,
+                69,
+                70,
+                71,
+                72
+              ]
+            ],
+            "frames": [
+              64,
+              70
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              64000,
+              70000
+            ],
+            "response": 0.65165221926931
+          },
+          "scheduled": 62
+        }
+      },
+      "opposite": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "57256c8ffe0edbad0c58fac6540174e7b51963ce52bd131e1cb5e36fa62924bc",
+            "frame_index": 63,
+            "pts": 63000
+          },
+          {
+            "decoded_rgb_sha256": "1a8319cb2346a121ec4bb4cbb30c0823d4fb66ebd33c4435499a864e9e493333",
+            "frame_index": 67,
+            "pts": 67000
+          },
+          {
+            "decoded_rgb_sha256": "c256f0b06ac9076189d7728f8f32756452b838ce98e0c415ab7b44c9cad1e588",
+            "frame_index": 70,
+            "pts": 70000
+          }
+        ],
+        "edges": [
+          [
+            61,
+            62,
+            63,
+            64,
+            65,
+            66
+          ],
+          [
+            67,
+            68,
+            69,
+            70,
+            71,
+            72
+          ]
+        ],
+        "frames": [
+          64,
+          70
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          64000,
+          70000
+        ],
+        "response": 0.65165221926931
+      },
+      "participants": [
+        4,
+        7
+      ],
+      "same": null,
+      "sha256": "7d4f312abb80b17e245d3df52cfb3e3c2925e1698369b8ab9df9784547fac832",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            102,
+            108
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            64,
+            70
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "left_only",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "e0c0b1aab3e40866e70cf7f84ac27645ecddce191d449058e5b861e18c351042",
+            "frame_index": 101,
+            "pts": 101000
+          },
+          {
+            "decoded_rgb_sha256": "b21d4ee140775711f370c254547f080da10e1c572390b34cf8269900ffef4699",
+            "frame_index": 105,
+            "pts": 105000
+          },
+          {
+            "decoded_rgb_sha256": "6a4e3a4e44105f563694e8de558c78b012edd958272b0356339f42bc616f13dc",
+            "frame_index": 108,
+            "pts": 108000
+          }
+        ],
+        "edges": [
+          [
+            99,
+            100,
+            101,
+            102,
+            103,
+            104
+          ],
+          [
+            105,
+            106,
+            107,
+            108,
+            109,
+            110
+          ]
+        ],
+        "frames": [
+          102,
+          108
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          102000,
+          108000
+        ],
+        "response": 0.8281572987582406
+      },
+      "first_pts": 0,
+      "group": 4,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 36,
+          "pane_changes": [
+            [
+              102,
+              0
+            ],
+            [
+              108,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "e0c0b1aab3e40866e70cf7f84ac27645ecddce191d449058e5b861e18c351042",
+                "frame_index": 101,
+                "pts": 101000
+              },
+              {
+                "decoded_rgb_sha256": "b21d4ee140775711f370c254547f080da10e1c572390b34cf8269900ffef4699",
+                "frame_index": 105,
+                "pts": 105000
+              },
+              {
+                "decoded_rgb_sha256": "6a4e3a4e44105f563694e8de558c78b012edd958272b0356339f42bc616f13dc",
+                "frame_index": 108,
+                "pts": 108000
+              }
+            ],
+            "edges": [
+              [
+                99,
+                100,
+                101,
+                102,
+                103,
+                104
+              ],
+              [
+                105,
+                106,
+                107,
+                108,
+                109,
+                110
+              ]
+            ],
+            "frames": [
+              102,
+              108
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              102000,
+              108000
+            ],
+            "response": 0.8281572987582406
+          },
+          "scheduled": 36
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 54,
+          "pane_changes": [
+            [
+              33,
+              0
+            ],
+            [
+              34,
+              0
+            ],
+            [
+              40,
+              0
+            ],
+            [
+              41,
+              0
+            ],
+            [
+              42,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 54
+        }
+      },
+      "opposite": null,
+      "participants": [
+        4,
+        7
+      ],
+      "same": null,
+      "sha256": "f53d80355ef9f127801dceecac80e1efe96f5ec74d522e0ef47d9fbd4cb14070",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            102,
+            108
+          ],
+          "pane": "left"
+        }
+      ]
+    },
+    {
+      "condition": "right_only",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "5b8ac7b0237b8dda1f233ddff48472096730c8d289b29724f94ecb13601b0830",
+            "frame_index": 94,
+            "pts": 94000
+          },
+          {
+            "decoded_rgb_sha256": "bd85816389336050749d122d794b050067bc81ee02a03cdcee145b5d4f29d09f",
+            "frame_index": 100,
+            "pts": 100000
+          },
+          {
+            "decoded_rgb_sha256": "371b68a55e31e8336531deb622576b4ca1b77a21d473e62caf21244731cf460d",
+            "frame_index": 103,
+            "pts": 103000
+          }
+        ],
+        "edges": [
+          [
+            92,
+            93,
+            94,
+            95,
+            96,
+            97
+          ],
+          [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ]
+        ],
+        "frames": [
+          95,
+          103
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          95000,
+          103000
+        ],
+        "response": 0.4645488406591822
+      },
+      "first_pts": 0,
+      "group": 4,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 25,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 25
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 60,
+          "pane_changes": [
+            [
+              33,
+              0
+            ],
+            [
+              34,
+              0
+            ],
+            [
+              40,
+              0
+            ],
+            [
+              41,
+              0
+            ],
+            [
+              42,
+              0
+            ],
+            [
+              94,
+              0
+            ],
+            [
+              95,
+              0
+            ],
+            [
+              103,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "5b8ac7b0237b8dda1f233ddff48472096730c8d289b29724f94ecb13601b0830",
+                "frame_index": 94,
+                "pts": 94000
+              },
+              {
+                "decoded_rgb_sha256": "bd85816389336050749d122d794b050067bc81ee02a03cdcee145b5d4f29d09f",
+                "frame_index": 100,
+                "pts": 100000
+              },
+              {
+                "decoded_rgb_sha256": "371b68a55e31e8336531deb622576b4ca1b77a21d473e62caf21244731cf460d",
+                "frame_index": 103,
+                "pts": 103000
+              }
+            ],
+            "edges": [
+              [
+                92,
+                93,
+                94,
+                95,
+                96,
+                97
+              ],
+              [
+                100,
+                101,
+                102,
+                103,
+                104,
+                105
+              ]
+            ],
+            "frames": [
+              95,
+              103
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              95000,
+              103000
+            ],
+            "response": 0.4645488406591822
+          },
+          "scheduled": 60
+        }
+      },
+      "opposite": null,
+      "participants": [
+        4,
+        7
+      ],
+      "same": null,
+      "sha256": "8e3290cc6a4a921010274bcf582f61104e20ed44f420077104e6d4d4a7ec741a",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            95,
+            103
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "ordinary",
+      "first": null,
+      "first_pts": 0,
+      "group": 4,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 25,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 25
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 54,
+          "pane_changes": [
+            [
+              33,
+              0
+            ],
+            [
+              34,
+              0
+            ],
+            [
+              40,
+              0
+            ],
+            [
+              41,
+              0
+            ],
+            [
+              42,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 54
+        }
+      },
+      "opposite": null,
+      "participants": [
+        4,
+        7
+      ],
+      "same": null,
+      "sha256": "d5799878f7e0920d5f1f608f5f6ee900990df7775abe570988ab24a5c147bc46",
+      "time_base": "1/30000",
+      "truth": []
+    },
+    {
+      "condition": "ordinary_cuts",
+      "first": null,
+      "first_pts": 0,
+      "group": 4,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        }
+      },
+      "opposite": null,
+      "participants": [
+        4,
+        7
+      ],
+      "same": null,
+      "sha256": "f3d2abd22661bbfbf4020c44b268912028e41891470406292f3c07891448306e",
+      "time_base": "1/30000",
+      "truth": []
+    },
+    {
+      "condition": "left_then_right",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "720738c04122838370c6271c8512878a1fe62d2beb884027a4c1442be2059a0c",
+            "frame_index": 61,
+            "pts": 61000
+          },
+          {
+            "decoded_rgb_sha256": "872c7e572b783c0a0972373f4a19c39fb565ad4277c04f9338aeb53e3a2705fb",
+            "frame_index": 65,
+            "pts": 65000
+          },
+          {
+            "decoded_rgb_sha256": "a68f21cd7ed560d3b6a5b65f57ddf9a40f9829ca57ad1d717983da5f9c5928cf",
+            "frame_index": 68,
+            "pts": 68000
+          }
+        ],
+        "edges": [
+          [
+            59,
+            60,
+            61,
+            62,
+            63,
+            64
+          ],
+          [
+            65,
+            66,
+            67,
+            68,
+            69,
+            70
+          ]
+        ],
+        "frames": [
+          62,
+          68
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          62000,
+          68000
+        ],
+        "response": 0.6839622198111238
+      },
+      "first_pts": 0,
+      "group": 5,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 65,
+          "pane_changes": [
+            [
+              6,
+              0
+            ],
+            [
+              62,
+              0
+            ],
+            [
+              68,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "720738c04122838370c6271c8512878a1fe62d2beb884027a4c1442be2059a0c",
+                "frame_index": 61,
+                "pts": 61000
+              },
+              {
+                "decoded_rgb_sha256": "872c7e572b783c0a0972373f4a19c39fb565ad4277c04f9338aeb53e3a2705fb",
+                "frame_index": 65,
+                "pts": 65000
+              },
+              {
+                "decoded_rgb_sha256": "a68f21cd7ed560d3b6a5b65f57ddf9a40f9829ca57ad1d717983da5f9c5928cf",
+                "frame_index": 68,
+                "pts": 68000
+              }
+            ],
+            "edges": [
+              [
+                59,
+                60,
+                61,
+                62,
+                63,
+                64
+              ],
+              [
+                65,
+                66,
+                67,
+                68,
+                69,
+                70
+              ]
+            ],
+            "frames": [
+              62,
+              68
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              62000,
+              68000
+            ],
+            "response": 0.6839622198111238
+          },
+          "scheduled": 65
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 45,
+          "pane_changes": [
+            [
+              92,
+              0
+            ],
+            [
+              98,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "87dc3c8bdce5bd5dcdfd98b706e17357c8db9724551313b4095f909e09fa0743",
+                "frame_index": 91,
+                "pts": 91000
+              },
+              {
+                "decoded_rgb_sha256": "07d87337073e81c6caa61374b33b317f9b90563a73cf2e975f55c8472f1aca73",
+                "frame_index": 95,
+                "pts": 95000
+              },
+              {
+                "decoded_rgb_sha256": "fe854450c62f3c8f0d7d95c1daf3a6da7163602038ffb3c1db4fe1216f9939fa",
+                "frame_index": 98,
+                "pts": 98000
+              }
+            ],
+            "edges": [
+              [
+                89,
+                90,
+                91,
+                92,
+                93,
+                94
+              ],
+              [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100
+              ]
+            ],
+            "frames": [
+              92,
+              98
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              92000,
+              98000
+            ],
+            "response": 0.5331379759906107
+          },
+          "scheduled": 45
+        }
+      },
+      "opposite": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "87dc3c8bdce5bd5dcdfd98b706e17357c8db9724551313b4095f909e09fa0743",
+            "frame_index": 91,
+            "pts": 91000
+          },
+          {
+            "decoded_rgb_sha256": "07d87337073e81c6caa61374b33b317f9b90563a73cf2e975f55c8472f1aca73",
+            "frame_index": 95,
+            "pts": 95000
+          },
+          {
+            "decoded_rgb_sha256": "fe854450c62f3c8f0d7d95c1daf3a6da7163602038ffb3c1db4fe1216f9939fa",
+            "frame_index": 98,
+            "pts": 98000
+          }
+        ],
+        "edges": [
+          [
+            89,
+            90,
+            91,
+            92,
+            93,
+            94
+          ],
+          [
+            95,
+            96,
+            97,
+            98,
+            99,
+            100
+          ]
+        ],
+        "frames": [
+          92,
+          98
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          92000,
+          98000
+        ],
+        "response": 0.5331379759906107
+      },
+      "participants": [
+        5,
+        8
+      ],
+      "same": null,
+      "sha256": "b13c90e125734da0512355c8050fd4e9b20a96775226f3093075283c085e5a1d",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            62,
+            68
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            92,
+            98
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "right_then_left",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "7cc9b7563b36e8868f1f59d14bef0959583203827760f426364e6c8d124499a1",
+            "frame_index": 88,
+            "pts": 88000
+          },
+          {
+            "decoded_rgb_sha256": "1686042ca9cfb17a48a1d9b169cfc6cc943489d6551737656fc7acb9373fc465",
+            "frame_index": 93,
+            "pts": 93000
+          },
+          {
+            "decoded_rgb_sha256": "9e7df9a1518aec4cabe24a218a344a5a385b38ea11c1ee13495be11102ac01ee",
+            "frame_index": 97,
+            "pts": 97000
+          }
+        ],
+        "edges": [
+          [
+            86,
+            87,
+            88,
+            89,
+            90,
+            91
+          ],
+          [
+            94,
+            95,
+            96,
+            97,
+            98,
+            99
+          ]
+        ],
+        "frames": [
+          89,
+          97
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          89000,
+          97000
+        ],
+        "response": 0.6673206111526943
+      },
+      "first_pts": 0,
+      "group": 5,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 54,
+          "pane_changes": [
+            [
+              6,
+              0
+            ],
+            [
+              89,
+              0
+            ],
+            [
+              96,
+              0
+            ],
+            [
+              97,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "7cc9b7563b36e8868f1f59d14bef0959583203827760f426364e6c8d124499a1",
+                "frame_index": 88,
+                "pts": 88000
+              },
+              {
+                "decoded_rgb_sha256": "1686042ca9cfb17a48a1d9b169cfc6cc943489d6551737656fc7acb9373fc465",
+                "frame_index": 93,
+                "pts": 93000
+              },
+              {
+                "decoded_rgb_sha256": "9e7df9a1518aec4cabe24a218a344a5a385b38ea11c1ee13495be11102ac01ee",
+                "frame_index": 97,
+                "pts": 97000
+              }
+            ],
+            "edges": [
+              [
+                86,
+                87,
+                88,
+                89,
+                90,
+                91
+              ],
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ]
+            ],
+            "frames": [
+              89,
+              97
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              89000,
+              97000
+            ],
+            "response": 0.6673206111526943
+          },
+          "scheduled": 54
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 51,
+          "pane_changes": [
+            [
+              70,
+              0
+            ],
+            [
+              78,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "1c54f75544602044e6c380142600b21f1827a5108a402cc9902232164acfdf22",
+                "frame_index": 69,
+                "pts": 69000
+              },
+              {
+                "decoded_rgb_sha256": "8f496c64cbda4e5079073d111e3cf49955508901f8a51f697ad83f1c285c4285",
+                "frame_index": 74,
+                "pts": 74000
+              },
+              {
+                "decoded_rgb_sha256": "12b8a502a94c4eb86831d3f2849539a173e4c1741c2bee73929d9f5768a3daa0",
+                "frame_index": 78,
+                "pts": 78000
+              }
+            ],
+            "edges": [
+              [
+                67,
+                68,
+                69,
+                70,
+                71,
+                72
+              ],
+              [
+                75,
+                76,
+                77,
+                78,
+                79,
+                80
+              ]
+            ],
+            "frames": [
+              70,
+              78
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              70000,
+              78000
+            ],
+            "response": 0.580393738104386
+          },
+          "scheduled": 51
+        }
+      },
+      "opposite": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "1c54f75544602044e6c380142600b21f1827a5108a402cc9902232164acfdf22",
+            "frame_index": 69,
+            "pts": 69000
+          },
+          {
+            "decoded_rgb_sha256": "8f496c64cbda4e5079073d111e3cf49955508901f8a51f697ad83f1c285c4285",
+            "frame_index": 74,
+            "pts": 74000
+          },
+          {
+            "decoded_rgb_sha256": "12b8a502a94c4eb86831d3f2849539a173e4c1741c2bee73929d9f5768a3daa0",
+            "frame_index": 78,
+            "pts": 78000
+          }
+        ],
+        "edges": [
+          [
+            67,
+            68,
+            69,
+            70,
+            71,
+            72
+          ],
+          [
+            75,
+            76,
+            77,
+            78,
+            79,
+            80
+          ]
+        ],
+        "frames": [
+          70,
+          78
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          70000,
+          78000
+        ],
+        "response": 0.580393738104386
+      },
+      "participants": [
+        5,
+        8
+      ],
+      "same": null,
+      "sha256": "8f99b4e83941073069ef00250073a51629067dce896bb7f97c2d83346da6427b",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            89,
+            97
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            70,
+            78
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "left_only",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "720738c04122838370c6271c8512878a1fe62d2beb884027a4c1442be2059a0c",
+            "frame_index": 61,
+            "pts": 61000
+          },
+          {
+            "decoded_rgb_sha256": "f60d546d78529b31416ab1dc06676f2e4176b8ca3a3080211466b5a9d960084c",
+            "frame_index": 65,
+            "pts": 65000
+          },
+          {
+            "decoded_rgb_sha256": "aa3c57e53ad42d6876142b54d40f286f282df013f48e0f1180841b949a14ee89",
+            "frame_index": 68,
+            "pts": 68000
+          }
+        ],
+        "edges": [
+          [
+            59,
+            60,
+            61,
+            62,
+            63,
+            64
+          ],
+          [
+            65,
+            66,
+            67,
+            68,
+            69,
+            70
+          ]
+        ],
+        "frames": [
+          62,
+          68
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          62000,
+          68000
+        ],
+        "response": 0.679416915237594
+      },
+      "first_pts": 0,
+      "group": 5,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 65,
+          "pane_changes": [
+            [
+              6,
+              0
+            ],
+            [
+              62,
+              0
+            ],
+            [
+              68,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "720738c04122838370c6271c8512878a1fe62d2beb884027a4c1442be2059a0c",
+                "frame_index": 61,
+                "pts": 61000
+              },
+              {
+                "decoded_rgb_sha256": "f60d546d78529b31416ab1dc06676f2e4176b8ca3a3080211466b5a9d960084c",
+                "frame_index": 65,
+                "pts": 65000
+              },
+              {
+                "decoded_rgb_sha256": "aa3c57e53ad42d6876142b54d40f286f282df013f48e0f1180841b949a14ee89",
+                "frame_index": 68,
+                "pts": 68000
+              }
+            ],
+            "edges": [
+              [
+                59,
+                60,
+                61,
+                62,
+                63,
+                64
+              ],
+              [
+                65,
+                66,
+                67,
+                68,
+                69,
+                70
+              ]
+            ],
+            "frames": [
+              62,
+              68
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              62000,
+              68000
+            ],
+            "response": 0.679416915237594
+          },
+          "scheduled": 65
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 39,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 39
+        }
+      },
+      "opposite": null,
+      "participants": [
+        5,
+        8
+      ],
+      "same": null,
+      "sha256": "0dc9f269e407ee198b3451214a9c1bbb9e7a14cf8d2f438ed7c37942c9fb93f1",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            62,
+            68
+          ],
+          "pane": "left"
+        }
+      ]
+    },
+    {
+      "condition": "right_only",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "63d4eece949475cc62673a331bbc7310926d212987cf6d2858fb809f86279e9d",
+            "frame_index": 69,
+            "pts": 69000
+          },
+          {
+            "decoded_rgb_sha256": "106e1ce4379c452759aed5245611e285eb92d516b2649378ac6ec2fc6ce0269a",
+            "frame_index": 74,
+            "pts": 74000
+          },
+          {
+            "decoded_rgb_sha256": "15bf40df7cb9d49aabd1ae5af90d775df480454420cf9e97cbdb62895f709c11",
+            "frame_index": 78,
+            "pts": 78000
+          }
+        ],
+        "edges": [
+          [
+            67,
+            68,
+            69,
+            70,
+            71,
+            72
+          ],
+          [
+            75,
+            76,
+            77,
+            78,
+            79,
+            80
+          ]
+        ],
+        "frames": [
+          70,
+          78
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          70000,
+          78000
+        ],
+        "response": 0.6113486753858093
+      },
+      "first_pts": 0,
+      "group": 5,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 54,
+          "pane_changes": [
+            [
+              6,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 54
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 51,
+          "pane_changes": [
+            [
+              70,
+              0
+            ],
+            [
+              78,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "63d4eece949475cc62673a331bbc7310926d212987cf6d2858fb809f86279e9d",
+                "frame_index": 69,
+                "pts": 69000
+              },
+              {
+                "decoded_rgb_sha256": "106e1ce4379c452759aed5245611e285eb92d516b2649378ac6ec2fc6ce0269a",
+                "frame_index": 74,
+                "pts": 74000
+              },
+              {
+                "decoded_rgb_sha256": "15bf40df7cb9d49aabd1ae5af90d775df480454420cf9e97cbdb62895f709c11",
+                "frame_index": 78,
+                "pts": 78000
+              }
+            ],
+            "edges": [
+              [
+                67,
+                68,
+                69,
+                70,
+                71,
+                72
+              ],
+              [
+                75,
+                76,
+                77,
+                78,
+                79,
+                80
+              ]
+            ],
+            "frames": [
+              70,
+              78
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              70000,
+              78000
+            ],
+            "response": 0.6113486753858093
+          },
+          "scheduled": 51
+        }
+      },
+      "opposite": null,
+      "participants": [
+        5,
+        8
+      ],
+      "same": null,
+      "sha256": "870c687f7eae777536b6567103622217a927913e02921518583c478f1484a556",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            70,
+            78
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "ordinary",
+      "first": null,
+      "first_pts": 0,
+      "group": 5,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 54,
+          "pane_changes": [
+            [
+              6,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 54
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 39,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 39
+        }
+      },
+      "opposite": null,
+      "participants": [
+        5,
+        8
+      ],
+      "same": null,
+      "sha256": "f707cc04e7a3ddd26c523ec34f8def698055c5f9af819032c9554cc09af3a080",
+      "time_base": "1/30000",
+      "truth": []
+    },
+    {
+      "condition": "ordinary_cuts",
+      "first": null,
+      "first_pts": 0,
+      "group": 5,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        }
+      },
+      "opposite": null,
+      "participants": [
+        5,
+        8
+      ],
+      "same": null,
+      "sha256": "55702aef98d1afc156bfb93a73ba918118950cd72842c077bc9469022b3daa41",
+      "time_base": "1/30000",
+      "truth": []
+    },
+    {
+      "condition": "left_then_right",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "7552461a68e6025f78713cf16de2579391dc862e662e567d2fa2528af34bbadb",
+            "frame_index": 85,
+            "pts": 85000
+          },
+          {
+            "decoded_rgb_sha256": "c07ff26be7f85b0c88d65f3882d70f888d61aef8b746d7c84efaee6c0c35e125",
+            "frame_index": 91,
+            "pts": 91000
+          },
+          {
+            "decoded_rgb_sha256": "eff5148c060477d789d9d6a064e5fae3418d4496ec323b003cdf6e94e1403168",
+            "frame_index": 94,
+            "pts": 94000
+          }
+        ],
+        "edges": [
+          [
+            83,
+            84,
+            85,
+            86,
+            87,
+            88
+          ],
+          [
+            91,
+            92,
+            93,
+            94,
+            95,
+            96
+          ]
+        ],
+        "frames": [
+          86,
+          94
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          86000,
+          94000
+        ],
+        "response": 0.4829081139499455
+      },
+      "first_pts": 0,
+      "group": 6,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 28,
+          "pane_changes": [
+            [
+              56,
+              0
+            ],
+            [
+              68,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 28
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 27,
+          "pane_changes": [
+            [
+              86,
+              0
+            ],
+            [
+              94,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "7552461a68e6025f78713cf16de2579391dc862e662e567d2fa2528af34bbadb",
+                "frame_index": 85,
+                "pts": 85000
+              },
+              {
+                "decoded_rgb_sha256": "c07ff26be7f85b0c88d65f3882d70f888d61aef8b746d7c84efaee6c0c35e125",
+                "frame_index": 91,
+                "pts": 91000
+              },
+              {
+                "decoded_rgb_sha256": "eff5148c060477d789d9d6a064e5fae3418d4496ec323b003cdf6e94e1403168",
+                "frame_index": 94,
+                "pts": 94000
+              }
+            ],
+            "edges": [
+              [
+                83,
+                84,
+                85,
+                86,
+                87,
+                88
+              ],
+              [
+                91,
+                92,
+                93,
+                94,
+                95,
+                96
+              ]
+            ],
+            "frames": [
+              86,
+              94
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              86000,
+              94000
+            ],
+            "response": 0.4829081139499455
+          },
+          "scheduled": 27
+        }
+      },
+      "opposite": null,
+      "participants": [
+        6,
+        1
+      ],
+      "same": null,
+      "sha256": "53d044a7272b1e2a674d94e927df56c08988de8fee1a457fcef6f44c03699185",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            68,
+            76
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            86,
+            94
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "right_then_left",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "769c0f5c7186504e56ef43dbdac0e5f37ce08165e57eedda19c2f51875f23a12",
+            "frame_index": 96,
+            "pts": 96000
+          },
+          {
+            "decoded_rgb_sha256": "68f70470e84ce378308f03f76fd50ddd7c3aaa0cd31cb34cdeed02d425f6b1b2",
+            "frame_index": 100,
+            "pts": 100000
+          },
+          {
+            "decoded_rgb_sha256": "aa30172e8806aece6a2877c0d9e0a03d72560bf7a02b052bb587ed88be8083d4",
+            "frame_index": 103,
+            "pts": 103000
+          }
+        ],
+        "edges": [
+          [
+            94,
+            95,
+            96,
+            97,
+            98,
+            99
+          ],
+          [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ]
+        ],
+        "frames": [
+          97,
+          103
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          97000,
+          103000
+        ],
+        "response": 0.7263697637126838
+      },
+      "first_pts": 0,
+      "group": 6,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 27,
+          "pane_changes": [
+            [
+              56,
+              0
+            ],
+            [
+              97,
+              0
+            ],
+            [
+              103,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "769c0f5c7186504e56ef43dbdac0e5f37ce08165e57eedda19c2f51875f23a12",
+                "frame_index": 96,
+                "pts": 96000
+              },
+              {
+                "decoded_rgb_sha256": "68f70470e84ce378308f03f76fd50ddd7c3aaa0cd31cb34cdeed02d425f6b1b2",
+                "frame_index": 100,
+                "pts": 100000
+              },
+              {
+                "decoded_rgb_sha256": "aa30172e8806aece6a2877c0d9e0a03d72560bf7a02b052bb587ed88be8083d4",
+                "frame_index": 103,
+                "pts": 103000
+              }
+            ],
+            "edges": [
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ],
+              [
+                100,
+                101,
+                102,
+                103,
+                104,
+                105
+              ]
+            ],
+            "frames": [
+              97,
+              103
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              97000,
+              103000
+            ],
+            "response": 0.7263697637126838
+          },
+          "scheduled": 27
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 28,
+          "pane_changes": [
+            [
+              61,
+              0
+            ],
+            [
+              67,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "9c9d38d1d052cf53ffd3033f3c848a040aa5ad9b8dee8f0cade47c4f7b394491",
+                "frame_index": 60,
+                "pts": 60000
+              },
+              {
+                "decoded_rgb_sha256": "4e491b3996f424c6ddf9854bee86a39fefafcf27c98b74387e0adb74d7cdd629",
+                "frame_index": 64,
+                "pts": 64000
+              },
+              {
+                "decoded_rgb_sha256": "b02ac3482fa796235d02d687362fdc8ecf1222c77b9d2dd8b9b9aac8681b207a",
+                "frame_index": 67,
+                "pts": 67000
+              }
+            ],
+            "edges": [
+              [
+                58,
+                59,
+                60,
+                61,
+                62,
+                63
+              ],
+              [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69
+              ]
+            ],
+            "frames": [
+              61,
+              67
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              61000,
+              67000
+            ],
+            "response": 0.6482714818769253
+          },
+          "scheduled": 28
+        }
+      },
+      "opposite": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "9c9d38d1d052cf53ffd3033f3c848a040aa5ad9b8dee8f0cade47c4f7b394491",
+            "frame_index": 60,
+            "pts": 60000
+          },
+          {
+            "decoded_rgb_sha256": "4e491b3996f424c6ddf9854bee86a39fefafcf27c98b74387e0adb74d7cdd629",
+            "frame_index": 64,
+            "pts": 64000
+          },
+          {
+            "decoded_rgb_sha256": "b02ac3482fa796235d02d687362fdc8ecf1222c77b9d2dd8b9b9aac8681b207a",
+            "frame_index": 67,
+            "pts": 67000
+          }
+        ],
+        "edges": [
+          [
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ],
+          [
+            64,
+            65,
+            66,
+            67,
+            68,
+            69
+          ]
+        ],
+        "frames": [
+          61,
+          67
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          61000,
+          67000
+        ],
+        "response": 0.6482714818769253
+      },
+      "participants": [
+        6,
+        1
+      ],
+      "same": null,
+      "sha256": "db9853d9b29e48dc5dd9a6d19c38f322b1988cedbddbb2838bec9442d72f743f",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            97,
+            103
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            61,
+            67
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "left_only",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "c324c996a6822e0ce18cc54ac95d765f9c266a27ca8e864db358b3e14de14487",
+            "frame_index": 96,
+            "pts": 96000
+          },
+          {
+            "decoded_rgb_sha256": "9f78974a9afc4af3cb4b500ba3745d938d56445f302461cf09796e2addbe28cf",
+            "frame_index": 100,
+            "pts": 100000
+          },
+          {
+            "decoded_rgb_sha256": "66aae40bb5468569cbf89925830d01c6727f568ce7367b540cf0ab8b2dd5c2ca",
+            "frame_index": 103,
+            "pts": 103000
+          }
+        ],
+        "edges": [
+          [
+            94,
+            95,
+            96,
+            97,
+            98,
+            99
+          ],
+          [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ]
+        ],
+        "frames": [
+          97,
+          103
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          97000,
+          103000
+        ],
+        "response": 0.7161088179704832
+      },
+      "first_pts": 0,
+      "group": 6,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 27,
+          "pane_changes": [
+            [
+              56,
+              0
+            ],
+            [
+              97,
+              0
+            ],
+            [
+              103,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "c324c996a6822e0ce18cc54ac95d765f9c266a27ca8e864db358b3e14de14487",
+                "frame_index": 96,
+                "pts": 96000
+              },
+              {
+                "decoded_rgb_sha256": "9f78974a9afc4af3cb4b500ba3745d938d56445f302461cf09796e2addbe28cf",
+                "frame_index": 100,
+                "pts": 100000
+              },
+              {
+                "decoded_rgb_sha256": "66aae40bb5468569cbf89925830d01c6727f568ce7367b540cf0ab8b2dd5c2ca",
+                "frame_index": 103,
+                "pts": 103000
+              }
+            ],
+            "edges": [
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ],
+              [
+                100,
+                101,
+                102,
+                103,
+                104,
+                105
+              ]
+            ],
+            "frames": [
+              97,
+              103
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              97000,
+              103000
+            ],
+            "response": 0.7161088179704832
+          },
+          "scheduled": 27
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 17,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 17
+        }
+      },
+      "opposite": null,
+      "participants": [
+        6,
+        1
+      ],
+      "same": null,
+      "sha256": "38de16e2f5a15d7b4fc2d44caffd05a3d8eadfe500a95dd4c9c429c4ad1cf153",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            97,
+            103
+          ],
+          "pane": "left"
+        }
+      ]
+    },
+    {
+      "condition": "right_only",
+      "first": null,
+      "first_pts": 0,
+      "group": 6,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 17,
+          "pane_changes": [
+            [
+              56,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 17
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 22,
+          "pane_changes": [
+            [
+              86,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 22
+        }
+      },
+      "opposite": null,
+      "participants": [
+        6,
+        1
+      ],
+      "same": null,
+      "sha256": "393e663bbc4f14eabaa779fc5eb6e4d9e35376d69fd5abb1fc43847c77214bdd",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            86,
+            94
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "ordinary",
+      "first": null,
+      "first_pts": 0,
+      "group": 6,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 17,
+          "pane_changes": [
+            [
+              56,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 17
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 17,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 17
+        }
+      },
+      "opposite": null,
+      "participants": [
+        6,
+        1
+      ],
+      "same": null,
+      "sha256": "71a991f417111792cae1d60c994007c629bff54b63086ee3b5a43334b039d96e",
+      "time_base": "1/30000",
+      "truth": []
+    },
+    {
+      "condition": "ordinary_cuts",
+      "first": null,
+      "first_pts": 0,
+      "group": 6,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        }
+      },
+      "opposite": null,
+      "participants": [
+        6,
+        1
+      ],
+      "same": null,
+      "sha256": "90d3ac6c9e5df0a0bfd5b33fff27c9e0b50490b5f8cd777c70ef20eb141b71a1",
+      "time_base": "1/30000",
+      "truth": []
+    },
+    {
+      "condition": "left_then_right",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "3d6927ed8699f16f48e3424691ac3a14ea9709a3e0072aa87f1e83cbd7dd30af",
+            "frame_index": 63,
+            "pts": 63000
+          },
+          {
+            "decoded_rgb_sha256": "a335cd1e230ddf8bb08bcb8aca1421223d7f426dc13d7e9924582bb144470fff",
+            "frame_index": 67,
+            "pts": 67000
+          },
+          {
+            "decoded_rgb_sha256": "b7968ecdcd01e76f3b157e5bc8fdcc7a8a5c12eb4862bd11b06e524dd0704980",
+            "frame_index": 70,
+            "pts": 70000
+          }
+        ],
+        "edges": [
+          [
+            61,
+            62,
+            63,
+            64,
+            65,
+            66
+          ],
+          [
+            67,
+            68,
+            69,
+            70,
+            71,
+            72
+          ]
+        ],
+        "frames": [
+          64,
+          70
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          64000,
+          70000
+        ],
+        "response": 0.6262587235842071
+      },
+      "first_pts": 0,
+      "group": 7,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 62,
+          "pane_changes": [
+            [
+              33,
+              0
+            ],
+            [
+              34,
+              0
+            ],
+            [
+              40,
+              0
+            ],
+            [
+              41,
+              0
+            ],
+            [
+              42,
+              0
+            ],
+            [
+              64,
+              0
+            ],
+            [
+              70,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "3d6927ed8699f16f48e3424691ac3a14ea9709a3e0072aa87f1e83cbd7dd30af",
+                "frame_index": 63,
+                "pts": 63000
+              },
+              {
+                "decoded_rgb_sha256": "a335cd1e230ddf8bb08bcb8aca1421223d7f426dc13d7e9924582bb144470fff",
+                "frame_index": 67,
+                "pts": 67000
+              },
+              {
+                "decoded_rgb_sha256": "b7968ecdcd01e76f3b157e5bc8fdcc7a8a5c12eb4862bd11b06e524dd0704980",
+                "frame_index": 70,
+                "pts": 70000
+              }
+            ],
+            "edges": [
+              [
+                61,
+                62,
+                63,
+                64,
+                65,
+                66
+              ],
+              [
+                67,
+                68,
+                69,
+                70,
+                71,
+                72
+              ]
+            ],
+            "frames": [
+              64,
+              70
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              64000,
+              70000
+            ],
+            "response": 0.6262587235842071
+          },
+          "scheduled": 62
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 38,
+          "pane_changes": [
+            [
+              95,
+              0
+            ],
+            [
+              101,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "ad2d70b4d91dfce51f7e202d929cc38008dd3eccafa98638f527a639efbffd91",
+                "frame_index": 94,
+                "pts": 94000
+              },
+              {
+                "decoded_rgb_sha256": "2936870d69fcfd151d5930fc4f75c2e4f9a988d061e4c3e9d13001514515d21c",
+                "frame_index": 98,
+                "pts": 98000
+              },
+              {
+                "decoded_rgb_sha256": "19fc864fe732295ba1af83ddaf35847cfb8987f31d0c36a356dfb1a46ac29bcd",
+                "frame_index": 101,
+                "pts": 101000
+              }
+            ],
+            "edges": [
+              [
+                92,
+                93,
+                94,
+                95,
+                96,
+                97
+              ],
+              [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103
+              ]
+            ],
+            "frames": [
+              95,
+              101
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              95000,
+              101000
+            ],
+            "response": 0.5631400591430872
+          },
+          "scheduled": 38
+        }
+      },
+      "opposite": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "ad2d70b4d91dfce51f7e202d929cc38008dd3eccafa98638f527a639efbffd91",
+            "frame_index": 94,
+            "pts": 94000
+          },
+          {
+            "decoded_rgb_sha256": "2936870d69fcfd151d5930fc4f75c2e4f9a988d061e4c3e9d13001514515d21c",
+            "frame_index": 98,
+            "pts": 98000
+          },
+          {
+            "decoded_rgb_sha256": "19fc864fe732295ba1af83ddaf35847cfb8987f31d0c36a356dfb1a46ac29bcd",
+            "frame_index": 101,
+            "pts": 101000
+          }
+        ],
+        "edges": [
+          [
+            92,
+            93,
+            94,
+            95,
+            96,
+            97
+          ],
+          [
+            98,
+            99,
+            100,
+            101,
+            102,
+            103
+          ]
+        ],
+        "frames": [
+          95,
+          101
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          95000,
+          101000
+        ],
+        "response": 0.5631400591430872
+      },
+      "participants": [
+        7,
+        2
+      ],
+      "same": null,
+      "sha256": "beed85289467fe5c28b7b6eeeca28e023cd7693bf59158dd61c52d4328e16c66",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            64,
+            70
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            95,
+            101
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "right_then_left",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "b0068ef7f7c81921c651ad2a340a0341647379fd2a128021cfa0202829b40dc9",
+            "frame_index": 66,
+            "pts": 66000
+          },
+          {
+            "decoded_rgb_sha256": "d664decf76020089c9a684f5683b041517cef805dd4757debd4f5590381d45ac",
+            "frame_index": 71,
+            "pts": 71000
+          },
+          {
+            "decoded_rgb_sha256": "318d497524925bb5ea932458480051b47d7a719c704cd7f5a6ad7f6fe0d0eda9",
+            "frame_index": 75,
+            "pts": 75000
+          }
+        ],
+        "edges": [
+          [
+            64,
+            65,
+            66,
+            67,
+            68,
+            69
+          ],
+          [
+            72,
+            73,
+            74,
+            75,
+            76,
+            77
+          ]
+        ],
+        "frames": [
+          67,
+          75
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          67000,
+          75000
+        ],
+        "response": 0.6652039766184891
+      },
+      "first_pts": 0,
+      "group": 7,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 60,
+          "pane_changes": [
+            [
+              33,
+              0
+            ],
+            [
+              34,
+              0
+            ],
+            [
+              40,
+              0
+            ],
+            [
+              41,
+              0
+            ],
+            [
+              42,
+              0
+            ],
+            [
+              94,
+              0
+            ],
+            [
+              95,
+              0
+            ],
+            [
+              103,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "ac72e042117110f6443a04771f3a92a0555b7b742f9c1cf98050ca47279533f0",
+                "frame_index": 94,
+                "pts": 94000
+              },
+              {
+                "decoded_rgb_sha256": "c887530715d5a0f4061edae727946d40245b35745555f941d42c947d7dc9b6e2",
+                "frame_index": 100,
+                "pts": 100000
+              },
+              {
+                "decoded_rgb_sha256": "acb54ec6363bf0fa6471a3a2a6e127dca7935a4565cd805ec071eb434ce149ea",
+                "frame_index": 103,
+                "pts": 103000
+              }
+            ],
+            "edges": [
+              [
+                92,
+                93,
+                94,
+                95,
+                96,
+                97
+              ],
+              [
+                100,
+                101,
+                102,
+                103,
+                104,
+                105
+              ]
+            ],
+            "frames": [
+              95,
+              103
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              95000,
+              103000
+            ],
+            "response": 0.4775320325147845
+          },
+          "scheduled": 60
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 34,
+          "pane_changes": [
+            [
+              56,
+              0
+            ],
+            [
+              67,
+              0
+            ],
+            [
+              75,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "b0068ef7f7c81921c651ad2a340a0341647379fd2a128021cfa0202829b40dc9",
+                "frame_index": 66,
+                "pts": 66000
+              },
+              {
+                "decoded_rgb_sha256": "d664decf76020089c9a684f5683b041517cef805dd4757debd4f5590381d45ac",
+                "frame_index": 71,
+                "pts": 71000
+              },
+              {
+                "decoded_rgb_sha256": "318d497524925bb5ea932458480051b47d7a719c704cd7f5a6ad7f6fe0d0eda9",
+                "frame_index": 75,
+                "pts": 75000
+              }
+            ],
+            "edges": [
+              [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69
+              ],
+              [
+                72,
+                73,
+                74,
+                75,
+                76,
+                77
+              ]
+            ],
+            "frames": [
+              67,
+              75
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              67000,
+              75000
+            ],
+            "response": 0.6652039766184891
+          },
+          "scheduled": 34
+        }
+      },
+      "opposite": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "ac72e042117110f6443a04771f3a92a0555b7b742f9c1cf98050ca47279533f0",
+            "frame_index": 94,
+            "pts": 94000
+          },
+          {
+            "decoded_rgb_sha256": "c887530715d5a0f4061edae727946d40245b35745555f941d42c947d7dc9b6e2",
+            "frame_index": 100,
+            "pts": 100000
+          },
+          {
+            "decoded_rgb_sha256": "acb54ec6363bf0fa6471a3a2a6e127dca7935a4565cd805ec071eb434ce149ea",
+            "frame_index": 103,
+            "pts": 103000
+          }
+        ],
+        "edges": [
+          [
+            92,
+            93,
+            94,
+            95,
+            96,
+            97
+          ],
+          [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ]
+        ],
+        "frames": [
+          95,
+          103
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          95000,
+          103000
+        ],
+        "response": 0.4775320325147845
+      },
+      "participants": [
+        7,
+        2
+      ],
+      "same": null,
+      "sha256": "91dd0c3bb9047cd59059a0e11465d48aff55f5b49a2d486f9da87cef2a104759",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            95,
+            103
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            67,
+            75
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "left_only",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "3d6927ed8699f16f48e3424691ac3a14ea9709a3e0072aa87f1e83cbd7dd30af",
+            "frame_index": 63,
+            "pts": 63000
+          },
+          {
+            "decoded_rgb_sha256": "4f5f539e56c42a72f3a9ab4381f471c8eb84ab20ec0fffe222d896e89f49d3bc",
+            "frame_index": 67,
+            "pts": 67000
+          },
+          {
+            "decoded_rgb_sha256": "6d5e6dabbd1aa845f7f162550da9e9af0dda56128ef5d55e7dd35c8c20b44086",
+            "frame_index": 70,
+            "pts": 70000
+          }
+        ],
+        "edges": [
+          [
+            61,
+            62,
+            63,
+            64,
+            65,
+            66
+          ],
+          [
+            67,
+            68,
+            69,
+            70,
+            71,
+            72
+          ]
+        ],
+        "frames": [
+          64,
+          70
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          64000,
+          70000
+        ],
+        "response": 0.6395415785757294
+      },
+      "first_pts": 0,
+      "group": 7,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 62,
+          "pane_changes": [
+            [
+              33,
+              0
+            ],
+            [
+              34,
+              0
+            ],
+            [
+              40,
+              0
+            ],
+            [
+              41,
+              0
+            ],
+            [
+              42,
+              0
+            ],
+            [
+              64,
+              0
+            ],
+            [
+              70,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "3d6927ed8699f16f48e3424691ac3a14ea9709a3e0072aa87f1e83cbd7dd30af",
+                "frame_index": 63,
+                "pts": 63000
+              },
+              {
+                "decoded_rgb_sha256": "4f5f539e56c42a72f3a9ab4381f471c8eb84ab20ec0fffe222d896e89f49d3bc",
+                "frame_index": 67,
+                "pts": 67000
+              },
+              {
+                "decoded_rgb_sha256": "6d5e6dabbd1aa845f7f162550da9e9af0dda56128ef5d55e7dd35c8c20b44086",
+                "frame_index": 70,
+                "pts": 70000
+              }
+            ],
+            "edges": [
+              [
+                61,
+                62,
+                63,
+                64,
+                65,
+                66
+              ],
+              [
+                67,
+                68,
+                69,
+                70,
+                71,
+                72
+              ]
+            ],
+            "frames": [
+              64,
+              70
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              64000,
+              70000
+            ],
+            "response": 0.6395415785757294
+          },
+          "scheduled": 62
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 27,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 27
+        }
+      },
+      "opposite": null,
+      "participants": [
+        7,
+        2
+      ],
+      "same": null,
+      "sha256": "f43bbf83d8526ede521788adad5e1a31a9f21d6c5b1615ea2a83b7539b76da03",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            64,
+            70
+          ],
+          "pane": "left"
+        }
+      ]
+    },
+    {
+      "condition": "right_only",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "bbcd94e0a32ab345fdfadeef4edb8e33c65baf824e355c7c1a85ebbefe8ae04a",
+            "frame_index": 66,
+            "pts": 66000
+          },
+          {
+            "decoded_rgb_sha256": "ecc487caac5c5e763fbf72b7bdefe9c9a4650dee1a6c9768dac2045dc6face0b",
+            "frame_index": 71,
+            "pts": 71000
+          },
+          {
+            "decoded_rgb_sha256": "7f221228e3af6cb0eda3d3b43d87e834fb3ca3c2241bd2ae827eceb596745548",
+            "frame_index": 75,
+            "pts": 75000
+          }
+        ],
+        "edges": [
+          [
+            64,
+            65,
+            66,
+            67,
+            68,
+            69
+          ],
+          [
+            72,
+            73,
+            74,
+            75,
+            76,
+            77
+          ]
+        ],
+        "frames": [
+          67,
+          75
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          67000,
+          75000
+        ],
+        "response": 0.665537800285456
+      },
+      "first_pts": 0,
+      "group": 7,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 55,
+          "pane_changes": [
+            [
+              33,
+              0
+            ],
+            [
+              34,
+              0
+            ],
+            [
+              40,
+              0
+            ],
+            [
+              41,
+              0
+            ],
+            [
+              42,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 55
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 34,
+          "pane_changes": [
+            [
+              56,
+              0
+            ],
+            [
+              67,
+              0
+            ],
+            [
+              75,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "bbcd94e0a32ab345fdfadeef4edb8e33c65baf824e355c7c1a85ebbefe8ae04a",
+                "frame_index": 66,
+                "pts": 66000
+              },
+              {
+                "decoded_rgb_sha256": "ecc487caac5c5e763fbf72b7bdefe9c9a4650dee1a6c9768dac2045dc6face0b",
+                "frame_index": 71,
+                "pts": 71000
+              },
+              {
+                "decoded_rgb_sha256": "7f221228e3af6cb0eda3d3b43d87e834fb3ca3c2241bd2ae827eceb596745548",
+                "frame_index": 75,
+                "pts": 75000
+              }
+            ],
+            "edges": [
+              [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69
+              ],
+              [
+                72,
+                73,
+                74,
+                75,
+                76,
+                77
+              ]
+            ],
+            "frames": [
+              67,
+              75
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              67000,
+              75000
+            ],
+            "response": 0.665537800285456
+          },
+          "scheduled": 34
+        }
+      },
+      "opposite": null,
+      "participants": [
+        7,
+        2
+      ],
+      "same": null,
+      "sha256": "553944af01164c72c8a530efd1b9f5da94ef19de5b8bd85dc943e8333740d267",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            67,
+            75
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "ordinary",
+      "first": null,
+      "first_pts": 0,
+      "group": 7,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 54,
+          "pane_changes": [
+            [
+              33,
+              0
+            ],
+            [
+              34,
+              0
+            ],
+            [
+              40,
+              0
+            ],
+            [
+              41,
+              0
+            ],
+            [
+              42,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 54
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 27,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 27
+        }
+      },
+      "opposite": null,
+      "participants": [
+        7,
+        2
+      ],
+      "same": null,
+      "sha256": "d02e0ce12bb14c404986af8e7547961fc3975959d0a1a307af0ebc5f662210f9",
+      "time_base": "1/30000",
+      "truth": []
+    },
+    {
+      "condition": "ordinary_cuts",
+      "first": null,
+      "first_pts": 0,
+      "group": 7,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        }
+      },
+      "opposite": null,
+      "participants": [
+        7,
+        2
+      ],
+      "same": null,
+      "sha256": "d00a8f95f3be1a6a782cfd949e3328420c183256e3a4b9e35c6370bf31253b5c",
+      "time_base": "1/30000",
+      "truth": []
+    },
+    {
+      "condition": "left_then_right",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "e8a363ab2d0adc016977ff8351c366e12b79606732ed16d423902490c96e3524",
+            "frame_index": 96,
+            "pts": 96000
+          },
+          {
+            "decoded_rgb_sha256": "8dd3d2b5f1c0cc96a85badb34762db2fadaf66005764e67f6946ffe5972ecd21",
+            "frame_index": 102,
+            "pts": 102000
+          },
+          {
+            "decoded_rgb_sha256": "452d0b971879450f1468159d72e47560449bc404f038da8d2ec6ba544f1d76b8",
+            "frame_index": 105,
+            "pts": 105000
+          }
+        ],
+        "edges": [
+          [
+            94,
+            95,
+            96,
+            97,
+            98,
+            99
+          ],
+          [
+            102,
+            103,
+            104,
+            105,
+            106,
+            107
+          ]
+        ],
+        "frames": [
+          97,
+          105
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          97000,
+          105000
+        ],
+        "response": 0.6261328210871165
+      },
+      "first_pts": 0,
+      "group": 8,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 51,
+          "pane_changes": [
+            [
+              70,
+              0
+            ],
+            [
+              78,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "db5ff2255d23914ec6a7f92bb40145e690153de726900d9c97da2401507a7860",
+                "frame_index": 69,
+                "pts": 69000
+              },
+              {
+                "decoded_rgb_sha256": "71debf1917b67fbb361b266272c525148e6c72b9d25d1e01b88749e146ba01ed",
+                "frame_index": 74,
+                "pts": 74000
+              },
+              {
+                "decoded_rgb_sha256": "8c4abc0835d3d4e10532e20afd3aa757cd78ee2e5adaaf08c7a6144ec9690704",
+                "frame_index": 78,
+                "pts": 78000
+              }
+            ],
+            "edges": [
+              [
+                67,
+                68,
+                69,
+                70,
+                71,
+                72
+              ],
+              [
+                75,
+                76,
+                77,
+                78,
+                79,
+                80
+              ]
+            ],
+            "frames": [
+              70,
+              78
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              70000,
+              78000
+            ],
+            "response": 0.5904272902628163
+          },
+          "scheduled": 51
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 73,
+          "pane_changes": [
+            [
+              85,
+              0
+            ],
+            [
+              96,
+              0
+            ],
+            [
+              97,
+              0
+            ],
+            [
+              105,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "e8a363ab2d0adc016977ff8351c366e12b79606732ed16d423902490c96e3524",
+                "frame_index": 96,
+                "pts": 96000
+              },
+              {
+                "decoded_rgb_sha256": "8dd3d2b5f1c0cc96a85badb34762db2fadaf66005764e67f6946ffe5972ecd21",
+                "frame_index": 102,
+                "pts": 102000
+              },
+              {
+                "decoded_rgb_sha256": "452d0b971879450f1468159d72e47560449bc404f038da8d2ec6ba544f1d76b8",
+                "frame_index": 105,
+                "pts": 105000
+              }
+            ],
+            "edges": [
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ],
+              [
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            ],
+            "frames": [
+              97,
+              105
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              97000,
+              105000
+            ],
+            "response": 0.6261328210871165
+          },
+          "scheduled": 73
+        }
+      },
+      "opposite": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "db5ff2255d23914ec6a7f92bb40145e690153de726900d9c97da2401507a7860",
+            "frame_index": 69,
+            "pts": 69000
+          },
+          {
+            "decoded_rgb_sha256": "71debf1917b67fbb361b266272c525148e6c72b9d25d1e01b88749e146ba01ed",
+            "frame_index": 74,
+            "pts": 74000
+          },
+          {
+            "decoded_rgb_sha256": "8c4abc0835d3d4e10532e20afd3aa757cd78ee2e5adaaf08c7a6144ec9690704",
+            "frame_index": 78,
+            "pts": 78000
+          }
+        ],
+        "edges": [
+          [
+            67,
+            68,
+            69,
+            70,
+            71,
+            72
+          ],
+          [
+            75,
+            76,
+            77,
+            78,
+            79,
+            80
+          ]
+        ],
+        "frames": [
+          70,
+          78
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          70000,
+          78000
+        ],
+        "response": 0.5904272902628163
+      },
+      "participants": [
+        8,
+        3
+      ],
+      "same": null,
+      "sha256": "f7b573a775418cdfc602689c0145d10072a3c511dc199a59701255b953aa4cc8",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            70,
+            78
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            97,
+            105
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "right_then_left",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "335fc8acee38e2d7359cf105bad9a4d576a21279f9fbef881677579f6898c812",
+            "frame_index": 63,
+            "pts": 63000
+          },
+          {
+            "decoded_rgb_sha256": "e6151eccd539db7177ba4bb2865ec7b5d4b987e17d0815a6b18a437d255855a3",
+            "frame_index": 67,
+            "pts": 67000
+          },
+          {
+            "decoded_rgb_sha256": "adb6257d4a34b791fc57a8575b8555bd632b8dd76c4358143821e3110a4979d9",
+            "frame_index": 70,
+            "pts": 70000
+          }
+        ],
+        "edges": [
+          [
+            61,
+            62,
+            63,
+            64,
+            65,
+            66
+          ],
+          [
+            67,
+            68,
+            69,
+            70,
+            71,
+            72
+          ]
+        ],
+        "frames": [
+          64,
+          70
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          64000,
+          70000
+        ],
+        "response": 0.6218308281916232
+      },
+      "first_pts": 0,
+      "group": 8,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 45,
+          "pane_changes": [
+            [
+              92,
+              0
+            ],
+            [
+              98,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "6110b2f8bb7b8f99271e0f0833bdf8a68293250962b945bbdd7f7eef65459212",
+                "frame_index": 91,
+                "pts": 91000
+              },
+              {
+                "decoded_rgb_sha256": "20aa39de34a1818d3395d06fcb7f9fb622126c2f310bc4c4dde050ebaadb3582",
+                "frame_index": 95,
+                "pts": 95000
+              },
+              {
+                "decoded_rgb_sha256": "b0ad744d81f2fce203993bf8b71f00fb87aa3dde5774e852a36ad009ca2067d7",
+                "frame_index": 98,
+                "pts": 98000
+              }
+            ],
+            "edges": [
+              [
+                89,
+                90,
+                91,
+                92,
+                93,
+                94
+              ],
+              [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100
+              ]
+            ],
+            "frames": [
+              92,
+              98
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              92000,
+              98000
+            ],
+            "response": 0.5165009037559335
+          },
+          "scheduled": 45
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 80,
+          "pane_changes": [
+            [
+              64,
+              0
+            ],
+            [
+              70,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "335fc8acee38e2d7359cf105bad9a4d576a21279f9fbef881677579f6898c812",
+                "frame_index": 63,
+                "pts": 63000
+              },
+              {
+                "decoded_rgb_sha256": "e6151eccd539db7177ba4bb2865ec7b5d4b987e17d0815a6b18a437d255855a3",
+                "frame_index": 67,
+                "pts": 67000
+              },
+              {
+                "decoded_rgb_sha256": "adb6257d4a34b791fc57a8575b8555bd632b8dd76c4358143821e3110a4979d9",
+                "frame_index": 70,
+                "pts": 70000
+              }
+            ],
+            "edges": [
+              [
+                61,
+                62,
+                63,
+                64,
+                65,
+                66
+              ],
+              [
+                67,
+                68,
+                69,
+                70,
+                71,
+                72
+              ]
+            ],
+            "frames": [
+              64,
+              70
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              64000,
+              70000
+            ],
+            "response": 0.6218308281916232
+          },
+          "scheduled": 80
+        }
+      },
+      "opposite": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "6110b2f8bb7b8f99271e0f0833bdf8a68293250962b945bbdd7f7eef65459212",
+            "frame_index": 91,
+            "pts": 91000
+          },
+          {
+            "decoded_rgb_sha256": "20aa39de34a1818d3395d06fcb7f9fb622126c2f310bc4c4dde050ebaadb3582",
+            "frame_index": 95,
+            "pts": 95000
+          },
+          {
+            "decoded_rgb_sha256": "b0ad744d81f2fce203993bf8b71f00fb87aa3dde5774e852a36ad009ca2067d7",
+            "frame_index": 98,
+            "pts": 98000
+          }
+        ],
+        "edges": [
+          [
+            89,
+            90,
+            91,
+            92,
+            93,
+            94
+          ],
+          [
+            95,
+            96,
+            97,
+            98,
+            99,
+            100
+          ]
+        ],
+        "frames": [
+          92,
+          98
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          92000,
+          98000
+        ],
+        "response": 0.5165009037559335
+      },
+      "participants": [
+        8,
+        3
+      ],
+      "same": null,
+      "sha256": "a8060bddc412f9592ebc3f272b9bbb583294ff7ad1193be9b9fc0ca841db9045",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            92,
+            98
+          ],
+          "pane": "left"
+        },
+        {
+          "frames": [
+            64,
+            70
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "left_only",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "f8a89ce03405e1d2d1354d7b2a91d97300288683b0fcdb88ad3700a92f6ed7f6",
+            "frame_index": 91,
+            "pts": 91000
+          },
+          {
+            "decoded_rgb_sha256": "c6ecbb26b67202637357779de135784bcd82fba01444021d723d8eae785d5e31",
+            "frame_index": 95,
+            "pts": 95000
+          },
+          {
+            "decoded_rgb_sha256": "e0c11a920c1daa0aca7d960ddb844f79186265f10e7d8c38c29b477ad1d3cd0f",
+            "frame_index": 98,
+            "pts": 98000
+          }
+        ],
+        "edges": [
+          [
+            89,
+            90,
+            91,
+            92,
+            93,
+            94
+          ],
+          [
+            95,
+            96,
+            97,
+            98,
+            99,
+            100
+          ]
+        ],
+        "frames": [
+          92,
+          98
+        ],
+        "pane": "left",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          92000,
+          98000
+        ],
+        "response": 0.5160681210141285
+      },
+      "first_pts": 0,
+      "group": 8,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": true,
+          "measured": 45,
+          "pane_changes": [
+            [
+              92,
+              0
+            ],
+            [
+              98,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "f8a89ce03405e1d2d1354d7b2a91d97300288683b0fcdb88ad3700a92f6ed7f6",
+                "frame_index": 91,
+                "pts": 91000
+              },
+              {
+                "decoded_rgb_sha256": "c6ecbb26b67202637357779de135784bcd82fba01444021d723d8eae785d5e31",
+                "frame_index": 95,
+                "pts": 95000
+              },
+              {
+                "decoded_rgb_sha256": "e0c11a920c1daa0aca7d960ddb844f79186265f10e7d8c38c29b477ad1d3cd0f",
+                "frame_index": 98,
+                "pts": 98000
+              }
+            ],
+            "edges": [
+              [
+                89,
+                90,
+                91,
+                92,
+                93,
+                94
+              ],
+              [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100
+              ]
+            ],
+            "frames": [
+              92,
+              98
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              92000,
+              98000
+            ],
+            "response": 0.5160681210141285
+          },
+          "scheduled": 45
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 78,
+          "pane_changes": [
+            [
+              85,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 78
+        }
+      },
+      "opposite": null,
+      "participants": [
+        8,
+        3
+      ],
+      "same": null,
+      "sha256": "a41d87915241923aafbe2d64e16f499109a47d8462e387bacbfc76e7b277e354",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            92,
+            98
+          ],
+          "pane": "left"
+        }
+      ]
+    },
+    {
+      "condition": "right_only",
+      "first": {
+        "anchors": [
+          {
+            "decoded_rgb_sha256": "400364cfd988cae9679b0f1b2043f15dbd7ecb4384a184c6ff90219f4d0c6a5e",
+            "frame_index": 96,
+            "pts": 96000
+          },
+          {
+            "decoded_rgb_sha256": "64de1827e63c849eb8a36689c3de11601312f5ff6a53e253a9186024c905ea68",
+            "frame_index": 102,
+            "pts": 102000
+          },
+          {
+            "decoded_rgb_sha256": "62b1a2754cbf2b75e719754ddd20847ee325742294fb906b723c8ee64e899949",
+            "frame_index": 105,
+            "pts": 105000
+          }
+        ],
+        "edges": [
+          [
+            94,
+            95,
+            96,
+            97,
+            98,
+            99
+          ],
+          [
+            102,
+            103,
+            104,
+            105,
+            106,
+            107
+          ]
+        ],
+        "frames": [
+          97,
+          105
+        ],
+        "pane": "right",
+        "pane_tiles": [
+          0,
+          0
+        ],
+        "pts": [
+          97000,
+          105000
+        ],
+        "response": 0.6053709472413875
+      },
+      "first_pts": 0,
+      "group": 8,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 39,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 39
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 73,
+          "pane_changes": [
+            [
+              85,
+              0
+            ],
+            [
+              96,
+              0
+            ],
+            [
+              97,
+              0
+            ],
+            [
+              105,
+              0
+            ]
+          ],
+          "proposal": {
+            "anchors": [
+              {
+                "decoded_rgb_sha256": "400364cfd988cae9679b0f1b2043f15dbd7ecb4384a184c6ff90219f4d0c6a5e",
+                "frame_index": 96,
+                "pts": 96000
+              },
+              {
+                "decoded_rgb_sha256": "64de1827e63c849eb8a36689c3de11601312f5ff6a53e253a9186024c905ea68",
+                "frame_index": 102,
+                "pts": 102000
+              },
+              {
+                "decoded_rgb_sha256": "62b1a2754cbf2b75e719754ddd20847ee325742294fb906b723c8ee64e899949",
+                "frame_index": 105,
+                "pts": 105000
+              }
+            ],
+            "edges": [
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ],
+              [
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            ],
+            "frames": [
+              97,
+              105
+            ],
+            "pane_tiles": [
+              0,
+              0
+            ],
+            "pts": [
+              97000,
+              105000
+            ],
+            "response": 0.6053709472413875
+          },
+          "scheduled": 73
+        }
+      },
+      "opposite": null,
+      "participants": [
+        8,
+        3
+      ],
+      "same": null,
+      "sha256": "01e5ebbf07a0c93249f021c9e8c8b00cbf9dd178fc6036a536951ec945a830fc",
+      "time_base": "1/30000",
+      "truth": [
+        {
+          "frames": [
+            97,
+            105
+          ],
+          "pane": "right"
+        }
+      ]
+    },
+    {
+      "condition": "ordinary",
+      "first": null,
+      "first_pts": 0,
+      "group": 8,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 39,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 39
+        },
+        "right_guarded": {
+          "complete_pair": true,
+          "measured": 78,
+          "pane_changes": [
+            [
+              85,
+              0
+            ]
+          ],
+          "proposal": null,
+          "scheduled": 78
+        }
+      },
+      "opposite": null,
+      "participants": [
+        8,
+        3
+      ],
+      "same": null,
+      "sha256": "c6267e67f1d5e0fb6ddd28c1041d49fb0e3c853045c25a378bf7e1f110b58731",
+      "time_base": "1/30000",
+      "truth": []
+    },
+    {
+      "condition": "ordinary_cuts",
+      "first": null,
+      "first_pts": 0,
+      "group": 8,
+      "methods": {
+        "left_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        },
+        "right_guarded": {
+          "complete_pair": false,
+          "measured": 0,
+          "pane_changes": [],
+          "proposal": null,
+          "scheduled": 12
+        }
+      },
+      "opposite": null,
+      "participants": [
+        8,
+        3
+      ],
+      "same": null,
+      "sha256": "20dd8ddcc5ddeef4347d6e31ee017c3adbf3078e4fe759314681848e7a2b6ae0",
+      "time_base": "1/30000",
+      "truth": []
+    }
+  ],
+  "schema": "chipmunk.video-face-opposite-pane/1",
+  "weights": {
+    "face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+    "face_recognition_sface_2021dec.onnx": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79"
+  }
+}

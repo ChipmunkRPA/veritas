@@ -1,0 +1,25 @@
+{
+  "face_geometry_sha256": "b7a243c7955698efda51a2f78f10703d53aa49c592881195af44b99dbbff7c85",
+  "face_geometry_weights_sha256": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+  "ordinary_extra_plan_sha256": "83c66c872d9ddc33a6f9ddf902fec635411765a78c8d96de1a4c1e4b42132a50",
+  "prior_rosters": {
+    "codec_stress_roster.json": "0ab4c837497e7d5f2c4ba890f7a4c1830f448d7b27f57e2e5a11aa28f4a35cc8",
+    "freeze.json": "af7feee3a877e09414ff92892b8af923c2f2441a4007596eacf4910bd6e89ff3"
+  },
+  "protocol": {
+    "agreement": "Require both visual cues at the same frame for this arm. Report each cue independently as well. The cues use shared geometry and motion support; their results are not independent probabilities.",
+    "calibration": "Lock the third-largest ordinary development maximum with arm-specific floors. Report isolated and joint signals. Every actual alert on ordinary editing or untouched footage counts against specificity.",
+    "deformation": "At mouth-shell and matched reference points, measure the discrepancy between the flow of each point and opposite points a few pixels away. Use the worse of horizontal and vertical normalized bending, conditioned on stable flow and comparable local texture.",
+    "gates": "At least four strict LivePortrait hits in three groups, the one strict MuseTalk hit, at least 70% measured each neural family and ordinary controls, at most two ordinary alerts and none on untouched, recompressed, hard-cut, dubbed, silent or cadence-altered controls. Require exact native interval IoU of at least one half.",
+    "ordinary_extra": "Use the first planned offset of four previously acquired public speech sources outside GRID/Lombard. Create a common H.264 25 fps delivery and remux unchanged pictures with time-shifted or silent audio. Separately retime lossless pictures with fixed alternating 32 and 48 ms presentation steps.",
+    "scope": "Single-upload picture comparison without previous media, sound, text, model/renderer output, or prior region selections. A candidate would contribute zero AI confidence before new independent transfer.",
+    "transport": "Estimate forward and return flow from low-pass neighboring native pictures in eye-normalized coordinates. At pixels with verified geometry and a stable round trip, compare the signed fine-detail vectors transported with this flow. Compare mouth skin with skin above and beside it. Fine detail is not used for the flow fit.",
+    "window": "Require verified upright native pictures, one shot, frame steps 22\u201355 ms near that clip\u2019s median, and at least 80% support in each flank and the selected 8, 12, 16 or 20-picture window. Select the greatest positive core difference against both five-frame flanks. Commit before, first, during and first following picture/crop hashes."
+  },
+  "schema": "chipmunk.video-mouth-motion-transport/1",
+  "source_count": {
+    "codec_stress": 34,
+    "development": 56,
+    "held": 146
+  }
+}

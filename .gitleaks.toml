@@ -211,3 +211,13 @@ regexes = [
   '''^tokenizer\.json": "(?:c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539|2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf)"$''',
   '''^tokenizer_config\.json": "(?:c91efca15ceff6e9ee9424db58a6f59cd41294e550a86cbd07e3c1fb500b34f9|d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432)"$''',
 ]
+
+[[rules.allowlists]]
+description = "Verified masked-word and incumbent writing tokenizer file SHA-256 values"
+condition = "AND"
+paths = ['''(^|/)backend/scripts/writing_bidirectional_transfer\.py$''', '''(^|/)docs/evaluation-panels/writing-bidirectional-transfer-2026-11-13\.json$''']
+regexTarget = "match"
+regexes = [
+  '''^tokenizer\.json": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf"$''',
+  '''^tokenizer_config\.json": "(?:06e673dd9251e2b2ba8a6e2fd15bd4f57de436ed43f02e757f20380952185080|d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432)"$''',
+]

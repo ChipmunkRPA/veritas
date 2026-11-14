@@ -38,6 +38,12 @@ includes separate readers for acoustic recovery and classifier localization.
 The readers recount published scalar records. Native replay additionally
 requires the frozen source audio and the retained local checkpoints.
 
+The latest single-upload comparisons cover [localized image residuals](image-residual-third-order-transfer-2026-11-13.md),
+[motion around the mouth](video-mouth-motion-transport-2026-11-13.md),
+[speech responses in overlapping windows](audio-context-frame-transfer-2026-11-13.md),
+and [word prediction in edited passages](writing-bidirectional-transfer-2026-11-13.md).
+Their local measurements and portable readers are available for independent review.
+
 The [public audio bandwidth replay](audio-bandwidth-return-2026-11-13.md#replay-from-public-source-ranges)
 downloads about 12.3 MB from the AMI publisher and verifies the exact source
 intervals and all 192 published measurements. The [duration transfer replay](audio-bandwidth-return-2026-11-13.md#transfer-to-eight-and-twelve-seconds)

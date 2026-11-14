@@ -175,6 +175,13 @@ are not public screening promises or calibrated population probabilities.
   across both runs. The wider search is a local opt-in. The source-separated
   test fell short of the confirmation gate. Both ranges and coverage
   replayed through prepaid local analysis, JSON, PDF and signed originals.
+- [Moving face positions in the first H.264 scan](video-face-moving-shortlist-2026-11-13.md)
+  recovered four exact intervals on development clips with zero extra
+  flags on 101 unique ordinary deliveries. It added no locations or
+  flags in the separate 56-file confirmation and remains a local opt-in.
+  The customer flow verified one recovered range and its six images
+  through simulated prepayment, JSON, PDF and signed replay. The held
+  misses had competing face detections around the authored boundaries.
 - [JPEG75 and JPEG85 detail loss](image-jpeg-detail-quality-transfer-2026-11-13.md)
   adds 19 useful local blur ranges per format, without adding any highlight
   on 306 controls per format. It requires an earlier matching copy and

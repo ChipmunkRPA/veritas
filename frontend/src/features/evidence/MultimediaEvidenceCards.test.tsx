@@ -363,10 +363,11 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByRole('article')).toBeNull()
   })
 
-  it('distinguishes native motion inputs from face samples in the brief HEVC range', () => {
-    const set = { ...structuredClone(video), version: 'video-evidence-21' }
+  it.each([['video-evidence-21', 'face-short-return/9'], ['video-evidence-28', 'face-short-return/15']])(
+    'distinguishes native motion inputs from face samples in %s', (version, method) => {
+    const set = { ...structuredClone(video), version }
     const packet = set.packets[0]
-    packet.face_return = { method: 'face-short-return/9', start_stream_s: 2.066667, end_stream_s: 2.266667,
+    packet.face_return = { method, start_stream_s: 2.066667, end_stream_s: 2.266667,
       frame_inputs: Array.from({ length: 12 }, (_, i) => ({ frame_index: 59 + i })),
       scene_frame_inputs: Array.from({ length: 120 }, (_, frame_index) => ({ frame_index })),
       edges: { entry: { frame_indices: [59, 60, 61, 62, 63, 64] }, exit: { frame_indices: [65, 66, 67, 68, 69, 70] } } }

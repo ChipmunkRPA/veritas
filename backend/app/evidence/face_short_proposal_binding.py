@@ -13,9 +13,11 @@ WEBM_METHOD = "face-short-return/12"
 WEBM_ENCODING = webm.WEBM_ENCODING
 AVC_METHOD = "face-short-return/13"
 SECOND_AVC_METHOD = "face-short-return/14"
+MOVING_AVC_METHOD = "face-short-return/15"
 AVC_ENCODING = ("h264", "yuv420p", "avc1")
 SOURCE_PROFILES = {METHOD: (paired.ENCODING, "mp4"), WEBM_METHOD: (WEBM_ENCODING, "webm"),
-                   AVC_METHOD: (AVC_ENCODING, "mp4"), SECOND_AVC_METHOD: (AVC_ENCODING, "mp4")}
+                   AVC_METHOD: (AVC_ENCODING, "mp4"), SECOND_AVC_METHOD: (AVC_ENCODING, "mp4"),
+                   MOVING_AVC_METHOD: (AVC_ENCODING, "mp4")}
 METHODS = frozenset(SOURCE_PROFILES)
 POINT = 0.10
 ANCHOR_SAMPLES = tuple(range(4, 120, 10))
@@ -112,7 +114,7 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
         and stop in edges
         and type(start) is int
         and type(stop) is int
-        and stop - start in (SECOND_AVC_DURATIONS if record["method"] == SECOND_AVC_METHOD else DURATIONS),
+        and stop - start in (SECOND_AVC_DURATIONS if record["method"] in {SECOND_AVC_METHOD, MOVING_AVC_METHOD} else DURATIONS),
         "Brief face proposal has an invalid edge shortlist",
     )
     planned = face_schedule(edges)

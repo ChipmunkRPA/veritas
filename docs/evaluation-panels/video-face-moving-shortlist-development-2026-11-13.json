@@ -1,0 +1,8356 @@
+{
+  "freeze": {
+    "schema": "chipmunk.video-face-moving-shortlist/1",
+    "panel": "development",
+    "design": {
+      "roles": [
+        "original",
+        "two_swaps",
+        "tandem_two_swaps",
+        "swap_then_jump",
+        "light_then_swap",
+        "same_source_cuts",
+        "cross_recording_cuts"
+      ],
+      "min_gains": 3,
+      "min_groups": 2,
+      "max_ordinary_added": 1,
+      "max_cut_added": 0,
+      "max_wrong": 1,
+      "route": "Only clips without an existing brief face range. Preserve all existing face ranges.",
+      "point": 0.1,
+      "max_edges": 16,
+      "max_scheduled": 84
+    },
+    "weights": {
+      "face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+      "face_recognition_sface_2021dec.onnx": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79"
+    },
+    "inputs": {
+      "video-face-distinct-avc-retained-2026-11-13.json": "fe3b055cefaf4194c21669b765bdd99d7a2c9b67b4c2cae7c297a0e40e315ea5",
+      "video-face-distinct-avc-source-separated-2026-11-13.json": "ad6d950f821197f65838649d48c6bab16c67ad400753b3c5cc2169283871d003",
+      "prior_source_plan": "a4277282b974225f1e3ee44a25da37a5163cea8361c414b49005c5ba3d9873d8",
+      "video-face-two-returns-hd-2026-11-12": "767a10820b2cc13348b9d1aaeb57a53c8c4acc38d81656733c4f7f5555d2c8db",
+      "video-face-hd-retry-scene-challenge-2026-11-12": "bba120480ff4afda17bbcb8d7e13a2c7a3ceac8faa617fbba2f7463f48737dbc",
+      "prior_media": "ced6b119a03be9ed9ea983e7d0f5a948ec20570471a929eb1f6009c756d9167a"
+    },
+    "methods": {
+      "video_face_moving_shortlist.py": "829c48c9c078640880119c750d0692155e947e899e14785ab7484a3071f9ca47",
+      "face_paired_edge.py": "6ed182fdf5d1bc6e809afdeef25e0b13c03453bfaf6a4ba1f67273b527f041a0",
+      "face_short_proposal.py": "303d98289717cff2753c7065c170932449a93f83cb68164d19a92796f3647cb2",
+      "face_appearance.py": "32f7e964702c0035168437b9eab45159612bc930c632d8e453839b2dd6954391",
+      "video_face_distinct_avc.py": "94dc2cb56fe2e1efa229c4f89be6af48b4c4e2901c51803dd9d00be72092abbb"
+    }
+  },
+  "rows": [
+    {
+      "group": 1,
+      "condition": "original",
+      "sha256": "1cc709f016b2c89fd2bb27fccfdb3555e98cc6150b32955d3cbf814b4fd61686",
+      "truth": [],
+      "index": 1,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "tandem_original",
+      "sha256": "1712f23105a621f644d19babea309f24f18949733425bcd3f499f3788e340f10",
+      "truth": [],
+      "index": 2,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "two_swaps",
+      "sha256": "58488a3dbb007606d4971bf6358261355633d32abcec9502df4e0915cf0c138c",
+      "truth": [
+        [
+          62,
+          68
+        ],
+        [
+          90,
+          98
+        ]
+      ],
+      "index": 3,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        62,
+        68
+      ],
+      "prior": [
+        [
+          62,
+          68
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "tandem_two_swaps",
+      "sha256": "fb9f05af92f76e7634a0045b102caaeab9d1df19ec91e1d5b0e592f6a6b4d062",
+      "truth": [
+        [
+          62,
+          68
+        ],
+        [
+          90,
+          98
+        ]
+      ],
+      "index": 4,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        62,
+        68
+      ],
+      "prior": [
+        [
+          62,
+          68
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "swap_then_jump",
+      "sha256": "ce7d7a915016dddfa39c206b9bcc19c5b1f90228c95cb9d396123192ed6f594b",
+      "truth": [
+        [
+          62,
+          68
+        ]
+      ],
+      "index": 5,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        62,
+        68
+      ],
+      "prior": [
+        [
+          62,
+          68
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "light_then_swap",
+      "sha256": "52cfc8edc6bc767bfc17aaba572949a320ff168ef6c2ad70273362be04cbe413",
+      "truth": [
+        [
+          90,
+          98
+        ]
+      ],
+      "index": 6,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            90,
+            98
+          ],
+          "scheduled": 24,
+          "measured": 24,
+          "choice": {
+            "frames": [
+              90,
+              98
+            ],
+            "response": 0.7399148144929447,
+            "pts": [
+              90000,
+              98000
+            ],
+            "edge_frames": [
+              [
+                87,
+                88,
+                89,
+                90,
+                91,
+                92
+              ],
+              [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100
+              ]
+            ],
+            "anchors": [
+              {
+                "frame": 89,
+                "pts": 89000,
+                "rgb_sha256": "3e91753f41fd19268fd0730b356c2dce2e56fafffd352186ae419eaaa3b658d9"
+              },
+              {
+                "frame": 94,
+                "pts": 94000,
+                "rgb_sha256": "522d546dfd75df68bdfc53fa53de4099bbf447a30837203e9e1b5d8b8350d376"
+              },
+              {
+                "frame": 98,
+                "pts": 98000,
+                "rgb_sha256": "31506eb4ee81c6a32ad741849b9d65bb5f7e4c757c7ac34c9406c88263a641ed"
+              }
+            ]
+          }
+        },
+        "moving": {
+          "edges": [
+            90,
+            98
+          ],
+          "scheduled": 24,
+          "measured": 24,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            90,
+            98
+          ],
+          "scheduled": 24,
+          "measured": 24,
+          "choice": {
+            "frames": [
+              90,
+              98
+            ],
+            "response": 0.7399148144929447,
+            "pts": [
+              90000,
+              98000
+            ],
+            "edge_frames": [
+              [
+                87,
+                88,
+                89,
+                90,
+                91,
+                92
+              ],
+              [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100
+              ]
+            ],
+            "anchors": [
+              {
+                "frame": 89,
+                "pts": 89000,
+                "rgb_sha256": "3e91753f41fd19268fd0730b356c2dce2e56fafffd352186ae419eaaa3b658d9"
+              },
+              {
+                "frame": 94,
+                "pts": 94000,
+                "rgb_sha256": "522d546dfd75df68bdfc53fa53de4099bbf447a30837203e9e1b5d8b8350d376"
+              },
+              {
+                "frame": 98,
+                "pts": 98000,
+                "rgb_sha256": "31506eb4ee81c6a32ad741849b9d65bb5f7e4c757c7ac34c9406c88263a641ed"
+              }
+            ]
+          }
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "same_source_cuts",
+      "sha256": "1e9a524685decb591cf9ceff8d8ad36ed268c2760c2b61184139c9f62d39779a",
+      "truth": [],
+      "index": 7,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "cross_recording_cuts",
+      "sha256": "67c1e5b1159d3e4ef293c36b51204d5f5e7c716e2491ee4e5bfd28189457a8e8",
+      "truth": [],
+      "index": 8,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            93,
+            100
+          ],
+          "scheduled": 23,
+          "measured": 23,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "original",
+      "sha256": "1ad3bc257ff21c43f64cfef1354b2a80472d108ff8c0fa40d00246514dfd2caf",
+      "truth": [],
+      "index": 9,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            76,
+            90,
+            13,
+            92
+          ],
+          "scheduled": 29,
+          "measured": 29,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            76,
+            90,
+            13
+          ],
+          "scheduled": 28,
+          "measured": 28,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            76,
+            90,
+            13
+          ],
+          "scheduled": 28,
+          "measured": 28,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "tandem_original",
+      "sha256": "01d771d721573d6214f92d571259bf2ddd0e89744817796129d799dcec3115fc",
+      "truth": [],
+      "index": 10,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            90,
+            76,
+            13,
+            92
+          ],
+          "scheduled": 29,
+          "measured": 29,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            90,
+            76,
+            13
+          ],
+          "scheduled": 28,
+          "measured": 28,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            90,
+            76,
+            13
+          ],
+          "scheduled": 28,
+          "measured": 28,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "two_swaps",
+      "sha256": "ddc2fca49f819823f38c99c54fea215848750fdf566a4d3bd2fa0f6a19520c58",
+      "truth": [
+        [
+          67,
+          75
+        ],
+        [
+          94,
+          100
+        ]
+      ],
+      "index": 11,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        68,
+        76
+      ],
+      "prior": [
+        [
+          71,
+          95
+        ],
+        [
+          68,
+          76
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "tandem_two_swaps",
+      "sha256": "d15a439847ca15b0a6835d1688eb8a994204af9f2fa3400ed387b93a46264a91",
+      "truth": [
+        [
+          67,
+          75
+        ],
+        [
+          94,
+          100
+        ]
+      ],
+      "index": 12,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        68,
+        76
+      ],
+      "prior": [
+        [
+          71,
+          95
+        ],
+        [
+          68,
+          76
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "swap_then_jump",
+      "sha256": "24b7a49c2781ba6eb9f17b1977fab27021d93ecfa5dc75b234d1e1ee060fb8e5",
+      "truth": [
+        [
+          67,
+          75
+        ]
+      ],
+      "index": 13,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        68,
+        76
+      ],
+      "prior": [
+        [
+          68,
+          76
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "light_then_swap",
+      "sha256": "ae7c36f136eeb84064a124d084d5f6402a2be374d9b1fbd3e7f184b5c38b6ff6",
+      "truth": [
+        [
+          94,
+          100
+        ]
+      ],
+      "index": 14,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        94,
+        100
+      ],
+      "prior": [
+        [
+          94,
+          100
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "same_source_cuts",
+      "sha256": "86c4272bfeac3920b8f532f55bb005b5d7eb9021ed88049a6bd391571e802207",
+      "truth": [],
+      "index": 15,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            76,
+            13,
+            90,
+            92
+          ],
+          "scheduled": 29,
+          "measured": 29,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            76,
+            13,
+            90,
+            92
+          ],
+          "scheduled": 29,
+          "measured": 29,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            76,
+            13,
+            90,
+            92
+          ],
+          "scheduled": 29,
+          "measured": 29,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "cross_recording_cuts",
+      "sha256": "cefc97ffe5c32f352d04b7b7f19b48970654e2ee4bbc5f2fdbdeee359fa452b2",
+      "truth": [],
+      "index": 16,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            76,
+            98,
+            13,
+            92
+          ],
+          "scheduled": 33,
+          "measured": 33,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            92,
+            76,
+            13
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            92,
+            76,
+            13
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "original",
+      "sha256": "c1cb025fbf98ba194de45f2701b111b60fd8d0450f522a503967008a7b0eb258",
+      "truth": [],
+      "index": 17,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            41,
+            39,
+            38,
+            63,
+            26,
+            37,
+            25,
+            61,
+            94,
+            114,
+            27,
+            98,
+            59,
+            31,
+            95
+          ],
+          "scheduled": 55,
+          "measured": 55,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            41,
+            39,
+            38,
+            63,
+            26,
+            37,
+            25,
+            61,
+            94,
+            114,
+            27,
+            98,
+            59,
+            31
+          ],
+          "scheduled": 55,
+          "measured": 55,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            41,
+            39,
+            38,
+            63,
+            26,
+            37,
+            25,
+            61,
+            94,
+            114,
+            27,
+            98,
+            59,
+            31
+          ],
+          "scheduled": 55,
+          "measured": 55,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "tandem_original",
+      "sha256": "a3b2f8f34eed00b45a132f248395432968221b914def3c9f04dc58563782d63d",
+      "truth": [],
+      "index": 18,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            41,
+            39,
+            38,
+            37,
+            26,
+            63,
+            25,
+            61,
+            27,
+            94,
+            114,
+            98,
+            59,
+            31
+          ],
+          "scheduled": 55,
+          "measured": 55,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            41,
+            39,
+            38,
+            63,
+            37,
+            26,
+            25,
+            61,
+            27,
+            114,
+            94,
+            98,
+            59,
+            31
+          ],
+          "scheduled": 55,
+          "measured": 55,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            41,
+            39,
+            38,
+            63,
+            37,
+            26,
+            25,
+            61,
+            27,
+            114,
+            94,
+            98,
+            59,
+            31
+          ],
+          "scheduled": 55,
+          "measured": 55,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "two_swaps",
+      "sha256": "c4cdca994f99800a53a45f50732dcb60277c842500d25826c9cad51341c66fe0",
+      "truth": [
+        [
+          64,
+          70
+        ],
+        [
+          88,
+          96
+        ]
+      ],
+      "index": 19,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        64,
+        70
+      ],
+      "prior": [
+        [
+          64,
+          70
+        ],
+        [
+          88,
+          96
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "tandem_two_swaps",
+      "sha256": "6bc1719091aa27ed433bc14e540d34cb3f470390b5e3c87d697ee503fa4e728e",
+      "truth": [
+        [
+          64,
+          70
+        ],
+        [
+          88,
+          96
+        ]
+      ],
+      "index": 20,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        64,
+        70
+      ],
+      "prior": [
+        [
+          64,
+          70
+        ],
+        [
+          88,
+          96
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "swap_then_jump",
+      "sha256": "79c71369b1becc4e1a809e9a2dc511bb4998f7c5e2dbccad94f775cafcd07a1d",
+      "truth": [
+        [
+          64,
+          70
+        ]
+      ],
+      "index": 21,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        64,
+        70
+      ],
+      "prior": [
+        [
+          64,
+          70
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "light_then_swap",
+      "sha256": "414f0b48393f7ec7bae4b3d1b8b7237046811c7eed71f4462a9f67e9b1ea7ee1",
+      "truth": [
+        [
+          88,
+          96
+        ]
+      ],
+      "index": 22,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        88,
+        96
+      ],
+      "prior": [
+        [
+          88,
+          96
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "same_source_cuts",
+      "sha256": "755a3869b3b6754f533c0784505e43985e55d01b902a2690252a62916567b0f0",
+      "truth": [],
+      "index": 23,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            70,
+            64,
+            41,
+            39,
+            38,
+            63,
+            26,
+            37,
+            25,
+            61,
+            114,
+            27,
+            98,
+            31,
+            59
+          ],
+          "scheduled": 59,
+          "measured": 59,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            70,
+            64,
+            41,
+            39,
+            38,
+            63,
+            26,
+            37,
+            25,
+            61,
+            114,
+            27,
+            98,
+            31,
+            59
+          ],
+          "scheduled": 59,
+          "measured": 59,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            70,
+            64,
+            41,
+            39,
+            38,
+            63,
+            26,
+            37,
+            25,
+            61,
+            114,
+            27,
+            98,
+            31,
+            59
+          ],
+          "scheduled": 59,
+          "measured": 59,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "cross_recording_cuts",
+      "sha256": "c8fb39f696167579cfba0ce2e60e692507cb052e65dee5f08a27156acfb05b85",
+      "truth": [],
+      "index": 24,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            41,
+            39,
+            38,
+            63,
+            26,
+            37,
+            25,
+            61,
+            114,
+            27,
+            31,
+            59
+          ],
+          "scheduled": 46,
+          "measured": 46,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            41,
+            39,
+            38,
+            37,
+            26,
+            63,
+            25,
+            114,
+            61,
+            27,
+            31,
+            59
+          ],
+          "scheduled": 46,
+          "measured": 46,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            41,
+            39,
+            38,
+            37,
+            26,
+            63,
+            25,
+            114,
+            61,
+            27,
+            31,
+            59
+          ],
+          "scheduled": 46,
+          "measured": 46,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "original",
+      "sha256": "e17adf83eff9df8fc4290d7994b2cc5f5ce7bd97e833aa4d24cc2ecc75f48698",
+      "truth": [],
+      "index": 25,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            46,
+            45,
+            47,
+            58,
+            44
+          ],
+          "scheduled": 26,
+          "measured": 26,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            46,
+            45,
+            47,
+            58,
+            44
+          ],
+          "scheduled": 26,
+          "measured": 26,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            46,
+            45,
+            47,
+            58,
+            44
+          ],
+          "scheduled": 26,
+          "measured": 26,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "tandem_original",
+      "sha256": "e132ad6a32a7732dfda578256b12ca7491a84388e5b99107221b1e3e581f7b57",
+      "truth": [],
+      "index": 26,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            46,
+            45,
+            47,
+            58,
+            44
+          ],
+          "scheduled": 26,
+          "measured": 26,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            46,
+            45,
+            47,
+            58,
+            44
+          ],
+          "scheduled": 26,
+          "measured": 26,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            46,
+            45,
+            47,
+            58,
+            44
+          ],
+          "scheduled": 26,
+          "measured": 26,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "two_swaps",
+      "sha256": "6e6edc482a0aa738d3be71282ff13b3f91f8f4e9fca0a7dd69ad2240c0eb4889",
+      "truth": [
+        [
+          65,
+          73
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 27,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        66,
+        74
+      ],
+      "prior": [
+        [
+          71,
+          95
+        ],
+        [
+          66,
+          74
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "tandem_two_swaps",
+      "sha256": "a0858eae0e5282f0315da94f80ecc5acb49c4874136e644a8bcf4c2227f5d202",
+      "truth": [
+        [
+          65,
+          73
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 28,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        66,
+        74
+      ],
+      "prior": [
+        [
+          71,
+          95
+        ],
+        [
+          66,
+          74
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "swap_then_jump",
+      "sha256": "7acf63528d5cbf1b7c1a536ce88d5f01c953f94d1266230f064dd90f48bbd4c1",
+      "truth": [
+        [
+          65,
+          73
+        ]
+      ],
+      "index": 29,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        66,
+        74
+      ],
+      "prior": [
+        [
+          66,
+          74
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "light_then_swap",
+      "sha256": "2f1d6cce9445cb41d5f2c163814c88ea130b795bc45e056093ba294e678bfdbc",
+      "truth": [
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 30,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        92,
+        98
+      ],
+      "prior": [
+        [
+          92,
+          98
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "same_source_cuts",
+      "sha256": "bb876e4f9f009924f429ca7ab7ad2b6fcdd3ebf966c3c779aceb844cdcf555f1",
+      "truth": [],
+      "index": 31,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            68,
+            46,
+            67,
+            45,
+            47,
+            69,
+            66,
+            58,
+            44
+          ],
+          "scheduled": 34,
+          "measured": 34,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            68,
+            46,
+            67,
+            45,
+            47,
+            69,
+            58,
+            66,
+            44
+          ],
+          "scheduled": 34,
+          "measured": 34,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            68,
+            46,
+            67,
+            45,
+            47,
+            69,
+            58,
+            66,
+            44
+          ],
+          "scheduled": 34,
+          "measured": 34,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "cross_recording_cuts",
+      "sha256": "267279cee1d0125e41dba097b5795880fcbf8feec7b506c1a20ad6edfe2473df",
+      "truth": [],
+      "index": 32,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            46,
+            45,
+            47,
+            58,
+            44
+          ],
+          "scheduled": 26,
+          "measured": 26,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            46,
+            45,
+            47,
+            58,
+            44
+          ],
+          "scheduled": 26,
+          "measured": 26,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            46,
+            45,
+            47,
+            58,
+            44
+          ],
+          "scheduled": 26,
+          "measured": 26,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "original",
+      "sha256": "348309b3ec2e75293842c902093872ba50152f51ed27e07f1f7070a3c49428d1",
+      "truth": [],
+      "index": 33,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            68,
+            40,
+            83,
+            112,
+            70,
+            76,
+            90,
+            8,
+            94,
+            89,
+            65,
+            72,
+            114,
+            67,
+            102,
+            64
+          ],
+          "scheduled": 67,
+          "measured": 67,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            68,
+            112,
+            40,
+            83,
+            8,
+            70,
+            76,
+            90,
+            89,
+            114,
+            94,
+            65,
+            72,
+            67,
+            113,
+            102
+          ],
+          "scheduled": 66,
+          "measured": 66,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            68,
+            112,
+            40,
+            83,
+            8,
+            70,
+            76,
+            90,
+            89,
+            114,
+            94,
+            65,
+            72,
+            67,
+            113,
+            102
+          ],
+          "scheduled": 66,
+          "measured": 66,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "tandem_original",
+      "sha256": "1f7f4dca9d82527b42e11201b00ae344bbf89fe2d5825b5825b018e5fb1db141",
+      "truth": [],
+      "index": 34,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            68,
+            40,
+            112,
+            83,
+            70,
+            90,
+            76,
+            8,
+            94,
+            114,
+            89,
+            65,
+            67,
+            72,
+            64
+          ],
+          "scheduled": 62,
+          "measured": 62,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            68,
+            112,
+            40,
+            83,
+            8,
+            70,
+            76,
+            90,
+            114,
+            94,
+            89,
+            65,
+            67,
+            72
+          ],
+          "scheduled": 61,
+          "measured": 61,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            68,
+            112,
+            40,
+            83,
+            8,
+            70,
+            76,
+            90,
+            114,
+            94,
+            89,
+            65,
+            67,
+            72
+          ],
+          "scheduled": 61,
+          "measured": 61,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "two_swaps",
+      "sha256": "185810dc30b08903a62252613d81e306bd690266e0cfe2db292d347a434fc182",
+      "truth": [
+        [
+          62,
+          68
+        ],
+        [
+          90,
+          98
+        ]
+      ],
+      "index": 35,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        62,
+        68
+      ],
+      "prior": [
+        [
+          62,
+          68
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "tandem_two_swaps",
+      "sha256": "3da2841172d10d758d34de6d3c33231dda06d0058f57ed44563e03d57ab32d6d",
+      "truth": [
+        [
+          62,
+          68
+        ],
+        [
+          90,
+          98
+        ]
+      ],
+      "index": 36,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        62,
+        68
+      ],
+      "prior": [
+        [
+          62,
+          68
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "swap_then_jump",
+      "sha256": "67e59cbf9d18238f03b0b0f95b253068fb6ebe9e47bc81b1cef7e7efe44f09eb",
+      "truth": [
+        [
+          62,
+          68
+        ]
+      ],
+      "index": 37,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        62,
+        68
+      ],
+      "prior": [
+        [
+          62,
+          68
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "light_then_swap",
+      "sha256": "a294f40f36517dd61c02361b697dd625de0ef26f128402d0e24d5bdcfa0198e6",
+      "truth": [
+        [
+          90,
+          98
+        ]
+      ],
+      "index": 38,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            90,
+            40,
+            112,
+            83,
+            98,
+            70,
+            76,
+            8,
+            89,
+            94,
+            72,
+            114,
+            64,
+            102,
+            46,
+            82
+          ],
+          "scheduled": 75,
+          "measured": 75,
+          "choice": {
+            "frames": [
+              90,
+              98
+            ],
+            "response": 0.514786752761672,
+            "pts": [
+              90000,
+              98000
+            ],
+            "edge_frames": [
+              [
+                87,
+                88,
+                89,
+                90,
+                91,
+                92
+              ],
+              [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100
+              ]
+            ],
+            "anchors": [
+              {
+                "frame": 89,
+                "pts": 89000,
+                "rgb_sha256": "86c49698c723727e523832da3e90618047d03b2651b0765d1e14e107203ee7e5"
+              },
+              {
+                "frame": 94,
+                "pts": 94000,
+                "rgb_sha256": "cebc8b89d494882ec1fc0929ba6a7308434d254a668bdbe89120f193cc2f441a"
+              },
+              {
+                "frame": 98,
+                "pts": 98000,
+                "rgb_sha256": "0819a327a21bbb4f7b876f562b47e4b940dca32d2aa9f78839955b118d3d7d25"
+              }
+            ]
+          }
+        },
+        "moving": {
+          "edges": [
+            90,
+            112,
+            40,
+            83,
+            8,
+            98,
+            76,
+            70,
+            89,
+            114,
+            94,
+            72,
+            113,
+            64,
+            6,
+            102
+          ],
+          "scheduled": 70,
+          "measured": 70,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            90,
+            112,
+            40,
+            83,
+            8,
+            98,
+            76,
+            70,
+            89,
+            114,
+            94,
+            72,
+            113,
+            64,
+            6,
+            102
+          ],
+          "scheduled": 70,
+          "measured": 70,
+          "choice": {
+            "frames": [
+              90,
+              98
+            ],
+            "response": 0.514786752761672,
+            "pts": [
+              90000,
+              98000
+            ],
+            "edge_frames": [
+              [
+                87,
+                88,
+                89,
+                90,
+                91,
+                92
+              ],
+              [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100
+              ]
+            ],
+            "anchors": [
+              {
+                "frame": 89,
+                "pts": 89000,
+                "rgb_sha256": "86c49698c723727e523832da3e90618047d03b2651b0765d1e14e107203ee7e5"
+              },
+              {
+                "frame": 94,
+                "pts": 94000,
+                "rgb_sha256": "cebc8b89d494882ec1fc0929ba6a7308434d254a668bdbe89120f193cc2f441a"
+              },
+              {
+                "frame": 98,
+                "pts": 98000,
+                "rgb_sha256": "0819a327a21bbb4f7b876f562b47e4b940dca32d2aa9f78839955b118d3d7d25"
+              }
+            ]
+          }
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "same_source_cuts",
+      "sha256": "3d9c0b44cdbc5409feb90818789245508a7b5bb3604ce11fc2c9d0d224d6b2e3",
+      "truth": [],
+      "index": 39,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            98,
+            40,
+            83,
+            112,
+            72,
+            76,
+            70,
+            8,
+            89,
+            102,
+            94,
+            114,
+            82,
+            113,
+            46,
+            29
+          ],
+          "scheduled": 76,
+          "measured": 76,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            112,
+            40,
+            83,
+            8,
+            72,
+            70,
+            76,
+            89,
+            114,
+            102,
+            94,
+            113,
+            82,
+            6,
+            46,
+            29
+          ],
+          "scheduled": 75,
+          "measured": 75,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            112,
+            40,
+            83,
+            8,
+            72,
+            70,
+            76,
+            89,
+            114,
+            102,
+            94,
+            113,
+            82,
+            6,
+            46,
+            29
+          ],
+          "scheduled": 75,
+          "measured": 75,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "cross_recording_cuts",
+      "sha256": "d0dd3b264a9780088058283e8ba721c52f0577352068655e199bf9072c05d096",
+      "truth": [],
+      "index": 40,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            40,
+            83,
+            112,
+            72,
+            76,
+            70,
+            8,
+            102,
+            89,
+            114,
+            82,
+            46,
+            113,
+            6,
+            54,
+            50
+          ],
+          "scheduled": 72,
+          "measured": 72,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            112,
+            40,
+            83,
+            8,
+            72,
+            70,
+            76,
+            102,
+            89,
+            114,
+            113,
+            6,
+            82,
+            46
+          ],
+          "scheduled": 65,
+          "measured": 65,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            112,
+            40,
+            83,
+            8,
+            72,
+            70,
+            76,
+            102,
+            89,
+            114,
+            113,
+            6,
+            82,
+            46
+          ],
+          "scheduled": 65,
+          "measured": 65,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "original",
+      "sha256": "526b1c167f78686e478fa011b89e982ce06320d46025f959561967cd1cecae8a",
+      "truth": [],
+      "index": 41,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            94,
+            101
+          ],
+          "scheduled": 23,
+          "measured": 23,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            101
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            101
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "tandem_original",
+      "sha256": "982ee22eafbd1987adbc0d1f7e595b3bc5f4f607fe831e0bfdeabc6ab6c9e605",
+      "truth": [],
+      "index": 42,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            94,
+            101,
+            93
+          ],
+          "scheduled": 24,
+          "measured": 24,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            101,
+            93
+          ],
+          "scheduled": 23,
+          "measured": 23,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            101,
+            93
+          ],
+          "scheduled": 23,
+          "measured": 23,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "two_swaps",
+      "sha256": "0cd6f717c88f39a3a500b35a6b48ee5bc30991eeb4c7e80b919f7f90d12976b6",
+      "truth": [
+        [
+          67,
+          75
+        ],
+        [
+          94,
+          100
+        ]
+      ],
+      "index": 43,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        68,
+        76
+      ],
+      "prior": [
+        [
+          71,
+          95
+        ],
+        [
+          68,
+          76
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "tandem_two_swaps",
+      "sha256": "915361740cfbca5848884c2c0efd8f66b69a50ee7ef2a04276faf46630a4aa6a",
+      "truth": [
+        [
+          67,
+          75
+        ],
+        [
+          94,
+          100
+        ]
+      ],
+      "index": 44,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        68,
+        76
+      ],
+      "prior": [
+        [
+          71,
+          95
+        ],
+        [
+          68,
+          76
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "swap_then_jump",
+      "sha256": "a87d035492ad6c42d1fede734872d30f98841b0d7a3f145a0ec12c396c99fe49",
+      "truth": [
+        [
+          67,
+          75
+        ]
+      ],
+      "index": 45,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        68,
+        76
+      ],
+      "prior": [
+        [
+          55,
+          71
+        ],
+        [
+          68,
+          76
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "light_then_swap",
+      "sha256": "de2427c08240806ca8ef82313186c889a0f9a065719df6c9afa4e6f2425cb44e",
+      "truth": [
+        [
+          94,
+          100
+        ]
+      ],
+      "index": 46,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        94,
+        100
+      ],
+      "prior": [
+        [
+          94,
+          100
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "same_source_cuts",
+      "sha256": "1fd541c2d8aca3d23270ce02d042450cef948e23a086b35a4d21080642a546e7",
+      "truth": [],
+      "index": 47,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            67,
+            93,
+            73
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            67,
+            93,
+            73
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            67,
+            93,
+            73
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "cross_recording_cuts",
+      "sha256": "61e3a26beea349d4ddf62ce214f4f4aed35199942772efcecf6b4e886df6d025",
+      "truth": [],
+      "index": 48,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            101
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "original",
+      "sha256": "faa8d31b0016dc8a53e67c9401ffac202bdaa5766ea87a5bebb127cca1e83174",
+      "truth": [],
+      "index": 49,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            90,
+            105,
+            91
+          ],
+          "scheduled": 24,
+          "measured": 24,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            90,
+            105,
+            91
+          ],
+          "scheduled": 24,
+          "measured": 24,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            90,
+            105,
+            91
+          ],
+          "scheduled": 24,
+          "measured": 24,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "tandem_original",
+      "sha256": "357e470fb60ea37a6adc1edeac0b4de80f704827b508b63b12f5a4244cc6cae3",
+      "truth": [],
+      "index": 50,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            90
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            90,
+            83
+          ],
+          "scheduled": 23,
+          "measured": 23,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            90,
+            83
+          ],
+          "scheduled": 23,
+          "measured": 23,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "two_swaps",
+      "sha256": "728f6e1be49379d75cb842a9115ed676d6c26e5169f205e626b5d740d6039b1c",
+      "truth": [
+        [
+          64,
+          70
+        ],
+        [
+          88,
+          96
+        ]
+      ],
+      "index": 51,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        88,
+        96
+      ],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          88,
+          96
+        ],
+        [
+          64,
+          70
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "tandem_two_swaps",
+      "sha256": "dec0aa4017b61aa72753fdd6919bf983735fb1865f5d012ec45c273e8e27a189",
+      "truth": [
+        [
+          64,
+          70
+        ],
+        [
+          88,
+          96
+        ]
+      ],
+      "index": 52,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        64,
+        70
+      ],
+      "prior": [
+        [
+          64,
+          70
+        ],
+        [
+          88,
+          96
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "swap_then_jump",
+      "sha256": "efbb6b38c964df8d9cc60cac02963e7c075887e0e5309f7871ac81679c1e3c30",
+      "truth": [
+        [
+          64,
+          70
+        ]
+      ],
+      "index": 53,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        64,
+        70
+      ],
+      "prior": [
+        [
+          64,
+          70
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "light_then_swap",
+      "sha256": "682e6868201d293fae6f002c00822fb684a59d87d1b6b984731558fdd00a0731",
+      "truth": [
+        [
+          88,
+          96
+        ]
+      ],
+      "index": 54,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        88,
+        96
+      ],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          80,
+          97
+        ],
+        [
+          88,
+          96
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "same_source_cuts",
+      "sha256": "1d65c178c455a6a07118e61acffa974dad78058a347a9db4ee953137ceb13a27",
+      "truth": [],
+      "index": 55,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            70
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            70,
+            105
+          ],
+          "scheduled": 23,
+          "measured": 23,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            70,
+            105
+          ],
+          "scheduled": 23,
+          "measured": 23,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "cross_recording_cuts",
+      "sha256": "7a0ccc4cb4bd45eeb7ed727d22d246091a4a20d49c84c58aee9aff235b87bb07",
+      "truth": [],
+      "index": 56,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            105,
+            98,
+            83
+          ],
+          "scheduled": 28,
+          "measured": 28,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            105,
+            98,
+            83
+          ],
+          "scheduled": 28,
+          "measured": 28,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "original",
+      "sha256": "68c390171f46e90910b1f1db147655734de7df3f4538b7c4325cbc800e036ea4",
+      "truth": [],
+      "index": 57,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            79,
+            84,
+            95
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            79,
+            84,
+            95
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            79,
+            84,
+            95
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "tandem_original",
+      "sha256": "c8c09da3f3e5eed6b75c4a016ef0b1c06e45995a4f0f24b97baa945cb045e7ea",
+      "truth": [],
+      "index": 58,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            79,
+            84
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            79,
+            84
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            79,
+            84
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "two_swaps",
+      "sha256": "2b30074c487f993432efa6fe9429c3f7ddaa34ff430ff5d133402df16648c253",
+      "truth": [
+        [
+          65,
+          73
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 59,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        66,
+        74
+      ],
+      "prior": [
+        [
+          71,
+          95
+        ],
+        [
+          66,
+          74
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "tandem_two_swaps",
+      "sha256": "4b0e9fa3304e3ebea08727ec3479ba2bf6ded1c2416b61fee4b936ba80a9edd9",
+      "truth": [
+        [
+          65,
+          73
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 60,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        66,
+        74
+      ],
+      "prior": [
+        [
+          66,
+          74
+        ],
+        [
+          92,
+          98
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "swap_then_jump",
+      "sha256": "6a5fc2bd37fa933b90730015cd1706b781658249afadc23f3a97531a0b11ea54",
+      "truth": [
+        [
+          65,
+          73
+        ]
+      ],
+      "index": 61,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        66,
+        74
+      ],
+      "prior": [
+        [
+          66,
+          74
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "light_then_swap",
+      "sha256": "bef2480a328d4854c64ecf986d8afee0ee886719ea893686f18978ea2dc12a06",
+      "truth": [
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 62,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": [
+        92,
+        98
+      ],
+      "prior": [
+        [
+          92,
+          98
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "same_source_cuts",
+      "sha256": "e50bdd2b3ce0795b598287beb761a109828ecb143ffca63da772100edaccd2c9",
+      "truth": [],
+      "index": 63,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            97,
+            73,
+            65,
+            79,
+            91,
+            84
+          ],
+          "scheduled": 43,
+          "measured": 43,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            97,
+            73,
+            65,
+            79,
+            91,
+            84
+          ],
+          "scheduled": 43,
+          "measured": 43,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            97,
+            73,
+            65,
+            79,
+            91,
+            84
+          ],
+          "scheduled": 43,
+          "measured": 43,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "cross_recording_cuts",
+      "sha256": "f5e29d274add2b65f317433f7e60898a6cb53a27f1f6fa91d284e92df362f5f8",
+      "truth": [],
+      "index": 64,
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            79,
+            84
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            79,
+            84,
+            89
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            79,
+            84,
+            89
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "ordinary",
+      "sha256": "6260cbacec9a8710dc964a4384a8eaddd6eac6b7d2601aa2bf4b79e0abfac1bb",
+      "truth": [],
+      "index": 65,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "person_switch",
+      "sha256": "ae9cf2c9e87e8ee2668dd1dda789145f9917971387be44c055a3044620b403e1",
+      "truth": [],
+      "index": 66,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "tandem_person_switch",
+      "sha256": "907823fea0f6c503086de7eba6ff38deb105ec2c8b906220e7f22570cb16b038",
+      "truth": [],
+      "index": 67,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "same_person_jump",
+      "sha256": "7ff1c5a56f241ffe0d90d5cbd50eb058066780c98bdc58f1e3737a13a5e15a06",
+      "truth": [],
+      "index": 68,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            74,
+            63
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            74,
+            63
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            74,
+            63
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "same_person_reframe",
+      "sha256": "67d2cb97dafa28050994d2dcf210db52a595e2390405a46d0a5b3377c1c46146",
+      "truth": [],
+      "index": 69,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "ordinary",
+      "sha256": "9d723e2c26460292698c23300652006e426e2785097a5029647889ad19f2e349",
+      "truth": [],
+      "index": 70,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "person_switch",
+      "sha256": "8632caf1598bda2e688e3f565c103938150078bdc236fffdfcc2c243e1f9dc84",
+      "truth": [],
+      "index": 71,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "tandem_person_switch",
+      "sha256": "8952f4cf756d0e6254641f5babdf8ee03c998f0731b6ce1cda4557916eaa8e08",
+      "truth": [],
+      "index": 72,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "same_person_jump",
+      "sha256": "4600710b196570211bea754755b8bfebaafe91da4f6ac558577b00669646dc21",
+      "truth": [],
+      "index": 73,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            96
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            96
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            96
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "same_person_reframe",
+      "sha256": "74df0d158298133d1a79a60c9ca08df62cf2c7d6def17e03ff6fd19cd24b541c",
+      "truth": [],
+      "index": 74,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "ordinary",
+      "sha256": "c76ea4b1bf4f620b94306f8eacaed197b4e03e7c43d5bce24d4ca306cbafd965",
+      "truth": [],
+      "index": 75,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "person_switch",
+      "sha256": "4c7b3d4ceb487a6150d6608723404652e4014a706d6fce7b2c71373c28182fc7",
+      "truth": [],
+      "index": 76,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "tandem_person_switch",
+      "sha256": "55d491274df41051e2527937b4ea98f81bec70f9fa5cc3870dfabefb2b3f849c",
+      "truth": [],
+      "index": 77,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "same_person_jump",
+      "sha256": "5329206410a57b9be0786f316041248f8b751e2cf1f118a868516a8aa7a6fdc8",
+      "truth": [],
+      "index": 78,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            74,
+            63
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            74,
+            63
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            74,
+            63
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "same_person_reframe",
+      "sha256": "08654b0222dc9050c294f1eab05d6f2b3446c593a9cae8ab6a0a6366a762f18d",
+      "truth": [],
+      "index": 79,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "ordinary",
+      "sha256": "54db2b9396e1191d19cdc934f80b898a4edf4d5aa7e0df68ac37d980361f0d35",
+      "truth": [],
+      "index": 80,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "person_switch",
+      "sha256": "38324d856e1c42ec48d85af466ada378876f564ac93dd2e9ab548d23472da30b",
+      "truth": [],
+      "index": 81,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "tandem_person_switch",
+      "sha256": "9f8176a0c55bf4f3919be8ba8089b79e9a9ac0bd81d4f0f9c98cf66d04ebcc46",
+      "truth": [],
+      "index": 82,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "same_person_jump",
+      "sha256": "94fe34963667837397d5cb41121fd7088b4e3f9f25adb71f9997774ebb7cb6a7",
+      "truth": [],
+      "index": 83,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            96,
+            85
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            96,
+            85
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            96,
+            85
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "same_person_reframe",
+      "sha256": "30d3a0ec61717ac85464ba9ffb7121492e7109961c287bf53213bf9f6e8bbd77",
+      "truth": [],
+      "index": 84,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "ordinary",
+      "sha256": "b9fffa9def3fc9d0b7a3c25b9db4f27af3f74d3622ab5182dbcc9fd94607e6d8",
+      "truth": [],
+      "index": 85,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "person_switch",
+      "sha256": "5693448741ca8bf9e2522753f0eeac09cba7906d573183bfc44befe5d415f5c9",
+      "truth": [],
+      "index": 86,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "tandem_person_switch",
+      "sha256": "9a0db75c52b361f7933b9bc2f9b5527e95823c1d813fafced4753aa27768248b",
+      "truth": [],
+      "index": 87,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "same_person_jump",
+      "sha256": "0385ae507553bdba4c1ea93e5fbda48d22d1fe53018dca4343d234c0d20cfa8a",
+      "truth": [],
+      "index": 88,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            63
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            63
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            63
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "same_person_reframe",
+      "sha256": "309a33d4f2227bafca0d9a549fc38fb5eedb79b108b3634e6aafab416e201dc6",
+      "truth": [],
+      "index": 89,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "ordinary",
+      "sha256": "0ea9d7f4e5b1cef19989a64f2e002b610a9a7817f5618260e02d8840cd6092c6",
+      "truth": [],
+      "index": 90,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "person_switch",
+      "sha256": "825aafcd3379f9bdadfc41e4b444a5538602dd2d190b5f2f264672b6a29ddac5",
+      "truth": [],
+      "index": 91,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "tandem_person_switch",
+      "sha256": "2c751a9084f381cfe06a4408cc0d1e113c1d1562b711f4b28aa8670ebb0082a9",
+      "truth": [],
+      "index": 92,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "same_person_jump",
+      "sha256": "458b9ab44894b4880b276e924ae4c8d075373965eefa56c7de608efc63d59b35",
+      "truth": [],
+      "index": 93,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            96,
+            85
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            96,
+            85
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            96,
+            85
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "same_person_reframe",
+      "sha256": "a68c563c256d0e420bec00c304a9df827644af3a2db03519875c925f81040e0e",
+      "truth": [],
+      "index": 94,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "ordinary",
+      "sha256": "b7ab8de1ec30ac8855984d1b63f12d360e36502cafcf35db57f4d05ec18c02de",
+      "truth": [],
+      "index": 95,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "person_switch",
+      "sha256": "769507d0c17ceda48c6e74a1032575295c95a81e56d77c6b5317b822a9120f8d",
+      "truth": [],
+      "index": 96,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "tandem_person_switch",
+      "sha256": "baaec07d184b7d52736200fa0f8c8c2aec467d34bd9ccaf7f06e2560282b2982",
+      "truth": [],
+      "index": 97,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "same_person_jump",
+      "sha256": "db12bae1afcbb3cf398b16321ecc2aa4fb3ded6b74c8ed59c095269a409c444b",
+      "truth": [],
+      "index": 98,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            74
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            74
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            74
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "same_person_reframe",
+      "sha256": "de40978c5de3a617a668f626c9db6a8ad4198a70eca68aa766b59014a2105f2a",
+      "truth": [],
+      "index": 99,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "ordinary",
+      "sha256": "2e50b28c4a6368e430a049da143943e923a43fb24518a2c90e7a512a464e3846",
+      "truth": [],
+      "index": 100,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            28,
+            27
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            28,
+            27
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            28,
+            27
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "person_switch",
+      "sha256": "915e42f7a24d8fb76c7da8e7f902c3dc51eea3a97d113108a238e0ef6aa7ef36",
+      "truth": [],
+      "index": 101,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            28,
+            27
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            28,
+            27
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            28,
+            27
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "tandem_person_switch",
+      "sha256": "b6be5fe81fc70d8b2124bd81a82be1afed63248cdddf7baa9a6c7bfe816281e1",
+      "truth": [],
+      "index": 102,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            28
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            28
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            28
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "same_person_jump",
+      "sha256": "050fdf329f8b8fb45d7e60f56eae145d8864a327d7bb1d54cffc8198ac6d289a",
+      "truth": [],
+      "index": 103,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            85,
+            28,
+            27
+          ],
+          "scheduled": 23,
+          "measured": 23,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            85,
+            28,
+            27
+          ],
+          "scheduled": 23,
+          "measured": 23,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            85,
+            28,
+            27
+          ],
+          "scheduled": 23,
+          "measured": 23,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "same_person_reframe",
+      "sha256": "e9ac5e14f46e1db3bd725032e75557333549f5e67f2a3dae2d6d003232ffab0e",
+      "truth": [],
+      "index": 104,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            28,
+            27
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            28,
+            27
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            28,
+            27
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "original",
+      "sha256": "fcc45109bfbe5361b6fac1ae07cdb860437036fb19d397da9cfa9ff67f17fd09",
+      "truth": [],
+      "index": 105,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            73,
+            83,
+            56
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            73,
+            83,
+            56
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            73,
+            83,
+            56
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "publisher_swap",
+      "sha256": "a7300bfe3aa51d30348a5e112c4b75d187b1233887731389e016fef645da05dc",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "index": 106,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            74,
+            63,
+            73,
+            83,
+            56
+          ],
+          "scheduled": 33,
+          "measured": 33,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            74,
+            63,
+            73,
+            83,
+            56
+          ],
+          "scheduled": 33,
+          "measured": 33,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            74,
+            63,
+            73,
+            83,
+            56
+          ],
+          "scheduled": 33,
+          "measured": 33,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "tandem_publisher_swap",
+      "sha256": "68f408f7773ab4f78ec014171019e69e0d1c003327c3e820d349a5cf4578a25e",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "index": 107,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            63,
+            74,
+            73,
+            83,
+            56
+          ],
+          "scheduled": 33,
+          "measured": 33,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            63,
+            74,
+            73,
+            83,
+            56
+          ],
+          "scheduled": 33,
+          "measured": 33,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            63,
+            74,
+            73,
+            83,
+            56
+          ],
+          "scheduled": 33,
+          "measured": 33,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "original",
+      "sha256": "5ee77b3523dfb1439e65da666ffc6b0e60feb2f3ee09df203dfd56c33f8c2ee4",
+      "truth": [],
+      "index": 108,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            25
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            25
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            25
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "publisher_swap",
+      "sha256": "1269b8cb53bb81c8f66cae7fab1541b02853302b32e2a486defaf0ba35bd9d33",
+      "truth": [
+        [
+          85,
+          96
+        ]
+      ],
+      "index": 109,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            85,
+            25
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            85,
+            25
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            85,
+            25
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "tandem_publisher_swap",
+      "sha256": "eb25b17fabdb53fb846effaa8ba1ad9d44cd896d37ef83d7ad7919f4bd7bdf77",
+      "truth": [
+        [
+          85,
+          96
+        ]
+      ],
+      "index": 110,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            85,
+            25,
+            26
+          ],
+          "scheduled": 23,
+          "measured": 23,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            85,
+            25,
+            26,
+            96
+          ],
+          "scheduled": 28,
+          "measured": 28,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            85,
+            25,
+            26,
+            96
+          ],
+          "scheduled": 28,
+          "measured": 28,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "original",
+      "sha256": "26420c0b987254591bfa507208dbbe804e04d7825dd3440b5073240cce1bce0b",
+      "truth": [],
+      "index": 111,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            111,
+            114,
+            28,
+            112,
+            113
+          ],
+          "scheduled": 26,
+          "measured": 26,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            111,
+            28,
+            112,
+            114,
+            113
+          ],
+          "scheduled": 26,
+          "measured": 26,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            111,
+            28,
+            112,
+            114,
+            113
+          ],
+          "scheduled": 26,
+          "measured": 26,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "publisher_swap",
+      "sha256": "bafd696e679f9a4c3e95ccac022674561f71f13e1a2f6787ac01b15efd70da30",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "index": 112,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            63,
+            74,
+            111,
+            112,
+            114,
+            28,
+            113
+          ],
+          "scheduled": 36,
+          "measured": 36,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            63,
+            74,
+            111,
+            112,
+            28,
+            114,
+            113
+          ],
+          "scheduled": 36,
+          "measured": 36,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            63,
+            74,
+            111,
+            112,
+            28,
+            114,
+            113
+          ],
+          "scheduled": 36,
+          "measured": 36,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "tandem_publisher_swap",
+      "sha256": "ad0c9f0c03c3eacb1d8683b4b11042f46138ab8609b25bfb2c931994e7cc525c",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "index": 113,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            63,
+            74,
+            111,
+            28,
+            112,
+            113,
+            114
+          ],
+          "scheduled": 36,
+          "measured": 35,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            63,
+            74,
+            111,
+            28,
+            112,
+            113,
+            114
+          ],
+          "scheduled": 36,
+          "measured": 35,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            63,
+            74,
+            111,
+            28,
+            112,
+            113,
+            114
+          ],
+          "scheduled": 36,
+          "measured": 35,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "original",
+      "sha256": "ebadcfa94b388d63b3966fc0e38018790f72ce98ed5e32010a3eb755027e049d",
+      "truth": [],
+      "index": 114,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            66
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            66
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            66
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "publisher_swap",
+      "sha256": "7effccb759b27cd7b79fa2f7ff95be8cdb0c95d93d11f5ab866e10df21c6f896",
+      "truth": [
+        [
+          85,
+          96
+        ]
+      ],
+      "index": 115,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            96,
+            85,
+            66
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            96,
+            85,
+            66
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            96,
+            85,
+            66
+          ],
+          "scheduled": 27,
+          "measured": 27,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "tandem_publisher_swap",
+      "sha256": "ed0614c545a095dc138f7108c11149358555d303c2421c9ffbe0ba3167359162",
+      "truth": [
+        [
+          85,
+          96
+        ]
+      ],
+      "index": 116,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            96,
+            85,
+            66,
+            65
+          ],
+          "scheduled": 28,
+          "measured": 28,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            96,
+            85,
+            66,
+            6
+          ],
+          "scheduled": 32,
+          "measured": 32,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            96,
+            85,
+            66,
+            6
+          ],
+          "scheduled": 32,
+          "measured": 32,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "original",
+      "sha256": "33e6c2bc573d939186474f4c8fdcc22ceeb86916f1a1652b4b9365ebf0e3ed2c",
+      "truth": [],
+      "index": 117,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            8,
+            15,
+            9,
+            17,
+            6,
+            18,
+            89,
+            99,
+            78,
+            14,
+            87,
+            96,
+            54
+          ],
+          "scheduled": 54,
+          "measured": 54,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            8,
+            9,
+            15,
+            17,
+            6,
+            18,
+            89,
+            99,
+            14,
+            78,
+            87,
+            54,
+            96
+          ],
+          "scheduled": 54,
+          "measured": 54,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            8,
+            9,
+            15,
+            17,
+            6,
+            18,
+            89,
+            99,
+            14,
+            78,
+            87,
+            54,
+            96
+          ],
+          "scheduled": 54,
+          "measured": 54,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "publisher_swap",
+      "sha256": "2f7586028129efffdcfe195a8213b155b8a3c856baa4a6dfeb3cade8ad73999f",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "index": 118,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            63,
+            74,
+            8,
+            15,
+            9,
+            17,
+            6,
+            18,
+            89,
+            99,
+            14,
+            78,
+            87,
+            96,
+            54
+          ],
+          "scheduled": 62,
+          "measured": 62,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            63,
+            74,
+            8,
+            9,
+            15,
+            17,
+            6,
+            18,
+            89,
+            14,
+            99,
+            78,
+            87,
+            54,
+            96
+          ],
+          "scheduled": 62,
+          "measured": 62,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            63,
+            74,
+            8,
+            9,
+            15,
+            17,
+            6,
+            18,
+            89,
+            14,
+            99,
+            78,
+            87,
+            54,
+            96
+          ],
+          "scheduled": 62,
+          "measured": 62,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "tandem_publisher_swap",
+      "sha256": "bee874fce2b7d5ce2adc59f3f562b465fddc5291355c450a396ed61135bcbe89",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "index": 119,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            63,
+            74,
+            8,
+            9,
+            15,
+            17,
+            6,
+            18,
+            89,
+            99,
+            87,
+            14,
+            78,
+            96,
+            77,
+            110
+          ],
+          "scheduled": 63,
+          "measured": 63,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            63,
+            74,
+            8,
+            15,
+            9,
+            17,
+            6,
+            18,
+            89,
+            99,
+            14,
+            87,
+            78,
+            96,
+            77,
+            110
+          ],
+          "scheduled": 63,
+          "measured": 63,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            63,
+            74,
+            8,
+            15,
+            9,
+            17,
+            6,
+            18,
+            89,
+            99,
+            14,
+            87,
+            78,
+            96,
+            77,
+            110
+          ],
+          "scheduled": 63,
+          "measured": 63,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "original",
+      "sha256": "c8e8811f8673fcab109769217fce58c6cfca3b4521a7f975239e2036cfc26160",
+      "truth": [],
+      "index": 120,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            108,
+            15,
+            57,
+            69
+          ],
+          "scheduled": 34,
+          "measured": 34,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            108,
+            15,
+            57,
+            69,
+            34
+          ],
+          "scheduled": 39,
+          "measured": 39,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            108,
+            15,
+            57,
+            69,
+            34
+          ],
+          "scheduled": 39,
+          "measured": 39,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "publisher_swap",
+      "sha256": "4ce6dce253b571193ef17214ab0823e983efad301672ad20f8aff8a79c65b4fe",
+      "truth": [
+        [
+          85,
+          96
+        ]
+      ],
+      "index": 121,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            85,
+            96,
+            108,
+            15,
+            57,
+            69
+          ],
+          "scheduled": 44,
+          "measured": 44,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            85,
+            96,
+            108,
+            15,
+            69,
+            57,
+            95,
+            34
+          ],
+          "scheduled": 50,
+          "measured": 50,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            85,
+            96,
+            108,
+            15,
+            69,
+            57,
+            95,
+            34
+          ],
+          "scheduled": 50,
+          "measured": 50,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "tandem_publisher_swap",
+      "sha256": "34e5d28ba25dba466f9f1e6b42a92eab53b8f7337f817b544d4cb9df9e289387",
+      "truth": [
+        [
+          85,
+          96
+        ]
+      ],
+      "index": 122,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            96,
+            85,
+            108,
+            15,
+            57,
+            69,
+            34,
+            114,
+            95
+          ],
+          "scheduled": 55,
+          "measured": 55,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            96,
+            85,
+            108,
+            57,
+            69,
+            95,
+            114
+          ],
+          "scheduled": 45,
+          "measured": 45,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            96,
+            85,
+            108,
+            57,
+            69,
+            95,
+            114
+          ],
+          "scheduled": 45,
+          "measured": 45,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "original",
+      "sha256": "0da70ba8f57866a044c668a85f4e6add353c08c8da6a4f860a552d8dbb349cf4",
+      "truth": [],
+      "index": 123,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            29,
+            55,
+            37,
+            79,
+            77,
+            101,
+            19,
+            49,
+            7,
+            96,
+            17,
+            85,
+            61,
+            108,
+            65,
+            97
+          ],
+          "scheduled": 83,
+          "measured": 83,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            29,
+            37,
+            79,
+            55,
+            77,
+            96,
+            101,
+            49,
+            19,
+            7,
+            85,
+            17,
+            61,
+            91,
+            89,
+            65
+          ],
+          "scheduled": 82,
+          "measured": 82,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            29,
+            37,
+            79,
+            55,
+            77,
+            96,
+            101,
+            49,
+            19,
+            7,
+            85,
+            17,
+            61,
+            91,
+            89,
+            65
+          ],
+          "scheduled": 82,
+          "measured": 82,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "publisher_swap",
+      "sha256": "0d00be6371abe23a6aebd21e3f5b135d7a633f37379e1c4bbdfaf3c7cec9b0cd",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "index": 124,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            74,
+            63,
+            29,
+            37,
+            55,
+            79,
+            101,
+            77,
+            19,
+            49,
+            7,
+            96,
+            85,
+            17,
+            61,
+            108
+          ],
+          "scheduled": 84,
+          "measured": 84,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            74,
+            63,
+            53,
+            29,
+            79,
+            37,
+            55,
+            96,
+            101,
+            19,
+            49,
+            7,
+            77,
+            85,
+            17,
+            61
+          ],
+          "scheduled": 78,
+          "measured": 78,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            74,
+            63,
+            53,
+            29,
+            79,
+            37,
+            55,
+            96,
+            101,
+            19,
+            49,
+            7,
+            77,
+            85,
+            17,
+            61
+          ],
+          "scheduled": 78,
+          "measured": 78,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "tandem_publisher_swap",
+      "sha256": "b2992e2b75bda4e564035980ce75341e2427f7c17e7d2be58f4132094dbbf35d",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "index": 125,
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "first": null,
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            63,
+            74,
+            29,
+            37,
+            79,
+            55,
+            77,
+            19,
+            101,
+            49,
+            96,
+            7,
+            85,
+            89,
+            17,
+            91
+          ],
+          "scheduled": 81,
+          "measured": 81,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            74,
+            63,
+            60,
+            29,
+            37,
+            55,
+            79,
+            96,
+            77,
+            101,
+            19,
+            49,
+            7,
+            85,
+            89,
+            17
+          ],
+          "scheduled": 82,
+          "measured": 82,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            74,
+            63,
+            60,
+            29,
+            37,
+            55,
+            79,
+            96,
+            77,
+            101,
+            19,
+            49,
+            7,
+            85,
+            89,
+            17
+          ],
+          "scheduled": 82,
+          "measured": 82,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "original",
+      "sha256": "b5e03006acaa20019ebdfddc1b0cf52f96b39ee56a8eb73f14f265f4963f722b",
+      "truth": [],
+      "index": 126,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            85,
+            84,
+            9,
+            86,
+            95,
+            94,
+            18,
+            64,
+            17,
+            8,
+            109,
+            10,
+            63,
+            65,
+            96,
+            108
+          ],
+          "scheduled": 54,
+          "measured": 54,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            85,
+            9,
+            84,
+            86,
+            95,
+            94,
+            18,
+            8,
+            64,
+            17,
+            10,
+            63,
+            65,
+            108,
+            96,
+            109
+          ],
+          "scheduled": 54,
+          "measured": 54,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            85,
+            9,
+            84,
+            86,
+            95,
+            94,
+            18,
+            8,
+            64,
+            17,
+            10,
+            63,
+            65,
+            108,
+            96,
+            109
+          ],
+          "scheduled": 54,
+          "measured": 54,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "two_swaps",
+      "sha256": "806e25c8b7e5300afe48dd02adb1c2a42625eb7710192bc672bd58343067201b",
+      "truth": [
+        [
+          63,
+          69
+        ],
+        [
+          93,
+          101
+        ]
+      ],
+      "index": 127,
+      "bank": "source_separated",
+      "first": [
+        64,
+        70
+      ],
+      "prior": [
+        [
+          64,
+          70
+        ],
+        [
+          94,
+          102
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "tandem_two_swaps",
+      "sha256": "35f2a0918d334dcc37a5fcc16906af94705dff5122837fe51d5b10ace36b498e",
+      "truth": [
+        [
+          63,
+          69
+        ],
+        [
+          93,
+          101
+        ]
+      ],
+      "index": 128,
+      "bank": "source_separated",
+      "first": [
+        64,
+        70
+      ],
+      "prior": [
+        [
+          64,
+          70
+        ],
+        [
+          94,
+          102
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "swap_then_jump",
+      "sha256": "0db2a6f5782142afd04c8a6091f6d8fb86569d5236ce74eff838e1cccafa4cec",
+      "truth": [
+        [
+          63,
+          69
+        ]
+      ],
+      "index": 129,
+      "bank": "source_separated",
+      "first": [
+        64,
+        70
+      ],
+      "prior": [
+        [
+          64,
+          70
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "light_then_swap",
+      "sha256": "9bcda0f8865b85aaa657f5b659b4b8990f593b78472feb97300f27a248c689c4",
+      "truth": [
+        [
+          93,
+          101
+        ]
+      ],
+      "index": 130,
+      "bank": "source_separated",
+      "first": [
+        94,
+        102
+      ],
+      "prior": [
+        [
+          94,
+          102
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "same_source_cuts",
+      "sha256": "668892318ea5c531c21d16dfe0803b3e2c1282e79bcf31b4653f6de356b7306c",
+      "truth": [],
+      "index": 131,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            85,
+            86,
+            84,
+            9,
+            18,
+            63,
+            8,
+            92,
+            17,
+            10,
+            109,
+            108,
+            29,
+            28,
+            16,
+            87
+          ],
+          "scheduled": 58,
+          "measured": 58,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            85,
+            84,
+            9,
+            86,
+            18,
+            63,
+            8,
+            17,
+            10,
+            92,
+            109,
+            108,
+            28,
+            29,
+            16,
+            19
+          ],
+          "scheduled": 59,
+          "measured": 59,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            85,
+            84,
+            9,
+            86,
+            18,
+            63,
+            8,
+            17,
+            10,
+            92,
+            109,
+            108,
+            28,
+            29,
+            16,
+            19
+          ],
+          "scheduled": 59,
+          "measured": 59,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 1,
+      "condition": "cross_recording_cuts",
+      "sha256": "c306bf466f8ef9319e7842dbc0aa5d3959747189e2bad70a6bf9ab1ecb07b1a7",
+      "truth": [],
+      "index": 132,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            85,
+            84,
+            9,
+            86,
+            18,
+            92,
+            17,
+            109,
+            8,
+            10,
+            28,
+            108,
+            29,
+            16,
+            107,
+            75
+          ],
+          "scheduled": 58,
+          "measured": 58,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            85,
+            9,
+            84,
+            86,
+            18,
+            8,
+            17,
+            10,
+            108,
+            109,
+            28,
+            29,
+            16,
+            92,
+            19,
+            107
+          ],
+          "scheduled": 54,
+          "measured": 54,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            85,
+            9,
+            84,
+            86,
+            18,
+            8,
+            17,
+            10,
+            108,
+            109,
+            28,
+            29,
+            16,
+            92,
+            19,
+            107
+          ],
+          "scheduled": 54,
+          "measured": 54,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "original",
+      "sha256": "ebadcfa94b388d63b3966fc0e38018790f72ce98ed5e32010a3eb755027e049d",
+      "truth": [],
+      "index": 133,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            66
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            66
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            66
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "two_swaps",
+      "sha256": "72f11644aa59a881aa1d966d421319433861642cc74232a32fdf975df45ba44a",
+      "truth": [
+        [
+          69,
+          77
+        ],
+        [
+          96,
+          102
+        ]
+      ],
+      "index": 134,
+      "bank": "source_separated",
+      "first": [
+        96,
+        102
+      ],
+      "prior": [
+        [
+          96,
+          102
+        ],
+        [
+          70,
+          78
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "tandem_two_swaps",
+      "sha256": "7fc60bab349af5fbee8e07fe71ffb4de955df0f485acc3e98715cd76e94e3417",
+      "truth": [
+        [
+          69,
+          77
+        ],
+        [
+          96,
+          102
+        ]
+      ],
+      "index": 135,
+      "bank": "source_separated",
+      "first": [
+        96,
+        102
+      ],
+      "prior": [
+        [
+          96,
+          102
+        ],
+        [
+          70,
+          78
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "swap_then_jump",
+      "sha256": "df211c7d11dc786649f30a3708c62e871622540914edc98b6e6b985ce08f823f",
+      "truth": [
+        [
+          69,
+          77
+        ]
+      ],
+      "index": 136,
+      "bank": "source_separated",
+      "first": [
+        70,
+        78
+      ],
+      "prior": [
+        [
+          70,
+          78
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "light_then_swap",
+      "sha256": "b60d615e1df18b91207bc975b5f4d01f3e24f570c1fc275f61d4e578038dd136",
+      "truth": [
+        [
+          96,
+          102
+        ]
+      ],
+      "index": 137,
+      "bank": "source_separated",
+      "first": [
+        96,
+        102
+      ],
+      "prior": [
+        [
+          96,
+          102
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "same_source_cuts",
+      "sha256": "ef84d279baf5b73609057eb96cf4db5450a7414acd36ff1a8b3497abc2dbf5c3",
+      "truth": [],
+      "index": 138,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 2,
+      "condition": "cross_recording_cuts",
+      "sha256": "58f76536b03ff936517163604a8e8d9bf8fd4ca06d5fe56f98b83a85a018fecf",
+      "truth": [],
+      "index": 139,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            66,
+            97
+          ],
+          "scheduled": 22,
+          "measured": 22,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            66
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            66
+          ],
+          "scheduled": 17,
+          "measured": 17,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "original",
+      "sha256": "84b810933f01d598a950530131cb617014af7ee0920ad134167d034fe736b559",
+      "truth": [],
+      "index": 140,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "two_swaps",
+      "sha256": "f1a04d73b80a8892521bd529f35f1c5072ceae635b4c1025c1f15f2f4f480ec9",
+      "truth": [
+        [
+          66,
+          72
+        ],
+        [
+          99,
+          107
+        ]
+      ],
+      "index": 141,
+      "bank": "source_separated",
+      "first": [
+        100,
+        108
+      ],
+      "prior": [
+        [
+          100,
+          108
+        ],
+        [
+          66,
+          72
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "tandem_two_swaps",
+      "sha256": "493b6fef69978dfc72b5171c2aebc355a152f6b9bfc5bffc5c07bed17d42d12d",
+      "truth": [
+        [
+          66,
+          72
+        ],
+        [
+          99,
+          107
+        ]
+      ],
+      "index": 142,
+      "bank": "source_separated",
+      "first": [
+        100,
+        108
+      ],
+      "prior": [
+        [
+          100,
+          108
+        ],
+        [
+          66,
+          72
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "swap_then_jump",
+      "sha256": "fb076187c8d0a2cb47dd565c057cbc315ca5415855a473aa77707ce4b02efbe1",
+      "truth": [
+        [
+          66,
+          72
+        ]
+      ],
+      "index": 143,
+      "bank": "source_separated",
+      "first": [
+        66,
+        72
+      ],
+      "prior": [
+        [
+          66,
+          72
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "light_then_swap",
+      "sha256": "1e05e82477e1fce4ab12f20190c6800b174baaadb65c30b5b7f2784b0639578b",
+      "truth": [
+        [
+          99,
+          107
+        ]
+      ],
+      "index": 144,
+      "bank": "source_separated",
+      "first": [
+        100,
+        108
+      ],
+      "prior": [
+        [
+          100,
+          108
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "same_source_cuts",
+      "sha256": "e23a37f04b89ec929577625d4cf5696b5dd15053137bcdd94c675f1f432b270b",
+      "truth": [],
+      "index": 145,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            99,
+            72,
+            66
+          ],
+          "scheduled": 28,
+          "measured": 28,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            99,
+            72,
+            66
+          ],
+          "scheduled": 28,
+          "measured": 28,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            99,
+            72,
+            66
+          ],
+          "scheduled": 28,
+          "measured": 28,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 3,
+      "condition": "cross_recording_cuts",
+      "sha256": "c617b4542c2cf6d5f82f5c6ff5fc00bd7f10124e0470dae83f967d7d149aff5d",
+      "truth": [],
+      "index": 146,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [],
+          "scheduled": 12,
+          "measured": 12,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "original",
+      "sha256": "c8e8811f8673fcab109769217fce58c6cfca3b4521a7f975239e2036cfc26160",
+      "truth": [],
+      "index": 147,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            108,
+            15,
+            57,
+            69
+          ],
+          "scheduled": 34,
+          "measured": 34,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            108,
+            15,
+            57,
+            69,
+            34
+          ],
+          "scheduled": 39,
+          "measured": 39,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            108,
+            15,
+            57,
+            69,
+            34
+          ],
+          "scheduled": 39,
+          "measured": 39,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "two_swaps",
+      "sha256": "ec651ed86f53ddc6047c535177f35a6ed443d5fc2ee2e48072b03b6d868ef503",
+      "truth": [
+        [
+          71,
+          79
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 148,
+      "bank": "source_separated",
+      "first": [
+        92,
+        98
+      ],
+      "prior": [
+        [
+          92,
+          98
+        ],
+        [
+          72,
+          80
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "tandem_two_swaps",
+      "sha256": "957003e52b3293b2ac63787beca61819c8df6f11f57de13c0d4333ddaf518b6c",
+      "truth": [
+        [
+          71,
+          79
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 149,
+      "bank": "source_separated",
+      "first": [
+        92,
+        98
+      ],
+      "prior": [
+        [
+          92,
+          98
+        ],
+        [
+          72,
+          80
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "swap_then_jump",
+      "sha256": "180622ca1859b7a3ca9cee41d87c153557b0583674450cb401505daa505b9edf",
+      "truth": [
+        [
+          71,
+          79
+        ]
+      ],
+      "index": 150,
+      "bank": "source_separated",
+      "first": [
+        72,
+        80
+      ],
+      "prior": [
+        [
+          72,
+          80
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "light_then_swap",
+      "sha256": "d9880256a2caaf9ce40fd5b17df4ad198e3cf3b062d04266b1a0a2d960920b21",
+      "truth": [
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 151,
+      "bank": "source_separated",
+      "first": [
+        92,
+        98
+      ],
+      "prior": [
+        [
+          92,
+          98
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "same_source_cuts",
+      "sha256": "9b7f7fd5eae4a8e83435501e3e5500060f1562f9302d256010b52bf6bba52b92",
+      "truth": [],
+      "index": 152,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            108,
+            15,
+            57,
+            69,
+            34,
+            8
+          ],
+          "scheduled": 45,
+          "measured": 45,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            108,
+            15,
+            57,
+            69,
+            34
+          ],
+          "scheduled": 39,
+          "measured": 39,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            108,
+            15,
+            57,
+            69,
+            34
+          ],
+          "scheduled": 39,
+          "measured": 39,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 4,
+      "condition": "cross_recording_cuts",
+      "sha256": "1b50c699755d716b428a76993fc9d41936a5d646533a6ae9fa878f744ae531fe",
+      "truth": [],
+      "index": 153,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            69,
+            108,
+            15,
+            57,
+            90,
+            34
+          ],
+          "scheduled": 45,
+          "measured": 45,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            108,
+            15,
+            57,
+            69,
+            34
+          ],
+          "scheduled": 39,
+          "measured": 39,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            108,
+            15,
+            57,
+            69,
+            34
+          ],
+          "scheduled": 39,
+          "measured": 39,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "original",
+      "sha256": "5a3e80ce45a43ea11f9927db046aa527b0aa4ee40a39d87671a41fc2232b84b8",
+      "truth": [],
+      "index": 154,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            111,
+            112,
+            110,
+            69,
+            113,
+            67,
+            18,
+            89,
+            68,
+            88,
+            19,
+            17,
+            6,
+            77,
+            70,
+            7
+          ],
+          "scheduled": 53,
+          "measured": 53,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            112,
+            111,
+            69,
+            113,
+            110,
+            67,
+            68,
+            89,
+            88,
+            114,
+            70,
+            77,
+            95,
+            66,
+            109,
+            78
+          ],
+          "scheduled": 49,
+          "measured": 48,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            112,
+            111,
+            69,
+            113,
+            110,
+            67,
+            68,
+            89,
+            88,
+            114,
+            70,
+            77,
+            95,
+            66,
+            109,
+            78
+          ],
+          "scheduled": 49,
+          "measured": 48,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "two_swaps",
+      "sha256": "47ef5191e1d2e4679561a37aa70a310acca7da330e2b3dddfe2d3e950221af0f",
+      "truth": [
+        [
+          63,
+          69
+        ],
+        [
+          93,
+          101
+        ]
+      ],
+      "index": 155,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            69,
+            111,
+            112,
+            110,
+            113,
+            101,
+            18,
+            89,
+            19,
+            88,
+            77,
+            17,
+            6,
+            7,
+            95,
+            68
+          ],
+          "scheduled": 63,
+          "measured": 63,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            69,
+            111,
+            112,
+            113,
+            110,
+            101,
+            89,
+            88,
+            114,
+            95,
+            70,
+            68,
+            77,
+            67,
+            93,
+            109
+          ],
+          "scheduled": 53,
+          "measured": 52,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            69,
+            111,
+            112,
+            113,
+            110,
+            101,
+            89,
+            88,
+            114,
+            95,
+            70,
+            68,
+            77,
+            67,
+            93,
+            109
+          ],
+          "scheduled": 53,
+          "measured": 52,
+          "choice": {
+            "frames": [
+              93,
+              101
+            ],
+            "response": 0.5031070102917982,
+            "pts": [
+              93000,
+              101000
+            ],
+            "edge_frames": [
+              [
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ],
+              [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103
+              ]
+            ],
+            "anchors": [
+              {
+                "frame": 92,
+                "pts": 92000,
+                "rgb_sha256": "8f52ebff08b391fbef1795cb305c10aa86ea3de40ba8d0b6791ab275e7aa0e2e"
+              },
+              {
+                "frame": 97,
+                "pts": 97000,
+                "rgb_sha256": "5c5ff1fc570e1a245925f7be1f2be62ff1f7303bb894e0545c6a7a90a02b76c2"
+              },
+              {
+                "frame": 101,
+                "pts": 101000,
+                "rgb_sha256": "4824a5bfce66190bf840e8c509c92ef1c0b256e40f01e9ceef42e5a13af3fc20"
+              }
+            ]
+          }
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "tandem_two_swaps",
+      "sha256": "95ba2f7a71630d1c36916a8de5555ea8d6df0bbbb8312dbb287072f4577e10fc",
+      "truth": [
+        [
+          63,
+          69
+        ],
+        [
+          93,
+          101
+        ]
+      ],
+      "index": 156,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            69,
+            111,
+            112,
+            110,
+            113,
+            89,
+            101,
+            18,
+            17,
+            88,
+            19,
+            114,
+            6,
+            7,
+            78,
+            70
+          ],
+          "scheduled": 60,
+          "measured": 60,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            69,
+            112,
+            111,
+            113,
+            110,
+            89,
+            101,
+            114,
+            88,
+            67,
+            70,
+            78,
+            95,
+            68,
+            109,
+            93
+          ],
+          "scheduled": 54,
+          "measured": 54,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            69,
+            112,
+            111,
+            113,
+            110,
+            89,
+            101,
+            114,
+            88,
+            67,
+            70,
+            78,
+            95,
+            68,
+            109,
+            93
+          ],
+          "scheduled": 54,
+          "measured": 54,
+          "choice": {
+            "frames": [
+              93,
+              101
+            ],
+            "response": 0.40976664461207046,
+            "pts": [
+              93000,
+              101000
+            ],
+            "edge_frames": [
+              [
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ],
+              [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103
+              ]
+            ],
+            "anchors": [
+              {
+                "frame": 92,
+                "pts": 92000,
+                "rgb_sha256": "a6d648bfd62ea314bb2c8f4bca863c0c6d250b1e92e7b63ce7337744c1a3adec"
+              },
+              {
+                "frame": 97,
+                "pts": 97000,
+                "rgb_sha256": "3f6442e3644ea436460bd599a544a63bea14e4d164ce620ef447dbdc112be200"
+              },
+              {
+                "frame": 101,
+                "pts": 101000,
+                "rgb_sha256": "e0bf06e905ea64a71efa2e48f537708b3b33fce7958dc2da5db03778c31d10ae"
+              }
+            ]
+          }
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "swap_then_jump",
+      "sha256": "dbc3c4da098785eb3e9bf56506ebe0bf7d35da5722af1e3f165fbe5935913351",
+      "truth": [
+        [
+          63,
+          69
+        ]
+      ],
+      "index": 157,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            93,
+            69,
+            111,
+            112,
+            110,
+            113,
+            18,
+            89,
+            88,
+            19,
+            6,
+            17,
+            70,
+            77,
+            7,
+            68
+          ],
+          "scheduled": 56,
+          "measured": 54,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            93,
+            69,
+            111,
+            112,
+            110,
+            113,
+            89,
+            88,
+            70,
+            68,
+            77,
+            114,
+            109,
+            67,
+            78,
+            55
+          ],
+          "scheduled": 51,
+          "measured": 48,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            93,
+            69,
+            111,
+            112,
+            110,
+            113,
+            89,
+            88,
+            70,
+            68,
+            77,
+            114,
+            109,
+            67,
+            78,
+            55
+          ],
+          "scheduled": 51,
+          "measured": 48,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "light_then_swap",
+      "sha256": "d690441e1605692dfcabb14222fb7bf6dcb1bf78e3913aea71f855e1ff71b948",
+      "truth": [
+        [
+          93,
+          101
+        ]
+      ],
+      "index": 158,
+      "bank": "source_separated",
+      "first": [
+        94,
+        102
+      ],
+      "prior": [
+        [
+          94,
+          102
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "same_source_cuts",
+      "sha256": "fba4692bf2f72a016059fe7b2abee3fc3958b23f65149cb99827af16e1b787b8",
+      "truth": [],
+      "index": 159,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            93,
+            111,
+            112,
+            110,
+            113,
+            70,
+            89,
+            18,
+            88,
+            6,
+            17,
+            77,
+            7,
+            19,
+            109,
+            114
+          ],
+          "scheduled": 56,
+          "measured": 55,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            93,
+            112,
+            111,
+            113,
+            110,
+            70,
+            89,
+            88,
+            114,
+            109,
+            78,
+            55,
+            95,
+            6,
+            7,
+            23
+          ],
+          "scheduled": 62,
+          "measured": 61,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            93,
+            112,
+            111,
+            113,
+            110,
+            70,
+            89,
+            88,
+            114,
+            109,
+            78,
+            55,
+            95,
+            6,
+            7,
+            23
+          ],
+          "scheduled": 62,
+          "measured": 61,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 5,
+      "condition": "cross_recording_cuts",
+      "sha256": "9c27346d269916077062552aa299f5cc161d4d670377511167d233788092ee71",
+      "truth": [],
+      "index": 160,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            111,
+            70,
+            112,
+            89,
+            110,
+            90,
+            113,
+            91,
+            18,
+            88,
+            19,
+            6,
+            77,
+            17,
+            7,
+            114
+          ],
+          "scheduled": 54,
+          "measured": 54,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            112,
+            111,
+            113,
+            110,
+            114,
+            70,
+            77,
+            78,
+            109,
+            6,
+            7,
+            23,
+            55,
+            19
+          ],
+          "scheduled": 54,
+          "measured": 54,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            112,
+            111,
+            113,
+            110,
+            114,
+            70,
+            77,
+            78,
+            109,
+            6,
+            7,
+            23,
+            55,
+            19
+          ],
+          "scheduled": 54,
+          "measured": 54,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "original",
+      "sha256": "00c27af2f3b08ed4d470838c6bf197d013513abefbca087fed9c4dab9fa49992",
+      "truth": [],
+      "index": 161,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            90,
+            53,
+            12
+          ],
+          "scheduled": 28,
+          "measured": 28,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            53,
+            90,
+            12
+          ],
+          "scheduled": 28,
+          "measured": 28,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            53,
+            90,
+            12
+          ],
+          "scheduled": 28,
+          "measured": 28,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "two_swaps",
+      "sha256": "d79179201cdaf7cf3ea468d2b6e919c55163de80423ffbaf0323c0ec2252a98b",
+      "truth": [
+        [
+          69,
+          77
+        ],
+        [
+          96,
+          102
+        ]
+      ],
+      "index": 162,
+      "bank": "source_separated",
+      "first": [
+        96,
+        102
+      ],
+      "prior": [
+        [
+          96,
+          102
+        ],
+        [
+          70,
+          78
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "tandem_two_swaps",
+      "sha256": "9ec0cc85144822cf6aea546264ef4a7cf0469fd9a4dc54082f979beb76f08db0",
+      "truth": [
+        [
+          69,
+          77
+        ],
+        [
+          96,
+          102
+        ]
+      ],
+      "index": 163,
+      "bank": "source_separated",
+      "first": [
+        96,
+        102
+      ],
+      "prior": [
+        [
+          96,
+          102
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "swap_then_jump",
+      "sha256": "6385520900ab9a6e89b010c56c06481d3c548f6848510bdf9d315429abb4e5bf",
+      "truth": [
+        [
+          69,
+          77
+        ]
+      ],
+      "index": 164,
+      "bank": "source_separated",
+      "first": [
+        70,
+        78
+      ],
+      "prior": [
+        [
+          70,
+          78
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "light_then_swap",
+      "sha256": "f2ba7b95cfb34592d7f334183ba8953866edce049e766bc553ab0e213a08fb74",
+      "truth": [
+        [
+          96,
+          102
+        ]
+      ],
+      "index": 165,
+      "bank": "source_separated",
+      "first": [
+        96,
+        102
+      ],
+      "prior": [
+        [
+          96,
+          102
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "same_source_cuts",
+      "sha256": "387bbb1e504f981db80c1021e681035361de046ea6292eea0a62a3e56ac4ca99",
+      "truth": [],
+      "index": 166,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            77,
+            69,
+            90,
+            53,
+            75,
+            12
+          ],
+          "scheduled": 41,
+          "measured": 41,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            77,
+            69,
+            90,
+            53,
+            12,
+            75
+          ],
+          "scheduled": 41,
+          "measured": 41,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            77,
+            69,
+            90,
+            53,
+            12,
+            75
+          ],
+          "scheduled": 41,
+          "measured": 41,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 6,
+      "condition": "cross_recording_cuts",
+      "sha256": "57fc4a5926c2b0a76f83ac68aaea09a89a8d5a8f217b25043f88917279d83687",
+      "truth": [],
+      "index": 167,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            90,
+            53,
+            106,
+            103,
+            12,
+            105
+          ],
+          "scheduled": 36,
+          "measured": 36,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            76,
+            75,
+            70,
+            53,
+            90,
+            12,
+            103,
+            105,
+            106
+          ],
+          "scheduled": 47,
+          "measured": 47,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            76,
+            75,
+            70,
+            53,
+            90,
+            12,
+            103,
+            105,
+            106
+          ],
+          "scheduled": 47,
+          "measured": 47,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "original",
+      "sha256": "64a9bc5163fea210a3097fc60d65b01b2520d3626ea1f074cb2fb16d17242061",
+      "truth": [],
+      "index": 168,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            50
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            50
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            50
+          ],
+          "scheduled": 18,
+          "measured": 18,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "two_swaps",
+      "sha256": "1787b4369fdd4c73e6011ad2b62c23de6e544d77c175d41bfab7f4a58566ae64",
+      "truth": [
+        [
+          66,
+          72
+        ],
+        [
+          99,
+          107
+        ]
+      ],
+      "index": 169,
+      "bank": "source_separated",
+      "first": [
+        100,
+        108
+      ],
+      "prior": [
+        [
+          100,
+          108
+        ],
+        [
+          66,
+          72
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "tandem_two_swaps",
+      "sha256": "f0a1799aa971fb1695fde938efcbcf99985c445113c31f3b61d203cef125fa37",
+      "truth": [
+        [
+          66,
+          72
+        ],
+        [
+          99,
+          107
+        ]
+      ],
+      "index": 170,
+      "bank": "source_separated",
+      "first": [
+        100,
+        108
+      ],
+      "prior": [
+        [
+          100,
+          108
+        ],
+        [
+          66,
+          72
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "swap_then_jump",
+      "sha256": "d12d19d076c5472b60fd01f2bc75c8a22e1fbc085cadcaff12ace38aa38ff0ff",
+      "truth": [
+        [
+          66,
+          72
+        ]
+      ],
+      "index": 171,
+      "bank": "source_separated",
+      "first": [
+        66,
+        72
+      ],
+      "prior": [
+        [
+          66,
+          72
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "light_then_swap",
+      "sha256": "fa52bb69760aedf690ae1be8c77f90a942d616b61f7d741a9af47e2b5ec5c33d",
+      "truth": [
+        [
+          99,
+          107
+        ]
+      ],
+      "index": 172,
+      "bank": "source_separated",
+      "first": [
+        100,
+        108
+      ],
+      "prior": [
+        [
+          100,
+          108
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "same_source_cuts",
+      "sha256": "662e614150c15394358e04942917a51164b222eb4d1fcfa18889aafc548644fe",
+      "truth": [],
+      "index": 173,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            107,
+            50,
+            72,
+            99
+          ],
+          "scheduled": 34,
+          "measured": 34,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            107,
+            50,
+            72,
+            99
+          ],
+          "scheduled": 34,
+          "measured": 34,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            107,
+            50,
+            72,
+            99
+          ],
+          "scheduled": 34,
+          "measured": 34,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 7,
+      "condition": "cross_recording_cuts",
+      "sha256": "9f700b1e85a98205fe7e6c8c7fa653b8c4db0b10823a080caf2625f1d14be7fc",
+      "truth": [],
+      "index": 174,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            67,
+            68,
+            50
+          ],
+          "scheduled": 24,
+          "measured": 24,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            67,
+            68,
+            50
+          ],
+          "scheduled": 24,
+          "measured": 24,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            67,
+            68,
+            50
+          ],
+          "scheduled": 24,
+          "measured": 24,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "original",
+      "sha256": "a773902bc412385df7427949bc3cd0c099fb18d9288da714b60f4fdbe48ab739",
+      "truth": [],
+      "index": 175,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            36,
+            65,
+            27,
+            6,
+            28,
+            66,
+            29
+          ],
+          "scheduled": 35,
+          "measured": 35,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            65,
+            36,
+            27,
+            6,
+            66,
+            28
+          ],
+          "scheduled": 34,
+          "measured": 34,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            65,
+            36,
+            27,
+            6,
+            66,
+            28
+          ],
+          "scheduled": 34,
+          "measured": 34,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "two_swaps",
+      "sha256": "ad1d2a0493c082f33de80da7e9db647ed52c1487124c207cc0bf4cf8a3c2378f",
+      "truth": [
+        [
+          71,
+          79
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 176,
+      "bank": "source_separated",
+      "first": [
+        92,
+        98
+      ],
+      "prior": [
+        [
+          92,
+          98
+        ],
+        [
+          72,
+          80
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "tandem_two_swaps",
+      "sha256": "9ded7406081c9de91c76a74f774ac9a8b5783dfcfd65eef84577f9b60043d0bc",
+      "truth": [
+        [
+          71,
+          79
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 177,
+      "bank": "source_separated",
+      "first": [
+        92,
+        98
+      ],
+      "prior": [
+        [
+          71,
+          95
+        ],
+        [
+          72,
+          95
+        ],
+        [
+          92,
+          98
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "swap_then_jump",
+      "sha256": "da0af090b9be76bfcf19cb3f9f9685de576324ee558c6e861cb6ffd68f6f767b",
+      "truth": [
+        [
+          71,
+          79
+        ]
+      ],
+      "index": 178,
+      "bank": "source_separated",
+      "first": [
+        72,
+        80
+      ],
+      "prior": [
+        [
+          72,
+          80
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "light_then_swap",
+      "sha256": "0d203dfc0c1e624a9111538231717fda248a04a490701b3b35023ef9f7b7395b",
+      "truth": [
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 179,
+      "bank": "source_separated",
+      "first": [
+        92,
+        98
+      ],
+      "prior": [
+        [
+          92,
+          98
+        ]
+      ],
+      "candidates": null,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "same_source_cuts",
+      "sha256": "16d93bdd51b6c1d5dec4fbc8b2e2ff7cbc6a5c7135cf3b0dd7f1e68d506377fa",
+      "truth": [],
+      "index": 180,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            36,
+            65,
+            6,
+            27,
+            28
+          ],
+          "scheduled": 33,
+          "measured": 33,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            65,
+            36,
+            27,
+            6,
+            28
+          ],
+          "scheduled": 33,
+          "measured": 33,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            65,
+            36,
+            27,
+            6,
+            28
+          ],
+          "scheduled": 33,
+          "measured": 33,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "group": 8,
+      "condition": "cross_recording_cuts",
+      "sha256": "9aecfeb8bf5d36a9c323a079cfdc6d8594d7a751ef7f7e50ae1e031f00706c35",
+      "truth": [],
+      "index": 181,
+      "bank": "source_separated",
+      "first": null,
+      "prior": [],
+      "candidates": {
+        "fixed_wider": {
+          "edges": [
+            36,
+            65,
+            27,
+            6,
+            28
+          ],
+          "scheduled": 33,
+          "measured": 33,
+          "choice": null
+        },
+        "moving": {
+          "edges": [
+            65,
+            36,
+            27,
+            6,
+            28
+          ],
+          "scheduled": 33,
+          "measured": 33,
+          "choice": null
+        },
+        "moving_wider": {
+          "edges": [
+            65,
+            36,
+            27,
+            6,
+            28
+          ],
+          "scheduled": 33,
+          "measured": 33,
+          "choice": null
+        }
+      },
+      "time_base": "1/30000",
+      "first_pts": 0
+    }
+  ],
+  "result": {
+    "baseline": {
+      "locations": 87,
+      "truth_spans": 110,
+      "ordinary": 101,
+      "ordinary_with_range": 15,
+      "routed_edits": 19,
+      "routed_ordinary": 101,
+      "repeated_ordinary_deliveries": 2
+    },
+    "arms": {
+      "fixed_wider": {
+        "added": 2,
+        "exact": 2,
+        "wrong": 0,
+        "ordinary_added": 0,
+        "cut_added": 0,
+        "gained_groups": 2,
+        "passes": false
+      },
+      "moving": {
+        "added": 0,
+        "exact": 0,
+        "wrong": 0,
+        "ordinary_added": 0,
+        "cut_added": 0,
+        "gained_groups": 0,
+        "passes": false
+      },
+      "moving_wider": {
+        "added": 4,
+        "exact": 4,
+        "wrong": 0,
+        "ordinary_added": 0,
+        "cut_added": 0,
+        "gained_groups": 3,
+        "passes": true
+      }
+    }
+  }
+}

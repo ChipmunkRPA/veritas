@@ -56,6 +56,7 @@ from app.evidence.video_packet_versions import (
     PAIRED_EDGE_VERSION,
     PICTURE_HOLD_VERSIONS,
     SHORT_AVC_PROPOSAL_VERSION,
+    MOVING_AVC_PROPOSAL_VERSION,
     SECOND_AVC_PROPOSAL_VERSION,
     SHORT_CARRIER_VERSION,
     SHORT_PROPOSAL_VERSION,
@@ -707,7 +708,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     set_id = current_set_id(analysis)
     version = face_return_binding.METHOD_VERSIONS[return_candidates[-1]["face_return"]["method"]] if return_candidates else VERSION
     proposal_versions = {SHORT_PROPOSAL_VERSION, SHORT_WEBM_PROPOSAL_VERSION, SHORT_AVC_PROPOSAL_VERSION,
-                         SECOND_AVC_PROPOSAL_VERSION}
+                         SECOND_AVC_PROPOSAL_VERSION, MOVING_AVC_PROPOSAL_VERSION}
     if version not in proposal_versions | {SHORT_WINDOW_VERSION, SHORT_CARRIER_VERSION} and any(
             face_boundary_binding.is_paired(item.get("face_boundary")) for item in chosen):
         version = PAIRED_EDGE_VERSION

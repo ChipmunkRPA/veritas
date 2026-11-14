@@ -117,6 +117,11 @@ after frames.
 The [second distinct face range replay](video-face-distinct-avc-2026-11-13.md#independent-replay)
 compares two search lengths and checks both the recorded decisions and
 original camera timestamps and images through a separate FFmpeg path.
+The [moving-face comparison](video-face-moving-shortlist-2026-11-13.md#replay)
+tests the face position and duration changes separately, preserves cases
+where the first scan found a range, and recounts ordinary controls by
+unique delivered bytes. Independent reviewers can recheck the recorded
+timestamps and exact original images using a separate FFmpeg decode.
 
 ### Reproduce the boundaries of four checks
 

@@ -736,6 +736,7 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
                 "scheduled_frames": 0, "measured_face_frames": 0}
     prior = details.get("face_return")
     second_avc = proposal_method == proposal.AVC_METHOD and settings.video_face_second_avc_review
+    retry_moving = proposal_method == proposal.AVC_METHOD and settings.video_face_moving_avc_review
     if prior is None:
         details["face_short_proposal_check"] = coverage
     remaining = deadline.remaining() if deadline is not None else None
@@ -808,13 +809,31 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
         if len(anchor_indices) < 4:
             coverage["reason"] = "insufficient_same_shot_context"
             return
-        edges = face_short_proposal.shortlist(reduced, [faces[i][2]["bbox"] for i in anchor_indices], stop.check)
+        anchors = {i: faces[i][2]["bbox"] for i in anchor_indices}
+        edges = face_short_proposal.shortlist(reduced, list(anchors.values()), stop.check)
         planned = proposal.face_schedule(edges)
         coverage["scheduled_frames"] = len(planned)
         read(set(planned)-set(proposal.ANCHOR_SAMPLES), face=True, pixels=False)
         if prior is None:
             selected = face_short_proposal.select(edges, faces, reduced, stop.check, excluded)
             stop.check("brief face proposal")
+            if selected is None and retry_moving:
+                coverage.update(status="unassessed", reason="time_budget")
+                edges = face_short_proposal.moving_shortlist(reduced, anchors, stop.check)
+                planned = proposal.face_schedule(edges)
+                coverage["scheduled_frames"] = len(planned)
+                faces = {i: faces[i] for i in planned if i in faces}
+                read(set(planned) - set(proposal.ANCHOR_SAMPLES) - faces.keys(), face=True, pixels=False)
+                if edges and not face_short_proposal.has_measurable_pair(edges, faces, proposal.SECOND_AVC_DURATIONS):
+                    coverage["reason"] = "insufficient_same_shot_context"
+                    return
+                selected = face_short_proposal.select(edges, faces, reduced, stop.check, excluded,
+                                                     durations=proposal.SECOND_AVC_DURATIONS)
+                stop.check("moving brief face proposal")
+                if selected is not None:
+                    details["face_return"] = record(selected, proposal.MOVING_AVC_METHOD)
+                    coverage.update(status="localized", reason=None)
+                    return
             if selected is None:
                 coverage.update(status="no_distinct_range", reason=None)
                 return
@@ -881,6 +900,9 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
              *(("The optional second H.264 range uses the same bounded measurements or runs one bounded pass after "
                 "the first guarded range within the remaining analysis time.",)
                if settings.video_face_short_avc_review and settings.video_face_second_avc_review else ()),
+             *(("The optional moving-face scan follows the measured face position after a fixed scan finds no range. "
+                "It can schedule up to 84 face inputs within the same time budget.",)
+               if settings.video_face_short_avc_review and settings.video_face_moving_avc_review else ()),
              *(("The enabled overlapping review reads 240 native pictures and compares three bounded face input sets.",)
                if settings.video_face_short_window_review or settings.video_face_short_carrier_review else ()),
              *(("The enabled cut context reads up to 77 native pictures and detects at most three face boxes.",)

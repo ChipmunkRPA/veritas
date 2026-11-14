@@ -212,3 +212,23 @@ def test_bounded_proposal_cannot_duplicate_the_final_paired_boundary():
         face_return_binding.validate_set(document)
     proposed.update(start_pts=53000, end_pts=59000)
     face_return_binding.validate_set(document)
+
+
+def test_moving_shortlist_interpolates_centers_and_preserves_rank_budget(monkeypatch):
+    from app.detectors.video import face_paired_edge, face_short_proposal
+
+    observed = {}
+
+    def motion(index, reduced, box):
+        observed[index] = box["x"]
+        return {"central_hex": float(index).hex()}
+
+    monkeypatch.setattr(face_paired_edge, "motion", motion)
+    anchors = {i: {"x": i, "y": 0, "w": 100, "h": 100} for i in (14, 34, 64, 104)}
+    edges = face_short_proposal.moving_shortlist({}, anchors, lambda _: None)
+    assert observed[6] == 14 and observed[39] == 39 and observed[114] == 104
+    assert edges == list(range(114, 98, -1))
+    assert len(face_short_proposal_binding.face_schedule(edges)) <= 84
+    face_indices = set(range(59, 73))
+    assert face_short_proposal.has_measurable_pair([62, 70], face_indices, (7, 8))
+    assert not face_short_proposal.has_measurable_pair([62, 70], face_indices - {70}, (7, 8))

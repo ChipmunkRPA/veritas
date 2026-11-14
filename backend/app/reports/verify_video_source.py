@@ -54,6 +54,7 @@ from app.evidence.video_packet_versions import (
     SECOND_HD_FACE_VERSION,
     SECOND_SHORT_FACE_VERSION,
     SHORT_AVC_PROPOSAL_VERSION,
+    MOVING_AVC_PROPOSAL_VERSION,
     SECOND_AVC_PROPOSAL_VERSION,
     SHORT_CARRIER_VERSION,
     SHORT_PROPOSAL_VERSION,
@@ -173,8 +174,13 @@ def _verify_guarded_scene(record, frames) -> None:
 def _verify_paired_motion(record, reduced, *, proposal=False) -> None:
     boxes = {row["frame_index"]:row["bbox"] for row in record["frame_inputs"]}
     planned = set(reduced) if proposal else set(record["scheduled_frame_indices"])
-    if proposal and face_short_proposal.shortlist(reduced, [boxes[i] for i in record["shortlist_anchor_indices"]], lambda _:None) != record["shortlist_edges"]:
-        raise ValueError("The original video does not reproduce its bounded face shortlist")
+    if proposal:
+        anchors = {i: boxes[i] for i in record["shortlist_anchor_indices"]}
+        shortlist = (face_short_proposal.moving_shortlist(reduced, anchors, lambda _: None)
+                     if record["method"] == face_short_proposal_binding.MOVING_AVC_METHOD
+                     else face_short_proposal.shortlist(reduced, list(anchors.values()), lambda _: None))
+        if shortlist != record["shortlist_edges"]:
+            raise ValueError("The original video does not reproduce its bounded face shortlist")
     for label, edge in (("entry",record["start_frame_index"]),("exit",record["end_frame_index"])):
         inputs = face_paired_edge_binding.motion_inputs(edge,planned)
         observed = face_paired_edge.motion(edge,{i:reduced[i] for i in inputs},boxes[edge-1])
@@ -238,7 +244,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_FACE_VERSION, SECOND_SHORT_FACE_VERSION, SECOND_HD_FACE_VERSION,
     } or avc_with_guarded_first
     expected_proposals = (1 if avc_with_guarded_first else 2) if second_avc else int(
-        evidence["version"] in {SHORT_PROPOSAL_VERSION, SHORT_WEBM_PROPOSAL_VERSION, SHORT_AVC_PROPOSAL_VERSION})
+        evidence["version"] in {SHORT_PROPOSAL_VERSION, SHORT_WEBM_PROPOSAL_VERSION, SHORT_AVC_PROPOSAL_VERSION,
+                                MOVING_AVC_PROPOSAL_VERSION})
     windowed = evidence["version"] == SHORT_WINDOW_VERSION
     carrier_windows = evidence["version"] == SHORT_CARRIER_VERSION
     paired = evidence["version"] in {PAIRED_EDGE_VERSION, SHORT_PROPOSAL_VERSION, SPATIAL_CUT_VERSION}
@@ -265,7 +272,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if not face_short_proposal_binding.webm_source(table, (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag")),
                                                        face_return.source_carrier(original)):
             raise ValueError("The original video differs from its brief WebM face-review source profile")
-    if evidence["version"] in {SHORT_AVC_PROPOSAL_VERSION, SECOND_AVC_PROPOSAL_VERSION}:
+    if evidence["version"] in {SHORT_AVC_PROPOSAL_VERSION, SECOND_AVC_PROPOSAL_VERSION, MOVING_AVC_PROPOSAL_VERSION}:
         delivery = probe_container(original, include_codec_tag=True)
         encoding = delivery.get("codec"), delivery.get("pix_fmt")
         if not face_short_proposal_binding.avc_source(table, (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag")),

@@ -520,7 +520,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_tracked_changes.verify_source(document, decoded.get(document_tracked_changes.KEY),
                                               expected=source.get(document_tracked_changes.COMMITMENT))
         verify_repeated_passages(document, text, mapping)
-        document_percentage_consistency.verify_source(document, text, mapping, decoded.get("sentences", ()))
+        document_percentage_consistency.verify_source(document, text, mapping, decoded.get("sentences", ()), meta=decoded["meta"])
         document_native_locations.validate(document)
         if document_email_contexts.KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))

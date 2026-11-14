@@ -89,9 +89,12 @@ function PercentageConsistency({ review }: { review: NonNullable<DocumentEvidenc
         const chars = Array.from(row.text)
         const start = row.quantity_start - row.start
         const end = row.quantity_end - row.start
+        const source = row.anchor
+        const location = source?.kind === 'pdf' ? `PDF page ${source.page}` : source?.kind === 'docx'
+          ? `Word body paragraph ${source.body_paragraph}` : source?.kind === 'email' ? `Email body part ${source.mime_part}` : null
         return <div key={row.start} className="mb-2 last:mb-0">
           <blockquote className="m-0 break-words text-small">{chars.slice(0, start).join('')}<mark>{chars.slice(start, end).join('')}</mark>{chars.slice(end).join('')}</blockquote>
-          <p className="mt-1 mb-0 font-mono text-caption text-text-muted">Statement [{row.start}, {row.end}) · Value [{row.quantity_start}, {row.quantity_end})</p>
+          <p className="mt-1 mb-0 font-mono text-caption text-text-muted">{location && `${location} · `}Statement [{row.start}, {row.end}) · Value [{row.quantity_start}, {row.quantity_end})</p>
         </div>
       })}
     </div>)}

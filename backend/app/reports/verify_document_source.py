@@ -129,7 +129,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if document_percentage_consistency.KEY in evidence:
         from app.detectors.text.pipeline import segment_within
 
-        document_percentage_consistency.verify_source(evidence, text, mapping, [asdict(row) for row in segment_within(doc)])
+        document_percentage_consistency.verify_source(evidence, text, mapping, [asdict(row) for row in segment_within(doc)], meta=doc.meta)
     document_matched_context.verify_source(evidence, text, mapping)
     document_native_locations.validate(evidence)
     document_paragraph_priority.verify_source(evidence, text, mapping)

@@ -360,13 +360,16 @@ export interface EmailClassifierInputScope {
     windows: { spans: [number, number][]; input_sha256: string; role: 'body' | 'quoted' | 'signature' | 'mixed' | 'unmapped' }[];
     unlisted: number }[]
 }
+type PercentageSource = { kind: 'pdf'; page: number; block: number; bbox: number[]; coordinate_space: 'unrotated-page-points' }
+  | { kind: 'docx'; paragraph_index: number; body_path: [number]; body_paragraph: number }
+  | { kind: 'email'; mime_part: string; source_start: number; source_end: number }
 export interface DocumentEvidenceSet extends SetBase {
   schema: 'chipmunk.document-evidence/1'; packets: DocumentEvidencePacket[]; omitted_windows: number
   source: { sha256: string; chars?: number; method?: string; offset_unit: 'unicode_codepoint' }
-  percentage_consistency?: { schema: 'document-percentage-consistency/1'; status: 'different_values' | 'checked' | 'not_assessed';
+  percentage_consistency?: { schema: 'document-percentage-consistency/1' | 'document-percentage-consistency/2'; status: 'different_values' | 'checked' | 'not_assessed';
     scope: string; limitation: string; authorship_confidence_contribution: 0; checked_sentences: number;
     excluded_blocks: number; different_claims: number; comparable_claims: number;
-    groups: { start: number; end: number; text: string; quantity_start: number; quantity_end: number }[][] }
+    groups: { start: number; end: number; text: string; quantity_start: number; quantity_end: number; anchor?: PercentageSource }[][] }
   repeated_passages?: { schema: 'document-repeated-passages/1'; status: 'matched' | 'no_match' | 'not_assessed';
     coverage: { compared_blocks: number; excluded_ocr_blocks: number; excluded_quoted_or_signature_blocks: number; omitted_groups: number };
     groups: { id: string; text: string; text_sha256: string; word_count: number; total_occurrences: number;

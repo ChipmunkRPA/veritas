@@ -1,6 +1,6 @@
 # Repeated percentage statements in one document
 
-The local TXT check highlights both values when two complete sentences in
+The local check highlights both values when two complete sentences in
 separate paragraphs use identical wording, punctuation and percentage units
 apart from a single number. It ignores letter case and spacing, and treats
 `47` and `47.0` as the same number. Differences in a stated reporting year,
@@ -8,16 +8,27 @@ cohort, denominator or citation remain part of the comparison. The check
 omits marked quotes, ranges and approximate numbers in its supported syntax.
 
 Enable `VERITAS_DOCUMENT_PERCENTAGE_CONSISTENCY=true` in a local development
-instance and run a new TXT analysis. The evidence page, PDF and JSON retain
-both complete sentences and the exact Unicode ranges for the values in the
-extracted text. Redacted PDFs show ranges and omit the excerpts and values.
+instance and run a new TXT, Word, plain-text email or selectable PDF analysis.
+The evidence page, PDF and JSON retain both complete sentences and the exact
+Unicode ranges for the values in the extracted text. Mapped documents also
+identify the PDF page, Word body paragraph or decoded email part. PDF input
+must be at most 12 pages. Pages with hidden or transparent text, OCR text,
+Word tables and quoted or hidden runs, and email quotes and signatures are
+outside this check. The PDF ruling uses the native text trace. The main Word
+scope covers regular body styles and directly mapped runs. Redacted reports
+show locations and omit the excerpts and values.
 This evidence carries zero AI-authorship weight. Two sentences can use the
 same wording while referring to different unstated dates, groups or
 denominators. Source context is needed to interpret the difference.
 The check reads the stored sentence boundaries from the existing document
 decode. Loading the analysis and generating a report reuse those boundaries.
 
-## Local validation
+## TXT evaluation and format verification
+
+The Word, EML and PDF integration fixtures pair exact value changes with
+controls inside a Word table, quoted Word paragraph, hidden Word run,
+quoted email reply or invisible PDF text. The mapped results carry zero
+authorship weight. The detection counts below come from the TXT panel.
 
 The frozen selection used a pinned GovReport pack and salted source order.
 Twenty-four previously unused GAO test highlights with eligible percentage

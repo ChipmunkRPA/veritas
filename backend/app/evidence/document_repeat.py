@@ -61,7 +61,7 @@ def _sized(text: str) -> bool:
     return len(text) <= MAX_CHARACTERS and len(text.split()) >= MIN_WORDS
 
 
-def _anchor(entry: dict) -> dict | None:
+def block_anchor(entry: dict) -> dict | None:
     kind = entry.get("kind")
     if kind == "pdf" and entry.get("extraction") == "text_layer":
         keys = ("page", "block", "bbox", "coordinate_space")
@@ -103,7 +103,7 @@ def build(source: dict, text: str, mapping: list[dict]) -> dict:
             coverage["excluded_ocr_blocks"] += 1
         elif entry.get("kind") == "email" and entry.get("quote_role") in {"quoted", "signature"}:
             coverage["excluded_quoted_or_signature_blocks"] += 1
-        elif (anchor := _anchor(entry)) is None:
+        elif (anchor := block_anchor(entry)) is None:
             coverage["excluded_other_blocks"] += 1
         elif not _sized(excerpt := text[start:end]):
             coverage["excluded_short_or_long_blocks"] += 1
@@ -142,7 +142,7 @@ def _valid_docx_path(path) -> bool:
     return True
 
 
-def _validate_anchor(anchor: dict, size: int) -> None:
+def validate_block_anchor(anchor: dict, size: int) -> None:
     _require(isinstance(anchor, dict), "Repeated text needs a source anchor")
     kind = anchor.get("kind")
     if kind in {"text", "email"}:
@@ -264,7 +264,7 @@ def validate(document: dict) -> None:
             )
             end = b
             ranges.append((a, b))
-            _validate_anchor(occurrence["anchor"], len(excerpt))
+            validate_block_anchor(occurrence["anchor"], len(excerpt))
         first_positions.append(occurrences[0]["start"])
     ordered = sorted(ranges)
     _require(

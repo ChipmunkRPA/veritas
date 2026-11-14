@@ -439,6 +439,7 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True) -> Document:
     partial_pages: list[dict] = []
     hybrid_pages: list[dict] = []
     ocr_pages, rasters, raster_bytes = [], {}, 0
+    percentage_text_pages = []
     runtime = None
     started = time.monotonic()
 
@@ -472,6 +473,13 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True) -> Document:
             parts = []
             page_parts.append(parts)
             blocks = page.get_text("rawdict")["blocks"]
+            if len(doc) <= NATIVE_COMPARISON_MAX_PAGES:
+                try:
+                    spans = page.get_texttrace()
+                except (ValueError, RuntimeError):
+                    spans = []
+                if spans and all(span["type"] != 3 and span["opacity"] > 0 for span in spans):
+                    percentage_text_pages.append(page.number + 1)
             blocks.sort(key=lambda b: (round(b["bbox"][1] / 5), b["bbox"][0]))
             page_chars = 0
             native_lines = []
@@ -527,6 +535,7 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True) -> Document:
     d = _join_mapped([part for parts in page_parts for part in parts], dehyphenate=True)
     d.source_rasters = rasters
     d.meta = {"pages": pages, "method": "pymupdf", "unmapped_pages": empty_pages,
+              "percentage_text_pages": percentage_text_pages,
               "partially_checked_pages": partial_pages,
               "ocr": {"version": OCR_VERSION, "status": "partial" if empty_pages or partial_pages else "complete" if ocr_pages else "not_needed",
                       "pages": ocr_pages, "pages_without_text": [p["page"] for p in ocr_pages if p.get("coverage_scope") != "image_region"], "unchecked_pages": empty_pages,
@@ -555,16 +564,21 @@ def extract_docx(path: Path) -> Document:
     from docx.table import Table
     from docx.text.paragraph import Paragraph
 
+    from app.evidence.document_archive_word import ordinary_body_paragraph
     from app.evidence.document_tracked_changes import PART_NAME, inspect
 
     d = docx.Document(str(path))
     parts: list[tuple[str, dict]] = []
+    percentage_body_paragraphs = []
 
     def walk(parent, elements, path_parts):
         for index, element in enumerate(elements):
             path_here = [*path_parts, index]
             if element.tag == qn("w:p"):
                 paragraph = Paragraph(element, parent)
+                if not path_parts:
+                    eligible = paragraph.style.style_id.casefold() in {"normal", "bodytext", "bodytext2", "bodytext3"}
+                    percentage_body_paragraphs.append(index if eligible and ordinary_body_paragraph(paragraph) else None)
                 cursor, runs = 0, []
                 for ri, run in enumerate(paragraph.runs):
                     runs.append({"run": ri, "start": cursor, "end": cursor + len(run.text)})
@@ -589,7 +603,7 @@ def extract_docx(path: Path) -> Document:
         doc.word_review = inspect(d.element.body, part)
     word_warning = (" The file contains Word revision marks. The writing checks may omit text within those marks."
                     if doc.word_review and doc.word_review["status"] != "no_match" else "")
-    doc.meta = {"method": "python-docx", "paragraph_count": len(parts),
+    doc.meta = {"method": "python-docx", "paragraph_count": len(parts), "percentage_body_paragraphs": percentage_body_paragraphs,
                 "coverage_warning": ("Body paragraphs and tables were extracted in document order. Headers, footers, text boxes and "
                                      "embedded attachments were not checked; DOCX has no stable page numbers." + word_warning)}
     return doc

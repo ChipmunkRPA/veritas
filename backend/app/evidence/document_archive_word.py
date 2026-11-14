@@ -48,7 +48,7 @@ def _location(block, excerpt):
             "changed_tokens": tokens, "runs_complete": block["runs_complete"]}
 
 
-def _ordinary_boundary(paragraph):
+def ordinary_body_paragraph(paragraph):
     # Fields, tracked edits and other omitted structures can contain text at the gap.
     style = paragraph._p.find(f"{qn('w:pPr')}/{qn('w:pStyle')}")
     if style is not None and style.get(qn("w:val"), "").casefold() in {"quote", "intensequote", "blocktext"}:
@@ -81,7 +81,7 @@ def _body(data: bytes):
         complete = "".join(contents) == value
         parts.append((value, {"kind": "docx", "paragraph": number, "body_index": body_index,
                               "runs": runs if complete else [], "runs_complete": complete,
-                              "ordinary_boundary": complete and _ordinary_boundary(paragraph)}))
+                              "ordinary_boundary": complete and ordinary_body_paragraph(paragraph)}))
     return _join_mapped(parts)
 
 

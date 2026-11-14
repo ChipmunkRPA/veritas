@@ -554,9 +554,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     except (ValueError, KeyError, TypeError) as error:
         raise DocumentPacketIntegrityError("Local passage coverage differs from the frozen inputs") from error
     document["repeated_passages"] = document_repeat.build(document["source"], text, mapping)
-    if settings.environment == "dev" and settings.document_percentage_consistency and document["source"]["method"] == "plain":
+    if (settings.environment == "dev" and settings.document_percentage_consistency
+            and document_percentage_consistency.supported(document["source"]["method"], decoded["meta"].get("email"))):
         document[document_percentage_consistency.KEY] = document_percentage_consistency.build(
-            document["source"], text, mapping, decoded["sentences"],
+            document["source"], text, mapping, decoded["sentences"], meta=decoded["meta"],
         )
     quoted_roles = {"quoted", "signature"}
     quoted_ranges = [_range(source, len(text)) for source in mapping if source.get("quote_role") in quoted_roles]
@@ -691,7 +692,8 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
         decoded = _decode(db, analysis, store, result)
         try:
             document_repeat.verify_source(document, decoded["text"], decoded["source_map"])
-            document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()))
+            document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()),
+                                                          meta=decoded["meta"])
             document_matched_context.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_paragraph_priority.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_passage_coverage.verify_source(document, decoded["text"], decoded["source_map"],

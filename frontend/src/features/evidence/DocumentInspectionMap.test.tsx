@@ -50,6 +50,26 @@ describe('ordinary document passage inspection', () => {
     expect(within(section).getByText(/zero AI-authorship weight/)).toBeTruthy()
   })
 
+  it('shows the recorded source page beside each conflicting number', () => {
+    const group = [2, 4].map((page, index) => {
+      const value = index ? '37' : '47'
+      const text = `The review found a rate of ${value} percent among all applications.`
+      const start = index * 100
+      const quantity_start = start + text.indexOf(value)
+      return { start, end: start + text.length, text, quantity_start, quantity_end: quantity_start + value.length,
+        anchor: { kind: 'pdf' as const, page, block: 0, bbox: [20, 20, 500, 40], coordinate_space: 'unrotated-page-points' as const } }
+    })
+    show({ ...evidence([]), percentage_consistency: {
+      schema: 'document-percentage-consistency/2', status: 'different_values', authorship_confidence_contribution: 0,
+      checked_sentences: 2, comparable_claims: 1, excluded_blocks: 0, different_claims: 1, groups: [group],
+      scope: 'Compares complete body sentences.', limitation: 'This check carries zero AI-authorship weight.',
+    } })
+    const section = screen.getByRole('region', { name: 'Repeated percentage statements' })
+    expect(within(section).getByText(/^PDF page 2 · Statement/)).toBeTruthy()
+    expect(within(section).getByText(/^PDF page 4 · Statement/)).toBeTruthy()
+    expect(Array.from(section.querySelectorAll('mark'), item => item.textContent)).toEqual(['47', '37'])
+  })
+
   it('marks all three measured sentences and leaves the navigation focus separate', () => {
     const item: DocumentEvidencePacket = { ...packet, inspection_scope: { basis: 'scored_context',
       spans: [{ start: 108, end: 122 }, { start: 123, end: 137 }, { start: 138, end: 142 }] } }

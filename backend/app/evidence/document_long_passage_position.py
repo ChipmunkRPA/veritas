@@ -4,7 +4,9 @@ from __future__ import annotations
 
 from app.evidence.document_scope import check_range
 
-SCHEMA = "document-passage-position-review/2"
+LEGACY_SCHEMA = "document-passage-position-review/2"
+SCHEMA = "document-passage-position-review/4"
+SCHEMAS = {LEGACY_SCHEMA, SCHEMA}
 POINT = 3.6821095168341915
 MAX_CHARS = 5200
 
@@ -57,12 +59,18 @@ def geometry(text, mapping, method, sentences):
     return {"paragraphs": len(mapping), "sentence_count": len(sentences), "contexts": contexts}
 
 
-def record(scope, *, readings=None, text=None):
+def record(scope, *, readings=None, text=None, schema=SCHEMA):
     from app.evidence.document_passage_position import _amount
 
-    common = {"schema": SCHEMA, "authorship_confidence_contribution": 0, **scope}
-    if readings is None:
+    common = {"schema": schema, "authorship_confidence_contribution": 0, **scope}
+    if not readings or all(response is None for response in readings):
         return {**common, "status": "unassessed", "selected": None}
+    contexts = [{**row, **({"readings": response} if response is not None else {})}
+                for row, response in zip(scope["contexts"], readings, strict=True)]
+    if any(response is None for response in readings):
+        if schema != SCHEMA:
+            raise ValueError("Partial writing readings require the current schema")
+        return {**common, "status": "partial", "selected": None, "contexts": contexts}
     contrasts = []
     for responses in readings:
         left, center, right = (_amount(row["response_hex"]) for row in responses)
@@ -70,7 +78,7 @@ def record(scope, *, readings=None, text=None):
     highest = max(contrasts)
     selected = contrasts.index(highest) if highest > POINT and contrasts.count(highest) == 1 else None
     result = {**common, "status": "flagged" if selected is not None else "no_flag", "selected": selected,
-              "contexts": [{**row, "readings": response} for row, response in zip(scope["contexts"], readings, strict=True)]}
+              "contexts": contexts}
     if selected is not None and text is not None:
         focus = scope["contexts"][selected]["sentences"][1]
         result["focus_text"] = text[focus["start"]:focus["end"]]
@@ -84,7 +92,8 @@ def validate(value, source):
                 "contexts", "selected", "signal_ref"}
     if value.get("status") == "flagged":
         required.add("focus_text")
-    if (set(value) != required or type(value["authorship_confidence_contribution"]) is not int
+    schema = value.get("schema")
+    if (set(value) != required or schema not in SCHEMAS or type(value["authorship_confidence_contribution"]) is not int
             or source.get("method") != "plain" or type(source.get("chars")) is not int
             or not 0 < source["chars"] <= MAX_CHARS
             or type(value["paragraphs"]) is not int or not 3 <= value["paragraphs"] <= 5
@@ -97,9 +106,8 @@ def validate(value, source):
     previous = (-1, -1)
     shifts = {}
     native_by_span = {}
-    complete = value["status"] != "unassessed"
     for context in value["contexts"]:
-        if set(context) != ({"paragraph", "sentences", "readings"} if complete else {"paragraph", "sentences"}):
+        if set(context) not in ({"paragraph", "sentences"}, {"paragraph", "sentences", "readings"}):
             raise ValueError("Invalid longer writing response context")
         paragraph, spans = context["paragraph"], context["sentences"]
         if type(paragraph) is not int or not max(0, previous[0]) <= paragraph < value["paragraphs"] or len(spans) != 3:
@@ -121,10 +129,9 @@ def validate(value, source):
             raise ValueError("Longer writing centers are repeated or unordered")
         previous = (paragraph, start)
         contexts.append({"paragraph": paragraph, "sentences": spans})
-        if complete:
-            readings.append(validate_readings(context["readings"]))
+        readings.append(validate_readings(context["readings"]) if "readings" in context else None)
     scope = {"paragraphs": value["paragraphs"], "sentence_count": value["sentence_count"], "contexts": contexts}
-    expected = record(scope, readings=readings if complete else None)
+    expected = record(scope, readings=readings, schema=schema)
     if expected != {key: item for key, item in value.items() if key not in {"signal_ref", "focus_text"}}:
         raise ValueError("The longer writing position direction does not replay")
     if expected["selected"] is not None:
@@ -150,6 +157,8 @@ def verify_source(value, text, mapping, method, sentences):
         if text[focus["start"]:focus["end"]] != value["focus_text"]:
             raise ValueError("The longer writing excerpt differs from the original source")
     for context in value["contexts"]:
+        if "readings" not in context:
+            continue
         for (content, _, _), reading in zip(inputs(text, context["sentences"]), context["readings"], strict=True):
             if text_hash(content) != reading["input_sha256"]:
                 raise ValueError("Longer writing input differs from the original source")

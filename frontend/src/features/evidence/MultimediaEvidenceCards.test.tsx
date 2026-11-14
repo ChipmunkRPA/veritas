@@ -59,6 +59,22 @@ describe('ordinary multimedia evidence', () => {
     expect(section.getByText('The middle sentence showed a stronger local response.')).toBeTruthy()
   })
 
+  it('shows the missing center in a partial longer-passage check', () => {
+    const context = (paragraph: number, base: number) => ({ paragraph, sentences: [0, 10, 20].map(offset => ({
+      start: base + offset, end: base + offset + 8, source_start: base + offset + 2, source_end: base + offset + 10,
+    })) })
+    const reading = { input_sha256: 'a'.repeat(64), response_hex: '0x1.0000000000000p+0', focus_tokens: 12, neighbor_tokens: 20 }
+    show({ ...document, packets: [], coverage: { passage_position_review: {
+      schema: 'document-passage-position-review/4', status: 'partial', paragraphs: 3, sentence_count: 9,
+      contexts: [{ ...context(0, 0), readings: [reading, reading, reading] }, context(1, 31)],
+      selected: null, authorship_confidence_contribution: 0, signal_ref: packet.signal_refs[0],
+    } } })
+    const section = within(screen.getByRole('region', { name: 'Longer-passage writing check' }))
+    expect(section.getByText(/Completed 1 of 2 eligible centers/)).toBeTruthy()
+    expect(section.getByText('[43, 51)')).toBeTruthy()
+    expect(section.queryByText(/Authorship remains undetermined/)).toBeNull()
+  })
+
   it('shows submitted Word revision wording and its native XML position', () => {
     const set: DocumentEvidenceSet = { ...document, packets: [], coverage: {
       word_tracked_changes: { status: 'partial', part: 'word/document.xml', paragraphs: 3, inserted: 1, deleted: 0,

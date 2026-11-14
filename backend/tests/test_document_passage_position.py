@@ -5,6 +5,7 @@ from email.message import EmailMessage
 from types import SimpleNamespace
 
 import pytest
+from test_document_packets import packet_factory as packet_factory
 
 from app.core.canonical import canonical_hash
 from app.core.config import settings
@@ -215,6 +216,94 @@ def test_longer_writing_unassessed_without_complete_responses(tmp_path, monkeypa
     assert not review.verify_source(document(doc, row), doc.text, doc.source_map)
     doc, sentences = setup_source(tmp_path, LONG_TEXT.replace("major change", "major  change", 1))
     assert document_long_passage_position.geometry(doc.text, doc.source_map, "plain", sentences) is None
+
+
+@pytest.mark.parametrize("interruption, missing", [("overflow", 1), ("deadline", 2)])
+def test_longer_writing_retains_complete_centers_after_interruption(tmp_path, monkeypatch, interruption, missing):
+    doc, sentences = setup_source(tmp_path, LONG_TEXT)
+    rejected = sentences[3 if interruption == "overflow" else 6].text
+
+    def measured(_, values, _deadline):
+        if any(rejected in value for value, _, _ in values):
+            if interruption == "overflow":
+                raise ValueError("The complete writing input exceeds the tokenizer limit")
+            raise DetectorTimeout("test deadline")
+        return [{"input_sha256": text_hash(value), "response_hex": score.hex(), "focus_tokens": 12,
+                 "neighbor_tokens": 20} for (value, _, _), score in zip(values, (0., 8., 0.) * (len(values) // 3), strict=True)]
+
+    monkeypatch.setattr(passage_position, "_scores", measured)
+    record = passage_position._capture_long(None, doc, sentences, Deadline(30))
+    assert record["status"] == "partial" and record["selected"] is None and "focus_text" not in record
+    assert [i for i, context in enumerate(record["contexts"]) if "readings" not in context] == [missing]
+    package = document(doc, record)
+    assert review.verify_source(package, doc.text, doc.source_map)
+    shown = _passage_position_view(package["coverage"], withheld=False)
+    assert shown["measured"] == 2 and shown["eligible"] == 3
+    assert shown["unchecked"] == [record["contexts"][missing]["sentences"][1]]
+    result = {"signals": [{"status": "ok", "details": {"text_evidence": {
+        "version": "scored-context/1", "offset_unit": "unicode_codepoint",
+        "extracted_text_sha256": text_hash(doc.text), "windows": [], review.KEY: record,
+    }}}]}
+    coverage = document_passage_coverage.build(result, doc.text, doc.source_map)
+    assert {row["source_block"] for row in coverage["ranges"] if row["state"] == "no_local_record"} == {missing + 1}
+    assert len([row for row in coverage["ranges"] if row["state"] == "response_range"]) == 2
+
+    forged = deepcopy(package)
+    forged["coverage"][review.KEY]["contexts"][0]["readings"][1]["input_sha256"] = "0" * 64
+    with pytest.raises(ValueError, match="differs from the original"):
+        review.verify_source(forged, doc.text, doc.source_map)
+    forged = deepcopy(package)
+    forged["coverage"][review.KEY]["status"] = "no_flag"
+    with pytest.raises(ValueError, match="does not replay"):
+        review.verify_source(forged, doc.text, doc.source_map)
+
+
+def test_partial_position_report_uses_the_same_source_ranges_as_export(packet_factory, monkeypatch):
+    from app.core.canonical import canonical_json
+    from app.evidence.document_packets import build_packet_set, packet_hash
+    from app.reports import engine, multimedia_evidence, public_package
+    from app.reports.specimens import specimen
+
+    db, store, analysis, result, _, original = packet_factory(".txt", scores=(), text=LONG_TEXT)
+    # The fixture adds an emoji before the opening sentence. Build the geometry
+    # from the original whose hash and extraction are bound to the packet set.
+    doc = extract(original, ".txt")
+    sentences = segment(doc)
+    scope = document_long_passage_position.geometry(doc.text, doc.source_map, "plain", sentences)
+    context, *_ = scope["contexts"]
+    readings = [{"input_sha256": text_hash(value), "response_hex": score.hex(), "focus_tokens": 12,
+                 "neighbor_tokens": 20} for (value, _, _), score in
+                zip(review.inputs(doc.text, context["sentences"]), (0., 8., 0.), strict=True)]
+    position = document_long_passage_position.record(scope, readings=[readings, None, None], text=doc.text)
+    signal = result["signals"][0]
+    signal["detector_id"] = document_matched_context.DETECTOR
+    signal["detector_version"] = "1.0.0"
+    signal["model_revisions"] = {document_matched_context.MODEL: document_matched_context.REVISION}
+    signal["details"]["text_evidence"][review.KEY] = position
+    analysis.result_hash = store.put_bytes(canonical_json(result)).sha256
+    evidence = build_packet_set(db, analysis, store, result)
+    frozen = specimen("document", "standard")
+    report_result = {**deepcopy(frozen.result), "signals": result["signals"], "findings": []}
+    report_result["manifest"]["sampling"] = result["manifest"]["sampling"]
+    report_result["input"]["sha256"] = analysis.sha256
+    evidence.update(analysis_id=frozen.analysis.id, revision=frozen.analysis.revision,
+                    original_result_hash=canonical_hash(report_result))
+    evidence["sha256"] = packet_hash(evidence)
+    frozen = frozen.model_copy(update={"result": report_result, "evidence": evidence,
+        "media": frozen.media.model_copy(update={"sha256": analysis.sha256})})
+    monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
+    exported = public_package._evidence(frozen)
+    multimedia_evidence.verify_assets(exported, store, result=report_result)
+    saved = exported["coverage"][review.KEY]
+    assert saved["status"] == "partial" and saved["selected"] is None
+    assert [bool(item.get("readings")) for item in saved["contexts"]] == [True, False, False]
+    rendered = engine.render_pdf(frozen)
+    assert not rendered.refused
+    text = " ".join(engine.pdf_text(rendered.pdf).split())
+    assert "Completed 1 of 3 eligible centers." in text
+    for item in saved["contexts"][1:]:
+        middle = item["sentences"][1]
+        assert f"[{middle['source_start']}, {middle['source_end']})" in text
 
 
 @pytest.mark.parametrize("long", [False, True])

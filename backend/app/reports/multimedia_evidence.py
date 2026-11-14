@@ -813,17 +813,19 @@ def _unselected_writing_responses_view(coverage: dict, *, withheld: bool) -> dic
 
 
 def _passage_position_view(coverage: dict, *, withheld: bool) -> dict | None:
-    from app.evidence.document_long_passage_position import SCHEMA as LONG_SCHEMA
+    from app.evidence.document_long_passage_position import SCHEMAS
     from app.evidence.document_passage_position import KEY, LABELS
 
     if (record := coverage.get(KEY)) is None:
         return None
-    if record["schema"] == LONG_SCHEMA:
+    if record["schema"] in SCHEMAS:
         selected = record["selected"]
         context = record["contexts"][selected] if selected is not None else None
         return {"longer": True, "status": record["status"], "text": None if withheld else record.get("focus_text"),
                 "paragraphs": record["paragraphs"], "sentence_count": record["sentence_count"],
-                "eligible": len(record["contexts"]), "rows": [] if context is None else
+                "eligible": len(record["contexts"]), "measured": sum("readings" in item for item in record["contexts"]),
+                "unchecked": [item["sentences"][1] for item in record["contexts"] if "readings" not in item],
+                "rows": [] if context is None else
                 [{"label": label, **span, "response": float.fromhex(reading["response_hex"])}
                  for label, span, reading in zip(("Previous", "Selected", "Following"), context["sentences"],
                                                  context["readings"], strict=True)]}

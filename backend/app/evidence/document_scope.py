@@ -354,7 +354,7 @@ def validate_passage_coverage(document: dict) -> None:
         raise ValueError("Invalid document passage coverage summary")
     if record["schema"] == PASSAGE_POSITION_COVERAGE_SCHEMA:
         position = (document.get("coverage") or {}).get("passage_position_review") or {}
-        if position.get("status") not in {"flagged", "no_flag"}:
+        if position.get("status") not in {"flagged", "no_flag", "partial"}:
             raise ValueError("Passage coverage includes an unmeasured writing position review")
     displayed = Counter()
     previous_end, previous_block = 0, 0

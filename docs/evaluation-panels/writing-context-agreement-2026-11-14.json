@@ -1,0 +1,166 @@
+{
+  "advance": false,
+  "outcomes": {
+    "elife": {
+      "counts": {
+        "after_ordinary": 12,
+        "after_ordinary_flags": 0,
+        "assessed_files": 45,
+        "before_ordinary": 12,
+        "before_ordinary_flags": 1,
+        "combined_located": 0,
+        "files": 45,
+        "granite_edits": 10,
+        "incumbent_located": 0,
+        "measured_sentences": 429,
+        "qwen_edits": 11,
+        "target_assessed": 21,
+        "target_unique_top": 3,
+        "wrong_locations": 0
+      },
+      "flags": [
+        {
+          "group": "21715",
+          "known_edit": null,
+          "span": [
+            715,
+            902
+          ],
+          "variant": "before"
+        }
+      ],
+      "groups": {
+        "additional_ordinary": [
+          "21715"
+        ],
+        "candidate_ordinary": [
+          "21715"
+        ],
+        "incumbent_ordinary": [
+          "13964",
+          "27240"
+        ]
+      }
+    },
+    "f1000": {
+      "counts": {
+        "after_ordinary": 9,
+        "after_ordinary_flags": 1,
+        "assessed_files": 36,
+        "before_ordinary": 9,
+        "before_ordinary_flags": 2,
+        "combined_located": 4,
+        "files": 36,
+        "granite_edits": 9,
+        "incumbent_located": 4,
+        "measured_sentences": 292,
+        "qwen_edits": 9,
+        "target_assessed": 18,
+        "target_unique_top": 9,
+        "wrong_locations": 4
+      },
+      "flags": [
+        {
+          "group": "12989",
+          "known_edit": null,
+          "span": [
+            2180,
+            2310
+          ],
+          "variant": "before"
+        },
+        {
+          "group": "12989",
+          "known_edit": null,
+          "span": [
+            2301,
+            2431
+          ],
+          "variant": "after"
+        },
+        {
+          "group": "12989",
+          "known_edit": [
+            1209,
+            1302
+          ],
+          "span": [
+            2177,
+            2307
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "12989",
+          "known_edit": [
+            1209,
+            1318
+          ],
+          "span": [
+            2193,
+            2323
+          ],
+          "variant": "granite"
+        },
+        {
+          "group": "12039",
+          "known_edit": [
+            880,
+            1095
+          ],
+          "span": [
+            880,
+            1095
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "13723",
+          "known_edit": null,
+          "span": [
+            137,
+            350
+          ],
+          "variant": "before"
+        },
+        {
+          "group": "13723",
+          "known_edit": [
+            2093,
+            2226
+          ],
+          "span": [
+            137,
+            350
+          ],
+          "variant": "qwen"
+        },
+        {
+          "group": "13723",
+          "known_edit": [
+            2093,
+            2307
+          ],
+          "span": [
+            137,
+            350
+          ],
+          "variant": "granite"
+        }
+      ],
+      "groups": {
+        "additional_ordinary": [
+          "12989"
+        ],
+        "candidate_ordinary": [
+          "12989",
+          "13723"
+        ],
+        "incumbent_ordinary": [
+          "12687",
+          "13723"
+        ]
+      }
+    }
+  }
+}

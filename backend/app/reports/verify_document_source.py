@@ -190,7 +190,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         position_review = coverage[document_passage_position.KEY]
         position_detail = (" Verified all three writing position inputs and their source ranges."
                            if position_review["schema"] in document_passage_position.SHORT_SCHEMAS else
-                           f" Verified writing inputs and source ranges at all {len(position_review['contexts'])} eligible centers.")
+                           f" Verified writing inputs and source ranges at "
+                           f"{sum('readings' in row for row in position_review['contexts'])} of "
+                           f"{len(position_review['contexts'])} eligible centers.")
     native_detail = " Verified decoded original text locations for the inspected writing." if document_native_locations.KEY in coverage else ""
     email_input_detail = f" Verified source roles and text hashes for {email_inputs} classifier inputs." if email_inputs else ""
     tracked_detail = f" Verified {tracked} retained tracked Word edit locations against the source XML." if tracked else ""

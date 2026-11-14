@@ -2,6 +2,10 @@
 {% if position.longer %}
 <h3 id="document-passage-position">Longer-passage writing check</h3>
 <p>{{ position.eligible }} eligible sentence centers across {{ position.paragraphs }} paragraphs and {{ position.sentence_count }} sentences.</p>
+{% if position.status == 'partial' %}
+<p>Completed {{ position.measured }} of {{ position.eligible }} eligible centers. No sentence was selected because the check was incomplete.</p>
+<p>Original character ranges without complete readings{% for span in position.unchecked %}{{ ' ' if loop.first else ', ' }}[{{ span.source_start }}, {{ span.source_end }}){% endfor %}.</p>
+{% endif %}
 {% if position.status == 'flagged' %}
 <p>The selected sentence showed a stronger AI-like writing response than its immediate neighbors. Review the wording in context.</p>
 {% if position.text %}<p><strong>Selected sentence.</strong> {{ position.text }}</p>{% endif %}
@@ -13,7 +17,7 @@
 </table>
 {% elif position.status == 'unassessed' %}
 <p>Complete responses were unavailable for the eligible centers.</p>
-{% else %}
+{% elif position.status == 'no_flag' %}
 <p>No sentence was selected among the eligible centers. Authorship remains undetermined.</p>
 {% endif %}
 <p class="caption">This optional check carries zero weight in the overall assessment. JSON pointer <span class="mono">/coverage/passage_position_review</span>.</p>

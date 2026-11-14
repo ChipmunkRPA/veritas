@@ -164,6 +164,7 @@ def validate_readings(readings):
                 or any(type(row[key]) is not int or row[key] <= 0 for key in ("focus_tokens", "neighbor_tokens"))
                 or row["focus_tokens"] + row["neighbor_tokens"] > 512):
             raise ValueError("Incomplete writing input coverage")
+        _amount(row["response_hex"])
     return readings
 
 
@@ -173,7 +174,7 @@ def validate(document, *, published_checks=None):
         return None
     schema = value.get("schema")
     mapped = schema == MAPPED_SCHEMA
-    if (schema not in SHORT_SCHEMAS | {document_long_passage_position.SCHEMA}
+    if (schema not in SHORT_SCHEMAS | document_long_passage_position.SCHEMAS
             or value.get("authorship_confidence_contribution") != 0
             or not mapped and document["source"].get("method") != "plain"):
         raise ValueError("Invalid writing position scope")
@@ -182,7 +183,7 @@ def validate(document, *, published_checks=None):
     if (ref.get("id") not in checks or published_checks is not None and ref["id"] not in published_checks
             or not isinstance(ref.get("display_id"), str) or not re.fullmatch(r"S[0-9]{2,6}", ref["display_id"])):
         raise ValueError("Writing position evidence has no recorded check")
-    if schema == document_long_passage_position.SCHEMA:
+    if schema in document_long_passage_position.SCHEMAS:
         return document_long_passage_position.validate(value, document["source"])
     required = {"schema", "status", "authorship_confidence_contribution", "sentences", "signal_ref", "focus_text"}
     if mapped:
@@ -234,7 +235,7 @@ def verify_source(document, text, mapping, *, result=None, meta=None):
         return False
     sentences = segment(from_string(text))
     method = document["source"]["method"]
-    if value["schema"] == document_long_passage_position.SCHEMA:
+    if value["schema"] in document_long_passage_position.SCHEMAS:
         return document_long_passage_position.verify_source(value, text, mapping, method, sentences)
     locator = value.get("source_locator")
     if locator is not None and mapped_locator(mapping, meta or {}) != locator:

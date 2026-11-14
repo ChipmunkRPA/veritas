@@ -103,12 +103,12 @@ def _marks(result: dict, text: str, *, include_position: bool) -> tuple[bytearra
         if not include_position:
             continue
         position = record.get(document_passage_position.KEY) or {}
-        if position.get("status") not in {"flagged", "no_flag"}:
+        if position.get("status") not in {"flagged", "no_flag", "partial"}:
             continue
         if position.get("schema") in document_passage_position.SHORT_SCHEMAS:
             groups = [position]
-        elif position.get("schema") == document_long_passage_position.SCHEMA:
-            groups = position["contexts"]
+        elif position.get("schema") in document_long_passage_position.SCHEMAS:
+            groups = [context for context in position["contexts"] if "readings" in context]
         else:
             raise ValueError("Unknown writing position evidence")
         for group in groups:

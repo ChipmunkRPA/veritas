@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Agreement between three views of a sentence](writing-context-agreement-2026-11-14.md)
+  added no useful locations on the two journal panels. The optional
+  longer-passage check now retains complete centers when some inputs fail or
+  exceed the time budget. Evidence shows the missing source ranges.
+
 - [Mouth-hold soundtrack under strong background sound](video-mouth-hold-background-transfer-2026-11-14.md)
   found zero added reliable periodicity recoveries in held testing.
   Speech activity survived environmental noise but could not distinguish

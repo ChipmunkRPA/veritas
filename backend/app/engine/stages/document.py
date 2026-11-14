@@ -43,7 +43,7 @@ from app.evidence import document_pdf_visibility, document_tracked_changes, docu
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p33"
+PIPELINE_VERSION = "doc-2.0-p34"
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 PRIMARY_DETECTORS = TEXT_PRIMARY_DETECTORS  # v0.3 used the fine-tune whenever it was installed
 SECONDARY_DETECTOR = "txt.hf.hello_simpleai"

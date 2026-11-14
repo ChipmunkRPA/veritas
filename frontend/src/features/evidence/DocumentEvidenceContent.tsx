@@ -44,8 +44,9 @@ function EmailInputScope({ scope }: { scope: EmailClassifierInputScope }) {
 }
 
 function PassagePosition({ review }: { review: DocumentPassagePosition }) {
-  if (review.schema === 'document-passage-position-review/2') {
+  if ('contexts' in review) {
     const selected = review.selected == null ? null : review.contexts[review.selected]
+    const unchecked = review.contexts.filter(row => !row.readings).map(row => row.sentences[1])
     const labels = ['Previous sentence', 'Selected sentence', 'Following sentence']
     return <section id="document-passage-position" aria-labelledby="document-passage-position-title" className="mt-4 rounded-md border border-border p-4">
       <h3 id="document-passage-position-title" className="m-0 text-body font-medium">Longer-passage writing check</h3>
@@ -53,7 +54,12 @@ function PassagePosition({ review }: { review: DocumentPassagePosition }) {
       <p className="mt-2 mb-0 text-small">{review.status === 'flagged'
         ? 'The selected sentence showed a stronger AI-like writing response than its immediate neighbors. Review the wording in context.'
         : review.status === 'unassessed' ? 'Complete responses were unavailable for the eligible centers.'
+        : review.status === 'partial' ? `Completed ${review.contexts.length - unchecked.length} of ${review.contexts.length} eligible centers. No sentence was selected because the check was incomplete.`
         : 'No sentence was selected among the eligible centers. Authorship remains undetermined.'}</p>
+      {review.status === 'partial' && <p className="mt-2 mb-0 text-small">
+        Original character ranges without complete readings{' '}
+        <span className="font-mono">{unchecked.map(row => `[${row.source_start}, ${row.source_end})`).join(', ')}</span>.
+      </p>}
       {selected && <>
         <blockquote className="my-3 border-l-2 border-border pl-3 break-words text-small">{review.focus_text}</blockquote>
         <ul className="mt-2 mb-0 list-none p-0 text-small">{selected.sentences.map((row, i) =>

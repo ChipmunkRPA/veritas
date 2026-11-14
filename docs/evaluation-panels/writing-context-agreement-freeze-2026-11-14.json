@@ -1,0 +1,117 @@
+{
+  "centers": [
+    2.6627620477418015,
+    -1.2848120229680693,
+    0.21583444308739094
+  ],
+  "cutoff": 1.511552782070673,
+  "feature_maxima": {
+    "10245": [
+      1.2403549897336308,
+      -4.0399544861650885,
+      -0.7083846450218463
+    ],
+    "10336": [
+      2.361652504331517,
+      -2.9983693016991175,
+      0.6467988076490846
+    ],
+    "10427": [
+      2.9994683546910035,
+      3.8334239373239933,
+      1.7221808973863402
+    ],
+    "10569": [
+      2.5699303542476786,
+      -4.994549227205679,
+      0.01464290785481241
+    ],
+    "11045": [
+      1.5846968811526325,
+      0.5882137145298169,
+      -0.12813447269149736
+    ],
+    "11241": [
+      3.0300230927945413,
+      -0.7570424308061282,
+      -0.1388262271208354
+    ],
+    "11519": [
+      1.2789387896768076,
+      -0.2047376965823442,
+      0.15570264151387464
+    ],
+    "8729": [
+      2.922285774844722,
+      -2.258841588884687,
+      0.0784124107377967
+    ],
+    "8841": [
+      1.9211985772137186,
+      -1.1573974119766868,
+      -0.28455162137415574
+    ],
+    "8996": [
+      4.597859753488045,
+      -4.156968655045461,
+      0.27596624466090725
+    ],
+    "9203": [
+      3.6821095168341915,
+      -2.922370792289021,
+      1.6486549803788841
+    ],
+    "9277": [
+      2.776825859497624,
+      -0.9176265086956645,
+      0.44437721786840617
+    ],
+    "9742": [
+      2.755593741235924,
+      -1.412226633959452,
+      0.47225176010729264
+    ],
+    "9938": [
+      1.8453129620293236,
+      1.2478823697692702,
+      1.873206045136111
+    ]
+  },
+  "measurements_sha256": "0c8721669f689ad8cba9344600c2757a3a5ce4835155836911dc380533dfd51d",
+  "method": {
+    "advance": "Across the two panels, at least three added exact locations from distinct works, both generators and both publishers. At most one added ordinary work per publisher and at most two wrong locations per added exact location.",
+    "comparison": "Preserve both existing context and longer-position locations and count new exact locations separately from flags elsewhere.",
+    "features": [
+      "position_contrast",
+      "isolated_log_odds",
+      "two_sided_omission"
+    ],
+    "geometry": "Reuse only exact source and input hash matches. All three measurements must be complete at each eligible center.",
+    "normalization": "Each feature uses the median and median absolute deviation of 14 ordinary work maxima. Scale floor is 0.25 raw units.",
+    "point": "Strict excess over the second-highest ordinary work maximum of the normalized median. Both versions per work participate.",
+    "score": "The median of the three normalized features at the same exact sentence. The largest unique complete response can select one sentence."
+  },
+  "point_sha256": "1b4713fb1fc38053a1f28d2c4e564fa587cb16950d261070e8dd7ab6d6871801",
+  "scales": [
+    0.5544122577904114,
+    1.675558024026,
+    0.34931479299355733
+  ],
+  "schema": "chipmunk.writing-context-agreement-replay/1",
+  "work_maxima": {
+    "10245": -2.5656125708279234,
+    "10336": -1.0226785668775256,
+    "10427": 1.397431076397279,
+    "10569": -0.8241730444145321,
+    "11045": -0.984696104139032,
+    "11241": 0.009535296307854208,
+    "11519": -0.17214215595680588,
+    "8729": -0.3975445394241927,
+    "8841": -1.4324788829391937,
+    "8996": 0.17214215595680588,
+    "9203": 1.5968030528189359,
+    "9277": 0.21914222545999223,
+    "9742": -0.07604309081772845,
+    "9938": 1.511552782070673
+  }
+}

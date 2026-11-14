@@ -6,6 +6,7 @@ import hashlib
 import json
 import math
 from functools import lru_cache
+from itertools import batched
 from pathlib import Path
 
 from app.core.config import settings
@@ -119,13 +120,24 @@ def _capture_long(classifier, doc, sentences, deadline):
     if remaining is not None and remaining < LONG_EXTRA_SECONDS + 1:
         return document_long_passage_position.record(scope)
     budget = deadline.nested(LONG_EXTRA_SECONDS)
-    readings = []
+    groups = [document_passage_position.inputs(doc.text, row["sentences"]) for row in scope["contexts"]]
+    readings = [None] * len(groups)
     try:
-        for start in range(0, len(scope["contexts"]), 2):
-            batch = [item for row in scope["contexts"][start:start + 2]
-                     for item in document_passage_position.inputs(doc.text, row["sentences"])]
-            output = _scores(classifier, batch, budget)
-            readings.extend(output[i:i + 3] for i in range(0, len(output), 3))
-    except (DetectorTimeout, KeyError, OSError, RuntimeError, ValueError):
-        return document_long_passage_position.record(scope)
+        for start in range(0, len(groups), 2):
+            batch = groups[start:start + 2]
+            try:
+                output = _scores(classifier, [item for group in batch for item in group], budget)
+            except ValueError:
+                # A bad input can invalidate its batch. Retry each complete
+                # context separately so the neighboring center can still be read.
+                for index, group in enumerate(batch, start):
+                    try:
+                        readings[index] = _scores(classifier, group, budget)
+                    except ValueError:
+                        continue
+            else:
+                for index, response in zip(range(start, start + len(batch)), batched(output, 3), strict=True):
+                    readings[index] = list(response)
+    except (DetectorTimeout, KeyError, OSError, RuntimeError):
+        pass
     return document_long_passage_position.record(scope, readings=readings, text=doc.text)

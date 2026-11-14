@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Shared spectrogram normalization in noisy speech](audio-shared-mel-context-2026-11-14.md)
+  located 8 of 40 edits across three previously exposed panels, compared
+  with 7 for denser windows with local normalization and 1 for the
+  current review. Shared scale and dense local each flagged 21 of 84
+  ordinary clips, compared with 8 for the current check. The new method
+  stays experimental pending a fresh, matched comparison.
+
 - **Color stored under PNG transparency** now shows a same-location pair
   in the ordinary analysis view and PDF, plus coordinates and crop hashes
   in JSON. The check measures fully transparent pixels in supported RGBA

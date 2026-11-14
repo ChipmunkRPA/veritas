@@ -103,6 +103,11 @@ The [resynthesis and competing speech replay](audio-sine-resynthesis-transfer-20
 recounts 152 held deliveries at the same frozen speech points. Native
 replay reconstructs each waveform and checks matched resynthesized words,
 synthetic splices, infill deliveries, and isolated meeting-room controls.
+The [shared speech normalization replay](audio-shared-mel-context-2026-11-14.md#replay)
+recounts three short-window routes with identical speech admission on
+151 comparison clips. Its selection point comes from 44 separate deliveries.
+It reports standalone and supplementary results, including ordinary
+flags and flags on resynthesis of unchanged words.
 
 The latest single-upload comparisons cover [localized image residuals](image-residual-third-order-transfer-2026-11-13.md),
 [motion around the mouth](video-mouth-motion-transport-2026-11-13.md),

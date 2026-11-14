@@ -86,6 +86,37 @@ def test_measured_mixed_sound_level_distinguishes_digital_silence_from_noise():
         binding.validate(review, packet, audio, "1/16000")
 
 
+def test_speech_activity_clips_to_the_hold_and_cannot_cross_its_source_context():
+    class Activity:
+        def spans(self, pcm):
+            assert len(pcm) == 6 * binding.RATE
+            return [(2.8, 3.1), (3.0, 3.21)]
+
+    review = {"schema": "chipmunk.video-mouth-local-hold/1", "status": "matched",
+              "match": {"frames": [0, 1]}, "pts": [64_000, 70_400]}
+    audio = {"timeline_time_base": "1/16000", "samples": 128_000,
+             "timeline": [{"start_sample": 0, "end_sample": 128_000, "source_pts": 0}]}
+    values = np.random.default_rng(754).uniform(-.1, .1, size=128_000)
+    record = measure(values, audio, review, "1/16000", schema=binding.ACTIVITY_SCHEMA, activity=Activity())
+    assert record["speech_activity"] == {"samples": 6400, "context": [19_200, 115_200]}
+    assert "cannot be assigned to the visible person" in binding.observation(record)
+    review["sound_context"] = record
+    packet = {"mouth_hold_sound": record, "limitations": [binding.LIMITATION], "artifacts": {
+        binding.WAV: {"media_type": "audio/wav", "samples": 6400, "sample_rate": 16000, "channels": 1},
+        binding.WAVEFORM: {"media_type": "image/png", "width": 960, "height": 280}}}
+    binding.validate(review, packet, audio, "1/16000")
+    record["speech_activity"]["context"][0] -= 1
+    with pytest.raises(ValueError, match="outside the supported source context"):
+        binding.validate(review, packet, audio, "1/16000")
+
+    disrupted = {**audio, "timeline": [
+        {"start_sample": 0, "end_sample": 60_000, "source_pts": 0},
+        {"start_sample": 60_000, "end_sample": 72_000, "source_pts": 60_002},
+        {"start_sample": 72_000, "end_sample": 128_000, "source_pts": 72_004},
+    ]}
+    assert measure(values, disrupted, review, "1/16000", schema=binding.ACTIVITY_SCHEMA)["schema"] == binding.LEVEL_SCHEMA
+
+
 @pytest.mark.parametrize(("blocks", "expected"), [
     ([(0, 12_800, 0), (12_800, 32_000, 16_000)], (12_800, 19_200, 16_000, 22_400)),
     ([(0, 23_000, 0), (23_000, 32_000, 24_000)], (16_000, 22_400, 16_000, 22_400)),

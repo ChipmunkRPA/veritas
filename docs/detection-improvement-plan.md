@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Speech activity during a video mouth hold](video-mouth-hold-speech-context-2026-11-14.md)
+  measured speech in 40/60 rain- or train-masked intervals versus zero by
+  periodicity, with zero speech observations on 30 environmental-only
+  controls. The local trial binds the result to the displayed pictures
+  and waveform. It leaves speaker attribution and AI confidence unchanged.
+
 - [Speech alignment against an earlier recording](audio-aligned-speech-app-2026-11-14.md)
   raises clean splice localization from 4/27 to 24/27 without new flags
   in 312 ordinary pairs. The trial shows separate timestamps and waveforms

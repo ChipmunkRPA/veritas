@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [video mouth-hold speech replay](video-mouth-hold-speech-context-2026-11-14.md#replay)
+recounts 165 windows across genuine speech, edited speech and matched
+background-only recordings. It reconstructs the measured speech duration
+and shows why speech from another person can produce the same observation.
+
 The [earlier-copy speech alignment replay](audio-aligned-speech-app-2026-11-14.md#replay)
 recounts 468 pairs from two disjoint reader panels. It checks added
 locations, ordinary processing flags and noise-related abstentions.

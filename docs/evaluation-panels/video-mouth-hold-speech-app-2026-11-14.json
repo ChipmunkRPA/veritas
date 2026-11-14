@@ -1,0 +1,102 @@
+{
+  "cases": {
+    "background-competing_speech": {
+      "frame_indices": [
+        12,
+        17,
+        21
+      ],
+      "sound": {
+        "blocks": 15,
+        "periodic_blocks": 2,
+        "rms_dbfs": -45.0,
+        "samples": [
+          8320,
+          13440
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          8320,
+          13440
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            32000
+          ],
+          "samples": 5120
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      },
+      "source_assets_verified": 7,
+      "source_sha256": "7087ed8db9a861dca543e11058a84e7cb1416670d87fbf26ce9a2647aff3b152"
+    },
+    "background-train": {
+      "frame_indices": [
+        12,
+        17,
+        21
+      ],
+      "sound": {
+        "blocks": 15,
+        "periodic_blocks": 0,
+        "rms_dbfs": -18.329,
+        "samples": [
+          8320,
+          13440
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          8320,
+          13440
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            32000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      },
+      "source_assets_verified": 7,
+      "source_sha256": "ad111de23882968587c8b4b73aacbd09175dbde0454bdb0a4f2c7061227beb7c"
+    },
+    "variant-train": {
+      "frame_indices": [
+        12,
+        17,
+        21
+      ],
+      "sound": {
+        "blocks": 15,
+        "periodic_blocks": 0,
+        "rms_dbfs": -17.264,
+        "samples": [
+          8320,
+          13440
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          8320,
+          13440
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            32000
+          ],
+          "samples": 5120
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      },
+      "source_assets_verified": 7,
+      "source_sha256": "a24433c04b759a3356a3268ebcc4afe3301b76310556d8f4fc12aec235a6c30f"
+    }
+  },
+  "paid_runs": 3,
+  "unpaid_jobs": 0
+}

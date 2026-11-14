@@ -240,6 +240,7 @@ class Settings(BaseSettings):
     audio_reference_aligned_speech: bool = False  # Trial: align speech when the two clean-copy timelines differ locally.
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.
     video_soundtrack_pair_review: bool = False  # Compare two matching audio streams in one short video.
+    video_mouth_hold_speech_context: bool = False  # Trial: measure speech activity at a verified mouth hold.
     video_soundtrack_frequency_review: bool = False  # Check cross-band support after a missed broad timing match.
     video_reference_local_area: bool = False  # Qualified short 720 x 480 earlier-copy picture evidence.
     video_reference_measured_interval: bool = False  # Show strongly supported frame boundaries for qualified local picture ranges.

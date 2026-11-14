@@ -8,6 +8,7 @@ from fractions import Fraction
 
 SCHEMA = "chipmunk.video-mouth-hold-sound/1"
 LEVEL_SCHEMA = "chipmunk.video-mouth-hold-sound/2"
+ACTIVITY_SCHEMA = "chipmunk.video-mouth-hold-sound/3"
 RATE = 16000
 HOP = 320
 WAV = "mouth_hold_audio"
@@ -16,6 +17,8 @@ WAVEFORM_TITLE = "Sound during the mouth-region hold"
 SOURCE_CLOCK = "source_pts"
 SOURCE_WAVEFORM_TITLE = "Sound during the mouth-region hold (source time)"
 MIN_BLOCKS = 6
+MIN_ACTIVITY_SAMPLES = 3200
+MAX_CONTEXT_SAMPLES = 6 * RATE
 HOLD_SCHEMAS = frozenset({"chipmunk.video-mouth-local-hold/1", "chipmunk.video-mouth-local-hold/2"})
 LIMITATION = ("The mixed soundtrack can include a different speaker, ordinary dubbing or music. "
               "Strong background noise can mask voice-like periodicity. This observation carries zero AI confidence weight.")
@@ -62,6 +65,18 @@ def block_starts(start: int, stop: int) -> range:
     return range(offset, stop - 2 * HOP + 1, HOP)
 
 
+def activity_context(audio, start, stop):
+    for block in audio["timeline"]:
+        a, b = block["start_sample"], block["end_sample"]
+        if a <= start < stop <= b:
+            length = min(MAX_CONTEXT_SAMPLES, b - a)
+            if length < RATE or stop - start > length:
+                return None
+            left = min(max(a, (start + stop - length) // 2), b - length)
+            return left, left + length
+    return None
+
+
 def measurements(record):
     count, periodic = record["blocks"], record["periodic_blocks"]
     observations = [{"label": "Audio blocks with voice-like periodicity", "value": f"{periodic} of {count}",
@@ -71,10 +86,16 @@ def measurements(record):
         observations.append({"label": "Mixed soundtrack level during the hold",
                              "value": "Digital silence" if level is None else level,
                              "unit": "" if level is None else "dBFS RMS"})
+    if activity := record.get("speech_activity"):
+        observations.append({"label": "Estimated speech activity during the hold",
+                             "value": round(1000 * activity["samples"] / RATE, 1), "unit": "ms"})
     return observations
 
 
 def observation(record):
+    if (activity := record.get("speech_activity")) and activity["samples"] >= MIN_ACTIVITY_SAMPLES:
+        return ("The mixed soundtrack contains detectable speech activity during the mouth-region hold. "
+                "The sound cannot be assigned to the visible person from this check.")
     if record["sustained_periodicity"]:
         return "The soundtrack has sustained voice-like periodicity during the measured mouth-region hold."
     if "rms_dbfs" in record:
@@ -98,7 +119,7 @@ def validate(review, packet, audio, time_base):
     count = len(block_starts(start, stop))
     schema = record["schema"]
     keys = {"schema", "samples", "source_pts", "time_base", "blocks", "periodic_blocks", "sustained_periodicity"}
-    if schema == LEVEL_SCHEMA:
+    if schema in {LEVEL_SCHEMA, ACTIVITY_SCHEMA}:
         keys.add("rms_dbfs")
         level = record.get("rms_dbfs")
         if level is None:
@@ -106,7 +127,15 @@ def validate(review, packet, audio, time_base):
                 raise ValueError("Digital silence cannot contain periodic blocks")
         elif type(level) not in (int, float) or not math.isfinite(level) or not -150 <= level <= 0:
             raise ValueError("Mouth-hold soundtrack level is outside the PCM range")
-    if (set(record) != keys or schema not in {SCHEMA, LEVEL_SCHEMA}
+    if schema == ACTIVITY_SCHEMA:
+        keys.add("speech_activity")
+        activity = record["speech_activity"]
+        context = activity_context(audio, start, stop)
+        if (set(activity) != {"samples", "context"} or context is None or activity["context"] != list(context)
+                or type(activity["samples"]) is not int or not 0 <= activity["samples"] <= stop - start
+                or (record["rms_dbfs"] is None and activity["samples"])):
+            raise ValueError("Mouth-hold speech activity falls outside the supported source context")
+    if (set(record) != keys or schema not in {SCHEMA, LEVEL_SCHEMA, ACTIVITY_SCHEMA}
             or record["samples"] != [start, stop] or record["source_pts"] != [first, last]
             or record["time_base"] != f"1/{RATE}" or type(record["blocks"]) is not int
             or record["blocks"] != count or count < MIN_BLOCKS

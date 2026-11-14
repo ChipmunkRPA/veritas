@@ -1,0 +1,4853 @@
+{
+  "activity_sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+  "results": {
+    "background/competing_speech": {
+      "periodic": 0,
+      "speech": 6,
+      "windows": 15
+    },
+    "background/rain": {
+      "periodic": 0,
+      "speech": 0,
+      "windows": 15
+    },
+    "background/train": {
+      "periodic": 0,
+      "speech": 0,
+      "windows": 15
+    },
+    "original/clean": {
+      "periodic": 1,
+      "speech": 15,
+      "windows": 15
+    },
+    "original/competing_speech": {
+      "periodic": 0,
+      "speech": 15,
+      "windows": 15
+    },
+    "original/rain": {
+      "periodic": 0,
+      "speech": 13,
+      "windows": 15
+    },
+    "original/train": {
+      "periodic": 0,
+      "speech": 8,
+      "windows": 15
+    },
+    "variant/clean": {
+      "periodic": 2,
+      "speech": 15,
+      "windows": 15
+    },
+    "variant/competing_speech": {
+      "periodic": 0,
+      "speech": 15,
+      "windows": 15
+    },
+    "variant/rain": {
+      "periodic": 0,
+      "speech": 12,
+      "windows": 15
+    },
+    "variant/train": {
+      "periodic": 0,
+      "speech": 7,
+      "windows": 15
+    }
+  },
+  "rows": [
+    {
+      "id": 0,
+      "pcm_sha256": "11a672ab9f84207465f51c391786a5feefb01ec1f0156769bc9ae2e3accae31d",
+      "role": "original",
+      "scene": "clean",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 12,
+        "rms_dbfs": -20.296,
+        "samples": [
+          8320,
+          14720
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          8320,
+          14720
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 0,
+      "pcm_sha256": "3a33b078e35d7de233e465eed6b9499996c03503647e1c2b84b070b353ee4b9c",
+      "role": "variant",
+      "scene": "clean",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 12,
+        "rms_dbfs": -25.096,
+        "samples": [
+          8320,
+          14720
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          8320,
+          14720
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 0,
+      "pcm_sha256": "49b81526a13b228d813c9a92317d933df2fecc16c512372b92c43b5c1bdba802",
+      "role": "original",
+      "scene": "rain",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 3,
+        "rms_dbfs": -21.826,
+        "samples": [
+          8320,
+          14720
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          8320,
+          14720
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 0,
+      "pcm_sha256": "13b6263062e1039879614b59748801d7b542c8bdce6922760cf7a49e0516a588",
+      "role": "variant",
+      "scene": "rain",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 0,
+        "rms_dbfs": -24.441,
+        "samples": [
+          8320,
+          14720
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          8320,
+          14720
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 0,
+      "pcm_sha256": "afac7d83b08ffe8d12863604c41f2869be8824be0b57f1b907ae9c060c301841",
+      "role": "background",
+      "scene": "rain",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 0,
+        "rms_dbfs": -26.345,
+        "samples": [
+          8320,
+          14720
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          8320,
+          14720
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 0,
+      "pcm_sha256": "7c1b95cc4389949e203541d14e7714f3a5d9e9da7e561e564d3ab592882ae108",
+      "role": "original",
+      "scene": "train",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 0,
+        "rms_dbfs": -15.965,
+        "samples": [
+          8320,
+          14720
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          8320,
+          14720
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 0,
+      "pcm_sha256": "8e7fd6b33a25e074c83806b9d29b80d34d2c992635451d17be429392873cfaa5",
+      "role": "variant",
+      "scene": "train",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 0,
+        "rms_dbfs": -16.989,
+        "samples": [
+          8320,
+          14720
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          8320,
+          14720
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 0,
+      "pcm_sha256": "fd68c13ce6c49d08a64b2803fb933222f644ccb6ba7aadb7249357dbddf674e6",
+      "role": "background",
+      "scene": "train",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 0,
+        "rms_dbfs": -17.76,
+        "samples": [
+          8320,
+          14720
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          8320,
+          14720
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 0,
+      "pcm_sha256": "de2b04877314e0fbaba0661fc4eba0813ab2292a9ce2408a4d070a8795f3621a",
+      "role": "background",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 0,
+        "rms_dbfs": -55.568,
+        "samples": [
+          8320,
+          14720
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          8320,
+          14720
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 0,
+      "pcm_sha256": "4777e9861c09969fe15f9275188e1718a4efe6d09c7e3b6d35a5fd3d028a8754",
+      "role": "original",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 7,
+        "rms_dbfs": -22.232,
+        "samples": [
+          8320,
+          14720
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          8320,
+          14720
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 0,
+      "pcm_sha256": "a926d1141746e11c3e5058d0cc737c2f18b59412d03f038366338fa9e40d8455",
+      "role": "variant",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 1,
+        "rms_dbfs": -25.912,
+        "samples": [
+          8320,
+          14720
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          8320,
+          14720
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 1,
+      "pcm_sha256": "f00e6cb8e1b2cf1f094377722d7073e62a056b54c6cbe4495778ff6092891535",
+      "role": "original",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 15,
+        "rms_dbfs": -38.136,
+        "samples": [
+          27440,
+          33840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27440,
+          33840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": true,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 1,
+      "pcm_sha256": "32bc70fc27ea395dcd075338cb15994140a9808d23f58d15a8f59307c6823aa4",
+      "role": "variant",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 10,
+        "rms_dbfs": -33.117,
+        "samples": [
+          27440,
+          33840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27440,
+          33840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 1,
+      "pcm_sha256": "d9445f1dd38965b46895bc8819812fc471474eab1d53efaf3ab2596c0bca9846",
+      "role": "original",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -25.355,
+        "samples": [
+          27440,
+          33840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27440,
+          33840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 176
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 1,
+      "pcm_sha256": "9827bdc054aaa6e12083cc467a08b731f554e828d73f55df4cc2a846b0247f3b",
+      "role": "variant",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -25.068,
+        "samples": [
+          27440,
+          33840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27440,
+          33840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 5296
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 1,
+      "pcm_sha256": "63f874847446ab2b60d6be3f1ec2bb7c2917af9676f01499ed550bf4f1e86786",
+      "role": "background",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -25.52,
+        "samples": [
+          27440,
+          33840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27440,
+          33840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 1,
+      "pcm_sha256": "62beb8eaa0618ed0844d0fcf5abe8ad358074de2e4f9606f7c52c72226fc907a",
+      "role": "original",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -22.755,
+        "samples": [
+          27440,
+          33840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27440,
+          33840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 1,
+      "pcm_sha256": "8e7e2d34e034cc8063f3da394ddc2802d91f00017e5df115d5df322e5b8cfc50",
+      "role": "variant",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -22.633,
+        "samples": [
+          27440,
+          33840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27440,
+          33840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 1,
+      "pcm_sha256": "91f121868eba59874cddfebf122602f18a9107788eb9edcf96883d5607c8835e",
+      "role": "background",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -22.949,
+        "samples": [
+          27440,
+          33840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27440,
+          33840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 1,
+      "pcm_sha256": "12369b952aae7dfaea311030d09ceb9408fe6fc76002678c723efbb441526804",
+      "role": "background",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -56.739,
+        "samples": [
+          27440,
+          33840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27440,
+          33840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 1,
+      "pcm_sha256": "ecbc3fc4102cc825215a85d5b930964776443796672137c7e5b365eded3eaba3",
+      "role": "original",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -33.089,
+        "samples": [
+          27440,
+          33840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27440,
+          33840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 1,
+      "pcm_sha256": "e9fd098b637b0b788d3cbca8d972121ef8cec65abf398a8d3eafb44a8300db88",
+      "role": "variant",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 3,
+        "rms_dbfs": -30.887,
+        "samples": [
+          27440,
+          33840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27440,
+          33840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 2,
+      "pcm_sha256": "4c3d7f2dcb91fe8b97654b1e74bc1192614b3c15595b16e7cc778ad2ed30df02",
+      "role": "original",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 7,
+        "rms_dbfs": -22.538,
+        "samples": [
+          49200,
+          55600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          49200,
+          55600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 2,
+      "pcm_sha256": "90eac0778cdbc5a768aafc036db682298ee5b85f70ca7e37b1f9f141bc00aafd",
+      "role": "variant",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 6,
+        "rms_dbfs": -30.357,
+        "samples": [
+          49200,
+          55600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          49200,
+          55600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 2,
+      "pcm_sha256": "88d2d33d47632453beb3410da86d9aaf699c4f10fb9728f3e7bea638dd2b5634",
+      "role": "original",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -24.026,
+        "samples": [
+          49200,
+          55600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          49200,
+          55600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 4880
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 2,
+      "pcm_sha256": "8e623d59a08d0bdea15a569a0bf0fe5dca12e61cb5ab8a25a9f54fe2579b7f8a",
+      "role": "variant",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -25.617,
+        "samples": [
+          49200,
+          55600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          49200,
+          55600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 2,
+      "pcm_sha256": "3a5f13eb038af27d3e6286dcdaa17ccf238bad58d6f2945492b6d49e9753ef76",
+      "role": "background",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -26.03,
+        "samples": [
+          49200,
+          55600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          49200,
+          55600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 2,
+      "pcm_sha256": "b212389b6322429a0482e02caf69923f0f853d18a850fba0ae27070c493e81b9",
+      "role": "original",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -18.815,
+        "samples": [
+          49200,
+          55600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          49200,
+          55600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 4880
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 2,
+      "pcm_sha256": "11fa52f0d0860daf81f63369f99b4831d4eab9596efbf709d9df100c8bf65704",
+      "role": "variant",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -20.999,
+        "samples": [
+          49200,
+          55600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          49200,
+          55600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 2,
+      "pcm_sha256": "36cf2ae58c475e7b16dfca2dac3a6ffe811185a39e8dd96ff61360ae3cf90e66",
+      "role": "background",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -21.432,
+        "samples": [
+          49200,
+          55600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          49200,
+          55600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 2,
+      "pcm_sha256": "faefcacffb60a0c3a79ca9763d06ae7106eb9b0968c15efc5c383ecf97550a27",
+      "role": "background",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 1,
+        "rms_dbfs": -44.639,
+        "samples": [
+          49200,
+          55600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          49200,
+          55600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 2,
+      "pcm_sha256": "96b2c9f3e67a184022a2bf0efa48ef616dc209d937df7964e65d6194c300fb92",
+      "role": "original",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 4,
+        "rms_dbfs": -15.723,
+        "samples": [
+          49200,
+          55600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          49200,
+          55600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 2,
+      "pcm_sha256": "3ed4f648c3cd39199d7c909634decce7c721b1cd3670f274a08c0e941b4d0109",
+      "role": "variant",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 6,
+        "rms_dbfs": -16.928,
+        "samples": [
+          49200,
+          55600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          49200,
+          55600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 3,
+      "pcm_sha256": "1c137a9d887caff66b052c354cdfccf08fb4e4b66f9d269a6253e70f139235ed",
+      "role": "original",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 7,
+        "rms_dbfs": -25.378,
+        "samples": [
+          5200,
+          11600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          5200,
+          11600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 3,
+      "pcm_sha256": "30b482bdea9ef32ffb5b1287f7741948abe45c8ba138a31d9cdf82a30a86e11c",
+      "role": "variant",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 9,
+        "rms_dbfs": -25.033,
+        "samples": [
+          5200,
+          11600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          5200,
+          11600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 3,
+      "pcm_sha256": "aaf65fd36bc63f88984fcc93aed047173797ac8d69e7d3f0ae50733c7792a42b",
+      "role": "original",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 1,
+        "rms_dbfs": -22.982,
+        "samples": [
+          5200,
+          11600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          5200,
+          11600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 3,
+      "pcm_sha256": "aa584e38f6d64e934f4ea53270f4505b908016c64452d5e6f3bdecd178406ce0",
+      "role": "variant",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 4,
+        "rms_dbfs": -22.929,
+        "samples": [
+          5200,
+          11600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          5200,
+          11600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 3,
+      "pcm_sha256": "6fa0d4033a1c448bc4561ffc7de21eb1f2e0727192c47739ea7a9952eaa5a495",
+      "role": "background",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -26.856,
+        "samples": [
+          5200,
+          11600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          5200,
+          11600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 3,
+      "pcm_sha256": "8e985d5b864d70a1eafd3c16884a822d809526b2609faf7cba7dcadccb86a953",
+      "role": "original",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -21.568,
+        "samples": [
+          5200,
+          11600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          5200,
+          11600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 3,
+      "pcm_sha256": "eee8a4b1bc48b9aa46222fa448c0e067f1dffda855b73a92a76a20e1222f0486",
+      "role": "variant",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -21.282,
+        "samples": [
+          5200,
+          11600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          5200,
+          11600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 3,
+      "pcm_sha256": "c9c64d90629e2d0f89698b0014ff4fb590cea701577f8a3623ff8c36f5654fcb",
+      "role": "background",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -23.841,
+        "samples": [
+          5200,
+          11600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          5200,
+          11600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 3,
+      "pcm_sha256": "91fb01979f9d03731e57a73639f280a8476d37c53ff84bf09ab091edd149e4f4",
+      "role": "background",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -55.429,
+        "samples": [
+          5200,
+          11600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          5200,
+          11600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 3,
+      "pcm_sha256": "8a2b4f187e0dd905beaf91323c5d7f37782b816dbd616c5ef6bc65725cb6bfc4",
+      "role": "original",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 3,
+        "rms_dbfs": -24.239,
+        "samples": [
+          5200,
+          11600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          5200,
+          11600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 3,
+      "pcm_sha256": "51fa08543f227597b8999e02b01a946ea1d15eb6f7c22fbe197e7832309000f5",
+      "role": "variant",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 5,
+        "rms_dbfs": -23.737,
+        "samples": [
+          5200,
+          11600
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          5200,
+          11600
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 4,
+      "pcm_sha256": "d54320db7e6239433962db5e261306baa4b34a4533970b7ba92f56160587548d",
+      "role": "original",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 5,
+        "rms_dbfs": -29.145,
+        "samples": [
+          29520,
+          35920
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          29520,
+          35920
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 4,
+      "pcm_sha256": "7bfa20407a0d7010d06515c96a7370b77835d13a8e4abf66209ff756a200c2be",
+      "role": "variant",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 15,
+        "rms_dbfs": -22.629,
+        "samples": [
+          29520,
+          35920
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          29520,
+          35920
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": true,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 4,
+      "pcm_sha256": "38f063e51e6fd741fa1104935eb3e0bc0f8eab2467ab7aa78b2a57d0347ebc7c",
+      "role": "original",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -27.793,
+        "samples": [
+          29520,
+          35920
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          29520,
+          35920
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 4,
+      "pcm_sha256": "b7d546c7f655c81a3e3db539bbd9afef57650fbd83bc3e4f30a2afa9dd63be84",
+      "role": "variant",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 5,
+        "rms_dbfs": -24.445,
+        "samples": [
+          29520,
+          35920
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          29520,
+          35920
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 4,
+      "pcm_sha256": "cbf226607e9f6a1ad34a89b0f354ca652f74261ff0ab2bd224296f10696f7dc8",
+      "role": "background",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -29.649,
+        "samples": [
+          29520,
+          35920
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          29520,
+          35920
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 4,
+      "pcm_sha256": "81ae623fbb1df6bd672762d801fc2030ef1961dfafaf240060f4bdc33d18439f",
+      "role": "original",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -19.225,
+        "samples": [
+          29520,
+          35920
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          29520,
+          35920
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 4,
+      "pcm_sha256": "1895d7bc588794028eb433bd428a64ee4867ca3dfa869b429483f537c0fa2351",
+      "role": "variant",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -17.66,
+        "samples": [
+          29520,
+          35920
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          29520,
+          35920
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 4,
+      "pcm_sha256": "06d7b8dea2010bb638d89741b01d3f7e23ba08068192003add79e39b8da23e99",
+      "role": "background",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -19.833,
+        "samples": [
+          29520,
+          35920
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          29520,
+          35920
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 4,
+      "pcm_sha256": "1923f27457d37d39d0b9db8ec209fede58bbf759ef3e477bcd90db0e2098d1ea",
+      "role": "background",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -50.415,
+        "samples": [
+          29520,
+          35920
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          29520,
+          35920
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 4,
+      "pcm_sha256": "987249aada59a1971f6f16c71ec7dcce4f19ab37bb10e00e6e4ad5c71a3feb75",
+      "role": "original",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 1,
+        "rms_dbfs": -21.685,
+        "samples": [
+          29520,
+          35920
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          29520,
+          35920
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 4,
+      "pcm_sha256": "7b383ac328988519a05e335ca98a7ecb0bb3b762761e42e447c23f72b5874873",
+      "role": "variant",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 9,
+        "rms_dbfs": -19.842,
+        "samples": [
+          29520,
+          35920
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          29520,
+          35920
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 5,
+      "pcm_sha256": "69b1a3ac3f769e98b9e571edb670c68d3e39408eb91006f4c5900cb3802b873a",
+      "role": "original",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 9,
+        "rms_dbfs": -20.947,
+        "samples": [
+          17440,
+          23840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          17440,
+          23840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 5,
+      "pcm_sha256": "eba8905458ba4c6b23ad989869392d9fd5273f966eeaee135cfe7034b95f5769",
+      "role": "variant",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 10,
+        "rms_dbfs": -21.735,
+        "samples": [
+          17440,
+          23840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          17440,
+          23840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 5,
+      "pcm_sha256": "608c44ae788f7aefd144158be90eb7a614862403d9e8d23d4485803f29438a66",
+      "role": "original",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -23.258,
+        "samples": [
+          17440,
+          23840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          17440,
+          23840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 5,
+      "pcm_sha256": "f2038c17fcb2813991fc41d2bbad1493d71999cbfc821c8c52da537167096a5c",
+      "role": "variant",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -23.618,
+        "samples": [
+          17440,
+          23840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          17440,
+          23840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 5,
+      "pcm_sha256": "e9df52d86602b84481b70cb8a6099852d9aa38843af58fe092208c980caf41d5",
+      "role": "background",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -25.673,
+        "samples": [
+          17440,
+          23840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          17440,
+          23840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 5,
+      "pcm_sha256": "48f60cf759f808c813f89f893a7e22d9ae97394321099dc8fd522672499f22e7",
+      "role": "original",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -15.863,
+        "samples": [
+          17440,
+          23840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          17440,
+          23840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 5,
+      "pcm_sha256": "c144cf353c7c3b8773c3417e0356796a376d6c53e4c18930ba827d18695c5d08",
+      "role": "variant",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -16.174,
+        "samples": [
+          17440,
+          23840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          17440,
+          23840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 5,
+      "pcm_sha256": "d31fe7247c4cbc6611255a3187c845c1cd9f67560fbeb0986853dd9894eb7230",
+      "role": "background",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -17.411,
+        "samples": [
+          17440,
+          23840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          17440,
+          23840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 5,
+      "pcm_sha256": "877ac3b3afc4be53e6bb34f6d42cf70832ca6a14b20b16434b70f529042557d4",
+      "role": "background",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -59.581,
+        "samples": [
+          17440,
+          23840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          17440,
+          23840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 448
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 5,
+      "pcm_sha256": "d10c5f34fef32972a42570d05e5b14ccf62394ce20890b0d80afc7400bd8d71b",
+      "role": "original",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 2,
+        "rms_dbfs": -23.441,
+        "samples": [
+          17440,
+          23840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          17440,
+          23840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 5,
+      "pcm_sha256": "a46d73e6938ec35dc837dee42ad0d6601907d42bfb79f203814f0f69d885c91d",
+      "role": "variant",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 4,
+        "rms_dbfs": -23.916,
+        "samples": [
+          17440,
+          23840
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          17440,
+          23840
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 6,
+      "pcm_sha256": "c37d7d32550bbc262e9d6a64ce9ce6942de7d1f89065e12d555bc194092305d7",
+      "role": "original",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 3,
+        "rms_dbfs": -24.977,
+        "samples": [
+          76640,
+          83040
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76640,
+          83040
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 6,
+      "pcm_sha256": "4f0b56acac4ddd7400e7c0ec1a56f217ced3b669e99f63e1dd3c14d7bcb4732e",
+      "role": "variant",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 10,
+        "rms_dbfs": -20.752,
+        "samples": [
+          76640,
+          83040
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76640,
+          83040
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 6,
+      "pcm_sha256": "ed36e2b025e7044860810ac0fb254fb157eeb98a9c64839b28cac7506aff7e2b",
+      "role": "original",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -25.345,
+        "samples": [
+          76640,
+          83040
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76640,
+          83040
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 5184
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 6,
+      "pcm_sha256": "436ada0b53a138cca8517f61effc0a52392636be05ef616897fe915673feb90a",
+      "role": "variant",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -23.929,
+        "samples": [
+          76640,
+          83040
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76640,
+          83040
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 6,
+      "pcm_sha256": "ac28a860eb76d4512bf75e24351a5792b14be748e42d19792505b3335546459d",
+      "role": "background",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -26.463,
+        "samples": [
+          76640,
+          83040
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76640,
+          83040
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 6,
+      "pcm_sha256": "c714ae11e3f1b1ab16468cff2acbc63953114a73340b31ae5dc6c1f743c01b00",
+      "role": "original",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -17.051,
+        "samples": [
+          76640,
+          83040
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76640,
+          83040
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 6,
+      "pcm_sha256": "865dec7ca24e6975156e10236adce3f7539ea9da830b4feadb47dfb06334a81a",
+      "role": "variant",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -16.098,
+        "samples": [
+          76640,
+          83040
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76640,
+          83040
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6208
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 6,
+      "pcm_sha256": "1a272a161d393d3cd8ebf035cffa2b19e4288305bb35dbe3e8bfac42a34bf3d6",
+      "role": "background",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -17.853,
+        "samples": [
+          76640,
+          83040
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76640,
+          83040
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 6,
+      "pcm_sha256": "319b13dcf4f561cdd5fea709d8aa5ac8250aec6d5b2ddb2a82390d4b673fc6c4",
+      "role": "background",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 1,
+        "rms_dbfs": -47.038,
+        "samples": [
+          76640,
+          83040
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76640,
+          83040
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 6,
+      "pcm_sha256": "37d967225e42a90ee3367e00613278c14e43c121f83e4ccd65c76c8b37f515fe",
+      "role": "original",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 3,
+        "rms_dbfs": -20.096,
+        "samples": [
+          76640,
+          83040
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76640,
+          83040
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 6,
+      "pcm_sha256": "ae7ab57efd74c4b9b4b066d4f98be611bc0daf3a5fc8c61ef447b421166eddbd",
+      "role": "variant",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 7,
+        "rms_dbfs": -18.498,
+        "samples": [
+          76640,
+          83040
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76640,
+          83040
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 7,
+      "pcm_sha256": "6a028909d24eb11d3be1246aec4363a97950b42bab0e681851250395ab232221",
+      "role": "original",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 8,
+        "rms_dbfs": -24.38,
+        "samples": [
+          46160,
+          52560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          46160,
+          52560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 7,
+      "pcm_sha256": "c8ff40a9700dac7cfe62fbe925a52f0abe7cb8c40a420e64d17f6717f734012f",
+      "role": "variant",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 4,
+        "rms_dbfs": -31.867,
+        "samples": [
+          46160,
+          52560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          46160,
+          52560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 7,
+      "pcm_sha256": "fe306e330d8c9c1bb56a77ca44d329536497ebefbd07bca8c5cd00d9e9b6f084",
+      "role": "original",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 1,
+        "rms_dbfs": -19.91,
+        "samples": [
+          46160,
+          52560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          46160,
+          52560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 7,
+      "pcm_sha256": "95c4897c043a4246587380f2a3ac972b4e57836a73e8c8bf1625b44828f5c79b",
+      "role": "variant",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -21.357,
+        "samples": [
+          46160,
+          52560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          46160,
+          52560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 7,
+      "pcm_sha256": "3853e19f0209e2d5ebd3ae70d7cb5b68b4c359fb6c0595c0cdda6122d1e472dc",
+      "role": "background",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -21.822,
+        "samples": [
+          46160,
+          52560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          46160,
+          52560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 7,
+      "pcm_sha256": "baa8df3783f912a59ce1d92b5b8da2ec818c6db8d7402a8de060adc8e3250d76",
+      "role": "original",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -19.519,
+        "samples": [
+          46160,
+          52560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          46160,
+          52560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 7,
+      "pcm_sha256": "a0f297e6fd34c8ba7de89042b19f7badac996cadb330ee9bba4d600804d03407",
+      "role": "variant",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -21.027,
+        "samples": [
+          46160,
+          52560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          46160,
+          52560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 912
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 7,
+      "pcm_sha256": "365d6c806a8ed21c493ec4477fcb1e141047da9f107b5782f5fc2836e0bf8c8f",
+      "role": "background",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -21.258,
+        "samples": [
+          46160,
+          52560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          46160,
+          52560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 7,
+      "pcm_sha256": "09644b648eef4d2adf4f8ed95f36378c61546804bb11e21a7c605a49af3c7244",
+      "role": "background",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -47.01,
+        "samples": [
+          46160,
+          52560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          46160,
+          52560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 7,
+      "pcm_sha256": "64b0eaea7decb9ce5b14e594c541e99ff42b60a0fd6b7e47bb59f1991ef76388",
+      "role": "original",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 4,
+        "rms_dbfs": -17.676,
+        "samples": [
+          46160,
+          52560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          46160,
+          52560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 7,
+      "pcm_sha256": "3f0e075209a754690984c7ac8eaef78ed52cc10493e769935829ef6c0a744fc7",
+      "role": "variant",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 3,
+        "rms_dbfs": -18.561,
+        "samples": [
+          46160,
+          52560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          46160,
+          52560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 8,
+      "pcm_sha256": "66218dd89c0dea5b2dc4220f8ca9e4bf3b0f7b72a75084a372206071800d2401",
+      "role": "original",
+      "scene": "clean",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 9,
+        "rms_dbfs": -23.096,
+        "samples": [
+          27840,
+          34240
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27840,
+          34240
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 8,
+      "pcm_sha256": "ca4ed8e4fcef519e5b26a821b4d410df54a8dbd3fefa9aec1c04b0d36d4f45c5",
+      "role": "variant",
+      "scene": "clean",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 9,
+        "rms_dbfs": -24.532,
+        "samples": [
+          27840,
+          34240
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27840,
+          34240
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 8,
+      "pcm_sha256": "f7f21a04c23162964333f35a85aaee24ab6e25179ca23d048a0d94eeb8094030",
+      "role": "original",
+      "scene": "rain",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 0,
+        "rms_dbfs": -25.186,
+        "samples": [
+          27840,
+          34240
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27840,
+          34240
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 8,
+      "pcm_sha256": "39d86f38937a941e2a2dbd550f230be2fc048e20551bad09e823d43ada530323",
+      "role": "variant",
+      "scene": "rain",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 1,
+        "rms_dbfs": -25.89,
+        "samples": [
+          27840,
+          34240
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27840,
+          34240
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 8,
+      "pcm_sha256": "afac7d83b08ffe8d12863604c41f2869be8824be0b57f1b907ae9c060c301841",
+      "role": "background",
+      "scene": "rain",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 0,
+        "rms_dbfs": -29.349,
+        "samples": [
+          27840,
+          34240
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27840,
+          34240
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 8,
+      "pcm_sha256": "b8bd50adb6982421918ca750eb260def931c45a6d83a133be89e15f4ef1836f3",
+      "role": "original",
+      "scene": "train",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 0,
+        "rms_dbfs": -17.622,
+        "samples": [
+          27840,
+          34240
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27840,
+          34240
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 8,
+      "pcm_sha256": "2665ebb9e4905426a59f99b1e8126006cb8aed809eb29ab8eaf05bc881cace86",
+      "role": "variant",
+      "scene": "train",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 0,
+        "rms_dbfs": -17.864,
+        "samples": [
+          27840,
+          34240
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27840,
+          34240
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 8,
+      "pcm_sha256": "1e19c23647d1d3f2b31eea94947191d26f9780ceea75a269f7f4aab07f2e737e",
+      "role": "background",
+      "scene": "train",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 0,
+        "rms_dbfs": -18.878,
+        "samples": [
+          27840,
+          34240
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27840,
+          34240
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 8,
+      "pcm_sha256": "de2b04877314e0fbaba0661fc4eba0813ab2292a9ce2408a4d070a8795f3621a",
+      "role": "background",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 5,
+        "rms_dbfs": -39.509,
+        "samples": [
+          27840,
+          34240
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27840,
+          34240
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 8,
+      "pcm_sha256": "41ae9831d4764838f65053dd8114e38c9e9e37337ccca3ffe1c63da3aaca2cc8",
+      "role": "original",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 4,
+        "rms_dbfs": -14.978,
+        "samples": [
+          27840,
+          34240
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27840,
+          34240
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 8,
+      "pcm_sha256": "ca92706255b49753efa0cb7e447ccd51aa8dd6ddcaeefc4b97efb3ae0e6e56f5",
+      "role": "variant",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 19,
+        "periodic_blocks": 3,
+        "rms_dbfs": -15.048,
+        "samples": [
+          27840,
+          34240
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          27840,
+          34240
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 9,
+      "pcm_sha256": "beabcb789087ede735ff260552bb11e08c5bd7b21b6b3dc00b55d023abd67a4c",
+      "role": "original",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 9,
+        "rms_dbfs": -25.855,
+        "samples": [
+          88720,
+          95120
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          88720,
+          95120
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 9,
+      "pcm_sha256": "e96986e505a3cf89aaa14bd80be6f36c6ac5f475413385e5fb7917a320f9607b",
+      "role": "variant",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 9,
+        "rms_dbfs": -25.862,
+        "samples": [
+          88720,
+          95120
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          88720,
+          95120
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 9,
+      "pcm_sha256": "f423713012c40754ba8ec4befea1beeb644701e49d0fb4705b54ab0964ee7d6c",
+      "role": "original",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -20.298,
+        "samples": [
+          88720,
+          95120
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          88720,
+          95120
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 4464
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 9,
+      "pcm_sha256": "5b13739710fec640f97bf1c27dbd7f896abe0440021fe7a9a3e1cc4cf3eaada1",
+      "role": "variant",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -20.279,
+        "samples": [
+          88720,
+          95120
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          88720,
+          95120
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 3952
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 9,
+      "pcm_sha256": "a44642dfcf9857a2225d9317a0d5616fe88f191eb72d1f158b9af4706487893c",
+      "role": "background",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -20.78,
+        "samples": [
+          88720,
+          95120
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          88720,
+          95120
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 9,
+      "pcm_sha256": "3175d4b4c711f03a3694050800d4850dec7cd9b7f206fd071de120bb002a383d",
+      "role": "original",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -21.273,
+        "samples": [
+          88720,
+          95120
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          88720,
+          95120
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 9,
+      "pcm_sha256": "5806aafa77ceed11fc02706db59967c8433bfb60c3e9242ab80fadb4d4dcfd71",
+      "role": "variant",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -21.277,
+        "samples": [
+          88720,
+          95120
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          88720,
+          95120
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 9,
+      "pcm_sha256": "f86c3efdce6e6229efc29564bf924a2b2373b7493ec6bdb27bf9b209cb14cf83",
+      "role": "background",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -23.248,
+        "samples": [
+          88720,
+          95120
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          88720,
+          95120
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 9,
+      "pcm_sha256": "12369b952aae7dfaea311030d09ceb9408fe6fc76002678c723efbb441526804",
+      "role": "background",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -55.853,
+        "samples": [
+          88720,
+          95120
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          88720,
+          95120
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 1360
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 9,
+      "pcm_sha256": "81c5732bee53fd9908b1b9eef629d9bfca6cffc31396908207df95f95f2e1b5f",
+      "role": "original",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 2,
+        "rms_dbfs": -24.908,
+        "samples": [
+          88720,
+          95120
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          88720,
+          95120
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 9,
+      "pcm_sha256": "aa8f9c2bd41aa2fecadfc967a4bccda95d89ab09f38a412d15250c1916622014",
+      "role": "variant",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 4,
+        "rms_dbfs": -24.93,
+        "samples": [
+          88720,
+          95120
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          88720,
+          95120
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 10,
+      "pcm_sha256": "b6d82cbda380399d2148891cd8ac2616338ca3a2651831e95dd61b1371bc216e",
+      "role": "original",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 5,
+        "rms_dbfs": -29.757,
+        "samples": [
+          20560,
+          26960
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          20560,
+          26960
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 10,
+      "pcm_sha256": "1800614f2a66b05f0c3cdf97053c96f50a40df5f9ee956cba7884bed36896164",
+      "role": "variant",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 18,
+        "rms_dbfs": -27.0,
+        "samples": [
+          20560,
+          26960
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          20560,
+          26960
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": true,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 10,
+      "pcm_sha256": "9d1fe7a5515d3d6319b8bce5595d5d9880fe55c7605ef827a835ed57e6b151ce",
+      "role": "original",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -26.183,
+        "samples": [
+          20560,
+          26960
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          20560,
+          26960
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 10,
+      "pcm_sha256": "85e6abc8db2f34f0ba02ea0821f34b70ff4542e201e284d3615fa28077e4b949",
+      "role": "variant",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -25.276,
+        "samples": [
+          20560,
+          26960
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          20560,
+          26960
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 10,
+      "pcm_sha256": "787666196f65e8371ea22bb54c3e764c86bbbe20db608ae3c4234884ca8152ac",
+      "role": "background",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -27.386,
+        "samples": [
+          20560,
+          26960
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          20560,
+          26960
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 10,
+      "pcm_sha256": "f7bf6d4c8e2b683118299348cd6aeb40235ec0baa64f8dd35f2782065aeaa97c",
+      "role": "original",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -23.078,
+        "samples": [
+          20560,
+          26960
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          20560,
+          26960
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 10,
+      "pcm_sha256": "31cedcacc8e45f283ac85a708dd2a4e7f86c03dad245ebda31c3a8343592bd3c",
+      "role": "variant",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -22.19,
+        "samples": [
+          20560,
+          26960
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          20560,
+          26960
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 10,
+      "pcm_sha256": "e8936062f5a85be78bc7b9033b084e487a48b3ec3c7820935a2dcef7392d9ae7",
+      "role": "background",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -24.089,
+        "samples": [
+          20560,
+          26960
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          20560,
+          26960
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 10,
+      "pcm_sha256": "faefcacffb60a0c3a79ca9763d06ae7106eb9b0968c15efc5c383ecf97550a27",
+      "role": "background",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -48.286,
+        "samples": [
+          20560,
+          26960
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          20560,
+          26960
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 10,
+      "pcm_sha256": "7d0a50ab1ee8a16a23a950fbda577a8d5461286c464b1cb8559e97e0e8782df7",
+      "role": "original",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 9,
+        "rms_dbfs": -22.925,
+        "samples": [
+          20560,
+          26960
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          20560,
+          26960
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 10,
+      "pcm_sha256": "d4aec8c1386f32a6b325ff0d0835370eaa99b19abd414d218833c32e70425d7a",
+      "role": "variant",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 9,
+        "rms_dbfs": -21.958,
+        "samples": [
+          20560,
+          26960
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          20560,
+          26960
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 11,
+      "pcm_sha256": "8f8c94a67d32129de20acfdc5f71c33d71423ab81c2846b28780ec786acbc76b",
+      "role": "original",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 6,
+        "rms_dbfs": -29.66,
+        "samples": [
+          79760,
+          86160
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          79760,
+          86160
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 11,
+      "pcm_sha256": "856015c6448196a6e16db6de6f5470898407ce6bfa466cbc2fe69159ba3de632",
+      "role": "variant",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 7,
+        "rms_dbfs": -21.868,
+        "samples": [
+          79760,
+          86160
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          79760,
+          86160
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 11,
+      "pcm_sha256": "4bba2daa09116a436efabc5b1512c2eec1f1c38a064f6fee3a588e9539fe2f64",
+      "role": "original",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -19.81,
+        "samples": [
+          79760,
+          86160
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          79760,
+          86160
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 11,
+      "pcm_sha256": "be7de8673934d9a029c4ec49db9868b63acf1f4cb734fa0273e64edae08c17b7",
+      "role": "variant",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 2,
+        "rms_dbfs": -18.057,
+        "samples": [
+          79760,
+          86160
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          79760,
+          86160
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 11,
+      "pcm_sha256": "0ab409b3a8d78c74c76d3b7ecd50734754353949d191d6c1120eccc0ad0119e0",
+      "role": "background",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -20.268,
+        "samples": [
+          79760,
+          86160
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          79760,
+          86160
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 11,
+      "pcm_sha256": "57517bbca75f6caad8951bdb3e7b093e8ae8a65e946dfcca8b7bcaf45854d772",
+      "role": "original",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -15.658,
+        "samples": [
+          79760,
+          86160
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          79760,
+          86160
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 2128
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 11,
+      "pcm_sha256": "9db2956f6127ce09a3b6014b0c259066026dd20fce68f32935dab80a07714160",
+      "role": "variant",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -14.75,
+        "samples": [
+          79760,
+          86160
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          79760,
+          86160
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 5200
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 11,
+      "pcm_sha256": "9ff406d3aeba5495a7d9cbfacbce86adc9d521c95b33c1040a70a4d4851cbe38",
+      "role": "background",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -15.912,
+        "samples": [
+          79760,
+          86160
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          79760,
+          86160
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 11,
+      "pcm_sha256": "91fb01979f9d03731e57a73639f280a8476d37c53ff84bf09ab091edd149e4f4",
+      "role": "background",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -53.153,
+        "samples": [
+          79760,
+          86160
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          79760,
+          86160
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 11,
+      "pcm_sha256": "14a3a7472358152e9ed9d07bae08349ec895989bc293518dc015154820d35294",
+      "role": "original",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 6,
+        "rms_dbfs": -25.229,
+        "samples": [
+          79760,
+          86160
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          79760,
+          86160
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 11,
+      "pcm_sha256": "33d63cfc6163938bf9cef268cbb677b23b2d857aef7cf4bdd758574264591422",
+      "role": "variant",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 2,
+        "rms_dbfs": -22.853,
+        "samples": [
+          79760,
+          86160
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          79760,
+          86160
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 12,
+      "pcm_sha256": "058eceb73fce36ab76cfee54e9024f55499afa83b3746f91fd0f0f0f4a8188fe",
+      "role": "original",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 1,
+        "rms_dbfs": -35.643,
+        "samples": [
+          30160,
+          36560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          30160,
+          36560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 12,
+      "pcm_sha256": "14e09467af6990be7759afa29e3e2197a0c3dcb3f4e59f065b8be8521689d574",
+      "role": "variant",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 5,
+        "rms_dbfs": -35.317,
+        "samples": [
+          30160,
+          36560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          30160,
+          36560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 12,
+      "pcm_sha256": "7221a24fb2156b44f73902680ddec8a52e48587a8b3018083fd8a1c0e9c55262",
+      "role": "original",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -31.228,
+        "samples": [
+          30160,
+          36560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          30160,
+          36560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 12,
+      "pcm_sha256": "16b983cd4b583a7f28a3200c1c95c7c7e7815577ad050aeb439643abefdbfece",
+      "role": "variant",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -31.227,
+        "samples": [
+          30160,
+          36560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          30160,
+          36560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 12,
+      "pcm_sha256": "2edfdfedefda985356210881a347a76e137868d2d7911b58240d6c98be967102",
+      "role": "background",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -33.084,
+        "samples": [
+          30160,
+          36560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          30160,
+          36560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 12,
+      "pcm_sha256": "7efe12be6e63bbc7e72305f766b027ef0df395eac60cd36cc4089f5f659b1a7f",
+      "role": "original",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -26.546,
+        "samples": [
+          30160,
+          36560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          30160,
+          36560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 12,
+      "pcm_sha256": "d6486efddba1bd7ca9f3523412c03b97a2b560566974dad0fadde0d9aa4a844c",
+      "role": "variant",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -26.553,
+        "samples": [
+          30160,
+          36560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          30160,
+          36560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 12,
+      "pcm_sha256": "be6bc4b5ae702f094bcaaa4b861596b8376bf1a0b44af6a27d0b7b661ae149a8",
+      "role": "background",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -27.193,
+        "samples": [
+          30160,
+          36560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          30160,
+          36560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 12,
+      "pcm_sha256": "1923f27457d37d39d0b9db8ec209fede58bbf759ef3e477bcd90db0e2098d1ea",
+      "role": "background",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -50.568,
+        "samples": [
+          30160,
+          36560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          30160,
+          36560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 12,
+      "pcm_sha256": "343e409bced47fb77704ff3540688d3ca66152ead5489eae2a682a9cdb07cee2",
+      "role": "original",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 3,
+        "rms_dbfs": -29.127,
+        "samples": [
+          30160,
+          36560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          30160,
+          36560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 12,
+      "pcm_sha256": "b8ad54a4c3b9dfa8e332e3cd2c61ca814e62d1c5f6ebb087116a3e4ed4972bc9",
+      "role": "variant",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -28.758,
+        "samples": [
+          30160,
+          36560
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          30160,
+          36560
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 13,
+      "pcm_sha256": "f6c9b217430bc943864750e6325557ea0601f323eec194e538d7a594aa6408dd",
+      "role": "original",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 3,
+        "rms_dbfs": -19.218,
+        "samples": [
+          44080,
+          50480
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          44080,
+          50480
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 13,
+      "pcm_sha256": "376e22ee8aa62249a8555357e461e04d8a84f5364bc9954de05f269d15741aea",
+      "role": "variant",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 7,
+        "rms_dbfs": -24.235,
+        "samples": [
+          44080,
+          50480
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          44080,
+          50480
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 13,
+      "pcm_sha256": "c3b6d00b448fcbef8367c86a0615cba38aab6455281400b835a0bb1d6bf2942f",
+      "role": "original",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -24.607,
+        "samples": [
+          44080,
+          50480
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          44080,
+          50480
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 13,
+      "pcm_sha256": "10f8565d5804eaefb3b5ce2d0d82ca8db36bb78581f9805b1ac25cfaa5202428",
+      "role": "variant",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -25.525,
+        "samples": [
+          44080,
+          50480
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          44080,
+          50480
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 2480
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 13,
+      "pcm_sha256": "204ceefb0317feaded8803729ebd5700dddc9810a12a46b4d7a23e337b5871a1",
+      "role": "background",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -25.711,
+        "samples": [
+          44080,
+          50480
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          44080,
+          50480
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 13,
+      "pcm_sha256": "13eda88ef1278471841666c0f949bfe1296a2a174283bbcc6bf4316e35dce2cf",
+      "role": "original",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -15.494,
+        "samples": [
+          44080,
+          50480
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          44080,
+          50480
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 13,
+      "pcm_sha256": "c803c687c0bde3f9677d4a1ab6cfe28357419beb7b7050813d97b23f46268985",
+      "role": "variant",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -15.954,
+        "samples": [
+          44080,
+          50480
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          44080,
+          50480
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 13,
+      "pcm_sha256": "bd0dd18af79059dbd1e51540a936d4fd3a1446b3f84aff56a198bc127484cdaf",
+      "role": "background",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -16.119,
+        "samples": [
+          44080,
+          50480
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          44080,
+          50480
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 13,
+      "pcm_sha256": "877ac3b3afc4be53e6bb34f6d42cf70832ca6a14b20b16434b70f529042557d4",
+      "role": "background",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -50.364,
+        "samples": [
+          44080,
+          50480
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          44080,
+          50480
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6064
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 13,
+      "pcm_sha256": "54e9ab1a2d99c49963ec9d9586ceff0c1c5cacb16ce8107d1e9cf7526c1e245d",
+      "role": "original",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 1,
+        "rms_dbfs": -19.178,
+        "samples": [
+          44080,
+          50480
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          44080,
+          50480
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 13,
+      "pcm_sha256": "810e71cd9cf251e0e035d564a0df4133352eb52ee2f74b21c0d21a8f7c18b1e2",
+      "role": "variant",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 1,
+        "rms_dbfs": -19.465,
+        "samples": [
+          44080,
+          50480
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          44080,
+          50480
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 14,
+      "pcm_sha256": "f7cfeebed8bef2c4a12d64b10b99d6c0cbea7da49daf0f32597793dc37667beb",
+      "role": "original",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 4,
+        "rms_dbfs": -20.019,
+        "samples": [
+          76960,
+          83360
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76960,
+          83360
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 14,
+      "pcm_sha256": "dd1f65b2778692194c2725d6e16c24077ea22726c921d03977c3a6d9d20865e6",
+      "role": "variant",
+      "scene": "clean",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 2,
+        "rms_dbfs": -23.086,
+        "samples": [
+          76960,
+          83360
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76960,
+          83360
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 14,
+      "pcm_sha256": "7aa760c6ee03f8ff43ae5f40a9eafa87d6a5367994a6eb5a41fb9c1e5178b894",
+      "role": "original",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -24.641,
+        "samples": [
+          76960,
+          83360
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76960,
+          83360
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 14,
+      "pcm_sha256": "1beeb43515c4feb8d27ce207ea4f1aeb26da6381c0955b1ed73f153fcb87b853",
+      "role": "variant",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -25.519,
+        "samples": [
+          76960,
+          83360
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76960,
+          83360
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 2944
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 14,
+      "pcm_sha256": "ac28a860eb76d4512bf75e24351a5792b14be748e42d19792505b3335546459d",
+      "role": "background",
+      "scene": "rain",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -26.724,
+        "samples": [
+          76960,
+          83360
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76960,
+          83360
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 14,
+      "pcm_sha256": "90e337e3224f92f35039f30b4b3f1da3362fb96d6f230b273e6f1785df07cf61",
+      "role": "original",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -14.699,
+        "samples": [
+          76960,
+          83360
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76960,
+          83360
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 14,
+      "pcm_sha256": "fdb7fff61e7741158ed1649520d435baffde91fac49c9dcfd046c7bcbc537c36",
+      "role": "variant",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -15.482,
+        "samples": [
+          76960,
+          83360
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76960,
+          83360
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 14,
+      "pcm_sha256": "408934c66030508ae321eca51ca55126ee287f8915d074d4dce4ad874f9fbb7e",
+      "role": "background",
+      "scene": "train",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -16.154,
+        "samples": [
+          76960,
+          83360
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76960,
+          83360
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 0
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 14,
+      "pcm_sha256": "319b13dcf4f561cdd5fea709d8aa5ac8250aec6d5b2ddb2a82390d4b673fc6c4",
+      "role": "background",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 1,
+        "rms_dbfs": -46.883,
+        "samples": [
+          76960,
+          83360
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76960,
+          83360
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 14,
+      "pcm_sha256": "afb97daaa979c12859a40deb10d2989c703a50d431be0862e66753f57cb032ee",
+      "role": "original",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 3,
+        "rms_dbfs": -19.362,
+        "samples": [
+          76960,
+          83360
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76960,
+          83360
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    },
+    {
+      "id": 14,
+      "pcm_sha256": "3d6e337e54b04522eb6c2e73e0fab9108b9b4ca565a0924af746718ed85229dc",
+      "role": "variant",
+      "scene": "competing_speech",
+      "sound": {
+        "blocks": 18,
+        "periodic_blocks": 0,
+        "rms_dbfs": -20.288,
+        "samples": [
+          76960,
+          83360
+        ],
+        "schema": "chipmunk.video-mouth-hold-sound/3",
+        "source_pts": [
+          76960,
+          83360
+        ],
+        "speech_activity": {
+          "context": [
+            0,
+            96000
+          ],
+          "samples": 6400
+        },
+        "sustained_periodicity": false,
+        "time_base": "1/16000"
+      }
+    }
+  ],
+  "schema": "chipmunk.mouth-hold-speech-context-transfer/1",
+  "sources": [
+    "0068a46026fe2683dd7cef6913a896cdb30c4153a0ee4f67c8401f60597e5001",
+    "fc0d7915d1c9e500164c94db4b61f32c7e4b50dac21a83cf627eee97e27f79b9",
+    "f6b0ded9d70d2c8d55dcaeebcd68a74d559158f2055dee89741671a6545b1d01"
+  ]
+}

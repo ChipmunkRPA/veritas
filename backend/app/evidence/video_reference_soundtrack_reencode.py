@@ -15,10 +15,10 @@ BASIS = "paired_h264_soundtrack_picture_grid/1"
 FRAME_COUNT = 63
 PICTURE_SIZE = (480, 360)
 HD_PICTURE_SIZE = (1280, 720)
-HD_FRAME_COUNT, HD_RATE = 120, 30
+HD_RATES = (24, 25, 30)
 HD_GRID = (160, 90)
-HD_PROFILE = {"width": HD_PICTURE_SIZE[0], "height": HD_PICTURE_SIZE[1],
-              "pictures": HD_FRAME_COUNT, "frames_per_second": HD_RATE}
+HD_30_PROFILE = {"width": HD_PICTURE_SIZE[0], "height": HD_PICTURE_SIZE[1],
+                 "pictures": 120, "frames_per_second": 30}
 POINTS = {"whole_q65": 2.5, "whole_q90": 4.0, "local_five_frame_median": 6.27}
 SCOPE = (
     "This compares two supplied clips on the same verified picture and sound clocks. The picture comparison allows "
@@ -31,9 +31,9 @@ HD_SCOPE = SCOPE.replace("small H.264 re-encoding differences.",
 
 def profile(tables, *, allow_hd=False):
     """Select the tested geometry and exact rational clock of both copies."""
-    candidates = ((PICTURE_SIZE, FRAME_COUNT, 25),)
+    candidates = [(PICTURE_SIZE, FRAME_COUNT, 25)]
     if allow_hd:
-        candidates += ((HD_PICTURE_SIZE, HD_FRAME_COUNT, HD_RATE),)
+        candidates.extend((HD_PICTURE_SIZE, 4 * rate, rate) for rate in HD_RATES)
     for size, count, rate in candidates:
         if all((table.width, table.height) == size and len(table) == count for table in tables):
             return {"pictures": count, "rate": rate, "size": size, "samples": count * SAMPLE_RATE // rate}
@@ -58,8 +58,18 @@ def scope(picture):
     return HD_SCOPE if "fine_grid" in picture["soundtrack_picture_comparison"] else SCOPE
 
 
+def hd_report_profile(tables):
+    selected = profile(tables, allow_hd=True)
+    if selected is None or selected["size"] != HD_PICTURE_SIZE:
+        raise ValueError("The paired picture grid requires the recorded HD profile")
+    return {"width": HD_PICTURE_SIZE[0], "height": HD_PICTURE_SIZE[1], "pictures": selected["pictures"],
+            "frames_per_second": selected["rate"]}
+
+
 def report_profile(picture):
-    return {"picture_profile": HD_PROFILE} if "fine_grid" in picture["soundtrack_picture_comparison"] else {}
+    comparison = picture["soundtrack_picture_comparison"]
+    # Existing 30 fps exports only committed the profile on the timing record.
+    return {"picture_profile": comparison.get("picture_profile", HD_30_PROFILE)} if "fine_grid" in comparison else {}
 
 
 def picture_difference(first, second, *, grid=(80, 60)):

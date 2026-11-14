@@ -115,21 +115,22 @@ it('renders the signed local soundtrack shift and exact native picture from the 
   expect(screen.getAllByRole('img', { name: /matched soundtrack waveform/ })).toHaveLength(2)
 })
 
-it.each([true, false])('validates paired re-encoded soundtrack pictures, complete = %s', async (complete) => {
+it.each([[true, 24], [true, 25], [true, 30], [false, 30]] as const)(
+  'validates paired re-encoded soundtrack pictures, complete = %s at %i fps', async (complete, rate) => {
   const picture = { file: 'native.png', media_type: 'image/png', sha256: 'a'.repeat(64) }
   const audio = { file: 'matched.wav', media_type: 'audio/wav', sha256: 'b'.repeat(64) }
   const waveform = { low: [-0.4], high: [0.2] }
   const pair = (frame_index: number) => {
-    const item = { frame_index, time_s: frame_index / 25, asset: picture }
+    const item = { frame_index, time_s: frame_index / rate, asset: picture }
     return { earlier: item, submitted: item }
   }
   const summary = 'Matching soundtrack audio moved 200.0 ms later between the clips over corresponding pictures.'
   const comparison = {
     schema: 'chipmunk.video-reference-comparison/11', status: 'measured', interpretation: 'Decoded source differences.',
-    submitted: { width: 1280, height: 720 }, picture: { matching_frames: 0, changed_frames: 120, ranges: [] },
+    submitted: { width: 1280, height: 720 }, picture: { matching_frames: 0, changed_frames: 4 * rate, ranges: [] },
     soundtrack_alignment: { summary, scope: 'Local timing across re-encoded copies.', status: 'local_shift',
       basis: 'paired_h264_soundtrack_picture_grid/1',
-      picture_profile: { width: 1280, height: 720, pictures: 120, frames_per_second: 30 }, range: {
+      picture_profile: { width: 1280, height: 720, pictures: 4 * rate, frames_per_second: rate }, range: {
         earlier: { start_s: .68, end_s: 1.28, audio, waveform }, submitted: { start_s: .88, end_s: 1.48, audio, waveform },
         paired_pictures: { before: pair(21), during: pair(29), ...(complete ? { after: pair(37) } : {}) },
       },
@@ -142,9 +143,10 @@ it.each([true, false])('validates paired re-encoded soundtrack pictures, complet
   fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
   if (complete) {
     expect(await screen.findByText(summary)).toBeTruthy()
-    expect(screen.getByText('Compared 120 corresponding 1280×720 pictures at 30 fps.')).toBeTruthy()
-    expect(screen.getByAltText('before · Earlier clip · 0.840 s')).toBeTruthy()
-    expect(screen.getByAltText('after · Analyzed clip · 1.480 s')).toBeTruthy()
+    expect(screen.getByText(`Compared ${4 * rate} corresponding 1280×720 pictures at ${rate} fps.`)).toBeTruthy()
+    const clock = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 7 })
+    expect(screen.getByAltText(`before · Earlier clip · ${clock.format(21 / rate)} s`)).toBeTruthy()
+    expect(screen.getByAltText(`after · Analyzed clip · ${clock.format(37 / rate)} s`)).toBeTruthy()
     expect(screen.getAllByRole('img', { name: /^(before|during|after) ·/ })).toHaveLength(6)
     expect(screen.getAllByRole('img', { name: /matched soundtrack waveform/ })).toHaveLength(2)
   } else {

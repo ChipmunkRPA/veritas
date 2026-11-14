@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Earlier-copy 720p soundtrack timing at 24 and 25 fps](video-soundtrack-cadence-2026-11-14.md)
+  located 21 of 28 short shifts in each cadence and carrier, with zero
+  flags on 112 controls per delivery set. The local app reports the
+  signed movement, both waveforms and six matching-clock source pictures.
+
 - [Signed mouth and speech transitions](video-lipsync-signed-transitions-2026-11-14.md)
   measured 40 of 66 planned short timing edits. Neither transitions
   alone nor agreement with aperture and level correctly located any at

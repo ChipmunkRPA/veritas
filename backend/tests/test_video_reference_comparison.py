@@ -481,18 +481,21 @@ def test_reencoded_soundtrack_shift_has_exact_paired_evidence_and_rejects_matche
     assert not any(name.startswith("soundtrack-shift-") for name in blocked_assets)
 
 
-def test_hd_reencode_profile_reaches_authorized_comparison_and_original_replay(tmp_path, reference_http, monkeypatch):
+@pytest.mark.parametrize(("rate", "movement"), [(24, -3200), (25, 3200), (30, 3200)])
+def test_hd_reencode_profile_reaches_authorized_comparison_and_original_replay(
+    tmp_path, reference_http, monkeypatch, rate, movement,
+):
     from scripts.video_reference_soundtrack_panel import remux
 
     y, x = np.indices((720, 1280))
     light = np.uint8(118 + 18 * np.sin(x / 12) * np.cos(y / 15) + 11 * np.cos((x + y) / 8))
-    frames = np.stack([np.roll(np.repeat(light[..., None], 3, axis=2), index % 8, axis=1) for index in range(120)])
+    frames = np.stack([np.roll(np.repeat(light[..., None], 3, axis=2), index % 8, axis=1) for index in range(4 * rate)])
     pcm = np.random.default_rng(3172).integers(-7200, 7200, 64000, dtype=np.int16).astype(np.float32) / 32768
     edited = pcm.copy()
-    edited[24000:38400] = pcm[20800:35200]
+    edited[24000:38400] = pcm[24000 - movement:38400 - movement]
     clips = []
     for name, crf, signal in (("earlier", 18, pcm), ("submitted", 34, edited)):
-        picture = encode_lossy_comparison(tmp_path / f"{name}-picture.mov", frames, lossless=False, crf=crf, rate=30)
+        picture = encode_lossy_comparison(tmp_path / f"{name}-picture.mov", frames, lossless=False, crf=crf, rate=rate)
         audio = tmp_path / f"{name}.wav"
         audio.write_bytes(wav_bytes(signal))
         delivery = tmp_path / f"{name}.mp4"
@@ -523,22 +526,24 @@ def test_hd_reencode_profile_reaches_authorized_comparison_and_original_replay(t
     payload = response.json()
     record = payload["comparison"]
     assert record["schema"] == video_reference.SCHEMA_WITH_REENCODED_SOUNDTRACK
-    assert record["picture"]["soundtrack_picture_comparison"]["fine_grid"]["compared_pictures"] == 120
+    assert record["picture"]["soundtrack_picture_comparison"]["fine_grid"]["compared_pictures"] == 4 * rate
     timing = record["soundtrack_alignment"]
-    assert timing["status"] == "local_shift" and timing["offset_ms"] == 200
-    assert timing["picture_profile"] == {"width": 1280, "height": 720, "frames_per_second": 30, "pictures": 120}
+    assert timing["status"] == "local_shift" and timing["offset_ms"] == movement / 16
+    assert timing["picture_profile"] == {"width": 1280, "height": 720, "frames_per_second": rate, "pictures": 4 * rate}
+    recorded_profile = record["picture"]["soundtrack_picture_comparison"].get("picture_profile")
+    assert recorded_profile == (timing["picture_profile"] if rate != 30 else None)
     assert timing["affects_overall_confidence"] is False
     span = timing["range"]
     a, b = span["submitted"]["samples"]
     assert 24000 <= a <= 24640 and 37760 <= b <= 38400
-    assert span["earlier"]["samples"] == [a - 3200, b - 3200]
+    assert span["earlier"]["samples"] == [a - movement, b - movement]
     assert [span["paired_pictures"][role]["submitted"]["frame_index"]
             for role in ("before", "during", "after")] == [
-        a * 30 // 16000 - 1, (a + b) * 30 // 32000, -(-b * 30 // 16000)]
+        a * rate // 16000 - 1, (a + b) * rate // 32000, -(-b * rate // 16000)]
     report_pdf = base64.b64decode(payload["pdf"])
     with pymupdf.open(stream=report_pdf, filetype="pdf") as report:
         page = next(p for p in report if "Local soundtrack timing" in p.get_text())
-        assert "Compared 120 corresponding 1280×720 pictures at 30 fps." in page.get_text()
+        assert f"Compared {4 * rate} corresponding 1280×720 pictures at {rate} fps." in page.get_text()
         assert len(page.get_images()) == 6
     export = tmp_path / "hd-export.json"
     export.write_text(json.dumps({"comparison": record, "assets": payload["assets"]}))

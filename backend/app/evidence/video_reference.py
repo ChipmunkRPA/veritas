@@ -232,9 +232,11 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
     rects = video_reference_local.rectangles(tables[0].height, tables[0].width) if local_check or area_check else None
     measurements = []
     signals, background_errors, cells = [], [], []
+    hd_profile = (video_reference_soundtrack_reencode.hd_report_profile(tables)
+                  if include_soundtrack_reencode and (tables[1].width, tables[1].height)
+                  == video_reference_soundtrack_reencode.HD_PICTURE_SIZE else None)
     timing_differences = [] if include_soundtrack_reencode else None
-    fine_timing_differences = ([] if include_soundtrack_reencode
-                               and len(tables[1]) == video_reference_soundtrack_reencode.HD_FRAME_COUNT else None)
+    fine_timing_differences = [] if hd_profile is not None else None
     pairs = _frame_pairs(paths, tables) if trim_offset is None else _trimmed_pairs(paths, tables, earlier_offset)
     for first, second in pairs:
         difference = first.rgb != second.rgb
@@ -341,9 +343,11 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
     if timing_differences is not None and changed:
         comparison = video_reference_soundtrack_reencode.summarize(timing_differences)
         picture["soundtrack_picture_comparison"] = comparison
-        if fine_timing_differences is not None:
+        if fine_timing_differences is not None and hd_profile is not None:
             fine = video_reference_soundtrack_reencode.summarize(fine_timing_differences)
             comparison.update(fine_grid=fine, within_bounds=comparison["within_bounds"] and fine["within_bounds"])
+            if hd_profile["frames_per_second"] != 30:
+                comparison["picture_profile"] = hd_profile
     if local is not None:
         for field, selected in (("range", choice), ("measured_interval", precise)):
             if selected is None:

@@ -752,7 +752,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       Matching stereo recordings can be compared channel by channel. For lossless 16 kHz mono recordings, the comparison can also account for a constant volume change and up to 250 ms of trim per file when the samples support both.
     </p>}
     {kind === 'video' && <p className="mt-2 mb-0 text-caption text-text-muted">
-      When present in both clips, a second soundtrack is compared separately. Local timing on the first soundtrack requires identical decoded pictures and matching soundtrack clocks.
+      When present in both clips, a second soundtrack is compared separately. Local timing on the first soundtrack requires corresponding pictures and matching soundtrack clocks.
     </p>}
     {pictureInsertionAvailable && <p className="mt-2 mb-0 text-caption text-text-muted">
       The picture comparison can also locate an insertion in some pairs of 24 fps H.264 clips with a 480-pixel long side and up to 360 pictures per clip.

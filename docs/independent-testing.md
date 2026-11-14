@@ -27,6 +27,11 @@ recomputes the published operating points and before, during, and after
 evidence ranges for short timing hypotheses. It includes unchanged,
 ordinary processing, constant-offset and synchronized controls.
 
+The [720p soundtrack cadence replay](video-soundtrack-cadence-2026-11-14.md#replay)
+recounts results for 24 and 25 fps. It checks that both signed shifts
+use distinct audio from the untouched reference and includes separate
+PCM and AAC deliveries and synchronized picture controls.
+
 The [PDF credential replay](pdf-content-credentials-2026-11-13.md#independent-local-replay)
 checks a pinned public signed PDF with the bundled trust list and verifies
 that the signature binds the document itself.

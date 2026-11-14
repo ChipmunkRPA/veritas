@@ -58,6 +58,7 @@ type SoundtrackTiming = {
   scope: string
   status?: 'unassessed' | 'no_local_shift' | 'local_shift'
   basis?: string
+  picture_profile?: { width: number; height: number; pictures: number; frames_per_second: number }
   aac_presentation?: { side: Side; sample_rate: number; presentation_end_exclusive_pts: number; excluded_trailing_samples: number }
   range?: Record<Side, SoundtrackSide> & {
     picture?: SoundtrackPicture
@@ -384,7 +385,7 @@ function TimingEvidence({ timing, assets }: { timing: TimingComparison; assets: 
 }
 
 function SoundtrackTimingEvidence({ timing, assets, audioOnly = false, title: customTitle }: {
-  timing: Pick<SoundtrackTiming, 'summary' | 'scope' | 'range' | 'aac_presentation'>; assets: Result['assets']; audioOnly?: boolean; title?: string
+  timing: Pick<SoundtrackTiming, 'summary' | 'scope' | 'range' | 'aac_presentation' | 'picture_profile'>; assets: Result['assets']; audioOnly?: boolean; title?: string
 }) {
   const span = timing.range
   const picture = span?.picture
@@ -393,10 +394,14 @@ function SoundtrackTimingEvidence({ timing, assets, audioOnly = false, title: cu
   const labels = audioOnly ? { earlier: 'Earlier recording', submitted: 'Analyzed recording' } : names
   const excerpt = audioOnly ? 'matched excerpt' : 'matched soundtrack'
   const aac = timing.aac_presentation
+  const profile = timing.picture_profile
   const maximum = span ? Math.max(.01, ...sides.flatMap(side => [...span[side].waveform.low, ...span[side].waveform.high].map(Math.abs))) : 1
   return <section className="space-y-2" aria-label={title}>
     <h3 className="m-0 text-small font-medium">{title}</h3>
     <p className="m-0 text-small">{timing.summary}</p>
+    {profile && <p className="m-0 text-caption text-text-muted">
+      Compared {profile.pictures} corresponding {profile.width}×{profile.height} pictures at {profile.frames_per_second} fps.
+    </p>}
     {aac && <p className="m-0 text-caption text-text-muted">
       {labels[aac.side]} · AAC duration {sourceSeconds.format(aac.presentation_end_exclusive_pts / aac.sample_rate)} s
       {' · '}{aac.excluded_trailing_samples.toLocaleString('en-US')} trailing decoded samples excluded

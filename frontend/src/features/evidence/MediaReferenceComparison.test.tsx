@@ -126,9 +126,10 @@ it.each([true, false])('validates paired re-encoded soundtrack pictures, complet
   const summary = 'Matching soundtrack audio moved 200.0 ms later between the clips over corresponding pictures.'
   const comparison = {
     schema: 'chipmunk.video-reference-comparison/11', status: 'measured', interpretation: 'Decoded source differences.',
-    submitted: { width: 480, height: 360 }, picture: { matching_frames: 0, changed_frames: 63, ranges: [] },
+    submitted: { width: 1280, height: 720 }, picture: { matching_frames: 0, changed_frames: 120, ranges: [] },
     soundtrack_alignment: { summary, scope: 'Local timing across re-encoded copies.', status: 'local_shift',
-      basis: 'paired_h264_soundtrack_picture_grid/1', range: {
+      basis: 'paired_h264_soundtrack_picture_grid/1',
+      picture_profile: { width: 1280, height: 720, pictures: 120, frames_per_second: 30 }, range: {
         earlier: { start_s: .68, end_s: 1.28, audio, waveform }, submitted: { start_s: .88, end_s: 1.48, audio, waveform },
         paired_pictures: { before: pair(21), during: pair(29), ...(complete ? { after: pair(37) } : {}) },
       },
@@ -141,6 +142,7 @@ it.each([true, false])('validates paired re-encoded soundtrack pictures, complet
   fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
   if (complete) {
     expect(await screen.findByText(summary)).toBeTruthy()
+    expect(screen.getByText('Compared 120 corresponding 1280×720 pictures at 30 fps.')).toBeTruthy()
     expect(screen.getByAltText('before · Earlier clip · 0.840 s')).toBeTruthy()
     expect(screen.getByAltText('after · Analyzed clip · 1.480 s')).toBeTruthy()
     expect(screen.getAllByRole('img', { name: /^(before|during|after) ·/ })).toHaveLength(6)

@@ -239,7 +239,7 @@ class Settings(BaseSettings):
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.
     video_reference_local_area: bool = False  # Qualified short 720 x 480 earlier-copy picture evidence.
     video_reference_measured_interval: bool = False  # Show strongly supported frame boundaries for qualified local picture ranges.
-    video_reference_soundtrack_reencode: bool = False  # Measure local soundtrack shifts across qualified H.264 re-encodes.
+    video_reference_soundtrack_reencode: bool = False  # Compare local sound timing in qualified SD and 720p H.264 re-encodes.
     video_reference_picture_insertion: bool = False  # Locate one longer picture interval across matching H.264 copies.
     video_reference_timing_model_path: Path | None = None  # Optional pinned local landmark task for a marked earlier closure.
     document_revision_comparison_enabled: bool = False  # Authenticated development-only earlier-draft comparison.

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import io
-from bisect import bisect_right
+from bisect import bisect_left, bisect_right
 from contextlib import closing
 from fractions import Fraction
 from hashlib import sha256
@@ -185,19 +185,22 @@ def assess(path, table, picture, audio, tracks, assets):
 
 def assess_reencode(paths, tables, picture, audio, tracks, assets):
     """Measure a shift only when whole-picture and local-grid agreement both hold."""
-    result = {"status": "unassessed", "basis": reencode.BASIS, "scope": reencode.SCOPE,
-              "affects_overall_confidence": False}
+    result = {"status": "unassessed", "basis": reencode.BASIS, "scope": reencode.scope(picture),
+              "affects_overall_confidence": False, **reencode.report_profile(picture)}
     if not picture["soundtrack_picture_comparison"]["within_bounds"]:
         return result | {"summary": "Local soundtrack timing could not be assessed because the paired pictures differ too much."}
-    if (audio["earlier"]["relative_start"] != "0" or not reencode.FRAME_COUNT * reencode.HOP
-            <= audio["earlier"]["samples"] <= reencode.FRAME_COUNT * reencode.HOP + 1024):
+    profile = reencode.profile(tables, allow_hd=True)
+    if (profile is None or audio["earlier"]["relative_start"] != "0" or not profile["samples"]
+            <= audio["earlier"]["samples"] <= profile["samples"] + 1024):
         return result | {"summary": "Local soundtrack timing requires matching continuous sound clocks starting at the first picture."}
+
+    clock = [(tick - tables[1].pts[0]) * tables[1].tb for tick in tables[1].pts]
 
     def witnesses(_origin, span):
         start, end = span
-        hop = reencode.HOP
-        positions = {"before": max(0, start // hop - 1), "during": (start + end) // (2 * hop),
-                     "after": (end + hop - 1) // hop}
+        positions = {"before": max(0, bisect_right(clock, Fraction(start, SAMPLE_RATE)) - 2),
+                     "during": bisect_right(clock, Fraction(start + end, 2 * SAMPLE_RATE)) - 1,
+                     "after": bisect_left(clock, Fraction(end, SAMPLE_RATE))}
         return {"paired_pictures": {
             role: {side: _picture_at(assets, path, table, index, prefix=f"soundtrack-shift-{side}-{role}")
                    for side, path, table in zip(("earlier", "submitted"), paths, tables, strict=True)}

@@ -310,6 +310,9 @@ def _soundtrack_timing_page(document, timing, assets):
     page = _page(document, "Local soundtrack timing")
     page.insert_textbox((MARGIN, 124, RIGHT, 165), timing["summary"], fontsize=12, fontname="hebo", color=INK)
     page.insert_textbox((MARGIN, 169, RIGHT, 217), timing["scope"], fontsize=10, fontname="helv", color=MUTED)
+    if profile := timing.get("picture_profile"):
+        _text(page, MARGIN, 222, f"Compared {profile['pictures']} corresponding {profile['width']}×{profile['height']} "
+              f"pictures at {profile['frames_per_second']} fps.", size=9, color=MUTED)
     if timing["status"] != "local_shift":
         return
     span = timing["range"]
@@ -317,8 +320,9 @@ def _soundtrack_timing_page(document, timing, assets):
         width = (RIGHT - MARGIN - 20) / 3
         for col, role in enumerate(("before", "during", "after")):
             x = MARGIN + col * (width + 10)
-            _text(page, x, 232, role.capitalize(), font="hebo", size=10)
-            for top, side in zip((253, 346), LABELS, strict=True):
+            name_y = 240 if timing.get("picture_profile") else 232
+            _text(page, x, name_y, role.capitalize(), font="hebo", size=10)
+            for top, side in zip((name_y + 21, name_y + 114), LABELS, strict=True):
                 picture = pictures[role][side]
                 _text(page, x, top - 9, f"{LABELS[side]} · {picture['time_s']:.3f} s", size=9, color=MUTED)
                 page.insert_image(pymupdf.Rect(x, top, x + width, top + 74), stream=assets[picture["asset"]["file"]])

@@ -233,6 +233,8 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
     measurements = []
     signals, background_errors, cells = [], [], []
     timing_differences = [] if include_soundtrack_reencode else None
+    fine_timing_differences = ([] if include_soundtrack_reencode
+                               and len(tables[1]) == video_reference_soundtrack_reencode.HD_FRAME_COUNT else None)
     pairs = _frame_pairs(paths, tables) if trim_offset is None else _trimmed_pairs(paths, tables, earlier_offset)
     for first, second in pairs:
         difference = first.rgb != second.rgb
@@ -246,6 +248,9 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
             measurements[-1].update(earlier_frame=first.index, earlier_time_s=float(earlier_clock[first.index]))
         if timing_differences is not None:
             timing_differences.append(video_reference_soundtrack_reencode.picture_difference(first.rgb, second.rgb))
+        if fine_timing_differences is not None:
+            fine_timing_differences.append(video_reference_soundtrack_reencode.picture_difference(
+                first.rgb, second.rgb, grid=video_reference_soundtrack_reencode.HD_GRID))
         if rects is not None:
             if area_check:
                 signal, background, grid = video_reference_photometric.measurements(first.rgb, second.rgb, rects)
@@ -334,7 +339,11 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
     picture = {"status": "measured", "matching_frames": len(sizes) - changed, "changed_frames": changed,
                "frame_pairs_sha256": canonical_hash(measurements), "ranges": output}
     if timing_differences is not None and changed:
-        picture["soundtrack_picture_comparison"] = video_reference_soundtrack_reencode.summarize(timing_differences)
+        comparison = video_reference_soundtrack_reencode.summarize(timing_differences)
+        picture["soundtrack_picture_comparison"] = comparison
+        if fine_timing_differences is not None:
+            fine = video_reference_soundtrack_reencode.summarize(fine_timing_differences)
+            comparison.update(fine_grid=fine, within_bounds=comparison["within_bounds"] and fine["within_bounds"])
     if local is not None:
         for field, selected in (("range", choice), ("measured_interval", precise)):
             if selected is None:
@@ -390,6 +399,7 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             include_additional_soundtrack: bool = True,
             include_channel_timing: bool = False, include_trimmed: bool = False,
             include_trim_reencoded: bool = False, include_soundtrack_reencode: bool = False,
+            include_hd_soundtrack_reencode: bool = False,
             include_picture_insertion: bool = False,
             verify_picture_insertion_retention: bool = True) -> tuple[dict, dict[str, bytes]]:
     """Report decoded differences on matching clocks or within a verified trimmed overlap."""
@@ -449,7 +459,8 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
     tracks = decoded = None
     if status == "measured":
         compare_timing_pictures = (include_soundtrack and include_soundtrack_reencode and timing_event_s is None
-                                   and video_reference_soundtrack_reencode.eligible(paths, tables))
+                                   and video_reference_soundtrack_reencode.eligible(
+                                       paths, tables, allow_hd=include_hd_soundtrack_reencode))
         record["picture"] = _picture(paths, tables, assets, include_local=include_local,
                                      include_local_area=include_local_area and timing_event_s is None,
                                      include_measured_interval=include_measured_interval,
@@ -491,12 +502,13 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
                 alignment = video_reference_soundtrack.assess(submitted, tables[1], record["picture"], record["audio"],
                                                              tracks, timing_assets)
         except DecodeError:
-            alignment = {"status": "unassessed", "scope": (video_reference_soundtrack_reencode.SCOPE if reencoded_pictures
+            alignment = {"status": "unassessed", "scope": (video_reference_soundtrack_reencode.scope(record["picture"]) if reencoded_pictures
                                                             else video_reference_soundtrack.SCOPE),
                          "affects_overall_confidence": False,
                          "summary": "The check could not retrieve the verified picture for the matched soundtrack excerpt."}
             if reencoded_pictures:
                 alignment["basis"] = video_reference_soundtrack_reencode.BASIS
+                alignment.update(video_reference_soundtrack_reencode.report_profile(record["picture"]))
         else:
             assets.update(timing_assets)
         record.update(schema=SCHEMA_WITH_SOUNDTRACK, soundtrack_alignment=alignment)
@@ -509,8 +521,9 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
     elif reencoded_pictures:
         record["soundtrack_alignment"] = {
             "status": "unassessed", "basis": video_reference_soundtrack_reencode.BASIS,
-            "scope": video_reference_soundtrack_reencode.SCOPE, "affects_overall_confidence": False,
+            "scope": video_reference_soundtrack_reencode.scope(record["picture"]), "affects_overall_confidence": False,
             "summary": "Local soundtrack timing requires matching continuous sound clocks in both clips.",
+            **video_reference_soundtrack_reencode.report_profile(record["picture"]),
         }
     if include_additional_soundtrack and status == "measured":
         additional = _additional_soundtracks(paths, sources, tables, assets)

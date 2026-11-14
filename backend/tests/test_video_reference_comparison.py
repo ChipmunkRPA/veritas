@@ -481,6 +481,70 @@ def test_reencoded_soundtrack_shift_has_exact_paired_evidence_and_rejects_matche
     assert not any(name.startswith("soundtrack-shift-") for name in blocked_assets)
 
 
+def test_hd_reencode_profile_reaches_authorized_comparison_and_original_replay(tmp_path, reference_http, monkeypatch):
+    from scripts.video_reference_soundtrack_panel import remux
+
+    y, x = np.indices((720, 1280))
+    light = np.uint8(118 + 18 * np.sin(x / 12) * np.cos(y / 15) + 11 * np.cos((x + y) / 8))
+    frames = np.stack([np.roll(np.repeat(light[..., None], 3, axis=2), index % 8, axis=1) for index in range(120)])
+    pcm = np.random.default_rng(3172).integers(-7200, 7200, 64000, dtype=np.int16).astype(np.float32) / 32768
+    edited = pcm.copy()
+    edited[24000:38400] = pcm[20800:35200]
+    clips = []
+    for name, crf, signal in (("earlier", 18, pcm), ("submitted", 34, edited)):
+        picture = encode_lossy_comparison(tmp_path / f"{name}-picture.mov", frames, lossless=False, crf=crf, rate=30)
+        audio = tmp_path / f"{name}.wav"
+        audio.write_bytes(wav_bytes(signal))
+        delivery = tmp_path / f"{name}.mp4"
+        remux(picture, audio, delivery, ("-c:a", "aac", "-b:a", "64k"))
+        clips.append(delivery)
+    earlier, submitted = clips
+    f = reference_http
+    submission = f.store.put_bytes(submitted.read_bytes())
+
+    @contextmanager
+    def sessions():
+        with Session(f.engine) as db:
+            yield db
+
+    monkeypatch.setattr(v2_media_reference, "default_store", lambda: f.store)
+    monkeypatch.setattr(v2_media_reference, "get_session", sessions)
+    monkeypatch.setattr(settings, "video_reference_soundtrack_reencode", True)
+    with sessions() as db:
+        analysis = db.get(Analysis, "other-kind")
+        analysis.kind, analysis.status, analysis.filename = "video", "done", submitted.name
+        analysis.content_type = "video/mp4"
+        analysis.sha256, analysis.size_bytes = submission.sha256, submission.size_bytes
+        db.commit()
+    response = f.client.post("/api/v2/analyses/other-kind/video-reference-comparison", headers=f.viewer,
+                             files={"earlier": (earlier.name, earlier.read_bytes(), "video/mp4")},
+                             data={"include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    payload = response.json()
+    record = payload["comparison"]
+    assert record["schema"] == video_reference.SCHEMA_WITH_REENCODED_SOUNDTRACK
+    assert record["picture"]["soundtrack_picture_comparison"]["fine_grid"]["compared_pictures"] == 120
+    timing = record["soundtrack_alignment"]
+    assert timing["status"] == "local_shift" and timing["offset_ms"] == 200
+    assert timing["picture_profile"] == {"width": 1280, "height": 720, "frames_per_second": 30, "pictures": 120}
+    assert timing["affects_overall_confidence"] is False
+    span = timing["range"]
+    a, b = span["submitted"]["samples"]
+    assert 24000 <= a <= 24640 and 37760 <= b <= 38400
+    assert span["earlier"]["samples"] == [a - 3200, b - 3200]
+    assert [span["paired_pictures"][role]["submitted"]["frame_index"]
+            for role in ("before", "during", "after")] == [
+        a * 30 // 16000 - 1, (a + b) * 30 // 32000, -(-b * 30 // 16000)]
+    report_pdf = base64.b64decode(payload["pdf"])
+    with pymupdf.open(stream=report_pdf, filetype="pdf") as report:
+        page = next(p for p in report if "Local soundtrack timing" in p.get_text())
+        assert "Compared 120 corresponding 1280×720 pictures at 30 fps." in page.get_text()
+        assert len(page.get_images()) == 6
+    export = tmp_path / "hd-export.json"
+    export.write_text(json.dumps({"comparison": record, "assets": payload["assets"]}))
+    assert run(earlier, submitted, export, verify=True) == record
+
+
 @pytest.mark.parametrize(("lossless", "local_area"), [(True, False), (False, False), (False, True)],
                          ids=["earlier-ffv1", "earlier-h264", "earlier-h264-local-area"])
 def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(

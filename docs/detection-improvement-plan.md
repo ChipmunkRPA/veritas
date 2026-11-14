@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [720p earlier-copy soundtrack timing](video-soundtrack-hd-transfer-2026-11-14.md)
+  found 17 of 22 held shifts in each of two matched carriers. The finer
+  picture grid excluded a synchronized mouth edit without losing any
+  correct locations. The local app now compares this bounded 30 fps
+  profile and binds the audio and six pictures to both source clocks.
+
 - [Adjacent soundtrack repeats](video-adjacent-sound-transfer-2026-11-14.md)
   brought the combined short-video result from seven to 15 of 44 known
   repeat pairs without adding ordinary flags. The AAC transfer added no

@@ -70,6 +70,7 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         reencoded_soundtrack: bool = False, picture_insertion: bool = False) -> dict:
     options = {"include_trimmed": not verify, "include_local_area": not verify, "include_trim_reencoded": not verify,
                "include_measured_interval": not verify, "include_soundtrack_reencode": reencoded_soundtrack,
+               "include_hd_soundtrack_reencode": reencoded_soundtrack,
                "include_picture_insertion": picture_insertion}
     short_fallback = not verify
     local_sound = not verify
@@ -99,6 +100,8 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
                            include_soundtrack=schema == SCHEMA_WITH_SOUNDTRACK or reencoded_soundtrack
                            or (composite and "soundtrack_alignment" in record),
                            include_soundtrack_reencode=reencoded_soundtrack,
+                           include_hd_soundtrack_reencode=(reencoded_soundtrack and "fine_grid" in
+                               record.get("picture", {}).get("soundtrack_picture_comparison", {})),
                            include_additional_soundtrack=additional or (composite and "additional_soundtrack" in record),
                            include_channel_timing=channel_timing)
             if "timing" in record and schema in (SCHEMA_WITH_TIMING, SCHEMA_WITH_SHORT_TIMING, SCHEMA_WITH_SOUNDTRACK,

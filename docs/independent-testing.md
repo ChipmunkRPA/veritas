@@ -55,6 +55,10 @@ The [adjacent speech replay](video-adjacent-sound-transfer-2026-11-14.md#replay)
 recounts useful and misplaced repeat pairs, synchronized controls, and a
 four-recording AAC transfer with matched competing speech.
 
+The [720p soundtrack comparison](video-soundtrack-hd-transfer-2026-11-14.md#local-use-and-replay)
+recreates earlier-copy timing on both PCM and AAC deliveries and
+includes synchronized mouth controls that the finer picture grid rejects.
+
 The [noisy voice diagnostic](audio-source-isolation-diagnostic-2026-11-13.md#replay)
 includes separate readers for acoustic recovery and classifier localization.
 The readers recount published scalar records. Native replay additionally

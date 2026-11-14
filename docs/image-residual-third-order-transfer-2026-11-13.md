@@ -39,8 +39,10 @@ photos are distributed.
 
 Run `freeze`, `calibrate`, and `score` in order using the local archive and
 the [BG-REAL one-source preparation](image-jpeg-signed-transitions-2026-11-12.md).
-To recompute held arithmetic with the standard library only, decompress the
-public ledger and run the reviewer.
+To recompute held arithmetic with the standard library only, pass the public
+gzip ledger directly to the reviewer. It checks the frozen source plan and
+native region geometry, then recomputes each candidate's operating point,
+held counts and advancement criteria.
 
 ```sh
 export PYTHONPATH=backend OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
@@ -48,6 +50,6 @@ for phase in freeze calibrate score; do
   backend/.venv/bin/python -B -m scripts.image_residual_third_order_transfer \
     "$phase" "$run_dir" --bg "$bg_plan_root" || exit 1
 done
-gzip -dc docs/evaluation-panels/image-residual-third-order-transfer-2026-11-13.json.gz > "$receipt"
-python3 -B -S -m scripts.image_residual_third_order_transfer review "$receipt"
+python3 -B -S -m scripts.review_image_residual_third_order_transfer \
+  docs/evaluation-panels/image-residual-third-order-transfer-2026-11-13.json.gz
 ```

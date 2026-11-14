@@ -61,11 +61,15 @@ fitting and point selection, 9,598 distinct masked inputs in assessment, and
 205 unique incumbent contexts for the new reports. A separate direct audit
 checked 33 multi-piece masks against the full, unpadded model. The largest
 log-probability difference was 0.0000087. The scalar receipt contains source
-commitments, native ranges and saved scores without model inputs,
-word identities or source excerpts.
+commitments, native ranges and saved scores without model inputs, word
+identities or source excerpts. The portable reader verified every rounded
+calibration maximum, cutoff and held decision exactly on macOS and Linux.
+The Linux refit differed in a few coefficients by at most `1.12e-16`.
+The reader allows at most `1e-14` absolute drift in a coefficient and requires
+both sets of coefficients to reproduce every recorded location and count.
 
 ```sh
-PYTHONPATH=backend python3 -B -S -m scripts.writing_bidirectional_transfer review \
+PYTHONPATH=backend python3 -B -S -m scripts.review_writing_bidirectional_transfer \
   docs/evaluation-panels/writing-bidirectional-transfer-2026-11-13.json
 ```
 

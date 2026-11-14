@@ -292,11 +292,30 @@ EDIT_POSITION_TRANSFERS = {
         f"{SCRIPTS}/writing_interval_transfer.py", f"{SCRIPTS}/writing_temperature_transfer.py",
     )),
 }
+SINGLE_UPLOAD_CUES = {
+    "image": ("review_image_residual_third_order_transfer.py", ("image-residual-third-order-transfer-2026-11-13.json.gz",), (), (
+        f"{SCRIPTS}/image_residual_third_order_transfer.py",
+    )),
+    "video": ("video_mouth_motion_transport.py", ("video-mouth-motion-transport-2026-11-13.json.gz",), ("review",), (
+        f"{PANELS}/video-lipsync-repeat-public-speech-sources-2026-11-13.json",
+    )),
+    "audio": ("review_audio_context_frame_transfer.py", ("audio-context-frame-transfer-2026-11-13.json",), (), (
+        f"{SCRIPTS}/review_audio_stock_voice_transfer.py",
+        f"{PANELS}/audio-stock-voice-transfer-2026-11-13.json", f"{PANELS}/audio-phoneme-short-edit-score-2026-11-13.json",
+        f"{PANELS}/audio-random-clock-stock-2026-11-13.json",
+    )),
+    "writing": ("review_writing_bidirectional_transfer.py", ("writing-bidirectional-transfer-2026-11-13.json",), (), (
+        f"{SCRIPTS}/writing_bidirectional_transfer.py",
+        f"{SCRIPTS}/writing_revision_trajectory_transfer.py", f"{SCRIPTS}/writing_temperature_transfer.py",
+        f"{SCRIPTS}/writing_interval_transfer.py", f"{SCRIPTS}/writing_focus_v3.py",
+    )),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
           "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion",
           "short-edit-transfer-2026-11-13", "delivery-and-localization", "reference-and-rotation", "single-upload-transfers",
-          "processing-and-short-edits", "delivery-and-reference-transfers", "short-edit-checks", "edit-position-transfers")
+          "processing-and-short-edits", "delivery-and-reference-transfers", "short-edit-checks", "edit-position-transfers",
+          "single-upload-cues")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -376,6 +395,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = SHORT_EDIT_CHECKS[modality]
     elif suite == "edit-position-transfers":
         script, panel_names, prefix, dependencies = EDIT_POSITION_TRANSFERS[modality]
+    elif suite == "single-upload-cues":
+        script, panel_names, prefix, dependencies = SINGLE_UPLOAD_CUES[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

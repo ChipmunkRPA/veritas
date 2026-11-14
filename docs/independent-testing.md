@@ -42,7 +42,8 @@ The latest single-upload comparisons cover [localized image residuals](image-res
 [motion around the mouth](video-mouth-motion-transport-2026-11-13.md),
 [speech responses in overlapping windows](audio-context-frame-transfer-2026-11-13.md),
 and [word prediction in edited passages](writing-bidirectional-transfer-2026-11-13.md).
-Their local measurements and portable readers are available for independent review.
+The [single-upload replay](#replay-the-four-single-upload-comparisons) runs their
+public readers together and formats a receipt for an independent issue.
 
 The [public audio bandwidth replay](audio-bandwidth-return-2026-11-13.md#replay-from-public-source-ranges)
 downloads about 12.3 MB from the AMI publisher and verifies the exact source
@@ -119,7 +120,7 @@ recounts 544 blur, generated-edit and delivery-control comparisons. The
 checks all reported source clocks and separate ranges for the 80-pair
 transfer. The [randomized speech replay](audio-random-clock-stock-2026-11-13.md)
 compares three frozen routes at eight measured edit placements.
-The [repeated-percentage check](writing-percentage-consistency-2026-11-13.md#local-validation)
+The [repeated-percentage check](writing-percentage-consistency-2026-11-13.md#txt-evaluation-and-format-verification)
 replays both Unicode value ranges on known TXT disagreements, with separate
 controls for different cohorts, denominators and reporting dates.
 
@@ -1709,6 +1710,28 @@ The selected ledgers cover [JPEG preview regions](image-thumbnail-extent-transfe
 [the eLife sentence comparison](writing-elife-exact-sentence-confirmation-2026-11-12.md).
 For source labels, decoder output, or predictive performance, follow the
 native instructions for the claim you are reviewing.
+
+### Replay the four single-upload comparisons
+
+Run this locally from a checkout with Python 3.11 or later. It needs only the
+repository and the standard library, including for the compressed image and
+video ledgers. The readers verify the frozen image roster and region geometry,
+the recorded video frame clocks and control outcomes, the audio window-alignment
+results and their three ancestor receipts, and the writing fit and held counts.
+The receipt commits to the exact ledger, scripts and other files each reader
+uses. This reproduces arithmetic from recorded measurements. The separate
+study instructions cover reopening sources or running detector inference.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/single-upload-cues.json" --suite single-upload-cues
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/single-upload-cues.json" --format-issue
+```
+
+Compare with the [maintainer's local Linux reference receipt](evaluation-panels/single-upload-cues-linux-reference-2026-11-13.json)
+using `--compare`. Please include the affected modality, the specific result you
+checked and any discrepancy when sharing an issue. The reference is a local
+maintainer reproduction. It records no external reviewer participation.
 
 ### Review localization across four media types
 

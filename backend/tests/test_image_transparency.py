@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import io
 from contextlib import nullcontext
+from hashlib import sha256
 from types import SimpleNamespace
 
 import numpy as np
@@ -11,6 +12,7 @@ from PIL import Image
 from app.engine.exhibits import ExhibitWriter
 from app.engine.stages import image as image_stage
 from app.evidence import image_transparency as check
+from app.evidence import image_transparency_binding as binding
 from app.reports import engine, figures
 from app.reports.specimens import specimen
 from app.storage.objects import ObjectStore
@@ -82,6 +84,18 @@ def test_render_stage_exports_registered_transparency_crops_and_signed_report_vi
                                                Image.fromarray(oriented[:128, 128:])).convert("RGB"))
     np.testing.assert_array_equal(view, expected)
     assert set(map(tuple, reveal.reshape(-1, 3))) == {(210, 210, 210), (20, 70, 160), (240, 70, 160)}
+    record = binding.projection(review)
+    source_ref = {"sha256": sha, "width": 200, "height": 240, "coordinate_space": "exif-oriented-original"}
+    assert len(binding.assets(record, source_ref)) == 2
+    assert check.verify(data, record, store.read_bytes)
+    with pytest.raises(ValueError, match="crop differs"):
+        check.verify(data, record, lambda digest: store.read_bytes(location["visible_crop"]["sha256"]))
+    invalid = {**record, "location": {**record["location"], "bounds": {"x": 129, "y": 0, "w": 72, "h": 128}}}
+    with pytest.raises(ValueError, match="outside"):
+        binding.assets(invalid, source_ref)
+    changed = encode(sample(), orientation=6)
+    with pytest.raises(ValueError, match="coverage differs"):
+        check.verify(changed, {**record, "source_sha256": sha256(changed).hexdigest()}, store.read_bytes)
 
     example = specimen("image", profile=profile)
     snapshot = example.model_copy(update={

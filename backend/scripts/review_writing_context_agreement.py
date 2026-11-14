@@ -8,9 +8,9 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from statistics import median
 
-from .review_writing_f1000_position_transfer import POINTS, check, digest
-from .review_writing_long_position import select_case
-from .writing_omission_attribution import log_odds, responses, verify_panel
+from scripts.review_writing_f1000_position_transfer import POINTS, check, digest
+from scripts.review_writing_long_position import select_case
+from scripts.writing_omission_attribution import log_odds, responses, verify_panel
 
 PANELS = Path(__file__).resolve().parents[2] / "docs/evaluation-panels"
 FILES = {

@@ -23,6 +23,7 @@ from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.evidence import face_short_window_binding as face_windows
 from app.evidence import image_editor_preview_binding as editor_preview
+from app.evidence import image_transparency_binding as transparency
 from app.evidence import scene_return_binding
 from app.evidence.service import ASSET_TYPES, asset_refs
 from app.reports import package as legacy
@@ -160,6 +161,32 @@ def _editor_preview(db, frozen, evidence):
     return projection, indexed
 
 
+def _transparency_assets(db, frozen, evidence):
+    from app.evidence.image_transparency import CREATOR, from_result
+
+    review = from_result(frozen.result)
+    if review is None:
+        return None, {}
+    record = transparency.projection(review)
+    try:
+        assets = transparency.assets(record, evidence["source"])
+    except ValueError as error:
+        raise legacy.PackageError(str(error)) from error
+    exhibits = {e["id"]: e for e in frozen.result.get("exhibits") or []
+                if e.get("created_by") == CREATOR and e.get("kind") == "image" and e.get("role") == "comparison"}
+    result = {}
+    for exhibit_id, asset in assets.items():
+        digest = asset["sha256"]
+        exhibit = exhibits.get(exhibit_id) or {}
+        artefact = db.get(Artefact, exhibit["payload_artefact_id"]) if exhibit.get("payload_artefact_id") else None
+        if (artefact is None or artefact.analysis_id != frozen.analysis.id or artefact.created_by != CREATOR
+                or artefact.role != "exhibit_payload" or artefact.media_type != "image/png"
+                or artefact.sha256 != digest or frozen.exhibit_images.get(exhibit_id) != digest):
+            raise legacy.PackageError("A PNG transparency crop differs from the frozen report.")
+        result[digest] = asset, artefact
+    return record, result
+
+
 def build_public(db, package, *, store, key: signing.InstanceKey, exported_at: datetime) -> legacy.Built:
     analysis = db.get(Analysis, package.analysis_id)
     report = db.get(ReportRow, package.report_id)
@@ -192,6 +219,15 @@ def build_public(db, package, *, store, key: signing.InstanceKey, exported_at: d
             if result["decision"].get("image_copy_coverage") is not None:
                 raise legacy.PackageError("Thumbnail evidence conflicts with the original provenance scope.")
             result[editor_preview.KEY] = projection
+    if analysis.kind == "image" and report.profile in transparency.REPORT_PROFILES:
+        projection, alpha_crops = _transparency_assets(db, frozen, evidence)
+        if projection is not None:
+            if result["decision"].get("image_copy_coverage") is not None:
+                raise legacy.PackageError("PNG transparency evidence conflicts with the original provenance scope.")
+            result[transparency.KEY] = projection
+            if any(digest in previews and previews[digest][0] != asset for digest, (asset, _) in alpha_crops.items()):
+                raise legacy.PackageError("A PNG transparency crop conflicts with a thumbnail crop.")
+            previews.update(alpha_crops)
     if analysis.kind != 'image':
         from app.reports.multimedia_evidence import verify_assets
 
@@ -213,7 +249,7 @@ def build_public(db, package, *, store, key: signing.InstanceKey, exported_at: d
     for sha, (asset, _) in previews.items():
         reference = refs.setdefault(sha, asset)
         if any(asset[key] != reference.get(key) for key in ("media_type", "width", "height")):
-            raise legacy.PackageError("A thumbnail crop conflicts with another frozen asset.")
+            raise legacy.PackageError("An image crop conflicts with another frozen asset.")
     for sha, asset in sorted(refs.items()):
         mime = asset['media_type']
         if sha in previews:

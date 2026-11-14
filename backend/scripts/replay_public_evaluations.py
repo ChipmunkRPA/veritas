@@ -344,12 +344,27 @@ LOCAL_TRIALS = {
         )
     )),
 }
+TIMING_AND_LOCATION = {
+    "image": ("image_regional_padding_transfer.py", ("image-regional-padding-transfer-2026-11-14.json",), ("review",), (
+        f"{SCRIPTS}/image_small_region_repeat.py", f"{PANELS}/image-small-region-repeat-2026-11-14.json",
+    )),
+    "video": ("review_video_adjacent_sound_delivery.py", ("video-adjacent-sound-delivery-2026-11-14.json",), (), (
+        f"{SCRIPTS}/review_video_adjacent_sound.py",
+    )),
+    "audio": ("audio_digital_silence_transfer.py", ("audio-digital-silence-2026-11-14.json",), (), ()),
+    "writing": ("review_writing_context_agreement.py", ("writing-context-agreement-freeze-2026-11-14.json",), ("review",), (
+        f"{SCRIPTS}/review_writing_f1000_position_transfer.py", f"{SCRIPTS}/review_writing_long_position.py",
+        f"{SCRIPTS}/writing_omission_attribution.py", f"{SCRIPTS}/writing_focus_v3.py",
+        f"{PANELS}/writing-omission-attribution-2026-11-13.json", f"{PANELS}/writing-long-position-transfer-2026-11-12.json",
+        f"{PANELS}/writing-f1000-position-transfer-2026-11-13.json", f"{PANELS}/writing-elife-long-position-transfer-2026-11-13.json",
+    )),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
           "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion",
           "short-edit-transfer-2026-11-13", "delivery-and-localization", "reference-and-rotation", "single-upload-transfers",
           "processing-and-short-edits", "delivery-and-reference-transfers", "short-edit-checks", "edit-position-transfers",
-          "single-upload-cues", "check-boundaries", "local-trials")
+          "single-upload-cues", "check-boundaries", "local-trials", "timing-and-location")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -435,6 +450,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = CHECK_BOUNDARIES[modality]
     elif suite == "local-trials":
         script, panel_names, prefix, dependencies = LOCAL_TRIALS[modality]
+    elif suite == "timing-and-location":
+        script, panel_names, prefix, dependencies = TIMING_AND_LOCATION[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

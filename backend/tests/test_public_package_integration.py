@@ -500,6 +500,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
             return None
         if fullname in ('app.evidence', 'app.evidence.mp4', 'app.evidence.image_eligibility', 'app.evidence.image_copy_similarity_binding',
                         'app.evidence.image_editor_preview_binding',
+                        'app.evidence.image_transparency_binding',
                         'app.evidence.image_interpolation_binding',
                         'app.evidence.image_copy_affine_binding',
                         'app.evidence.document_context', 'app.evidence.document_scope', 'app.evidence.document_repeat',
@@ -572,7 +573,8 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
 
 @pytest.mark.parametrize('name', ['face_interval_binding.py', 'face_short_window_binding.py', 'face_short_carrier_binding.py', 'sound_event_binding.py', 'document_scope.py',
                                  'image_copy_similarity_binding.py', 'image_copy_affine_binding.py',
-                                 'image_editor_preview_binding.py', 'stereo_binding.py', 'scene_return_binding.py'])
+                                 'image_editor_preview_binding.py', 'image_transparency_binding.py',
+                                 'stereo_binding.py', 'scene_return_binding.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
 

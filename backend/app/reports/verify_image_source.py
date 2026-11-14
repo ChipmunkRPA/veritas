@@ -12,6 +12,7 @@ from PIL import Image, ImageOps
 
 from app.evidence import image_embedded_pair_binding as embedded_pair
 from app.evidence import image_interpolation_binding as interpolation
+from app.evidence import image_transparency_binding as transparency
 from app.evidence.image_copy_similarity_binding import (
     JPEG_BLOCK_BASIS,
     OFFGRID_BASIS,
@@ -149,7 +150,15 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         interpolation.validate(evidence, evidence["source"].get(interpolation.COMMITMENT))
         if verify(data, native_review, lambda digest: archive.read(f"assets/{digest}.png")):
             native_detail = " Recomputed the native interpolation inspection and any exact 16-bit source crop."
-    preview = json.loads(archive.read('result.json')).get(IMAGE_EDITOR_PREVIEW) if 'result.json' in archive.namelist() else None
+    projected = json.loads(archive.read('result.json')) if 'result.json' in archive.namelist() else {}
+    preview = projected.get(IMAGE_EDITOR_PREVIEW)
+    if transparency.KEY in projected:
+        from app.evidence.image_transparency import verify
+
+        record = projected[transparency.KEY]
+        transparency.assets(record, evidence["source"])
+        matched = verify(data, record, lambda digest: archive.read(f"assets/{digest}.png"))
+        native_detail += " Recomputed the PNG transparency counts" + (" and both source crops." if matched else ".")
     crops = list(_crops(evidence))
     pair = (evidence.get(embedded_pair.KEY) or {}).get('pair')
     repeat_checks = [check for check in (evidence.get("coverage") or {}).get("inspection_checks", [])

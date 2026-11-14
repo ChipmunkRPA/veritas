@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import io
+from hashlib import sha256
 
 import cv2
 import numpy as np
@@ -9,9 +10,10 @@ from PIL import Image, ImageOps
 
 from app.engine.exhibits import ExhibitBudgetExceeded
 from app.engine.media import refuse_truncated_images
+from app.evidence import image_transparency_binding as binding
 
-KEY = "png_transparency"
-CREATOR = "png_transparency"
+KEY = binding.KEY
+CREATOR = KEY
 TITLE = "Color stored under PNG transparency"
 VISIBLE = "Crop as displayed on white"
 HIDDEN = "Stored colors revealed in the same crop"
@@ -24,9 +26,6 @@ LIMITATION = ("Ordinary cutouts and editing tools can preserve colors under tran
               "no weight in the AI assessment. Smooth or low-contrast hidden content may go undetected.")
 SUMMARY = ["Width", "Height", "Fully transparent pixels", "Tiles with at least 32 qualifying pairs"]
 LOCATION = ["Source x", "Source y", "Crop width", "Crop height", "Qualifying neighboring pairs"]
-TILE = 128
-MIN_PAIRS = 32
-MAX_PIXELS = 4_194_304
 
 
 def measure(data):
@@ -37,7 +36,7 @@ def measure(data):
     refuse_truncated_images()
     try:
         with Image.open(io.BytesIO(data), formats=["PNG"]) as source:
-            if (source.width * source.height > MAX_PIXELS or max(source.size) > 4096 or source.mode != "RGBA"
+            if (source.width * source.height > binding.MAX_PIXELS or max(source.size) > binding.MAX_EDGE or source.mode != "RGBA"
                     or source.get_format_mimetype() == "image/apng"):
                 return None
             with ImageOps.exif_transpose(source) as oriented:
@@ -54,22 +53,53 @@ def measure(data):
     # reduce ordinary color bleed at antialiased edges.
     interior = cv2.erode(transparent, np.ones((7, 7), np.uint8), borderType=cv2.BORDER_CONSTANT, borderValue=1).astype(bool)
     tiles, best = 0, None
-    for y in range(0, height, TILE):
-        for x in range(0, width, TILE):
-            selected = interior[y:y + TILE, x:x + TILE]
-            if selected.sum() <= MIN_PAIRS // 2:
+    for y in range(0, height, binding.TILE):
+        for x in range(0, width, binding.TILE):
+            selected = interior[y:y + binding.TILE, x:x + binding.TILE]
+            if selected.sum() <= binding.MIN_PAIRS // 2:
                 continue
-            tile = pixels[y:y + TILE, x:x + TILE]
+            tile = pixels[y:y + binding.TILE, x:x + binding.TILE]
             colors = tile[:, :, :3].astype(np.int16)
             across = (np.abs(colors[:, 1:] - colors[:, :-1]) >= 16).any(axis=2) & (selected[:, 1:] & selected[:, :-1])
             down = (np.abs(colors[1:] - colors[:-1]) >= 16).any(axis=2) & (selected[1:] & selected[:-1])
             pairs = int(across.sum() + down.sum())
-            if pairs >= MIN_PAIRS:
+            if pairs >= binding.MIN_PAIRS:
                 tiles += 1
                 if best is None or pairs > best[0][-1]:
                     crop_height, crop_width = selected.shape
                     best = (x, y, crop_width, crop_height, pairs), tile, selected
     return (width, height, count, tiles), best
+
+
+def crop_pixels(tile, interior):
+    source = Image.fromarray(tile)
+    shown = np.asarray(Image.alpha_composite(Image.new("RGBA", source.size, "white"), source).convert("RGB"))
+    revealed = np.full(tile.shape[:2] + (3,), 210, dtype=np.uint8)
+    revealed[interior] = tile[:, :, :3][interior]
+    return shown, revealed
+
+
+def verify(data, record, read_asset):
+    measured = measure(data)
+    if measured is None or measured[0] != tuple(record[k] for k in binding.COUNTS):
+        raise ValueError("PNG transparency coverage differs from the original")
+    loc = record["location"]
+    if loc is None:
+        return False
+    if measured[1] is None:
+        raise ValueError("The original has no qualifying PNG transparency crop")
+    (x, y, w, h, pairs), tile, interior = measured[1]
+    if (x, y, w, h, pairs) != (*(loc["bounds"][k] for k in ("x", "y", "w", "h")), loc["qualifying_pairs"]):
+        raise ValueError("PNG transparency location differs from the original")
+    for role, match in zip(binding.ROLES, crop_pixels(tile, interior), strict=True):
+        digest = loc[role]["sha256"]
+        raw = read_asset(digest)
+        if len(raw) > binding.MAX_ASSET_BYTES or sha256(raw).hexdigest() != digest:
+            raise ValueError("PNG transparency crop differs from its declared bytes or size limit")
+        with Image.open(io.BytesIO(raw), formats=["PNG"]) as image:
+            if image.mode != "RGB" or image.size != (w, h) or not np.array_equal(np.asarray(image), match):
+                raise ValueError("PNG transparency crop differs from the source rendering")
+    return True
 
 
 def add_exhibits(data, writer):
@@ -86,10 +116,7 @@ def add_exhibits(data, writer):
         location, tile, interior = best
         x, y, w, h, pairs = location
         coords = f"Source x {x}, y {y}, {w} × {h} px. {pairs:,} qualifying neighboring pairs."
-        source = Image.fromarray(tile)
-        shown = np.asarray(Image.alpha_composite(Image.new("RGBA", source.size, "white"), source).convert("RGB"))
-        revealed = np.full(tile.shape[:2] + (3,), 210, dtype=np.uint8)
-        revealed[interior] = tile[:, :, :3][interior]
+        shown, revealed = crop_pixels(tile, interior)
         try:
             for title, pixels, note in ((VISIBLE, shown, "Composited on white."),
                                         (HIDDEN, revealed, "Only the fully transparent interior is revealed. Other pixels are gray.")):
@@ -127,6 +154,6 @@ def from_result(result):
                            "url": f"/api/v2/exhibits/{item['id']}/payload"}
         crops["bounds"] = dict(zip(("x", "y", "w", "h"), map(int, (x, y, w, h)), strict=True))
         crops["qualifying_pairs"] = int(pairs)
-    return {"schema": "png-transparency/1", "source_sha256": digest, "width": int(width), "height": int(height),
+    return {"schema": binding.SCHEMA, "source_sha256": digest, "width": int(width), "height": int(height),
             "fully_transparent_pixels": int(transparent), "qualifying_tiles": int(tiles), "location": crops or None,
             "scope": SCOPE, "limitation": LIMITATION, "authorship_confidence_contribution": 0}

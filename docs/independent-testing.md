@@ -47,6 +47,18 @@ The [padding replay](image-regional-padding-transfer-2026-11-14.md#replay)
 recounts two alternatives using those same submitted pixels and reports
 each variant's useful locations, misplaced flags and ordinary highlights.
 
+The `timing-and-location` suite recounts the padding comparison, adjacent
+soundtrack copies, exact digital-silence intervals and three-view sentence
+agreement. It needs only Python and the checked-in ledgers. The receipt
+records the reader and input hashes, without user identities, uploads,
+weights or absolute paths. A match checks the published arithmetic.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/timing.json" --suite timing-and-location
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/timing.json" --format-issue
+```
+
 The [fresh video timing study](video-lipsync-repeat-fresh-actors-2026-11-13.md#replay)
 includes two public source plans and runners that recover the exact native
 clip clocks. The [paired soundtrack comparison](video-soundtrack-reencode-2026-11-13.md#replay)
@@ -1476,6 +1488,14 @@ separately, run the verifier against the evidence ZIP and your original image.
 ```sh
 python -m app.cli verify evidence.zip --public-key instance-key.pem --source-image original.png
 ```
+
+For a PNG transparency observation, the signed package includes the
+coverage counts and any saved visible and revealed crops. The same command
+uses the project environment to recompute the qualifying tile and compare
+both sets of pixels against the original. Keep the original locally and
+export a draft package with **Include original** off when sharing the
+derivative. Its revealed crop can expose content hidden in the original
+display.
 
 This optional check runs locally. It compares the original SHA-256 and
 then checks every unannotated inspection crop and both sides of a same-image

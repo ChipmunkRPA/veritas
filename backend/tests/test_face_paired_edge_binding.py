@@ -232,3 +232,24 @@ def test_moving_shortlist_interpolates_centers_and_preserves_rank_budget(monkeyp
     face_indices = set(range(59, 73))
     assert face_short_proposal.has_measurable_pair([62, 70], face_indices, (7, 8))
     assert not face_short_proposal.has_measurable_pair([62, 70], face_indices - {70}, (7, 8))
+
+
+def test_dominant_face_position_rejects_competing_or_discontinuous_detections():
+    from app.evidence import face_primary_track_binding as track
+
+    assert type(settings).model_fields["video_face_primary_track_avc_review"].default is False
+    main, inset, peer = (10, 30, 120, 150), (430, 40, 48, 50), (350, 40, 110, 145)
+    slots = [4, 14, 24, 34]
+    reference = track.anchors(dict.fromkeys(slots, [main, inset]))
+    assert track.follow(18, [inset, main], reference) == main
+    assert track.follow(18, [main, peer], reference) is None
+    assert track.follow(18, [inset], reference) is None
+    assert track.follow(45, [main], reference) is None
+    assert track.anchors({**dict.fromkeys(slots, [main]), 44: [peer]}) == {}
+    planned = [*slots, 35]
+    record = {"face_detection_boxes": [{"frame_index": i, "boxes": [list(main), list(inset)]} for i in planned]}
+    faces = {35: {"bbox": dict(zip(("x", "y", "w", "h"), main, strict=True))}}
+    track.validate(record, {"width": 1280, "height": 720}, planned, faces, slots)
+    record["face_detection_boxes"][-1]["boxes"].append(list(peer))
+    with pytest.raises(ValueError, match="does not follow"):
+        track.validate(record, {"width": 1280, "height": 720}, planned, faces, slots)

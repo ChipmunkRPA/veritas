@@ -57,6 +57,7 @@ from app.evidence.video_packet_versions import (
     PICTURE_HOLD_VERSIONS,
     SHORT_AVC_PROPOSAL_VERSION,
     MOVING_AVC_PROPOSAL_VERSION,
+    PRIMARY_TRACK_AVC_PROPOSAL_VERSION,
     SECOND_AVC_PROPOSAL_VERSION,
     SHORT_CARRIER_VERSION,
     SHORT_PROPOSAL_VERSION,
@@ -708,7 +709,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     set_id = current_set_id(analysis)
     version = face_return_binding.METHOD_VERSIONS[return_candidates[-1]["face_return"]["method"]] if return_candidates else VERSION
     proposal_versions = {SHORT_PROPOSAL_VERSION, SHORT_WEBM_PROPOSAL_VERSION, SHORT_AVC_PROPOSAL_VERSION,
-                         SECOND_AVC_PROPOSAL_VERSION, MOVING_AVC_PROPOSAL_VERSION}
+                         SECOND_AVC_PROPOSAL_VERSION, MOVING_AVC_PROPOSAL_VERSION, PRIMARY_TRACK_AVC_PROPOSAL_VERSION}
     if version not in proposal_versions | {SHORT_WINDOW_VERSION, SHORT_CARRIER_VERSION} and any(
             face_boundary_binding.is_paired(item.get("face_boundary")) for item in chosen):
         version = PAIRED_EDGE_VERSION
@@ -979,6 +980,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 packet["interpretation"] += (" At each endpoint, the check compares three face views on each side and measures motion "
                                              "in the nearby picture. The start and end measurements below show the support for both transitions.")
                 packet["measurements"].extend(face_return_binding.proposal_boundary_measurements(face_return))
+            if face_return["method"] == face_short_proposal_binding.PRIMARY_TRACK_AVC_METHOD:
+                packet["interpretation"] += " The check followed the larger face by its position and size when smaller faces appeared."
             if face_return["method"] == face_return_binding.FINE_SCENE_METHOD:
                 packet["interpretation"] += " Smaller areas outside the face supplied background detail at one or both boundaries."
                 for name, edge in zip(("Entry", "Exit"), face_return["fine_scene_edges"], strict=True):

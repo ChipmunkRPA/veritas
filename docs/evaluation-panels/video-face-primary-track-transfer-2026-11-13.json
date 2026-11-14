@@ -1,0 +1,5927 @@
+{
+  "freeze": {
+    "schema": "chipmunk.video-face-primary-track/1",
+    "methods": {
+      "video_face_primary_track_transfer.py": "c4e5e92ee85586c6edec8aecfd3f5ce38bb5cd92f7660b442102ae5c34e4f83a",
+      "face_primary_track.py": "b4011ceeab06162927fe362a1c070b9c9de70ba4c2fdcf793d8fc8ed907488e5"
+    },
+    "parents": {
+      "video-face-moving-shortlist-confirmation-2026-11-13.json": "dd0ee3a6a205320ce1b1f881223fc91d8a709802180e34b830f7e760d195f786",
+      "video-face-moving-shortlist-development-2026-11-13.json": "3490ef7a7b5c2f8f1d3b8cf7aaa2d83d99f0dfa36e9acdbce3b0d05d4b613178"
+    },
+    "design": {
+      "required_new_groups": 2,
+      "minimum_new_intervals": 3,
+      "max_new_ordinary": 1,
+      "max_new_cut": 0
+    },
+    "weights": {
+      "face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+      "face_recognition_sface_2021dec.onnx": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79"
+    },
+    "inputs": [
+      "5ee77b3523dfb1439e65da666ffc6b0e60feb2f3ee09df203dfd56c33f8c2ee4",
+      "d036532cb33b113d8d1e8a48d5ca85495f8acfcd16a0ed257bd47d1159107e48",
+      "de792eb5875fa2c1471e1e0e7ef974c049089da6effab42c63d15011f99cc933",
+      "fcc45109bfbe5361b6fac1ae07cdb860437036fb19d397da9cfa9ff67f17fd09",
+      "90a3f01057bea666cca6f2cbcfc7da400bb27973dccd31d2bb2d76a203d62486",
+      "b904cea81e97f85268ec1d7b28770f2fbb5584caf425f870b1a00011fcdde501",
+      "0da70ba8f57866a044c668a85f4e6add353c08c8da6a4f860a552d8dbb349cf4",
+      "aab6a2aeaad661e0bf1f0e638ec1261bf23ed16747265ed8c440b0707e52047d",
+      "a01b2d5679b44cefd97e5b440c8dbf91524ba28f0a1cca8feccca6e4e6e19a06",
+      "998b5d4ab5884dccd1d2a45c7f1c5bdfa541c57842f2956011038e5376403df2",
+      "4bf7f7db4185303d5dab8d008c8a501a23e088f2a05163027c5499690672cb11",
+      "799154cd0b4e8d877ec3087dcc6fab6035b5b56092285d816731b83d38cb1ce0",
+      "bd6b463c4b50dc0116c3b4cdd9192b47851f637574c7c6c87e0b3b9bce84b9e9",
+      "bf89160a42f0d119d6eba0dde9e1bf83cb26c2b41e64fe2a96f1465296659bba",
+      "230208258c05825678e951e8e5503a447c6bdef4805b6562f7a9b8410a80727a",
+      "9dab5fd7c2cb75d2544fe43952c175a4b03eec14e55f8c90487dec78288eb7e0",
+      "33e6c2bc573d939186474f4c8fdcc22ceeb86916f1a1652b4b9365ebf0e3ed2c",
+      "329ef959115942d385749c4ab228ee03365881850d92298d589cbf75a64b4718",
+      "42f367b0720ac890bdbd9ebe2d997fc9b2bc592fb8758ac284f4546cd136b39b",
+      "123fe79c4ab864d2b4d8c3a91cce5a10db14aeaa6f7e7977f2d8037ccf869f11",
+      "2fa65125436fcafee66c4d57b4e0ddea6cebd617ad28db6f7f4ddd0c9812ed2b",
+      "2ebb998ceddd9906ab83ea4cb89d978c3a92b3dbe50bd5805bebad0939eba9b0",
+      "96f04d0a26aa25ea102bce212e580df94b4397b2b29721f7653f32de0b320516",
+      "14177ee4ef2da8c2de71f69e2ad07d1af8b2e9e30b4ac5d1881c5035a89d519a",
+      "bc81ff75a649d3a91169a42695c378877a75099e7c65b53106d8b00232f1fa25",
+      "a05bf4ea64e32d866efe92fbf01f5286bd25c96dc313e8d76ee70876dbfc10af",
+      "61ba9e800894bda7379711ce29fcacdb0b3c396187a79cf386382ea431a05860",
+      "83e19f49f56c39aea5bc792d51f45221abc4e020974a1b6e08739c862466a2a4",
+      "1cc709f016b2c89fd2bb27fccfdb3555e98cc6150b32955d3cbf814b4fd61686",
+      "1712f23105a621f644d19babea309f24f18949733425bcd3f499f3788e340f10",
+      "52cfc8edc6bc767bfc17aaba572949a320ff168ef6c2ad70273362be04cbe413",
+      "1e9a524685decb591cf9ceff8d8ad36ed268c2760c2b61184139c9f62d39779a",
+      "67c1e5b1159d3e4ef293c36b51204d5f5e7c716e2491ee4e5bfd28189457a8e8",
+      "1ad3bc257ff21c43f64cfef1354b2a80472d108ff8c0fa40d00246514dfd2caf",
+      "01d771d721573d6214f92d571259bf2ddd0e89744817796129d799dcec3115fc",
+      "86c4272bfeac3920b8f532f55bb005b5d7eb9021ed88049a6bd391571e802207",
+      "cefc97ffe5c32f352d04b7b7f19b48970654e2ee4bbc5f2fdbdeee359fa452b2",
+      "c1cb025fbf98ba194de45f2701b111b60fd8d0450f522a503967008a7b0eb258",
+      "a3b2f8f34eed00b45a132f248395432968221b914def3c9f04dc58563782d63d",
+      "755a3869b3b6754f533c0784505e43985e55d01b902a2690252a62916567b0f0",
+      "c8fb39f696167579cfba0ce2e60e692507cb052e65dee5f08a27156acfb05b85",
+      "e17adf83eff9df8fc4290d7994b2cc5f5ce7bd97e833aa4d24cc2ecc75f48698",
+      "e132ad6a32a7732dfda578256b12ca7491a84388e5b99107221b1e3e581f7b57",
+      "bb876e4f9f009924f429ca7ab7ad2b6fcdd3ebf966c3c779aceb844cdcf555f1",
+      "267279cee1d0125e41dba097b5795880fcbf8feec7b506c1a20ad6edfe2473df",
+      "348309b3ec2e75293842c902093872ba50152f51ed27e07f1f7070a3c49428d1",
+      "1f7f4dca9d82527b42e11201b00ae344bbf89fe2d5825b5825b018e5fb1db141",
+      "a294f40f36517dd61c02361b697dd625de0ef26f128402d0e24d5bdcfa0198e6",
+      "3d9c0b44cdbc5409feb90818789245508a7b5bb3604ce11fc2c9d0d224d6b2e3",
+      "d0dd3b264a9780088058283e8ba721c52f0577352068655e199bf9072c05d096",
+      "526b1c167f78686e478fa011b89e982ce06320d46025f959561967cd1cecae8a",
+      "982ee22eafbd1987adbc0d1f7e595b3bc5f4f607fe831e0bfdeabc6ab6c9e605",
+      "1fd541c2d8aca3d23270ce02d042450cef948e23a086b35a4d21080642a546e7",
+      "61e3a26beea349d4ddf62ce214f4f4aed35199942772efcecf6b4e886df6d025",
+      "faa8d31b0016dc8a53e67c9401ffac202bdaa5766ea87a5bebb127cca1e83174",
+      "357e470fb60ea37a6adc1edeac0b4de80f704827b508b63b12f5a4244cc6cae3",
+      "1d65c178c455a6a07118e61acffa974dad78058a347a9db4ee953137ceb13a27",
+      "7a0ccc4cb4bd45eeb7ed727d22d246091a4a20d49c84c58aee9aff235b87bb07",
+      "68c390171f46e90910b1f1db147655734de7df3f4538b7c4325cbc800e036ea4",
+      "c8c09da3f3e5eed6b75c4a016ef0b1c06e45995a4f0f24b97baa945cb045e7ea",
+      "e50bdd2b3ce0795b598287beb761a109828ecb143ffca63da772100edaccd2c9",
+      "f5e29d274add2b65f317433f7e60898a6cb53a27f1f6fa91d284e92df362f5f8",
+      "6260cbacec9a8710dc964a4384a8eaddd6eac6b7d2601aa2bf4b79e0abfac1bb",
+      "ae9cf2c9e87e8ee2668dd1dda789145f9917971387be44c055a3044620b403e1",
+      "907823fea0f6c503086de7eba6ff38deb105ec2c8b906220e7f22570cb16b038",
+      "7ff1c5a56f241ffe0d90d5cbd50eb058066780c98bdc58f1e3737a13a5e15a06",
+      "67d2cb97dafa28050994d2dcf210db52a595e2390405a46d0a5b3377c1c46146",
+      "9d723e2c26460292698c23300652006e426e2785097a5029647889ad19f2e349",
+      "8632caf1598bda2e688e3f565c103938150078bdc236fffdfcc2c243e1f9dc84",
+      "8952f4cf756d0e6254641f5babdf8ee03c998f0731b6ce1cda4557916eaa8e08",
+      "4600710b196570211bea754755b8bfebaafe91da4f6ac558577b00669646dc21",
+      "74df0d158298133d1a79a60c9ca08df62cf2c7d6def17e03ff6fd19cd24b541c",
+      "c76ea4b1bf4f620b94306f8eacaed197b4e03e7c43d5bce24d4ca306cbafd965",
+      "4c7b3d4ceb487a6150d6608723404652e4014a706d6fce7b2c71373c28182fc7",
+      "55d491274df41051e2527937b4ea98f81bec70f9fa5cc3870dfabefb2b3f849c",
+      "5329206410a57b9be0786f316041248f8b751e2cf1f118a868516a8aa7a6fdc8",
+      "08654b0222dc9050c294f1eab05d6f2b3446c593a9cae8ab6a0a6366a762f18d",
+      "54db2b9396e1191d19cdc934f80b898a4edf4d5aa7e0df68ac37d980361f0d35",
+      "38324d856e1c42ec48d85af466ada378876f564ac93dd2e9ab548d23472da30b",
+      "9f8176a0c55bf4f3919be8ba8089b79e9a9ac0bd81d4f0f9c98cf66d04ebcc46",
+      "94fe34963667837397d5cb41121fd7088b4e3f9f25adb71f9997774ebb7cb6a7",
+      "30d3a0ec61717ac85464ba9ffb7121492e7109961c287bf53213bf9f6e8bbd77",
+      "b9fffa9def3fc9d0b7a3c25b9db4f27af3f74d3622ab5182dbcc9fd94607e6d8",
+      "5693448741ca8bf9e2522753f0eeac09cba7906d573183bfc44befe5d415f5c9",
+      "9a0db75c52b361f7933b9bc2f9b5527e95823c1d813fafced4753aa27768248b",
+      "0385ae507553bdba4c1ea93e5fbda48d22d1fe53018dca4343d234c0d20cfa8a",
+      "309a33d4f2227bafca0d9a549fc38fb5eedb79b108b3634e6aafab416e201dc6",
+      "0ea9d7f4e5b1cef19989a64f2e002b610a9a7817f5618260e02d8840cd6092c6",
+      "825aafcd3379f9bdadfc41e4b444a5538602dd2d190b5f2f264672b6a29ddac5",
+      "2c751a9084f381cfe06a4408cc0d1e113c1d1562b711f4b28aa8670ebb0082a9",
+      "458b9ab44894b4880b276e924ae4c8d075373965eefa56c7de608efc63d59b35",
+      "a68c563c256d0e420bec00c304a9df827644af3a2db03519875c925f81040e0e",
+      "b7ab8de1ec30ac8855984d1b63f12d360e36502cafcf35db57f4d05ec18c02de",
+      "769507d0c17ceda48c6e74a1032575295c95a81e56d77c6b5317b822a9120f8d",
+      "baaec07d184b7d52736200fa0f8c8c2aec467d34bd9ccaf7f06e2560282b2982",
+      "db12bae1afcbb3cf398b16321ecc2aa4fb3ded6b74c8ed59c095269a409c444b",
+      "de40978c5de3a617a668f626c9db6a8ad4198a70eca68aa766b59014a2105f2a",
+      "2e50b28c4a6368e430a049da143943e923a43fb24518a2c90e7a512a464e3846",
+      "915e42f7a24d8fb76c7da8e7f902c3dc51eea3a97d113108a238e0ef6aa7ef36",
+      "b6be5fe81fc70d8b2124bd81a82be1afed63248cdddf7baa9a6c7bfe816281e1",
+      "050fdf329f8b8fb45d7e60f56eae145d8864a327d7bb1d54cffc8198ac6d289a",
+      "e9ac5e14f46e1db3bd725032e75557333549f5e67f2a3dae2d6d003232ffab0e",
+      "a7300bfe3aa51d30348a5e112c4b75d187b1233887731389e016fef645da05dc",
+      "68f408f7773ab4f78ec014171019e69e0d1c003327c3e820d349a5cf4578a25e",
+      "1269b8cb53bb81c8f66cae7fab1541b02853302b32e2a486defaf0ba35bd9d33",
+      "eb25b17fabdb53fb846effaa8ba1ad9d44cd896d37ef83d7ad7919f4bd7bdf77",
+      "26420c0b987254591bfa507208dbbe804e04d7825dd3440b5073240cce1bce0b",
+      "bafd696e679f9a4c3e95ccac022674561f71f13e1a2f6787ac01b15efd70da30",
+      "ad0c9f0c03c3eacb1d8683b4b11042f46138ab8609b25bfb2c931994e7cc525c",
+      "ebadcfa94b388d63b3966fc0e38018790f72ce98ed5e32010a3eb755027e049d",
+      "7effccb759b27cd7b79fa2f7ff95be8cdb0c95d93d11f5ab866e10df21c6f896",
+      "ed0614c545a095dc138f7108c11149358555d303c2421c9ffbe0ba3167359162",
+      "2f7586028129efffdcfe195a8213b155b8a3c856baa4a6dfeb3cade8ad73999f",
+      "bee874fce2b7d5ce2adc59f3f562b465fddc5291355c450a396ed61135bcbe89",
+      "c8e8811f8673fcab109769217fce58c6cfca3b4521a7f975239e2036cfc26160",
+      "4ce6dce253b571193ef17214ab0823e983efad301672ad20f8aff8a79c65b4fe",
+      "34e5d28ba25dba466f9f1e6b42a92eab53b8f7337f817b544d4cb9df9e289387",
+      "0d00be6371abe23a6aebd21e3f5b135d7a633f37379e1c4bbdfaf3c7cec9b0cd",
+      "b2992e2b75bda4e564035980ce75341e2427f7c17e7d2be58f4132094dbbf35d",
+      "b5e03006acaa20019ebdfddc1b0cf52f96b39ee56a8eb73f14f265f4963f722b",
+      "668892318ea5c531c21d16dfe0803b3e2c1282e79bcf31b4653f6de356b7306c",
+      "c306bf466f8ef9319e7842dbc0aa5d3959747189e2bad70a6bf9ab1ecb07b1a7",
+      "ef84d279baf5b73609057eb96cf4db5450a7414acd36ff1a8b3497abc2dbf5c3",
+      "58f76536b03ff936517163604a8e8d9bf8fd4ca06d5fe56f98b83a85a018fecf",
+      "84b810933f01d598a950530131cb617014af7ee0920ad134167d034fe736b559",
+      "e23a37f04b89ec929577625d4cf5696b5dd15053137bcdd94c675f1f432b270b",
+      "c617b4542c2cf6d5f82f5c6ff5fc00bd7f10124e0470dae83f967d7d149aff5d",
+      "9b7f7fd5eae4a8e83435501e3e5500060f1562f9302d256010b52bf6bba52b92",
+      "1b50c699755d716b428a76993fc9d41936a5d646533a6ae9fa878f744ae531fe",
+      "5a3e80ce45a43ea11f9927db046aa527b0aa4ee40a39d87671a41fc2232b84b8",
+      "47ef5191e1d2e4679561a37aa70a310acca7da330e2b3dddfe2d3e950221af0f",
+      "95ba2f7a71630d1c36916a8de5555ea8d6df0bbbb8312dbb287072f4577e10fc",
+      "dbc3c4da098785eb3e9bf56506ebe0bf7d35da5722af1e3f165fbe5935913351",
+      "fba4692bf2f72a016059fe7b2abee3fc3958b23f65149cb99827af16e1b787b8",
+      "9c27346d269916077062552aa299f5cc161d4d670377511167d233788092ee71",
+      "00c27af2f3b08ed4d470838c6bf197d013513abefbca087fed9c4dab9fa49992",
+      "387bbb1e504f981db80c1021e681035361de046ea6292eea0a62a3e56ac4ca99",
+      "57fc4a5926c2b0a76f83ac68aaea09a89a8d5a8f217b25043f88917279d83687",
+      "64a9bc5163fea210a3097fc60d65b01b2520d3626ea1f074cb2fb16d17242061",
+      "662e614150c15394358e04942917a51164b222eb4d1fcfa18889aafc548644fe",
+      "9f700b1e85a98205fe7e6c8c7fa653b8c4db0b10823a080caf2625f1d14be7fc",
+      "a773902bc412385df7427949bc3cd0c099fb18d9288da714b60f4fdbe48ab739",
+      "16d93bdd51b6c1d5dec4fbc8b2e2ff7cbc6a5c7135cf3b0dd7f1e68d506377fa",
+      "9aecfeb8bf5d36a9c323a079cfdc6d8594d7a751ef7f7e50ae1e031f00706c35"
+    ]
+  },
+  "rows": [
+    {
+      "sha256": "5ee77b3523dfb1439e65da666ffc6b0e60feb2f3ee09df203dfd56c33f8c2ee4",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 1,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 1,
+      "methods": {
+        "single_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "d036532cb33b113d8d1e8a48d5ca85495f8acfcd16a0ed257bd47d1159107e48",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 1,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 2,
+      "methods": {
+        "single_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "de792eb5875fa2c1471e1e0e7ef974c049089da6effab42c63d15011f99cc933",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 1,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 3,
+      "methods": {
+        "single_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "fcc45109bfbe5361b6fac1ae07cdb860437036fb19d397da9cfa9ff67f17fd09",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 2,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 4,
+      "methods": {
+        "single_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "90a3f01057bea666cca6f2cbcfc7da400bb27973dccd31d2bb2d76a203d62486",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 2,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 5,
+      "methods": {
+        "single_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "b904cea81e97f85268ec1d7b28770f2fbb5584caf425f870b1a00011fcdde501",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 2,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 6,
+      "methods": {
+        "single_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "0da70ba8f57866a044c668a85f4e6add353c08c8da6a4f860a552d8dbb349cf4",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 3,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 7,
+      "methods": {
+        "single_face": {
+          "measured": 82,
+          "scheduled": 82,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 82,
+          "scheduled": 82,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 82,
+          "scheduled": 82,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "aab6a2aeaad661e0bf1f0e638ec1261bf23ed16747265ed8c440b0707e52047d",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 3,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 8,
+      "methods": {
+        "single_face": {
+          "measured": 82,
+          "scheduled": 82,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 82,
+          "scheduled": 82,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 82,
+          "scheduled": 82,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "a01b2d5679b44cefd97e5b440c8dbf91524ba28f0a1cca8feccca6e4e6e19a06",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 3,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 9,
+      "methods": {
+        "single_face": {
+          "measured": 80,
+          "scheduled": 83,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 73,
+          "scheduled": 73,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 3
+    },
+    {
+      "sha256": "998b5d4ab5884dccd1d2a45c7f1c5bdfa541c57842f2956011038e5376403df2",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 4,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 10,
+      "methods": {
+        "single_face": {
+          "measured": 8,
+          "scheduled": 25,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 25,
+          "scheduled": 25,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 25,
+          "scheduled": 25,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 17
+    },
+    {
+      "sha256": "4bf7f7db4185303d5dab8d008c8a501a23e088f2a05163027c5499690672cb11",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 4,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          72,
+          80
+        ],
+        [
+          102,
+          108
+        ]
+      ],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 11,
+      "methods": {
+        "single_face": {
+          "measured": 10,
+          "scheduled": 47,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 47,
+          "scheduled": 47,
+          "proposal": {
+            "frames": [
+              102,
+              108
+            ],
+            "response": 0.8145693363659348,
+            "pts": [
+              102000,
+              108000
+            ],
+            "edges": [
+              [
+                99,
+                100,
+                101,
+                102,
+                103,
+                104
+              ],
+              [
+                105,
+                106,
+                107,
+                108,
+                109,
+                110
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "6e60554c6f7e54f20b3c35b2dd20f2dfe7d14ad81e8456c64bf926d3dcbfd436"
+              },
+              {
+                "frame_index": 105,
+                "pts": 105000,
+                "decoded_rgb_sha256": "894a463a58cf854cd77a4f462a912ffa4520416da624d52c4ad2b2ce34f69cbd"
+              },
+              {
+                "frame_index": 108,
+                "pts": 108000,
+                "decoded_rgb_sha256": "abbe6460afa31572e1a989b054b3251a2ec9689d5a7329a37d6f80688166fb80"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 47,
+          "scheduled": 47,
+          "proposal": {
+            "frames": [
+              102,
+              108
+            ],
+            "response": 0.8145693363659348,
+            "pts": [
+              102000,
+              108000
+            ],
+            "edges": [
+              [
+                99,
+                100,
+                101,
+                102,
+                103,
+                104
+              ],
+              [
+                105,
+                106,
+                107,
+                108,
+                109,
+                110
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "6e60554c6f7e54f20b3c35b2dd20f2dfe7d14ad81e8456c64bf926d3dcbfd436"
+              },
+              {
+                "frame_index": 105,
+                "pts": 105000,
+                "decoded_rgb_sha256": "894a463a58cf854cd77a4f462a912ffa4520416da624d52c4ad2b2ce34f69cbd"
+              },
+              {
+                "frame_index": 108,
+                "pts": 108000,
+                "decoded_rgb_sha256": "abbe6460afa31572e1a989b054b3251a2ec9689d5a7329a37d6f80688166fb80"
+              }
+            ]
+          }
+        }
+      },
+      "multiple_faces": 37
+    },
+    {
+      "sha256": "799154cd0b4e8d877ec3087dcc6fab6035b5b56092285d816731b83d38cb1ce0",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 4,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          72,
+          80
+        ],
+        [
+          102,
+          108
+        ]
+      ],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 12,
+      "methods": {
+        "single_face": {
+          "measured": 26,
+          "scheduled": 47,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 47,
+          "scheduled": 47,
+          "proposal": {
+            "frames": [
+              102,
+              108
+            ],
+            "response": 0.7580851780889273,
+            "pts": [
+              102000,
+              108000
+            ],
+            "edges": [
+              [
+                99,
+                100,
+                101,
+                102,
+                103,
+                104
+              ],
+              [
+                105,
+                106,
+                107,
+                108,
+                109,
+                110
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "97f66ed928c458df5b4b5dd80502ff19851c256f3c2f2b4aacf54a5f52489238"
+              },
+              {
+                "frame_index": 105,
+                "pts": 105000,
+                "decoded_rgb_sha256": "1cfd7426a31052a9abb95183f44bb96ba55269d2cff19232303b7f5e5ae1acb1"
+              },
+              {
+                "frame_index": 108,
+                "pts": 108000,
+                "decoded_rgb_sha256": "42e9841d86bcee1ecc8a4bd516e6737e1c95a92fe4a270da3f89902242cbe08c"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 47,
+          "scheduled": 47,
+          "proposal": {
+            "frames": [
+              102,
+              108
+            ],
+            "response": 0.7580851780889273,
+            "pts": [
+              102000,
+              108000
+            ],
+            "edges": [
+              [
+                99,
+                100,
+                101,
+                102,
+                103,
+                104
+              ],
+              [
+                105,
+                106,
+                107,
+                108,
+                109,
+                110
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "97f66ed928c458df5b4b5dd80502ff19851c256f3c2f2b4aacf54a5f52489238"
+              },
+              {
+                "frame_index": 105,
+                "pts": 105000,
+                "decoded_rgb_sha256": "1cfd7426a31052a9abb95183f44bb96ba55269d2cff19232303b7f5e5ae1acb1"
+              },
+              {
+                "frame_index": 108,
+                "pts": 108000,
+                "decoded_rgb_sha256": "42e9841d86bcee1ecc8a4bd516e6737e1c95a92fe4a270da3f89902242cbe08c"
+              }
+            ]
+          }
+        }
+      },
+      "multiple_faces": 21
+    },
+    {
+      "sha256": "bd6b463c4b50dc0116c3b4cdd9192b47851f637574c7c6c87e0b3b9bce84b9e9",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 4,
+      "condition": "swap_then_jump",
+      "truth": [
+        [
+          72,
+          80
+        ]
+      ],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 13,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 42,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 42,
+          "scheduled": 42,
+          "proposal": {
+            "frames": [
+              72,
+              80
+            ],
+            "response": 0.7259389861989755,
+            "pts": [
+              72000,
+              80000
+            ],
+            "edges": [
+              [
+                69,
+                70,
+                71,
+                72,
+                73,
+                74
+              ],
+              [
+                77,
+                78,
+                79,
+                80,
+                81,
+                82
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 71,
+                "pts": 71000,
+                "decoded_rgb_sha256": "dd92ef4e8a1c88ddbae64d96ec5cd46718d066a24ee50b33b88643e4fbcaa56d"
+              },
+              {
+                "frame_index": 77,
+                "pts": 77000,
+                "decoded_rgb_sha256": "0362bb25a4d373bd9b5297260d43eceea68399188f2de9beeea19501587d8ed7"
+              },
+              {
+                "frame_index": 80,
+                "pts": 80000,
+                "decoded_rgb_sha256": "44937e808410f35df9046144106ae3dc0c47fdff96b44b3d5a309ec6d17a5b19"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 42,
+          "scheduled": 42,
+          "proposal": {
+            "frames": [
+              72,
+              80
+            ],
+            "response": 0.7259389861989755,
+            "pts": [
+              72000,
+              80000
+            ],
+            "edges": [
+              [
+                69,
+                70,
+                71,
+                72,
+                73,
+                74
+              ],
+              [
+                77,
+                78,
+                79,
+                80,
+                81,
+                82
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 71,
+                "pts": 71000,
+                "decoded_rgb_sha256": "dd92ef4e8a1c88ddbae64d96ec5cd46718d066a24ee50b33b88643e4fbcaa56d"
+              },
+              {
+                "frame_index": 77,
+                "pts": 77000,
+                "decoded_rgb_sha256": "0362bb25a4d373bd9b5297260d43eceea68399188f2de9beeea19501587d8ed7"
+              },
+              {
+                "frame_index": 80,
+                "pts": 80000,
+                "decoded_rgb_sha256": "44937e808410f35df9046144106ae3dc0c47fdff96b44b3d5a309ec6d17a5b19"
+              }
+            ]
+          }
+        }
+      },
+      "multiple_faces": 30
+    },
+    {
+      "sha256": "bf89160a42f0d119d6eba0dde9e1bf83cb26c2b41e64fe2a96f1465296659bba",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 4,
+      "condition": "light_then_swap",
+      "truth": [
+        [
+          102,
+          108
+        ]
+      ],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 14,
+      "methods": {
+        "single_face": {
+          "measured": 16,
+          "scheduled": 36,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 36,
+          "scheduled": 36,
+          "proposal": {
+            "frames": [
+              102,
+              108
+            ],
+            "response": 0.7998563890519451,
+            "pts": [
+              102000,
+              108000
+            ],
+            "edges": [
+              [
+                99,
+                100,
+                101,
+                102,
+                103,
+                104
+              ],
+              [
+                105,
+                106,
+                107,
+                108,
+                109,
+                110
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "ba6f43071e64c9509eb14df5873cdbea63cf507b27c14729477503e3f9d01ece"
+              },
+              {
+                "frame_index": 105,
+                "pts": 105000,
+                "decoded_rgb_sha256": "7e53b0ecd6031acb5fdc96fab50ad40d40b5bffac7d181fd41490ad974136f1c"
+              },
+              {
+                "frame_index": 108,
+                "pts": 108000,
+                "decoded_rgb_sha256": "671a71fb30fd23af631f023b66a10b74dc01ea5753797386c5dae2de7a4b8b56"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 36,
+          "scheduled": 36,
+          "proposal": {
+            "frames": [
+              102,
+              108
+            ],
+            "response": 0.7998563890519451,
+            "pts": [
+              102000,
+              108000
+            ],
+            "edges": [
+              [
+                99,
+                100,
+                101,
+                102,
+                103,
+                104
+              ],
+              [
+                105,
+                106,
+                107,
+                108,
+                109,
+                110
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "ba6f43071e64c9509eb14df5873cdbea63cf507b27c14729477503e3f9d01ece"
+              },
+              {
+                "frame_index": 105,
+                "pts": 105000,
+                "decoded_rgb_sha256": "7e53b0ecd6031acb5fdc96fab50ad40d40b5bffac7d181fd41490ad974136f1c"
+              },
+              {
+                "frame_index": 108,
+                "pts": 108000,
+                "decoded_rgb_sha256": "671a71fb30fd23af631f023b66a10b74dc01ea5753797386c5dae2de7a4b8b56"
+              }
+            ]
+          }
+        }
+      },
+      "multiple_faces": 20
+    },
+    {
+      "sha256": "230208258c05825678e951e8e5503a447c6bdef4805b6562f7a9b8410a80727a",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 4,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 15,
+      "methods": {
+        "single_face": {
+          "measured": 11,
+          "scheduled": 31,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 36,
+          "scheduled": 36,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 36,
+          "scheduled": 36,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 23
+    },
+    {
+      "sha256": "9dab5fd7c2cb75d2544fe43952c175a4b03eec14e55f8c90487dec78288eb7e0",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 4,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 16,
+      "methods": {
+        "single_face": {
+          "measured": 18,
+          "scheduled": 38,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 38,
+          "scheduled": 38,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 20
+    },
+    {
+      "sha256": "33e6c2bc573d939186474f4c8fdcc22ceeb86916f1a1652b4b9365ebf0e3ed2c",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 5,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 17,
+      "methods": {
+        "single_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "329ef959115942d385749c4ab228ee03365881850d92298d589cbf75a64b4718",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 5,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 18,
+      "methods": {
+        "single_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "42f367b0720ac890bdbd9ebe2d997fc9b2bc592fb8758ac284f4546cd136b39b",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 5,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 19,
+      "methods": {
+        "single_face": {
+          "measured": 59,
+          "scheduled": 59,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 59,
+          "scheduled": 59,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "123fe79c4ab864d2b4d8c3a91cce5a10db14aeaa6f7e7977f2d8037ccf869f11",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 6,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 20,
+      "methods": {
+        "single_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "2fa65125436fcafee66c4d57b4e0ddea6cebd617ad28db6f7f4ddd0c9812ed2b",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 6,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 21,
+      "methods": {
+        "single_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "2ebb998ceddd9906ab83ea4cb89d978c3a92b3dbe50bd5805bebad0939eba9b0",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 6,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 22,
+      "methods": {
+        "single_face": {
+          "measured": 23,
+          "scheduled": 23,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 23,
+          "scheduled": 23,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "96f04d0a26aa25ea102bce212e580df94b4397b2b29721f7653f32de0b320516",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 7,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 23,
+      "methods": {
+        "single_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "14177ee4ef2da8c2de71f69e2ad07d1af8b2e9e30b4ac5d1881c5035a89d519a",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 7,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 24,
+      "methods": {
+        "single_face": {
+          "measured": 61,
+          "scheduled": 61,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 61,
+          "scheduled": 61,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 61,
+          "scheduled": 61,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "bc81ff75a649d3a91169a42695c378877a75099e7c65b53106d8b00232f1fa25",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 7,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 25,
+      "methods": {
+        "single_face": {
+          "measured": 48,
+          "scheduled": 48,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 48,
+          "scheduled": 48,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "a05bf4ea64e32d866efe92fbf01f5286bd25c96dc313e8d76ee70876dbfc10af",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 8,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 26,
+      "methods": {
+        "single_face": {
+          "measured": 37,
+          "scheduled": 37,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 37,
+          "scheduled": 37,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 37,
+          "scheduled": 37,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "61ba9e800894bda7379711ce29fcacdb0b3c396187a79cf386382ea431a05860",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 8,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 27,
+      "methods": {
+        "single_face": {
+          "measured": 32,
+          "scheduled": 32,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 32,
+          "scheduled": 32,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 32,
+          "scheduled": 32,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "83e19f49f56c39aea5bc792d51f45221abc4e020974a1b6e08739c862466a2a4",
+      "bank": "confirmation",
+      "panel": "confirmation",
+      "group": 8,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 28,
+      "methods": {
+        "single_face": {
+          "measured": 38,
+          "scheduled": 38,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 38,
+          "scheduled": 38,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "1cc709f016b2c89fd2bb27fccfdb3555e98cc6150b32955d3cbf814b4fd61686",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 1,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 29,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "1712f23105a621f644d19babea309f24f18949733425bcd3f499f3788e340f10",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 1,
+      "condition": "tandem_original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 30,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "52cfc8edc6bc767bfc17aaba572949a320ff168ef6c2ad70273362be04cbe413",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 1,
+      "condition": "light_then_swap",
+      "truth": [
+        [
+          90,
+          98
+        ]
+      ],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 31,
+      "methods": {
+        "single_face": {
+          "measured": 24,
+          "scheduled": 24,
+          "proposal": {
+            "frames": [
+              90,
+              98
+            ],
+            "response": 0.7399148144929447,
+            "pts": [
+              90000,
+              98000
+            ],
+            "edges": [
+              [
+                87,
+                88,
+                89,
+                90,
+                91,
+                92
+              ],
+              [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 89,
+                "pts": 89000,
+                "decoded_rgb_sha256": "3e91753f41fd19268fd0730b356c2dce2e56fafffd352186ae419eaaa3b658d9"
+              },
+              {
+                "frame_index": 94,
+                "pts": 94000,
+                "decoded_rgb_sha256": "522d546dfd75df68bdfc53fa53de4099bbf447a30837203e9e1b5d8b8350d376"
+              },
+              {
+                "frame_index": 98,
+                "pts": 98000,
+                "decoded_rgb_sha256": "31506eb4ee81c6a32ad741849b9d65bb5f7e4c757c7ac34c9406c88263a641ed"
+              }
+            ]
+          }
+        },
+        "largest_face": {
+          "measured": 24,
+          "scheduled": 24,
+          "proposal": {
+            "frames": [
+              90,
+              98
+            ],
+            "response": 0.7399148144929447,
+            "pts": [
+              90000,
+              98000
+            ],
+            "edges": [
+              [
+                87,
+                88,
+                89,
+                90,
+                91,
+                92
+              ],
+              [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 89,
+                "pts": 89000,
+                "decoded_rgb_sha256": "3e91753f41fd19268fd0730b356c2dce2e56fafffd352186ae419eaaa3b658d9"
+              },
+              {
+                "frame_index": 94,
+                "pts": 94000,
+                "decoded_rgb_sha256": "522d546dfd75df68bdfc53fa53de4099bbf447a30837203e9e1b5d8b8350d376"
+              },
+              {
+                "frame_index": 98,
+                "pts": 98000,
+                "decoded_rgb_sha256": "31506eb4ee81c6a32ad741849b9d65bb5f7e4c757c7ac34c9406c88263a641ed"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 24,
+          "scheduled": 24,
+          "proposal": {
+            "frames": [
+              90,
+              98
+            ],
+            "response": 0.7399148144929447,
+            "pts": [
+              90000,
+              98000
+            ],
+            "edges": [
+              [
+                87,
+                88,
+                89,
+                90,
+                91,
+                92
+              ],
+              [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 89,
+                "pts": 89000,
+                "decoded_rgb_sha256": "3e91753f41fd19268fd0730b356c2dce2e56fafffd352186ae419eaaa3b658d9"
+              },
+              {
+                "frame_index": 94,
+                "pts": 94000,
+                "decoded_rgb_sha256": "522d546dfd75df68bdfc53fa53de4099bbf447a30837203e9e1b5d8b8350d376"
+              },
+              {
+                "frame_index": 98,
+                "pts": 98000,
+                "decoded_rgb_sha256": "31506eb4ee81c6a32ad741849b9d65bb5f7e4c757c7ac34c9406c88263a641ed"
+              }
+            ]
+          }
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "1e9a524685decb591cf9ceff8d8ad36ed268c2760c2b61184139c9f62d39779a",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 1,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 32,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "67c1e5b1159d3e4ef293c36b51204d5f5e7c716e2491ee4e5bfd28189457a8e8",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 1,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 33,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "1ad3bc257ff21c43f64cfef1354b2a80472d108ff8c0fa40d00246514dfd2caf",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 2,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 34,
+      "methods": {
+        "single_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "01d771d721573d6214f92d571259bf2ddd0e89744817796129d799dcec3115fc",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 2,
+      "condition": "tandem_original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 35,
+      "methods": {
+        "single_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "86c4272bfeac3920b8f532f55bb005b5d7eb9021ed88049a6bd391571e802207",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 2,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 36,
+      "methods": {
+        "single_face": {
+          "measured": 29,
+          "scheduled": 29,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 29,
+          "scheduled": 29,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 29,
+          "scheduled": 29,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "cefc97ffe5c32f352d04b7b7f19b48970654e2ee4bbc5f2fdbdeee359fa452b2",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 2,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 37,
+      "methods": {
+        "single_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "c1cb025fbf98ba194de45f2701b111b60fd8d0450f522a503967008a7b0eb258",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 3,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 38,
+      "methods": {
+        "single_face": {
+          "measured": 55,
+          "scheduled": 55,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 55,
+          "scheduled": 55,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 55,
+          "scheduled": 55,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "a3b2f8f34eed00b45a132f248395432968221b914def3c9f04dc58563782d63d",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 3,
+      "condition": "tandem_original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 39,
+      "methods": {
+        "single_face": {
+          "measured": 55,
+          "scheduled": 55,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 55,
+          "scheduled": 55,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 55,
+          "scheduled": 55,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "755a3869b3b6754f533c0784505e43985e55d01b902a2690252a62916567b0f0",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 3,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 40,
+      "methods": {
+        "single_face": {
+          "measured": 59,
+          "scheduled": 59,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 59,
+          "scheduled": 59,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 59,
+          "scheduled": 59,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "c8fb39f696167579cfba0ce2e60e692507cb052e65dee5f08a27156acfb05b85",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 3,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 41,
+      "methods": {
+        "single_face": {
+          "measured": 46,
+          "scheduled": 46,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 46,
+          "scheduled": 46,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "e17adf83eff9df8fc4290d7994b2cc5f5ce7bd97e833aa4d24cc2ecc75f48698",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 4,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 42,
+      "methods": {
+        "single_face": {
+          "measured": 26,
+          "scheduled": 26,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 26,
+          "scheduled": 26,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 26,
+          "scheduled": 26,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "e132ad6a32a7732dfda578256b12ca7491a84388e5b99107221b1e3e581f7b57",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 4,
+      "condition": "tandem_original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 43,
+      "methods": {
+        "single_face": {
+          "measured": 26,
+          "scheduled": 26,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 26,
+          "scheduled": 26,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 26,
+          "scheduled": 26,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "bb876e4f9f009924f429ca7ab7ad2b6fcdd3ebf966c3c779aceb844cdcf555f1",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 4,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 44,
+      "methods": {
+        "single_face": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "267279cee1d0125e41dba097b5795880fcbf8feec7b506c1a20ad6edfe2473df",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 4,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 45,
+      "methods": {
+        "single_face": {
+          "measured": 26,
+          "scheduled": 26,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 26,
+          "scheduled": 26,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "348309b3ec2e75293842c902093872ba50152f51ed27e07f1f7070a3c49428d1",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 5,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 46,
+      "methods": {
+        "single_face": {
+          "measured": 66,
+          "scheduled": 66,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 66,
+          "scheduled": 66,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 66,
+          "scheduled": 66,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "1f7f4dca9d82527b42e11201b00ae344bbf89fe2d5825b5825b018e5fb1db141",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 5,
+      "condition": "tandem_original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 47,
+      "methods": {
+        "single_face": {
+          "measured": 61,
+          "scheduled": 61,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 61,
+          "scheduled": 61,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 61,
+          "scheduled": 61,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "a294f40f36517dd61c02361b697dd625de0ef26f128402d0e24d5bdcfa0198e6",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 5,
+      "condition": "light_then_swap",
+      "truth": [
+        [
+          90,
+          98
+        ]
+      ],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 48,
+      "methods": {
+        "single_face": {
+          "measured": 70,
+          "scheduled": 70,
+          "proposal": {
+            "frames": [
+              90,
+              98
+            ],
+            "response": 0.514786752761672,
+            "pts": [
+              90000,
+              98000
+            ],
+            "edges": [
+              [
+                87,
+                88,
+                89,
+                90,
+                91,
+                92
+              ],
+              [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 89,
+                "pts": 89000,
+                "decoded_rgb_sha256": "86c49698c723727e523832da3e90618047d03b2651b0765d1e14e107203ee7e5"
+              },
+              {
+                "frame_index": 94,
+                "pts": 94000,
+                "decoded_rgb_sha256": "cebc8b89d494882ec1fc0929ba6a7308434d254a668bdbe89120f193cc2f441a"
+              },
+              {
+                "frame_index": 98,
+                "pts": 98000,
+                "decoded_rgb_sha256": "0819a327a21bbb4f7b876f562b47e4b940dca32d2aa9f78839955b118d3d7d25"
+              }
+            ]
+          }
+        },
+        "largest_face": {
+          "measured": 70,
+          "scheduled": 70,
+          "proposal": {
+            "frames": [
+              90,
+              98
+            ],
+            "response": 0.514786752761672,
+            "pts": [
+              90000,
+              98000
+            ],
+            "edges": [
+              [
+                87,
+                88,
+                89,
+                90,
+                91,
+                92
+              ],
+              [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 89,
+                "pts": 89000,
+                "decoded_rgb_sha256": "86c49698c723727e523832da3e90618047d03b2651b0765d1e14e107203ee7e5"
+              },
+              {
+                "frame_index": 94,
+                "pts": 94000,
+                "decoded_rgb_sha256": "cebc8b89d494882ec1fc0929ba6a7308434d254a668bdbe89120f193cc2f441a"
+              },
+              {
+                "frame_index": 98,
+                "pts": 98000,
+                "decoded_rgb_sha256": "0819a327a21bbb4f7b876f562b47e4b940dca32d2aa9f78839955b118d3d7d25"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 70,
+          "scheduled": 70,
+          "proposal": {
+            "frames": [
+              90,
+              98
+            ],
+            "response": 0.514786752761672,
+            "pts": [
+              90000,
+              98000
+            ],
+            "edges": [
+              [
+                87,
+                88,
+                89,
+                90,
+                91,
+                92
+              ],
+              [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 89,
+                "pts": 89000,
+                "decoded_rgb_sha256": "86c49698c723727e523832da3e90618047d03b2651b0765d1e14e107203ee7e5"
+              },
+              {
+                "frame_index": 94,
+                "pts": 94000,
+                "decoded_rgb_sha256": "cebc8b89d494882ec1fc0929ba6a7308434d254a668bdbe89120f193cc2f441a"
+              },
+              {
+                "frame_index": 98,
+                "pts": 98000,
+                "decoded_rgb_sha256": "0819a327a21bbb4f7b876f562b47e4b940dca32d2aa9f78839955b118d3d7d25"
+              }
+            ]
+          }
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "3d9c0b44cdbc5409feb90818789245508a7b5bb3604ce11fc2c9d0d224d6b2e3",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 5,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 49,
+      "methods": {
+        "single_face": {
+          "measured": 75,
+          "scheduled": 75,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 75,
+          "scheduled": 75,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 75,
+          "scheduled": 75,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "d0dd3b264a9780088058283e8ba721c52f0577352068655e199bf9072c05d096",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 5,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 50,
+      "methods": {
+        "single_face": {
+          "measured": 65,
+          "scheduled": 65,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 65,
+          "scheduled": 65,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 65,
+          "scheduled": 65,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "526b1c167f78686e478fa011b89e982ce06320d46025f959561967cd1cecae8a",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 6,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 51,
+      "methods": {
+        "single_face": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "982ee22eafbd1987adbc0d1f7e595b3bc5f4f607fe831e0bfdeabc6ab6c9e605",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 6,
+      "condition": "tandem_original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 52,
+      "methods": {
+        "single_face": {
+          "measured": 23,
+          "scheduled": 23,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 23,
+          "scheduled": 23,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 23,
+          "scheduled": 23,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "1fd541c2d8aca3d23270ce02d042450cef948e23a086b35a4d21080642a546e7",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 6,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 53,
+      "methods": {
+        "single_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "61e3a26beea349d4ddf62ce214f4f4aed35199942772efcecf6b4e886df6d025",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 6,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 54,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "faa8d31b0016dc8a53e67c9401ffac202bdaa5766ea87a5bebb127cca1e83174",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 7,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 55,
+      "methods": {
+        "single_face": {
+          "measured": 24,
+          "scheduled": 24,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 24,
+          "scheduled": 24,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 24,
+          "scheduled": 24,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "357e470fb60ea37a6adc1edeac0b4de80f704827b508b63b12f5a4244cc6cae3",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 7,
+      "condition": "tandem_original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 56,
+      "methods": {
+        "single_face": {
+          "measured": 23,
+          "scheduled": 23,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 23,
+          "scheduled": 23,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 23,
+          "scheduled": 23,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "1d65c178c455a6a07118e61acffa974dad78058a347a9db4ee953137ceb13a27",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 7,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 57,
+      "methods": {
+        "single_face": {
+          "measured": 23,
+          "scheduled": 23,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 23,
+          "scheduled": 23,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 23,
+          "scheduled": 23,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "7a0ccc4cb4bd45eeb7ed727d22d246091a4a20d49c84c58aee9aff235b87bb07",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 7,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 58,
+      "methods": {
+        "single_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "68c390171f46e90910b1f1db147655734de7df3f4538b7c4325cbc800e036ea4",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 8,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 59,
+      "methods": {
+        "single_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "c8c09da3f3e5eed6b75c4a016ef0b1c06e45995a4f0f24b97baa945cb045e7ea",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 8,
+      "condition": "tandem_original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 60,
+      "methods": {
+        "single_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "e50bdd2b3ce0795b598287beb761a109828ecb143ffca63da772100edaccd2c9",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 8,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 61,
+      "methods": {
+        "single_face": {
+          "measured": 43,
+          "scheduled": 43,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 43,
+          "scheduled": 43,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 43,
+          "scheduled": 43,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "f5e29d274add2b65f317433f7e60898a6cb53a27f1f6fa91d284e92df362f5f8",
+      "bank": "video-face-two-returns-hd-2026-11-12",
+      "panel": "development",
+      "group": 8,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 62,
+      "methods": {
+        "single_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "6260cbacec9a8710dc964a4384a8eaddd6eac6b7d2601aa2bf4b79e0abfac1bb",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 1,
+      "condition": "ordinary",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 63,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "ae9cf2c9e87e8ee2668dd1dda789145f9917971387be44c055a3044620b403e1",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 1,
+      "condition": "person_switch",
+      "truth": [],
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 64,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "907823fea0f6c503086de7eba6ff38deb105ec2c8b906220e7f22570cb16b038",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 1,
+      "condition": "tandem_person_switch",
+      "truth": [],
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 65,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "7ff1c5a56f241ffe0d90d5cbd50eb058066780c98bdc58f1e3737a13a5e15a06",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 1,
+      "condition": "same_person_jump",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 66,
+      "methods": {
+        "single_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "67d2cb97dafa28050994d2dcf210db52a595e2390405a46d0a5b3377c1c46146",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 1,
+      "condition": "same_person_reframe",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 67,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "9d723e2c26460292698c23300652006e426e2785097a5029647889ad19f2e349",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 2,
+      "condition": "ordinary",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 68,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "8632caf1598bda2e688e3f565c103938150078bdc236fffdfcc2c243e1f9dc84",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 2,
+      "condition": "person_switch",
+      "truth": [],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 69,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "8952f4cf756d0e6254641f5babdf8ee03c998f0731b6ce1cda4557916eaa8e08",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 2,
+      "condition": "tandem_person_switch",
+      "truth": [],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 70,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "4600710b196570211bea754755b8bfebaafe91da4f6ac558577b00669646dc21",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 2,
+      "condition": "same_person_jump",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 71,
+      "methods": {
+        "single_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "74df0d158298133d1a79a60c9ca08df62cf2c7d6def17e03ff6fd19cd24b541c",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 2,
+      "condition": "same_person_reframe",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 72,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "c76ea4b1bf4f620b94306f8eacaed197b4e03e7c43d5bce24d4ca306cbafd965",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 3,
+      "condition": "ordinary",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 73,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "4c7b3d4ceb487a6150d6608723404652e4014a706d6fce7b2c71373c28182fc7",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 3,
+      "condition": "person_switch",
+      "truth": [],
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 74,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "55d491274df41051e2527937b4ea98f81bec70f9fa5cc3870dfabefb2b3f849c",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 3,
+      "condition": "tandem_person_switch",
+      "truth": [],
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 75,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "5329206410a57b9be0786f316041248f8b751e2cf1f118a868516a8aa7a6fdc8",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 3,
+      "condition": "same_person_jump",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 76,
+      "methods": {
+        "single_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "08654b0222dc9050c294f1eab05d6f2b3446c593a9cae8ab6a0a6366a762f18d",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 3,
+      "condition": "same_person_reframe",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 77,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "54db2b9396e1191d19cdc934f80b898a4edf4d5aa7e0df68ac37d980361f0d35",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 4,
+      "condition": "ordinary",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 78,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "38324d856e1c42ec48d85af466ada378876f564ac93dd2e9ab548d23472da30b",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 4,
+      "condition": "person_switch",
+      "truth": [],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 79,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "9f8176a0c55bf4f3919be8ba8089b79e9a9ac0bd81d4f0f9c98cf66d04ebcc46",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 4,
+      "condition": "tandem_person_switch",
+      "truth": [],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 80,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "94fe34963667837397d5cb41121fd7088b4e3f9f25adb71f9997774ebb7cb6a7",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 4,
+      "condition": "same_person_jump",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 81,
+      "methods": {
+        "single_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "30d3a0ec61717ac85464ba9ffb7121492e7109961c287bf53213bf9f6e8bbd77",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 4,
+      "condition": "same_person_reframe",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 82,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "b9fffa9def3fc9d0b7a3c25b9db4f27af3f74d3622ab5182dbcc9fd94607e6d8",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 5,
+      "condition": "ordinary",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 83,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "5693448741ca8bf9e2522753f0eeac09cba7906d573183bfc44befe5d415f5c9",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 5,
+      "condition": "person_switch",
+      "truth": [],
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 84,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "9a0db75c52b361f7933b9bc2f9b5527e95823c1d813fafced4753aa27768248b",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 5,
+      "condition": "tandem_person_switch",
+      "truth": [],
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 85,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "0385ae507553bdba4c1ea93e5fbda48d22d1fe53018dca4343d234c0d20cfa8a",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 5,
+      "condition": "same_person_jump",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 86,
+      "methods": {
+        "single_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "309a33d4f2227bafca0d9a549fc38fb5eedb79b108b3634e6aafab416e201dc6",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 5,
+      "condition": "same_person_reframe",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 87,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "0ea9d7f4e5b1cef19989a64f2e002b610a9a7817f5618260e02d8840cd6092c6",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 6,
+      "condition": "ordinary",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 88,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "825aafcd3379f9bdadfc41e4b444a5538602dd2d190b5f2f264672b6a29ddac5",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 6,
+      "condition": "person_switch",
+      "truth": [],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 89,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "2c751a9084f381cfe06a4408cc0d1e113c1d1562b711f4b28aa8670ebb0082a9",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 6,
+      "condition": "tandem_person_switch",
+      "truth": [],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 90,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "458b9ab44894b4880b276e924ae4c8d075373965eefa56c7de608efc63d59b35",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 6,
+      "condition": "same_person_jump",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 91,
+      "methods": {
+        "single_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "a68c563c256d0e420bec00c304a9df827644af3a2db03519875c925f81040e0e",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 6,
+      "condition": "same_person_reframe",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 92,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "b7ab8de1ec30ac8855984d1b63f12d360e36502cafcf35db57f4d05ec18c02de",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 7,
+      "condition": "ordinary",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 93,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "769507d0c17ceda48c6e74a1032575295c95a81e56d77c6b5317b822a9120f8d",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 7,
+      "condition": "person_switch",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 94,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "baaec07d184b7d52736200fa0f8c8c2aec467d34bd9ccaf7f06e2560282b2982",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 7,
+      "condition": "tandem_person_switch",
+      "truth": [],
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 95,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "db12bae1afcbb3cf398b16321ecc2aa4fb3ded6b74c8ed59c095269a409c444b",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 7,
+      "condition": "same_person_jump",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 96,
+      "methods": {
+        "single_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "de40978c5de3a617a668f626c9db6a8ad4198a70eca68aa766b59014a2105f2a",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 7,
+      "condition": "same_person_reframe",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 97,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "2e50b28c4a6368e430a049da143943e923a43fb24518a2c90e7a512a464e3846",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 8,
+      "condition": "ordinary",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 98,
+      "methods": {
+        "single_face": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "915e42f7a24d8fb76c7da8e7f902c3dc51eea3a97d113108a238e0ef6aa7ef36",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 8,
+      "condition": "person_switch",
+      "truth": [],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 99,
+      "methods": {
+        "single_face": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "b6be5fe81fc70d8b2124bd81a82be1afed63248cdddf7baa9a6c7bfe816281e1",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 8,
+      "condition": "tandem_person_switch",
+      "truth": [],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 100,
+      "methods": {
+        "single_face": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "050fdf329f8b8fb45d7e60f56eae145d8864a327d7bb1d54cffc8198ac6d289a",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 8,
+      "condition": "same_person_jump",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 101,
+      "methods": {
+        "single_face": {
+          "measured": 23,
+          "scheduled": 23,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 23,
+          "scheduled": 23,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 23,
+          "scheduled": 23,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "e9ac5e14f46e1db3bd725032e75557333549f5e67f2a3dae2d6d003232ffab0e",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 8,
+      "condition": "same_person_reframe",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 102,
+      "methods": {
+        "single_face": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "a7300bfe3aa51d30348a5e112c4b75d187b1233887731389e016fef645da05dc",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 1,
+      "condition": "publisher_swap",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 103,
+      "methods": {
+        "single_face": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "68f408f7773ab4f78ec014171019e69e0d1c003327c3e820d349a5cf4578a25e",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 1,
+      "condition": "tandem_publisher_swap",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 104,
+      "methods": {
+        "single_face": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "1269b8cb53bb81c8f66cae7fab1541b02853302b32e2a486defaf0ba35bd9d33",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 2,
+      "condition": "publisher_swap",
+      "truth": [
+        [
+          85,
+          96
+        ]
+      ],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 105,
+      "methods": {
+        "single_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "eb25b17fabdb53fb846effaa8ba1ad9d44cd896d37ef83d7ad7919f4bd7bdf77",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 2,
+      "condition": "tandem_publisher_swap",
+      "truth": [
+        [
+          85,
+          96
+        ]
+      ],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 106,
+      "methods": {
+        "single_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "26420c0b987254591bfa507208dbbe804e04d7825dd3440b5073240cce1bce0b",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 3,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 107,
+      "methods": {
+        "single_face": {
+          "measured": 26,
+          "scheduled": 26,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 26,
+          "scheduled": 26,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 26,
+          "scheduled": 26,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "bafd696e679f9a4c3e95ccac022674561f71f13e1a2f6787ac01b15efd70da30",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 3,
+      "condition": "publisher_swap",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 108,
+      "methods": {
+        "single_face": {
+          "measured": 36,
+          "scheduled": 36,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 36,
+          "scheduled": 36,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 36,
+          "scheduled": 36,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "ad0c9f0c03c3eacb1d8683b4b11042f46138ab8609b25bfb2c931994e7cc525c",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 3,
+      "condition": "tandem_publisher_swap",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 109,
+      "methods": {
+        "single_face": {
+          "measured": 35,
+          "scheduled": 36,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 36,
+          "scheduled": 36,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 36,
+          "scheduled": 36,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 1
+    },
+    {
+      "sha256": "ebadcfa94b388d63b3966fc0e38018790f72ce98ed5e32010a3eb755027e049d",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 4,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 110,
+      "methods": {
+        "single_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "7effccb759b27cd7b79fa2f7ff95be8cdb0c95d93d11f5ab866e10df21c6f896",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 4,
+      "condition": "publisher_swap",
+      "truth": [
+        [
+          85,
+          96
+        ]
+      ],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 111,
+      "methods": {
+        "single_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "ed0614c545a095dc138f7108c11149358555d303c2421c9ffbe0ba3167359162",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 4,
+      "condition": "tandem_publisher_swap",
+      "truth": [
+        [
+          85,
+          96
+        ]
+      ],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 112,
+      "methods": {
+        "single_face": {
+          "measured": 32,
+          "scheduled": 32,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 32,
+          "scheduled": 32,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 32,
+          "scheduled": 32,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "2f7586028129efffdcfe195a8213b155b8a3c856baa4a6dfeb3cade8ad73999f",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 5,
+      "condition": "publisher_swap",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 113,
+      "methods": {
+        "single_face": {
+          "measured": 62,
+          "scheduled": 62,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 62,
+          "scheduled": 62,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 62,
+          "scheduled": 62,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "bee874fce2b7d5ce2adc59f3f562b465fddc5291355c450a396ed61135bcbe89",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 5,
+      "condition": "tandem_publisher_swap",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 114,
+      "methods": {
+        "single_face": {
+          "measured": 63,
+          "scheduled": 63,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 63,
+          "scheduled": 63,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 63,
+          "scheduled": 63,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "c8e8811f8673fcab109769217fce58c6cfca3b4521a7f975239e2036cfc26160",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 6,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 115,
+      "methods": {
+        "single_face": {
+          "measured": 39,
+          "scheduled": 39,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 39,
+          "scheduled": 39,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 39,
+          "scheduled": 39,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "4ce6dce253b571193ef17214ab0823e983efad301672ad20f8aff8a79c65b4fe",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 6,
+      "condition": "publisher_swap",
+      "truth": [
+        [
+          85,
+          96
+        ]
+      ],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 116,
+      "methods": {
+        "single_face": {
+          "measured": 50,
+          "scheduled": 50,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 50,
+          "scheduled": 50,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 50,
+          "scheduled": 50,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "34e5d28ba25dba466f9f1e6b42a92eab53b8f7337f817b544d4cb9df9e289387",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 6,
+      "condition": "tandem_publisher_swap",
+      "truth": [
+        [
+          85,
+          96
+        ]
+      ],
+      "prior": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 117,
+      "methods": {
+        "single_face": {
+          "measured": 45,
+          "scheduled": 45,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 45,
+          "scheduled": 45,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 45,
+          "scheduled": 45,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "0d00be6371abe23a6aebd21e3f5b135d7a633f37379e1c4bbdfaf3c7cec9b0cd",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 7,
+      "condition": "publisher_swap",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 118,
+      "methods": {
+        "single_face": {
+          "measured": 78,
+          "scheduled": 78,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 78,
+          "scheduled": 78,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 78,
+          "scheduled": 78,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "b2992e2b75bda4e564035980ce75341e2427f7c17e7d2be58f4132094dbbf35d",
+      "bank": "video-face-hd-retry-scene-challenge-2026-11-12",
+      "panel": "development",
+      "group": 7,
+      "condition": "tandem_publisher_swap",
+      "truth": [
+        [
+          63,
+          74
+        ]
+      ],
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 119,
+      "methods": {
+        "single_face": {
+          "measured": 82,
+          "scheduled": 82,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 82,
+          "scheduled": 82,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 82,
+          "scheduled": 82,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "b5e03006acaa20019ebdfddc1b0cf52f96b39ee56a8eb73f14f265f4963f722b",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 1,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 120,
+      "methods": {
+        "single_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "668892318ea5c531c21d16dfe0803b3e2c1282e79bcf31b4653f6de356b7306c",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 1,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 121,
+      "methods": {
+        "single_face": {
+          "measured": 59,
+          "scheduled": 59,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 59,
+          "scheduled": 59,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 59,
+          "scheduled": 59,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "c306bf466f8ef9319e7842dbc0aa5d3959747189e2bad70a6bf9ab1ecb07b1a7",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 1,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 122,
+      "methods": {
+        "single_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "ef84d279baf5b73609057eb96cf4db5450a7414acd36ff1a8b3497abc2dbf5c3",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 2,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 123,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "58f76536b03ff936517163604a8e8d9bf8fd4ca06d5fe56f98b83a85a018fecf",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 2,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 124,
+      "methods": {
+        "single_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "84b810933f01d598a950530131cb617014af7ee0920ad134167d034fe736b559",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 3,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 125,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "e23a37f04b89ec929577625d4cf5696b5dd15053137bcdd94c675f1f432b270b",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 3,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 126,
+      "methods": {
+        "single_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "c617b4542c2cf6d5f82f5c6ff5fc00bd7f10124e0470dae83f967d7d149aff5d",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 3,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 127,
+      "methods": {
+        "single_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "9b7f7fd5eae4a8e83435501e3e5500060f1562f9302d256010b52bf6bba52b92",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 4,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 128,
+      "methods": {
+        "single_face": {
+          "measured": 39,
+          "scheduled": 39,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 39,
+          "scheduled": 39,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 39,
+          "scheduled": 39,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "1b50c699755d716b428a76993fc9d41936a5d646533a6ae9fa878f744ae531fe",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 4,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 129,
+      "methods": {
+        "single_face": {
+          "measured": 39,
+          "scheduled": 39,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 39,
+          "scheduled": 39,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "5a3e80ce45a43ea11f9927db046aa527b0aa4ee40a39d87671a41fc2232b84b8",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 5,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 130,
+      "methods": {
+        "single_face": {
+          "measured": 48,
+          "scheduled": 49,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 49,
+          "scheduled": 49,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 49,
+          "scheduled": 49,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 1
+    },
+    {
+      "sha256": "47ef5191e1d2e4679561a37aa70a310acca7da330e2b3dddfe2d3e950221af0f",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 5,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          63,
+          69
+        ],
+        [
+          93,
+          101
+        ]
+      ],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 131,
+      "methods": {
+        "single_face": {
+          "measured": 52,
+          "scheduled": 53,
+          "proposal": {
+            "frames": [
+              93,
+              101
+            ],
+            "response": 0.5031070102917982,
+            "pts": [
+              93000,
+              101000
+            ],
+            "edges": [
+              [
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ],
+              [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 92,
+                "pts": 92000,
+                "decoded_rgb_sha256": "8f52ebff08b391fbef1795cb305c10aa86ea3de40ba8d0b6791ab275e7aa0e2e"
+              },
+              {
+                "frame_index": 97,
+                "pts": 97000,
+                "decoded_rgb_sha256": "5c5ff1fc570e1a245925f7be1f2be62ff1f7303bb894e0545c6a7a90a02b76c2"
+              },
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "4824a5bfce66190bf840e8c509c92ef1c0b256e40f01e9ceef42e5a13af3fc20"
+              }
+            ]
+          }
+        },
+        "largest_face": {
+          "measured": 53,
+          "scheduled": 53,
+          "proposal": {
+            "frames": [
+              93,
+              101
+            ],
+            "response": 0.5031070102917982,
+            "pts": [
+              93000,
+              101000
+            ],
+            "edges": [
+              [
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ],
+              [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 92,
+                "pts": 92000,
+                "decoded_rgb_sha256": "8f52ebff08b391fbef1795cb305c10aa86ea3de40ba8d0b6791ab275e7aa0e2e"
+              },
+              {
+                "frame_index": 97,
+                "pts": 97000,
+                "decoded_rgb_sha256": "5c5ff1fc570e1a245925f7be1f2be62ff1f7303bb894e0545c6a7a90a02b76c2"
+              },
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "4824a5bfce66190bf840e8c509c92ef1c0b256e40f01e9ceef42e5a13af3fc20"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 53,
+          "scheduled": 53,
+          "proposal": {
+            "frames": [
+              93,
+              101
+            ],
+            "response": 0.5031070102917982,
+            "pts": [
+              93000,
+              101000
+            ],
+            "edges": [
+              [
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ],
+              [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 92,
+                "pts": 92000,
+                "decoded_rgb_sha256": "8f52ebff08b391fbef1795cb305c10aa86ea3de40ba8d0b6791ab275e7aa0e2e"
+              },
+              {
+                "frame_index": 97,
+                "pts": 97000,
+                "decoded_rgb_sha256": "5c5ff1fc570e1a245925f7be1f2be62ff1f7303bb894e0545c6a7a90a02b76c2"
+              },
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "4824a5bfce66190bf840e8c509c92ef1c0b256e40f01e9ceef42e5a13af3fc20"
+              }
+            ]
+          }
+        }
+      },
+      "multiple_faces": 1
+    },
+    {
+      "sha256": "95ba2f7a71630d1c36916a8de5555ea8d6df0bbbb8312dbb287072f4577e10fc",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 5,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          63,
+          69
+        ],
+        [
+          93,
+          101
+        ]
+      ],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 132,
+      "methods": {
+        "single_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": {
+            "frames": [
+              93,
+              101
+            ],
+            "response": 0.40976664461207046,
+            "pts": [
+              93000,
+              101000
+            ],
+            "edges": [
+              [
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ],
+              [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 92,
+                "pts": 92000,
+                "decoded_rgb_sha256": "a6d648bfd62ea314bb2c8f4bca863c0c6d250b1e92e7b63ce7337744c1a3adec"
+              },
+              {
+                "frame_index": 97,
+                "pts": 97000,
+                "decoded_rgb_sha256": "3f6442e3644ea436460bd599a544a63bea14e4d164ce620ef447dbdc112be200"
+              },
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "e0bf06e905ea64a71efa2e48f537708b3b33fce7958dc2da5db03778c31d10ae"
+              }
+            ]
+          }
+        },
+        "largest_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": {
+            "frames": [
+              93,
+              101
+            ],
+            "response": 0.40976664461207046,
+            "pts": [
+              93000,
+              101000
+            ],
+            "edges": [
+              [
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ],
+              [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 92,
+                "pts": 92000,
+                "decoded_rgb_sha256": "a6d648bfd62ea314bb2c8f4bca863c0c6d250b1e92e7b63ce7337744c1a3adec"
+              },
+              {
+                "frame_index": 97,
+                "pts": 97000,
+                "decoded_rgb_sha256": "3f6442e3644ea436460bd599a544a63bea14e4d164ce620ef447dbdc112be200"
+              },
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "e0bf06e905ea64a71efa2e48f537708b3b33fce7958dc2da5db03778c31d10ae"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": {
+            "frames": [
+              93,
+              101
+            ],
+            "response": 0.40976664461207046,
+            "pts": [
+              93000,
+              101000
+            ],
+            "edges": [
+              [
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ],
+              [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 92,
+                "pts": 92000,
+                "decoded_rgb_sha256": "a6d648bfd62ea314bb2c8f4bca863c0c6d250b1e92e7b63ce7337744c1a3adec"
+              },
+              {
+                "frame_index": 97,
+                "pts": 97000,
+                "decoded_rgb_sha256": "3f6442e3644ea436460bd599a544a63bea14e4d164ce620ef447dbdc112be200"
+              },
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "e0bf06e905ea64a71efa2e48f537708b3b33fce7958dc2da5db03778c31d10ae"
+              }
+            ]
+          }
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "dbc3c4da098785eb3e9bf56506ebe0bf7d35da5722af1e3f165fbe5935913351",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 5,
+      "condition": "swap_then_jump",
+      "truth": [
+        [
+          63,
+          69
+        ]
+      ],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 133,
+      "methods": {
+        "single_face": {
+          "measured": 48,
+          "scheduled": 51,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 51,
+          "scheduled": 51,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 51,
+          "scheduled": 51,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 3
+    },
+    {
+      "sha256": "fba4692bf2f72a016059fe7b2abee3fc3958b23f65149cb99827af16e1b787b8",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 5,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 134,
+      "methods": {
+        "single_face": {
+          "measured": 61,
+          "scheduled": 62,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 62,
+          "scheduled": 62,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 62,
+          "scheduled": 62,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 1
+    },
+    {
+      "sha256": "9c27346d269916077062552aa299f5cc161d4d670377511167d233788092ee71",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 5,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 135,
+      "methods": {
+        "single_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "00c27af2f3b08ed4d470838c6bf197d013513abefbca087fed9c4dab9fa49992",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 6,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 136,
+      "methods": {
+        "single_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "387bbb1e504f981db80c1021e681035361de046ea6292eea0a62a3e56ac4ca99",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 6,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 137,
+      "methods": {
+        "single_face": {
+          "measured": 41,
+          "scheduled": 41,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 41,
+          "scheduled": 41,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 41,
+          "scheduled": 41,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "57fc4a5926c2b0a76f83ac68aaea09a89a8d5a8f217b25043f88917279d83687",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 6,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 138,
+      "methods": {
+        "single_face": {
+          "measured": 47,
+          "scheduled": 47,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 47,
+          "scheduled": 47,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "64a9bc5163fea210a3097fc60d65b01b2520d3626ea1f074cb2fb16d17242061",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 7,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 139,
+      "methods": {
+        "single_face": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "662e614150c15394358e04942917a51164b222eb4d1fcfa18889aafc548644fe",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 7,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 140,
+      "methods": {
+        "single_face": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "9f700b1e85a98205fe7e6c8c7fa653b8c4db0b10823a080caf2625f1d14be7fc",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 7,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 141,
+      "methods": {
+        "single_face": {
+          "measured": 24,
+          "scheduled": 24,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 24,
+          "scheduled": 24,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 24,
+          "scheduled": 24,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "a773902bc412385df7427949bc3cd0c099fb18d9288da714b60f4fdbe48ab739",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 8,
+      "condition": "original",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 142,
+      "methods": {
+        "single_face": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "16d93bdd51b6c1d5dec4fbc8b2e2ff7cbc6a5c7135cf3b0dd7f1e68d506377fa",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 8,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 143,
+      "methods": {
+        "single_face": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    },
+    {
+      "sha256": "9aecfeb8bf5d36a9c323a079cfdc6d8594d7a751ef7f7e50ae1e031f00706c35",
+      "bank": "source_separated",
+      "panel": "development",
+      "group": 8,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "prior": [],
+      "first": null,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "index": 144,
+      "methods": {
+        "single_face": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null
+        }
+      },
+      "multiple_faces": 0
+    }
+  ],
+  "result": {
+    "confirmation": {
+      "clips": 28,
+      "ordinary": 24,
+      "edited": 4,
+      "single_face": {
+        "useful": 0,
+        "exact": 0,
+        "misplaced": 0,
+        "ordinary_flags": 0,
+        "cut_flags": 0,
+        "groups": 0
+      },
+      "largest_face": {
+        "useful": 4,
+        "exact": 4,
+        "misplaced": 0,
+        "ordinary_flags": 0,
+        "cut_flags": 0,
+        "groups": 1
+      },
+      "confirmed_track": {
+        "useful": 4,
+        "exact": 4,
+        "misplaced": 0,
+        "ordinary_flags": 0,
+        "cut_flags": 0,
+        "groups": 1
+      }
+    },
+    "development": {
+      "clips": 116,
+      "ordinary": 97,
+      "edited": 19,
+      "single_face": {
+        "useful": 4,
+        "exact": 4,
+        "misplaced": 0,
+        "ordinary_flags": 0,
+        "cut_flags": 0,
+        "groups": 3
+      },
+      "largest_face": {
+        "useful": 0,
+        "exact": 0,
+        "misplaced": 0,
+        "ordinary_flags": 0,
+        "cut_flags": 0,
+        "groups": 0
+      },
+      "confirmed_track": {
+        "useful": 0,
+        "exact": 0,
+        "misplaced": 0,
+        "ordinary_flags": 0,
+        "cut_flags": 0,
+        "groups": 0
+      }
+    }
+  }
+}

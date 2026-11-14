@@ -182,6 +182,11 @@ are not public screening promises or calibrated population probabilities.
   The customer flow verified one recovered range and its six images
   through simulated prepayment, JSON, PDF and signed replay. The held
   misses had competing face detections around the authored boundaries.
+- [Follow the dominant face when smaller detections appear](video-face-primary-track-2026-11-13.md)
+  recovered four exact ranges in the previously missed source without
+  adding any flags across 121 ordinary clips. A separate picture-in-picture
+  test recovered 11 of 14 edited deliveries across six sources with zero
+  flags on 21 ordinary controls. The option remains a local trial.
 - [JPEG75 and JPEG85 detail loss](image-jpeg-detail-quality-transfer-2026-11-13.md)
   adds 19 useful local blur ranges per format, without adding any highlight
   on 306 controls per format. It requires an earlier matching copy and

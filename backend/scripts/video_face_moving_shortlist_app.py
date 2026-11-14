@@ -21,7 +21,7 @@ from scripts.video_short_return_encoded_app import (
 )
 
 
-def run(bank, output):
+def run(bank, output, *, primary_track=False):
     configure(output, ROOT)
     os.environ.update(
         BASE_FLAGS, VERITAS_VIDEO_FACE_SECOND_AVC_REVIEW="true", VERITAS_VIDEO_FACE_MOVING_AVC_REVIEW="false"
@@ -36,7 +36,7 @@ def run(bank, output):
     from app.billing import service
     from app.core.config import settings
     from app.engine.registry import get_registry
-    from app.evidence.face_short_proposal_binding import MOVING_AVC_METHOD
+    from app.evidence.face_short_proposal_binding import MOVING_AVC_METHOD, PRIMARY_TRACK_AVC_METHOD
     from app.main import app
     from app.reports.verify import verify_package
     from app.storage.db import get_session
@@ -54,7 +54,14 @@ def run(bank, output):
     stub = PaymentStub()
     service._stripe = stub
     roster = {row["file"]: row for row in json.loads((bank / "media.json").read_text())["rows"]}
-    cases = ("g5-tandem_two_swaps.mp4", "g5-cross_recording_cuts.mp4", "g8-tandem_two_swaps.mp4")
+    if primary_track:
+        cases = ("g4-tandem_two_swaps.mp4", "g4-cross_recording_cuts.mp4", "g1-tandem_two_swaps.mp4")
+        serving_mode = "video_face_primary_track_avc_review"
+        review_method, packet_version = PRIMARY_TRACK_AVC_METHOD, "video-evidence-29"
+    else:
+        cases = ("g5-tandem_two_swaps.mp4", "g5-cross_recording_cuts.mp4", "g8-tandem_two_swaps.mp4")
+        serving_mode = "video_face_moving_avc_review"
+        review_method, packet_version = MOVING_AVC_METHOD, "video-evidence-28"
     before, results = {}, {}
     with TestClient(app, client=("127.0.0.1", 50000)) as client:
         with get_session() as db:
@@ -65,7 +72,7 @@ def run(bank, output):
             db.commit()
         client.headers["X-API-Key"] = key
         for active in (False, True):
-            settings.video_face_moving_avc_review = active
+            setattr(settings, serving_mode, active)
             for case in cases:
                 row = roster[case]
                 source = bank / "media" / case
@@ -73,7 +80,7 @@ def run(bank, output):
                 decision, _ = read_result(aid, row["sha256"])
                 route = f"/api/v2/analyses/{aid}"
                 evidence = body(client.get(f"{route}/evidence-packets"))
-                recovered = [r for r in evidence["packets"] if r.get("semantics") == MOVING_AVC_METHOD]
+                recovered = [r for r in evidence["packets"] if r.get("semantics") == review_method]
                 existing = [
                     r["face_return"] for r in evidence["packets"] if "face_return" in r and r not in recovered
                 ]
@@ -90,7 +97,7 @@ def run(bank, output):
                     results[case] = {"ranges_kept": len(existing), "additional_ranges": 0}
                     continue
                 [packet] = recovered
-                assert evidence["version"] == "video-evidence-28"
+                assert evidence["version"] == packet_version
                 change = packet["face_return"]
                 assert [change["start_frame_index"], change["end_frame_index"]] == row["truth"][1]
                 anchors = {role: change["anchors"][role] for role in ("before", "during", "after")}
@@ -106,6 +113,9 @@ def run(bank, output):
                         in words
                     )
                     assert "Source frames compared at each boundary" in words
+                    if primary_track:
+                        assert "followed the larger face by its position and size" in words
+                        assert any(len(row["boxes"]) >= 2 for row in change["face_detection_boxes"])
                     assert images <= {
                         image_signature(document.extract_image(xref)["image"])
                         for xref in {image[0] for page in document for image in page.get_images(full=True)}
@@ -159,5 +169,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("bank", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--primary-track", action="store_true")
     args = parser.parse_args()
-    run(args.bank.resolve(), args.output.resolve())
+    run(args.bank.resolve(), args.output.resolve(), primary_track=args.primary_track)

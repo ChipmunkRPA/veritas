@@ -276,6 +276,7 @@ class Settings(BaseSettings):
     video_face_short_avc_review: bool = False  # Trial: review brief face changes in qualified four-second H.264 MP4.
     video_face_second_avc_review: bool = False  # Trial: locate a second brief face change in that AVC profile.
     video_face_moving_avc_review: bool = False  # Trial: follow the face when the fixed scan finds no short range.
+    video_face_primary_track_avc_review: bool = False  # Trial: follow a dominant face past smaller detections.
     video_face_unrouted_short_review: bool = False  # Propose a brief face-change range on qualified HEVC sources.
     video_face_short_return_review: bool = False  # Add a distinct, source-bound range to eligible appearance reviews.
     video_face_second_return_review: bool = False  # Check a second disjoint range on tested short H.264 profiles.

@@ -117,6 +117,10 @@ after frames.
 The [second distinct face range replay](video-face-distinct-avc-2026-11-13.md#independent-replay)
 compares two search lengths and checks both the recorded decisions and
 original camera timestamps and images through a separate FFmpeg path.
+The [dominant-face evaluation](video-face-primary-track-2026-11-13.md#replay)
+compares single-face, largest-face and position-consistent selection.
+Both the natural and picture-in-picture panels publish reviewable source
+timings, exact hit counts, and native image commitments.
 The [moving-face comparison](video-face-moving-shortlist-2026-11-13.md#replay)
 tests the face position and duration changes separately, preserves cases
 where the first scan found a range, and recounts ordinary controls by

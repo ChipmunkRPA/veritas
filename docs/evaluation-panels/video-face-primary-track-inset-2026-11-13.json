@@ -1,0 +1,2334 @@
+{
+  "schema": "chipmunk.video-face-primary-track-picture-in-picture/1",
+  "parent_manifest": "124d5470a726841609da3c475c4b5b10657c782557db57f59df5ffce6024335f",
+  "models": {
+    "face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+    "face_recognition_sface_2021dec.onnx": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79"
+  },
+  "runner_sha256": "e178d74b0adf7d4a3e5fedc34e8b78b53b8bcc0286943e9eb682921b0d125055",
+  "native_manifest_sha256": "fdc546eb5a1f08d0f002f0f9242786b8dea1845fb576691f8c1b04dacc0fe886",
+  "rows": [
+    {
+      "sha256": "90be8474b11ea9d9b835b3cb569e31dd1b306ac22bcbdb83680a0b131c68d2fb",
+      "group": 1,
+      "condition": "original",
+      "truth": [],
+      "index": 1,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 17,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "45c8169904835c8dc150e59d601759d24e3957dc4ccf6df8a2473eba8d82b443",
+      "group": 1,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          61,
+          67
+        ],
+        [
+          86,
+          94
+        ]
+      ],
+      "index": 2,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 38,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 38,
+          "scheduled": 38,
+          "proposal": {
+            "frames": [
+              61,
+              67
+            ],
+            "response": 0.7101445253452942,
+            "pts": [
+              61000,
+              67000
+            ],
+            "edges": [
+              [
+                58,
+                59,
+                60,
+                61,
+                62,
+                63
+              ],
+              [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 60,
+                "pts": 60000,
+                "decoded_rgb_sha256": "67ce310322322089211c5bcdbacfd1dfe605282c1af70a483e2fd1a0a6971cfd"
+              },
+              {
+                "frame_index": 64,
+                "pts": 64000,
+                "decoded_rgb_sha256": "55cb354792d794a2972795da01564618e8c618d006ca1a71696ddd11022d71b7"
+              },
+              {
+                "frame_index": 67,
+                "pts": 67000,
+                "decoded_rgb_sha256": "a2b0cb4261e753e7d32b8f04cc0d1843489d5f588695f3348733183d33a233b6"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 38,
+          "scheduled": 38,
+          "proposal": {
+            "frames": [
+              61,
+              67
+            ],
+            "response": 0.7101445253452942,
+            "pts": [
+              61000,
+              67000
+            ],
+            "edges": [
+              [
+                58,
+                59,
+                60,
+                61,
+                62,
+                63
+              ],
+              [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 60,
+                "pts": 60000,
+                "decoded_rgb_sha256": "67ce310322322089211c5bcdbacfd1dfe605282c1af70a483e2fd1a0a6971cfd"
+              },
+              {
+                "frame_index": 64,
+                "pts": 64000,
+                "decoded_rgb_sha256": "55cb354792d794a2972795da01564618e8c618d006ca1a71696ddd11022d71b7"
+              },
+              {
+                "frame_index": 67,
+                "pts": 67000,
+                "decoded_rgb_sha256": "a2b0cb4261e753e7d32b8f04cc0d1843489d5f588695f3348733183d33a233b6"
+              }
+            ]
+          }
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "728c8b6eda34f126ec8dfc7a71074d9fb755cdf278e3f292626a6426268b7c9f",
+      "group": 1,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          61,
+          67
+        ],
+        [
+          86,
+          94
+        ]
+      ],
+      "index": 3,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 34,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": {
+            "frames": [
+              61,
+              67
+            ],
+            "response": 0.5123788162674141,
+            "pts": [
+              61000,
+              67000
+            ],
+            "edges": [
+              [
+                58,
+                59,
+                60,
+                61,
+                62,
+                63
+              ],
+              [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 60,
+                "pts": 60000,
+                "decoded_rgb_sha256": "4538ba78c3df07e31cf2aebbcd911a6ad14a9c130e1f372d22a196a3d35e1b52"
+              },
+              {
+                "frame_index": 64,
+                "pts": 64000,
+                "decoded_rgb_sha256": "1cbbd49f9948cd573e9f2fd04659f393a29157f5af717a835755148fd381a7b7"
+              },
+              {
+                "frame_index": 67,
+                "pts": 67000,
+                "decoded_rgb_sha256": "a1f6721741659cf622cf9e3e54c73d4d96b154016d0d218749947424f595c93b"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": {
+            "frames": [
+              61,
+              67
+            ],
+            "response": 0.5123788162674141,
+            "pts": [
+              61000,
+              67000
+            ],
+            "edges": [
+              [
+                58,
+                59,
+                60,
+                61,
+                62,
+                63
+              ],
+              [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 60,
+                "pts": 60000,
+                "decoded_rgb_sha256": "4538ba78c3df07e31cf2aebbcd911a6ad14a9c130e1f372d22a196a3d35e1b52"
+              },
+              {
+                "frame_index": 64,
+                "pts": 64000,
+                "decoded_rgb_sha256": "1cbbd49f9948cd573e9f2fd04659f393a29157f5af717a835755148fd381a7b7"
+              },
+              {
+                "frame_index": 67,
+                "pts": 67000,
+                "decoded_rgb_sha256": "a1f6721741659cf622cf9e3e54c73d4d96b154016d0d218749947424f595c93b"
+              }
+            ]
+          }
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "d7a1273884863d8c0091c93f82b38cec88475250370bb4c30610f1280b88e22a",
+      "group": 1,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "index": 4,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 28,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "4604c1f658a1d4a57951f449a868c565bf96dac15e7fef03fbc068e71021c8ec",
+      "group": 1,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "index": 5,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 23,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 23,
+          "scheduled": 23,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "8be334ca0f98c3120e0b43912eb22eb1e8eb9d26b33f86f5eb5a873a2dde4e9b",
+      "group": 2,
+      "condition": "original",
+      "truth": [],
+      "index": 6,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 27,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "8d36bdba6c7515349a906977018a3937c1d61587f121f04ad4acd6d36b61ffdb",
+      "group": 2,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          67,
+          75
+        ],
+        [
+          95,
+          101
+        ]
+      ],
+      "index": 7,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 45,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 45,
+          "scheduled": 45,
+          "proposal": {
+            "frames": [
+              67,
+              75
+            ],
+            "response": 0.6757892918971742,
+            "pts": [
+              67000,
+              75000
+            ],
+            "edges": [
+              [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69
+              ],
+              [
+                72,
+                73,
+                74,
+                75,
+                76,
+                77
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 66,
+                "pts": 66000,
+                "decoded_rgb_sha256": "e5b927a06d71853f37608c018b13159db4b7c0a23e53890e37f27d615faa9aba"
+              },
+              {
+                "frame_index": 71,
+                "pts": 71000,
+                "decoded_rgb_sha256": "c5a89bd037d5ac4525a8f6666b2b8d2b6e66c8684ecfa9f22c797faadcd91755"
+              },
+              {
+                "frame_index": 75,
+                "pts": 75000,
+                "decoded_rgb_sha256": "1800e132a1c244e934416ca78caec8a35276786a7f23b987ebb2ece6326fa10f"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 45,
+          "scheduled": 45,
+          "proposal": {
+            "frames": [
+              67,
+              75
+            ],
+            "response": 0.6757892918971742,
+            "pts": [
+              67000,
+              75000
+            ],
+            "edges": [
+              [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69
+              ],
+              [
+                72,
+                73,
+                74,
+                75,
+                76,
+                77
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 66,
+                "pts": 66000,
+                "decoded_rgb_sha256": "e5b927a06d71853f37608c018b13159db4b7c0a23e53890e37f27d615faa9aba"
+              },
+              {
+                "frame_index": 71,
+                "pts": 71000,
+                "decoded_rgb_sha256": "c5a89bd037d5ac4525a8f6666b2b8d2b6e66c8684ecfa9f22c797faadcd91755"
+              },
+              {
+                "frame_index": 75,
+                "pts": 75000,
+                "decoded_rgb_sha256": "1800e132a1c244e934416ca78caec8a35276786a7f23b987ebb2ece6326fa10f"
+              }
+            ]
+          }
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "76bc45f1e731800aa8b10f68a81c812ade244ed96573c7e7ab2c64b601def284",
+      "group": 2,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          67,
+          75
+        ],
+        [
+          95,
+          101
+        ]
+      ],
+      "index": 8,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 45,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 45,
+          "scheduled": 45,
+          "proposal": {
+            "frames": [
+              67,
+              75
+            ],
+            "response": 0.53731076761983,
+            "pts": [
+              67000,
+              75000
+            ],
+            "edges": [
+              [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69
+              ],
+              [
+                72,
+                73,
+                74,
+                75,
+                76,
+                77
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 66,
+                "pts": 66000,
+                "decoded_rgb_sha256": "0ccf6679338aabef8d47a4584f4626922f6098bf4822331f9edf598052e82bdf"
+              },
+              {
+                "frame_index": 71,
+                "pts": 71000,
+                "decoded_rgb_sha256": "b9a382a0f25fb96806379cafc07bb89c19f6055cc677c22a7a70f5a96c2bb546"
+              },
+              {
+                "frame_index": 75,
+                "pts": 75000,
+                "decoded_rgb_sha256": "46558a56d49da92adf6ab5f6efe1b75182f587a994d3209e6fb271f4fa714bfb"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 45,
+          "scheduled": 45,
+          "proposal": {
+            "frames": [
+              67,
+              75
+            ],
+            "response": 0.53731076761983,
+            "pts": [
+              67000,
+              75000
+            ],
+            "edges": [
+              [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69
+              ],
+              [
+                72,
+                73,
+                74,
+                75,
+                76,
+                77
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 66,
+                "pts": 66000,
+                "decoded_rgb_sha256": "0ccf6679338aabef8d47a4584f4626922f6098bf4822331f9edf598052e82bdf"
+              },
+              {
+                "frame_index": 71,
+                "pts": 71000,
+                "decoded_rgb_sha256": "b9a382a0f25fb96806379cafc07bb89c19f6055cc677c22a7a70f5a96c2bb546"
+              },
+              {
+                "frame_index": 75,
+                "pts": 75000,
+                "decoded_rgb_sha256": "46558a56d49da92adf6ab5f6efe1b75182f587a994d3209e6fb271f4fa714bfb"
+              }
+            ]
+          }
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "26db843fb0b176fcfe1be141568c7fe94a949e4fd1be93cd341332877fb30ae0",
+      "group": 2,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "index": 9,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 27,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 27,
+          "scheduled": 27,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "4ce6550e7683fa9229a7697ef3272e855fbfad4492f0f1362f705cc5a2df630a",
+      "group": 2,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "index": 10,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 22,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 22,
+          "scheduled": 22,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "31ec8133b08808b87e3d49fe8499baf1f0a60ef550b772a6534fadd2ea908521",
+      "group": 3,
+      "condition": "original",
+      "truth": [],
+      "index": 11,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 82,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 82,
+          "scheduled": 82,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 82,
+          "scheduled": 82,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "7379482531d7a60475d97b53483ead37007bda7a87683e3cb0622d19a3b0e001",
+      "group": 3,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          64,
+          70
+        ],
+        [
+          97,
+          105
+        ]
+      ],
+      "index": 12,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 83,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 83,
+          "scheduled": 83,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 83,
+          "scheduled": 83,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "92dddf5f386bf9b4057363a7a4a07a96ad2377d5e5d5a894025b86043adfa2cf",
+      "group": 3,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          64,
+          70
+        ],
+        [
+          97,
+          105
+        ]
+      ],
+      "index": 13,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 82,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 82,
+          "scheduled": 82,
+          "proposal": {
+            "frames": [
+              97,
+              105
+            ],
+            "response": 0.5772783248714044,
+            "pts": [
+              97000,
+              105000
+            ],
+            "edges": [
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ],
+              [
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 96,
+                "pts": 96000,
+                "decoded_rgb_sha256": "bd82d89c7e510aa4c3002cca331351553b4308e67ec7ce53d789fc00d1461ac3"
+              },
+              {
+                "frame_index": 102,
+                "pts": 102000,
+                "decoded_rgb_sha256": "b1b8768163008494855a69aee9e84e2b1f79583d3f85ee882d802e95f506562e"
+              },
+              {
+                "frame_index": 105,
+                "pts": 105000,
+                "decoded_rgb_sha256": "e2b8c067a07e42f91c03ad33d753995cbd2354955e85e0f969e288064be21e35"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 82,
+          "scheduled": 82,
+          "proposal": {
+            "frames": [
+              97,
+              105
+            ],
+            "response": 0.5772783248714044,
+            "pts": [
+              97000,
+              105000
+            ],
+            "edges": [
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ],
+              [
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 96,
+                "pts": 96000,
+                "decoded_rgb_sha256": "bd82d89c7e510aa4c3002cca331351553b4308e67ec7ce53d789fc00d1461ac3"
+              },
+              {
+                "frame_index": 102,
+                "pts": 102000,
+                "decoded_rgb_sha256": "b1b8768163008494855a69aee9e84e2b1f79583d3f85ee882d802e95f506562e"
+              },
+              {
+                "frame_index": 105,
+                "pts": 105000,
+                "decoded_rgb_sha256": "e2b8c067a07e42f91c03ad33d753995cbd2354955e85e0f969e288064be21e35"
+              }
+            ]
+          }
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "7f7f7b926bd52ee932169aed2199a3b80b8cce4bdfd408c15406854ace8e920e",
+      "group": 3,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "index": 14,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 83,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 83,
+          "scheduled": 83,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 83,
+          "scheduled": 83,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "877c7c1f93f68177e767dbabdbeb32fbcb4a0f4db3fbe9493f5e29d54369866d",
+      "group": 3,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "index": 15,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 73,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 73,
+          "scheduled": 73,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "d3158b03f5c2d273ea73d4a53bce7b1a1b50e82970b01af610ca49b940ebeef8",
+      "group": 5,
+      "condition": "original",
+      "truth": [],
+      "index": 16,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 60,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 60,
+          "scheduled": 60,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 60,
+          "scheduled": 60,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "4708078f0d3c5c06b0515d5f42710e7a0403749c882dbe42b35adb31653c810f",
+      "group": 5,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          62,
+          68
+        ],
+        [
+          89,
+          97
+        ]
+      ],
+      "index": 17,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 65,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 65,
+          "scheduled": 65,
+          "proposal": {
+            "frames": [
+              62,
+              68
+            ],
+            "response": 0.7260389635165877,
+            "pts": [
+              62000,
+              68000
+            ],
+            "edges": [
+              [
+                59,
+                60,
+                61,
+                62,
+                63,
+                64
+              ],
+              [
+                65,
+                66,
+                67,
+                68,
+                69,
+                70
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 61,
+                "pts": 61000,
+                "decoded_rgb_sha256": "1c7035de85ddd52388f28b74c261afcdcd1ba4d4e8111adfe25799f62038cc86"
+              },
+              {
+                "frame_index": 65,
+                "pts": 65000,
+                "decoded_rgb_sha256": "4e7ab27a4003306eb5b7302286fd58861fcf9d0873687cce164fed4707a06cae"
+              },
+              {
+                "frame_index": 68,
+                "pts": 68000,
+                "decoded_rgb_sha256": "62e11e75dad86df4740992f8725152c4d90a7d7abcd16b6623bb5cab06b7687f"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 65,
+          "scheduled": 65,
+          "proposal": {
+            "frames": [
+              62,
+              68
+            ],
+            "response": 0.7260389635165877,
+            "pts": [
+              62000,
+              68000
+            ],
+            "edges": [
+              [
+                59,
+                60,
+                61,
+                62,
+                63,
+                64
+              ],
+              [
+                65,
+                66,
+                67,
+                68,
+                69,
+                70
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 61,
+                "pts": 61000,
+                "decoded_rgb_sha256": "1c7035de85ddd52388f28b74c261afcdcd1ba4d4e8111adfe25799f62038cc86"
+              },
+              {
+                "frame_index": 65,
+                "pts": 65000,
+                "decoded_rgb_sha256": "4e7ab27a4003306eb5b7302286fd58861fcf9d0873687cce164fed4707a06cae"
+              },
+              {
+                "frame_index": 68,
+                "pts": 68000,
+                "decoded_rgb_sha256": "62e11e75dad86df4740992f8725152c4d90a7d7abcd16b6623bb5cab06b7687f"
+              }
+            ]
+          }
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "cfc385ccb8cbed55dae181b2d29f5189fbc136aa9a1f55e4008d606c5479ee03",
+      "group": 5,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          62,
+          68
+        ],
+        [
+          89,
+          97
+        ]
+      ],
+      "index": 18,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 65,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 65,
+          "scheduled": 65,
+          "proposal": {
+            "frames": [
+              62,
+              68
+            ],
+            "response": 0.6587807828357807,
+            "pts": [
+              62000,
+              68000
+            ],
+            "edges": [
+              [
+                59,
+                60,
+                61,
+                62,
+                63,
+                64
+              ],
+              [
+                65,
+                66,
+                67,
+                68,
+                69,
+                70
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 61,
+                "pts": 61000,
+                "decoded_rgb_sha256": "9efa6e443ac5881826413bd03f4c11cebe7f987d2f8a3550aed818c2ffbf7ec6"
+              },
+              {
+                "frame_index": 65,
+                "pts": 65000,
+                "decoded_rgb_sha256": "e2a31656f23bbe87dbfb684e2ff19662b35586ad3aa2dc5f1d8aeff9ed08bf25"
+              },
+              {
+                "frame_index": 68,
+                "pts": 68000,
+                "decoded_rgb_sha256": "40434e09be32ccabbcd12a86efe8c2237f443465f352e26cac72f010ec9ea973"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 65,
+          "scheduled": 65,
+          "proposal": {
+            "frames": [
+              62,
+              68
+            ],
+            "response": 0.6587807828357807,
+            "pts": [
+              62000,
+              68000
+            ],
+            "edges": [
+              [
+                59,
+                60,
+                61,
+                62,
+                63,
+                64
+              ],
+              [
+                65,
+                66,
+                67,
+                68,
+                69,
+                70
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 61,
+                "pts": 61000,
+                "decoded_rgb_sha256": "9efa6e443ac5881826413bd03f4c11cebe7f987d2f8a3550aed818c2ffbf7ec6"
+              },
+              {
+                "frame_index": 65,
+                "pts": 65000,
+                "decoded_rgb_sha256": "e2a31656f23bbe87dbfb684e2ff19662b35586ad3aa2dc5f1d8aeff9ed08bf25"
+              },
+              {
+                "frame_index": 68,
+                "pts": 68000,
+                "decoded_rgb_sha256": "40434e09be32ccabbcd12a86efe8c2237f443465f352e26cac72f010ec9ea973"
+              }
+            ]
+          }
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "b75ec5d30962257f5c2fd5ff7503367afab5acd784701cb117e47139068558d7",
+      "group": 5,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "index": 19,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 60,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 60,
+          "scheduled": 60,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 60,
+          "scheduled": 60,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "a41791ecd23220630a8399343bab2bb19835a0f765a5dd1a64effb0d33d41ad3",
+      "group": 5,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "index": 20,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 59,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 59,
+          "scheduled": 59,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "7afc34f571a7d8d8a78081ebed7bdb47855fa608d334a573dd0307bf8961be7a",
+      "group": 6,
+      "condition": "original",
+      "truth": [],
+      "index": 21,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 17,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "6354c0d605aa8a12d115bee8312e4b552f0f0bbc93e4cce5f2a2bb8c801a8e1b",
+      "group": 6,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          68,
+          76
+        ],
+        [
+          97,
+          103
+        ]
+      ],
+      "index": 22,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 38,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 38,
+          "scheduled": 38,
+          "proposal": {
+            "frames": [
+              97,
+              103
+            ],
+            "response": 0.7219610799603962,
+            "pts": [
+              97000,
+              103000
+            ],
+            "edges": [
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ],
+              [
+                100,
+                101,
+                102,
+                103,
+                104,
+                105
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 96,
+                "pts": 96000,
+                "decoded_rgb_sha256": "4e464da9d4912ea39b5696ac129ded0f242d812b9018ede78c15a1ff1307ad4b"
+              },
+              {
+                "frame_index": 100,
+                "pts": 100000,
+                "decoded_rgb_sha256": "b94705056caecab8de8546fa445c2ca311761cfd3ed6b8b09492e12390dfec12"
+              },
+              {
+                "frame_index": 103,
+                "pts": 103000,
+                "decoded_rgb_sha256": "dfc5c96023fe6b31c891cc0e2220dafe0b67ec014728e28fd8cc27c2b0a8f17a"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "07d83bc249ba1c5515502326d689b786c63bce3375b5c53c9111027f4cc6090b",
+      "group": 6,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          68,
+          76
+        ],
+        [
+          97,
+          103
+        ]
+      ],
+      "index": 23,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 38,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 38,
+          "scheduled": 38,
+          "proposal": {
+            "frames": [
+              97,
+              103
+            ],
+            "response": 0.48332667797251694,
+            "pts": [
+              97000,
+              103000
+            ],
+            "edges": [
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ],
+              [
+                100,
+                101,
+                102,
+                103,
+                104,
+                105
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 96,
+                "pts": 96000,
+                "decoded_rgb_sha256": "b257f4a1be698885368a8e4df3420a8db1adfbc67785e89e3eb531b1c94dabe7"
+              },
+              {
+                "frame_index": 100,
+                "pts": 100000,
+                "decoded_rgb_sha256": "ed74c59ba7985830c8558e3c2b776c8eee6bbb16796a74e16b25a8150dac857b"
+              },
+              {
+                "frame_index": 103,
+                "pts": 103000,
+                "decoded_rgb_sha256": "ce4f19f3741fc4500818cbeb751e90afbaadc9e9bcaf9494c09c86c13f07ca42"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "d07fe727b3b11d986ce99a39b1bb6a4de98ab23f9b18943c2ed77c21e68c4549",
+      "group": 6,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "index": 24,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 28,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "3ed7e259ab57659b2236fffb5115990d0a60319bcc9d6dfa49d6159cd3f3994b",
+      "group": 6,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "index": 25,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 24,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 24,
+          "scheduled": 24,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "73e0af286f9170ee462e7363fe42eed12d23fb47c6f67d3400ca8a25a814dcc8",
+      "group": 7,
+      "condition": "original",
+      "truth": [],
+      "index": 26,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 54,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 31,
+          "scheduled": 53,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "b1640f400b75622963e8209f38e7e6950ada96808efbfc2f296a9edbce39468e",
+      "group": 7,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          64,
+          70
+        ],
+        [
+          95,
+          103
+        ]
+      ],
+      "index": 27,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 68,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 63,
+          "scheduled": 63,
+          "proposal": {
+            "frames": [
+              64,
+              70
+            ],
+            "response": 0.6636889015985685,
+            "pts": [
+              64000,
+              70000
+            ],
+            "edges": [
+              [
+                61,
+                62,
+                63,
+                64,
+                65,
+                66
+              ],
+              [
+                67,
+                68,
+                69,
+                70,
+                71,
+                72
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 63,
+                "pts": 63000,
+                "decoded_rgb_sha256": "2cd91dc7c883e7217439418f1c8fa0f3e392db4f9132c1bfe03ab29bd6006708"
+              },
+              {
+                "frame_index": 67,
+                "pts": 67000,
+                "decoded_rgb_sha256": "a9b2d0df8afc9d8ce1197eb02ecce410b07e8ef1d683b7b39834ac3372e124d8"
+              },
+              {
+                "frame_index": 70,
+                "pts": 70000,
+                "decoded_rgb_sha256": "291d40297b0a197ed6484fd47df29ce3c71649fa843000a762386828eac38b3f"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 42,
+          "scheduled": 67,
+          "proposal": {
+            "frames": [
+              95,
+              103
+            ],
+            "response": 0.49340015487039257,
+            "pts": [
+              95000,
+              103000
+            ],
+            "edges": [
+              [
+                92,
+                93,
+                94,
+                95,
+                96,
+                97
+              ],
+              [
+                100,
+                101,
+                102,
+                103,
+                104,
+                105
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 94,
+                "pts": 94000,
+                "decoded_rgb_sha256": "9ab7faffd833525c129e87b8a01bf993cfb8c0af42e226f7a2281eb10c761dcd"
+              },
+              {
+                "frame_index": 100,
+                "pts": 100000,
+                "decoded_rgb_sha256": "9bb2374eeff4229664d22392b78067fdca0caab38a27fd8989f190c5eab7abf3"
+              },
+              {
+                "frame_index": 103,
+                "pts": 103000,
+                "decoded_rgb_sha256": "2220a0b0c210b0e30e3558f453f6e8559189accce531b33e83f5f75ee66d0e43"
+              }
+            ]
+          }
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "92431c5c328e87267f7a43cf14a3fcfa77d17f494da48bf09743787987896bd6",
+      "group": 7,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          64,
+          70
+        ],
+        [
+          95,
+          103
+        ]
+      ],
+      "index": 28,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 67,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 67,
+          "scheduled": 67,
+          "proposal": {
+            "frames": [
+              64,
+              70
+            ],
+            "response": 0.39884718682183773,
+            "pts": [
+              64000,
+              70000
+            ],
+            "edges": [
+              [
+                61,
+                62,
+                63,
+                64,
+                65,
+                66
+              ],
+              [
+                67,
+                68,
+                69,
+                70,
+                71,
+                72
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 63,
+                "pts": 63000,
+                "decoded_rgb_sha256": "9b0e21f469eaa4460feb285c28c67b6aebcf43920f1b29c7d96a87c5c34db63b"
+              },
+              {
+                "frame_index": 67,
+                "pts": 67000,
+                "decoded_rgb_sha256": "2598e9627c49a5fea37ab28441d2fe4950e318f44c98440dfe47b3fbc20c3145"
+              },
+              {
+                "frame_index": 70,
+                "pts": 70000,
+                "decoded_rgb_sha256": "4179596f4073cd0e590db6bf31546d1693b6fc16900e94c23bb2ee315a2c8bae"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 49,
+          "scheduled": 66,
+          "proposal": {
+            "frames": [
+              64,
+              70
+            ],
+            "response": 0.39884718682183773,
+            "pts": [
+              64000,
+              70000
+            ],
+            "edges": [
+              [
+                61,
+                62,
+                63,
+                64,
+                65,
+                66
+              ],
+              [
+                67,
+                68,
+                69,
+                70,
+                71,
+                72
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 63,
+                "pts": 63000,
+                "decoded_rgb_sha256": "9b0e21f469eaa4460feb285c28c67b6aebcf43920f1b29c7d96a87c5c34db63b"
+              },
+              {
+                "frame_index": 67,
+                "pts": 67000,
+                "decoded_rgb_sha256": "2598e9627c49a5fea37ab28441d2fe4950e318f44c98440dfe47b3fbc20c3145"
+              },
+              {
+                "frame_index": 70,
+                "pts": 70000,
+                "decoded_rgb_sha256": "4179596f4073cd0e590db6bf31546d1693b6fc16900e94c23bb2ee315a2c8bae"
+              }
+            ]
+          }
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "5389c6c902728dee1a76490716f8b6fdaaae0c6349dd30656eb710510106af4f",
+      "group": 7,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "index": 29,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 61,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 61,
+          "scheduled": 61,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 40,
+          "scheduled": 60,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "03b0084ba1c964fe7b512613c712b5a86329b7ab5a83b7a0f9e5a4b6feeb7cfa",
+      "group": 7,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "index": 30,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 48,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 48,
+          "scheduled": 48,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "7d65e0ace06fcf3bcd50ef2c78f87943a57a1cdf9617152c5cd4f52931298b8c",
+      "group": 8,
+      "condition": "original",
+      "truth": [],
+      "index": 31,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 37,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 37,
+          "scheduled": 37,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 37,
+          "scheduled": 37,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "e494cc07087badb06cf3f00a7271ea62a5291da2d0afbefcdb9681b868bd8422",
+      "group": 8,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          70,
+          78
+        ],
+        [
+          92,
+          98
+        ]
+      ],
+      "index": 32,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 57,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 57,
+          "scheduled": 57,
+          "proposal": {
+            "frames": [
+              70,
+              78
+            ],
+            "response": 0.5973782128626324,
+            "pts": [
+              70000,
+              78000
+            ],
+            "edges": [
+              [
+                67,
+                68,
+                69,
+                70,
+                71,
+                72
+              ],
+              [
+                75,
+                76,
+                77,
+                78,
+                79,
+                80
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 69,
+                "pts": 69000,
+                "decoded_rgb_sha256": "43d25529d6aad5833fdfaae857550825ce757a3ae2bd8b36d0c25126109d0413"
+              },
+              {
+                "frame_index": 74,
+                "pts": 74000,
+                "decoded_rgb_sha256": "fdfc3721e8775bb384e1b0b3333cf36963a837be13b93eaf648d05fb151cea2c"
+              },
+              {
+                "frame_index": 78,
+                "pts": 78000,
+                "decoded_rgb_sha256": "37fb1e45d51d7989753376ce9690733fda7be5ee056d39afe96b5fe1d6438f2e"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 57,
+          "scheduled": 57,
+          "proposal": {
+            "frames": [
+              70,
+              78
+            ],
+            "response": 0.5973782128626324,
+            "pts": [
+              70000,
+              78000
+            ],
+            "edges": [
+              [
+                67,
+                68,
+                69,
+                70,
+                71,
+                72
+              ],
+              [
+                75,
+                76,
+                77,
+                78,
+                79,
+                80
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 69,
+                "pts": 69000,
+                "decoded_rgb_sha256": "43d25529d6aad5833fdfaae857550825ce757a3ae2bd8b36d0c25126109d0413"
+              },
+              {
+                "frame_index": 74,
+                "pts": 74000,
+                "decoded_rgb_sha256": "fdfc3721e8775bb384e1b0b3333cf36963a837be13b93eaf648d05fb151cea2c"
+              },
+              {
+                "frame_index": 78,
+                "pts": 78000,
+                "decoded_rgb_sha256": "37fb1e45d51d7989753376ce9690733fda7be5ee056d39afe96b5fe1d6438f2e"
+              }
+            ]
+          }
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "d416632d3d3e3cb12322d76df9865bc37bafb0299a2d5ceb1c23db4cbaf90d6e",
+      "group": 8,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          70,
+          78
+        ],
+        [
+          92,
+          98
+        ]
+      ],
+      "index": 33,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 57,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 57,
+          "scheduled": 57,
+          "proposal": {
+            "frames": [
+              92,
+              98
+            ],
+            "response": 0.41919823466577666,
+            "pts": [
+              92000,
+              98000
+            ],
+            "edges": [
+              [
+                89,
+                90,
+                91,
+                92,
+                93,
+                94
+              ],
+              [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 91,
+                "pts": 91000,
+                "decoded_rgb_sha256": "814dfe9943716e67d2cf6cf98032127f9ec78681b617e3cc17c4c029e8334a77"
+              },
+              {
+                "frame_index": 95,
+                "pts": 95000,
+                "decoded_rgb_sha256": "3e9c4d9bde36128ea97b8c7189a8d1202ff9a37b62ea8d2cbc0cf8edad450244"
+              },
+              {
+                "frame_index": 98,
+                "pts": 98000,
+                "decoded_rgb_sha256": "77c0b3f695eeff8b49e410b4745037f809f754b53f22a46a67ad14305156bb56"
+              }
+            ]
+          }
+        },
+        "confirmed_track": {
+          "measured": 57,
+          "scheduled": 57,
+          "proposal": {
+            "frames": [
+              92,
+              98
+            ],
+            "response": 0.41919823466577666,
+            "pts": [
+              92000,
+              98000
+            ],
+            "edges": [
+              [
+                89,
+                90,
+                91,
+                92,
+                93,
+                94
+              ],
+              [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 91,
+                "pts": 91000,
+                "decoded_rgb_sha256": "814dfe9943716e67d2cf6cf98032127f9ec78681b617e3cc17c4c029e8334a77"
+              },
+              {
+                "frame_index": 95,
+                "pts": 95000,
+                "decoded_rgb_sha256": "3e9c4d9bde36128ea97b8c7189a8d1202ff9a37b62ea8d2cbc0cf8edad450244"
+              },
+              {
+                "frame_index": 98,
+                "pts": 98000,
+                "decoded_rgb_sha256": "77c0b3f695eeff8b49e410b4745037f809f754b53f22a46a67ad14305156bb56"
+              }
+            ]
+          }
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "24e8a0c72871b03499b68e4fdf806903602c0541beac410edba4c90cf20d8996",
+      "group": 8,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "index": 34,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 32,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 32,
+          "scheduled": 32,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 32,
+          "scheduled": 32,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    },
+    {
+      "sha256": "384f8b45ebbeffa51f5ec589670b544687da0d8a3d59260bbff3dc779bee1cb7",
+      "group": 8,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "index": 35,
+      "panel": "picture_in_picture",
+      "bank": "held_visual_layout",
+      "prior": [],
+      "first": null,
+      "multiple_faces": 48,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null
+        },
+        "largest_face": {
+          "measured": 38,
+          "scheduled": 38,
+          "proposal": null
+        },
+        "confirmed_track": {
+          "measured": 40,
+          "scheduled": 45,
+          "proposal": null
+        }
+      },
+      "first_pts": 0,
+      "time_base": "1/30000"
+    }
+  ],
+  "result": {
+    "picture_in_picture": {
+      "clips": 35,
+      "ordinary": 21,
+      "edited": 14,
+      "single_face": {
+        "useful": 0,
+        "exact": 0,
+        "misplaced": 0,
+        "ordinary_flags": 0,
+        "cut_flags": 0,
+        "groups": 0
+      },
+      "largest_face": {
+        "useful": 13,
+        "exact": 13,
+        "misplaced": 0,
+        "ordinary_flags": 0,
+        "cut_flags": 0,
+        "groups": 7
+      },
+      "confirmed_track": {
+        "useful": 11,
+        "exact": 11,
+        "misplaced": 0,
+        "ordinary_flags": 0,
+        "cut_flags": 0,
+        "groups": 6
+      }
+    }
+  }
+}

@@ -14,15 +14,15 @@ RANGE_SAMPLES = 9 * HOP
 BANDS = ((300, 900), (900, 1750), (1750, 3400))
 
 
-def _frames(pcm, frequency, weight):
+def _frames(pcm, frequency, weight, *, hop):
     sos = butter(2, frequency, fs=RATE, btype="bandpass", output="sos")
     filtered = sosfiltfilt(sos, pcm.astype(np.float64))
-    frames = np.lib.stride_tricks.sliding_window_view(filtered, WIDTH)[::HOP]
+    frames = np.lib.stride_tricks.sliding_window_view(filtered, len(weight))[::hop]
     return frames - (frames @ weight / weight.sum())[:, None]
 
 
-def _matched(before, after, weight):
-    earlier, submitted = (_frames(pcm, (250, 3800), weight) * np.sqrt(weight) for pcm in (before, after))
+def matched(before, after, weight):
+    earlier, submitted = (_frames(pcm, (250, 3800), weight, hop=HOP) * np.sqrt(weight) for pcm in (before, after))
     ref = np.einsum("ij,ij->i", earlier, earlier)
     sub = np.einsum("ij,ij->i", submitted, submitted)
     joint = np.einsum("ij,ij->i", earlier, submitted)
@@ -33,9 +33,9 @@ def _matched(before, after, weight):
             and np.quantile(corr[active], .7) >= .30)
 
 
-def _band_stats(before, after, weight):
+def band_stats(before, after, weight, *, hop=HOP):
     for frequency in BANDS:
-        earlier, submitted = (_frames(pcm, frequency, weight) for pcm in (before, after))
+        earlier, submitted = (_frames(pcm, frequency, weight, hop=hop) for pcm in (before, after))
         power = (earlier * earlier) @ weight
         joint = (earlier * submitted) @ weight
         strength = np.sqrt(power / weight.sum())
@@ -43,7 +43,7 @@ def _band_stats(before, after, weight):
 
 
 def _strongest(before, after, weight):
-    stats = list(_band_stats(before, after, weight))
+    stats = list(band_stats(before, after, weight))
     centers = np.arange(1 + (SAMPLES - WIDTH) // HOP) * HOP + WIDTH // 2
     best = None
     for start in range(8, len(centers) - 17):
@@ -78,7 +78,7 @@ def _strongest(before, after, weight):
 def locate(earlier, submitted):
     """Accept native signed 16-bit samples at the pre-verified common clock."""
     weight = np.hanning(WIDTH)
-    if not _matched(earlier, submitted, weight):
+    if not matched(earlier, submitted, weight):
         return "reference_match_not_supported", None
     result = _strongest(earlier, submitted, weight)
     if result is None:

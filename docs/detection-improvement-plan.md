@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Denser earlier-copy speech review](audio-dense-clean-reference-2026-11-13.md)
+  located 14 of 16 short synthetic alterations under competing speech,
+  up from six on the same earlier-copy pairs. At −5 dB it highlighted one
+  of 24 untouched or processing controls, down from five. It is a local
+  trial for six-second aligned comparisons with a clean earlier recording.
+
 - [Native PNG regional review](native-regional-serving-v47-result.md#optional-app-integration)
   is enabled on the local instance. The paid-flow replay added one location
   to a previously evaluated edit and none to the matching untouched photo.

@@ -69,8 +69,10 @@ type CleanSpeechComparison = {
   scope: string
   status: 'localized_difference' | 'no_local_difference' | 'unassessed' | 'broad_processing_difference'
   reason: string
+  basis?: 'dense_clean_reference_v1'
   range?: Record<Side, SoundtrackSide & { source_pts: [number, number] }> & {
-    bands: { band_hz: [number, number] }[]
+    bands: { band_hz: [number, number]; before: number; within: number; after: number }[]
+    relative_drop: number
     supporting_window_starts?: [number, number]
   }
 }
@@ -143,7 +145,7 @@ type Comparison = {
   schema: 'chipmunk.audio-reference-comparison/1' | 'chipmunk.audio-reference-comparison/2' | 'chipmunk.audio-reference-comparison/3'
     | 'chipmunk.audio-reference-comparison/4' | 'chipmunk.audio-reference-comparison/5' | 'chipmunk.audio-reference-comparison/6'
     | 'chipmunk.audio-reference-comparison/7' | 'chipmunk.audio-reference-comparison/8' | 'chipmunk.audio-reference-comparison/9'
-    | 'chipmunk.audio-reference-comparison/10'
+    | 'chipmunk.audio-reference-comparison/10' | 'chipmunk.audio-reference-comparison/11'
   picture?: never
   picture_insertion?: never
   insertion_retention?: never
@@ -621,6 +623,18 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
       Two six-second checks starting at {sourceSeconds.format(span.supporting_window_starts[0] / trimSampleRate)} s and{' '}
       {sourceSeconds.format(span.supporting_window_starts[1] / trimSampleRate)} s agreed.
     </p>}
+    {span && result.basis === 'dense_clean_reference_v1' && <div className="text-caption text-text-muted">
+      <p className="m-0">Drop in signed matching-sound gain {span.relative_drop.toFixed(3)}.</p>
+      <table className="mt-2 text-left">
+        <caption className="mb-1 text-left font-medium">Matching sound gain by frequency band</caption>
+        <thead><tr><th className="pr-3" scope="col">Band</th><th className="pr-3" scope="col">Before</th>
+          <th className="pr-3" scope="col">Within</th><th scope="col">After</th></tr></thead>
+        <tbody>{span.bands.map(({ band_hz: [low, high], before, within, after }) => <tr key={low}>
+          <th className="pr-3 font-normal" scope="row">{low}–{high} Hz</th><td>{before.toFixed(3)}</td>
+          <td>{within.toFixed(3)}</td><td>{after.toFixed(3)}</td>
+        </tr>)}</tbody>
+      </table>
+    </div>}
   </div>
 }
 
@@ -657,7 +671,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
       if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
@@ -670,9 +684,13 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       if (schema === 'chipmunk.audio-reference-comparison/10' && !response.comparison.local_timing?.aac_presentation) {
         throw new Error('The comparison response is missing its AAC timing evidence.')
       }
-      if ((schema === 'chipmunk.audio-reference-comparison/8' || schema === 'chipmunk.audio-reference-comparison/9')
-          && !response.comparison.clean_speech) {
+      if ((schema === 'chipmunk.audio-reference-comparison/8' || schema === 'chipmunk.audio-reference-comparison/9'
+          || schema === 'chipmunk.audio-reference-comparison/11') && !response.comparison.clean_speech) {
         throw new Error('The comparison response is missing its local speech result.')
+      }
+      if (schema === 'chipmunk.audio-reference-comparison/11'
+          && response.comparison.clean_speech?.basis !== 'dense_clean_reference_v1') {
+        throw new Error('The comparison response is missing its local speech measurement method.')
       }
       if ((schema === 'chipmunk.audio-reference-comparison/7' || schema === 'chipmunk.video-reference-comparison/8')
           && !response.comparison.channel_timing) {

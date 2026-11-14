@@ -1,0 +1,9 @@
+{
+  "held_bank": "Published randomized placement panel, eight disjoint host groups, two rendered voice generators, 0 and -5 dB with authored gain, global EQ, unrelated exact prior recording and masker-only additions",
+  "selection": "Maximum useful primary -5 dB synthetic locations and minimum misplaced range on stock-only development, ties favor accuracy on clean/0 dB and shorter frame",
+  "operating_point": 0.31758884,
+  "primary": "Six seconds same-clock PCM. Retain existing broadband pair admission. Use 120 ms frames with 40 ms steps, search 960 ms intervals, 80 ms guards and available portions of 640 ms comparison flanks, with at least three active frames per interval per band, two bands and existing coherent gain consistency. Use the maximum development control score, with strict excess",
+  "comparison": "Existing 720 ms evidence and the same candidate as an optional replacement for the six-second method only. Report additive tradeoffs separately",
+  "advancement": "On held -5 dB: net two useful synthetic locations and at least two host groups with gains; at most one more flagged unchanged/gain/EQ case and at most one more misplaced synthetic; no unrelated or masker-only admission at either level. Partial credit is never an authorship verdict.",
+  "useful": "At least 50% edit coverage and 0.30 temporal IoU. Ordinary splices are separate physical-change positives."
+}

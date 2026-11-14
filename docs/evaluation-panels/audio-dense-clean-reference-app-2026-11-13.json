@@ -1,0 +1,41 @@
+{
+  "cases": {
+    "recovered": {
+      "original_assessment_preserved": true,
+      "source_replay": {
+        "excerpts_verified": 2,
+        "reason": "local_change",
+        "samples": [
+          8960,
+          24320
+        ],
+        "status": "localized_difference"
+      },
+      "truth_samples": [
+        9949,
+        25309
+      ]
+    },
+    "unrelated": {
+      "original_assessment_preserved": true,
+      "source_replay": {
+        "excerpts_verified": 0,
+        "reason": "reference_match_not_supported",
+        "status": "unassessed"
+      },
+      "truth_samples": null
+    },
+    "untouched": {
+      "original_assessment_preserved": true,
+      "source_replay": {
+        "excerpts_verified": 0,
+        "reason": "no_local_change",
+        "status": "no_local_difference"
+      },
+      "truth_samples": null
+    }
+  },
+  "simulated_prepaid_analyses": 2,
+  "successful_runs": 3,
+  "unpaid_jobs": 0
+}

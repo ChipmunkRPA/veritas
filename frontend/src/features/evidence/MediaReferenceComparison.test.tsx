@@ -328,13 +328,16 @@ it('shows exact moved sound in the reported stereo channel', async () => {
   expect(screen.queryByRole('region', { name: 'Right channel timing' })).toBeNull()
 })
 
-it('offers the earlier clean speech check only when available and shows both source excerpts', async () => {
+it.each([false, true])('offers the earlier clean speech check and shows both source excerpts (dense=%s)', async (dense) => {
   const audio = { file: 'excerpt.wav', media_type: 'audio/wav', sha256: 'c'.repeat(64) }
-  const excerpt = { start_s: 2, end_s: 2.72, source_pts: [32000, 43520], audio, waveform: { low: [-.4], high: [.2] } }
+  const excerpt = { start_s: 2, end_s: dense ? 2.96 : 2.72, source_pts: [32000, dense ? 47360 : 43520],
+    audio, waveform: { low: [-.4], high: [.2] } }
   const comparison = {
-    schema: 'chipmunk.audio-reference-comparison/8', status: 'measured', interpretation: 'Decoded audio differences.',
+    schema: `chipmunk.audio-reference-comparison/${dense ? 11 : 8}`, status: 'measured', interpretation: 'Decoded audio differences.',
     clean_speech: { status: 'localized_difference', summary: 'Matching sound became weaker.', scope: 'Ordinary edits can cause this.',
-      range: { earlier: excerpt, submitted: excerpt, bands: [{ band_hz: [300, 900] }, { band_hz: [900, 1750] }] } },
+      ...(dense ? { basis: 'dense_clean_reference_v1' } : {}),
+      range: { earlier: excerpt, submitted: excerpt, relative_drop: .5,
+        bands: [[300, 900], [900, 1750]].map(band_hz => ({ band_hz, before: 1, within: .5, after: 1 })) } },
   }
   const fetch = vi.fn().mockResolvedValueOnce(Response.json({ available: true, clean_speech_available: true }))
     .mockResolvedValueOnce(Response.json({ comparison, assets: { 'excerpt.wav': 'UklGRg==' }, pdf: 'JVBERi0xLjQK' }))
@@ -344,8 +347,9 @@ it('offers the earlier clean speech check only when available and shows both sou
   fireEvent.click(screen.getByRole('checkbox', { name: 'The earlier file is a clean copy of the same recording' }))
   fireEvent.click(screen.getByRole('button', { name: 'Compare recordings' }))
   expect(await screen.findByRole('region', { name: 'Local speech comparison' })).toBeTruthy()
-  expect(screen.getByText('Analyzed recording · 2.000–2.720 s')).toBeTruthy()
-  expect(screen.getByText(/source ticks 32000 to 43520/)).toBeTruthy()
+  expect(screen.getByText(`Analyzed recording · 2.000–${dense ? '2.960' : '2.720'} s`)).toBeTruthy()
+  expect(screen.getByText(new RegExp(`source ticks 32000 to ${dense ? 47360 : 43520}`))).toBeTruthy()
+  expect(Boolean(screen.queryByText('Matching sound gain by frequency band'))).toBe(dense)
   expect(screen.getAllByRole('img', { name: /matched excerpt waveform/ })).toHaveLength(2)
   expect((fetch.mock.calls[1][1].body as FormData).get('earlier_has_clean_speech')).toBe('true')
   expect(screen.getByRole('button', { name: 'Download PDF' })).toBeTruthy()

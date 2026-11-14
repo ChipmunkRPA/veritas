@@ -197,6 +197,11 @@ This replay checks published decisions and overlap counts without source media.
 The linked guides cover native replay, the separate audio equalization test
 and the Word extraction scope.
 
+The [denser earlier-copy speech review](audio-dense-clean-reference-2026-11-13.md#replay)
+recounts 352 source-bound comparisons of short speech changes under
+competing voices. Its model-free reader verifies control counts,
+operating points, and useful localization without source audio.
+
 The [JPEG detail-loss replay](image-jpeg-detail-loss-2026-11-13.md#local-use-and-replay)
 recounts 544 blur, generated-edit and delivery-control comparisons. The
 [multiple video insertion replay](video-temporal-multiple-inserts-2026-11-13.md#replay)

@@ -10,6 +10,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_AAC_TIMING,
     SCHEMA_WITH_CHANNEL_TIMING,
     SCHEMA_WITH_CLEAN_SPEECH,
+    SCHEMA_WITH_DENSE_CLEAN_SPEECH,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
     SCHEMA_WITH_LOCAL_TIMING,
     SCHEMA_WITH_LONG_CLEAN_SPEECH,
@@ -396,6 +397,8 @@ def _clean_speech_page(document, result):
     if "supporting_window_starts" in span:
         first_window, last_window = (x / rate for x in span["supporting_window_starts"])
         _text(page, MARGIN, 291, f"Two six-second checks starting at {first_window:.3f} s and {last_window:.3f} s agreed.", size=9, color=MUTED)
+    if "basis" in result:
+        _text(page, MARGIN, 291, f"Drop in signed matching-sound gain  {span['relative_drop']:.3f}", size=9, color=MUTED)
     maximum = max(.01, *(abs(level) for side in LABELS for field in ("low", "high")
                         for level in span[side]["waveform"][field]))
     for y, (side, label) in zip((379, 565), (("earlier", "Earlier recording"), ("submitted", "Analyzed recording")), strict=True):
@@ -405,6 +408,12 @@ def _clean_speech_page(document, result):
         _draw_waveform(page, row["waveform"], y, maximum, (end - first) / rate)
         _text(page, MARGIN, y + 53, f"Source ticks [{source_start}, {source_end}) at 16 kHz.", size=9, color=MUTED)
     _text(page, MARGIN, 673, "Waveforms share one scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
+    if "basis" in result:
+        _text(page, MARGIN, 694, "Matching sound gain by band  ·  before / within / after", size=9, font="hebo")
+        for index, band in enumerate(span["bands"]):
+            low, high = band["band_hz"]
+            gains = "  /  ".join(f"{band[side]:.3f}" for side in ("before", "within", "after"))
+            _text(page, MARGIN, 710 + 13 * index, f"{low}-{high} Hz    {gains}", size=9, color=MUTED)
 
 
 def _sound_page(document, span, *, level_adjusted=False, track_title=None):
@@ -535,7 +544,7 @@ def render(record, assets):
         is_audio = record["schema"] in (AUDIO_SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT, SCHEMA_WITH_TRIM_ALIGNMENT,
                                         SCHEMA_WITH_TRIM_AND_LEVEL, SCHEMA_WITH_STEREO, SCHEMA_WITH_LOCAL_TIMING,
                                         SCHEMA_WITH_CHANNEL_TIMING, SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH,
-                                        SCHEMA_WITH_AAC_TIMING)
+                                        SCHEMA_WITH_AAC_TIMING, SCHEMA_WITH_DENSE_CLEAN_SPEECH)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
         adjusted = record.get("level_adjusted")
         trimmed = is_audio and "trim_alignment" in record.get("audio", {})

@@ -27,6 +27,7 @@ SCHEMA_WITH_CHANNEL_TIMING = "chipmunk.audio-reference-comparison/7"
 SCHEMA_WITH_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/8"
 SCHEMA_WITH_LONG_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/9"
 SCHEMA_WITH_AAC_TIMING = "chipmunk.audio-reference-comparison/10"
+SCHEMA_WITH_DENSE_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/11"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_SECONDS = 30
 MAX_PRESENTED_RANGES = 3
@@ -81,6 +82,10 @@ CLEAN_SPEECH_SCOPE = (
     "This check looks for a 720 ms drop in sound shared with the earlier recording, with matching sound on both sides. "
     "Ordinary edits, local level changes and overlapping sound can affect the result. "
     "It contributes zero weight to the AI estimate and does not identify who spoke."
+)
+DENSE_CLEAN_SPEECH_SCOPE = (
+    "This check looks for a 960 ms drop in sound shared with the clean earlier recording, relative to both sides. "
+    "Ordinary edits, level changes and overlapping sound can produce a finding. It carries zero weight in the AI estimate."
 )
 CLEAN_SPEECH_SUMMARY = {
     "native_format_required": "Both files need continuous 16 kHz mono 16-bit WAV or FLAC audio.",
@@ -472,12 +477,13 @@ def _local_timing(decoded, audio, assets, *, aac_tracks=None):
     }
 
 
-def _clean_speech(decoded, assets, *, allow_long):
-    from app.evidence import audio_clean_speech, audio_clean_speech_long
+def _clean_speech(decoded, assets, *, allow_long, use_dense):
+    from app.evidence import audio_clean_speech, audio_clean_speech_dense, audio_clean_speech_long
 
     tracks = tuple(source[0] for source in decoded)
     counts = [track[2]["samples"] if track[2] is not None else None for track in tracks]
     long = allow_long and counts == [audio_clean_speech_long.SAMPLES] * 2
+    dense = False
     profile = None
     if not all(track[0] == "measured" and source[4] for track, source in zip(tracks, decoded, strict=True)):
         reason, span = "native_format_required", None
@@ -489,7 +495,9 @@ def _clean_speech(decoded, assets, *, allow_long):
         reason, span, profile = audio_clean_speech_long.locate(*samples)
     else:
         samples = ((track[1] * 32768).astype("<i2") for track in tracks)
-        reason, span = audio_clean_speech.locate(*samples)
+        dense = use_dense
+        method = audio_clean_speech_dense if dense else audio_clean_speech
+        reason, span = method.locate(*samples)
     statuses = {"local_change": "localized_difference", "no_local_change": "no_local_difference"}
     statuses.update(consistent_frequency_balance_change="broad_processing_difference", no_corroborated_local_change="no_local_difference")
     summary = LONG_CLEAN_SPEECH_SUMMARY if allow_long else CLEAN_SPEECH_SUMMARY
@@ -501,6 +509,8 @@ def _clean_speech(decoded, assets, *, allow_long):
               "sample_rate": AUDIO_RATE, "affects_overall_confidence": False}
     if long:
         result["sample_count"] = audio_clean_speech_long.SAMPLES
+    if dense:
+        result.update(basis=audio_clean_speech_dense.BASIS, scope=DENSE_CLEAN_SPEECH_SCOPE)
     if profile is not None:
         result["frequency_balance"] = profile
     if span is not None:
@@ -509,6 +519,8 @@ def _clean_speech(decoded, assets, *, allow_long):
                     for side, track in zip(("earlier", "submitted"), tracks, strict=True)}
         result["range"] = span | excerpts | {"support_sha256": canonical_hash(span)}
     extended = long or reason == "common_clock_required"
+    if dense:
+        return SCHEMA_WITH_DENSE_CLEAN_SPEECH, result
     return SCHEMA_WITH_LONG_CLEAN_SPEECH if extended else SCHEMA_WITH_CLEAN_SPEECH, result
 
 
@@ -521,6 +533,7 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             include_channel_timing: bool = False,
             include_clean_speech: bool = False,
             allow_long_clean_speech: bool = True,
+            use_dense_clean_speech: bool = False,
             include_aac_timing: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Compare continuous recordings and recover a small, exactly supported edge trim."""
     paths = earlier, submitted
@@ -565,7 +578,8 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             if timing is not None:
                 record.update(schema=SCHEMA_WITH_CHANNEL_TIMING, channel_timing=timing)
     if include_clean_speech:
-        schema, speech = _clean_speech((first, second), assets, allow_long=allow_long_clean_speech)
+        schema, speech = _clean_speech((first, second), assets, allow_long=allow_long_clean_speech,
+                                       use_dense=use_dense_clean_speech)
         record.update(schema=schema, clean_speech=speech)
     if aac_tracks:
         record["schema"] = SCHEMA_WITH_AAC_TIMING

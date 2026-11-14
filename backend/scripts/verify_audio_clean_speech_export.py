@@ -12,7 +12,8 @@ from struct import iter_unpack
 import numpy as np
 
 from app.core.canonical import canonical_hash
-from app.evidence import audio_clean_speech, audio_clean_speech_long
+from app.evidence import audio_clean_speech, audio_clean_speech_dense, audio_clean_speech_long
+from app.evidence.audio_reference import SCHEMA_WITH_DENSE_CLEAN_SPEECH
 from scripts.verify_audio_local_timing_export import decode
 from scripts.verify_stereo_reference import RATE, SIDES, digest, require, verify_clip, waveform
 
@@ -28,8 +29,9 @@ def verify_export(earlier, submitted, export):
     record, assets = package["comparison"], package["assets"]
     result = record["clean_speech"]
     long = record["schema"] == LONG_SCHEMA
+    dense = record["schema"] == SCHEMA_WITH_DENSE_CLEAN_SPEECH
     sample_count = audio_clean_speech_long.SAMPLES if long else audio_clean_speech.SAMPLES
-    require(record["schema"] in {SCHEMA, LONG_SCHEMA} and result["sample_rate"] == RATE
+    require(record["schema"] in {SCHEMA, LONG_SCHEMA, SCHEMA_WITH_DENSE_CLEAN_SPEECH} and result["sample_rate"] == RATE
             and record["affects_overall_confidence"] is False and result["affects_overall_confidence"] is False,
             "The export needs local speech evidence with zero AI weight")
     native = [decode(path, record[side]) for path, side in zip((earlier, submitted), SIDES, strict=True)]
@@ -44,6 +46,9 @@ def verify_export(earlier, submitted, export):
         reason, measured, profile = audio_clean_speech_long.locate(*samples)
         require(result["sample_count"] == sample_count and result.get("frequency_balance") == profile,
                 "Extended speech duration or frequency measurements differ")
+    elif dense:
+        require(result.get("basis") == audio_clean_speech_dense.BASIS, "Local speech measurement basis differs")
+        reason, measured = audio_clean_speech_dense.locate(*samples)
     else:
         reason, measured = audio_clean_speech.locate(*samples)
     status = STATUSES.get(reason, "unassessed")

@@ -795,7 +795,8 @@ def test_clean_speech_lane_localizes_and_falls_back_with_source_clips(tmp_path, 
     assert record["clean_speech"]["reason"] == "native_format_required"
 
 
-def test_clean_speech_lane_api_is_opt_in_and_renders_source_ranges(reference_http, monkeypatch, tmp_path, clean_speech_pair):
+@pytest.mark.parametrize("dense", [False, True])
+def test_clean_speech_lane_api_is_opt_in_and_renders_source_ranges(reference_http, monkeypatch, tmp_path, clean_speech_pair, dense):
     f = reference_http
 
     @contextmanager
@@ -808,6 +809,7 @@ def test_clean_speech_lane_api_is_opt_in_and_renders_source_ranges(reference_htt
     monkeypatch.setattr(settings, "audio_reference_comparison_enabled", True)
     monkeypatch.setattr(settings, "audio_reference_clean_speech", True)
     monkeypatch.setattr(settings, "audio_reference_long_clean_speech", False)
+    monkeypatch.setattr(settings, "audio_reference_dense_clean_speech", dense)
     first, second = (clean_speech_pair[name] for name in ("earlier", "altered"))
     stored = f.store.put_file(second)
     with sessions() as db:
@@ -826,13 +828,21 @@ def test_clean_speech_lane_api_is_opt_in_and_renders_source_ranges(reference_htt
                              data={"include_pdf": "true", "earlier_has_clean_speech": "true"})
     assert response.status_code == 200 and response.headers["cache-control"] == "no-store"
     payload = response.json()
-    span = payload["comparison"]["clean_speech"]["range"]
+    speech = payload["comparison"]["clean_speech"]
+    span = speech["range"]
+    assert payload["comparison"]["schema"] == (
+        audio_reference.SCHEMA_WITH_DENSE_CLEAN_SPEECH if dense else audio_reference.SCHEMA_WITH_CLEAN_SPEECH
+    )
+    assert span["samples"][1] - span["samples"][0] == (15360 if dense else 11520)
+    assert ("basis" in speech) is dense
     with pymupdf.open(stream=base64.b64decode(payload["pdf"], validate=True), filetype="pdf") as report:
         page = report[1]
         copy = " ".join(page.get_text().split())
         assert "Local speech comparison" in copy
         assert "Ordinary edits" in copy and "zero weight" in copy
-        assert "2.000 to 2.720 s" in copy
+        start, end = (sample / 16000 for sample in span["samples"])
+        assert f"{start:.3f} to {end:.3f} s" in copy
+        assert ("Matching sound gain by band" in copy) is dense
         assert f"[{span['samples'][0]}, {span['samples'][1]})" in copy
         waveform_paths = [path for path in page.get_drawings()
                           if path.get("color") == pytest.approx((.18, .39, .31))]
@@ -843,6 +853,7 @@ def test_clean_speech_lane_api_is_opt_in_and_renders_source_ranges(reference_htt
     export = tmp_path / "local-speech-comparison.json"
     export.write_text(json.dumps({key: payload[key] for key in ("comparison", "assets")}))
     assert verify_clean_speech(first, second, export)["excerpts_verified"] == 2
+    assert run(first, second, export, verify=True) == payload["comparison"]
     with sessions() as db:
         assert db.get(Analysis, "other-kind").result_hash == original_result
 
@@ -864,7 +875,7 @@ def test_clean_speech_twelve_seconds_distinguishes_late_change_and_broad_frequen
         ("mismatched", donor + background, "unassessed"),
     ):
         other = save(tmp_path, name, (np.rint(waveform) / 32768).astype(np.float32))
-        record, assets = audio_reference.compare(path, other, include_clean_speech=True)
+        record, assets = audio_reference.compare(path, other, include_clean_speech=True, use_dense_clean_speech=True)
         assert record["schema"] == audio_reference.SCHEMA_WITH_LONG_CLEAN_SPEECH
         check = record["clean_speech"]
         assert check["status"] == expected and check["sample_count"] == 192000

@@ -262,7 +262,7 @@ def export_json(aid: str, request: Request):
                 raise HTTPException(status_code=500, detail="Evidence failed integrity checks; export was not served.") from None
             evidence = {"image_evidence" if a.kind == "image" else "evidence": packet_set or unavailable_packet_set(a)}
     if getattr(a, "kind", None) == "image":
-        from app.evidence import image_thumbnail_evidence, image_whole_review
+        from app.evidence import image_thumbnail_evidence, image_transparency, image_whole_review
 
         thumbnail_evidence = image_thumbnail_evidence.from_result(stored)
         if thumbnail_evidence is not None:
@@ -270,6 +270,9 @@ def export_json(aid: str, request: Request):
         whole_image_review = image_whole_review.from_result(stored)
         if whole_image_review is not None and whole_image_review["source_sha256"] == a.sha256:
             evidence["whole_image_review"] = whole_image_review
+        transparency = image_transparency.from_result(stored)
+        if transparency and transparency["source_sha256"] == a.sha256:
+            evidence[image_transparency.KEY] = transparency
     decision = stored.get("decision") or {}
     display_result = {**stored, "kind": getattr(a, "kind", stored.get("kind")), "status": a.status}
     if decision and not decision.get("provenance_record"):

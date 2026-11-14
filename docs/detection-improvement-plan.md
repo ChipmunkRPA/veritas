@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- **Color stored under PNG transparency** now shows a same-location pair
+  in the ordinary analysis view and PDF, plus coordinates and crop hashes
+  in JSON. The check measures fully transparent pixels in supported RGBA
+  PNGs. Ordinary cutouts can preserve this color. The observation carries
+  zero AI-authorship weight and can miss smooth hidden content.
+
 - [Exact digital silence](audio-digital-silence-2026-11-14.md) is now
   source-linked evidence for audio and video. The check located all 72
   authored mutes in noisy mixtures and none of 152 controls. It distinguishes
@@ -88,6 +94,11 @@ are not public screening promises or calibrated population probabilities.
   found one useful edit and eight additional ordinary highlights when the
   area rule was removed. The horizontal repeat recovered no additional
   edits. The browser and PDF now show the recorded area denominator.
+
+- [Padding outside the submitted image](image-regional-padding-transfer-2026-11-14.md)
+  tested extended edges and reflection on the same 186 JPEGs. Neither
+  variant added a useful location. Extended edges reduced ordinary
+  highlights from 20 to 13, while reflection increased them to 44.
 
 - [Progressive JPEG earlier-copy comparison](image-reference-progressive-2026-11-14.md)
   located four additional object removals across two photographs and six

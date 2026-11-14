@@ -1361,9 +1361,10 @@ def exhibit_rows(snapshot: ReportSnapshot, images: dict[str, str], signals: dict
     if kind == "image":
         from app.evidence.image_thumbnail_evidence import from_result as thumbnail_review
         from app.evidence.image_thumbnail_evidence import is_preview_exhibit
+        from app.evidence.image_transparency import CREATOR as PNG_TRANSPARENCY
         from app.evidence.image_whole_review import is_review_exhibit
 
-        records = [item for item in records if not is_review_exhibit(item)]
+        records = [item for item in records if not is_review_exhibit(item) and item.get("created_by") != PNG_TRANSPARENCY]
         preview = thumbnail_review(result)
         if (snapshot.report.redacted or (preview and preview["source_sha256"] == snapshot.media.sha256
                                         and any(r.get("footprint_grid") for r in preview["regions"]))):

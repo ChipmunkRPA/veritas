@@ -1,0 +1,21 @@
+{% if v.get('png_transparency') %}
+{% set review = v.png_transparency %}
+<section class="chapter-cont image-evidence" aria-labelledby="png-transparency-heading">
+<h2 class="chapter-title" id="png-transparency-heading">Color stored under PNG transparency</h2>
+<p>Checked {{ '{:,}'.format(review.width * review.height) }} pixels. {{ '{:,}'.format(review.fully_transparent_pixels) }} are fully transparent. {{ '{:,}'.format(review.qualifying_tiles) }} {{ 'tile' if review.qualifying_tiles == 1 else 'tiles' }} met the color-variation rule.</p>
+<p>{{ review.limitation }} {{ review.scope }}</p>
+{% if review.location %}
+{% set loc = review.location %}
+<div class="evidence-plates evidence-plates-pair">
+{% for crop in (loc.visible_crop, loc.revealed_crop) %}
+<figure>
+{% if crop.uri %}<img src="{{ crop.uri }}" alt="{{ crop.title }}">{% endif %}
+<figcaption>{{ crop.title }}. {{ crop.caption }}</figcaption>
+</figure>
+{% endfor %}
+</div>
+{% elif review.qualifying_tiles %}
+<p>The crop pair is unavailable.</p>
+{% endif %}
+</section>
+{% endif %}

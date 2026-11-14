@@ -43,6 +43,9 @@ pixels and the evidence from the baseline pairs.
 The [small JPEG edit replay](image-small-region-repeat-2026-11-14.md#replay)
 recounts the existing area rule, its removal, and a stricter repeat
 comparison on 186 single-upload JPEG deliveries from 30 photos.
+The [padding replay](image-regional-padding-transfer-2026-11-14.md#replay)
+recounts two alternatives using those same submitted pixels and reports
+each variant's useful locations, misplaced flags and ordinary highlights.
 
 The [fresh video timing study](video-lipsync-repeat-fresh-actors-2026-11-13.md#replay)
 includes two public source plans and runners that recover the exact native

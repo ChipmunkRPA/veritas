@@ -51,6 +51,27 @@ def test_coverage_keeps_gate_suppression_separate_from_display_caps():
     assert inspection_check_view({**check(), "candidate_eligibility": None})["eligible_count_label"] == "Available for region selection"
 
 
+def test_report_lists_the_repeat_counts_for_supported_and_withheld_regions(tmp_path, monkeypatch):
+    snapshot, store = packet_snapshot(tmp_path, "standard")
+    inspection = {**check(.5), "eligible_components": 1, "selected_components": 0, "omitted_components": 1,
+                  "flip_consistency": {"schema": "image-flip-consistency/1", "inspected_components": 2,
+                                       "supported_components": 1, "withheld_components": 1, "candidates": [
+                                           {"bounds": [25, 5, 40, 30], "shared_pixels": 340, "source_pixels": 1200, "retained": False},
+                                           {"bounds": [175, 5, 50, 40], "shared_pixels": 1800, "source_pixels": 2000, "retained": True},
+                                       ]}}
+    frozen = copy.deepcopy(snapshot.image_evidence)
+    frozen.update(version="image-evidence-3", packets=[], coverage={"inspection_checks": [inspection]})
+    snapshot = snapshot.model_copy(update={"image_evidence": frozen})
+    monkeypatch.setattr(image_evidence, "verified_set", lambda value: value.image_evidence)
+    monkeypatch.setattr(image_evidence, "default_store", lambda: store)
+    rendered = engine.render_pdf(snapshot)
+    with pymupdf.open(stream=rendered.pdf, filetype="pdf") as report:
+        words = " ".join(word for page in report for word in page.get_text().split())
+    assert "Initial candidate 1. 340 of 1,200 measured cells overlapped. Withheld after the repeat." in words
+    assert "Initial candidate 2. 1,800 of 2,000 measured cells overlapped. Supported by the repeat." in words
+    assert "Source x 25, y 5 · 40 × 30 px" in words
+
+
 @pytest.mark.parametrize("profile", ["standard", "forensic", "summary", "newsroom"])
 def test_no_packet_report_still_displays_gate_and_incomplete_coverage(tmp_path, monkeypatch, profile):
     snapshot, store = packet_snapshot(tmp_path, profile)

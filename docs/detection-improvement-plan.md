@@ -67,6 +67,10 @@ are not public screening promises or calibrated population probabilities.
   is enabled locally for the supported PNG size. It reduced ordinary
   highlights from 37 to 26 of 68 and useful masks increased from 11 to 12
   of 40. It carries zero AI-confidence weight.
+- [Two reflected views](image-regional-two-reflections-2026-11-13.md)
+  added no useful edit locations on the 108-image replay. The browser
+  and Standard PDF now show the existing horizontal repeat mask with
+  source bounds and overlap counts for both supported and withheld candidates.
 - [Progressive JPEG regional evidence](image-regional-progressive-jpeg-2026-11-13.md)
   adds support for standard quality-75 progressive files in the existing
   development profile. All 90 matched decodes and six paired regional runs

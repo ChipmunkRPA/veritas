@@ -36,10 +36,12 @@ export interface ImageInspectionCheck {
   candidate_eligibility?: CandidateEligibility
   flip_consistency?: {
     schema: 'image-flip-consistency/1'
-    candidates: { region_id: 'R1' | 'R2'; source_pixels: number; shared_pixels: number; retained: boolean }[]
+    candidates: { region_id: 'R1' | 'R2'; bounds: [number, number, number, number];
+      source_pixels: number; shared_pixels: number; retained: boolean }[]
     inspected_components: number
     supported_components: number
     withheld_components: number
+    aligned_mask_png_sha256?: string
   }
   map_grid?: [number, number]
   source_quality?: {

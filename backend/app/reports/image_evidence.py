@@ -208,14 +208,17 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     overview = (document.get("overview") or {}).values()
     for check in (document.get("coverage") or {}).get("inspection_checks", []):
         display = inspection_check_view(check)
-        sha = check.get("reliability_mask_sha256")
-        if sha and display["map_grid"] and not withheld:
-            for asset in overview:
-                if (asset["sha256"] == sha and asset["media_type"] == "image/png"
-                        and [asset["width"], asset["height"]] == list(display["map_grid"])):
-                    data = _asset_bytes(asset, store)
-                    display["coverage_map"] = "data:image/png;base64," + base64.b64encode(data).decode("ascii")
-                    break
+        masks = {"coverage_map": check.get("reliability_mask_sha256"),
+                 "repeat_mask": (check.get("flip_consistency") or {}).get("aligned_mask_png_sha256")}
+        if display["map_grid"] and not withheld:
+            for name, sha in masks.items():
+                if sha:
+                    for asset in overview:
+                        if (asset["sha256"] == sha and asset["media_type"] == "image/png"
+                                and [asset["width"], asset["height"]] == list(display["map_grid"])):
+                            data = _asset_bytes(asset, store)
+                            display[name] = "data:image/png;base64," + base64.b64encode(data).decode("ascii")
+                            break
         inspection_checks.append(display)
     return {"available": True, "id": document["id"], "version": document["version"], "sha256": document["sha256"],
             "source_sha256": document["source"]["sha256"], "source": document["source"], "packets": packets,

@@ -558,17 +558,27 @@ describe('image evidence cards', () => {
   })
 
   it('distinguishes flip-check rejection, unreviewed regions, and display limits', () => {
-    show({ ...evidence, packets: [], coverage: { inspection_checks: [check({ candidate_eligibility: gate(.5),
+    const mask = { ...artifact('d'), width: 512, height: 320 }
+    const value = { ...evidence, packets: [], overview: { inspection_01_aligned_flip_mask: mask },
+      coverage: { inspection_checks: [check({ candidate_eligibility: gate(.5),
       eligible_components: 1, selected_components: 0, omitted_components: 1,
       flip_consistency: { schema: 'image-flip-consistency/1', inspected_components: 2, supported_components: 1,
+        aligned_mask_png_sha256: mask.sha256,
         withheld_components: 1, candidates: [
-          { region_id: 'R1', source_pixels: 11, shared_pixels: 5, retained: false },
-          { region_id: 'R2', source_pixels: 10, shared_pixels: 5, retained: true },
+          { region_id: 'R1', bounds: [4, 8, 6, 9], source_pixels: 11, shared_pixels: 5, retained: false },
+          { region_id: 'R2', bounds: [14, 8, 6, 9], source_pixels: 10, shared_pixels: 5, retained: true },
         ] },
-    })] } })
+    })] } }
+    show(value)
     expect(screen.getByText('Supported by the flip check')).toBeTruthy()
-    expect(screen.getByText(/same detector on a horizontal flip.*50% of its source pixels.*no AI authorship weight/)).toBeTruthy()
+    expect(screen.getByText(/same detector on a horizontal flip.*50% of its measured grid cells.*no AI authorship weight/)).toBeTruthy()
     expect(screen.getByText('The flip check withheld 1 of 2 candidate regions.')).toBeTruthy()
+    expect(screen.getByText('Initial candidate 1. 5 of 11 measured cells overlapped. Withheld after the repeat.')).toBeTruthy()
+    expect(screen.getByText('Initial candidate 2. 5 of 10 measured cells overlapped. Supported by the repeat.')).toBeTruthy()
+    expect(screen.getByText('Source x 4, y 8 · 6 × 9 px')).toBeTruthy()
+    fireEvent.click(screen.getByText('Show the aligned repeat mask'))
+    expect(screen.getByAltText('Horizontal repeat mask aligned to the submitted image').getAttribute('src'))
+      .toBe(evidenceImageUrl(value, mask, 'signed token'))
     expect(screen.getByText('10 measured regions were outside the two-candidate review limit.')).toBeTruthy()
     expect(screen.getByText(/1 supported region is not shown/)).toBeTruthy()
     expect(screen.queryByText(/measured regions were withheld by the image gate/)).toBeNull()

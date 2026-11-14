@@ -2605,3 +2605,8 @@ The [gain retry replays](audio-gain-gate-voice-transfer-2026-11-13.md#applicatio
 recount 261 downstream decisions, with separate labels for quiet genuine
 speech, three synthetic families, matched room mixtures, and isolated room
 sound. They include native commands for recovering the prepared inputs.
+
+The [image repeatability replay](image-regional-two-reflections-2026-11-13.md#replay)
+recounts exact changed-pixel overlap for three approaches across 108 PNGs.
+The native procedure rebuilds each input against the original horizontal
+repeat receipt.

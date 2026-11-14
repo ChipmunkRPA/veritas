@@ -68,10 +68,13 @@ def inspection_check_view(check: dict) -> dict:
     if valid and isinstance(flip, dict) and flip.get("schema") == "image-flip-consistency/1":
         inspected, supported, withheld = (flip.get(key) for key in
                                           ("inspected_components", "supported_components", "withheld_components"))
+        candidates = flip.get("candidates")
         if (all(type(value) is int for value in (inspected, supported, withheld))
-                and eligible <= inspected <= min(2, raw) and supported == eligible and withheld == inspected - supported):
+                and eligible <= inspected <= min(2, raw) and supported == eligible and withheld == inspected - supported
+                and isinstance(candidates, list) and len(candidates) == inspected):
             flip_view = {"inspected": inspected, "withheld": withheld,
-                         "outside_limit": raw - inspected if eligibility["status"] != "withheld" else 0}
+                         "outside_limit": raw - inspected if eligibility["status"] != "withheld" else 0,
+                         "candidates": candidates}
     suppressed = 0
     if valid:
         suppressed = raw - eligible if not has_flip else raw if eligibility["status"] == "withheld" else 0

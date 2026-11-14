@@ -46,6 +46,7 @@ export default function ImageInspectionChecks({ checks, coverageMap }: {
         && Number.isSafeInteger(flip.inspected_components)
         && flip.inspected_components >= counts.eligible && flip.inspected_components <= Math.min(2, counts.raw)
         && flip.supported_components === counts.eligible
+        && Array.isArray(flip.candidates) && flip.candidates.length === flip.inspected_components
         && flip.withheld_components === flip.inspected_components - flip.supported_components ? flip : null
       const gateWithheld = flip && counts ? (eligibility.status === 'withheld' ? counts.raw : 0) : (counts?.suppressed ?? 0)
       const outsideFlipLimit = checkedFlip && counts && eligibility.status !== 'withheld'
@@ -65,8 +66,17 @@ export default function ImageInspectionChecks({ checks, coverageMap }: {
           </dl>
           {gateWithheld > 0 && <p className="mt-3 mb-0 text-small text-text-muted">{gateWithheld} measured {gateWithheld === 1 ? 'region was' : 'regions were'} withheld by the image gate. The raw map remains in the evidence record; withheld regions are not cleared as authentic.</p>}
           {flip && (checkedFlip ? <>
-            <p className="mt-3 mb-0 text-small text-text-muted">The flip check uses the same detector on a horizontal flip. It retains a region when at least 50% of its source pixels overlap after mapping back. It contributes no AI authorship weight.</p>
+            <p className="mt-3 mb-0 text-small text-text-muted">The flip check uses the same detector on a horizontal flip. It retains a region when at least 50% of its measured grid cells overlap after mapping back. It contributes no AI authorship weight.</p>
             <p className="mt-2 mb-0 text-small text-text-muted">The flip check withheld {checkedFlip.withheld_components} of {checkedFlip.inspected_components} candidate regions.</p>
+            <ul aria-label="Repeat measurements by candidate" className="mt-2 mb-0 list-disc pl-4 text-small text-text-muted">
+              {checkedFlip.candidates.map((candidate, index) => {
+                const [x, y, width, height] = candidate.bounds
+                return <li key={candidate.region_id}>
+                  <span>Initial candidate {index + 1}. {candidate.shared_pixels.toLocaleString('en-US')} of {candidate.source_pixels.toLocaleString('en-US')} measured cells overlapped. {candidate.retained ? 'Supported by the repeat.' : 'Withheld after the repeat.'}</span>
+                  <span className="block font-mono text-caption">Source x {x}, y {y} · {width} × {height} px</span>
+                </li>
+              })}
+            </ul>
             {outsideFlipLimit > 0 && <p className="mt-2 mb-0 text-small text-text-muted">{outsideFlipLimit} measured {outsideFlipLimit === 1 ? 'region was' : 'regions were'} outside the two-candidate review limit.</p>}
           </> : <p className="mt-2 mb-0 text-small text-text-muted">Flip-check coverage is unavailable.</p>)}
           {counts.omitted > 0 && <p className="mt-2 mb-0 text-small text-text-muted">{counts.omitted} {flip ? 'supported' : 'eligible'} {counts.omitted === 1 ? 'region is' : 'regions are'} not shown because of display limits or evidence requirements. These cards are not an exhaustive map of possible edits.</p>}

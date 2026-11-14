@@ -750,6 +750,20 @@ def _document_coverage_details(coverage: dict) -> list[str]:
                 notes.append(f"Page {page['page']}. {count} invisible text {label}. "
                              f"Recorded locations in unrotated PDF points {boxes}.")
             notes.append(document_pdf_visibility.LIMITATION)
+        if "replacement_examined_pages" in visibility:
+            checked = len(visibility["replacement_examined_pages"])
+            notes.append(f"PDF replacement text. Compared copyable text with glyph text on {checked} of "
+                         f"{visibility['total_pages']} pages.")
+            for page in visibility["replacement_differences"]:
+                details = f"Page {page['page']}. Copyable text differs from glyph text."
+                if page["boxes"]:
+                    boxes = ", ".join(f"[{', '.join(map(str, box))}]" for box in page["boxes"])
+                    details += f" Recorded locations in unrotated PDF points {boxes}."
+                if page["locations_incomplete"]:
+                    details += "Locations are approximate or incomplete."
+                notes.append(details)
+            if visibility["replacement_differences"]:
+                notes.append(document_pdf_visibility.REPLACEMENT_LIMITATION)
     if visibility := coverage.get(document_word_visibility.KEY):
         notes.append(f"Word text visibility. Checked {visibility['checked_paragraphs']} extracted paragraphs "
                      f"and found {visibility['hidden_runs']} text runs marked hidden. "

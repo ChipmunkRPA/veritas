@@ -442,6 +442,9 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True) -> Document:
     ocr_pages, rasters, raster_bytes = [], {}, 0
     percentage_text_pages = []
     visibility_examined, invisible_text = [], []
+    replacement_examined, replacement_differences = [], []
+    replacement_flag = getattr(pymupdf, "TEXT_IGNORE_ACTUALTEXT", 0)
+    glyph_flags = (pymupdf.TEXTFLAGS_RAWDICT & ~pymupdf.TEXT_PRESERVE_IMAGES) | replacement_flag
     runtime = None
     started = time.monotonic()
 
@@ -475,6 +478,15 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True) -> Document:
             parts = []
             page_parts.append(parts)
             blocks = page.get_text("rawdict")["blocks"]
+            if replacement_flag:
+                try:
+                    glyph_blocks = page.get_text("rawdict", flags=glyph_flags)["blocks"]
+                except (ValueError, RuntimeError):
+                    pass
+                else:
+                    replacement_examined.append(page.number + 1)
+                    if difference := document_pdf_visibility.inspect_replacement(page, blocks, glyph_blocks):
+                        replacement_differences.append(difference)
             try:
                 spans = page.get_texttrace()
             except (ValueError, RuntimeError):
@@ -542,7 +554,8 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True) -> Document:
     d.source_rasters = rasters
     d.meta = {"pages": pages, "method": "pymupdf", "unmapped_pages": empty_pages,
               "percentage_text_pages": percentage_text_pages,
-              document_pdf_visibility.KEY: document_pdf_visibility.build(pages, visibility_examined, invisible_text),
+              document_pdf_visibility.KEY: document_pdf_visibility.build(pages, visibility_examined, invisible_text,
+                                                                        replacement_examined, replacement_differences),
               "partially_checked_pages": partial_pages,
               "ocr": {"version": OCR_VERSION, "status": "partial" if empty_pages or partial_pages else "complete" if ocr_pages else "not_needed",
                       "pages": ocr_pages, "pages_without_text": [p["page"] for p in ocr_pages if p.get("coverage_scope") != "image_region"], "unchecked_pages": empty_pages,

@@ -59,6 +59,22 @@ describe('ordinary document passage inspection', () => {
     expect(within(section).getByText('[70, 81, 330, 92]')).toBeTruthy()
   })
 
+  it('shows a different copyable PDF text layer with its source box and scope', () => {
+    const set = evidence([])
+    show({ ...set, coverage: { ...set.coverage, pdf_text_visibility: {
+      schema: 'document-pdf-text-visibility/3', total_pages: 3, examined_pages: [1, 2, 3], locations: [],
+      replacement_examined_pages: [1, 3],
+      replacement_differences: [{ page: 3, boxes: [[70, 81, 90, 92]], locations_incomplete: true }],
+      coordinate_space: 'unrotated-page-points', authorship_confidence_contribution: 0,
+    } } })
+    const section = screen.getByRole('region', { name: 'PDF text visibility' })
+    expect(within(section).getByText('Compared copyable text with glyph text on 2 of 3 pages.')).toBeTruthy()
+    expect(within(section).getByText('Page 3 · Copyable text differs from glyph text')).toBeTruthy()
+    expect(within(section).getByText('[70, 81, 90, 92] (unrotated PDF points)')).toBeTruthy()
+    expect(within(section).getByText('Locations are approximate or incomplete.')).toBeTruthy()
+    expect(within(section).getByText(/zero AI-authorship weight/)).toBeTruthy()
+  })
+
   it('shows the native table location of a Word run with direct hidden formatting', () => {
     const set = evidence([])
     show({ ...set, coverage: { ...set.coverage, word_text_visibility: {

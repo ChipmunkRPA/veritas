@@ -7,6 +7,7 @@ from test_document_packets import packet_factory as packet_factory
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.evidence import document_percentage_consistency as percentages
+from app.evidence import document_word_visibility
 from app.evidence.document_packets import build_packet_set, load_packet_set
 from app.reports import engine, multimedia_evidence
 from app.reports.specimens import specimen
@@ -121,6 +122,9 @@ def test_mapped_percentages_have_native_anchors_in_evidence_and_pdf(packet_facto
     result = deepcopy(sample.result)
     result["input"].update(sha256=analysis.sha256, filename=analysis.filename, size_bytes=analysis.size_bytes)
     result["manifest"].update(sampling=original["manifest"]["sampling"], detectors=[])
+    if extension == ".docx":
+        result["manifest"]["sampling"][document_word_visibility.COMMITMENT] = canonical_hash(
+            decoded["meta"][document_word_visibility.KEY])
     result.update(signals=original["signals"], findings=[], exhibits=[])
     analysis.result_hash = store.put_bytes(canonical_json(result)).sha256
     monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)

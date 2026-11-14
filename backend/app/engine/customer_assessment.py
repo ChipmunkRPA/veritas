@@ -215,6 +215,7 @@ def _customer_assessment(result: Mapping[str, Any]) -> dict[str, Any]:
 
         headline = decision.get("verbal")
         if headline in (document_pdf_visibility.ASSESSMENT_HEADLINE, document_pdf_visibility.INCOMPLETE_HEADLINE,
+                        document_pdf_visibility.REPLACEMENT_HEADLINE,
                         document_word_visibility.HEADLINE):
             return {**answer, "headline": headline, "meaning": decision["reason"]}
         if headline in {msg[0] for msg in language_scope.MESSAGES.values()}:

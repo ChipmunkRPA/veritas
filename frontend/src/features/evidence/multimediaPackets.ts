@@ -415,8 +415,11 @@ export interface DocumentEvidenceSet extends SetBase {
       signal_ref: EvidenceRef; authorship_confidence_contribution: 0 };
     partially_checked_pages?: { page: number; image_boxes: [number, number, number, number][];
       coordinate_space: 'unrotated-page-points'; reason: string }[];
-    pdf_text_visibility?: { schema: 'document-pdf-text-visibility/1' | 'document-pdf-text-visibility/2'; total_pages: number; examined_pages: number[];
+    pdf_text_visibility?: { schema: 'document-pdf-text-visibility/1' | 'document-pdf-text-visibility/2' | 'document-pdf-text-visibility/3';
+      total_pages: number; examined_pages: number[];
       locations: { page: number; invisible_spans: number; boxes: [number, number, number, number][] }[];
+      replacement_examined_pages?: number[];
+      replacement_differences?: { page: number; boxes: [number, number, number, number][]; locations_incomplete: boolean }[];
       coordinate_space: 'unrotated-page-points'; authorship_confidence_contribution: 0 };
     word_text_visibility?: { schema: 'document-word-text-visibility/1'; part: string; checked_paragraphs: number; hidden_runs: number;
       locations: { body_path: (number | 'row' | 'cell')[]; body_paragraph: number | null; run: number; source_start: number; source_end: number }[];

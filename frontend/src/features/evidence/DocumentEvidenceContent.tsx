@@ -296,6 +296,21 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         </ul>
         <p className="mt-2 mb-0 text-small text-text-muted">Locations use unrotated PDF points. Searchable scans and accessibility overlays can contain invisible text. This check carries zero AI-authorship weight.</p>
       </>}
+      {textVisibility.replacement_examined_pages && <p className="mt-2 mb-0 text-small">
+        Compared copyable text with glyph text on {textVisibility.replacement_examined_pages.length} of {textVisibility.total_pages} pages.
+      </p>}
+      {!!textVisibility.replacement_differences?.length && <>
+        <ul className="mt-2 mb-0 pl-5 text-small">
+          {textVisibility.replacement_differences.map(row => <li key={row.page}>
+            Page {row.page} · Copyable text differs from glyph text
+            {row.boxes.length > 0 && <p className="mt-1 mb-1 font-mono text-caption text-text-muted">
+              {row.boxes.map(box => `[${box.join(', ')}]`).join(', ')} (unrotated PDF points)
+            </p>}
+            {row.locations_incomplete && <p className="mt-1 mb-1 text-caption text-text-muted">Locations are approximate or incomplete.</p>}
+          </li>)}
+        </ul>
+        <p className="mt-2 mb-0 text-small text-text-muted">PDF accessibility and OCR corrections can legitimately change copyable text. This check carries zero AI-authorship weight.</p>
+      </>}
     </section>}
     <DocumentInspectionMap packets={set.packets} selectedId={selectedId} onSelect={selectPassage} />
     <DocumentPassageCoverage coverage={set.coverage?.local_passage_coverage} />

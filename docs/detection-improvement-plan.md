@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [PDF copyable text vs. glyph text](document-pdf-copyable-text-2026-11-14.md)
+  located changed amounts, omissions, inserts, and replacements even when
+  the rendered page was identical. It also reported a legitimate OCR
+  correction. Locations and coverage appear in browser, PDF, and JSON.
+  The check carries zero AI-authorship weight.
+
 - [Small JPEG regions below the area rule](image-small-region-repeat-2026-11-14.md)
   found one useful edit and eight additional ordinary highlights when the
   area rule was removed. The horizontal repeat recovered no additional

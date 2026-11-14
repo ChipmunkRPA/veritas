@@ -197,8 +197,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     email_input_detail = f" Verified source roles and text hashes for {email_inputs} classifier inputs." if email_inputs else ""
     tracked_detail = f" Verified {tracked} retained tracked Word edit locations against the source XML." if tracked else ""
     word_visibility_detail = " Verified direct Word hidden formatting and retained run locations." if document_word_visibility.KEY in coverage else ""
+    pdf_visibility = coverage.get(document_pdf_visibility.KEY, {})
+    pdf_replacement_detail = (" Verified the PDF copyable-text comparison and retained page locations."
+                              if pdf_visibility.get("schema") == document_pdf_visibility.SCHEMA else "")
     percentage_detail = " Verified repeated percentage statements and their value ranges." if document_percentage_consistency.KEY in evidence else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
-            f"{tracked_detail}{word_visibility_detail}{percentage_detail}")
+            f"{tracked_detail}{word_visibility_detail}{pdf_replacement_detail}{percentage_detail}")

@@ -26,6 +26,10 @@ The [PDF credential replay](pdf-content-credentials-2026-11-13.md#independent-lo
 checks a pinned public signed PDF with the bundled trust list and verifies
 that the signature binds the document itself.
 
+The [PDF copyable-text replay](document-pdf-copyable-text-2026-11-14.md#replay)
+recreates page locations for differences and tests a legitimate accessibility
+correction from a pinned publisher fixture.
+
 The [longer writing replay](writing-context-agreement-2026-11-14.md#replay)
 checks source alignment between two saved measurement methods, rebuilds a
 combined operating point and recounts all 39 known edits and 42 ordinary

@@ -178,11 +178,14 @@ def test_pdf_invisible_layer_is_located_and_limits_the_actual_assessment(last_pa
     bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
               "source_commitment": {"sha256": analysis.sha256, "bytes": analysis.size_bytes}}
     archived = deepcopy(export)
-    archived["coverage"][key] = {**review, "schema": document_pdf_visibility.LEGACY_SCHEMA,
+    previous = deepcopy(export)
+    previous["coverage"][key] = {k: v for k, v in review.items() if not k.startswith("replacement_")}
+    previous["coverage"][key]["schema"] = document_pdf_visibility.FULL_PAGE_SCHEMA
+    archived["coverage"][key] = {**previous["coverage"][key], "schema": document_pdf_visibility.LEGACY_SCHEMA,
         "examined_pages": list(range(1, min(last_page, 12) + 1)), "locations": [row] if last_page <= 12 else []}
     old_decode = {**decoded, "meta": {**decoded["meta"], key: archived["coverage"][key]}}
     assert not stage.current_decode_output(old_decode)
-    for exported in (export, archived):
+    for exported in (export, previous, archived):
         zip_path = tmp_path / "evidence.zip"
         with ZipFile(zip_path, "w") as archive:
             archive.writestr("evidence.json", json.dumps(exported))

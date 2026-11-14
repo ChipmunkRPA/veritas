@@ -265,10 +265,14 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
     hybrid_notice = hybrid_ocr_notice((doc.meta.get("ocr") or {}).get("pages") or [])
     visibility = doc.meta.get(document_pdf_visibility.KEY) or {}
     invisible = visibility.get("locations", [])
+    replacement = visibility.get("replacement_differences", [])
     word_hidden = doc.meta.get(document_word_visibility.KEY, {}).get("hidden_runs", 0)
-    visibility_incomplete = (visibility.get("schema") == document_pdf_visibility.SCHEMA
+    visibility_incomplete = (visibility.get("schema") in (document_pdf_visibility.FULL_PAGE_SCHEMA, document_pdf_visibility.SCHEMA)
                              and len(visibility["examined_pages"]) < visibility["total_pages"])
-    if not any((unchecked, partial_notice, hybrid_notice, invisible, visibility_incomplete, word_hidden)):
+    replacement_incomplete = ("replacement_examined_pages" in visibility
+                              and len(visibility["replacement_examined_pages"]) < visibility["total_pages"])
+    if not any((unchecked, partial_notice, hybrid_notice, invisible, replacement, visibility_incomplete, replacement_incomplete,
+                word_hidden)):
         return output
     notices = []
     if unchecked:
@@ -287,6 +291,13 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
     if visibility_incomplete:
         visibility_notices.append(f"The PDF text visibility check completed on {len(visibility['examined_pages'])} of "
                                   f"{visibility['total_pages']} pages.")
+    if replacement:
+        pages = ", ".join(str(row["page"]) for row in replacement)
+        visibility_notices.append(f"Copyable text differs from the glyph text on PDF {'page' if len(replacement) == 1 else 'pages'} "
+                                  f"{pages}. Replacement text can include legitimate accessibility corrections.")
+    if replacement_incomplete:
+        visibility_notices.append(f"The PDF replacement text check completed on {len(visibility['replacement_examined_pages'])} of "
+                                  f"{visibility['total_pages']} pages.")
     if word_hidden:
         label = "run" if word_hidden == 1 else "runs"
         visibility_notices.append(f"The Word file marks {word_hidden} text {label} as hidden. "
@@ -298,7 +309,9 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
         headline = document_word_visibility.HEADLINE
     elif invisible:
         headline = document_pdf_visibility.ASSESSMENT_HEADLINE
-    elif visibility_incomplete:
+    elif replacement:
+        headline = document_pdf_visibility.REPLACEMENT_HEADLINE
+    elif visibility_incomplete or replacement_incomplete:
         headline = document_pdf_visibility.INCOMPLETE_HEADLINE
     elif partial_notice:
         headline = "Partially assessed: some document text remains unchecked"

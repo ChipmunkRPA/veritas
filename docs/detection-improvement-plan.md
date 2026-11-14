@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Single-upload writing context transfer](writing-local-context-transfer-2026-11-14.md)
+  tested 176 held rewrites. The existing primary context rule located
+  49 and both new combinations located zero at their frozen points.
+  The app now records when either core writing check was skipped,
+  along with the completed checks, in the evidence and exports.
+
 - [Independent sentence matching between drafts](writing-independent-anchor-transfer-2026-11-14.md)
   assessed 151 of 160 rewrites across news and abstracts, up from 25.
   The local opt-in found 13 exact rewrites, up from four, and did not

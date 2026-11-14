@@ -1,0 +1,50 @@
+{
+  "schema": "chipmunk.writing-check-coverage-app/1",
+  "checkout_minor_units": 999,
+  "checkout_currency": "USD",
+  "no_jobs_before_simulated_payment": true,
+  "devices": {
+    "cpu": {
+      "group": "609a9ac12a531dd7bd297edb9c32c987c509b0c43cb2363648d3ac58d36b522e",
+      "source_sha256": "d373dc064060143c6e8b22b5057f68a42fec606e2f4863548226a82f7e26b74e",
+      "family": "gemini-2.5-flash",
+      "truth": [
+        391,
+        463
+      ],
+      "document_outcome": "inconclusive",
+      "writing_check_coverage": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "skipped"
+      },
+      "same_status_in_api_and_json": true,
+      "same_status_in_standard_pdf": true,
+      "signed_replay_verified": true,
+      "learned_checks": {
+        "passage_classifier": "ok",
+        "writing_pattern_ratio": "skipped"
+      }
+    },
+    "mps": {
+      "group": "609a9ac12a531dd7bd297edb9c32c987c509b0c43cb2363648d3ac58d36b522e",
+      "source_sha256": "d373dc064060143c6e8b22b5057f68a42fec606e2f4863548226a82f7e26b74e",
+      "family": "gemini-2.5-flash",
+      "truth": [
+        391,
+        463
+      ],
+      "document_outcome": "inconclusive",
+      "writing_check_coverage": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "same_status_in_api_and_json": true,
+      "same_status_in_standard_pdf": true,
+      "signed_replay_verified": true,
+      "learned_checks": {
+        "passage_classifier": "ok",
+        "writing_pattern_ratio": "ok"
+      }
+    }
+  }
+}

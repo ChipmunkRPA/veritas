@@ -40,6 +40,7 @@ from app.engine.registry import TEXT_FINETUNE_DETECTOR, TEXT_PRIMARY_DETECTORS
 from app.engine.runner import StageContext
 from app.engine.stages import common, document_screening
 from app.evidence import (
+    document_check_coverage,
     document_invisible_characters,
     document_pdf_visibility,
     document_tracked_changes,
@@ -516,6 +517,10 @@ def publish(ctx: StageContext) -> dict[str, Any]:
     }
     if tracked := decoded.get(document_tracked_changes.KEY):
         result.manifest.sampling[document_tracked_changes.COMMITMENT] = canonical_hash(tracked)
+    if writing_checks := document_check_coverage.capture(
+        (ctx.outputs.get("detect") or {}).get("detectors", []), PRIMARY_DETECTORS, BINOCULARS_DETECTOR,
+    ):
+        result.manifest.sampling[document_check_coverage.KEY] = writing_checks
     if word_visibility := decoded.get("meta", {}).get(document_word_visibility.KEY):
         result.manifest.sampling[document_word_visibility.COMMITMENT] = canonical_hash(word_visibility)
     if invisible := document_invisible_characters.measure(decoded["text"], decoded["source_map"], decoded["meta"],

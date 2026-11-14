@@ -449,6 +449,10 @@ export interface DocumentEvidenceSet extends SetBase {
       locations: { text_offset: number; source_start: number; source_end: number; codepoint: string; looks_like?: string;
         body_path?: (number | 'row' | 'cell')[]; mime_part?: string }[] };
     checks?: { signal_ref: EvidenceRef; status: 'recorded' | 'partial' | 'context_not_recorded'; scored_windows: number; limitation?: string }[];
+    writing_check_coverage?: {
+      schema: 'document-writing-check-coverage/1';
+      checks: Partial<Record<'passage_classifier' | 'writing_pattern_ratio', 'completed' | 'not_applicable' | 'skipped' | 'failed' | 'timed_out'>>;
+    };
     ocr?: { status?: string; pages?: { page: number; status: string; coverage_scope?: 'image_region'; reason?: string | null; mean_recognition_confidence?: number;
       language?: { status?: string; language?: string; reason?: string }; [key: string]: unknown }[]; unchecked_pages?: number[] } | null
     email?: { body_part?: string; body_content_type?: 'text/plain' | 'text/html'; attachments?: unknown[]; [key: string]: unknown } | boolean | null }

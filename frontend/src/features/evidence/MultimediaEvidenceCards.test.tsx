@@ -38,6 +38,16 @@ const show = (set: MultimediaEvidenceSet, token = 'signed token', mediaReady = t
 afterEach(cleanup)
 
 describe('ordinary multimedia evidence', () => {
+  it('shows a skipped writing check on a result that has no highlighted passages', () => {
+    show({ ...document, packets: [], coverage: { writing_check_coverage: {
+      schema: 'document-writing-check-coverage/1',
+      checks: { passage_classifier: 'completed', writing_pattern_ratio: 'skipped' },
+    } } })
+    const section = within(screen.getByRole('region', { name: 'Writing check coverage' }))
+    expect(section.getByText('Passage classifier · Completed')).toBeTruthy()
+    expect(section.getByText('Writing-pattern ratio · Skipped')).toBeTruthy()
+  })
+
   it.each([
     [{ kind: 'docx', paragraph_index: 0, body_path: [0] }, /Word body paragraph 1/],
     [{ kind: 'email', mime_part: '1.2' }, /decoded email MIME part 1\.2/],

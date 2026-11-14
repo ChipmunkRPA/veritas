@@ -72,6 +72,7 @@ def public_result(result: dict) -> dict:
                 source_coverage[key] = commitment
     if result.get('kind') == 'document':
         from app.evidence import (
+            document_check_coverage,
             document_invisible_characters,
             document_passage_position,
             document_tracked_changes,
@@ -79,6 +80,8 @@ def public_result(result: dict) -> dict:
         )
         from app.evidence.email_alternatives import COMMITMENT, result_review
 
+        if writing_checks := document_check_coverage.from_result(result):
+            source_coverage[document_check_coverage.COMMITMENT] = document_check_coverage.commitment(writing_checks)
         if alternatives := result_review(result):
             source_coverage[COMMITMENT] = canonical_hash(alternatives)
         if position := document_passage_position.from_result(result):

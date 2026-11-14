@@ -26,6 +26,7 @@ from app.evidence import (
 )
 from app.evidence.audio_binding import SPEECH_SELECTION, SPEECH_SELECTION_COMMITMENT
 from app.evidence.av_binding import TIMING_COMMITMENT, TIMING_WINDOWS
+from app.evidence.document_check_coverage import COMMITMENT as WRITING_CHECK_COVERAGE
 from app.evidence.face_alignment_context import validate as validate_face_alignment
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.face_interval_binding import validate_packet as validate_face_interval
@@ -97,7 +98,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     _require(set(result) <= {'schema', 'is_projection', 'original_result_sha256', 'decision', 'findings', 'checks', 'note',
                              IMAGE_EDITOR_PREVIEW, face_return_coverage.COMMITMENT, email_alternatives.COMMITMENT,
                              face_short_window_binding.COMMITMENT, scene_return_binding.COMMITMENT,
-                             scene_return_binding.COVERAGE_COMMITMENT, WRITING_POSITION,
+                             scene_return_binding.COVERAGE_COMMITMENT, WRITING_POSITION, WRITING_CHECK_COVERAGE,
                              EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, WORD_TEXT_VISIBILITY,
                              IMAGE_INTERPOLATION, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
                              image_animation_binding.KEY,
@@ -261,6 +262,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              'Email body rendition commitments require document evidence')
     _require(analysis['kind'] == 'document' or WRITING_POSITION not in result,
              'Writing position commitments require document evidence')
+    _require(analysis['kind'] == 'document' or WRITING_CHECK_COVERAGE not in result,
+             'Writing check coverage commitments require document evidence')
     _require(analysis['kind'] == 'document' or WORD_TRACKED_CHANGES not in result,
              'Tracked Word edits require document evidence')
     _require(analysis['kind'] == 'document' or WORD_TEXT_VISIBILITY not in result,
@@ -271,6 +274,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              'Email classifier input commitments require document evidence')
     if analysis['kind'] == 'document':
         from app.evidence import (
+            document_check_coverage,
             document_email_contexts,
             document_passage_position,
             document_pdf_visibility,
@@ -284,6 +288,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         from app.evidence.document_repeat import validate as validate_repeated_passages
         from app.evidence.document_unselected_responses import validate as validate_unselected_responses
 
+        document_check_coverage.verify(evidence, result.get(document_check_coverage.COMMITMENT))
+        _require(evidence["source"].get(document_check_coverage.COMMITMENT) == result.get(document_check_coverage.COMMITMENT),
+                 "Writing check coverage differs from the public result commitment")
         validate_repeated_passages(evidence)
         document_percentage_consistency.validate(evidence)
         document_pdf_visibility.validate(evidence)

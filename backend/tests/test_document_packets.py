@@ -18,7 +18,7 @@ from sqlalchemy.orm import Session
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.text.extract import extract, text_hash
 from app.detectors.text.segment import segment
-from app.evidence import document_passage_coverage, document_unselected_responses
+from app.evidence import document_check_coverage, document_passage_coverage, document_unselected_responses
 from app.evidence.document_packets import (
     DocumentPacketIntegrityError,
     build_packet_set,
@@ -127,6 +127,33 @@ def test_frozen_contexts_are_bound_to_source_and_input_with_no_model_names(packe
     assert evidence["sha256"] == packet_hash(evidence)
     assert evidence["coverage"]["scored_windows"] == 3
     assert evidence["coverage"]["candidate_spans"] == 1
+
+
+def test_skipped_writing_check_is_bound_without_a_model_name_or_local_vote(packet_factory):
+    from app.reports.multimedia_evidence import _document_coverage_details
+
+    db, store, analysis, result, _, _ = packet_factory(scores=(.2, .1, .15))
+    record = document_check_coverage.capture([
+        {"detector_id": "txt.desklib", "status": "ok"},
+        {"detector_id": "txt.binoculars", "status": "skipped", "reason": "PRIVATE MODEL did not fit"},
+    ], {"txt.desklib"}, "txt.binoculars")
+    result["manifest"]["sampling"][document_check_coverage.KEY] = record
+    analysis.result_hash = canonical_hash(result)
+    evidence = build_packet_set(db, analysis, store, result)
+    assert evidence["packets"] == []
+    assert evidence["coverage"][document_check_coverage.KEY]["checks"] == {
+        "passage_classifier": "completed", "writing_pattern_ratio": "skipped",
+    }
+    assert evidence["source"][document_check_coverage.COMMITMENT] == canonical_hash(record)
+    notes = _document_coverage_details(evidence["coverage"])
+    assert "Writing-pattern ratio. Skipped." in notes
+    assert "PRIVATE MODEL" not in json.dumps(evidence) + repr(notes)
+    forged = deepcopy(evidence)
+    forged["coverage"][document_check_coverage.KEY]["checks"]["writing_pattern_ratio"] = "completed"
+    forged["sha256"] = packet_hash(forged)
+    with pytest.raises(DocumentPacketIntegrityError, match="invalid source commitments"):
+        validate_packet_set(forged, analysis_id=analysis.id, revision=analysis.revision,
+                            original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
 
 
 def test_short_email_maps_opposing_context_only_and_unassessed_quote_without_cards(packet_factory):

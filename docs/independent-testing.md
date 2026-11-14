@@ -13,6 +13,10 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [single-upload writing replay](writing-local-context-transfer-2026-11-14.md#replay)
+recomputes the two fits, calibration points, exact-location outcomes, and
+ordinary excerpt flags. It covers news, abstracts, and held-out essays.
+
 The [news and abstracts draft replay](writing-independent-anchor-transfer-2026-11-14.md#replay)
 recounts the additional exact locations, assessed coverage, and ordinary
 controls when individual sentences can be reviewed between supplied drafts.

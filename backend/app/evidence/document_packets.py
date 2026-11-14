@@ -24,6 +24,7 @@ from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
 from app.evidence import (
+    document_check_coverage,
     document_email_contexts,
     document_invisible_characters,
     document_matched_context,
@@ -330,6 +331,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
     if not isinstance(size, int) or size < 0 or document["source"].get("offset_unit") != "unicode_codepoint":
         raise DocumentPacketIntegrityError("Document evidence has no valid text coordinate space")
     try:
+        document_check_coverage.verify(document, document["source"].get(document_check_coverage.COMMITMENT))
         document_repeat.validate(document)
         document_percentage_consistency.validate(document)
         document_pdf_visibility.validate(document)
@@ -519,6 +521,9 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 "omitted_windows": max(0, len(candidates) - len(selected)), "limitations": []}
     if partially_checked := decoded["meta"].get("partially_checked_pages"):
         document["coverage"]["partially_checked_pages"] = partially_checked
+    if writing_checks := document_check_coverage.from_result(result):
+        document["coverage"][document_check_coverage.KEY] = writing_checks
+        document["source"][document_check_coverage.COMMITMENT] = document_check_coverage.commitment(writing_checks)
     if visibility := decoded["meta"].get(document_pdf_visibility.KEY):
         document["coverage"][document_pdf_visibility.KEY] = visibility
     if word_visibility := document_word_visibility.from_result(result):
@@ -710,6 +715,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             if document["source"].get(document_word_visibility.COMMITMENT) != document_word_visibility.from_result(result):
                 raise ValueError("Word visibility evidence differs from the published result")
             document_word_visibility.verify_source(document, decoded["meta"].get(document_word_visibility.KEY), frozen=True)
+            document_check_coverage.verify(document, document_check_coverage.commitment(document_check_coverage.from_result(result)))
             if document["source"].get(document_invisible_characters.COMMITMENT) != document_invisible_characters.from_result(result):
                 raise ValueError("Invisible-character evidence differs from the published result")
             document_invisible_characters.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])

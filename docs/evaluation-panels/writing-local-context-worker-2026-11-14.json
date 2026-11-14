@@ -1,0 +1,328 @@
+{
+  "no_jobs_before_simulated_payment": true,
+  "rows": [
+    {
+      "group": "414c1bbdfe7205cc6b7e732a163762d2af126a165477a2019fe34229f2dffd90",
+      "source_sha256": "1f1d4726b58ea2d26a70e222b35605f8d7a5103fa24d574763870ecc83fb0977",
+      "family": "original",
+      "truth": null,
+      "document_outcome": "inconclusive",
+      "passages": [
+        {
+          "focus": [
+            501,
+            592
+          ],
+          "spans": [
+            [
+              501,
+              592
+            ]
+          ],
+          "primary_support": false
+        }
+      ],
+      "primary_scores": [
+        "0x1.dc9c4da9003efp-6",
+        "0x1.46e4c0df58c09p-7",
+        "0x1.d2391d57ff9b5p-9",
+        "0x1.99392189bd838p-6",
+        "0x1.41f212d773190p-7"
+      ],
+      "learned_checks": {
+        "passage_classifier": "ok",
+        "writing_pattern_ratio": "ok"
+      }
+    },
+    {
+      "group": "414c1bbdfe7205cc6b7e732a163762d2af126a165477a2019fe34229f2dffd90",
+      "source_sha256": "c70c7e473d2507c58d54655e3c2c9c056126b8672c65bba47f457e3120451c3e",
+      "family": "gemini-2.5-flash",
+      "truth": [
+        212,
+        422
+      ],
+      "document_outcome": "inconclusive",
+      "passages": [],
+      "primary_scores": [
+        "0x1.dc9c4da9003efp-6",
+        "0x1.4906034f3fd93p-5",
+        "0x1.35ac8a3726070p-6",
+        "0x1.5d031055b8994p-7",
+        "0x1.41f212d773190p-7"
+      ],
+      "learned_checks": {
+        "passage_classifier": "ok",
+        "writing_pattern_ratio": "ok"
+      }
+    },
+    {
+      "group": "414c1bbdfe7205cc6b7e732a163762d2af126a165477a2019fe34229f2dffd90",
+      "source_sha256": "66720917d191be414e4d6375a3c2d542945a0b5f2cc4539eda390a83c34e9357",
+      "family": "gpt-5.4-nano",
+      "truth": [
+        212,
+        424
+      ],
+      "document_outcome": "inconclusive",
+      "passages": [
+        {
+          "focus": [
+            502,
+            593
+          ],
+          "spans": [
+            [
+              502,
+              593
+            ]
+          ],
+          "primary_support": false
+        }
+      ],
+      "primary_scores": [
+        "0x1.dc9c4da9003efp-6",
+        "0x1.dc69f8c21e1d2p-7",
+        "0x1.82235b4edb2f6p-8",
+        "0x1.b899392189bd8p-6",
+        "0x1.41f212d773190p-7"
+      ],
+      "learned_checks": {
+        "passage_classifier": "ok",
+        "writing_pattern_ratio": "ok"
+      }
+    },
+    {
+      "group": "609a9ac12a531dd7bd297edb9c32c987c509b0c43cb2363648d3ac58d36b522e",
+      "source_sha256": "afd9a05dd031c39bce74734c6559091241a62691a9af06b5320b5a273df35fee",
+      "family": "original",
+      "truth": null,
+      "document_outcome": "inconclusive",
+      "passages": [
+        {
+          "focus": [
+            0,
+            226
+          ],
+          "spans": [
+            [
+              0,
+              226
+            ],
+            [
+              227,
+              390
+            ]
+          ],
+          "primary_support": true
+        },
+        {
+          "focus": [
+            476,
+            527
+          ],
+          "spans": [
+            [
+              476,
+              527
+            ]
+          ],
+          "primary_support": false
+        }
+      ],
+      "primary_scores": [
+        "0x1.8fafea3df6db9p-1",
+        "0x1.8f8ad25679896p-3",
+        "0x1.3437c5692b3ccp-3",
+        "0x1.e3f78bbd38045p-4",
+        "0x1.b81908e581cf8p-2"
+      ],
+      "learned_checks": {
+        "passage_classifier": "ok",
+        "writing_pattern_ratio": "ok"
+      }
+    },
+    {
+      "group": "609a9ac12a531dd7bd297edb9c32c987c509b0c43cb2363648d3ac58d36b522e",
+      "source_sha256": "d373dc064060143c6e8b22b5057f68a42fec606e2f4863548226a82f7e26b74e",
+      "family": "gemini-2.5-flash",
+      "truth": [
+        391,
+        463
+      ],
+      "document_outcome": "inconclusive",
+      "passages": [
+        {
+          "focus": [
+            0,
+            226
+          ],
+          "spans": [
+            [
+              0,
+              226
+            ],
+            [
+              227,
+              390
+            ]
+          ],
+          "primary_support": true
+        },
+        {
+          "focus": [
+            227,
+            390
+          ],
+          "spans": [
+            [
+              0,
+              226
+            ],
+            [
+              227,
+              390
+            ],
+            [
+              391,
+              463
+            ]
+          ],
+          "primary_support": true
+        },
+        {
+          "focus": [
+            391,
+            463
+          ],
+          "spans": [
+            [
+              391,
+              463
+            ]
+          ],
+          "primary_support": true
+        },
+        {
+          "focus": [
+            464,
+            515
+          ],
+          "spans": [
+            [
+              464,
+              515
+            ]
+          ],
+          "primary_support": false
+        }
+      ],
+      "primary_scores": [
+        "0x1.8fafea3df6db9p-1",
+        "0x1.b51d4738a3b58p-1",
+        "0x1.82cc70867ad8ep-1",
+        "0x1.93a3ec02f2f98p-2",
+        "0x1.b81908e581cf8p-2"
+      ],
+      "learned_checks": {
+        "passage_classifier": "ok",
+        "writing_pattern_ratio": "ok"
+      }
+    },
+    {
+      "group": "609a9ac12a531dd7bd297edb9c32c987c509b0c43cb2363648d3ac58d36b522e",
+      "source_sha256": "14495ece678b02e535d41ddbc91efc4a77f55dc95c7b1ca19b9257b523c9aa14",
+      "family": "gpt-5.4-nano",
+      "truth": [
+        391,
+        474
+      ],
+      "document_outcome": "inconclusive",
+      "passages": [
+        {
+          "focus": [
+            0,
+            226
+          ],
+          "spans": [
+            [
+              0,
+              226
+            ],
+            [
+              227,
+              390
+            ]
+          ],
+          "primary_support": true
+        },
+        {
+          "focus": [
+            227,
+            390
+          ],
+          "spans": [
+            [
+              0,
+              226
+            ],
+            [
+              227,
+              390
+            ],
+            [
+              391,
+              474
+            ]
+          ],
+          "primary_support": true
+        },
+        {
+          "focus": [
+            391,
+            474
+          ],
+          "spans": [
+            [
+              227,
+              390
+            ],
+            [
+              391,
+              474
+            ],
+            [
+              475,
+              526
+            ]
+          ],
+          "primary_support": true
+        },
+        {
+          "focus": [
+            475,
+            526
+          ],
+          "spans": [
+            [
+              475,
+              526
+            ]
+          ],
+          "primary_support": false
+        }
+      ],
+      "primary_scores": [
+        "0x1.8fafea3df6db9p-1",
+        "0x1.6eb0531982880p-1",
+        "0x1.26bdb1a6d6990p-1",
+        "0x1.c6c2acb85a4f0p-3",
+        "0x1.b81908e581cf8p-2"
+      ],
+      "learned_checks": {
+        "passage_classifier": "ok",
+        "writing_pattern_ratio": "ok"
+      }
+    }
+  ]
+}

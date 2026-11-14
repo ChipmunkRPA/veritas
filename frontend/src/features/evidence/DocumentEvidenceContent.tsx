@@ -26,6 +26,14 @@ const emailInputRoles = [
   ['mixed', 'Mixed roles'], ['unmapped', 'Role unavailable'],
 ] as const
 
+const writingCheckLabels = {
+  completed: 'Completed',
+  not_applicable: 'Outside this check’s scope',
+  skipped: 'Skipped',
+  failed: 'Failed',
+  timed_out: 'Timed out',
+}
+
 function EmailInputScope({ scope }: { scope: EmailClassifierInputScope }) {
   return <section className="mt-4 rounded-md border border-border p-4" aria-labelledby="email-input-scope-title">
     <h3 id="email-input-scope-title" className="m-0 text-body font-medium">What the email writing checks read</h3>
@@ -344,6 +352,16 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         </ul>
         <p className="mt-2 mb-0 text-small text-text-muted">PDF accessibility and OCR corrections can legitimately change copyable text. This check carries zero AI-authorship weight.</p>
       </>}
+    </section>}
+    {set.coverage?.writing_check_coverage && <section className="mt-4 rounded-md border border-border p-4" aria-labelledby="writing-check-coverage-title">
+      <h3 id="writing-check-coverage-title" className="m-0 text-body font-medium">Writing check coverage</h3>
+      <ul className="mt-2 mb-0 list-disc pl-5 text-small">
+        {([['passage_classifier', 'Passage classifier'], ['writing_pattern_ratio', 'Writing-pattern ratio']] as const)
+          .map(([key, name]) => {
+            const state = set.coverage?.writing_check_coverage?.checks[key]
+            return state && <li key={key}>{name} · {writingCheckLabels[state]}</li>
+          })}
+      </ul>
     </section>}
     <DocumentInspectionMap packets={set.packets} selectedId={selectedId} onSelect={selectPassage} />
     <DocumentPassageCoverage coverage={set.coverage?.local_passage_coverage} />

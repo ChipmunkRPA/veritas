@@ -517,6 +517,7 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
 def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.text.extract import text_hash
     from app.evidence import (
+        document_check_coverage,
         document_email_contexts,
         document_invisible_characters,
         document_matched_context,
@@ -539,6 +540,11 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     )
     from app.evidence.document_repeat import verify_source as verify_repeated_passages
 
+    document_check_coverage.verify(document, document["source"].get(document_check_coverage.COMMITMENT))
+    if result is not None:
+        document_check_coverage.verify(
+            document, document_check_coverage.commitment(document_check_coverage.from_result(result)),
+        )
     source = document["source"]
     decoded = json.loads(_bytes(source["decode_sha256"], store))
     text, mapping = decoded["text"], decoded["source_map"]
@@ -753,13 +759,17 @@ def _invisible_characters_view(coverage: dict) -> dict | None:
 
 
 def _document_coverage_details(coverage: dict) -> list[str]:
-    from app.evidence import document_pdf_visibility, document_word_visibility
+    from app.evidence import document_check_coverage, document_pdf_visibility, document_word_visibility
 
     notes = [
         f"{check['signal_ref'].get('display_id') or 'Recorded check'}: {check['scored_windows']} local context(s) retained. "
         + check.get('limitation', 'Some input contexts were omitted by the bounded evidence capture; missing context is not a negative finding.')
         for check in coverage.get("checks", []) if check["status"] != "recorded"
     ]
+    checks = (coverage.get(document_check_coverage.KEY) or {}).get("checks", {})
+    for key, title in (("passage_classifier", "Passage classifier"), ("writing_pattern_ratio", "Writing-pattern ratio")):
+        if key in checks:
+            notes.append(f"{title}. {document_check_coverage.LABELS[checks[key]]}.")
     if review := coverage.get("matched_context_review"):
         notes.append(f"Short-passage review selected {review['selected_sentences']} of {review['eligible_sentences']} "
                      "eligible sentences. This evidence has zero weight in the overall assessment.")

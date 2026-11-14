@@ -77,6 +77,8 @@ paired native-16 kHz run, it establishes a difficult negative condition for
 the proposed expansion. It cannot attribute the false alerts to the sample
 rate itself or establish sensitivity on native 48 kHz synthetic files. The
 strong performance on re-rendered mixtures alone would miss this problem.
+The [matched 16 kHz follow-up](audio-background-rate-diagnostic-2026-11-13.md)
+reproduces the five flags on the same speakers at the app's 16 kHz rate.
 
 ## Local application and replay
 

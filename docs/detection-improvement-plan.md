@@ -60,6 +60,18 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- PDF text visibility checks up to 12 pages for searchable text that the PDF explicitly
+  does not draw. The evidence view, report and JSON retain page numbers and locations in
+  unrotated PDF coordinates. The presence of this layer withholds whole-document writing
+  confidence because extracted text can differ from the visible page. Searchable scans
+  can contain such a layer, so its presence supplies zero evidence of AI authorship.
+- [Matched-rate speech diagnostic](audio-background-rate-diagnostic-2026-11-13.md)
+  reproduced five false alerts on 12 genuine speakers in loud traffic at both native
+  48 kHz and the existing supported 16 kHz. The evidence view and PDF disclose this
+  concrete failure mode of the optional background-reduced check.
+- [Grammatical attachment changes](writing-dependency-transfer-2026-11-13.md)
+  added zero locations on 40 held sentence edits. A part-of-speech comparison added
+  one location and one false alert. Both remain experimental.
 - [JPEG75 and JPEG85 detail loss](image-jpeg-detail-quality-transfer-2026-11-13.md)
   adds 19 useful local blur ranges per format, without adding any highlight
   on 306 controls per format. It requires an earlier matching copy and

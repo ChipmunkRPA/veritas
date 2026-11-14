@@ -221,3 +221,13 @@ regexes = [
   '''^tokenizer\.json": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf"$''',
   '''^tokenizer_config\.json": "(?:06e673dd9251e2b2ba8a6e2fd15bd4f57de436ed43f02e757f20380952185080|d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432)"$''',
 ]
+
+[[rules.allowlists]]
+description = "Verified incumbent tokenizer SHA-256 values in the dependency study"
+condition = "AND"
+paths = ['''(^|/)docs/evaluation-panels/writing-dependency-transfer-2026-11-13\.json$''']
+regexTarget = "match"
+regexes = [
+  '''^tokenizer\.json": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf"$''',
+  '''^tokenizer_config\.json": "d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432"$''',
+]

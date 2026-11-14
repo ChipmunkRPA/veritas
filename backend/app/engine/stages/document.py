@@ -410,7 +410,7 @@ def unassessed_language_fusion(ctx: StageContext, doc: Document, sents: list[Sen
                    for row in common.LEGACY_ASSESSMENTS]
     profile = {**ctx.outputs["condition"]["profile"], "within_validated_envelope": False,
                "validation_support": "unsupported", "validation_measured_at": None}
-    profile["limiting_conditions"] = [*profile.get("limiting_conditions", []), reason]
+    profile["limiting_conditions"] = [*profile.get("limiting_conditions", []), language_scope.LIMITATION]
     return {"decision": decision, "signals": [], "assessments": assessments, "caveats": [reason], "calibration": [],
             "condition_profile": profile, "fusion": {"mode": "fallback", "reason": reason},
             "v1": {key: legacy[key] for key in ("verdict", "signals", "sentences", "stats", "document")}}

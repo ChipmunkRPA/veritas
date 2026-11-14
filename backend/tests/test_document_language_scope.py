@@ -171,6 +171,8 @@ def test_stage_guards_learned_checks_and_reports_unassessed_scope(packet_factory
     snapshot.result.update(frozen)
     view = customer_assessment(snapshot.result)
     assert view["headline"] == headline and view["meaning"] == reason and view["confidence_pct"] is None
+    assert view["scope_label"] == language_scope.ASSESSMENT_SCOPE
+    assert "No passage received an authorship score" in view["scope_note"]
     assert project(snapshot.result)["decision"]["verbal"] == headline
     analysis.result_hash = canonical_hash(snapshot.result)
     store.put_bytes(canonical_json(snapshot.result))

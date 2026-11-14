@@ -213,9 +213,12 @@ def _customer_assessment(result: Mapping[str, Any]) -> dict[str, Any]:
         from app.detectors.text import language_scope
 
         headline = decision.get("verbal")
-        document_limits = {document_pdf_visibility.ASSESSMENT_HEADLINE, *(msg[0] for msg in language_scope.MESSAGES.values())}
-        if headline in document_limits:
+        if headline == document_pdf_visibility.ASSESSMENT_HEADLINE:
             return {**answer, "headline": headline, "meaning": decision["reason"]}
+        if headline in {msg[0] for msg in language_scope.MESSAGES.values()}:
+            return {**answer, "headline": headline, "meaning": decision["reason"],
+                    "scope_label": language_scope.ASSESSMENT_SCOPE,
+                    "scope_note": "The language check ran on the extracted text. No passage received an authorship score."}
     if result.get("status") not in (None, "done") or not decision or decision.get("code") == "not_assessable":
         return answer
     if _unavailable_contributor(result):

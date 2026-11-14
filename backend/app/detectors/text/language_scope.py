@@ -10,6 +10,8 @@ from app.detectors.text.segment import Sentence
 
 KEY = "writing_language_scope"
 ENGLISH = "english"
+LIMITATION = "English writing could not be confirmed for statistical analysis"
+ASSESSMENT_SCOPE = "Writing-language coverage"
 MESSAGES = {
     "unsupported": ("Writing not assessed: English required",
                     "The extracted writing was identified as a language outside the current English coverage. "

@@ -77,6 +77,24 @@ def test_scope_and_exclusive_overlap_are_exact():
     assert not face_return.distinct(replace(candidate, end=23), table, None)
 
 
+def test_second_avc_range_keeps_exact_gap_and_distinct_review_scope():
+    from app.evidence.face_short_proposal_binding import AVC_METHOD, SECOND_AVC_METHOD
+
+    clock = {"time_base": "1/30000"}
+    shared = dict(clock, scheduled_frame_indices=[62, 71], shortlist_edges=[62, 71],
+                  shortlist_anchor_indices=[12], frame_inputs=[], scene_frame_inputs=[])
+    primary = dict(shared, method=AVC_METHOD, start_pts=62000, end_pts=68000)
+    second = dict(shared, method=SECOND_AVC_METHOD, start_pts=71000, end_pts=79000)
+    face_return_binding.validate_second(second, primary)
+    face_return_binding.validate_second(second, dict(primary, method=GUARDED_720P30_METHOD))
+    with pytest.raises(ValueError, match="too close"):
+        face_return_binding.validate_second(dict(second, start_pts=70999), primary)
+    with pytest.raises(ValueError, match="duplicates"):
+        face_return_binding.validate_second(second, primary, dict(clock, start_pts=72000, end_pts=80000))
+    with pytest.raises(ValueError, match="same native measurements"):
+        face_return_binding.validate_second(dict(second, shortlist_edges=[71]), primary)
+
+
 def test_second_dense_range_reuses_first_without_publishing_a_cut():
     base = table_for(25)
     table = replace(base, pts=base.pts[:120], pict_types=base.pict_types[:120],

@@ -114,6 +114,9 @@ The [paired shortlist replay](video-brief-face-paired-shortlist-2026-11-13.md#re
 recounts both approaches on 56 retained deliveries and verifies the
 presentation ticks of the selected intervals and before, during and
 after frames.
+The [second distinct face range replay](video-face-distinct-avc-2026-11-13.md#independent-replay)
+compares two search lengths and checks both the recorded decisions and
+original camera timestamps and images through a separate FFmpeg path.
 
 ### Reproduce the boundaries of four checks
 

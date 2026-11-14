@@ -16,6 +16,7 @@ from app.evidence.video_packet_versions import (
     FINE_SCENE_FACE_VERSION,
     GUARDED_720P30_FACE_VERSION,
     GUARDED_CODEC_FACE_VERSION,
+    SECOND_AVC_PROPOSAL_VERSION,
     SECOND_HD_FACE_VERSION,
     SECOND_SHORT_FACE_VERSION,
     SHORT_AVC_PROPOSAL_VERSION,
@@ -34,12 +35,15 @@ GUARDED_CODEC_METHOD = "face-short-return/5"
 GUARDED_720P30_METHOD = "face-short-return/6"
 SECOND_METHOD = "face-short-return/7"
 SECOND_HD_METHOD = "face-short-return/8"
+SECOND_AVC_METHOD = proposal.SECOND_AVC_METHOD
 SECOND_PRIOR_METHODS = frozenset({METHOD, DENSE_METHOD, FINE_SCENE_METHOD})
-SECOND_METHODS = frozenset({SECOND_METHOD, SECOND_HD_METHOD})
+SECOND_METHODS = frozenset({SECOND_METHOD, SECOND_HD_METHOD, SECOND_AVC_METHOD})
 SECOND_MIN_GAP = 2
-GUARDED_METHODS = frozenset({GUARDED_CODEC_METHOD, GUARDED_720P30_METHOD}) | SECOND_METHODS
-SECOND_BY_VERSION = {SECOND_SHORT_FACE_VERSION: SECOND_METHOD, SECOND_HD_FACE_VERSION: SECOND_HD_METHOD}
-PRIMARY_BY_SECOND = {SECOND_METHOD: SECOND_PRIOR_METHODS, SECOND_HD_METHOD: frozenset({GUARDED_720P30_METHOD})}
+GUARDED_METHODS = frozenset({GUARDED_CODEC_METHOD, GUARDED_720P30_METHOD, SECOND_METHOD, SECOND_HD_METHOD})
+SECOND_BY_VERSION = {SECOND_SHORT_FACE_VERSION: SECOND_METHOD, SECOND_HD_FACE_VERSION: SECOND_HD_METHOD,
+                     SECOND_AVC_PROPOSAL_VERSION: SECOND_AVC_METHOD}
+PRIMARY_BY_SECOND = {SECOND_METHOD: SECOND_PRIOR_METHODS, SECOND_HD_METHOD: frozenset({GUARDED_720P30_METHOD}),
+                     SECOND_AVC_METHOD: frozenset({GUARDED_720P30_METHOD, proposal.AVC_METHOD})}
 GUARDED_720P30_DIMENSIONS = (1280, 720)
 GUARDED_720P30_STEP = Fraction(1, 30)
 FINE_SCENE_FRAME_COUNT = 120
@@ -62,7 +66,7 @@ METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VE
                    SECOND_METHOD: SECOND_SHORT_FACE_VERSION, SECOND_HD_METHOD: SECOND_HD_FACE_VERSION,
                    proposal.METHOD: SHORT_PROPOSAL_VERSION, short_windows.METHOD: SHORT_WINDOW_VERSION,
                    carriers.METHOD: SHORT_CARRIER_VERSION, proposal.WEBM_METHOD: SHORT_WEBM_PROPOSAL_VERSION,
-                   proposal.AVC_METHOD: SHORT_AVC_PROPOSAL_VERSION}
+                   proposal.AVC_METHOD: SHORT_AVC_PROPOSAL_VERSION, SECOND_AVC_METHOD: SECOND_AVC_PROPOSAL_VERSION}
 WINDOW_METHODS = frozenset((short_windows.METHOD, carriers.METHOD))
 POINT = 0.10
 SCENE_POINT = 0.55
@@ -135,6 +139,19 @@ def validate_second(record, primary, *incumbents):
              "A second face range requires an earlier qualified brief face range")
     left, right = record["start_pts"], record["end_pts"]
     base = Fraction(record["time_base"])
+    if record["method"] == SECOND_AVC_METHOD:
+        a, b = primary["start_pts"], primary["end_pts"]
+        _require(primary["time_base"] == record["time_base"]
+                 and max(a - right, left - b) * base >= proposal.SECOND_AVC_GAP,
+                 "The second AVC face range is too close to the first brief range")
+        if primary["method"] == proposal.AVC_METHOD:
+            _require(all(record[key] == primary[key] for key in (
+                "scheduled_frame_indices", "shortlist_edges", "shortlist_anchor_indices", "frame_inputs",
+                "scene_frame_inputs",
+            )), "Two bounded AVC face ranges must use the same native measurements")
+        for other in incumbents:
+            validate_distinct(record, other)
+        return
     for other in (primary, *incumbents):
         if other is not None:
             _require(record["time_base"] == other["time_base"]

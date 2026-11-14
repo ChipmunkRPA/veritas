@@ -22,6 +22,7 @@ _REASONS = {
 }
 _FOLLOWUPS = ("dense_fallback", "fine_scene_fallback")
 BOUNDED = "bounded_proposal"
+SECOND_AVC = "second_avc"
 
 
 def _pass(status, reason, scheduled_frames, measured_face_frames, frame_count):
@@ -43,7 +44,7 @@ def _from_raw(raw, frame_count):
     return _pass(raw["status"], raw["reason"], raw["scheduled_frames"], raw["measured_face_frames"], frame_count)
 
 
-def from_worker(raw, frame_count, bounded=None):
+def from_worker(raw, frame_count, bounded=None, second_avc=None):
     """Keep separate passes so overlapping samples cannot inflate coverage."""
     passes = {}
     if raw is not None:
@@ -51,6 +52,8 @@ def from_worker(raw, frame_count, bounded=None):
                   **{name: _from_raw(raw[name], frame_count) for name in _FOLLOWUPS if name in raw}}
     if bounded is not None:
         passes[BOUNDED] = bounded
+    if second_avc is not None:
+        passes[SECOND_AVC] = second_avc
     return checked({"passes": passes, "observations": observations(passes), "affects_overall_confidence": False}, frame_count)
 
 
@@ -73,9 +76,9 @@ def checked(record, frame_count):
     if (not isinstance(record, dict) or set(record) != {"passes", "observations", "affects_overall_confidence"}
             or record["affects_overall_confidence"] is not False
             or not isinstance(record["passes"], dict) or not record["passes"].keys() & {"initial", BOUNDED}
-            or not record["passes"].keys() <= {"initial", *_FOLLOWUPS, BOUNDED}):
+            or not record["passes"].keys() <= {"initial", *_FOLLOWUPS, BOUNDED, SECOND_AVC}):
         raise ValueError("Invalid brief face-change coverage record")
-    legacy = {key: value for key, value in record["passes"].items() if key != BOUNDED}
+    legacy = {key: value for key, value in record["passes"].items() if key not in {BOUNDED, SECOND_AVC}}
     if BOUNDED in record["passes"]:
         _bounded(record["passes"][BOUNDED], frame_count)
     for measure in legacy.values():
@@ -84,8 +87,13 @@ def checked(record, frame_count):
         _pass(**measure, frame_count=frame_count)
     if legacy and ("initial" not in legacy or (len(legacy) > 1 and legacy["initial"]["status"] in {"not_applicable", "localized"})):
         raise ValueError("Brief face-change follow-up has no eligible initial scan")
-    if sum(measure["status"] == "localized" for measure in record["passes"].values()) > 1:
+    first_ranges = sum(measure["status"] == "localized" for key, measure in record["passes"].items() if key != SECOND_AVC)
+    if first_ranges > 1:
         raise ValueError("Brief face-change coverage reports conflicting passes")
+    if SECOND_AVC in record["passes"]:
+        _bounded(record["passes"][SECOND_AVC], frame_count)
+        if frame_count != 120 or first_ranges != 1:
+            raise ValueError("Second AVC face proposal needs a recorded first range")
     if record["observations"] != observations(record["passes"]):
         raise ValueError("Brief face-change wording differs from its measured coverage")
     return record
@@ -97,7 +105,7 @@ def from_result(result, frame_count=None):
         return None
     if frame_count is None:
         # Result projection has no video frame table. Portable evidence checks the real limit.
-        frame_count = 240
+        frame_count = 120 if SECOND_AVC in record.get("passes", {}) else 240
     return checked(record, frame_count)
 
 
@@ -105,20 +113,28 @@ def validate(document):
     record = (document.get("coverage") or {}).get(KEY)
     returns = [packet["face_return"] for packet in document["packets"]
                if packet.get("face_return") and packet["face_return"]["method"] not in {windows.METHOD,carriers.METHOD}]
-    proposed = [item for item in returns if item.get("method") in proposal.METHODS]
+    proposed = [item for item in returns if item["method"] in proposal.METHODS - {proposal.SECOND_AVC_METHOD}]
+    second = [item for item in returns if item["method"] == proposal.SECOND_AVC_METHOD]
     if proposed and (record is None or BOUNDED not in record["passes"]):
         raise ValueError("Brief face proposal is missing its measured coverage")
+    if second and (record is None or SECOND_AVC not in record["passes"]):
+        raise ValueError("Second AVC face proposal is missing its measured coverage")
     if record is not None:
         checked(record, document["source"]["frame_count"])
-        passes = any(item["status"] == "localized" for key,item in record["passes"].items() if key != BOUNDED)
+        passes = any(item["status"] == "localized" for key, item in record["passes"].items()
+                     if key not in {BOUNDED, SECOND_AVC})
         legacy = any(item.get("method") not in proposal.METHODS for item in returns)
         bounded = record["passes"].get(BOUNDED) or {}
         if passes != legacy or (bounded.get("status") == "localized") != bool(proposed):
             raise ValueError("Brief face-change coverage disagrees with the displayed ranges")
-        if proposed and (len(proposed) != 1 or bounded["pixel_frames"] != len(proposed[0]["scene_frame_inputs"])
-                or bounded["scheduled_frames"] != len(proposed[0]["scheduled_frame_indices"])
-                or bounded["measured_face_frames"] != len(proposed[0]["frame_inputs"])):
-            raise ValueError("Brief face proposal coverage differs from its measured source inputs")
+        followup = record["passes"].get(SECOND_AVC) or {}
+        if (followup.get("status") == "localized") != bool(second):
+            raise ValueError("Second AVC face coverage disagrees with the displayed ranges")
+        for items, coverage in ((proposed, bounded), (second, followup)):
+            if items and (len(items) != 1 or coverage["pixel_frames"] != len(items[0]["scene_frame_inputs"])
+                          or coverage["scheduled_frames"] != len(items[0]["scheduled_frame_indices"])
+                          or coverage["measured_face_frames"] != len(items[0]["frame_inputs"])):
+                raise ValueError("Brief face proposal coverage differs from its measured source inputs")
     return record
 
 
@@ -148,5 +164,10 @@ def observations(record):
             outcome = ("A brief face-change range was recorded." if item["status"] == "localized"
                        else "No distinct brief face-change range was found in this scan.")
         lines.append(f"Bounded native scan. {outcome} Motion inputs: {item['pixel_frames']} of 120 pictures. "
+                     f"Comparable face inputs: {item['measured_face_frames']} of {item['scheduled_frames']} scheduled pictures.")
+    if item := record.get(SECOND_AVC):
+        outcome = _REASONS.get(item["reason"]) or ("A separate range was recorded." if item["status"] == "localized"
+                                                  else "No separate range met the measurement rules.")
+        lines.append(f"Second brief face-change scan. {outcome} Motion inputs: {item['pixel_frames']} of 120 pictures. "
                      f"Comparable face inputs: {item['measured_face_frames']} of {item['scheduled_frames']} scheduled pictures.")
     return lines

@@ -597,7 +597,14 @@ def _with_spatial_cut(result, inputs, yunet, deadline):
 def _with_short_proposal(result, inputs, yunet, recognizer, deadline):
     if result.status in {'ok', 'not_applicable'} and _window_source(inputs):
         return _with_short_windows(result, inputs, yunet, recognizer, deadline)
-    if result.status in {'ok', 'not_applicable'} and not result.details.get("face_return"):
+    if result.status in {'ok', 'not_applicable'}:
+        primary = result.details.get("face_return")
+        if primary is not None:
+            if (settings.video_face_second_avc_review and _short_avc_source(inputs)
+                    and primary["method"] == GUARDED_720P30_METHOD and not result.details.get("face_return_secondary")):
+                _propose_short(result.details, inputs, yunet, recognizer, deadline,
+                               face_detail_repeat.original_range(result.details), proposal_method=proposal.AVC_METHOD)
+            return result
         proposal_method = (proposal.METHOD if _short_source(inputs)
                            else proposal.WEBM_METHOD if _short_webm_source(inputs)
                            else proposal.AVC_METHOD if _short_avc_source(inputs) else None)
@@ -727,7 +734,10 @@ def _with_short_windows(result, inputs, yunet, recognizer, deadline):
 def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, proposal_method=proposal.METHOD):
     coverage = {"status": "unassessed", "reason": "time_budget", "pixel_frames": 0,
                 "scheduled_frames": 0, "measured_face_frames": 0}
-    details["face_short_proposal_check"] = coverage
+    prior = details.get("face_return")
+    second_avc = proposal_method == proposal.AVC_METHOD and settings.video_face_second_avc_review
+    if prior is None:
+        details["face_short_proposal_check"] = coverage
     remaining = deadline.remaining() if deadline is not None else None
     budget = SHORT_PROPOSAL_BUDGET_S if remaining is None else min(SHORT_PROPOSAL_BUDGET_S, remaining-COARSE_RESULT_RESERVE_S)
     if budget <= 0:
@@ -768,6 +778,28 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
                     return True
         return False
 
+    def distinct_from_first(first):
+        def excluded_second(start, end):
+            gap = max(first["start_pts"] - table.pts[end], table.pts[start] - first["end_pts"])
+            return excluded(start, end) or gap * table.tb < proposal.SECOND_AVC_GAP
+        return excluded_second
+
+    def record(selection, record_method):
+        (negative, start, end), proof, gaps = selection
+        middle = min((i for i in faces if start <= i < end), key=lambda i: (abs(2*i-start-end), i))
+        encoding, carrier = proposal.SOURCE_PROFILES[record_method]
+        return {"method": record_method, "time_base": table.time_base, "source_first_pts": table.pts[0],
+                "source_encoding": list(encoding), "source_carrier": carrier,
+                "start_frame_index": start, "end_frame_index": end,
+                "start_pts": table.pts[start], "end_pts": table.pts[end],
+                "start_stream_s": table.seconds(start), "end_stream_s": table.seconds(end),
+                "response": -negative, "response_hex": (-negative).hex(), "edges": proof,
+                "return_hex": [value.hex() for value in gaps],
+                "anchors": dict(zip(paired.ROLES, (start-1, middle, end), strict=True)),
+                "scheduled_frame_indices": planned, "shortlist_edges": edges,
+                "shortlist_anchor_indices": anchor_indices, "frame_inputs": [faces[i][2] for i in sorted(faces)],
+                "scene_frame_inputs": [scene[i] for i in sorted(scene)]}
+
     try:
         read(proposal.PLAN, face=False, pixels=True)
         coverage["scheduled_frames"] = len(proposal.ANCHOR_SAMPLES)
@@ -780,34 +812,38 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
         planned = proposal.face_schedule(edges)
         coverage["scheduled_frames"] = len(planned)
         read(set(planned)-set(proposal.ANCHOR_SAMPLES), face=True, pixels=False)
-        selected = face_short_proposal.select(edges, faces, reduced, stop.check, excluded)
-        stop.check("brief face proposal")
+        if prior is None:
+            selected = face_short_proposal.select(edges, faces, reduced, stop.check, excluded)
+            stop.check("brief face proposal")
+            if selected is None:
+                coverage.update(status="no_distinct_range", reason=None)
+                return
+            prior = details["face_return"] = record(selected, proposal_method)
+            coverage.update(status="localized", reason=None)
+        if second_avc:
+            coverage.update(status="unassessed", reason="time_budget")
+            selected = face_short_proposal.select(edges, faces, reduced, stop.check, distinct_from_first(prior),
+                                                 durations=proposal.SECOND_AVC_DURATIONS)
+            stop.check("second brief face proposal")
+            if selected is not None:
+                details["face_return_secondary"] = record(selected, proposal.SECOND_AVC_METHOD)
+            coverage.update(status="localized" if selected is not None else "no_distinct_range", reason=None)
     except DecodeError:
-        if coverage["reason"] == "time_budget":
+        if coverage["status"] == "unassessed" and coverage["reason"] == "time_budget":
             coverage["reason"] = "incomplete_native_decode"
         return
     except DetectorTimeout:
         return
     except (cv2.error, ValueError):
-        coverage["reason"] = "native_measurement_unavailable"
+        if coverage["status"] == "unassessed":
+            coverage["reason"] = "native_measurement_unavailable"
         return
     finally:
         coverage.update(pixel_frames=len(reduced), measured_face_frames=len(faces))
-    if selected is None:
-        coverage.update(status="no_distinct_range", reason=None)
-        return
-    (negative, start, end), proof, gaps = selected
-    middle = min((i for i in faces if start <= i < end), key=lambda i: (abs(2*i-start-end), i))
-    encoding, carrier = proposal.SOURCE_PROFILES[proposal_method]
-    details["face_return"] = {"method": proposal_method, "time_base": table.time_base, "source_first_pts": table.pts[0],
-        "source_encoding": list(encoding), "source_carrier": carrier,
-        "start_frame_index": start, "end_frame_index": end,
-        "start_pts": table.pts[start], "end_pts": table.pts[end], "start_stream_s": table.seconds(start), "end_stream_s": table.seconds(end),
-        "response": -negative, "response_hex": (-negative).hex(), "edges": proof, "return_hex": [value.hex() for value in gaps],
-        "anchors": dict(zip(paired.ROLES,(start-1,middle,end),strict=True)), "scheduled_frame_indices": planned,
-        "shortlist_edges": edges, "shortlist_anchor_indices": anchor_indices,
-        "frame_inputs": [faces[i][2] for i in sorted(faces)], "scene_frame_inputs": [scene[i] for i in sorted(scene)]}
-    coverage.update(status="localized", reason=None)
+        if second_avc and prior is not None:
+            details["face_second_avc_check"] = coverage.copy()
+        if second_avc and prior is not None and details.get("face_short_proposal_check") is coverage:
+            coverage.update(status="localized", reason=None)
 
 
 class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
@@ -842,6 +878,9 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
              *((f'The enabled brief proposal reads 120 pixel inputs and measures at most {proposal.MAX_FACE_READS} face inputs.',)
                if settings.video_face_unrouted_short_review or settings.video_face_short_carrier_review
                or settings.video_face_short_avc_review else ()),
+             *(("The optional second H.264 range uses the same bounded measurements or runs one bounded pass after "
+                "the first guarded range within the remaining analysis time.",)
+               if settings.video_face_short_avc_review and settings.video_face_second_avc_review else ()),
              *(("The enabled overlapping review reads 240 native pictures and compares three bounded face input sets.",)
                if settings.video_face_short_window_review or settings.video_face_short_carrier_review else ()),
              *(("The enabled cut context reads up to 77 native pictures and detects at most three face boxes.",)

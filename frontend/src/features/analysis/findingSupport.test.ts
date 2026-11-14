@@ -162,6 +162,19 @@ describe('findingSupport', () => {
     expect(item.scopeNote).toContain('The end is exclusive.')
   })
 
+  it('links both brief face ranges to their own timestamps and original frames', () => {
+    const first = videoPacket({ face_return: { method: 'face-short-return/6', start_stream_s: 2.133333,
+      end_stream_s: 2.333333, frame_inputs: [{ frame_index: 66 }] } })
+    const second = videoPacket({ id: 'V02', face_return: { method: 'face-short-return/8', start_stream_s: 2.933333,
+      end_stream_s: 3.2, frame_inputs: [{ frame_index: 92 }] } })
+    const set = { ...video([first, second]), version: 'video-evidence-19' }
+    const { packets } = findingSupport({ analysisId, finding: finding(), signals: [signal()], evidence: set })
+    expect(packets.map((link) => [link.label, link.href])).toEqual([
+      ['V01 · Brief face-change range 2.133 s–2.333 s (source clock)', '/analyses/analysis-1/media-evidence?view=plain#media-evidence-V01'],
+      ['V02 · Brief face-change range 2.933 s–3.200 s (source clock)', '/analyses/analysis-1/media-evidence?view=plain#media-evidence-V02'],
+    ])
+  })
+
   it('routes nested video voice and timing packets to their own real packet hashes', () => {
     const set = nestedVideo()
     const voice = findingSupport({ analysisId, finding: finding({ id: 'F4' }), signals: [], evidence: set })

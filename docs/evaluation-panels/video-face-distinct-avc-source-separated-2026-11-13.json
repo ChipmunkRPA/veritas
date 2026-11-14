@@ -1,0 +1,2235 @@
+{
+  "freeze": {
+    "schema": "chipmunk.video-face-distinct-avc/1",
+    "panel": "fresh",
+    "design": {
+      "gap_frames": 3,
+      "point": 0.1,
+      "minimum_added_locations": 3,
+      "minimum_gained_groups": 2,
+      "maximum_wrong_ranges": 1,
+      "maximum_new_control_ranges": 1,
+      "maximum_genuine_speaker_or_cut_ranges": 0,
+      "durations": [
+        [
+          5,
+          6,
+          7
+        ],
+        [
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      ]
+    },
+    "models": {
+      "face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+      "face_recognition_sface_2021dec.onnx": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79"
+    },
+    "flags": {
+      "VERITAS_VIDEO_FACE_SECOND_RETURN_REVIEW": "true",
+      "VERITAS_VIDEO_FACE_DETAIL_REPEAT_REVIEW": "true",
+      "VERITAS_VIDEO_FACE_PAIRED_EDGE_REFINEMENT": "true",
+      "VERITAS_VIDEO_FACE_SPATIAL_CUT_CONTEXT": "true",
+      "VERITAS_VIDEO_FACE_UNROUTED_SHORT_REVIEW": "false",
+      "VERITAS_VIDEO_FACE_SHORT_CARRIER_REVIEW": "false",
+      "VERITAS_VIDEO_FACE_SHORT_WINDOW_REVIEW": "false",
+      "VERITAS_VIDEO_FACE_SHORT_AVC_REVIEW": "true"
+    },
+    "code": {
+      "video_face_distinct_avc.py": "94dc2cb56fe2e1efa229c4f89be6af48b4c4e2901c51803dd9d00be72092abbb",
+      "face_paired_edge.py": "6ed182fdf5d1bc6e809afdeef25e0b13c03453bfaf6a4ba1f67273b527f041a0",
+      "face_short_proposal.py": "cfefa6cd4630a49ac91cca6add59fb5187dd805a792a4bfad76da3f0d727089b",
+      "face_appearance.py": "c83a414a1a2d42508db2046ed19855b7dadd53781603bb2dc0353cff430179e5",
+      "video_brief_face_120_carrier.py": "9d3b96b9ee8a0c0c734480b927093b6a44970783c8ef68c2f5025ed2400dc7ef"
+    }
+  },
+  "rows": [
+    {
+      "sha256": "b5e03006acaa20019ebdfddc1b0cf52f96b39ee56a8eb73f14f265f4963f722b",
+      "group": 1,
+      "condition": "original",
+      "truth": [],
+      "index": 1,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        85,
+        84,
+        9,
+        86,
+        95,
+        94,
+        18,
+        64,
+        17,
+        8,
+        109,
+        10,
+        63,
+        65,
+        96,
+        108
+      ],
+      "scheduled": 54,
+      "measured": 54,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "806e25c8b7e5300afe48dd02adb1c2a42625eb7710192bc672bd58343067201b",
+      "group": 1,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          63,
+          69
+        ],
+        [
+          93,
+          101
+        ]
+      ],
+      "index": 2,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        64,
+        70
+      ],
+      "secondary": [
+        [
+          94,
+          102
+        ]
+      ],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        63,
+        93,
+        85,
+        86,
+        9,
+        84,
+        95,
+        69,
+        94,
+        101,
+        18,
+        8,
+        17,
+        10,
+        109,
+        64
+      ],
+      "scheduled": 63,
+      "measured": 63,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "35f2a0918d334dcc37a5fcc16906af94705dff5122837fe51d5b10ace36b498e",
+      "group": 1,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          63,
+          69
+        ],
+        [
+          93,
+          101
+        ]
+      ],
+      "index": 3,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        64,
+        70
+      ],
+      "secondary": [
+        [
+          94,
+          102
+        ]
+      ],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        63,
+        85,
+        93,
+        9,
+        86,
+        95,
+        84,
+        94,
+        18,
+        69,
+        17,
+        64,
+        109,
+        8,
+        10,
+        108
+      ],
+      "scheduled": 58,
+      "measured": 58,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "0db2a6f5782142afd04c8a6091f6d8fb86569d5236ce74eff838e1cccafa4cec",
+      "group": 1,
+      "condition": "swap_then_jump",
+      "truth": [
+        [
+          63,
+          69
+        ]
+      ],
+      "index": 4,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        64,
+        70
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        63,
+        85,
+        86,
+        84,
+        9,
+        69,
+        18,
+        8,
+        92,
+        17,
+        10,
+        64,
+        109,
+        108,
+        29,
+        28
+      ],
+      "scheduled": 63,
+      "measured": 63,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "9bcda0f8865b85aaa657f5b659b4b8990f593b78472feb97300f27a248c689c4",
+      "group": 1,
+      "condition": "light_then_swap",
+      "truth": [
+        [
+          93,
+          101
+        ]
+      ],
+      "index": 5,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        94,
+        102
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        63,
+        85,
+        93,
+        84,
+        86,
+        9,
+        95,
+        94,
+        64,
+        18,
+        101,
+        8,
+        17,
+        10,
+        108,
+        109
+      ],
+      "scheduled": 59,
+      "measured": 59,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "668892318ea5c531c21d16dfe0803b3e2c1282e79bcf31b4653f6de356b7306c",
+      "group": 1,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "index": 6,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        85,
+        86,
+        84,
+        9,
+        18,
+        63,
+        8,
+        92,
+        17,
+        10,
+        109,
+        108,
+        29,
+        28,
+        16,
+        87
+      ],
+      "scheduled": 58,
+      "measured": 58,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "c306bf466f8ef9319e7842dbc0aa5d3959747189e2bad70a6bf9ab1ecb07b1a7",
+      "group": 1,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "index": 7,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        85,
+        84,
+        9,
+        86,
+        18,
+        92,
+        17,
+        109,
+        8,
+        10,
+        28,
+        108,
+        29,
+        16,
+        107,
+        75
+      ],
+      "scheduled": 58,
+      "measured": 58,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "ebadcfa94b388d63b3966fc0e38018790f72ce98ed5e32010a3eb755027e049d",
+      "group": 2,
+      "condition": "original",
+      "truth": [],
+      "index": 8,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        66
+      ],
+      "scheduled": 17,
+      "measured": 17,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "72f11644aa59a881aa1d966d421319433861642cc74232a32fdf975df45ba44a",
+      "group": 2,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          69,
+          77
+        ],
+        [
+          96,
+          102
+        ]
+      ],
+      "index": 9,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        96,
+        102
+      ],
+      "secondary": [
+        [
+          70,
+          78
+        ]
+      ],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        96,
+        102,
+        69,
+        77,
+        66
+      ],
+      "scheduled": 35,
+      "measured": 35,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "7fc60bab349af5fbee8e07fe71ffb4de955df0f485acc3e98715cd76e94e3417",
+      "group": 2,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          69,
+          77
+        ],
+        [
+          96,
+          102
+        ]
+      ],
+      "index": 10,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        96,
+        102
+      ],
+      "secondary": [
+        [
+          70,
+          78
+        ]
+      ],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        96,
+        102,
+        69,
+        77,
+        66
+      ],
+      "scheduled": 35,
+      "measured": 35,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "df211c7d11dc786649f30a3708c62e871622540914edc98b6e6b985ce08f823f",
+      "group": 2,
+      "condition": "swap_then_jump",
+      "truth": [
+        [
+          69,
+          77
+        ]
+      ],
+      "index": 11,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        70,
+        78
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        69,
+        77,
+        66,
+        79
+      ],
+      "scheduled": 27,
+      "measured": 27,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "b60d615e1df18b91207bc975b5f4d01f3e24f570c1fc275f61d4e578038dd136",
+      "group": 2,
+      "condition": "light_then_swap",
+      "truth": [
+        [
+          96,
+          102
+        ]
+      ],
+      "index": 12,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        96,
+        102
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        96,
+        102,
+        66
+      ],
+      "scheduled": 27,
+      "measured": 27,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "ef84d279baf5b73609057eb96cf4db5450a7414acd36ff1a8b3497abc2dbf5c3",
+      "group": 2,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "index": 13,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [],
+      "scheduled": 12,
+      "measured": 12,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "58f76536b03ff936517163604a8e8d9bf8fd4ca06d5fe56f98b83a85a018fecf",
+      "group": 2,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "index": 14,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        66,
+        97
+      ],
+      "scheduled": 22,
+      "measured": 22,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "84b810933f01d598a950530131cb617014af7ee0920ad134167d034fe736b559",
+      "group": 3,
+      "condition": "original",
+      "truth": [],
+      "index": 15,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [],
+      "scheduled": 12,
+      "measured": 12,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "f1a04d73b80a8892521bd529f35f1c5072ceae635b4c1025c1f15f2f4f480ec9",
+      "group": 3,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          66,
+          72
+        ],
+        [
+          99,
+          107
+        ]
+      ],
+      "index": 16,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        100,
+        108
+      ],
+      "secondary": [
+        [
+          66,
+          72
+        ]
+      ],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        66,
+        72,
+        107,
+        99
+      ],
+      "scheduled": 33,
+      "measured": 33,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "493b6fef69978dfc72b5171c2aebc355a152f6b9bfc5bffc5c07bed17d42d12d",
+      "group": 3,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          66,
+          72
+        ],
+        [
+          99,
+          107
+        ]
+      ],
+      "index": 17,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        100,
+        108
+      ],
+      "secondary": [
+        [
+          66,
+          72
+        ]
+      ],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        66,
+        72,
+        107,
+        99
+      ],
+      "scheduled": 33,
+      "measured": 33,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "fb076187c8d0a2cb47dd565c057cbc315ca5415855a473aa77707ce4b02efbe1",
+      "group": 3,
+      "condition": "swap_then_jump",
+      "truth": [
+        [
+          66,
+          72
+        ]
+      ],
+      "index": 18,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        66,
+        72
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        99,
+        66,
+        72
+      ],
+      "scheduled": 28,
+      "measured": 28,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "1e05e82477e1fce4ab12f20190c6800b174baaadb65c30b5b7f2784b0639578b",
+      "group": 3,
+      "condition": "light_then_swap",
+      "truth": [
+        [
+          99,
+          107
+        ]
+      ],
+      "index": 19,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        100,
+        108
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        107,
+        99
+      ],
+      "scheduled": 23,
+      "measured": 23,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "e23a37f04b89ec929577625d4cf5696b5dd15053137bcdd94c675f1f432b270b",
+      "group": 3,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "index": 20,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        99,
+        72,
+        66
+      ],
+      "scheduled": 28,
+      "measured": 28,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "c617b4542c2cf6d5f82f5c6ff5fc00bd7f10124e0470dae83f967d7d149aff5d",
+      "group": 3,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "index": 21,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [],
+      "scheduled": 12,
+      "measured": 12,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "c8e8811f8673fcab109769217fce58c6cfca3b4521a7f975239e2036cfc26160",
+      "group": 4,
+      "condition": "original",
+      "truth": [],
+      "index": 22,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        108,
+        15,
+        57,
+        69
+      ],
+      "scheduled": 34,
+      "measured": 34,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "ec651ed86f53ddc6047c535177f35a6ed443d5fc2ee2e48072b03b6d868ef503",
+      "group": 4,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          71,
+          79
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 23,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        92,
+        98
+      ],
+      "secondary": [
+        [
+          72,
+          80
+        ]
+      ],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        71,
+        79,
+        97,
+        108,
+        91,
+        15,
+        57,
+        69,
+        58
+      ],
+      "scheduled": 54,
+      "measured": 54,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "957003e52b3293b2ac63787beca61819c8df6f11f57de13c0d4333ddaf518b6c",
+      "group": 4,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          71,
+          79
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 24,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        92,
+        98
+      ],
+      "secondary": [
+        [
+          72,
+          80
+        ]
+      ],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        71,
+        79,
+        97,
+        108,
+        15,
+        91,
+        57,
+        69,
+        58
+      ],
+      "scheduled": 54,
+      "measured": 54,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "180622ca1859b7a3ca9cee41d87c153557b0583674450cb401505daa505b9edf",
+      "group": 4,
+      "condition": "swap_then_jump",
+      "truth": [
+        [
+          71,
+          79
+        ]
+      ],
+      "index": 25,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        72,
+        80
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        71,
+        79,
+        108,
+        15,
+        57,
+        69,
+        34,
+        8
+      ],
+      "scheduled": 53,
+      "measured": 53,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "d9880256a2caaf9ce40fd5b17df4ad198e3cf3b062d04266b1a0a2d960920b21",
+      "group": 4,
+      "condition": "light_then_swap",
+      "truth": [
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 26,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        92,
+        98
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        97,
+        108,
+        91,
+        15,
+        57,
+        69
+      ],
+      "scheduled": 45,
+      "measured": 45,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "9b7f7fd5eae4a8e83435501e3e5500060f1562f9302d256010b52bf6bba52b92",
+      "group": 4,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "index": 27,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        108,
+        15,
+        57,
+        69,
+        34,
+        8
+      ],
+      "scheduled": 45,
+      "measured": 45,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "1b50c699755d716b428a76993fc9d41936a5d646533a6ae9fa878f744ae531fe",
+      "group": 4,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "index": 28,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        69,
+        108,
+        15,
+        57,
+        90,
+        34
+      ],
+      "scheduled": 45,
+      "measured": 45,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "5a3e80ce45a43ea11f9927db046aa527b0aa4ee40a39d87671a41fc2232b84b8",
+      "group": 5,
+      "condition": "original",
+      "truth": [],
+      "index": 29,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        111,
+        112,
+        110,
+        69,
+        113,
+        67,
+        18,
+        89,
+        68,
+        88,
+        19,
+        17,
+        6,
+        77,
+        70,
+        7
+      ],
+      "scheduled": 53,
+      "measured": 53,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "47ef5191e1d2e4679561a37aa70a310acca7da330e2b3dddfe2d3e950221af0f",
+      "group": 5,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          63,
+          69
+        ],
+        [
+          93,
+          101
+        ]
+      ],
+      "index": 30,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        69,
+        111,
+        112,
+        110,
+        113,
+        101,
+        18,
+        89,
+        19,
+        88,
+        77,
+        17,
+        6,
+        7,
+        95,
+        68
+      ],
+      "scheduled": 63,
+      "measured": 63,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "95ba2f7a71630d1c36916a8de5555ea8d6df0bbbb8312dbb287072f4577e10fc",
+      "group": 5,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          63,
+          69
+        ],
+        [
+          93,
+          101
+        ]
+      ],
+      "index": 31,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        69,
+        111,
+        112,
+        110,
+        113,
+        89,
+        101,
+        18,
+        17,
+        88,
+        19,
+        114,
+        6,
+        7,
+        78,
+        70
+      ],
+      "scheduled": 60,
+      "measured": 60,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "dbc3c4da098785eb3e9bf56506ebe0bf7d35da5722af1e3f165fbe5935913351",
+      "group": 5,
+      "condition": "swap_then_jump",
+      "truth": [
+        [
+          63,
+          69
+        ]
+      ],
+      "index": 32,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        93,
+        69,
+        111,
+        112,
+        110,
+        113,
+        18,
+        89,
+        88,
+        19,
+        6,
+        17,
+        70,
+        77,
+        7,
+        68
+      ],
+      "scheduled": 56,
+      "measured": 54,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "d690441e1605692dfcabb14222fb7bf6dcb1bf78e3913aea71f855e1ff71b948",
+      "group": 5,
+      "condition": "light_then_swap",
+      "truth": [
+        [
+          93,
+          101
+        ]
+      ],
+      "index": 33,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        94,
+        102
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        69,
+        111,
+        112,
+        110,
+        113,
+        101,
+        18,
+        68,
+        89,
+        67,
+        88,
+        19,
+        6,
+        70,
+        17,
+        77
+      ],
+      "scheduled": 58,
+      "measured": 58,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "fba4692bf2f72a016059fe7b2abee3fc3958b23f65149cb99827af16e1b787b8",
+      "group": 5,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "index": 34,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        93,
+        111,
+        112,
+        110,
+        113,
+        70,
+        89,
+        18,
+        88,
+        6,
+        17,
+        77,
+        7,
+        19,
+        109,
+        114
+      ],
+      "scheduled": 56,
+      "measured": 55,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "9c27346d269916077062552aa299f5cc161d4d670377511167d233788092ee71",
+      "group": 5,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "index": 35,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        111,
+        70,
+        112,
+        89,
+        110,
+        90,
+        113,
+        91,
+        18,
+        88,
+        19,
+        6,
+        77,
+        17,
+        7,
+        114
+      ],
+      "scheduled": 54,
+      "measured": 54,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "00c27af2f3b08ed4d470838c6bf197d013513abefbca087fed9c4dab9fa49992",
+      "group": 6,
+      "condition": "original",
+      "truth": [],
+      "index": 36,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        90,
+        53,
+        12
+      ],
+      "scheduled": 28,
+      "measured": 28,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "d79179201cdaf7cf3ea468d2b6e919c55163de80423ffbaf0323c0ec2252a98b",
+      "group": 6,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          69,
+          77
+        ],
+        [
+          96,
+          102
+        ]
+      ],
+      "index": 37,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        96,
+        102
+      ],
+      "secondary": [
+        [
+          70,
+          78
+        ]
+      ],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        102,
+        69,
+        96,
+        77,
+        90,
+        53,
+        12
+      ],
+      "scheduled": 49,
+      "measured": 49,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "9ec0cc85144822cf6aea546264ef4a7cf0469fd9a4dc54082f979beb76f08db0",
+      "group": 6,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          69,
+          77
+        ],
+        [
+          96,
+          102
+        ]
+      ],
+      "index": 38,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        96,
+        102
+      ],
+      "secondary": [],
+      "bounded_first": {
+        "frames": [
+          96,
+          102
+        ],
+        "response": 0.2742032289415074,
+        "pts": [
+          96000,
+          102000
+        ],
+        "anchors": [
+          {
+            "frame_index": 95,
+            "pts": 95000,
+            "decoded_rgb_sha256": "ac4fc51c22941cb519facffdd6224c78a56f2ddad087ead12701ebec5fb74170",
+            "aligned_rgb_sha256": "d515ecd229e174dd0acea49f8bb59b5260f496769d433c439fd2f33e658b08b5"
+          },
+          {
+            "frame_index": 99,
+            "pts": 99000,
+            "decoded_rgb_sha256": "4c44dedf6678498c5228ba2f54dd3754ff600aa6c6f5e3991abb1450aaae17e9",
+            "aligned_rgb_sha256": "8b0015ed05f3544f0441b474d5ee7f35c6045648d483112066324d03ba8c865d"
+          },
+          {
+            "frame_index": 102,
+            "pts": 102000,
+            "decoded_rgb_sha256": "6d87f3adcb607b5a049eb8da352a3e2b1a1dd1d0d2d579aef277d4719ff77bc3",
+            "aligned_rgb_sha256": "445c4c6a135fe93a4d6ebcc4b6c164bc65dcef2b0478b83900589e66f82553c5"
+          }
+        ]
+      },
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        102,
+        69,
+        96,
+        77,
+        90,
+        89
+      ],
+      "scheduled": 40,
+      "measured": 39,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "6385520900ab9a6e89b010c56c06481d3c548f6848510bdf9d315429abb4e5bf",
+      "group": 6,
+      "condition": "swap_then_jump",
+      "truth": [
+        [
+          69,
+          77
+        ]
+      ],
+      "index": 39,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        70,
+        78
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        69,
+        77,
+        90,
+        53,
+        12
+      ],
+      "scheduled": 39,
+      "measured": 39,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "f2ba7b95cfb34592d7f334183ba8953866edce049e766bc553ab0e213a08fb74",
+      "group": 6,
+      "condition": "light_then_swap",
+      "truth": [
+        [
+          96,
+          102
+        ]
+      ],
+      "index": 40,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        96,
+        102
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        102,
+        96,
+        90,
+        53,
+        12
+      ],
+      "scheduled": 38,
+      "measured": 38,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "387bbb1e504f981db80c1021e681035361de046ea6292eea0a62a3e56ac4ca99",
+      "group": 6,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "index": 41,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        77,
+        69,
+        90,
+        53,
+        75,
+        12
+      ],
+      "scheduled": 41,
+      "measured": 41,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "57fc4a5926c2b0a76f83ac68aaea09a89a8d5a8f217b25043f88917279d83687",
+      "group": 6,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "index": 42,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        90,
+        53,
+        106,
+        103,
+        12,
+        105
+      ],
+      "scheduled": 36,
+      "measured": 36,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "64a9bc5163fea210a3097fc60d65b01b2520d3626ea1f074cb2fb16d17242061",
+      "group": 7,
+      "condition": "original",
+      "truth": [],
+      "index": 43,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        50
+      ],
+      "scheduled": 18,
+      "measured": 18,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "1787b4369fdd4c73e6011ad2b62c23de6e544d77c175d41bfab7f4a58566ae64",
+      "group": 7,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          66,
+          72
+        ],
+        [
+          99,
+          107
+        ]
+      ],
+      "index": 44,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        100,
+        108
+      ],
+      "secondary": [
+        [
+          66,
+          72
+        ]
+      ],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        107,
+        99,
+        72,
+        50
+      ],
+      "scheduled": 34,
+      "measured": 34,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "f0a1799aa971fb1695fde938efcbcf99985c445113c31f3b61d203cef125fa37",
+      "group": 7,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          66,
+          72
+        ],
+        [
+          99,
+          107
+        ]
+      ],
+      "index": 45,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        100,
+        108
+      ],
+      "secondary": [
+        [
+          66,
+          72
+        ]
+      ],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        107,
+        99,
+        66,
+        72,
+        50
+      ],
+      "scheduled": 39,
+      "measured": 39,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "d12d19d076c5472b60fd01f2bc75c8a22e1fbc085cadcaff12ace38aa38ff0ff",
+      "group": 7,
+      "condition": "swap_then_jump",
+      "truth": [
+        [
+          66,
+          72
+        ]
+      ],
+      "index": 46,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        66,
+        72
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        72,
+        107,
+        50
+      ],
+      "scheduled": 28,
+      "measured": 28,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "fa52bb69760aedf690ae1be8c77f90a942d616b61f7d741a9af47e2b5ec5c33d",
+      "group": 7,
+      "condition": "light_then_swap",
+      "truth": [
+        [
+          99,
+          107
+        ]
+      ],
+      "index": 47,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        100,
+        108
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        99,
+        107,
+        50
+      ],
+      "scheduled": 29,
+      "measured": 29,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "662e614150c15394358e04942917a51164b222eb4d1fcfa18889aafc548644fe",
+      "group": 7,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "index": 48,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        107,
+        50,
+        72,
+        99
+      ],
+      "scheduled": 34,
+      "measured": 34,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "9f700b1e85a98205fe7e6c8c7fa653b8c4db0b10823a080caf2625f1d14be7fc",
+      "group": 7,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "index": 49,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        67,
+        68,
+        50
+      ],
+      "scheduled": 24,
+      "measured": 24,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "a773902bc412385df7427949bc3cd0c099fb18d9288da714b60f4fdbe48ab739",
+      "group": 8,
+      "condition": "original",
+      "truth": [],
+      "index": 50,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        36,
+        65,
+        27,
+        6,
+        28,
+        66,
+        29
+      ],
+      "scheduled": 35,
+      "measured": 35,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "ad1d2a0493c082f33de80da7e9db647ed52c1487124c207cc0bf4cf8a3c2378f",
+      "group": 8,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          71,
+          79
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 51,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        92,
+        98
+      ],
+      "secondary": [
+        [
+          72,
+          80
+        ]
+      ],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        97,
+        91,
+        79,
+        71,
+        36,
+        65,
+        6,
+        27,
+        28,
+        29
+      ],
+      "scheduled": 57,
+      "measured": 57,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "9ded7406081c9de91c76a74f774ac9a8b5783dfcfd65eef84577f9b60043d0bc",
+      "group": 8,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          71,
+          79
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 52,
+      "bank": "source_separated",
+      "coarse": [
+        71,
+        95
+      ],
+      "refined": [
+        72,
+        95
+      ],
+      "first": [
+        92,
+        98
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": {
+          "frames": [
+            71,
+            79
+          ],
+          "response": 0.22424379330459454,
+          "pts": [
+            71000,
+            79000
+          ],
+          "anchors": [
+            {
+              "frame_index": 70,
+              "pts": 70000,
+              "decoded_rgb_sha256": "fe7ade2f6d71a3d98ad958120ecdfb2a620d345adf5f6c80e04b81df35c56d40",
+              "aligned_rgb_sha256": "441867f2c8fe934230d21c4c5d98b231165d4c88cb107fa9c5e49affad1c0635"
+            },
+            {
+              "frame_index": 74,
+              "pts": 74000,
+              "decoded_rgb_sha256": "b7e4a5f432d9aab5292bf0e4abde18503112bee21aa78e6de3b55b47a8fba103",
+              "aligned_rgb_sha256": "f3eb144b648bc760360068e5e022a21dea7abe181c4f63c65b08f44ee58e5e37"
+            },
+            {
+              "frame_index": 79,
+              "pts": 79000,
+              "decoded_rgb_sha256": "5a21d48b7e6f5ea07b7aeb5b4a11e9ad9224000737821e5750e2115c0aa0944e",
+              "aligned_rgb_sha256": "5c94e6d451e9b0b71ec4e2fb6309fcd74c0eb73d27498129a7f351aa479ef3b5"
+            }
+          ]
+        }
+      },
+      "edges": [
+        97,
+        91,
+        79,
+        71,
+        65,
+        36,
+        6,
+        27,
+        28
+      ],
+      "scheduled": 56,
+      "measured": 56,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "da0af090b9be76bfcf19cb3f9f9685de576324ee558c6e861cb6ffd68f6f767b",
+      "group": 8,
+      "condition": "swap_then_jump",
+      "truth": [
+        [
+          71,
+          79
+        ]
+      ],
+      "index": 53,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        72,
+        80
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        79,
+        71,
+        36,
+        65,
+        27,
+        6,
+        28,
+        29
+      ],
+      "scheduled": 46,
+      "measured": 46,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "0d203dfc0c1e624a9111538231717fda248a04a490701b3b35023ef9f7b7395b",
+      "group": 8,
+      "condition": "light_then_swap",
+      "truth": [
+        [
+          91,
+          97
+        ]
+      ],
+      "index": 54,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": [
+        92,
+        98
+      ],
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        97,
+        91,
+        36,
+        65,
+        27,
+        6,
+        28,
+        29
+      ],
+      "scheduled": 45,
+      "measured": 45,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "16d93bdd51b6c1d5dec4fbc8b2e2ff7cbc6a5c7135cf3b0dd7f1e68d506377fa",
+      "group": 8,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "index": 55,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        36,
+        65,
+        6,
+        27,
+        28
+      ],
+      "scheduled": 33,
+      "measured": 33,
+      "time_base": "1/30000",
+      "first_pts": 0
+    },
+    {
+      "sha256": "9aecfeb8bf5d36a9c323a079cfdc6d8594d7a751ef7f7e50ae1e031f00706c35",
+      "group": 8,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "index": 56,
+      "bank": "source_separated",
+      "coarse": null,
+      "refined": null,
+      "first": null,
+      "secondary": [],
+      "bounded_first": null,
+      "extras": {
+        "five_to_seven": null,
+        "five_to_nine": null
+      },
+      "edges": [
+        36,
+        65,
+        27,
+        6,
+        28
+      ],
+      "scheduled": 33,
+      "measured": 33,
+      "time_base": "1/30000",
+      "first_pts": 0
+    }
+  ],
+  "result": {
+    "baseline": {
+      "edited": 32,
+      "ordinary": 24,
+      "ordinary_with_current_ranges": 0,
+      "two_edits_known": 16,
+      "two_edits_currently_located": 12,
+      "routed": 17,
+      "current_useful": 41,
+      "known_edits": 48
+    },
+    "candidates": {
+      "five_to_seven": {
+        "counts": {
+          "selected": 0,
+          "added_locations": 0,
+          "gained_groups": 0,
+          "wrong_ranges": 0,
+          "new_control_ranges": 0,
+          "new_genuine_speaker_or_cut_ranges": 0,
+          "new_complete_dual": 0,
+          "exact_additions": 0
+        },
+        "gate": false
+      },
+      "five_to_nine": {
+        "counts": {
+          "selected": 1,
+          "added_locations": 1,
+          "gained_groups": 1,
+          "wrong_ranges": 0,
+          "new_control_ranges": 0,
+          "new_genuine_speaker_or_cut_ranges": 0,
+          "new_complete_dual": 1,
+          "exact_additions": 1
+        },
+        "gate": false
+      }
+    }
+  }
+}

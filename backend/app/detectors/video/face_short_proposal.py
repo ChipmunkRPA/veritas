@@ -31,11 +31,11 @@ def shortlist(reduced, anchor_boxes, check):
     return kept
 
 
-def select(edge_candidates, values, reduced, check, excluded):
+def select(edge_candidates, values, reduced, check, excluded, *, durations=proof.DURATIONS):
     edges = face_paired_edge.appearance_edges(edge_candidates, values, reduced, check)
     ranked = []
     for start, entry in edges.items():
-        for length in proof.DURATIONS:
+        for length in durations:
             stop = start + length
             if stop not in edges or excluded(start, stop):
                 continue

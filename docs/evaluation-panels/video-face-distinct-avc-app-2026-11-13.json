@@ -1,0 +1,55 @@
+{
+  "cases": {
+    "g1-cross_recording_cuts.mp4": {
+      "additional_ranges": 0,
+      "assessment_retained": true,
+      "second_scan": "not_run"
+    },
+    "g1-two_swaps.mp4": {
+      "additional_ranges": 1,
+      "assessment_retained": true,
+      "exact_source_images": 12,
+      "pdf_json_and_source_verified": true,
+      "second_scan": "localized",
+      "source_frames": [
+        [
+          61,
+          65,
+          68
+        ],
+        [
+          89,
+          94,
+          98
+        ]
+      ]
+    },
+    "g2-swap_then_jump.mp4": {
+      "additional_ranges": 0,
+      "assessment_retained": true,
+      "second_scan": "no_distinct_range"
+    },
+    "g2-tandem_two_swaps.mp4": {
+      "additional_ranges": 1,
+      "assessment_retained": true,
+      "exact_source_images": 12,
+      "pdf_json_and_source_verified": true,
+      "second_scan": "localized",
+      "source_frames": [
+        [
+          66,
+          72,
+          76
+        ],
+        [
+          93,
+          97,
+          100
+        ]
+      ]
+    }
+  },
+  "default_off": true,
+  "simulated_paid_runs": 8,
+  "unpaid_jobs": 0
+}

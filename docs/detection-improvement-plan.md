@@ -169,6 +169,12 @@ are not public screening promises or calibrated population probabilities.
   The app and Standard PDF now show the six source frames compared at
   each boundary, matching the JSON. Simulated checkout and signed replay
   verified those lists on both encodes of the known edit.
+- [A second distinct H.264 face range](video-face-distinct-avc-2026-11-13.md)
+  adds 10 exact locations on the retained bank and one on the separate
+  eight-source panel, with no additional ordinary flags on 103 controls
+  across both runs. The wider search is a local opt-in. The source-separated
+  test fell short of the confirmation gate. Both ranges and coverage
+  replayed through prepaid local analysis, JSON, PDF and signed originals.
 - [JPEG75 and JPEG85 detail loss](image-jpeg-detail-quality-transfer-2026-11-13.md)
   adds 19 useful local blur ranges per format, without adding any highlight
   on 306 controls per format. It requires an earlier matching copy and

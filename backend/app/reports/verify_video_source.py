@@ -43,7 +43,7 @@ from app.evidence import (
     scene_return_binding,
 )
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
-from app.evidence.face_return_binding import DENSE_ENCODING, FINE_SCENE_METHOD, GUARDED_METHODS
+from app.evidence.face_return_binding import DENSE_ENCODING, FINE_SCENE_METHOD, GUARDED_720P30_METHOD, GUARDED_METHODS
 from app.evidence.face_return_binding import validate_packet as validate_face_return
 from app.evidence.source_geometry import pixel_bounds
 from app.evidence.video_packet_versions import (
@@ -54,6 +54,7 @@ from app.evidence.video_packet_versions import (
     SECOND_HD_FACE_VERSION,
     SECOND_SHORT_FACE_VERSION,
     SHORT_AVC_PROPOSAL_VERSION,
+    SECOND_AVC_PROPOSAL_VERSION,
     SHORT_CARRIER_VERSION,
     SHORT_PROPOSAL_VERSION,
     SHORT_WEBM_PROPOSAL_VERSION,
@@ -230,10 +231,14 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     source = evidence["source"]
     encoding = None
     delivery = None
+    second_avc = evidence["version"] == SECOND_AVC_PROPOSAL_VERSION
+    first_return = next((packet["face_return"] for packet in evidence["packets"] if packet.get("face_return")), {})
+    avc_with_guarded_first = second_avc and first_return.get("method") == GUARDED_720P30_METHOD
     guarded_codec = evidence["version"] in {
         GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_FACE_VERSION, SECOND_SHORT_FACE_VERSION, SECOND_HD_FACE_VERSION,
-    }
-    proposal = evidence["version"] in {SHORT_PROPOSAL_VERSION, SHORT_WEBM_PROPOSAL_VERSION, SHORT_AVC_PROPOSAL_VERSION}
+    } or avc_with_guarded_first
+    expected_proposals = (1 if avc_with_guarded_first else 2) if second_avc else int(
+        evidence["version"] in {SHORT_PROPOSAL_VERSION, SHORT_WEBM_PROPOSAL_VERSION, SHORT_AVC_PROPOSAL_VERSION})
     windowed = evidence["version"] == SHORT_WINDOW_VERSION
     carrier_windows = evidence["version"] == SHORT_CARRIER_VERSION
     paired = evidence["version"] in {PAIRED_EDGE_VERSION, SHORT_PROPOSAL_VERSION, SPATIAL_CUT_VERSION}
@@ -260,8 +265,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if not face_short_proposal_binding.webm_source(table, (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag")),
                                                        face_return.source_carrier(original)):
             raise ValueError("The original video differs from its brief WebM face-review source profile")
-    if evidence["version"] == SHORT_AVC_PROPOSAL_VERSION:
+    if evidence["version"] in {SHORT_AVC_PROPOSAL_VERSION, SECOND_AVC_PROPOSAL_VERSION}:
         delivery = probe_container(original, include_codec_tag=True)
+        encoding = delivery.get("codec"), delivery.get("pix_fmt")
         if not face_short_proposal_binding.avc_source(table, (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag")),
                                                       face_return.source_carrier(original)):
             raise ValueError("The original video differs from its brief H.264 face-review source profile")
@@ -484,7 +490,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         _verify_guarded_scene(record, background_frames)
     for record in paired_records:
         _verify_paired_motion(record, {row["frame_index"]:paired_pixels[row["frame_index"]] for row in record["scene_frame_inputs"]})
-    if len(proposal_records) != int(proposal):
+    if len(proposal_records) != expected_proposals:
         raise ValueError("The original video evidence version disagrees with its brief face proposal")
     for record in proposal_records:
         _verify_paired_motion(record, paired_pixels, proposal=True)
@@ -510,7 +516,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             + (" Recomputed 4 guarded background boundaries and verified the source carrier." if len(guarded_records) == 2 else
                " Recomputed both guarded background boundaries and verified the source carrier." if guarded_codec else "")
             + (" Recomputed both paired face boundary motion measurements and verified the source carrier." if paired_records else "")
-            + (" Recomputed the bounded face shortlist and both near-head motion boundaries." if proposal_records else "")
+            + (" Recomputed the bounded face shortlist and both near-head motion boundaries for each reported proposal."
+               if second_avc else " Recomputed the bounded face shortlist and both near-head motion boundaries."
+               if proposal_records else "")
             + (" Recomputed each carrier-qualified window shortlist and both native face boundaries." if carrier_windows and window_records else "")
             + (" Recomputed each overlapping window shortlist and both native face boundaries." if windowed and window_records else "")
             + (" Recomputed the surrounding-picture cut context and both native boundaries." if cut_records else "")

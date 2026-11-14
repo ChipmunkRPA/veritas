@@ -1213,7 +1213,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         bounded = details.get("face_short_proposal_check")
         if coverage is not None or bounded is not None:
             count = len(ctx.outputs["probe"]["frame_table"]["pts"])
-            result.manifest.sampling[face_return_coverage.KEY] = face_return_coverage.from_worker(coverage, count, bounded=bounded)
+            result.manifest.sampling[face_return_coverage.KEY] = face_return_coverage.from_worker(
+                coverage, count, bounded=bounded, second_avc=details.get("face_second_avc_check"))
         if windows := details.get("face_short_windows_check"):
             coverage = face_short_window_binding.coverage(windows) | (details.get("face_short_windows_source") or {})
             result.manifest.sampling[face_short_window_binding.KEY] = face_short_window_binding.checked(coverage, len(ctx.outputs["probe"]["frame_table"]["pts"]))

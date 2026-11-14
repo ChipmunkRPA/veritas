@@ -18,6 +18,7 @@ WORD_BOUNDARY_SCHEMA = "chipmunk.paired-writing-review/4"
 INTERIOR_SCHEMA = "chipmunk.paired-writing-review/5"
 MULTIPLE_SCHEMA = "chipmunk.paired-writing-review/6"
 INDEPENDENT_SCHEMA = "chipmunk.paired-writing-review/7"
+WORD_INDEPENDENT_SCHEMA = "chipmunk.paired-writing-review/8"
 ANCHORED_DRAFT_SCHEMA = "chipmunk.document-revision-comparison/7"
 MAX_REVISIONS = 4
 MULTIPLE_SCOPE = ("Checks separate changed sentences in short English text drafts. Each comparison requires its own "
@@ -25,6 +26,11 @@ MULTIPLE_SCOPE = ("Checks separate changed sentences in short English text draft
 INDEPENDENT_SCOPE = (
     "Only the listed changed sentences were matched between drafts using two unchanged neighbors. Other edits may "
     "remain unchecked. The responses are uncalibrated and carry zero authorship confidence weight."
+)
+WORD_INDEPENDENT_SCOPE = (
+    "Only the listed sentences were matched. Each changed sentence and its two unchanged neighbors share one "
+    "top-level Word paragraph in each draft. Other body text, tables and headers may remain unchecked. "
+    "The responses are uncalibrated and carry zero authorship confidence weight."
 )
 # Second-highest genuine work response in the frozen paired center transfer.
 BOUNDARY_POINT = 0.12844311183234092
@@ -85,7 +91,7 @@ def _source(text: str):
     return document, segment(document)
 
 
-def _word_context_locations(spans: list[list[int]], layout: WordParagraphs) -> list[dict] | None:
+def _word_context_locations(spans: list[list[int]], layout: WordParagraphs, *, same_paragraph=False) -> list[dict] | None:
     locations = []
     for start, end in spans:
         matches = [(paragraph, index, start - lo, end - lo) for paragraph, index, lo, hi in layout
@@ -95,7 +101,8 @@ def _word_context_locations(spans: list[list[int]], layout: WordParagraphs) -> l
         paragraph, index, local_start, local_end = matches[0]
         locations.append({"paragraph": paragraph, "body_index": index, "start": local_start, "end": local_end})
     first, last = locations[0], locations[-1]
-    if last["paragraph"] != first["paragraph"] + 1 or last["body_index"] != first["body_index"] + 1:
+    step = 0 if same_paragraph else 1
+    if last["paragraph"] != first["paragraph"] + step or last["body_index"] != first["body_index"] + step:
         return None
     return locations
 
@@ -339,9 +346,12 @@ def refine_wording(comparison: dict, earlier: str, later: str) -> dict:
     return comparison
 
 
-def independently_anchored_revisions(comparison: dict, earlier: str, later: str) -> list[PairedInput]:
+def independently_anchored_revisions(comparison: dict, earlier: str, later: str, *,
+                                     word_layouts: WordLayouts | None = None) -> list[PairedInput]:
     """Map one changed sentence without requiring unrelated revisions to share its layout."""
-    if comparison["format"] != "plain_text" or comparison.get("relocated_passages"):
+    word = comparison["format"] == "docx"
+    if (comparison["format"] not in {"plain_text", "docx"} or (word and word_layouts is None)
+            or comparison.get("relocated_passages")):
         return []
     old, new = _source(earlier), _source(later)
     if old is None or new is None:
@@ -376,6 +386,13 @@ def independently_anchored_revisions(comparison: dict, earlier: str, later: str)
     for i, j in positions:
         before, old_input = _context(old_doc, old_units[i - 1:i + 2], earlier)
         after, new_input = _context(new_doc, new_units[j - 1:j + 2], later)
+        if word:
+            assert word_layouts is not None
+            for side, layout in zip((before, after), word_layouts, strict=True):
+                locations = _word_context_locations(side["context_spans"], layout, same_paragraph=True)
+                if locations is None:
+                    return []
+                side["context_paragraphs"] = locations
         old_tokens = tokens(earlier, [(before["start"], before["end"])])
         new_tokens = tokens(later, [(after["start"], after["end"])])
         local_changes = differences(old_tokens, new_tokens)
@@ -388,7 +405,7 @@ def independently_anchored_revisions(comparison: dict, earlier: str, later: str)
 
 
 def multiple_result(candidates: list[PairedInput], measured: list[list[dict] | None] | None = None, *,
-                    independent: bool = False) -> dict:
+                    independent: bool = False, draft_format: str = "plain_text") -> dict:
     if not candidates or (measured is not None and len(measured) != len(candidates)):
         raise ValueError("Expected individually mapped paired revisions")
     reviews = []
@@ -400,11 +417,15 @@ def multiple_result(candidates: list[PairedInput], measured: list[list[dict] | N
         reviews.append(review)
     increases = sum(row["status"] == "joint_increase" for row in reviews)
     checked = sum(row["status"] != "unavailable" for row in reviews)
-    return {"schema": INDEPENDENT_SCHEMA if independent else MULTIPLE_SCHEMA,
+    schema, scope = MULTIPLE_SCHEMA, MULTIPLE_SCOPE
+    if independent:
+        schema, scope = ((WORD_INDEPENDENT_SCHEMA, WORD_INDEPENDENT_SCOPE) if draft_format == "docx"
+                         else (INDEPENDENT_SCHEMA, INDEPENDENT_SCOPE))
+    return {"schema": schema,
             "status": "joint_increase" if increases else
             "no_joint_increase" if checked == len(candidates) else "unavailable",
             "summary": f"Checked {checked} of {len(candidates)} mapped revisions. Both writing responses increased at {increases}.",
-            "scope": INDEPENDENT_SCOPE if independent else MULTIPLE_SCOPE,
+            "scope": scope,
             "authorship_confidence_contribution": 0, "revisions": reviews}
 
 
@@ -480,15 +501,16 @@ def verify(comparison: dict, earlier: str, later: str, recorded: dict, *,
            word_layouts: WordLayouts | None = None) -> str:
     """Rebuild the source scope and check saved response arithmetic without inference."""
     schema = recorded.get("schema")
-    if schema in (MULTIPLE_SCHEMA, INDEPENDENT_SCHEMA):
-        independent = schema == INDEPENDENT_SCHEMA
-        candidates = (independently_anchored_revisions(comparison, earlier, later) if independent
+    if schema in (MULTIPLE_SCHEMA, INDEPENDENT_SCHEMA, WORD_INDEPENDENT_SCHEMA):
+        independent = schema in (INDEPENDENT_SCHEMA, WORD_INDEPENDENT_SCHEMA)
+        candidates = (independently_anchored_revisions(comparison, earlier, later, word_layouts=word_layouts) if independent
                       else separate_revisions(comparison, earlier, later))
         revisions = recorded.get("revisions")
         if (not isinstance(revisions, list) or len(revisions) != len(candidates) or not candidates
                 or any(not isinstance(row, dict) for row in revisions)):
             raise ValueError("The draft comparison does not contain all mapped revisions")
-        expected = multiple_result(candidates, [row.get("responses") for row in revisions], independent=independent)
+        expected = multiple_result(candidates, [row.get("responses") for row in revisions], independent=independent,
+                                   draft_format=comparison["format"])
         if json.dumps(recorded, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
             raise ValueError("Mapped revisions differ from the source positions or saved responses")
         return expected["status"]

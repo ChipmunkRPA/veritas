@@ -86,7 +86,8 @@ def _paired(review: dict | None) -> str:
               f'<p>{escape(review["scope"])}</p>']
     for number, revision in enumerate(review.get("revisions", ()), 1):
         heading = f"Changed sentence {number}"
-        output.append(f'<h2>{heading}</h2><p>{escape(STATUS_TEXT[revision["status"]])}</p>')
+        output.append(f'<section class="word-paired-change"><h2>{heading}</h2>'
+                      f'<p>{escape(STATUS_TEXT[revision["status"]])}</p>')
         if change_ids := revision.get("change_ids"):
             links = ", ".join(f'<a href="#draft-change-{escape(value)}">{escape(value)}</a>' for value in change_ids)
             output.append(f'<p class="coordinates">Linked wording changes {links}</p>')
@@ -94,9 +95,12 @@ def _paired(review: dict | None) -> str:
             item = revision[side]
             changed_tokens = [span for change in revision.get("wording_changes", ())
                               for span in change[f"{side}_changed_tokens"]]
-            output.append(_side(f"{label} sentence", item | {"changed_tokens": changed_tokens}))
+            paragraphs = item.get("context_paragraphs")
+            output.append(_side(f"{label} sentence", item | {"changed_tokens": changed_tokens,
+                                                             "paragraphs": [paragraphs[1]] if paragraphs else []}))
         for i, row in enumerate(revision.get("responses", ()), 1):
             output.append(f'<p>Check {i} · {row["earlier"]:.4g} → {row["later"]:.4g}</p>')
+        output.append("</section>")
     if review.get("responses"):
         links = ", ".join(f'<a href="#draft-change-{escape(value)}">{escape(value)}</a>' for value in review["change_ids"])
         output.append(f'<p class="coordinates">Linked wording changes {links}</p>')

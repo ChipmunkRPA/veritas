@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [Word draft replay](document-word-independent-anchor-2026-11-14.md#replay)
+checks two Word renderings of 216 earlier-draft pairs. It verifies the
+paragraph positions and the input equality needed to reuse the previously
+recorded responses. The same page links a portable single-upload
+conditional-loss experiment on false flags and missed edits.
+
 The [video mouth-hold speech replay](video-mouth-hold-speech-context-2026-11-14.md#replay)
 recounts 165 windows across genuine speech, edited speech and matched
 background-only recordings. It reconstructs the measured speech duration

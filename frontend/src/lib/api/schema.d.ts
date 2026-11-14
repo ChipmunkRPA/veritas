@@ -3640,7 +3640,7 @@ export interface components {
              * Schema
              * @enum {string}
              */
-            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2" | "chipmunk.paired-writing-review/3" | "chipmunk.paired-writing-review/4" | "chipmunk.paired-writing-review/5" | "chipmunk.paired-writing-review/6" | "chipmunk.paired-writing-review/7";
+            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2" | "chipmunk.paired-writing-review/3" | "chipmunk.paired-writing-review/4" | "chipmunk.paired-writing-review/5" | "chipmunk.paired-writing-review/6" | "chipmunk.paired-writing-review/7" | "chipmunk.paired-writing-review/8";
             /** Scope */
             scope: string;
             /**

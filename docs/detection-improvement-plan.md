@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Independently matched Word revisions](document-word-independent-anchor-2026-11-14.md)
+  retain 13 useful rewrite locations and zero flags on mapped ordinary
+  revisions in the version with an extra paragraph. The app, PDF and JSON
+  show each side's exact Word coordinates. The separate conditional-loss
+  experiment reduced ordinary flags while losing useful single-upload
+  locations, so it stays offline.
+
 - [Speech activity during a video mouth hold](video-mouth-hold-speech-context-2026-11-14.md)
   measured speech in 40/60 rain- or train-masked intervals versus zero by
   periodicity, with zero speech observations on 30 environmental-only

@@ -160,15 +160,22 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
           </span>)}
         </p>}
         <div className="mt-2 grid gap-4 sm:grid-cols-2">
-          {(['earlier', 'later'] as const).map(side => <div key={side}>
-            <p className="m-0 font-mono text-caption text-text-muted">
-              {side === 'earlier' ? 'Earlier' : 'Analyzed'} sentence [{revision[side].start}, {revision[side].end})
-            </p>
-            <p className="mt-1 mb-0 whitespace-pre-wrap break-words text-small">
-              <MarkedExcerpt excerpt={{ ...revision[side],
-                changed_tokens: revision.wording_changes?.flatMap(change => change[`${side}_changed_tokens`]) ?? [] }} />
-            </p>
-          </div>)}
+          {(['earlier', 'later'] as const).map(side => {
+            const sentence = revision[side]
+            const location = sentence.context_paragraphs?.[1]
+            return <div key={side}>
+              <p className="m-0 font-mono text-caption text-text-muted">
+                {side === 'earlier' ? 'Earlier' : 'Analyzed'} sentence [{sentence.start}, {sentence.end})
+              </p>
+              {location && <p className="mt-1 mb-0 font-mono text-caption text-text-muted">
+                Paragraph {location.paragraph} [{location.start}, {location.end})
+              </p>}
+              <p className="mt-1 mb-0 whitespace-pre-wrap break-words text-small">
+                <MarkedExcerpt excerpt={{ ...sentence,
+                  changed_tokens: revision.wording_changes?.flatMap(change => change[`${side}_changed_tokens`]) ?? [] }} />
+              </p>
+            </div>
+          })}
         </div>
         {revision.responses?.map((response, i) => <p key={i} className="mt-1 mb-0 text-caption">
           Check {i + 1} · {response.earlier.toPrecision(4)} → {response.later.toPrecision(4)}

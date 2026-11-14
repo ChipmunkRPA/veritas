@@ -155,7 +155,7 @@ class DraftPairedCheck(BaseModel):
     schema_name: Literal[
         "chipmunk.paired-writing-review/1", "chipmunk.paired-writing-review/2",
         "chipmunk.paired-writing-review/3", "chipmunk.paired-writing-review/4", "chipmunk.paired-writing-review/5",
-        "chipmunk.paired-writing-review/6", "chipmunk.paired-writing-review/7",
+        "chipmunk.paired-writing-review/6", "chipmunk.paired-writing-review/7", "chipmunk.paired-writing-review/8",
     ] = Field(alias="schema")
     status: Literal["outside_scope", "unavailable", "no_joint_increase", "joint_increase"]
     scope: str
@@ -356,12 +356,12 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
             if candidate is None and settings.document_paired_separate_review:
                 separate = paired.separate_revisions(comparison, old_text, new_text)
                 if not separate and settings.document_paired_independent_review:
-                    separate = paired.independently_anchored_revisions(comparison, old_text, new_text)
+                    separate = paired.independently_anchored_revisions(comparison, old_text, new_text, word_layouts=word_layouts)
                     independent = bool(separate)
             center_responses = neighboring_responses = None
             if separate:
                 comparison["paired_check"] = paired.multiple_result(
-                    separate, paired.score_separate(separate), independent=independent,
+                    separate, paired.score_separate(separate), independent=independent, draft_format=draft_format,
                 )
             elif candidate is not None and candidate.across_paragraphs:
                 responses, center_responses = paired.score_boundary(candidate)
@@ -375,7 +375,7 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
         except Exception as error:
             log.warning("document_revision.paired_check_unavailable", exception=type(error).__name__)
             comparison["paired_check"] = (
-                paired.multiple_result(separate, independent=independent) if separate
+                paired.multiple_result(separate, independent=independent, draft_format=draft_format) if separate
                 else paired.result(candidate, draft_format=draft_format)
             )
     check = comparison.get("paired_check", {})

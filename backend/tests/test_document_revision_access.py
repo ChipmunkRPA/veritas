@@ -1335,6 +1335,58 @@ def test_independent_draft_review_preserves_other_edits_and_checks_its_own_range
         review(comparison_file, older, newer)
 
 
+def test_independent_word_draft_maps_the_changed_sentence_after_an_inserted_paragraph(reference_http, monkeypatch, tmp_path):
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_detector_mode", "candidate")
+    monkeypatch.setattr(settings, "text_window_sentences", 3)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    monkeypatch.setattr(settings, "document_paired_separate_review", True)
+    monkeypatch.setattr(settings, "document_paired_independent_review", True)
+    before = "Staff listed the inspection dates in a long table."
+    after = "The reviewers documented the dates of each inspection."
+    prefix = "The audit included reports from eight regional offices. "
+    tail = " The records are kept at the city office."
+
+    def word(center, *, extra=False):
+        document = Document()
+        document.add_paragraph("The meeting took place on Monday morning. The clerk shared the early schedule.")
+        if extra:
+            document.add_paragraph("The visitors left at three after discussing the next review.")
+        document.add_paragraph(prefix + center + tail)
+        stream = BytesIO()
+        document.save(stream)
+        return stream.getvalue()
+
+    old, new = word(before), word(after, extra=True)
+    _saved(f, "independent-word", ".docx", new)
+    monkeypatch.setattr(paired, "score_separate", lambda _: [[{"earlier": .2, "later": .5}, {"earlier": .3, "later": .8}]])
+    payload = f.client.post(_url("independent-word"), headers=f.viewer, files=_upload(old, ".docx"),
+                            data={"include_paired_check": "true", "include_pdf": "true"}).json()
+    comparison = payload["comparison"]
+    check = comparison["paired_check"]
+    assert check["schema"] == paired.WORD_INDEPENDENT_SCHEMA and check["authorship_confidence_contribution"] == 0
+    revision, = check["revisions"]
+    assert revision["earlier"]["text"] == before and revision["later"]["text"] == after
+    assert [revision[side]["context_paragraphs"][1] for side in ("earlier", "later")] == [
+        {"paragraph": i, "body_index": i - 1, "start": len(prefix), "end": len(prefix) + len(text)}
+        for i, text in ((2, before), (3, after))
+    ]
+    assert any("visitors" in change["later"]["text"] for change in comparison["changes"] if change["later"])
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as report:
+        text = " ".join(" ".join(page.get_text().split()) for page in report)
+        assert "Experimental paired writing check" in text
+        assert f"Paragraph 3 [{len(prefix)}, {len(prefix) + len(after)})" in text
+    earlier, later, export = (tmp_path / name for name in ("earlier.docx", "later.docx", "output.json"))
+    earlier.write_bytes(old)
+    later.write_bytes(new)
+    export.write_text(json.dumps(comparison))
+    assert review(export, earlier, later)["paired_word_sentence_ranges_verified"] == 6
+    revision["later"]["context_paragraphs"][1]["body_index"] -= 1
+    export.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="Mapped revisions differ"):
+        review(export, earlier, later)
+
+
 def test_adjacent_sentence_pair_uses_exact_text_exports_and_preserves_legacy_replay(reference_http, monkeypatch, tmp_path):
     f = _install(reference_http, monkeypatch)
     monkeypatch.setattr(settings, "text_detector_mode", "candidate")

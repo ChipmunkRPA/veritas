@@ -94,10 +94,10 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
         result["paired_scope_and_saved_response_arithmetic"] = verify(
             expected, old_text, new_text, paired, word_layouts=word_layouts,
         )
-        if "context_paragraphs" in paired.get("earlier", {}):
-            result["paired_word_sentence_ranges_verified"] = sum(
-                len(paired[side]["context_paragraphs"]) for side in ("earlier", "later")
-            )
+        word_ranges = sum(len(revision.get(side, {}).get("context_paragraphs", ()))
+                          for revision in (paired, *paired.get("revisions", ())) for side in ("earlier", "later"))
+        if word_ranges:
+            result["paired_word_sentence_ranges_verified"] = word_ranges
     return result
 
 

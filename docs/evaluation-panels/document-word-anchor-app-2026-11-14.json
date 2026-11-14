@@ -1,0 +1,113 @@
+{
+  "cases": {
+    "generated": {
+      "paragraphs": [
+        {
+          "earlier": {
+            "body_index": 0,
+            "end": 191,
+            "paragraph": 1,
+            "start": 13
+          },
+          "later": {
+            "body_index": 1,
+            "end": 211,
+            "paragraph": 2,
+            "start": 13
+          }
+        },
+        {
+          "earlier": {
+            "body_index": 1,
+            "end": 253,
+            "paragraph": 2,
+            "start": 180
+          },
+          "later": {
+            "body_index": 2,
+            "end": 267,
+            "paragraph": 3,
+            "start": 180
+          }
+        }
+      ],
+      "plain_text_sha256": [
+        "9d8f2bee4caa16ada4052f4e0a0563a6d08ecbedea09ee3952c1987169b2dc93",
+        "fdcbeb6acd428d0ea5484e6cd44ba7cb4c878265e33018b174a454904337f9ed"
+      ],
+      "status_with_fallback": "joint_increase",
+      "status_without_fallback": "outside_scope",
+      "verified": {
+        "body_paragraph_ranges_verified": 14,
+        "changed_token_ranges_verified": 45,
+        "changes_by_role": {
+          "body": 7
+        },
+        "coordinate_space": "docx_body_unicode_codepoint",
+        "paired_scope_and_saved_response_arithmetic": "joint_increase",
+        "paired_word_sentence_ranges_verified": 12,
+        "source_hashes_verified": 2
+      },
+      "word_sha256": [
+        "c5f77f482df54879739dc571463fe17cc8efb2c4fe2dc508c8bcc9b8cf64c59d",
+        "45e74fc87304f91256e6faa0534d879d5c82de0e175ac9ec301a0bc376624b0d"
+      ]
+    },
+    "ordinary": {
+      "paragraphs": [
+        {
+          "earlier": {
+            "body_index": 0,
+            "end": 323,
+            "paragraph": 1,
+            "start": 140
+          },
+          "later": {
+            "body_index": 1,
+            "end": 350,
+            "paragraph": 2,
+            "start": 140
+          }
+        },
+        {
+          "earlier": {
+            "body_index": 1,
+            "end": 252,
+            "paragraph": 2,
+            "start": 152
+          },
+          "later": {
+            "body_index": 2,
+            "end": 275,
+            "paragraph": 3,
+            "start": 152
+          }
+        }
+      ],
+      "plain_text_sha256": [
+        "f45f2e0cc55b5af3ac7d63ad4e033e41cd0fe7347c23fcb04813cf334e697046",
+        "664bf58745505c1e3229e948b6cd42793dd6e3eb1a7f4994e121298615b85dfb"
+      ],
+      "status_with_fallback": "no_joint_increase",
+      "status_without_fallback": "outside_scope",
+      "verified": {
+        "body_paragraph_ranges_verified": 6,
+        "changed_token_ranges_verified": 29,
+        "changes_by_role": {
+          "body": 3
+        },
+        "coordinate_space": "docx_body_unicode_codepoint",
+        "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+        "paired_word_sentence_ranges_verified": 12,
+        "source_hashes_verified": 2
+      },
+      "word_sha256": [
+        "53abc708eed610821440cdbe0cfa15db628e7c418627b0f9049723298c615e59",
+        "fa2503a6a25d4b7d4eee317b6e1183075c6ec43db45b0f49748ac082cdf8381c"
+      ]
+    }
+  },
+  "overall_assessments_preserved": true,
+  "paid_runs": 2,
+  "unpaid_jobs": 0
+}

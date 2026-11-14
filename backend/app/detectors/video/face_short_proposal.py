@@ -50,8 +50,26 @@ def _rank(reduced, box_at, check):
     return kept
 
 
-def select(edge_candidates, values, reduced, check, excluded, *, durations=proof.DURATIONS):
+def pane_motion(edge, reduced, box, pane):
+    """Count off-face tiles with an abrupt change relative to nearby frames."""
+    x, y, w, h = (box[key] * 0.3 for key in ("x", "y", "w", "h"))
+    left, right = (24, 168) if pane == "left" else (216, 360)
+    changes = [np.abs(reduced[i].astype("float32") - reduced[i-1]) for i in range(edge-3, edge+4)]
+    count = 0
+    for row in range(48, 169, 24):
+        for col in range(left, right, 24):
+            if col + 24 >= x - w/4 and col <= x + w*1.25 and row + 24 >= y - h/4 and row <= y + h*1.25:
+                continue
+            means = [float(delta[row:row+24, col:col+24].mean()) for delta in changes]
+            if means[3] - np.median(means[:3] + means[4:]) >= 12.0:
+                count += 1
+    return count
+
+
+def select(edge_candidates, values, reduced, check, excluded, *, durations=proof.DURATIONS, extra_edge_check=None):
     edges = face_paired_edge.appearance_edges(edge_candidates, values, reduced, check)
+    if extra_edge_check is not None:
+        edges = {edge: row for edge, row in edges.items() if extra_edge_check(edge)}
     ranked = []
     for start, entry in edges.items():
         for length in durations:

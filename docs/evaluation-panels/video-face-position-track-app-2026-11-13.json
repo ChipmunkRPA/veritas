@@ -2,6 +2,8 @@
   "cases": {
     "g2-guest_cut.mp4": {
       "additional_ranges": 0,
+      "bounded_scan": "unassessed",
+      "coverage_reason": "insufficient_face_track_context",
       "ranges_kept": 0
     },
     "g2-tandem_two_swaps.mp4": {
@@ -12,6 +14,10 @@
         99,
         102
       ],
+      "face_position_reference_frames": [
+        64,
+        114
+      ],
       "frames": [
         96,
         102
@@ -20,6 +26,8 @@
     },
     "g6-original.mp4": {
       "additional_ranges": 0,
+      "bounded_scan": "unassessed",
+      "coverage_reason": "insufficient_face_track_context",
       "ranges_kept": 0
     }
   },

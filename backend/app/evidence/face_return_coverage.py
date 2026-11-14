@@ -17,6 +17,7 @@ _REASONS = {
     "native_measurement_unavailable": "A sampled picture could not be measured.",
     "incomplete_native_decode": "Some scheduled source pictures could not be decoded.",
     "insufficient_same_shot_context": "The sampled pictures did not provide enough comparable single-face context.",
+    "insufficient_face_track_context": "The sampled pictures did not provide enough comparable views of the same face.",
     "surrounding_scene_changed": "The surrounding picture changed too much to support the range.",
     "sparse_range_outside_profile": "The initial scan found a possible change. That scan alone cannot support a brief range for this video profile.",
 }
@@ -67,7 +68,8 @@ def _bounded(item, frame_count):
             or (status in {"localized", "no_distinct_range"} and (reason is not None or pixels != 120 or scheduled < 12 or measured < 4))
             or (status == "localized" and measured < 11)
             or (status == "unassessed" and reason not in {"time_budget", "native_measurement_unavailable",
-                "insufficient_same_shot_context", "native_timestamp_unverified", "incomplete_native_decode"})
+                "insufficient_same_shot_context", "insufficient_face_track_context",
+                "native_timestamp_unverified", "incomplete_native_decode"})
             or status not in {"localized", "no_distinct_range", "unassessed"}):
         raise ValueError("Invalid bounded face proposal disposition")
 

@@ -43,7 +43,7 @@ def inputs(args):
     return [(case, *paths[digest]) for digest, case in selected.items()]
 
 
-def measure(path, item, detector, recognizer, earlier, *, alternate_track=False):
+def measure(path, item, detector, recognizer, earlier, *, alternate_track=False, split_track=False):
     import cv2
 
     from app.detectors.image.faces import detect_faces
@@ -90,6 +90,7 @@ def measure(path, item, detector, recognizer, earlier, *, alternate_track=False)
 
     anchors = {}
     alternate_anchors = {}
+    pane_references = {}
 
     def pick_tracked(index, found):
         return face_primary_track.follow(index, found, anchors)
@@ -102,6 +103,14 @@ def measure(path, item, detector, recognizer, earlier, *, alternate_track=False)
             return next((face for face in found if face.box() == selected), None)
 
         selectors["position_track"] = pick_alternate
+    if split_track:
+        def pick_pane(pane):
+            def pick(index, found):
+                return face_primary_track.follow_pane(index, found, pane_references[pane], pane)
+
+            return pick
+
+        selectors.update({pane: pick_pane(pane) for pane in ("left", "right")})
 
     def check(*_):
         return None
@@ -115,16 +124,21 @@ def measure(path, item, detector, recognizer, earlier, *, alternate_track=False)
             detect(frame, ("single_face", "largest_face"))
     require(len(reduced) == 120, "Incomplete picture analysis")
     anchors = face_primary_track.find_anchors(detections)
+    if split_track:
+        pane_references = {pane: face_primary_track.find_pane_anchors(detections, pane)
+                           for pane in ("left", "right")}
     if alternate_track:
         alternate_anchors = track_binding.anchors({i: [face.box() for face in found] for i, found in detections.items()},
                                                   position_only=True)
-        # The alternative can select a different face from the one with the largest area.
-        additional = {i for i in proof.ANCHOR_SAMPLES if (face := pick_alternate(i, detections[i])) is not None
-                      and (i, face.box()) not in values}
-        if additional:
-            for frame in decode_frames(path, table, sorted(additional), timeout_s=35):
-                verify(frame)
-                detect(frame, ("position_track",))
+    # A selector may require a second crop in an anchor picture.
+    extra = set(selectors) - set(METHODS)
+    additional = {i for i in proof.ANCHOR_SAMPLES
+                  if any((face := selectors[name](i, detections[i])) is not None
+                         and (i, face.box()) not in values for name in extra)}
+    if additional:
+        for frame in decode_frames(path, table, sorted(additional), timeout_s=35):
+            verify(frame)
+            detect(frame, extra)
     plan = {}
     for name in selectors:
         boxes = {}
@@ -147,6 +161,16 @@ def measure(path, item, detector, recognizer, earlier, *, alternate_track=False)
     def excluded(start, end):
         return any(overlap((start, end), span) for span in earlier)
 
+    def saved_proposal(choice, measured):
+        (negative, start, end), support, _ = choice
+        center = min((i for i in measured if start <= i < end), key=lambda i: (abs(2*i-start-end), i))
+        return {
+            "frames": [start, end], "response": -negative, "pts": [table.pts[start], table.pts[end]],
+            "edges": [support[side]["frame_indices"] for side in ("entry", "exit")],
+            "anchors": [{k: measured[i][2][k] for k in ("frame_index", "pts", "decoded_rgb_sha256")}
+                        for i in (start-1, center, end)],
+        }
+
     out = {}
     for name, (edges, schedule) in plan.items():
         measured = {}
@@ -155,27 +179,32 @@ def measure(path, item, detector, recognizer, earlier, *, alternate_track=False)
                 reading := values.get((i, face.box()))
             ):
                 measured[i] = reading
+        pane_changes = {}
+
+        def pane_stable(edge, pane=name, measured=measured, pane_changes=pane_changes):
+            count = face_short_proposal.pane_motion(edge, reduced, measured[edge-1][2]["bbox"], pane)
+            pane_changes[edge] = count
+            return count < track_binding.PANE_CHANGE_TILES
+
         selected = face_short_proposal.select(
             edges, measured, reduced, check, excluded, durations=proof.SECOND_AVC_DURATIONS
         )
-        record = None
-        if selected:
-            (negative, start, end), support, _ = selected
-            center = min(
-                (i for i in measured if start <= i < end), key=lambda i: (abs(2 * i - start - end), i)
-            )
-            record = {
-                "frames": [start, end],
-                "response": -negative,
-                "pts": [table.pts[start], table.pts[end]],
-                "edges": [support[side]["frame_indices"] for side in ("entry", "exit")],
-                "anchors": [
-                    {k: measured[i][2][k] for k in ("frame_index", "pts", "decoded_rgb_sha256")}
-                    for i in (start - 1, center, end)
-                ],
-            }
+        record = saved_proposal(selected, measured) if selected else None
         out[name] = {"measured": len(measured), "scheduled": len(schedule), "proposal": record}
-        if alternate_track:
+        if split_track and name in {"left", "right"}:
+            guarded = face_short_proposal.select(
+                edges, measured, reduced, check, excluded, durations=proof.SECOND_AVC_DURATIONS,
+                extra_edge_check=pane_stable,
+            )
+            guarded_record = None
+            if guarded:
+                guarded_record = saved_proposal(guarded, measured)
+                guarded_record["pane_tiles"] = [pane_changes[i] for i in guarded_record["frames"]]
+            out[name + "_guarded"] = {**out[name], "proposal": guarded_record,
+                                      "complete_pair": face_short_proposal.has_measurable_pair(
+                                          edges, measured, proof.SECOND_AVC_DURATIONS),
+                                      "pane_changes": [[i, count] for i, count in sorted(pane_changes.items())]}
+        if alternate_track or split_track:
             out[name]["complete_pair"] = face_short_proposal.has_measurable_pair(
                 edges, measured, proof.SECOND_AVC_DURATIONS,
             )
@@ -311,12 +340,12 @@ def sha(path):
 def replay_pixels(rows, paths):
     witnesses = 0
     for item in rows:
-        selected = {
-            anchor["frame_index"]: anchor
-            for reading in item["methods"].values()
-            if reading["proposal"]
-            for anchor in reading["proposal"]["anchors"]
-        }
+        selected = {}
+        for reading in item["methods"].values():
+            if reading["proposal"]:
+                for anchor in reading["proposal"]["anchors"]:
+                    i = anchor["frame_index"]
+                    require(selected.setdefault(i, anchor) == anchor, "Methods disagree on the original frame")
         witnesses += native(
             paths[item["sha256"]],
             item | {"delivery_sha256": item["sha256"], "proposal": {"anchors": list(selected.values())}},

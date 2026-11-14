@@ -125,6 +125,9 @@ The [moving-guest evaluation](video-face-position-track-2026-11-13.md#replay)
 adds a temporarily enlarged moving guest, ordinary cuts to other people,
 and a guest-only cut. The offline reader checks paired outcomes and all
 reported frame positions. FFmpeg can replay the original frame hashes.
+The [side-by-side evaluation](video-face-split-track-2026-11-13.md#replay)
+checks both sides against labeled swaps and ordinary speaker or layout
+changes. Its public reader validates the reported track and boundary counts.
 The [moving-face comparison](video-face-moving-shortlist-2026-11-13.md#replay)
 tests the face position and duration changes separately, preserves cases
 where the first scan found a range, and recounts ordinary controls by

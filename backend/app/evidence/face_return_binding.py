@@ -10,6 +10,7 @@ from app.evidence import face_short_carrier_binding as carriers
 from app.evidence import face_short_proposal_binding as proposal
 from app.evidence import face_short_window_binding as short_windows
 from app.evidence.face_interval_binding import face_context_box, validate_face_input
+from app.evidence.face_primary_track_binding import position_context
 from app.evidence.video_packet_versions import (
     DENSE_DURATION_FACE_VERSION,
     DENSE_SHORT_FACE_VERSION,
@@ -17,6 +18,7 @@ from app.evidence.video_packet_versions import (
     GUARDED_720P30_FACE_VERSION,
     GUARDED_CODEC_FACE_VERSION,
     MOVING_AVC_PROPOSAL_VERSION,
+    PANE_TRACK_AVC_PROPOSAL_VERSION,
     POSITION_TRACK_AVC_PROPOSAL_VERSION,
     PRIMARY_TRACK_AVC_PROPOSAL_VERSION,
     SECOND_AVC_PROPOSAL_VERSION,
@@ -72,7 +74,8 @@ METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VE
                    proposal.AVC_METHOD: SHORT_AVC_PROPOSAL_VERSION, SECOND_AVC_METHOD: SECOND_AVC_PROPOSAL_VERSION,
                    proposal.MOVING_AVC_METHOD: MOVING_AVC_PROPOSAL_VERSION,
                    proposal.PRIMARY_TRACK_AVC_METHOD: PRIMARY_TRACK_AVC_PROPOSAL_VERSION,
-                   proposal.POSITION_TRACK_AVC_METHOD: POSITION_TRACK_AVC_PROPOSAL_VERSION}
+                   proposal.POSITION_TRACK_AVC_METHOD: POSITION_TRACK_AVC_PROPOSAL_VERSION,
+                   proposal.PANE_TRACK_AVC_METHOD: PANE_TRACK_AVC_PROPOSAL_VERSION}
 WINDOW_METHODS = frozenset((short_windows.METHOD, carriers.METHOD))
 POINT = 0.10
 SCENE_POINT = 0.55
@@ -122,6 +125,14 @@ def proposal_boundary_measurements(record):
             {"label": f"{label} nearby regions with substantial motion",
              "value": f"{sum(value >= motion_floor for value in motion)} of {len(motion)}", "unit": "regions"},
         ])
+    if record["method"] == proposal.POSITION_TRACK_AVC_METHOD:
+        refs = position_context(record, proposal.ANCHOR_SAMPLES)
+        measurements.append({"label": "Face position reference frames", "value": " and ".join(map(str, refs)),
+                             "unit": "source frame indices"})
+    if record["method"] == proposal.PANE_TRACK_AVC_METHOD:
+        for label, count in zip(("Start", "End"), record["off_face_motion_tiles"], strict=True):
+            measurements.append({"label": f"{label} abrupt changes outside the face on the {record['pane']}",
+                                 "value": count, "unit": "picture tiles"})
     return measurements
 
 
@@ -388,8 +399,12 @@ def validate_packet(packet, source, *, table_pts=None, interpolated=(), rotation
              and packet.get("claim_scope") == "sampled_window" and len(packet["signal_refs"]) == 1,
              "Supplemental face evidence must remain a confidence-neutral sampled window")
     validate_record(record, source, table_pts=table_pts, interpolated=interpolated, rotation=rotation, truncated=truncated)
-    if semantics in proposal.METHODS and len(measurements := packet.get("measurements", [])) > 2:
-        _require(measurements[2:] == proposal_boundary_measurements(record),
+    measurements = packet.get("measurements", [])
+    if semantics == proposal.PANE_TRACK_AVC_METHOD or semantics in proposal.METHODS and len(measurements) > 2:
+        expected = proposal_boundary_measurements(record)
+        if record["method"] == proposal.POSITION_TRACK_AVC_METHOD and len(measurements) == 6:
+            expected = expected[:-1]  # Earlier signed packets have only the four boundary measurements.
+        _require(measurements[2:] == expected,
                  "Displayed transitions differ from their recorded face and nearby motion measurements")
     _require(len(packet["frames"]) == 3, "Supplemental face evidence needs three original frame views")
     inputs = {row["frame_index"]: row for row in record["frame_inputs"]}

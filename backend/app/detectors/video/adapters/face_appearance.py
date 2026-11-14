@@ -27,6 +27,7 @@ from app.detectors.video.decode import DecodeError
 from app.engine.boundary import Deadline, DetectorTimeout
 from app.engine.detector import ActivationUse, Applicability, DetectorResult, InputUnit, UnitScore
 from app.evidence import face_paired_edge_binding as paired
+from app.evidence import face_primary_track_binding
 from app.evidence import face_short_carrier_binding as short_carriers
 from app.evidence import face_short_proposal_binding as proposal
 from app.evidence import face_short_window_binding as windows
@@ -738,6 +739,7 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
     prior = details.get("face_return")
     second_avc = proposal_method == proposal.AVC_METHOD and settings.video_face_second_avc_review
     retry_moving = proposal_method == proposal.AVC_METHOD and settings.video_face_moving_avc_review
+    retry_panes = proposal_method == proposal.AVC_METHOD and settings.video_face_pane_track_avc_review and prior is None
     track_modes = [
         method for enabled, method in (
             (settings.video_face_primary_track_avc_review, proposal.PRIMARY_TRACK_AVC_METHOD),
@@ -755,7 +757,9 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
     scene, reduced, faces = {}, {}, {}
     detections = {}
     track_method = None
+    pane = None
     reference_faces = {}
+    pane_measured = None
 
     def read(indices, *, face, pixels):
         seen = set()
@@ -775,7 +779,9 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
                     if i not in detections:
                         detections[i] = detect_faces(bgr, detector=yunet, min_size=48)
                     detected = detections[i]
-                    if track_method is not None:
+                    if pane is not None:
+                        chosen = face_primary_track.follow_pane(i, detected, reference_faces, pane)
+                    elif track_method is not None:
                         chosen = face_primary_track.follow(i, detected, reference_faces,
                                                           position_only=track_method == proposal.POSITION_TRACK_AVC_METHOD)
                     else:
@@ -820,7 +826,7 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
 
     def recover_track(track):
         nonlocal track_method, reference_faces, faces, anchor_indices, edges, planned
-        coverage.update(status="unassessed", reason="insufficient_same_shot_context")
+        coverage.update(status="unassessed", reason="insufficient_face_track_context")
         position_only = track == proposal.POSITION_TRACK_AVC_METHOD
         reference_faces = face_primary_track.find_anchors(
             {i: detections[i] for i in proposal.ANCHOR_SAMPLES}, position_only=position_only,
@@ -835,7 +841,7 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
         read(set(anchor_slots) - faces.keys(), face=True, pixels=False)
         anchor_indices = [i for i in anchor_slots if i in faces]
         if len(anchor_indices) < 4:
-            coverage["reason"] = "insufficient_same_shot_context"
+            coverage["reason"] = "insufficient_face_track_context"
             return
         anchors = {i: faces[i][2]["bbox"] for i in anchor_indices}
         edges = face_short_proposal.moving_shortlist(reduced, anchors, stop.check)
@@ -850,7 +856,7 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
         stop.check("tracked brief face proposal")
         if selected is not None:
             if not any(len(detections[i]) > 1 for i in faces):
-                coverage["reason"] = "insufficient_same_shot_context"
+                coverage["reason"] = "insufficient_face_track_context"
                 return
             details["face_return"] = {
                 **record(selected, track),
@@ -861,14 +867,78 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
         elif not edges or face_short_proposal.has_measurable_pair(edges, faces, proposal.SECOND_AVC_DURATIONS):
             coverage.update(status="no_distinct_range", reason=None)
         else:
-            coverage["reason"] = "insufficient_same_shot_context"
+            coverage["reason"] = "insufficient_face_track_context"
 
     def recover_tracks():
+        nonlocal pane_measured
         if any(len(found) > 1 for found in detections.values()):
             for track in track_modes:
                 recover_track(track)
                 if details.get("face_return"):
-                    break
+                    return
+            if retry_panes:
+                pane_measured = recover_panes()
+
+    def recover_panes():
+        nonlocal pane, reference_faces, faces, anchor_indices, edges, planned
+        sampled = {i: detections[i] for i in proposal.ANCHOR_SAMPLES}
+        best = None
+        measured_pair = False
+        best_coverage = (0, 0)
+        for side in ("left", "right"):
+            reference_faces = face_primary_track.find_pane_anchors(sampled, side)
+            if not reference_faces:
+                continue
+            pane = side
+            faces = {}
+            coverage.update(status="unassessed", reason="time_budget", scheduled_frames=len(proposal.ANCHOR_SAMPLES))
+            read(proposal.ANCHOR_SAMPLES, face=True, pixels=False)
+            anchor_indices = sorted(faces)
+            if len(anchor_indices) < 4:
+                coverage["reason"] = "insufficient_face_track_context"
+                continue
+            anchors = {i: faces[i][2]["bbox"] for i in anchor_indices}
+            edges = face_short_proposal.moving_shortlist(reduced, anchors, stop.check)
+            planned = proposal.face_schedule(edges)
+            coverage["scheduled_frames"] = len(planned)
+            read(set(planned) - set(proposal.ANCHOR_SAMPLES), face=True, pixels=False)
+            best_coverage = max(best_coverage, (len(faces), len(planned)))
+            measured_pair |= face_short_proposal.has_measurable_pair(edges, faces, proposal.SECOND_AVC_DURATIONS)
+            counts = {}
+
+            def stable(i, *, counts=counts, faces=faces, pane=side):
+                stop.check("pane motion")
+                counts[i] = face_short_proposal.pane_motion(i, reduced, faces[i-1][2]["bbox"], pane)
+                return counts[i] < face_primary_track_binding.PANE_CHANGE_TILES
+
+            selected = face_short_proposal.select(
+                edges, faces, reduced, stop.check, excluded, durations=proposal.SECOND_AVC_DURATIONS,
+                extra_edge_check=stable,
+            )
+            if selected is None:
+                continue
+            rank = (*selected[0], side)
+            if best is None or rank < best[0]:
+                _, start, end = selected[0]
+                best = (rank, {**record(selected, proposal.PANE_TRACK_AVC_METHOD),
+                               "pane": side, "off_face_motion_tiles": [counts[start], counts[end]],
+                               "face_detection_boxes": [
+                                   {"frame_index": i, "boxes": [list(face.box()) for face in detections[i]]}
+                                   for i in planned
+                               ]}, faces)
+        if best is not None:
+            _, value, faces = best
+            details["face_return"] = value
+            coverage.update(status="localized", reason=None, scheduled_frames=len(value["scheduled_frame_indices"]))
+        elif best_coverage[1]:
+            coverage.update(status="no_distinct_range" if measured_pair else "unassessed",
+                            reason=None if measured_pair else "insufficient_face_track_context",
+                            scheduled_frames=best_coverage[1])
+            # The aggregate shows the best-covered pane without summing repeated pictures.
+            return best_coverage[0]
+        elif pane is not None:
+            coverage.update(status="unassessed", reason="insufficient_face_track_context")
+        return len(faces)
 
     try:
         read(proposal.PLAN, face=False, pixels=True)
@@ -934,7 +1004,7 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
             coverage["reason"] = "native_measurement_unavailable"
         return
     finally:
-        coverage.update(pixel_frames=len(reduced), measured_face_frames=len(faces))
+        coverage.update(pixel_frames=len(reduced), measured_face_frames=len(faces) if pane_measured is None else pane_measured)
         if second_avc and prior is not None:
             details["face_second_avc_check"] = coverage.copy()
         if second_avc and prior is not None and details.get("face_short_proposal_check") is coverage:
@@ -982,6 +1052,9 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
              *(("The optional face-position fallback uses comparable detections on both sides of a temporary size change. "
                 "It schedules up to 84 pictures within the existing time budget.",)
                if settings.video_face_short_avc_review and settings.video_face_position_track_avc_review else ()),
+             *(("The optional side-by-side review measures each face separately and checks motion outside the face. "
+                "Each side schedules up to 84 pictures within the shared time budget.",)
+               if settings.video_face_short_avc_review and settings.video_face_pane_track_avc_review else ()),
              *(("The enabled overlapping review reads 240 native pictures and compares three bounded face input sets.",)
                if settings.video_face_short_window_review or settings.video_face_short_carrier_review else ()),
              *(("The enabled cut context reads up to 77 native pictures and detects at most three face boxes.",)

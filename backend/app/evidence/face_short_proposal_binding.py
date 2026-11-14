@@ -17,13 +17,14 @@ SECOND_AVC_METHOD = "face-short-return/14"
 MOVING_AVC_METHOD = "face-short-return/15"
 PRIMARY_TRACK_AVC_METHOD = "face-short-return/16"
 POSITION_TRACK_AVC_METHOD = "face-short-return/17"
+PANE_TRACK_AVC_METHOD = "face-short-return/18"
 AVC_ENCODING = ("h264", "yuv420p", "avc1")
 SOURCE_PROFILES = {METHOD: (paired.ENCODING, "mp4"), WEBM_METHOD: (WEBM_ENCODING, "webm"),
                    AVC_METHOD: (AVC_ENCODING, "mp4"), SECOND_AVC_METHOD: (AVC_ENCODING, "mp4"),
                    MOVING_AVC_METHOD: (AVC_ENCODING, "mp4"), PRIMARY_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"),
-                   POSITION_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4")}
+                   POSITION_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"), PANE_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4")}
 METHODS = frozenset(SOURCE_PROFILES)
-TRACK_METHODS = frozenset({PRIMARY_TRACK_AVC_METHOD, POSITION_TRACK_AVC_METHOD})
+TRACK_METHODS = frozenset({PRIMARY_TRACK_AVC_METHOD, POSITION_TRACK_AVC_METHOD, PANE_TRACK_AVC_METHOD})
 MOVING_METHODS = TRACK_METHODS | {MOVING_AVC_METHOD}
 POINT = 0.10
 ANCHOR_SAMPLES = tuple(range(4, 120, 10))
@@ -74,6 +75,9 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     else:
         clock = table_pts is None or exact_clock(base, table_pts, first_pts)
     extra = {"face_detection_boxes"} if record["method"] in TRACK_METHODS else set()
+    is_pane = record["method"] == PANE_TRACK_AVC_METHOD
+    if is_pane:
+        extra.update(("pane", "off_face_motion_tiles"))
     require(
         set(record)
         == extra | {
@@ -143,8 +147,14 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
         "Brief face proposal lacks original shortlist anchors",
     )
     if record["method"] in TRACK_METHODS:
+        pane = record.get("pane")
+        if is_pane:
+            tiles = record["off_face_motion_tiles"]
+            require(pane in {"left", "right"} and isinstance(tiles, list) and len(tiles) == 2
+                    and all(type(count) is int and 0 <= count < face_primary_track_binding.PANE_CHANGE_TILES
+                            for count in tiles), "The selected range does not meet its pane motion guard")
         face_primary_track_binding.validate(record, source, planned, faces, ANCHOR_SAMPLES,
-                                            position_only=record["method"] == POSITION_TRACK_AVC_METHOD)
+                                            position_only=record["method"] == POSITION_TRACK_AVC_METHOD, pane=pane)
     for key, i in (("start", start), ("end", stop)):
         pts = scenes[i]["pts"]
         require(

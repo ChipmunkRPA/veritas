@@ -1,0 +1,49 @@
+{
+  "cases": {
+    "g1-ordinary_speaker_cut.mp4": {
+      "additional_ranges": 0,
+      "ranges_kept": 0
+    },
+    "g1-swaps_left.mp4": {
+      "additional_ranges": 1,
+      "exact_source_images": 6,
+      "exhibit_frames": [
+        60,
+        64,
+        67
+      ],
+      "frames": [
+        61,
+        67
+      ],
+      "off_face_motion_tiles": [
+        0,
+        0
+      ],
+      "side": "left",
+      "signed_source_verified": true
+    },
+    "g1-swaps_right.mp4": {
+      "additional_ranges": 1,
+      "exact_source_images": 6,
+      "exhibit_frames": [
+        60,
+        64,
+        67
+      ],
+      "frames": [
+        61,
+        67
+      ],
+      "off_face_motion_tiles": [
+        0,
+        0
+      ],
+      "side": "right",
+      "signed_source_verified": true
+    }
+  },
+  "overall_assessment_retained": true,
+  "simulated_paid_runs": 6,
+  "unpaid_jobs": 0
+}

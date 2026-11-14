@@ -232,6 +232,19 @@ def test_legacy_and_bounded_face_coverage_bind_to_separate_ranges():
     face_return_coverage.validate({'source': {'frame_count': 120}, 'packets': [], 'coverage': {face_return_coverage.KEY: no_range}})
 
 
+def test_brief_face_tracker_reports_incomplete_tracking_without_an_originality_verdict():
+    worker = {"status": "unassessed", "reason": "insufficient_face_track_context",
+              "pixel_frames": 120, "scheduled_frames": 12, "measured_face_frames": 3}
+    coverage = face_return_coverage.from_worker(None, 120, bounded=worker)
+    document = {"source": {"frame_count": 120}, "packets": [], "coverage": {face_return_coverage.KEY: coverage}}
+    face_return_coverage.validate_commitment(document, canonical_hash(coverage))
+    assert coverage["observations"] == [
+        "Bounded native scan. The sampled pictures did not provide enough comparable views of the same face. "
+        "Motion inputs: 120 of 120 pictures. Comparable face inputs: 3 of 12 scheduled pictures."
+    ]
+    assert coverage["affects_overall_confidence"] is False
+
+
 def test_parent_builder_capture_assets_and_manifest_are_one_set(nested_case, monkeypatch):
     f = nested_case
     assert f.document['version'] in video_packets.NESTED_VERSIONS

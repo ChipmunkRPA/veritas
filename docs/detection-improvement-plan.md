@@ -60,6 +60,10 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Side-by-side face tracking](video-face-split-track-2026-11-13.md)
+  measures both sides of the picture separately. The study compares
+  individual tracks, the largest face, and a guard for changes outside the face.
+
 - [Face tracking through changes in guest size](video-face-position-track-2026-11-13.md)
   recovered six exact intervals across three of eight source recordings,
   with no added flags on 32 matched ordinary controls. The measurements

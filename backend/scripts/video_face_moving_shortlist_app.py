@@ -21,11 +21,13 @@ from scripts.video_short_return_encoded_app import (
 )
 
 
-def run(bank, output, *, primary_track=False, position_track=False):
+def run(bank, output, *, primary_track=False, position_track=False, pane_track=False):
     configure(output, ROOT)
     os.environ.update(
         BASE_FLAGS, VERITAS_VIDEO_FACE_SECOND_AVC_REVIEW="true", VERITAS_VIDEO_FACE_MOVING_AVC_REVIEW="false",
-        VERITAS_VIDEO_FACE_PRIMARY_TRACK_AVC_REVIEW="false", VERITAS_VIDEO_FACE_POSITION_TRACK_AVC_REVIEW="false",
+        VERITAS_VIDEO_FACE_PRIMARY_TRACK_AVC_REVIEW="false",
+        VERITAS_VIDEO_FACE_POSITION_TRACK_AVC_REVIEW=str(pane_track).lower(),
+        VERITAS_VIDEO_FACE_PANE_TRACK_AVC_REVIEW="false",
     )
 
     import cv2
@@ -39,6 +41,7 @@ def run(bank, output, *, primary_track=False, position_track=False):
     from app.engine.registry import get_registry
     from app.evidence.face_short_proposal_binding import (
         MOVING_AVC_METHOD,
+        PANE_TRACK_AVC_METHOD,
         POSITION_TRACK_AVC_METHOD,
         PRIMARY_TRACK_AVC_METHOD,
     )
@@ -59,7 +62,11 @@ def run(bank, output, *, primary_track=False, position_track=False):
     stub = PaymentStub()
     service._stripe = stub
     roster = {row["file"]: row for row in json.loads((bank / "media.json").read_text())["rows"]}
-    if position_track:
+    if pane_track:
+        cases = ("g1-swaps_left.mp4", "g1-swaps_right.mp4", "g1-ordinary_speaker_cut.mp4")
+        serving_mode = "video_face_pane_track_avc_review"
+        review_method, packet_version = PANE_TRACK_AVC_METHOD, "video-evidence-31"
+    elif position_track:
         cases = ("g2-tandem_two_swaps.mp4", "g2-guest_cut.mp4", "g6-original.mp4")
         serving_mode = "video_face_position_track_avc_review"
         review_method, packet_version = POSITION_TRACK_AVC_METHOD, "video-evidence-30"
@@ -98,17 +105,26 @@ def run(bank, output, *, primary_track=False, position_track=False):
                     before[case] = decision, existing
                     continue
                 assert before[case] == (decision, existing)
-                assert len(recovered) == int(case == cases[0])
+                assert len(recovered) == int(case in cases[:2 if pane_track else 1])
                 exported = fetch(client, f"/api/analyses/{aid}/export.json")
                 assert json.loads(exported)["evidence"] == evidence
                 scan(exported.decode())
                 if not recovered:
                     results[case] = {"ranges_kept": len(existing), "additional_ranges": 0}
+                    if position_track:
+                        coverage = evidence["coverage"]["brief_face_review"]["passes"]["bounded_proposal"]
+                        results[case]["bounded_scan"] = coverage["status"]
+                        if coverage["reason"]:
+                            results[case]["coverage_reason"] = coverage["reason"]
                     continue
                 [packet] = recovered
                 assert evidence["version"] == packet_version
                 change = packet["face_return"]
-                assert [change["start_frame_index"], change["end_frame_index"]] == row["truth"][1]
+                interval = [change["start_frame_index"], change["end_frame_index"]]
+                if pane_track:
+                    assert interval in row["truth"] and change["pane"] == row["expected_pane"]
+                else:
+                    assert interval == row["truth"][1]
                 anchors = {role: change["anchors"][role] for role in ("before", "during", "after")}
                 images, _ = native_frames(client, packet, source, row, output, representatives=anchors)
                 report = body(client.post(f"{route}/reports", json={"profile": "standard"}))
@@ -128,6 +144,13 @@ def run(bank, output, *, primary_track=False, position_track=False):
                     if position_track:
                         assert "followed the same face position when another face changed size" in words
                         assert any(len(row["boxes"]) >= 2 for row in change["face_detection_boxes"])
+                        [references] = [m["value"] for m in packet["measurements"]
+                                        if m["label"] == "Face position reference frames"]
+                        assert f"Face position reference frames {references}" in words
+                    if pane_track:
+                        assert f"followed the face on the {change['pane']} side" in words
+                        for label, count in zip(("Start", "End"), change["off_face_motion_tiles"], strict=True):
+                            assert f"{label} abrupt changes outside the face on the {change['pane']} {count}" in words
                     assert images <= {
                         image_signature(document.extract_image(xref)["image"])
                         for xref in {image[0] for page in document for image in page.get_images(full=True)}
@@ -139,7 +162,9 @@ def run(bank, output, *, primary_track=False, position_track=False):
                     )
                 )
                 package = wait(client, f"/api/v2/packages/{package['id']}", timeout=120)
-                signed = output / "signed-package.zip"
+                case_output = output / Path(case).stem if pane_track else output
+                case_output.mkdir(exist_ok=True)
+                signed = case_output / "signed-package.zip"
                 signed.write_bytes(fetch(client, f"/api/v2/packages/{package['id']}/file"))
                 signer = body(client.get("/api/v2/instance/public-key"))
                 replay = verify_package(
@@ -159,15 +184,22 @@ def run(bank, output, *, primary_track=False, position_track=False):
                     bundle = json.loads(archive.read("bundle.json"))
                     assert json.loads(archive.read("evidence.json")) == evidence
                     assert archive.read(bundle["reports"][0]["file"]) == pdf
-                (output / "report.pdf").write_bytes(pdf)
-                (output / "export.json").write_bytes(exported)
+                (case_output / "report.pdf").write_bytes(pdf)
+                (case_output / "export.json").write_bytes(exported)
                 results[case] = {
                     "additional_ranges": 1,
-                    "frames": row["truth"][1],
+                    "frames": interval,
                     "exhibit_frames": list(anchors.values()),
                     "exact_source_images": len(images),
                     "signed_source_verified": True,
                 }
+                if position_track:
+                    results[case]["face_position_reference_frames"] = [
+                        int(index) for index in references.split(" and ")
+                    ]
+                if pane_track:
+                    results[case]["side"] = change["pane"]
+                    results[case]["off_face_motion_tiles"] = change["off_face_motion_tiles"]
     receipt = {
         "cases": results,
         "simulated_paid_runs": 2 * len(cases),
@@ -184,5 +216,7 @@ if __name__ == "__main__":
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--primary-track", action="store_true")
     mode.add_argument("--position-track", action="store_true")
+    mode.add_argument("--pane-track", action="store_true")
     args = parser.parse_args()
-    run(args.bank.resolve(), args.output.resolve(), primary_track=args.primary_track, position_track=args.position_track)
+    run(args.bank.resolve(), args.output.resolve(), primary_track=args.primary_track,
+        position_track=args.position_track, pane_track=args.pane_track)

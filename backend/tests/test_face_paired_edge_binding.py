@@ -120,7 +120,7 @@ def test_paired_edge_rejects_altered_proof(change, reason):
         face_boundary_binding.validate_record(value, coarse, source, table_pts=table.pts)
 
 
-@pytest.mark.parametrize("carrier", ["hevc", "webm", "avc", "avc_position"])
+@pytest.mark.parametrize("carrier", ["hevc", "webm", "avc", "avc_position", "avc_pane"])
 def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(carrier):
     webm = carrier == "webm"
     table, source, _, value = record()
@@ -138,7 +138,8 @@ def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(carr
         assert not face_short_proposal_binding.avc_source(irregular, face_short_proposal_binding.AVC_ENCODING, "mp4")
     method = {"hevc": face_short_proposal_binding.METHOD, "webm": face_short_proposal_binding.WEBM_METHOD,
               "avc": face_short_proposal_binding.AVC_METHOD,
-              "avc_position": face_short_proposal_binding.POSITION_TRACK_AVC_METHOD}[carrier]
+              "avc_position": face_short_proposal_binding.POSITION_TRACK_AVC_METHOD,
+              "avc_pane": face_short_proposal_binding.PANE_TRACK_AVC_METHOD}[carrier]
     encoding, container = face_short_proposal_binding.SOURCE_PROFILES[method]
     old_faces = {row["frame_index"]: row for row in value["frame_inputs"]}
     sample = list(face_short_proposal_binding.ANCHOR_SAMPLES)
@@ -177,17 +178,34 @@ def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(carr
             {"frame_index": i, "boxes": [tracked, [950, 35, 100 if 74 <= i <= 104 else 48, 48]]}
             for i in planned
         ]
+        from app.evidence.face_primary_track_binding import position_context
+
+        assert position_context(value, sample) == (64, 114)
+    if carrier == "avc_pane":
+        tracked, peer = [400, 320, 110, 110], [950, 35, 100, 98]
+        value.update(pane="left", off_face_motion_tiles=[3, 0],
+                     face_detection_boxes=[{"frame_index": i, "boxes": [tracked, peer]} for i in planned])
+        for row in value["frame_inputs"]:
+            row["bbox"] = {**row["bbox"], "x": 400}
+            row["landmarks"] = [[x-200, y] for x, y in row["landmarks"]]
     response = paired.edge_response(value, {row["frame_index"]: row for row in value["frame_inputs"]}, 87, 93)
     value.update(response=response, response_hex=response.hex())
     assert type(settings).model_fields["video_face_unrouted_short_review"].default is False
     assert type(settings).model_fields["video_face_short_avc_review"].default is False
     face_return_binding.validate_record(value, source, table_pts=table.pts)
-    assert [(item["label"], item["value"]) for item in face_return_binding.proposal_boundary_measurements(value)] == [
+    measurements = face_return_binding.proposal_boundary_measurements(value)
+    assert [(item["label"], item["value"]) for item in measurements[:4]] == [
         ("Start face change above nearby variation", 0.38),
         ("Start nearby regions with substantial motion", "0 of 4"),
         ("End face change above nearby variation", 0.38),
         ("End nearby regions with substantial motion", "0 of 4"),
     ]
+    if carrier == "avc_pane":
+        assert [row["value"] for row in measurements[4:]] == [3, 0]
+        with pytest.raises(ValueError, match="pane motion guard"):
+            face_return_binding.validate_record({**value, "off_face_motion_tiles": [3, 8]}, source, table_pts=table.pts)
+        with pytest.raises(ValueError, match="does not follow"):
+            face_return_binding.validate_record({**value, "pane": "right"}, source, table_pts=table.pts)
     if webm:
         bad = deepcopy(value)
         bad["scene_frame_inputs"][70]["pts"] += 1
@@ -239,6 +257,22 @@ def test_moving_shortlist_interpolates_centers_and_preserves_rank_budget(monkeyp
     face_indices = set(range(59, 73))
     assert face_short_proposal.has_measurable_pair([62, 70], face_indices, (7, 8))
     assert not face_short_proposal.has_measurable_pair([62, 70], face_indices - {70}, (7, 8))
+
+
+def test_off_face_motion_counts_only_abrupt_changes_in_the_selected_half():
+    import numpy as np
+
+    from app.detectors.video.face_short_proposal import pane_motion
+    from app.evidence.face_primary_track_binding import PANE_CHANGE_TILES
+
+    whole = {i: np.full((216, 384), 80 if i < 30 else 160, dtype=np.uint8) for i in range(26, 34)}
+    face = {"x": 220, "y": 240, "w": 135, "h": 135}
+    assert pane_motion(30, whole, face, "left") >= PANE_CHANGE_TILES
+    for i, picture in whole.items():
+        picture[:, :192] = 80
+        if i >= 30:
+            picture[72:113, 66:107] = 160
+    assert pane_motion(30, whole, face, "left") == 0
 
 
 def test_dominant_face_position_rejects_competing_or_discontinuous_detections():

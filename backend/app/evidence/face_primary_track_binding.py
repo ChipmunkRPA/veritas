@@ -7,6 +7,9 @@ AREA_RATIO = 4
 MIN_OVERLAP = 0.35
 MAX_DISTRACTOR_OVERLAP = 0.10
 POSITION_MAX_ANCHOR_GAP = 50
+PANE_DIVIDER = 640
+PANE_GAP = 24
+PANE_CHANGE_TILES = 8
 
 
 def overlap(a, b):
@@ -78,7 +81,27 @@ def follow(index, boxes, reference, *, position_only=False):
     return main
 
 
-def validate(record, source, planned, faces, anchor_samples, *, position_only=False):
+def pane_faces(boxes, pane):
+    if pane == "left":
+        return [box for box in boxes if box[0] + box[2] <= PANE_DIVIDER - PANE_GAP]
+    return [box for box in boxes if box[0] >= PANE_DIVIDER + PANE_GAP]
+
+
+def pane_anchors(detections, pane):
+    separated = {i: pane_faces(boxes, pane) for i, boxes in detections.items()}
+    other = "right" if pane == "left" else "left"
+    if sum(len(boxes) == len(pane_faces(detections[i], other)) == 1
+           for i, boxes in separated.items()) < 8:
+        return {}
+    return anchors(separated)
+
+
+def pane_pick(index, boxes, reference, pane):
+    found = pane_faces(boxes, pane)
+    return follow(index, found, reference) if len(found) == 1 else None
+
+
+def validate(record, source, planned, faces, anchor_samples, *, position_only=False, pane=None):
     rows = record["face_detection_boxes"]
     width, height = source["width"], source["height"]
     if (
@@ -109,10 +132,24 @@ def validate(record, source, planned, faces, anchor_samples, *, position_only=Fa
         ):
             raise ValueError("Dominant face evidence has an invalid native detection box")
         detections[row["frame_index"]] = [tuple(box) for box in boxes]
-    reference = anchors({index: detections[index] for index in anchor_samples}, position_only=position_only)
+    sampled = {index: detections[index] for index in anchor_samples}
+    reference = pane_anchors(sampled, pane) if pane else anchors(sampled, position_only=position_only)
     if not reference or not any(len(detections[index]) > 1 for index in faces):
         raise ValueError("Dominant face evidence lacks a continuous sampled position")
     for index, reading in faces.items():
         selected = tuple(reading["bbox"][key] for key in ("x", "y", "w", "h"))
-        if follow(index, detections[index], reference, position_only=position_only) != selected:
+        expected = (pane_pick(index, detections[index], reference, pane) if pane else
+                    follow(index, detections[index], reference, position_only=position_only))
+        if expected != selected:
             raise ValueError("The measured face does not follow its recorded native detections")
+
+def position_context(record, anchor_samples):
+    reference = anchors({row["frame_index"]: [tuple(box) for box in row["boxes"]]
+                         for row in record["face_detection_boxes"] if row["frame_index"] in anchor_samples},
+                        position_only=True)
+    middle = record["anchors"]["during"]
+    indices = list(reference)
+    offset = bisect_left(indices, middle)
+    if middle in reference:
+        return (middle,)
+    return tuple(dict.fromkeys((indices[max(0, offset-1)], indices[min(len(indices)-1, offset)])))

@@ -18,6 +18,7 @@
 {% endif %}
 <p class="caption">This optional check carries zero weight in the overall assessment. JSON pointer <span class="mono">/coverage/passage_position_review</span>.</p>
 {% else %}
+<div{% if position.locator %} class="multimedia-scored-context"{% endif %}>
 <h3 id="document-passage-position">Three-sentence writing check</h3>
 {% if position.status == 'flagged' %}
 <p>The middle sentence showed a stronger AI-like writing response than both neighbors. This check marked that sentence for inspection.</p>
@@ -27,6 +28,9 @@
 <p>The middle sentence did not reach the review level for a stronger AI-like writing response than both neighbors. This result leaves authorship undetermined.</p>
 {% endif %}
 {% if position.text %}<p><strong>Middle sentence.</strong> {{ position.text }}</p>{% endif %}
+{% if position.locator %}
+<p class="caption">Original character positions in {% if position.locator.kind == 'docx' %}Word body paragraph {{ position.locator.paragraph_index + 1 }}{% else %}decoded email MIME part {{ position.locator.mime_part }}{% endif %}.</p>
+{% endif %}
 <table class="multimedia-locator">
 <thead><tr><th>Sentence</th><th>Original text characters</th><th>Raw response</th></tr></thead>
 <tbody>{% for row in position.rows %}
@@ -34,4 +38,5 @@
 {% endfor %}</tbody>
 </table>
 <p class="caption">Each response uses its sentence and immediate neighbors. This check carries zero weight in the overall assessment. JSON pointer <span class="mono">/coverage/passage_position_review</span>.</p>
+</div>
 {% endif %}

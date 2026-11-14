@@ -633,7 +633,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     position = document_passage_position.from_result(result)
     if position is not None:
         document["coverage"][document_passage_position.KEY] = position
-        document_passage_position.verify_source(document, text, mapping)
+        document_passage_position.verify_source(document, text, mapping, meta=decoded["meta"])
     warning = decoded["meta"].get("coverage_warning")
     if warning:
         document["limitations"].append(warning)
@@ -704,7 +704,8 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_passage_coverage.verify_source(document, decoded["text"], decoded["source_map"],
                                                     result=result, meta=decoded["meta"])
             document_unselected_responses.verify_source(document, decoded["text"], decoded["source_map"], result=result)
-            document_passage_position.verify_source(document, decoded["text"], decoded["source_map"], result=result)
+            document_passage_position.verify_source(document, decoded["text"], decoded["source_map"],
+                                                    result=result, meta=decoded["meta"])
             document_email_contexts.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_tracked_changes.verify_source(document, decoded.get(document_tracked_changes.KEY),
                                                   expected=document_tracked_changes.from_result(result))

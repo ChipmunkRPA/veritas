@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from email.message import EmailMessage
 from types import SimpleNamespace
 
 import pytest
@@ -30,8 +31,79 @@ def setup_source(tmp_path, text=TEXT):
 
 def document(doc, row):
     ref = {"id": "check.test", "display_id": "S01"}
-    return {"source": {"method": "plain", "chars": len(doc.text)},
-            "coverage": {"checks": [{"signal_ref": ref}], review.KEY: {**row, "signal_ref": ref}}}
+    return {"source": {"method": doc.meta["method"], "chars": len(doc.text)},
+            "coverage": {"checks": [{"signal_ref": ref}], "email": doc.meta.get("email"),
+                         review.KEY: {**row, "signal_ref": ref}}}
+
+
+@pytest.mark.parametrize(("ext", "locator"), [
+    ("docx", {"kind": "docx", "paragraph_index": 0, "body_path": [0]}),
+    ("eml", {"kind": "email", "mime_part": "1.1"}),
+])
+def test_position_in_new_formats_replays_original_offsets(tmp_path, monkeypatch, ext, locator):
+    source = tmp_path / ("source." + ext)
+    body = TEXT.replace("major change", "major   change")
+    if ext == "docx":
+        from docx import Document
+
+        word = Document()
+        paragraph = word.add_paragraph()
+        paragraph.add_run(body[:130])
+        paragraph.add_run(body[130:]).bold = True
+        word.save(source)
+    else:
+        email = EmailMessage()
+        email.set_content(body, cte="quoted-printable")
+        email.add_alternative("<p>Secondary HTML representation</p>", subtype="html")
+        source.write_bytes(email.as_bytes())
+    doc = extract(source, "." + ext)
+    assert doc.text == TEXT
+    monkeypatch.setattr(settings, "text_passage_position_review", True)
+    monkeypatch.setattr(settings, "text_detector_mode", "candidate")
+    monkeypatch.setattr(settings, "text_window_sentences", 3)
+    spec = SimpleNamespace(id=document_matched_context.DETECTOR, version="1.0.0")
+    revisions = {document_matched_context.MODEL: document_matched_context.REVISION}
+    ctx = SimpleNamespace(device="cpu", deadline=Deadline(30))
+
+    def measured(_, values, deadline):
+        return [{"input_sha256": text_hash(value), "response_hex": score.hex(),
+                 "focus_tokens": 12, "neighbor_tokens": 20}
+                for (value, _, _), score in zip(values, (1., 5., 2.), strict=True)]
+
+    monkeypatch.setattr(passage_position, "_scores", measured)
+    row = passage_position.capture(None, doc, segment(doc), ctx, spec, revisions)
+    assert row["schema"] == review.MAPPED_SCHEMA and row["source_locator"] == locator
+    assert row["status"] == "flagged" and row["authorship_confidence_contribution"] == 0
+    mid = row["sentences"][1]
+    assert body[mid["source_start"]:mid["source_end"]] == row["focus_text"].replace("major change", "major   change")
+    package = document(doc, row)
+    assert review.verify_source(package, doc.text, doc.source_map, meta=doc.meta)
+    assert _passage_position_view(package["coverage"], withheld=False)["locator"] == locator
+    tampered = deepcopy(package)
+    tampered["coverage"][review.KEY]["sentences"][1]["source_end"] -= 1
+    with pytest.raises(ValueError, match="positions differ from the original"):
+        review.verify_source(tampered, doc.text, doc.source_map, meta=doc.meta)
+
+
+@pytest.mark.parametrize(("ext", "variant"), [("docx", "quote"), ("eml", "quoted"), ("eml", "html")])
+def test_mapping_does_not_admit_quotes_or_html(tmp_path, ext, variant):
+    source = tmp_path / ("source." + ext)
+    if ext == "docx":
+        from docx import Document
+
+        word = Document()
+        word.add_paragraph(TEXT, style="Quote")
+        word.save(source)
+    else:
+        email = EmailMessage()
+        if variant == "quoted":
+            email.set_content("> " + TEXT)
+        else:
+            email.set_content("<p>" + TEXT + "</p>", subtype="html")
+        source.write_bytes(email.as_bytes())
+    doc = extract(source, "." + ext)
+    assert review.mapped_locator(doc.source_map, doc.meta) is None
+    assert review.geometry(doc.text, doc.source_map, doc.meta["method"], segment(doc)) is None
 
 
 def test_position_is_bound_to_exact_source_and_public_result(tmp_path):

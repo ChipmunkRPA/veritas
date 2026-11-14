@@ -105,7 +105,7 @@ def _marks(result: dict, text: str, *, include_position: bool) -> tuple[bytearra
         position = record.get(document_passage_position.KEY) or {}
         if position.get("status") not in {"flagged", "no_flag"}:
             continue
-        if position.get("schema") == document_passage_position.SCHEMA:
+        if position.get("schema") in document_passage_position.SHORT_SCHEMAS:
             groups = [position]
         elif position.get("schema") == document_long_passage_position.SCHEMA:
             groups = position["contexts"]

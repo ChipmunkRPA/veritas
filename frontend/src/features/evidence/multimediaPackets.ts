@@ -353,7 +353,9 @@ interface DocumentPositionSpan { start: number; end: number; source_start: numbe
 interface DocumentPositionReading { input_sha256: string; response_hex: string; focus_tokens: number; neighbor_tokens: number }
 export type DocumentPassagePosition = { status: 'flagged' | 'no_flag' | 'unassessed';
   authorship_confidence_contribution: 0; signal_ref: EvidenceRef } & ({
-  schema: 'document-passage-position-review/1'; focus_text: string; sentences: DocumentPositionSpan[];
+  schema: 'document-passage-position-review/1' | 'document-passage-position-review/3';
+  focus_text: string; sentences: DocumentPositionSpan[];
+  source_locator?: { kind: 'docx'; paragraph_index: number; body_path: [number] } | { kind: 'email'; mime_part: string };
   readings?: DocumentPositionReading[]; contrast_hex?: string
 } | {
   schema: 'document-passage-position-review/2'; paragraphs: number; sentence_count: number;

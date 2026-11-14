@@ -38,6 +38,27 @@ const show = (set: MultimediaEvidenceSet, token = 'signed token', mediaReady = t
 afterEach(cleanup)
 
 describe('ordinary multimedia evidence', () => {
+  it.each([
+    [{ kind: 'docx', paragraph_index: 0, body_path: [0] }, /Word body paragraph 1/],
+    [{ kind: 'email', mime_part: '1.2' }, /decoded email MIME part 1\.2/],
+  ] as const)('shows the original sentence location for %o', (locator, label) => {
+    const source_locator = locator.kind === 'docx' ? { ...locator, body_path: [0] as [number] } : locator
+    show({ ...document, packets: [], coverage: { passage_position_review: {
+      schema: 'document-passage-position-review/3', status: 'flagged',
+      focus_text: 'The middle sentence showed a stronger local response.',
+      authorship_confidence_contribution: 0, signal_ref: packet.signal_refs[0], source_locator,
+      sentences: [
+        { start: 0, end: 10, source_start: 0, source_end: 10 },
+        { start: 11, end: 64, source_start: 11, source_end: 66 },
+        { start: 65, end: 80, source_start: 67, source_end: 82 },
+      ],
+    } } })
+    const section = within(screen.getByRole('region', { name: 'Three-sentence writing check' }))
+    expect(section.getByText(label)).toBeTruthy()
+    expect(section.getByText('[11, 66)')).toBeTruthy()
+    expect(section.getByText('The middle sentence showed a stronger local response.')).toBeTruthy()
+  })
+
   it('shows submitted Word revision wording and its native XML position', () => {
     const set: DocumentEvidenceSet = { ...document, packets: [], coverage: {
       word_tracked_changes: { status: 'partial', part: 'word/document.xml', paragraphs: 3, inserted: 1, deleted: 0,

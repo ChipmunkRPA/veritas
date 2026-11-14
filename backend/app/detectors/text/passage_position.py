@@ -95,19 +95,20 @@ def capture(classifier, doc, sentences, ctx, spec, revisions):
         return _capture_long(classifier, doc, sentences, ctx.deadline)
     if not settings.text_passage_position_review:
         return None
-    spans = document_passage_position.geometry(doc.text, doc.source_map, doc.meta.get("method"), sentences)
+    locator = document_passage_position.mapped_locator(doc.source_map, doc.meta)
+    spans = document_passage_position.geometry(doc.text, doc.source_map, doc.meta.get("method"), sentences, locator=locator)
     if spans is None:
         return None
     # Leave headroom for committing the normal result. The small optional
     # review never replaces or changes the existing classifier output.
     remaining = ctx.deadline.remaining()
     if remaining is not None and remaining < EXTRA_SECONDS + 1:
-        return document_passage_position.unassessed(spans, sentences[1].text)
+        return document_passage_position.unassessed(spans, sentences[1].text, locator=locator)
     try:
         readings = _scores(classifier, document_passage_position.inputs(doc.text, spans), ctx.deadline.nested(EXTRA_SECONDS))
     except (DetectorTimeout, KeyError, OSError, RuntimeError, ValueError):
-        return document_passage_position.unassessed(spans, sentences[1].text)
-    return document_passage_position.record(spans, readings, sentences[1].text)
+        return document_passage_position.unassessed(spans, sentences[1].text, locator=locator)
+    return document_passage_position.record(spans, readings, sentences[1].text, locator=locator)
 
 
 def _capture_long(classifier, doc, sentences, deadline):

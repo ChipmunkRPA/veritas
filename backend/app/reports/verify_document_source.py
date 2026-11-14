@@ -139,7 +139,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_scope.validate_checkpoint_agreement(evidence, text, mapping=mapping)
     unselected = document_unselected_responses.verify_source(evidence, text, mapping)
     email_inputs = document_email_contexts.verify_source(evidence, text, mapping)
-    position = document_passage_position.verify_source(evidence, text, mapping)
+    position = document_passage_position.verify_source(evidence, text, mapping, meta=doc.meta)
     alternatives = email_alternatives.verify_source(evidence, original.read_bytes()) if email_alternatives.KEY in coverage else None
     tracked = document_tracked_changes.verify_source(evidence, doc.word_review,
                                                     expected=source.get(document_tracked_changes.COMMITMENT))
@@ -187,7 +187,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if position:
         position_review = coverage[document_passage_position.KEY]
         position_detail = (" Verified all three writing position inputs and their source ranges."
-                           if position_review["schema"] == document_passage_position.SCHEMA else
+                           if position_review["schema"] in document_passage_position.SHORT_SCHEMAS else
                            f" Verified writing inputs and source ranges at all {len(position_review['contexts'])} eligible centers.")
     native_detail = " Verified decoded original text locations for the inspected writing." if document_native_locations.KEY in coverage else ""
     email_input_detail = f" Verified source roles and text hashes for {email_inputs} classifier inputs." if email_inputs else ""

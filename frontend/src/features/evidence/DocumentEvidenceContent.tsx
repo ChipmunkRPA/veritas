@@ -63,6 +63,7 @@ function PassagePosition({ review }: { review: DocumentPassagePosition }) {
     </section>
   }
   const labels = ['Opening sentence', 'Middle sentence', 'Closing sentence']
+  const locator = review.source_locator
   return <section id="document-passage-position" aria-labelledby="document-passage-position-title" className="mt-4 rounded-md border border-border p-4">
     <h3 id="document-passage-position-title" className="m-0 text-body font-medium">Three-sentence writing check</h3>
     <p className="mt-2 mb-0 text-small">{review.status === 'flagged'
@@ -70,6 +71,8 @@ function PassagePosition({ review }: { review: DocumentPassagePosition }) {
       : review.status === 'unassessed' ? 'The input met the scope for this check. Complete responses were unavailable.'
       : 'The middle sentence did not reach the review level for a stronger AI-like writing response than both neighbors. This result leaves authorship undetermined.'}</p>
     <blockquote className="my-3 border-l-2 border-border pl-3 break-words text-small">{review.focus_text}</blockquote>
+    {locator && <p className="mt-2 mb-0 text-caption text-text-muted">Original character positions in {locator.kind === 'docx'
+      ? `Word body paragraph ${locator.paragraph_index + 1}` : `decoded email MIME part ${locator.mime_part}`}.</p>}
     <ul className="mt-2 mb-0 list-none p-0 text-small">{review.sentences.map((row, i) =>
       <li key={row.source_start}>{labels[i]} <span className="font-mono">[{row.source_start}, {row.source_end})</span></li>)}</ul>
     <p className="mt-2 mb-0 text-caption text-text-muted">Positions count Unicode characters in the original text. Each response uses its sentence and immediate neighbors. This check carries zero weight in the overall assessment.</p>

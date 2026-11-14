@@ -564,7 +564,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
             document_unselected_responses.verify_source(document, text, mapping, result=frozen)
         if document_passage_position.KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
-            document_passage_position.verify_source(document, text, mapping, result=frozen)
+            document_passage_position.verify_source(document, text, mapping, result=frozen, meta=decoded["meta"])
         if document_scope.CHECKPOINT_AGREEMENT_KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             document_scope.validate_checkpoint_agreement(document, text, result=frozen, mapping=mapping)
@@ -815,6 +815,7 @@ def _passage_position_view(coverage: dict, *, withheld: bool) -> dict | None:
                                                  context["readings"], strict=True)]}
     readings = record.get("readings")
     return {"longer": False, "status": record["status"], "text": None if withheld else record["focus_text"],
+            "locator": record.get("source_locator"),
             "rows": [{"label": label.capitalize(), **span,
                       "response": float.fromhex(readings[i]["response_hex"]) if readings is not None else None}
                      for i, (label, span) in enumerate(zip(LABELS, record["sentences"], strict=True))]}

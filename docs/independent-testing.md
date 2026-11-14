@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [earlier-copy speech alignment replay](audio-aligned-speech-app-2026-11-14.md#replay)
+recounts 468 pairs from two disjoint reader panels. It checks added
+locations, ordinary processing flags and noise-related abstentions.
+The export verifier uses both source files to reproduce the separately
+timed excerpts and waveforms without model weights.
+
 The [three-editor PNG replay](image-edge-context-new-sources-2026-11-14.md#replay)
 recounts 156 edited and ordinary files. It can download the exact public
 publisher inputs afresh and verify every changed-pixel mask before model

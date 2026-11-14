@@ -9,6 +9,7 @@ from pathlib import Path
 from app.evidence.audio_reference import (
     SCHEMA,
     SCHEMA_WITH_AAC_TIMING,
+    SCHEMA_WITH_ALIGNED_SPEECH,
     SCHEMA_WITH_CHANNEL_TIMING,
     SCHEMA_WITH_CLEAN_SPEECH,
     SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD,
@@ -30,31 +31,38 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False, c
     if verify:
         exported = json.loads((output if output.is_file() else output / "comparison.json").read_bytes())
         record = exported.get("comparison", exported) if isinstance(exported, dict) else None
-        if isinstance(record, dict) and record.get("schema") in {SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT, SCHEMA_WITH_TRIM_ALIGNMENT}:
-            compare_source = partial(compare, include_level_adjustment=record["schema"] != SCHEMA,
-                                     include_trim_alignment=record["schema"] == SCHEMA_WITH_TRIM_ALIGNMENT,
+        if not isinstance(record, dict):
+            raise ValueError("The comparison record must be a JSON object.")
+        schema = record.get("schema")
+        aligned = schema == SCHEMA_WITH_ALIGNED_SPEECH
+        if aligned:
+            schema = record.get("comparison_schema")
+        if schema in {SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT, SCHEMA_WITH_TRIM_ALIGNMENT}:
+            compare_source = partial(compare, include_level_adjustment=schema != SCHEMA,
+                                     include_trim_alignment=schema == SCHEMA_WITH_TRIM_ALIGNMENT,
                                      include_trim_level_adjustment=False, include_stereo=False)
-        elif isinstance(record, dict) and record.get("schema") == SCHEMA_WITH_TRIM_AND_LEVEL:
+        elif schema == SCHEMA_WITH_TRIM_AND_LEVEL:
             compare_source = partial(compare, include_stereo=False)
-        elif isinstance(record, dict) and record.get("schema") == SCHEMA_WITH_LOCAL_TIMING:
+        elif schema == SCHEMA_WITH_LOCAL_TIMING:
             compare_source = partial(compare, include_local_timing=True)
-        elif isinstance(record, dict) and record.get("schema") == SCHEMA_WITH_CHANNEL_TIMING:
+        elif schema == SCHEMA_WITH_CHANNEL_TIMING:
             compare_source = partial(compare, include_local_timing=True, include_channel_timing=True)
-        elif isinstance(record, dict) and record.get("schema") == SCHEMA_WITH_AAC_TIMING:
+        elif schema == SCHEMA_WITH_AAC_TIMING:
             compare_source = partial(compare, include_local_timing=True, include_aac_timing=True,
                                      include_clean_speech="clean_speech" in record,
                                      allow_long_clean_speech=record.get("local_timing", {}).get("twelve_second_speech_option", True))
-        elif isinstance(record, dict) and record.get("schema") in {
+        elif schema in {
             SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH, SCHEMA_WITH_DENSE_CLEAN_SPEECH,
             *eq_schemas,
         }:
             compare_source = partial(compare, include_clean_speech=True, include_local_timing="local_timing" in record,
                                      include_channel_timing="channel_timing" in record,
-                                     allow_long_clean_speech=record["schema"] == SCHEMA_WITH_LONG_CLEAN_SPEECH,
-                                     use_dense_clean_speech=record["schema"] in {
-                                         SCHEMA_WITH_DENSE_CLEAN_SPEECH, *eq_schemas},
-                                     use_clean_speech_eq_guard=record["schema"] in eq_schemas,
-                                     include_clean_speech_match_support=record["schema"] == SCHEMA_WITH_CLEAN_SPEECH_SUPPORT)
+                                     allow_long_clean_speech=schema == SCHEMA_WITH_LONG_CLEAN_SPEECH,
+                                     use_dense_clean_speech=schema in {SCHEMA_WITH_DENSE_CLEAN_SPEECH, *eq_schemas},
+                                     use_clean_speech_eq_guard=schema in eq_schemas,
+                                     include_clean_speech_match_support=schema == SCHEMA_WITH_CLEAN_SPEECH_SUPPORT)
+        if aligned:
+            compare_source = partial(compare_source, include_aligned_speech=True)
     return replay(compare_source, earlier, submitted, output, verify=verify)
 
 

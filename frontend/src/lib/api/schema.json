@@ -1756,6 +1756,17 @@
       },
       "AudioReferenceAvailability": {
         "properties": {
+          "aligned_speech_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aligned Speech Available"
+          },
           "available": {
             "title": "Available",
             "type": "boolean"
@@ -13572,6 +13583,17 @@
             ],
             "title": "Picture Insertion Available"
           },
+          "sound_difference_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sound Difference Available"
+          },
           "timing_available": {
             "anyOf": [
               {
@@ -18237,6 +18259,15 @@
                   },
                   "include_pdf": {
                     "default": "false",
+                    "enum": [
+                      "true",
+                      "false"
+                    ],
+                    "type": "string"
+                  },
+                  "include_sound_difference": {
+                    "default": "false",
+                    "description": "Opt into the experimental earlier-copy soundtrack comparison when available.",
                     "enum": [
                       "true",
                       "false"

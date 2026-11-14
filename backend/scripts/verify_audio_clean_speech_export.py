@@ -14,6 +14,7 @@ import numpy as np
 from app.core.canonical import canonical_hash
 from app.evidence import audio_clean_speech, audio_clean_speech_dense, audio_clean_speech_long
 from app.evidence.audio_reference import (
+    SCHEMA_WITH_ALIGNED_SPEECH,
     SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD,
     SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
@@ -32,12 +33,13 @@ def verify_export(earlier, submitted, export):
     package = json.loads(export.read_bytes())
     record, assets = package["comparison"], package["assets"]
     result = record["clean_speech"]
-    long = record["schema"] == LONG_SCHEMA
-    dense = record["schema"] == SCHEMA_WITH_DENSE_CLEAN_SPEECH
-    with_support = record["schema"] == SCHEMA_WITH_CLEAN_SPEECH_SUPPORT
-    eq_guard = with_support or record["schema"] == SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD
+    schema = record["comparison_schema"] if record["schema"] == SCHEMA_WITH_ALIGNED_SPEECH else record["schema"]
+    long = schema == LONG_SCHEMA
+    dense = schema == SCHEMA_WITH_DENSE_CLEAN_SPEECH
+    with_support = schema == SCHEMA_WITH_CLEAN_SPEECH_SUPPORT
+    eq_guard = with_support or schema == SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD
     sample_count = audio_clean_speech_long.SAMPLES if long else audio_clean_speech.SAMPLES
-    require((record["schema"] in {SCHEMA, LONG_SCHEMA} or dense or eq_guard) and result["sample_rate"] == RATE
+    require((schema in {SCHEMA, LONG_SCHEMA} or dense or eq_guard) and result["sample_rate"] == RATE
             and record["affects_overall_confidence"] is False and result["affects_overall_confidence"] is False,
             "The export needs local speech evidence with zero AI weight")
     native = [decode(path, record[side]) for path, side in zip((earlier, submitted), SIDES, strict=True)]

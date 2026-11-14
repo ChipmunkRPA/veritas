@@ -237,6 +237,7 @@ class Settings(BaseSettings):
     audio_reference_long_clean_speech: bool = False  # Extend the optional clean-copy comparison to twelve seconds.
     audio_reference_dense_clean_speech: bool = False  # Trial: denser comparison of six-second clean-copy pairs.
     audio_reference_clean_speech_eq_guard: bool = False  # Trial: explain consistent frequency changes in six-second pairs.
+    audio_reference_aligned_speech: bool = False  # Trial: align speech when the two clean-copy timelines differ locally.
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.
     video_soundtrack_pair_review: bool = False  # Compare two matching audio streams in one short video.
     video_soundtrack_frequency_review: bool = False  # Check cross-band support after a missed broad timing match.

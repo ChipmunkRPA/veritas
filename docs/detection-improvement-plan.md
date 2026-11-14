@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Speech alignment against an earlier recording](audio-aligned-speech-app-2026-11-14.md)
+  raises clean splice localization from 4/27 to 24/27 without new flags
+  in 312 ordinary pairs. The trial shows separate timestamps and waveforms
+  in the app, PDF and JSON. It left all 81 strongly noise-masked edits
+  unassessed and contributes zero weight to AI confidence.
+
 - [PNG padding transfer across three editor families](image-edge-context-new-sources-2026-11-14.md)
   compared 156 deliveries from 26 photo groups. Requiring a padding repeat
   alongside the local flip check reduced ordinary highlights from 50 to 45

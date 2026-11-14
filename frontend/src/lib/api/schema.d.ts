@@ -2346,6 +2346,8 @@ export interface components {
         };
         /** AudioReferenceAvailability */
         AudioReferenceAvailability: {
+            /** Aligned Speech Available */
+            aligned_speech_available?: boolean | null;
             /** Available */
             available: boolean;
             /** Clean Speech Available */
@@ -6193,6 +6195,8 @@ export interface components {
             available: boolean;
             /** Picture Insertion Available */
             picture_insertion_available?: boolean | null;
+            /** Sound Difference Available */
+            sound_difference_available?: boolean | null;
             /** Timing Available */
             timing_available?: boolean | null;
         };
@@ -9377,6 +9381,12 @@ export interface operations {
                      * @enum {string}
                      */
                     include_pdf?: "true" | "false";
+                    /**
+                     * @description Opt into the experimental earlier-copy soundtrack comparison when available.
+                     * @default false
+                     * @enum {string}
+                     */
+                    include_sound_difference?: "true" | "false";
                     /** @description Optional marked mouth closure time in the earlier clip, in seconds. */
                     timing_event_s?: string;
                 };

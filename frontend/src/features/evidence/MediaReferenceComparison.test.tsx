@@ -426,6 +426,48 @@ it.each([8, 11, 12, 13])('shows both source excerpts for local speech comparison
   expect(screen.getByRole('button', { name: 'Download JSON evidence' })).toBeTruthy()
 })
 
+it('shows aligned excerpts on two independent recording clocks and retains the decoded comparison', async () => {
+  const waveform = { low: [-.4], high: [.2] }
+  const excerpt = (file: string, start_s: number, end_s: number) => ({
+    start_s, end_s, waveform, audio: { file, media_type: 'audio/wav', sha256: 'c'.repeat(64) },
+  })
+  const comparison = {
+    schema: 'chipmunk.audio-reference-comparison/14',
+    comparison_schema: 'chipmunk.audio-reference-comparison/1',
+    status: 'audio_timelines_differ',
+    interpretation: 'Decoded samples use different clocks.',
+    aligned_speech: {
+      status: 'localized_difference', summary: 'The aligned recordings sound less similar in this interval.',
+      scope: 'This check contributes zero weight to the AI assessment.',
+      range: {
+        earlier: excerpt('earlier.wav', 2.34, 3.02),
+        submitted: excerpt('submitted.wav', 2.4, 3.12),
+        section_distances: { before: .258, during: 2.689, after: .699 },
+        flank_duration_ms: 400,
+      },
+    },
+  }
+  const fetch = vi.fn().mockResolvedValueOnce(Response.json({
+    available: true, clean_speech_available: true, aligned_speech_available: true,
+  })).mockResolvedValueOnce(Response.json({ comparison, assets: { 'earlier.wav': 'UklGRg==', 'submitted.wav': 'UklGRg==' },
+    pdf: 'JVBERi0xLjQK' }))
+  vi.stubGlobal('fetch', fetch)
+  show('audio')
+  fireEvent.change(await screen.findByLabelText('Earlier audio'), { target: { files: [new File(['audio'], 'earlier.wav')] } })
+  expect(screen.getByText(/Heavy background sound can prevent a result/)).toBeTruthy()
+  fireEvent.click(screen.getByRole('checkbox', { name: 'The earlier file is a clean copy of the same recording' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Compare recordings' }))
+  const region = within(await screen.findByRole('region', { name: 'Aligned speech comparison' }))
+  expect(region.getByText('Earlier recording · 2.340–3.020 s')).toBeTruthy()
+  expect(region.getByText('Analyzed recording · 2.400–3.120 s')).toBeTruthy()
+  expect(region.getByText(/before 0.258, during 2.689, after 0.699/)).toBeTruthy()
+  expect(region.getAllByRole('img', { name: /aligned speech excerpt waveform/ })).toHaveLength(2)
+  expect(screen.getByText(/Decoded sample comparison unavailable/)).toBeTruthy()
+  expect((fetch.mock.calls[1][1].body as FormData).get('earlier_has_clean_speech')).toBe('true')
+  expect(screen.getByRole('button', { name: 'Download PDF' })).toBeTruthy()
+  expect(screen.getByRole('button', { name: 'Download JSON evidence' })).toBeTruthy()
+})
+
 it.each([9, 12])('shows a frequency-balance change without a local excerpt (version %s)', async (version) => {
   const comparison = {
     schema: `chipmunk.audio-reference-comparison/${version}`, status: 'measured', interpretation: 'Decoded audio differences.',

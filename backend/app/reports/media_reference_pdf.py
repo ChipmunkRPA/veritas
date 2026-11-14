@@ -8,6 +8,7 @@ from app.evidence.audio_reference import (
     AUDIO_RATE,
     MAX_SECONDS,
     SCHEMA_WITH_AAC_TIMING,
+    SCHEMA_WITH_ALIGNED_SPEECH,
     SCHEMA_WITH_CHANNEL_TIMING,
     SCHEMA_WITH_CLEAN_SPEECH,
     SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD,
@@ -145,10 +146,13 @@ def _audio_summary(document, record):
         _text(page, MARGIN, y, label, font="hebo")
         _text(page, MARGIN, y + 20, f"SHA-256 {record[side]['sha256']}", size=9, font="cour", color=MUTED)
     if record["status"] != "measured":
-        title = "Decoded sample comparison unavailable" if record["schema"] == SCHEMA_WITH_AAC_TIMING else "Comparison unassessed"
+        separate = record["schema"] in {SCHEMA_WITH_AAC_TIMING, SCHEMA_WITH_ALIGNED_SPEECH}
+        title = "Decoded sample comparison unavailable" if separate else "Comparison unassessed"
         _text(page, MARGIN, 346, title, size=16, font="hebo")
         _text(page, MARGIN, 370, AUDIO_ONLY_STATUS[record["status"]])
-        if record["schema"] == SCHEMA_WITH_AAC_TIMING:
+        if record.get("aligned_speech"):
+            _text(page, MARGIN, 397, "The aligned speech result appears on a separate page.", size=10, color=MUTED)
+        elif record["schema"] == SCHEMA_WITH_AAC_TIMING:
             _text(page, MARGIN, 397, "The local timing result appears on a separate page.", size=10, color=MUTED)
         return
     _text(page, MARGIN, 346, "Decoded sample comparison", size=16, font="hebo")
@@ -452,6 +456,28 @@ def _clean_speech_page(document, result):
             _text(page, MARGIN, 704 + 12 * index, f"{low}-{high} Hz    {gains}", size=9, color=MUTED)
 
 
+def _aligned_speech_page(document, result):
+    page = _page(document, "Aligned speech comparison")
+    page.insert_textbox((MARGIN, 125, RIGHT, 173), result["summary"], fontsize=12, fontname="hebo", color=INK)
+    page.insert_textbox((MARGIN, 178, RIGHT, 242), result["scope"], fontsize=11, fontname="helv", color=MUTED)
+    span = result.get("range")
+    if not span:
+        return
+    values = span["section_distances"]
+    _text(page, MARGIN, 251, f"Sound dissimilarity before {values['before']:.3f}, during {values['during']:.3f}, "
+          f"after {values['after']:.3f}.", size=10)
+    _text(page, MARGIN, 268, f"Each surrounding section lasts {span['flank_duration_ms']} ms. Larger values mean less similar sound.",
+          size=9, color=MUTED)
+    maximum = max(.01, *(abs(level) for side in LABELS for field in ("low", "high") for level in span[side]["waveform"][field]))
+    for y, side, label in ((385, "earlier", "Earlier recording"), (559, "submitted", "Analyzed recording")):
+        clip = span[side]
+        first, end = clip["samples"]
+        _text(page, MARGIN, y - 65, f"{label}  {clip['start_s']:.3f} to {clip['end_s']:.3f} s", font="hebo")
+        _draw_waveform(page, clip["waveform"], y, maximum, (end - first) / AUDIO_RATE)
+        _text(page, MARGIN, y + 55, f"Source samples [{first}, {end}) at 16 kHz.", size=9, color=MUTED)
+    _text(page, MARGIN, 657, "Waveforms share one amplitude scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
+
+
 def _sound_page(document, span, *, level_adjusted=False, track_title=None):
     difference = span.get("difference")
     if level_adjusted:
@@ -581,7 +607,8 @@ def render(record, assets):
                                         SCHEMA_WITH_TRIM_AND_LEVEL, SCHEMA_WITH_STEREO, SCHEMA_WITH_LOCAL_TIMING,
                                         SCHEMA_WITH_CHANNEL_TIMING, SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH,
                                         SCHEMA_WITH_AAC_TIMING, SCHEMA_WITH_DENSE_CLEAN_SPEECH,
-                                        SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD, SCHEMA_WITH_CLEAN_SPEECH_SUPPORT)
+                                        SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD, SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
+                                        SCHEMA_WITH_ALIGNED_SPEECH)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
         adjusted = record.get("level_adjusted")
         trimmed = is_audio and "trim_alignment" in record.get("audio", {})
@@ -592,6 +619,8 @@ def render(record, assets):
             _insertion_page(document, insertion, assets)
         if adjusted and trimmed:
             _level_adjusted_pages(document, adjusted)
+        if aligned_speech := record.get("aligned_speech"):
+            _aligned_speech_page(document, aligned_speech)
         if "clean_speech" in record:
             _clean_speech_page(document, record["clean_speech"])
         remaining = []

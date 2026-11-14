@@ -1,0 +1,59 @@
+{
+  "cases": {
+    "clean-cut_paste": {
+      "excerpts": {
+        "earlier": {
+          "pcm_sha256": "623de080313d3cc5ecb17e4b26a64012dda477c349c48b55ca528e34a387ec23",
+          "samples": [
+            37440,
+            48320
+          ]
+        },
+        "submitted": {
+          "pcm_sha256": "0c84c5baba021c51c12f861714eaa72da5ea77aa70bb55fae7785ab36cb9a261",
+          "samples": [
+            38400,
+            49920
+          ]
+        }
+      },
+      "source_sha256": [
+        "df18646d6d280fda7d71a4da1ad2bf916311f7808984ec50070a39e9754b9d84",
+        "02b1d80517e6bd9880e2078b6e38fdacf7c727b6ee0e41bd3ed1fc9db00076ee"
+      ],
+      "status": "localized_difference",
+      "truth_samples": [
+        [
+          38240,
+          48320
+        ]
+      ]
+    },
+    "clean-unchanged": {
+      "excerpts": {},
+      "source_sha256": [
+        "df18646d6d280fda7d71a4da1ad2bf916311f7808984ec50070a39e9754b9d84",
+        "df18646d6d280fda7d71a4da1ad2bf916311f7808984ec50070a39e9754b9d84"
+      ],
+      "status": "no_local_difference",
+      "truth_samples": []
+    },
+    "train-cut_paste": {
+      "excerpts": {},
+      "source_sha256": [
+        "df18646d6d280fda7d71a4da1ad2bf916311f7808984ec50070a39e9754b9d84",
+        "9f65ea5b8a61fbc52f95ef8fd7b8717285ce19a2b3b4df6398568fc7b8e10f90"
+      ],
+      "status": "unassessed",
+      "truth_samples": [
+        [
+          38240,
+          48320
+        ]
+      ]
+    }
+  },
+  "overall_assessments_preserved": true,
+  "paid_runs": 3,
+  "unpaid_jobs": 0
+}

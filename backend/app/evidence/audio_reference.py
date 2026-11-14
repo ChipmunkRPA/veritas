@@ -30,6 +30,7 @@ SCHEMA_WITH_AAC_TIMING = "chipmunk.audio-reference-comparison/10"
 SCHEMA_WITH_DENSE_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/11"
 SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD = "chipmunk.audio-reference-comparison/12"
 SCHEMA_WITH_CLEAN_SPEECH_SUPPORT = "chipmunk.audio-reference-comparison/13"
+SCHEMA_WITH_ALIGNED_SPEECH = "chipmunk.audio-reference-comparison/14"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_SECONDS = 30
 MAX_PRESENTED_RANGES = 3
@@ -546,6 +547,53 @@ def _clean_speech(decoded, assets, *, allow_long, use_dense, use_eq_guard, inclu
     return SCHEMA_WITH_LONG_CLEAN_SPEECH if extended else SCHEMA_WITH_CLEAN_SPEECH, result
 
 
+def _aligned_speech(decoded, assets):
+    from app.evidence import audio_aligned_speech as alignment
+
+    result = {
+        "basis": alignment.BASIS,
+        "status": "unassessed",
+        "scope": "This check aligns short excerpts of the same recording and needs similar speech on both sides of a "
+                 "difference. Loud background sound can prevent alignment. Re-recording and ordinary edits can produce "
+                 "differences. This check contributes zero weight to the AI assessment.",
+        "sample_rate": AUDIO_RATE,
+        "affects_overall_confidence": False,
+    }
+    tracks = [source[0] for source in decoded]
+    if not all(track[0] == "measured" and source[4] for track, source in zip(tracks, decoded, strict=True)):
+        return result | {"reason": "native_format_required",
+                         "summary": "Speech alignment needs two continuous 16 kHz mono 16-bit WAV or FLAC recordings."}
+    if not all(track[2]["source_pts"] == 0 and alignment.MIN_SAMPLES <= track[2]["samples"] <= alignment.MAX_SAMPLES
+               for track in tracks):
+        return result | {"reason": "short_zero_origin_required",
+                         "summary": "Speech alignment needs recordings of 5.8 to 12 seconds that start at a verified zero timestamp."}
+    samples = [(track[1] * 32768).astype("<i2") for track in tracks]
+    status, chosen, median, residual = alignment.locate(*samples)
+    summary = {
+        "insufficient_matching_speech": "Too little similar speech supported a local comparison.",
+        "no_local_difference": "No interval showed a supported local loss of speech similarity.",
+        "broad_processing_difference": "One volume or frequency adjustment, with optional uniform resampling, explained the pair.",
+        "localized_difference": "The aligned recordings sound less similar in this interval than in the sections on both sides.",
+    }
+    result.update(status="unassessed" if status == "insufficient_matching_speech" else status,
+                  reason=status, summary=summary[status], median_alignment_distance=median)
+    if residual is not None:
+        result["relative_processing_residual"] = residual
+    if chosen:
+        earlier_span, submitted_span = (chosen[key] for key in ("earlier_span", "span"))
+        excerpts = {
+            side: _timing_excerpt(assets, "aligned-speech", side, track[1], track[2]["source_pts"], interval)
+            for side, track, interval in zip(("earlier", "submitted"), tracks, (earlier_span, submitted_span), strict=True)
+        }
+        result["range"] = excerpts | {
+            "section_distances": dict(zip(("before", "during", "after"), chosen["means"], strict=True)),
+            "local_excess_distance": chosen["score"],
+            "flank_duration_ms": alignment.FLANK * alignment.HOP * 1000 // AUDIO_RATE,
+            "support_sha256": canonical_hash(chosen),
+        }
+    return result
+
+
 def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None = None,
             include_level_adjustment: bool = True,
             include_trim_alignment: bool = True,
@@ -558,7 +606,8 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             use_dense_clean_speech: bool = False,
             use_clean_speech_eq_guard: bool = False,
             include_clean_speech_match_support: bool = True,
-            include_aac_timing: bool = False) -> tuple[dict, dict[str, bytes]]:
+            include_aac_timing: bool = False,
+            include_aligned_speech: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Compare continuous recordings and recover a small, exactly supported edge trim."""
     paths = earlier, submitted
     filenames = filenames or (earlier.name, submitted.name)
@@ -610,6 +659,9 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
         record["schema"] = SCHEMA_WITH_AAC_TIMING
         if include_clean_speech:
             record["local_timing"]["twelve_second_speech_option"] = allow_long_clean_speech
+    if include_aligned_speech:
+        record.update(schema=SCHEMA_WITH_ALIGNED_SPEECH, comparison_schema=record["schema"],
+                      aligned_speech=_aligned_speech((first, second), assets))
     if sources != tuple(_identity(path, name) for path, name in zip(paths, filenames, strict=True)):
         raise ValueError("One of the recordings changed while the comparison was running.")
     return record, assets

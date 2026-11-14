@@ -313,6 +313,9 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 <p class="caption">{{ context.bin_count }} measured time bins; {{ context.event_count }} selected acoustic events. JSON pointer <span class="mono">{{ context.json_pointer }}</span>. These measurements describe the mixed recording; they do not isolate background sounds from speech or determine AI authorship.</p>
 {% if context.get('upper_frequency_status') == 'unassessed' %}<p class="caption">The surrounding sound did not support a temporary upper-frequency comparison.</p>{% endif %}
 {% if context.get('upper_frequency_status') == 'no_supported_drop' %}<p class="caption">No temporary upper-frequency drop met the measurement rules in the comparable ranges.</p>{% endif %}
+{% if context.digital_silence %}
+<p class="caption">Exact digital silence. Checked {{ context.digital_silence.checked_samples }} of {{ context.source.samples }} samples in continuous ranges. Found {{ context.digital_silence.qualifying_intervals }} qualifying intervals and displayed {{ context.digital_silence.selected | length }}.</p>
+{% endif %}
 {% if context.source.sample_rate %}<p class="caption">Source PCM: {{ context.source.samples }} samples at {{ context.source.sample_rate }} Hz. SHA-256 <span class="mono evidence-hash">{{ context.source.pcm_sha256 }}</span>.</p>{% endif %}
 {{ plates(context.images, true) }}
 {% for note in context.limitations %}<p class="caption">{{ note }}</p>{% endfor %}

@@ -17,6 +17,8 @@ from PIL import Image, ImageDraw
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.audio.decode import SAMPLE_RATE, source_ranges, wav_bytes
+from app.evidence import audio_silence
+from app.evidence import audio_silence_binding as silence
 from app.evidence.audio_bandwidth_binding import (
     BANDWIDTH_METHOD,
     EXPANDED_SCHEMA,
@@ -109,12 +111,16 @@ def _candidates(bins: list[dict]) -> list[dict]:
 
 
 def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict], *, version: str = VERSION) -> dict:
+    if not isinstance(version, str):
+        raise ValueError("Unsupported acoustic measurement version")
+    with_silence = version.endswith(silence.VERSION_SUFFIX)
+    base_version = version.removesuffix(silence.VERSION_SUFFIX)
     schemas = {"mixed-acoustics-1": "chipmunk.acoustic-context/1", VERSION: SCHEMA,
                BANDWIDTH_VERSION: BANDWIDTH_SCHEMA, EXPANDED_VERSION: EXPANDED_SCHEMA}
-    if version not in schemas:
+    if base_version not in schemas or (with_silence and base_version == "mixed-acoustics-1"):
         raise ValueError("Unsupported acoustic measurement version")
-    current = version != "mixed-acoustics-1"
-    bandwidth = version in {BANDWIDTH_VERSION, EXPANDED_VERSION}
+    current = base_version != "mixed-acoustics-1"
+    bandwidth = base_version in {BANDWIDTH_VERSION, EXPANDED_VERSION}
     bins = measurements(pcm)
     candidates = _candidates(bins)
     selected = sorted(candidates, key=lambda c: (-c["priority"], -c["strength"], c["start_sample"], c["category"]))[:MAX_EVENTS]
@@ -126,7 +132,7 @@ def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict
     if bandwidth:
         from app.evidence.audio_bandwidth_confirmation import locate
 
-        if not native_input(len(pcm), mapping, version):
+        if not native_input(len(pcm), mapping, base_version):
             raise ValueError("Temporary upper-frequency review requires a supported lossless mono source and clock")
         count, best = locate(pcm)
         bandwidth_detail = {"assessed_ranges": count, "status": "unassessed" if best is None else "no_supported_drop"}
@@ -134,8 +140,11 @@ def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict
             a, b = best["range"]
             bandwidth_detail.update(status="measured_drop", measurement=best)
             selected.append({"category": "upper_frequency_drop", "start_sample": a, "end_sample": b, "value": best["drop_db"]})
+    silence_detail = audio_silence.measure(pcm, mapping["timeline"]) if with_silence else None
+    if silence_detail is not None:
+        selected.extend({**row, "category": silence.KEY, "value": 0} for row in silence_detail["selected"])
     selected.sort(key=lambda c: (c["start_sample"], c["end_sample"], c["category"]))
-    document = {"schema": schemas[version], "status": "ready", "source": source,
+    document = {"schema": silence.CONTEXT_SCHEMA if with_silence else schemas[base_version], "status": "ready", "source": source,
                 "method": {"version": version, "frame_samples": FRAME_SAMPLES,
                            "description": "Deterministic measurements of frozen mixed mono PCM; no sound-source separation or AI classification.",
                            "thresholds": THRESHOLDS, "selection": "Clipping, then energy changes, then longest quiet intervals; up to eight, shown in time order.",
@@ -161,10 +170,19 @@ def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict
         document["method"]["upper_frequency_drop"] = BANDWIDTH_METHOD
         document["upper_frequency_drop"] = bandwidth_detail
         document["limitations"].append("The short upper-frequency check compares the mixed track only when surrounding upper-frequency sound is measurable. A supported dip can result from ordinary sound changes, filtering, or a recording-path change and carries zero weight in the AI estimate.")
+    if silence_detail is not None:
+        document["method"][silence.KEY] = silence.METHOD
+        document[silence.KEY] = silence_detail
+        document["limitations"].append(silence.LIMITATION)
     for i, candidate in enumerate(selected, 1):
         a, b, category, value = (candidate[k] for k in ("start_sample", "end_sample", "category", "value"))
         ca, cb = max(0, a-2*SAMPLE_RATE), min(len(pcm), b+2*SAMPLE_RATE)
-        if category == "upper_frequency_drop":
+        if category == silence.KEY:
+            ca, cb = a - silence.FLANK, b + silence.FLANK
+            label, unit = "Nonzero samples in the selected interval", "samples"
+            observation = f"All {b-a:,} samples are zero from {a/SAMPLE_RATE:.3f} to {b/SAMPLE_RATE:.3f} s, with measurable sound on both sides."
+            interpretation = silence.LIMITATION + " This observation carries zero AI-confidence weight."
+        elif category == "upper_frequency_drop":
             label, unit = "Minimum relative drop across both upper frequency bands and both flanks", "dB"
             observation = f"The mixed track has at least {value:.1f} dB less upper-frequency energy relative to the lower band across {a/SAMPLE_RATE:.3f} to {b/SAMPLE_RATE:.3f} s. Comparable upper-frequency sound returns afterward."
             interpretation = "Listen to the selected interval and both surrounding portions. Ordinary sound changes or filtering can produce this pattern. This observation carries zero weight in the AI estimate."
@@ -194,7 +212,11 @@ def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict
                  "limitations": ["This interval is descriptive acoustic context, not a synthetic-voice finding or exact edit boundary."]}
         if "change_sample" in candidate:
             event["change_sample"] = candidate["change_sample"]
-        if category == "upper_frequency_drop":
+        if category == silence.KEY:
+            event["title"] = silence.TITLE
+            event["observations"].extend({"label": f"{side} 100 ms RMS", "value": level, "unit": "dBFS"}
+                                         for side, level in zip(("Before", "After"), candidate["flank_rms_dbfs"], strict=True))
+        elif category == "upper_frequency_drop":
             event["title"] = "Temporary upper-frequency drop"
             before, inside, after = bandwidth_detail["measurement"]["relative_band_db"]
             for index, frequency in enumerate(("4.1–5.5 kHz", "5.5–7.4 kHz"), 1):

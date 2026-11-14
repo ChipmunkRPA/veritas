@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Exact digital silence](audio-digital-silence-2026-11-14.md) is now
+  source-linked evidence for audio and video. The check located all 72
+  authored mutes in noisy mixtures and none of 152 controls. It distinguishes
+  whole-track silence from continued background sound and carries zero
+  AI-confidence weight.
+
 - [720p earlier-copy soundtrack timing](video-soundtrack-hd-transfer-2026-11-14.md)
   found 17 of 22 held shifts in each of two matched carriers. The finer
   picture grid excluded a synchronized mouth edit without losing any

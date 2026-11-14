@@ -1120,6 +1120,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
                     or not {f["anchor"]["frame_index"] for f in packet["frames"]}.issubset(indices)):
                 raise PacketIntegrityError("Video window evidence has invalid frame support")
     if document["version"] in NESTED_VERSIONS:
+        from app.evidence.audio_silence_binding import CONTEXT_SCHEMA
         from app.evidence.av_binding import validate_audio_clock_coverage, validate_av_channel
         from app.evidence.video_audio import validate_channel
 
@@ -1131,7 +1132,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
                     and not document["audio"].get("acoustic_context")):
                 raise ValueError("Current video evidence omits its acoustic context measurements")
             if (document["version"] in CONTINUITY_VERSIONS and document["audio"]["coverage"] is not None
-                    and document["audio"]["acoustic_context"]["schema"] != "chipmunk.acoustic-context/2"):
+                    and document["audio"]["acoustic_context"]["schema"] not in {"chipmunk.acoustic-context/2", CONTEXT_SCHEMA}):
                 raise ValueError("Current video evidence omits continuity measurements")
         except (KeyError, TypeError, ValueError) as error:
             raise PacketIntegrityError("Video audio/AV evidence has invalid source bindings") from error

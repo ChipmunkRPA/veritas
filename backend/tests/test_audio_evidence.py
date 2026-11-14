@@ -133,6 +133,11 @@ def audio_fixture(tmp_path, request):
                         "-af", r"asetnsamples=n=1600:p=0,asetpts=PTS+if(gte(N\,64000)\,16000\,0)",
                         "-c:a", "pcm_s16le", str(shifted)], check=True, capture_output=True, timeout=20)
         source_path = shifted
+    elif fixture_type == "digital_mute":
+        time = np.arange(6 * SAMPLE_RATE) / SAMPLE_RATE
+        signal = .2 * np.sin(2 * np.pi * 431 * time + .4)
+        signal[37017:40545] = 0
+        source_path.write_bytes(wav_bytes(signal))
     else:
         _write_source(source_path)
     store = ObjectStore(tmp_path / "objects")
@@ -305,11 +310,12 @@ def test_native_bandwidth_evidence_matches_source_and_pdf(audio_fixture, expecte
     with db.begin_nested() as transaction:
         baseline = build_packet_set(db, analysis, store, result)
         transaction.rollback()
-    assert baseline["acoustic_context"]["schema"] == "chipmunk.acoustic-context/2"
+    assert baseline["acoustic_context"]["schema"] == "chipmunk.acoustic-context/5"
     monkeypatch.setattr(settings, "audio_bandwidth_return_review", True)
     document = build_packet_set(db, analysis, store, result)
     acoustic = document["acoustic_context"]
-    assert acoustic["schema"] == f"chipmunk.acoustic-context/{schema}"
+    assert acoustic["schema"] == "chipmunk.acoustic-context/5"
+    assert acoustic["method"]["version"] == f"mixed-acoustics-{schema}+silence"
     assert acoustic["upper_frequency_drop"]["status"] == expected
     assert document["packets"] == baseline["packets"] and document["coverage"] == baseline["coverage"]
     assert analysis.result_hash == document["original_result_hash"] == result_hash
@@ -351,8 +357,51 @@ def test_native_bandwidth_excludes_unqualified_duration_and_bit_depth(audio_fixt
     db, store, analysis, result, _, _ = audio_fixture
     monkeypatch.setattr(settings, "audio_bandwidth_return_review", True)
     document = build_packet_set(db, analysis, store, result)
-    assert document["acoustic_context"]["schema"] == "chipmunk.acoustic-context/2"
+    assert document["acoustic_context"]["schema"] == "chipmunk.acoustic-context/5"
     assert "upper_frequency_drop" not in document["acoustic_context"]
+
+
+@pytest.mark.parametrize("audio_fixture", ["digital_mute"], indirect=True)
+def test_digital_silence_coordinates_playback_pdf_and_original_replay(audio_fixture, tmp_path, monkeypatch):
+    from test_video_nested_evidence import _check_public_zip
+
+    from app.reports import engine, multimedia_evidence, public_package
+    from app.reports.specimens import specimen
+
+    db, store, analysis, result, pcm, _ = audio_fixture
+    original = specimen("audio", "standard")
+    result = {**original.result, **result}
+    analysis.result_hash = store.put_bytes(canonical_json(result)).sha256
+    document = build_packet_set(db, analysis, store, result)
+    acoustic = document["acoustic_context"]
+    event, = [row for row in acoustic["events"] if row["category"] == "digital_silence"]
+    assert event["interval"] == {"start_sample": 37017, "end_sample": 40545}
+    assert event["context_interval"] == {"start_sample": 35417, "end_sample": 42145}
+    assert len(event["source_timestamp_ranges"]) == 1
+    assert acoustic["digital_silence"]["affects_overall_confidence"] is False
+    assert not any(row["category"] == "near_silence" for row in acoustic["events"])
+    np.testing.assert_array_equal(read_wav(store.read_bytes(event["artifacts"]["selected_clip"]["sha256"])), pcm[37017:40545])
+    np.testing.assert_array_equal(read_wav(store.read_bytes(event["artifacts"]["context_clip"]["sha256"])), pcm[35417:42145])
+    forged = deepcopy(document)
+    forged["acoustic_context"]["digital_silence"]["selected"][0]["start_sample"] += 1
+    forged["sha256"] = packet_hash(forged)
+    with pytest.raises(PacketIntegrityError, match="Digital-silence event"):
+        validate_packet_set(forged, analysis_id=analysis.id, revision=analysis.revision,
+                            original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
+    snapshot = original.model_copy(update={"result": result, "evidence": document,
+        "analysis": original.analysis.model_copy(update={"id": analysis.id, "revision": analysis.revision}),
+        "media": original.media.model_copy(update={"sha256": analysis.sha256, "size_bytes": analysis.size_bytes,
+                                                    "filename": analysis.filename, "content_type": analysis.content_type}),
+        "report": original.report.model_copy(update={"template_set": engine.TEMPLATE_SET})})
+    monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
+    assert public_package._evidence(snapshot)["acoustic_context"]["digital_silence"] == acoustic["digital_silence"]
+    rendered = engine.render_pdf(snapshot)
+    assert not rendered.refused
+    pdf = " ".join(engine.pdf_text(rendered.pdf).split())
+    assert "Exact digital silence" in pdf and "37017" in pdf
+    assert "All 3,528 samples are zero from 2.314 to 2.534 s" in pdf
+    _check_public_zip(SimpleNamespace(db=db, store=store, analysis=analysis, frozen=snapshot, document=document),
+                      tmp_path, monkeypatch, rendered.pdf, source_audio=tmp_path / analysis.filename)
 
 
 def test_unscored_spans_and_below_threshold_do_not_invent_regions(audio_fixture):

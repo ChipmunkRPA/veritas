@@ -927,6 +927,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 "source": copy.deepcopy(acoustic.get("source", {})), "bin_count": len(acoustic.get("bins", [])),
                 "event_count": len(acoustic.get("events", [])), "limitations": copy.deepcopy(acoustic.get("limitations", [])),
                 "upper_frequency_status": acoustic.get("upper_frequency_drop", {}).get("status"),
+                "digital_silence": acoustic.get("digital_silence"),
                 "images": [plate(role, asset, overview_label("acoustic context", acoustic, role))
                            for role, asset in sorted(acoustic.get("overview", {}).items())]})
     for packet_kind, part, packet, json_pointer in entries:

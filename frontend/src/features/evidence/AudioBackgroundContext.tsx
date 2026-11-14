@@ -5,7 +5,7 @@ import { rationalSeconds, seconds, type AcousticContextEvent, type AudioEvidence
 
 const labels: Record<AcousticContextEvent['category'], string> = {
   spectral_transition: 'Possible sound-content transition', energy_change: 'Sound level change', near_silence: 'Very quiet interval',
-  clipping: 'Near-full-scale samples', upper_frequency_drop: 'Temporary upper-frequency drop',
+  clipping: 'Near-full-scale samples', upper_frequency_drop: 'Temporary upper-frequency drop', digital_silence: 'Exact digital silence',
 }
 
 export default function AudioBackgroundContext({ set, token, mediaReady, pauseAudio }: {
@@ -21,7 +21,7 @@ export default function AudioBackgroundContext({ set, token, mediaReady, pauseAu
   }, [hash, context]) // pauseAudio is a presentation callback; source/hash changes select the event.
   const selected = events.find((event) => event.id === selectedId) ?? events[0]
   const bound = context && ['chipmunk.acoustic-context/1', 'chipmunk.acoustic-context/2', 'chipmunk.acoustic-context/3',
-    'chipmunk.acoustic-context/4'].includes(context.schema) && context.status === 'ready'
+    'chipmunk.acoustic-context/4', 'chipmunk.acoustic-context/5'].includes(context.schema) && context.status === 'ready'
     && context.source.sha256 === set.source.sha256
     && context.source.pcm_sha256 === set.source.pcm_sha256
     && context.source.sample_rate === set.source.sample_rate && context.source.sample_rate > 0
@@ -42,6 +42,10 @@ export default function AudioBackgroundContext({ set, token, mediaReady, pauseAu
           <p className="mt-2 mb-0 font-mono text-caption text-text-muted">Measured input: 0.000 s–{seconds(context.source.samples / context.source.sample_rate)} · {context.bins.length} recorded acoustic blocks</p>
           {context.upper_frequency_drop?.status === 'unassessed' && <p className="mt-2 mb-0 text-small text-text-muted">The surrounding sound did not support a temporary upper-frequency comparison.</p>}
           {context.upper_frequency_drop?.status === 'no_supported_drop' && <p className="mt-2 mb-0 text-small text-text-muted">No temporary upper-frequency drop met the measurement rules in the comparable ranges.</p>}
+          {context.digital_silence && <p className="mt-2 mb-0 text-small text-text-muted">
+            Exact digital silence checked {(context.digital_silence.checked_samples / context.source.sample_rate).toFixed(3)} s of the decoded track.
+            {' '}Found {context.digital_silence.qualifying_intervals} qualifying intervals and displayed {context.digital_silence.selected.length}.
+          </p>}
           {context.summary && <EvidenceMeasurements values={[
             { label: 'Low-energy reference of the mixed track', value: context.summary.low_energy_reference_dbfs, unit: 'dBFS' },
             { label: 'Very quiet input', value: context.summary.near_silence_samples / context.source.sample_rate, unit: 's' },

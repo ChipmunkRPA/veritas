@@ -208,9 +208,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         replay_detail += f" Verified {len(review['windows'])} long speech-window input ranges and their marked waveforms."
         if "regions" in review:
             replay_detail += f" Verified {len(review['regions'])} selected speech ranges against the same original samples."
+    from app.evidence import audio_silence_binding as silence
     from app.evidence.audio_bandwidth_binding import BANDWIDTH_SCHEMAS
 
-    if (context := audio.get("acoustic_context")) and context["schema"] in BANDWIDTH_SCHEMAS:
+    context = audio.get("acoustic_context") or {}
+    if context.get("schema") in BANDWIDTH_SCHEMAS or "upper_frequency_drop" in context:
         from app.evidence.audio_background import verify_source_content
         from app.evidence.audio_packets import _chart
 
@@ -218,6 +220,14 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         verify_source_content(context, pcm=decoded.pcm, mapping=decoded.mapping, source=context["source"],
                               voice_packets=audio["packets"], read_asset=lambda sha: archive.read(paths[sha]), waveform=_chart)
         replay_detail += " Recomputed the temporary upper-frequency comparison and acoustic plots."
+    if context.get("schema") == silence.CONTEXT_SCHEMA:
+        from app.evidence.audio_silence import measure
+
+        # Use the verified source ledger to keep zero runs on continuous clocks.
+        measured = measure(decoded.pcm, source["timeline"])
+        if measured != context.get(silence.KEY):
+            raise ValueError("Digital-silence measurements differ from the source audio")
+        replay_detail += " Recomputed exact digital-silence intervals and their surrounding sound."
     interval_label = "interval" if intervals == 1 else "intervals"
     asset_label = "asset" if len(covered) == 1 else "assets"
     playback = (f"{intervals} original playback {interval_label} and accounted for {len(covered)} WAV {asset_label}"

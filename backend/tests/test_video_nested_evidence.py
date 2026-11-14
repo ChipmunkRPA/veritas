@@ -157,7 +157,7 @@ def nested_case(av_fixture, monkeypatch, request):
         from app.evidence import audio_background
         current_acoustics = audio_background.build_content
         def historical_acoustics(*args, **kwargs):
-            kwargs.setdefault('version', 'mixed-acoustics-1')
+            kwargs['version'] = 'mixed-acoustics-1'
             return current_acoustics(*args, **kwargs)
         monkeypatch.setattr(audio_background, 'build_content', historical_acoustics)
     if request.param == 'video-evidence-3':
@@ -817,7 +817,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
         if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.stereo_binding',
                         'app.evidence.stereo_listening_binding', 'app.evidence.stereo_repetition_binding',
                         'app.evidence.audio_gain_repetition_binding',
-                        'app.evidence.audio_background_binding','app.evidence.audio_bandwidth_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
+                        'app.evidence.audio_background_binding','app.evidence.audio_bandwidth_binding', 'app.evidence.audio_silence_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
                         'app.evidence.audio_similarity_binding',
                         'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_boundary_clock','app.evidence.face_alignment_context',
                         'app.evidence.face_paired_edge_binding','app.evidence.face_short_proposal_binding','app.evidence.face_primary_track_binding','app.evidence.face_short_window_binding','app.evidence.face_short_carrier_binding','app.evidence.face_spatial_cut_binding',
@@ -976,6 +976,13 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         (unscored,) = coverage['unscored_intervals']
         assert (unscored['start_sample'], unscored['end_sample']) == (32000, len(reference.pcm))
         assert unscored['source_timestamp_ranges'][0]['source_start_pts'] == 118400
+        (digital,) = [row for row in f.document['audio']['acoustic_context']['events'] if row['category'] == 'digital_silence']
+        native_end = 48000 + int(reference.pcm[48000] == 0)
+        assert digital['source_timestamp_ranges'] == [
+            {'start_sample': 32000, 'end_sample': native_end, 'source_start_pts': 118400,
+             'source_end_pts': 86400 + native_end, 'time_base': '1/16000'},
+        ]
+        assert f.document['audio']['acoustic_context']['digital_silence']['affects_overall_confidence'] is False
         assert f.document['av']['packets']
         assert [p['measurement'] for p in f.document['av']['packets']] == [p['measurement'] for p in ordinary['av']['packets']]
         assert [p['anchor'] for p in f.document['av']['packets']] == [p['anchor'] for p in ordinary['av']['packets']]

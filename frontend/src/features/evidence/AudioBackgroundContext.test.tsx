@@ -86,6 +86,23 @@ describe('background and recording context', () => {
     expect(screen.queryByText('Temporary upper-frequency drop')).toBeNull()
   })
 
+  it('shows the exact digital-silence count and source-linked playback', () => {
+    const set = fixture()
+    const context = set.acoustic_context!
+    context.schema = 'chipmunk.acoustic-context/5'
+    context.digital_silence = {
+      checked_samples: 48000, qualifying_intervals: 1, selected: [context.events[0].interval],
+      affects_overall_confidence: false,
+    }
+    context.events[0].category = 'digital_silence'
+    context.events[0].observation = 'All samples in this selected interval are zero.'
+    show(set)
+    expect(screen.getByText(/Exact digital silence checked 3.000 s of the decoded track/)).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Inspect B01, Exact digital silence, 2.000 s–3.000 s' })).toBeTruthy()
+    expect(screen.getByLabelText('B01: exact acoustic interval').getAttribute('src'))
+      .toContain(context.events[0].artifacts.selected_clip.sha256)
+  })
+
   it('shows a new continuity lead with the same source-bound media and ordinary-music limitation', () => {
     const set = fixture()
     set.version = 'audio-evidence-3'

@@ -97,6 +97,17 @@ def test_silence_has_finite_floor_and_no_synthesis_result():
     verify(fixture)
 
 
+def test_exact_silence_does_not_join_across_source_clock_gap():
+    from app.evidence.audio_silence import measure
+
+    samples = np.r_[np.full(3600, .2), np.zeros(2400), np.full(3600, .2)]
+    first = {'start_sample': 0, 'end_sample': 4800, 'source_pts': 0}
+    second = {'start_sample': 4800, 'end_sample': 9600, 'source_pts': 4800}
+    assert measure(samples, [first, second])['qualifying_intervals'] == 1
+    assert measure(samples, [first, {**second, 'source_pts': 4801}])['qualifying_intervals'] == 0
+    assert measure(samples * 0, [first, second])['qualifying_intervals'] == 0
+
+
 @pytest.mark.parametrize('mutation',['number','time','clip','chart','overlap','source'])
 def test_recomputation_refuses_fabricated_context(mutation):
     fixture = build(np.concatenate([np.zeros(SAMPLE_RATE), np.ones(SAMPLE_RATE)*.2]))

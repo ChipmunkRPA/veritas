@@ -77,6 +77,9 @@ splice flags, untouched files and isolated background observations.
 The [short speech coverage verifier](audio-interval-learning-2026-11-13.md#app-coverage)
 recomputes all five speech-activity measurements from a signed analysis
 and the supplied original, including windows the voice check skipped.
+The [exact digital-silence replay](audio-digital-silence-2026-11-14.md#customer-flow-and-replay)
+recounts 296 matched deliveries and can reproduce the native sample
+positions from public SINE and AMI sources.
 The [brief speech admission replay](audio-short-admission-transfer-2026-11-14.md#local-app-and-replay)
 reproduces which windows admitted speech after a primary coverage skip.
 The receipt keeps false alerts on human splices and unchanged recordings

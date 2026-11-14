@@ -93,7 +93,7 @@ export interface AudioEvidencePacket extends PacketBase {
     source_start_pts: number; source_end_pts: number; time_base: string })[] }
 }
 export interface AcousticContextEvent {
-  id: string; category: 'energy_change' | 'near_silence' | 'clipping' | 'spectral_transition' | 'upper_frequency_drop'
+  id: string; category: 'energy_change' | 'near_silence' | 'clipping' | 'spectral_transition' | 'upper_frequency_drop' | 'digital_silence'
   interval: SampleInterval; context_interval: SampleInterval; start_s: number; end_s: number
   source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
   observation: string; interpretation: string; limitations: string[]; observations: EvidenceMeasure[]
@@ -101,7 +101,7 @@ export interface AcousticContextEvent {
   related_voice_packet_ids: string[]
 }
 export interface AcousticContext {
-  schema: 'chipmunk.acoustic-context/1' | 'chipmunk.acoustic-context/2' | 'chipmunk.acoustic-context/3' | 'chipmunk.acoustic-context/4'; status: 'ready'
+  schema: 'chipmunk.acoustic-context/1' | 'chipmunk.acoustic-context/2' | 'chipmunk.acoustic-context/3' | 'chipmunk.acoustic-context/4' | 'chipmunk.acoustic-context/5'; status: 'ready'
   source: { sha256: string; pcm_sha256: string; sample_rate: number; samples: number; coordinate_space: 'analysed-mono-pcm' }
   method: { version: string; frame_samples: number; description: string; thresholds: Record<string, number> }
   summary?: { measured_samples: number; frame_count: number; low_energy_reference_dbfs: number; peak_dbfs: number;
@@ -111,6 +111,7 @@ export interface AcousticContext {
     clipped_fraction: number; low_band_fraction: number; high_band_fraction: number; spectral_flatness: number })[]
   events: AcousticContextEvent[]; limitations: string[]; omitted_events?: number; omitted_continuity_windows?: number
   upper_frequency_drop?: { assessed_ranges: number; status: 'unassessed' | 'no_supported_drop' | 'measured_drop' }
+  digital_silence?: { checked_samples: number; qualifying_intervals: number; selected: SampleInterval[]; affects_overall_confidence: false }
 }
 export interface SoundEventContext {
   schema: 'chipmunk.sound-events/1'; status: 'ready'

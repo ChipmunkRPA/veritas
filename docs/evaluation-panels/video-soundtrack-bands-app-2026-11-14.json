@@ -1,0 +1,50 @@
+{
+  "cases": {
+    "different_speech": {
+      "coverage": {
+        "candidate_windows": 198,
+        "matched_windows": 0,
+        "same_time_windows": 0,
+        "sections_with_same_time_matches": 0
+      },
+      "exhibits_verified": 0,
+      "original_replay_verified": true,
+      "shift_samples": null,
+      "source_intervals": [],
+      "source_sha256": "edd96e79c026401a45168fe8e841bec22028337cbe1e43020865897abb9f526d",
+      "status": "insufficient_same_time_support"
+    },
+    "later": {
+      "coverage": {
+        "candidate_windows": 198,
+        "matched_windows": 136,
+        "same_time_windows": 122,
+        "sections_with_same_time_matches": 3
+      },
+      "exhibits_verified": 4,
+      "measurement_basis": "two-band-corroboration/1",
+      "original_replay_verified": true,
+      "shift_samples": 3200,
+      "source_intervals": [
+        {
+          "end_sample": 23360,
+          "source_end_pts": 23360,
+          "source_start_pts": 18240,
+          "start_sample": 18240,
+          "time_base": "1/16000"
+        },
+        {
+          "end_sample": 26560,
+          "source_end_pts": 26560,
+          "source_start_pts": 21440,
+          "start_sample": 21440,
+          "time_base": "1/16000"
+        }
+      ],
+      "source_sha256": "fe3a6b138c4803d6f96e2cc1d58eb2e7eb2a94e601621ea441dc76794b8fe4d8",
+      "status": "local_shift"
+    }
+  },
+  "simulated_paid_runs": 2,
+  "unpaid_jobs": 0
+}

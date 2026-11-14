@@ -9,6 +9,7 @@ from collections import Counter
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from scripts.video_short_soundtrack_transfer import OFFSETS as EDIT_CLOCK_OFFSETS
 from scripts.video_short_soundtrack_transfer import RATE, boundary, sha, sources
 
 OFFSETS = (43, 51)
@@ -46,7 +47,8 @@ def review(receipt):
         for row in (row for row in receipt["rows"] if row["carrier"] == carrier):
             truth = row["truth"]
             expected_truth = None if row["role"] not in LAGS else {
-                "samples": boundary(row["group"], 23 if row["offset"] == OFFSETS[0] else 38), "shift": LAGS[row["role"]]}
+                "samples": boundary(row["group"], EDIT_CLOCK_OFFSETS[OFFSETS.index(row["offset"])]),
+                "shift": LAGS[row["role"]]}
             if truth != expected_truth:
                 raise ValueError("Known edit differs from its planned interval")
             for arm, counter in totals.items():
@@ -84,7 +86,7 @@ def review(receipt):
     return results
 
 
-def run(bank, sounds, output, examples):
+def run(bank, sounds, output, examples, *, plan=None, callback=None):
     import numpy as np
     from scipy.signal import butter, sosfiltfilt
 
@@ -93,13 +95,13 @@ def run(bank, sounds, output, examples):
     from scripts.audio_reference_variable_window import read_noise
     from scripts.video_lipsync_local_delay_transfer import shift
 
-    plan = freeze(bank)
+    plan = plan or freeze(bank)
     sounds = read_noise(sounds)
     output.mkdir(mode=0o700, exist_ok=False)
     (output / "freeze.json").write_text(json.dumps(plan, indent=2, sort_keys=True) + "\n")
     rows = []
     for group, item in enumerate(plan["sources"], 1):
-        for ordinal, offset in enumerate(OFFSETS):
+        for ordinal, offset in enumerate(item.get("offsets", OFFSETS)):
             with TemporaryDirectory(prefix="soundtrack-pair-") as scratch:
                 work = Path(scratch)
                 picture = work / "base.mov"
@@ -111,7 +113,7 @@ def run(bank, sounds, output, examples):
                 original = decoded.pcm[:4 * RATE]
                 if len(decoded.mapping["timeline"]) != 1 or len(original) < 4 * RATE - 16:
                     raise ValueError(f"Original clip lacks four continuous seconds ({len(original)} decoded samples)")
-                start, stop = boundary(group, 23 if ordinal == 0 else 38)
+                start, stop = boundary(group, EDIT_CLOCK_OFFSETS[ordinal])
                 weights = np.ones(stop-start)
                 weights[:160] = np.arange(160) / 160
                 weights[-160:] = weights[:160][::-1]
@@ -133,11 +135,14 @@ def run(bank, sounds, output, examples):
                           "different_speech": np.r_[original[32000:], original[:32000]], "rain_only": beds["rain"],
                           "train_only": beds["train"], "short": original[:-3200], "clock_offset": original,
                           "same_local_shift": delayed, "one_track": original, "three_tracks": original}
+                primary_tracks = {"same_local_shift": delayed}
+                if callback:
+                    choose, primary_tracks = callback.variants(original, advanced, delayed, beds, choose, primary_tracks)
                 for carrier, (suffix, codec) in CARRIERS.items():
-                    for role in VARIANTS:
+                    for role, variant in choose.items() if callback else ((role, choose[role]) for role in VARIANTS):
                         base, alternate = work / "primary.wav", work / "alternate.wav"
-                        base.write_bytes(wav_bytes(delayed if role == "same_local_shift" else original))
-                        alternate.write_bytes(wav_bytes(np.clip(choose[role], -1., 32767 / 32768)))
+                        base.write_bytes(wav_bytes(np.clip(primary_tracks.get(role, original), -1., 32767 / 32768)))
+                        alternate.write_bytes(wav_bytes(np.clip(variant, -1., 32767 / 32768)))
                         output_clip = work / f"delivery.{suffix}"
                         other_input = ["-itsoffset", "0.12"] if role == "clock_offset" else []
                         mapping = ["-map", "0:v:0", "-map", "1:a:0"]
@@ -150,18 +155,23 @@ def run(bank, sounds, output, examples):
                         digest = sha(output_clip)
                         first = decode_audio(output_clip, source_sha256=digest, max_seconds=pair.DECODE_SECONDS)
                         readings = {arm: {"status": "unsupported_clock"} for arm in ("guarded", "unrestricted")}
+                        second = None
                         if len(first.mapping.get("audio_stream_indices", [])) == 2:
                             second = pair.decode(output_clip, digest)
                             readings = {"guarded": pair.measure(first, second),
                                         "unrestricted": pair.measure(first, second, require_shared_track=False)}
-                        truth = {"samples": [start, stop], "shift": LAGS[role]} if role in LAGS else None
-                        rows.append({"group": group, "offset": offset, "carrier": carrier, "role": role,
-                                     "truth": truth, "sha256": digest, **readings})
+                        lags = callback.LAGS if callback else LAGS
+                        truth = {"samples": [start, stop], "shift": lags[role]} if role in lags else None
+                        row = {"group": group, "offset": offset, "carrier": carrier, "role": role,
+                               "truth": truth, "sha256": digest, **readings}
+                        rows.append(row)
+                        if callback:
+                            callback.score(row, first, second, output_clip, output, examples)
                         if examples and group == 1 and ordinal == 0 and role in {"later", "same", "constant", "different_speech"}:
                             (output / f"{carrier}-{role}.{suffix}").write_bytes(output_clip.read_bytes())
             print(group, offset, len(rows), flush=True)
     receipt = {"freeze": plan, "rows": rows}
-    receipt["results"] = review(receipt)
+    receipt["results"] = (callback.review if callback else review)(receipt)
     (output / "receipt.json").write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n")
     print(json.dumps(receipt["results"], sort_keys=True))
 

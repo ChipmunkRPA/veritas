@@ -47,7 +47,8 @@ SCOPE = ("For clips with identical decoded pictures and picture timing, this che
          "This comparison carries zero weight in the AI estimate.")
 
 
-def _matches(earlier, submitted, *, window=WINDOW, step=STEP, min_rms=MIN_RMS):
+def _matches(earlier, submitted, *, window=WINDOW, step=STEP, min_rms=MIN_RMS,
+             min_correlation=MIN_CORRELATION, min_margin=MIN_MARGIN):
     base = np.asarray(earlier, dtype=np.float64)
     sums = np.r_[0, np.cumsum(base)]
     squares = np.r_[0, np.cumsum(base * base)]
@@ -69,7 +70,7 @@ def _matches(earlier, submitted, *, window=WINDOW, step=STEP, min_rms=MIN_RMS):
         best = float(correlation[index])
         distinct = max(float(correlation[:max(0, index - ALTERNATIVE + 1)].max(initial=0)),
                        float(correlation[index + ALTERNATIVE:].max(initial=0)))
-        if best < MIN_CORRELATION or best - distinct < MIN_MARGIN:
+        if best < min_correlation or best - distinct < min_margin:
             yield start, None, None
         else:
             yield start, start - (low + index), best

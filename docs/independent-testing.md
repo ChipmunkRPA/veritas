@@ -13,6 +13,10 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [frequency-band soundtrack replay](video-soundtrack-bands-2026-11-14.md#replay)
+recounts the added timing locations, misses and ordinary flags with recorded
+rain and train noise. The numeric receipt uses standard-library Python.
+
 The [writing ratio calibration replay](writing-ratio-context-review-2026-11-14.md#replay)
 recounts eight frozen absolute, context and length comparisons. It distinguishes
 correct added locations, genuine flags and unrelated locations in edited files.

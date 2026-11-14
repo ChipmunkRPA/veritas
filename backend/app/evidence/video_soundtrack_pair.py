@@ -6,7 +6,7 @@ from hashlib import sha256
 
 from app.detectors.audio.decode import SAMPLE_RATE, decode_audio, source_ranges, wav_bytes
 from app.evidence import video_reference_soundtrack as timing
-from app.evidence.video_soundtrack_pair_binding import LIMITATION, SCHEMA
+from app.evidence.video_soundtrack_pair_binding import FREQUENCY_BASIS, LIMITATION, SCHEMA
 
 MAX_SECONDS = 12
 DECODE_SECONDS = MAX_SECONDS + 1
@@ -33,9 +33,13 @@ def measure(primary, secondary, *, require_shared_track=True):
         return {"status": "unsupported_clock"}
     matches = list(timing._matches(primary.pcm, secondary.pcm, window=timing.SHORT_WINDOW,
                                   step=timing.SHORT_STEP, min_rms=timing.QUIET_RMS))
+    return select(matches, len(primary.pcm), require_shared_track=require_shared_track)
+
+
+def select(matches, samples, *, require_shared_track=True):
     assessed = [(start, lag) for start, lag, _ in matches if lag is not None]
     same_time = [start for start, lag in assessed if abs(lag) <= timing.STABLE]
-    thirds = {min(2, 3 * start // len(primary.pcm)) for start in same_time}
+    thirds = {min(2, 3 * start // samples) for start in same_time}
     coverage = {"candidate_windows": len(matches), "matched_windows": len(assessed), "same_time_windows": len(same_time),
                 "sections_with_same_time_matches": len(thirds)}
     if (len(assessed) < 2 * timing.FLANK_WINDOWS + timing.MIN_WINDOWS
@@ -50,14 +54,21 @@ def decode(path, source_sha256):
     return decode_audio(path, source_sha256=source_sha256, stream_position=1, max_seconds=DECODE_SECONDS)
 
 
-def analyze(path, source_sha256, primary):
+def analyze(path, source_sha256, primary, *, use_bands=False):
     if not timing.MIN_SAMPLES <= len(primary.pcm) <= MAX_SECONDS * SAMPLE_RATE:
         return {"status": "duration_outside_scope"}, None
     try:
         secondary = decode(path, source_sha256)
     except (ValueError, RuntimeError):
         return {"status": "second_stream_unavailable"}, None
-    return measure(primary, secondary), secondary
+    result = measure(primary, secondary)
+    if use_bands and result["status"] in {"no_local_shift", "insufficient_same_time_support"}:
+        from app.evidence.video_soundtrack_bands import matches
+
+        candidate = select(list(matches(primary.pcm, secondary.pcm)), len(primary.pcm))
+        if candidate["status"] == "local_shift":
+            return candidate | {"measurement_basis": FREQUENCY_BASIS}, secondary
+    return result, secondary
 
 
 def describe(source, reading, primary, secondary, make_asset):
@@ -68,7 +79,9 @@ def describe(source, reading, primary, secondary, make_asset):
     doc = {"schema": SCHEMA, "status": reading["status"], "source_sha256": source["sha256"],
            "stream_indices": source["audio_stream_indices"], "primary_pcm_sha256": source["pcm_sha256"],
            "affects_overall_confidence": False, "limitation": LIMITATION, "location": None,
-           "coverage": {key: value for key, value in reading.items() if key not in {"status", "range"}}}
+           "coverage": {key: value for key, value in reading.items() if key not in {"status", "range", "measurement_basis"}}}
+    if basis := reading.get("measurement_basis"):
+        doc["measurement_basis"] = basis
     if secondary is not None:
         doc["secondary_pcm_sha256"] = secondary.mapping["pcm_sha256"]
     if span is None:

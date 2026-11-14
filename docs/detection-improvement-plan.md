@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Two-track timing under rain and train noise](video-soundtrack-bands-2026-11-14.md)
+  raises useful timing locations from 41 to 45 of 84 staged edits in each of
+  two delivery formats. It adds one too-short range on an edited clip and no
+  flags on 252 controls per format. The development trial links both sound excerpts.
+
 - [Competing offsets in single-track video](video-lip-lag-prominence-2026-11-14.md)
   tests whether isolated peaks improve short timing localization. The rule
   finds two of 64 staged edits and flags 44 of 256 controls, so it stays

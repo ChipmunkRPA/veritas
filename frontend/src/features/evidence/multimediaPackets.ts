@@ -266,6 +266,7 @@ export type VideoChannelStatus = 'ready' | 'absent' | 'unavailable' | 'not_asses
 export interface SoundtrackPair {
   status: 'duration_outside_scope' | 'second_stream_unavailable' | 'unsupported_clock' | 'insufficient_same_time_support' | 'no_local_shift' | 'local_shift'
   stream_indices: [number, number]; limitation: string
+  measurement_basis?: 'two-band-corroboration/1'
   coverage: Partial<Record<'candidate_windows' | 'matched_windows' | 'same_time_windows' | 'sections_with_same_time_matches', number>>
   location: { shift_samples: number; supporting_windows: number; minimum_correlation: number
     excerpts: (SampleInterval & { stream_index: number; source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'];

@@ -265,6 +265,9 @@ XML body index {{ row.body_index }}, paragraph child index {{ row.inline_index }
 {% if pair.coverage %}<p class="caption">{{ pair.coverage.same_time_windows }} same-time matches among {{ pair.coverage.matched_windows }} matched windows. {{ pair.coverage.candidate_windows }} windows checked.</p>{% endif %}
 {% if pair.location %}
 <p>The matching excerpt is {{ '%.1f' | format(pair.location.offset_ms | abs) }} ms {{ 'later' if pair.location.offset_ms > 0 else 'earlier' }} in the second track (stream {{ pair.stream_indices[1] }}).</p>
+{% if pair.get('measurement_basis') == 'two-band-corroboration/1' %}
+<p class="caption">Each supporting window had at least two frequency bands that agreed on the shift. The waveforms and clips use the original decoded audio.</p>
+{% endif %}
 {% if evidence.withheld %}
 {% for track in pair.location.excerpts %}<p class="caption">{{ track.label }}</p>{% endfor %}
 {% else %}{{ plates(pair.location.excerpts | map(attribute='image') | list, wide=true) }}{% endif %}

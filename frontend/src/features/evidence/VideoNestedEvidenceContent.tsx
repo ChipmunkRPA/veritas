@@ -54,6 +54,9 @@ function SoundtrackComparison({ pair, set, token, mediaReady }: {
       {pair.coverage.candidate_windows} windows checked.</p>}
     {location && <>
       <p className="mt-2 mb-0 text-small">The matching excerpt is {Math.abs(offsetMs).toFixed(1)} ms {offsetMs > 0 ? 'later' : 'earlier'} in the second track.</p>
+      {pair.measurement_basis === 'two-band-corroboration/1' && <p className="mt-2 mb-0 text-caption text-text-muted">
+        Each supporting window had at least two frequency bands that agreed on the shift. The waveforms and clips use the original decoded audio.
+      </p>}
       <div className={`mt-3 ${evidenceGrid}`} onPlayCapture={event => {
         if (event.target instanceof HTMLAudioElement) {
           event.currentTarget.querySelectorAll('audio').forEach(audio => { if (audio !== event.target && !audio.paused) audio.pause() })

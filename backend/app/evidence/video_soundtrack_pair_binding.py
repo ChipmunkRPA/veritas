@@ -10,6 +10,9 @@ from app.core.canonical import canonical_hash
 KEY = "soundtrack_pair"
 COMMITMENT = "video_soundtrack_pair_sha256"
 SCHEMA = "chipmunk.video-soundtrack-pair/1"
+BANDS = ((250, 1350), (1350, 3500), (3500, 7000))
+BAND_CORRELATION = .82
+FREQUENCY_BASIS = "two-band-corroboration/1"
 RATE = 16_000
 LIMITATION = ("The check compares the first and second audio streams. It cannot tell which stream changed or whether either "
               "one matches the speaker's mouth. Dubbing, music and ordinary editing can affect the result. "
@@ -53,10 +56,12 @@ def _validate(doc, source, expected):
     location = doc["location"]
     coverage = doc["coverage"]
     streams = doc["stream_indices"]
+    basis = doc.get("measurement_basis")
     if (commitment(doc) != expected or doc["schema"] != SCHEMA or doc["source_sha256"] != source["sha256"]
             or doc["primary_pcm_sha256"] != source["pcm_sha256"] or streams != source["audio_stream_indices"]
             or len(streams) != 2 or doc["affects_overall_confidence"] is not False or doc["limitation"] != LIMITATION
-            or status not in REASONS or (location is not None) != (status == "local_shift")):
+            or status not in REASONS or (location is not None) != (status == "local_shift")
+            or basis not in {None, FREQUENCY_BASIS} or basis is not None and location is None):
         raise ValueError("Soundtrack comparison differs from its source or recorded disposition")
     in_scope = 24000 <= source["samples"] <= 12 * RATE
     if (status == "duration_outside_scope") == in_scope:
@@ -86,7 +91,7 @@ def _validate(doc, source, expected):
     shift, witnesses, score = (location[name] for name in ("shift_samples", "supporting_windows", "minimum_correlation"))
     if (not all(type(value) is int for value in (shift, witnesses)) or not 1920 <= abs(shift) <= 5760
             or not 4 <= witnesses <= matched - same or type(score) not in (int, float) or not math.isfinite(score)
-            or not .86 <= score <= 1 or len(source["timeline"]) != 1
+            or not (BAND_CORRELATION if basis else .86) <= score <= 1 or len(source["timeline"]) != 1
             or second["start_sample"] - first["start_sample"] != shift or second["end_sample"] - first["end_sample"] != shift):
         raise ValueError("Invalid local soundtrack observation")
     start_pts = source["timeline"][0]["source_pts"]

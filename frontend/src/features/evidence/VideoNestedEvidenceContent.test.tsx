@@ -254,12 +254,14 @@ it('shows both source-linked waveforms and playable excerpts for a local soundtr
     clip: { sha256: (stream + 4).toString().repeat(64), media_type: 'audio/wav', url: '', samples: 4800, sample_rate: 16000, channels: 1 },
   })
   audio.soundtrack_pair = { status: 'local_shift', stream_indices: [1, 2], limitation: 'Carries zero weight in the AI estimate.',
+    measurement_basis: 'two-band-corroboration/1',
     coverage: { candidate_windows: 197, matched_windows: 100, same_time_windows: 90 },
     location: { shift_samples: 3200, supporting_windows: 8, minimum_correlation: .92,
       excerpts: [excerpt(1, 17600, 'd'), excerpt(2, 20800, 'e')] } }
   render(<MemoryRouter><VideoNestedEvidenceContent set={set} token="secure" mediaReady channel="audio" /></MemoryRouter>)
   const comparison = within(screen.getByRole('region', { name: 'Timing between audio tracks' }))
   expect(comparison.getByText(/200\.0 ms later/)).toBeTruthy()
+  expect(comparison.getByText(/at least two frequency bands that agreed on the shift/)).toBeTruthy()
   expect(comparison.getByText(/Stream 2 · source 1\.300 s–1\.600 s/)).toBeTruthy()
   expect(comparison.getByRole('img', { name: 'Stream 1 waveform' })).toBeTruthy()
   expect(comparison.getByLabelText('Stream 2 matching excerpt').getAttribute('src')).toContain('6'.repeat(64) + '.wav')

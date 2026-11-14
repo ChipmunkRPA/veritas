@@ -15,9 +15,10 @@ from scripts.video_short_return_encoded_app import PaymentStub, body, checkout, 
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def run(bank, output):
+def run(bank, output, *, band_example=None, expected_shift=3200):
     configure(output, ROOT)
-    os.environ.update(VERITAS_ENVIRONMENT="dev", VERITAS_VIDEO_SOUNDTRACK_PAIR_REVIEW="true")
+    os.environ.update(VERITAS_ENVIRONMENT="dev", VERITAS_VIDEO_SOUNDTRACK_PAIR_REVIEW="true",
+                      VERITAS_VIDEO_SOUNDTRACK_FREQUENCY_REVIEW=str(band_example is not None).lower())
 
     import pymupdf
     from fastapi.testclient import TestClient
@@ -25,7 +26,7 @@ def run(bank, output):
 
     from app.api import auth
     from app.billing import service
-    from app.evidence.video_soundtrack_pair_binding import KEY, assets
+    from app.evidence.video_soundtrack_pair_binding import FREQUENCY_BASIS, KEY, assets
     from app.main import app
     from app.reports.verify import verify_package
     from app.storage.db import Analysis, get_session
@@ -44,8 +45,9 @@ def run(bank, output):
             db.commit()
         client.headers["X-API-Key"] = secret
         for role, expected in (("later", "local_shift"), ("different_speech", "insufficient_same_time_support")):
-            source = bank / f"aac-{role}.mp4"
-            aid = checkout(client, stub, source, filename=source.name)
+            source = band_example if role == "later" and band_example else bank / f"aac-{role}.mp4"
+            media_type = "video/quicktime" if source.suffix == ".mov" else "video/mp4"
+            aid = checkout(client, stub, source, filename=source.name, media_type=media_type)
             assert stub.sessions[next(reversed(stub.sessions))]["amount_total"] == 999
             evidence = body(client.get(f"/api/v2/analyses/{aid}/evidence-packets"))
             exported = fetch(client, f"/api/analyses/{aid}/export.json")
@@ -53,6 +55,8 @@ def run(bank, output):
             assert json.loads(exported)["evidence"] == evidence
             case = evidence["audio"][KEY]
             assert case["status"] == expected and case["stream_indices"] == [1, 2] and case["affects_overall_confidence"] is False
+            if role == "later" and band_example:
+                assert case.get("measurement_basis") == FREQUENCY_BASIS
             exhibits = {role: fetch(client, asset["url"]) for role, asset in assets(case).items()}
             assert all(hashlib.sha256(data).hexdigest() == assets(case)[role]["sha256"] for role, data in exhibits.items())
             with get_session() as db:
@@ -70,7 +74,11 @@ def run(bank, output):
                 scan(words)
                 assert "Timing between audio tracks" in words and "The second track was unassessed" not in words
                 if case["location"]:
-                    assert len(exhibits) == 4 and "200.0 ms later" in words
+                    direction = 'later' if expected_shift > 0 else 'earlier'
+                    assert case['location']['shift_samples'] == expected_shift and len(exhibits) == 4
+                    assert f"{abs(expected_shift)/16:.1f} ms {direction}" in words
+                    if band_example:
+                        assert "at least two frequency bands that agreed on the shift" in words
                     originals = {Image.open(io.BytesIO(data)).convert("RGB").tobytes()
                                  for role, data in exhibits.items() if role.endswith("waveform")}
                     extracted = {Image.open(io.BytesIO(document.extract_image(xref)["image"])).convert("RGB").tobytes()
@@ -93,6 +101,8 @@ def run(bank, output):
                             "shift_samples": location["shift_samples"] if location else None,
                             "source_intervals": [track["source_timestamp_ranges"][0] for track in location["excerpts"]]
                             if location else [], "exhibits_verified": len(exhibits), "original_replay_verified": True}
+            if basis := case.get("measurement_basis"):
+                tested[role]["measurement_basis"] = basis
     receipt = {"simulated_paid_runs": len(tested), "unpaid_jobs": 0, "cases": tested}
     (output / "receipt.json").write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n")
 
@@ -101,5 +111,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("bank", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--band-example", type=Path)
+    parser.add_argument("--expected-shift", type=int, default=3200)
     args = parser.parse_args()
-    run(args.bank, args.output)
+    run(args.bank, args.output, band_example=args.band_example, expected_shift=args.expected_shift)

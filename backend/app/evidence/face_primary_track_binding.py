@@ -6,6 +6,7 @@ from bisect import bisect_left
 AREA_RATIO = 4
 MIN_OVERLAP = 0.35
 MAX_DISTRACTOR_OVERLAP = 0.10
+POSITION_MAX_ANCHOR_GAP = 50
 
 
 def overlap(a, b):
@@ -29,21 +30,21 @@ def dominant(boxes):
     return main
 
 
-def anchors(detections):
+def anchors(detections, *, position_only=False):
     boxes = {
         i: main for i, candidates in sorted(detections.items()) if (main := dominant(candidates)) is not None
     }
     if len(boxes) < 4:
         return {}
     indices = list(boxes)
-    if any(b - a > 20 or overlap(boxes[a], boxes[b]) < MIN_OVERLAP for a, b in zip(indices, indices[1:])):
+    maximum_gap = POSITION_MAX_ANCHOR_GAP if position_only else 20
+    if any(b - a > maximum_gap or overlap(boxes[a], boxes[b]) < MIN_OVERLAP for a, b in zip(indices, indices[1:])):
         return {}
     return boxes
 
 
-def follow(index, boxes, reference):
-    main = dominant(boxes)
-    if main is None or not reference:
+def follow(index, boxes, reference, *, position_only=False):
+    if not reference:
         return None
     indices = list(reference)
     offset = bisect_left(indices, index)
@@ -60,17 +61,24 @@ def follow(index, boxes, reference):
             left + (right - left) * (index - a) / (b - a)
             for left, right in zip(reference[a], reference[b], strict=True)
         )
-    return (
-        main
-        if (
-            overlap(main, predicted) >= MIN_OVERLAP
-            and 0.5 <= main[2] * main[3] / (predicted[2] * predicted[3]) <= 2
-        )
-        else None
-    )
+    expected_area = predicted[2] * predicted[3]
+
+    def comparable(box):
+        return overlap(box, predicted) >= MIN_OVERLAP and 0.5 <= box[2] * box[3] / expected_area <= 2
+
+    if not position_only or not a <= index <= b:
+        main = dominant(boxes)
+        return main if main is not None and comparable(main) else None
+    plausible = [box for box in boxes if comparable(box)]
+    if len(plausible) != 1:
+        return None
+    main, = plausible
+    if any(box != main and overlap(box, main) > MAX_DISTRACTOR_OVERLAP for box in boxes):
+        return None
+    return main
 
 
-def validate(record, source, planned, faces, anchor_samples):
+def validate(record, source, planned, faces, anchor_samples, *, position_only=False):
     rows = record["face_detection_boxes"]
     width, height = source["width"], source["height"]
     if (
@@ -101,10 +109,10 @@ def validate(record, source, planned, faces, anchor_samples):
         ):
             raise ValueError("Dominant face evidence has an invalid native detection box")
         detections[row["frame_index"]] = [tuple(box) for box in boxes]
-    reference = anchors({index: detections[index] for index in anchor_samples})
+    reference = anchors({index: detections[index] for index in anchor_samples}, position_only=position_only)
     if not reference or not any(len(detections[index]) > 1 for index in faces):
         raise ValueError("Dominant face evidence lacks a continuous sampled position")
     for index, reading in faces.items():
         selected = tuple(reading["bbox"][key] for key in ("x", "y", "w", "h"))
-        if follow(index, detections[index], reference) != selected:
+        if follow(index, detections[index], reference, position_only=position_only) != selected:
             raise ValueError("The measured face does not follow its recorded native detections")

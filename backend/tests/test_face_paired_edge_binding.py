@@ -120,7 +120,7 @@ def test_paired_edge_rejects_altered_proof(change, reason):
         face_boundary_binding.validate_record(value, coarse, source, table_pts=table.pts)
 
 
-@pytest.mark.parametrize("carrier", ["hevc", "webm", "avc"])
+@pytest.mark.parametrize("carrier", ["hevc", "webm", "avc", "avc_position"])
 def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(carrier):
     webm = carrier == "webm"
     table, source, _, value = record()
@@ -137,7 +137,8 @@ def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(carr
         irregular = replace(table, pts=(*table.pts[:70], table.pts[70] + 1, *table.pts[71:]))
         assert not face_short_proposal_binding.avc_source(irregular, face_short_proposal_binding.AVC_ENCODING, "mp4")
     method = {"hevc": face_short_proposal_binding.METHOD, "webm": face_short_proposal_binding.WEBM_METHOD,
-              "avc": face_short_proposal_binding.AVC_METHOD}[carrier]
+              "avc": face_short_proposal_binding.AVC_METHOD,
+              "avc_position": face_short_proposal_binding.POSITION_TRACK_AVC_METHOD}[carrier]
     encoding, container = face_short_proposal_binding.SOURCE_PROFILES[method]
     old_faces = {row["frame_index"]: row for row in value["frame_inputs"]}
     sample = list(face_short_proposal_binding.ANCHOR_SAMPLES)
@@ -170,6 +171,12 @@ def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(carr
         scene_frame_inputs=[frame(i) for i in range(120)],
         edges=edges,
     )
+    if carrier == "avc_position":
+        tracked = [600, 320, 110, 110]
+        value["face_detection_boxes"] = [
+            {"frame_index": i, "boxes": [tracked, [950, 35, 100 if 74 <= i <= 104 else 48, 48]]}
+            for i in planned
+        ]
     response = paired.edge_response(value, {row["frame_index"]: row for row in value["frame_inputs"]}, 87, 93)
     value.update(response=response, response_hex=response.hex())
     assert type(settings).model_fields["video_face_unrouted_short_review"].default is False
@@ -194,7 +201,7 @@ def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(carr
     for key, changed, reason in (
         ("shortlist_edges", [87, 93, 93], "edge shortlist"),
         ("scheduled_frame_indices", planned[:-1], "face sample budget"),
-        ("shortlist_anchor_indices", sample[:-1], "shortlist anchors"),
+        ("shortlist_anchor_indices", value["shortlist_anchor_indices"][:-1], "shortlist anchors"),
         ("scene_frame_inputs", value["scene_frame_inputs"][:-1], "omits native pixel inputs"),
         ("response_hex", (0.11).hex(), "fixed support point"),
     ):
@@ -253,3 +260,25 @@ def test_dominant_face_position_rejects_competing_or_discontinuous_detections():
     record["face_detection_boxes"][-1]["boxes"].append(list(peer))
     with pytest.raises(ValueError, match="does not follow"):
         track.validate(record, {"width": 1280, "height": 720}, planned, faces, slots)
+
+
+def test_face_position_tracks_a_smaller_face_only_between_matching_anchors():
+    from app.evidence import face_primary_track_binding as track
+
+    assert type(settings).model_fields["video_face_position_track_avc_review"].default is False
+    main, inset, peer = (10, 30, 120, 150), (430, 40, 48, 50), (350, 40, 110, 145)
+    slots = [4, 14, 24, 34, 44, 54, 64, 74]
+    detections = {i: [main, peer] if 24 < i < 74 else [main, inset] for i in slots}
+    assert track.anchors(detections) == {}
+    reference = track.anchors(detections, position_only=True)
+    assert track.follow(54, [peer, main], reference, position_only=True) == main
+    assert track.follow(54, [main, (22, 24, 110, 145)], reference, position_only=True) is None
+    assert track.follow(81, [main, peer], reference, position_only=True) is None
+    record = {"face_detection_boxes": [{"frame_index": i, "boxes": [list(box) for box in detections[i]]}
+                                       for i in slots]}
+    source = {"width": 1280, "height": 720}
+    faces = {54: {"bbox": dict(zip(("x", "y", "w", "h"), main, strict=True))}}
+    track.validate(record, source, slots, faces, slots, position_only=True)
+    faces[54]["bbox"] = dict(zip(("x", "y", "w", "h"), peer, strict=True))
+    with pytest.raises(ValueError, match="does not follow"):
+        track.validate(record, source, slots, faces, slots, position_only=True)

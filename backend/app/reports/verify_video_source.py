@@ -43,20 +43,26 @@ from app.evidence import (
     scene_return_binding,
 )
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
-from app.evidence.face_return_binding import DENSE_ENCODING, FINE_SCENE_METHOD, GUARDED_720P30_METHOD, GUARDED_METHODS
+from app.evidence.face_return_binding import (
+    DENSE_ENCODING,
+    FINE_SCENE_METHOD,
+    GUARDED_720P30_METHOD,
+    GUARDED_METHODS,
+)
 from app.evidence.face_return_binding import validate_packet as validate_face_return
 from app.evidence.source_geometry import pixel_bounds
 from app.evidence.video_packet_versions import (
     DENSE_FACE_VERSIONS,
     GUARDED_720P30_FACE_VERSION,
     GUARDED_CODEC_FACE_VERSION,
+    MOVING_AVC_PROPOSAL_VERSION,
     PAIRED_EDGE_VERSION,
+    POSITION_TRACK_AVC_PROPOSAL_VERSION,
+    PRIMARY_TRACK_AVC_PROPOSAL_VERSION,
+    SECOND_AVC_PROPOSAL_VERSION,
     SECOND_HD_FACE_VERSION,
     SECOND_SHORT_FACE_VERSION,
     SHORT_AVC_PROPOSAL_VERSION,
-    MOVING_AVC_PROPOSAL_VERSION,
-    PRIMARY_TRACK_AVC_PROPOSAL_VERSION,
-    SECOND_AVC_PROPOSAL_VERSION,
     SHORT_CARRIER_VERSION,
     SHORT_PROPOSAL_VERSION,
     SHORT_WEBM_PROPOSAL_VERSION,
@@ -246,7 +252,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     } or avc_with_guarded_first
     expected_proposals = (1 if avc_with_guarded_first else 2) if second_avc else int(
         evidence["version"] in {SHORT_PROPOSAL_VERSION, SHORT_WEBM_PROPOSAL_VERSION, SHORT_AVC_PROPOSAL_VERSION,
-                                MOVING_AVC_PROPOSAL_VERSION, PRIMARY_TRACK_AVC_PROPOSAL_VERSION})
+                                MOVING_AVC_PROPOSAL_VERSION, PRIMARY_TRACK_AVC_PROPOSAL_VERSION,
+                                POSITION_TRACK_AVC_PROPOSAL_VERSION})
     windowed = evidence["version"] == SHORT_WINDOW_VERSION
     carrier_windows = evidence["version"] == SHORT_CARRIER_VERSION
     paired = evidence["version"] in {PAIRED_EDGE_VERSION, SHORT_PROPOSAL_VERSION, SPATIAL_CUT_VERSION}
@@ -274,7 +281,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                                                        face_return.source_carrier(original)):
             raise ValueError("The original video differs from its brief WebM face-review source profile")
     if evidence["version"] in {SHORT_AVC_PROPOSAL_VERSION, SECOND_AVC_PROPOSAL_VERSION, MOVING_AVC_PROPOSAL_VERSION,
-                               PRIMARY_TRACK_AVC_PROPOSAL_VERSION}:
+                               PRIMARY_TRACK_AVC_PROPOSAL_VERSION, POSITION_TRACK_AVC_PROPOSAL_VERSION}:
         delivery = probe_container(original, include_codec_tag=True)
         encoding = delivery.get("codec"), delivery.get("pix_fmt")
         if not face_short_proposal_binding.avc_source(table, (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag")),

@@ -16,12 +16,15 @@ AVC_METHOD = "face-short-return/13"
 SECOND_AVC_METHOD = "face-short-return/14"
 MOVING_AVC_METHOD = "face-short-return/15"
 PRIMARY_TRACK_AVC_METHOD = "face-short-return/16"
+POSITION_TRACK_AVC_METHOD = "face-short-return/17"
 AVC_ENCODING = ("h264", "yuv420p", "avc1")
 SOURCE_PROFILES = {METHOD: (paired.ENCODING, "mp4"), WEBM_METHOD: (WEBM_ENCODING, "webm"),
                    AVC_METHOD: (AVC_ENCODING, "mp4"), SECOND_AVC_METHOD: (AVC_ENCODING, "mp4"),
-                   MOVING_AVC_METHOD: (AVC_ENCODING, "mp4"), PRIMARY_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4")}
+                   MOVING_AVC_METHOD: (AVC_ENCODING, "mp4"), PRIMARY_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"),
+                   POSITION_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4")}
 METHODS = frozenset(SOURCE_PROFILES)
-MOVING_METHODS = frozenset({MOVING_AVC_METHOD, PRIMARY_TRACK_AVC_METHOD})
+TRACK_METHODS = frozenset({PRIMARY_TRACK_AVC_METHOD, POSITION_TRACK_AVC_METHOD})
+MOVING_METHODS = TRACK_METHODS | {MOVING_AVC_METHOD}
 POINT = 0.10
 ANCHOR_SAMPLES = tuple(range(4, 120, 10))
 EDGE_SCAN = range(6, 115)
@@ -70,7 +73,7 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
         clock = base == webm.WEBM_TIME_BASE and (table_pts is None or webm.valid_webm_clock(base, table_pts, first_pts))
     else:
         clock = table_pts is None or exact_clock(base, table_pts, first_pts)
-    extra = {"face_detection_boxes"} if record["method"] == PRIMARY_TRACK_AVC_METHOD else set()
+    extra = {"face_detection_boxes"} if record["method"] in TRACK_METHODS else set()
     require(
         set(record)
         == extra | {
@@ -139,8 +142,9 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
         record["shortlist_anchor_indices"] == observed and len(observed) >= 4,
         "Brief face proposal lacks original shortlist anchors",
     )
-    if record["method"] == PRIMARY_TRACK_AVC_METHOD:
-        face_primary_track_binding.validate(record, source, planned, faces, ANCHOR_SAMPLES)
+    if record["method"] in TRACK_METHODS:
+        face_primary_track_binding.validate(record, source, planned, faces, ANCHOR_SAMPLES,
+                                            position_only=record["method"] == POSITION_TRACK_AVC_METHOD)
     for key, i in (("start", start), ("end", stop)):
         pts = scenes[i]["pts"]
         require(

@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Face tracking through changes in guest size](video-face-position-track-2026-11-13.md)
+  recovered six exact intervals across three of eight source recordings,
+  with no added flags on 32 matched ordinary controls. The measurements
+  cover a qualified four-second video profile and carry zero AI-confidence weight.
+
 - [Short speech-window attenuation](audio-voice-attenuation-2026-11-13.md)
   added two useful locations on 28 noisy edits and ten ordinary flags
   with the simpler rule. The comparison stays offline. The app and PDF

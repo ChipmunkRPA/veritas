@@ -21,10 +21,11 @@ from scripts.video_short_return_encoded_app import (
 )
 
 
-def run(bank, output, *, primary_track=False):
+def run(bank, output, *, primary_track=False, position_track=False):
     configure(output, ROOT)
     os.environ.update(
-        BASE_FLAGS, VERITAS_VIDEO_FACE_SECOND_AVC_REVIEW="true", VERITAS_VIDEO_FACE_MOVING_AVC_REVIEW="false"
+        BASE_FLAGS, VERITAS_VIDEO_FACE_SECOND_AVC_REVIEW="true", VERITAS_VIDEO_FACE_MOVING_AVC_REVIEW="false",
+        VERITAS_VIDEO_FACE_PRIMARY_TRACK_AVC_REVIEW="false", VERITAS_VIDEO_FACE_POSITION_TRACK_AVC_REVIEW="false",
     )
 
     import cv2
@@ -36,7 +37,11 @@ def run(bank, output, *, primary_track=False):
     from app.billing import service
     from app.core.config import settings
     from app.engine.registry import get_registry
-    from app.evidence.face_short_proposal_binding import MOVING_AVC_METHOD, PRIMARY_TRACK_AVC_METHOD
+    from app.evidence.face_short_proposal_binding import (
+        MOVING_AVC_METHOD,
+        POSITION_TRACK_AVC_METHOD,
+        PRIMARY_TRACK_AVC_METHOD,
+    )
     from app.main import app
     from app.reports.verify import verify_package
     from app.storage.db import get_session
@@ -54,7 +59,11 @@ def run(bank, output, *, primary_track=False):
     stub = PaymentStub()
     service._stripe = stub
     roster = {row["file"]: row for row in json.loads((bank / "media.json").read_text())["rows"]}
-    if primary_track:
+    if position_track:
+        cases = ("g2-tandem_two_swaps.mp4", "g2-guest_cut.mp4", "g6-original.mp4")
+        serving_mode = "video_face_position_track_avc_review"
+        review_method, packet_version = POSITION_TRACK_AVC_METHOD, "video-evidence-30"
+    elif primary_track:
         cases = ("g4-tandem_two_swaps.mp4", "g4-cross_recording_cuts.mp4", "g1-tandem_two_swaps.mp4")
         serving_mode = "video_face_primary_track_avc_review"
         review_method, packet_version = PRIMARY_TRACK_AVC_METHOD, "video-evidence-29"
@@ -116,6 +125,9 @@ def run(bank, output, *, primary_track=False):
                     if primary_track:
                         assert "followed the larger face by its position and size" in words
                         assert any(len(row["boxes"]) >= 2 for row in change["face_detection_boxes"])
+                    if position_track:
+                        assert "followed the same face position when another face changed size" in words
+                        assert any(len(row["boxes"]) >= 2 for row in change["face_detection_boxes"])
                     assert images <= {
                         image_signature(document.extract_image(xref)["image"])
                         for xref in {image[0] for page in document for image in page.get_images(full=True)}
@@ -169,6 +181,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("bank", type=Path)
     parser.add_argument("output", type=Path)
-    parser.add_argument("--primary-track", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--primary-track", action="store_true")
+    mode.add_argument("--position-track", action="store_true")
     args = parser.parse_args()
-    run(args.bank.resolve(), args.output.resolve(), primary_track=args.primary_track)
+    run(args.bank.resolve(), args.output.resolve(), primary_track=args.primary_track, position_track=args.position_track)

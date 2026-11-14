@@ -1,0 +1,3171 @@
+{
+  "schema": "chipmunk.video-face-position-track/1",
+  "media_manifest_sha256": "5ce3ecd79680c48bd57670eba30bfa39003e0dc64bf320766c9e4a4892c2a065",
+  "parent_manifest_sha256": "ced6b119a03be9ed9ea983e7d0f5a948ec20570471a929eb1f6009c756d9167a",
+  "layouts": [
+    {
+      "group": 1,
+      "guest": 4,
+      "second_guest": 6,
+      "left": true,
+      "enlarged": [
+        63,
+        109
+      ],
+      "size": [
+        213,
+        295
+      ]
+    },
+    {
+      "group": 2,
+      "guest": 5,
+      "second_guest": 7,
+      "left": false,
+      "enlarged": [
+        65,
+        110
+      ],
+      "size": [
+        203,
+        318
+      ]
+    },
+    {
+      "group": 3,
+      "guest": 6,
+      "second_guest": 8,
+      "left": true,
+      "enlarged": [
+        61,
+        108
+      ],
+      "size": [
+        285,
+        410
+      ]
+    },
+    {
+      "group": 4,
+      "guest": 7,
+      "second_guest": 1,
+      "left": true,
+      "enlarged": [
+        63,
+        109
+      ],
+      "size": [
+        313,
+        410
+      ]
+    },
+    {
+      "group": 5,
+      "guest": 8,
+      "second_guest": 2,
+      "left": true,
+      "enlarged": [
+        65,
+        110
+      ],
+      "size": [
+        282,
+        410
+      ]
+    },
+    {
+      "group": 6,
+      "guest": 1,
+      "second_guest": 3,
+      "left": false,
+      "enlarged": [
+        61,
+        108
+      ],
+      "size": [
+        188,
+        231
+      ]
+    },
+    {
+      "group": 7,
+      "guest": 2,
+      "second_guest": 4,
+      "left": true,
+      "enlarged": [
+        63,
+        109
+      ],
+      "size": [
+        188,
+        245
+      ]
+    },
+    {
+      "group": 8,
+      "guest": 3,
+      "second_guest": 5,
+      "left": true,
+      "enlarged": [
+        65,
+        110
+      ],
+      "size": [
+        188,
+        260
+      ]
+    }
+  ],
+  "source_indices": [
+    56,
+    47,
+    15,
+    54,
+    65,
+    66,
+    39,
+    2
+  ],
+  "runner_sha256": "4acfe8d56d3366bea025c9fb570c6a5f79ebbf3c80d07da041f9f4511cc22aa1",
+  "measurement_sha256": "f21dc13d95a5e8c95e8eaad60f2368c31f090581c99d94396930f37fecd782e1",
+  "method_sha256": "0f0ea4f0acf360387f1832707293daad788fcb841cf65c3c8d52283feb0948b7",
+  "models": {
+    "face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+    "face_recognition_sface_2021dec.onnx": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79"
+  },
+  "rows": [
+    {
+      "group": 1,
+      "condition": "original",
+      "truth": [],
+      "sha256": "947bf2b4d7b3d70c76184c815d0d52a13aa82963c789c7e8539dda06c722d9db",
+      "index": 1,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 59,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 59,
+          "scheduled": 59,
+          "proposal": null,
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 1,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          63,
+          69
+        ],
+        [
+          93,
+          101
+        ]
+      ],
+      "sha256": "aa9bb4e553ef81c25b5fd7e261df17ce40b19cb42596ad9f78c6da9b721793b1",
+      "index": 2,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 64,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 64,
+          "scheduled": 64,
+          "proposal": {
+            "frames": [
+              63,
+              69
+            ],
+            "response": 0.4888407858828264,
+            "pts": [
+              63000,
+              69000
+            ],
+            "edges": [
+              [
+                60,
+                61,
+                62,
+                63,
+                64,
+                65
+              ],
+              [
+                66,
+                67,
+                68,
+                69,
+                70,
+                71
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 62,
+                "pts": 62000,
+                "decoded_rgb_sha256": "eefc957d9e97bf1cbf93f573cc82d648caaff0e912e3ad744a59c8abdf3be022"
+              },
+              {
+                "frame_index": 66,
+                "pts": 66000,
+                "decoded_rgb_sha256": "3d2ce3cf649fc109bedb1ba5547b193f206aed1e09050bd847b9e3fa3310496e"
+              },
+              {
+                "frame_index": 69,
+                "pts": 69000,
+                "decoded_rgb_sha256": "31950f575c01d26494453f7b84cd27d7866dbea7c100af2833f61ddda87ff9e8"
+              }
+            ]
+          },
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 1,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          63,
+          69
+        ],
+        [
+          93,
+          101
+        ]
+      ],
+      "sha256": "868e3328dd49e1ebb830720f01d11a986f402594cf8ba0745bd7257b8236be93",
+      "index": 3,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 63,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 63,
+          "scheduled": 63,
+          "proposal": {
+            "frames": [
+              63,
+              69
+            ],
+            "response": 0.38786848003250196,
+            "pts": [
+              63000,
+              69000
+            ],
+            "edges": [
+              [
+                60,
+                61,
+                62,
+                63,
+                64,
+                65
+              ],
+              [
+                66,
+                67,
+                68,
+                69,
+                70,
+                71
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 62,
+                "pts": 62000,
+                "decoded_rgb_sha256": "a7e7a6e3326f0fb5f23260b1f381486c6f32fc8ddafc998c414650a6245c8724"
+              },
+              {
+                "frame_index": 66,
+                "pts": 66000,
+                "decoded_rgb_sha256": "32431c2eb46abb468bbfe97998fe88fe38698c92c6247cb2d43b764547df1391"
+              },
+              {
+                "frame_index": 69,
+                "pts": 69000,
+                "decoded_rgb_sha256": "5f880368e4f6b4647c9a0b596ee9965f9438ca259a35a72bf5033259fa5629db"
+              }
+            ]
+          },
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 1,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "sha256": "1ab1f3624b5bc86ad13b436309aa95784d444ae4800ae9b4582034a595607f9b",
+      "index": 4,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 59,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 59,
+          "scheduled": 59,
+          "proposal": null,
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 1,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "sha256": "f98b0319511533a8179c45c0751fe1b8bb36edfbac1d72b65001af09863a5993",
+      "index": 5,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 54,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": null,
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 1,
+      "condition": "guest_cut",
+      "truth": [],
+      "sha256": "541476b8a2203bdbd9ff7390c3126fe92a8b5173a3a2000d2525958fafb3b15d",
+      "index": 6,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 59,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 59,
+          "scheduled": 59,
+          "proposal": null,
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 2,
+      "condition": "original",
+      "truth": [],
+      "sha256": "34465d098c1e2ebaf920fd5a0eb9ab3c501f385b7e603619730390712cb8dc28",
+      "index": 7,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 17,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 2,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          69,
+          77
+        ],
+        [
+          96,
+          102
+        ]
+      ],
+      "sha256": "2c3ff2abda4f93c69f4e911d1d85c25fac620b0f9fac3b6ef02d206f59ee15f6",
+      "index": 8,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 35,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 35,
+          "scheduled": 35,
+          "proposal": {
+            "frames": [
+              96,
+              102
+            ],
+            "response": 0.5617866234860078,
+            "pts": [
+              96000,
+              102000
+            ],
+            "edges": [
+              [
+                93,
+                94,
+                95,
+                96,
+                97,
+                98
+              ],
+              [
+                99,
+                100,
+                101,
+                102,
+                103,
+                104
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 95,
+                "pts": 95000,
+                "decoded_rgb_sha256": "802bb7c516490f76a2c96fd7c9fcc99e1672419d515620573a2ede6d79035ce8"
+              },
+              {
+                "frame_index": 99,
+                "pts": 99000,
+                "decoded_rgb_sha256": "fbbea3f852e08316cca4603ef57ab45f989d7dc6153cf691161dfdc5ad417488"
+              },
+              {
+                "frame_index": 102,
+                "pts": 102000,
+                "decoded_rgb_sha256": "9e4906a1428c4ce2c1bd5d22684b2fc16051e7b501b1c9a57466de73b3c02e9f"
+              }
+            ]
+          },
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 35,
+          "scheduled": 35,
+          "proposal": {
+            "frames": [
+              96,
+              102
+            ],
+            "response": 0.5617866234860078,
+            "pts": [
+              96000,
+              102000
+            ],
+            "edges": [
+              [
+                93,
+                94,
+                95,
+                96,
+                97,
+                98
+              ],
+              [
+                99,
+                100,
+                101,
+                102,
+                103,
+                104
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 95,
+                "pts": 95000,
+                "decoded_rgb_sha256": "802bb7c516490f76a2c96fd7c9fcc99e1672419d515620573a2ede6d79035ce8"
+              },
+              {
+                "frame_index": 99,
+                "pts": 99000,
+                "decoded_rgb_sha256": "fbbea3f852e08316cca4603ef57ab45f989d7dc6153cf691161dfdc5ad417488"
+              },
+              {
+                "frame_index": 102,
+                "pts": 102000,
+                "decoded_rgb_sha256": "9e4906a1428c4ce2c1bd5d22684b2fc16051e7b501b1c9a57466de73b3c02e9f"
+              }
+            ]
+          },
+          "complete_pair": true
+        }
+      }
+    },
+    {
+      "group": 2,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          69,
+          77
+        ],
+        [
+          96,
+          102
+        ]
+      ],
+      "sha256": "97e5815feaa8543707c446e07c9cf0275822242c95cf49cd9ce0f0aa9aff7288",
+      "index": 9,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 40,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 40,
+          "scheduled": 40,
+          "proposal": {
+            "frames": [
+              96,
+              102
+            ],
+            "response": 0.4022759861316647,
+            "pts": [
+              96000,
+              102000
+            ],
+            "edges": [
+              [
+                93,
+                94,
+                95,
+                96,
+                97,
+                98
+              ],
+              [
+                99,
+                100,
+                101,
+                102,
+                103,
+                104
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 95,
+                "pts": 95000,
+                "decoded_rgb_sha256": "875a92782160ada10a4ae884d36301c280b5225045584a5c97f80dfd4caa999f"
+              },
+              {
+                "frame_index": 99,
+                "pts": 99000,
+                "decoded_rgb_sha256": "7a90adedf4969711cc7458bb1b1895890fecddc49afcb3de291d21d8d0467183"
+              },
+              {
+                "frame_index": 102,
+                "pts": 102000,
+                "decoded_rgb_sha256": "e79d0192ca2b72ab79d77d3f57a17188db6e9f09eecbbdbab9555675bd1f4b77"
+              }
+            ]
+          },
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 40,
+          "scheduled": 40,
+          "proposal": {
+            "frames": [
+              96,
+              102
+            ],
+            "response": 0.4022759861316647,
+            "pts": [
+              96000,
+              102000
+            ],
+            "edges": [
+              [
+                93,
+                94,
+                95,
+                96,
+                97,
+                98
+              ],
+              [
+                99,
+                100,
+                101,
+                102,
+                103,
+                104
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 95,
+                "pts": 95000,
+                "decoded_rgb_sha256": "875a92782160ada10a4ae884d36301c280b5225045584a5c97f80dfd4caa999f"
+              },
+              {
+                "frame_index": 99,
+                "pts": 99000,
+                "decoded_rgb_sha256": "7a90adedf4969711cc7458bb1b1895890fecddc49afcb3de291d21d8d0467183"
+              },
+              {
+                "frame_index": 102,
+                "pts": 102000,
+                "decoded_rgb_sha256": "e79d0192ca2b72ab79d77d3f57a17188db6e9f09eecbbdbab9555675bd1f4b77"
+              }
+            ]
+          },
+          "complete_pair": true
+        }
+      }
+    },
+    {
+      "group": 2,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "sha256": "3ce65c796ac79347b963fdf80fdaf499c924f0fddd4954b6092f8771c8f9428b",
+      "index": 10,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 12,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 2,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "sha256": "beb8177c9b114e63632b3f74f79f6e2cec54c166d58d99f635913c6ffe41293f",
+      "index": 11,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 17,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 2,
+      "condition": "guest_cut",
+      "truth": [],
+      "sha256": "34ecc06c9c59b7cdc90bc01d0795b997d111ba5dfd20dc06ac2262366c5c4552",
+      "index": 12,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 17,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 17,
+          "scheduled": 17,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 3,
+      "condition": "original",
+      "truth": [],
+      "sha256": "df7cf22cc9f96fa0628edb642ea8564b2bd9ba942b96e56abfa86e5c34750670",
+      "index": 13,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 12,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 3,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          66,
+          72
+        ],
+        [
+          99,
+          107
+        ]
+      ],
+      "sha256": "66fe460c7a041c90104b028e28834b51a5565e02cfd1c117de7705eedfabe2ff",
+      "index": 14,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 33,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": {
+            "frames": [
+              99,
+              107
+            ],
+            "response": 0.751399186631246,
+            "pts": [
+              99000,
+              107000
+            ],
+            "edges": [
+              [
+                96,
+                97,
+                98,
+                99,
+                100,
+                101
+              ],
+              [
+                104,
+                105,
+                106,
+                107,
+                108,
+                109
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 98,
+                "pts": 98000,
+                "decoded_rgb_sha256": "2b725c1264087e18f42a75967fadc8fc7ccbbdc68735af4557d40e8ec5dced78"
+              },
+              {
+                "frame_index": 104,
+                "pts": 104000,
+                "decoded_rgb_sha256": "269e205dd74d3bb382b5ce33e0bb2c7b59fa396bef9ee2c81daf9dd1ea179b40"
+              },
+              {
+                "frame_index": 107,
+                "pts": 107000,
+                "decoded_rgb_sha256": "1681fa08e724ce6e7c006d78dae6856634b4ff12157921705ade86e29d71ce3c"
+              }
+            ]
+          },
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 3,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          66,
+          72
+        ],
+        [
+          99,
+          107
+        ]
+      ],
+      "sha256": "d4cb610ab410f23a4d27b4f03468407d72d789b7a59856f64fa16f66afeb6963",
+      "index": 15,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 33,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": {
+            "frames": [
+              99,
+              107
+            ],
+            "response": 0.6191999830257066,
+            "pts": [
+              99000,
+              107000
+            ],
+            "edges": [
+              [
+                96,
+                97,
+                98,
+                99,
+                100,
+                101
+              ],
+              [
+                104,
+                105,
+                106,
+                107,
+                108,
+                109
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 98,
+                "pts": 98000,
+                "decoded_rgb_sha256": "a199e181656b4078db6e04d0c45a64a33d4db4aab524722470cc196681b6ba41"
+              },
+              {
+                "frame_index": 104,
+                "pts": 104000,
+                "decoded_rgb_sha256": "f72027d5abe31051790a88412d2eac1d51ff4013b79df81d855bda944452c489"
+              },
+              {
+                "frame_index": 107,
+                "pts": 107000,
+                "decoded_rgb_sha256": "d6a954bda79bfc15a4f3af479d1bd3d7ebd77d31059c0a192799d48d94bf63ff"
+              }
+            ]
+          },
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 3,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "sha256": "1fafb8c1084e232f953661f8d4f603e6727a5ded016202dd5dcc4889bdb8526f",
+      "index": 16,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 28,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null,
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 3,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "sha256": "b98b493fb405a99b6fc0456bcafde7f9ca2ca4c18937a5ae37a378f22157efe7",
+      "index": 17,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 12,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 3,
+      "condition": "guest_cut",
+      "truth": [],
+      "sha256": "dab6cd04d36b46fa47af276ad59da90357ce93ab03712f18f1d32ea25aac030d",
+      "index": 18,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 12,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 12,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 4,
+      "condition": "original",
+      "truth": [],
+      "sha256": "a7420e1454f5cd009b0d04a9907466504b4e667283dd689befeb7f8de112cc4f",
+      "index": 19,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 34,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 4,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          71,
+          79
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "sha256": "405712264f96be0de920b0e9775e4e7e353274daffb817de32a1e073942465d1",
+      "index": 20,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 58,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 58,
+          "scheduled": 58,
+          "proposal": {
+            "frames": [
+              91,
+              97
+            ],
+            "response": 0.6405785720699316,
+            "pts": [
+              91000,
+              97000
+            ],
+            "edges": [
+              [
+                88,
+                89,
+                90,
+                91,
+                92,
+                93
+              ],
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 90,
+                "pts": 90000,
+                "decoded_rgb_sha256": "e6a91498be3081eaa331373030e735ed2bcba3c6cb8b5f20472b2499408850e4"
+              },
+              {
+                "frame_index": 94,
+                "pts": 94000,
+                "decoded_rgb_sha256": "847b9409d0062f4234092cf7a20806e4f8c932773bb49ea8c84edebc9bf2e36e"
+              },
+              {
+                "frame_index": 97,
+                "pts": 97000,
+                "decoded_rgb_sha256": "39a029362dac2e94acdd77b56af2541d036f3f9b04fd02614db815418d811e70"
+              }
+            ]
+          },
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 4,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          71,
+          79
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "sha256": "55c68f74e8e680706c38a72daa0a3ea339c152ab6ec112c0c29c2e024c1d3070",
+      "index": 21,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 59,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 59,
+          "scheduled": 59,
+          "proposal": {
+            "frames": [
+              71,
+              79
+            ],
+            "response": 0.512478120584325,
+            "pts": [
+              71000,
+              79000
+            ],
+            "edges": [
+              [
+                68,
+                69,
+                70,
+                71,
+                72,
+                73
+              ],
+              [
+                76,
+                77,
+                78,
+                79,
+                80,
+                81
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 70,
+                "pts": 70000,
+                "decoded_rgb_sha256": "b03576afd81b3615c467389979b88486f955f2689ad306c5f4732a6d8a787d07"
+              },
+              {
+                "frame_index": 74,
+                "pts": 74000,
+                "decoded_rgb_sha256": "94d3533a939dcadb8c1d7855e8dbf0f58de0acac6c416e3739e093da3e65c499"
+              },
+              {
+                "frame_index": 79,
+                "pts": 79000,
+                "decoded_rgb_sha256": "1a3f2d07d9dfd95c9e1d47535d61bf322c49ca7e60dbfa7c95c622869f8367fa"
+              }
+            ]
+          },
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 4,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "sha256": "1218e9b762acfa9403f3a2ad14df483fceb3b8e5feb2120e097351c301b4fc64",
+      "index": 22,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 34,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 4,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "sha256": "2cffa3aecb193e27a9c3438e2c1cee6325515f25be4b041bf4d1e59a4dc07086",
+      "index": 23,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 39,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 39,
+          "scheduled": 39,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 4,
+      "condition": "guest_cut",
+      "truth": [],
+      "sha256": "d46cece1e49328cbaa40f2cc960d0162770921fd7814d1108053d6b4a8555a7e",
+      "index": 24,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 34,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 5,
+      "condition": "original",
+      "truth": [],
+      "sha256": "5fc58961df13c4b81dcdee46ac26445b77fe5832efd8cf88ed177fada4dd5066",
+      "index": 25,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 49,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 49,
+          "scheduled": 49,
+          "proposal": null,
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 49,
+          "scheduled": 49,
+          "proposal": null,
+          "complete_pair": true
+        }
+      }
+    },
+    {
+      "group": 5,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          63,
+          69
+        ],
+        [
+          93,
+          101
+        ]
+      ],
+      "sha256": "6718355fbb5264cacff3e7722598c0d2f3f72ac5f9551be04ad3fec7e7e6696a",
+      "index": 26,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 54,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": {
+            "frames": [
+              93,
+              101
+            ],
+            "response": 0.5023314414067704,
+            "pts": [
+              93000,
+              101000
+            ],
+            "edges": [
+              [
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ],
+              [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 92,
+                "pts": 92000,
+                "decoded_rgb_sha256": "13045d2054ac7fdf02df23723406efe4c4930167a6355072fd8d1e233808b0c6"
+              },
+              {
+                "frame_index": 97,
+                "pts": 97000,
+                "decoded_rgb_sha256": "4508981094f589355466c5e541be8e60fde67c2784c6f9dfcb1475feac041140"
+              },
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "d748a4b152158b378a26900454392669d0e0623eb922c4cd243b8722b3a76caf"
+              }
+            ]
+          },
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": {
+            "frames": [
+              93,
+              101
+            ],
+            "response": 0.5023314414067704,
+            "pts": [
+              93000,
+              101000
+            ],
+            "edges": [
+              [
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ],
+              [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 92,
+                "pts": 92000,
+                "decoded_rgb_sha256": "13045d2054ac7fdf02df23723406efe4c4930167a6355072fd8d1e233808b0c6"
+              },
+              {
+                "frame_index": 97,
+                "pts": 97000,
+                "decoded_rgb_sha256": "4508981094f589355466c5e541be8e60fde67c2784c6f9dfcb1475feac041140"
+              },
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "d748a4b152158b378a26900454392669d0e0623eb922c4cd243b8722b3a76caf"
+              }
+            ]
+          },
+          "complete_pair": true
+        }
+      }
+    },
+    {
+      "group": 5,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          63,
+          69
+        ],
+        [
+          93,
+          101
+        ]
+      ],
+      "sha256": "2ae01b8c7c063b8f622c6c2245b547c39191a6b882358ddb4ceafb886091ddf7",
+      "index": 27,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 54,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": {
+            "frames": [
+              93,
+              101
+            ],
+            "response": 0.40769493275893265,
+            "pts": [
+              93000,
+              101000
+            ],
+            "edges": [
+              [
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ],
+              [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 92,
+                "pts": 92000,
+                "decoded_rgb_sha256": "02aca16f23e56b0dc3eb8308ca0f21577f14a07f70a9a09eaa04d2b5b60142f2"
+              },
+              {
+                "frame_index": 97,
+                "pts": 97000,
+                "decoded_rgb_sha256": "49c6bd94de781c5b96ceec406791f413d7956aaecd5cf9c3ae9693957952900c"
+              },
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "445bddad99d300e53efa91cc6d6a87dfd2f2310471cc1d2c464fb254f64c55dd"
+              }
+            ]
+          },
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 54,
+          "scheduled": 54,
+          "proposal": {
+            "frames": [
+              93,
+              101
+            ],
+            "response": 0.40769493275893265,
+            "pts": [
+              93000,
+              101000
+            ],
+            "edges": [
+              [
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ],
+              [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 92,
+                "pts": 92000,
+                "decoded_rgb_sha256": "02aca16f23e56b0dc3eb8308ca0f21577f14a07f70a9a09eaa04d2b5b60142f2"
+              },
+              {
+                "frame_index": 97,
+                "pts": 97000,
+                "decoded_rgb_sha256": "49c6bd94de781c5b96ceec406791f413d7956aaecd5cf9c3ae9693957952900c"
+              },
+              {
+                "frame_index": 101,
+                "pts": 101000,
+                "decoded_rgb_sha256": "445bddad99d300e53efa91cc6d6a87dfd2f2310471cc1d2c464fb254f64c55dd"
+              }
+            ]
+          },
+          "complete_pair": true
+        }
+      }
+    },
+    {
+      "group": 5,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "sha256": "5d3458be68bdeb19144e0dc0b44adcf05a91ba43203739fad8500175dd6a4a24",
+      "index": 28,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 62,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 62,
+          "scheduled": 62,
+          "proposal": null,
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 62,
+          "scheduled": 62,
+          "proposal": null,
+          "complete_pair": true
+        }
+      }
+    },
+    {
+      "group": 5,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "sha256": "05d6452af6d86ab5995c60b30f42488f467e99df0ccba78159aca4a3dc7f4597",
+      "index": 29,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 50,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 50,
+          "scheduled": 50,
+          "proposal": null,
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 5,
+      "condition": "guest_cut",
+      "truth": [],
+      "sha256": "5ff85eed081f56e4ba1512597b588a9d45a81cfe3707efcd6f2fe416042a6a6a",
+      "index": 30,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 49,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 49,
+          "scheduled": 49,
+          "proposal": null,
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 49,
+          "scheduled": 49,
+          "proposal": null,
+          "complete_pair": true
+        }
+      }
+    },
+    {
+      "group": 6,
+      "condition": "original",
+      "truth": [],
+      "sha256": "1e5a42d8cf3fde765020cf0b6faa38f99f6e15292c38f9f867ac9a27b9c61cdd",
+      "index": 31,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 32,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 32,
+          "scheduled": 32,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 6,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          69,
+          77
+        ],
+        [
+          96,
+          102
+        ]
+      ],
+      "sha256": "e75fc05fd0313ec5ebd6f30cffe89eec8f602c1d331046433c9a35819433b008",
+      "index": 32,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 43,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 43,
+          "scheduled": 43,
+          "proposal": null,
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 6,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          69,
+          77
+        ],
+        [
+          96,
+          102
+        ]
+      ],
+      "sha256": "c9373861adac446f97c74ce32bd96eb07a96a4dcedcbc4991a5974318a24a3fd",
+      "index": 33,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 31,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 31,
+          "scheduled": 31,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 6,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "sha256": "7c541b473674726821da1e140583ff4c27ed7647c9f17b275d8833b825f887ce",
+      "index": 34,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 33,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 6,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "sha256": "8c09b3dee3cab47150bb141e75921beec41326860e71e01a1a6a3e218df9eb5c",
+      "index": 35,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 38,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 38,
+          "scheduled": 38,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 6,
+      "condition": "guest_cut",
+      "truth": [],
+      "sha256": "cea0b6f68e1b2ce3fbd861bee8938ebfb3ff346bb7971d32b144330cb8f5dc80",
+      "index": 36,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 32,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 32,
+          "scheduled": 32,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 7,
+      "condition": "original",
+      "truth": [],
+      "sha256": "c4e23f40414913d4cd3bcc96cd58199e832d74c81ece8ae2567afade7e15fabe",
+      "index": 37,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 18,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 7,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          66,
+          72
+        ],
+        [
+          99,
+          107
+        ]
+      ],
+      "sha256": "e61b52dbf3763ed34ea0b17f9728ef81e107525e64ffee7cf49c5a7651baa435",
+      "index": 38,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 39,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 39,
+          "scheduled": 39,
+          "proposal": {
+            "frames": [
+              99,
+              107
+            ],
+            "response": 0.5843967549296033,
+            "pts": [
+              99000,
+              107000
+            ],
+            "edges": [
+              [
+                96,
+                97,
+                98,
+                99,
+                100,
+                101
+              ],
+              [
+                104,
+                105,
+                106,
+                107,
+                108,
+                109
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 98,
+                "pts": 98000,
+                "decoded_rgb_sha256": "9d9d8efdaedd7aaa5356d39aad2adb150faadc1a5e598a607b91fcfd8a12cf1b"
+              },
+              {
+                "frame_index": 104,
+                "pts": 104000,
+                "decoded_rgb_sha256": "83a29c0ce5b870a17a95e110214f18f0f7a34882746db865be7b2a015b7cf597"
+              },
+              {
+                "frame_index": 107,
+                "pts": 107000,
+                "decoded_rgb_sha256": "4d1f8b51091bd9415e1c7c09c82c7ceac97ff663f7559c34ed0ec1b83525c591"
+              }
+            ]
+          },
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 7,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          66,
+          72
+        ],
+        [
+          99,
+          107
+        ]
+      ],
+      "sha256": "df7e9c7d47e0c3f592b2cf85241208811bf34adb28a7dcc850341b0a598622ec",
+      "index": 39,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 39,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 39,
+          "scheduled": 39,
+          "proposal": {
+            "frames": [
+              99,
+              107
+            ],
+            "response": 0.31044407964805387,
+            "pts": [
+              99000,
+              107000
+            ],
+            "edges": [
+              [
+                96,
+                97,
+                98,
+                99,
+                100,
+                101
+              ],
+              [
+                104,
+                105,
+                106,
+                107,
+                108,
+                109
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 98,
+                "pts": 98000,
+                "decoded_rgb_sha256": "4c9f7d8e098d938c6e9461e83dc437da47d753042af0dd6f7c5a94dea06027cc"
+              },
+              {
+                "frame_index": 104,
+                "pts": 104000,
+                "decoded_rgb_sha256": "5833ecf48c5b35b13bb8787b649569f9aceb4b7631974fa13253b47a58f19294"
+              },
+              {
+                "frame_index": 107,
+                "pts": 107000,
+                "decoded_rgb_sha256": "a26ef4d7ea62b2c348ace50358ee1eb957e4002f90ef5202c00f63507770f708"
+              }
+            ]
+          },
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 7,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "sha256": "9a26d378ec73fef99525bfd2eb650865f1383a2e514b9fb0196b7624bfc6d9cb",
+      "index": 40,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 28,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 28,
+          "scheduled": 28,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 7,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "sha256": "d89bf02d9ceb2e8c1babc6a23f254fcdf83b150208fdb195d412408257ac85f4",
+      "index": 41,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 18,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 7,
+      "condition": "guest_cut",
+      "truth": [],
+      "sha256": "a64465455902154c701d6d78a7d8f8b6a99d61d5a04f1697a0088b0fa119c5a5",
+      "index": 42,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 18,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 18,
+          "scheduled": 18,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        }
+      }
+    },
+    {
+      "group": 8,
+      "condition": "original",
+      "truth": [],
+      "sha256": "098e889c32bf3a69d9a8ca4978c4222b9169adde5a1ebc30bcbabba1316ed8a6",
+      "index": 43,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 34,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null,
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null,
+          "complete_pair": true
+        }
+      }
+    },
+    {
+      "group": 8,
+      "condition": "two_swaps",
+      "truth": [
+        [
+          71,
+          79
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "sha256": "7bf53f1e2ef36e80fc7ed5da5dcc531cfb9e4b595cc88b44841895d97d086112",
+      "index": 44,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 56,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 56,
+          "scheduled": 56,
+          "proposal": {
+            "frames": [
+              91,
+              97
+            ],
+            "response": 0.5873668200922477,
+            "pts": [
+              91000,
+              97000
+            ],
+            "edges": [
+              [
+                88,
+                89,
+                90,
+                91,
+                92,
+                93
+              ],
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 90,
+                "pts": 90000,
+                "decoded_rgb_sha256": "a6e6dd516d43685806e6e91a0e3aec8a670106305c6f906878e023e9668ae0cc"
+              },
+              {
+                "frame_index": 94,
+                "pts": 94000,
+                "decoded_rgb_sha256": "70fb8cfc72f18f444eee4bca6320c7618e7743eb2704f4373f204188c4db6db5"
+              },
+              {
+                "frame_index": 97,
+                "pts": 97000,
+                "decoded_rgb_sha256": "2f8ca7c0edefe808537289ea2f612893232538401bc636f8cfead93defae5a0f"
+              }
+            ]
+          },
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 56,
+          "scheduled": 56,
+          "proposal": {
+            "frames": [
+              91,
+              97
+            ],
+            "response": 0.5873668200922477,
+            "pts": [
+              91000,
+              97000
+            ],
+            "edges": [
+              [
+                88,
+                89,
+                90,
+                91,
+                92,
+                93
+              ],
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 90,
+                "pts": 90000,
+                "decoded_rgb_sha256": "a6e6dd516d43685806e6e91a0e3aec8a670106305c6f906878e023e9668ae0cc"
+              },
+              {
+                "frame_index": 94,
+                "pts": 94000,
+                "decoded_rgb_sha256": "70fb8cfc72f18f444eee4bca6320c7618e7743eb2704f4373f204188c4db6db5"
+              },
+              {
+                "frame_index": 97,
+                "pts": 97000,
+                "decoded_rgb_sha256": "2f8ca7c0edefe808537289ea2f612893232538401bc636f8cfead93defae5a0f"
+              }
+            ]
+          },
+          "complete_pair": true
+        }
+      }
+    },
+    {
+      "group": 8,
+      "condition": "tandem_two_swaps",
+      "truth": [
+        [
+          71,
+          79
+        ],
+        [
+          91,
+          97
+        ]
+      ],
+      "sha256": "082c8c7094c133b524ffe28f03bade8d63f7a07070bcbcbf5eb1a6eb05f6a288",
+      "index": 45,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 55,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 55,
+          "scheduled": 55,
+          "proposal": {
+            "frames": [
+              91,
+              97
+            ],
+            "response": 0.37793386174254073,
+            "pts": [
+              91000,
+              97000
+            ],
+            "edges": [
+              [
+                88,
+                89,
+                90,
+                91,
+                92,
+                93
+              ],
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 90,
+                "pts": 90000,
+                "decoded_rgb_sha256": "61875ee80be04caa29f75731d933824a39a19000259eda9f7ee1ddbb6645915c"
+              },
+              {
+                "frame_index": 94,
+                "pts": 94000,
+                "decoded_rgb_sha256": "13c2a09591fb8bff3d13be2bca7876b49300a906198a69407780d0d614068cea"
+              },
+              {
+                "frame_index": 97,
+                "pts": 97000,
+                "decoded_rgb_sha256": "73106a3f468dbe78f43639a221df33bf8d4fad910006fc8210fcd365bb0e9850"
+              }
+            ]
+          },
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 55,
+          "scheduled": 55,
+          "proposal": {
+            "frames": [
+              91,
+              97
+            ],
+            "response": 0.37793386174254073,
+            "pts": [
+              91000,
+              97000
+            ],
+            "edges": [
+              [
+                88,
+                89,
+                90,
+                91,
+                92,
+                93
+              ],
+              [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99
+              ]
+            ],
+            "anchors": [
+              {
+                "frame_index": 90,
+                "pts": 90000,
+                "decoded_rgb_sha256": "61875ee80be04caa29f75731d933824a39a19000259eda9f7ee1ddbb6645915c"
+              },
+              {
+                "frame_index": 94,
+                "pts": 94000,
+                "decoded_rgb_sha256": "13c2a09591fb8bff3d13be2bca7876b49300a906198a69407780d0d614068cea"
+              },
+              {
+                "frame_index": 97,
+                "pts": 97000,
+                "decoded_rgb_sha256": "73106a3f468dbe78f43639a221df33bf8d4fad910006fc8210fcd365bb0e9850"
+              }
+            ]
+          },
+          "complete_pair": true
+        }
+      }
+    },
+    {
+      "group": 8,
+      "condition": "same_source_cuts",
+      "truth": [],
+      "sha256": "6337d7be98316be58ad5ab12ca1185d506e4668ca126f23f68939ac39ca55ef4",
+      "index": 46,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 33,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null,
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null,
+          "complete_pair": true
+        }
+      }
+    },
+    {
+      "group": 8,
+      "condition": "cross_recording_cuts",
+      "truth": [],
+      "sha256": "4de4f08874f3eae1dd6399708ba9566ed179f0f33d457a93d7b2348998951a50",
+      "index": 47,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 33,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null,
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 33,
+          "scheduled": 33,
+          "proposal": null,
+          "complete_pair": true
+        }
+      }
+    },
+    {
+      "group": 8,
+      "condition": "guest_cut",
+      "truth": [],
+      "sha256": "5c5130aad7f9a02b38da00e70a40c29244cd8a28dcd8f331bb163b274c626086",
+      "index": 48,
+      "panel": "moving_guest",
+      "bank": "held_layout",
+      "first": null,
+      "prior": [],
+      "multiple_faces": 34,
+      "time_base": "1/30000",
+      "first_pts": 0,
+      "methods": {
+        "single_face": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "largest_face": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null,
+          "complete_pair": true
+        },
+        "confirmed_track": {
+          "measured": 0,
+          "scheduled": 12,
+          "proposal": null,
+          "complete_pair": false
+        },
+        "position_track": {
+          "measured": 34,
+          "scheduled": 34,
+          "proposal": null,
+          "complete_pair": true
+        }
+      }
+    }
+  ],
+  "results": {
+    "clips": 48,
+    "ordinary": 32,
+    "edited": 16,
+    "single_face": {
+      "useful": 0,
+      "exact": 0,
+      "misplaced": 0,
+      "ordinary_flags": 0,
+      "cut_flags": 0,
+      "groups": 0,
+      "exact_clips": 0,
+      "measurable_pairs": 0,
+      "ordinary_clips_flagged": 0
+    },
+    "largest_face": {
+      "useful": 14,
+      "exact": 14,
+      "misplaced": 0,
+      "ordinary_flags": 0,
+      "cut_flags": 0,
+      "groups": 7,
+      "exact_clips": 14,
+      "measurable_pairs": 28,
+      "ordinary_clips_flagged": 0
+    },
+    "confirmed_track": {
+      "useful": 0,
+      "exact": 0,
+      "misplaced": 0,
+      "ordinary_flags": 0,
+      "cut_flags": 0,
+      "groups": 0,
+      "exact_clips": 0,
+      "measurable_pairs": 0,
+      "ordinary_clips_flagged": 0
+    },
+    "position_track": {
+      "useful": 6,
+      "exact": 6,
+      "misplaced": 0,
+      "ordinary_flags": 0,
+      "cut_flags": 0,
+      "groups": 3,
+      "exact_clips": 6,
+      "measurable_pairs": 13,
+      "ordinary_clips_flagged": 0
+    },
+    "paired": {
+      "new_exact": [
+        8,
+        9,
+        26,
+        27,
+        44,
+        45
+      ],
+      "incumbent_exact_missing_from_candidate": [],
+      "new_exact_groups": [
+        2,
+        5,
+        8
+      ],
+      "candidate_did_not_repeat_ordinary": [],
+      "new_ordinary_flags": [],
+      "new_cut_flags": []
+    },
+    "eligible_for_local_trial": true
+  }
+}

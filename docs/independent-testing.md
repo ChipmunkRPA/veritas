@@ -121,6 +121,10 @@ The [dominant-face evaluation](video-face-primary-track-2026-11-13.md#replay)
 compares single-face, largest-face and position-consistent selection.
 Both the natural and picture-in-picture panels publish reviewable source
 timings, exact hit counts, and native image commitments.
+The [moving-guest evaluation](video-face-position-track-2026-11-13.md#replay)
+adds a temporarily enlarged moving guest, ordinary cuts to other people,
+and a guest-only cut. The offline reader checks paired outcomes and all
+reported frame positions. FFmpeg can replay the original frame hashes.
 The [moving-face comparison](video-face-moving-shortlist-2026-11-13.md#replay)
 tests the face position and duration changes separately, preserves cases
 where the first scan found a range, and recounts ordinary controls by

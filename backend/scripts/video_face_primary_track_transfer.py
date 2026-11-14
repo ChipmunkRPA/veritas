@@ -43,7 +43,7 @@ def inputs(args):
     return [(case, *paths[digest]) for digest, case in selected.items()]
 
 
-def measure(path, item, detector, recognizer, earlier):
+def measure(path, item, detector, recognizer, earlier, *, alternate_track=False):
     import cv2
 
     from app.detectors.image.faces import detect_faces
@@ -51,6 +51,7 @@ def measure(path, item, detector, recognizer, earlier):
     from app.detectors.video.adapters.face_appearance import _measure
     from app.detectors.video.decode import FrameTable, decode_frames, probe_frames
     from app.detectors.video.face_return import source_carrier
+    from app.evidence import face_primary_track_binding as track_binding
     from app.evidence import face_short_proposal_binding as proof
 
     table = probe_frames(path, cap=130, timeout_s=18)
@@ -88,11 +89,19 @@ def measure(path, item, detector, recognizer, earlier):
         return found[0] if found else None
 
     anchors = {}
+    alternate_anchors = {}
 
     def pick_tracked(index, found):
         return face_primary_track.follow(index, found, anchors)
 
     selectors = dict(zip(METHODS, (pick_single, pick_largest, pick_tracked), strict=True))
+    if alternate_track:
+        def pick_alternate(index, found):
+            selected = track_binding.follow(index, [face.box() for face in found], alternate_anchors,
+                                            position_only=True)
+            return next((face for face in found if face.box() == selected), None)
+
+        selectors["position_track"] = pick_alternate
 
     def check(*_):
         return None
@@ -106,8 +115,18 @@ def measure(path, item, detector, recognizer, earlier):
             detect(frame, ("single_face", "largest_face"))
     require(len(reduced) == 120, "Incomplete picture analysis")
     anchors = face_primary_track.find_anchors(detections)
+    if alternate_track:
+        alternate_anchors = track_binding.anchors({i: [face.box() for face in found] for i, found in detections.items()},
+                                                  position_only=True)
+        # The alternative can select a different face from the one with the largest area.
+        additional = {i for i in proof.ANCHOR_SAMPLES if (face := pick_alternate(i, detections[i])) is not None
+                      and (i, face.box()) not in values}
+        if additional:
+            for frame in decode_frames(path, table, sorted(additional), timeout_s=35):
+                verify(frame)
+                detect(frame, ("position_track",))
     plan = {}
-    for name in METHODS:
+    for name in selectors:
         boxes = {}
         for index in proof.ANCHOR_SAMPLES:
             face = selectors[name](index, detections[index])
@@ -156,6 +175,10 @@ def measure(path, item, detector, recognizer, earlier):
                 ],
             }
         out[name] = {"measured": len(measured), "scheduled": len(schedule), "proposal": record}
+        if alternate_track:
+            out[name]["complete_pair"] = face_short_proposal.has_measurable_pair(
+                edges, measured, proof.SECOND_AVC_DURATIONS,
+            )
     return out, sum(len(found) > 1 for found in detections.values())
 
 
@@ -213,7 +236,7 @@ def scan(args, rows):
             )
 
 
-def review(rows):
+def review(rows, methods=METHODS):
     require(
         [r["index"] for r in rows] == list(range(1, len(rows) + 1))
         and len({r["sha256"] for r in rows}) == len(rows),
@@ -227,7 +250,7 @@ def review(rows):
             "ordinary": sum(not r["truth"] for r in cases),
             "edited": sum(bool(r["truth"]) for r in cases),
         }
-        for arm in METHODS:
+        for arm in methods:
             totals, groups = Counter(), set()
             for item in cases:
                 result = item["methods"][arm]

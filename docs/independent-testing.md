@@ -128,6 +128,9 @@ identifies those exact inputs by hash. All four outputs matched the macOS run.
 The [progressive JPEG replay](image-regional-progressive-jpeg-2026-11-13.md#replay)
 checks exact decoded-image and mask parity for a lossless carrier change. Its
 ledger covers 90 image pairs and six paired model runs.
+The [PNG repeat-pass replay](image-regional-flip-confirmation-2026-11-13.md#reproduce)
+recounts exact-mask usefulness and ordinary highlights for 108 PNG files
+across four editor families.
 
 ### Replay the recent local trials
 

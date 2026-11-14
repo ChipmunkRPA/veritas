@@ -1,0 +1,25 @@
+{
+  "scope": "Previously evaluated source pair and isolated regional detector, simulated prepayment.",
+  "cases": {
+    "edited": {
+      "source_sha256": "8dd129082ce15e4e1e93fd830078b43e9ad9eec3f8af27a395da988b2737ee74",
+      "regions_before": 2,
+      "regions_after": 1,
+      "pdf_reported_coverage": true,
+      "api_and_json_equal": true,
+      "signed_source_overlap_verified": true,
+      "model_name_scan_passed": true
+    },
+    "original": {
+      "source_sha256": "65acc112c5c0c5f4095af998bd77d463ea577ff4250350be599ea145f5983015",
+      "regions_before": 2,
+      "regions_after": 0,
+      "pdf_reported_coverage": true,
+      "api_and_json_equal": true,
+      "signed_source_overlap_verified": true,
+      "model_name_scan_passed": true
+    }
+  },
+  "unpaid_jobs": 0,
+  "duplicate_paid_webhooks_checked": true
+}

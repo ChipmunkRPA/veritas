@@ -63,6 +63,10 @@ are not public screening promises or calibrated population probabilities.
 - [Native PNG regional review](native-regional-serving-v47-result.md#optional-app-integration)
   is enabled on the local instance. The paid-flow replay added one location
   to a previously evaluated edit and none to the matching untouched photo.
+- [PNG regional repeat](image-regional-flip-confirmation-2026-11-13.md)
+  is enabled locally for the supported PNG size. It reduced ordinary
+  highlights from 37 to 26 of 68 and useful masks increased from 11 to 12
+  of 40. It carries zero AI-confidence weight.
 - [Progressive JPEG regional evidence](image-regional-progressive-jpeg-2026-11-13.md)
   adds support for standard quality-75 progressive files in the existing
   development profile. All 90 matched decodes and six paired regional runs

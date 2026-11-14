@@ -73,6 +73,10 @@ are not public screening promises or calibrated population probabilities.
   latest four media studies in one command on macOS and Linux. The replay
   verifies recorded measurements and decisions. Independent external
   review remains open.
+- [48 kHz background review](audio-background-lossless-rate-transfer-2026-11-13.md)
+  transfers 18 of 19 earlier useful noisy synthetic indications, but adds
+  five flags on 12 genuine native-rate speakers under strong roadside
+  sound. This route remains outside the app.
 - [Repeated percentage statements](writing-percentage-consistency-2026-11-13.md)
   links both positions when the same complete statement uses two different
   percentage values. It located both values in all 48 seeded disagreements

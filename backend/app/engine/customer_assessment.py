@@ -13,7 +13,7 @@ from typing import Any
 from app.engine.finding_assessment import finding_assessments
 from app.engine.fusion import abstain
 from app.engine.service_policy import RULE, THRESHOLD, standard_service_policy
-from app.evidence import document_pdf_visibility
+from app.evidence import document_pdf_visibility, document_word_visibility
 
 ARTICLE_REFERENCE_SLICE = "document/local-article-v1"
 EMAIL_REFERENCE_SLICE = "document/local-email-v1"
@@ -214,7 +214,8 @@ def _customer_assessment(result: Mapping[str, Any]) -> dict[str, Any]:
         from app.detectors.text import language_scope
 
         headline = decision.get("verbal")
-        if headline in (document_pdf_visibility.ASSESSMENT_HEADLINE, document_pdf_visibility.INCOMPLETE_HEADLINE):
+        if headline in (document_pdf_visibility.ASSESSMENT_HEADLINE, document_pdf_visibility.INCOMPLETE_HEADLINE,
+                        document_word_visibility.HEADLINE):
             return {**answer, "headline": headline, "meaning": decision["reason"]}
         if headline in {msg[0] for msg in language_scope.MESSAGES.values()}:
             return {**answer, "headline": headline, "meaning": decision["reason"],

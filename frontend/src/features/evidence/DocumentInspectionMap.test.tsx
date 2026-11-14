@@ -59,6 +59,20 @@ describe('ordinary document passage inspection', () => {
     expect(within(section).getByText('[70, 81, 330, 92]')).toBeTruthy()
   })
 
+  it('shows the native table location of a Word run with direct hidden formatting', () => {
+    const set = evidence([])
+    show({ ...set, coverage: { ...set.coverage, word_text_visibility: {
+      schema: 'document-word-text-visibility/1', part: 'word/document.xml', checked_paragraphs: 2,
+      hidden_runs: 1, authorship_confidence_contribution: 0,
+      locations: [{ body_path: [1, 'row', 0, 'cell', 0, 1], body_paragraph: null, run: 0, source_start: 7, source_end: 19 }],
+    } } })
+    const section = screen.getByRole('region', { name: 'Word text visibility' })
+    expect(within(section).getByText(/Found 1 text run marked hidden/)).toBeTruthy()
+    expect(within(section).getByText('Table cell (row 1, column 1) · Run 1 · Characters 8–19')).toBeTruthy()
+    expect(within(section).getByText(/Body path 1 \/ row \/ 0 \/ cell \/ 0 \/ 1/)).toBeTruthy()
+    expect(within(section).getByText(/zero AI-authorship weight/)).toBeTruthy()
+  })
+
   it('marks exact percentage values after a supplementary Unicode character', () => {
     const text = (value: string) => `The review 🧪 found ${value} percent of submitted applications qualified.`
     const readings = [['47', 50], ['37.0', 150]] as const

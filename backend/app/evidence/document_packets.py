@@ -36,6 +36,7 @@ from app.evidence import (
     document_scope,
     document_tracked_changes,
     document_unselected_responses,
+    document_word_visibility,
     email_alternatives,
 )
 from app.storage.artefacts import get_artefact, register_artefact
@@ -331,6 +332,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_repeat.validate(document)
         document_percentage_consistency.validate(document)
         document_pdf_visibility.validate(document)
+        document_word_visibility.validate(document, document["source"].get(document_word_visibility.COMMITMENT))
         document_matched_context.validate(document)
         document_paragraph_priority.validate(document)
         document_passage_coverage.validate(document)
@@ -517,6 +519,9 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"]["partially_checked_pages"] = partially_checked
     if visibility := decoded["meta"].get(document_pdf_visibility.KEY):
         document["coverage"][document_pdf_visibility.KEY] = visibility
+    if word_visibility := document_word_visibility.from_result(result):
+        document["source"][document_word_visibility.COMMITMENT] = word_visibility
+        document["coverage"][document_word_visibility.KEY] = decoded["meta"].get(document_word_visibility.KEY)
     if tracked_commitment := document_tracked_changes.from_result(result):
         document["source"][document_tracked_changes.COMMITMENT] = tracked_commitment
         document["coverage"][document_tracked_changes.KEY] = decoded.get(document_tracked_changes.KEY)
@@ -695,6 +700,9 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
         result = json.loads(_verified(store, analysis.result_hash))
         decoded = _decode(db, analysis, store, result)
         try:
+            if document["source"].get(document_word_visibility.COMMITMENT) != document_word_visibility.from_result(result):
+                raise ValueError("Word visibility evidence differs from the published result")
+            document_word_visibility.verify_source(document, decoded["meta"].get(document_word_visibility.KEY), frozen=True)
             document_repeat.verify_source(document, decoded["text"], decoded["source_map"])
             document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()),
                                                           meta=decoded["meta"])

@@ -140,12 +140,13 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
                 for key in ("pcm_sha256", "wav_sha256", "mapping_sha256", "samples", "sample_rate")):
             raise ObjectIntegrityError("Audio evidence does not match the published sample commitments")
     else:
-        from app.evidence import document_tracked_changes
+        from app.evidence import document_tracked_changes, document_word_visibility
 
         binding = sampling.get("document_source", {})
         if binding.get("source_sha256") != source_sha256 or any(source.get(key) != binding.get(key) or not source.get(key)
                 for key in ("extracted_text_sha256", "source_map_sha256", "decode_sha256")) or (
-                source.get(document_tracked_changes.COMMITMENT) != document_tracked_changes.from_result(result)):
+                source.get(document_tracked_changes.COMMITMENT) != document_tracked_changes.from_result(result)
+                or source.get(document_word_visibility.COMMITMENT) != document_word_visibility.from_result(result)):
             raise ObjectIntegrityError("Document evidence does not match the published extraction commitments")
 
 
@@ -516,6 +517,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_percentage_consistency,
         document_tracked_changes,
         document_unselected_responses,
+        document_word_visibility,
         email_alternatives,
     )
     from app.evidence.document_packets import (
@@ -545,6 +547,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         verify_repeated_passages(document, text, mapping)
         document_percentage_consistency.verify_source(document, text, mapping, decoded.get("sentences", ()), meta=decoded["meta"])
         document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
+        document_word_visibility.verify_source(document, decoded["meta"].get(document_word_visibility.KEY), frozen=True)
         document_native_locations.validate(document)
         if document_email_contexts.KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
@@ -723,7 +726,7 @@ def _coverage(kind: str, document: dict) -> str:
 
 
 def _document_coverage_details(coverage: dict) -> list[str]:
-    from app.evidence import document_pdf_visibility
+    from app.evidence import document_pdf_visibility, document_word_visibility
 
     notes = [
         f"{check['signal_ref'].get('display_id') or 'Recorded check'}: {check['scored_windows']} local context(s) retained. "
@@ -747,6 +750,18 @@ def _document_coverage_details(coverage: dict) -> list[str]:
                 notes.append(f"Page {page['page']}. {count} invisible text {label}. "
                              f"Recorded locations in unrotated PDF points {boxes}.")
             notes.append(document_pdf_visibility.LIMITATION)
+    if visibility := coverage.get(document_word_visibility.KEY):
+        notes.append(f"Word text visibility. Checked {visibility['checked_paragraphs']} extracted paragraphs "
+                     f"and found {visibility['hidden_runs']} text runs marked hidden. "
+                     f"{document_word_visibility.SCOPE} {document_word_visibility.LIMITATION}")
+        for row in visibility["locations"]:
+            path = " / ".join(map(str, row["body_path"]))
+            location = (f"Body paragraph {row['body_paragraph']}" if row["body_paragraph"] is not None
+                        else f"Table cell at row {row['body_path'][-4] + 1}, column {row['body_path'][-2] + 1}")
+            notes.append(f"{location}, run {row['run'] + 1}, characters {row['source_start'] + 1}–{row['source_end']}. "
+                         f"{visibility['part']}. Body path {path} (zero-based).")
+        if omitted := visibility["hidden_runs"] - len(visibility["locations"]):
+            notes.append(f"{omitted} additional hidden text runs exceed the location display limit.")
     email = coverage.get("email")
     if isinstance(email, dict):
         body_format = {"text/plain": "plain-text", "text/html": "HTML"}.get(email.get("body_content_type"))

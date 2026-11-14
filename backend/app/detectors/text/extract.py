@@ -571,18 +571,29 @@ def extract_docx(path: Path) -> Document:
     from docx.table import Table
     from docx.text.paragraph import Paragraph
 
+    from app.evidence import document_word_visibility
     from app.evidence.document_archive_word import ordinary_body_paragraph
     from app.evidence.document_tracked_changes import PART_NAME, inspect
 
     d = docx.Document(str(path))
     parts: list[tuple[str, dict]] = []
     percentage_body_paragraphs = []
+    hidden_locations = []
+    checked_paragraphs = hidden_runs = 0
 
     def walk(parent, elements, path_parts):
+        nonlocal checked_paragraphs, hidden_runs
         for index, element in enumerate(elements):
             path_here = [*path_parts, index]
             if element.tag == qn("w:p"):
                 paragraph = Paragraph(element, parent)
+                body_paragraph = len(percentage_body_paragraphs) + 1 if not path_parts else None
+                if paragraph.text.strip():
+                    checked_paragraphs += 1
+                    for location in document_word_visibility.inspect_paragraph(paragraph, path_here, body_paragraph):
+                        hidden_runs += 1
+                        if len(hidden_locations) < document_word_visibility.MAX_LOCATIONS:
+                            hidden_locations.append(location)
                 if not path_parts:
                     eligible = paragraph.style.style_id.casefold() in {"normal", "bodytext", "bodytext2", "bodytext3"}
                     percentage_body_paragraphs.append(index if eligible and ordinary_body_paragraph(paragraph) else None)
@@ -613,6 +624,8 @@ def extract_docx(path: Path) -> Document:
     doc.meta = {"method": "python-docx", "paragraph_count": len(parts), "percentage_body_paragraphs": percentage_body_paragraphs,
                 "coverage_warning": ("Body paragraphs and tables were extracted in document order. Headers, footers, text boxes and "
                                      "embedded attachments were not checked; DOCX has no stable page numbers." + word_warning)}
+    if PART_NAME.fullmatch(part):
+        doc.meta[document_word_visibility.KEY] = document_word_visibility.build(part, checked_paragraphs, hidden_runs, hidden_locations)
     return doc
 
 

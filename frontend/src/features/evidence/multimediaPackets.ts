@@ -416,6 +416,9 @@ export interface DocumentEvidenceSet extends SetBase {
     pdf_text_visibility?: { schema: 'document-pdf-text-visibility/1' | 'document-pdf-text-visibility/2'; total_pages: number; examined_pages: number[];
       locations: { page: number; invisible_spans: number; boxes: [number, number, number, number][] }[];
       coordinate_space: 'unrotated-page-points'; authorship_confidence_contribution: 0 };
+    word_text_visibility?: { schema: 'document-word-text-visibility/1'; part: string; checked_paragraphs: number; hidden_runs: number;
+      locations: { body_path: (number | 'row' | 'cell')[]; body_paragraph: number | null; run: number; source_start: number; source_end: number }[];
+      authorship_confidence_contribution: 0 };
     checks?: { signal_ref: EvidenceRef; status: 'recorded' | 'partial' | 'context_not_recorded'; scored_windows: number; limitation?: string }[];
     ocr?: { status?: string; pages?: { page: number; status: string; coverage_scope?: 'image_region'; reason?: string | null; mean_recognition_confidence?: number;
       language?: { status?: string; language?: string; reason?: string }; [key: string]: unknown }[]; unchecked_pages?: number[] } | null

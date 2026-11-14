@@ -69,7 +69,7 @@ def public_result(result: dict) -> dict:
             if commitment := sampling.get(key):
                 source_coverage[key] = commitment
     if result.get('kind') == 'document':
-        from app.evidence import document_passage_position, document_tracked_changes
+        from app.evidence import document_passage_position, document_tracked_changes, document_word_visibility
         from app.evidence.email_alternatives import COMMITMENT, result_review
 
         if alternatives := result_review(result):
@@ -78,6 +78,8 @@ def public_result(result: dict) -> dict:
             source_coverage[document_passage_position.COMMITMENT] = canonical_hash(position)
         if tracked := document_tracked_changes.from_result(result):
             source_coverage[document_tracked_changes.COMMITMENT] = tracked
+        if word_visibility := document_word_visibility.from_result(result):
+            source_coverage[document_word_visibility.COMMITMENT] = word_visibility
     checks = [{k: s[k] for k in ('id', 'display_id', 'category', 'family', 'scope', 'status', 'raw_score',
                                 'raw_score_kind', 'calibrated_probability') if k in s}
               for s in public.get('signals') or []]

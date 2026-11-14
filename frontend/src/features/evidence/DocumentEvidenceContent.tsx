@@ -229,6 +229,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const unmapped = [...new Set([...(set.coverage?.unmapped_pages ?? []), ...(set.coverage?.ocr?.unchecked_pages ?? [])])]
   const partialPages = set.coverage?.partially_checked_pages ?? []
   const textVisibility = set.coverage?.pdf_text_visibility
+  const wordVisibility = set.coverage?.word_text_visibility
   const ocrPages = set.coverage?.ocr?.pages ?? []
   const matched = set.coverage?.matched_context_review
   const writingAgreement = set.coverage?.writing_second_check
@@ -255,6 +256,28 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     </section>}
     <DocumentRepeatedPassages result={set.repeated_passages} />
     {set.percentage_consistency && <PercentageConsistency review={set.percentage_consistency} />}
+    {wordVisibility && <section aria-labelledby="document-word-text-visibility" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="document-word-text-visibility" className="m-0 text-body font-medium">Word text visibility</h3>
+      <p className="mt-2 mb-0 text-small">Checked {wordVisibility.checked_paragraphs} extracted paragraphs.
+        {' '}Found {wordVisibility.hidden_runs} text {wordVisibility.hidden_runs === 1 ? 'run' : 'runs'} marked hidden.</p>
+      <p className="mt-2 mb-0 text-small text-text-muted">This check covers direct hidden formatting in body and table text.
+        {' '}Word can display hidden text depending on its settings. This check carries zero AI-authorship weight.</p>
+      {wordVisibility.locations.length > 0 && <>
+        <ul className="mt-2 mb-0 pl-5 text-small">
+          {wordVisibility.locations.map(row => <li key={`${row.body_path.join('/')}:${row.run}`}>
+            {row.body_path.length > 1
+              ? `Table cell (row ${Number(row.body_path.at(-4)) + 1}, column ${Number(row.body_path.at(-2)) + 1})`
+              : `Body paragraph ${row.body_paragraph}`} · Run {row.run + 1} · Characters {row.source_start + 1}–{row.source_end}
+            <p className="mt-1 mb-2 font-mono text-caption text-text-muted">
+              {wordVisibility.part} · Body path {row.body_path.join(' / ')} (zero-based)
+            </p>
+          </li>)}
+        </ul>
+        {wordVisibility.hidden_runs > wordVisibility.locations.length && <p className="mt-2 mb-0 text-caption text-text-muted">
+          {wordVisibility.hidden_runs - wordVisibility.locations.length} additional hidden text runs exceed the location display limit.
+        </p>}
+      </>}
+    </section>}
     {textVisibility && <section aria-labelledby="document-pdf-text-visibility" className="mt-4 rounded-md border border-border p-4">
       <h3 id="document-pdf-text-visibility" className="m-0 text-body font-medium">PDF text visibility</h3>
       <p className="mt-2 mb-0 text-small">Checked {textVisibility.examined_pages.length} of {textVisibility.total_pages} pages for explicitly invisible text.</p>

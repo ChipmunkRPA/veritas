@@ -28,6 +28,7 @@ from app.evidence import (
     document_scope,
     document_tracked_changes,
     document_unselected_responses,
+    document_word_visibility,
     email_alternatives,
 )
 from app.evidence.document_packets import (
@@ -128,6 +129,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("Recorded document coverage differs from the re-extracted original")
     document_repeat.verify_source(evidence, text, mapping)
     document_pdf_visibility.verify_source(evidence, doc.meta)
+    document_word_visibility.verify_source(evidence, doc.meta.get(document_word_visibility.KEY))
     if document_percentage_consistency.KEY in evidence:
         from app.detectors.text.pipeline import segment_within
 
@@ -192,7 +194,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     native_detail = " Verified decoded original text locations for the inspected writing." if document_native_locations.KEY in coverage else ""
     email_input_detail = f" Verified source roles and text hashes for {email_inputs} classifier inputs." if email_inputs else ""
     tracked_detail = f" Verified {tracked} retained tracked Word edit locations against the source XML." if tracked else ""
+    word_visibility_detail = " Verified direct Word hidden formatting and retained run locations." if document_word_visibility.KEY in coverage else ""
     percentage_detail = " Verified repeated percentage statements and their value ranges." if document_percentage_consistency.KEY in evidence else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
-            f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}{tracked_detail}{percentage_detail}")
+            f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
+            f"{tracked_detail}{word_visibility_detail}{percentage_detail}")

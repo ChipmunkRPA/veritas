@@ -48,6 +48,7 @@ from app.evidence import (
     document_matched_context,
     document_packets,
     document_scope,
+    document_word_visibility,
     image_editor_preview_binding,
     image_packets_v7,
     image_thumbnail_evidence,
@@ -122,19 +123,20 @@ def test_actual_0023_to_0024_migration_preserves_legacy_package_bytes_and_every_
     db_engine.dispose()
 
 
-@pytest.fixture(params=["video", "audio", "document", "document_agreement", "hybrid_document", "scanned_document",
+@pytest.fixture(params=["video", "audio", "document", "document_agreement", "hybrid_document", "scanned_document", "hidden_word",
                         "image", "image_translation", "image_affine", "image_affine_large", "image_embedded_pair",
                         "image_editor_preview"])
 def multimedia_package(request, tmp_path, monkeypatch):
     hybrid = request.param == "hybrid_document"
     scanned = request.param == "scanned_document"
     agreement = request.param == "document_agreement"
+    hidden_word = request.param == "hidden_word"
     translated = request.param == "image_translation"
     large_affine = request.param == "image_affine_large"
     geometric = large_affine or request.param == "image_affine"
     embedded = request.param == "image_embedded_pair"
     editor = request.param == "image_editor_preview"
-    kind = "document" if hybrid or scanned or agreement else "image" if translated or geometric or embedded or editor else request.param
+    kind = "document" if hybrid or scanned or agreement or hidden_word else "image" if translated or geometric or embedded or editor else request.param
     if kind == "image":
         monkeypatch.setattr(settings, "image_jpeg_block_copy_review", False)
         monkeypatch.setattr(settings, "image_jpeg_offgrid_copy_review", False)
@@ -207,6 +209,20 @@ def multimedia_package(request, tmp_path, monkeypatch):
         if hybrid:
             assert any(anchor.get("ocr", {}).get("coverage_scope") == "image_region" for anchor in packet["anchors"])
         assert "page1_ocr_input" in packet["artifacts"]
+    elif hidden_word:
+        from docx import Document
+
+        source_docx = tmp_path / "hidden.docx"
+        word = Document()
+        paragraph = word.add_paragraph("This body contains enough visible words to exercise the writing evidence export. ")
+        paragraph.add_run("This Word run is directly marked hidden.").font.hidden = True
+        word.save(source_docx)
+        db, store, analysis, result, decoded, _ = request.getfixturevalue("packet_factory")(".docx", scores=(), source_pdf=source_docx)
+        result["kind"] = "document"
+        result["manifest"]["sampling"][document_word_visibility.COMMITMENT] = canonical_hash(decoded["meta"][document_word_visibility.KEY])
+        analysis.result_hash = store.put_bytes(canonical_json(result)).sha256
+        document = document_packets.build_packet_set(db, analysis, store, result)
+        assert document["coverage"][document_word_visibility.KEY]["hidden_runs"] == 1
     elif agreement:
         db, store, analysis, result, *_ = request.getfixturevalue("packet_factory")(".txt", scores=(.91, .93, .81))
         signal = result["signals"][0]
@@ -307,10 +323,14 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
         else:
             assert image_editor_preview_binding.KEY not in public
         writing_agreement = frozen.get("coverage", {}).get(document_scope.CHECKPOINT_AGREEMENT_KEY)
+        word_visibility = frozen.get("coverage", {}).get(document_word_visibility.KEY)
         assert {entry["sha256"] for entry in bundle["artifacts"]} == set(expected)
         if writing_agreement:
             assert not expected
             assert [row["state"] for row in writing_agreement["ranges"]] == ["corroborated", "different", "unavailable"]
+        elif word_visibility:
+            assert not expected
+            assert public[document_word_visibility.COMMITMENT] == canonical_hash(word_visibility)
         else:
             assert expected and all(archive.read(entry["file"]) == f.store.read_bytes(entry["sha256"])
                                     for entry in bundle["artifacts"])
@@ -336,6 +356,11 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
     embedded = frozen.get("version") == "image-evidence-15"
     if writing_agreement:
         original = tmp_path / "submitted.txt"
+        original.write_bytes(f.store.read_bytes(f.analysis.sha256))
+        checked = verify.verify_package(built.path, public_key_pem=f.key.public_pem(), source_document=original)
+        assert checked.ok, checked.as_dict()
+    if word_visibility:
+        original = tmp_path / "submitted.docx"
         original.write_bytes(f.store.read_bytes(f.analysis.sha256))
         checked = verify.verify_package(built.path, public_key_pem=f.key.public_pem(), source_document=original)
         assert checked.ok, checked.as_dict()
@@ -483,7 +508,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.document_matched_context', 'app.evidence.document_paragraph_priority',
                         'app.evidence.document_email_contexts', 'app.evidence.document_native_locations',
                         'app.evidence.document_passage_position', 'app.evidence.document_long_passage_position',
-                        'app.evidence.document_tracked_changes', 'app.evidence.document_pdf_visibility',
+                        'app.evidence.document_tracked_changes', 'app.evidence.document_pdf_visibility', 'app.evidence.document_word_visibility',
                         'app.evidence.document_percentage_consistency',
                         'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.audio_background_binding', 'app.evidence.audio_bandwidth_binding',
                         'app.evidence.audio_repetition_binding', 'app.evidence.audio_exact_repetition', 'app.evidence.audio_similarity_binding',

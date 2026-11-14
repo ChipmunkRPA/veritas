@@ -57,6 +57,7 @@ IMAGE_EDITOR_PREVIEW = 'thumbnail_evidence'
 EMAIL_CLASSIFIER_SCOPE = 'email_classifier_input_scope_sha256'
 WRITING_POSITION = 'writing_position_review_sha256'
 WORD_TRACKED_CHANGES = 'word_tracked_changes_sha256'
+WORD_TEXT_VISIBILITY = 'word_text_visibility_sha256'
 IMAGE_INTERPOLATION = 'native_interpolation_review_sha256'
 VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3', 'image-evidence-4', 'image-evidence-5',
                       'image-evidence-6', IMAGE_PAIR_VERSION} | REFLECTION_VERSIONS, 'video': VIDEO_VERSIONS,
@@ -94,7 +95,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              IMAGE_EDITOR_PREVIEW, face_return_coverage.COMMITMENT, email_alternatives.COMMITMENT,
                              face_short_window_binding.COMMITMENT, scene_return_binding.COMMITMENT,
                              scene_return_binding.COVERAGE_COMMITMENT, WRITING_POSITION,
-                             EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, IMAGE_INTERPOLATION, SPEECH_SELECTION_COMMITMENT,
+                             EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, WORD_TEXT_VISIBILITY,
+                             IMAGE_INTERPOLATION, SPEECH_SELECTION_COMMITMENT,
                              TIMING_COMMITMENT},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
@@ -254,6 +256,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              'Writing position commitments require document evidence')
     _require(analysis['kind'] == 'document' or WORD_TRACKED_CHANGES not in result,
              'Tracked Word edits require document evidence')
+    _require(analysis['kind'] == 'document' or WORD_TEXT_VISIBILITY not in result,
+             'Word text visibility requires document evidence')
     _require(analysis['kind'] == 'document' or EMAIL_CLASSIFIER_SCOPE not in result,
              'Email classifier input commitments require document evidence')
     if analysis['kind'] == 'document':
@@ -263,6 +267,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             document_pdf_visibility,
             document_percentage_consistency,
             document_tracked_changes,
+            document_word_visibility,
         )
         from app.evidence.document_matched_context import validate as validate_matched_context
         from app.evidence.document_native_locations import validate as validate_native_locations
@@ -283,6 +288,10 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         _require(evidence["source"].get(document_tracked_changes.COMMITMENT) == tracked,
                  "Tracked Word edits differ from the public result")
         document_tracked_changes.validate(evidence, tracked)
+        word_visibility = result.get(WORD_TEXT_VISIBILITY)
+        _require(evidence["source"].get(WORD_TEXT_VISIBILITY) == word_visibility,
+                 "Word visibility differs from the public result")
+        document_word_visibility.validate(evidence, word_visibility)
         document_email_contexts.validate_commitment(evidence, result.get(document_email_contexts.COMMITMENT),
                                                     published_checks={check["id"] for check in result.get("checks", [])})
         document_scope.validate_checkpoint_agreement(evidence)

@@ -39,11 +39,11 @@ from app.engine.fusion.registry import Selection
 from app.engine.registry import TEXT_FINETUNE_DETECTOR, TEXT_PRIMARY_DETECTORS
 from app.engine.runner import StageContext
 from app.engine.stages import common, document_screening
-from app.evidence import document_pdf_visibility, document_tracked_changes
+from app.evidence import document_pdf_visibility, document_tracked_changes, document_word_visibility
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p32"  # English coverage gate for statistical writing checks.
+PIPELINE_VERSION = "doc-2.0-p33"
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 PRIMARY_DETECTORS = TEXT_PRIMARY_DETECTORS  # v0.3 used the fine-tune whenever it was installed
 SECONDARY_DETECTOR = "txt.hf.hello_simpleai"
@@ -87,7 +87,9 @@ def current_decode_output(output: Any) -> bool:
     """Reuse extraction only when its source coverage is current."""
     if not isinstance(output, dict) or output.get("meta", {}).get("extraction_version") != EXTRACTION_VERSION:
         return False
-    if output["meta"].get("method") == "python-docx" and document_tracked_changes.KEY not in output:
+    if (output["meta"].get("method") == "python-docx" and
+            (document_tracked_changes.KEY not in output
+             or (output["meta"].get(document_word_visibility.KEY) or {}).get("schema") != document_word_visibility.SCHEMA)):
         return False
     if (output["meta"].get("method") == "pymupdf"
             and output["meta"].get(document_pdf_visibility.KEY, {}).get("schema") != document_pdf_visibility.SCHEMA):
@@ -263,9 +265,10 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
     hybrid_notice = hybrid_ocr_notice((doc.meta.get("ocr") or {}).get("pages") or [])
     visibility = doc.meta.get(document_pdf_visibility.KEY) or {}
     invisible = visibility.get("locations", [])
+    word_hidden = doc.meta.get(document_word_visibility.KEY, {}).get("hidden_runs", 0)
     visibility_incomplete = (visibility.get("schema") == document_pdf_visibility.SCHEMA
                              and len(visibility["examined_pages"]) < visibility["total_pages"])
-    if not any((unchecked, partial_notice, hybrid_notice, invisible, visibility_incomplete)):
+    if not any((unchecked, partial_notice, hybrid_notice, invisible, visibility_incomplete, word_hidden)):
         return output
     notices = []
     if unchecked:
@@ -284,10 +287,16 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
     if visibility_incomplete:
         visibility_notices.append(f"The PDF text visibility check completed on {len(visibility['examined_pages'])} of "
                                   f"{visibility['total_pages']} pages.")
+    if word_hidden:
+        label = "run" if word_hidden == 1 else "runs"
+        visibility_notices.append(f"The Word file marks {word_hidden} text {label} as hidden. "
+                                  "The extracted writing may differ from what Word displays.")
     notices.extend(visibility_notices)
     notices.append("No whole-document authorship conclusion is available.")
     scope = " ".join(notices)
-    if invisible:
+    if word_hidden:
+        headline = document_word_visibility.HEADLINE
+    elif invisible:
         headline = document_pdf_visibility.ASSESSMENT_HEADLINE
     elif visibility_incomplete:
         headline = document_pdf_visibility.INCOMPLETE_HEADLINE
@@ -489,6 +498,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
     }
     if tracked := decoded.get(document_tracked_changes.KEY):
         result.manifest.sampling[document_tracked_changes.COMMITMENT] = canonical_hash(tracked)
+    if word_visibility := decoded.get("meta", {}).get(document_word_visibility.KEY):
+        result.manifest.sampling[document_word_visibility.COMMITMENT] = canonical_hash(word_visibility)
     if settings.document_email_alternatives_review and decoded.get("meta", {}).get("method") == "email":
         from app.evidence import email_alternatives
 

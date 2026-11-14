@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short local evidence replay](writing-context-pool-transfer-2026-11-14.md#reproduce)
+recounts the image-padding controls, paired video soundtrack shifts, stereo
+intervals and writing edits at varying sentence positions. It uses only the
+checked-in numeric measurements and standard-library Python. The receipt
+supports local comparison and can be shared without source media or prose.
+
 The [single-upload writing replay](writing-local-context-transfer-2026-11-14.md#replay)
 recomputes the two fits, calibration points, exact-location outcomes, and
 ordinary excerpt flags. It covers news, abstracts, and held-out essays.

@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Contextual sentence pooling at varied positions](writing-context-pool-transfer-2026-11-14.md)
+  located 29 of 60 held essay edits versus 14 for the current proxy.
+  It also flagged 19 of 30 genuine essays and misplaced 21 locations
+  in edited essays. The candidate stays offline. The portable four-media
+  review includes this study and the short soundtrack and stereo checks.
+
 - [Single-upload writing context transfer](writing-local-context-transfer-2026-11-14.md)
   tested 176 held rewrites. The existing primary context rule located
   49 and both new combinations located zero at their frozen points.

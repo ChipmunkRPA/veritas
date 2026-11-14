@@ -372,12 +372,23 @@ STEREO_AND_FACE_REPLAY = {
         "writing-neighbor-interaction-freeze-2026-11-14.json", "writing-neighbor-interaction-2026-11-14.json",
     ), ("review",), TIMING_AND_LOCATION["writing"][3] + (f"{SCRIPTS}/review_writing_context_agreement.py",)),
 }
+SHORT_LOCAL_EVIDENCE = {
+    "image": TIMING_AND_LOCATION["image"],
+    "video": ("video_short_soundtrack_transfer.py", ("video-short-soundtrack-2026-11-14.json",), ("review",), ()),
+    "audio": STEREO_AND_FACE_REPLAY["audio"],
+    "writing": ("writing_context_pool_transfer.py", ("writing-context-pool-transfer-2026-11-14.json",), ("review",), tuple(
+        f"{SCRIPTS}/{name}.py" for name in ("writing_focus_v3", "writing_interval_transfer",
+                                           "writing_local_context_transfer", "writing_paired_scale_transfer",
+                                           "writing_revision_trajectory_transfer", "writing_sentence_anchor_transfer")
+    )),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
           "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion",
           "short-edit-transfer-2026-11-13", "delivery-and-localization", "reference-and-rotation", "single-upload-transfers",
           "processing-and-short-edits", "delivery-and-reference-transfers", "short-edit-checks", "edit-position-transfers",
-          "single-upload-cues", "check-boundaries", "local-trials", "timing-and-location", "stereo-and-face")
+          "single-upload-cues", "check-boundaries", "local-trials", "timing-and-location", "stereo-and-face",
+          "short-local-evidence")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -467,6 +478,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = TIMING_AND_LOCATION[modality]
     elif suite == "stereo-and-face":
         script, panel_names, prefix, dependencies = STEREO_AND_FACE_REPLAY[modality]
+    elif suite == "short-local-evidence":
+        script, panel_names, prefix, dependencies = SHORT_LOCAL_EVIDENCE[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

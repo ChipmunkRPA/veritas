@@ -30,6 +30,26 @@ const show = (set: DocumentEvidenceSet) => render(<MemoryRouter><DocumentEvidenc
 afterEach(cleanup)
 
 describe('ordinary document passage inspection', () => {
+  it('marks exact percentage values after a supplementary Unicode character', () => {
+    const text = (value: string) => `The review 🧪 found ${value} percent of submitted applications qualified.`
+    const readings = [['47', 50], ['37.0', 150]] as const
+    const group = readings.map(([value, start]) => {
+      const prefix = 'The review 🧪 found '
+      const found = text(value)
+      const quantity_start = start + Array.from(prefix).length
+      return { start, end: start + Array.from(found).length, text: found, quantity_start, quantity_end: quantity_start + value.length }
+    })
+    show({ ...evidence([]), percentage_consistency: {
+      schema: 'document-percentage-consistency/1', status: 'different_values', authorship_confidence_contribution: 0,
+      checked_sentences: 2, comparable_claims: 1, excluded_blocks: 0, different_claims: 1, groups: [group],
+      scope: 'Compares complete body sentences.', limitation: 'This check carries zero AI-authorship weight.',
+    } })
+    const section = screen.getByRole('region', { name: 'Repeated percentage statements' })
+    expect(Array.from(section.querySelectorAll('mark'), item => item.textContent)).toEqual(['47', '37.0'])
+    expect(within(section).getByText('Statement [50, 116) · Value [69, 71)')).toBeTruthy()
+    expect(within(section).getByText(/zero AI-authorship weight/)).toBeTruthy()
+  })
+
   it('marks all three measured sentences and leaves the navigation focus separate', () => {
     const item: DocumentEvidencePacket = { ...packet, inspection_scope: { basis: 'scored_context',
       spans: [{ start: 108, end: 122 }, { start: 123, end: 137 }, { start: 138, end: 142 }] } }

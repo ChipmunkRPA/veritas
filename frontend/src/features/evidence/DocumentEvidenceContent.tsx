@@ -76,6 +76,31 @@ function PassagePosition({ review }: { review: DocumentPassagePosition }) {
   </section>
 }
 
+function PercentageConsistency({ review }: { review: NonNullable<DocumentEvidenceSet['percentage_consistency']> }) {
+  return <section aria-labelledby="document-percentage-consistency" className="mt-4 rounded-md border border-border p-4">
+    <h3 className="m-0 text-body font-medium" id="document-percentage-consistency">Repeated percentage statements</h3>
+    <p className="mt-2 mb-0 text-small">{review.scope}</p>
+    <p className="mt-2 mb-0 text-small">{review.status === 'different_values'
+      ? `${review.different_claims} repeated ${review.different_claims === 1 ? 'statement uses' : 'statements use'} different values.`
+      : review.status === 'checked' ? 'No differently stated values were found in the eligible repeated sentences.'
+        : 'No eligible percentage statement was repeated across separate paragraphs.'}</p>
+    {review.groups.map(group => <div key={group[0].start} className="mt-3 rounded-md border border-border p-3">
+      {group.map(row => {
+        const chars = Array.from(row.text)
+        const start = row.quantity_start - row.start
+        const end = row.quantity_end - row.start
+        return <div key={row.start} className="mb-2 last:mb-0">
+          <blockquote className="m-0 break-words text-small">{chars.slice(0, start).join('')}<mark>{chars.slice(start, end).join('')}</mark>{chars.slice(end).join('')}</blockquote>
+          <p className="mt-1 mb-0 font-mono text-caption text-text-muted">Statement [{row.start}, {row.end}) · Value [{row.quantity_start}, {row.quantity_end})</p>
+        </div>
+      })}
+    </div>)}
+    {review.different_claims > review.groups.length && <p className="mt-2 mb-0 text-caption text-text-muted">
+      {review.different_claims - review.groups.length} additional statements exceed the display limit.</p>}
+    <p className="mt-2 mb-0 text-caption text-text-muted">{review.limitation} Positions use extracted Unicode characters.</p>
+  </section>
+}
+
 function EmailBodyComparison({ review }: { review?: EmailBodyAlternatives }) {
   if (!review) return null
   return <section id="email-body-alternatives" aria-labelledby="email-body-alternatives-heading" className="mt-4 rounded-md border border-border p-4">
@@ -219,6 +244,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
       {!!tracked.omitted_excerpts && <p className="mt-2 mb-0 text-caption text-text-muted">{tracked.omitted_excerpts} further excerpts exceed the display limit.</p>}
     </section>}
     <DocumentRepeatedPassages result={set.repeated_passages} />
+    {set.percentage_consistency && <PercentageConsistency review={set.percentage_consistency} />}
     <DocumentInspectionMap packets={set.packets} selectedId={selectedId} onSelect={selectPassage} />
     <DocumentPassageCoverage coverage={set.coverage?.local_passage_coverage} />
     <DocumentUnselectedResponses responses={set.coverage?.unselected_passage_responses} />

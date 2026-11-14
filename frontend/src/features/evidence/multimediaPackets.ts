@@ -363,6 +363,10 @@ export interface EmailClassifierInputScope {
 export interface DocumentEvidenceSet extends SetBase {
   schema: 'chipmunk.document-evidence/1'; packets: DocumentEvidencePacket[]; omitted_windows: number
   source: { sha256: string; chars?: number; method?: string; offset_unit: 'unicode_codepoint' }
+  percentage_consistency?: { schema: 'document-percentage-consistency/1'; status: 'different_values' | 'checked' | 'not_assessed';
+    scope: string; limitation: string; authorship_confidence_contribution: 0; checked_sentences: number;
+    excluded_blocks: number; different_claims: number; comparable_claims: number;
+    groups: { start: number; end: number; text: string; quantity_start: number; quantity_end: number }[][] }
   repeated_passages?: { schema: 'document-repeated-passages/1'; status: 'matched' | 'no_match' | 'not_assessed';
     coverage: { compared_blocks: number; excluded_ocr_blocks: number; excluded_quoted_or_signature_blocks: number; omitted_groups: number };
     groups: { id: string; text: string; text_sha256: string; word_count: number; total_occurrences: number;

@@ -113,6 +113,9 @@ recounts 544 blur, generated-edit and delivery-control comparisons. The
 checks all reported source clocks and separate ranges for the 80-pair
 transfer. The [randomized speech replay](audio-random-clock-stock-2026-11-13.md)
 compares three frozen routes at eight measured edit placements.
+The [repeated-percentage check](writing-percentage-consistency-2026-11-13.md#local-validation)
+replays both Unicode value ranges on known TXT disagreements, with separate
+controls for different cohorts, denominators and reporting dates.
 
 Recount those three studies and the [standalone writing intensity trial](writing-edit-intensity-transfer-2026-11-13.md)
 in one receipt. The checks recompute published outcomes from scalar

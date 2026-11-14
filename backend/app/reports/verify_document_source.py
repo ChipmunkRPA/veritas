@@ -6,6 +6,7 @@ import base64
 import hashlib
 import json
 from collections.abc import Callable
+from dataclasses import asdict
 from pathlib import Path
 from zipfile import ZipFile
 
@@ -21,6 +22,7 @@ from app.evidence import (
     document_paragraph_priority,
     document_passage_coverage,
     document_passage_position,
+    document_percentage_consistency,
     document_repeat,
     document_scope,
     document_tracked_changes,
@@ -124,6 +126,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
            for key, default in fields.items()):
         raise ValueError("Recorded document coverage differs from the re-extracted original")
     document_repeat.verify_source(evidence, text, mapping)
+    if document_percentage_consistency.KEY in evidence:
+        from app.detectors.text.pipeline import segment_within
+
+        document_percentage_consistency.verify_source(evidence, text, mapping, [asdict(row) for row in segment_within(doc)])
     document_matched_context.verify_source(evidence, text, mapping)
     document_native_locations.validate(evidence)
     document_paragraph_priority.verify_source(evidence, text, mapping)
@@ -184,6 +190,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     native_detail = " Verified decoded original text locations for the inspected writing." if document_native_locations.KEY in coverage else ""
     email_input_detail = f" Verified source roles and text hashes for {email_inputs} classifier inputs." if email_inputs else ""
     tracked_detail = f" Verified {tracked} retained tracked Word edit locations against the source XML." if tracked else ""
+    percentage_detail = " Verified repeated percentage statements and their value ranges." if document_percentage_consistency.KEY in evidence else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
-            f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}{tracked_detail}")
+            f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}{tracked_detail}{percentage_detail}")

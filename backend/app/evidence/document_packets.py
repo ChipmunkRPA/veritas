@@ -21,6 +21,7 @@ from sqlalchemy.orm import Session
 
 from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
+from app.core.config import settings
 from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
 from app.evidence import (
     document_email_contexts,
@@ -29,6 +30,7 @@ from app.evidence import (
     document_paragraph_priority,
     document_passage_coverage,
     document_passage_position,
+    document_percentage_consistency,
     document_repeat,
     document_scope,
     document_tracked_changes,
@@ -326,6 +328,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         raise DocumentPacketIntegrityError("Document evidence has no valid text coordinate space")
     try:
         document_repeat.validate(document)
+        document_percentage_consistency.validate(document)
         document_matched_context.validate(document)
         document_paragraph_priority.validate(document)
         document_passage_coverage.validate(document)
@@ -551,6 +554,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     except (ValueError, KeyError, TypeError) as error:
         raise DocumentPacketIntegrityError("Local passage coverage differs from the frozen inputs") from error
     document["repeated_passages"] = document_repeat.build(document["source"], text, mapping)
+    if settings.environment == "dev" and settings.document_percentage_consistency and document["source"]["method"] == "plain":
+        document[document_percentage_consistency.KEY] = document_percentage_consistency.build(
+            document["source"], text, mapping, decoded["sentences"],
+        )
     quoted_roles = {"quoted", "signature"}
     quoted_ranges = [_range(source, len(text)) for source in mapping if source.get("quote_role") in quoted_roles]
     for index, (a, b) in enumerate(selected, 1):
@@ -684,6 +691,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
         decoded = _decode(db, analysis, store, result)
         try:
             document_repeat.verify_source(document, decoded["text"], decoded["source_map"])
+            document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()))
             document_matched_context.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_paragraph_priority.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_passage_coverage.verify_source(document, decoded["text"], decoded["source_map"],

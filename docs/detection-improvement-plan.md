@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Repeated percentages in TXT](writing-percentage-consistency-2026-11-13.md)
+  links both positions when the same complete statement uses two different
+  percentage values. It located both values in all 48 seeded disagreements
+  and gave no findings on 608 ordinary and constructed controls. It carries
+  zero AI-authorship weight. Dates, cohorts, denominators and citations that
+  differ in the text are treated as different claims.
 - [JPEG detail loss](image-jpeg-detail-loss-2026-11-13.md) adds a narrow
   earlier-copy check. It located moderate local blur in 14 of 34 cases,
   versus one with the existing comparison. It added useful moderate or

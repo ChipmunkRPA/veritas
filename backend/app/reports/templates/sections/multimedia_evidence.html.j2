@@ -30,6 +30,23 @@
 <p class="caption">Evidence set {{ evidence.version }} - SHA-256 <span class="mono evidence-hash">{{ evidence.sha256 }}</span></p>
 <p class="caption"{% if evidence.kind == 'audio' %} id="multimedia-evidence-voice-coverage"{% endif %}>{{ evidence.coverage_note }}</p>
 {% for note in evidence.coverage_details %}<p class="caption">{{ note }}</p>{% endfor %}
+{% set quantities = evidence.get('percentage_consistency') %}
+{% if quantities %}
+<h3 id="document-percentage-consistency">Repeated percentage statements</h3>
+<p>{{ quantities.scope }}</p>
+{% if quantities.groups %}
+<p>{{ quantities.different_claims }} repeated {% if quantities.different_claims == 1 %}statement uses{% else %}statements use{% endif %} different values.</p>
+{% for group in quantities.groups %}
+{% for row in group %}
+{% if not evidence.withheld %}<blockquote>{{ row.before }}<mark>{{ row.quantity }}</mark>{{ row.after }}</blockquote>{% endif %}
+<p class="caption">Statement [{{ row.start }}, {{ row.end }}) · Value [{{ row.quantity_start }}, {{ row.quantity_end }})</p>
+{% endfor %}
+{% endfor %}
+{% if quantities.different_claims > (quantities.groups | length) %}<p class="caption">{{ quantities.different_claims - (quantities.groups | length) }} additional statements exceed the display limit.</p>{% endif %}
+{% elif quantities.status == 'checked' %}<p>No differently stated values were found in the eligible repeated sentences.</p>
+{% else %}<p>No eligible percentage statement was repeated across separate paragraphs.</p>{% endif %}
+<p class="caption">{{ quantities.limitation }} Positions use extracted Unicode characters. JSON pointer <span class="mono">/percentage_consistency</span>.</p>
+{% endif %}
 {% set email_scope = evidence.get('email_classifier_input_scope') %}
 {% if email_scope %}
 <h3 id="multimedia-email-input-scope">What the email writing checks read</h3>
@@ -385,7 +402,7 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% else %}
 {% set stereo_repeats = namespace(found=false) %}
 {% if evidence.get('stereo_repetition') %}{% for row in evidence.stereo_repetition.channels %}{% if row.measurement.pairs or (row.get('gain_measurement') and row.gain_measurement.pairs) %}{% set stereo_repeats.found = true %}{% endif %}{% endfor %}{% endif %}
-{% if not stereo_repeats.found and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
+{% if not stereo_repeats.found and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') and not (evidence.get('percentage_consistency') and evidence.percentage_consistency.groups) %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
 {% if evidence.omitted %}<p class="caption">{{ evidence.omitted }} additional candidates were omitted from this bounded evidence set.</p>{% endif %}
 {% for note in evidence.limitations %}<p class="caption">{{ note }}</p>{% endfor %}
 {% endif %}

@@ -250,7 +250,12 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     _require(analysis['kind'] == 'document' or EMAIL_CLASSIFIER_SCOPE not in result,
              'Email classifier input commitments require document evidence')
     if analysis['kind'] == 'document':
-        from app.evidence import document_email_contexts, document_passage_position, document_tracked_changes
+        from app.evidence import (
+            document_email_contexts,
+            document_passage_position,
+            document_percentage_consistency,
+            document_tracked_changes,
+        )
         from app.evidence.document_matched_context import validate as validate_matched_context
         from app.evidence.document_native_locations import validate as validate_native_locations
         from app.evidence.document_paragraph_priority import validate as validate_paragraph_priority
@@ -258,6 +263,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         from app.evidence.document_unselected_responses import validate as validate_unselected_responses
 
         validate_repeated_passages(evidence)
+        document_percentage_consistency.validate(evidence)
         validate_native_locations(evidence)
         validate_matched_context(evidence, published_checks={check['id'] for check in result.get('checks', [])})
         validate_paragraph_priority(evidence)

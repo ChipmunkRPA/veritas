@@ -90,6 +90,9 @@ def test_exact_waveform_audio_and_clock_replay(directions, status):
     review = audio_long_review.build(record, store=store, source=source, pcm=pcm, mapping=source,
                                     asset=asset, waveform=audio_packets._chart)
     assert review["status"] == status and review["affects_overall_confidence"] is False
+    sample_coverage = review[binding.COVERAGE]
+    assert sample_coverage["samples_by_status"]["outside_schedule"] == len(pcm) - 3 * binding.SPAN
+    assert sum(sample_coverage["samples_by_status"].values()) == len(pcm)
     for window in review["windows"]:
         a, b = window["start_sample"], window["end_sample"]
         assert window["source_timestamp_ranges"][0]["source_start_pts"] == a
@@ -102,6 +105,13 @@ def test_exact_waveform_audio_and_clock_replay(directions, status):
     audio_long_review.verify(review, record, store=store, source=source, pcm=pcm, mapping=source,
                              read_asset=assets.__getitem__, waveform=audio_packets._chart)
     audio_long_review.verify_source(review, pcm=pcm, mapping=source, waveform=audio_packets._chart)
+    corrupted = deepcopy(review)
+    corrupted[binding.COVERAGE]["intervals"][0]["source_timestamp_ranges"][0]["source_end_pts"] += 1
+    with pytest.raises(ValueError, match="sample coverage differs"):
+        audio_long_review.verify_source(corrupted, pcm=pcm, mapping=source, waveform=audio_packets._chart)
+    legacy = {key: value for key, value in review.items() if key != binding.COVERAGE}
+    audio_long_review.verify(legacy, record, store=store, source=source, pcm=pcm, mapping=source,
+                             read_asset=assets.__getitem__, waveform=audio_packets._chart)
     moved = deepcopy(review)
     moved["windows"][0]["source_timestamp_ranges"][0]["source_end_pts"] -= 1
     with pytest.raises(ValueError, match="clock"):

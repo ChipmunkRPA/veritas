@@ -198,6 +198,9 @@ def verify_exports(client, aid, source, evidence, assets, output):
         for window in evidence["long_voice_review"]["windows"]:
             if "speech_samples" in window:
                 assert f"Detected speech {window['speech_samples'] / RATE:.3f} of 3.000 s." in text
+        coverage = evidence["long_voice_review"]["sample_coverage"]
+        assert sum(coverage["samples_by_status"].values()) == evidence["source"]["samples"]
+        assert "Where the long speech review reached a response" in text
         images = {item[0] for page in doc for item in page.get_images(full=True)}
         assert signature(png) in {signature(doc.extract_image(xref)["image"]) for xref in images}
     package = body(client.post(f"/api/v2/analyses/{aid}/packages",
@@ -396,12 +399,17 @@ def run_resampled(study, output):
                     if label == "isolated_rain":
                         import pymupdf
 
+                        sample_coverage = review["sample_coverage"]
+                        assert sample_coverage["samples_by_status"]["below_speech_minimum"] == len(pcm)
+                        assert all(value == 0 for label, value in sample_coverage["samples_by_status"].items()
+                                   if label != "below_speech_minimum")
                         report = body(client.post(f"/api/v2/analyses/{aid}/reports", json={"profile": "standard"}))
                         report = wait(client, f"/api/v2/reports/{report['id']}", timeout=120)
                         pdf = fetch(client, f"/api/v2/reports/{report['id']}/file")
                         with pymupdf.open(stream=pdf, filetype="pdf") as document:
                             text = " ".join(" ".join(page.get_text().split()) for page in document)
                         assert text.count("Detected speech 0.000 of 3.000 s. Below the 1.500 s speech minimum. Samples") == len(windows)
+                        assert "All covering windows were below the speech minimum" in text
                         (output / "isolated-rain.pdf").write_bytes(pdf)
                         summary["skipped_windows_in_pdf"] = len(windows)
                 results[label] = summary

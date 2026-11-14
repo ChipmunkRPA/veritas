@@ -168,6 +168,12 @@ Samples [{{ review.interval.start_sample }}, {{ review.interval.end_sample }}) a
 {% set review = evidence.long_voice_review %}
 <h3 id="multimedia-long-voice-review">{{ review.title }}</h3>
 <p class="caption">{% if review.status == 'skipped' %}Skipped. {% endif %}{{ review.reason }}</p>
+{% if review.get('sample_coverage') %}
+<h4 id="long-voice-coverage">Where the long speech review reached a response</h4>
+<p class="caption">Intervals are listed once even when windows overlap. A directional window does not assign a result to every sample in it.</p>
+<table class="multimedia-locator" aria-labelledby="long-voice-coverage"><thead><tr><th>Source interval</th><th>Window coverage</th></tr></thead>
+<tbody>{% for interval in review.sample_coverage.intervals %}<tr><td>{{ '%.3f' | format(interval.start_sample / 16000) }}–{{ '%.3f' | format(interval.end_sample / 16000) }} s</td><td>{{ interval.label }}</td></tr>{% endfor %}</tbody></table>
+{% endif %}
 {% for region in review.get('regions', []) %}
 <p class="caption"><strong>{% if region.basis == 'overlap' %}Overlap of two AI-leaning windows{% else %}Corroborated three-second window{% endif %}</strong>.
 {{ '%.3f' | format(region.start_sample / 16000) }}–{{ '%.3f' | format(region.end_sample / 16000) }} s.

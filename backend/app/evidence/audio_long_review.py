@@ -42,7 +42,7 @@ def _waveform(window, pcm, waveform):
     return waveform(pcm, [], start=0, end=len(pcm), selected=(window["start_sample"], window["end_sample"]), scores=False)
 
 
-def build(record, *, store, source, pcm, mapping, asset, waveform):
+def build(record, *, store, source, pcm, mapping, asset, waveform, include_sample_coverage=True):
     raw = _receipt(record, store, source)
     schema = raw.get("schema")
     focused = schema in binding.FOCUSED_SCHEMAS
@@ -74,6 +74,8 @@ def build(record, *, store, source, pcm, mapping, asset, waveform):
                             "artifacts": artifacts(reading)})
         document["regions"] = regions
     binding.validate(document, source)
+    if include_sample_coverage and windows:
+        document[binding.COVERAGE] = binding.sample_coverage(len(pcm), windows)
     return document
 
 
@@ -88,7 +90,8 @@ def verify(document, record, *, store, source, pcm, mapping, read_asset, wavefor
             raise ValueError("Long speech-window asset differs from its recorded samples")
         return asset
 
-    expected = build(record, store=store, source=source, pcm=pcm, mapping=mapping, asset=checked, waveform=waveform)
+    expected = build(record, store=store, source=source, pcm=pcm, mapping=mapping, asset=checked, waveform=waveform,
+                     include_sample_coverage=binding.COVERAGE in document)
     if expected != document:
         raise ValueError("Long speech-window presentation differs from its frozen response")
 

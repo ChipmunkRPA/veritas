@@ -213,6 +213,10 @@ export interface LongVoiceReview {
   schema: 'chipmunk.long-voice-review/1' | 'chipmunk.long-voice-review/2' | 'chipmunk.long-voice-review/3'; title: 'Long speech-window review'
   status: 'corroborated' | 'no_corroboration' | 'skipped'
   reason: string; limitation: string; affects_overall_confidence: false
+  sample_coverage?: {
+    samples_by_status: Record<LongVoiceCoverageStatus, number>
+    intervals: (SampleInterval & { status: LongVoiceCoverageStatus; source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] })[]
+  }
   windows: (SampleInterval & {
     pcm_sha256: string; direction: 'ai' | 'original' | 'inconclusive' | 'unassessed'
     speech_samples?: number
@@ -225,6 +229,7 @@ export interface LongVoiceReview {
     artifacts: Record<'selected_clip' | 'waveform', EvidenceAsset>
   })[]
 }
+export type LongVoiceCoverageStatus = 'directional' | 'inconclusive' | 'below_speech_minimum' | 'outside_schedule'
 export interface BackgroundVoiceReview {
   schema: 'chipmunk.background-reduced-voice-review/1'
   title: string; status: 'flagged' | 'no_flag' | 'unassessed' | 'skipped'

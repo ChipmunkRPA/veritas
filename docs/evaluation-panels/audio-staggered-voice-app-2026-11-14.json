@@ -1,0 +1,86 @@
+{
+  "analyzed_sample_rate": 16000,
+  "cases": {
+    "genuine_rain": {
+      "case": 55,
+      "file_sha256": "655a1a8bf1727567d06a830495f3ecd513287afe8da573c80432068a76f891ad",
+      "pcm_sha256": "2ff731146b860158cc325630bce0b9631eca8219ae95af1b7bb38c69af5ced88",
+      "regions": [],
+      "speech_samples": [
+        40384,
+        42784,
+        39712,
+        37216
+      ],
+      "status": "no_corroboration",
+      "windows": 4
+    },
+    "isolated_rain": {
+      "case": 90,
+      "file_sha256": "a689e14e37c90e3b41a28e74c7409cd25f59a52414016d257a82d8359fbad45e",
+      "pcm_sha256": "35e0f413778c06a45a60ef09fc136c827912116be2fc6aeca68f79ce7d04c151",
+      "regions": [],
+      "skipped_windows_in_pdf": 5,
+      "speech_samples": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "no_corroboration",
+      "windows": 5
+    },
+    "rain_edit": {
+      "case": 19,
+      "file_sha256": "ec16222e3394812d4160c6b6ca405aba88a689488c451992bde5d88f3cc6f7d4",
+      "pcm_sha256": "d75a489dfb942589f48b2f91abe5f398f441fd43dcb4cc14a3ffa39cc48ecafe",
+      "pdf_api_json_agree": true,
+      "regions": [
+        [
+          48000,
+          72000
+        ]
+      ],
+      "selected_clip_sha256": "71259b94d85e2a9071752587eba5f14c562d2a1b0d56bde64d9f756b303665ca",
+      "signed_source_replay": true,
+      "signed_speech_counts_recomputed": [
+        {
+          "end_sample": 48000,
+          "speech_samples": 34080,
+          "start_sample": 0
+        },
+        {
+          "end_sample": 72000,
+          "speech_samples": 26976,
+          "start_sample": 24000
+        },
+        {
+          "end_sample": 96000,
+          "speech_samples": 39776,
+          "start_sample": 48000
+        },
+        {
+          "end_sample": 115440,
+          "speech_samples": 40384,
+          "start_sample": 67440
+        }
+      ],
+      "speech_samples": [
+        34080,
+        26976,
+        39776,
+        40384
+      ],
+      "status": "corroborated",
+      "template_set": "veritas-report-2.0.r146",
+      "waveform_sha256": "0de0b3522f58d3a9778cc90b19be0962f8ea6286383e30ceee7f287e64deee63",
+      "windows": 4,
+      "wrong_original_rejected": true
+    }
+  },
+  "original_sample_rate": 48000,
+  "overall_decision_identical_flag_on_off": true,
+  "simulated_paid_jobs": 6,
+  "unpaid_jobs": 0
+}

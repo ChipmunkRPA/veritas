@@ -1,0 +1,6214 @@
+{
+  "freeze": {
+    "method": {
+      "comparison": "Use the same reset speech-activity and the same incumbent calibration tested in both window widths. A staggered or shorter finding must add a useful location on top of current evidence, with no removals.",
+      "rule": "At least three added loud-noise useful locations across two generator families and at most one additional genuine source group, zero additional isolated backgrounds and zero new gain-only genuine flags. This panel can support a separate confirmation, since its foregrounds and backgrounds were used for earlier comparisons.",
+      "shorter": "Use 2.5-second windows on the same 750 ms phase. Require an existing AI-leaning three-second window whose midpoint is within 750 ms of the shorter window's midpoint. Report only the overlap.",
+      "staggered": "Add three-second windows offset by 750 ms. Require two AI-leaning three-second windows starting 1.5 s apart on either phase."
+    },
+    "parent_sha256": "ae15cc9b7f3693a2743b5aac299f2841ab6aa2308eada642be14c9448c7c5e72",
+    "schema": "chipmunk.audio-staggered-voice-transfer/1"
+  },
+  "recordings": [
+    {
+      "case": 0,
+      "windows": [
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 47456
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 38432
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 46432
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 47456
+        },
+        {
+          "direction": "ai",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 36384
+        },
+        {
+          "direction": "ai",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 44384
+        }
+      ]
+    },
+    {
+      "case": 1,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 38432
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 46432
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 8736
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 16736
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 31776
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 39776
+        }
+      ]
+    },
+    {
+      "case": 2,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 8640
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 15232
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 31168
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 40288
+        }
+      ]
+    },
+    {
+      "case": 3,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 47456
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 47968
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "ai",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 40000
+        }
+      ]
+    },
+    {
+      "case": 4,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 36896
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 44896
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 36384
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 44384
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 35808
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 43808
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 37408
+        }
+      ]
+    },
+    {
+      "case": 5,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 12320
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 20320
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 36896
+        }
+      ]
+    },
+    {
+      "case": 6,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 32224
+        },
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 43840
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 35840
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 43840
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 33248
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 41248
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 30240
+        },
+        {
+          "direction": "original",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 38240
+        },
+        {
+          "direction": "original",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "original",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 47968
+        }
+      ]
+    },
+    {
+      "case": 7,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 26560
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 37664
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 35328
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 43328
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 33248
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 36736
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 24448
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 31456
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 38432
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 46432
+        }
+      ]
+    },
+    {
+      "case": 8,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 8544
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 21984
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 29984
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 6592
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 6592
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 10784
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 18784
+        },
+        {
+          "direction": "ai",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 28704
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 36704
+        }
+      ]
+    },
+    {
+      "case": 9,
+      "windows": [
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 33728
+        },
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 45344
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 36320
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 44320
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 47968
+        }
+      ]
+    },
+    {
+      "case": 10,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 47456
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 26144
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 34144
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 38944
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 46944
+        }
+      ]
+    },
+    {
+      "case": 11,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 16320
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 16320
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 9568
+        }
+      ]
+    },
+    {
+      "case": 12,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 35360
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 43360
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 47456
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 36896
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 44896
+        },
+        {
+          "direction": "ai",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 40000
+        }
+      ]
+    },
+    {
+      "case": 13,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 35360
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 43360
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 32288
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 40288
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 36896
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 44896
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 34336
+        }
+      ]
+    },
+    {
+      "case": 14,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 25536
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 25536
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 10688
+        }
+      ]
+    },
+    {
+      "case": 15,
+      "windows": [
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 35360
+        },
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 43360
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 47456
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 32224
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 43840
+        },
+        {
+          "direction": "ai",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 36352
+        },
+        {
+          "direction": "ai",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 44352
+        },
+        {
+          "direction": "original",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 47968
+        }
+      ]
+    },
+    {
+      "case": 16,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 35360
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 43360
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 47456
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 32192
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 43808
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 27680
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 35680
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 5472
+        }
+      ]
+    },
+    {
+      "case": 17,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 10592
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 26656
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 29632
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 18,
+      "windows": [
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 37376
+        },
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 45376
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 38432
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 46432
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 48000
+        }
+      ]
+    },
+    {
+      "case": 19,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 27616
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 35616
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 32800
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 40800
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 28704
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 36704
+        }
+      ]
+    },
+    {
+      "case": 20,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 18912
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 19840
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 18368
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 18368
+        }
+      ]
+    },
+    {
+      "case": 21,
+      "windows": [
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 48000
+        }
+      ]
+    },
+    {
+      "case": 22,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 47968
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 27168
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 35168
+        }
+      ]
+    },
+    {
+      "case": 23,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 38432
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 46432
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 24,
+      "windows": [
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 47968
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 48000
+        }
+      ]
+    },
+    {
+      "case": 25,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 34272
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 42272
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 28704
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 36704
+        }
+      ]
+    },
+    {
+      "case": 26,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 27,
+      "windows": [
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 38848
+        },
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 47968
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 38432
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 46432
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 47456
+        },
+        {
+          "direction": "ai",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 40000
+        }
+      ]
+    },
+    {
+      "case": 28,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 27072
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 34592
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 32736
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 40736
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 26560
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 35104
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 29,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 30,
+      "windows": [
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 48000
+        }
+      ]
+    },
+    {
+      "case": 31,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 30240
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 35776
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 12832
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 20832
+        }
+      ]
+    },
+    {
+      "case": 32,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 33,
+      "windows": [
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 38944
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 46944
+        }
+      ]
+    },
+    {
+      "case": 34,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 47456
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 38848
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 46944
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 30688
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 38688
+        }
+      ]
+    },
+    {
+      "case": 35,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 47456
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 26656
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 33216
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 4640
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 12640
+        }
+      ]
+    },
+    {
+      "case": 36,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 37344
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 45344
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 36832
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 43904
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 34784
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 42784
+        },
+        {
+          "direction": "ai",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 35360
+        },
+        {
+          "direction": "ai",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 43360
+        },
+        {
+          "direction": "ai",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 36896
+        },
+        {
+          "direction": "ai",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 44896
+        }
+      ]
+    },
+    {
+      "case": 37,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 34784
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 42784
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 30752
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 38752
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 19424
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 27424
+        },
+        {
+          "direction": "ai",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 31776
+        },
+        {
+          "direction": "ai",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 39776
+        },
+        {
+          "direction": "ai",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 23008
+        },
+        {
+          "direction": "ai",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 31008
+        }
+      ]
+    },
+    {
+      "case": 38,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 4640
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 12640
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 17856
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 17856
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 8640
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 17856
+        }
+      ]
+    },
+    {
+      "case": 39,
+      "windows": [
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 31168
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 40224
+        }
+      ]
+    },
+    {
+      "case": 40,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 5472
+        }
+      ]
+    },
+    {
+      "case": 41,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 42,
+      "windows": [
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 33312
+        },
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 41312
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 34336
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 42336
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 47968
+        }
+      ]
+    },
+    {
+      "case": 43,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 7104
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 7104
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 13760
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 14784
+        }
+      ]
+    },
+    {
+      "case": 44,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 8128
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 8128
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 45,
+      "windows": [
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 30144
+        },
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 37664
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 30688
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 38688
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 47968
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "original",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 47456
+        },
+        {
+          "direction": "original",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "ai",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 46528
+        }
+      ]
+    },
+    {
+      "case": 46,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 35264
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 43296
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 22560
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 30560
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 38432
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 46432
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 32288
+        },
+        {
+          "direction": "original",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 40288
+        },
+        {
+          "direction": "original",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 34336
+        },
+        {
+          "direction": "original",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 42336
+        }
+      ]
+    },
+    {
+      "case": 47,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 31680
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 41248
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 17440
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 25024
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 28640
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 36640
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 21952
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 26912
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 48,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 47456
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 34848
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 42848
+        },
+        {
+          "direction": "ai",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "ai",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 47968
+        },
+        {
+          "direction": "ai",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 33728
+        }
+      ]
+    },
+    {
+      "case": 49,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 38944
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 46944
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 30688
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 38688
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 12320
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 20320
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 47968
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 39360
+        }
+      ]
+    },
+    {
+      "case": 50,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 38944
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 46944
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 26592
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 34592
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 6080
+        }
+      ]
+    },
+    {
+      "case": 51,
+      "windows": [
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 36352
+        },
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 41888
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 36832
+        },
+        {
+          "direction": "ai",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 44832
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 42944
+        },
+        {
+          "direction": "original",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 35296
+        },
+        {
+          "direction": "original",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 43296
+        }
+      ]
+    },
+    {
+      "case": 52,
+      "windows": [
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 29728
+        },
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 37312
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 35808
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 43808
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 38944
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 41920
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 30176
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 38176
+        }
+      ]
+    },
+    {
+      "case": 53,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 15296
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 15296
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 15392
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 22976
+        }
+      ]
+    },
+    {
+      "case": 54,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 38944
+        },
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 46944
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 47968
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 38432
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 46432
+        }
+      ]
+    },
+    {
+      "case": 55,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 35264
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 42784
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 30688
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 32128
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 31200
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 39200
+        }
+      ]
+    },
+    {
+      "case": 56,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 21984
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 29984
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 12672
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 12672
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 57,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 35808
+        },
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 40768
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 32736
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 35712
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 33248
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 41248
+        }
+      ]
+    },
+    {
+      "case": 58,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 38848
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 47968
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 41920
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 31712
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 39712
+        }
+      ]
+    },
+    {
+      "case": 59,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 39360
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 41408
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 14272
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 16832
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 20864
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 31968
+        }
+      ]
+    },
+    {
+      "case": 60,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 47968
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 33216
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 33216
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 27104
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 35104
+        },
+        {
+          "direction": "original",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 37920
+        },
+        {
+          "direction": "original",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 45920
+        },
+        {
+          "direction": "original",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 39456
+        }
+      ]
+    },
+    {
+      "case": 61,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 35872
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 43872
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 34336
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 42336
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 12320
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 20320
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 36896
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 44896
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 5568
+        }
+      ]
+    },
+    {
+      "case": 62,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 5152
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 8640
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 33216
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 35264
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 6080
+        }
+      ]
+    },
+    {
+      "case": 63,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 44992
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 36832
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 44832
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 47456
+        },
+        {
+          "direction": "original",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 40000
+        }
+      ]
+    },
+    {
+      "case": 64,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 47040
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 36832
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 44832
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 38944
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 46944
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 33824
+        }
+      ]
+    },
+    {
+      "case": 65,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 18304
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 24288
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 13184
+        }
+      ]
+    },
+    {
+      "case": 66,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 47968
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 34848
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 42848
+        },
+        {
+          "direction": "original",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "original",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "original",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "original",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 47968
+        }
+      ]
+    },
+    {
+      "case": 67,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 47968
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 32224
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 40224
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 34848
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 42848
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 35872
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 43872
+        },
+        {
+          "direction": "original",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 47968
+        }
+      ]
+    },
+    {
+      "case": 68,
+      "windows": [
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 33152
+        },
+        {
+          "direction": "ai",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 40672
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 19872
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 27872
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 11712
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 11712
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 15392
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 23392
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 35296
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 43296
+        }
+      ]
+    },
+    {
+      "case": 69,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 33216
+        },
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 40224
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 32256
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 40256
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 47968
+        }
+      ]
+    },
+    {
+      "case": 70,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 30144
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 37152
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 23072
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 31072
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 36896
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 44896
+        }
+      ]
+    },
+    {
+      "case": 71,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 10176
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 16672
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 13792
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 21792
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 72,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 48000
+        }
+      ]
+    },
+    {
+      "case": 73,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 32800
+        },
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 40800
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 36384
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 44384
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 19424
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 27424
+        }
+      ]
+    },
+    {
+      "case": 74,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 6080
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 6080
+        }
+      ]
+    },
+    {
+      "case": 75,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 37824
+        },
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 37824
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 33792
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 41792
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 31168
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 43296
+        }
+      ]
+    },
+    {
+      "case": 76,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 34752
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 41248
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 19488
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 27488
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 12672
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 19680
+        }
+      ]
+    },
+    {
+      "case": 77,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 5568
+        }
+      ]
+    },
+    {
+      "case": 78,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 36352
+        },
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 44352
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 31776
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 39776
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 45024
+        },
+        {
+          "direction": "original",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 36224
+        },
+        {
+          "direction": "original",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 36224
+        },
+        {
+          "direction": "original",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 33248
+        },
+        {
+          "direction": "original",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 41248
+        }
+      ]
+    },
+    {
+      "case": 79,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 35296
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 43296
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 29728
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 37728
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 44992
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 32640
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 32640
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 31712
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 39712
+        }
+      ]
+    },
+    {
+      "case": 80,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 8128
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 14720
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 11712
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            132000
+          ],
+          "speech_samples": 11712
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            108000,
+            148000
+          ],
+          "speech_samples": 32736
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            108000,
+            156000
+          ],
+          "speech_samples": 40736
+        }
+      ]
+    },
+    {
+      "case": 81,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 48000
+        }
+      ]
+    },
+    {
+      "case": 82,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 37408
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 45408
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 35872
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 43872
+        }
+      ]
+    },
+    {
+      "case": 83,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 84,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 36352
+        },
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 40352
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 32224
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 40224
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 36896
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 44896
+        }
+      ]
+    },
+    {
+      "case": 85,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 31136
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 35136
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 32224
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 40224
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 36384
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 44384
+        }
+      ]
+    },
+    {
+      "case": 86,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 7712
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 11200
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 19328
+        },
+        {
+          "direction": "ai",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 26336
+        }
+      ]
+    },
+    {
+      "case": 87,
+      "windows": [
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "original",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 40000
+        },
+        {
+          "direction": "original",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 48000
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 39968
+        },
+        {
+          "direction": "original",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 47968
+        }
+      ]
+    },
+    {
+      "case": 88,
+      "windows": [
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 39456
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 47456
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 32800
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 40800
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 31776
+        },
+        {
+          "direction": "inconclusive",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 39776
+        }
+      ]
+    },
+    {
+      "case": 89,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 5568
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 5568
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 90,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 91,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 92,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 93,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 94,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 95,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 96,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    },
+    {
+      "case": 97,
+      "windows": [
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            52000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            12000,
+            60000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            76000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            36000,
+            84000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            100000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            60000,
+            108000
+          ],
+          "speech_samples": 0
+        },
+        {
+          "direction": "unassessed",
+          "span": [
+            84000,
+            124000
+          ],
+          "speech_samples": 0
+        }
+      ]
+    }
+  ],
+  "results": {
+    "cells": {
+      "gain_control/genuine": {
+        "current_flags": 0,
+        "current_useful": 0,
+        "files": 12,
+        "shorter_added": 0,
+        "shorter_admission_reachable": 0,
+        "shorter_ai": 0,
+        "shorter_flags": 0,
+        "shorter_geometry_reachable": 0,
+        "shorter_misplaced": 0,
+        "shorter_new_flags": 0,
+        "shorter_planned": 43,
+        "shorter_scored": 43,
+        "shorter_useful": 0,
+        "staggered_added": 0,
+        "staggered_admission_reachable": 0,
+        "staggered_flags": 0,
+        "staggered_geometry_reachable": 0,
+        "staggered_misplaced": 0,
+        "staggered_new_flags": 0,
+        "staggered_useful": 0,
+        "three_ai": 0,
+        "three_planned": 41,
+        "three_scored": 41
+      },
+      "gain_control/partial": {
+        "current_flags": 16,
+        "current_useful": 13,
+        "files": 18,
+        "shorter_added": 1,
+        "shorter_admission_reachable": 13,
+        "shorter_ai": 46,
+        "shorter_flags": 18,
+        "shorter_geometry_reachable": 13,
+        "shorter_misplaced": 7,
+        "shorter_new_flags": 2,
+        "shorter_planned": 65,
+        "shorter_scored": 65,
+        "shorter_useful": 14,
+        "staggered_added": 2,
+        "staggered_admission_reachable": 10,
+        "staggered_flags": 17,
+        "staggered_geometry_reachable": 10,
+        "staggered_misplaced": 4,
+        "staggered_new_flags": 1,
+        "staggered_useful": 15,
+        "three_ai": 42,
+        "three_planned": 61,
+        "three_scored": 61
+      },
+      "rain/genuine": {
+        "current_flags": 0,
+        "current_useful": 0,
+        "files": 12,
+        "shorter_added": 0,
+        "shorter_admission_reachable": 0,
+        "shorter_ai": 0,
+        "shorter_flags": 0,
+        "shorter_geometry_reachable": 0,
+        "shorter_misplaced": 0,
+        "shorter_new_flags": 0,
+        "shorter_planned": 43,
+        "shorter_scored": 38,
+        "shorter_useful": 0,
+        "staggered_added": 0,
+        "staggered_admission_reachable": 0,
+        "staggered_flags": 0,
+        "staggered_geometry_reachable": 0,
+        "staggered_misplaced": 0,
+        "staggered_new_flags": 0,
+        "staggered_useful": 0,
+        "three_ai": 0,
+        "three_planned": 41,
+        "three_scored": 39
+      },
+      "rain/isolated": {
+        "current_flags": 0,
+        "current_useful": 0,
+        "files": 4,
+        "shorter_added": 0,
+        "shorter_admission_reachable": 0,
+        "shorter_ai": 0,
+        "shorter_flags": 0,
+        "shorter_geometry_reachable": 0,
+        "shorter_misplaced": 0,
+        "shorter_new_flags": 0,
+        "shorter_planned": 16,
+        "shorter_scored": 0,
+        "shorter_useful": 0,
+        "staggered_added": 0,
+        "staggered_admission_reachable": 0,
+        "staggered_flags": 0,
+        "staggered_geometry_reachable": 0,
+        "staggered_misplaced": 0,
+        "staggered_new_flags": 0,
+        "staggered_useful": 0,
+        "three_ai": 0,
+        "three_planned": 12,
+        "three_scored": 0
+      },
+      "rain/partial": {
+        "current_flags": 3,
+        "current_useful": 3,
+        "files": 18,
+        "shorter_added": 0,
+        "shorter_admission_reachable": 13,
+        "shorter_ai": 5,
+        "shorter_flags": 4,
+        "shorter_geometry_reachable": 13,
+        "shorter_misplaced": 1,
+        "shorter_new_flags": 1,
+        "shorter_planned": 65,
+        "shorter_scored": 53,
+        "shorter_useful": 3,
+        "staggered_added": 1,
+        "staggered_admission_reachable": 7,
+        "staggered_flags": 4,
+        "staggered_geometry_reachable": 10,
+        "staggered_misplaced": 0,
+        "staggered_new_flags": 1,
+        "staggered_useful": 4,
+        "three_ai": 6,
+        "three_planned": 61,
+        "three_scored": 51
+      },
+      "train/genuine": {
+        "current_flags": 0,
+        "current_useful": 0,
+        "files": 12,
+        "shorter_added": 0,
+        "shorter_admission_reachable": 0,
+        "shorter_ai": 1,
+        "shorter_flags": 0,
+        "shorter_geometry_reachable": 0,
+        "shorter_misplaced": 0,
+        "shorter_new_flags": 0,
+        "shorter_planned": 43,
+        "shorter_scored": 7,
+        "shorter_useful": 0,
+        "staggered_added": 0,
+        "staggered_admission_reachable": 0,
+        "staggered_flags": 0,
+        "staggered_geometry_reachable": 0,
+        "staggered_misplaced": 0,
+        "staggered_new_flags": 0,
+        "staggered_useful": 0,
+        "three_ai": 2,
+        "three_planned": 41,
+        "three_scored": 10
+      },
+      "train/isolated": {
+        "current_flags": 0,
+        "current_useful": 0,
+        "files": 4,
+        "shorter_added": 0,
+        "shorter_admission_reachable": 0,
+        "shorter_ai": 0,
+        "shorter_flags": 0,
+        "shorter_geometry_reachable": 0,
+        "shorter_misplaced": 0,
+        "shorter_new_flags": 0,
+        "shorter_planned": 16,
+        "shorter_scored": 0,
+        "shorter_useful": 0,
+        "staggered_added": 0,
+        "staggered_admission_reachable": 0,
+        "staggered_flags": 0,
+        "staggered_geometry_reachable": 0,
+        "staggered_misplaced": 0,
+        "staggered_new_flags": 0,
+        "staggered_useful": 0,
+        "three_ai": 0,
+        "three_planned": 12,
+        "three_scored": 0
+      },
+      "train/partial": {
+        "current_flags": 0,
+        "current_useful": 0,
+        "files": 18,
+        "shorter_added": 0,
+        "shorter_admission_reachable": 3,
+        "shorter_ai": 2,
+        "shorter_flags": 0,
+        "shorter_geometry_reachable": 13,
+        "shorter_misplaced": 0,
+        "shorter_new_flags": 0,
+        "shorter_planned": 65,
+        "shorter_scored": 14,
+        "shorter_useful": 0,
+        "staggered_added": 0,
+        "staggered_admission_reachable": 0,
+        "staggered_flags": 0,
+        "staggered_geometry_reachable": 10,
+        "staggered_misplaced": 0,
+        "staggered_new_flags": 0,
+        "staggered_useful": 0,
+        "three_ai": 1,
+        "three_planned": 61,
+        "three_scored": 14
+      }
+    },
+    "decision": {
+      "shorter": {
+        "new_genuine_groups": 0,
+        "new_isolated": 0,
+        "noisy_edit_families": [],
+        "noisy_edit_groups": 0,
+        "passes": false
+      },
+      "staggered": {
+        "new_genuine_groups": 0,
+        "new_isolated": 0,
+        "noisy_edit_families": [
+          "xttsv2"
+        ],
+        "noisy_edit_groups": 1,
+        "passes": false
+      }
+    }
+  }
+}

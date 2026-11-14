@@ -13,6 +13,10 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [staggered speech window replay](audio-staggered-voice-2026-11-14.md#replay)
+distinguishes gaps in the window schedule, misses caused by speech admission,
+and misses after scoring. It recounts 98 matched deliveries with standard-library Python.
+
 The [learned mouth and audio timing replay](video-local-alignment-transfer-2026-11-14.md#replay)
 recounts the held local shifts and matched controls. Native replay separately
 fits the scorer on commercially permitted source media. The public receipt

@@ -1287,10 +1287,13 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         ]
     long_voice_review = copy.deepcopy(document.get("long_voice_review"))
     if long_voice_review:
-        from app.evidence.audio_long_review_binding import LABELS, media_windows
+        from app.evidence.audio_long_review_binding import COVERAGE, COVERAGE_LABELS, LABELS, media_windows
 
         for window in long_voice_review["windows"]:
             window["label"] = LABELS[window["direction"]]
+        if coverage := long_voice_review.get(COVERAGE):
+            for interval in coverage["intervals"]:
+                interval["label"] = COVERAGE_LABELS[interval["status"]]
         focused = "regions" in long_voice_review
         for window in media_windows(long_voice_review):
             if asset := window["artifacts"].get("waveform"):

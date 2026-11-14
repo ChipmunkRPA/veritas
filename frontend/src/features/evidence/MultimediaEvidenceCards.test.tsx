@@ -399,6 +399,9 @@ describe('ordinary multimedia evidence', () => {
       schema: 'chipmunk.long-voice-review/2', title: 'Long speech-window review', status: 'no_corroboration',
       reason: 'The sampled windows did not produce corroborating AI-like responses.',
       limitation: 'This review carries no weight in the overall assessment.', affects_overall_confidence: false, regions: [],
+      sample_coverage: { samples_by_status: { directional: 0, inconclusive: 0, below_speech_minimum: 48000, outside_schedule: 0 },
+        intervals: [{ start_sample: 0, end_sample: 48000, status: 'below_speech_minimum',
+          source_timestamp_ranges: [{ start_sample: 0, end_sample: 48000, source_start_pts: 0, source_end_pts: 48000, time_base: '1/16000' }] }] },
       windows: [{ start_sample: 0, end_sample: 48000, pcm_sha256: 'a'.repeat(64), direction: 'unassessed', speech_samples: 16000, artifacts: {},
         source_timestamp_ranges: [{ start_sample: 0, end_sample: 48000, source_start_pts: 0, source_end_pts: 48000, time_base: '1/16000' }] }],
     }
@@ -406,6 +409,7 @@ describe('ordinary multimedia evidence', () => {
     const review = within(screen.getByRole('region', { name: 'Long speech-window review' }))
     expect(review.getByRole('status').textContent).toBe('None of the sampled windows produced a usable speech response.')
     expect(review.getByText(/Detected speech 1\.000 s of 3\.000 s. Below the 1\.500 s speech minimum./)).toBeTruthy()
+    expect(review.getByRole('row', { name: /0\.000 s–3\.000 s All covering windows were below the speech minimum/ })).toBeTruthy()
     expect(review.queryByRole('link')).toBeNull()
   })
 

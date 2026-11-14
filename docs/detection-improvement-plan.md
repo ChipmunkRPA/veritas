@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Staggered speech windows under loud noise](audio-staggered-voice-2026-11-14.md)
+  added one rain-masked and zero train-masked locations. Neither alternative
+  met the noise requirement. New long speech reports show contiguous source
+  coverage, distinguishing unassessed time from inconclusive scores.
+
 - [Learned audio and mouth correspondence](video-local-alignment-transfer-2026-11-14.md)
   recovered zero of 20 held short timing shifts at the frozen point and stays
   offline. New analyses explain exactly which decoded soundtrack timestamp

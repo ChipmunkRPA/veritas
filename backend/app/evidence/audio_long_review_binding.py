@@ -39,6 +39,10 @@ SKIPPED_RECEIPT = "The optional long-window response could not be saved."
 SKIP_REASONS = {SKIPPED_BUDGET, SKIPPED_TIMEOUT, SKIPPED_UNAVAILABLE, SKIPPED_RECEIPT}
 SHA = re.compile(r"[0-9a-f]{64}")
 WINDOW_FIELDS = frozenset({"start_sample", "end_sample", "pcm_sha256", "direction"})
+COVERAGE = "sample_coverage"
+COVERAGE_LABELS = {"directional": "At least one directional response", "inconclusive": "Only inconclusive responses",
+                   "below_speech_minimum": "All covering windows were below the speech minimum",
+                   "outside_schedule": "Outside the sampled windows"}
 
 
 def supported_source(source: dict) -> bool:
@@ -111,6 +115,28 @@ def focused_regions(samples: int, windows: list[dict]) -> list[dict]:
     return sorted([*overlap, *full], key=lambda item: (item["start_sample"], item["end_sample"]))
 
 
+def sample_coverage(samples, windows):
+    """Partition decoded samples by the strongest available window disposition."""
+    edges = sorted({0, samples, *(w[k] for w in windows for k in ("start_sample", "end_sample"))})
+    counts = dict.fromkeys(COVERAGE_LABELS, 0)
+    intervals = []
+    for start, end in zip(edges, edges[1:]):
+        states = {w["direction"] for w in windows if w["start_sample"] <= start and end <= w["end_sample"]}
+        if states & {"ai", "original"}:
+            status = "directional"
+        elif "inconclusive" in states:
+            status = "inconclusive"
+        else:
+            status = "below_speech_minimum" if states else "outside_schedule"
+        counts[status] += end - start
+        if intervals and intervals[-1]["status"] == status:
+            intervals[-1]["end_sample"] = end
+        else:
+            intervals.append({"start_sample": start, "end_sample": end, "status": status})
+    return {"samples_by_status": counts, "intervals": [row | {
+        "source_timestamp_ranges": _source_ranges(row["start_sample"], row["end_sample"])} for row in intervals]}
+
+
 def _require(valid, message):
     if not valid:
         raise ValueError(message)
@@ -130,7 +156,17 @@ def validate_window_fields(window, *extra):
 
 def validate(review: dict, source: dict) -> None:
     try:
-        _validate(review, source)
+        if COVERAGE in review:
+            _validate({key: val for key, val in review.items() if key != COVERAGE}, source)
+            record = review[COVERAGE]
+            _require(bool(review["windows"]) and record == sample_coverage(source["samples"], review["windows"])
+                     and all(type(x) is int for x in record["samples_by_status"].values())
+                     and all(type(row[k]) is int for row in record["intervals"] for k in ("start_sample", "end_sample"))
+                     and all(type(span[k]) is int for row in record["intervals"] for span in row["source_timestamp_ranges"]
+                             for k in ("start_sample", "end_sample", "source_start_pts", "source_end_pts")),
+                     "Long speech sample coverage differs from the recorded windows")
+        else:
+            _validate(review, source)
     except (KeyError, TypeError, AttributeError) as error:
         raise ValueError("Incomplete long speech-window evidence") from error
 

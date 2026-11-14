@@ -8,7 +8,7 @@ import AudioStereoContext from './AudioStereoContext'
 import AudioRepetitionContext from './AudioRepetitionContext'
 import { EvidenceAudio, EvidenceLimits, EvidenceMeasurements, EvidencePicture, EvidenceReferences, evidenceCard, evidenceGrid } from './EvidenceMedia'
 import { measurementValue } from './imagePackets'
-import { rationalSeconds, seconds, type AudioEvidencePacket, type AudioEvidenceSet } from './multimediaPackets'
+import { rationalSeconds, seconds, type AudioEvidencePacket, type AudioEvidenceSet, type LongVoiceCoverageStatus } from './multimediaPackets'
 
 const longVoiceLabels = {
   ai: 'Leans AI-generated in this window',
@@ -17,6 +17,12 @@ const longVoiceLabels = {
   unassessed: 'No usable speech response',
 }
 const longVoiceSampleRate = 16_000
+const longVoiceCoverageLabels: Record<LongVoiceCoverageStatus, string> = {
+  directional: 'At least one directional response',
+  inconclusive: 'Only inconclusive responses',
+  below_speech_minimum: 'All covering windows were below the speech minimum',
+  outside_schedule: 'Outside the sampled windows',
+}
 
 function SourceTimestamps({ ranges, videoOriginS, showSeconds = false }: {
   ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']; videoOriginS?: number | null; showSeconds?: boolean
@@ -177,6 +183,17 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       <h3 className="m-0 text-body font-medium">{longReview.title}</h3>
       <p className="mt-2 mb-0 text-small" role="status">{focusedSpeech && longReview.windows.length > 0 && !hasMeasuredSpeech
         ? 'None of the sampled windows produced a usable speech response.' : longReview.reason}</p>
+      {longReview.sample_coverage && <details className="mt-3 text-small" open={longReview.status === 'no_corroboration'}>
+        <summary className="cursor-pointer">Where the long speech review reached a response</summary>
+        <p className="mt-2 mb-0 text-text-muted">Intervals are listed once even when windows overlap. A directional window does not assign a result to every sample in it.</p>
+        <table className="mt-3 w-full text-left text-caption">
+          <thead><tr><th scope="col">Source interval</th><th scope="col">Window coverage</th></tr></thead>
+          <tbody>{longReview.sample_coverage.intervals.map(interval => <tr key={interval.start_sample}>
+            <td className="py-1 pr-3 font-mono">{seconds(interval.start_sample / longVoiceSampleRate)}–{seconds(interval.end_sample / longVoiceSampleRate)}</td>
+            <td>{longVoiceCoverageLabels[interval.status]}</td>
+          </tr>)}</tbody>
+        </table>
+      </details>}
       {!!longReview.regions?.length && <ol className="mt-4 mb-0 space-y-3 list-none p-0">
         {longReview.regions.map((region) => {
           const span = `${seconds(region.start_sample / longVoiceSampleRate)}–${seconds(region.end_sample / longVoiceSampleRate)}`

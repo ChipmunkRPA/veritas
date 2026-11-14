@@ -113,6 +113,13 @@ are not public screening promises or calibrated population probabilities.
   noisy genuine clips from three to two and cut synthetic flags from eight
   to six. Overlapping windows and restricted frequency bands removed no
   false flags. All three probes remain offline.
+- [Paired speech under loud backgrounds](audio-paired-loud-noise-2026-11-13.md)
+  checked 193 English deliveries at the earlier fixed score points. On
+  environmental noise the union added one synthetic flag and zero false
+  flags beyond the optional background reduction. Competing speech added
+  three detections across two families and six genuine false flags. The
+  paired check remains offline. A public reviewer recounts anonymous
+  directions without audio files or model assets.
 - [Grammatical attachment changes](writing-dependency-transfer-2026-11-13.md)
   added zero locations on 40 held sentence edits. A part-of-speech comparison added
   one location and one false alert. Both remain experimental.

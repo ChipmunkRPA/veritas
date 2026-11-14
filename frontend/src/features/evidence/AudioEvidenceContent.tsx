@@ -188,6 +188,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       {backgroundReview.status === 'flagged' && <>
         <p className="mt-2 mb-0 text-caption text-text-muted">
           Loud background sound can make genuine speech look AI-generated in this check.
+          When voices overlap, the check cannot identify which speaker drove the result.
         </p>
         <SourceTimestamps ranges={backgroundReview.source_timestamp_ranges} showSeconds />
         <p className="m-0 font-mono text-caption text-text-muted">

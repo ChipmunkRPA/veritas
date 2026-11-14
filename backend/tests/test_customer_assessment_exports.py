@@ -116,6 +116,19 @@ def test_video_report_describes_limited_timing_coverage():
     assert "too few measured speech windows" in engine.render_html(snapshot, embed_fonts=False)
 
 
+def test_audio_pdf_explains_scope_of_overlapping_speech():
+    from app.detectors.audio.calibration import SHA256
+    from app.reports import engine
+    from app.reports.specimens import specimen
+
+    snapshot = specimen("audio", "standard")
+    snapshot.result["decision"].update(fuser_sha256=SHA256, code="ai_supported", probability_ai_calibrated=.92)
+    report = engine.render_pdf(snapshot)
+    assert not report.refused
+    rendered = " ".join(engine.pdf_text(report.pdf).split())
+    assert "When voices overlap, the check cannot identify which speaker drove the result." in rendered
+
+
 @pytest.mark.parametrize("kind", ["image", "video", "audio", "document"])
 @pytest.mark.parametrize("profile", ["summary", "standard", "forensic", "newsroom"])
 def test_every_standard_report_discloses_screening_scope_and_private_engagement(kind, profile):

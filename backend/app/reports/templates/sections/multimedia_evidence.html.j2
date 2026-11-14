@@ -131,7 +131,7 @@ Samples [{{ window.start_sample }}, {{ window.end_sample }}) at 16000 Hz.
 <h3 id="multimedia-background-reduced-voice-review">{{ review.title }}</h3>
 <p class="caption">{{ review.reason }}</p>
 {% if review.status == 'flagged' %}
-<p class="caption">Loud background sound can make genuine speech look AI-generated in this check.</p>
+<p class="caption">Loud background sound can make genuine speech look AI-generated in this check. When voices overlap, the check cannot identify which speaker drove the result.</p>
 <p class="caption">Flagged interval 0.000–3.000 s. Samples [{{ review.interval.start_sample }}, {{ review.interval.end_sample }}) at 16000 Hz.
 {% for range in review.source_timestamp_ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% endfor %}</p>
 {% if not evidence.withheld %}<p class="caption">The evidence export includes original and background-reduced playback of this interval.</p>{% endif %}

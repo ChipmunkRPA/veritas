@@ -69,6 +69,7 @@ describe('local speech calibration', () => {
     expect(got.confidence_pct).toBe(confidence)
     expect(got.interval_pct).toBeNull()
     expect(got.limitation).toContain('short English speech')
+    expect(got.scope_note).toContain('cannot identify which speaker drove the result')
     expect(presentedCustomerAssessment({ ...input, customer_assessment: got })).toBe(got)
   })
 })

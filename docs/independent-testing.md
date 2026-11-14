@@ -37,6 +37,9 @@ The [noisy voice diagnostic](audio-source-isolation-diagnostic-2026-11-13.md#rep
 includes separate readers for acoustic recovery and classifier localization.
 The readers recount published scalar records. Native replay additionally
 requires the frozen source audio and the retained local checkpoints.
+The [paired voice review](audio-paired-loud-noise-2026-11-13.md#replay)
+recounts 193 decision records, including false flags under competing
+speech, with only the Python standard library.
 
 The latest single-upload comparisons cover [localized image residuals](image-residual-third-order-transfer-2026-11-13.md),
 [motion around the mouth](video-mouth-motion-transport-2026-11-13.md),

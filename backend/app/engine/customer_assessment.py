@@ -18,6 +18,7 @@ from app.evidence import document_pdf_visibility
 ARTICLE_REFERENCE_SLICE = "document/local-article-v1"
 EMAIL_REFERENCE_SLICE = "document/local-email-v1"
 MIN_LANDMARK_TIMING_CHANGE_WINDOWS = 4
+VOICE_OVERLAP_NOTE = "When voices overlap, the check cannot identify which speaker drove the result."
 INTERVAL_NOTE = (
     "This range describes uncertainty in the combined estimate. It does not include every detection error "
     "or unfamiliar type of content; a 90% interval does not mean the conclusion is 90% accurate."
@@ -138,7 +139,7 @@ def _video_soundtrack(result: Mapping[str, Any]) -> dict[str, Any] | None:
         elif screen.get("scope_supported") is not True:
             headline = "No calibrated speech tendency for this soundtrack duration"
         return {"direction": direction, "headline": headline, "confidence_pct": confidence,
-                "limitation": f"{NOTE} The speech assessment is separate from the visual and audio-picture timing results."}
+                "limitation": f"{NOTE} {VOICE_OVERLAP_NOTE} The speech assessment is separate from the visual and audio-picture timing results."}
     return None
 
 
@@ -236,7 +237,8 @@ def _customer_assessment(result: Mapping[str, Any]) -> dict[str, Any]:
                 "confidence_label": "Reference-calibrated estimate" if direction != "inconclusive" else None,
                 "probability_ai_pct": _pct(p) if p is not None else None,
                 "meaning": "The recorded speech checks support this tendency only within the assessed speech and its calibrated scope." if direction != "inconclusive" else "The recorded speech checks do not support a reliable directional conclusion in their calibrated scope.", "limitation": NOTE,
-                "scope_label": "Speech assessment", "scope_note": "Local experimental audio screening; the percentage concerns speech, not every sound or edit in the recording.",
+                "scope_label": "Speech assessment",
+                "scope_note": f"The check assesses the speech interval as a whole. {VOICE_OVERLAP_NOTE}",
                 "interval_note": "No per-file confidence interval has been established for this audio calibration."}
     if decision.get("fusion_mode") != "artefact":
         return {**answer, "headline": "Inconclusive: no calibrated estimate",

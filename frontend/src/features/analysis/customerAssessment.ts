@@ -174,7 +174,7 @@ function baseCustomerAssessment(result: Input): CustomerAssessment {
       confidence_label: direction !== 'inconclusive' ? 'Reference-calibrated estimate' : null,
       probability_ai_pct: probability(p) ? pct(p) : null, meaning: direction !== 'inconclusive' ? 'The recorded speech checks support this tendency only within the assessed speech and its calibrated scope.' : 'The recorded speech checks do not support a reliable directional conclusion in their calibrated scope.',
       limitation: 'Local screening estimate calibrated on a balanced reference set of authentic and AI speech. It is not a measured accuracy rate for this recording. Validation used short English speech; heavy background sound can cause errors or an inconclusive result. No per-file confidence interval is established.',
-      scope_label: 'Speech assessment', scope_note: 'Local experimental audio screening; the percentage concerns speech, not every sound or edit in the recording.',
+      scope_label: 'Speech assessment', scope_note: 'The check assesses the speech interval as a whole. When voices overlap, the check cannot identify which speaker drove the result.',
       interval_note: 'No per-file confidence interval has been established for this audio calibration.' }
   }
   if (d.fusion_mode !== 'artefact') return { ...answer, headline: 'Inconclusive: no calibrated estimate',

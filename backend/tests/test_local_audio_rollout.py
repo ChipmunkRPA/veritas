@@ -70,6 +70,7 @@ def test_customer_result_uses_saved_calibration_and_guards(code, p, direction, c
         'condition_profile': {'within_validated_envelope': False}})
     assert result['direction'] == direction and result['confidence_pct'] == confidence
     assert result['interval_pct'] is None
+    assert "cannot identify which speaker drove the result" in result["scope_note"]
 
 
 @pytest.mark.parametrize('scope, p, guarded, veto, direction, confidence', [
@@ -88,6 +89,7 @@ def test_video_soundtrack_uses_only_eligible_saved_speech(scope, p, guarded, vet
     result = customer_assessment(baseline)
     assert result['direction'] == 'unavailable' and result['confidence_pct'] is None
     assert result['soundtrack']['direction'] == direction and result['soundtrack']['confidence_pct'] == confidence
+    assert "cannot identify which speaker drove the result" in result["soundtrack"]["limitation"]
     signal['calibration_ref'] = 'different-reference'
     assert 'soundtrack' not in customer_assessment(baseline)
 

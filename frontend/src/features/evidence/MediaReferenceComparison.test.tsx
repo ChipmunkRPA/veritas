@@ -19,6 +19,23 @@ function show(kind: 'audio' | 'video' = 'video') {
   </QueryClientProvider>)
 }
 
+it('shows a soundtrack disposition without inventing playback evidence', async () => {
+  const comparison = { schema: 'chipmunk.video-reference-comparison/15', comparison_schema: 'chipmunk.video-reference-comparison/5',
+    status: 'measured', interpretation: 'Compared copies.', submitted: { width: 1280, height: 720 },
+    sound_difference: { status: 'unassessed', reason: 'weak_flanks', affects_overall_confidence: false,
+      summary: 'A possible difference had insufficient matching sound on either side to report a range.',
+      scope: 'Missing or weak evidence can leave a soundtrack change unresolved.' } }
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(Response.json({ available: true, sound_difference_available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets: {} })))
+  show()
+  fireEvent.change(await screen.findByLabelText('Earlier video'), { target: { files: [new File(['movie'], 'earlier.mp4')] } })
+  fireEvent.click(screen.getByRole('checkbox', { name: 'Include experimental soundtrack comparison' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
+  const trial = await screen.findByRole('region', { name: 'Experimental soundtrack comparison' })
+  expect(within(trial).getByText(comparison.sound_difference.summary)).toBeTruthy()
+  expect(within(trial).queryByLabelText(/Play analyzed clip/)).toBeNull()
+})
+
 it.each([true, false])('requires both audio excerpts and the six soundtrack-difference pictures (%s)', async (complete) => {
   const image = { file: 'picture.png', media_type: 'image/png', sha256: 'a'.repeat(64) }
   const audio = { file: 'sound.wav', media_type: 'audio/wav', sha256: 'b'.repeat(64) }

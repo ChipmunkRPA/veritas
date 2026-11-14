@@ -232,34 +232,49 @@ def assess_reencode(paths, tables, picture, audio, tracks, assets, *, quiet=Fals
 DIFFERENCE_SCOPE = ("This compares the first soundtrack in two supplied clips. Matching sound was measured on either side. "
                     "A loss of matching sound can come from a replacement, other editing, or recording conditions. "
                     "This comparison carries zero weight in the AI estimate.")
+DIFFERENCE_UNASSESSED_SCOPE = ("This compares the first soundtrack in two supplied clips. Missing or weak evidence can leave a "
+                              "soundtrack change unresolved. This comparison carries zero weight in the AI estimate.")
 
 
 def assess_difference(paths, tables, comparison, tracks, assets):
     """Attach a corroborated acoustic difference to exact clock-matched pictures."""
     from app.evidence import video_reference_sound_difference as difference
 
+    def disposition(reason, summary, *, status="unassessed"):
+        return {"status": status, "reason": reason, "summary": summary, "scope": DIFFERENCE_UNASSESSED_SCOPE,
+                "affects_overall_confidence": False}
+
     qualified = reencode.profile(tables, allow_hd=True)
     if (not qualified or qualified["size"] != reencode.HD_PICTURE_SIZE or qualified["rate"] != 25
-            or not reencode.eligible(paths, tables, allow_hd=True) or comparison["picture"]["changed_frames"]
-            or comparison["audio"]["status"] != "measured"
-            or any(track[2]["relative_start"] != "0" or not difference.SAMPLES <= len(track[1]) <= difference.SAMPLES + 1024 for track in tracks)
-            or comparison.get("soundtrack_alignment", {}).get("status") == "local_shift"):
-        return None
+            or not reencode.eligible(paths, tables, allow_hd=True)):
+        return disposition("unsupported_picture_profile", "The trial requires two four-second 720p25 H.264 clips.")
+    if comparison["picture"]["changed_frames"]:
+        return disposition("pictures_differ", "The decoded pictures differ. The trial requires matching pictures.")
+    if (comparison["audio"]["status"] != "measured" or any(
+            track[2]["relative_start"] != "0" or not difference.SAMPLES <= len(track[1]) <= difference.SAMPLES + 1024
+            for track in tracks)):
+        return disposition("soundtrack_clock_unavailable", "The trial needs continuous soundtracks on the same clock as the pictures.")
+    if comparison.get("soundtrack_alignment", {}).get("status") == "local_shift":
+        return disposition("timing_difference", "The timing comparison found the same sound at different times. See Local soundtrack timing.")
     # Use the short timing search independently of the configured display profile.
     decoded = [track[1][:difference.SAMPLES] for track in tracks]
     shifted, _ = measure(*decoded, window=SHORT_WINDOW, step=SHORT_STEP, min_rms=QUIET_RMS)
     if shifted:
-        return None
+        return disposition("timing_difference", "The short timing search matched the same sound at different times within the clip.")
     status, reading = difference.measure(*[(pcm * 32768).astype("<i2") for pcm in decoded])
-    if reading is None or not difference.strong_flanks(reading):
-        return None
+    if status == "matching_flanks_unavailable":
+        return disposition(status, "Too little matching sound was found on either side to assess a local difference.")
+    if reading is None:
+        return disposition("no_local_range", "The trial found no local range that met its measurement rules.", status="no_local_range")
+    if not difference.strong_flanks(reading):
+        return disposition("weak_flanks", "A possible difference had insufficient matching sound on either side to report a range.")
     interval = reading["samples"]
     pending = {}
     prefix = "soundtrack-difference"
     try:
         witnesses = _paired_pictures(pending, paths, tables, interval, prefix=prefix)
     except DecodeError:
-        return None
+        return disposition("source_frames_unavailable", "The trial could not retrieve the source pictures for the measured range.")
     clips = {side: _clip(pending, side, track, interval, Fraction(0), prefix=prefix)
              for side, track in zip(("earlier", "submitted"), tracks, strict=True)}
     assets.update(pending)

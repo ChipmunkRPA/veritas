@@ -73,6 +73,11 @@ analysis and carries no weight in the saved confidence. The API requires
 an explicit request and accepts it separately from a marked mouth event.
 The comparison export binds the earlier and analyzed frames, local audio,
 sample positions and band measurements. These are supplemental findings.
+The PDF and JSON also retain a result when the trial cannot report a range.
+The result identifies missing picture or audio coverage, a supported timing
+alternative, insufficient matching sound, or a completed search with no
+qualifying range. Only a measured difference includes matching picture
+exhibits and audio excerpts.
 Two isolated $9.99 test checkouts exercised the paid worker and authenticated
 comparison. No analysis jobs ran before simulated payment. The held AAC
 replacement showed **1.400–1.880 s**, with six matching source pictures and

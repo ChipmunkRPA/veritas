@@ -48,6 +48,7 @@ SCHEMA_WITH_REENCODED_SOUNDTRACK = "chipmunk.video-reference-comparison/11"
 SCHEMA_WITH_PICTURE_INSERTION = "chipmunk.video-reference-comparison/12"
 SCHEMA_WITH_INSERTION_RETENTION = "chipmunk.video-reference-comparison/13"
 SCHEMA_WITH_SOUND_DIFFERENCE = "chipmunk.video-reference-comparison/14"
+SCHEMA_WITH_SOUND_DIFFERENCE_COVERAGE = "chipmunk.video-reference-comparison/15"
 MAX_COMPARED_SOUNDTRACKS = 2
 MAX_BYTES = 48 * 1024 * 1024
 MAX_FRAMES = 360
@@ -408,6 +409,7 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             include_quiet_soundtrack: bool = False,
             include_short_soundtrack: bool = False,
             include_sound_difference: bool = False,
+            include_sound_difference_coverage: bool = True,
             include_picture_insertion: bool = False,
             verify_picture_insertion_retention: bool = True) -> tuple[dict, dict[str, bytes]]:
     """Report decoded differences on matching clocks or within a verified trimmed overlap."""
@@ -419,6 +421,22 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
     record = {"schema": SCHEMA, "status": status,
               "earlier": {**sources[0], **_reference(tables[0])}, "submitted": {**sources[1], **_reference(tables[1])},
               "interpretation": INTERPRETATION, "affects_overall_confidence": False}
+
+    def with_sound_difference(disposition=None):
+        applicable = include_sound_difference and timing_event_s is None
+        if applicable and disposition is None and include_sound_difference_coverage:
+            from app.evidence.video_reference_soundtrack import DIFFERENCE_UNASSESSED_SCOPE
+
+            disposition = {"status": "unassessed", "reason": "picture_clock_unavailable",
+                           "summary": "The two supplied clips did not pass the matching picture clock check.",
+                           "scope": DIFFERENCE_UNASSESSED_SCOPE, "affects_overall_confidence": False}
+        if applicable and include_sound_difference_coverage:
+            record.update(schema=SCHEMA_WITH_SOUND_DIFFERENCE_COVERAGE, sound_difference=disposition,
+                          comparison_schema=record["schema"])
+        elif applicable and disposition and disposition["status"] == "localized_difference":
+            record.update(schema=SCHEMA_WITH_SOUND_DIFFERENCE, sound_difference=disposition)
+        return record, assets
+
     if (include_picture_insertion and timing_event_s is None and status in {"picture_timelines_differ", "comparison_limit"}
             and (insertion := video_reference_insertion.locate(
                 paths, tables, MAX_PIXELS, verify_retention=verify_picture_insertion_retention)) is not None):
@@ -433,7 +451,7 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             record.update(schema=SCHEMA_WITH_INSERTION_RETENTION, insertion_retention=insertion["retention"])
         else:
             record["schema"] = SCHEMA_WITH_PICTURE_INSERTION
-        return record, assets
+        return with_sound_difference()
     if include_trimmed and timing_event_s is None and status == "picture_timelines_differ":
         if trim := _trim_offset(paths, tables):
             offset, support = trim
@@ -444,7 +462,7 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
                           trim_alignment={"earlier_frames": [offset, offset + overlap], "submitted_frames": [0, overlap],
                                           "unique_matching_frames": support, "audio_checked": False},
                           picture=_picture(paths, tables, assets, include_local=False, trim_offset=offset))
-            return record, assets
+            return with_sound_difference()
         if include_trim_reencoded and video_reference_trimmed.eligible(paths, tables):
             coarse = [video_reference_trimmed.read_pictures(path, table)
                       for path, table in zip(paths, tables, strict=True)]
@@ -463,7 +481,7 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
                               picture=picture)
                 if sources != tuple(_identity(path) for path in paths):
                     raise ValueError("One of the clips changed while the comparison was running.")
-                return record, assets
+                return with_sound_difference()
     tracks = decoded = None
     if status == "measured":
         compare_timing_pictures = (include_soundtrack and include_soundtrack_reencode and timing_event_s is None
@@ -557,11 +575,13 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             record.update(schema=SCHEMA_WITH_CHANNEL_TIMING, channel_timing=channels)
     if reencoded_pictures:
         record["schema"] = SCHEMA_WITH_REENCODED_SOUNDTRACK
-    if include_sound_difference and timing_event_s is None and tracks is not None:
+    if include_sound_difference and timing_event_s is None:
         from app.evidence.video_reference_soundtrack import assess_difference
 
-        if difference := assess_difference(paths, tables, record, tracks, assets):
-            record.update(schema=SCHEMA_WITH_SOUND_DIFFERENCE, sound_difference=difference)
+        if tracks is None:
+            with_sound_difference()
+        else:
+            with_sound_difference(assess_difference(paths, tables, record, tracks, assets))
     if sources != tuple(_identity(path) for path in paths):
         raise ValueError("One of the clips changed while the comparison was running.")
     return record, assets

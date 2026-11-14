@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [soundtrack flank-ranking replay](video-sound-difference-guards-2026-11-14.md#replay)
+compares three checks on the same edits and controls. It recounts paired gains,
+lost locations and flags by underlying cause and carrier, including local
+timing edits that can resemble replacement.
+
 The [earlier-copy soundtrack difference replay](video-reference-sound-difference-2026-11-14.md#optional-local-trial-and-replay)
 recounts acoustic replacements, timing changes, ordinary processing, and
 background-only controls. The comparison export can be verified against the

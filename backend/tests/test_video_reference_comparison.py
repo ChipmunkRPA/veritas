@@ -427,8 +427,23 @@ def test_matching_pictures_bind_a_local_soundtrack_difference_and_replay(tmp_pat
     earlier, submitted, same = [tmp_path / f'{name}.mp4' for name in ('earlier', 'submitted', 'same')]
     for path, signal in ((earlier, pcm), (submitted, changed), (same, pcm * .7)):
         _remux_wave(picture, signal, path, 'AAC')
-    normal, _ = video_reference.compare(earlier, same, include_sound_difference=True)
-    assert 'sound_difference' not in normal
+    normal, unchanged_assets = video_reference.compare(earlier, same, include_sound_difference=True)
+    unchanged = normal['sound_difference']
+    assert unchanged['status'] == 'no_local_range' and unchanged['reason'] == 'no_local_range'
+    assert unchanged['affects_overall_confidence'] is False and 'range' not in unchanged
+    assert not any(name.startswith('soundtrack-difference-') for name in unchanged_assets)
+    pdf = render_comparison(normal, unchanged_assets)
+    with pymupdf.open(stream=pdf, filetype='pdf') as report:
+        page = next(p for p in report if 'Experimental soundtrack comparison' in p.get_text())
+        assert 'no local range' in page.get_text() and not page.get_images()
+    destination = tmp_path / 'no-local-range'
+    assert run(earlier, same, destination, sound_difference=True) == run(earlier, same, destination, verify=True)
+    safe_export = destination / 'comparison.json'
+    tampered = json.loads(safe_export.read_bytes())
+    tampered['sound_difference']['reason'] = 'timing_difference'
+    safe_export.write_bytes(canonical_json(tampered))
+    with pytest.raises(ValueError, match='differs from the re-decoded sources'):
+        run(earlier, same, destination, verify=True)
 
     fixture = reference_http
     retained = fixture.store.put_bytes(submitted.read_bytes())
@@ -460,7 +475,8 @@ def test_matching_pictures_bind_a_local_soundtrack_difference_and_replay(tmp_pat
     assert response.status_code == 200, response.text
     exported = response.json()
     record = exported['comparison']
-    assert record['schema'] == video_reference.SCHEMA_WITH_SOUND_DIFFERENCE
+    assert record['schema'] == video_reference.SCHEMA_WITH_SOUND_DIFFERENCE_COVERAGE
+    assert record['comparison_schema'] == video_reference.SCHEMA_WITH_SOUNDTRACK
     assert record['picture']['matching_frames'] == 100
     difference = record['sound_difference']
     assert difference['affects_overall_confidence'] is False
@@ -481,6 +497,13 @@ def test_matching_pictures_bind_a_local_soundtrack_difference_and_replay(tmp_pat
     target = tmp_path / 'sound-difference.json'
     target.write_text(json.dumps(exported))
     assert run(earlier, submitted, target, verify=True) == record
+    legacy_target = tmp_path / 'legacy'
+    legacy, legacy_assets = video_reference.compare(earlier, submitted, include_sound_difference=True, include_sound_difference_coverage=False)
+    assert legacy['schema'] == video_reference.SCHEMA_WITH_SOUND_DIFFERENCE
+    from scripts.compare_video_references import replay
+
+    assert replay(lambda *_: (legacy, legacy_assets), earlier, submitted, legacy_target) == run(
+        earlier, submitted, legacy_target, verify=True)
     result['bands'][0]['correlation'][0] -= .01
     target.write_text(json.dumps(exported))
     with pytest.raises(ValueError, match='differs from the re-decoded sources'):
@@ -806,6 +829,7 @@ def test_authenticated_video_comparison_exports_exact_evidence_without_new_analy
     stored = f.store.put_file(later)
     monkeypatch.setattr(settings, "video_reference_comparison_enabled", True)
     monkeypatch.setattr(settings, "video_reference_picture_insertion", False)
+    monkeypatch.setattr(settings, "video_reference_sound_difference", False)
 
     @contextmanager
     def sessions():

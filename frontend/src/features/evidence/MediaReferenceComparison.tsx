@@ -67,10 +67,10 @@ type SoundtrackTiming = {
   }
 }
 type SoundtrackDifference = Pick<SoundtrackTiming, 'summary' | 'scope' | 'picture_profile'> & {
-  status: 'localized_difference'
   affects_overall_confidence: false
+} & ({ status: 'localized_difference'
   range: NonNullable<SoundtrackTiming['range']> & { bands: { band_hz: [number, number] }[] }
-}
+} | { status: 'unassessed' | 'no_local_range'; reason: string; range?: never })
 type CleanSpeechComparison = {
   summary: string
   scope: string
@@ -140,7 +140,7 @@ type Comparison = {
     | 'chipmunk.video-reference-comparison/4' | 'chipmunk.video-reference-comparison/5' | 'chipmunk.video-reference-comparison/6'
     | 'chipmunk.video-reference-comparison/7' | 'chipmunk.video-reference-comparison/8' | 'chipmunk.video-reference-comparison/9'
     | 'chipmunk.video-reference-comparison/10' | 'chipmunk.video-reference-comparison/11' | 'chipmunk.video-reference-comparison/12'
-    | 'chipmunk.video-reference-comparison/13' | 'chipmunk.video-reference-comparison/14'
+    | 'chipmunk.video-reference-comparison/13' | 'chipmunk.video-reference-comparison/14' | 'chipmunk.video-reference-comparison/15'
   submitted: PictureDimensions
   picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
   picture_insertion?: PictureInsertion
@@ -148,6 +148,7 @@ type Comparison = {
   timing?: TimingComparison
   soundtrack_alignment?: SoundtrackTiming
   sound_difference?: SoundtrackDifference
+  comparison_schema?: string
   additional_soundtrack?: AdditionalSoundtrack
   level_adjusted?: never
   stereo_comparison?: never
@@ -168,6 +169,7 @@ type Comparison = {
   timing?: never
   soundtrack_alignment?: never
   sound_difference?: never
+  comparison_schema?: never
   additional_soundtrack?: never
   level_adjusted?: LevelAdjustedAudio
   stereo_comparison?: StereoComparison
@@ -537,8 +539,8 @@ function ResultView({ result }: { result: Result }) {
       (!comparison.channel_timing?.ranges.length || comparison.soundtrack_alignment.range) &&
       <SoundtrackTimingEvidence timing={comparison.soundtrack_alignment} assets={assets} />}
     {comparison.sound_difference && <SoundtrackTimingEvidence timing={{ ...comparison.sound_difference,
-      waveform_note: `Matching sound fell in the ${comparison.sound_difference.range.bands.map(({ band_hz: [low, high] }) => `${low}–${high}`).join(', ')} Hz bands.` }}
-      assets={assets} title="Soundtrack difference over matching pictures" excerpt="soundtrack excerpt" />}
+      waveform_note: comparison.sound_difference.range && `Matching sound fell in the ${comparison.sound_difference.range.bands.map(({ band_hz: [low, high] }) => `${low}–${high}`).join(', ')} Hz bands.` }}
+      assets={assets} title={comparison.sound_difference.range ? 'Soundtrack difference over matching pictures' : 'Experimental soundtrack comparison'} excerpt="soundtrack excerpt" />}
     {comparison.channel_timing && <ChannelTimingEvidence timing={comparison.channel_timing} assets={assets} audioOnly={isAudio} />}
     {comparison.local_timing && (!comparison.channel_timing || comparison.local_timing.range) &&
       <SoundtrackTimingEvidence timing={comparison.local_timing} assets={assets} audioOnly />}
@@ -720,8 +722,10 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
     if (soundDifferenceAvailable && soundDifference && !timingEvent) body.append('include_sound_difference', 'true')
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
-      const schema = response?.comparison?.schema
-      const accepted = kind === 'video' ? 14 : 13
+      const versionedSchema = response?.comparison?.schema
+      const hasCoverage = versionedSchema === 'chipmunk.video-reference-comparison/15'
+      const schema = hasCoverage ? response.comparison.comparison_schema : versionedSchema
+      const accepted = kind === 'video' && !hasCoverage ? 14 : 13
       if (!Array.from({ length: accepted }, (_, index) => index + 1).some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
@@ -774,17 +778,19 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
         throw new Error('The comparison response is missing its local soundtrack timing evidence.')
       }
       const insertion = response.comparison.picture_insertion
-      if (schema === 'chipmunk.video-reference-comparison/14') {
+      if (schema === 'chipmunk.video-reference-comparison/14' || hasCoverage) {
         const difference = response.comparison.sound_difference
-        if (!difference || difference.status !== 'localized_difference' || difference.affects_overall_confidence !== false ||
-            !difference.range?.bands?.length || !sides.every(side => {
-              const span = difference.range
+        const span = difference?.range
+        if (!difference || difference.affects_overall_confidence !== false || !difference.scope || !difference.summary ||
+            (difference.status !== 'localized_difference' && (!hasCoverage || span || !difference.reason ||
+              !['unassessed', 'no_local_range'].includes(difference.status))) ||
+            (difference.status === 'localized_difference' && (!span?.bands?.length || !sides.every(side => {
               const audio = span[side]?.audio
               return !!audio && !!assetBody(response.assets, audio, 'audio/wav') && insertionRoles.every(role => {
                 const frame = span.paired_pictures?.[role]?.[side]
                 return !!frame && !!assetBody(response.assets, frame.asset, 'image/png')
               })
-            })) {
+            })))) {
           throw new Error('The comparison response is missing the source pictures or soundtrack excerpts.')
         }
       }

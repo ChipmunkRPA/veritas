@@ -69,6 +69,11 @@ def _audio_file_range(span):
 
 def _summary(document, record):
     page = _page(document, TITLE)
+    difference = record.get("sound_difference")
+    if difference and difference["status"] != "localized_difference":
+        _text(page, MARGIN, 691, "Experimental soundtrack comparison", size=12, font="hebo")
+        page.insert_textbox((MARGIN, 701, RIGHT, 741), difference["summary"] + " " + difference["scope"],
+                            fontsize=9, fontname="helv", color=MUTED)
     page.insert_textbox((MARGIN, 125, RIGHT, 184), record["interpretation"], fontsize=11, fontname="helv", color=INK)
     for y, (side, label) in zip((203, 265), LABELS.items(), strict=True):
         clip = record[side]
@@ -94,7 +99,7 @@ def _summary(document, record):
         return
     picture = record["picture"]
     _text(page, MARGIN, 347, "Picture comparison", size=16, font="hebo")
-    if record["schema"] == SCHEMA_WITH_TRIM_REENCODE:
+    if record.get("comparison_schema", record["schema"]) == SCHEMA_WITH_TRIM_REENCODE:
         first, stop = record["trim_alignment"]["earlier_frames"]
         local = picture["local_comparison"]
         _text(page, MARGIN, 371, f"Aligned earlier frames [{first}, {stop}) with analyzed frames [0, {stop - first}).")
@@ -613,7 +618,8 @@ def render(record, assets):
                 and (not record.get("channel_timing", {}).get("ranges")
                      or record["soundtrack_alignment"]["status"] == "local_shift")):
             _soundtrack_timing_page(document, record["soundtrack_alignment"], assets)
-        if difference := record.get("sound_difference"):
+        difference = record.get("sound_difference")
+        if difference and difference["status"] == "localized_difference":
             _soundtrack_timing_page(document, difference, assets, title="Soundtrack difference over matching pictures")
         if "additional_soundtrack" in record:
             _additional_soundtrack_pages(document, record["additional_soundtrack"])

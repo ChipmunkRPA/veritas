@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Stronger flanks before ranking a soundtrack difference](video-sound-difference-guards-2026-11-14.md)
+  added 13 useful AAC and ten PCM locations without losing earlier locations.
+  It also added three AAC and four PCM flags on real local-delay controls.
+  A looser rule added 44 locations and more ordinary flags per carrier.
+  Both remain offline. The opt-in app records why a range was unavailable.
+
 - [Local soundtrack differences over matching pictures](video-reference-sound-difference-2026-11-14.md)
   found six of 16 clean replacements and zero of 48 noisy replacements per
   carrier on the transfer, with no flags on 256 controls. It stays outside

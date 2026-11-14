@@ -20,6 +20,7 @@ from app.evidence.video_reference import (
     SCHEMA_WITH_REENCODED_SOUNDTRACK,
     SCHEMA_WITH_SHORT_TIMING,
     SCHEMA_WITH_SOUND_DIFFERENCE,
+    SCHEMA_WITH_SOUND_DIFFERENCE_COVERAGE,
     SCHEMA_WITH_SOUNDTRACK,
     SCHEMA_WITH_TIMING,
     SCHEMA_WITH_TRIM,
@@ -86,23 +87,28 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds = None
         if isinstance(record, dict):
             schema = record.get("schema")
+            difference_coverage = schema == SCHEMA_WITH_SOUND_DIFFERENCE_COVERAGE
+            if difference_coverage:
+                schema = record.get("comparison_schema")
+            difference = schema == SCHEMA_WITH_SOUND_DIFFERENCE
+            options["include_sound_difference"] = difference or difference_coverage
+            options["include_sound_difference_coverage"] = difference_coverage
             options["include_picture_insertion"] = schema in (SCHEMA_WITH_PICTURE_INSERTION, SCHEMA_WITH_INSERTION_RETENTION)
             options["verify_picture_insertion_retention"] = schema == SCHEMA_WITH_INSERTION_RETENTION
             reencoded_soundtrack = schema == SCHEMA_WITH_REENCODED_SOUNDTRACK
-            difference = schema == SCHEMA_WITH_SOUND_DIFFERENCE
-            options["include_sound_difference"] = difference
             if difference:
                 reencoded_soundtrack = "soundtrack_picture_comparison" in record.get("picture", {})
             options["include_trimmed"] = schema in (SCHEMA_WITH_TRIM, SCHEMA_WITH_TRIM_REENCODE)
             options["include_trim_reencoded"] = schema == SCHEMA_WITH_TRIM_REENCODE
-            channel_timing = schema == SCHEMA_WITH_CHANNEL_TIMING or (difference and "channel_timing" in record)
+            channel_timing = schema == SCHEMA_WITH_CHANNEL_TIMING or (
+                (difference or difference_coverage) and "channel_timing" in record)
             timing = record.get("timing", {})
             waveform = (record.get("soundtrack_alignment") or {}).get("waveform_basis")
             local_sound = schema == SCHEMA_WITH_MARKED_SOUND_FALLBACK or (
                 channel_timing and (timing.get("reason") == "profile" or "changed_audio_samples" in timing)
             )
             additional = schema == SCHEMA_WITH_ADDITIONAL_SOUNDTRACK
-            composite = additional or local_sound or channel_timing or reencoded_soundtrack or difference
+            composite = additional or local_sound or channel_timing or reencoded_soundtrack or difference or difference_coverage
             local = record.get("picture", {}).get("local_comparison", {})
             options["include_local_area"] = local.get("basis") == LOCAL_AREA_BASIS
             options["include_measured_interval"] = "measured_interval" in local

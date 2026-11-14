@@ -28,6 +28,7 @@ PICTURE_STATUS = {
     "unverified_picture_clock": "The comparison could not verify every picture timestamp.",
     "picture_geometry_differs": "The clips have different display dimensions.",
     "picture_timelines_differ": "The clips have different relative picture timestamps.",
+    "insertion_retention_uncertain": "The retained pictures did not support a single insertion.",
 }
 AUDIO_STATUS = {
     "no_stream": "Neither clip has a soundtrack.",
@@ -85,6 +86,8 @@ def _summary(document, record):
             _text(page, MARGIN, 413, f"The matching comparison also supports start frames {low} through {high}.")
         _text(page, MARGIN, 446, "The next page shows the matching pictures on both sides of the insertion.")
         _text(page, MARGIN, 467, "The soundtrack was outside this comparison.", color=MUTED)
+        if "insertion_retention" in record:
+            _text(page, MARGIN, 489, "The retained sections were also checked in overlapping eight-picture windows.", color=MUTED)
         return
     picture = record["picture"]
     _text(page, MARGIN, 347, "Picture comparison", size=16, font="hebo")

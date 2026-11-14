@@ -484,3 +484,18 @@ it('shows both insertion clocks and before, during and after pictures', async ()
     'chipmunk-verify-video-comparison.json', 'chipmunk-verify-video-comparison.pdf',
   ])
 })
+
+it('shows why a single insertion is unverified and keeps its exports available', async () => {
+  const comparison = { schema: 'chipmunk.video-reference-comparison/13', status: 'insertion_retention_uncertain',
+    interpretation: 'The comparison could not verify one continuous insertion.',
+    insertion_retention: { window_frames: 8 }, submitted: { width: 480, height: 270 } }
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(Response.json({ available: true, picture_insertion_available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets: {}, pdf: 'JVBERi0xLjQK' })))
+  show()
+  fireEvent.change(await screen.findByLabelText('Earlier video'), { target: { files: [new File(['movie'], 'earlier.mp4')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
+  expect(await screen.findByText('The retained pictures did not support a single insertion.')).toBeTruthy()
+  expect(screen.queryByRole('region', { name: 'Additional pictures' })).toBeNull()
+  expect(screen.getByRole('button', { name: 'Download JSON evidence' })).toBeTruthy()
+  expect(screen.getByRole('button', { name: 'Download PDF' })).toBeTruthy()
+})

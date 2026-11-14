@@ -11,10 +11,17 @@ from itertools import pairwise
 THUMB_SIDE = 96
 THUMB_BYTES = THUMB_SIDE ** 2
 EVIDENCE_ROLES = ("before", "during", "after")
+RETENTION_WINDOW = 8
+MAX_RETENTION_MEDIAN = .035
+MAX_ALTERNATE_GAIN = .020
 INTERPRETATION = (
     "The pictures before and after this interval match the earlier clip closely. "
     "The analyzed clip contains additional pictures between them. Ordinary edits can also add pictures. "
     "This comparison covers the picture track and carries no weight in the AI estimate."
+)
+RETENTION_INTERPRETATION = (
+    "One interval could account for the longer picture track, but sections outside it did not match consistently. "
+    "The comparison could not verify one continuous insertion. The soundtrack was outside this comparison."
 )
 
 
@@ -30,6 +37,29 @@ def normalized(pixels):
     luma = pixels.astype(np.float32)
     low, mid, high = np.percentile(luma, (20, 50, 80), axis=(1, 2), keepdims=True)
     return ((luma - mid) / np.maximum(high - low, 24)).astype(np.float32)
+
+
+def retention_support(earlier, submitted, selected):
+    """Check local agreement across both sections that should have been retained."""
+    import numpy as np
+
+    start, stop = selected
+    before, after = normalized(earlier), normalized(submitted)
+    difference = stop - start
+    costs = np.stack([frame_error(before, after[offset:offset + len(before)])
+                      for offset in range(difference + 1)], axis=1)
+    support = []
+    for flank, offset in ((costs[:start], 0), (costs[start:], difference)):
+        windows = np.lib.stride_tricks.sliding_window_view(flank, RETENTION_WINDOW, axis=0)
+        typical = np.median(windows[:, offset, :], axis=-1)
+        mean = windows.mean(axis=-1)
+        support.append({"median": round(float(typical.max()), 6),
+                        "alternate_gain": round(float((mean[:, offset] - mean.min(axis=1)).max()), 6)})
+    return support
+
+
+def retained_pictures_agree(support):
+    return all(side["median"] <= MAX_RETENTION_MEDIAN and side["alternate_gain"] <= MAX_ALTERNATE_GAIN for side in support)
 
 
 def pair_interval(first, second):
@@ -107,7 +137,7 @@ def _luma(path, table, max_pixels):
     return np.frombuffer(raw, dtype=np.uint8).reshape(-1, THUMB_SIDE, THUMB_SIDE)
 
 
-def locate(paths, tables, max_pixels):
+def locate(paths, tables, max_pixels, *, verify_retention=False):
     from app.detectors.video.decode import DecodeError
 
     if not eligible(paths, tables):
@@ -119,4 +149,9 @@ def locate(paths, tables, max_pixels):
     result = pair_interval(first, second)
     if result["bounds"] is None:
         return None
+    if verify_retention:
+        support = retention_support(first, second, result["bounds"])
+        result["retention"] = {"window_frames": RETENTION_WINDOW, "before": support[0], "after": support[1], "audio_checked": False}
+        if not retained_pictures_agree(support):
+            result.update(status="insertion_retention_uncertain", bounds=None)
     return result

@@ -816,8 +816,9 @@ def test_added_pictures_preserve_native_timestamps_and_exports(tmp_path, referen
     assert response.status_code == 200, response.text[:300]
     payload = response.json()
     record = payload["comparison"]
-    assert record["schema"] == video_reference.SCHEMA_WITH_PICTURE_INSERTION
+    assert record["schema"] == video_reference.SCHEMA_WITH_INSERTION_RETENTION
     assert record["affects_overall_confidence"] is False
+    assert record["insertion_retention"]["window_frames"] == 8
     edit = record["picture_insertion"]
     assert edit["audio_checked"] is False
     assert (edit["start_frame"], edit["end_frame_exclusive"], edit["inserted_frames"]) == (start, stop, 30)
@@ -844,4 +845,41 @@ def test_added_pictures_preserve_native_timestamps_and_exports(tmp_path, referen
     exported = tmp_path / "insertion.json"
     exported.write_text(json.dumps({key: payload[key] for key in ("comparison", "assets")}))
     assert run(earlier, after, exported, verify=True) == record
+    old_record, old_assets = video_reference.compare(
+        earlier, after, include_picture_insertion=True, verify_picture_insertion_retention=False
+    )
+    assert old_record["schema"] == video_reference.SCHEMA_WITH_PICTURE_INSERTION
+    assert old_record["picture_insertion"] == edit
+    exported.write_text(json.dumps({"comparison": old_record, "assets": {
+        name: base64.b64encode(body).decode("ascii") for name, body in old_assets.items()
+    }}))
+    assert run(earlier, after, exported, verify=True) == old_record
     assert "picture_insertion" not in video_reference.compare(after, earlier, include_picture_insertion=True)[0]
+
+
+def test_one_insert_comparison_withholds_a_range_when_retained_pictures_disagree(tmp_path):
+    from app.evidence import video_reference_insertion as insertion
+    from app.reports.media_reference_pdf import render
+
+    # The replaced eight-picture section is short enough to evade whole-side percentiles.
+    rng = np.random.default_rng(720)
+    seeds = rng.integers(12, 244, size=(188, 15, 30, 3), dtype=np.uint8)
+    base = seeds[:150]
+    mixed = np.concatenate((base[:24], seeds[150:158], base[32:108], seeds[158:188], base[108:]))
+    paths = [encode_lossy_comparison(tmp_path / name, frames.repeat(16, axis=1).repeat(16, axis=2),
+                                     lossless=False, rate=24)
+             for name, frames in (("earlier.mp4", base), ("submitted.mp4", mixed))]
+    earlier, submitted = paths
+    original, _ = video_reference.compare(earlier, submitted, include_picture_insertion=True,
+                                          verify_picture_insertion_retention=False)
+    assert original["picture_insertion"]["inserted_frames"] == 30
+    current, assets = video_reference.compare(earlier, submitted, include_picture_insertion=True)
+    assert current["status"] == "insertion_retention_uncertain" and not assets and "picture_insertion" not in current
+    retention = current["insertion_retention"]
+    assert not insertion.retained_pictures_agree([retention["before"], retention["after"]])
+    exported = tmp_path / "retention.json"
+    exported.write_text(json.dumps({"comparison": current, "assets": {}}))
+    assert run(earlier, submitted, exported, verify=True) == current
+    with pymupdf.open(stream=render(current, assets), filetype="pdf") as pdf:
+        assert len(pdf) == 1
+        assert "The retained pictures did not support a single insertion." in pdf[0].get_text()

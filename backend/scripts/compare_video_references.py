@@ -14,6 +14,7 @@ from app.evidence.video_reference import (
     SCHEMA,
     SCHEMA_WITH_ADDITIONAL_SOUNDTRACK,
     SCHEMA_WITH_CHANNEL_TIMING,
+    SCHEMA_WITH_INSERTION_RETENTION,
     SCHEMA_WITH_MARKED_SOUND_FALLBACK,
     SCHEMA_WITH_PICTURE_INSERTION,
     SCHEMA_WITH_REENCODED_SOUNDTRACK,
@@ -78,7 +79,8 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds = None
         if isinstance(record, dict):
             schema = record.get("schema")
-            options["include_picture_insertion"] = schema == SCHEMA_WITH_PICTURE_INSERTION
+            options["include_picture_insertion"] = schema in (SCHEMA_WITH_PICTURE_INSERTION, SCHEMA_WITH_INSERTION_RETENTION)
+            options["verify_picture_insertion_retention"] = schema == SCHEMA_WITH_INSERTION_RETENTION
             reencoded_soundtrack = schema == SCHEMA_WITH_REENCODED_SOUNDTRACK
             options["include_trimmed"] = schema in (SCHEMA_WITH_TRIM, SCHEMA_WITH_TRIM_REENCODE)
             options["include_trim_reencoded"] = schema == SCHEMA_WITH_TRIM_REENCODE

@@ -125,9 +125,11 @@ type Comparison = {
     | 'chipmunk.video-reference-comparison/4' | 'chipmunk.video-reference-comparison/5' | 'chipmunk.video-reference-comparison/6'
     | 'chipmunk.video-reference-comparison/7' | 'chipmunk.video-reference-comparison/8' | 'chipmunk.video-reference-comparison/9'
     | 'chipmunk.video-reference-comparison/10' | 'chipmunk.video-reference-comparison/11' | 'chipmunk.video-reference-comparison/12'
+    | 'chipmunk.video-reference-comparison/13'
   submitted: PictureDimensions
   picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
   picture_insertion?: PictureInsertion
+  insertion_retention?: { window_frames: number }
   timing?: TimingComparison
   soundtrack_alignment?: SoundtrackTiming
   additional_soundtrack?: AdditionalSoundtrack
@@ -144,6 +146,7 @@ type Comparison = {
     | 'chipmunk.audio-reference-comparison/10'
   picture?: never
   picture_insertion?: never
+  insertion_retention?: never
   timing?: never
   soundtrack_alignment?: never
   additional_soundtrack?: never
@@ -165,6 +168,7 @@ const unassessed: Record<string, string> = {
   unverified_picture_clock: 'The comparison could not verify every picture timestamp.',
   picture_geometry_differs: 'The clips have different display dimensions.',
   picture_timelines_differ: 'The clips have different relative picture timestamps.',
+  insertion_retention_uncertain: 'The retained pictures did not support a single insertion.',
   no_stream: 'Neither clip has a soundtrack.',
   audio_unassessed: 'Both soundtracks need a decodable continuous sample clock.',
   audio_timelines_differ: 'The soundtracks have different start times or sample counts.',
@@ -501,6 +505,9 @@ function ResultView({ result }: { result: Result }) {
     </p>}
     {comparison.clean_speech && <CleanSpeechEvidence result={comparison.clean_speech} assets={assets} />}
     {comparison.picture_insertion && <InsertionEvidence insertion={comparison.picture_insertion} assets={assets} />}
+    {comparison.picture_insertion && comparison.insertion_retention && <p className="m-0 text-caption text-text-muted">
+      The retained sections also matched in overlapping {comparison.insertion_retention.window_frames}-picture windows.
+    </p>}
     {comparison.timing && <TimingEvidence timing={comparison.timing} assets={assets} />}
     {comparison.soundtrack_alignment && !comparison.timing?.changed_audio_samples &&
       (!comparison.channel_timing?.ranges.length || comparison.soundtrack_alignment.range) &&
@@ -650,7 +657,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
       if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
@@ -689,7 +696,13 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
         throw new Error('The comparison response is missing its local soundtrack timing evidence.')
       }
       const insertion = response.comparison.picture_insertion
-      if (schema === 'chipmunk.video-reference-comparison/12' && (!insertion || insertion.audio_checked !== false ||
+      const retention = schema === 'chipmunk.video-reference-comparison/13'
+      const insertionUncertain = retention && response.comparison.status === 'insertion_retention_uncertain'
+      if (retention && (response.comparison.insertion_retention?.window_frames !== 8 ||
+          (insertionUncertain ? !!insertion : response.comparison.status !== 'measured'))) {
+        throw new Error('The comparison response is missing its retained picture measurements.')
+      }
+      if ((schema === 'chipmunk.video-reference-comparison/12' || retention && !insertionUncertain) && (!insertion || insertion.audio_checked !== false ||
         !insertionRoles.every(role => (role === 'during' ? ['submitted'] as const : sides).every(side => {
           const name = insertion.witnesses?.[role]?.[side]?.asset?.file
           return !!name && !!response.assets?.[name]

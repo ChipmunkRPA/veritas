@@ -46,6 +46,7 @@ SCHEMA_WITH_TRIM = "chipmunk.video-reference-comparison/9"
 SCHEMA_WITH_TRIM_REENCODE = "chipmunk.video-reference-comparison/10"
 SCHEMA_WITH_REENCODED_SOUNDTRACK = "chipmunk.video-reference-comparison/11"
 SCHEMA_WITH_PICTURE_INSERTION = "chipmunk.video-reference-comparison/12"
+SCHEMA_WITH_INSERTION_RETENTION = "chipmunk.video-reference-comparison/13"
 MAX_COMPARED_SOUNDTRACKS = 2
 MAX_BYTES = 48 * 1024 * 1024
 MAX_FRAMES = 360
@@ -389,7 +390,8 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             include_additional_soundtrack: bool = True,
             include_channel_timing: bool = False, include_trimmed: bool = False,
             include_trim_reencoded: bool = False, include_soundtrack_reencode: bool = False,
-            include_picture_insertion: bool = False) -> tuple[dict, dict[str, bytes]]:
+            include_picture_insertion: bool = False,
+            verify_picture_insertion_retention: bool = True) -> tuple[dict, dict[str, bytes]]:
     """Report decoded differences on matching clocks or within a verified trimmed overlap."""
     paths = earlier, submitted
     sources = tuple(_identity(path) for path in paths)
@@ -400,12 +402,19 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
               "earlier": {**sources[0], **_reference(tables[0])}, "submitted": {**sources[1], **_reference(tables[1])},
               "interpretation": INTERPRETATION, "affects_overall_confidence": False}
     if (include_picture_insertion and timing_event_s is None and status in {"picture_timelines_differ", "comparison_limit"}
-            and (insertion := video_reference_insertion.locate(paths, tables, MAX_PIXELS)) is not None):
-        evidence = _insertion_evidence(paths, tables, assets, insertion)
+            and (insertion := video_reference_insertion.locate(
+                paths, tables, MAX_PIXELS, verify_retention=verify_picture_insertion_retention)) is not None):
+        if insertion["bounds"] is not None:
+            record.update(status="measured", interpretation=video_reference_insertion.INTERPRETATION,
+                          picture_insertion=_insertion_evidence(paths, tables, assets, insertion))
+        else:
+            record.update(status=insertion["status"], interpretation=video_reference_insertion.RETENTION_INTERPRETATION)
         if sources != tuple(_identity(path) for path in paths):
             raise ValueError("One of the clips changed while the comparison was running.")
-        record.update(schema=SCHEMA_WITH_PICTURE_INSERTION, status="measured",
-                      interpretation=video_reference_insertion.INTERPRETATION, picture_insertion=evidence)
+        if verify_picture_insertion_retention:
+            record.update(schema=SCHEMA_WITH_INSERTION_RETENTION, insertion_retention=insertion["retention"])
+        else:
+            record["schema"] = SCHEMA_WITH_PICTURE_INSERTION
         return record, assets
     if include_trimmed and timing_event_s is None and status == "picture_timelines_differ":
         if trim := _trim_offset(paths, tables):

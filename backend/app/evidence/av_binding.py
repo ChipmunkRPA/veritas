@@ -11,10 +11,62 @@ from itertools import pairwise
 from app.evidence.mp4 import validate_clip_binding
 
 LEGACY_AUDIO_CLOCK_REASON = 'Audio timestamps contain gaps; audio/video correlation does not support this timeline.'
+TIMING_WINDOWS = 'timing_windows'
+TIMING_COMMITMENT = 'av_timing_windows_sha256'
+TIMING_REASONS = {
+    'measured': 'Mouth and audio timing was measured.',
+    'insufficient_speech': 'Too little speech was detected for this window.',
+    'missing_picture_timestamps': 'No source picture was available close enough to every audio tick.',
+    'insufficient_audio_context': 'The full timing search would extend beyond the audio.',
+    'no_face_track': 'No tracked face was available.',
+    'missing_landmarks': 'No single face track had usable mouth landmarks across the entire window.',
+    'track_limit': 'The window was outside the selected face tracks.',
+    'missing_mouth_input': 'Some source mouth crops could not be verified.',
+    'unchanged_mouth_pixels': 'The mouth crops were identical across the window.',
+    'flat_mouth_proxy': 'The mouth-opening measurement stayed flat.',
+    'speaker_unresolved': 'Speech could not be linked to a visible mouth for this window.',
+}
+TIMING_DISPLAY_LIMIT = 12
 
 
 class InvalidAV(ValueError):
     pass
+
+
+def timing_ranges(samples: int) -> range:
+    """One-second audio windows at the alignment check's half-second cadence."""
+    ticks = samples // 640
+    return range(max(0, (2 * (ticks - 25) + 1) // 25 + 1))
+
+
+def timing_interval(index: int, origin: int) -> dict:
+    start = (index * 25 // 2) * 640
+    end = start + 16000
+    return {'start_sample': start, 'end_sample': end, 'source_start_pts': origin + start,
+            'source_end_pts': origin + end, 'time_base': '1/16000'}
+
+
+def _validate_timing_coverage(coverage: dict, samples: int, origin: int) -> None:
+    rows = coverage['windows']
+    if (set(coverage) != {'raw_output_sha256', 'windows'} or not isinstance(rows, list)
+            or not re.fullmatch(r'[a-f0-9]{64}', coverage['raw_output_sha256'])
+            or len(rows) != len(timing_ranges(samples))):
+        raise InvalidAV('Timing coverage differs from the audio window schedule')
+    for index, row in enumerate(rows):
+        start = index * 25 // 2
+        if (set(row) != {'status', 'speech_ticks', 'interval'} or row['status'] not in TIMING_REASONS
+                or type(row['speech_ticks']) is not int or not 0 <= row['speech_ticks'] <= 25
+                or row['interval'] != timing_interval(index, origin)
+                or any(type(row['interval'][key]) is not int for key in
+                       ('start_sample', 'end_sample', 'source_start_pts', 'source_end_pts'))):
+            raise InvalidAV('Timing coverage row has an invalid status, speech count or interval')
+        if (row['status'] == 'insufficient_speech') != (row['speech_ticks'] < 13):
+            raise InvalidAV('Timing coverage differs from the recorded speech decision')
+        full_search = start >= 15 and (start + 40) * 640 <= samples
+        if ((row['status'] == 'insufficient_audio_context' and full_search)
+                or (row['status'] not in {'insufficient_speech', 'missing_picture_timestamps', 'insufficient_audio_context'}
+                    and not full_search)):
+            raise InvalidAV('Timing coverage disagrees with the available audio search margin')
 
 
 def audio_clock_discontinuity(timeline: Sequence[Mapping[str, int]]) -> str:
@@ -84,6 +136,13 @@ def _validate(channel: dict, video: dict) -> None:
     timeline = source['timeline'][0]
     require(timeline['start_sample'] == 0 and timeline['end_sample'] == source['samples'] and integer(timeline['source_pts']), 'AV source timeline is not a continuous PCM mapping')
     origin = timeline['source_pts']
+    if TIMING_WINDOWS in channel['coverage']:
+        timing = channel['coverage'][TIMING_WINDOWS]
+        _validate_timing_coverage(timing, source['samples'], origin)
+        measured_starts = {row['interval']['start_sample'] for row in timing['windows'] if row['status'] == 'measured'}
+        require(all(packet['interval']['start_sample'] in measured_starts for packet in channel['packets']
+                    if packet['source_record']['raw_output_sha256'] == timing['raw_output_sha256']),
+                'A published AV packet differs from the timing coverage')
     ids = set()
     for packet in channel['packets']:
         require(packet['id'] not in ids and packet['id'].startswith('AV'), 'AV packet identities are invalid')

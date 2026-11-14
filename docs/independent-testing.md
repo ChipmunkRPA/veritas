@@ -1545,6 +1545,11 @@ python -m app.cli verify evidence.zip --public-key instance-key.pem \
   --source-video original.mkv --source-audio original.mkv
 ```
 
+When the evidence includes a timing window schedule, these two checks
+recompute the recorded speech counts and the eligibility of source frame
+timestamps. The signed result also commits to the reported reasons for
+each window. [Supported coverage and replay fixture](video-timing-window-coverage-2026-11-14.md#independent-replay)
+
 ### Recompute selected image and video measurements
 
 After the trusted-key verification above, extract the signed `evidence.json`

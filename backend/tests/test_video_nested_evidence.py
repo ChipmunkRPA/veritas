@@ -36,7 +36,7 @@ from app.detectors.video.face_appearance import METHOD, cpp_alignment
 from app.detectors.video.frame_store import FrameStore
 from app.engine.boundary import Deadline
 from app.engine.detector import DetectorResult, UnitScore
-from app.engine.stages import video
+from app.engine.stages import common, video
 from app.engine.synthesis.engine import SynthesisInput, synthesise
 from app.evidence import (
     face_boundary_binding,
@@ -50,6 +50,7 @@ from app.evidence import (
     video_packets,
 )
 from app.evidence.audio_binding import validate_audio_channel
+from app.evidence.av_binding import TIMING_WINDOWS, InvalidAV, validate_av_channel
 from app.evidence.image_packets import PacketIntegrityError
 from app.reports import engine, multimedia_evidence, package, signing, snapshot, verify, verify_video_source
 from app.reports.specimens import specimen
@@ -97,6 +98,51 @@ def test_one_source_bound_timing_window_discloses_missing_change_coverage_in_jso
     rendered = engine.render_pdf(report.model_copy(update={'result': payload}))
     text = ' '.join(engine.pdf_text(rendered.pdf).split())
     assert measured in text and 'Timing change unassessed' in text
+
+
+def test_unmeasured_timing_windows_reach_the_pdf_and_signed_export(av_fixture, tmp_path, monkeypatch):
+    f = av_fixture
+    path = f.store.path_for(f.analysis.sha256)
+    inputs = replace(f.inputs, tracks=(), frames={})
+    detector = LandmarkXcorrDetector()
+    result = detector.run(SimpleNamespace(outputs=SimpleNamespace(av=inputs)))
+    assert result.status == 'not_applicable' and result.aggregate is None
+    raw = common.detector_entry(detector.spec, result, None)
+    ref = f.store.put_bytes(canonical_json(raw)).sha256
+    rows = raw['details'][TIMING_WINDOWS]['windows']
+    record = f.result['manifest']['sampling']['video_audio_evidence']
+    record['av_checks'] = []
+    record[TIMING_WINDOWS] = {'raw_output_sha256': ref, 'windows_sha256': canonical_hash(rows)}
+    f.result['kind'] = 'video'
+    f.result['signals'] = f.result['signals'][:1]
+    _prepare_parent(f)
+    _freeze_parent(f)
+    f.result = _report_scaffold(f).result
+    f.analysis.result_hash = f.store.put_bytes(canonical_json(f.result)).sha256
+    _freeze_parent(f)
+    av = f.document['av']
+    assert av['status'] == 'not_assessed' and av['packets'] == []
+    assert av['coverage'][TIMING_WINDOWS]['windows'] == rows
+    assert len(rows) == 6
+    assert all(row['status'] == 'insufficient_speech' for row in rows)
+    assert rows[0]['interval']['source_start_pts'] == 86400
+    assert rows[-1]['interval']['source_end_pts'] == 142080
+    assert project(f.document)['av']['coverage'][TIMING_WINDOWS]['windows'] == rows
+    altered = copy.deepcopy(av)
+    altered['coverage'][TIMING_WINDOWS]['windows'][0]['interval']['source_start_pts'] += 1
+    with pytest.raises(InvalidAV, match='invalid status, speech count or interval'):
+        validate_av_channel(altered, f.source)
+
+    monkeypatch.setattr(multimedia_evidence, 'default_store', lambda: f.store)
+    pdf = engine.render_pdf(f.frozen).pdf
+    (tmp_path / 'av-timing-coverage.pdf').write_bytes(pdf)
+    pdf_text = ' '.join(engine.pdf_text(pdf).split())
+    assert 'Speech and mouth timing coverage' in pdf_text
+    assert '0 of 6 scheduled one-second windows reached a timing measurement' in pdf_text
+    assert 'Too little speech was detected for this window.' in pdf_text
+    assert '5.400–6.400 s' in pdf_text
+    assert '/av/coverage/timing_windows' in pdf_text and detector.spec.id not in pdf_text
+    _check_public_zip(f, tmp_path, monkeypatch, pdf, source_audio=path, source_video=path)
 
 
 @pytest.fixture(params=['video-evidence-3', 'video-evidence-4', 'video-evidence-5', 'video-evidence-6'])
@@ -747,10 +793,14 @@ def _check_public_zip(f, tmp_path, monkeypatch, pdf_bytes, *, source_audio=None,
         stereo = part.get('stereo_context')
         if stereo and stereo['schema'] == 'chipmunk.stereo-channel-context/2' and stereo['stereo_pcm_sha256'] is not None:
             assert f"Recomputed stereo channel and mono-downmix evidence for {len(stereo['windows'])} windows" in audio_check['detail']
+        if timing := ((f.document.get('av') or {}).get('coverage') or {}).get(TIMING_WINDOWS):
+            assert f"Recomputed speech activity and source times for {len(timing['windows'])} timing windows" in audio_check['detail']
     if source_video is not None:
         video_check = checks['original video frames']
         assert video_check['ok'] and 'source frame clock matched' in video_check['detail']
         assert f"mouth patches ({25 * len(f.document['av']['packets'])})" in video_check['detail']
+        if timing := (f.document['av'].get('coverage') or {}).get(TIMING_WINDOWS):
+            assert f"Recomputed picture-clock coverage for {len(timing['windows'])} timing windows" in video_check['detail']
     if source_audio is not None and source_video is not None:
         wrong_source = tmp_path / 'unrelated-original.bin'
         wrong_source.write_bytes(b'unrelated original')

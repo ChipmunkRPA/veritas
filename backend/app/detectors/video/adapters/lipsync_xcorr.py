@@ -24,6 +24,7 @@ from typing import Any
 
 import numpy as np
 
+from app.core.canonical import canonical_hash
 from app.detectors.video import lipsync, sampling, xcorr
 from app.detectors.video.adapters.common import CPU_ONLY, FULL_DEEP, H2, video_spec
 from app.detectors.video.adapters.lipsync import (
@@ -36,7 +37,9 @@ from app.detectors.video.adapters.lipsync import (
 from app.detectors.video.adapters.swap import track_name
 from app.detectors.video.av_evidence import capture_correlation
 from app.engine.detector import Applicability, Detector, DetectorResult, InputUnit, RunContext, UnitScore
+from app.evidence.av_binding import TIMING_WINDOWS, timing_interval, timing_ranges
 
+DETECTOR_ID = "vid.lipsync.landmark_xcorr"
 NO_SPEECH = "no speech detected in the sound track"
 SILENT = "the sound track is silent"
 NO_MOUTH = "no face track with a visible mouth and timestamp-matched video frames for a full 1 s window of speech"
@@ -158,15 +161,51 @@ def _thin(points: list[tuple[float, float]]) -> list[tuple[float, float]]:
     return [points[int(k)] for k in keep]
 
 
+def _timing_coverage(inputs: AVInputs, grid: lipsync.TickGrid, speech: lipsync.Speech, result: DetectorResult, *,
+                     has_landmarks=(), measured=(), unresolved=(), omitted=()) -> DetectorResult:
+    """Record the furthest timing check reached per scheduled window across face tracks."""
+    mapping = inputs.audio_mapping
+    if not mapping or not mapping.get("source_sha256") or (measured and result.details["av_input"]["status"] != "ready"):
+        return result
+    origin = mapping["timeline"][0]["source_pts"]
+    missing = {status: {row["index"] for row in omitted if row["status"] == status}
+               for status in ("unchanged_mouth_pixels", "flat_mouth_proxy", "missing_mouth_input")}
+    windows = []
+    for index in timing_ranges(len(inputs.audio.pcm)):
+        window = lipsync.Window("", index, 0.0, 0.0, xcorr.HOP_TICKS)
+        speech_ticks = int(np.count_nonzero(speech.speech[window.ticks.start:window.ticks.stop]))
+        if speech_ticks < lipsync.WINDOW_TICKS * lipsync.MIN_SPEECH_FRACTION:
+            status = "insufficient_speech"
+        elif window.ticks.stop > grid.ticks or any(frame < 0 for frame in grid.frames[window.ticks.start:window.ticks.stop]):
+            status = "missing_picture_timestamps"
+        elif not xcorr.full_search(window, speech.ticks):
+            status = "insufficient_audio_context"
+        elif not inputs.tracks:
+            status = "no_face_track"
+        elif index in measured:
+            status = "measured"
+        elif index in unresolved:
+            status = "speaker_unresolved"
+        elif index not in has_landmarks:
+            status = "missing_landmarks"
+        else:
+            status = next((reason for reason, indices in missing.items() if index in indices), "track_limit")
+        windows.append({"status": status, "speech_ticks": speech_ticks, "interval": timing_interval(index, origin)})
+    result.details[TIMING_WINDOWS] = {"source_sha256": mapping["source_sha256"], "pcm_sha256": mapping["pcm_sha256"],
+                                      "mapping_sha256": canonical_hash(mapping),
+                                      "frame_table_sha256": canonical_hash(inputs.table.to_json()), "windows": windows}
+    return result
+
+
 class LandmarkXcorrDetector(Detector):
-    spec = video_spec("vid.lipsync.landmark_xcorr",
+    spec = video_spec(DETECTOR_ID,
                       "Lip-sync lane: mouth opening vs speech level cross-correlation per speaking face track",
                       InputUnit.AV_WINDOW, (H2,), ("series", "segments"), family="av-sync", needs=("tracks", "audio"), lane="cpu",
-                      devices=CPU_ONLY, timeout_s=120.0, profiles=FULL_DEEP, version="0.5.6")
+                      devices=CPU_ONLY, timeout_s=120.0, profiles=FULL_DEEP, version="0.5.7")
 
     def applicable(self, ctx: RunContext) -> Applicability:
         inputs = ctx.outputs.av
-        if not isinstance(inputs, AVInputs) or not inputs.tracks:
+        if not isinstance(inputs, AVInputs):
             return Applicability(False, "no face track")
         audio = inputs.audio
         status = getattr(audio, "status", "absent")
@@ -180,23 +219,33 @@ class LandmarkXcorrDetector(Detector):
 
     def run(self, ctx: RunContext) -> DetectorResult:
         inputs: AVInputs = ctx.outputs.av
-        if inputs.audio.status == "silent" or inputs.audio.pcm is None:
+        if inputs.audio.status == "silent":
+            if not inputs.tracks:
+                return DetectorResult.not_applicable("no face track")
+            return self._informational("The sound track is silent", 0.0)
+        if inputs.audio.pcm is None:
             return self._informational("The sound track is silent", 0.0)
         pcm = inputs.audio.pcm
         origin = source_audio_origin(inputs)
         if isinstance(origin, str):
             return DetectorResult.not_applicable(origin)
         speech = lipsync.vad(pcm)
-        if not speech.speech.any():
-            return self._informational("No speech detected in the sound track", 0.0)
         grid = lipsync.tick_grid(inputs.table.times(), sampling.duration_s(inputs.table), len(pcm), audio_start_s=origin)
+        if not speech.speech.any():
+            if not inputs.tracks:
+                result = DetectorResult.not_applicable("no face track")
+            else:
+                result = self._informational("No speech detected in the sound track", 0.0)
+            return _timing_coverage(inputs, grid, speech, result)
         by_track = {t["track_id"]: {f["frame_index"]: f for f in inputs.frames.get(t["track_id"]) or []
                                     if f.get("landmarks") and len(f["landmarks"]) >= 5} for t in inputs.tracks}
         candidates = {tid: w for tid, frames in by_track.items()
                       if (w := [x for x in lipsync.track_windows(tid, frames, grid, speech, hop=xcorr.HOP_TICKS, max_windows=xcorr.MAX_WINDOWS)
                                 if xcorr.full_search(x, speech.ticks)])}
         if not candidates:
-            return DetectorResult.not_applicable(NO_MOUTH)
+            result = DetectorResult.not_applicable(NO_MOUTH if inputs.tracks else "no face track")
+            return _timing_coverage(inputs, grid, speech, result)
+        has_landmarks = {w.index for windows in candidates.values() for w in windows}
         largest = sorted(candidates, key=lambda tid: (-float(np.median([w.face_px for w in candidates[tid]])), tid))
         candidates = {tid: candidates[tid] for tid in largest[:lipsync.MAX_TRACKS]}
 
@@ -225,11 +274,12 @@ class LandmarkXcorrDetector(Detector):
                     scored.append(window)
                 else:
                     coverage[tid][window.index] = status
-                    omitted.append({"track_id": tid, "start_s": grid.seconds(window.start_tick),
+                    omitted.append({"track_id": tid, "index": window.index, "start_s": grid.seconds(window.start_tick),
                                     "end_s": grid.seconds(window.start_tick + lipsync.WINDOW_TICKS), "status": status})
             if scored:
                 measurable[tid] = scored
         counts = Counter(row["status"] for row in omitted)
+        kept = {}
         if not measurable:
             reason = NO_MOUTH
             if counts["unchanged_mouth_pixels"] + counts["flat_mouth_proxy"]:
@@ -247,8 +297,10 @@ class LandmarkXcorrDetector(Detector):
         result.metrics.update({"unmeasured_mouth_windows": float(len(omitted)),
                                **{key: float(count) for key, count in counts.items()}})
         if omitted:
-            result.details["unmeasured_mouth_windows"] = omitted
-        return result
+            result.details["unmeasured_mouth_windows"] = [{k: v for k, v in row.items() if k != "index"} for row in omitted]
+        return _timing_coverage(inputs, grid, speech, result, has_landmarks=has_landmarks,
+                                measured={w.index for windows in kept.values() for w in windows},
+                                unresolved={w.index for windows in measurable.values() for w in windows}, omitted=omitted)
 
     def _result(self, ctx: RunContext, inputs: AVInputs, grid: lipsync.TickGrid, speech: lipsync.Speech, scores: dict[str, float],
                 results: dict[str, lipsync.TrackSync], apertures: dict[str, dict[int, float]], candidates: int,

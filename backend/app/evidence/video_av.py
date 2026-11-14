@@ -13,10 +13,16 @@ from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash
 from app.detectors.audio.decode import SAMPLE_RATE, source_ranges, wav_bytes
 from app.detectors.video import lipsync, sampling, xcorr
+from app.detectors.video.adapters.lipsync_xcorr import DETECTOR_ID
 from app.detectors.video.av_evidence import VERSION as INPUT_VERSION
 from app.detectors.video.decode import decode_frames
 from app.evidence import audio_packets
-from app.evidence.av_binding import LEGACY_AUDIO_CLOCK_REASON, audio_clock_discontinuity, validate_av_channel
+from app.evidence.av_binding import (
+    LEGACY_AUDIO_CLOCK_REASON,
+    TIMING_WINDOWS,
+    audio_clock_discontinuity,
+    validate_av_channel,
+)
 from app.evidence.image_packets import PacketIntegrityError, _bounds, _png
 from app.evidence.video_audio import unavailable
 from app.evidence.video_clips import ClipUnavailable, build_clip
@@ -31,6 +37,26 @@ def _signals(result, entry, track_id):
             and (s.get('detector_id') == entry['detector_id'] or set(s.get('exhibit_ids', [])).intersection(entry.get('exhibit_ids', [])))]
     scoped = [s for s in rows if s.get('scope_ref') == track_id or s['id'].endswith(':' + track_id)]
     return scoped or [s for s in rows if s.get('scope', 'global') == 'global']
+
+
+def _timing_windows(record, store, source, candidates):
+    if not (reference := record.get(TIMING_WINDOWS)):
+        return {}
+    sha = reference['raw_output_sha256']
+    entry = json.loads(audio_packets._verified(store, sha))
+    details = entry.get('details', {}).get(TIMING_WINDOWS) or {}
+    if (entry.get('detector_id') != DETECTOR_ID or entry.get('status') not in {'ok', 'not_applicable'}
+            or details.get('source_sha256') != source['sha256']
+            or any(details.get(key) != source[key] for key in ('pcm_sha256', 'mapping_sha256', 'frame_table_sha256'))):
+        raise PacketIntegrityError('Timing coverage differs from its frozen audio and video inputs')
+    rows = details['windows']
+    if canonical_hash(rows) != reference.get('windows_sha256'):
+        raise PacketIntegrityError('Timing coverage differs from its published window commitment')
+    if {row['interval']['start_sample'] for row in rows if row['status'] == 'measured'} != {
+            item['window']['audio_interval']['start_sample'] for item in candidates
+            if item['raw_output_sha256'] == sha}:
+        raise PacketIntegrityError('Timing coverage differs from its measured windows')
+    return {TIMING_WINDOWS: {'raw_output_sha256': sha, 'windows': rows}}
 
 
 def _sources(record, result, store, source, table, anchors):
@@ -176,7 +202,8 @@ def build_channel(db, analysis, store, result, *, set_id, video_source, table, a
                'reason': None if candidates else 'No source-bound correlation windows were recorded; absent evidence does not establish synchronization.',
                'source': source, 'coverage': {'recorded_windows': len(candidates), 'selected_windows': len(selected),
                     'omitted_windows': max(0, len(candidates)-MAX_PACKETS), 'unsupported_checks': unsupported,
-                    'selection': 'flagged windows first, then chronological informational measured examples'},
+                    'selection': 'flagged windows first, then chronological informational measured examples',
+                    **_timing_windows(record, store, source, candidates)},
                'packets': [], 'limitations': ['Audio/video misalignment is not proof of AI generation or a deepfake.',
                    'Constant offsets can be container timing; changing offsets can also reflect dropped frames or clock jitter.',
                    'Mouth shading, facial hair, occlusion and speech from another person can alter correlation.',
@@ -299,6 +326,9 @@ def verify_source_assets(channel, *, video_source, result, store, table, anchors
     from app.detectors.audio.decode import read_wav
     pcm,_=audio_packets._input(store,SimpleNamespace(sha256=video_source['sha256']),binding)
     candidates,unsupported=_sources(record,result,store,channel['source'],table,anchors)
+    if channel['coverage'].get(TIMING_WINDOWS) != _timing_windows(
+            record, store, channel['source'], candidates).get(TIMING_WINDOWS):
+        raise PacketIntegrityError('Frozen timing coverage differs from the recorded run')
     candidates.sort(key=lambda item:(not (item['window']['overlaps_offset_step'] or item['window']['overlaps_correlation_collapse']),
                                      item['window']['start_tick'],item['track']['track_id']))
     if (channel['coverage']['recorded_windows']!=len(candidates) or channel['coverage']['omitted_windows']!=max(0,len(candidates)-MAX_PACKETS)

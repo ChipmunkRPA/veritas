@@ -22,6 +22,7 @@ from app.evidence import (
     scene_return_binding,
 )
 from app.evidence.audio_binding import SPEECH_SELECTION, SPEECH_SELECTION_COMMITMENT
+from app.evidence.av_binding import TIMING_COMMITMENT, TIMING_WINDOWS
 from app.evidence.face_alignment_context import validate as validate_face_alignment
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.face_interval_binding import validate_packet as validate_face_interval
@@ -93,7 +94,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              IMAGE_EDITOR_PREVIEW, face_return_coverage.COMMITMENT, email_alternatives.COMMITMENT,
                              face_short_window_binding.COMMITMENT, scene_return_binding.COMMITMENT,
                              scene_return_binding.COVERAGE_COMMITMENT, WRITING_POSITION,
-                             EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, IMAGE_INTERPOLATION, SPEECH_SELECTION_COMMITMENT},
+                             EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, IMAGE_INTERPOLATION, SPEECH_SELECTION_COMMITMENT,
+                             TIMING_COMMITMENT},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
     binding = bundle['evidence']
@@ -109,6 +111,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              and evidence.get('source', {}).get('sha256') == source['sha256'] == binding.get('source_sha256'),
              'The evidence source/result/revision binding differs')
     if analysis['kind'] == 'video':
+        timing = (evidence.get('av', {}).get('coverage') or {}).get(TIMING_WINDOWS)
+        _require((canonical_hash(timing['windows']) if timing is not None else None) == result.get(TIMING_COMMITMENT),
+                 'Timing window coverage differs from the published result')
         from app.evidence import face_return_binding
         from app.evidence.picture_hold_binding import validate as validate_picture_hold
 
@@ -190,6 +195,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         else:
             _require(not {'audio', 'av'}.intersection(evidence), 'Historical video evidence has unexpected nested channels')
     else:
+        _require(TIMING_COMMITMENT not in result, 'Timing window coverage belongs to video evidence')
         _require(face_return_coverage.COMMITMENT not in result, 'Brief face-change coverage belongs to video evidence')
         _require(face_short_window_binding.COMMITMENT not in result, 'Overlapping face windows belong to video evidence')
         _require(not {scene_return_binding.COMMITMENT, scene_return_binding.COVERAGE_COMMITMENT}.intersection(result),

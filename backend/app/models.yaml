@@ -1720,7 +1720,7 @@ detectors:
 
   - id: vid.lipsync.landmark_xcorr
     adapter: app.detectors.video.adapters.lipsync_xcorr:LandmarkXcorrDetector
-    version: 0.5.6
+    version: 0.5.7
     name: "Lip-sync lane: mouth opening vs speech level cross-correlation per speaking face track"
     modality: video
     family: av-sync

@@ -30,6 +30,21 @@
 <p class="caption">Evidence set {{ evidence.version }} - SHA-256 <span class="mono evidence-hash">{{ evidence.sha256 }}</span></p>
 <p class="caption"{% if evidence.kind == 'audio' %} id="multimedia-evidence-voice-coverage"{% endif %}>{{ evidence.coverage_note }}</p>
 {% for note in evidence.coverage_details %}<p class="caption">{{ note }}</p>{% endfor %}
+{% set timing = evidence.get('av_timing_windows') %}
+{% if timing %}
+<h3 id="multimedia-av-timing-coverage">Speech and mouth timing coverage</h3>
+<p>{{ timing.measured }} of {{ timing.total }} scheduled one-second windows reached a timing measurement. These overlapping windows are scheduled within the decoded soundtrack. A measurement can still yield an inconclusive timing result.</p>
+{% if timing.unmeasured %}
+<table class="multimedia-locator">
+<thead><tr><th>Original video time</th><th>Why timing was unassessed</th></tr></thead>
+<tbody>{% for window in timing.unmeasured %}
+<tr><td>{{ window.start_s }}–{{ window.end_s }} s</td><td>{{ window.reason }}</td></tr>
+{% endfor %}</tbody>
+</table>
+{% endif %}
+{% if timing.unlisted %}<p class="caption">{{ timing.unlisted }} more unassessed windows are listed in the JSON.</p>{% endif %}
+<p class="caption">JSON pointer <span class="mono">/av/coverage/timing_windows</span>.</p>
+{% endif %}
 {% set quantities = evidence.get('percentage_consistency') %}
 {% if quantities %}
 <h3 id="document-percentage-consistency">Repeated percentage statements</h3>

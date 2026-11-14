@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Speech and mouth timing coverage](video-timing-window-coverage-2026-11-14.md)
+  records which exact video windows could not be assessed and why. A held
+  mouth and an off-camera speaker retained their own dispositions through
+  the browser, PDF, JSON, and signed source replay. This improves visibility
+  into coverage and keeps detection rules unchanged.
+
 - [Short speech after a longer-window skip](audio-short-admission-transfer-2026-11-14.md)
   adds an optional local inspection path for brief speech. On the matched
   source panel it found one noisy edit and flagged three ordinary noisy

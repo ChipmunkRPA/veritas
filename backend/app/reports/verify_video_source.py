@@ -42,6 +42,7 @@ from app.evidence import (
     picture_sequence,
     scene_return_binding,
 )
+from app.evidence.av_binding import TIMING_WINDOWS
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.face_return_binding import (
     DENSE_ENCODING,
@@ -276,6 +277,21 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                (source["width"], source["height"], source["time_base"], source["frame_count"])
             or canonical_hash(table.to_json()) != source["frame_table_sha256"]):
         raise ValueError("The decoded frame table differs from its commitment. Check the local FFmpeg version.")
+    timing = (evidence.get("av", {}).get("coverage") or {}).get(TIMING_WINDOWS)
+    if timing:
+        from app.detectors.video import lipsync, sampling
+
+        audio = evidence["av"]["source"]
+        grid = lipsync.tick_grid(table.times(), sampling.duration_s(table), audio["samples"],
+                                 audio_start_s=audio["timeline"][0]["source_pts"] / audio["sample_rate"])
+        for row in timing["windows"]:
+            if row["status"] == "insufficient_speech":
+                continue
+            start = row["interval"]["start_sample"] // lipsync.HOP
+            end = row["interval"]["end_sample"] // lipsync.HOP
+            missing = end > grid.ticks or any(frame < 0 for frame in grid.frames[start:end])
+            if (row["status"] == "missing_picture_timestamps") != missing:
+                raise ValueError("Timing window coverage differs from the original picture timestamps")
     if paired:
         delivery = probe_container(original, include_codec_tag=True)
         if not face_paired_edge_binding.supported(table, (delivery.get("codec"),delivery.get("pix_fmt"),delivery.get("codec_tag")),
@@ -535,6 +551,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError("The original video does not reproduce its surrounding-picture cut context")
     return (f"Original SHA-256 and the source frame clock matched. Verified native frames ({len(found)}), "
             f"original images or crops ({images}), mouth patches ({patches}), and aligned face inputs ({alignments})."
+            + (f" Recomputed picture-clock coverage for {len(timing['windows'])} timing windows." if timing else "")
             + (f" Recomputed fine background boundaries ({fine_edges})." if fine_edges else "")
             + (" Recomputed 4 guarded background boundaries and verified the source carrier." if len(guarded_records) == 2 else
                " Recomputed both guarded background boundaries and verified the source carrier." if guarded_codec else "")

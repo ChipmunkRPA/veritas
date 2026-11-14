@@ -15,6 +15,7 @@ from PIL import Image
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.evidence import document_scope, service
+from app.evidence.av_binding import TIMING_DISPLAY_LIMIT, TIMING_REASONS, TIMING_WINDOWS
 from app.evidence.video_packet_versions import NESTED_VERSIONS as NESTED_VIDEO_VERSIONS
 from app.storage.objects import ObjectIntegrityError, ObjectStore, default_store
 
@@ -1184,7 +1185,19 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     background_review = copy.deepcopy(document.get("background_reduced_voice_review"))
     if background_review and (asset := background_review["artifacts"].get("waveform")):
         background_review["waveform"] = plate("waveform", asset, "Original waveform across the flagged three-second interval")
+    timing_view = None
+    if timing := (document.get("av", {}).get("coverage") or {}).get(TIMING_WINDOWS):
+        rows = timing["windows"]
+        unmeasured = [row for row in rows if row["status"] != "measured"]
+        timing_view = {"total": len(rows), "measured": len(rows) - len(unmeasured),
+                       "unlisted": max(0, len(unmeasured) - TIMING_DISPLAY_LIMIT), "unmeasured": []}
+        for row in unmeasured[:TIMING_DISPLAY_LIMIT]:
+            interval = row["interval"]
+            timing_view["unmeasured"].append({"start_s": f"{interval['source_start_pts'] / 16000:.3f}",
+                                             "end_s": f"{interval['source_end_pts'] / 16000:.3f}",
+                                             "reason": TIMING_REASONS[row["status"]]})
     return {"available": True, "kind": kind, "title": f"{kind.capitalize()} evidence", "id": document["id"],
+            "av_timing_windows": timing_view,
             "short_voice_review": short_voice_review,
             "long_voice_review": long_voice_review,
             "background_reduced_voice_review": background_review,

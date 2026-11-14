@@ -15,7 +15,7 @@ _PREVIOUS_PUBLIC_TEMPLATES = _FACE_SCOPE_LEGACY_TEMPLATES | {
     "veritas-report-2.0.r114", "veritas-report-2.0.r115", "veritas-report-2.0.r116",
     "veritas-report-2.0.r117", "veritas-report-2.0.r120", "veritas-report-2.0.r121", "veritas-report-2.0.r125",
     "veritas-report-2.0.r126", "veritas-report-2.0.r127", "veritas-report-2.0.r128", "veritas-report-2.0.r129", "veritas-report-2.0.r130",
-    "veritas-report-2.0.r131", "veritas-report-2.0.r132",
+    "veritas-report-2.0.r131", "veritas-report-2.0.r132", "veritas-report-2.0.r137",
 }
 
 

@@ -1,9 +1,21 @@
 import { EvidenceAudio, EvidenceLimits, EvidenceMeasurements, EvidencePicture, EvidenceReferences, evidenceCard, evidenceGrid } from './EvidenceMedia'
 import { ContextClip } from './VideoEvidenceContent'
-import { rationalSeconds, seconds, type VideoAVChannel, type VideoAVPacket, type VideoEvidenceSet } from './multimediaPackets'
+import { rationalSeconds, seconds, type VideoAVChannel, type VideoAVPacket, type VideoEvidenceSet, type VideoTimingStatus } from './multimediaPackets'
 
 const signed = (value: number) => `${value > 0 ? '+' : ''}${value}`
 const hasTimingChange = (packet: VideoAVPacket) => packet.measurement.overlaps_offset_step || packet.measurement.overlaps_correlation_collapse
+const unassessedTiming: Partial<Record<VideoTimingStatus, string>> = {
+  insufficient_speech: 'Too little speech was detected for this window.',
+  missing_picture_timestamps: 'No source picture was available close enough to every audio tick.',
+  insufficient_audio_context: 'The full timing search would extend beyond the audio.',
+  no_face_track: 'No tracked face was available.',
+  missing_landmarks: 'No single face track had usable mouth landmarks across the entire window.',
+  track_limit: 'The window was outside the selected face tracks.',
+  missing_mouth_input: 'Some source mouth crops could not be verified.',
+  unchanged_mouth_pixels: 'The mouth crops were identical across the window.',
+  flat_mouth_proxy: 'The mouth-opening measurement stayed flat.',
+  speaker_unresolved: 'Speech could not be linked to a visible mouth for this window.',
+}
 
 function intervalLabel(range: VideoAVPacket['anchor']['source_timestamp_ranges'][number]) {
   const start = rationalSeconds(range.source_start_pts, range.time_base)
@@ -24,6 +36,8 @@ export default function VideoAVEvidenceContent({ set, channel, token, mediaReady
   set: VideoEvidenceSet; channel: VideoAVChannel; token: string; mediaReady: boolean
 }) {
   const coverage = channel.coverage
+  const timingWindows = coverage?.timing_windows?.windows
+  const unmeasured = timingWindows?.filter((row) => row.status !== 'measured')
   const flaggedWindows = channel.packets.filter(hasTimingChange)
   return <div data-testid="video-av-evidence">
     <p className="mt-2 mb-0 text-small text-text-muted">Compare measured mouth appearance and audio energy on their original clocks. Correlation and timing differences do not prove AI generation, editing, or who is speaking.</p>
@@ -42,6 +56,16 @@ export default function VideoAVEvidenceContent({ set, channel, token, mediaReady
         : 'No measured alignment window is available.'} Repeated frames and gaps do not establish continuous analysis coverage.</p>
       {coverage.unsupported_checks.map((check, index) => <p key={index} className="mt-2 mb-0">Unmapped check: {check.reason} It does not establish synchronization.</p>)}
     </div> : <p className="mt-3 text-small text-text-muted">Alignment coverage is unavailable. Unmeasured intervals have not been cleared.</p>}
+    {timingWindows && unmeasured && <section aria-labelledby="speech-mouth-timing-coverage" className="mt-4 rounded-md border border-border p-4 text-small">
+      <h4 id="speech-mouth-timing-coverage" className="m-0 font-medium">Speech and mouth timing coverage</h4>
+      <p className="mt-2 mb-0 text-text-muted">{timingWindows.length - unmeasured.length} of {timingWindows.length} scheduled one-second windows reached a timing measurement. These overlapping windows are scheduled within the decoded soundtrack. A measurement can still yield an inconclusive timing result.</p>
+      {unmeasured.length > 0 && <details open={unmeasured.length <= 12} className="mt-3">
+        <summary className="cursor-pointer">Unassessed windows on the source clock ({unmeasured.length})</summary>
+        <ul className="mt-2 mb-0 space-y-2 text-text-muted">{unmeasured.map((row) => <li key={row.interval.start_sample}>
+          <span className="font-mono">{intervalLabel(row.interval)}</span> · {unassessedTiming[row.status] ?? 'Timing was unassessed.'}
+        </li>)}</ul>
+      </details>}
+    </section>}
     <div className="mt-6 space-y-7">{channel.packets.map((packet) => {
       const measurement = packet.measurement
       const flagged = hasTimingChange(packet)

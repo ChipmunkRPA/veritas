@@ -6,6 +6,7 @@ from app.core.config import settings
 from app.evidence import audio_packets, stereo_listening, stereo_repetition
 from app.evidence.audio_binding import SPEECH_SELECTION, VOICE_CLOCK_POLICY
 from app.evidence.audio_gain_repetition_binding import GAIN_INPUT, GAIN_VERSION
+from app.evidence.av_binding import TIMING_WINDOWS
 from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import DetectorRun
@@ -47,7 +48,7 @@ def freeze_input(ctx, decoded) -> dict:
 
 
 def published_record(ctx) -> dict:
-    """References to exact successful voice/AV raw outputs, committed with the result."""
+    """Commit measured voice/AV outputs and recorded coverage to the result."""
     from app.engine.stages import common
 
     decoded = (ctx.outputs.get('decode') or {}).get('audio', {})
@@ -62,8 +63,10 @@ def published_record(ctx) -> dict:
         for entry in common.entries(ctx, ('detect',)):
             family = entry.get('family')
             selection = entry.get('status') in {'ok', 'not_applicable'} and bool(entry.get('details', {}).get(SPEECH_SELECTION))
+            timing = family == 'av-sync' and entry.get('status') in {'ok', 'not_applicable'} and bool(
+                entry.get('details', {}).get(TIMING_WINDOWS))
             scored = family in {'voice', 'av-sync', 'acoustic-context'} and entry.get('status') == 'ok'
-            if not (selection or scored) or not entry.get('run_id'):
+            if not (selection or scored or timing) or not entry.get('run_id'):
                 continue
             run = db.get(DetectorRun, entry['run_id'])
             if run is None or run.analysis_id != ctx.analysis_id or not run.raw_output_artefact_id:
@@ -71,6 +74,9 @@ def published_record(ctx) -> dict:
             raw = get_artefact(db, run.raw_output_artefact_id, analysis_id=ctx.analysis_id)
             if selection:
                 record[SPEECH_SELECTION] = {'raw_output_sha256': raw.sha256}
+            if timing:
+                record[TIMING_WINDOWS] = {'raw_output_sha256': raw.sha256,
+                                          'windows_sha256': canonical_hash(entry['details'][TIMING_WINDOWS]['windows'])}
             if scored:
                 record[{'voice': 'voice_checks', 'av-sync': 'av_checks', 'acoustic-context': 'sound_checks'}[family]].append(
                     {'detector_id': entry['detector_id'], 'raw_output_sha256': raw.sha256})

@@ -276,8 +276,14 @@ export interface VideoAVChannel {
   status: VideoChannelStatus; reason: string | null; limitations: string[]; packets: VideoAVPacket[]
   source: AudioEvidenceSet['source'] & { tick_rate?: number; samples_per_tick?: number; video_time_base?: string }
   coverage?: { recorded_windows: number; selected_windows: number; omitted_windows: number; selection: string
-    unsupported_checks: { status: string; reason: string }[] } | null
+    unsupported_checks: { status: string; reason: string }[]
+    timing_windows?: { windows: { status: VideoTimingStatus; speech_ticks: number
+      interval: VideoAVPacket['anchor']['source_timestamp_ranges'][number] }[] }
+  } | null
 }
+export type VideoTimingStatus = 'measured' | 'insufficient_speech' | 'missing_picture_timestamps'
+  | 'insufficient_audio_context' | 'no_face_track' | 'missing_landmarks' | 'track_limit'
+  | 'missing_mouth_input' | 'unchanged_mouth_pixels' | 'flat_mouth_proxy' | 'speaker_unresolved'
 export interface TextSpan { start: number; end: number; text: string }
 export interface DocumentAnchor {
   kind: string; page?: number; paragraph?: number; mime_part?: string; quote_role?: string; extraction?: string

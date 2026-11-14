@@ -81,6 +81,24 @@ const show = (set: VideoEvidenceSet, token = 'signed token', mediaReady = true) 
 afterEach(cleanup)
 
 describe('video v3 nested source-bound evidence', () => {
+  it.each(['not_assessed', 'unavailable'] as const)('shows source ranges and reasons when alignment is %s', (status) => {
+    const set = fixture()
+    const av = set.av!
+    av.status = status
+    av.packets = []
+    av.coverage = { ...av.coverage!, recorded_windows: 0, selected_windows: 0, omitted_windows: 0,
+      timing_windows: { windows: [{
+        status: 'no_face_track', speech_ticks: 16,
+        interval: { start_sample: 16000, end_sample: 32000, source_start_pts: 102400, source_end_pts: 118400, time_base: '1/16000' },
+      }] },
+    }
+    show(set)
+    const coverage = screen.getByRole('region', { name: 'Speech and mouth timing coverage' })
+    expect(within(coverage).getByText(/0 of 1 scheduled one-second windows/)).toBeTruthy()
+    expect(within(coverage).getByText('6.400 s–7.400 s')).toBeTruthy()
+    expect(within(coverage).getByText(/No tracked face was available/)).toBeTruthy()
+  })
+
   it('shares parent media authority and preserves differing source and clip clocks', () => {
     const set = fixture()
     Object.assign(set.audio!, { id: 'foreign-child', analysis_id: 'other-analysis', sha256: 'f'.repeat(64) })

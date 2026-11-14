@@ -10,6 +10,7 @@ from zipfile import ZipFile
 
 from app.detectors.audio.decode import decode_audio, source_ranges, wav_bytes
 from app.evidence.audio_binding import SPEECH_SELECTION
+from app.evidence.av_binding import TIMING_WINDOWS
 from app.evidence.stereo_binding import SCHEMA as STEREO_CONTEXT_SCHEMA
 from app.reports.public_verify import SCHEMA
 
@@ -85,6 +86,17 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("Decoded audio duration disagrees with the recorded coverage limit")
 
     replay_detail = ""
+    if timing := (alignment.get("coverage") or {}).get(TIMING_WINDOWS):
+        from app.detectors.video import lipsync
+
+        speech = lipsync.vad(decoded.pcm).speech
+        for row in timing["windows"]:
+            interval = row["interval"]
+            start, end = interval["start_sample"], interval["end_sample"]
+            if ([interval] != source_ranges(decoded.mapping, start, end)
+                    or row["speech_ticks"] != int(speech[start // lipsync.HOP:end // lipsync.HOP].sum())):
+                raise ValueError("Timing window coverage differs from the original soundtrack")
+        replay_detail += f" Recomputed speech activity and source times for {len(timing['windows'])} timing windows."
     if selection := audio["coverage"].get(SPEECH_SELECTION):
         for row in selection["windows"]:
             if row["source_timestamp_ranges"] != source_ranges(decoded.mapping, row["start_sample"], row["end_sample"]):

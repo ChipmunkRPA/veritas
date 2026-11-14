@@ -54,8 +54,12 @@ def public_result(result: dict) -> dict:
         if native := interpolation.from_result(result):
             source_coverage[interpolation.COMMITMENT] = canonical_hash(native)
     if result.get('kind') == 'video':
+        from app.evidence.av_binding import TIMING_COMMITMENT, TIMING_WINDOWS
         from app.evidence.face_return_coverage import COMMITMENT, from_result
 
+        record = result.get('manifest', {}).get('sampling', {}).get('video_audio_evidence') or {}
+        if timing := record.get(TIMING_WINDOWS):
+            source_coverage[TIMING_COMMITMENT] = timing['windows_sha256']
         if brief_review := from_result(result):
             source_coverage[COMMITMENT] = canonical_hash(brief_review)
         if window_review := face_windows.from_result(result):

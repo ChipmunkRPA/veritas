@@ -45,7 +45,7 @@ export default function VideoNestedEvidenceContent({ set, token, mediaReady, cha
   const avHasCoverage = avCoverage && [avCoverage.recorded_windows, avCoverage.selected_windows, avCoverage.omitted_windows].every(count)
     && Array.isArray(avCoverage.unsupported_checks)
   const showAudio = audioBound && audioHasCoverage && (audio?.status === 'ready' || audio?.status === 'not_assessed')
-  const showAV = avBound && avHasCoverage && (av?.status === 'ready' || av?.status === 'not_assessed')
+  const showAV = avBound && avHasCoverage && (av?.status === 'ready' || av?.status === 'not_assessed' || !!avCoverage.timing_windows)
   return <div data-testid="video-nested-evidence" className="mt-8 space-y-8">
     {channel !== 'av' && <section id="media-evidence-voice" aria-label="Voice evidence from this video" className="border-t border-border pt-6 scroll-mt-20">
       <h3 className="m-0 text-body font-medium">Voice evidence from this video</h3>
@@ -62,7 +62,7 @@ export default function VideoNestedEvidenceContent({ set, token, mediaReady, cha
     {channel !== 'audio' && <section id="media-evidence-timing" aria-label="Audio and picture timing evidence" className="border-t border-border pt-6 scroll-mt-20">
       <h3 className="m-0 text-body font-medium">Audio and picture timing evidence</h3>
       {showAV && av ? <>
-        {av.status === 'not_assessed' && <UnavailableChannel reason={av.reason} />}
+        {av.status !== 'ready' && <UnavailableChannel reason={av.reason} />}
         <VideoAVEvidenceContent set={set} channel={av} token={token} mediaReady={mediaReady} />
         {av.packets.length === 0 && <SourceClock source={av.source} />}
       </>

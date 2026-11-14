@@ -252,6 +252,9 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         <div className="mt-4 space-y-3">
           <EvidencePicture set={set} artifact={packet.artifacts.mouth_hold_waveform} token={token} ready={mediaReady}
             alt="Waveform during the measured mouth-region hold" chart />
+          <p className="m-0 text-caption text-text-muted">{packet.artifacts.mouth_hold_waveform.time_axis === 'source_pts'
+            ? 'The waveform uses the same source clock as the pictures above.'
+            : 'The waveform axis starts from the decoded audio origin. The picture range above uses the source clock.'}</p>
           <EvidenceAudio set={set} artifact={packet.artifacts.mouth_hold_audio} token={token} ready={mediaReady}
             alt="Listen to the measured mouth-region hold" />
         </div>}

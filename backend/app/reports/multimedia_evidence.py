@@ -348,7 +348,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         if sound := packet.get("mouth_hold_sound"):
             from app.detectors.audio.decode import read_wav, wav_bytes
             from app.detectors.video.mouth_hold_sound import measure
-            from app.evidence.audio_packets import _chart
+            from app.evidence.audio_packets import mouth_hold_waveform
 
             audio = document["audio"]["source"]
             pcm = read_wav(_bytes(audio["wav_sha256"], store))
@@ -357,8 +357,8 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                 raise ObjectIntegrityError("Mouth-hold sound differs from the frozen audio measurement")
             start, stop = sound["samples"]
             expected = {mouth_hold_sound.WAV: wav_bytes(pcm[start:stop]),
-                        mouth_hold_sound.WAVEFORM: _chart(pcm, [], start=start, end=stop, selected=(start, stop),
-                                                          scores=False, title=mouth_hold_sound.WAVEFORM_TITLE)}
+                        mouth_hold_sound.WAVEFORM: mouth_hold_waveform(pcm, sound,
+                            time_axis=packet["artifacts"][mouth_hold_sound.WAVEFORM].get("time_axis"))}
             if any(assets[packet["artifacts"][role]["sha256"]] != data for role, data in expected.items()):
                 raise ObjectIntegrityError("Mouth-hold audio or waveform differs from the frozen soundtrack")
     if document.get("version") in NESTED_VIDEO_VERSIONS:
@@ -913,7 +913,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                            if hold else "Sampled frames (not continuous playback)")
                 row["images"] = [plate("contact_sheet", sheet, caption)]
             if waveform := packet["artifacts"].get("mouth_hold_waveform"):
-                row["images"].append(plate("mouth_hold_waveform", waveform, "Mono soundtrack during these measured pictures"))
+                clock = "source time" if waveform.get("time_axis") == "source_pts" else "time since the decoded audio starts"
+                row["images"].append(plate("mouth_hold_waveform", waveform, f"Mono soundtrack during these measured pictures ({clock})"))
             row["window"] = copy.deepcopy(packet.get("window"))
             row["face_interval"] = copy.deepcopy(packet.get("face_interval"))
             row["face_sequence"] = copy.deepcopy(packet.get("face_sequence"))

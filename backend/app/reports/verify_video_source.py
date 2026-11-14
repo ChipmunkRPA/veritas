@@ -459,7 +459,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if sound := local_mouth.get("sound_context"):
             from app.detectors.audio.decode import VIDEO_AUDIO_MAX_SECONDS, decode_audio, wav_bytes
             from app.detectors.video.mouth_hold_sound import measure
-            from app.evidence.audio_packets import _chart
+            from app.evidence.audio_packets import mouth_hold_waveform
 
             decoded_audio = decode_audio(original, source_sha256=digest, max_seconds=VIDEO_AUDIO_MAX_SECONDS,
                                          inspect_stereo=True, retain_stereo=True)
@@ -468,8 +468,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             packet = next(packet for packet in packets if packet["id"] == mouth_local_hold_binding.PACKET_ID)
             start, stop = sound["samples"]
             audio = wav_bytes(decoded_audio.pcm[start:stop])
-            waveform = _chart(decoded_audio.pcm, [], start=start, end=stop, selected=(start, stop),
-                              scores=False, title=mouth_hold_sound.WAVEFORM_TITLE)
+            waveform = mouth_hold_waveform(decoded_audio.pcm, sound,
+                time_axis=packet["artifacts"][mouth_hold_sound.WAVEFORM].get("time_axis"))
             for role, content in ((mouth_hold_sound.WAV, audio), (mouth_hold_sound.WAVEFORM, waveform)):
                 if hashlib.sha256(content).hexdigest() != packet["artifacts"][role]["sha256"]:
                     raise ValueError("The sound clip or waveform differs from the supplied soundtrack")

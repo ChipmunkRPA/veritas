@@ -12,6 +12,8 @@ HOP = 320
 WAV = "mouth_hold_audio"
 WAVEFORM = "mouth_hold_waveform"
 WAVEFORM_TITLE = "Sound during the mouth-region hold"
+SOURCE_CLOCK = "source_pts"
+SOURCE_WAVEFORM_TITLE = "Sound during the mouth-region hold (source time)"
 LIMITATION = ("The mixed soundtrack can include a different speaker, ordinary dubbing or music. "
               "Strong background noise can mask voice-like periodicity. This observation carries zero AI confidence weight.")
 
@@ -73,3 +75,5 @@ def validate(review, packet, audio, time_base):
             or waveform.get("media_type") != "image/png"
             or (waveform.get("width"), waveform.get("height")) != (960, 280)):
         raise ValueError("Mouth-hold sound assets differ from their source interval")
+    if "time_axis" in waveform and waveform["time_axis"] != SOURCE_CLOCK:
+        raise ValueError("Mouth-hold waveform uses an unknown time axis")

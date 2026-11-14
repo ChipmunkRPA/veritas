@@ -630,9 +630,9 @@ def _mouth_hold_packet(db: Session, store: ObjectStore, analysis: Analysis, set_
         a, b = sound["samples"]
         assets[mouth_hold_sound.WAV] = audio_packets._asset(db, store, analysis, set_id, wav_bytes(pcm[a:b]),
             "audio/wav", samples=b - a, sample_rate=mouth_hold_sound.RATE, channels=1)
-        waveform = audio_packets._chart(pcm, [], start=a, end=b, selected=(a, b), scores=False,
-                                       title=mouth_hold_sound.WAVEFORM_TITLE)
-        assets[mouth_hold_sound.WAVEFORM] = audio_packets._asset(db, store, analysis, set_id, waveform, "image/png", width=960, height=280)
+        waveform = audio_packets.mouth_hold_waveform(pcm, sound, time_axis=mouth_hold_sound.SOURCE_CLOCK)
+        assets[mouth_hold_sound.WAVEFORM] = audio_packets._asset(db, store, analysis, set_id, waveform, "image/png",
+            width=960, height=280, time_axis=mouth_hold_sound.SOURCE_CLOCK)
         observation += " " + mouth_hold_sound.observation(sound)
         measurements.extend(mouth_hold_sound.measurements(sound))
         limitations.append(mouth_hold_sound.LIMITATION)

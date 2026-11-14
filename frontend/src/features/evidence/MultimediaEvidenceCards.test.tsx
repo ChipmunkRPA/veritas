@@ -532,7 +532,7 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByRole('link', { name: 'Inspect the recorded hold' })).toBeNull()
   })
 
-  it('links the measured mouth-region hold and shows exact crops before, during and after it', () => {
+  it.each([undefined, 'source_pts'] as const)('shows exact crops and identifies the mouth-hold waveform clock (%s)', (timeAxis) => {
     const set = { ...structuredClone(video), version: 'video-evidence-17' }
     set.picture_hold = { status: 'no_match', frames_scanned: 50, frame_limit: 50, last_frame_index: 49,
       last_stream_time_s: 13.64, last_pts: 13640, time_base: '1/1000', reason: null, packet_id: null,
@@ -542,6 +542,8 @@ describe('ordinary multimedia evidence', () => {
     item.title = 'Mouth-region picture hold'
     item.claim_scope = 'sampled_window'
     item.mouth_local_hold = { frames: [8, 12], box: [110, 86, 24, 18] }
+    item.artifacts.mouth_hold_waveform = { ...item.artifacts[item.frames[0].artifact_refs.original], time_axis: timeAxis }
+    item.artifacts.mouth_hold_audio = { ...item.artifacts[item.frames[0].artifact_refs.original], media_type: 'audio/wav' }
     item.window = { frame_indices: [8, 9, 10, 11], start_pts: 12000, end_pts: 12160,
       time_base: '1/1000', start_stream_s: 12, end_stream_s: 12.16, start_playback_s: 2, end_playback_s: 2.16 }
     item.frames = (['before', 'during', 'after'] as const).map((interval_role, i) => {
@@ -560,6 +562,10 @@ describe('ordinary multimedia evidence', () => {
     for (const role of ['before', 'during', 'after']) expect(measured.getByText(new RegExp(`${role} hold range`))).toBeTruthy()
     expect(measured.getAllByAltText(/exact original video frame/)).toHaveLength(3)
     expect(measured.getAllByAltText(/exact measured mouth region/)).toHaveLength(3)
+    expect(measured.getByAltText('Waveform during the measured mouth-region hold')).toBeTruthy()
+    expect(measured.getByText(timeAxis === 'source_pts'
+      ? /same source clock as the pictures above/
+      : /waveform axis starts from the decoded audio origin/)).toBeTruthy()
     expect(measured.queryByAltText(/source face crop for context/)).toBeNull()
     fireEvent.click(measured.getByRole('button', { name: 'Go to frame 8 in playback' }))
     expect(screen.getByText(/Selected frame 8 · source 12\.000 s · player 2\.000 s/)).toBeTruthy()

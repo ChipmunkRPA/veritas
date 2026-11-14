@@ -19,3 +19,5 @@ The diagnostic reused nine held, rights-reviewed Wikitongues recordings from the
 | Natural quiet interval with strong added noise | 0/9 |
 
 An isolated local checkout compared two videos with identical pictures and audio outside **3.300–3.700 s**. The quiet version had speech elsewhere in the clip and measured **0/19** periodic blocks in the held interval. The inserted-speech version measured **19/19**. Chrome displayed the waveform, playable audio, and three matching source images and crops. The PDF and JSON retained the same interval and measurement. Signed replay verified both the WAV and waveform against the original video. [Local comparison counts](evaluation-panels/video-mouth-hold-sound-2026-11-13.json)
+
+A second checkout shifted the entire audio stream origin by **500 ms** while preserving video timestamps. The same **3.300–3.700 s** source interval selected decoded audio samples **44,800–51,200**. The waveform showed the original source clock, the JSON kept both clocks, and the PDF, Chrome waveform and signed replay verified the resulting excerpt. Older signed packages still replay their original waveform bytes.

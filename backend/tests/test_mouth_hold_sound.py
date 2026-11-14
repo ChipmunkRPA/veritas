@@ -5,6 +5,7 @@ import pytest
 
 from app.detectors.video.mouth_hold_sound import measure
 from app.evidence import mouth_hold_sound as binding
+from app.evidence.audio_packets import mouth_hold_waveform
 
 
 def test_mouth_hold_sound_binds_local_samples_and_rejects_unverified_clock():
@@ -53,3 +54,26 @@ def test_mouth_hold_sound_binds_local_samples_and_rejects_unverified_clock():
     assert measure(wave, broken, review, review["time_base"]) is None
     with pytest.raises(ValueError, match="continuous source coverage"):
         binding.validate(review, packet, broken, review["time_base"])
+    trailing = {**mapping, "timeline": [{**mapping["timeline"][0], "source_pts": first + 1}]}
+    assert measure(wave, trailing, review, review["time_base"]) is None
+
+
+def test_mouth_hold_waveform_keeps_archived_axis_and_matches_nonzero_audio_origin(monkeypatch):
+    from PIL import ImageDraw
+
+    painter = ImageDraw.ImageDraw.text
+    labels = []
+
+    def remember(self, xy, text, *args, **kwargs):
+        labels.append(text)
+        return painter(self, xy, text, *args, **kwargs)
+
+    monkeypatch.setattr(ImageDraw.ImageDraw, "text", remember)
+    pcm = np.zeros(60_000)
+    sound = {"samples": [44_800, 51_200], "source_pts": [52_800, 59_200]}
+    legacy = mouth_hold_waveform(pcm, sound, time_axis=None)
+    assert labels == [binding.WAVEFORM_TITLE, "2.80s", "2.90s", "3.00s", "3.10s", "3.20s"]
+    labels.clear()
+    source = mouth_hold_waveform(pcm, sound, time_axis=binding.SOURCE_CLOCK)
+    assert labels == [binding.SOURCE_WAVEFORM_TITLE, "3.300s", "3.400s", "3.500s", "3.600s", "3.700s"]
+    assert legacy != source

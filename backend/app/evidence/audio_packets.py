@@ -247,7 +247,8 @@ def _windows(store: ObjectStore, result: dict[str, Any], record: dict[str, Any],
 
 
 def _chart(pcm: np.ndarray, windows: list[dict[str, Any]], *, start: int, end: int,
-           selected: tuple[int, int] | None, scores: bool, title: str | None = None) -> bytes:
+           selected: tuple[int, int] | None, scores: bool, title: str | None = None,
+           source_offset: int = 0, time_precision: int = 2) -> bytes:
     im = Image.new("RGB", (960, 280), (250, 249, 245))
     draw = ImageDraw.Draw(im)
     x0, y0, x1, y1 = 58, 40, 938, 232
@@ -278,7 +279,8 @@ def _chart(pcm: np.ndarray, windows: list[dict[str, Any]], *, start: int, end: i
                 draw.line((x0 + i, mid - float(chunk.max()) * 90, x0 + i, mid - float(chunk.min()) * 90), fill=(45, 100, 78))
     for fraction in (0, 0.25, 0.5, 0.75, 1):
         x = x0 + fraction * (x1 - x0)
-        draw.text((x - 12, y1 + 10), f"{(start + fraction * (end - start)) / SAMPLE_RATE:.2f}s", fill=(50, 70, 60))
+        seconds = (source_offset + start + fraction * (end - start)) / SAMPLE_RATE
+        draw.text((x - 12, y1 + 10), f"{seconds:.{time_precision}f}s", fill=(50, 70, 60))
     buffer = io.BytesIO()
     im.save(buffer, "PNG")
     return buffer.getvalue()
@@ -292,6 +294,20 @@ def _asset(db: Session, store: ObjectStore, analysis: Analysis, set_id: str, dat
     ext = "wav" if media_type == "audio/wav" else "png"
     return {"sha256": art.sha256, "media_type": media_type, **metadata,
             "url": f"/api/v2/analyses/{analysis.id}/evidence-packets/{set_id}/assets/{art.sha256}.{ext}"}
+
+
+def mouth_hold_waveform(pcm: np.ndarray, sound: dict, *, time_axis: str | None) -> bytes:
+    from app.evidence import mouth_hold_sound
+
+    start, stop = sound["samples"]
+    if time_axis is None:
+        return _chart(pcm, [], start=start, end=stop, selected=(start, stop), scores=False,
+                      title=mouth_hold_sound.WAVEFORM_TITLE)
+    if time_axis != mouth_hold_sound.SOURCE_CLOCK:
+        raise ValueError("Unsupported mouth-hold waveform time axis")
+    return _chart(pcm, [], start=start, end=stop, selected=(start, stop), scores=False,
+                  title=mouth_hold_sound.SOURCE_WAVEFORM_TITLE, source_offset=sound["source_pts"][0] - start,
+                  time_precision=3)
 
 
 def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result: dict[str, Any]) -> dict[str, Any]:

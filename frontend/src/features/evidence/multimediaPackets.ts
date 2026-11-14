@@ -7,7 +7,7 @@ export interface EvidenceAsset {
   width?: number; height?: number; samples?: number; sample_rate?: number; channels?: number
   frame_count?: number; time_base?: string; pts?: number[]; durations?: number[]; duration_ticks?: number; duration_s?: number
   codec?: string; has_audio?: boolean
-  role?: string; page?: number; source_bbox?: number[]
+  role?: string; page?: number; source_bbox?: number[]; time_axis?: 'source_pts'
 }
 export interface EvidenceRef { id: string; display_id: string | null }
 export interface EvidenceMeasure { label: string; value: number; unit: string }

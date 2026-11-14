@@ -95,6 +95,24 @@ def test_second_avc_range_keeps_exact_gap_and_distinct_review_scope():
         face_return_binding.validate_second(dict(second, shortlist_edges=[71]), primary)
 
 
+def test_second_pane_range_requires_same_track_and_separate_native_ticks():
+    from app.evidence.face_short_proposal_binding import PANE_TRACK_AVC_METHOD, SECOND_PANE_TRACK_AVC_METHOD
+
+    shared = dict(time_base="1/30000", pane="left", face_detection_boxes=[{"frame_index": 54}],
+                  scheduled_frame_indices=[54, 71], shortlist_edges=[61, 71],
+                  shortlist_anchor_indices=[54], frame_inputs=[], scene_frame_inputs=[])
+    primary = dict(shared, method=PANE_TRACK_AVC_METHOD, start_pts=53000, end_pts=59000)
+    second = dict(shared, method=SECOND_PANE_TRACK_AVC_METHOD, start_pts=62000, end_pts=68000)
+    face_return_binding.validate_second(second, primary)
+    with pytest.raises(ValueError, match="too close"):
+        face_return_binding.validate_second(dict(second, start_pts=61999), primary)
+    for changed in (dict(pane="right"), dict(face_detection_boxes=[])):
+        with pytest.raises(ValueError, match="same side and face detections"):
+            face_return_binding.validate_second(dict(second, **changed), primary)
+    with pytest.raises(ValueError, match="same native measurements"):
+        face_return_binding.validate_second(dict(second, shortlist_edges=[71]), primary)
+
+
 def test_second_dense_range_reuses_first_without_publishing_a_cut():
     base = table_for(25)
     table = replace(base, pts=base.pts[:120], pict_types=base.pict_types[:120],

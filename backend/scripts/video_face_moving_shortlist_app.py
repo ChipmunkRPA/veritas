@@ -21,13 +21,15 @@ from scripts.video_short_return_encoded_app import (
 )
 
 
-def run(bank, output, *, primary_track=False, position_track=False, pane_track=False):
+def run(bank, output, *, primary_track=False, position_track=False, pane_track=False, second_pane=False):
     configure(output, ROOT)
+    pane_track |= second_pane
     os.environ.update(
         BASE_FLAGS, VERITAS_VIDEO_FACE_SECOND_AVC_REVIEW="true", VERITAS_VIDEO_FACE_MOVING_AVC_REVIEW="false",
         VERITAS_VIDEO_FACE_PRIMARY_TRACK_AVC_REVIEW="false",
         VERITAS_VIDEO_FACE_POSITION_TRACK_AVC_REVIEW=str(pane_track).lower(),
-        VERITAS_VIDEO_FACE_PANE_TRACK_AVC_REVIEW="false",
+        VERITAS_VIDEO_FACE_PANE_TRACK_AVC_REVIEW=str(second_pane).lower(),
+        VERITAS_VIDEO_FACE_SECOND_PANE_AVC_REVIEW="false",
     )
 
     import cv2
@@ -44,6 +46,7 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
         PANE_TRACK_AVC_METHOD,
         POSITION_TRACK_AVC_METHOD,
         PRIMARY_TRACK_AVC_METHOD,
+        SECOND_PANE_TRACK_AVC_METHOD,
     )
     from app.main import app
     from app.reports.verify import verify_package
@@ -62,7 +65,11 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
     stub = PaymentStub()
     service._stripe = stub
     roster = {row["file"]: row for row in json.loads((bank / "media.json").read_text())["rows"]}
-    if pane_track:
+    if second_pane:
+        cases = ("g2-swaps_left.mp4", "g3-swaps_right.mp4", "g1-swaps_left.mp4", "g2-ordinary_speaker_cut.mp4")
+        serving_mode = "video_face_second_pane_avc_review"
+        review_method, packet_version = SECOND_PANE_TRACK_AVC_METHOD, "video-evidence-32"
+    elif pane_track:
         cases = ("g1-swaps_left.mp4", "g1-swaps_right.mp4", "g1-ordinary_speaker_cut.mp4")
         serving_mode = "video_face_pane_track_avc_review"
         review_method, packet_version = PANE_TRACK_AVC_METHOD, "video-evidence-31"
@@ -111,6 +118,10 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                 scan(exported.decode())
                 if not recovered:
                     results[case] = {"ranges_kept": len(existing), "additional_ranges": 0}
+                    if second_pane:
+                        assert len(existing) == int(case == cases[2])
+                        followup = evidence["coverage"]["brief_face_review"]["passes"].get("second_avc")
+                        assert (followup or {}).get("status") == ("no_distinct_range" if existing else None)
                     if position_track:
                         coverage = evidence["coverage"]["brief_face_review"]["passes"]["bounded_proposal"]
                         results[case]["bounded_scan"] = coverage["status"]
@@ -126,7 +137,21 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                 else:
                     assert interval == row["truth"][1]
                 anchors = {role: change["anchors"][role] for role in ("before", "during", "after")}
-                images, _ = native_frames(client, packet, source, row, output, representatives=anchors)
+                case_output = output / Path(case).stem if pane_track else output
+                case_output.mkdir(exist_ok=True)
+                images, _ = native_frames(client, packet, source, row, case_output, representatives=anchors)
+                primary_images = set()
+                if second_pane:
+                    [primary] = [r for r in evidence["packets"] if r.get("semantics") == PANE_TRACK_AVC_METHOD]
+                    [first] = existing
+                    first_interval = [first["start_frame_index"], first["end_frame_index"]]
+                    assert interval != first_interval and sorted([interval, first_interval]) == sorted(row["truth"])
+                    first_folder = case_output / "primary"
+                    first_folder.mkdir()
+                    primary_images, _ = native_frames(
+                        client, primary, source, row, first_folder,
+                        representatives={role: first["anchors"][role] for role in ("before", "during", "after")},
+                    )
                 report = body(client.post(f"{route}/reports", json={"profile": "standard"}))
                 report = wait(client, f"/api/v2/reports/{report['id']}", timeout=120)
                 pdf = fetch(client, f"/api/v2/reports/{report['id']}/file")
@@ -151,7 +176,10 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                         assert f"followed the face on the {change['pane']} side" in words
                         for label, count in zip(("Start", "End"), change["off_face_motion_tiles"], strict=True):
                             assert f"{label} abrupt changes outside the face on the {change['pane']} {count}" in words
-                    assert images <= {
+                    if second_pane:
+                        assert "Additional brief face change on the same side" in words
+                        assert f"brief face-change range spans {first['start_stream_s']:.3f}-{first['end_stream_s']:.3f} s" in words
+                    assert images | primary_images <= {
                         image_signature(document.extract_image(xref)["image"])
                         for xref in {image[0] for page in document for image in page.get_images(full=True)}
                     }
@@ -162,8 +190,6 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                     )
                 )
                 package = wait(client, f"/api/v2/packages/{package['id']}", timeout=120)
-                case_output = output / Path(case).stem if pane_track else output
-                case_output.mkdir(exist_ok=True)
                 signed = case_output / "signed-package.zip"
                 signed.write_bytes(fetch(client, f"/api/v2/packages/{package['id']}/file"))
                 signer = body(client.get("/api/v2/instance/public-key"))
@@ -178,6 +204,7 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                     item.ok
                     and item.name == "original video frames"
                     and "bounded face shortlist" in item.detail
+                    and (not second_pane or "off-face motion counts on the tracked side at both boundaries of each range" in item.detail)
                     for item in replay.checks
                 ), replay.as_dict()
                 with ZipFile(signed) as archive:
@@ -200,6 +227,12 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                 if pane_track:
                     results[case]["side"] = change["pane"]
                     results[case]["off_face_motion_tiles"] = change["off_face_motion_tiles"]
+                if second_pane:
+                    results[case]["primary_frames"] = first_interval
+                    results[case]["primary_exhibit_frames"] = [
+                        first["anchors"][role] for role in ("before", "during", "after")
+                    ]
+                    results[case]["exact_source_images"] += len(primary_images)
     receipt = {
         "cases": results,
         "simulated_paid_runs": 2 * len(cases),
@@ -217,6 +250,7 @@ if __name__ == "__main__":
     mode.add_argument("--primary-track", action="store_true")
     mode.add_argument("--position-track", action="store_true")
     mode.add_argument("--pane-track", action="store_true")
+    mode.add_argument("--second-pane", action="store_true")
     args = parser.parse_args()
     run(args.bank.resolve(), args.output.resolve(), primary_track=args.primary_track,
-        position_track=args.position_track, pane_track=args.pane_track)
+        position_track=args.position_track, pane_track=args.pane_track, second_pane=args.second_pane)

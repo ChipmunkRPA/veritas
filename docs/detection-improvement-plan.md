@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Second face-change range on the same side](video-face-second-pane-2026-11-14.md)
+  raised exact interval coverage from 24/48 to 46/48 in the staged
+  split-screen panel. Forty ordinary controls gained no flags. The
+  opt-in trial shows source times, frames, crops and measurements.
+
 - [Look-alike letters in uploaded text](document-invisible-characters-2026-11-14.md#look-alike-letters)
   adds source positions for selected mixed-script characters in TXT,
   Word and mapped email. The observation carries zero AI-authorship

@@ -424,7 +424,7 @@ describe('ordinary multimedia evidence', () => {
 
   it.each([['video-evidence-21', 'face-short-return/9'], ['video-evidence-28', 'face-short-return/15'],
     ['video-evidence-29', 'face-short-return/16'], ['video-evidence-30', 'face-short-return/17'],
-    ['video-evidence-31', 'face-short-return/18']])(
+    ['video-evidence-31', 'face-short-return/18'], ['video-evidence-32', 'face-short-return/19']])(
     'distinguishes native motion inputs from face samples in %s', (version, method) => {
     const set = { ...structuredClone(video), version }
     const packet = set.packets[0]

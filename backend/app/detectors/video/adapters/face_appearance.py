@@ -920,16 +920,42 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
             rank = (*selected[0], side)
             if best is None or rank < best[0]:
                 _, start, end = selected[0]
-                best = (rank, {**record(selected, proposal.PANE_TRACK_AVC_METHOD),
-                               "pane": side, "off_face_motion_tiles": [counts[start], counts[end]],
-                               "face_detection_boxes": [
-                                   {"frame_index": i, "boxes": [list(face.box()) for face in detections[i]]}
-                                   for i in planned
-                               ]}, faces)
+                value = {
+                    **record(selected, proposal.PANE_TRACK_AVC_METHOD),
+                    "pane": side, "off_face_motion_tiles": [counts[start], counts[end]],
+                    "face_detection_boxes": [
+                        {"frame_index": i, "boxes": [list(face.box()) for face in detections[i]]}
+                        for i in planned
+                    ],
+                }
+                best = rank, value, faces, counts, stable
         if best is not None:
-            _, value, faces = best
+            _, value, faces, counts, stable = best
+            planned = value["scheduled_frame_indices"]
             details["face_return"] = value
-            coverage.update(status="localized", reason=None, scheduled_frames=len(value["scheduled_frame_indices"]))
+            coverage.update(status="localized", reason=None, scheduled_frames=len(planned))
+            if settings.video_face_second_pane_avc_review:
+                edges = value["shortlist_edges"]
+                anchor_indices = value["shortlist_anchor_indices"]
+                followup = {
+                    "status": "unassessed", "reason": "time_budget", "pixel_frames": len(reduced),
+                    "scheduled_frames": len(planned), "measured_face_frames": len(faces),
+                }
+                details["face_second_avc_check"] = followup
+                selected = face_short_proposal.select(
+                    edges, faces, reduced, stop.check, distinct_from_first(value),
+                    durations=proposal.SECOND_AVC_DURATIONS, extra_edge_check=stable,
+                )
+                stop.check("second pane face proposal")
+                if selected is not None:
+                    _, start, end = selected[0]
+                    details["face_return_secondary"] = {
+                        **record(selected, proposal.SECOND_PANE_TRACK_AVC_METHOD),
+                        "pane": value["pane"],
+                        "off_face_motion_tiles": [counts[start], counts[end]],
+                        "face_detection_boxes": value["face_detection_boxes"],
+                    }
+                followup.update(status="localized" if selected is not None else "no_distinct_range", reason=None)
         elif best_coverage[1]:
             coverage.update(status="no_distinct_range" if measured_pair else "unassessed",
                             reason=None if measured_pair else "insufficient_face_track_context",
@@ -1055,6 +1081,9 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
              *(("The optional side-by-side review measures each face separately and checks motion outside the face. "
                 "Each side schedules up to 84 pictures within the shared time budget.",)
                if settings.video_face_short_avc_review and settings.video_face_pane_track_avc_review else ()),
+             *(("The optional second range on the selected side reuses the same pictures and face measurements.",)
+               if settings.video_face_short_avc_review and settings.video_face_pane_track_avc_review
+               and settings.video_face_second_pane_avc_review else ()),
              *(("The enabled overlapping review reads 240 native pictures and compares three bounded face input sets.",)
                if settings.video_face_short_window_review or settings.video_face_short_carrier_review else ()),
              *(("The enabled cut context reads up to 77 native pictures and detects at most three face boxes.",)

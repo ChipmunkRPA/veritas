@@ -63,6 +63,7 @@ from app.evidence.video_packet_versions import (
     PRIMARY_TRACK_AVC_PROPOSAL_VERSION,
     SECOND_AVC_PROPOSAL_VERSION,
     SECOND_HD_FACE_VERSION,
+    SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION,
     SECOND_SHORT_FACE_VERSION,
     SHORT_AVC_PROPOSAL_VERSION,
     SHORT_CARRIER_VERSION,
@@ -190,7 +191,7 @@ def _verify_paired_motion(record, reduced, *, proposal=False) -> None:
                      else face_short_proposal.shortlist(reduced, list(anchors.values()), lambda _: None))
         if shortlist != record["shortlist_edges"]:
             raise ValueError("The original video does not reproduce its bounded face shortlist")
-        if record["method"] == face_short_proposal_binding.PANE_TRACK_AVC_METHOD:
+        if record["method"] in face_short_proposal_binding.PANE_METHODS:
             edges = (record["start_frame_index"], record["end_frame_index"])
             counts = [face_short_proposal.pane_motion(i, reduced, boxes[i-1], record["pane"]) for i in edges]
             if counts != record["off_face_motion_tiles"]:
@@ -251,7 +252,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     source = evidence["source"]
     encoding = None
     delivery = None
-    second_avc = evidence["version"] == SECOND_AVC_PROPOSAL_VERSION
+    second_avc = evidence["version"] in {SECOND_AVC_PROPOSAL_VERSION, SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION}
     first_return = next((packet["face_return"] for packet in evidence["packets"] if packet.get("face_return")), {})
     avc_with_guarded_first = second_avc and first_return.get("method") == GUARDED_720P30_METHOD
     guarded_codec = evidence["version"] in {
@@ -304,7 +305,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError("The original video differs from its brief WebM face-review source profile")
     if evidence["version"] in {SHORT_AVC_PROPOSAL_VERSION, SECOND_AVC_PROPOSAL_VERSION, MOVING_AVC_PROPOSAL_VERSION,
                                PRIMARY_TRACK_AVC_PROPOSAL_VERSION, POSITION_TRACK_AVC_PROPOSAL_VERSION,
-                               PANE_TRACK_AVC_PROPOSAL_VERSION}:
+                               PANE_TRACK_AVC_PROPOSAL_VERSION, SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION}:
         delivery = probe_container(original, include_codec_tag=True)
         encoding = delivery.get("codec"), delivery.get("pix_fmt")
         if not face_short_proposal_binding.avc_source(table, (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag")),
@@ -553,7 +554,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             + (" Recomputed the bounded face shortlist and both near-head motion boundaries for each reported proposal."
                if second_avc else " Recomputed the bounded face shortlist and both near-head motion boundaries."
                if proposal_records else "")
-            + (" Recomputed off-face motion counts on the tracked side at both boundaries."
+            + (" Recomputed off-face motion counts on the tracked side at both boundaries of each range."
+               if evidence["version"] == SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION else
+               " Recomputed off-face motion counts on the tracked side at both boundaries."
                if evidence["version"] == PANE_TRACK_AVC_PROPOSAL_VERSION else "")
             + (" Recomputed each carrier-qualified window shortlist and both native face boundaries." if carrier_windows and window_records else "")
             + (" Recomputed each overlapping window shortlist and both native face boundaries." if windowed and window_records else "")

@@ -27,6 +27,11 @@ recomputes the published operating points and before, during, and after
 evidence ranges for short timing hypotheses. It includes unchanged,
 ordinary processing, constant-offset and synchronized controls.
 
+The [second split-screen face range replay](video-face-second-pane-2026-11-14.md#try-and-replay)
+checks paired outcomes and source clocks for two nearby edits on one
+side. Both local ranges can also be verified from a signed app export
+and its original MP4.
+
 The [720p soundtrack cadence replay](video-soundtrack-cadence-2026-11-14.md#replay)
 recounts results for 24 and 25 fps. It checks that both signed shifts
 use distinct audio from the untouched reference and includes separate

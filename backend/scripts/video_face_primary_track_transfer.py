@@ -43,7 +43,8 @@ def inputs(args):
     return [(case, *paths[digest]) for digest, case in selected.items()]
 
 
-def measure(path, item, detector, recognizer, earlier, *, alternate_track=False, split_track=False):
+def measure(path, item, detector, recognizer, earlier, *, alternate_track=False, split_track=False,
+            second_pane_range=False):
     import cv2
 
     from app.detectors.image.faces import detect_faces
@@ -204,6 +205,20 @@ def measure(path, item, detector, recognizer, earlier, *, alternate_track=False,
                                       "complete_pair": face_short_proposal.has_measurable_pair(
                                           edges, measured, proof.SECOND_AVC_DURATIONS),
                                       "pane_changes": [[i, count] for i, count in sorted(pane_changes.items())]}
+            if second_pane_range and guarded_record:
+                a, b = guarded_record["frames"]
+
+                def distinct(start, end, a=a, b=b):
+                    return excluded(start, end) or max(a - end, start - b) < 3
+
+                another = face_short_proposal.select(
+                    edges, measured, reduced, check, distinct, durations=proof.SECOND_AVC_DURATIONS,
+                    extra_edge_check=pane_stable,
+                )
+                if another:
+                    saved = saved_proposal(another, measured)
+                    saved["pane_tiles"] = [pane_changes[i] for i in saved["frames"]]
+                    out[name + "_guarded"]["second"] = saved
         if alternate_track or split_track:
             out[name]["complete_pair"] = face_short_proposal.has_measurable_pair(
                 edges, measured, proof.SECOND_AVC_DURATIONS,

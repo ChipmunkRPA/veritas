@@ -115,8 +115,8 @@ def validate(document):
     record = (document.get("coverage") or {}).get(KEY)
     returns = [packet["face_return"] for packet in document["packets"]
                if packet.get("face_return") and packet["face_return"]["method"] not in {windows.METHOD,carriers.METHOD}]
-    proposed = [item for item in returns if item["method"] in proposal.METHODS - {proposal.SECOND_AVC_METHOD}]
-    second = [item for item in returns if item["method"] == proposal.SECOND_AVC_METHOD]
+    proposed = [item for item in returns if item["method"] in proposal.METHODS - proposal.SECOND_METHODS]
+    second = [item for item in returns if item["method"] in proposal.SECOND_METHODS]
     if proposed and (record is None or BOUNDED not in record["passes"]):
         raise ValueError("Brief face proposal is missing its measured coverage")
     if second and (record is None or SECOND_AVC not in record["passes"]):

@@ -18,13 +18,17 @@ MOVING_AVC_METHOD = "face-short-return/15"
 PRIMARY_TRACK_AVC_METHOD = "face-short-return/16"
 POSITION_TRACK_AVC_METHOD = "face-short-return/17"
 PANE_TRACK_AVC_METHOD = "face-short-return/18"
+SECOND_PANE_TRACK_AVC_METHOD = "face-short-return/19"
 AVC_ENCODING = ("h264", "yuv420p", "avc1")
 SOURCE_PROFILES = {METHOD: (paired.ENCODING, "mp4"), WEBM_METHOD: (WEBM_ENCODING, "webm"),
                    AVC_METHOD: (AVC_ENCODING, "mp4"), SECOND_AVC_METHOD: (AVC_ENCODING, "mp4"),
                    MOVING_AVC_METHOD: (AVC_ENCODING, "mp4"), PRIMARY_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"),
-                   POSITION_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"), PANE_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4")}
+                   POSITION_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"), PANE_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"),
+                   SECOND_PANE_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4")}
 METHODS = frozenset(SOURCE_PROFILES)
-TRACK_METHODS = frozenset({PRIMARY_TRACK_AVC_METHOD, POSITION_TRACK_AVC_METHOD, PANE_TRACK_AVC_METHOD})
+PANE_METHODS = frozenset({PANE_TRACK_AVC_METHOD, SECOND_PANE_TRACK_AVC_METHOD})
+SECOND_METHODS = frozenset({SECOND_AVC_METHOD, SECOND_PANE_TRACK_AVC_METHOD})
+TRACK_METHODS = PANE_METHODS | {PRIMARY_TRACK_AVC_METHOD, POSITION_TRACK_AVC_METHOD}
 MOVING_METHODS = TRACK_METHODS | {MOVING_AVC_METHOD}
 POINT = 0.10
 ANCHOR_SAMPLES = tuple(range(4, 120, 10))
@@ -75,7 +79,7 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     else:
         clock = table_pts is None or exact_clock(base, table_pts, first_pts)
     extra = {"face_detection_boxes"} if record["method"] in TRACK_METHODS else set()
-    is_pane = record["method"] == PANE_TRACK_AVC_METHOD
+    is_pane = record["method"] in PANE_METHODS
     if is_pane:
         extra.update(("pane", "off_face_motion_tiles"))
     require(
@@ -125,7 +129,7 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
         and stop in edges
         and type(start) is int
         and type(stop) is int
-        and stop - start in (SECOND_AVC_DURATIONS if record["method"] in MOVING_METHODS | {SECOND_AVC_METHOD} else DURATIONS),
+        and stop - start in (SECOND_AVC_DURATIONS if record["method"] in MOVING_METHODS | SECOND_METHODS else DURATIONS),
         "Brief face proposal has an invalid edge shortlist",
     )
     planned = face_schedule(edges)

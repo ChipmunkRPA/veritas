@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Exact likelihood on missed writing passages](writing-missed-passage-transfer-2026-11-14.md)
+  found useful locations in 62 of 132 held rewrites when either proxy
+  could flag, up from 22 with the classifier alone. Genuine flags rose
+  from 21 to 58 of 66. None of the candidates recovered the 16 cases that
+  both proxies missed across two panels. The app now distinguishes no
+  selected passages from no recorded local writing evidence.
+
 - [Exact focus inside an existing writing finding](writing-focus-inside-context-2026-11-14.md)
   added no correct locations on 34 new Qwen and GPT-5.4 rewrites.
   The app keeps the scored context. New local reports explain why core

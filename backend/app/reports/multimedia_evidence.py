@@ -733,9 +733,17 @@ def _coverage(kind: str, document: dict) -> str:
         if coverage.get("decode_limit_reached"):
             summary += " The decoding limit was reached; later audio was not checked."
         return summary
-    summary = f"{coverage.get('scored_windows', 0)} scored contexts; {coverage.get('candidate_spans', 0)} candidate passages."
-    if not coverage.get("email"):
-        summary += f" {len(coverage.get('unmapped_pages') or [])} source pages have no mapped text."
+    contexts = coverage.get("scored_windows", 0)
+    candidates = coverage.get("candidate_spans", 0)
+    if contexts:
+        summary = f"Recorded {contexts} scored {'context' if contexts == 1 else 'contexts'}."
+        summary += (f" Selected {candidates} candidate {'passage' if candidates == 1 else 'passages'} for review."
+                    if candidates else " The writing checks selected no passages for review. AI editing may still be present.")
+    else:
+        summary = "No local writing responses were recorded."
+    if unmapped := coverage.get("unmapped_pages"):
+        qualifier = "source page has" if len(unmapped) == 1 else "source pages have"
+        summary += f" {len(unmapped)} {qualifier} no mapped text."
     partial_count = len(coverage.get("partially_checked_pages") or [])
     if partial_count:
         page_count = "1 source page has" if partial_count == 1 else f"{partial_count} source pages have"

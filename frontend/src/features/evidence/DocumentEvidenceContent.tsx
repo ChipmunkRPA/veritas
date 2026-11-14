@@ -265,6 +265,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const matched = set.coverage?.matched_context_review
   const writingAgreement = set.coverage?.writing_second_check
   const writingChecks = set.coverage?.writing_check_coverage
+  const scoredWindows = set.coverage?.scored_windows
   const tracked = set.coverage?.word_tracked_changes
   const selectablePages = [...new Set(writingAgreement?.pdf_spans?.map((span) => span.page) ?? [])]
   const usesOcr = ocrPages.some((page) => page.status === 'extracted') || set.packets.some((packet) => packet.anchors.some((anchor) => anchor.extraction === 'ocr'))
@@ -409,8 +410,12 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         })}</ul>}
     </section>}
     <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
-      <p className="m-0">{set.coverage?.scored_windows != null ? `${set.coverage.scored_windows} scored context window(s) were recorded.` : 'Exact scored-context coverage is unavailable.'}
-        {' '}The marked ranges show the text behind the recorded measurements. The responses do not determine the origin of individual words.</p>
+      <p className="m-0">{scoredWindows == null ? 'Exact scored-context coverage is unavailable.'
+        : scoredWindows === 0 ? 'No local writing responses were recorded.'
+        : `Recorded ${scoredWindows} scored ${scoredWindows === 1 ? 'context' : 'contexts'}.`}
+        {!!scoredWindows && set.coverage?.candidate_spans === 0
+          && ' The writing checks selected no passages for review. AI editing may still be present.'}
+        {set.packets.length > 0 && ' The marked ranges show the text behind the recorded measurements. The responses do not determine the origin of individual words.'}</p>
       {matched && <p className="mt-2 mb-0">Short-passage review selected {matched.selected_sentences} of {matched.eligible_sentences} eligible sentences. This evidence has zero weight in the overall assessment.</p>}
       {unmapped.length > 0 && <p className="mt-2 mb-0">Pages without mapped text: {unmapped.join(', ')}. Those pages have not been cleared.</p>}
       {partialPages.length > 0 && <>

@@ -59,6 +59,16 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByRole('region', { name: 'Passages to inspect' })).toBeNull()
   })
 
+  it('distinguishes measured text with no selected passage from missing local evidence', () => {
+    const { rerender } = show({ ...document, packets: [], coverage: { scored_windows: 2, candidate_spans: 0 } })
+    expect(screen.getByText(/Recorded 2 scored contexts.*AI editing may still be present/)).toBeTruthy()
+    rerender(<MemoryRouter><MultimediaEvidenceContent set={{
+      ...document, packets: [], coverage: { scored_windows: 0, candidate_spans: 0 },
+    }} token="signed token" mediaReady /></MemoryRouter>)
+    expect(screen.getByText('No local writing responses were recorded.')).toBeTruthy()
+    expect(screen.queryByText(/The writing checks selected no passages/)).toBeNull()
+  })
+
   it.each([
     [{ kind: 'docx', paragraph_index: 0, body_path: [0] }, /Word body paragraph 1/],
     [{ kind: 'email', mime_part: '1.2' }, /decoded email MIME part 1\.2/],

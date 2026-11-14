@@ -176,6 +176,19 @@ def test_writing_check_reasons_use_safe_enumerated_values():
         document_check_coverage.commitment(record)
 
 
+@pytest.mark.parametrize(("scores", "message"), [
+    ((.2, .1, .15), "The writing checks selected no passages for review. AI editing may still be present."),
+    ((), "No local writing responses were recorded."),
+])
+def test_report_distinguishes_unflagged_passages_from_missing_local_evidence(packet_factory, scores, message):
+    from app.reports.multimedia_evidence import _coverage
+
+    db, store, analysis, result, _, _ = packet_factory(scores=scores)
+    evidence = build_packet_set(db, analysis, store, result)
+    assert evidence["coverage"]["candidate_spans"] == 0
+    assert message in _coverage("document", evidence)
+
+
 def test_short_email_maps_opposing_context_only_and_unassessed_quote_without_cards(packet_factory):
     body = "Please send the agenda. The date changed.\n\n> This was in the old message."
     db, store, analysis, result, decoded, _ = packet_factory(".eml", scores=(.2,), text=body)

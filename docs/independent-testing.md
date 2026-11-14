@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [missed writing passage replay](writing-missed-passage-transfer-2026-11-14.md#independent-replay)
+rebuilds genuine-only operating points and recounts which edits escaped
+both local writing checks. It uses the public numeric receipt and
+standard-library Python. An Apple GPU is needed only for native inference.
+
 The [writing focus replay](writing-focus-inside-context-2026-11-14.md#replay)
 recounts three ways of narrowing an existing context finding. It includes
 held Qwen3-8B and full GPT-5.4 rewrites and paired genuine source text.

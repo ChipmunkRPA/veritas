@@ -30,6 +30,7 @@ from app.evidence import (
     document_paragraph_priority,
     document_passage_coverage,
     document_passage_position,
+    document_pdf_visibility,
     document_percentage_consistency,
     document_repeat,
     document_scope,
@@ -329,6 +330,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
     try:
         document_repeat.validate(document)
         document_percentage_consistency.validate(document)
+        document_pdf_visibility.validate(document)
         document_matched_context.validate(document)
         document_paragraph_priority.validate(document)
         document_passage_coverage.validate(document)
@@ -513,6 +515,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 "omitted_windows": max(0, len(candidates) - len(selected)), "limitations": []}
     if partially_checked := decoded["meta"].get("partially_checked_pages"):
         document["coverage"]["partially_checked_pages"] = partially_checked
+    if visibility := decoded["meta"].get(document_pdf_visibility.KEY):
+        document["coverage"][document_pdf_visibility.KEY] = visibility
     if tracked_commitment := document_tracked_changes.from_result(result):
         document["source"][document_tracked_changes.COMMITMENT] = tracked_commitment
         document["coverage"][document_tracked_changes.KEY] = decoded.get(document_tracked_changes.KEY)
@@ -694,6 +698,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_repeat.verify_source(document, decoded["text"], decoded["source_map"])
             document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()),
                                                           meta=decoded["meta"])
+            document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
             document_matched_context.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_paragraph_priority.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_passage_coverage.verify_source(document, decoded["text"], decoded["source_map"],

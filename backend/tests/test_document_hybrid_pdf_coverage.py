@@ -16,6 +16,7 @@ from app.detectors.text import extract as extraction
 from app.engine.customer_assessment import customer_assessment
 from app.engine.fusion.registry import Selection
 from app.engine.stages import document as stage
+from app.evidence import document_pdf_visibility
 from app.evidence.document_packets import (
     _pdf_plates,
     _source_anchors,
@@ -100,6 +101,72 @@ def test_small_figure_and_searchable_scan_keep_mapped_coverage(tmp_path, overlay
     assert doc.meta["unmapped_pages"] == []
     assert doc.meta["ocr"]["status"] == "not_needed"
     assert (SCAN_LINES[0] in doc.text) == overlay
+    visibility = doc.meta[document_pdf_visibility.KEY]
+    assert visibility["examined_pages"] == [1]
+    assert len(visibility["locations"]) == int(overlay)
+
+
+def test_pdf_invisible_layer_is_located_and_limits_the_actual_assessment(packet_factory, tmp_path, monkeypatch):
+    path = tmp_path / "text-visibility.pdf"
+    with pymupdf.open() as pdf:
+        page = pdf.new_page()
+        page.insert_text((50, 50), "This writing displays on the first page in the normal text layer.")
+        page = pdf.new_page()
+        page.insert_text((50, 50), "These native words remain visible through their painted outlines.",
+                         render_mode=2, fill_opacity=0)
+        page.insert_text((70, 90), "This layer is searchable although it is explicitly invisible.", render_mode=3)
+        page.insert_text((70, 110), "This second layer has no opacity and is also invisible.", fill_opacity=0)
+        page.set_rotation(90)
+        pdf.save(path)
+
+    db, store, analysis, result, decoded, _ = packet_factory(".pdf", scores=(), source_pdf=path)
+    evidence = build_packet_set(db, analysis, store, result)
+    key = document_pdf_visibility.KEY
+    review = evidence["coverage"][key]
+    assert review["examined_pages"] == [1, 2] and review["authorship_confidence_contribution"] == 0
+    row, = review["locations"]
+    assert row["page"] == 2 and row["invisible_spans"] == 2
+    assert [(x0, y0) for x0, y0, _, _ in row["boxes"]] == [(70., pytest.approx(y, abs=1)) for y in (81, 101)]
+    assert load_packet_set(db, analysis, store) == evidence
+    assert document_pdf_visibility.verify_source(evidence, extraction.extract(path, ".pdf").meta) is None
+
+    for mutation in ("delete", "move"):
+        forged = deepcopy(evidence)
+        if mutation == "delete":
+            del forged["coverage"][key]
+        else:
+            forged["coverage"][key]["locations"][0]["boxes"][0][0] += .1
+        forged["sha256"] = packet_hash(forged)
+        with pytest.raises(ObjectIntegrityError, match="recorded source extraction"):
+            multimedia_evidence.verify_assets(forged, store)
+
+    for score in (.04, .96):
+        for code in ("ai_supported", "no_ai_indicators"):
+            report_result = stage.enforce_extraction_scope({"decision": {"code": code, "verbal": "Fixture estimate",
+                "reason": "Fixture", "band": "uncertain", "confidence": "medium", "fusion_mode": "fallback",
+                "probability_ai_calibrated": score}}, extraction.Document(decoded["text"], [], decoded["meta"]))
+            assessment = customer_assessment({**report_result, "kind": "document"})
+            assert assessment["headline"] == document_pdf_visibility.ASSESSMENT_HEADLINE
+            assert "PDF page 2" in assessment["meaning"]
+            assert assessment["direction"] == "unavailable" and assessment["confidence_pct"] is None
+
+    snapshot = specimen("document", "standard")
+    report_result = {**deepcopy(snapshot.result), "signals": result["signals"]}
+    report_result["input"]["sha256"] = analysis.sha256
+    report_result["manifest"]["sampling"] = result["manifest"]["sampling"]
+    evidence = {**evidence, "analysis_id": snapshot.analysis.id, "revision": snapshot.analysis.revision,
+                "original_result_hash": canonical_hash(report_result)}
+    evidence["sha256"] = packet_hash(evidence)
+    snapshot = snapshot.model_copy(update={"result": report_result, "evidence": evidence,
+        "media": snapshot.media.model_copy(update={"sha256": analysis.sha256})})
+    monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
+    assert public_package._evidence(snapshot)["coverage"][key] == review
+    rendered = engine.render_pdf(snapshot)
+    assert not rendered.refused
+    pdf_text = " ".join(engine.pdf_text(rendered.pdf).split())
+    assert "Checked 2 of 2 pages for explicitly invisible text" in pdf_text
+    assert "Page 2. 2 invisible text spans" in pdf_text
+    assert "unrotated PDF points" in pdf_text
 
 
 def test_decode_error_explains_the_unchecked_scan_when_caption_is_too_short(tmp_path, monkeypatch):

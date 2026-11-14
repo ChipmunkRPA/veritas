@@ -13,6 +13,7 @@ from typing import Any
 from app.engine.finding_assessment import finding_assessments
 from app.engine.fusion import abstain
 from app.engine.service_policy import RULE, THRESHOLD, standard_service_policy
+from app.evidence import document_pdf_visibility
 
 ARTICLE_REFERENCE_SLICE = "document/local-article-v1"
 EMAIL_REFERENCE_SLICE = "document/local-email-v1"
@@ -208,6 +209,10 @@ def _customer_assessment(result: Mapping[str, Any]) -> dict[str, Any]:
     if origin_record or decision.get("driving_hypothesis") == "H3_provenance_integrity":
         return {**answer, "applies": False, "direction": "record", "headline": None,
                 "meaning": "The conclusion follows the file's provenance record, not a confidence percentage."}
+    if (result.get("kind") == "document" and decision.get("code") == "not_assessable"
+            and decision.get("verbal") == document_pdf_visibility.ASSESSMENT_HEADLINE):
+        return {**answer, "headline": document_pdf_visibility.ASSESSMENT_HEADLINE,
+                "meaning": decision["reason"]}
     if result.get("status") not in (None, "done") or not decision or decision.get("code") == "not_assessable":
         return answer
     if _unavailable_contributor(result):

@@ -37,11 +37,11 @@ from app.engine.fusion.registry import Selection
 from app.engine.registry import TEXT_FINETUNE_DETECTOR, TEXT_PRIMARY_DETECTORS
 from app.engine.runner import StageContext
 from app.engine.stages import common, document_screening
-from app.evidence import document_tracked_changes
+from app.evidence import document_pdf_visibility, document_tracked_changes
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p30"  # p30: optional PDF credentials before writing checks; p29: source-bound hybrid PDF OCR.
+PIPELINE_VERSION = "doc-2.0-p31"  # p31: separate invisible PDF text from whole-document authorship.
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 PRIMARY_DETECTORS = TEXT_PRIMARY_DETECTORS  # v0.3 used the fine-tune whenever it was installed
 SECONDARY_DETECTOR = "txt.hf.hello_simpleai"
@@ -86,6 +86,8 @@ def current_decode_output(output: Any) -> bool:
     if not isinstance(output, dict) or output.get("meta", {}).get("extraction_version") != EXTRACTION_VERSION:
         return False
     if output["meta"].get("method") == "python-docx" and document_tracked_changes.KEY not in output:
+        return False
+    if output["meta"].get("method") == "pymupdf" and document_pdf_visibility.KEY not in output["meta"]:
         return False
     hashes = {artifact.get("sha256") for artifact in output.get("artefacts", [])}
     return all(page.get("raster", {}).get("sha256") in hashes for page in output.get("meta", {}).get("ocr", {}).get("pages", [])
@@ -242,7 +244,8 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
     unchecked = doc.meta.get("unmapped_pages") or []
     partial_notice = partial_pdf_notice(doc.meta.get("partially_checked_pages") or [])
     hybrid_notice = hybrid_ocr_notice((doc.meta.get("ocr") or {}).get("pages") or [])
-    if not unchecked and not partial_notice and not hybrid_notice:
+    invisible = (doc.meta.get(document_pdf_visibility.KEY) or {}).get("locations", [])
+    if not unchecked and not partial_notice and not hybrid_notice and not invisible:
         return output
     notices = []
     if unchecked:
@@ -253,9 +256,17 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
         notices.append("The recorded scores and excerpts apply only to extracted text.")
     if hybrid_notice:
         notices.append(hybrid_notice)
+    visibility_notice = None
+    if invisible:
+        pages = ", ".join(str(row["page"]) for row in invisible)
+        visibility_notice = (f"Invisible searchable text was found on PDF {'page' if len(invisible) == 1 else 'pages'} {pages}. "
+                             "The extracted writing may differ from the visible page.")
+        notices.append(visibility_notice)
     notices.append("No whole-document authorship conclusion is available.")
     scope = " ".join(notices)
-    if partial_notice:
+    if invisible:
+        headline = document_pdf_visibility.ASSESSMENT_HEADLINE
+    elif partial_notice:
         headline = "Partially assessed: some document text remains unchecked"
     elif unchecked:
         headline = "Partially assessed: some document pages remain unchecked"
@@ -268,13 +279,14 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
         "band": "uncertain", "confidence": "low", "driving_hypothesis": None, "provenance_record": None,
         "statistical_alone": None, "statistical_estimate_before_provenance": None, "contributions": []}).model_dump(mode="json")
     output = {**output, "decision": decision, "caveats": [*output.get("caveats", []), scope]}
-    if partial_notice or hybrid_notice:
+    if partial_notice or hybrid_notice or invisible:
         profile = output.get("condition_profile")
         if profile is not None:
             output["condition_profile"] = {
                 **profile, "within_validated_envelope": False, "validation_support": "unsupported",
                 "validation_measured_at": None,
-                "limiting_conditions": [*profile.get("limiting_conditions", []), *filter(None, (partial_notice, hybrid_notice))],
+                "limiting_conditions": [*profile.get("limiting_conditions", []),
+                                        *filter(None, (partial_notice, hybrid_notice, visibility_notice))],
             }
         # Keep exact raw passage inputs and responses. Whole-document calibration
         # must also be withheld on individual aggregate writing checks.

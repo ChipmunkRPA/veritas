@@ -22,6 +22,7 @@ from app.evidence import (
     document_paragraph_priority,
     document_passage_coverage,
     document_passage_position,
+    document_pdf_visibility,
     document_percentage_consistency,
     document_repeat,
     document_scope,
@@ -126,6 +127,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
            for key, default in fields.items()):
         raise ValueError("Recorded document coverage differs from the re-extracted original")
     document_repeat.verify_source(evidence, text, mapping)
+    document_pdf_visibility.verify_source(evidence, doc.meta)
     if document_percentage_consistency.KEY in evidence:
         from app.detectors.text.pipeline import segment_within
 

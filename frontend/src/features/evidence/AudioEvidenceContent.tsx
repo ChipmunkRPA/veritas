@@ -186,6 +186,9 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       <h3 className="m-0 text-body font-medium">{backgroundReview.title}</h3>
       <p className="mt-2 mb-0 text-small">{backgroundReview.reason}</p>
       {backgroundReview.status === 'flagged' && <>
+        <p className="mt-2 mb-0 text-caption text-text-muted">
+          Loud background sound can make genuine speech look AI-generated in this check.
+        </p>
         <SourceTimestamps ranges={backgroundReview.source_timestamp_ranges} showSeconds />
         <p className="m-0 font-mono text-caption text-text-muted">
           Samples [{backgroundReview.interval.start_sample}, {backgroundReview.interval.end_sample})

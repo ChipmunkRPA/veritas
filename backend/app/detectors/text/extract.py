@@ -20,6 +20,7 @@ from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 
+from app.evidence import document_pdf_visibility
 from app.evidence.document_scope import EMAIL_HTML_COORDINATES
 
 
@@ -440,6 +441,7 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True) -> Document:
     hybrid_pages: list[dict] = []
     ocr_pages, rasters, raster_bytes = [], {}, 0
     percentage_text_pages = []
+    visibility_examined, invisible_text = [], []
     runtime = None
     started = time.monotonic()
 
@@ -473,12 +475,17 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True) -> Document:
             parts = []
             page_parts.append(parts)
             blocks = page.get_text("rawdict")["blocks"]
-            if len(doc) <= NATIVE_COMPARISON_MAX_PAGES:
+            if page.number < document_pdf_visibility.MAX_PAGES:
                 try:
                     spans = page.get_texttrace()
                 except (ValueError, RuntimeError):
-                    spans = []
-                if spans and all(span["type"] != 3 and span["opacity"] > 0 for span in spans):
+                    spans = None
+                if spans is not None:
+                    visibility_examined.append(page.number + 1)
+                    if location := document_pdf_visibility.inspect_page(page, spans):
+                        invisible_text.append(location)
+                if len(doc) <= NATIVE_COMPARISON_MAX_PAGES and spans and all(
+                        span["type"] != 3 and span["opacity"] > 0 for span in spans):
                     percentage_text_pages.append(page.number + 1)
             blocks.sort(key=lambda b: (round(b["bbox"][1] / 5), b["bbox"][0]))
             page_chars = 0
@@ -536,6 +543,7 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True) -> Document:
     d.source_rasters = rasters
     d.meta = {"pages": pages, "method": "pymupdf", "unmapped_pages": empty_pages,
               "percentage_text_pages": percentage_text_pages,
+              document_pdf_visibility.KEY: document_pdf_visibility.build(pages, visibility_examined, invisible_text),
               "partially_checked_pages": partial_pages,
               "ocr": {"version": OCR_VERSION, "status": "partial" if empty_pages or partial_pages else "complete" if ocr_pages else "not_needed",
                       "pages": ocr_pages, "pages_without_text": [p["page"] for p in ocr_pages if p.get("coverage_scope") != "image_region"], "unchecked_pages": empty_pages,

@@ -490,6 +490,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_paragraph_priority,
         document_passage_coverage,
         document_passage_position,
+        document_pdf_visibility,
         document_percentage_consistency,
         document_tracked_changes,
         document_unselected_responses,
@@ -521,6 +522,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
                                               expected=source.get(document_tracked_changes.COMMITMENT))
         verify_repeated_passages(document, text, mapping)
         document_percentage_consistency.verify_source(document, text, mapping, decoded.get("sentences", ()), meta=decoded["meta"])
+        document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
         document_native_locations.validate(document)
         if document_email_contexts.KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
@@ -699,6 +701,8 @@ def _coverage(kind: str, document: dict) -> str:
 
 
 def _document_coverage_details(coverage: dict) -> list[str]:
+    from app.evidence import document_pdf_visibility
+
     notes = [
         f"{check['signal_ref'].get('display_id') or 'Recorded check'}: {check['scored_windows']} local context(s) retained. "
         + check.get('limitation', 'Some input contexts were omitted by the bounded evidence capture; missing context is not a negative finding.')
@@ -710,6 +714,17 @@ def _document_coverage_details(coverage: dict) -> list[str]:
     for page in coverage.get("partially_checked_pages", []):
         boxes = ", ".join(f"[{', '.join(map(str, box))}]" for box in page["image_boxes"])
         notes.append(f"Page {page['page']}. {page['reason']} Unchecked bounds in unrotated PDF points {boxes}.")
+    if visibility := coverage.get(document_pdf_visibility.KEY):
+        examined = len(visibility['examined_pages'])
+        notes.append(f"PDF text visibility. Checked {examined} of {visibility['total_pages']} pages for explicitly invisible text.")
+        if visibility["locations"]:
+            for page in visibility["locations"]:
+                boxes = ", ".join(f"[{', '.join(map(str, box))}]" for box in page["boxes"])
+                count = page["invisible_spans"]
+                label = "span" if count == 1 else "spans"
+                notes.append(f"Page {page['page']}. {count} invisible text {label}. "
+                             f"Recorded locations in unrotated PDF points {boxes}.")
+            notes.append(document_pdf_visibility.LIMITATION)
     email = coverage.get("email")
     if isinstance(email, dict):
         body_format = {"text/plain": "plain-text", "text/html": "HTML"}.get(email.get("body_content_type"))

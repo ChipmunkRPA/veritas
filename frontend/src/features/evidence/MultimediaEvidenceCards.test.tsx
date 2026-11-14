@@ -201,6 +201,7 @@ describe('ordinary multimedia evidence', () => {
     }
     show(set)
     const review = within(screen.getByRole('region', { name: 'Speech review with reduced background sound' }))
+    expect(review.getByText('Loud background sound can make genuine speech look AI-generated in this check.')).toBeTruthy()
     expect(review.getByText(/Original audio 0\.000 s–3\.000 s\. Source PTS \[0, 48000\) at 1\/16000/)).toBeTruthy()
     expect(review.getByAltText('Original waveform across the flagged three-second interval')).toBeTruthy()
     const original = review.getByLabelText('Original three-second interval')

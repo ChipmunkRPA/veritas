@@ -225,6 +225,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const attachmentCount = emailCoverage?.attachments?.length ?? 0
   const unmapped = [...new Set([...(set.coverage?.unmapped_pages ?? []), ...(set.coverage?.ocr?.unchecked_pages ?? [])])]
   const partialPages = set.coverage?.partially_checked_pages ?? []
+  const textVisibility = set.coverage?.pdf_text_visibility
   const ocrPages = set.coverage?.ocr?.pages ?? []
   const matched = set.coverage?.matched_context_review
   const writingAgreement = set.coverage?.writing_second_check
@@ -251,6 +252,19 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     </section>}
     <DocumentRepeatedPassages result={set.repeated_passages} />
     {set.percentage_consistency && <PercentageConsistency review={set.percentage_consistency} />}
+    {textVisibility && <section aria-labelledby="document-pdf-text-visibility" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="document-pdf-text-visibility" className="m-0 text-body font-medium">PDF text visibility</h3>
+      <p className="mt-2 mb-0 text-small">Checked {textVisibility.examined_pages.length} of {textVisibility.total_pages} pages for explicitly invisible text.</p>
+      {textVisibility.locations.length > 0 && <>
+        <ul className="mt-2 mb-0 pl-5 text-small">
+          {textVisibility.locations.map(row => <li key={row.page}>
+            Page {row.page} · {row.invisible_spans} invisible text {row.invisible_spans === 1 ? 'span' : 'spans'}
+            <p className="mt-1 mb-1 font-mono text-caption text-text-muted">{row.boxes.map(box => `[${box.join(', ')}]`).join(', ')}</p>
+          </li>)}
+        </ul>
+        <p className="mt-2 mb-0 text-small text-text-muted">Locations use unrotated PDF points. Searchable scans and accessibility overlays can contain invisible text. This check carries zero AI-authorship weight.</p>
+      </>}
+    </section>}
     <DocumentInspectionMap packets={set.packets} selectedId={selectedId} onSelect={selectPassage} />
     <DocumentPassageCoverage coverage={set.coverage?.local_passage_coverage} />
     <DocumentUnselectedResponses responses={set.coverage?.unselected_passage_responses} />

@@ -60,6 +60,26 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [JPEG detail loss](image-jpeg-detail-loss-2026-11-13.md) adds a narrow
+  earlier-copy check. It located moderate local blur in 14 of 34 cases,
+  versus one with the existing comparison. It added useful moderate or
+  strong regions across 13 sources and selected none of 442 other pairs.
+  Browser, PDF and JSON identify the measured area and retain the source crops.
+- [Multiple video insertions](video-temporal-multiple-inserts-2026-11-13.md)
+  improved complete locations from zero to nine of 24 in the held test.
+  It added no flags across 48 negative controls and kept eight correct
+  single-insert results. The successful multi-insert results came from
+  three of eight sources, so the method remains offline.
+- [Randomized audio edit positions](audio-random-clock-stock-2026-11-13.md)
+  confirmed the five-window review can reach both clip edges. The older
+  sparse point located two of 16 edits at −5 dB versus one today, with
+  three additional ordinary flags. A separate enhanced-audio view helped
+  on some positions and added eight ordinary flags, so serving is unchanged.
+- [Standalone writing edit intensity](writing-edit-intensity-transfer-2026-11-13.md)
+  found two additional locations among 255 known edits, both variants from
+  one journal article, alongside seven newly flagged ordinary work groups.
+  The candidate stays offline. A [four-media replay](independent-testing.md#replay-delivery-and-earlier-copy-comparisons)
+  verifies this round's public evaluation ledgers.
 - [Video insertion localization](video-temporal-insert-confirmation-2026-11-13.md)
   adds a short earlier-copy comparison. It recovered both boundaries of all
   16 held generated insertions and 13 of 16 conventional insertions. The

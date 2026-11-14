@@ -107,6 +107,23 @@ This replay checks published decisions and overlap counts without source media.
 The linked guides cover native replay, the separate audio equalization test
 and the Word extraction scope.
 
+The [JPEG detail-loss replay](image-jpeg-detail-loss-2026-11-13.md#local-use-and-replay)
+recounts 544 blur, generated-edit and delivery-control comparisons. The
+[multiple video insertion replay](video-temporal-multiple-inserts-2026-11-13.md#replay)
+checks all reported source clocks and separate ranges for the 80-pair
+transfer. The [randomized speech replay](audio-random-clock-stock-2026-11-13.md)
+compares three frozen routes at eight measured edit placements.
+
+Recount those three studies and the [standalone writing intensity trial](writing-edit-intensity-transfer-2026-11-13.md)
+in one receipt. The checks recompute published outcomes from scalar
+measurements. Native decoding and model inference have separate commands.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/edit-positions.json" --suite edit-position-transfers
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/edit-positions.json" --format-issue
+```
+
 The [video insertion confirmation](video-temporal-insert-confirmation-2026-11-13.md#replay)
 replays 72 pairs and checks submitted frame ranges and five before, during
 and after source pictures against the opt-in comparison. The

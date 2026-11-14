@@ -162,7 +162,8 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
                              allow_exact_jpeg_identity=settings.image_reference_exact_jpeg_identity,
                              allow_shifted_jpeg=settings.image_reference_shifted_jpeg,
                              allow_structure_jpeg=settings.image_reference_structure_jpeg,
-                             allow_same_jpeg=settings.image_reference_same_jpeg)
+                             allow_same_jpeg=settings.image_reference_same_jpeg,
+                             allow_jpeg_detail_loss=settings.image_reference_jpeg_detail_loss)
         if settings.image_reference_jpeg_png_envelope and comparison["status"] != "comparable":
             from app.evidence.image_reference_delivery_envelope import inspect as compare_delivery
 

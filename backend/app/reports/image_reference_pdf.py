@@ -6,6 +6,7 @@ import pymupdf
 
 from app.detectors.image import (
     reference_exact_jpeg,
+    reference_jpeg_detail_loss,
     reference_png_orientation,
     reference_png_oriented_crop,
     reference_png_oriented_resize,
@@ -83,7 +84,7 @@ def _summary(document, comparison, assets):
         _text(page, MARGIN, 318, f"{proof['exact_tiles']:,} of {proof['full_tiles']:,} full blocks matched after JPEG encoding.",
               size=10, color=MUTED)
         _text(page, MARGIN, 334, f"{proof['anchor_count']:,} unique detailed blocks supported alignment.", size=10, color=MUTED)
-    if schema == reference_same_jpeg.SCHEMA:
+    if schema in {reference_same_jpeg.SCHEMA, reference_jpeg_detail_loss.SCHEMA}:
         proof = comparison["alignment"]
         _text(page, MARGIN, 302, "Matching JPEG blocks support the same framing.", size=10, font="hebo")
         _text(page, MARGIN, 318, f"{proof['exact_tiles']:,} of {proof['full_tiles']:,} complete decoded blocks match exactly.",
@@ -95,7 +96,8 @@ def _summary(document, comparison, assets):
         _text(page, MARGIN, 302, "Matching detail supports the same framing.", size=10, font="hebo")
         _text(page, MARGIN, 318, f"{aligned} of {detailed} detailed areas matched across the two images.", size=10, color=MUTED)
         _text(page, MARGIN, 334, "Highlights require local color and structure changes under both tone fits.", size=10, color=MUTED)
-    elif schema != reference_same_jpeg.SCHEMA and (alignment := comparison.get("alignment")) and "submitted_overlap" in alignment:
+    elif (schema not in {reference_same_jpeg.SCHEMA, reference_jpeg_detail_loss.SCHEMA}
+          and (alignment := comparison.get("alignment")) and "submitted_overlap" in alignment):
         label = "area compared" if schema == reference_shifted_jpeg.SCHEMA else "overlap"
         _text(page, MARGIN, 302, f"Earlier copy {label}: {_area(alignment['reference_overlap'])}", size=10)
         _text(page, MARGIN, 318, f"Submitted image {label}: {_area(alignment['submitted_overlap'])}", size=10)
@@ -172,7 +174,8 @@ def render(comparison: dict, assets: dict[str, bytes]) -> bytes:
         document.set_metadata({"title": "Earlier-copy image comparison", "author": "Chipmunk Verify"})
         _summary(document, comparison, assets)
         for index, region in enumerate(comparison["regions"], 1):
-            page = _page(document, f"Difference region {index}", "Coordinates use each image's oriented native pixels.")
+            label = "Fine detail loss" if comparison["schema"] == reference_jpeg_detail_loss.SCHEMA else "Difference region"
+            page = _page(document, f"{label} {index}", "Coordinates use each image's oriented native pixels.")
             overlay = region.get("submitted_overlay")
             for x, right, label, bounds, asset, hash_y in (
                 (MARGIN, 296, "Earlier copy", region.get("reference_region", region), region["reference_crop"], 585),
@@ -189,6 +192,11 @@ def render(comparison: dict, assets: dict[str, bytes]) -> bytes:
                 _image(page, pymupdf.Rect(316, 407, RIGHT, 558), region["submitted_crop"], assets, overlay=overlay)
                 _text(page, MARGIN, 379, f"Retained difference pixels: {region['selected_pixels']}", size=10)
                 _text(page, MARGIN, 395, f"/regions/{index - 1}/submitted_overlay", size=9, font="cour", color=MUTED)
+                if "directly_measured_tiles" in region:
+                    total = region["selected_pixels"] // reference_jpeg_detail_loss.TILE ** 2
+                    _text(page, MARGIN, 412, f"{region['directly_measured_tiles']} of {total} tiles directly support the finding.",
+                          size=10, color=MUTED)
+                    _text(page, MARGIN, 428, "Adjacent highlights can include small gaps.", size=10, color=MUTED)
                 _text(page, MARGIN, 665, "Difference overlay SHA-256", size=10, font="hebo")
                 _text(page, MARGIN, 681, overlay["sha256"], size=9, font="cour", color=MUTED)
             else:

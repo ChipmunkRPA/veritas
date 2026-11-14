@@ -1,0 +1,3297 @@
+{
+  "classifier_forwards": 551,
+  "elapsed_seconds": 377.83,
+  "enhancement_frame_forwards": 16544,
+  "minimum_enhancement_suppression_db": 6,
+  "native_audit": {
+    "exact_clock_and_masker_pairs": 64,
+    "held_reader_and_book_groups": 12,
+    "max_abs_host_snr_error_db": 1.4114650682823988e-05,
+    "waveforms": 83
+  },
+  "native_freeze_sha256": "f75a359827024a3bc757c36841426a62d990ff6ba8435351db0eacbaa1314e66",
+  "readout_points": {
+    "earlier_sparse": 5.356589748054317,
+    "enhanced_rescue": 6.822523597593649,
+    "equal_point_sparse": 6.822523597593649,
+    "existing_short": 6.822523597593649
+  },
+  "rows": [
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 0,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        2.893621245314952,
+        -6.300207175498747,
+        -5.913059750373903,
+        -6.960061036844034,
+        -7.056555722469302
+      ],
+      "pcm_sha256": "0807c8afd2ab40a8552b0daf36d50745e6106b10a2245d59c7eefcd68c469401",
+      "snr": 0,
+      "stratum": 2
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          1.916747240806472,
+          -5.95651529401372,
+          -3.475511021853013,
+          -4.226935452817113,
+          -5.947569385238325
+        ],
+        "sha256": "38f80d8fd0d12b1a8520f93da071f72b32b80e64c1e4ef91cc19c5e364f63ff5",
+        "si_sdr_gain_db": 2.4080348335225166,
+        "suppression_db": 6.005821509783801
+      },
+      "group": 0,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -5.478653840853934,
+        -6.605358110717402,
+        -4.556556665482175,
+        -6.344078124591799,
+        -6.807801278093075
+      ],
+      "pcm_sha256": "7fd8ab8c9c69387f44b6c7bda075b128d332ec6f5145e0cb1e4ba3dd026358c7",
+      "snr": -5,
+      "stratum": 2
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "2950ff2e3578185c6042369a42004d9516c86ecbbb5f680c24f66ba0a082dcaf",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 0,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        30116,
+        45476
+      ],
+      "original_scores": [
+        -3.7822015016294994,
+        -5.399078794356601,
+        -4.481509707471324,
+        -6.960061036844034,
+        -7.056555722469302
+      ],
+      "pcm_sha256": "0688bd72ca4e207bf0f69f70b212f3dbc57a60f80165905bdd3cb2e06bc06c4b",
+      "snr": 0,
+      "stratum": 2
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "2950ff2e3578185c6042369a42004d9516c86ecbbb5f680c24f66ba0a082dcaf",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          -3.9627465756479827,
+          -6.348356192485192,
+          -4.494068658840626,
+          -3.207808973276096,
+          -6.23108956551547
+        ],
+        "sha256": "13b189811869c7bd21549c8896dc4f8548a833e571c205dc868226e6ea54a6c1",
+        "si_sdr_gain_db": 2.139988745498114,
+        "suppression_db": 6.411638345469379
+      },
+      "group": 0,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        30116,
+        45476
+      ],
+      "original_scores": [
+        -5.70198634203472,
+        -6.741124133173568,
+        -5.115821893507836,
+        -6.344078124591799,
+        -6.807801278093075
+      ],
+      "pcm_sha256": "ea57507b2aafb3b8578a2c80768e57c684d8779b2996b63bff82388607a7d42d",
+      "snr": -5,
+      "stratum": 2
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "e24f3d70fd2e5dc4d06bed07d37fe535269577ee2055ae1fe6786ba61d2b144a",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 0,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        30116,
+        45476
+      ],
+      "original_scores": [
+        -3.15179374336752,
+        -5.891809899200227,
+        -5.919357364848225,
+        -6.960061036844034,
+        -7.056555722469302
+      ],
+      "pcm_sha256": "15a2f0846cdfa29e615f469ee87033ef6e24c9b43b803138c46bb01edb752656",
+      "snr": 0,
+      "stratum": 2
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "e24f3d70fd2e5dc4d06bed07d37fe535269577ee2055ae1fe6786ba61d2b144a",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          -0.24821107527184605,
+          -6.031200406802294,
+          -4.405588132396114,
+          3.9183333442378294,
+          -5.919765427993983
+        ],
+        "sha256": "4d18f6c191fbd9ff7ea268391686cfd43eec341a89026afdf42c42fd40f1764c",
+        "si_sdr_gain_db": 0.462131609986403,
+        "suppression_db": 6.723289223509237
+      },
+      "group": 0,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        30116,
+        45476
+      ],
+      "original_scores": [
+        -5.44696230598439,
+        -6.613348967052797,
+        -5.751108146990884,
+        -6.344078124591799,
+        -6.807801278093075
+      ],
+      "pcm_sha256": "51d914fb8c95453937f41e16dd4fa4e1cb80e03e841e706dbe3180f5a3ad3142",
+      "snr": -5,
+      "stratum": 2
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "d11dd4848202c35b88beb59d33f8c97aa7a9d959876193af045f0d503d8e1ae3",
+      "edit_clock": [
+        30116,
+        45476
+      ],
+      "enhanced": null,
+      "group": 0,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        4.0783715985966325,
+        3.5075570027043863,
+        -5.601936406053523,
+        -6.960061036844034,
+        -7.056555722469302
+      ],
+      "pcm_sha256": "bf54d62af9a4c0c2922b95bd6c7a74cc2a60e44a1ef1c864485c64b7c2f3b7d0",
+      "snr": 0,
+      "stratum": 2
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "d11dd4848202c35b88beb59d33f8c97aa7a9d959876193af045f0d503d8e1ae3",
+      "edit_clock": [
+        30116,
+        45476
+      ],
+      "enhanced": {
+        "scores": [
+          -0.036052436038823577,
+          -4.955786633383156,
+          -3.449902043649493,
+          3.1446525071274825,
+          -6.148796618713825
+        ],
+        "sha256": "b8c8506abd9343be4b2f95f5d416ce3cff7f214d51576933f662099386e9f573",
+        "si_sdr_gain_db": 0.9959218135376808,
+        "suppression_db": 7.217304602024872
+      },
+      "group": 0,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -5.138619431733853,
+        -5.081126277260735,
+        -4.926648107319838,
+        -6.344078124591799,
+        -6.807801278093075
+      ],
+      "pcm_sha256": "2250554ac8ba1249f1d4c00f5ef0bcb27d21702e548177e1ea5a23443fa04c9c",
+      "snr": -5,
+      "stratum": 2
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "ce6fa0bc69323633d6d335e5e89177f8e28c13c36912d8504cdd2c5976f8681b",
+      "edit_clock": [
+        30116,
+        45476
+      ],
+      "enhanced": null,
+      "group": 0,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        4.02532099266901,
+        4.779542875711471,
+        -3.7391858451893363,
+        -6.960061036844034,
+        -7.056555722469302
+      ],
+      "pcm_sha256": "6b8a504eae7222a1eb94a165b374382b1bb67fc6f86908a2140c9786fbdad506",
+      "snr": 0,
+      "stratum": 2
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "ce6fa0bc69323633d6d335e5e89177f8e28c13c36912d8504cdd2c5976f8681b",
+      "edit_clock": [
+        30116,
+        45476
+      ],
+      "enhanced": {
+        "scores": [
+          4.21662413218846,
+          3.022150102630533,
+          2.459379849894553,
+          4.282971359678692,
+          -6.161085131711248
+        ],
+        "sha256": "6025ccdd1b26727ee6098cb9ed7d37522cf78bae07ef51a213cffb0a1fe7bf4d",
+        "si_sdr_gain_db": 1.2893676923427577,
+        "suppression_db": 6.984338730347749
+      },
+      "group": 0,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -4.718654651695455,
+        -5.321290990786507,
+        -5.003397949696518,
+        -6.344078124591799,
+        -6.807801278093075
+      ],
+      "pcm_sha256": "1adbd6e336d32db9f0f8876cdfef5e5f141c3a394c20a1c5c34c7ece34b87f72",
+      "snr": -5,
+      "stratum": 2
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 1,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -4.825906703425648,
+        5.132915223328218,
+        6.803237132908103,
+        5.661175609893411,
+        -4.345526716816067
+      ],
+      "pcm_sha256": "34f8a616332fb8b14ad75e4be3ac09eb132a12d08729bb4537d2ad84f8048457",
+      "snr": 0,
+      "stratum": 1
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          -4.29639958626335,
+          6.233103138924594,
+          5.564397757106239,
+          7.177255963108744,
+          3.19074025715644
+        ],
+        "sha256": "76121f3f2b82011e0e06db9e281e2507e14b453c360257b46345e9679da486f9",
+        "si_sdr_gain_db": 2.7428557114617003,
+        "suppression_db": 7.956112391761389
+      },
+      "group": 1,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -4.959508952673849,
+        3.829916027584962,
+        5.766623290656758,
+        3.67215623655275,
+        -4.878390304152909
+      ],
+      "pcm_sha256": "333f008b6ea77a1f517e2f426bd61e84e923df472f7f5ce37a13c28330758d86",
+      "snr": -5,
+      "stratum": 1
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "837bbacfd0f4876a536f9e7c1d9ef59897ba9b2d937edf58f9a853a0c37c3bbc",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 1,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        19752,
+        35112
+      ],
+      "original_scores": [
+        -3.686803818635053,
+        6.83861465927455,
+        6.878936201917029,
+        5.661175609893411,
+        -4.345526716816067
+      ],
+      "pcm_sha256": "b16df657998989e189ca49af72716795f6e192f9a4c62365a159be5f3fc8f569",
+      "snr": 0,
+      "stratum": 1
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "837bbacfd0f4876a536f9e7c1d9ef59897ba9b2d937edf58f9a853a0c37c3bbc",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          -2.6590895714432023,
+          5.337159638214633,
+          6.496097089275217,
+          7.272807528659677,
+          2.9313801253238423
+        ],
+        "sha256": "078ae43fda665d1a963cac22c4fb6542355f18877a86b5fbd96d64eb977ec6c0",
+        "si_sdr_gain_db": 0.08255878648497639,
+        "suppression_db": 9.401270893114006
+      },
+      "group": 1,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        19752,
+        35112
+      ],
+      "original_scores": [
+        -5.1429300641775475,
+        6.101786598632506,
+        5.8383264950181,
+        3.67215623655275,
+        -4.878390304152909
+      ],
+      "pcm_sha256": "d140bf53b4994755b50011fc28fd1eace091924ca24a73a6caf72920287edb0e",
+      "snr": -5,
+      "stratum": 1
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "cec83a0692ee7a490cc7be3c97e4672b0a0dd32357c52158e315f995f83c0a5e",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 1,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        19752,
+        35112
+      ],
+      "original_scores": [
+        -6.57137774878456,
+        5.736312573182485,
+        6.971842172325898,
+        5.661175609893411,
+        -4.345526716816067
+      ],
+      "pcm_sha256": "0f74130d58f1d117bfbac3154993eb403fb1c992345ec249ab3a17232567ddb5",
+      "snr": 0,
+      "stratum": 1
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "cec83a0692ee7a490cc7be3c97e4672b0a0dd32357c52158e315f995f83c0a5e",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          4.532022142414543,
+          7.249856587185559,
+          6.7429895484619236,
+          7.17506986388609,
+          -3.063228620437182
+        ],
+        "sha256": "1e96e414261d2ad752c4465263b0f596007eac023f25612062f16cb480a38a94",
+        "si_sdr_gain_db": 2.767274326589173,
+        "suppression_db": 8.341163031937944
+      },
+      "group": 1,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        19752,
+        35112
+      ],
+      "original_scores": [
+        -5.649080301432927,
+        6.549544261076637,
+        5.653064035146791,
+        3.67215623655275,
+        -4.878390304152909
+      ],
+      "pcm_sha256": "1cc60ca6a593f781db5891d532a1a4048f7b84ce6dd28d9bedb7833cf4817dca",
+      "snr": -5,
+      "stratum": 1
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "3c71e453c1c01cfe1198b6fa188588beff8586e58f00d867ba600e5ddbf780d1",
+      "edit_clock": [
+        19752,
+        35112
+      ],
+      "enhanced": null,
+      "group": 1,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        4.115101536752461,
+        6.277979703093927,
+        6.461870202035932,
+        5.661175609893411,
+        -4.345526716816067
+      ],
+      "pcm_sha256": "e6a5d527bfd7a18e697a4288377034794641a60bd57c6443b4403750ab65e413",
+      "snr": 0,
+      "stratum": 1
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "3c71e453c1c01cfe1198b6fa188588beff8586e58f00d867ba600e5ddbf780d1",
+      "edit_clock": [
+        19752,
+        35112
+      ],
+      "enhanced": {
+        "scores": [
+          6.682956163506631,
+          7.011916771013601,
+          4.972034376703432,
+          7.213303574921723,
+          2.520278328876135
+        ],
+        "sha256": "eea9dd578afe18ce0dc23d3f61df83bd2073193e23ed935d86914de301429b0d",
+        "si_sdr_gain_db": 2.841473972966095,
+        "suppression_db": 8.279967711117964
+      },
+      "group": 1,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -2.255722797138896,
+        5.852625064759624,
+        5.357929987850437,
+        3.67215623655275,
+        -4.878390304152909
+      ],
+      "pcm_sha256": "0eb7ebc3be58a26c1123a5e1905802ed83eaa727efcfb7e9a3f63c18609b31dc",
+      "snr": -5,
+      "stratum": 1
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "63b870db7885e1443360dd016b9c03fd58c6965d5aa7845c889f7f0bd5baddb3",
+      "edit_clock": [
+        19752,
+        35112
+      ],
+      "enhanced": null,
+      "group": 1,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -4.212239289702836,
+        6.404258392494447,
+        6.822743038377048,
+        5.661175609893411,
+        -4.345526716816067
+      ],
+      "pcm_sha256": "5665ea8d9dcd1ff9dcbc891996d2e0c3f206719f9aad7d10914d4c4d21ec92f3",
+      "snr": 0,
+      "stratum": 1
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "63b870db7885e1443360dd016b9c03fd58c6965d5aa7845c889f7f0bd5baddb3",
+      "edit_clock": [
+        19752,
+        35112
+      ],
+      "enhanced": {
+        "scores": [
+          3.765514450315609,
+          6.777578807931477,
+          6.574544402116958,
+          7.242405103210939,
+          2.907706697439589
+        ],
+        "sha256": "b3297f1cb94649ed64672fc2f29175263c1c864e254b019d49418ccd5d1fbe51",
+        "si_sdr_gain_db": 2.5887099002282645,
+        "suppression_db": 9.004242552213928
+      },
+      "group": 1,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -4.438550955456028,
+        5.394077611646376,
+        5.6842313403217375,
+        3.67215623655275,
+        -4.878390304152909
+      ],
+      "pcm_sha256": "5abf956d14b7af2a8c87df7061883f633613b001672bf3c3a2804fe8421dc68b",
+      "snr": -5,
+      "stratum": 1
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 2,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        4.047427202752582,
+        6.003964508444764,
+        5.5256226656540495,
+        2.9171608535279305,
+        6.611941127524789
+      ],
+      "pcm_sha256": "0dad29c671f144635cd4d9911f7d3947fdf3f46056ff0a0a29089c5456c7ba86",
+      "snr": 0,
+      "stratum": 4
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": null,
+        "sha256": "59a1f500ad97f1db9a043740de719596f03f748572b47b66fd97290e7f294f94",
+        "si_sdr_gain_db": -2.0797482903591975,
+        "suppression_db": 5.631888802710857
+      },
+      "group": 2,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -4.26138400052814,
+        6.925983918560165,
+        3.9211071469205603,
+        -3.3919424614407148,
+        4.7464059669174405
+      ],
+      "pcm_sha256": "1e58f975187bf21827ca0ee25df0478280ebdff68eab75550f1a95bed20a4ced",
+      "snr": -5,
+      "stratum": 4
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "cd200bb1eb5b9f491bd536d67b7fe23beda45670b780bb47ec005162887ba6af",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 2,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        45769,
+        61129
+      ],
+      "original_scores": [
+        4.047427202752582,
+        6.113135619992302,
+        4.719089826995429,
+        -3.353300976229443,
+        6.611941127524789
+      ],
+      "pcm_sha256": "013672648ca6227eb2d469d36bc44098332328a3528e118a3d42a2e66570e418",
+      "snr": 0,
+      "stratum": 4
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "cd200bb1eb5b9f491bd536d67b7fe23beda45670b780bb47ec005162887ba6af",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": null,
+        "sha256": "4cfeadf6e054536b23ef6a1b43eee4b237e3d9934b84704149fc5b6828ac09f1",
+        "si_sdr_gain_db": -1.4579847281656253,
+        "suppression_db": 5.3563532300842525
+      },
+      "group": 2,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        45769,
+        61129
+      ],
+      "original_scores": [
+        -4.26138400052814,
+        7.121099694097015,
+        5.82524333225318,
+        -3.386295312139334,
+        4.7464059669174405
+      ],
+      "pcm_sha256": "07f70aea00b32c194e5727f9a80d1c9216f63de43eaf45dee41f02f2fd95f001",
+      "snr": -5,
+      "stratum": 4
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "db1fdabcc3b3d074d0d80b133c62c6fa15dd114e6d1be2575f8fd35465a0e5fc",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 2,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        45769,
+        61129
+      ],
+      "original_scores": [
+        4.047427202752582,
+        5.8975242608160805,
+        3.046369927227537,
+        -2.5008897425421885,
+        6.611941127524789
+      ],
+      "pcm_sha256": "6379c0342f0266f2f57eb0afa44cc4c8a91e0331b42faebcfa3524c7b726a1be",
+      "snr": 0,
+      "stratum": 4
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "db1fdabcc3b3d074d0d80b133c62c6fa15dd114e6d1be2575f8fd35465a0e5fc",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": null,
+        "sha256": "142542d4620b5eb2c9f24401306ff421004fac6443e1b298510818967807d914",
+        "si_sdr_gain_db": -1.4401634060498862,
+        "suppression_db": 5.631796734029681
+      },
+      "group": 2,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        45769,
+        61129
+      ],
+      "original_scores": [
+        -4.26138400052814,
+        6.7899806438102805,
+        6.4277361500069246,
+        4.894995702518249,
+        4.7464059669174405
+      ],
+      "pcm_sha256": "5b344c98b0f98622fea60a5aa3d5cf123a979e09344dddfe102e3dcae775c3ab",
+      "snr": -5,
+      "stratum": 4
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "7c869842a26ace322bd5208d819a3172a13d643e2ba4cfa12c8299be316701da",
+      "edit_clock": [
+        45769,
+        61129
+      ],
+      "enhanced": null,
+      "group": 2,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        4.047427202752582,
+        5.988484453911464,
+        7.217851271023039,
+        5.878650583754557,
+        6.611941127524789
+      ],
+      "pcm_sha256": "a7e0a9b02069464ad501ff4c3fb7e9db1e66bc8f9ad38de0a14dbda8bfd6d21a",
+      "snr": 0,
+      "stratum": 4
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "7c869842a26ace322bd5208d819a3172a13d643e2ba4cfa12c8299be316701da",
+      "edit_clock": [
+        45769,
+        61129
+      ],
+      "enhanced": {
+        "scores": null,
+        "sha256": "75741bef0deeeb113a0875e4685e9454ab536b7cf197e13a78a387bf7cbbda13",
+        "si_sdr_gain_db": -1.099598859257033,
+        "suppression_db": 5.377097490770922
+      },
+      "group": 2,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -4.26138400052814,
+        7.1370401557656695,
+        7.2429057112301525,
+        5.416309727879529,
+        4.7464059669174405
+      ],
+      "pcm_sha256": "dd7a070e31e9028717679f8635237e0c614e1094c589b5ea070810c6155a81e9",
+      "snr": -5,
+      "stratum": 4
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "d07de897880866ad5e95e810920ca8f8cf4320b8985e3db839154431d279f927",
+      "edit_clock": [
+        45769,
+        61129
+      ],
+      "enhanced": null,
+      "group": 2,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        4.047427202752582,
+        6.469131646070125,
+        7.2039485337582505,
+        6.853665996659193,
+        6.611941127524789
+      ],
+      "pcm_sha256": "28b5069f6964099fc6df3fa35f5512e5d83e9a623cb5d5c5dfc451aca137c892",
+      "snr": 0,
+      "stratum": 4
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "d07de897880866ad5e95e810920ca8f8cf4320b8985e3db839154431d279f927",
+      "edit_clock": [
+        45769,
+        61129
+      ],
+      "enhanced": {
+        "scores": null,
+        "sha256": "2b59d08f16ae60abf666cfefa93e20722e240501d1cf0c6c12dbcd2d35c14988",
+        "si_sdr_gain_db": -2.0072204256768433,
+        "suppression_db": 5.921956444988562
+      },
+      "group": 2,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -4.26138400052814,
+        7.018498807683953,
+        7.011121879029008,
+        3.9167623068953814,
+        4.7464059669174405
+      ],
+      "pcm_sha256": "90439db12b314db37f44293d49ef7d48bc7e0daa0d2d83fb5f76de557e824002",
+      "snr": -5,
+      "stratum": 4
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "cdff0a5380e7388dc55ed9433be16c589e8bff067f54b51bfd0840ec9de974e7",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 3,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -4.872098512042061,
+        3.553658300702038,
+        5.102016827181359,
+        -6.07997085179226,
+        -5.426126491657414
+      ],
+      "pcm_sha256": "547441aca685481110ae0cb985f2d2091a09d1e12f696a2b96da063e2b1215b2",
+      "snr": 0,
+      "stratum": 0
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "cdff0a5380e7388dc55ed9433be16c589e8bff067f54b51bfd0840ec9de974e7",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          6.408931985641515,
+          7.0705919198689475,
+          6.79690773890555,
+          0.9285382595967431,
+          5.124708709703287
+        ],
+        "sha256": "5544b727036ca04e63bff8d55b1a9b87ce6151bb09333e50343f3dff1285cdac",
+        "si_sdr_gain_db": 2.7649287266590594,
+        "suppression_db": 6.6592498439522
+      },
+      "group": 3,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -5.788316753156868,
+        -4.2890968245649805,
+        -4.632415819720475,
+        -5.780589138965331,
+        -5.07627295067039
+      ],
+      "pcm_sha256": "71b997126d8f34ddf5a2beb1f48dc315bd3a1b4c1a8c57319b45d0ab42e21bf4",
+      "snr": -5,
+      "stratum": 0
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "c6153a813d17cf15582eab22b362febd1843214702507c3c5313716cad37523d",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 3,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        9949,
+        25309
+      ],
+      "original_scores": [
+        5.972463009534095,
+        -5.044839854640849,
+        5.102016827181359,
+        -6.07997085179226,
+        -5.426126491657414
+      ],
+      "pcm_sha256": "eb9e20643d97101449da64797cfec86e92e15e0bcc9528c457b80a64c166597b",
+      "snr": 0,
+      "stratum": 0
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "c6153a813d17cf15582eab22b362febd1843214702507c3c5313716cad37523d",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          7.307094005990631,
+          6.966381559819608,
+          5.3743089874369625,
+          4.862600077808511,
+          6.228905964511495
+        ],
+        "sha256": "9ca6e8bb06c2b1d1e19addc5d6f160398dcbab1503aed472ee9dd547b39ed1dd",
+        "si_sdr_gain_db": 1.3184452623799392,
+        "suppression_db": 7.218448522851272
+      },
+      "group": 3,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        9949,
+        25309
+      ],
+      "original_scores": [
+        5.529794124905774,
+        -5.941246516515419,
+        -4.632415819720475,
+        -5.780589138965331,
+        -5.07627295067039
+      ],
+      "pcm_sha256": "c1c3d4ccb2f9b816f7eccbc2d1a9510f66123da597abc7cef7432aea02572168",
+      "snr": -5,
+      "stratum": 0
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "14a2c6a7ea1a9dcad27f0ab06f693e7bd88c4243d99346a6b0ad592d4834e536",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 3,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        9949,
+        25309
+      ],
+      "original_scores": [
+        -6.002367955976214,
+        -6.591792086180034,
+        5.102016827181359,
+        -6.07997085179226,
+        -5.426126491657414
+      ],
+      "pcm_sha256": "13e0aef6dbba516209c70612c7c4af808c2d061b6c9b54ae9eba0661d178a95f",
+      "snr": 0,
+      "stratum": 0
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "14a2c6a7ea1a9dcad27f0ab06f693e7bd88c4243d99346a6b0ad592d4834e536",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          -5.086107220640774,
+          -4.4214253829597885,
+          -4.0100955874650355,
+          2.923925602567133,
+          4.625026081944047
+        ],
+        "sha256": "dd04144cc2195f617f73e2f2abebe7dbb8105b0edfd43cb9ff1e336d57b94409",
+        "si_sdr_gain_db": 1.3745679632815735,
+        "suppression_db": 7.034293376556419
+      },
+      "group": 3,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        9949,
+        25309
+      ],
+      "original_scores": [
+        -6.344028460442836,
+        -6.647968214198505,
+        -4.632415819720475,
+        -5.780589138965331,
+        -5.07627295067039
+      ],
+      "pcm_sha256": "c91760f3915c066a49c8ecbe57bff05a6201d0195568a975d65554faacff9bea",
+      "snr": -5,
+      "stratum": 0
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "745a48b15fda50a33780a07b2c861b6009b04b9099b864a9895e6279e08c90de",
+      "edit_clock": [
+        9949,
+        25309
+      ],
+      "enhanced": null,
+      "group": 3,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        6.014745541625831,
+        5.273751832772234,
+        5.102016827181359,
+        -6.07997085179226,
+        -5.426126491657414
+      ],
+      "pcm_sha256": "7d38740fc20d0f64b96c8bf5eeb8a2f47d84c1e075cee910c227f63519a3cf29",
+      "snr": 0,
+      "stratum": 0
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "745a48b15fda50a33780a07b2c861b6009b04b9099b864a9895e6279e08c90de",
+      "edit_clock": [
+        9949,
+        25309
+      ],
+      "enhanced": {
+        "scores": [
+          7.225367611175319,
+          7.072420468813593,
+          -2.6497297276748286,
+          4.554806333733453,
+          5.9399137136511975
+        ],
+        "sha256": "04e4039d2f18ab27f7fe8ca00d48db63db4cfa1910751ee7124d30dc8169f75a",
+        "si_sdr_gain_db": 0.2774126986404939,
+        "suppression_db": 7.082929670408333
+      },
+      "group": 3,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -3.2878258714540736,
+        -5.294855120560218,
+        -4.632415819720475,
+        -5.780589138965331,
+        -5.07627295067039
+      ],
+      "pcm_sha256": "a152dadfb576e08d093f340b946289694d888f54174d803aa7b75d55adc43c99",
+      "snr": -5,
+      "stratum": 0
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "2f78f90d311decd69bb78eeb13f8f8930729c98e6146988b1877873c0a3a126c",
+      "edit_clock": [
+        9949,
+        25309
+      ],
+      "enhanced": null,
+      "group": 3,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        7.075098982111938,
+        4.519768680596653,
+        5.102016827181359,
+        -6.07997085179226,
+        -5.426126491657414
+      ],
+      "pcm_sha256": "87623b57412e05d32f92dbd05a9855a7245f76abb96ed38c467883b6b37767b9",
+      "snr": 0,
+      "stratum": 0
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "2f78f90d311decd69bb78eeb13f8f8930729c98e6146988b1877873c0a3a126c",
+      "edit_clock": [
+        9949,
+        25309
+      ],
+      "enhanced": {
+        "scores": [
+          7.38122251185051,
+          7.366574282280634,
+          4.577228590324419,
+          5.355595291958249,
+          6.592610410333954
+        ],
+        "sha256": "880df304e639c73f9a58b312134273dbd8faa6a1eb68b947a1344b0e380829a6",
+        "si_sdr_gain_db": 0.11754127700328532,
+        "suppression_db": 7.761974857566014
+      },
+      "group": 3,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        4.787009543801184,
+        -2.798945964804177,
+        -4.632415819720475,
+        -5.780589138965331,
+        -5.07627295067039
+      ],
+      "pcm_sha256": "fdb60716200b446b1ab9b89c9a3e6dbc47cd90ce37db0363d53a66fbd649651b",
+      "snr": -5,
+      "stratum": 0
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "98cfac6784b06f7bd9ad0047d0ee1d735f7ffb0b34b5ab26ee74a55640fa8067",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 4,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.097413983669028,
+        -5.90684986327648,
+        -5.516171925629523,
+        -4.853703506837829,
+        -5.404295958867649
+      ],
+      "pcm_sha256": "cf972f38381fab52c831321dc63aae7707c201cc77d3a1020734a9c8791e4e93",
+      "snr": 0,
+      "stratum": 3
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "98cfac6784b06f7bd9ad0047d0ee1d735f7ffb0b34b5ab26ee74a55640fa8067",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          -6.3464546356023375,
+          -5.0981559619322665,
+          -5.778411881964805,
+          5.014396771955455,
+          4.882015311065816
+        ],
+        "sha256": "cbb6cad307439bbc8a57ab07e54e359dc9f77d179912e619d3be4686a1f3f7c6",
+        "si_sdr_gain_db": -1.369327956790741,
+        "suppression_db": 6.000590270611789
+      },
+      "group": 4,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.260151856248137,
+        -5.512344358701905,
+        -4.705426299350597,
+        1.1297960586173663,
+        -4.221854262473734
+      ],
+      "pcm_sha256": "4e54241a21398661ebdff6fce1332d6119a999d2d56424a720c74dd041f1a712",
+      "snr": -5,
+      "stratum": 3
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "c337125ea672aad507716513c57d218f6236917c3aac8a48132c791a80fd25bd",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 4,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        32715,
+        48075
+      ],
+      "original_scores": [
+        -6.097413983669028,
+        -4.319478013726251,
+        -5.482584457281331,
+        -4.849050584615257,
+        -5.404295958867649
+      ],
+      "pcm_sha256": "2117a2e0048f2b51db42b39498b201b8dad324527707f0bdb7ffc1d18564db5c",
+      "snr": 0,
+      "stratum": 3
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "c337125ea672aad507716513c57d218f6236917c3aac8a48132c791a80fd25bd",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          -6.3464546356023375,
+          -5.264189727779585,
+          -5.827286727431555,
+          5.809065135335613,
+          4.91139242845023
+        ],
+        "sha256": "f08b5c56403b1dd84f37f43bb3f3d6b58561cf9c2ec72ad7d83064121e1977e8",
+        "si_sdr_gain_db": -1.5295998949319163,
+        "suppression_db": 6.067163781603701
+      },
+      "group": 4,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        32715,
+        48075
+      ],
+      "original_scores": [
+        -6.260151856248137,
+        -4.165840225415453,
+        -5.117798794994624,
+        1.1422868390102054,
+        -4.221854262473734
+      ],
+      "pcm_sha256": "cf4e814550ea0bab38a70a69d87fde3f89bc70dc06d8f046192d3f210a1881e5",
+      "snr": -5,
+      "stratum": 3
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "d7d471aad2d92d943eae34df55afa9560f5475d6371afaee96361c1c67ba5751",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 4,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        32715,
+        48075
+      ],
+      "original_scores": [
+        -6.097413983669028,
+        2.6989636830056942,
+        -5.638761533986043,
+        -4.832434571259055,
+        -5.404295958867649
+      ],
+      "pcm_sha256": "d048fcd9b4be63eaab40ee568d86e1e30b3c96a8f84bed66faf60bfc7b7be832",
+      "snr": 0,
+      "stratum": 3
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "d7d471aad2d92d943eae34df55afa9560f5475d6371afaee96361c1c67ba5751",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": null,
+        "sha256": "2577ad26bc0a2776593bdf913f0c6ad8483c9796a691aaf57608332f191c04e1",
+        "si_sdr_gain_db": -0.9990628337723741,
+        "suppression_db": 5.77163518635298
+      },
+      "group": 4,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        32715,
+        48075
+      ],
+      "original_scores": [
+        -6.260151856248137,
+        -4.519167410137662,
+        -5.611265129815925,
+        1.20230685264414,
+        -4.221854262473734
+      ],
+      "pcm_sha256": "9a2da75f6d5ec240f6ce2e93d781e9dfbe8e65a29fbd931c28283a4759f3a507",
+      "snr": -5,
+      "stratum": 3
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "73b8359601a086358a7d01e372cb1e7d72c162f0c1849a6f43f7d1047b4906e0",
+      "edit_clock": [
+        32715,
+        48075
+      ],
+      "enhanced": null,
+      "group": 4,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.097413983669028,
+        -2.5127487793644003,
+        -4.510978688202836,
+        -4.848519354416299,
+        -5.404295958867649
+      ],
+      "pcm_sha256": "ea01ffcbe6b2bc3650ee8167da92bc32405faf539702719ed8f35697f0353947",
+      "snr": 0,
+      "stratum": 3
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "73b8359601a086358a7d01e372cb1e7d72c162f0c1849a6f43f7d1047b4906e0",
+      "edit_clock": [
+        32715,
+        48075
+      ],
+      "enhanced": {
+        "scores": null,
+        "sha256": "3b068085d7e6698bb80426abd518e377eefc2f6336729faf185561b27e557af1",
+        "si_sdr_gain_db": -0.9319523283928763,
+        "suppression_db": 5.943131586726133
+      },
+      "group": 4,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.260151856248137,
+        -4.592214617065284,
+        3.1174021146850004,
+        1.1425670308652016,
+        -4.221854262473734
+      ],
+      "pcm_sha256": "ee659213dbce2b25184939cfe9066996d7fa3578c515502368108330eb6f9485",
+      "snr": -5,
+      "stratum": 3
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "6225f14c006cbc9aa164e835e021b4f08d4b8bf45e3a6b217382007e9804876d",
+      "edit_clock": [
+        32715,
+        48075
+      ],
+      "enhanced": null,
+      "group": 4,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.097413983669028,
+        6.6895638206104495,
+        5.1780402517689765,
+        -4.846426045911189,
+        -5.404295958867649
+      ],
+      "pcm_sha256": "a78248266fa3040474a2d7b3e70eca3de8d68e0c5a842dd6da403c95ff3de9fe",
+      "snr": 0,
+      "stratum": 3
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "6225f14c006cbc9aa164e835e021b4f08d4b8bf45e3a6b217382007e9804876d",
+      "edit_clock": [
+        32715,
+        48075
+      ],
+      "enhanced": {
+        "scores": null,
+        "sha256": "ac184da9c6e6c185e2dbe0935f0c98d584708114a74bc53e9fbb57cffb3e2661",
+        "si_sdr_gain_db": -1.150329582994889,
+        "suppression_db": 5.942596420082945
+      },
+      "group": 4,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.260151856248137,
+        -2.893912312685489,
+        -3.2832026813583783,
+        1.1375728838352344,
+        -4.221854262473734
+      ],
+      "pcm_sha256": "0dc945a5bbb07d372eae08505aa5f3bb92886d83bafd21a0d7be1d17c1a5c9ea",
+      "snr": -5,
+      "stratum": 3
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "c3ce0ad95ee880f7fedde503163b9a8249c90322ff26279a3f71b484dc6b3c18",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 5,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.406338682208461,
+        1.7472107216635282,
+        -4.056002155456352,
+        5.144037609005538,
+        -3.7618784996129655
+      ],
+      "pcm_sha256": "cfb351e031c827474b94085d319fadb4aae0cebaab02f099533e2a3c247ed97e",
+      "snr": 0,
+      "stratum": 5
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "c3ce0ad95ee880f7fedde503163b9a8249c90322ff26279a3f71b484dc6b3c18",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": null,
+        "sha256": "020dddddc960d6f4f5c55b983be8c6c45ef79d38bee128b89ff04d4ad0294687",
+        "si_sdr_gain_db": -2.707006247681881,
+        "suppression_db": 5.41431867398952
+      },
+      "group": 5,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.549768437602289,
+        -4.144226124924271,
+        -4.333978168651738,
+        -3.6555425658282474,
+        -5.922749063658884
+      ],
+      "pcm_sha256": "f273f321b7fcf59fd0e1f6119e64dcc80d1d0246718cd971ec9821e8354cf1f0",
+      "snr": -5,
+      "stratum": 5
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "9fb92db66a73e2286b52aed345e657b4f9dcb4b8f52d2d824eb72844d5ca5808",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 5,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        58652,
+        74012
+      ],
+      "original_scores": [
+        -6.406338682208461,
+        1.7472107216635282,
+        -4.751594592866759,
+        4.340314591298504,
+        -5.331897760183646
+      ],
+      "pcm_sha256": "6b390c961cebd19509dd897b0b8a343a6a96268136e71035770a5d5f1f36e317",
+      "snr": 0,
+      "stratum": 5
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "9fb92db66a73e2286b52aed345e657b4f9dcb4b8f52d2d824eb72844d5ca5808",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": null,
+        "sha256": "1bb9693843432497a425d92d4d8c9786a61148bf328350f06611edacd9961847",
+        "si_sdr_gain_db": -2.957263484515014,
+        "suppression_db": 5.252031157798667
+      },
+      "group": 5,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        58652,
+        74012
+      ],
+      "original_scores": [
+        -6.549768437602289,
+        -4.144226124924271,
+        -4.835288487063418,
+        -3.558865138229631,
+        -5.804524432456234
+      ],
+      "pcm_sha256": "cfd782e4c4d6c75944bd533d4a2e1534b79b115a782c8906a86c6648022cf98a",
+      "snr": -5,
+      "stratum": 5
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "ffed3ca4604eb3e6f90e721138631f8296ec1282bc3615b02756fc169aa8adde",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 5,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        58652,
+        74012
+      ],
+      "original_scores": [
+        -6.406338682208461,
+        1.7472107216635282,
+        -4.469983105353317,
+        4.862200819488186,
+        2.3463163888797656
+      ],
+      "pcm_sha256": "adcb3f6d585fc61937bcc7a3f43c38bb651a8b3849d6e1b345576d2c28d28422",
+      "snr": 0,
+      "stratum": 5
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "ffed3ca4604eb3e6f90e721138631f8296ec1282bc3615b02756fc169aa8adde",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": null,
+        "sha256": "e83f87600be59e628ab436dd04208b71126d9c5c47c0e49102af3ed122204cee",
+        "si_sdr_gain_db": -3.668338384527422,
+        "suppression_db": 5.547290779139367
+      },
+      "group": 5,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        58652,
+        74012
+      ],
+      "original_scores": [
+        -6.549768437602289,
+        -4.144226124924271,
+        -4.34605402690657,
+        -4.377671302545093,
+        -5.359177590184647
+      ],
+      "pcm_sha256": "d81484fa22dc8b38af27320249f031b52e7bdaa761ef9c0953608c041a6c4e8f",
+      "snr": -5,
+      "stratum": 5
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "ff86f8b3616f9af99f05370ea0e9fe9ca9429afcf5eb8571f8f25fa797925ca5",
+      "edit_clock": [
+        58652,
+        74012
+      ],
+      "enhanced": null,
+      "group": 5,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.406338682208461,
+        1.7472107216635282,
+        -4.032779184588722,
+        4.808748737668253,
+        -4.786924365937484
+      ],
+      "pcm_sha256": "da363f715897d4ce8107e053c5d5af2437180db7e501ca90d88d8be1c1126863",
+      "snr": 0,
+      "stratum": 5
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "ff86f8b3616f9af99f05370ea0e9fe9ca9429afcf5eb8571f8f25fa797925ca5",
+      "edit_clock": [
+        58652,
+        74012
+      ],
+      "enhanced": {
+        "scores": null,
+        "sha256": "96771d41f542456767ff7d10f62eec7a9943ec83305b01afcb45e6c55b49679b",
+        "si_sdr_gain_db": -4.01092665454847,
+        "suppression_db": 5.476526733495527
+      },
+      "group": 5,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.549768437602289,
+        -4.144226124924271,
+        -3.8833331942083826,
+        -3.5987368276900837,
+        -5.60813236909015
+      ],
+      "pcm_sha256": "c70657456d0cc8875804da63a6ba7d69ccb832a9a03092f148c49d7122f9da9a",
+      "snr": -5,
+      "stratum": 5
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "681057ccef9676f2006427d2470a28bc152d9f9fdcad9dde8196744c4f8a9419",
+      "edit_clock": [
+        58652,
+        74012
+      ],
+      "enhanced": null,
+      "group": 5,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.406338682208461,
+        1.7472107216635282,
+        2.884953433870367,
+        5.855865215857269,
+        -5.276762961923563
+      ],
+      "pcm_sha256": "b544fc91dfaa70e0776a83209d66205d48e5c4a58b5287faee112364c5216cdc",
+      "snr": 0,
+      "stratum": 5
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": "681057ccef9676f2006427d2470a28bc152d9f9fdcad9dde8196744c4f8a9419",
+      "edit_clock": [
+        58652,
+        74012
+      ],
+      "enhanced": {
+        "scores": null,
+        "sha256": "ee643f4be7c06250d85b541625189bf4eb456f9fd91484cd9972bd553c9218b3",
+        "si_sdr_gain_db": -3.5044596513451935,
+        "suppression_db": 5.39204308139854
+      },
+      "group": 5,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.549768437602289,
+        -4.144226124924271,
+        -3.7025771699767644,
+        -3.9127059140863234,
+        -6.389599783634163
+      ],
+      "pcm_sha256": "f83ec35d452e2e84500b16ab7e6373d93f6cff8e9b2bddc53a2dcabbbe61dd75",
+      "snr": -5,
+      "stratum": 5
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "7936f6cd5382d70384512e15dd1ad285a925d7b5d2f9f486dd43de598b6fb530",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 6,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -5.961988419287872,
+        -2.7043958468602813,
+        4.4992395234699245,
+        -1.868726205191469,
+        6.1501032964525475
+      ],
+      "pcm_sha256": "158eb8a3b03ea9d29abbba35e40ebd9dc5e8861ee36d55f44c52b473b86b21d1",
+      "snr": 0,
+      "stratum": 6
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "7936f6cd5382d70384512e15dd1ad285a925d7b5d2f9f486dd43de598b6fb530",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          0.42661190247828196,
+          7.020100986832036,
+          5.903280285596732,
+          5.847607793915821,
+          7.244074770723593
+        ],
+        "sha256": "81d710a9e301e2d7f330f55fab23f471fe380dd4a1c1dc3a21f992776b020911",
+        "si_sdr_gain_db": 1.9561320864848524,
+        "suppression_db": 7.3654590059828795
+      },
+      "group": 6,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.2108921938997765,
+        -4.731767213929198,
+        -2.3699416842208,
+        3.7187664342851576,
+        4.797641060375774
+      ],
+      "pcm_sha256": "b475d1d5011a18d7d14a0064015a9eb223fcd58385c759c846f789e2792e944e",
+      "snr": -5,
+      "stratum": 6
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "38991ae315afb8fe496d46a7c00d05c2554b59b4cc719ea20c5a8f1906b9202a",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 6,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        63052,
+        78412
+      ],
+      "original_scores": [
+        -5.961988419287872,
+        -2.7043958468602813,
+        4.48793417345709,
+        7.196750039692606,
+        7.169935717496619
+      ],
+      "pcm_sha256": "085b00d6b75a5f23147e11759ec9a69baef091bc7cbcd7ee2a885bd8a31cfbda",
+      "snr": 0,
+      "stratum": 6
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "38991ae315afb8fe496d46a7c00d05c2554b59b4cc719ea20c5a8f1906b9202a",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": null,
+        "sha256": "100b82b22759c571a2134c0c0d93157c884dcb21bbcb4793583ab401fe60be11",
+        "si_sdr_gain_db": 1.710561903162899,
+        "suppression_db": 7.429127580698451
+      },
+      "group": 6,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        63052,
+        78412
+      ],
+      "original_scores": [
+        -6.2108921938997765,
+        -4.731767213929198,
+        -2.439573937899215,
+        7.161744652669846,
+        7.093907994739336
+      ],
+      "pcm_sha256": "cb41447e322734eed7d8ad2a26270db13d552a898349f3a3eec6f43ec3377b99",
+      "snr": -5,
+      "stratum": 6
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "db003a29631a3270d62778e6b1dc720b21741ae26e676b6fc15ec62ee0ea0e1c",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 6,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        63052,
+        78412
+      ],
+      "original_scores": [
+        -5.961988419287872,
+        -2.7043958468602813,
+        4.401570119308043,
+        4.4806150108344,
+        4.814228963804761
+      ],
+      "pcm_sha256": "13abce65185d9e4ddcb53d5b4445ec330b65d413a6b359550c4edbec57405d7c",
+      "snr": 0,
+      "stratum": 6
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "db003a29631a3270d62778e6b1dc720b21741ae26e676b6fc15ec62ee0ea0e1c",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          0.42661190247828196,
+          7.020100986832036,
+          5.535306917014919,
+          6.759645434167561,
+          7.311821094113661
+        ],
+        "sha256": "4d036006d190167c727f43683ec21f032d234221cc9ca8befce116cafc014220",
+        "si_sdr_gain_db": 1.7576092334998146,
+        "suppression_db": 7.393019717992303
+      },
+      "group": 6,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        63052,
+        78412
+      ],
+      "original_scores": [
+        -6.2108921938997765,
+        -4.731767213929198,
+        -2.8189382389490016,
+        4.569149742082976,
+        5.570087904255561
+      ],
+      "pcm_sha256": "6b91bf54e7f867cda34b2fd38283614cfbc18b1da732b308efb123a54834aa5a",
+      "snr": -5,
+      "stratum": 6
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "ca8fb9e0e7d9c3eebefbc7b66edd3dd5f23c90eb28e4be89a1417160477022ec",
+      "edit_clock": [
+        63052,
+        78412
+      ],
+      "enhanced": null,
+      "group": 6,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -5.961988419287872,
+        -2.7043958468602813,
+        4.726398164502042,
+        4.766836472617192,
+        5.319029996910995
+      ],
+      "pcm_sha256": "a3acf3127f785db3e41a273fffaf9b5289b13e59df3d8e2f5bc656e98147876e",
+      "snr": 0,
+      "stratum": 6
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "ca8fb9e0e7d9c3eebefbc7b66edd3dd5f23c90eb28e4be89a1417160477022ec",
+      "edit_clock": [
+        63052,
+        78412
+      ],
+      "enhanced": {
+        "scores": [
+          0.42661190247828196,
+          7.020100986832036,
+          5.96263597065051,
+          3.4078616788848053,
+          5.864824553506889
+        ],
+        "sha256": "d3eb73a08e3850861361d54e400c350f9d2b37b2800b032f93166b02387fb89a",
+        "si_sdr_gain_db": 1.6972072648132608,
+        "suppression_db": 7.417668653438838
+      },
+      "group": 6,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.2108921938997765,
+        -4.731767213929198,
+        0.6938085073973453,
+        3.7742736277158078,
+        -3.9600834178791504
+      ],
+      "pcm_sha256": "c5a4dc548bc207d1a28c56a6649529e3c8228c589c98e2c95f981817c2cf6395",
+      "snr": -5,
+      "stratum": 6
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "e8b052101101c5720371994dae6b0d5ca83e7a42433b19e9ce343fc1e1512858",
+      "edit_clock": [
+        63052,
+        78412
+      ],
+      "enhanced": null,
+      "group": 6,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -5.961988419287872,
+        -2.7043958468602813,
+        4.159296384643114,
+        6.396947626276829,
+        7.19468007120687
+      ],
+      "pcm_sha256": "4b2911301859da6f07b2423de4420dcc547aae4bc3be61c42f4a089ea7a4f562",
+      "snr": 0,
+      "stratum": 6
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": "e8b052101101c5720371994dae6b0d5ca83e7a42433b19e9ce343fc1e1512858",
+      "edit_clock": [
+        63052,
+        78412
+      ],
+      "enhanced": {
+        "scores": [
+          0.42661190247828196,
+          7.020100986832036,
+          5.187383168588402,
+          4.781203828120784,
+          7.184315205202895
+        ],
+        "sha256": "81ac5d55e12eb6eea62865a940fc913480e4eb747eb44f1a7900f88744e4c30e",
+        "si_sdr_gain_db": 1.676095450419012,
+        "suppression_db": 7.42917080096404
+      },
+      "group": 6,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.2108921938997765,
+        -4.731767213929198,
+        -3.195974852814247,
+        4.90140223301961,
+        6.498000192713746
+      ],
+      "pcm_sha256": "6b7b62b67194e7609d248e258951eff31b1d93ef4a3b107bce05e7ab25445280",
+      "snr": -5,
+      "stratum": 6
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "d4c86f41f8d4a7ee40167b414f31a9236a701863a873e840220339bd681387f4",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 7,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -5.408314220599011,
+        -3.6550453481581187,
+        3.913270267983327,
+        -0.044527376014817155,
+        -2.855196247962388
+      ],
+      "pcm_sha256": "fa01c4ec635d4cc2fe06e827e03a63ef70b3672375be9ffd2fc252426e7154d9",
+      "snr": 0,
+      "stratum": 7
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "d4c86f41f8d4a7ee40167b414f31a9236a701863a873e840220339bd681387f4",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          5.35876055270492,
+          -3.0627613138723935,
+          4.80037716142696,
+          -2.8601169975155445,
+          -3.1718849817163424
+        ],
+        "sha256": "ab6ecbf9814d50cd9bd36d25572ca3d14bfbf10104b912e5393e054f62c335e7",
+        "si_sdr_gain_db": 0.7999418598198647,
+        "suppression_db": 10.51275270224706
+      },
+      "group": 7,
+      "kind": "untouched",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -4.789050152083285,
+        -5.28612609818011,
+        -2.465587133672782,
+        4.024087210166704,
+        -4.414493533248803
+      ],
+      "pcm_sha256": "9bfc2133e0f472a427458a8d9bc542030254bc1b932e8a166db6a7d59464c106",
+      "snr": -5,
+      "stratum": 7
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "83edffa73475dbb0cf1c563fb503d12196b7aebce95dac2cd667224b623eb254",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 7,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        79677,
+        95037
+      ],
+      "original_scores": [
+        -5.408314220599011,
+        -3.6550453481581187,
+        3.913270267983327,
+        -2.2433423828290757,
+        -4.762426336313779
+      ],
+      "pcm_sha256": "4f7a7d8e58490937cc48577a3fd57b46c130dd8872465b773c4b509929a415ac",
+      "snr": 0,
+      "stratum": 7
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "83edffa73475dbb0cf1c563fb503d12196b7aebce95dac2cd667224b623eb254",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          5.35876055270492,
+          -3.0627613138723935,
+          4.80037716142696,
+          -3.201083691133982,
+          3.663860995706886
+        ],
+        "sha256": "bcfd929e166d5e9932b7ea8c000afb0b0fd4e2277db38802047968c04eb909d7",
+        "si_sdr_gain_db": 1.637811706498412,
+        "suppression_db": 10.436204867707822
+      },
+      "group": 7,
+      "kind": "same_reader_splice",
+      "ordinary_splice_clock": [
+        79677,
+        95037
+      ],
+      "original_scores": [
+        -4.789050152083285,
+        -5.28612609818011,
+        -2.465587133672782,
+        3.8571700957887085,
+        -5.510601021189828
+      ],
+      "pcm_sha256": "0b7a9ca8fb8179211b0c137eb782a097f49ec18b7d29ba0f2c1f3b45814ba668",
+      "snr": -5,
+      "stratum": 7
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "e419553320b6fda45fd30ff8f26b68922dd26124e9f66837cd00773bf86517f9",
+      "edit_clock": null,
+      "enhanced": null,
+      "group": 7,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        79677,
+        95037
+      ],
+      "original_scores": [
+        -5.408314220599011,
+        -3.6550453481581187,
+        3.913270267983327,
+        -2.5461043975559825,
+        5.724299719573548
+      ],
+      "pcm_sha256": "636e3e1f4e807a8136eebfd98109c9ce58d717f859592527da6644e783e0708e",
+      "snr": 0,
+      "stratum": 7
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "e419553320b6fda45fd30ff8f26b68922dd26124e9f66837cd00773bf86517f9",
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          5.35876055270492,
+          -3.0627613138723935,
+          4.80037716142696,
+          -3.1102278012864364,
+          6.846561456502741
+        ],
+        "sha256": "c9c6b6ad2bfbb003ceb0cce97f73ab5428d9afe53eb06053fc09e59d2d484d8b",
+        "si_sdr_gain_db": 1.4771818494895492,
+        "suppression_db": 10.31350566491559
+      },
+      "group": 7,
+      "kind": "different_reader_splice",
+      "ordinary_splice_clock": [
+        79677,
+        95037
+      ],
+      "original_scores": [
+        -4.789050152083285,
+        -5.28612609818011,
+        -2.465587133672782,
+        3.0514123260453814,
+        -2.455034301541222
+      ],
+      "pcm_sha256": "aecf47bb4380a63d0bf93a682e5dc2730671fec94ab1f730572f426181279499",
+      "snr": -5,
+      "stratum": 7
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "79a2005b0afe01c1f90fae2fe4175aab1b270ca25e905038f5ea7e07b76b28dc",
+      "edit_clock": [
+        79677,
+        95037
+      ],
+      "enhanced": null,
+      "group": 7,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -5.408314220599011,
+        -3.6550453481581187,
+        3.913270267983327,
+        -2.029032725008249,
+        4.903038722560258
+      ],
+      "pcm_sha256": "3e16cf2426afaa56270f11f5c2b126be901cbc1dc50973f5559a827917f236cd",
+      "snr": 0,
+      "stratum": 7
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "79a2005b0afe01c1f90fae2fe4175aab1b270ca25e905038f5ea7e07b76b28dc",
+      "edit_clock": [
+        79677,
+        95037
+      ],
+      "enhanced": {
+        "scores": [
+          5.35876055270492,
+          -3.0627613138723935,
+          4.80037716142696,
+          -2.7331662283042055,
+          4.9357628293638856
+        ],
+        "sha256": "fc0e827d93662344f2a204c1b4a0ebd1e7b23dcf3cf365723d97fff5c81f6827",
+        "si_sdr_gain_db": 1.0957339266672044,
+        "suppression_db": 10.349695614908313
+      },
+      "group": 7,
+      "kind": "piper",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -4.789050152083285,
+        -5.28612609818011,
+        -2.465587133672782,
+        4.01130055936202,
+        -0.8943709662137178
+      ],
+      "pcm_sha256": "ae67b1e758425f3517f22327adb5e04b537e975132fb29bfa48a4162a2b29b2d",
+      "snr": -5,
+      "stratum": 7
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "5ccee6f78d5060ace0119dc51a92eebf8ad347033d81dfe9d5683916667ab851",
+      "edit_clock": [
+        79677,
+        95037
+      ],
+      "enhanced": null,
+      "group": 7,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -5.408314220599011,
+        -3.6550453481581187,
+        3.913270267983327,
+        1.6816689634382436,
+        6.172318147036008
+      ],
+      "pcm_sha256": "840b62a6f3baf3a50a83bd7cd5051a214c63f2ac3a0f7fae06e22bb5363cc01b",
+      "snr": 0,
+      "stratum": 7
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": "5ccee6f78d5060ace0119dc51a92eebf8ad347033d81dfe9d5683916667ab851",
+      "edit_clock": [
+        79677,
+        95037
+      ],
+      "enhanced": {
+        "scores": [
+          5.35876055270492,
+          -3.0627613138723935,
+          4.80037716142696,
+          -2.517577946987773,
+          5.525351212672112
+        ],
+        "sha256": "ce784e0bd0efc2a64881c0e1740f5b5b9ef0e32ebf29e9146f0ae4f9aaaf9622",
+        "si_sdr_gain_db": 1.5492960356597782,
+        "suppression_db": 10.400224600416852
+      },
+      "group": 7,
+      "kind": "kitten",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -4.789050152083285,
+        -5.28612609818011,
+        -2.465587133672782,
+        4.244275121355398,
+        -3.119697630869622
+      ],
+      "pcm_sha256": "832cbde59cb0178cbcfa6517d7e0a57ccc62f9a15e7062b02e86fa47a928fcde",
+      "snr": -5,
+      "stratum": 7
+    },
+    {
+      "capture": 0,
+      "dry_pcm_sha256": null,
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          null,
+          4.601862108962762,
+          null,
+          -6.348805925743907,
+          -6.989638745802175
+        ],
+        "sha256": "e8ce588a11a68892bacc066517373e4d117da6a6a36a52d99f975228eef82afa",
+        "si_sdr_gain_db": null,
+        "suppression_db": 9.09706523948038
+      },
+      "group": "isolated-0",
+      "kind": "isolated",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        null,
+        -6.416568742109088,
+        -6.69217064075627,
+        -7.095487603186738,
+        -7.13404794088312
+      ],
+      "pcm_sha256": "d6a6cd5a4fedd3eb0c8fead8e53d67f11208abd47988256383a4f9a4a7124612",
+      "snr": null,
+      "stratum": null
+    },
+    {
+      "capture": 1,
+      "dry_pcm_sha256": null,
+      "edit_clock": null,
+      "enhanced": {
+        "scores": [
+          -4.721614792325744,
+          -5.8750591640227405,
+          null,
+          -7.025343413955848,
+          -5.5230774856873985
+        ],
+        "sha256": "557469ceb0e8e21af19267a92a1a265050b78cc878dac31158e4a28adcea9b39",
+        "si_sdr_gain_db": null,
+        "suppression_db": 7.722397597794798
+      },
+      "group": "isolated-1",
+      "kind": "isolated",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.688951501231827,
+        -6.362111075166652,
+        -7.114181580364642,
+        -6.882424333425532,
+        -5.265359909337211
+      ],
+      "pcm_sha256": "9aa3dbe52a874165423ac79d862c817c86d71cbf517871d11401e1fd329bcf2f",
+      "snr": null,
+      "stratum": null
+    },
+    {
+      "capture": 2,
+      "dry_pcm_sha256": null,
+      "edit_clock": null,
+      "enhanced": {
+        "scores": null,
+        "sha256": "6c370c8f4866943d098c7a56245e82f81ce5504291088fba22261664dc40e028",
+        "si_sdr_gain_db": null,
+        "suppression_db": 4.2253319259866355
+      },
+      "group": "isolated-2",
+      "kind": "isolated",
+      "ordinary_splice_clock": null,
+      "original_scores": [
+        -6.108800947046742,
+        -5.356903109034436,
+        -6.471446015218558,
+        -6.596545226454528,
+        -5.752615939858858
+      ],
+      "pcm_sha256": "8c18212eb07bf20a57613cb5087cc55d071de74ebaf12f529c8307ce8e5c1cf1",
+      "snr": null,
+      "stratum": null
+    }
+  ],
+  "sample_rate": 16000,
+  "schema": "chipmunk.audio-random-clock-stock/1",
+  "source_commitments": {
+    "capture_header_hashes": [
+      "1c868c06dd407951029b9983b848ec0d24bc833eab5323322301b473f68d6c24",
+      "2aa4abc38d802caaa9b54d44f0dfe97c42587f9906d106c2615bccae259a965a",
+      "3c6b4540344a3e5f84442c91d6222883632ec9ca27a8b5438fa3c19695350bd4"
+    ],
+    "detector_assets": {
+      "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+      "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+    },
+    "enhancer_sha256": "b4718df6228e7bdf1a8a435cf98f838636eb2fd331acabf86ba87c5192ebcb87",
+    "masker_overlap_centiseconds": [
+      96,
+      96,
+      85,
+      26,
+      96,
+      96,
+      96,
+      96
+    ],
+    "mls_parquet_groups": [
+      11,
+      13,
+      15,
+      20,
+      22,
+      24,
+      26,
+      29,
+      35,
+      37
+    ],
+    "previous_stock_freeze_sha256": "4b5da5240a12528bd703b41943f714a11fa15ef6cdbf9fcdf3d08cc028f268f1",
+    "seed": 271083,
+    "speaker_groups_excluded_from_prior_stock": 12,
+    "synthesis_assets": {
+      "kitten_checkpoint": "f7b0afcbee92870b32b8e0276d855b954dc25470c9f051b376ac7eee537c76fc",
+      "kitten_config": "b66006ccbeccd4de5fc3c9272059c47f5725df7215fd889785c03602652fab64",
+      "kitten_runtime_wheel": "cba97464da2ec56384b9fc03004449dadbe6d9abd16aa89e98953027854fd7d9",
+      "kitten_stock_voices": "8aa7cee235abb0739cb51e6559685f65a4dacd95568833d05699b1633f519b3f",
+      "piper_checkpoint": "b9739443232a80a59c7d18810dd856899bf16a7964725f5ab81ea49b1351cb71",
+      "piper_config": "6c2db7f558a4a8deb9fe822583c1c5105f6c4e834dd0f9de8ad17a888ee9fe1d",
+      "piper_publisher_card": "60eaf4d10009d1bd4a1aa555d337dae00f60421d72fee415b9139a021e7cb5d0"
+    }
+  },
+  "stratum_sample_limits": [
+    0,
+    10080,
+    20160,
+    30240,
+    40320,
+    50400,
+    60480,
+    70560,
+    80641
+  ],
+  "summary": {
+    "earlier_sparse": {
+      "-5dB": {
+        "correct": 2,
+        "distinct_edits": 2,
+        "false_isolated": 0,
+        "false_ordinary": 6,
+        "geometry_eligible": 12,
+        "isolated": 0,
+        "locations": [
+          {
+            "capture": 1,
+            "edit_clock": [
+              19752,
+              35112
+            ],
+            "group": 1,
+            "kind": "piper",
+            "snr": -5,
+            "stratum": 1,
+            "view": "original",
+            "window": [
+              16000,
+              48000
+            ]
+          },
+          {
+            "capture": 1,
+            "edit_clock": [
+              19752,
+              35112
+            ],
+            "group": 1,
+            "kind": "kitten",
+            "snr": -5,
+            "stratum": 1,
+            "view": "original",
+            "window": [
+              16000,
+              48000
+            ]
+          }
+        ],
+        "no_flag_edit": 12,
+        "ordinary": 24,
+        "ordinary_groups": 3,
+        "positive": 16,
+        "selected_enhanced": 0,
+        "selected_original": 10,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 2
+      },
+      "0dB": {
+        "correct": 6,
+        "distinct_edits": 6,
+        "false_isolated": 0,
+        "false_ordinary": 7,
+        "geometry_eligible": 12,
+        "isolated": 0,
+        "locations": [
+          {
+            "capture": 1,
+            "edit_clock": [
+              19752,
+              35112
+            ],
+            "group": 1,
+            "kind": "piper",
+            "snr": 0,
+            "stratum": 1,
+            "view": "original",
+            "window": [
+              16000,
+              48000
+            ]
+          },
+          {
+            "capture": 1,
+            "edit_clock": [
+              19752,
+              35112
+            ],
+            "group": 1,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 1,
+            "view": "original",
+            "window": [
+              16000,
+              48000
+            ]
+          },
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              48000,
+              80000
+            ]
+          },
+          {
+            "capture": 1,
+            "edit_clock": [
+              32715,
+              48075
+            ],
+            "group": 4,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 3,
+            "view": "original",
+            "window": [
+              16000,
+              48000
+            ]
+          },
+          {
+            "capture": 2,
+            "edit_clock": [
+              58652,
+              74012
+            ],
+            "group": 5,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 5,
+            "view": "original",
+            "window": [
+              48000,
+              80000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              63052,
+              78412
+            ],
+            "group": 6,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 6,
+            "view": "original",
+            "window": [
+              48000,
+              80000
+            ]
+          }
+        ],
+        "no_flag_edit": 9,
+        "ordinary": 24,
+        "ordinary_groups": 3,
+        "positive": 16,
+        "selected_enhanced": 0,
+        "selected_original": 14,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 1
+      },
+      "all": {
+        "correct": 8,
+        "distinct_edits": 6,
+        "false_isolated": 0,
+        "false_ordinary": 13,
+        "geometry_eligible": 24,
+        "isolated": 3,
+        "locations": [
+          {
+            "capture": 1,
+            "edit_clock": [
+              19752,
+              35112
+            ],
+            "group": 1,
+            "kind": "piper",
+            "snr": 0,
+            "stratum": 1,
+            "view": "original",
+            "window": [
+              16000,
+              48000
+            ]
+          },
+          {
+            "capture": 1,
+            "edit_clock": [
+              19752,
+              35112
+            ],
+            "group": 1,
+            "kind": "piper",
+            "snr": -5,
+            "stratum": 1,
+            "view": "original",
+            "window": [
+              16000,
+              48000
+            ]
+          },
+          {
+            "capture": 1,
+            "edit_clock": [
+              19752,
+              35112
+            ],
+            "group": 1,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 1,
+            "view": "original",
+            "window": [
+              16000,
+              48000
+            ]
+          },
+          {
+            "capture": 1,
+            "edit_clock": [
+              19752,
+              35112
+            ],
+            "group": 1,
+            "kind": "kitten",
+            "snr": -5,
+            "stratum": 1,
+            "view": "original",
+            "window": [
+              16000,
+              48000
+            ]
+          },
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              48000,
+              80000
+            ]
+          },
+          {
+            "capture": 1,
+            "edit_clock": [
+              32715,
+              48075
+            ],
+            "group": 4,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 3,
+            "view": "original",
+            "window": [
+              16000,
+              48000
+            ]
+          },
+          {
+            "capture": 2,
+            "edit_clock": [
+              58652,
+              74012
+            ],
+            "group": 5,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 5,
+            "view": "original",
+            "window": [
+              48000,
+              80000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              63052,
+              78412
+            ],
+            "group": 6,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 6,
+            "view": "original",
+            "window": [
+              48000,
+              80000
+            ]
+          }
+        ],
+        "no_flag_edit": 21,
+        "ordinary": 48,
+        "ordinary_groups": 3,
+        "positive": 32,
+        "selected_enhanced": 0,
+        "selected_original": 24,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 3
+      },
+      "isolated": {
+        "correct": 0,
+        "distinct_edits": 0,
+        "false_isolated": 0,
+        "false_ordinary": 0,
+        "geometry_eligible": 0,
+        "isolated": 3,
+        "locations": [],
+        "no_flag_edit": 0,
+        "ordinary": 0,
+        "ordinary_groups": 0,
+        "positive": 0,
+        "selected_enhanced": 0,
+        "selected_original": 0,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 0
+      }
+    },
+    "enhanced_rescue": {
+      "-5dB": {
+        "correct": 4,
+        "distinct_edits": 4,
+        "false_isolated": 0,
+        "false_ordinary": 11,
+        "geometry_eligible": 16,
+        "isolated": 0,
+        "locations": [
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "piper",
+            "snr": -5,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              32000,
+              64000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              9949,
+              25309
+            ],
+            "group": 3,
+            "kind": "piper",
+            "snr": -5,
+            "stratum": 0,
+            "view": "enhanced",
+            "window": [
+              0,
+              32000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              9949,
+              25309
+            ],
+            "group": 3,
+            "kind": "kitten",
+            "snr": -5,
+            "stratum": 0,
+            "view": "enhanced",
+            "window": [
+              0,
+              32000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              63052,
+              78412
+            ],
+            "group": 6,
+            "kind": "kitten",
+            "snr": -5,
+            "stratum": 6,
+            "view": "enhanced",
+            "window": [
+              64000,
+              96000
+            ]
+          }
+        ],
+        "no_flag_edit": 8,
+        "ordinary": 24,
+        "ordinary_groups": 5,
+        "positive": 16,
+        "selected_enhanced": 14,
+        "selected_original": 5,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 4
+      },
+      "0dB": {
+        "correct": 4,
+        "distinct_edits": 4,
+        "false_isolated": 0,
+        "false_ordinary": 3,
+        "geometry_eligible": 16,
+        "isolated": 0,
+        "locations": [
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "piper",
+            "snr": 0,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              32000,
+              64000
+            ]
+          },
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              32000,
+              64000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              9949,
+              25309
+            ],
+            "group": 3,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 0,
+            "view": "original",
+            "window": [
+              0,
+              32000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              63052,
+              78412
+            ],
+            "group": 6,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 6,
+            "view": "original",
+            "window": [
+              64000,
+              96000
+            ]
+          }
+        ],
+        "no_flag_edit": 11,
+        "ordinary": 24,
+        "ordinary_groups": 2,
+        "positive": 16,
+        "selected_enhanced": 0,
+        "selected_original": 8,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 1
+      },
+      "all": {
+        "correct": 8,
+        "distinct_edits": 5,
+        "false_isolated": 0,
+        "false_ordinary": 14,
+        "geometry_eligible": 32,
+        "isolated": 3,
+        "locations": [
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "piper",
+            "snr": 0,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              32000,
+              64000
+            ]
+          },
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "piper",
+            "snr": -5,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              32000,
+              64000
+            ]
+          },
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              32000,
+              64000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              9949,
+              25309
+            ],
+            "group": 3,
+            "kind": "piper",
+            "snr": -5,
+            "stratum": 0,
+            "view": "enhanced",
+            "window": [
+              0,
+              32000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              9949,
+              25309
+            ],
+            "group": 3,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 0,
+            "view": "original",
+            "window": [
+              0,
+              32000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              9949,
+              25309
+            ],
+            "group": 3,
+            "kind": "kitten",
+            "snr": -5,
+            "stratum": 0,
+            "view": "enhanced",
+            "window": [
+              0,
+              32000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              63052,
+              78412
+            ],
+            "group": 6,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 6,
+            "view": "original",
+            "window": [
+              64000,
+              96000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              63052,
+              78412
+            ],
+            "group": 6,
+            "kind": "kitten",
+            "snr": -5,
+            "stratum": 6,
+            "view": "enhanced",
+            "window": [
+              64000,
+              96000
+            ]
+          }
+        ],
+        "no_flag_edit": 19,
+        "ordinary": 48,
+        "ordinary_groups": 5,
+        "positive": 32,
+        "selected_enhanced": 14,
+        "selected_original": 13,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 5
+      },
+      "isolated": {
+        "correct": 0,
+        "distinct_edits": 0,
+        "false_isolated": 0,
+        "false_ordinary": 0,
+        "geometry_eligible": 0,
+        "isolated": 3,
+        "locations": [],
+        "no_flag_edit": 0,
+        "ordinary": 0,
+        "ordinary_groups": 0,
+        "positive": 0,
+        "selected_enhanced": 0,
+        "selected_original": 0,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 0
+      }
+    },
+    "equal_point_sparse": {
+      "-5dB": {
+        "correct": 0,
+        "distinct_edits": 0,
+        "false_isolated": 0,
+        "false_ordinary": 3,
+        "geometry_eligible": 12,
+        "isolated": 0,
+        "locations": [],
+        "no_flag_edit": 14,
+        "ordinary": 24,
+        "ordinary_groups": 2,
+        "positive": 16,
+        "selected_enhanced": 0,
+        "selected_original": 5,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 2
+      },
+      "0dB": {
+        "correct": 1,
+        "distinct_edits": 1,
+        "false_isolated": 0,
+        "false_ordinary": 2,
+        "geometry_eligible": 12,
+        "isolated": 0,
+        "locations": [
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              48000,
+              80000
+            ]
+          }
+        ],
+        "no_flag_edit": 15,
+        "ordinary": 24,
+        "ordinary_groups": 2,
+        "positive": 16,
+        "selected_enhanced": 0,
+        "selected_original": 3,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 0
+      },
+      "all": {
+        "correct": 1,
+        "distinct_edits": 1,
+        "false_isolated": 0,
+        "false_ordinary": 5,
+        "geometry_eligible": 24,
+        "isolated": 3,
+        "locations": [
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              48000,
+              80000
+            ]
+          }
+        ],
+        "no_flag_edit": 29,
+        "ordinary": 48,
+        "ordinary_groups": 3,
+        "positive": 32,
+        "selected_enhanced": 0,
+        "selected_original": 8,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 2
+      },
+      "isolated": {
+        "correct": 0,
+        "distinct_edits": 0,
+        "false_isolated": 0,
+        "false_ordinary": 0,
+        "geometry_eligible": 0,
+        "isolated": 3,
+        "locations": [],
+        "no_flag_edit": 0,
+        "ordinary": 0,
+        "ordinary_groups": 0,
+        "positive": 0,
+        "selected_enhanced": 0,
+        "selected_original": 0,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 0
+      }
+    },
+    "existing_short": {
+      "-5dB": {
+        "correct": 1,
+        "distinct_edits": 1,
+        "false_isolated": 0,
+        "false_ordinary": 3,
+        "geometry_eligible": 16,
+        "isolated": 0,
+        "locations": [
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "piper",
+            "snr": -5,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              32000,
+              64000
+            ]
+          }
+        ],
+        "no_flag_edit": 14,
+        "ordinary": 24,
+        "ordinary_groups": 2,
+        "positive": 16,
+        "selected_enhanced": 0,
+        "selected_original": 5,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 1
+      },
+      "0dB": {
+        "correct": 4,
+        "distinct_edits": 4,
+        "false_isolated": 0,
+        "false_ordinary": 3,
+        "geometry_eligible": 16,
+        "isolated": 0,
+        "locations": [
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "piper",
+            "snr": 0,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              32000,
+              64000
+            ]
+          },
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              32000,
+              64000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              9949,
+              25309
+            ],
+            "group": 3,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 0,
+            "view": "original",
+            "window": [
+              0,
+              32000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              63052,
+              78412
+            ],
+            "group": 6,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 6,
+            "view": "original",
+            "window": [
+              64000,
+              96000
+            ]
+          }
+        ],
+        "no_flag_edit": 11,
+        "ordinary": 24,
+        "ordinary_groups": 2,
+        "positive": 16,
+        "selected_enhanced": 0,
+        "selected_original": 8,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 1
+      },
+      "all": {
+        "correct": 5,
+        "distinct_edits": 4,
+        "false_isolated": 0,
+        "false_ordinary": 6,
+        "geometry_eligible": 32,
+        "isolated": 3,
+        "locations": [
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "piper",
+            "snr": 0,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              32000,
+              64000
+            ]
+          },
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "piper",
+            "snr": -5,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              32000,
+              64000
+            ]
+          },
+          {
+            "capture": 2,
+            "edit_clock": [
+              45769,
+              61129
+            ],
+            "group": 2,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 4,
+            "view": "original",
+            "window": [
+              32000,
+              64000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              9949,
+              25309
+            ],
+            "group": 3,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 0,
+            "view": "original",
+            "window": [
+              0,
+              32000
+            ]
+          },
+          {
+            "capture": 0,
+            "edit_clock": [
+              63052,
+              78412
+            ],
+            "group": 6,
+            "kind": "kitten",
+            "snr": 0,
+            "stratum": 6,
+            "view": "original",
+            "window": [
+              64000,
+              96000
+            ]
+          }
+        ],
+        "no_flag_edit": 25,
+        "ordinary": 48,
+        "ordinary_groups": 3,
+        "positive": 32,
+        "selected_enhanced": 0,
+        "selected_original": 13,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 2
+      },
+      "isolated": {
+        "correct": 0,
+        "distinct_edits": 0,
+        "false_isolated": 0,
+        "false_ordinary": 0,
+        "geometry_eligible": 0,
+        "isolated": 3,
+        "locations": [],
+        "no_flag_edit": 0,
+        "ordinary": 0,
+        "ordinary_groups": 0,
+        "positive": 0,
+        "selected_enhanced": 0,
+        "selected_original": 0,
+        "unassessed_edit": 0,
+        "unassessed_isolated": 0,
+        "unassessed_ordinary": 0,
+        "wrong_window": 0
+      }
+    },
+    "geometry": {
+      "earlier_sparse": 6,
+      "enhanced_rescue": 8,
+      "equal_point_sparse": 6,
+      "existing_short": 8
+    },
+    "signal_audit": {
+      "admitted_enhancement_cases": 28,
+      "enhanced_classifier_forwards": 137,
+      "median_si_sdr_gain_db": 0.8979318366787727,
+      "median_suppression_db": 7.009316053452084,
+      "original_classifier_forwards": 414
+    }
+  },
+  "window_samples": [
+    [
+      0,
+      32000
+    ],
+    [
+      16000,
+      48000
+    ],
+    [
+      32000,
+      64000
+    ],
+    [
+      48000,
+      80000
+    ],
+    [
+      64000,
+      96000
+    ]
+  ]
+}

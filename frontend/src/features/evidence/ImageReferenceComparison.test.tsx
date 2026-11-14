@@ -158,6 +158,45 @@ describe('earlier-copy comparison', () => {
     expect((await screen.findByRole('alert')).textContent).toContain('The server returned an incomplete exact-block JPEG comparison.')
   })
 
+  it('shows detail loss with matching crops and rejects impossible measured support', async () => {
+    const result = structuredClone(comparison)
+    const measured = result.comparison
+    measured.schema = 'chipmunk.image-reference-comparison/15'
+    measured.reference = { ...measured.reference, width: 624, height: 528 }
+    measured.submitted = { ...measured.submitted, width: 624, height: 528 }
+    measured.mask = artifact('difference-mask.png', 624, 528)
+    const bounds = { x: 288, y: 224, w: 96, h: 80 }
+    measured.regions[0] = {
+      ...bounds, reference_region: bounds, directly_measured_tiles: 22, selected_pixels: 7424,
+      reference_crop: artifact('reference-01.png', 96, 80), submitted_crop: artifact('submitted-01.png', 96, 80),
+      submitted_overlay: artifact('submitted-overlay-01.png', 96, 80),
+    }
+    const overlap = { x: 0, y: 0, w: 624, h: 528 }
+    measured.affects_overall_confidence = false
+    measured.alignment = {
+      method: 'exact_jpeg_pair_local_detail_loss', reference_minus_submitted: { x: 0, y: 0 },
+      submitted_overlap: overlap, reference_overlap: overlap, full_tiles: 1287, exact_tiles: 1240, anchor_count: 1000,
+      anchor_sha256: hash, reference_decoded_rgb_sha256: hash,
+      supported_zones: [[0, 0], [0, 1], [1, 1], [1, 2], [2, 1], [2, 2]],
+    }
+    const invalid = structuredClone(result)
+    invalid.comparison.regions[0].directly_measured_tiles = 30
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true }))
+      .mockResolvedValueOnce(json(result)).mockResolvedValueOnce(json(invalid)))
+    show()
+    await choose('earlier.jpg')
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText('Fine detail loss 1')).toBeTruthy()
+    expect(screen.getByText(/22 of 29 tiles directly support/)).toBeTruthy()
+    expect(screen.getByText(/carries no weight in the AI estimate/)).toBeTruthy()
+    expect(screen.getByRole('img', { name: 'Earlier copy crop for region 1' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Download comparison PDF' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Download comparison JSON' })).toBeTruthy()
+    await choose('earlier-again.jpg')
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect((await screen.findByRole('alert')).textContent).toContain('incomplete exact-block JPEG comparison')
+  })
+
   it('checks fresh availability before displaying the form, even with a previously available cached value', async () => {
     const query = new QueryClient()
     query.setQueryData(['analysis', 'analysis-1', 'image-reference-comparison'], true)

@@ -270,11 +270,33 @@ SHORT_EDIT_CHECKS = {
         )
     )),
 }
+EDIT_POSITION_TRANSFERS = {
+    "image": ("image_jpeg_detail_loss_confirmation.py", ("image-jpeg-detail-loss-2026-11-13.json",), ("review",), (
+        f"{SCRIPTS}/image_reference_same_jpeg_confirmation.py", f"{SCRIPTS}/image_reference_same_jpeg_transfer.py",
+        f"{SCRIPTS}/image_jpeg90_paired_corroboration.py",
+    )),
+    "video": ("video_temporal_multiple_inserts.py", ("video-temporal-multiple-inserts-held-2026-11-13.json",), ("review",), (
+        f"{PANELS}/video-temporal-multiple-inserts-plan-2026-11-13.json",
+        f"{PANELS}/video-temporal-insert-confirmation-plan-2026-11-13.json",
+        f"{PANELS}/video-temporal-insert-confirmation-2026-11-13.json",
+        f"{PANELS}/video-temporal-insert-native-2026-11-13.json",
+        f"{PANELS}/video-temporal-insert-source-intake-2026-11-13.json",
+        f"{SCRIPTS}/video_temporal_insert_confirmation.py", f"{SCRIPTS}/video_temporal_insert_native.py",
+        f"{SCRIPTS}/review_video_temporal_insert_sources.py", "backend/app/evidence/video_reference_insertion.py",
+    )),
+    "audio": ("review_audio_random_clock_stock.py", ("audio-random-clock-stock-2026-11-13.json",), (), (
+        f"{SCRIPTS}/review_audio_stock_voice_transfer.py",
+    )),
+    "writing": ("writing_edit_intensity_transfer.py", ("writing-edit-intensity-transfer-2026-11-13.json",), ("review",), (
+        f"{SCRIPTS}/writing_revision_trajectory_transfer.py", f"{SCRIPTS}/review_writing_long_position.py",
+        f"{SCRIPTS}/writing_interval_transfer.py", f"{SCRIPTS}/writing_temperature_transfer.py",
+    )),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
           "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion",
           "short-edit-transfer-2026-11-13", "delivery-and-localization", "reference-and-rotation", "single-upload-transfers",
-          "processing-and-short-edits", "delivery-and-reference-transfers", "short-edit-checks")
+          "processing-and-short-edits", "delivery-and-reference-transfers", "short-edit-checks", "edit-position-transfers")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -352,6 +374,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = DELIVERY_AND_REFERENCE_TRANSFERS[modality]
     elif suite == "short-edit-checks":
         script, panel_names, prefix, dependencies = SHORT_EDIT_CHECKS[modality]
+    elif suite == "edit-position-transfers":
+        script, panel_names, prefix, dependencies = EDIT_POSITION_TRANSFERS[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

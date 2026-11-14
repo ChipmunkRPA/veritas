@@ -30,6 +30,7 @@ EXACT_JPEG_IDENTITY_SCHEMA = "chipmunk.image-reference-comparison/11"
 SHIFTED_JPEG_SCHEMA = "chipmunk.image-reference-comparison/12"
 STRUCTURE_JPEG_SCHEMA = "chipmunk.image-reference-comparison/13"
 SAME_JPEG_SCHEMA = "chipmunk.image-reference-comparison/14"
+JPEG_DETAIL_LOSS_SCHEMA = "chipmunk.image-reference-comparison/15"
 ORIENTATION_SCHEMA = "chipmunk.image-reference-comparison/6"
 CROPPED_RESIZE_SCHEMAS = {CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, JPEG_PNG_ENVELOPE_SCHEMA}
 ORIENTATIONS = {
@@ -353,10 +354,13 @@ def _jpeg_replay(comparison, earlier, submitted, sub):
         evidence = Path(temporary) / "evidence"
         structure = comparison["schema"] == STRUCTURE_JPEG_SCHEMA
         same_jpeg = comparison["schema"] == SAME_JPEG_SCHEMA
+        detail_loss = comparison["schema"] == JPEG_DETAIL_LOSS_SCHEMA
         options = {"exact_jpeg_identity": structure or comparison["schema"] == EXACT_JPEG_IDENTITY_SCHEMA,
                    "shifted_jpeg": structure or comparison["schema"] == SHIFTED_JPEG_SCHEMA,
                    "structure_jpeg": structure}
-        if same_jpeg:
+        if detail_loss:
+            options["same_jpeg"] = False
+        if same_jpeg or detail_loss:
             recorded = comparison.get("comparison_options")
             _require(type(recorded) is dict and recorded.keys() == options.keys()
                      and all(type(value) is bool for value in recorded.values()),
@@ -365,7 +369,8 @@ def _jpeg_replay(comparison, earlier, submitted, sub):
         result = inspect(earlier, submitted, evidence_dir=evidence, allow_proportional_resize=True,
                          allow_oriented_crop=True, allow_oriented_resize=True, allow_embedded_photo=True,
                          allow_exact_jpeg_identity=options["exact_jpeg_identity"], allow_shifted_jpeg=options["shifted_jpeg"],
-                         allow_structure_jpeg=options["structure_jpeg"], allow_same_jpeg=same_jpeg)
+                         allow_structure_jpeg=options["structure_jpeg"], allow_same_jpeg=same_jpeg or options.get("same_jpeg", False),
+                         allow_jpeg_detail_loss=detail_loss)
         _require(result.get("schema") == comparison["schema"]
                  and _same_replayed_fields(source_fields(comparison), source_fields(result))
                  and all("submitted_overlay" in region for region in comparison["regions"]),
@@ -399,7 +404,8 @@ def review(export, earlier, submitted):
         sub = _source(stack, submitted_bytes, comparison["submitted"])
         resized = comparison["schema"] == RESIZE_SCHEMA or comparison["schema"] in CROPPED_RESIZE_SCHEMAS
         oriented = comparison["schema"] == ORIENTATION_SCHEMA
-        jpeg = comparison["schema"] in {EXACT_JPEG_IDENTITY_SCHEMA, SHIFTED_JPEG_SCHEMA, STRUCTURE_JPEG_SCHEMA, SAME_JPEG_SCHEMA}
+        jpeg = comparison["schema"] in {EXACT_JPEG_IDENTITY_SCHEMA, SHIFTED_JPEG_SCHEMA, STRUCTURE_JPEG_SCHEMA,
+                                        SAME_JPEG_SCHEMA, JPEG_DETAIL_LOSS_SCHEMA}
         crop = comparison.get("reference_crop_bounds") if comparison["schema"] in CROPPED_RESIZE_SCHEMAS else None
         if resized:
             carrier = stack.enter_context(Image.open(io.BytesIO(submitted_bytes), formats=["PNG", "JPEG"]))

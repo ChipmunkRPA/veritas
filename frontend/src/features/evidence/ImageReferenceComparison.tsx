@@ -5,7 +5,7 @@ import { saveBlob } from '../../lib/api/reports'
 import {
   compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
-  IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
+  IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, jpegDetailLossSchema, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -72,7 +72,8 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const embeddedPhoto = comparison.schema === embeddedPhotoSchema ? comparison.embedded_native_photo : undefined
   const delivery = comparison.schema === jpegPngEnvelopeSchema
   const sameJpegFraming = comparison.schema === exactJpegIdentitySchema ? alignment : undefined
-  const sameJpegBlocks = comparison.schema === sameJpegSchema ? alignment : undefined
+  const detailLoss = comparison.schema === jpegDetailLossSchema
+  const sameJpegBlocks = (comparison.schema === sameJpegSchema || detailLoss) ? alignment : undefined
   const shiftedJpeg = comparison.schema === shiftedJpegSchema ? alignment : undefined
   const sameStructureFraming = comparison.schema === structureJpegSchema ? comparison.same_framing_structure : undefined
   const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' || exact || delivery
@@ -132,6 +133,9 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       {' '}{sameJpegBlocks.anchor_count?.toLocaleString('en-US')} unique detailed blocks support the same framing.
       Ordinary edits can produce highlighted differences.
     </p>}
+    {detailLoss && <p className="mt-2 mb-0 text-small text-text-muted">
+      Fine luminance detail is weaker in the highlighted areas while broader structure remains similar. Local blur or other ordinary processing can produce this pattern. This check carries no weight in the AI estimate.
+    </p>}
     {shiftedJpeg && <p className="mt-2 mb-0 text-small text-text-muted">
       After whole-pixel alignment, {shiftedJpeg.exact_tiles?.toLocaleString('en-US')} of {shiftedJpeg.full_tiles?.toLocaleString('en-US')} complete JPEG blocks matched in the area compared. Ordinary edits can produce highlighted differences.
     </p>}
@@ -189,7 +193,10 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       </div>}
       <ol className="mt-4 mb-0 list-none space-y-4 p-0">
         {regions.map((region, index) => <li key={index} className="rounded-md border border-border p-3">
-          <h3 className="m-0 text-small font-medium">Difference region {index + 1}</h3>
+          <h3 className="m-0 text-small font-medium">{detailLoss ? 'Fine detail loss' : 'Difference region'} {index + 1}</h3>
+          {detailLoss && <p className="mt-1 mb-0 text-caption text-text-muted">
+            {region.directly_measured_tiles} of {(region.selected_pixels ?? 0) / 256} tiles directly support the finding. Adjacent highlights can include small gaps.
+          </p>}
           <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className="min-w-0">
               <ComparisonPicture result={result} artifact={region.reference_crop} label={`Earlier copy crop for region ${index + 1}`} />

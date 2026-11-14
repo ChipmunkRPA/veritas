@@ -887,3 +887,73 @@ def test_exact_jpeg_block_fallback_preserves_completed_analysis_and_exports(refe
     assert compare(submitted)["comparison"] == baseline
     with Session(f.engine) as db:
         assert db.get(Analysis, "image-a").result_hash == "a" * 64
+
+
+def test_jpeg_detail_loss_keeps_earlier_copy_crops_and_replays(reference_http, tmp_path, monkeypatch):
+    rng = np.random.default_rng(560)
+    width, height = 624, 528
+    y, x = np.indices((height, width))
+    background = cv2.resize(rng.integers(0, 255, (18, 26)).astype(np.float32), (width, height),
+                            interpolation=cv2.INTER_CUBIC)
+    detail = 7 * np.sin(1.55 * x + .20 * y) + 5 * np.cos(1.5 * y) + 6 * np.sin(1.3 * (x + y))
+    detail += 3 * rng.normal(size=detail.shape)
+    rgb = np.stack([89 + background * .25, 83 + background * .32, 113 + background * .30], axis=-1)
+    source = np.rint(rgb + detail[..., None]).astype(np.uint8)
+    softened = cv2.GaussianBlur(source, (0, 0), 1.35)
+    modified = source.copy()
+    modified[224:304, 288:384] = softened[224:304, 288:384]
+
+    def encode(pixels, quality=90):
+        with io.BytesIO() as buffer:
+            Image.fromarray(pixels).save(buffer, "JPEG", quality=quality, subsampling=2)
+            return buffer.getvalue()
+
+    before = encode(source)
+    after = encode(modified)
+    f = reference_http
+
+    def compare(payload):
+        stored = f.store.put_bytes(payload)
+        with Session(f.engine) as db:
+            analysis = db.get(Analysis, "image-a")
+            analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+            db.commit()
+        response = f.client.post(_url(), headers=f.viewer, files={"reference": ("before.jpg", before, "image/jpeg")},
+                                 data={"include_pdf": "true"})
+        assert response.status_code == 200
+        assert response.headers["Cache-Control"] == "no-store"
+        return response.json()
+
+    for flag in ("image_reference_exact_jpeg_identity", "image_reference_shifted_jpeg",
+                 "image_reference_structure_jpeg", "image_reference_same_jpeg"):
+        monkeypatch.setattr(settings, flag, True)
+    monkeypatch.setattr(settings, "image_reference_jpeg_detail_loss", False)
+    baseline = compare(after)["comparison"]
+    assert baseline["regions"] == []
+    monkeypatch.setattr(settings, "image_reference_jpeg_detail_loss", True)
+    payload = compare(after)
+    result = payload["comparison"]
+    assert result["schema"] == "chipmunk.image-reference-comparison/15"
+    assert result["affects_overall_confidence"] is False
+    [region] = result["regions"]
+    assert region["reference_region"] == {"x": 288, "y": 224, "w": 96, "h": 80}
+    assert 0 < region["directly_measured_tiles"] <= region["selected_pixels"] // 256
+    assert result["comparison_options"]["same_jpeg"] is True
+    with pymupdf.open(stream=base64.b64decode(payload.pop("pdf")), filetype="pdf") as pdf:
+        assert "Fine luminance detail is weaker" in pdf[0].get_text()
+        assert "directly support the finding" in pdf[1].get_text()
+        _assert_pdf_assets(pdf, pdf[0], [result["mask"]], payload)
+        _assert_pdf_assets(pdf, pdf[1], [region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")], payload)
+    manifest, reference_path, submitted_path = (tmp_path / name for name in ("comparison.json", "earlier.jpg", "submitted.jpg"))
+    reference_path.write_bytes(before)
+    submitted_path.write_bytes(after)
+    manifest.write_text(json.dumps(payload))
+    assert review(manifest, reference_path, submitted_path)["mask_pixels_counted"] == region["selected_pixels"]
+    region["directly_measured_tiles"] += 1
+    manifest.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="differ from recomputed evidence"):
+        review(manifest, reference_path, submitted_path)
+    assert compare(encode(softened))["comparison"]["schema"] != "chipmunk.image-reference-comparison/15"
+    assert compare(encode(modified, 85))["comparison"]["schema"] != "chipmunk.image-reference-comparison/15"
+    with Session(f.engine) as db:
+        assert db.get(Analysis, "image-a").result_hash == "a" * 64

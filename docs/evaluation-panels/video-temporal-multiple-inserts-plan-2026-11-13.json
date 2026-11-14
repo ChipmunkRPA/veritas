@@ -1,0 +1,2127 @@
+{
+  "method": {
+    "control_gate": "The candidate must add no reports on unchanged, wrong-reference, replacement, removal, static, or near-static controls. Count any preexisting single reports on those controls separately.",
+    "distribution": "Original 4 cached preflight recordings for development, 8 previously checked but development-disjoint cached confirmation recordings for held edit recipes. All media comes from the same CC BY 4.0 deposit.",
+    "gates": {
+      "generated_complete_groups": 6,
+      "generated_three_complete": 6,
+      "generated_two_complete": 6,
+      "maximum_control_reports": 0,
+      "maximum_disrupted_single": 0,
+      "maximum_positive_outside_tolerance": 0,
+      "ordinary_two_complete": 5
+    },
+    "limits": {
+      "alternate_run_margin": 0.02,
+      "ambiguity_cost": 0.035,
+      "ambiguity_frames": 3,
+      "match_median": 0.1,
+      "match_p90": 0.22,
+      "match_run_min": 12,
+      "max_added": 144,
+      "max_frames": 360,
+      "min_flank": 24,
+      "min_insert": 16,
+      "motion_floor": 0.015,
+      "single_improvement": 0.3,
+      "source_motion_luma": 1.0
+    },
+    "matcher": "Ordered alignment with exactly two or three query insertions and every earlier picture retained. Minimize summed standardized luma absolute differences. Check temporal content in each retained span, reject substantially better local alignments, and preserve plausible endpoint bounds across near-ties. Prefer the existing result on ties.",
+    "process": "No learned weights. Exact 24 fps retained-frame clocks verified independently by FFmpeg framehash. Each delivery preserves the authored source sequence and native frame counts. The comparison carries zero AI weight."
+  },
+  "partitions": {
+    "development": [
+      {
+        "edits": {
+          "generated_three": [
+            [
+              31,
+              0,
+              "donor",
+              8,
+              24
+            ],
+            [
+              76,
+              0,
+              "donor",
+              42,
+              70
+            ],
+            [
+              116,
+              0,
+              "donor",
+              84,
+              122
+            ]
+          ],
+          "generated_two": [
+            [
+              42,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              105,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ],
+          "mixed_removal": [
+            [
+              42,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              72,
+              20,
+              "base",
+              0,
+              0
+            ],
+            [
+              105,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ],
+          "mixed_replacement": [
+            [
+              42,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              72,
+              24,
+              "donor",
+              21,
+              45
+            ],
+            [
+              105,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ],
+          "near_static_two": [
+            [
+              42,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              105,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ],
+          "ordinary_two": [
+            [
+              42,
+              0,
+              "base",
+              8,
+              40
+            ],
+            [
+              105,
+              0,
+              "base",
+              60,
+              96
+            ]
+          ],
+          "single": [
+            [
+              67,
+              0,
+              "donor",
+              34,
+              76
+            ]
+          ],
+          "static_two": [
+            [
+              42,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              105,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ],
+          "unchanged": [],
+          "wrong_earlier": [
+            [
+              42,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              105,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ]
+        },
+        "example": 38,
+        "files": {
+          "authentic": {
+            "filename": "Ornek_38.mp4",
+            "sha256": "5f87c550eb74e1f655ffc5c7659a5543b730dbc80068c34d987e078aff363cc2"
+          },
+          "fake_segments": {
+            "filename": "Ornek_38_fake.mp4",
+            "sha256": "1ef92d95b66f54f55332f648ee9ff0ae361d14783e4a0427ea9b413f4e30f567"
+          }
+        }
+      },
+      {
+        "edits": {
+          "generated_three": [
+            [
+              32,
+              0,
+              "donor",
+              8,
+              28
+            ],
+            [
+              77,
+              0,
+              "donor",
+              42,
+              72
+            ],
+            [
+              117,
+              0,
+              "donor",
+              84,
+              124
+            ]
+          ],
+          "generated_two": [
+            [
+              44,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              107,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ],
+          "mixed_removal": [
+            [
+              44,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              72,
+              20,
+              "base",
+              0,
+              0
+            ],
+            [
+              107,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ],
+          "mixed_replacement": [
+            [
+              44,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              72,
+              24,
+              "donor",
+              21,
+              45
+            ],
+            [
+              107,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ],
+          "near_static_two": [
+            [
+              44,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              107,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ],
+          "ordinary_two": [
+            [
+              44,
+              0,
+              "base",
+              8,
+              42
+            ],
+            [
+              107,
+              0,
+              "base",
+              60,
+              98
+            ]
+          ],
+          "single": [
+            [
+              68,
+              0,
+              "donor",
+              34,
+              76
+            ]
+          ],
+          "static_two": [
+            [
+              44,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              107,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ],
+          "unchanged": [],
+          "wrong_earlier": [
+            [
+              44,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              107,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ]
+        },
+        "example": 47,
+        "files": {
+          "authentic": {
+            "filename": "Ornek_47.mp4",
+            "sha256": "477da005dde8d85cd67ec70b3fafcf1f425ada96ed8364e47b8dca0cb554b2ee"
+          },
+          "fake_segments": {
+            "filename": "Ornek_47_fake.mp4",
+            "sha256": "13a8bb8505bf5c05f72e85e9f1563cd469e1e47f9dd5531dadb13323041ab75a"
+          }
+        }
+      },
+      {
+        "edits": {
+          "generated_three": [
+            [
+              33,
+              0,
+              "donor",
+              8,
+              32
+            ],
+            [
+              78,
+              0,
+              "donor",
+              42,
+              74
+            ],
+            [
+              118,
+              0,
+              "donor",
+              84,
+              120
+            ]
+          ],
+          "generated_two": [
+            [
+              46,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              109,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ],
+          "mixed_removal": [
+            [
+              46,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              72,
+              20,
+              "base",
+              0,
+              0
+            ],
+            [
+              109,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ],
+          "mixed_replacement": [
+            [
+              46,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              72,
+              24,
+              "donor",
+              21,
+              45
+            ],
+            [
+              109,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ],
+          "near_static_two": [
+            [
+              46,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              109,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ],
+          "ordinary_two": [
+            [
+              46,
+              0,
+              "base",
+              8,
+              44
+            ],
+            [
+              109,
+              0,
+              "base",
+              60,
+              100
+            ]
+          ],
+          "single": [
+            [
+              69,
+              0,
+              "donor",
+              34,
+              76
+            ]
+          ],
+          "static_two": [
+            [
+              46,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              109,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ],
+          "unchanged": [],
+          "wrong_earlier": [
+            [
+              46,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              109,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ]
+        },
+        "example": 74,
+        "files": {
+          "authentic": {
+            "filename": "Ornek_74.mp4",
+            "sha256": "9e70349998e71e9b33929057d8ee202d65e3d3658e7f14bfa63ad51870c8fb60"
+          },
+          "fake_segments": {
+            "filename": "Ornek_74_fake.mp4",
+            "sha256": "35b70efc17c4fffedf203d8a4579f666ac84d312a3fc3cce02e1243e55cb03c2"
+          }
+        }
+      },
+      {
+        "edits": {
+          "generated_three": [
+            [
+              34,
+              0,
+              "donor",
+              8,
+              24
+            ],
+            [
+              76,
+              0,
+              "donor",
+              42,
+              76
+            ],
+            [
+              119,
+              0,
+              "donor",
+              84,
+              122
+            ]
+          ],
+          "generated_two": [
+            [
+              48,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              111,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ],
+          "mixed_removal": [
+            [
+              48,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              72,
+              20,
+              "base",
+              0,
+              0
+            ],
+            [
+              111,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ],
+          "mixed_replacement": [
+            [
+              48,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              72,
+              24,
+              "donor",
+              21,
+              45
+            ],
+            [
+              111,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ],
+          "near_static_two": [
+            [
+              48,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              111,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ],
+          "ordinary_two": [
+            [
+              48,
+              0,
+              "base",
+              8,
+              40
+            ],
+            [
+              111,
+              0,
+              "base",
+              60,
+              102
+            ]
+          ],
+          "single": [
+            [
+              70,
+              0,
+              "donor",
+              34,
+              76
+            ]
+          ],
+          "static_two": [
+            [
+              48,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              111,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ],
+          "unchanged": [],
+          "wrong_earlier": [
+            [
+              48,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              111,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ]
+        },
+        "example": 86,
+        "files": {
+          "authentic": {
+            "filename": "Ornek_86.mp4",
+            "sha256": "37ae2c8aeea1d6d4d283dd1d83d0fb566cecd5dfda281f47ceee29b757040f9c"
+          },
+          "fake_segments": {
+            "filename": "Ornek_86_fake.mp4",
+            "sha256": "d4447fd8a15da4ea7d1b58780f9efe046c23138d931d4f480367e4bfcce432a2"
+          }
+        }
+      }
+    ],
+    "held": [
+      {
+        "edits": {
+          "generated_three": [
+            [
+              31,
+              0,
+              "donor",
+              8,
+              24
+            ],
+            [
+              76,
+              0,
+              "donor",
+              42,
+              70
+            ],
+            [
+              116,
+              0,
+              "donor",
+              84,
+              122
+            ]
+          ],
+          "generated_two": [
+            [
+              42,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              105,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ],
+          "mixed_removal": [
+            [
+              42,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              72,
+              20,
+              "base",
+              0,
+              0
+            ],
+            [
+              105,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ],
+          "mixed_replacement": [
+            [
+              42,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              72,
+              24,
+              "donor",
+              21,
+              45
+            ],
+            [
+              105,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ],
+          "near_static_two": [
+            [
+              42,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              105,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ],
+          "ordinary_two": [
+            [
+              42,
+              0,
+              "base",
+              8,
+              40
+            ],
+            [
+              105,
+              0,
+              "base",
+              60,
+              96
+            ]
+          ],
+          "single": [
+            [
+              67,
+              0,
+              "donor",
+              34,
+              76
+            ]
+          ],
+          "static_two": [
+            [
+              42,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              105,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ],
+          "unchanged": [],
+          "wrong_earlier": [
+            [
+              42,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              105,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ]
+        },
+        "example": 2,
+        "files": {
+          "authentic": {
+            "filename": "Ornek_2.mp4",
+            "sha256": "19b64ee35fd057a630050b15b7f66f2dab1427970ca60d4496af6cfeaeaf84d0"
+          },
+          "fake_segments": {
+            "filename": "Ornek_2_fake.mp4",
+            "sha256": "de6d68e3563d773cb3aeaa7afbd72103de8cbd365491a8576ea69d6777c02ffe"
+          }
+        }
+      },
+      {
+        "edits": {
+          "generated_three": [
+            [
+              32,
+              0,
+              "donor",
+              8,
+              28
+            ],
+            [
+              77,
+              0,
+              "donor",
+              42,
+              72
+            ],
+            [
+              117,
+              0,
+              "donor",
+              84,
+              124
+            ]
+          ],
+          "generated_two": [
+            [
+              44,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              107,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ],
+          "mixed_removal": [
+            [
+              44,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              72,
+              20,
+              "base",
+              0,
+              0
+            ],
+            [
+              107,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ],
+          "mixed_replacement": [
+            [
+              44,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              72,
+              24,
+              "donor",
+              21,
+              45
+            ],
+            [
+              107,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ],
+          "near_static_two": [
+            [
+              44,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              107,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ],
+          "ordinary_two": [
+            [
+              44,
+              0,
+              "base",
+              8,
+              42
+            ],
+            [
+              107,
+              0,
+              "base",
+              60,
+              98
+            ]
+          ],
+          "single": [
+            [
+              68,
+              0,
+              "donor",
+              34,
+              76
+            ]
+          ],
+          "static_two": [
+            [
+              44,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              107,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ],
+          "unchanged": [],
+          "wrong_earlier": [
+            [
+              44,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              107,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ]
+        },
+        "example": 81,
+        "files": {
+          "authentic": {
+            "filename": "Ornek_81.mp4",
+            "sha256": "1578019af169e7e5ce6e0dcfef623e9196883c654ef68f36485f629096681609"
+          },
+          "fake_segments": {
+            "filename": "Ornek_81_fake.mp4",
+            "sha256": "00c1f1937640af9c982aa1bb507e22b3bbde36e923074f9aea5f94c01459e647"
+          }
+        }
+      },
+      {
+        "edits": {
+          "generated_three": [
+            [
+              33,
+              0,
+              "donor",
+              8,
+              32
+            ],
+            [
+              78,
+              0,
+              "donor",
+              42,
+              74
+            ],
+            [
+              118,
+              0,
+              "donor",
+              84,
+              120
+            ]
+          ],
+          "generated_two": [
+            [
+              46,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              109,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ],
+          "mixed_removal": [
+            [
+              46,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              72,
+              20,
+              "base",
+              0,
+              0
+            ],
+            [
+              109,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ],
+          "mixed_replacement": [
+            [
+              46,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              72,
+              24,
+              "donor",
+              21,
+              45
+            ],
+            [
+              109,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ],
+          "near_static_two": [
+            [
+              46,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              109,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ],
+          "ordinary_two": [
+            [
+              46,
+              0,
+              "base",
+              8,
+              44
+            ],
+            [
+              109,
+              0,
+              "base",
+              60,
+              100
+            ]
+          ],
+          "single": [
+            [
+              69,
+              0,
+              "donor",
+              34,
+              76
+            ]
+          ],
+          "static_two": [
+            [
+              46,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              109,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ],
+          "unchanged": [],
+          "wrong_earlier": [
+            [
+              46,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              109,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ]
+        },
+        "example": 97,
+        "files": {
+          "authentic": {
+            "filename": "Ornek_97.mp4",
+            "sha256": "4012598f56474f4cf5d799381b456a54b1a8d47c42901b2af767e326c2708ec0"
+          },
+          "fake_segments": {
+            "filename": "Ornek_97_fake.mp4",
+            "sha256": "bce73ec79674616e3976e1b34c7aefd3280127566f19098b45912954fdda6d05"
+          }
+        }
+      },
+      {
+        "edits": {
+          "generated_three": [
+            [
+              34,
+              0,
+              "donor",
+              8,
+              24
+            ],
+            [
+              76,
+              0,
+              "donor",
+              42,
+              76
+            ],
+            [
+              119,
+              0,
+              "donor",
+              84,
+              122
+            ]
+          ],
+          "generated_two": [
+            [
+              48,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              111,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ],
+          "mixed_removal": [
+            [
+              48,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              72,
+              20,
+              "base",
+              0,
+              0
+            ],
+            [
+              111,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ],
+          "mixed_replacement": [
+            [
+              48,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              72,
+              24,
+              "donor",
+              21,
+              45
+            ],
+            [
+              111,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ],
+          "near_static_two": [
+            [
+              48,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              111,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ],
+          "ordinary_two": [
+            [
+              48,
+              0,
+              "base",
+              8,
+              40
+            ],
+            [
+              111,
+              0,
+              "base",
+              60,
+              102
+            ]
+          ],
+          "single": [
+            [
+              70,
+              0,
+              "donor",
+              34,
+              76
+            ]
+          ],
+          "static_two": [
+            [
+              48,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              111,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ],
+          "unchanged": [],
+          "wrong_earlier": [
+            [
+              48,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              111,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ]
+        },
+        "example": 91,
+        "files": {
+          "authentic": {
+            "filename": "Ornek_91.mp4",
+            "sha256": "b7079fbebf76ca8f01d32f49120f6b1cfd2b29fb2fbd12239d526af15af3f7c6"
+          },
+          "fake_segments": {
+            "filename": "Ornek_91_fake.mp4",
+            "sha256": "c738df73cd0bd02a3ef405909233ed6818d2708658b459b2eb209ad2160a48cd"
+          }
+        }
+      },
+      {
+        "edits": {
+          "generated_three": [
+            [
+              35,
+              0,
+              "donor",
+              8,
+              28
+            ],
+            [
+              77,
+              0,
+              "donor",
+              42,
+              70
+            ],
+            [
+              120,
+              0,
+              "donor",
+              84,
+              124
+            ]
+          ],
+          "generated_two": [
+            [
+              50,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              113,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ],
+          "mixed_removal": [
+            [
+              50,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              72,
+              20,
+              "base",
+              0,
+              0
+            ],
+            [
+              113,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ],
+          "mixed_replacement": [
+            [
+              50,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              72,
+              24,
+              "donor",
+              21,
+              45
+            ],
+            [
+              113,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ],
+          "near_static_two": [
+            [
+              50,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              113,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ],
+          "ordinary_two": [
+            [
+              50,
+              0,
+              "base",
+              8,
+              42
+            ],
+            [
+              113,
+              0,
+              "base",
+              60,
+              96
+            ]
+          ],
+          "single": [
+            [
+              71,
+              0,
+              "donor",
+              34,
+              76
+            ]
+          ],
+          "static_two": [
+            [
+              50,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              113,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ],
+          "unchanged": [],
+          "wrong_earlier": [
+            [
+              50,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              113,
+              0,
+              "donor",
+              61,
+              97
+            ]
+          ]
+        },
+        "example": 82,
+        "files": {
+          "authentic": {
+            "filename": "Ornek_82.mp4",
+            "sha256": "ebadb7c879f37797a3b1a4df8b6e692f81be0d179999c01fa18611db5fd9d5f5"
+          },
+          "fake_segments": {
+            "filename": "Ornek_82_fake.mp4",
+            "sha256": "09670650302e97d05d5c9501db746fd4b728a298456b0973591507083804f867"
+          }
+        }
+      },
+      {
+        "edits": {
+          "generated_three": [
+            [
+              36,
+              0,
+              "donor",
+              8,
+              32
+            ],
+            [
+              78,
+              0,
+              "donor",
+              42,
+              72
+            ],
+            [
+              121,
+              0,
+              "donor",
+              84,
+              120
+            ]
+          ],
+          "generated_two": [
+            [
+              52,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              115,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ],
+          "mixed_removal": [
+            [
+              52,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              72,
+              20,
+              "base",
+              0,
+              0
+            ],
+            [
+              115,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ],
+          "mixed_replacement": [
+            [
+              52,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              72,
+              24,
+              "donor",
+              21,
+              45
+            ],
+            [
+              115,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ],
+          "near_static_two": [
+            [
+              52,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              115,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ],
+          "ordinary_two": [
+            [
+              52,
+              0,
+              "base",
+              8,
+              44
+            ],
+            [
+              115,
+              0,
+              "base",
+              60,
+              98
+            ]
+          ],
+          "single": [
+            [
+              72,
+              0,
+              "donor",
+              34,
+              76
+            ]
+          ],
+          "static_two": [
+            [
+              52,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              115,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ],
+          "unchanged": [],
+          "wrong_earlier": [
+            [
+              52,
+              0,
+              "donor",
+              12,
+              48
+            ],
+            [
+              115,
+              0,
+              "donor",
+              61,
+              99
+            ]
+          ]
+        },
+        "example": 71,
+        "files": {
+          "authentic": {
+            "filename": "Ornek_71.mp4",
+            "sha256": "d0a09d469936a4224f9b499784d1a147484a0469ace1848d71b31a3244af30bc"
+          },
+          "fake_segments": {
+            "filename": "Ornek_71_fake.mp4",
+            "sha256": "ca9122448531f9d726dc99eab4b51a62099d3168df5d85e2be2d898ac772c1ce"
+          }
+        }
+      },
+      {
+        "edits": {
+          "generated_three": [
+            [
+              37,
+              0,
+              "donor",
+              8,
+              24
+            ],
+            [
+              76,
+              0,
+              "donor",
+              42,
+              74
+            ],
+            [
+              122,
+              0,
+              "donor",
+              84,
+              122
+            ]
+          ],
+          "generated_two": [
+            [
+              54,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              117,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ],
+          "mixed_removal": [
+            [
+              54,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              72,
+              20,
+              "base",
+              0,
+              0
+            ],
+            [
+              117,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ],
+          "mixed_replacement": [
+            [
+              54,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              72,
+              24,
+              "donor",
+              21,
+              45
+            ],
+            [
+              117,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ],
+          "near_static_two": [
+            [
+              54,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              117,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ],
+          "ordinary_two": [
+            [
+              54,
+              0,
+              "base",
+              8,
+              40
+            ],
+            [
+              117,
+              0,
+              "base",
+              60,
+              100
+            ]
+          ],
+          "single": [
+            [
+              73,
+              0,
+              "donor",
+              34,
+              76
+            ]
+          ],
+          "static_two": [
+            [
+              54,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              117,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ],
+          "unchanged": [],
+          "wrong_earlier": [
+            [
+              54,
+              0,
+              "donor",
+              12,
+              44
+            ],
+            [
+              117,
+              0,
+              "donor",
+              61,
+              101
+            ]
+          ]
+        },
+        "example": 70,
+        "files": {
+          "authentic": {
+            "filename": "Ornek_70.mp4",
+            "sha256": "611edd85e3b49b05ec6fc4ee411609e721682ab00b0a9c13d643458f4dfe2fc6"
+          },
+          "fake_segments": {
+            "filename": "Ornek_70_fake.mp4",
+            "sha256": "01ccf47c326c0b6afddaccb74d3451ad1c030666a8537654270d832016955d21"
+          }
+        }
+      },
+      {
+        "edits": {
+          "generated_three": [
+            [
+              38,
+              0,
+              "donor",
+              8,
+              28
+            ],
+            [
+              77,
+              0,
+              "donor",
+              42,
+              76
+            ],
+            [
+              123,
+              0,
+              "donor",
+              84,
+              124
+            ]
+          ],
+          "generated_two": [
+            [
+              56,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              119,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ],
+          "mixed_removal": [
+            [
+              56,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              72,
+              20,
+              "base",
+              0,
+              0
+            ],
+            [
+              119,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ],
+          "mixed_replacement": [
+            [
+              56,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              72,
+              24,
+              "donor",
+              21,
+              45
+            ],
+            [
+              119,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ],
+          "near_static_two": [
+            [
+              56,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              119,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ],
+          "ordinary_two": [
+            [
+              56,
+              0,
+              "base",
+              8,
+              42
+            ],
+            [
+              119,
+              0,
+              "base",
+              60,
+              102
+            ]
+          ],
+          "single": [
+            [
+              74,
+              0,
+              "donor",
+              34,
+              76
+            ]
+          ],
+          "static_two": [
+            [
+              56,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              119,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ],
+          "unchanged": [],
+          "wrong_earlier": [
+            [
+              56,
+              0,
+              "donor",
+              12,
+              46
+            ],
+            [
+              119,
+              0,
+              "donor",
+              61,
+              103
+            ]
+          ]
+        },
+        "example": 72,
+        "files": {
+          "authentic": {
+            "filename": "Ornek_72.mp4",
+            "sha256": "9e37303803ca92b6694f4a605273f8f1b8fe15ac9bcb5094797caca3a8f4b075"
+          },
+          "fake_segments": {
+            "filename": "Ornek_72_fake.mp4",
+            "sha256": "3fd96f8a5fff8859087409fcaeaa01b466b576dca179ac222057f74ba713ae63"
+          }
+        }
+      }
+    ]
+  },
+  "schema": "chipmunk.video-temporal-multiple-inserts/1"
+}

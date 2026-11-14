@@ -18,6 +18,8 @@ export interface NativeImageArea {
 }
 
 interface DifferenceRegion extends NativeImageArea {
+  selected_pixels?: number
+  directly_measured_tiles?: number
   reference_region?: NativeImageArea
   reference_crop?: ReferencePng
   submitted_crop?: ReferencePng
@@ -95,6 +97,7 @@ export const exactJpegIdentitySchema = 'chipmunk.image-reference-comparison/11'
 export const shiftedJpegSchema = 'chipmunk.image-reference-comparison/12'
 export const structureJpegSchema = 'chipmunk.image-reference-comparison/13'
 export const sameJpegSchema = 'chipmunk.image-reference-comparison/14'
+export const jpegDetailLossSchema = 'chipmunk.image-reference-comparison/15'
 export const IMAGE_REFERENCE_SECTION_ID = 'earlier-image-comparison'
 export const orientationLabels = {
   rotate_90_clockwise: '90-degree clockwise rotation',
@@ -145,8 +148,9 @@ function validAreaWithin(area: NativeImageArea, width: number, height: number): 
 function validSameJpegProof(comparison: ImageReferenceRecord): boolean {
   const { width, height } = comparison.submitted
   const proof = comparison.alignment
+  const detailLoss = comparison.schema === jpegDetailLossSchema
   if (!proof || comparison.status !== 'comparable' || comparison.affects_overall_confidence !== false
-      || proof.method !== 'exact_decoded_jpeg_pair_identity'
+      || proof.method !== (detailLoss ? 'exact_jpeg_pair_local_detail_loss' : 'exact_decoded_jpeg_pair_identity')
       || comparison.reference.width !== width || comparison.reference.height !== height
       || ![width, height].every(value => Number.isSafeInteger(value) && value >= 512 && value <= 768)
       || ![proof.submitted_overlap, proof.reference_overlap].every(area =>
@@ -156,6 +160,13 @@ function validSameJpegProof(comparison: ImageReferenceRecord): boolean {
   const exact = proof.exact_tiles ?? 0
   const anchors = proof.anchor_count ?? 0
   const zones = proof.supported_zones
+  if (detailLoss && (!comparison.regions.length || !comparison.mask || comparison.regions.some(region => {
+    const pixels = region.selected_pixels ?? 0
+    const direct = region.directly_measured_tiles ?? 0
+    return ![pixels, direct].every(Number.isSafeInteger) || pixels % 256 !== 0 || pixels < 1024
+      || pixels > region.w * region.h || direct < 1 || direct > pixels / 256
+      || [region.x, region.y, region.w, region.h].some(value => value % 16 !== 0)
+  }))) return false
   return [full, exact, anchors].every(Number.isSafeInteger)
     && full === Math.floor(width / 16) * Math.floor(height / 16) && full >= exact && exact >= .85 * full
     && exact >= anchors && anchors >= 24 && Array.isArray(zones)
@@ -241,7 +252,7 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
       throw new Error('The server returned an incomplete JPEG structure comparison.')
     }
   }
-  if (comparison.schema === sameJpegSchema && !validSameJpegProof(comparison)) {
+  if ((comparison.schema === sameJpegSchema || comparison.schema === jpegDetailLossSchema) && !validSameJpegProof(comparison)) {
     throw new Error('The server returned an incomplete exact-block JPEG comparison.')
   }
   if (comparison.schema === exactPngCropResizeSchema && (!comparison.reference_crop_bounds

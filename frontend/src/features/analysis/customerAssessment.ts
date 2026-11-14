@@ -25,6 +25,7 @@ type Input = FindingContext & {
   decision?: Decision | null; status?: string; stored_record?: unknown
   kind?: string; signals?: readonly Signal[]; findings?: readonly FindingInput[]
   condition_profile?: { within_validated_envelope?: boolean | null; slice_id?: string | null } | null
+  manifest?: { sampling?: { image_frame_count?: number | null } | null } | null
   caveats?: readonly string[]
 }
 export const ASSESSMENT_RULE = 'evidence-led-assessment/v7'
@@ -160,6 +161,13 @@ function baseCustomerAssessment(result: Input): CustomerAssessment {
   if (originRecord || d?.driving_hypothesis === 'H3_provenance_integrity') return {
     ...answer, applies: false, direction: 'record', headline: null,
     meaning: "The conclusion follows the file's provenance record, not a confidence percentage.",
+  }
+  const frameCount = result.manifest?.sampling?.image_frame_count
+  if (result.kind === 'image' && typeof frameCount === 'number' && Number.isInteger(frameCount) && frameCount > 1) return {
+    ...answer, direction: 'inconclusive', headline: 'Inconclusive: multiple images in this file',
+    meaning: 'The still-image checks cover only the first stored image.',
+    scope: 'image_components', scope_label: 'First stored image',
+    scope_note: `The header reports ${frameCount} stored images. No combined AI confidence is available for the sequence.`,
   }
   if ((result.status != null && result.status !== 'done') || !d || d.code === 'not_assessable') return answer
   if (unavailableContributor(result)) return { ...answer, direction: 'inconclusive',

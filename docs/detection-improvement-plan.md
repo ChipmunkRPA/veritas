@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Animated PNG opening comparison](image-animation-opening-2026-11-14.md)
+  compares the separate fallback and the first full replacement frame.
+  It shows the source coordinates, pixel count and preview pair in the
+  analysis, PDF and JSON and can be replayed from the submitted file.
+  Multi-image uploads do not get a combined AI confidence from a still frame.
+
 - [Invisible Unicode characters](document-invisible-characters-2026-11-14.md)
   are now source-linked evidence in TXT, Word, and mapped email body text.
   The analysis, PDF, JSON, and signed replay use the same code points

@@ -49,6 +49,7 @@ def image(ctx: StageContext) -> dict[str, Any]:
     data = bytes(common.media(ctx).original_bytes())
     with Image.open(io.BytesIO(data)) as im:
         fmt = im.format
+        frames = probed.get("n_frames") or getattr(im, "n_frames", 1)
         width, height = int(probed.get("width") or im.width), int(probed.get("height") or im.height)
         has_exif = bool(probed["has_exif"]) if "has_exif" in probed else len(im.getexif()) > 0
         orientation = int(probed["exif_orientation"] if "exif_orientation" in probed else im.getexif().get(0x0112, 1) or 1)
@@ -69,7 +70,8 @@ def image(ctx: StageContext) -> dict[str, Any]:
                        slice_id=abstain.image_slice(width, height, q, face_px),
                        limiting_conditions=abstain.image_conditions(width, height, q, face_px, screenshot))
     return {"profile": profile,
-            "context": {"face_px": face_px, "jpeg_q": q, "min_side": min(width, height), "has_camera_exif": has_exif, **kinds}}
+            "context": {"face_px": face_px, "jpeg_q": q, "min_side": min(width, height), "has_camera_exif": has_exif,
+                        "image_frame_count": frames, **kinds}}
 
 
 def _content_kinds(data: bytes) -> dict[str, Any]:

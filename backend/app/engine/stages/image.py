@@ -53,6 +53,8 @@ from app.engine.media import MAX_PIXELS
 from app.engine.runner import StageContext
 from app.engine.stages import common
 from app.evidence import (
+    image_animation,
+    image_animation_binding,
     image_interpolation_binding,
     image_thumbnail_evidence,
     image_transparency,
@@ -525,7 +527,8 @@ def render(ctx: StageContext) -> dict[str, Any]:
     probed = ctx.outputs.get("probe") or {}
     rgba = (ingest.get("mime") == "image/png" and probed.get("mode") == "RGBA"
             and probed.get("n_frames") == 1)
-    if (jpeg or png_preview or whole_review or rgba) and not ctx.state.get("refusion") and not provenance_gate.stop(ctx):
+    animated_png = ingest.get("mime") in {"image/png", "image/apng"} and (probed.get("n_frames") or 0) > 1
+    if (jpeg or png_preview or whole_review or rgba or animated_png) and not ctx.state.get("refusion") and not provenance_gate.stop(ctx):
         ids = set()
         if jpeg or png_preview:
             ids.update(image_thumbnail_evidence.add_exhibits(bytes(_media(ctx).original_bytes()),
@@ -539,6 +542,10 @@ def render(ctx: StageContext) -> dict[str, Any]:
             ctx.check("before PNG transparency inspection")
             ids.update(image_transparency.add_exhibits(_media(ctx).original_bytes(),
                                                        ctx.exhibits.bind(image_transparency.CREATOR)))
+        if animated_png:
+            ctx.check("before animated PNG opening comparison")
+            ids.update(image_animation.add_exhibits(_media(ctx).original_bytes(),
+                                                     ctx.exhibits.bind(image_animation_binding.KEY)))
         image_exhibits = [e.model_dump(mode="json") for e in ctx.exhibits.exhibits if e.id in ids]
         payloads = {e.get("payload_artefact_id") for e in image_exhibits if e["kind"] == "image"}
         image_artefacts = [dataclasses.asdict(a) for a in ctx.exhibits.artefacts if a.id in payloads]

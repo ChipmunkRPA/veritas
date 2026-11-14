@@ -20,6 +20,7 @@ from app.evidence import (
     face_return_coverage,
     face_short_window_binding,
     face_spatial_cut_binding,
+    image_animation_binding,
     image_transparency_binding,
     scene_return_binding,
 )
@@ -99,6 +100,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              scene_return_binding.COVERAGE_COMMITMENT, WRITING_POSITION,
                              EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, WORD_TEXT_VISIBILITY,
                              IMAGE_INTERPOLATION, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
+                             image_animation_binding.KEY,
                              document_invisible_characters.COMMITMENT,
                              TIMING_COMMITMENT},
              'The public result contains unsupported internal fields')
@@ -356,7 +358,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     if analysis['kind'] == 'image':
         groups.append(interpolation.assets(evidence))
     thumbnail_assets = set()
-    transparency_assets = set()
+    png_limits = {}
     if IMAGE_EDITOR_PREVIEW in result:
         from app.evidence import image_editor_preview_binding
 
@@ -368,14 +370,18 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         thumbnail_groups = list(image_editor_preview_binding.asset_groups(result[IMAGE_EDITOR_PREVIEW], evidence['source']))
         thumbnail_assets = {asset['sha256'] for group in thumbnail_groups for asset in group.values()}
         groups.extend(thumbnail_groups)
-    if image_transparency_binding.KEY in result:
+    for method in (image_transparency_binding, image_animation_binding):
+        if method.KEY not in result:
+            continue
         reports = bundle.get("reports")
         _require(analysis["kind"] == "image" and (result.get("decision") or {}).get("image_copy_coverage") is None
                  and isinstance(reports, list) and len(reports) == 1
-                 and reports[0].get("profile") in image_transparency_binding.REPORT_PROFILES,
-                 "PNG transparency is outside an eligible image report")
-        assets = image_transparency_binding.assets(result[image_transparency_binding.KEY], evidence["source"])
-        transparency_assets = {asset["sha256"] for asset in assets.values()}
+                 and reports[0].get("profile") in method.REPORT_PROFILES,
+                 "PNG comparison is outside an eligible image report")
+        assets = method.assets(result[method.KEY], evidence["source"])
+        for asset in assets.values():
+            digest = asset["sha256"]
+            png_limits[digest] = min(png_limits.get(digest, method.MAX_ASSET_BYTES), method.MAX_ASSET_BYTES)
         groups.append(assets)
     repeat_pcm = {}
     gain_pairs = []
@@ -504,8 +510,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         _require(entry.get('bytes') == archive.getinfo(path).file_size, 'An artifact size differs from its index')
         if digest in thumbnail_assets:
             _require(0 < entry['bytes'] <= image_editor_preview_binding.MAX_ASSET_BYTES, 'A thumbnail crop exceeds its size limit')
-        if digest in transparency_assets:
-            _require(0 < entry['bytes'] <= image_transparency_binding.MAX_ASSET_BYTES, 'A PNG transparency crop exceeds its size limit')
+        if digest in png_limits:
+            _require(0 < entry['bytes'] <= png_limits[digest], 'A PNG comparison image exceeds its size limit')
         recorded = hashlib.sha256()
         with archive.open(path) as stream:
             while chunk := stream.read(1024 * 1024):

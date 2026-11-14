@@ -30,6 +30,11 @@ describe('evidence-led customer interpretation, shared report/API cases', () => 
     expect(presentedCustomerAssessment({ ...input, customer_assessment: { ...expected, confidence_pct: Infinity } })).toEqual(expected)
     expect(presentedCustomerAssessment({ ...input, customer_assessment: { ...expected, interval_pct: [90, 10] } })).toEqual(expected)
   })
+  it('withholds combined confidence when one of several stored images was assessed', () => {
+    const got = customerAssessment({ ...cases[0].input, kind: 'image', manifest: { sampling: { image_frame_count: 3 } } })
+    expect(got).toMatchObject({ direction: 'inconclusive', scope: 'image_components', scope_label: 'First stored image',
+      confidence_pct: null, probability_ai_pct: null, interval_pct: null })
+  })
   it('an API-scoped result is used even before the browser has fetched the check records', () => {
     const input = cases.find(c => c.name === 'real video excludes checked voice and timing from visual percentage')!.input
     const fromApi = customerAssessment(input)

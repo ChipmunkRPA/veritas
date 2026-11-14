@@ -17,8 +17,8 @@ interface TabSpec {
 
 export const TABS: TabSpec[] = [
   {
-    kind: 'image', label: 'Image', noun: 'an image', accept: 'image/*,.heic,.heif', exts: ['jpg', 'jpeg', 'png', 'webp', 'heic', 'heif', 'bmp', 'tif', 'tiff', 'gif'], mimePrefix: 'image/', maxBytes: 60 * MB,
-    formats: 'JPEG · PNG · WebP · HEIC · up to 60 MB',
+    kind: 'image', label: 'Image', noun: 'an image', accept: 'image/*,.apng,.heic,.heif', exts: ['jpg', 'jpeg', 'png', 'apng', 'webp', 'heic', 'heif', 'bmp', 'tif', 'tiff', 'gif'], mimePrefix: 'image/', maxBytes: 60 * MB,
+    formats: 'JPEG · PNG · APNG · WebP · HEIC · up to 60 MB',
   },
   {
     kind: 'video', label: 'Video', noun: 'a video', accept: 'video/*,.mkv', exts: ['mp4', 'mov', 'webm', 'mkv', 'm4v', 'avi'], mimePrefix: 'video/', maxBytes: 500 * MB,

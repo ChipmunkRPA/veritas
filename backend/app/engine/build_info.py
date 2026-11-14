@@ -143,6 +143,8 @@ def compute(entries: Iterable[Mapping[str, Any]]) -> tuple[str | None, str | Non
 
 def sampling(kind: str, outputs: Mapping[str, Any]) -> dict[str, Any]:
     """What the analysis sampled from the media, compact enough for the manifest and the forensic appendix."""
+    if kind == "image" and (count := ((outputs.get("probe") or {}).get("n_frames") or 1)) > 1:
+        return {"image_frame_count": count}
     if kind == "video":
         probe, shots = outputs.get("probe"), outputs.get("shots")
         frames = rerun.sampled_frames(probe, shots)

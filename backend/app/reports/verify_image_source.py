@@ -10,6 +10,7 @@ from zipfile import ZipFile
 
 from PIL import Image, ImageOps
 
+from app.evidence import image_animation_binding as animation
 from app.evidence import image_embedded_pair_binding as embedded_pair
 from app.evidence import image_interpolation_binding as interpolation
 from app.evidence import image_transparency_binding as transparency
@@ -159,6 +160,15 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         transparency.assets(record, evidence["source"])
         matched = verify(data, record, lambda digest: archive.read(f"assets/{digest}.png"))
         native_detail += " Recomputed the PNG transparency counts" + (" and both source crops." if matched else ".")
+    if animation.KEY in projected:
+        from app.evidence.image_animation import verify
+
+        record = projected[animation.KEY]
+        source = evidence["source"]
+        animation.assets(record, source)
+        verify(data, record, lambda digest: archive.read(f"assets/{digest}.png"),
+               source_size=(source["width"], source["height"]))
+        native_detail += " Recomputed the animated PNG opening comparison and verified any recorded previews."
     crops = list(_crops(evidence))
     pair = (evidence.get(embedded_pair.KEY) or {}).get('pair')
     repeat_checks = [check for check in (evidence.get("coverage") or {}).get("inspection_checks", [])

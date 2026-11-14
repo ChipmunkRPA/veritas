@@ -1510,6 +1510,9 @@ export a draft package with **Include original** off when sharing the
 derivative. Its revealed crop can expose content hidden in the original
 display.
 
+The same command recomputes the [animated PNG opening comparison](image-animation-opening-2026-11-14.md)
+from the submitted file and verifies both previews when available.
+
 This optional check runs locally. It compares the original SHA-256 and
 then checks every unannotated inspection crop and both sides of a same-image
 match at their recorded EXIF-oriented coordinates. Pillow is enough for

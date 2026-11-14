@@ -290,10 +290,15 @@ def content_outside(kind: str, profile: Mapping[str, Any], context: Mapping[str,
     return "; ".join(content_conditions(kind, profile, context, bench).values()) or None
 
 
+MULTIFRAME_IMAGE_SCOPE = "the file contains multiple images and still-image checks only read the first stored image"
+
+
 def outside_reason(kind: str, profile: Mapping[str, Any], context: Mapping[str, Any] | None,
                    bench: Mapping[str, Any] | None) -> str | None:
     """Why an input is outside what the artefact's bench validated, whatever its slice says: below the size floor (L-1),
     or content the bench does not hold (D-65). The reasons that apply, joined; None when none does."""
+    if kind == "image" and ((context or {}).get("image_frame_count") or 1) > 1:
+        return MULTIFRAME_IMAGE_SCOPE
     reasons = [r for r in (size_floor(kind, profile, bench), content_outside(kind, profile, context, bench)) if r]
     return "; ".join(reasons) or None
 

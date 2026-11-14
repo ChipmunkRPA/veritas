@@ -13,7 +13,8 @@ import filetype
 
 from app.core.config import settings
 
-IMAGE_MIMES = {"image/jpeg", "image/png", "image/webp", "image/heic", "image/heif", "image/tiff", "image/bmp", "image/gif", "image/avif"}
+IMAGE_MIMES = {"image/jpeg", "image/png", "image/apng", "image/webp", "image/heic", "image/heif",
+               "image/tiff", "image/bmp", "image/gif", "image/avif"}
 VIDEO_MIMES = {"video/mp4", "video/quicktime", "video/x-matroska", "video/webm", "video/x-msvideo", "video/mpeg", "video/3gpp", "video/x-m4v"}
 DOC_EXTS = {".pdf", ".docx", ".txt", ".md", ".markdown", ".html", ".htm", ".eml"}
 M4A_BRANDS = {b"M4A ", b"M4B "}

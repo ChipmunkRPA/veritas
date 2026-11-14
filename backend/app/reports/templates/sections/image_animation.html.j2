@@ -1,0 +1,17 @@
+{% if v.get('png_animation') %}
+{% set review = v.png_animation %}
+<section class="chapter-cont image-evidence" aria-labelledby="png-animation-heading">
+<h2 class="chapter-title" id="png-animation-heading">Animated PNG opening comparison</h2>
+<p>{{ review.summary }}</p>
+{% if review.previews %}
+<div class="evidence-plates evidence-plates-pair">
+{% for asset in review.previews.values() %}
+<figure>
+{% if asset.uri %}<img src="{{ asset.uri }}" alt="{{ asset.title }}">{% endif %}
+<figcaption>{{ asset.title }}</figcaption>
+</figure>
+{% endfor %}
+</div>
+{% endif %}
+</section>
+{% endif %}

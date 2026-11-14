@@ -219,7 +219,7 @@ def view_of(snapshot: ReportSnapshot, *, version: str) -> dict[str, Any]:
                 images["source"] = source
         out = page_view(snapshot, images=images, thumbnail_details=thumbnails)
     if not withheld and snapshot.analysis.kind == "image":
-        from app.evidence import image_transparency
+        from app.evidence import image_animation, image_animation_binding, image_transparency
         from app.evidence.image_thumbnail_evidence import from_result as thumbnail_review
         from app.evidence.image_whole_review import from_result as whole_image_review
 
@@ -243,6 +243,12 @@ def view_of(snapshot: ReportSnapshot, *, version: str) -> dict[str, Any]:
                 digest = snapshot.exhibit_images.get(crop["exhibit_id"])
                 crop["uri"] = figures.plate(digest, forensic.PLATE_BOX) if digest == crop["sha256"] else None
             out[image_transparency.KEY] = transparency
+        animation = image_animation.from_result(snapshot.result)
+        if animation and animation["source_sha256"] == snapshot.media.sha256:
+            for asset in animation["previews"].values():
+                digest = snapshot.exhibit_images.get(asset["exhibit_id"])
+                asset["uri"] = figures.plate(digest, (528, 528)) if digest == asset["sha256"] else None
+            out[image_animation_binding.KEY] = animation
     out["image_evidence"] = image_evidence.view(snapshot)
     out["evidence"] = multimedia_evidence.view(snapshot)
     return out

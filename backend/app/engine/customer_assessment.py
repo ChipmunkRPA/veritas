@@ -210,6 +210,12 @@ def _customer_assessment(result: Mapping[str, Any]) -> dict[str, Any]:
     if origin_record or decision.get("driving_hypothesis") == "H3_provenance_integrity":
         return {**answer, "applies": False, "direction": "record", "headline": None,
                 "meaning": "The conclusion follows the file's provenance record, not a confidence percentage."}
+    frame_count = (result.get("manifest", {}).get("sampling") or {}).get("image_frame_count")
+    if result.get("kind") == "image" and type(frame_count) is int and frame_count > 1:
+        return {**answer, "direction": "inconclusive", "headline": "Inconclusive: multiple images in this file",
+                "meaning": "The still-image checks cover only the first stored image.",
+                "scope": "image_components", "scope_label": "First stored image",
+                "scope_note": f"The header reports {frame_count} stored images. No combined AI confidence is available for the sequence."}
     if result.get("kind") == "document" and decision.get("code") == "not_assessable":
         from app.detectors.text import language_scope
 

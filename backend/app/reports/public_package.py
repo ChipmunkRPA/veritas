@@ -22,6 +22,7 @@ from app.cases import review
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.evidence import face_short_window_binding as face_windows
+from app.evidence import image_animation_binding as animation
 from app.evidence import image_editor_preview_binding as editor_preview
 from app.evidence import image_transparency_binding as transparency
 from app.evidence import scene_return_binding
@@ -168,28 +169,26 @@ def _editor_preview(db, frozen, evidence):
     return projection, indexed
 
 
-def _transparency_assets(db, frozen, evidence):
-    from app.evidence.image_transparency import CREATOR, from_result
-
-    review = from_result(frozen.result)
+def _png_display_assets(db, frozen, evidence, *, binding, review):
     if review is None:
         return None, {}
-    record = transparency.projection(review)
+    record = binding.projection(review)
     try:
-        assets = transparency.assets(record, evidence["source"])
+        assets = binding.assets(record, evidence["source"])
     except ValueError as error:
         raise legacy.PackageError(str(error)) from error
     exhibits = {e["id"]: e for e in frozen.result.get("exhibits") or []
-                if e.get("created_by") == CREATOR and e.get("kind") == "image" and e.get("role") == "comparison"}
+                if e.get("created_by") == binding.KEY and e.get("kind") == "image" and e.get("role") == "comparison"}
     result = {}
     for exhibit_id, asset in assets.items():
         digest = asset["sha256"]
         exhibit = exhibits.get(exhibit_id) or {}
         artefact = db.get(Artefact, exhibit["payload_artefact_id"]) if exhibit.get("payload_artefact_id") else None
-        if (artefact is None or artefact.analysis_id != frozen.analysis.id or artefact.created_by != CREATOR
+        if (artefact is None or artefact.analysis_id != frozen.analysis.id or artefact.created_by != binding.KEY
                 or artefact.role != "exhibit_payload" or artefact.media_type != "image/png"
+                or not 0 < artefact.bytes <= binding.MAX_ASSET_BYTES
                 or artefact.sha256 != digest or frozen.exhibit_images.get(exhibit_id) != digest):
-            raise legacy.PackageError("A PNG transparency crop differs from the frozen report.")
+            raise legacy.PackageError("A PNG comparison image differs from the frozen report.")
         result[digest] = asset, artefact
     return record, result
 
@@ -226,15 +225,20 @@ def build_public(db, package, *, store, key: signing.InstanceKey, exported_at: d
             if result["decision"].get("image_copy_coverage") is not None:
                 raise legacy.PackageError("Thumbnail evidence conflicts with the original provenance scope.")
             result[editor_preview.KEY] = projection
-    if analysis.kind == "image" and report.profile in transparency.REPORT_PROFILES:
-        projection, alpha_crops = _transparency_assets(db, frozen, evidence)
-        if projection is not None:
-            if result["decision"].get("image_copy_coverage") is not None:
-                raise legacy.PackageError("PNG transparency evidence conflicts with the original provenance scope.")
-            result[transparency.KEY] = projection
-            if any(digest in previews and previews[digest][0] != asset for digest, (asset, _) in alpha_crops.items()):
-                raise legacy.PackageError("A PNG transparency crop conflicts with a thumbnail crop.")
-            previews.update(alpha_crops)
+    if analysis.kind == "image":
+        from app.evidence import image_animation, image_transparency
+
+        for binding, read in ((transparency, image_transparency.from_result), (animation, image_animation.from_result)):
+            if report.profile not in binding.REPORT_PROFILES:
+                continue
+            projection, assets = _png_display_assets(db, frozen, evidence, binding=binding, review=read(frozen.result))
+            if projection is not None:
+                if result["decision"].get("image_copy_coverage") is not None:
+                    raise legacy.PackageError("PNG comparison conflicts with the original provenance scope.")
+                result[binding.KEY] = projection
+                if any(digest in previews and previews[digest][0] != asset for digest, (asset, _) in assets.items()):
+                    raise legacy.PackageError("A PNG comparison image conflicts with other image evidence.")
+                previews.update(assets)
     if analysis.kind != 'image':
         from app.reports.multimedia_evidence import verify_assets
 
@@ -308,7 +312,7 @@ def build_public(db, package, *, store, key: signing.InstanceKey, exported_at: d
     files['instance_public_key.pem'] = key.public_pem()
     files['reproduce.md'] = b'# Public evidence derivative\n\nThis package cannot reproduce model inference. Obtain the authorised internal analysis record separately. Adding the source does not change this limitation.\n'
     preview_note = ('result.json also declares the saved editor thumbnail crops and footprint. '
-                    'Use verify with --source-image to check them against the submitted JPEG.\n' if previews else '')
+                    'Use verify with --source-image to check them against the submitted image.\n' if previews else '')
     files['README.txt'] = (
         'Chipmunk Verify public evidence package\n\n'
         f"Status: {package.kind.upper()}; report {report.display_id}.\n"

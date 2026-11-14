@@ -15,6 +15,9 @@ from app.detectors.image import (
 )
 
 SCHEMA = "chipmunk.image-reference-comparison/15"
+EXTENDED_SCHEMA = "chipmunk.image-reference-comparison/16"
+SCHEMAS = frozenset({SCHEMA, EXTENDED_SCHEMA})
+EXTRA_QUALITIES = (75, 85)
 METHOD = "exact_jpeg_pair_local_detail_loss"
 INTERPRETATION = (
     "Matching blocks support the same framing. Fine luminance detail is weaker in the highlighted areas while broader "
@@ -32,11 +35,14 @@ def _vectors(coefficients, rows, columns):
     return [blocks[..., band].reshape(rows, columns, -1) for band in _BANDS]
 
 
-def compare(earlier, submitted, earlier_bytes, submitted_bytes):
+def compare(earlier, submitted, earlier_bytes, submitted_bytes, *, alternate_quality=None):
     """Return a supplementary loss-of-detail region only when the pair qualifies."""
+    if alternate_quality is not None and alternate_quality not in EXTRA_QUALITIES:
+        return None, None
+    quality = reference_same_jpeg.QUALITY if alternate_quality is None else alternate_quality
     if (earlier_bytes == submitted_bytes or earlier.size != submitted.size
             or not reference_same_jpeg.MIN_SIDE <= min(earlier.size) <= max(earlier.size) <= reference_same_jpeg.MAX_SIDE
-            or not all(reference_structure_jpeg._jpeg_profile(image, body, (reference_same_jpeg.QUALITY,))
+            or not all(reference_structure_jpeg._jpeg_profile(image, body, (quality,))
                        for image, body in ((earlier, earlier_bytes), (submitted, submitted_bytes)))):
         return None, None
     a, b = np.asarray(earlier), np.asarray(submitted)

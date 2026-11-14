@@ -119,7 +119,8 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             allow_oriented_crop: bool = False, allow_oriented_resize: bool = False,
             allow_embedded_photo: bool = False, allow_exact_jpeg_identity: bool = False,
             allow_shifted_jpeg: bool = False, allow_structure_jpeg: bool = False,
-            allow_same_jpeg: bool = False, allow_jpeg_detail_loss: bool = False) -> dict:
+            allow_same_jpeg: bool = False, allow_jpeg_detail_loss: bool = False,
+            allow_jpeg_detail_loss_extra_qualities: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     before, after = _bytes(reference_path), _bytes(submitted_path)
     with Image.open(io.BytesIO(before)) as original, Image.open(io.BytesIO(after)) as questioned:
@@ -183,20 +184,28 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             detailed, selection = reference_jpeg_detail_loss.compare(original, questioned, before, after)
             if detailed is not None:
                 result, mask, schema = detailed, selection, reference_jpeg_detail_loss.SCHEMA
+            elif allow_jpeg_detail_loss_extra_qualities:
+                for quality in reference_jpeg_detail_loss.EXTRA_QUALITIES:
+                    detailed, selection = reference_jpeg_detail_loss.compare(original, questioned, before, after,
+                                                                             alternate_quality=quality)
+                    if detailed is not None:
+                        detailed["alignment"]["jpeg_quality"] = quality
+                        result, mask, schema = detailed, selection, reference_jpeg_detail_loss.EXTENDED_SCHEMA
+                        break
     aligned = "alignment" in result
     interpretation = {reference_structure_jpeg.SCHEMA: reference_structure_jpeg.INTERPRETATION,
                       reference_same_jpeg.SCHEMA: reference_same_jpeg.INTERPRETATION,
-                      reference_jpeg_detail_loss.SCHEMA: reference_jpeg_detail_loss.INTERPRETATION}
+                      **dict.fromkeys(reference_jpeg_detail_loss.SCHEMAS, reference_jpeg_detail_loss.INTERPRETATION)}
     output = {"schema": schema or f"chipmunk.image-reference-comparison/{2 if aligned else 1}",
               "coordinate_space": "exif-oriented-submitted" if aligned or schema else "exif-oriented-original",
               "reference": {"sha256": hashlib.sha256(before).hexdigest(), "width": reference.shape[1], "height": reference.shape[0]},
               "submitted": {"sha256": hashlib.sha256(after).hexdigest(), "width": submitted.shape[1], "height": submitted.shape[0]},
               **result, "interpretation": interpretation.get(schema, INTERPRETATION)}
-    if schema in {reference_same_jpeg.SCHEMA, reference_jpeg_detail_loss.SCHEMA}:
+    if schema in {reference_same_jpeg.SCHEMA, *reference_jpeg_detail_loss.SCHEMAS}:
         output["affects_overall_confidence"] = False
         output["comparison_options"] = {"exact_jpeg_identity": allow_exact_jpeg_identity,
                                         "shifted_jpeg": allow_shifted_jpeg, "structure_jpeg": allow_structure_jpeg}
-        if schema == reference_jpeg_detail_loss.SCHEMA:
+        if schema in reference_jpeg_detail_loss.SCHEMAS:
             output["comparison_options"]["same_jpeg"] = allow_same_jpeg
     if evidence_dir is not None:
         _write_evidence(evidence_dir, output, reference, submitted, mask)

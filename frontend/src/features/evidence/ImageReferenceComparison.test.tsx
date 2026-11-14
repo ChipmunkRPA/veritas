@@ -158,10 +158,10 @@ describe('earlier-copy comparison', () => {
     expect((await screen.findByRole('alert')).textContent).toContain('The server returned an incomplete exact-block JPEG comparison.')
   })
 
-  it('shows detail loss with matching crops and rejects impossible measured support', async () => {
+  it.each([75, 85, 90])('shows JPEG%s detail loss with matching crops and rejects impossible support', async (quality) => {
     const result = structuredClone(comparison)
     const measured = result.comparison
-    measured.schema = 'chipmunk.image-reference-comparison/15'
+    measured.schema = quality === 90 ? 'chipmunk.image-reference-comparison/15' : 'chipmunk.image-reference-comparison/16'
     measured.reference = { ...measured.reference, width: 624, height: 528 }
     measured.submitted = { ...measured.submitted, width: 624, height: 528 }
     measured.mask = artifact('difference-mask.png', 624, 528)
@@ -178,6 +178,7 @@ describe('earlier-copy comparison', () => {
       submitted_overlap: overlap, reference_overlap: overlap, full_tiles: 1287, exact_tiles: 1240, anchor_count: 1000,
       anchor_sha256: hash, reference_decoded_rgb_sha256: hash,
       supported_zones: [[0, 0], [0, 1], [1, 1], [1, 2], [2, 1], [2, 2]],
+      ...(quality === 90 ? {} : { jpeg_quality: quality }),
     }
     const invalid = structuredClone(result)
     invalid.comparison.regions[0].directly_measured_tiles = 30

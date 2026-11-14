@@ -60,12 +60,26 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
-- [Repeated percentages in TXT](writing-percentage-consistency-2026-11-13.md)
+- [JPEG75 and JPEG85 detail loss](image-jpeg-detail-quality-transfer-2026-11-13.md)
+  adds 19 useful local blur ranges per format, without adding any highlight
+  on 306 controls per format. It requires an earlier matching copy and
+  contributes zero AI-confidence weight.
+- [Video insertion verification](video-insert-retention-2026-11-13.md)
+  withholds a single range when the pictures outside it do not reliably
+  match. Across two held collections it retained 20 correct ranges and
+  withheld 32 incorrect single ranges on multiple or mixed edits.
+- [Single-upload public replay](independent-testing.md) now reproduces the
+  latest four media studies in one command on macOS and Linux. The replay
+  verifies recorded measurements and decisions. Independent external
+  review remains open.
+- [Repeated percentage statements](writing-percentage-consistency-2026-11-13.md)
   links both positions when the same complete statement uses two different
   percentage values. It located both values in all 48 seeded disagreements
-  and gave no findings on 608 ordinary and constructed controls. It carries
-  zero AI-authorship weight. Dates, cohorts, denominators and citations that
-  differ in the text are treated as different claims.
+  in the TXT study and gave no findings on 608 ordinary and constructed
+  controls. Supported Word, plain-text and mapped HTML email, and selectable
+  PDF documents record source-level locations. It carries zero AI-authorship
+  weight. Dates, cohorts, denominators and citations that differ in the text
+  are treated as different claims.
 - [JPEG detail loss](image-jpeg-detail-loss-2026-11-13.md) adds a narrow
   earlier-copy check. It located moderate local blur in 14 of 34 cases,
   versus one with the existing comparison. It added useful moderate or

@@ -53,6 +53,7 @@ export interface ImageReferenceRecord {
     supported_zones?: [number, number][]
     anchor_sha256?: string
     reference_decoded_rgb_sha256?: string
+    jpeg_quality?: number
     reference_minus_submitted?: { x: number; y: number }
   }
   submitted_over_reference_xy?: [[number, number], [number, number]]
@@ -98,6 +99,9 @@ export const shiftedJpegSchema = 'chipmunk.image-reference-comparison/12'
 export const structureJpegSchema = 'chipmunk.image-reference-comparison/13'
 export const sameJpegSchema = 'chipmunk.image-reference-comparison/14'
 export const jpegDetailLossSchema = 'chipmunk.image-reference-comparison/15'
+export const extendedJpegDetailLossSchema = 'chipmunk.image-reference-comparison/16'
+export const isJpegDetailLoss = (schema: string) =>
+  schema === jpegDetailLossSchema || schema === extendedJpegDetailLossSchema
 export const IMAGE_REFERENCE_SECTION_ID = 'earlier-image-comparison'
 export const orientationLabels = {
   rotate_90_clockwise: '90-degree clockwise rotation',
@@ -148,14 +152,15 @@ function validAreaWithin(area: NativeImageArea, width: number, height: number): 
 function validSameJpegProof(comparison: ImageReferenceRecord): boolean {
   const { width, height } = comparison.submitted
   const proof = comparison.alignment
-  const detailLoss = comparison.schema === jpegDetailLossSchema
+  const detailLoss = isJpegDetailLoss(comparison.schema)
   if (!proof || comparison.status !== 'comparable' || comparison.affects_overall_confidence !== false
       || proof.method !== (detailLoss ? 'exact_jpeg_pair_local_detail_loss' : 'exact_decoded_jpeg_pair_identity')
       || comparison.reference.width !== width || comparison.reference.height !== height
       || ![width, height].every(value => Number.isSafeInteger(value) && value >= 512 && value <= 768)
       || ![proof.submitted_overlap, proof.reference_overlap].every(area =>
         validArea(area) && area.x === 0 && area.y === 0 && area.w === width && area.h === height)
-      || proof.reference_minus_submitted?.x !== 0 || proof.reference_minus_submitted.y !== 0) return false
+      || proof.reference_minus_submitted?.x !== 0 || proof.reference_minus_submitted.y !== 0
+      || (comparison.schema === extendedJpegDetailLossSchema && proof.jpeg_quality !== 75 && proof.jpeg_quality !== 85)) return false
   const full = proof.full_tiles ?? 0
   const exact = proof.exact_tiles ?? 0
   const anchors = proof.anchor_count ?? 0
@@ -252,7 +257,7 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
       throw new Error('The server returned an incomplete JPEG structure comparison.')
     }
   }
-  if ((comparison.schema === sameJpegSchema || comparison.schema === jpegDetailLossSchema) && !validSameJpegProof(comparison)) {
+  if ((comparison.schema === sameJpegSchema || isJpegDetailLoss(comparison.schema)) && !validSameJpegProof(comparison)) {
     throw new Error('The server returned an incomplete exact-block JPEG comparison.')
   }
   if (comparison.schema === exactPngCropResizeSchema && (!comparison.reference_crop_bounds

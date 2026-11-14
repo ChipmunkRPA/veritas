@@ -84,7 +84,7 @@ def _summary(document, comparison, assets):
         _text(page, MARGIN, 318, f"{proof['exact_tiles']:,} of {proof['full_tiles']:,} full blocks matched after JPEG encoding.",
               size=10, color=MUTED)
         _text(page, MARGIN, 334, f"{proof['anchor_count']:,} unique detailed blocks supported alignment.", size=10, color=MUTED)
-    if schema in {reference_same_jpeg.SCHEMA, reference_jpeg_detail_loss.SCHEMA}:
+    if schema in {reference_same_jpeg.SCHEMA, *reference_jpeg_detail_loss.SCHEMAS}:
         proof = comparison["alignment"]
         _text(page, MARGIN, 302, "Matching JPEG blocks support the same framing.", size=10, font="hebo")
         _text(page, MARGIN, 318, f"{proof['exact_tiles']:,} of {proof['full_tiles']:,} complete decoded blocks match exactly.",
@@ -96,7 +96,7 @@ def _summary(document, comparison, assets):
         _text(page, MARGIN, 302, "Matching detail supports the same framing.", size=10, font="hebo")
         _text(page, MARGIN, 318, f"{aligned} of {detailed} detailed areas matched across the two images.", size=10, color=MUTED)
         _text(page, MARGIN, 334, "Highlights require local color and structure changes under both tone fits.", size=10, color=MUTED)
-    elif (schema not in {reference_same_jpeg.SCHEMA, reference_jpeg_detail_loss.SCHEMA}
+    elif (schema not in {reference_same_jpeg.SCHEMA, *reference_jpeg_detail_loss.SCHEMAS}
           and (alignment := comparison.get("alignment")) and "submitted_overlap" in alignment):
         label = "area compared" if schema == reference_shifted_jpeg.SCHEMA else "overlap"
         _text(page, MARGIN, 302, f"Earlier copy {label}: {_area(alignment['reference_overlap'])}", size=10)
@@ -174,7 +174,7 @@ def render(comparison: dict, assets: dict[str, bytes]) -> bytes:
         document.set_metadata({"title": "Earlier-copy image comparison", "author": "Chipmunk Verify"})
         _summary(document, comparison, assets)
         for index, region in enumerate(comparison["regions"], 1):
-            label = "Fine detail loss" if comparison["schema"] == reference_jpeg_detail_loss.SCHEMA else "Difference region"
+            label = "Fine detail loss" if comparison["schema"] in reference_jpeg_detail_loss.SCHEMAS else "Difference region"
             page = _page(document, f"{label} {index}", "Coordinates use each image's oriented native pixels.")
             overlay = region.get("submitted_overlay")
             for x, right, label, bounds, asset, hash_y in (

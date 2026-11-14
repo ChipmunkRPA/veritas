@@ -5,7 +5,7 @@ import { saveBlob } from '../../lib/api/reports'
 import {
   compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
-  IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, jpegDetailLossSchema, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
+  IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -72,7 +72,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const embeddedPhoto = comparison.schema === embeddedPhotoSchema ? comparison.embedded_native_photo : undefined
   const delivery = comparison.schema === jpegPngEnvelopeSchema
   const sameJpegFraming = comparison.schema === exactJpegIdentitySchema ? alignment : undefined
-  const detailLoss = comparison.schema === jpegDetailLossSchema
+  const detailLoss = isJpegDetailLoss(comparison.schema)
   const sameJpegBlocks = (comparison.schema === sameJpegSchema || detailLoss) ? alignment : undefined
   const shiftedJpeg = comparison.schema === shiftedJpegSchema ? alignment : undefined
   const sameStructureFraming = comparison.schema === structureJpegSchema ? comparison.same_framing_structure : undefined

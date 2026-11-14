@@ -889,7 +889,8 @@ def test_exact_jpeg_block_fallback_preserves_completed_analysis_and_exports(refe
         assert db.get(Analysis, "image-a").result_hash == "a" * 64
 
 
-def test_jpeg_detail_loss_keeps_earlier_copy_crops_and_replays(reference_http, tmp_path, monkeypatch):
+@pytest.mark.parametrize("quality", (75, 85, 90))
+def test_jpeg_detail_loss_keeps_earlier_copy_crops_and_replays(reference_http, tmp_path, monkeypatch, quality):
     rng = np.random.default_rng(560)
     width, height = 624, 528
     y, x = np.indices((height, width))
@@ -908,8 +909,8 @@ def test_jpeg_detail_loss_keeps_earlier_copy_crops_and_replays(reference_http, t
             Image.fromarray(pixels).save(buffer, "JPEG", quality=quality, subsampling=2)
             return buffer.getvalue()
 
-    before = encode(source)
-    after = encode(modified)
+    before = encode(source, quality)
+    after = encode(modified, quality)
     f = reference_http
 
     def compare(payload):
@@ -931,12 +932,21 @@ def test_jpeg_detail_loss_keeps_earlier_copy_crops_and_replays(reference_http, t
     baseline = compare(after)["comparison"]
     assert baseline["regions"] == []
     monkeypatch.setattr(settings, "image_reference_jpeg_detail_loss", True)
+    extra_quality = quality != 90
+    monkeypatch.setattr(settings, "image_reference_jpeg_detail_loss_extra_qualities", False)
+    if extra_quality:
+        assert compare(after)["comparison"] == baseline
+        monkeypatch.setattr(settings, "image_reference_jpeg_detail_loss_extra_qualities", True)
     payload = compare(after)
     result = payload["comparison"]
-    assert result["schema"] == "chipmunk.image-reference-comparison/15"
+    expected_schema = "chipmunk.image-reference-comparison/" + ("16" if extra_quality else "15")
+    assert result["schema"] == expected_schema
+    assert result["alignment"].get("jpeg_quality", 90) == quality
     assert result["affects_overall_confidence"] is False
     [region] = result["regions"]
-    assert region["reference_region"] == {"x": 288, "y": 224, "w": 96, "h": 80}
+    bounds = region["reference_region"]
+    assert 288 <= bounds["x"] < bounds["x"] + bounds["w"] <= 384
+    assert 224 <= bounds["y"] < bounds["y"] + bounds["h"] <= 304
     assert 0 < region["directly_measured_tiles"] <= region["selected_pixels"] // 256
     assert result["comparison_options"]["same_jpeg"] is True
     with pymupdf.open(stream=base64.b64decode(payload.pop("pdf")), filetype="pdf") as pdf:
@@ -953,7 +963,10 @@ def test_jpeg_detail_loss_keeps_earlier_copy_crops_and_replays(reference_http, t
     manifest.write_text(json.dumps(payload))
     with pytest.raises(ValueError, match="differ from recomputed evidence"):
         review(manifest, reference_path, submitted_path)
-    assert compare(encode(softened))["comparison"]["schema"] != "chipmunk.image-reference-comparison/15"
-    assert compare(encode(modified, 85))["comparison"]["schema"] != "chipmunk.image-reference-comparison/15"
+    assert compare(encode(softened, quality))["comparison"]["schema"] != expected_schema
+    mismatched_quality = (85 if quality == 75 else 75)
+    assert compare(encode(modified, mismatched_quality))["comparison"]["schema"] not in {
+        "chipmunk.image-reference-comparison/15", "chipmunk.image-reference-comparison/16",
+    }
     with Session(f.engine) as db:
         assert db.get(Analysis, "image-a").result_hash == "a" * 64

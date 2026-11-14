@@ -86,6 +86,9 @@ and after the inserted footage. It also gives corresponding screenshots from
 the earlier video on both sides and retains native timestamps in JSON and
 PDF. The comparison uses the existing authenticated earlier-copy route and
 does not start a paid analysis or alter the existing analysis result.
+The [retained-picture check](video-insert-retention-2026-11-13.md) verifies
+that the two remaining sections support one insertion before showing a
+range. It reports the comparison as unassessed when those sections disagree.
 
 ## Replay
 

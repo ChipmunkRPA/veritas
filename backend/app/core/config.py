@@ -229,6 +229,7 @@ class Settings(BaseSettings):
     image_reference_structure_jpeg: bool = False  # Optional same-framing JPEG comparison after global tone changes.
     image_reference_same_jpeg: bool = False  # Optional exact-block fallback for matching JPEG90 copies.
     image_reference_jpeg_detail_loss: bool = False  # Measure localized loss of fine detail across matching JPEG90 copies.
+    image_reference_jpeg_detail_loss_extra_qualities: bool = False  # Include matching standard JPEG75 and JPEG85 copies.
     audio_reference_comparison_enabled: bool = False  # Authenticated comparison of a short earlier recording.
     audio_reference_local_timing: bool = False  # Find localized changes in the timing of matching excerpts.
     audio_reference_aac_timing: bool = False  # Support native mono M4A and lossless timing pairs with the same presented duration.

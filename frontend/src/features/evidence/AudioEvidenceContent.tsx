@@ -67,6 +67,11 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
   const tracks = set.source.audio_stream_indices
   const clock = set.coverage?.source_clock_context
   const shortReview = standalone ? set.short_voice_review : undefined
+  const shortInterval = shortReview?.status === 'flagged' ? shortReview.interval : null
+  const shortContext = shortInterval
+    ? (set.acoustic_context?.events ?? []).filter(event =>
+      event.interval.start_sample < shortInterval.end_sample && event.interval.end_sample > shortInterval.start_sample)
+    : []
   const longReview = standalone ? set.long_voice_review : undefined
   const focusedSpeech = longReview?.schema === 'chipmunk.long-voice-review/2'
   const hasMeasuredSpeech = longReview?.windows.some((window) => window.direction !== 'unassessed')
@@ -141,6 +146,12 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
           <EvidenceAudio set={set} artifact={shortReview.artifacts.selected_clip} token={token} ready={mediaReady}
             alt="Flagged two-second speech window" />
         </div>}
+        {shortContext.length > 0 && <p className="mt-3 mb-0 text-caption text-text-muted">
+          Overlapping recording observations{' '}
+          {shortContext.map((event, index) => <span key={event.id}>{index > 0 && ', '}
+            <Link to={{ search, hash: `#media-evidence-${encodeURIComponent(event.id)}` }} className="underline underline-offset-2">{event.id}</Link>
+          </span>)}. They describe the same time in the mixed track. The cause of the speech response is undetermined.
+        </p>}
       </>}
       {rate && shortReview.checked_windows.length > 0 && <details className="mt-3 text-small text-text-muted">
         <summary className="cursor-pointer font-medium">Checked two-second windows</summary>

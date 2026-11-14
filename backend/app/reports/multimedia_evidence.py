@@ -1163,6 +1163,12 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     short_voice_review = copy.deepcopy(document.get("short_voice_review"))
     if short_voice_review and (asset := short_voice_review["artifacts"].get("waveform")):
         short_voice_review["waveform"] = plate("waveform", asset, "Waveform with the selected two-second window highlighted")
+        interval = short_voice_review["interval"]
+        short_voice_review["recording_context"] = [
+            event["id"] for event in (document.get("acoustic_context") or {}).get("events", ())
+            if event["interval"]["start_sample"] < interval["end_sample"]
+            and event["interval"]["end_sample"] > interval["start_sample"]
+        ]
     long_voice_review = copy.deepcopy(document.get("long_voice_review"))
     if long_voice_review:
         from app.evidence.audio_long_review_binding import LABELS, media_windows

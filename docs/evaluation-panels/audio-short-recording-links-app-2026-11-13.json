@@ -1,0 +1,50 @@
+{
+  "cases": {
+    "genuine-no-flag": {
+      "interval": null,
+      "observation_ranges": [],
+      "overlapping_observations": [],
+      "source_package_verified": true,
+      "status": "no_flag"
+    },
+    "late-clone-flag": {
+      "interval": {
+        "end_sample": 96000,
+        "start_sample": 64000
+      },
+      "observation_ranges": [],
+      "overlapping_observations": [],
+      "source_package_verified": true,
+      "status": "flagged"
+    },
+    "stock-context": {
+      "interval": {
+        "end_sample": 80000,
+        "start_sample": 48000
+      },
+      "observation_ranges": [
+        {
+          "end_sample": 56000,
+          "start_sample": 40000
+        }
+      ],
+      "overlapping_observations": [
+        "B02"
+      ],
+      "source_package_verified": true,
+      "status": "flagged"
+    },
+    "stock-flag": {
+      "interval": {
+        "end_sample": 80000,
+        "start_sample": 48000
+      },
+      "observation_ranges": [],
+      "overlapping_observations": [],
+      "source_package_verified": true,
+      "status": "flagged"
+    }
+  },
+  "prepaid_analyses": 4,
+  "unpaid_jobs": 0
+}

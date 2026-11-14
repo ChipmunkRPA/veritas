@@ -1,0 +1,8 @@
+{
+  "scope": "Six-second 16 kHz mono single upload only. No clean earlier recording or component is available to the detector.",
+  "assets": "Use exact installed primary speech-origin weights with original serving window admission and five two-second windows. Verify stored incumbent scores on a deterministic native window per role.",
+  "selection": "Take up to two strongest admitted incumbent windows. Attenuate each exact one-second half independently to 0.25 with a 40 ms cosine ramp at its boundaries. Use the processing clock only for measurement and report original half samples.",
+  "arms": "Incumbent 2-second flag. Highest forward-minus-attenuated-half drop. Highest drop that exceeds the competing half by a positive amount, ranked by the mean of drop and contrast. Also report each as an additive rescue.",
+  "points": "Original serving threshold. For each separate test statistic use the second-highest matched genuine-source maximum (one fitting group allowed), bounded by the largest genuine background-only score. Seal on previously published stock development before any held inference.",
+  "evaluation": "On randomized stock and independent archived cross-generator cohorts under -5 dB or stronger overlap, count useful edit locations (half edit coverage and 0.30 IoU), wrong ranges, original/noisy ordinary splice flags, groups and isolated backgrounds. Require two extra correct intervals across two generator families, no background-only addition, and at most one additional ordinary source group in each pool for a product trial. Views of the same input are correlated. No AI confidence fit."
+}

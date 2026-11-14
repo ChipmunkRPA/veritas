@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Short speech-window attenuation](audio-voice-attenuation-2026-11-13.md)
+  added two useful locations on 28 noisy edits and ten ordinary flags
+  with the simpler rule. The comparison stays offline. The app and PDF
+  now link flagged short speech windows to overlapping acoustic evidence.
+
 - [Denser earlier-copy speech review](audio-dense-clean-reference-2026-11-13.md)
   located 14 of 16 short synthetic alterations under competing speech,
   up from six on the same earlier-copy pairs. At −5 dB it highlighted one

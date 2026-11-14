@@ -241,6 +241,11 @@ python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/deliver
 
 ### Replay the short edit confirmation studies
 
+The [single-upload attenuation review](audio-voice-attenuation-2026-11-13.md#replay)
+checks the frozen comparison and every false alarm on 137 noisy
+recordings. Its native reader reconstructs all 548 processed inputs
+from the separately retained sources.
+
 Recompute published results for [JPEG90 agreement](image-regional-jpeg90-quality-agreement-2026-11-13.md),
 [repeated speech and mouth motion](video-lipsync-repeat-motion-2026-11-13.md),
 [voice resonance under competing speech](audio-formant-local-transfer-2026-11-13.md)

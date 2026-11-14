@@ -103,6 +103,7 @@
 <p class="caption">Flagged window {{ '%.3f' | format(review.start_s) }}–{{ '%.3f' | format(review.end_s) }} s.
 Samples [{{ review.interval.start_sample }}, {{ review.interval.end_sample }}) at 16000 Hz.
 {% for range in review.source_timestamp_ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% endfor %}</p>
+{% if review.get('recording_context') %}<p class="caption">Overlapping recording observations {% for id in review.recording_context %}<a href="#multimedia-evidence-{{ id }}">{{ id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}. They describe the same time in the mixed track. The cause of the speech response is undetermined.</p>{% endif %}
 {% if review.get('waveform') %}{{ plates([review.waveform]) }}{% endif %}
 {% endif %}
 <p class="caption">{{ review.limitation }} JSON pointer <span class="mono">/short_voice_review</span>.</p>

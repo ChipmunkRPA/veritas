@@ -42,6 +42,27 @@ const show = (set: AudioEvidenceSet, entry = '/analysis') => render(<MemoryRoute
 afterEach(() => { cleanup(); vi.restoreAllMocks() })
 
 describe('background and recording context', () => {
+  it('links a short speech finding to only the overlapping mixed-track observation', () => {
+    const set = fixture()
+    const interval = { start_sample: 16000, end_sample: 48000 }
+    set.short_voice_review = {
+      schema: 'chipmunk.short-voice-review/1', title: 'Short speech-window review', status: 'flagged',
+      reason: 'A two-second speech window returned an elevated response for review.',
+      limitation: 'This carries no weight in the overall assessment.', affects_overall_confidence: false,
+      checked_windows: [interval], interval, start_s: 1, end_s: 3,
+      source_timestamp_ranges: [{ ...interval, source_start_pts: 96000, source_end_pts: 128000, time_base: '1/16000' }],
+      artifacts: {},
+    }
+    show(set, '/analysis?view=plain')
+    const review = within(screen.getByRole('region', { name: 'Short speech-window review' }))
+    expect(review.queryByRole('link', { name: 'B02' })).toBeNull()
+    expect(review.getByText(/cause of the speech response is undetermined/)).toBeTruthy()
+    const link = review.getByRole('link', { name: 'B01' })
+    expect(link.getAttribute('href')).toBe('/analysis?view=plain#media-evidence-B01')
+    fireEvent.click(link)
+    expect(screen.getByRole('article', { name: 'Selected acoustic evidence B01' })).toBeTruthy()
+  })
+
   it.each([3, 4] as const)('shows the upper-frequency observation with the exact playable range in schema %i', version => {
     const set = fixture()
     const context = set.acoustic_context!

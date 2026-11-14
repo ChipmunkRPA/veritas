@@ -10,7 +10,7 @@ export interface EvidenceAsset {
   role?: string; page?: number; source_bbox?: number[]; time_axis?: 'source_pts'
 }
 export interface EvidenceRef { id: string; display_id: string | null }
-export interface EvidenceMeasure { label: string; value: number; unit: string }
+export interface EvidenceMeasure { label: string; value: number | string; unit: string }
 export interface PacketBase {
   id: string; title: string; observation: string; interpretation: string; limitations: string[]
   finding_ids: string[]; signal_refs: EvidenceRef[]; artifacts: Record<string, EvidenceAsset>

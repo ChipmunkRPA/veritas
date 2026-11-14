@@ -593,6 +593,8 @@ describe('ordinary multimedia evidence', () => {
     item.title = 'Mouth-region picture hold'
     item.claim_scope = 'sampled_window'
     item.mouth_local_hold = { frames: [8, 12], box: [110, 86, 24, 18] }
+    item.measurements = [{ label: 'Audio blocks with voice-like periodicity', value: '0 of 7', unit: '40 ms blocks' },
+      { label: 'Mixed soundtrack level during the hold', value: 'Digital silence', unit: '' }]
     item.artifacts.mouth_hold_waveform = { ...item.artifacts[item.frames[0].artifact_refs.original], time_axis: timeAxis }
     item.artifacts.mouth_hold_audio = { ...item.artifacts[item.frames[0].artifact_refs.original], media_type: 'audio/wav' }
     item.window = { frame_indices: [8, 9, 10, 11], start_pts: 12000, end_pts: 12160,
@@ -614,6 +616,8 @@ describe('ordinary multimedia evidence', () => {
     expect(measured.getAllByAltText(/exact original video frame/)).toHaveLength(3)
     expect(measured.getAllByAltText(/exact measured mouth region/)).toHaveLength(3)
     expect(measured.getByAltText('Waveform during the measured mouth-region hold')).toBeTruthy()
+    expect(measured.getByText('0 of 7 40 ms blocks')).toBeTruthy()
+    expect(measured.getByText('Digital silence')).toBeTruthy()
     expect(measured.getByText(timeAxis === 'source_pts'
       ? /same source clock as the pictures above/
       : /waveform axis starts from the decoded audio origin/)).toBeTruthy()

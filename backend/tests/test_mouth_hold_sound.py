@@ -59,6 +59,33 @@ def test_mouth_hold_sound_binds_local_samples_and_rejects_unverified_clock(schem
     assert measure(wave, trailing, review, review["time_base"]) is None
 
 
+def test_measured_mixed_sound_level_distinguishes_digital_silence_from_noise():
+    review = {"schema": "chipmunk.video-mouth-local-hold/1", "status": "matched",
+              "match": {"frames": [0, 1]}, "pts": [8320, 13440]}
+    audio = {"timeline_time_base": "1/16000", "samples": 16000,
+             "timeline": [{"start_sample": 0, "end_sample": 16000, "source_pts": 0}]}
+    options = {"time_base": "1/16000", "schema": binding.LEVEL_SCHEMA}
+
+    silent = measure(np.zeros(16000), audio, review, **options)
+    assert silent["rms_dbfs"] is None and silent["periodic_blocks"] == 0
+    assert "digitally silent" in binding.observation(silent)
+    values = np.random.default_rng(42).uniform(-.1, .1, size=16000)
+    noisy = measure(values, audio, review, **options)
+    assert noisy["rms_dbfs"] == pytest.approx(-24.8, abs=.5)
+    assert noisy["sustained_periodicity"] is False
+    assert "Speech presence remains undetermined." in binding.observation(noisy)
+    assert binding.measurements(noisy)[-1]["value"] == noisy["rms_dbfs"]
+
+    review["sound_context"] = noisy
+    packet = {"mouth_hold_sound": noisy, "limitations": [binding.LIMITATION], "artifacts": {
+        binding.WAV: {"media_type": "audio/wav", "samples": 5120, "sample_rate": 16000, "channels": 1},
+        binding.WAVEFORM: {"media_type": "image/png", "width": 960, "height": 280}}}
+    binding.validate(review, packet, audio, "1/16000")
+    noisy["rms_dbfs"] = 5
+    with pytest.raises(ValueError, match="outside the PCM range"):
+        binding.validate(review, packet, audio, "1/16000")
+
+
 @pytest.mark.parametrize(("blocks", "expected"), [
     ([(0, 12_800, 0), (12_800, 32_000, 16_000)], (12_800, 19_200, 16_000, 22_400)),
     ([(0, 23_000, 0), (23_000, 32_000, 24_000)], (16_000, 22_400, 16_000, 22_400)),

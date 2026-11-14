@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Mouth-hold soundtrack under strong background sound](video-mouth-hold-background-transfer-2026-11-14.md)
+  found zero added reliable periodicity recoveries in held testing.
+  Speech activity survived environmental noise but could not distinguish
+  foreground speech from competing voices. New local video evidence
+  distinguishes digital silence from nonperiodic sound and reports its
+  level on the same clock as the waveform and mouth crops.
+
 - [Sound during a short mouth hold](video-mouth-hold-sound-2026-11-13.md#sound-evidence-on-two-second-clips)
   extends source-clock audio evidence to an existing two-second H.264
   picture check. Simulated checkout, signed original replay and the

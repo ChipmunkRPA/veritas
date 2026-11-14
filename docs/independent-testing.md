@@ -1548,6 +1548,9 @@ python -m app.cli verify evidence.zip --public-key instance-key.pem \
 For a [measured mouth hold with audio](video-mouth-hold-sound-2026-11-13.md#sound-evidence-on-two-second-clips),
 both verifiers re-decode the soundtrack and reconstruct the exact WAV and
 waveform. The video comparison additionally checks the picture measurements.
+The [strong-background replay](video-mouth-hold-background-transfer-2026-11-14.md#local-app-and-independent-replay)
+recounts the periodicity and speech-activity decisions across the same
+matched clean, mixed, and background-only windows.
 
 When the evidence includes a timing window schedule, these two checks
 recompute the recorded speech counts and the eligibility of source frame

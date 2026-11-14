@@ -7,6 +7,7 @@ import math
 from fractions import Fraction
 
 SCHEMA = "chipmunk.video-mouth-hold-sound/1"
+LEVEL_SCHEMA = "chipmunk.video-mouth-hold-sound/2"
 RATE = 16000
 HOP = 320
 WAV = "mouth_hold_audio"
@@ -63,13 +64,24 @@ def block_starts(start: int, stop: int) -> range:
 
 def measurements(record):
     count, periodic = record["blocks"], record["periodic_blocks"]
-    return [{"label": "Audio blocks with voice-like periodicity", "value": f"{periodic} of {count}",
-             "unit": "40 ms blocks"}]
+    observations = [{"label": "Audio blocks with voice-like periodicity", "value": f"{periodic} of {count}",
+                     "unit": "40 ms blocks"}]
+    if "rms_dbfs" in record:
+        level = record["rms_dbfs"]
+        observations.append({"label": "Mixed soundtrack level during the hold",
+                             "value": "Digital silence" if level is None else level,
+                             "unit": "" if level is None else "dBFS RMS"})
+    return observations
 
 
 def observation(record):
     if record["sustained_periodicity"]:
         return "The soundtrack has sustained voice-like periodicity during the measured mouth-region hold."
+    if "rms_dbfs" in record:
+        if record["rms_dbfs"] is None:
+            return "The decoded soundtrack was digitally silent during the measured mouth-region hold."
+        return ("The mixed soundtrack did not show sustained voice-like periodicity during the measured mouth-region hold. "
+                "Speech presence remains undetermined.")
     return "The soundtrack did not show sustained voice-like periodicity during the measured mouth-region hold."
 
 
@@ -84,8 +96,18 @@ def validate(review, packet, audio, time_base):
         raise ValueError("Mouth-hold sound has no continuous source coverage")
     start, stop, first, last = located
     count = len(block_starts(start, stop))
-    if (set(record) != {"schema", "samples", "source_pts", "time_base", "blocks", "periodic_blocks", "sustained_periodicity"}
-            or record["schema"] != SCHEMA or record["samples"] != [start, stop] or record["source_pts"] != [first, last]
+    schema = record["schema"]
+    keys = {"schema", "samples", "source_pts", "time_base", "blocks", "periodic_blocks", "sustained_periodicity"}
+    if schema == LEVEL_SCHEMA:
+        keys.add("rms_dbfs")
+        level = record.get("rms_dbfs")
+        if level is None:
+            if record["periodic_blocks"] != 0:
+                raise ValueError("Digital silence cannot contain periodic blocks")
+        elif type(level) not in (int, float) or not math.isfinite(level) or not -150 <= level <= 0:
+            raise ValueError("Mouth-hold soundtrack level is outside the PCM range")
+    if (set(record) != keys or schema not in {SCHEMA, LEVEL_SCHEMA}
+            or record["samples"] != [start, stop] or record["source_pts"] != [first, last]
             or record["time_base"] != f"1/{RATE}" or type(record["blocks"]) is not int
             or record["blocks"] != count or count < MIN_BLOCKS
             or type(record["periodic_blocks"]) is not int or not 0 <= record["periodic_blocks"] <= count

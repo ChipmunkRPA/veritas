@@ -39,7 +39,9 @@ export function EvidenceLimits({ lines }: { lines: string[] }) {
 }
 export function EvidenceMeasurements({ values }: { values: EvidenceMeasure[] }) {
   return <dl className="mt-3 mb-0 space-y-1.5">{values.map((value, i) => <div key={i} className="flex flex-wrap justify-between gap-x-4 text-small">
-    <dt className="text-text-muted">{value.label}</dt><dd className="m-0 font-mono num">{measurementValue(value.value)} {value.unit}</dd>
+    <dt className="text-text-muted">{value.label}</dt><dd className="m-0 font-mono num">
+      {typeof value.value === 'number' ? measurementValue(value.value) : value.value}{value.unit && ` ${value.unit}`}
+    </dd>
   </div>)}</dl>
 }
 export function EvidenceReferences({ packet }: { packet: PacketBase }) {

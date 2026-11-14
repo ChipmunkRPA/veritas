@@ -3,12 +3,14 @@
 
 from __future__ import annotations
 
+import math
+
 import numpy as np
 
 from app.evidence import mouth_hold_sound as binding
 
 
-def measure(pcm, mapping, review, time_base):
+def measure(pcm, mapping, review, time_base, *, schema=binding.SCHEMA):
     clock = binding.bounds(review, mapping, time_base)
     if clock is None or len(pcm) != mapping["samples"]:
         return None
@@ -32,9 +34,14 @@ def measure(pcm, mapping, review, time_base):
         values = lagged / (1e-12 + norm)
         if np.any((values[1:-1] >= .78) & (values[1:-1] > values[:-2]) & (values[1:-1] >= values[2:])):
             periodic += 1
-    return {"schema": binding.SCHEMA, "samples": [start, stop], "source_pts": [first, last],
-            "time_base": f"1/{binding.RATE}", "blocks": measured, "periodic_blocks": periodic,
-            "sustained_periodicity": 3 * periodic >= 2 * measured}
+    record = {"schema": schema, "samples": [start, stop], "source_pts": [first, last],
+              "time_base": f"1/{binding.RATE}", "blocks": measured, "periodic_blocks": periodic,
+              "sustained_periodicity": 3 * periodic >= 2 * measured}
+    if schema == binding.LEVEL_SCHEMA:
+        selected = np.asarray(pcm[start:stop], dtype=np.float64)
+        power = float(np.mean(selected ** 2))
+        record["rms_dbfs"] = round(10 * math.log10(power), 3) if power else None
+    return record
 
 
 def source_assets(pcm, mapping, review, time_base, *, time_axis):
@@ -43,7 +50,7 @@ def source_assets(pcm, mapping, review, time_base, *, time_axis):
     from app.evidence.audio_packets import mouth_hold_waveform
 
     sound = review["sound_context"]
-    if measure(pcm, mapping, review, time_base) != sound:
+    if measure(pcm, mapping, review, time_base, schema=sound["schema"]) != sound:
         raise ValueError("The soundtrack does not reproduce the measured mouth-hold interval")
     start, stop = sound["samples"]
     return {binding.WAV: wav_bytes(pcm[start:stop]),

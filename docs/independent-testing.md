@@ -1895,6 +1895,23 @@ and the source pixels behind the crop. The replay does not score authorship.
 
 ## Choose a review to reproduce
 
+### Review recent stereo and face evidence
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/review.json" --suite stereo-and-face
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/review.json" --format-issue
+```
+
+This suite covers [image padding](image-regional-padding-transfer-2026-11-14.md),
+[split-screen face changes](video-face-second-pane-2026-11-14.md),
+[identical stereo intervals](audio-identical-stereo-intervals-2026-11-14.md)
+and [writing context](writing-neighbor-interaction-2026-11-14.md).
+Use the topic's native instructions to reproduce decoding or to report
+a new test cohort. For a new cohort, record source-group counts, edit
+boundaries, controls, and codec alongside the results. Publish the summary
+and receipt only if you have permission to share them.
+
 ### Save a four-modality replay receipt
 
 From the repository root with Python 3.11 or later:

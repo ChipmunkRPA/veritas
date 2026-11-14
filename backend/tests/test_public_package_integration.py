@@ -530,7 +530,8 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.mouth_hold_sound', 'app.evidence.mouth_local_hold_binding', 'app.evidence.source_geometry',
                         'app.evidence.video_packet_versions', 'app.evidence.picture_hold_binding', 'app.evidence.picture_sequence',
                         'app.evidence.scene_return_binding', 'app.evidence.sound_event_binding',
-                        'app.evidence.stereo_binding', 'app.evidence.stereo_listening_binding'):
+                        'app.evidence.stereo_binding', 'app.evidence.stereo_listening_binding',
+                        'app.evidence.stereo_collapse_binding'):
             return None
         if fullname.startswith(('app.storage', 'app.core.config', 'app.detectors', 'app.evidence', 'app.api',
                                 'torch', 'numpy', 'cv2', 'transformers', 'fastapi', 'sqlalchemy')):
@@ -584,7 +585,7 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
 @pytest.mark.parametrize('name', ['face_interval_binding.py', 'face_short_window_binding.py', 'face_short_carrier_binding.py', 'sound_event_binding.py', 'document_scope.py',
                                  'image_copy_similarity_binding.py', 'image_copy_affine_binding.py',
                                  'image_editor_preview_binding.py', 'image_transparency_binding.py', 'image_animation_binding.py',
-                                 'stereo_binding.py', 'scene_return_binding.py'])
+                                 'stereo_binding.py', 'stereo_collapse_binding.py', 'scene_return_binding.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
 
@@ -608,7 +609,12 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
     elif name == 'stereo_binding.py':
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.evidence.audio_silence_binding', item)
-                         for item in ('FLANK', 'MIN_FLANK_DBFS', 'MINIMUM', 'continuous_spans')}
+                         for item in ('FLANK', 'MIN_FLANK_DBFS', 'MINIMUM', 'continuous_spans')} | {
+                             ('app.evidence', 'stereo_collapse_binding'),
+                         }
+    elif name == 'stereo_collapse_binding.py':
+        assert imports <= sys.stdlib_module_names | {'app'}
+        assert local == {('app.evidence.audio_silence_binding', 'continuous_spans')}
     else:
         assert imports <= sys.stdlib_module_names
 

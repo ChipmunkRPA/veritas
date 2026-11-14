@@ -36,6 +36,9 @@ export default function AudioStereoContext({ set, token, mediaReady, videoOrigin
   const silence = context.channel_silence
   const silenceAssets = listening?.schema === 'chipmunk.stereo-listening/1'
     && listening.affects_overall_confidence === false ? listening.channel_silence : undefined
+  const identical = context.identical_channel_interval
+  const identicalAssets = listening?.schema === 'chipmunk.stereo-listening/1'
+    && listening.affects_overall_confidence === false ? listening.identical_channel_interval : undefined
   return <section id="media-evidence-stereo" aria-labelledby="media-evidence-stereo-heading" className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
     <h3 id="media-evidence-stereo-heading" className="m-0 text-body font-medium">Stereo channel comparison</h3>
     {!bound ? <p role="alert" className="mt-2 mb-0 text-small text-text-muted">The channel measurements do not match this analyzed audio input.</p>
@@ -89,6 +92,46 @@ export default function AudioStereoContext({ set, token, mediaReady, videoOrigin
               </article>
             })}
           </div>}
+        {identical?.schema === 'chipmunk.stereo-identical-interval/1' && identical.affects_overall_confidence === false
+          && <section className="mt-4 text-small">
+            <h4 className="m-0 font-medium">Identical audio in both channels</h4>
+            <p className="mt-2 mb-0 text-text-muted">{identical.checked_samples > 0
+              ? <>Checked {seconds(identical.checked_samples / context.sample_rate)} of aligned stereo audio. Found{' '}
+                {identical.qualifying_intervals} qualifying {identical.qualifying_intervals === 1 ? 'interval' : 'intervals'}
+                {identical.qualifying_intervals > identical.selected.length ? ', with the three longest shown.' : '.'}</>
+              : 'No continuous stereo segment was long enough for this check.'}</p>
+            {identical.selected.length > 0 && <p className="mt-2 mb-0 text-text-muted">The decoded channels match sample for sample within the highlighted interval and differ before and after. A local mono insert or ordinary mix can cause this. This observation carries no weight in the AI assessment.</p>}
+            {identical.selected.map((row, index) => {
+              const assets = identicalAssets?.[index]?.artifacts
+              return <article key={row.start_sample} className="mt-4 border-t border-border pt-3"
+                onPlayCapture={(event) => {
+                  if (event.target instanceof HTMLAudioElement) pauseAudio(event.target)
+                }}>
+                <h5 className="m-0 font-medium">Channels match, decoded audio {range(row)}</h5>
+                <p className="mt-1 mb-0 text-caption text-text-muted">Samples [{row.start_sample}, {row.end_sample}) at {context.sample_rate} Hz. The stereo difference signal measured {row.flank_difference_dbfs[0]} dBFS before and {row.flank_difference_dbfs[1]} dBFS after. The weakest 80 ms block within the match measured {row.minimum_signal_dbfs} dBFS.</p>
+                {row.source_timestamp_ranges.map((item) => {
+                  const start = rationalSeconds(item.source_start_pts, item.time_base)
+                  const end = rationalSeconds(item.source_end_pts, item.time_base)
+                  return <p key={item.start_sample} className="m-0 text-caption text-text-muted">
+                    Source PTS [{item.source_start_pts}, {item.source_end_pts}) at {item.time_base}.
+                    {typeof videoOriginS === 'number' && Number.isFinite(videoOriginS) && start !== null && end !== null
+                      && start >= videoOriginS && ` Video playback ${seconds(start - videoOriginS)}–${seconds(end - videoOriginS)}.`}
+                  </p>
+                })}
+                {assets && <>
+                  <figure className="m-0 mt-3">
+                    <EvidencePicture set={set} artifact={assets.waveform} token={token} ready={mediaReady} chart
+                      alt={`Stereo waveform with identical channels highlighted at ${range(row)}`} />
+                    <figcaption className="text-caption text-text-muted">The waveform and playback include 80 ms before and after the highlighted interval.</figcaption>
+                  </figure>
+                  <div className="mt-3 grid gap-3 min-[900px]:grid-cols-3">
+                    {(['left', 'right', 'mono'] as const).map((channel) => <EvidenceAudio key={channel} set={set}
+                      artifact={assets[channel]} token={token} ready={mediaReady} alt={channels[channel]} />)}
+                  </div>
+                </>}
+              </article>
+            })}
+          </section>}
         {comparisons.length > 0 && <details className="mt-3 text-small"
           onPlayCapture={(event) => {
             if (event.target instanceof HTMLAudioElement) pauseAudio(event.target)

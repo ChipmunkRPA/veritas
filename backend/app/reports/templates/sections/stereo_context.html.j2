@@ -30,6 +30,27 @@ JSON pointer <span class="mono">{{ row.json_pointer }}</span>.</p>
 {% endfor %}
 {% endif %}
 {% endif %}
+{% if stereo.identical_channel_interval is defined %}
+{% set stereo_match = stereo.identical_channel_interval %}
+<h4>Identical audio in both channels</h4>
+{% if stereo_match.checked_samples %}
+<p>Checked {{ '%.3f' | format(stereo_match.checked_samples / stereo.sample_rate) }} s of aligned stereo audio. Found {{ stereo_match.qualifying_intervals }} qualifying {{ 'interval' if stereo_match.qualifying_intervals == 1 else 'intervals' }}{% if stereo_match.qualifying_intervals > evidence.identical_channel_interval | length %}, with the three longest shown{% endif %}.</p>
+{% else %}<p>No continuous stereo segment was long enough for this check.</p>{% endif %}
+{% if evidence.identical_channel_interval %}
+<p>The decoded channels match sample for sample within each highlighted interval and differ before and after. A local mono insert or ordinary mix can cause this. This observation carries no weight in the AI assessment.</p>
+{% for row in evidence.identical_channel_interval %}
+<article class="multimedia-evidence-packet multimedia-repeat-pair">
+<h4>Channels match, decoded audio {{ '%.3f' | format(row.start_s) }}–{{ '%.3f' | format(row.end_s) }} s</h4>
+<p class="caption">Samples [{{ row.start_sample }}, {{ row.end_sample }}) at {{ stereo.sample_rate }} Hz.
+{% for range in row.ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% if range.playback %} Video playback {{ '%.3f' | format(range.playback[0]) }}–{{ '%.3f' | format(range.playback[1]) }} s.{% endif %}{% endfor %}
+The stereo difference signal measured {{ row.flank_difference_dbfs[0] }} dBFS before and {{ row.flank_difference_dbfs[1] }} dBFS after. The weakest 80 ms block within the match measured {{ row.minimum_signal_dbfs }} dBFS.</p>
+{{ plates([row.waveform], true) }}
+<p class="caption evidence-hash">Waveform SHA-256 <span class="mono">{{ row.waveform.sha256 }}</span>.<br>
+JSON pointer <span class="mono">{{ row.json_pointer }}</span>.</p>
+</article>
+{% endfor %}
+{% endif %}
+{% endif %}
 {% if has_downmix %}
 {% set attenuated = stereo.windows | selectattr('downmix.strong_attenuation') | list %}
 {% if attenuated %}<p><strong>Strong level drop in the analyzed mono mix.</strong> {{ attenuated | length }} complete window{% if attenuated | length != 1 %}s{% endif %} met this review condition. Sounds present in stereo may be harder to hear in the analyzed copy.</p>{% endif %}

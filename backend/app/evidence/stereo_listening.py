@@ -8,14 +8,13 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 from app.detectors.audio.decode import SAMPLE_RATE, wav_bytes
-from app.evidence.audio_silence_binding import FLANK
-from app.evidence.stereo_binding import CHANNEL_SILENCE
 from app.evidence.stereo_listening_binding import (
     CHANNELS,
     DIMENSIONS,
+    LOCAL_EXCERPTS,
     SCHEMA,
     all_artifacts,
-    channel_silence_intervals,
+    intervals,
     select_windows,
     validate,
 )
@@ -29,8 +28,9 @@ def _excerpts(stereo):
     for index in select_windows(stereo):
         window = stereo["windows"][index]
         yield index, window["start_sample"], window["end_sample"]
-    for start, end in channel_silence_intervals(stereo):
-        yield None, start, end
+    for key in LOCAL_EXCERPTS:
+        for start, end in intervals(stereo, key):
+            yield key, start, end
 
 
 def selected_pcm(stereo: dict, pcm: np.ndarray) -> bytes:
@@ -48,7 +48,7 @@ def freeze(db, store, analysis_id: str, decoded):
                              created_by=SCHEMA, analysis_id=analysis_id)
 
 
-def _waveform(tracks: tuple[np.ndarray, ...], *, mark_silence: bool = False) -> bytes:
+def _waveform(tracks: tuple[np.ndarray, ...], *, flank: int = 0) -> bytes:
     im = Image.new("RGB", DIMENSIONS, "#faf9f5")
     draw = ImageDraw.Draw(im)
     x0, x1 = PLOT_BOX[0], PLOT_BOX[2] - 1
@@ -60,8 +60,8 @@ def _waveform(tracks: tuple[np.ndarray, ...], *, mark_silence: bool = False) -> 
         mid = 67 + 80 * index
         draw.text((10, mid - 7), label, fill="#203b30")
         draw.rectangle((x0, mid - 34, x1, mid + 34), outline="#c6cbc0")
-        if mark_silence:
-            margin = round((x1 - x0) * FLANK / sample_count)
+        if flank:
+            margin = round((x1 - x0) * flank / sample_count)
             draw.rectangle((x0 + margin, mid - 33, x1 - margin, mid + 33), fill="#f0e4ca")
         draw.line((x0, mid, x1, mid), fill="#c6cbc0")
         for i, chunk in enumerate(np.array_split(track, x1 - x0)):
@@ -86,7 +86,7 @@ def payloads(data: bytes, stereo: dict, pcm: np.ndarray, *, waveform: bool = Tru
         tracks = (pair[:, 0].astype(np.float32) / 32768, pair[:, 1].astype(np.float32) / 32768, pcm[start:end])
         files = {name: wav_bytes(track) for name, track in zip(CHANNELS, tracks, strict=True)}
         if waveform:
-            files["waveform"] = _waveform(tracks, mark_silence=index is None)
+            files["waveform"] = _waveform(tracks, flank=LOCAL_EXCERPTS.get(index, 0))
         yield index, count, files
 
 
@@ -105,8 +105,8 @@ def build(store, digest: str | None, stereo: dict | None, pcm: np.ndarray, asset
         artifacts = {name: asset(files[name], "audio/wav", samples=count, sample_rate=SAMPLE_RATE, channels=1)
                      for name in CHANNELS}
         artifacts["waveform"] = asset(files["waveform"], "image/png", width=DIMENSIONS[0], height=DIMENSIONS[1])
-        if index is None:
-            result.setdefault(CHANNEL_SILENCE, []).append({"artifacts": artifacts})
+        if isinstance(index, str):
+            result.setdefault(index, []).append({"artifacts": artifacts})
         else:
             result["windows"].append({"stereo_window_index": index, "artifacts": artifacts})
     return result

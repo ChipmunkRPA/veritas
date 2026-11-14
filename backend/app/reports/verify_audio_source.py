@@ -14,6 +14,7 @@ from app.evidence.audio_binding import SPEECH_SELECTION
 from app.evidence.av_binding import TIMING_WINDOWS
 from app.evidence.stereo_binding import CHANNEL_SILENCE
 from app.evidence.stereo_binding import SCHEMA as STEREO_CONTEXT_SCHEMA
+from app.evidence.stereo_collapse_binding import KEY as IDENTICAL_CHANNEL_INTERVAL
 from app.reports.public_verify import SCHEMA
 
 SOURCE_FIELDS = ("samples", "sample_rate", "channels", "source_stream_index", "source_sample_rate", "source_channels",
@@ -106,14 +107,18 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         replay_detail += f" Verified source times for {len(selection['windows'])} recorded speech windows."
     if stereo and stereo["schema"] == STEREO_CONTEXT_SCHEMA and stereo["stereo_pcm_sha256"] is not None:
         measured = dict(decoded.mapping.get("stereo_context", {}))
-        if CHANNEL_SILENCE not in stereo:
-            measured.pop(CHANNEL_SILENCE, None)  # Earlier signed exports predate this measurement.
+        for key in (CHANNEL_SILENCE, IDENTICAL_CHANNEL_INTERVAL):
+            if key not in stereo:
+                measured.pop(key, None)  # Earlier signed exports predate these measurements.
         if stereo != measured:
             raise ValueError("Stereo channel and mono-downmix evidence differs from the original audio samples")
         replay_detail += f" Recomputed stereo channel and mono-downmix evidence for {len(stereo['windows'])} windows."
         if CHANNEL_SILENCE in stereo:
             count = len(stereo[CHANNEL_SILENCE]["selected"])
             replay_detail += f" Recomputed exact channel silence and validated {count} selected intervals."
+        if IDENTICAL_CHANNEL_INTERVAL in stereo:
+            count = len(stereo[IDENTICAL_CHANNEL_INTERVAL]["selected"])
+            replay_detail += f" Recomputed identical-channel audio and validated {count} selected intervals."
     covered = set()
     intervals = 0
     for label, span, timestamps, asset in _clips(audio, alignment):
@@ -142,6 +147,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         replay_detail += " Recomputed the soundtrack measurement and waveform during the mouth-region hold."
     if listening := audio.get("stereo_listening"):
         from app.evidence.stereo_listening import selected_pcm, verify_payloads
+        from app.evidence.stereo_listening_binding import all_artifacts
         from app.storage.objects import ObjectIntegrityError
 
         if decoded.stereo_pcm is None:
@@ -152,7 +158,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                                            read_waveform=lambda sha: archive.read(plots[sha])))
         except ObjectIntegrityError as error:
             raise ValueError(str(error)) from error
-        intervals += 3 * (len(listening["windows"]) + len(listening.get(CHANNEL_SILENCE, [])))
+        intervals += 3 * sum(1 for _ in all_artifacts(listening))
     if repeated is not None:
         from app.evidence.audio_gain_repetition_binding import GAIN_VERSION
         from app.evidence.stereo_repetition import native_pcm, verify

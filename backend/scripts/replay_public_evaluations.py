@@ -359,12 +359,25 @@ TIMING_AND_LOCATION = {
         f"{PANELS}/writing-f1000-position-transfer-2026-11-13.json", f"{PANELS}/writing-elife-long-position-transfer-2026-11-13.json",
     )),
 }
+STEREO_AND_FACE_REPLAY = {
+    "image": TIMING_AND_LOCATION["image"],
+    "video": ("video_face_second_pane_transfer.py", ("video-face-second-pane-2026-11-14.json",), ("review",), (
+        f"{SCRIPTS}/review_video_brief_face_120_carrier.py", f"{SCRIPTS}/video_face_primary_track_transfer.py",
+        f"{PANELS}/video-face-split-track-2026-11-13.json",
+    )),
+    "audio": ("audio_stereo_identical_transfer.py", ("audio-stereo-identical-held-2026-11-14.json",), ("review",), (
+        "backend/app/detectors/audio/stereo_collapse.py", "backend/app/evidence/stereo_collapse_binding.py",
+    )),
+    "writing": ("writing_neighbor_interaction_transfer.py", (
+        "writing-neighbor-interaction-freeze-2026-11-14.json", "writing-neighbor-interaction-2026-11-14.json",
+    ), ("review",), TIMING_AND_LOCATION["writing"][3] + (f"{SCRIPTS}/review_writing_context_agreement.py",)),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
           "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion",
           "short-edit-transfer-2026-11-13", "delivery-and-localization", "reference-and-rotation", "single-upload-transfers",
           "processing-and-short-edits", "delivery-and-reference-transfers", "short-edit-checks", "edit-position-transfers",
-          "single-upload-cues", "check-boundaries", "local-trials", "timing-and-location")
+          "single-upload-cues", "check-boundaries", "local-trials", "timing-and-location", "stereo-and-face")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -452,6 +465,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = LOCAL_TRIALS[modality]
     elif suite == "timing-and-location":
         script, panel_names, prefix, dependencies = TIMING_AND_LOCATION[modality]
+    elif suite == "stereo-and-face":
+        script, panel_names, prefix, dependencies = STEREO_AND_FACE_REPLAY[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

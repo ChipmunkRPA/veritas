@@ -127,6 +127,7 @@ def test_legacy_stereo_context_remains_readable_and_rejects_unversioned_downmix(
     legacy = deepcopy(decoded.mapping["stereo_context"])
     legacy.update(schema=stereo_binding.LEGACY_SCHEMA, silence_floor_dbfs=stereo_binding.LEGACY_SILENCE_FLOOR_DBFS)
     del legacy["mono_pcm_sha256"], legacy["strong_downmix_attenuation_db"], legacy["channel_silence"]
+    del legacy["identical_channel_interval"]
     for row in legacy["windows"]:
         del row["downmix"]
     stereo.validate(legacy, decoded.mapping)
@@ -206,14 +207,14 @@ def test_channel_silence_does_not_cross_source_clock_gap():
     assert result["selected"][0]["source_timestamp_ranges"] == source_ranges(mapping, 23000, 26200)
 
 
-@pytest.mark.parametrize("mute_channel", [False, True])
-def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_path, monkeypatch, mute_channel):
+@pytest.mark.parametrize("channel_change", ["none", "mute", "identical"])
+def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_path, monkeypatch, channel_change):
     first, second, path = (tmp_path / name for name in ("source.wav", "alternate.wav", "multitrack.mka"))
     _source(first, seconds=2, mode="first_left_then_balanced", rate=SAMPLE_RATE)
-    if mute_channel:
+    if channel_change != "none":
         with wave.open(str(first), "rb") as input_file:
             values = np.frombuffer(input_file.readframes(input_file.getnframes()), dtype="<i2").reshape(-1, 2).copy()
-        values[6001:9201, 0] = 0
+        values[6001:9201, 0] = 0 if channel_change == "mute" else values[6001:9201, 1]
         with wave.open(str(first), "wb") as output:
             output.setparams((2, 2, SAMPLE_RATE, 0, "NONE", ""))
             output.writeframes(values.tobytes())
@@ -259,8 +260,8 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
                                                 read_waveform=store.read_bytes)
         silence = packet["stereo_context"]["channel_silence"]
         assert silence["affects_overall_confidence"] is False
-        assert silence["qualifying_intervals"] == int(mute_channel)
-        if mute_channel:
+        assert silence["qualifying_intervals"] == int(channel_change == "mute")
+        if channel_change == "mute":
             (selected,) = silence["selected"]
             assert (selected["start_sample"], selected["end_sample"], selected["silent_channel"]) == (6001, 9201, "left")
             clips = listening["channel_silence"][0]["artifacts"]
@@ -275,6 +276,20 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
             shifted["stereo_context"]["channel_silence"]["selected"][0]["source_timestamp_ranges"][0]["source_start_pts"] += 1
             with pytest.raises(audio_packets.PacketIntegrityError, match="Exact channel silence differs"):
                 audio_packets.validate_content(shifted)
+        identical = packet["stereo_context"]["identical_channel_interval"]
+        assert identical["affects_overall_confidence"] is False
+        assert identical["qualifying_intervals"] == int(channel_change == "identical")
+        if channel_change == "identical":
+            (selected,) = identical["selected"]
+            assert (selected["start_sample"], selected["end_sample"]) == (6001, 9201)
+            clips = listening["identical_channel_interval"][0]["artifacts"]
+            for index, role in enumerate(("left", "right")):
+                decoded_clip = read_wav(store.read_bytes(clips[role]["sha256"]))
+                np.testing.assert_array_equal(decoded_clip, decoded.stereo_pcm[4721:10481, index] / 32768)
+            wrong_clock = deepcopy(packet)
+            wrong_clock["stereo_context"]["identical_channel_interval"]["selected"][0]["source_timestamp_ranges"][0]["source_end_pts"] += 1
+            with pytest.raises(audio_packets.PacketIntegrityError):
+                audio_packets.validate_content(wrong_clock)
         (overlap,) = packet["coverage"]["stereo_attenuation_overlaps"]
         assert overlap == {
             "start_sample": 16000, "end_sample": 32000, "unscored_interval_index": 0, "stereo_window_index": 1,
@@ -311,9 +326,12 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         assert "Mono is digitally silent" in words
         assert "/stereo_listening/windows/1" in words
         assert "Exact silence in one channel" in words
-        if mute_channel:
+        if channel_change == "mute":
             assert "/stereo_context/channel_silence/selected/0" in words
             assert "Left channel silent, decoded audio 0.375–0.575 s" in " ".join(words.split())
+        if channel_change == "identical":
+            assert "/stereo_context/identical_channel_interval/selected/0" in words
+            assert "Channels match, decoded audio 0.375–0.575 s" in " ".join(words.split())
         assert "Unscored voice during a mono level drop" in words
         assert "Overlap 1.000–2.000 s of analyzed audio" in words and "/coverage/stereo_attenuation_overlaps" in words
         assert [w["downmix"]["strong_attenuation"] for w in packet["stereo_context"]["windows"]] == [False, True]
@@ -349,7 +367,9 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         checked = verify.verify_package(built.path, public_key_pem=key.public_pem(), source_audio=path)
         assert checked.ok and "32,000 decoded mono samples" in checked.checks[-1].detail, checked.as_dict()
         assert "Recomputed stereo channel and mono-downmix evidence for 2 windows" in checked.checks[-1].detail
-        assert f"Recomputed exact channel silence and validated {int(mute_channel)} selected intervals" in checked.checks[-1].detail
+        assert f"Recomputed exact channel silence and validated {int(channel_change == 'mute')} selected intervals" in checked.checks[-1].detail
+        assert (f"Recomputed identical-channel audio and validated {int(channel_change == 'identical')} selected intervals"
+                in checked.checks[-1].detail)
         forged_listening = deepcopy(packet)
         clips = forged_listening["stereo_listening"]["windows"][1]["artifacts"]
         clips["left"], clips["right"] = clips["right"], clips["left"]

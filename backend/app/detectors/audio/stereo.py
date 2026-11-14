@@ -9,7 +9,9 @@ from typing import Any
 import numpy as np
 
 from app.detectors.audio.decode import SAMPLE_RATE, source_ranges
+from app.detectors.audio.stereo_collapse import measure as measure_identical
 from app.evidence import stereo_binding as binding
+from app.evidence import stereo_collapse_binding
 from app.evidence.audio_silence_binding import FLANK, MIN_FLANK_DBFS, MINIMUM
 
 
@@ -124,8 +126,11 @@ def build(mapping: dict[str, Any], mono: np.ndarray, layout: str | None, stereo:
         })
     context["status"] = "measured" if any(w["status"] != "quiet" for w in windows) else "quiet"
     context["stereo_pcm_sha256"] = hashlib.sha256(stereo[:end].astype("<i2", copy=False).tobytes()).hexdigest()
-    context[binding.CHANNEL_SILENCE] = channel_silence(stereo[:end], mapping["timeline"],
-                                                      lambda a, b: source_ranges(mapping, a, b))
+    def ranges(start, stop):
+        return source_ranges(mapping, start, stop)
+
+    context[binding.CHANNEL_SILENCE] = channel_silence(stereo[:end], mapping["timeline"], ranges)
+    context[stereo_collapse_binding.KEY] = measure_identical(stereo[:end], mapping["timeline"], ranges)
     return context
 
 

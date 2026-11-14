@@ -192,8 +192,11 @@ def validate_content(document: dict[str, Any]) -> None:
             validate_listening(document["stereo_listening"], document.get("stereo_context"))
         except ValueError as error:
             raise PacketIntegrityError(str(error)) from error
-    elif (document.get("stereo_context") or {}).get("channel_silence", {}).get("selected"):
-        raise PacketIntegrityError("Exact channel silence is missing its listening evidence")
+    else:
+        from app.evidence.stereo_listening_binding import LOCAL_EXCERPTS, intervals
+
+        if any(intervals(document.get("stereo_context"), key) for key in LOCAL_EXCERPTS):
+            raise PacketIntegrityError("A selected stereo interval is missing its listening evidence")
 
 
 def _input(store: ObjectStore, analysis: Analysis, binding: dict[str, Any]) -> tuple[np.ndarray, dict[str, Any]]:

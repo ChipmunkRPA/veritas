@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import re
 
+from app.evidence import stereo_collapse_binding
 from app.evidence.audio_silence_binding import FLANK
 from app.evidence.stereo_binding import CHANNEL_SILENCE, SAMPLE_RATE
 from app.evidence.stereo_binding import SCHEMA as STEREO_SCHEMA
@@ -11,6 +12,7 @@ SCHEMA = "chipmunk.stereo-listening/1"
 DIMENSIONS = (960, 290)
 CHANNELS = ("left", "right", "mono")
 MAX_WINDOWS = 3
+LOCAL_EXCERPTS = {CHANNEL_SILENCE: FLANK, stereo_collapse_binding.KEY: stereo_collapse_binding.FLANK}
 
 
 def select_windows(stereo: dict | None) -> list[int]:
@@ -30,13 +32,14 @@ def select_windows(stereo: dict | None) -> list[int]:
     return sorted(item[2] for item in sorted(candidates)[:MAX_WINDOWS])
 
 
-def channel_silence_intervals(stereo: dict | None) -> list[tuple[int, int]]:
-    return [(row["start_sample"] - FLANK, row["end_sample"] + FLANK)
-            for row in (stereo or {}).get(CHANNEL_SILENCE, {}).get("selected", [])]
+def intervals(stereo: dict | None, key: str) -> list[tuple[int, int]]:
+    flank = LOCAL_EXCERPTS[key]
+    return [(row["start_sample"] - flank, row["end_sample"] + flank)
+            for row in (stereo or {}).get(key, {}).get("selected", [])]
 
 
 def all_artifacts(listening: dict):
-    for rows in (listening["windows"], listening.get(CHANNEL_SILENCE, [])):
+    for rows in (listening["windows"], *(listening.get(key, []) for key in LOCAL_EXCERPTS)):
         yield from (row["artifacts"] for row in rows)
 
 
@@ -44,13 +47,11 @@ def validate(listening: dict, stereo: dict | None) -> None:
     try:
         selected = select_windows(stereo)
         rows = listening["windows"]
-        silence = channel_silence_intervals(stereo)
-        keys = {"schema", "affects_overall_confidence", "windows"}
-        if silence:
-            keys.add(CHANNEL_SILENCE)
+        excerpts = {key: spans for key in LOCAL_EXCERPTS if (spans := intervals(stereo, key))}
+        keys = {"schema", "affects_overall_confidence", "windows", *excerpts}
         if (set(listening) != keys
                 or listening["schema"] != SCHEMA or listening["affects_overall_confidence"] is not False
-                or (not selected and not silence) or not isinstance(rows, list)
+                or (not selected and not excerpts) or not isinstance(rows, list)
                 or [row["stereo_window_index"] for row in rows] != selected):
             raise ValueError("Stereo listening windows differ from the measured channel comparison")
         for row in rows:
@@ -58,13 +59,14 @@ def validate(listening: dict, stereo: dict | None) -> None:
                     or set(row["artifacts"]) != {*CHANNELS, "waveform"}):
                 raise ValueError("Stereo listening assets are incomplete")
             _validate_assets(row["artifacts"], SAMPLE_RATE)
-        excerpts = listening.get(CHANNEL_SILENCE, [])
-        if not isinstance(excerpts, list) or len(excerpts) != len(silence):
-            raise ValueError("Stereo listening clips do not cover the selected silence intervals")
-        for row, (start, end) in zip(excerpts, silence, strict=True):
-            if set(row) != {"artifacts"}:
-                raise ValueError("Stereo channel silence assets are incomplete")
-            _validate_assets(row["artifacts"], end - start)
+        for key, spans in excerpts.items():
+            section = listening[key]
+            if not isinstance(section, list) or len(section) != len(spans):
+                raise ValueError("Stereo listening clips do not cover the selected intervals")
+            for row, (start, end) in zip(section, spans, strict=True):
+                if set(row) != {"artifacts"}:
+                    raise ValueError("Stereo excerpt assets are incomplete")
+                _validate_assets(row["artifacts"], end - start)
     except (KeyError, AttributeError, IndexError, TypeError) as error:
         raise ValueError("Stereo listening evidence has invalid fields") from error
 

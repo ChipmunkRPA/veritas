@@ -16,6 +16,7 @@ from PIL import Image
 from app.core.canonical import canonical_hash, canonical_json
 from app.evidence import document_scope, service
 from app.evidence.av_binding import TIMING_DISPLAY_LIMIT, TIMING_REASONS, TIMING_WINDOWS
+from app.evidence.stereo_listening_binding import LOCAL_EXCERPTS
 from app.evidence.video_packet_versions import NESTED_VERSIONS as NESTED_VIDEO_VERSIONS
 from app.storage.objects import ObjectIntegrityError, ObjectStore, default_store
 
@@ -96,9 +97,10 @@ def asset_items(document: dict[str, Any]):
         for window in (part.get("stereo_listening") or {}).get("windows", []):
             for role, asset in sorted(window["artifacts"].items()):
                 yield None, f"stereo_{window['stereo_window_index']}_{role}", asset
-        for index, excerpt in enumerate((part.get("stereo_listening") or {}).get("channel_silence", [])):
-            for role, asset in sorted(excerpt["artifacts"].items()):
-                yield None, f"channel_silence_{index}_{role}", asset
+        for key in LOCAL_EXCERPTS:
+            for index, excerpt in enumerate((part.get("stereo_listening") or {}).get(key, [])):
+                for role, asset in sorted(excerpt["artifacts"].items()):
+                    yield None, f"{key}_{index}_{role}", asset
         for key in ("repetition_context", "similarity_context"):
             for pair in (part.get(key) or {}).get("pairs", []):
                 for role, asset in sorted(pair["artifacts"].items()):
@@ -1190,15 +1192,16 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "waveform": plate("waveform", comparison["artifacts"]["waveform"], caption),
             "json_pointer": f"{stereo_prefix}/stereo_listening/windows/{index}",
         })
-    channel_silence = []
-    if stereo_context and (measurement := stereo_context.get("channel_silence")):
-        for index, (row, excerpt) in enumerate(zip(measurement["selected"],
-                (stereo_source.get("stereo_listening") or {}).get("channel_silence", []), strict=True)):
-            interval = _voice_interval_view(row, rate, video_origin_s)
-            caption = (f"Left, right and analyzed mono. Highlighted interval: "
-                       f"{interval['start_s']:.3f}–{interval['end_s']:.3f} s of decoded audio.")
-            channel_silence.append({**row, **interval, "waveform": plate("waveform", excerpt["artifacts"]["waveform"], caption),
-                                    "json_pointer": f"{stereo_prefix}/stereo_context/channel_silence/selected/{index}"})
+    stereo_excerpts = {key: [] for key in LOCAL_EXCERPTS}
+    for key, excerpts in stereo_excerpts.items():
+        if stereo_context and (measurement := stereo_context.get(key)):
+            for index, (row, excerpt) in enumerate(zip(measurement["selected"],
+                    (stereo_source.get("stereo_listening") or {}).get(key, []), strict=True)):
+                interval = _voice_interval_view(row, rate, video_origin_s)
+                caption = (f"Left, right and analyzed mono. Highlighted interval: "
+                           f"{interval['start_s']:.3f}–{interval['end_s']:.3f} s of decoded audio.")
+                excerpts.append({**row, **interval, "waveform": plate("waveform", excerpt["artifacts"]["waveform"], caption),
+                                 "json_pointer": f"{stereo_prefix}/stereo_context/{key}/selected/{index}"})
     gaps = voice_coverage.get("unscored_intervals", [])
     speech_selection = voice_coverage.get("speech_window_selection")
     speech_windows = []
@@ -1267,7 +1270,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "background_reduced_voice_review": background_review,
             "stereo_context": stereo_context,
             "stereo_listening": stereo_listening,
-            "channel_silence": channel_silence,
+            **stereo_excerpts,
             "repetition_context": copy.deepcopy(stereo_source.get("repetition_context")),
             "repetition_context_pointer": "/audio/repetition_context" if kind == "video" else "/repetition_context",
             "stereo_repetition": stereo_repeated,

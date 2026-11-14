@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Local loss of stereo differences](audio-identical-stereo-intervals-2026-11-14.md)
+  located 47 of 48 lossless edits exactly across two held meetings
+  and flagged none of 144 matched controls. AAC preserved one useful
+  overlap. New audio and video analyses show source clocks, waveform
+  and channel playback for each selected interval.
+
 - [Second face-change range on the same side](video-face-second-pane-2026-11-14.md)
   raised exact interval coverage from 24/48 to 46/48 in the staged
   split-screen panel. Forty ordinary controls gained no flags. The

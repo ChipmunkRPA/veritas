@@ -430,7 +430,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         if 'stereo_context' in part or 'stereo_listening' in part:
             from app.evidence.audio_binding import _timeline_ranges
             from app.evidence.stereo_binding import validate as validate_stereo
-            from app.evidence.stereo_listening_binding import all_artifacts, channel_silence_intervals
+            from app.evidence.stereo_listening_binding import LOCAL_EXCERPTS, all_artifacts, intervals
             from app.evidence.stereo_listening_binding import validate as validate_listening
 
             _require((analysis['kind'] == 'audio' and part is evidence) or part is evidence.get('audio'),
@@ -441,7 +441,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                 validate_listening(part['stereo_listening'], stereo)
                 groups.extend(all_artifacts(part['stereo_listening']))
             else:
-                _require(not channel_silence_intervals(stereo), 'Exact channel silence is missing its listening evidence')
+                _require(not any(intervals(stereo, key) for key in LOCAL_EXCERPTS),
+                         'A selected stereo interval is missing its listening evidence')
         if 'stereo_repetition' in part:
             from app.evidence.stereo_repetition_binding import pairs
             from app.evidence.stereo_repetition_binding import validate as validate_stereo_repeat

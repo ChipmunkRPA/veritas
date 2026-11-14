@@ -6,6 +6,7 @@ import re
 from collections.abc import Callable
 from typing import Any
 
+from app.evidence import stereo_collapse_binding
 from app.evidence.audio_silence_binding import FLANK, MIN_FLANK_DBFS, MINIMUM, continuous_spans
 
 SAMPLE_RATE = 16_000
@@ -107,7 +108,7 @@ def _validate(context: dict[str, Any], source: dict[str, Any], ranges: SourceRan
     pcm_sha = context["stereo_pcm_sha256"]
     if reason or count == 0 or status == "unavailable":
         if (status != (reason or ("too_short" if count == 0 else "unavailable"))
-                or windows != [] or pcm_sha is not None or CHANNEL_SILENCE in context):
+                or windows != [] or pcm_sha is not None or {CHANNEL_SILENCE, stereo_collapse_binding.KEY} & context.keys()):
             raise ValueError("Unassessed stereo evidence contains inconsistent measurements")
         return
     if not _HASH.fullmatch(str(pcm_sha)) or not isinstance(windows, list) or len(windows) != count:
@@ -143,6 +144,11 @@ def _validate(context: dict[str, Any], source: dict[str, Any], ranges: SourceRan
         if schema != SCHEMA:
             raise ValueError("Legacy stereo context cannot contain exact channel silence")
         _validate_channel_silence(context[CHANNEL_SILENCE], source["timeline"], count * SAMPLE_RATE, ranges)
+    if stereo_collapse_binding.KEY in context:
+        if schema != SCHEMA:
+            raise ValueError("Legacy stereo context cannot contain identical-channel measurements")
+        stereo_collapse_binding.validate(context[stereo_collapse_binding.KEY], source["timeline"],
+                                         count * SAMPLE_RATE, ranges)
 
 
 def _valid_level(value: Any, silence_floor: int) -> bool:

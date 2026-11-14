@@ -816,6 +816,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self,fullname,path=None,target=None):
         if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.stereo_binding',
                         'app.evidence.stereo_listening_binding', 'app.evidence.stereo_repetition_binding',
+                        'app.evidence.stereo_collapse_binding',
                         'app.evidence.audio_gain_repetition_binding',
                         'app.evidence.audio_background_binding','app.evidence.audio_bandwidth_binding', 'app.evidence.audio_silence_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
                         'app.evidence.audio_similarity_binding',
@@ -943,7 +944,10 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         assert mapping == reference.mapping
         assert binding['mapping_sha256'] == canonical_hash(reference.mapping)
         listening_pcm_sha = binding['stereo_listening_pcm_sha256']
-        assert len(f.store.read_bytes(listening_pcm_sha)) == 4 * (SAMPLE_RATE + 6400)
+        (identical,) = json.loads(f.store.read_bytes(stage['stereo_context_sha256']))['identical_channel_interval']['selected']
+        match_start, match_end = identical['start_sample'], identical['end_sample']
+        assert abs(match_start - 11402) <= 2 and abs(match_end - 32000) <= 2
+        assert len(f.store.read_bytes(listening_pcm_sha)) == 4 * (SAMPLE_RATE + 6400 + match_end - match_start + 2560)
         assert binding['pcm_sha256'] == reference.mapping['pcm_sha256']
         assert f.store.read_bytes(binding['wav_sha256']) == reference.wav
         np.testing.assert_array_equal(ctx.state['audio'].pcm, reference.pcm)
@@ -997,6 +1001,11 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         assert (selected['start_sample'], selected['end_sample'], selected['silent_channel']) == (8202, 11402, 'right')
         assert selected['source_timestamp_ranges'][0]['source_start_pts'] == 94602
         assert listening['channel_silence'][0]['artifacts']['right']['samples'] == 6400
+        assert identical['source_timestamp_ranges'] == [{
+            'start_sample': match_start, 'end_sample': match_end, 'source_start_pts': 86400 + match_start,
+            'source_end_pts': 86400 + match_end, 'time_base': '1/16000',
+        }]
+        assert listening['identical_channel_interval'][0]['artifacts']['right']['samples'] == match_end - match_start + 2560
 
         monkeypatch.setattr(v2_evidence_packets, 'get_session', sessions)
         monkeypatch.setattr(v2_evidence_packets, 'default_store', lambda: f.store)
@@ -1013,6 +1022,8 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         assert '/audio/stereo_context/channel_silence/selected/0' in text
         assert 'Right channel silent, decoded audio 0.513–0.713 s' in ' '.join(text.split())
         assert 'Video playback 0.913–1.113 s' in ' '.join(text.split())
+        assert '/audio/stereo_context/identical_channel_interval/selected/0' in text
+        assert 'Video playback 1.113–2.400 s' in ' '.join(text.split())
         assert 'Video playback 2.400–3.400 s' in ' '.join(text.split())
         assert 'Unscored voice intervals' in text and '/audio/coverage/unscored_intervals' in text
         assert 'Unscored voice during a mono level drop' in text and '/audio/coverage/stereo_attenuation_overlaps' in text

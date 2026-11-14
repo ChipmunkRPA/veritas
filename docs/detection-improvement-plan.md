@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [One-second refinement of existing speech flags](audio-narrow-flag-transfer-2026-11-14.md)
+  improved one clean location and zero noisy locations on 15 new SINE
+  readers. All three variants preserved the two useful clean locations.
+  The app retains its existing evidence ranges.
+
 - [Shared spectrogram normalization in noisy speech](audio-shared-mel-context-2026-11-14.md)
   located 8 of 40 edits across three previously exposed panels, compared
   with 7 for denser windows with local normalization and 1 for the

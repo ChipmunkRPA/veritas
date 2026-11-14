@@ -89,6 +89,18 @@ speech and background evaluation, including genuine mixtures and
 ordinary audio edits as controls. Its published experiments do not
 qualify a checkpoint for this deployment.
 
+The October [CompSpoof V2 analysis](https://arxiv.org/html/2610.17617v1)
+independently varies speech and environmental sound origin. Its
+aggregate results favor recognizing generated environmental sounds, but
+the breakdown traces much of that difference to poor transfer to one
+speech source. An evaluation for our app should therefore report
+separate results for each component and generator, with the other
+component held fixed. It should also keep ordinary vocal events and
+competing speakers in the matched controls. The released checkpoints
+carry CC BY-NC 4.0. This review used the paper's experiment design
+and left the checkpoints out of the project.
+[Publisher checkpoint terms](https://huggingface.co/nii-yamagishilab/slt2026-checkpoints)
+
 [ToolDF](https://arxiv.org/html/2609.03620v2) tests whether routing speech,
 singing, music and background components to different experts helps on
 overlapping or temporally mixed audio. Our

@@ -1,0 +1,4466 @@
+{
+  "freeze": {
+    "backgrounds": [
+      {
+        "byte_size": 36689964,
+        "header_sha256": "1515b214a72653ef18c4786813c3def978a7e8d8d7cad5e299726a968aa810db",
+        "overlap_samples": 47520,
+        "pcm_sha256": "de2b04877314e0fbaba0661fc4eba0813ab2292a9ce2408a4d070a8795f3621a",
+        "room": "ES2015a",
+        "speech_samples": 87680,
+        "start_sample": 7536000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2015a/audio/ES2015a.Array1-01.wav"
+      },
+      {
+        "byte_size": 44294104,
+        "header_sha256": "50662862a0b6631dc009547deb39cc3bb1e913590d9fc68329cb76f913d22882",
+        "overlap_samples": 53120,
+        "pcm_sha256": "12369b952aae7dfaea311030d09ceb9408fe6fc76002678c723efbb441526804",
+        "room": "ES2016a",
+        "speech_samples": 87040,
+        "start_sample": 6096000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2016a/audio/ES2016a.Array1-01.wav"
+      },
+      {
+        "byte_size": 40092714,
+        "header_sha256": "d3560f9867b480b65decd1c3961007e1d3c16e036289386b918c2c9565405d0e",
+        "overlap_samples": 57280,
+        "pcm_sha256": "faefcacffb60a0c3a79ca9763d06ae7106eb9b0968c15efc5c383ecf97550a27",
+        "room": "TS3006a",
+        "speech_samples": 96000,
+        "start_sample": 11568000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3006a/audio/TS3006a.Array1-01.wav"
+      },
+      {
+        "byte_size": 43272574,
+        "header_sha256": "e9c124fcfdc94409802b3775fa2982b259a926a8dae032c919a79864e0563512",
+        "overlap_samples": 47360,
+        "pcm_sha256": "91fb01979f9d03731e57a73639f280a8476d37c53ff84bf09ab091edd149e4f4",
+        "room": "TS3008a",
+        "speech_samples": 96000,
+        "start_sample": 9888000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3008a/audio/TS3008a.Array1-01.wav"
+      },
+      {
+        "byte_size": 48191870,
+        "header_sha256": "dbbcf6a76095c44c3d7c1aeac87e61b3ae8e9e89fbe267429505a31e64a7bb19",
+        "overlap_samples": 40320,
+        "pcm_sha256": "1923f27457d37d39d0b9db8ec209fede58bbf759ef3e477bcd90db0e2098d1ea",
+        "room": "TS3009a",
+        "speech_samples": 96000,
+        "start_sample": 9648000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3009a/audio/TS3009a.Array1-01.wav"
+      },
+      {
+        "byte_size": 33313834,
+        "header_sha256": "15ac2013f6570e30cf90c55877a45f3dcdba37b952d356598a72c70fa82e531f",
+        "overlap_samples": 34880,
+        "pcm_sha256": "877ac3b3afc4be53e6bb34f6d42cf70832ca6a14b20b16434b70f529042557d4",
+        "room": "TS3010a",
+        "speech_samples": 95040,
+        "start_sample": 4368000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3010a/audio/TS3010a.Array1-01.wav"
+      },
+      {
+        "byte_size": 48313386,
+        "header_sha256": "2e7baeb04d65066c4dbe9ac9156ffd8bd3d2cd3e23caaa038d1632cd61150171",
+        "overlap_samples": 32320,
+        "pcm_sha256": "319b13dcf4f561cdd5fea709d8aa5ac8250aec6d5b2ddb2a82390d4b673fc6c4",
+        "room": "TS3011a",
+        "speech_samples": 86240,
+        "start_sample": 8832000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3011a/audio/TS3011a.Array1-01.wav"
+      },
+      {
+        "byte_size": 27500244,
+        "header_sha256": "28969a7502e9676e3765eab5f5d908c33e376ee586172546a2a8d881c7d1e1c9",
+        "overlap_samples": 32320,
+        "pcm_sha256": "09644b648eef4d2adf4f8ed95f36378c61546804bb11e21a7c605a49af3c7244",
+        "room": "TS3012a",
+        "speech_samples": 96000,
+        "start_sample": 5328000,
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/TS3012a/audio/TS3012a.Array1-01.wav"
+      }
+    ],
+    "method": {
+      "assessment": "Require 0.30 temporal intersection over union and 50% recall of the labeled edit. Count gains, losses, incorrect refinements, ordinary refinements, and unchanged dispositions. The latest speaker-disjoint confirmation shares editor lineage and background sources with earlier work.",
+      "cases": "Three previously scored banks for retrospective comparison. For additional confirmation take one new publisher-labeled 0.20\u20131.00 s cut-and-paste edit per previously unused SINE reader from three pinned archive prefixes. Retain one six-second original/edit pair per reader. Match each pair clean and at \u22125 dB with previously used AMI rooms.",
+      "choose": "Keep the existing five-window review point. Consider only one-second windows wholly contained in the already flagged two-second range. Each normalization route must exceed its own earlier development point. The agreement route changes the displayed range only if both routes choose the same interval. Otherwise retain the broad range. No route creates an additional file flag."
+    },
+    "pairs": [
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "0b6ca279251fafd0cdc92e503b1efdee50e8a7df29b34d56a848325499c5875a",
+            "samples": 156456,
+            "wav_sha256": "c316217654788c4e1a151ce2132fee304ce5cbcae8593c1b069edba7c991f64f"
+          },
+          "variant": {
+            "pcm_sha256": "990ccf7ac20cee7729b6518b4091f347cb1b4ae065c875cca9e75f831a017ada",
+            "samples": 152832,
+            "wav_sha256": "ac47d678479e4be76a0e6fe64295cb6ef08f6bd1f5a8d37df6d97d77ca7892e6"
+          }
+        },
+        "id": 0,
+        "native_start": 2400,
+        "publisher_cut_paste_clock": "0.00-0.63-T/0.63-1.01-F/1.01-6.37-T",
+        "reader": "969",
+        "role": "cut_paste",
+        "room": "ES2015a",
+        "shard": 31,
+        "stem": "969-nicholas_nickleby_0908_librivox_64kb_mp3-nickleby_05_dickens_64kb_87",
+        "truth": [
+          8480,
+          14560
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "86553066ce0d02809f08bd453e906f0cc1bc7dd7ca4ab54c6a93644739e9b18b",
+            "samples": 164136,
+            "wav_sha256": "ae4be9543383fa4f8c90b0788f4db450d7a00387d420e5e549d31a7eb8932466"
+          },
+          "variant": {
+            "pcm_sha256": "cafd2f81c1a92c6cff19ca7de210cfdb8b48dcf905c9063d710495e691ff33ba",
+            "samples": 167424,
+            "wav_sha256": "dd1f2679754972789b236f1486f15d499757a9b6e1fd77e756f63c29a87c3b10"
+          }
+        },
+        "id": 1,
+        "native_start": 14400,
+        "publisher_cut_paste_clock": "0.00-2.38-T/2.38-2.65-F/2.65-6.98-T",
+        "reader": "984",
+        "role": "cut_paste",
+        "room": "ES2016a",
+        "shard": 31,
+        "stem": "984-orthodoxy_jac_librivox_64kb_mp3-orthodoxy_07b_chesterton_64kb_47",
+        "truth": [
+          28480,
+          32800
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "2803099a81b7baf6f41dc937bea3e2901240de9d8dc5d0e354560119edf47beb",
+            "samples": 165120,
+            "wav_sha256": "af2323c8858cff363c51e412c1ac84ee0cdc399b011cf88e4baae0c72d227b5f"
+          },
+          "variant": {
+            "pcm_sha256": "d239060ec21928fa9ad17c374168d7d8f5528c2b9f436bdb693c0514686d1e6d",
+            "samples": 165632,
+            "wav_sha256": "a9fcd9fb6c84b5f444d7aa81e56bd493c1450e382ab113e7d27acd4f2c731df6"
+          }
+        },
+        "id": 2,
+        "native_start": 4800,
+        "publisher_cut_paste_clock": "0.00-3.18-T/3.18-3.77-F/3.77-6.90-T",
+        "reader": "204",
+        "role": "cut_paste",
+        "room": "TS3006a",
+        "shard": 9,
+        "stem": "204-great_expectations_mfs_0812_librivox_64kb_mp3-greatexpectations_44_dickens_64kb_43",
+        "truth": [
+          47680,
+          57120
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "c28eea2b6b1b3ab88f98214fc031e55dc4908e6dcbaa203992a72de239df1dc6",
+            "samples": 150720,
+            "wav_sha256": "6a69cf883bdacac2dcc7e7ddbce73a4119ce48e7253964915b5bd0ede656988d"
+          },
+          "variant": {
+            "pcm_sha256": "efc74465c3094b8f48203ea3c30f6f64df12935a85290144411c20ffeb26f30f",
+            "samples": 145152,
+            "wav_sha256": "50f2daaf148b3c9678f5e005008e99b2c0e7b7498646aea034382a5831607ce6"
+          }
+        },
+        "id": 3,
+        "native_start": 0,
+        "publisher_cut_paste_clock": "0.00-0.41-T/0.41-0.64-F/0.64-6.05-T",
+        "reader": "925",
+        "role": "cut_paste",
+        "room": "TS3008a",
+        "shard": 31,
+        "stem": "925-web_new_testament_0811_librivox1_64kb_mp3-worldenglishbible2_06_matthew_64kb_104",
+        "truth": [
+          6560,
+          10240
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "cecea9e7b74b6d920c4d48c39eb8b1de22000d59e9457e05657856189c287268",
+            "samples": 181416,
+            "wav_sha256": "e0648c4445aa74ff8272c67ba3b9cf27f26286171589c762a30f3215e2321877"
+          },
+          "variant": {
+            "pcm_sha256": "08d06672f36d4b9d5257bd296bce8be54e9af7e85a57d44c5b74c0f516be895a",
+            "samples": 176896,
+            "wav_sha256": "89d93d095522c30dfc74185508c57c1dd3572f8f89803ab67d65a6f9884cd1ea"
+          }
+        },
+        "id": 4,
+        "native_start": 21600,
+        "publisher_cut_paste_clock": "0.00-2.70-T/2.70-3.19-F/3.19-7.37-T",
+        "reader": "1066",
+        "role": "cut_paste",
+        "room": "TS3009a",
+        "shard": 0,
+        "stem": "1066-diaryfromdixie_1101_librivox_64kb_mp3-diaryfromdixie_32_chesnut_64kb_4",
+        "truth": [
+          28800,
+          36640
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "329c36b27dad173d3b52b9237f45996129f1e95ac273b38059682f756d991c56",
+            "samples": 190056,
+            "wav_sha256": "a18c8d0dbd9f25b1ebd6dd51c982cf21000832ae66748e69ae4e97aeedb96a92"
+          },
+          "variant": {
+            "pcm_sha256": "3db611d98e37cde86be7db271bde42c877b62266e7e244d14ececda73249dcb5",
+            "samples": 189440,
+            "wav_sha256": "ad78164e8d7389c600cf2299fe9c592c69f8daf3f082a026a866a6dbd5d52bc1"
+          }
+        },
+        "id": 5,
+        "native_start": 2400,
+        "publisher_cut_paste_clock": "0.00-1.07-T/1.07-1.71-F/1.71-7.89-T",
+        "reader": "20",
+        "role": "cut_paste",
+        "room": "TS3010a",
+        "shard": 9,
+        "stem": "20-ulysses_2007_librivox_64kb_mp3-ulysses_06_joyce_64kb_120",
+        "truth": [
+          15520,
+          25760
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "dc73e65a1851fd07a4380e591911afb6d3a9c4d6ffc50157c2fd1c7651efde58",
+            "samples": 171816,
+            "wav_sha256": "989e744b6dd03d86184f656bad37458590453be96c5b4eaff8e0a7b3cd574b35"
+          },
+          "variant": {
+            "pcm_sha256": "6f5d7d17e7578701fc75d0be8f60ac51144fb6379fe4b509732ac17bff6470fa",
+            "samples": 172288,
+            "wav_sha256": "713acb4d518c4db3c422c6c6db6b988254c63dd5e426840da8112e2cd2d38456"
+          }
+        },
+        "id": 6,
+        "native_start": 16800,
+        "publisher_cut_paste_clock": "0.00-5.44-T/5.44-5.94-F/5.94-7.18-T",
+        "reader": "94",
+        "role": "cut_paste",
+        "room": "TS3011a",
+        "shard": 31,
+        "stem": "94-essays_first_series_0708_librivox_64kb_mp3-essays_first_series_03_emerson_64kb_114",
+        "truth": [
+          75840,
+          83840
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "8a091ea22d3d15ad9ee8ba5b68d0a739434739d9cf256f8a565ef361c9bb40c8",
+            "samples": 167040,
+            "wav_sha256": "1cc315b5d8f4072a8f4b46f5bd8bcbf4b48c01ef514f92caa9bb5fc8a9393d34"
+          },
+          "variant": {
+            "pcm_sha256": "c78f786f4826cbc40b5d725d7bc3620fe01fdd9d0f5b51e7cf5bf02522f6c68a",
+            "samples": 165632,
+            "wav_sha256": "bc917bda67ac40ee16edf53b2cd0df7f42517ac71fe7f96aca36c5131b633c26"
+          }
+        },
+        "id": 7,
+        "native_start": 12000,
+        "publisher_cut_paste_clock": "0.00-3.42-T/3.42-3.75-F/3.75-6.90-T",
+        "reader": "92",
+        "role": "cut_paste",
+        "room": "TS3012a",
+        "shard": 31,
+        "stem": "92-christmas_short_works_2007_0712_librivox_64kb_mp3-consciencepudding_nesbit_cs_64kb_13",
+        "truth": [
+          46720,
+          52000
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "a94db7112d11c00cc2244ddd3182ee7281b5b01a4bff3beef71008937e995d6c",
+            "samples": 163200,
+            "wav_sha256": "0ea577dd6d5e3c85a30377779f3ea71adfe71f7185627fc1c4966b0a1c42dcc3"
+          },
+          "variant": {
+            "pcm_sha256": "b63899895db80786662ba9186af16dc89bb93eec3c5b0586eba5dbcd5721beb1",
+            "samples": 163328,
+            "wav_sha256": "73b584a9b55c2d403dd3f5aa85e451ba7429bd75d66f2e71e799fd5cd60bf052"
+          }
+        },
+        "id": 8,
+        "native_start": 14400,
+        "publisher_cut_paste_clock": "0.00-2.23-T/2.23-2.85-F/2.85-6.81-T",
+        "reader": "107",
+        "role": "cut_paste",
+        "room": "ES2015a",
+        "shard": 0,
+        "stem": "107-boys_life_of_twain_jg_0810_librivox_64kb_mp3-twain_25_paine_64kb_5",
+        "truth": [
+          26080,
+          36000
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "5be55c7d1999bb846d1eeffc5ac0981776bf575dfef5ed0527988671b5b73967",
+            "samples": 190056,
+            "wav_sha256": "6607012d35c58d742bdff44e1b2af03b37e911639d5adca157a7be6f3a4aa659"
+          },
+          "variant": {
+            "pcm_sha256": "77f4b840abd11b212b8316e5e4da3bbd708abe6035af6e0f2743b2ed1418e0a5",
+            "samples": 192000,
+            "wav_sha256": "e5ab372222cb40a1645bfe4e6c1538a4fa326bf2c5b065fbf64c878b41d8e0c3"
+          }
+        },
+        "id": 9,
+        "native_start": 4800,
+        "publisher_cut_paste_clock": "0.00-5.83-T/5.83-6.06-F/6.06-8.00-T",
+        "reader": "9647",
+        "role": "cut_paste",
+        "room": "ES2016a",
+        "shard": 31,
+        "stem": "9647-kalevala_lonnrot_1608_librivox_64kb_mp3-kalevala_20_lonnrot_64kb_11",
+        "truth": [
+          90080,
+          93760
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "2e5455ba0e82cad002b77e138a4afd34a454ac2d1a0ada8ab57349ad76cd1216",
+            "samples": 157416,
+            "wav_sha256": "42fc76ace66fc25fabaebca990458ccfaa8aa8f92cbb52d438a43c7e9cb2a61b"
+          },
+          "variant": {
+            "pcm_sha256": "6a27cc7b62d05b42b42c8ccd4689a9604e31636282e66e3eca06cecc093b85f8",
+            "samples": 158464,
+            "wav_sha256": "6a0433821603b17cc4b28ba110e9c3f21467c4659af5a0fa34dd6af35a3cb039"
+          }
+        },
+        "id": 10,
+        "native_start": 4800,
+        "publisher_cut_paste_clock": "0.00-1.47-T/1.47-1.90-F/1.90-6.60-T",
+        "reader": "103",
+        "role": "cut_paste",
+        "room": "TS3006a",
+        "shard": 0,
+        "stem": "103-eldorado_krs_librivox_64kb_mp3-eldorado_41_orczy_64kb_40",
+        "truth": [
+          20320,
+          27200
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "2ef072707cfa13ca5898957c7a1ad6b89ef0fe2535d11005d57072fcea5311ef",
+            "samples": 167016,
+            "wav_sha256": "029572464cc69aa3f35583d1e0a55746bf57587f873be2f589c0dda824bffa2c"
+          },
+          "variant": {
+            "pcm_sha256": "afff985c761aeadd57cdd0bb21b84cb98b7c26785201e8c1c40d1737ba8fea62",
+            "samples": 167168,
+            "wav_sha256": "63bac7308d440d285ebf40068d6b41429efac1b2041b41dfac6d167f23c4224b"
+          }
+        },
+        "id": 11,
+        "native_start": 4800,
+        "publisher_cut_paste_clock": "0.00-4.99-T/4.99-5.78-F/5.78-6.97-T",
+        "reader": "9875",
+        "role": "cut_paste",
+        "room": "TS3008a",
+        "shard": 31,
+        "stem": "9875-scalp_hunters_1506_librivox_64kb_mp3-scalphunters_44_reid_64kb_4",
+        "truth": [
+          76640,
+          89280
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "c7d586f62668f761e9438604997fb3593aaf34fd9fec7e59da61ff6a6a77a797",
+            "samples": 177600,
+            "wav_sha256": "4dd5a7b4280bafb12ee891dd70c5359744086e0a9eb92370b3b858ea9c8c2fdf"
+          },
+          "variant": {
+            "pcm_sha256": "6c8a33922f582a511b66b84277233a5ede474fbf1ac4a9b98a0f62d8b792af0f",
+            "samples": 181248,
+            "wav_sha256": "60c97819bb3ac9fcb9dbf085f694ec5c6b1781b99cfbe8ac5b2f4edb5bd32de4"
+          }
+        },
+        "id": 12,
+        "native_start": 19200,
+        "publisher_cut_paste_clock": "0.00-2.60-T/2.60-3.17-F/3.17-7.55-T",
+        "reader": "2007",
+        "role": "cut_paste",
+        "room": "TS3009a",
+        "shard": 9,
+        "stem": "2007-tomjones_0811_librivox_64kb_mp3-tomjones_53_fielding_64kb_13",
+        "truth": [
+          28800,
+          37920
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "aa6d403043fd47265eb52f093caaf866a3432e220d17b67aa1c77c46970972a6",
+            "samples": 182400,
+            "wav_sha256": "93c8fd7752b9376f5637248882a7a42f146d60ea04ecf410917d7d06d6705260"
+          },
+          "variant": {
+            "pcm_sha256": "ddce71b7a3fb78b86401c2ae836fa9659dceedcb9ab8a7fa6cc1b513f24323ba",
+            "samples": 180480,
+            "wav_sha256": "eea8871ebe23fd6f4c5d1cedd456ac7e6a68616b2f32f1be5df534785f3f298a"
+          }
+        },
+        "id": 13,
+        "native_start": 14400,
+        "publisher_cut_paste_clock": "0.00-3.31-T/3.31-3.80-F/3.80-7.52-T",
+        "reader": "949",
+        "role": "cut_paste",
+        "room": "TS3010a",
+        "shard": 31,
+        "stem": "949-theo_roosevelt_autobiography_0810_librivox1_64kb_mp3-autobiography_10_troosevelt_64kb_22",
+        "truth": [
+          43360,
+          51200
+        ]
+      },
+      {
+        "files": {
+          "original": {
+            "pcm_sha256": "8657bc50859444994be4629a0a8d3aa221cd4178bca8799f51f9b7473608ecf7",
+            "samples": 168000,
+            "wav_sha256": "788637975884cf28804b166b51a94135d1e7d839064e114c621c7247eb7ab641"
+          },
+          "variant": {
+            "pcm_sha256": "d1c06571635f5202c3717cb12cda13f9bda2b9063f2a93bd7269963e2eca523b",
+            "samples": 166144,
+            "wav_sha256": "c7fd6a30d9904f8eb90e470b05499cdcfbce67aa10f955108fc15825fcb06276"
+          }
+        },
+        "id": 14,
+        "native_start": 19200,
+        "publisher_cut_paste_clock": "0.00-5.64-T/5.64-5.98-F/5.98-6.92-T",
+        "reader": "926",
+        "role": "cut_paste",
+        "room": "TS3011a",
+        "shard": 31,
+        "stem": "926-confessions_augustine_0911_librivox_64kb_mp3-confessions_05_08-14_augustine_64kb_70",
+        "truth": [
+          77440,
+          82880
+        ]
+      }
+    ],
+    "parent_sha256": "e4de086f269d7682bfd48a5b5bed9f92f666d3e577e367a079474b8e2f419bce",
+    "prefix_bytes": 201326592,
+    "publisher_revision": "81be5d5e6a7d5d0f9bbbb613abed7b700f43d793",
+    "runner_sha256": "c2b9d4513cae3dacabb821ba2d694324d89cd1ae78165fcf7d5711f4f600b6ea",
+    "schema": "chipmunk.audio-narrow-flag-transfer/1",
+    "shards": [
+      {
+        "complete_wavs": 755,
+        "prefix_sha256": "a82541d64b9432118de27eca368afb3a04795578c2ab799ff839df16a1a2fcc8",
+        "publisher_bytes": 2951811530,
+        "publisher_etag": "e998711cef47d01dcd2cfbaff9a719f52573e386a8af96b8fe049917d1e62a79",
+        "publisher_sha256": "35700c1f64bf3f356b77c6c6d10284917360d52e6cd1d980edc184b8cfeac9ba",
+        "shard": 0
+      },
+      {
+        "complete_wavs": 752,
+        "prefix_sha256": "3583846cd9bff1aa5d69065a023d575951b8135e7d24ae744ca25d016e4df7d0",
+        "publisher_bytes": 3010393126,
+        "publisher_etag": "e2b6c8df729630697722faa9e0376d37cd9f038517aa1be9f4837f6f52c592de",
+        "publisher_sha256": "0ad5400e304fc0ad8d207668b57ca413d49b264f8f799175794322d5d587a360",
+        "shard": 9
+      },
+      {
+        "complete_wavs": 780,
+        "prefix_sha256": "a69318bcdb65cbf02d4a5a53c164a4fd470980f6f951e723f4308b0d3b802668",
+        "publisher_bytes": 1996174627,
+        "publisher_etag": "c807b40ae8a98c93c853fa671fd8a8889afc67a6acec0dd203e809e025f359ba",
+        "publisher_sha256": "794de6b77f64581133cfe5339f42c9ff471c8d77803aea6432b84ce4d9e2feb0",
+        "shard": 31
+      }
+    ],
+    "shared_reader_sha256": "63344da7cc55b6d23e9ce9b70eef1b569947055ea3c4bfe777f3fc0b50897d1a",
+    "source_parent_sha256": "f6b0ded9d70d2c8d55dcaeebcd68a74d559158f2055dee89741671a6545b1d01"
+  },
+  "points": {
+    "local": 5.3355751,
+    "shared_center_scale": 5.36742735,
+    "shared_scale": 5.40646124
+  },
+  "records": [
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -6.845037477598476,
+        -6.822058195018285,
+        -7.0548849597432115,
+        -7.193097130208966,
+        -7.0620808689241725
+      ],
+      "group": 0,
+      "kind": "untouched",
+      "pcm_sha256": "11a672ab9f84207465f51c391786a5feefb01ec1f0156769bc9ae2e3accae31d",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        6.996920630701372,
+        -6.991913725133124,
+        -6.971375396935178,
+        -7.171113004705609,
+        -7.039228872667447
+      ],
+      "group": 0,
+      "kind": "cut_paste",
+      "pcm_sha256": "3a33b078e35d7de233e465eed6b9499996c03503647e1c2b84b070b353ee4b9c",
+      "side": "variant",
+      "truth": [
+        8480,
+        14560
+      ],
+      "views": {
+        "local": [
+          5.84619093,
+          5.87661028,
+          4.65939236,
+          4.60593224,
+          -7.12384653,
+          -7.14019203,
+          -7.14885283,
+          -7.13083506,
+          -7.18453503,
+          -7.19256258,
+          -7.08926916
+        ],
+        "shared_scale": [
+          6.02392244,
+          6.04531288,
+          4.97413015,
+          4.77520418,
+          -7.11022472,
+          -7.13988113,
+          -7.13696527,
+          -7.11973286,
+          -7.17241478,
+          -7.18023682,
+          -7.07865477
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        6.428402388537363,
+        -5.462815285094381,
+        -5.557598124659311,
+        -4.402532099626402,
+        5.176075288102178
+      ],
+      "group": 0,
+      "kind": "untouched",
+      "pcm_sha256": "4777e9861c09969fe15f9275188e1718a4efe6d09c7e3b6d35a5fd3d028a8754",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        5.7311202175987574,
+        -5.558963763999132,
+        -5.4374399427017845,
+        -4.601423284294951,
+        -5.091869327208932
+      ],
+      "group": 0,
+      "kind": "cut_paste",
+      "pcm_sha256": "a926d1141746e11c3e5058d0cc737c2f18b59412d03f038366338fa9e40d8455",
+      "side": "variant",
+      "truth": [
+        8480,
+        14560
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -7.1167340533189725,
+        -7.1239977609090195,
+        -7.05062202812526,
+        -7.157131735567243,
+        -7.0842318583717345
+      ],
+      "group": 1,
+      "kind": "untouched",
+      "pcm_sha256": "f00e6cb8e1b2cf1f094377722d7073e62a056b54c6cbe4495778ff6092891535",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        2.890964080352371,
+        4.965722056104574,
+        -6.830740428709422,
+        -7.135060305934933,
+        -7.108092283012529
+      ],
+      "group": 1,
+      "kind": "cut_paste",
+      "pcm_sha256": "32bc70fc27ea395dcd075338cb15994140a9808d23f58d15a8f59307c6823aa4",
+      "side": "variant",
+      "truth": [
+        28480,
+        32800
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -4.875561235348448,
+        -5.204488289105537,
+        -3.06051356642213,
+        -6.378218573637193,
+        -6.623298665426814
+      ],
+      "group": 1,
+      "kind": "untouched",
+      "pcm_sha256": "ecbc3fc4102cc825215a85d5b930964776443796672137c7e5b365eded3eaba3",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -3.8240899863267535,
+        6.394582156155604,
+        -2.3269717371438716,
+        -4.238489084667475,
+        -6.382640327240904
+      ],
+      "group": 1,
+      "kind": "cut_paste",
+      "pcm_sha256": "e9fd098b637b0b788d3cbca8d972121ef8cec65abf398a8d3eafb44a8300db88",
+      "side": "variant",
+      "truth": [
+        28480,
+        32800
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -6.901076753253157,
+        -7.018628641576359,
+        -7.174118520121133,
+        -7.111081074568478,
+        -6.799238162873453
+      ],
+      "group": 2,
+      "kind": "untouched",
+      "pcm_sha256": "4c3d7f2dcb91fe8b97654b1e74bc1192614b3c15595b16e7cc778ad2ed30df02",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -6.901076753253157,
+        -6.98479170700038,
+        4.353879020925795,
+        3.9445720103146504,
+        -6.856010407503549
+      ],
+      "group": 2,
+      "kind": "cut_paste",
+      "pcm_sha256": "90eac0778cdbc5a768aafc036db682298ee5b85f70ca7e37b1f9f141bc00aafd",
+      "side": "variant",
+      "truth": [
+        47680,
+        57120
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        6.351969297332086,
+        3.145184006468285,
+        4.020387767204581,
+        -4.384829556178322,
+        -4.818888657428964
+      ],
+      "group": 2,
+      "kind": "untouched",
+      "pcm_sha256": "96b2c9f3e67a184022a2bf0efa48ef616dc209d937df7964e65d6194c300fb92",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        6.351969297332086,
+        3.1336830754941154,
+        -3.5350071645267347,
+        -6.12518022860559,
+        -6.259338361773668
+      ],
+      "group": 2,
+      "kind": "cut_paste",
+      "pcm_sha256": "3ed4f648c3cd39199d7c909634decce7c721b1cd3670f274a08c0e941b4d0109",
+      "side": "variant",
+      "truth": [
+        47680,
+        57120
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -6.414995688833454,
+        -6.58280758292594,
+        -6.329911724686444,
+        -6.349181681665659,
+        -6.650033467970874
+      ],
+      "group": 3,
+      "kind": "untouched",
+      "pcm_sha256": "1c137a9d887caff66b052c354cdfccf08fb4e4b66f9d269a6253e70f139235ed",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        5.956762387143909,
+        -6.850165909757451,
+        -6.271893079963104,
+        -6.057968178735932,
+        -6.8548712647035055
+      ],
+      "group": 3,
+      "kind": "cut_paste",
+      "pcm_sha256": "30b482bdea9ef32ffb5b1287f7741948abe45c8ba138a31d9cdf82a30a86e11c",
+      "side": "variant",
+      "truth": [
+        6560,
+        10240
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -3.9842453422465924,
+        -5.793730720633265,
+        -3.9787426277903766,
+        4.7838525150612945,
+        5.458355817280291
+      ],
+      "group": 3,
+      "kind": "untouched",
+      "pcm_sha256": "8a2b4f187e0dd905beaf91323c5d7f37782b816dbd616c5ef6bc65725cb6bfc4",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -3.6670641813298004,
+        4.531756162532866,
+        2.051043004631123,
+        4.504570190833311,
+        -3.6606526679015317
+      ],
+      "group": 3,
+      "kind": "cut_paste",
+      "pcm_sha256": "51fa08543f227597b8999e02b01a946ea1d15eb6f7c22fbe197e7832309000f5",
+      "side": "variant",
+      "truth": [
+        6560,
+        10240
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -7.110949475442613,
+        -7.244660302504203,
+        -7.13640830005123,
+        -7.050543803809455,
+        -7.097197521601803
+      ],
+      "group": 4,
+      "kind": "untouched",
+      "pcm_sha256": "d54320db7e6239433962db5e261306baa4b34a4533970b7ba92f56160587548d",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        5.772349389275178,
+        6.244998791847489,
+        3.392155905089277,
+        -7.123945217566725,
+        -7.153641653518397
+      ],
+      "group": 4,
+      "kind": "cut_paste",
+      "pcm_sha256": "7bfa20407a0d7010d06515c96a7370b77835d13a8e4abf66209ff756a200c2be",
+      "side": "variant",
+      "truth": [
+        28800,
+        36640
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        2.349263292553441,
+        -3.0226316128304966,
+        -5.403778091438721,
+        -6.81754596240832,
+        -5.248634356005695
+      ],
+      "group": 4,
+      "kind": "untouched",
+      "pcm_sha256": "987249aada59a1971f6f16c71ec7dcce4f19ab37bb10e00e6e4ad5c71a3feb75",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        4.005303326586145,
+        -3.620014166787696,
+        -5.886869408701368,
+        -6.658527849100166,
+        -5.972952849418508
+      ],
+      "group": 4,
+      "kind": "cut_paste",
+      "pcm_sha256": "7b383ac328988519a05e335ca98a7ecb0bb3b762761e42e447c23f72b5874873",
+      "side": "variant",
+      "truth": [
+        28800,
+        36640
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -6.789143605656115,
+        -6.5488854053113155,
+        -6.814534174279199,
+        -6.696221364458964,
+        -6.546064411401414
+      ],
+      "group": 5,
+      "kind": "untouched",
+      "pcm_sha256": "69b1a3ac3f769e98b9e571edb670c68d3e39408eb91006f4c5900cb3802b873a",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        6.655558526417153,
+        6.0635600615696825,
+        -6.665452952801577,
+        -6.200197211122534,
+        -6.310094367066597
+      ],
+      "group": 5,
+      "kind": "cut_paste",
+      "pcm_sha256": "eba8905458ba4c6b23ad989869392d9fd5273f966eeaee135cfe7034b95f5769",
+      "side": "variant",
+      "truth": [
+        15520,
+        25760
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -4.684322352251989,
+        3.5650255518019542,
+        6.829017385525942,
+        0.45570555860423245,
+        -3.752586778412546
+      ],
+      "group": 5,
+      "kind": "untouched",
+      "pcm_sha256": "d10c5f34fef32972a42570d05e5b14ccf62394ce20890b0d80afc7400bd8d71b",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          4.96563244,
+          4.47385931,
+          4.36120081,
+          4.62384701,
+          5.16166306,
+          5.33012056,
+          5.24418306,
+          5.19046021,
+          4.83598042,
+          4.62995243,
+          4.67130518
+        ],
+        "shared_scale": [
+          5.2969389,
+          4.86784506,
+          4.64161062,
+          4.97246742,
+          4.65122318,
+          4.7930727,
+          4.72845745,
+          4.55988455,
+          4.1515379,
+          4.05233669,
+          4.1674366
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        5.5608615675965964,
+        5.7978359164469655,
+        5.294252713624215,
+        5.318354277499055,
+        4.548626609477829
+      ],
+      "group": 5,
+      "kind": "cut_paste",
+      "pcm_sha256": "a46d73e6938ec35dc837dee42ad0d6601907d42bfb79f203814f0f69d885c91d",
+      "side": "variant",
+      "truth": [
+        15520,
+        25760
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -4.510172882717402,
+        -6.992846968910913,
+        -7.1002469429576465,
+        -6.84459206005245,
+        -6.758253087000205
+      ],
+      "group": 6,
+      "kind": "untouched",
+      "pcm_sha256": "c37d7d32550bbc262e9d6a64ce9ce6942de7d1f89065e12d555bc194092305d7",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -4.510172882717402,
+        -6.992846968910913,
+        -7.1002469429576465,
+        3.996652836176787,
+        6.777998484647073
+      ],
+      "group": 6,
+      "kind": "cut_paste",
+      "pcm_sha256": "4f0b56acac4ddd7400e7c0ec1a56f217ced3b669e99f63e1dd3c14d7bcb4732e",
+      "side": "variant",
+      "truth": [
+        75840,
+        83840
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -5.815542218618957,
+        -4.986134507658332,
+        -4.724450589083662,
+        -3.797405209761737,
+        -5.827012498256425
+      ],
+      "group": 6,
+      "kind": "untouched",
+      "pcm_sha256": "37d967225e42a90ee3367e00613278c14e43c121f83e4ccd65c76c8b37f515fe",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -5.815542218618957,
+        -4.986134507658332,
+        -4.724450589083662,
+        -4.539215025330007,
+        -5.815977538654561
+      ],
+      "group": 6,
+      "kind": "cut_paste",
+      "pcm_sha256": "ae7ab57efd74c4b9b4b066d4f98be611bc0daf3a5fc8c61ef447b421166eddbd",
+      "side": "variant",
+      "truth": [
+        75840,
+        83840
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -6.9490785596399665,
+        -6.950825192346191,
+        -7.095869084343615,
+        -7.088718403140325,
+        -6.883079555511165
+      ],
+      "group": 7,
+      "kind": "untouched",
+      "pcm_sha256": "6a028909d24eb11d3be1246aec4363a97950b42bab0e681851250395ab232221",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -6.9490785596399665,
+        -6.948998880420568,
+        -6.863212620182052,
+        -6.95633557489096,
+        -6.624424970693185
+      ],
+      "group": 7,
+      "kind": "cut_paste",
+      "pcm_sha256": "c8ff40a9700dac7cfe62fbe925a52f0abe7cb8c40a420e64d17f6717f734012f",
+      "side": "variant",
+      "truth": [
+        46720,
+        52000
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -4.122628219431312,
+        -5.612497307526421,
+        -5.45813846866897,
+        -3.6673261984960197,
+        -5.050694533763229
+      ],
+      "group": 7,
+      "kind": "untouched",
+      "pcm_sha256": "64b0eaea7decb9ce5b14e594c541e99ff42b60a0fd6b7e47bb59f1991ef76388",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -4.122628219431312,
+        -5.585609425141449,
+        -6.382273658050788,
+        -5.0245603792850355,
+        -5.987451543991892
+      ],
+      "group": 7,
+      "kind": "cut_paste",
+      "pcm_sha256": "3f0e075209a754690984c7ac8eaef78ed52cc10493e769935829ef6c0a744fc7",
+      "side": "variant",
+      "truth": [
+        46720,
+        52000
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -7.145420000040029,
+        -7.140148202121825,
+        -6.933930910558965,
+        -7.10420986419662,
+        -7.144984216789267
+      ],
+      "group": 8,
+      "kind": "untouched",
+      "pcm_sha256": "66218dd89c0dea5b2dc4220f8ca9e4bf3b0f7b72a75084a372206071800d2401",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        4.668948104075804,
+        7.337721950237633,
+        6.850615024193661,
+        -7.114039469214635,
+        -7.040107759520701
+      ],
+      "group": 8,
+      "kind": "cut_paste",
+      "pcm_sha256": "ca4ed8e4fcef519e5b26a821b4d410df54a8dbd3fefa9aec1c04b0d36d4f45c5",
+      "side": "variant",
+      "truth": [
+        26080,
+        36000
+      ],
+      "views": {
+        "local": [
+          6.97668028,
+          7.11618137,
+          7.30555725,
+          7.36682224,
+          6.2752924,
+          6.22476673,
+          5.84749031,
+          5.83107948,
+          5.92451906,
+          5.62523937,
+          5.8479743
+        ],
+        "shared_scale": [
+          6.98245239,
+          7.13955641,
+          7.30267429,
+          7.36542082,
+          6.18240261,
+          6.13124609,
+          5.80017281,
+          5.78791952,
+          5.84660625,
+          5.50591421,
+          5.65430403
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        4.515048409601458,
+        4.656851393570338,
+        -5.349388185750745,
+        -4.385474256847327,
+        -3.801415959094722
+      ],
+      "group": 8,
+      "kind": "untouched",
+      "pcm_sha256": "41ae9831d4764838f65053dd8114e38c9e9e37337ccca3ffe1c63da3aaca2cc8",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        4.376421014148566,
+        4.851905805870588,
+        -4.562847142732572,
+        -3.867898973107637,
+        -5.31895261179356
+      ],
+      "group": 8,
+      "kind": "cut_paste",
+      "pcm_sha256": "ca92706255b49753efa0cb7e447ccd51aa8dd6ddcaeefc4b97efb3ae0e6e56f5",
+      "side": "variant",
+      "truth": [
+        26080,
+        36000
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -7.233784222649309,
+        -7.271894437753196,
+        -7.291199701037209,
+        -7.281534725340527,
+        -7.21197135103528
+      ],
+      "group": 9,
+      "kind": "untouched",
+      "pcm_sha256": "beabcb789087ede735ff260552bb11e08c5bd7b21b6b3dc00b55d023abd67a4c",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -7.233784222649309,
+        -7.271894437753196,
+        -7.291199701037209,
+        -7.281534725340527,
+        -1.6923315680568172
+      ],
+      "group": 9,
+      "kind": "cut_paste",
+      "pcm_sha256": "e96986e505a3cf89aaa14bd80be6f36c6ac5f475413385e5fb7917a320f9607b",
+      "side": "variant",
+      "truth": [
+        90080,
+        93760
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -6.945830345884126,
+        -6.470289708855042,
+        -5.789110667870922,
+        -2.1752347749568246,
+        -5.752240163246711
+      ],
+      "group": 9,
+      "kind": "untouched",
+      "pcm_sha256": "81c5732bee53fd9908b1b9eef629d9bfca6cffc31396908207df95f95f2e1b5f",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -6.945830345884126,
+        -6.470289708855042,
+        -5.789110667870922,
+        -2.1752347749568246,
+        -5.703800147862474
+      ],
+      "group": 9,
+      "kind": "cut_paste",
+      "pcm_sha256": "aa8f9c2bd41aa2fecadfc967a4bccda95d89ab09f38a412d15250c1916622014",
+      "side": "variant",
+      "truth": [
+        90080,
+        93760
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -7.025130277827472,
+        -7.116651497991386,
+        -7.146593084147827,
+        -7.075276347660211,
+        -7.147426604231244
+      ],
+      "group": 10,
+      "kind": "untouched",
+      "pcm_sha256": "b6d82cbda380399d2148891cd8ac2616338ca3a2651831e95dd61b1371bc216e",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        5.692403184916088,
+        4.71045728539085,
+        -7.127165798740553,
+        -7.091200843336443,
+        -7.086768111860355
+      ],
+      "group": 10,
+      "kind": "cut_paste",
+      "pcm_sha256": "1800614f2a66b05f0c3cdf97053c96f50a40df5f9ee956cba7884bed36896164",
+      "side": "variant",
+      "truth": [
+        20320,
+        27200
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        6.84308397501138,
+        7.012314453649369,
+        -5.4016379982089235,
+        -5.98339603727109,
+        -2.6693629428755905
+      ],
+      "group": 10,
+      "kind": "untouched",
+      "pcm_sha256": "7d0a50ab1ee8a16a23a950fbda577a8d5461286c464b1cb8559e97e0e8782df7",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          4.33204365,
+          4.59209156,
+          4.7478056,
+          4.88388729,
+          -5.20998192,
+          -5.73162031,
+          -5.75927448,
+          -5.52618456,
+          -5.65747166,
+          -5.56259632,
+          -5.54885912
+        ],
+        "shared_scale": [
+          4.53500605,
+          4.8003602,
+          4.92970085,
+          5.09844589,
+          -4.59247684,
+          -5.20687723,
+          -5.25937271,
+          -5.04893541,
+          -5.19485044,
+          -5.02932262,
+          -5.10588837
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        6.945017892165503,
+        5.998617056119346,
+        -6.043466546876872,
+        -5.8425117092854215,
+        4.633792965378645
+      ],
+      "group": 10,
+      "kind": "cut_paste",
+      "pcm_sha256": "d4aec8c1386f32a6b325ff0d0835370eaa99b19abd414d218833c32e70425d7a",
+      "side": "variant",
+      "truth": [
+        20320,
+        27200
+      ],
+      "views": {
+        "local": [
+          -2.44281673,
+          -2.30822277,
+          -2.05452752,
+          -1.9783752,
+          -4.86553001,
+          -5.28084373,
+          -5.46429396,
+          -5.3536272,
+          -5.43485641,
+          -5.27067661,
+          -5.27674484
+        ],
+        "shared_scale": [
+          -3.36250448,
+          -3.48426628,
+          -3.31997252,
+          -3.18214178,
+          -4.71638775,
+          -5.16275787,
+          -5.38817787,
+          -5.25600052,
+          -5.3025713,
+          -5.06558609,
+          -5.13709593
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -7.082991562363182,
+        -6.977563804660762,
+        -6.8105821707471845,
+        -7.148169543673147,
+        -6.992376779551165
+      ],
+      "group": 11,
+      "kind": "untouched",
+      "pcm_sha256": "8f8c94a67d32129de20acfdc5f71c33d71423ab81c2846b28780ec786acbc76b",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -7.082991562363182,
+        -6.977563804660762,
+        -6.8105821707471845,
+        5.024339660225765,
+        7.2017034526616355
+      ],
+      "group": 11,
+      "kind": "cut_paste",
+      "pcm_sha256": "856015c6448196a6e16db6de6f5470898407ce6bfa466cbc2fe69159ba3de632",
+      "side": "variant",
+      "truth": [
+        76640,
+        89280
+      ],
+      "views": {
+        "local": [
+          -7.15344334,
+          -7.12437344,
+          -7.13532352,
+          -7.13219833,
+          -7.08523703,
+          null,
+          null,
+          6.97426844,
+          6.86501646,
+          7.29388046,
+          7.36356592
+        ],
+        "shared_scale": [
+          -7.05802679,
+          -7.03926659,
+          -7.03926659,
+          -7.03875685,
+          -6.99585724,
+          null,
+          null,
+          6.96113825,
+          6.88190269,
+          7.30554867,
+          7.36021757
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        null,
+        -5.143049291169313,
+        -1.9969922605108195,
+        6.114868052027086,
+        5.936028706209695
+      ],
+      "group": 11,
+      "kind": "untouched",
+      "pcm_sha256": "14a3a7472358152e9ed9d07bae08349ec895989bc293518dc015154820d35294",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        null,
+        -5.143049291169313,
+        -1.9969922605108195,
+        5.6481805730425005,
+        -2.9994206930634357
+      ],
+      "group": 11,
+      "kind": "cut_paste",
+      "pcm_sha256": "33d63cfc6163938bf9cef268cbb677b23b2d857aef7cf4bdd758574264591422",
+      "side": "variant",
+      "truth": [
+        76640,
+        89280
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -7.072898898225048,
+        -6.97005178102976,
+        -7.075572969166231,
+        -7.165023781370896,
+        -7.0839195194852085
+      ],
+      "group": 12,
+      "kind": "untouched",
+      "pcm_sha256": "058eceb73fce36ab76cfee54e9024f55499afa83b3746f91fd0f0f0f4a8188fe",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -6.963379343884829,
+        -6.948498705324646,
+        -7.098792987345348,
+        -7.181757914137149,
+        -7.143994853934852
+      ],
+      "group": 12,
+      "kind": "cut_paste",
+      "pcm_sha256": "14e09467af6990be7759afa29e3e2197a0c3dcb3f4e59f065b8be8521689d574",
+      "side": "variant",
+      "truth": [
+        28800,
+        37920
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        3.9782888504658676,
+        5.7520334426273525,
+        4.547971020127931,
+        -3.5459571218177404,
+        6.687260562026546
+      ],
+      "group": 12,
+      "kind": "untouched",
+      "pcm_sha256": "343e409bced47fb77704ff3540688d3ca66152ead5489eae2a682a9cdb07cee2",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        4.186255823089626,
+        5.033537399347145,
+        4.450966986180089,
+        -4.31676580988709,
+        6.582068353356547
+      ],
+      "group": 12,
+      "kind": "cut_paste",
+      "pcm_sha256": "b8ad54a4c3b9dfa8e332e3cd2c61ca814e62d1c5f6ebb087116a3e4ed4972bc9",
+      "side": "variant",
+      "truth": [
+        28800,
+        37920
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -7.233157151595056,
+        -7.2054919682557355,
+        -6.903984058493733,
+        -6.902663272257904,
+        -7.190983307463804
+      ],
+      "group": 13,
+      "kind": "untouched",
+      "pcm_sha256": "f6c9b217430bc943864750e6325557ea0601f323eec194e538d7a594aa6408dd",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -7.233157151595056,
+        3.3648209458527525,
+        6.283700956378635,
+        -6.388308521732071,
+        -7.189047771793499
+      ],
+      "group": 13,
+      "kind": "cut_paste",
+      "pcm_sha256": "376e22ee8aa62249a8555357e461e04d8a84f5364bc9954de05f269d15741aea",
+      "side": "variant",
+      "truth": [
+        43360,
+        51200
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -4.362445762667212,
+        -4.444182445818199,
+        0.05830627897453067,
+        4.318107272913137,
+        3.5836940962479042
+      ],
+      "group": 13,
+      "kind": "untouched",
+      "pcm_sha256": "54e9ab1a2d99c49963ec9d9586ceff0c1c5cacb16ce8107d1e9cf7526c1e245d",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -4.362445762667212,
+        -4.882672795433901,
+        -3.8496051527699304,
+        -3.97919029840903,
+        -3.9728686963644515
+      ],
+      "group": 13,
+      "kind": "cut_paste",
+      "pcm_sha256": "810e71cd9cf251e0e035d564a0df4133352eb52ee2f74b21c0d21a8f7c18b1e2",
+      "side": "variant",
+      "truth": [
+        43360,
+        51200
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -6.970293990255587,
+        -7.083630496313844,
+        -7.062302626970404,
+        -6.943270649258155,
+        -6.982131962563121
+      ],
+      "group": 14,
+      "kind": "untouched",
+      "pcm_sha256": "f7cfeebed8bef2c4a12d64b10b99d6c0cbea7da49daf0f32597793dc37667beb",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "existing_scores": [
+        -6.970293990255587,
+        -7.083630496313844,
+        -7.062302626970404,
+        -6.938904725499017,
+        -6.912533747653476
+      ],
+      "group": 14,
+      "kind": "cut_paste",
+      "pcm_sha256": "dd1f65b2778692194c2725d6e16c24077ea22726c921d03977c3a6d9d20865e6",
+      "side": "variant",
+      "truth": [
+        77440,
+        82880
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -3.0996193674362664,
+        5.123948450028923,
+        -5.891650214689132,
+        -5.006744365997077,
+        -6.5692576804527345
+      ],
+      "group": 14,
+      "kind": "untouched",
+      "pcm_sha256": "afb97daaa979c12859a40deb10d2989c703a50d431be0862e66753f57cb032ee",
+      "side": "original",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -3.0996193674362664,
+        5.123948450028923,
+        -5.891650214689132,
+        -5.946012019440253,
+        -6.431690243852982
+      ],
+      "group": 14,
+      "kind": "cut_paste",
+      "pcm_sha256": "3d6e337e54b04522eb6c2e73e0fab9108b9b4ca565a0924af746718ed85229dc",
+      "side": "variant",
+      "truth": [
+        77440,
+        82880
+      ],
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "group": 0,
+      "kind": "background_only",
+      "pcm_sha256": "de2b04877314e0fbaba0661fc4eba0813ab2292a9ce2408a4d070a8795f3621a",
+      "side": "ES2015a",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        null,
+        null,
+        -6.895895913985221,
+        -7.054102897709726,
+        -7.092196456091101
+      ],
+      "group": 1,
+      "kind": "background_only",
+      "pcm_sha256": "12369b952aae7dfaea311030d09ceb9408fe6fc76002678c723efbb441526804",
+      "side": "ES2016a",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        null,
+        -5.981012340344597,
+        -6.764061491976937,
+        -7.006289467117724,
+        -6.728701621216375
+      ],
+      "group": 2,
+      "kind": "background_only",
+      "pcm_sha256": "faefcacffb60a0c3a79ca9763d06ae7106eb9b0968c15efc5c383ecf97550a27",
+      "side": "TS3006a",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "group": 3,
+      "kind": "background_only",
+      "pcm_sha256": "91fb01979f9d03731e57a73639f280a8476d37c53ff84bf09ab091edd149e4f4",
+      "side": "TS3008a",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "group": 4,
+      "kind": "background_only",
+      "pcm_sha256": "1923f27457d37d39d0b9db8ec209fede58bbf759ef3e477bcd90db0e2098d1ea",
+      "side": "TS3009a",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "group": 5,
+      "kind": "background_only",
+      "pcm_sha256": "877ac3b3afc4be53e6bb34f6d42cf70832ca6a14b20b16434b70f529042557d4",
+      "side": "TS3010a",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        null,
+        -5.242648107139676,
+        -6.9819307123385475,
+        -6.958375966044792,
+        -7.060256003277256
+      ],
+      "group": 6,
+      "kind": "background_only",
+      "pcm_sha256": "319b13dcf4f561cdd5fea709d8aa5ac8250aec6d5b2ddb2a82390d4b673fc6c4",
+      "side": "TS3011a",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "condition": "competing_speech",
+      "existing_scores": [
+        -5.7887554442323825,
+        -6.626069994297422,
+        -6.861447360175687,
+        -6.934385770140629,
+        -6.818294084646396
+      ],
+      "group": 7,
+      "kind": "background_only",
+      "pcm_sha256": "09644b648eef4d2adf4f8ed95f36378c61546804bb11e21a7c605a49af3c7244",
+      "side": "TS3012a",
+      "truth": null,
+      "views": {
+        "local": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "shared_scale": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "clean": {
+      "agreement": {
+        "changed": [
+          {
+            "broad": [
+              0,
+              32000
+            ],
+            "group": 0,
+            "kind": "edited",
+            "narrow": [
+              8000,
+              24000
+            ],
+            "pcm_sha256": "3a33b078e35d7de233e465eed6b9499996c03503647e1c2b84b070b353ee4b9c",
+            "truth": [
+              8480,
+              14560
+            ],
+            "useful_broad": false,
+            "useful_displayed": true
+          },
+          {
+            "broad": [
+              16000,
+              48000
+            ],
+            "group": 8,
+            "kind": "edited",
+            "narrow": [
+              24000,
+              40000
+            ],
+            "pcm_sha256": "ca4ed8e4fcef519e5b26a821b4d410df54a8dbd3fefa9aec1c04b0d36d4f45c5",
+            "truth": [
+              26080,
+              36000
+            ],
+            "useful_broad": true,
+            "useful_displayed": true
+          },
+          {
+            "broad": [
+              64000,
+              96000
+            ],
+            "group": 11,
+            "kind": "edited",
+            "narrow": [
+              80000,
+              96000
+            ],
+            "pcm_sha256": "856015c6448196a6e16db6de6f5470898407ce6bfa466cbc2fe69159ba3de632",
+            "truth": [
+              76640,
+              89280
+            ],
+            "useful_broad": true,
+            "useful_displayed": true
+          }
+        ],
+        "counts": {
+          "edited": 15,
+          "edited_flagged": 3,
+          "edited_narrowed": 3,
+          "ordinary": 15,
+          "ordinary_flagged": 0,
+          "ordinary_narrowed": 0,
+          "timing_gains": 1,
+          "timing_losses": 0,
+          "useful_broad": 2,
+          "useful_displayed": 3,
+          "wrong_narrowing": 0
+        }
+      },
+      "local": {
+        "changed": [
+          {
+            "broad": [
+              0,
+              32000
+            ],
+            "group": 0,
+            "kind": "edited",
+            "narrow": [
+              8000,
+              24000
+            ],
+            "pcm_sha256": "3a33b078e35d7de233e465eed6b9499996c03503647e1c2b84b070b353ee4b9c",
+            "truth": [
+              8480,
+              14560
+            ],
+            "useful_broad": false,
+            "useful_displayed": true
+          },
+          {
+            "broad": [
+              16000,
+              48000
+            ],
+            "group": 8,
+            "kind": "edited",
+            "narrow": [
+              24000,
+              40000
+            ],
+            "pcm_sha256": "ca4ed8e4fcef519e5b26a821b4d410df54a8dbd3fefa9aec1c04b0d36d4f45c5",
+            "truth": [
+              26080,
+              36000
+            ],
+            "useful_broad": true,
+            "useful_displayed": true
+          },
+          {
+            "broad": [
+              64000,
+              96000
+            ],
+            "group": 11,
+            "kind": "edited",
+            "narrow": [
+              80000,
+              96000
+            ],
+            "pcm_sha256": "856015c6448196a6e16db6de6f5470898407ce6bfa466cbc2fe69159ba3de632",
+            "truth": [
+              76640,
+              89280
+            ],
+            "useful_broad": true,
+            "useful_displayed": true
+          }
+        ],
+        "counts": {
+          "edited": 15,
+          "edited_flagged": 3,
+          "edited_narrowed": 3,
+          "ordinary": 15,
+          "ordinary_flagged": 0,
+          "ordinary_narrowed": 0,
+          "timing_gains": 1,
+          "timing_losses": 0,
+          "useful_broad": 2,
+          "useful_displayed": 3,
+          "wrong_narrowing": 0
+        }
+      },
+      "shared_scale": {
+        "changed": [
+          {
+            "broad": [
+              0,
+              32000
+            ],
+            "group": 0,
+            "kind": "edited",
+            "narrow": [
+              8000,
+              24000
+            ],
+            "pcm_sha256": "3a33b078e35d7de233e465eed6b9499996c03503647e1c2b84b070b353ee4b9c",
+            "truth": [
+              8480,
+              14560
+            ],
+            "useful_broad": false,
+            "useful_displayed": true
+          },
+          {
+            "broad": [
+              16000,
+              48000
+            ],
+            "group": 8,
+            "kind": "edited",
+            "narrow": [
+              24000,
+              40000
+            ],
+            "pcm_sha256": "ca4ed8e4fcef519e5b26a821b4d410df54a8dbd3fefa9aec1c04b0d36d4f45c5",
+            "truth": [
+              26080,
+              36000
+            ],
+            "useful_broad": true,
+            "useful_displayed": true
+          },
+          {
+            "broad": [
+              64000,
+              96000
+            ],
+            "group": 11,
+            "kind": "edited",
+            "narrow": [
+              80000,
+              96000
+            ],
+            "pcm_sha256": "856015c6448196a6e16db6de6f5470898407ce6bfa466cbc2fe69159ba3de632",
+            "truth": [
+              76640,
+              89280
+            ],
+            "useful_broad": true,
+            "useful_displayed": true
+          }
+        ],
+        "counts": {
+          "edited": 15,
+          "edited_flagged": 3,
+          "edited_narrowed": 3,
+          "ordinary": 15,
+          "ordinary_flagged": 0,
+          "ordinary_narrowed": 0,
+          "timing_gains": 1,
+          "timing_losses": 0,
+          "useful_broad": 2,
+          "useful_displayed": 3,
+          "wrong_narrowing": 0
+        }
+      }
+    },
+    "competing_speech": {
+      "agreement": {
+        "changed": [],
+        "counts": {
+          "edited": 15,
+          "edited_flagged": 1,
+          "edited_narrowed": 0,
+          "isolated": 8,
+          "isolated_flagged": 0,
+          "isolated_narrowed": 0,
+          "ordinary": 15,
+          "ordinary_flagged": 2,
+          "ordinary_narrowed": 0,
+          "timing_gains": 0,
+          "timing_losses": 0,
+          "useful_broad": 0,
+          "useful_displayed": 0,
+          "wrong_narrowing": 0
+        }
+      },
+      "local": {
+        "changed": [],
+        "counts": {
+          "edited": 15,
+          "edited_flagged": 1,
+          "edited_narrowed": 0,
+          "isolated": 8,
+          "isolated_flagged": 0,
+          "isolated_narrowed": 0,
+          "ordinary": 15,
+          "ordinary_flagged": 2,
+          "ordinary_narrowed": 0,
+          "timing_gains": 0,
+          "timing_losses": 0,
+          "useful_broad": 0,
+          "useful_displayed": 0,
+          "wrong_narrowing": 0
+        }
+      },
+      "shared_scale": {
+        "changed": [],
+        "counts": {
+          "edited": 15,
+          "edited_flagged": 1,
+          "edited_narrowed": 0,
+          "isolated": 8,
+          "isolated_flagged": 0,
+          "isolated_narrowed": 0,
+          "ordinary": 15,
+          "ordinary_flagged": 2,
+          "ordinary_narrowed": 0,
+          "timing_gains": 0,
+          "timing_losses": 0,
+          "useful_broad": 0,
+          "useful_displayed": 0,
+          "wrong_narrowing": 0
+        }
+      }
+    },
+    "families": {
+      "agreement": {
+        "changed": [
+          {
+            "broad": [
+              32000,
+              64000
+            ],
+            "group": "replicate-1-2-interior",
+            "kind": "ordinary",
+            "narrow": [
+              48000,
+              64000
+            ],
+            "pcm_sha256": "ffc515c68685312e70cb3148c2da7bcf5a4606f7deb251ded67dcca837e5e4c2",
+            "truth": null,
+            "useful_broad": false,
+            "useful_displayed": false
+          },
+          {
+            "broad": [
+              32000,
+              64000
+            ],
+            "group": "replicate-1-2-interior",
+            "kind": "ordinary",
+            "narrow": [
+              32000,
+              48000
+            ],
+            "pcm_sha256": "2fdedea4b93e2f9f88a77801402c3d91f9503147607bab5ed2fbf08173ced896",
+            "truth": null,
+            "useful_broad": false,
+            "useful_displayed": false
+          },
+          {
+            "broad": [
+              32000,
+              64000
+            ],
+            "group": "replicate-1-2-interior",
+            "kind": "edited",
+            "narrow": [
+              32000,
+              48000
+            ],
+            "pcm_sha256": "4df8252c3a3000d7ef018e671ec31a785493237acdf88aab59b16e47b2e2a915",
+            "truth": [
+              26880,
+              42240
+            ],
+            "useful_broad": false,
+            "useful_displayed": true
+          }
+        ],
+        "counts": {
+          "edited": 12,
+          "edited_flagged": 2,
+          "edited_narrowed": 1,
+          "isolated": 4,
+          "isolated_flagged": 0,
+          "isolated_narrowed": 0,
+          "ordinary": 36,
+          "ordinary_flagged": 5,
+          "ordinary_narrowed": 2,
+          "timing_gains": 1,
+          "timing_losses": 0,
+          "useful_broad": 0,
+          "useful_displayed": 1,
+          "wrong_narrowing": 0
+        }
+      },
+      "local": {
+        "changed": [
+          {
+            "broad": [
+              32000,
+              64000
+            ],
+            "group": "replicate-1-2-interior",
+            "kind": "ordinary",
+            "narrow": [
+              48000,
+              64000
+            ],
+            "pcm_sha256": "ffc515c68685312e70cb3148c2da7bcf5a4606f7deb251ded67dcca837e5e4c2",
+            "truth": null,
+            "useful_broad": false,
+            "useful_displayed": false
+          },
+          {
+            "broad": [
+              32000,
+              64000
+            ],
+            "group": "replicate-1-2-interior",
+            "kind": "ordinary",
+            "narrow": [
+              32000,
+              48000
+            ],
+            "pcm_sha256": "2fdedea4b93e2f9f88a77801402c3d91f9503147607bab5ed2fbf08173ced896",
+            "truth": null,
+            "useful_broad": false,
+            "useful_displayed": false
+          },
+          {
+            "broad": [
+              32000,
+              64000
+            ],
+            "group": "replicate-1-2-interior",
+            "kind": "edited",
+            "narrow": [
+              32000,
+              48000
+            ],
+            "pcm_sha256": "4df8252c3a3000d7ef018e671ec31a785493237acdf88aab59b16e47b2e2a915",
+            "truth": [
+              26880,
+              42240
+            ],
+            "useful_broad": false,
+            "useful_displayed": true
+          }
+        ],
+        "counts": {
+          "edited": 12,
+          "edited_flagged": 2,
+          "edited_narrowed": 1,
+          "isolated": 4,
+          "isolated_flagged": 0,
+          "isolated_narrowed": 0,
+          "ordinary": 36,
+          "ordinary_flagged": 5,
+          "ordinary_narrowed": 2,
+          "timing_gains": 1,
+          "timing_losses": 0,
+          "useful_broad": 0,
+          "useful_displayed": 1,
+          "wrong_narrowing": 0
+        }
+      },
+      "shared_scale": {
+        "changed": [
+          {
+            "broad": [
+              32000,
+              64000
+            ],
+            "group": "replicate-1-2-interior",
+            "kind": "ordinary",
+            "narrow": [
+              48000,
+              64000
+            ],
+            "pcm_sha256": "ffc515c68685312e70cb3148c2da7bcf5a4606f7deb251ded67dcca837e5e4c2",
+            "truth": null,
+            "useful_broad": false,
+            "useful_displayed": false
+          },
+          {
+            "broad": [
+              32000,
+              64000
+            ],
+            "group": "replicate-1-2-interior",
+            "kind": "ordinary",
+            "narrow": [
+              32000,
+              48000
+            ],
+            "pcm_sha256": "2fdedea4b93e2f9f88a77801402c3d91f9503147607bab5ed2fbf08173ced896",
+            "truth": null,
+            "useful_broad": false,
+            "useful_displayed": false
+          },
+          {
+            "broad": [
+              32000,
+              64000
+            ],
+            "group": "replicate-1-2-interior",
+            "kind": "edited",
+            "narrow": [
+              32000,
+              48000
+            ],
+            "pcm_sha256": "4df8252c3a3000d7ef018e671ec31a785493237acdf88aab59b16e47b2e2a915",
+            "truth": [
+              26880,
+              42240
+            ],
+            "useful_broad": false,
+            "useful_displayed": true
+          }
+        ],
+        "counts": {
+          "edited": 12,
+          "edited_flagged": 2,
+          "edited_narrowed": 1,
+          "isolated": 4,
+          "isolated_flagged": 0,
+          "isolated_narrowed": 0,
+          "ordinary": 36,
+          "ordinary_flagged": 5,
+          "ordinary_narrowed": 2,
+          "timing_gains": 1,
+          "timing_losses": 0,
+          "useful_broad": 0,
+          "useful_displayed": 1,
+          "wrong_narrowing": 0
+        }
+      }
+    },
+    "random_placement": {
+      "agreement": {
+        "changed": [
+          {
+            "broad": [
+              16000,
+              48000
+            ],
+            "group": 2,
+            "kind": "ordinary",
+            "narrow": [
+              32000,
+              48000
+            ],
+            "pcm_sha256": "07f70aea00b32c194e5727f9a80d1c9216f63de43eaf45dee41f02f2fd95f001",
+            "truth": null,
+            "useful_broad": false,
+            "useful_displayed": false
+          },
+          {
+            "broad": [
+              32000,
+              64000
+            ],
+            "group": 2,
+            "kind": "edited",
+            "narrow": [
+              40000,
+              56000
+            ],
+            "pcm_sha256": "dd7a070e31e9028717679f8635237e0c614e1094c589b5ea070810c6155a81e9",
+            "truth": [
+              45769,
+              61129
+            ],
+            "useful_broad": true,
+            "useful_displayed": true
+          },
+          {
+            "broad": [
+              16000,
+              48000
+            ],
+            "group": 2,
+            "kind": "edited",
+            "narrow": [
+              32000,
+              48000
+            ],
+            "pcm_sha256": "90439db12b314db37f44293d49ef7d48bc7e0daa0d2d83fb5f76de557e824002",
+            "truth": [
+              45769,
+              61129
+            ],
+            "useful_broad": false,
+            "useful_displayed": false
+          },
+          {
+            "broad": [
+              48000,
+              80000
+            ],
+            "group": 6,
+            "kind": "ordinary",
+            "narrow": [
+              64000,
+              80000
+            ],
+            "pcm_sha256": "cb41447e322734eed7d8ad2a26270db13d552a898349f3a3eec6f43ec3377b99",
+            "truth": null,
+            "useful_broad": false,
+            "useful_displayed": false
+          }
+        ],
+        "counts": {
+          "edited": 16,
+          "edited_flagged": 2,
+          "edited_narrowed": 2,
+          "isolated": 3,
+          "isolated_flagged": 0,
+          "isolated_narrowed": 0,
+          "ordinary": 24,
+          "ordinary_flagged": 3,
+          "ordinary_narrowed": 2,
+          "timing_gains": 0,
+          "timing_losses": 0,
+          "useful_broad": 1,
+          "useful_displayed": 1,
+          "wrong_narrowing": 1
+        }
+      },
+      "local": {
+        "changed": [
+          {
+            "broad": [
+              16000,
+              48000
+            ],
+            "group": 2,
+            "kind": "ordinary",
+            "narrow": [
+              32000,
+              48000
+            ],
+            "pcm_sha256": "07f70aea00b32c194e5727f9a80d1c9216f63de43eaf45dee41f02f2fd95f001",
+            "truth": null,
+            "useful_broad": false,
+            "useful_displayed": false
+          },
+          {
+            "broad": [
+              32000,
+              64000
+            ],
+            "group": 2,
+            "kind": "edited",
+            "narrow": [
+              40000,
+              56000
+            ],
+            "pcm_sha256": "dd7a070e31e9028717679f8635237e0c614e1094c589b5ea070810c6155a81e9",
+            "truth": [
+              45769,
+              61129
+            ],
+            "useful_broad": true,
+            "useful_displayed": true
+          },
+          {
+            "broad": [
+              16000,
+              48000
+            ],
+            "group": 2,
+            "kind": "edited",
+            "narrow": [
+              32000,
+              48000
+            ],
+            "pcm_sha256": "90439db12b314db37f44293d49ef7d48bc7e0daa0d2d83fb5f76de557e824002",
+            "truth": [
+              45769,
+              61129
+            ],
+            "useful_broad": false,
+            "useful_displayed": false
+          },
+          {
+            "broad": [
+              48000,
+              80000
+            ],
+            "group": 6,
+            "kind": "ordinary",
+            "narrow": [
+              64000,
+              80000
+            ],
+            "pcm_sha256": "cb41447e322734eed7d8ad2a26270db13d552a898349f3a3eec6f43ec3377b99",
+            "truth": null,
+            "useful_broad": false,
+            "useful_displayed": false
+          }
+        ],
+        "counts": {
+          "edited": 16,
+          "edited_flagged": 2,
+          "edited_narrowed": 2,
+          "isolated": 3,
+          "isolated_flagged": 0,
+          "isolated_narrowed": 0,
+          "ordinary": 24,
+          "ordinary_flagged": 3,
+          "ordinary_narrowed": 2,
+          "timing_gains": 0,
+          "timing_losses": 0,
+          "useful_broad": 1,
+          "useful_displayed": 1,
+          "wrong_narrowing": 1
+        }
+      },
+      "shared_scale": {
+        "changed": [
+          {
+            "broad": [
+              16000,
+              48000
+            ],
+            "group": 2,
+            "kind": "ordinary",
+            "narrow": [
+              32000,
+              48000
+            ],
+            "pcm_sha256": "07f70aea00b32c194e5727f9a80d1c9216f63de43eaf45dee41f02f2fd95f001",
+            "truth": null,
+            "useful_broad": false,
+            "useful_displayed": false
+          },
+          {
+            "broad": [
+              32000,
+              64000
+            ],
+            "group": 2,
+            "kind": "edited",
+            "narrow": [
+              40000,
+              56000
+            ],
+            "pcm_sha256": "dd7a070e31e9028717679f8635237e0c614e1094c589b5ea070810c6155a81e9",
+            "truth": [
+              45769,
+              61129
+            ],
+            "useful_broad": true,
+            "useful_displayed": true
+          },
+          {
+            "broad": [
+              16000,
+              48000
+            ],
+            "group": 2,
+            "kind": "edited",
+            "narrow": [
+              32000,
+              48000
+            ],
+            "pcm_sha256": "90439db12b314db37f44293d49ef7d48bc7e0daa0d2d83fb5f76de557e824002",
+            "truth": [
+              45769,
+              61129
+            ],
+            "useful_broad": false,
+            "useful_displayed": false
+          },
+          {
+            "broad": [
+              48000,
+              80000
+            ],
+            "group": 6,
+            "kind": "ordinary",
+            "narrow": [
+              64000,
+              80000
+            ],
+            "pcm_sha256": "cb41447e322734eed7d8ad2a26270db13d552a898349f3a3eec6f43ec3377b99",
+            "truth": null,
+            "useful_broad": false,
+            "useful_displayed": false
+          }
+        ],
+        "counts": {
+          "edited": 16,
+          "edited_flagged": 2,
+          "edited_narrowed": 2,
+          "isolated": 3,
+          "isolated_flagged": 0,
+          "isolated_narrowed": 0,
+          "ordinary": 24,
+          "ordinary_flagged": 3,
+          "ordinary_narrowed": 2,
+          "timing_gains": 0,
+          "timing_losses": 0,
+          "useful_broad": 1,
+          "useful_displayed": 1,
+          "wrong_narrowing": 1
+        }
+      }
+    },
+    "sine": {
+      "agreement": {
+        "changed": [
+          {
+            "broad": [
+              16000,
+              48000
+            ],
+            "group": 11,
+            "kind": "same_words",
+            "narrow": [
+              24000,
+              40000
+            ],
+            "pcm_sha256": "f781390ae1c52e20c1f8d9b573e38d72126f75c6c87e773dec818b314a0cdeaf",
+            "truth": null,
+            "useful_broad": false,
+            "useful_displayed": false
+          }
+        ],
+        "counts": {
+          "edited": 12,
+          "edited_flagged": 1,
+          "edited_narrowed": 0,
+          "isolated": 8,
+          "isolated_flagged": 0,
+          "isolated_narrowed": 0,
+          "ordinary": 24,
+          "ordinary_flagged": 0,
+          "ordinary_narrowed": 0,
+          "same_words": 12,
+          "same_words_flagged": 1,
+          "same_words_narrowed": 1,
+          "timing_gains": 0,
+          "timing_losses": 0,
+          "useful_broad": 0,
+          "useful_displayed": 0,
+          "wrong_narrowing": 0
+        }
+      },
+      "local": {
+        "changed": [
+          {
+            "broad": [
+              16000,
+              48000
+            ],
+            "group": 11,
+            "kind": "same_words",
+            "narrow": [
+              24000,
+              40000
+            ],
+            "pcm_sha256": "f781390ae1c52e20c1f8d9b573e38d72126f75c6c87e773dec818b314a0cdeaf",
+            "truth": null,
+            "useful_broad": false,
+            "useful_displayed": false
+          },
+          {
+            "broad": [
+              16000,
+              48000
+            ],
+            "group": 21,
+            "kind": "edited",
+            "narrow": [
+              16000,
+              32000
+            ],
+            "pcm_sha256": "4eebcb4ba1345c8eb1e8b039473056912b3a9c67dcd381754586fb6049522f96",
+            "truth": [
+              24160,
+              29600
+            ],
+            "useful_broad": false,
+            "useful_displayed": true
+          }
+        ],
+        "counts": {
+          "edited": 12,
+          "edited_flagged": 1,
+          "edited_narrowed": 1,
+          "isolated": 8,
+          "isolated_flagged": 0,
+          "isolated_narrowed": 0,
+          "ordinary": 24,
+          "ordinary_flagged": 0,
+          "ordinary_narrowed": 0,
+          "same_words": 12,
+          "same_words_flagged": 1,
+          "same_words_narrowed": 1,
+          "timing_gains": 1,
+          "timing_losses": 0,
+          "useful_broad": 0,
+          "useful_displayed": 1,
+          "wrong_narrowing": 0
+        }
+      },
+      "shared_scale": {
+        "changed": [
+          {
+            "broad": [
+              16000,
+              48000
+            ],
+            "group": 11,
+            "kind": "same_words",
+            "narrow": [
+              24000,
+              40000
+            ],
+            "pcm_sha256": "f781390ae1c52e20c1f8d9b573e38d72126f75c6c87e773dec818b314a0cdeaf",
+            "truth": null,
+            "useful_broad": false,
+            "useful_displayed": false
+          },
+          {
+            "broad": [
+              16000,
+              48000
+            ],
+            "group": 21,
+            "kind": "edited",
+            "narrow": [
+              24000,
+              40000
+            ],
+            "pcm_sha256": "4eebcb4ba1345c8eb1e8b039473056912b3a9c67dcd381754586fb6049522f96",
+            "truth": [
+              24160,
+              29600
+            ],
+            "useful_broad": false,
+            "useful_displayed": true
+          }
+        ],
+        "counts": {
+          "edited": 12,
+          "edited_flagged": 1,
+          "edited_narrowed": 1,
+          "isolated": 8,
+          "isolated_flagged": 0,
+          "isolated_narrowed": 0,
+          "ordinary": 24,
+          "ordinary_flagged": 0,
+          "ordinary_narrowed": 0,
+          "same_words": 12,
+          "same_words_flagged": 1,
+          "same_words_narrowed": 1,
+          "timing_gains": 1,
+          "timing_losses": 0,
+          "useful_broad": 0,
+          "useful_displayed": 1,
+          "wrong_narrowing": 0
+        }
+      }
+    }
+  }
+}

@@ -52,13 +52,14 @@ def _band_reading(stats, bounds):
             "local_relative_gain": round(float(gain[1] / flank_gain), 6)}
 
 
-def measure(earlier, submitted):
+def measure(earlier, submitted, *, recover_supported=False):
     """Compare known shared-time sound on either side of a possible local source change."""
     if len(earlier) != SAMPLES or len(submitted) != SAMPLES:
         return "outside_scope", None
     statistics = [_band_statistics(earlier, submitted, band) for band in speech.BANDS]
     count = 1 + (SAMPLES - WINDOW) // HOP
     best = None
+    supported = None
     measured = False
     for width in WIDTHS:
         for start in range(MIN_SUPPORT + GUARD, count - width - MIN_SUPPORT - GUARD + 1):
@@ -77,9 +78,14 @@ def measure(earlier, submitted):
             if len(qualifying) < 2:
                 continue
             score = round(float(np.median([1 - band["local_relative_gain"] for band in qualifying])), 6)
+            reading = {"samples": [start * HOP + (WINDOW - HOP) // 2, end * HOP + (WINDOW - HOP) // 2],
+                       "strength": score, "bands": qualifying}
             if best is None or score > best["strength"]:
-                best = {"samples": [start * HOP + (WINDOW - HOP) // 2, end * HOP + (WINDOW - HOP) // 2],
-                        "strength": score, "bands": qualifying}
+                best = reading
+            if recover_supported and (supported is None or score > supported["strength"]) and strong_flanks(reading):
+                supported = reading
+    if supported is not None and not strong_flanks(best):
+        return "localized_difference", {**supported, "selection": "strong_flanks_first"}
     if best:
         return "localized_difference", best
     return ("no_local_difference" if measured else "matching_flanks_unavailable"), None

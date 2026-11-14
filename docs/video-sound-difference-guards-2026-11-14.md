@@ -58,9 +58,28 @@ for further comparison with a stronger test for movable audio.
 The lower-floor arm kept the previous useful locations and added 44 in
 each carrier, including 39 noisy locations. It added 21 AAC and 19 PCM
 control flags. Those flags included local filtering, gain and local delay.
-The two candidates fell outside the frozen control limits. The opt-in app
-uses its original acoustic selection. It now retains a coverage reason
-alongside the other measurements when the trial has no publishable range.
+The two candidates fell outside the frozen control limits for replacing the
+existing selection. The stronger-flank check is now available as a
+supplemental observation in the explicitly opted-in local comparison, with
+zero weight in the AI estimate. The more permissive arm stays in evaluation.
+
+## Local trial and evidence
+
+The trial first checks for a supported timing shift and preserves an existing
+soundtrack range when it has strong matches on both sides. If the strongest
+range has weak flanks, the trial can display a different range that meets the
+same matching requirements. These additional ranges appear as **Soundtrack
+difference with unresolved cause**, with the original timestamps, both
+waveforms and playable clips, and three matching picture pairs. The same
+selection and exhibits can be reproduced from both source files and the JSON
+with the existing comparison verifier.
+
+Three simulated $9.99 checkouts exercised the local app. The rain-masked
+replacement and rain-masked local delay both showed **1.400–2.200 s** and six
+verified frames. This check could not distinguish their causes. The clean
+delay was identified by the app's existing timing comparison, which took
+precedence and suppressed the additional range. All three record and asset
+replays matched. No jobs ran before payment.
 
 ## Replay
 

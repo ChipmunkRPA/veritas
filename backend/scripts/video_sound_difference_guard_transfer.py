@@ -24,6 +24,7 @@ ARMS = ("current", "strong_flanks_first", "check_for_delay")
 PEOPLE = ("ioanna", "james", "mckensie", "paison", "piotr", "priscilla")
 GATE = {"useful_gain": 3, "distinct_groups": 2, "max_added_control_flags_per_carrier": 2,
         "max_priority_control_flags": 0}
+BASELINE_SHA256 = "8d07b2a70ca0c3a41412a1b757f580f39678096a42ff64217ed5b64bc5ab8723"
 
 
 def boundary(group, offset, offsets):
@@ -34,13 +35,12 @@ def boundary(group, offset, offsets):
 
 def plan():
     method = Path(__file__).with_name("video_sound_difference_guard.py")
-    working = Path(__file__).resolve().parents[1] / "app/evidence/video_reference_sound_difference.py"
     parent = sources.ROOT / "docs/evaluation-panels/video-mouth-hd-hold-2026-11-12.json"
     roster = {item["name"]: item for item in read(parent)["source_plan"]["rows"]}
     selected = [{"file": name + ".webm", "sha256": roster[name]["source_sha256"], "credit": roster[name]["credit"],
                  "license": roster[name]["license"], "page": roster[name]["commons"]} for name in PEOPLE]
     return {"schema": SCHEMA, "sources": selected, "offsets": list(OFFSETS), "gate": GATE,
-            "method_sha256": sha(method), "baseline_sha256": sha(working), "sources_sha256": sha(parent),
+            "method_sha256": sha(method), "baseline_sha256": BASELINE_SHA256, "sources_sha256": sha(parent),
             "method": "For two copies of the same clip, compare the current select-then-check rule with applying "
                       "the 0.84 flank floor before ranking, and with a lower 0.52 floor plus a local timing alternative. "
                       "Each arm still yields at most one range after the existing short timing check."}
@@ -218,7 +218,8 @@ def main():
         require(report == receipt["summary"], "Saved outcomes do not replay")
         print(json.dumps(report, indent=2, sort_keys=True))
         return
-    lock = {"plan": plan(), "runner_sha256": sha(Path(__file__))}
+    implementation = Path(__file__).resolve().parents[1] / "app/evidence/video_reference_sound_difference.py"
+    lock = {"plan": plan(), "runner_sha256": sha(Path(__file__)), "implementation_sha256": sha(implementation)}
     if args.output.exists():
         parser.error("Use a new path")
     if args.phase == "freeze":

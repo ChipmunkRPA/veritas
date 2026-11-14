@@ -22,6 +22,7 @@ ROLES = ("same_speaker", "other_speaker", "unchanged", "local_gain", "local_filt
 EDITS = ROLES[:2]
 GATE = {"minimum_useful_aac": 36, "max_ordinary_flags_per_carrier": 5, "max_constant_or_unrelated_flags": 0}
 DEVELOPMENT_METHOD = "707b1e686b88201ccc0739eae69d865f04d1856300b0ff0a686d6cd947234f0a"
+TRANSFER_METHOD = "8d07b2a70ca0c3a41412a1b757f580f39678096a42ff64217ed5b64bc5ab8723"
 
 
 def boundary(group, offset, offsets):
@@ -31,13 +32,12 @@ def boundary(group, offset, offsets):
 
 
 def plan(transfer=False):
-    method = Path(__file__).resolve().parents[1] / "app/evidence/video_reference_sound_difference.py"
     comparison = read(sources.ROOT / "docs/evaluation-panels/video-lipsync-repeat-public-speech-sources-2026-11-13.json")
     roster = [row | {"file": row["id"] + ".webm"} for row in comparison["sources"]] if transfer else sources.sources()
     gate = {"clean_aac_locations": 8, "minimum_source_groups": 3, "max_ordinary_flags_per_carrier": 1,
             "max_constant_or_unrelated_flags": 0} if transfer else GATE
     return {"schema": SCHEMA, "sources": roster, "offsets": [31, 46] if transfer else list(OFFSETS), "gate": gate,
-            "method_sha256": sha(method) if transfer else DEVELOPMENT_METHOD,
+            "method_sha256": TRANSFER_METHOD if transfer else DEVELOPMENT_METHOD,
             "method": "Compare paired windows of the two soundtracks on the same picture clock. "
               "Use the existing signed timing method first. Count acoustic loss in the absence of an explainable local delay. "
               "Require temporal IoU of 0.50 with the authored substitution. No model or transcription is used."} | (
@@ -215,7 +215,8 @@ def main():
         require(report == receipt["summary"], "Saved outcomes do not replay")
         print(json.dumps(report, indent=2, sort_keys=True))
         return
-    lock = {"plan": plan(args.transfer), "runner_sha256": sha(Path(__file__))}
+    implementation = Path(__file__).resolve().parents[1] / "app/evidence/video_reference_sound_difference.py"
+    lock = {"plan": plan(args.transfer), "runner_sha256": sha(Path(__file__)), "implementation_sha256": sha(implementation)}
     if args.output.exists():
         parser.error("Use a new path")
     if args.phase == "freeze":

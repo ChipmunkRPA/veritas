@@ -78,6 +78,10 @@ The result identifies missing picture or audio coverage, a supported timing
 alternative, insufficient matching sound, or a completed search with no
 qualifying range. Only a measured difference includes matching picture
 exhibits and audio excerpts.
+The trial can also surface a different supported interval when the
+strongest acoustic change lacks sufficient matching sound on either side.
+The app reports that interval with its cause unresolved. [Newer test and
+local verification](video-sound-difference-guards-2026-11-14.md#local-trial-and-evidence)
 Two isolated $9.99 test checkouts exercised the paid worker and authenticated
 comparison. No analysis jobs ran before simulated payment. The held AAC
 replacement showed **1.400–1.880 s**, with six matching source pictures and

@@ -190,6 +190,7 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         include_quiet_soundtrack=settings.video_reference_soundtrack_reencode,
                         include_short_soundtrack=settings.video_reference_short_soundtrack,
                         include_sound_difference=include_sound_difference,
+                        recover_sound_difference=include_sound_difference,
                         include_picture_insertion=settings.video_reference_picture_insertion,
                     )
                 else:

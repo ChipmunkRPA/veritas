@@ -236,7 +236,7 @@ DIFFERENCE_UNASSESSED_SCOPE = ("This compares the first soundtrack in two suppli
                               "soundtrack change unresolved. This comparison carries zero weight in the AI estimate.")
 
 
-def assess_difference(paths, tables, comparison, tracks, assets):
+def assess_difference(paths, tables, comparison, tracks, assets, *, recover_supported=False):
     """Attach a corroborated acoustic difference to exact clock-matched pictures."""
     from app.evidence import video_reference_sound_difference as difference
 
@@ -261,7 +261,7 @@ def assess_difference(paths, tables, comparison, tracks, assets):
     shifted, _ = measure(*decoded, window=SHORT_WINDOW, step=SHORT_STEP, min_rms=QUIET_RMS)
     if shifted:
         return disposition("timing_difference", "The short timing search matched the same sound at different times within the clip.")
-    status, reading = difference.measure(*[(pcm * 32768).astype("<i2") for pcm in decoded])
+    status, reading = difference.measure(*[(pcm * 32768).astype("<i2") for pcm in decoded], recover_supported=recover_supported)
     if status == "matching_flanks_unavailable":
         return disposition(status, "Too little matching sound was found on either side to assess a local difference.")
     if reading is None:
@@ -279,7 +279,11 @@ def assess_difference(paths, tables, comparison, tracks, assets):
              for side, track in zip(("earlier", "submitted"), tracks, strict=True)}
     assets.update(pending)
     start, end = interval
-    return {"status": status, "scope": DIFFERENCE_SCOPE, "affects_overall_confidence": False, "sample_rate": SAMPLE_RATE,
+    scope = DIFFERENCE_SCOPE
+    if reading.get("selection") == "strong_flanks_first":
+        scope = ("Matching audio on both sides supports inspection of this interval. A local delay, replacement, or other edit "
+                 "could cause the difference. The cause remains unresolved. This comparison carries zero weight in the AI estimate.")
+    return {"status": status, "scope": scope, "affects_overall_confidence": False, "sample_rate": SAMPLE_RATE,
             "picture_pair_sha256": comparison["picture"]["frame_pairs_sha256"],
             "summary": f"The two soundtracks differ from {start / SAMPLE_RATE:.3f} to {end / SAMPLE_RATE:.3f} s while the decoded pictures match.",
             "picture_profile": reencode.hd_report_profile(tables),

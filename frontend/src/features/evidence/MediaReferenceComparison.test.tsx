@@ -36,16 +36,23 @@ it('shows a soundtrack disposition without inventing playback evidence', async (
   expect(within(trial).queryByLabelText(/Play analyzed clip/)).toBeNull()
 })
 
-it.each([true, false])('requires both audio excerpts and the six soundtrack-difference pictures (%s)', async (complete) => {
+it.each([
+  { complete: true, recovered: false },
+  { complete: true, recovered: true },
+  { complete: false, recovered: true },
+])('requires both audio excerpts and six pictures ($complete, recovered=$recovered)', async ({ complete, recovered }) => {
   const image = { file: 'picture.png', media_type: 'image/png', sha256: 'a'.repeat(64) }
   const audio = { file: 'sound.wav', media_type: 'audio/wav', sha256: 'b'.repeat(64) }
   const picture = { asset: image, frame_index: 40, time_s: 1.6 }
   const clip = { start_s: 1.4, end_s: 1.8, audio, waveform: { low: [-.3], high: [.3] } }
   const pair = { earlier: picture, submitted: picture }
-  const comparison = { schema: 'chipmunk.video-reference-comparison/14', status: 'measured', interpretation: 'Compared copies.',
+  const comparison = { schema: recovered ? 'chipmunk.video-reference-comparison/16' : 'chipmunk.video-reference-comparison/14',
+    ...(recovered && { comparison_schema: 'chipmunk.video-reference-comparison/5' }),
+    status: 'measured', interpretation: 'Compared copies.',
     submitted: { width: 1280, height: 720 }, picture: { matching_frames: 100, changed_frames: 0, ranges: [] },
     sound_difference: { status: 'localized_difference', affects_overall_confidence: false, summary: 'The two soundtracks differ locally.',
       scope: 'The comparison carries zero weight in the AI estimate.', range: { earlier: clip, submitted: clip,
+        ...(recovered && { selection: 'strong_flanks_first' }),
         bands: [{ band_hz: [300, 900] }, { band_hz: [900, 1750] }], paired_pictures: { before: pair, during: pair, after: pair } } } }
   const assets = complete ? { 'picture.png': 'iVBORw0KGgo=', 'sound.wav': 'UklGRg==' } : { 'picture.png': 'iVBORw0KGgo=' }
   const fetch = vi.fn().mockResolvedValueOnce(Response.json({ available: true, sound_difference_available: true }))
@@ -58,7 +65,8 @@ it.each([true, false])('requires both audio excerpts and the six soundtrack-diff
   fireEvent.click(trial)
   fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
   if (complete) {
-    const section = await screen.findByRole('region', { name: 'Soundtrack difference over matching pictures' })
+    const title = recovered ? 'Soundtrack difference with unresolved cause' : 'Soundtrack difference over matching pictures'
+    const section = await screen.findByRole('region', { name: title })
     expect(within(section).getAllByRole('img', { name: /clip · 1.600 s/ })).toHaveLength(6)
     expect(within(section).getByText(/300–900, 900–1750 Hz/)).toBeTruthy()
     expect(within(section).getByText('Analyzed clip · 1.400–1.800 s')).toBeTruthy()

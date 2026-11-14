@@ -64,7 +64,9 @@ are not public screening promises or calibrated population probabilities.
   added 13 useful AAC and ten PCM locations without losing earlier locations.
   It also added three AAC and four PCM flags on real local-delay controls.
   A looser rule added 44 locations and more ordinary flags per carrier.
-  Both remain offline. The opt-in app records why a range was unavailable.
+  The opt-in app uses the stronger-flank result when the original range lacks
+  support. The new observation leaves its cause unresolved and has zero AI
+  confidence weight. The more permissive comparison remains offline.
 
 - [Local soundtrack differences over matching pictures](video-reference-sound-difference-2026-11-14.md)
   found six of 16 clean replacements and zero of 48 noisy replacements per

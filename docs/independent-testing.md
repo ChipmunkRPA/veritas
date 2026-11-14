@@ -16,7 +16,10 @@ or rerun a workflow.
 The [soundtrack flank-ranking replay](video-sound-difference-guards-2026-11-14.md#replay)
 compares three checks on the same edits and controls. It recounts paired gains,
 lost locations and flags by underlying cause and carrier, including local
-timing edits that can resemble replacement.
+timing edits that can resemble replacement. The native replay uses the same
+fixed operating points when the optional app comparison is updated. The
+source-file verifier also reproduces the additional ranges and audio and
+picture exhibits recorded by the local trial.
 
 The [earlier-copy soundtrack difference replay](video-reference-sound-difference-2026-11-14.md#optional-local-trial-and-replay)
 recounts acoustic replacements, timing changes, ordinary processing, and

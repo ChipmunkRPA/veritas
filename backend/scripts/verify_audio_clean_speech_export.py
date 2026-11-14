@@ -18,6 +18,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD,
     SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
+    SCHEMA_WITH_MATCHING_WAVEFORM,
 )
 from scripts.verify_audio_local_timing_export import decode
 from scripts.verify_stereo_reference import RATE, SIDES, digest, require, verify_clip, waveform
@@ -33,7 +34,9 @@ def verify_export(earlier, submitted, export):
     package = json.loads(export.read_bytes())
     record, assets = package["comparison"], package["assets"]
     result = record["clean_speech"]
-    schema = record["comparison_schema"] if record["schema"] == SCHEMA_WITH_ALIGNED_SPEECH else record["schema"]
+    schema = record["schema"]
+    if schema in {SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM}:
+        schema = record["comparison_schema"]
     long = schema == LONG_SCHEMA
     dense = schema == SCHEMA_WITH_DENSE_CLEAN_SPEECH
     with_support = schema == SCHEMA_WITH_CLEAN_SPEECH_SUPPORT

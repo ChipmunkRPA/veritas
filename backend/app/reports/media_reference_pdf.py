@@ -17,6 +17,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
     SCHEMA_WITH_LOCAL_TIMING,
     SCHEMA_WITH_LONG_CLEAN_SPEECH,
+    SCHEMA_WITH_MATCHING_WAVEFORM,
     SCHEMA_WITH_STEREO,
     SCHEMA_WITH_TRIM_ALIGNMENT,
     SCHEMA_WITH_TRIM_AND_LEVEL,
@@ -146,11 +147,13 @@ def _audio_summary(document, record):
         _text(page, MARGIN, y, label, font="hebo")
         _text(page, MARGIN, y + 20, f"SHA-256 {record[side]['sha256']}", size=9, font="cour", color=MUTED)
     if record["status"] != "measured":
-        separate = record["schema"] in {SCHEMA_WITH_AAC_TIMING, SCHEMA_WITH_ALIGNED_SPEECH}
+        separate = record["schema"] in {SCHEMA_WITH_AAC_TIMING, SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM}
         title = "Decoded sample comparison unavailable" if separate else "Comparison unassessed"
         _text(page, MARGIN, 346, title, size=16, font="hebo")
         _text(page, MARGIN, 370, AUDIO_ONLY_STATUS[record["status"]])
-        if record.get("aligned_speech"):
+        if record.get("matching_waveform"):
+            _text(page, MARGIN, 397, "The speech waveform comparison appears on a separate page.", size=10, color=MUTED)
+        elif record.get("aligned_speech"):
             _text(page, MARGIN, 397, "The aligned speech result appears on a separate page.", size=10, color=MUTED)
         elif record["schema"] == SCHEMA_WITH_AAC_TIMING:
             _text(page, MARGIN, 397, "The local timing result appears on a separate page.", size=10, color=MUTED)
@@ -468,6 +471,28 @@ def _aligned_speech_page(document, result):
           f"after {values['after']:.3f}.", size=10)
     _text(page, MARGIN, 268, f"Each surrounding section lasts {span['flank_duration_ms']} ms. Larger values mean less similar sound.",
           size=9, color=MUTED)
+    _audio_pair_waveforms(page, span)
+
+
+def _matching_waveform_page(document, result):
+    page = _page(document, "Matching speech waveform")
+    page.insert_textbox((MARGIN, 125, RIGHT, 173), result["summary"], fontsize=12, fontname="hebo", color=INK)
+    page.insert_textbox((MARGIN, 178, RIGHT, 242), result["scope"], fontsize=11, fontname="helv", color=MUTED)
+    span = result.get("range")
+    if not span:
+        return
+    values = span["flank_offsets_samples"]
+    before, after = (values[side] * 1000 / AUDIO_RATE for side in ("before", "after"))
+    support = span["supporting_windows"]
+    _text(page, MARGIN, 251, f"Analyzed minus earlier timing offset  {before:+.1f} ms before and {after:+.1f} ms after.", size=10)
+    _text(page, MARGIN, 268, f"During the interval the match was {span['matching_share']:.0%} of the weaker surrounding match.",
+          size=10)
+    _text(page, MARGIN, 285, f"{support['before']} matching windows before, {support['during']} measured inside, "
+          f"{support['after']} matching after.", size=9, color=MUTED)
+    _audio_pair_waveforms(page, span)
+
+
+def _audio_pair_waveforms(page, span):
     maximum = max(.01, *(abs(level) for side in LABELS for field in ("low", "high") for level in span[side]["waveform"][field]))
     for y, side, label in ((385, "earlier", "Earlier recording"), (559, "submitted", "Analyzed recording")):
         clip = span[side]
@@ -608,7 +633,7 @@ def render(record, assets):
                                         SCHEMA_WITH_CHANNEL_TIMING, SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH,
                                         SCHEMA_WITH_AAC_TIMING, SCHEMA_WITH_DENSE_CLEAN_SPEECH,
                                         SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD, SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
-                                        SCHEMA_WITH_ALIGNED_SPEECH)
+                                        SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
         adjusted = record.get("level_adjusted")
         trimmed = is_audio and "trim_alignment" in record.get("audio", {})
@@ -621,6 +646,8 @@ def render(record, assets):
             _level_adjusted_pages(document, adjusted)
         if aligned_speech := record.get("aligned_speech"):
             _aligned_speech_page(document, aligned_speech)
+        if matching_waveform := record.get("matching_waveform"):
+            _matching_waveform_page(document, matching_waveform)
         if "clean_speech" in record:
             _clean_speech_page(document, record["clean_speech"])
         remaining = []

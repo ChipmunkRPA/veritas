@@ -426,13 +426,13 @@ it.each([8, 11, 12, 13])('shows both source excerpts for local speech comparison
   expect(screen.getByRole('button', { name: 'Download JSON evidence' })).toBeTruthy()
 })
 
-it('shows aligned excerpts on two independent recording clocks and retains the decoded comparison', async () => {
+it.each([14, 15])('shows audio excerpts on two recording clocks for comparison version %s', async (version) => {
   const waveform = { low: [-.4], high: [.2] }
   const excerpt = (file: string, start_s: number, end_s: number) => ({
     start_s, end_s, waveform, audio: { file, media_type: 'audio/wav', sha256: 'c'.repeat(64) },
   })
   const comparison = {
-    schema: 'chipmunk.audio-reference-comparison/14',
+    schema: `chipmunk.audio-reference-comparison/${version}`,
     comparison_schema: 'chipmunk.audio-reference-comparison/1',
     status: 'audio_timelines_differ',
     interpretation: 'Decoded samples use different clocks.',
@@ -446,6 +446,18 @@ it('shows aligned excerpts on two independent recording clocks and retains the d
         flank_duration_ms: 400,
       },
     },
+    ...(version === 15 ? {
+      matching_waveform: {
+        status: 'localized_difference', summary: 'The matching speech shifts in time across this interval.',
+        scope: 'This check contributes zero weight to the AI assessment.',
+        range: {
+          earlier: excerpt('earlier.wav', 2.340, 3.020),
+          submitted: excerpt('submitted.wav', 2.340, 3.120),
+          matching_share: .09, flank_offsets_samples: { before: 0, after: 1600 },
+          supporting_windows: { before: 5, during: 9, after: 4 },
+        },
+      },
+    } : {}),
   }
   const fetch = vi.fn().mockResolvedValueOnce(Response.json({
     available: true, clean_speech_available: true, aligned_speech_available: true,
@@ -462,6 +474,13 @@ it('shows aligned excerpts on two independent recording clocks and retains the d
   expect(region.getByText('Analyzed recording · 2.400–3.120 s')).toBeTruthy()
   expect(region.getByText(/before 0.258, during 2.689, after 0.699/)).toBeTruthy()
   expect(region.getAllByRole('img', { name: /aligned speech excerpt waveform/ })).toHaveLength(2)
+  if (version === 15) {
+    const matching = within(screen.getByRole('region', { name: 'Matching speech waveform' }))
+    expect(matching.getByText('Analyzed recording · 2.340–3.120 s')).toBeTruthy()
+    expect(matching.getByText(/\+0 ms before and \+100 ms after/)).toBeTruthy()
+    expect(matching.getByText(/9% of the weaker surrounding match/)).toBeTruthy()
+    expect(matching.getAllByRole('img', { name: /matching waveform excerpt waveform/ })).toHaveLength(2)
+  }
   expect(screen.getByText(/Decoded sample comparison unavailable/)).toBeTruthy()
   expect((fetch.mock.calls[1][1].body as FormData).get('earlier_has_clean_speech')).toBe('true')
   expect(screen.getByRole('button', { name: 'Download PDF' })).toBeTruthy()

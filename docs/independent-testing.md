@@ -40,6 +40,11 @@ locations, ordinary processing flags and noise-related abstentions.
 The export verifier uses both source files to reproduce the separately
 timed excerpts and waveforms without model weights.
 
+The [noisy speech waveform replay](audio-reference-waveform-2026-11-14.md#local-use-and-replay)
+adds tests for brief timing changes under rain, train noise and other speech.
+It checks both source clocks on the same 468 comparisons and includes 96
+separate background and ordinary processing controls.
+
 The [three-editor PNG replay](image-edge-context-new-sources-2026-11-14.md#replay)
 recounts 156 edited and ordinary files. It can download the exact public
 publisher inputs afresh and verify every changed-pixel mask before model

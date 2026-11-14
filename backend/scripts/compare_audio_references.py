@@ -18,6 +18,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
     SCHEMA_WITH_LOCAL_TIMING,
     SCHEMA_WITH_LONG_CLEAN_SPEECH,
+    SCHEMA_WITH_MATCHING_WAVEFORM,
     SCHEMA_WITH_TRIM_ALIGNMENT,
     SCHEMA_WITH_TRIM_AND_LEVEL,
     compare,
@@ -34,8 +35,9 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False, c
         if not isinstance(record, dict):
             raise ValueError("The comparison record must be a JSON object.")
         schema = record.get("schema")
-        aligned = schema == SCHEMA_WITH_ALIGNED_SPEECH
-        if aligned:
+        waveform = schema == SCHEMA_WITH_MATCHING_WAVEFORM
+        aligned = schema == SCHEMA_WITH_ALIGNED_SPEECH or waveform and "aligned_speech" in record
+        if aligned or waveform:
             schema = record.get("comparison_schema")
         if schema in {SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT, SCHEMA_WITH_TRIM_ALIGNMENT}:
             compare_source = partial(compare, include_level_adjustment=schema != SCHEMA,
@@ -61,8 +63,8 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False, c
                                      use_dense_clean_speech=schema in {SCHEMA_WITH_DENSE_CLEAN_SPEECH, *eq_schemas},
                                      use_clean_speech_eq_guard=schema in eq_schemas,
                                      include_clean_speech_match_support=schema == SCHEMA_WITH_CLEAN_SPEECH_SUPPORT)
-        if aligned:
-            compare_source = partial(compare_source, include_aligned_speech=True)
+        if aligned or waveform:
+            compare_source = partial(compare_source, include_aligned_speech=aligned, include_matching_waveform=waveform)
     return replay(compare_source, earlier, submitted, output, verify=verify)
 
 

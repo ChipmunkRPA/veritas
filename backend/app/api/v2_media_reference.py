@@ -183,6 +183,8 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         use_clean_speech_eq_guard=settings.audio_reference_clean_speech_eq_guard,
                         include_aligned_speech=settings.audio_reference_clean_speech and earlier_has_clean_speech
                         and settings.audio_reference_aligned_speech,
+                        include_matching_waveform=settings.audio_reference_clean_speech and earlier_has_clean_speech
+                        and settings.audio_reference_matching_waveform,
                     )
                 elif timing_event_s is None:
                     record, assets = video_reference.compare(

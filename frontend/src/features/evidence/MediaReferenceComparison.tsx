@@ -101,6 +101,13 @@ type AlignedSpeechComparison = {
     flank_duration_ms: number
   }
 }
+type MatchingWaveformComparison = Omit<AlignedSpeechComparison, 'range'> & {
+  range?: Record<Side, SoundtrackSide> & {
+    matching_share: number
+    flank_offsets_samples: Record<'before' | 'after', number>
+    supporting_windows: Record<'before' | 'during' | 'after', number>
+  }
+}
 type ChannelTimingRange = Omit<SoundtrackTiming, 'scope' | 'range'> & {
   channel: 'left' | 'right'
   range: Record<Side, SoundtrackSide> & { changed_samples: [number, number] }
@@ -168,6 +175,7 @@ type Comparison = {
   local_timing?: never
   clean_speech?: never
   aligned_speech?: never
+  matching_waveform?: never
   channel_timing?: ChannelTiming
   trim_alignment?: PictureTrimAlignment
 } | {
@@ -177,6 +185,7 @@ type Comparison = {
     | 'chipmunk.audio-reference-comparison/10' | 'chipmunk.audio-reference-comparison/11'
     | 'chipmunk.audio-reference-comparison/12'
     | 'chipmunk.audio-reference-comparison/13' | 'chipmunk.audio-reference-comparison/14'
+    | 'chipmunk.audio-reference-comparison/15'
   picture?: never
   picture_insertion?: never
   insertion_retention?: never
@@ -190,6 +199,7 @@ type Comparison = {
   local_timing?: SoundtrackTiming
   clean_speech?: CleanSpeechComparison
   aligned_speech?: AlignedSpeechComparison
+  matching_waveform?: MatchingWaveformComparison
   channel_timing?: ChannelTiming
   trim_alignment?: never
 })
@@ -507,6 +517,17 @@ function AlignedSpeechEvidence({ result, assets }: { result: AlignedSpeechCompar
     audioOnly title="Aligned speech comparison" excerpt="aligned speech excerpt" />
 }
 
+function MatchingWaveformEvidence({ result, assets }: { result: MatchingWaveformComparison; assets: Result['assets'] }) {
+  const span = result.range
+  const offset = (samples: number) => new Intl.NumberFormat('en-US', { signDisplay: 'always', maximumFractionDigits: 1 })
+    .format(samples * 1000 / trimSampleRate)
+  const waveformNote = span
+    ? `Analyzed minus earlier timing offset ${offset(span.flank_offsets_samples.before)} ms before and ${offset(span.flank_offsets_samples.after)} ms after. During the interval the match was ${Math.round(span.matching_share * 100)}% of the weaker surrounding match.`
+    : undefined
+  return <SoundtrackTimingEvidence timing={{ ...result, waveform_note: waveformNote }} assets={assets}
+    audioOnly title="Matching speech waveform" excerpt="matching waveform excerpt" />
+}
+
 function InsertionEvidence({ insertion, assets }: { insertion: PictureInsertion; assets: Result['assets'] }) {
   const [low, high] = insertion.plausible_start_frames
   return <section aria-label="Additional pictures" className="space-y-3">
@@ -552,10 +573,12 @@ function ResultView({ result }: { result: Result }) {
     <p className="m-0 text-small text-text-muted">{comparison.interpretation}</p>
     {comparison.status !== 'measured' && <p className="m-0 text-small">
       {(comparison.schema === 'chipmunk.audio-reference-comparison/10' ||
-        comparison.schema === 'chipmunk.audio-reference-comparison/14') && 'Decoded sample comparison unavailable. '}
+        comparison.schema === 'chipmunk.audio-reference-comparison/14' ||
+        comparison.schema === 'chipmunk.audio-reference-comparison/15') && 'Decoded sample comparison unavailable. '}
       {notes[comparison.status] ?? 'The files could not be compared.'}
     </p>}
     {comparison.aligned_speech && <AlignedSpeechEvidence result={comparison.aligned_speech} assets={assets} />}
+    {comparison.matching_waveform && <MatchingWaveformEvidence result={comparison.matching_waveform} assets={assets} />}
     {comparison.clean_speech && <CleanSpeechEvidence result={comparison.clean_speech} assets={assets} />}
     {comparison.picture_insertion && <InsertionEvidence insertion={comparison.picture_insertion} assets={assets} />}
     {comparison.picture_insertion && comparison.insertion_retention && <p className="m-0 text-caption text-text-muted">
@@ -756,7 +779,8 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       const recovered = versionedSchema === 'chipmunk.video-reference-comparison/16'
       const hasCoverage = recovered || versionedSchema === 'chipmunk.video-reference-comparison/15'
       const hasSpeechAlignment = versionedSchema === 'chipmunk.audio-reference-comparison/14'
-      const schema = hasCoverage || hasSpeechAlignment ? response.comparison.comparison_schema : versionedSchema
+      const hasWaveform = versionedSchema === 'chipmunk.audio-reference-comparison/15'
+      const schema = hasCoverage || hasSpeechAlignment || hasWaveform ? response.comparison.comparison_schema : versionedSchema
       const accepted = kind === 'video' && !hasCoverage ? 14 : 13
       if (!Array.from({ length: accepted }, (_, index) => index + 1).some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
@@ -767,6 +791,10 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       const aligned = response.comparison.aligned_speech
       if (hasSpeechAlignment && (!aligned || (aligned.status === 'localized_difference') !== !!aligned.range)) {
         throw new Error('The comparison response is missing its aligned speech evidence.')
+      }
+      const matching = response.comparison.matching_waveform
+      if (hasWaveform && (!matching || (matching.status === 'localized_difference') !== !!matching.range)) {
+        throw new Error('The comparison response is missing its matching waveform evidence.')
       }
       if (schema === 'chipmunk.audio-reference-comparison/6' && !response.comparison.local_timing) {
         throw new Error('The comparison response is missing its local audio timing result.')

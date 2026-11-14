@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Progressive JPEG regional evidence](image-regional-progressive-jpeg-2026-11-13.md)
+  adds support for standard quality-75 progressive files in the existing
+  development profile. All 90 matched decodes and six paired regional runs
+  agreed exactly with baseline JPEG. A separate known insertion reproduced its
+  crop, mask and signed report through simulated checkout.
 - New analyses apply an English-language coverage check before statistical
   writing models run. Clearly unsupported, detected mixed, or uncertain
   language yields an unassessed authorship result. Purchase disclosures
@@ -93,6 +98,9 @@ are not public screening promises or calibrated population probabilities.
 - [Grammatical attachment changes](writing-dependency-transfer-2026-11-13.md)
   added zero locations on 40 held sentence edits. A part-of-speech comparison added
   one location and one false alert. Both remain experimental.
+- [Typed contextual sentence review](writing-typed-decision-transfer-2026-11-13.md)
+  increased useful locations from 10 to 13 across 40 held English edits and
+  untouched highlights from 11 to 12 of 20. It remains experimental.
 - [Short H.264 face localization](video-brief-face-avc-clock-confirmation-2026-11-13.md)
   increased correct ranges from nine to ten on 16 edited deliveries from eight
   source groups. Neither route flagged any of the 40 ordinary clips. The additional

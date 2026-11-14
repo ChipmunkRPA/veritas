@@ -1015,7 +1015,7 @@ detectors:
 
   - id: loc.native_regional
     adapter: app.detectors.image.adapters.regional:RegionalDetector
-    version: 0.1.0
+    version: 0.1.1
     name: Sensitive regional screening
     modality: image
     family: localiser
@@ -1027,14 +1027,14 @@ detectors:
     calibration: {method: none}
     known_limitations:
       - "Regional editing cues, not AI-specific attribution; ordinary edits and untouched photographs can trigger highlights. Unmarked pixels are not confirmed original."
-      - "Upright RGB PNG inputs at least 64 px each side and an optional development-only baseline JPEG profile. 1024 canvas, preserved aspect, top-left source, padding excluded. Other JPEG profiles and other devices/dtypes are outside this check."
+      - "Upright RGB PNG inputs at least 64 px each side and an optional development-only JPEG profile. 1024 canvas, preserved aspect, top-left source, padding excluded. Other JPEG profiles and other devices/dtypes are outside this check."
       - "The selected native gate is a response-area rule, not public confidence or a screening accuracy claim. Zero whole-file authorship-confidence weight."
     source_url: https://github.com/WenOOI/RelayFormer/tree/23c973fc956195537d85148d124d6a146243f6c9
     threat: [partial_edit]
     lane: partial_edit
     training_data: "Pinned released base plus local adaptation on 213 source-paired images in 168 creator/duplicate groups. Source rights/unknown aliases/pretraining overlap limits documented in v26/v41 studies; local weights not redistributed."
     coverage_date: "November 2026 local same-editing-family confirmation and serving parity"
-    input_constraints: ["Upright RGB PNG, minimum side 64 px, or optional upright RGB baseline IJG quality-75 4:2:0 JPEG, long side 768 px and short side at least 512 px. CPU float32 with two CPU threads, one source per call."]
+    input_constraints: ["Upright RGB PNG, minimum side 64 px, or optional upright RGB baseline or single-frame progressive IJG quality-75 4:2:0 JPEG with fixed quantization tables, long side 768 px and short side at least 512 px. CPU float32 with two CPU threads, one source per call."]
     fp_modes: ["Untouched images, tone/blur processing, ordinary non-AI edits and unfamiliar sources; AI-specificity has not been established"]
     citation: "Native confirmation docs/image-native-confirmation-v46-result.md; engineering parity docs/native-regional-serving-v47-protocol.md."
     admission: {decision: pending, evidence: "45/59 useful edited regions versus 10/59 for old check, with 13/59 versus 3/59 original false flags. Optional local evidence only; product/export/payment-flow verification required before local default."}

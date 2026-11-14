@@ -21,11 +21,12 @@ JPEG_SIGNATURE = b"\xff\xd8"
 
 def evaluated_jpeg(data: bytes) -> bool:
     structure = jpeg_bitstream.read(data)
-    return bool(structure and structure.frame == "baseline" and structure.precision == 8
+    return bool(structure and structure.frame in {"baseline", "progressive"} and structure.precision == 8
                 and max(structure.width, structure.height) == 768 and min(structure.width, structure.height) >= 512
                 and [(c.id, c.h, c.v) for c in structure.components] == [(1, 2, 2), (2, 1, 1), (3, 1, 1)]
                 and all(structure.table_bits.get(c.table_id) == 8 for c in structure.components)
-                and structure.ijg_quality == 75 and structure.table(2) == structure.table(1))
+                and structure.ijg_quality == 75 and structure.table(2) == structure.table(1)
+                and (structure.frame == "baseline" or jpeg_bitstream.progressive_frame(data) is not None))
 
 
 def flip_components(measured, aligned):
@@ -57,7 +58,7 @@ class RegionalDetector(LocaliserDetector):
                  "previous check. Highlights are editing cues; AI authorship remains inconclusive from this check alone. "
                  "Unmarked areas are not confirmed original. The response is not an authorship confidence score.")
     spec = image_spec("loc.native_regional", METHOD, "localiser", InputUnit.IMAGE, (H2,), ("heatmap", "regions"),
-                      model_ids=(MODEL,), devices=("cpu",), lane="cpu", timeout_s=180., version="0.1.0")
+                      model_ids=(MODEL,), devices=("cpu",), lane="cpu", timeout_s=180., version="0.1.1")
 
     def applicable(self, ctx: RunContext) -> Applicability:
         data = original_bytes(ctx)

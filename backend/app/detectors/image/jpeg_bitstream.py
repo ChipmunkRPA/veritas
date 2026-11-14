@@ -8,13 +8,14 @@ file's own (luma and chroma, 8- or 16-bit). Tables are returned in natural (row-
 - `ijg_quality`: the libjpeg quality whose scaled standard luma and chroma tables equal the file's, else None.
 - `fingerprint`: sha256 over the component tables and sampling factors, an in-house key for the I-4 table database. It is
   not ExifTool's JPEGDigest.
-- Not read: tables redefined after the first scan (possible between progressive scans) and anything after the frame
-  header of lossless or hierarchical files.
+- The general structure reader stops before the first scan. The progressive-profile reader below also checks later
+  scan boundaries and refuses table redefinitions and additional frames.
 """
 from __future__ import annotations
 
 import hashlib
 import json
+import re
 from dataclasses import dataclass
 from typing import Any
 
@@ -33,6 +34,7 @@ FRAMES = {0xC0: "baseline", 0xC1: "extended sequential", 0xC2: "progressive", 0x
 STANDALONE = frozenset({0x01, *range(0xD0, 0xD9)})  # TEM, RST0–RST7, SOI: no length field
 SUBSAMPLING = {(1, 1): "4:4:4", (2, 1): "4:2:2", (2, 2): "4:2:0", (4, 1): "4:1:1", (1, 2): "4:4:0", (4, 2): "4:1:0"}
 DQT, SOS, EOI, DRI = 0xDB, 0xDA, 0xD9, 0xDD
+_ENTROPY_MARKER = re.compile(rb"\xff[\x01-\xcf\xd8-\xfe]")
 
 
 class JpegParseError(ValueError):
@@ -116,7 +118,7 @@ def estimate_quality(table: tuple[int, ...] | None, standard: np.ndarray) -> int
     return int(round(max(1, min(100, quality))))
 
 
-def _u16(buf: memoryview, at: int) -> int:
+def _u16(buf: bytes | memoryview, at: int) -> int:
     return int.from_bytes(buf[at:at + 2], "big")
 
 
@@ -189,3 +191,43 @@ def read(data: bytes | memoryview) -> JpegStructure | None:
         return parse(data)
     except JpegParseError:
         return None
+
+
+def progressive_frame(data: bytes) -> tuple[JpegStructure, int] | None:
+    """Read a single progressive frame with fixed tables across the scan sequence."""
+    frame = read(data)
+    if frame is None or frame.frame != "progressive":
+        return None
+    pos, frames, scans, in_scan = 2, 0, 0, False
+    while pos < len(data):
+        if in_scan:
+            marker_at = _ENTROPY_MARKER.search(data, pos)
+            if marker_at is None:
+                return None
+            pos = marker_at.start()
+            in_scan = False
+        if data[pos] != 0xFF:
+            return None
+        while pos < len(data) and data[pos] == 0xFF:
+            pos += 1
+        if pos >= len(data):
+            return None
+        marker = data[pos]
+        pos += 1
+        if marker == EOI:
+            return (frame, scans) if frames == 1 and scans >= 2 and pos == len(data) else None
+        if marker in STANDALONE or (scans and (marker == DQT or marker in FRAMES)):
+            return None
+        if pos + 2 > len(data) or (size := _u16(data, pos)) < 2 or pos + size > len(data):
+            return None
+        if marker in FRAMES:
+            frames += 1
+            if frames != 1:
+                return None
+        if marker == SOS:
+            scans += 1
+            if scans > 16:
+                return None
+            in_scan = True
+        pos += size
+    return None

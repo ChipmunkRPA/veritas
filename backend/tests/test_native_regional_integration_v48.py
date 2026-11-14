@@ -99,7 +99,9 @@ def test_png_scope_size_and_empty_result_never_assert_original(context, monkeypa
     (75, "4:2:0", (769, 512), 1, False, False),
     (75, "4:2:0", (768, 511), 1, False, False),
     (75, "4:2:0", (768, 512), 6, False, False),
-    (75, "4:2:0", (768, 512), 1, True, False),
+    (75, "4:2:0", (768, 512), 1, True, True),
+    (90, "4:2:0", (768, 512), 1, True, False),
+    (75, "4:4:4", (768, 512), 1, True, False),
 ])
 def test_jpeg_scope_requires_opt_in_and_evaluated_encoding(monkeypatch, quality, sampling, size, orientation,
                                                          progressive, supported):
@@ -123,6 +125,30 @@ def test_jpeg_scope_requires_opt_in_and_evaluated_encoding(monkeypatch, quality,
     monkeypatch.setattr(settings, "image_region_mode", "candidate")
     monkeypatch.setattr(settings, "environment", "prod")
     assert not detector.applicable(ctx).ok
+
+
+def test_progressive_jpeg_rejects_truncated_scans_and_table_changes():
+    from app.detectors.image import jpeg_bitstream
+    from app.detectors.image.adapters.regional import evaluated_jpeg
+
+    stream = io.BytesIO()
+    Image.new("RGB", (768, 512), (90, 100, 110)).save(stream, "JPEG", quality=75, subsampling=2, progressive=True)
+    original = stream.getvalue()
+    first_table = original.index(b"\xff\xdb")
+    table_bytes = 2 + int.from_bytes(original[first_table + 2:first_table + 4])
+    injected = original[:-2] + original[first_table:first_table + table_bytes] + original[-2:]
+    frame_at = original.index(b"\xff\xc2")
+    frame_size = 2 + int.from_bytes(original[frame_at + 2:frame_at + 4])
+    repeated_frame = original[:frame_at] + original[frame_at:frame_at + frame_size] + original[frame_at:]
+    filled_end = original[:-2] + b"\xff" + original[-2:]
+    assert jpeg_bitstream.read(injected).ijg_quality == 75
+    assert jpeg_bitstream.progressive_frame(original)[1] == 10
+    assert evaluated_jpeg(original)
+    assert evaluated_jpeg(filled_end)
+    assert not evaluated_jpeg(injected)
+    assert not evaluated_jpeg(repeated_frame)
+    assert not evaluated_jpeg(original[:-2])
+    assert not evaluated_jpeg(original + b"second frame")
 
 
 def test_jpeg_scope_rejects_distinct_third_component_quantization():

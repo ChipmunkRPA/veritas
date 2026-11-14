@@ -1,0 +1,41 @@
+{
+  "audio_sample_range": [
+    44800,
+    51200
+  ],
+  "audio_source_pts": [
+    52800,
+    59200
+  ],
+  "audio_source_time_base": "1/16000",
+  "audio_start_relative_to_picture_ms": 500,
+  "browser": {
+    "audio_ready": true,
+    "page_errors": 0,
+    "source_clock_legend_visible": true,
+    "waveform_rendered": true
+  },
+  "checked_sample_count": 6400,
+  "json_export_evidence_parity": true,
+  "package_archive_parity": true,
+  "payment": {
+    "fulfilled_job_count": 1,
+    "simulated_webhook_duplicate_checked": true,
+    "unpaid_job_count": 0
+  },
+  "public_model_name_scan_passed": true,
+  "scope": "One local +500 ms clock replay using archived HD test pictures and a synthetic periodic diagnostic tone. This checks evidence correspondence, with zero overall confidence weight.",
+  "signed_source_replay_verified": true,
+  "source_picture_range_s": [
+    3.3,
+    3.7
+  ],
+  "standard_pdf_verified_images": 7,
+  "verified_source_frames": [
+    98,
+    105,
+    111
+  ],
+  "wav_matches_original_samples": true,
+  "waveform_time_axis": "source_pts"
+}

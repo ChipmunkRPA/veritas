@@ -33,17 +33,27 @@ from app.storage.db import Analysis, BillingOrderRow, DetectorRun, ReportRow
 
 
 @pytest.mark.slow
-def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(billing, monkeypatch, tmp_path):
+@pytest.mark.parametrize(("input_var", "proof_var", "expected_source", "expected_mask"), [
+    ("CHIPMUNK_REGIONAL_JPEG_FLOW_INPUT", "CHIPMUNK_REGIONAL_JPEG_FLOW_PROOF",
+     "35caa98a2cb4a3cba85c5910b3d11b5cfe6fa211728ecd1a160478f9bafb8df3",
+     "a0394a1a157a0427db88c388aa9aeab9c4f8534dd139f97fefefef171f9b874c"),
+    ("CHIPMUNK_REGIONAL_PROGRESSIVE_FLOW_INPUT", "CHIPMUNK_REGIONAL_PROGRESSIVE_FLOW_PROOF",
+     "8bd8de273e668a77aa63e4caacd7a87374a6801930a2cc38124722fad247ad6b",
+     "a872832fbaf89e4631b0b10bacb3850eb4cafc7f10b55472be574b901a7a9233"),
+], ids=["baseline", "progressive"])
+def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
+    billing, monkeypatch, tmp_path, input_var, proof_var, expected_source, expected_mask,
+):
     import fitz
     import torch
     import uvicorn
 
-    path = os.getenv("CHIPMUNK_REGIONAL_JPEG_FLOW_INPUT")
+    path = os.getenv(input_var)
     if not path:
         pytest.skip("Supply the digest-pinned held JPEG from the retained transfer panel")
     source = Path(path).read_bytes()
     source_hash = hashlib.sha256(source).hexdigest()
-    assert source_hash == "35caa98a2cb4a3cba85c5910b3d11b5cfe6fa211728ecd1a160478f9bafb8df3"
+    assert source_hash == expected_source
     f = billing
     for key, value in {"environment": "dev", "device": "cpu", "image_region_mode": "legacy",
                        "image_region_jpeg_review": True, "image_region_flip_review": True,
@@ -125,8 +135,7 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(billing, mon
         status, error, result_hash = wait_for(terminal_analysis, lambda row: row[0] in {"done", "failed"}, "JPEG analysis")
         assert status == "done", error
         assert state["forwards"] == 1
-        assert hashlib.sha256(state["source_mask"].tobytes()).hexdigest() == (
-            "a0394a1a157a0427db88c388aa9aeab9c4f8534dd139f97fefefef171f9b874c")
+        assert hashlib.sha256(state["source_mask"].tobytes()).hexdigest() == expected_mask
         result = json.loads(f.store.read_bytes(result_hash))
         with f.sessions() as db:
             run = db.query(DetectorRun).filter_by(analysis_id=aid, detector_id="loc.native_regional").one()
@@ -200,7 +209,7 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(billing, mon
         finally:
             server.should_exit = True
             thread.join(timeout=15)
-        proof = os.getenv("CHIPMUNK_REGIONAL_JPEG_FLOW_PROOF")
+        proof = os.getenv(proof_var)
         if proof:
             with Path(proof).open("x") as output:
                 json.dump({"source_sha256": source_hash, "simulated_stripe_only": True, "price_usd_minor": 999,

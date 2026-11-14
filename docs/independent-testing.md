@@ -125,6 +125,10 @@ using `--compare`. The container used the committed readers and ledgers through
 a read-only mount with networking disabled. It lacked Git, so the receipt
 identifies those exact inputs by hash. All four outputs matched the macOS run.
 
+The [progressive JPEG replay](image-regional-progressive-jpeg-2026-11-13.md#replay)
+checks exact decoded-image and mask parity for a lossless carrier change. Its
+ledger covers 90 image pairs and six paired model runs.
+
 ### Replay delivery and earlier-copy comparisons
 
 Recount the [two JPEG90 delivery histories](image-regional-jpeg90-carrier-2026-11-13.md),

@@ -28,6 +28,7 @@ SCHEMA_WITH_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/8"
 SCHEMA_WITH_LONG_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/9"
 SCHEMA_WITH_AAC_TIMING = "chipmunk.audio-reference-comparison/10"
 SCHEMA_WITH_DENSE_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/11"
+SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD = "chipmunk.audio-reference-comparison/12"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_SECONDS = 30
 MAX_PRESENTED_RANGES = 3
@@ -86,6 +87,10 @@ CLEAN_SPEECH_SCOPE = (
 DENSE_CLEAN_SPEECH_SCOPE = (
     "This check looks for a 960 ms drop in sound shared with the clean earlier recording, relative to both sides. "
     "Ordinary edits, level changes and overlapping sound can produce a finding. It carries zero weight in the AI estimate."
+)
+CLEAN_SPEECH_EQ_GUARD_SCOPE = (
+    "This check compares a 960 ms interval with sound on both sides. It measures frequency balance in three two-second "
+    "sections. A consistent change can be explained by equalization. The result carries zero weight in the AI estimate."
 )
 CLEAN_SPEECH_SUMMARY = {
     "native_format_required": "Both files need continuous 16 kHz mono 16-bit WAV or FLAC audio.",
@@ -477,13 +482,14 @@ def _local_timing(decoded, audio, assets, *, aac_tracks=None):
     }
 
 
-def _clean_speech(decoded, assets, *, allow_long, use_dense):
+def _clean_speech(decoded, assets, *, allow_long, use_dense, use_eq_guard):
     from app.evidence import audio_clean_speech, audio_clean_speech_dense, audio_clean_speech_long
 
     tracks = tuple(source[0] for source in decoded)
     counts = [track[2]["samples"] if track[2] is not None else None for track in tracks]
     long = allow_long and counts == [audio_clean_speech_long.SAMPLES] * 2
     dense = False
+    eq_guard = False
     profile = None
     if not all(track[0] == "measured" and source[4] for track, source in zip(tracks, decoded, strict=True)):
         reason, span = "native_format_required", None
@@ -497,10 +503,14 @@ def _clean_speech(decoded, assets, *, allow_long, use_dense):
         samples = ((track[1] * 32768).astype("<i2") for track in tracks)
         dense = use_dense
         method = audio_clean_speech_dense if dense else audio_clean_speech
-        reason, span = method.locate(*samples)
+        eq_guard = dense and use_eq_guard
+        if eq_guard:
+            reason, span, profile = audio_clean_speech_dense.locate_with_frequency_balance(*samples)
+        else:
+            reason, span = method.locate(*samples)
     statuses = {"local_change": "localized_difference", "no_local_change": "no_local_difference"}
     statuses.update(consistent_frequency_balance_change="broad_processing_difference", no_corroborated_local_change="no_local_difference")
-    summary = LONG_CLEAN_SPEECH_SUMMARY if allow_long else CLEAN_SPEECH_SUMMARY
+    summary = LONG_CLEAN_SPEECH_SUMMARY if allow_long or eq_guard else CLEAN_SPEECH_SUMMARY
     scope = LONG_CLEAN_SPEECH_SCOPE if long else CLEAN_SPEECH_SCOPE
     if reason == "common_clock_required":
         scope = LONG_CLEAN_SPEECH_CLOCK_SCOPE
@@ -511,6 +521,8 @@ def _clean_speech(decoded, assets, *, allow_long, use_dense):
         result["sample_count"] = audio_clean_speech_long.SAMPLES
     if dense:
         result.update(basis=audio_clean_speech_dense.BASIS, scope=DENSE_CLEAN_SPEECH_SCOPE)
+    if eq_guard:
+        result.update(basis=audio_clean_speech_dense.EQ_GUARD_BASIS, scope=CLEAN_SPEECH_EQ_GUARD_SCOPE)
     if profile is not None:
         result["frequency_balance"] = profile
     if span is not None:
@@ -519,6 +531,8 @@ def _clean_speech(decoded, assets, *, allow_long, use_dense):
                     for side, track in zip(("earlier", "submitted"), tracks, strict=True)}
         result["range"] = span | excerpts | {"support_sha256": canonical_hash(span)}
     extended = long or reason == "common_clock_required"
+    if eq_guard:
+        return SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD, result
     if dense:
         return SCHEMA_WITH_DENSE_CLEAN_SPEECH, result
     return SCHEMA_WITH_LONG_CLEAN_SPEECH if extended else SCHEMA_WITH_CLEAN_SPEECH, result
@@ -534,6 +548,7 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             include_clean_speech: bool = False,
             allow_long_clean_speech: bool = True,
             use_dense_clean_speech: bool = False,
+            use_clean_speech_eq_guard: bool = False,
             include_aac_timing: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Compare continuous recordings and recover a small, exactly supported edge trim."""
     paths = earlier, submitted
@@ -579,7 +594,7 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
                 record.update(schema=SCHEMA_WITH_CHANNEL_TIMING, channel_timing=timing)
     if include_clean_speech:
         schema, speech = _clean_speech((first, second), assets, allow_long=allow_long_clean_speech,
-                                       use_dense=use_dense_clean_speech)
+                                       use_dense=use_dense_clean_speech, use_eq_guard=use_clean_speech_eq_guard)
         record.update(schema=schema, clean_speech=speech)
     if aac_tracks:
         record["schema"] = SCHEMA_WITH_AAC_TIMING

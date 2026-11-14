@@ -1951,6 +1951,12 @@ The [speech activity comparison](audio-continuous-activity-2026-11-14.md#replay)
 recounts skipped and recovered windows and shows how to verify the
 speech counts in a signed customer export.
 
+The [earlier-copy frequency comparison](audio-reference-variable-window-2026-11-14.md#local-use-and-replay)
+includes a portable count review and an original-sample replay across
+824 pairs. It compares shorter time windows separately from the check
+for broad filtering and shows how to verify the three measured time
+sections in a downloaded JSON comparison.
+
 ### Review recent stereo and face evidence
 
 The [opposite-side face trial](video-face-opposite-pane-2026-11-14.md)

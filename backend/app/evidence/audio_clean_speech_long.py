@@ -47,12 +47,12 @@ def _band_gain(x, y, mask):
     return float(np.dot(weights, np.sum(np.real(np.conj(x) * y), axis=1)) / max(1e-6, np.dot(weights, power)))
 
 
-def _profile(first, second):
+def _profile(first, second, section_samples):
     frequencies = np.fft.rfftfreq(FFT, 1 / RATE)
     masks = [(frequencies >= low) & (frequencies < high) for low, high in BANDS]
     vectors = []
-    for offset in (0, 4 * RATE, 8 * RATE):
-        end = offset + 4 * RATE
+    for offset in range(0, 3 * section_samples, section_samples):
+        end = offset + section_samples
         x, y = (_spectra(signal[offset:end]) for signal in (first, second))
         gains = np.array([_band_gain(x, y, mask) for mask in masks])
         if min(gains[:2]) <= .25:
@@ -62,11 +62,11 @@ def _profile(first, second):
     return vectors
 
 
-def _eq_explanation(first, second):
-    vectors = _profile(first, second)
+def frequency_balance(first, second, *, section_samples=4 * RATE):
+    vectors = _profile(first, second, section_samples)
     earlier, middle, later = vectors
     if earlier is None or later is None:
-        return False, vectors
+        return False, None
     typical = np.median([row for row in vectors if row is not None], axis=0)
     # The tilt must have the same sign and approximately the same shape across the file.
     tilt = typical[-1] - typical[0]
@@ -76,7 +76,12 @@ def _eq_explanation(first, second):
     if middle is not None:
         consistent &= (direction * (middle[-1] - middle[0]) >= .15
                        and float(np.median(abs(middle - typical))) <= .22)
-    return bool(consistent and abs(tilt) >= .35 and direction * (typical[-1] - typical[2]) >= .18), vectors
+    explained = bool(consistent and abs(tilt) >= .35 and direction * (typical[-1] - typical[2]) >= .18)
+    if not explained:
+        return False, None
+    trace = {"bands_hz": [list(band) for band in BANDS], "section_start_samples": [0, section_samples, 2 * section_samples],
+             "relative_gains": [None if p is None else [round(float(v), 8) for v in p] for p in vectors]}
+    return True, trace
 
 
 def locate(earlier, submitted):
@@ -84,10 +89,8 @@ def locate(earlier, submitted):
     observation = _compare_windows(earlier, submitted)
     if not observation["admitted"]:
         return "reference_match_not_supported", None, None
-    explained, profiles = _eq_explanation(earlier, submitted)
+    explained, trace = frequency_balance(earlier, submitted)
     if explained:
-        trace = {"bands_hz": [list(band) for band in BANDS], "section_start_samples": [0, 4 * RATE, 8 * RATE],
-                 "relative_gains": [None if p is None else [round(float(v), 8) for v in p] for p in profiles]}
         return "consistent_frequency_balance_change", None, trace
     if (span := observation["corroborated"]) is not None:
         return "local_change", span, None

@@ -71,7 +71,12 @@ type CleanSpeechComparison = {
   scope: string
   status: 'localized_difference' | 'no_local_difference' | 'unassessed' | 'broad_processing_difference'
   reason: string
-  basis?: 'dense_clean_reference_v1'
+  basis?: 'dense_clean_reference_v1' | 'dense_clean_reference_frequency_balance_v1'
+  frequency_balance?: {
+    bands_hz: [number, number][]
+    section_start_samples: number[]
+    relative_gains: (number[] | null)[]
+  }
   range?: Record<Side, SoundtrackSide & { source_pts: [number, number] }> & {
     bands: { band_hz: [number, number]; before: number; within: number; after: number }[]
     relative_drop: number
@@ -148,6 +153,7 @@ type Comparison = {
     | 'chipmunk.audio-reference-comparison/4' | 'chipmunk.audio-reference-comparison/5' | 'chipmunk.audio-reference-comparison/6'
     | 'chipmunk.audio-reference-comparison/7' | 'chipmunk.audio-reference-comparison/8' | 'chipmunk.audio-reference-comparison/9'
     | 'chipmunk.audio-reference-comparison/10' | 'chipmunk.audio-reference-comparison/11'
+    | 'chipmunk.audio-reference-comparison/12'
   picture?: never
   picture_insertion?: never
   insertion_retention?: never
@@ -620,6 +626,7 @@ function SecondSoundtrack({ result, assets }: { result: AdditionalSoundtrack; as
 
 function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison; assets: Result['assets'] }) {
   const span = result.range
+  const balance = result.frequency_balance
   return <div className="space-y-2 rounded-md border border-border p-3">
     <SoundtrackTimingEvidence timing={result} assets={assets} audioOnly title="Local speech comparison" />
     {span
@@ -630,7 +637,7 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
       Two six-second checks starting at {sourceSeconds.format(span.supporting_window_starts[0] / trimSampleRate)} s and{' '}
       {sourceSeconds.format(span.supporting_window_starts[1] / trimSampleRate)} s agreed.
     </p>}
-    {span && result.basis === 'dense_clean_reference_v1' && <div className="text-caption text-text-muted">
+    {span && result.basis && <div className="text-caption text-text-muted">
       <p className="m-0">Drop in signed matching-sound gain {span.relative_drop.toFixed(3)}.</p>
       <table className="mt-2 text-left">
         <caption className="mb-1 text-left font-medium">Matching sound gain by frequency band</caption>
@@ -640,6 +647,22 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
           <th className="pr-3 font-normal" scope="row">{low}–{high} Hz</th><td>{before.toFixed(3)}</td>
           <td>{within.toFixed(3)}</td><td>{after.toFixed(3)}</td>
         </tr>)}</tbody>
+      </table>
+    </div>}
+    {balance && <div className="overflow-x-auto text-caption text-text-muted">
+      <table className="text-left">
+        <caption className="mb-1 text-left font-medium">Relative gain by frequency across the recording</caption>
+        <thead><tr><th className="pr-3" scope="col">Section</th>
+          {balance.bands_hz.map(([low, high]) => <th className="pr-3" key={low} scope="col">{low}–{high} Hz</th>)}
+        </tr></thead>
+        <tbody>{balance.section_start_samples.map((start, index, starts) => {
+          const duration = starts[1] - starts[0]
+          return <tr key={start}>
+            <th className="pr-3 font-normal" scope="row">{start / trimSampleRate}–{(start + duration) / trimSampleRate} s</th>
+            {balance.relative_gains[index]?.map((value, i) => <td key={balance.bands_hz[i][0]}>{value.toFixed(3)}</td>)
+              ?? <td colSpan={balance.bands_hz.length}>Too little matching sound</td>}
+          </tr>
+        })}</tbody>
       </table>
     </div>}
   </div>
@@ -678,7 +701,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
       if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
@@ -692,12 +715,17 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
         throw new Error('The comparison response is missing its AAC timing evidence.')
       }
       if ((schema === 'chipmunk.audio-reference-comparison/8' || schema === 'chipmunk.audio-reference-comparison/9'
-          || schema === 'chipmunk.audio-reference-comparison/11') && !response.comparison.clean_speech) {
+          || schema === 'chipmunk.audio-reference-comparison/11' || schema === 'chipmunk.audio-reference-comparison/12')
+          && !response.comparison.clean_speech) {
         throw new Error('The comparison response is missing its local speech result.')
       }
       if (schema === 'chipmunk.audio-reference-comparison/11'
           && response.comparison.clean_speech?.basis !== 'dense_clean_reference_v1') {
         throw new Error('The comparison response is missing its local speech measurement method.')
+      }
+      if (schema === 'chipmunk.audio-reference-comparison/12'
+          && response.comparison.clean_speech?.basis !== 'dense_clean_reference_frequency_balance_v1') {
+        throw new Error('The comparison response is missing its frequency-balance measurement method.')
       }
       if ((schema === 'chipmunk.audio-reference-comparison/7' || schema === 'chipmunk.video-reference-comparison/8')
           && !response.comparison.channel_timing) {

@@ -1,0 +1,104 @@
+{
+  "cases": {
+    "eq": {
+      "after": "broad_processing_difference",
+      "before": "localized_difference",
+      "earlier_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "frequency_balance": {
+        "bands_hz": [
+          [
+            300,
+            850
+          ],
+          [
+            850,
+            1450
+          ],
+          [
+            1450,
+            2100
+          ],
+          [
+            2100,
+            2800
+          ],
+          [
+            2800,
+            3700
+          ]
+        ],
+        "relative_gains": [
+          [
+            1.08516937,
+            0.91483063,
+            0.56934897,
+            0.24658797,
+            0.29546305
+          ],
+          [
+            1.0901394,
+            0.9098606,
+            0.75017902,
+            0.27476525,
+            0.39003083
+          ],
+          [
+            1.00752706,
+            0.99247294,
+            0.76849992,
+            0.39579649,
+            0.10381468
+          ]
+        ],
+        "section_start_samples": [
+          0,
+          32000,
+          64000
+        ]
+      },
+      "source_replay": {
+        "excerpts_verified": 0,
+        "reason": "consistent_frequency_balance_change",
+        "status": "broad_processing_difference"
+      },
+      "submitted_sha256": "f6c742e80d445087e5f253075a623635a53c1c3c619aa5c4bac520b423fd80dc",
+      "truth_samples": null
+    },
+    "piper": {
+      "after": "localized_difference",
+      "before": "localized_difference",
+      "earlier_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "frequency_balance": null,
+      "source_replay": {
+        "excerpts_verified": 2,
+        "reason": "local_change",
+        "samples": [
+          44800,
+          60160
+        ],
+        "status": "localized_difference"
+      },
+      "submitted_sha256": "066d26d82a56495d66067c74eb60b50a4e51ed3d90cb04ef7c9d48c6d2b9cbd3",
+      "truth_samples": [
+        45769,
+        61129
+      ]
+    },
+    "untouched": {
+      "after": "no_local_difference",
+      "before": "no_local_difference",
+      "earlier_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "frequency_balance": null,
+      "source_replay": {
+        "excerpts_verified": 0,
+        "reason": "no_local_change",
+        "status": "no_local_difference"
+      },
+      "submitted_sha256": "aa029833c1388e67ca6a676b831be27913dc58d28f5c7b106596ff41d769e0dc",
+      "truth_samples": null
+    }
+  },
+  "overall_assessments_preserved": true,
+  "paid_runs": 3,
+  "unpaid_jobs": 0
+}

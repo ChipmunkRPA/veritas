@@ -810,6 +810,7 @@ def test_clean_speech_lane_api_is_opt_in_and_renders_source_ranges(reference_htt
     monkeypatch.setattr(settings, "audio_reference_clean_speech", True)
     monkeypatch.setattr(settings, "audio_reference_long_clean_speech", False)
     monkeypatch.setattr(settings, "audio_reference_dense_clean_speech", dense)
+    monkeypatch.setattr(settings, "audio_reference_clean_speech_eq_guard", False)
     first, second = (clean_speech_pair[name] for name in ("earlier", "altered"))
     stored = f.store.put_file(second)
     with sessions() as db:

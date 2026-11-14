@@ -7,6 +7,7 @@ import numpy as np
 from app.evidence import audio_clean_speech as earlier
 
 BASIS = "dense_clean_reference_v1"
+EQ_GUARD_BASIS = "dense_clean_reference_frequency_balance_v1"
 WIDTH = 1920
 HOP = 640
 INTERVAL_FRAMES = 24
@@ -78,3 +79,15 @@ def locate(first, second):
     if result["relative_drop"] <= POINT:
         return "no_local_change", None
     return "local_change", result
+
+
+def locate_with_frequency_balance(first, second):
+    from app.evidence.audio_clean_speech_long import frequency_balance
+
+    reason, result = locate(first, second)
+    if reason == "reference_match_not_supported":
+        return reason, result, None
+    explained, profile = frequency_balance(first, second, section_samples=2 * earlier.RATE)
+    if explained:
+        return "consistent_frequency_balance_change", None, profile
+    return reason, result, None

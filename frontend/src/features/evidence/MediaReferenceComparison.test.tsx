@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { cleanup, fireEvent, render, screen } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { afterEach, expect, it, vi } from 'vitest'
 import { saveBlob } from '../../lib/api/reports'
 import MediaReferenceComparison from './MediaReferenceComparison'
@@ -337,14 +337,15 @@ it('shows exact moved sound in the reported stereo channel', async () => {
   expect(screen.queryByRole('region', { name: 'Right channel timing' })).toBeNull()
 })
 
-it.each([false, true])('offers the earlier clean speech check and shows both source excerpts (dense=%s)', async (dense) => {
+it.each([8, 11, 12])('shows both source excerpts for local speech comparison version %s', async (version) => {
+  const dense = version !== 8
   const audio = { file: 'excerpt.wav', media_type: 'audio/wav', sha256: 'c'.repeat(64) }
   const excerpt = { start_s: 2, end_s: dense ? 2.96 : 2.72, source_pts: [32000, dense ? 47360 : 43520],
     audio, waveform: { low: [-.4], high: [.2] } }
   const comparison = {
-    schema: `chipmunk.audio-reference-comparison/${dense ? 11 : 8}`, status: 'measured', interpretation: 'Decoded audio differences.',
+    schema: `chipmunk.audio-reference-comparison/${version}`, status: 'measured', interpretation: 'Decoded audio differences.',
     clean_speech: { status: 'localized_difference', summary: 'Matching sound became weaker.', scope: 'Ordinary edits can cause this.',
-      ...(dense ? { basis: 'dense_clean_reference_v1' } : {}),
+      ...(dense ? { basis: version === 12 ? 'dense_clean_reference_frequency_balance_v1' : 'dense_clean_reference_v1' } : {}),
       range: { earlier: excerpt, submitted: excerpt, relative_drop: .5,
         bands: [[300, 900], [900, 1750]].map(band_hz => ({ band_hz, before: 1, within: .5, after: 1 })) } },
   }
@@ -365,12 +366,18 @@ it.each([false, true])('offers the earlier clean speech check and shows both sou
   expect(screen.getByRole('button', { name: 'Download JSON evidence' })).toBeTruthy()
 })
 
-it('shows an earlier-audio frequency-balance change without a local excerpt', async () => {
+it.each([9, 12])('shows a frequency-balance change without a local excerpt (version %s)', async (version) => {
   const comparison = {
-    schema: 'chipmunk.audio-reference-comparison/9', status: 'measured', interpretation: 'Decoded audio differences.',
+    schema: `chipmunk.audio-reference-comparison/${version}`, status: 'measured', interpretation: 'Decoded audio differences.',
     clean_speech: { status: 'broad_processing_difference', reason: 'consistent_frequency_balance_change',
       summary: 'Equalization can produce this pattern, so no local interval is highlighted.',
-      scope: 'It contributes zero weight to the AI estimate.' },
+      scope: 'It contributes zero weight to the AI estimate.',
+      ...(version === 12 ? {
+        basis: 'dense_clean_reference_frequency_balance_v1',
+        frequency_balance: { bands_hz: [[300, 850]], section_start_samples: [0, 32000, 64000],
+          relative_gains: [[1], null, [.9]] },
+      } : {}),
+    },
   }
   vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(Response.json({ available: true, clean_speech_available: true, long_clean_speech_available: true }))
     .mockResolvedValueOnce(Response.json({ comparison, assets: {}, pdf: 'JVBERi0xLjQK' })))
@@ -381,6 +388,11 @@ it('shows an earlier-audio frequency-balance change without a local excerpt', as
   fireEvent.click(screen.getByRole('button', { name: 'Compare recordings' }))
   expect(await screen.findByText(/Equalization can produce this pattern/)).toBeTruthy()
   expect(screen.queryByRole('img', { name: /matched excerpt waveform/ })).toBeNull()
+  if (version === 12) {
+    const readings = within(screen.getByRole('table', { name: 'Relative gain by frequency across the recording' }))
+    expect(readings.getByText('4–6 s')).toBeTruthy()
+    expect(readings.getByText('Too little matching sound')).toBeTruthy()
+  }
   expect(screen.getByRole('button', { name: 'Download JSON evidence' })).toBeTruthy()
 })
 

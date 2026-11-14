@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Frequency balance in a clean earlier recording pair](audio-reference-variable-window-2026-11-14.md)
+  explains two spurious local flags as broad processing across 448 held
+  ordinary pairs, leaving one flag. It kept the 14 of 16 synthetic speech
+  replacements localized under train noise. Shorter windows and the SINE
+  transfers added no usable localizations.
+
 - [Continuous speech activity under background noise](audio-continuous-activity-2026-11-14.md)
   admitted 36 additional windows on train-masked edits. It located no
   additional edits and added one false range on a genuine recording.

@@ -10,6 +10,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_AAC_TIMING,
     SCHEMA_WITH_CHANNEL_TIMING,
     SCHEMA_WITH_CLEAN_SPEECH,
+    SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD,
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
     SCHEMA_WITH_LOCAL_TIMING,
@@ -392,10 +393,21 @@ def _clean_speech_page(document, result):
         _text(page, MARGIN, 259, "The decoded sample comparison is reported separately.")
         if (balance := result.get("frequency_balance")) is not None:
             _text(page, MARGIN, 290, "Frequency balance across the recording", font="hebo")
-            for y, (start, gains) in enumerate(zip(balance["section_start_samples"], balance["relative_gains"], strict=True), 0):
-                values = "Shared sound was too limited" if gains is None else "   ".join(f"{gain:.3f}" for gain in gains)
-                _text(page, MARGIN, 312 + 19 * y, f"{start / AUDIO_RATE:.0f} to {start / AUDIO_RATE + 4:.0f} s   {values}", size=10)
-            _text(page, MARGIN, 384, "Relative gains by frequency band, from 300 to 3,700 Hz.", size=9, color=MUTED)
+            starts = balance["section_start_samples"]
+            duration = (starts[1] - starts[0]) / AUDIO_RATE
+            columns = [MARGIN + 68 + 82 * i for i in range(len(balance["bands_hz"]))]
+            _text(page, MARGIN, 314, "Section", size=9, font="hebo")
+            for x, (low, high) in zip(columns, balance["bands_hz"], strict=True):
+                _text(page, x, 314, f"{low}-{high} Hz", size=9, font="hebo")
+            for i, (start, gains) in enumerate(zip(starts, balance["relative_gains"], strict=True)):
+                y = 334 + 19 * i
+                _text(page, MARGIN, y, f"{start / AUDIO_RATE:.0f} to {start / AUDIO_RATE + duration:.0f} s", size=10)
+                if gains is None:
+                    _text(page, columns[0], y, "Too little matching sound", size=10, color=MUTED)
+                    continue
+                for x, gain in zip(columns, gains, strict=True):
+                    _text(page, x, y, f"{gain:.3f}", size=10)
+            _text(page, MARGIN, 400, "Gains are relative to the two lowest frequency bands.", size=9, color=MUTED)
         return
     first, end = span["samples"]
     rate = result["sample_rate"]
@@ -416,11 +428,11 @@ def _clean_speech_page(document, result):
         _text(page, MARGIN, y + 53, f"Source ticks [{source_start}, {source_end}) at 16 kHz.", size=9, color=MUTED)
     _text(page, MARGIN, 673, "Waveforms share one scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
     if "basis" in result:
-        _text(page, MARGIN, 694, "Matching sound gain by band  ·  before / within / after", size=9, font="hebo")
+        _text(page, MARGIN, 691, "Matching sound gain by band  ·  before / within / after", size=9, font="hebo")
         for index, band in enumerate(span["bands"]):
             low, high = band["band_hz"]
             gains = "  /  ".join(f"{band[side]:.3f}" for side in ("before", "within", "after"))
-            _text(page, MARGIN, 710 + 13 * index, f"{low}-{high} Hz    {gains}", size=9, color=MUTED)
+            _text(page, MARGIN, 704 + 12 * index, f"{low}-{high} Hz    {gains}", size=9, color=MUTED)
 
 
 def _sound_page(document, span, *, level_adjusted=False, track_title=None):
@@ -551,7 +563,8 @@ def render(record, assets):
         is_audio = record["schema"] in (AUDIO_SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT, SCHEMA_WITH_TRIM_ALIGNMENT,
                                         SCHEMA_WITH_TRIM_AND_LEVEL, SCHEMA_WITH_STEREO, SCHEMA_WITH_LOCAL_TIMING,
                                         SCHEMA_WITH_CHANNEL_TIMING, SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH,
-                                        SCHEMA_WITH_AAC_TIMING, SCHEMA_WITH_DENSE_CLEAN_SPEECH)
+                                        SCHEMA_WITH_AAC_TIMING, SCHEMA_WITH_DENSE_CLEAN_SPEECH,
+                                        SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
         adjusted = record.get("level_adjusted")
         trimmed = is_audio and "trim_alignment" in record.get("audio", {})

@@ -40,6 +40,10 @@ requires the frozen source audio and the retained local checkpoints.
 The [paired voice review](audio-paired-loud-noise-2026-11-13.md#replay)
 recounts 193 decision records, including false flags under competing
 speech, with only the Python standard library.
+The [competing-voice interval replay](audio-competing-speech-localization-2026-11-13.md#reproduce-from-public-source-ranges)
+fetches the exact 128 native excerpts from the publisher and can regenerate
+all of their predicted sample ranges with the pinned local model. The
+standard-library review also verifies the archived false-alarm tradeoff.
 
 The latest single-upload comparisons cover [localized image residuals](image-residual-third-order-transfer-2026-11-13.md),
 [motion around the mouth](video-mouth-motion-transport-2026-11-13.md),

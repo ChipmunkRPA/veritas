@@ -1,0 +1,4376 @@
+{
+  "schema": "chipmunk.audio-locate-competing-speech/1",
+  "freeze": {
+    "schema": "chipmunk.audio-locate-competing-speech/1",
+    "recipe": {
+      "sources": "Eight high-overlap and eight minimal-overlap nonoverlapping 3-second native audio excerpts per fresh AMI meeting, selected on manual words only. Cohorts and annotated participants are disjoint from meetings named in repository evaluation documents at freeze.",
+      "reference": "Gold is at least two distinct speakers with concurrent manually timed word ranges, quantized to 10 ms. High has at least 1.2 s of overlap, minimal has at most 0.1 s. All excerpts contain at least 2.45 s of annotated speech.",
+      "candidate": "Compare a right-padded input and a separately centered, silence-padded input. Their native receptive fields use the same 270-sample grid. Agreement retains only frames whose two-speaker-class flags reproduce in both placements. Require 250 ms of contiguous frames in each arm.",
+      "evidence_gate": "At least half of high excerpts correctly localized in every fresh meeting with no more than one marker on minimal overlap per meeting. Correct localization requires at least 0.30 temporal IoU and 0.50 recall of annotated overlap. Counts are not an AI decision.",
+      "decision_gate": "Replay a separate 93-clip bank with known genuine and generated speech. A marker may withhold a primary AI flag only. Require at least two genuine false flags withheld, at most one synthetic hit withheld and zero clean synthetic losses."
+    },
+    "runner_sha256": "a00a88a24df462118f072ff2a6f0143ccf7d54414671825d55b4ca412d9c8301",
+    "annotations_sha256": "b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d",
+    "earlier_revision": "f5080f4",
+    "earlier_meetings": [
+      "ES2002a",
+      "ES2003c",
+      "ES2004a",
+      "ES2005a",
+      "ES2007c",
+      "ES2008a",
+      "ES2010d",
+      "ES2012b",
+      "ES2013a",
+      "IS1001b",
+      "IS1003a",
+      "IS1004c",
+      "IS1006a",
+      "IS1007a",
+      "IS1009a"
+    ],
+    "cases": [
+      {
+        "id": 0,
+        "room": "ES2006a",
+        "start_sample": 8768000,
+        "annotation": "high",
+        "truth": [
+          [
+            25120,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 1,
+        "room": "ES2006a",
+        "start_sample": 5056000,
+        "annotation": "high",
+        "truth": [
+          [
+            13760,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 2,
+        "room": "ES2006a",
+        "start_sample": 3520000,
+        "annotation": "high",
+        "truth": [
+          [
+            26720,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 3,
+        "room": "ES2006a",
+        "start_sample": 4992000,
+        "annotation": "high",
+        "truth": [
+          [
+            16000,
+            47680
+          ]
+        ]
+      },
+      {
+        "id": 4,
+        "room": "ES2006a",
+        "start_sample": 11264000,
+        "annotation": "high",
+        "truth": [
+          [
+            14400,
+            26400
+          ],
+          [
+            40000,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 5,
+        "room": "ES2006a",
+        "start_sample": 448000,
+        "annotation": "high",
+        "truth": [
+          [
+            26560,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 6,
+        "room": "ES2006a",
+        "start_sample": 6080000,
+        "annotation": "high",
+        "truth": [
+          [
+            14080,
+            40960
+          ]
+        ]
+      },
+      {
+        "id": 7,
+        "room": "ES2006a",
+        "start_sample": 13440000,
+        "annotation": "high",
+        "truth": [
+          [
+            0,
+            8640
+          ],
+          [
+            12960,
+            31680
+          ],
+          [
+            37120,
+            47680
+          ]
+        ]
+      },
+      {
+        "id": 8,
+        "room": "ES2006a",
+        "start_sample": 7744000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 9,
+        "room": "ES2006a",
+        "start_sample": 14144000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 10,
+        "room": "ES2006a",
+        "start_sample": 6400000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 11,
+        "room": "ES2006a",
+        "start_sample": 11712000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 12,
+        "room": "ES2006a",
+        "start_sample": 6784000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 13,
+        "room": "ES2006a",
+        "start_sample": 2688000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 14,
+        "room": "ES2006a",
+        "start_sample": 4800000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 15,
+        "room": "ES2006a",
+        "start_sample": 2432000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 16,
+        "room": "ES2011c",
+        "start_sample": 8128000,
+        "annotation": "high",
+        "truth": [
+          [
+            0,
+            20160
+          ]
+        ]
+      },
+      {
+        "id": 17,
+        "room": "ES2011c",
+        "start_sample": 10496000,
+        "annotation": "high",
+        "truth": [
+          [
+            0,
+            45760
+          ]
+        ]
+      },
+      {
+        "id": 18,
+        "room": "ES2011c",
+        "start_sample": 9216000,
+        "annotation": "high",
+        "truth": [
+          [
+            0,
+            6560
+          ],
+          [
+            16000,
+            24960
+          ],
+          [
+            36480,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 19,
+        "room": "ES2011c",
+        "start_sample": 9024000,
+        "annotation": "high",
+        "truth": [
+          [
+            26560,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 20,
+        "room": "ES2011c",
+        "start_sample": 11840000,
+        "annotation": "high",
+        "truth": [
+          [
+            0,
+            25600
+          ],
+          [
+            28000,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 21,
+        "room": "ES2011c",
+        "start_sample": 9344000,
+        "annotation": "high",
+        "truth": [
+          [
+            800,
+            28320
+          ]
+        ]
+      },
+      {
+        "id": 22,
+        "room": "ES2011c",
+        "start_sample": 12288000,
+        "annotation": "high",
+        "truth": [
+          [
+            0,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 23,
+        "room": "ES2011c",
+        "start_sample": 8064000,
+        "annotation": "high",
+        "truth": [
+          [
+            21600,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 24,
+        "room": "ES2011c",
+        "start_sample": 2880000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 25,
+        "room": "ES2011c",
+        "start_sample": 5376000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 26,
+        "room": "ES2011c",
+        "start_sample": 9536000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 27,
+        "room": "ES2011c",
+        "start_sample": 6464000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 28,
+        "room": "ES2011c",
+        "start_sample": 6016000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 29,
+        "room": "ES2011c",
+        "start_sample": 9408000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 30,
+        "room": "ES2011c",
+        "start_sample": 12928000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 31,
+        "room": "ES2011c",
+        "start_sample": 6848000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 32,
+        "room": "IS1002c",
+        "start_sample": 3200000,
+        "annotation": "high",
+        "truth": [
+          [
+            23680,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 33,
+        "room": "IS1002c",
+        "start_sample": 5504000,
+        "annotation": "high",
+        "truth": [
+          [
+            19200,
+            42240
+          ]
+        ]
+      },
+      {
+        "id": 34,
+        "room": "IS1002c",
+        "start_sample": 11008000,
+        "annotation": "high",
+        "truth": [
+          [
+            20320,
+            36480
+          ],
+          [
+            37440,
+            40640
+          ]
+        ]
+      },
+      {
+        "id": 35,
+        "room": "IS1002c",
+        "start_sample": 13568000,
+        "annotation": "high",
+        "truth": [
+          [
+            0,
+            21920
+          ]
+        ]
+      },
+      {
+        "id": 36,
+        "room": "IS1002c",
+        "start_sample": 960000,
+        "annotation": "high",
+        "truth": [
+          [
+            0,
+            3360
+          ],
+          [
+            28800,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 37,
+        "room": "IS1002c",
+        "start_sample": 3968000,
+        "annotation": "high",
+        "truth": [
+          [
+            0,
+            44960
+          ]
+        ]
+      },
+      {
+        "id": 38,
+        "room": "IS1002c",
+        "start_sample": 1856000,
+        "annotation": "high",
+        "truth": [
+          [
+            7680,
+            31680
+          ],
+          [
+            32320,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 39,
+        "room": "IS1002c",
+        "start_sample": 6528000,
+        "annotation": "high",
+        "truth": [
+          [
+            0,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 40,
+        "room": "IS1002c",
+        "start_sample": 3648000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 41,
+        "room": "IS1002c",
+        "start_sample": 4096000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 42,
+        "room": "IS1002c",
+        "start_sample": 1152000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 43,
+        "room": "IS1002c",
+        "start_sample": 12736000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 44,
+        "room": "IS1002c",
+        "start_sample": 6848000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 45,
+        "room": "IS1002c",
+        "start_sample": 13248000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 46,
+        "room": "IS1002c",
+        "start_sample": 2816000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 47,
+        "room": "IS1002c",
+        "start_sample": 11904000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 48,
+        "room": "IS1008c",
+        "start_sample": 7104000,
+        "annotation": "high",
+        "truth": [
+          [
+            7840,
+            46080
+          ]
+        ]
+      },
+      {
+        "id": 49,
+        "room": "IS1008c",
+        "start_sample": 7744000,
+        "annotation": "high",
+        "truth": [
+          [
+            0,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 50,
+        "room": "IS1008c",
+        "start_sample": 7808000,
+        "annotation": "high",
+        "truth": [
+          [
+            0,
+            34240
+          ]
+        ]
+      },
+      {
+        "id": 51,
+        "room": "IS1008c",
+        "start_sample": 9536000,
+        "annotation": "high",
+        "truth": [
+          [
+            0,
+            25760
+          ]
+        ]
+      },
+      {
+        "id": 52,
+        "room": "IS1008c",
+        "start_sample": 7872000,
+        "annotation": "high",
+        "truth": [
+          [
+            26880,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 53,
+        "room": "IS1008c",
+        "start_sample": 8128000,
+        "annotation": "high",
+        "truth": [
+          [
+            3200,
+            40640
+          ],
+          [
+            46080,
+            48000
+          ]
+        ]
+      },
+      {
+        "id": 54,
+        "room": "IS1008c",
+        "start_sample": 8192000,
+        "annotation": "high",
+        "truth": [
+          [
+            0,
+            11520
+          ],
+          [
+            25440,
+            33440
+          ]
+        ]
+      },
+      {
+        "id": 55,
+        "room": "IS1008c",
+        "start_sample": 4736000,
+        "annotation": "high",
+        "truth": [
+          [
+            0,
+            21920
+          ]
+        ]
+      },
+      {
+        "id": 56,
+        "room": "IS1008c",
+        "start_sample": 6080000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 57,
+        "room": "IS1008c",
+        "start_sample": 4160000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 58,
+        "room": "IS1008c",
+        "start_sample": 13248000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 59,
+        "room": "IS1008c",
+        "start_sample": 6464000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 60,
+        "room": "IS1008c",
+        "start_sample": 11200000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 61,
+        "room": "IS1008c",
+        "start_sample": 4032000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 62,
+        "room": "IS1008c",
+        "start_sample": 10944000,
+        "annotation": "minimal",
+        "truth": []
+      },
+      {
+        "id": 63,
+        "room": "IS1008c",
+        "start_sample": 9344000,
+        "annotation": "minimal",
+        "truth": []
+      }
+    ]
+  },
+  "captures": {
+    "ES2006a": {
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2006a/audio/ES2006a.Array1-01.wav",
+      "bytes": 41098968,
+      "header_sha256": "699158814a82bb58446ea2c11ab6f585d81acbff76d38cde28668ffee136be19",
+      "samples": 20549462
+    },
+    "ES2011c": {
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2011c/audio/ES2011c.Array1-01.wav",
+      "bytes": 51714092,
+      "header_sha256": "e9bf6db25a2ff02558a6550eeefa8b52296f751804d71fe3d06d8ad8ba0cb73e",
+      "samples": 25857024
+    },
+    "IS1002c": {
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/IS1002c/audio/IS1002c.Array1-01.wav",
+      "bytes": 66588777,
+      "header_sha256": "285d0171a658e5819fccd8a0b70788c8412de7db3ed56189a2c7cb6b2d2cbd8d",
+      "samples": 33293653
+    },
+    "IS1008c": {
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/IS1008c/audio/IS1008c.Array1-01.wav",
+      "bytes": 49486609,
+      "header_sha256": "d7bf03f43a8f994a70fdca08f3a42b17be26e1e44aba1d65cbc83769dac68c9e",
+      "samples": 24742570
+    }
+  },
+  "decision_bank_sha256": "fced4a7d3d1a70f983788dc132e89e0801d9e890bdbca965ef9447714190b93c",
+  "checkpoint_sha256": "220ad67ca923bef2fa91f2390c786097bf305bceb5e261d4af67b38e938e1079",
+  "fresh": [
+    {
+      "id": 0,
+      "room": "ES2006a",
+      "start_sample": 8768000,
+      "annotation": "high",
+      "truth": [
+        [
+          25120,
+          48000
+        ]
+      ],
+      "pcm_sha256": "700fbf5aab61da5bd09133eaad889fd341c94ded902684a151f772420d448de5",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 1,
+      "room": "ES2006a",
+      "start_sample": 5056000,
+      "annotation": "high",
+      "truth": [
+        [
+          13760,
+          48000
+        ]
+      ],
+      "pcm_sha256": "1d12a8222ea568482150206c997e4bad56cc8faf70dc8199f7916713d5dd8175",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 2,
+      "room": "ES2006a",
+      "start_sample": 3520000,
+      "annotation": "high",
+      "truth": [
+        [
+          26720,
+          48000
+        ]
+      ],
+      "pcm_sha256": "f6615fb33230605ec6c5a7f9aa3b3f84113500c0b8967decadd26550532e804b",
+      "observations": {
+        "right_padded": [
+          [
+            28710,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            28710,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            28710,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "room": "ES2006a",
+      "start_sample": 4992000,
+      "annotation": "high",
+      "truth": [
+        [
+          16000,
+          47680
+        ]
+      ],
+      "pcm_sha256": "64155dbe964fba916d0bff9194a4ed009ddd084489ecb09fec44b6adc0a170ac",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 4,
+      "room": "ES2006a",
+      "start_sample": 11264000,
+      "annotation": "high",
+      "truth": [
+        [
+          14400,
+          26400
+        ],
+        [
+          40000,
+          48000
+        ]
+      ],
+      "pcm_sha256": "b6eb6f1b7929892018a096737210c6dfbc97fec8a2c1ebc260db73cccd810973",
+      "observations": {
+        "right_padded": [
+          [
+            630,
+            37890
+          ]
+        ],
+        "centered": [
+          [
+            16290,
+            36270
+          ]
+        ],
+        "agreement": [
+          [
+            16290,
+            36270
+          ]
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "room": "ES2006a",
+      "start_sample": 448000,
+      "annotation": "high",
+      "truth": [
+        [
+          26560,
+          48000
+        ]
+      ],
+      "pcm_sha256": "3e8eaf1f80c8ff55f7eeb7aa07a6ac0841186a49bf566c1d99bf5a8a512b2709",
+      "observations": {
+        "right_padded": [
+          [
+            27360,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            34110,
+            43830
+          ]
+        ],
+        "agreement": [
+          [
+            34110,
+            43830
+          ]
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "room": "ES2006a",
+      "start_sample": 6080000,
+      "annotation": "high",
+      "truth": [
+        [
+          14080,
+          40960
+        ]
+      ],
+      "pcm_sha256": "f55b4e4b1ec05ed08d6038ef1c1ccef00b10fb7fe6684f34b799f595c14fa538",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            40320
+          ]
+        ],
+        "centered": [
+          [
+            10080,
+            39780
+          ]
+        ],
+        "agreement": [
+          [
+            10080,
+            39780
+          ]
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "room": "ES2006a",
+      "start_sample": 13440000,
+      "annotation": "high",
+      "truth": [
+        [
+          0,
+          8640
+        ],
+        [
+          12960,
+          31680
+        ],
+        [
+          37120,
+          47680
+        ]
+      ],
+      "pcm_sha256": "be9720f9f03743d2b666b19289931b027b3c3b2647c4b9a39d5a10a2fcb4c0a3",
+      "observations": {
+        "right_padded": [
+          [
+            36540,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            37350,
+            46530
+          ]
+        ],
+        "agreement": [
+          [
+            37350,
+            46530
+          ]
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "room": "ES2006a",
+      "start_sample": 7744000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "b9583f9dbb2fa8e46d487ed2c82dd370ff97daf819d186a63fdde2cc81f95d30",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 9,
+      "room": "ES2006a",
+      "start_sample": 14144000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "580eb68b814cfc9cbfe005104681f6a2f4e0df081826d038cb175fce2ec37577",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 10,
+      "room": "ES2006a",
+      "start_sample": 6400000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "89d96c11fa77a189d76ec4487e2b0a3a87130962040cc355eb1084defb968a81",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 11,
+      "room": "ES2006a",
+      "start_sample": 11712000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "14c5c684a314be1ed2583faa13bed7a4197b938e56627b442c7e86a0f1aba057",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 12,
+      "room": "ES2006a",
+      "start_sample": 6784000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "1df8ec0380a53f5f90ce7b905e6ca67f5a132235934bb8c891f20f3cd338ee3e",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 13,
+      "room": "ES2006a",
+      "start_sample": 2688000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "b53ea4e7a1af2f15a0aec053352102e4dcd75d3ce6b81365a5132083db540a56",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 14,
+      "room": "ES2006a",
+      "start_sample": 4800000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "b7697425588d4fbd814ebdb99f5e928058d776a6555e5f9dd8a127ddfa8e8f30",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 15,
+      "room": "ES2006a",
+      "start_sample": 2432000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "ebf5ba84685952935b9e5442793b5f5b55bcba936a732c5f0af0f3f4bc5dd07d",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 16,
+      "room": "ES2011c",
+      "start_sample": 8128000,
+      "annotation": "high",
+      "truth": [
+        [
+          0,
+          20160
+        ]
+      ],
+      "pcm_sha256": "4828471219a55af6a23585b36cbbb54f7b18661f70823d1460f76f3ace217e4d",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            21420
+          ]
+        ],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 17,
+      "room": "ES2011c",
+      "start_sample": 10496000,
+      "annotation": "high",
+      "truth": [
+        [
+          0,
+          45760
+        ]
+      ],
+      "pcm_sha256": "0525122047a706ff2ab6497c1c6e11db7c9c190aeaad64063bf876aa9efaf0ef",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            44100
+          ]
+        ],
+        "centered": [
+          [
+            8190,
+            42480
+          ]
+        ],
+        "agreement": [
+          [
+            8190,
+            42480
+          ]
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "room": "ES2011c",
+      "start_sample": 9216000,
+      "annotation": "high",
+      "truth": [
+        [
+          0,
+          6560
+        ],
+        [
+          16000,
+          24960
+        ],
+        [
+          36480,
+          48000
+        ]
+      ],
+      "pcm_sha256": "0b9f0c1468274f57175e82bf8e1f00cd21d92bfc8aae730193539a60e0641f4d",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 19,
+      "room": "ES2011c",
+      "start_sample": 9024000,
+      "annotation": "high",
+      "truth": [
+        [
+          26560,
+          48000
+        ]
+      ],
+      "pcm_sha256": "c272772a1a6ae0872afbe8268678aa2f98862dd92896112e4f4c6e16a45e8dbc",
+      "observations": {
+        "right_padded": [
+          [
+            9540,
+            47340
+          ]
+        ],
+        "centered": [
+          [
+            26550,
+            47070
+          ]
+        ],
+        "agreement": [
+          [
+            26550,
+            47070
+          ]
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "room": "ES2011c",
+      "start_sample": 11840000,
+      "annotation": "high",
+      "truth": [
+        [
+          0,
+          25600
+        ],
+        [
+          28000,
+          48000
+        ]
+      ],
+      "pcm_sha256": "a5a2a02ba21f6aaa38231dce1cb80439d7bf07870519540d3f389aedb2532742",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            11700,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            11700,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "room": "ES2011c",
+      "start_sample": 9344000,
+      "annotation": "high",
+      "truth": [
+        [
+          800,
+          28320
+        ]
+      ],
+      "pcm_sha256": "52b6daff42c223b154fbf7d1c7ea981477dce3ca8fcdafe0185ce14e62a5bcc0",
+      "observations": {
+        "right_padded": [
+          [
+            900,
+            23850
+          ]
+        ],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 22,
+      "room": "ES2011c",
+      "start_sample": 12288000,
+      "annotation": "high",
+      "truth": [
+        [
+          0,
+          48000
+        ]
+      ],
+      "pcm_sha256": "ee6bb94d308bf6b03a0db31dec4c3f5261c94da28912d555d76e8adf645f28bc",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            44370
+          ]
+        ],
+        "centered": [
+          [
+            1710,
+            42210
+          ]
+        ],
+        "agreement": [
+          [
+            1710,
+            42210
+          ]
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "room": "ES2011c",
+      "start_sample": 8064000,
+      "annotation": "high",
+      "truth": [
+        [
+          21600,
+          48000
+        ]
+      ],
+      "pcm_sha256": "2ad3849021d0b07f578a1c970accab53baffb387ee298af91a82a18dde221fb7",
+      "observations": {
+        "right_padded": [
+          [
+            21150,
+            37890
+          ]
+        ],
+        "centered": [
+          [
+            20610,
+            39240
+          ]
+        ],
+        "agreement": [
+          [
+            21150,
+            37890
+          ]
+        ]
+      }
+    },
+    {
+      "id": 24,
+      "room": "ES2011c",
+      "start_sample": 2880000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "2f97ad1573c28cabf7e9235e80d3d12c0af5640b1e0c86b7dcf2178012734ed4",
+      "observations": {
+        "right_padded": [
+          [
+            26010,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            26010,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            26010,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 25,
+      "room": "ES2011c",
+      "start_sample": 5376000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "b94a9acf15dcdce2084cd1f9525835c87e7fb0098bb43f1da640246f4adb5924",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 26,
+      "room": "ES2011c",
+      "start_sample": 9536000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "01e11f8bb32380ff6bf119178421874cdf38a92ca95cb91c6c4cf92aacab9dfa",
+      "observations": {
+        "right_padded": [
+          [
+            10350,
+            44640
+          ]
+        ],
+        "centered": [
+          [
+            19530,
+            44640
+          ]
+        ],
+        "agreement": [
+          [
+            19530,
+            44640
+          ]
+        ]
+      }
+    },
+    {
+      "id": 27,
+      "room": "ES2011c",
+      "start_sample": 6464000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "6c10145f8be9abceea3167bf6203c92a26f52062008e11f05906eb38c2075553",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 28,
+      "room": "ES2011c",
+      "start_sample": 6016000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "4f2e03856678019981dcd08286bd57e34ee159c8cc8eae7be2fa11089a685179",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 29,
+      "room": "ES2011c",
+      "start_sample": 9408000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "2d2c3edef59ddefe54f6a551b9a847885c833426abd702e9389ad095123358f1",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 30,
+      "room": "ES2011c",
+      "start_sample": 12928000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "ca2a9f0fcf85dacfec487d666126efe3aa059bc369fdb9d7c1792b0a310ec08e",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            9000
+          ]
+        ],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 31,
+      "room": "ES2011c",
+      "start_sample": 6848000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "677d798e2513d31991b86171fb98ca6b3b7a754209f7103d1fdcaa8241560065",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 32,
+      "room": "IS1002c",
+      "start_sample": 3200000,
+      "annotation": "high",
+      "truth": [
+        [
+          23680,
+          48000
+        ]
+      ],
+      "pcm_sha256": "050b3163d4eec091f5dba8d0f89ac9cc4b9b25bc6a213e61677e97758efba44b",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 33,
+      "room": "IS1002c",
+      "start_sample": 5504000,
+      "annotation": "high",
+      "truth": [
+        [
+          19200,
+          42240
+        ]
+      ],
+      "pcm_sha256": "b8b7477e637091e266579821b3f2812c7152e61df570ab5b248d085a5a8bfae7",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            43560
+          ]
+        ],
+        "centered": [
+          [
+            3600,
+            9270
+          ],
+          [
+            18450,
+            44100
+          ]
+        ],
+        "agreement": [
+          [
+            3600,
+            9270
+          ],
+          [
+            18450,
+            43560
+          ]
+        ]
+      }
+    },
+    {
+      "id": 34,
+      "room": "IS1002c",
+      "start_sample": 11008000,
+      "annotation": "high",
+      "truth": [
+        [
+          20320,
+          36480
+        ],
+        [
+          37440,
+          40640
+        ]
+      ],
+      "pcm_sha256": "9e223356bf882a3b793964d5c844cb5b5ed9e352cd286088e382a82017d4b74d",
+      "observations": {
+        "right_padded": [
+          [
+            12240,
+            44640
+          ]
+        ],
+        "centered": [
+          [
+            17100,
+            45180
+          ]
+        ],
+        "agreement": [
+          [
+            17100,
+            44640
+          ]
+        ]
+      }
+    },
+    {
+      "id": 35,
+      "room": "IS1002c",
+      "start_sample": 13568000,
+      "annotation": "high",
+      "truth": [
+        [
+          0,
+          21920
+        ]
+      ],
+      "pcm_sha256": "7603ac37319ff321ce8ec726c531ce52688174533e7503a680fc27e1201ea4d9",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            28440
+          ]
+        ],
+        "centered": [
+          [
+            630,
+            39510
+          ]
+        ],
+        "agreement": [
+          [
+            630,
+            28440
+          ]
+        ]
+      }
+    },
+    {
+      "id": 36,
+      "room": "IS1002c",
+      "start_sample": 960000,
+      "annotation": "high",
+      "truth": [
+        [
+          0,
+          3360
+        ],
+        [
+          28800,
+          48000
+        ]
+      ],
+      "pcm_sha256": "f1d08619d39bb35070af1c42b14c66aef5c32f7603d72be58d8e1463f0cb56fd",
+      "observations": {
+        "right_padded": [
+          [
+            27090,
+            46530
+          ]
+        ],
+        "centered": [
+          [
+            27090,
+            46260
+          ]
+        ],
+        "agreement": [
+          [
+            27090,
+            46260
+          ]
+        ]
+      }
+    },
+    {
+      "id": 37,
+      "room": "IS1002c",
+      "start_sample": 3968000,
+      "annotation": "high",
+      "truth": [
+        [
+          0,
+          44960
+        ]
+      ],
+      "pcm_sha256": "eba351ca2bce6df289f99b386a705d2c067aff03988a21c7b7179812298b63c9",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            20070,
+            46530
+          ]
+        ],
+        "agreement": [
+          [
+            20070,
+            46530
+          ]
+        ]
+      }
+    },
+    {
+      "id": 38,
+      "room": "IS1002c",
+      "start_sample": 1856000,
+      "annotation": "high",
+      "truth": [
+        [
+          7680,
+          31680
+        ],
+        [
+          32320,
+          48000
+        ]
+      ],
+      "pcm_sha256": "bfe6b9b96cc93c072de391a4c301c22ce0be07d28a8d981aa532b0348a4dd565",
+      "observations": {
+        "right_padded": [
+          [
+            37620,
+            44100
+          ]
+        ],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 39,
+      "room": "IS1002c",
+      "start_sample": 6528000,
+      "annotation": "high",
+      "truth": [
+        [
+          0,
+          48000
+        ]
+      ],
+      "pcm_sha256": "decd3186ee813debfbc374ff6d344dc3064c9f4868a0da3b018c002ced850536",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            41400
+          ]
+        ],
+        "centered": [
+          [
+            1440,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            1440,
+            41400
+          ]
+        ]
+      }
+    },
+    {
+      "id": 40,
+      "room": "IS1002c",
+      "start_sample": 3648000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "9bbd1e0677c15c5ec2fde492a1593a886dcafe841fc7b86e820257d930567179",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 41,
+      "room": "IS1002c",
+      "start_sample": 4096000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "22be78595c5f9e8986117c29e66ad58c2cd61dae76c5697538f5dbded407f90f",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 42,
+      "room": "IS1002c",
+      "start_sample": 1152000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "c5fc3f247a19d6cc773aab53f2c6aa38ff286176728f49540adc0177905d67d9",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 43,
+      "room": "IS1002c",
+      "start_sample": 12736000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "d8bd4a8ad22af3649b968c01ca1b24db490f7cc9d4106f95bbfd05ca2d8cce37",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 44,
+      "room": "IS1002c",
+      "start_sample": 6848000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "d5c019c2714b9b8877cb2a6baeddb27718556a51f73f0a31fd6a782e253ff9c3",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 45,
+      "room": "IS1002c",
+      "start_sample": 13248000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "9f7e46138f4a12bbde315ac281276ae44861483fca7593258279b6086fe95b1c",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 46,
+      "room": "IS1002c",
+      "start_sample": 2816000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "411cfa6cd2e969c67edd377da1557ee241e878a08658a73f4feefc2a963ec8d9",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 47,
+      "room": "IS1002c",
+      "start_sample": 11904000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "f0289beb256d3a4e9fff38f9252255bf51c1df5fb6e0c5ed637b0ae0c4073398",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 48,
+      "room": "IS1008c",
+      "start_sample": 7104000,
+      "annotation": "high",
+      "truth": [
+        [
+          7840,
+          46080
+        ]
+      ],
+      "pcm_sha256": "8c5e4d621a1b5bdce63000a647bb033df0484d1e2e1437df4c5b906cdd3f88a9",
+      "observations": {
+        "right_padded": [
+          [
+            1980,
+            33570
+          ]
+        ],
+        "centered": [
+          [
+            7110,
+            31950
+          ]
+        ],
+        "agreement": [
+          [
+            7110,
+            31950
+          ]
+        ]
+      }
+    },
+    {
+      "id": 49,
+      "room": "IS1008c",
+      "start_sample": 7744000,
+      "annotation": "high",
+      "truth": [
+        [
+          0,
+          48000
+        ]
+      ],
+      "pcm_sha256": "a096230cedee5ecb13938e46500af5a11de9225c528b341d344f5e7f2c9464c4",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 50,
+      "room": "IS1008c",
+      "start_sample": 7808000,
+      "annotation": "high",
+      "truth": [
+        [
+          0,
+          34240
+        ]
+      ],
+      "pcm_sha256": "42659d1a2f1c0ff6fc7172c294e4677ca7c00e1129e408990fa21136ec4892c8",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 51,
+      "room": "IS1008c",
+      "start_sample": 9536000,
+      "annotation": "high",
+      "truth": [
+        [
+          0,
+          25760
+        ]
+      ],
+      "pcm_sha256": "6d4c17141f30c6b45a3f9d1ebd324a4bff032c50ab12addbf4bcee6454908851",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 52,
+      "room": "IS1008c",
+      "start_sample": 7872000,
+      "annotation": "high",
+      "truth": [
+        [
+          26880,
+          48000
+        ]
+      ],
+      "pcm_sha256": "915e148d6c8255d28072a9281c7750afa26032a13322c4d012a425fabcf4e299",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 53,
+      "room": "IS1008c",
+      "start_sample": 8128000,
+      "annotation": "high",
+      "truth": [
+        [
+          3200,
+          40640
+        ],
+        [
+          46080,
+          48000
+        ]
+      ],
+      "pcm_sha256": "6a8af16007ec16a3144744fb0a5e70819a13d1d6583f43ac90e4feefd8e5ee98",
+      "observations": {
+        "right_padded": [
+          [
+            1710,
+            41400
+          ]
+        ],
+        "centered": [
+          [
+            2790,
+            9810
+          ]
+        ],
+        "agreement": [
+          [
+            2790,
+            9810
+          ]
+        ]
+      }
+    },
+    {
+      "id": 54,
+      "room": "IS1008c",
+      "start_sample": 8192000,
+      "annotation": "high",
+      "truth": [
+        [
+          0,
+          11520
+        ],
+        [
+          25440,
+          33440
+        ]
+      ],
+      "pcm_sha256": "c206c631c04a00190358b3556f636b4aa164e0d50b5399906763820af1bb820d",
+      "observations": {
+        "right_padded": [
+          [
+            1440,
+            33030
+          ]
+        ],
+        "centered": [
+          [
+            4680,
+            12780
+          ]
+        ],
+        "agreement": [
+          [
+            4680,
+            12780
+          ]
+        ]
+      }
+    },
+    {
+      "id": 55,
+      "room": "IS1008c",
+      "start_sample": 4736000,
+      "annotation": "high",
+      "truth": [
+        [
+          0,
+          21920
+        ]
+      ],
+      "pcm_sha256": "d4e762390d66620d373d540bc296b116f4b107ba1cfca79df030592881ab418a",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 56,
+      "room": "IS1008c",
+      "start_sample": 6080000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "04f02cabae9205ce2a67f76eacc821b1dde1f9f41166f94fd0049c7b432d5ab1",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 57,
+      "room": "IS1008c",
+      "start_sample": 4160000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "5580cf4497bab033c8393091e2a9a28c479229f6182f2711dc8f7dcab833d053",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 58,
+      "room": "IS1008c",
+      "start_sample": 13248000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "fe52c403e6ffc0c598ab344751f298b7fa0bc30ee2e41a33725851b60954590b",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 59,
+      "room": "IS1008c",
+      "start_sample": 6464000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "92c999a67f23ce9cd10d56d4ed898a00a984f117b13e079e2890472199f6f9eb",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 60,
+      "room": "IS1008c",
+      "start_sample": 11200000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "a4926f8a3d1efc7a7d0c9230dd2f52fafca4be3e8e1399914e29611216e3e07c",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 61,
+      "room": "IS1008c",
+      "start_sample": 4032000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "e88c99bd8725561b5b2ad22162e88b2d569c8fae3f0888dda68ed9a44c8627bb",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 62,
+      "room": "IS1008c",
+      "start_sample": 10944000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "3fbb89819c554c5dffc0343e86f15c537d82247153a5e073e0e57bb1e7bb259b",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 63,
+      "room": "IS1008c",
+      "start_sample": 9344000,
+      "annotation": "minimal",
+      "truth": [],
+      "pcm_sha256": "ecfda826652b78ee9620d75330d85b05f182291be3f924d4f7fe16a52cebfd1d",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    }
+  ],
+  "matched": [
+    {
+      "id": 0,
+      "condition": "native",
+      "family": "genuine",
+      "group": 0,
+      "primary": "unassessed",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            19260
+          ]
+        ],
+        "centered": [
+          [
+            4140,
+            18990
+          ],
+          [
+            31410,
+            35460
+          ]
+        ],
+        "agreement": [
+          [
+            4140,
+            18990
+          ]
+        ]
+      }
+    },
+    {
+      "id": 1,
+      "condition": "native",
+      "family": "genuine",
+      "group": 0,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            17370,
+            40320
+          ]
+        ],
+        "centered": [
+          [
+            17910,
+            39510
+          ]
+        ],
+        "agreement": [
+          [
+            17910,
+            39510
+          ]
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "condition": "native",
+      "family": "genuine",
+      "group": 0,
+      "primary": "unassessed",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 3,
+      "condition": "native",
+      "family": "genuine",
+      "group": 0,
+      "primary": "unassessed",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            20070
+          ],
+          [
+            21420,
+            29250
+          ]
+        ],
+        "centered": [
+          [
+            360,
+            18990
+          ],
+          [
+            21420,
+            27360
+          ]
+        ],
+        "agreement": [
+          [
+            360,
+            18990
+          ],
+          [
+            21420,
+            27360
+          ]
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "condition": "native",
+      "family": "genuine",
+      "group": 0,
+      "primary": "unassessed",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            10350
+          ]
+        ],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 5,
+      "condition": "native",
+      "family": "genuine",
+      "group": 0,
+      "primary": "unassessed",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 6,
+      "condition": "native",
+      "family": "genuine",
+      "group": 0,
+      "primary": "unassessed",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 7,
+      "condition": "native",
+      "family": "genuine",
+      "group": 0,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 8,
+      "condition": "isolated_background",
+      "family": "background",
+      "group": 0,
+      "primary": "original",
+      "observations": {
+        "right_padded": [
+          [
+            5220,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            5490,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            5490,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "condition": "isolated_background",
+      "family": "background",
+      "group": 0,
+      "primary": "original",
+      "observations": {
+        "right_padded": [
+          [
+            11970,
+            20070
+          ]
+        ],
+        "centered": [
+          [
+            11970,
+            18990
+          ]
+        ],
+        "agreement": [
+          [
+            11970,
+            18990
+          ]
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "condition": "isolated_background",
+      "family": "background",
+      "group": 0,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [
+          [
+            5490,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            9000,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            9000,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "condition": "isolated_background",
+      "family": "background",
+      "group": 0,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 12,
+      "condition": "native",
+      "family": "genuine",
+      "group": 1,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 13,
+      "condition": "native",
+      "family": "genuine",
+      "group": 1,
+      "primary": "original",
+      "observations": {
+        "right_padded": [
+          [
+            3600,
+            22500
+          ]
+        ],
+        "centered": [
+          [
+            4680,
+            19260
+          ]
+        ],
+        "agreement": [
+          [
+            4680,
+            19260
+          ]
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "condition": "native",
+      "family": "genuine",
+      "group": 1,
+      "primary": "original",
+      "observations": {
+        "right_padded": [
+          [
+            22500,
+            42750
+          ]
+        ],
+        "centered": [
+          [
+            23310,
+            43020
+          ]
+        ],
+        "agreement": [
+          [
+            23310,
+            42750
+          ]
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "condition": "native",
+      "family": "genuine",
+      "group": 1,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            47340
+          ]
+        ],
+        "centered": [
+          [
+            35190,
+            46530
+          ]
+        ],
+        "agreement": [
+          [
+            35190,
+            46530
+          ]
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "condition": "native",
+      "family": "genuine",
+      "group": 1,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 17,
+      "condition": "native",
+      "family": "genuine",
+      "group": 1,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 18,
+      "condition": "native",
+      "family": "genuine",
+      "group": 1,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 19,
+      "condition": "native",
+      "family": "genuine",
+      "group": 1,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 20,
+      "condition": "isolated_background",
+      "family": "background",
+      "group": 1,
+      "primary": "original",
+      "observations": {
+        "right_padded": [
+          [
+            16020,
+            37080
+          ]
+        ],
+        "centered": [
+          [
+            16560,
+            36810
+          ]
+        ],
+        "agreement": [
+          [
+            16560,
+            36810
+          ]
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "condition": "isolated_background",
+      "family": "background",
+      "group": 1,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 22,
+      "condition": "isolated_background",
+      "family": "background",
+      "group": 1,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 23,
+      "condition": "isolated_background",
+      "family": "background",
+      "group": 1,
+      "primary": "original",
+      "observations": {
+        "right_padded": [
+          [
+            10350,
+            17100
+          ]
+        ],
+        "centered": [
+          [
+            10350,
+            26550
+          ]
+        ],
+        "agreement": [
+          [
+            10350,
+            17100
+          ]
+        ]
+      }
+    },
+    {
+      "id": 24,
+      "condition": "clean",
+      "family": "genuine",
+      "group": 2,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 25,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 2,
+      "primary": "original",
+      "observations": {
+        "right_padded": [
+          [
+            5220,
+            47070
+          ]
+        ],
+        "centered": [
+          [
+            5490,
+            47070
+          ]
+        ],
+        "agreement": [
+          [
+            5490,
+            47070
+          ]
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 2,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            8730,
+            35190
+          ]
+        ],
+        "centered": [
+          [
+            18990,
+            34650
+          ]
+        ],
+        "agreement": [
+          [
+            18990,
+            34650
+          ]
+        ]
+      }
+    },
+    {
+      "id": 27,
+      "condition": "clean",
+      "family": "genuine",
+      "group": 2,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 28,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 2,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            11160,
+            47340
+          ]
+        ],
+        "centered": [
+          [
+            9540,
+            45720
+          ]
+        ],
+        "agreement": [
+          [
+            11160,
+            45720
+          ]
+        ]
+      }
+    },
+    {
+      "id": 29,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 2,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            23310,
+            34110
+          ]
+        ],
+        "centered": [
+          [
+            10620,
+            32220
+          ]
+        ],
+        "agreement": [
+          [
+            23310,
+            32220
+          ]
+        ]
+      }
+    },
+    {
+      "id": 30,
+      "condition": "clean",
+      "family": "genuine",
+      "group": 3,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 31,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 3,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [
+          [
+            4140,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            6840,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            6840,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 32,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 3,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            8460,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            8460,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 33,
+      "condition": "clean",
+      "family": "genuine",
+      "group": 3,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 34,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 3,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            11700,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            11700,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 35,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 3,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            5220,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            5220,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 36,
+      "condition": "clean",
+      "family": "genuine",
+      "group": 4,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 37,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 4,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            3330,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            3870,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            3870,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 38,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 4,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            19530,
+            41670
+          ]
+        ],
+        "centered": [
+          [
+            19800,
+            31140
+          ],
+          [
+            34380,
+            41670
+          ]
+        ],
+        "agreement": [
+          [
+            19800,
+            31140
+          ],
+          [
+            34380,
+            41670
+          ]
+        ]
+      }
+    },
+    {
+      "id": 39,
+      "condition": "clean",
+      "family": "genuine",
+      "group": 4,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 40,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 4,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            1170,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            1170,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 41,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 4,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            32760
+          ]
+        ],
+        "centered": [
+          [
+            2790,
+            32760
+          ]
+        ],
+        "agreement": [
+          [
+            2790,
+            32760
+          ]
+        ]
+      }
+    },
+    {
+      "id": 42,
+      "condition": "clean",
+      "family": "genuine",
+      "group": 5,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 43,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 5,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            2250,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            6300,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            6300,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 44,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 5,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            1440,
+            7380
+          ],
+          [
+            7650,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            1440,
+            7380
+          ],
+          [
+            7650,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 45,
+      "condition": "clean",
+      "family": "genuine",
+      "group": 5,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 46,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 5,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            9270,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            9270,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 47,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 5,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            6300,
+            47070
+          ]
+        ],
+        "centered": [
+          [
+            7380,
+            47340
+          ]
+        ],
+        "agreement": [
+          [
+            7380,
+            47070
+          ]
+        ]
+      }
+    },
+    {
+      "id": 48,
+      "condition": "clean",
+      "family": "genuine",
+      "group": 6,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 49,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 6,
+      "primary": "original",
+      "observations": {
+        "right_padded": [
+          [
+            1980,
+            45990
+          ]
+        ],
+        "centered": [
+          [
+            3060,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            3060,
+            45990
+          ]
+        ]
+      }
+    },
+    {
+      "id": 50,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 6,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            26280
+          ],
+          [
+            37890,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            19260,
+            24660
+          ],
+          [
+            37890,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            19260,
+            24660
+          ],
+          [
+            37890,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 51,
+      "condition": "clean",
+      "family": "genuine",
+      "group": 6,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 52,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 6,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            3060,
+            47340
+          ]
+        ],
+        "centered": [
+          [
+            6300,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            6300,
+            47340
+          ]
+        ]
+      }
+    },
+    {
+      "id": 53,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 6,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            6030,
+            12510
+          ],
+          [
+            18990,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            21150,
+            41670
+          ]
+        ],
+        "agreement": [
+          [
+            21150,
+            41670
+          ]
+        ]
+      }
+    },
+    {
+      "id": 54,
+      "condition": "clean",
+      "family": "genuine",
+      "group": 7,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 55,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 7,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            7650,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            10890,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            10890,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 56,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 7,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            9810,
+            41400
+          ]
+        ],
+        "centered": [
+          [
+            10080,
+            41670
+          ]
+        ],
+        "agreement": [
+          [
+            10080,
+            41400
+          ]
+        ]
+      }
+    },
+    {
+      "id": 57,
+      "condition": "clean",
+      "family": "genuine",
+      "group": 7,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 58,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 7,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            47070
+          ]
+        ],
+        "centered": [
+          [
+            11970,
+            47070
+          ]
+        ],
+        "agreement": [
+          [
+            11970,
+            47070
+          ]
+        ]
+      }
+    },
+    {
+      "id": 59,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 7,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            5760,
+            37620
+          ]
+        ],
+        "centered": [
+          [
+            6570,
+            37890
+          ]
+        ],
+        "agreement": [
+          [
+            6570,
+            37620
+          ]
+        ]
+      }
+    },
+    {
+      "id": 60,
+      "condition": "clean",
+      "family": "genuine",
+      "group": 8,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 61,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 8,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            5490,
+            46530
+          ]
+        ],
+        "centered": [
+          [
+            5490,
+            45990
+          ]
+        ],
+        "agreement": [
+          [
+            5490,
+            45990
+          ]
+        ]
+      }
+    },
+    {
+      "id": 62,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 8,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [
+          [
+            19260,
+            32490
+          ]
+        ],
+        "centered": [
+          [
+            8730,
+            37080
+          ]
+        ],
+        "agreement": [
+          [
+            19260,
+            32490
+          ]
+        ]
+      }
+    },
+    {
+      "id": 63,
+      "condition": "clean",
+      "family": "genuine",
+      "group": 8,
+      "primary": "original",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 64,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 8,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            6840,
+            47340
+          ]
+        ],
+        "centered": [
+          [
+            7110,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            7110,
+            47340
+          ]
+        ]
+      }
+    },
+    {
+      "id": 65,
+      "condition": "mixed",
+      "family": "genuine",
+      "group": 8,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            4140,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            4680,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            4680,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 66,
+      "condition": "clean",
+      "family": "clone",
+      "group": 9,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [
+          [
+            27630,
+            37350
+          ]
+        ],
+        "centered": [
+          [
+            28170,
+            36540
+          ]
+        ],
+        "agreement": [
+          [
+            28170,
+            36540
+          ]
+        ]
+      }
+    },
+    {
+      "id": 67,
+      "condition": "mixed",
+      "family": "clone",
+      "group": 9,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [
+          [
+            6030,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            6300,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            6300,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 68,
+      "condition": "mixed",
+      "family": "clone",
+      "group": 9,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            1440,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            1440,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 69,
+      "condition": "clean",
+      "family": "clone",
+      "group": 10,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [
+          [
+            4950,
+            10890
+          ]
+        ],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 70,
+      "condition": "mixed",
+      "family": "clone",
+      "group": 10,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            11430,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            11430,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 71,
+      "condition": "mixed",
+      "family": "clone",
+      "group": 10,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            43830
+          ]
+        ],
+        "centered": [
+          [
+            5220,
+            43830
+          ]
+        ],
+        "agreement": [
+          [
+            5220,
+            43830
+          ]
+        ]
+      }
+    },
+    {
+      "id": 72,
+      "condition": "clean",
+      "family": "clone",
+      "group": 11,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 73,
+      "condition": "mixed",
+      "family": "clone",
+      "group": 11,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            4140,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            4140,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 74,
+      "condition": "mixed",
+      "family": "clone",
+      "group": 11,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [
+          [
+            360,
+            7920
+          ],
+          [
+            9000,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            10080,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            10080,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 75,
+      "condition": "clean",
+      "family": "expressive",
+      "group": 12,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 76,
+      "condition": "mixed",
+      "family": "expressive",
+      "group": 12,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            11700,
+            46260
+          ]
+        ],
+        "centered": [
+          [
+            11700,
+            46260
+          ]
+        ],
+        "agreement": [
+          [
+            11700,
+            46260
+          ]
+        ]
+      }
+    },
+    {
+      "id": 77,
+      "condition": "mixed",
+      "family": "expressive",
+      "group": 12,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            18720,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            18990,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            18990,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 78,
+      "condition": "clean",
+      "family": "expressive",
+      "group": 13,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 79,
+      "condition": "mixed",
+      "family": "expressive",
+      "group": 13,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            7380,
+            45990
+          ]
+        ],
+        "centered": [
+          [
+            12780,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            12780,
+            45990
+          ]
+        ]
+      }
+    },
+    {
+      "id": 80,
+      "condition": "mixed",
+      "family": "expressive",
+      "group": 13,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            10350,
+            20340
+          ]
+        ],
+        "centered": [
+          [
+            10620,
+            15480
+          ]
+        ],
+        "agreement": [
+          [
+            10620,
+            15480
+          ]
+        ]
+      }
+    },
+    {
+      "id": 81,
+      "condition": "clean",
+      "family": "expressive",
+      "group": 14,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 82,
+      "condition": "mixed",
+      "family": "expressive",
+      "group": 14,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [
+          [
+            11430,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            12780,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            12780,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 83,
+      "condition": "mixed",
+      "family": "expressive",
+      "group": 14,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            15480,
+            46800
+          ]
+        ],
+        "centered": [
+          [
+            17370,
+            46530
+          ]
+        ],
+        "agreement": [
+          [
+            17370,
+            46530
+          ]
+        ]
+      }
+    },
+    {
+      "id": 84,
+      "condition": "clean",
+      "family": "stock",
+      "group": 15,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 85,
+      "condition": "mixed",
+      "family": "stock",
+      "group": 15,
+      "primary": "original",
+      "observations": {
+        "right_padded": [
+          [
+            4950,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            5490,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            5490,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 86,
+      "condition": "mixed",
+      "family": "stock",
+      "group": 15,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            9540,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            9810,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            9810,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 87,
+      "condition": "clean",
+      "family": "stock",
+      "group": 16,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 88,
+      "condition": "mixed",
+      "family": "stock",
+      "group": 16,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            7110,
+            47340
+          ]
+        ],
+        "centered": [
+          [
+            7650,
+            47340
+          ]
+        ],
+        "agreement": [
+          [
+            7650,
+            47340
+          ]
+        ]
+      }
+    },
+    {
+      "id": 89,
+      "condition": "mixed",
+      "family": "stock",
+      "group": 16,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            7110,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            6840,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            7110,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 90,
+      "condition": "clean",
+      "family": "stock",
+      "group": 17,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [],
+        "centered": [],
+        "agreement": []
+      }
+    },
+    {
+      "id": 91,
+      "condition": "mixed",
+      "family": "stock",
+      "group": 17,
+      "primary": "ai",
+      "observations": {
+        "right_padded": [
+          [
+            6030,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            7110,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            7110,
+            47610
+          ]
+        ]
+      }
+    },
+    {
+      "id": 92,
+      "condition": "mixed",
+      "family": "stock",
+      "group": 17,
+      "primary": "inconclusive",
+      "observations": {
+        "right_padded": [
+          [
+            6570,
+            47610
+          ]
+        ],
+        "centered": [
+          [
+            7920,
+            47610
+          ]
+        ],
+        "agreement": [
+          [
+            7920,
+            47610
+          ]
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "right_padded": {
+      "rooms": {
+        "ES2006a": {
+          "high_planned": 8,
+          "high_marked": 5,
+          "high_localized": 3,
+          "minimal_planned": 8,
+          "minimal_marked": 0
+        },
+        "ES2011c": {
+          "high_planned": 8,
+          "high_marked": 7,
+          "high_localized": 7,
+          "minimal_planned": 8,
+          "minimal_marked": 3
+        },
+        "IS1002c": {
+          "high_planned": 8,
+          "high_marked": 7,
+          "high_localized": 6,
+          "minimal_planned": 8,
+          "minimal_marked": 0
+        },
+        "IS1008c": {
+          "high_planned": 8,
+          "high_marked": 3,
+          "high_localized": 3,
+          "minimal_planned": 8,
+          "minimal_marked": 0
+        }
+      },
+      "decision_bank": {
+        "native/genuine": {
+          "files": 16,
+          "primary_unassessed": 6,
+          "withheld_ai": 0,
+          "primary_inconclusive": 2,
+          "primary_original": 8
+        },
+        "isolated_background/background": {
+          "files": 8,
+          "primary_original": 5,
+          "withheld_ai": 1,
+          "primary_ai": 1,
+          "primary_inconclusive": 2
+        },
+        "clean/genuine": {
+          "files": 14,
+          "primary_original": 14,
+          "withheld_ai": 0
+        },
+        "mixed/genuine": {
+          "files": 28,
+          "primary_original": 2,
+          "withheld_ai": 3,
+          "primary_inconclusive": 23,
+          "primary_ai": 3
+        },
+        "clean/synthetic": {
+          "files": 9,
+          "primary_ai": 9,
+          "withheld_ai": 2
+        },
+        "mixed/synthetic": {
+          "files": 18,
+          "primary_ai": 7,
+          "withheld_ai": 7,
+          "primary_inconclusive": 10,
+          "primary_original": 1
+        }
+      },
+      "withheld_false_ai": 3,
+      "withheld_synthetic_ai": 9,
+      "evidence_gate": false,
+      "decision_gate": false
+    },
+    "centered": {
+      "rooms": {
+        "ES2006a": {
+          "high_planned": 8,
+          "high_marked": 5,
+          "high_localized": 3,
+          "minimal_planned": 8,
+          "minimal_marked": 0
+        },
+        "ES2011c": {
+          "high_planned": 8,
+          "high_marked": 5,
+          "high_localized": 5,
+          "minimal_planned": 8,
+          "minimal_marked": 2
+        },
+        "IS1002c": {
+          "high_planned": 8,
+          "high_marked": 6,
+          "high_localized": 6,
+          "minimal_planned": 8,
+          "minimal_marked": 0
+        },
+        "IS1008c": {
+          "high_planned": 8,
+          "high_marked": 3,
+          "high_localized": 1,
+          "minimal_planned": 8,
+          "minimal_marked": 0
+        }
+      },
+      "decision_bank": {
+        "native/genuine": {
+          "files": 16,
+          "primary_unassessed": 6,
+          "withheld_ai": 0,
+          "primary_inconclusive": 2,
+          "primary_original": 8
+        },
+        "isolated_background/background": {
+          "files": 8,
+          "primary_original": 5,
+          "withheld_ai": 1,
+          "primary_ai": 1,
+          "primary_inconclusive": 2
+        },
+        "clean/genuine": {
+          "files": 14,
+          "primary_original": 14,
+          "withheld_ai": 0
+        },
+        "mixed/genuine": {
+          "files": 28,
+          "primary_original": 2,
+          "withheld_ai": 3,
+          "primary_inconclusive": 23,
+          "primary_ai": 3
+        },
+        "clean/synthetic": {
+          "files": 9,
+          "primary_ai": 9,
+          "withheld_ai": 1
+        },
+        "mixed/synthetic": {
+          "files": 18,
+          "primary_ai": 7,
+          "withheld_ai": 7,
+          "primary_inconclusive": 10,
+          "primary_original": 1
+        }
+      },
+      "withheld_false_ai": 3,
+      "withheld_synthetic_ai": 8,
+      "evidence_gate": false,
+      "decision_gate": false
+    },
+    "agreement": {
+      "rooms": {
+        "ES2006a": {
+          "high_planned": 8,
+          "high_marked": 5,
+          "high_localized": 3,
+          "minimal_planned": 8,
+          "minimal_marked": 0
+        },
+        "ES2011c": {
+          "high_planned": 8,
+          "high_marked": 5,
+          "high_localized": 5,
+          "minimal_planned": 8,
+          "minimal_marked": 2
+        },
+        "IS1002c": {
+          "high_planned": 8,
+          "high_marked": 6,
+          "high_localized": 6,
+          "minimal_planned": 8,
+          "minimal_marked": 0
+        },
+        "IS1008c": {
+          "high_planned": 8,
+          "high_marked": 3,
+          "high_localized": 1,
+          "minimal_planned": 8,
+          "minimal_marked": 0
+        }
+      },
+      "decision_bank": {
+        "native/genuine": {
+          "files": 16,
+          "primary_unassessed": 6,
+          "withheld_ai": 0,
+          "primary_inconclusive": 2,
+          "primary_original": 8
+        },
+        "isolated_background/background": {
+          "files": 8,
+          "primary_original": 5,
+          "withheld_ai": 1,
+          "primary_ai": 1,
+          "primary_inconclusive": 2
+        },
+        "clean/genuine": {
+          "files": 14,
+          "primary_original": 14,
+          "withheld_ai": 0
+        },
+        "mixed/genuine": {
+          "files": 28,
+          "primary_original": 2,
+          "withheld_ai": 3,
+          "primary_inconclusive": 23,
+          "primary_ai": 3
+        },
+        "clean/synthetic": {
+          "files": 9,
+          "primary_ai": 9,
+          "withheld_ai": 1
+        },
+        "mixed/synthetic": {
+          "files": 18,
+          "primary_ai": 7,
+          "withheld_ai": 7,
+          "primary_inconclusive": 10,
+          "primary_original": 1
+        }
+      },
+      "withheld_false_ai": 3,
+      "withheld_synthetic_ai": 8,
+      "evidence_gate": false,
+      "decision_gate": false
+    }
+  }
+}

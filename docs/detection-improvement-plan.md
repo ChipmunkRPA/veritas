@@ -120,6 +120,14 @@ are not public screening promises or calibrated population probabilities.
   three detections across two families and six genuine false flags. The
   paired check remains offline. A public reviewer recounts anonymous
   directions without audio files or model assets.
+- [Native competing-voice intervals](audio-competing-speech-localization-2026-11-13.md)
+  measured 128 excerpts from eight separate, previously unused AMI
+  meetings. Exact unpadded input marked no minimal-overlap controls in
+  its 32-clip bank, but localized 18 of 32 high-overlap cases versus 19
+  for right padding. On the separate archived comparison, withholding AI
+  flags removed three genuine-foreground false flags and eight or nine
+  correct synthetic flags. Both approaches remain in evaluation. The two
+  public replays recover the original PCM ranges from the publisher.
 - [Grammatical attachment changes](writing-dependency-transfer-2026-11-13.md)
   added zero locations on 40 held sentence edits. A part-of-speech comparison added
   one location and one false alert. Both remain experimental.

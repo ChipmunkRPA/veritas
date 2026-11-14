@@ -305,6 +305,7 @@ export interface VideoAVPacket extends PacketBase {
 }
 export interface VideoAVChannel {
   status: VideoChannelStatus; reason: string | null; limitations: string[]; packets: VideoAVPacket[]
+  audio_clock_breaks?: { time_base: '1/16000'; breaks: { boundary_sample: number; before_end_pts: number; after_start_pts: number }[] }
   source: AudioEvidenceSet['source'] & { tick_rate?: number; samples_per_tick?: number; video_time_base?: string }
   coverage?: { recorded_windows: number; selected_windows: number; omitted_windows: number; selection: string
     unsupported_checks: { status: string; reason: string }[]

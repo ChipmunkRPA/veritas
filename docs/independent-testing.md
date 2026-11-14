@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [learned mouth and audio timing replay](video-local-alignment-transfer-2026-11-14.md#replay)
+recounts the held local shifts and matched controls. Native replay separately
+fits the scorer on commercially permitted source media. The public receipt
+uses numeric measurements without clips or learned weights.
+
 The [frequency-band soundtrack replay](video-soundtrack-bands-2026-11-14.md#replay)
 recounts the added timing locations, misses and ordinary flags with recorded
 rain and train noise. The numeric receipt uses standard-library Python.

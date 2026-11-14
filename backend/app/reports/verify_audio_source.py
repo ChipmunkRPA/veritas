@@ -11,7 +11,7 @@ from zipfile import ZipFile
 from app.detectors.audio.decode import decode_audio, source_ranges, wav_bytes
 from app.evidence import mouth_hold_sound, mouth_local_hold_binding
 from app.evidence.audio_binding import SPEECH_SELECTION
-from app.evidence.av_binding import TIMING_WINDOWS
+from app.evidence.av_binding import AUDIO_CLOCK_BREAKS, TIMING_WINDOWS, check_audio_clock_breaks
 from app.evidence.stereo_binding import CHANNEL_SILENCE
 from app.evidence.stereo_binding import SCHEMA as STEREO_CONTEXT_SCHEMA
 from app.evidence.stereo_collapse_binding import KEY as IDENTICAL_CHANNEL_INTERVAL
@@ -106,6 +106,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             covered.add(excerpt["clip"]["sha256"])
             intervals += 1
         replay_detail += " Recomputed the comparison of two audio streams and its source excerpts."
+    if AUDIO_CLOCK_BREAKS in alignment:
+        check_audio_clock_breaks(alignment, decoded.mapping["timeline"])
+        replay_detail += f" Recomputed {len(alignment[AUDIO_CLOCK_BREAKS]['breaks'])} audio clock breaks that prevented video timing."
     if timing := (alignment.get("coverage") or {}).get(TIMING_WINDOWS):
         from app.detectors.video import lipsync
 

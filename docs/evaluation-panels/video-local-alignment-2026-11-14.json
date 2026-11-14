@@ -1,0 +1,4609 @@
+{
+  "bindings": {
+    "face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+    "video_lipsync_signed_transitions.py": "2408562ada950aee054b07a7286f810f44911a8a349d6e526ec18e45d28ae4b0",
+    "video_lipsync_window_schedule.py": "6d808bf09a623dec43f54ddd2cf96c92f39494f575162d98a22d45db92ceff44",
+    "video_local_alignment_model.py": "e8b17e4e06594d7a6fb253346af5970e66eec2383e50192c7396d0b1e6018c83",
+    "video_local_alignment_transfer.py": "fdd60d85d2244392c71b1ac63166ce244316c4d0b5c1a0084c207caf0730cdb5"
+  },
+  "fit_observations": 879,
+  "freeze": {
+    "gate": {
+      "added_locations": 4,
+      "max_added_ordinary_flags": 2,
+      "max_added_wrong_edit_ranges": 2,
+      "max_matched_or_global_flags": 0,
+      "sources_with_gain": 3
+    },
+    "method": "Balanced logistic ranking with bilinear features from 12 whitened components in each modality, five-tick local input and six nearby negative lags, trained on aligned fit excerpts only. Point is the strongest ordinary result on four other people plus 0.03. Positive requires 0.40 temporal IoU and signed offset within 80 ms.",
+    "roles": [
+      "original",
+      "gain",
+      "lowpass",
+      "noise",
+      "global_early",
+      "local_early",
+      "global_late",
+      "local_late",
+      "matched_picture_early",
+      "matched_picture_late"
+    ],
+    "schema": "chipmunk.video-local-alignment-transfer/1",
+    "sources": [
+      {
+        "attribution": "Wikitongues, Diego Martins",
+        "file": "diego.webm",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "offsets": [
+          10,
+          16,
+          22,
+          28
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_Diego_speaking_Portuguese%2C_English%2C_Spanish%2C_French%2C_Italian%2C_and_German.webm",
+        "sha256": "e459b43ebc099d2cb6700cd5815d1e0ca1899ae714b7f3d15a1102220de26099",
+        "split": "fit"
+      },
+      {
+        "attribution": "Wikitongues",
+        "file": "ioanna.webm",
+        "license": "https://creativecommons.org/licenses/by/3.0/",
+        "offsets": [
+          18,
+          24,
+          30,
+          36
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_Ioanna_speaking_Greek.webm",
+        "sha256": "8275dec02a8ae560c17e3f0786c7cdb71ade72641468c9f6d7c06519ca8fb134",
+        "split": "fit"
+      },
+      {
+        "attribution": "Wikitongues, James Habitan",
+        "file": "james.webm",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "offsets": [
+          14,
+          21
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_James_speaking_Filipino%2C_English%2C_and_Spanish.webm",
+        "sha256": "29729329886bf8bd7f7029482a9b20a538ad5331b9d1dfc7e627c559dce6cf99",
+        "split": "point"
+      },
+      {
+        "attribution": "Wikitongues, Fiel Sahir",
+        "file": "jan.webm",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "offsets": [
+          18,
+          24,
+          30,
+          36
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_Jan_speaking_Brabants.webm",
+        "sha256": "80babb6fc1e1442448ec990f1083aab2a4e903836a66617430772fecb482dc07",
+        "split": "fit"
+      },
+      {
+        "attribution": "Bogreudell",
+        "file": "mckensie.webm",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "offsets": [
+          42,
+          48,
+          54,
+          60
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_Mckensie_speaking_English.webm",
+        "sha256": "f8ade3762e451da6cf680a03222f603ca5535230bc39c87720f57552436b2fa3",
+        "split": "fit"
+      },
+      {
+        "attribution": "Wikitongues, Chabota Kanguya",
+        "file": "paison.webm",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "offsets": [
+          14,
+          21
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_Paison_speaking_Kiga_and_English.webm",
+        "sha256": "3be9af6eb452adf8d37d77bb1c6a724e502db43b6511d7f0834dd21a0255e7c8",
+        "split": "point"
+      },
+      {
+        "attribution": "Wikitongues, Piotr Usiek",
+        "file": "piotr.webm",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "offsets": [
+          10,
+          16,
+          22,
+          28
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_Piotr_speaking_Silesian_and_English.webm",
+        "sha256": "9be8fa1a9bb4da8014cb6d2d3bc961e8081a3a920cc3dffc6c226ae4c7ee31d6",
+        "split": "fit"
+      },
+      {
+        "attribution": "Wikitongues",
+        "file": "priscilla.webm",
+        "license": "https://creativecommons.org/licenses/by/3.0/",
+        "offsets": [
+          22,
+          29
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_Priscilla_speaking_Nakanamanga.webm",
+        "sha256": "69ade821b419b62ffa97c3a3b73d0db1449c9bd5c453caed0a96e7955f74fc52",
+        "split": "point"
+      },
+      {
+        "attribution": "Wikitongues",
+        "file": "regina.webm",
+        "license": "https://creativecommons.org/licenses/by/3.0/",
+        "offsets": [
+          18,
+          24,
+          30,
+          36
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_Regina_speaking_Spanish.webm",
+        "sha256": "a04c5cc5c0c3c4286e211a3b86aa3766d5fef7a030104554d7d6e1821c642555",
+        "split": "fit"
+      },
+      {
+        "attribution": "Wikitongues, Guillem Belmar",
+        "file": "sara.webm",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "offsets": [
+          14,
+          21
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_Sara_speaking_Portuguese.webm",
+        "sha256": "e7c310405acc0aa2b4ceeb197a84d29ce2190a6ca8ff7211abba6dadb455268b",
+        "split": "point"
+      },
+      {
+        "attribution": "Wikitongues",
+        "file": "simon.webm",
+        "license": "https://creativecommons.org/licenses/by/3.0/",
+        "offsets": [
+          10,
+          16,
+          22,
+          28
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_Simon_speaking_Cumbrian.webm",
+        "sha256": "67c892eeaf869119bf8fab229bd8b731e427b176473e70fec1380ea2aa8a6812",
+        "split": "fit"
+      },
+      {
+        "attribution": "Bogreudell",
+        "file": "WIKITONGUES-_Gereon_speaking_English.webm",
+        "license": "CC-BY-SA-4.0",
+        "offsets": [
+          72,
+          86
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_Gereon_speaking_English.webm",
+        "sha256": "32b20a20e84d46d17da126689572f9a431d01ddc23880b90240952875b2a3fe8",
+        "split": "held",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/WIKITONGUES-_Gereon_speaking_English.webm"
+      },
+      {
+        "attribution": "Wikitongues",
+        "file": "WIKITONGUES-_Imtimeren_speaking_Mongsen_and_English.webm",
+        "license": "CC-BY-SA-4.0",
+        "offsets": [
+          72,
+          86
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_Imtimeren_speaking_Mongsen_and_English.webm",
+        "sha256": "0ccec42e6861332b6ad189ec6009f9ed6101f7422586a96b203e809e0620b0da",
+        "split": "held",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/57/WIKITONGUES-_Imtimeren_speaking_Mongsen_and_English.webm"
+      },
+      {
+        "attribution": "Wikitongues and Nick Panzarella",
+        "file": "WIKITONGUES-_Raluca_speaking_Romanian.webm",
+        "license": "CC-BY-SA-4.0",
+        "offsets": [
+          72,
+          86
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_Raluca_speaking_Romanian.webm",
+        "sha256": "c4434b0b812ac0acbf2e3f4cbb19481232df1aa7c2a746d3286218cf412f4b90",
+        "split": "held",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/WIKITONGUES-_Raluca_speaking_Romanian.webm"
+      },
+      {
+        "attribution": "Bogreudell",
+        "file": "WIKITONGUES-_Sam_speaking_English.webm",
+        "license": "CC-BY-SA-4.0",
+        "offsets": [
+          72,
+          86
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_Sam_speaking_English.webm",
+        "sha256": "fad57b91c051dbf389d238cdc42b9cd72aeb73a16e93afc9983b0a428ba91cf2",
+        "split": "held",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/WIKITONGUES-_Sam_speaking_English.webm"
+      },
+      {
+        "attribution": "Bogreudell",
+        "file": "WIKITONGUES-_William_speaking_English.webm",
+        "license": "CC-BY-SA-4.0",
+        "offsets": [
+          72,
+          86
+        ],
+        "page": "https://commons.wikimedia.org/wiki/File:WIKITONGUES-_William_speaking_English.webm",
+        "sha256": "f0c58a97344e56f5470243b629e1a43e62746c1487991598ede2fbe129b15366",
+        "split": "held",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/WIKITONGUES-_William_speaking_English.webm"
+      }
+    ]
+  },
+  "point": 2.06189,
+  "results": {
+    "added_control_flags": 0,
+    "added_useful": 0,
+    "added_wrong": 0,
+    "candidate_control_flags": 0,
+    "candidate_measured": 33,
+    "candidate_useful": 0,
+    "candidate_useful_before_point": 1,
+    "candidate_wrong": 0,
+    "controls": 80,
+    "current_control_flags": 0,
+    "current_measured": 31,
+    "current_useful": 0,
+    "edits": 20,
+    "excerpts": 10,
+    "passes": false,
+    "sources_with_gain": 0
+  },
+  "rows": [
+    {
+      "cases": [
+        {
+          "brackets": 145,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "aed8ac77a95b641340247b211e1a955cc50695441b0e0cc42f1ff5b352b6c028",
+          "role": "original",
+          "score": {
+            "changed_lag": -9,
+            "gains": [
+              0.453943,
+              0.439003,
+              0.423209
+            ],
+            "reference_lag": -4,
+            "score": 0.423209,
+            "ticks": [
+              27,
+              47
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 127,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "7c619855f3ae947bc615141f136d2de896a2a743a0268cd5f6aa00ac9215b24d",
+          "role": "gain",
+          "score": {
+            "changed_lag": -9,
+            "gains": [
+              0.453943,
+              0.502099,
+              0.424184
+            ],
+            "reference_lag": -4,
+            "score": 0.424184,
+            "ticks": [
+              27,
+              47
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 145,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "4724c5a81e0c2be7167346c6d4d4656772a6ae1a88cb580106c8983a172ce9ac",
+          "role": "lowpass",
+          "score": {
+            "changed_lag": -9,
+            "gains": [
+              0.453943,
+              0.491668,
+              0.368868
+            ],
+            "reference_lag": -4,
+            "score": 0.368868,
+            "ticks": [
+              27,
+              47
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 145,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "20d56b3729656bbb811f085d1cb537f96f8979277d3fba7cb5cd34b1b06020de",
+          "role": "noise",
+          "score": {
+            "changed_lag": 7,
+            "gains": [
+              0.637311,
+              0.190264,
+              0.237085
+            ],
+            "reference_lag": 3,
+            "score": 0.190264,
+            "ticks": [
+              30,
+              46
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 130,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "c87728738dca09f0426d18e6b2a3089512a6955e8a5034c68a9db8ea7b486be9",
+          "role": "global_early",
+          "score": {
+            "changed_lag": 1,
+            "gains": [
+              2.2022,
+              0.331433,
+              0.428166
+            ],
+            "reference_lag": -3,
+            "score": 0.331433,
+            "ticks": [
+              22,
+              36
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 145,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": -7,
+          "pcm_sha256": "5f1f9ba69709db627716496a0bff4e8674473ed8899a999b9a46b212b1521a0d",
+          "role": "local_early",
+          "score": {
+            "changed_lag": 9,
+            "gains": [
+              2.054562,
+              1.13652,
+              0.624116
+            ],
+            "reference_lag": 4,
+            "score": 0.624116,
+            "ticks": [
+              26,
+              40
+            ]
+          },
+          "truth": [
+            37,
+            59
+          ]
+        },
+        {
+          "brackets": 145,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "a407f76b9cdb9eeb52cc032af6c58dff543a3b11c375ddc7c0b5bd586ec5bcd8",
+          "role": "global_late",
+          "score": {
+            "changed_lag": -8,
+            "gains": [
+              0.6849,
+              0.58586,
+              0.586774
+            ],
+            "reference_lag": -3,
+            "score": 0.58586,
+            "ticks": [
+              40,
+              58
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 145,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": 7,
+          "pcm_sha256": "540e852db00d06984e21499d3fd6857c0b9dde6227290ed3335bd788cbbd11ed",
+          "role": "local_late",
+          "score": {
+            "changed_lag": 6,
+            "gains": [
+              0.747387,
+              0.395819,
+              0.689515
+            ],
+            "reference_lag": 1,
+            "score": 0.395819,
+            "ticks": [
+              23,
+              37
+            ]
+          },
+          "truth": [
+            37,
+            59
+          ]
+        },
+        {
+          "brackets": 145,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "5f1f9ba69709db627716496a0bff4e8674473ed8899a999b9a46b212b1521a0d",
+          "role": "matched_picture_early",
+          "score": {
+            "changed_lag": -9,
+            "gains": [
+              0.769442,
+              0.381962,
+              0.303263
+            ],
+            "reference_lag": -2,
+            "score": 0.303263,
+            "ticks": [
+              26,
+              42
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 145,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "540e852db00d06984e21499d3fd6857c0b9dde6227290ed3335bd788cbbd11ed",
+          "role": "matched_picture_late",
+          "score": {
+            "changed_lag": -5,
+            "gains": [
+              0.483776,
+              0.451951,
+              0.430116
+            ],
+            "reference_lag": 1,
+            "score": 0.430116,
+            "ticks": [
+              26,
+              48
+            ]
+          },
+          "truth": null
+        }
+      ],
+      "file": "james.webm",
+      "group": 3,
+      "mouth_ticks": 88,
+      "offset": 14,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 113,
+          "current": {
+            "ranges": [],
+            "starts": [
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "7a66fae3776dceaba642f5c091a6deb64718bb5721e35fabb8d3fc1b5137989c",
+          "role": "original",
+          "score": {
+            "changed_lag": 7,
+            "gains": [
+              0.663549,
+              0.844091,
+              0.656349
+            ],
+            "reference_lag": -1,
+            "score": 0.656349,
+            "ticks": [
+              24,
+              46
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 100,
+          "current": {
+            "ranges": [],
+            "starts": [
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "277e557771592d68da90f942f9853624389defc8b69ae4de01041414841cce5e",
+          "role": "gain",
+          "score": {
+            "changed_lag": -9,
+            "gains": [
+              1.158194,
+              0.63075,
+              0.841983
+            ],
+            "reference_lag": -1,
+            "score": 0.63075,
+            "ticks": [
+              22,
+              38
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 118,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "f11d07924b99881928f2faee00364a613630239fb3dd4d4f8f2185a36a6fbf8b",
+          "role": "lowpass",
+          "score": {
+            "changed_lag": 7,
+            "gains": [
+              0.663549,
+              0.712982,
+              0.730841
+            ],
+            "reference_lag": -1,
+            "score": 0.663549,
+            "ticks": [
+              24,
+              46
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 100,
+          "current": {
+            "ranges": [],
+            "starts": [
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "7e9d3d488afdd82309b371840ea4986c61d5b686af422c60e0dff88b933cb25a",
+          "role": "noise",
+          "score": {
+            "changed_lag": -9,
+            "gains": [
+              1.158194,
+              0.693809,
+              0.598886
+            ],
+            "reference_lag": -1,
+            "score": 0.598886,
+            "ticks": [
+              22,
+              36
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 117,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "219df42754d11090e82eb75fd142645e8296a5b170e487ee804858de9bdd2c49",
+          "role": "global_early",
+          "score": {
+            "changed_lag": -4,
+            "gains": [
+              0.542629,
+              0.600458,
+              0.647564
+            ],
+            "reference_lag": 2,
+            "score": 0.542629,
+            "ticks": [
+              40,
+              62
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 145,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": -7,
+          "pcm_sha256": "084fa31b30c388b0d53f78eaa215241608599fdf6d546ef536e2e95b25d54a15",
+          "role": "local_early",
+          "score": {
+            "changed_lag": -9,
+            "gains": [
+              1.237843,
+              0.7101,
+              1.115436
+            ],
+            "reference_lag": -1,
+            "score": 0.7101,
+            "ticks": [
+              21,
+              35
+            ]
+          },
+          "truth": [
+            37,
+            59
+          ]
+        },
+        {
+          "brackets": 124,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "c907ab9d90322a7dce28272a4d701b52f255604136948d94b84286d539c279ab",
+          "role": "global_late",
+          "score": {
+            "changed_lag": -5,
+            "gains": [
+              0.6916,
+              0.692535,
+              1.282759
+            ],
+            "reference_lag": 3,
+            "score": 0.6916,
+            "ticks": [
+              25,
+              43
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 124,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": 7,
+          "pcm_sha256": "d2cdfc56ba81f423e6ee130a42ea7bd6a520bc64179d3feec2fdb8776742e488",
+          "role": "local_late",
+          "score": {
+            "changed_lag": -8,
+            "gains": [
+              0.646736,
+              0.375184,
+              0.478987
+            ],
+            "reference_lag": 0,
+            "score": 0.375184,
+            "ticks": [
+              22,
+              44
+            ]
+          },
+          "truth": [
+            37,
+            59
+          ]
+        },
+        {
+          "brackets": 145,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "084fa31b30c388b0d53f78eaa215241608599fdf6d546ef536e2e95b25d54a15",
+          "role": "matched_picture_early",
+          "score": {
+            "changed_lag": -9,
+            "gains": [
+              1.319728,
+              1.136724,
+              1.422879
+            ],
+            "reference_lag": -3,
+            "score": 1.136724,
+            "ticks": [
+              22,
+              40
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 124,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "d2cdfc56ba81f423e6ee130a42ea7bd6a520bc64179d3feec2fdb8776742e488",
+          "role": "matched_picture_late",
+          "score": {
+            "changed_lag": 7,
+            "gains": [
+              0.450552,
+              0.404669,
+              0.410102
+            ],
+            "reference_lag": -1,
+            "score": 0.404669,
+            "ticks": [
+              25,
+              47
+            ]
+          },
+          "truth": null
+        }
+      ],
+      "file": "james.webm",
+      "group": 3,
+      "mouth_ticks": 88,
+      "offset": 21,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "06ee412c1d1927e8f7cfee9bdf75cde1f9dbf62e6305ada37233caf54955a63a",
+          "role": "original",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "87ddfb7a0412da90e51341f0fb4ff97077308b5154510550a01be466ff7d254a",
+          "role": "gain",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 24,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "c15034009e03c3108a83a11aadd974878274bd426c8e97e474ffb0ff51cb211b",
+          "role": "lowpass",
+          "score": {
+            "changed_lag": 8,
+            "gains": [
+              0.390836,
+              0.25967,
+              0.602666
+            ],
+            "reference_lag": 3,
+            "score": 0.25967,
+            "ticks": [
+              44,
+              62
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "3b97529b824cdaa0c4903a1d728338a2b235c375b28176a459e518dc340acd7e",
+          "role": "noise",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 4,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "67a4ccba2bb722e4e6f01ac330840539fe304da2c4096684bbdc199bbcb5fed9",
+          "role": "global_early",
+          "score": {
+            "changed_lag": 4,
+            "gains": [
+              0.200875,
+              0.228944,
+              0.215276
+            ],
+            "reference_lag": -2,
+            "score": 0.200875,
+            "ticks": [
+              36,
+              58
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": -5,
+          "pcm_sha256": "eb0527f256c00cad73a90e2764787d86660d7294cd11ae714c9471f18174d37f",
+          "role": "local_early",
+          "score": null,
+          "truth": [
+            35,
+            51
+          ]
+        },
+        {
+          "brackets": 3,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "2f72d6792509865f0089e503b98ba1a790bcb283b7ca5ae920a6a8295f9e75a5",
+          "role": "global_late",
+          "score": {
+            "changed_lag": 7,
+            "gains": [
+              0.041956,
+              0.392204,
+              0.201041
+            ],
+            "reference_lag": 0,
+            "score": 0.041956,
+            "ticks": [
+              32,
+              54
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": 5,
+          "pcm_sha256": "0cf5aff06e7726866ba6d7bb44f395a5716d45cb87734a712b5b88dd410a8402",
+          "role": "local_late",
+          "score": null,
+          "truth": [
+            35,
+            51
+          ]
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "eb0527f256c00cad73a90e2764787d86660d7294cd11ae714c9471f18174d37f",
+          "role": "matched_picture_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "0cf5aff06e7726866ba6d7bb44f395a5716d45cb87734a712b5b88dd410a8402",
+          "role": "matched_picture_late",
+          "score": null,
+          "truth": null
+        }
+      ],
+      "file": "paison.webm",
+      "group": 6,
+      "mouth_ticks": 88,
+      "offset": 14,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 6,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "46f3e54ca2876a4d2f9e36f2e83847446b7d879c2bdcce9b2dc9335ddfbd80a8",
+          "role": "original",
+          "score": {
+            "changed_lag": -1,
+            "gains": [
+              0.847693,
+              0.3618,
+              0.590654
+            ],
+            "reference_lag": 4,
+            "score": 0.3618,
+            "ticks": [
+              23,
+              37
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "069a6e298c1aeb6ab31d982f74ffa5d601b1ec481b0ad27320e8a3970af20145",
+          "role": "gain",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "afea3c8f81e472013f54465e6c6ed3f74d0f7775759188b1ee1c826162f5c015",
+          "role": "lowpass",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 6,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "451c676ff0dcd06a80b47d3d3c41a68830b8418aa433ae0e139778bc3b46b3e0",
+          "role": "noise",
+          "score": {
+            "changed_lag": -1,
+            "gains": [
+              0.871569,
+              0.369061,
+              0.364748
+            ],
+            "reference_lag": 4,
+            "score": 0.364748,
+            "ticks": [
+              24,
+              38
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "5d9a41e1500308d2cd289dac7be4408eae07b926ae922ffdae8916b88f361b3b",
+          "role": "global_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": -5,
+          "pcm_sha256": "976067d535b199579306d44bc961e654aca1c405f32a1385b1c3063b8ed2dcc2",
+          "role": "local_early",
+          "score": null,
+          "truth": [
+            35,
+            51
+          ]
+        },
+        {
+          "brackets": 25,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "9940e4fd5a0d1e81490686c4597926f852ce07bf35d2488e7c71b8d42afbebc2",
+          "role": "global_late",
+          "score": {
+            "changed_lag": -8,
+            "gains": [
+              0.878775,
+              0.880353,
+              0.620521
+            ],
+            "reference_lag": 0,
+            "score": 0.620521,
+            "ticks": [
+              29,
+              43
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 25,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25
+            ]
+          },
+          "lag": 5,
+          "pcm_sha256": "53b1b7c1943c8e68bd1f3a2e021e521bcbca92c458695972a608c8c0c1a005f2",
+          "role": "local_late",
+          "score": {
+            "changed_lag": -9,
+            "gains": [
+              2.112657,
+              0.47049,
+              0.525817
+            ],
+            "reference_lag": -4,
+            "score": 0.47049,
+            "ticks": [
+              29,
+              43
+            ]
+          },
+          "truth": [
+            35,
+            51
+          ]
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "976067d535b199579306d44bc961e654aca1c405f32a1385b1c3063b8ed2dcc2",
+          "role": "matched_picture_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 25,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "53b1b7c1943c8e68bd1f3a2e021e521bcbca92c458695972a608c8c0c1a005f2",
+          "role": "matched_picture_late",
+          "score": {
+            "changed_lag": -8,
+            "gains": [
+              0.618157,
+              0.718311,
+              0.65196
+            ],
+            "reference_lag": 0,
+            "score": 0.618157,
+            "ticks": [
+              27,
+              43
+            ]
+          },
+          "truth": null
+        }
+      ],
+      "file": "paison.webm",
+      "group": 6,
+      "mouth_ticks": 88,
+      "offset": 21,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 83,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "c0c1cc7fb29906e4009ac0ba3b7890d7440affc32816ec63abce8702417cc8d7",
+          "role": "original",
+          "score": {
+            "changed_lag": 4,
+            "gains": [
+              1.660779,
+              1.070302,
+              1.066072
+            ],
+            "reference_lag": -1,
+            "score": 1.066072,
+            "ticks": [
+              23,
+              45
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 83,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "c19cd807ad5e8094e5acd28b7543da87be8af89a6278feaffea64af66c494e07",
+          "role": "gain",
+          "score": {
+            "changed_lag": 4,
+            "gains": [
+              1.660779,
+              0.999082,
+              1.1045
+            ],
+            "reference_lag": -1,
+            "score": 0.999082,
+            "ticks": [
+              23,
+              45
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 83,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "bf57b9d11dcdeaf56e40d3b25ccb505494d4e3a51ae832e0bdd1c55c5eb86b63",
+          "role": "lowpass",
+          "score": {
+            "changed_lag": 3,
+            "gains": [
+              1.365999,
+              0.849396,
+              1.191196
+            ],
+            "reference_lag": -1,
+            "score": 0.849396,
+            "ticks": [
+              23,
+              45
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 83,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "9f707a6392ed7f6e27a97960c0d777a0e19c0ce03dc2c2e01865998f46f2ef82",
+          "role": "noise",
+          "score": {
+            "changed_lag": -9,
+            "gains": [
+              0.626756,
+              0.869708,
+              0.506096
+            ],
+            "reference_lag": -4,
+            "score": 0.506096,
+            "ticks": [
+              41,
+              63
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 69,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "eb7dad526b4ede2b57a5a09c14e14f8fc842f8bf59ca01dce8297be8ecae6fa1",
+          "role": "global_early",
+          "score": {
+            "changed_lag": 0,
+            "gains": [
+              1.415427,
+              0.676236,
+              0.766208
+            ],
+            "reference_lag": -4,
+            "score": 0.676236,
+            "ticks": [
+              21,
+              43
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 83,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": -5,
+          "pcm_sha256": "47ac5c9090dbdb0174bba97927129656cdbbbc768a1742803b68f13eab0963c8",
+          "role": "local_early",
+          "score": {
+            "changed_lag": 4,
+            "gains": [
+              1.660779,
+              1.078067,
+              0.899269
+            ],
+            "reference_lag": -1,
+            "score": 0.899269,
+            "ticks": [
+              23,
+              39
+            ]
+          },
+          "truth": [
+            37,
+            53
+          ]
+        },
+        {
+          "brackets": 85,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "731710835c0952c24b5b9993a003e4a6cab88fe7da62647bdbf899836668b5c6",
+          "role": "global_late",
+          "score": {
+            "changed_lag": 9,
+            "gains": [
+              1.660779,
+              1.070302,
+              1.066072
+            ],
+            "reference_lag": 4,
+            "score": 1.066072,
+            "ticks": [
+              23,
+              45
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 83,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": 5,
+          "pcm_sha256": "70454463e8b559992459642590f0ce676c12e1d4204968ae874671770c219ef0",
+          "role": "local_late",
+          "score": {
+            "changed_lag": 4,
+            "gains": [
+              1.939072,
+              0.546177,
+              0.568157
+            ],
+            "reference_lag": -2,
+            "score": 0.546177,
+            "ticks": [
+              23,
+              45
+            ]
+          },
+          "truth": [
+            37,
+            53
+          ]
+        },
+        {
+          "brackets": 83,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "47ac5c9090dbdb0174bba97927129656cdbbbc768a1742803b68f13eab0963c8",
+          "role": "matched_picture_early",
+          "score": {
+            "changed_lag": 4,
+            "gains": [
+              1.582242,
+              1.103948,
+              1.109204
+            ],
+            "reference_lag": -1,
+            "score": 1.103948,
+            "ticks": [
+              23,
+              39
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 83,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "70454463e8b559992459642590f0ce676c12e1d4204968ae874671770c219ef0",
+          "role": "matched_picture_late",
+          "score": {
+            "changed_lag": 3,
+            "gains": [
+              0.517576,
+              0.49393,
+              0.653731
+            ],
+            "reference_lag": -1,
+            "score": 0.49393,
+            "ticks": [
+              27,
+              49
+            ]
+          },
+          "truth": null
+        }
+      ],
+      "file": "priscilla.webm",
+      "group": 8,
+      "mouth_ticks": 88,
+      "offset": 22,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 98,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "a8c8f3836d7601090072fe3f103bf1d875f7442459fc4688e4772da382600d1d",
+          "role": "original",
+          "score": {
+            "changed_lag": -6,
+            "gains": [
+              1.849255,
+              2.367989,
+              1.800211
+            ],
+            "reference_lag": 2,
+            "score": 1.800211,
+            "ticks": [
+              27,
+              49
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 103,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "35f80366e0ef025c65a1967c4ddf85771573397f72fea62974a3efb1006d25d5",
+          "role": "gain",
+          "score": {
+            "changed_lag": -7,
+            "gains": [
+              1.560218,
+              2.333734,
+              1.64353
+            ],
+            "reference_lag": 1,
+            "score": 1.560218,
+            "ticks": [
+              28,
+              50
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 98,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "c58bc999953d044daefe9306ed4766b125b02e5c0c08320e75edbfa36c750254",
+          "role": "lowpass",
+          "score": {
+            "changed_lag": -5,
+            "gains": [
+              2.03189,
+              2.211459,
+              2.03577
+            ],
+            "reference_lag": 3,
+            "score": 2.03189,
+            "ticks": [
+              26,
+              48
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 98,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "474812ac804fd44597584f8bfb0dd1c268f8c14680e6a93d32d01a724fb34e9c",
+          "role": "noise",
+          "score": {
+            "changed_lag": -4,
+            "gains": [
+              0.854779,
+              2.67818,
+              0.949727
+            ],
+            "reference_lag": 2,
+            "score": 0.854779,
+            "ticks": [
+              40,
+              54
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 110,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "3dcbcef587cafe50a44e79dcbdb90a150321f41a4d4b94e3c5213fa5ee14e647",
+          "role": "global_early",
+          "score": {
+            "changed_lag": -8,
+            "gains": [
+              2.243135,
+              1.72526,
+              1.6689
+            ],
+            "reference_lag": 0,
+            "score": 1.6689,
+            "ticks": [
+              24,
+              46
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 98,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": -5,
+          "pcm_sha256": "6107b290a6e3401a651caa24de9e5b46abe4020376705e8a1f6698886c498ddd",
+          "role": "local_early",
+          "score": {
+            "changed_lag": -8,
+            "gains": [
+              1.387094,
+              1.333132,
+              1.308428
+            ],
+            "reference_lag": 0,
+            "score": 1.308428,
+            "ticks": [
+              28,
+              50
+            ]
+          },
+          "truth": [
+            36,
+            52
+          ]
+        },
+        {
+          "brackets": 106,
+          "current": {
+            "ranges": [],
+            "starts": [
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "b89bf07780b6b62c0077cadb4e86af45612802efe50c8e6e60e4be28c049124d",
+          "role": "global_late",
+          "score": {
+            "changed_lag": 9,
+            "gains": [
+              4.043437,
+              1.56657,
+              1.710471
+            ],
+            "reference_lag": 1,
+            "score": 1.56657,
+            "ticks": [
+              48,
+              62
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 98,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": 5,
+          "pcm_sha256": "2f0f41ec119fe5da3f673fc32cee348708a60ecb75fc9e63bcbe2aef3600c282",
+          "role": "local_late",
+          "score": {
+            "changed_lag": -4,
+            "gains": [
+              1.462625,
+              2.061618,
+              1.596716
+            ],
+            "reference_lag": 4,
+            "score": 1.462625,
+            "ticks": [
+              29,
+              51
+            ]
+          },
+          "truth": [
+            36,
+            52
+          ]
+        },
+        {
+          "brackets": 98,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "6107b290a6e3401a651caa24de9e5b46abe4020376705e8a1f6698886c498ddd",
+          "role": "matched_picture_early",
+          "score": {
+            "changed_lag": -6,
+            "gains": [
+              1.442953,
+              1.57973,
+              1.487264
+            ],
+            "reference_lag": 2,
+            "score": 1.442953,
+            "ticks": [
+              28,
+              50
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 98,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "2f0f41ec119fe5da3f673fc32cee348708a60ecb75fc9e63bcbe2aef3600c282",
+          "role": "matched_picture_late",
+          "score": {
+            "changed_lag": -4,
+            "gains": [
+              1.913849,
+              2.383015,
+              1.774648
+            ],
+            "reference_lag": 4,
+            "score": 1.774648,
+            "ticks": [
+              29,
+              51
+            ]
+          },
+          "truth": null
+        }
+      ],
+      "file": "priscilla.webm",
+      "group": 8,
+      "mouth_ticks": 87,
+      "offset": 29,
+      "picture_count": 87,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 87
+    },
+    {
+      "cases": [
+        {
+          "brackets": 112,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "c87a81014bd2b4c1dfc36500d0053a4c34688d00580e6894ebd127f0cfda72ff",
+          "role": "original",
+          "score": {
+            "changed_lag": 7,
+            "gains": [
+              0.784314,
+              1.037026,
+              0.98737
+            ],
+            "reference_lag": 3,
+            "score": 0.784314,
+            "ticks": [
+              42,
+              58
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 1,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "043144da7f3f499df346ed3ccfa1630dee5172b871374d54fe27ab140b33448e",
+          "role": "gain",
+          "score": {
+            "changed_lag": -9,
+            "gains": [
+              0.632529,
+              1.563462,
+              0.191495
+            ],
+            "reference_lag": -1,
+            "score": 0.191495,
+            "ticks": [
+              53,
+              67
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 125,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "7f02cda2be94c33f370914f404cebd08033886ec994c9203dd8c280cfd3d0ca0",
+          "role": "lowpass",
+          "score": {
+            "changed_lag": 9,
+            "gains": [
+              0.948418,
+              1.434604,
+              1.610282
+            ],
+            "reference_lag": 1,
+            "score": 0.948418,
+            "ticks": [
+              38,
+              56
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 112,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "5aef00224ed4927f327a018aaa8cc8066978d45be1be427533ad80edd30d3252",
+          "role": "noise",
+          "score": {
+            "changed_lag": -7,
+            "gains": [
+              1.126574,
+              1.151891,
+              1.164072
+            ],
+            "reference_lag": 0,
+            "score": 1.126574,
+            "ticks": [
+              46,
+              60
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 145,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "33741a49ae39e863e2d9389f62045722fee5f9c8aa60dd3fe673dfda5367b21f",
+          "role": "global_early",
+          "score": {
+            "changed_lag": -2,
+            "gains": [
+              1.362748,
+              0.928935,
+              2.479116
+            ],
+            "reference_lag": 3,
+            "score": 0.928935,
+            "ticks": [
+              23,
+              39
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 112,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": -5,
+          "pcm_sha256": "fecb00ec3fbdc73884272009bfe393351ee9d53cc7a340a4a44929ad5e7cce68",
+          "role": "local_early",
+          "score": {
+            "changed_lag": 7,
+            "gains": [
+              1.199586,
+              2.000564,
+              1.197668
+            ],
+            "reference_lag": 3,
+            "score": 1.197668,
+            "ticks": [
+              35,
+              51
+            ]
+          },
+          "truth": [
+            34,
+            50
+          ]
+        },
+        {
+          "brackets": 145,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "7e2dbce7f641b165c611312976df1a59c1263cef9cc418aa645a23e667559d68",
+          "role": "global_late",
+          "score": {
+            "changed_lag": 2,
+            "gains": [
+              1.753211,
+              1.772472,
+              2.650352
+            ],
+            "reference_lag": -4,
+            "score": 1.753211,
+            "ticks": [
+              38,
+              52
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 112,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": 5,
+          "pcm_sha256": "9641e99cf8c96ca5a1573442d95d2cf4fe5f23619a201165e8fe3aa02bf4d099",
+          "role": "local_late",
+          "score": {
+            "changed_lag": 1,
+            "gains": [
+              0.982482,
+              1.19519,
+              0.8268
+            ],
+            "reference_lag": -4,
+            "score": 0.8268,
+            "ticks": [
+              35,
+              49
+            ]
+          },
+          "truth": [
+            34,
+            50
+          ]
+        },
+        {
+          "brackets": 112,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "fecb00ec3fbdc73884272009bfe393351ee9d53cc7a340a4a44929ad5e7cce68",
+          "role": "matched_picture_early",
+          "score": {
+            "changed_lag": 7,
+            "gains": [
+              1.601428,
+              1.730845,
+              1.876878
+            ],
+            "reference_lag": 2,
+            "score": 1.601428,
+            "ticks": [
+              37,
+              51
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 112,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "9641e99cf8c96ca5a1573442d95d2cf4fe5f23619a201165e8fe3aa02bf4d099",
+          "role": "matched_picture_late",
+          "score": {
+            "changed_lag": -8,
+            "gains": [
+              1.103507,
+              1.006552,
+              0.865513
+            ],
+            "reference_lag": 0,
+            "score": 0.865513,
+            "ticks": [
+              51,
+              67
+            ]
+          },
+          "truth": null
+        }
+      ],
+      "file": "sara.webm",
+      "group": 10,
+      "mouth_ticks": 88,
+      "offset": 14,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 117,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "36fe20f687eb21ea751564d2d73dbb59c19721182d6ee7420d6435de8b6abd7b",
+          "role": "original",
+          "score": {
+            "changed_lag": -8,
+            "gains": [
+              1.657416,
+              1.123039,
+              1.238219
+            ],
+            "reference_lag": 0,
+            "score": 1.123039,
+            "ticks": [
+              23,
+              39
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 117,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "343cdd9664904e12cc763799a6beef89c127d8dacf77a3810207964e718f1e2d",
+          "role": "gain",
+          "score": {
+            "changed_lag": -8,
+            "gains": [
+              1.661797,
+              1.135383,
+              1.265558
+            ],
+            "reference_lag": 0,
+            "score": 1.135383,
+            "ticks": [
+              23,
+              39
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 117,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "df4af337ae2069bcd87d781b971965a7df1af403c1c86e5bd9e5ff4e36375485",
+          "role": "lowpass",
+          "score": {
+            "changed_lag": -8,
+            "gains": [
+              1.649198,
+              1.536823,
+              1.259816
+            ],
+            "reference_lag": 0,
+            "score": 1.259816,
+            "ticks": [
+              24,
+              38
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 117,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "b360026c0eec319f4bc5d42a7f30c2271c015213ff349dcf7d06238b7f1595ae",
+          "role": "noise",
+          "score": {
+            "changed_lag": -8,
+            "gains": [
+              1.307883,
+              0.962593,
+              1.623196
+            ],
+            "reference_lag": 0,
+            "score": 0.962593,
+            "ticks": [
+              22,
+              36
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 117,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "53fd82460d0057864f50ce569084de20b6450b2b8df6ba6f5ca5fd1f6a8aa754",
+          "role": "global_early",
+          "score": {
+            "changed_lag": 7,
+            "gains": [
+              2.331156,
+              1.114293,
+              2.517585
+            ],
+            "reference_lag": 1,
+            "score": 1.114293,
+            "ticks": [
+              37,
+              59
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 117,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": -5,
+          "pcm_sha256": "bfbc8b19fda53fc0c7548046806495ed3f580500e6008413c50ef5c63b51ff29",
+          "role": "local_early",
+          "score": {
+            "changed_lag": 4,
+            "gains": [
+              1.111899,
+              0.629645,
+              0.624867
+            ],
+            "reference_lag": -1,
+            "score": 0.624867,
+            "ticks": [
+              38,
+              56
+            ]
+          },
+          "truth": [
+            34,
+            50
+          ]
+        },
+        {
+          "brackets": 120,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "6c5c7d95e03d45aa981c591114ffc82bd055e95d427451493b34b3d87a8e8a5d",
+          "role": "global_late",
+          "score": {
+            "changed_lag": -9,
+            "gains": [
+              1.964491,
+              2.743651,
+              1.912958
+            ],
+            "reference_lag": -3,
+            "score": 1.912958,
+            "ticks": [
+              30,
+              44
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 117,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": 5,
+          "pcm_sha256": "75f04650f157cf6cef5b07cbeba0eebff9a74c15e3a9f14db48138d629cc0666",
+          "role": "local_late",
+          "score": {
+            "changed_lag": -7,
+            "gains": [
+              1.301523,
+              1.295039,
+              4.534529
+            ],
+            "reference_lag": 1,
+            "score": 1.295039,
+            "ticks": [
+              22,
+              36
+            ]
+          },
+          "truth": [
+            34,
+            50
+          ]
+        },
+        {
+          "brackets": 117,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "bfbc8b19fda53fc0c7548046806495ed3f580500e6008413c50ef5c63b51ff29",
+          "role": "matched_picture_early",
+          "score": {
+            "changed_lag": -8,
+            "gains": [
+              1.964007,
+              2.282724,
+              2.155442
+            ],
+            "reference_lag": 0,
+            "score": 1.964007,
+            "ticks": [
+              23,
+              37
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 117,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "75f04650f157cf6cef5b07cbeba0eebff9a74c15e3a9f14db48138d629cc0666",
+          "role": "matched_picture_late",
+          "score": {
+            "changed_lag": -9,
+            "gains": [
+              1.681726,
+              1.642183,
+              1.503038
+            ],
+            "reference_lag": -2,
+            "score": 1.503038,
+            "ticks": [
+              26,
+              44
+            ]
+          },
+          "truth": null
+        }
+      ],
+      "file": "sara.webm",
+      "group": 10,
+      "mouth_ticks": 88,
+      "offset": 21,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "cea2a08f87fac5acc3f3b6da9794ec847d8772ced94254dcab87596c0a01d97d",
+          "role": "original",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "d5c7aba0eefbd00237c089ac3b6548f34237046a7cdec6b2d94eb84f2b66fb51",
+          "role": "gain",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "bdb7975b30574aec613c40dd2d768e3a548c11c7445408dac54f884b10e21d73",
+          "role": "lowpass",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "e982fd4a2a29018a9a4ed483b23f72fa5dbae969a2e84adb26331f7e6c4aea5b",
+          "role": "noise",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "2b64b959fc95258d0512f8f885fbdc9371c6f57b515569ea3e6dda0234925f61",
+          "role": "global_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": -5,
+          "pcm_sha256": "9d7acffc9c2f9feb5bd777bf00fa8858066f81ac8e34acd1af4741e0ef856a65",
+          "role": "local_early",
+          "score": null,
+          "truth": [
+            36,
+            52
+          ]
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "8982008b71917963960cf8ab402841fd6ab27950debc66e428e8dc4897015e92",
+          "role": "global_late",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": 5,
+          "pcm_sha256": "b4e7a2902f06163aadd568db4d8189205174cf37715b06bcabe079e4b12586cb",
+          "role": "local_late",
+          "score": null,
+          "truth": [
+            36,
+            52
+          ]
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "9d7acffc9c2f9feb5bd777bf00fa8858066f81ac8e34acd1af4741e0ef856a65",
+          "role": "matched_picture_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "b4e7a2902f06163aadd568db4d8189205174cf37715b06bcabe079e4b12586cb",
+          "role": "matched_picture_late",
+          "score": null,
+          "truth": null
+        }
+      ],
+      "file": "WIKITONGUES-_Gereon_speaking_English.webm",
+      "group": 12,
+      "mouth_ticks": 88,
+      "offset": 72,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 65,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "0eb23a313cabeaa7df5ac5de94290e3b36a15a8e398cac7b8f96dd64329f2014",
+          "role": "original",
+          "score": {
+            "changed_lag": 6,
+            "gains": [
+              0.359636,
+              0.393448,
+              0.642768
+            ],
+            "reference_lag": 1,
+            "score": 0.359636,
+            "ticks": [
+              43,
+              57
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 16,
+          "current": {
+            "ranges": [],
+            "starts": [
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "b60e653b953812d09cdc42badf248999794143fbe4de7b3b78893bff8f4e44ca",
+          "role": "gain",
+          "score": {
+            "changed_lag": 3,
+            "gains": [
+              0.181854,
+              0.358664,
+              0.202396
+            ],
+            "reference_lag": -1,
+            "score": 0.181854,
+            "ticks": [
+              47,
+              61
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 16,
+          "current": {
+            "ranges": [],
+            "starts": [
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "7358104ae488a95bd078e0e713f464d8a37c74586888f44a52bcbb688e83be25",
+          "role": "lowpass",
+          "score": {
+            "changed_lag": -9,
+            "gains": [
+              0.342457,
+              0.275797,
+              0.481426
+            ],
+            "reference_lag": -3,
+            "score": 0.275797,
+            "ticks": [
+              47,
+              61
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 16,
+          "current": {
+            "ranges": [],
+            "starts": [
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "1ff0702cd3164ce52255a14d13690aad25346d7cd95c1a0af16c7120719a9a7c",
+          "role": "noise",
+          "score": {
+            "changed_lag": 3,
+            "gains": [
+              0.431419,
+              0.36822,
+              0.362088
+            ],
+            "reference_lag": -2,
+            "score": 0.362088,
+            "ticks": [
+              47,
+              67
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 90,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "7c0c44b00b6e56748308c3240bd1d7ca3588014494a9291bfa0c6aee302f65af",
+          "role": "global_early",
+          "score": {
+            "changed_lag": 1,
+            "gains": [
+              0.359636,
+              0.393448,
+              0.642768
+            ],
+            "reference_lag": -4,
+            "score": 0.359636,
+            "ticks": [
+              43,
+              57
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 65,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": -5,
+          "pcm_sha256": "3b2e2932e06527d633df508e3cff9d70f22f2dd00891b2c1648d9a1d15523b2b",
+          "role": "local_early",
+          "score": {
+            "changed_lag": 3,
+            "gains": [
+              0.247058,
+              0.267327,
+              0.409027
+            ],
+            "reference_lag": -1,
+            "score": 0.247058,
+            "ticks": [
+              39,
+              59
+            ]
+          },
+          "truth": [
+            36,
+            52
+          ]
+        },
+        {
+          "brackets": 40,
+          "current": {
+            "ranges": [],
+            "starts": [
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "9e4000fa1545e8d2a996fc68a7646fb1a374aa977b6449511aaedb8677169c5d",
+          "role": "global_late",
+          "score": {
+            "changed_lag": 8,
+            "gains": [
+              0.225725,
+              0.50701,
+              0.31046
+            ],
+            "reference_lag": 4,
+            "score": 0.225725,
+            "ticks": [
+              46,
+              60
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 65,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": 5,
+          "pcm_sha256": "41ae89a2d3eaeb96213928a5ae4d9acdd046d1be5ab874f40ff2bbf63b4b3c43",
+          "role": "local_late",
+          "score": {
+            "changed_lag": 0,
+            "gains": [
+              0.026765,
+              0.402512,
+              0.125699
+            ],
+            "reference_lag": -4,
+            "score": 0.026765,
+            "ticks": [
+              48,
+              66
+            ]
+          },
+          "truth": [
+            36,
+            52
+          ]
+        },
+        {
+          "brackets": 65,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "3b2e2932e06527d633df508e3cff9d70f22f2dd00891b2c1648d9a1d15523b2b",
+          "role": "matched_picture_early",
+          "score": {
+            "changed_lag": 3,
+            "gains": [
+              0.346107,
+              0.346618,
+              0.391281
+            ],
+            "reference_lag": -1,
+            "score": 0.346107,
+            "ticks": [
+              42,
+              58
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 65,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "41ae89a2d3eaeb96213928a5ae4d9acdd046d1be5ab874f40ff2bbf63b4b3c43",
+          "role": "matched_picture_late",
+          "score": {
+            "changed_lag": 4,
+            "gains": [
+              0.151951,
+              0.148523,
+              0.31217
+            ],
+            "reference_lag": -4,
+            "score": 0.148523,
+            "ticks": [
+              49,
+              67
+            ]
+          },
+          "truth": null
+        }
+      ],
+      "file": "WIKITONGUES-_Gereon_speaking_English.webm",
+      "group": 12,
+      "mouth_ticks": 88,
+      "offset": 86,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 110,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "e43c2bcb7ad4cc5a275fd2874570009a05350ea26494f97d1cdb9ab14f9d0c4f",
+          "role": "original",
+          "score": {
+            "changed_lag": 4,
+            "gains": [
+              0.466991,
+              0.448971,
+              0.339154
+            ],
+            "reference_lag": -4,
+            "score": 0.339154,
+            "ticks": [
+              35,
+              53
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 110,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "52160fae81487cd6bcb8e046e2884c3a119e08059b37a5a418041bb419bb5f56",
+          "role": "gain",
+          "score": {
+            "changed_lag": 0,
+            "gains": [
+              0.633855,
+              0.287734,
+              0.338478
+            ],
+            "reference_lag": 4,
+            "score": 0.287734,
+            "ticks": [
+              22,
+              36
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 110,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "f157caa7c7b035b2c0e208b3d718b1997ed69f878176348fed8ec10b63784f35",
+          "role": "lowpass",
+          "score": {
+            "changed_lag": -4,
+            "gains": [
+              0.371155,
+              0.314623,
+              0.52731
+            ],
+            "reference_lag": 4,
+            "score": 0.314623,
+            "ticks": [
+              23,
+              45
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 103,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "5ac1229634b74b2a0c980734d63bcb6d2eb2364277b42909676bec8caa5385a5",
+          "role": "noise",
+          "score": {
+            "changed_lag": -5,
+            "gains": [
+              1.029477,
+              0.814699,
+              0.573669
+            ],
+            "reference_lag": 3,
+            "score": 0.573669,
+            "ticks": [
+              53,
+              67
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 120,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "6fb24ad1fcc4dfc8b4dfb17a03eb06f5aabd7116590cd33e6a43093522f6d017",
+          "role": "global_early",
+          "score": {
+            "changed_lag": 1,
+            "gains": [
+              0.327159,
+              0.484003,
+              0.350671
+            ],
+            "reference_lag": -4,
+            "score": 0.327159,
+            "ticks": [
+              28,
+              46
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 110,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": -7,
+          "pcm_sha256": "0d23522803d956f0fe0cc31a9b9606f92bdb0f3ef8f39e46498eda039126fb72",
+          "role": "local_early",
+          "score": {
+            "changed_lag": -4,
+            "gains": [
+              0.407303,
+              0.374259,
+              0.340023
+            ],
+            "reference_lag": 3,
+            "score": 0.340023,
+            "ticks": [
+              21,
+              35
+            ]
+          },
+          "truth": [
+            37,
+            59
+          ]
+        },
+        {
+          "brackets": 104,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "74d112f4e5f1af3ca38c05bac7baab57174cafaa82eeafe46d6fb57528dceb17",
+          "role": "global_late",
+          "score": {
+            "changed_lag": 4,
+            "gains": [
+              0.383641,
+              0.547541,
+              0.381077
+            ],
+            "reference_lag": -2,
+            "score": 0.381077,
+            "ticks": [
+              40,
+              58
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 110,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": 7,
+          "pcm_sha256": "5ac7fa0a3f10f29f217141415bd6eccfe0fa96dfa6d9a52a4e6810a3b6383c56",
+          "role": "local_late",
+          "score": {
+            "changed_lag": 4,
+            "gains": [
+              0.319637,
+              0.40478,
+              0.288643
+            ],
+            "reference_lag": 0,
+            "score": 0.288643,
+            "ticks": [
+              38,
+              56
+            ]
+          },
+          "truth": [
+            37,
+            59
+          ]
+        },
+        {
+          "brackets": 110,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "0d23522803d956f0fe0cc31a9b9606f92bdb0f3ef8f39e46498eda039126fb72",
+          "role": "matched_picture_early",
+          "score": {
+            "changed_lag": -5,
+            "gains": [
+              0.535463,
+              0.553083,
+              0.397368
+            ],
+            "reference_lag": 3,
+            "score": 0.397368,
+            "ticks": [
+              21,
+              35
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 110,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "5ac7fa0a3f10f29f217141415bd6eccfe0fa96dfa6d9a52a4e6810a3b6383c56",
+          "role": "matched_picture_late",
+          "score": {
+            "changed_lag": 5,
+            "gains": [
+              0.34831,
+              0.313805,
+              0.321317
+            ],
+            "reference_lag": 1,
+            "score": 0.313805,
+            "ticks": [
+              35,
+              55
+            ]
+          },
+          "truth": null
+        }
+      ],
+      "file": "WIKITONGUES-_Imtimeren_speaking_Mongsen_and_English.webm",
+      "group": 13,
+      "mouth_ticks": 88,
+      "offset": 72,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 70,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "4ac26bc635a96de61816c1fa5c7c04a1ac8e0f750fa2e9507d28288b3f40ae6c",
+          "role": "original",
+          "score": {
+            "changed_lag": -3,
+            "gains": [
+              0.358059,
+              0.236459,
+              0.185373
+            ],
+            "reference_lag": 4,
+            "score": 0.185373,
+            "ticks": [
+              47,
+              61
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 70,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "243aee4ad6d3781a69846afe37762c8e85e0cf4f67d998e295b3c97678d21f93",
+          "role": "gain",
+          "score": {
+            "changed_lag": -3,
+            "gains": [
+              0.39593,
+              0.196088,
+              0.239402
+            ],
+            "reference_lag": 4,
+            "score": 0.196088,
+            "ticks": [
+              46,
+              62
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 70,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "1df9914df624ef772cef334ace3490da208b863b2805dfa5226d78d046233946",
+          "role": "lowpass",
+          "score": {
+            "changed_lag": -4,
+            "gains": [
+              0.379028,
+              0.33212,
+              0.651232
+            ],
+            "reference_lag": 4,
+            "score": 0.33212,
+            "ticks": [
+              47,
+              67
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 70,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "e28512d7bd90f4ac4e6b35585a4d33f9b5565fcc80864a20549c03e933c5232c",
+          "role": "noise",
+          "score": {
+            "changed_lag": -1,
+            "gains": [
+              0.405985,
+              0.27201,
+              0.607247
+            ],
+            "reference_lag": 4,
+            "score": 0.27201,
+            "ticks": [
+              36,
+              56
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 120,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "25d62cf373b0818ebc8e79f80449e7078d9dfc2cdc4c3af7383e349d701ccf47",
+          "role": "global_early",
+          "score": {
+            "changed_lag": -9,
+            "gains": [
+              0.282015,
+              0.302911,
+              0.275759
+            ],
+            "reference_lag": -2,
+            "score": 0.275759,
+            "ticks": [
+              46,
+              60
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 70,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": -7,
+          "pcm_sha256": "93e4a9d6dbdb5fb970402017232ebfc11ab72c618063a8553eda01f07bd27abf",
+          "role": "local_early",
+          "score": {
+            "changed_lag": -3,
+            "gains": [
+              0.371288,
+              0.234419,
+              0.262953
+            ],
+            "reference_lag": 4,
+            "score": 0.234419,
+            "ticks": [
+              40,
+              54
+            ]
+          },
+          "truth": [
+            37,
+            59
+          ]
+        },
+        {
+          "brackets": 117,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "c39079517d87e188fdb9e42b4f537d47d9f0ec57d8727a96222ed0f916606bf1",
+          "role": "global_late",
+          "score": {
+            "changed_lag": -5,
+            "gains": [
+              0.681893,
+              0.589671,
+              0.567515
+            ],
+            "reference_lag": 3,
+            "score": 0.567515,
+            "ticks": [
+              23,
+              37
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 70,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": 7,
+          "pcm_sha256": "e148cf8607d41f447f7d52f5c0d655c198066ba60c769414e355bb8c84a57a39",
+          "role": "local_late",
+          "score": {
+            "changed_lag": -1,
+            "gains": [
+              0.63015,
+              0.374649,
+              0.761305
+            ],
+            "reference_lag": 4,
+            "score": 0.374649,
+            "ticks": [
+              53,
+              67
+            ]
+          },
+          "truth": [
+            37,
+            59
+          ]
+        },
+        {
+          "brackets": 70,
+          "current": {
+            "ranges": [],
+            "starts": [
+              25,
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "93e4a9d6dbdb5fb970402017232ebfc11ab72c618063a8553eda01f07bd27abf",
+          "role": "matched_picture_early",
+          "score": {
+            "changed_lag": -3,
+            "gains": [
+              0.526624,
+              0.290054,
+              0.327364
+            ],
+            "reference_lag": 4,
+            "score": 0.290054,
+            "ticks": [
+              39,
+              53
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 70,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "e148cf8607d41f447f7d52f5c0d655c198066ba60c769414e355bb8c84a57a39",
+          "role": "matched_picture_late",
+          "score": {
+            "changed_lag": -4,
+            "gains": [
+              0.517282,
+              0.26974,
+              0.539326
+            ],
+            "reference_lag": 4,
+            "score": 0.26974,
+            "ticks": [
+              53,
+              67
+            ]
+          },
+          "truth": null
+        }
+      ],
+      "file": "WIKITONGUES-_Imtimeren_speaking_Mongsen_and_English.webm",
+      "group": 13,
+      "mouth_ticks": 88,
+      "offset": 86,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "992fb69c54ef8465a2bbd0ee93032dc80ef96226c3d752499c431e046446a311",
+          "role": "original",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "35e7e8eb78046e01fe46ffb67ed92921113bbd2a74eb27856088e676732c705f",
+          "role": "gain",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "c3a8ad08dc8f5a55aeab2756afb4fbf46aaa718842fbcabfd5d288be0e308f11",
+          "role": "lowpass",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "ee7a2aec49ed68150314a5d04cf2917dc69030e1b9d2cd5929dfe439994bc976",
+          "role": "noise",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "89a058b01d3844ba92f680d1ed610953b2e64b85ae2405a51e1945596a2e62d6",
+          "role": "global_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": -5,
+          "pcm_sha256": "5cc8c04344262e894b94304717d6ae7ae220e5a3a6228931ba8db8fdca6886e5",
+          "role": "local_early",
+          "score": null,
+          "truth": [
+            38,
+            54
+          ]
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "7c1cf757909ede5cf5302fca9e627659db9b5ea6d2ebb2dfbe38c86b80f238dc",
+          "role": "global_late",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": 5,
+          "pcm_sha256": "1793b0bdaad7c8c983256f0e31afb9149a7ea94a2cf111e33b8568caac1ee246",
+          "role": "local_late",
+          "score": null,
+          "truth": [
+            38,
+            54
+          ]
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "5cc8c04344262e894b94304717d6ae7ae220e5a3a6228931ba8db8fdca6886e5",
+          "role": "matched_picture_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "1793b0bdaad7c8c983256f0e31afb9149a7ea94a2cf111e33b8568caac1ee246",
+          "role": "matched_picture_late",
+          "score": null,
+          "truth": null
+        }
+      ],
+      "file": "WIKITONGUES-_Raluca_speaking_Romanian.webm",
+      "group": 14,
+      "mouth_ticks": 0,
+      "offset": 72,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "4747e677909468f8b0525252e65d041bf1197cfcaed3339f137462317929b4ff",
+          "role": "original",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "eb2d9209426852026d08acbbf5e0e02e2fdf1c7067acfcc70a6464bba4915a86",
+          "role": "gain",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "565dab9289bd38cb19108a13ffe39d9c6244a62fbaff220b1d27710e07f7f5d5",
+          "role": "lowpass",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "003caa27f1a095aff0c69a0505c0e7d04728f3606072f430a147a80d50193f50",
+          "role": "noise",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "fdb4cb559e37d9fc3532dd568614cd41355fd4be47fee5acb18e5aba2512d29f",
+          "role": "global_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": -5,
+          "pcm_sha256": "a14ef77ad7fcbe99a39516ebca74f95c8633b4361772d7e48493d3da92fb2401",
+          "role": "local_early",
+          "score": null,
+          "truth": [
+            38,
+            54
+          ]
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "96f52b65481d714588d1659ae4a16620852e15d33cfc48da28ff58e2ea717cdf",
+          "role": "global_late",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": 5,
+          "pcm_sha256": "f5eedfcd22cbde7a309bc76684e36c8267a791c6e2696ea28e6f7144cc274144",
+          "role": "local_late",
+          "score": null,
+          "truth": [
+            38,
+            54
+          ]
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "a14ef77ad7fcbe99a39516ebca74f95c8633b4361772d7e48493d3da92fb2401",
+          "role": "matched_picture_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "f5eedfcd22cbde7a309bc76684e36c8267a791c6e2696ea28e6f7144cc274144",
+          "role": "matched_picture_late",
+          "score": null,
+          "truth": null
+        }
+      ],
+      "file": "WIKITONGUES-_Raluca_speaking_Romanian.webm",
+      "group": 14,
+      "mouth_ticks": 0,
+      "offset": 86,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "7c4371d56daa91bcf8a566a84b87e793aebb27566b90a4710becf6244089fe01",
+          "role": "original",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "848b7389713df2ddcfe17da88bdff8fbfdadb69c57d759edfa0ca3fdda4d32b5",
+          "role": "gain",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "554a80f30c09db69be9eecd30a536dea0e8d4e2c6f85af5a17916b3e182c1816",
+          "role": "lowpass",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "082fe556b82b3ca1172cafdeebac6dc655573eb4e6394c15108f9982b73829f7",
+          "role": "noise",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "0e4ee60dc9cc74132a2bce4ad3af5f055a5909415c48cc1f786f4a49a1906c6a",
+          "role": "global_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": -7,
+          "pcm_sha256": "596cf055f97645e4fa9ef1dc7b1699e320117cccfce556bc5156eb9d14a222d3",
+          "role": "local_early",
+          "score": null,
+          "truth": [
+            34,
+            56
+          ]
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "c4f4625aeff61e93e2c6ca8eba181a11d1c7a598b8bc3e717e8a840ad27b53c2",
+          "role": "global_late",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": 7,
+          "pcm_sha256": "aadd0293b187e79e6fa9f21f86604f28c2ba3fc4267daf456a59acb3facc0ac3",
+          "role": "local_late",
+          "score": null,
+          "truth": [
+            34,
+            56
+          ]
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "596cf055f97645e4fa9ef1dc7b1699e320117cccfce556bc5156eb9d14a222d3",
+          "role": "matched_picture_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "aadd0293b187e79e6fa9f21f86604f28c2ba3fc4267daf456a59acb3facc0ac3",
+          "role": "matched_picture_late",
+          "score": null,
+          "truth": null
+        }
+      ],
+      "file": "WIKITONGUES-_Sam_speaking_English.webm",
+      "group": 15,
+      "mouth_ticks": 88,
+      "offset": 72,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "205653cf66132c05626d1c18e8c4c517817240ed2ad64f90b3aa72b3301873a1",
+          "role": "original",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "b24472d997b44bc572c06fd58eb734e1f7e960130d3500589853f7e57a591c2e",
+          "role": "gain",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "b791056df17a184a28c403f3141656be23322198fd5c7fd7230058d391ec39e7",
+          "role": "lowpass",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "4cad3d402853e15b4042a4b2cc5f978eeed36fee2ae088d4f489fca7dc75d20a",
+          "role": "noise",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 35,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "5037784c784f0afdcdb2df4d03e9b100d42910a563dd3dd8b269e2fd8153ec8f",
+          "role": "global_early",
+          "score": {
+            "changed_lag": -4,
+            "gains": [
+              0.422847,
+              0.469627,
+              0.491684
+            ],
+            "reference_lag": 2,
+            "score": 0.422847,
+            "ticks": [
+              27,
+              41
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": [
+              37
+            ]
+          },
+          "lag": -7,
+          "pcm_sha256": "21a486b796d8fa6ce3340056be2acdc49b8e53560e936430d4f1652f10b89688",
+          "role": "local_early",
+          "score": null,
+          "truth": [
+            34,
+            56
+          ]
+        },
+        {
+          "brackets": 35,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "d5e79fb9647cf152633b412da473fdba526871ba2eaedc62e60e1cb0f4844341",
+          "role": "global_late",
+          "score": {
+            "changed_lag": -1,
+            "gains": [
+              0.528564,
+              0.892842,
+              0.574872
+            ],
+            "reference_lag": 4,
+            "score": 0.528564,
+            "ticks": [
+              43,
+              61
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": 7,
+          "pcm_sha256": "685ee1b459fd0d8f1d64c6937d6794aaa9fef8579e793520ca14c14716c80777",
+          "role": "local_late",
+          "score": null,
+          "truth": [
+            34,
+            56
+          ]
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": [
+              37
+            ]
+          },
+          "lag": null,
+          "pcm_sha256": "21a486b796d8fa6ce3340056be2acdc49b8e53560e936430d4f1652f10b89688",
+          "role": "matched_picture_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "685ee1b459fd0d8f1d64c6937d6794aaa9fef8579e793520ca14c14716c80777",
+          "role": "matched_picture_late",
+          "score": null,
+          "truth": null
+        }
+      ],
+      "file": "WIKITONGUES-_Sam_speaking_English.webm",
+      "group": 15,
+      "mouth_ticks": 88,
+      "offset": 86,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "43d879d14d4e9425e9db5bc5b34b3b7e988d294fd3aef0eda313a99f44d8d73d",
+          "role": "original",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "334d83c6ef0221e98a2ba69e7560393a38282de631f6c0f5633303ca6aaaa26b",
+          "role": "gain",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "fab4b9ed52a2bfc0b89871ac18b2fc0337896d3652aa040ae7b77eb4494ad9f5",
+          "role": "lowpass",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "20e6a3f1ffa7f1a7bd93fb538640882b61c85d46bf28cb5e5eebc9f2a9a35837",
+          "role": "noise",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "fcfa1925240ada1ea6f2660fa0472850632a6e35f741217a8e04c0cea646ea41",
+          "role": "global_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": -5,
+          "pcm_sha256": "bb274ac181a0e738e1d825ff9798e691389fe8bcd1421412f645645b07ae6515",
+          "role": "local_early",
+          "score": null,
+          "truth": [
+            35,
+            51
+          ]
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "ee5e180eb6bf224d5a4c6fed859806d330bec29d4afe084e4ab8bdeebf5b3405",
+          "role": "global_late",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": 5,
+          "pcm_sha256": "809532023d15bffbc4d7b2ff4c053564e9ec5a6bd4b25b2f1eeb0e2d0b7355a0",
+          "role": "local_late",
+          "score": null,
+          "truth": [
+            35,
+            51
+          ]
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "bb274ac181a0e738e1d825ff9798e691389fe8bcd1421412f645645b07ae6515",
+          "role": "matched_picture_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "809532023d15bffbc4d7b2ff4c053564e9ec5a6bd4b25b2f1eeb0e2d0b7355a0",
+          "role": "matched_picture_late",
+          "score": null,
+          "truth": null
+        }
+      ],
+      "file": "WIKITONGUES-_William_speaking_English.webm",
+      "group": 16,
+      "mouth_ticks": 88,
+      "offset": 72,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "cases": [
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "1d832063835e9a6e993a9d78e2c0401c387b94c20c5f1ddddbe3cdf1f8753edf",
+          "role": "original",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 31,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "065614382634fd52e0904ce9dc2e698fd40f540c32ecf5e139de48c1fd58c32b",
+          "role": "gain",
+          "score": {
+            "changed_lag": -6,
+            "gains": [
+              0.168153,
+              0.857792,
+              0.261276
+            ],
+            "reference_lag": 1,
+            "score": 0.168153,
+            "ticks": [
+              37,
+              59
+            ]
+          },
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "6aa504cd5498734db5e68677e2b1f7ee968029fb8331dacce5aefc0a36ce8d99",
+          "role": "lowpass",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "d3ceb53936e65067dd7cf3399c7f0a0f8ae9806acc6282384eedf7dcf2246df9",
+          "role": "noise",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "6fa891a0101cec1938f194db17dfecbffb9a4dd9f2d06254a85e00fd2d39ffc1",
+          "role": "global_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": -5,
+          "pcm_sha256": "78441c35f046c42bc91d5057b5c313507f3b384d0dd544438bce848bb1ea6fc4",
+          "role": "local_early",
+          "score": null,
+          "truth": [
+            34,
+            50
+          ]
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "7df31be0a7989f8e539168c44cc82da1e7a782e79ec06791be06aec496e5842e",
+          "role": "global_late",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": 5,
+          "pcm_sha256": "799bd69786eb816ae9c264afee8c0c91d66fc1d61e2d8c85432a8f9899718b36",
+          "role": "local_late",
+          "score": null,
+          "truth": [
+            34,
+            50
+          ]
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "78441c35f046c42bc91d5057b5c313507f3b384d0dd544438bce848bb1ea6fc4",
+          "role": "matched_picture_early",
+          "score": null,
+          "truth": null
+        },
+        {
+          "brackets": 0,
+          "current": {
+            "ranges": [],
+            "starts": []
+          },
+          "lag": null,
+          "pcm_sha256": "799bd69786eb816ae9c264afee8c0c91d66fc1d61e2d8c85432a8f9899718b36",
+          "role": "matched_picture_late",
+          "score": null,
+          "truth": null
+        }
+      ],
+      "file": "WIKITONGUES-_William_speaking_English.webm",
+      "group": 16,
+      "mouth_ticks": 87,
+      "offset": 86,
+      "picture_count": 87,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 87
+    }
+  ],
+  "runtime": {
+    "ffmpeg": "ffmpeg version 7.0.2 Copyright (c) 2000-2024 the FFmpeg developers",
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "sklearn": "1.9.0"
+  },
+  "training": [
+    {
+      "file": "diego.webm",
+      "group": 1,
+      "mouth_ticks": 88,
+      "offset": 10,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "diego.webm",
+      "group": 1,
+      "mouth_ticks": 88,
+      "offset": 16,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "diego.webm",
+      "group": 1,
+      "mouth_ticks": 88,
+      "offset": 22,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "diego.webm",
+      "group": 1,
+      "mouth_ticks": 88,
+      "offset": 28,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "ioanna.webm",
+      "group": 2,
+      "mouth_ticks": 87,
+      "offset": 18,
+      "picture_count": 87,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 87
+    },
+    {
+      "file": "ioanna.webm",
+      "group": 2,
+      "mouth_ticks": 88,
+      "offset": 24,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "ioanna.webm",
+      "group": 2,
+      "mouth_ticks": 87,
+      "offset": 30,
+      "picture_count": 87,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 87
+    },
+    {
+      "file": "ioanna.webm",
+      "group": 2,
+      "mouth_ticks": 88,
+      "offset": 36,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "jan.webm",
+      "group": 4,
+      "mouth_ticks": 88,
+      "offset": 18,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "jan.webm",
+      "group": 4,
+      "mouth_ticks": 88,
+      "offset": 24,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "jan.webm",
+      "group": 4,
+      "mouth_ticks": 88,
+      "offset": 30,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "jan.webm",
+      "group": 4,
+      "mouth_ticks": 88,
+      "offset": 36,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "mckensie.webm",
+      "group": 5,
+      "mouth_ticks": 88,
+      "offset": 42,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "mckensie.webm",
+      "group": 5,
+      "mouth_ticks": 88,
+      "offset": 48,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "mckensie.webm",
+      "group": 5,
+      "mouth_ticks": 88,
+      "offset": 54,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "mckensie.webm",
+      "group": 5,
+      "mouth_ticks": 88,
+      "offset": 60,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "piotr.webm",
+      "group": 7,
+      "mouth_ticks": 88,
+      "offset": 10,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "piotr.webm",
+      "group": 7,
+      "mouth_ticks": 88,
+      "offset": 16,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "piotr.webm",
+      "group": 7,
+      "mouth_ticks": 88,
+      "offset": 22,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "piotr.webm",
+      "group": 7,
+      "mouth_ticks": 88,
+      "offset": 28,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "regina.webm",
+      "group": 9,
+      "mouth_ticks": 87,
+      "offset": 18,
+      "picture_count": 87,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 87
+    },
+    {
+      "file": "regina.webm",
+      "group": 9,
+      "mouth_ticks": 88,
+      "offset": 24,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "regina.webm",
+      "group": 9,
+      "mouth_ticks": 87,
+      "offset": 30,
+      "picture_count": 87,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 87
+    },
+    {
+      "file": "regina.webm",
+      "group": 9,
+      "mouth_ticks": 88,
+      "offset": 36,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "simon.webm",
+      "group": 11,
+      "mouth_ticks": 88,
+      "offset": 10,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "simon.webm",
+      "group": 11,
+      "mouth_ticks": 88,
+      "offset": 16,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "simon.webm",
+      "group": 11,
+      "mouth_ticks": 88,
+      "offset": 22,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    },
+    {
+      "file": "simon.webm",
+      "group": 11,
+      "mouth_ticks": 88,
+      "offset": 28,
+      "picture_count": 88,
+      "picture_time_base": "1/12800",
+      "source_audio_start": "0",
+      "ticks": 88
+    }
+  ]
+}

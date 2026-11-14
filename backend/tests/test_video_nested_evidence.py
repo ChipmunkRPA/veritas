@@ -869,7 +869,7 @@ def test_video_clock_break_survives_pdf_json_and_signed_audio_replay(av_fixture,
     path = tmp_path / 'clock-gap.mkv'
     subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-copyts', '-i', str(original),
                     '-map', '0:v:0', '-map', '0:a:0', '-c:v', 'copy', '-c:a', 'pcm_s16le',
-                    '-af', r'asetnsamples=n=2048:p=0,asetpts=PTS+if(gte(N\,24576)\,10240\,0)',
+                    '-af', r'asetnsamples=n=2048:p=0,asetpts=PTS+if(gte(N\,24576)\,10240\,0)+if(gte(N\,40960)\,5120\,0)',
                     '-avoid_negative_ts', 'disabled', str(path)], check=True, timeout=30)
     obj = f.store.put_file(path)
     f.analysis.sha256, f.analysis.size_bytes = obj.sha256, obj.size_bytes
@@ -884,7 +884,7 @@ def test_video_clock_break_survives_pdf_json_and_signed_audio_replay(av_fixture,
         state={'media': SimpleNamespace(path=path)}, store=f.store, check=lambda *a: None,
         sessions=sessions, analysis_id=f.analysis.id)
     stage = video.decode(ctx)['audio']
-    assert stage['source_clock_break_count'] == 1 and ctx.state['audio'].clock_breaks == (24576,)
+    assert stage['source_clock_break_count'] == 2 and ctx.state['audio'].clock_breaks == (24576, 40960)
     assert stage['evidence_input']['pcm_sha256'] == decoded.mapping['pcm_sha256']
     record = f.result['manifest']['sampling']['video_audio_evidence']
     record.update(input=stage['evidence_input'], av_checks=[], voice_clock_policy='source-clock-split/1')
@@ -898,9 +898,14 @@ def test_video_clock_break_survives_pdf_json_and_signed_audio_replay(av_fixture,
     f.analysis.result_hash = f.store.put_bytes(canonical_json(f.result)).sha256
     _freeze_parent(f)
     clock = f.document['audio']['coverage']['source_clock_context']
-    assert clock['total_discontinuities'] == 1 and clock['scored_windows_crossing'] == 0
+    assert clock['total_discontinuities'] == 2 and clock['scored_windows_crossing'] == 0
     assert clock['recording_voice_estimate_withheld'] is True
     assert clock['breaks'][0]['jump_samples'] == 10240 and clock['breaks'][0]['boundary_sample'] == 24576
+    av_clock = f.document['av']['audio_clock_breaks']
+    assert av_clock['time_base'] == '1/16000'
+    assert [r['boundary_sample'] for r in av_clock['breaks']] == [24576, 40960]
+    assert [r['after_start_pts'] - r['before_end_pts'] for r in av_clock['breaks']] == [10240, 5120]
+    assert project(f.document)['av']['audio_clock_breaks'] == av_clock
     tampered = copy.deepcopy(f.document['audio'])
     tampered['coverage']['source_clock_context']['breaks'][0]['jump_samples'] += 1
     with pytest.raises(ValueError, match='Audio source clock observations differ'):
@@ -912,6 +917,8 @@ def test_video_clock_break_survives_pdf_json_and_signed_audio_replay(av_fixture,
     assert 'Audio source clock breaks' in report and 'Source timestamp gap of 640.000 ms' in report
     assert 'the report gives no recording-wide voice estimate' in report
     assert '/audio/coverage/source_clock_context' in report
+    assert 'Soundtrack clock breaks that prevented a timing check' in report
+    assert '24576' in report and '40960' in report and '/av/audio_clock_breaks' in report
     _check_public_zip(f, tmp_path, monkeypatch, pdf, source_audio=path)
 
 

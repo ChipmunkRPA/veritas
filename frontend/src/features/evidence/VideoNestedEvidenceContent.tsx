@@ -1,7 +1,7 @@
 import AudioEvidenceContent from './AudioEvidenceContent'
 import { EvidenceAudio, EvidenceLimits, EvidencePicture, evidenceGrid } from './EvidenceMedia'
 import VideoAVEvidenceContent from './VideoAVEvidenceContent'
-import { rationalSeconds, seconds, type AudioEvidenceSet, type SoundtrackPair, type VideoAudioChannel, type VideoEvidenceSet } from './multimediaPackets'
+import { rationalSeconds, seconds, type AudioEvidenceSet, type SoundtrackPair, type VideoAudioChannel, type VideoAVChannel, type VideoEvidenceSet } from './multimediaPackets'
 
 /** Presentation adapter only: nested audio never receives a separate authority or hash. */
 export function videoAudioView(parent: VideoEvidenceSet, channel: VideoAudioChannel): AudioEvidenceSet {
@@ -31,6 +31,26 @@ function SourceClock({ source }: { source: AudioEvidenceSet['source'] }) {
 }
 
 const count = (value: unknown) => typeof value === 'number' && Number.isFinite(value) && value >= 0
+
+function TimingClockBreaks({ clock }: { clock: NonNullable<VideoAVChannel['audio_clock_breaks']> }) {
+  const limit = 8
+  return <section aria-label="Soundtrack clock breaks" className="mt-4 rounded-md border border-border p-4 text-small">
+    <h4 className="m-0 font-medium">Soundtrack clock breaks</h4>
+    <p className="mt-2 mb-0 text-text-muted">The timing check requires a continuous audio clock. The decoded soundtrack has {clock.breaks.length} timestamp {clock.breaks.length === 1 ? 'break' : 'breaks'}.</p>
+    <div className="mt-3 overflow-x-auto">
+      <table className="w-full text-left text-caption">
+        <thead><tr><th>Decoded sample</th><th>Previous span ends</th><th>Next span begins</th><th>Clock jump</th></tr></thead>
+        <tbody>{clock.breaks.slice(0, limit).map(row => <tr key={row.boundary_sample}>
+          <td>{row.boundary_sample}</td>
+          <td>{rationalSeconds(row.before_end_pts, clock.time_base)?.toFixed(7)} s</td>
+          <td>{rationalSeconds(row.after_start_pts, clock.time_base)?.toFixed(7)} s</td>
+          <td>{row.after_start_pts > row.before_end_pts ? 'Forward' : 'Backward'}</td>
+        </tr>)}</tbody>
+      </table>
+    </div>
+    {clock.breaks.length > limit && <p className="mt-2 mb-0 text-text-muted">{clock.breaks.length - limit} further clock breaks are in the JSON export.</p>}
+  </section>
+}
 
 const soundtrackMessages: Record<SoundtrackPair['status'], string> = {
   duration_outside_scope: 'This check covers soundtracks from 1.5 to 12 seconds.',
@@ -118,6 +138,7 @@ export default function VideoNestedEvidenceContent({ set, token, mediaReady, cha
         {av.packets.length === 0 && <SourceClock source={av.source} />}
       </>
         : <UnavailableChannel reason={!avBound && av ? 'The alignment record does not match this original video.' : av?.reason} />}
+      {avBound && av?.audio_clock_breaks && <TimingClockBreaks clock={av.audio_clock_breaks} />}
       <EvidenceLimits lines={av?.limitations ?? []} />
     </section>}
   </div>

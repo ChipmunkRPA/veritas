@@ -173,6 +173,20 @@ describe('video v3 nested source-bound evidence', () => {
     expect(document.querySelectorAll('img[src], audio[src], video[src]')).toHaveLength(0)
   })
 
+  it('shows both forward and backward breaks in an unassessed timing track', () => {
+    const set = fixture()
+    set.av = { ...set.av!, status: 'unavailable', reason: 'The audio clock is discontinuous.', coverage: null, packets: [],
+      audio_clock_breaks: { time_base: '1/16000', breaks: [
+        { boundary_sample: 6400, before_end_pts: 6400, after_start_pts: 6416 },
+        { boundary_sample: 16000, before_end_pts: 16016, after_start_pts: 16008 },
+      ] } }
+    show(set)
+    const clock = within(screen.getByRole('region', { name: 'Soundtrack clock breaks' }))
+    expect(clock.getByRole('row', { name: /6400 0\.4000000 s 0\.4010000 s Forward/ })).toBeTruthy()
+    expect(clock.getByRole('row', { name: /16000 1\.0010000 s 1\.0005000 s Backward/ })).toBeTruthy()
+    expect(screen.queryByRole('navigation', { name: 'Flagged timing intervals' })).toBeNull()
+  })
+
   it('retains decoded context, zero scored coverage, and source clocks when channels were not assessed', () => {
     const set = fixture()
     set.audio = { ...set.audio!, status: 'not_assessed', reason: 'No speech windows could be scored.', packets: [], omitted_windows: 0,

@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Learned audio and mouth correspondence](video-local-alignment-transfer-2026-11-14.md)
+  recovered zero of 20 held short timing shifts at the frozen point and stays
+  offline. New analyses explain exactly which decoded soundtrack timestamp
+  breaks prevented the timing check.
+
 - [Two-track timing under rain and train noise](video-soundtrack-bands-2026-11-14.md)
   raises useful timing locations from 41 to 45 of 84 staged edits in each of
   two delivery formats. It adds one too-short range on an edited clip and no

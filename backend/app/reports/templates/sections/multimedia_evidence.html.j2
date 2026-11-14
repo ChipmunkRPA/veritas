@@ -46,6 +46,17 @@
 {% if invisible.matches > invisible.locations | length %}<p class="caption">{{ invisible.matches - (invisible.locations | length) }} further characters exceed the location display limit.</p>{% endif %}
 <p class="caption">{{ invisible.scope }} {{ invisible.limitation }} JSON pointer <span class="mono">/coverage/invisible_characters</span>.</p>
 {% endif %}
+{% set breaks = evidence.get('av_clock_breaks') %}
+{% if breaks %}
+<h3 id="multimedia-av-clock-breaks">Soundtrack clock breaks that prevented a timing check</h3>
+<p>The timing check requires a continuous audio clock. The decoded soundtrack has {{ breaks.count }} timestamp {{ 'break' if breaks.count == 1 else 'breaks' }}.</p>
+<table class="multimedia-locator" aria-labelledby="multimedia-av-clock-breaks">
+<thead><tr><th>Decoded sample</th><th>Previous span ends</th><th>Next span begins</th><th>Clock jump</th></tr></thead>
+<tbody>{% for row in breaks.rows %}<tr><td>{{ row.sample }}</td><td>{{ row.before }} s</td><td>{{ row.after }} s</td><td>{{ row.direction }}</td></tr>{% endfor %}</tbody>
+</table>
+{% if breaks.unlisted %}<p class="caption">{{ breaks.unlisted }} further clock breaks are in the JSON.</p>{% endif %}
+<p class="caption">JSON pointer <span class="mono">/av/audio_clock_breaks</span>.</p>
+{% endif %}
 {% set timing = evidence.get('av_timing_windows') %}
 {% if timing %}
 <h3 id="multimedia-av-timing-coverage">Speech and mouth timing coverage</h3>

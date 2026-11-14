@@ -261,6 +261,12 @@ def test_decoded_audio_clock_gap_keeps_exact_source_times_without_av_findings(av
 
     validate_audio_clock_coverage(evidence(channel, expected))
     validate_audio_clock_coverage(evidence(legacy, LEGACY_AUDIO_CLOCK_REASON))
+    tampered = deepcopy(channel)
+    tampered['audio_clock_breaks']['breaks'][0]['after_start_pts'] += 1
+    with pytest.raises(InvalidAV, match='AV clock breaks differ'):
+        validate_audio_clock_coverage(evidence(tampered, expected))
+    with pytest.raises(PacketIntegrityError, match='AV clock breaks differ'):
+        video_av.verify_source_assets(tampered, **kwargs)
     with pytest.raises(InvalidAV, match='decoded audio clock'):
         validate_audio_clock_coverage(evidence(changed, changed['reason']))
     with pytest.raises(InvalidAV, match='Reported AV coverage'):

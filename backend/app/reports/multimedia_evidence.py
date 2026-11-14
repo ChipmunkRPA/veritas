@@ -8,6 +8,7 @@ import io
 import json
 import re
 import wave
+from decimal import Decimal
 from typing import TYPE_CHECKING, Any
 
 import numpy as np
@@ -15,7 +16,13 @@ from PIL import Image
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.evidence import document_scope, service
-from app.evidence.av_binding import TIMING_DISPLAY_LIMIT, TIMING_REASONS, TIMING_WINDOWS
+from app.evidence.av_binding import (
+    AUDIO_CLOCK_BREAKS,
+    AV_CLOCK_DISPLAY_LIMIT,
+    TIMING_DISPLAY_LIMIT,
+    TIMING_REASONS,
+    TIMING_WINDOWS,
+)
 from app.evidence.stereo_listening_binding import LOCAL_EXCERPTS
 from app.evidence.video_packet_versions import NESTED_VERSIONS as NESTED_VIDEO_VERSIONS
 from app.storage.objects import ObjectIntegrityError, ObjectStore, default_store
@@ -1293,6 +1300,15 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     if background_review and (asset := background_review["artifacts"].get("waveform")):
         background_review["waveform"] = plate("waveform", asset, "Original waveform across the flagged three-second interval")
     timing_view = None
+    av_clock_view = None
+    if clock := (document.get("av") or {}).get(AUDIO_CLOCK_BREAKS):
+        breaks = clock["breaks"]
+        av_clock_view = {"count": len(breaks), "unlisted": max(0, len(breaks) - AV_CLOCK_DISPLAY_LIMIT),
+                         "rows": [{"sample": row["boundary_sample"],
+                                   "before": f"{Decimal(row['before_end_pts']) / 16000:.7f}",
+                                   "after": f"{Decimal(row['after_start_pts']) / 16000:.7f}",
+                                   "direction": "Forward" if row["after_start_pts"] > row["before_end_pts"] else "Backward"}
+                                  for row in breaks[:AV_CLOCK_DISPLAY_LIMIT]]}
     if timing := (document.get("av", {}).get("coverage") or {}).get(TIMING_WINDOWS):
         rows = timing["windows"]
         unmeasured = [row for row in rows if row["status"] != "measured"]
@@ -1305,6 +1321,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                              "reason": TIMING_REASONS[row["status"]]})
     return {"available": True, "kind": kind, "title": f"{kind.capitalize()} evidence", "id": document["id"],
             "av_timing_windows": timing_view,
+            "av_clock_breaks": av_clock_view,
             "short_voice_review": short_voice_review,
             "long_voice_review": long_voice_review,
             "background_reduced_voice_review": background_review,

@@ -12,6 +12,8 @@ from app.evidence import av_lag_support
 from app.evidence.mp4 import validate_clip_binding
 
 LEGACY_AUDIO_CLOCK_REASON = 'Audio timestamps contain gaps; audio/video correlation does not support this timeline.'
+AUDIO_CLOCK_BREAKS = 'audio_clock_breaks'
+AV_CLOCK_DISPLAY_LIMIT = 8
 TIMING_WINDOWS = 'timing_windows'
 TIMING_COMMITMENT = 'av_timing_windows_sha256'
 TIMING_REASONS = {
@@ -70,24 +72,49 @@ def _validate_timing_coverage(coverage: dict, samples: int, origin: int) -> None
             raise InvalidAV('Timing coverage disagrees with the available audio search margin')
 
 
-def audio_clock_discontinuity(timeline: Sequence[Mapping[str, int]]) -> str:
-    """Describe the first discontinuity in a validated 16 kHz source timeline."""
+def iter_audio_clock_breaks(timeline: Sequence[Mapping[str, int]]):
+    """Yield each discontinuity in a validated 16 kHz source timeline."""
     for before, after in pairwise(timeline):
         end = before['source_pts'] + before['end_sample'] - before['start_sample']
         start = after['source_pts']
         if end != start:
-            direction = 'forward' if start > end else 'backward'
-            return (f'Audio/video timing was unassessed. The decoded audio clock jumps {direction} '
-                    f'from {Decimal(end) / 16000:.7f} s to {Decimal(start) / 16000:.7f} s on the source clock.')
+            yield {'boundary_sample': after['start_sample'], 'before_end_pts': end, 'after_start_pts': start}
+
+
+def audio_clock_break_evidence(timeline: Sequence[Mapping[str, int]]) -> dict:
+    return {'time_base': '1/16000', 'breaks': list(iter_audio_clock_breaks(timeline))}
+
+
+def audio_clock_discontinuity(timeline: Sequence[Mapping[str, int]]) -> str:
+    """Describe the first discontinuity in a validated 16 kHz source timeline."""
+    if first := next(iter_audio_clock_breaks(timeline), None):
+        end, start = first['before_end_pts'], first['after_start_pts']
+        direction = 'forward' if start > end else 'backward'
+        return (f'Audio/video timing was unassessed. The decoded audio clock jumps {direction} '
+                f'from {Decimal(end) / 16000:.7f} s to {Decimal(start) / 16000:.7f} s on the source clock.')
     return 'Audio/video timing was unassessed because the decoded audio timeline has separate spans.'
+
+
+def check_audio_clock_breaks(channel, timeline) -> None:
+    if AUDIO_CLOCK_BREAKS not in channel:
+        return  # Historical exports recorded only the first discontinuity.
+    recorded = channel[AUDIO_CLOCK_BREAKS]
+    expected = audio_clock_break_evidence(timeline)
+    if (not expected['breaks'] or not isinstance(recorded, dict) or recorded != expected
+            or any(type(value) is not int for row in recorded['breaks'] for value in row.values())):
+        raise InvalidAV('AV clock breaks differ from the decoded audio timeline')
 
 
 def validate_audio_clock_coverage(document: dict) -> None:
     audio = document['audio']
-    if audio['coverage'] is None or len(audio['source']['timeline']) <= 1:
-        return
     channel = document['av']
-    reason = audio_clock_discontinuity(audio['source']['timeline'])
+    timeline = audio['source'].get('timeline', [])
+    if AUDIO_CLOCK_BREAKS in channel and (len(timeline) <= 1 or audio['coverage'] is None):
+        raise InvalidAV('AV clock breaks have no verified audio timeline')
+    check_audio_clock_breaks(channel, timeline)
+    if audio['coverage'] is None or len(timeline) <= 1:
+        return
+    reason = audio_clock_discontinuity(timeline)
     if (channel['status'] != 'unavailable' or channel['coverage'] is not None
             or channel['reason'] not in (LEGACY_AUDIO_CLOCK_REASON, reason)):
         raise InvalidAV('Frozen AV coverage differs from the decoded audio clock')
@@ -125,6 +152,9 @@ def _validate(channel: dict, video: dict) -> None:
     source = channel['source']
     require(source['sha256'] == video['sha256'], 'AV source differs from the original video')
     require(channel['status'] in {'ready', 'not_assessed', 'absent', 'unavailable'}, 'AV availability is invalid')
+    if AUDIO_CLOCK_BREAKS in channel:
+        require(channel['status'] == 'unavailable' and channel['coverage'] is None,
+                'AV clock breaks require an unassessed timing channel')
     if channel['coverage'] is None:
         require(channel['status'] != 'ready' and not channel['packets'] and bool(channel['reason']), 'Unavailable AV channel contains evidence or lacks a reason')
         return

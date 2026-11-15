@@ -99,6 +99,11 @@ export interface ImageReferenceRecord {
     submitted_over_reference_xy: [[number, number], [number, number]]
     supported_kernels: (LossyWebpSupport & { kernel: 'bicubic' | 'bilinear' | 'lanczos' })[]
   }
+  lossy_webp_crop?: {
+    reference_crop: NativeImageArea
+    anchor_zones: [number, number][]
+    framing: LossyWebpSupport
+  }
   affects_overall_confidence?: boolean
   additional_regions?: number
 }
@@ -119,6 +124,7 @@ export const pngOpacitySchema = 'chipmunk.image-reference-comparison/17'
 export const exactWebpSchema = 'chipmunk.image-reference-comparison/18'
 export const lossyWebpSchema = 'chipmunk.image-reference-comparison/19'
 export const resizedLossyWebpSchema = 'chipmunk.image-reference-comparison/20'
+export const croppedLossyWebpSchema = 'chipmunk.image-reference-comparison/21'
 export const isJpegDetailLoss = (schema: string) =>
   schema === jpegDetailLossSchema || schema === extendedJpegDetailLossSchema
 export const IMAGE_REFERENCE_SECTION_ID = 'earlier-image-comparison'
@@ -271,6 +277,33 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
             || earlier.y + earlier.h !== Math.ceil((region.y + region.h) * earlierHeight / height)
         })) {
       throw new Error('The server returned an incomplete resized WebP comparison.')
+    }
+  }
+  if (comparison.schema === croppedLossyWebpSchema && comparison.status === 'comparable') {
+    const crop = comparison.lossy_webp_crop
+    const { width, height } = comparison.submitted
+    const { width: earlierWidth, height: earlierHeight } = comparison.reference
+    const bounds = crop?.reference_crop
+    const zones = crop?.anchor_zones
+    if (!crop?.framing || comparison.affects_overall_confidence !== false || !validArea(bounds)
+        || ![earlierWidth, earlierHeight, width, height].every(Number.isSafeInteger)
+        || Math.min(earlierWidth, earlierHeight) < 512 || Math.max(earlierWidth, earlierHeight) > 1024
+        || Math.min(width, height) < 384 || (width === earlierWidth && height === earlierHeight)
+        || width * 5 < earlierWidth * 4 || height * 5 < earlierHeight * 4
+        || earlierWidth - width > 128 || earlierHeight - height > 128
+        || bounds.w !== width || bounds.h !== height || !validAreaWithin(bounds, earlierWidth, earlierHeight)
+        || !Array.isArray(zones) || zones.length < 5 || zones.length > 9
+        || !zones.every(zone => Array.isArray(zone) && zone.length === 2 && zone.every(value => [0, 1, 2].includes(value)))
+        || new Set(zones.map(zone => zone.join(','))).size !== zones.length
+        || ![0, 1].every(axis => new Set(zones.map(zone => zone[axis])).size >= 2)
+        || !supportsLossyFraming(crop.framing, width, height)
+        || comparison.regions.some(region => {
+          const earlier = region.reference_region
+          return !validAreaWithin(region, width, height) || !validArea(earlier)
+            || earlier.x !== region.x + bounds.x || earlier.y !== region.y + bounds.y
+            || earlier.w !== region.w || earlier.h !== region.h
+        })) {
+      throw new Error('The server returned an incomplete cropped WebP comparison.')
     }
   }
   if (comparison.schema === pngOpacitySchema && comparison.status === 'comparable') {

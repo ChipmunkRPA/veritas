@@ -6,7 +6,7 @@ import {
   compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
   IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
-  pngOpacitySchema, exactWebpSchema, lossyWebpSchema, resizedLossyWebpSchema,
+  pngOpacitySchema, exactWebpSchema, lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -81,6 +81,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const exactWebp = comparison.schema === exactWebpSchema ? comparison.exact_webp : undefined
   const lossyWebp = comparison.schema === lossyWebpSchema ? comparison.lossy_webp : undefined
   const resizedWebp = comparison.schema === resizedLossyWebpSchema ? comparison.lossy_webp_resize : undefined
+  const croppedWebp = comparison.schema === croppedLossyWebpSchema ? comparison.lossy_webp_crop : undefined
   const sameJpegBlocks = (comparison.schema === sameJpegSchema || detailLoss) ? alignment : undefined
   const shiftedJpeg = comparison.schema === shiftedJpegSchema ? alignment : undefined
   const sameStructureFraming = comparison.schema === structureJpegSchema ? comparison.same_framing_structure : undefined
@@ -152,6 +153,11 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       {resizedWebp.supported_kernels.length} resize filters supported the same framing after WebP compression.
       The highlights mark brightness differences that persisted across filters. Each crop uses its own file’s native pixels.
       This comparison carries zero weight in the AI assessment.
+    </p>}
+    {croppedWebp && <p className="mt-2 mb-0 text-small text-text-muted">
+      Matching detail in {croppedWebp.anchor_zones.length} areas of the WebP located the crop at <NativeArea area={croppedWebp.reference_crop} /> in the earlier copy.
+      {' '}The highlights show brightness differences within that crop after allowing for compression. Pixels outside the crop were unassessed.
+      {' '}Ordinary edits can cause these differences. This comparison carries zero weight in the AI assessment.
     </p>}
     {sameJpegFraming && <p className="mt-2 mb-0 text-small text-text-muted">
       Exact JPEG block matches support the same framing. After encoding the earlier PNG with the submitted JPEG settings,

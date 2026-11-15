@@ -23,6 +23,7 @@ from app.detectors.image import (
     reference_exact_jpeg,
     reference_lossless_webp,
     reference_lossy_webp,
+    reference_lossy_webp_crop,
     reference_lossy_webp_resize,
     reference_png_opacity,
     reference_png_orientation,
@@ -289,6 +290,59 @@ def test_resized_lossy_webp_export_keeps_both_native_crops(reference_http, tmp_p
     export.write_text(json.dumps(payload))
     assert review(export, earlier_file, submitted_file)["crops_verified"] >= 2
     native["x"] += 1
+    export.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="Lossy WebP measurements differ"):
+        review(export, earlier_file, submitted_file)
+
+
+@pytest.mark.parametrize("scenario", ["inside", "outside", "ambiguous"])
+def test_cropped_lossy_webp_compares_only_the_matched_area(reference_http, tmp_path, monkeypatch, scenario):
+    monkeypatch.setattr(settings, "image_reference_lossy_webp", True)
+    f = reference_http
+    x, y, width, height = 25, 44, 702, 450
+    earlier = cv2.resize(f.reference_pixels, (768, 512), interpolation=cv2.INTER_CUBIC)
+    detail = cv2.GaussianBlur(np.random.default_rng(99).normal(0, 13, earlier.shape[:2]), (0, 0), .9)
+    earlier = np.clip(earlier + detail[:, :, None], 0, 255).astype(np.uint8)
+    if scenario == "ambiguous":
+        earlier = np.tile(earlier[:16, :16], (32, 48, 1))
+    edited = earlier.copy()
+    if scenario == "inside":
+        edited[y+120:y+175, x+230:x+280] = (220, 39, 115)
+    if scenario == "outside":
+        edited[:y] = (220, 39, 115)
+    earlier_file, submitted_file, export = (tmp_path / name for name in ("earlier.png", "submitted.webp", "comparison.json"))
+    Image.fromarray(earlier).save(earlier_file, format="PNG")
+    Image.fromarray(edited[y:y+height, x:x+width]).save(submitted_file, format="WEBP", quality=71)
+    stored = f.store.put_bytes(submitted_file.read_bytes())
+    with Session(f.engine) as db:
+        record = db.get(Analysis, "image-a")
+        record.sha256, record.size_bytes = stored.sha256, stored.size_bytes
+        db.commit()
+    response = f.client.post(_url(), files=_upload(earlier_file.read_bytes()), headers=f.viewer, data={"include_pdf": "true"})
+    assert response.status_code == 200
+    payload = response.json()
+    comp = payload["comparison"]
+    assert comp["affects_overall_confidence"] is False
+    if scenario == "ambiguous":
+        assert comp["status"] == reference_lossy_webp.UNASSESSED
+        assert not comp["regions"] and not payload["pngs"]
+        return
+    assert comp["schema"] == reference_lossy_webp_crop.SCHEMA and comp["status"] == "comparable"
+    proof = comp["lossy_webp_crop"]
+    assert proof["reference_crop"] == {"x": x, "y": y, "w": width, "h": height}
+    assert bool(comp["regions"]) == (scenario == "inside")
+    pdf_bytes = base64.b64decode(payload.pop("pdf"), validate=True)
+    with pymupdf.open(stream=pdf_bytes, filetype="pdf") as pdf:
+        assert "Matched an unscaled crop after WebP compression" in pdf[0].get_text()
+        assert f"x {x}, y {y}, {width} x {height} px" in pdf[0].get_text()
+        if comp["regions"]:
+            region = comp["regions"][0]
+            native = region["reference_region"]
+            assert native["x"] == region["x"] + x and native["y"] == region["y"] + y
+            _assert_pdf_assets(pdf, pdf[1], [region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")], payload)
+    export.write_text(json.dumps(payload))
+    assert review(export, earlier_file, submitted_file)["crops_verified"] == 2 * len(comp["regions"])
+    proof["reference_crop"]["x"] += 1
     export.write_text(json.dumps(payload))
     with pytest.raises(ValueError, match="Lossy WebP measurements differ"):
         review(export, earlier_file, submitted_file)

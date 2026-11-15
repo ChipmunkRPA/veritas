@@ -106,6 +106,11 @@ def _summary(document, comparison, assets):
         _text(page, MARGIN, 302, "Matching framing after proportional downsampling and WebP compression.", size=10, font="hebo")
         _text(page, MARGIN, 318, f"Resize filters supporting the framing: {kernels}.", size=10, color=MUTED)
         _text(page, MARGIN, 334, "Each crop uses the native pixels of its own file.", size=10, color=MUTED)
+    if proof := comparison.get("lossy_webp_crop"):
+        _text(page, MARGIN, 302, "Matched an unscaled crop after WebP compression.", size=10, font="hebo")
+        _text(page, MARGIN, 318, f"Earlier-copy area compared | {_area(proof['reference_crop'])}", size=10)
+        _text(page, MARGIN, 334, f"Matching detail in {len(proof['anchor_zones'])} areas supported placement.",
+              size=10, color=MUTED)
     if schema == reference_exact_jpeg.SCHEMA:
         proof = comparison["alignment"]
         _text(page, MARGIN, 302, "Same framing supported by exact JPEG block matches.", size=10, font="hebo")

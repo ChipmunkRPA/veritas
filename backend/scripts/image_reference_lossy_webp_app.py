@@ -19,6 +19,26 @@ ROLES = ("sharp", "prior_webp", "translated")
 
 
 def examples(args, receipt):
+    if args.cropped:
+        from scripts import image_reference_cropped_webp_transfer as benchmark
+
+        profile = "tight_corner"
+        roles = ("small_feathered", "prior_jpeg", "mirrored")
+        measured = {(r["case"]["source"], r["case"]["role"]): r for r in receipt["rows"] if r["case"]["profile"] == profile}
+        chosen = next(source for (source, role), row in measured.items() if role == roles[0]
+                      and row["registered"] == row["case"]["crop"]
+                      and useful((row["selected"], row["overlap"]), row["case"]["changed"])
+                      and measured[source, roles[1]]["registered"] and not measured[source, roles[1]]["selected"]
+                      and not measured[source, roles[2]]["registered"])
+        inputs = {}
+        for case, ref, upload, truth in benchmark.cases(args, "held", identity=chosen):
+            role = case["role"]
+            if role in roles and profile == case["profile"]:
+                row = measured[chosen, role]
+                assert case == row["case"]
+                inputs[role] = (row, ref, upload, truth)
+        assert set(inputs) == set(roles)
+        return inputs
     if args.resized:
         from scripts import image_reference_resized_webp_transfer as benchmark
 
@@ -56,18 +76,27 @@ def examples(args, receipt):
     raise ValueError("Held app proof cases were incomplete")
 
 
-def verify(payload, row, ref, submitted, folder, truth, *, resized):
+def verify(payload, row, ref, submitted, folder, truth, *, resized, cropped):
     import numpy as np
     import pymupdf
     from PIL import Image
 
-    from app.detectors.image import reference_lossy_webp, reference_lossy_webp_resize
+    from app.detectors.image import reference_lossy_webp, reference_lossy_webp_crop, reference_lossy_webp_resize
     from scripts.review_image_reference_export import review
     from scripts.verify_multimedia_exports import scan
 
     comparison = payload["comparison"]
-    assert comparison["schema"] == (reference_lossy_webp_resize.SCHEMA if resized else reference_lossy_webp.SCHEMA)
-    assert comparison["status"] == row["status"] and comparison["affects_overall_confidence"] is False
+    schema = reference_lossy_webp_resize.SCHEMA if resized or cropped else reference_lossy_webp.SCHEMA
+    status = row.get("status", reference_lossy_webp.UNASSESSED)
+    summary = "proportional downsampling and WebP compression" if resized else "allows for lossy WebP compression"
+    field = "selection_sha256" if resized else "selected_sha256"
+    if cropped and row["registered"]:
+        schema, status = reference_lossy_webp_crop.SCHEMA, "comparable"
+        summary, field = "Matched an unscaled crop after WebP compression", "selection"
+        bounds = comparison["lossy_webp_crop"]["reference_crop"]
+        assert [bounds[key] for key in ("x", "y", "w", "h")] == row["registered"]
+    assert comparison["schema"] == schema
+    assert comparison["status"] == status and comparison["affects_overall_confidence"] is False
     scan(str(comparison))
     pdf = base64.b64decode(payload.pop("pdf"), validate=True)
     export = folder / "comparison.json"
@@ -78,12 +107,10 @@ def verify(payload, row, ref, submitted, folder, truth, *, resized):
         pages = [page.get_text() for page in report]
         scan("\n".join(pages))
         if regions := comparison["regions"]:
-            summary = "proportional downsampling and WebP compression" if resized else "allows for lossy WebP compression"
             assert summary in pages[0] and len(regions) + 1 == len(pages)
             mask_bytes = base64.b64decode(payload["pngs"][comparison["mask"]["file"]], validate=True)
             with Image.open(io.BytesIO(mask_bytes)) as image:
                 mask = np.asarray(image) == 255
-            field = "selection_sha256" if resized else "selected_sha256"
             assert sha(mask.tobytes()) == row[field] and int((mask & truth).sum()) == row["overlap"]
             for text, region in zip(pages[1:], regions, strict=True):
                 assert all(region[role]["sha256"] in text for role in ("reference_crop", "submitted_crop", "submitted_overlay"))
@@ -97,7 +124,11 @@ def verify(payload, row, ref, submitted, folder, truth, *, resized):
 
 def run(args):
     receipt = read(args.receipt)
-    if args.resized:
+    if args.cropped:
+        from scripts import image_reference_cropped_webp_transfer as benchmark
+
+        benchmark.review(receipt)
+    elif args.resized:
         from scripts import image_reference_resized_webp_transfer as benchmark
 
         benchmark.verify(receipt)
@@ -145,7 +176,7 @@ def run(args):
             endpoint = f"/api/v2/analyses/{aid}/image-reference-comparison"
             assert body(client.get(endpoint))["available"]
             response = body(client.post(endpoint, files={"reference": (ref.name, earlier, "image/png")}, data={"include_pdf": "true"}))
-            verification[role] = verify(response, row, ref, submitted, folder, truth, resized=args.resized)
+            verification[role] = verify(response, row, ref, submitted, folder, truth, resized=args.resized, cropped=args.cropped)
             assert result_hash(aid) == before
     save(args.output / "receipt.json", {"results": verification, "paid_analyses": len(stub.sessions), "unpaid_jobs": 0,
                                         "overall_analysis_preserved": True})
@@ -155,7 +186,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
     parser.add_argument("receipt", type=Path)
-    parser.add_argument("--resized", action="store_true")
+    geometry = parser.add_mutually_exclusive_group()
+    geometry.add_argument("--resized", action="store_true")
+    geometry.add_argument("--cropped", action="store_true")
     parser.add_argument("--development-sources", type=Path, required=True)
     data = ROOT / "backend/data/independent-evaluation"
     parser.add_argument("--native", type=Path, default=data / "native-regional-serving-v47")

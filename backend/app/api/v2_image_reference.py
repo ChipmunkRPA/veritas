@@ -82,7 +82,7 @@ def _check_image(path: Path, *, allow_lossy_webp: bool = False) -> None:
 
                 if supported(image, body, minimum_side=MIN_SIDE):
                     return
-            scope = ("Use a simple opaque WebP. Downsampled lossy comparisons require each side to be 384 to 1,024 pixels."
+            scope = ("Use a simple opaque WebP. Cropped or downsampled lossy comparisons require sides of 384 to 1,024 pixels."
                      if allow_lossy_webp else "Use a simple opaque lossless WebP with each side between 512 and 1,024 pixels.")
             raise ProblemError(422, "Unsupported WebP", scope)
 
@@ -183,7 +183,7 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
                              allow_same_jpeg=settings.image_reference_same_jpeg,
                              allow_jpeg_detail_loss=settings.image_reference_jpeg_detail_loss,
                              allow_jpeg_detail_loss_extra_qualities=settings.image_reference_jpeg_detail_loss_extra_qualities,
-                             allow_lossy_webp=settings.image_reference_lossy_webp)
+                             allow_lossy_webp=settings.image_reference_lossy_webp, allow_lossy_webp_crop=True)
         if settings.image_reference_jpeg_png_envelope and comparison["status"] not in {
             "comparable", UNASSESSED, WEBP_UNASSESSED, LOSSY_WEBP_UNASSESSED,
         }:

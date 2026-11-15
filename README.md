@@ -14,6 +14,8 @@ are not prepared for use as court evidence or expert testimony.
 - **Images:** original crops, region overlays, provenance and metadata observations,
   and visual-generation and editing checks. Optional regional review also covers
   [supported lossless WebP stills](docs/image-regional-webp-2026-11-14.md).
+  Earlier-copy comparison can locate differences in
+  [supported cropped lossy WebP files](docs/image-reference-cropped-webp-2026-11-14.md).
   Overlays identify areas to inspect and can also highlight ordinary processing.
 - **Video:** sampled frames, tracked-face review intervals with before/during/after
   context where available, voice evidence, and audio/picture timing observations.

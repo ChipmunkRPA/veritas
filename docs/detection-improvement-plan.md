@@ -60,6 +60,15 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Locating short edits on exact isolated voices](audio-two-voice-isolation-2026-11-15.md)
+  compares mixture and estimated voices with dry and room-rendered versions
+  on the same clock. The one-second scan found no useful held room-rendered
+  ranges even with exact isolation. At a known edit clock, the PhonemeDF
+  dry voices ranked 14/16 edits above matched controls, compared with 9/16
+  after room rendering. Room and delivery robustness remain priorities
+  alongside separation. The current scan found three correctly timed
+  isolated stock edits from one family and lost the one detected in mixture.
+
 - [Independent edits to two competing voices](audio-two-voice-components-2026-11-15.md)
   renders 140 new mixtures with matched genuine edits. A wider stereo
   check locates two new held ranges and follows the correct voice in both.

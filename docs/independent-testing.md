@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [exact isolated voice replay](audio-two-voice-isolation-2026-11-15.md#replay)
+compares one-second results on two-voice mixtures, estimated voices, and
+exact dry and room-rendered voices. It verifies score changes at the same
+annotated edit clock separately from the interval selected by each check.
+
 The [two-voice source attribution replay](audio-two-voice-components-2026-11-15.md#replay)
 checks 140 deliveries whose primary and competing voices change independently.
 The portable reader separates timestamps, wrong-voice flags, ordinary alerts,

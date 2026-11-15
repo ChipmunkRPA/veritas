@@ -2796,6 +2796,28 @@ check with no located region uses an empty list. An unassessed check uses
 its status and reason, without a region list. Confirm the clock, frame
 order or text extraction against the original before entering positions.
 
+Use `count-events` with the same receipts when locating each separate edit
+matters. A pair must meet both prespecified overlap requirements. The
+counter finds the maximum number of one-to-one matches, so one long highlight
+can earn credit for at most one annotated edit. Separate report totals retain
+missed edits, unmatched proposals, fully located positive inputs, unassessed
+inputs, and distinct source groups by medium and condition. The output uses
+commitments and counts and omits case IDs and exact locations.
+
+```sh
+python3 -IS "$review" count-events "$scratch/example/manifest.json" \
+  "$scratch/example/location-truth.json" "$scratch/example/candidate-locations.json" \
+  "$scratch/event-counts.json" --match .30 .50
+cmp "$scratch/example/candidate-event-counts.json" "$scratch/event-counts.json"
+```
+
+The example has two separately annotated adjacent edit ranges per positive
+input. The regular region count still measures their union. The event count
+treats repeated identical proposals as one for matching and counts duplicates
+as unmatched. Inputs represented only by a PBM mask still have a union count.
+For the event count, masks are reported as unavailable instance geometry
+because they do not declare separate edits.
+
 For an irregular image region, use a binary PBM mask in the original
 image geometry. Truth or response can use a mask in place of `regions`.
 The other side can be another mask or a set of rectangles. Use the

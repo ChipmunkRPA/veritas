@@ -53,6 +53,14 @@ def main() -> None:
     locations.add_argument("response", type=Path)
     locations.add_argument("output", type=Path)
     locations.add_argument("--image-mask-dir", type=Path, help="Local directory for explicitly declared binary PBM masks")
+    events = commands.add_parser("count-events", help="Count individual edit matches without disclosing private annotations")
+    events.add_argument("manifest", type=Path)
+    events.add_argument("truth", type=Path)
+    events.add_argument("response", type=Path)
+    events.add_argument("output", type=Path)
+    events.add_argument("--match", nargs=2, type=float, required=True, metavar=("IOU", "RECALL"),
+                        help="Declare the minimum per-event IoU and recall")
+    events.add_argument("--image-mask-dir", type=Path, help="Local directory for explicitly declared binary PBM masks")
     inputs = commands.add_parser("verify-inputs", help="Rehash every planned input and parent source on disk")
     inputs.add_argument("manifest", type=Path)
     inputs.add_argument("file_index", type=Path)
@@ -100,6 +108,11 @@ def main() -> None:
         from app.bench.independent_inputs import verify_inputs
 
         result = verify_inputs(manifest, read(args.file_index), args.root)
+    elif args.command == "count-events":
+        from app.bench.independent_locations import count_events
+
+        result = count_events(manifest, read(args.truth), read(args.response), mask_directory=args.image_mask_dir,
+                              minimum_iou=args.match[0], minimum_recall=args.match[1])
     elif args.command == "replicate":
         from app.bench.independent_replication import replicate
 

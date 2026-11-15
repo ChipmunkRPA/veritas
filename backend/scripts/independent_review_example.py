@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from app.bench.independent import LOCALIZATION_UNITS, SCHEMA, compare, digest, freeze
-from app.bench.independent_locations import TRUTH_SCHEMA
+from app.bench.independent_locations import TRUTH_SCHEMA, count_events
 from app.bench.independent_replication import replicate_locations
 
 EXTENTS = {"audio": 48_000, "image": 1_000, "text": 500, "video": 100}
@@ -63,8 +63,10 @@ def _location_example(manifest, confirmation, *, moved=False):
                 return []
             return [[start // 10, 0, (start + size) // 10, 10]] if image else [[start, start + size]]
         target_start = source // 2 if case["label"] else 0
+        first_length = target // 2
         truth["cases"].append({"id": row["id"], "input_sha256": row["input_sha256"],
-                               "extent": extent, "regions": region(target_start, target)})
+                               "extent": extent, "regions": region(target_start, first_length)
+                               + region(target_start + first_length, target - first_length)})
         location = row["localization"]
         if location["status"] == "ok":
             reported, overlap = (location[k] for k in ("reported_units", "overlap_units"))
@@ -99,5 +101,7 @@ def create(directory, write):
             write(directory / "candidate-locations.json", response)
             write(directory / "candidate-repeat-locations.json", repeated)
             write(directory / "location-replication.json", replicate_locations(manifest, truth, response, repeated, lock))
+            write(directory / "candidate-event-counts.json", count_events(manifest, truth, response, minimum_iou=.30,
+                                                                         minimum_recall=.50))
         systems.extend((confirmation, lock))
     write(directory / "comparison.json", compare(manifest, *systems, require_freeze_commitment=True))

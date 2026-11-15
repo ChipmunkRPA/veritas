@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import re
+from collections import Counter, defaultdict
 from copy import deepcopy
 from itertools import pairwise
 from pathlib import Path
@@ -11,6 +12,7 @@ from pathlib import Path
 from app.bench import independent
 
 TRUTH_SCHEMA = "chipmunk.independent-location-truth/1"
+EVENTS_SCHEMA = "chipmunk.independent-location-events/1"
 MAX_REGIONS = 256
 MAX_MASK_SIDE = 16_384
 MAX_MASK_PIXELS = 64_000_000
@@ -156,7 +158,7 @@ def _truth_rows(document, expected, manifest_hash, split):
     return rows
 
 
-def _count_locations(manifest, truth, response, mask_directory, *, retain_locations=False):
+def _count_locations(manifest, truth, response, mask_directory, *, retain_locations=False, collect_events=None):
     audit = independent.audit_manifest(manifest)
     split = response.get("split")
     if split not in independent.SPLITS or response.get("manifest_sha256") != audit["manifest_sha256"]:
@@ -193,11 +195,15 @@ def _count_locations(manifest, truth, response, mask_directory, *, retain_locati
         if location["status"] != "ok":
             if location.keys() != {"status", "reason"}:
                 raise ValueError("Unassessed locations need a reason without coordinates")
+            if collect_events is not None:
+                collect_events(expected[row["id"]], reference, None)
             continue
         if location.keys() not in ({"status", "regions"}, {"status", "mask"}):
             raise ValueError("Measured locations need exact regions or an image mask")
         detected = _location(location, extent, directory)
         _, reported, overlap = _area(reference, detected, extent)
+        if collect_events is not None:
+            collect_events(expected[row["id"]], reference, detected)
         if retain_locations:
             exact_locations[row["id"]] = (extent, location, directory)
         row["localization"] = {"status": "ok", "reported_units": reported, "overlap_units": overlap}
@@ -208,3 +214,73 @@ def _count_locations(manifest, truth, response, mask_directory, *, retain_locati
 def count_locations(manifest, truth, response, *, mask_directory: Path | None = None):
     """Convert local annotations to a portable receipt while stripping location coordinates."""
     return _count_locations(manifest, truth, response, mask_directory)[0]
+
+
+def _matches(reference, detected, minimum_iou, minimum_recall):
+    # Eligible pairs form a bipartite graph. Reassign earlier matches when
+    # needed so that a broad proposal cannot block two narrower matches.
+    edges = []
+    for target in reference:
+        compatible = []
+        for index, proposal in enumerate(detected):
+            target_units, reported_units, overlap = measures([target], [proposal])
+            if overlap / (target_units + reported_units - overlap) >= minimum_iou and overlap / target_units >= minimum_recall:
+                compatible.append(index)
+        edges.append(compatible)
+    assigned = {}
+
+    def assign(target, visited):
+        for proposal in edges[target]:
+            if proposal in visited:
+                continue
+            visited.add(proposal)
+            if proposal not in assigned or assign(assigned[proposal], visited):
+                assigned[proposal] = target
+                return True
+        return False
+
+    return sum(assign(target, set()) for target in range(len(reference)))
+
+
+def count_events(manifest, truth, response, *, minimum_iou, minimum_recall, mask_directory: Path | None = None):
+    """Summarize separate annotations and proposals without emitting their coordinates."""
+    if any(type(value) not in (float, int) or not 0 < value <= 1 for value in (minimum_iou, minimum_recall)):
+        raise ValueError("Minimum event IoU and recall must each be greater than zero and at most one")
+    grouped = defaultdict(Counter)
+    groups = defaultdict(set)
+
+    def collect(case, reference, detected):
+        stratum = case["modality"], case["condition"], case["label"]
+        group = grouped[stratum]
+        group["planned"] += 1
+        groups[stratum].add(case["group"])
+        if isinstance(reference, tuple) or isinstance(detected, tuple):
+            group["unavailable_instance_geometry"] += 1
+            return
+        if len({tuple(event) for event in reference}) != len(reference):
+            raise ValueError("Event truth contains identical duplicate annotations")
+        group["target_events"] += len(reference)
+        if detected is None:
+            group["unassessed"] += 1
+            return
+        group["assessed"] += 1
+        distinct_proposals = list(dict.fromkeys(map(tuple, detected)))
+        matched = _matches(reference, distinct_proposals, minimum_iou, minimum_recall)
+        group["reported_events"] += len(detected)
+        group["matched_events"] += matched
+        group["complete_positive_inputs"] += bool(reference) and matched == len(reference)
+
+    _count_locations(manifest, truth, response, mask_directory, collect_events=collect)
+    strata = []
+    fields = ("planned", "assessed", "unassessed", "unavailable_instance_geometry", "target_events",
+              "reported_events", "matched_events", "complete_positive_inputs")
+    for (modality, condition, label), counts in sorted(grouped.items()):
+        strata.append({"modality": modality, "condition": condition, "label": label,
+                       "source_groups": len(groups[modality, condition, label]),
+                       **{key: counts[key] for key in fields},
+                       "missed_events": counts["target_events"] - counts["matched_events"],
+                       "unmatched_proposals": counts["reported_events"] - counts["matched_events"]})
+    return {"schema": EVENTS_SCHEMA, "manifest_sha256": independent.digest(manifest),
+            "truth_sha256": independent.digest(truth), "response_sha256": independent.digest(response),
+            "split": response["split"], "minimum_iou": minimum_iou, "minimum_recall": minimum_recall,
+            "matching": "maximum one-to-one matches", "strata": strata}

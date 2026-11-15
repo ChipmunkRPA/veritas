@@ -105,6 +105,10 @@ def test_exact_image_masks_and_rectangles_use_the_same_native_geometry(tmp_path)
 
     prediction["localization"] = {"status": "ok", "mask": measured}
     run(3, 2)
+    event_report = locations.count_events(manifest, truth, response, minimum_iou=.3, minimum_recall=.5,
+                                          mask_directory=tmp_path)
+    assert event_report["strata"][0]["unavailable_instance_geometry"] == 1
+    assert event_report["strata"][0]["target_events"] == 0
     source.pop("mask")
     source["regions"] = [[0, 0, 2, 2]]
     run(3, 1)
@@ -126,6 +130,34 @@ def test_exact_image_masks_and_rectangles_use_the_same_native_geometry(tmp_path)
     source["extent"] = [3, 5]
     with pytest.raises(ValueError, match="dimensions"):
         locations.count_locations(manifest, truth, response, mask_directory=tmp_path)
+
+
+def test_instance_counts_detect_merged_edits_and_unmatched_proposals():
+    manifest, receipt = fixture()
+    selected = [case for case in manifest["cases"] if case["modality"] == "audio" and case["split"] == "confirmation"]
+    for case in selected:
+        case["localization_truth"] = {"unit": "samples", "source_units": 100, "target_units": 20 * case["label"]}
+    truth = {"schema": locations.TRUTH_SCHEMA, "split": "confirmation", "manifest_sha256": review.digest(manifest),
+             "cases": [{"id": case["id"], "input_sha256": case["input_sha256"], "extent": [100],
+                        "regions": [[10, 20], [25, 35]] if case["label"] else []} for case in selected]}
+    response = receipt("confirmation")
+    by_id = {case["id"]: case for case in selected}
+    for row in response["predictions"]:
+        if case := by_id.get(row["id"]):
+            row["localization"] = {"status": "ok", "regions": [[10, 35], [10, 35]]} if case["condition"] == "clean" else (
+                {"status": "ok", "regions": [[10, 35], [10, 20], [70, 80]]} if case["label"] else
+                {"status": "inconclusive", "reason": "Unverified sample clock"})
+    result = locations.count_events(manifest, truth, response, minimum_iou=.3, minimum_recall=.5)
+    clean_control, merged, unassessed, separate = result["strata"]
+    assert (clean_control["matched_events"], clean_control["unmatched_proposals"]) == (0, 2)
+    assert (merged["matched_events"], merged["missed_events"], merged["unmatched_proposals"],
+            merged["complete_positive_inputs"]) == (1, 1, 1, 0)
+    assert (unassessed["assessed"], unassessed["unassessed"]) == (0, 1)
+    assert (separate["matched_events"], separate["unmatched_proposals"], separate["complete_positive_inputs"]) == (2, 1, 1)
+    assert all(case["id"] not in str(result) for case in selected)
+    assert all(case["input_sha256"] not in str(result) for case in selected)
+    with pytest.raises(ValueError, match="Minimum event"):
+        locations.count_events(manifest, truth, response, minimum_iou=0, minimum_recall=.5)
 
 
 def test_four_media_fixture_audits_and_summarizes_without_loading_models():

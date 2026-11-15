@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Word responses after hiding neighboring sentences](writing-context-response-words-2026-11-15.md)
+  improved the two-stage report check from 4/32 to 6/32 local Qwen
+  locations and reduced ordinary report flags from 22/93 to 14/93.
+  The candidate found no GPT-5.4 report locations and lost two net
+  abstract locations at the separate genre point. It stays in evaluation.
+
 - [Explicit temporal boundary cue for short voice edits](audio-temporal-boundary-transfer-2026-11-15.md)
   increased useful primary locations without a matched-control alert
   from one to three. It added one useful Kokoro location in a separate

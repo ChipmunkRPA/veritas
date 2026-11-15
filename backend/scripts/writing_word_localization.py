@@ -76,8 +76,8 @@ def input_plan(path):
     return rows, truth, baseline
 
 
-def encode(row, tokenizer):
-    encoded = tokenizer(row["text"], return_offsets_mapping=True, truncation=False)
+def encode(row, tokenizer, *, tokenized=None):
+    encoded = tokenizer(row["text"], return_offsets_mapping=True, truncation=False) if tokenized is None else tokenized
     ids = encoded["input_ids"]
     if len(ids) > parent.MAX_TOKENS:
         return None

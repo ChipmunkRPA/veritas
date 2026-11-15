@@ -38,13 +38,16 @@ def fit_roster(rows):
             or row["role"] == "editorial" and row["family"] in {"before", "edited"}]
 
 
-def feature_batches(rows, tokenizer, model, device):
+def feature_batches(rows, tokenizer, model, device, *, context_response=False):
     import torch
 
     with torch.inference_mode():
         for start in range(0, len(rows), 16):
             batch = rows[start:start + 16]
-            encoded = [prior.encode(row, tokenizer) for row in batch]
+            tokens = [tokenizer(row["text"], return_offsets_mapping=True, return_special_tokens_mask=True,
+                                truncation=False) if context_response else None
+                      for row in batch]
+            encoded = [prior.encode(row, tokenizer, tokenized=tokenized) for row, tokenized in zip(batch, tokens, strict=True)]
             width = max((len(item[0]) for item in encoded if item), default=0)
             ids = torch.zeros((len(batch), width), dtype=torch.long)
             attention = torch.zeros_like(ids)
@@ -55,6 +58,8 @@ def feature_batches(rows, tokenizer, model, device):
                     attention[i, :len(sequence)] = 1
             if width:
                 hidden = model(input_ids=ids.to(device), attention_mask=attention.to(device)).last_hidden_state.cpu().float()
+                if context_response:
+                    standalone = isolated_sentence_states(batch, encoded, tokens, ids, model, device, hidden)
             for i, (row, item) in enumerate(zip(batch, encoded, strict=True)):
                 if not item:
                     yield row, None
@@ -66,11 +71,41 @@ def feature_batches(rows, tokenizer, model, device):
                 states = hidden[i].new_zeros((len(words), hidden.shape[-1])).index_add_(0, index, hidden[i, subwords]) / count
                 parts = torch.tensor([word[2] for word in words])
                 centers = torch.stack([states[parts == part].mean(0) for part in range(5)])
-                context = centers.clone()
-                context[1:4] -= (centers[:3] + centers[2:]) / 2
                 useful = [i for i, word in enumerate(words) if 1 <= word[2] <= 3]
-                features = torch.cat((states[useful], states[useful] - centers[parts[useful]], context[parts[useful]]), dim=1)
+                if context_response:
+                    isolated_words = torch.zeros_like(states).index_add_(0, index, standalone[i, subwords]) / count
+                    measured_context = states[useful] - isolated_words[useful]
+                else:
+                    context = centers.clone()
+                    context[1:4] -= (centers[:3] + centers[2:]) / 2
+                    measured_context = context[parts[useful]]
+                features = torch.cat((states[useful], states[useful] - centers[parts[useful]], measured_context), dim=1)
                 yield row, (words, useful, features)
+
+
+def isolated_sentence_states(batch, encoded, tokens, ids, model, device, reference):
+    import torch
+
+    standalone = torch.zeros_like(reference)
+    active = [i for i, item in enumerate(encoded) if item is not None]
+    input_ids = ids[active].to(device)
+    for section in (1, 2, 3):
+        keep = torch.zeros((len(active), ids.shape[1]), dtype=torch.bool)
+        inside = torch.zeros_like(keep)
+        for row_index, i in enumerate(active):
+            start, end = batch[i]["spans"][section]
+            offsets = tokens[i]["offset_mapping"]
+            mask = [start <= a < b <= end for a, b in offsets]
+            word_ids, words = encoded[i][1:]
+            if any(not mask[j] for j, index in enumerate(word_ids) if index is not None and words[index][2] == section):
+                raise ValueError("The isolated view lost a token from its source sentence")
+            inside[row_index, :len(mask)] = torch.tensor(mask)
+            special = tokens[i]["special_tokens_mask"]
+            keep[row_index, :len(mask)] = torch.tensor([retain or bool(flag) for retain, flag in zip(mask, special, strict=True)])
+        states = model(input_ids=input_ids, attention_mask=keep.to(device)).last_hidden_state.cpu().float()
+        for row_index, i in enumerate(active):
+            standalone[i, inside[row_index]] = states[row_index, inside[row_index]]
+    return standalone
 
 def fit(examples, truth):
     import torch
@@ -143,12 +178,12 @@ def best(words, score):
     return ranked[0] if ranked[0]["score"] != ranked[1]["score"] else None
 
 
-def measure(rows, truth, tokenizer, backbone, device, trained):
+def measure(rows, truth, tokenizer, backbone, device, trained, *, context_response=False):
     import torch
 
     mean, scale, heads = trained
     with torch.no_grad():
-        for row, example in feature_batches(rows, tokenizer, backbone, device):
+        for row, example in feature_batches(rows, tokenizer, backbone, device, context_response=context_response):
             record = {key: row[key] for key in ("role", "group", "family", "sha256", "spans", "position")}
             word_spans = [[a, b, sentence] for a, b, sentence, _ in prior.items(row)]
             record.update(words=word_spans, changed=sorted(truth.get(row["sha256"], ())),
@@ -231,7 +266,7 @@ def compare_prior(record):
     return {" / ".join(key): dict(value) for key, value in sorted(totals.items())}
 
 
-def run(args):
+def run(args, *, schema=SCHEMA, rule=RULE, context_response=False):
     import torch
     from safetensors.torch import load_file, save_file
 
@@ -242,7 +277,7 @@ def run(args):
         raise ValueError("The frozen prior word encoder differs from its evaluated weights")
     args.output.mkdir(mode=0o700)
     fit_rows = fit_roster(rows)
-    freeze = {"schema": SCHEMA, "rule": RULE, "encoder_sha256": pinned["weights_sha256"],
+    freeze = {"schema": schema, "rule": rule, "encoder_sha256": pinned["weights_sha256"],
               "fit": [[row[key] for key in ("role", "group", "family", "sha256")] for row in fit_rows]}
     prior.parent.previous.write(args.output / "freeze.json", freeze)
     tokenizer, backbone, _, device = prior.parent.init_encoder(args.encoder)
@@ -250,15 +285,18 @@ def run(args):
     backbone.load_state_dict({key.removeprefix("encoder."): value for key, value in frozen.items()
                               if key.startswith("encoder.")}, strict=True)
     backbone.eval()
-    trained, metrics = fit(feature_batches(fit_rows, tokenizer, backbone, device), truth)
+    features = feature_batches(fit_rows, tokenizer, backbone, device, context_response=context_response)
+    trained, metrics = fit(features, truth)
     mean, scale, heads = trained
     filename = args.output / "head.safetensors"
     save_file({"mean": mean, "scale": scale} | {f"{arm}.{key}": value for arm, head in heads.items()
               for key, value in head.state_dict().items()}, filename)
-    calibration = list(measure([row for row in rows if row["role"] == "calibration"], truth, tokenizer, backbone, device, trained))
+    calibration = list(measure([row for row in rows if row["role"] == "calibration"], truth, tokenizer, backbone, device,
+                               trained, context_response=context_response))
     cuts = points(calibration)
     prior.parent.previous.write(args.output / "points.json", cuts)
-    held = list(measure([row for row in rows if row["role"] == "held"], truth, tokenizer, backbone, device, trained))
+    held = list(measure([row for row in rows if row["role"] == "held"], truth, tokenizer, backbone, device,
+                        trained, context_response=context_response))
     record = freeze | metrics | {"head_sha256": prior.parent.pool.file_hash(filename), "calibration": calibration,
                                 "held": held, "points": cuts, "results": compare(held, cuts)}
     prior.parent.previous.write(args.output / "receipt.json", record)
@@ -305,7 +343,6 @@ def ordinary_inputs(folder):
 def ordinary_transfer(args):
     import torch
     from safetensors.torch import load_file
-    from torch import nn
 
     torch.set_num_threads(4)
     primary = spans.read(args.fitted / "receipt.json")
@@ -322,15 +359,7 @@ def ordinary_transfer(args):
         module.load_state_dict({key.removeprefix(prefix + "."): value for key, value in frozen.items()
                                if key.startswith(prefix + ".")}, strict=True)
         module.eval()
-    parameters = load_file(fitted)
-    mean, scale = parameters["mean"], parameters["scale"]
-    heads = {}
-    for arm in ARMS:
-        model = nn.Sequential(nn.Linear(len(mean), 32), nn.GELU(), nn.Linear(32, 2))
-        model.load_state_dict({key.removeprefix(arm + "."): value for key, value in parameters.items()
-                               if key.startswith(arm + ".")}, strict=True)
-        heads[arm] = model.eval()
-    measurements = list(measure(rows, truth, tokenizer, backbone, device, (mean, scale, heads)))
+    measurements = list(measure(rows, truth, tokenizer, backbone, device, load_fitted_heads(fitted)))
     older = prior.score(rows, truth, tokenizer, backbone, old_head, device)
     for row, old in zip(measurements, older, strict=True):
         if row["sha256"] != old["sha256"] or row["words"] != old["word_ranges"]:
@@ -341,6 +370,21 @@ def ordinary_transfer(args):
     record["results"] = compare(measurements, record["points"])
     prior.parent.previous.write(args.output, record)
     print(json.dumps(record["results"], sort_keys=True), flush=True)
+
+
+def load_fitted_heads(path):
+    from safetensors.torch import load_file
+    from torch import nn
+
+    parameters = load_file(path)
+    mean, scale = parameters["mean"], parameters["scale"]
+    heads = {}
+    for arm in ARMS:
+        model = nn.Sequential(nn.Linear(len(mean), 32), nn.GELU(), nn.Linear(32, 2))
+        model.load_state_dict({key.removeprefix(arm + "."): value for key, value in parameters.items()
+                               if key.startswith(arm + ".")}, strict=True)
+        heads[arm] = model.eval()
+    return mean, scale, heads
 
 
 def review_ordinary(receipt, primary_path):

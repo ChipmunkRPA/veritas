@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [isolated-sentence response replay](writing-context-response-words-2026-11-15.md#independent-replay)
+recounts changes in local word selection and ordinary alerts across
+reports, news, abstracts and dated journal revisions. It also exposes
+the tradeoff from keeping either check's findings.
+
 The [voice boundary cue replay](audio-temporal-boundary-transfer-2026-11-15.md#replay)
 recounts primary and transfer locations, matched genuine splices and
 background-only alerts using two numeric receipts. The native replay

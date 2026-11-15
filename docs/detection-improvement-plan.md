@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Rotated copies inside one JPEG](image-jpeg-turned-copy-2026-11-15.md)
+  raised correct two-crop locations from 11/111 to 85/111 at quality 75
+  and from 18/111 to 82/111 at quality 90, with zero additional flags
+  across 370 matched controls. The tested fallback is an evaluation
+  script. A local serving trial needs source verification and report
+  coverage.
+
 - [Word removal and masking inside a flagged sentence](writing-word-perturbation-2026-11-15.md)
   located 6/309 rewrites with deletion versus 5/309 with the previous
   word proposal. It gained six and lost five, and highlighted all 110

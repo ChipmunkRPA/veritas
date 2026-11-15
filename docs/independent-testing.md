@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [rotated JPEG copy replay](image-jpeg-turned-copy-2026-11-15.md#replay)
+recounts 592 deliveries from attributed source photos and requires
+useful overlap on both original crop boxes. It preserves the prior
+checks' selection and counts additional flags on five control types
+separately for each JPEG profile.
+
 The [word masking and deletion replay](writing-word-perturbation-2026-11-15.md#replay)
 checks 10,223 source ranges and reconstructs the selection for each
 perturbation. It distinguishes ordinary flags, exact word overlap, and

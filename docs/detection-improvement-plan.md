@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Predictability in other passages of the same report](writing-other-paragraphs-2026-11-14.md)
+  reduced ordinary highlights from 51 to 43 of 51 at the tighter
+  operating point, while useful locations fell from 29 to 13. The
+  rule stays offline. Eight simulated checkouts separately confirmed
+  that passage highlights can coexist with an inconclusive overall assessment.
+
 - [Independently matched PDF revisions](document-pdf-independent-anchor-2026-11-14.md)
   record the source page and exact changed-word boxes in each draft,
   including when a sentence moves to another page. Three simulated

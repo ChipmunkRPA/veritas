@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [other-paragraph comparison](writing-other-paragraphs-2026-11-14.md#replay)
+recounts a check of predictability across disjoint passages from the same report.
+It includes point selection on separate ordinary reports, two held rewrite
+families and eight locally simulated checkout reports.
+
 The [PDF draft replay](document-pdf-independent-anchor-2026-11-14.md#local-verification)
 verifies a changed sentence against both original PDF pages after repagination.
 

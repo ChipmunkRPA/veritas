@@ -1,0 +1,846 @@
+{
+  "billing": {
+    "amount_minor": 999,
+    "currency": "usd",
+    "simulated": true,
+    "unpaid_jobs": 0
+  },
+  "outcomes": {
+    "gemini-2.5-flash/ordinary": {
+      "actual": 2,
+      "inconclusive": 2,
+      "total": 2
+    },
+    "gemini-2.5-flash/rewritten": {
+      "actual": 2,
+      "inconclusive": 2,
+      "total": 2
+    },
+    "gpt-5.4-nano/ordinary": {
+      "actual": 2,
+      "inconclusive": 2,
+      "total": 2
+    },
+    "gpt-5.4-nano/rewritten": {
+      "actual": 1,
+      "inconclusive": 2,
+      "total": 2
+    }
+  },
+  "roster_sha256": "c6616de24f9c3cc21e53417dc1fd4014656d9288205dae98534b41f9bd6b4044",
+  "rows": [
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            115
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              0,
+              115
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            116,
+            284
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              115
+            ],
+            [
+              116,
+              284
+            ],
+            [
+              285,
+              361
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            965,
+            1229
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              965,
+              1229
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            1230,
+            1368
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              965,
+              1229
+            ],
+            [
+              1230,
+              1368
+            ],
+            [
+              1369,
+              1595
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1369,
+            1595
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              1369,
+              1595
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1597,
+            1787
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              1597,
+              1787
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "group": "3863b2884a76f8b5b195f81f4d5ca9a0d6bcf99c0ca19eb942797541c1d4c574",
+      "sha256": "9a4ef6af6c6f72085ed7d1a783e957f8d5e175f7674052f112297925d59cc28c",
+      "signed_source_replay": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            115
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              0,
+              115
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            116,
+            284
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              115
+            ],
+            [
+              116,
+              284
+            ],
+            [
+              285,
+              361
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            1223,
+            1361
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              965,
+              1222
+            ],
+            [
+              1223,
+              1361
+            ],
+            [
+              1362,
+              1588
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1362,
+            1588
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              1362,
+              1588
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1590,
+            1780
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              1590,
+              1780
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            1781,
+            1958
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              1590,
+              1780
+            ],
+            [
+              1781,
+              1958
+            ],
+            [
+              1959,
+              2115
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "group": "3863b2884a76f8b5b195f81f4d5ca9a0d6bcf99c0ca19eb942797541c1d4c574",
+      "sha256": "6d3234baf0f5528fb91e0ed0351f27364e0bd818b62da99775c7ea47c93b8eab",
+      "signed_source_replay": true
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            332,
+            433
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              332,
+              433
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            434,
+            521
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              434,
+              521
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1574,
+            1657
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              1574,
+              1657
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1658,
+            1808
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              1658,
+              1808
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            2177,
+            2283
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              2177,
+              2283
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            2442,
+            2576
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              2442,
+              2576
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "group": "483206585e0ce51697f892d600a18feda43b25b8dbf43b38fd8a58f0b3b0c2f3",
+      "sha256": "9230dd1d3eef98ba9522e72a823f6a13902a8cf9193fd7d6f2ad34e663d2adda",
+      "signed_source_replay": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            332,
+            433
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              332,
+              433
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            434,
+            521
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              434,
+              521
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1578,
+            1661
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              1578,
+              1661
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1662,
+            1812
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              1662,
+              1812
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            2181,
+            2287
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              2181,
+              2287
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            2446,
+            2580
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              2446,
+              2580
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "group": "483206585e0ce51697f892d600a18feda43b25b8dbf43b38fd8a58f0b3b0c2f3",
+      "sha256": "aed06237bd59875a03cbf4fd4fe1b398ee0903d6f0f030db4ce44e9f66381b49",
+      "signed_source_replay": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            206
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              0,
+              206
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1602,
+            1908
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              1602,
+              1908
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1909,
+            2149
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              1909,
+              2149
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            2150,
+            2247
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              1909,
+              2149
+            ],
+            [
+              2150,
+              2247
+            ],
+            [
+              2249,
+              2372
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            2249,
+            2372
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              2249,
+              2372
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            2593,
+            2738
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              2373,
+              2592
+            ],
+            [
+              2593,
+              2738
+            ],
+            [
+              2739,
+              2869
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "group": "9a8d59ea156166246751097583235c996c8892a7e34a537bfb211955c2a4a6e7",
+      "sha256": "654eedbf42f1771d5a687769d41d39f13411c486a154ea93e562080461ee9942",
+      "signed_source_replay": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            206
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              0,
+              206
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            1602,
+            1876
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              1389,
+              1601
+            ],
+            [
+              1602,
+              1876
+            ],
+            [
+              1877,
+              2117
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1877,
+            2117
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              1877,
+              2117
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            2118,
+            2215
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              1877,
+              2117
+            ],
+            [
+              2118,
+              2215
+            ],
+            [
+              2217,
+              2340
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            2217,
+            2340
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              2217,
+              2340
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            2341,
+            2560
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              2341,
+              2560
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "group": "9a8d59ea156166246751097583235c996c8892a7e34a537bfb211955c2a4a6e7",
+      "sha256": "fddbb0cb48a811944731b9d903beefd8eb647faeb7595f68d64ad3b13f8b8b6a",
+      "signed_source_replay": true
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            191,
+            446
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              191,
+              446
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1052,
+            1123
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              1052,
+              1123
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1124,
+            1415
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              1124,
+              1415
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1494,
+            1638
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              1494,
+              1638
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1993,
+            2162
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              1993,
+              2162
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "group": "dbcfbe3e93de58212a0773af51769f6723103c0305319a6d4dc3c1d3f3a9babb",
+      "sha256": "1da3f955f8828d2ea433dd2d3ed4b053e3506f3bdc9c383ebd297bcb368d9f7b",
+      "signed_source_replay": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            191,
+            446
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              191,
+              446
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1052,
+            1120
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              1052,
+              1120
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1121,
+            1412
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              1121,
+              1412
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1491,
+            1635
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              1491,
+              1635
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1990,
+            2159
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              1990,
+              2159
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "group": "dbcfbe3e93de58212a0773af51769f6723103c0305319a6d4dc3c1d3f3a9babb",
+      "sha256": "86b97e028a29768e4c3086d2991c4a8223549901ccf8295a93cbb5008f7ee836",
+      "signed_source_replay": false
+    }
+  ],
+  "schema": "chipmunk.writing-sibling-paragraph-transfer/1/worker"
+}

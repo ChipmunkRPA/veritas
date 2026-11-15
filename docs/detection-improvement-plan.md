@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Missing lip closure during a detected M sound](video-mouth-closure-transfer-2026-11-14.md)
+  located four of 20 same-speaker dubs at the 100 ms broader point.
+  The current timing rule found zero. The candidate produced six flags
+  on controls with same-letter dubs or constant timing shifts and stays
+  in evaluation. The wider point also flagged untouched footage.
+
 - [Temporary phase changes in background sound](audio-tonal-phase-evidence-2026-11-14.md)
   located 12/144 staged intervals in short noisy mixtures. Seven of 72
   gradual timing changes also triggered the check. The other 540 controls

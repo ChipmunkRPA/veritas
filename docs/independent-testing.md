@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [lip-closure and soundtrack replay](video-mouth-closure-transfer-2026-11-14.md#local-replay)
+compares visible articulation with an audible M sound on source-separated
+speakers. It checks exact audio replacements, full source clocks, and
+mouth crops around both correct locations and control flags.
+
 The [background tone phase replay](audio-tonal-phase-evidence-2026-11-14.md#replay)
 compares two tonal continuity rules with the existing acoustic check.
 It includes exact staged intervals, ordinary controls, and a transfer

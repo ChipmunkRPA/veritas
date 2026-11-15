@@ -229,7 +229,7 @@ def source_rows(folder, previous=None):
     return document
 
 
-def neural_decoder(path):
+def neural_decoder(path, *, names=("b", "bʲ", "bʰ", "bː", "p", "pʲ", "pʰ", "pː")):
     import numpy as np
     import torch
     from transformers import AutoModelForCTC, Wav2Vec2FeatureExtractor
@@ -242,7 +242,6 @@ def neural_decoder(path):
     model = AutoModelForCTC.from_pretrained(path, local_files_only=True, trust_remote_code=False, dtype=dtype).to(device).eval()
     feature = Wav2Vec2FeatureExtractor.from_pretrained(path, local_files_only=True)
     vocabulary = json.loads((path / "vocab.json").read_text())
-    names = ("b", "bʲ", "bʰ", "bː", "p", "pʲ", "pʰ", "pː")
     phones = {vocabulary[name]: name[0] for name in names}
     hop, width = 1, 1
     for kernel, step in zip(model.config.conv_kernel, model.config.conv_stride, strict=True):

@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Lip timing at 30 and 29.97 fps](video-lip-frame-clock-2026-11-15.md)
+  reproduced seven correctly located carrier deliveries in a controlled
+  nearest-picture replay. On separate native 29.97 fps speech, it located
+  2/48 staged local shifts, with 0/72 ordinary flags and 1/48 constant-delay
+  flags. The wider lip-timing coverage remains in evaluation.
+
 - [Compact interpolation cells for soft-edged image edits](image-native-cfa-compact-core-2026-11-15.md)
   located 40 of 60 staged 32-pixel edits previously missed, including
   24 of 40 off-grid deliveries. It added no flags across 160 assessed

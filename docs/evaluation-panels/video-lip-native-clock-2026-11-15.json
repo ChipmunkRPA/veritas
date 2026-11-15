@@ -1,0 +1,52 @@
+{
+  "cases": 168,
+  "counts": {
+    "constant": {
+      "files": 48,
+      "flagged": 1,
+      "unresolved": 25,
+      "useful": 0
+    },
+    "local": {
+      "files": 48,
+      "flagged": 2,
+      "unresolved": 18,
+      "useful": 2
+    },
+    "ordinary": {
+      "files": 72,
+      "flagged": 0,
+      "unresolved": 35,
+      "useful": 0
+    }
+  },
+  "device": "mps",
+  "media": {
+    "contents_license": "DbCL-1.0",
+    "database_license": "ODbL-1.0",
+    "source": "https://github.com/CheyneyComputerScience/CREMA-D"
+  },
+  "native_pictures": 1824,
+  "point": 0.9279881,
+  "private_native_receipt_sha256": "0c493a40a1e58365588cb4355f03b3cbbe7b5720b8c49c8776b53a4e65f3f852",
+  "reference": {
+    "closure": {
+      "median": 0.000578
+    },
+    "rounded": {
+      "median": 0.3973106
+    },
+    "spread": {
+      "median": 0.9265317
+    }
+  },
+  "schema": "chipmunk.video-lip-native-clock-transfer/1",
+  "source_count": 24,
+  "source_groups_with_correct_localizations": 2,
+  "statuses": {
+    "ambiguous_change": 8,
+    "insufficient_events": 70,
+    "matched": 3,
+    "no_match": 87
+  }
+}

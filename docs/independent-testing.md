@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [lip timing picture-clock replay](video-lip-frame-clock-2026-11-15.md#replay)
+compares original, held and nearest picture samples at exact frame rates
+with the soundtrack events and operating point fixed. A separate native
+speech pass checks 24 actors with the pinned source archive and assets.
+
 The [compact image crop replay](image-native-cfa-compact-core-2026-11-15.md#replay)
 recounts the four inner-cell readings and the optional exterior
 recovery measurement on two held camera groups. It preserves the

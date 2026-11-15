@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Finite perturbations inside existing audio alerts](audio-finite-window-attribution-2026-11-15.md)
+  added no useful range in a four-second context. The exact alert crop
+  added two ranges among 48 noisy primary edits, one of which matched a
+  genuine alert at the edit clock. The cue remains in evaluation.
+
 - [Earlier speech-encoder layers under competing voices](audio-short-edit-layer-ablation-2026-11-15.md)
   located 3/16 randomized −5 dB edits versus 1/16 for the current review,
   with two ordinary flags versus three. Two of the three locations also

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [finite audio perturbation replay](audio-finite-window-attribution-2026-11-15.md#replay)
+recounts how masking two versions of the same feature bands changes
+one-second evidence ranges. A separate Node.js implementation derives
+the operating points and verifies outcomes on ordinary and edited clocks.
+
 The [earlier speech-layer replay](audio-short-edit-layer-ablation-2026-11-15.md#replay)
 recomputes genuine-only operating points and exact-clock outcomes on three
 transfer banks. It can show when retaining both checks adds an apparent

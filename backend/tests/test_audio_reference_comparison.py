@@ -934,8 +934,8 @@ def test_clean_speech_lane_api_is_opt_in_and_renders_source_ranges(reference_htt
         assert db.get(Analysis, "other-kind").result_hash == original_result
 
 
-@pytest.mark.parametrize("aac_channels", [None, 1, 2])
-def test_clean_speech_twelve_seconds_distinguishes_late_change_and_broad_frequency_processing(tmp_path, aac_channels):
+@pytest.mark.parametrize(("aac_channels", "stereo_enabled"), [(None, False), (1, False), (2, False), (2, True)])
+def test_clean_speech_twelve_seconds_distinguishes_late_change_and_broad_frequency_processing(tmp_path, aac_channels, stereo_enabled):
     from scipy.signal import butter, sosfiltfilt
 
     rng = np.random.default_rng(172)
@@ -958,10 +958,12 @@ def test_clean_speech_twelve_seconds_distinguishes_late_change_and_broad_frequen
             subprocess.run(["ffmpeg", "-v", "error", "-i", str(other), "-ar", "48000", "-ac", str(aac_channels),
                             "-c:a", "aac", "-b:a", "96k", str(encoded)], check=True)
             other = encoded
-            schema = audio_reference.SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH
-        options = dict(include_clean_speech=True, use_dense_clean_speech=True, include_clean_speech_aac=bool(aac_channels))
+            schema = (audio_reference.SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH if stereo_enabled
+                      else audio_reference.SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH)
+        options = dict(include_clean_speech=True, use_dense_clean_speech=True, include_clean_speech_aac=bool(aac_channels),
+                       include_clean_speech_stereo_aac=stereo_enabled)
         record, assets = audio_reference.compare(path, other, **options)
-        if aac_channels == 2:
+        if aac_channels == 2 and not stereo_enabled:
             assert record["clean_speech"]["status"] == "unassessed"
             assert "aac_presentation" not in record["clean_speech"]
             continue
@@ -988,6 +990,8 @@ def test_clean_speech_twelve_seconds_distinguishes_late_change_and_broad_frequen
             assert measured["samples"] == [145920, 157440]
             assert measured["excerpts_verified"] == 2
             assert len(check["range"]["supporting_window_starts"]) == 2
+            if stereo_enabled:
+                assert check["stereo_support"]["witness_channels"] == ["left", "right"]
         else:
             assert "range" not in check
             assert measured["excerpts_verified"] == 0

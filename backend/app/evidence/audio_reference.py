@@ -40,6 +40,7 @@ SCHEMA_WITH_ALIGNED_SPEECH = "chipmunk.audio-reference-comparison/14"
 SCHEMA_WITH_MATCHING_WAVEFORM = "chipmunk.audio-reference-comparison/15"
 SCHEMA_WITH_AAC_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/16"
 SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/17"
+SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/18"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_SECONDS = 30
 MAX_PRESENTED_RANGES = 3
@@ -115,11 +116,16 @@ LONG_CLEAN_SPEECH_SUMMARY = CLEAN_SPEECH_SUMMARY | {
     "common_clock_required": "Both files need exactly six or twelve seconds on the same zero-based sample clock.",
     "consistent_frequency_balance_change": "The two recordings show a consistent change in frequency balance across the clip. Equalization can produce this pattern, so no local interval is highlighted.",
     "no_corroborated_local_change": "No local drop in shared sound was confirmed by two neighboring checks.",
+    "stereo_range_not_corroborated": "The stereo channels and their mono mix did not confirm the same interval.",
 }
 LONG_CLEAN_SPEECH_SCOPE = (
     "The twelve-second check looks for matching sound that weakens locally in two overlapping windows. "
     "Ordinary edits, local level changes and overlapping sound can affect the result. "
     "It contributes zero weight to the AI estimate and does not identify who spoke."
+)
+STEREO_CLEAN_SPEECH_SCOPE = (
+    "This check compares the mono mix and the stereo channels at 16 kHz. A highlight requires overlapping ranges. "
+    "Room speech can match the earlier file. This comparison carries zero weight in the AI estimate."
 )
 LONG_CLEAN_SPEECH_CLOCK_SCOPE = (
     "The local speech check requires a matching earlier recording and native timestamps. "
@@ -510,11 +516,17 @@ def _clean_speech(decoded, assets, *, allow_long, use_dense, use_eq_guard, inclu
     eq_guard = False
     profile = None
     match_support = None
+    stereo_support = None
     if aac_tracks is not None:
         tracks, aac = aac_tracks
         samples = ((track[1] * 32768).astype("<i2") for track in tracks)
         long = aac["presentation_end_exclusive_pts"] == audio_clean_speech_long.SAMPLES
-        if long:
+        if long and aac.get("native_clock", {}).get("channels") == 2:
+            from app.evidence import audio_clean_speech_stereo
+
+            pcm = decoded[1][3][1][:audio_clean_speech_long.SAMPLES]
+            reason, span, profile, stereo_support = audio_clean_speech_stereo.locate(*samples, pcm)
+        elif long:
             reason, span, profile = audio_clean_speech_long.locate(*samples)
         else:
             dense = eq_guard = True
@@ -559,7 +571,9 @@ def _clean_speech(decoded, assets, *, allow_long, use_dense, use_eq_guard, inclu
         result["match_support"] = match_support
     if aac_tracks is not None:
         result["aac_presentation"] = aac
-        if "native_clock" in aac:
+        if stereo_support is not None:
+            result.update(scope=STEREO_CLEAN_SPEECH_SCOPE, stereo_support=stereo_support)
+        elif "native_clock" in aac:
             duration = "twelve" if long else "six"
             result["scope"] += f" It measures the {duration} seconds of AAC playback after conversion to 16 kHz mono."
         else:
@@ -571,6 +585,8 @@ def _clean_speech(decoded, assets, *, allow_long, use_dense, use_eq_guard, inclu
                     for side, track in zip(("earlier", "submitted"), tracks, strict=True)}
         result["range"] = span | excerpts | {"support_sha256": canonical_hash(span)}
     if aac_tracks is not None:
+        if stereo_support is not None:
+            return SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH, result
         return (SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH if long else SCHEMA_WITH_AAC_CLEAN_SPEECH), result
     extended = long or reason == "common_clock_required"
     if match_support is not None:
@@ -695,6 +711,7 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             include_clean_speech_match_support: bool = True,
             include_aac_timing: bool = False,
             include_clean_speech_aac: bool = False,
+            include_clean_speech_stereo_aac: bool = False,
             include_aligned_speech: bool = False,
             include_matching_waveform: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Compare continuous recordings and recover a small, exactly supported edge trim."""
@@ -738,8 +755,12 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
         if presented and presented[1]["side"] == "submitted":
             proof = presented[1]
             duration = proof["presentation_end_exclusive_pts"]
+            side_count = proof.get("native_clock", {}).get("channels")
+            stereo_pcm = second[3][1] if second[3] is not None else None
+            supported_stereo = (include_clean_speech_stereo_aac and side_count == 2
+                                and stereo_pcm is not None and stereo_pcm.shape == (proof["decoded_samples"], 2))
             if duration == 6 * AUDIO_RATE or (allow_long_clean_speech and duration == 12 * AUDIO_RATE
-                                              and proof.get("native_clock", {}).get("channels") == 1):
+                                              and (side_count == 1 or supported_stereo)):
                 speech_aac = presented
     if include_local_timing:
         record.update(schema=SCHEMA_WITH_LOCAL_TIMING,

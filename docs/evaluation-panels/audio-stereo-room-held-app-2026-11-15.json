@@ -1,0 +1,158 @@
+{
+  "cases": {
+    "edited": {
+      "baseline_status": "unassessed",
+      "earlier_pcm_sha256": "25368600ac580ddd3fc0b6d8b1fdc7bd5049988c55d4990501ff7e264122e767",
+      "pdf_sha256": "c44edbc72a43306f50cbf220d0e20749c7b21ff90ab9aadf5471c36f2e553408",
+      "presentation": {
+        "decoded_samples": 192171,
+        "excluded_trailing_samples": 171,
+        "native_clock": {
+          "channels": 2,
+          "presentation_end_exclusive_pts": 576000,
+          "sample_rate": 48000,
+          "time_base": "1/48000"
+        },
+        "presentation_end_exclusive_pts": 192000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "source_replay": {
+        "excerpts_verified": 2,
+        "reason": "local_change",
+        "samples": [
+          116480,
+          128000
+        ],
+        "status": "localized_difference"
+      },
+      "stereo_support": {
+        "views": {
+          "downmix": {
+            "range": [
+              116480,
+              128000
+            ],
+            "reason": "local_change"
+          },
+          "left": {
+            "range": [
+              116480,
+              128000
+            ],
+            "reason": "local_change"
+          },
+          "right": {
+            "range": [
+              116480,
+              128000
+            ],
+            "reason": "local_change"
+          }
+        },
+        "witness_channels": [
+          "left"
+        ]
+      },
+      "submitted_m4a_sha256": "505a3c441a2f3fe260eaf0000fe7e01884d0a7c30c152616418f1914d474d586"
+    },
+    "unrelated": {
+      "baseline_status": "unassessed",
+      "earlier_pcm_sha256": "a5224c95a6ec75eab941f8f1dff772e8d9380fa749f8863fe1329438b9a352cb",
+      "pdf_sha256": "62bfceff6deaad09bf3b4b89477eb5275ca55825254eee3f7cf439418a2413cd",
+      "presentation": {
+        "decoded_samples": 192171,
+        "excluded_trailing_samples": 171,
+        "native_clock": {
+          "channels": 2,
+          "presentation_end_exclusive_pts": 576000,
+          "sample_rate": 48000,
+          "time_base": "1/48000"
+        },
+        "presentation_end_exclusive_pts": 192000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "source_replay": {
+        "excerpts_verified": 0,
+        "reason": "stereo_range_not_corroborated",
+        "status": "unassessed"
+      },
+      "stereo_support": {
+        "views": {
+          "downmix": {
+            "range": [
+              138240,
+              149760
+            ],
+            "reason": "local_change"
+          },
+          "left": {
+            "range": null,
+            "reason": "no_corroborated_local_change"
+          },
+          "right": {
+            "range": [
+              140800,
+              152320
+            ],
+            "reason": "local_change"
+          }
+        },
+        "witness_channels": []
+      },
+      "submitted_m4a_sha256": "75411b2dcc7c095a484d977476a01e83712dcd445a9e99981807b58161688afe"
+    },
+    "untouched": {
+      "baseline_status": "unassessed",
+      "earlier_pcm_sha256": "25368600ac580ddd3fc0b6d8b1fdc7bd5049988c55d4990501ff7e264122e767",
+      "pdf_sha256": "ccde951facecffa170a5fae81d4ff88fa7b2a8ff72cebaab1d5ce7306b18b1ad",
+      "presentation": {
+        "decoded_samples": 192171,
+        "excluded_trailing_samples": 171,
+        "native_clock": {
+          "channels": 2,
+          "presentation_end_exclusive_pts": 576000,
+          "sample_rate": 48000,
+          "time_base": "1/48000"
+        },
+        "presentation_end_exclusive_pts": 192000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "source_replay": {
+        "excerpts_verified": 0,
+        "reason": "no_corroborated_local_change",
+        "status": "no_local_difference"
+      },
+      "stereo_support": {
+        "views": {
+          "downmix": {
+            "range": null,
+            "reason": "no_corroborated_local_change"
+          },
+          "left": {
+            "range": null,
+            "reason": "no_corroborated_local_change"
+          },
+          "right": {
+            "range": null,
+            "reason": "no_corroborated_local_change"
+          }
+        },
+        "witness_channels": []
+      },
+      "submitted_m4a_sha256": "75411b2dcc7c095a484d977476a01e83712dcd445a9e99981807b58161688afe"
+    }
+  },
+  "jobs_before_payment": 0,
+  "paid_analyses": 2,
+  "saved_assessments_preserved": true,
+  "usd_cents": 999
+}

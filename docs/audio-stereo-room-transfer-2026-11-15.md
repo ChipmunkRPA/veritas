@@ -74,10 +74,61 @@ with 4/80 ordinary flags versus 15/80 for the downmix. On the earlier
 scaled-and-delayed stereo panel, it lost one correct location from
 each edit class and reduced ordinary flags from 12/80 to 3/80. The
 room result tests two independent recordings as backgrounds for a
-reused foreground roster. The agreement rule stays experimental pending
-fresh recordings selected before scoring, especially in cases where
-the foreground and room reference both vary across microphones.
+reused foreground roster. Those findings informed the separate validation below.
 [Frozen placements and numeric outcomes](evaluation-panels/audio-stereo-room-transfer-2026-11-15.json.gz)
+
+## Separate validation
+
+The agreement rule was fixed before opening any of the later results.
+The follow-up used the other 16 edit placements from the same foreground
+banks and room recordings from AMI meetings ES2010a and IS1005a. Its
+twelve-second windows exclude every source time used in the earlier
+stereo channel-copy study. Each room supplies two groups for every
+combination of early or late edit and quieter left or right target.
+The clean companions and generator families still come from the same
+source banks. The follow-up measures transfer to different room speech
+and foreground placements with the same known edit mechanisms.
+[Earlier stereo windows](audio-identical-stereo-intervals-2026-11-14.md)
+
+| Held result | Downmix | Downmix and selected channel agree |
+| --- | ---: | ---: |
+| Correct synthetic edit ranges | 18/32 | 18/32 |
+| Correct genuine-splice ranges | 11/20 | 11/20 |
+| Ordinary foreground clips flagged | 5/40 | 1/40 |
+| Flags when the reference was the room speech | 7/16 | 0/16 |
+| Flags on room-only recordings with their matching references | 4/16 | 0/16 |
+
+The combined check kept every correct downmix range, including late edits.
+The stronger channel alone still admitted all 16 exact room references and
+flagged one of them. The combined check returned no local range on any of
+those 16 references. Both meetings supplied correct localizations. The one
+ordinary flag came from ES2010a. These are staged foreground edits against
+real room recordings. The four meeting backgrounds across the two panels
+do not establish rates for other microphones, speakers or overlapping
+sources. [Held placements and measured ranges](evaluation-panels/audio-stereo-room-held-2026-11-15.json.gz)
+
+## Local app
+
+Set `VERITAS_AUDIO_REFERENCE_CLEAN_SPEECH_STEREO_AAC=true` along with the
+existing comparison, clean speech, long clean speech and clean speech AAC
+options. In a retained audio analysis, open **Compare with an earlier
+audio recording** and confirm that you have a clean earlier copy of
+the same recording. This option accepts a continuous twelve-second 48 kHz
+stereo AAC-LC submission and a continuous, same-clock twelve-second 16 kHz
+mono PCM16 WAV or FLAC reference. It verifies the original presentation
+clock and uses the two original stereo channels to check the waveform
+interval found in the mono mix. Unconfirmed intervals remain unassessed
+in the result. The comparison contributes zero weight to AI confidence.
+
+Two simulated USD 9.99 checkouts completed on the local worker. The staged
+edit produced **7.280–8.000 s**, with the left channel confirming that
+range. The browser and PDF identify the channel and label the analyzed
+waveform as the mono mix. The API and downloadable evidence use source
+ticks **[116480, 128000)** at 16 kHz. Independent FFmpeg decoding verified
+both playable excerpts, waveforms and stereo support. The unchanged copy
+produced no local range, and the room-reference challenge stayed
+unassessed. No job started before payment. Saved AI assessments were
+preserved. [Paid local verification](evaluation-panels/audio-stereo-room-held-app-2026-11-15.json)
 
 ## Replay
 
@@ -106,4 +157,14 @@ backend/.venv/bin/python -B -m "$module" freeze "$run/plan.json" \
 backend/.venv/bin/python -B -m "$module" run "$run/plan.json" \
   --rooms "$rooms" --annotations "$annotations" --icsi "$icsi" --ami "$ami" \
   --receipt "$run/room.json.gz"
+```
+
+For the separate validation, use the ES2010a and IS1005a tracks, add
+`--holdout` to both native commands, and use new output paths. Review
+selects the held plan from the receipt.
+
+```sh
+backend/.venv/bin/python -B -m scripts.audio_clean_speech_aac_app "$run/app" \
+  --receipt "$run/held.json.gz" --rooms "$rooms" --sources "$ami" --icsi "$icsi" \
+  --carrier aac48_stereo --long
 ```

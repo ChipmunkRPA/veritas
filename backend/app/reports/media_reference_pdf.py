@@ -21,6 +21,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_LONG_CLEAN_SPEECH,
     SCHEMA_WITH_MATCHING_WAVEFORM,
     SCHEMA_WITH_STEREO,
+    SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH,
     SCHEMA_WITH_TRIM_ALIGNMENT,
     SCHEMA_WITH_TRIM_AND_LEVEL,
 )
@@ -150,6 +151,7 @@ def _audio_summary(document, record):
         _text(page, MARGIN, y + 20, f"SHA-256 {record[side]['sha256']}", size=9, font="cour", color=MUTED)
     if record["status"] != "measured":
         separate = record["schema"] in {SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH, SCHEMA_WITH_AAC_TIMING,
+                                        SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH,
                                         SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM}
         title = "Decoded sample comparison unavailable" if separate else "Comparison unassessed"
         _text(page, MARGIN, 346, title, size=16, font="hebo")
@@ -160,7 +162,7 @@ def _audio_summary(document, record):
             _text(page, MARGIN, 397, "The aligned speech result appears on a separate page.", size=10, color=MUTED)
         elif record["schema"] == SCHEMA_WITH_AAC_TIMING:
             _text(page, MARGIN, 397, "The local timing result appears on a separate page.", size=10, color=MUTED)
-        elif record["schema"] in {SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH}:
+        elif record["schema"] in {SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH, SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH}:
             _text(page, MARGIN, 397, "The local speech result appears on a separate page.", size=10, color=MUTED)
         return
     _text(page, MARGIN, 346, "Decoded sample comparison", size=16, font="hebo")
@@ -453,10 +455,17 @@ def _clean_speech_page(document, result):
         _text(page, MARGIN, 291 + offset, f"Two six-second checks starting at {first_window:.3f} s and {last_window:.3f} s agreed.", size=9, color=MUTED)
     if "basis" in result:
         _text(page, MARGIN, 291 + offset, f"Drop in signed matching-sound gain  {span['relative_drop']:.3f}", size=9, color=MUTED)
+    stereo = result.get("stereo_support")
+    if stereo:
+        for index, side in enumerate(stereo["witness_channels"]):
+            start, stop = stereo["views"][side]["range"]
+            _text(page, MARGIN, 343 + 13 * index, f"{side.capitalize()} channel supported {start / rate:.3f} to {stop / rate:.3f} s.",
+                  size=9, color=MUTED)
     maximum = max(.01, *(abs(level) for side in LABELS for field in ("low", "high")
                         for level in span[side]["waveform"][field]))
-    centers = (408, 565) if offset else (379, 565)
-    for y, (side, label) in zip(centers, (("earlier", "Earlier recording"), ("submitted", "Analyzed recording")), strict=True):
+    centers = (439, 590) if stereo else (408, 565) if offset else (379, 565)
+    submitted = "Analyzed recording · mono mix" if stereo else "Analyzed recording"
+    for y, (side, label) in zip(centers, (("earlier", "Earlier recording"), ("submitted", submitted)), strict=True):
         row = span[side]
         source_start, source_end = row["source_pts"]
         _text(page, MARGIN, y - 63, f"{label}  {row['start_s']:.3f} to {row['end_s']:.3f} s", font="hebo")
@@ -644,6 +653,7 @@ def render(record, assets):
                                         SCHEMA_WITH_TRIM_AND_LEVEL, SCHEMA_WITH_STEREO, SCHEMA_WITH_LOCAL_TIMING,
                                         SCHEMA_WITH_CHANNEL_TIMING, SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH,
                                         SCHEMA_WITH_AAC_TIMING, SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH,
+                                        SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH,
                                         SCHEMA_WITH_DENSE_CLEAN_SPEECH,
                                         SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD, SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
                                         SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM)

@@ -61,10 +61,11 @@ are not public screening promises or calibrated population probabilities.
 ## Latest checks added and evaluated locally
 
 - [Stereo speech with interference on both microphones](audio-stereo-room-transfer-2026-11-15.md)
-  shows that the earlier other-channel match rule still admits every
-  exact-room reference. A later agreement probe kept all 14 useful
-  synthetic ranges from the downmix and reduced flags against room
-  references from 10/16 to 1/16. The probe needs fresh validation.
+  adds earlier-copy comparison for qualified twelve-second stereo AAC.
+  On separate room and foreground placements it kept all 18 useful synthetic
+  and 11 genuine-splice ranges, with ordinary flags down from 5/40 to 1/40.
+  Flags when the reference matched the background fell from 7/16 to 0/16.
+  Local playback, PDF and JSON retain the source time and supporting channel.
 
 - [Comparison on separate stereo channels](audio-clean-speech-stereo-long-2026-11-15.md)
   retains all 32 correctly located synthetic ranges on recordings with an

@@ -1793,6 +1793,17 @@
             ],
             "title": "Clean Speech Available"
           },
+          "clean_speech_stereo_aac_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Clean Speech Stereo Aac Available"
+          },
           "long_clean_speech_available": {
             "anyOf": [
               {

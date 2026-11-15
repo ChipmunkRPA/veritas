@@ -12,7 +12,12 @@ from struct import iter_unpack
 import numpy as np
 
 from app.core.canonical import canonical_hash
-from app.evidence import audio_clean_speech, audio_clean_speech_dense, audio_clean_speech_long
+from app.evidence import (
+    audio_clean_speech,
+    audio_clean_speech_dense,
+    audio_clean_speech_long,
+    audio_clean_speech_stereo,
+)
 from app.evidence.audio_reference import (
     SCHEMA_WITH_AAC_CLEAN_SPEECH,
     SCHEMA_WITH_ALIGNED_SPEECH,
@@ -21,15 +26,39 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
     SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH,
     SCHEMA_WITH_MATCHING_WAVEFORM,
+    SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH,
 )
 from scripts.verify_audio_local_timing_export import _decode
-from scripts.verify_stereo_reference import RATE, SIDES, digest, require, verify_clip, waveform
+from scripts.verify_stereo_reference import (
+    FRAME,
+    RATE,
+    SIDES,
+    command,
+    digest,
+    require,
+    verify_clip,
+    waveform,
+)
 
 SCHEMA = "chipmunk.audio-reference-comparison/8"
 LONG_SCHEMA = "chipmunk.audio-reference-comparison/9"
 STATUSES = {"local_change": "localized_difference", "no_local_change": "no_local_difference",
             "no_corroborated_local_change": "no_local_difference",
             "consistent_frequency_balance_change": "broad_processing_difference"}
+
+
+def _decode_stereo(path, count):
+    decoded = command(
+        "ffmpeg", "-v", "info", "-nostdin", "-protocol_whitelist", "file", "-copyts", "-i", str(path.resolve()),
+        "-map", "0:a:0", "-af", f"aresample={RATE},atrim=end_sample={count + 1},ashowinfo",
+        "-c:a", "pcm_s16le", "-f", "s16le", "pipe:1",
+    )
+    total = 0
+    for expected, (index, tick, length) in enumerate(FRAME.findall(decoded.stderr)):
+        require(int(index) == expected and int(tick) == total and int(length) > 0, "Stereo sample clock is discontinuous")
+        total += int(length)
+    require(total == count and len(decoded.stdout) == 4 * count, "Decoded stereo clock differs from the mono mix")
+    return np.frombuffer(decoded.stdout, dtype="<i2").reshape(-1, 2)
 
 
 def verify_export(earlier, submitted, export):
@@ -39,7 +68,8 @@ def verify_export(earlier, submitted, export):
     schema = record["schema"]
     if schema in {SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM}:
         schema = record["comparison_schema"]
-    long_aac = schema == SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH
+    stereo_aac = schema == SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH
+    long_aac = stereo_aac or schema == SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH
     long = schema == LONG_SCHEMA or long_aac
     dense = schema == SCHEMA_WITH_DENSE_CLEAN_SPEECH
     aac = schema == SCHEMA_WITH_AAC_CLEAN_SPEECH or long_aac
@@ -54,8 +84,8 @@ def verify_export(earlier, submitted, export):
     proof = decoded[1][2]
     require(proof is not None and result.get("aac_presentation") == {"side": "submitted", **proof} if aac
             else "aac_presentation" not in result, "AAC presentation proof differs")
-    require(not long_aac or proof.get("native_clock", {}).get("channels") == 1,
-            "The twelve-second AAC comparison needs a verified 48 kHz mono source")
+    require(not long_aac or proof.get("native_clock", {}).get("channels") == (2 if stereo_aac else 1),
+            "The twelve-second AAC source channel layout differs")
     require(all(origin == 0 and (reading["presentation_end_exclusive_pts"] if reading else len(raw) // 2) == sample_count
                 for raw, origin, reading in decoded),
             "This verification requires both equal supported native source clocks")
@@ -66,7 +96,12 @@ def verify_export(earlier, submitted, export):
         require(record["audio"][side] == expected, "Decoded source metadata differs")
     samples = [pcm[:sample_count] for pcm in samples]
     if long:
-        reason, measured, profile = audio_clean_speech_long.locate(*samples)
+        if stereo_aac:
+            stereo = _decode_stereo(submitted, proof["decoded_samples"])[:sample_count]
+            reason, measured, profile, stereo_support = audio_clean_speech_stereo.locate(*samples, stereo)
+            require(result.get("stereo_support") == stereo_support, "Stereo support differs")
+        else:
+            reason, measured, profile = audio_clean_speech_long.locate(*samples)
         require(result["sample_count"] == sample_count and result.get("frequency_balance") == profile,
                 "Extended speech duration or frequency measurements differ")
     elif eq_guard:

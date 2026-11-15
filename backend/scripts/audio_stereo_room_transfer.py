@@ -13,6 +13,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from app.evidence import audio_clean_speech_stereo as channel_check
 from scripts import audio_clean_speech_stereo_long as stereo
 
 old = stereo.old
@@ -24,10 +25,16 @@ SOURCES = {
     "IS1004a": ("94cbb0f0cadfe3d8d4d4bfd699d1e40f5a66cece979de24718721ebcc0f08f6a",
                 "3f6d6e61e896c91c5f1ad90726ccc1f5283fa764156394f699750c3a18fc914a"),
 }
+HOLDOUT_SOURCES = {
+    "ES2010a": ("5f92fefcbb2c997edcd27a2da9939179ebeb53b234712c2aebcd774aba555e4d",
+                "99ca68da1f4af6d6316ada55978f43c50ddb0569df6fe973559bee074b75f9d7"),
+    "IS1005a": ("2e33dc55de7e2a72c737aee2b84ea346cc32791c41f36c3afee1d84c9a1c54a9",
+                "2cc5d5715fc75d00f5f70d5693e004485e0693f64c27851877dd58d9b5d46444"),
+}
+EXCLUDED_PANEL = old.PANELS / "audio-stereo-identical-held-2026-11-14.json"
 ANNOTATIONS = "b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d"
 SCHEMA = "chipmunk.audio-stereo-room-transfer/1"
 LEVEL = -5
-WEAK_CORROBORATION = .15
 ARMS = ("downmix", "agreement", "reference_selected", "corroborated")
 CONTROLS = ("background_reference", "unrelated", "half_matched", "unmixed", "background_only")
 DIGEST = re.compile(r"[0-9a-f]{64}")
@@ -42,27 +49,33 @@ METHOD = {
     "controls": "Use ordinary and resampled speech, wrong and half-matching target references, exact room "
                 "references in the mixed inputs, room alone with its matching track, and room alone with target reference.",
 }
+HOLDOUT_METHOD = METHOD | {
+    "holdout": "Use the other two of every four foreground groups per bank. Balance early and late edits and "
+               "target channel within each meeting. Exclude all excerpt times used in the stereo channel-copy study.",
+    "comparison": METHOD["comparison"] + " Also retain a downmix range only when the supported native range "
+                  "overlaps at least half its duration. Keep the same measurements and decision points.",
+}
 
 
-def foreground_rows():
+def foreground_rows(*, holdout=False):
     previous = stereo.baseline()
     selected = []
     for bank in ("icsi", "ami"):
         groups = sorted({group for source, group, _kind in previous if source == bank})
         for index, group in enumerate(groups):
-            if index % 4 < 2:
+            if (index % 4 >= 2) == holdout:
                 original = previous[bank, group, "untouched"]
                 selected.append({key: original[key] for key in ("bank", "group", "companion", "half", "earlier_sha256")})
     return previous, selected
 
 
-def read_rooms(folder):
+def read_rooms(folder, *, holdout=False):
     from contextlib import ExitStack
 
     import numpy as np
 
     tracks = {}
-    for meeting, pins in SOURCES.items():
+    for meeting, pins in (HOLDOUT_SOURCES if holdout else SOURCES).items():
         channels = []
         with ExitStack() as stack:
             for mic, pin in zip(MICS, pins, strict=True):
@@ -78,14 +91,32 @@ def read_rooms(folder):
     return tracks
 
 
-def plan(annotations, rooms):
+def room_assignment(index, *, holdout):
+    if holdout:
+        meeting = tuple(HOLDOUT_SOURCES)[(index + index // 2) % 2]
+        return meeting, "left" if index // 4 % 2 else "right"
+    return tuple(SOURCES)[index % 2], "left" if index // 2 % 2 else "right"
+
+
+def reserved_windows():
+    excluded = defaultdict(set)
+    for row in old.read(EXCLUDED_PANEL)["rows"]:
+        if row["meeting"] in HOLDOUT_SOURCES:
+            left = row["excerpt_start_s"] * 100
+            excluded[row["meeting"]].add((left, left + 300))
+    old.require(all(len(excluded[meeting]) == 12 for meeting in HOLDOUT_SOURCES), "The prior source windows changed")
+    return excluded
+
+
+def plan(annotations, rooms, *, holdout=False):
     from zipfile import ZipFile
 
     import numpy as np
 
     from scripts.prepare_natural_overlap_transfer import track_words
 
-    previous, rows = foreground_rows()
+    previous, rows = foreground_rows(holdout=holdout)
+    excluded = reserved_windows() if holdout else defaultdict(set)
     with annotations.open("rb") as f:
         old.require(hashlib.file_digest(f, "sha256").hexdigest() == ANNOTATIONS, "AMI annotation archive differs")
     speech = {}
@@ -98,7 +129,7 @@ def plan(annotations, rooms):
             speech[name] = mask
     used = defaultdict(set)
     for index, row in enumerate(rows):
-        meeting = tuple(SOURCES)[index % len(SOURCES)]
+        meeting, quiet_side = room_assignment(index, holdout=holdout)
         mask = speech[meeting]
         labels = [case["truth"] for (bank, group, kind), case in previous.items()
                   if (bank, group) == (row["bank"], row["group"]) and stereo.prior.category(kind) == "synthetic_edit"]
@@ -106,17 +137,23 @@ def plan(annotations, rooms):
         choices = [
             start for start in range(6000, 60000, 1200)
             if start not in used[meeting]
+            and all(right <= start or left >= start + 1200 for left, right in excluded[meeting])
             and all(mask[start + shift:start + shift + 600].sum() >= 240 for shift in (0, 600))
             and all(2 * mask[start + a:start + b].sum() >= b - a for a, b in offsets)
         ]
-        start = min(choices, key=lambda offset: old.sha(f"room-aac-1:{index}:{offset}".encode()))
+        old.require(bool(choices), "No disjoint recording meets the locked overlap criterion")
+        salt = "room-aac-2" if holdout else "room-aac-1"
+        start = min(choices, key=lambda offset: old.sha(f"{salt}:{index}:{offset}".encode()))
         used[meeting].add(start)
         background = np.column_stack([voice[start * 160:start * 160 + SAMPLES] for voice in rooms[meeting]])
-        row.update(meeting=meeting, start=start * 160, quiet_side="left" if index // 2 % 2 else "right",
+        row.update(meeting=meeting, start=start * 160, quiet_side=quiet_side,
                    observed_word_centiseconds=[int(mask[start + a:start + b].sum()) for a, b in offsets],
                    room_pcm_sha256=old.sha(background.astype("<i2").tobytes()))
-    return {"sources": SOURCES, "annotations": ANNOTATIONS, "parameters": METHOD,
-            "prior": old.sha(stereo.BASE.read_bytes()), "rows": rows}
+    frozen = {"sources": HOLDOUT_SOURCES if holdout else SOURCES, "annotations": ANNOTATIONS,
+              "parameters": HOLDOUT_METHOD if holdout else METHOD, "prior": old.sha(stereo.BASE.read_bytes()), "rows": rows}
+    if holdout:
+        frozen["excluded_panel"] = old.sha(EXCLUDED_PANEL.read_bytes())
+    return frozen
 
 
 def dry_inputs(icsi, ami):
@@ -182,12 +219,7 @@ def materialize(row, rooms, dry):
 
 
 def choose(entry):
-    pick = entry["selected"]["reference_selected"]
-    if pick in ("left", "right"):
-        other = "right" if pick == "left" else "left"
-        if any((part["upper_correlation"] or 0.) < WEAK_CORROBORATION for part in entry["support"][other]):
-            return entry["selected"]["agreement"]
-    return pick
+    return channel_check.corroborated_view(entry["support"], entry["selected"])
 
 
 def category(kind):
@@ -195,11 +227,7 @@ def category(kind):
 
 
 def downmix_with_channel_support(entry):
-    views = entry["readings"]
-    downmix = views["downmix"]["range"]
-    selected = views.get(choose(entry))
-    channel = selected["range"] if selected else None
-    return "downmix" if downmix and channel and stereo.overlap(downmix, channel) else None
+    return "downmix" if channel_check.supporting_channels(entry["readings"], entry["support"], entry["selected"]) else None
 
 
 def summary(rows, arms=ARMS):
@@ -224,7 +252,7 @@ def summary(rows, arms=ARMS):
     return dict(totals)
 
 
-def native_check(plan_data, rooms, icsi, ami):
+def native_check(plan_data, rooms, icsi, ami, *, holdout=False):
     sources = dry_inputs(icsi, ami)
     previous = stereo.baseline()
     rows = []
@@ -244,22 +272,31 @@ def native_check(plan_data, rooms, icsi, ami):
                 rows.append({**source, "kind": kind, "truth": truth, "mixture_sha256": old.sha(mixture),
                              "reference_sha256": old.sha(reference), "clock": clock, "measurement": stereo.check(reference, views)})
             print(f"Completed {source['meeting']} placement {source['start'] // RATE}s, {len(rows)} total.", flush=True)
-    return {"schema": SCHEMA, "plan": plan_data, "rows": rows, "summary": summary(rows)}
+    arms = (*ARMS, DIAGNOSTIC) if holdout else ARMS
+    return {"schema": SCHEMA, "plan": plan_data, "rows": rows, "summary": summary(rows, arms)}
 
 
 def review(receipt):
-    previous, admitted = foreground_rows()
     frozen = receipt["plan"]
-    old.require(receipt["schema"] == SCHEMA and frozen["parameters"] == METHOD
+    holdout = frozen["parameters"] == HOLDOUT_METHOD
+    previous, admitted = foreground_rows(holdout=holdout)
+    sources = HOLDOUT_SOURCES if holdout else SOURCES
+    excluded = reserved_windows() if holdout else defaultdict(set)
+    required_exclusions = old.sha(EXCLUDED_PANEL.read_bytes()) if holdout else None
+    old.require(receipt["schema"] == SCHEMA and frozen["parameters"] == (HOLDOUT_METHOD if holdout else METHOD)
                 and frozen["annotations"] == ANNOTATIONS and frozen["prior"] == old.sha(stereo.BASE.read_bytes())
-                and frozen["sources"] == {key: list(pins) for key, pins in SOURCES.items()},
+                and frozen["sources"] == {key: list(pins) for key, pins in sources.items()}
+                and frozen.get("excluded_panel") == required_exclusions,
                 "The frozen test identity differs")
     roster = {(r["bank"], r["group"]): r for r in frozen["rows"]}
     for i, row in enumerate(admitted):
         held = roster[row["bank"], row["group"]]
-        old.require(all(held[key] == value for key, value in row.items()) and held["meeting"] == tuple(SOURCES)[i % 2]
-                    and held["quiet_side"] == ("left" if i // 2 % 2 else "right")
-                    and held["start"] in range(60 * RATE, 600 * RATE, SAMPLES), "The source placement changed")
+        meeting, quiet_side = room_assignment(i, holdout=holdout)
+        start = held["start"] // 160
+        old.require(all(held[key] == value for key, value in row.items()) and held["meeting"] == meeting
+                    and held["quiet_side"] == quiet_side and held["start"] in range(60 * RATE, 600 * RATE, SAMPLES)
+                    and all(right <= start or left >= start + 1200 for left, right in excluded[meeting]),
+                    "The source placement changed")
     offsets = {(r["meeting"], r["start"]) for r in roster.values()}
     old.require(len(offsets) == len(roster) == len(admitted) == len(frozen["rows"]) == 16
                 and all(DIGEST.fullmatch(row["room_pcm_sha256"]) for row in roster.values()),
@@ -299,7 +336,7 @@ def review(receipt):
                             "Changing the reference also changed the submitted recording")
         exact_room = actual[bank, group, "background_reference"]["reference_sha256"]
         old.require(exact_room == actual[bank, group, "unmixed"]["reference_sha256"], "The room reference changed")
-    observed = summary(receipt["rows"])
+    observed = summary(receipt["rows"], (*ARMS, DIAGNOSTIC) if holdout else ARMS)
     old.require(observed == receipt["summary"], "The measured counts differ")
     return observed
 
@@ -313,6 +350,7 @@ def main():
     parser.add_argument("--icsi", type=Path)
     parser.add_argument("--ami", type=Path)
     parser.add_argument("--receipt", type=Path)
+    parser.add_argument("--holdout", action="store_true", help="Use the separate room and foreground placement roster")
     parser.add_argument("--diagnostic", action="store_true", help="Review the later downmix and channel range agreement probe")
     args = parser.parse_args()
     if args.phase == "review":
@@ -326,8 +364,8 @@ def main():
         parser.error("Native comparison requires --rooms and --annotations")
     if args.phase == "run" and not (args.icsi and args.ami and args.receipt):
         parser.error("Native scoring requires --icsi, --ami and --receipt")
-    rooms = read_rooms(args.rooms)
-    frozen = plan(args.annotations, rooms)
+    rooms = read_rooms(args.rooms, holdout=args.holdout)
+    frozen = plan(args.annotations, rooms, holdout=args.holdout)
     encoded = json.dumps(frozen, sort_keys=True, separators=(",", ":")).encode()
     if args.phase == "freeze":
         with args.plan_or_receipt.open("xb") as f:
@@ -335,7 +373,7 @@ def main():
         print(old.sha(encoded))
         return
     old.require(args.plan_or_receipt.read_bytes() == encoded, "A prospective room plan is required")
-    receipt = native_check(frozen, rooms, args.icsi, args.ami)
+    receipt = native_check(frozen, rooms, args.icsi, args.ami, holdout=args.holdout)
     raw = json.dumps(receipt, sort_keys=True, separators=(",", ":")).encode()
     review(json.loads(raw))
     with args.receipt.open("xb") as f:

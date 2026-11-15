@@ -12,15 +12,16 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from app.evidence import audio_clean_speech_stereo as channel_check
 from scripts import audio_clean_speech_aac_long_transfer as prior
 
+select = channel_check.select
+overlap = channel_check.overlap
 old = prior.previous
 SCHEMA = "chipmunk.audio-clean-speech-stereo-long/1"
 BASE = old.PANELS / "audio-clean-speech-aac-long-2026-11-15.json.gz"
 CARRIERS = ("retained_stereo", "asymmetric_stereo")
 ARMS = ("downmix", "left", "right", "agreement", "reference_selected")
-HALF = prior.SAMPLES // 2
-CORRELATION_MARGIN = .04
 RANGE_SAMPLES = 11_520
 CLOCK = {"sample_rate": 48000, "channels": 2, "time_base": "1/48000",
          "presentation_end_exclusive_pts": 3 * prior.SAMPLES}
@@ -38,36 +39,6 @@ METHOD = {
     "layout": "Replay the retained stereo delivery and a second stereo mix adding different recorded speech to one "
               "channel. Alternate the contaminated channel across source groups in sorted order.",
 }
-
-
-def select(readings, supports):
-    candidates = [name for name in ("left", "right") if all(part["admitted"] for part in supports[name])]
-    choices = {}
-    first, second = readings["left"], readings["right"]
-    a, b = first["range"], second["range"]
-    agreement = None
-    if a and b and overlap(a, b):
-        if a == b and readings["downmix"]["range"] == a:
-            agreement = "downmix"
-        else:
-            agreement = "left" if a[0] <= b[0] else "right"
-    choices["agreement"] = agreement
-    chosen = None
-    for side in candidates:
-        other = "right" if side == "left" else "left"
-        differences = [
-            m["upper_correlation"] - (n["upper_correlation"] or 0.)
-            for m, n in zip(supports[side], supports[other], strict=True)
-        ]
-        if min(differences) >= CORRELATION_MARGIN:
-            chosen = side
-            break
-    choices["reference_selected"] = chosen or agreement
-    return choices
-
-
-def overlap(a, b):
-    return 2 * (min(a[1], b[1]) - max(a[0], b[0])) >= max(a[1] - a[0], b[1] - b[0])
 
 
 def stereo_pcm(path, stereo_bytes, expected_hash=None):
@@ -107,19 +78,10 @@ def asymmetric(submitted, interference, *, reverse):
 def check(first, views):
     import numpy as np
 
-    from app.evidence import audio_clean_speech, audio_clean_speech_long
-
     earlier = np.frombuffer(first, dtype="<i2")
-    readings, support = {}, {}
+    _, readings, support = channel_check.observe(earlier, views)
     for name, pcm in views.items():
-        reason, span, _ = audio_clean_speech_long.locate(earlier, pcm)
-        readings[name] = {"reason": reason, "range": span["samples"] if span else None,
-                          "pcm_sha256": old.sha(pcm.astype("<i2", copy=False).tobytes())}
-        if name != "downmix":
-            support[name] = [
-                audio_clean_speech.match_support(earlier[i:i + HALF], pcm[i:i + HALF], np.hanning(audio_clean_speech.WIDTH))
-                for i in (0, HALF)
-            ]
+        readings[name]["pcm_sha256"] = old.sha(pcm.astype("<i2", copy=False).tobytes())
     return {"readings": readings, "support": support, "selected": select(readings, support)}
 
 

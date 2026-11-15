@@ -85,6 +85,10 @@ type CleanSpeechComparison = {
   basis?: 'dense_clean_reference_v1' | 'dense_clean_reference_frequency_balance_v1'
   sample_count?: number
   aac_presentation?: SoundtrackTiming['aac_presentation']
+  stereo_support?: {
+    views: Record<'downmix' | 'left' | 'right', { reason: string; range: [number, number] | null }>
+    witness_channels: ('left' | 'right')[]
+  }
   match_support?: { checked_windows: number; active_windows: number; matching_windows: number; upper_correlation: number | null; admitted: boolean }
   frequency_balance?: {
     bands_hz: [number, number][]
@@ -191,7 +195,7 @@ type Comparison = {
     | 'chipmunk.audio-reference-comparison/12'
     | 'chipmunk.audio-reference-comparison/13' | 'chipmunk.audio-reference-comparison/14'
     | 'chipmunk.audio-reference-comparison/15' | 'chipmunk.audio-reference-comparison/16'
-    | 'chipmunk.audio-reference-comparison/17'
+    | 'chipmunk.audio-reference-comparison/17' | 'chipmunk.audio-reference-comparison/18'
   picture?: never
   picture_insertion?: never
   insertion_retention?: never
@@ -211,7 +215,8 @@ type Comparison = {
 })
 type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: string | null }
 type Availability = { available: boolean; timing_available?: boolean; picture_insertion_available?: boolean; sound_difference_available?: boolean
-  clean_speech_available?: boolean; long_clean_speech_available?: boolean; aligned_speech_available?: boolean; clean_speech_aac_available?: boolean }
+  clean_speech_available?: boolean; long_clean_speech_available?: boolean; aligned_speech_available?: boolean; clean_speech_aac_available?: boolean
+  clean_speech_stereo_aac_available?: boolean }
 const sourceSeconds = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 7, useGrouping: false })
 const trimSampleRate = 16000
 
@@ -433,8 +438,9 @@ function TimingEvidence({ timing, assets }: { timing: TimingComparison; assets: 
   </section>
 }
 
-function SoundtrackTimingEvidence({ timing, assets, audioOnly = false, title: customTitle, excerpt: customExcerpt }: {
-  timing: Pick<SoundtrackTiming, 'summary' | 'scope' | 'range' | 'aac_presentation' | 'picture_profile' | 'waveform_note'>; assets: Result['assets']; audioOnly?: boolean; title?: string; excerpt?: string
+function SoundtrackTimingEvidence({ timing, assets, audioOnly = false, title: customTitle, excerpt: customExcerpt, analyzedMono = false }: {
+  timing: Pick<SoundtrackTiming, 'summary' | 'scope' | 'range' | 'aac_presentation' | 'picture_profile' | 'waveform_note'>;
+  assets: Result['assets']; audioOnly?: boolean; title?: string; excerpt?: string; analyzedMono?: boolean
 }) {
   const span = timing.range
   const picture = span?.picture
@@ -482,8 +488,9 @@ function SoundtrackTimingEvidence({ timing, assets, audioOnly = false, title: cu
       </div>}
       <div className="grid gap-4 sm:grid-cols-2">{sides.map(side => {
         const row = span[side]
+        const caption = side === 'submitted' && analyzedMono ? labels[side] + ' (mono mix)' : labels[side]
         return <div className="min-w-0 space-y-2" key={side}>
-          <p className="m-0 text-small font-medium">{labels[side]} · {sourceSeconds.format(row.start_s)}–{sourceSeconds.format(row.end_s)} s</p>
+          <p className="m-0 text-small font-medium">{caption} · {sourceSeconds.format(row.start_s)}–{sourceSeconds.format(row.end_s)} s</p>
           <ClipWaveform wave={row.waveform} maximum={maximum} name={`${labels[side]} ${excerpt}`} />
           <Playback body={assetBody(assets, row.audio, 'audio/wav')} name={`Play ${labels[side].toLowerCase()} ${excerpt}`} />
         </div>
@@ -583,7 +590,8 @@ function ResultView({ result }: { result: Result }) {
         comparison.schema === 'chipmunk.audio-reference-comparison/14' ||
         comparison.schema === 'chipmunk.audio-reference-comparison/15' ||
         comparison.schema === 'chipmunk.audio-reference-comparison/16' ||
-        comparison.schema === 'chipmunk.audio-reference-comparison/17') && 'Decoded sample comparison unavailable. '}
+        comparison.schema === 'chipmunk.audio-reference-comparison/17' ||
+        comparison.schema === 'chipmunk.audio-reference-comparison/18') && 'Decoded sample comparison unavailable. '}
       {notes[comparison.status] ?? 'The files could not be compared.'}
     </p>}
     {comparison.aligned_speech && <AlignedSpeechEvidence result={comparison.aligned_speech} assets={assets} />}
@@ -703,8 +711,15 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
   const span = result.range
   const balance = result.frequency_balance
   const support = result.match_support
+  const stereo = result.stereo_support
   return <div className="space-y-2 rounded-md border border-border p-3">
-    <SoundtrackTimingEvidence timing={result} assets={assets} audioOnly title="Local speech comparison" />
+    <SoundtrackTimingEvidence timing={result} assets={assets} audioOnly title="Local speech comparison" analyzedMono={!!stereo} />
+    {stereo?.witness_channels.map(channel => {
+      const range = stereo.views[channel].range
+      return range && <p key={channel} className="m-0 text-caption text-text-muted">
+        The {channel} channel supported {sourceSeconds.format(range[0] / trimSampleRate)}–{sourceSeconds.format(range[1] / trimSampleRate)} s.
+      </p>
+    })}
     {support && <p className="m-0 text-caption text-text-muted">
       Matching sound in {support.matching_windows} of {support.active_windows} active windows.{' '}
       {support.checked_windows} overlapping windows checked across the pair.
@@ -749,9 +764,10 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
 }
 
 function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertionAvailable, cleanSpeechAvailable, longCleanSpeechAvailable,
-  alignedSpeechAvailable, cleanSpeechAacAvailable, soundDifferenceAvailable }: {
+  alignedSpeechAvailable, cleanSpeechAacAvailable, cleanSpeechStereoAacAvailable, soundDifferenceAvailable }: {
   analysisId: string; kind: Kind; timingAvailable: boolean; pictureInsertionAvailable: boolean
   cleanSpeechAvailable: boolean; longCleanSpeechAvailable: boolean; alignedSpeechAvailable: boolean; cleanSpeechAacAvailable: boolean
+  cleanSpeechStereoAacAvailable: boolean
   soundDifferenceAvailable: boolean
 }) {
   const heading = useId()
@@ -793,7 +809,8 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       const schema = hasCoverage || hasSpeechAlignment || hasWaveform ? response.comparison.comparison_schema : versionedSchema
       const accepted = kind === 'video' && !hasCoverage ? 14 : 13
       const hasAacSpeech = kind === 'audio' && schema === 'chipmunk.audio-reference-comparison/16'
-      const hasLongAacSpeech = kind === 'audio' && schema === 'chipmunk.audio-reference-comparison/17'
+      const hasStereoAacSpeech = kind === 'audio' && schema === 'chipmunk.audio-reference-comparison/18'
+      const hasLongAacSpeech = hasStereoAacSpeech || (kind === 'audio' && schema === 'chipmunk.audio-reference-comparison/17')
       if (!hasAacSpeech && !hasLongAacSpeech && !Array.from({ length: accepted }, (_, index) => index + 1).some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
@@ -839,9 +856,17 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       if (hasLongAacSpeech && (localSpeech?.sample_count !== 192000 ||
           localSpeech.aac_presentation?.presentation_end_exclusive_pts !== 192000 ||
           localSpeech.aac_presentation.native_clock?.sample_rate !== 48000 ||
-          localSpeech.aac_presentation.native_clock.channels !== 1 ||
+          localSpeech.aac_presentation.native_clock.channels !== (hasStereoAacSpeech ? 2 : 1) ||
           localSpeech.aac_presentation.native_clock.presentation_end_exclusive_pts !== 576000)) {
         throw new Error('The comparison response is missing its twelve-second AAC speech clock.')
+      }
+      if (hasStereoAacSpeech) {
+        const stereo = localSpeech?.stereo_support
+        if (!stereo?.views?.downmix || !stereo.views.left || !stereo.views.right ||
+            !Array.isArray(stereo.witness_channels) || (!!stereo.witness_channels.length !== !!localSpeech?.range) ||
+            stereo.witness_channels.some(channel => !['left', 'right'].includes(channel) || !stereo.views[channel]?.range)) {
+          throw new Error('The comparison response is missing its stereo speech evidence.')
+        }
       }
       if ((schema === 'chipmunk.audio-reference-comparison/7' || schema === 'chipmunk.video-reference-comparison/8')
           && !response.comparison.channel_timing) {
@@ -946,7 +971,8 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
             ? 'Compare continuous 16 kHz mono 16-bit WAV or FLAC copies of 5.8 to 12 seconds. The trial can align small timing differences. Heavy background sound can prevent a result.'
             : `Compare short speech changes. Both files need exactly ${longCleanSpeechAvailable ? 'six or twelve' : 'six'} seconds of continuous 16 kHz mono 16-bit WAV or FLAC with the same start and timing.`}
           {cleanSpeechAacAvailable && ' The analyzed file can also be a six-second AAC M4A at 16 kHz mono or 48 kHz mono or stereo.'}
-          {cleanSpeechAacAvailable && longCleanSpeechAvailable && ' Twelve-second AAC M4A is supported at 48 kHz mono.'}
+          {cleanSpeechAacAvailable && longCleanSpeechAvailable &&
+            ` Twelve-second AAC M4A is supported at 48 kHz mono${cleanSpeechStereoAacAvailable ? ' or stereo' : ''}.`}
           {cleanSpeechAacAvailable && ' Use a 16 kHz mono 16-bit WAV or FLAC earlier copy with matching duration and timing.'}
         </p>
       </div>}
@@ -983,6 +1009,7 @@ export default function MediaReferenceComparison({ analysisId, kind }: { analysi
       soundDifferenceAvailable={kind === 'video' && availability.data.sound_difference_available === true}
       cleanSpeechAvailable={kind === 'audio' && availability.data.clean_speech_available === true}
       cleanSpeechAacAvailable={kind === 'audio' && availability.data.clean_speech_aac_available === true}
+      cleanSpeechStereoAacAvailable={kind === 'audio' && availability.data.clean_speech_stereo_aac_available === true}
       alignedSpeechAvailable={kind === 'audio' && availability.data.aligned_speech_available === true}
       longCleanSpeechAvailable={kind === 'audio' && availability.data.long_clean_speech_available === true} /> : null
 }

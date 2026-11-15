@@ -2354,6 +2354,8 @@ export interface components {
             clean_speech_aac_available?: boolean | null;
             /** Clean Speech Available */
             clean_speech_available?: boolean | null;
+            /** Clean Speech Stereo Aac Available */
+            clean_speech_stereo_aac_available?: boolean | null;
             /** Long Clean Speech Available */
             long_clean_speech_available?: boolean | null;
         };

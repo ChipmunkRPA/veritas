@@ -143,7 +143,7 @@ def fit_input(root, plan, generator, feature_of):
     return np.array(records), np.array(masks, np.float32), np.array(edges, np.float32)
 
 
-def train(root, plan, generator, bank, *, feature_of=None):
+def train(root, plan, generator, bank, *, feature_of=None, extra_objective=None):
     import numpy as np
     import torch
     from torch.nn import functional as F
@@ -180,6 +180,8 @@ def train(root, plan, generator, bank, *, feature_of=None):
             rank_loss = F.softplus(-margins).mean()
             consistency = F.smooth_l1_loss(margins[:, 0, :], margins[:, 1, :])
             loss = interior_loss + .25 * edge_loss + .35 * rank_loss + .12 * consistency
+            if extra_objective is not None:
+                loss = loss + extra_objective(classifier, mean, scale, indices, local[:, 1], boundary[:, 1])
             optimizer.zero_grad(set_to_none=True)
             loss.backward()
             optimizer.step()

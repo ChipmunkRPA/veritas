@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Ranking short voice edits against matched controls](audio-competing-speech-ranking-2026-11-15.md)
+  increased useful locations without a matched control alert from one to
+  three on the primary panel at the wider point. In 172 separate transfer
+  recordings, it reproduced a known ElevenLabs location at its stricter
+  point and found no noisy Piper or KittenTTS edits. The candidate stays in
+  evaluation.
+
 - [Separate writing change and origin checks](writing-edit-occurrence-transfer-2026-11-15.md)
   still found no useful word locations in 60 GPT-5.4 report rewrites.
   Both candidates flagged 22/93 ordinary reports, compared with 15/93

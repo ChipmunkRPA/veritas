@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short voice ranking replay](audio-competing-speech-ranking-2026-11-15.md#independent-replay)
+checks ordinary and background controls at the same edit clock. It also
+compares two training variants on 172 retained transfer recordings across
+five generator families and three target-to-background conditions.
+
 The [separate writing change and origin replay](writing-edit-occurrence-transfer-2026-11-15.md#replay)
 recounts both candidate checks, paired gains and losses, and false alerts
 on separately verified genuine eLife revisions. The original publisher

@@ -24,6 +24,7 @@ from app.core.logging import get_logger
 from app.engine.exhibits import ExhibitBudgetExceeded
 from app.engine.models import MemoryBudgetExceeded, get_model_manager
 from app.evidence import image_png_layout
+from app.provenance.metadata_rules import standard_quality
 from app.storage.objects import ObjectStoreError
 
 CREATOR = "render"
@@ -44,6 +45,7 @@ FLAGGED = ("The supplementary whole-image check found a pattern associated with 
            "This result carries zero weight in the overall assessment.")
 NO_FLAG = ("The supplementary whole-image check measured three image views and gave no elevated response. "
            "It carries zero weight in the overall assessment.")
+COMPRESSION_LIMIT = " Heavy JPEG compression can hide patterns measured by this check."
 UNAVAILABLE = "The supplementary whole-image check was unavailable for this analysis."
 SCOPE = ("The supplementary check covers upright RGB JPEGs with a short side of at least 1,024 pixels "
          "and a long side of at most 4,920 pixels.")
@@ -104,10 +106,15 @@ def add_exhibits(source: Path, source_sha256: str, writer, *, remaining: float |
             if (image.mode != "RGB" or image.getexif().get(274, 1) != 1 or min(size) < min_side or max(size) > MAX_SIDE
                     or (is_png and (image.n_frames != 1 or "transparency" in image.info or not _true_color_png(source)))):
                 return _summary(writer, "skipped", PNG_SCOPE if is_png else SCOPE)
+            quality = None if is_png else standard_quality(image.quantization)
     except (OSError, ValueError, SyntaxError, Image.DecompressionBombError):
         return _summary(writer, "skipped", SCOPE)
     if python is None or not python.is_file() or settings.models_dir is None:
         log.info("image_review.skipped", reason="runtime_not_configured")
+        return _summary(writer, "skipped", UNAVAILABLE)
+    model = settings.models_dir / "research/image-v7-smaug"
+    if not (model / "model.safetensors").is_file() or not (model / "3_Dense/model.safetensors").is_file():
+        log.info("image_review.skipped", reason="checkpoint_unavailable")
         return _summary(writer, "skipped", UNAVAILABLE)
     try:
         memory, disk = psutil.virtual_memory().available, shutil.disk_usage(settings.data_dir).free
@@ -137,13 +144,13 @@ def add_exhibits(source: Path, source_sha256: str, writer, *, remaining: float |
                 env = {key: os.environ[key] for key in ("PATH", "LANG", "LC_ALL", "TMPDIR") if key in os.environ}
                 env.update(PYTHONPATH=str(BACKEND_DIR), PYTHONDONTWRITEBYTECODE="1", HF_HUB_OFFLINE="1",
                            TRANSFORMERS_OFFLINE="1", OMP_NUM_THREADS="4", OPENBLAS_NUM_THREADS="1", VECLIB_MAXIMUM_THREADS="4")
-                model = settings.models_dir / "research/image-v7-smaug"
                 subprocess.run([str(python.absolute()), "-B", "-m", "scripts.image_whole_evidence_worker", str(source),
                                 str(model), str(directory)], env=env, check=True, timeout=TIMEOUT_S,
                                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 flagged, crops = _output(directory, source_sha256, size)
         if not flagged:
-            return _summary(writer, "no_flag", NO_FLAG)
+            caption = NO_FLAG + COMPRESSION_LIMIT if quality is not None and quality <= 15 else NO_FLAG
+            return _summary(writer, "no_flag", caption)
         ids, rows = [], []
         for number, (bounds, data) in enumerate(crops, 1):
             x, y, w, h = bounds

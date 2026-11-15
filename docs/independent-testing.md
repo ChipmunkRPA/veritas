@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [JPEG compression replay](visual-checkpoint-recovery-2026-11-15.md#local-replay)
+compares 68 compressed deliveries from 34 earlier source images. It checks
+the earlier source and score commitments, then recounts gains and losses
+against the frozen operating point. The local app replay also verifies the
+restored face check on a matched original and two publisher swaps.
+
 The [native lip-timing support replay](video-lip-timing-block-support-2026-11-15.md#replay)
 recounts three gates on timing candidates for 60 native-camera recordings.
 It keeps the counts of deliveries per actor distinct from the grouped

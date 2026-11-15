@@ -1,0 +1,5115 @@
+{
+  "codec": {
+    "libjpeg": "6.2",
+    "pillow": "12.3.0"
+  },
+  "inputs": {
+    "baseline_sha256": "1d34843980392b6df234e3d4c7bcdd7f1b4a9f2ed612016d19327776e0d196de",
+    "native_freeze_sha256": "729042123b1f39efff8b4224f89455d7d4a18db938af31d052bf5a7cb69d97c4",
+    "operating_point_sha256": "c97b5e02b26a2c8763c9f1c8cb543f5ab63780b65f0f554e0450a42ca470d4bc",
+    "source_roster_sha256": "a98bebe846ebd2e8d8ca269b61f3573535fc440e93b9e20f372fc86b7fb4b8e8"
+  },
+  "method": {
+    "decision": "Use the current production worker's three exact views and reviewed CPU model, with its existing native mean and point. Compare matched gains and losses without fitting. These are whole-image responses for fully generated and ordinary scenes, without localized edit or real-world error claims.",
+    "sources": "Use all 34 native original files of the earlier held JPEG panel, not chosen by their scores. Retain the native and JPEG75 readings as earlier matched measurements.",
+    "transform": "Encode the native upright RGB pixels at Pillow JPEG qualities 35 and 15. No resize, crop, orientation change, metadata, optimization or progressive coding. Use standard 4:2:0 sampling."
+  },
+  "outcomes": {
+    "ordinary/abandoned/jpeg15": {
+      "files": 4,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/abandoned/jpeg35": {
+      "files": 4,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/abandoned/jpeg75": {
+      "files": 4,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/abandoned/native": {
+      "files": 4,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/architecture/jpeg15": {
+      "files": 2,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/architecture/jpeg35": {
+      "files": 2,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/architecture/jpeg75": {
+      "files": 2,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/architecture/native": {
+      "files": 2,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/building-exteriors/jpeg15": {
+      "files": 1,
+      "flagged": false,
+      "gained": false,
+      "lost": false
+    },
+    "ordinary/building-exteriors/jpeg35": {
+      "files": 1,
+      "flagged": false,
+      "gained": false,
+      "lost": false
+    },
+    "ordinary/building-exteriors/jpeg75": {
+      "files": 1,
+      "flagged": false,
+      "gained": false,
+      "lost": false
+    },
+    "ordinary/building-exteriors/native": {
+      "files": 1,
+      "flagged": false,
+      "gained": false,
+      "lost": false
+    },
+    "ordinary/cityscapes/jpeg15": {
+      "files": 3,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/cityscapes/jpeg35": {
+      "files": 3,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/cityscapes/jpeg75": {
+      "files": 3,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/cityscapes/native": {
+      "files": 3,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/forests/jpeg15": {
+      "files": 3,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/forests/jpeg35": {
+      "files": 3,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/forests/jpeg75": {
+      "files": 3,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/forests/native": {
+      "files": 3,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/jpeg15": {
+      "files": 16,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/jpeg35": {
+      "files": 16,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/jpeg75": {
+      "files": 16,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/lakes/jpeg15": {
+      "files": 3,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/lakes/jpeg35": {
+      "files": 3,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/lakes/jpeg75": {
+      "files": 3,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/lakes/native": {
+      "files": 3,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "ordinary/native": {
+      "files": 16,
+      "flagged": 0,
+      "gained": 0,
+      "lost": 0
+    },
+    "synthetic/FLUX.2_max/jpeg15": {
+      "files": 6,
+      "flagged": 5,
+      "gained": 0,
+      "lost": 1
+    },
+    "synthetic/FLUX.2_max/jpeg35": {
+      "files": 6,
+      "flagged": 6,
+      "gained": 0,
+      "lost": 0
+    },
+    "synthetic/FLUX.2_max/jpeg75": {
+      "files": 6,
+      "flagged": 6,
+      "gained": 0,
+      "lost": 0
+    },
+    "synthetic/FLUX.2_max/native": {
+      "files": 6,
+      "flagged": 6,
+      "gained": 0,
+      "lost": 0
+    },
+    "synthetic/GLM-Image/jpeg15": {
+      "files": 6,
+      "flagged": 4,
+      "gained": 0,
+      "lost": 2
+    },
+    "synthetic/GLM-Image/jpeg35": {
+      "files": 6,
+      "flagged": 6,
+      "gained": 0,
+      "lost": 0
+    },
+    "synthetic/GLM-Image/jpeg75": {
+      "files": 6,
+      "flagged": 6,
+      "gained": 0,
+      "lost": 0
+    },
+    "synthetic/GLM-Image/native": {
+      "files": 6,
+      "flagged": 6,
+      "gained": 0,
+      "lost": 0
+    },
+    "synthetic/Qwen-Image-2512/jpeg15": {
+      "files": 6,
+      "flagged": 5,
+      "gained": 0,
+      "lost": 1
+    },
+    "synthetic/Qwen-Image-2512/jpeg35": {
+      "files": 6,
+      "flagged": 6,
+      "gained": 0,
+      "lost": 0
+    },
+    "synthetic/Qwen-Image-2512/jpeg75": {
+      "files": 6,
+      "flagged": 6,
+      "gained": 0,
+      "lost": 0
+    },
+    "synthetic/Qwen-Image-2512/native": {
+      "files": 6,
+      "flagged": 6,
+      "gained": 0,
+      "lost": 0
+    },
+    "synthetic/jpeg15": {
+      "files": 18,
+      "flagged": 14,
+      "gained": 0,
+      "lost": 4
+    },
+    "synthetic/jpeg35": {
+      "files": 18,
+      "flagged": 18,
+      "gained": 0,
+      "lost": 0
+    },
+    "synthetic/jpeg75": {
+      "files": 18,
+      "flagged": 18,
+      "gained": 0,
+      "lost": 0
+    },
+    "synthetic/native": {
+      "files": 18,
+      "flagged": 18,
+      "gained": 0,
+      "lost": 0
+    }
+  },
+  "point": -5.4320597648620605,
+  "samples": [
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "1fad342b74b208eec4a842d145adb9e3e32541e34a23e096ed37ebec6643af6d",
+          "mean": 9.474857330322266,
+          "readings": [
+            9.483291625976562,
+            9.37411117553711,
+            9.567169189453125
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "5c8ab5d9b7d8691d590890bd35f81365c944eb00c8493e5b73885760ea5f0e73",
+          "mean": 9.432951927185059,
+          "readings": [
+            9.4855318069458,
+            9.256394386291504,
+            9.556930541992188
+          ]
+        }
+      },
+      "family": "Qwen-Image-2512",
+      "index": 0,
+      "label": "synthetic",
+      "native_sha256": "a13f94db9da7c2525b53cbe038825857d0048fcb15d456b8108583477d4d17b2",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "403f4ff838dbf14f31cb1e8bfa59f03ca9e670c69de7ff037a8de86f58eb9f8b",
+          "mean": -6.971200466156006,
+          "readings": [
+            -6.7308454513549805,
+            -7.211024284362793,
+            -6.971732139587402
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "4de2cbd89469610fbe2ac89c86b7c558e9fb156008dc7e53769c17df9236cd1b",
+          "mean": -1.0417157411575317,
+          "readings": [
+            -0.1477581113576889,
+            -2.032355785369873,
+            -0.9450335502624512
+          ]
+        }
+      },
+      "family": "Qwen-Image-2512",
+      "index": 1,
+      "label": "synthetic",
+      "native_sha256": "2c2a0d9a6fbc76cdcdaf03b139ab272a337885545b37ec61c248e1d423489da8",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "8cf9cfdb87657a92b45a694ea3ab086e4c6fb7ca2189c2325e8e49d13852e9af",
+          "mean": 6.595067977905273,
+          "readings": [
+            6.6289963722229,
+            6.311516284942627,
+            6.844691753387451
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "a66395686a463f5ebcf56c6ab27cf104dc7f016124cf542f539b0496059b49ab",
+          "mean": 7.110073089599609,
+          "readings": [
+            7.001325607299805,
+            7.481508255004883,
+            6.847386360168457
+          ]
+        }
+      },
+      "family": "Qwen-Image-2512",
+      "index": 2,
+      "label": "synthetic",
+      "native_sha256": "e6f0af23d8e265706a6e56d2223b6ec8cd0fdc42b52151fa9a237e3e93c3779e",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "77ac69242594a4cbf84fd8d9c6b4bd091e740edacef91d17fa971cc83492a7fc",
+          "mean": 10.048611640930176,
+          "readings": [
+            10.016207695007324,
+            10.12364387512207,
+            10.005983352661133
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "7a525f4ea8c4d78593f4781d14dfd68ec6da7b1ee02dbfbb0fe557b3e5173a50",
+          "mean": 10.153910636901855,
+          "readings": [
+            10.11056900024414,
+            10.183808326721191,
+            10.167356491088867
+          ]
+        }
+      },
+      "family": "Qwen-Image-2512",
+      "index": 3,
+      "label": "synthetic",
+      "native_sha256": "252c6664799bdf24ed80e0af1acfa65fdf0c149dd8db192c583bc2fc9f01fdd0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "e9b75e447b2c7d56a8be4a6066a76fcbb6752aedaa41c0d243eba70e6a20204a",
+          "mean": 7.013673782348633,
+          "readings": [
+            6.922067642211914,
+            6.807171821594238,
+            7.311781883239746
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "e10a6c72a84c90cd651e2bc14700e7f91de85cc6a011b8011671165ddfd8fb38",
+          "mean": 7.103860378265381,
+          "readings": [
+            7.300579071044922,
+            6.578089714050293,
+            7.4329118728637695
+          ]
+        }
+      },
+      "family": "Qwen-Image-2512",
+      "index": 4,
+      "label": "synthetic",
+      "native_sha256": "b65762515cb9b276e3bc2e1953b9cb3671684a990ccd66387ae72c8e8a0b4c29",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "f0b2dcb7787f72e972d748860a7450d848dc410af4abacccb94461ac22bef338",
+          "mean": 7.638539791107178,
+          "readings": [
+            7.831021785736084,
+            7.639313697814941,
+            7.44528341293335
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "b70b9bc9de7d98f74bef986f153afe2fbf0c14c681b548a6ee3d17470f4f79ac",
+          "mean": 9.28492259979248,
+          "readings": [
+            9.396683692932129,
+            9.208032608032227,
+            9.250049591064453
+          ]
+        }
+      },
+      "family": "Qwen-Image-2512",
+      "index": 5,
+      "label": "synthetic",
+      "native_sha256": "d079bf557a6c7cbad36909de43a5adba05a69b91bbb8193bdc65e34c31e828df",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "a81c51477036a3b9998ffbb627ec2a97913414fdffc70d48803df9dcf0e62d38",
+          "mean": 9.827906608581543,
+          "readings": [
+            9.811664581298828,
+            9.819530487060547,
+            9.852523803710938
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "47304b6cef73559d403183cd8ea34811494e24d0f5416ca0d471c980e4a840b4",
+          "mean": 9.974730491638184,
+          "readings": [
+            9.956289291381836,
+            10.007406234741211,
+            9.960495948791504
+          ]
+        }
+      },
+      "family": "GLM-Image",
+      "index": 6,
+      "label": "synthetic",
+      "native_sha256": "e5824ff3d2a7408d36a9300ddd86841951b575de36acea8f36cab76af9c7c8d7",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "14be1b1e22aa59b45a5a8a525b8a36d63338f6ce57455ffc23db56a31a850d97",
+          "mean": -0.4943191707134247,
+          "readings": [
+            -1.1382238864898682,
+            0.8760905265808105,
+            -1.220824122428894
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "c5ec1aa61de2341a0fec2d68d4a664fb20094674e0dd8123f7e5314e5f30477d",
+          "mean": 5.535634994506836,
+          "readings": [
+            6.5370073318481445,
+            5.273552417755127,
+            4.796345233917236
+          ]
+        }
+      },
+      "family": "GLM-Image",
+      "index": 7,
+      "label": "synthetic",
+      "native_sha256": "401ca4c7a7ba183804b911d3681e86903eb8a1a4fdae4913ee0579789ae65ddf",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "b6d0097486ffcedaa2af83cc3f5bee16320271069e76d4d343dca348111d9028",
+          "mean": 8.054912567138672,
+          "readings": [
+            7.854914665222168,
+            8.206695556640625,
+            8.103126525878906
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "1765c19eae21a287644c5d8189d62369af21785a97531a3bd6dae2c31df332de",
+          "mean": 9.21506404876709,
+          "readings": [
+            9.085980415344238,
+            9.319710731506348,
+            9.239501953125
+          ]
+        }
+      },
+      "family": "GLM-Image",
+      "index": 8,
+      "label": "synthetic",
+      "native_sha256": "4e3c2db72626178ef5cc9b397704e6f5160358f3307cf17474f34ad4f85a0e1c",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "65dbf704dca9c1172af50a848bdd7d22d5e0ee6b67e0b108f5ae9bfe521b03d1",
+          "mean": -6.447990417480469,
+          "readings": [
+            -6.45552921295166,
+            -5.776195526123047,
+            -7.112247467041016
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "51961b542a5e14006af7f12486b60078890d55d1efdac8787b1b806767c0ae34",
+          "mean": -4.351932525634766,
+          "readings": [
+            -3.902078628540039,
+            -5.036772727966309,
+            -4.116945743560791
+          ]
+        }
+      },
+      "family": "GLM-Image",
+      "index": 9,
+      "label": "synthetic",
+      "native_sha256": "1e2ea262f1f18f2af431ac24b223b8cce2ff9ee2fa23ffd0a0e12f9cf9ffd63d",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "245daebd575fccdcf456f307c65209e1794f9efa2618a78e5da7fb659878fdb4",
+          "mean": 8.274287223815918,
+          "readings": [
+            8.627684593200684,
+            7.789776802062988,
+            8.40539836883545
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "8e076b53aa0bc08f392dd4d2d5d4d327b9cd6eee1c02f11d7969fa013ea3a808",
+          "mean": 7.82379150390625,
+          "readings": [
+            7.76473331451416,
+            7.417121410369873,
+            8.289519309997559
+          ]
+        }
+      },
+      "family": "GLM-Image",
+      "index": 10,
+      "label": "synthetic",
+      "native_sha256": "03bf2519ef4f6c6d7c1bac2a268155dbfdec4e7838f6067c4f090116bbbfe40c",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "8523158521de455a9f65689657e387e39dc2c7a90b629d6ba1ea2d15e8b3a5e2",
+          "mean": -6.12665319442749,
+          "readings": [
+            -6.918394088745117,
+            -4.6166229248046875,
+            -6.844941139221191
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "8dcdc1d57f17b642f486f592ccf296ef08e675385994bafe0610d691f08bf70d",
+          "mean": -3.3510730266571045,
+          "readings": [
+            -3.7300829887390137,
+            -1.961155891418457,
+            -4.3619794845581055
+          ]
+        }
+      },
+      "family": "GLM-Image",
+      "index": 11,
+      "label": "synthetic",
+      "native_sha256": "494cd301272fb7022566b256866593169f43f2f7bd730710ddf5db9aaaea877b",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "3a43b30cbc998cfab46cf63f916d4080a4da948e47d4d7bb7dc42a7f49ff099d",
+          "mean": -6.435007572174072,
+          "readings": [
+            -5.775524139404297,
+            -6.801648139953613,
+            -6.727851867675781
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "4f1dcb71771c40d7d4104f36814a0eec3776b592565064aa628a44bf88e8093c",
+          "mean": -5.178914546966553,
+          "readings": [
+            -5.882710933685303,
+            -4.295157432556152,
+            -5.358875751495361
+          ]
+        }
+      },
+      "family": "FLUX.2_max",
+      "index": 12,
+      "label": "synthetic",
+      "native_sha256": "eb7546a9ada19638852c1e9c6a7d378a71526907ddfcf5d4f085e72a4f05f07f",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "19f9ee0a18a3cb86d4de3ff5a2958aa4c2865ce613420da852f7346735b6f54b",
+          "mean": 9.145763397216797,
+          "readings": [
+            8.98536491394043,
+            9.467536926269531,
+            8.984389305114746
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "140cf8e564c9528fe6f7b8c804c6034dbf9fdd8301d21878a0cac0bdf3106fc0",
+          "mean": 9.673419952392578,
+          "readings": [
+            9.677471160888672,
+            9.577180862426758,
+            9.765608787536621
+          ]
+        }
+      },
+      "family": "FLUX.2_max",
+      "index": 13,
+      "label": "synthetic",
+      "native_sha256": "ead098a7eef53c8113b2e9abfb750da48abd09328af9d37b8442a8ebd5cc88c0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "e2c8f248f845775309ed8bf5d147fb8f04817ba4ca7e5301ea862dbf04eff045",
+          "mean": 9.075944900512695,
+          "readings": [
+            8.939085006713867,
+            9.16812515258789,
+            9.120624542236328
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "60523b1716bce88b922c2daa4ea715af3353c5717d3b5fbbea50eec3d2e5e7be",
+          "mean": 9.052992820739746,
+          "readings": [
+            8.477407455444336,
+            9.352258682250977,
+            9.32931137084961
+          ]
+        }
+      },
+      "family": "FLUX.2_max",
+      "index": 14,
+      "label": "synthetic",
+      "native_sha256": "0693276da719119415d8c9bf7de150ef91634cb53e54b80c44c3f12614680c0c",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "acccc9bd32b44f547c8f7a4682bdc1b4881edc187d32a55b0ef92f4e146653e3",
+          "mean": 5.865031719207764,
+          "readings": [
+            5.595595836639404,
+            5.948146820068359,
+            6.051351547241211
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "c8015ed7fec2414601fdc89e019c4cfe8c7e3654f55503183052d7c088a6f43f",
+          "mean": -0.49883413314819336,
+          "readings": [
+            -3.2233004570007324,
+            2.7835240364074707,
+            -1.0567259788513184
+          ]
+        }
+      },
+      "family": "FLUX.2_max",
+      "index": 15,
+      "label": "synthetic",
+      "native_sha256": "bfaebf8030fb6eac99bbfc20bcbed4e34033fb2499a3207195ca679abf3495bc",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "871b64d3aced1158e74d3db5f10924376cf9c08d48386eb4df305f7ccb561081",
+          "mean": 5.147653579711914,
+          "readings": [
+            4.639842510223389,
+            5.415904521942139,
+            5.387213706970215
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "67e447b8da5f41d1a17b5c95de017a8efee87d8d25f0ffee32c02f341f47194a",
+          "mean": 1.8227616548538208,
+          "readings": [
+            -1.7040916681289673,
+            3.52744197845459,
+            3.644934892654419
+          ]
+        }
+      },
+      "family": "FLUX.2_max",
+      "index": 16,
+      "label": "synthetic",
+      "native_sha256": "93df9f13c4590d14a010079695b5a17377d2367df5f3a797338cda9c2ea7ae6c",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "facebe89dfb05a711d6ed3c3df1760491819a15985cc9cdddcf562d0dadc266d",
+          "mean": 3.681792974472046,
+          "readings": [
+            3.7383456230163574,
+            3.9421987533569336,
+            3.3648345470428467
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                540672,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                24576,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                565248,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ],
+            [
+              [
+                49152,
+                576
+              ],
+              [
+                24576,
+                576
+              ],
+              [
+                589824,
+                576
+              ],
+              [
+                565248,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "cbbc60dbf5aa33bf84e5ce0e941aa0c78732a9ade16e805d3b33521c4db824ff",
+          "mean": 3.7842323780059814,
+          "readings": [
+            4.158476829528809,
+            3.4050350189208984,
+            3.789185047149658
+          ]
+        }
+      },
+      "family": "FLUX.2_max",
+      "index": 17,
+      "label": "synthetic",
+      "native_sha256": "0466c07b23d310292f312a6bbc4f6173ca4c4d2cc686efe420bd9d6e47addb4d",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                866
+              ],
+              [
+                30648,
+                576
+              ],
+              [
+                1013760,
+                866
+              ],
+              [
+                704904,
+                576
+              ]
+            ],
+            [
+              [
+                324480,
+                866
+              ],
+              [
+                30648,
+                576
+              ],
+              [
+                1338240,
+                866
+              ],
+              [
+                704904,
+                576
+              ]
+            ],
+            [
+              [
+                648960,
+                866
+              ],
+              [
+                30648,
+                576
+              ],
+              [
+                1662720,
+                866
+              ],
+              [
+                704904,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "be559f33701eb970928b3c90be4a306556118d3e2828ba731d3d1bbee81c7a39",
+          "mean": -9.46523666381836,
+          "readings": [
+            -9.663721084594727,
+            -9.420835494995117,
+            -9.31115436553955
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                866
+              ],
+              [
+                30648,
+                576
+              ],
+              [
+                1013760,
+                866
+              ],
+              [
+                704904,
+                576
+              ]
+            ],
+            [
+              [
+                324480,
+                866
+              ],
+              [
+                30648,
+                576
+              ],
+              [
+                1338240,
+                866
+              ],
+              [
+                704904,
+                576
+              ]
+            ],
+            [
+              [
+                648960,
+                866
+              ],
+              [
+                30648,
+                576
+              ],
+              [
+                1662720,
+                866
+              ],
+              [
+                704904,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "6e5ef17d26df22dcf594b53a3babe36e8e104709170caff5779faba34abb803a",
+          "mean": -9.042098045349121,
+          "readings": [
+            -9.454294204711914,
+            -8.97491455078125,
+            -8.697086334228516
+          ]
+        }
+      },
+      "family": "architecture",
+      "index": 18,
+      "label": "ordinary",
+      "native_sha256": "344f53f67ddc72adc7711c2a16bfe06796a82d14401a02041c94cfd09ee07b79",
+      "size": [
+        1920,
+        1277
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                1024
+              ],
+              [
+                25920,
+                576
+              ],
+              [
+                1013760,
+                1024
+              ],
+              [
+                596160,
+                576
+              ]
+            ],
+            [
+              [
+                476160,
+                1024
+              ],
+              [
+                25920,
+                576
+              ],
+              [
+                1489920,
+                1024
+              ],
+              [
+                596160,
+                576
+              ]
+            ],
+            [
+              [
+                952320,
+                1024
+              ],
+              [
+                25920,
+                576
+              ],
+              [
+                1966080,
+                1024
+              ],
+              [
+                596160,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "f16061a3411b2fde6701ef9e8dead31f51f1088baa18c68e26bd90a9f31f74d7",
+          "mean": -9.283642768859863,
+          "readings": [
+            -9.404407501220703,
+            -9.119586944580078,
+            -9.326934814453125
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                1024
+              ],
+              [
+                25920,
+                576
+              ],
+              [
+                1013760,
+                1024
+              ],
+              [
+                596160,
+                576
+              ]
+            ],
+            [
+              [
+                476160,
+                1024
+              ],
+              [
+                25920,
+                576
+              ],
+              [
+                1489920,
+                1024
+              ],
+              [
+                596160,
+                576
+              ]
+            ],
+            [
+              [
+                952320,
+                1024
+              ],
+              [
+                25920,
+                576
+              ],
+              [
+                1966080,
+                1024
+              ],
+              [
+                596160,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "79612e451b7fbc1279143c7b830688bfc5ca619f887f6129953711487703bcbb",
+          "mean": -9.427382469177246,
+          "readings": [
+            -9.25926685333252,
+            -9.36424446105957,
+            -9.6586332321167
+          ]
+        }
+      },
+      "family": "lakes",
+      "index": 19,
+      "label": "ordinary",
+      "native_sha256": "3c17c7ad804183fade56a9e85a3569a717bbaea6ef5a912e7c6eaae44d9984f4",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1013760,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                322560,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1336320,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                645120,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1658880,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "43ee0a56448c74d5860c1c1bc90f09b5799b3f4dbc719fca472cde25110417c8",
+          "mean": -8.24585247039795,
+          "readings": [
+            -8.052505493164062,
+            -8.38245964050293,
+            -8.302593231201172
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1013760,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                322560,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1336320,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                645120,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1658880,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "87bff75170dd761a4cf0ab3df610316c5619a816598617e483de9c412e3c702d",
+          "mean": -8.094986915588379,
+          "readings": [
+            -8.445204734802246,
+            -8.204192161560059,
+            -7.63556432723999
+          ]
+        }
+      },
+      "family": "lakes",
+      "index": 20,
+      "label": "ordinary",
+      "native_sha256": "2b6816275b26e22f7609d72e69f75d7be73c0b797e9dcb00eacfa9b35adde935",
+      "size": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1013760,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                322560,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1336320,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                645120,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1658880,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "d1b88145400e8743979cfe689fefaff7653aec75beee43894a87e16ff9c4fd9d",
+          "mean": -9.499224662780762,
+          "readings": [
+            -9.568164825439453,
+            -9.501446723937988,
+            -9.428062438964844
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1013760,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                322560,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1336320,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                645120,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1658880,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "2d60a240df0fdab77a978de65a2aeed8854cc2b443349868fdf5d2bc99f3cccb",
+          "mean": -9.525473594665527,
+          "readings": [
+            -9.682392120361328,
+            -9.540213584899902,
+            -9.353812217712402
+          ]
+        }
+      },
+      "family": "forests",
+      "index": 21,
+      "label": "ordinary",
+      "native_sha256": "673747b90b351f8b6dc2956ee96ad15c6ea5e4f270b0ab8407d954dce47b4347",
+      "size": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1013760,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                322560,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1336320,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                645120,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1658880,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "18e8e31a468974206a94d754210324f0596b5c936b98b5418e3569658b000340",
+          "mean": -7.8877105712890625,
+          "readings": [
+            -7.557343006134033,
+            -7.596715927124023,
+            -8.509074211120605
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1013760,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                322560,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1336320,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                645120,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1658880,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "c2cdc5f637789b210a4621ce13775ea8a93da506d4e8f872991101a022a3b529",
+          "mean": -7.724365234375,
+          "readings": [
+            -7.257491111755371,
+            -7.373879909515381,
+            -8.541725158691406
+          ]
+        }
+      },
+      "family": "abandoned",
+      "index": 22,
+      "label": "ordinary",
+      "native_sha256": "7743986a7a30d8017ef7213c8dcebcf23e9fbda63b3f15b9d7de067c7c309904",
+      "size": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                769
+              ],
+              [
+                34512,
+                576
+              ],
+              [
+                1013760,
+                769
+              ],
+              [
+                793776,
+                576
+              ]
+            ],
+            [
+              [
+                230400,
+                769
+              ],
+              [
+                34512,
+                576
+              ],
+              [
+                1244160,
+                769
+              ],
+              [
+                793776,
+                576
+              ]
+            ],
+            [
+              [
+                462720,
+                769
+              ],
+              [
+                34512,
+                576
+              ],
+              [
+                1476480,
+                769
+              ],
+              [
+                793776,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "5505f1cdf2b7cec5889511c712d9a12f4f1127954f03f15917ce429a9409b4c3",
+          "mean": -9.094257354736328,
+          "readings": [
+            -9.281689643859863,
+            -9.295201301574707,
+            -8.705881118774414
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                769
+              ],
+              [
+                34512,
+                576
+              ],
+              [
+                1013760,
+                769
+              ],
+              [
+                793776,
+                576
+              ]
+            ],
+            [
+              [
+                230400,
+                769
+              ],
+              [
+                34512,
+                576
+              ],
+              [
+                1244160,
+                769
+              ],
+              [
+                793776,
+                576
+              ]
+            ],
+            [
+              [
+                462720,
+                769
+              ],
+              [
+                34512,
+                576
+              ],
+              [
+                1476480,
+                769
+              ],
+              [
+                793776,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "d9d27d81aa372ae9cae74eb5448db976eff98753bfa60f14625b5c88acb45cc6",
+          "mean": -9.035600662231445,
+          "readings": [
+            -9.320744514465332,
+            -9.152265548706055,
+            -8.633790969848633
+          ]
+        }
+      },
+      "family": "abandoned",
+      "index": 23,
+      "label": "ordinary",
+      "native_sha256": "2f26e4e8aefc4f2d560a30e592521a14af361e25b47239b41cee31a32982d488",
+      "size": [
+        1920,
+        1438
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1013760,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                322560,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1336320,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                645120,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1658880,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "96b3734954c28c3e2ae2fbb2b4e3bfcf63c198abd897ef25a1e75d3394ae2f78",
+          "mean": -9.779841423034668,
+          "readings": [
+            -9.885403633117676,
+            -9.722532272338867,
+            -9.731587409973145
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1013760,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                322560,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1336320,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                645120,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1658880,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "417573d18a2f91669a13fb857b996e36268e3c812d648581a3c66bf4d8d7bbd9",
+          "mean": -9.774752616882324,
+          "readings": [
+            -9.878799438476562,
+            -9.601004600524902,
+            -9.844453811645508
+          ]
+        }
+      },
+      "family": "building-exteriors",
+      "index": 24,
+      "label": "ordinary",
+      "native_sha256": "19bb44ebdc6709a4409bd8674158f24da74660de85a6cf4ab8d8e323e7ca3c7d",
+      "size": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                864
+              ],
+              [
+                78720,
+                576
+              ],
+              [
+                2597760,
+                864
+              ],
+              [
+                1810560,
+                576
+              ]
+            ],
+            [
+              [
+                826560,
+                864
+              ],
+              [
+                78720,
+                576
+              ],
+              [
+                3424320,
+                864
+              ],
+              [
+                1810560,
+                576
+              ]
+            ],
+            [
+              [
+                1653120,
+                864
+              ],
+              [
+                78720,
+                576
+              ],
+              [
+                4250880,
+                864
+              ],
+              [
+                1810560,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "b67aeef204075f19e0279081e781fa2290d48584c37c6e0f27a7420f778c39e9",
+          "mean": -9.67212200164795,
+          "readings": [
+            -9.733758926391602,
+            -9.733869552612305,
+            -9.548738479614258
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                864
+              ],
+              [
+                78720,
+                576
+              ],
+              [
+                2597760,
+                864
+              ],
+              [
+                1810560,
+                576
+              ]
+            ],
+            [
+              [
+                826560,
+                864
+              ],
+              [
+                78720,
+                576
+              ],
+              [
+                3424320,
+                864
+              ],
+              [
+                1810560,
+                576
+              ]
+            ],
+            [
+              [
+                1653120,
+                864
+              ],
+              [
+                78720,
+                576
+              ],
+              [
+                4250880,
+                864
+              ],
+              [
+                1810560,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "f723734879a9b91a13c07ea40873667019e61b8d6110040cdec00b8058c3a26f",
+          "mean": -9.599017143249512,
+          "readings": [
+            -9.618947982788086,
+            -9.535578727722168,
+            -9.642524719238281
+          ]
+        }
+      },
+      "family": "abandoned",
+      "index": 25,
+      "label": "ordinary",
+      "native_sha256": "2be1638a4a5aefe37470ce19970d9883cb1c76e1751fc127c884d5cbaf2771d8",
+      "size": [
+        4920,
+        3280
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                813
+              ],
+              [
+                32664,
+                576
+              ],
+              [
+                1013760,
+                813
+              ],
+              [
+                751272,
+                576
+              ]
+            ],
+            [
+              [
+                272640,
+                813
+              ],
+              [
+                32664,
+                576
+              ],
+              [
+                1286400,
+                813
+              ],
+              [
+                751272,
+                576
+              ]
+            ],
+            [
+              [
+                547200,
+                813
+              ],
+              [
+                32664,
+                576
+              ],
+              [
+                1560960,
+                813
+              ],
+              [
+                751272,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "f99cb2c8f6e9fa8c612d742fa9fb783d64dfb443d03db1a6a32cb40af1b48e90",
+          "mean": -9.323404312133789,
+          "readings": [
+            -9.129341125488281,
+            -9.370710372924805,
+            -9.470161437988281
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                813
+              ],
+              [
+                32664,
+                576
+              ],
+              [
+                1013760,
+                813
+              ],
+              [
+                751272,
+                576
+              ]
+            ],
+            [
+              [
+                272640,
+                813
+              ],
+              [
+                32664,
+                576
+              ],
+              [
+                1286400,
+                813
+              ],
+              [
+                751272,
+                576
+              ]
+            ],
+            [
+              [
+                547200,
+                813
+              ],
+              [
+                32664,
+                576
+              ],
+              [
+                1560960,
+                813
+              ],
+              [
+                751272,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "a081565c802ad85ef0e73543adb3793d6bb6757b62697c92bfe3721adb720bc6",
+          "mean": -9.378630638122559,
+          "readings": [
+            -9.20833969116211,
+            -9.352014541625977,
+            -9.575538635253906
+          ]
+        }
+      },
+      "family": "cityscapes",
+      "index": 26,
+      "label": "ordinary",
+      "native_sha256": "12068f2e78a122c5bbaf273702a30c00fe2c187a8b93c15e5d9bd506ee02f467",
+      "size": [
+        1920,
+        1361
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                1035
+              ],
+              [
+                25656,
+                576
+              ],
+              [
+                1013760,
+                1035
+              ],
+              [
+                590088,
+                576
+              ]
+            ],
+            [
+              [
+                485760,
+                1035
+              ],
+              [
+                25656,
+                576
+              ],
+              [
+                1499520,
+                1035
+              ],
+              [
+                590088,
+                576
+              ]
+            ],
+            [
+              [
+                973440,
+                1035
+              ],
+              [
+                25656,
+                576
+              ],
+              [
+                1987200,
+                1035
+              ],
+              [
+                590088,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "61f6b85e9d4f672f56c24f9ec6bc546c484eae60e20234b80b0b4633d8daa51a",
+          "mean": -9.753016471862793,
+          "readings": [
+            -9.710719108581543,
+            -9.747251510620117,
+            -9.801078796386719
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                1035
+              ],
+              [
+                25656,
+                576
+              ],
+              [
+                1013760,
+                1035
+              ],
+              [
+                590088,
+                576
+              ]
+            ],
+            [
+              [
+                485760,
+                1035
+              ],
+              [
+                25656,
+                576
+              ],
+              [
+                1499520,
+                1035
+              ],
+              [
+                590088,
+                576
+              ]
+            ],
+            [
+              [
+                973440,
+                1035
+              ],
+              [
+                25656,
+                576
+              ],
+              [
+                1987200,
+                1035
+              ],
+              [
+                590088,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "6c85e6556d3314e26e2a14815d541fddaed7567bd42f91ac7beb24f62de2e8c4",
+          "mean": -9.637972831726074,
+          "readings": [
+            -9.436704635620117,
+            -9.705448150634766,
+            -9.771766662597656
+          ]
+        }
+      },
+      "family": "cityscapes",
+      "index": 27,
+      "label": "ordinary",
+      "native_sha256": "29a3fb89f04f60f8b6eca20a7fea8ec97c99fc28db56a34e5e7cef6fa66c2e94",
+      "size": [
+        1920,
+        1069
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1013760,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                322560,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1336320,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                645120,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1658880,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "5600355f3d028da50091fcca0967008e784b0defa482574116cfa6495c91386a",
+          "mean": -8.504643440246582,
+          "readings": [
+            -8.71864128112793,
+            -8.755714416503906,
+            -8.039576530456543
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1013760,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                322560,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1336320,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                645120,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1658880,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "1198721802bcf3a64b683b75fde2e3d49a02f358370d2ce694dac8cf0f8f148d",
+          "mean": -8.315231323242188,
+          "readings": [
+            -8.698978424072266,
+            -8.297475814819336,
+            -7.949239730834961
+          ]
+        }
+      },
+      "family": "lakes",
+      "index": 28,
+      "label": "ordinary",
+      "native_sha256": "0c734244232ff89d7daceebf9eb659d4a853d9dcc27bd4cdd7af90855a91321f",
+      "size": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1013760,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                322560,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1336320,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                645120,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1658880,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "de0e058bff4ad72aeb553c2303815a08694ea7ca47fcf081a771dbf4b2cdd3ed",
+          "mean": -7.706491947174072,
+          "readings": [
+            -7.104307174682617,
+            -7.885885238647461,
+            -8.129284858703613
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1013760,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                322560,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1336320,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ],
+            [
+              [
+                645120,
+                864
+              ],
+              [
+                30720,
+                576
+              ],
+              [
+                1658880,
+                864
+              ],
+              [
+                706560,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "941ed4093af526aa47d62bff9a0c2990ee233fd1ee21112791ddab174eeb3f4b",
+          "mean": -7.44044828414917,
+          "readings": [
+            -7.214532852172852,
+            -7.510541915893555,
+            -7.596269607543945
+          ]
+        }
+      },
+      "family": "forests",
+      "index": 29,
+      "label": "ordinary",
+      "native_sha256": "ad2b39217fe6564e0d39e7db713977a702eab2adc959f2d465af380efad491d1",
+      "size": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                863
+              ],
+              [
+                30768,
+                576
+              ],
+              [
+                1013760,
+                863
+              ],
+              [
+                707664,
+                576
+              ]
+            ],
+            [
+              [
+                320640,
+                863
+              ],
+              [
+                30768,
+                576
+              ],
+              [
+                1334400,
+                863
+              ],
+              [
+                707664,
+                576
+              ]
+            ],
+            [
+              [
+                643200,
+                863
+              ],
+              [
+                30768,
+                576
+              ],
+              [
+                1656960,
+                863
+              ],
+              [
+                707664,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "94ccad269c1408e3dcefaa7d4ab158c2aa017589837fe6002df1755380efbba3",
+          "mean": -8.391406059265137,
+          "readings": [
+            -8.363506317138672,
+            -8.576772689819336,
+            -8.23393726348877
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                863
+              ],
+              [
+                30768,
+                576
+              ],
+              [
+                1013760,
+                863
+              ],
+              [
+                707664,
+                576
+              ]
+            ],
+            [
+              [
+                320640,
+                863
+              ],
+              [
+                30768,
+                576
+              ],
+              [
+                1334400,
+                863
+              ],
+              [
+                707664,
+                576
+              ]
+            ],
+            [
+              [
+                643200,
+                863
+              ],
+              [
+                30768,
+                576
+              ],
+              [
+                1656960,
+                863
+              ],
+              [
+                707664,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "d83712c5d4a3e4491b21684adb7c314eecde36cd494c6f32b5ab696c302383b1",
+          "mean": -8.009360313415527,
+          "readings": [
+            -7.775411605834961,
+            -8.440520286560059,
+            -7.812148094177246
+          ]
+        }
+      },
+      "family": "forests",
+      "index": 30,
+      "label": "ordinary",
+      "native_sha256": "79cb31e377f7ceaa1a15df73ef8994072d927457642a47ef837bc4fce25038e8",
+      "size": [
+        1920,
+        1282
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                812
+              ],
+              [
+                32688,
+                576
+              ],
+              [
+                1013760,
+                812
+              ],
+              [
+                751824,
+                576
+              ]
+            ],
+            [
+              [
+                272640,
+                812
+              ],
+              [
+                32688,
+                576
+              ],
+              [
+                1286400,
+                812
+              ],
+              [
+                751824,
+                576
+              ]
+            ],
+            [
+              [
+                545280,
+                812
+              ],
+              [
+                32688,
+                576
+              ],
+              [
+                1559040,
+                812
+              ],
+              [
+                751824,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "6c7bfb6186173f2dcb373aa25d584e7e625c65ebbb2c84a6f89a1ee5bf4047ec",
+          "mean": -9.146041870117188,
+          "readings": [
+            -9.201822280883789,
+            -9.268260955810547,
+            -8.968042373657227
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                812
+              ],
+              [
+                32688,
+                576
+              ],
+              [
+                1013760,
+                812
+              ],
+              [
+                751824,
+                576
+              ]
+            ],
+            [
+              [
+                272640,
+                812
+              ],
+              [
+                32688,
+                576
+              ],
+              [
+                1286400,
+                812
+              ],
+              [
+                751824,
+                576
+              ]
+            ],
+            [
+              [
+                545280,
+                812
+              ],
+              [
+                32688,
+                576
+              ],
+              [
+                1559040,
+                812
+              ],
+              [
+                751824,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "3c5699cb7dfd3d9a242e4e25a16a073cd14d9ed7f546a7d59e5a5c9671d506d3",
+          "mean": -9.238560676574707,
+          "readings": [
+            -9.233695983886719,
+            -9.249305725097656,
+            -9.232681274414062
+          ]
+        }
+      },
+      "family": "architecture",
+      "index": 31,
+      "label": "ordinary",
+      "native_sha256": "133d8e045ab867b158f07bb1e5a3355940de939d3fe41094078166d29f2f1d68",
+      "size": [
+        1920,
+        1362
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                919
+              ],
+              [
+                28896,
+                576
+              ],
+              [
+                1013760,
+                919
+              ],
+              [
+                664608,
+                576
+              ]
+            ],
+            [
+              [
+                374400,
+                919
+              ],
+              [
+                28896,
+                576
+              ],
+              [
+                1388160,
+                919
+              ],
+              [
+                664608,
+                576
+              ]
+            ],
+            [
+              [
+                750720,
+                919
+              ],
+              [
+                28896,
+                576
+              ],
+              [
+                1764480,
+                919
+              ],
+              [
+                664608,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "27b391dc9edc34435d395cb8da9c37d831633bc3acdd9a0fa0624e8bc22d061e",
+          "mean": -9.822037696838379,
+          "readings": [
+            -9.823112487792969,
+            -9.852989196777344,
+            -9.790013313293457
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                919
+              ],
+              [
+                28896,
+                576
+              ],
+              [
+                1013760,
+                919
+              ],
+              [
+                664608,
+                576
+              ]
+            ],
+            [
+              [
+                374400,
+                919
+              ],
+              [
+                28896,
+                576
+              ],
+              [
+                1388160,
+                919
+              ],
+              [
+                664608,
+                576
+              ]
+            ],
+            [
+              [
+                750720,
+                919
+              ],
+              [
+                28896,
+                576
+              ],
+              [
+                1764480,
+                919
+              ],
+              [
+                664608,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "e821857dcb13972bd453273dba4b44a8abef0511002a01b6e182d8c91e9924e8",
+          "mean": -9.813053131103516,
+          "readings": [
+            -9.92560863494873,
+            -9.766542434692383,
+            -9.74700927734375
+          ]
+        }
+      },
+      "family": "abandoned",
+      "index": 32,
+      "label": "ordinary",
+      "native_sha256": "db4cec05c989fe5112550cea3a1a363354d4fe37d23e835566b5f8939bdeb79b",
+      "size": [
+        1920,
+        1204
+      ]
+    },
+    {
+      "deliveries": {
+        "15": {
+          "crop_edges": [
+            [
+              [
+                0,
+                867
+              ],
+              [
+                30600,
+                576
+              ],
+              [
+                1013760,
+                867
+              ],
+              [
+                703800,
+                576
+              ]
+            ],
+            [
+              [
+                324480,
+                867
+              ],
+              [
+                30600,
+                576
+              ],
+              [
+                1338240,
+                867
+              ],
+              [
+                703800,
+                576
+              ]
+            ],
+            [
+              [
+                650880,
+                867
+              ],
+              [
+                30600,
+                576
+              ],
+              [
+                1664640,
+                867
+              ],
+              [
+                703800,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "89b1231360c909277661f43cabfe0bbde47ae183a4283f031929bb0dcda9a6c2",
+          "mean": -9.622464179992676,
+          "readings": [
+            -9.757805824279785,
+            -9.71492862701416,
+            -9.394659042358398
+          ]
+        },
+        "35": {
+          "crop_edges": [
+            [
+              [
+                0,
+                867
+              ],
+              [
+                30600,
+                576
+              ],
+              [
+                1013760,
+                867
+              ],
+              [
+                703800,
+                576
+              ]
+            ],
+            [
+              [
+                324480,
+                867
+              ],
+              [
+                30600,
+                576
+              ],
+              [
+                1338240,
+                867
+              ],
+              [
+                703800,
+                576
+              ]
+            ],
+            [
+              [
+                650880,
+                867
+              ],
+              [
+                30600,
+                576
+              ],
+              [
+                1664640,
+                867
+              ],
+              [
+                703800,
+                576
+              ]
+            ]
+          ],
+          "input_sha256": "a875a836425c9ef25048c00f414b5e74bd95f0f6ecf8e3df50828531dc246496",
+          "mean": -9.29658031463623,
+          "readings": [
+            -9.57096004486084,
+            -9.377580642700195,
+            -8.941200256347656
+          ]
+        }
+      },
+      "family": "cityscapes",
+      "index": 33,
+      "label": "ordinary",
+      "native_sha256": "e99ed01cffbdd48075a4ee8b317007761e901cc9678e6fa831afe5c94876c57b",
+      "size": [
+        1920,
+        1275
+      ]
+    }
+  ],
+  "schema": "chipmunk.image-whole-jpeg-transfer/1"
+}

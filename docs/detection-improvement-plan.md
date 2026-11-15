@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Restored visual checks and heavy JPEG compression](visual-checkpoint-recovery-2026-11-15.md)
+  restores the offline sampled face and supplementary image checks. The
+  image check retains 18/18 generated flags at JPEG quality 35 and
+  14/18 at quality 15, with 0/16 ordinary flags at both settings. A
+  no-flag result on a matching strongly compressed file now explains
+  that compression can hide some patterns.
+
 - [Repeated support for native lip timing](video-lip-timing-block-support-2026-11-15.md)
   tests whether alternating time blocks or the direction of mouth motion
   support the same candidate interval. Both block tests cleared the two

@@ -22,20 +22,29 @@ from app.storage.objects import ObjectStore
 FIXTURE = json.loads((Path(__file__).parent / "fixtures/image_scope_cases_v50.json").read_text())
 
 
-def _jpeg(path):
-    Image.new("RGB", (1024, 1400)).save(path, format="JPEG")
+def _jpeg(path, *, quality=75):
+    Image.new("RGB", (1024, 1400)).save(path, format="JPEG", quality=quality, subsampling=2)
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-@pytest.mark.parametrize("case", ["flagged", "no_flag", "skipped", "bad_binding", "reclaimed", "still_low"])
+def _weights(root):
+    model = root / "research/image-v7-smaug"
+    (model / "3_Dense").mkdir(parents=True)
+    (model / "model.safetensors").touch()
+    (model / "3_Dense/model.safetensors").touch()
+    return model
+
+
+@pytest.mark.parametrize("case", ["flagged", "no_flag", "compressed", "skipped", "bad_binding", "reclaimed", "still_low"])
 def test_review_only_publishes_hash_bound_positive_crops(tmp_path, monkeypatch, case):
     original = tmp_path / "file.jpg"
-    sha = _jpeg(original)
+    sha = _jpeg(original, quality=15 if case == "compressed" else 75)
     fake_venv = tmp_path / "python"
     fake_venv.symlink_to(original)
     monkeypatch.setattr(review.settings, "image_whole_review_python", fake_venv)
     monkeypatch.setattr(review.settings, "data_dir", tmp_path)
     monkeypatch.setattr(review.settings, "models_dir", tmp_path)
+    _weights(tmp_path)
     monkeypatch.setattr(review.settings, "min_free_bytes", 0)
     monkeypatch.setattr(review, "MEMORY_RESERVE", 1)
     memory = {"reclaimed": [0, 1], "still_low": [0, 0]}.get(case, [1])
@@ -79,7 +88,9 @@ def test_review_only_publishes_hash_bound_positive_crops(tmp_path, monkeypatch, 
     data = {"input": {"sha256": sha}, "exhibits": [x.model_dump(mode="json") for x in writer.exhibits if x.id in ids]}
     projected = review.from_result(data)
     assert projected["source_sha256"] == sha and projected["authorship_confidence_contribution"] == 0
-    assert projected["status"] == {"bad_binding": "skipped", "reclaimed": "no_flag", "still_low": "skipped"}.get(case, case)
+    assert projected["status"] == {"bad_binding": "skipped", "reclaimed": "no_flag", "still_low": "skipped",
+                                  "compressed": "no_flag"}.get(case, case)
+    assert (review.COMPRESSION_LIMIT in projected["interpretation"]) == (case == "compressed")
     if case in {"reclaimed", "still_low"}:
         assert events == (["lease", "worker", "released"] if case == "reclaimed" else ["lease", "released"])
     else:
@@ -122,6 +133,8 @@ def test_configured_full_png_explicitly_reports_scope_skip(tmp_path, monkeypatch
         source = store.put_bytes(buffer.getvalue())
     monkeypatch.setattr(review.settings, "image_whole_review_python", tmp_path / "not-needed")
     monkeypatch.setattr(review.settings, "image_whole_png_review_enabled", False)
+    monkeypatch.setattr(review.settings, "image_png_exif_preview_review", False)
+    monkeypatch.setattr(review.settings, "image_native_interpolation_review", False)
     monkeypatch.setattr(review.settings, "environment", "dev")
     monkeypatch.setattr(image_stage, "_legacy_artifacts", lambda _: {})
     context = SimpleNamespace(analysis_id="png", exhibits=ExhibitWriter("png", store), store=store,
@@ -142,6 +155,7 @@ def test_opted_in_png_rejects_outside_scope_without_worker(tmp_path, monkeypatch
     monkeypatch.setattr(review.settings, "image_whole_review_python", source)
     monkeypatch.setattr(review.settings, "image_whole_png_review_enabled", True)
     monkeypatch.setattr(review.settings, "models_dir", tmp_path)
+    _weights(tmp_path)
     monkeypatch.setattr(review.settings, "data_dir", tmp_path)
     monkeypatch.setattr(review.settings, "min_free_bytes", 0)
     monkeypatch.setattr(review, "MEMORY_RESERVE", 0)
@@ -152,6 +166,29 @@ def test_opted_in_png_rejects_outside_scope_without_worker(tmp_path, monkeypatch
     projected = review.from_result(result)
     assert projected["status"] == "skipped" and projected["interpretation"] == expected
     assert not projected["crops"] and projected["authorship_confidence_contribution"] == 0
+
+
+def test_missing_weight_reports_unavailable_without_spawning_worker(tmp_path, monkeypatch):
+    source = tmp_path / "ordinary.jpeg"
+    digest = _jpeg(source)
+    model = _weights(tmp_path)
+    missing = model / "model.safetensors"
+    missing.unlink()
+    missing.symlink_to(tmp_path / "unmounted-drive/model.safetensors")
+    monkeypatch.setattr(review.settings, "image_whole_review_python", source)
+    monkeypatch.setattr(review.settings, "models_dir", tmp_path)
+    monkeypatch.setattr(review.psutil, "virtual_memory", lambda: pytest.fail("unexpected resource probe"))
+    monkeypatch.setattr(review.subprocess, "run", lambda *args, **kwargs: pytest.fail("unexpected worker"))
+    writer = ExhibitWriter("image", ObjectStore(tmp_path / "objects")).bind(review.CREATOR)
+
+    ids = review.add_exhibits(source, digest, writer, remaining=None)
+
+    projected = review.from_result({
+        "input": {"sha256": digest},
+        "exhibits": [item.model_dump(mode="json") for item in writer.exhibits if item.id in ids],
+    })
+    assert projected["status"] == "skipped" and projected["interpretation"] == review.UNAVAILABLE
+    assert projected["crops"] == [] and projected["authorship_confidence_contribution"] == 0
 
 
 @pytest.mark.parametrize("width,repeats", [(25, image_png_layout.MAX_WORDS + 1), (4920, 2)])

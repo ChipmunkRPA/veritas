@@ -1,0 +1,105 @@
+{
+  "cases": [
+    {
+      "api_pdf_images_verified": 6,
+      "case": "rtfs-13-original_videos",
+      "flagged": false,
+      "kind": "video",
+      "planned_source_indices": [
+        26,
+        51,
+        77,
+        102,
+        128,
+        153
+      ],
+      "signed_source_verified": true,
+      "source_sha256": "d16fa2f03a9a1f33cfda67d5416b25265f1aeeb62c08f55c0aa858eaddbab89c",
+      "source_time_base": "1/15360"
+    },
+    {
+      "api_pdf_images_verified": 6,
+      "case": "rtfs-13-inswapper",
+      "flagged": true,
+      "kind": "video",
+      "planned_source_indices": [
+        26,
+        51,
+        77,
+        102,
+        128,
+        153
+      ],
+      "signed_source_verified": true,
+      "source_sha256": "d3d8f9cce030029c0b87b753181a07ba0f2a09844ef2c494210abdabb10bf04d",
+      "source_time_base": "1/15360"
+    },
+    {
+      "api_pdf_images_verified": 6,
+      "case": "rtfs-13-uniface",
+      "flagged": true,
+      "kind": "video",
+      "planned_source_indices": [
+        26,
+        51,
+        77,
+        102,
+        128,
+        153
+      ],
+      "signed_source_verified": true,
+      "source_sha256": "b1c2c7a1706c8d083db8905f0d8c21cf588a47a62009d4de70a147bd53e4ccec",
+      "source_time_base": "1/15360"
+    },
+    {
+      "api_pdf_images_verified": 0,
+      "case": "ordinary",
+      "flagged": false,
+      "kind": "image",
+      "signed_source_verified": true,
+      "source_crop_bounds": [],
+      "source_sha256": "344f53f67ddc72adc7711c2a16bfe06796a82d14401a02041c94cfd09ee07b79"
+    },
+    {
+      "api_pdf_images_verified": 3,
+      "case": "synthetic",
+      "flagged": true,
+      "kind": "image",
+      "signed_source_verified": true,
+      "source_crop_bounds": [
+        {
+          "h": 940,
+          "w": 939,
+          "x": 0,
+          "y": 42
+        },
+        {
+          "h": 940,
+          "w": 940,
+          "x": 42,
+          "y": 42
+        },
+        {
+          "h": 940,
+          "w": 939,
+          "x": 85,
+          "y": 42
+        }
+      ],
+      "source_sha256": "a13f94db9da7c2525b53cbe038825857d0048fcb15d456b8108583477d4d17b2"
+    },
+    {
+      "api_pdf_images_verified": 0,
+      "case": "compressed-generated",
+      "compression_note_verified": true,
+      "flagged": false,
+      "kind": "image",
+      "signed_source_verified": true,
+      "source_crop_bounds": [],
+      "source_sha256": "403f4ff838dbf14f31cb1e8bfa59f03ca9e670c69de7ff037a8de86f58eb9f8b"
+    }
+  ],
+  "paid_analyses": 6,
+  "payment": "simulated USD 9.99",
+  "unpaid_jobs": 0
+}

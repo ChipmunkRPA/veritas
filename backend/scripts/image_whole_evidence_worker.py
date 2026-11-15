@@ -24,9 +24,8 @@ def sha(path):
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
-def inspect(source, model_dir, output):
+def load_reviewed_model(model_dir):
     import torch
-    from PIL import Image
     from sentence_transformers import SentenceTransformer
 
     torch.set_num_threads(4)
@@ -46,6 +45,13 @@ def inspect(source, model_dir, output):
     assets.check_tensor_file(model[3], model_dir / "3_Dense/model.safetensors", 769)
     processor = model[0].processor.image_processor
     processor.max_soft_tokens = processor.image_seq_length = 140
+    return model
+
+
+def score_views(model, source):
+    import torch
+    from PIL import Image
+
     with Image.open(source, formats=["JPEG", "PNG"]) as image:
         crops, traces = views(image, 3)
     with torch.inference_mode():
@@ -53,6 +59,11 @@ def inspect(source, model_dir, output):
                                  show_progress_bar=False).float().reshape(-1)
     if responses.shape != (3,) or not torch.isfinite(responses).all():
         raise ValueError("The whole-image response is incomplete")
+    return crops, traces, responses
+
+
+def inspect(source, model_dir, output):
+    crops, traces, responses = score_views(load_reviewed_model(model_dir), source)
     point = json.loads(POINT.read_bytes())["gate"]["raw_mean_logit"]
     flagged = float(responses.mean()) > point
     regions = []

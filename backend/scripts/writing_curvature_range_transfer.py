@@ -38,12 +38,12 @@ METHOD = {
 }
 
 
-def ranked_ranges(row, profile):
-    """Calculate all candidate scores from prefix sums and retain the unique maximum."""
+def range_scores(row, profile):
+    """Calculate all candidate scores from prefix sums."""
     words = row["words"]
     reading = profile["words"]
     if reading is None:
-        return {}, {}, Counter()
+        return {}
     effects, variance, missing = [0.], [0.], [0]
     for item in reading:
         effects.append(effects[-1] + (item[0] if item else 0.))
@@ -56,18 +56,7 @@ def ranked_ranges(row, profile):
         effect, spread = effects[b] - effects[a], variance[b] - variance[a]
         return (effect, spread) if spread > 0.000001 else None
 
-    def maximum(values):
-        if not values:
-            return None
-        values.sort(reverse=True)
-        if len(values) > 1 and values[0][0] == values[1][0]:
-            return None
-        score, idx, a, b = values[0]
-        return {"score": score, "sentence": idx, "words": list(range(a, b))}
-
-    all_scores = defaultdict(list)
-    peaks = {}
-    coverage = Counter()
+    by_sentence = {}
     for idx in parent.CENTERS:
         indices = [i for i, word in enumerate(words) if word[2] == idx]
         if not indices:
@@ -93,6 +82,24 @@ def ranked_ranges(row, profile):
                                for other, noise in flanks)
                 sentence_scores["two_flanks"].append((round(contrast, 7), idx, a, b))
                 sentence_scores["agreement"].append((round(min(absolute, contrast), 7), idx, a, b))
+        by_sentence[idx] = sentence_scores
+    return by_sentence
+
+
+def ranked_ranges(row, profile):
+    def maximum(values):
+        if not values:
+            return None
+        values.sort(reverse=True)
+        if len(values) > 1 and values[0][0] == values[1][0]:
+            return None
+        score, idx, a, b = values[0]
+        return {"score": score, "sentence": idx, "words": list(range(a, b))}
+
+    all_scores = defaultdict(list)
+    peaks = {}
+    coverage = Counter()
+    for idx, sentence_scores in range_scores(row, profile).items():
         for arm, values in sentence_scores.items():
             all_scores[arm].extend(values)
             coverage[arm] += len(values)

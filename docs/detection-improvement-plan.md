@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Length calibration for writing highlights](writing-width-calibration-2026-11-15.md)
+  doubled useful word locations from 20/309 to 40/309 when given the
+  correct sentence. With the fixed sentence selector, it found 3/36
+  held essay rewrites versus 1/36 before adjustment, with the same
+  four ordinary flags at the tighter point. All three came from one
+  generator. The writing check remains in evaluation.
+
 - [Stereo speech with interference on both microphones](audio-stereo-room-transfer-2026-11-15.md)
   adds earlier-copy comparison for qualified twelve-second stereo AAC.
   On separate room and foreground placements it kept all 18 useful synthetic

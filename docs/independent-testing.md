@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [writing range length replay](writing-width-calibration-2026-11-15.md#replay)
+recounts exact word overlaps and ordinary alerts with and without a
+fixed sentence choice. It adds a held essay panel with two edit generators
+and reproduces length-specific calibration without text or model files.
+
 The [stereo room replay](audio-stereo-room-transfer-2026-11-15.md#replay)
 recounts two panels of 172 earlier-copy comparisons using synchronized room
 microphones in four meetings. It separates matching foreground references,

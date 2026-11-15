@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Earlier-copy speech check for AAC under competing speech](audio-clean-speech-aac-2026-11-15.md)
+  localized 55/64 staged replacements at 32 kbps and 57/64 at 64 kbps.
+  It highlighted none of 80 unchanged or same-word resampling controls.
+  It also flagged 35/40 deliberate genuine splices. Findings include
+  both exact excerpts and carry zero AI-confidence weight.
+
 - [Small interpolation changes in one native PNG](image-native-cfa-fine-2026-11-15.md)
   localized 16/20 sharp 32-pixel edits missed by the coarse rule,
   with no flags in 120 supported ordinary controls. The fine fallback

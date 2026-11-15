@@ -394,7 +394,7 @@ it('shows exact moved sound in the reported stereo channel', async () => {
   expect(screen.queryByRole('region', { name: 'Right channel timing' })).toBeNull()
 })
 
-it.each([8, 11, 12, 13])('shows both source excerpts for local speech comparison version %s', async (version) => {
+it.each([8, 11, 12, 13, 16])('shows both source excerpts for local speech comparison version %s', async (version) => {
   const dense = version !== 8
   const audio = { file: 'excerpt.wav', media_type: 'audio/wav', sha256: 'c'.repeat(64) }
   const excerpt = { start_s: 2, end_s: dense ? 2.96 : 2.72, source_pts: [32000, dense ? 47360 : 43520],
@@ -403,23 +403,28 @@ it.each([8, 11, 12, 13])('shows both source excerpts for local speech comparison
     schema: `chipmunk.audio-reference-comparison/${version}`, status: 'measured', interpretation: 'Decoded audio differences.',
     clean_speech: { status: 'localized_difference', summary: 'Matching sound became weaker.', scope: 'Ordinary edits can cause this.',
       ...(dense ? { basis: version >= 12 ? 'dense_clean_reference_frequency_balance_v1' : 'dense_clean_reference_v1' } : {}),
-      ...(version === 13 ? { match_support: { checked_windows: 73, active_windows: 63, matching_windows: 51,
+      ...(version >= 13 ? { match_support: { checked_windows: 73, active_windows: 63, matching_windows: 51,
         upper_correlation: .72, admitted: true } } : {}),
+      ...(version === 16 ? { aac_presentation: { side: 'submitted', sample_rate: 16000,
+        presentation_end_exclusive_pts: 96000, excluded_trailing_samples: 256 } } : {}),
       range: { earlier: excerpt, submitted: excerpt, relative_drop: .5,
         bands: [[300, 900], [900, 1750]].map(band_hz => ({ band_hz, before: 1, within: .5, after: 1 })) } },
   }
-  const fetch = vi.fn().mockResolvedValueOnce(Response.json({ available: true, clean_speech_available: true }))
+  const fetch = vi.fn().mockResolvedValueOnce(Response.json({ available: true, clean_speech_available: true,
+    ...(version === 16 && { clean_speech_aac_available: true }) }))
     .mockResolvedValueOnce(Response.json({ comparison, assets: { 'excerpt.wav': 'UklGRg==' }, pdf: 'JVBERi0xLjQK' }))
   vi.stubGlobal('fetch', fetch)
   show('audio')
   fireEvent.change(await screen.findByLabelText('Earlier audio'), { target: { files: [new File(['audio'], 'earlier.wav')] } })
+  expect(Boolean(screen.queryByText(/can also be a six-second, 16 kHz mono AAC M4A/))).toBe(version === 16)
   fireEvent.click(screen.getByRole('checkbox', { name: 'The earlier file is a clean copy of the same recording' }))
   fireEvent.click(screen.getByRole('button', { name: 'Compare recordings' }))
   expect(await screen.findByRole('region', { name: 'Local speech comparison' })).toBeTruthy()
   expect(screen.getByText(`Analyzed recording · 2.000–${dense ? '2.960' : '2.720'} s`)).toBeTruthy()
   expect(screen.getByText(new RegExp(`source ticks 32000 to ${dense ? 47360 : 43520}`))).toBeTruthy()
   expect(Boolean(screen.queryByText('Matching sound gain by frequency band'))).toBe(dense)
-  expect(Boolean(screen.queryByText(/Matching sound in 51 of 63 active windows/))).toBe(version === 13)
+  expect(Boolean(screen.queryByText(/Matching sound in 51 of 63 active windows/))).toBe(version >= 13)
+  expect(Boolean(screen.queryByText(/AAC duration 6\.000 s.*256 trailing decoded samples excluded/))).toBe(version === 16)
   expect(screen.getAllByRole('img', { name: /matched excerpt waveform/ })).toHaveLength(2)
   expect((fetch.mock.calls[1][1].body as FormData).get('earlier_has_clean_speech')).toBe('true')
   expect(screen.getByRole('button', { name: 'Download PDF' })).toBeTruthy()

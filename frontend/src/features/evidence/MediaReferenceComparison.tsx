@@ -80,6 +80,7 @@ type CleanSpeechComparison = {
   status: 'localized_difference' | 'no_local_difference' | 'unassessed' | 'broad_processing_difference'
   reason: string
   basis?: 'dense_clean_reference_v1' | 'dense_clean_reference_frequency_balance_v1'
+  aac_presentation?: SoundtrackTiming['aac_presentation']
   match_support?: { checked_windows: number; active_windows: number; matching_windows: number; upper_correlation: number | null; admitted: boolean }
   frequency_balance?: {
     bands_hz: [number, number][]
@@ -185,7 +186,7 @@ type Comparison = {
     | 'chipmunk.audio-reference-comparison/10' | 'chipmunk.audio-reference-comparison/11'
     | 'chipmunk.audio-reference-comparison/12'
     | 'chipmunk.audio-reference-comparison/13' | 'chipmunk.audio-reference-comparison/14'
-    | 'chipmunk.audio-reference-comparison/15'
+    | 'chipmunk.audio-reference-comparison/15' | 'chipmunk.audio-reference-comparison/16'
   picture?: never
   picture_insertion?: never
   insertion_retention?: never
@@ -205,7 +206,7 @@ type Comparison = {
 })
 type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: string | null }
 type Availability = { available: boolean; timing_available?: boolean; picture_insertion_available?: boolean; sound_difference_available?: boolean
-  clean_speech_available?: boolean; long_clean_speech_available?: boolean; aligned_speech_available?: boolean }
+  clean_speech_available?: boolean; long_clean_speech_available?: boolean; aligned_speech_available?: boolean; clean_speech_aac_available?: boolean }
 const sourceSeconds = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 7, useGrouping: false })
 const trimSampleRate = 16000
 
@@ -574,7 +575,8 @@ function ResultView({ result }: { result: Result }) {
     {comparison.status !== 'measured' && <p className="m-0 text-small">
       {(comparison.schema === 'chipmunk.audio-reference-comparison/10' ||
         comparison.schema === 'chipmunk.audio-reference-comparison/14' ||
-        comparison.schema === 'chipmunk.audio-reference-comparison/15') && 'Decoded sample comparison unavailable. '}
+        comparison.schema === 'chipmunk.audio-reference-comparison/15' ||
+        comparison.schema === 'chipmunk.audio-reference-comparison/16') && 'Decoded sample comparison unavailable. '}
       {notes[comparison.status] ?? 'The files could not be compared.'}
     </p>}
     {comparison.aligned_speech && <AlignedSpeechEvidence result={comparison.aligned_speech} assets={assets} />}
@@ -740,9 +742,10 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
 }
 
 function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertionAvailable, cleanSpeechAvailable, longCleanSpeechAvailable,
-  alignedSpeechAvailable, soundDifferenceAvailable }: {
+  alignedSpeechAvailable, cleanSpeechAacAvailable, soundDifferenceAvailable }: {
   analysisId: string; kind: Kind; timingAvailable: boolean; pictureInsertionAvailable: boolean
-  cleanSpeechAvailable: boolean; longCleanSpeechAvailable: boolean; alignedSpeechAvailable: boolean; soundDifferenceAvailable: boolean
+  cleanSpeechAvailable: boolean; longCleanSpeechAvailable: boolean; alignedSpeechAvailable: boolean; cleanSpeechAacAvailable: boolean
+  soundDifferenceAvailable: boolean
 }) {
   const heading = useId()
   const input = useId()
@@ -782,7 +785,8 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       const hasWaveform = versionedSchema === 'chipmunk.audio-reference-comparison/15'
       const schema = hasCoverage || hasSpeechAlignment || hasWaveform ? response.comparison.comparison_schema : versionedSchema
       const accepted = kind === 'video' && !hasCoverage ? 14 : 13
-      if (!Array.from({ length: accepted }, (_, index) => index + 1).some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
+      const hasAacSpeech = kind === 'audio' && schema === 'chipmunk.audio-reference-comparison/16'
+      if (!hasAacSpeech && !Array.from({ length: accepted }, (_, index) => index + 1).some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
       if (schema === 'chipmunk.audio-reference-comparison/3' && !response.comparison.audio?.trim_alignment) {
@@ -802,7 +806,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       if (schema === 'chipmunk.audio-reference-comparison/10' && !response.comparison.local_timing?.aac_presentation) {
         throw new Error('The comparison response is missing its AAC timing evidence.')
       }
-      const reportsMatchSupport = schema === 'chipmunk.audio-reference-comparison/13'
+      const reportsMatchSupport = hasAacSpeech || schema === 'chipmunk.audio-reference-comparison/13'
       const usesFrequencyBalance = reportsMatchSupport || schema === 'chipmunk.audio-reference-comparison/12'
       if ((schema === 'chipmunk.audio-reference-comparison/8' || schema === 'chipmunk.audio-reference-comparison/9'
           || schema === 'chipmunk.audio-reference-comparison/11' || usesFrequencyBalance)
@@ -819,6 +823,9 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       }
       if (reportsMatchSupport && !response.comparison.clean_speech?.match_support) {
         throw new Error('The comparison response is missing its matching sound counts.')
+      }
+      if (hasAacSpeech && response.comparison.clean_speech?.aac_presentation?.side !== 'submitted') {
+        throw new Error('The comparison response is missing its AAC speech clock.')
       }
       if ((schema === 'chipmunk.audio-reference-comparison/7' || schema === 'chipmunk.video-reference-comparison/8')
           && !response.comparison.channel_timing) {
@@ -922,6 +929,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
           {alignedSpeechAvailable
             ? 'Compare continuous 16 kHz mono 16-bit WAV or FLAC copies of 5.8 to 12 seconds. The trial can align small timing differences. Heavy background sound can prevent a result.'
             : `Compare short speech changes. Both files need exactly ${longCleanSpeechAvailable ? 'six or twelve' : 'six'} seconds of continuous 16 kHz mono 16-bit WAV or FLAC with the same start and timing.`}
+          {cleanSpeechAacAvailable && ' The analyzed file can also be a six-second, 16 kHz mono AAC M4A when the earlier copy is a six-second WAV or FLAC on the same sample clock.'}
         </p>
       </div>}
       {soundDifferenceAvailable && <div className="min-w-0 basis-full">
@@ -956,6 +964,7 @@ export default function MediaReferenceComparison({ analysisId, kind }: { analysi
       pictureInsertionAvailable={kind === 'video' && availability.data.picture_insertion_available === true}
       soundDifferenceAvailable={kind === 'video' && availability.data.sound_difference_available === true}
       cleanSpeechAvailable={kind === 'audio' && availability.data.clean_speech_available === true}
+      cleanSpeechAacAvailable={kind === 'audio' && availability.data.clean_speech_aac_available === true}
       alignedSpeechAvailable={kind === 'audio' && availability.data.aligned_speech_available === true}
       longCleanSpeechAvailable={kind === 'audio' && availability.data.long_clean_speech_available === true} /> : null
 }

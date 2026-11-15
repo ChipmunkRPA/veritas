@@ -39,7 +39,7 @@ def decode(path, original):
     return raw, origin
 
 
-def _decode(path, original, *, aac_presentation):
+def _decode(path, original, *, aac_presentation, retain_padding=False):
     path = str(path.resolve())
     with open(path, "rb") as source:
         size = Path(path).stat().st_size
@@ -47,7 +47,7 @@ def _decode(path, original, *, aac_presentation):
         require(original == {"bytes": size, "sha256": hashlib.file_digest(source, "sha256").hexdigest()},
                 "Original file differs from the export")
     probe = command(
-        "ffprobe", "-v", "error", "-protocol_whitelist", "file", "-select_streams", "a:0",
+        "ffprobe", "-v", "error", "-protocol_whitelist", "file", "-select_streams", "a",
         "-show_entries", "stream=sample_rate,channels,codec_name,bits_per_raw_sample,time_base,start_pts,duration_ts:format=format_name",
         "-of", "json", path,
     )
@@ -85,7 +85,7 @@ def _decode(path, original, *, aac_presentation):
                  "presentation_end_exclusive_pts": presented, "decoded_samples": count,
                  "excluded_trailing_samples": count - presented}
     require(MIN_SAMPLES <= presented <= MAX_SAMPLES, "Recording extent differs")
-    return audio.stdout[:2*presented], origin, proof
+    return (audio.stdout if retain_padding else audio.stdout[:2*presented]), origin, proof
 
 
 def verify_export(earlier, submitted, export):

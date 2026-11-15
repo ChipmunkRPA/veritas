@@ -823,6 +823,36 @@ def test_clean_speech_match_support_records_admission_and_replays_older_exports(
             verify_clean_speech(first, second, output)
 
 
+def test_clean_speech_aac_keeps_presentation_clock_and_replays_excerpts(tmp_path, clean_speech_pair):
+    first = clean_speech_pair["earlier"]
+    since = tmp_path / "presented.m4a"
+    subprocess.run(["ffmpeg", "-v", "error", "-i", str(clean_speech_pair["altered"]),
+                    "-c:a", "aac", "-b:a", "48k", str(since)], check=True)
+    options = dict(include_clean_speech=True, include_local_timing=True, include_aac_timing=True)
+    historic, _ = audio_reference.compare(first, since, **options)
+    assert historic["schema"] == audio_reference.SCHEMA_WITH_AAC_TIMING
+    assert historic["clean_speech"]["reason"] == "native_format_required"
+    record, assets = audio_reference.compare(first, since, include_clean_speech_aac=True, **options)
+    speech = record["clean_speech"]
+    assert record["schema"] == audio_reference.SCHEMA_WITH_AAC_CLEAN_SPEECH
+    assert speech["status"] == "localized_difference"
+    assert speech["aac_presentation"] == record["local_timing"]["aac_presentation"]
+    assert speech["aac_presentation"]["presentation_end_exclusive_pts"] == 96_000
+    output = tmp_path / "aac-speech.json"
+    payload = {"comparison": record, "assets": {key: base64.b64encode(value).decode() for key, value in assets.items()}}
+    output.write_text(json.dumps(payload))
+    assert run(first, since, output, verify=True) == record
+    assert verify_clean_speech(first, since, output)["excerpts_verified"] == 2
+    speech["aac_presentation"]["excluded_trailing_samples"] += 1
+    output.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="AAC presentation proof differs"):
+        verify_clean_speech(first, since, output)
+    reverse, _ = audio_reference.compare(since, first, include_clean_speech_aac=True, **options)
+    assert reverse["clean_speech"]["reason"] == "native_format_required"
+    differently_timed, _ = audio_reference.compare(clean_speech_pair["shorter"], since, include_clean_speech_aac=True, **options)
+    assert differently_timed["clean_speech"]["status"] == "unassessed"
+
+
 @pytest.mark.parametrize("dense", [False, True])
 def test_clean_speech_lane_api_is_opt_in_and_renders_source_ranges(reference_http, monkeypatch, tmp_path, clean_speech_pair, dense):
     f = reference_http

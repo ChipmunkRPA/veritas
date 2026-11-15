@@ -1,0 +1,72 @@
+{
+  "cases": {
+    "piper": {
+      "baseline_status": "unassessed",
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "pdf_sha256": "e498a0c6c55e7e9745cb534739d3960d559c1b3e37292ff839eece0e13ab7412",
+      "presentation": {
+        "decoded_samples": 96256,
+        "excluded_trailing_samples": 256,
+        "presentation_end_exclusive_pts": 96000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "source_replay": {
+        "excerpts_verified": 2,
+        "reason": "local_change",
+        "samples": [
+          31360,
+          46720
+        ],
+        "status": "localized_difference"
+      },
+      "submitted_m4a_sha256": "c978db29b7bf27960ac1126176e3b74f78090b459c9fdc1e443ea10c4dc1c87f"
+    },
+    "unrelated": {
+      "baseline_status": "unassessed",
+      "earlier_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "pdf_sha256": "62080ee3e3dfe756e78d92d64fb4b189e803d57316f3e5d835c05b5d785ab34d",
+      "presentation": {
+        "decoded_samples": 96256,
+        "excluded_trailing_samples": 256,
+        "presentation_end_exclusive_pts": 96000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "source_replay": {
+        "excerpts_verified": 0,
+        "reason": "reference_match_not_supported",
+        "status": "unassessed"
+      },
+      "submitted_m4a_sha256": "a28819a4176fe38ab50b55d2b77c48549cf8d7559c860dd7282dc39608838041"
+    },
+    "untouched": {
+      "baseline_status": "unassessed",
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "pdf_sha256": "bb4ad201755da671c02412dd55183d603d849aca63dc64114dd4ef3685cf437d",
+      "presentation": {
+        "decoded_samples": 96256,
+        "excluded_trailing_samples": 256,
+        "presentation_end_exclusive_pts": 96000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "source_replay": {
+        "excerpts_verified": 0,
+        "reason": "no_local_change",
+        "status": "no_local_difference"
+      },
+      "submitted_m4a_sha256": "a28819a4176fe38ab50b55d2b77c48549cf8d7559c860dd7282dc39608838041"
+    }
+  },
+  "jobs_before_payment": 0,
+  "paid_analyses": 2,
+  "saved_assessments_preserved": true,
+  "usd_cents": 999
+}

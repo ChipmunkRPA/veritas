@@ -1,0 +1,2889 @@
+{
+  "bank": "ami",
+  "method": {
+    "comparison": "Use the frozen dense speech measurement and frequency-balance guard. Compare PCM with native 16 kHz mono AAC-LC at 32 and 64 kbps.",
+    "condition": "The earlier file is the exact uninterrupted dry original. Submitted audio has competing speech 5 dB louder.",
+    "controls": "Count genuine splices separately from ordinary processing, isolated background and an unrelated earlier reader.",
+    "location": "Cover half of the known interval and achieve at least .30 temporal intersection over union."
+  },
+  "rows": [
+    {
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "encoded_sha256": {
+        "aac32": "a28819a4176fe38ab50b55d2b77c48549cf8d7559c860dd7282dc39608838041",
+        "aac64": "dca7428c111ef15efbbcbb536797dbbb4c22467a98bea9dc5eec1b513e62727c"
+      },
+      "group": 0,
+      "kind": "untouched",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "7fd8ab8c9c69387f44b6c7bda075b128d332ec6f5145e0cb1e4ba3dd026358c7",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "encoded_sha256": {
+        "aac32": "a28819a4176fe38ab50b55d2b77c48549cf8d7559c860dd7282dc39608838041",
+        "aac64": "dca7428c111ef15efbbcbb536797dbbb4c22467a98bea9dc5eec1b513e62727c"
+      },
+      "group": 0,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac32": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac64": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "7fd8ab8c9c69387f44b6c7bda075b128d332ec6f5145e0cb1e4ba3dd026358c7",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "encoded_sha256": {
+        "aac32": "20f90374cda8a957b2ab2aadaf4c7672c3d57412462134078f39114f9cb78be4",
+        "aac64": "2d127dcd89e185c76181584dc76ee905925612824853bb562794132a27f4dcd0"
+      },
+      "group": 0,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "ea57507b2aafb3b8578a2c80768e57c684d8779b2996b63bff82388607a7d42d",
+      "truth": [
+        30116,
+        45476
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "encoded_sha256": {
+        "aac32": "e32aaf990cb788f58f957360ed3b3b11de0649f8e212f22aacbcc0ec09a057bd",
+        "aac64": "1e0375f2d0362267ad5bef31e3e9d019ecef832401753ddacbb3ab848d108d2f"
+      },
+      "group": 0,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "51d914fb8c95453937f41e16dd4fa4e1cb80e03e841e706dbe3180f5a3ad3142",
+      "truth": [
+        30116,
+        45476
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "encoded_sha256": {
+        "aac32": "c978db29b7bf27960ac1126176e3b74f78090b459c9fdc1e443ea10c4dc1c87f",
+        "aac64": "aacb725e3111623ebdbd48daf60ac3fd6829cc96a67b1b35daab6f30a5d380a3"
+      },
+      "group": 0,
+      "kind": "piper",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "2250554ac8ba1249f1d4c00f5ef0bcb27d21702e548177e1ea5a23443fa04c9c",
+      "truth": [
+        30116,
+        45476
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "encoded_sha256": {
+        "aac32": "c0bb98193fc467d36f89d074365af913c051568e99526c7cdcf22f1ecd13f74e",
+        "aac64": "7d5a38bd465d9aaec137cad76276fcf65847c91adfe37a89970fe63288ae6af1"
+      },
+      "group": 0,
+      "kind": "kitten",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "1adbd6e336d32db9f0f8876cdfef5e5f141c3a394c20a1c5c34c7ece34b87f72",
+      "truth": [
+        30116,
+        45476
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "encoded_sha256": {
+        "aac32": "8557e317386005cbef318fc229bd6877e1bc6c6d8b827d4654bcab4d099bb8cb",
+        "aac64": "539d1633a8eb204a11a3ef6b700abdc8491cf50f29cfcf8a2443418e9eb1717c"
+      },
+      "group": 1,
+      "kind": "untouched",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "333f008b6ea77a1f517e2f426bd61e84e923df472f7f5ce37a13c28330758d86",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "encoded_sha256": {
+        "aac32": "8557e317386005cbef318fc229bd6877e1bc6c6d8b827d4654bcab4d099bb8cb",
+        "aac64": "539d1633a8eb204a11a3ef6b700abdc8491cf50f29cfcf8a2443418e9eb1717c"
+      },
+      "group": 1,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac32": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac64": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "333f008b6ea77a1f517e2f426bd61e84e923df472f7f5ce37a13c28330758d86",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "encoded_sha256": {
+        "aac32": "9e608dd57f45207d9b77d5da8d3a1baaabc6c2369da7d7c73aec8e85a8315d04",
+        "aac64": "35e46e36b7ad4809c64e0010118144e7572f0273d56197c9d3267668ffd7787c"
+      },
+      "group": 1,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            19200,
+            34560
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            19200,
+            34560
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            19200,
+            34560
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "d140bf53b4994755b50011fc28fd1eace091924ca24a73a6caf72920287edb0e",
+      "truth": [
+        19752,
+        35112
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "encoded_sha256": {
+        "aac32": "725214b6ebca5c191dba8b07184933f9d0916c9bc56395012e3454a119581ba0",
+        "aac64": "8a3e34af3277efc780f29952cb79f249fd8861543ac258d70c12042525186666"
+      },
+      "group": 1,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            18560,
+            33920
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            18560,
+            33920
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            18560,
+            33920
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "1cc60ca6a593f781db5891d532a1a4048f7b84ce6dd28d9bedb7833cf4817dca",
+      "truth": [
+        19752,
+        35112
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "encoded_sha256": {
+        "aac32": "ba9f3b3c7a759e44ae56bfee83801545d8d03f132996966cfe694ac5b762a1dc",
+        "aac64": "85bd693f29e31d22055ad8921de692f3e282843241fbf976396b552b222fa9d8"
+      },
+      "group": 1,
+      "kind": "piper",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            18560,
+            33920
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            18560,
+            33920
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            18560,
+            33920
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "0eb7ebc3be58a26c1123a5e1905802ed83eaa727efcfb7e9a3f63c18609b31dc",
+      "truth": [
+        19752,
+        35112
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "encoded_sha256": {
+        "aac32": "aeb98ed2d35059adeeda44e08983cbc4cd8d41fbeb9adbe50c401e23213a22ee",
+        "aac64": "b4941ec713fa64c5c869b762b2c4340d9ffc1790ebf46d481e604d79975aa673"
+      },
+      "group": 1,
+      "kind": "kitten",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            19200,
+            34560
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            19200,
+            34560
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            19200,
+            34560
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "5abf956d14b7af2a8c87df7061883f633613b001672bf3c3a2804fe8421dc68b",
+      "truth": [
+        19752,
+        35112
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "encoded_sha256": {
+        "aac32": "fdd3d8b074f06831ff835ed445b2764403ba96fff6444be06468249c136cae93",
+        "aac64": "df78b7f65b6945ca878e50acfbeb30150436daaa030f721792be635c1bf2b4d7"
+      },
+      "group": 2,
+      "kind": "untouched",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "1e58f975187bf21827ca0ee25df0478280ebdff68eab75550f1a95bed20a4ced",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "cdff0a5380e7388dc55ed9433be16c589e8bff067f54b51bfd0840ec9de974e7",
+      "encoded_sha256": {
+        "aac32": "fdd3d8b074f06831ff835ed445b2764403ba96fff6444be06468249c136cae93",
+        "aac64": "df78b7f65b6945ca878e50acfbeb30150436daaa030f721792be635c1bf2b4d7"
+      },
+      "group": 2,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac32": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac64": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "1e58f975187bf21827ca0ee25df0478280ebdff68eab75550f1a95bed20a4ced",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "encoded_sha256": {
+        "aac32": "a8b98a8a6bb6c11f84d9d6920b1cab791b6f3db63eca440549d390376ef80638",
+        "aac64": "f4b1b0131411cabcaa783236e55fffa36178658fb371ab58362ef518b232fdb0"
+      },
+      "group": 2,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            41600,
+            56960
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            41600,
+            56960
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            41600,
+            56960
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "07f70aea00b32c194e5727f9a80d1c9216f63de43eaf45dee41f02f2fd95f001",
+      "truth": [
+        45769,
+        61129
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "encoded_sha256": {
+        "aac32": "ed1b11ef886489fa6a0892366df0b3b7ac4c343fb61727b414783af543058e57",
+        "aac64": "6208eb04867799850f7c878de22621859aee05ffdf0fb5da0bfa6b1f99839948"
+      },
+      "group": 2,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "5b344c98b0f98622fea60a5aa3d5cf123a979e09344dddfe102e3dcae775c3ab",
+      "truth": [
+        45769,
+        61129
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "encoded_sha256": {
+        "aac32": "6dc53e35540486b883dd957f16e8ccf3ea0e27c2c529715bdd4bc6a8704befcb",
+        "aac64": "0bfbf30e90b4e325ae44297870c13488e12675b9694c2e647a3fd18d80f5849d"
+      },
+      "group": 2,
+      "kind": "piper",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "dd7a070e31e9028717679f8635237e0c614e1094c589b5ea070810c6155a81e9",
+      "truth": [
+        45769,
+        61129
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "encoded_sha256": {
+        "aac32": "20f54fd375cef196b283057a765e3df205d96a1e23d5f427945704926dee3512",
+        "aac64": "572ef30df29f18a03ee886f2bb32be5e6902cee3def7b40f034792d7b1d81843"
+      },
+      "group": 2,
+      "kind": "kitten",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "90439db12b314db37f44293d49ef7d48bc7e0daa0d2d83fb5f76de557e824002",
+      "truth": [
+        45769,
+        61129
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "cdff0a5380e7388dc55ed9433be16c589e8bff067f54b51bfd0840ec9de974e7",
+      "encoded_sha256": {
+        "aac32": "86bf002cdea9f4b48f22d63c856fbf0eee47a735dba7cd02b3c36fd004d63fbb",
+        "aac64": "b33b86db667f3c00a214ba25f5d89b0e6a39b386544b4b6aa01eb95cacb648e5"
+      },
+      "group": 3,
+      "kind": "untouched",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "71b997126d8f34ddf5a2beb1f48dc315bd3a1b4c1a8c57319b45d0ab42e21bf4",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "98cfac6784b06f7bd9ad0047d0ee1d735f7ffb0b34b5ab26ee74a55640fa8067",
+      "encoded_sha256": {
+        "aac32": "86bf002cdea9f4b48f22d63c856fbf0eee47a735dba7cd02b3c36fd004d63fbb",
+        "aac64": "b33b86db667f3c00a214ba25f5d89b0e6a39b386544b4b6aa01eb95cacb648e5"
+      },
+      "group": 3,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac32": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac64": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "71b997126d8f34ddf5a2beb1f48dc315bd3a1b4c1a8c57319b45d0ab42e21bf4",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "cdff0a5380e7388dc55ed9433be16c589e8bff067f54b51bfd0840ec9de974e7",
+      "encoded_sha256": {
+        "aac32": "425505ddaa2cc26bc65ab22d99697740ab1d48caefccd79f9989de20ecb21068",
+        "aac64": "ae9ada987d8cb8eef897eb3a9ca07a43a9ebcee5cee498eeffc5dc8328609ea3"
+      },
+      "group": 3,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "c1c3d4ccb2f9b816f7eccbc2d1a9510f66123da597abc7cef7432aea02572168",
+      "truth": [
+        9949,
+        25309
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "cdff0a5380e7388dc55ed9433be16c589e8bff067f54b51bfd0840ec9de974e7",
+      "encoded_sha256": {
+        "aac32": "1ddc0f21bf57247666c76d23ca113d29aa208e6111dc9ace96224b9f5df521ee",
+        "aac64": "340380eb8f1028df589b9543c57f256c87d69c57e64098b7147130eb37de9494"
+      },
+      "group": 3,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "c91760f3915c066a49c8ecbe57bff05a6201d0195568a975d65554faacff9bea",
+      "truth": [
+        9949,
+        25309
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "cdff0a5380e7388dc55ed9433be16c589e8bff067f54b51bfd0840ec9de974e7",
+      "encoded_sha256": {
+        "aac32": "0b35a48993759067acc0f34f7ab7a33f54c47a75ecc98c5b5de4503504a78650",
+        "aac64": "d8cf34111c1150470c1e515bebd5efb222f2fc4700b01df4f938ebf006400403"
+      },
+      "group": 3,
+      "kind": "piper",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "a152dadfb576e08d093f340b946289694d888f54174d803aa7b75d55adc43c99",
+      "truth": [
+        9949,
+        25309
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "cdff0a5380e7388dc55ed9433be16c589e8bff067f54b51bfd0840ec9de974e7",
+      "encoded_sha256": {
+        "aac32": "4df0f0845ffb07b449e5095cf19e5e8ab5016f5cdefbd6e74da8f4688a081396",
+        "aac64": "061f84d942325d09beaf653a0d74960ce657af959533a0e7c955e34557620482"
+      },
+      "group": 3,
+      "kind": "kitten",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8320,
+            23680
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            8320,
+            23680
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "fdb60716200b446b1ab9b89c9a3e6dbc47cd90ce37db0363d53a66fbd649651b",
+      "truth": [
+        9949,
+        25309
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "98cfac6784b06f7bd9ad0047d0ee1d735f7ffb0b34b5ab26ee74a55640fa8067",
+      "encoded_sha256": {
+        "aac32": "a2b1f65cc743a749c7d8e6a7ba8276157eb121015166111d1f681eb3372fb404",
+        "aac64": "836118e3f32296c4a7104546e0c5070e61f5ed1932bbb856a6ad213abe59a09c"
+      },
+      "group": 4,
+      "kind": "untouched",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "4e54241a21398661ebdff6fce1332d6119a999d2d56424a720c74dd041f1a712",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "c3ce0ad95ee880f7fedde503163b9a8249c90322ff26279a3f71b484dc6b3c18",
+      "encoded_sha256": {
+        "aac32": "a2b1f65cc743a749c7d8e6a7ba8276157eb121015166111d1f681eb3372fb404",
+        "aac64": "836118e3f32296c4a7104546e0c5070e61f5ed1932bbb856a6ad213abe59a09c"
+      },
+      "group": 4,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac32": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac64": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "4e54241a21398661ebdff6fce1332d6119a999d2d56424a720c74dd041f1a712",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "98cfac6784b06f7bd9ad0047d0ee1d735f7ffb0b34b5ab26ee74a55640fa8067",
+      "encoded_sha256": {
+        "aac32": "6be7c8f68cd4cf1ce536f1e5ff1efce2ada47c2b0ae3ee38413ae5d5f91695d5",
+        "aac64": "d999cfc9b74c6e479f12117a65bf1b76ffdfa6192e1ffb36033237f708d9f699"
+      },
+      "group": 4,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            28160,
+            43520
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            28160,
+            43520
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            28160,
+            43520
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "cf4e814550ea0bab38a70a69d87fde3f89bc70dc06d8f046192d3f210a1881e5",
+      "truth": [
+        32715,
+        48075
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "98cfac6784b06f7bd9ad0047d0ee1d735f7ffb0b34b5ab26ee74a55640fa8067",
+      "encoded_sha256": {
+        "aac32": "0424119a5243a16e82244b8af2e2115d67a316d5783e6fbe2a8f45f4f70c18b4",
+        "aac64": "ac87448410c48f0b2eb1b12a1d0c547ce2c5a1f18efd0b0be332f09e00310034"
+      },
+      "group": 4,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            30720,
+            46080
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            30720,
+            46080
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            30720,
+            46080
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "9a2da75f6d5ec240f6ce2e93d781e9dfbe8e65a29fbd931c28283a4759f3a507",
+      "truth": [
+        32715,
+        48075
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "98cfac6784b06f7bd9ad0047d0ee1d735f7ffb0b34b5ab26ee74a55640fa8067",
+      "encoded_sha256": {
+        "aac32": "ded6ab4aa0244c95d356b1bc4eb823115a3f80bb9b2ef4e63a5b84f53effb4b6",
+        "aac64": "88911559ba78817d3400c2a5c6becf4fddc922c0b65f71ee98a6306b0645e0f6"
+      },
+      "group": 4,
+      "kind": "piper",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            29440,
+            44800
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            30080,
+            45440
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            29440,
+            44800
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "ee659213dbce2b25184939cfe9066996d7fa3578c515502368108330eb6f9485",
+      "truth": [
+        32715,
+        48075
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "98cfac6784b06f7bd9ad0047d0ee1d735f7ffb0b34b5ab26ee74a55640fa8067",
+      "encoded_sha256": {
+        "aac32": "6526a5ae4720dd6da7b6d0b45e1566157ce64f2a5459a2e90df5dfa29cfb299f",
+        "aac64": "9d2bad4877492de3843b79b25de7a47d583461ec93b28eeccf3f7eb56a0e3da7"
+      },
+      "group": 4,
+      "kind": "kitten",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            30720,
+            46080
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            30720,
+            46080
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            30720,
+            46080
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "0dc945a5bbb07d372eae08505aa5f3bb92886d83bafd21a0d7be1d17c1a5c9ea",
+      "truth": [
+        32715,
+        48075
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c3ce0ad95ee880f7fedde503163b9a8249c90322ff26279a3f71b484dc6b3c18",
+      "encoded_sha256": {
+        "aac32": "99e7ac441e7626c55d09be16fed52aeee9b99da8faaacb75ec7e0884b2f8fc82",
+        "aac64": "1471175e4c98bb29beb09bdd4be404f7e05fada95b231b429ec437fb5ce799d5"
+      },
+      "group": 5,
+      "kind": "untouched",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "f273f321b7fcf59fd0e1f6119e64dcc80d1d0246718cd971ec9821e8354cf1f0",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "7936f6cd5382d70384512e15dd1ad285a925d7b5d2f9f486dd43de598b6fb530",
+      "encoded_sha256": {
+        "aac32": "99e7ac441e7626c55d09be16fed52aeee9b99da8faaacb75ec7e0884b2f8fc82",
+        "aac64": "1471175e4c98bb29beb09bdd4be404f7e05fada95b231b429ec437fb5ce799d5"
+      },
+      "group": 5,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac32": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac64": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "f273f321b7fcf59fd0e1f6119e64dcc80d1d0246718cd971ec9821e8354cf1f0",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "c3ce0ad95ee880f7fedde503163b9a8249c90322ff26279a3f71b484dc6b3c18",
+      "encoded_sha256": {
+        "aac32": "2e5e08b9a1ac517ad0ccbcfb4054632e96267f25ac8b95a24f6db8f71e12850d",
+        "aac64": "b61cee953ff5b72a276722c23a37c52a9901b0bd32d48b2fecc97e665648ae3c"
+      },
+      "group": 5,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            54400,
+            69760
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            54400,
+            69760
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            54400,
+            69760
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "cfd782e4c4d6c75944bd533d4a2e1534b79b115a782c8906a86c6648022cf98a",
+      "truth": [
+        58652,
+        74012
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c3ce0ad95ee880f7fedde503163b9a8249c90322ff26279a3f71b484dc6b3c18",
+      "encoded_sha256": {
+        "aac32": "85ff46dfbd8673a92deebf48ec6cf2fa9fc9ea8263c683499c94ab8a07bae356",
+        "aac64": "9963e7b5c39e5d2f3253e51fd55e09dbbcaceefb4571fda352309119e76eeb2e"
+      },
+      "group": 5,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "d81484fa22dc8b38af27320249f031b52e7bdaa761ef9c0953608c041a6c4e8f",
+      "truth": [
+        58652,
+        74012
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c3ce0ad95ee880f7fedde503163b9a8249c90322ff26279a3f71b484dc6b3c18",
+      "encoded_sha256": {
+        "aac32": "016fbd12b92e0c5f3d43ca9cafb65a7aab8334bb999091b73e916d92e63cb80f",
+        "aac64": "111a1b748a77c37715cdb23810a9c6b20befe1b1546a21cedd880b0e0d02b637"
+      },
+      "group": 5,
+      "kind": "piper",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "c70657456d0cc8875804da63a6ba7d69ccb832a9a03092f148c49d7122f9da9a",
+      "truth": [
+        58652,
+        74012
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c3ce0ad95ee880f7fedde503163b9a8249c90322ff26279a3f71b484dc6b3c18",
+      "encoded_sha256": {
+        "aac32": "92cb28a60c1035fd50a2e5ea605fd092ff0096d52adbac130eb55238529197da",
+        "aac64": "f14804792ef9b2405645fece204fe577cbddde5c39040b66e9713b09eb3e1f71"
+      },
+      "group": 5,
+      "kind": "kitten",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "f83ec35d452e2e84500b16ab7e6373d93f6cff8e9b2bddc53a2dcabbbe61dd75",
+      "truth": [
+        58652,
+        74012
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "7936f6cd5382d70384512e15dd1ad285a925d7b5d2f9f486dd43de598b6fb530",
+      "encoded_sha256": {
+        "aac32": "9c922ce9fa670acb872c8ce0036925a5fbf2bf6e0b16698125e896ddbecf9720",
+        "aac64": "7908864bcfa93c196bf708059e9763ed1cfe687fe9a1eeac3a1e3e4244e48e74"
+      },
+      "group": 6,
+      "kind": "untouched",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "b475d1d5011a18d7d14a0064015a9eb223fcd58385c759c846f789e2792e944e",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "d4c86f41f8d4a7ee40167b414f31a9236a701863a873e840220339bd681387f4",
+      "encoded_sha256": {
+        "aac32": "9c922ce9fa670acb872c8ce0036925a5fbf2bf6e0b16698125e896ddbecf9720",
+        "aac64": "7908864bcfa93c196bf708059e9763ed1cfe687fe9a1eeac3a1e3e4244e48e74"
+      },
+      "group": 6,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac32": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac64": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "b475d1d5011a18d7d14a0064015a9eb223fcd58385c759c846f789e2792e944e",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "7936f6cd5382d70384512e15dd1ad285a925d7b5d2f9f486dd43de598b6fb530",
+      "encoded_sha256": {
+        "aac32": "52796385bf7212b6904014f2b012421e173963a3d43ec1bd41b7d8a943eced9f",
+        "aac64": "90194779512e014752a0f57acd34695c23ac0f040b770dd3e8d48e097f6b5d5f"
+      },
+      "group": 6,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            61440,
+            76800
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            61440,
+            76800
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            61440,
+            76800
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "cb41447e322734eed7d8ad2a26270db13d552a898349f3a3eec6f43ec3377b99",
+      "truth": [
+        63052,
+        78412
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "7936f6cd5382d70384512e15dd1ad285a925d7b5d2f9f486dd43de598b6fb530",
+      "encoded_sha256": {
+        "aac32": "76dd480d92ab03bf208c54fd76c182f94cf60b7ec679101f626e7b99c70167bb",
+        "aac64": "ec1a4df42e5677b0b68a52d863369f3a29b03b1c4ec109ac66bd1142eda874cd"
+      },
+      "group": 6,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "6b91bf54e7f867cda34b2fd38283614cfbc18b1da732b308efb123a54834aa5a",
+      "truth": [
+        63052,
+        78412
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "7936f6cd5382d70384512e15dd1ad285a925d7b5d2f9f486dd43de598b6fb530",
+      "encoded_sha256": {
+        "aac32": "1857c7f36d905ea8ccc81977e9a7b016160613a4cc8f0debe0d1f4ca22c9084e",
+        "aac64": "89f5e5fa898288ec08107d580a3bcb253599ed74a59e1d7f86e86ee8aaf2b772"
+      },
+      "group": 6,
+      "kind": "piper",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "c5a4dc548bc207d1a28c56a6649529e3c8228c589c98e2c95f981817c2cf6395",
+      "truth": [
+        63052,
+        78412
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "7936f6cd5382d70384512e15dd1ad285a925d7b5d2f9f486dd43de598b6fb530",
+      "encoded_sha256": {
+        "aac32": "9cc915dbc2fe5a908fd3811aa440b6f92c446cd7cf559fc3fd1880712ca390de",
+        "aac64": "68dcd71135d38d5bf4e009280dc7c761a3f711899db2b3911353ff6590a8ce8f"
+      },
+      "group": 6,
+      "kind": "kitten",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "6b7b62b67194e7609d248e258951eff31b1d93ef4a3b107bce05e7ab25445280",
+      "truth": [
+        63052,
+        78412
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "d4c86f41f8d4a7ee40167b414f31a9236a701863a873e840220339bd681387f4",
+      "encoded_sha256": {
+        "aac32": "78f21a0dba3207e70609856db7be1603937d261d1c42619a0bf3315753848c1a",
+        "aac64": "0d794d41327fd83f6e266cd235b9d83c43847980efac48cefb2eefabbb41d95a"
+      },
+      "group": 7,
+      "kind": "untouched",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "9bfc2133e0f472a427458a8d9bc542030254bc1b932e8a166db6a7d59464c106",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "encoded_sha256": {
+        "aac32": "78f21a0dba3207e70609856db7be1603937d261d1c42619a0bf3315753848c1a",
+        "aac64": "0d794d41327fd83f6e266cd235b9d83c43847980efac48cefb2eefabbb41d95a"
+      },
+      "group": 7,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac32": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac64": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "9bfc2133e0f472a427458a8d9bc542030254bc1b932e8a166db6a7d59464c106",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "d4c86f41f8d4a7ee40167b414f31a9236a701863a873e840220339bd681387f4",
+      "encoded_sha256": {
+        "aac32": "42fcbd367c175e57321f183a7accee7ae6ef0bedb58be483d990d893fd41e9be",
+        "aac64": "6e85f9fb1a7efe57444e5f873cb0553435c238ae58138c73e5668092e90c1bf7"
+      },
+      "group": 7,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "0b7a9ca8fb8179211b0c137eb782a097f49ec18b7d29ba0f2c1f3b45814ba668",
+      "truth": [
+        79677,
+        95037
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "d4c86f41f8d4a7ee40167b414f31a9236a701863a873e840220339bd681387f4",
+      "encoded_sha256": {
+        "aac32": "1a822e74f37cc9e9f436f1e87bfbebdd3b5881711a5f9fa988e159d355af19dc",
+        "aac64": "6da18d5ce7d1454f0d63da1270e9e6b90f0310c041f78bb247f93cdeb5937e9d"
+      },
+      "group": 7,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "aecf47bb4380a63d0bf93a682e5dc2730671fec94ab1f730572f426181279499",
+      "truth": [
+        79677,
+        95037
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "d4c86f41f8d4a7ee40167b414f31a9236a701863a873e840220339bd681387f4",
+      "encoded_sha256": {
+        "aac32": "130762cd85e775f588cbb66b43d440cddbfc7c14a49262db0cce587a05a1ccfe",
+        "aac64": "834ea82069c8e69cdf147e3518c45fd073e774910ad33e0537dcd4dff3eb1ffc"
+      },
+      "group": 7,
+      "kind": "piper",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "ae67b1e758425f3517f22327adb5e04b537e975132fb29bfa48a4162a2b29b2d",
+      "truth": [
+        79677,
+        95037
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "d4c86f41f8d4a7ee40167b414f31a9236a701863a873e840220339bd681387f4",
+      "encoded_sha256": {
+        "aac32": "475845e811186e09c0b624c5da97971422af1eef9997ba8f861d3e0909ab98e7",
+        "aac64": "6754574e139f19b39db39d4f9312e4fa34aacae8ef1c6ea61b576ad205b575b0"
+      },
+      "group": 7,
+      "kind": "kitten",
+      "outcomes": {
+        "aac32": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac64": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "832cbde59cb0178cbcfa6517d7e0a57ccc62f9a15e7062b02e86fa47a928fcde",
+      "truth": [
+        79677,
+        95037
+      ]
+    }
+  ],
+  "schema": "chipmunk.audio-clean-speech-aac-transfer/1",
+  "source_sha256": "f75a359827024a3bc757c36841426a62d990ff6ba8435351db0eacbaa1314e66",
+  "summary": {
+    "aac32": {
+      "genuine_splice": {
+        "admitted": 16,
+        "broad": 0,
+        "files": 16,
+        "flags": 14,
+        "unassessed": 0,
+        "useful": 14
+      },
+      "kitten": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 7,
+        "unassessed": 0,
+        "useful": 7
+      },
+      "ordinary_processing": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 0,
+        "unassessed": 0,
+        "useful": 0
+      },
+      "piper": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 7,
+        "unassessed": 0,
+        "useful": 7
+      },
+      "unrelated": {
+        "admitted": 0,
+        "broad": 0,
+        "files": 8,
+        "flags": 0,
+        "unassessed": 8,
+        "useful": 0
+      }
+    },
+    "aac64": {
+      "genuine_splice": {
+        "admitted": 16,
+        "broad": 0,
+        "files": 16,
+        "flags": 14,
+        "unassessed": 0,
+        "useful": 14
+      },
+      "kitten": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 7,
+        "unassessed": 0,
+        "useful": 7
+      },
+      "ordinary_processing": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 0,
+        "unassessed": 0,
+        "useful": 0
+      },
+      "piper": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 7,
+        "unassessed": 0,
+        "useful": 7
+      },
+      "unrelated": {
+        "admitted": 0,
+        "broad": 0,
+        "files": 8,
+        "flags": 0,
+        "unassessed": 8,
+        "useful": 0
+      }
+    },
+    "pcm": {
+      "genuine_splice": {
+        "admitted": 16,
+        "broad": 0,
+        "files": 16,
+        "flags": 14,
+        "unassessed": 0,
+        "useful": 14
+      },
+      "kitten": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 7,
+        "unassessed": 0,
+        "useful": 7
+      },
+      "ordinary_processing": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 0,
+        "unassessed": 0,
+        "useful": 0
+      },
+      "piper": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 7,
+        "unassessed": 0,
+        "useful": 7
+      },
+      "unrelated": {
+        "admitted": 0,
+        "broad": 0,
+        "files": 8,
+        "flags": 0,
+        "unassessed": 8,
+        "useful": 0
+      }
+    }
+  }
+}

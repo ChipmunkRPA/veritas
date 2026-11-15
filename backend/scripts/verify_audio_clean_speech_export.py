@@ -14,13 +14,14 @@ import numpy as np
 from app.core.canonical import canonical_hash
 from app.evidence import audio_clean_speech, audio_clean_speech_dense, audio_clean_speech_long
 from app.evidence.audio_reference import (
+    SCHEMA_WITH_AAC_CLEAN_SPEECH,
     SCHEMA_WITH_ALIGNED_SPEECH,
     SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD,
     SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
     SCHEMA_WITH_MATCHING_WAVEFORM,
 )
-from scripts.verify_audio_local_timing_export import decode
+from scripts.verify_audio_local_timing_export import _decode
 from scripts.verify_stereo_reference import RATE, SIDES, digest, require, verify_clip, waveform
 
 SCHEMA = "chipmunk.audio-reference-comparison/8"
@@ -39,20 +40,27 @@ def verify_export(earlier, submitted, export):
         schema = record["comparison_schema"]
     long = schema == LONG_SCHEMA
     dense = schema == SCHEMA_WITH_DENSE_CLEAN_SPEECH
-    with_support = schema == SCHEMA_WITH_CLEAN_SPEECH_SUPPORT
+    aac = schema == SCHEMA_WITH_AAC_CLEAN_SPEECH
+    with_support = aac or schema == SCHEMA_WITH_CLEAN_SPEECH_SUPPORT
     eq_guard = with_support or schema == SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD
     sample_count = audio_clean_speech_long.SAMPLES if long else audio_clean_speech.SAMPLES
     require((schema in {SCHEMA, LONG_SCHEMA} or dense or eq_guard) and result["sample_rate"] == RATE
             and record["affects_overall_confidence"] is False and result["affects_overall_confidence"] is False,
             "The export needs local speech evidence with zero AI weight")
-    native = [decode(path, record[side]) for path, side in zip((earlier, submitted), SIDES, strict=True)]
-    require(all(origin == 0 and len(raw) == sample_count * 2 for raw, origin in native),
+    decoded = [_decode(path, record[side], aac_presentation=aac and side == "submitted", retain_padding=True)
+               for path, side in zip((earlier, submitted), SIDES, strict=True)]
+    proof = decoded[1][2]
+    require(proof is not None and result.get("aac_presentation") == {"side": "submitted", **proof} if aac
+            else "aac_presentation" not in result, "AAC presentation proof differs")
+    require(all(origin == 0 and (reading["presentation_end_exclusive_pts"] if reading else len(raw) // 2) == sample_count
+                for raw, origin, reading in decoded),
             "This verification requires both equal supported native source clocks")
-    samples = [np.frombuffer(raw, dtype="<i2") for raw, _ in native]
-    for side, (_, origin), pcm in zip(SIDES, native, samples, strict=True):
+    samples = [np.frombuffer(raw, dtype="<i2") for raw, _, _ in decoded]
+    for side, (_, origin, _), pcm in zip(SIDES, decoded, samples, strict=True):
         decoded_float = (pcm.astype(np.float32) / 32768).astype("<f4", copy=False)
-        expected = {"pcm_sha256": digest(decoded_float.tobytes()), "source_pts": origin, "relative_start": "0", "samples": sample_count}
+        expected = {"pcm_sha256": digest(decoded_float.tobytes()), "source_pts": origin, "relative_start": "0", "samples": len(pcm)}
         require(record["audio"][side] == expected, "Decoded source metadata differs")
+    samples = [pcm[:sample_count] for pcm in samples]
     if long:
         reason, measured, profile = audio_clean_speech_long.locate(*samples)
         require(result["sample_count"] == sample_count and result.get("frequency_balance") == profile,
@@ -79,7 +87,7 @@ def verify_export(earlier, submitted, export):
     require({key: span[key] for key in measured} == measured
             and span["support_sha256"] == canonical_hash(measured), "Local speech measurement or range differs")
     start, end = measured["samples"]
-    for side, (raw, origin) in zip(SIDES, native, strict=True):
+    for side, (raw, origin, _) in zip(SIDES, decoded, strict=True):
         row = span[side]
         require(row["samples"] == [start, end] and row["source_pts"] == [origin + start, origin + end]
                 and row["start_s"] == start / RATE and row["end_s"] == end / RATE, "Exported source clock differs")

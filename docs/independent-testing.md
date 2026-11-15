@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [noisy AAC speech comparison replay](audio-clean-speech-aac-2026-11-15.md#local-app-and-replay)
+recounts exact-clock findings across 240 paired recordings at two AAC
+bitrates and on uncompressed WAV. Genuine splices, resampling, isolated
+background speech and wrong references are counted separately.
+
 The [small PNG interpolation replay](image-native-cfa-fine-2026-11-15.md#reproduce)
 recounts locations, control flags and unassessed deliveries on two
 separate camera groups. The native replay verifies the original RAW

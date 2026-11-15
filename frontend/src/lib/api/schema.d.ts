@@ -2350,6 +2350,8 @@ export interface components {
             aligned_speech_available?: boolean | null;
             /** Available */
             available: boolean;
+            /** Clean Speech Aac Available */
+            clean_speech_aac_available?: boolean | null;
             /** Clean Speech Available */
             clean_speech_available?: boolean | null;
             /** Long Clean Speech Available */

@@ -1771,6 +1771,17 @@
             "title": "Available",
             "type": "boolean"
           },
+          "clean_speech_aac_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Clean Speech Aac Available"
+          },
           "clean_speech_available": {
             "anyOf": [
               {

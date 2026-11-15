@@ -32,6 +32,7 @@ SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD = "chipmunk.audio-reference-comparison/12"
 SCHEMA_WITH_CLEAN_SPEECH_SUPPORT = "chipmunk.audio-reference-comparison/13"
 SCHEMA_WITH_ALIGNED_SPEECH = "chipmunk.audio-reference-comparison/14"
 SCHEMA_WITH_MATCHING_WAVEFORM = "chipmunk.audio-reference-comparison/15"
+SCHEMA_WITH_AAC_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/16"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_SECONDS = 30
 MAX_PRESENTED_RANGES = 3
@@ -428,7 +429,7 @@ def channel_timing(decoded, assets, *, sample_limit=None):
             "affects_overall_confidence": False, "sample_rate": AUDIO_RATE, "ranges": ranges}
 
 
-def _aac_timing_tracks(paths, decoded):
+def _aac_presented_tracks(paths, decoded):
     tracks = tuple(item[0] for item in decoded)
     if not all(track[0] == "measured" and track[2]["source_pts"] == 0 for track in tracks):
         return None
@@ -485,7 +486,7 @@ def _local_timing(decoded, audio, assets, *, aac_tracks=None):
     }
 
 
-def _clean_speech(decoded, assets, *, allow_long, use_dense, use_eq_guard, include_match_support):
+def _clean_speech(decoded, assets, *, allow_long, use_dense, use_eq_guard, include_match_support, aac_tracks=None):
     from app.evidence import audio_clean_speech, audio_clean_speech_dense, audio_clean_speech_long
 
     tracks = tuple(source[0] for source in decoded)
@@ -495,7 +496,12 @@ def _clean_speech(decoded, assets, *, allow_long, use_dense, use_eq_guard, inclu
     eq_guard = False
     profile = None
     match_support = None
-    if not all(track[0] == "measured" and source[4] for track, source in zip(tracks, decoded, strict=True)):
+    if aac_tracks is not None:
+        tracks, aac = aac_tracks
+        samples = ((track[1] * 32768).astype("<i2") for track in tracks)
+        dense = eq_guard = True
+        reason, span, profile, match_support = audio_clean_speech_dense.locate_with_match_support(*samples)
+    elif not all(track[0] == "measured" and source[4] for track, source in zip(tracks, decoded, strict=True)):
         reason, span = "native_format_required", None
     elif not (all(track[2]["source_pts"] == 0 for track in tracks)
               and counts == [audio_clean_speech_long.SAMPLES if long else audio_clean_speech.SAMPLES] * 2):
@@ -533,11 +539,17 @@ def _clean_speech(decoded, assets, *, allow_long, use_dense, use_eq_guard, inclu
         result["frequency_balance"] = profile
     if match_support is not None:
         result["match_support"] = match_support
+    if aac_tracks is not None:
+        result["aac_presentation"] = aac
+        result["scope"] += (" This check uses the six seconds presented by the submitted AAC track. "
+                            "Ordinary edits and local level changes can also reduce matching sound.")
     if span is not None:
         start, stop = span["samples"]
         excerpts = {side: _timing_excerpt(assets, "clean-reference-speech", side, track[1], track[2]["source_pts"], [start, stop])
                     for side, track in zip(("earlier", "submitted"), tracks, strict=True)}
         result["range"] = span | excerpts | {"support_sha256": canonical_hash(span)}
+    if aac_tracks is not None:
+        return SCHEMA_WITH_AAC_CLEAN_SPEECH, result
     extended = long or reason == "common_clock_required"
     if match_support is not None:
         return SCHEMA_WITH_CLEAN_SPEECH_SUPPORT, result
@@ -660,6 +672,7 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             use_clean_speech_eq_guard: bool = False,
             include_clean_speech_match_support: bool = True,
             include_aac_timing: bool = False,
+            include_clean_speech_aac: bool = False,
             include_aligned_speech: bool = False,
             include_matching_waveform: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Compare continuous recordings and recover a small, exactly supported edge trim."""
@@ -694,12 +707,15 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
         stereo = _compare_stereo((first, second), assets)
         if stereo is not None:
             record.update(schema=SCHEMA_WITH_STEREO, stereo_comparison=stereo)
-    aac_tracks = None
+    aac_tracks = _aac_presented_tracks(paths, (first, second)) if (
+        (include_local_timing and include_aac_timing) or (include_clean_speech and include_clean_speech_aac)) else None
+    timing_aac = aac_tracks if include_local_timing and include_aac_timing else None
+    speech_aac = (aac_tracks if include_clean_speech_aac and aac_tracks
+                  and aac_tracks[1]["side"] == "submitted"
+                  and aac_tracks[1]["presentation_end_exclusive_pts"] == 6 * AUDIO_RATE else None)
     if include_local_timing:
-        if include_aac_timing:
-            aac_tracks = _aac_timing_tracks(paths, (first, second))
         record.update(schema=SCHEMA_WITH_LOCAL_TIMING,
-                      local_timing=_local_timing((first, second), audio, assets, aac_tracks=aac_tracks))
+                      local_timing=_local_timing((first, second), audio, assets, aac_tracks=timing_aac))
         if include_channel_timing:
             timing = channel_timing((first, second), assets) if stereo and stereo["status"] == "measured" else None
             if timing is not None:
@@ -707,12 +723,14 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
     if include_clean_speech:
         schema, speech = _clean_speech((first, second), assets, allow_long=allow_long_clean_speech,
                                        use_dense=use_dense_clean_speech, use_eq_guard=use_clean_speech_eq_guard,
-                                       include_match_support=include_clean_speech_match_support)
+                                       include_match_support=include_clean_speech_match_support, aac_tracks=speech_aac)
         record.update(schema=schema, clean_speech=speech)
-    if aac_tracks:
+    if timing_aac and record["schema"] != SCHEMA_WITH_AAC_CLEAN_SPEECH:
         record["schema"] = SCHEMA_WITH_AAC_TIMING
         if include_clean_speech:
             record["local_timing"]["twelve_second_speech_option"] = allow_long_clean_speech
+    elif timing_aac:
+        record["local_timing"]["scope"] = AAC_TIMING_SCOPE.replace("For timing only, the", "The", 1)
     if include_aligned_speech or include_matching_waveform:
         record["comparison_schema"] = record["schema"]
     if include_aligned_speech:

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [speech decoder-frequency replay](audio-decoder-peak-transfer-2026-11-14.md#reproduce-the-comparison)
+recomputes frozen operating points and three ways to rank short audio
+intervals under competing speech. A separate calculation projects directly
+onto the registered frequencies to check the native FFT measurements.
+
 The [reference-list scope replay](writing-bibliography-scope-2026-11-14.md#replay)
 compares held TXT, Word and PDF layouts from separate source articles. It
 checks exact body text and source coordinates and preserves layouts with

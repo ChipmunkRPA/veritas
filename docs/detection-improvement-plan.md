@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Decoder-frequency peaks under competing speech](audio-decoder-peak-transfer-2026-11-14.md)
+  added no useful locations on 40 held edits. Local contrast added nine
+  ordinary-file flags. Alternate native arithmetic reproduced all 195
+  case decisions. The three rules remain in evaluation.
+
 - [Terminal reference-list scope for writing](writing-bibliography-scope-2026-11-14.md)
   preserved the exact body and source mapping on all 36 held TXT, DOCX and
   PDF layouts. Five local worker comparisons removed 22 reference-list

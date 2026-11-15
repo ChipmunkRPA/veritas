@@ -1,10 +1,13 @@
 # SPDX-License-Identifier: MIT
 import hashlib
 import subprocess
+from types import SimpleNamespace
 
 import pytest
 
 from app.detectors.audio.decode import decode_audio
+from app.detectors.audio.phone_events import MODEL_BLOBS
+from app.detectors.video import viseme_review
 from app.evidence import video_viseme_binding as binding
 
 
@@ -39,3 +42,20 @@ def test_48khz_timing_stops_at_the_presented_end(aac_mapping):
 ])
 def test_48khz_timing_declines_unsupported_or_incomplete_clocks(aac_mapping, change):
     assert binding.audio_origin(aac_mapping | change) is None
+
+
+def test_timing_reports_unavailable_assets_when_the_checkpoint_drive_is_missing(tmp_path, monkeypatch):
+    checkpoint = tmp_path / "checkpoint"
+    checkpoint.mkdir()
+    for name in MODEL_BLOBS:
+        (checkpoint / name).touch()
+    (checkpoint / "pytorch_model.bin").symlink_to(tmp_path / "disconnected" / "pytorch_model.bin")
+    geometry = tmp_path / "geometry.task"
+    geometry.touch()
+    monkeypatch.setattr(viseme_review.settings, "video_lip_timing_model_dir", checkpoint)
+    monkeypatch.setattr(viseme_review.settings, "video_lip_timing_face_asset", geometry)
+    monkeypatch.setattr(viseme_review, "supported", lambda *_: True)
+
+    result = viseme_review.assess(None, SimpleNamespace(table=None), {}, {}, [])
+
+    assert result == binding.skipped("assets")

@@ -1,0 +1,2190 @@
+{
+  "method": {
+    "change_direction": "After reviewing the first two rosters and before scoring the separate native recording bank, add a test of signed rank changes over 80 ms. Require the measured lag to fit these changes better than the alternate lag in all three regions, with one observation per flank and two inside. Only use original timestamped frames.",
+    "check": "Retain the existing sparse finding and point. Use the previous ranked winner only as a fallback. At that exact interval, group every observation into even and odd time blocks from the audio origin. Each split must independently prefer the winning signs in all three regions.",
+    "parameters": "Use the previous frozen tighter points, lag grid and staged edit overlap rule. No new fitting. Keep native audio extents and picture timestamps in every group.",
+    "sources": "Recount both existing native actor rosters. Separately decode all 15 archived digest-verified native recordings from the earlier short-delay intake before comparing any result. Those actor codes are distinct from both native rosters. Keep even unsupported cases in coverage.",
+    "variants": "Separately test 40 and 80 ms blocks. Each split must contain an observation on both flanks and at least two inside. Sum integer score differences at the same candidate lags. Equal or negative signed support cannot verify the respective region. The splits reuse correlated signals."
+  },
+  "model": {
+    "revision": "ae45363bf3413b374fecd9dc8bc1df0e24c3b7f4",
+    "weights_sha256": "3173bde9e9ce490fa0f989e413c42f25bc1820c020adc1e6b9b87025b3cfcc5e"
+  },
+  "points": {
+    "per_clip_ranks": 0.7909019,
+    "sparse": 0.9279881
+  },
+  "results": {
+    "alternate": {
+      "baseline_by_role": {
+        "early": {
+          "files": 15,
+          "flagged": 1,
+          "useful": 0
+        },
+        "filtered": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "gain": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "global_early": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "global_late": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "late": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "original": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        }
+      },
+      "counts": {
+        "alternating_40ms/constant": {
+          "files": 30,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "alternating_40ms/early": {
+          "files": 15,
+          "flagged": 1,
+          "useful": 0
+        },
+        "alternating_40ms/filtered": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_40ms/gain": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_40ms/global_early": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_40ms/global_late": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_40ms/late": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_40ms/local": {
+          "files": 30,
+          "flagged": 1,
+          "misplaced": 1,
+          "useful": 0
+        },
+        "alternating_40ms/ordinary": {
+          "files": 45,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "alternating_40ms/original": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_80ms/constant": {
+          "files": 30,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "alternating_80ms/early": {
+          "files": 15,
+          "flagged": 1,
+          "useful": 0
+        },
+        "alternating_80ms/filtered": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_80ms/gain": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_80ms/global_early": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_80ms/global_late": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_80ms/late": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_80ms/local": {
+          "files": 30,
+          "flagged": 1,
+          "misplaced": 1,
+          "useful": 0
+        },
+        "alternating_80ms/ordinary": {
+          "files": 45,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "alternating_80ms/original": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "change_direction/constant": {
+          "files": 30,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "change_direction/early": {
+          "files": 15,
+          "flagged": 1,
+          "useful": 0
+        },
+        "change_direction/filtered": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "change_direction/gain": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "change_direction/global_early": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "change_direction/global_late": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "change_direction/late": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "change_direction/local": {
+          "files": 30,
+          "flagged": 1,
+          "misplaced": 1,
+          "useful": 0
+        },
+        "change_direction/ordinary": {
+          "files": 45,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "change_direction/original": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "rank_fallback/constant": {
+          "files": 30,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "rank_fallback/early": {
+          "files": 15,
+          "flagged": 1,
+          "useful": 0
+        },
+        "rank_fallback/filtered": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "rank_fallback/gain": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "rank_fallback/global_early": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "rank_fallback/global_late": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "rank_fallback/late": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "rank_fallback/local": {
+          "files": 30,
+          "flagged": 1,
+          "misplaced": 1,
+          "useful": 0
+        },
+        "rank_fallback/ordinary": {
+          "files": 45,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "rank_fallback/original": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "sparse/constant": {
+          "files": 30,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "sparse/early": {
+          "files": 15,
+          "flagged": 1,
+          "useful": 0
+        },
+        "sparse/filtered": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "sparse/gain": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "sparse/global_early": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "sparse/global_late": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "sparse/late": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        },
+        "sparse/local": {
+          "files": 30,
+          "flagged": 1,
+          "misplaced": 1,
+          "useful": 0
+        },
+        "sparse/ordinary": {
+          "files": 45,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "sparse/original": {
+          "files": 15,
+          "flagged": 0,
+          "useful": 0
+        }
+      },
+      "fallback": [],
+      "ordinary_alerts_per_source": [],
+      "unassessed_source_clips": 0
+    },
+    "first": {
+      "baseline_by_role": {
+        "early": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 1
+        },
+        "filtered": {
+          "files": 24,
+          "flagged": 0,
+          "useful": 0
+        },
+        "gain": {
+          "files": 24,
+          "flagged": 0,
+          "useful": 0
+        },
+        "global_early": {
+          "files": 24,
+          "flagged": 0,
+          "useful": 0
+        },
+        "global_late": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 0
+        },
+        "late": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 1
+        },
+        "original": {
+          "files": 24,
+          "flagged": 0,
+          "useful": 0
+        }
+      },
+      "counts": {
+        "alternating_40ms/constant": {
+          "files": 48,
+          "flagged": 1,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "alternating_40ms/early": {
+          "files": 24,
+          "flagged": 3,
+          "useful": 1
+        },
+        "alternating_40ms/filtered": {
+          "files": 24,
+          "flagged": 2,
+          "useful": 0
+        },
+        "alternating_40ms/gain": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 0
+        },
+        "alternating_40ms/global_early": {
+          "files": 24,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_40ms/global_late": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 0
+        },
+        "alternating_40ms/late": {
+          "files": 24,
+          "flagged": 3,
+          "useful": 3
+        },
+        "alternating_40ms/local": {
+          "files": 48,
+          "flagged": 6,
+          "misplaced": 2,
+          "useful": 4
+        },
+        "alternating_40ms/ordinary": {
+          "files": 72,
+          "flagged": 5,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "alternating_40ms/original": {
+          "files": 24,
+          "flagged": 2,
+          "useful": 0
+        },
+        "alternating_80ms/constant": {
+          "files": 48,
+          "flagged": 1,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "alternating_80ms/early": {
+          "files": 24,
+          "flagged": 2,
+          "useful": 1
+        },
+        "alternating_80ms/filtered": {
+          "files": 24,
+          "flagged": 2,
+          "useful": 0
+        },
+        "alternating_80ms/gain": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 0
+        },
+        "alternating_80ms/global_early": {
+          "files": 24,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_80ms/global_late": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 0
+        },
+        "alternating_80ms/late": {
+          "files": 24,
+          "flagged": 3,
+          "useful": 3
+        },
+        "alternating_80ms/local": {
+          "files": 48,
+          "flagged": 5,
+          "misplaced": 1,
+          "useful": 4
+        },
+        "alternating_80ms/ordinary": {
+          "files": 72,
+          "flagged": 5,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "alternating_80ms/original": {
+          "files": 24,
+          "flagged": 2,
+          "useful": 0
+        },
+        "change_direction/constant": {
+          "files": 48,
+          "flagged": 1,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "change_direction/early": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 1
+        },
+        "change_direction/filtered": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 0
+        },
+        "change_direction/gain": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 0
+        },
+        "change_direction/global_early": {
+          "files": 24,
+          "flagged": 0,
+          "useful": 0
+        },
+        "change_direction/global_late": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 0
+        },
+        "change_direction/late": {
+          "files": 24,
+          "flagged": 2,
+          "useful": 2
+        },
+        "change_direction/local": {
+          "files": 48,
+          "flagged": 3,
+          "misplaced": 0,
+          "useful": 3
+        },
+        "change_direction/ordinary": {
+          "files": 72,
+          "flagged": 4,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "change_direction/original": {
+          "files": 24,
+          "flagged": 2,
+          "useful": 0
+        },
+        "rank_fallback/constant": {
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "rank_fallback/early": {
+          "files": 24,
+          "flagged": 3,
+          "useful": 1
+        },
+        "rank_fallback/filtered": {
+          "files": 24,
+          "flagged": 2,
+          "useful": 0
+        },
+        "rank_fallback/gain": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 0
+        },
+        "rank_fallback/global_early": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 0
+        },
+        "rank_fallback/global_late": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 0
+        },
+        "rank_fallback/late": {
+          "files": 24,
+          "flagged": 4,
+          "useful": 4
+        },
+        "rank_fallback/local": {
+          "files": 48,
+          "flagged": 7,
+          "misplaced": 2,
+          "useful": 5
+        },
+        "rank_fallback/ordinary": {
+          "files": 72,
+          "flagged": 5,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "rank_fallback/original": {
+          "files": 24,
+          "flagged": 2,
+          "useful": 0
+        },
+        "sparse/constant": {
+          "files": 48,
+          "flagged": 1,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "sparse/early": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 1
+        },
+        "sparse/filtered": {
+          "files": 24,
+          "flagged": 0,
+          "useful": 0
+        },
+        "sparse/gain": {
+          "files": 24,
+          "flagged": 0,
+          "useful": 0
+        },
+        "sparse/global_early": {
+          "files": 24,
+          "flagged": 0,
+          "useful": 0
+        },
+        "sparse/global_late": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 0
+        },
+        "sparse/late": {
+          "files": 24,
+          "flagged": 1,
+          "useful": 1
+        },
+        "sparse/local": {
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 0,
+          "useful": 2
+        },
+        "sparse/ordinary": {
+          "files": 72,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "sparse/original": {
+          "files": 24,
+          "flagged": 0,
+          "useful": 0
+        }
+      },
+      "fallback": [
+        {
+          "role": "early",
+          "support": {
+            "alternating_40ms": [
+              [
+                [
+                  1,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ],
+              [
+                [
+                  1,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ]
+              ]
+            ],
+            "alternating_80ms": [
+              [
+                [
+                  2,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  0
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ]
+              ]
+            ],
+            "change_direction": [
+              [
+                [
+                  1,
+                  1
+                ],
+                [
+                  12,
+                  1
+                ],
+                [
+                  1,
+                  -1
+                ]
+              ]
+            ]
+          },
+          "useful": false
+        },
+        {
+          "role": "early",
+          "support": {
+            "alternating_40ms": [
+              [
+                [
+                  2,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  10,
+                  1
+                ]
+              ],
+              [
+                [
+                  3,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  9,
+                  1
+                ]
+              ]
+            ],
+            "alternating_80ms": [
+              [
+                [
+                  2,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ],
+                [
+                  10,
+                  1
+                ]
+              ],
+              [
+                [
+                  3,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  9,
+                  1
+                ]
+              ]
+            ],
+            "change_direction": [
+              [
+                [
+                  4,
+                  -1
+                ],
+                [
+                  10,
+                  1
+                ],
+                [
+                  16,
+                  1
+                ]
+              ]
+            ]
+          },
+          "useful": false
+        },
+        {
+          "role": "filtered",
+          "support": {
+            "alternating_40ms": [
+              [
+                [
+                  2,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ],
+              [
+                [
+                  3,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ]
+              ]
+            ],
+            "alternating_80ms": [
+              [
+                [
+                  3,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ],
+              [
+                [
+                  2,
+                  1
+                ],
+                [
+                  8,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ]
+              ]
+            ],
+            "change_direction": [
+              [
+                [
+                  4,
+                  1
+                ],
+                [
+                  13,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ]
+            ]
+          },
+          "useful": false
+        },
+        {
+          "role": "filtered",
+          "support": {
+            "alternating_40ms": [
+              [
+                [
+                  8,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ],
+              [
+                [
+                  7,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ]
+            ],
+            "alternating_80ms": [
+              [
+                [
+                  8,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ],
+              [
+                [
+                  7,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ]
+            ],
+            "change_direction": [
+              [
+                [
+                  14,
+                  1
+                ],
+                [
+                  12,
+                  1
+                ],
+                [
+                  0,
+                  0
+                ]
+              ]
+            ]
+          },
+          "useful": false
+        },
+        {
+          "role": "gain",
+          "support": {
+            "alternating_40ms": [
+              [
+                [
+                  2,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ],
+              [
+                [
+                  3,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ]
+              ]
+            ],
+            "alternating_80ms": [
+              [
+                [
+                  3,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ],
+              [
+                [
+                  2,
+                  1
+                ],
+                [
+                  8,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ]
+              ]
+            ],
+            "change_direction": [
+              [
+                [
+                  4,
+                  1
+                ],
+                [
+                  13,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ]
+            ]
+          },
+          "useful": false
+        },
+        {
+          "role": "global_early",
+          "support": {
+            "alternating_40ms": [
+              [
+                [
+                  7,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              [
+                [
+                  7,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ]
+            ],
+            "alternating_80ms": [
+              [
+                [
+                  7,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              [
+                [
+                  7,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ]
+            ],
+            "change_direction": [
+              [
+                [
+                  13,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  0,
+                  0
+                ]
+              ]
+            ]
+          },
+          "useful": false
+        },
+        {
+          "role": "late",
+          "support": {
+            "alternating_40ms": [
+              [
+                [
+                  1,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  0
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ]
+            ],
+            "alternating_80ms": [
+              [
+                [
+                  1,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  0
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ]
+              ]
+            ],
+            "change_direction": [
+              [
+                [
+                  0,
+                  0
+                ],
+                [
+                  9,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ]
+              ]
+            ]
+          },
+          "useful": true
+        },
+        {
+          "role": "late",
+          "support": {
+            "alternating_40ms": [
+              [
+                [
+                  3,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ]
+              ],
+              [
+                [
+                  2,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ]
+              ]
+            ],
+            "alternating_80ms": [
+              [
+                [
+                  3,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ]
+              ],
+              [
+                [
+                  2,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ]
+              ]
+            ],
+            "change_direction": [
+              [
+                [
+                  4,
+                  -1
+                ],
+                [
+                  14,
+                  1
+                ],
+                [
+                  9,
+                  1
+                ]
+              ]
+            ]
+          },
+          "useful": true
+        },
+        {
+          "role": "late",
+          "support": {
+            "alternating_40ms": [
+              [
+                [
+                  5,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ]
+              ],
+              [
+                [
+                  5,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ]
+              ]
+            ],
+            "alternating_80ms": [
+              [
+                [
+                  5,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ]
+              ],
+              [
+                [
+                  5,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ]
+            ],
+            "change_direction": [
+              [
+                [
+                  9,
+                  1
+                ],
+                [
+                  14,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ]
+              ]
+            ]
+          },
+          "useful": true
+        },
+        {
+          "role": "original",
+          "support": {
+            "alternating_40ms": [
+              [
+                [
+                  2,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ]
+              ],
+              [
+                [
+                  3,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ]
+              ]
+            ],
+            "alternating_80ms": [
+              [
+                [
+                  3,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ],
+              [
+                [
+                  2,
+                  1
+                ],
+                [
+                  8,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ]
+            ],
+            "change_direction": [
+              [
+                [
+                  4,
+                  1
+                ],
+                [
+                  13,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ]
+              ]
+            ]
+          },
+          "useful": false
+        },
+        {
+          "role": "original",
+          "support": {
+            "alternating_40ms": [
+              [
+                [
+                  3,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ],
+              [
+                [
+                  2,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ]
+            ],
+            "alternating_80ms": [
+              [
+                [
+                  3,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ]
+              ],
+              [
+                [
+                  2,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ]
+              ]
+            ],
+            "change_direction": [
+              [
+                [
+                  4,
+                  1
+                ],
+                [
+                  10,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ]
+              ]
+            ]
+          },
+          "useful": false
+        }
+      ],
+      "ordinary_alerts_per_source": [
+        3,
+        1,
+        1
+      ],
+      "unassessed_source_clips": 0
+    },
+    "remaining": {
+      "baseline_by_role": {
+        "early": {
+          "files": 21,
+          "flagged": 2,
+          "useful": 1
+        },
+        "filtered": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "gain": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "global_early": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "global_late": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "late": {
+          "files": 21,
+          "flagged": 2,
+          "useful": 1
+        },
+        "original": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        }
+      },
+      "counts": {
+        "alternating_40ms/constant": {
+          "files": 42,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "alternating_40ms/early": {
+          "files": 21,
+          "flagged": 4,
+          "useful": 2
+        },
+        "alternating_40ms/filtered": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_40ms/gain": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_40ms/global_early": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_40ms/global_late": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_40ms/late": {
+          "files": 21,
+          "flagged": 2,
+          "useful": 1
+        },
+        "alternating_40ms/local": {
+          "files": 42,
+          "flagged": 6,
+          "misplaced": 3,
+          "useful": 3
+        },
+        "alternating_40ms/ordinary": {
+          "files": 63,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "alternating_40ms/original": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_80ms/constant": {
+          "files": 42,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "alternating_80ms/early": {
+          "files": 21,
+          "flagged": 4,
+          "useful": 2
+        },
+        "alternating_80ms/filtered": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_80ms/gain": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_80ms/global_early": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_80ms/global_late": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "alternating_80ms/late": {
+          "files": 21,
+          "flagged": 2,
+          "useful": 1
+        },
+        "alternating_80ms/local": {
+          "files": 42,
+          "flagged": 6,
+          "misplaced": 3,
+          "useful": 3
+        },
+        "alternating_80ms/ordinary": {
+          "files": 63,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "alternating_80ms/original": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "change_direction/constant": {
+          "files": 42,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "change_direction/early": {
+          "files": 21,
+          "flagged": 4,
+          "useful": 2
+        },
+        "change_direction/filtered": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "change_direction/gain": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "change_direction/global_early": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "change_direction/global_late": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "change_direction/late": {
+          "files": 21,
+          "flagged": 2,
+          "useful": 1
+        },
+        "change_direction/local": {
+          "files": 42,
+          "flagged": 6,
+          "misplaced": 3,
+          "useful": 3
+        },
+        "change_direction/ordinary": {
+          "files": 63,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "change_direction/original": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "rank_fallback/constant": {
+          "files": 42,
+          "flagged": 1,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "rank_fallback/early": {
+          "files": 21,
+          "flagged": 5,
+          "useful": 3
+        },
+        "rank_fallback/filtered": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "rank_fallback/gain": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "rank_fallback/global_early": {
+          "files": 21,
+          "flagged": 1,
+          "useful": 0
+        },
+        "rank_fallback/global_late": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "rank_fallback/late": {
+          "files": 21,
+          "flagged": 2,
+          "useful": 1
+        },
+        "rank_fallback/local": {
+          "files": 42,
+          "flagged": 7,
+          "misplaced": 3,
+          "useful": 4
+        },
+        "rank_fallback/ordinary": {
+          "files": 63,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "rank_fallback/original": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "sparse/constant": {
+          "files": 42,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "sparse/early": {
+          "files": 21,
+          "flagged": 2,
+          "useful": 1
+        },
+        "sparse/filtered": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "sparse/gain": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "sparse/global_early": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "sparse/global_late": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        },
+        "sparse/late": {
+          "files": 21,
+          "flagged": 2,
+          "useful": 1
+        },
+        "sparse/local": {
+          "files": 42,
+          "flagged": 4,
+          "misplaced": 2,
+          "useful": 2
+        },
+        "sparse/ordinary": {
+          "files": 63,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "sparse/original": {
+          "files": 21,
+          "flagged": 0,
+          "useful": 0
+        }
+      },
+      "fallback": [
+        {
+          "role": "early",
+          "support": {
+            "alternating_40ms": [
+              [
+                [
+                  10,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ],
+              [
+                [
+                  9,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ]
+              ]
+            ],
+            "alternating_80ms": [
+              [
+                [
+                  10,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ]
+              ],
+              [
+                [
+                  9,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ]
+            ],
+            "change_direction": [
+              [
+                [
+                  18,
+                  1
+                ],
+                [
+                  10,
+                  1
+                ],
+                [
+                  2,
+                  1
+                ]
+              ]
+            ]
+          },
+          "useful": false
+        },
+        {
+          "role": "early",
+          "support": {
+            "alternating_40ms": [
+              [
+                [
+                  6,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ],
+              [
+                [
+                  7,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  0,
+                  0
+                ]
+              ]
+            ],
+            "alternating_80ms": [
+              [
+                [
+                  5,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              [
+                [
+                  8,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ]
+            ],
+            "change_direction": [
+              [
+                [
+                  11,
+                  1
+                ],
+                [
+                  10,
+                  1
+                ],
+                [
+                  0,
+                  0
+                ]
+              ]
+            ]
+          },
+          "useful": true
+        },
+        {
+          "role": "early",
+          "support": {
+            "alternating_40ms": [
+              [
+                [
+                  8,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ],
+              [
+                [
+                  6,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ]
+            ],
+            "alternating_80ms": [
+              [
+                [
+                  6,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ],
+              [
+                [
+                  8,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ],
+                [
+                  4,
+                  1
+                ]
+              ]
+            ],
+            "change_direction": [
+              [
+                [
+                  11,
+                  1
+                ],
+                [
+                  11,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ]
+              ]
+            ]
+          },
+          "useful": true
+        },
+        {
+          "role": "global_early",
+          "support": {
+            "alternating_40ms": [
+              [
+                [
+                  5,
+                  1
+                ],
+                [
+                  6,
+                  1
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              [
+                [
+                  4,
+                  1
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ]
+            ],
+            "alternating_80ms": [
+              [
+                [
+                  4,
+                  1
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ],
+              [
+                [
+                  5,
+                  1
+                ],
+                [
+                  8,
+                  1
+                ],
+                [
+                  0,
+                  0
+                ]
+              ]
+            ],
+            "change_direction": [
+              [
+                [
+                  8,
+                  1
+                ],
+                [
+                  9,
+                  1
+                ],
+                [
+                  0,
+                  0
+                ]
+              ]
+            ]
+          },
+          "useful": false
+        }
+      ],
+      "ordinary_alerts_per_source": [],
+      "unassessed_source_clips": 0
+    }
+  },
+  "schema": "chipmunk.video-lip-timing-block-support/1",
+  "source": {
+    "alternate": "4cf5b6888420c2701e285e6d1a3ca762945dca33d89ea703659e35bb6b832474",
+    "earlier_acquisition": "1d2cb7f65ab2a87a287f2b09c1809b06bf60bf85b9dadb93bb924968a858c2b8",
+    "first": "3e96b9d824e5eed3668e08edfd94d1364a82af176cce3794d05e8e2fec89c51e",
+    "rank_comparison": "44c100c2a56e889bcfb69e11cf6a180ee918476748462c43b81caf98cfc465b2",
+    "remaining": "860e4e775d25ea94351b1ce76a5203e0ebe2f71e989eb39fba307f37e221264e"
+  }
+}

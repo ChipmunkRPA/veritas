@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Repeated support for native lip timing](video-lip-timing-block-support-2026-11-15.md)
+  tests whether alternating time blocks or the direction of mouth motion
+  support the same candidate interval. Both block tests cleared the two
+  added uniform-delay flags without clearing any of five ordinary flags.
+  No candidate added a location on 30 shifted soundtracks from 15
+  separate 29.97 fps actors, so they stay in evaluation.
+
 - [Writing scores after hiding one sentence](writing-attention-attribution-2026-11-15.md)
   compared three exact positions on 24 separate original/rewrite pairs.
   At the wider point, masking gained three correct sentence locations and

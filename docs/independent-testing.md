@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [native lip-timing support replay](video-lip-timing-block-support-2026-11-15.md#replay)
+recounts three gates on timing candidates for 60 native-camera recordings.
+It keeps the counts of deliveries per actor distinct from the grouped
+ordinary flags and reproduces the gate decisions without redistributing
+source media or actor identifiers.
+
 The [writing attention replay](writing-attention-attribution-2026-11-15.md#replay)
 recounts exact sentence locations, ordinary alerts and paired score
 movement on untouched neighbors. Its separate test uses 24 original and

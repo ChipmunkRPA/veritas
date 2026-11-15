@@ -32,10 +32,13 @@ def assess(ctx, frame_store, mapping, audio_input, shots):
     table = frame_store.table if frame_store is not None else None
     if audio_input is None or not supported(table, mapping, shots):
         return binding.skipped("unsupported")
+    from app.detectors.audio.phone_events import MODEL_BLOBS
+
     model = settings.video_lip_timing_model_dir
     geometry = settings.video_lip_timing_face_asset
     runtime = settings.video_lip_timing_runtime
-    if not model or not model.is_dir() or not geometry or not geometry.is_file() or (runtime and not runtime.is_dir()):
+    if (not model or not all((model / name).is_file() for name in (*MODEL_BLOBS, "pytorch_model.bin"))
+            or not geometry or not geometry.is_file() or (runtime and not runtime.is_dir())):
         return binding.skipped("assets")
     remaining = ctx.deadline.remaining()
     budget = TIME_BUDGET if remaining is None else min(TIME_BUDGET, remaining - 8.)

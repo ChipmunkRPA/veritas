@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Contiguous word ranges for short rewrites](writing-local-word-spans-2026-11-15.md)
+  added one useful local Qwen report location at the wider point with
+  fewer ordinary flags overall. The result did not transfer to GPT-5.4.
+  Even with the known sentence supplied to the reviewer, only 5/57
+  assessed GPT-5.4 cases had useful word overlap. The new readout stays
+  experimental.
+
 - [Clean-feature correction for competing speech](audio-short-edit-noise-projection-2026-11-15.md)
   reduced feature error on all 144 paired deliveries. Two apparent short
   edit detections repeated in the isolated backgrounds. No added location

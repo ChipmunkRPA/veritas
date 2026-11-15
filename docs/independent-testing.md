@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short rewrite word-span replay](writing-local-word-spans-2026-11-15.md#independent-replay)
+recounts contiguous word evidence, ordinary flags and whether a result
+also appeared in the matched ordinary draft. It separately reads the
+known edit sentence to distinguish picking the wrong sentence from weak
+word scores inside it. The numeric comparison runs without source text.
+
 The [short speech edit control replay](audio-short-edit-noise-projection-2026-11-15.md#independent-replay)
 checks whether a matched genuine file or an isolated background triggered
 at the known edit time, even if its selected endpoints differ. It also

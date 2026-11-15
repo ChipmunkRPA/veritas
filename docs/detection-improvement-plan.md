@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Separate writing change and origin checks](writing-edit-occurrence-transfer-2026-11-15.md)
+  still found no useful word locations in 60 GPT-5.4 report rewrites.
+  Both candidates flagged 22/93 ordinary reports, compared with 15/93
+  for the prior word check. The verified pre-2020 eLife intake adds two
+  genuine revision pairs to the replay. Both heads stay in evaluation.
+
 - [Vowel and lip-closure timing](video-lip-viseme-transfer-2026-11-15.md)
   added nine useful locations on the primary panel at the tighter point.
   A separate eight-speaker panel found 4/32 PCM and 3/32 AAC shifts

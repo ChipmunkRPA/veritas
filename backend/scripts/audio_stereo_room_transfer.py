@@ -156,9 +156,7 @@ def plan(annotations, rooms, *, holdout=False):
     return frozen
 
 
-def dry_inputs(icsi, ami):
-    import numpy as np
-
+def dry_icsi_inputs(icsi):
     from scripts.audio_short_edit_detector_training import load_plan
 
     result = defaultdict(dict)
@@ -170,6 +168,13 @@ def dry_inputs(icsi, ami):
             raw = (icsi / "pcm" / f"{pin}.pcm").read_bytes()
             old.require(len(raw) == SAMPLES and old.sha(raw) == pin, "ICSI dry excerpt changed")
             result["icsi", row["group"]][row["kind"]] = raw
+    return result
+
+
+def dry_inputs(icsi, ami):
+    import numpy as np
+
+    result = dry_icsi_inputs(icsi)
     freeze_path = ami / "placements-freeze.json"
     old.require(old.sha(freeze_path.read_bytes()) == old.source_hash("ami"), "AMI foreground sources changed")
     with np.load(ami / "placements-native.npz", allow_pickle=False) as storage:

@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Short speech changes during loud room speech](audio-reference-spatial-schedule-2026-11-15.md)
+  found three additional useful held ranges with denser starts and the
+  original window separation, with the same control outcomes. Shorter
+  separation found three more ranges in the first panel and added one
+  wrong-reference flag. Stereo interference reduction recovered no new
+  ranges. The schedule candidates remain in local evaluation.
+
 - [Restored visual checks and heavy JPEG compression](visual-checkpoint-recovery-2026-11-15.md)
   restores the offline sampled face and supplementary image checks. The
   image check retains 18/18 generated flags at JPEG quality 35 and

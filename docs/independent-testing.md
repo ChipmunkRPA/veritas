@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [stereo background and window replay](audio-reference-spatial-schedule-2026-11-15.md#replay)
+recounts 264 earlier-copy comparisons. It measures the benefit and
+control errors of a projected stereo mix and two denser window
+schedules separately, without redistributing recordings.
+
 The [JPEG compression replay](visual-checkpoint-recovery-2026-11-15.md#local-replay)
 compares 68 compressed deliveries from 34 earlier source images. It checks
 the earlier source and score commitments, then recounts gains and losses

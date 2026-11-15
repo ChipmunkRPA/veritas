@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Compact interpolation cells for soft-edged image edits](image-native-cfa-compact-core-2026-11-15.md)
+  located 40 of 60 staged 32-pixel edits previously missed, including
+  24 of 40 off-grid deliveries. It added no flags across 160 assessed
+  ordinary controls and retains exact original source crops.
+
 - [Writing range agreement and nearby-sentence contrast](writing-range-context-2026-11-15.md)
   raised useful retained abstract locations from 1/60 to 2/60 while
   reducing ordinary flags from 25/60 to 8/60 at the wider point. On

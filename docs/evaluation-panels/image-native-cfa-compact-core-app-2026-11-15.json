@@ -1,0 +1,59 @@
+{
+  "analyses": 4,
+  "automated_assessments_unchanged": true,
+  "before_payment_jobs": 0,
+  "cases": {
+    "offset_even_feather": {
+      "images_verified_in_pdf": 0,
+      "pdf_sha256": "2368b6714341458e42995f03d88aa00b91fcf5dd8ecae7860f9b74befc2e81cf",
+      "record": {
+        "affects_overall_confidence": false,
+        "basis": null,
+        "decoded_rgb16_sha256": null,
+        "limitation": "An ordinary edit can change the interpolation pattern. The observation carries zero AI confidence weight.",
+        "observation": "No qualifying interpolation shift was found in the checked areas.",
+        "phase": 0,
+        "reference_closure": 1.0,
+        "region": null,
+        "schema": "image-native-interpolation/7",
+        "scope": "This check requires a 2048 \u00d7 1536, 16-bit RGB PNG without ancillary chunks and a repeatable interpolation pattern. The compact check measures four 8 \u00d7 8 pixel cells inside each candidate crop.",
+        "source_sha256": "b21b0a807c9fc66b8918b4a2189d19ff3dca5eea16b3839439e40ea15d79467d",
+        "status": "no_match",
+        "supported_cells": 2620
+      },
+      "signed_source_verified": true,
+      "source": 1079
+    },
+    "offset_feather9": {
+      "images_verified_in_pdf": 2,
+      "pdf_sha256": "82c1c965e3019e841305f0b320196d4bc500e4619db16d237e36af4b90fc85e9",
+      "record": {
+        "affects_overall_confidence": false,
+        "basis": "The alternate pattern was stronger in 4 of four 8 \u00d7 8 pixel cells in the center of this crop. This supports a local change in pixel alignment. The crop includes the area around those cells.",
+        "compact_pattern": {
+          "alternate_phase": 2,
+          "matching_cells": 4
+        },
+        "decoded_rgb16_sha256": "ce59c82bbfbfe6bc17260b9a3dd493c39590afc281c5513e049dd0d0fc21f52e",
+        "limitation": "An ordinary edit can change the interpolation pattern. The observation carries zero AI confidence weight.",
+        "observation": "A small area showed a different camera interpolation pattern from the rest of the image.",
+        "phase": 0,
+        "reference_closure": 1.0,
+        "region": [
+          1388,
+          448,
+          1420,
+          480
+        ],
+        "schema": "image-native-interpolation/7",
+        "scope": "This check requires a 2048 \u00d7 1536, 16-bit RGB PNG without ancillary chunks and a repeatable interpolation pattern. The compact check measures four 8 \u00d7 8 pixel cells inside each candidate crop.",
+        "source_sha256": "f737bf89c563b634d9a4b653afcd2284fcc9eaa46ca3dbad4aec64aa7f0a7aae",
+        "status": "compact_shift",
+        "supported_cells": 2620
+      },
+      "signed_source_verified": true,
+      "source": 1079
+    }
+  },
+  "usd_cents": 999
+}

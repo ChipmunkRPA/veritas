@@ -12,8 +12,9 @@ from app.evidence import image_interpolation_binding as binding
 
 
 def record(source_sha256, *, body=None, skipped=False, schema=None, include_rotation=False, include_quantized=False,
-           include_fine=False, include_extent=False, check=None):
+           include_fine=False, include_extent=False, include_core=False, check=None):
     extent_requested = schema == binding.EXTENT_SCHEMA or (schema is None and include_fine and include_extent)
+    core_requested = schema == binding.CORE_SCHEMA or (schema is None and include_fine and include_core)
     if schema is None:
         is_legacy_size = body is not None and native_cfa_dimensions.png_size(body) == binding.LEGACY_SIZE
         if not is_legacy_size:
@@ -24,9 +25,10 @@ def record(source_sha256, *, body=None, skipped=False, schema=None, include_rota
             schema = binding.ROTATION_SCHEMA if include_rotation else binding.SCHEMA
     detector = native_cfa_dimensions if schema == binding.EXTENDED_SCHEMA else native_cfa
     fine_requested = schema in binding.FINE_SCHEMAS or (include_fine and schema != binding.EXTENDED_SCHEMA)
-    extra_status, extra_region, quantized, fine, extent = "no_match", None, None, None, None
+    extra_status, extra_region, quantized, fine, extent, compact = "no_match", None, None, None, None, None
     try:
-        if body is not None and not skipped and (schema in {binding.ROTATION_SCHEMA, binding.QUANTIZED_SCHEMA} or fine_requested):
+        if (body is not None and not skipped and schema != binding.EXTENDED_SCHEMA
+                and (schema in {binding.ROTATION_SCHEMA, binding.QUANTIZED_SCHEMA} or fine_requested or core_requested)):
             rgb = detector.decoded_rgb(body)
             measurement = detector.measure(rgb) if rgb is not None else native_cfa.InterpolationReview("unsupported_png")
             if measurement.status == "assessed" and not measurement.region:
@@ -60,6 +62,19 @@ def record(source_sha256, *, body=None, skipped=False, schema=None, include_rota
                                     schema = binding.EXTENT_SCHEMA
                                     extra_region = expanded["region"]
                                     extent = {key: expanded[key] for key in ("inner_region", "edges")}
+                if core_requested and extra_region is None:
+                    from app.detectors.image import native_cfa_core
+
+                    try:
+                        core = native_cfa_core.propose(rgb, measurement.phase, check=check)["core"]
+                    except (cv2.error, MemoryError):
+                        pass  # Preserve earlier observations if this optional check cannot run.
+                    else:
+                        schema = binding.CORE_SCHEMA
+                        if core is not None and core["response"] > 0.:
+                            matches, _, _, _ = native_cfa_core.cell_support(core["core_cells"], core["outer_cells"])
+                            extra_status, extra_region = "compact_shift", core["region"]
+                            compact = {"alternate_phase": core["alternate_phase"], "matching_cells": matches}
         else:
             measurement = detector.inspect_png(body) if body is not None and not skipped else None
     except (cv2.error, MemoryError):
@@ -81,11 +96,13 @@ def record(source_sha256, *, body=None, skipped=False, schema=None, include_rota
               "reference_closure": measurement.reference_closure if measurement else None,
               "decoded_rgb16_sha256": digest}
     if schema in binding.BASIS_SCHEMAS:
-        result["basis"] = binding.basis(status, fine, extent)
+        result["basis"] = binding.basis(status, fine, extent, compact)
     if fine is not None:
         result["fine_pattern"] = fine
     if extent is not None:
         result["extent_pattern"] = extent
+    if compact is not None:
+        result["compact_pattern"] = compact
     if schema == binding.QUANTIZED_SCHEMA:
         result["quantized_pattern"] = (dict(zip(("code_step", "minimum_channel_fraction", "phase_contrast"), quantized, strict=True))
                                        if quantized is not None else None)

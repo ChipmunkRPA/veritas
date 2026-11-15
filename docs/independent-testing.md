@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [compact image crop replay](image-native-cfa-compact-core-2026-11-15.md#replay)
+recounts the four inner-cell readings and the optional exterior
+recovery measurement on two held camera groups. It preserves the
+original PNG coordinates for every offset blend and counts ordinary
+raw development, resize and translation controls separately.
+
 The [writing range agreement replay](writing-range-context-2026-11-15.md#replay)
 compares positions and overlapping words across two fitted checks.
 It includes 28 additional abstract pairs excluded from earlier

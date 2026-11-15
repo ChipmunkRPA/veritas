@@ -14,11 +14,13 @@ ROTATION_SCHEMA = "image-native-interpolation/3"
 QUANTIZED_SCHEMA = "image-native-interpolation/4"
 FINE_SCHEMA = "image-native-interpolation/5"
 EXTENT_SCHEMA = "image-native-interpolation/6"
+CORE_SCHEMA = "image-native-interpolation/7"
 SCOPE = "This check requires a 2048 × 1536, 16-bit RGB PNG without ancillary chunks and a repeatable interpolation pattern."
 ROTATION_SCOPE = SCOPE + " It also looks for local interpolation consistent with a small rotation."
 QUANTIZED_SCOPE = ROTATION_SCOPE + " This check also compares local stored-value steps with the remaining pixel pattern."
 FINE_SCOPE = SCOPE + " The fine check compares nearby 16-pixel cells on the original pixel grid."
 EXTENT_SCOPE = FINE_SCOPE + " It also checks where the surrounding pattern returns beyond those cells."
+CORE_SCOPE = SCOPE + " The compact check measures four 8 × 8 pixel cells inside each candidate crop."
 EXTENDED_SCOPE = (
     "This check requires a 16-bit RGB PNG without ancillary chunks, a repeatable interpolation pattern, "
     "and one of these sizes: 2048 × 1536, 2304 × 1728, 2368 × 1344 or 1792 × 1792."
@@ -26,11 +28,11 @@ EXTENDED_SCOPE = (
 LEGACY_SIZE = (2048, 1536)
 SUPPORTED_SIZES = frozenset({LEGACY_SIZE, (2304, 1728), (2368, 1344), (1792, 1792)})
 SCOPES = {SCHEMA: SCOPE, EXTENDED_SCHEMA: EXTENDED_SCOPE, ROTATION_SCHEMA: ROTATION_SCOPE,
-          QUANTIZED_SCHEMA: QUANTIZED_SCOPE, FINE_SCHEMA: FINE_SCOPE, EXTENT_SCHEMA: EXTENT_SCOPE}
+          QUANTIZED_SCHEMA: QUANTIZED_SCOPE, FINE_SCHEMA: FINE_SCOPE, EXTENT_SCHEMA: EXTENT_SCOPE, CORE_SCHEMA: CORE_SCOPE}
 FINE_SCHEMAS = {FINE_SCHEMA, EXTENT_SCHEMA}
-BASIS_SCHEMAS = {ROTATION_SCHEMA, QUANTIZED_SCHEMA, *FINE_SCHEMAS}
+BASIS_SCHEMAS = {ROTATION_SCHEMA, QUANTIZED_SCHEMA, CORE_SCHEMA, *FINE_SCHEMAS}
 EDGE_SIDES = ("left", "top", "right", "bottom")
-REGION_STATUSES = frozenset({"matched", "rotation", "quantized_resampling", "fine_shift"})
+REGION_STATUSES = frozenset({"matched", "rotation", "quantized_resampling", "fine_shift", "compact_shift"})
 LIMITATION = "An ordinary edit can change the interpolation pattern. The observation carries zero AI confidence weight."
 STATUS = {
     "unsupported_png": "The PNG did not match the supported input profile.",
@@ -40,6 +42,7 @@ STATUS = {
     "rotation": "A compact region showed an interpolation pattern consistent with a small local rotation.",
     "quantized_resampling": "A compact region used larger pixel-value steps and retained a repeating camera-style pattern.",
     "fine_shift": "A small region repeated a different camera interpolation pattern from the surrounding image.",
+    "compact_shift": "A small area showed a different camera interpolation pattern from the rest of the image.",
     "provenance": "The analysis stopped at verified provenance before this check ran.",
     "unavailable": "The check could not finish during the analysis.",
 }
@@ -69,13 +72,17 @@ def observation(schema, status):
     return STATUS[status]
 
 
-def basis(status, fine=None, extent=None):
+def basis(status, fine=None, extent=None, compact=None):
     if status == "fine_shift":
         counts = f"The alternate pattern was stronger in {fine['matching_cells']} of {fine['compared_cells']} measured 16 × 16 pixel cells"
         if extent is not None:
             return (f"{counts} in the inner region. "
                     f"The surrounding pattern returned beyond {len(extent['edges'])} sides of that region, supporting the larger crop.")
         return f"{counts} within the crop. This supports a local change in pixel alignment."
+    if status == "compact_shift":
+        supported = compact["matching_cells"]
+        return (f"The alternate pattern was stronger in {supported} of four 8 × 8 pixel cells in the center of this crop. "
+                "This supports a local change in pixel alignment. The crop includes the area around those cells.")
     return {"rotation": ROTATION_OBSERVATION, "quantized_resampling": QUANTIZED_OBSERVATION}.get(status)
 
 
@@ -126,8 +133,10 @@ def validate(document, commitment):
             or (status == "rotation" and schema not in {ROTATION_SCHEMA, QUANTIZED_SCHEMA})
             or (status == "quantized_resampling" and schema != QUANTIZED_SCHEMA)
             or (status == "fine_shift" and schema not in FINE_SCHEMAS)
+            or (status == "compact_shift" and schema != CORE_SCHEMA)
             or (schema == FINE_SCHEMA and status not in {"fine_shift", "no_match"})
             or (schema == EXTENT_SCHEMA and status != "fine_shift")
+            or (schema == CORE_SCHEMA and status not in {"compact_shift", "no_match"})
             or record["scope"] != scope or record["limitation"] != LIMITATION
             or record["affects_overall_confidence"] is not False):
         raise ValueError("Interpolation evidence differs from its source commitment")
@@ -147,7 +156,16 @@ def validate(document, commitment):
             raise ValueError("Interpolation extent differs from its supported sides")
     elif "extent_pattern" in record:
         raise ValueError("Unexpected interpolation extent evidence")
-    if (schema in BASIS_SCHEMAS and record.get("basis") != basis(status, fine, extent)
+    compact = record.get("compact_pattern")
+    if status == "compact_shift":
+        if (not isinstance(compact, dict) or compact.keys() != {"alternate_phase", "matching_cells"}
+                or any(type(value) is not int for value in compact.values())
+                or compact["alternate_phase"] not in range(4) or compact["alternate_phase"] == record["phase"]
+                or not 3 <= compact["matching_cells"] <= 4):
+            raise ValueError("Invalid compact interpolation reading")
+    elif "compact_pattern" in record:
+        raise ValueError("Unexpected compact interpolation reading")
+    if (schema in BASIS_SCHEMAS and record.get("basis") != basis(status, fine, extent, compact)
             or schema not in BASIS_SCHEMAS and "basis" in record):
         raise ValueError("Interpolation evidence does not describe the recorded basis")
     quantized = record.get("quantized_pattern")
@@ -177,10 +195,12 @@ def validate(document, commitment):
             raise ValueError("Interpolation source images require a measured region")
         return
     x0, y0, x1, y1 = box
-    alignment = 8 if fine is not None else 32 if status == "matched" else 16
+    alignment = 4 if compact is not None else 8 if fine is not None else 32 if status == "matched" else 16
     if any(type(v) is not int or v % alignment for v in box):
         raise ValueError("Interpolation region is not aligned to its native grid")
-    if fine is not None:
+    if compact is not None:
+        valid_shape = x1 - x0 == y1 - y0 == 32 and 8 <= x0 < x1 <= size[0] - 8 and 8 <= y0 < y1 <= size[1] - 8
+    elif fine is not None:
         a, b, c, d = extent["inner_region"] if extent is not None else box
         valid_shape = (c - a in {32, 48} and d - b in {32, 48}
                        and fine["compared_cells"] == (c - a) * (d - b) // 256)

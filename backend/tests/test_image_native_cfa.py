@@ -195,6 +195,34 @@ def test_refined_crop_follows_recovered_pattern_on_each_side(renders):
         binding.extent_region(refined["extent_pattern"])
 
 
+def test_compact_cells_replay_a_feathered_crop_in_original_pixels(renders):
+    original, large_edit = renders
+    changed = original.copy()
+    target = changed[417:449, 481:513]
+    y, x = np.indices((32, 32))
+    distance = np.minimum.reduce((x + 1, y + 1, 32 - x, 32 - y))
+    weight = ((1 - np.cos(np.pi * np.minimum(1., distance / 6))) / 2)[..., None]
+    target[:] = np.rint(target * (1 - weight) + original[161:193, 130:162] * weight).astype(np.uint16)
+    body = png(changed)
+    sha = hashlib.sha256(body).hexdigest()
+    assert source.record(sha, body=body, include_fine=True)["status"] == "no_match"
+    result = source.record(sha, body=body, include_fine=True, include_core=True)
+    assert result["schema"] == binding.CORE_SCHEMA and result["status"] == "compact_shift"
+    assert result["compact_pattern"]["matching_cells"] >= 3
+    assert result["affects_overall_confidence"] is False
+    assert source.record(sha, body=body, schema=binding.CORE_SCHEMA) == result
+    x0, y0, x1, y1 = result["region"]
+    assert (x1 - x0, y1 - y0) == (32, 32)
+    assert abs(x0 - 481) <= 4 and abs(y0 - 417) <= 4
+    assert np.array_equal(source.plates(body, result["region"], schema=binding.CORE_SCHEMA)["crop"], changed[y0:y1, x0:x1, ::-1])
+    for rgb, status in ((original, "no_match"), (large_edit, "matched")):
+        encoded = png(rgb)
+        pin = hashlib.sha256(encoded).hexdigest()
+        report = source.record(pin, body=encoded, include_fine=True, include_core=True)
+        assert report["status"] == status and "compact_pattern" not in report
+        assert source.record(pin, body=encoded, schema=report["schema"]) == report
+
+
 def test_quantized_region_binds_measurement_and_preserves_rotation_priority(renders, monkeypatch):
     from app.detectors.image import native_cfa_quantized, native_cfa_rotation
 

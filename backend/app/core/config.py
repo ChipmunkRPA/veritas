@@ -223,6 +223,7 @@ class Settings(BaseSettings):
     image_native_quantized_review: bool = False  # Also inspect qualifying PNG regions for lower-depth camera resampling.
     image_native_fine_review: bool = False  # Also check small native regions for a local interpolation shift.
     image_native_extent_review: bool = False  # Extend an accepted fine region where surrounding interpolation returns.
+    image_native_core_review: bool = False  # Check compact cell groups when the earlier native scans have no region.
     image_sharp_boundary_enabled: bool = False
     image_reference_comparison_enabled: bool = False  # Development-only comparison of an uploaded earlier copy.
     image_reference_jpeg_png_envelope: bool = False  # Optional earlier standard JPEG to cropped PNG color differences.

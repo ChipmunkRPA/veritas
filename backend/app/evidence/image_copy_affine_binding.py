@@ -5,6 +5,8 @@ from __future__ import annotations
 import math
 import re
 
+from app.evidence.image_copy_similarity_binding import TURNED_JPEG_COPY_AFFINE_VERSION
+
 KEY = "copy_affine"
 VERSION = "image-evidence-13"
 LARGE_VERSION = "image-evidence-14"
@@ -13,7 +15,7 @@ JPEG_OFFGRID_AFFINE_VERSION = "image-evidence-19"
 SMALL_PNG_COPY_AFFINE_VERSION = "image-evidence-21"
 TURNED_PNG_COPY_AFFINE_VERSION = "image-evidence-23"
 LARGE_VERSIONS = frozenset({LARGE_VERSION, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_AFFINE_VERSION,
-                           SMALL_PNG_COPY_AFFINE_VERSION, TURNED_PNG_COPY_AFFINE_VERSION})
+                           SMALL_PNG_COPY_AFFINE_VERSION, TURNED_PNG_COPY_AFFINE_VERSION, TURNED_JPEG_COPY_AFFINE_VERSION})
 AFFINE_VERSIONS = LARGE_VERSIONS | {VERSION}
 SCHEMA = "same-image-affine-support/1"
 LARGE_SCHEMA = "same-image-affine-support/2"

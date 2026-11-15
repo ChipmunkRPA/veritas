@@ -39,7 +39,7 @@ def inputs(args):
     raise ValueError("No common held source for both rotations and their matched control")
 
 
-def report(client, aid, input_path, evidence, pair, exports):
+def report(client, aid, input_path, evidence, pair, exports, *, jpeg=False):
     import pymupdf
 
     from app.reports.verify import verify_package
@@ -54,8 +54,9 @@ def report(client, aid, input_path, evidence, pair, exports):
         words = " ".join(" ".join(page.get_text().split()) for page in document)
         scan(words)
         direction = "90° counterclockwise" if pair["transform"] == "rotate_90_ccw" else "180°"
-        assert f"Area B matches Area A exactly after rotating it {direction}." in words
-        assert "Exact rotated pair" in words
+        summary = "closely matches Area A" if jpeg else "matches Area A exactly"
+        assert f"Area B {summary} after rotating it {direction}." in words
+        assert ("Rotated JPEG pair" if jpeg else "Exact rotated pair") in words
         for region in pair["regions"].values():
             coordinates = f"x {region['x']}, y {region['y']}, {region['w']} x {region['h']} px"
             assert coordinates in words.replace("×", "x")
@@ -90,7 +91,8 @@ def run(args):
     from app.api import auth
     from app.billing import service
     from app.core.config import settings
-    from app.evidence.image_copy_similarity_binding import PNG_COPY_TRANSFORMS, ROLES as AREAS, TURNED_PNG_BASIS
+    from app.evidence.image_copy_similarity_binding import PNG_COPY_TRANSFORMS, TURNED_PNG_BASIS
+    from app.evidence.image_copy_similarity_binding import ROLES as AREAS
     from app.evidence.image_embedded_pair_binding import base_document
     from app.main import app
     from app.storage.db import Analysis, get_session

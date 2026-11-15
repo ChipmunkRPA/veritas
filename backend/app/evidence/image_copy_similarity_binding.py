@@ -21,8 +21,11 @@ SMALL_PNG_COPY_VERSION = "image-evidence-20"
 SMALL_PNG_COPY_AFFINE_VERSION = "image-evidence-21"
 TURNED_PNG_COPY_VERSION = "image-evidence-22"
 TURNED_PNG_COPY_AFFINE_VERSION = "image-evidence-23"
+TURNED_JPEG_COPY_VERSION = "image-evidence-24"
+TURNED_JPEG_COPY_AFFINE_VERSION = "image-evidence-25"
 TURNED_PNG_VERSIONS = frozenset({TURNED_PNG_COPY_VERSION, TURNED_PNG_COPY_AFFINE_VERSION})
 SMALL_PNG_VERSIONS = TURNED_PNG_VERSIONS | {SMALL_PNG_COPY_VERSION, SMALL_PNG_COPY_AFFINE_VERSION}
+TURNED_JPEG_VERSIONS = frozenset({TURNED_JPEG_COPY_VERSION, TURNED_JPEG_COPY_AFFINE_VERSION})
 SMALL_PNG_MIN_SIDE, SMALL_PNG_MAX_SIDE = 384, 768
 SMALL_PNG_CROP_MIN, SMALL_PNG_CROP_MAX = 16, 56
 SMALL_PNG_BASIS = "png_exact_small_copy"
@@ -37,12 +40,13 @@ SMALL_PNG_STATUS_TEXT = {
     "ambiguous_pairs": "Multiple exact pairs made this comparison ambiguous.",
     "unassessed_match_budget": "Too many competing offsets prevented a distinct small-copy comparison.",
 }
-JPEG_OFFGRID_VERSIONS = frozenset({JPEG_OFFGRID_VERSION, JPEG_OFFGRID_AFFINE_VERSION})
+JPEG_OFFGRID_VERSIONS = TURNED_JPEG_VERSIONS | {JPEG_OFFGRID_VERSION, JPEG_OFFGRID_AFFINE_VERSION}
 JPEG_BLOCK_VERSIONS = JPEG_OFFGRID_VERSIONS | {JPEG_BLOCK_VERSION, JPEG_BLOCK_AFFINE_VERSION}
 VERSION = V12
 AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_AFFINE_VERSION,
-                             SMALL_PNG_COPY_AFFINE_VERSION, TURNED_PNG_COPY_AFFINE_VERSION})
-CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12, JPEG_BLOCK_VERSION, JPEG_OFFGRID_VERSION} | SMALL_PNG_VERSIONS
+                             SMALL_PNG_COPY_AFFINE_VERSION, TURNED_PNG_COPY_AFFINE_VERSION,
+                             TURNED_JPEG_COPY_AFFINE_VERSION})
+CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12} | JPEG_BLOCK_VERSIONS | SMALL_PNG_VERSIONS
 TRANSLATION_VERSIONS = CREDENTIAL_VERSIONS | {V10, V11}
 BASIS_VERSIONS = CREDENTIAL_VERSIONS | {V11}
 REFLECTION_VERSIONS = frozenset({V7, V8, V9}) | TRANSLATION_VERSIONS
@@ -61,6 +65,7 @@ JPEG_BLOCK_STATUS_TEXT = {
 OFFGRID_MIN_SIDE = 32
 OFFGRID_MAX_SIDE = 118
 OFFGRID_BASIS = "jpeg_offgrid_texture"
+TURNED_JPEG_BASIS = "jpeg_turned_copy"
 OFFGRID_STATUS_TEXT = {
     "supported_pair": "The aligned crops have closely matching color values inside and more different surroundings on at least three sides.",
     "no_pair": ("The between-block JPEG check found no qualifying repeated area. "
@@ -68,6 +73,14 @@ OFFGRID_STATUS_TEXT = {
     "unsupported_profile": "The between-block check covers upright color JPEGs with the tested standard compression tables.",
     "unavailable": "The between-block JPEG check could not complete.",
     "unassessed_match_budget": "Too many competing offsets prevented a distinct between-block comparison.",
+}
+TURNED_JPEG_STATUS_TEXT = {
+    "supported_pair": "After alignment, the crops have similar color inside and more different surroundings on at least three sides.",
+    "no_pair": "The JPEG rotation check found no qualifying pair after a quarter turn or half turn.",
+    "unsupported_profile": "The JPEG rotation check covers upright color JPEGs within the tested compression settings.",
+    "unavailable": "The JPEG rotation check could not complete.",
+    "ambiguous": "More than one pair fit the JPEG rotation check, so it could not select distinct areas.",
+    "unassessed_match_budget": "Too many matching points prevented a distinct JPEG rotation comparison.",
 }
 SKIPPED_CREDENTIALS_TEXT = "Trusted Content Credentials cover this image and declare AI involvement. The two copy checks were skipped."
 TRANSLATION_NOTE = (
@@ -221,17 +234,33 @@ def _validate_offgrid(record: dict | None, jpeg_status: str | None) -> bool:
     status, measurement = record["status"], record["measurement"]
     if status not in OFFGRID_STATUS_TEXT or (status == "supported_pair") != (measurement is not None):
         raise ValueError("Between-block JPEG comparison has an invalid status")
+    return _validate_jpeg_measurement(measurement)
+
+
+def _validate_turned_jpeg(record: dict | None, offgrid_review: dict | None) -> bool:
+    should_run = offgrid_review is not None and offgrid_review["status"] == "no_pair"
+    if record is None and not should_run:
+        return False
+    if not should_run or not isinstance(record, dict) or set(record) != {"status", "measurement"}:
+        raise ValueError("Rotated JPEG coverage does not follow the completed between-block comparison")
+    status, measurement = record["status"], record["measurement"]
+    if status not in TURNED_JPEG_STATUS_TEXT or (status == "supported_pair") != (measurement is not None):
+        raise ValueError("Rotated JPEG comparison has an invalid status")
+    return _validate_jpeg_measurement(measurement)
+
+
+def _validate_jpeg_measurement(measurement: dict | None) -> bool:
     if measurement is None:
         return False
     if not isinstance(measurement, dict) or set(measurement) != {"interior_mean", "interior_p90", "perimeter_means"}:
-        raise ValueError("Between-block JPEG comparison has an invalid measurement")
+        raise ValueError("JPEG copy comparison has an invalid measurement")
     mean, p90, perimeter = (measurement[k] for k in ("interior_mean", "interior_p90", "perimeter_means"))
     if not (_rgb_level(mean, 3.2) and _rgb_level(p90, 6) and isinstance(perimeter, list) and len(perimeter) == 4
             and all(value is None or _rgb_level(value, 255) for value in perimeter)):
-        raise ValueError("Between-block JPEG differences are outside the measured limits")
+        raise ValueError("JPEG copy differences are outside the measured limits")
     # Recorded levels are rounded to five decimal places.
     if sum(value is not None and value + 0.00005 >= max(7, 2.5 * mean) for value in perimeter) < 3:
-        raise ValueError("Between-block JPEG comparison lacks surrounding contrast")
+        raise ValueError("JPEG copy comparison lacks surrounding contrast")
     return True
 
 
@@ -266,6 +295,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     has_basis = not reflected and document["version"] in BASIS_VERSIONS
     has_jpeg_review = not reflected and document["version"] in JPEG_BLOCK_VERSIONS
     has_offgrid_review = not reflected and document["version"] in JPEG_OFFGRID_VERSIONS
+    has_turned_jpeg_review = not reflected and document["version"] in TURNED_JPEG_VERSIONS
     has_small_png_review = not reflected and document["version"] in SMALL_PNG_VERSIONS
     if has_small_png_review:
         supported |= SMALL_PNG_MIN_SIDE <= min(size) <= max(size) <= SMALL_PNG_MAX_SIDE
@@ -284,6 +314,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         fields.add("jpeg_block_review")
     if has_offgrid_review:
         fields.add("jpeg_offgrid_review")
+    if has_turned_jpeg_review:
+        fields.add("jpeg_turned_review")
     if has_small_png_review:
         fields.add("small_png_copy_review")
     if not isinstance(record, dict) or set(record) != fields:
@@ -312,6 +344,10 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
             raise ValueError("Between-block JPEG coverage is outside its native source geometry")
     if offgrid_pair and len(pairs) != 1:
         raise ValueError("Between-block JPEG evidence must contain one measured pair")
+    turned_jpeg_pair = has_turned_jpeg_review and _validate_turned_jpeg(record["jpeg_turned_review"],
+                                                                     record["jpeg_offgrid_review"])
+    if turned_jpeg_pair and len(pairs) != 1:
+        raise ValueError("Rotated JPEG evidence must contain one measured pair")
     small_png_pair = False
     if has_small_png_review and (review := record["small_png_copy_review"]) is not None:
         small_png_pair = _validate_small_png(review)
@@ -327,6 +363,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
             expected = (JPEG_BLOCK_BASIS,)
         if offgrid_pair:
             expected = (OFFGRID_BASIS,)
+        if turned_jpeg_pair:
+            expected = (TURNED_JPEG_BASIS,)
         if small_png_pair:
             expected = ((SMALL_PNG_BASIS, TURNED_PNG_BASIS) if document["version"] in TURNED_PNG_VERSIONS
                         else (SMALL_PNG_BASIS,))
@@ -336,12 +374,12 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     if has_jpeg_review:
         jpeg_status = record["jpeg_block_review"]
         if (jpeg_status is not None and (jpeg_status not in JPEG_BLOCK_STATUS_TEXT
-                or (status != "no_pair" and not (status == "supported_pair" and (jpeg_pair or offgrid_pair)))
+                or (status != "no_pair" and not (status == "supported_pair" and (jpeg_pair or offgrid_pair or turned_jpeg_pair)))
                 or (jpeg_status != "unsupported_profile" and document["source"]["exif_orientation"] != 1))
                 or jpeg_pair and not pairs):
             raise ValueError("JPEG block coverage differs from the completed copy check")
     for index, pair in enumerate(pairs, 1):
-        turned = record.get("basis") == TURNED_PNG_BASIS
+        turned = record.get("basis") in {TURNED_PNG_BASIS, TURNED_JPEG_BASIS}
         transforms = (("horizontal_reflection",) if reflected else
                       (PNG_COPY_TRANSFORMS[1], PNG_COPY_TRANSFORMS[2]) if turned else ("same_orientation",))
         if (
@@ -371,7 +409,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         ax, ay, aw, ah = boxes[0]
         bx, by, bw, bh = boxes[1]
         overlaps = ax < bx + bw and bx < ax + aw and ay < by + bh and by < ay + ah
-        equal_size = (reflected or offgrid_pair or small_png_pair
+        equal_size = (reflected or offgrid_pair or small_png_pair or turned_jpeg_pair
                       or record.get("basis") in {"native_patch_alignment", JPEG_BLOCK_BASIS})
         aligned_size = (bh, bw) if turned and pair["transform"] == PNG_COPY_TRANSFORMS[1] else (bw, bh)
         if overlaps or (equal_size and (aw, ah) != aligned_size):
@@ -385,3 +423,5 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         if offgrid_pair and (not ((bx - ax) % 8 or (by - ay) % 8)
                              or not OFFGRID_MIN_SIDE <= min(aw, ah) <= max(aw, ah) <= OFFGRID_MAX_SIDE):
             raise ValueError("Between-block JPEG pair is outside its measured geometry")
+        if turned_jpeg_pair and not OFFGRID_MIN_SIDE <= min(aw, ah) <= max(aw, ah) <= OFFGRID_MAX_SIDE:
+            raise ValueError("Rotated JPEG pair is outside its measured geometry")

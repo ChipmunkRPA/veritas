@@ -1,0 +1,71 @@
+{
+  "browser": {
+    "original_crop_links": true,
+    "original_location_overlays": true,
+    "page_errors": 0,
+    "verified_cases": [
+      "quarter",
+      "half"
+    ]
+  },
+  "cases": {
+    "half": {
+      "native_crops_verified_in_pdf": 2,
+      "pdf_sha256": "393430c7e2c40e5cfdfd10aa6d650e9a8dced5fa60f72d3b636424a37ae809a6",
+      "quality": 90,
+      "regions": {
+        "area_a": {
+          "h": 63,
+          "w": 59,
+          "x": 463,
+          "y": 294
+        },
+        "area_b": {
+          "h": 63,
+          "w": 59,
+          "x": 38,
+          "y": 28
+        }
+      },
+      "signed_source_verified": true,
+      "source_group": 0,
+      "source_sha256": "72e13a33e1cfbdb3a47e4c3439ca8e33e1893ae50f7ffdfc340ce42ecc1146d6",
+      "status": "supported_pair",
+      "transform": "rotate_180"
+    },
+    "ordinary": {
+      "quality": 90,
+      "source_group": 0,
+      "source_sha256": "88c822e72020308b7250a700e5fdab86db5be022f89e1a445eb91435ee1bb7b0",
+      "status": "no_pair"
+    },
+    "quarter": {
+      "earlier_evidence_preserved": true,
+      "native_crops_verified_in_pdf": 2,
+      "overall_assessment_preserved": true,
+      "pdf_sha256": "dcb2ae8463d1858590bcfa2e98b2dc967f50992cb4c7f619974de782c04bef27",
+      "quality": 75,
+      "regions": {
+        "area_a": {
+          "h": 69,
+          "w": 54,
+          "x": 38,
+          "y": 30
+        },
+        "area_b": {
+          "h": 54,
+          "w": 69,
+          "x": 464,
+          "y": 294
+        }
+      },
+      "signed_source_verified": true,
+      "source_group": 0,
+      "source_sha256": "a1ccd8f242be3ee687ce26da4f23d803bc71d67a94012dd6d1d7ec2057b888ee",
+      "status": "supported_pair",
+      "transform": "rotate_90_ccw"
+    }
+  },
+  "simulated_paid_analyses": 4,
+  "unpaid_jobs": 0
+}

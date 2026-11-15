@@ -33,8 +33,9 @@ def _minimum_crop_side(data: bytes) -> int | None:
     return OFFGRID_MIN_SIDE if digest in _QUANTIZATION_SHA256 else None
 
 
-def supported(data: bytes) -> bool:
-    return _minimum_crop_side(data) is not None
+def supported(data: bytes, *, include_quality_85: bool = True) -> bool:
+    minimum_side = _minimum_crop_side(data)
+    return minimum_side is not None and (include_quality_85 or minimum_side == OFFGRID_MIN_SIDE)
 
 
 def review(data, rgb):

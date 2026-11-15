@@ -49,10 +49,30 @@ pairs. The existing checks flagged 31 and 36 controls, chiefly the
 deliberate straight copies. The two quality profiles share the same
 photos and staged changes. The rates apply to these delivery settings
 and known copied rectangles. They leave coverage on native phone JPEGs,
-other quantization tables, and arbitrary angles unmeasured. The rotation
-check is currently an evaluation script. A serving trial needs
-source-bound crop verification and browser, PDF, and JSON checks.
+other quantization tables, and arbitrary angles unmeasured.
 [Source-coordinate receipt](evaluation-panels/image-jpeg-turned-copy-2026-11-15.json)
+
+## Local app
+
+Set `VERITAS_IMAGE_TURNED_JPEG_COPY_REVIEW=true` in development to
+include this comparison. It accepts upright RGB 4:2:0 JPEGs with the
+tested quality 75 or 90 tables, a shortest side of at least 384 pixels,
+and a longest side of 513–1,024 pixels. It runs after the existing
+non-mirrored, encoded-block, and between-block checks complete with
+no supported pair. Trusted AI Content Credentials still skip these
+comparisons. The printed rotation explains how the check compared
+the areas. Both crops are displayed in their original orientation.
+The finding carries zero weight in the overall AI confidence.
+
+Four simulated USD $9.99 checkouts exercised the earlier quarter-turn
+result, both supported rotations with the option enabled, and an unchanged
+control. No analysis started before payment confirmation. Headless
+Chromium verified the two positions on each original and the crop links.
+The Standard PDF and JSON recorded the same coordinates, and the signed
+package verifier recomputed the JPEG color measurements and checked both
+crops against the upload. The quarter-turn assessment and earlier evidence
+remained available, and the unchanged control returned no rotation finding.
+[Local application receipt](evaluation-panels/image-jpeg-turned-copy-app-2026-11-15.json)
 
 ## Replay
 
@@ -68,4 +88,13 @@ python3 -B -S -m scripts.image_jpeg_turned_copy_transfer "$receipt"
 backend/.venv/bin/python -B -m scripts.image_jpeg_turned_copy_transfer \
   "$run/held.json" --archive "$archive" --workers 4
 cmp "$run/held.json" "$receipt"
+```
+
+Build the frontend and install Playwright Chromium before the browser
+option. The local smoke test creates its own database and simulates
+checkout without contacting Stripe.
+
+```sh
+backend/.venv/bin/python -B -m scripts.image_jpeg_turned_copy_app \
+  "$run/app" "$receipt" "$archive" --browser
 ```

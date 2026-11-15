@@ -62,7 +62,7 @@ type SoundtrackTiming = {
   waveform_note?: string
   aac_presentation?: {
     side: Side; sample_rate: number; presentation_end_exclusive_pts: number; excluded_trailing_samples: number
-    native_clock?: { sample_rate: number; channels: number }
+    native_clock?: { sample_rate: number; channels: number; presentation_end_exclusive_pts: number }
   }
   range?: Record<Side, SoundtrackSide> & {
     picture?: SoundtrackPicture

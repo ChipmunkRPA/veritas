@@ -43,6 +43,10 @@ from app.evidence.image_copy_similarity_binding import (
     SMALL_PNG_VERSIONS,
     TRANSLATION_NOTE,
     TRANSLATION_SCHEMA,
+    TURNED_JPEG_BASIS,
+    TURNED_JPEG_COPY_AFFINE_VERSION,
+    TURNED_JPEG_COPY_VERSION,
+    TURNED_JPEG_VERSIONS,
     TURNED_PNG_BASIS,
     TURNED_PNG_COPY_AFFINE_VERSION,
     TURNED_PNG_COPY_VERSION,
@@ -67,7 +71,9 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
 CREATOR = "image-evidence-packets/10"
-_CREATORS = {TURNED_PNG_COPY_AFFINE_VERSION: "image-evidence-packets/21", TURNED_PNG_COPY_VERSION: "image-evidence-packets/20",
+_CREATORS = {TURNED_JPEG_COPY_AFFINE_VERSION: "image-evidence-packets/23",
+             TURNED_JPEG_COPY_VERSION: "image-evidence-packets/22",
+             TURNED_PNG_COPY_AFFINE_VERSION: "image-evidence-packets/21", TURNED_PNG_COPY_VERSION: "image-evidence-packets/20",
              SMALL_PNG_COPY_AFFINE_VERSION: "image-evidence-packets/19", SMALL_PNG_COPY_VERSION: "image-evidence-packets/18",
              JPEG_OFFGRID_AFFINE_VERSION: "image-evidence-packets/17", JPEG_OFFGRID_VERSION: "image-evidence-packets/16",
              JPEG_BLOCK_AFFINE_VERSION: "image-evidence-packets/15", JPEG_BLOCK_VERSION: "image-evidence-packets/14",
@@ -91,6 +97,8 @@ def _active_version() -> str:
 
 
 def _analysis_version(analysis: Analysis) -> str:
+    if settings.environment == "dev" and settings.image_turned_jpeg_copy_review and analysis.content_type == "image/jpeg":
+        return TURNED_JPEG_COPY_AFFINE_VERSION if settings.image_affine_copy_review else TURNED_JPEG_COPY_VERSION
     if settings.environment == "dev" and settings.image_small_png_copy_review and analysis.content_type == "image/png":
         if settings.image_turned_png_copy_review:
             return TURNED_PNG_COPY_AFFINE_VERSION if settings.image_affine_copy_review else TURNED_PNG_COPY_VERSION
@@ -189,6 +197,14 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
         try:
             verify(legacy._verified(store, document["source"]["sha256"]), np.asarray(source), translation["pairs"][0],
                    translation["jpeg_offgrid_review"]["measurement"])
+        except (OSError, ValueError) as error:
+            raise PacketIntegrityError(str(error)) from error
+    if translation.get("basis") == TURNED_JPEG_BASIS:
+        from app.evidence.image_jpeg_turned_copy_source import verify
+
+        try:
+            verify(legacy._verified(store, document["source"]["sha256"]), np.asarray(source), translation["pairs"][0],
+                   translation["jpeg_turned_review"]["measurement"])
         except (OSError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
 
@@ -322,7 +338,7 @@ def build_packet_set(
     size = document["source"]["width"], document["source"]["height"]
     status, boxes = "unsupported_geometry", []
     translation_status, translations, basis, source = "unsupported_geometry", [], None, None
-    jpeg_status = offgrid_review = small_png_review = None
+    jpeg_status = offgrid_review = turned_jpeg_review = small_png_review = None
     turns = 0
     skipped = result_skip(result) is not None
     if skipped:
@@ -353,6 +369,15 @@ def build_packet_set(
                         offgrid_review, extra = {"status": "unavailable", "measurement": None}, []
                     if extra:
                         translation_status, translations, basis = "supported_pair", extra, OFFGRID_BASIS
+                    elif version in TURNED_JPEG_VERSIONS and offgrid_review["status"] == "no_pair":
+                        from app.evidence import image_jpeg_turned_copy_source
+
+                        try:
+                            turned_jpeg_review, extra, turns = image_jpeg_turned_copy_source.review(data, rgb)
+                        except (cv2.error, OSError, ValueError, SystemError):
+                            turned_jpeg_review, extra = {"status": "unavailable", "measurement": None}, []
+                        if extra:
+                            translation_status, translations, basis = "supported_pair", extra, TURNED_JPEG_BASIS
     if (version in SMALL_PNG_VERSIONS and not skipped
             and SMALL_PNG_MIN_SIDE <= min(size) <= max(size) <= SMALL_PNG_MAX_SIDE
             and translation_status in {"no_pair", "unsupported_geometry"}):
@@ -375,6 +400,8 @@ def build_packet_set(
         document["copy_translation"]["jpeg_block_review"] = jpeg_status
     if version in JPEG_OFFGRID_VERSIONS:
         document["copy_translation"]["jpeg_offgrid_review"] = offgrid_review
+    if version in TURNED_JPEG_VERSIONS:
+        document["copy_translation"]["jpeg_turned_review"] = turned_jpeg_review
     if version in SMALL_PNG_VERSIONS:
         document["copy_translation"]["small_png_copy_review"] = small_png_review
     if version in AFFINE_VERSIONS:

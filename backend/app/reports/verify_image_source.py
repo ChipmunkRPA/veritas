@@ -19,6 +19,7 @@ from app.evidence.image_copy_similarity_binding import (
     OFFGRID_BASIS,
     ROLES,
     SMALL_PNG_BASIS,
+    TURNED_JPEG_BASIS,
     TURNED_PNG_BASIS,
     box_bounds,
     copy_records,
@@ -196,6 +197,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             source = oriented.convert('RGB')
     translation = evidence.get('copy_translation') or {}
     offgrid = translation.get('basis') == OFFGRID_BASIS
+    turned_jpeg = translation.get("basis") == TURNED_JPEG_BASIS
     with source:
         if (declared.get('coordinate_space') != 'exif-oriented-original'
                 or source.size != (declared.get('width'), declared.get('height'))
@@ -215,6 +217,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             from app.evidence.image_jpeg_offgrid_source import verify
 
             verify(data, np.asarray(source), translation['pairs'][0], translation['jpeg_offgrid_review']['measurement'])
+        if turned_jpeg:
+            import numpy as np
+
+            from app.evidence.image_jpeg_turned_copy_source import verify
+
+            verify(data, np.asarray(source), translation["pairs"][0], translation["jpeg_turned_review"]["measurement"])
     if pair is not None:
         from app.evidence import image_embedded_pair_pixels as embedded_pixels
 
@@ -251,6 +259,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         detail += f" Recomputed the exact matching RGB pixels and surrounding differences{alignment} on the submitted PNG."
     if offgrid:
         detail += ' Recomputed the recorded color differences inside and around the two selected JPEG crops.'
+    if turned_jpeg:
+        detail += " Recomputed the color differences inside and around the two selected JPEG crops after rotation."
     if repeated:
         detail += f' Recomputed repeat-pass overlap for {repeated} source regions from their recorded masks.'
     if quality:

@@ -114,6 +114,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         OFFGRID_STATUS_TEXT,
         SKIPPED_CREDENTIALS,
         SMALL_PNG_STATUS_TEXT,
+        TURNED_JPEG_BASIS,
+        TURNED_JPEG_STATUS_TEXT,
         TURNED_PNG_BASIS,
         TURNED_PNG_VERSIONS,
         status_text,
@@ -167,8 +169,13 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                     perimeter = ", ".join(f"{value:.2f}" for value in measured["perimeter_mean_absolute_difference"])
                     check["basis_text"] += (f" Compared {measured['matching_pixels']:,} RGB pixels in each crop. "
                                             f"Mean surrounding differences (top, bottom, left, right) {perimeter} of 255 levels.")
-            elif review := check.get("jpeg_offgrid_review"):
-                check["basis_text"] = OFFGRID_STATUS_TEXT[review["status"]]
+            elif review := check.get("jpeg_turned_review") or check.get("jpeg_offgrid_review"):
+                turned_jpeg = check.get("jpeg_turned_review") is not None
+                statuses = TURNED_JPEG_STATUS_TEXT if turned_jpeg else OFFGRID_STATUS_TEXT
+                check["basis_text"] = statuses[review["status"]]
+                if check.get("basis") == TURNED_JPEG_BASIS:
+                    turns = "90° counterclockwise" if check["pairs"][0]["transform"] == "rotate_90_ccw" else "180°"
+                    check["observation"] = f"Area B closely matches Area A after rotating it {turns}."
                 if measured := review["measurement"]:
                     perimeter = ", ".join("unavailable" if value is None else f"{value:.2f}"
                                           for value in measured["perimeter_means"])

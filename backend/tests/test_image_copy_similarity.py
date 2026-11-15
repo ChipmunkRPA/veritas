@@ -559,6 +559,36 @@ def test_report_and_json_share_source_bound_pair_and_redaction(packet_fixture, m
     )
 
 
+def test_rotated_jpeg_replays_both_native_areas_and_rejects_changed_measurements(monkeypatch):
+    from app.detectors.image import jpeg_turned_copy
+    from app.evidence import image_jpeg_turned_copy_source as rotated
+
+    rng = np.random.default_rng(58)
+    pixels = cv2.resize(rng.integers(0, 256, (86, 113, 3), dtype=np.uint8), (640, 512), interpolation=cv2.INTER_CUBIC)
+    pixels[72:144, 81:137] = np.rot90(pixels[313:369, 405:477])
+    image = Image.fromarray(pixels)
+    raw = _bytes(image, format="JPEG", quality=90, subsampling=2)
+    with Image.open(io.BytesIO(raw)) as source:
+        rgb = np.array(source)
+    review, pairs, turns = rotated.review(raw, rgb)
+    assert review["status"] == "supported_pair" and turns == 1
+    pair = {"transform": "rotate_90_ccw", "regions": {
+        area: dict(zip("xywh", box, strict=True)) for area, box in zip(("area_a", "area_b"), pairs[0], strict=True)}}
+    rotated.verify(raw, rgb, pair, review["measurement"])
+    changed = {**review["measurement"], "interior_mean": 0.0}
+    with pytest.raises(ValueError, match="differ from the submitted image"):
+        rotated.verify(raw, rgb, pair, changed)
+    with pytest.raises(ValueError, match="requires a quarter turn or half turn"):
+        rotated.verify(raw, rgb, {**pair, "transform": "same_orientation"}, review["measurement"])
+
+    def unexpected_check(_):
+        pytest.fail("An unsupported JPEG must not run the rotation search")
+
+    monkeypatch.setattr(jpeg_turned_copy, "analyse", unexpected_check)
+    unsupported = _bytes(image, format="JPEG", quality=85, subsampling=2)
+    assert rotated.review(unsupported, rgb) == ({"status": "unsupported_profile", "measurement": None}, [], 0)
+
+
 def test_small_png_copy_preserves_exact_crops_and_rejects_unsupported_sources(evidence_http, monkeypatch):
     from app.evidence import image_exact_small_copy_source
     from app.evidence.image_copy_similarity_binding import SMALL_PNG_BASIS

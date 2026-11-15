@@ -147,13 +147,13 @@ def pcm(payload):
     return np.rint(values.astype(np.float64) * 32768).clip(-32768, 32767).astype("<i2")
 
 
-def source_rows(folder, previous=None):
+def source_rows(folder, previous=None, *, extra_excluded=(), speaker_count=12, clips_per_condition=2):
     from scripts.lombard_mouth_source_intake import MemberReader, index_zip, target
 
     locations, archive_metadata = source_archives(folder)
     groups = defaultdict(list)
     earlier = None
-    excluded = set(EXCLUDED)
+    excluded = set(EXCLUDED).union(extra_excluded)
     if previous is not None:
         first = json.loads(previous.read_bytes())
         require(first.get("method") == DESIGN and review(first) == first.get("outcomes"), "The earlier benchmark cannot replay")
@@ -186,7 +186,7 @@ def source_rows(folder, previous=None):
         for speaker in sorted(groups, key=stable_order):
             by_condition = defaultdict(list)
             for uid, condition, phone, a, b in sorted(groups[speaker], key=lambda row: stable_order(row[0])):
-                if len(by_condition[condition]) >= 2:
+                if len(by_condition[condition]) >= clips_per_condition:
                     continue
                 center = (a + b) // 2
                 start, stop = center - HALF_EDIT, center + HALF_EDIT
@@ -211,14 +211,15 @@ def source_rows(folder, previous=None):
                                 "front": {"name": eyes[uid].filename, "sha256": digest(picture)},
                                 "alignment": {"name": aligned[uid].filename, "sha256": digest(label_bytes)}},
                 })
-            if any(len(by_condition[c]) != 2 for c in ("p", "l")):
+            if any(len(by_condition[c]) != clips_per_condition for c in ("p", "l")):
                 continue
             split = "development" if len(speakers) < 4 else "held"
             speakers.append(speaker)
             rows.extend(row | {"split": split} for condition in ("p", "l") for row in by_condition[condition])
-            if len(speakers) == 12:
+            if len(speakers) == speaker_count:
                 break
-    require(len(speakers) == 12 and len(rows) == 48, "Incomplete disjoint source roster")
+    require(len(speakers) == speaker_count and len(rows) == 2 * clips_per_condition * speaker_count,
+            "Incomplete disjoint source roster")
     document = {"schema": SCHEMA, "method": DESIGN if earlier is None else CONTEXT_DESIGN,
             "revision": MODEL_REVISION, "model_sha256": WEIGHT_PIN,
             "baseline_sha256": SPHINX_PIN, "archives": archive_metadata,

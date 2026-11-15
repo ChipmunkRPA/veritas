@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Vowel and lip-closure timing](video-lip-viseme-transfer-2026-11-15.md)
+  added nine useful locations on the primary panel at the tighter point.
+  A separate eight-speaker panel found 4/32 PCM and 3/32 AAC shifts
+  versus zero for the current timing check. There were zero ordinary
+  alerts and one AAC constant-delay alert. The source witness replay
+  links the audio range and original pictures for a local trial.
+
 - [Contiguous word ranges for short rewrites](writing-local-word-spans-2026-11-15.md)
   added one useful local Qwen report location at the wider point with
   fewer ordinary flags overall. The result did not transfer to GPT-5.4.

@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [vowel and lip-closure timing replay](video-lip-viseme-transfer-2026-11-15.md#independent-replay)
+recalculates the local timing changes and counts separate ordinary and
+constant-delay errors before and after AAC. A native replay reconstructs
+the sound and verifies original frames and mouth crops from eight
+speakers outside the primary cohorts.
+
 The [short rewrite word-span replay](writing-local-word-spans-2026-11-15.md#independent-replay)
 recounts contiguous word evidence, ordinary flags and whether a result
 also appeared in the matched ordinary draft. It separately reads the

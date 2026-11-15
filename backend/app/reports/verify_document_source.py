@@ -16,6 +16,7 @@ from app.core.canonical import canonical_hash
 from app.detectors.text.extract import extract, text_hash
 from app.evidence import (
     document_bibliography,
+    document_chat_markers,
     document_context,
     document_email_contexts,
     document_invisible_characters,
@@ -137,6 +138,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_pdf_visibility.verify_source(evidence, doc.meta)
     document_word_visibility.verify_source(evidence, doc.meta.get(document_word_visibility.KEY))
     document_invisible_characters.verify_source(evidence, text, mapping, doc.meta)
+    document_chat_markers.verify_source(evidence, text, mapping, doc.meta)
     if document_percentage_consistency.KEY in evidence:
         from app.detectors.text.pipeline import segment_within
 
@@ -217,7 +219,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     pdf_covered_detail = (" Verified the covered PDF text inspection and retained page locations."
                           if "covered_examined_pages" in pdf_visibility else "")
     percentage_detail = " Verified repeated percentage statements and their value ranges." if document_percentage_consistency.KEY in evidence else ""
+    marker_detail = " Verified chat formatting markers and retained source positions." if document_chat_markers.KEY in coverage else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
-            f"{tracked_detail}{word_visibility_detail}{invisible_detail}{pdf_replacement_detail}{pdf_covered_detail}{percentage_detail}")
+            f"{tracked_detail}{word_visibility_detail}{invisible_detail}{pdf_replacement_detail}{pdf_covered_detail}{percentage_detail}{marker_detail}")

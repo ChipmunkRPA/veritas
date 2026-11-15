@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Source-bound chat formatting markers](document-chat-format-markers-2026-11-15.md)
+  adds exact locations from eight documented formats to text, Word,
+  mapped email and selectable PDF evidence. All 72 archived ordinary
+  report excerpts had no matching pair. The check leaves AI confidence
+  to the existing writing analysis.
+
 - [Direct supervision of word ranges](writing-supervised-ranges-2026-11-15.md)
   increased useful local Qwen report locations from one to five at the
   tighter point, with five net additional ordinary flags. In 48 new

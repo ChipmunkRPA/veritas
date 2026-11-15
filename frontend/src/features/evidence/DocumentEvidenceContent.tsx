@@ -157,6 +157,34 @@ function PercentageConsistency({ review }: { review: NonNullable<DocumentEvidenc
   </section>
 }
 
+function ChatFormatMarkers({ review }: { review: NonNullable<NonNullable<DocumentEvidenceSet['coverage']>['chat_format_markers']> }) {
+  if (!review.turns) return null
+  return <section aria-labelledby="document-chat-format-markers" className="mt-4 rounded-md border border-border p-4">
+    <h3 id="document-chat-format-markers" className="m-0 text-body font-medium">Chat formatting markers</h3>
+    <p className="mt-2 mb-0 text-small">Found {review.turns} {review.turns === 1 ? 'message' : 'messages'} with a matching opening and closing marker.</p>
+    <ol className="mt-3 mb-0 list-none space-y-3 p-0">
+      {review.locations.map(({ opener, closer }) =>
+        <li key={opener.start} className="space-y-2 rounded-md border border-border p-3">
+          {([['Opening', opener], ['Closing', closer]] as const).map(([label, marker]) => {
+            const anchor = marker.anchor
+            const source = anchor.kind === 'pdf' ? `PDF page ${anchor.page}, text block ${anchor.block}`
+              : anchor.kind === 'docx' ? `Word body path ${anchor.body_path.join(' / ')}`
+              : anchor.kind === 'email' ? `Decoded email part ${anchor.mime_part}` : 'Decoded source'
+            return <div key={marker.start}>
+              <p className="m-0 break-all text-small">{label} <code>{marker.literal}</code></p>
+              <p className="mt-1 mb-0 text-caption text-text-muted">{source}
+                {marker.ranges && ` · characters ${marker.ranges.map(([a, b]) => `[${a}, ${b})`).join(', ')}`}
+                {' '}· Extracted characters [{marker.start}, {marker.end})</p>
+            </div>
+          })}
+        </li>)}
+    </ol>
+    {review.turns > review.locations.length && <p className="mt-2 mb-0 text-caption text-text-muted">
+      {review.turns - review.locations.length} further messages exceed the display limit.</p>}
+    <p className="mt-2 mb-0 text-caption text-text-muted">{review.limitation} Positions are zero-based and end offsets are exclusive.</p>
+  </section>
+}
+
 function EmailBodyComparison({ review }: { review?: EmailBodyAlternatives }) {
   if (!review) return null
   return <section id="email-body-alternatives" aria-labelledby="email-body-alternatives-heading" className="mt-4 rounded-md border border-border p-4">
@@ -314,6 +342,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     </section>}
     <DocumentRepeatedPassages result={set.repeated_passages} />
     {set.percentage_consistency && <PercentageConsistency review={set.percentage_consistency} />}
+    {set.coverage?.chat_format_markers && <ChatFormatMarkers review={set.coverage.chat_format_markers} />}
     {invisible && <section aria-labelledby="document-invisible-characters" className="mt-4 rounded-md border border-border p-4">
       <h3 id="document-invisible-characters" className="m-0 text-body font-medium">
         {lookalikes ? 'Invisible and look-alike characters in the source text' : 'Invisible characters in the source text'}

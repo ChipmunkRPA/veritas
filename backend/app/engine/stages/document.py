@@ -42,6 +42,7 @@ from app.engine.runner import StageContext
 from app.engine.stages import common, document_screening
 from app.evidence import (
     document_bibliography,
+    document_chat_markers,
     document_check_coverage,
     document_invisible_characters,
     document_pdf_visibility,
@@ -549,9 +550,10 @@ def publish(ctx: StageContext) -> dict[str, Any]:
     if tracked := decoded.get(document_tracked_changes.KEY):
         result.manifest.sampling[document_tracked_changes.COMMITMENT] = canonical_hash(tracked)
     detected = ctx.outputs.get("detect") or {}
+    verified_credentials = provenance_gate.stop(ctx)
     if writing_checks := document_check_coverage.capture(
         detected.get("detectors", []), PRIMARY_DETECTORS, BINOCULARS_DETECTOR,
-        language=detected.get(language_scope.KEY), verified_credentials=provenance_gate.stop(ctx),
+        language=detected.get(language_scope.KEY), verified_credentials=verified_credentials,
     ):
         result.manifest.sampling[document_check_coverage.KEY] = writing_checks
     if word_visibility := decoded.get("meta", {}).get(document_word_visibility.KEY):
@@ -559,6 +561,10 @@ def publish(ctx: StageContext) -> dict[str, Any]:
     if invisible := document_invisible_characters.measure(decoded["text"], decoded["source_map"], decoded["meta"],
                                                         schema=document_invisible_characters.GLYPH_SCHEMA):
         result.manifest.sampling[document_invisible_characters.COMMITMENT] = canonical_hash(invisible)
+    if not verified_credentials:
+        markers = document_chat_markers.measure(decoded["text"], decoded["source_map"], decoded["meta"])
+        if markers is not None:
+            result.manifest.sampling[document_chat_markers.COMMITMENT] = canonical_hash(markers)
     if settings.document_email_alternatives_review and decoded.get("meta", {}).get("method") == "email":
         from app.evidence import email_alternatives
 

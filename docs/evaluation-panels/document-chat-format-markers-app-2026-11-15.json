@@ -1,0 +1,278 @@
+{
+  "cases": {
+    "email": {
+      "markers": {
+        "authorship_confidence_contribution": 0,
+        "checked_chars": 542,
+        "limitation": "Anyone can type or copy these markers. They do not identify a provider or establish who wrote the surrounding text. This observation carries zero AI-authorship weight.",
+        "locations": [
+          {
+            "closer": {
+              "anchor": {
+                "kind": "email",
+                "mime_part": "1",
+                "source_end": 576,
+                "source_start": 49
+              },
+              "end": 544,
+              "literal": "<|im_end|>",
+              "ranges": [
+                [
+                  560,
+                  576
+                ]
+              ],
+              "start": 534
+            },
+            "opener": {
+              "anchor": {
+                "kind": "email",
+                "mime_part": "1",
+                "source_end": 42,
+                "source_start": 15
+              },
+              "end": 21,
+              "literal": "<|im_start|>assistant",
+              "ranges": [
+                [
+                  15,
+                  42
+                ]
+              ],
+              "start": 0
+            }
+          }
+        ],
+        "schema": "document-chat-format-markers/1",
+        "scope": "Checks intact opening and closing markers around an assistant-style message in mapped source text.",
+        "turns": 1
+      },
+      "pdf_sha256": "63936be59d187ccb7c88768f7d13da5fe924f46b27e26ac5e34eaef127261acb",
+      "signed_source_verified": true,
+      "source_sha256": "3ace30cc8f73237b132a45c8b7632d18839ea57a39ff09f305c83531963e2b4e",
+      "writing_checks": {
+        "checks": {
+          "passage_classifier": "completed",
+          "writing_pattern_ratio": "skipped"
+        },
+        "reasons": {
+          "writing_pattern_ratio": "memory_budget"
+        },
+        "schema": "document-writing-check-coverage/2"
+      }
+    },
+    "ordinary": {
+      "markers": {
+        "authorship_confidence_contribution": 0,
+        "checked_chars": 528,
+        "limitation": "Anyone can type or copy these markers. They do not identify a provider or establish who wrote the surrounding text. This observation carries zero AI-authorship weight.",
+        "locations": [],
+        "schema": "document-chat-format-markers/1",
+        "scope": "Checks intact opening and closing markers around an assistant-style message in mapped source text.",
+        "turns": 0
+      },
+      "pdf_sha256": "9fdb6dff9e2ecbf3e25b12019e640d8fb40400726415221e10121e8145e3ba54",
+      "signed_source_verified": true,
+      "source_sha256": "0432a5df98385dd32845ea9d39d9dd443b055c9f24feb9977c5d55abff3575bf",
+      "writing_checks": {
+        "checks": {
+          "passage_classifier": "completed",
+          "writing_pattern_ratio": "skipped"
+        },
+        "reasons": {
+          "writing_pattern_ratio": "memory_budget"
+        },
+        "schema": "document-writing-check-coverage/2"
+      }
+    },
+    "pdf": {
+      "markers": {
+        "authorship_confidence_contribution": 0,
+        "checked_chars": 543,
+        "limitation": "Anyone can type or copy these markers. They do not identify a provider or establish who wrote the surrounding text. This observation carries zero AI-authorship weight.",
+        "locations": [
+          {
+            "closer": {
+              "anchor": {
+                "bbox": [
+                  64.0,
+                  64.000015,
+                  537.209167,
+                  176.599304
+                ],
+                "block": 0,
+                "coordinate_space": "unrotated-page-points",
+                "kind": "pdf",
+                "page": 1
+              },
+              "end": 543,
+              "literal": "<|im_end|>",
+              "start": 533
+            },
+            "opener": {
+              "anchor": {
+                "bbox": [
+                  64.0,
+                  64.000015,
+                  537.209167,
+                  176.599304
+                ],
+                "block": 0,
+                "coordinate_space": "unrotated-page-points",
+                "kind": "pdf",
+                "page": 1
+              },
+              "end": 21,
+              "literal": "<|im_start|>assistant",
+              "start": 0
+            }
+          }
+        ],
+        "schema": "document-chat-format-markers/1",
+        "scope": "Checks intact opening and closing markers around an assistant-style message in mapped source text.",
+        "turns": 1
+      },
+      "pdf_sha256": "95596868179c103dd9948b688722913fe029a64aa49bb79ba0a9a53ac8ba29c1",
+      "signed_source_verified": true,
+      "source_sha256": "2495d219c08bb5aa191ca1046f6dea93187539657665dad2cbe8eb5960735024",
+      "writing_checks": {
+        "checks": {
+          "passage_classifier": "completed",
+          "writing_pattern_ratio": "skipped"
+        },
+        "reasons": {
+          "writing_pattern_ratio": "memory_budget"
+        },
+        "schema": "document-writing-check-coverage/2"
+      }
+    },
+    "plain": {
+      "markers": {
+        "authorship_confidence_contribution": 0,
+        "checked_chars": 558,
+        "limitation": "Anyone can type or copy these markers. They do not identify a provider or establish who wrote the surrounding text. This observation carries zero AI-authorship weight.",
+        "locations": [
+          {
+            "closer": {
+              "anchor": {
+                "kind": "text",
+                "source_end": 560,
+                "source_start": 17
+              },
+              "end": 560,
+              "literal": "<\uff5cend\u2581of\u2581sentence\uff5c>",
+              "ranges": [
+                [
+                  541,
+                  560
+                ]
+              ],
+              "start": 541
+            },
+            "opener": {
+              "anchor": {
+                "kind": "text",
+                "source_end": 560,
+                "source_start": 17
+              },
+              "end": 30,
+              "literal": "<\uff5cAssistant\uff5c>",
+              "ranges": [
+                [
+                  17,
+                  30
+                ]
+              ],
+              "start": 17
+            }
+          }
+        ],
+        "schema": "document-chat-format-markers/1",
+        "scope": "Checks intact opening and closing markers around an assistant-style message in mapped source text.",
+        "turns": 1
+      },
+      "pdf_sha256": "b138346ae40985c543c8c57dc92bf04881322659e521d72b61b24d3b07317983",
+      "signed_source_verified": true,
+      "source_sha256": "f2db1f139dbbe4a48c1f1f0df108f9366ed47d1ccf707f406f7c0f808f374961",
+      "writing_checks": {
+        "checks": {
+          "passage_classifier": "completed",
+          "writing_pattern_ratio": "skipped"
+        },
+        "reasons": {
+          "writing_pattern_ratio": "memory_budget"
+        },
+        "schema": "document-writing-check-coverage/2"
+      }
+    },
+    "word": {
+      "markers": {
+        "authorship_confidence_contribution": 0,
+        "checked_chars": 542,
+        "limitation": "Anyone can type or copy these markers. They do not identify a provider or establish who wrote the surrounding text. This observation carries zero AI-authorship weight.",
+        "locations": [
+          {
+            "closer": {
+              "anchor": {
+                "body_path": [
+                  2
+                ],
+                "kind": "docx",
+                "paragraph_index": 2
+              },
+              "end": 546,
+              "literal": "<|im_end|>",
+              "ranges": [
+                [
+                  0,
+                  10
+                ]
+              ],
+              "start": 536
+            },
+            "opener": {
+              "anchor": {
+                "body_path": [
+                  0
+                ],
+                "kind": "docx",
+                "paragraph_index": 0
+              },
+              "end": 21,
+              "literal": "<|im_start|>assistant",
+              "ranges": [
+                [
+                  0,
+                  21
+                ]
+              ],
+              "start": 0
+            }
+          }
+        ],
+        "schema": "document-chat-format-markers/1",
+        "scope": "Checks intact opening and closing markers around an assistant-style message in mapped source text.",
+        "turns": 1
+      },
+      "pdf_sha256": "65e3e5e874623fcf7b7cfdd3cdd18c6532e06f87bce066e81a16786b3a24db9b",
+      "signed_source_verified": true,
+      "source_sha256": "2da5723c5914d92ad2f2fae8735451581f22837e9e0d708942ac501f13722059",
+      "writing_checks": {
+        "checks": {
+          "passage_classifier": "completed",
+          "writing_pattern_ratio": "skipped"
+        },
+        "reasons": {
+          "writing_pattern_ratio": "memory_budget"
+        },
+        "schema": "document-writing-check-coverage/2"
+      }
+    }
+  },
+  "checkout": {
+    "jobs_before_payment": 0,
+    "paid_analyses": 5,
+    "usd_cents": 999
+  },
+  "device": "cpu"
+}

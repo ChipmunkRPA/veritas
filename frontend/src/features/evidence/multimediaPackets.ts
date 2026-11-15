@@ -484,12 +484,19 @@ export interface DocumentEvidenceSet extends SetBase {
       checked_blocks: number; checked_chars: number; matches: number; authorship_confidence_contribution: 0;
       locations: { text_offset: number; source_start: number; source_end: number; codepoint: string; looks_like?: string;
         body_path?: (number | 'row' | 'cell')[]; mime_part?: string }[] };
+    chat_format_markers?: { schema: 'document-chat-format-markers/1'; scope: string; limitation: string;
+      checked_chars: number; turns: number; authorship_confidence_contribution: 0;
+      locations: { opener: DocumentChatMarker; closer: DocumentChatMarker }[] };
     checks?: { signal_ref: EvidenceRef; status: 'recorded' | 'partial' | 'context_not_recorded'; scored_windows: number; limitation?: string }[];
     writing_check_coverage?: WritingCheckCoverage;
     ocr?: { status?: string; pages?: { page: number; status: string; coverage_scope?: 'image_region'; reason?: string | null; mean_recognition_confidence?: number;
       language?: { status?: string; language?: string; reason?: string }; [key: string]: unknown }[]; unchecked_pages?: number[] } | null
     email?: { body_part?: string; body_content_type?: 'text/plain' | 'text/html'; attachments?: unknown[]; [key: string]: unknown } | boolean | null }
 }
+
+type DocumentChatMarker = { literal: string; start: number; end: number; ranges?: [number, number][];
+  anchor: { kind: 'text' } | { kind: 'docx'; body_path: (number | 'row' | 'cell')[] }
+    | { kind: 'pdf'; page: number; block: number } | { kind: 'email'; mime_part: string } };
 
 type BibliographySource = { kind: 'pdf'; page: number } | { kind: 'docx'; body_index: number } | { kind: 'text'; start: number; end: number }
 type WritingCheck = 'passage_classifier' | 'writing_pattern_ratio'

@@ -158,6 +158,22 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
   })
 
+  it('shows both chat markers with their original character positions', () => {
+    show({ ...document, packets: [], coverage: { chat_format_markers: {
+      schema: 'document-chat-format-markers/1', scope: 'Maps literal source text.',
+      limitation: 'Anyone can type or copy these markers.', checked_chars: 80, turns: 1,
+      authorship_confidence_contribution: 0, locations: [{
+        opener: { literal: '<|im_start|>assistant', start: 8, end: 29, ranges: [[12, 41]], anchor: { kind: 'email', mime_part: '1.1' } },
+        closer: { literal: '<|im_end|>', start: 48, end: 58, ranges: [[62, 80]], anchor: { kind: 'email', mime_part: '1.1' } },
+      }],
+    } } })
+    const section = within(screen.getByRole('region', { name: 'Chat formatting markers' }))
+    expect(section.getByText('<|im_start|>assistant').tagName).toBe('CODE')
+    expect(section.getByText('<|im_end|>')).toBeTruthy()
+    expect(section.getByText(/Decoded email part 1.1 · characters \[12, 41\)/)).toBeTruthy()
+    expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
+  })
+
   it('links voice evidence to only sound categories overlapping its exact samples', () => {
     const set = structuredClone(audio)
     set.source.pcm_sha256 = 'a'.repeat(64)

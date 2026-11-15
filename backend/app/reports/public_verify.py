@@ -13,6 +13,7 @@ import wave
 
 from app.core.canonical import canonical_hash
 from app.evidence import (
+    document_chat_markers,
     document_invisible_characters,
     document_scope,
     email_alternatives,
@@ -105,7 +106,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, WORD_TEXT_VISIBILITY,
                              IMAGE_INTERPOLATION, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
                              image_animation_binding.KEY,
-                             document_invisible_characters.COMMITMENT,
+                             document_invisible_characters.COMMITMENT, document_chat_markers.COMMITMENT,
                              TIMING_COMMITMENT, SOUNDTRACK_PAIR_COMMITMENT},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
@@ -280,6 +281,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              'Word text visibility requires document evidence')
     _require(analysis["kind"] == "document" or document_invisible_characters.COMMITMENT not in result,
              "Invisible-character measurements require document evidence")
+    _require(analysis["kind"] == "document" or document_chat_markers.COMMITMENT not in result,
+             "Chat-format marker measurements require document evidence")
     _require(analysis['kind'] == 'document' or EMAIL_CLASSIFIER_SCOPE not in result,
              'Email classifier input commitments require document evidence')
     if analysis['kind'] == 'document':
@@ -325,6 +328,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         _require(evidence["source"].get(document_invisible_characters.COMMITMENT) == invisible,
                  "Invisible-character evidence differs from the public result")
         document_invisible_characters.validate(evidence, invisible)
+        document_chat_markers.validate(evidence, result.get(document_chat_markers.COMMITMENT))
         document_email_contexts.validate_commitment(evidence, result.get(document_email_contexts.COMMITMENT),
                                                     published_checks={check["id"] for check in result.get("checks", [])})
         document_scope.validate_checkpoint_agreement(evidence)

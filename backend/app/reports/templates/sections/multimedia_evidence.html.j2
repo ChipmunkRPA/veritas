@@ -30,6 +30,18 @@
 <p class="caption">Evidence set {{ evidence.version }} - SHA-256 <span class="mono evidence-hash">{{ evidence.sha256 }}</span></p>
 <p class="caption"{% if evidence.kind == 'audio' %} id="multimedia-evidence-voice-coverage"{% endif %}>{{ evidence.coverage_note }}</p>
 {% for note in evidence.coverage_details %}<p class="caption">{{ note }}</p>{% endfor %}
+{% set chat = evidence.get('chat_format_markers') %}
+{% if chat %}
+<h3 id="document-chat-format-markers">{{ chat.title }}</h3>
+<p>Found {{ chat.turns }} {{ 'message' if chat.turns == 1 else 'messages' }} with a matching opening and closing marker.</p>
+<table class="multimedia-locator" aria-labelledby="document-chat-format-markers">
+<thead><tr><th style="width: 36%">Marker</th><th>Source location</th><th style="width: 24%">Extracted characters</th></tr></thead>
+<tbody>{% for pair in chat.locations %}{% for side in ['opener', 'closer'] %}{% set marker = pair[side] %}
+<tr><td>{{ 'Opening' if side == 'opener' else 'Closing' }}<br><span class="mono">{{ marker.literal|e }}</span></td><td>{{ marker.label }}</td><td>[{{ marker.start }}, {{ marker.end }})</td></tr>
+{% endfor %}{% endfor %}</tbody></table>
+{% if chat.turns > chat.locations | length %}<p class="caption">{{ chat.turns - (chat.locations | length) }} further messages exceed the display limit.</p>{% endif %}
+<p class="caption">{{ chat.limitation }} Positions are zero-based and end offsets are exclusive. JSON pointer <span class="mono">/coverage/chat_format_markers</span>.</p>
+{% endif %}
 {% set invisible = evidence.get('invisible_characters') %}
 {% if invisible %}
 <h3 id="document-invisible-characters">{{ invisible.title }}</h3>

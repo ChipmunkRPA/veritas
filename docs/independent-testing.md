@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [chat formatting marker replay](document-chat-format-markers-2026-11-15.md#local-verification-and-replay)
+checks exact source positions across four document formats, then verifies
+the result in PDF, JSON and signed evidence. It includes 72 ordinary
+report excerpts and exercises payment before analysis.
+
 The [direct word-range replay](writing-supervised-ranges-2026-11-15.md#independent-replay)
 recounts contiguous word matches, matched-control alerts and a single
 work-level comparison point for two checks. The report replication adds

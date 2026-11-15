@@ -160,6 +160,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
             raise ObjectIntegrityError("Audio evidence does not match the published sample commitments")
     else:
         from app.evidence import (
+            document_chat_markers,
             document_invisible_characters,
             document_tracked_changes,
             document_word_visibility,
@@ -170,7 +171,8 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
                 for key in ("extracted_text_sha256", "source_map_sha256", "decode_sha256")) or (
                 source.get(document_tracked_changes.COMMITMENT) != document_tracked_changes.from_result(result)
                 or source.get(document_word_visibility.COMMITMENT) != document_word_visibility.from_result(result)
-                or source.get(document_invisible_characters.COMMITMENT) != document_invisible_characters.from_result(result)):
+                or source.get(document_invisible_characters.COMMITMENT) != document_invisible_characters.from_result(result)
+                or source.get(document_chat_markers.COMMITMENT) != document_chat_markers.from_result(result)):
             raise ObjectIntegrityError("Document evidence does not match the published extraction commitments")
 
 
@@ -546,6 +548,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     from app.detectors.text.extract import text_hash
     from app.evidence import (
         document_bibliography,
+        document_chat_markers,
         document_check_coverage,
         document_email_contexts,
         document_invisible_characters,
@@ -596,6 +599,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_bibliography.verify_source(document, decoded["meta"])
         document_word_visibility.verify_source(document, decoded["meta"].get(document_word_visibility.KEY), frozen=True)
         document_invisible_characters.verify_source(document, text, mapping, decoded["meta"])
+        document_chat_markers.verify_source(document, text, mapping, decoded["meta"])
         document_native_locations.validate(document)
         document_scope.validate_card_selection(document, mapping)
         if document_email_contexts.KEY in coverage:
@@ -802,6 +806,17 @@ def _invisible_characters_view(coverage: dict) -> dict | None:
             "locations": [{**row, "name": invisible.character_name(row),
                            "label": invisible.location_label(row, record["coordinate_space"])}
                           for row in record["locations"]]}
+
+
+def _chat_markers_view(coverage: dict) -> dict | None:
+    from app.evidence import document_chat_markers as chat
+
+    record = coverage.get(chat.KEY)
+    if not record or not record["turns"]:
+        return None
+    return {**record, "title": chat.TITLE,
+            "locations": [{side: {**marker, "label": chat.location_label(marker)} for side, marker in pair.items()}
+                          for pair in record["locations"]]}
 
 
 def _document_coverage_details(coverage: dict) -> list[str]:
@@ -1454,6 +1469,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "email_classifier_input_scope": (document.get("coverage") or {}).get(EMAIL_INPUT_SCOPE) if kind == "document" else None,
             "word_tracked_changes": (document.get("coverage") or {}).get(TRACKED) if kind == "document" and not withheld else None,
             "invisible_characters": _invisible_characters_view(document.get("coverage") or {}) if kind == "document" else None,
+            "chat_format_markers": _chat_markers_view(document.get("coverage") or {}) if kind == "document" and not withheld else None,
             "coverage_details": ([f"{'Voice evidence' if key == 'audio' else 'Audio/video synchronization evidence'}: {channel['reason']}"
                                   for key, channel in (document.get("coverage", {}).get("channels") or {}).items()]
                                  if kind == "video" else

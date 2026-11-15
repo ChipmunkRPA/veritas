@@ -60,6 +60,10 @@ Those observations remain visible, but supply no AI-origin confidence. Historica
 marker-led results receive an explicit retired-rule interpretation without rewriting
 their saved calculations.
 
+[Chat formatting markers in document uploads](document-chat-format-markers-2026-11-15.md)
+add source locations for intact published assistant delimiters. They
+carry zero authorship weight and cannot trigger the fast gate.
+
 ## Broader provider findings
 
 | Provider family | Collected signals and verification route | Important qualification |

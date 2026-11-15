@@ -25,6 +25,7 @@ from app.core.config import settings
 from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
 from app.evidence import (
     document_bibliography,
+    document_chat_markers,
     document_check_coverage,
     document_email_contexts,
     document_invisible_characters,
@@ -340,6 +341,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_bibliography.validate(document)
         document_word_visibility.validate(document, document["source"].get(document_word_visibility.COMMITMENT))
         document_invisible_characters.validate(document, document["source"].get(document_invisible_characters.COMMITMENT))
+        document_chat_markers.validate(document, document["source"].get(document_chat_markers.COMMITMENT))
         document_matched_context.validate(document)
         document_paragraph_priority.validate(document)
         document_scope.validate_card_selection(document)
@@ -536,6 +538,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][document_invisible_characters.KEY] = document_invisible_characters.rebuild(
             text, mapping, decoded["meta"], invisible)
         document_invisible_characters.validate(document, invisible)
+    if markers := document_chat_markers.from_result(result):
+        document["source"][document_chat_markers.COMMITMENT] = markers
+        document["coverage"][document_chat_markers.KEY] = document_chat_markers.measure(text, mapping, decoded["meta"])
+        document_chat_markers.validate(document, markers)
     if tracked_commitment := document_tracked_changes.from_result(result):
         document["source"][document_tracked_changes.COMMITMENT] = tracked_commitment
         document["coverage"][document_tracked_changes.KEY] = decoded.get(document_tracked_changes.KEY)
@@ -722,6 +728,9 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             if document["source"].get(document_invisible_characters.COMMITMENT) != document_invisible_characters.from_result(result):
                 raise ValueError("Invisible-character evidence differs from the published result")
             document_invisible_characters.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])
+            if document["source"].get(document_chat_markers.COMMITMENT) != document_chat_markers.from_result(result):
+                raise ValueError("Chat-format marker evidence differs from the published result")
+            document_chat_markers.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])
             document_repeat.verify_source(document, decoded["text"], decoded["source_map"])
             document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()),
                                                           meta=decoded["meta"])

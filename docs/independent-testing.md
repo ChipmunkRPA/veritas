@@ -13,6 +13,13 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [competing-voice attenuation replay](audio-stream-attenuation-2026-11-15.md#replay)
+recreates decision counts for 139 deliveries spanning four voice generators.
+It checks source-clock overlap, genuine edits at the same clock, and whether
+the favored estimate tracked the known foreground. The numeric replay runs
+with standard Python. The native instructions separately reproduce the
+attenuated model inputs and verify the original recording commitments.
+
 The [adjacent-sentence writing replay](writing-adjacent-range-2026-11-15.md#independent-replay)
 recomputes which of 84 matched news and government-report rewrites
 were pinpointed at the sentence and changed-word levels. It also

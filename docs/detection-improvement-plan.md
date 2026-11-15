@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Turning down each estimated voice in a noisy recording](audio-stream-attenuation-2026-11-15.md)
+  tested 139 deliveries across four generators. The most selective rule
+  found one ICSI edit range, repeated that range on two ordinary controls,
+  and favored the estimate farther from the known foreground. On the
+  independent stock source bank, no rule added a useful location. The
+  three rules remain in evaluation. The next source-attribution comparison
+  should place synthetic speech separately in the primary and competing voices.
+
 - [Adjacent-sentence writing highlights](writing-adjacent-range-2026-11-15.md)
   compares isolated and paired sentence readings on 84 fresh English
   news and report rewrites. Reading two sentences together added one

@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Word ranges trained against matched originals](writing-paired-ranges-2026-11-15.md)
+  reduced tighter ordinary report flags from 8/93 to 2/93 and located
+  three local Qwen rewrites versus five for the prior range head. Both
+  range heads missed every edit in 48 fresh GPT-5.4 report pairs. The
+  paired head and combined decisions stay in evaluation.
+
 - [Speech and mouth timing on 48 kHz AAC](video-lip-viseme-transfer-2026-11-15.md#48-khz-aac-coverage)
   extends the local trial to qualified short mono AAC videos. It located
   4/32 staged local shifts, flagged no ordinary controls out of 48 and

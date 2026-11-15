@@ -35,6 +35,10 @@ RULE = {
     "measurement": "Replay geometry, separately fitted genre points, matched controls and paired gains and losses.",
 }
 KEYS = context.KEYS
+RANGE_REPORT = spans.PRIMARY.with_name("writing-supervised-ranges-report-2026-11-15.json.gz")
+RANGE_TRANSFER = spans.PRIMARY.with_name("writing-supervised-ranges-transfer-2026-11-15.json.gz")
+PAIRED_RULE = RULE | {"training": RULE["training"] + " For each generated rewrite, add a unit-margin softplus loss "
+    "between the mean of its useful ranges and the four strongest ranges in the same sentence of the matched ordinary file."}
 
 
 def candidates(words):
@@ -94,14 +98,27 @@ def head():
     return RangeHead()
 
 
-def fit(inputs, truth, tokenizer, encoder, device):
+def fit(inputs, truth, tokenizer, encoder, device, *, paired_margin=False):
     import torch
     from torch.nn.functional import softplus
 
     by_group = defaultdict(list)
     for row, item in occurrence.feature_batches(inputs, tokenizer, encoder, device, context_response=True):
-        by_group[row["role"], row["group"]].append(ready(row, item, truth))
-    admitted = [item for pair in by_group.values() if len(pair) == 2 and all(item is not None for item in pair) for item in pair]
+        by_group[row["role"], row["group"]].append((row, ready(row, item, truth)))
+    admitted, counterparts = [], {}
+    for pair in by_group.values():
+        if len(pair) != 2 or any(item is None for _, item in pair):
+            continue
+        index = len(admitted)
+        admitted.extend(item for _, item in pair)
+        if paired_margin:
+            for i, (row, item) in enumerate(pair):
+                before, original = pair[1 - i]
+                if before["family"] == "original" and item[2].any():
+                    mask = torch.tensor([section == row["position"] for section, *_ in original[3]])
+                    if row["position"] != before["position"] or not mask.any():
+                        raise ValueError("Matched fit sentences have incompatible native locations")
+                    counterparts[index + i] = (index + 1 - i, mask)
     words = torch.cat([example[0] for example in admitted])
     mean, scale = words.mean(0), words.std(0).clamp_min(.001)
     del words
@@ -125,12 +142,20 @@ def fit(inputs, truth, tokenizer, encoder, device):
                 loss = softplus(negative.topk(min(8, len(negative))).values).mean()
                 if labels.any():
                     loss = loss + softplus(-response[labels]).mean()
+                if i in counterparts:
+                    j, mask = counterparts[i]
+                    baseline = model(*examples[j][:2])[mask]
+                    loss = loss + softplus(1 + baseline.topk(min(4, len(baseline))).values.mean() - response[labels].mean())
                 losses.append(loss)
             optimizer.zero_grad(set_to_none=True)
             torch.stack(losses).mean().backward()
             optimizer.step()
         print(f"Completed range fit epoch {epoch + 1}/{EPOCHS}", flush=True)
-    return model.eval(), mean, scale, {"files": len(examples), "with_useful_training_ranges": positive}
+    coverage = {"files": len(examples), "with_useful_training_ranges": positive}
+    if paired_margin:
+        assert len(counterparts) == positive
+        coverage["matched_training_ranges"] = len(counterparts)
+    return model.eval(), mean, scale, coverage
 
 
 def selected(readings):
@@ -192,7 +217,8 @@ def workflow_summary(rows, points, baseline, base_points):
         earlier = by_source.pop((reading["role"], reading["group"], reading["family"]))
         if any(reading[key] != earlier[key] for key in KEYS):
             raise ValueError("A candidate used different source word geometry")
-        earlier_best = earlier["best"].get("context/edit_and_origin", earlier["best"].get("edit_and_origin"))
+        earlier_best = next((earlier["best"][key] for key in ("range", "context/edit_and_origin", "edit_and_origin")
+                             if key in earlier["best"]), None)
         paired.append((earlier | {"best": {"range": earlier_best}}, reading))
     if by_source:
         raise ValueError("A prior comparison work is missing")
@@ -221,7 +247,7 @@ def validate_range_row(row):
 def review_record(record, report=None):
     baseline = spans.read(REFERENCE_TRANSFER if report else REFERENCE)
     expected_phase = "transfer" if report else "report"
-    if (record["schema"] != SCHEMA or record["phase"] != expected_phase or record["rule"] != RULE
+    if (record["schema"] != SCHEMA or record["phase"] != expected_phase or record["rule"] not in (RULE, PAIRED_RULE)
             or record["baseline_sha256"] != prior.receipt_digest(baseline)):
         raise ValueError("The comparison inputs differ")
     for row in record["calibration"] + record["held"]:
@@ -229,7 +255,7 @@ def review_record(record, report=None):
     if report:
         review(report)
         primary = spans.read(report)
-        if record["head_sha256"] != primary["head_sha256"]:
+        if record["head_sha256"] != primary["head_sha256"] or record["rule"] != primary["rule"]:
             raise ValueError("The transfer used different fitted weights")
         points = by_domain(record["calibration"], primary["points"])
         summary = {}
@@ -243,6 +269,19 @@ def review_record(record, report=None):
             raise ValueError("The training roster or encoder changed")
         points = operating(record["calibration"])
         summary = workflow_summary(record["held"], points, baseline["held"], baseline["points"]["edit_and_origin"])
+    if record["rule"] == PAIRED_RULE:
+        earlier = spans.read(RANGE_TRANSFER if report else RANGE_REPORT)
+        if record["range_reference_sha256"] != prior.receipt_digest(earlier):
+            raise ValueError("The earlier range comparison differs")
+        if report:
+            paired = {}
+            for genre in ("news", "abstracts", "journals"):
+                domain = genre if genre in points else "report"
+                paired[genre] = workflow_summary([r for r in record["held"] if r["domain"] == genre], points[domain],
+                    [r for r in earlier["held"] if r["domain"] == genre], earlier["points"][domain]["range"])
+        else:
+            paired = workflow_summary(record["held"], points, earlier["held"], earlier["points"]["range"])
+        summary = {"against_context_words": summary, "against_unpaired_ranges": paired}
     for now, past in zip(record["calibration"], baseline["calibration"], strict=True):
         if any(now[key] != past[key] for key in KEYS):
             raise ValueError("The genuine calibration work or its geometry changed")
@@ -354,7 +393,7 @@ def run(args):
         identities = [[row[key] for key in ("role", "group", "family", "sha256")] for row in fit_rows]
         if identities != baseline["fit"]:
             raise ValueError("The fit did not use the original source works")
-        model, mean, scale, coverage = fit(fit_rows, truth, tokenizer, encoder, device)
+        model, mean, scale, coverage = fit(fit_rows, truth, tokenizer, encoder, device, paired_margin=args.paired_margin)
         fitted = model, mean, scale
         weights = args.output / "range.safetensors"
         save_file({"mean": mean, "scale": scale, **{f"head.{k}": v for k, v in model.state_dict().items()}}, weights)
@@ -363,7 +402,10 @@ def run(args):
     points = by_domain(calibration, primary["points"]) if transfer else operating(calibration)
     prior.parent.previous.write(args.output / "points.json", points)
     held = list(measure(hold, truth, tokenizer, encoder, device, fitted))
-    result = {"schema": SCHEMA, "phase": args.phase, "rule": RULE, "baseline_sha256": prior.receipt_digest(reference),
+    rule = primary["rule"] if transfer else PAIRED_RULE if args.paired_margin else RULE
+    if rule == PAIRED_RULE:
+        extra["range_reference_sha256"] = prior.receipt_digest(spans.read(RANGE_TRANSFER if transfer else RANGE_REPORT))
+    result = {"schema": SCHEMA, "phase": args.phase, "rule": rule, "baseline_sha256": prior.receipt_digest(reference),
               "encoder_sha256": baseline["encoder_sha256"], "head_sha256": prior.parent.pool.file_hash(weights),
               "calibration": calibration, "held": held, "points": points, **extra}
     result["summary"] = review_record(result, args.fitted / "receipt.json" if transfer else None)
@@ -376,6 +418,7 @@ if __name__ == "__main__":
     parser.add_argument("output", type=Path)
     for option in ("roster", "encoder", "encoder-weights", "fitted", "matched", "additional", "editorial", "report"):
         parser.add_argument(f"--{option}", type=Path)
+    parser.add_argument("--paired-margin", action="store_true", help="Train against the corresponding ordinary sentence")
     args = parser.parse_args()
     if args.phase in {"review", "review-combined"}:
         action = review if args.phase == "review" else combined

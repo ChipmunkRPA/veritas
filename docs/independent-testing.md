@@ -23,6 +23,12 @@ recounts contiguous word matches, matched-control alerts and a single
 work-level comparison point for two checks. The report replication adds
 48 publisher works outside the audited earlier report rosters.
 
+The [matched-original word-range replay](writing-paired-ranges-2026-11-15.md#independent-replay)
+checks a separate training objective against both earlier heads, including
+48 additional report works disjoint from the earlier replication. It
+recounts matched ordinary alerts and shows where even the known sentence
+fails to rank the changed words correctly.
+
 The [noisy AAC speech comparison replay](audio-clean-speech-aac-2026-11-15.md#local-app-and-replay)
 recounts exact-clock findings across 240 paired recordings at two AAC
 bitrates and on uncompressed WAV. Genuine splices, resampling, isolated

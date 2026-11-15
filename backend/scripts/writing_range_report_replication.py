@@ -11,6 +11,8 @@ from scripts import writing_supervised_ranges as ranges
 from scripts import writing_word_localization as words
 
 SCHEMA = "chipmunk.writing-range-report-replication/1"
+PAIRED_SCHEMA = "chipmunk.writing-paired-range-report-replication/1"
+PREVIOUS_REPLICATION = ranges.RANGE_REPORT.with_name("writing-supervised-ranges-replication-2026-11-15.json.gz")
 FAMILY = "gpt-5.4"
 PER_POSITION = 16
 SOURCE_SHA = words.parent.previous.REPORT_PINS[1]
@@ -25,6 +27,8 @@ RULE = {"selection": "Select 16 new source works per interior edit position by s
                      "Exclude recorded work hashes and overlapping normalized 12-word phrases.",
         "measurement": "Use both frozen weights and the earlier report operating points, including the combined ordinary-work ranks.",
         "input": "Select a single isolated publisher rewrite and its exact earlier version, with four unchanged adjacent sentences."}
+PAIRED_RULE = RULE | {"selection": RULE["selection"] + " Also exclude every source work from the prior range replication.",
+                      "measurement": "Score the three frozen heads and compare the two range decisions and their joint work-level calibration."}
 pool = words.parent.pool
 
 
@@ -33,7 +37,7 @@ def require(condition, reason):
         raise ValueError(reason)
 
 
-def make_plan(source, native):
+def make_plan(source, native, *, paired=False):
     from scripts.writing_interval_transfer import fingerprints
 
     exposed_native, _, _ = words.input_plan(native)
@@ -44,11 +48,16 @@ def make_plan(source, native):
         path = pool.PANEL_DIR / name
         exposure[name] = pool.file_hash(path)
         groups.update(re.findall(r'"([a-f0-9]{64})"', path.read_text()))
+    schema = PAIRED_SCHEMA if paired else SCHEMA
+    if paired:
+        previous = ranges.spans.read(PREVIOUS_REPLICATION)
+        exposure[PREVIOUS_REPLICATION.name] = pool.file_hash(PREVIOUS_REPLICATION)
+        groups.update(row["group"] for row in previous["held"])
     table = words.parent.load_shard(source, "test", FAMILY, SOURCE_SHA)
     for key, versions in table.items():
         if pool.sha(key) in groups and "v0" in versions:
             fingerprints_seen.update(fingerprints(versions["v0"]["text"]))
-    order = sorted(table, key=lambda key: pool.sha(f"{SCHEMA}/{key}"))
+    order = sorted(table, key=lambda key: pool.sha(f"{schema}/{key}"))
     rows, count = [], Counter()
     for key in order:
         if len(rows) == PER_POSITION * 3 * 2:
@@ -78,19 +87,24 @@ def make_plan(source, native):
         fingerprints_seen.update(content | excerpt_pieces)
         count[position] += 1
     require(count == {i: PER_POSITION for i in (1, 2, 3)}, "There were too few unused source works at a required position")
-    return {"schema": SCHEMA, "rule": RULE, "source_sha256": SOURCE_SHA,
+    return {"schema": schema, "rule": PAIRED_RULE if paired else RULE, "source_sha256": SOURCE_SHA,
             "native_roster_sha256": pool.file_hash(native), "prior_exposure": exposure, "rows": rows}
 
 
 def review(record, report):
     primary = ranges.spans.read(report)
+    paired = primary["rule"] == ranges.PAIRED_RULE
+    if paired:
+        ranges.review_record(primary)
     reference = ranges.spans.read(ranges.REFERENCE)
     rows, old = record["held"], record["incumbent"]
-    require(record["schema"] == SCHEMA and record["rule"] == RULE and record["source_sha256"] == SOURCE_SHA
+    require(record["schema"] == (PAIRED_SCHEMA if paired else SCHEMA)
+            and record["rule"] == (PAIRED_RULE if paired else RULE) and record["source_sha256"] == SOURCE_SHA
             and record["native_roster_sha256"] == ranges.spans.read(words.RECEIPT)["roster_sha256"]
             and record["candidate_sha256"] == words.receipt_digest(primary)
             and record["baseline_sha256"] == words.receipt_digest(reference), "The frozen models or source pin differs")
-    require(record["prior_exposure"] == {name: pool.file_hash(pool.PANEL_DIR / name) for name in EXPOSURE},
+    paths = [*EXPOSURE, PREVIOUS_REPLICATION.name] if paired else EXPOSURE
+    require(record["prior_exposure"] == {name: pool.file_hash(pool.PANEL_DIR / name) for name in paths},
             "The prior work exclusion receipts differ")
     require(len(rows) == len(old) == 6 * PER_POSITION, "A held pair is missing")
     require(Counter(row["position"] for row in rows if row["family"] == FAMILY) == dict.fromkeys((1, 2, 3), PER_POSITION),
@@ -108,6 +122,17 @@ def review(record, report):
                                     {"calibration": reference["calibration"], "held": old},
                                     "edit_and_origin", reference["points"]["edit_and_origin"])
     result = {"ranges": counts, "joint": joint}
+    if paired:
+        previous = ranges.spans.read(PREVIOUS_REPLICATION)
+        require(groups.isdisjoint(row["group"] for row in previous["held"]), "Prior replication work resurfaced")
+        unpaired = ranges.spans.read(ranges.RANGE_REPORT)
+        require(record["unpaired_reference_sha256"] == words.receipt_digest(unpaired), "Prior range weights changed")
+        for row in record["unpaired"]:
+            ranges.validate_range_row(row)
+        result["against_unpaired_ranges"] = ranges.workflow_summary(rows, primary["points"], record["unpaired"],
+                                                                   unpaired["points"]["range"])
+        result["joint_range_heads"] = ranges.joint_comparison({"calibration": primary["calibration"], "held": rows},
+            {"calibration": unpaired["calibration"], "held": record["unpaired"]}, "range", unpaired["points"]["range"])
     require("results" not in record or record["results"] == result, "Replication counts do not reproduce")
     return result
 
@@ -120,12 +145,15 @@ def run(args):
     primary_file = args.fitted / "receipt.json"
     ranges.review(primary_file)
     primary = ranges.spans.read(primary_file)
+    paired = primary["rule"] == ranges.PAIRED_RULE
     incumbent = ranges.spans.read(ranges.REFERENCE)
     require(pool.file_hash(args.encoder_weights) == primary["encoder_sha256"]
             and pool.file_hash(args.context_head) == incumbent["head_sha256"], "A pinned weight file differs")
     weights = args.fitted / "range.safetensors"
     require(pool.file_hash(weights) == primary["head_sha256"], "The range weights differ")
-    fresh = make_plan(args.source, args.roster)
+    fresh = make_plan(args.source, args.roster, paired=paired)
+    if args.frozen_plan and fresh != ranges.spans.read(args.frozen_plan):
+        raise ValueError("The fresh source plan differs from the pre-scoring selection")
     words.parent.previous.write(args.output / "frozen.json", fresh)
     native = fresh["rows"]
     truth = {after["sha256"]: words.edit_words(before, after) for before, after in zip(native[::2], native[1::2], strict=True)}
@@ -134,16 +162,24 @@ def run(args):
     encoder.load_state_dict({k.removeprefix("encoder."): v for k, v in contents.items() if k.startswith("encoder.")}, strict=True)
     encoder.eval()
     del contents
-    values = load_file(weights)
-    model = ranges.head()
-    model.load_state_dict({k.removeprefix("head."): v for k, v in values.items() if k.startswith("head.")}, strict=True)
-    actual = list(ranges.measure(native, truth, tokenizer, encoder, device, (model.eval(), values["mean"], values["scale"])))
+    def measure_range(path):
+        values = load_file(path)
+        model = ranges.head()
+        model.load_state_dict({k.removeprefix("head."): v for k, v in values.items() if k.startswith("head.")}, strict=True)
+        return list(ranges.measure(native, truth, tokenizer, encoder, device, (model.eval(), values["mean"], values["scale"])))
+
+    actual = measure_range(weights)
     old = list(occurrence.measure(native, truth, tokenizer, encoder, device,
                                   occurrence.load_fitted_heads(args.context_head), context_response=True))
     record = {key: value for key, value in fresh.items() if key != "rows"}
     record.update(candidate_sha256=words.receipt_digest(primary), baseline_sha256=words.receipt_digest(incumbent),
                   held=actual, incumbent=old,
                   variants=dict(Counter(row["variant"] for row in native if row["variant"] is not None)))
+    if paired:
+        unpaired = ranges.spans.read(ranges.RANGE_REPORT)
+        require(args.unpaired_head and pool.file_hash(args.unpaired_head) == unpaired["head_sha256"],
+                "Fresh comparison requires the original range weights")
+        record.update(unpaired=measure_range(args.unpaired_head), unpaired_reference_sha256=words.receipt_digest(unpaired))
     record["results"] = review(record, primary_file)
     words.parent.previous.write(args.output / "receipt.json", record)
 
@@ -152,7 +188,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("phase", choices=("run", "review"))
     parser.add_argument("output", type=Path)
-    for option in ("report", "source", "roster", "encoder", "encoder-weights", "context-head", "fitted"):
+    for option in ("report", "source", "roster", "encoder", "encoder-weights", "context-head", "fitted", "unpaired-head", "frozen-plan"):
         parser.add_argument(f"--{option}", type=Path)
     args = parser.parse_args()
     if args.phase == "review":

@@ -106,7 +106,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
         check_docx_safe(original)
         try:
-            doc = extract(original, extension, allow_ocr=False)
+            review = coverage.get(document_tracked_changes.KEY) or {}
+            doc = extract(original, extension, allow_ocr=False,
+                          project_word_revisions=review.get("schema") == document_tracked_changes.PROJECTION_SCHEMA)
         except (OpcError, XMLSyntaxError) as error:
             raise ValueError("The supplied DOCX cannot be parsed locally") from error
     else:

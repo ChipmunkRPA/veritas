@@ -12,6 +12,7 @@ import pytest
 from test_document_packets import packet_factory as packet_factory
 
 from app.core.canonical import canonical_hash, canonical_json
+from app.detectors.text.extract import extract
 from app.evidence import document_native_locations as locations
 from app.evidence import document_tracked_changes as tracked
 from app.evidence.document_packets import (
@@ -22,10 +23,51 @@ from app.evidence.document_packets import (
 )
 from app.reports import engine, multimedia_evidence, public_package, public_verify, verify_document_source
 from app.reports.specimens import specimen
+from scripts import document_word_projection_app as sample
 
 FIRST = "😀 First sentence has enough wording to inspect."
 MIDDLE = "The  middle sentence includes a source position."
 LAST = "The final sentence explains the report's purpose."
+
+
+@pytest.mark.parametrize("project", [False, True])
+def test_signed_word_projection_replays_with_the_recorded_input_policy(packet_factory, tmp_path, project):
+    source, accepted = tmp_path / "tracked.docx", tmp_path / "accepted.docx"
+    sample.create(source, "inline")
+    sample.create(accepted, "accepted")
+    original = source.read_bytes()
+    result = extract(source, ".docx", project_word_revisions=project)
+    accepted_text = extract(accepted, ".docx")
+    review = result.word_review
+    assert review["schema"] == (tracked.PROJECTION_SCHEMA if project else tracked.SCHEMA)
+    assert (result.text == accepted_text.text) is project
+    assert source.read_bytes() == original
+    insertion = next(row for row in review["rows"] if row["kind"] == "inserted")
+    if project:
+        assert insertion["writing_input_range"] == [len(sample.PREFIX), len(sample.PREFIX) + len(sample.INSERTED)]
+    else:
+        assert "writing_input_range" not in insertion
+
+    db, store, analysis, report, decoded, _ = packet_factory(
+        ".docx", source_pdf=source, project_word_revisions=project, include_word_review=True,
+    )
+    assert decoded["text"] == result.text
+    fields = build_packet_set(db, analysis, store, report)
+    assert fields["coverage"][tracked.KEY] == review
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"sha256": result.meta["original_sha256"], "bytes": len(original)}}
+    archive_path = tmp_path / "proof.zip"
+    with zipfile.ZipFile(archive_path, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(fields))
+    with zipfile.ZipFile(archive_path) as archive:
+        assert "Verified 2 retained tracked Word edit locations" in verify_document_source.check(archive, bundle, source)
+    if project:
+        forged = deepcopy(fields)
+        changed = next(row for row in forged["coverage"][tracked.KEY]["rows"] if row["kind"] == "inserted")
+        changed["writing_input_range"] = [k + 1 for k in changed["writing_input_range"]]
+        forged["source"][tracked.COMMITMENT] = canonical_hash(forged["coverage"][tracked.KEY])
+        with pytest.raises(ValueError, match="original XML positions"):
+            tracked.verify_source(forged, review, expected=forged["source"][tracked.COMMITMENT])
 
 
 def _prepare(ext, path):

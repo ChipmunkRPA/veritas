@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [Word revision input replay](document-word-writing-input-2026-11-15.md#local-verification)
+compares the accepted and tracked versions of the same document, checks
+their exact detector inputs, and verifies the revision locations and
+abstentions in the paid local worker and signed report.
+
 The [isolated-background training replay](audio-short-edit-background-training-2026-11-15.md#independent-replay)
 recalculates six calibration pairs, matched false-alert changes and time
 overlap. The independently selectable 18-reader SINE panel checks 80

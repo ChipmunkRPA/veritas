@@ -413,7 +413,13 @@ def assemble_document(doc: Document, sents: list[Sentence], scores: DocumentScor
 
 
 def _analyze_segmented(doc: Document, sents: list[Sentence], art_dir: Path | None, t0: float) -> dict:
-    from app.evidence import document_pdf_visibility
+    from app.evidence import document_pdf_visibility, document_tracked_changes
+
+    if document_tracked_changes.unsupported(doc.word_review):
+        return unassessed_language_document(doc, sents, language_scope.UNSUPPORTED_WORD_REVISIONS)
+    if ((doc.word_review or {}).get("writing_input") == document_tracked_changes.INPUT_PROJECTED
+            and sum(sentence.n_words for sentence in sents) < MIN_WORDS):
+        return unassessed_language_document(doc, sents, language_scope.TOO_LITTLE_AFTER_WORD_REVISIONS)
 
     if covered := doc.meta.get(document_pdf_visibility.KEY, {}).get("covered_locations"):
         notice = document_pdf_visibility.covered_notice(covered)

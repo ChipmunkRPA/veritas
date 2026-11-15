@@ -449,9 +449,11 @@ export interface DocumentEvidenceSet extends SetBase {
     balanced_passage_selection?: { schema: 'document-balanced-passage-selection/1'; candidate_blocks: number;
       displayed_blocks: number; displayed_passages: number };
     word_tracked_changes?: { status: 'found' | 'partial' | 'no_match'; scope: string; limitation: string;
+      writing_input?: 'no_tracked_text_changes' | 'accepted_inline_changes' | 'unsupported_tracked_changes';
       part: string; paragraphs: number; inserted: number; deleted: number; unsupported_marks: number;
       omitted_excerpts: number; rows: { kind: 'inserted' | 'deleted'; paragraph: number; body_index: number;
-        inline_index: number; text: string; characters: number }[]; authorship_confidence_contribution: 0 };
+        inline_index: number; text: string; characters: number; writing_input_range?: [number, number] }[];
+      authorship_confidence_contribution: 0 };
     email_body_alternatives?: EmailBodyAlternatives;
     email_classifier_input_scope?: EmailClassifierInputScope;
     local_passage_coverage?: DocumentPassageCoverage;
@@ -504,6 +506,7 @@ type WritingCheck = 'passage_classifier' | 'writing_pattern_ratio'
 type WritingCheckState = 'completed' | 'not_applicable' | 'skipped' | 'failed' | 'timed_out'
 export type WritingCheckReason = 'memory_budget' | 'unavailable' | 'verified_credentials'
   | 'unsupported_language' | 'mixed_language' | 'language_unclear' | 'no_text' | 'too_little_after_cover'
+  | 'unsupported_word_revisions' | 'too_little_after_word_revisions'
 type WritingCheckCoverage =
   | { schema: 'document-writing-check-coverage/1'; checks: Partial<Record<WritingCheck, WritingCheckState>> }
   | { schema: 'document-writing-check-coverage/2'; checks: Partial<Record<WritingCheck, WritingCheckState>>;

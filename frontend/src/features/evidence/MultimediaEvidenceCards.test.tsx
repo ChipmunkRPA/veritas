@@ -158,6 +158,20 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
   })
 
+  it('shows the accepted paragraph range beside the original Word revision position', () => {
+    show({ ...document, packets: [], coverage: { word_tracked_changes: {
+      status: 'found', part: 'word/document.xml', paragraphs: 2, inserted: 1, deleted: 0,
+      writing_input: 'accepted_inline_changes', scope: 'Checks inline changes.', limitation: 'Authorship remains undetermined.',
+      unsupported_marks: 0, omitted_excerpts: 0, authorship_confidence_contribution: 0,
+      rows: [{ kind: 'inserted', paragraph: 2, body_index: 1, inline_index: 2, text: 'Insert 😀',
+        characters: 8, writing_input_range: [17, 25] }],
+    } } })
+    const section = within(screen.getByRole('region', { name: 'Word tracked text changes' }))
+    expect(section.getByText(/insertions included and deletions excluded/)).toBeTruthy()
+    expect(section.getByText(/paragraph child index 2/)).toBeTruthy()
+    expect(section.getByText('Accepted paragraph characters [17, 25).')).toBeTruthy()
+  })
+
   it('shows both chat markers with their original character positions', () => {
     show({ ...document, packets: [], coverage: { chat_format_markers: {
       schema: 'document-chat-format-markers/1', scope: 'Maps literal source text.',

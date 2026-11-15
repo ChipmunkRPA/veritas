@@ -22,6 +22,7 @@ from app.evidence import (
     document_check_coverage,
     document_passage_coverage,
     document_scope,
+    document_tracked_changes,
     document_unselected_responses,
     document_word_visibility,
 )
@@ -45,7 +46,8 @@ def packet_factory(tmp_path):
     Base.metadata.create_all(engine)
     store = ObjectStore(tmp_path / "objects")
     with Session(engine) as db:
-        def create(ext=".txt", scores=(0.1, 0.9, 0.2), ocr=False, text=None, source_pdf=None):
+        def create(ext=".txt", scores=(0.1, 0.9, 0.2), ocr=False, text=None, source_pdf=None,
+                   *, project_word_revisions=True, include_word_review=False):
             path = source_pdf if source_pdf is not None else tmp_path / ("source" + ext)
             text = text or "First sentence contains enough useful words. Second sentence adds more context to this test. Third sentence completes the source."
             if ext == ".pdf" and source_pdf is None:
@@ -72,12 +74,15 @@ def packet_factory(tmp_path):
             elif ext != ".pdf" and source_pdf is None:
                 path.write_text("😀 " + text)
             source = store.put_bytes(path.read_bytes())
-            doc = extract(path, ext)
+            doc = extract(path, ext, project_word_revisions=project_word_revisions)
             for content in doc.source_rasters.values():
                 register_artefact(db, store, base64.b64decode(content), media_type="image/png", role="preview", created_by="document-ocr/1")
             sents = segment(doc)
             decoded = {"text": doc.text, "paragraphs": doc.paragraphs, "source_map": doc.source_map,
                        "meta": doc.meta, "sentences": [dataclasses.asdict(s) for s in sents], "words": sum(s.n_words for s in sents)}
+            word_review = doc.word_review if include_word_review else None
+            if word_review is not None:
+                decoded[document_tracked_changes.KEY] = word_review
             content_type = {".pdf": "application/pdf", ".eml": "message/rfc822",
                             ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"}.get(ext, "text/plain")
             analysis = Analysis(id="document-fixture", kind="document", filename=path.name, content_type=content_type,
@@ -105,6 +110,8 @@ def packet_factory(tmp_path):
                        "findings": [{"id": "F1", "evidence_ids": [signal["id"]]}]}
             if word_visibility := doc.meta.get(document_word_visibility.KEY):
                 result["manifest"]["sampling"][document_word_visibility.COMMITMENT] = canonical_hash(word_visibility)
+            if word_review is not None:
+                result["manifest"]["sampling"][document_tracked_changes.COMMITMENT] = canonical_hash(word_review)
             analysis.result_hash = canonical_hash(result)
             store.put_bytes(canonical_json(result))
             return db, store, analysis, result, decoded, path

@@ -590,7 +590,7 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool 
     return d
 
 
-def extract_docx(path: Path) -> Document:
+def extract_docx(path: Path, *, project_word_revisions: bool = True) -> Document:
     import docx
     from docx.oxml.ns import qn
     from docx.table import Table
@@ -598,9 +598,11 @@ def extract_docx(path: Path) -> Document:
 
     from app.evidence import document_word_visibility
     from app.evidence.document_archive_word import ordinary_body_paragraph
-    from app.evidence.document_tracked_changes import PART_NAME, inspect
+    from app.evidence.document_tracked_changes import INPUT_NOTICES, PART_NAME, inspect
 
     d = docx.Document(str(path))
+    part = str(d.part.partname).removeprefix("/")
+    review = inspect(d.element.body, part, project_inline=project_word_revisions) if PART_NAME.fullmatch(part) else None
     parts: list[tuple[str, dict]] = []
     percentage_body_paragraphs = []
     hidden_locations = []
@@ -641,11 +643,11 @@ def extract_docx(path: Path) -> Document:
 
     walk(d, d.element.body, [])
     doc = _join_mapped(parts)
-    part = str(d.part.partname).removeprefix("/")
-    if PART_NAME.fullmatch(part):
-        doc.word_review = inspect(d.element.body, part)
-    word_warning = (" The file contains Word revision marks. The writing checks may omit text within those marks."
-                    if doc.word_review and doc.word_review["status"] != "no_match" else "")
+    doc.word_review = review
+    word_warning = ""
+    if review and review["status"] != "no_match":
+        word_warning = " " + INPUT_NOTICES.get(review.get("writing_input"),
+            "The file contains Word revision marks. The writing checks may omit text within those marks.")
     doc.meta = {"method": "python-docx", "paragraph_count": len(parts), "percentage_body_paragraphs": percentage_body_paragraphs,
                 "coverage_warning": ("Body paragraphs and tables were extracted in document order. Headers, footers, text boxes and "
                                      "embedded attachments were not checked; DOCX has no stable page numbers." + word_warning)}
@@ -870,12 +872,13 @@ def extract_eml(path: Path) -> Document:
     return document
 
 
-def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True) -> Document:
+def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True,
+            project_word_revisions: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
     elif ext == ".docx":
-        d = extract_docx(path)
+        d = extract_docx(path, project_word_revisions=project_word_revisions)
     elif ext == ".eml":
         d = extract_eml(path)
     else:

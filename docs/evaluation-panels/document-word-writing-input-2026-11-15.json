@@ -1,0 +1,92 @@
+{
+  "completed": 4,
+  "device": "mps",
+  "jobs_started_before_payment": 0,
+  "rows": {
+    "accepted": {
+      "decision": "inconclusive",
+      "historical_input_sha256": "63e8fadabb42b5e27d5260f9c7f02ffca932f4cfce1a3f20b55e25b124204c9a",
+      "input_sha256": "63e8fadabb42b5e27d5260f9c7f02ffca932f4cfce1a3f20b55e25b124204c9a",
+      "range": null,
+      "score_input_digest": "4286141bb3db217b8b89160ac960c0aab738dd14c463036af9c512dfd019d4d6",
+      "scored_windows": 24,
+      "signed_report_checked": false,
+      "source_sha256": "c6a004ee043aa452329cd67015f46c3523897067ae676b8b0e4665b7547b97ae",
+      "status": "no_tracked_text_changes",
+      "writing": {
+        "checks": {
+          "passage_classifier": "completed",
+          "writing_pattern_ratio": "completed"
+        },
+        "schema": "document-writing-check-coverage/1"
+      }
+    },
+    "deleted_only": {
+      "decision": "not_assessable",
+      "historical_input_sha256": "dabccb07dd0257a6670ea5345077d08b18f49297fd0f5989097b463b1aa4fb5f",
+      "input_sha256": "dabccb07dd0257a6670ea5345077d08b18f49297fd0f5989097b463b1aa4fb5f",
+      "range": null,
+      "score_input_digest": null,
+      "scored_windows": 0,
+      "signed_report_checked": false,
+      "source_sha256": "5de612b9b37a63843490e08f0049a92567cae96aba7c25900d5ca9c80cff3476",
+      "status": "accepted_inline_changes",
+      "writing": {
+        "checks": {
+          "passage_classifier": "not_applicable",
+          "writing_pattern_ratio": "not_applicable"
+        },
+        "reasons": {
+          "passage_classifier": "too_little_after_word_revisions",
+          "writing_pattern_ratio": "too_little_after_word_revisions"
+        },
+        "schema": "document-writing-check-coverage/2"
+      }
+    },
+    "inline": {
+      "decision": "inconclusive",
+      "historical_input_sha256": "522130e0be3cee4d288bb7dbd09cd206c4f2f2ad7ee145b9e9e9fd457d18fc68",
+      "input_sha256": "63e8fadabb42b5e27d5260f9c7f02ffca932f4cfce1a3f20b55e25b124204c9a",
+      "range": [
+        63,
+        178
+      ],
+      "score_input_digest": "4286141bb3db217b8b89160ac960c0aab738dd14c463036af9c512dfd019d4d6",
+      "scored_windows": 24,
+      "signed_report_checked": true,
+      "source_sha256": "8a938fdb967520af9644160ebdefca7f5d9859762e067983dcabf41e1a71b029",
+      "status": "accepted_inline_changes",
+      "writing": {
+        "checks": {
+          "passage_classifier": "completed",
+          "writing_pattern_ratio": "completed"
+        },
+        "schema": "document-writing-check-coverage/1"
+      }
+    },
+    "paragraph_mark": {
+      "decision": "not_assessable",
+      "historical_input_sha256": "522130e0be3cee4d288bb7dbd09cd206c4f2f2ad7ee145b9e9e9fd457d18fc68",
+      "input_sha256": "522130e0be3cee4d288bb7dbd09cd206c4f2f2ad7ee145b9e9e9fd457d18fc68",
+      "range": null,
+      "score_input_digest": null,
+      "scored_windows": 0,
+      "signed_report_checked": true,
+      "source_sha256": "3df61bae574f0cecd493436fd8cf60f0f8f500cce0433fcd8adfe7825b890577",
+      "status": "unsupported_tracked_changes",
+      "writing": {
+        "checks": {
+          "passage_classifier": "not_applicable",
+          "writing_pattern_ratio": "not_applicable"
+        },
+        "reasons": {
+          "passage_classifier": "unsupported_word_revisions",
+          "writing_pattern_ratio": "unsupported_word_revisions"
+        },
+        "schema": "document-writing-check-coverage/2"
+      }
+    }
+  },
+  "schema": "chipmunk.document-word-projection-app/1",
+  "simulated_price_usd_cents": 999
+}

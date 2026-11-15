@@ -7,10 +7,13 @@ from collections.abc import Iterator
 
 from app.detectors.text import extract
 from app.detectors.text.segment import Sentence
+from app.evidence import document_tracked_changes
 
 KEY = "writing_language_scope"
 ENGLISH = "english"
 TOO_LITTLE_AFTER_COVER = "too_little_after_cover"
+UNSUPPORTED_WORD_REVISIONS = "unsupported_word_revisions"
+TOO_LITTLE_AFTER_WORD_REVISIONS = "too_little_after_word_revisions"
 LIMITATION = "English writing could not be confirmed for statistical analysis"
 ASSESSMENT_SCOPE = "Writing-language coverage"
 MESSAGES = {
@@ -26,6 +29,11 @@ MESSAGES = {
     TOO_LITTLE_AFTER_COVER: ("Writing not assessed: too little remaining text",
                              "Too little text remained after pages with covered text were excluded. "
                              "Automated authorship checks were skipped."),
+    UNSUPPORTED_WORD_REVISIONS: (document_tracked_changes.UNSUPPORTED_HEADLINE,
+                                 document_tracked_changes.INPUT_NOTICES[document_tracked_changes.INPUT_UNSUPPORTED]),
+    TOO_LITTLE_AFTER_WORD_REVISIONS: ("Writing not assessed: too little text after Word revisions",
+                                      "Too little text remained after applying the supported Word revisions. "
+                                      "Automated writing checks were skipped."),
 }
 LANGUAGE_POINT = .99
 MIN_PASSAGE_LETTERS = 45

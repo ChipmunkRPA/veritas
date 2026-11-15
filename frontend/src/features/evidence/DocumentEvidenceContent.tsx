@@ -59,6 +59,8 @@ const writingCheckReasons: Record<WritingCheckReason, string> = {
   mixed_language: 'The extracted text contained English and another language.',
   language_unclear: 'The check could not establish the language of the extracted writing.',
   too_little_after_cover: 'Too little text remained after pages with covered text were excluded.',
+  unsupported_word_revisions: 'Some Word revisions could change which text is visible.',
+  too_little_after_word_revisions: 'Too little text remained after applying the supported Word revisions.',
   no_text: 'There was no extracted text for this check to read.',
 }
 
@@ -327,6 +329,8 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     {set.coverage?.email_classifier_input_scope && <EmailInputScope scope={set.coverage.email_classifier_input_scope} />}
     {tracked && <section aria-label="Word tracked text changes" className="mt-4 rounded-md border border-border p-4">
       <h3 className="m-0 text-body font-medium">Word tracked text changes</h3>
+      {tracked.writing_input === 'accepted_inline_changes' && <p className="mt-2 mb-0 text-small">Writing checks use the version with these inline insertions included and deletions excluded.</p>}
+      {tracked.writing_input === 'unsupported_tracked_changes' && <p className="mt-2 mb-0 text-small">Some Word revisions could change which text is visible. Automated writing checks were skipped.</p>}
       <p className="mt-2 mb-0 text-small">Checked {tracked.paragraphs} body paragraphs. Found {tracked.inserted} insertions and {tracked.deleted} deletions.</p>
       {!!tracked.unsupported_marks && <p className="mt-2 mb-0 text-small">{tracked.unsupported_marks} additional revision marks were outside scope.</p>}
       <p className="mt-2 mb-0 text-small text-text-muted">{tracked.scope} {tracked.limitation}</p>
@@ -336,6 +340,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
           <blockquote className="mt-2 mb-0 whitespace-pre-wrap break-words text-small">{row.text}
             {row.characters > Array.from(row.text).length && `… (${row.characters} source characters)`}</blockquote>
           <p className="mt-2 mb-0 text-caption text-text-muted">{tracked.part} · XML body index {row.body_index}, paragraph child index {row.inline_index} (zero-based).</p>
+          {row.writing_input_range && <p className="mt-2 mb-0 text-caption text-text-muted">Accepted paragraph characters [{row.writing_input_range[0]}, {row.writing_input_range[1]}).</p>}
         </li>)}
       </ol>}
       {!!tracked.omitted_excerpts && <p className="mt-2 mb-0 text-caption text-text-muted">{tracked.omitted_excerpts} further excerpts exceed the display limit.</p>}

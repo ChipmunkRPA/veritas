@@ -268,6 +268,8 @@ Samples [{{ window.start_sample }}, {{ window.end_sample }}) at 16000 Hz.
 {% if evidence.get('word_tracked_changes') %}
 {% set tracked = evidence.word_tracked_changes %}
 <h3>Word tracked text changes</h3>
+{% if tracked.get('writing_input') == 'accepted_inline_changes' %}<p>Writing checks use the version with these inline insertions included and deletions excluded.</p>{% endif %}
+{% if tracked.get('writing_input') == 'unsupported_tracked_changes' %}<p>Some Word revisions could change which text is visible. Automated writing checks were skipped.</p>{% endif %}
 <p class="caption">{{ tracked.scope }} {{ tracked.limitation }}</p>
 <p class="caption">Checked {{ tracked.paragraphs }} body paragraphs. Found {{ tracked.inserted }} insertions and {{ tracked.deleted }} deletions.
 {% if tracked.unsupported_marks %}{{ tracked.unsupported_marks }} additional revision marks were outside scope.{% endif %}
@@ -275,6 +277,7 @@ Samples [{{ window.start_sample }}, {{ window.end_sample }}) at 16000 Hz.
 {% for row in tracked.rows %}
 <p class="caption"><strong>{{ row.kind | capitalize }} · Body paragraph {{ row.paragraph }}</strong>.
 XML body index {{ row.body_index }}, paragraph child index {{ row.inline_index }} (zero-based).</p>
+{% if row.writing_input_range is defined %}<p class="caption">Accepted paragraph characters [{{ row.writing_input_range[0] }}, {{ row.writing_input_range[1] }}).</p>{% endif %}
 <blockquote>{{ row.text }}{% if row.characters > row.text | length %}… ({{ row.characters }} source characters){% endif %}</blockquote>
 {% endfor %}
 <p class="caption">Source part <span class="mono">{{ tracked.part }}</span>. JSON pointer <span class="mono">/coverage/word_tracked_changes</span>.</p>

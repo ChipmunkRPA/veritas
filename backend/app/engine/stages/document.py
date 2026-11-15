@@ -52,7 +52,7 @@ from app.evidence import (
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p35"
+PIPELINE_VERSION = "doc-2.0-p36"
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 BIBLIOGRAPHY_POLICY = "writing_bibliography_review_enabled"
 PRIMARY_DETECTORS = TEXT_PRIMARY_DETECTORS  # v0.3 used the fine-tune whenever it was installed
@@ -78,8 +78,10 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     path = common.media_path(ctx)
     prose_only = settings.environment == "dev" and settings.text_bibliography_scope_review
     doc, sents = decode_document(path, path.suffix, prose_only=prose_only) if prose_only else decode_document(path, path.suffix)
-    if doc.meta.get(document_pdf_visibility.KEY, {}).get("covered_locations"):
-        # Keep the PDF finding even when its excluded pages leave too little text to score.
+    word_input = (doc.word_review or {}).get("writing_input")
+    if (doc.meta.get(document_pdf_visibility.KEY, {}).get("covered_locations")
+            or word_input in (document_tracked_changes.INPUT_UNSUPPORTED, document_tracked_changes.INPUT_PROJECTED)):
+        # Retain source evidence even when little usable writing remains.
         words = sum(sentence.n_words for sentence in sents)
     else:
         words = check_document_length(doc, sents)
@@ -106,7 +108,7 @@ def current_decode_output(output: Any) -> bool:
     if output.get(BIBLIOGRAPHY_POLICY, False) is not (settings.environment == "dev" and settings.text_bibliography_scope_review):
         return False
     if (output["meta"].get("method") == "python-docx" and
-            (document_tracked_changes.KEY not in output
+            ((output.get(document_tracked_changes.KEY) or {}).get("schema") != document_tracked_changes.PROJECTION_SCHEMA
              or (output["meta"].get(document_word_visibility.KEY) or {}).get("schema") != document_word_visibility.SCHEMA)):
         return False
     if (output["meta"].get("method") == "pymupdf"
@@ -163,8 +165,15 @@ def detect(ctx: StageContext) -> dict[str, Any]:
         doc, sentences = document_input(ctx)
         ctx.check("before identifying writing language")
         covered = doc.meta.get(document_pdf_visibility.KEY, {}).get("covered_locations")
-        scope = (language_scope.TOO_LITTLE_AFTER_COVER if covered and decoded["words"] < MIN_WORDS else
-                 language_scope.classify(doc.text, sentences))
+        word_review = decoded.get(document_tracked_changes.KEY) or {}
+        if document_tracked_changes.unsupported(word_review):
+            scope = language_scope.UNSUPPORTED_WORD_REVISIONS
+        elif word_review.get("writing_input") == document_tracked_changes.INPUT_PROJECTED and decoded["words"] < MIN_WORDS:
+            scope = language_scope.TOO_LITTLE_AFTER_WORD_REVISIONS
+        elif covered and decoded["words"] < MIN_WORDS:
+            scope = language_scope.TOO_LITTLE_AFTER_COVER
+        else:
+            scope = language_scope.classify(doc.text, sentences)
         ctx.check("after identifying writing language")
     detected = common.run_detectors(ctx, (Modality.TEXT,),
                                     outputs=StageOutputs(document={**decoded, language_scope.KEY: scope}),
@@ -478,7 +487,9 @@ def unassessed_language_fusion(ctx: StageContext, doc: Document, sents: list[Sen
                    for row in common.LEGACY_ASSESSMENTS]
     profile = {**ctx.outputs["condition"]["profile"], "within_validated_envelope": False,
                "validation_support": "unsupported", "validation_measured_at": None}
-    limitation = reason if scope == language_scope.TOO_LITTLE_AFTER_COVER else language_scope.LIMITATION
+    limitation = (reason if scope in {language_scope.TOO_LITTLE_AFTER_COVER, language_scope.UNSUPPORTED_WORD_REVISIONS,
+                                    language_scope.TOO_LITTLE_AFTER_WORD_REVISIONS}
+                  else language_scope.LIMITATION)
     profile["limiting_conditions"] = [*profile.get("limiting_conditions", []), limitation]
     return {"decision": decision, "signals": [], "assessments": assessments, "caveats": [reason], "calibration": [],
             "condition_profile": profile, "fusion": {"mode": "fallback", "reason": reason},

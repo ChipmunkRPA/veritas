@@ -9,30 +9,45 @@ from app.evidence import audio_clean_speech
 RATE = audio_clean_speech.RATE
 SAMPLES = 12 * RATE
 WINDOWS = tuple(range(0, audio_clean_speech.SAMPLES + 1, 19200))
+DENSE_WINDOWS = tuple(range(0, audio_clean_speech.SAMPLES + 1, 6400))
 FFT, HOP = 2048, 1024
 BANDS = ((300, 850), (850, 1450), (1450, 2100), (2100, 2800), (2800, 3700))
 
 
-def _compare_windows(first, second):
+def measure_windows(first, second, starts):
     values = []
-    for start in WINDOWS:
+    for start in starts:
         end = start + audio_clean_speech.SAMPLES
         reason, result = audio_clean_speech.locate(first[start:end], second[start:end])
         if result:
             result = {**result, "samples": [x + start for x in result["samples"]]}
         values.append({"start": start, "reason": reason, "result": result})
+    return values
+
+
+def corroborate_windows(values, gap=19200):
+    hits = {row["start"]: row["result"] for row in values if row["result"] is not None}
+    witnessed = []
+    for start, a in hits.items():
+        b = hits.get(start + gap)
+        if b and abs(a["samples"][0] - b["samples"][0]) <= audio_clean_speech.RANGE_SAMPLES // 2:
+            strongest = a if a["relative_drop"] >= b["relative_drop"] else b
+            witnessed.append((min(a["relative_drop"], b["relative_drop"]), strongest, [start, start + gap]))
+    best = max(witnessed, key=lambda entry: (entry[0], -entry[1]["samples"][0]), default=None)
+    return None if best is None else best[1] | {"supporting_window_starts": best[2]}
+
+
+def _compare_windows(first, second):
+    values = measure_windows(first, second, WINDOWS)
     matched = [r["reason"] != "reference_match_not_supported" for r in values]
     admitted = sum(matched) >= 4 and matched[0] and matched[-1]
-    witnessed = []
-    if admitted:
-        for left, right in zip(values[:-1], values[1:], strict=True):
-            a, b = left["result"], right["result"]
-            if a and b and abs(a["samples"][0] - b["samples"][0]) <= audio_clean_speech.RANGE_SAMPLES // 2:
-                strongest = a if a["relative_drop"] >= b["relative_drop"] else b
-                witnessed.append((min(a["relative_drop"], b["relative_drop"]), strongest, [left["start"], right["start"]]))
-    best = max(witnessed, key=lambda entry: (entry[0], -entry[1]["samples"][0]), default=None)
-    return {"windows": values, "admitted": admitted,
-            "corroborated": None if best is None else best[1] | {"supporting_window_starts": best[2]}}
+    return {"windows": values, "admitted": admitted, "corroborated": corroborate_windows(values) if admitted else None}
+
+
+def denser_windows(earlier, submitted, original_reason):
+    if original_reason in {"reference_match_not_supported", "consistent_frequency_balance_change"}:
+        return []
+    return measure_windows(earlier, submitted, DENSE_WINDOWS)
 
 
 def _spectra(signal):

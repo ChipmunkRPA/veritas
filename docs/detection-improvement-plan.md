@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Stereo speech localization in three new rooms](audio-reference-fresh-room-validation-2026-11-15.md)
+  adds an optional local fallback with denser window starts. Correct ranges
+  rose from 26/48 to 28/48 for synthetic edits and from 13/24 to 14/24
+  for real splices. All 72 ordinary controls stayed clear. The original
+  and denser checks each flagged one of 24 wrong-background references.
+
 - [Short speech changes during loud room speech](audio-reference-spatial-schedule-2026-11-15.md)
   found three additional useful held ranges with denser starts and the
   original window separation, with the same control outcomes. Shorter

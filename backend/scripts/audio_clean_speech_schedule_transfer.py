@@ -36,33 +36,6 @@ METHOD = {
 }
 
 
-def shapes(reference, submitted, reason):
-    from app.evidence import audio_clean_speech as single
-
-    if reason in {"reference_match_not_supported", "consistent_frequency_balance_change"}:
-        return {}
-    output = {}
-    for start in STARTS:
-        stop = start + single.SAMPLES
-        _, signal = single.locate(reference[start:stop], submitted[start:stop])
-        if signal:
-            output[start] = signal | {"samples": [value + start for value in signal["samples"]]}
-    return output
-
-
-def paired(hits, gap):
-    choices = []
-    for start, left in hits.items():
-        right = hits.get(start + gap)
-        if right is None or abs(left["samples"][0] - right["samples"][0]) > WIDTH // 2:
-            continue
-        stronger = left if left["relative_drop"] >= right["relative_drop"] else right
-        weakest = min(left["relative_drop"], right["relative_drop"])
-        choices.append(((weakest, -stronger["samples"][0]), stronger["samples"], [start, start + gap]))
-    best = max(choices, key=lambda entry: entry[0], default=None)
-    return {"range": best[1], "windows": best[2]} if best else {"range": None, "windows": None}
-
-
 def geometry(truth, starts, separation):
     if not truth:
         return False
@@ -76,12 +49,28 @@ def geometry(truth, starts, separation):
     return False
 
 
+def measure(earlier, views, reference_measurement):
+    from app.evidence.audio_clean_speech_long import corroborate_windows, denser_windows
+
+    series = {
+        side: denser_windows(earlier, clip, reference_measurement["readings"][side]["reason"])
+        for side, clip in views.items()
+    }
+    report = {}
+    for arm, spacing in SEPARATIONS.items():
+        report[arm] = {}
+        for side, readings in series.items():
+            span = corroborate_windows(readings, spacing)
+            report[arm][side] = {"range": span["samples"], "windows": span["supporting_window_starts"]} if span else {
+                "range": None, "windows": None,
+            }
+    return report
+
+
 def capture(args):
     containers = defaultdict(list)
     for name, row, earlier, views in spatial.native_cases(args, spatial.input_panels()):
-        series = {side: shapes(earlier, clip, row["measurement"]["readings"][side]["reason"]) for side, clip in views.items()}
-        readings = {arm: {side: paired(hits, spacing) for side, hits in series.items()}
-                    for arm, spacing in SEPARATIONS.items()}
+        readings = measure(earlier, views, row["measurement"])
         containers[name].append({"group": row["group"], "kind": row["kind"], "views": readings})
         if len(containers[name]) % 11 == 0:
             print(f"{name}: measured {len(containers[name])} stereo pairs.", flush=True)

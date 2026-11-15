@@ -1,0 +1,153 @@
+{
+  "cases": {
+    "edited": {
+      "baseline_status": "unassessed",
+      "earlier_pcm_sha256": "abcc830a87b89eb6fdf29e50f1aa1d44d08d42efc2ea8973cf769021c8de39e7",
+      "pdf_sha256": "7e650af6f12409e4d6ff7bacb5562b993069ac979677567c426205414779e431",
+      "presentation": {
+        "decoded_samples": 192171,
+        "excluded_trailing_samples": 171,
+        "native_clock": {
+          "channels": 2,
+          "presentation_end_exclusive_pts": 576000,
+          "sample_rate": 48000,
+          "time_base": "1/48000"
+        },
+        "presentation_end_exclusive_pts": 192000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "source_replay": {
+        "excerpts_verified": 2,
+        "reason": "local_change",
+        "samples": [
+          116480,
+          128000
+        ],
+        "status": "localized_difference"
+      },
+      "stereo_support": {
+        "denser_window_starts": true,
+        "views": {
+          "downmix": {
+            "range": [
+              116480,
+              128000
+            ],
+            "reason": "local_change"
+          },
+          "left": {
+            "range": [
+              116480,
+              128000
+            ],
+            "reason": "local_change"
+          },
+          "right": {
+            "range": [
+              116480,
+              128000
+            ],
+            "reason": "local_change"
+          }
+        },
+        "witness_channels": [
+          "left"
+        ]
+      },
+      "submitted_m4a_sha256": "5008c1251c2cf657f038ee909aa5a1029e622414b7b9f3d0c3d7735d10172034"
+    },
+    "unrelated": {
+      "baseline_status": "unassessed",
+      "earlier_pcm_sha256": "797d585674ce545731bb78cbc190360839c22b18dbd674989b29cabb19e45af1",
+      "pdf_sha256": "92101970d17b7f38189f88f2589baa5a9931836d22f580b7de8fa22bacf494b5",
+      "presentation": {
+        "decoded_samples": 192171,
+        "excluded_trailing_samples": 171,
+        "native_clock": {
+          "channels": 2,
+          "presentation_end_exclusive_pts": 576000,
+          "sample_rate": 48000,
+          "time_base": "1/48000"
+        },
+        "presentation_end_exclusive_pts": 192000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "source_replay": {
+        "excerpts_verified": 0,
+        "reason": "no_corroborated_local_change",
+        "status": "no_local_difference"
+      },
+      "stereo_support": {
+        "views": {
+          "downmix": {
+            "range": null,
+            "reason": "no_corroborated_local_change"
+          },
+          "left": {
+            "range": null,
+            "reason": "no_corroborated_local_change"
+          },
+          "right": {
+            "range": null,
+            "reason": "local_support_not_available"
+          }
+        },
+        "witness_channels": []
+      },
+      "submitted_m4a_sha256": "80b48309067722ff1897500e95f99e7014e11c23a7afac17467cc55029707242"
+    },
+    "untouched": {
+      "baseline_status": "unassessed",
+      "earlier_pcm_sha256": "abcc830a87b89eb6fdf29e50f1aa1d44d08d42efc2ea8973cf769021c8de39e7",
+      "pdf_sha256": "e06bd1774d16f991a9058272583719bd4eff15c30aa09262487ddcd9697c88ee",
+      "presentation": {
+        "decoded_samples": 192171,
+        "excluded_trailing_samples": 171,
+        "native_clock": {
+          "channels": 2,
+          "presentation_end_exclusive_pts": 576000,
+          "sample_rate": 48000,
+          "time_base": "1/48000"
+        },
+        "presentation_end_exclusive_pts": 192000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "source_replay": {
+        "excerpts_verified": 0,
+        "reason": "no_corroborated_local_change",
+        "status": "no_local_difference"
+      },
+      "stereo_support": {
+        "views": {
+          "downmix": {
+            "range": null,
+            "reason": "no_corroborated_local_change"
+          },
+          "left": {
+            "range": null,
+            "reason": "no_corroborated_local_change"
+          },
+          "right": {
+            "range": null,
+            "reason": "no_corroborated_local_change"
+          }
+        },
+        "witness_channels": []
+      },
+      "submitted_m4a_sha256": "80b48309067722ff1897500e95f99e7014e11c23a7afac17467cc55029707242"
+    }
+  },
+  "jobs_before_payment": 0,
+  "paid_analyses": 2,
+  "saved_assessments_preserved": true,
+  "usd_cents": 999
+}

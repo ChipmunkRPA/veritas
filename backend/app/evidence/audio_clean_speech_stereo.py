@@ -65,14 +65,28 @@ def observe(earlier, views):
     return observations, readings, support
 
 
-def locate(earlier, downmix, stereo):
-    observations, readings, support = observe(earlier, {"downmix": downmix, "left": stereo[:, 0], "right": stereo[:, 1]})
+def locate(earlier, downmix, stereo, *, allow_denser_windows=False):
+    views = {"downmix": downmix, "left": stereo[:, 0], "right": stereo[:, 1]}
+    observations, readings, support = observe(earlier, views)
     choices = select(readings, support)
     witnesses = supporting_channels(readings, support, choices)
     proof = {"views": readings, "witness_channels": witnesses}
     reason, span, profile = observations["downmix"]
     if witnesses:
         return reason, span, profile, proof
+    if allow_denser_windows and reason not in {"reference_match_not_supported", "consistent_frequency_balance_change"}:
+        from app.evidence.audio_clean_speech_long import corroborate_windows, denser_windows
+
+        candidates = {name: corroborate_windows(denser_windows(earlier, pcm, readings[name]["reason"]))
+                      for name, pcm in views.items()}
+        dense = {name: {"range": candidate["samples"] if candidate else None,
+                        "reason": "local_change" if candidate else readings[name]["reason"]}
+                 for name, candidate in candidates.items()}
+        witnesses = supporting_channels(dense, support, select(dense, support))
+        if witnesses:
+            return "local_change", candidates["downmix"], None, {
+                "views": dense, "witness_channels": witnesses, "denser_window_starts": True,
+            }
     if any(view["range"] for view in readings.values()):
         return "stereo_range_not_corroborated", None, None, proof
     return reason, None, profile, proof

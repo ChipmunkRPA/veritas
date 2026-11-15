@@ -21,9 +21,9 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_LONG_CLEAN_SPEECH,
     SCHEMA_WITH_MATCHING_WAVEFORM,
     SCHEMA_WITH_STEREO,
-    SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH,
     SCHEMA_WITH_TRIM_ALIGNMENT,
     SCHEMA_WITH_TRIM_AND_LEVEL,
+    STEREO_AAC_SPEECH_SCHEMAS,
 )
 from app.evidence.audio_reference import SCHEMA as AUDIO_SCHEMA
 from app.evidence.video_reference import SCHEMA_WITH_TRIM_REENCODE
@@ -151,7 +151,7 @@ def _audio_summary(document, record):
         _text(page, MARGIN, y + 20, f"SHA-256 {record[side]['sha256']}", size=9, font="cour", color=MUTED)
     if record["status"] != "measured":
         separate = record["schema"] in {SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH, SCHEMA_WITH_AAC_TIMING,
-                                        SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH,
+                                        *STEREO_AAC_SPEECH_SCHEMAS,
                                         SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM}
         title = "Decoded sample comparison unavailable" if separate else "Comparison unassessed"
         _text(page, MARGIN, 346, title, size=16, font="hebo")
@@ -162,7 +162,7 @@ def _audio_summary(document, record):
             _text(page, MARGIN, 397, "The aligned speech result appears on a separate page.", size=10, color=MUTED)
         elif record["schema"] == SCHEMA_WITH_AAC_TIMING:
             _text(page, MARGIN, 397, "The local timing result appears on a separate page.", size=10, color=MUTED)
-        elif record["schema"] in {SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH, SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH}:
+        elif record["schema"] in {SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH, *STEREO_AAC_SPEECH_SCHEMAS}:
             _text(page, MARGIN, 397, "The local speech result appears on a separate page.", size=10, color=MUTED)
         return
     _text(page, MARGIN, 346, "Decoded sample comparison", size=16, font="hebo")
@@ -450,12 +450,16 @@ def _clean_speech_page(document, result):
     rate = result["sample_rate"]
     _text(page, MARGIN, 253 + offset, f"Selected interval  {first / rate:.3f} to {end / rate:.3f} s", font="hebo")
     _text(page, MARGIN, 274 + offset, f"{len(span['bands'])} frequency bands had matching sound on both sides.", size=10, color=MUTED)
+    stereo = result.get("stereo_support")
     if "supporting_window_starts" in span:
         first_window, last_window = (x / rate for x in span["supporting_window_starts"])
-        _text(page, MARGIN, 291 + offset, f"Two six-second checks starting at {first_window:.3f} s and {last_window:.3f} s agreed.", size=9, color=MUTED)
+        starts = f"{first_window:.3f} s and {last_window:.3f} s"
+        witness_text = (f"The denser scan found agreement at window starts of {starts}."
+                        if stereo and stereo.get("denser_window_starts")
+                        else f"Two six-second checks starting at {starts} agreed.")
+        _text(page, MARGIN, 291 + offset, witness_text, size=9, color=MUTED)
     if "basis" in result:
         _text(page, MARGIN, 291 + offset, f"Drop in signed matching-sound gain  {span['relative_drop']:.3f}", size=9, color=MUTED)
-    stereo = result.get("stereo_support")
     if stereo:
         for index, side in enumerate(stereo["witness_channels"]):
             start, stop = stereo["views"][side]["range"]
@@ -653,7 +657,7 @@ def render(record, assets):
                                         SCHEMA_WITH_TRIM_AND_LEVEL, SCHEMA_WITH_STEREO, SCHEMA_WITH_LOCAL_TIMING,
                                         SCHEMA_WITH_CHANNEL_TIMING, SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH,
                                         SCHEMA_WITH_AAC_TIMING, SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH,
-                                        SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH,
+                                        *STEREO_AAC_SPEECH_SCHEMAS,
                                         SCHEMA_WITH_DENSE_CLEAN_SPEECH,
                                         SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD, SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
                                         SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM)

@@ -189,6 +189,7 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         use_clean_speech_eq_guard=settings.audio_reference_clean_speech_eq_guard,
                         include_clean_speech_aac=settings.audio_reference_clean_speech_aac,
                         include_clean_speech_stereo_aac=settings.audio_reference_clean_speech_stereo_aac,
+                        allow_denser_stereo_windows=settings.audio_reference_stereo_denser_windows,
                         include_aligned_speech=settings.audio_reference_clean_speech and earlier_has_clean_speech
                         and settings.audio_reference_aligned_speech,
                         include_matching_waveform=settings.audio_reference_clean_speech and earlier_has_clean_speech

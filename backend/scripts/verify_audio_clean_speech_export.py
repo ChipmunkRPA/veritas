@@ -24,9 +24,10 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD,
     SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
+    SCHEMA_WITH_DENSER_STEREO_AAC,
     SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH,
     SCHEMA_WITH_MATCHING_WAVEFORM,
-    SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH,
+    STEREO_AAC_SPEECH_SCHEMAS,
 )
 from scripts.verify_audio_local_timing_export import _decode
 from scripts.verify_stereo_reference import (
@@ -68,7 +69,7 @@ def verify_export(earlier, submitted, export):
     schema = record["schema"]
     if schema in {SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM}:
         schema = record["comparison_schema"]
-    stereo_aac = schema == SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH
+    stereo_aac = schema in STEREO_AAC_SPEECH_SCHEMAS
     long_aac = stereo_aac or schema == SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH
     long = schema == LONG_SCHEMA or long_aac
     dense = schema == SCHEMA_WITH_DENSE_CLEAN_SPEECH
@@ -98,7 +99,8 @@ def verify_export(earlier, submitted, export):
     if long:
         if stereo_aac:
             stereo = _decode_stereo(submitted, proof["decoded_samples"])[:sample_count]
-            reason, measured, profile, stereo_support = audio_clean_speech_stereo.locate(*samples, stereo)
+            reason, measured, profile, stereo_support = audio_clean_speech_stereo.locate(
+                *samples, stereo, allow_denser_windows=schema == SCHEMA_WITH_DENSER_STEREO_AAC)
             require(result.get("stereo_support") == stereo_support, "Stereo support differs")
         else:
             reason, measured, profile = audio_clean_speech_long.locate(*samples)

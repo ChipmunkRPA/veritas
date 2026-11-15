@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [fresh room and microphone replay](audio-reference-fresh-room-validation-2026-11-15.md#replay)
+recounts 264 earlier-copy comparisons using three new recorded backgrounds.
+Review both denser window rules and the current stereo comparison from
+numeric evidence. A separate native command can rebuild the deliveries
+from bounded publisher excerpts and the pinned foregrounds.
+
 The [stereo background and window replay](audio-reference-spatial-schedule-2026-11-15.md#replay)
 recounts 264 earlier-copy comparisons. It measures the benefit and
 control errors of a projected stereo mix and two denser window

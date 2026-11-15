@@ -60,7 +60,54 @@ def stereo_cases(args):
         }
 
 
+def denser_stereo_cases(args):
+    import numpy as np
+
+    from scripts import audio_clean_speech_schedule_fresh_rooms as fresh
+
+    receipt = fresh.schedule.spatial.load(args.receipt)
+    assert fresh.review(receipt) == receipt["results"]
+    room, plan = fresh.room, receipt["plan"]
+    sources = {row["group"]: row for row in plan["rows"]}
+    rows = {(row["group"], row["kind"]): row for row in receipt["samples"]}
+    arm = "dense_same_gap"
+    for (group, kind), row in rows.items():
+        measurement = row["measurement"]
+        if (room.category(kind) == "synthetic_edit" and not room.downmix_with_channel_support(measurement)
+                and room.old.location(fresh.schedule.arm_result(row, row, arm), sources[group]["truth"][kind])
+                and not room.downmix_with_channel_support(rows[group, "background_reference"]["measurement"])):
+            break
+    else:
+        raise ValueError("The fresh ledger has no recovered synthetic case with a clean background control")
+    source = sources[group]
+    meeting = source["meeting"]
+    raw = [fresh.fetch_range(meeting, mic, 44 + 2 * source["start"], 2 * fresh.SAMPLES) for mic in fresh.MICS]
+    assert dict(zip(fresh.MICS, map(sha, raw), strict=True)) == receipt["rooms_pcm_sha256"][str(group)]
+    tracks = [np.frombuffer(channel, dtype="<i2") for channel in raw]
+    pairs = room.materialize(source | {"start": 0}, {meeting: tracks}, room.dry_icsi_inputs(args.icsi))
+    for role, case in (("edited", kind), ("untouched", "untouched"), ("unrelated", "background_reference")):
+        reference, mixture = pairs[case]
+        row = rows[group, case]
+        assert sha(reference) == row["reference"] and sha(mixture) == row["submitted"]
+        measured = row["measurement"]
+        prior = room.downmix_with_channel_support(measured)
+        views = measured["readings"] if prior else row["views"][arm]
+        channels = room.channel_check.supporting_channels(
+            views, measured["support"], room.channel_check.select(views, measured["support"]))
+        nearby = measured["readings"]
+        reason = ("local_change" if channels else "stereo_range_not_corroborated"
+                  if any(item["range"] for item in nearby.values()) else nearby["downmix"]["reason"])
+        yield role, reference, mixture, row["clock"]["encoded_sha256"], {
+            **row["clock"], "reason": reason, "range": views["downmix"]["range"] if channels else None,
+            "witness_channels": channels, "denser_window_starts": bool(channels and not prior),
+            "prior_has_range": bool(prior),
+        }
+
+
 def cases(args):
+    if args.denser_stereo:
+        yield from denser_stereo_cases(args)
+        return
     if args.rooms:
         yield from stereo_cases(args)
         return
@@ -116,6 +163,7 @@ def run(args):
     from app.core.config import settings
     from app.evidence.audio_reference import (
         SCHEMA_WITH_AAC_CLEAN_SPEECH,
+        SCHEMA_WITH_DENSER_STEREO_AAC,
         SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH,
         SCHEMA_WITH_MATCHING_WAVEFORM,
         SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH,
@@ -128,8 +176,8 @@ def run(args):
 
     carrier = args.carrier
     seconds = 12 if args.long else 6
-    stereo_room = args.rooms is not None
-    schema = (SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH if stereo_room else
+    stereo_room = args.rooms is not None or args.denser_stereo
+    schema = (SCHEMA_WITH_DENSER_STEREO_AAC if args.denser_stereo else SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH if stereo_room else
               SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH if args.long else SCHEMA_WITH_AAC_CLEAN_SPEECH)
     torch.set_num_threads(2)
     torch.set_num_interop_threads(1)
@@ -181,6 +229,12 @@ def run(args):
             available = body(client.get(endpoint))
             assert available["clean_speech_aac_available"] is True
             assert bool(available.get("clean_speech_stereo_aac_available")) is stereo_room
+            settings.audio_reference_stereo_denser_windows = False
+            if args.denser_stereo:
+                previous = body(client.post(endpoint, data=form, files=files))["comparison"]
+                assert previous["comparison_schema"] == SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH
+                assert ("range" in previous["clean_speech"]) is measured["prior_has_range"]
+                settings.audio_reference_stereo_denser_windows = True
             result = body(client.post(endpoint, data=form, files=files))
             comparison = result["comparison"]
             check = comparison["clean_speech"]
@@ -197,6 +251,8 @@ def run(args):
             assert check.get("range", {}).get("samples") == span and check["affects_overall_confidence"] is False
             if stereo_room:
                 assert check["stereo_support"]["witness_channels"] == measured["witness_channels"]
+            if args.denser_stereo:
+                assert bool(check["stereo_support"].get("denser_window_starts")) is measured["denser_window_starts"]
             exported = args.output / f"{role}.json"
             exported.write_text(json.dumps({name: result[name] for name in ("comparison", "assets")}))
             # The base64 waveform may contain coincidental substrings of model names.
@@ -211,6 +267,9 @@ def run(args):
                 words = " ".join(page.get_text().split())
                 scan(words)
                 assert f"AAC duration {seconds}.000 s" in words and check["summary"] in words
+                if args.denser_stereo:
+                    assert "changes near either end can be missed" in words
+                    assert ("The denser scan found agreement" in words) is measured["denser_window_starts"]
                 if carrier in CARRIERS48:
                     channels = CARRIERS48[carrier][1]
                     assert f"48 kHz {'stereo' if channels == 2 else 'mono'} source" in words
@@ -236,15 +295,20 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
     parser.add_argument("--receipt", type=Path, required=True)
-    parser.add_argument("--sources", type=Path, required=True)
+    parser.add_argument("--sources", type=Path)
     parser.add_argument("--carrier", choices=("aac32", *CARRIERS48), default="aac32")
     parser.add_argument("--long", action="store_true")
     parser.add_argument("--bank", choices=("ami", "icsi"), default="ami")
     parser.add_argument("--rooms", type=Path, help="Held stereo AMI microphone files")
     parser.add_argument("--icsi", type=Path, help="Dry ICSI sources for held stereo replay")
+    parser.add_argument("--denser-stereo", action="store_true", help="Replay the denser fallback on fresh room excerpts.")
     args = parser.parse_args()
-    if args.rooms and not (args.long and args.carrier == "aac48_stereo" and args.icsi):
-        parser.error("The held stereo replay requires --long, --carrier aac48_stereo and --icsi.")
-    if args.long and not args.rooms and args.carrier != "aac48_mono":
+    if args.denser_stereo and args.rooms:
+        parser.error("The denser-stereo replay uses only source excerpts from the fresh ledger.")
+    if not args.denser_stereo and not args.sources:
+        parser.error("Specify --sources for the selected source bank.")
+    if (args.rooms or args.denser_stereo) and not (args.long and args.carrier == "aac48_stereo" and args.icsi):
+        parser.error("The stereo replay requires --long, --carrier aac48_stereo and --icsi.")
+    if args.long and not (args.rooms or args.denser_stereo) and args.carrier != "aac48_mono":
         parser.error("The twelve-second replay requires a 48 kHz mono carrier.")
     run(args)

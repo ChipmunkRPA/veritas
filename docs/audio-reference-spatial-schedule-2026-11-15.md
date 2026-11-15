@@ -63,10 +63,10 @@ Keep the dense 1.2 s schedule as the candidate for a fresh room and
 microphone comparison. It recovered three held locations without
 additional control flags. Test the shorter spacing separately because
 it recovered three more locations in the first panel and added one
-wrong-reference alert. Both remain research checks. The comparison
+wrong-reference alert. The [fresh room and microphone study](audio-reference-fresh-room-validation-2026-11-15.md)
+reports the follow-up and local fallback. The comparison
 requires a matching earlier recording and cannot attribute a change
-to AI. Customer-facing confidence and the current detector remain as
-previously released.
+to AI. It contributes zero weight to the overall AI confidence.
 
 ## Replay
 

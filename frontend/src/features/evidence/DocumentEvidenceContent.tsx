@@ -9,6 +9,23 @@ import DocumentRepeatedPassages from './DocumentRepeatedPassages'
 import DocumentUnselectedResponses from './DocumentUnselectedResponses'
 import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentOriginalTextLocation, type DocumentPassagePosition, type EmailBodyAlternatives, type EmailClassifierInputScope, type WritingCheckReason } from './multimediaPackets'
 
+function BibliographyCoverage({ review }: { review: NonNullable<NonNullable<DocumentEvidenceSet['coverage']>['writing_bibliography']> }) {
+  const { first_location: first, last_location: last } = review
+  let location: string | undefined
+  if (first.kind === 'pdf' && last.kind === 'pdf') {
+    location = first.page === last.page ? `PDF page ${first.page}` : `PDF pages ${first.page}–${last.page}`
+  } else if (first.kind === 'docx' && last.kind === 'docx') {
+    location = `Word body blocks ${first.body_index + 1}–${last.body_index + 1}`
+  } else if (first.kind === 'text' && last.kind === 'text') {
+    location = `Source characters ${first.start + 1}–${last.end}`
+  }
+  return <section className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
+    <h3 className="m-0 text-body font-medium text-text">Excluded references</h3>
+    <p className="mt-2 mb-0">The writing input excluded a terminal reference list with {review.entry_count} citation entries.
+      {location && ` ${location}.`} Citation accuracy was not assessed.</p>
+  </section>
+}
+
 const originalLocationLabels: Record<DocumentOriginalTextLocation['coordinate'], string> = {
   decoded_text: 'Original decoded text characters',
   word_paragraph: 'Original Word paragraph characters',
@@ -402,6 +419,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
       </ul>
     </section>}
     <DocumentInspectionMap packets={set.packets} selectedId={selectedId} onSelect={selectPassage} />
+    {set.coverage?.writing_bibliography && <BibliographyCoverage review={set.coverage.writing_bibliography} />}
     <DocumentPassageCoverage coverage={set.coverage?.local_passage_coverage} />
     <DocumentUnselectedResponses responses={set.coverage?.unselected_passage_responses} />
     {set.coverage?.passage_position_review && <PassagePosition review={set.coverage.passage_position_review} />}

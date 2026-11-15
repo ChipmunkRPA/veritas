@@ -41,6 +41,7 @@ from app.engine.registry import TEXT_FINETUNE_DETECTOR, TEXT_PRIMARY_DETECTORS
 from app.engine.runner import StageContext
 from app.engine.stages import common, document_screening
 from app.evidence import (
+    document_bibliography,
     document_check_coverage,
     document_invisible_characters,
     document_pdf_visibility,
@@ -52,6 +53,7 @@ from app.schemas.legacy import FALLBACK_CAVEAT
 
 PIPELINE_VERSION = "doc-2.0-p35"
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
+BIBLIOGRAPHY_POLICY = "writing_bibliography_review_enabled"
 PRIMARY_DETECTORS = TEXT_PRIMARY_DETECTORS  # v0.3 used the fine-tune whenever it was installed
 SECONDARY_DETECTOR = "txt.hf.hello_simpleai"
 BINOCULARS_DETECTOR = "txt.binoculars"
@@ -73,7 +75,8 @@ SPANS_CAPTION = ("Per-sentence p(AI) from the legacy fuser after contextual smoo
 
 def decode(ctx: StageContext) -> dict[str, Any]:
     path = common.media_path(ctx)
-    doc, sents = decode_document(path, path.suffix)
+    prose_only = settings.environment == "dev" and settings.text_bibliography_scope_review
+    doc, sents = decode_document(path, path.suffix, prose_only=prose_only) if prose_only else decode_document(path, path.suffix)
     if doc.meta.get(document_pdf_visibility.KEY, {}).get("covered_locations"):
         # Keep the PDF finding even when its excluded pages leave too little text to score.
         words = sum(sentence.n_words for sentence in sents)
@@ -91,12 +94,15 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     return {"text": doc.text, "paragraphs": [[int(a), int(b)] for a, b in doc.paragraphs], "meta": common.json_safe(doc.meta),
             "sentences": [dataclasses.asdict(s) for s in sents], "words": words, "source_map": doc.source_map,
             "artefacts": artifacts,
+            **({BIBLIOGRAPHY_POLICY: True} if prose_only else {}),
             **({document_tracked_changes.KEY: doc.word_review} if doc.word_review is not None else {})}
 
 
 def current_decode_output(output: Any) -> bool:
     """Reuse extraction only when its source coverage is current."""
     if not isinstance(output, dict) or output.get("meta", {}).get("extraction_version") != EXTRACTION_VERSION:
+        return False
+    if output.get(BIBLIOGRAPHY_POLICY, False) is not (settings.environment == "dev" and settings.text_bibliography_scope_review):
         return False
     if (output["meta"].get("method") == "python-docx" and
             (document_tracked_changes.KEY not in output
@@ -281,6 +287,7 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
     replacement = visibility.get("replacement_differences", [])
     covered = visibility.get("covered_locations", [])
     word_hidden = doc.meta.get(document_word_visibility.KEY, {}).get("hidden_runs", 0)
+    bibliography = doc.meta.get(document_bibliography.KEY)
     visibility_incomplete = (visibility.get("schema") in (document_pdf_visibility.FULL_PAGE_SCHEMA,
                              document_pdf_visibility.REPLACEMENT_SCHEMA, document_pdf_visibility.SCHEMA)
                              and len(visibility["examined_pages"]) < visibility["total_pages"])
@@ -289,7 +296,7 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
     covered_incomplete = ("covered_examined_pages" in visibility
                           and len(visibility["covered_examined_pages"]) < visibility["total_pages"])
     if not any((unchecked, partial_notice, hybrid_notice, invisible, replacement, covered, visibility_incomplete,
-                replacement_incomplete, covered_incomplete, word_hidden)):
+                replacement_incomplete, covered_incomplete, word_hidden, bibliography)):
         return output
     notices = []
     if unchecked:
@@ -300,6 +307,9 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
         notices.append("The recorded scores and excerpts apply only to extracted text.")
     if hybrid_notice:
         notices.append(hybrid_notice)
+    body_notice = document_bibliography.notice(bibliography) if bibliography else None
+    if body_notice:
+        notices.append(body_notice)
     visibility_notices = []
     if invisible:
         pages = ", ".join(str(row["page"]) for row in invisible)
@@ -341,6 +351,8 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
         headline = "Partially assessed: some document text remains unchecked"
     elif unchecked:
         headline = "Partially assessed: some document pages remain unchecked"
+    elif bibliography and not hybrid_notice:
+        headline = document_bibliography.HEADLINE
     else:
         headline = "Mixed PDF text available for inspection"
     before = output["decision"]
@@ -350,14 +362,14 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
         "band": "uncertain", "confidence": "low", "driving_hypothesis": None, "provenance_record": None,
         "statistical_alone": None, "statistical_estimate_before_provenance": None, "contributions": []}).model_dump(mode="json")
     output = {**output, "decision": decision, "caveats": [*output.get("caveats", []), scope]}
-    if partial_notice or hybrid_notice or visibility_notices:
+    if partial_notice or hybrid_notice or visibility_notices or body_notice:
         profile = output.get("condition_profile")
         if profile is not None:
             output["condition_profile"] = {
                 **profile, "within_validated_envelope": False, "validation_support": "unsupported",
                 "validation_measured_at": None,
                 "limiting_conditions": [*profile.get("limiting_conditions", []),
-                                        *filter(None, (partial_notice, hybrid_notice)), *visibility_notices],
+                                        *filter(None, (partial_notice, hybrid_notice, body_notice)), *visibility_notices],
             }
         # Keep exact raw passage inputs and responses. Whole-document calibration
         # must also be withheld on individual aggregate writing checks.

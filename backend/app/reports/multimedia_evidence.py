@@ -529,6 +529,7 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
 def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.text.extract import text_hash
     from app.evidence import (
+        document_bibliography,
         document_check_coverage,
         document_email_contexts,
         document_invisible_characters,
@@ -576,6 +577,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         verify_repeated_passages(document, text, mapping)
         document_percentage_consistency.verify_source(document, text, mapping, decoded.get("sentences", ()), meta=decoded["meta"])
         document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
+        document_bibliography.verify_source(document, decoded["meta"])
         document_word_visibility.verify_source(document, decoded["meta"].get(document_word_visibility.KEY), frozen=True)
         document_invisible_characters.verify_source(document, text, mapping, decoded["meta"])
         document_native_locations.validate(document)
@@ -787,7 +789,12 @@ def _invisible_characters_view(coverage: dict) -> dict | None:
 
 
 def _document_coverage_details(coverage: dict) -> list[str]:
-    from app.evidence import document_check_coverage, document_pdf_visibility, document_word_visibility
+    from app.evidence import (
+        document_bibliography,
+        document_check_coverage,
+        document_pdf_visibility,
+        document_word_visibility,
+    )
 
     notes = [
         f"{check['signal_ref'].get('display_id') or 'Recorded check'}: {check['scored_windows']} local context(s) retained. "
@@ -801,6 +808,9 @@ def _document_coverage_details(coverage: dict) -> list[str]:
         if key in checks:
             reason = f" {document_check_coverage.REASONS[reasons[key]][1]}" if key in reasons else ""
             notes.append(f"{title}. {document_check_coverage.LABELS[checks[key]]}.{reason}")
+    if bibliography := coverage.get(document_bibliography.KEY):
+        notes.append(f"{document_bibliography.notice(bibliography)} Location in original: "
+                     f"{document_bibliography.location_label(bibliography)}. Citation accuracy was not assessed.")
     if review := coverage.get("matched_context_review"):
         notes.append(f"Short-passage review selected {review['selected_sentences']} of {review['eligible_sentences']} "
                      "eligible sentences. This evidence has zero weight in the overall assessment.")

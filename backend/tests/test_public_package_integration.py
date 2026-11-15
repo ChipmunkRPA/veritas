@@ -524,6 +524,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.document_invisible_characters',
                         'app.evidence.document_passage_position', 'app.evidence.document_long_passage_position',
                         'app.evidence.document_tracked_changes', 'app.evidence.document_pdf_visibility', 'app.evidence.document_word_visibility',
+                        'app.evidence.document_bibliography',
                         'app.evidence.document_percentage_consistency',
                         'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.av_lag_support',
                         'app.evidence.audio_background_binding', 'app.evidence.audio_bandwidth_binding', 'app.evidence.audio_silence_binding',
@@ -589,7 +590,7 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
         assert "2 unannotated crops matched" in verify_image_source.check(archive, bundle, original)
 
 
-@pytest.mark.parametrize('name', ['face_interval_binding.py', 'face_short_window_binding.py', 'face_short_carrier_binding.py', 'sound_event_binding.py', 'document_scope.py', 'audio_tonal_phase_binding.py',
+@pytest.mark.parametrize('name', ['face_interval_binding.py', 'face_short_window_binding.py', 'face_short_carrier_binding.py', 'sound_event_binding.py', 'document_scope.py', 'audio_tonal_phase_binding.py', 'document_bibliography.py',
                                  'image_copy_similarity_binding.py', 'image_copy_affine_binding.py',
                                  'image_editor_preview_binding.py', 'image_transparency_binding.py', 'image_animation_binding.py',
                                  'stereo_binding.py', 'stereo_collapse_binding.py', 'scene_return_binding.py'])

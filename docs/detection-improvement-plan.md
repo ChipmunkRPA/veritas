@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Terminal reference-list scope for writing](writing-bibliography-scope-2026-11-14.md)
+  preserved the exact body and source mapping on all 36 held TXT, DOCX and
+  PDF layouts. Five local worker comparisons removed 22 reference-list
+  highlights and still highlighted both known rewrites at their exact spans.
+
 - [Earlier-copy evidence for lossy WebP](image-reference-lossy-webp-2026-11-14.md)
   located 135 of 144 held edits with no highlights on 216 unchanged
   or recompression-only deliveries. The local comparison exposes original

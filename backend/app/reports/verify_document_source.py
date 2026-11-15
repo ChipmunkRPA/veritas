@@ -15,6 +15,7 @@ from PIL import Image
 from app.core.canonical import canonical_hash
 from app.detectors.text.extract import extract, text_hash
 from app.evidence import (
+    document_bibliography,
     document_context,
     document_email_contexts,
     document_invisible_characters,
@@ -119,6 +120,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if (extension == ".eml" and doc.meta["email"]["body_content_type"] != "text/plain"
             and not document_scope.mapped_email_html(doc.meta["email"]) and not unassigned_email_roles):
         raise ValueError("Original-document replay requires a plain-text or source-mapped HTML EML body.")
+    if document_bibliography.KEY in coverage:
+        doc = document_bibliography.body_view(doc)
+    document_bibliography.verify_source(evidence, doc.meta)
     text, mapping = doc.text, doc.source_map
     if (doc.meta["original_sha256"] != source["sha256"] or len(text) != source["chars"]
             or doc.meta.get("method") != source["method"] or text_hash(text) != source["extracted_text_sha256"]

@@ -24,6 +24,7 @@ from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
 from app.evidence import (
+    document_bibliography,
     document_check_coverage,
     document_email_contexts,
     document_invisible_characters,
@@ -336,6 +337,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_repeat.validate(document)
         document_percentage_consistency.validate(document)
         document_pdf_visibility.validate(document)
+        document_bibliography.validate(document)
         document_word_visibility.validate(document, document["source"].get(document_word_visibility.COMMITMENT))
         document_invisible_characters.validate(document, document["source"].get(document_invisible_characters.COMMITMENT))
         document_matched_context.validate(document)
@@ -524,6 +526,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["source"][document_check_coverage.COMMITMENT] = document_check_coverage.commitment(writing_checks)
     if visibility := decoded["meta"].get(document_pdf_visibility.KEY):
         document["coverage"][document_pdf_visibility.KEY] = visibility
+    if bibliography := decoded["meta"].get(document_bibliography.KEY):
+        document["coverage"][document_bibliography.KEY] = bibliography
     if word_visibility := document_word_visibility.from_result(result):
         document["source"][document_word_visibility.COMMITMENT] = word_visibility
         document["coverage"][document_word_visibility.KEY] = decoded["meta"].get(document_word_visibility.KEY)
@@ -722,6 +726,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()),
                                                           meta=decoded["meta"])
             document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
+            document_bibliography.verify_source(document, decoded["meta"])
             document_matched_context.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_paragraph_priority.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_scope.validate_card_selection(document, decoded["source_map"])

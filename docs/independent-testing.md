@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [reference-list scope replay](writing-bibliography-scope-2026-11-14.md#replay)
+compares held TXT, Word and PDF layouts from separate source articles. It
+checks exact body text and source coordinates and preserves layouts with
+appendices or ambiguous entries.
+
 The [lossy WebP earlier-copy replay](image-reference-lossy-webp-2026-11-14.md#local-replay)
 checks source-linked brightness differences across three previously untested
 WebP encoding settings. It includes untouched, recompressed, translated and

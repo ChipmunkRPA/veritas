@@ -571,12 +571,16 @@ def prepare_document(path: Path, ext: str) -> Document:
     return doc
 
 
-def decode_document(path: Path, ext: str) -> tuple[Document, list[Sentence]]:
+def decode_document(path: Path, ext: str, *, prose_only: bool = False) -> tuple[Document, list[Sentence]]:
     """One document of a request, read and segmented: both in child processes that are killed, within
     `document_decode_timeout_s` together. The order is read, `check_document_size`, segment: a document over the size
     limit is never segmented."""
     started = time.monotonic()
     doc = prepare_document(path, ext)
+    if prose_only:
+        from app.evidence.document_bibliography import body_view
+
+        doc = body_view(doc)
     return doc, segment_within(doc, started)
 
 

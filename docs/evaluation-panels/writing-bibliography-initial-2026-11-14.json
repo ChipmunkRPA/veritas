@@ -1,0 +1,4508 @@
+{
+  "design": {
+    "matched_controls": "Render text, Word and native PDF without dropping source characters. Test actual references, an ordinary appendix after references, too few entries, a heading followed by prose and a mixed list.",
+    "sources": "Four dated article sources per publisher from the retained JATS archives. Pin article bytes and DOI. Use their initial body paragraphs and six of their labeled bibliography records, rendered from the same JATS fields.",
+    "utility": "The entire qualified reference section should be excluded in the bibliography case only. On those cases, the retained normalized text and all source-map offsets must equal the body control."
+  },
+  "results": {
+    "docx/bibliography": {
+      "body_matches": 10,
+      "cases": 12,
+      "excluded": 10,
+      "original_preserved": 2
+    },
+    "docx/body": {
+      "body_matches": 12,
+      "cases": 12,
+      "excluded": 0,
+      "original_preserved": 12
+    },
+    "docx/followed_by_prose": {
+      "body_matches": 0,
+      "cases": 12,
+      "excluded": 0,
+      "original_preserved": 12
+    },
+    "docx/heading_with_prose": {
+      "body_matches": 0,
+      "cases": 12,
+      "excluded": 0,
+      "original_preserved": 12
+    },
+    "docx/one_nonentry": {
+      "body_matches": 0,
+      "cases": 12,
+      "excluded": 0,
+      "original_preserved": 12
+    },
+    "docx/underfilled": {
+      "body_matches": 0,
+      "cases": 12,
+      "excluded": 0,
+      "original_preserved": 12
+    },
+    "pdf/bibliography": {
+      "body_matches": 10,
+      "cases": 12,
+      "excluded": 10,
+      "original_preserved": 2
+    },
+    "pdf/body": {
+      "body_matches": 12,
+      "cases": 12,
+      "excluded": 0,
+      "original_preserved": 12
+    },
+    "pdf/followed_by_prose": {
+      "body_matches": 0,
+      "cases": 12,
+      "excluded": 0,
+      "original_preserved": 12
+    },
+    "pdf/heading_with_prose": {
+      "body_matches": 0,
+      "cases": 12,
+      "excluded": 0,
+      "original_preserved": 12
+    },
+    "pdf/one_nonentry": {
+      "body_matches": 0,
+      "cases": 12,
+      "excluded": 0,
+      "original_preserved": 12
+    },
+    "pdf/underfilled": {
+      "body_matches": 0,
+      "cases": 12,
+      "excluded": 0,
+      "original_preserved": 12
+    },
+    "txt/bibliography": {
+      "body_matches": 10,
+      "cases": 12,
+      "excluded": 10,
+      "original_preserved": 2
+    },
+    "txt/body": {
+      "body_matches": 12,
+      "cases": 12,
+      "excluded": 0,
+      "original_preserved": 12
+    },
+    "txt/followed_by_prose": {
+      "body_matches": 0,
+      "cases": 12,
+      "excluded": 0,
+      "original_preserved": 12
+    },
+    "txt/heading_with_prose": {
+      "body_matches": 0,
+      "cases": 12,
+      "excluded": 0,
+      "original_preserved": 12
+    },
+    "txt/one_nonentry": {
+      "body_matches": 0,
+      "cases": 12,
+      "excluded": 0,
+      "original_preserved": 12
+    },
+    "txt/underfilled": {
+      "body_matches": 0,
+      "cases": 12,
+      "excluded": 0,
+      "original_preserved": 12
+    }
+  },
+  "rows": [
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "c49ed1908ec120a6de996fb1b2aff29453fabc9c1239bd7f4531a0d7426aa105",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 959,
+        "entry_count": 6,
+        "first_location": {
+          "end": 971,
+          "kind": "text",
+          "start": 961
+        },
+        "heading": "references",
+        "last_location": {
+          "end": 2064,
+          "kind": "text",
+          "start": 1912
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 2064,
+        "section_sha256": "afbfd1107d191f506cc1f3d213dbee32c8006d4311ecf75d012ed8eb43fb362b",
+        "section_start": 961
+      },
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "d10e8829fd105632316592ceb158d04ad4cc81a6fef2947266a72733c64869a5",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "d10e8829fd105632316592ceb158d04ad4cc81a6fef2947266a72733c64869a5"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "f30549a0552bab762190903747b9f1f4f6e989324789708f4e6b9dfce9a529bb",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "f30549a0552bab762190903747b9f1f4f6e989324789708f4e6b9dfce9a529bb"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "a5dae68746fffa6c3d83d6dbb13f8678449a248345d18a57f1e511062dfcf312",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "a5dae68746fffa6c3d83d6dbb13f8678449a248345d18a57f1e511062dfcf312"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "baf51553192171358ad8bb2b34a1fc68f8fc629c98224e39445a2f85de6b62af",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "baf51553192171358ad8bb2b34a1fc68f8fc629c98224e39445a2f85de6b62af"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "c49ed1908ec120a6de996fb1b2aff29453fabc9c1239bd7f4531a0d7426aa105",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 959,
+        "entry_count": 6,
+        "first_location": {
+          "body_index": 2,
+          "kind": "docx"
+        },
+        "heading": "references",
+        "last_location": {
+          "body_index": 8,
+          "kind": "docx"
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 2064,
+        "section_sha256": "afbfd1107d191f506cc1f3d213dbee32c8006d4311ecf75d012ed8eb43fb362b",
+        "section_start": 961
+      },
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "d10e8829fd105632316592ceb158d04ad4cc81a6fef2947266a72733c64869a5",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "d10e8829fd105632316592ceb158d04ad4cc81a6fef2947266a72733c64869a5"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "f30549a0552bab762190903747b9f1f4f6e989324789708f4e6b9dfce9a529bb",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "f30549a0552bab762190903747b9f1f4f6e989324789708f4e6b9dfce9a529bb"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "a5dae68746fffa6c3d83d6dbb13f8678449a248345d18a57f1e511062dfcf312",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "a5dae68746fffa6c3d83d6dbb13f8678449a248345d18a57f1e511062dfcf312"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "baf51553192171358ad8bb2b34a1fc68f8fc629c98224e39445a2f85de6b62af",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "baf51553192171358ad8bb2b34a1fc68f8fc629c98224e39445a2f85de6b62af"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "c49ed1908ec120a6de996fb1b2aff29453fabc9c1239bd7f4531a0d7426aa105",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 959,
+        "entry_count": 6,
+        "first_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "heading": "references",
+        "last_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 2064,
+        "section_sha256": "afbfd1107d191f506cc1f3d213dbee32c8006d4311ecf75d012ed8eb43fb362b",
+        "section_start": 961
+      },
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "d10e8829fd105632316592ceb158d04ad4cc81a6fef2947266a72733c64869a5",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "d10e8829fd105632316592ceb158d04ad4cc81a6fef2947266a72733c64869a5"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "f30549a0552bab762190903747b9f1f4f6e989324789708f4e6b9dfce9a529bb",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "f30549a0552bab762190903747b9f1f4f6e989324789708f4e6b9dfce9a529bb"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "a5dae68746fffa6c3d83d6dbb13f8678449a248345d18a57f1e511062dfcf312",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "a5dae68746fffa6c3d83d6dbb13f8678449a248345d18a57f1e511062dfcf312"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "baf51553192171358ad8bb2b34a1fc68f8fc629c98224e39445a2f85de6b62af",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "282b52b5027e09736d18364d920276c322caf1a4650148208462e40a1d177d70",
+        "doi": "10.7554/eLife.13292",
+        "entries_sha256": "150ee2ed1674c306c4078f06f33efb5cf4041753d8204505077ea9585967b005",
+        "publisher": "elife",
+        "source_file": "elife-13292-v2.xml",
+        "xml_sha256": "6d7c6199b57d13a8c60ad18a11b0fb18b17636431a4ff09cf6ac60f6b9b28aba",
+        "year": 2016
+      },
+      "writing_sha256": "baf51553192171358ad8bb2b34a1fc68f8fc629c98224e39445a2f85de6b62af"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "240637fbeef4763c48bda5f1b694024f25a1bf90538863d5a01d3f95b2c318bc",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 802,
+        "entry_count": 6,
+        "first_location": {
+          "end": 814,
+          "kind": "text",
+          "start": 804
+        },
+        "heading": "references",
+        "last_location": {
+          "end": 1908,
+          "kind": "text",
+          "start": 1723
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 1908,
+        "section_sha256": "68caa12381653f1cfdb3b6f3851e17ec67ea0ce79f527c147c46d9d7379516fb",
+        "section_start": 804
+      },
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "ffaee8247d929eece760940ddf1a56fd27157874b207c5593175b1c332814d05",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "ffaee8247d929eece760940ddf1a56fd27157874b207c5593175b1c332814d05"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "3f42e53783bfe16cf9a79e5340fd78e03e80b4b63d8415ce3dde241c40c0de09",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "3f42e53783bfe16cf9a79e5340fd78e03e80b4b63d8415ce3dde241c40c0de09"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "8fed113c2d4859be8a9e964f453127cc2d4800f97f3c1c4c663c7feb90d81cbe",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "8fed113c2d4859be8a9e964f453127cc2d4800f97f3c1c4c663c7feb90d81cbe"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "6cff1f55a77eafa5fcae6985454002a05994728e9907eea809585bd6443eb37d",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "6cff1f55a77eafa5fcae6985454002a05994728e9907eea809585bd6443eb37d"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "240637fbeef4763c48bda5f1b694024f25a1bf90538863d5a01d3f95b2c318bc",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 802,
+        "entry_count": 6,
+        "first_location": {
+          "body_index": 2,
+          "kind": "docx"
+        },
+        "heading": "references",
+        "last_location": {
+          "body_index": 8,
+          "kind": "docx"
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 1908,
+        "section_sha256": "68caa12381653f1cfdb3b6f3851e17ec67ea0ce79f527c147c46d9d7379516fb",
+        "section_start": 804
+      },
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "ffaee8247d929eece760940ddf1a56fd27157874b207c5593175b1c332814d05",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "ffaee8247d929eece760940ddf1a56fd27157874b207c5593175b1c332814d05"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "3f42e53783bfe16cf9a79e5340fd78e03e80b4b63d8415ce3dde241c40c0de09",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "3f42e53783bfe16cf9a79e5340fd78e03e80b4b63d8415ce3dde241c40c0de09"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "8fed113c2d4859be8a9e964f453127cc2d4800f97f3c1c4c663c7feb90d81cbe",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "8fed113c2d4859be8a9e964f453127cc2d4800f97f3c1c4c663c7feb90d81cbe"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "6cff1f55a77eafa5fcae6985454002a05994728e9907eea809585bd6443eb37d",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "6cff1f55a77eafa5fcae6985454002a05994728e9907eea809585bd6443eb37d"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "240637fbeef4763c48bda5f1b694024f25a1bf90538863d5a01d3f95b2c318bc",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 802,
+        "entry_count": 6,
+        "first_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "heading": "references",
+        "last_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 1908,
+        "section_sha256": "68caa12381653f1cfdb3b6f3851e17ec67ea0ce79f527c147c46d9d7379516fb",
+        "section_start": 804
+      },
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "ffaee8247d929eece760940ddf1a56fd27157874b207c5593175b1c332814d05",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "ffaee8247d929eece760940ddf1a56fd27157874b207c5593175b1c332814d05"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "3f42e53783bfe16cf9a79e5340fd78e03e80b4b63d8415ce3dde241c40c0de09",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "3f42e53783bfe16cf9a79e5340fd78e03e80b4b63d8415ce3dde241c40c0de09"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "8fed113c2d4859be8a9e964f453127cc2d4800f97f3c1c4c663c7feb90d81cbe",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "8fed113c2d4859be8a9e964f453127cc2d4800f97f3c1c4c663c7feb90d81cbe"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "6cff1f55a77eafa5fcae6985454002a05994728e9907eea809585bd6443eb37d",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "f57e45fee8a6f2a8df68afc50308bf4312a061a46876c62ccfd7899e5aeda6e3",
+        "doi": "10.7554/eLife.28635",
+        "entries_sha256": "e692da340b7805b8aaabedbba1ede98978be2a33ff063f0bb9357878b3b75640",
+        "publisher": "elife",
+        "source_file": "elife-28635-v2.xml",
+        "xml_sha256": "609eb43f6586b723124d941c2be7cc52c3cf32caabb49c1120079499d6250496",
+        "year": 2017
+      },
+      "writing_sha256": "6cff1f55a77eafa5fcae6985454002a05994728e9907eea809585bd6443eb37d"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "0cb8e41ecf1fc0e661c76984e2878c0e8af5b379e8d1a2ca8f92314143354cad",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 1110,
+        "entry_count": 6,
+        "first_location": {
+          "end": 1122,
+          "kind": "text",
+          "start": 1112
+        },
+        "heading": "references",
+        "last_location": {
+          "end": 2295,
+          "kind": "text",
+          "start": 2140
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 2295,
+        "section_sha256": "d601bff563a0d0fa3d6af986094146c49290af998149a8ec7d377f06a123e4b3",
+        "section_start": 1112
+      },
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "9959759181014664a1d3f11f4713a33eb92ae23c57359996aa8007f94d120173",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "9959759181014664a1d3f11f4713a33eb92ae23c57359996aa8007f94d120173"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "9fad5718f4f0496e33a2895c5a1f8330fab47851fd82bed498abc5ae70e6ad81",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "9fad5718f4f0496e33a2895c5a1f8330fab47851fd82bed498abc5ae70e6ad81"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "22417948a4b29076a1878f33c93f37efb950e3cc160d1d060ab6cf2d47bc9635",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "22417948a4b29076a1878f33c93f37efb950e3cc160d1d060ab6cf2d47bc9635"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "c7873c024093fd49a5af5a0addce753cdbaa6270b6fef81e4950d3e4e7deb139",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "c7873c024093fd49a5af5a0addce753cdbaa6270b6fef81e4950d3e4e7deb139"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "0cb8e41ecf1fc0e661c76984e2878c0e8af5b379e8d1a2ca8f92314143354cad",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 1110,
+        "entry_count": 6,
+        "first_location": {
+          "body_index": 2,
+          "kind": "docx"
+        },
+        "heading": "references",
+        "last_location": {
+          "body_index": 8,
+          "kind": "docx"
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 2295,
+        "section_sha256": "d601bff563a0d0fa3d6af986094146c49290af998149a8ec7d377f06a123e4b3",
+        "section_start": 1112
+      },
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "9959759181014664a1d3f11f4713a33eb92ae23c57359996aa8007f94d120173",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "9959759181014664a1d3f11f4713a33eb92ae23c57359996aa8007f94d120173"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "9fad5718f4f0496e33a2895c5a1f8330fab47851fd82bed498abc5ae70e6ad81",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "9fad5718f4f0496e33a2895c5a1f8330fab47851fd82bed498abc5ae70e6ad81"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "22417948a4b29076a1878f33c93f37efb950e3cc160d1d060ab6cf2d47bc9635",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "22417948a4b29076a1878f33c93f37efb950e3cc160d1d060ab6cf2d47bc9635"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "c7873c024093fd49a5af5a0addce753cdbaa6270b6fef81e4950d3e4e7deb139",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "c7873c024093fd49a5af5a0addce753cdbaa6270b6fef81e4950d3e4e7deb139"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "0cb8e41ecf1fc0e661c76984e2878c0e8af5b379e8d1a2ca8f92314143354cad",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 1110,
+        "entry_count": 6,
+        "first_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "heading": "references",
+        "last_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 2295,
+        "section_sha256": "d601bff563a0d0fa3d6af986094146c49290af998149a8ec7d377f06a123e4b3",
+        "section_start": 1112
+      },
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "9959759181014664a1d3f11f4713a33eb92ae23c57359996aa8007f94d120173",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "9959759181014664a1d3f11f4713a33eb92ae23c57359996aa8007f94d120173"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "9fad5718f4f0496e33a2895c5a1f8330fab47851fd82bed498abc5ae70e6ad81",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "9fad5718f4f0496e33a2895c5a1f8330fab47851fd82bed498abc5ae70e6ad81"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "22417948a4b29076a1878f33c93f37efb950e3cc160d1d060ab6cf2d47bc9635",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "22417948a4b29076a1878f33c93f37efb950e3cc160d1d060ab6cf2d47bc9635"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "c7873c024093fd49a5af5a0addce753cdbaa6270b6fef81e4950d3e4e7deb139",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "591b1fe4f14444abc16d8c9513678441aca92185249346e76ea482f352ceeb56",
+        "doi": "10.7554/eLife.04046",
+        "entries_sha256": "3194198813b72ce7de446b31c4e52473484887e680869f935dfa6950e33f9f6b",
+        "publisher": "elife",
+        "source_file": "elife-04046-v2.xml",
+        "xml_sha256": "37587f16051002792ff42771dbdf37bf6d8d9473a02e3017875c1e9c71bb80ab",
+        "year": 2014
+      },
+      "writing_sha256": "c7873c024093fd49a5af5a0addce753cdbaa6270b6fef81e4950d3e4e7deb139"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "be5890dfa3d6302ec12471d0a5431636f35565bf2519ae1ac5eb2dee2ba156c1",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 703,
+        "entry_count": 6,
+        "first_location": {
+          "end": 715,
+          "kind": "text",
+          "start": 705
+        },
+        "heading": "references",
+        "last_location": {
+          "end": 1645,
+          "kind": "text",
+          "start": 1484
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 1645,
+        "section_sha256": "013eb5fc412a765cfec51ce3866bb98c8da44c02e07750c75d0ace0007391153",
+        "section_start": 705
+      },
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "c72edbe75fc62afa7cc743574aed8a01f40ba85452ec4a99271cb6752856abdf",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "c72edbe75fc62afa7cc743574aed8a01f40ba85452ec4a99271cb6752856abdf"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "12d2c8a405925b9d411671588d3dc7e883e5a3d1c24e110dcd6b3778e7b63cdd",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "12d2c8a405925b9d411671588d3dc7e883e5a3d1c24e110dcd6b3778e7b63cdd"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "246af08561e4af8b23aed9f132e7c858f2992aaa7a13d41b1c67e51d8befe576",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "246af08561e4af8b23aed9f132e7c858f2992aaa7a13d41b1c67e51d8befe576"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "61da88af6d727f00c8bdb3bd82cc138ca777eb76924b6d8aac10788fb253ca57",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "61da88af6d727f00c8bdb3bd82cc138ca777eb76924b6d8aac10788fb253ca57"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "be5890dfa3d6302ec12471d0a5431636f35565bf2519ae1ac5eb2dee2ba156c1",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 703,
+        "entry_count": 6,
+        "first_location": {
+          "body_index": 2,
+          "kind": "docx"
+        },
+        "heading": "references",
+        "last_location": {
+          "body_index": 8,
+          "kind": "docx"
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 1645,
+        "section_sha256": "013eb5fc412a765cfec51ce3866bb98c8da44c02e07750c75d0ace0007391153",
+        "section_start": 705
+      },
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "c72edbe75fc62afa7cc743574aed8a01f40ba85452ec4a99271cb6752856abdf",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "c72edbe75fc62afa7cc743574aed8a01f40ba85452ec4a99271cb6752856abdf"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "12d2c8a405925b9d411671588d3dc7e883e5a3d1c24e110dcd6b3778e7b63cdd",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "12d2c8a405925b9d411671588d3dc7e883e5a3d1c24e110dcd6b3778e7b63cdd"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "246af08561e4af8b23aed9f132e7c858f2992aaa7a13d41b1c67e51d8befe576",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "246af08561e4af8b23aed9f132e7c858f2992aaa7a13d41b1c67e51d8befe576"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "61da88af6d727f00c8bdb3bd82cc138ca777eb76924b6d8aac10788fb253ca57",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "61da88af6d727f00c8bdb3bd82cc138ca777eb76924b6d8aac10788fb253ca57"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "be5890dfa3d6302ec12471d0a5431636f35565bf2519ae1ac5eb2dee2ba156c1",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 703,
+        "entry_count": 6,
+        "first_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "heading": "references",
+        "last_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 1645,
+        "section_sha256": "013eb5fc412a765cfec51ce3866bb98c8da44c02e07750c75d0ace0007391153",
+        "section_start": 705
+      },
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "c72edbe75fc62afa7cc743574aed8a01f40ba85452ec4a99271cb6752856abdf",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "c72edbe75fc62afa7cc743574aed8a01f40ba85452ec4a99271cb6752856abdf"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "12d2c8a405925b9d411671588d3dc7e883e5a3d1c24e110dcd6b3778e7b63cdd",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "12d2c8a405925b9d411671588d3dc7e883e5a3d1c24e110dcd6b3778e7b63cdd"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "246af08561e4af8b23aed9f132e7c858f2992aaa7a13d41b1c67e51d8befe576",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "246af08561e4af8b23aed9f132e7c858f2992aaa7a13d41b1c67e51d8befe576"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "61da88af6d727f00c8bdb3bd82cc138ca777eb76924b6d8aac10788fb253ca57",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "7cde3de19483651c4ff27bc8a05966ed670996bf0d290b11547e1bbcea1f52dd",
+        "doi": "10.7554/eLife.36163",
+        "entries_sha256": "f7a16eeede78612b3473493e670a09198989082f0dc91a830a71f705dfd4fec6",
+        "publisher": "elife",
+        "source_file": "elife-36163-v2.xml",
+        "xml_sha256": "dd5a25b6a33b768deece99afbe2a2e28b2d9218b4a95b607af071d27de3e1fc4",
+        "year": 2018
+      },
+      "writing_sha256": "61da88af6d727f00c8bdb3bd82cc138ca777eb76924b6d8aac10788fb253ca57"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "b0f37b7f9067cf1ed43df7fb5ddaf784993b812a5c88a644a0ec70ec5e4e077c",
+      "other_text_preserved": true,
+      "role": "bibliography",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "b0f37b7f9067cf1ed43df7fb5ddaf784993b812a5c88a644a0ec70ec5e4e077c"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "3bd2ef0583bf589eebde48525266ace2ab5541eb175b47d8ec5e7b5cad2541cf",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "3bd2ef0583bf589eebde48525266ace2ab5541eb175b47d8ec5e7b5cad2541cf"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "e2b32a99efa25250fb2ce1fb4ac9f8af67fd751215d86da2709eca0aac80bc5b",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "e2b32a99efa25250fb2ce1fb4ac9f8af67fd751215d86da2709eca0aac80bc5b"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "57bd02651d31d76b7518d41cf4d522ac2f9526ed392a8acef988bb4391e0187d",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "57bd02651d31d76b7518d41cf4d522ac2f9526ed392a8acef988bb4391e0187d"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "27c0bcd566940966d626c4aed2c0b5f3988a4dbff2fd40f1d19184c0d6e26f4e",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "27c0bcd566940966d626c4aed2c0b5f3988a4dbff2fd40f1d19184c0d6e26f4e"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "b0f37b7f9067cf1ed43df7fb5ddaf784993b812a5c88a644a0ec70ec5e4e077c",
+      "other_text_preserved": true,
+      "role": "bibliography",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "b0f37b7f9067cf1ed43df7fb5ddaf784993b812a5c88a644a0ec70ec5e4e077c"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "3bd2ef0583bf589eebde48525266ace2ab5541eb175b47d8ec5e7b5cad2541cf",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "3bd2ef0583bf589eebde48525266ace2ab5541eb175b47d8ec5e7b5cad2541cf"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "e2b32a99efa25250fb2ce1fb4ac9f8af67fd751215d86da2709eca0aac80bc5b",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "e2b32a99efa25250fb2ce1fb4ac9f8af67fd751215d86da2709eca0aac80bc5b"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "57bd02651d31d76b7518d41cf4d522ac2f9526ed392a8acef988bb4391e0187d",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "57bd02651d31d76b7518d41cf4d522ac2f9526ed392a8acef988bb4391e0187d"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "27c0bcd566940966d626c4aed2c0b5f3988a4dbff2fd40f1d19184c0d6e26f4e",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "27c0bcd566940966d626c4aed2c0b5f3988a4dbff2fd40f1d19184c0d6e26f4e"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "b0f37b7f9067cf1ed43df7fb5ddaf784993b812a5c88a644a0ec70ec5e4e077c",
+      "other_text_preserved": true,
+      "role": "bibliography",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "b0f37b7f9067cf1ed43df7fb5ddaf784993b812a5c88a644a0ec70ec5e4e077c"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "3bd2ef0583bf589eebde48525266ace2ab5541eb175b47d8ec5e7b5cad2541cf",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "3bd2ef0583bf589eebde48525266ace2ab5541eb175b47d8ec5e7b5cad2541cf"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "e2b32a99efa25250fb2ce1fb4ac9f8af67fd751215d86da2709eca0aac80bc5b",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "e2b32a99efa25250fb2ce1fb4ac9f8af67fd751215d86da2709eca0aac80bc5b"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "57bd02651d31d76b7518d41cf4d522ac2f9526ed392a8acef988bb4391e0187d",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "57bd02651d31d76b7518d41cf4d522ac2f9526ed392a8acef988bb4391e0187d"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "27c0bcd566940966d626c4aed2c0b5f3988a4dbff2fd40f1d19184c0d6e26f4e",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "fe94be3e2f24bcba421bf1829a914e233a84a6ef7a18b3d84552a2cddbbd9a22",
+        "doi": "10.12688/gatesopenres.12783.2",
+        "entries_sha256": "97172e00b7e32fd0f41ffc4ec51f74d5400eca29ac0f236152c00a96a66fa212",
+        "publisher": "gates",
+        "source_file": "gates-12783-after.xml",
+        "xml_sha256": "455dec4e02207121ca923ae2bd24731c47732d6fd6a7beb8c07b3553e76b6809",
+        "year": 2017
+      },
+      "writing_sha256": "27c0bcd566940966d626c4aed2c0b5f3988a4dbff2fd40f1d19184c0d6e26f4e"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "5ef952e964b0c47836833d820abad70cb2024f921d627760e5ba27883733a036",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 856,
+        "entry_count": 6,
+        "first_location": {
+          "end": 868,
+          "kind": "text",
+          "start": 858
+        },
+        "heading": "references",
+        "last_location": {
+          "end": 1813,
+          "kind": "text",
+          "start": 1624
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 1813,
+        "section_sha256": "4b47de0dc4a7cc5285ad835b82b7e3a33ae33c53e8332d4b40a2d18050c4d3e6",
+        "section_start": 858
+      },
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "9f6acfb62689c015b5d9179d871016c46ddc9b747f61c7adc702998d36352af6",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "9f6acfb62689c015b5d9179d871016c46ddc9b747f61c7adc702998d36352af6"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "792c70abe469427c4b8f999a5d34d61e2431bb5b33a357388071f8295eb59f02",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "792c70abe469427c4b8f999a5d34d61e2431bb5b33a357388071f8295eb59f02"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "2e0fbd5d7752135238124ce562e43cf664ec4fe64e0e18966bbf2b06b8228ee4",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "2e0fbd5d7752135238124ce562e43cf664ec4fe64e0e18966bbf2b06b8228ee4"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "45e88172bae4b1df9a36c2b75a7881b263d0505e3269012563be201fb042c178",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "45e88172bae4b1df9a36c2b75a7881b263d0505e3269012563be201fb042c178"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "5ef952e964b0c47836833d820abad70cb2024f921d627760e5ba27883733a036",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 856,
+        "entry_count": 6,
+        "first_location": {
+          "body_index": 2,
+          "kind": "docx"
+        },
+        "heading": "references",
+        "last_location": {
+          "body_index": 8,
+          "kind": "docx"
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 1813,
+        "section_sha256": "4b47de0dc4a7cc5285ad835b82b7e3a33ae33c53e8332d4b40a2d18050c4d3e6",
+        "section_start": 858
+      },
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "9f6acfb62689c015b5d9179d871016c46ddc9b747f61c7adc702998d36352af6",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "9f6acfb62689c015b5d9179d871016c46ddc9b747f61c7adc702998d36352af6"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "792c70abe469427c4b8f999a5d34d61e2431bb5b33a357388071f8295eb59f02",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "792c70abe469427c4b8f999a5d34d61e2431bb5b33a357388071f8295eb59f02"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "2e0fbd5d7752135238124ce562e43cf664ec4fe64e0e18966bbf2b06b8228ee4",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "2e0fbd5d7752135238124ce562e43cf664ec4fe64e0e18966bbf2b06b8228ee4"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "45e88172bae4b1df9a36c2b75a7881b263d0505e3269012563be201fb042c178",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "45e88172bae4b1df9a36c2b75a7881b263d0505e3269012563be201fb042c178"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "5ef952e964b0c47836833d820abad70cb2024f921d627760e5ba27883733a036",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 856,
+        "entry_count": 6,
+        "first_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "heading": "references",
+        "last_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 1813,
+        "section_sha256": "4b47de0dc4a7cc5285ad835b82b7e3a33ae33c53e8332d4b40a2d18050c4d3e6",
+        "section_start": 858
+      },
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "9f6acfb62689c015b5d9179d871016c46ddc9b747f61c7adc702998d36352af6",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "9f6acfb62689c015b5d9179d871016c46ddc9b747f61c7adc702998d36352af6"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "792c70abe469427c4b8f999a5d34d61e2431bb5b33a357388071f8295eb59f02",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "792c70abe469427c4b8f999a5d34d61e2431bb5b33a357388071f8295eb59f02"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "2e0fbd5d7752135238124ce562e43cf664ec4fe64e0e18966bbf2b06b8228ee4",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "2e0fbd5d7752135238124ce562e43cf664ec4fe64e0e18966bbf2b06b8228ee4"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "45e88172bae4b1df9a36c2b75a7881b263d0505e3269012563be201fb042c178",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "b3a90cc07ed98d1147b924392b0f8aa0acff7c054e4e4eeaf9fcd8fd5e643f2f",
+        "doi": "10.12688/gatesopenres.12891.2",
+        "entries_sha256": "19457ecc91c30a039ea6b293bb28dce6a387a53cdca343176857fe69585490b1",
+        "publisher": "gates",
+        "source_file": "gates-12891-after.xml",
+        "xml_sha256": "bc4b69e83fccb2510f8d7b058d6dc87e735e31ce10ef77e57dbe602eb515da14",
+        "year": 2018
+      },
+      "writing_sha256": "45e88172bae4b1df9a36c2b75a7881b263d0505e3269012563be201fb042c178"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "1e5436eb8fb515fa1c2635200ada441eb14fbe9ab8622a15f134e8598913e94b",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 1190,
+        "entry_count": 6,
+        "first_location": {
+          "end": 1202,
+          "kind": "text",
+          "start": 1192
+        },
+        "heading": "references",
+        "last_location": {
+          "end": 2413,
+          "kind": "text",
+          "start": 2199
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 2413,
+        "section_sha256": "2e35a1a1aba76cef6fc73ec74c4ba4eaecd10f121bde4bb470469dc723b42207",
+        "section_start": 1192
+      },
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "ac0d32b69a6c5bd79a7e5ef2b290c6401b5c1fad7e614f940bdc29fd714d0fc3",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "ac0d32b69a6c5bd79a7e5ef2b290c6401b5c1fad7e614f940bdc29fd714d0fc3"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "81f65d110639e9542706552ee581e995e9675b8c6e9712ad76353d56b410c2a1",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "81f65d110639e9542706552ee581e995e9675b8c6e9712ad76353d56b410c2a1"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "93474d974926a236a2e155eaa3923395c9cbc37b9bbd591b83c0a49c2a3de226",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "93474d974926a236a2e155eaa3923395c9cbc37b9bbd591b83c0a49c2a3de226"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "ee4cf56a80da2b31f4935ae065da9bfaa095eda2446113f5daa446146fd5a74b",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "ee4cf56a80da2b31f4935ae065da9bfaa095eda2446113f5daa446146fd5a74b"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "1e5436eb8fb515fa1c2635200ada441eb14fbe9ab8622a15f134e8598913e94b",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 1190,
+        "entry_count": 6,
+        "first_location": {
+          "body_index": 2,
+          "kind": "docx"
+        },
+        "heading": "references",
+        "last_location": {
+          "body_index": 8,
+          "kind": "docx"
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 2413,
+        "section_sha256": "2e35a1a1aba76cef6fc73ec74c4ba4eaecd10f121bde4bb470469dc723b42207",
+        "section_start": 1192
+      },
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "ac0d32b69a6c5bd79a7e5ef2b290c6401b5c1fad7e614f940bdc29fd714d0fc3",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "ac0d32b69a6c5bd79a7e5ef2b290c6401b5c1fad7e614f940bdc29fd714d0fc3"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "81f65d110639e9542706552ee581e995e9675b8c6e9712ad76353d56b410c2a1",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "81f65d110639e9542706552ee581e995e9675b8c6e9712ad76353d56b410c2a1"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "93474d974926a236a2e155eaa3923395c9cbc37b9bbd591b83c0a49c2a3de226",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "93474d974926a236a2e155eaa3923395c9cbc37b9bbd591b83c0a49c2a3de226"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "ee4cf56a80da2b31f4935ae065da9bfaa095eda2446113f5daa446146fd5a74b",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "ee4cf56a80da2b31f4935ae065da9bfaa095eda2446113f5daa446146fd5a74b"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "1e5436eb8fb515fa1c2635200ada441eb14fbe9ab8622a15f134e8598913e94b",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 1190,
+        "entry_count": 6,
+        "first_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "heading": "references",
+        "last_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 2413,
+        "section_sha256": "2e35a1a1aba76cef6fc73ec74c4ba4eaecd10f121bde4bb470469dc723b42207",
+        "section_start": 1192
+      },
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "ac0d32b69a6c5bd79a7e5ef2b290c6401b5c1fad7e614f940bdc29fd714d0fc3",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "ac0d32b69a6c5bd79a7e5ef2b290c6401b5c1fad7e614f940bdc29fd714d0fc3"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "81f65d110639e9542706552ee581e995e9675b8c6e9712ad76353d56b410c2a1",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "81f65d110639e9542706552ee581e995e9675b8c6e9712ad76353d56b410c2a1"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "93474d974926a236a2e155eaa3923395c9cbc37b9bbd591b83c0a49c2a3de226",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "93474d974926a236a2e155eaa3923395c9cbc37b9bbd591b83c0a49c2a3de226"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "ee4cf56a80da2b31f4935ae065da9bfaa095eda2446113f5daa446146fd5a74b",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "b789fc85df6b1a1aa6086d9543208f1379ff63cca5c93e0e964f602acf2de4d3",
+        "doi": "10.12688/gatesopenres.12749.2",
+        "entries_sha256": "528153361618b43f21f51d61e6ddc2203c1348a328df4a0d5f0fd27830e46ca4",
+        "publisher": "gates",
+        "source_file": "gates-12749-after.xml",
+        "xml_sha256": "a8a85d219f553eb598b2025a4c389ff73ac9ed3a34d09e22b58ff7d574df6a15",
+        "year": 2017
+      },
+      "writing_sha256": "ee4cf56a80da2b31f4935ae065da9bfaa095eda2446113f5daa446146fd5a74b"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "af19690e66f3908334fdd64f9fab1a7c13cba12557880f89d661a8ddc4514e2a",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 1103,
+        "entry_count": 6,
+        "first_location": {
+          "end": 1115,
+          "kind": "text",
+          "start": 1105
+        },
+        "heading": "references",
+        "last_location": {
+          "end": 2145,
+          "kind": "text",
+          "start": 1986
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 2145,
+        "section_sha256": "8e89126d5e9ab65dbbd752c3ddbce93161fce66fa322255eab38f7f024aa73b9",
+        "section_start": 1105
+      },
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "2658fd36100efd8a677bac91ba9e11b3eef75a1f23f0c050b56819636eb006d1",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "2658fd36100efd8a677bac91ba9e11b3eef75a1f23f0c050b56819636eb006d1"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "78881bc3c6e1fd6f2f030f25813ff66ac55001a9431dcc3c309bfe7090cd1e34",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "78881bc3c6e1fd6f2f030f25813ff66ac55001a9431dcc3c309bfe7090cd1e34"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "1f35c78956ac0b9b5dd6a89f33ba6659a24fe397c22ccb410c2f469f8f84bfe0",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "1f35c78956ac0b9b5dd6a89f33ba6659a24fe397c22ccb410c2f469f8f84bfe0"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "67818f50def6d995ac92369692c809f4cdfbebb505fefd297fe6302f23e66a60",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "67818f50def6d995ac92369692c809f4cdfbebb505fefd297fe6302f23e66a60"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "af19690e66f3908334fdd64f9fab1a7c13cba12557880f89d661a8ddc4514e2a",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 1103,
+        "entry_count": 6,
+        "first_location": {
+          "body_index": 2,
+          "kind": "docx"
+        },
+        "heading": "references",
+        "last_location": {
+          "body_index": 8,
+          "kind": "docx"
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 2145,
+        "section_sha256": "8e89126d5e9ab65dbbd752c3ddbce93161fce66fa322255eab38f7f024aa73b9",
+        "section_start": 1105
+      },
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "2658fd36100efd8a677bac91ba9e11b3eef75a1f23f0c050b56819636eb006d1",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "2658fd36100efd8a677bac91ba9e11b3eef75a1f23f0c050b56819636eb006d1"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "78881bc3c6e1fd6f2f030f25813ff66ac55001a9431dcc3c309bfe7090cd1e34",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "78881bc3c6e1fd6f2f030f25813ff66ac55001a9431dcc3c309bfe7090cd1e34"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "1f35c78956ac0b9b5dd6a89f33ba6659a24fe397c22ccb410c2f469f8f84bfe0",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "1f35c78956ac0b9b5dd6a89f33ba6659a24fe397c22ccb410c2f469f8f84bfe0"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "67818f50def6d995ac92369692c809f4cdfbebb505fefd297fe6302f23e66a60",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "67818f50def6d995ac92369692c809f4cdfbebb505fefd297fe6302f23e66a60"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "af19690e66f3908334fdd64f9fab1a7c13cba12557880f89d661a8ddc4514e2a",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 1103,
+        "entry_count": 6,
+        "first_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "heading": "references",
+        "last_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 2145,
+        "section_sha256": "8e89126d5e9ab65dbbd752c3ddbce93161fce66fa322255eab38f7f024aa73b9",
+        "section_start": 1105
+      },
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "2658fd36100efd8a677bac91ba9e11b3eef75a1f23f0c050b56819636eb006d1",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "2658fd36100efd8a677bac91ba9e11b3eef75a1f23f0c050b56819636eb006d1"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "78881bc3c6e1fd6f2f030f25813ff66ac55001a9431dcc3c309bfe7090cd1e34",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "78881bc3c6e1fd6f2f030f25813ff66ac55001a9431dcc3c309bfe7090cd1e34"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "1f35c78956ac0b9b5dd6a89f33ba6659a24fe397c22ccb410c2f469f8f84bfe0",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "1f35c78956ac0b9b5dd6a89f33ba6659a24fe397c22ccb410c2f469f8f84bfe0"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "67818f50def6d995ac92369692c809f4cdfbebb505fefd297fe6302f23e66a60",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "c39841b15617167a83566d96d51a4b2356e68e98ed29742a0d372462bbbaf8a0",
+        "doi": "10.12688/gatesopenres.12820.2",
+        "entries_sha256": "02e83e3429f4f753797f9a57a7416997c1e4745dad7dbbfdb47ff4343823104a",
+        "publisher": "gates",
+        "source_file": "gates-12820-after.xml",
+        "xml_sha256": "ce8124c16bcb665443539b66f0ccf238382e8778ac7e541480f39ff9b7dca0ac",
+        "year": 2018
+      },
+      "writing_sha256": "67818f50def6d995ac92369692c809f4cdfbebb505fefd297fe6302f23e66a60"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "c991526cbe93cc55f4dc7b2bb48a596b95939029e5ab9833201f924045deedfe",
+      "other_text_preserved": true,
+      "role": "bibliography",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "c991526cbe93cc55f4dc7b2bb48a596b95939029e5ab9833201f924045deedfe"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "12c68fadd8864bc917f8026574e66bb08935718b0a78f2e5e1afa3ef505a6e89",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "12c68fadd8864bc917f8026574e66bb08935718b0a78f2e5e1afa3ef505a6e89"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "aca808ad8aabd90e89f64d7b31fda667e34694402a2b2ed0460e5718426d0fdd",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "aca808ad8aabd90e89f64d7b31fda667e34694402a2b2ed0460e5718426d0fdd"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "0d8dfd659edbee0ea6ca9a0bfa0a6a8ad163b3423dd8d1bca7dba7cd24230eb0",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "0d8dfd659edbee0ea6ca9a0bfa0a6a8ad163b3423dd8d1bca7dba7cd24230eb0"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "20ece96525a6dec33be0813ef1508b62653c658e5c2b39fc343ab0054736e5d8",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "20ece96525a6dec33be0813ef1508b62653c658e5c2b39fc343ab0054736e5d8"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "c991526cbe93cc55f4dc7b2bb48a596b95939029e5ab9833201f924045deedfe",
+      "other_text_preserved": true,
+      "role": "bibliography",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "c991526cbe93cc55f4dc7b2bb48a596b95939029e5ab9833201f924045deedfe"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "12c68fadd8864bc917f8026574e66bb08935718b0a78f2e5e1afa3ef505a6e89",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "12c68fadd8864bc917f8026574e66bb08935718b0a78f2e5e1afa3ef505a6e89"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "aca808ad8aabd90e89f64d7b31fda667e34694402a2b2ed0460e5718426d0fdd",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "aca808ad8aabd90e89f64d7b31fda667e34694402a2b2ed0460e5718426d0fdd"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "0d8dfd659edbee0ea6ca9a0bfa0a6a8ad163b3423dd8d1bca7dba7cd24230eb0",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "0d8dfd659edbee0ea6ca9a0bfa0a6a8ad163b3423dd8d1bca7dba7cd24230eb0"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "20ece96525a6dec33be0813ef1508b62653c658e5c2b39fc343ab0054736e5d8",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "20ece96525a6dec33be0813ef1508b62653c658e5c2b39fc343ab0054736e5d8"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "c991526cbe93cc55f4dc7b2bb48a596b95939029e5ab9833201f924045deedfe",
+      "other_text_preserved": true,
+      "role": "bibliography",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "c991526cbe93cc55f4dc7b2bb48a596b95939029e5ab9833201f924045deedfe"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "12c68fadd8864bc917f8026574e66bb08935718b0a78f2e5e1afa3ef505a6e89",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "12c68fadd8864bc917f8026574e66bb08935718b0a78f2e5e1afa3ef505a6e89"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "aca808ad8aabd90e89f64d7b31fda667e34694402a2b2ed0460e5718426d0fdd",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "aca808ad8aabd90e89f64d7b31fda667e34694402a2b2ed0460e5718426d0fdd"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "0d8dfd659edbee0ea6ca9a0bfa0a6a8ad163b3423dd8d1bca7dba7cd24230eb0",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "0d8dfd659edbee0ea6ca9a0bfa0a6a8ad163b3423dd8d1bca7dba7cd24230eb0"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "20ece96525a6dec33be0813ef1508b62653c658e5c2b39fc343ab0054736e5d8",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "400bca889c24f2848efb0ae56c6d29f61ecbf528b0044c080ea4f42e50aea75a",
+        "doi": "10.12688/wellcomeopenres.14838.2",
+        "entries_sha256": "ab4f7e50cd922d2697144d93890ae9ced4e68544ba9d00813d430574b8b2d6a8",
+        "publisher": "wellcome",
+        "source_file": "wellcome-14838-after.xml",
+        "xml_sha256": "2e4622041a16cabfe5559db1b8911b8946db89cd4003d458daf80b3f6d462c36",
+        "year": 2018
+      },
+      "writing_sha256": "20ece96525a6dec33be0813ef1508b62653c658e5c2b39fc343ab0054736e5d8"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "117ad5336b3c512a22cb0d62db0b8ab8e12c0d3a68e9d297a73f614727e8d49f",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 1019,
+        "entry_count": 6,
+        "first_location": {
+          "end": 1031,
+          "kind": "text",
+          "start": 1021
+        },
+        "heading": "references",
+        "last_location": {
+          "end": 1861,
+          "kind": "text",
+          "start": 1667
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 1861,
+        "section_sha256": "10253a12660f69b040d936ee7ea266502905ef7d1b877898e6b1cdd133b45263",
+        "section_start": 1021
+      },
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "7cf496948ffedc8598f2c5764588f0bedc61c32fbc3b2c1ebd167de247759d96",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "7cf496948ffedc8598f2c5764588f0bedc61c32fbc3b2c1ebd167de247759d96"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "94d681ff16ee5a6aa5750be00d0048c9e490fc562e0466ebb52b3354668dc8e9",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "94d681ff16ee5a6aa5750be00d0048c9e490fc562e0466ebb52b3354668dc8e9"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "ffde7f98edc035f9f7d860d4f786d52f3ee7eeac26030ad995a2f9bbc7841808",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "ffde7f98edc035f9f7d860d4f786d52f3ee7eeac26030ad995a2f9bbc7841808"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "d0ff317e78b86836cb6fa98562dab16bf37352411f4cba048b1454d38f5cbf70",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "d0ff317e78b86836cb6fa98562dab16bf37352411f4cba048b1454d38f5cbf70"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "117ad5336b3c512a22cb0d62db0b8ab8e12c0d3a68e9d297a73f614727e8d49f",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 1019,
+        "entry_count": 6,
+        "first_location": {
+          "body_index": 2,
+          "kind": "docx"
+        },
+        "heading": "references",
+        "last_location": {
+          "body_index": 8,
+          "kind": "docx"
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 1861,
+        "section_sha256": "10253a12660f69b040d936ee7ea266502905ef7d1b877898e6b1cdd133b45263",
+        "section_start": 1021
+      },
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "7cf496948ffedc8598f2c5764588f0bedc61c32fbc3b2c1ebd167de247759d96",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "7cf496948ffedc8598f2c5764588f0bedc61c32fbc3b2c1ebd167de247759d96"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "94d681ff16ee5a6aa5750be00d0048c9e490fc562e0466ebb52b3354668dc8e9",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "94d681ff16ee5a6aa5750be00d0048c9e490fc562e0466ebb52b3354668dc8e9"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "ffde7f98edc035f9f7d860d4f786d52f3ee7eeac26030ad995a2f9bbc7841808",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "ffde7f98edc035f9f7d860d4f786d52f3ee7eeac26030ad995a2f9bbc7841808"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "d0ff317e78b86836cb6fa98562dab16bf37352411f4cba048b1454d38f5cbf70",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "d0ff317e78b86836cb6fa98562dab16bf37352411f4cba048b1454d38f5cbf70"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "117ad5336b3c512a22cb0d62db0b8ab8e12c0d3a68e9d297a73f614727e8d49f",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 1019,
+        "entry_count": 6,
+        "first_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "heading": "references",
+        "last_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 1861,
+        "section_sha256": "10253a12660f69b040d936ee7ea266502905ef7d1b877898e6b1cdd133b45263",
+        "section_start": 1021
+      },
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "7cf496948ffedc8598f2c5764588f0bedc61c32fbc3b2c1ebd167de247759d96",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "7cf496948ffedc8598f2c5764588f0bedc61c32fbc3b2c1ebd167de247759d96"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "94d681ff16ee5a6aa5750be00d0048c9e490fc562e0466ebb52b3354668dc8e9",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "94d681ff16ee5a6aa5750be00d0048c9e490fc562e0466ebb52b3354668dc8e9"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "ffde7f98edc035f9f7d860d4f786d52f3ee7eeac26030ad995a2f9bbc7841808",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "ffde7f98edc035f9f7d860d4f786d52f3ee7eeac26030ad995a2f9bbc7841808"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "d0ff317e78b86836cb6fa98562dab16bf37352411f4cba048b1454d38f5cbf70",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "13c43474e68e12242673828aa7a6cfdc3f8785a1fa102d28f5ef3e16dbf6f47c",
+        "doi": "10.12688/wellcomeopenres.12478.2",
+        "entries_sha256": "cb4e10edf2107c3afe3be5af437ca88b8437b87a74ea4347e2f4e5e82184653c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-12478-after.xml",
+        "xml_sha256": "4354857265ae07e64a3866a74fb953eddbecf186e43bc5d48f86aeb2820af4dc",
+        "year": 2017
+      },
+      "writing_sha256": "d0ff317e78b86836cb6fa98562dab16bf37352411f4cba048b1454d38f5cbf70"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "e98b359840a54270ae837897013e6a2638b8aea418a0c3878eca2bf4bb81b268",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 917,
+        "entry_count": 6,
+        "first_location": {
+          "end": 929,
+          "kind": "text",
+          "start": 919
+        },
+        "heading": "references",
+        "last_location": {
+          "end": 1953,
+          "kind": "text",
+          "start": 1821
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 1953,
+        "section_sha256": "0eefc10ba8f09aa600cf4901ca5b56957ef83b533b5d355c18f2a0be1675d4a1",
+        "section_start": 919
+      },
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "8564a07b758beb55579f9673cb9040f29457cf60afec655c187184e5ccb2f9e9",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "8564a07b758beb55579f9673cb9040f29457cf60afec655c187184e5ccb2f9e9"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "da922b9d324860bac7ed3091a93fd841b541d335bf7191bd77b9f133f72f2cfa",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "da922b9d324860bac7ed3091a93fd841b541d335bf7191bd77b9f133f72f2cfa"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "7a485d2100f5149f52e7198ea5e6e2a75300ddc8916c45f0c9bd368ea24255a3",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "7a485d2100f5149f52e7198ea5e6e2a75300ddc8916c45f0c9bd368ea24255a3"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "1e2d331052230d83d1e2054c55e635e5b8359d9ef86812821f976e165087b1c3",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "1e2d331052230d83d1e2054c55e635e5b8359d9ef86812821f976e165087b1c3"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "e98b359840a54270ae837897013e6a2638b8aea418a0c3878eca2bf4bb81b268",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 917,
+        "entry_count": 6,
+        "first_location": {
+          "body_index": 2,
+          "kind": "docx"
+        },
+        "heading": "references",
+        "last_location": {
+          "body_index": 8,
+          "kind": "docx"
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 1953,
+        "section_sha256": "0eefc10ba8f09aa600cf4901ca5b56957ef83b533b5d355c18f2a0be1675d4a1",
+        "section_start": 919
+      },
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "8564a07b758beb55579f9673cb9040f29457cf60afec655c187184e5ccb2f9e9",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "8564a07b758beb55579f9673cb9040f29457cf60afec655c187184e5ccb2f9e9"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "da922b9d324860bac7ed3091a93fd841b541d335bf7191bd77b9f133f72f2cfa",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "da922b9d324860bac7ed3091a93fd841b541d335bf7191bd77b9f133f72f2cfa"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "7a485d2100f5149f52e7198ea5e6e2a75300ddc8916c45f0c9bd368ea24255a3",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "7a485d2100f5149f52e7198ea5e6e2a75300ddc8916c45f0c9bd368ea24255a3"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "1e2d331052230d83d1e2054c55e635e5b8359d9ef86812821f976e165087b1c3",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "1e2d331052230d83d1e2054c55e635e5b8359d9ef86812821f976e165087b1c3"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "d16f6461c2f9aa136379a6dbd096fa3a6c1b2b109a40ad7b434ee6370897a26c",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "d16f6461c2f9aa136379a6dbd096fa3a6c1b2b109a40ad7b434ee6370897a26c"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "a9936299beb496fe2d5132bd340c06ba7a5d393e6f8f84b8c61770ee6fcb4c3e",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 915,
+        "entry_count": 6,
+        "first_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "heading": "references",
+        "last_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 1951,
+        "section_sha256": "0eefc10ba8f09aa600cf4901ca5b56957ef83b533b5d355c18f2a0be1675d4a1",
+        "section_start": 917
+      },
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "d16f6461c2f9aa136379a6dbd096fa3a6c1b2b109a40ad7b434ee6370897a26c"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "c0e964a23447d79ffce85e17846ffe2152b40335c4049f9f8ba0ca22d2d1e598",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "c0e964a23447d79ffce85e17846ffe2152b40335c4049f9f8ba0ca22d2d1e598"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "0cabbe66393b56a7e7b4538727278ea3223ade41cf0769c5b246780bcb772cae",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "0cabbe66393b56a7e7b4538727278ea3223ade41cf0769c5b246780bcb772cae"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "80854a19ff1c636bf89335e9e0a73ce96cf54807125768ceb3ffa33268e92974",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "80854a19ff1c636bf89335e9e0a73ce96cf54807125768ceb3ffa33268e92974"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "5c1e22700a2af52c98f590e509c2fec6c37e42be87ffc5d483adea028240c659",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "27dc514e306b4d8c212fbad4fc2f6fbead4b4f644422d4c3a417cd6248b6a04d",
+        "doi": "10.12688/wellcomeopenres.15229.2",
+        "entries_sha256": "5c52da999a61bf160356accba63f06d2db16a0ff5d97a891fd6ef70a17d38f6c",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15229-after.xml",
+        "xml_sha256": "c246643089cf19ad7fd4b143c81772d0e8bdf3cc42fec34df7b035f3491f9124",
+        "year": 2019
+      },
+      "writing_sha256": "5c1e22700a2af52c98f590e509c2fec6c37e42be87ffc5d483adea028240c659"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6"
+    },
+    {
+      "body_matches": true,
+      "format": "txt",
+      "input_sha256": "189ad3fb07686253da1e8fd1f45096894c18f2313096cadbe7b8b2a80671c6e1",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 1046,
+        "entry_count": 6,
+        "first_location": {
+          "end": 1058,
+          "kind": "text",
+          "start": 1048
+        },
+        "heading": "references",
+        "last_location": {
+          "end": 2154,
+          "kind": "text",
+          "start": 1980
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 2154,
+        "section_sha256": "8d3ff7749f916ee8379e97af7fd490feb5bc263843d9b0155e986682ec4610de",
+        "section_start": 1048
+      },
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "66cfada857233a621ac59f5c2952192bd7d4c9e9690df10f184cb95860918ea8",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "66cfada857233a621ac59f5c2952192bd7d4c9e9690df10f184cb95860918ea8"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "ec2eb9ee60f831e5db9a2211812fd079d202037129066dc34c766e26c312b661",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "ec2eb9ee60f831e5db9a2211812fd079d202037129066dc34c766e26c312b661"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "dfacf26dfa35c772aecc3c57c3f2a4cc583119e1f6c4e2a63464be0c8f2576a3",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "dfacf26dfa35c772aecc3c57c3f2a4cc583119e1f6c4e2a63464be0c8f2576a3"
+    },
+    {
+      "body_matches": false,
+      "format": "txt",
+      "input_sha256": "cfd162def60f97ff4215b5a2d6b9f02806e2d94744c5c32c41e0de9f97848bb2",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "cfd162def60f97ff4215b5a2d6b9f02806e2d94744c5c32c41e0de9f97848bb2"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6"
+    },
+    {
+      "body_matches": true,
+      "format": "docx",
+      "input_sha256": "189ad3fb07686253da1e8fd1f45096894c18f2313096cadbe7b8b2a80671c6e1",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 1046,
+        "entry_count": 6,
+        "first_location": {
+          "body_index": 2,
+          "kind": "docx"
+        },
+        "heading": "references",
+        "last_location": {
+          "body_index": 8,
+          "kind": "docx"
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 2154,
+        "section_sha256": "8d3ff7749f916ee8379e97af7fd490feb5bc263843d9b0155e986682ec4610de",
+        "section_start": 1048
+      },
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "66cfada857233a621ac59f5c2952192bd7d4c9e9690df10f184cb95860918ea8",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "66cfada857233a621ac59f5c2952192bd7d4c9e9690df10f184cb95860918ea8"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "ec2eb9ee60f831e5db9a2211812fd079d202037129066dc34c766e26c312b661",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "ec2eb9ee60f831e5db9a2211812fd079d202037129066dc34c766e26c312b661"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "dfacf26dfa35c772aecc3c57c3f2a4cc583119e1f6c4e2a63464be0c8f2576a3",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "dfacf26dfa35c772aecc3c57c3f2a4cc583119e1f6c4e2a63464be0c8f2576a3"
+    },
+    {
+      "body_matches": false,
+      "format": "docx",
+      "input_sha256": "cfd162def60f97ff4215b5a2d6b9f02806e2d94744c5c32c41e0de9f97848bb2",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "cfd162def60f97ff4215b5a2d6b9f02806e2d94744c5c32c41e0de9f97848bb2"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+      "other_text_preserved": true,
+      "role": "body",
+      "section": null,
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6"
+    },
+    {
+      "body_matches": true,
+      "format": "pdf",
+      "input_sha256": "189ad3fb07686253da1e8fd1f45096894c18f2313096cadbe7b8b2a80671c6e1",
+      "other_text_preserved": false,
+      "role": "bibliography",
+      "section": {
+        "body_chars": 1046,
+        "entry_count": 6,
+        "first_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "heading": "references",
+        "last_location": {
+          "kind": "pdf",
+          "page": 1
+        },
+        "schema": "chipmunk.writing-bibliography/1",
+        "section_end": 2154,
+        "section_sha256": "8d3ff7749f916ee8379e97af7fd490feb5bc263843d9b0155e986682ec4610de",
+        "section_start": 1048
+      },
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "66cfada857233a621ac59f5c2952192bd7d4c9e9690df10f184cb95860918ea8",
+      "other_text_preserved": true,
+      "role": "followed_by_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "66cfada857233a621ac59f5c2952192bd7d4c9e9690df10f184cb95860918ea8"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "ec2eb9ee60f831e5db9a2211812fd079d202037129066dc34c766e26c312b661",
+      "other_text_preserved": true,
+      "role": "underfilled",
+      "section": null,
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "ec2eb9ee60f831e5db9a2211812fd079d202037129066dc34c766e26c312b661"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "dfacf26dfa35c772aecc3c57c3f2a4cc583119e1f6c4e2a63464be0c8f2576a3",
+      "other_text_preserved": true,
+      "role": "heading_with_prose",
+      "section": null,
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "dfacf26dfa35c772aecc3c57c3f2a4cc583119e1f6c4e2a63464be0c8f2576a3"
+    },
+    {
+      "body_matches": false,
+      "format": "pdf",
+      "input_sha256": "cfd162def60f97ff4215b5a2d6b9f02806e2d94744c5c32c41e0de9f97848bb2",
+      "other_text_preserved": true,
+      "role": "one_nonentry",
+      "section": null,
+      "source": {
+        "body_sha256": "7323ed7f9a17031eee6283d05bafe19c1a526f552ca0ea1a161eb524d77e18b6",
+        "doi": "10.12688/wellcomeopenres.15013.2",
+        "entries_sha256": "fb3918d762ea74ee5ff6c811a91a42eb864b474905081801fe3327a47c2673e7",
+        "publisher": "wellcome",
+        "source_file": "wellcome-15013-after.xml",
+        "xml_sha256": "3207a3d5f224463153808009da5280abd9f9413d99bbd8ec46e0f4818ec9dd0d",
+        "year": 2019
+      },
+      "writing_sha256": "cfd162def60f97ff4215b5a2d6b9f02806e2d94744c5c32c41e0de9f97848bb2"
+    }
+  ],
+  "schema": "chipmunk.writing-bibliography-scope-transfer/1"
+}

@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [standalone writing classifier comparison](writing-independent-range-transfer-2026-11-15.md#independent-replay)
+replays scoped sentence selection and exact word overlap for three genres.
+It keeps ordinary versions and edited examples together by work and
+reproduces the difference between finding the sentence and finding the
+changed words.
+
 The [twelve-second AAC speech replay](audio-clean-speech-aac-2026-11-15.md#twelve-second-mono-aac-under-competing-speech)
 recounts 272 paired comparisons on the same lossless, mono and stereo
 delivery clocks. It preserves local edit positions, mismatched references

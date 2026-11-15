@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Separate writing classifier for sentence selection](writing-independent-range-transfer-2026-11-15.md)
+  selected ten correct sentences versus three on 48 separate report
+  rewrites, but located only one useful word range with 20 ordinary flags
+  versus eight. The frozen word head reached useful overlap on only four
+  of those rewrites when given the correct sentence. The new classifier
+  and its combinations remain in evaluation.
+
 - [Twelve-second AAC speech comparison](audio-clean-speech-aac-2026-11-15.md#twelve-second-mono-aac-under-competing-speech)
   retains 32/64 useful synthetic replacement locations from the lossless
   comparison with six ordinary flags in each carrier. Fourteen correct

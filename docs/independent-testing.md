@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [nested speech-window replay](audio-nested-voice-window-2026-11-14.md#replay)
+checks the time evidence behind existing alerts on exact spoken-word
+replacements under AMI and ICSI background speech. The
+[ICSI source bank](audio-icsi-overlap-intake-2026-11-14.md#replay-the-source-bank)
+rebuilds the original 24 excerpts from public annotation and byte ranges.
+
 The [short-voice input sensitivity replay](audio-input-contribution-transfer-2026-11-14.md#reproduce)
 checks source identities, exact sample windows and held results across
 several synthesis families with competing speech. Use `count-events`

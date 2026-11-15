@@ -30,6 +30,9 @@ LEVELS = (0, -5)
 GROUPS = 8
 SCHEMA = "chipmunk.audio-nested-voice-window/1"
 INPUT_PARENT = PANELS / "audio-input-contribution-transfer-2026-11-14.json"
+AMI_PARENT = PANELS / "audio-nested-voice-window-ami-2026-11-14.json"
+ICSI_METHOD = "Reuse the exact AMI cohort foregrounds. Use annotation-only one-to-one matching with eight frozen strong ICSI " \
+    "excerpts at -5 dB. Require concurrent background speech through at least half of each edit. Keep the scoped points fixed."
 METHOD = {
     "source": "Select eight distinct PhonemeDF prompt readers by hashed order from the existing qualified publisher "
               "prefixes. Match the whole publisher word tier across real speech, MeloTTS and Chatterbox TTS, "
@@ -180,6 +183,46 @@ def _room_inputs(history, roster):
                                               "edit_overlap_samples": support, "pcm_sha256": SOURCE.digest(raw)}
 
 
+def _icsi_inputs(root, roster):
+    from scripts import audio_icsi_overlap_intake as icsi
+
+    receipt = SOURCE.read(root / "receipt.json")
+    frozen = receipt["plan"]
+    SOURCE.check(frozen["schema"] == icsi.SCHEMA and frozen["sample_rate"] == RATE and frozen["sample_count"] == SAMPLES
+                 and frozen["revision"] == icsi.REVISION, "Different ICSI source plan")
+    options = {}
+    for source in roster:
+        a, b = source["truth"]
+        eligible = []
+        for index, case in enumerate(receipt["cases"]):
+            if case["condition"] != "strong":
+                continue
+            overlap = sum(max(0, min(b, end) - max(a, start)) for start, end in case["overlap_ranges"])
+            if 2*overlap >= b-a:
+                eligible.append((_rank((source["group"], case["room"], case["start_sample"])), index, overlap))
+        options[source["group"]] = sorted(eligible)
+
+    def match(pending, used, assigned):
+        if not pending:
+            return assigned
+        group, *rest = pending
+        for _, index, overlap in options[group]:
+            if index not in used and (result := match(rest, used | {index}, assigned + [(group, index, overlap)])):
+                return result
+        return None
+
+    matched = match(sorted(options, key=lambda group: (len(options[group]), group)), set(), [])
+    SOURCE.check(matched is not None and len(matched) == len(roster), "Insufficient distinct ICSI overlap excerpts")
+    SOURCE.check(len({receipt["cases"][index]["room"] for _, index, _ in matched}) >= 3, "The match lacks three meeting groups")
+    for group, index, support in matched:
+        item = receipt["cases"][index]
+        room, start = item["room"], item["start_sample"]
+        raw = (root / f"{room}-{start}.pcm").read_bytes()
+        SOURCE.check(len(raw) == 2*SAMPLES and SOURCE.digest(raw) == item["pcm_sha256"], "ICSI sample receipt differs")
+        yield group, raw, {"room": room, "capture_header_sha256": receipt["captures"][room]["header_sha256"],
+                           "start_sample": start, "edit_overlap_samples": support, "pcm_sha256": item["pcm_sha256"]}
+
+
 def _materialize(args):
     import numpy as np
 
@@ -188,9 +231,17 @@ def _materialize(args):
 
     arrays, labels, archive = _inputs(args)
     roster = _select(arrays, labels, args.history)
-    backgrounds = {group: (raw, bind) for group, raw, bind in _room_inputs(args.history, roster)}
+    related = SOURCE.read(AMI_PARENT)["freeze"]["plan"] if args.icsi else None
+    if related is not None:
+        SOURCE.check(archive == related["archive"] and all(
+            {k: v for k, v in item.items() if k != "key"} == {k: v for k, v in old.items() if k != "background"}
+            for item, old in zip(roster, related["sources"], strict=True)), "The fixed foreground roster differs")
+    background_rows = _icsi_inputs(args.icsi, roster) if args.icsi else _room_inputs(args.history, roster)
+    backgrounds = {group: (raw, bind) for group, raw, bind in background_rows}
     rows, bank = [], {}
     seen = {row["pcm_sha256"] for panel in SOURCE.read(INPUT_PARENT)["panels"].values() for row in panel}
+    if related is not None:
+        seen.update(row["pcm_sha256"] for row in related["clips"])
     for source in roster:
         index, key = source["group"], source["key"]
         left = source["crop"]
@@ -210,7 +261,7 @@ def _materialize(args):
         masker *= rms(host) / rms(masker)
         peak = max(np.max(abs(value) + abs(masker) * 10 ** .25) for value in variants.values())
         gain = 26000 / peak
-        for db in LEVELS:
+        for db in ((-5,) if args.icsi else LEVELS):
             mix = np.rint(masker * gain * 10 ** (-db / 20)).astype(np.int32)
             prepared = {kind: np.rint(value * gain).astype(np.int32) + mix for kind, value in variants.items()}
             if db == -5:
@@ -229,7 +280,10 @@ def _materialize(args):
                              "truth": [a, b] if kind.startswith("edited/") else None})
         source["background"] = background
         source.pop("key")
-    return {"archive": archive, "sources": roster, "clips": rows}, bank
+    plan = {"archive": archive, "sources": roster, "clips": rows}
+    if args.icsi:
+        plan.update(icsi_receipt_sha256=SOURCE.path_sha(args.icsi / "receipt.json"), ami_parent_sha256=SOURCE.path_sha(AMI_PARENT))
+    return plan, bank
 
 
 def _dense(model, pcm, spans, before):
@@ -259,6 +313,9 @@ def review(record):
     lock = record["freeze"]
     SOURCE.check(lock["schema"] == SCHEMA and lock["method"] == METHOD and lock["points"] == [BASE_POINT, DENSE_POINT]
                  and lock["exploration_sha256"] == SOURCE.path_sha(INPUT_PARENT), "Method or points differ")
+    if lock.get("background_transfer") is not None:
+        SOURCE.check(lock["background_transfer"] == ICSI_METHOD and lock["plan"]["ami_parent_sha256"] == SOURCE.path_sha(AMI_PARENT),
+                     "Secondary background transfer differs")
     stats = defaultdict(Counter)
     for clip, scores in zip(lock["plan"]["clips"], record["measurements"], strict=True):
         SOURCE.check(scores["pcm_sha256"] == clip["pcm_sha256"], "A measured source differs from the frozen plan")
@@ -300,6 +357,8 @@ def _run(args):
     lock = {"schema": SCHEMA, "method": METHOD, "points": [BASE_POINT, DENSE_POINT], "plan": plan,
             "runner_sha256": SOURCE.path_sha(Path(__file__)), "assets": ASSETS,
             "exploration_sha256": SOURCE.path_sha(INPUT_PARENT)}
+    if args.icsi:
+        lock["background_transfer"] = ICSI_METHOD
     SOURCE.write(args.path / "freeze.json", lock)
     print(f"Froze {len(plan['sources'])} readers and {len(plan['clips'])} deliveries before inference", flush=True)
     network_free()
@@ -342,6 +401,7 @@ if __name__ == "__main__":
     for field in ("melo", "aligned", "earlier"):
         parser.add_argument(f"--{field}", type=Path)
     parser.add_argument("--history", type=Path, default=ROOT / "backend/data/independent-evaluation")
+    parser.add_argument("--icsi", type=Path, help="Replay the frozen foreground roster over acquired ICSI utterance overlap")
     parser.add_argument("--weights", type=Path, default=ROOT / "models/weights/audio-upgrade")
     args = parser.parse_args()
     if args.phase == "measure" and any(getattr(args, field) is None for field in ("melo", "aligned", "earlier")):

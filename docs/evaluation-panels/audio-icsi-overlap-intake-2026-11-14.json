@@ -1,0 +1,883 @@
+{
+  "captures": {
+    "Bmr002": {
+      "header_sha256": "e46ab04d3b4364d917bdfd9f1d91965c253e320eeaf83e3a55d1d7bd2ad9c7ea",
+      "samples": 43947904,
+      "total_bytes": 87895852
+    },
+    "Bns003": {
+      "header_sha256": "5c099038f44416ab6c91f7a75136fed0640655502685d386be3c5283efff3de9",
+      "samples": 48112000,
+      "total_bytes": 96224044
+    },
+    "Bro010": {
+      "header_sha256": "6e5093a33848e30f5ed31901c5240d2924d435b8d08f0cf1dc06f5a733c92f3c",
+      "samples": 46450048,
+      "total_bytes": 92900140
+    }
+  },
+  "cases": [
+    {
+      "active_samples": 83200,
+      "condition": "strong",
+      "overlap_ranges": [
+        [
+          15040,
+          21760
+        ],
+        [
+          29440,
+          33280
+        ],
+        [
+          40320,
+          41120
+        ],
+        [
+          62080,
+          68160
+        ],
+        [
+          83840,
+          84960
+        ],
+        [
+          90240,
+          96000
+        ]
+      ],
+      "overlap_samples": 24320,
+      "pcm_sha256": "356986aea82e3ba2d4ec0b77afafc238ca88cda532fe441c33da5f33d3fc34e8",
+      "room": "Bmr002",
+      "start_sample": 25920000
+    },
+    {
+      "active_samples": 87360,
+      "condition": "strong",
+      "overlap_ranges": [
+        [
+          16160,
+          17920
+        ],
+        [
+          52640,
+          61280
+        ],
+        [
+          73120,
+          73600
+        ],
+        [
+          73760,
+          76480
+        ],
+        [
+          76640,
+          84480
+        ],
+        [
+          84640,
+          95040
+        ]
+      ],
+      "overlap_samples": 31840,
+      "pcm_sha256": "f0444a26e7d16376c6bebf7d6b44f89e3d2974d0239a6c1805c665148d2ff732",
+      "room": "Bmr002",
+      "start_sample": 39456000
+    },
+    {
+      "active_samples": 72800,
+      "condition": "strong",
+      "overlap_ranges": [
+        [
+          54880,
+          56160
+        ],
+        [
+          58400,
+          74080
+        ],
+        [
+          75680,
+          80320
+        ],
+        [
+          85600,
+          88000
+        ]
+      ],
+      "overlap_samples": 24000,
+      "pcm_sha256": "b027cbc80b4dada7030277ccf0785ae3188982656e682aeb829c99cc258fafeb",
+      "room": "Bmr002",
+      "start_sample": 864000
+    },
+    {
+      "active_samples": 79200,
+      "condition": "strong",
+      "overlap_ranges": [
+        [
+          0,
+          4000
+        ],
+        [
+          24640,
+          30880
+        ],
+        [
+          31520,
+          31680
+        ],
+        [
+          49600,
+          52800
+        ],
+        [
+          55360,
+          60800
+        ],
+        [
+          65760,
+          71040
+        ],
+        [
+          72160,
+          72320
+        ],
+        [
+          93120,
+          93920
+        ],
+        [
+          94080,
+          96000
+        ]
+      ],
+      "overlap_samples": 27200,
+      "pcm_sha256": "28d41abe55716f0d71185ee5594324222e00279872f2c21eb29b694105b2b662",
+      "room": "Bmr002",
+      "start_sample": 22656000
+    },
+    {
+      "active_samples": 80000,
+      "condition": "minimal",
+      "overlap_ranges": [],
+      "overlap_samples": 0,
+      "pcm_sha256": "2c8c241240bbd76c1bb59f8862386d4e5fe814aab910d67ff2681508173466b0",
+      "room": "Bmr002",
+      "start_sample": 6816000
+    },
+    {
+      "active_samples": 78720,
+      "condition": "minimal",
+      "overlap_ranges": [],
+      "overlap_samples": 0,
+      "pcm_sha256": "4c16c01163204f8fc04176ee9c2b1fcd8f246f4b1a8eef33e57068afb9a1a7e4",
+      "room": "Bmr002",
+      "start_sample": 24000000
+    },
+    {
+      "active_samples": 81120,
+      "condition": "minimal",
+      "overlap_ranges": [],
+      "overlap_samples": 0,
+      "pcm_sha256": "17d7103bb13c3af06613f7be1fd0beb559826fe5e0853d108d5d1449444b4b18",
+      "room": "Bmr002",
+      "start_sample": 37248000
+    },
+    {
+      "active_samples": 78080,
+      "condition": "minimal",
+      "overlap_ranges": [],
+      "overlap_samples": 0,
+      "pcm_sha256": "6578ad8a3b36065cb88ae6bb3b15ac5017ad0be29c6fe56f444e03930e3f13f8",
+      "room": "Bmr002",
+      "start_sample": 2880000
+    },
+    {
+      "active_samples": 80160,
+      "condition": "strong",
+      "overlap_ranges": [
+        [
+          22400,
+          27680
+        ],
+        [
+          33280,
+          37440
+        ],
+        [
+          68000,
+          83360
+        ]
+      ],
+      "overlap_samples": 24800,
+      "pcm_sha256": "832ecb0395dcd4932a6f7bfbf1ceef6a80068b3b516818ffa0c3f622f0868361",
+      "room": "Bns003",
+      "start_sample": 11520000
+    },
+    {
+      "active_samples": 83840,
+      "condition": "strong",
+      "overlap_ranges": [
+        [
+          62240,
+          82240
+        ]
+      ],
+      "overlap_samples": 20000,
+      "pcm_sha256": "44cf7c82d7f7939690bf8e343456d0339e3df698b86e6cc0b2129515b8eeae74",
+      "room": "Bns003",
+      "start_sample": 12000000
+    },
+    {
+      "active_samples": 74080,
+      "condition": "strong",
+      "overlap_ranges": [
+        [
+          25760,
+          27680
+        ],
+        [
+          72960,
+          92000
+        ]
+      ],
+      "overlap_samples": 20960,
+      "pcm_sha256": "9ad1f93a25e083c5cf894fa150cbd8f7b33d493d47291d93d4b404b55150ec9a",
+      "room": "Bns003",
+      "start_sample": 26784000
+    },
+    {
+      "active_samples": 88800,
+      "condition": "strong",
+      "overlap_ranges": [
+        [
+          960,
+          1920
+        ],
+        [
+          5280,
+          11520
+        ],
+        [
+          20320,
+          20480
+        ],
+        [
+          21600,
+          26080
+        ],
+        [
+          27520,
+          33120
+        ],
+        [
+          33600,
+          39520
+        ],
+        [
+          86560,
+          90560
+        ],
+        [
+          94080,
+          96000
+        ]
+      ],
+      "overlap_samples": 29280,
+      "pcm_sha256": "fb30364d2574448b05b127622c5c3cb5ea636191e0735d7800a15c4effb6b788",
+      "room": "Bns003",
+      "start_sample": 12192000
+    },
+    {
+      "active_samples": 91840,
+      "condition": "minimal",
+      "overlap_ranges": [],
+      "overlap_samples": 0,
+      "pcm_sha256": "565d5b2d6923b47b2079f1c6f623e9dd98e8ae1e40dbed0bb0a8e05b3cc73e27",
+      "room": "Bns003",
+      "start_sample": 17376000
+    },
+    {
+      "active_samples": 74560,
+      "condition": "minimal",
+      "overlap_ranges": [],
+      "overlap_samples": 0,
+      "pcm_sha256": "fe30aa86791c744c59600498eb401b6e90aca659f117d3b205a21088b0dcbc0b",
+      "room": "Bns003",
+      "start_sample": 36768000
+    },
+    {
+      "active_samples": 77120,
+      "condition": "minimal",
+      "overlap_ranges": [],
+      "overlap_samples": 0,
+      "pcm_sha256": "a89e78539ae1d2be734ff016154f7dbb4a1aaa19d7c71d0a738c3b00135812c4",
+      "room": "Bns003",
+      "start_sample": 40224000
+    },
+    {
+      "active_samples": 83680,
+      "condition": "minimal",
+      "overlap_ranges": [],
+      "overlap_samples": 0,
+      "pcm_sha256": "c93e02612d83262d5e2d328e0211350e5b4f5600d9671bf64047418c56f96aed",
+      "room": "Bns003",
+      "start_sample": 5760000
+    },
+    {
+      "active_samples": 74400,
+      "condition": "strong",
+      "overlap_ranges": [
+        [
+          0,
+          15680
+        ],
+        [
+          28320,
+          37440
+        ]
+      ],
+      "overlap_samples": 24800,
+      "pcm_sha256": "6d8f40ff5681a806aef8061d56c653e0bc0e578d2a5894f55a4343e059a4024a",
+      "room": "Bro010",
+      "start_sample": 21216000
+    },
+    {
+      "active_samples": 94080,
+      "condition": "strong",
+      "overlap_ranges": [
+        [
+          4320,
+          5760
+        ],
+        [
+          9120,
+          11680
+        ],
+        [
+          20320,
+          24800
+        ],
+        [
+          25280,
+          35840
+        ],
+        [
+          42240,
+          50880
+        ],
+        [
+          67360,
+          69920
+        ]
+      ],
+      "overlap_samples": 30240,
+      "pcm_sha256": "28023dc02e1310dfc983d290b5ea84a40ace1cf0809ac2c7f73d4a1fcd924370",
+      "room": "Bro010",
+      "start_sample": 23808000
+    },
+    {
+      "active_samples": 83360,
+      "condition": "strong",
+      "overlap_ranges": [
+        [
+          0,
+          21280
+        ],
+        [
+          23040,
+          30240
+        ]
+      ],
+      "overlap_samples": 28480,
+      "pcm_sha256": "e0a90d24b824c9c8d11e40ccbe9ab12718848199a895c2b2e357e88bd4ed5e63",
+      "room": "Bro010",
+      "start_sample": 14400000
+    },
+    {
+      "active_samples": 84320,
+      "condition": "strong",
+      "overlap_ranges": [
+        [
+          56960,
+          73440
+        ],
+        [
+          76480,
+          79680
+        ]
+      ],
+      "overlap_samples": 19680,
+      "pcm_sha256": "fcba61120ba26199dc54e08a244a7724f2820c0b21dfb20f33a1ccdb5415adb1",
+      "room": "Bro010",
+      "start_sample": 16512000
+    },
+    {
+      "active_samples": 78720,
+      "condition": "minimal",
+      "overlap_ranges": [],
+      "overlap_samples": 0,
+      "pcm_sha256": "a55c5b60c846c90bc29621bd564a2060fda3c3a02cfa8ebabbc7c3675fa5aabb",
+      "room": "Bro010",
+      "start_sample": 20064000
+    },
+    {
+      "active_samples": 79520,
+      "condition": "minimal",
+      "overlap_ranges": [],
+      "overlap_samples": 0,
+      "pcm_sha256": "3c9200442c5cca4fe72f70cc37788c07fdd20d49e7f6bc5e3047196c5489caa5",
+      "room": "Bro010",
+      "start_sample": 2016000
+    },
+    {
+      "active_samples": 83040,
+      "condition": "minimal",
+      "overlap_ranges": [],
+      "overlap_samples": 0,
+      "pcm_sha256": "60336b036fd8a81a5a65f18d64c163535f9ad8ea56140d538f1e951fd959cb4d",
+      "room": "Bro010",
+      "start_sample": 35808000
+    },
+    {
+      "active_samples": 78880,
+      "condition": "minimal",
+      "overlap_ranges": [],
+      "overlap_samples": 0,
+      "pcm_sha256": "b9f42a483e7aca38c1405cbd12c75867ecb85a0d6b89b1265db600ce1b3adcab",
+      "room": "Bro010",
+      "start_sample": 41856000
+    }
+  ],
+  "detection_attempts": 0,
+  "plan": {
+    "annotations_sha256": "cf4860245b9ca9c9ed11a66e5a74cfea2a99a686a52f7580aa0a6bc2225895a9",
+    "annotations_url": "https://groups.inf.ed.ac.uk/ami/ICSICorpusAnnotations/ICSI_core_NXT.zip",
+    "cases": [
+      {
+        "active_samples": 83200,
+        "condition": "strong",
+        "overlap_ranges": [
+          [
+            15040,
+            21760
+          ],
+          [
+            29440,
+            33280
+          ],
+          [
+            40320,
+            41120
+          ],
+          [
+            62080,
+            68160
+          ],
+          [
+            83840,
+            84960
+          ],
+          [
+            90240,
+            96000
+          ]
+        ],
+        "overlap_samples": 24320,
+        "room": "Bmr002",
+        "start_sample": 25920000
+      },
+      {
+        "active_samples": 87360,
+        "condition": "strong",
+        "overlap_ranges": [
+          [
+            16160,
+            17920
+          ],
+          [
+            52640,
+            61280
+          ],
+          [
+            73120,
+            73600
+          ],
+          [
+            73760,
+            76480
+          ],
+          [
+            76640,
+            84480
+          ],
+          [
+            84640,
+            95040
+          ]
+        ],
+        "overlap_samples": 31840,
+        "room": "Bmr002",
+        "start_sample": 39456000
+      },
+      {
+        "active_samples": 72800,
+        "condition": "strong",
+        "overlap_ranges": [
+          [
+            54880,
+            56160
+          ],
+          [
+            58400,
+            74080
+          ],
+          [
+            75680,
+            80320
+          ],
+          [
+            85600,
+            88000
+          ]
+        ],
+        "overlap_samples": 24000,
+        "room": "Bmr002",
+        "start_sample": 864000
+      },
+      {
+        "active_samples": 79200,
+        "condition": "strong",
+        "overlap_ranges": [
+          [
+            0,
+            4000
+          ],
+          [
+            24640,
+            30880
+          ],
+          [
+            31520,
+            31680
+          ],
+          [
+            49600,
+            52800
+          ],
+          [
+            55360,
+            60800
+          ],
+          [
+            65760,
+            71040
+          ],
+          [
+            72160,
+            72320
+          ],
+          [
+            93120,
+            93920
+          ],
+          [
+            94080,
+            96000
+          ]
+        ],
+        "overlap_samples": 27200,
+        "room": "Bmr002",
+        "start_sample": 22656000
+      },
+      {
+        "active_samples": 80000,
+        "condition": "minimal",
+        "overlap_ranges": [],
+        "overlap_samples": 0,
+        "room": "Bmr002",
+        "start_sample": 6816000
+      },
+      {
+        "active_samples": 78720,
+        "condition": "minimal",
+        "overlap_ranges": [],
+        "overlap_samples": 0,
+        "room": "Bmr002",
+        "start_sample": 24000000
+      },
+      {
+        "active_samples": 81120,
+        "condition": "minimal",
+        "overlap_ranges": [],
+        "overlap_samples": 0,
+        "room": "Bmr002",
+        "start_sample": 37248000
+      },
+      {
+        "active_samples": 78080,
+        "condition": "minimal",
+        "overlap_ranges": [],
+        "overlap_samples": 0,
+        "room": "Bmr002",
+        "start_sample": 2880000
+      },
+      {
+        "active_samples": 80160,
+        "condition": "strong",
+        "overlap_ranges": [
+          [
+            22400,
+            27680
+          ],
+          [
+            33280,
+            37440
+          ],
+          [
+            68000,
+            83360
+          ]
+        ],
+        "overlap_samples": 24800,
+        "room": "Bns003",
+        "start_sample": 11520000
+      },
+      {
+        "active_samples": 83840,
+        "condition": "strong",
+        "overlap_ranges": [
+          [
+            62240,
+            82240
+          ]
+        ],
+        "overlap_samples": 20000,
+        "room": "Bns003",
+        "start_sample": 12000000
+      },
+      {
+        "active_samples": 74080,
+        "condition": "strong",
+        "overlap_ranges": [
+          [
+            25760,
+            27680
+          ],
+          [
+            72960,
+            92000
+          ]
+        ],
+        "overlap_samples": 20960,
+        "room": "Bns003",
+        "start_sample": 26784000
+      },
+      {
+        "active_samples": 88800,
+        "condition": "strong",
+        "overlap_ranges": [
+          [
+            960,
+            1920
+          ],
+          [
+            5280,
+            11520
+          ],
+          [
+            20320,
+            20480
+          ],
+          [
+            21600,
+            26080
+          ],
+          [
+            27520,
+            33120
+          ],
+          [
+            33600,
+            39520
+          ],
+          [
+            86560,
+            90560
+          ],
+          [
+            94080,
+            96000
+          ]
+        ],
+        "overlap_samples": 29280,
+        "room": "Bns003",
+        "start_sample": 12192000
+      },
+      {
+        "active_samples": 91840,
+        "condition": "minimal",
+        "overlap_ranges": [],
+        "overlap_samples": 0,
+        "room": "Bns003",
+        "start_sample": 17376000
+      },
+      {
+        "active_samples": 74560,
+        "condition": "minimal",
+        "overlap_ranges": [],
+        "overlap_samples": 0,
+        "room": "Bns003",
+        "start_sample": 36768000
+      },
+      {
+        "active_samples": 77120,
+        "condition": "minimal",
+        "overlap_ranges": [],
+        "overlap_samples": 0,
+        "room": "Bns003",
+        "start_sample": 40224000
+      },
+      {
+        "active_samples": 83680,
+        "condition": "minimal",
+        "overlap_ranges": [],
+        "overlap_samples": 0,
+        "room": "Bns003",
+        "start_sample": 5760000
+      },
+      {
+        "active_samples": 74400,
+        "condition": "strong",
+        "overlap_ranges": [
+          [
+            0,
+            15680
+          ],
+          [
+            28320,
+            37440
+          ]
+        ],
+        "overlap_samples": 24800,
+        "room": "Bro010",
+        "start_sample": 21216000
+      },
+      {
+        "active_samples": 94080,
+        "condition": "strong",
+        "overlap_ranges": [
+          [
+            4320,
+            5760
+          ],
+          [
+            9120,
+            11680
+          ],
+          [
+            20320,
+            24800
+          ],
+          [
+            25280,
+            35840
+          ],
+          [
+            42240,
+            50880
+          ],
+          [
+            67360,
+            69920
+          ]
+        ],
+        "overlap_samples": 30240,
+        "room": "Bro010",
+        "start_sample": 23808000
+      },
+      {
+        "active_samples": 83360,
+        "condition": "strong",
+        "overlap_ranges": [
+          [
+            0,
+            21280
+          ],
+          [
+            23040,
+            30240
+          ]
+        ],
+        "overlap_samples": 28480,
+        "room": "Bro010",
+        "start_sample": 14400000
+      },
+      {
+        "active_samples": 84320,
+        "condition": "strong",
+        "overlap_ranges": [
+          [
+            56960,
+            73440
+          ],
+          [
+            76480,
+            79680
+          ]
+        ],
+        "overlap_samples": 19680,
+        "room": "Bro010",
+        "start_sample": 16512000
+      },
+      {
+        "active_samples": 78720,
+        "condition": "minimal",
+        "overlap_ranges": [],
+        "overlap_samples": 0,
+        "room": "Bro010",
+        "start_sample": 20064000
+      },
+      {
+        "active_samples": 79520,
+        "condition": "minimal",
+        "overlap_ranges": [],
+        "overlap_samples": 0,
+        "room": "Bro010",
+        "start_sample": 2016000
+      },
+      {
+        "active_samples": 83040,
+        "condition": "minimal",
+        "overlap_ranges": [],
+        "overlap_samples": 0,
+        "room": "Bro010",
+        "start_sample": 35808000
+      },
+      {
+        "active_samples": 78880,
+        "condition": "minimal",
+        "overlap_ranges": [],
+        "overlap_samples": 0,
+        "room": "Bro010",
+        "start_sample": 41856000
+      }
+    ],
+    "known_speaker_counts": {
+      "Bmr002": 4,
+      "Bns003": 6,
+      "Bro010": 6
+    },
+    "method": {
+      "geometry": "Use nonoverlapping 6 s windows on a 10 ms source grid, starting at 12 s and ending within the hour. Require 4.5 s with at least one speaker. Select four windows with at least 1.2 s of overlapping words, plus four with at most 0.1 s, per meeting. Select using fixed SHA-256 order before audio access.",
+      "native": "Use exact original 16 kHz mono 16-bit PCM from the pinned interaction WAV. Retrieve only the header and selected sample ranges. Keep known widths and clocks without resampling. No source inference.",
+      "room_groups": "Choose a deterministic three-meeting combination with four or more declared participants in each and no declared participant shared among the three. Use published words and dialogue-act participant IDs only."
+    },
+    "repository": "aaronyee/icsi-meeting-corpus",
+    "revision": "ea358f7db63cd68c59b22d7990918f326480215f",
+    "sample_count": 96000,
+    "sample_rate": 16000,
+    "schema": "chipmunk.audio-icsi-overlap-intake/1"
+  }
+}

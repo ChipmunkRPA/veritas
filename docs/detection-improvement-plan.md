@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Narrower locations inside short speech alerts](audio-nested-voice-window-2026-11-14.md)
+  recovered five useful edit locations across two readers in 48 aligned
+  replacements. It also narrowed 18 existing ordinary AMI alerts. The app
+  keeps the original ranges. A separate ICSI intake supplies 24 exactly
+  reproducible genuine windows across three participant-separated meetings.
+
 - [Input sensitivity during a short voice edit](audio-input-contribution-transfer-2026-11-14.md)
   found zero added useful locations with the signed upper-frequency cue.
   Agreement with the dense score added one range on the three-generator

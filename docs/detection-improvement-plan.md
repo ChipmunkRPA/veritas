@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Writing scores after hiding one sentence](writing-attention-attribution-2026-11-15.md)
+  compared three exact positions on 24 separate original/rewrite pairs.
+  At the wider point, masking gained three correct sentence locations and
+  lost four, while ordinary flags fell from 6/24 to 4/24. Both the masking
+  and agreement rules stay in evaluation. The replay tracks when the
+  rewrite also changes the scores of untouched sentences.
+
 - [Mouth-opening ranks for lip timing](video-lip-aperture-scale-2026-11-15.md)
   adds nine useful ranges in 128 main PCM shifts and one in each
   separate delivery panel while preserving existing findings and

@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [writing attention replay](writing-attention-attribution-2026-11-15.md#replay)
+recounts exact sentence locations, ordinary alerts and paired score
+movement on untouched neighbors. Its separate test uses 24 original and
+rewrite pairs with two generators. The portable path exposes exact
+source coordinates and readings without redistributing essay text.
+
 The [mouth-opening rank replay](video-lip-aperture-scale-2026-11-15.md#replay)
 recounts useful ranges from the actual two-check order and distinguishes
 weak measurements from intervals outside the timing grid. The native

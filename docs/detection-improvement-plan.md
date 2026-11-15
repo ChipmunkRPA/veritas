@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Word predictability inside a rewrite](writing-curvature-ranges-2026-11-15.md)
+  tested absolute curvature, a comparison with both flanks, and their
+  agreement. Each located one of 309 rewrites at the wider point, compared
+  with six from the prior word-range check. The best union adds one correct
+  location and flags 63 additional ordinary files. The checks remain in
+  evaluation.
+
 - [Rotated copies inside one JPEG](image-jpeg-turned-copy-2026-11-15.md)
   raised correct two-crop locations from 11/111 to 85/111 at quality 75
   and from 18/111 to 82/111 at quality 90, with zero additional flags

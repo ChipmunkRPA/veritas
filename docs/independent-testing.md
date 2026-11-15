@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [word predictability replay](writing-curvature-ranges-2026-11-15.md#replay)
+rebuilds exact range selections from per-word scalar measurements. It
+recounts both calibration points, paired gains and losses, and genuine
+revisions flagged by the different comparisons.
+
 The [rotated JPEG copy replay](image-jpeg-turned-copy-2026-11-15.md#replay)
 recounts 592 deliveries from attributed source photos and requires
 useful overlap on both original crop boxes. It preserves the prior

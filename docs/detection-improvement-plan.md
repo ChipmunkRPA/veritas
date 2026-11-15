@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Training a short-edit detector](audio-short-edit-detector-training-2026-11-14.md)
+  scored 88 matched prompts with readers, background sessions and the
+  synthetic training generator held out of each assessment. One model
+  added four useful noisy locations and 29 genuine alerts to the current
+  check. The other added no useful locations at either operating point.
+  Both remain evaluation-only, and the replay counts cases whose matched
+  controls were flagged at identical times.
+
 - [Speaker isolation during short edits](audio-mixture-phase-isolation-2026-11-14.md)
   compared 96 recordings. The exact target produced four useful ICSI
   locations without matched-location collisions. Blind separation

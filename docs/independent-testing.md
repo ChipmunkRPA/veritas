@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short-edit training replay](audio-short-edit-detector-training-2026-11-14.md#independent-replay)
+rebuilds matched dry and competing-speech variants. It checks separate
+speaker and generator roles, cutoffs frozen on genuine recordings, and
+useful locations against the actual local PCM review.
+
 The [speaker isolation replay](audio-mixture-phase-isolation-2026-11-14.md#replay)
 recounts edit locations and corresponding genuine flags across the mixed
 recording, exact target stem, blind separation and reconstruction from

@@ -579,6 +579,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_word_visibility.verify_source(document, decoded["meta"].get(document_word_visibility.KEY), frozen=True)
         document_invisible_characters.verify_source(document, text, mapping, decoded["meta"])
         document_native_locations.validate(document)
+        document_scope.validate_card_selection(document, mapping)
         if document_email_contexts.KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             document_email_contexts.verify_source(document, text, mapping, result=frozen)
@@ -749,7 +750,11 @@ def _coverage(kind: str, document: dict) -> str:
     candidates = coverage.get("candidate_spans", 0)
     if contexts:
         summary = f"Recorded {contexts} scored {'context' if contexts == 1 else 'contexts'}."
-        if candidates:
+        if balance := coverage.get(document_scope.CARD_SELECTION_KEY):
+            summary += (f" Showing {balance['displayed_passages']} of {candidates} candidate passages across "
+                        f"{balance['displayed_blocks']} of {balance['candidate_blocks']} source blocks with flags. "
+                        "The selection reserves space for disagreements. Ordinary writing can produce similar responses.")
+        elif candidates:
             summary += (f" Selected {candidates} candidate {'passage' if candidates == 1 else 'passages'} for review."
                         " Ordinary editing and polished writing can produce a similar response.")
         else:

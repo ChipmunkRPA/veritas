@@ -435,6 +435,8 @@ export interface DocumentEvidenceSet extends SetBase {
       occurrences: { start: number; end: number; anchor: { kind: 'text' | 'email' | 'docx' | 'pdf'; source_start?: number;
         source_end?: number; mime_part?: string; paragraph_index?: number; page?: number; block?: number; bbox?: number[] } }[] }[] }
   coverage?: { scored_windows?: number; candidate_spans?: number; unmapped_pages?: number[];
+    balanced_passage_selection?: { schema: 'document-balanced-passage-selection/1'; candidate_blocks: number;
+      displayed_blocks: number; displayed_passages: number };
     word_tracked_changes?: { status: 'found' | 'partial' | 'no_match'; scope: string; limitation: string;
       part: string; paragraphs: number; inserted: number; deleted: number; unsupported_marks: number;
       omitted_excerpts: number; rows: { kind: 'inserted' | 'deleted'; paragraph: number; body_index: number;

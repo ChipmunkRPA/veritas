@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Writing evidence across more source blocks](writing-balanced-cards-2026-11-14.md)
+  redistributes six detailed cards using the exact source mapping.
+  The held essay comparison displays 125 source blocks, up from 120,
+  at the same 182 disagreements and the same 17 useful rewrite locations.
+
 - [Predictability in other passages of the same report](writing-other-paragraphs-2026-11-14.md)
   reduced ordinary highlights from 51 to 43 of 51 at the tighter
   operating point, while useful locations fell from 29 to 13. The

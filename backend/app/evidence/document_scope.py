@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import math
 import re
+from bisect import bisect_right
 from collections import Counter
 
 VERSION = "document-evidence-5"
@@ -14,6 +15,9 @@ REPEAT_VERSIONS = frozenset({VERSION, MATCHED_VERSION, PARAGRAPH_PRIORITY_VERSIO
 SCOPE_VERSIONS = frozenset({"document-evidence-4", *REPEAT_VERSIONS})
 CONTEXT_VERSIONS = frozenset({"document-evidence-3", *SCOPE_VERSIONS})
 VERSIONS = frozenset({"document-evidence-1", "document-evidence-2", *CONTEXT_VERSIONS})
+CARD_SELECTION_KEY = "balanced_passage_selection"
+CARD_SELECTION_SCHEMA = "document-balanced-passage-selection/1"
+MAX_PASSAGES = 6
 
 PASSAGE_COVERAGE_KEY = "local_passage_coverage"
 PASSAGE_COVERAGE_SCHEMA = "document-local-passage-coverage/1"
@@ -53,6 +57,38 @@ def check_range(span: dict, size: int) -> tuple[int, int]:
     if type(start) is not int or type(end) is not int or not 0 <= start < end <= size:
         raise ValueError("Invalid document inspection coordinates")
     return start, end
+
+
+def source_blocks(locations: list[tuple[int, int]], mapping: list[dict]) -> dict[tuple[int, int], int]:
+    """Use source block numbers only where the complete focus is mapped."""
+    starts = [block["start"] for block in mapping]
+    blocks = {}
+    for start, end in locations:
+        index = bisect_right(starts, start) - 1
+        if index >= 0 and end <= mapping[index]["end"]:
+            blocks[start, end] = index + 1
+    return blocks
+
+
+def validate_card_selection(document: dict, mapping: list[dict] | None = None) -> None:
+    coverage = document.get("coverage") or {}
+    record = coverage.get(CARD_SELECTION_KEY)
+    if record is None:
+        return
+    candidates = coverage["candidate_spans"]
+    locations = [(p["focus"]["start"], p["focus"]["end"]) for p in document["packets"]]
+    if (not isinstance(record, dict) or set(record) != {"schema", "candidate_blocks", "displayed_blocks", "displayed_passages"}
+            or record["schema"] != CARD_SELECTION_SCHEMA or type(candidates) is not int
+            or any(type(record[key]) is not int for key in ("candidate_blocks", "displayed_blocks", "displayed_passages"))
+            or not 1 <= record["displayed_blocks"] <= record["displayed_passages"] == MAX_PASSAGES < candidates
+            or not max(2, record["displayed_blocks"]) <= record["candidate_blocks"] <= candidates
+            or len(locations) != len(set(locations)) or len(locations) != record["displayed_passages"]):
+        raise ValueError("Invalid distribution of displayed passage cards")
+    if mapping is not None:
+        blocks = source_blocks(locations, mapping)
+        if (len(blocks) != len(locations) or len(set(blocks.values())) != record["displayed_blocks"]
+                or record["candidate_blocks"] > len(mapping)):
+            raise ValueError("Displayed passages do not match their recorded source blocks")
 
 
 def mapped_email_html(email: dict) -> bool:

@@ -1,0 +1,58 @@
+{
+  "benchmark_sha256": "be7fa3bb25283c6088af0fe62d0b24d194a8e4c69499776139e51c2119219eca",
+  "billing": {
+    "amount_minor": 999,
+    "simulated": true,
+    "unpaid_jobs": 0
+  },
+  "rows": [
+    {
+      "candidate_spans": 7,
+      "disagreements_retained": 5,
+      "essay_sha256": "f12630fa0444987ea0d1e5ebb9f7bc632f551bd6f604305e5e1c70499e0b9628",
+      "extension": ".txt",
+      "json_matches": true,
+      "original_sha256": "f12630fa0444987ea0d1e5ebb9f7bc632f551bd6f604305e5e1c70499e0b9628",
+      "pdf_matches": true,
+      "selection": {
+        "candidate_blocks": 3,
+        "displayed_blocks": 3,
+        "displayed_passages": 6,
+        "schema": "document-balanced-passage-selection/1"
+      },
+      "signed_source_replay": true
+    },
+    {
+      "candidate_spans": 7,
+      "disagreements_retained": 6,
+      "essay_sha256": "86786324ba0350ded48892d8f7cc59eff39c18702b914168085d969bc0113054",
+      "extension": ".docx",
+      "json_matches": true,
+      "original_sha256": "8138c2e12ac84e27d79d8ac63b27b13c2a6c6ca1429bfb423e206e219192c625",
+      "pdf_matches": true,
+      "selection": {
+        "candidate_blocks": 3,
+        "displayed_blocks": 3,
+        "displayed_passages": 6,
+        "schema": "document-balanced-passage-selection/1"
+      },
+      "signed_source_replay": true
+    },
+    {
+      "candidate_spans": 7,
+      "disagreements_retained": 6,
+      "essay_sha256": "86786324ba0350ded48892d8f7cc59eff39c18702b914168085d969bc0113054",
+      "extension": ".pdf",
+      "json_matches": true,
+      "original_sha256": "2e41c8e854b5aee012d690dee9d28ec1b8318ea847294cbca98b68d1ca386404",
+      "pdf_matches": true,
+      "selection": {
+        "candidate_blocks": 3,
+        "displayed_blocks": 3,
+        "displayed_passages": 6,
+        "schema": "document-balanced-passage-selection/1"
+      },
+      "signed_source_replay": true
+    }
+  ]
+}

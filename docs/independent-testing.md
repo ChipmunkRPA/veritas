@@ -13,6 +13,10 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [writing card allocation replay](writing-balanced-cards-2026-11-14.md#reproduce)
+recounts source coverage, disagreements and useful localizations under
+both six-card selection policies on 26 held essay pairs.
+
 The [other-paragraph comparison](writing-other-paragraphs-2026-11-14.md#replay)
 recounts a check of predictability across disjoint passages from the same report.
 It includes point selection on separate ordinary reports, two held rewrite

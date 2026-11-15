@@ -18,7 +18,12 @@ from sqlalchemy.orm import Session
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.text.extract import extract, text_hash
 from app.detectors.text.segment import segment
-from app.evidence import document_check_coverage, document_passage_coverage, document_unselected_responses
+from app.evidence import (
+    document_check_coverage,
+    document_passage_coverage,
+    document_scope,
+    document_unselected_responses,
+)
 from app.evidence.document_packets import (
     DocumentPacketIntegrityError,
     build_packet_set,
@@ -548,6 +553,31 @@ def test_opposing_responses_outside_display_limit_are_counted_explicitly(packet_
     assert evidence["coverage"]["opposing_windows_displayed"] == 6
     assert evidence["coverage"]["opposing_windows_omitted"] == 2
     assert any("2 recorded opposing" in line for line in evidence["limitations"])
+
+
+def test_six_card_limit_covers_separate_source_blocks_and_keeps_disagreement(packet_factory):
+    paragraphs = [
+        " ".join(f"Sentence number {i} contains enough words to identify this source passage." for i in group)
+        for group in (range(8), range(8, 10), range(10, 12))
+    ]
+    db, store, analysis, result, decoded, _ = packet_factory(text="\n\n".join(paragraphs), scores=(0.9,) * 12)
+    signal = _add_ratio(result, decoded, score=0.8)
+    windows = signal["details"]["text_evidence"]["windows"]
+    for index in (0, 1, 2, 3, 8, 11):
+        windows[index].update(score=1.4, score_exact_hex=(1.4).hex(), mean_negative_log_likelihood=2.8)
+    analysis.result_hash = canonical_hash(result)
+    evidence = build_packet_set(db, analysis, store, result)
+    expected = [decoded["sentences"][i]["start"] for i in (0, 4, 8, 9, 10, 11)]
+    assert [packet["focus"]["start"] for packet in evidence["packets"]] == expected
+    coverage = evidence["coverage"]
+    assert coverage["candidate_spans"] == 12 and evidence["omitted_windows"] == 6
+    assert coverage["opposing_windows_recorded"] == 6 and coverage["opposing_windows_displayed"] == 3
+    assert coverage[document_scope.CARD_SELECTION_KEY] == {"schema": document_scope.CARD_SELECTION_SCHEMA, "candidate_blocks": 3,
+                                                          "displayed_blocks": 3, "displayed_passages": 6}
+    document_scope.validate_card_selection(evidence, decoded["source_map"])
+    coverage[document_scope.CARD_SELECTION_KEY]["displayed_blocks"] = 2
+    with pytest.raises(ValueError, match="recorded source blocks"):
+        document_scope.validate_card_selection(evidence, decoded["source_map"])
 
 
 def test_ratio_boundary_direction_survives_canonical_rounding(packet_factory):

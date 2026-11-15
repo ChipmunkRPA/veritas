@@ -38,6 +38,17 @@ const show = (set: MultimediaEvidenceSet, token = 'signed token', mediaReady = t
 afterEach(cleanup)
 
 describe('ordinary multimedia evidence', () => {
+  it('distinguishes displayed passages from the full list of writing candidates', () => {
+    show({ ...document, omitted_windows: 6, coverage: {
+      scored_windows: 24,
+      candidate_spans: 12,
+      balanced_passage_selection: { schema: 'document-balanced-passage-selection/1',
+        candidate_blocks: 4, displayed_blocks: 3, displayed_passages: 6 },
+    } })
+    expect(screen.getByText(/Showing 6 of 12 candidate passages across 3 of 4 source blocks with flags/)).toBeTruthy()
+    expect(screen.getByText(/The selection reserves space for disagreements/)).toBeTruthy()
+  })
+
   it('shows a skipped writing check on a result that has no highlighted passages', () => {
     show({ ...document, packets: [], coverage: { writing_check_coverage: {
       schema: 'document-writing-check-coverage/1',

@@ -36,6 +36,7 @@ from app.evidence import (
     document_percentage_consistency,
     document_repeat,
     document_scope,
+    document_selection,
     document_tracked_changes,
     document_unselected_responses,
     document_word_visibility,
@@ -48,7 +49,7 @@ from app.storage.objects import ObjectIntegrityError, ObjectStore
 SCHEMA = "chipmunk.document-evidence/1"
 VERSION = document_scope.VERSION
 CREATOR = "document-evidence-packets/1"
-MAX_PACKETS = 6
+MAX_PACKETS = document_scope.MAX_PASSAGES
 MAX_PAGES_PER_PACKET = 3
 _NS = uuid.UUID("e17ab568-436e-43a8-bc69-939c3a8007a6")
 _SHA = re.compile(r"[a-f0-9]{64}")
@@ -339,6 +340,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_invisible_characters.validate(document, document["source"].get(document_invisible_characters.COMMITMENT))
         document_matched_context.validate(document)
         document_paragraph_priority.validate(document)
+        document_scope.validate_card_selection(document)
         document_passage_coverage.validate(document)
         document_passage_position.validate(document)
         document_tracked_changes.validate(document, document["source"].get(document_tracked_changes.COMMITMENT))
@@ -491,17 +493,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     mixed_pdf_review = bool(checkpoint_review and checkpoint_review["schema"] == document_scope.CHECKPOINT_AGREEMENT_PDF_SCHEMA)
     priority = (sorted({(row["start"], row["end"]) for row in checkpoint_review["ranges"]}.intersection(candidates))
                 if reply_review or mixed_pdf_review else matched)
-    # Ratios and classifier outputs are not commensurate. Reserve half the
-    # bounded display for disagreement so selecting corroborated passages does
-    # not systematically hide real opposing observations elsewhere in the file.
-    remaining = set(candidates).difference(priority)
-    conflicts = sorted(key for key in remaining if any(document_scope.inspection_direction(w) is False for w in groups[key]))
-    agreed = sorted(remaining.difference(conflicts))
-    reserved = min(MAX_PACKETS // 2, MAX_PACKETS - len(priority))
-    selected = priority + conflicts[:reserved]
-    selected += agreed[:MAX_PACKETS - len(selected)]
-    selected += conflicts[reserved:reserved + MAX_PACKETS - len(selected)]
-    selected.sort()
+    disagreements, classifier_support = document_selection.directions(groups, candidates)
+    method = decoded["meta"].get("method")
+    blocks = document_scope.source_blocks(candidates, mapping) if method in {"plain", "python-docx", "pymupdf"} else {}
+    selected, distribution = document_selection.select(candidates, disagreements, classifier_support, priority, blocks)
     opposing_total = sum(document_scope.inspection_direction(w) is False for values in groups.values() for w in values)
     opposing_shown = sum(document_scope.inspection_direction(w) is False for key in selected for w in groups[key])
     document = {"schema": SCHEMA, "status": "ready", "id": current_set_id(analysis),
@@ -515,10 +510,13 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                               "opposing_windows_recorded": opposing_total,
                                               "opposing_windows_displayed": opposing_shown,
                                               "opposing_windows_omitted": opposing_total - opposing_shown,
-                                              "selection_policy": "Up to half the displayed passages are reserved for disagreement; remaining slots use other candidate passages, then any remaining disagreements. Each group follows source order; incomparable score kinds are not pooled.",
+                                              "selection_policy": document_selection.DEFAULT_POLICY,
                                               "unmapped_pages": decoded["meta"].get("unmapped_pages", []),
                                               "ocr": public_ocr, "email": decoded["meta"].get("email")},
                 "omitted_windows": max(0, len(candidates) - len(selected)), "limitations": []}
+    if distribution is not None:
+        document["coverage"][document_scope.CARD_SELECTION_KEY] = distribution
+        document["coverage"]["selection_policy"] = document_selection.BALANCED_POLICY
     if partially_checked := decoded["meta"].get("partially_checked_pages"):
         document["coverage"]["partially_checked_pages"] = partially_checked
     if writing_checks := document_check_coverage.from_result(result):
@@ -553,18 +551,15 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][document_scope.CHECKPOINT_AGREEMENT_KEY] = checkpoint_review
         document_scope.validate_checkpoint_agreement(document, text, result=result, mapping=mapping)
         if reply_review or mixed_pdf_review:
+            review = "writing" if mixed_pdf_review else "reply-body"
             document["coverage"]["selection_policy"] = (
-                "Passages revisited by the second writing check are prioritized for inclusion. Remaining passages use the standard "
-                "disagreement and source-order policy."
-            ) if mixed_pdf_review else (
-                "Passages revisited by the second reply-body check are prioritized for inclusion. Remaining passages use the standard "
-                "disagreement and source-order policy."
-            )
+                f"Passages revisited by the second {review} check are prioritized for inclusion. "
+                + document["coverage"]["selection_policy"])
     if matched_review is not None:
         document["coverage"][document_matched_context.KEY] = matched_review
         document["coverage"]["selection_policy"] = (
-            "Sentences selected by the short-passage review are prioritized for inclusion. Other passages follow the standard "
-            "disagreement and source-order policy. Each check keeps its own recorded response."
+            "Sentences selected by the short-passage review are prioritized for inclusion. "
+            + document["coverage"]["selection_policy"]
         )
     try:
         meta = decoded["meta"]
@@ -728,6 +723,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
             document_matched_context.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_paragraph_priority.verify_source(document, decoded["text"], decoded["source_map"], result=result)
+            document_scope.validate_card_selection(document, decoded["source_map"])
             document_passage_coverage.verify_source(document, decoded["text"], decoded["source_map"],
                                                     result=result, meta=decoded["meta"])
             document_unselected_responses.verify_source(document, decoded["text"], decoded["source_map"], result=result)

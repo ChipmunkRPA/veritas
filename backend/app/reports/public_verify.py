@@ -301,6 +301,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         validate_native_locations(evidence)
         validate_matched_context(evidence, published_checks={check['id'] for check in result.get('checks', [])})
         validate_paragraph_priority(evidence)
+        document_scope.validate_card_selection(evidence)
         document_scope.validate_passage_coverage(evidence)
         document_passage_position.validate(evidence, published_checks={check["id"] for check in result.get("checks", [])})
         document_passage_position.validate_commitment(evidence, result.get(document_passage_position.COMMITMENT))

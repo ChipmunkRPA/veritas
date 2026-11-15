@@ -139,6 +139,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_matched_context.verify_source(evidence, text, mapping)
     document_native_locations.validate(evidence)
     document_paragraph_priority.verify_source(evidence, text, mapping)
+    document_scope.validate_card_selection(evidence, mapping)
     document_passage_coverage.verify_source(evidence, text, mapping, meta=doc.meta)
     document_scope.validate_checkpoint_agreement(evidence, text, mapping=mapping)
     unselected = document_unselected_responses.verify_source(evidence, text, mapping)

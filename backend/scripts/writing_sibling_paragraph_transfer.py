@@ -48,22 +48,37 @@ def group_blocks(raw, windows):
     return by_text
 
 
-def compose(before, middle, after):
+def compose(before, middle, after, *, flank_size=5, min_words=180):
     from app.detectors.text.extract import from_string
     from app.detectors.text.segment import segment
 
     doc = from_string("\n\n".join((before, middle, after)))
     units = segment(doc)
-    if (len(doc.paragraphs) != 3 or [s.paragraph for s in units] != [p for p in range(3) for _ in range(5)]
-            or not 180 <= doc.meta["words"] <= 540):
+    sizes = (flank_size, 5, flank_size)
+    if (len(doc.paragraphs) != 3 or [s.paragraph for s in units] != [p for p, size in enumerate(sizes) for _ in range(size)]
+            or not min_words <= doc.meta["words"] <= 540):
         raise ValueError("Control paragraphs differ from the native source positions")
     return doc.text, [[s.start, s.end] for s in units]
 
 
-def pair(name, versions, position_order):
+def shorter_windows(raw, size):
+    from scripts.writing_sentence_anchor_transfer import source_spans
+
+    units = source_spans(raw)
+    for i in range(len(units) - size + 1):
+        window = units[i:i + size]
+        if (window[0][0].paragraph == window[-1][0].paragraph
+                and all(8 <= sentence.n_words <= 80 for sentence, _, _ in window)):
+            yield [(a, b) for _, a, b in window]
+
+
+def pair(name, versions, position_order, *, flank_size=5, separation=200, min_words=180):
     raw, _ = pool.truth_text(versions["v0"])
     by_text = group_blocks(raw, pool.source_windows(raw))
     options = intake.excerpt_options(name, versions)
+    if not options:
+        return None
+    controls = by_text if flank_size == 5 else group_blocks(raw, shorter_windows(raw, flank_size))
     for position in position_order:
         if position not in options:
             continue
@@ -73,29 +88,31 @@ def pair(name, versions, position_order):
             continue
         start, end, _ = anchor[0]
         flanks = [[], []]
-        for excerpt, locations in by_text.items():
+        for excerpt, locations in controls.items():
             if len(locations) != 1:
                 continue
             a, b, spans = locations[0]
-            left = start - b >= 200
-            right = a - end >= 200
+            left = start - b >= separation
+            right = a - end >= separation
             if not (left or right):
                 continue
-            try:
-                clean, _ = pool.normalize(raw, spans)
-            except ValueError:
-                continue
+            clean = excerpt
+            if flank_size == 5:
+                try:
+                    clean, _ = pool.normalize(raw, spans)
+                except ValueError:
+                    continue
             flanks[int(right)].append((start - b if left else a - end, a, b, clean))
         if not all(flanks):
             continue
         _, a, b, before = min(flanks[0])
         _, c, d, after = min(flanks[1])
         try:
-            clean, spans = compose(before, original, after)
-            edited, edit_spans = compose(before, rewrite, after)
+            clean, spans = compose(before, original, after, flank_size=flank_size, min_words=min_words)
+            edited, edit_spans = compose(before, rewrite, after, flank_size=flank_size, min_words=min_words)
         except ValueError:
             continue
-        k = 5 + position
+        k = flank_size + position
         unchanged = [(clean[x:y], edited[a:b]) for i, ((x, y), (a, b)) in enumerate(zip(spans, edit_spans, strict=True))
                      if i != k]
         if any(before != after for before, after in unchanged):

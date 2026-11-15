@@ -272,6 +272,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const writingAgreement = set.coverage?.writing_second_check
   const writingChecks = set.coverage?.writing_check_coverage
   const scoredWindows = set.coverage?.scored_windows
+  const balancedSelection = set.coverage?.balanced_passage_selection
   const tracked = set.coverage?.word_tracked_changes
   const selectablePages = [...new Set(writingAgreement?.pdf_spans?.map((span) => span.page) ?? [])]
   const usesOcr = ocrPages.some((page) => page.status === 'extracted') || set.packets.some((packet) => packet.anchors.some((anchor) => anchor.extraction === 'ocr'))
@@ -422,6 +423,11 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         {!!scoredWindows && set.coverage?.candidate_spans === 0
           && ' The writing checks selected no passages for review. AI editing may still be present.'}
         {set.packets.length > 0 && ' The marked text shows where the checks measured a pattern. Ordinary editing and polished writing can produce a similar response.'}</p>
+      {balancedSelection && <p className="mt-2 mb-0">
+        Showing {balancedSelection.displayed_passages} of {set.coverage?.candidate_spans} candidate passages across{' '}
+        {balancedSelection.displayed_blocks} of {balancedSelection.candidate_blocks} source blocks with flags.
+        The selection reserves space for disagreements.
+      </p>}
       {matched && <p className="mt-2 mb-0">Short-passage review selected {matched.selected_sentences} of {matched.eligible_sentences} eligible sentences. This evidence has zero weight in the overall assessment.</p>}
       {unmapped.length > 0 && <p className="mt-2 mb-0">Pages without mapped text: {unmapped.join(', ')}. Those pages have not been cleared.</p>}
       {partialPages.length > 0 && <>

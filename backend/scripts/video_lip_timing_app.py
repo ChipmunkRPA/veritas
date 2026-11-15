@@ -12,13 +12,14 @@ from pathlib import Path
 from zipfile import ZipFile
 
 SOURCE = "s41_p_bbbt7p"
+RANKED_SOURCE = "s33_l_srat5p"
 
 
-def fixtures(output, sources, receipt, *, aac48=False):
+def fixtures(output, sources, receipt, *, aac48=False, ranked=False):
     from scripts import video_lip_viseme_transfer as study
     from scripts.video_lip_event_alignment import aac_clocked
 
-    row = next(item for item in study.load(receipt)["rows"] if item["source"] == SOURCE)
+    row = next(item for item in study.load(receipt)["rows"] if item["source"] == (RANKED_SOURCE if ranked else SOURCE))
     payloads = {}
     for role in ("audio", "front"):
         member = row["members"][role]
@@ -53,7 +54,7 @@ def run(args):
                       VERITAS_VIDEO_LIP_TIMING_RUNTIME=str(args.runtime.resolve()))
     if args.standard_checks:
         os.environ.update(VERITAS_DEVICE="auto", VERITAS_JOB_TIMEOUT_S="480")
-    picture = fixtures(output, args.sources, args.receipt, aac48=args.aac48)
+    picture = fixtures(output, args.sources, args.receipt, aac48=args.aac48, ranked=args.ranked)
 
     import pymupdf
     from fastapi.testclient import TestClient
@@ -93,7 +94,8 @@ def run(args):
         cases = [(False, output / "late.mp4"), (True, output / "late.mp4"),
                  (True, output / "original.mp4"), (True, picture)]
         for active, source in cases:
-            settings.video_lip_timing_review = active
+            settings.video_lip_timing_review = active or args.ranked
+            settings.video_lip_timing_ranked = active and args.ranked
             media_type = "video/quicktime" if source.suffix == ".mov" else "video/mp4"
             aid = checkout(client, stub, source, filename=source.name, media_type=media_type)
             evidence = body(client.get(f"/api/v2/analyses/{aid}/evidence-packets"))
@@ -107,19 +109,28 @@ def run(args):
             matched = [item for item in evidence["packets"] if item["id"] == binding.PACKET_ID]
             assert bool(matched) == (status == "matched")
             if not active:
-                assert status == "off"
+                if args.ranked:
+                    assert review["schema"] == binding.SCHEMA and status in {"no_match", "insufficient_events", "ambiguous_change"}
+                else:
+                    assert status == "off"
                 off = decision(aid)
             elif source == picture:
                 assert status == "unsupported"
             elif source.stem == "original":
-                assert status == "no_match", status
+                assert status == "no_match" or (args.ranked and status in {"insufficient_events", "ambiguous_change"}), status
             else:
                 assert status == "matched" and decision(aid) == off, status
                 [packet] = matched
                 witness = packet[binding.KEY]
-                assert witness == {"audio_source_pts": [10880, 22400], "picture_source_samples": [8320, 19840],
-                                   "baseline_lag_samples": 0, "change_samples": 2560,
-                                   "picture_frames": {"before": 12, "during": 21, "after": 30}}
+                if args.ranked:
+                    assert review["schema"] == binding.SCHEMA_WITH_APERTURE and review["measurement_basis"] == "relative_mouth_opening"
+                    assert witness == {"audio_source_pts": [18560, 30080], "picture_source_samples": [14720, 26240],
+                                       "baseline_lag_samples": -640, "change_samples": 4480,
+                                       "picture_frames": {"before": 22, "during": 31, "after": 40}}, witness
+                else:
+                    assert witness == {"audio_source_pts": [10880, 22400], "picture_source_samples": [8320, 19840],
+                                       "baseline_lag_samples": 0, "change_samples": 2560,
+                                       "picture_frames": {"before": 12, "during": 21, "after": 30}}
                 if args.aac48:
                     audio = evidence["audio"]["source"]
                     assert audio["source_sample_rate"] == 48_000
@@ -136,7 +147,8 @@ def run(args):
                     words = " ".join(word for page in document for word in page.get_text().split())
                     scan(words)
                     words = words.replace("–", "-")
-                    assert all(text in words for text in ("Local speech and mouth timing change", "0.680-1.400 s", "0.520-1.240 s",
+                    times = ("1.160-1.880 s", "0.920-1.640 s") if args.ranked else ("0.680-1.400 s", "0.520-1.240 s")
+                    assert all(text in words for text in ("Local speech and mouth timing change", *times,
                                                           "Before timing range", "During timing range", "After timing range")), words[-4000:]
                     embedded = {pixels(document.extract_image(ref)["image"])
                                 for ref in {image[0] for page in document for image in page.get_images(full=True)}}
@@ -168,4 +180,8 @@ if __name__ == "__main__":
         parser.add_argument(name, type=Path)
     parser.add_argument("--standard-checks", action="store_true", help="Also run the configured Full video detectors")
     parser.add_argument("--aac48", action="store_true", help="Replay with 48 kHz mono AAC source tracks")
-    run(parser.parse_args())
+    parser.add_argument("--ranked", action="store_true", help="Replay the separate 16 kHz aperture timing fixture")
+    args = parser.parse_args()
+    if args.aac48 and args.ranked:
+        parser.error("The clipwise aperture fixture uses a source track at 16 kHz")
+    run(args)

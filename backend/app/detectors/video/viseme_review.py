@@ -44,7 +44,8 @@ def assess(ctx, frame_store, mapping, audio_input, shots):
     request = {"runtime": str(runtime.resolve()) if runtime else None, "geometry": str(geometry.resolve()),
                "checkpoint": str(model.resolve()), "frames": table.to_json(), "video": str(frame_store.path.resolve()),
                "wav": str(ctx.store.path_for(audio_input["wav_sha256"]).resolve()), "samples": mapping["samples"],
-               "presented_samples": binding.presented_samples(mapping)}
+               "presented_samples": binding.presented_samples(mapping),
+               "ranked": settings.video_lip_timing_ranked and mapping["source_sample_rate"] == 16000}
     env = {"PATH": os.environ.get("PATH", os.defpath), "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1",
            "HF_HUB_DISABLE_TELEMETRY": "1", "PYTHONPATH": str(Path(__file__).resolve().parents[3]),
            "OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "VECLIB_MAXIMUM_THREADS": "1"}

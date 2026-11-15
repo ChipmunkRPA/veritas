@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [mouth-opening rank replay](video-lip-aperture-scale-2026-11-15.md#replay)
+recounts useful ranges from the actual two-check order and distinguishes
+weak measurements from intervals outside the timing grid. The native
+replay adds 21 separate actors and keeps their original presentation clocks.
+
 The [writing range length replay](writing-width-calibration-2026-11-15.md#replay)
 recounts exact word overlaps and ordinary alerts with and without a
 fixed sentence choice. It adds a held essay panel with two edit generators

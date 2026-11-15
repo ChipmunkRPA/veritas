@@ -538,7 +538,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.video_packet_versions', 'app.evidence.video_soundtrack_pair_binding',
                         'app.evidence.picture_hold_binding', 'app.evidence.picture_sequence',
                         'app.evidence.scene_return_binding', 'app.evidence.sound_event_binding',
-                        'app.evidence.video_viseme_binding', 'app.evidence.video_viseme_timing',
+                        'app.evidence.video_viseme_binding', 'app.evidence.video_viseme_ranked', 'app.evidence.video_viseme_timing',
                         'app.evidence.stereo_binding', 'app.evidence.stereo_listening_binding',
                         'app.evidence.stereo_collapse_binding'):
             return None
@@ -595,7 +595,7 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
                                  'image_copy_similarity_binding.py', 'image_copy_affine_binding.py',
                                  'image_editor_preview_binding.py', 'image_transparency_binding.py', 'image_animation_binding.py',
                                  'stereo_binding.py', 'stereo_collapse_binding.py', 'scene_return_binding.py',
-                                 'video_viseme_binding.py', 'video_viseme_timing.py', 'document_chat_markers.py'])
+                                 'video_viseme_binding.py', 'video_viseme_ranked.py', 'video_viseme_timing.py', 'document_chat_markers.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
 
@@ -630,7 +630,14 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
         assert local == {('app.evidence', 'document_pdf_visibility')}
     elif name == 'video_viseme_binding.py':
         assert imports <= sys.stdlib_module_names | {'app'}
-        assert local == {('app.core.canonical', 'canonical_hash'), ('app.evidence', 'video_viseme_timing')}
+        assert local == {('app.core.canonical', 'canonical_hash'), ('app.evidence', 'video_viseme_timing'),
+                         ('app.evidence', 'video_viseme_ranked')}
+    elif name == 'video_viseme_ranked.py':
+        assert imports <= sys.stdlib_module_names | {'app'}
+        assert local == {('app.evidence', 'video_viseme_timing')}
+    elif name == 'image_copy_affine_binding.py':
+        assert imports <= sys.stdlib_module_names | {'app'}
+        assert local == {('app.evidence.image_copy_similarity_binding', 'TURNED_JPEG_COPY_AFFINE_VERSION')}
     elif name == 'document_chat_markers.py':
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.core.canonical', 'FLOAT_DP'), ('app.core.canonical', 'canonical_hash'),

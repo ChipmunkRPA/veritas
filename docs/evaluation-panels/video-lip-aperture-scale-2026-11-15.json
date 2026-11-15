@@ -1,0 +1,2401 @@
+{
+  "method": {
+    "diagnostic": "Give the same dense and sparse events their exact authored edit span and signed timing change. Try the existing common-flank lag and count the first unmet condition before a flag. This uses known labels only for diagnosis.",
+    "points": "Use each candidate's largest and second-largest speaker maxima among the frozen ordinary calibration deliveries, including uniform delays. Keep the prior sparse and dense cutoffs.",
+    "scale": "Rescale each clip's dense aperture prediction to its observed 10th to 90th percentile independently. Keep the existing mouth-gap scale. The rank arm instead uses midranks on both series. Use the same 20 ms prediction cadence, 40 ms measurement grid, native pictures, timing search and range overlap.",
+    "transfer": "Use the original GRID and matched PCM and AAC sources, the first 24 qualified native actors, and the remaining qualified native actors. The same frozen fitting and points apply.",
+    "wide_grid": "After the first native diagnostic, lock a separate trial widening the absolute lag grid from \u00b1240 ms to \u00b1400 ms. Keep the signed local change requirement, score scales and interval search. Evaluate original aperture and clipwise ranks separately on this grid, including the held actors."
+  },
+  "native": {
+    "previous": {
+      "actors": 24,
+      "fallback": {
+        "tight/constant": {
+          "added_flags": 1,
+          "added_useful": 0,
+          "baseline_flags": 1,
+          "files": 48,
+          "useful": 0
+        },
+        "tight/local": {
+          "added_flags": 5,
+          "added_useful": 3,
+          "baseline_flags": 2,
+          "files": 48,
+          "useful": 5
+        },
+        "tight/ordinary": {
+          "added_flags": 5,
+          "added_useful": 0,
+          "baseline_flags": 0,
+          "files": 72,
+          "useful": 0
+        },
+        "wider/constant": {
+          "added_flags": 2,
+          "added_useful": 0,
+          "baseline_flags": 7,
+          "files": 48,
+          "useful": 0
+        },
+        "wider/local": {
+          "added_flags": 7,
+          "added_useful": 3,
+          "baseline_flags": 10,
+          "files": 48,
+          "useful": 9
+        },
+        "wider/ordinary": {
+          "added_flags": 10,
+          "added_useful": 0,
+          "baseline_flags": 5,
+          "files": 72,
+          "useful": 0
+        }
+      },
+      "located_ranges": 5,
+      "oracle": {
+        "normalized_aperture": {
+          "below_frozen_point": 15,
+          "constant_lag_fits_better": 2,
+          "flanks_do_not_prefer_common_lag": 9,
+          "inside_does_not_prefer_authored_shift": 4,
+          "measured_and_useful": 0,
+          "missing_before_during_or_after": 1,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 17
+        },
+        "normalized_wide_grid": {
+          "below_frozen_point": 11,
+          "constant_lag_fits_better": 7,
+          "flanks_do_not_prefer_common_lag": 12,
+          "inside_does_not_prefer_authored_shift": 8,
+          "measured_and_useful": 0,
+          "missing_before_during_or_after": 1,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 9
+        },
+        "per_clip_ranks": {
+          "below_frozen_point": 14,
+          "constant_lag_fits_better": 3,
+          "flanks_do_not_prefer_common_lag": 9,
+          "inside_does_not_prefer_authored_shift": 7,
+          "measured_and_useful": 3,
+          "missing_before_during_or_after": 1,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 14
+        },
+        "per_clip_scale": {
+          "below_frozen_point": 15,
+          "constant_lag_fits_better": 4,
+          "flanks_do_not_prefer_common_lag": 15,
+          "inside_does_not_prefer_authored_shift": 2,
+          "measured_and_useful": 1,
+          "missing_before_during_or_after": 1,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 11
+        },
+        "ranked_wide_grid": {
+          "below_frozen_point": 14,
+          "constant_lag_fits_better": 3,
+          "flanks_do_not_prefer_common_lag": 8,
+          "inside_does_not_prefer_authored_shift": 12,
+          "measured_and_useful": 1,
+          "missing_before_during_or_after": 1,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 10
+        },
+        "sparse": {
+          "below_frozen_point": 5,
+          "flanks_do_not_prefer_common_lag": 3,
+          "inside_does_not_prefer_authored_shift": 3,
+          "measured_and_useful": 2,
+          "missing_before_during_or_after": 33,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 4
+        }
+      },
+      "outcomes": {
+        "normalized_aperture/tight/constant": {
+          "assessed": 43,
+          "eligible_events": 1526,
+          "files": 48,
+          "flagged": 3,
+          "misplaced": 0,
+          "union_flagged": 4,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_aperture/tight/local": {
+          "assessed": 43,
+          "eligible_events": 1553,
+          "files": 48,
+          "flagged": 4,
+          "misplaced": 4,
+          "union_flagged": 6,
+          "union_useful": 2,
+          "useful": 0
+        },
+        "normalized_aperture/tight/ordinary": {
+          "assessed": 57,
+          "eligible_events": 2343,
+          "files": 72,
+          "flagged": 7,
+          "misplaced": 0,
+          "union_flagged": 7,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_aperture/wider/constant": {
+          "assessed": 43,
+          "eligible_events": 1526,
+          "files": 48,
+          "flagged": 3,
+          "misplaced": 0,
+          "union_flagged": 9,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_aperture/wider/local": {
+          "assessed": 43,
+          "eligible_events": 1553,
+          "files": 48,
+          "flagged": 5,
+          "misplaced": 4,
+          "union_flagged": 14,
+          "union_useful": 7,
+          "useful": 1
+        },
+        "normalized_aperture/wider/ordinary": {
+          "assessed": 57,
+          "eligible_events": 2343,
+          "files": 72,
+          "flagged": 7,
+          "misplaced": 0,
+          "union_flagged": 11,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/tight/constant": {
+          "assessed": 43,
+          "eligible_events": 1447,
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 3,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/tight/local": {
+          "assessed": 42,
+          "eligible_events": 1503,
+          "files": 48,
+          "flagged": 3,
+          "misplaced": 3,
+          "union_flagged": 5,
+          "union_useful": 2,
+          "useful": 0
+        },
+        "normalized_wide_grid/tight/ordinary": {
+          "assessed": 62,
+          "eligible_events": 2262,
+          "files": 72,
+          "flagged": 3,
+          "misplaced": 0,
+          "union_flagged": 3,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/wider/constant": {
+          "assessed": 43,
+          "eligible_events": 1447,
+          "files": 48,
+          "flagged": 4,
+          "misplaced": 0,
+          "union_flagged": 10,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/wider/local": {
+          "assessed": 42,
+          "eligible_events": 1503,
+          "files": 48,
+          "flagged": 4,
+          "misplaced": 4,
+          "union_flagged": 13,
+          "union_useful": 6,
+          "useful": 0
+        },
+        "normalized_wide_grid/wider/ordinary": {
+          "assessed": 62,
+          "eligible_events": 2262,
+          "files": 72,
+          "flagged": 8,
+          "misplaced": 0,
+          "union_flagged": 12,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/tight/constant": {
+          "assessed": 44,
+          "eligible_events": 1526,
+          "files": 48,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 2,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/tight/local": {
+          "assessed": 45,
+          "eligible_events": 1553,
+          "files": 48,
+          "flagged": 5,
+          "misplaced": 2,
+          "union_flagged": 7,
+          "union_useful": 5,
+          "useful": 3
+        },
+        "per_clip_ranks/tight/ordinary": {
+          "assessed": 65,
+          "eligible_events": 2343,
+          "files": 72,
+          "flagged": 5,
+          "misplaced": 0,
+          "union_flagged": 5,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/wider/constant": {
+          "assessed": 44,
+          "eligible_events": 1526,
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 9,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/wider/local": {
+          "assessed": 45,
+          "eligible_events": 1553,
+          "files": 48,
+          "flagged": 10,
+          "misplaced": 5,
+          "union_flagged": 17,
+          "union_useful": 9,
+          "useful": 5
+        },
+        "per_clip_ranks/wider/ordinary": {
+          "assessed": 65,
+          "eligible_events": 2343,
+          "files": 72,
+          "flagged": 10,
+          "misplaced": 0,
+          "union_flagged": 15,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/tight/constant": {
+          "assessed": 45,
+          "eligible_events": 1526,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 1,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/tight/local": {
+          "assessed": 47,
+          "eligible_events": 1553,
+          "files": 48,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 3,
+          "union_useful": 3,
+          "useful": 1
+        },
+        "per_clip_scale/tight/ordinary": {
+          "assessed": 67,
+          "eligible_events": 2343,
+          "files": 72,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 1,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/wider/constant": {
+          "assessed": 45,
+          "eligible_events": 1526,
+          "files": 48,
+          "flagged": 5,
+          "misplaced": 0,
+          "union_flagged": 10,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/wider/local": {
+          "assessed": 47,
+          "eligible_events": 1553,
+          "files": 48,
+          "flagged": 21,
+          "misplaced": 10,
+          "union_flagged": 27,
+          "union_useful": 15,
+          "useful": 11
+        },
+        "per_clip_scale/wider/ordinary": {
+          "assessed": 67,
+          "eligible_events": 2343,
+          "files": 72,
+          "flagged": 16,
+          "misplaced": 0,
+          "union_flagged": 21,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/tight/constant": {
+          "assessed": 41,
+          "eligible_events": 1447,
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 3,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/tight/local": {
+          "assessed": 43,
+          "eligible_events": 1503,
+          "files": 48,
+          "flagged": 5,
+          "misplaced": 4,
+          "union_flagged": 7,
+          "union_useful": 3,
+          "useful": 1
+        },
+        "ranked_wide_grid/tight/ordinary": {
+          "assessed": 64,
+          "eligible_events": 2262,
+          "files": 72,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 1,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/wider/constant": {
+          "assessed": 41,
+          "eligible_events": 1447,
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 9,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/wider/local": {
+          "assessed": 43,
+          "eligible_events": 1503,
+          "files": 48,
+          "flagged": 8,
+          "misplaced": 6,
+          "union_flagged": 15,
+          "union_useful": 6,
+          "useful": 2
+        },
+        "ranked_wide_grid/wider/ordinary": {
+          "assessed": 64,
+          "eligible_events": 2262,
+          "files": 72,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 7,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/tight/constant": {
+          "assessed": 23,
+          "eligible_events": 214,
+          "files": 48,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 1,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/tight/local": {
+          "assessed": 30,
+          "eligible_events": 204,
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 2,
+          "union_useful": 2,
+          "useful": 2
+        },
+        "sparse/tight/ordinary": {
+          "assessed": 37,
+          "eligible_events": 312,
+          "files": 72,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/wider/constant": {
+          "assessed": 23,
+          "eligible_events": 214,
+          "files": 48,
+          "flagged": 7,
+          "misplaced": 0,
+          "union_flagged": 7,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/wider/local": {
+          "assessed": 30,
+          "eligible_events": 204,
+          "files": 48,
+          "flagged": 10,
+          "misplaced": 4,
+          "union_flagged": 10,
+          "union_useful": 6,
+          "useful": 6
+        },
+        "sparse/wider/ordinary": {
+          "assessed": 37,
+          "eligible_events": 312,
+          "files": 72,
+          "flagged": 5,
+          "misplaced": 0,
+          "union_flagged": 5,
+          "union_useful": 0,
+          "useful": 0
+        }
+      },
+      "source_sha256": "3e96b9d824e5eed3668e08edfd94d1364a82af176cce3794d05e8e2fec89c51e"
+    },
+    "remaining": {
+      "actors": 21,
+      "fallback": {
+        "tight/constant": {
+          "added_flags": 1,
+          "added_useful": 0,
+          "baseline_flags": 0,
+          "files": 42,
+          "useful": 0
+        },
+        "tight/local": {
+          "added_flags": 3,
+          "added_useful": 2,
+          "baseline_flags": 4,
+          "files": 42,
+          "useful": 4
+        },
+        "tight/ordinary": {
+          "added_flags": 0,
+          "added_useful": 0,
+          "baseline_flags": 0,
+          "files": 63,
+          "useful": 0
+        },
+        "wider/constant": {
+          "added_flags": 3,
+          "added_useful": 0,
+          "baseline_flags": 5,
+          "files": 42,
+          "useful": 0
+        },
+        "wider/local": {
+          "added_flags": 5,
+          "added_useful": 1,
+          "baseline_flags": 10,
+          "files": 42,
+          "useful": 6
+        },
+        "wider/ordinary": {
+          "added_flags": 6,
+          "added_useful": 0,
+          "baseline_flags": 9,
+          "files": 63,
+          "useful": 0
+        }
+      },
+      "located_ranges": 2,
+      "oracle": {
+        "normalized_aperture": {
+          "below_frozen_point": 9,
+          "constant_lag_fits_better": 4,
+          "flanks_do_not_prefer_common_lag": 11,
+          "inside_does_not_prefer_authored_shift": 2,
+          "measured_and_useful": 1,
+          "missing_before_during_or_after": 7,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 9
+        },
+        "normalized_wide_grid": {
+          "below_frozen_point": 5,
+          "constant_lag_fits_better": 3,
+          "flanks_do_not_prefer_common_lag": 14,
+          "inside_does_not_prefer_authored_shift": 5,
+          "measured_and_useful": 0,
+          "missing_before_during_or_after": 7,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 8
+        },
+        "per_clip_ranks": {
+          "below_frozen_point": 11,
+          "constant_lag_fits_better": 2,
+          "flanks_do_not_prefer_common_lag": 10,
+          "inside_does_not_prefer_authored_shift": 2,
+          "measured_and_useful": 2,
+          "missing_before_during_or_after": 7,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 10
+        },
+        "per_clip_scale": {
+          "below_frozen_point": 15,
+          "constant_lag_fits_better": 2,
+          "flanks_do_not_prefer_common_lag": 9,
+          "inside_does_not_prefer_authored_shift": 1,
+          "measured_and_useful": 0,
+          "missing_before_during_or_after": 7,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 8
+        },
+        "ranked_wide_grid": {
+          "below_frozen_point": 11,
+          "constant_lag_fits_better": 2,
+          "flanks_do_not_prefer_common_lag": 8,
+          "inside_does_not_prefer_authored_shift": 5,
+          "measured_and_useful": 0,
+          "missing_before_during_or_after": 7,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 9
+        },
+        "sparse": {
+          "authored_shift_passes": 1,
+          "below_frozen_point": 3,
+          "constant_lag_fits_better": 1,
+          "flanks_do_not_prefer_common_lag": 3,
+          "measured_and_useful": 2,
+          "missing_before_during_or_after": 32,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 2
+        }
+      },
+      "outcomes": {
+        "normalized_aperture/tight/constant": {
+          "assessed": 41,
+          "eligible_events": 1276,
+          "files": 42,
+          "flagged": 6,
+          "misplaced": 0,
+          "union_flagged": 6,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_aperture/tight/local": {
+          "assessed": 40,
+          "eligible_events": 1323,
+          "files": 42,
+          "flagged": 9,
+          "misplaced": 8,
+          "union_flagged": 13,
+          "union_useful": 3,
+          "useful": 1
+        },
+        "normalized_aperture/tight/ordinary": {
+          "assessed": 47,
+          "eligible_events": 1997,
+          "files": 63,
+          "flagged": 11,
+          "misplaced": 0,
+          "union_flagged": 11,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_aperture/wider/constant": {
+          "assessed": 41,
+          "eligible_events": 1276,
+          "files": 42,
+          "flagged": 7,
+          "misplaced": 0,
+          "union_flagged": 12,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_aperture/wider/local": {
+          "assessed": 40,
+          "eligible_events": 1323,
+          "files": 42,
+          "flagged": 10,
+          "misplaced": 9,
+          "union_flagged": 18,
+          "union_useful": 6,
+          "useful": 1
+        },
+        "normalized_aperture/wider/ordinary": {
+          "assessed": 47,
+          "eligible_events": 1997,
+          "files": 63,
+          "flagged": 12,
+          "misplaced": 0,
+          "union_flagged": 20,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/tight/constant": {
+          "assessed": 41,
+          "eligible_events": 1202,
+          "files": 42,
+          "flagged": 7,
+          "misplaced": 0,
+          "union_flagged": 7,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/tight/local": {
+          "assessed": 33,
+          "eligible_events": 1261,
+          "files": 42,
+          "flagged": 4,
+          "misplaced": 4,
+          "union_flagged": 8,
+          "union_useful": 2,
+          "useful": 0
+        },
+        "normalized_wide_grid/tight/ordinary": {
+          "assessed": 49,
+          "eligible_events": 1899,
+          "files": 63,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 1,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/wider/constant": {
+          "assessed": 41,
+          "eligible_events": 1202,
+          "files": 42,
+          "flagged": 8,
+          "misplaced": 0,
+          "union_flagged": 13,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/wider/local": {
+          "assessed": 33,
+          "eligible_events": 1261,
+          "files": 42,
+          "flagged": 4,
+          "misplaced": 4,
+          "union_flagged": 14,
+          "union_useful": 5,
+          "useful": 0
+        },
+        "normalized_wide_grid/wider/ordinary": {
+          "assessed": 49,
+          "eligible_events": 1899,
+          "files": 63,
+          "flagged": 4,
+          "misplaced": 0,
+          "union_flagged": 13,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/tight/constant": {
+          "assessed": 38,
+          "eligible_events": 1276,
+          "files": 42,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 1,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/tight/local": {
+          "assessed": 38,
+          "eligible_events": 1323,
+          "files": 42,
+          "flagged": 3,
+          "misplaced": 1,
+          "union_flagged": 7,
+          "union_useful": 4,
+          "useful": 2
+        },
+        "per_clip_ranks/tight/ordinary": {
+          "assessed": 58,
+          "eligible_events": 1997,
+          "files": 63,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/wider/constant": {
+          "assessed": 38,
+          "eligible_events": 1276,
+          "files": 42,
+          "flagged": 3,
+          "misplaced": 0,
+          "union_flagged": 8,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/wider/local": {
+          "assessed": 38,
+          "eligible_events": 1323,
+          "files": 42,
+          "flagged": 12,
+          "misplaced": 8,
+          "union_flagged": 15,
+          "union_useful": 7,
+          "useful": 4
+        },
+        "per_clip_ranks/wider/ordinary": {
+          "assessed": 58,
+          "eligible_events": 1997,
+          "files": 63,
+          "flagged": 6,
+          "misplaced": 0,
+          "union_flagged": 15,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/tight/constant": {
+          "assessed": 42,
+          "eligible_events": 1276,
+          "files": 42,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/tight/local": {
+          "assessed": 38,
+          "eligible_events": 1323,
+          "files": 42,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 4,
+          "union_useful": 2,
+          "useful": 0
+        },
+        "per_clip_scale/tight/ordinary": {
+          "assessed": 60,
+          "eligible_events": 1997,
+          "files": 63,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/wider/constant": {
+          "assessed": 42,
+          "eligible_events": 1276,
+          "files": 42,
+          "flagged": 11,
+          "misplaced": 0,
+          "union_flagged": 16,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/wider/local": {
+          "assessed": 38,
+          "eligible_events": 1323,
+          "files": 42,
+          "flagged": 16,
+          "misplaced": 8,
+          "union_flagged": 19,
+          "union_useful": 11,
+          "useful": 8
+        },
+        "per_clip_scale/wider/ordinary": {
+          "assessed": 60,
+          "eligible_events": 1997,
+          "files": 63,
+          "flagged": 14,
+          "misplaced": 0,
+          "union_flagged": 23,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/tight/constant": {
+          "assessed": 39,
+          "eligible_events": 1202,
+          "files": 42,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/tight/local": {
+          "assessed": 38,
+          "eligible_events": 1261,
+          "files": 42,
+          "flagged": 2,
+          "misplaced": 2,
+          "union_flagged": 6,
+          "union_useful": 2,
+          "useful": 0
+        },
+        "ranked_wide_grid/tight/ordinary": {
+          "assessed": 58,
+          "eligible_events": 1899,
+          "files": 63,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 1,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/wider/constant": {
+          "assessed": 39,
+          "eligible_events": 1202,
+          "files": 42,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 7,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/wider/local": {
+          "assessed": 38,
+          "eligible_events": 1261,
+          "files": 42,
+          "flagged": 7,
+          "misplaced": 6,
+          "union_flagged": 14,
+          "union_useful": 5,
+          "useful": 1
+        },
+        "ranked_wide_grid/wider/ordinary": {
+          "assessed": 58,
+          "eligible_events": 1899,
+          "files": 63,
+          "flagged": 4,
+          "misplaced": 0,
+          "union_flagged": 13,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/tight/constant": {
+          "assessed": 18,
+          "eligible_events": 170,
+          "files": 42,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/tight/local": {
+          "assessed": 16,
+          "eligible_events": 169,
+          "files": 42,
+          "flagged": 4,
+          "misplaced": 2,
+          "union_flagged": 4,
+          "union_useful": 2,
+          "useful": 2
+        },
+        "sparse/tight/ordinary": {
+          "assessed": 24,
+          "eligible_events": 248,
+          "files": 63,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/wider/constant": {
+          "assessed": 18,
+          "eligible_events": 170,
+          "files": 42,
+          "flagged": 5,
+          "misplaced": 0,
+          "union_flagged": 5,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/wider/local": {
+          "assessed": 16,
+          "eligible_events": 169,
+          "files": 42,
+          "flagged": 10,
+          "misplaced": 5,
+          "union_flagged": 10,
+          "union_useful": 5,
+          "useful": 5
+        },
+        "sparse/wider/ordinary": {
+          "assessed": 24,
+          "eligible_events": 248,
+          "files": 63,
+          "flagged": 9,
+          "misplaced": 0,
+          "union_flagged": 9,
+          "union_useful": 0,
+          "useful": 0
+        }
+      },
+      "source_sha256": "860e4e775d25ea94351b1ce76a5203e0ebe2f71e989eb39fba307f37e221264e"
+    }
+  },
+  "points": {
+    "normalized_aperture": {
+      "tight": 0.7443971,
+      "wider": 0.7289697
+    },
+    "normalized_wide_grid": {
+      "tight": 0.8310111,
+      "wider": 0.7499822
+    },
+    "per_clip_ranks": {
+      "tight": 0.7909019,
+      "wider": 0.5979574
+    },
+    "per_clip_scale": {
+      "tight": 2.3343491,
+      "wider": 0.9038504
+    },
+    "ranked_wide_grid": {
+      "tight": 0.79482,
+      "wider": 0.6365525
+    },
+    "sparse": {
+      "tight": 0.9279881,
+      "wider": 0.3709157
+    }
+  },
+  "portable": {
+    "aac48": {
+      "fallback": {
+        "tight/constant": {
+          "added_flags": 0,
+          "added_useful": 0,
+          "baseline_flags": 1,
+          "files": 32,
+          "useful": 0
+        },
+        "tight/local": {
+          "added_flags": 1,
+          "added_useful": 1,
+          "baseline_flags": 4,
+          "files": 32,
+          "useful": 4
+        },
+        "tight/ordinary": {
+          "added_flags": 0,
+          "added_useful": 0,
+          "baseline_flags": 0,
+          "files": 48,
+          "useful": 0
+        },
+        "wider/constant": {
+          "added_flags": 1,
+          "added_useful": 0,
+          "baseline_flags": 5,
+          "files": 32,
+          "useful": 0
+        },
+        "wider/local": {
+          "added_flags": 4,
+          "added_useful": 4,
+          "baseline_flags": 9,
+          "files": 32,
+          "useful": 9
+        },
+        "wider/ordinary": {
+          "added_flags": 0,
+          "added_useful": 0,
+          "baseline_flags": 10,
+          "files": 48,
+          "useful": 0
+        }
+      },
+      "located_ranges": 4,
+      "oracle": {
+        "normalized_aperture": {
+          "below_frozen_point": 15,
+          "flanks_do_not_prefer_common_lag": 1,
+          "inside_does_not_prefer_authored_shift": 2,
+          "measured_and_useful": 2,
+          "missing_before_during_or_after": 5,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 9
+        },
+        "normalized_wide_grid": {
+          "below_frozen_point": 7,
+          "constant_lag_fits_better": 2,
+          "flanks_do_not_prefer_common_lag": 8,
+          "inside_does_not_prefer_authored_shift": 3,
+          "measured_and_useful": 0,
+          "missing_before_during_or_after": 12,
+          "oracle_passes_but_search_misses": 0
+        },
+        "per_clip_ranks": {
+          "below_frozen_point": 12,
+          "flanks_do_not_prefer_common_lag": 5,
+          "inside_does_not_prefer_authored_shift": 3,
+          "measured_and_useful": 2,
+          "missing_before_during_or_after": 5,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 7
+        },
+        "per_clip_scale": {
+          "below_frozen_point": 12,
+          "constant_lag_fits_better": 1,
+          "flanks_do_not_prefer_common_lag": 8,
+          "measured_and_useful": 0,
+          "missing_before_during_or_after": 5,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 6
+        },
+        "ranked_wide_grid": {
+          "below_frozen_point": 13,
+          "constant_lag_fits_better": 1,
+          "flanks_do_not_prefer_common_lag": 3,
+          "inside_does_not_prefer_authored_shift": 1,
+          "measured_and_useful": 2,
+          "missing_before_during_or_after": 12,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 2
+        },
+        "sparse": {
+          "authored_shift_passes": 4,
+          "below_frozen_point": 4,
+          "constant_lag_fits_better": 1,
+          "inside_does_not_prefer_authored_shift": 2,
+          "measured_and_useful": 3,
+          "missing_before_during_or_after": 20,
+          "oracle_passes_but_search_misses": 3,
+          "signed_lag_outside_grid": 1
+        }
+      },
+      "outcomes": {
+        "normalized_aperture/tight/constant": {
+          "assessed": 32,
+          "eligible_events": 967,
+          "files": 32,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 1,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_aperture/tight/local": {
+          "assessed": 28,
+          "eligible_events": 1071,
+          "files": 32,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 5,
+          "union_useful": 5,
+          "useful": 2
+        },
+        "normalized_aperture/tight/ordinary": {
+          "assessed": 34,
+          "eligible_events": 1541,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_aperture/wider/constant": {
+          "assessed": 32,
+          "eligible_events": 967,
+          "files": 32,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 6,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_aperture/wider/local": {
+          "assessed": 28,
+          "eligible_events": 1071,
+          "files": 32,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 10,
+          "union_useful": 7,
+          "useful": 2
+        },
+        "normalized_aperture/wider/ordinary": {
+          "assessed": 34,
+          "eligible_events": 1541,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 10,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/tight/constant": {
+          "assessed": 30,
+          "eligible_events": 859,
+          "files": 32,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 2,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/tight/local": {
+          "assessed": 29,
+          "eligible_events": 931,
+          "files": 32,
+          "flagged": 1,
+          "misplaced": 1,
+          "union_flagged": 5,
+          "union_useful": 3,
+          "useful": 0
+        },
+        "normalized_wide_grid/tight/ordinary": {
+          "assessed": 47,
+          "eligible_events": 1323,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/wider/constant": {
+          "assessed": 30,
+          "eligible_events": 859,
+          "files": 32,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 6,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/wider/local": {
+          "assessed": 29,
+          "eligible_events": 931,
+          "files": 32,
+          "flagged": 2,
+          "misplaced": 2,
+          "union_flagged": 11,
+          "union_useful": 5,
+          "useful": 0
+        },
+        "normalized_wide_grid/wider/ordinary": {
+          "assessed": 47,
+          "eligible_events": 1323,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 10,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/tight/constant": {
+          "assessed": 31,
+          "eligible_events": 967,
+          "files": 32,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 1,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/tight/local": {
+          "assessed": 29,
+          "eligible_events": 1071,
+          "files": 32,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 5,
+          "union_useful": 5,
+          "useful": 2
+        },
+        "per_clip_ranks/tight/ordinary": {
+          "assessed": 37,
+          "eligible_events": 1541,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/wider/constant": {
+          "assessed": 31,
+          "eligible_events": 967,
+          "files": 32,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 6,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/wider/local": {
+          "assessed": 29,
+          "eligible_events": 1071,
+          "files": 32,
+          "flagged": 8,
+          "misplaced": 1,
+          "union_flagged": 13,
+          "union_useful": 10,
+          "useful": 7
+        },
+        "per_clip_ranks/wider/ordinary": {
+          "assessed": 37,
+          "eligible_events": 1541,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 10,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/tight/constant": {
+          "assessed": 32,
+          "eligible_events": 967,
+          "files": 32,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 1,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/tight/local": {
+          "assessed": 28,
+          "eligible_events": 1071,
+          "files": 32,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 4,
+          "union_useful": 3,
+          "useful": 0
+        },
+        "per_clip_scale/tight/ordinary": {
+          "assessed": 45,
+          "eligible_events": 1541,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/wider/constant": {
+          "assessed": 32,
+          "eligible_events": 967,
+          "files": 32,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 5,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/wider/local": {
+          "assessed": 28,
+          "eligible_events": 1071,
+          "files": 32,
+          "flagged": 7,
+          "misplaced": 3,
+          "union_flagged": 11,
+          "union_useful": 8,
+          "useful": 4
+        },
+        "per_clip_scale/wider/ordinary": {
+          "assessed": 45,
+          "eligible_events": 1541,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 10,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/tight/constant": {
+          "assessed": 31,
+          "eligible_events": 859,
+          "files": 32,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 1,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/tight/local": {
+          "assessed": 31,
+          "eligible_events": 931,
+          "files": 32,
+          "flagged": 3,
+          "misplaced": 1,
+          "union_flagged": 5,
+          "union_useful": 4,
+          "useful": 2
+        },
+        "ranked_wide_grid/tight/ordinary": {
+          "assessed": 44,
+          "eligible_events": 1323,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/wider/constant": {
+          "assessed": 31,
+          "eligible_events": 859,
+          "files": 32,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 5,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/wider/local": {
+          "assessed": 31,
+          "eligible_events": 931,
+          "files": 32,
+          "flagged": 9,
+          "misplaced": 4,
+          "union_flagged": 13,
+          "union_useful": 7,
+          "useful": 5
+        },
+        "ranked_wide_grid/wider/ordinary": {
+          "assessed": 44,
+          "eligible_events": 1323,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 10,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/tight/constant": {
+          "assessed": 19,
+          "eligible_events": 171,
+          "files": 32,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 1,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/tight/local": {
+          "assessed": 19,
+          "eligible_events": 178,
+          "files": 32,
+          "flagged": 4,
+          "misplaced": 1,
+          "union_flagged": 4,
+          "union_useful": 3,
+          "useful": 3
+        },
+        "sparse/tight/ordinary": {
+          "assessed": 31,
+          "eligible_events": 254,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/wider/constant": {
+          "assessed": 19,
+          "eligible_events": 171,
+          "files": 32,
+          "flagged": 5,
+          "misplaced": 0,
+          "union_flagged": 5,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/wider/local": {
+          "assessed": 19,
+          "eligible_events": 178,
+          "files": 32,
+          "flagged": 9,
+          "misplaced": 4,
+          "union_flagged": 9,
+          "union_useful": 5,
+          "useful": 5
+        },
+        "sparse/wider/ordinary": {
+          "assessed": 31,
+          "eligible_events": 254,
+          "files": 48,
+          "flagged": 10,
+          "misplaced": 0,
+          "union_flagged": 10,
+          "union_useful": 0,
+          "useful": 0
+        }
+      }
+    },
+    "pcm": {
+      "fallback": {
+        "tight/constant": {
+          "added_flags": 0,
+          "added_useful": 0,
+          "baseline_flags": 3,
+          "files": 32,
+          "useful": 0
+        },
+        "tight/local": {
+          "added_flags": 1,
+          "added_useful": 1,
+          "baseline_flags": 5,
+          "files": 32,
+          "useful": 5
+        },
+        "tight/ordinary": {
+          "added_flags": 0,
+          "added_useful": 0,
+          "baseline_flags": 0,
+          "files": 48,
+          "useful": 0
+        },
+        "wider/constant": {
+          "added_flags": 0,
+          "added_useful": 0,
+          "baseline_flags": 7,
+          "files": 32,
+          "useful": 0
+        },
+        "wider/local": {
+          "added_flags": 6,
+          "added_useful": 6,
+          "baseline_flags": 10,
+          "files": 32,
+          "useful": 12
+        },
+        "wider/ordinary": {
+          "added_flags": 0,
+          "added_useful": 0,
+          "baseline_flags": 11,
+          "files": 48,
+          "useful": 0
+        }
+      },
+      "located_ranges": 4,
+      "oracle": {
+        "normalized_aperture": {
+          "below_frozen_point": 14,
+          "constant_lag_fits_better": 1,
+          "flanks_do_not_prefer_common_lag": 3,
+          "inside_does_not_prefer_authored_shift": 2,
+          "measured_and_useful": 1,
+          "missing_before_during_or_after": 4,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 8
+        },
+        "normalized_wide_grid": {
+          "below_frozen_point": 8,
+          "constant_lag_fits_better": 2,
+          "flanks_do_not_prefer_common_lag": 8,
+          "inside_does_not_prefer_authored_shift": 2,
+          "measured_and_useful": 0,
+          "missing_before_during_or_after": 12,
+          "oracle_passes_but_search_misses": 0
+        },
+        "per_clip_ranks": {
+          "below_frozen_point": 17,
+          "flanks_do_not_prefer_common_lag": 4,
+          "inside_does_not_prefer_authored_shift": 2,
+          "measured_and_useful": 2,
+          "missing_before_during_or_after": 4,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 5
+        },
+        "per_clip_scale": {
+          "below_frozen_point": 13,
+          "constant_lag_fits_better": 2,
+          "flanks_do_not_prefer_common_lag": 6,
+          "inside_does_not_prefer_authored_shift": 1,
+          "measured_and_useful": 0,
+          "missing_before_during_or_after": 4,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 6
+        },
+        "ranked_wide_grid": {
+          "below_frozen_point": 16,
+          "flanks_do_not_prefer_common_lag": 2,
+          "inside_does_not_prefer_authored_shift": 1,
+          "measured_and_useful": 2,
+          "missing_before_during_or_after": 12,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 1
+        },
+        "sparse": {
+          "authored_shift_passes": 4,
+          "below_frozen_point": 5,
+          "constant_lag_fits_better": 1,
+          "flanks_do_not_prefer_common_lag": 1,
+          "inside_does_not_prefer_authored_shift": 1,
+          "measured_and_useful": 4,
+          "missing_before_during_or_after": 19,
+          "oracle_passes_but_search_misses": 3,
+          "signed_lag_outside_grid": 1
+        }
+      },
+      "outcomes": {
+        "normalized_aperture/tight/constant": {
+          "assessed": 30,
+          "eligible_events": 964,
+          "files": 32,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 3,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_aperture/tight/local": {
+          "assessed": 27,
+          "eligible_events": 1057,
+          "files": 32,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 5,
+          "union_useful": 5,
+          "useful": 1
+        },
+        "normalized_aperture/tight/ordinary": {
+          "assessed": 33,
+          "eligible_events": 1542,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_aperture/wider/constant": {
+          "assessed": 30,
+          "eligible_events": 964,
+          "files": 32,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 9,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_aperture/wider/local": {
+          "assessed": 27,
+          "eligible_events": 1057,
+          "files": 32,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 10,
+          "union_useful": 7,
+          "useful": 1
+        },
+        "normalized_aperture/wider/ordinary": {
+          "assessed": 33,
+          "eligible_events": 1542,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 11,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/tight/constant": {
+          "assessed": 29,
+          "eligible_events": 857,
+          "files": 32,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 4,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/tight/local": {
+          "assessed": 30,
+          "eligible_events": 917,
+          "files": 32,
+          "flagged": 2,
+          "misplaced": 2,
+          "union_flagged": 7,
+          "union_useful": 4,
+          "useful": 0
+        },
+        "normalized_wide_grid/tight/ordinary": {
+          "assessed": 46,
+          "eligible_events": 1324,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/wider/constant": {
+          "assessed": 29,
+          "eligible_events": 857,
+          "files": 32,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 8,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/wider/local": {
+          "assessed": 30,
+          "eligible_events": 917,
+          "files": 32,
+          "flagged": 3,
+          "misplaced": 2,
+          "union_flagged": 13,
+          "union_useful": 7,
+          "useful": 1
+        },
+        "normalized_wide_grid/wider/ordinary": {
+          "assessed": 46,
+          "eligible_events": 1324,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 11,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/tight/constant": {
+          "assessed": 30,
+          "eligible_events": 964,
+          "files": 32,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 3,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/tight/local": {
+          "assessed": 24,
+          "eligible_events": 1057,
+          "files": 32,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 6,
+          "union_useful": 6,
+          "useful": 2
+        },
+        "per_clip_ranks/tight/ordinary": {
+          "assessed": 43,
+          "eligible_events": 1542,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/wider/constant": {
+          "assessed": 30,
+          "eligible_events": 964,
+          "files": 32,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 7,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/wider/local": {
+          "assessed": 24,
+          "eligible_events": 1057,
+          "files": 32,
+          "flagged": 10,
+          "misplaced": 1,
+          "union_flagged": 16,
+          "union_useful": 13,
+          "useful": 9
+        },
+        "per_clip_ranks/wider/ordinary": {
+          "assessed": 43,
+          "eligible_events": 1542,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 11,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/tight/constant": {
+          "assessed": 30,
+          "eligible_events": 964,
+          "files": 32,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 3,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/tight/local": {
+          "assessed": 30,
+          "eligible_events": 1057,
+          "files": 32,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 5,
+          "union_useful": 4,
+          "useful": 0
+        },
+        "per_clip_scale/tight/ordinary": {
+          "assessed": 46,
+          "eligible_events": 1542,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/wider/constant": {
+          "assessed": 30,
+          "eligible_events": 964,
+          "files": 32,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 7,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/wider/local": {
+          "assessed": 30,
+          "eligible_events": 1057,
+          "files": 32,
+          "flagged": 9,
+          "misplaced": 3,
+          "union_flagged": 15,
+          "union_useful": 11,
+          "useful": 6
+        },
+        "per_clip_scale/wider/ordinary": {
+          "assessed": 46,
+          "eligible_events": 1542,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 11,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/tight/constant": {
+          "assessed": 28,
+          "eligible_events": 857,
+          "files": 32,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 3,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/tight/local": {
+          "assessed": 30,
+          "eligible_events": 917,
+          "files": 32,
+          "flagged": 3,
+          "misplaced": 1,
+          "union_flagged": 6,
+          "union_useful": 5,
+          "useful": 2
+        },
+        "ranked_wide_grid/tight/ordinary": {
+          "assessed": 47,
+          "eligible_events": 1324,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/wider/constant": {
+          "assessed": 28,
+          "eligible_events": 857,
+          "files": 32,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 7,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/wider/local": {
+          "assessed": 30,
+          "eligible_events": 917,
+          "files": 32,
+          "flagged": 11,
+          "misplaced": 4,
+          "union_flagged": 16,
+          "union_useful": 10,
+          "useful": 7
+        },
+        "ranked_wide_grid/wider/ordinary": {
+          "assessed": 47,
+          "eligible_events": 1324,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 11,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/tight/constant": {
+          "assessed": 20,
+          "eligible_events": 171,
+          "files": 32,
+          "flagged": 3,
+          "misplaced": 0,
+          "union_flagged": 3,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/tight/local": {
+          "assessed": 22,
+          "eligible_events": 177,
+          "files": 32,
+          "flagged": 5,
+          "misplaced": 1,
+          "union_flagged": 5,
+          "union_useful": 4,
+          "useful": 4
+        },
+        "sparse/tight/ordinary": {
+          "assessed": 30,
+          "eligible_events": 253,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 0,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/wider/constant": {
+          "assessed": 20,
+          "eligible_events": 171,
+          "files": 32,
+          "flagged": 7,
+          "misplaced": 0,
+          "union_flagged": 7,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/wider/local": {
+          "assessed": 22,
+          "eligible_events": 177,
+          "files": 32,
+          "flagged": 10,
+          "misplaced": 4,
+          "union_flagged": 10,
+          "union_useful": 6,
+          "useful": 6
+        },
+        "sparse/wider/ordinary": {
+          "assessed": 30,
+          "eligible_events": 253,
+          "files": 48,
+          "flagged": 11,
+          "misplaced": 0,
+          "union_flagged": 11,
+          "union_useful": 0,
+          "useful": 0
+        }
+      }
+    },
+    "primary": {
+      "fallback": {
+        "tight/constant": {
+          "added_flags": 0,
+          "added_useful": 0,
+          "baseline_flags": 5,
+          "files": 128,
+          "useful": 0
+        },
+        "tight/local": {
+          "added_flags": 10,
+          "added_useful": 9,
+          "baseline_flags": 18,
+          "files": 128,
+          "useful": 18
+        },
+        "tight/ordinary": {
+          "added_flags": 0,
+          "added_useful": 0,
+          "baseline_flags": 2,
+          "files": 192,
+          "useful": 0
+        },
+        "wider/constant": {
+          "added_flags": 3,
+          "added_useful": 0,
+          "baseline_flags": 18,
+          "files": 128,
+          "useful": 0
+        },
+        "wider/local": {
+          "added_flags": 25,
+          "added_useful": 19,
+          "baseline_flags": 36,
+          "files": 128,
+          "useful": 35
+        },
+        "wider/ordinary": {
+          "added_flags": 4,
+          "added_useful": 0,
+          "baseline_flags": 27,
+          "files": 192,
+          "useful": 0
+        }
+      },
+      "located_ranges": 21,
+      "oracle": {
+        "normalized_aperture": {
+          "authored_shift_passes": 1,
+          "below_frozen_point": 42,
+          "constant_lag_fits_better": 6,
+          "flanks_do_not_prefer_common_lag": 26,
+          "inside_does_not_prefer_authored_shift": 6,
+          "measured_and_useful": 4,
+          "missing_before_during_or_after": 22,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 25
+        },
+        "normalized_wide_grid": {
+          "below_frozen_point": 25,
+          "constant_lag_fits_better": 7,
+          "flanks_do_not_prefer_common_lag": 17,
+          "inside_does_not_prefer_authored_shift": 15,
+          "measured_and_useful": 1,
+          "missing_before_during_or_after": 57,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 7
+        },
+        "per_clip_ranks": {
+          "authored_shift_passes": 8,
+          "below_frozen_point": 46,
+          "constant_lag_fits_better": 7,
+          "flanks_do_not_prefer_common_lag": 15,
+          "inside_does_not_prefer_authored_shift": 8,
+          "measured_and_useful": 12,
+          "missing_before_during_or_after": 22,
+          "oracle_passes_but_search_misses": 1,
+          "signed_lag_outside_grid": 22
+        },
+        "per_clip_scale": {
+          "below_frozen_point": 61,
+          "constant_lag_fits_better": 3,
+          "flanks_do_not_prefer_common_lag": 14,
+          "inside_does_not_prefer_authored_shift": 6,
+          "measured_and_useful": 0,
+          "missing_before_during_or_after": 22,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 22
+        },
+        "ranked_wide_grid": {
+          "authored_shift_passes": 3,
+          "below_frozen_point": 25,
+          "constant_lag_fits_better": 9,
+          "flanks_do_not_prefer_common_lag": 12,
+          "inside_does_not_prefer_authored_shift": 17,
+          "measured_and_useful": 8,
+          "missing_before_during_or_after": 57,
+          "oracle_passes_but_search_misses": 0,
+          "signed_lag_outside_grid": 5
+        },
+        "sparse": {
+          "authored_shift_passes": 6,
+          "below_frozen_point": 19,
+          "constant_lag_fits_better": 7,
+          "flanks_do_not_prefer_common_lag": 6,
+          "inside_does_not_prefer_authored_shift": 4,
+          "measured_and_useful": 9,
+          "missing_before_during_or_after": 77,
+          "oracle_passes_but_search_misses": 3,
+          "signed_lag_outside_grid": 9
+        }
+      },
+      "outcomes": {
+        "normalized_aperture/tight/constant": {
+          "assessed": 104,
+          "eligible_events": 3998,
+          "files": 128,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 7,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_aperture/tight/local": {
+          "assessed": 115,
+          "eligible_events": 4411,
+          "files": 128,
+          "flagged": 6,
+          "misplaced": 2,
+          "union_flagged": 22,
+          "union_useful": 13,
+          "useful": 4
+        },
+        "normalized_aperture/tight/ordinary": {
+          "assessed": 159,
+          "eligible_events": 6369,
+          "files": 192,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 2,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_aperture/wider/constant": {
+          "assessed": 104,
+          "eligible_events": 3998,
+          "files": 128,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 19,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_aperture/wider/local": {
+          "assessed": 115,
+          "eligible_events": 4411,
+          "files": 128,
+          "flagged": 9,
+          "misplaced": 4,
+          "union_flagged": 42,
+          "union_useful": 21,
+          "useful": 5
+        },
+        "normalized_aperture/wider/ordinary": {
+          "assessed": 159,
+          "eligible_events": 6369,
+          "files": 192,
+          "flagged": 1,
+          "misplaced": 0,
+          "union_flagged": 27,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/tight/constant": {
+          "assessed": 104,
+          "eligible_events": 3596,
+          "files": 128,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 7,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/tight/local": {
+          "assessed": 113,
+          "eligible_events": 3811,
+          "files": 128,
+          "flagged": 2,
+          "misplaced": 1,
+          "union_flagged": 20,
+          "union_useful": 10,
+          "useful": 1
+        },
+        "normalized_wide_grid/tight/ordinary": {
+          "assessed": 160,
+          "eligible_events": 5419,
+          "files": 192,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 2,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/wider/constant": {
+          "assessed": 104,
+          "eligible_events": 3596,
+          "files": 128,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 20,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "normalized_wide_grid/wider/local": {
+          "assessed": 113,
+          "eligible_events": 3811,
+          "files": 128,
+          "flagged": 5,
+          "misplaced": 2,
+          "union_flagged": 41,
+          "union_useful": 19,
+          "useful": 3
+        },
+        "normalized_wide_grid/wider/ordinary": {
+          "assessed": 160,
+          "eligible_events": 5419,
+          "files": 192,
+          "flagged": 3,
+          "misplaced": 0,
+          "union_flagged": 27,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/tight/constant": {
+          "assessed": 110,
+          "eligible_events": 3998,
+          "files": 128,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 5,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/tight/local": {
+          "assessed": 117,
+          "eligible_events": 4411,
+          "files": 128,
+          "flagged": 13,
+          "misplaced": 1,
+          "union_flagged": 28,
+          "union_useful": 21,
+          "useful": 12
+        },
+        "per_clip_ranks/tight/ordinary": {
+          "assessed": 156,
+          "eligible_events": 6369,
+          "files": 192,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 2,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/wider/constant": {
+          "assessed": 110,
+          "eligible_events": 3998,
+          "files": 128,
+          "flagged": 5,
+          "misplaced": 0,
+          "union_flagged": 21,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_ranks/wider/local": {
+          "assessed": 117,
+          "eligible_events": 4411,
+          "files": 128,
+          "flagged": 37,
+          "misplaced": 7,
+          "union_flagged": 61,
+          "union_useful": 44,
+          "useful": 30
+        },
+        "per_clip_ranks/wider/ordinary": {
+          "assessed": 156,
+          "eligible_events": 6369,
+          "files": 192,
+          "flagged": 4,
+          "misplaced": 0,
+          "union_flagged": 31,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/tight/constant": {
+          "assessed": 116,
+          "eligible_events": 3998,
+          "files": 128,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 5,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/tight/local": {
+          "assessed": 120,
+          "eligible_events": 4411,
+          "files": 128,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 18,
+          "union_useful": 9,
+          "useful": 0
+        },
+        "per_clip_scale/tight/ordinary": {
+          "assessed": 168,
+          "eligible_events": 6369,
+          "files": 192,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 2,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/wider/constant": {
+          "assessed": 116,
+          "eligible_events": 3998,
+          "files": 128,
+          "flagged": 4,
+          "misplaced": 0,
+          "union_flagged": 22,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "per_clip_scale/wider/local": {
+          "assessed": 120,
+          "eligible_events": 4411,
+          "files": 128,
+          "flagged": 63,
+          "misplaced": 15,
+          "union_flagged": 81,
+          "union_useful": 57,
+          "useful": 48
+        },
+        "per_clip_scale/wider/ordinary": {
+          "assessed": 168,
+          "eligible_events": 6369,
+          "files": 192,
+          "flagged": 9,
+          "misplaced": 0,
+          "union_flagged": 36,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/tight/constant": {
+          "assessed": 107,
+          "eligible_events": 3596,
+          "files": 128,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 5,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/tight/local": {
+          "assessed": 115,
+          "eligible_events": 3811,
+          "files": 128,
+          "flagged": 10,
+          "misplaced": 2,
+          "union_flagged": 26,
+          "union_useful": 17,
+          "useful": 8
+        },
+        "ranked_wide_grid/tight/ordinary": {
+          "assessed": 157,
+          "eligible_events": 5419,
+          "files": 192,
+          "flagged": 0,
+          "misplaced": 0,
+          "union_flagged": 2,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/wider/constant": {
+          "assessed": 107,
+          "eligible_events": 3596,
+          "files": 128,
+          "flagged": 4,
+          "misplaced": 0,
+          "union_flagged": 22,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "ranked_wide_grid/wider/local": {
+          "assessed": 115,
+          "eligible_events": 3811,
+          "files": 128,
+          "flagged": 32,
+          "misplaced": 15,
+          "union_flagged": 55,
+          "union_useful": 29,
+          "useful": 17
+        },
+        "ranked_wide_grid/wider/ordinary": {
+          "assessed": 157,
+          "eligible_events": 5419,
+          "files": 192,
+          "flagged": 7,
+          "misplaced": 0,
+          "union_flagged": 32,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/tight/constant": {
+          "assessed": 83,
+          "eligible_events": 689,
+          "files": 128,
+          "flagged": 5,
+          "misplaced": 0,
+          "union_flagged": 5,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/tight/local": {
+          "assessed": 65,
+          "eligible_events": 700,
+          "files": 128,
+          "flagged": 18,
+          "misplaced": 9,
+          "union_flagged": 18,
+          "union_useful": 9,
+          "useful": 9
+        },
+        "sparse/tight/ordinary": {
+          "assessed": 118,
+          "eligible_events": 1028,
+          "files": 192,
+          "flagged": 2,
+          "misplaced": 0,
+          "union_flagged": 2,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/wider/constant": {
+          "assessed": 83,
+          "eligible_events": 689,
+          "files": 128,
+          "flagged": 18,
+          "misplaced": 0,
+          "union_flagged": 18,
+          "union_useful": 0,
+          "useful": 0
+        },
+        "sparse/wider/local": {
+          "assessed": 65,
+          "eligible_events": 700,
+          "files": 128,
+          "flagged": 36,
+          "misplaced": 20,
+          "union_flagged": 36,
+          "union_useful": 16,
+          "useful": 16
+        },
+        "sparse/wider/ordinary": {
+          "assessed": 118,
+          "eligible_events": 1028,
+          "files": 192,
+          "flagged": 27,
+          "misplaced": 0,
+          "union_flagged": 27,
+          "union_useful": 0,
+          "useful": 0
+        }
+      }
+    }
+  },
+  "schema": "chipmunk.video-lip-aperture-scale/1",
+  "source": {
+    "video-lip-dense-carrier-2026-11-15.json.gz": "5cf755df85b4ec1b068164afc128f009135e8e15a58bc7c5d9690f8cc1949b94",
+    "video-lip-dense-native-2026-11-15.json": "cafda2c8f14ee545f5bc05a98a4fc02d1ef52df3553a071306c4cd63d7d2c3fd",
+    "video-lip-dense-posteriors-2026-11-15.json.gz": "256bf6ab71d4706f8a0783a9107b8add0d05413ca6378c75d99d83af946e14b6"
+  }
+}

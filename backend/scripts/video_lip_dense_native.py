@@ -68,7 +68,7 @@ def capture(args, primary):
     if study.phone.sha(args.geometry) != study.parent.FACE_SHA256:
         raise ValueError("Face geometry weights differ from the pinned asset")
     read, device = dense.reader(args.checkpoint)
-    qualified = native.roster(args.audit)
+    qualified = native.roster(args.audit, remaining=args.remaining_actors)
     rows = []
     for item in qualified:
         index = item["index"]
@@ -86,8 +86,11 @@ def capture(args, primary):
                      "audio_origin": origin, "width": table.width, "height": table.height,
                      "time_base": table.time_base, "frames": frames, "cases": cases})
         print(f"Replayed native pictures and speech for {len(rows)}/{len(qualified)} actors.", flush=True)
-    return {"schema": SCHEMA, "primary_sha256": study.phone.sha(args.primary), "model": dense.MODEL,
-            "device": device, "rows": rows} | {"result": evaluate(qualified, rows, primary)}
+    report = {"schema": SCHEMA, "primary_sha256": study.phone.sha(args.primary), "model": dense.MODEL,
+              "device": device, "rows": rows, "result": evaluate(qualified, rows, primary)}
+    if args.remaining_actors:
+        report["remaining_actors"] = True
+    return report
 
 
 def nearest_25(row):
@@ -162,6 +165,7 @@ def main():
     run = phases.add_parser("capture")
     for name in ("primary", "audit", "media", "checkpoint", "geometry", "runtime", "output"):
         run.add_argument(name, type=Path)
+    run.add_argument("--remaining-actors", action="store_true", help="Use the qualified actors after the first native roster")
     replay = phases.add_parser("review")
     for name in ("primary", "audit", "receipt"):
         replay.add_argument(name, type=Path)
@@ -173,7 +177,7 @@ def main():
         dense.seal(args.output, record)
     else:
         record = study.load(args.receipt)
-        qualified = native.roster(args.audit)
+        qualified = native.roster(args.audit, remaining=record.get("remaining_actors") is True)
         if (record["schema"] != SCHEMA or record["primary_sha256"] != study.phone.sha(args.primary)
                 or record["model"] != dense.MODEL
                 or record["result"] != evaluate(qualified, record["rows"], primary)):

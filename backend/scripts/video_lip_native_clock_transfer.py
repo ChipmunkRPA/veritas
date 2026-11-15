@@ -20,7 +20,7 @@ EDIT_WIDTH = 11_200
 SOURCES = 24
 
 
-def roster(audit):
+def roster(audit, *, remaining=False):
     sources = []
     for path in sorted(audit.glob("batch-??.jsonl")):
         for line in path.read_text().splitlines():
@@ -40,6 +40,10 @@ def roster(audit):
     ordered = sorted(sources, key=lambda row: hashlib.sha256(f"{SCHEMA}/{row['group']}".encode()).digest())
     study.phone.require(len({row["group"] for row in ordered}) == len(ordered) >= SOURCES,
                         "Need distinct qualified source actors")
+    if remaining:
+        held = ordered[SOURCES:]
+        study.phone.require(bool(held), "No actor remains after the original evaluation roster")
+        return held
     return ordered[:SOURCES]
 
 

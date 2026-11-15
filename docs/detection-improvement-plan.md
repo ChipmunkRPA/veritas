@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Mouth-opening ranks for lip timing](video-lip-aperture-scale-2026-11-15.md)
+  adds nine useful ranges in 128 main PCM shifts and one in each
+  separate delivery panel while preserving existing findings and
+  control flags. It is available for the supported short local
+  profile with 16 kHz mono soundtracks. Both wider timing offsets
+  and 29.97 fps source coverage remain in evaluation.
+
 - [Length calibration for writing highlights](writing-width-calibration-2026-11-15.md)
   doubled useful word locations from 20/309 to 40/309 when given the
   correct sentence. With the fixed sentence selector, it found 3/36

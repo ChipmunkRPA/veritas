@@ -65,14 +65,14 @@ def compatible(row, sounds, references, *, sample_at=nearest):
     return events
 
 
-def totals(events):
-    return [sum(event[2][i] for event in events) for i in range(len(LAGS))]
+def totals(events, *, lags=LAGS):
+    return [sum(event[2][i] for event in events) for i in range(len(lags))]
 
 
-def hypotheses(events, samples):
+def hypotheses(events, samples, *, lags=LAGS):
     if len(events) < 4:
         return {"status": "insufficient_events", "eligible_events": len(events)}
-    constant = max(totals(events))
+    constant = max(totals(events, lags=lags))
     alternatives = []
     for width in WIDTHS:
         for start in range(EDGE, samples-width-EDGE+1, STEP):
@@ -83,12 +83,12 @@ def hypotheses(events, samples):
             after = [event for event in events if event[0] >= stop]
             if not before or len(local) < 2 or not after:
                 continue
-            left, middle, right = map(totals, (before, local, after))
-            flank_order = sorted(range(len(LAGS)), key=lambda i: (-(left[i] + right[i]), abs(LAGS[i]), LAGS[i]))
+            left, middle, right = (totals(group, lags=lags) for group in (before, local, after))
+            flank_order = sorted(range(len(lags)), key=lambda i: (-(left[i] + right[i]), abs(lags[i]), lags[i]))
             outer = flank_order[0]
             # The contrast should be against the strongest common flank lag.
-            for inner, lag in enumerate(LAGS):
-                shift = lag - LAGS[outer]
+            for inner, lag in enumerate(lags):
+                shift = lag - lags[outer]
                 if not MINIMUM_CHANGE <= abs(shift) <= MAXIMUM_CHANGE:
                     continue
                 if min(left[outer] - left[inner], right[outer] - right[inner], middle[inner] - middle[outer]) <= 0:
@@ -96,7 +96,7 @@ def hypotheses(events, samples):
                 gain = round((left[outer]+middle[inner]+right[outer]-constant) / (SCORE_UNITS * len(events)), 7)
                 if gain <= 0:
                     continue
-                alternatives.append({"score": gain, "span": [start, stop], "baseline_lag": LAGS[outer],
+                alternatives.append({"score": gain, "span": [start, stop], "baseline_lag": lags[outer],
                                      "change": shift, "frames": sorted({event[3][inner] for event in local}),
                                      "before_frame": before[-1][3][outer], "after_frame": after[0][3][outer],
                                      "local_events": [event[0] for event in local]})

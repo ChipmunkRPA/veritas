@@ -7,11 +7,13 @@ import re
 from fractions import Fraction
 
 from app.core.canonical import canonical_hash
+from app.evidence import video_viseme_ranked as ranked
 from app.evidence import video_viseme_timing as timing
 
 KEY = "lip_timing_review"
 COMMITMENT = "lip_timing_review_sha256"
 SCHEMA = "chipmunk.video-lip-timing/1"
+SCHEMA_WITH_APERTURE = "chipmunk.video-lip-timing/2"
 PACKET_ID = "VLT01"
 CLIP, WAVEFORM = "lip_timing_audio", "lip_timing_waveform"
 REFERENCE = {"closure": {"median": .000578}, "rounded": {"median": .3973106}, "spread": {"median": .9265317}}
@@ -80,6 +82,22 @@ def audio_origin(mapping):
     return first if cursor == samples else None
 
 
+def _witness(candidate, pictures, samples, origin, point):
+    state = candidate["status"]
+    if state != "measured" or candidate["score"] <= point:
+        return state, None
+    plates = timing.picture_evidence(pictures, candidate, samples)
+    frames = plates["picture_brackets"]
+    if not all(frames.values()):
+        return "incomplete_context", None
+    return "matched", {
+        "audio_source_pts": [origin + tick for tick in candidate["span"]],
+        "picture_source_samples": [origin + tick for tick in plates["picture_span"]],
+        "baseline_lag_samples": candidate["baseline_lag"], "change_samples": candidate["change"],
+        "picture_frames": {role: frame["index"] for role, frame in frames.items()},
+    }
+
+
 def measured(raw, *, timestamps, time_base, source, mapping):
     origin = audio_origin(mapping)
     if origin is None:
@@ -107,24 +125,29 @@ def measured(raw, *, timestamps, time_base, source, mapping):
             raise ValueError("Timing input has an invalid speech event")
         last = at
     inputs = {"frames": rows, "phones": raw["phones"], "samples": samples}
-    candidate = timing.hypotheses(timing.compatible({"frames": geometry}, raw["phones"], REFERENCE), samples)
-    state = candidate["status"]
-    witness = None
-    if state == "measured" and candidate["score"] > POINT:
-        plates = timing.picture_evidence(geometry, candidate, samples)
-        frames = plates["picture_brackets"]
-        if all(frames.values()):
-            state = "matched"
-            witness = {"audio_source_pts": [origin + tick for tick in candidate["span"]],
-                       "picture_source_samples": [origin + tick for tick in plates["picture_span"]],
-                       "baseline_lag_samples": candidate["baseline_lag"], "change_samples": candidate["change"],
-                       "picture_frames": {role: frame["index"] for role, frame in frames.items()}}
-        else:
-            state = "incomplete_context"
+    picture = {"frames": geometry}
+    candidate = timing.hypotheses(timing.compatible(picture, raw["phones"], REFERENCE), samples)
+    state, witness = _witness(candidate, geometry, samples, origin, POINT)
+    basis = {}
+    if "aperture_prediction" in raw:
+        prediction = raw["aperture_prediction"]
+        if (mapping["source_sample_rate"] != timing.RATE or not isinstance(prediction, list)
+                or len(prediction) != (samples - 2 * ranked.CENTER) // ranked.STRIDE + 1
+                or any(v is not None and (type(v) is not int or not -ranked.UNIT // 2 <= v <= ranked.UNIT * 3 // 2)
+                       for v in prediction)):
+            raise ValueError("Aperture estimates differ from the source clock or valid range")
+        inputs["aperture_prediction"] = prediction
+        basis = {"schema": SCHEMA_WITH_APERTURE, "measurement_basis": "speech_events"}
+        if witness is None:
+            extra = timing.hypotheses(ranked.scores(picture, prediction), samples)
+            _, supported = _witness(extra, geometry, samples, origin, ranked.POINT)
+            if supported is not None:
+                candidate, state, witness = extra, "matched", supported
+                basis["measurement_basis"] = "relative_mouth_opening"
     # Canonical evidence rounds floats to six places. Keep seven-place inputs and fits as integers.
     if "score" in candidate:
         candidate["score_units"] = round(candidate.pop("score") * timing.SCORE_UNITS)
-    return {**skipped("no_match" if state in {"measured", "no_supported_change"} else state),
+    return {**skipped("no_match" if state in {"measured", "no_supported_change"} else state), **basis,
             "pcm_sha256": mapping["pcm_sha256"], "audio_origin_pts": origin,
             "inputs": inputs, "measurement": candidate, "witness": witness}
 
@@ -135,8 +158,11 @@ def observation(record):
     a, b = [sample / timing.RATE for sample in witness["picture_source_samples"]]
     direction = "later" if witness["change_samples"] > 0 else "earlier"
     change = abs(witness["change_samples"]) * 1000 / timing.RATE
-    return (f"Relative to the surrounding timing, the audio was approximately {change:.0f} ms {direction}. "
-            f"Audio source time {lo:.3f}–{hi:.3f} s. Corresponding picture time {a:.3f}–{b:.3f} s.")
+    description = (f"Relative to the surrounding timing, the audio was approximately {change:.0f} ms {direction}. "
+                   f"Audio source time {lo:.3f}–{hi:.3f} s. Corresponding picture time {a:.3f}–{b:.3f} s.")
+    if record.get("measurement_basis") == "relative_mouth_opening":
+        description += " Mouth opening and speech supported a different offset inside this interval than on both sides."
+    return description
 
 
 def validate(document, *, timestamps=None, committed=_UNSET):
@@ -152,7 +178,7 @@ def validate(document, *, timestamps=None, committed=_UNSET):
             raise ValueError("Uncommitted lip timing evidence")
         return
     state = record["status"]
-    if record.get("schema") != SCHEMA or state not in STATUS or record.get("affects_overall_confidence") is not False:
+    if record.get("schema") not in {SCHEMA, SCHEMA_WITH_APERTURE} or state not in STATUS or record.get("affects_overall_confidence") is not False:
         raise ValueError("Invalid lip timing disposition")
     if "inputs" not in record:
         if record != skipped(state) or state not in {"unsupported", "assets", "runtime", "provenance"} or packets:

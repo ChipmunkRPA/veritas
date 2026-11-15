@@ -250,6 +250,7 @@ class Settings(BaseSettings):
     video_soundtrack_pair_review: bool = False  # Compare two matching audio streams in one short video.
     video_mouth_hold_speech_context: bool = False  # Trial: measure speech activity at a verified mouth hold.
     video_lip_timing_review: bool = False  # Local trial on short single-shot clips with exact source timing.
+    video_lip_timing_ranked: bool = False  # Add clipwise aperture timing on supported 16 kHz soundtracks.
     video_lip_timing_model_dir: Path | None = None
     video_lip_timing_face_asset: Path | None = None
     video_lip_timing_runtime: Path | None = None

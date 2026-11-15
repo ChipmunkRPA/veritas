@@ -6,7 +6,6 @@ from __future__ import annotations
 import argparse
 import gzip
 import json
-import math
 from collections import Counter, defaultdict
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -17,19 +16,21 @@ from app.detectors.audio.phone_events import (
     MODEL_REVISION,
     STRIDE,
     WEIGHT_PIN,
-    collapse,
-    phone_posteriors,
 )
+from app.detectors.video.viseme_worker import aperture_reader
+from app.evidence import video_viseme_ranked as ranked
 from app.evidence import video_viseme_timing as timing
 from scripts import video_lip_viseme_transfer as prior
 
 SCHEMA = "chipmunk.video-lip-dense-posteriors/1"
 CARRIER_SCHEMA = "chipmunk.video-lip-dense-carrier/1"
 CARRIER_SOURCE = prior.prior.PANEL / "video-lip-viseme-carrier-2026-11-15.json.gz"
-UNIT = 1_000_000
-WINDOW = (1, 2, 3, 2, 1)
+UNIT = ranked.UNIT
 RIDGE = .08
-MIN_SPEECH = .10
+reader = aperture_reader
+acoustic = ranked.acoustic
+features = ranked.features
+predict = ranked.predict
 APERTURE_ARMS = ("aperture", "normalized_aperture")
 MOTION_ARMS = ("aperture_and_motion", "normalized_aperture_and_motion")
 ARMS = APERTURE_ARMS + MOTION_ARMS
@@ -50,23 +51,6 @@ METHOD = {
 MODEL = {"revision": MODEL_REVISION, "weights_sha256": WEIGHT_PIN}
 
 
-def reader(checkpoint):
-    posterior, vocabulary, device = phone_posteriors(checkpoint)
-    groups = [[vocabulary[name] for name in names] for names in timing.PHONES.values()]
-    included = {index for ids in groups for index in ids}
-    excluded = {vocabulary[token] for token in ("<pad>", "<s>", "</s>", "<unk>", "|") if token in vocabulary}
-    other = sorted(set(vocabulary.values()) - included - excluded)
-    labels = {vocabulary[name]: label for label, names in timing.PHONES.items() for name in names}
-
-    def measure(pcm, *, include_events=False):
-        probabilities = posterior(pcm)
-        masses = [probabilities[:, ids].sum(1).tolist() for ids in (*groups, other)]
-        series = [[round(UNIT * value) for value in row] for row in zip(*masses, strict=True)]
-        return (series, collapse(probabilities, labels)) if include_events else series
-
-    return measure, device
-
-
 def capture(args):
     rows = prior.timings()["rows"]
     measure, device = reader(args.checkpoint)
@@ -85,27 +69,6 @@ def capture(args):
             out.write(json.dumps({"source": row["source"], "device": device, "cases": cases}, sort_keys=True) + "\n")
             if i % 8 == 0:
                 print(f"Measured {i}/{len(rows)} native speech recordings.", flush=True)
-
-
-def acoustic(groups):
-    nearby = [None] * len(groups)
-    for i in range(2, len(groups) - 2):
-        interval = groups[i - 2:i + 3]
-        values = [sum(weight * row[j] for weight, row in zip(WINDOW, interval, strict=True)) for j in range(5)]
-        mass = sum(values)
-        if mass:
-            nearby[i] = [v / mass for v in values] + [mass / (UNIT * sum(WINDOW))]
-    return nearby
-
-
-def features(nearby, index):
-    start, stop = index - 3, index + 3
-    if start < 2 or stop >= len(nearby) - 2:
-        return None
-    values = [nearby[i] for i in (start, index, stop)]
-    if any(point is None for point in values) or values[1][-1] < MIN_SPEECH:
-        return None
-    return [1.] + [value for point in values for value in point]
 
 
 def fit(rows, captured):
@@ -138,17 +101,7 @@ def fit(rows, captured):
     return {"weights": [round(float(v), 9) for v in weights], "examples": sum(x[2] for x in pieces), "clips": len(pieces)}
 
 
-def predict(groups, fitted):
-    nearby = acoustic(groups)
-    predictions = []
-    for i in range(len(groups)):
-        row = features(nearby, i)
-        estimate = None if row is None else min(1.5, max(-.5, math.fsum(a * b for a, b in zip(row, fitted, strict=True))))
-        predictions.append(None if estimate is None else round(UNIT * estimate))
-    return predictions
-
-
-def match_scores(row, predictions):
+def match_scores(row, predictions, *, lags=timing.LAGS):
     points = timing.observations(row)
     if points is None:
         return {arm: [] for arm in ARMS}
@@ -159,7 +112,7 @@ def match_scores(row, predictions):
         if predictions[i] is None:
             continue
         sample = CENTER + i * STRIDE
-        values = [timing.nearest(points, sample - lag) for lag in timing.LAGS]
+        values = [timing.nearest(points, sample - lag) for lag in lags]
         if any(value is None for value in values):
             continue
         aperture = predictions[i] / UNIT
@@ -171,8 +124,8 @@ def match_scores(row, predictions):
         if left is None or right is None:
             continue
         derivative = (right - left) / UNIT
-        low = [timing.nearest(points, sample - 2 * STRIDE - lag) for lag in timing.LAGS]
-        high = [timing.nearest(points, sample + 2 * STRIDE - lag) for lag in timing.LAGS]
+        low = [timing.nearest(points, sample - 2 * STRIDE - lag) for lag in lags]
+        high = [timing.nearest(points, sample + 2 * STRIDE - lag) for lag in lags]
         if any(a is None or b is None or a[1] >= b[1] for a, b in zip(low, high, strict=True)):
             continue
         motion = [min(1.5, abs(b[0] - a[0] - derivative)) ** 2 for a, b in zip(low, high, strict=True)]

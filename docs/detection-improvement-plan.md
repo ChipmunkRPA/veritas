@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Word-level localization in writing](writing-word-localization-2026-11-14.md)
+  added four exact changed-word locations to 93 staged report rewrites
+  without new ordinary report highlights. Separate genre cutoffs kept two
+  new news locations and three new abstract locations with one added
+  ordinary news flag. The missing GPT-5.4 and limited editorial coverage
+  keep the fitted head in evaluation.
+
 - [Frame-level speech features for short edits under competing speech](audio-short-edit-speech-layers-2026-11-14.md)
   raised matched-control ranking from 7/48 to 18/48. A separate 48-file
   transfer found one ElevenLabs location with no ordinary or background

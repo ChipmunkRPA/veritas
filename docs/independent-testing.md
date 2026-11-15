@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [word-level writing replay](writing-word-localization-2026-11-14.md#independent-replay)
+recounts useful word locations and ordinary alerts on reports, dated journal
+revisions, news and abstracts. The native audit rederives all changed-word
+labels from the earlier and later wording. The scalar recount needs no model
+or source prose.
+
 The [short voice edit speech-layer replay](audio-short-edit-speech-layers-2026-11-14.md#independent-replay)
 recounts true locations, false alerts and unassessed inputs on two anonymous
 numeric panels. It includes a generator and meeting transfer with cutoffs

@@ -64,7 +64,7 @@ def _original(aid: str) -> tuple[str, int] | None:
         return analysis.sha256, analysis.size_bytes
 
 
-def _check_image(path: Path) -> None:
+def _check_image(path: Path, *, allow_lossy_webp: bool = False) -> None:
     with Image.open(path, formats=["PNG", "JPEG", "WEBP"]) as image:
         if image.width * image.height > MAX_PIXELS:
             raise ProblemError(413, "Image dimensions exceed the limit", "Each image must be 4 megapixels or smaller.")
@@ -73,8 +73,16 @@ def _check_image(path: Path) -> None:
         if image.format == "WEBP":
             from app.detectors.image.lossless_webp import lossless_webp_size
 
-            if image.mode != "RGB" or lossless_webp_size(path.read_bytes()) != image.size:
-                raise ProblemError(422, "Unsupported WebP", "Use a simple opaque lossless WebP with each side between 512 and 1,024 pixels.")
+            body = path.read_bytes()
+            if image.mode == "RGB" and lossless_webp_size(body) == image.size:
+                return
+            if allow_lossy_webp:
+                from app.detectors.image.reference_lossy_webp import supported
+
+                if supported(image, body):
+                    return
+            kind = "WebP" if allow_lossy_webp else "lossless WebP"
+            raise ProblemError(422, "Unsupported WebP", f"Use a simple opaque {kind} with each side between 512 and 1,024 pixels.")
 
 
 def _unavailable() -> ProblemError:
@@ -90,7 +98,7 @@ def image_reference_availability(aid: str):
         try:
             path = default_store().path_for(sha256)
             if path.is_file() and path.stat().st_size == size:
-                _check_image(path)
+                _check_image(path, allow_lossy_webp=settings.image_reference_lossy_webp)
                 available = True
         except (*_image_errors, ObjectStoreError, ProblemError):
             pass
@@ -136,6 +144,7 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
     from cv2 import error as OpenCVError
 
     from app.detectors.image.reference_lossless_webp import UNASSESSED as WEBP_UNASSESSED
+    from app.detectors.image.reference_lossy_webp import UNASSESSED as LOSSY_WEBP_UNASSESSED
     from app.detectors.image.reference_png_opacity import UNASSESSED
     from app.evidence.image_reference import inspect
 
@@ -151,7 +160,7 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
     if received != original:
         raise _integrity_failure()
     try:
-        _check_image(submitted_path)
+        _check_image(submitted_path, allow_lossy_webp=settings.image_reference_lossy_webp)
     except (*_image_errors, ProblemError):
         raise _unavailable() from None
 
@@ -171,8 +180,11 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
                              allow_structure_jpeg=settings.image_reference_structure_jpeg,
                              allow_same_jpeg=settings.image_reference_same_jpeg,
                              allow_jpeg_detail_loss=settings.image_reference_jpeg_detail_loss,
-                             allow_jpeg_detail_loss_extra_qualities=settings.image_reference_jpeg_detail_loss_extra_qualities)
-        if settings.image_reference_jpeg_png_envelope and comparison["status"] not in {"comparable", UNASSESSED, WEBP_UNASSESSED}:
+                             allow_jpeg_detail_loss_extra_qualities=settings.image_reference_jpeg_detail_loss_extra_qualities,
+                             allow_lossy_webp=settings.image_reference_lossy_webp)
+        if settings.image_reference_jpeg_png_envelope and comparison["status"] not in {
+            "comparable", UNASSESSED, WEBP_UNASSESSED, LOSSY_WEBP_UNASSESSED,
+        }:
             from app.evidence.image_reference_delivery_envelope import inspect as compare_delivery
 
             delivery_artifacts = workspace / "delivery-evidence"

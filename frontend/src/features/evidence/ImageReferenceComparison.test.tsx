@@ -90,6 +90,28 @@ describe('earlier-copy comparison', () => {
     expect(JSON.parse(await blobText(download))).toEqual({ comparison: record, pngs: result.pngs })
   })
 
+  it('explains the lossy WebP framing measurement and exports the same evidence', async () => {
+    const result = structuredClone(comparison)
+    const record = result.comparison
+    record.schema = 'chipmunk.image-reference-comparison/19'
+    record.submitted = { ...record.submitted, width: 768, height: 512 }
+    record.reference = { ...record.submitted, sha256: 'b'.repeat(64) }
+    record.affects_overall_confidence = false
+    record.lossy_webp = { matching_tiles: 212, textured_tiles: 260, tile_side_px: 32, earlier_rgb_sha256: hash }
+    record.mask = artifact('difference-mask.png', 768, 512)
+    delete record.alignment
+    delete record.regions[0].reference_region
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText(/212 of 260 detailed areas/)).toBeTruthy()
+    expect(screen.getByAltText('Earlier copy crop for region 1')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
+    const [download] = vi.mocked(saveBlob).mock.calls[0]
+    expect(JSON.parse(await blobText(download))).toEqual({ comparison: record, pngs: result.pngs })
+  })
+
   it('shows opacity changes and retains the native mask in the JSON download', async () => {
     const result = structuredClone(comparison)
     const record = result.comparison

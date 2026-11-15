@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [lossy WebP earlier-copy replay](image-reference-lossy-webp-2026-11-14.md#local-replay)
+checks source-linked brightness differences across three previously untested
+WebP encoding settings. It includes untouched, recompressed, translated and
+unrelated controls, and recounts exact pre-delivery edit coverage.
+
 The [lip-closure and soundtrack replay](video-mouth-closure-transfer-2026-11-14.md#local-replay)
 compares visible articulation with an audible M sound on source-separated
 speakers. It checks exact audio replacements, full source clocks, and

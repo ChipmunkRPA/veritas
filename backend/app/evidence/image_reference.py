@@ -19,6 +19,7 @@ from app.detectors.image import (
     reference_exact_jpeg,
     reference_jpeg_detail_loss,
     reference_lossless_webp,
+    reference_lossy_webp,
     reference_png_exact_resize,
     reference_png_opacity,
     reference_png_orientation,
@@ -151,7 +152,8 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             allow_embedded_photo: bool = False, allow_exact_jpeg_identity: bool = False,
             allow_shifted_jpeg: bool = False, allow_structure_jpeg: bool = False,
             allow_same_jpeg: bool = False, allow_jpeg_detail_loss: bool = False,
-            allow_jpeg_detail_loss_extra_qualities: bool = False, allow_png_opacity: bool = False) -> dict:
+            allow_jpeg_detail_loss_extra_qualities: bool = False, allow_png_opacity: bool = False,
+            allow_lossy_webp: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     refuse_truncated_images()
     before, after = _bytes(reference_path), _bytes(submitted_path)
@@ -168,7 +170,10 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                                     else (_oriented_rgb(original), _oriented_rgb(questioned)))
         else:
             reference, submitted = _oriented_rgb(original), _oriented_rgb(questioned)
-        if webp:
+        if allow_lossy_webp and reference_lossy_webp.supported(questioned, after):
+            schema = reference_lossy_webp.SCHEMA
+            result, mask = reference_lossy_webp.compare(original, questioned, before, after)
+        elif webp:
             schema = reference_lossless_webp.SCHEMA
             result = {"status": reference_lossless_webp.UNASSESSED, "regions": []}
             mask = None
@@ -244,6 +249,8 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                       reference_same_jpeg.SCHEMA: reference_same_jpeg.INTERPRETATION,
                       reference_lossless_webp.SCHEMA: (reference_lossless_webp.INTERPRETATION
                                                        if result["status"] == "comparable" else reference_lossless_webp.LIMITATION),
+                      reference_lossy_webp.SCHEMA: (reference_lossy_webp.INTERPRETATION
+                                                   if result["status"] == "comparable" else reference_lossy_webp.LIMITATION),
                       reference_png_opacity.SCHEMA: (reference_png_opacity.INTERPRETATION if result["status"] == "comparable"
                                                     else reference_png_opacity.UNASSESSED_INTERPRETATION),
                       **dict.fromkeys(reference_jpeg_detail_loss.SCHEMAS, reference_jpeg_detail_loss.INTERPRETATION)}

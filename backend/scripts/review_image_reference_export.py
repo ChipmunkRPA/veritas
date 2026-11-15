@@ -34,6 +34,7 @@ JPEG_DETAIL_LOSS_SCHEMA = "chipmunk.image-reference-comparison/15"
 EXTENDED_JPEG_DETAIL_LOSS_SCHEMA = "chipmunk.image-reference-comparison/16"
 PNG_OPACITY_SCHEMA = "chipmunk.image-reference-comparison/17"
 EXACT_WEBP_SCHEMA = "chipmunk.image-reference-comparison/18"
+LOSSY_WEBP_SCHEMA = "chipmunk.image-reference-comparison/19"
 ORIENTATION_SCHEMA = "chipmunk.image-reference-comparison/6"
 CROPPED_RESIZE_SCHEMAS = {CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, JPEG_PNG_ENVELOPE_SCHEMA}
 ORIENTATIONS = {
@@ -392,13 +393,13 @@ def _jpeg_replay(comparison, earlier, submitted, sub):
             return mask.tobytes()
 
 
-def _exact_lossless_replay(comparison, earlier, submitted, *, opacity):
+def _native_reference_replay(comparison, earlier, submitted, *, opacity, lossy_webp):
     from app.evidence.image_reference import inspect
 
     with TemporaryDirectory() as temporary:
         evidence = Path(temporary) / "evidence"
-        regenerated = inspect(earlier, submitted, evidence_dir=evidence, allow_png_opacity=opacity)
-        label = "PNG opacity" if opacity else "Exact WebP"
+        regenerated = inspect(earlier, submitted, evidence_dir=evidence, allow_png_opacity=opacity, allow_lossy_webp=lossy_webp)
+        label = "PNG opacity" if opacity else "Lossy WebP" if lossy_webp else "Exact WebP"
         _require(_same_replayed_fields(comparison, regenerated), f"{label} measurements differ from the supplied sources")
         if "mask" in regenerated:
             with Image.open(evidence / regenerated["mask"]["file"], formats=["PNG"]) as image:
@@ -418,7 +419,7 @@ def review(export, earlier, submitted):
     _require(status in {"comparable", "integer_alignment_unresolved", "different_dimensions", "unsupported_dimensions",
                         "unaligned", "insufficient_common_background", "uncertain_delivery", "partial_jpeg_delivery_unassessed",
                         "unsupported_resize_geometry", "same_framing_unresolved", "resize_delivery_unresolved",
-                        "png_opacity_unassessed", "webp_framing_unassessed"},
+                        "png_opacity_unassessed", "webp_framing_unassessed", "webp_lossy_delivery_unassessed"},
              "Unknown comparison status")
     _require(not regions or status == "comparable", "An unassessed comparison contains difference regions")
     with ExitStack() as stack:
@@ -426,15 +427,16 @@ def review(export, earlier, submitted):
         submitted_bytes = _read(submitted, MAX_SOURCE_BYTES)
         opacity = comparison["schema"] == PNG_OPACITY_SCHEMA
         webp = comparison["schema"] == EXACT_WEBP_SCHEMA
-        ref = _source(stack, earlier_bytes, comparison["reference"], composite=opacity, webp=webp)
-        sub = _source(stack, submitted_bytes, comparison["submitted"], composite=opacity, webp=webp)
+        lossy_webp = comparison["schema"] == LOSSY_WEBP_SCHEMA
+        ref = _source(stack, earlier_bytes, comparison["reference"], composite=opacity, webp=webp or lossy_webp)
+        sub = _source(stack, submitted_bytes, comparison["submitted"], composite=opacity, webp=webp or lossy_webp)
         resized = comparison["schema"] == RESIZE_SCHEMA or comparison["schema"] in CROPPED_RESIZE_SCHEMAS
         oriented = comparison["schema"] == ORIENTATION_SCHEMA
         jpeg = comparison["schema"] in {EXACT_JPEG_IDENTITY_SCHEMA, SHIFTED_JPEG_SCHEMA, STRUCTURE_JPEG_SCHEMA,
                                         SAME_JPEG_SCHEMA, JPEG_DETAIL_LOSS_SCHEMA, EXTENDED_JPEG_DETAIL_LOSS_SCHEMA}
         crop = comparison.get("reference_crop_bounds") if comparison["schema"] in CROPPED_RESIZE_SCHEMAS else None
-        if opacity or webp:
-            expected_lossless_mask = _exact_lossless_replay(comparison, earlier, submitted, opacity=opacity)
+        if opacity or webp or lossy_webp:
+            expected_native_mask = _native_reference_replay(comparison, earlier, submitted, opacity=opacity, lossy_webp=lossy_webp)
             dx, dy, overlap = 0, 0, (0, 0, sub.width, sub.height)
         elif resized:
             carrier = stack.enter_context(Image.open(io.BytesIO(submitted_bytes), formats=["PNG", "JPEG"]))
@@ -468,8 +470,8 @@ def review(export, earlier, submitted):
                      "Difference mask pixels differ from the recomputed resize comparison")
         if jpeg:
             _require(mask.tobytes() == expected_jpeg_mask, "Difference mask pixels differ from the recomputed JPEG comparison")
-        if opacity or webp:
-            _require(mask.tobytes() == expected_lossless_mask, "Difference mask pixels differ from the recomputed lossless comparison")
+        if opacity or webp or lossy_webp:
+            _require(mask.tobytes() == expected_native_mask, "Difference mask pixels differ from the recomputed native comparison")
         if oriented:
             with ImageChops.subtract(mask, mismatch) as unsupported:
                 _require(not unsupported.getbbox(), "Difference mask marks a pixel that matches the oriented source")

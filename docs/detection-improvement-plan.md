@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Earlier-copy evidence for lossy WebP](image-reference-lossy-webp-2026-11-14.md)
+  located 135 of 144 held edits with no highlights on 216 unchanged
+  or recompression-only deliveries. The local comparison exposes original
+  crops and brightness-difference masks in the app, PDF and JSON.
+
 - [Missing lip closure during a detected M sound](video-mouth-closure-transfer-2026-11-14.md)
   located four of 20 same-speaker dubs at the 100 ms broader point.
   The current timing rule found zero. The candidate produced six flags

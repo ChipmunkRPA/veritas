@@ -6,7 +6,7 @@ import {
   compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
   IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
-  pngOpacitySchema, exactWebpSchema,
+  pngOpacitySchema, exactWebpSchema, lossyWebpSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -28,6 +28,7 @@ const unassessed: Record<string, string> = {
   resize_delivery_unresolved: 'Too few resize comparisons agreed on the image delivery.',
   png_opacity_unassessed: 'The opacity comparison requires two matched 8-bit RGB or RGBA PNGs with the same framing and color profile.',
   webp_framing_unassessed: 'Exact WebP comparison needs compatible opaque images with matching dimensions and enough exact shared detail.',
+  webp_lossy_delivery_unassessed: 'The copies could not be reliably matched after allowing for WebP compression.',
 }
 
 function NativeArea({ area }: { area: NativeImageArea }) {
@@ -78,6 +79,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const detailLoss = isJpegDetailLoss(comparison.schema)
   const opacity = comparison.schema === pngOpacitySchema ? comparison.png_opacity : undefined
   const exactWebp = comparison.schema === exactWebpSchema ? comparison.exact_webp : undefined
+  const lossyWebp = comparison.schema === lossyWebpSchema ? comparison.lossy_webp : undefined
   const sameJpegBlocks = (comparison.schema === sameJpegSchema || detailLoss) ? alignment : undefined
   const shiftedJpeg = comparison.schema === shiftedJpegSchema ? alignment : undefined
   const sameStructureFraming = comparison.schema === structureJpegSchema ? comparison.same_framing_structure : undefined
@@ -138,6 +140,12 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       {exactWebp.changed_pixels === 0 ? 'All decoded RGB pixels match.' :
         `${exactWebp.changed_pixels.toLocaleString('en-US')} decoded pixels differ. ${exactWebp.matched_tiles.length} matching detailed areas supported the framing.`}
       {' '}Ordinary edits can produce these differences. This check carries no weight in the AI assessment.
+    </p>}
+    {lossyWebp && <p className="mt-2 mb-0 text-small text-text-muted">
+      {lossyWebp.matching_tiles.toLocaleString('en-US')} of {lossyWebp.textured_tiles.toLocaleString('en-US')} detailed areas
+      supported matching framing. The comparison highlights local brightness differences after filtering small compression variations.
+      Ordinary editing can cause differences.
+      This check carries no weight in the AI assessment.
     </p>}
     {sameJpegFraming && <p className="mt-2 mb-0 text-small text-text-muted">
       Exact JPEG block matches support the same framing. After encoding the earlier PNG with the submitted JPEG settings,

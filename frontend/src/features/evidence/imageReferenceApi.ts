@@ -86,6 +86,7 @@ export interface ImageReferenceRecord {
   }
   png_opacity?: { opacity_changed_pixels: number; matched_pixels: number; matched_tiles: [number, number][] }
   exact_webp?: { changed_pixels: number; matched_tiles: [number, number][]; earlier_rgb_sha256: string; submitted_rgb_sha256: string }
+  lossy_webp?: { matching_tiles: number; textured_tiles: number; tile_side_px: number; earlier_rgb_sha256: string }
   affects_overall_confidence?: boolean
   additional_regions?: number
 }
@@ -104,6 +105,7 @@ export const jpegDetailLossSchema = 'chipmunk.image-reference-comparison/15'
 export const extendedJpegDetailLossSchema = 'chipmunk.image-reference-comparison/16'
 export const pngOpacitySchema = 'chipmunk.image-reference-comparison/17'
 export const exactWebpSchema = 'chipmunk.image-reference-comparison/18'
+export const lossyWebpSchema = 'chipmunk.image-reference-comparison/19'
 export const isJpegDetailLoss = (schema: string) =>
   schema === jpegDetailLossSchema || schema === extendedJpegDetailLossSchema
 export const IMAGE_REFERENCE_SECTION_ID = 'earlier-image-comparison'
@@ -215,6 +217,20 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
         || ![webp.earlier_rgb_sha256, webp.submitted_rgb_sha256].every(digest => /^[a-f0-9]{64}$/.test(digest))
         || comparison.regions.some(region => !validAreaWithin(region, width, height))) {
       throw new Error('The server returned an incomplete lossless WebP comparison.')
+    }
+  }
+  if (comparison.schema === lossyWebpSchema && comparison.status === 'comparable') {
+    const webp = comparison.lossy_webp
+    const { width, height } = comparison.submitted
+    if (!webp || comparison.affects_overall_confidence !== false || ![width, height].every(
+      side => Number.isSafeInteger(side) && side >= 512 && side <= 1024)
+        || comparison.reference.width !== width || comparison.reference.height !== height || webp.tile_side_px !== 32
+        || ![webp.matching_tiles, webp.textured_tiles].every(Number.isSafeInteger)
+        || webp.matching_tiles < 24 || 20 * webp.matching_tiles < 13 * webp.textured_tiles || webp.matching_tiles > webp.textured_tiles
+        || webp.textured_tiles > Math.floor(width / 32) * Math.floor(height / 32)
+        || !/^[a-f0-9]{64}$/.test(webp.earlier_rgb_sha256)
+        || comparison.regions.some(region => !validAreaWithin(region, width, height))) {
+      throw new Error('The server returned an incomplete lossy WebP comparison.')
     }
   }
   if (comparison.schema === pngOpacitySchema && comparison.status === 'comparable') {

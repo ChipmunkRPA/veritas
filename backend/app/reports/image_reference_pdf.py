@@ -8,6 +8,7 @@ from app.detectors.image import (
     reference_exact_jpeg,
     reference_jpeg_detail_loss,
     reference_lossless_webp,
+    reference_lossy_webp,
     reference_png_opacity,
     reference_png_orientation,
     reference_png_oriented_crop,
@@ -33,6 +34,7 @@ RESIZE_UNASSESSED = {
     "resize_delivery_unresolved": "Comparison unassessed. Too few resize comparisons agreed on the image delivery.",
     reference_png_opacity.UNASSESSED: "Comparison unassessed. Shared PNG framing or color settings could not be established.",
     reference_lossless_webp.UNASSESSED: "Comparison unassessed. Compatible lossless RGB framing could not be established.",
+    reference_lossy_webp.UNASSESSED: "Comparison unassessed. Matching framing could not be verified after compression.",
 }
 
 
@@ -95,6 +97,10 @@ def _summary(document, comparison, assets):
         if changed:
             _text(page, MARGIN, 318, f"{len(proof['matched_tiles'])} matching detailed areas supported the framing.",
                   size=10, color=MUTED)
+    if proof := comparison.get("lossy_webp"):
+        _text(page, MARGIN, 302, "The comparison allows for lossy WebP compression.", size=10, font="hebo")
+        _text(page, MARGIN, 318, f"{proof['matching_tiles']:,} of {proof['textured_tiles']:,} detailed areas supported the framing.",
+              size=10, color=MUTED)
     if schema == reference_exact_jpeg.SCHEMA:
         proof = comparison["alignment"]
         _text(page, MARGIN, 302, "Same framing supported by exact JPEG block matches.", size=10, font="hebo")

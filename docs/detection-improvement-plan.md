@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Visible lip releases paired with speech timings](video-bilabial-mouth-transfer-2026-11-14.md)
+  localized 5/128 staged local shifts, compared with 0/128 for the current
+  timing check. Four other flags missed the position or direction rule.
+  The localized method issued no alerts on 192 ordinary deliveries or
+  128 constant delays. It stays in evaluation.
+
 - [Neural phone timestamps for lip-sync evaluation](video-neural-phone-clock-2026-11-14.md)
   tracked 42 of 128 staged sound shifts across two disjoint held cohorts,
   compared with 28 for the earlier decoder. Original label matches rose

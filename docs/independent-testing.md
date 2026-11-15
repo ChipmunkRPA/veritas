@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [visible lip-release replay](video-bilabial-mouth-transfer-2026-11-14.md#replay)
+compares current short lip-sync timing with independently measured mouth
+openings and acoustic anchors. It covers ordinary processing, constant
+delays and local shifts. Native replay checks source frames and crops.
+
 The [phone clock replay](video-neural-phone-clock-2026-11-14.md#independent-replay)
 recounts shift tracking and unmatched audio events on two distinct speaker
 cohorts. Native replay verifies authored waveforms and adjacent source frame

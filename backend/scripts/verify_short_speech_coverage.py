@@ -34,14 +34,14 @@ def verify_coverage(package, original, public_key, weights, *, long_review=False
         if hashlib.file_digest(source, "sha256").hexdigest() != ACTIVITY_SHA256:
             raise ValueError("Local speech activity weights differ from the pinned asset")
     source = evidence["source"]
-    decoded = decode_audio(original, source_sha256=source["sha256"],
-                           max_seconds=14.0 if long_review else 6.0, inspect_stereo=False)
+    duration = 14.0 if long_review else (7.0 if source.get("source_codec") == "aac" else 6.0)
+    decoded = decode_audio(original, source_sha256=source["sha256"], max_seconds=duration, inspect_stereo=False)
     if decoded.mapping["pcm_sha256"] != source["pcm_sha256"]:
         raise ValueError("Re-decoded speech review input differs from the original commitment")
     activity = SpeechActivity(weights)
     if long_review:
         return verify_long_windows(activity, decoded.pcm, review["windows"])
-    spans = activity.spans(decoded.pcm)
+    spans = activity.spans(decoded.pcm[:6 * RATE])
     expected = window_coverage(speech_counts(spans), decoded.mapping)
     if expected != review["window_coverage"]:
         raise ValueError("Measured speech coverage differs from the signed evidence")

@@ -14,12 +14,12 @@ from app.evidence.audio_short_review_binding import (
     DETECTOR_ID,
     GRID,
     NO_SPEECH_REASON,
-    RATE,
     SAMPLES,
     SCHEMA,
     TITLE,
     selected_range,
     speech_counts,
+    supported_aac_length,
 )
 
 BUDGET_S = 15.0
@@ -65,15 +65,19 @@ class ShortVoiceReview(Detector):
 
     def applicable(self, ctx):
         track = ctx.outputs.audio
-        ok = track is not None and track.pcm is not None and len(track.pcm) == SAMPLES and not track.clock_breaks
+        if track is None or track.pcm is None or track.clock_breaks:
+            return Applicability(False, "No eligible continuous six-second source.")
+        codec = (ctx.outputs.probe or {}).get("source_codec")
+        ok = supported_aac_length(len(track.pcm)) if codec == "aac" else len(track.pcm) == SAMPLES
         return Applicability(ok, None if ok else "No eligible continuous six-second source.")
 
     def run(self, ctx):
         pcm = ctx.outputs.audio.pcm
-        spans = ctx.lease.get(ACTIVITY_MODEL).obj.spans(pcm)
+        presentation = pcm[:SAMPLES]
+        spans = ctx.lease.get(ACTIVITY_MODEL).obj.spans(presentation)
         model = ctx.lease.get(PellaVoiceDetector.MODEL_ID).obj
         probe = ctx.outputs.probe or {}
-        review = scan(pcm, spans, model, ctx.deadline, codec=probe.get("source_codec"))
+        review = scan(presentation, spans, model, ctx.deadline, codec=probe.get("source_codec"))
         if probe.get("primary_coverage_skip") is True:
             review["reason"] = AFTER_COVERAGE_SKIP[review["status"]]
         return DetectorResult(status="ok", details={

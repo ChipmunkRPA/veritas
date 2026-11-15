@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Short speech review on 48 kHz AAC](audio-short-aac-transfer-2026-11-15.md)
+  adds a local Full trial for a verified six-second mono M4A presentation.
+  It gains four useful deliveries from two source groups when combined
+  with four-second review, with one additional ordinary group flagged.
+  The app and exports keep the exact interval and exclude codec padding
+  from the short-window analysis.
+
 - [Agreement between short speech-edit checks](audio-short-edit-agreement-2026-11-15.md)
   increased correctly located primary edits from 4/48 to 8/48 when any
   wider check could add an interval. It also added 19 ordinary flags and

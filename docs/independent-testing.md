@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short AAC speech replay](audio-short-aac-transfer-2026-11-15.md#replay)
+reconstructs the comparison on three retained source banks and recounts
+useful intervals, misplaced flags and ordinary source groups. The
+local worker test checks the same original excerpt and waveform through
+paid checkout, the PDF and JSON, and signed source replay.
+
 The [short speech-edit agreement replay](audio-short-edit-agreement-2026-11-15.md#replay)
 checks whether different speech responses support the same interval.
 It replays original and joint point selection, compares individual

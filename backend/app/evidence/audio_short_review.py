@@ -49,7 +49,7 @@ def build(record, *, store, source, pcm, mapping, asset, waveform):
         document.update(start_s=a / binding.RATE, end_s=b / binding.RATE, source_timestamp_ranges=source_ranges(mapping, a, b))
         document["artifacts"] = {
             "selected_clip": asset(wav_bytes(pcm[a:b]), "audio/wav", samples=b - a, sample_rate=binding.RATE, channels=1),
-            "waveform": asset(waveform(pcm, [], start=0, end=len(pcm), selected=(a, b), scores=False),
+            "waveform": asset(waveform(pcm, [], start=0, end=binding.SAMPLES, selected=(a, b), scores=False),
                               "image/png", width=960, height=280),
         }
     binding.validate(document, source)

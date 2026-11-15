@@ -13,11 +13,17 @@ DETECTOR_ID = "aud.short_voice_review"
 REVIEW_POINT = 6.822523597593649
 MP3_REVIEW_POINT = 7.085599896496718
 MP3_ORIGIN = 1105
+AAC_RATE, AAC_FRAME, AAC_REVIEW_POINT = 48_000, 1024, 7.049249651163794
+AAC_CONTAINER = "mov,mp4,m4a,3gp,3g2,mj2"
+AAC_FIELDS = ("source_container", "source_profile", "source_bit_rate", "source_time_base", "source_start_pts",
+              "source_duration_pts")
 TITLE = "Short speech-window review"
 LIMITATION = ("This is a clue for the complete two-second window. It cannot establish AI generation or the boundaries "
               "of an edit. It carries no weight in the overall assessment.")
 SCOPE_REASON = ("This check requires Full analysis of six continuous decoded seconds at 16 kHz. "
                 "It supports 16-bit mono WAV and FLAC and a verified 48 kb/s mono MP3 profile.")
+AAC_SCOPE_REASON = ("This check requires a continuous six-second source in Full analysis. It supports 16-bit mono WAV and "
+                    "FLAC, the verified 48 kb/s mono MP3 profile, and 48 kHz mono AAC-LC in M4A at the tested bit rate.")
 NO_SPEECH_REASON = "No two-second interval contained enough detected speech."
 AFTER_COVERAGE_SKIP = {
     "flagged": "The main voice check skipped its longer windows. A shorter window returned an elevated response. "
@@ -31,7 +37,7 @@ AFTER_COVERAGE_SKIP = {
 def source_metadata(mapping: dict) -> dict:
     metadata = {"source_codec": mapping.get("source_codec")}
     keys = {"flac": ("source_container", "source_bit_depth"), "pcm_s16le": ("source_container", "source_bit_depth"),
-            "mp3": ("source_container", "source_bit_rate")}
+            "mp3": ("source_container", "source_bit_rate"), "aac": AAC_FIELDS}
     metadata.update({key: mapping[key] for key in keys.get(metadata["source_codec"], ()) if key in mapping})
     return metadata
 
@@ -40,8 +46,28 @@ def source_metadata_matches(source: dict, mapping: dict) -> bool:
     return all(mapping.get(key) == value for key, value in source_metadata(source).items())
 
 
+def supported_aac_length(samples: int) -> bool:
+    return SAMPLES <= samples <= SAMPLES + (AAC_FRAME + 2) // 3
+
+
+def supported_aac(source: dict) -> bool:
+    bit_rate, samples = source.get("source_bit_rate"), source.get("samples")
+    return (
+        source.get("source_codec") == "aac" and source.get("source_container") == AAC_CONTAINER
+        and source.get("source_profile") == "LC" and type(bit_rate) is int and 64_000 <= bit_rate <= 67_000
+        and source.get("source_time_base") == "1/48000" and source.get("source_start_pts") == 0
+        and source.get("source_duration_pts") == 6 * AAC_RATE and type(samples) is int and supported_aac_length(samples)
+        and source.get("sample_rate") == RATE and source.get("source_sample_rate") == AAC_RATE
+        and source.get("channels") == source.get("source_channels") == 1
+        and len(source.get("audio_stream_indices", [0])) == 1 and source.get("timeline_time_base") == "1/16000"
+        and source.get("timeline") == [{"start_sample": 0, "end_sample": samples, "source_pts": 0}]
+    )
+
+
 def supported_source(mapping: dict) -> bool:
     codec = mapping.get("source_codec")
+    if codec == "aac":
+        return supported_aac(mapping)
     lossless = codec == "pcm_s16le" or (
         codec == "flac" and mapping.get("source_container") == "flac" and mapping.get("source_bit_depth") == 16
     )
@@ -58,7 +84,7 @@ def supported_source(mapping: dict) -> bool:
 
 def selected_range(responses: list[dict], codec: str | None = None) -> dict | None:
     best = max(responses, key=lambda item: (item["logit"], -item["start_sample"]), default=None)
-    point = MP3_REVIEW_POINT if codec == "mp3" else REVIEW_POINT
+    point = {"mp3": MP3_REVIEW_POINT, "aac": AAC_REVIEW_POINT}.get(codec, REVIEW_POINT)
     if best is None or best["logit"] <= point:
         return None
     return {key: best[key] for key in ("start_sample", "end_sample")}

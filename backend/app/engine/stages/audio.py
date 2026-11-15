@@ -59,7 +59,12 @@ from app.evidence.audio_binding import (
     VOICE_CLOCK_POLICY,
     source_clock_breaks,
 )
-from app.evidence.audio_short_review_binding import SCOPE_REASON, supported_source
+from app.evidence.audio_short_review_binding import (
+    AAC_CONTAINER,
+    AAC_SCOPE_REASON,
+    SCOPE_REASON,
+    supported_source,
+)
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 from app.storage.artefacts import ArtefactNotFound, get_artefact, register_artefact
@@ -272,9 +277,14 @@ def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
     if provenance_gate.stop(ctx):
         return short_voice_review.skipped(provenance_gate.SKIP_REASON)
     facts = ctx.outputs["probe"]["facts"]
-    if (Profile(ctx.profile) is not Profile.FULL or facts.get("container") not in {"wav", "flac", "mp3"}
+    source_codec = ctx.outputs["decode"].get("short_voice_review_source_codec")
+    aac_enabled = settings.environment == "dev" and settings.audio_short_aac_review
+    container = facts.get("container")
+    allowed_container = container in {"wav", "flac", "mp3"} or (
+        aac_enabled and source_codec == "aac" and container == AAC_CONTAINER and not facts.get("has_video"))
+    if (Profile(ctx.profile) is not Profile.FULL or not allowed_container
             or not ctx.outputs["decode"].get("short_voice_review_source_supported")):
-        return short_voice_review.skipped(SCOPE_REASON)
+        return short_voice_review.skipped(AAC_SCOPE_REASON if aac_enabled else SCOPE_REASON)
     primary = next((e for e in entries if e.get("detector_id") == short_voice_review.PellaVoiceDetector.spec.id), {})
     coverage_skip = (settings.environment == "dev" and settings.audio_short_admission_review
                      and primary.get("status") == "not_applicable" and primary.get("reason") == NO_ADMITTED_VOICE)
@@ -284,7 +294,6 @@ def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
     if remaining is not None and remaining < short_voice_review.BUDGET_S + short_voice_review.PIPELINE_RESERVE_S:
         return short_voice_review.skipped("The optional short-window check did not have enough analysis time.")
     detector = short_voice_review.ShortVoiceReview()
-    source_codec = ctx.outputs["decode"].get("short_voice_review_source_codec")
     run_ctx = RunContext(analysis_id=ctx.analysis_id, media=common.media(ctx), profile=ctx.profile, device="cpu",
                          dtype=None, lease=None, outputs=StageOutputs(audio=track, probe={"source_codec": source_codec,
                              "primary_coverage_skip": coverage_skip}), deadline=ctx.deadline,

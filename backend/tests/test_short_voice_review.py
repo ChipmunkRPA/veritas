@@ -59,6 +59,39 @@ def test_mp3_uses_its_frozen_point_and_exact_source_clock():
     assert not binding.source_metadata_matches({"source_codec": "mp3", "source_bit_rate": 64000}, mp3)
 
 
+def test_aac_keeps_the_exact_presentation_separate_from_decoder_padding():
+    presentation = np.zeros(binding.SAMPLES, np.float32)
+    padded = np.concatenate((presentation, np.ones(256, np.float32)))
+    aac = source(padded) | {
+        "source_codec": "aac", "source_container": binding.AAC_CONTAINER, "source_profile": "LC",
+        "source_sample_rate": 48000, "source_bit_rate": 65000, "source_time_base": "1/48000",
+        "source_start_pts": 0, "source_duration_pts": 288000,
+    }
+    assert binding.supported_source(aac)
+    for key, value in (("source_duration_pts", 288003), ("source_profile", "HE-AAC"), ("source_bit_rate", 96000),
+                       ("source_channels", 2), ("audio_stream_indices", [0, 1]), ("source_start_pts", 1024)):
+        assert not binding.supported_source(aac | {key: value})
+    coverage = binding.window_coverage([32000] * 5, aac)
+    assert coverage[-1]["source_timestamp_ranges"][-1]["source_end_pts"] == binding.SAMPLES
+
+    def spans(samples):
+        np.testing.assert_array_equal(samples, presentation)
+        return [(0.0, 6.0)]
+
+    classifiers = {
+        short_voice_review.ACTIVITY_MODEL: SimpleNamespace(obj=SimpleNamespace(spans=spans)),
+        short_voice_review.PellaVoiceDetector.MODEL_ID: SimpleNamespace(obj=SimpleNamespace(predict=lambda _: [.9995])),
+    }
+    ctx = SimpleNamespace(outputs=SimpleNamespace(audio=AudioTrack("analysis", padded, len(padded)), probe={"source_codec": "aac"}),
+                          lease=classifiers, deadline=Deadline(None))
+    review = short_voice_review.ShortVoiceReview()
+    result = review.run(ctx)
+    assert result.details["pcm_sha256"] == aac["pcm_sha256"]
+    assert result.details["short_voice_review"]["selected"] == {"start_sample": 0, "end_sample": 32000}
+    marginal = [{"start_sample": 0, "end_sample": 32000, "logit": 6.9}]
+    assert binding.selected_range(marginal) and not binding.selected_range(marginal, "aac")
+
+
 @pytest.mark.skipif(not which("ffmpeg") or not which("ffprobe"), reason="Requires the local audio decoder")
 def test_native_flac_depth_and_exact_decoded_samples(tmp_path):
     source_pcm = np.arange(binding.SAMPLES, dtype=np.int32).astype("<i2").astype(np.float32) / 32768

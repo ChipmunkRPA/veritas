@@ -225,9 +225,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         replay_detail += " Recomputed the bounded waveform similarity result."
     if (review := audio.get("short_voice_review")) and review["status"] == "flagged":
         from app.evidence.audio_packets import _chart
+        from app.evidence.audio_short_review_binding import SAMPLES
 
         selected = (review["interval"]["start_sample"], review["interval"]["end_sample"])
-        waveform = _chart(decoded.pcm, [], start=0, end=len(decoded.pcm), selected=selected, scores=False)
+        waveform = _chart(decoded.pcm, [], start=0, end=SAMPLES, selected=selected, scores=False)
         if hashlib.sha256(waveform).hexdigest() != review["artifacts"]["waveform"]["sha256"]:
             raise ValueError("Short speech-window waveform differs from the recorded samples")
         replay_detail += " Recomputed the marked short speech-window waveform."

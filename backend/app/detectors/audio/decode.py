@@ -251,6 +251,10 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
                 and mapping["source_codec"] == "aac" and mapping["source_sample_rate"] == 48_000
                 and type(stream.get("duration_ts")) is int):
             mapping["source_duration_pts"] = stream["duration_ts"]
+            mapping["source_container"] = fmt["format_name"]
+            mapping["source_profile"] = stream.get("profile")
+            bit_rate = _number(stream.get("bit_rate"))
+            mapping["source_bit_rate"] = int(bit_rate) if bit_rate is not None else None
         if mapping["source_codec"] == "flac":
             mapping["source_container"] = fmt.get("format_name")
             bits = _number(stream.get("bits_per_raw_sample"))

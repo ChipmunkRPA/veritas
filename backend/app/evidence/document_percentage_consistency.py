@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from bisect import bisect_right
 from collections import defaultdict
 from decimal import Decimal
 
@@ -10,6 +11,7 @@ from app.core.canonical import FLOAT_DP
 from app.evidence.document_native_locations import clip_source_ranges
 from app.evidence.document_repeat import block_anchor, validate_block_anchor
 from app.evidence.document_scope import mapped_email_html
+from app.evidence.document_tracked_changes import JOINED_PARAGRAPHS
 
 KEY = "percentage_consistency"
 SCHEMA = "document-percentage-consistency/1"
@@ -120,8 +122,10 @@ def build(source, text, mapping, sentences, *, meta=None, legacy=False):
                 continue
             candidates[index] = anchor
     checked = 0
+    # Accepted Word paragraphs can span several native source blocks.
+    native_starts = [row["start"] for row in mapping] if meta.get(JOINED_PARAGRAPHS) else []
     for unit in sentences:
-        index = unit["paragraph"]
+        index = bisect_right(native_starts, unit["start"]) - 1 if native_starts else unit["paragraph"]
         if index not in candidates:
             continue
         start, end = unit["start"], unit["end"]

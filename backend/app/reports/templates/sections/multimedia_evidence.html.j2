@@ -269,6 +269,7 @@ Samples [{{ window.start_sample }}, {{ window.end_sample }}) at 16000 Hz.
 {% set tracked = evidence.word_tracked_changes %}
 <h3>Word tracked text changes</h3>
 {% if tracked.get('writing_input') == 'accepted_inline_changes' %}<p>Writing checks use the version with these inline insertions included and deletions excluded.</p>{% endif %}
+{% if tracked.get('writing_input') == 'accepted_paragraph_changes' %}<p>Writing checks use the accepted wording and paragraph breaks.</p>{% endif %}
 {% if tracked.get('writing_input') == 'unsupported_tracked_changes' %}<p>Some Word revisions could change which text is visible. Automated writing checks were skipped.</p>{% endif %}
 <p class="caption">{{ tracked.scope }} {{ tracked.limitation }}</p>
 <p class="caption">Checked {{ tracked.paragraphs }} body paragraphs. Found {{ tracked.inserted }} insertions and {{ tracked.deleted }} deletions.
@@ -280,6 +281,11 @@ XML body index {{ row.body_index }}, paragraph child index {{ row.inline_index }
 {% if row.writing_input_range is defined %}<p class="caption">Accepted paragraph characters [{{ row.writing_input_range[0] }}, {{ row.writing_input_range[1] }}).</p>{% endif %}
 <blockquote>{{ row.text }}{% if row.characters > row.text | length %}… ({{ row.characters }} source characters){% endif %}</blockquote>
 {% endfor %}
+{% for mark in tracked.get('paragraph_marks', []) %}
+<p class="caption"><strong>{{ mark.kind | capitalize }} paragraph break · Body paragraph {{ mark.paragraph }}</strong>.
+XML body index {{ mark.body_index }}, child path {{ mark.child_path | join(' / ') }} (zero-based).</p>
+{% endfor %}
+{% if tracked.get('omitted_paragraph_marks') %}<p class="caption">{{ tracked.omitted_paragraph_marks }} further paragraph breaks exceed the display limit.</p>{% endif %}
 <p class="caption">Source part <span class="mono">{{ tracked.part }}</span>. JSON pointer <span class="mono">/coverage/word_tracked_changes</span>.</p>
 {% endif %}
 {% if evidence.get('unselected_writing_responses') %}

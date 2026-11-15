@@ -172,6 +172,31 @@ describe('ordinary multimedia evidence', () => {
     expect(section.getByText('Accepted paragraph characters [17, 25).')).toBeTruthy()
   })
 
+  it('shows tracked paragraph breaks even when no passage is highlighted', () => {
+    show({ ...document, packets: [], coverage: { word_tracked_changes: {
+      status: 'found', part: 'word/document.xml', paragraphs: 3, inserted: 0, deleted: 0,
+      writing_input: 'accepted_paragraph_changes', scope: 'Checks paragraph breaks.', limitation: 'Authorship remains undetermined.',
+      unsupported_marks: 0, omitted_excerpts: 0, authorship_confidence_contribution: 0,
+      rows: [], paragraph_marks: [{ kind: 'deleted', paragraph: 2, body_index: 1, child_path: [0, 0, 0] }],
+    } } })
+    const section = within(screen.getByRole('region', { name: 'Word tracked text changes' }))
+    expect(section.getByText(/accepted wording and paragraph breaks/)).toBeTruthy()
+    expect(section.getByText('Deleted paragraph break · Body paragraph 2')).toBeTruthy()
+    expect(section.getByText(/XML body index 1, child path 0 \/ 0 \/ 0/)).toBeTruthy()
+    expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
+  })
+
+  it('explains why writing was skipped when the unsupported revision has no excerpt', () => {
+    show({ ...document, packets: [], coverage: { word_tracked_changes: {
+      status: 'partial', part: 'word/document.xml', paragraphs: 3, inserted: 0, deleted: 0,
+      writing_input: 'unsupported_tracked_changes', scope: 'Checks paragraph breaks.', limitation: 'Authorship remains undetermined.',
+      unsupported_marks: 1, omitted_excerpts: 0, authorship_confidence_contribution: 0,
+      rows: [], paragraph_marks: [],
+    } } })
+    expect(screen.getByText(/Automated writing checks were skipped/)).toBeTruthy()
+    expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
+  })
+
   it('shows both chat markers with their original character positions', () => {
     show({ ...document, packets: [], coverage: { chat_format_markers: {
       schema: 'document-chat-format-markers/1', scope: 'Maps literal source text.',

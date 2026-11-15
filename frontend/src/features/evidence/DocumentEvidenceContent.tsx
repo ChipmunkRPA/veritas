@@ -330,6 +330,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     {tracked && <section aria-label="Word tracked text changes" className="mt-4 rounded-md border border-border p-4">
       <h3 className="m-0 text-body font-medium">Word tracked text changes</h3>
       {tracked.writing_input === 'accepted_inline_changes' && <p className="mt-2 mb-0 text-small">Writing checks use the version with these inline insertions included and deletions excluded.</p>}
+      {tracked.writing_input === 'accepted_paragraph_changes' && <p className="mt-2 mb-0 text-small">Writing checks use the accepted wording and paragraph breaks.</p>}
       {tracked.writing_input === 'unsupported_tracked_changes' && <p className="mt-2 mb-0 text-small">Some Word revisions could change which text is visible. Automated writing checks were skipped.</p>}
       <p className="mt-2 mb-0 text-small">Checked {tracked.paragraphs} body paragraphs. Found {tracked.inserted} insertions and {tracked.deleted} deletions.</p>
       {!!tracked.unsupported_marks && <p className="mt-2 mb-0 text-small">{tracked.unsupported_marks} additional revision marks were outside scope.</p>}
@@ -343,7 +344,14 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
           {row.writing_input_range && <p className="mt-2 mb-0 text-caption text-text-muted">Accepted paragraph characters [{row.writing_input_range[0]}, {row.writing_input_range[1]}).</p>}
         </li>)}
       </ol>}
+      {!!tracked.paragraph_marks?.length && <ol className="mt-3 mb-0 list-none space-y-3 p-0">
+        {tracked.paragraph_marks.map((mark) => <li key={mark.body_index} className="rounded-md border border-border p-3">
+          <p className="m-0 text-small font-medium">{mark.kind === 'inserted' ? 'Inserted' : 'Deleted'} paragraph break · Body paragraph {mark.paragraph}</p>
+          <p className="mt-2 mb-0 text-caption text-text-muted">{tracked.part} · XML body index {mark.body_index}, child path {mark.child_path.join(' / ')} (zero-based).</p>
+        </li>)}
+      </ol>}
       {!!tracked.omitted_excerpts && <p className="mt-2 mb-0 text-caption text-text-muted">{tracked.omitted_excerpts} further excerpts exceed the display limit.</p>}
+      {!!tracked.omitted_paragraph_marks && <p className="mt-2 mb-0 text-caption text-text-muted">{tracked.omitted_paragraph_marks} further paragraph breaks exceed the display limit.</p>}
     </section>}
     <DocumentRepeatedPassages result={set.repeated_passages} />
     {set.percentage_consistency && <PercentageConsistency review={set.percentage_consistency} />}

@@ -73,36 +73,76 @@ def _normalise(raw: str, *, dehyphenate: bool = False) -> tuple[str, list[tuple[
     return "".join(chars[start:end]), origins[start:end]
 
 
+def _source_ranges(raw, text, origins, pos, *, base=0, html_origins=None):
+    ranges = []
+    previous_direct = False
+    for i, (a, b) in enumerate(origins):
+        lo, hi = (html_origins[a][0], html_origins[b - 1][1]) if html_origins is not None else (base + a, base + b)
+        row = [pos + i, pos + i + 1, lo, hi]
+        direct = b - a == hi - lo == 1 and raw[a:b] == text[i]
+        if ranges and previous_direct and direct and ranges[-1][1] == row[0] and ranges[-1][3] == row[2]:
+            ranges[-1][1], ranges[-1][3] = row[1], row[3]
+        else:
+            ranges.append(row)
+        previous_direct = direct
+    return ranges
+
+
+def _paragraph_groups(parts):
+    group = []
+    for part in parts:
+        group.append(part)
+        if not part[1].get("join_following_paragraph"):
+            yield group
+            group = []
+    if group:
+        raise ValueError("A deleted Word paragraph mark has no following paragraph")
+
+
+def _joined_word_mapping(group, text, origins, pos):
+    source_start = first = 0
+    for raw, source in group:
+        source_end = source_start + len(raw)
+        last = first
+        while last < len(origins) and origins[last][0] < source_end:
+            last += 1
+        if first < last:
+            # When whitespace straddles the deleted break, the first actual
+            # source of that space anchors the single normalized character.
+            selected = [(a - source_start, min(b, source_end) - source_start) for a, b in origins[first:last]]
+            entry = {key: value for key, value in source.items() if key != "join_following_paragraph"}
+            yield {**entry, "start": pos + first, "end": pos + last, "offset_unit": "unicode_codepoint",
+                   "source_ranges": _source_ranges(raw, text[first:last], selected, pos + first)}
+        first, source_start = last, source_end
+
+
 def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False) -> Document:
     texts: list[str] = []
     spans: list[tuple[int, int]] = []
     mapping: list[dict] = []
     pos = 0
-    for raw, source in parts:
+    for group in _paragraph_groups(parts):
+        raw, source = group[0]
+        if len(group) > 1:
+            raw = "".join(piece for piece, _ in group)
         text, origins = _normalise(raw, dehyphenate=dehyphenate)
         if not text:
             continue
         if texts:
             pos += 2
+        spans.append((pos, pos + len(text)))
+        texts.append(text)
+        if len(group) > 1:
+            mapping.extend(_joined_word_mapping(group, text, origins, pos))
+            pos += len(text)
+            continue
         entry = {k: v for k, v in source.items() if k not in {"glyphs", "ocr_words", "html_origins"}}
         entry.update(start=pos, end=pos + len(text), offset_unit="unicode_codepoint")
         if source.get("kind") in {"text", "email", "docx"}:
             # Consecutive 1:1 stretches are compacted; collapsed whitespace keeps
             # its entire source range. These are decoded codepoints, not bytes.
-            ranges: list[list[int]] = []
-            base = source.get("source_start", 0)
-            html_origins = source.get("html_origins")
-            previous_direct = False
-            for i, (a, b) in enumerate(origins):
-                lo, hi = (html_origins[a][0], html_origins[b - 1][1]) if html_origins is not None else (base + a, base + b)
-                row = [pos + i, pos + i + 1, lo, hi]
-                direct = b - a == hi - lo == 1 and raw[a:b] == text[i]
-                if ranges and previous_direct and direct and ranges[-1][1] == row[0] and ranges[-1][3] == row[2]:
-                    ranges[-1][1], ranges[-1][3] = row[1], row[3]
-                else:
-                    ranges.append(row)
-                previous_direct = direct
-            entry["source_ranges"] = ranges
+            entry["source_ranges"] = _source_ranges(raw, text, origins, pos, base=source.get("source_start", 0),
+                                                     html_origins=source.get("html_origins"))
         glyphs = source.get("glyphs")
         if glyphs is not None:
             fragments = []
@@ -127,8 +167,6 @@ def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False) ->
             entry["fragments"] = fragments
             entry["geometry_granularity"] = "word"
         mapping.append(entry)
-        spans.append((pos, pos + len(text)))
-        texts.append(text)
         pos += len(text)
     return Document("\n\n".join(texts), spans, source_map=mapping)
 
@@ -590,7 +628,7 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool 
     return d
 
 
-def extract_docx(path: Path, *, project_word_revisions: bool = True) -> Document:
+def extract_docx(path: Path, *, project_word_revisions: bool = True, project_word_breaks: bool = True) -> Document:
     import docx
     from docx.oxml.ns import qn
     from docx.table import Table
@@ -598,11 +636,13 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True) -> Document
 
     from app.evidence import document_word_visibility
     from app.evidence.document_archive_word import ordinary_body_paragraph
-    from app.evidence.document_tracked_changes import INPUT_NOTICES, PART_NAME, inspect
+    from app.evidence.document_tracked_changes import INPUT_NOTICES, JOINED_PARAGRAPHS, PART_NAME, inspect
 
     d = docx.Document(str(path))
     part = str(d.part.partname).removeprefix("/")
-    review = inspect(d.element.body, part, project_inline=project_word_revisions) if PART_NAME.fullmatch(part) else None
+    joined = set() if project_word_revisions and project_word_breaks else None
+    review = (inspect(d.element.body, part, project_inline=project_word_revisions, joined_paragraphs=joined)
+              if PART_NAME.fullmatch(part) else None)
     parts: list[tuple[str, dict]] = []
     percentage_body_paragraphs = []
     hidden_locations = []
@@ -610,6 +650,7 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True) -> Document
 
     def walk(parent, elements, path_parts):
         nonlocal checked_paragraphs, hidden_runs
+        continued = False
         for index, element in enumerate(elements):
             path_here = [*path_parts, index]
             if element.tag == qn("w:p"):
@@ -621,16 +662,21 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True) -> Document
                         hidden_runs += 1
                         if len(hidden_locations) < document_word_visibility.MAX_LOCATIONS:
                             hidden_locations.append(location)
+                joins_next = joined is not None and element in joined
                 if not path_parts:
                     eligible = paragraph.style.style_id.casefold() in {"normal", "bodytext", "bodytext2", "bodytext3"}
-                    percentage_body_paragraphs.append(index if eligible and ordinary_body_paragraph(paragraph) else None)
+                    percentage_body_paragraphs.append(index if eligible and not (continued or joins_next)
+                                                      and ordinary_body_paragraph(paragraph) else None)
+                continued = joins_next
                 cursor, runs = 0, []
                 for ri, run in enumerate(paragraph.runs):
                     runs.append({"run": ri, "start": cursor, "end": cursor + len(run.text)})
                     cursor += len(run.text)
-                parts.append((paragraph.text, {"kind": "docx", "body_path": path_here,
-                                               "paragraph_index": len(parts), "runs": runs,
-                                               "run_mapping_complete": cursor == len(paragraph.text)}))
+                source = {"kind": "docx", "body_path": path_here, "paragraph_index": len(parts),
+                          "runs": runs, "run_mapping_complete": cursor == len(paragraph.text)}
+                if joins_next:
+                    source["join_following_paragraph"] = True
+                parts.append((paragraph.text, source))
             elif element.tag == qn("w:tbl"):
                 table = Table(element, parent)
                 seen = set()
@@ -648,9 +694,12 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True) -> Document
     if review and review["status"] != "no_match":
         word_warning = " " + INPUT_NOTICES.get(review.get("writing_input"),
             "The file contains Word revision marks. The writing checks may omit text within those marks.")
-    doc.meta = {"method": "python-docx", "paragraph_count": len(parts), "percentage_body_paragraphs": percentage_body_paragraphs,
+    doc.meta = {"method": "python-docx", "paragraph_count": len(parts) - len(joined or ()),
+                "percentage_body_paragraphs": percentage_body_paragraphs,
                 "coverage_warning": ("Body paragraphs and tables were extracted in document order. Headers, footers, text boxes and "
                                      "embedded attachments were not checked; DOCX has no stable page numbers." + word_warning)}
+    if joined:
+        doc.meta[JOINED_PARAGRAPHS] = len(joined)
     if PART_NAME.fullmatch(part):
         doc.meta[document_word_visibility.KEY] = document_word_visibility.build(part, checked_paragraphs, hidden_runs, hidden_locations)
     return doc
@@ -873,12 +922,12 @@ def extract_eml(path: Path) -> Document:
 
 
 def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True,
-            project_word_revisions: bool = True) -> Document:
+            project_word_revisions: bool = True, project_word_breaks: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
     elif ext == ".docx":
-        d = extract_docx(path, project_word_revisions=project_word_revisions)
+        d = extract_docx(path, project_word_revisions=project_word_revisions, project_word_breaks=project_word_breaks)
     elif ext == ".eml":
         d = extract_eml(path)
     else:

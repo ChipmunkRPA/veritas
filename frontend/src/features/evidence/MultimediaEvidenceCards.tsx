@@ -19,7 +19,8 @@ export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: Mul
   const longSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' && set.long_voice_review?.status === 'corroborated'
   const backgroundSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' && set.background_reduced_voice_review?.status === 'flagged'
   const repeatedText = set.schema === 'chipmunk.document-evidence/1' && set.repeated_passages?.status === 'matched'
-  const trackedWordEdits = set.schema === 'chipmunk.document-evidence/1' && (set.coverage?.word_tracked_changes?.rows.length ?? 0) > 0
+  const tracked = set.schema === 'chipmunk.document-evidence/1' ? set.coverage?.word_tracked_changes : undefined
+  const trackedWordEdits = !!(tracked?.rows.length || tracked?.paragraph_marks?.length || tracked?.unsupported_marks)
   const chatMarkers = set.schema === 'chipmunk.document-evidence/1' && (set.coverage?.chat_format_markers?.turns ?? 0) > 0
   return <div data-testid="multimedia-evidence-content" data-evidence-set={set.id ?? ''} data-evidence-hash={set.sha256 ?? ''}>
     {set.status !== 'ready' ? <p role="status" className="mt-3 text-small text-text-muted">

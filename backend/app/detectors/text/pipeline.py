@@ -417,7 +417,7 @@ def _analyze_segmented(doc: Document, sents: list[Sentence], art_dir: Path | Non
 
     if document_tracked_changes.unsupported(doc.word_review):
         return unassessed_language_document(doc, sents, language_scope.UNSUPPORTED_WORD_REVISIONS)
-    if ((doc.word_review or {}).get("writing_input") == document_tracked_changes.INPUT_PROJECTED
+    if (document_tracked_changes.projected(doc.word_review)
             and sum(sentence.n_words for sentence in sents) < MIN_WORDS):
         return unassessed_language_document(doc, sents, language_scope.TOO_LITTLE_AFTER_WORD_REVISIONS)
 

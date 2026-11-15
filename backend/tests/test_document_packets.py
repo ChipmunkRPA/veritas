@@ -47,7 +47,7 @@ def packet_factory(tmp_path):
     store = ObjectStore(tmp_path / "objects")
     with Session(engine) as db:
         def create(ext=".txt", scores=(0.1, 0.9, 0.2), ocr=False, text=None, source_pdf=None,
-                   *, project_word_revisions=True, include_word_review=False):
+                   *, project_word_revisions=True, project_word_breaks=True, include_word_review=False):
             path = source_pdf if source_pdf is not None else tmp_path / ("source" + ext)
             text = text or "First sentence contains enough useful words. Second sentence adds more context to this test. Third sentence completes the source."
             if ext == ".pdf" and source_pdf is None:
@@ -74,7 +74,7 @@ def packet_factory(tmp_path):
             elif ext != ".pdf" and source_pdf is None:
                 path.write_text("😀 " + text)
             source = store.put_bytes(path.read_bytes())
-            doc = extract(path, ext, project_word_revisions=project_word_revisions)
+            doc = extract(path, ext, project_word_revisions=project_word_revisions, project_word_breaks=project_word_breaks)
             for content in doc.source_rasters.values():
                 register_artefact(db, store, base64.b64decode(content), media_type="image/png", role="preview", created_by="document-ocr/1")
             sents = segment(doc)

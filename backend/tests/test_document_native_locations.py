@@ -30,16 +30,20 @@ MIDDLE = "The  middle sentence includes a source position."
 LAST = "The final sentence explains the report's purpose."
 
 
-@pytest.mark.parametrize("project", [False, True])
-def test_signed_word_projection_replays_with_the_recorded_input_policy(packet_factory, tmp_path, project):
+@pytest.mark.parametrize(("project", "breaks", "schema"), [
+    (False, False, tracked.SCHEMA),
+    (True, False, tracked.PROJECTION_SCHEMA),
+    (True, True, tracked.PARAGRAPH_SCHEMA),
+])
+def test_signed_word_projection_replays_with_the_recorded_input_policy(packet_factory, tmp_path, project, breaks, schema):
     source, accepted = tmp_path / "tracked.docx", tmp_path / "accepted.docx"
     sample.create(source, "inline")
     sample.create(accepted, "accepted")
     original = source.read_bytes()
-    result = extract(source, ".docx", project_word_revisions=project)
+    result = extract(source, ".docx", project_word_revisions=project, project_word_breaks=breaks)
     accepted_text = extract(accepted, ".docx")
     review = result.word_review
-    assert review["schema"] == (tracked.PROJECTION_SCHEMA if project else tracked.SCHEMA)
+    assert review["schema"] == schema
     assert (result.text == accepted_text.text) is project
     assert source.read_bytes() == original
     insertion = next(row for row in review["rows"] if row["kind"] == "inserted")
@@ -49,7 +53,7 @@ def test_signed_word_projection_replays_with_the_recorded_input_policy(packet_fa
         assert "writing_input_range" not in insertion
 
     db, store, analysis, report, decoded, _ = packet_factory(
-        ".docx", source_pdf=source, project_word_revisions=project, include_word_review=True,
+        ".docx", source_pdf=source, project_word_revisions=project, project_word_breaks=breaks, include_word_review=True,
     )
     assert decoded["text"] == result.text
     fields = build_packet_set(db, analysis, store, report)
@@ -216,6 +220,68 @@ def test_pdf_positions_do_not_claim_decoded_character_locations(packet_factory):
     assert all(anchor["page"] == 1 for packet in evidence["packets"] for anchor in packet["anchors"])
 
 
+def test_word_paragraph_marks_preserve_accepted_text_and_native_locations(tmp_path):
+    from docx.oxml import OxmlElement
+
+    from app.detectors.text.extract import extract
+
+    submitted = tmp_path / "marked.docx"
+    doc = docx.Document()
+    for text, mark in (("An inter", "del"), ("rupted plan  ", "del"), ("  was reviewed.", "ins"), ("A separate paragraph.", None)):
+        paragraph = doc.add_paragraph(text)
+        if mark:
+            properties = OxmlElement("w:rPr")
+            properties.append(OxmlElement(f"w:{mark}"))
+            paragraph._p.get_or_add_pPr().append(properties)
+    doc.save(submitted)
+    accepted = extract(submitted, ".docx")
+    prior = extract(submitted, ".docx", project_word_breaks=False)
+    expected = "An interrupted plan was reviewed.\n\nA separate paragraph."
+    assert accepted.text == expected
+    assert accepted.paragraphs == [(0, 33), (35, len(expected))]
+    assert accepted.word_review["writing_input"] == tracked.INPUT_PARAGRAPHS
+    assert prior.word_review["schema"] == tracked.PROJECTION_SCHEMA and tracked.unsupported(prior.word_review)
+    assert prior.text == "An inter\n\nrupted plan\n\nwas reviewed.\n\nA separate paragraph."
+    assert [(row["kind"], row["body_index"], row["child_path"]) for row in accepted.word_review["paragraph_marks"]] == [
+        ("deleted", 0, [0, 0, 0]), ("deleted", 1, [0, 0, 0]), ("inserted", 2, [0, 0, 0]),
+    ]
+    first, second, third, fourth = accepted.source_map
+    assert [row["body_path"] for row in (first, second, third, fourth)] == [[0], [1], [2], [3]]
+    assert [expected[row["start"]:row["end"]] for row in accepted.source_map] == [
+        "An inter", "rupted plan ", "was reviewed.", "A separate paragraph.",
+    ]
+    assert second["source_ranges"][-1] == [19, 20, 11, 13]
+    assert third["source_ranges"] == [[20, 33, 2, 15]]
+
+    evidence = {"coverage": {tracked.KEY: accepted.word_review}, "source": {"method": "python-docx"}}
+    assert tracked.verify_source(evidence, accepted.word_review, expected=canonical_hash(accepted.word_review)) == 3
+    forged = deepcopy(evidence)
+    review = forged["coverage"][tracked.KEY]
+    review["paragraph_marks"][0]["child_path"] = [0, 0, 1]
+    with pytest.raises(ValueError, match="original XML positions"):
+        tracked.verify_source(forged, accepted.word_review, expected=canonical_hash(review))
+
+
+def test_word_paragraph_mark_before_table_does_not_join_through_table(tmp_path):
+    from docx.oxml import OxmlElement
+
+    from app.detectors.text.extract import extract
+
+    file = tmp_path / "table.docx"
+    doc = docx.Document()
+    paragraph = doc.add_paragraph("Keep the visible paragraph.")
+    properties = OxmlElement("w:rPr")
+    properties.append(OxmlElement("w:del"))
+    paragraph._p.get_or_add_pPr().append(properties)
+    doc.add_table(1, 1).cell(0, 0).text = "Table content."
+    doc.add_paragraph("Keep the following paragraph.")
+    doc.save(file)
+    measured = extract(file, ".docx")
+    assert tracked.unsupported(measured.word_review)
+    assert measured.word_review["paragraph_marks"] == []
+    assert measured.text == "Keep the visible paragraph.\n\nTable content.\n\nKeep the following paragraph."
+
+
 def test_word_track_changes_match_original_xml_and_stay_out_of_redacted_pdf(packet_factory, tmp_path, monkeypatch):
     from docx.oxml import OxmlElement
     from docx.oxml.ns import qn
@@ -252,7 +318,7 @@ def test_word_track_changes_match_original_xml_and_stay_out_of_redacted_pdf(pack
                 data = data.replace(b"word/document.xml", b"word/main.xml")
             output.writestr(item.replace("word/document.xml", "word/main.xml").replace("word/_rels/document.xml.rels", "word/_rels/main.xml.rels"), data)
     original = moved
-    db, store, analysis, result, decoded, _ = packet_factory(".docx", source_pdf=original)
+    db, store, analysis, result, decoded, _ = packet_factory(".docx", source_pdf=original, project_word_revisions=False)
     source = docx.Document(original)
     review = tracked.inspect(source.element.body, str(source.part.partname).lstrip("/"))
     assert review["part"] == "word/main.xml"

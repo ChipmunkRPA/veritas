@@ -1,0 +1,113 @@
+{
+  "cases": {
+    "joined": {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "input": "no_tracked_text_changes",
+      "mark": null,
+      "original": "6854458e7fcc9cbe001a41fd57165582ce64b094f26f0774cc2778da794decca",
+      "prior_input": "no_tracked_text_changes",
+      "score_digest": "3743f64e9213b08d45922265849bc110326c16686eef12cc6c0d7debe513d8ce",
+      "signed": true,
+      "source_paths": [],
+      "text": "28fe6bbae8c32105fb7fa3b43531a0a72021696350908e08544413f05d57d2d1",
+      "windows": 18
+    },
+    "joined_tracked": {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "input": "accepted_paragraph_changes",
+      "mark": {
+        "body_index": 1,
+        "child_path": [
+          0,
+          0,
+          0
+        ],
+        "kind": "deleted",
+        "paragraph": 2
+      },
+      "original": "f731edec8e1da5eff154603c4b1114c726dff21d2399df233e3cecb5527906b1",
+      "prior_input": "unsupported_tracked_changes",
+      "score_digest": "3743f64e9213b08d45922265849bc110326c16686eef12cc6c0d7debe513d8ce",
+      "signed": true,
+      "source_paths": [
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "text": "28fe6bbae8c32105fb7fa3b43531a0a72021696350908e08544413f05d57d2d1",
+      "windows": 18
+    },
+    "split": {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "input": "no_tracked_text_changes",
+      "mark": null,
+      "original": "0743ff10e3fd8855be59e26af615eef8f52e70c4aaa7f197f226752dafb088bb",
+      "prior_input": "no_tracked_text_changes",
+      "score_digest": "6c4714fa335c2609d9bbecd0910f35d6458b96fac60fd836b30e6134d58cba48",
+      "signed": true,
+      "source_paths": [],
+      "text": "0ce89e4ba7d31ead65775023344a97bc76fc6ab21aed848cbf06c6f318464a13",
+      "windows": 20
+    },
+    "split_tracked": {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "input": "accepted_paragraph_changes",
+      "mark": {
+        "body_index": 1,
+        "child_path": [
+          0,
+          0,
+          0
+        ],
+        "kind": "inserted",
+        "paragraph": 2
+      },
+      "original": "99962bbc50572707b6fafa996587ac124187d16ef40b811f088651cf22b6af09",
+      "prior_input": "unsupported_tracked_changes",
+      "score_digest": "6c4714fa335c2609d9bbecd0910f35d6458b96fac60fd836b30e6134d58cba48",
+      "signed": true,
+      "source_paths": [],
+      "text": "0ce89e4ba7d31ead65775023344a97bc76fc6ab21aed848cbf06c6f318464a13",
+      "windows": 20
+    },
+    "table": {
+      "checks": {
+        "passage_classifier": "not_applicable",
+        "writing_pattern_ratio": "not_applicable"
+      },
+      "decision": "not_assessable",
+      "input": "unsupported_tracked_changes",
+      "mark": null,
+      "original": "8717f429dab478fabed555d4ce455c5984d4d0ef01ef01ef7ed2d5499dcbbef0",
+      "prior_input": "unsupported_tracked_changes",
+      "score_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "signed": true,
+      "source_paths": [],
+      "text": "e05d946dba54035d05eddbeb2d1d54750fc4979bef9b337e9b27bee200e94ad4",
+      "windows": 0
+    }
+  },
+  "device": "mps",
+  "payment_cents": 999,
+  "schema": "chipmunk.document-word-breaks-app/1",
+  "unpaid_jobs": 0
+}

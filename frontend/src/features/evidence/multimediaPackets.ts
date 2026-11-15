@@ -449,10 +449,12 @@ export interface DocumentEvidenceSet extends SetBase {
     balanced_passage_selection?: { schema: 'document-balanced-passage-selection/1'; candidate_blocks: number;
       displayed_blocks: number; displayed_passages: number };
     word_tracked_changes?: { status: 'found' | 'partial' | 'no_match'; scope: string; limitation: string;
-      writing_input?: 'no_tracked_text_changes' | 'accepted_inline_changes' | 'unsupported_tracked_changes';
+      writing_input?: 'no_tracked_text_changes' | 'accepted_inline_changes' | 'accepted_paragraph_changes' | 'unsupported_tracked_changes';
       part: string; paragraphs: number; inserted: number; deleted: number; unsupported_marks: number;
       omitted_excerpts: number; rows: { kind: 'inserted' | 'deleted'; paragraph: number; body_index: number;
         inline_index: number; text: string; characters: number; writing_input_range?: [number, number] }[];
+      paragraph_marks?: { kind: 'inserted' | 'deleted'; paragraph: number; body_index: number; child_path: [number, number, number] }[];
+      omitted_paragraph_marks?: number;
       authorship_confidence_contribution: 0 };
     email_body_alternatives?: EmailBodyAlternatives;
     email_classifier_input_scope?: EmailClassifierInputScope;

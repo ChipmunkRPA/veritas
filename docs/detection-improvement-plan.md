@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Tracked paragraph breaks in Word](document-word-paragraph-breaks-2026-11-15.md)
+  lets supported edits reach the writing checks. The accepted text follows
+  each inserted or deleted break. An excerpt spanning a deleted break maps
+  to both original paragraphs. Complex unhandled revisions remain unassessed.
+
 - [Playback of speech lost in mono](audio-cancelled-speech-transfer-2026-11-15.md)
   adds the exact difference clip and waveform for selected stereo
   cancellation evidence in audio and video. A 392-delivery classifier

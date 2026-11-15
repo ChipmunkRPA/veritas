@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [tracked Word paragraph break replay](document-word-paragraph-breaks-2026-11-15.md#reproduce-locally)
+compares both writing checks on independently authored accepted and tracked
+versions, then verifies the signed evidence against the original Word files.
+Its portable receipt contains no source prose or model weights.
+
 The [cancelled-speech replay](audio-cancelled-speech-transfer-2026-11-15.md#local-app-verification-and-replay)
 recounts separate voice response points and missed, flagged and
 unassessed windows across three held panels. The app evidence separately

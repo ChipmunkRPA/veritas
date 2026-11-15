@@ -1,5 +1,8 @@
 # Use visible Word revision text for writing analysis
 
+The [paragraph-break update](document-word-paragraph-breaks-2026-11-15.md)
+extends the original inline projection described here.
+
 A Word document can contain an insertion that is visible in its final
 text while the underlying paragraph reader skips the inserted run.
 Chipmunk Verify used to show this insertion in the revision evidence

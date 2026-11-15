@@ -78,9 +78,8 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     path = common.media_path(ctx)
     prose_only = settings.environment == "dev" and settings.text_bibliography_scope_review
     doc, sents = decode_document(path, path.suffix, prose_only=prose_only) if prose_only else decode_document(path, path.suffix)
-    word_input = (doc.word_review or {}).get("writing_input")
     if (doc.meta.get(document_pdf_visibility.KEY, {}).get("covered_locations")
-            or word_input in (document_tracked_changes.INPUT_UNSUPPORTED, document_tracked_changes.INPUT_PROJECTED)):
+            or document_tracked_changes.unsupported(doc.word_review) or document_tracked_changes.projected(doc.word_review)):
         # Retain source evidence even when little usable writing remains.
         words = sum(sentence.n_words for sentence in sents)
     else:
@@ -108,7 +107,7 @@ def current_decode_output(output: Any) -> bool:
     if output.get(BIBLIOGRAPHY_POLICY, False) is not (settings.environment == "dev" and settings.text_bibliography_scope_review):
         return False
     if (output["meta"].get("method") == "python-docx" and
-            ((output.get(document_tracked_changes.KEY) or {}).get("schema") != document_tracked_changes.PROJECTION_SCHEMA
+            ((output.get(document_tracked_changes.KEY) or {}).get("schema") != document_tracked_changes.PARAGRAPH_SCHEMA
              or (output["meta"].get(document_word_visibility.KEY) or {}).get("schema") != document_word_visibility.SCHEMA)):
         return False
     if (output["meta"].get("method") == "pymupdf"
@@ -168,7 +167,7 @@ def detect(ctx: StageContext) -> dict[str, Any]:
         word_review = decoded.get(document_tracked_changes.KEY) or {}
         if document_tracked_changes.unsupported(word_review):
             scope = language_scope.UNSUPPORTED_WORD_REVISIONS
-        elif word_review.get("writing_input") == document_tracked_changes.INPUT_PROJECTED and decoded["words"] < MIN_WORDS:
+        elif document_tracked_changes.projected(word_review) and decoded["words"] < MIN_WORDS:
             scope = language_scope.TOO_LITTLE_AFTER_WORD_REVISIONS
         elif covered and decoded["words"] < MIN_WORDS:
             scope = language_scope.TOO_LITTLE_AFTER_COVER

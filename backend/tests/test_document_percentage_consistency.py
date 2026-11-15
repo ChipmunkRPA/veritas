@@ -185,3 +185,33 @@ def test_mapped_percentages_have_native_anchors_in_evidence_and_pdf(packet_facto
         if kind != "pdf":
             assert report_text.count("Original value position") == 2
         assert (first in report_text and second in report_text) is not redacted
+
+
+def test_word_percentages_after_an_accepted_paragraph_join_keep_native_positions(tmp_path):
+    from dataclasses import asdict
+
+    from docx import Document
+    from docx.oxml import OxmlElement
+
+    from app.detectors.text.extract import extract
+    from app.detectors.text.segment import segment
+
+    path = tmp_path / "joined.docx"
+    source = Document()
+    first, second = STATEMENT.format(27).split("27")
+    properties = OxmlElement("w:rPr")
+    properties.append(OxmlElement("w:del"))
+    source.add_paragraph(first)._p.get_or_add_pPr().append(properties)
+    source.add_paragraph("27" + second)
+    source.add_paragraph(STATEMENT.format(47))
+    source.add_paragraph(STATEMENT.format(37))
+    source.save(path)
+
+    doc = extract(path, ".docx")
+    binding = {"method": "python-docx", "extracted_text_sha256": doc.meta["extracted_text_sha256"],
+               "source_map_sha256": canonical_hash(doc.source_map)}
+    result = percentages.build(binding, doc.text, doc.source_map, [asdict(unit) for unit in segment(doc)], meta=doc.meta)
+    assert result["excluded_blocks"] == 2 and result["checked_sentences"] == 2
+    [positions] = result["groups"]
+    assert [row["anchor"]["body_path"] for row in positions] == [[2], [3]]
+    assert [doc.text[row["quantity_start"]:row["quantity_end"]] for row in positions] == ["47", "37"]

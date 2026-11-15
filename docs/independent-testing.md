@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [edited-paragraph replay](document-mixed-format-comparison-2026-11-13.md#a-paragraph-that-moved-and-changed)
+recounts exact passage positions and highlights outside the known edited
+sentence across TXT and Word. It includes two generator families, five
+matched controls per work, and a local PDF and JSON replay against both drafts.
+
 The [feathered PNG crop replay](image-native-cfa-fine-2026-11-15.md#feathered-edit-crops)
 verifies how paired cell readings extend a previously highlighted region.
 It recounts the original and extended crop overlap at two feather widths

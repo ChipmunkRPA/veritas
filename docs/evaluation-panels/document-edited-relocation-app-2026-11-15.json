@@ -1,0 +1,50 @@
+{
+  "cases": {
+    "docx": {
+      "passage_ranges": {
+        "earlier": [
+          77,
+          264
+        ],
+        "later": [
+          235,
+          426
+        ]
+      },
+      "verification": {
+        "body_paragraph_ranges_verified": 2,
+        "changed_token_ranges_verified": 4,
+        "changes_by_role": {},
+        "coordinate_space": "docx_body_unicode_codepoint",
+        "relocated_passages_verified": 1,
+        "source_hashes_verified": 2
+      }
+    },
+    "txt": {
+      "passage_ranges": {
+        "earlier": [
+          77,
+          264
+        ],
+        "later": [
+          235,
+          426
+        ]
+      },
+      "verification": {
+        "changed_token_ranges_verified": 4,
+        "changes_by_role": {},
+        "coordinate_space": "decoded_source_unicode_codepoint",
+        "relocated_passages_verified": 1,
+        "source_hashes_verified": 2
+      }
+    }
+  },
+  "checkout": {
+    "cents": 999,
+    "currency": "USD",
+    "paid_analyses": 2,
+    "unpaid_jobs": 0
+  },
+  "overall_assessments_preserved": true
+}

@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Edited paragraphs that move between drafts](document-mixed-format-comparison-2026-11-13.md#a-paragraph-that-moved-and-changed)
+  links both positions in matching TXT and Word drafts. It confines the
+  changed-word highlights to the known revised sentence in 65/72 staged
+  rewrites per format across two generators. It leaves 360 comparison
+  controls per format as before and assigns zero authorship weight.
+
 - [Larger crops for feathered native PNG edits](image-native-cfa-fine-2026-11-15.md#feathered-edit-crops)
   improves useful localization from 0/20 to 11/20 staged 48-pixel edits
   at each of two blend widths. It extends a previously detected region

@@ -9,6 +9,7 @@ from collections import Counter
 from pathlib import Path
 
 from app.evidence.document_revision import (
+    EDITED_RELOCATION_SCHEMA,
     FORMATS,
     HTML_COORDINATES,
     MAX_BYTES,
@@ -55,7 +56,9 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
     if "paired_check" in received and not isinstance(received["paired_check"], dict):
         raise ValueError("The optional paired writing check has invalid fields")
     paired = received.pop("paired_check", None)
-    anchored = received.get("schema") == ANCHORED_DRAFT_SCHEMA
+    schema = received.get("schema")
+    anchored = schema == ANCHORED_DRAFT_SCHEMA
+    relocated = schema in (RELOCATION_SCHEMA, EDITED_RELOCATION_SCHEMA)
     if (anchored and paired is not None and paired.get("status") != "outside_scope"
             and paired.get("schema") != INDEPENDENT_SCHEMA):
         raise ValueError("Anchored wording changes cannot carry statistical sentence responses")
@@ -65,21 +68,22 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
     expected, old_text, new_text, native_layouts = compare_with_sources(
         _read(earlier, MAX_BYTES), _read(later, MAX_BYTES), extension, earlier_extension=old_extension,
         email_body_only=paired is not None, pdf_paired_text_only=paired is not None, pdf_independent=pdf_independent,
-        include_word_tables=(received.get("schema") in {WORD_TABLES_SCHEMA, ALIGNED_WORD_TABLES_SCHEMA}
-                             or received.get("schema") == RELOCATION_SCHEMA and "word_tables" in received),
-        strict_word_tables=received.get("schema") == WORD_TABLES_SCHEMA,
-        include_relocations=anchored or received.get("schema") == RELOCATION_SCHEMA,
+        include_word_tables=(schema in {WORD_TABLES_SCHEMA, ALIGNED_WORD_TABLES_SCHEMA}
+                             or relocated and "word_tables" in received),
+        strict_word_tables=schema == WORD_TABLES_SCHEMA,
+        include_relocations=anchored or relocated,
+        include_edited_relocations=schema == EDITED_RELOCATION_SCHEMA,
     )
     rebuilt = refine_wording(expected, old_text, new_text) if anchored else expected
     if json.dumps(received, sort_keys=True, allow_nan=False) != json.dumps(rebuilt, sort_keys=True, allow_nan=False):
         raise ValueError("The comparison does not replay from these source bytes and decoded positions")
     roles = Counter(row["role"] for row in rebuilt["changes"])
     excerpts = [row[side] for row in rebuilt["changes"] for side in ("earlier", "later") if row[side] is not None]
-    result = {"source_hashes_verified": 2, "coordinate_space": expected["coordinate_space"], "changes_by_role": dict(roles),
-              "changed_token_ranges_verified": sum(len(excerpt["changed_tokens"]) for excerpt in excerpts)}
+    result = {"source_hashes_verified": 2, "coordinate_space": expected["coordinate_space"], "changes_by_role": dict(roles)}
     if passages := expected.get("relocated_passages"):
         result["relocated_passages_verified"] = len(passages)
         excerpts.extend(passage[side] for passage in passages for side in ("earlier", "later"))
+    result["changed_token_ranges_verified"] = sum(len(excerpt["changed_tokens"]) for excerpt in excerpts)
     if ".docx" in (extension, old_extension):
         result["body_paragraph_ranges_verified"] = sum(len(excerpt.get("paragraphs", ())) for excerpt in excerpts)
     if ".pdf" in (extension, old_extension):

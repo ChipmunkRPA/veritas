@@ -11,6 +11,7 @@ from email import policy
 from email.parser import BytesParser
 from html import unescape
 from io import BytesIO
+from itertools import takewhile
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from zipfile import BadZipFile, ZipFile
@@ -24,6 +25,7 @@ SCHEMA = "chipmunk.document-revision-comparison/1"
 HTML_SCHEMA = "chipmunk.document-revision-comparison/2"
 MIXED_SCHEMA = "chipmunk.document-revision-comparison/3"
 RELOCATION_SCHEMA = "chipmunk.document-revision-comparison/6"
+EDITED_RELOCATION_SCHEMA = "chipmunk.document-revision-comparison/8"
 HTML_COORDINATES = "email_html_extracted_text_unicode_codepoint"
 MIXED_COORDINATES = "per_source_unicode_codepoint"
 TOKENS = re.compile(r"\w+(?:[’'-]\w+)*|[^\w\s]")
@@ -49,6 +51,8 @@ MIXED_MULTIPAGE_PDF_SCOPE = "PDF coverage includes selectable text on all {pages
 DOCX_PART = "word/document.xml"
 INTERPRETATION = "This comparison locates changes between the supplied versions. The revision sequence and authorship require independent evidence."
 RELOCATION_SCOPE = "The reordered passage has the same wording and punctuation in both versions. Its position changed relative to other matching paragraphs."
+EDITED_RELOCATION_SCOPE = ("One body passage changed position relative to other matching paragraphs. Its unchanged opening and "
+                           "closing words link it across versions. Highlights show wording and punctuation changes within that passage.")
 WordParagraphs = list[tuple[int, int, int, int]]
 WordLayouts = tuple[WordParagraphs, WordParagraphs]
 PdfLayouts = tuple[list[dict], list[dict]]
@@ -290,10 +294,18 @@ def _excerpt(text: str, extent: list[int] | None, changed_tokens: list[list[int]
     return result
 
 
+def _ordinary_relocation_indices(text, layout, extension, body):
+    if extension == ".txt":
+        return {index for index, (start, end) in enumerate(layout)
+                if all(not line.lstrip().startswith(">") for line in text[start:end].splitlines())}
+    from app.evidence.document_archive_word import ordinary_body_paragraph
+
+    positions = {index for _, index, paragraph in _word_paragraphs(body) if ordinary_body_paragraph(paragraph)}
+    return {index for index, (_, body_index, _, _) in enumerate(layout) if body_index in positions}
+
+
 def _relocated_paragraph(earlier, later, old_layout, new_layout, extension, word_bodies):
     """Locate one unambiguous paragraph reorder among uniquely matched body paragraphs."""
-    word = extension == ".docx"
-
     def paragraph_index(text, layout):
         rows = [(tuple(text[start:end].split()), [start, end], index)
                 for index, (*_, start, end) in enumerate(layout)]
@@ -306,22 +318,9 @@ def _relocated_paragraph(earlier, later, old_layout, new_layout, extension, word
     if len(common) < 3 or [key for key in old if key in common] == [key for key in new if key in common]:
         return None
 
-    if word:
-        from docx.oxml.ns import qn
-        from docx.text.paragraph import Paragraph
-
-        from app.evidence.document_archive_word import ordinary_body_paragraph
-
-        visibility = [{i for i, paragraph in enumerate(body)
-                       if paragraph.tag == qn("w:p") and ordinary_body_paragraph(Paragraph(paragraph, None))}
-                      for body in word_bodies]
-        common = {key for key in common if old_layout[old[key][1]][1] in visibility[0]
-                  and new_layout[new[key][1]][1] in visibility[1]}
-    else:
-        def unquoted(text, position):
-            return all(not line.lstrip().startswith(">") for line in text[slice(*position)].splitlines())
-
-        common = {key for key in common if unquoted(earlier, old[key][0]) and unquoted(later, new[key][0])}
+    old_visible = _ordinary_relocation_indices(earlier, old_layout, extension, word_bodies[0])
+    new_visible = _ordinary_relocation_indices(later, new_layout, extension, word_bodies[1])
+    common = {key for key in common if old[key][1] in old_visible and new[key][1] in new_visible}
     if len(common) < 3:
         return None
 
@@ -338,6 +337,46 @@ def _relocated_paragraph(earlier, later, old_layout, new_layout, extension, word
     key = candidates[0]
     return {"earlier": _excerpt(earlier, old[key][0], [], old_layout, extension),
             "later": _excerpt(later, new[key][0], [], new_layout, extension)}
+
+
+def _edited_relocation(earlier, later, old_layout, new_layout, extension, word_bodies):
+    """Pair one edited paragraph across an otherwise unchanged, ordered body."""
+    if len(old_layout) != len(new_layout) or len(old_layout) < 4:
+        return None
+    bounds = [[row[-2:] for row in layout] for layout in (old_layout, new_layout)]
+    old, new = [[tokens(text, [span]) for span in positions]
+                for text, positions in zip((earlier, later), bounds, strict=True)]
+    left, right = ([tuple(value for value, _, _ in paragraph) for paragraph in side] for side in (old, new))
+    common = set(left) & set(right)
+    if (len(set(left)) != len(left) or len(set(right)) != len(right) or len(common) != len(left) - 1
+            or [row for row in left if row in common] != [row for row in right if row in common]):
+        return None
+    a, b = (next(index for index, row in enumerate(side) if row not in common) for side in (left, right))
+    if abs(a - b) < 2:
+        return None
+    if (len(_ordinary_relocation_indices(earlier, old_layout, extension, word_bodies[0])) != len(left)
+            or len(_ordinary_relocation_indices(later, new_layout, extension, word_bodies[1])) != len(right)):
+        return None
+
+    before, after = left[a], right[b]
+    opening = tuple(pair[0] for pair in takewhile(lambda pair: pair[0] == pair[1], zip(before, after)))
+    closing = tuple(pair[0] for pair in takewhile(lambda pair: pair[0] == pair[1], zip(reversed(before), reversed(after))))[::-1]
+    shared = len(opening) + len(closing)
+    if shared > min(len(before), len(after)) or 5 * shared < 3 * max(len(before), len(after)):
+        return None
+    for anchor in (opening, closing):
+        if sum(any(character.isalnum() for character in token) for token in anchor) < 5:
+            return None
+        if any(sum(paragraph[index:index + len(anchor)] == anchor for paragraph in side
+                   for index in range(len(paragraph) - len(anchor) + 1)) != 1 for side in (left, right)):
+            return None
+    edits = differences(old[a][len(opening):-len(closing)], new[b][len(opening):-len(closing)])
+    return {
+        "earlier": _excerpt(earlier, list(bounds[0][a]), [span for edit in edits for span in edit["earlier_changed_tokens"]],
+                            old_layout, extension),
+        "later": _excerpt(later, list(bounds[1][b]), [span for edit in edits for span in edit["later_changed_tokens"]],
+                          new_layout, extension),
+    }
 
 
 def compare(earlier: bytes, later: bytes, extension: str) -> dict:
@@ -369,6 +408,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                          include_word_tables: bool = True,
                          strict_word_tables: bool = False,
                          include_relocations: bool = True,
+                         include_edited_relocations: bool = True,
                          ) -> tuple[dict, str, str, WordLayouts | PdfLayouts | None]:
     """Return ephemeral native layouts for the requested paired sentence scope."""
     if extension not in FORMATS:
@@ -381,6 +421,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
         raise ValueError("Each version must be nonempty and at most 1 MiB.")
     changes = []
     relocation = None
+    edited_relocation = False
     schema = SCHEMA
     scope, coordinates = SCOPE, TEXT_COORDINATES
     mixed_pdf_scope = MIXED_PDF_SCOPE
@@ -421,6 +462,9 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                 schema, scope, coordinates = HTML_SCHEMA, HTML_SCOPE, HTML_COORDINATES
         if check_relocation:
             relocation = _relocated_paragraph(old_text, new_text, old_layout, new_layout, extension, word_bodies)
+            if relocation is None and include_edited_relocations:
+                relocation = _edited_relocation(old_text, new_text, old_layout, new_layout, extension, word_bodies)
+                edited_relocation = relocation is not None
             if relocation:
                 for side, by_role in (("earlier", old_tokens), ("later", new_tokens)):
                     excerpt = relocation[side]
@@ -449,7 +493,8 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     if word_tables is not None:
         result.update(schema=word_table_comparator.SCHEMA, scope=word_table_comparator.SCOPE, word_tables=word_tables)
     if relocation:
-        result.update(schema=RELOCATION_SCHEMA, scope=scope + " " + RELOCATION_SCOPE,
+        result.update(schema=EDITED_RELOCATION_SCHEMA if edited_relocation else RELOCATION_SCHEMA,
+                      scope=scope + " " + (EDITED_RELOCATION_SCOPE if edited_relocation else RELOCATION_SCOPE),
                       relocated_passages=[relocation])
     if extension == ".eml" and email_body_only:
         return result, _email_body_prefix(old_text, old_tokens), _email_body_prefix(new_text, new_tokens), None

@@ -233,7 +233,7 @@ class DraftComparison(BaseModel):
     schema_name: Literal["chipmunk.document-revision-comparison/1", "chipmunk.document-revision-comparison/2",
                          "chipmunk.document-revision-comparison/3", "chipmunk.document-revision-comparison/4",
                          "chipmunk.document-revision-comparison/5", "chipmunk.document-revision-comparison/6",
-                         "chipmunk.document-revision-comparison/7"] = Field(alias="schema")
+                         "chipmunk.document-revision-comparison/7", "chipmunk.document-revision-comparison/8"] = Field(alias="schema")
     format: Literal["email", "plain_text", "docx", "pdf", "mixed"]
     coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint",
                               "pdf_native_text_unicode_codepoint", "email_html_extracted_text_unicode_codepoint",

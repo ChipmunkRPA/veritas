@@ -1690,6 +1690,51 @@ def test_distinguishes_reordered_passage_from_wording_change_in_api_pdf_and_repl
 
 
 @pytest.mark.parametrize("extension", [".txt", ".docx"])
+def test_compares_edited_reordered_paragraph_against_both_sources(reference_http, monkeypatch, tmp_path, extension):
+    f = _install(reference_http, monkeypatch)
+    a, opening, b, c = _REORDER_PARAGRAPHS
+    closing = "The records manager filed the appendix alongside the signed review minutes."
+    old = f"{opening} Several agencies logged six exceptions. {closing}"
+    new = old.replace("logged six", "recorded eight")
+    versions = ([a, old, b, c], [a, b, c, new])
+    earlier, later = (_reorder_document(body, extension) for body in versions)
+    _saved(f, "moved-edited", extension, later)
+    response = f.client.post(_url("moved-edited"), headers=f.viewer, files=_upload(earlier, extension), data={"include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    comparison = response.json()["comparison"]
+    assert comparison["schema"] == document_revision.EDITED_RELOCATION_SCHEMA
+    assert comparison["changes"] == []
+    passage, = comparison["relocated_passages"]
+    for side, body, paragraph, expected in zip(("earlier", "later"), versions, (old, new),
+                                               (["logged", "six"], ["recorded", "eight"]), strict=True):
+        text = "\n\n".join(body)
+        excerpt = passage[side]
+        assert text[excerpt["start"]:excerpt["end"]] == excerpt["text"] == paragraph
+        assert [text[start:end] for start, end in excerpt["changed_tokens"]] == expected
+        if extension == ".docx":
+            index = body.index(paragraph)
+            assert excerpt["paragraphs"] == [{"paragraph": index + 1, "body_index": index, "start": 0, "end": len(paragraph)}]
+    with pymupdf.open(stream=base64.b64decode(response.json()["pdf"]), filetype="pdf") as report:
+        pages = " ".join(" ".join(page.get_text().split()) for page in report)
+        assert "Reordered and edited body passage" in pages and "No other word or punctuation changes found" in pages
+        assert "logged six exceptions" in pages and "recorded eight exceptions" in pages
+
+    earlier_path, later_path = (tmp_path / (name + extension) for name in ("old", "new"))
+    earlier_path.write_bytes(earlier)
+    later_path.write_bytes(later)
+    export = tmp_path / "comparison.json"
+    export.write_text(json.dumps(comparison))
+    assert review(export, earlier_path, later_path)["changed_token_ranges_verified"] == 4
+    passage["later"]["changed_tokens"][0][0] += 1
+    export.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(export, earlier_path, later_path)
+    old_comparison, *_ = document_revision.compare_with_sources(earlier, later, extension, include_edited_relocations=False)
+    export.write_text(json.dumps(old_comparison))
+    assert "relocated_passages_verified" not in review(export, earlier_path, later_path)
+
+
+@pytest.mark.parametrize("extension", [".txt", ".docx"])
 def test_reordered_passage_abstains_on_offset_only_duplicates_ambiguous_swaps_and_quotes(extension):
     a, moved, b, c = _REORDER_PARAGRAPHS
     controls = [

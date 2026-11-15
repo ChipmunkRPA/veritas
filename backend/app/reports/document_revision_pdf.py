@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from html import escape
 
-from app.evidence.document_revision import HTML_COORDINATES
+from app.evidence.document_revision import EDITED_RELOCATION_SCHEMA, HTML_COORDINATES
 from app.evidence.document_revision_writing import PDF_CONTINUATION_SCHEMA, STATUS_TEXT
 from app.reports.engine import _restricted_fetcher, load_weasyprint
 
@@ -182,7 +182,9 @@ def render(comparison: dict) -> bytes:
         anchor = escape(change["id"])
         changes.append(f'<section{change_class}><h2 id="draft-change-{anchor}">{anchor} · {label}</h2>'
                        f'{_side("Earlier draft", change["earlier"])}{_side("Analyzed version", change["later"])}</section>')
-    relocations = [f'<section><h2>Reordered body passage</h2>{_side("Earlier draft", passage["earlier"])}'
+    edited_relocation = comparison["schema"] == EDITED_RELOCATION_SCHEMA
+    relocation_title = "Reordered and edited body passage" if edited_relocation else "Reordered body passage"
+    relocations = [f'<section><h2>{relocation_title}</h2>{_side("Earlier draft", passage["earlier"])}'
                    f'{_side("Analyzed version", passage["later"])}</section>'
                    for passage in comparison.get("relocated_passages", ())]
     sources = []
@@ -204,7 +206,8 @@ def render(comparison: dict) -> bytes:
         positions = ("Each side uses its own Unicode character offsets. Word paragraph offsets start within the paragraph. "
                      "PDF source boxes use unrotated page coordinates.")
     word_tables = comparison.get("word_tables")
-    no_changes = ("No word or punctuation changes found in the top-level body paragraphs." if word_tables else
+    no_changes = ("No other word or punctuation changes found." if edited_relocation else
+                  "No word or punctuation changes found in the top-level body paragraphs." if word_tables else
                   "No word or punctuation changes found in the reply body." if html_reply else "No word or punctuation changes found.")
     content = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Earlier-draft comparison</title>
 <meta name="author" content="Chipmunk Verify"><style>{STYLE}</style></head><body>

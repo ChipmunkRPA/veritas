@@ -126,6 +126,28 @@ it('shows both locations of a reordered body passage and exports the exact compa
   expect(JSON.parse(exported)).toEqual(comparison)
 })
 
+it('highlights wording changes within a reordered body passage', async () => {
+  const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64), decoded_characters: 100, mime_part: null }
+  const comparison: DraftComparison = {
+    schema: 'chipmunk.document-revision-comparison/8', format: 'plain_text', coordinate_space: 'decoded_source_unicode_codepoint',
+    earlier: source, later: source, scope: 'Compare wording within the reordered passage.', interpretation: 'Source comparison only.',
+    changes: [], relocated_passages: [{
+      earlier: { start: 24, end: 41, text: 'Notes recorded 6.', changed_tokens: [[39, 40]] },
+      later: { start: 64, end: 81, text: 'Notes recorded 8.', changed_tokens: [[79, 80]] },
+    }],
+  }
+  vi.mocked(draftAvailability).mockResolvedValue({ extension: '.txt', pairedCheckAvailable: false })
+  vi.mocked(compareDraft).mockResolvedValue({ comparison, pdf: 'JVBERi0xLjQK' })
+  show()
+  const input = await screen.findByLabelText('Earlier draft')
+  fireEvent.change(input, { target: { files: [new File(['earlier'], 'earlier.txt')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
+  await screen.findByRole('heading', { name: 'Reordered and edited body passage' })
+  expect(screen.getByRole('status').textContent).toContain('One body passage was reordered and edited.')
+  expect(screen.getByText('6').tagName).toBe('MARK')
+  expect(screen.getByText('8').tagName).toBe('MARK')
+})
+
 it('displays the exact server excerpts and Unicode ranges and downloads both reports', async () => {
   const source = { sha256: '0'.repeat(64), bytes: 20, decoded_text_sha256: '1'.repeat(64), decoded_characters: 40, mime_part: '1.1' }
   const comparison: DraftComparison = {

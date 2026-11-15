@@ -103,6 +103,11 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                         and (extended_pair is None or extended_pair["second"]["end_frame_index"] >= opening_limit)):
                     motion = extended_motion
             cover["motion_sequence_review"] = motion
+            if remaining_s is None or remaining_s - (time.monotonic() - started) > 1.0:
+                cover[picture_sequence.MOTION_REVERSE_KEY] = picture_motion.scan(
+                    observed[:opening_limit], descriptors[:opening_limit], tb, motion_encoding,
+                    cover[picture_sequence.REVERSE_KEY]["pair"], source_profile=motion_profile,
+                    schema=picture_sequence.MOTION_REVERSE_SCHEMA)
         mouth_prefix = observed[:mouth_count]
         if (mouth_profile and cover["frames_scanned"] >= mouth_count and len(mouth_frames) == mouth_count
                 and all(point is not None for point, _ in mouth_prefix)):

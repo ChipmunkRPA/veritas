@@ -78,6 +78,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
   const sceneReview = set.coverage?.scene_return_review
   const mouthHold = hold?.mouth_local_hold
   const motion = hold?.motion_sequence_review
+  const reverseMotion = hold?.reverse_motion_sequence_review
   const motionRate = motion?.parameters.frame_rate ?? 20
   const motionLimit = motion?.frames_scanned || motionRate * 9
   const laterFrames = hold && set.coverage ? set.coverage.frame_count - hold.frames_scanned : 0
@@ -157,6 +158,14 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         : hold.reverse_sequence_review.status === 'no_match' ? 'No exact reversed sequence was found in the checked frames.'
         : 'The checked footage did not contain two usable ranges of at least half a second.'}</p>
       <p className="mt-2 mb-0 text-caption text-text-muted">Checked the first {hold.frames_scanned} source frames for exact decoded matches. Reverse playback can be part of ordinary editing.</p>
+    </section>}
+    {reverseMotion && reverseMotion.reason !== 'exact_sequence' && <section aria-labelledby="video-reverse-motion-heading" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="video-reverse-motion-heading" className="m-0 text-body font-medium">Similar moving pictures in reverse order</h3>
+      <p className="mt-2 mb-0 text-small">{reverseMotion.status === 'matched'
+        ? <a className="underline" href="#media-evidence-VPR04">Inspect both source ranges and their endpoint frames</a>
+        : reverseMotion.status === 'no_match' ? `No qualifying reverse match was found in the first ${reverseMotion.frames_scanned} frames.`
+        : 'This check needs regular, verified source timestamps throughout the first nine seconds.'}</p>
+      <p className="mt-2 mb-0 text-caption text-text-muted">The check compares whole-picture appearance and reversed motion. Reverse playback can be ordinary editing and carries no AI confidence weight.</p>
     </section>}
     {motion && <section aria-labelledby="video-motion-sequence-heading" className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-motion-sequence-heading" className="m-0 text-body font-medium">Similar repeated moving sequences</h3>

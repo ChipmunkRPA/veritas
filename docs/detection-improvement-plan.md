@@ -60,6 +60,17 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Reversed moving pictures after lossy compression](video-reverse-motion-2026-11-15.md)
+  found useful ranges in 15/16 H.264 and VP9 deliveries versus 0/16 for the
+  exact check, with zero matches on 64 controls and 16 variable-clock
+  cases unassessed. Both source ranges and original endpoint frames are
+  shown in the browser, PDF and JSON. Signed source replay verified both codecs.
+
+- [Ordered lip and speech events](video-lip-event-alignment-2026-11-15.md)
+  increased the combined experimental timings from 5/128 to 6/128 with
+  zero control flags. The fixed AAC subset found no useful ranges before
+  or after compression. Sparse timing support keeps the cue in evaluation.
+
 - [Word-level localization in writing](writing-word-localization-2026-11-14.md)
   added four exact changed-word locations to 93 staged report rewrites
   without new ordinary report highlights. Separate genre cutoffs kept two

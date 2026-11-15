@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [lossy reversed-motion replay](video-reverse-motion-2026-11-15.md#replay)
+recounts both source ranges and reproduces the endpoint images from encoded
+video. The [ordered lip and speech replay](video-lip-event-alignment-2026-11-15.md#replay)
+keeps constant-delay controls separate from local edits and can replay the
+additional AAC soundtrack comparison without loading a model.
+
 The [word-level writing replay](writing-word-localization-2026-11-14.md#independent-replay)
 recounts useful word locations and ordinary alerts on reports, dated journal
 revisions, news and abstracts. The native audit rederives all changed-word

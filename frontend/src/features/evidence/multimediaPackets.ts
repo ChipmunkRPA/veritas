@@ -67,6 +67,8 @@ export interface VideoEvidenceSet extends SetBase {
     reason: string | null; packet_id: string | null; scan_scope?: 'extended-native-prefix/1' | 'native-sequence-prefix/1'; continuity_breaks?: number;
     sequence_review?: { status: 'matched' | 'no_match' | 'unavailable' }
     reverse_sequence_review?: { status: 'matched' | 'no_match' | 'unavailable' }
+    reverse_motion_sequence_review?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number
+      reason: 'exact_sequence' | 'source_clock' | null }
     mouth_local_hold?: { status: 'matched' | 'no_match' | 'no_stable_face' | 'unavailable'; frames_scanned: number;
       packet_id: 'VPH02' | null; affects_overall_confidence: false; assessed_window_starts?: number[] }
     motion_sequence_review?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number; parameters: { frame_rate: 20 | 25 }

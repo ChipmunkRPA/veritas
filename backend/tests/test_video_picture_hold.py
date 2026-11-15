@@ -89,14 +89,15 @@ def _mouth_source(path, monkeypatch, *, hd):
     monkeypatch.setattr(mouth_local_hold, "source_geometry", lambda *_: (mouth_local_hold.Geometry(cx, cy, span), 1))
 
 
-@pytest.mark.parametrize("case", ["opening_hold", "later_hold", "moving_sequence", "reverse_sequence", "lossy_sequence", "lossy_sequence_360p",
+@pytest.mark.parametrize("case", ["opening_hold", "later_hold", "moving_sequence", "reverse_sequence", "lossy_reverse", "lossy_sequence", "lossy_sequence_360p",
                                    "lossy_sequence_360p_late", "mouth_hold", "mouth_hold_hd"])
 def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monkeypatch, case, request):
     mouth = case in {"mouth_hold", "mouth_hold_hd"}
     hd = case == "mouth_hold_hd"
     high_res = case.startswith("lossy_sequence_360p")
     extension = case == "lossy_sequence_360p_late"
-    lossy = case.startswith("lossy_sequence")
+    lossy_reverse = case == "lossy_reverse"
+    lossy = case.startswith("lossy_sequence") or lossy_reverse
     reverse = case == "reverse_sequence"
     repeated, late = mouth or lossy or reverse or case == "moving_sequence", case != "opening_hold"
     path = tmp_path / ("mouth-hold.mp4" if mouth else "exact-hold.mkv")
@@ -110,7 +111,7 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
             authored(request.getfixturevalue("motion_raster_360p"), path, 21, 147, 23, "copy", "h264")
         else:
             indices = [20, 41, 130, 151]
-            deliver(read_source(None), path, 20, 130, 22, "copy", "h264")
+            deliver(read_source(None), path, 20, 130, 22, "reverse" if lossy_reverse else "copy", "h264")
     else:
         frames = _source(path, held=not repeated, late=late, repeated=repeated, reverse=reverse)
     table = probe_frames(path)
@@ -143,13 +144,15 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
     elif lossy:
         coverage = scan["coverage"]
         assert coverage["sequence_review"]["status"] == "no_match"
-        motion = coverage["motion_sequence_review"]
+        motion = coverage[picture_sequence.MOTION_REVERSE_KEY if lossy_reverse else "motion_sequence_review"]
         assert motion["status"] == "matched" and motion["frames_scanned"] == (450 if extension else 225 if high_res else 180)
         assert motion["parameters"]["frame_rate"] == (25 if high_res else 20)
-        assert motion["schema"] == (picture_sequence.MOTION_EXTENDED_SCHEMA if extension else picture_sequence.MOTION_SCHEMA)
+        expected_schema = (picture_sequence.MOTION_REVERSE_SCHEMA if lossy_reverse else
+                           picture_sequence.MOTION_EXTENDED_SCHEMA if extension else picture_sequence.MOTION_SCHEMA)
+        assert motion["schema"] == expected_schema
         match = motion["pair"]
         assert [row[2] for row in picture_sequence.endpoints(match)] == indices
-        assert not np.array_equal(frames[indices[0]], frames[indices[2]])
+        assert not np.array_equal(frames[indices[0]], frames[indices[-1] if lossy_reverse else indices[2]])
     elif repeated:
         assert scan["match"] is None and scan["coverage"]["scan_scope"] == picture_sequence.SCAN_SCOPE
         key = picture_sequence.REVERSE_KEY if reverse else "sequence_review"
@@ -197,7 +200,8 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
         document = service.persist_packet_set(db, analysis, store, result=result)
         assert service.load_packet_set(db, analysis, store) == document
         assert document["coverage"]["scored_frame_indices"] == []
-        expected_packet = (mouth_local_hold_binding.PACKET_ID if mouth else picture_sequence.MOTION_PACKET_ID if lossy
+        expected_packet = (mouth_local_hold_binding.PACKET_ID if mouth else picture_sequence.MOTION_REVERSE_PACKET_ID if lossy_reverse
+                           else picture_sequence.MOTION_PACKET_ID if lossy
                            else picture_sequence.REVERSE_PACKET_ID if reverse
                            else picture_sequence.PACKET_ID if repeated else binding.PACKET_ID)
         [packet] = [candidate for candidate in document["packets"] if candidate["id"] == expected_packet] if mouth else document["packets"]
@@ -228,6 +232,10 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
         if lossy:
             assert packet["affects_overall_confidence"] is False
             assert len({f["artifact_refs"]["original"] for f in packet["frames"]}) == 4
+            if lossy_reverse:
+                assert match["order"] == "reverse"
+                assert [f["artifact_refs"]["original"] for f in packet["frames"]] == [
+                    "first_start_picture", "first_end_picture", "second_start_picture", "second_end_picture"]
             if extension:
                 interrupted = list(table.pts)
                 interrupted[400] += 1
@@ -265,6 +273,10 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
                 assert ("3.300 to 3.700 s" if hd else "0.640 to 1.040 s") in text and "Exact measured mouth-region crop" in text
                 if hd:
                     assert "Mouth geometry was measured in 3 of 3 overlapping windows" in text
+            elif lossy_reverse:
+                assert "Similar moving pictures in reverse order" in text and "VPR04" in text
+                assert "Reversed ranges 1.000-2.050 s and 6.500-7.550 s" in text
+                assert "transitions support the reversed motion" in text
             elif lossy:
                 assert "Similar repeated moving sequences" in text and "VPR02" in text
                 if extension:

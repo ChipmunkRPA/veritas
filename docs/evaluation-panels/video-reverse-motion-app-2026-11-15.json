@@ -1,0 +1,54 @@
+{
+  "outcomes": [
+    {
+      "codec": "vp9",
+      "frames": [
+        18,
+        39,
+        117,
+        138
+      ],
+      "pdf_sha256": "1b87bd067a5ea1a3efc0fd554d03361d8b94de837fb3bb73a67d6b5a903f1342",
+      "profile": "sd",
+      "role": "reverse",
+      "source_replay": true,
+      "source_sha256": "0eb481816e617841b251205074cd4f96867b343a1710003faaba0086953c7a00",
+      "status": "matched",
+      "verified_images": 5
+    },
+    {
+      "codec": "h264",
+      "frames": [
+        22,
+        50,
+        145,
+        173
+      ],
+      "pdf_sha256": "dbd55e023277f68f4eaf20380465d3939cb46b4b047089c6ed9870e25e9af20b",
+      "profile": "larger",
+      "role": "reverse",
+      "source_replay": true,
+      "source_sha256": "79bed749ac168436fde69b30c8b9d57bb4ee7e22d1aacb448395da01657721cd",
+      "status": "matched",
+      "verified_images": 5
+    },
+    {
+      "codec": "vp9",
+      "frames": null,
+      "profile": "sd",
+      "role": "original",
+      "source_sha256": "116eb9e661a63814c469d8b03e4397750b73440884373a086b430390f8bf8f86",
+      "status": "no_match"
+    },
+    {
+      "codec": "h264",
+      "frames": null,
+      "profile": "larger",
+      "role": "changing_spacing",
+      "source_sha256": "16fab6e2ea4cdc33fa05fba7475a97c0b8dc273bc234b27d4afc53d918acb606",
+      "status": "unavailable"
+    }
+  ],
+  "paid_analyses": 4,
+  "unpaid_jobs": 0
+}

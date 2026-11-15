@@ -553,14 +553,14 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
                              source: dict, review: dict, decoded: dict) -> dict:
     pair = review["pair"]
     motion = "supporting_edge_offsets" in pair
-    reverse = review["schema"] == picture_sequence.REVERSE_SCHEMA
+    reverse = pair.get("order") == "reverse"
     packet_id = picture_sequence.MOTION_PACKET_ID if motion else picture_sequence.PACKET_ID
     title = "Similar moving pictures at two source ranges" if motion else "Same moving pictures at two source ranges"
     selection = "longest_pair_of_similar_moving_sequences" if motion else "longest_pair_of_exact_moving_sequences"
     if reverse:
-        packet_id = picture_sequence.REVERSE_PACKET_ID
-        title = "Moving pictures repeated in reverse"
-        selection = "longest_pair_of_reversed_moving_sequences"
+        packet_id = picture_sequence.MOTION_REVERSE_PACKET_ID if motion else picture_sequence.REVERSE_PACKET_ID
+        title = "Similar moving pictures in reverse order" if motion else "Moving pictures repeated in reverse"
+        selection = "longest_pair_of_similar_reversed_moving_sequences" if motion else "longest_pair_of_reversed_moving_sequences"
     motion_limit = review["frames_scanned"] if motion else None
     frames, images, labels, assets = [], [], [], {}
     for number, (occurrence, role, index, pts, digest) in enumerate(picture_sequence.endpoints(pair), 1):
@@ -757,7 +757,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             "unavailable", picture_hold_binding.HISTORICAL, source["time_base"]))
     match = hold["match"] if hold is not None else None
     picture_reviews = document.get("picture_hold", {})
-    sequence_matches = [picture_reviews[key] for key in ("sequence_review", "motion_sequence_review", picture_sequence.REVERSE_KEY)
+    sequence_matches = [picture_reviews[key] for key in ("sequence_review", "motion_sequence_review", picture_sequence.REVERSE_KEY,
+                                                         picture_sequence.MOTION_REVERSE_KEY)
                         if picture_reviews.get(key, {}).get("pair") is not None]
     mouth_review = picture_reviews.get("mouth_local_hold", {})
     mouth_match = mouth_review.get("match")

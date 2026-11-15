@@ -21,6 +21,14 @@
 {% else %}<p>The checked footage did not contain two usable ranges of at least half a second.</p>{% endif %}
 <p class="caption">Checked the first {{ hold.frames_scanned }} source frames for exact decoded matches. Reverse playback can be part of ordinary editing. JSON pointer <span class="mono">/picture_hold/reverse_sequence_review</span>.</p>
 {% endif %}
+{% if hold.get('reverse_motion_sequence_review') and hold.reverse_motion_sequence_review.reason != 'exact_sequence' %}
+{% set reverse_motion = hold.reverse_motion_sequence_review %}
+<h3>Similar moving pictures in reverse order</h3>
+{% if reverse_motion.status == 'matched' %}<p><a href="#multimedia-evidence-VPR04">Inspect both source ranges and their endpoint frames</a>.</p>
+{% elif reverse_motion.status == 'no_match' %}<p>No qualifying reverse match was found in the first {{ reverse_motion.frames_scanned }} frames.</p>
+{% else %}<p>The check needs regular, verified source timestamps throughout the first nine seconds.</p>{% endif %}
+<p class="caption">The check compares whole-picture appearance and reversed motion at matching frame intervals. Reverse playback can be ordinary editing and carries no AI confidence weight. JSON pointer <span class="mono">/picture_hold/reverse_motion_sequence_review</span>.</p>
+{% endif %}
 {% if hold.get('motion_sequence_review') %}
 {% set motion = hold.motion_sequence_review %}
 {% set motion_rate = motion.parameters.frame_rate %}

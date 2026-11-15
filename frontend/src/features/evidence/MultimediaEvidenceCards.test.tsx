@@ -639,25 +639,28 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText(/PTS 12520 at 1\/1000/)).toBeTruthy()
   })
 
-  it('links a reversed sequence to its source ranges and four endpoint frames', () => {
+  it.each(['VPR03', 'VPR04'])('links %s reversed sequence to its source ranges and four endpoint frames', packetId => {
     const set = structuredClone(video)
     set.picture_hold = { status: 'no_match', frames_scanned: 180, frame_limit: 180, last_frame_index: 179,
       last_stream_time_s: 18.95, last_pts: 18950, time_base: '1/1000', reason: null, packet_id: null,
-      sequence_review: { status: 'no_match' }, reverse_sequence_review: { status: 'matched' } }
+      sequence_review: { status: 'no_match' }, reverse_sequence_review: { status: packetId === 'VPR03' ? 'matched' : 'no_match' } }
+    if (packetId === 'VPR04') {
+      set.picture_hold.reverse_motion_sequence_review = { status: 'matched', frames_scanned: 180, reason: null }
+    }
     const item = set.packets[0]
-    item.id = 'VPR03'
+    item.id = packetId
     item.claim_scope = 'paired_frame_sequences'
     item.picture_sequence = { order: 'reverse', frame_count: 22, span_s: 1.05,
       first: { start_frame_index: 20, end_frame_index: 41, start_stream_s: 11, end_stream_s: 12.05 },
       second: { start_frame_index: 130, end_frame_index: 151, start_stream_s: 16.5, end_stream_s: 17.55 } }
-    item.frames = [20, 41, 130, 151].map((frameIndex, index) => ({ ...item.frames[0], id: `VPR03.${index + 1}`,
+    item.frames = [20, 41, 130, 151].map((frameIndex, index) => ({ ...item.frames[0], id: `${packetId}.${index + 1}`,
       score: null, is_peak: false, context_region: null, artifact_refs: { original: 'original', context: 'original' },
       anchor: { frame_index: frameIndex, pts: 10000 + frameIndex * 50, time_base: '1/1000',
         stream_time_s: 10 + frameIndex / 20, playback_time_s: frameIndex / 20 } }))
     const { container } = show(set)
     const link = screen.getByRole('link', { name: 'Inspect both source ranges and their endpoint frames' })
-    expect(link.getAttribute('href')).toBe('#media-evidence-VPR03')
-    const packet = within(container.querySelector<HTMLElement>('#media-evidence-VPR03')!)
+    expect(link.getAttribute('href')).toBe(`#media-evidence-${packetId}`)
+    const packet = within(container.querySelector<HTMLElement>(`#media-evidence-${packetId}`)!)
     expect(packet.getByText('11.000 s–12.050 s')).toBeTruthy()
     expect(packet.getByText('16.500 s–17.550 s')).toBeTruthy()
     expect(packet.getAllByAltText(/exact original video frame/)).toHaveLength(4)

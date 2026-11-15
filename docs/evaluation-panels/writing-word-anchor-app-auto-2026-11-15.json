@@ -1,0 +1,789 @@
+{
+  "billing": {
+    "jobs_started_before_payment": 0,
+    "price_usd_cents": 999,
+    "simulated": true
+  },
+  "device": "mps",
+  "ledger_sha256": "0a431868518879050ec578ad7d2d0f0256c5c62f1958d77926a94743d81030cc",
+  "requested_device": "auto",
+  "results": {
+    "news/1/edited": {
+      "classifier_completed": 2,
+      "displayed_review": 2,
+      "exact": 1,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 0
+    },
+    "news/1/original": {
+      "classifier_completed": 2,
+      "displayed_review": 2,
+      "exact": 0,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 0
+    },
+    "news/2/edited": {
+      "classifier_completed": 2,
+      "displayed_review": 2,
+      "exact": 0,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 0
+    },
+    "news/2/original": {
+      "classifier_completed": 2,
+      "displayed_review": 2,
+      "exact": 0,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 0
+    },
+    "reports/1/edited": {
+      "classifier_completed": 2,
+      "displayed_review": 2,
+      "exact": 2,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 1
+    },
+    "reports/1/original": {
+      "classifier_completed": 2,
+      "displayed_review": 2,
+      "exact": 0,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 0
+    },
+    "reports/2/edited": {
+      "classifier_completed": 2,
+      "displayed_review": 2,
+      "exact": 0,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 0
+    },
+    "reports/2/original": {
+      "classifier_completed": 2,
+      "displayed_review": 2,
+      "exact": 0,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 0
+    }
+  },
+  "rows": [
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "1f0d5286880745fca2e2838705cb5cadc741280dcadee3c9be547797d87e7dc3",
+      "sha256": "5483d90c1e36eb37d4d6c8f378234b6eeaef4e3057ba6112f2f2c0761a993737",
+      "spans": [
+        [
+          [
+            0,
+            95
+          ],
+          [
+            96,
+            179
+          ]
+        ],
+        [
+          [
+            96,
+            179
+          ]
+        ],
+        [
+          [
+            96,
+            179
+          ],
+          [
+            180,
+            320
+          ],
+          [
+            321,
+            500
+          ]
+        ],
+        [
+          [
+            321,
+            500
+          ]
+        ],
+        [
+          [
+            321,
+            664
+          ]
+        ],
+        [
+          [
+            559,
+            664
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "1f0d5286880745fca2e2838705cb5cadc741280dcadee3c9be547797d87e7dc3",
+      "sha256": "e0fc4ca4f2a74bd80ea744f0b55fee2958627005baa1835edf6d96fcd3a23ce6",
+      "spans": [
+        [
+          [
+            0,
+            95
+          ],
+          [
+            96,
+            179
+          ]
+        ],
+        [
+          [
+            96,
+            179
+          ]
+        ],
+        [
+          [
+            96,
+            179
+          ],
+          [
+            180,
+            320
+          ],
+          [
+            321,
+            501
+          ]
+        ],
+        [
+          [
+            180,
+            320
+          ],
+          [
+            321,
+            501
+          ],
+          [
+            502,
+            559
+          ]
+        ],
+        [
+          [
+            321,
+            665
+          ]
+        ],
+        [
+          [
+            560,
+            665
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "0c505ae9eda6ee1f543991317b5b68347f38541a84d6cb27bea9ac628d18b070",
+      "sha256": "e9a34272e45b4be60daec6d98f783fe17942a25221e95f0bc72cdf624fe06188",
+      "spans": [
+        [
+          [
+            199,
+            438
+          ]
+        ],
+        [
+          [
+            439,
+            779
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "0c505ae9eda6ee1f543991317b5b68347f38541a84d6cb27bea9ac628d18b070",
+      "sha256": "6b87982400905bdad1183fb2e985cbda56b288dbd55d33c8e69ef465b60c9222",
+      "spans": [
+        [
+          [
+            199,
+            438
+          ]
+        ],
+        [
+          [
+            746,
+            851
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "02c307241dffba50bfdc12d54076f23ba1f47ce958e80c75b473805287de0938",
+      "sha256": "4ba5ac79686976b907d8c67682c94dc28cc1d587fc94f4c059203a9fa0605b9d",
+      "spans": [
+        [
+          [
+            0,
+            142
+          ],
+          [
+            143,
+            218
+          ]
+        ],
+        [
+          [
+            143,
+            218
+          ]
+        ],
+        [
+          [
+            219,
+            317
+          ],
+          [
+            318,
+            440
+          ],
+          [
+            441,
+            565
+          ]
+        ],
+        [
+          [
+            441,
+            565
+          ]
+        ],
+        [
+          [
+            441,
+            620
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "02c307241dffba50bfdc12d54076f23ba1f47ce958e80c75b473805287de0938",
+      "sha256": "f63a52c263becd08787ff0018ead0ce8bf1f33dcfe5bb6df93cbd290ac067be4",
+      "spans": [
+        [
+          [
+            0,
+            142
+          ],
+          [
+            143,
+            218
+          ]
+        ],
+        [
+          [
+            143,
+            218
+          ]
+        ],
+        [
+          [
+            318,
+            453
+          ]
+        ],
+        [
+          [
+            454,
+            578
+          ]
+        ],
+        [
+          [
+            454,
+            633
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "33b26345b5bae12c413d71d66dfcd050cc15b3914431c0067b52f7e8141e35b9",
+      "sha256": "f8d97411368213834d9369ac28e86daabef336ee14a15e8da6c9960db8421ceb",
+      "spans": [
+        [
+          [
+            0,
+            59
+          ],
+          [
+            60,
+            133
+          ]
+        ],
+        [
+          [
+            0,
+            59
+          ],
+          [
+            60,
+            133
+          ],
+          [
+            134,
+            266
+          ]
+        ],
+        [
+          [
+            60,
+            133
+          ],
+          [
+            134,
+            266
+          ],
+          [
+            267,
+            427
+          ]
+        ],
+        [
+          [
+            267,
+            427
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "33b26345b5bae12c413d71d66dfcd050cc15b3914431c0067b52f7e8141e35b9",
+      "sha256": "b38670f5b1a699a5e26c3ae4b41d42f050cf5c7b3cb0651ea5fe0e5a96d35523",
+      "spans": [
+        [
+          [
+            0,
+            59
+          ],
+          [
+            60,
+            133
+          ]
+        ],
+        [
+          [
+            0,
+            59
+          ],
+          [
+            60,
+            133
+          ],
+          [
+            134,
+            266
+          ]
+        ],
+        [
+          [
+            60,
+            133
+          ],
+          [
+            134,
+            266
+          ],
+          [
+            267,
+            434
+          ]
+        ],
+        [
+          [
+            267,
+            434
+          ]
+        ],
+        [
+          [
+            435,
+            729
+          ]
+        ],
+        [
+          [
+            435,
+            729
+          ],
+          [
+            730,
+            794
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "0c8093034fa4298fed60d264171f3acf913a0d7c000c681a1148098af191f76e",
+      "sha256": "999ae9cd7fb714d24053f4991c6e3899cc8b59752b23521deb40170332c514fb",
+      "spans": [
+        [
+          [
+            0,
+            84
+          ]
+        ],
+        [
+          [
+            0,
+            84
+          ],
+          [
+            85,
+            385
+          ],
+          [
+            386,
+            474
+          ]
+        ],
+        [
+          [
+            386,
+            474
+          ]
+        ],
+        [
+          [
+            386,
+            474
+          ],
+          [
+            475,
+            645
+          ],
+          [
+            646,
+            762
+          ]
+        ],
+        [
+          [
+            646,
+            762
+          ]
+        ],
+        [
+          [
+            646,
+            762
+          ],
+          [
+            763,
+            888
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "0c8093034fa4298fed60d264171f3acf913a0d7c000c681a1148098af191f76e",
+      "sha256": "cd7f2f91613a6a52f77593ddf15a8a61a31879bc78f25c526c23d2beea7fc663",
+      "spans": [
+        [
+          [
+            0,
+            84
+          ]
+        ],
+        [
+          [
+            0,
+            84
+          ],
+          [
+            85,
+            385
+          ],
+          [
+            386,
+            473
+          ]
+        ],
+        [
+          [
+            386,
+            473
+          ]
+        ],
+        [
+          [
+            386,
+            473
+          ],
+          [
+            474,
+            644
+          ],
+          [
+            645,
+            761
+          ]
+        ],
+        [
+          [
+            645,
+            761
+          ]
+        ],
+        [
+          [
+            645,
+            761
+          ],
+          [
+            762,
+            887
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "42a012ad78671b93308a3c56ad9eaa4e70ce78207b404f47476f2933c802607c",
+      "sha256": "9e10d81ffc6f40256c2ff8fb935ac1b7755fbd57d6953aa6af6894248df129d9",
+      "spans": [
+        [
+          [
+            0,
+            147
+          ]
+        ],
+        [
+          [
+            148,
+            218
+          ]
+        ],
+        [
+          [
+            219,
+            712
+          ]
+        ],
+        [
+          [
+            713,
+            874
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "42a012ad78671b93308a3c56ad9eaa4e70ce78207b404f47476f2933c802607c",
+      "sha256": "5baf10d7486fecbaaa32c6ac9c22fd2d42ab6d77106dcbd1e529ac9b713c26a1",
+      "spans": [
+        [
+          [
+            0,
+            147
+          ]
+        ],
+        [
+          [
+            148,
+            218
+          ]
+        ],
+        [
+          [
+            219,
+            712
+          ]
+        ],
+        [
+          [
+            713,
+            903
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "015bce4e78587040c90856e4e25cd97cbe9c2b367f37eb3776f39b23c9e5390f",
+      "sha256": "18df5c837951b0f38770ff41ce9a5139c3384129910af5ac0ecfe70bcf46bd8a",
+      "spans": [
+        [
+          [
+            303,
+            414
+          ]
+        ],
+        [
+          [
+            678,
+            879
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "015bce4e78587040c90856e4e25cd97cbe9c2b367f37eb3776f39b23c9e5390f",
+      "sha256": "a1e3592d0c036b970c1ad6d93805fa62e1cd4aa7053afe45c1e2ff9d86ed5462",
+      "spans": [
+        [
+          [
+            303,
+            414
+          ]
+        ],
+        [
+          [
+            620,
+            679
+          ]
+        ],
+        [
+          [
+            680,
+            881
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "3309a00aa1c9eb737604fcaee8728d378914bf77971f8221ed1e757a74383459",
+      "sha256": "9e63834776ccdea9a59cf0bd4df6a9ce49e2d95f927ed8036da9f9964f033fc9",
+      "spans": [
+        [
+          [
+            0,
+            160
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "3309a00aa1c9eb737604fcaee8728d378914bf77971f8221ed1e757a74383459",
+      "sha256": "69d8d94f95fa0165516099228def87749452cee21e60761b4d7b00b4afb41fa9",
+      "spans": [
+        [
+          [
+            0,
+            160
+          ]
+        ]
+      ]
+    }
+  ],
+  "schema": "chipmunk.writing-adjacent-range-app/1"
+}

@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Narrow writing highlights with unchanged-word training](writing-word-anchor-transfer-2026-11-15.md)
+  compares three refitted word heads on 84 separate news and report
+  rewrites and 21 genuine journal revision pairs. The best new rule gives
+  two useful locations and 16 ordinary flags. The earlier experimental
+  word head gives four useful locations and 17 ordinary flags. The
+  refits remain in evaluation. The local app's two current writing
+  checks completed on all 16 prepaid test excerpts on the Mac's GPU.
+
 - [Fitting short edits across room and gain changes](audio-short-edit-room-training-2026-11-15.md)
   separates matched-level room rendering, lower volume, and competing speech.
   The centered fit improved isolated room localization across both held

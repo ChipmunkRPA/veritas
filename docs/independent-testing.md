@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [narrow writing highlight replay](writing-word-anchor-transfer-2026-11-15.md#replay)
+reconstructs seven word-selection comparisons on the same held excerpts.
+It verifies useful edit overlap, ordinary alerts, journal revision flags,
+input coverage, and the number of edits that the proposed highlight
+shapes could cover. A separate receipt replays the app's source offsets.
+
 The [paired room and gain replay](audio-short-edit-room-training-2026-11-15.md#reproduce-locally)
 recomputes six independently fitted short-edit trials on separate speakers,
 room responses, and held generators. It includes the real app scan on held

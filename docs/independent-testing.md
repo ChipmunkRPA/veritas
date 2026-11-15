@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [word masking and deletion replay](writing-word-perturbation-2026-11-15.md#replay)
+checks 10,223 source ranges and reconstructs the selection for each
+perturbation. It distinguishes ordinary flags, exact word overlap, and
+the possibility that a valid span was available but ranked too low.
+
 The [standalone writing classifier comparison](writing-independent-range-transfer-2026-11-15.md#independent-replay)
 replays scoped sentence selection and exact word overlap for three genres.
 It keeps ordinary versions and edited examples together by work and

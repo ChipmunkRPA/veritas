@@ -1,0 +1,503 @@
+{
+  "audited_sentences": 14,
+  "largest_drop_difference": 1.26e-05,
+  "preserved_selections": {
+    "both": 14,
+    "delete": 14,
+    "mask": 14
+  },
+  "records": [
+    {
+      "batched": {
+        "both": [
+          66,
+          69
+        ],
+        "delete": [
+          66,
+          69
+        ],
+        "mask": [
+          66,
+          69
+        ]
+      },
+      "batched_reading_sha256": "7482c40c333ffbf6921d18b9a4574e33d48966a3ad6698bfbd8d9bb24c645828",
+      "individual": {
+        "both": [
+          66,
+          69
+        ],
+        "delete": [
+          66,
+          69
+        ],
+        "mask": [
+          66,
+          69
+        ]
+      },
+      "largest_drop_difference": 1.6e-06,
+      "panel": "reports",
+      "sentence": 3,
+      "source": "f03d42f8654b09f839d6497356e2a04d1e1bf742d0ab2068e8937fabd4d51e5d"
+    },
+    {
+      "batched": {
+        "both": [
+          91,
+          103
+        ],
+        "delete": [
+          91,
+          94
+        ],
+        "mask": [
+          103,
+          106
+        ]
+      },
+      "batched_reading_sha256": "e860b24a37f88e36813caa52044795f8f113d856fa72136dc0116e7ea7ad4399",
+      "individual": {
+        "both": [
+          91,
+          103
+        ],
+        "delete": [
+          91,
+          94
+        ],
+        "mask": [
+          103,
+          106
+        ]
+      },
+      "largest_drop_difference": 1.26e-05,
+      "panel": "reports",
+      "sentence": 3,
+      "source": "0a62c9039f789c9625146a176203b802daebce18de080974b5162cedc0fed442"
+    },
+    {
+      "batched": {
+        "both": [
+          100,
+          103
+        ],
+        "delete": [
+          100,
+          103
+        ],
+        "mask": [
+          100,
+          103
+        ]
+      },
+      "batched_reading_sha256": "0b08da4c3035f37b6e68f4552bf81ae6ad8248648517c36c68957cdb9dea26ca",
+      "individual": {
+        "both": [
+          100,
+          103
+        ],
+        "delete": [
+          100,
+          103
+        ],
+        "mask": [
+          100,
+          103
+        ]
+      },
+      "largest_drop_difference": 5.3e-06,
+      "panel": "report_replication",
+      "sentence": 2,
+      "source": "f4493f9b07d046188b4e2513d95c3f3bfca94e97307fe47cf96439d2e35f511e"
+    },
+    {
+      "batched": {
+        "both": [
+          85,
+          97
+        ],
+        "delete": [
+          91,
+          103
+        ],
+        "mask": [
+          85,
+          97
+        ]
+      },
+      "batched_reading_sha256": "65f2cfb07c7a39bb439bea66d96ef4ed9f141e10371cf06f5581be3290264d3d",
+      "individual": {
+        "both": [
+          85,
+          97
+        ],
+        "delete": [
+          91,
+          103
+        ],
+        "mask": [
+          85,
+          97
+        ]
+      },
+      "largest_drop_difference": 4.8e-06,
+      "panel": "report_replication",
+      "sentence": 3,
+      "source": "1400898df1146fb8a81b66fa85faf85d700a494c34edf8f10ea5337d1871f0d1"
+    },
+    {
+      "batched": {
+        "both": [
+          63,
+          69
+        ],
+        "delete": [
+          66,
+          72
+        ],
+        "mask": [
+          63,
+          66
+        ]
+      },
+      "batched_reading_sha256": "50e2d3b8413e73f848f8386f70dda441b264842cd941b050cb20fe3507e41328",
+      "individual": {
+        "both": [
+          63,
+          69
+        ],
+        "delete": [
+          66,
+          72
+        ],
+        "mask": [
+          63,
+          66
+        ]
+      },
+      "largest_drop_difference": 1.7e-06,
+      "panel": "elife_body",
+      "sentence": 2,
+      "source": "0ac9a2bd775ce30086649426cd70cec0ff81cf07cdf937022701a693526103b0"
+    },
+    {
+      "batched": {
+        "both": [
+          61,
+          67
+        ],
+        "delete": [
+          70,
+          73
+        ],
+        "mask": [
+          73,
+          79
+        ]
+      },
+      "batched_reading_sha256": "0769b410e04348933056d1d5b719cf220c3267558fe3d29863f8c857ead6848c",
+      "individual": {
+        "both": [
+          61,
+          67
+        ],
+        "delete": [
+          70,
+          73
+        ],
+        "mask": [
+          73,
+          79
+        ]
+      },
+      "largest_drop_difference": 1.6e-06,
+      "panel": "elife_body",
+      "sentence": 2,
+      "source": "f99887f1490fc390ebe4e8200d52a33d035912fcdff0c65be9a5141b942520e3"
+    },
+    {
+      "batched": {
+        "both": [
+          29,
+          32
+        ],
+        "delete": [
+          29,
+          32
+        ],
+        "mask": [
+          48,
+          51
+        ]
+      },
+      "batched_reading_sha256": "6b3a91ecdcc39bc579fe018796fae497336dbed6e87d70a65500999f2fa41f96",
+      "individual": {
+        "both": [
+          29,
+          32
+        ],
+        "delete": [
+          29,
+          32
+        ],
+        "mask": [
+          48,
+          51
+        ]
+      },
+      "largest_drop_difference": 4.7e-06,
+      "panel": "dated_revisions",
+      "sentence": 1,
+      "source": "f7558c1a925a5181f0b43dac6540de840487c6bf5ac2cfe3a6ea8ab3ab9b33c8"
+    },
+    {
+      "batched": {
+        "both": [
+          27,
+          45
+        ],
+        "delete": [
+          32,
+          50
+        ],
+        "mask": [
+          27,
+          33
+        ]
+      },
+      "batched_reading_sha256": "e0379672cbb2a28d8355ff843b197d457ce25e0615818fa865cbbf83915f3f00",
+      "individual": {
+        "both": [
+          27,
+          45
+        ],
+        "delete": [
+          32,
+          50
+        ],
+        "mask": [
+          27,
+          33
+        ]
+      },
+      "largest_drop_difference": 3.9e-06,
+      "panel": "dated_revisions",
+      "sentence": 2,
+      "source": "e02552006265fcb9950c921cf7b21ad93a338f9b522f140d8b94712909c2899d"
+    },
+    {
+      "batched": {
+        "both": [
+          46,
+          49
+        ],
+        "delete": [
+          52,
+          55
+        ],
+        "mask": [
+          46,
+          52
+        ]
+      },
+      "batched_reading_sha256": "2e1d0532e08ced5d82a7ab2b44199140483afa08ed721090055a165bfc2134df",
+      "individual": {
+        "both": [
+          46,
+          49
+        ],
+        "delete": [
+          52,
+          55
+        ],
+        "mask": [
+          46,
+          52
+        ]
+      },
+      "largest_drop_difference": 5.1e-06,
+      "panel": "additional_abstracts",
+      "sentence": 2,
+      "source": "f000961a257c362c08909e40cc4196290cc68f1013e14be796c744c595556f06"
+    },
+    {
+      "batched": {
+        "both": [
+          50,
+          56
+        ],
+        "delete": [
+          53,
+          56
+        ],
+        "mask": [
+          50,
+          56
+        ]
+      },
+      "batched_reading_sha256": "eefe344585386d6e193460c41e3b30048a232f5336b351fcb0a4504bc3f8b39f",
+      "individual": {
+        "both": [
+          50,
+          56
+        ],
+        "delete": [
+          53,
+          56
+        ],
+        "mask": [
+          50,
+          56
+        ]
+      },
+      "largest_drop_difference": 1.7e-06,
+      "panel": "additional_abstracts",
+      "sentence": 2,
+      "source": "2d6c68a467c3677f5bd7ee58969b3f5403ed9022219001f7a59528058e8bbf9d"
+    },
+    {
+      "batched": {
+        "both": [
+          22,
+          25
+        ],
+        "delete": [
+          22,
+          25
+        ],
+        "mask": [
+          13,
+          16
+        ]
+      },
+      "batched_reading_sha256": "4271918f70afceec48a49627a68f547cc5c434e04d55dcd24d5d08a9add8b52b",
+      "individual": {
+        "both": [
+          22,
+          25
+        ],
+        "delete": [
+          22,
+          25
+        ],
+        "mask": [
+          13,
+          16
+        ]
+      },
+      "largest_drop_difference": 9.5e-06,
+      "panel": "news",
+      "sentence": 1,
+      "source": "9c0d5eae3737600b31d5068f161ffcf79e6a1cfe172ca40aa5dd5cb0c6f14fb0"
+    },
+    {
+      "batched": {
+        "both": [
+          53,
+          65
+        ],
+        "delete": [
+          53,
+          56
+        ],
+        "mask": [
+          53,
+          65
+        ]
+      },
+      "batched_reading_sha256": "eb4cb373a9d720b7c1fc688d8b6e2bc4308b1891bd2a558a8584a2b28f79f304",
+      "individual": {
+        "both": [
+          53,
+          65
+        ],
+        "delete": [
+          53,
+          56
+        ],
+        "mask": [
+          53,
+          65
+        ]
+      },
+      "largest_drop_difference": 3.4e-06,
+      "panel": "news",
+      "sentence": 3,
+      "source": "8c940a2d0101ccf248a89a2e192b6ee8abbc14467b388cc754440eea689df5bf"
+    },
+    {
+      "batched": {
+        "both": [
+          26,
+          38
+        ],
+        "delete": [
+          32,
+          38
+        ],
+        "mask": [
+          26,
+          32
+        ]
+      },
+      "batched_reading_sha256": "f0e3e4e82c9151b2ed3c6444ea7decf63fb780fc4b7eafe38f1a9b62bb5be353",
+      "individual": {
+        "both": [
+          26,
+          38
+        ],
+        "delete": [
+          32,
+          38
+        ],
+        "mask": [
+          26,
+          32
+        ]
+      },
+      "largest_drop_difference": 2.9e-06,
+      "panel": "abstracts",
+      "sentence": 1,
+      "source": "2d17df4de3de3b69e2f8052699c221c99a1b7e398f2b7b93b79486aec262f6a2"
+    },
+    {
+      "batched": {
+        "both": [
+          24,
+          30
+        ],
+        "delete": [
+          24,
+          30
+        ],
+        "mask": [
+          24,
+          30
+        ]
+      },
+      "batched_reading_sha256": "35f4def7c78c3222ef9eecbf11979cca8578a5a2adbe4ca43ea079c1f858ddae",
+      "individual": {
+        "both": [
+          24,
+          30
+        ],
+        "delete": [
+          24,
+          30
+        ],
+        "mask": [
+          24,
+          30
+        ]
+      },
+      "largest_drop_difference": 1.3e-06,
+      "panel": "abstracts",
+      "sentence": 1,
+      "source": "a901d371a0f277d38946d93912326e9810bc432573556584a0b33ff26162e5fb"
+    }
+  ],
+  "runtime": "1.24.3",
+  "schema": "chipmunk.writing-word-perturbation-batch-audit/1"
+}

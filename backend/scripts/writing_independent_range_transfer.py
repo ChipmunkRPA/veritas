@@ -95,18 +95,23 @@ def native(args):
     return {row["sha256"]: row for row in reports + transfer + dated + elife + fresh + abstract}
 
 
-def capture(args):
-    import numpy as np
+def load_classifier(assets):
     import onnxruntime as ort
     from tokenizers import Tokenizer
 
-    previous.require(all(previous.digest(args.assets / name) == pin for name, pin in ASSETS.items()),
+    previous.require(all(previous.digest(assets / name) == pin for name, pin in ASSETS.items()),
                      "The released checkpoint, tokenizer or license differs")
     settings = ort.SessionOptions()
     settings.intra_op_num_threads = 2
     settings.inter_op_num_threads = 1
-    model = ort.InferenceSession(str(args.assets / "model.onnx"), sess_options=settings, providers=["CPUExecutionProvider"])
-    tokenizer = Tokenizer.from_file(str(args.assets / "tokenizer.json"))
+    model = ort.InferenceSession(str(assets / "model.onnx"), sess_options=settings, providers=["CPUExecutionProvider"])
+    return model, Tokenizer.from_file(str(assets / "tokenizer.json")), ort.__version__
+
+
+def capture(args):
+    import numpy as np
+
+    model, tokenizer, runtime = load_classifier(args.assets)
     calibration, panels, baseline_points, sources = reference()
     text = native(args)
     controls = {row["sha256"]: row for rows in calibration.values() for row in rows}
@@ -133,7 +138,7 @@ def capture(args):
         if i % 80 == 0:
             print(f"Read {i}/{len(controls) + len(held)} source excerpts.", flush=True)
     return {"schema": SCHEMA, "method": METHOD, "model": {"revision": RELEASE, "assets": ASSETS},
-            "sources": sources, "runtime": ort.__version__, "readings": scored, "points": points}
+            "sources": sources, "runtime": runtime, "readings": scored, "points": points}
 
 
 def features(row, readings):

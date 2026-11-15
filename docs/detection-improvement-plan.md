@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Word removal and masking inside a flagged sentence](writing-word-perturbation-2026-11-15.md)
+  located 6/309 rewrites with deletion versus 5/309 with the previous
+  word proposal. It gained six and lost five, and highlighted all 110
+  ordinary sentence flags at the wider setting. Given the correct
+  sentence, it found 31 useful spans versus 43 using the previous
+  proposal. The perturbation check remains experimental.
+
 - [Separate writing classifier for sentence selection](writing-independent-range-transfer-2026-11-15.md)
   selected ten correct sentences versus three on 48 separate report
   rewrites, but located only one useful word range with 20 ordinary flags

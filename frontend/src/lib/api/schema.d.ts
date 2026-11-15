@@ -3640,7 +3640,7 @@ export interface components {
              * Schema
              * @enum {string}
              */
-            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2" | "chipmunk.paired-writing-review/3" | "chipmunk.paired-writing-review/4" | "chipmunk.paired-writing-review/5" | "chipmunk.paired-writing-review/6" | "chipmunk.paired-writing-review/7" | "chipmunk.paired-writing-review/8";
+            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2" | "chipmunk.paired-writing-review/3" | "chipmunk.paired-writing-review/4" | "chipmunk.paired-writing-review/5" | "chipmunk.paired-writing-review/6" | "chipmunk.paired-writing-review/7" | "chipmunk.paired-writing-review/8" | "chipmunk.paired-writing-review/9";
             /** Scope */
             scope: string;
             /**
@@ -3904,6 +3904,8 @@ export interface components {
             end: number;
             /** Input Sha256 */
             input_sha256: string;
+            /** Pdf Pages */
+            pdf_pages?: components["schemas"]["DraftPdfPage"][] | null;
             /** Start */
             start: number;
             /** Text */

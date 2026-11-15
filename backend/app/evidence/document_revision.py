@@ -51,6 +51,7 @@ INTERPRETATION = "This comparison locates changes between the supplied versions.
 RELOCATION_SCOPE = "The reordered passage has the same wording and punctuation in both versions. Its position changed relative to other matching paragraphs."
 WordParagraphs = list[tuple[int, int, int, int]]
 WordLayouts = tuple[WordParagraphs, WordParagraphs]
+PdfLayouts = tuple[list[dict], list[dict]]
 
 
 def tokens(text, offsets):
@@ -223,7 +224,9 @@ def _source(path: Path, data: bytes, extension: str, *, mixed: bool = False, wor
         body = tokens(doc.text, doc.paragraphs)
         if len(body) > MAX_TOKENS:
             raise ValueError(f"Each version can contain up to {MAX_TOKENS:,} words and punctuation tokens.")
-        return doc.text, {"body": body, "quoted": [], "signature": []}, _source_record(data, doc.text), doc.source_map
+        hidden = set(doc.meta.get("hidden_text_pages") or ())
+        layout = [row | {"hidden_text_on_page": row["page"] in hidden} for row in doc.source_map]
+        return doc.text, {"body": body, "quoted": [], "signature": []}, _source_record(data, doc.text), layout
     if extension == ".eml":
         message = BytesParser(policy=policy.default).parsebytes(data)
         if not any(field in message for field in ("From", "To", "Subject", "Date", "Message-ID", "Content-Type", "MIME-Version")):
@@ -362,11 +365,12 @@ def compare_with_text(earlier: bytes, later: bytes, extension: str, *,
 
 def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                          email_body_only: bool = False, pdf_paired_text_only: bool = False, earlier_extension: str | None = None,
+                         pdf_independent: bool = False,
                          include_word_tables: bool = True,
                          strict_word_tables: bool = False,
                          include_relocations: bool = True,
-                         ) -> tuple[dict, str, str, WordLayouts | None]:
-    """Keep the native Word paragraph locations available for exact paired sentence mapping."""
+                         ) -> tuple[dict, str, str, WordLayouts | PdfLayouts | None]:
+    """Return ephemeral native layouts for the requested paired sentence scope."""
     if extension not in FORMATS:
         raise ValueError(f"Choose two {SUPPORTED_DRAFTS}.")
     old_extension = extension if earlier_extension is None else earlier_extension
@@ -450,6 +454,14 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     if extension == ".eml" and email_body_only:
         return result, _email_body_prefix(old_text, old_tokens), _email_body_prefix(new_text, new_tokens), None
     if extension == ".pdf" and pdf_paired_text_only:
+        if pdf_independent and not mixed:
+            layouts = old_layout, new_layout
+            limit = document_revision_pdf.NATIVE_COMPARISON_MAX_PAGES
+            texts = [document_revision_pdf.ordered_text(text, layout, page_limit=limit, single_column=True)
+                     if not any(row["hidden_text_on_page"] for row in layout) else ""
+                     for text, layout in zip((old_text, new_text), layouts, strict=True)]
+            if all(texts):
+                return result, texts[0], texts[1], layouts
         return (result, document_revision_pdf.ordered_text(old_text, old_layout),
                 document_revision_pdf.ordered_text(new_text, new_layout), None)
     return result, old_text, new_text, (old_layout, new_layout) if extension == ".docx" else None

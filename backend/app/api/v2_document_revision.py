@@ -121,6 +121,7 @@ class DraftWritingFocus(BaseModel):
     input_sha256: str
     center_input_sha256: str | None = None
     context_paragraphs: list[DraftParagraph] | None = None
+    pdf_pages: list[DraftPdfPage] | None = None
 
 
 class DraftWritingResponse(BaseModel):
@@ -156,6 +157,7 @@ class DraftPairedCheck(BaseModel):
         "chipmunk.paired-writing-review/1", "chipmunk.paired-writing-review/2",
         "chipmunk.paired-writing-review/3", "chipmunk.paired-writing-review/4", "chipmunk.paired-writing-review/5",
         "chipmunk.paired-writing-review/6", "chipmunk.paired-writing-review/7", "chipmunk.paired-writing-review/8",
+        "chipmunk.paired-writing-review/9",
     ] = Field(alias="schema")
     status: Literal["outside_scope", "unavailable", "no_joint_increase", "joint_increase"]
     scope: str
@@ -333,10 +335,11 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
     if len(later) != size or hashlib.sha256(later).hexdigest() != sha256:
         raise ProblemError(409, "Original integrity check failed", "The retained document no longer matches its recorded hash and size.")
     paired_enabled = include_paired_check and earlier_extension == extension and _paired_enabled(extension)
+    pdf_independent = paired_enabled and extension == ".pdf" and settings.document_paired_independent_review
     try:
-        comparison, old_text, new_text, word_layouts = compare_with_sources(
+        comparison, old_text, new_text, native_layouts = compare_with_sources(
             earlier, later, extension, earlier_extension=earlier_extension,
-            email_body_only=paired_enabled, pdf_paired_text_only=paired_enabled,
+            email_body_only=paired_enabled, pdf_paired_text_only=paired_enabled, pdf_independent=pdf_independent,
         )
     except (UnicodeError, LookupError, RecursionError):
         raise ProblemError(422, "Could not compare drafts", "Use readable files in a supported draft format.") from None
@@ -349,14 +352,22 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
         separate = []
         independent = False
         draft_format = comparison["format"]
+        word_layouts = native_layouts if draft_format == "docx" else None
+        pdf_layouts = native_layouts if pdf_independent else None
+        multi_page = pdf_layouts is not None and any(layout[-1]["page"] > 1 for layout in pdf_layouts)
         boundary_enabled = settings.document_paired_boundary_review
         try:
-            candidate = paired.paired_input(comparison, old_text, new_text, allow_boundary=boundary_enabled,
-                                           allow_interior=True, word_layouts=word_layouts)
-            if candidate is None and settings.document_paired_separate_review:
-                separate = paired.separate_revisions(comparison, old_text, new_text)
-                if not separate and settings.document_paired_independent_review:
-                    separate = paired.independently_anchored_revisions(comparison, old_text, new_text, word_layouts=word_layouts)
+            if not multi_page:
+                candidate = paired.paired_input(comparison, old_text, new_text, allow_boundary=boundary_enabled,
+                                               allow_interior=True, word_layouts=word_layouts)
+            if candidate is None:
+                if settings.document_paired_separate_review:
+                    separate = paired.separate_revisions(comparison, old_text, new_text)
+                if not separate and (pdf_layouts is not None
+                                     or settings.document_paired_separate_review and settings.document_paired_independent_review):
+                    separate = paired.independently_anchored_revisions(
+                        comparison, old_text, new_text, word_layouts=word_layouts, pdf_layouts=pdf_layouts,
+                    )
                     independent = bool(separate)
             center_responses = neighboring_responses = None
             if separate:

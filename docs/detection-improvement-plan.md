@@ -60,6 +60,18 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Independently matched PDF revisions](document-pdf-independent-anchor-2026-11-14.md)
+  record the source page and exact changed-word boxes in each draft,
+  including when a sentence moves to another page. Three simulated
+  prepaid local analyses verified 26 source boxes. The two held rewrites
+  did not produce a shared increase in the paired writing responses.
+
+- [Fine-tuned sentence localization](writing-matched-encoder-2026-11-14.md)
+  trained a compact encoder on 930 matched report pairs. On 93 held report
+  pairs, the tighter point found four exact rewrite locations at eight
+  ordinary flags. Adding it would move existing exact locations from 49 to
+  53 while leaving 89 ordinary flags. The candidate stays offline.
+
 - [Topic-conditioned predictability in formal writing](writing-topic-response-2026-11-14.md)
   reduced ordinary flags from 44/48 to 37/48 while reducing useful
   locations from 22/48 to 19/48 on fresh government excerpts. The

@@ -13,6 +13,14 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [PDF draft replay](document-pdf-independent-anchor-2026-11-14.md#local-verification)
+verifies a changed sentence against both original PDF pages after repagination.
+
+The [fine-tuned sentence localization replay](writing-matched-encoder-2026-11-14.md#replay)
+recomputes held results for a compact encoder trained on matched rewrites.
+It compares exact locations and ordinary flags across 93 government-work pairs
+and 74 previously measured journal versions.
+
 The [topic-response replay](writing-topic-response-2026-11-14.md#reproduce)
 compares matched and neutral topic cues on government-report sentences.
 It reports the effect on ordinary passage flags and correct locations on

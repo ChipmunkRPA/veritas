@@ -304,6 +304,7 @@ def test_single_page_pdf_paired_review_keeps_page_evidence_and_replays(reference
     monkeypatch.setattr(settings, "text_detector_mode", "candidate")
     monkeypatch.setattr(settings, "text_window_sentences", 3)
     monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    monkeypatch.setattr(settings, "document_paired_independent_review", False)
     prefix = "The committee met on Monday morning to review the budget. "
     earlier_sentence = "The draft gives the survey date and meeting location."
     later_sentence = "The revision includes a detailed account of the survey and its outcomes."
@@ -364,6 +365,85 @@ def test_single_page_pdf_paired_review_keeps_page_evidence_and_replays(reference
         assert outcome.json()["comparison"]["paired_check"]["status"] == "outside_scope"
         assert outcome.json()["comparison"]["changes"]
     assert len(scored) == 1
+
+
+def test_independent_pdf_review_verifies_a_sentence_that_moved_to_another_page(reference_http, monkeypatch, tmp_path):
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_detector_mode", "candidate")
+    monkeypatch.setattr(settings, "text_window_sentences", 3)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    monkeypatch.setattr(settings, "document_paired_independent_review", True)
+    before = "Staff listed the inspection dates in a long table."
+    after = "The reviewers documented the dates of each inspection."
+
+    def pdf(sentence, *, cover=False, hidden=False):
+        with pymupdf.open() as document:
+            if cover:
+                page = document.new_page()
+                page.insert_text((54, 55), "The cover sheet contains the department contact details.")
+                if hidden:
+                    page.insert_text((54, 80), "This unrelated text is invisible in the rendered draft.", render_mode=3)
+            page = document.new_page()
+            passage = f"The audit included reports from eight regional offices. {sentence} The records are kept at the city office."
+            assert page.insert_textbox((54, 55, 530, 300), passage, fontsize=11, lineheight=1.32) >= 0
+            return document.tobytes()
+
+    older, newer = pdf(before), pdf(after, cover=True)
+    _saved(f, "independent-pdf", ".pdf", newer)
+    url = _url("independent-pdf")
+    scores = []
+
+    def score(candidates):
+        scores.extend(candidates)
+        return [[{"earlier": .2, "later": .5}, {"earlier": .3, "later": .8}]]
+
+    monkeypatch.setattr(paired, "score_separate", score)
+    standard = f.client.post(url, headers=f.viewer, files=_upload(older, ".pdf"))
+    assert standard.status_code == 200 and not scores
+    response = f.client.post(url, headers=f.viewer, files=_upload(older, ".pdf"),
+                             data={"include_paired_check": "true", "include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    payload = response.json()
+    comparison = payload["comparison"]
+    check = comparison["paired_check"]
+    assert comparison["changes"] == standard.json()["comparison"]["changes"]
+    assert check["schema"] == paired.PDF_INDEPENDENT_SCHEMA and check["status"] == "joint_increase"
+    assert check["authorship_confidence_contribution"] == 0 and len(scores) == 1
+    revision, = check["revisions"]
+    assert revision["change_ids"] and all(change in {row["id"] for row in comparison["changes"]}
+                                          for change in revision["change_ids"])
+    for side, number, sentence in (("earlier", 1, before), ("later", 2, after)):
+        assert revision[side]["text"] == sentence
+        page, = revision[side]["pdf_pages"]
+        assert page["page"] == number and page["word_regions"]
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as report:
+        text = " ".join(" ".join(page.get_text().split()) for page in report)
+        assert "Changed sentence 1" in text and "Page 1" in text and "Page 2" in text
+        assert "Linked wording changes" in text
+        assert "zero authorship confidence weight" in text and "ModernBERT" not in text and "Tropa" not in text
+    old, new, exported = (tmp_path / name for name in ("earlier.pdf", "later.pdf", "comparison.json"))
+    old.write_bytes(older)
+    new.write_bytes(newer)
+    exported.write_text(json.dumps(comparison))
+    assert review(exported, old, new)["paired_pdf_word_regions_verified"] >= 2
+    revision["later"]["pdf_pages"][0]["page"] = 1
+    exported.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="Mapped revisions differ"):
+        review(exported, old, new)
+
+    _saved(f, "independent-hidden-pdf", ".pdf", pdf(after, cover=True, hidden=True))
+    declined = f.client.post(_url("independent-hidden-pdf"), headers=f.viewer, files=_upload(older, ".pdf"),
+                             data={"include_paired_check": "true"})
+    assert declined.status_code == 200, declined.text
+    assert declined.json()["comparison"]["paired_check"]["status"] == "outside_scope"
+    assert len(scores) == 1
+
+    monkeypatch.setattr(paired, "score_separate", lambda candidates: [None] * len(candidates))
+    unscored = f.client.post(url, headers=f.viewer, files=_upload(older, ".pdf"),
+                             data={"include_paired_check": "true", "include_pdf": "true"}).json()
+    assert unscored["comparison"]["paired_check"]["status"] == "unavailable"
+    with pymupdf.open(stream=base64.b64decode(unscored["pdf"]), filetype="pdf") as report:
+        assert "Writing responses were unavailable." in "".join(page.get_text() for page in report)
 
 
 def test_pdf_drafts_with_unmapped_or_locked_pages_are_refused():

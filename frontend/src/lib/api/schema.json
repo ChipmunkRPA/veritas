@@ -5963,7 +5963,8 @@
               "chipmunk.paired-writing-review/5",
               "chipmunk.paired-writing-review/6",
               "chipmunk.paired-writing-review/7",
-              "chipmunk.paired-writing-review/8"
+              "chipmunk.paired-writing-review/8",
+              "chipmunk.paired-writing-review/9"
             ],
             "title": "Schema",
             "type": "string"
@@ -6876,6 +6877,20 @@
           "input_sha256": {
             "title": "Input Sha256",
             "type": "string"
+          },
+          "pdf_pages": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DraftPdfPage"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pdf Pages"
           },
           "start": {
             "title": "Start",

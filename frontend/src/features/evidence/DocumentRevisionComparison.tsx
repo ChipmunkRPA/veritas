@@ -170,6 +170,9 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
               {location && <p className="mt-1 mb-0 font-mono text-caption text-text-muted">
                 Paragraph {location.paragraph} [{location.start}, {location.end})
               </p>}
+              {sentence.pdf_pages?.map(page => <p key={page.page} className="mt-1 mb-0 font-mono text-caption text-text-muted">
+                PDF page {page.page}
+              </p>)}
               <p className="mt-1 mb-0 whitespace-pre-wrap break-words text-small">
                 <MarkedExcerpt excerpt={{ ...sentence,
                   changed_tokens: revision.wording_changes?.flatMap(change => change[`${side}_changed_tokens`]) ?? [] }} />
@@ -312,7 +315,7 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
     {extension === '.eml' && <p className="mt-2 mb-0 text-small text-text-muted">Use two plain-text emails or two HTML-only replies with two, three, five or six simple body paragraphs and a trailing blockquote.</p>}
     {extension === '.pdf' && <p className="mt-2 mb-0 text-small text-text-muted">Use unlocked PDFs with selectable text on every page, up to 12 pages each.</p>}
     {earlierExtensions.length > 1 && <p className="mt-2 mb-0 text-small text-text-muted">For drafts in different formats, use an upright PDF with selectable text. Multi-page PDFs need a single column per page and can have up to 12 pages.</p>}
-    {extension === '.pdf' && pairedCheckAvailable && <p className="mt-2 mb-0 text-small text-text-muted">The paired writing check covers one upright page per draft with selectable text and an unambiguous reading order.</p>}
+    {extension === '.pdf' && pairedCheckAvailable && <p className="mt-2 mb-0 text-small text-text-muted">For the paired writing check, use upright PDFs with selectable text in a clear reading order. In each draft, the changed sentence and its two unchanged neighbors need to share one text block on the same page.</p>}
     <form onSubmit={event => void submit(event)} className="mt-4 flex flex-wrap items-end gap-3">
       <div className="min-w-0">
         <label htmlFor={inputId} className="mb-1 block text-small font-medium">Earlier draft</label>

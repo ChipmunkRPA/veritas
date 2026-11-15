@@ -98,7 +98,7 @@ def _paired(review: dict | None) -> str:
             paragraphs = item.get("context_paragraphs")
             output.append(_side(f"{label} sentence", item | {"changed_tokens": changed_tokens,
                                                              "paragraphs": [paragraphs[1]] if paragraphs else []}))
-        for i, row in enumerate(revision.get("responses", ()), 1):
+        for i, row in enumerate(revision.get("responses") or (), 1):
             output.append(f'<p>Check {i} · {row["earlier"]:.4g} → {row["later"]:.4g}</p>')
         output.append("</section>")
     if review.get("responses"):

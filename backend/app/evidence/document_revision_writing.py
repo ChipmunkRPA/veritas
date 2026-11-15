@@ -9,7 +9,8 @@ from dataclasses import dataclass
 
 from app.detectors.text.extract import _normalise, _ocr_language, from_string, text_hash
 from app.detectors.text.segment import segment
-from app.evidence.document_revision import WordLayouts, WordParagraphs, differences, tokens
+from app.evidence import document_revision_pdf
+from app.evidence.document_revision import PdfLayouts, WordLayouts, WordParagraphs, differences, tokens
 
 SCHEMA = "chipmunk.paired-writing-review/1"
 WIDE_SCHEMA = "chipmunk.paired-writing-review/2"
@@ -19,6 +20,7 @@ INTERIOR_SCHEMA = "chipmunk.paired-writing-review/5"
 MULTIPLE_SCHEMA = "chipmunk.paired-writing-review/6"
 INDEPENDENT_SCHEMA = "chipmunk.paired-writing-review/7"
 WORD_INDEPENDENT_SCHEMA = "chipmunk.paired-writing-review/8"
+PDF_INDEPENDENT_SCHEMA = "chipmunk.paired-writing-review/9"
 ANCHORED_DRAFT_SCHEMA = "chipmunk.document-revision-comparison/7"
 MAX_REVISIONS = 4
 MULTIPLE_SCOPE = ("Checks separate changed sentences in short English text drafts. Each comparison requires its own "
@@ -30,6 +32,11 @@ INDEPENDENT_SCOPE = (
 WORD_INDEPENDENT_SCOPE = (
     "Only the listed sentences were matched. Each changed sentence and its two unchanged neighbors share one "
     "top-level Word paragraph in each draft. Other body text, tables and headers may remain unchecked. "
+    "The responses are uncalibrated and carry zero authorship confidence weight."
+)
+PDF_INDEPENDENT_SCOPE = (
+    "Each listed sentence and its unchanged neighbors share a verified selectable text block on one page of each draft. "
+    "The drafts may use different pages for the same text. Other text may remain unchecked. "
     "The responses are uncalibrated and carry zero authorship confidence weight."
 )
 # Second-highest genuine work response in the frozen paired center transfer.
@@ -347,10 +354,13 @@ def refine_wording(comparison: dict, earlier: str, later: str) -> dict:
 
 
 def independently_anchored_revisions(comparison: dict, earlier: str, later: str, *,
-                                     word_layouts: WordLayouts | None = None) -> list[PairedInput]:
+                                     word_layouts: WordLayouts | None = None,
+                                     pdf_layouts: PdfLayouts | None = None) -> list[PairedInput]:
     """Map one changed sentence without requiring unrelated revisions to share its layout."""
     word = comparison["format"] == "docx"
-    if (comparison["format"] not in {"plain_text", "docx"} or (word and word_layouts is None)
+    pdf = comparison["format"] == "pdf"
+    if (comparison["format"] not in {"plain_text", "docx", "pdf"} or (word and word_layouts is None)
+            or (pdf and pdf_layouts is None)
             or comparison.get("relocated_passages")):
         return []
     old, new = _source(earlier), _source(later)
@@ -398,9 +408,32 @@ def independently_anchored_revisions(comparison: dict, earlier: str, later: str,
         local_changes = differences(old_tokens, new_tokens)
         if not local_changes:
             continue
-        candidates.append(PairedInput(old_input, new_input, {
-            "earlier": before, "later": after, "wording_changes": local_changes,
-        }))
+        geometry = {"earlier": before, "later": after, "wording_changes": local_changes}
+        if pdf:
+            assert pdf_layouts is not None
+            changed_by_side = {}
+            for key, focus, layout in zip(("earlier", "later"), (before, after), pdf_layouts, strict=True):
+                start, end = focus["context_spans"][0][0], focus["context_spans"][-1][1]
+                blocks = [block for block in layout if block["start"] <= start < end <= block["end"]]
+                if len(blocks) != 1:
+                    break
+                positions = [span for change in local_changes for span in change[f"{key}_changed_tokens"]]
+                try:
+                    focus["pdf_pages"] = document_revision_pdf.page_locations([focus["start"], focus["end"]], positions, blocks)
+                except ValueError:
+                    break
+                changed_by_side[key] = {tuple(span) for span in positions}
+            if "pdf_pages" not in before or "pdf_pages" not in after:
+                continue
+            linked = [
+                change["id"] for change in comparison["changes"] if any(
+                    changed_by_side[key].intersection(map(tuple, (change[key] or {}).get("changed_tokens", ())))
+                    for key in changed_by_side
+                )
+            ]
+            if linked:
+                geometry["change_ids"] = linked
+        candidates.append(PairedInput(old_input, new_input, geometry))
     return candidates
 
 
@@ -419,12 +452,21 @@ def multiple_result(candidates: list[PairedInput], measured: list[list[dict] | N
     checked = sum(row["status"] != "unavailable" for row in reviews)
     schema, scope = MULTIPLE_SCHEMA, MULTIPLE_SCOPE
     if independent:
-        schema, scope = ((WORD_INDEPENDENT_SCHEMA, WORD_INDEPENDENT_SCOPE) if draft_format == "docx"
-                         else (INDEPENDENT_SCHEMA, INDEPENDENT_SCOPE))
+        schema, scope = {
+            "docx": (WORD_INDEPENDENT_SCHEMA, WORD_INDEPENDENT_SCOPE),
+            "pdf": (PDF_INDEPENDENT_SCHEMA, PDF_INDEPENDENT_SCOPE),
+        }.get(draft_format, (INDEPENDENT_SCHEMA, INDEPENDENT_SCOPE))
+    summary = f"Checked {checked} of {len(candidates)} mapped revisions. Both writing responses increased at {increases}."
+    if schema == PDF_INDEPENDENT_SCHEMA:
+        if checked:
+            summary = (f"Scored {checked} of {len(candidates)} mapped sentences. "
+                       f"Both checks gave a stronger AI-like response for {increases} of the scored sentences.")
+        else:
+            summary = "The changed sentences were located in both drafts. Writing responses were unavailable."
     return {"schema": schema,
             "status": "joint_increase" if increases else
             "no_joint_increase" if checked == len(candidates) else "unavailable",
-            "summary": f"Checked {checked} of {len(candidates)} mapped revisions. Both writing responses increased at {increases}.",
+            "summary": summary,
             "scope": scope,
             "authorship_confidence_contribution": 0, "revisions": reviews}
 
@@ -498,12 +540,13 @@ def result(candidate: PairedInput | None, responses: list[dict] | None = None, *
 
 
 def verify(comparison: dict, earlier: str, later: str, recorded: dict, *,
-           word_layouts: WordLayouts | None = None) -> str:
+           word_layouts: WordLayouts | None = None, pdf_layouts: PdfLayouts | None = None) -> str:
     """Rebuild the source scope and check saved response arithmetic without inference."""
     schema = recorded.get("schema")
-    if schema in (MULTIPLE_SCHEMA, INDEPENDENT_SCHEMA, WORD_INDEPENDENT_SCHEMA):
-        independent = schema in (INDEPENDENT_SCHEMA, WORD_INDEPENDENT_SCHEMA)
-        candidates = (independently_anchored_revisions(comparison, earlier, later, word_layouts=word_layouts) if independent
+    if schema in (MULTIPLE_SCHEMA, INDEPENDENT_SCHEMA, WORD_INDEPENDENT_SCHEMA, PDF_INDEPENDENT_SCHEMA):
+        independent = schema != MULTIPLE_SCHEMA
+        candidates = (independently_anchored_revisions(comparison, earlier, later, word_layouts=word_layouts,
+                                                       pdf_layouts=pdf_layouts) if independent
                       else separate_revisions(comparison, earlier, later))
         revisions = recorded.get("revisions")
         if (not isinstance(revisions, list) or len(revisions) != len(candidates) or not candidates

@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Explicit temporal boundary cue for short voice edits](audio-temporal-boundary-transfer-2026-11-15.md)
+  increased useful primary locations without a matched-control alert
+  from one to three. It added one useful Kokoro location in a separate
+  room bank and missed all 32 noisy stock-voice edits. The cue remains
+  in evaluation.
+
 - [Earlier-copy comparison after both cropping and downsizing WebP](image-reference-crop-resize-webp-2026-11-15.md)
   located 129/192 staged edits where the prior WebP paths were unassessed.
   It highlighted no controls and accepted the exact crop on 174/384 of

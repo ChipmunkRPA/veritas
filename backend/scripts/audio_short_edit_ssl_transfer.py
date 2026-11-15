@@ -118,7 +118,7 @@ def feature_reader(root, plan, digest):
     return lock, feature_of
 
 
-def train(args):
+def train(args, *, model_factory=parent.model, schema=SCHEMA, method=EXPERIMENT):
     import torch
     from safetensors.torch import save_file
 
@@ -126,7 +126,8 @@ def train(args):
     from scripts.audio_strong_traffic_view import network_free
 
     plan, digest = parent.load_plan(args.data)
-    lock, feature_of = feature_reader(args.cache, plan, digest)
+    origin, feature_of = feature_reader(args.cache, plan, digest)
+    lock = origin | {"schema": schema, "method": method}
     SOURCE.check(SOURCE.path_sha(args.speech) == SPEECH, "Speech activity asset differs")
     args.output.mkdir(mode=0o700)
     network_free()
@@ -135,7 +136,8 @@ def train(args):
     activity = SpeechActivity(args.speech)
     fitted = []
     for known, unknown in (parent.sources.FAMILIES, parent.sources.FAMILIES[::-1]):
-        model, mean, scale, losses = parent.train(args.data, plan, known, None, feature_of=feature_of)
+        model, mean, scale, losses = parent.train(args.data, plan, known, None, feature_of=feature_of,
+                                                 model_factory=model_factory)
         weights = args.output / (known + ".safetensors")
         save_file({**model.state_dict(), "feature_mean": torch.from_numpy(mean),
                    "feature_scale": torch.from_numpy(scale)}, str(weights))
@@ -176,14 +178,14 @@ def flank_interval(local, edge, spans):
     return None if peak is None else {"score": round(peak[0], 8), "range": [-parent.HOP * peak[1], -parent.HOP * peak[2]]}
 
 
-def load_head(root, case):
+def load_head(root, case, *, model_factory=parent.model):
     from safetensors.torch import load_file
 
     weights = root / (case["trained_family"] + ".safetensors")
     SOURCE.check(SOURCE.path_sha(weights) == case["weights_sha256"], "Fitted head differs")
     tensors = load_file(str(weights))
     mean, scale = tensors.pop("feature_mean").numpy(), tensors.pop("feature_scale").numpy()
-    model = parent.model().eval()
+    model = model_factory().eval()
     model.load_state_dict(tensors, strict=True)
     return model, (mean, scale)
 

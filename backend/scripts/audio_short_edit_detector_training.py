@@ -143,7 +143,7 @@ def fit_input(root, plan, generator, feature_of):
     return np.array(records), np.array(masks, np.float32), np.array(edges, np.float32)
 
 
-def train(root, plan, generator, bank, *, feature_of=None, extra_objective=None):
+def train(root, plan, generator, bank, *, feature_of=None, extra_objective=None, model_factory=model):
     import numpy as np
     import torch
     from torch.nn import functional as F
@@ -158,7 +158,7 @@ def train(root, plan, generator, bank, *, feature_of=None, extra_objective=None)
     x = torch.from_numpy((x - mean[:, None]) / scale[:, None])
     region, edge = [torch.from_numpy(array) for array in (region, edge)]
     torch.manual_seed(SEED)
-    classifier = model().train()
+    classifier = model_factory().train()
     optimizer = torch.optim.AdamW(classifier.parameters(), lr=.002, weight_decay=.001)
     trace = []
     for _ in range(EPOCHS):

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [voice boundary cue replay](audio-temporal-boundary-transfer-2026-11-15.md#replay)
+recounts primary and transfer locations, matched genuine splices and
+background-only alerts using two numeric receipts. The native replay
+verifies the frozen input features and decodes the retained transfer PCM.
+
 The [cropped and downsized WebP replay](image-reference-crop-resize-webp-2026-11-15.md#replay-commands)
 recounts same-source edit locations after both transformations, including
 cases where cropping removed the edit. The local app replay verifies both

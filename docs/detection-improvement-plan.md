@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Fitting short edits across room and gain changes](audio-short-edit-room-training-2026-11-15.md)
+  separates matched-level room rendering, lower volume, and competing speech.
+  The centered fit improved isolated room localization across both held
+  PhonemeDF generators. Its noisy stock gain did not transfer to a second
+  recorded-room bank, where no fit found a useful location free of a matched
+  ordinary alert. The candidate remains in evaluation.
+
 - [Locating short edits on exact isolated voices](audio-two-voice-isolation-2026-11-15.md)
   compares mixture and estimated voices with dry and room-rendered versions
   on the same clock. The one-second scan found no useful held room-rendered

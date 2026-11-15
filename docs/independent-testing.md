@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [paired room and gain replay](audio-short-edit-room-training-2026-11-15.md#reproduce-locally)
+recomputes six independently fitted short-edit trials on separate speakers,
+room responses, and held generators. It includes the real app scan on held
+mixtures and a second four-room transfer with the original model cutoffs.
+
 The [exact isolated voice replay](audio-two-voice-isolation-2026-11-15.md#replay)
 compares one-second results on two-voice mixtures, estimated voices, and
 exact dry and room-rendered voices. It verifies score changes at the same

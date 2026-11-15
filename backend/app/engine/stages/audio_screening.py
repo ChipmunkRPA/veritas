@@ -6,7 +6,7 @@ import math
 from app.detectors.audio import calibration
 from app.engine.fusion import decisive
 from app.engine.stages import common, video
-from app.evidence.audio_binding import VOICE_CLOCK_LIMIT
+from app.evidence.audio_binding import voice_input_limit
 from app.schemas.evidence import Decision, SignalV2
 from app.storage.artefacts import register_artefact
 from app.storage.db import FuserRow
@@ -25,8 +25,9 @@ def fuse(ctx):
     p = screen.get('probability_ai')
     direction = screen.get('decision', 'inconclusive')
     reason = screen.get('reason', 'No usable speech response was available; no authenticity conclusion can be made.')
-    if (ctx.outputs.get("decode") or {}).get("source_clock_break_count"):
-        p, direction, reason = None, 'inconclusive', VOICE_CLOCK_LIMIT
+    input_limit = voice_input_limit(ctx.outputs.get("decode") or {})
+    if input_limit:
+        p, direction, reason = None, 'inconclusive', input_limit
     code = {'ai': 'ai_supported', 'original': 'no_ai_indicators'}.get(direction, 'inconclusive' if primary else 'not_assessable')
     verbal = {'ai': 'Leaning towards AI-generated speech', 'original': 'Leaning towards original speech'}.get(direction, 'Inconclusive audio assessment')
     band = {'ai': 'likely_ai', 'original': 'likely_authentic'}.get(direction, 'uncertain')
@@ -73,7 +74,7 @@ def fuse(ctx):
     # No new confidence interval or general-population accuracy claim is fabricated.
     profile = {'slice_id': 'audio/local-speech-v3', 'duration_s': ctx.outputs['probe']['facts'].get('duration_s'),
                'within_validated_envelope': False, 'validation_support': 'unsupported',
-               'limiting_conditions': [calibration.NOTE]}
+               'limiting_conditions': [*([input_limit] if input_limit else []), calibration.NOTE]}
     with ctx.sessions() as db:
         artifact = register_artefact(db, ctx.store, calibration.PATH.read_bytes(), media_type='application/json',
                                     role='stage_output', created_by='audio-confidence', analysis_id=ctx.analysis_id)

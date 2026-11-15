@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [stereo voice coverage replay](audio-downmix-coverage-2026-11-15.md#replay)
+compares 32 simulated prepaid analyses with matched source hashes.
+It verifies the exact mono cancellation times, the four withheld
+recording-wide estimates, and agreement on the twelve controls. The
+native run also checks the original-channel assets and a signed report.
+
 The [narrow writing highlight replay](writing-word-anchor-transfer-2026-11-15.md#replay)
 reconstructs seven word-selection comparisons on the same held excerpts.
 It verifies useful edit overlap, ordinary alerts, journal revision flags,

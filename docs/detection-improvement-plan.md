@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Stereo mono-input voice coverage](audio-downmix-coverage-2026-11-15.md)
+  withholds the recording-wide estimate when sound in the stereo upload
+  cancels in the mono waveform used by the voice check. Four staged
+  recordings with hidden stereo sound moved from an original-speech
+  assessment to inconclusive. All twelve ordinary control decisions
+  matched. Exact windows, channel clips and waveforms support the result.
+
 - [Narrow writing highlights with unchanged-word training](writing-word-anchor-transfer-2026-11-15.md)
   compares three refitted word heads on 84 separate news and report
   rewrites and 21 genuine journal revision pairs. The best new rule gives

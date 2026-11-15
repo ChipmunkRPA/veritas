@@ -254,6 +254,7 @@ export interface AudioEvidenceSet extends SetBase {
   coverage?: { decoded_samples: number; scored_samples: number; unscored_samples: number; decode_limit_reached: boolean;
     selection_threshold: number; windows: (SampleInterval & { score: number; signal_refs: EvidenceRef[] })[];
     source_clock_context?: AudioSourceClockContext;
+    mono_voice_coverage_limit?: { policy: 'destructive-stereo-downmix/1'; reason: string; stereo_window_indices: number[] };
     speech_window_selection?: { schema: 'audio-speech-window-selection/1'; minimum_speech_fraction: 0.5;
       affects_overall_confidence: false; raw_output_sha256: string;
       counts: Record<'scored' | 'below_speech_minimum' | 'outside_window_limit', number>;

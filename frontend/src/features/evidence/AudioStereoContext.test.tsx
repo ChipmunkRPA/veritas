@@ -77,17 +77,26 @@ it('shows mono level loss at the matching source interval without marking it as 
       downmix: { mono_rms_dbfs: -140, attenuation_db: null, strong_attenuation: true },
     }],
   }
+  set.coverage = {
+    decoded_samples: 16000, scored_samples: 0, unscored_samples: 16000, decode_limit_reached: false,
+    selection_threshold: 0.5, windows: [], mono_voice_coverage_limit: {
+      policy: 'destructive-stereo-downmix/1', stereo_window_indices: [0],
+      reason: 'The stereo channels cancel some sound in the mono input. A recording-wide voice estimate is unavailable.',
+    },
+  }
   const { rerender } = renderAudio(set)
   const section = within(screen.getByRole('region', { name: 'Stereo channel comparison' }))
   expect(section.getByText(/Strong level drop in the analyzed mono mix/)).toBeTruthy()
   expect(section.getByText('[32000, 48000) at 1/16000')).toBeTruthy()
   expect(section.getByText('Mono is digitally silent')).toBeTruthy()
-  expect(section.getByText(/do not contribute to the AI assessment/)).toBeTruthy()
+  expect(section.getByText(/recording-wide voice estimate is unavailable/)).toBeTruthy()
+  expect(section.getByText(/Affected decoded audio 0\.000 s–1\.000 s/)).toBeTruthy()
 
   const changed = { ...set, source: { ...set.source, pcm_sha256: 'e'.repeat(64) } }
   rerender(<MemoryRouter><AudioEvidenceContent set={changed} token="" mediaReady={false} /></MemoryRouter>)
   expect(section.getByRole('alert')).toBeTruthy()
   expect(section.queryByText('Mono is digitally silent')).toBeNull()
+  expect(section.queryByText(/recording-wide voice estimate is unavailable/)).toBeNull()
 })
 
 it('plays only the committed comparison and anchors all four assets to its sample and source times', () => {

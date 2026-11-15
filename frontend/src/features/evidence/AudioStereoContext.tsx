@@ -27,6 +27,9 @@ export default function AudioStereoContext({ set, token, mediaReady, videoOrigin
     seconds(window.start_sample / context.sample_rate) + '–' + seconds(window.end_sample / context.sample_rate)
   const strong = context.windows.filter((window) => window.status === 'strong_imbalance')
   const attenuated = hasDownmix ? context.windows.filter((window) => window.downmix?.strong_attenuation) : []
+  const monoLimit = set.coverage?.mono_voice_coverage_limit
+  const cancelled = monoLimit?.policy === 'destructive-stereo-downmix/1'
+    ? monoLimit.stereo_window_indices.flatMap((index) => context.windows[index] ? [context.windows[index]] : []) : []
   const listening = set.stereo_listening
   const comparisons = hasDownmix && listening?.schema === 'chipmunk.stereo-listening/1'
     && listening.affects_overall_confidence === false ? listening.windows.flatMap(({ stereo_window_index, artifacts }) => {
@@ -43,10 +46,13 @@ export default function AudioStereoContext({ set, token, mediaReady, videoOrigin
     <h3 id="media-evidence-stereo-heading" className="m-0 text-body font-medium">Stereo channel comparison</h3>
     {!bound ? <p role="alert" className="mt-2 mb-0 text-small text-text-muted">The channel measurements do not match this analyzed audio input.</p>
       : context.status === 'measured' || context.status === 'quiet' ? <>
-        <p className="mt-2 mb-0 text-small text-text-muted">Compared {context.windows.length} complete one-second {context.windows.length === 1 ? 'window' : 'windows'} in the first {context.max_seconds} seconds {hasDownmix ? 'using the decoded stereo channels and the analyzed mono mix' : 'before mono mixing'}. Stereo placement, mixing and microphone position can all affect these readings. They do not contribute to the AI assessment.</p>
+        <p className="mt-2 mb-0 text-small text-text-muted">Compared {context.windows.length} complete one-second {context.windows.length === 1 ? 'window' : 'windows'} in the first {context.max_seconds} seconds {hasDownmix ? 'using the decoded stereo channels and the analyzed mono mix' : 'before mono mixing'}. Stereo placement, mixing and microphone position can all affect these readings. {cancelled.length ? 'The channel measurements describe what was available for the voice check.' : 'They do not contribute to the AI assessment.'}</p>
         {context.status === 'quiet'
           ? <p className="mt-2 mb-0 text-small">All measured windows fell below the {context.quiet_floor_dbfs} dBFS review floor.</p>
           : <p className="mt-2 mb-0 text-small">{strong.length} {strong.length === 1 ? 'window had' : 'windows had'} a strong channel-level difference{strong.length === 0 ? '.' : <>. {strong.slice(0, 3).map((window) => range(window) + ' (' + window.louder_channel + ' louder)').join(', ')}{strong.length > 3 ? ', with more in the table.' : '.'}</>}</p>}
+        {cancelled.length > 0 && <p className="mt-2 mb-0 text-small">
+          {monoLimit?.reason} Affected decoded audio {cancelled.slice(0, 3).map(range).join(', ')}{cancelled.length > 3 ? ', with more in the table.' : '.'}
+        </p>}
         {attenuated.length > 0 && <p className="mt-2 mb-0 text-small">
           <strong>Strong level drop in the analyzed mono mix.</strong>{' '}
           Decoded audio {attenuated.slice(0, 3).map(range).join(', ')}{attenuated.length > 3 ? ', with more in the table.' : '.'}{' '}

@@ -24,9 +24,12 @@ from app.core.config import settings
 from app.detectors.audio.coverage import interval_union
 from app.detectors.audio.decode import SAMPLE_RATE, read_wav, source_ranges, wav_bytes
 from app.evidence.audio_binding import (
+    MONO_VOICE_COVERAGE,
+    MONO_VOICE_POLICY,
     SPEECH_SELECTION,
     VOICE_CLOCK_POLICY,
     attach_stereo_attenuation_overlaps,
+    mono_voice_coverage_limit,
     source_clock_context,
     speech_window_selection,
     unscored_voice_intervals,
@@ -513,6 +516,8 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
         document["stereo_context"] = mapping["stereo_context"]
     if "stereo_context" in document:
         attach_stereo_attenuation_overlaps(document)
+        if record.get("mono_voice_policy") == MONO_VOICE_POLICY and (limit := mono_voice_coverage_limit(document["stereo_context"])):
+            document["coverage"][MONO_VOICE_COVERAGE] = limit
     from app.evidence import stereo_listening
 
     listening_digest = binding.get("stereo_listening_pcm_sha256") or mapping.get("stereo_listening_pcm_sha256")

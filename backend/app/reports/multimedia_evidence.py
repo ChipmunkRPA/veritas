@@ -431,10 +431,19 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
     source_ranges(mapping, 0, len(pcm))
     if "schema" in document:
         from app.evidence import audio_packets
+        from app.evidence.audio_binding import (
+            MONO_VOICE_COVERAGE,
+            MONO_VOICE_POLICY,
+            mono_voice_coverage_limit,
+        )
 
         result = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
         audio_record = result.get("manifest", {}).get("sampling", {}).get("audio_evidence") or {}
         audio_packets.verify_speech_selection(document, store, audio_record)
+        expected_limit = (mono_voice_coverage_limit(mapping.get("stereo_context"))
+                          if audio_record.get("mono_voice_policy") == MONO_VOICE_POLICY else None)
+        if document["coverage"].get(MONO_VOICE_COVERAGE) != expected_limit:
+            raise ObjectIntegrityError("The mono voice coverage limit differs from the recorded audio input and policy")
     stereo_context = document.get("stereo_context")
     if stereo_sha := document.get("stereo_context_sha256"):
         if canonical_json(stereo_context) != _bytes(stereo_sha, store):
@@ -1425,6 +1434,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "background_reduced_voice_review": background_review,
             "stereo_context": stereo_context,
             "stereo_listening": stereo_listening,
+            "mono_voice_coverage_limit": voice_coverage.get("mono_voice_coverage_limit") if kind == "audio" else None,
             **stereo_excerpts,
             "repetition_context": copy.deepcopy(stereo_source.get("repetition_context")),
             "repetition_context_pointer": "/audio/repetition_context" if kind == "video" else "/repetition_context",

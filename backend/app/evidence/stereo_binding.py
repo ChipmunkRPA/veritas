@@ -18,6 +18,7 @@ MAX_SECONDS = 30
 QUIET_DBFS = -50
 REVIEW_GAP_DB = 12
 REVIEW_DOWNMIX_DB = 12
+OPPOSITE_CHANNEL_CORRELATION = -0.85
 LEGACY_SILENCE_FLOOR_DBFS = -120
 # A one-sample, one-LSB pulse in one second of signed 16-bit PCM is about -132 dBFS.
 SILENCE_FLOOR_DBFS = -140
@@ -63,6 +64,15 @@ def downmix(left: float, right: float, mono: float) -> dict[str, Any]:
         "attenuation_db": attenuation,
         "strong_attenuation": strong,
     }
+
+
+def destructive_downmix_windows(context: dict | None) -> list[int]:
+    """Require measured loss in mono and strongly opposing stereo waveforms."""
+    if not context or context["schema"] != SCHEMA:
+        return []
+    return [index for index, window in enumerate(context["windows"])
+            if window["downmix"]["strong_attenuation"] and window["correlation"] is not None
+            and window["correlation"] <= OPPOSITE_CHANNEL_CORRELATION]
 
 
 def validate(context: dict[str, Any], source: dict[str, Any], *, ranges: SourceRanges) -> None:

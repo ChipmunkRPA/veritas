@@ -22,7 +22,15 @@ from app.detectors.audio import stereo
 from app.detectors.audio.decode import SAMPLE_RATE, decode_audio, read_wav, source_ranges, wav_bytes
 from app.engine.stages import audio
 from app.evidence import audio_packets, service, stereo_binding, stereo_listening
-from app.evidence.audio_binding import stereo_attenuation_overlaps, unscored_voice_intervals
+from app.evidence.audio_binding import (
+    MONO_VOICE_COVERAGE,
+    MONO_VOICE_LIMIT,
+    mono_voice_coverage_limit,
+    stereo_attenuation_overlaps,
+    unscored_voice_intervals,
+    validate_unscored_voice_coverage,
+    voice_input_limit,
+)
 from app.evidence.stereo_listening_binding import select_windows
 from app.reports import engine, multimedia_evidence, package, signing, verify, verify_audio_source
 from app.reports import snapshot as report_snapshot
@@ -111,6 +119,7 @@ def test_downmix_distinguishes_phase_loss_from_controls(tmp_path, mode, attenuat
     stereo.validate(context, decoded.mapping)
     window = context["windows"][0]
     assert window["downmix"]["strong_attenuation"] is marked
+    assert stereo_binding.destructive_downmix_windows(context) == ([0] if mode == "partial" else [])
     if attenuation is None:
         assert window["downmix"]["attenuation_db"] is None
     else:
@@ -118,6 +127,22 @@ def test_downmix_distinguishes_phase_loss_from_controls(tmp_path, mode, attenuat
     if mode == "sparse":
         assert window["downmix"]["mono_rms_dbfs"] == pytest.approx(-132.35, abs=0.02)
         assert window["left_rms_dbfs"] == window["right_rms_dbfs"] == window["downmix"]["mono_rms_dbfs"]
+
+
+def test_downmix_limit_binds_to_the_original_stereo_window(tmp_path):
+    path = tmp_path / "source.wav"
+    sha = _source(path, seconds=2, mode="first_left_then_balanced")
+    decoded = decode_audio(path, source_sha256=sha, inspect_stereo=True)
+    context = decoded.mapping["stereo_context"]
+    assert stereo_binding.destructive_downmix_windows(context) == [1]
+    assert voice_input_limit({"destructive_mono_downmix": True}) == MONO_VOICE_LIMIT
+    limit = mono_voice_coverage_limit(context)
+    assert limit is not None
+    coverage = {MONO_VOICE_COVERAGE: limit}
+    validate_unscored_voice_coverage(coverage, decoded.mapping, context)
+    limit["stereo_window_indices"] = [0]
+    with pytest.raises(ValueError, match="differs from the measured stereo windows"):
+        validate_unscored_voice_coverage(coverage, decoded.mapping, context)
 
 
 def test_legacy_stereo_context_remains_readable_and_rejects_unversioned_downmix(tmp_path):

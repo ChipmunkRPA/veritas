@@ -18,7 +18,26 @@ VOICE_CLOCK_LIMIT = (
     "The source audio timestamps contain a gap or overlap. "
     "A recording-wide voice estimate is unavailable."
 )
+MONO_VOICE_LIMIT = (
+    "The stereo channels cancel some sound in the mono input. "
+    "A recording-wide voice estimate is unavailable."
+)
+MONO_VOICE_POLICY = "destructive-stereo-downmix/1"
+MONO_VOICE_COVERAGE = "mono_voice_coverage_limit"
 VOICE_CLOCK_POLICY = "source-clock-split/1"
+
+
+def voice_input_limit(decoded: dict) -> str | None:
+    if decoded.get("source_clock_break_count"):
+        return VOICE_CLOCK_LIMIT
+    return MONO_VOICE_LIMIT if decoded.get("destructive_mono_downmix") else None
+
+
+def mono_voice_coverage_limit(stereo: dict | None) -> dict | None:
+    from app.evidence.stereo_binding import destructive_downmix_windows
+
+    indices = destructive_downmix_windows(stereo)
+    return {"policy": MONO_VOICE_POLICY, "reason": MONO_VOICE_LIMIT, "stereo_window_indices": indices} if indices else None
 
 
 def current_voice_detection_output(output) -> bool:
@@ -31,9 +50,9 @@ def exclude_recording_voice(entries: list[dict]) -> list[dict]:
             if entry.get("family") == "voice" and entry.get("status") == "ok" else entry for entry in entries]
 
 
-def limit_voice_screening(screening: dict) -> dict:
+def limit_voice_screening(screening: dict, *, reason: str) -> dict:
     return {**screening, "probability_ai": None, "reference_estimate_ai": None, "decision": "inconclusive",
-            "scope_supported": False, "reason": VOICE_CLOCK_LIMIT}
+            "scope_supported": False, "reason": reason}
 
 
 def unscored_voice_intervals(coverage: dict, source: dict) -> list[dict]:
@@ -234,6 +253,10 @@ def validate_audio_stream_scope(source: dict) -> None:
 
 def validate_unscored_voice_coverage(coverage: dict, source: dict, stereo: dict | None = None) -> None:
     validate_speech_window_selection(coverage, source)
+    if MONO_VOICE_COVERAGE in coverage:
+        expected = mono_voice_coverage_limit(stereo)
+        if not expected or canonical_hash(coverage[MONO_VOICE_COVERAGE]) != canonical_hash(expected):
+            raise ValueError("The mono voice coverage limit differs from the measured stereo windows")
     if not {"unscored_intervals", "stereo_attenuation_overlaps", "source_clock_context"}.intersection(coverage):
         return
     gaps = unscored_voice_intervals(coverage, source)

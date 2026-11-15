@@ -162,12 +162,12 @@ def voice_windows(pcm: np.ndarray, hop_s: float, *, window_s: float = VOICE_WIND
     return [(start / SR, pcm[start:end]) for start, end in windows]
 
 
-def limit_voice_signal(signal: Signal) -> Signal:
+def limit_voice_signal(signal: Signal, *, reason: str = VOICE_CLOCK_LIMIT) -> Signal:
     """Retain the voice observation but withhold a source-wide direction or weight."""
     return signal.model_copy(update={"value": None, "ai_probability": None, "weight": 0.0,
                                      "direction": "inconclusive", "strength": "none",
                                      "observed": "Raw responses are available for the recorded voice windows.",
-                                     "reasoning": VOICE_CLOCK_LIMIT})
+                                     "reasoning": reason})
 
 
 def silent_signal(pcm_samples: int) -> tuple[Signal, dict]:

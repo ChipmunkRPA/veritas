@@ -306,6 +306,7 @@ def test_native_bandwidth_evidence_matches_source_and_pdf(audio_fixture, expecte
     result = {**original.result, **result}
     result_hash = store.put_bytes(canonical_json(result)).sha256
     analysis.result_hash = result_hash
+    monkeypatch.setattr(settings, "audio_tonal_phase_review", False)
     monkeypatch.setattr(settings, "audio_bandwidth_return_review", False)
     with db.begin_nested() as transaction:
         baseline = build_packet_set(db, analysis, store, result)
@@ -355,6 +356,7 @@ def test_native_bandwidth_excludes_unqualified_duration_and_bit_depth(audio_fixt
     from app.core.config import settings
 
     db, store, analysis, result, _, _ = audio_fixture
+    monkeypatch.setattr(settings, "audio_tonal_phase_review", False)
     monkeypatch.setattr(settings, "audio_bandwidth_return_review", True)
     document = build_packet_set(db, analysis, store, result)
     assert document["acoustic_context"]["schema"] == "chipmunk.acoustic-context/5"

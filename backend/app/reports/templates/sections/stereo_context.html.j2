@@ -7,7 +7,12 @@
 {% elif stereo.status == 'too_short' %}<p>The stereo input has less than one complete second of decoded audio.</p>
 {% elif stereo.status == 'unavailable' %}<p>The stereo measurements could not be aligned to the recorded source clock.</p>
 {% else %}
-<p>Compared {{ stereo.windows | length }} complete one-second windows in the first {{ stereo.max_seconds }} seconds {% if has_downmix %}using the decoded stereo channels and the analyzed mono mix{% else %}before mono mixing{% endif %}. Stereo placement, mixing and microphone position can all affect these readings. They do not contribute to the AI assessment.</p>
+{% set limit = evidence.mono_voice_coverage_limit %}
+<p>Compared {{ stereo.windows | length }} complete one-second windows in the first {{ stereo.max_seconds }} seconds {% if has_downmix %}using the decoded stereo channels and the analyzed mono mix{% else %}before mono mixing{% endif %}. Stereo placement, mixing and microphone position can all affect these readings. {% if limit %}The channel measurements describe what was available for the voice check.{% else %}They do not contribute to the AI assessment.{% endif %}</p>
+{% if limit %}
+<p>{{ limit.reason }} Affected decoded audio {% for index in limit.stereo_window_indices[:3] %}{% set row = stereo.windows[index] %}{{ '%.3f' | format(row.start_sample / stereo.sample_rate) }}–{{ '%.3f' | format(row.end_sample / stereo.sample_rate) }} s{% if not loop.last %}, {% endif %}{% endfor %}{% if limit.stereo_window_indices | length > 3 %}, with more in the table{% endif %}.</p>
+<p class="caption">JSON pointer <span class="mono">/coverage/mono_voice_coverage_limit</span>.</p>
+{% endif %}
 {% if stereo.status == 'quiet' %}<p>All measured windows fell below the {{ stereo.quiet_floor_dbfs }} dBFS review floor.</p>{% endif %}
 {% if stereo.channel_silence is defined %}
 {% set silence = stereo.channel_silence %}

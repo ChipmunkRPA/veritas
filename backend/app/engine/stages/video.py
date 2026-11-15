@@ -102,6 +102,7 @@ from app.evidence.audio_binding import (
     exclude_recording_voice,
     limit_voice_screening,
     source_clock_breaks,
+    voice_input_limit,
 )
 from app.evidence.face_boundary_binding import is_paired
 from app.evidence.face_boundary_binding import source_inputs as face_boundary_source_inputs
@@ -647,7 +648,7 @@ def synthesis_signals(ctx: StageContext, first: int) -> list[dict[str, Any]]:
     manifest = getattr(ctx.state.get("registry"), "manifest", None)
     exhibits = common.stage_exhibit_list(ctx, ("detect",))
     decoded = ctx.outputs.get("decode") or {}
-    clock_limited = bool((decoded.get("audio") or decoded).get("source_clock_break_count"))
+    input_limit = voice_input_limit(decoded.get("audio") or decoded)
     out: list[dict[str, Any]] = []
     for entry in (ctx.outputs.get("detect") or {}).get("detectors", []):
         aggregate = entry["aggregate"]
@@ -657,9 +658,9 @@ def synthesis_signals(ctx: StageContext, first: int) -> list[dict[str, Any]]:
         sid = common.signal_id(entry["detector_id"], aggregate)
         details = entry.get("details") or {}
         screening = details.get("audio_screening") or {}
-        limit_screening = clock_limited and entry["detector_id"] in AUDIO_INSPECTION_DETECTORS and bool(screening)
+        limit_screening = input_limit and entry["detector_id"] in AUDIO_INSPECTION_DETECTORS and bool(screening)
         if limit_screening:
-            screening = limit_voice_screening(screening)
+            screening = limit_voice_screening(screening, reason=input_limit)
             details = {**details, "audio_screening": screening}
         out.append(SignalV2.model_validate({
             "id": sid, "display_id": f"S{first + len(out):02d}", "detector_id": entry["detector_id"],
@@ -670,7 +671,7 @@ def synthesis_signals(ctx: StageContext, first: int) -> list[dict[str, Any]]:
             "lane": card.lane if card is not None else None, "threat": list(card.threat) if card is not None else [],
             "fp_modes": card_copy.client_modes(card.fp_modes) if card is not None else [], "raw_score": aggregate["raw"],
             "raw_kind": aggregate["raw_kind"], "effective_weight": 0.0, "observed": entry["observed"],
-            "reference": entry["reference"], "reasoning": VOICE_CLOCK_LIMIT if limit_screening else entry["reasoning"],
+            "reference": entry["reference"], "reasoning": input_limit if limit_screening else entry["reasoning"],
             "metrics": entry["metrics"], "details": details, "calibrated_probability": screening.get("probability_ai"),
             "calibration_ref": screening.get("calibration_sha256"),
             "exhibit_ids": [x["id"] for x in exhibits if sid in (x.get("source_signal_ids") or [])],

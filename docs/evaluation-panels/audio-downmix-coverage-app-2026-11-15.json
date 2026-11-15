@@ -1,0 +1,732 @@
+{
+  "after": {
+    "before": false,
+    "jobs_before_payment": 0,
+    "plan_sha256": "82bb132eb0a875e286fd428a75bd6452552c88136a5566c65e381e641b9c0d02",
+    "price_usd_cents": 999,
+    "rows": [
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "fcbe471dd489e5f0948dbc3af9e7860215e6b8892980f2f4734f3ba13fd879bd",
+        "case": "mono",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.063981,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "03c6d1992e71fdf882762ab89b8a2104c4e2405ccde78064971a9a851cb14ba1",
+        "file_sha256": "c0c9bb30c064fbe11065f076d1df21117f2d2cfa6a1198d27d19156ccd8c142e",
+        "group": 64,
+        "replacement_pcm_sha256": "b1cfe93730c50e781e1a51915d62b989ff0fcc7e17810e193f29517568741cbe",
+        "replacement_sample_start": 28000,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "fcbe471dd489e5f0948dbc3af9e7860215e6b8892980f2f4734f3ba13fd879bd",
+        "case": "equal_channels",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.063981,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "03c6d1992e71fdf882762ab89b8a2104c4e2405ccde78064971a9a851cb14ba1",
+        "file_sha256": "7a809c2684f19215ef831c67cbfef0837a29d5c68c9830d9d2dd3404045edf86",
+        "group": 64,
+        "replacement_pcm_sha256": "b1cfe93730c50e781e1a51915d62b989ff0fcc7e17810e193f29517568741cbe",
+        "replacement_sample_start": 28000,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "fcbe471dd489e5f0948dbc3af9e7860215e6b8892980f2f4734f3ba13fd879bd",
+        "case": "single_channel",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.063981,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "03c6d1992e71fdf882762ab89b8a2104c4e2405ccde78064971a9a851cb14ba1",
+        "file_sha256": "1cebd287be6514fe9800d324fefd998358c8f071489fa0844346747a6105c7c7",
+        "group": 64,
+        "replacement_pcm_sha256": "b1cfe93730c50e781e1a51915d62b989ff0fcc7e17810e193f29517568741cbe",
+        "replacement_sample_start": 28000,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [
+          {
+            "correlation": -0.982278,
+            "downmix": {
+              "attenuation_db": 20.557,
+              "mono_rms_dbfs": -42.7,
+              "strong_attenuation": true
+            },
+            "end_sample": 32000,
+            "left_rms_dbfs": -22.143,
+            "level_gap_db": 0.031,
+            "louder_channel": null,
+            "right_rms_dbfs": -22.174,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "start_sample": 16000,
+            "status": "measured"
+          }
+        ],
+        "carrier_pcm_sha256": "fcbe471dd489e5f0948dbc3af9e7860215e6b8892980f2f4734f3ba13fd879bd",
+        "case": "cancellation",
+        "decision": {
+          "code": "inconclusive",
+          "probability_ai_calibrated": null,
+          "reason": "The stereo channels cancel some sound in the mono input. A recording-wide voice estimate is unavailable."
+        },
+        "decoded_pcm_sha256": "03c6d1992e71fdf882762ab89b8a2104c4e2405ccde78064971a9a851cb14ba1",
+        "file_sha256": "6f6354654ca74e1124a45d282e09e45d284ed395ee9779e09bfd007e6b6a42f0",
+        "group": 64,
+        "replacement_pcm_sha256": "b1cfe93730c50e781e1a51915d62b989ff0fcc7e17810e193f29517568741cbe",
+        "replacement_sample_start": 28000,
+        "report_checked": true
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "6aaac9b115aef99ab37974b2a8a97661251ae004afd690d226f9576ff5c63ffe",
+        "case": "mono",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.062483,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "b0b50243a721454660be145cb84b058e94a5bf5ba80c2a80bf4ecbb42bbabf4b",
+        "file_sha256": "88f2ee7bf8f40a8945c2f59b2ba55f2657fb9929433597b0aaead253cad125c9",
+        "group": 72,
+        "replacement_pcm_sha256": "6e3af579704626aae0a207e77d11324a70d948315ecae49ad53fb74ca4bc6756",
+        "replacement_sample_start": 11600,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "6aaac9b115aef99ab37974b2a8a97661251ae004afd690d226f9576ff5c63ffe",
+        "case": "equal_channels",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.062483,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "b0b50243a721454660be145cb84b058e94a5bf5ba80c2a80bf4ecbb42bbabf4b",
+        "file_sha256": "cc06d85e2be6a163b06da7d685188a0ebb1b28ea0c85daa91e9c5efb938d5a8c",
+        "group": 72,
+        "replacement_pcm_sha256": "6e3af579704626aae0a207e77d11324a70d948315ecae49ad53fb74ca4bc6756",
+        "replacement_sample_start": 11600,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "6aaac9b115aef99ab37974b2a8a97661251ae004afd690d226f9576ff5c63ffe",
+        "case": "single_channel",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.062483,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "b0b50243a721454660be145cb84b058e94a5bf5ba80c2a80bf4ecbb42bbabf4b",
+        "file_sha256": "6cbe78b4f8e797253b38c8cf7b13cd9562f7931b0ca71815025675c1f1913f83",
+        "group": 72,
+        "replacement_pcm_sha256": "6e3af579704626aae0a207e77d11324a70d948315ecae49ad53fb74ca4bc6756",
+        "replacement_sample_start": 11600,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [
+          {
+            "correlation": -0.910446,
+            "downmix": {
+              "attenuation_db": 13.393,
+              "mono_rms_dbfs": -43.024,
+              "strong_attenuation": true
+            },
+            "end_sample": 32000,
+            "left_rms_dbfs": -29.631,
+            "level_gap_db": 0.026,
+            "louder_channel": null,
+            "right_rms_dbfs": -29.657,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "start_sample": 16000,
+            "status": "measured"
+          }
+        ],
+        "carrier_pcm_sha256": "6aaac9b115aef99ab37974b2a8a97661251ae004afd690d226f9576ff5c63ffe",
+        "case": "cancellation",
+        "decision": {
+          "code": "inconclusive",
+          "probability_ai_calibrated": null,
+          "reason": "The stereo channels cancel some sound in the mono input. A recording-wide voice estimate is unavailable."
+        },
+        "decoded_pcm_sha256": "b0b50243a721454660be145cb84b058e94a5bf5ba80c2a80bf4ecbb42bbabf4b",
+        "file_sha256": "f9c8523839aeae0c13ff84df118268d66643f900f5e144a6de473819d03989ce",
+        "group": 72,
+        "replacement_pcm_sha256": "6e3af579704626aae0a207e77d11324a70d948315ecae49ad53fb74ca4bc6756",
+        "replacement_sample_start": 11600,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "234b8bc3c6e251229c248b5a78ad260180a586763194375c65fb1389fd1474e0",
+        "case": "mono",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.062565,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "d8d247757f26429ca047adaa5b635347911f627a92039d85f4bed554b7fc51b8",
+        "file_sha256": "b0ddbbc46ae79af459d3a0f9e7985fbbf9c94752dc3b0ba1e639113aed478f23",
+        "group": 80,
+        "replacement_pcm_sha256": "d8810ed620f82b3b820288ba3323f8e28d1337da2fdb91ec7f6ca5c431bf37a9",
+        "replacement_sample_start": 55520,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "234b8bc3c6e251229c248b5a78ad260180a586763194375c65fb1389fd1474e0",
+        "case": "equal_channels",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.062565,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "d8d247757f26429ca047adaa5b635347911f627a92039d85f4bed554b7fc51b8",
+        "file_sha256": "1892826c8564532bfde383b808e940924d36d9e8290a0b76aa657f0fe17b2a06",
+        "group": 80,
+        "replacement_pcm_sha256": "d8810ed620f82b3b820288ba3323f8e28d1337da2fdb91ec7f6ca5c431bf37a9",
+        "replacement_sample_start": 55520,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "234b8bc3c6e251229c248b5a78ad260180a586763194375c65fb1389fd1474e0",
+        "case": "single_channel",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.062565,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "d8d247757f26429ca047adaa5b635347911f627a92039d85f4bed554b7fc51b8",
+        "file_sha256": "237fe3901a64197e0d45c54f81eb86d7264b0eec4fb1c9cd5200d2470d4356ea",
+        "group": 80,
+        "replacement_pcm_sha256": "d8810ed620f82b3b820288ba3323f8e28d1337da2fdb91ec7f6ca5c431bf37a9",
+        "replacement_sample_start": 55520,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [
+          {
+            "correlation": -0.9915,
+            "downmix": {
+              "attenuation_db": 23.717,
+              "mono_rms_dbfs": -47.915,
+              "strong_attenuation": true
+            },
+            "end_sample": 32000,
+            "left_rms_dbfs": -24.198,
+            "level_gap_db": 0.001,
+            "louder_channel": null,
+            "right_rms_dbfs": -24.199,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "start_sample": 16000,
+            "status": "measured"
+          }
+        ],
+        "carrier_pcm_sha256": "234b8bc3c6e251229c248b5a78ad260180a586763194375c65fb1389fd1474e0",
+        "case": "cancellation",
+        "decision": {
+          "code": "inconclusive",
+          "probability_ai_calibrated": null,
+          "reason": "The stereo channels cancel some sound in the mono input. A recording-wide voice estimate is unavailable."
+        },
+        "decoded_pcm_sha256": "d8d247757f26429ca047adaa5b635347911f627a92039d85f4bed554b7fc51b8",
+        "file_sha256": "93ac0aab076f491e354563dd703520fac89a34577c870f2052cc4d5b29c92758",
+        "group": 80,
+        "replacement_pcm_sha256": "d8810ed620f82b3b820288ba3323f8e28d1337da2fdb91ec7f6ca5c431bf37a9",
+        "replacement_sample_start": 55520,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "57e924072c365ebfce0a1de1c75aae77b6c0b4e1a90bb99c11f2bd2efb304032",
+        "case": "mono",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.068429,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "cccc7888e7308801963035b93742b887075d1f9f74d4b35348c6352414daf6d0",
+        "file_sha256": "539dcb0d48d082cf50753f0ed9a24e9033b20541b4a32f7d45cd24a781668fd7",
+        "group": 65,
+        "replacement_pcm_sha256": "3c31b40d33e780b368e6400064a723d90d250d931f037084d44fc53a0cdc023e",
+        "replacement_sample_start": 64720,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "57e924072c365ebfce0a1de1c75aae77b6c0b4e1a90bb99c11f2bd2efb304032",
+        "case": "equal_channels",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.068429,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "cccc7888e7308801963035b93742b887075d1f9f74d4b35348c6352414daf6d0",
+        "file_sha256": "63ef5c28aed1ac6f7f14cc5e811c94845dd0e07814a9125f3c82e152581bb415",
+        "group": 65,
+        "replacement_pcm_sha256": "3c31b40d33e780b368e6400064a723d90d250d931f037084d44fc53a0cdc023e",
+        "replacement_sample_start": 64720,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "57e924072c365ebfce0a1de1c75aae77b6c0b4e1a90bb99c11f2bd2efb304032",
+        "case": "single_channel",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.068429,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "cccc7888e7308801963035b93742b887075d1f9f74d4b35348c6352414daf6d0",
+        "file_sha256": "994f0c1601228b37aa7fe9bd41314c07e367022a1578139343b385d204a3ecae",
+        "group": 65,
+        "replacement_pcm_sha256": "3c31b40d33e780b368e6400064a723d90d250d931f037084d44fc53a0cdc023e",
+        "replacement_sample_start": 64720,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [
+          {
+            "correlation": -0.973926,
+            "downmix": {
+              "attenuation_db": 18.849,
+              "mono_rms_dbfs": -46.255,
+              "strong_attenuation": true
+            },
+            "end_sample": 32000,
+            "left_rms_dbfs": -27.408,
+            "level_gap_db": 0.002,
+            "louder_channel": null,
+            "right_rms_dbfs": -27.406,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "start_sample": 16000,
+            "status": "measured"
+          }
+        ],
+        "carrier_pcm_sha256": "57e924072c365ebfce0a1de1c75aae77b6c0b4e1a90bb99c11f2bd2efb304032",
+        "case": "cancellation",
+        "decision": {
+          "code": "inconclusive",
+          "probability_ai_calibrated": null,
+          "reason": "The stereo channels cancel some sound in the mono input. A recording-wide voice estimate is unavailable."
+        },
+        "decoded_pcm_sha256": "cccc7888e7308801963035b93742b887075d1f9f74d4b35348c6352414daf6d0",
+        "file_sha256": "fc25a30bc7fa553d8d645c52cef4e8bbf8f36d0e191176be27b0fceea8e80905",
+        "group": 65,
+        "replacement_pcm_sha256": "3c31b40d33e780b368e6400064a723d90d250d931f037084d44fc53a0cdc023e",
+        "replacement_sample_start": 64720,
+        "report_checked": false
+      }
+    ],
+    "schema": "chipmunk.audio-downmix-coverage/1"
+  },
+  "before": {
+    "before": true,
+    "jobs_before_payment": 0,
+    "plan_sha256": "82bb132eb0a875e286fd428a75bd6452552c88136a5566c65e381e641b9c0d02",
+    "price_usd_cents": 999,
+    "rows": [
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "fcbe471dd489e5f0948dbc3af9e7860215e6b8892980f2f4734f3ba13fd879bd",
+        "case": "mono",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.063981,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "03c6d1992e71fdf882762ab89b8a2104c4e2405ccde78064971a9a851cb14ba1",
+        "file_sha256": "c0c9bb30c064fbe11065f076d1df21117f2d2cfa6a1198d27d19156ccd8c142e",
+        "group": 64,
+        "replacement_pcm_sha256": "b1cfe93730c50e781e1a51915d62b989ff0fcc7e17810e193f29517568741cbe",
+        "replacement_sample_start": 28000,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "fcbe471dd489e5f0948dbc3af9e7860215e6b8892980f2f4734f3ba13fd879bd",
+        "case": "equal_channels",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.063981,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "03c6d1992e71fdf882762ab89b8a2104c4e2405ccde78064971a9a851cb14ba1",
+        "file_sha256": "7a809c2684f19215ef831c67cbfef0837a29d5c68c9830d9d2dd3404045edf86",
+        "group": 64,
+        "replacement_pcm_sha256": "b1cfe93730c50e781e1a51915d62b989ff0fcc7e17810e193f29517568741cbe",
+        "replacement_sample_start": 28000,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "fcbe471dd489e5f0948dbc3af9e7860215e6b8892980f2f4734f3ba13fd879bd",
+        "case": "single_channel",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.063981,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "03c6d1992e71fdf882762ab89b8a2104c4e2405ccde78064971a9a851cb14ba1",
+        "file_sha256": "1cebd287be6514fe9800d324fefd998358c8f071489fa0844346747a6105c7c7",
+        "group": 64,
+        "replacement_pcm_sha256": "b1cfe93730c50e781e1a51915d62b989ff0fcc7e17810e193f29517568741cbe",
+        "replacement_sample_start": 28000,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [
+          {
+            "correlation": -0.982278,
+            "downmix": {
+              "attenuation_db": 20.557,
+              "mono_rms_dbfs": -42.7,
+              "strong_attenuation": true
+            },
+            "end_sample": 32000,
+            "left_rms_dbfs": -22.143,
+            "level_gap_db": 0.031,
+            "louder_channel": null,
+            "right_rms_dbfs": -22.174,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "start_sample": 16000,
+            "status": "measured"
+          }
+        ],
+        "carrier_pcm_sha256": "fcbe471dd489e5f0948dbc3af9e7860215e6b8892980f2f4734f3ba13fd879bd",
+        "case": "cancellation",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.063981,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "03c6d1992e71fdf882762ab89b8a2104c4e2405ccde78064971a9a851cb14ba1",
+        "file_sha256": "6f6354654ca74e1124a45d282e09e45d284ed395ee9779e09bfd007e6b6a42f0",
+        "group": 64,
+        "replacement_pcm_sha256": "b1cfe93730c50e781e1a51915d62b989ff0fcc7e17810e193f29517568741cbe",
+        "replacement_sample_start": 28000,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "6aaac9b115aef99ab37974b2a8a97661251ae004afd690d226f9576ff5c63ffe",
+        "case": "mono",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.062483,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "b0b50243a721454660be145cb84b058e94a5bf5ba80c2a80bf4ecbb42bbabf4b",
+        "file_sha256": "88f2ee7bf8f40a8945c2f59b2ba55f2657fb9929433597b0aaead253cad125c9",
+        "group": 72,
+        "replacement_pcm_sha256": "6e3af579704626aae0a207e77d11324a70d948315ecae49ad53fb74ca4bc6756",
+        "replacement_sample_start": 11600,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "6aaac9b115aef99ab37974b2a8a97661251ae004afd690d226f9576ff5c63ffe",
+        "case": "equal_channels",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.062483,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "b0b50243a721454660be145cb84b058e94a5bf5ba80c2a80bf4ecbb42bbabf4b",
+        "file_sha256": "cc06d85e2be6a163b06da7d685188a0ebb1b28ea0c85daa91e9c5efb938d5a8c",
+        "group": 72,
+        "replacement_pcm_sha256": "6e3af579704626aae0a207e77d11324a70d948315ecae49ad53fb74ca4bc6756",
+        "replacement_sample_start": 11600,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "6aaac9b115aef99ab37974b2a8a97661251ae004afd690d226f9576ff5c63ffe",
+        "case": "single_channel",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.062483,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "b0b50243a721454660be145cb84b058e94a5bf5ba80c2a80bf4ecbb42bbabf4b",
+        "file_sha256": "6cbe78b4f8e797253b38c8cf7b13cd9562f7931b0ca71815025675c1f1913f83",
+        "group": 72,
+        "replacement_pcm_sha256": "6e3af579704626aae0a207e77d11324a70d948315ecae49ad53fb74ca4bc6756",
+        "replacement_sample_start": 11600,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [
+          {
+            "correlation": -0.910446,
+            "downmix": {
+              "attenuation_db": 13.393,
+              "mono_rms_dbfs": -43.024,
+              "strong_attenuation": true
+            },
+            "end_sample": 32000,
+            "left_rms_dbfs": -29.631,
+            "level_gap_db": 0.026,
+            "louder_channel": null,
+            "right_rms_dbfs": -29.657,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "start_sample": 16000,
+            "status": "measured"
+          }
+        ],
+        "carrier_pcm_sha256": "6aaac9b115aef99ab37974b2a8a97661251ae004afd690d226f9576ff5c63ffe",
+        "case": "cancellation",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.062483,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "b0b50243a721454660be145cb84b058e94a5bf5ba80c2a80bf4ecbb42bbabf4b",
+        "file_sha256": "f9c8523839aeae0c13ff84df118268d66643f900f5e144a6de473819d03989ce",
+        "group": 72,
+        "replacement_pcm_sha256": "6e3af579704626aae0a207e77d11324a70d948315ecae49ad53fb74ca4bc6756",
+        "replacement_sample_start": 11600,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "234b8bc3c6e251229c248b5a78ad260180a586763194375c65fb1389fd1474e0",
+        "case": "mono",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.062565,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "d8d247757f26429ca047adaa5b635347911f627a92039d85f4bed554b7fc51b8",
+        "file_sha256": "b0ddbbc46ae79af459d3a0f9e7985fbbf9c94752dc3b0ba1e639113aed478f23",
+        "group": 80,
+        "replacement_pcm_sha256": "d8810ed620f82b3b820288ba3323f8e28d1337da2fdb91ec7f6ca5c431bf37a9",
+        "replacement_sample_start": 55520,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "234b8bc3c6e251229c248b5a78ad260180a586763194375c65fb1389fd1474e0",
+        "case": "equal_channels",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.062565,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "d8d247757f26429ca047adaa5b635347911f627a92039d85f4bed554b7fc51b8",
+        "file_sha256": "1892826c8564532bfde383b808e940924d36d9e8290a0b76aa657f0fe17b2a06",
+        "group": 80,
+        "replacement_pcm_sha256": "d8810ed620f82b3b820288ba3323f8e28d1337da2fdb91ec7f6ca5c431bf37a9",
+        "replacement_sample_start": 55520,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "234b8bc3c6e251229c248b5a78ad260180a586763194375c65fb1389fd1474e0",
+        "case": "single_channel",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.062565,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "d8d247757f26429ca047adaa5b635347911f627a92039d85f4bed554b7fc51b8",
+        "file_sha256": "237fe3901a64197e0d45c54f81eb86d7264b0eec4fb1c9cd5200d2470d4356ea",
+        "group": 80,
+        "replacement_pcm_sha256": "d8810ed620f82b3b820288ba3323f8e28d1337da2fdb91ec7f6ca5c431bf37a9",
+        "replacement_sample_start": 55520,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [
+          {
+            "correlation": -0.9915,
+            "downmix": {
+              "attenuation_db": 23.717,
+              "mono_rms_dbfs": -47.915,
+              "strong_attenuation": true
+            },
+            "end_sample": 32000,
+            "left_rms_dbfs": -24.198,
+            "level_gap_db": 0.001,
+            "louder_channel": null,
+            "right_rms_dbfs": -24.199,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "start_sample": 16000,
+            "status": "measured"
+          }
+        ],
+        "carrier_pcm_sha256": "234b8bc3c6e251229c248b5a78ad260180a586763194375c65fb1389fd1474e0",
+        "case": "cancellation",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.062565,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "d8d247757f26429ca047adaa5b635347911f627a92039d85f4bed554b7fc51b8",
+        "file_sha256": "93ac0aab076f491e354563dd703520fac89a34577c870f2052cc4d5b29c92758",
+        "group": 80,
+        "replacement_pcm_sha256": "d8810ed620f82b3b820288ba3323f8e28d1337da2fdb91ec7f6ca5c431bf37a9",
+        "replacement_sample_start": 55520,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "57e924072c365ebfce0a1de1c75aae77b6c0b4e1a90bb99c11f2bd2efb304032",
+        "case": "mono",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.068429,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "cccc7888e7308801963035b93742b887075d1f9f74d4b35348c6352414daf6d0",
+        "file_sha256": "539dcb0d48d082cf50753f0ed9a24e9033b20541b4a32f7d45cd24a781668fd7",
+        "group": 65,
+        "replacement_pcm_sha256": "3c31b40d33e780b368e6400064a723d90d250d931f037084d44fc53a0cdc023e",
+        "replacement_sample_start": 64720,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "57e924072c365ebfce0a1de1c75aae77b6c0b4e1a90bb99c11f2bd2efb304032",
+        "case": "equal_channels",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.068429,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "cccc7888e7308801963035b93742b887075d1f9f74d4b35348c6352414daf6d0",
+        "file_sha256": "63ef5c28aed1ac6f7f14cc5e811c94845dd0e07814a9125f3c82e152581bb415",
+        "group": 65,
+        "replacement_pcm_sha256": "3c31b40d33e780b368e6400064a723d90d250d931f037084d44fc53a0cdc023e",
+        "replacement_sample_start": 64720,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [],
+        "carrier_pcm_sha256": "57e924072c365ebfce0a1de1c75aae77b6c0b4e1a90bb99c11f2bd2efb304032",
+        "case": "single_channel",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.068429,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "cccc7888e7308801963035b93742b887075d1f9f74d4b35348c6352414daf6d0",
+        "file_sha256": "994f0c1601228b37aa7fe9bd41314c07e367022a1578139343b385d204a3ecae",
+        "group": 65,
+        "replacement_pcm_sha256": "3c31b40d33e780b368e6400064a723d90d250d931f037084d44fc53a0cdc023e",
+        "replacement_sample_start": 64720,
+        "report_checked": false
+      },
+      {
+        "attenuated_windows": [
+          {
+            "correlation": -0.973926,
+            "downmix": {
+              "attenuation_db": 18.849,
+              "mono_rms_dbfs": -46.255,
+              "strong_attenuation": true
+            },
+            "end_sample": 32000,
+            "left_rms_dbfs": -27.408,
+            "level_gap_db": 0.002,
+            "louder_channel": null,
+            "right_rms_dbfs": -27.406,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "start_sample": 16000,
+            "status": "measured"
+          }
+        ],
+        "carrier_pcm_sha256": "57e924072c365ebfce0a1de1c75aae77b6c0b4e1a90bb99c11f2bd2efb304032",
+        "case": "cancellation",
+        "decision": {
+          "code": "no_ai_indicators",
+          "probability_ai_calibrated": 0.068429,
+          "reason": "Leaning towards original speech."
+        },
+        "decoded_pcm_sha256": "cccc7888e7308801963035b93742b887075d1f9f74d4b35348c6352414daf6d0",
+        "file_sha256": "fc25a30bc7fa553d8d645c52cef4e8bbf8f36d0e191176be27b0fceea8e80905",
+        "group": 65,
+        "replacement_pcm_sha256": "3c31b40d33e780b368e6400064a723d90d250d931f037084d44fc53a0cdc023e",
+        "replacement_sample_start": 64720,
+        "report_checked": false
+      }
+    ]
+  },
+  "schema": "chipmunk.audio-downmix-coverage/1"
+}

@@ -19,10 +19,16 @@ JPEG_OFFGRID_VERSION = "image-evidence-18"
 JPEG_OFFGRID_AFFINE_VERSION = "image-evidence-19"
 SMALL_PNG_COPY_VERSION = "image-evidence-20"
 SMALL_PNG_COPY_AFFINE_VERSION = "image-evidence-21"
-SMALL_PNG_VERSIONS = frozenset({SMALL_PNG_COPY_VERSION, SMALL_PNG_COPY_AFFINE_VERSION})
+TURNED_PNG_COPY_VERSION = "image-evidence-22"
+TURNED_PNG_COPY_AFFINE_VERSION = "image-evidence-23"
+TURNED_PNG_VERSIONS = frozenset({TURNED_PNG_COPY_VERSION, TURNED_PNG_COPY_AFFINE_VERSION})
+SMALL_PNG_VERSIONS = TURNED_PNG_VERSIONS | {SMALL_PNG_COPY_VERSION, SMALL_PNG_COPY_AFFINE_VERSION}
 SMALL_PNG_MIN_SIDE, SMALL_PNG_MAX_SIDE = 384, 768
 SMALL_PNG_CROP_MIN, SMALL_PNG_CROP_MAX = 16, 56
 SMALL_PNG_BASIS = "png_exact_small_copy"
+TURNED_PNG_BASIS = "png_exact_turned_copy"
+PNG_COPY_TRANSFORMS = {0: "same_orientation", 1: "rotate_90_ccw", 2: "rotate_180"}
+PNG_COPY_TURNS = {transform: turns for turns, transform in PNG_COPY_TRANSFORMS.items()}
 SMALL_PNG_STATUS_TEXT = {
     "supported_pair": "Every RGB pixel in the two crops matches exactly. Pixels outside the crops differ on at least three sides.",
     "no_pair": "The small-copy check found no qualifying exact pair.",
@@ -34,8 +40,9 @@ SMALL_PNG_STATUS_TEXT = {
 JPEG_OFFGRID_VERSIONS = frozenset({JPEG_OFFGRID_VERSION, JPEG_OFFGRID_AFFINE_VERSION})
 JPEG_BLOCK_VERSIONS = JPEG_OFFGRID_VERSIONS | {JPEG_BLOCK_VERSION, JPEG_BLOCK_AFFINE_VERSION}
 VERSION = V12
-AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_AFFINE_VERSION, SMALL_PNG_COPY_AFFINE_VERSION})
-CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12, JPEG_BLOCK_VERSION, JPEG_OFFGRID_VERSION, SMALL_PNG_COPY_VERSION}
+AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_AFFINE_VERSION,
+                             SMALL_PNG_COPY_AFFINE_VERSION, TURNED_PNG_COPY_AFFINE_VERSION})
+CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12, JPEG_BLOCK_VERSION, JPEG_OFFGRID_VERSION} | SMALL_PNG_VERSIONS
 TRANSLATION_VERSIONS = CREDENTIAL_VERSIONS | {V10, V11}
 BASIS_VERSIONS = CREDENTIAL_VERSIONS | {V11}
 REFLECTION_VERSIONS = frozenset({V7, V8, V9}) | TRANSLATION_VERSIONS
@@ -321,7 +328,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         if offgrid_pair:
             expected = (OFFGRID_BASIS,)
         if small_png_pair:
-            expected = (SMALL_PNG_BASIS,)
+            expected = ((SMALL_PNG_BASIS, TURNED_PNG_BASIS) if document["version"] in TURNED_PNG_VERSIONS
+                        else (SMALL_PNG_BASIS,))
         if basis not in expected:
             raise ValueError("Copy similarity has an invalid matching basis")
     jpeg_pair = has_jpeg_review and record["jpeg_block_review"] == "supported_pair"
@@ -333,11 +341,14 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
                 or jpeg_pair and not pairs):
             raise ValueError("JPEG block coverage differs from the completed copy check")
     for index, pair in enumerate(pairs, 1):
+        turned = record.get("basis") == TURNED_PNG_BASIS
+        transforms = (("horizontal_reflection",) if reflected else
+                      (PNG_COPY_TRANSFORMS[1], PNG_COPY_TRANSFORMS[2]) if turned else ("same_orientation",))
         if (
             not isinstance(pair, dict)
             or set(pair) != {"id", "transform", "regions", "artifacts"}
             or pair["id"] != f"{'R' if reflected else 'T'}{index:02d}"
-            or pair["transform"] != ("horizontal_reflection" if reflected else "same_orientation")
+            or pair["transform"] not in transforms
             or not isinstance(pair["regions"], dict)
             or not isinstance(pair["artifacts"], dict)
             or set(pair["regions"]) != set(ROLES)
@@ -360,12 +371,14 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         ax, ay, aw, ah = boxes[0]
         bx, by, bw, bh = boxes[1]
         overlaps = ax < bx + bw and bx < ax + aw and ay < by + bh and by < ay + ah
-        equal_size = reflected or offgrid_pair or small_png_pair or record.get("basis") in {"native_patch_alignment", JPEG_BLOCK_BASIS}
-        if overlaps or (equal_size and (aw, ah) != (bw, bh)):
+        equal_size = (reflected or offgrid_pair or small_png_pair
+                      or record.get("basis") in {"native_patch_alignment", JPEG_BLOCK_BASIS})
+        aligned_size = (bh, bw) if turned and pair["transform"] == PNG_COPY_TRANSFORMS[1] else (bw, bh)
+        if overlaps or (equal_size and (aw, ah) != aligned_size):
             raise ValueError("The paired areas must be separate and aligned areas must share a native size")
         if small_png_pair and (not SMALL_PNG_CROP_MIN <= min(aw, ah) <= max(aw, ah) <= SMALL_PNG_CROP_MAX
                                or record["small_png_copy_review"]["measurement"]["matching_pixels"] != aw * ah
-                               or pair["artifacts"]["area_a"]["sha256"] != pair["artifacts"]["area_b"]["sha256"]):
+                               or (not turned and pair["artifacts"]["area_a"]["sha256"] != pair["artifacts"]["area_b"]["sha256"])):
             raise ValueError("Small PNG copy pair differs from its exact crop geometry or pixels")
         if jpeg_pair and (any(value % 8 for box in boxes for value in box) or not 24 <= min(aw, ah) <= max(aw, ah) <= 128):
             raise ValueError("JPEG copy areas do not follow the supported encoded block grid")

@@ -1,0 +1,58 @@
+{
+  "cases": {
+    "half_36x28": {
+      "native_crops_verified_in_pdf": 2,
+      "pdf_sha256": "dcba01585a52d0309341ef77cee39bc12d1c118430f0a7ab5d799f1f443e0fc3",
+      "regions": {
+        "area_a": {
+          "h": 28,
+          "w": 36,
+          "x": 54,
+          "y": 43
+        },
+        "area_b": {
+          "h": 28,
+          "w": 36,
+          "x": 485,
+          "y": 315
+        }
+      },
+      "signed_source_verified": true,
+      "source_group": 1,
+      "source_sha256": "7e6d4df3123257d8a62f83a57f254f8af85cf7e183d2a26268a794aab2c741eb",
+      "status": "supported_pair",
+      "transform": "rotate_180"
+    },
+    "ordinary": {
+      "source_group": 1,
+      "source_sha256": "987b86d44d0d747619ff55d7ebcf11fec5a55c67fd368cc12f1b8686f1df5377",
+      "status": "no_pair"
+    },
+    "quarter_24x28": {
+      "native_crops_verified_in_pdf": 2,
+      "overall_assessment_preserved": true,
+      "pdf_sha256": "809d2c2fcdaf18e098d30ff2293e84a1d49d13f812e6ed33eb7793f984b841ad",
+      "regions": {
+        "area_a": {
+          "h": 28,
+          "w": 24,
+          "x": 54,
+          "y": 43
+        },
+        "area_b": {
+          "h": 24,
+          "w": 28,
+          "x": 493,
+          "y": 319
+        }
+      },
+      "signed_source_verified": true,
+      "source_group": 1,
+      "source_sha256": "1d10189e0728e546c46d9da6dc16cae9a921b252225fbc94df4c14b516871b47",
+      "status": "supported_pair",
+      "transform": "rotate_90_ccw"
+    }
+  },
+  "simulated_paid_analyses": 4,
+  "unpaid_jobs": 0
+}

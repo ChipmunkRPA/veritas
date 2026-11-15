@@ -195,18 +195,26 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const heading = geometric ? 'Geometric copy comparison' : reflected ? 'Same-image copy similarity' : 'Copy similarity without mirroring'
   const sectionId = `image-${field.replace('_', '-')}`
   const baseVersion = set.prior_embedded_pair_evidence?.version ?? set.version
-  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21'].includes(baseVersion)) || (reflected &&
-    ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12', 'image-evidence-13',
-      'image-evidence-14', 'image-evidence-16', 'image-evidence-17', 'image-evidence-18', 'image-evidence-19', 'image-evidence-20', 'image-evidence-21'].includes(baseVersion))
+  const turnedReview = ['image-evidence-22', 'image-evidence-23'].includes(baseVersion)
+  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23'].includes(baseVersion))
+    || (reflected && (turnedReview || ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12',
+      'image-evidence-13', 'image-evidence-14', 'image-evidence-16', 'image-evidence-17', 'image-evidence-18',
+      'image-evidence-19', 'image-evidence-20', 'image-evidence-21'].includes(baseVersion)))
   const basis = field === 'copy_translation' && set.copy_translation?.basis
   const jpegReview = field === 'copy_translation' && set.copy_translation?.jpeg_block_review
   const offgrid = field === 'copy_translation' ? set.copy_translation?.jpeg_offgrid_review : undefined
   const smallPng = field === 'copy_translation' ? set.copy_translation?.small_png_copy_review : undefined
-  const basisText = smallPng ? smallPngCoverageText[smallPng.status] : offgrid ? offgridCoverageText[offgrid.status] : jpegReview ? jpegCoverageText[jpegReview]
-    : basis && basis !== 'png_exact_small_copy' && check.pairs.length > 0 && copyBasisText[basis]
+  const turned = basis === 'png_exact_turned_copy' && set.copy_translation?.pairs[0]?.transform
+  const basisText = smallPng
+    ? turned ? 'After alignment, pixels outside the crops differ on at least three sides.'
+      : turnedReview && smallPng.status === 'no_pair' ? 'The small-copy check found no qualifying exact pair with or without right-angle rotation.'
+        : smallPngCoverageText[smallPng.status]
+    : offgrid ? offgridCoverageText[offgrid.status] : jpegReview ? jpegCoverageText[jpegReview]
+      : basis && basis !== 'png_exact_small_copy' && basis !== 'png_exact_turned_copy' && check.pairs.length > 0 && copyBasisText[basis]
   const proposalSearch = geometric ? set.copy_affine?.proposal_search : undefined
   const statusText = {
-    supported_pair: geometric ? 'Matching detail was found after geometric alignment.'
+    supported_pair: turned ? `Area B matches Area A exactly after rotating it ${turned === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'}.`
+      : geometric ? 'Matching detail was found after geometric alignment.'
       : reflected ? 'Similar areas were found after horizontal reflection.' : 'Similar image detail was found without mirroring.',
     no_pair: geometric ? 'None of the distinct candidates examined had enough shared detail after alignment.'
       : reflected ? 'This check found no qualifying reflected pair.' : 'This check found no qualifying non-mirrored pair.',
@@ -232,7 +240,7 @@ function CopySimilarity({ set, field, token, mediaReady }: {
     {proposalSearch?.basis === 'reduced' && <p className="mt-2 mb-0 text-caption text-text-muted">The candidate search used a {proposalSearch.width} × {proposalSearch.height} pixel working image. The check measured any matching masks on the original pixel grid.</p>}
     {check.pairs.length > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">Coordinates use native pixels in the oriented original.</p>}
     {check.pairs.map(pair => <article key={pair.id} className="mt-4 border-t border-border pt-4">
-      <h4 className="m-0 text-small font-medium text-text">{pair.id} · {geometric ? 'Matched source areas' : reflected ? 'Reflected pair' : 'Non-mirrored pair'}</h4>
+      <h4 className="m-0 text-small font-medium text-text">{pair.id} · {turned ? 'Exact rotated pair' : geometric ? 'Matched source areas' : reflected ? 'Reflected pair' : 'Non-mirrored pair'}</h4>
       <CopyLocations set={set} sourceHash={check.source_sha256} regions={pair.regions} token={token} mediaReady={mediaReady} />
       <div className="mt-3 grid grid-cols-2 gap-4 max-[639px]:grid-cols-1">
         {copyAreas.map((role, index) => {

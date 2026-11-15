@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Exact right-angle image copies](image-exact-turned-copy-2026-11-15.md)
+  localized both source areas in 108/114 staged PNG edits versus 0/114
+  for prior copy-evidence paths. The check added no highlights on the
+  190 held controls. The local app and exports show native crops and
+  the measured alignment. The comparison has zero weight in AI confidence.
+
 - [Reversed moving pictures after lossy compression](video-reverse-motion-2026-11-15.md)
   found useful ranges in 15/16 H.264 and VP9 deliveries versus 0/16 for the
   exact check, with zero matches on 64 controls and 16 variable-clock

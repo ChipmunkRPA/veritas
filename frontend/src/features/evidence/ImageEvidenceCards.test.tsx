@@ -361,6 +361,19 @@ describe('image evidence cards', () => {
     expect(check.getByText(/zero weight in AI authorship confidence/)).toBeTruthy()
   })
 
+  it('explains how the rotated pair aligns and retains links to the untouched crops', () => {
+    show({ ...copyOnly, version: 'image-evidence-22', copy_translation: { ...translated, basis: 'png_exact_turned_copy',
+      pairs: [{ ...translated.pairs[0]!, transform: 'rotate_90_ccw' }],
+      small_png_copy_review: { status: 'supported_pair', measurement: { matching_pixels: 768, different_color_values: 721,
+        perimeter_mean_absolute_difference: [6.74, 40.29, 41.18, 24.47] } } } })
+    const check = within(screen.getByRole('region', { name: 'Copy similarity without mirroring' }))
+    expect(check.getByRole('heading', { name: /Exact rotated pair/ })).toBeTruthy()
+    expect(check.getByText('Area B matches Area A exactly after rotating it 90° counterclockwise.')).toBeTruthy()
+    expect(check.getByText(/Compared 768 RGB pixels in each crop/)).toBeTruthy()
+    expect(check.getByRole('link', { name: 'Area A in the original image' })).toBeTruthy()
+    expect(check.getByRole('link', { name: 'Area B in the original image' })).toBeTruthy()
+  })
+
   it('pairs each geometric comparison mask with the native source crop and exact area link', () => {
     show({ ...copyOnly, version: 'image-evidence-13', copy_affine: geometric })
     const check = within(screen.getByRole('region', { name: 'Geometric copy comparison' }))

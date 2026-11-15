@@ -114,6 +114,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         OFFGRID_STATUS_TEXT,
         SKIPPED_CREDENTIALS,
         SMALL_PNG_STATUS_TEXT,
+        TURNED_PNG_BASIS,
+        TURNED_PNG_VERSIONS,
         status_text,
     )
     from app.evidence.image_packets_v8 import validate_assets
@@ -155,6 +157,12 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         if field == "copy_translation":
             if small_review := check.get("small_png_copy_review"):
                 check["basis_text"] = SMALL_PNG_STATUS_TEXT[small_review["status"]]
+                if check.get("basis") == TURNED_PNG_BASIS:
+                    turns = "90° counterclockwise" if check["pairs"][0]["transform"] == "rotate_90_ccw" else "180°"
+                    check["observation"] = f"Area B matches Area A exactly after rotating it {turns}."
+                    check["basis_text"] = "After alignment, pixels outside the crops differ on at least three sides."
+                elif base_version in TURNED_PNG_VERSIONS and small_review["status"] == "no_pair":
+                    check["basis_text"] = "The small-copy check found no qualifying exact pair with or without right-angle rotation."
                 if measured := small_review["measurement"]:
                     perimeter = ", ".join(f"{value:.2f}" for value in measured["perimeter_mean_absolute_difference"])
                     check["basis_text"] += (f" Compared {measured['matching_pixels']:,} RGB pixels in each crop. "

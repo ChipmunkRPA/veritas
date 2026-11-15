@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+To check [right-angle copies in a single PNG](image-exact-turned-copy-2026-11-15.md),
+recount the native crop positions and control flags using the public
+receipt. The native replay uses 38 pinned Wikimedia photos and also
+recreates the rotated and ordinary deliveries from the retained archive.
+
 The [lossy reversed-motion replay](video-reverse-motion-2026-11-15.md#replay)
 recounts both source ranges and reproduces the endpoint images from encoded
 video. The [ordered lip and speech replay](video-lip-event-alignment-2026-11-15.md#replay)

@@ -14,25 +14,28 @@ MAX_CANDIDATES = 60_000
 _PERIMETER = 3
 
 
-def _blocks(rgb, first, second):
+def _blocks(rgb, first, second, turns):
     height, width = rgb.shape[:2]
     x, y, w, h = first
-    a, b, _, _ = second
-    if not (MIN_CROP <= min(w, h) <= max(w, h) <= MAX_CROP and (w, h) == second[2:]
+    a, b, u, v = second
+    if not (MIN_CROP <= min(w, h) <= max(w, h) <= MAX_CROP
+            and (w, h) == ((v, u) if turns == 1 else (u, v))
             and max(abs(a - x), abs(b - y)) >= MIN_DISPLACEMENT
-            and (abs(a - x) >= w or abs(b - y) >= h)
-            and all(i >= _PERIMETER and i + w + _PERIMETER <= width for i in (x, a))
-            and all(i >= _PERIMETER and i + h + _PERIMETER <= height for i in (y, b))):
+            and (x + w <= a or a + u <= x or y + h <= b or b + v <= y)
+            and all(i >= _PERIMETER and j >= _PERIMETER and i + sw + _PERIMETER <= width
+                    and j + sh + _PERIMETER <= height for i, j, sw, sh in (first, second))):
         return None
     return (rgb[y - _PERIMETER:y + h + _PERIMETER, x - _PERIMETER:x + w + _PERIMETER],
-            rgb[b - _PERIMETER:b + h + _PERIMETER, a - _PERIMETER:a + w + _PERIMETER])
+            rgb[b - _PERIMETER:b + v + _PERIMETER, a - _PERIMETER:a + u + _PERIMETER])
 
 
-def witness(rgb, first, second):
-    blocks = _blocks(rgb, first, second)
+def witness(rgb, first, second, *, turns=0):
+    blocks = _blocks(rgb, first, second, turns)
     if blocks is None:
         return None
     before, after = blocks
+    if turns:
+        after = np.rot90(after, turns)
     core = before[_PERIMETER:-_PERIMETER, _PERIMETER:-_PERIMETER]
     if not np.array_equal(core, after[_PERIMETER:-_PERIMETER, _PERIMETER:-_PERIMETER]):
         return None
@@ -53,7 +56,7 @@ def witness(rgb, first, second):
             "perimeter_mean_absolute_difference": border_mean}
 
 
-def _offsets(rgb):
+def signatures(rgb):
     packed = rgb[..., 0].astype(np.uint64) << 16 | rgb[..., 1].astype(np.uint64) << 8 | rgb[..., 2].astype(np.uint64)
     height, width = packed.shape
     # Use several widely separated samples only to propose matching coordinates.
@@ -63,8 +66,13 @@ def _offsets(rgb):
     for y, x in ((1, 7), (3, 3), (7, 1), (8, 8)):
         signatures *= np.uint64(0x9E3779B185EBCA87)
         signatures ^= packed[y:height - 8 + y, x:width - 8 + x]
-    order = np.argsort(signatures, axis=None, kind="stable")
-    sorted_values = signatures.ravel()[order]
+    return signatures
+
+
+def _offsets(rgb):
+    seeds = signatures(rgb)
+    order = np.argsort(seeds, axis=None, kind="stable")
+    sorted_values = seeds.ravel()[order]
     equal = sorted_values[:-1] == sorted_values[1:]
     # Ignore ambiguous matches with more than two occurrences of the same seed.
     unique_pairs = equal & ~np.r_[False, equal[:-1]] & ~np.r_[equal[1:], False]
@@ -73,8 +81,8 @@ def _offsets(rgb):
         return None
     if not len(chosen):
         return []
-    y, x = np.unravel_index(order[chosen], signatures.shape)
-    b, a = np.unravel_index(order[chosen + 1], signatures.shape)
+    y, x = np.unravel_index(order[chosen], seeds.shape)
+    b, a = np.unravel_index(order[chosen + 1], seeds.shape)
     dx, dy = a - x, b - y
     separated = np.maximum(np.abs(dx), np.abs(dy)) >= MIN_DISPLACEMENT
     dx, dy = dx[separated], dy[separated]
@@ -84,11 +92,11 @@ def _offsets(rgb):
     return [shift for _, shift in ranked[:MAX_OFFSETS]]
 
 
-def _regions(rgb, dx, dy):
+def matching_regions(rgb, comparison, dx, dy):
     height, width = rgb.shape[:2]
     x, y = max(0, -dx), max(0, -dy)
-    right, bottom = min(width, width - dx), min(height, height - dy)
-    equality = np.all(rgb[y:bottom, x:right] == rgb[y + dy:bottom + dy, x + dx:right + dx], axis=2)
+    right, bottom = min(width, comparison.shape[1] - dx), min(height, comparison.shape[0] - dy)
+    equality = np.all(rgb[y:bottom, x:right] == comparison[y + dy:bottom + dy, x + dx:right + dx], axis=2)
     # Exact equality component is already the crop mask. Requiring full fill
     # removes holey graphic and palette matches.
     _, _, boxes, _ = cv2.connectedComponentsWithStats(equality.astype(np.uint8), connectivity=4)
@@ -106,7 +114,7 @@ def analyse(rgb):
         return {"status": "unassessed_match_budget", "pairs": []}
     pairs = []
     for dx, dy in offsets:
-        for first, second in _regions(rgb, dx, dy):
+        for first, second in matching_regions(rgb, rgb, dx, dy):
             if (proof := witness(rgb, first, second)) is not None:
                 pairs.append({"pair": (first, second), "measurement": proof})
     if len(pairs) > 1:

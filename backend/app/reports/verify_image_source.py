@@ -19,6 +19,7 @@ from app.evidence.image_copy_similarity_binding import (
     OFFGRID_BASIS,
     ROLES,
     SMALL_PNG_BASIS,
+    TURNED_PNG_BASIS,
     box_bounds,
     copy_records,
 )
@@ -222,7 +223,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError('Exact two-area evidence requires a PNG within the tested source scope')
         with original_png:
             embedded_pixels.verify(original_png, pair, lambda digest: archive.read(f'assets/{digest}.png'))
-    small_png = translation.get("basis") == SMALL_PNG_BASIS
+    small_png = translation.get("basis") in {SMALL_PNG_BASIS, TURNED_PNG_BASIS}
     if small_png:
         from app.evidence.image_exact_small_copy_source import verify
 
@@ -246,7 +247,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if matched_blocks:
         detail += f' Reproduced {matched_blocks} matching encoded JPEG brightness blocks per paired area in total.'
     if small_png:
-        detail += " Recomputed the exact matching RGB pixels and surrounding differences on the submitted PNG."
+        alignment = " after rotation" if translation.get("basis") == TURNED_PNG_BASIS else ""
+        detail += f" Recomputed the exact matching RGB pixels and surrounding differences{alignment} on the submitted PNG."
     if offgrid:
         detail += ' Recomputed the recorded color differences inside and around the two selected JPEG crops.'
     if repeated:

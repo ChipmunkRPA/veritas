@@ -11,7 +11,7 @@ import numpy as np
 from PIL import Image
 
 from app.detectors.image import exact_small_copy
-from app.evidence.image_copy_similarity_binding import ROLES, SMALL_PNG_MAX_SIDE, SMALL_PNG_MIN_SIDE
+from app.evidence.image_copy_similarity_binding import PNG_COPY_TURNS, ROLES, SMALL_PNG_MAX_SIDE, SMALL_PNG_MIN_SIDE
 
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 MAX_PNG_BYTES = 4 * 1024 * 1024
@@ -57,15 +57,19 @@ def native_rgb(data):
         return np.array(image)
 
 
-def review(data):
+def review(data, *, include_rotation=False):
     pixels = native_rgb(data)
     if pixels is None:
-        return {"status": "unsupported_profile", "measurement": None}, []
+        return {"status": "unsupported_profile", "measurement": None}, [], 0
     item = exact_small_copy.analyse(pixels)
+    if include_rotation and item["status"] == "no_pair":
+        from app.detectors.image import exact_turned_copy
+
+        item = exact_turned_copy.analyse(pixels)
     if not item["pairs"]:
-        return {"status": item["status"], "measurement": None}, []
+        return {"status": item["status"], "measurement": None}, [], 0
     match, = item["pairs"]
-    return {"status": item["status"], "measurement": match["measurement"]}, [match["pair"]]
+    return {"status": item["status"], "measurement": match["measurement"]}, [match["pair"]], match.get("turns", 0)
 
 
 def verify(data, pair, measurement):
@@ -73,5 +77,6 @@ def verify(data, pair, measurement):
     if pixels is None:
         raise ValueError("Exact copy comparison requires an upright static RGB PNG within its tested size.")
     boxes = [tuple(pair["regions"][role][key] for key in "xywh") for role in ROLES]
-    if exact_small_copy.witness(pixels, *boxes) != measurement:
+    turns = PNG_COPY_TURNS.get(pair.get("transform"))
+    if turns is None or exact_small_copy.witness(pixels, *boxes, turns=turns) != measurement:
         raise ValueError("Exact copy measurement differs from the submitted RGB pixels or surroundings.")

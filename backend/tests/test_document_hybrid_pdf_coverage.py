@@ -109,6 +109,8 @@ def test_small_figure_and_searchable_scan_keep_mapped_coverage(tmp_path, overlay
 
 @pytest.mark.parametrize("last_page", [2, 15])
 def test_pdf_invisible_layer_is_located_and_limits_the_actual_assessment(last_page, packet_factory, tmp_path, monkeypatch):
+    # The packet fixture extracts the full document, independently of the local developer setting.
+    monkeypatch.setattr(stage.settings, "text_bibliography_scope_review", False)
     path = tmp_path / "text-visibility.pdf"
     with pymupdf.open() as pdf:
         page = pdf.new_page()

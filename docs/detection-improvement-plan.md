@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Adjacent-sentence writing highlights](writing-adjacent-range-2026-11-15.md)
+  compares isolated and paired sentence readings on 84 fresh English
+  news and report rewrites. Reading two sentences together added one
+  exact boundary and reduced ordinary flags from 18/84 to 16/84 at the
+  wider point. The count of useful changed-word ranges stayed at 2/84.
+  The candidates remain in evaluation.
+
 - [Stereo speech localization in three new rooms](audio-reference-fresh-room-validation-2026-11-15.md)
   adds an optional local fallback with denser window starts. Correct ranges
   rose from 26/48 to 28/48 for synthetic edits and from 13/24 to 14/24

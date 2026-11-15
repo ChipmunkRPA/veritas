@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [adjacent-sentence writing replay](writing-adjacent-range-2026-11-15.md#independent-replay)
+recomputes which of 84 matched news and government-report rewrites
+were pinpointed at the sentence and changed-word levels. It also
+recounts ordinary flags and uses known edit locations to measure
+how often sentence-sized highlights are too broad.
+
 The [fresh room and microphone replay](audio-reference-fresh-room-validation-2026-11-15.md#replay)
 recounts 264 earlier-copy comparisons using three new recorded backgrounds.
 Review both denser window rules and the current stereo comparison from

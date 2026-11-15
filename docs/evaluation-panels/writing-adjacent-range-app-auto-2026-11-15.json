@@ -1,0 +1,516 @@
+{
+  "billing": {
+    "jobs_started_before_payment": 0,
+    "price_usd_cents": 999,
+    "simulated": true
+  },
+  "device": "mps",
+  "ledger_sha256": "63ad79d6b240db2fddc0fc37799dd06b98484a9b0d2635915bdc3106d441fb97",
+  "requested_device": "auto",
+  "results": {
+    "news/1/edited": {
+      "classifier_completed": 2,
+      "displayed_review": 2,
+      "exact": 2,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 0
+    },
+    "news/1/original": {
+      "classifier_completed": 2,
+      "displayed_review": 2,
+      "exact": 0,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 0
+    },
+    "news/2/edited": {
+      "classifier_completed": 2,
+      "displayed_review": 1,
+      "exact": 0,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 0
+    },
+    "news/2/original": {
+      "classifier_completed": 2,
+      "displayed_review": 2,
+      "exact": 0,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 0
+    },
+    "reports/1/edited": {
+      "classifier_completed": 2,
+      "displayed_review": 2,
+      "exact": 1,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 0
+    },
+    "reports/1/original": {
+      "classifier_completed": 2,
+      "displayed_review": 2,
+      "exact": 0,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 0
+    },
+    "reports/2/edited": {
+      "classifier_completed": 2,
+      "displayed_review": 2,
+      "exact": 0,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 0
+    },
+    "reports/2/original": {
+      "classifier_completed": 2,
+      "displayed_review": 2,
+      "exact": 0,
+      "files": 2,
+      "inconclusive": 2,
+      "ratio_completed": 2,
+      "useful": 0
+    }
+  },
+  "rows": [
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "1d551f4e5e8e6c28f2ba38ec14768485538aad33d9a51eebbbdc7271d6d09c48",
+      "sha256": "d5e5d74044a6a688bc88f3c3cd94ad26a553caac87f9d8a09753cd7788061079",
+      "spans": [
+        [
+          [
+            123,
+            216
+          ]
+        ],
+        [
+          [
+            312,
+            445
+          ]
+        ],
+        [
+          [
+            446,
+            519
+          ]
+        ],
+        [
+          [
+            520,
+            751
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "1d551f4e5e8e6c28f2ba38ec14768485538aad33d9a51eebbbdc7271d6d09c48",
+      "sha256": "638c67f48d3371ff397140d0b8297b6b69f07b6609b724c2679d47733f6006ed",
+      "spans": [
+        [
+          [
+            123,
+            216
+          ]
+        ],
+        [
+          [
+            312,
+            451
+          ]
+        ],
+        [
+          [
+            452,
+            525
+          ]
+        ],
+        [
+          [
+            526,
+            757
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "0b6d84b2e139e1e7e1b1c6451f62eb77e4a72e6097a9a9f125eef9ce1c286c57",
+      "sha256": "f3cf12e6b4ccd39b54cd7653469e18af507e0b7e285c887081bcadfcae0e4c17",
+      "spans": [
+        [
+          [
+            693,
+            827
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "0b6d84b2e139e1e7e1b1c6451f62eb77e4a72e6097a9a9f125eef9ce1c286c57",
+      "sha256": "cc74cc47c0f984d7075627a2a3b8fb3b5229d61a3cc0b85a8193d78f8f09013b",
+      "spans": []
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "0a27ae8dc2eb1811ed9756e734f163ff10ff7d0aafed29e11717b87a4f09ec2b",
+      "sha256": "13cfb954bc5b5aa55de07e732cc7e5eb650e473404551c12c793ffff8dba0047",
+      "spans": [
+        [
+          [
+            0,
+            140
+          ]
+        ],
+        [
+          [
+            141,
+            249
+          ]
+        ],
+        [
+          [
+            250,
+            395
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "0a27ae8dc2eb1811ed9756e734f163ff10ff7d0aafed29e11717b87a4f09ec2b",
+      "sha256": "10610f4366f0bdb436898986da9786810632ee7914ba4c76c6ea6610b1a9f70e",
+      "spans": [
+        [
+          [
+            0,
+            140
+          ]
+        ],
+        [
+          [
+            141,
+            249
+          ]
+        ],
+        [
+          [
+            250,
+            396
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "20b5ce55a1f2139a54f2fa4d98577fe8d58e183a8f1dcbb61e7c196883d92948",
+      "sha256": "0fc02ce3887eb0cd1a2ff886b16c6147d3c7f6e41591d010eefdbf3282bf097f",
+      "spans": [
+        [
+          [
+            0,
+            146
+          ],
+          [
+            147,
+            304
+          ]
+        ],
+        [
+          [
+            761,
+            895
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "20b5ce55a1f2139a54f2fa4d98577fe8d58e183a8f1dcbb61e7c196883d92948",
+      "sha256": "51c561f76e8aeebb3c1a58e60cb69dc6d4254fd9f5fcb2e96dceae4b9822ef74",
+      "spans": [
+        [
+          [
+            0,
+            146
+          ],
+          [
+            147,
+            304
+          ]
+        ],
+        [
+          [
+            763,
+            897
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "143a5f13db330a23853452e5bfe296774128e7b8ea5552075b60c69113c9b17c",
+      "sha256": "7855d19a523ebe43cd2a5a47bdc65a0bbe718c2039c5484a8e572df62d57b6bc",
+      "spans": [
+        [
+          [
+            434,
+            777
+          ]
+        ],
+        [
+          [
+            778,
+            998
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "143a5f13db330a23853452e5bfe296774128e7b8ea5552075b60c69113c9b17c",
+      "sha256": "ee0a6b96da0c94c70f4d4bba392ef9b225cda058e6181faa4490ecdb808f44e4",
+      "spans": [
+        [
+          [
+            434,
+            777
+          ]
+        ],
+        [
+          [
+            778,
+            996
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "0af7281c57fce714e70702466a9eb98e51130ccb11d1edb5ed85580d7b68b42a",
+      "sha256": "5160e7282d9fb7ea2f19f216b31c7b1cc205d214aca690fcce2e4b2a3a11b43d",
+      "spans": [
+        [
+          [
+            0,
+            142
+          ]
+        ],
+        [
+          [
+            143,
+            309
+          ]
+        ],
+        [
+          [
+            771,
+            1075
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "0af7281c57fce714e70702466a9eb98e51130ccb11d1edb5ed85580d7b68b42a",
+      "sha256": "43b0a6150eec66c722c189ae65397816253080a3877f8d6bf8ee871565443388",
+      "spans": [
+        [
+          [
+            0,
+            142
+          ]
+        ],
+        [
+          [
+            143,
+            309
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "13f2131af9b94ac6fb95b60cedd7a54865f2e53110c0ab8009326187770fd4a6",
+      "sha256": "4c28030d14169904930195b67cccda145b919a68c065b478e17c002ca2bd10fc",
+      "spans": [
+        [
+          [
+            661,
+            776
+          ]
+        ],
+        [
+          [
+            661,
+            776
+          ],
+          [
+            777,
+            968
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "13f2131af9b94ac6fb95b60cedd7a54865f2e53110c0ab8009326187770fd4a6",
+      "sha256": "cd20e3bba8f4739e72589929a8b47935f8cd48a098ec34a350c694ca8d1280a3",
+      "spans": [
+        [
+          [
+            669,
+            784
+          ]
+        ],
+        [
+          [
+            669,
+            784
+          ],
+          [
+            785,
+            976
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "original",
+      "group": "07abec77ae0a174f6907125c1cfe4b61359bc7359fa739914ea4b2b1a169fe94",
+      "sha256": "43d8d0744cc220d65a228de489a20d811c63bb252ca339068f9944e13324203b",
+      "spans": [
+        [
+          [
+            0,
+            83
+          ]
+        ],
+        [
+          [
+            900,
+            1066
+          ]
+        ]
+      ]
+    },
+    {
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "delivery": "edited",
+      "group": "07abec77ae0a174f6907125c1cfe4b61359bc7359fa739914ea4b2b1a169fe94",
+      "sha256": "eb485abcc86c90656be6044e811bceb4989c8bd552d0e3d3c458f59788073ecb",
+      "spans": [
+        [
+          [
+            0,
+            83
+          ]
+        ],
+        [
+          [
+            571,
+            862
+          ]
+        ],
+        [
+          [
+            863,
+            1029
+          ]
+        ]
+      ]
+    }
+  ],
+  "schema": "chipmunk.writing-adjacent-range-app/1"
+}

@@ -26,16 +26,18 @@ import threading
 import time
 from collections import OrderedDict
 from collections.abc import Callable, Iterable, Iterator, Mapping, Sequence
-from contextlib import contextmanager
+from contextlib import contextmanager, suppress
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from numbers import Integral
 from pathlib import Path
+from tempfile import NamedTemporaryFile
 from typing import TYPE_CHECKING, Any, Protocol
 
 from app.core.config import settings
 from app.core.logging import get_logger
 from app.engine.detector import DetectorResult
+from app.storage.space import FULL_ERRNOS
 
 if TYPE_CHECKING:
     from app.engine.manifest import Manifest, ModelEntry
@@ -267,6 +269,7 @@ class FootprintStore:
         self.path = path
         self._lock = threading.Lock()
         self._warned: set[str] = set()
+        self._write_full_warned = False
         self._data: dict[str, dict] = {"measured": {}, "device_pins": {}}
         if path.is_file():
             try:
@@ -333,7 +336,17 @@ class FootprintStore:
             model = dict(self._mapping(self._data["measured"].get(model_id, {}), f"measured.{model_id}"))
             model[device_kind] = row
             self._data["measured"][model_id] = model
-            self._save()
+            try:
+                self._save()
+            except OSError as error:
+                if error.errno not in FULL_ERRNOS:
+                    raise
+                # Keep the new measurement available for this process's memory accounting.
+                if not self._write_full_warned:
+                    log.warning("models.footprints_storage_full", path=str(self.path))
+                    self._write_full_warned = True
+            else:
+                self._write_full_warned = False
 
     def _pin_field(self, model_id: str, key: str) -> str | None:
         row = self._mapping(self._data["device_pins"].get(model_id, {}), f"device_pins.{model_id}")
@@ -355,9 +368,18 @@ class FootprintStore:
 
     def _save(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        tmp = self.path.with_suffix(".json.tmp")
-        tmp.write_text(json.dumps(self._data, indent=2, sort_keys=True), encoding="utf-8")
-        tmp.replace(self.path)
+        tmp = None
+        try:
+            with NamedTemporaryFile(mode="w", encoding="utf-8", dir=self.path.parent, prefix=f".{self.path.stem}.",
+                                    suffix=".tmp", delete=False) as output:
+                tmp = Path(output.name)
+                json.dump(self._data, output, indent=2, sort_keys=True)
+            tmp.replace(self.path)
+        except OSError:
+            if tmp is not None:
+                with suppress(OSError):
+                    tmp.unlink(missing_ok=True)
+            raise
 
 
 def _now() -> str:

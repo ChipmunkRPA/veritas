@@ -13,6 +13,10 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [separate stereo channel replay](audio-clean-speech-stereo-long-2026-11-15.md#replay)
+recounts 272 earlier-copy pairs in each of two stereo layouts. It separates
+correct ranges, ordinary flags, and matches to the added background voice.
+
 The [dense lip-timing replay](video-lip-dense-posteriors-2026-11-15.md#replay)
 recounts selected ranges and constant-delay errors under both sparse and
 dense speech measurements. It separates the held PCM and AAC deliveries

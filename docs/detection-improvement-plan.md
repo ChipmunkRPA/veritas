@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Comparison on separate stereo channels](audio-clean-speech-stereo-long-2026-11-15.md)
+  retains all 32 correctly located synthetic ranges on recordings with an
+  extra competing voice on one channel. It cuts ordinary flags from 15/80
+  to 6/80. It also admits 32 background recordings as references. A later
+  check using both channels' reference support removes those admissions on
+  the same panel. Stereo coverage remains experimental pending separate testing.
+
 - [Dense speech evidence for lip timing](video-lip-dense-posteriors-2026-11-15.md)
   complements the sparse cue on the main PCM and separate AAC panels.
   It adds four and two useful ranges, respectively. It recovers none

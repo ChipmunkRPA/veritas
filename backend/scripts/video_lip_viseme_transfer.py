@@ -12,7 +12,15 @@ from statistics import median
 from tempfile import TemporaryDirectory
 from zipfile import ZipFile
 
-from app.evidence.video_viseme_timing import PHONES, STEP, compatible, hypotheses, nearest, observations, picture_evidence
+from app.evidence.video_viseme_timing import (
+    PHONES,
+    STEP,
+    compatible,
+    hypotheses,
+    nearest,
+    observations,
+    picture_evidence,
+)
 from scripts import video_lip_event_alignment as prior
 
 parent = prior.parent
@@ -93,13 +101,13 @@ def capture(args):
     phone.write(args.output, {"method": METHOD, "device": device, "parent_sha256": phone.sha(prior.SOURCE), "rows": output})
 
 
-def fit(base, captured):
+def fit(base, captured, *, sample_at=nearest):
     groups = defaultdict(list)
     for row, measured in zip(base, captured, strict=True):
         if not is_fit(row) or (points := observations(row)) is None:
             continue
         for label, sample, _ in measured["cases"]["original"]["phones"]:
-            if (value := nearest(points, sample)) is not None:
+            if (value := sample_at(points, sample)) is not None:
                 groups[label].append((row["speaker"], value[0]))
     result = {label: {"median": round(median(point for _, point in values), 7),
                       "events": len(values), "speakers": len({speaker for speaker, _ in values})}

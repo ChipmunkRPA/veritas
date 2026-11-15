@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Between-frame lip-timing comparison](video-lip-subframe-transfer-2026-11-15.md)
+  found five new locations and lost six at the tighter primary point,
+  while ordinary flags increased from 2/192 to 16/192. A single-event
+  check removed both ordinary primary flags but lost a useful PCM
+  transfer location. Both variants stay in evaluation.
+
 - [Finite perturbations inside existing audio alerts](audio-finite-window-attribution-2026-11-15.md)
   added no useful range in a four-second context. The exact alert crop
   added two ranges among 48 noisy primary edits, one of which matched a

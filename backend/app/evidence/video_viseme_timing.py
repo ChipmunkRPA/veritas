@@ -45,7 +45,7 @@ def nearest(points, sample):
     return gaps[winner], indices[winner]
 
 
-def compatible(row, sounds, references):
+def compatible(row, sounds, references, *, sample_at=nearest):
     points = observations(row)
     if points is None:
         return []
@@ -53,7 +53,7 @@ def compatible(row, sounds, references):
     for label, sample, probability in sounds:
         if label not in references:
             continue
-        values = [nearest(points, sample-lag) for lag in LAGS]
+        values = [sample_at(points, sample-lag) for lag in LAGS]
         if not all(value is not None for value in values):
             continue
         center = references[label]["median"]

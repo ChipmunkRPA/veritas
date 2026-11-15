@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [between-frame lip-timing replay](video-lip-subframe-transfer-2026-11-15.md#replay)
+compares interpolation and single-event sensitivity on the same
+speech and source clocks. It derives the operating points from four
+calibration speakers and checks prior results before counting paired
+gains and losses in PCM and AAC.
+
 The [finite audio perturbation replay](audio-finite-window-attribution-2026-11-15.md#replay)
 recounts how masking two versions of the same feature bands changes
 one-second evidence ranges. A separate Node.js implementation derives

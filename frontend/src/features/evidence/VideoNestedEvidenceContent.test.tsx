@@ -81,6 +81,18 @@ const show = (set: VideoEvidenceSet, token = 'signed token', mediaReady = true) 
 afterEach(cleanup)
 
 describe('video v3 nested source-bound evidence', () => {
+  it('links repeated offset measurements to both supporting windows', () => {
+    const set = fixture()
+    const av = set.av!
+    av.packets.push({ ...av.packets[0], id: 'AV03' })
+    av.coverage!.repeated_offsets = [{ offset_ms: 200, packet_ids: ['AV01', 'AV03'] }]
+    show(set)
+    const section = screen.getByRole('region', { name: 'Repeated audio offset in measured windows' })
+    expect(within(section).getByText(/Audio matched 200 ms later/)).toBeTruthy()
+    expect(within(section).getByRole('link', { name: 'AV01' }).getAttribute('href')).toBe('#media-evidence-AV01')
+    expect(within(section).getByRole('link', { name: 'AV03' }).getAttribute('href')).toBe('#media-evidence-AV03')
+  })
+
   it.each(['not_assessed', 'unavailable'] as const)('shows source ranges and reasons when alignment is %s', (status) => {
     const set = fixture()
     const av = set.av!

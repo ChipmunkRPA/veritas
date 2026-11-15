@@ -57,6 +57,15 @@
 {% if breaks.unlisted %}<p class="caption">{{ breaks.unlisted }} further clock breaks are in the JSON.</p>{% endif %}
 <p class="caption">JSON pointer <span class="mono">/av/audio_clock_breaks</span>.</p>
 {% endif %}
+{% set repeated = evidence.get('av_repeated_offsets') %}
+{% if repeated %}
+<h3>Repeated audio offset in measured windows</h3>
+{% for row in repeated %}
+<p>Audio matched {{ row.offset_ms | abs }} ms {{ 'later' if row.offset_ms > 0 else 'earlier' }} than the picture in separate measured windows on the same face track.
+  {% for id in row.packet_ids %}<a href="#multimedia-evidence-{{ id }}">{{ id }}</a>{% if not loop.last %}, {% else %}.{% endif %}{% endfor %}</p>
+{% endfor %}
+<p class="caption">This describes the listed windows. A repeated offset can come from recording or export timing. JSON pointer <span class="mono">/av/coverage/repeated_offsets</span>.</p>
+{% endif %}
 {% set timing = evidence.get('av_timing_windows') %}
 {% if timing %}
 <h3 id="multimedia-av-timing-coverage">Speech and mouth timing coverage</h3>

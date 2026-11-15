@@ -70,6 +70,7 @@ export default function VideoAVEvidenceContent({ set, channel, token, mediaReady
   const sampleRate = channel.source.sample_rate ?? 0
   const timingGaps = measured ? unmeasuredSourceRanges(measured, channel.source) : []
   const flaggedWindows = channel.packets.filter(hasTimingChange)
+  const repeated = coverage?.repeated_offsets ?? []
   return <div data-testid="video-av-evidence">
     <p className="mt-2 mb-0 text-small text-text-muted">Compare measured mouth appearance and audio energy on their original clocks. Correlation and timing differences do not prove AI generation, editing, or who is speaking.</p>
     {flaggedWindows.length > 0 ? <nav aria-label="Flagged timing intervals" className="mt-4 rounded-md border border-border p-4">
@@ -79,7 +80,15 @@ export default function VideoAVEvidenceContent({ set, channel, token, mediaReady
         <a className="text-accent underline" href={`#media-evidence-${packet.id}`}>{packet.id} · {packet.anchor.source_timestamp_ranges.map(intervalLabel).join(' · ')}</a>
         {' '}· {packet.measurement.overlaps_offset_step ? 'Offset change' : 'Drop in mouth and audio agreement'}
       </li>)}</ul>
-    </nav> : channel.packets.length > 0 && <p className="mt-3 mb-0 text-small text-text-muted">The displayed windows contain no flagged timing change. A consistent delay can still be present, and a redrawn mouth can match its audio.</p>}
+    </nav> : channel.packets.length > 0 && <p className="mt-3 mb-0 text-small text-text-muted">The displayed windows contain no flagged timing change. A redrawn mouth can match its audio.</p>}
+    {repeated.length > 0 && <section aria-label="Repeated audio offset in measured windows" className="mt-4 rounded-md border border-border p-4 text-small">
+      <h4 className="m-0 font-medium">Repeated audio offset in measured windows</h4>
+      {repeated.map(({ offset_ms, packet_ids }) => <p key={packet_ids[0]} className="mt-2 mb-0">
+        Audio matched {Math.abs(offset_ms)} ms {offset_ms > 0 ? 'later' : 'earlier'} than the picture in separate measured windows on the same face track.
+        {' '}{packet_ids.map((id, index) => <span key={id}>{index > 0 && ', '}<a href={`#media-evidence-${id}`} className="text-accent underline">{id}</a></span>)}.
+      </p>)}
+      <p className="mt-2 mb-0 text-text-muted">This describes the listed windows. A repeated offset can come from recording or export timing.</p>
+    </section>}
     {coverage ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <p className="m-0">{coverage.selected_windows} of {coverage.recorded_windows} recorded alignment windows are shown; {coverage.omitted_windows} are omitted.
         {' '}Flagged windows are shown first, followed by measured examples in time order. Overlapping windows are not independent confirmations.</p>

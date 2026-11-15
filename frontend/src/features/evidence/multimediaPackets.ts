@@ -317,6 +317,7 @@ export interface VideoAVChannel {
   source: AudioEvidenceSet['source'] & { tick_rate?: number; samples_per_tick?: number; video_time_base?: string }
   coverage?: { recorded_windows: number; selected_windows: number; omitted_windows: number; selection: string
     unsupported_checks: { status: string; reason: string }[]
+    repeated_offsets?: { offset_ms: number; packet_ids: string[] }[]
     timing_windows?: { windows: { status: VideoTimingStatus; speech_ticks: number
       interval: VideoAVPacket['anchor']['source_timestamp_ranges'][number] }[] }
   } | null

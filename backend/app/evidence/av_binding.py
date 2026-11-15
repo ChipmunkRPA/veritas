@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import math
 import re
+from collections import defaultdict
 from collections.abc import Mapping, Sequence
 from decimal import Decimal
 from fractions import Fraction
@@ -18,6 +19,7 @@ AV_LEGACY_SELECTION = 'flagged windows first, then chronological informational m
 AV_CONTEXT_SELECTION = 'first flagged window with nearby measured context before and after, then other measured windows'
 AV_CONTEXT_GAP_TICKS = 25
 TIMING_WINDOWS = 'timing_windows'
+REPEATED_OFFSETS = 'repeated_offsets'
 TIMING_COMMITMENT = 'av_timing_windows_sha256'
 TIMING_REASONS = {
     'measured': 'Mouth and audio timing was measured.',
@@ -37,6 +39,30 @@ TIMING_DISPLAY_LIMIT = 12
 
 class InvalidAV(ValueError):
     pass
+
+
+def repeated_offsets(packets):
+    """Summarize only displayed, time-disjoint support for the same recorded offset."""
+    groups = defaultdict(list)
+    for packet in packets:
+        m, s = packet['measurement'], packet['source_record']
+        lag = m['offset_ticks']
+        if (m['reading'] == 'constant_offset' and lag == m['baseline_offset_ticks'] and abs(lag) >= 3
+                and not m['overlaps_offset_step'] and not m['overlaps_correlation_collapse'] and not m['low_correlation']
+                and m['peak_correlation'] >= m['minimum_trusted_peak']
+                and av_lag_support.compare(m['lag_profile'], lag)['correlation_difference'] >= .05):
+            groups[s['raw_output_sha256'], s['track_id'], lag].append(packet)
+    rows = []
+    for (_, _, lag), group in groups.items():
+        chosen, end = [], -1
+        for packet in sorted(group, key=lambda value: value['window']['start_tick']):
+            window = packet['window']
+            if window['start_tick'] >= end:
+                chosen.append(packet['id'])
+                end = window['end_tick']
+        if len(chosen) >= 2:
+            rows.append({'offset_ms': lag * 40, 'packet_ids': chosen})
+    return rows
 
 
 def timing_ranges(samples: int) -> range:
@@ -264,5 +290,8 @@ def _validate(channel: dict, video: dict) -> None:
             require(0 <= gap <= AV_CONTEXT_GAP_TICKS, 'AV comparison window overlaps its reference or is too far away')
             roles.add(context['role'])
         validate_clip_binding(packet, video)
+    if REPEATED_OFFSETS in channel['coverage']:
+        require(bool(records := repeated_offsets(channel['packets'])) and channel['coverage'][REPEATED_OFFSETS] == records,
+                'Repeated AV offset differs from its measured support')
     require(channel['coverage']['selected_windows'] == len(channel['packets']) and channel['coverage']['recorded_windows'] >= len(channel['packets']), 'AV coverage differs from its selected packets')
     require((channel['status'] == 'ready') == bool(channel['coverage']['recorded_windows']), 'AV availability differs from recorded measurements')

@@ -20,6 +20,7 @@ from app.evidence import document_scope, service
 from app.evidence.av_binding import (
     AUDIO_CLOCK_BREAKS,
     AV_CLOCK_DISPLAY_LIMIT,
+    REPEATED_OFFSETS,
     TIMING_DISPLAY_LIMIT,
     TIMING_REASONS,
     TIMING_WINDOWS,
@@ -1373,7 +1374,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             timing_view["unmeasured"].append({"start_s": f"{interval['source_start_pts'] / 16000:.3f}",
                                              "end_s": f"{interval['source_end_pts'] / 16000:.3f}",
                                              "reason": TIMING_REASONS[row["status"]]})
+    av_coverage = (document.get("av") or {}).get("coverage") or {}
     return {"available": True, "kind": kind, "title": f"{kind.capitalize()} evidence", "id": document["id"],
+            "av_repeated_offsets": copy.deepcopy(av_coverage.get(REPEATED_OFFSETS, [])),
             "av_timing_windows": timing_view,
             "av_clock_breaks": av_clock_view,
             "short_voice_review": short_voice_review,

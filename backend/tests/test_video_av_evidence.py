@@ -176,6 +176,11 @@ def test_exact_voice_and_measured_av_inputs_share_parent_authority(av_fixture):
     assert audio['status']=='ready' and len(audio['packets'])==1
     assert av['status']=='ready' and len(av['packets'])==3
     assert all(p['measurement']['offset_ticks']==5 for p in av['packets'])
+    assert av['coverage']['repeated_offsets'] == [{'offset_ms': 200, 'packet_ids': ['AV01', 'AV03']}]
+    forged = deepcopy(av)
+    forged['coverage']['repeated_offsets'][0]['packet_ids'][1] = 'AV02'
+    with pytest.raises(InvalidAV, match='Repeated AV offset'):
+        validate_av_channel(forged, f.source)
     assert av['packets'][0]['window']['frame_indices']==list(range(35,60))
     assert av['packets'][0]['anchor']['source_timestamp_ranges'][0]['source_start_pts']==102400
     for channel in (audio,av):
@@ -201,7 +206,8 @@ def test_exact_voice_and_measured_av_inputs_share_parent_authority(av_fixture):
     assert 'gustking' not in json.dumps(audio)
 
 
-def test_flagged_av_window_shares_nonoverlapping_source_context(tmp_path, monkeypatch):
+@pytest.mark.parametrize('flagged', [True, False])
+def test_av_windows_share_nonoverlapping_source_context(tmp_path, monkeypatch, flagged):
     directory = tmp_path / 'long-source'
     directory.mkdir()
     fixture = av_fixture.__wrapped__(tmp_path, _make_av_source(directory, 155), tuple(range(2, 9)))
@@ -210,9 +216,12 @@ def test_flagged_av_window_shares_nonoverlapping_source_context(tmp_path, monkey
         # Commit a controlled selection on real measured inputs. This test
         # exercises evidence ordering independent of detector accuracy.
         raw = deepcopy(f.raw)
-        measured = raw['details']['av_input']['tracks'][0]['windows']
+        track = raw['details']['av_input']['tracks'][0]
+        measured = track['windows']
+        if flagged:
+            track['reading'] = 'offset_step'
         for window in measured:
-            window['overlaps_offset_step'] = window['window_index'] == 4
+            window['overlaps_offset_step'] = flagged and window['window_index'] == 4
             window['overlaps_correlation_collapse'] = False
         sha = f.store.put_bytes(canonical_json(raw)).sha256
         sample = f.result['manifest']['sampling']
@@ -232,22 +241,27 @@ def test_flagged_av_window_shares_nonoverlapping_source_context(tmp_path, monkey
         f.analysis.result_hash = canonical_hash(f.result)
         packet_set = video_packets.build_packet_set(f.db, f.analysis, f.store, f.result)
         av = json.loads(canonical_json(packet_set))['av']
-        primary, before, after, other = av['packets']
-        assert [p['window']['start_tick'] for p in (primary, before, after, other)] == [50, 25, 75, 37]
-        assert primary['measurement']['overlaps_offset_step'] and 'comparison_context' not in other
-        for packet, side in ((before, 'before'), (after, 'after')):
-            assert packet['comparison_context'] == {'role': side, 'reference_packet_id': primary['id']}
-            assert packet['title'] == f"Measured timing {side} AV01"
-            assert packet['anchor']['source_timestamp_ranges'][0]['source_start_pts'] == 86400 + packet['window']['start_tick'] * 640
-            assert len(packet['frames']) == 3 and 'selected_clip' in packet['artifacts']
-            assert len(packet['window']['frame_inputs']) == 25
+        if flagged:
+            primary, before, after, other = av['packets']
+            assert [p['window']['start_tick'] for p in (primary, before, after, other)] == [50, 25, 75, 37]
+            assert primary['measurement']['overlaps_offset_step'] and 'comparison_context' not in other
+            assert 'repeated_offsets' not in av['coverage']
+            for packet, side in ((before, 'before'), (after, 'after')):
+                assert packet['comparison_context'] == {'role': side, 'reference_packet_id': primary['id']}
+                assert packet['title'] == f"Measured timing {side} AV01"
+                assert packet['anchor']['source_timestamp_ranges'][0]['source_start_pts'] == 86400 + packet['window']['start_tick'] * 640
+                assert len(packet['frames']) == 3 and 'selected_clip' in packet['artifacts']
+                assert len(packet['window']['frame_inputs']) == 25
+        else:
+            assert av['coverage']['repeated_offsets'] == [{'offset_ms': 200, 'packet_ids': ['AV01', 'AV03']}]
         assets = {a['sha256']: f.store.read_bytes(a['sha256']) for p in av['packets'] for a in p['artifacts'].values()}
         video_av.verify_source_assets(av, video_source=f.source, result=f.result, store=f.store,
                                       table=f.table, anchors=f.anchors, assets=assets)
-        altered = deepcopy(av)
-        altered['packets'][1]['comparison_context']['role'] = 'after'
-        with pytest.raises(InvalidAV, match='overlaps its reference'):
-            validate_av_channel(altered, f.source)
+        if flagged:
+            altered = deepcopy(av)
+            altered['packets'][1]['comparison_context']['role'] = 'after'
+            with pytest.raises(InvalidAV, match='overlaps its reference'):
+                validate_av_channel(altered, f.source)
 
         report = specimen('video', 'standard')
         result = deepcopy(report.result)
@@ -263,12 +277,16 @@ def test_flagged_av_window_shares_nonoverlapping_source_context(tmp_path, monkey
         monkeypatch.setattr(multimedia_evidence, 'default_store', lambda: f.store)
         pdf = engine.render_pdf(report).pdf
         text = ' '.join(engine.pdf_text(pdf).split())
-        assert 'Measured window before the flagged window AV02.' in text
-        assert 'Measured window after the flagged window AV03.' in text
-        assert text.count('Three source frames and crops represent the 25 measured ticks.') == 3
+        if flagged:
+            assert 'Measured window before the flagged window AV02.' in text
+            assert 'Measured window after the flagged window AV03.' in text
+            assert text.count('Three source frames and crops represent the 25 measured ticks.') == 3
+        else:
+            assert 'Repeated audio offset in measured windows' in text
+            assert 'Audio matched 200 ms later than the picture' in text
         (tmp_path / 'av-context-standard.pdf').write_bytes(pdf)
         with pymupdf.open(stream=pdf, filetype='pdf') as pages:
-            expected = {f'multimedia-evidence-AV{i:02d}' for i in (1, 2, 3)}
+            expected = {f'multimedia-evidence-AV{i:02d}' for i in ((1, 2, 3) if flagged else (1, 3))}
             assert expected <= pages.resolve_names().keys()
             destinations = {link.get('nameddest') for page in pages for link in page.get_links()}
             assert expected <= destinations

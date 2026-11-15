@@ -13,6 +13,10 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [video timing-anchor replay](video-mouth-clock-context-2026-11-14.md#replay)
+recounts local dubs with and without soundtrack shifts and verifies the
+actual audio samples, frame clocks, and witness crops from both panels.
+
 The [speech decoder-frequency replay](audio-decoder-peak-transfer-2026-11-14.md#reproduce-the-comparison)
 recomputes frozen operating points and three ways to rank short audio
 intervals under competing speech. A separate calculation projects directly

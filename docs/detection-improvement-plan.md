@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Repeated audio offsets in measured video](video-mouth-clock-context-2026-11-14.md)
+  now link supporting nonoverlapping source windows in the browser, PDF
+  and JSON. A separate speech-anchor trial added one useful location and
+  reduced false local flags on constant shifts from ten to eight at the
+  broader 160 ms point. It remains experimental with sparse support.
+
 - [Decoder-frequency peaks under competing speech](audio-decoder-peak-transfer-2026-11-14.md)
   added no useful locations on 40 held edits. Local contrast added nine
   ordinary-file flags. Alternate native arithmetic reproduced all 195

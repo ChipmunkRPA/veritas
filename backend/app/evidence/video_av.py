@@ -23,11 +23,13 @@ from app.evidence.av_binding import (
     AV_CONTEXT_SELECTION,
     AV_LEGACY_SELECTION,
     LEGACY_AUDIO_CLOCK_REASON,
+    REPEATED_OFFSETS,
     TIMING_WINDOWS,
     InvalidAV,
     audio_clock_break_evidence,
     audio_clock_discontinuity,
     check_audio_clock_breaks,
+    repeated_offsets,
     validate_av_channel,
 )
 from app.evidence.image_packets import PacketIntegrityError, _bounds, _png
@@ -337,6 +339,8 @@ def build_channel(db, analysis, store, result, *, set_id, video_source, table, a
         except ClipUnavailable as error:
             packet['clip']={'status':'unavailable','reason':str(error)}
         channel['packets'].append(packet)
+    if repeated := repeated_offsets(channel['packets']):
+        channel['coverage'][REPEATED_OFFSETS] = repeated
     validate_av_channel(channel,video_source)
     return channel
 

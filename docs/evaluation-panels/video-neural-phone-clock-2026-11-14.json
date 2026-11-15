@@ -1,0 +1,6891 @@
+{
+  "archives": {
+    "audio": {
+      "bytes": 652614041,
+      "published_checksum": "md5:fa0cfc739705323b53ba50e148b3a144",
+      "url": "https://zenodo.org/records/3736465/files/lombardgrid_audio.zip"
+    },
+    "front": {
+      "bytes": 837239327,
+      "published_checksum": "md5:63b546f53267ae3f4cffe0c772317ce1",
+      "url": "https://zenodo.org/records/3736465/files/lombardgrid_front.zip"
+    }
+  },
+  "baseline_sha256": "833d0ba73affdec98883e0828dbacb69ab4932f4e739062076ed679e54878f21",
+  "device": "mps",
+  "metadata_sha256": {
+    "alignment.zip": "2205fa509c74c9d5d74ece299af7da530d76f651e38391d2b364a7417b0d6309",
+    "publisher-json.zip": "1de3299baaa6a13d8bcd458a688c94f2288a0ecca8b5a6817a055b393f5a98a6",
+    "record.json": "ee341f8e585ff38e61dea96aa5686f6b227e6d9b6c0b964d71afccd8c631571b"
+  },
+  "method": {
+    "edits": "Stage copies of the target speech 200 ms earlier and later in a local 700 ms window with 8 ms endpoint blends and unchanged PCM outside. Match only the independently labeled target in edited views.",
+    "neural": "Unprompted CTC acoustic token emissions at a verified 20 ms hop. Keep the largest emission in each run of the same token if posterior is at least 0.35.",
+    "reference": "Match independent publisher B or P intervals one-to-one on the native 16 kHz audio clock, with 40 ms interval padding. Maximize distinct matches, then minimize total absolute midpoint error.",
+    "sources": "CC BY 4.0 Lombard frontal and audio archive members with published phone alignment labels. Choose four development and eight held speaker codes by fixed hash order. Each speaker supplies two plain and two Lombard utterances. Verify the full picture archive and the size, CRC and SHA-256 of selected audio members read from publisher byte ranges.",
+    "stable": "Keep the original timestamp only if the same phone is observed within 40 ms after an independent 3.4 kHz low-pass delivery."
+  },
+  "model_sha256": "3173bde9e9ce490fa0f989e413c42f25bc1820c020adc1e6b9b87025b3cfcc5e",
+  "outcomes": {
+    "development/l/neural/early": {
+      "files": 8,
+      "files_with_hit": 3,
+      "matched": 3,
+      "median_midpoint_error_samples": 280,
+      "paired_shifts_within_60ms": 3,
+      "target_intervals": 8
+    },
+    "development/l/neural/filtered": {
+      "files": 8,
+      "files_with_hit": 5,
+      "matched": 9,
+      "median_midpoint_error_samples": 600,
+      "target_intervals": 17,
+      "unmatched_events": 8
+    },
+    "development/l/neural/late": {
+      "files": 8,
+      "files_with_hit": 3,
+      "matched": 3,
+      "median_midpoint_error_samples": 280,
+      "paired_shifts_within_60ms": 3,
+      "target_intervals": 8
+    },
+    "development/l/neural/original": {
+      "files": 8,
+      "files_with_hit": 5,
+      "matched": 10,
+      "median_midpoint_error_samples": 640.0,
+      "target_intervals": 17,
+      "unmatched_events": 7
+    },
+    "development/l/neural_stable/original": {
+      "files": 8,
+      "files_with_hit": 5,
+      "matched": 10,
+      "median_midpoint_error_samples": 640.0,
+      "target_intervals": 17,
+      "unmatched_events": 7
+    },
+    "development/l/old/early": {
+      "files": 8,
+      "files_with_hit": 3,
+      "matched": 3,
+      "median_midpoint_error_samples": 400,
+      "paired_shifts_within_60ms": 2,
+      "target_intervals": 8
+    },
+    "development/l/old/filtered": {
+      "files": 8,
+      "files_with_hit": 3,
+      "matched": 3,
+      "median_midpoint_error_samples": 880,
+      "target_intervals": 17,
+      "unmatched_events": 4
+    },
+    "development/l/old/late": {
+      "files": 8,
+      "files_with_hit": 2,
+      "matched": 2,
+      "median_midpoint_error_samples": 480.0,
+      "paired_shifts_within_60ms": 2,
+      "target_intervals": 8
+    },
+    "development/l/old/original": {
+      "files": 8,
+      "files_with_hit": 5,
+      "matched": 6,
+      "median_midpoint_error_samples": 640.0,
+      "target_intervals": 17,
+      "unmatched_events": 6
+    },
+    "development/l/old_stable/original": {
+      "files": 8,
+      "files_with_hit": 3,
+      "matched": 3,
+      "median_midpoint_error_samples": 880,
+      "target_intervals": 17,
+      "unmatched_events": 1
+    },
+    "development/p/neural/early": {
+      "files": 8,
+      "files_with_hit": 3,
+      "matched": 3,
+      "median_midpoint_error_samples": 760,
+      "paired_shifts_within_60ms": 3,
+      "target_intervals": 8
+    },
+    "development/p/neural/filtered": {
+      "files": 8,
+      "files_with_hit": 5,
+      "matched": 7,
+      "median_midpoint_error_samples": 920,
+      "target_intervals": 19,
+      "unmatched_events": 12
+    },
+    "development/p/neural/late": {
+      "files": 8,
+      "files_with_hit": 3,
+      "matched": 3,
+      "median_midpoint_error_samples": 760,
+      "paired_shifts_within_60ms": 3,
+      "target_intervals": 8
+    },
+    "development/p/neural/original": {
+      "files": 8,
+      "files_with_hit": 5,
+      "matched": 7,
+      "median_midpoint_error_samples": 920,
+      "target_intervals": 19,
+      "unmatched_events": 12
+    },
+    "development/p/neural_stable/original": {
+      "files": 8,
+      "files_with_hit": 5,
+      "matched": 7,
+      "median_midpoint_error_samples": 920,
+      "target_intervals": 19,
+      "unmatched_events": 12
+    },
+    "development/p/old/early": {
+      "files": 8,
+      "files_with_hit": 7,
+      "matched": 7,
+      "median_midpoint_error_samples": 800,
+      "paired_shifts_within_60ms": 4,
+      "target_intervals": 8
+    },
+    "development/p/old/filtered": {
+      "files": 8,
+      "files_with_hit": 4,
+      "matched": 5,
+      "median_midpoint_error_samples": 240,
+      "target_intervals": 19,
+      "unmatched_events": 4
+    },
+    "development/p/old/late": {
+      "files": 8,
+      "files_with_hit": 3,
+      "matched": 3,
+      "median_midpoint_error_samples": 640,
+      "paired_shifts_within_60ms": 2,
+      "target_intervals": 8
+    },
+    "development/p/old/original": {
+      "files": 8,
+      "files_with_hit": 5,
+      "matched": 7,
+      "median_midpoint_error_samples": 720,
+      "target_intervals": 19,
+      "unmatched_events": 4
+    },
+    "development/p/old_stable/original": {
+      "files": 8,
+      "files_with_hit": 3,
+      "matched": 4,
+      "median_midpoint_error_samples": 280.0,
+      "target_intervals": 19,
+      "unmatched_events": 2
+    },
+    "held/l/neural/early": {
+      "files": 16,
+      "files_with_hit": 7,
+      "matched": 7,
+      "median_midpoint_error_samples": 840,
+      "paired_shifts_within_60ms": 7,
+      "target_intervals": 16
+    },
+    "held/l/neural/filtered": {
+      "files": 16,
+      "files_with_hit": 11,
+      "matched": 15,
+      "median_midpoint_error_samples": 760,
+      "target_intervals": 31,
+      "unmatched_events": 15
+    },
+    "held/l/neural/late": {
+      "files": 16,
+      "files_with_hit": 7,
+      "matched": 7,
+      "median_midpoint_error_samples": 840,
+      "paired_shifts_within_60ms": 7,
+      "target_intervals": 16
+    },
+    "held/l/neural/original": {
+      "files": 16,
+      "files_with_hit": 11,
+      "matched": 15,
+      "median_midpoint_error_samples": 760,
+      "target_intervals": 31,
+      "unmatched_events": 16
+    },
+    "held/l/neural_stable/original": {
+      "files": 16,
+      "files_with_hit": 11,
+      "matched": 15,
+      "median_midpoint_error_samples": 760,
+      "target_intervals": 31,
+      "unmatched_events": 15
+    },
+    "held/l/old/early": {
+      "files": 16,
+      "files_with_hit": 7,
+      "matched": 7,
+      "median_midpoint_error_samples": 1040,
+      "paired_shifts_within_60ms": 5,
+      "target_intervals": 16
+    },
+    "held/l/old/filtered": {
+      "files": 16,
+      "files_with_hit": 5,
+      "matched": 5,
+      "median_midpoint_error_samples": 640,
+      "target_intervals": 31,
+      "unmatched_events": 10
+    },
+    "held/l/old/late": {
+      "files": 16,
+      "files_with_hit": 5,
+      "matched": 5,
+      "median_midpoint_error_samples": 1040,
+      "paired_shifts_within_60ms": 5,
+      "target_intervals": 16
+    },
+    "held/l/old/original": {
+      "files": 16,
+      "files_with_hit": 8,
+      "matched": 9,
+      "median_midpoint_error_samples": 720,
+      "target_intervals": 31,
+      "unmatched_events": 7
+    },
+    "held/l/old_stable/original": {
+      "files": 16,
+      "files_with_hit": 5,
+      "matched": 5,
+      "median_midpoint_error_samples": 720,
+      "target_intervals": 31,
+      "unmatched_events": 3
+    },
+    "held/p/neural/early": {
+      "files": 16,
+      "files_with_hit": 5,
+      "matched": 5,
+      "median_midpoint_error_samples": 520,
+      "paired_shifts_within_60ms": 5,
+      "target_intervals": 16
+    },
+    "held/p/neural/filtered": {
+      "files": 16,
+      "files_with_hit": 8,
+      "matched": 15,
+      "median_midpoint_error_samples": 520,
+      "target_intervals": 33,
+      "unmatched_events": 17
+    },
+    "held/p/neural/late": {
+      "files": 16,
+      "files_with_hit": 5,
+      "matched": 5,
+      "median_midpoint_error_samples": 280,
+      "paired_shifts_within_60ms": 5,
+      "target_intervals": 16
+    },
+    "held/p/neural/original": {
+      "files": 16,
+      "files_with_hit": 8,
+      "matched": 15,
+      "median_midpoint_error_samples": 520,
+      "target_intervals": 33,
+      "unmatched_events": 17
+    },
+    "held/p/neural_stable/original": {
+      "files": 16,
+      "files_with_hit": 8,
+      "matched": 15,
+      "median_midpoint_error_samples": 520,
+      "target_intervals": 33,
+      "unmatched_events": 17
+    },
+    "held/p/old/early": {
+      "files": 16,
+      "files_with_hit": 6,
+      "matched": 6,
+      "median_midpoint_error_samples": 680.0,
+      "paired_shifts_within_60ms": 3,
+      "target_intervals": 16
+    },
+    "held/p/old/filtered": {
+      "files": 16,
+      "files_with_hit": 7,
+      "matched": 7,
+      "median_midpoint_error_samples": 720,
+      "target_intervals": 33,
+      "unmatched_events": 7
+    },
+    "held/p/old/late": {
+      "files": 16,
+      "files_with_hit": 5,
+      "matched": 5,
+      "median_midpoint_error_samples": 720,
+      "paired_shifts_within_60ms": 2,
+      "target_intervals": 16
+    },
+    "held/p/old/original": {
+      "files": 16,
+      "files_with_hit": 4,
+      "matched": 4,
+      "median_midpoint_error_samples": 720.0,
+      "target_intervals": 33,
+      "unmatched_events": 9
+    },
+    "held/p/old_stable/original": {
+      "files": 16,
+      "files_with_hit": 4,
+      "matched": 4,
+      "median_midpoint_error_samples": 720.0,
+      "target_intervals": 33,
+      "unmatched_events": 2
+    }
+  },
+  "revision": "ae45363bf3413b374fecd9dc8bc1df0e24c3b7f4",
+  "roster_sha256": "d5a3e63a6427e2200c10bdff29a11df36cc930e4985276480b5284fa3cf790ca",
+  "rows": [
+    {
+      "condition": "p",
+      "edit": [
+        5360,
+        16560
+      ],
+      "labels": [
+        [
+          "b",
+          5280,
+          6400
+        ],
+        [
+          "b",
+          10560,
+          11360
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              9160,
+              0.98474
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              8640,
+              null
+            ]
+          ],
+          "sha256": "37591074b65301c52df447eeee31a04c5b45eb1bc7fe2e01db1ae5642d4d4766"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              7240,
+              0.985297
+            ],
+            [
+              "b",
+              12360,
+              0.976252
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              11840,
+              null
+            ]
+          ],
+          "sha256": "ef609629591dc2293b5f0335ec331d9e8dd5e8e6ab3d9bc4ae3194d0dc14377e"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              10440,
+              0.983507
+            ],
+            [
+              "b",
+              15560,
+              0.975359
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              10400,
+              null
+            ],
+            [
+              "b",
+              14960,
+              null
+            ]
+          ],
+          "sha256": "6c5f3c5a6f6b7cba5b76fcc5a9d448b3068973fd8be7d226b2392ad3dfea3a03"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              7240,
+              0.98621
+            ],
+            [
+              "b",
+              12360,
+              0.981811
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              6640,
+              null
+            ],
+            [
+              "b",
+              11840,
+              null
+            ]
+          ],
+          "sha256": "fba6ad934643237a8fd956d0929de2149db8b6c800936c77f56075e5b4000e8d"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s6_p_lbbf9s.json",
+          "sha256": "a26a551816e1d9c5452d65f3cd39167967fe99abdf71e806e11086451f2b3d0c"
+        },
+        "audio": {
+          "bytes": 135098,
+          "crc32": 3583674936,
+          "name": "lombardgrid/audio/s6_p_lbbf9s.wav",
+          "sha256": "aefb97c1068da0c9e5bedc676ea1ae750acbf807fa00f68120a9d49e90466aaf"
+        },
+        "front": {
+          "name": "lombardgrid/front/s6_p_lbbf9s.mov",
+          "sha256": "15fb2b11b88870d1ec91f79bbcb0eb56b84ae27b167cdba936e3fde264702c7f"
+        }
+      },
+      "samples": 33760,
+      "source": "s6_p_lbbf9s",
+      "speaker": "s6",
+      "split": "development",
+      "target": [
+        "b",
+        10560,
+        11360
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        14480,
+        25680
+      ],
+      "labels": [
+        [
+          "b",
+          1600,
+          2400
+        ],
+        [
+          "b",
+          19680,
+          20480
+        ],
+        [
+          "p",
+          26720,
+          28160
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.97009
+            ],
+            [
+              "b",
+              18120,
+              0.980683
+            ],
+            [
+              "p",
+              25160,
+              0.934553
+            ],
+            [
+              "p",
+              28360,
+              0.978887
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              17680,
+              null
+            ],
+            [
+              "b",
+              24640,
+              null
+            ],
+            [
+              "b",
+              28080,
+              null
+            ]
+          ],
+          "sha256": "53ae2259856acebf4a24ada8d004af239dfaee3e00f8277a085ae5f559a47963"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.969158
+            ],
+            [
+              "b",
+              21320,
+              0.977836
+            ],
+            [
+              "p",
+              28360,
+              0.978808
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              28240,
+              null
+            ]
+          ],
+          "sha256": "fa70e3b2079273508c5ac18b9d6ef8d482288a5ab1d16663b91e19be91984397"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.97108
+            ],
+            [
+              "b",
+              24520,
+              0.98117
+            ],
+            [
+              "p",
+              28360,
+              0.966556
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              28320,
+              null
+            ]
+          ],
+          "sha256": "5ee8a9b014ac98c0bcf49d58b290bfa45fb369955fce2b32700ff0f9da2f0e15"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.972417
+            ],
+            [
+              "b",
+              21320,
+              0.980141
+            ],
+            [
+              "p",
+              28360,
+              0.972918
+            ]
+          ],
+          "old": [],
+          "sha256": "f14c60e1dab44dbc528345e4808bb34f3c729251c46260dbf00a92d472801bb3"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s6_p_bwib4p.json",
+          "sha256": "753a659de6a12cfc5cbca66056ab99d698a1e2a7a7c98decf88a5c6e98d1242c"
+        },
+        "audio": {
+          "bytes": 145978,
+          "crc32": 2601946154,
+          "name": "lombardgrid/audio/s6_p_bwib4p.wav",
+          "sha256": "73992849fcc6451efb1202edf9acd9a5980616535b141eb75aeaa960eec90c8f"
+        },
+        "front": {
+          "name": "lombardgrid/front/s6_p_bwib4p.mov",
+          "sha256": "699eb8d0587be98fc6cff87e7f346be185ac670c96305115e16d17ebd8ca0d1e"
+        }
+      },
+      "samples": 36480,
+      "source": "s6_p_bwib4p",
+      "speaker": "s6",
+      "split": "development",
+      "target": [
+        "b",
+        19680,
+        20480
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        3520,
+        14720
+      ],
+      "labels": [
+        [
+          "p",
+          2560,
+          3360
+        ],
+        [
+          "b",
+          8800,
+          9440
+        ],
+        [
+          "b",
+          12800,
+          14560
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.523339
+            ],
+            [
+              "b",
+              5960,
+              0.979091
+            ],
+            [
+              "b",
+              9800,
+              0.97984
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              5440,
+              null
+            ]
+          ],
+          "sha256": "f1823e48c0ea09b0f20263324d78cb25c08e7e6dcb673a16ad95435f36dac6c6"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.990645
+            ],
+            [
+              "b",
+              9160,
+              0.967652
+            ],
+            [
+              "b",
+              13000,
+              0.981467
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              12800,
+              null
+            ]
+          ],
+          "sha256": "cb0b8693d2fcc9cd5ab2fa5cd01960b276505629e96a619c6b2f6fecf8abc319"
+        },
+        "late": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.87122
+            ],
+            [
+              "p",
+              6280,
+              0.988174
+            ],
+            [
+              "b",
+              12360,
+              0.980533
+            ]
+          ],
+          "old": [],
+          "sha256": "cd3c284bbb0b4a908f82a6dc60f173e475271749a67288616c9e36a6218b68fd"
+        },
+        "original": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.990417
+            ],
+            [
+              "b",
+              9160,
+              0.982612
+            ],
+            [
+              "b",
+              13000,
+              0.982845
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              12800,
+              null
+            ],
+            [
+              "b",
+              16720,
+              null
+            ]
+          ],
+          "sha256": "9072b1623c0dcf54f0bdf9830698ea001c1be9755d8887f634fbf980b984365a"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s6_l_pbbx4s.json",
+          "sha256": "e01dadd66e619022a1d99ca3a66e7bf0f6117d6ec5bc37cf66d2ca11635075a7"
+        },
+        "audio": {
+          "bytes": 160698,
+          "crc32": 2774450259,
+          "name": "lombardgrid/audio/s6_l_pbbx4s.wav",
+          "sha256": "50bbb52c4413b027265d6bd41d2736fbd2ef1f329ec013acc916cbe65b8d8b58"
+        },
+        "front": {
+          "name": "lombardgrid/front/s6_l_pbbx4s.mov",
+          "sha256": "d1f9382fbe5ee47aac8fe182235fa5b69ed0d3a7beb32bf6ebe1d7cb3eb87aca"
+        }
+      },
+      "samples": 40160,
+      "source": "s6_l_pbbx4s",
+      "speaker": "s6",
+      "split": "development",
+      "target": [
+        "b",
+        8800,
+        9440
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        6160,
+        17360
+      ],
+      "labels": [
+        [
+          "b",
+          1920,
+          2880
+        ],
+        [
+          "b",
+          11520,
+          12000
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.962629
+            ],
+            [
+              "b",
+              9160,
+              0.954211
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              2400,
+              null
+            ],
+            [
+              "b",
+              8160,
+              null
+            ]
+          ],
+          "sha256": "6cce839b7cbcade9bca6f4543ecff9c2f8edd6ffe3688d53b244db91bb0a4968"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.972238
+            ],
+            [
+              "b",
+              12360,
+              0.95729
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              11280,
+              null
+            ]
+          ],
+          "sha256": "3e66b08a4e10dc8cbaa610b79fc21f3a208c9cafdc9d0bb9121cb9cee8823060"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.974475
+            ],
+            [
+              "b",
+              15560,
+              0.959866
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              14560,
+              null
+            ]
+          ],
+          "sha256": "5ac9878c9a2d23bca5359b4fc2100dd3fe9d158f59ef9db35abdeabe2ab88a93"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.972717
+            ],
+            [
+              "b",
+              12360,
+              0.967871
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              2400,
+              null
+            ],
+            [
+              "b",
+              11360,
+              null
+            ],
+            [
+              "p",
+              15520,
+              null
+            ]
+          ],
+          "sha256": "ad635629b894e97a6f5494cfbd98e62c2c349b0406644ea528ab4d7bd0324923"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s6_l_bwbqza.json",
+          "sha256": "e1b3bf58bac692bbea2b4e1e14eb9b5b8dd0b71395a93f794af18cbebcc1ff69"
+        },
+        "audio": {
+          "bytes": 154938,
+          "crc32": 2340946283,
+          "name": "lombardgrid/audio/s6_l_bwbqza.wav",
+          "sha256": "38dbc824b97baa0f504577420813ca50df4662d7263a48f2dfb0b49a451dd009"
+        },
+        "front": {
+          "name": "lombardgrid/front/s6_l_bwbqza.mov",
+          "sha256": "05e2a7bd66ce5b10184b4f89c22ee8edcc0ab4a4e856c06bd7f60d1a918f53c6"
+        }
+      },
+      "samples": 38720,
+      "source": "s6_l_bwbqza",
+      "speaker": "s6",
+      "split": "development",
+      "target": [
+        "b",
+        11520,
+        12000
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        7040,
+        18240
+      ],
+      "labels": [
+        [
+          "b",
+          11520,
+          13760
+        ],
+        [
+          "p",
+          28480,
+          29440
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              10440,
+              0.963175
+            ],
+            [
+              "p",
+              30920,
+              0.983695
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              10240,
+              null
+            ],
+            [
+              "p",
+              15840,
+              null
+            ]
+          ],
+          "sha256": "d679f128bdf902f0e6575f686d888604382f3bf776083d553f3bdf491e9f7152"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              13640,
+              0.971166
+            ],
+            [
+              "p",
+              30920,
+              0.985249
+            ]
+          ],
+          "old": [],
+          "sha256": "7be60bc9c673830fd5cd4b24afd0efc1b1f00cb9b7cae6efa104caa86058932b"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              16840,
+              0.97259
+            ],
+            [
+              "p",
+              30920,
+              0.985126
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              30720,
+              null
+            ]
+          ],
+          "sha256": "f144dc420fd5f09b95d7e3ac6a2caf2fce64667e4f8558cf6761284e369be441"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              13640,
+              0.972612
+            ],
+            [
+              "p",
+              30920,
+              0.987279
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              30720,
+              null
+            ]
+          ],
+          "sha256": "37d3932933beb54d7c432249254e741ce69c4bd0680fc4f3130e72bf62238001"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s52_p_lgbm5p.json",
+          "sha256": "f6b30274d64c4b2f79c30828cd2fff5e58e53a3af13996192ffe03e3678b1533"
+        },
+        "audio": {
+          "bytes": 161338,
+          "crc32": 1996229016,
+          "name": "lombardgrid/audio/s52_p_lgbm5p.wav",
+          "sha256": "741ca913d5e809117e8be0cf5b7c8578c0464c3c62bc24295115ed27b8fff0d4"
+        },
+        "front": {
+          "name": "lombardgrid/front/s52_p_lgbm5p.mov",
+          "sha256": "7363649d7fa60775234100fbae0528a70764e39b43b3bd68f7ccf101154744b4"
+        }
+      },
+      "samples": 40320,
+      "source": "s52_p_lgbm5p",
+      "speaker": "s52",
+      "split": "development",
+      "target": [
+        "b",
+        11520,
+        13760
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        8320,
+        19520
+      ],
+      "labels": [
+        [
+          "b",
+          6080,
+          7520
+        ],
+        [
+          "b",
+          12640,
+          15200
+        ],
+        [
+          "p",
+          28160,
+          29440
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              8200,
+              0.982388
+            ],
+            [
+              "b",
+              11400,
+              0.976508
+            ],
+            [
+              "p",
+              30280,
+              0.984761
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              7520,
+              null
+            ],
+            [
+              "b",
+              10800,
+              null
+            ],
+            [
+              "p",
+              30400,
+              null
+            ]
+          ],
+          "sha256": "5cd8305e3bcb7d8bb38d6801cde090f49df9bcb967aa392506f9d23e7d9fb57f"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              8200,
+              0.974603
+            ],
+            [
+              "b",
+              14600,
+              0.973522
+            ],
+            [
+              "p",
+              30280,
+              0.988182
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              13760,
+              null
+            ]
+          ],
+          "sha256": "a03f9dee16b16476e1b7c0219b64df35c5216cb89ab8850824f66e0c1c10ddda"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              8200,
+              0.969803
+            ],
+            [
+              "b",
+              11400,
+              0.975814
+            ],
+            [
+              "b",
+              17800,
+              0.961241
+            ],
+            [
+              "p",
+              30280,
+              0.985798
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              7520,
+              null
+            ],
+            [
+              "b",
+              10720,
+              null
+            ],
+            [
+              "b",
+              17760,
+              null
+            ]
+          ],
+          "sha256": "7b16b561370a8baad548025c0a9fa00b3e45ed71afb0f9ed7c873bb2b5c6d0e8"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              8200,
+              0.979836
+            ],
+            [
+              "b",
+              14600,
+              0.975271
+            ],
+            [
+              "p",
+              30280,
+              0.988871
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              7520,
+              null
+            ],
+            [
+              "p",
+              13840,
+              null
+            ],
+            [
+              "p",
+              30400,
+              null
+            ]
+          ],
+          "sha256": "44884270971014915ba6c67839913d59c11abf197a7e0a0bfbaf226ab0c43e7b"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s52_p_lbbf9p.json",
+          "sha256": "5c90d99d56f0a3d2327c8505a96c9000a52a27d639a0c9a78da28900f619bd41"
+        },
+        "audio": {
+          "bytes": 161978,
+          "crc32": 2908370581,
+          "name": "lombardgrid/audio/s52_p_lbbf9p.wav",
+          "sha256": "af7970a17cc22c7fd3bfbdb68cb9e74a1bfdd8c1e375994aa3fce9c2dd50782e"
+        },
+        "front": {
+          "name": "lombardgrid/front/s52_p_lbbf9p.mov",
+          "sha256": "af9da7f70d469c2a04d5acd84e98fd3f055d1a7aa5579ac8bb2f71da7e43b338"
+        }
+      },
+      "samples": 40480,
+      "source": "s52_p_lbbf9p",
+      "speaker": "s52",
+      "split": "development",
+      "target": [
+        "b",
+        12640,
+        15200
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        12480,
+        23680
+      ],
+      "labels": [
+        [
+          "b",
+          960,
+          2720
+        ],
+        [
+          "p",
+          17440,
+          18720
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.937303
+            ],
+            [
+              "p",
+              16520,
+              0.940501
+            ]
+          ],
+          "old": [],
+          "sha256": "a4b38871a28067156f3ca693dd01df1a34a3ef7b53b4b6079fce10678682a74d"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.933232
+            ],
+            [
+              "p",
+              19720,
+              0.967707
+            ]
+          ],
+          "old": [],
+          "sha256": "392a7a9d2a0613d23cb9b04c12fbdcaa21d0a7feec17b7bf907602911efbf3ad"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.930085
+            ],
+            [
+              "p",
+              22920,
+              0.912026
+            ]
+          ],
+          "old": [],
+          "sha256": "a06d02dd6ee5186b244084663581704cbb8fa5214bd683d8a9abe53ced97ca9b"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.944001
+            ],
+            [
+              "p",
+              19720,
+              0.95564
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              19040,
+              null
+            ]
+          ],
+          "sha256": "827d994180853e48fe178c6d7fdb0d941dcf6895eec08e2dcc08fcbf14cebba2"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s52_l_brwp3s.json",
+          "sha256": "ec1c725f9e74c20d8f9591238765df337828305f406d1dcc13255230fc2b579f"
+        },
+        "audio": {
+          "bytes": 167098,
+          "crc32": 3781760211,
+          "name": "lombardgrid/audio/s52_l_brwp3s.wav",
+          "sha256": "7584d72307f06cfa31e9d175a5f2852257d61624ec63c37452ca5134d3fff16a"
+        },
+        "front": {
+          "name": "lombardgrid/front/s52_l_brwp3s.mov",
+          "sha256": "39e2de08cb7f504d936ca129b5370403fc2a580b8d137a350a6834e568ff53bb"
+        }
+      },
+      "samples": 41760,
+      "source": "s52_l_brwp3s",
+      "speaker": "s52",
+      "split": "development",
+      "target": [
+        "p",
+        17440,
+        18720
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        10000,
+        21200
+      ],
+      "labels": [
+        [
+          "b",
+          800,
+          3200
+        ],
+        [
+          "b",
+          13920,
+          17280
+        ],
+        [
+          "p",
+          32640,
+          33760
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.952134
+            ],
+            [
+              "b",
+              12680,
+              0.935419
+            ],
+            [
+              "p",
+              34760,
+              0.986698
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              34240,
+              null
+            ]
+          ],
+          "sha256": "2e1dae470c03771e892597936c0becbf9f7523c8fb3c283a7b210dcc05d91e3e"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.966574
+            ],
+            [
+              "b",
+              15880,
+              0.934787
+            ],
+            [
+              "p",
+              34760,
+              0.987678
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              34240,
+              null
+            ]
+          ],
+          "sha256": "222177e83b41c9240f9a0cb55cb795951256390f12eb498ff3f8161eae00f383"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.972205
+            ],
+            [
+              "b",
+              19080,
+              0.906968
+            ],
+            [
+              "p",
+              34760,
+              0.981447
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              34240,
+              null
+            ]
+          ],
+          "sha256": "108366ee047ca69f1e402c3d73b060a56268b7d977a54e259527977dde06c9fa"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.969352
+            ],
+            [
+              "b",
+              15880,
+              0.945849
+            ],
+            [
+              "p",
+              34760,
+              0.989332
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              34240,
+              null
+            ]
+          ],
+          "sha256": "aba2c76365800e0246a3b5e794ca30a82013bbef058d5449b203140bec6de696"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s52_l_bgbq4p.json",
+          "sha256": "1bb25dc4424b96b9c9caac4d2892aa84c4b981a9fc381576b683cd6edd9ef18b"
+        },
+        "audio": {
+          "bytes": 192698,
+          "crc32": 4127382526,
+          "name": "lombardgrid/audio/s52_l_bgbq4p.wav",
+          "sha256": "c586f5a353e75d57dbdf855abeab7ebc71d93c3af1ce0cfa2534636dea3cdc5a"
+        },
+        "front": {
+          "name": "lombardgrid/front/s52_l_bgbq4p.mov",
+          "sha256": "8771e5f96628d27b96864b1492b7482fbff85e55e387bbe9187d012269e65712"
+        }
+      },
+      "samples": 48160,
+      "source": "s52_l_bgbq4p",
+      "speaker": "s52",
+      "split": "development",
+      "target": [
+        "b",
+        13920,
+        17280
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        8880,
+        20080
+      ],
+      "labels": [
+        [
+          "p",
+          1600,
+          3360
+        ],
+        [
+          "b",
+          14080,
+          14880
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "p",
+              3400,
+              0.985863
+            ],
+            [
+              "b",
+              12040,
+              0.965924
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              11040,
+              null
+            ]
+          ],
+          "sha256": "94797da451982f44bce4627f6bd41dd22f166505bedd3c0881871f607fbab38c"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "p",
+              3400,
+              0.981244
+            ],
+            [
+              "b",
+              15240,
+              0.974187
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              14240,
+              null
+            ],
+            [
+              "b",
+              33680,
+              null
+            ]
+          ],
+          "sha256": "2c35e50442617fc74ec8ba4375affc18e687d47dc7f161a17364e60c49f33cdd"
+        },
+        "late": {
+          "neural": [
+            [
+              "p",
+              3400,
+              0.987233
+            ],
+            [
+              "b",
+              18440,
+              0.973339
+            ]
+          ],
+          "old": [],
+          "sha256": "0c56dee8614a58736a9bc037b9d9e354ccb44ded71fe4fe6a2e1975fd1b06c39"
+        },
+        "original": {
+          "neural": [
+            [
+              "p",
+              3400,
+              0.953742
+            ],
+            [
+              "b",
+              15240,
+              0.977616
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              14640,
+              null
+            ]
+          ],
+          "sha256": "8caacfbef5df4324ef2b5b8380d665174e43ca5b83972fe618a259ad8351d814"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s40_p_prbe8a.json",
+          "sha256": "c47fa0962a8b70fda53ab343653d76c3dbfefdc4490c67ceced6cd9bf3440b40"
+        },
+        "audio": {
+          "bytes": 153018,
+          "crc32": 421677286,
+          "name": "lombardgrid/audio/s40_p_prbe8a.wav",
+          "sha256": "ce4c66ec60c5f9693acfba9b1005a8bbf858cf8a50c48e79181faee287bd41ee"
+        },
+        "front": {
+          "name": "lombardgrid/front/s40_p_prbe8a.mov",
+          "sha256": "420652c55afb03e3c98dd5113a7174a6ce9c5eabbbc2c6d6575a7360b6d4a4ce"
+        }
+      },
+      "samples": 38240,
+      "source": "s40_p_prbe8a",
+      "speaker": "s40",
+      "split": "development",
+      "target": [
+        "b",
+        14080,
+        14880
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        3440,
+        14640
+      ],
+      "labels": [
+        [
+          "p",
+          1280,
+          2400
+        ],
+        [
+          "b",
+          8640,
+          9440
+        ],
+        [
+          "b",
+          15520,
+          16960
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              7240,
+              0.980727
+            ],
+            [
+              "b",
+              13640,
+              0.827904
+            ],
+            [
+              "b",
+              17160,
+              0.908132
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              6160,
+              null
+            ],
+            [
+              "b",
+              12960,
+              null
+            ],
+            [
+              "b",
+              16080,
+              null
+            ],
+            [
+              "b",
+              36800,
+              null
+            ]
+          ],
+          "sha256": "b4e13973f1fdd36adce3b23cbe0290e0c456a3211d102be68960061002283331"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.9865
+            ],
+            [
+              "b",
+              10440,
+              0.981208
+            ],
+            [
+              "b",
+              17160,
+              0.831828
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              9280,
+              null
+            ],
+            [
+              "b",
+              16240,
+              null
+            ],
+            [
+              "b",
+              36800,
+              null
+            ]
+          ],
+          "sha256": "6fc0cb38a09d0e0735554b6a604afb947ac2424704838beeeb8b2fd757b2f086"
+        },
+        "late": {
+          "neural": [
+            [
+              "p",
+              6280,
+              0.986041
+            ],
+            [
+              "b",
+              13640,
+              0.981272
+            ],
+            [
+              "b",
+              17160,
+              0.946167
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              12640,
+              null
+            ],
+            [
+              "b",
+              16240,
+              null
+            ],
+            [
+              "b",
+              36800,
+              null
+            ]
+          ],
+          "sha256": "e59ebf9687b798a943d5d31204a695c09c7c65849ddf4fca92397add171dd605"
+        },
+        "original": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.987005
+            ],
+            [
+              "b",
+              10440,
+              0.982293
+            ],
+            [
+              "b",
+              17160,
+              0.943213
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              9440,
+              null
+            ],
+            [
+              "b",
+              16160,
+              null
+            ],
+            [
+              "b",
+              36800,
+              null
+            ]
+          ],
+          "sha256": "cf059f6540677cf8e85db0960113af7743a95e65f975fab802c8491d715215cb"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s40_p_pbby6a.json",
+          "sha256": "9c174e6c9cd5a6a6256c9ed43cd1a236c8f3232bc82e41574ccc6366bb300b82"
+        },
+        "audio": {
+          "bytes": 165178,
+          "crc32": 2434286281,
+          "name": "lombardgrid/audio/s40_p_pbby6a.wav",
+          "sha256": "adac5f5a00ab550df470a868976a4cfe303a43a62fa30f85b940afa2665c9555"
+        },
+        "front": {
+          "name": "lombardgrid/front/s40_p_pbby6a.mov",
+          "sha256": "ec97dacd001c252d47e493a5becf70f032d8bd6b3704d5f141e73c5b7568b2fe"
+        }
+      },
+      "samples": 41280,
+      "source": "s40_p_pbby6a",
+      "speaker": "s40",
+      "split": "development",
+      "target": [
+        "b",
+        8640,
+        9440
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        11280,
+        22480
+      ],
+      "labels": [
+        [
+          "b",
+          16000,
+          17760
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              15240,
+              0.973165
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              14080,
+              null
+            ]
+          ],
+          "sha256": "0a8e27b1e1f91cedc4c06136a4ef0441f3f95eec827b461acfc277a293569beb"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              18440,
+              0.974561
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              17200,
+              null
+            ],
+            [
+              "b",
+              22640,
+              null
+            ]
+          ],
+          "sha256": "6f7231a0a5b2ad168048a2951987829d3f7448cfddde3b36af4b4ded00aec873"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              21640,
+              0.943336
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              20640,
+              null
+            ]
+          ],
+          "sha256": "e9bd507095d7a0fa7319c02fe42e3a17f88c7c092c94919e3e7fe72395be45b4"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              18440,
+              0.975711
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              17280,
+              null
+            ]
+          ],
+          "sha256": "64c15281c17d830585ba7e22bc006f588cef19a173f2e604482a3a850bc5b398"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s40_l_swbd8n.json",
+          "sha256": "f3352a9274b44fe51570f050da4eef494267ecb86484a8523bbe6eac194f9ab3"
+        },
+        "audio": {
+          "bytes": 171578,
+          "crc32": 4132650980,
+          "name": "lombardgrid/audio/s40_l_swbd8n.wav",
+          "sha256": "2c46b79eacfd95ed95676e8b4693588d2aacf921bbd77adcdec274a38dad9d22"
+        },
+        "front": {
+          "name": "lombardgrid/front/s40_l_swbd8n.mov",
+          "sha256": "8e0c575e431e26434176695bdabc31c3c1e7a1e83acb23cdbf794ad7beae53ad"
+        }
+      },
+      "samples": 42880,
+      "source": "s40_l_swbd8n",
+      "speaker": "s40",
+      "split": "development",
+      "target": [
+        "b",
+        16000,
+        17760
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        12400,
+        23600
+      ],
+      "labels": [
+        [
+          "b",
+          1120,
+          3200
+        ],
+        [
+          "p",
+          17280,
+          18720
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.938462
+            ],
+            [
+              "p",
+              16200,
+              0.893369
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              20640,
+              null
+            ],
+            [
+              "p",
+              24160,
+              null
+            ],
+            [
+              "b",
+              36240,
+              null
+            ]
+          ],
+          "sha256": "ddc5d4ca22d6b398639d0fc190aba4d47f46587c74e7544fdb002d668a4b5134"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.97425
+            ],
+            [
+              "p",
+              19400,
+              0.948382
+            ]
+          ],
+          "old": [],
+          "sha256": "8c35fa8dc963fe46a0147de3a35508502bef747b1790b259ca603bcb4c131e69"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.961087
+            ],
+            [
+              "p",
+              22600,
+              0.961354
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              24320,
+              null
+            ]
+          ],
+          "sha256": "eadf4564494cf7632d9ccab40b929e8c99d2e0d98f6085dc8a36e84941212a96"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.968958
+            ],
+            [
+              "p",
+              19080,
+              0.969339
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              23840,
+              null
+            ],
+            [
+              "b",
+              36240,
+              null
+            ]
+          ],
+          "sha256": "c249c896b5cb25f40f890bfde1d30c824cf1f17415ac92e6036f7cf02e91a4f8"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s40_l_bwip5a.json",
+          "sha256": "e55e6b36628bd314aba0f5865abf352e4cfdea50d4179f605ec7a193d13b6b1b"
+        },
+        "audio": {
+          "bytes": 163258,
+          "crc32": 728019043,
+          "name": "lombardgrid/audio/s40_l_bwip5a.wav",
+          "sha256": "35b8fd3bd1f8cc4e2b54986379185ca018634f77e5f270fd77a319f5459caee9"
+        },
+        "front": {
+          "name": "lombardgrid/front/s40_l_bwip5a.mov",
+          "sha256": "795f579d89af0c9b78806e912cb80d20e75833276cf3e03abf13aee57d834d70"
+        }
+      },
+      "samples": 40800,
+      "source": "s40_l_bwip5a",
+      "speaker": "s40",
+      "split": "development",
+      "target": [
+        "p",
+        17280,
+        18720
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        7600,
+        18800
+      ],
+      "labels": [
+        [
+          "b",
+          6400,
+          7520
+        ],
+        [
+          "b",
+          12800,
+          13600
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              7560,
+              0.447557
+            ],
+            [
+              "b",
+              11400,
+              0.911385
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              10880,
+              null
+            ]
+          ],
+          "sha256": "a2815ca7f1f0c085b30b75d0dc14dc91187e8e5fbec821634e265fab77cf6741"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              8520,
+              0.958214
+            ],
+            [
+              "b",
+              14600,
+              0.939556
+            ]
+          ],
+          "old": [],
+          "sha256": "06d9d835fbac48828a1d8f56f925853e3373a11d85d21e9fc19d9d05c27258df"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              11720,
+              0.966383
+            ],
+            [
+              "b",
+              17800,
+              0.904703
+            ]
+          ],
+          "old": [],
+          "sha256": "3a4c53d064d717e4c27e1393ce261496bc36ca89f966f2d7baa08cc58a207fb6"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              8520,
+              0.963202
+            ],
+            [
+              "b",
+              14600,
+              0.936245
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              14080,
+              null
+            ]
+          ],
+          "sha256": "da282234cb8649fc882154611fcf10c3d3d63e6f0df715ed3815893fae7fe234"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s16_p_lbbg9s.json",
+          "sha256": "740fbb73277e1595ddef8d52108c812c4de245ad235288e556cb886127305b5a"
+        },
+        "audio": {
+          "bytes": 166458,
+          "crc32": 1744842550,
+          "name": "lombardgrid/audio/s16_p_lbbg9s.wav",
+          "sha256": "7213e9b6269a96aa933dd1127bc853ae119487bad76f674f86e6c65ed2228412"
+        },
+        "front": {
+          "name": "lombardgrid/front/s16_p_lbbg9s.mov",
+          "sha256": "79136777d80e65d1da758ea8b100a96de86679e2a9ddcb16d1a7fdbe9c306add"
+        }
+      },
+      "samples": 41600,
+      "source": "s16_p_lbbg9s",
+      "speaker": "s16",
+      "split": "development",
+      "target": [
+        "b",
+        12800,
+        13600
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        21600,
+        32800
+      ],
+      "labels": [
+        [
+          "b",
+          6080,
+          7520
+        ],
+        [
+          "p",
+          26400,
+          28000
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              8520,
+              0.957776
+            ],
+            [
+              "p",
+              25800,
+              0.982687
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              25840,
+              null
+            ]
+          ],
+          "sha256": "535ccfc12e916ee8df761d9f035538f138416df34826dcdd570e04cefb2a2253"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              8520,
+              0.958004
+            ],
+            [
+              "p",
+              29000,
+              0.98167
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              28960,
+              null
+            ]
+          ],
+          "sha256": "7798c0554fe458c6ea37bfb2cfac6b4934b2b4d7e5361cba2ff66c0719b3076d"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              8520,
+              0.964881
+            ],
+            [
+              "b",
+              32200,
+              0.838176
+            ]
+          ],
+          "old": [],
+          "sha256": "59da372022f4b4ec6d566df31f56691f419c074677b43a3f9bf3787624eb1687"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              8520,
+              0.962238
+            ],
+            [
+              "p",
+              29000,
+              0.977907
+            ]
+          ],
+          "old": [],
+          "sha256": "df99be7708e15e0d6f9a9fb2304e437e3365110fe57209b07d08a0cffb09599d"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s16_p_sbwd4p.json",
+          "sha256": "67154dc081deef08bd75572197718c30761e6255b19a314bdf7f455b70f80865"
+        },
+        "audio": {
+          "bytes": 167738,
+          "crc32": 1813716947,
+          "name": "lombardgrid/audio/s16_p_sbwd4p.wav",
+          "sha256": "7bc8cf0302c3388c89add78c15ad33fd50d7d7e7c03e8b2bef39746117bcd5df"
+        },
+        "front": {
+          "name": "lombardgrid/front/s16_p_sbwd4p.mov",
+          "sha256": "96613a9ea14f12858d061861a8b9f9fd028303a005cd546943adffdbe111c12f"
+        }
+      },
+      "samples": 41920,
+      "source": "s16_p_sbwd4p",
+      "speaker": "s16",
+      "split": "development",
+      "target": [
+        "p",
+        26400,
+        28000
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        21120,
+        32320
+      ],
+      "labels": [
+        [
+          "b",
+          6560,
+          7840
+        ],
+        [
+          "p",
+          26080,
+          27360
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              9160,
+              0.985266
+            ],
+            [
+              "p",
+              25480,
+              0.989486
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              25120,
+              null
+            ]
+          ],
+          "sha256": "afef49a25c6abba7c29a64d22865ae3ff8515282399db9d0df00491e972aec7b"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              9160,
+              0.984519
+            ],
+            [
+              "p",
+              28680,
+              0.98594
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              6480,
+              null
+            ]
+          ],
+          "sha256": "6179de8b09bfba34bf95b0f1fe38935cb0fd5be8d145dda96f537242088501a1"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              9160,
+              0.984338
+            ],
+            [
+              "b",
+              31880,
+              0.957947
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              31200,
+              null
+            ]
+          ],
+          "sha256": "4df1980f7ea3bf743a573887216a540aada506318bd2a78ea04f7304b384f46e"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              9160,
+              0.986126
+            ],
+            [
+              "p",
+              28680,
+              0.987662
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              28320,
+              null
+            ]
+          ],
+          "sha256": "f4c286a3ff97898da84a8d1c9fb62dba0b8eaa4ba73a8d339f3b8bcfd37eab81"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s16_l_sbwd4p.json",
+          "sha256": "34a7ffb7a89e9453781a862bfeb27785f9a8516540292d25f6710d92a1b028ce"
+        },
+        "audio": {
+          "bytes": 163898,
+          "crc32": 2780841264,
+          "name": "lombardgrid/audio/s16_l_sbwd4p.wav",
+          "sha256": "fae40d6acd1b349820c12741753842f68e3f0991b91eeda7cf9f81c64787c17c"
+        },
+        "front": {
+          "name": "lombardgrid/front/s16_l_sbwd4p.mov",
+          "sha256": "b70af978508b281de31e7fb242e47973e6be4499e189e75aeca4aeb52b38e361"
+        }
+      },
+      "samples": 40960,
+      "source": "s16_l_sbwd4p",
+      "speaker": "s16",
+      "split": "development",
+      "target": [
+        "p",
+        26080,
+        27360
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        3840,
+        15040
+      ],
+      "labels": [
+        [
+          "p",
+          640,
+          2080
+        ],
+        [
+          "b",
+          8960,
+          9920
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.970883
+            ],
+            [
+              "b",
+              8200,
+              0.981952
+            ]
+          ],
+          "old": [],
+          "sha256": "7345fa776ec1a5eee13e1ce32cc615a8bc627df69eb689d01f813b0879dddd2c"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.988142
+            ],
+            [
+              "b",
+              11400,
+              0.978735
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              10720,
+              null
+            ]
+          ],
+          "sha256": "de5013390c3d87f0f9de1f2aaae50226c0e2353d8a3da964891f6d2b34ddbb72"
+        },
+        "late": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.648046
+            ],
+            [
+              "p",
+              6280,
+              0.988337
+            ],
+            [
+              "b",
+              14600,
+              0.968791
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              14160,
+              null
+            ]
+          ],
+          "sha256": "53d2fb0c7706493f3cebaab84ec147f173af02b108c59fa14e40ea06ba321468"
+        },
+        "original": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.98867
+            ],
+            [
+              "b",
+              11400,
+              0.982062
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              10880,
+              null
+            ]
+          ],
+          "sha256": "a2fb5478f6ef24094aa826268d8a875ddd31482a26480120d22b69ef9e757026"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s16_l_pbae1a.json",
+          "sha256": "fe589e4e0c667ece2aaa38cbaca31848e58f096b5e5859d5a3ce4a80b59eaeea"
+        },
+        "audio": {
+          "bytes": 184378,
+          "crc32": 323798164,
+          "name": "lombardgrid/audio/s16_l_pbae1a.wav",
+          "sha256": "a96ade63040758fa08e44ebfd9623961f5581a1e759eb29ab6881f4da361eebf"
+        },
+        "front": {
+          "name": "lombardgrid/front/s16_l_pbae1a.mov",
+          "sha256": "646cde87f2082f3b3b326bceea8ecc7a749192b77329fb784ee1d6c0225f2941"
+        }
+      },
+      "samples": 46080,
+      "source": "s16_l_pbae1a",
+      "speaker": "s16",
+      "split": "development",
+      "target": [
+        "b",
+        8960,
+        9920
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        5760,
+        16960
+      ],
+      "labels": [
+        [
+          "b",
+          1120,
+          2560
+        ],
+        [
+          "b",
+          5280,
+          6240
+        ],
+        [
+          "b",
+          10400,
+          12320
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.839284
+            ],
+            [
+              "b",
+              9160,
+              0.950936
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              8400,
+              null
+            ]
+          ],
+          "sha256": "c4e40132b66ab5bcdea14f8baeef03387a6a50bcc8a3410ee5ea4659b8e2bd40"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.828007
+            ],
+            [
+              "b",
+              7240,
+              0.977618
+            ],
+            [
+              "b",
+              12360,
+              0.9657
+            ]
+          ],
+          "old": [],
+          "sha256": "fc364b2476ec9fe5e6585d1b4cc5d2500221deb1b1f8d28b4d0503568d197b4e"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.886619
+            ],
+            [
+              "b",
+              10440,
+              0.979656
+            ],
+            [
+              "b",
+              15560,
+              0.968956
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              14800,
+              null
+            ]
+          ],
+          "sha256": "d28e77fe1dee353d51db10008bb89c73ca8f399f091287ac21dbe9d49ecf6580"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.898645
+            ],
+            [
+              "b",
+              7240,
+              0.981096
+            ],
+            [
+              "b",
+              12360,
+              0.966475
+            ]
+          ],
+          "old": [],
+          "sha256": "0defc2f76e45f0104e383013d14db7a7e6be1ea6bc9d6e2b75d4f0d21b40d676"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s21_p_bbbn9a.json",
+          "sha256": "b3909885914ffd08c9a24c9d317702e773251c327b86145412be708301de35fb"
+        },
+        "audio": {
+          "bytes": 147898,
+          "crc32": 2855496053,
+          "name": "lombardgrid/audio/s21_p_bbbn9a.wav",
+          "sha256": "af5533147abe5c20566c14319cb7438dee280509b803a12e2648e22f6e31624a"
+        },
+        "front": {
+          "name": "lombardgrid/front/s21_p_bbbn9a.mov",
+          "sha256": "1c53cfca34d90144070858138a139663748e12862806f46524862bf5d4615088"
+        }
+      },
+      "samples": 36960,
+      "source": "s21_p_bbbn9a",
+      "speaker": "s21",
+      "split": "held",
+      "target": [
+        "b",
+        10400,
+        12320
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        3360,
+        14560
+      ],
+      "labels": [
+        [
+          "p",
+          2080,
+          3360
+        ],
+        [
+          "b",
+          8480,
+          9440
+        ],
+        [
+          "b",
+          13600,
+          15360
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              6280,
+              0.885156
+            ],
+            [
+              "b",
+              11080,
+              0.968881
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              10560,
+              null
+            ],
+            [
+              "p",
+              19120,
+              null
+            ]
+          ],
+          "sha256": "fad4bff17f7323f95ba977458418e5b2fa7388d654d0116fd4beda798c10986f"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.977203
+            ],
+            [
+              "b",
+              9480,
+              0.663625
+            ],
+            [
+              "b",
+              14280,
+              0.973743
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              13760,
+              null
+            ],
+            [
+              "b",
+              19200,
+              null
+            ],
+            [
+              "b",
+              26800,
+              null
+            ]
+          ],
+          "sha256": "98a7f2365d589aafaf3b920346761d72ced965ceb52ab02b2130302c8cf4a3cb"
+        },
+        "late": {
+          "neural": [
+            [
+              "p",
+              6280,
+              0.988506
+            ],
+            [
+              "b",
+              13000,
+              0.90605
+            ],
+            [
+              "b",
+              14600,
+              0.355218
+            ]
+          ],
+          "old": [],
+          "sha256": "59c2a9eccc794c2f976c5912d6c50a22be5a9052e817cbf6a72dc43ba0995fee"
+        },
+        "original": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.987857
+            ],
+            [
+              "b",
+              9800,
+              0.626821
+            ],
+            [
+              "b",
+              14280,
+              0.976321
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              13760,
+              null
+            ]
+          ],
+          "sha256": "3e44c21f725df9c4db1ff94e1b1c4d94eccd950ad8671a13086ffb7b280149d5"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s21_p_pbbszn.json",
+          "sha256": "f48a87878947148989d408ea9fe61dfc63ab654c428c6e1c325188e62550dafb"
+        },
+        "audio": {
+          "bytes": 172218,
+          "crc32": 4208862074,
+          "name": "lombardgrid/audio/s21_p_pbbszn.wav",
+          "sha256": "677e280a3daaa7588cf1d4140f440a1e5734040659a348bef8ed6d4c4c1f774a"
+        },
+        "front": {
+          "name": "lombardgrid/front/s21_p_pbbszn.mov",
+          "sha256": "12fb74d7f940cde43f6a5900db59eac4b415346a64170bc8a0743932e612394c"
+        }
+      },
+      "samples": 43040,
+      "source": "s21_p_pbbszn",
+      "speaker": "s21",
+      "split": "held",
+      "target": [
+        "b",
+        8480,
+        9440
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        4080,
+        15280
+      ],
+      "labels": [
+        [
+          "b",
+          9120,
+          10240
+        ],
+        [
+          "p",
+          35360,
+          36480
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              6920,
+              0.965354
+            ],
+            [
+              "p",
+              36360,
+              0.979577
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              6160,
+              null
+            ]
+          ],
+          "sha256": "7bfef6fb0194e3ec1dbf2df59033999d96dfd8147311f04e10c80bf958f44f1d"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              10120,
+              0.798662
+            ],
+            [
+              "p",
+              36360,
+              0.923568
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              9360,
+              null
+            ]
+          ],
+          "sha256": "ff2bf25e46270eda1dacb3448fa2f6f5473c9a022e537c83b3b1967ef1778717"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              13320,
+              0.963753
+            ],
+            [
+              "p",
+              36360,
+              0.978966
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              12480,
+              null
+            ]
+          ],
+          "sha256": "9133722ec3d8ee0a946e44d6b941555aa420dde6de72ef472137ff687810ed77"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              10120,
+              0.909191
+            ],
+            [
+              "p",
+              36360,
+              0.974904
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              9360,
+              null
+            ]
+          ],
+          "sha256": "243813084d9cb8c28bd99b28c373c334895abf23cf8a11e59b0d9db8da59b952"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s21_l_sbwo8p.json",
+          "sha256": "9c83f83601a019340f3c6713cebd238992e6384ec3007ddbf2ffad24eefba17f"
+        },
+        "audio": {
+          "bytes": 197818,
+          "crc32": 3194401357,
+          "name": "lombardgrid/audio/s21_l_sbwo8p.wav",
+          "sha256": "d387a80061136007bff71c54da86acc101b5507b36e1c5cbca0461ba99ac57ca"
+        },
+        "front": {
+          "name": "lombardgrid/front/s21_l_sbwo8p.mov",
+          "sha256": "d2b1cb5100048f4cc1b479b8f6c87c6a89f50ff4203416f0aeb99ea820a9fc36"
+        }
+      },
+      "samples": 49440,
+      "source": "s21_l_sbwo8p",
+      "speaker": "s21",
+      "split": "held",
+      "target": [
+        "b",
+        9120,
+        10240
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        6960,
+        18160
+      ],
+      "labels": [
+        [
+          "p",
+          480,
+          1760
+        ],
+        [
+          "b",
+          12160,
+          12960
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "p",
+              3400,
+              0.981832
+            ],
+            [
+              "b",
+              11400,
+              0.974315
+            ]
+          ],
+          "old": [],
+          "sha256": "5a1acc6fbbec92dadeda9fe4ccf33048723640cf7b36d9d90a5c7f3a04efc37b"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "p",
+              3400,
+              0.983921
+            ],
+            [
+              "b",
+              14600,
+              0.979621
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              13840,
+              null
+            ]
+          ],
+          "sha256": "b02fa0c91534df968d513965b90a9fe8439373a516a89fd9f3284067833da001"
+        },
+        "late": {
+          "neural": [
+            [
+              "p",
+              3400,
+              0.986666
+            ],
+            [
+              "b",
+              17800,
+              0.968838
+            ]
+          ],
+          "old": [],
+          "sha256": "c11eb93434226f58677a1c09a3aeac381b15e6c40277d9eb1f578f65f863719b"
+        },
+        "original": {
+          "neural": [
+            [
+              "p",
+              3400,
+              0.986809
+            ],
+            [
+              "b",
+              14600,
+              0.981646
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              14240,
+              null
+            ]
+          ],
+          "sha256": "bd0357de46bea4f5f936f821518cad24677b3aa1c96482c1e10489eea9eb48c2"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s21_l_prbr1n.json",
+          "sha256": "cf4204c7c87be0e5ceca520e27bd85d92076a4247a88f023b6905393c5bf68da"
+        },
+        "audio": {
+          "bytes": 167098,
+          "crc32": 3917413681,
+          "name": "lombardgrid/audio/s21_l_prbr1n.wav",
+          "sha256": "d81ccde01304a574c8e08decf1a29eee705395706abf1d3bc0107d68453fc178"
+        },
+        "front": {
+          "name": "lombardgrid/front/s21_l_prbr1n.mov",
+          "sha256": "e6d07ff594dee35827d7f3110c26b660a11dd747025e5e3084e22804c5376091"
+        }
+      },
+      "samples": 41760,
+      "source": "s21_l_prbr1n",
+      "speaker": "s21",
+      "split": "held",
+      "target": [
+        "b",
+        12160,
+        12960
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        6160,
+        17360
+      ],
+      "labels": [
+        [
+          "b",
+          800,
+          2720
+        ],
+        [
+          "b",
+          11040,
+          12480
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.962224
+            ],
+            [
+              "b",
+              10120,
+              0.957038
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              9520,
+              null
+            ]
+          ],
+          "sha256": "3c10960d9b14fc260f0f30940996078de2eaaf7d7223d244b3f8b824b81fa6b0"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.959584
+            ],
+            [
+              "b",
+              13320,
+              0.965032
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              12640,
+              null
+            ]
+          ],
+          "sha256": "786a98353d54932f6dcadb64049f47af605a970c374d24f01e39ed2dc268262a"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.968844
+            ],
+            [
+              "b",
+              16520,
+              0.956739
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              15920,
+              null
+            ]
+          ],
+          "sha256": "d32408be71a5f5f88f36b527ac1bc19a856d166533f2a4ed9e10a45f6a5a64b3"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.968481
+            ],
+            [
+              "b",
+              13320,
+              0.96415
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              12720,
+              null
+            ]
+          ],
+          "sha256": "47d291380ec05d9e54c529e81aca6f989dc012e57108b9148b1d9b7b0631af48"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s31_p_brbn3n.json",
+          "sha256": "1b685723ef93863cc67ac00aad9e8cfc6566e2db3e45c21608db84271f4ce5d3"
+        },
+        "audio": {
+          "bytes": 149818,
+          "crc32": 4277145620,
+          "name": "lombardgrid/audio/s31_p_brbn3n.wav",
+          "sha256": "2dbcbdffd7e6a657a182f9bc23a02e3ced5705074775cb5d61f67f92c77e9e12"
+        },
+        "front": {
+          "name": "lombardgrid/front/s31_p_brbn3n.mov",
+          "sha256": "bb6d5a98b1a2d1b5f8962941d2721c55ab19f9c590a20d33fcee1a089d0a97ea"
+        }
+      },
+      "samples": 37440,
+      "source": "s31_p_brbn3n",
+      "speaker": "s31",
+      "split": "held",
+      "target": [
+        "b",
+        11040,
+        12480
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        5760,
+        16960
+      ],
+      "labels": [
+        [
+          "b",
+          10880,
+          11840
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              10120,
+              0.881447
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              9360,
+              null
+            ]
+          ],
+          "sha256": "cd09df2a71ecc2637e501d52f464e14f06b052d970b26ed903367f2504a1886a"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              13320,
+              0.956305
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              12480,
+              null
+            ]
+          ],
+          "sha256": "16ee9511415f28bc293cea9b512c403541e5079e8c8503cda4c4aa10fd132f39"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              16520,
+              0.92161
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              15840,
+              null
+            ]
+          ],
+          "sha256": "13bb995952cb52fd7bd46f38abe712da93081dc88a091ab71fdfe89448e69ee9"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              13320,
+              0.949577
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              12560,
+              null
+            ]
+          ],
+          "sha256": "198ce41c55833272cadd5e7c376ce30d07d3882eb4e6a9ca7b823ac9fb85ee24"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s31_p_swbl2a.json",
+          "sha256": "6b48e468dc16cfc0c1c6593c42c83fc5b8e6a14c283afbf41b71467986c2eea4"
+        },
+        "audio": {
+          "bytes": 144058,
+          "crc32": 1706255966,
+          "name": "lombardgrid/audio/s31_p_swbl2a.wav",
+          "sha256": "965a5d90d4976694b14a595d6a9d252884aa8d52ba2b232d61ac53ab923156b3"
+        },
+        "front": {
+          "name": "lombardgrid/front/s31_p_swbl2a.mov",
+          "sha256": "b56d4fbc67faa056e3bb6ed7d33bd4e29b1bb713420ff9a7b3c9e8df3eb80ae2"
+        }
+      },
+      "samples": 36000,
+      "source": "s31_p_swbl2a",
+      "speaker": "s31",
+      "split": "held",
+      "target": [
+        "b",
+        10880,
+        11840
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        9840,
+        21040
+      ],
+      "labels": [
+        [
+          "b",
+          14720,
+          16160
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              13960,
+              0.739968
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              9440,
+              null
+            ],
+            [
+              "p",
+              12880,
+              null
+            ],
+            [
+              "p",
+              25200,
+              null
+            ]
+          ],
+          "sha256": "d0508cfed19455da5021bc7debc93925382c4a5ac5230e645076fc6db04869a7"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              17160,
+              0.832781
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              9360,
+              null
+            ],
+            [
+              "p",
+              16080,
+              null
+            ]
+          ],
+          "sha256": "a09ffa5d759e6e9cdad952841d26cccfa1a2f8ea381b6a374bbef1eddb781c33"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              20360,
+              0.406105
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              25200,
+              null
+            ]
+          ],
+          "sha256": "7dd60ecce903d60221721206e9fe0b7de7d2b65b49578aa8c2183a1d4d56e784"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              17160,
+              0.902902
+            ]
+          ],
+          "old": [],
+          "sha256": "0dbbb6db66897c9737de85a9b52335d67a1215046f2d06efdf823afe97606146"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s31_l_swbl2a.json",
+          "sha256": "561f57ec83c1f7d1cb0425566b327a14b50d1a6292e74237c2b6c8fdb062c03f"
+        },
+        "audio": {
+          "bytes": 170938,
+          "crc32": 3094074916,
+          "name": "lombardgrid/audio/s31_l_swbl2a.wav",
+          "sha256": "16c2e0f31364863aa596bc827849764eacebbf2e608ebdc779544185d5f76697"
+        },
+        "front": {
+          "name": "lombardgrid/front/s31_l_swbl2a.mov",
+          "sha256": "5a5d6688b834ace642b37391ba7554e8fd9c0025ce1272ed41d49a4749f8c26d"
+        }
+      },
+      "samples": 42720,
+      "source": "s31_l_swbl2a",
+      "speaker": "s31",
+      "split": "held",
+      "target": [
+        "b",
+        14720,
+        16160
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        6960,
+        18160
+      ],
+      "labels": [
+        [
+          "b",
+          640,
+          2880
+        ],
+        [
+          "b",
+          11840,
+          13280
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.964554
+            ],
+            [
+              "b",
+              11080,
+              0.967817
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              10480,
+              null
+            ],
+            [
+              "p",
+              38480,
+              null
+            ]
+          ],
+          "sha256": "32bc9cedbb9e24e062555ed306bae466eb1ccb8f8bc6f4abd65af793cc495268"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.956999
+            ],
+            [
+              "b",
+              14280,
+              0.968227
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              13520,
+              null
+            ],
+            [
+              "p",
+              38480,
+              null
+            ]
+          ],
+          "sha256": "28c61ad4e3873687723c8457b6921590e270055e4f40c02071435c80ece6a6b1"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.971303
+            ],
+            [
+              "b",
+              17480,
+              0.961139
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              16880,
+              null
+            ],
+            [
+              "p",
+              38480,
+              null
+            ]
+          ],
+          "sha256": "03c31bf869521116bd535cb2850a12322f816294304cb9de4923bf67c5b031b6"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.965664
+            ],
+            [
+              "b",
+              14280,
+              0.970938
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              13680,
+              null
+            ],
+            [
+              "p",
+              38480,
+              null
+            ]
+          ],
+          "sha256": "5f366e02cc01ea4ede0809495bbf465e61d4ad839335791ca19c79532e6f3ebd"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s31_l_brbn3n.json",
+          "sha256": "7740c8fc2a49f71aa3e888c0a6e04e74a5a144487ca302a9ab4965b264aa856f"
+        },
+        "audio": {
+          "bytes": 163258,
+          "crc32": 2983201421,
+          "name": "lombardgrid/audio/s31_l_brbn3n.wav",
+          "sha256": "c1c22055c62265eb8964531f6a048b28917e7760951c5ffd7ccc264d18852640"
+        },
+        "front": {
+          "name": "lombardgrid/front/s31_l_brbn3n.mov",
+          "sha256": "742dcd0fc3ed0ad6a780a28ed58e5bf9e8082ff9c4f39708fbe2d4bf1b7bfcdb"
+        }
+      },
+      "samples": 40800,
+      "source": "s31_l_brbn3n",
+      "speaker": "s31",
+      "split": "held",
+      "target": [
+        "b",
+        11840,
+        13280
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        8560,
+        19760
+      ],
+      "labels": [
+        [
+          "b",
+          13760,
+          14560
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              12680,
+              0.970355
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              28080,
+              null
+            ]
+          ],
+          "sha256": "1b191d8dabd2b6e76b4d9e7d9076757ab135ac8d090efec5129e7acf4f510108"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              15880,
+              0.978061
+            ]
+          ],
+          "old": [],
+          "sha256": "6098db60a91dceff0dbfd91ea531c071b18871f2f3d62d610cee91d96fe60912"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              19080,
+              0.889516
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              28080,
+              null
+            ]
+          ],
+          "sha256": "91eae7257878a6245c497ea21121daada070bc35ec0ed12fc6aaeea39ab45267"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              15880,
+              0.976484
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              28080,
+              null
+            ]
+          ],
+          "sha256": "3dc789235c071a43e893a407933410b259b2ec01bbac95a5411a4331b0ee4a13"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s50_p_sgbq5s.json",
+          "sha256": "cf27c21fdd885e18c4e229542dfb75b48cf6ae5419a8a255624f6d29e2f5a13c"
+        },
+        "audio": {
+          "bytes": 149818,
+          "crc32": 1119480474,
+          "name": "lombardgrid/audio/s50_p_sgbq5s.wav",
+          "sha256": "d359e98a0c7faa53c239a685b4bfd19ba90f522a4d7686678ae2d3785667d475"
+        },
+        "front": {
+          "name": "lombardgrid/front/s50_p_sgbq5s.mov",
+          "sha256": "423e8773e964df3ccaa682e4bbfe2062271a70accbab30862de60a884b7ebc9e"
+        }
+      },
+      "samples": 37440,
+      "source": "s50_p_sgbq5s",
+      "speaker": "s50",
+      "split": "held",
+      "target": [
+        "b",
+        13760,
+        14560
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        16240,
+        27440
+      ],
+      "labels": [
+        [
+          "p",
+          21280,
+          22400
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "p",
+              20360,
+              0.986674
+            ]
+          ],
+          "old": [],
+          "sha256": "df79c03aedc1b2b81acb701bf0bf3c835bdebe0162e3e11bf822f1e0b99dc26d"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "p",
+              23560,
+              0.98457
+            ]
+          ],
+          "old": [],
+          "sha256": "ca5f301cd04a664d4f7737c25eca42439ea4463e0404d91da0d5c6ec49c64cd5"
+        },
+        "late": {
+          "neural": [
+            [
+              "p",
+              26760,
+              0.871392
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              16800,
+              null
+            ]
+          ],
+          "sha256": "7bb5b2e8a15154f74fe839467a3bbc1e6bbe11868c8f958f56b6523a79687549"
+        },
+        "original": {
+          "neural": [
+            [
+              "p",
+              23560,
+              0.988374
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              23520,
+              null
+            ]
+          ],
+          "sha256": "2796ecb3b9a85e90e11b856fec88be28ab06b54ac3a588b7b548401a4d8d6f1e"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s50_p_lgwn6p.json",
+          "sha256": "75caae2e13f4df9021e9d898727d1afeec8e851bd6c3e30cc3ba6fdd7fedd0cd"
+        },
+        "audio": {
+          "bytes": 137018,
+          "crc32": 3362004538,
+          "name": "lombardgrid/audio/s50_p_lgwn6p.wav",
+          "sha256": "0997fca545d90642dfd3136b7c40cdcd58a236e53e364c36e0fee8e98eee48fb"
+        },
+        "front": {
+          "name": "lombardgrid/front/s50_p_lgwn6p.mov",
+          "sha256": "4b5e33396f1b3a38448622d68f6c14a339d154c4a4dc1f9f86c79224af9685c8"
+        }
+      },
+      "samples": 34240,
+      "source": "s50_p_lgwn6p",
+      "speaker": "s50",
+      "split": "held",
+      "target": [
+        "p",
+        21280,
+        22400
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        3760,
+        14960
+      ],
+      "labels": [
+        [
+          "p",
+          1920,
+          3200
+        ],
+        [
+          "b",
+          8480,
+          10240
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.896487
+            ],
+            [
+              "b",
+              6600,
+              0.960652
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              5840,
+              null
+            ]
+          ],
+          "sha256": "741f90eada02cf305faf35ef66f8583b5674d806379e41bd1215221352b3ad18"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.989777
+            ],
+            [
+              "b",
+              9800,
+              0.981359
+            ]
+          ],
+          "old": [],
+          "sha256": "6eae351505d771f722bcdeb40b383e6635e3f08a110ad6809a518e7c6b336cbb"
+        },
+        "late": {
+          "neural": [
+            [
+              "p",
+              6280,
+              0.989957
+            ],
+            [
+              "b",
+              13000,
+              0.975694
+            ]
+          ],
+          "old": [],
+          "sha256": "9723e98d9ade2c6a8d7e6fa354b93dd5af160c3ce7ab5986a258675b25d61551"
+        },
+        "original": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.988508
+            ],
+            [
+              "b",
+              9800,
+              0.982559
+            ]
+          ],
+          "old": [],
+          "sha256": "41f5811e8a8ab7ea96619de2f00b6e69ec557d0c5632cc0fe80aa872f68c7b47"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s50_l_pbwe5a.json",
+          "sha256": "d34ebe1f18f5799e931ef609f7c06e693ee059d177b0db3504b2c0eb673a38cb"
+        },
+        "audio": {
+          "bytes": 167098,
+          "crc32": 1398642714,
+          "name": "lombardgrid/audio/s50_l_pbwe5a.wav",
+          "sha256": "132a4739edde0d49cebcfdd40798cf66c4f362795b4cab953527c9090d2bd6c1"
+        },
+        "front": {
+          "name": "lombardgrid/front/s50_l_pbwe5a.mov",
+          "sha256": "8319e8ae93481e3921c184831362934fe5e7f9adbc035e3a5d29a5ff19f7563b"
+        }
+      },
+      "samples": 41760,
+      "source": "s50_l_pbwe5a",
+      "speaker": "s50",
+      "split": "held",
+      "target": [
+        "b",
+        8480,
+        10240
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        9280,
+        20480
+      ],
+      "labels": [
+        [
+          "b",
+          800,
+          2400
+        ],
+        [
+          "b",
+          14080,
+          15680
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.97289
+            ],
+            [
+              "b",
+              13000,
+              0.976974
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              16480,
+              null
+            ]
+          ],
+          "sha256": "86b2b0b74058ba3e90f9173ee7da5e738df05f5bdda7eab0ca2f9240848c262a"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.974548
+            ],
+            [
+              "b",
+              16200,
+              0.972594
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              15520,
+              null
+            ],
+            [
+              "b",
+              19680,
+              null
+            ]
+          ],
+          "sha256": "81dfc9de100bdf5c5cc2a684d221c5e0fe383d0209d601b0f1c4ff739ac86a1e"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.971483
+            ],
+            [
+              "b",
+              19400,
+              0.963884
+            ]
+          ],
+          "old": [],
+          "sha256": "49d768d907b95f37558eee88532204eae4cc7498ad9041625b880f115249b9cb"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.974847
+            ],
+            [
+              "b",
+              16200,
+              0.976565
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              15600,
+              null
+            ],
+            [
+              "b",
+              19680,
+              null
+            ]
+          ],
+          "sha256": "c28306ece5e68dd5c8a452e20339dda80c6fc7cc5e9e87009383a8083ac21ce0"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s50_l_brbv2s.json",
+          "sha256": "f4ace11f80eaeac1a910a3539e78be47741174098b969e4cd09db95aff1da929"
+        },
+        "audio": {
+          "bytes": 175418,
+          "crc32": 2847110748,
+          "name": "lombardgrid/audio/s50_l_brbv2s.wav",
+          "sha256": "212276d433ea63cc22c66b2a409ce7717d016720e89d58d7af7080d3cd68c10f"
+        },
+        "front": {
+          "name": "lombardgrid/front/s50_l_brbv2s.mov",
+          "sha256": "f51306bbc8617e15a294f4ed0fa2c6197b16a76066f01d125ceddce564f3127c"
+        }
+      },
+      "samples": 43840,
+      "source": "s50_l_brbv2s",
+      "speaker": "s50",
+      "split": "held",
+      "target": [
+        "b",
+        14080,
+        15680
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        4400,
+        15600
+      ],
+      "labels": [
+        [
+          "b",
+          9280,
+          10720
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              8840,
+              0.971698
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              7440,
+              null
+            ]
+          ],
+          "sha256": "a1a0be9b9348b363738040636fdc9c56433374a8877777ce48b4a55bbbfb3163"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              12040,
+              0.981002
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              8160,
+              null
+            ],
+            [
+              "p",
+              25680,
+              null
+            ]
+          ],
+          "sha256": "3354a7ef3e247c902b54d8e4f0edbcbfd63fa85aaef5bb3a249cca296ed4cae3"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              15240,
+              0.930843
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              13840,
+              null
+            ]
+          ],
+          "sha256": "fa7bc4f3532acb221d9bc7068c003ec8de86a855f3b83a870b6092091e6e0f30"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              12040,
+              0.98133
+            ]
+          ],
+          "old": [],
+          "sha256": "5afd9358d9c9295f56cc219b35f210cabb527efd076c056fc1259c7f839acf95"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s32_p_sbig8n.json",
+          "sha256": "d365eb181175abbc44cb31c8713e25ada6737c5042ecec1f28000c76c0056ca5"
+        },
+        "audio": {
+          "bytes": 160698,
+          "crc32": 1069414555,
+          "name": "lombardgrid/audio/s32_p_sbig8n.wav",
+          "sha256": "1063704b78d21ea5747563e0fe8a1c58c528abe5d04063c24f10bd4a065c0b3e"
+        },
+        "front": {
+          "name": "lombardgrid/front/s32_p_sbig8n.mov",
+          "sha256": "a06e49fc31247d3caed64c6032ac2961f61e7a1fd083eaca7e32520dfdbc2a34"
+        }
+      },
+      "samples": 40160,
+      "source": "s32_p_sbig8n",
+      "speaker": "s32",
+      "split": "held",
+      "target": [
+        "b",
+        9280,
+        10720
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        6400,
+        17600
+      ],
+      "labels": [
+        [
+          "b",
+          11520,
+          12480
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              10120,
+              0.906547
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              9520,
+              null
+            ]
+          ],
+          "sha256": "aa75a13c877586004e09784d335e381b68c260b98205d4980202178e0d2bcd14"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              13320,
+              0.896295
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              12640,
+              null
+            ],
+            [
+              "b",
+              26720,
+              null
+            ]
+          ],
+          "sha256": "423025743fb18ece573296ce32c0a9b994f9c0ca479fb283e3119b0e061d1a0a"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              16520,
+              0.710127
+            ]
+          ],
+          "old": [],
+          "sha256": "350aac1b2f8d72a45b7d563514f1af508b98581e5f05a4449b866256993ae89d"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              13320,
+              0.913866
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              12720,
+              null
+            ]
+          ],
+          "sha256": "98c21bcf30c63be3279031879d06ce982c852f0a2b35e1d08e5406c676d1963e"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s32_p_lwbh6a.json",
+          "sha256": "c04e61711447fed10605f1d8d253cde99a440f7155bae95dbf939d8ed84e725e"
+        },
+        "audio": {
+          "bytes": 137018,
+          "crc32": 2883560949,
+          "name": "lombardgrid/audio/s32_p_lwbh6a.wav",
+          "sha256": "cb87a1eaceca0b5ce6fc6c1c169825b1c2d3b91d5226a165c12d31d1ae2df71e"
+        },
+        "front": {
+          "name": "lombardgrid/front/s32_p_lwbh6a.mov",
+          "sha256": "b2ab8a28def58c1b77e84e25ef91e37e3d6af27161e93a5836c14cb2d583eb13"
+        }
+      },
+      "samples": 34240,
+      "source": "s32_p_lwbh6a",
+      "speaker": "s32",
+      "split": "held",
+      "target": [
+        "b",
+        11520,
+        12480
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        6880,
+        18080
+      ],
+      "labels": [
+        [
+          "b",
+          960,
+          3040
+        ],
+        [
+          "b",
+          5920,
+          6880
+        ],
+        [
+          "b",
+          12000,
+          12960
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.896261
+            ],
+            [
+              "b",
+              11080,
+              0.848856
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              10320,
+              null
+            ]
+          ],
+          "sha256": "3dc9b87425fcf18cc8cda01518cc90c5361e96ba9103a4cd5672e059f0dfaf87"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.917369
+            ],
+            [
+              "b",
+              7880,
+              0.953899
+            ],
+            [
+              "b",
+              14280,
+              0.902791
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              22720,
+              null
+            ],
+            [
+              "b",
+              29520,
+              null
+            ]
+          ],
+          "sha256": "f6916d0cdcd8f582d33db31434b2dcde41135113dc10a645a65fbd128dc2b134"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.918978
+            ],
+            [
+              "b",
+              6920,
+              0.765103
+            ],
+            [
+              "b",
+              11080,
+              0.942566
+            ],
+            [
+              "b",
+              17480,
+              0.897238
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              16800,
+              null
+            ]
+          ],
+          "sha256": "f2ddce7bcae438da13e841882878d49978a202a19f47e52d19f330632e4a7e65"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              2760,
+              0.9399
+            ],
+            [
+              "b",
+              7880,
+              0.956458
+            ],
+            [
+              "b",
+              14280,
+              0.908553
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              13600,
+              null
+            ]
+          ],
+          "sha256": "1c9aa19f4a129176bab7ed1720589bd92a9da745898860770f1954499caefe28"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s32_l_bbab5n.json",
+          "sha256": "dbff084606fad7a7584dbc7007ea3ce62bdc0cb5007d6b72c5a965081757df54"
+        },
+        "audio": {
+          "bytes": 133818,
+          "crc32": 3446048420,
+          "name": "lombardgrid/audio/s32_l_bbab5n.wav",
+          "sha256": "12449ecdbea043fc1eb1e80961ae957aa43c082d886af4622b97f3e323a0bf8b"
+        },
+        "front": {
+          "name": "lombardgrid/front/s32_l_bbab5n.mov",
+          "sha256": "9f7b5ab93ed251953ec8672ef08a086f85ee9a6d43fdef42dec6ba2cef4e5454"
+        }
+      },
+      "samples": 33440,
+      "source": "s32_l_bbab5n",
+      "speaker": "s32",
+      "split": "held",
+      "target": [
+        "b",
+        12000,
+        12960
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        3280,
+        14480
+      ],
+      "labels": [
+        [
+          "b",
+          8160,
+          9600
+        ],
+        [
+          "b",
+          14240,
+          16320
+        ],
+        [
+          "p",
+          29760,
+          30880
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              7240,
+              0.957728
+            ],
+            [
+              "b",
+              13000,
+              0.907075
+            ],
+            [
+              "b",
+              16200,
+              0.922595
+            ],
+            [
+              "p",
+              31880,
+              0.986713
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              6400,
+              null
+            ],
+            [
+              "b",
+              12400,
+              null
+            ],
+            [
+              "b",
+              15600,
+              null
+            ]
+          ],
+          "sha256": "abb7adde0f313317bf0b23a3e42350761f58be2e32534978db6b63c282a63104"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              10440,
+              0.943509
+            ],
+            [
+              "b",
+              16200,
+              0.961465
+            ]
+          ],
+          "old": [],
+          "sha256": "58254e3b0a125295419a1c75be851ee028db505bc16d920ab154a34144d7238a"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              13640,
+              0.872521
+            ],
+            [
+              "b",
+              16200,
+              0.961978
+            ],
+            [
+              "p",
+              31880,
+              0.986645
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              15600,
+              null
+            ],
+            [
+              "p",
+              31520,
+              null
+            ]
+          ],
+          "sha256": "e727c3899889bb67c1d3680a012e08d826e6714f04117421e97bb76499257883"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              10440,
+              0.972174
+            ],
+            [
+              "b",
+              16200,
+              0.963001
+            ],
+            [
+              "p",
+              31880,
+              0.957257
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              9440,
+              null
+            ],
+            [
+              "p",
+              20400,
+              null
+            ]
+          ],
+          "sha256": "e06220a0242b07059aed25f7d76445e93549173472ef80b8be83150367dbe49f"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s32_l_lbbx5p.json",
+          "sha256": "db055f8ab8e447a630b2ad456bf11ca3b3c353ed6992e1679ef1b4e7dd211342"
+        },
+        "audio": {
+          "bytes": 174778,
+          "crc32": 1737303072,
+          "name": "lombardgrid/audio/s32_l_lbbx5p.wav",
+          "sha256": "3a2c02f87eab88816d1723ebbe5ac32f463ff32300ebce922deb9d69fa7cd3de"
+        },
+        "front": {
+          "name": "lombardgrid/front/s32_l_lbbx5p.mov",
+          "sha256": "4ebcd38f4f20122d7edd6bad366f80e4115e38171a79b3bd8588e1c65239d5f0"
+        }
+      },
+      "samples": 43680,
+      "source": "s32_l_lbbx5p",
+      "speaker": "s32",
+      "split": "held",
+      "target": [
+        "b",
+        8160,
+        9600
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        9840,
+        21040
+      ],
+      "labels": [
+        [
+          "p",
+          2240,
+          3840
+        ],
+        [
+          "b",
+          14560,
+          16320
+        ],
+        [
+          "p",
+          26080,
+          27040
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.989033
+            ],
+            [
+              "b",
+              12040,
+              0.974368
+            ],
+            [
+              "p",
+              27080,
+              0.497152
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              11600,
+              null
+            ]
+          ],
+          "sha256": "7edceb113d1d94ab9b58897e14bd49df7a16b64a64877a3cdad2351cbf599707"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.987403
+            ],
+            [
+              "b",
+              15240,
+              0.982697
+            ],
+            [
+              "p",
+              26760,
+              0.675668
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              14880,
+              null
+            ]
+          ],
+          "sha256": "2347298ef77462d1ed53dc240ded4cdd23ff355c07f53bfcd0e8c63ff921b118"
+        },
+        "late": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.990845
+            ],
+            [
+              "b",
+              18440,
+              0.977419
+            ],
+            [
+              "p",
+              27080,
+              0.773754
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              11920,
+              null
+            ],
+            [
+              "b",
+              17920,
+              null
+            ]
+          ],
+          "sha256": "bb6776f99cecf6414bfdcdb7ec4be54a911ceb2b17ab8422b3208dfce8e86d16"
+        },
+        "original": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.990188
+            ],
+            [
+              "b",
+              15240,
+              0.98282
+            ],
+            [
+              "p",
+              27080,
+              0.794358
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              14880,
+              null
+            ]
+          ],
+          "sha256": "57788d10e6ac782546614bf970afaec34620d2cfb41becbcffcccc0ea7ce71ce"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s5_p_pgbf2p.json",
+          "sha256": "86ec31bb1d63e1a3b35719f2675455f5b5fab5bb09977833e765bad30be17662"
+        },
+        "audio": {
+          "bytes": 149178,
+          "crc32": 3429479485,
+          "name": "lombardgrid/audio/s5_p_pgbf2p.wav",
+          "sha256": "5f3187b384399165e7df255cb329feca39d54128b55ad74efecafa913dde6f22"
+        },
+        "front": {
+          "name": "lombardgrid/front/s5_p_pgbf2p.mov",
+          "sha256": "d821be576f8395cdf8317d2b2569e536c4a60d80c41bb14868a51326cd81ecea"
+        }
+      },
+      "samples": 37280,
+      "source": "s5_p_pgbf2p",
+      "speaker": "s5",
+      "split": "held",
+      "target": [
+        "b",
+        14560,
+        16320
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        8240,
+        19440
+      ],
+      "labels": [
+        [
+          "p",
+          2560,
+          4320
+        ],
+        [
+          "b",
+          13280,
+          14400
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.965857
+            ],
+            [
+              "b",
+              10440,
+              0.866991
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              3200,
+              null
+            ],
+            [
+              "b",
+              9600,
+              null
+            ]
+          ],
+          "sha256": "cea733916df9331dea304e844381b3ed7387af1af8722e1e1a5c659c20447f26"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.971285
+            ],
+            [
+              "b",
+              13640,
+              0.933733
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              12880,
+              null
+            ]
+          ],
+          "sha256": "cf50ff2ed0c16b824c96dbb56700c6d55ff034d58b7fed6821fe045569b3bc16"
+        },
+        "late": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.97159
+            ],
+            [
+              "b",
+              16840,
+              0.934405
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              15840,
+              null
+            ]
+          ],
+          "sha256": "8b0c3b52303b642eec1737438b04e6473a6a16e0c1c02e660e5d419513d0a608"
+        },
+        "original": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.979206
+            ],
+            [
+              "b",
+              13640,
+              0.960287
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              12640,
+              null
+            ]
+          ],
+          "sha256": "0d4e8e1dcd4d85b47bf8585c8ce2b0dc6531afca73946782c9d27cdaed541721"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s5_p_prbq1s.json",
+          "sha256": "9324035dc4bc8fd3f7d8d3bc65f40e699aa4b80de6d89a473111f7f257f0340e"
+        },
+        "audio": {
+          "bytes": 138938,
+          "crc32": 1225324575,
+          "name": "lombardgrid/audio/s5_p_prbq1s.wav",
+          "sha256": "163c3b75e06ecd6fc92f1f58ab489a5fb87d2aa22e8e6d32fd85653bdc26dd31"
+        },
+        "front": {
+          "name": "lombardgrid/front/s5_p_prbq1s.mov",
+          "sha256": "e540d49481ed8e7ae489edb1d36fb379b639aa289528a68387e7bb80207ac861"
+        }
+      },
+      "samples": 34720,
+      "source": "s5_p_prbq1s",
+      "speaker": "s5",
+      "split": "held",
+      "target": [
+        "b",
+        13280,
+        14400
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        10240,
+        21440
+      ],
+      "labels": [
+        [
+          "b",
+          5760,
+          7040
+        ],
+        [
+          "p",
+          14720,
+          16960
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              8520,
+              0.942332
+            ],
+            [
+              "p",
+              14280,
+              0.92116
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              13920,
+              null
+            ]
+          ],
+          "sha256": "2a858b9d2a5f5a3763c9a42bf529bc82c2eeb51e9dcf3582261dc7b0a2d61af3"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              8520,
+              0.977878
+            ],
+            [
+              "p",
+              17480,
+              0.913917
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              6000,
+              null
+            ],
+            [
+              "p",
+              16960,
+              null
+            ],
+            [
+              "b",
+              23920,
+              null
+            ]
+          ],
+          "sha256": "9add47065b890e99908b186a9d2c4cb841213cd47c6ddc406024b78930bf4b2f"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              8520,
+              0.971802
+            ],
+            [
+              "b",
+              11720,
+              0.960812
+            ],
+            [
+              "p",
+              20680,
+              0.953172
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              7840,
+              null
+            ],
+            [
+              "p",
+              19920,
+              null
+            ]
+          ],
+          "sha256": "4ad3c244bcd85910552bc1ce7114d4b54fd39d14b97abbc5032b25809e432615"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              8520,
+              0.974108
+            ],
+            [
+              "p",
+              17480,
+              0.906526
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              17120,
+              null
+            ]
+          ],
+          "sha256": "d7a6655cf17cff30487396bc2b5730b839c91e46e7af788b2481a1040708cd04"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s5_l_sbapzs.json",
+          "sha256": "e34fbd3914db0a2cdd19805bfbd3cccf8b7a7969f0c8580a4093a8609e34e0a1"
+        },
+        "audio": {
+          "bytes": 167098,
+          "crc32": 2197798247,
+          "name": "lombardgrid/audio/s5_l_sbapzs.wav",
+          "sha256": "a06690a6ad7d3604ec835bc3ca3a434004e0fb54de84c9166205d4455b154423"
+        },
+        "front": {
+          "name": "lombardgrid/front/s5_l_sbapzs.mov",
+          "sha256": "f65db90bbd4927fcf3da75eae25ddb11acf5ccabf74264cb60285ab9185c48c6"
+        }
+      },
+      "samples": 41760,
+      "source": "s5_l_sbapzs",
+      "speaker": "s5",
+      "split": "held",
+      "target": [
+        "p",
+        14720,
+        16960
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        11120,
+        22320
+      ],
+      "labels": [
+        [
+          "p",
+          2400,
+          4160
+        ],
+        [
+          "b",
+          15680,
+          17760
+        ],
+        [
+          "p",
+          32960,
+          34080
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.987997
+            ],
+            [
+              "b",
+              13000,
+              0.982634
+            ],
+            [
+              "p",
+              33480,
+              0.984469
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              3120,
+              null
+            ],
+            [
+              "b",
+              12480,
+              null
+            ],
+            [
+              "p",
+              33040,
+              null
+            ]
+          ],
+          "sha256": "312dfd69ed793d4208bbdc17f2f83782b630fa0d16fd5a050706420d2ef5792d"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.990194
+            ],
+            [
+              "b",
+              16200,
+              0.983522
+            ],
+            [
+              "p",
+              33480,
+              0.988437
+            ]
+          ],
+          "old": [],
+          "sha256": "903a0712941cb0ab03a02cb56058455d723b082b37259723c9705662320b0a29"
+        },
+        "late": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.99082
+            ],
+            [
+              "b",
+              19400,
+              0.982829
+            ],
+            [
+              "p",
+              33480,
+              0.988839
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              3200,
+              null
+            ],
+            [
+              "p",
+              9440,
+              null
+            ],
+            [
+              "p",
+              33120,
+              null
+            ]
+          ],
+          "sha256": "f03a06fe0b7b4752d364acd60a5b1b3a4f3e4e8c1a0215d6bffecad8c69fcc0e"
+        },
+        "original": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.990088
+            ],
+            [
+              "b",
+              16200,
+              0.984947
+            ],
+            [
+              "p",
+              33480,
+              0.987583
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              3200,
+              null
+            ],
+            [
+              "p",
+              9440,
+              null
+            ],
+            [
+              "p",
+              33120,
+              null
+            ]
+          ],
+          "sha256": "abc2ffc92d1b4cdc763ae8d03289bc14d91e3ed8237d2d71bb5af7c25e6c9dc1"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s5_l_pgblzp.json",
+          "sha256": "0a4d40da19957fe588f1ec5b878c3d49a4e7bb1bb234abc2621f3ac939e3cd4f"
+        },
+        "audio": {
+          "bytes": 186298,
+          "crc32": 3857782685,
+          "name": "lombardgrid/audio/s5_l_pgblzp.wav",
+          "sha256": "3b93e80a7d59584a461812e9bf04ff6924a8c86778cbbae9cc048062ddebf9cf"
+        },
+        "front": {
+          "name": "lombardgrid/front/s5_l_pgblzp.mov",
+          "sha256": "8b4452675c0348833892ad1527e3354c8af4b115b82cf6433ce6017fa3b92c90"
+        }
+      },
+      "samples": 46560,
+      "source": "s5_l_pgblzp",
+      "speaker": "s5",
+      "split": "held",
+      "target": [
+        "b",
+        15680,
+        17760
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        6320,
+        17520
+      ],
+      "labels": [
+        [
+          "b",
+          6400,
+          7680
+        ],
+        [
+          "b",
+          11360,
+          12480
+        ],
+        [
+          "p",
+          26080,
+          28000
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              10120,
+              0.952455
+            ],
+            [
+              "p",
+              28360,
+              0.935533
+            ]
+          ],
+          "old": [],
+          "sha256": "dc2dd332bc6fb8add335690ec6af6b8c606da4024567abc40e1bf9a83e5ab98a"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              8520,
+              0.982197
+            ],
+            [
+              "b",
+              13320,
+              0.963377
+            ],
+            [
+              "p",
+              28360,
+              0.947436
+            ]
+          ],
+          "old": [],
+          "sha256": "1836edd151c5a2868bfd01120641536e97f30b9f921b64d0cb81a34fde9e4c21"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              11720,
+              0.984424
+            ],
+            [
+              "b",
+              16520,
+              0.956014
+            ],
+            [
+              "p",
+              28360,
+              0.962932
+            ]
+          ],
+          "old": [],
+          "sha256": "49bd053b6cbc57d87fd7b9cd3f7cac81e612d5ce57efedcb4d972ea3eb062ada"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              8520,
+              0.985075
+            ],
+            [
+              "b",
+              13320,
+              0.971995
+            ],
+            [
+              "p",
+              28360,
+              0.960268
+            ]
+          ],
+          "old": [],
+          "sha256": "acf81bfa6b010a0c85762167492c050777f8237a340b570a554facc579edfd6e"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s26_p_lbbt3p.json",
+          "sha256": "6f71fbff995fdb92347a6cd72bf647e4403a1b195667e23bfe146446132e6edc"
+        },
+        "audio": {
+          "bytes": 81644,
+          "crc32": 2356324495,
+          "name": "lombardgrid/audio/s26_p_lbbt3p.wav",
+          "sha256": "7b9d057a1300ca3daea128dc49a9846dc9f7cc9f89100982f6ccafe79ba833ba"
+        },
+        "front": {
+          "name": "lombardgrid/front/s26_p_lbbt3p.mov",
+          "sha256": "b64c9a8cc38cb449d4f12437ad2f4833e154f3df3dbfc6b1c9fed6ec6b6388e8"
+        }
+      },
+      "samples": 40800,
+      "source": "s26_p_lbbt3p",
+      "speaker": "s26",
+      "split": "held",
+      "target": [
+        "b",
+        11360,
+        12480
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        3440,
+        14640
+      ],
+      "labels": [
+        [
+          "b",
+          8480,
+          9600
+        ],
+        [
+          "b",
+          13920,
+          14720
+        ],
+        [
+          "p",
+          17440,
+          19840
+        ],
+        [
+          "p",
+          28800,
+          30240
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              7560,
+              0.972194
+            ],
+            [
+              "b",
+              12680,
+              0.964296
+            ],
+            [
+              "b",
+              15880,
+              0.959333
+            ],
+            [
+              "p",
+              19720,
+              0.973271
+            ],
+            [
+              "p",
+              31240,
+              0.974162
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              12080,
+              null
+            ],
+            [
+              "b",
+              15360,
+              null
+            ],
+            [
+              "b",
+              19040,
+              null
+            ]
+          ],
+          "sha256": "a45a632362981c49026d01752bf39af79a8edf124678fd1bc03ba75724505708"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              10760,
+              0.977542
+            ],
+            [
+              "b",
+              15880,
+              0.970266
+            ],
+            [
+              "p",
+              19720,
+              0.965758
+            ],
+            [
+              "p",
+              31240,
+              0.963649
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              19920,
+              null
+            ]
+          ],
+          "sha256": "eebcf2f3f4963dddef80db9476bda7c103b963f861b4d62e6abe94bf9a347402"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              13960,
+              0.97614
+            ],
+            [
+              "b",
+              15880,
+              0.963259
+            ],
+            [
+              "p",
+              19720,
+              0.96778
+            ],
+            [
+              "p",
+              31240,
+              0.97844
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              15440,
+              null
+            ],
+            [
+              "p",
+              19840,
+              null
+            ]
+          ],
+          "sha256": "504ab119e79673c6318306685d7fb72023bd01cfe4a1d8d75789f863e4005ee8"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              10760,
+              0.978648
+            ],
+            [
+              "b",
+              15880,
+              0.970205
+            ],
+            [
+              "p",
+              19720,
+              0.974481
+            ],
+            [
+              "p",
+              31240,
+              0.980983
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              9920,
+              null
+            ],
+            [
+              "b",
+              19040,
+              null
+            ]
+          ],
+          "sha256": "33ce1a78bcc28223a70e6fa19c82a149b19f7630ff1d0a49533f39ed7fdeff55"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s26_p_sbbp9p.json",
+          "sha256": "50b12fe731d400197dbe398b6fa6de7b167ec6df09339d3493c0313a698db77b"
+        },
+        "audio": {
+          "bytes": 85484,
+          "crc32": 4166697318,
+          "name": "lombardgrid/audio/s26_p_sbbp9p.wav",
+          "sha256": "8ed343fa63d952b0019ba157530006fc7402be88ea7746b281b54b72871f52b2"
+        },
+        "front": {
+          "name": "lombardgrid/front/s26_p_sbbp9p.mov",
+          "sha256": "3c20ef2fa5fe7a1c11082366096d17b031d9139d64091aef50faf133359ff7c2"
+        }
+      },
+      "samples": 42720,
+      "source": "s26_p_sbbp9p",
+      "speaker": "s26",
+      "split": "held",
+      "target": [
+        "b",
+        8480,
+        9600
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        13040,
+        24240
+      ],
+      "labels": [
+        [
+          "b",
+          18080,
+          19200
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              17480,
+              0.964943
+            ]
+          ],
+          "old": [],
+          "sha256": "07c99cfcea00c794d70964950994468a5fe9535c1426d3b1372c9b0fd78e84e1"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              20680,
+              0.972316
+            ]
+          ],
+          "old": [],
+          "sha256": "d1c98f7195a7a2611c3fcc718aeddecad998191ddd903ac990488c2154c004f9"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              23560,
+              0.826199
+            ]
+          ],
+          "old": [],
+          "sha256": "63bd86b2aa54b9e3b627b3ffb80964600db4d243933a5169f4d09dcdd6e52af2"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              20680,
+              0.972952
+            ]
+          ],
+          "old": [],
+          "sha256": "3994fe4520e878b9edc4c5c9a3f1656bf612c104e189b20fa006cda1811f65b2"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s26_l_sgab6a.json",
+          "sha256": "d61849a1776af80eb4e257f1c118f39bf5090056901ae5e17a2095e3fde4b28b"
+        },
+        "audio": {
+          "bytes": 83244,
+          "crc32": 3935475263,
+          "name": "lombardgrid/audio/s26_l_sgab6a.wav",
+          "sha256": "cd4dca211d8a2d6f85650bd7ccec006c413763062d9438ad8db9f0f2d1a2e531"
+        },
+        "front": {
+          "name": "lombardgrid/front/s26_l_sgab6a.mov",
+          "sha256": "5296674f0bd199acac277d3d9a21d02965e3bf1f00104ee7eb93cb23f48092c3"
+        }
+      },
+      "samples": 41600,
+      "source": "s26_l_sgab6a",
+      "speaker": "s26",
+      "split": "held",
+      "target": [
+        "b",
+        18080,
+        19200
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        6160,
+        17360
+      ],
+      "labels": [
+        [
+          "b",
+          5760,
+          6880
+        ],
+        [
+          "b",
+          11040,
+          12480
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              10120,
+              0.963346
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              9600,
+              null
+            ]
+          ],
+          "sha256": "4e090d185e9c1f4a7ddc228bad0797e532ecc3e50d39cb5c4744c804ae045193"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              8520,
+              0.979652
+            ],
+            [
+              "b",
+              13320,
+              0.970431
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              5040,
+              null
+            ]
+          ],
+          "sha256": "ec061bc4eeac7d2067aa588bbf5b038e64e76166c40a36f430e332980054b7b8"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              11720,
+              0.977103
+            ],
+            [
+              "b",
+              16520,
+              0.980644
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              16000,
+              null
+            ]
+          ],
+          "sha256": "9ca215172e564727d29a4fca74b2c8cdbf03775a9047688c3a066fcee4b0dfe3"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              8520,
+              0.981028
+            ],
+            [
+              "b",
+              13320,
+              0.978315
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              12800,
+              null
+            ]
+          ],
+          "sha256": "43877f31645b961f3d0099dfb784c6dc95ce34caf304faec9963ee5b24d0b2f7"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s26_l_sbbi2s.json",
+          "sha256": "44207668117eb4025c9d8d0986e72e0d6f535d48ea02d989ff6c69717486290d"
+        },
+        "audio": {
+          "bytes": 80044,
+          "crc32": 1259922683,
+          "name": "lombardgrid/audio/s26_l_sbbi2s.wav",
+          "sha256": "ecdb57f8635fc5d71c84ee9b7c6d0cf71dfa8fcb1000c0e5a0b263ed0e3d3d38"
+        },
+        "front": {
+          "name": "lombardgrid/front/s26_l_sbbi2s.mov",
+          "sha256": "e88ce233de53be8ce65a22e4b2e58667e0149d3ab94bf76c491cb1301bf6699d"
+        }
+      },
+      "samples": 40000,
+      "source": "s26_l_sbbi2s",
+      "speaker": "s26",
+      "split": "held",
+      "target": [
+        "b",
+        11040,
+        12480
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        17440,
+        28640
+      ],
+      "labels": [
+        [
+          "p",
+          640,
+          1760
+        ],
+        [
+          "b",
+          6080,
+          7040
+        ],
+        [
+          "p",
+          22560,
+          23520
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.989804
+            ],
+            [
+              "b",
+              8520,
+              0.795335
+            ],
+            [
+              "p",
+              21960,
+              0.959874
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              2800,
+              null
+            ],
+            [
+              "p",
+              8080,
+              null
+            ]
+          ],
+          "sha256": "688c6553f352d7d451c0b6f7454f2242971669b85621a31f14b352078471ce57"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.991841
+            ],
+            [
+              "b",
+              8520,
+              0.829282
+            ]
+          ],
+          "old": [],
+          "sha256": "d77db8e798c1944359645e3ee5f90c5942f1dc8227685a40184b993dceb169ee"
+        },
+        "late": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.987202
+            ],
+            [
+              "b",
+              8520,
+              0.798409
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              2720,
+              null
+            ],
+            [
+              "p",
+              8080,
+              null
+            ]
+          ],
+          "sha256": "dfb3eb1dec9a580b4e1a8472a756526d15d86644134b093d0be134fe470b3c6b"
+        },
+        "original": {
+          "neural": [
+            [
+              "p",
+              3080,
+              0.990853
+            ],
+            [
+              "b",
+              8520,
+              0.898069
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              2800,
+              null
+            ]
+          ],
+          "sha256": "14978c0e3db5f65ddeceffaca3781bfd39cda5bd6c61eab10544a224985168b4"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s42_p_pbay1p.json",
+          "sha256": "8d54aa9c61b975e091c102e8f2b171a5152943916049f570987dcb81a65a6ce1"
+        },
+        "audio": {
+          "bytes": 138298,
+          "crc32": 3953837414,
+          "name": "lombardgrid/audio/s42_p_pbay1p.wav",
+          "sha256": "65fc8a9423fcb6c95593f36446014b7d219547221a810b8e6c7a47927ab38360"
+        },
+        "front": {
+          "name": "lombardgrid/front/s42_p_pbay1p.mov",
+          "sha256": "4c3e020a77168bdf5a7a9960218a6fb28165f2932e290242e45fc2eae5635222"
+        }
+      },
+      "samples": 34560,
+      "source": "s42_p_pbay1p",
+      "speaker": "s42",
+      "split": "held",
+      "target": [
+        "p",
+        22560,
+        23520
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        4800,
+        16000
+      ],
+      "labels": [
+        [
+          "b",
+          1120,
+          1760
+        ],
+        [
+          "b",
+          10080,
+          10720
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.9642
+            ],
+            [
+              "b",
+              8520,
+              0.969403
+            ]
+          ],
+          "old": [],
+          "sha256": "e5ca895fb6007655a49dd4f2a10491b95879a85ee81e8125a90a614f4a21b05f"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.974649
+            ],
+            [
+              "b",
+              11720,
+              0.980967
+            ]
+          ],
+          "old": [],
+          "sha256": "6f7ab1f2c10db241cc57d150fb6d06a95115aa4638cd0a559e42154660da7a24"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.955798
+            ],
+            [
+              "b",
+              6280,
+              0.969738
+            ],
+            [
+              "b",
+              14920,
+              0.97219
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              14560,
+              null
+            ]
+          ],
+          "sha256": "1385c6fc0d30fc7d058f027557cea35fe926bd58299ca2b36a274081e871522c"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.977031
+            ],
+            [
+              "b",
+              11720,
+              0.981642
+            ]
+          ],
+          "old": [],
+          "sha256": "434fff1100d308c9e9af7c8912b7c41cae63a94cfb41196a85bc087a9d19a6db"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s42_p_bgbv7s.json",
+          "sha256": "af30976f5888ac0661b8752bdd28d14cd3f20e0b36440ba34ab5ed5e032e19df"
+        },
+        "audio": {
+          "bytes": 135738,
+          "crc32": 3213782307,
+          "name": "lombardgrid/audio/s42_p_bgbv7s.wav",
+          "sha256": "d75a022d6e275e5648f2f50dda83987fea24fbc5176c583018e591775ea06c16"
+        },
+        "front": {
+          "name": "lombardgrid/front/s42_p_bgbv7s.mov",
+          "sha256": "4fd9ffa8719933a90d17d0d5cf27eaa112cf58223971f6748d755805ad5dcc4b"
+        }
+      },
+      "samples": 33920,
+      "source": "s42_p_bgbv7s",
+      "speaker": "s42",
+      "split": "held",
+      "target": [
+        "b",
+        10080,
+        10720
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        14640,
+        25840
+      ],
+      "labels": [
+        [
+          "b",
+          1120,
+          2560
+        ],
+        [
+          "p",
+          19680,
+          20800
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.932283
+            ],
+            [
+              "p",
+              18760,
+              0.984372
+            ]
+          ],
+          "old": [],
+          "sha256": "22c4e1837e92fc6c73fe397dcc185f9c52cd3da4c27c2f440079131978b766a7"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.900051
+            ],
+            [
+              "p",
+              21960,
+              0.915423
+            ]
+          ],
+          "old": [],
+          "sha256": "b20d0c46f47cd77a39bfa62e0634ee3431bc6cdd66d8df33b7ae300db86c4a83"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.941937
+            ],
+            [
+              "p",
+              25160,
+              0.907926
+            ]
+          ],
+          "old": [],
+          "sha256": "87187b51288cddb74ecca2cc9e2519f2ba66d8635fba5eed25163d639c52382f"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              3080,
+              0.950134
+            ],
+            [
+              "p",
+              21960,
+              0.986726
+            ]
+          ],
+          "old": [],
+          "sha256": "582dd507e358e5cdf7a2d4fb93063367a6502668a1f5ad7ac979bb7260d9c0a9"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s42_l_brar9p.json",
+          "sha256": "a108342fd5252176c1e7c54c33c6caf503bccafdd972cff814252cd5e47ae771"
+        },
+        "audio": {
+          "bytes": 128698,
+          "crc32": 2314649771,
+          "name": "lombardgrid/audio/s42_l_brar9p.wav",
+          "sha256": "c5c8deb3cb17b311a6bd34f4026d137d692adaf06120a6a945e870c136aa9af4"
+        },
+        "front": {
+          "name": "lombardgrid/front/s42_l_brar9p.mov",
+          "sha256": "a4bf2a9d8ee93ffe1adab674e844f48605eb53de4abdc9cdc6cc432a9613c5c8"
+        }
+      },
+      "samples": 32160,
+      "source": "s42_l_brar9p",
+      "speaker": "s42",
+      "split": "held",
+      "target": [
+        "p",
+        19680,
+        20800
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        13120,
+        24320
+      ],
+      "labels": [
+        [
+          "p",
+          480,
+          1120
+        ],
+        [
+          "p",
+          18400,
+          19040
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "p",
+              2760,
+              0.98269
+            ],
+            [
+              "p",
+              17800,
+              0.962625
+            ]
+          ],
+          "old": [],
+          "sha256": "e9cda950f4c53374d0908b6e3a15a966233984f4de82d1364a5b85cfebea1a0e"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "p",
+              2760,
+              0.982749
+            ],
+            [
+              "p",
+              21000,
+              0.980143
+            ]
+          ],
+          "old": [],
+          "sha256": "186254ad19aeb08eca6ae58c0e6770ed1d0ab5496b2d4830ad9b86c16d15051c"
+        },
+        "late": {
+          "neural": [
+            [
+              "p",
+              2760,
+              0.987159
+            ],
+            [
+              "b",
+              23880,
+              0.411938
+            ]
+          ],
+          "old": [],
+          "sha256": "62be74038926d6e3a43e70fccab682e0ebd88eacf4383a0d2794473cd37b68ca"
+        },
+        "original": {
+          "neural": [
+            [
+              "p",
+              2760,
+              0.985824
+            ],
+            [
+              "p",
+              21000,
+              0.986916
+            ]
+          ],
+          "old": [],
+          "sha256": "7da88f7e8c94d47c4883d541f923f18104c0aa357ff858345779bad5ee9d8055"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s42_l_prie6p.json",
+          "sha256": "ddb508576ec6cd0b756e3bdd74f11748f1c04da55c74dabd614941fa0235d459"
+        },
+        "audio": {
+          "bytes": 131258,
+          "crc32": 1702013591,
+          "name": "lombardgrid/audio/s42_l_prie6p.wav",
+          "sha256": "7418b8a89ab738f3977c4486a58a4e08c741406bc17bd60bfcc9d014b5110afe"
+        },
+        "front": {
+          "name": "lombardgrid/front/s42_l_prie6p.mov",
+          "sha256": "d8339865557ab06fc1826ecf13d09982e4e41a0676177a670c5e8b926a47ad0c"
+        }
+      },
+      "samples": 32800,
+      "source": "s42_l_prie6p",
+      "speaker": "s42",
+      "split": "held",
+      "target": [
+        "p",
+        18400,
+        19040
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        4240,
+        15440
+      ],
+      "labels": [
+        [
+          "b",
+          9280,
+          10400
+        ],
+        [
+          "p",
+          28480,
+          29760
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              7240,
+              0.966027
+            ],
+            [
+              "p",
+              29640,
+              0.988845
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              6400,
+              null
+            ]
+          ],
+          "sha256": "c1c1a56911f2a1ad596c68c8e167610df40c9f8b95edf3b830195290ad7847bd"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              10440,
+              0.970696
+            ],
+            [
+              "p",
+              29640,
+              0.991537
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              8080,
+              null
+            ]
+          ],
+          "sha256": "9e86b19779619eb880face2389a97a31eca64fab713d358100ca300dac6d2d8a"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              13320,
+              0.955133
+            ],
+            [
+              "p",
+              29640,
+              0.988789
+            ]
+          ],
+          "old": [],
+          "sha256": "8eb0495e6aa4e686d6ebdedea380b8cd0b95f1f29196e1f664afbf238811e060"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              10440,
+              0.949454
+            ],
+            [
+              "p",
+              29640,
+              0.989051
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              9680,
+              null
+            ]
+          ],
+          "sha256": "2dc8081ac3e9c7934774ebef56b8398877935d0457fe116c58602441d69782b6"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s44_p_sbio6p.json",
+          "sha256": "7d1185201af5c2c9d2d244b2258a310fe66b46a473122808c1736d10826a986e"
+        },
+        "audio": {
+          "bytes": 165178,
+          "crc32": 3521195630,
+          "name": "lombardgrid/audio/s44_p_sbio6p.wav",
+          "sha256": "23b6430cd257ffea529acadd4efd444609c59c36aeb326407acc7611e63a31bb"
+        },
+        "front": {
+          "name": "lombardgrid/front/s44_p_sbio6p.mov",
+          "sha256": "27f348eb9f374a220d054c7607c7a156622dd452ec105c8d4c9b71faf85262c0"
+        }
+      },
+      "samples": 41280,
+      "source": "s44_p_sbio6p",
+      "speaker": "s44",
+      "split": "held",
+      "target": [
+        "b",
+        9280,
+        10400
+      ]
+    },
+    {
+      "condition": "p",
+      "edit": [
+        6880,
+        18080
+      ],
+      "labels": [
+        [
+          "b",
+          12160,
+          12800
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              10440,
+              0.95165
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              10000,
+              null
+            ]
+          ],
+          "sha256": "eaedc75072cbe8514a6afe7a4496b9cab5edc7f57c4fd5697fcdd805811fddc4"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              13640,
+              0.964466
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              13040,
+              null
+            ]
+          ],
+          "sha256": "8fb492b67ff22f277bf0bdc8d5f70e5329616bf548b34e0f9be54f94293a512e"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              16840,
+              0.921884
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              16240,
+              null
+            ]
+          ],
+          "sha256": "c6450a6fa968f83cfd4402dd1c50a15c672cc5f23070e97de8266bc971b71dac"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              13640,
+              0.956048
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              13200,
+              null
+            ]
+          ],
+          "sha256": "4e32420681053d668a67b4155dba470d2ca9e80671e6517806cd3b0c9d8742eb"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s44_p_lrbm5a.json",
+          "sha256": "bedb367bf67cb4196d1884a17e2a183d8bdc3d0c654e07ed1518303cacaf373b"
+        },
+        "audio": {
+          "bytes": 162618,
+          "crc32": 1573738018,
+          "name": "lombardgrid/audio/s44_p_lrbm5a.wav",
+          "sha256": "eccb98da13c3f29da9eeeef2c38146d6c9bafce28719eeeb29a5725c25037496"
+        },
+        "front": {
+          "name": "lombardgrid/front/s44_p_lrbm5a.mov",
+          "sha256": "7ef068bdc34fa8a778cececd9bf770121c72b8b07dd7b7fb74a3bd4ca5b3d486"
+        }
+      },
+      "samples": 40640,
+      "source": "s44_p_lrbm5a",
+      "speaker": "s44",
+      "split": "held",
+      "target": [
+        "b",
+        12160,
+        12800
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        10720,
+        21920
+      ],
+      "labels": [
+        [
+          "b",
+          15680,
+          16960
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              13960,
+              0.950613
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              13360,
+              null
+            ]
+          ],
+          "sha256": "4a38eb6af7b809df41bf1039e5b582addd74b8231f2337b43ccafe7b7d74a895"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              17160,
+              0.952566
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              16560,
+              null
+            ]
+          ],
+          "sha256": "bfa208675eb03e119fbd6006bf9702d6f40866c704f8cb633e60dbfa0c314885"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              20360,
+              0.958329
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              19760,
+              null
+            ]
+          ],
+          "sha256": "b9e54d4e0b6df5c75faa490cef1e073d7795fbc4b604c75391ad626198eb7807"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              17160,
+              0.95899
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              16880,
+              null
+            ]
+          ],
+          "sha256": "d8c5a5776751df7eb2ad2f3c6cb9adb60f6536a53021e57b9a996c8976ec2ff7"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s44_l_lwbn8n.json",
+          "sha256": "bf4e5829077cb7b37945d65ed686e22ec54dc2b8aff686536d71f714a14edf2e"
+        },
+        "audio": {
+          "bytes": 182458,
+          "crc32": 461852911,
+          "name": "lombardgrid/audio/s44_l_lwbn8n.wav",
+          "sha256": "80083381740cd9cd7184556c96015bdab7c79a139ac434374c54c1fe8c4ae57e"
+        },
+        "front": {
+          "name": "lombardgrid/front/s44_l_lwbn8n.mov",
+          "sha256": "a37ab297917df53591a93f7c2d1868daf75728a9226c87a6eb4cf6d3e027d3be"
+        }
+      },
+      "samples": 45600,
+      "source": "s44_l_lwbn8n",
+      "speaker": "s44",
+      "split": "held",
+      "target": [
+        "b",
+        15680,
+        16960
+      ]
+    },
+    {
+      "condition": "l",
+      "edit": [
+        7520,
+        18720
+      ],
+      "labels": [
+        [
+          "b",
+          12480,
+          13760
+        ]
+      ],
+      "measurements": {
+        "early": {
+          "neural": [
+            [
+              "b",
+              11080,
+              0.920283
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              10480,
+              null
+            ]
+          ],
+          "sha256": "5e4d98b57b479d733e11e0a2f09447d25e7128fb84092ce1c5d0b501ba2b2425"
+        },
+        "filtered": {
+          "neural": [
+            [
+              "b",
+              14280,
+              0.932892
+            ]
+          ],
+          "old": [],
+          "sha256": "be6ef3f96b7af710172e5d2404721d477888adea8867db3cebf9f18c250aeba2"
+        },
+        "late": {
+          "neural": [
+            [
+              "b",
+              17480,
+              0.90782
+            ]
+          ],
+          "old": [
+            [
+              "b",
+              10640,
+              null
+            ]
+          ],
+          "sha256": "80470ac58af05c4e5b308ab592d31e4b1c9522d3d7a8c71d2f7603b820cc7fa2"
+        },
+        "original": {
+          "neural": [
+            [
+              "b",
+              14280,
+              0.927128
+            ]
+          ],
+          "old": [
+            [
+              "p",
+              13680,
+              null
+            ]
+          ],
+          "sha256": "7ce24480919f146ccebec22429fd2406954a64e5f392c906580e3d6a01ad0b07"
+        }
+      },
+      "members": {
+        "alignment": {
+          "name": "lombardgrid/alignment/s44_l_lrbm5a.json",
+          "sha256": "d72d39347b83f7eb11e33171bb805f461496e2ba32c1eb426c2fcc21a28098a4"
+        },
+        "audio": {
+          "bytes": 169658,
+          "crc32": 1836793160,
+          "name": "lombardgrid/audio/s44_l_lrbm5a.wav",
+          "sha256": "9b05f66c11e9076aac88c997e8dafbb3d1cb38bd0cc69b3569d6fe3747f2a284"
+        },
+        "front": {
+          "name": "lombardgrid/front/s44_l_lrbm5a.mov",
+          "sha256": "034e2fc6365b3e15fbe4882ec33da1d03d746c836252d28f84243a832f004c84"
+        }
+      },
+      "samples": 42400,
+      "source": "s44_l_lrbm5a",
+      "speaker": "s44",
+      "split": "held",
+      "target": [
+        "b",
+        12480,
+        13760
+      ]
+    }
+  ],
+  "schema": "chipmunk.video-neural-phone-clock/1"
+}

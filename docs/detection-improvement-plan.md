@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Neural phone timestamps for lip-sync evaluation](video-neural-phone-clock-2026-11-14.md)
+  tracked 42 of 128 staged sound shifts across two disjoint held cohorts,
+  compared with 28 for the earlier decoder. Original label matches rose
+  from 29 to 51 of 123, with more unmatched readings. The overlapping
+  audio measurement gave no additional improvement and the cue stays
+  in local evaluation.
+
 - [Writing evidence across more source blocks](writing-balanced-cards-2026-11-14.md)
   redistributes six detailed cards using the exact source mapping.
   The held essay comparison displays 125 source blocks, up from 120,

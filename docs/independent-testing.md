@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [phone clock replay](video-neural-phone-clock-2026-11-14.md#independent-replay)
+recounts shift tracking and unmatched audio events on two distinct speaker
+cohorts. Native replay verifies authored waveforms and adjacent source frame
+commitments without loading the recognition checkpoints.
+
 The [writing card allocation replay](writing-balanced-cards-2026-11-14.md#reproduce)
 recounts source coverage, disagreements and useful localizations under
 both six-card selection policies on 26 held essay pairs.

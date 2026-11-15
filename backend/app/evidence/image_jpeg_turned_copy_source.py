@@ -7,8 +7,15 @@ from app.evidence import image_jpeg_offgrid_source
 from app.evidence.image_copy_similarity_binding import PNG_COPY_TURNS, ROLES
 
 
-def review(data, rgb):
-    if not image_jpeg_offgrid_source.supported(data, include_quality_85=False):
+def _supported(data, *, expanded, offgrid_status):
+    profile = image_jpeg_offgrid_source.encoded_profile(data)
+    if offgrid_status == "unsupported_profile":
+        return expanded and profile == 95
+    return offgrid_status == "no_pair" and (profile in {75, 90} or expanded and profile == 85)
+
+
+def review(data, rgb, *, expanded=False, offgrid_status="no_pair"):
+    if not _supported(data, expanded=expanded, offgrid_status=offgrid_status):
         return {"status": "unsupported_profile", "measurement": None}, [], 0
     status, candidates = jpeg_turned_copy.analyse(rgb)
     if not candidates:
@@ -17,8 +24,8 @@ def review(data, rgb):
     return {"status": status, "measurement": match["measurement"]}, [match["pair"]], match["turns"]
 
 
-def verify(data, rgb, pair, measurement):
-    if not image_jpeg_offgrid_source.supported(data, include_quality_85=False):
+def verify(data, rgb, pair, measurement, *, expanded=False, offgrid_status="no_pair"):
+    if not _supported(data, expanded=expanded, offgrid_status=offgrid_status):
         raise ValueError("Rotated-copy evidence requires a supported encoded JPEG")
     boxes = [tuple(pair["regions"][role][key] for key in "xywh") for role in ROLES]
     turns = PNG_COPY_TURNS.get(pair["transform"])

@@ -173,6 +173,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 turned_jpeg = check.get("jpeg_turned_review") is not None
                 statuses = TURNED_JPEG_STATUS_TEXT if turned_jpeg else OFFGRID_STATUS_TEXT
                 check["basis_text"] = statuses[review["status"]]
+                if turned_jpeg and (check.get("jpeg_offgrid_review") or {}).get("status") == "unsupported_profile":
+                    check["basis_text"] += " The between-block translation check was outside this file’s compression profile."
                 if check.get("basis") == TURNED_JPEG_BASIS:
                     turns = "90° counterclockwise" if check["pairs"][0]["transform"] == "rotate_90_ccw" else "180°"
                     check["observation"] = f"Area B closely matches Area A after rotating it {turns}."

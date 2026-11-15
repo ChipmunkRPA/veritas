@@ -11,15 +11,16 @@ from PIL import Image, JpegImagePlugin
 from app.detectors.image import jpeg_offgrid_copy
 from app.evidence.image_copy_similarity_binding import OFFGRID_MIN_SIDE, ROLES, V8, supported_size
 
-_QUANTIZATION_SHA256 = frozenset({
-    "db12807ffe7ea7d208d803a4ad9d156e941af36754c009d3ec5de5aae4112903",  # Standard JPEG quality 75.
-    "4a947d5d753cb42d30d364a580030dd557d37404f5e12e09378359b0e9e397ac",  # Standard JPEG quality 90.
-})
-_QUALITY_85_SHA256 = "25bb3739664e47c1cd8aadf2ff486d477738b962bc84a097ae7bab5d88084a12"
-_QUALITY_85_MIN_SIDE = 56
+_STANDARD_TABLES = {
+    "db12807ffe7ea7d208d803a4ad9d156e941af36754c009d3ec5de5aae4112903": 75,
+    "25bb3739664e47c1cd8aadf2ff486d477738b962bc84a097ae7bab5d88084a12": 85,
+    "4a947d5d753cb42d30d364a580030dd557d37404f5e12e09378359b0e9e397ac": 90,
+    "b40e056724db43022fcc08475520e2fda95cb91c31551a5dc0f9f9f6b50b1ddc": 95,
+}
+_QUANTIZATION_SHA256 = frozenset(digest for digest, profile in _STANDARD_TABLES.items() if profile in {75, 90})
 
 
-def _minimum_crop_side(data: bytes) -> int | None:
+def _table_digest(data: bytes) -> str | None:
     with Image.open(io.BytesIO(data), formats=["JPEG"]) as image:
         if (image.mode != "RGB" or JpegImagePlugin.get_sampling(image) != 2 or image.getexif().get(274, 1) != 1
                 or not supported_size(*image.size, version=V8) or set(image.quantization) != {0, 1}
@@ -27,9 +28,18 @@ def _minimum_crop_side(data: bytes) -> int | None:
                 or any(not 0 < level <= 255 for table in image.quantization.values() for level in table)):
             return None
         tables = bytes(image.quantization[0]) + bytes(image.quantization[1])
-    digest = hashlib.sha256(tables).hexdigest()
-    if digest == _QUALITY_85_SHA256:
-        return _QUALITY_85_MIN_SIDE
+    return hashlib.sha256(tables).hexdigest()
+
+
+def encoded_profile(data: bytes) -> int | None:
+    """Identify an exact tested set of quantization tables and compatible source geometry."""
+    return _STANDARD_TABLES.get(_table_digest(data))
+
+
+def _minimum_crop_side(data: bytes) -> int | None:
+    digest = _table_digest(data)
+    if _STANDARD_TABLES.get(digest) == 85:
+        return 56
     return OFFGRID_MIN_SIDE if digest in _QUANTIZATION_SHA256 else None
 
 

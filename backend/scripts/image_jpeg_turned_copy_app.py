@@ -91,10 +91,10 @@ def run(args):
     from app.billing import service
     from app.core.config import settings
     from app.evidence.image_copy_similarity_binding import (
+        EXPANDED_JPEG_ROTATION_AFFINE_VERSION,
         PNG_COPY_TRANSFORMS,
         ROLES,
         TURNED_JPEG_BASIS,
-        TURNED_JPEG_COPY_AFFINE_VERSION,
     )
     from app.evidence.image_embedded_pair_binding import base_document
     from app.main import app
@@ -136,7 +136,7 @@ def run(args):
             base = base_document(evidence)
             check = base["copy_translation"]
             rotation = check["jpeg_turned_review"]
-            assert evidence["status"] == "ready" and base["version"] == TURNED_JPEG_COPY_AFFINE_VERSION
+            assert evidence["status"] == "ready" and base["version"] == EXPANDED_JPEG_ROTATION_AFFINE_VERSION
             assert rotation["status"] == row["rotation"]["status"]
             export = fetch(client, f"/api/analyses/{aid}/export.json")
             scan(export.decode())

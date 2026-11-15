@@ -559,7 +559,8 @@ def test_report_and_json_share_source_bound_pair_and_redaction(packet_fixture, m
     )
 
 
-def test_rotated_jpeg_replays_both_native_areas_and_rejects_changed_measurements(monkeypatch):
+@pytest.mark.parametrize("quality,offgrid", [(85, "no_pair"), (90, "no_pair"), (95, "unsupported_profile")])
+def test_rotated_jpeg_replays_both_native_areas_and_rejects_changed_measurements(monkeypatch, quality, offgrid):
     from app.detectors.image import jpeg_turned_copy
     from app.evidence import image_jpeg_turned_copy_source as rotated
 
@@ -567,19 +568,27 @@ def test_rotated_jpeg_replays_both_native_areas_and_rejects_changed_measurements
     pixels = cv2.resize(rng.integers(0, 256, (86, 113, 3), dtype=np.uint8), (640, 512), interpolation=cv2.INTER_CUBIC)
     pixels[72:144, 81:137] = np.rot90(pixels[313:369, 405:477])
     image = Image.fromarray(pixels)
-    raw = _bytes(image, format="JPEG", quality=90, subsampling=2)
+    raw = _bytes(image, format="JPEG", quality=quality, subsampling=2)
     with Image.open(io.BytesIO(raw)) as source:
         rgb = np.array(source)
-    review, pairs, turns = rotated.review(raw, rgb)
+    options = {"expanded": quality in {85, 95}, "offgrid_status": offgrid}
+    assert image_jpeg_offgrid_source.supported(raw) is (quality != 95)
+    review, pairs, turns = rotated.review(raw, rgb, **options)
     assert review["status"] == "supported_pair" and turns == 1
     pair = {"transform": "rotate_90_ccw", "regions": {
         area: dict(zip("xywh", box, strict=True)) for area, box in zip(("area_a", "area_b"), pairs[0], strict=True)}}
-    rotated.verify(raw, rgb, pair, review["measurement"])
+    rotated.verify(raw, rgb, pair, review["measurement"], **options)
     changed = {**review["measurement"], "interior_mean": 0.0}
     with pytest.raises(ValueError, match="differ from the submitted image"):
-        rotated.verify(raw, rgb, pair, changed)
+        rotated.verify(raw, rgb, pair, changed, **options)
     with pytest.raises(ValueError, match="requires a quarter turn or half turn"):
-        rotated.verify(raw, rgb, {**pair, "transform": "same_orientation"}, review["measurement"])
+        rotated.verify(raw, rgb, {**pair, "transform": "same_orientation"}, review["measurement"], **options)
+    if quality in {85, 95}:
+        with pytest.raises(ValueError, match="supported encoded JPEG"):
+            rotated.verify(raw, rgb, pair, review["measurement"], expanded=False, offgrid_status=offgrid)
+        with pytest.raises(ValueError, match="supported encoded JPEG"):
+            rotated.verify(raw, rgb, pair, review["measurement"], expanded=True,
+                           offgrid_status="no_pair" if quality == 95 else "unsupported_profile")
 
     def unexpected_check(_):
         pytest.fail("An unsupported JPEG must not run the rotation search")
@@ -587,6 +596,9 @@ def test_rotated_jpeg_replays_both_native_areas_and_rejects_changed_measurements
     monkeypatch.setattr(jpeg_turned_copy, "analyse", unexpected_check)
     unsupported = _bytes(image, format="JPEG", quality=85, subsampling=2)
     assert rotated.review(unsupported, rgb) == ({"status": "unsupported_profile", "measurement": None}, [], 0)
+    unsupported = _bytes(image, format="JPEG", quality=92, subsampling=2)
+    assert rotated.review(unsupported, rgb, expanded=True, offgrid_status="unsupported_profile") == (
+        {"status": "unsupported_profile", "measurement": None}, [], 0)
 
 
 def test_small_png_copy_preserves_exact_crops_and_rejects_unsupported_sources(evidence_http, monkeypatch):

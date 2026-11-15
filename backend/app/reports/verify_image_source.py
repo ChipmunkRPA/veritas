@@ -15,6 +15,7 @@ from app.evidence import image_embedded_pair_binding as embedded_pair
 from app.evidence import image_interpolation_binding as interpolation
 from app.evidence import image_transparency_binding as transparency
 from app.evidence.image_copy_similarity_binding import (
+    EXPANDED_JPEG_ROTATION_VERSIONS,
     JPEG_BLOCK_BASIS,
     OFFGRID_BASIS,
     ROLES,
@@ -222,7 +223,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
             from app.evidence.image_jpeg_turned_copy_source import verify
 
-            verify(data, np.asarray(source), translation["pairs"][0], translation["jpeg_turned_review"]["measurement"])
+            verify(data, np.asarray(source), translation["pairs"][0], translation["jpeg_turned_review"]["measurement"],
+                   expanded=embedded_pair.base_document(evidence)["version"] in EXPANDED_JPEG_ROTATION_VERSIONS,
+                   offgrid_status=translation["jpeg_offgrid_review"]["status"])
     if pair is not None:
         from app.evidence import image_embedded_pair_pixels as embedded_pixels
 

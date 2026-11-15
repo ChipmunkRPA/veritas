@@ -23,9 +23,12 @@ TURNED_PNG_COPY_VERSION = "image-evidence-22"
 TURNED_PNG_COPY_AFFINE_VERSION = "image-evidence-23"
 TURNED_JPEG_COPY_VERSION = "image-evidence-24"
 TURNED_JPEG_COPY_AFFINE_VERSION = "image-evidence-25"
+EXPANDED_JPEG_ROTATION_VERSION = "image-evidence-26"
+EXPANDED_JPEG_ROTATION_AFFINE_VERSION = "image-evidence-27"
 TURNED_PNG_VERSIONS = frozenset({TURNED_PNG_COPY_VERSION, TURNED_PNG_COPY_AFFINE_VERSION})
 SMALL_PNG_VERSIONS = TURNED_PNG_VERSIONS | {SMALL_PNG_COPY_VERSION, SMALL_PNG_COPY_AFFINE_VERSION}
-TURNED_JPEG_VERSIONS = frozenset({TURNED_JPEG_COPY_VERSION, TURNED_JPEG_COPY_AFFINE_VERSION})
+EXPANDED_JPEG_ROTATION_VERSIONS = frozenset({EXPANDED_JPEG_ROTATION_VERSION, EXPANDED_JPEG_ROTATION_AFFINE_VERSION})
+TURNED_JPEG_VERSIONS = EXPANDED_JPEG_ROTATION_VERSIONS | {TURNED_JPEG_COPY_VERSION, TURNED_JPEG_COPY_AFFINE_VERSION}
 SMALL_PNG_MIN_SIDE, SMALL_PNG_MAX_SIDE = 384, 768
 SMALL_PNG_CROP_MIN, SMALL_PNG_CROP_MAX = 16, 56
 SMALL_PNG_BASIS = "png_exact_small_copy"
@@ -45,7 +48,7 @@ JPEG_BLOCK_VERSIONS = JPEG_OFFGRID_VERSIONS | {JPEG_BLOCK_VERSION, JPEG_BLOCK_AF
 VERSION = V12
 AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_AFFINE_VERSION,
                              SMALL_PNG_COPY_AFFINE_VERSION, TURNED_PNG_COPY_AFFINE_VERSION,
-                             TURNED_JPEG_COPY_AFFINE_VERSION})
+                             TURNED_JPEG_COPY_AFFINE_VERSION, EXPANDED_JPEG_ROTATION_AFFINE_VERSION})
 CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12} | JPEG_BLOCK_VERSIONS | SMALL_PNG_VERSIONS
 TRANSLATION_VERSIONS = CREDENTIAL_VERSIONS | {V10, V11}
 BASIS_VERSIONS = CREDENTIAL_VERSIONS | {V11}
@@ -237,12 +240,19 @@ def _validate_offgrid(record: dict | None, jpeg_status: str | None) -> bool:
     return _validate_jpeg_measurement(measurement)
 
 
-def _validate_turned_jpeg(record: dict | None, offgrid_review: dict | None) -> bool:
-    should_run = offgrid_review is not None and offgrid_review["status"] == "no_pair"
+def rotation_review_follows(offgrid_review: dict | None, *, expanded: bool) -> bool:
+    if offgrid_review is None:
+        return False
+    status = offgrid_review["status"]
+    return status == "no_pair" or expanded and status == "unsupported_profile"
+
+
+def _validate_turned_jpeg(record: dict | None, offgrid_review: dict | None, *, expanded: bool) -> bool:
+    should_run = rotation_review_follows(offgrid_review, expanded=expanded)
     if record is None and not should_run:
         return False
     if not should_run or not isinstance(record, dict) or set(record) != {"status", "measurement"}:
-        raise ValueError("Rotated JPEG coverage does not follow the completed between-block comparison")
+        raise ValueError("Rotated JPEG coverage does not follow its recorded between-block comparison")
     status, measurement = record["status"], record["measurement"]
     if status not in TURNED_JPEG_STATUS_TEXT or (status == "supported_pair") != (measurement is not None):
         raise ValueError("Rotated JPEG comparison has an invalid status")
@@ -344,8 +354,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
             raise ValueError("Between-block JPEG coverage is outside its native source geometry")
     if offgrid_pair and len(pairs) != 1:
         raise ValueError("Between-block JPEG evidence must contain one measured pair")
-    turned_jpeg_pair = has_turned_jpeg_review and _validate_turned_jpeg(record["jpeg_turned_review"],
-                                                                     record["jpeg_offgrid_review"])
+    turned_jpeg_pair = has_turned_jpeg_review and _validate_turned_jpeg(
+        record["jpeg_turned_review"], record["jpeg_offgrid_review"], expanded=document["version"] in EXPANDED_JPEG_ROTATION_VERSIONS)
     if turned_jpeg_pair and len(pairs) != 1:
         raise ValueError("Rotated JPEG evidence must contain one measured pair")
     small_png_pair = False

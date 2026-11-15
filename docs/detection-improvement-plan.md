@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Right-angle JPEG copies at quality 85 and 95](image-jpeg-rotation-profiles-2026-11-15.md)
+  expands the source-bound rotation check to two additional standard
+  compression tables. Correct locations rose from 1/72 to 50/72 at
+  quality 85 and from 8/72 to 50/72 at quality 95. No additional control
+  views flagged. Two quality-85 results were misplaced.
+
 - [Stereo cancellation in video soundtracks](video-soundtrack-downmix-coverage-2026-11-15.md)
   withholds the soundtrack estimate when the analyzed mono mix loses
   audible stereo sound. Two partial cancellations stopped leaning original,

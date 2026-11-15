@@ -64,6 +64,10 @@ comparisons. The printed rotation explains how the check compared
 the areas. Both crops are displayed in their original orientation.
 The finding carries zero weight in the overall AI confidence.
 
+The [later profile comparison](image-jpeg-rotation-profiles-2026-11-15.md)
+also supports two additional compression tables. The original receipt
+still records only the quality-75 and quality-90 experiment.
+
 Four simulated USD $9.99 checkouts exercised the earlier quarter-turn
 result, both supported rotations with the option enabled, and an unchanged
 control. No analysis started before payment confirmation. Headless

@@ -20,6 +20,9 @@ from app.evidence import image_packets_v5 as prior
 from app.evidence.image_copy_similarity_binding import (
     AFFINE_VERSIONS,
     CREDENTIAL_VERSIONS,
+    EXPANDED_JPEG_ROTATION_AFFINE_VERSION,
+    EXPANDED_JPEG_ROTATION_VERSION,
+    EXPANDED_JPEG_ROTATION_VERSIONS,
     JPEG_BLOCK_AFFINE_VERSION,
     JPEG_BLOCK_BASIS,
     JPEG_BLOCK_VERSION,
@@ -61,6 +64,7 @@ from app.evidence.image_copy_similarity_binding import (
     copy_records,
     prior_evidence,
     result_skip,
+    rotation_review_follows,
     supported_size,
     url,
     validate_copy_scope,
@@ -71,7 +75,9 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
 CREATOR = "image-evidence-packets/10"
-_CREATORS = {TURNED_JPEG_COPY_AFFINE_VERSION: "image-evidence-packets/23",
+_CREATORS = {EXPANDED_JPEG_ROTATION_AFFINE_VERSION: "image-evidence-packets/25",
+             EXPANDED_JPEG_ROTATION_VERSION: "image-evidence-packets/24",
+             TURNED_JPEG_COPY_AFFINE_VERSION: "image-evidence-packets/23",
              TURNED_JPEG_COPY_VERSION: "image-evidence-packets/22",
              TURNED_PNG_COPY_AFFINE_VERSION: "image-evidence-packets/21", TURNED_PNG_COPY_VERSION: "image-evidence-packets/20",
              SMALL_PNG_COPY_AFFINE_VERSION: "image-evidence-packets/19", SMALL_PNG_COPY_VERSION: "image-evidence-packets/18",
@@ -98,7 +104,7 @@ def _active_version() -> str:
 
 def _analysis_version(analysis: Analysis) -> str:
     if settings.environment == "dev" and settings.image_turned_jpeg_copy_review and analysis.content_type == "image/jpeg":
-        return TURNED_JPEG_COPY_AFFINE_VERSION if settings.image_affine_copy_review else TURNED_JPEG_COPY_VERSION
+        return EXPANDED_JPEG_ROTATION_AFFINE_VERSION if settings.image_affine_copy_review else EXPANDED_JPEG_ROTATION_VERSION
     if settings.environment == "dev" and settings.image_small_png_copy_review and analysis.content_type == "image/png":
         if settings.image_turned_png_copy_review:
             return TURNED_PNG_COPY_AFFINE_VERSION if settings.image_affine_copy_review else TURNED_PNG_COPY_VERSION
@@ -204,7 +210,8 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
 
         try:
             verify(legacy._verified(store, document["source"]["sha256"]), np.asarray(source), translation["pairs"][0],
-                   translation["jpeg_turned_review"]["measurement"])
+                   translation["jpeg_turned_review"]["measurement"], expanded=document["version"] in EXPANDED_JPEG_ROTATION_VERSIONS,
+                   offgrid_status=translation["jpeg_offgrid_review"]["status"])
         except (OSError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
 
@@ -329,6 +336,7 @@ def build_packet_set(
     if base is None:
         base = prior.build_packet_set(db, analysis, store, result)
     version = _analysis_version(analysis)
+    expanded_rotation = version in EXPANDED_JPEG_ROTATION_VERSIONS
     document = {
         **base,
         "id": current_set_id(analysis),
@@ -369,11 +377,12 @@ def build_packet_set(
                         offgrid_review, extra = {"status": "unavailable", "measurement": None}, []
                     if extra:
                         translation_status, translations, basis = "supported_pair", extra, OFFGRID_BASIS
-                    elif version in TURNED_JPEG_VERSIONS and offgrid_review["status"] == "no_pair":
+                    elif version in TURNED_JPEG_VERSIONS and rotation_review_follows(offgrid_review, expanded=expanded_rotation):
                         from app.evidence import image_jpeg_turned_copy_source
 
                         try:
-                            turned_jpeg_review, extra, turns = image_jpeg_turned_copy_source.review(data, rgb)
+                            turned_jpeg_review, extra, turns = image_jpeg_turned_copy_source.review(
+                                data, rgb, expanded=expanded_rotation, offgrid_status=offgrid_review["status"])
                         except (cv2.error, OSError, ValueError, SystemError):
                             turned_jpeg_review, extra = {"status": "unavailable", "measurement": None}, []
                         if extra:

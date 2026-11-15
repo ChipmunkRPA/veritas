@@ -205,10 +205,11 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const sectionId = `image-${field.replace('_', '-')}`
   const baseVersion = set.prior_embedded_pair_evidence?.version ?? set.version
   const turnedReview = ['image-evidence-22', 'image-evidence-23'].includes(baseVersion)
-  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25'].includes(baseVersion))
+  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27'].includes(baseVersion))
     || (reflected && (turnedReview || ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12',
       'image-evidence-13', 'image-evidence-14', 'image-evidence-16', 'image-evidence-17', 'image-evidence-18',
-      'image-evidence-19', 'image-evidence-20', 'image-evidence-21', 'image-evidence-24', 'image-evidence-25'].includes(baseVersion)))
+      'image-evidence-19', 'image-evidence-20', 'image-evidence-21', 'image-evidence-24', 'image-evidence-25',
+      'image-evidence-26', 'image-evidence-27'].includes(baseVersion)))
   const basis = field === 'copy_translation' && set.copy_translation?.basis
   const jpegReview = field === 'copy_translation' && set.copy_translation?.jpeg_block_review
   const offgrid = field === 'copy_translation' ? set.copy_translation?.jpeg_offgrid_review : undefined
@@ -242,6 +243,9 @@ function CopySimilarity({ set, field, token, mediaReady }: {
     <p className="mt-2 mb-0 text-small text-text-muted">{check.interpretation}</p>
     {!reflected && <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero weight in AI authorship confidence.</p>}
     {basisText && <p className="mt-2 mb-0 text-caption text-text-muted">{basisText}</p>}
+    {turnedJpeg && offgrid?.status === 'unsupported_profile' && <p className="mt-2 mb-0 text-caption text-text-muted">
+      The between-block translation check was outside this file’s compression profile.
+    </p>}
     {smallPng?.measurement && <p className="mt-2 mb-0 text-caption text-text-muted">
       Compared {smallPng.measurement.matching_pixels.toLocaleString('en-US')} RGB pixels in each crop.
       Mean surrounding differences (top, bottom, left, right) {smallPng.measurement.perimeter_mean_absolute_difference.map(value => value.toFixed(2)).join(', ')} of 255 levels.

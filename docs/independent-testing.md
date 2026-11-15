@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [JPEG rotation profile replay](image-jpeg-rotation-profiles-2026-11-15.md#replay)
+recounts both required crop overlaps and separately checks misplaced
+areas, matched controls, and repeated-structure controls. It also
+replays source crops through a paid local worker and signed reports.
+
 The [video soundtrack coverage replay](video-soundtrack-downmix-coverage-2026-11-15.md#replay)
 compares the same AAC and ALAC soundtracks with and without the coverage
 rule. It checks the measured source ranges, unchanged controls, paid

@@ -261,6 +261,20 @@ describe('ordinary document passage inspection', () => {
     expect(screen.getByText(/Pages without mapped text: 3/)).toBeTruthy()
   })
 
+  it('explains when an exact writing-pattern flag and a wider passage flag refer to different text', () => {
+    const item: DocumentEvidencePacket = {
+      ...packet,
+      review_basis: 'different_writing_ranges',
+      interpretation: 'The writing-pattern check measured the marked sentence. The passage classifier flagged a wider context that includes it. Ordinary writing can trigger both responses.',
+      inspection_scope: { basis: 'ratio_reduction', spans: [{ start: packet.focus.start, end: packet.focus.end }] },
+      supporting_windows: packet.supporting_windows.map(window => ({ ...window, direction: 'supports_ai' })),
+    }
+    show(evidence([item]))
+    expect(screen.getByText('Different text ranges')).toBeTruthy()
+    expect(screen.getByText(/Ordinary writing can trigger both responses/)).toBeTruthy()
+    expect(screen.getByTestId('passage-highlight-T01').textContent).toBe(packet.focus.text)
+  })
+
   it('distinguishes extracted positions from disjoint decoded email source ranges', () => {
     const item = { ...packet, anchors: [{ kind: 'email', mime_part: '1.1', quote_role: 'body',
       selected_start: 108, selected_end: 122 }, { kind: 'pdf', page: 2, selected_start: 123, selected_end: 137 }] }

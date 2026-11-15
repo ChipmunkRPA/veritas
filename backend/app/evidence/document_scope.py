@@ -345,6 +345,22 @@ def writing_pattern_only(windows: list[dict]) -> bool:
 WRITING_PATTERN_INTERPRETATION = (
     "This passage was selected by the writing-pattern check. Surrounding text can influence the measurement."
 )
+DIFFERENT_WRITING_RANGES = (
+    "The writing-pattern check measured the marked sentence. The passage classifier flagged a wider context "
+    "that includes it. Ordinary writing can trigger both responses."
+)
+
+
+def writing_review_basis(focus: dict, scope: dict, windows: list[dict]) -> str | None:
+    if writing_pattern_only(windows):
+        return "writing_pattern_only"
+    if scope["basis"] == "ratio_reduction" and any(
+        window.get("score_kind") == "classifier_probability" and supports_inspection(window)
+        and any(span["start"] < focus["start"] or span["end"] > focus["end"] for span in window["spans"])
+        for window in windows
+    ):
+        return "different_writing_ranges"
+    return None
 
 
 def build(focus: dict, windows: list[dict], size: int) -> dict:
@@ -385,10 +401,11 @@ def validate(packet: dict, size: int) -> None:
         not low <= span["start"] < span["end"] <= high for span in scope["spans"]
     ):
         raise ValueError("Document inspection scope differs from the recorded supporting inputs")
-    if "review_basis" in packet and (
-        packet["review_basis"] != "writing_pattern_only" or not writing_pattern_only(packet["supporting_windows"])
-    ):
-        raise ValueError("The writing-pattern review basis differs from the recorded responses")
+    if "review_basis" in packet:
+        basis = writing_review_basis(packet["focus"], scope, packet["supporting_windows"])
+        if (basis is None or packet["review_basis"] != basis
+                or basis == "different_writing_ranges" and packet.get("interpretation") != DIFFERENT_WRITING_RANGES):
+            raise ValueError("The writing review basis differs from the recorded responses")
 
 
 def validate_passage_coverage(document: dict) -> None:

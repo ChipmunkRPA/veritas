@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [writing agreement replay](writing-joint-tail-transfer-2026-11-14.md#local-replay)
+compares single-check flags and two-check agreement on disjoint news and
+abstract works. It includes separate same-genre cutoffs, matched ordinary
+controls and exact positions. Recreate both rosters from publisher shards
+or recount the measured comparisons with standard-library Python.
+
 The [PDF covered-text check](document-pdf-covered-copyable-text-2026-11-14.md#local-verification-and-replay)
 uses two PDF producers and known foreground and background paint orders.
 It verifies that covered words are absent from analysis and exports and

@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Different source ranges in writing agreement](writing-joint-tail-transfer-2026-11-14.md)
+  explains when the writing-pattern check measured the marked sentence and
+  the classifier flagged a wider context. Same-genre calibration added one
+  useful location to the current selection across 56 new rewrite pairs.
+  The candidate stays in local evaluation.
+
 - [Copyable text behind a solid PDF cover](document-pdf-covered-copyable-text-2026-11-14.md)
   records where the rendered page covers text that the file still exposes.
   The affected pages are excluded from writing inference. The app, PDF

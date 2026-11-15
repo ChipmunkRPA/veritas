@@ -637,9 +637,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                     "measurements": [{"label": "Language-pattern ratio" if w["score_kind"] == "perplexity_ratio" else "Context response",
                                                       "value": w["score"], "unit": "raw ratio" if w["score_kind"] == "perplexity_ratio" else "uncalibrated score"} for w in windows],
                                     "limitations": limits}
-        if document_scope.writing_pattern_only(windows):
-            packet["review_basis"] = "writing_pattern_only"
-            packet["interpretation"] = document_scope.WRITING_PATTERN_INTERPRETATION
+        if basis := document_scope.writing_review_basis(focus, scope, windows):
+            packet["review_basis"] = basis
+            packet["interpretation"] = (document_scope.WRITING_PATTERN_INTERPRETATION if basis == "writing_pattern_only"
+                                        else document_scope.DIFFERENT_WRITING_RANGES)
         if review_marker is not None:
             packet[document_matched_context.KEY] = review_marker
             packet["observation"] = ("The recorded response on this three-sentence context selected its middle "

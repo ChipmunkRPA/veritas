@@ -116,7 +116,8 @@ export default function DocumentInspectionMap({ packets, selectedId, onSelect }:
         const supporting = packet.supporting_windows.filter((window) => windowInspectionDirection(window) === true).length
         const opposing = packet.supporting_windows.filter((window) => windowInspectionDirection(window) === false).length
         const basis = packet.inspection_scope?.basis
-        const reading = writingPatternOnly(packet) ? 'Predictability measurement' : supporting && opposing ? 'Responses disagree' : supporting
+        const reading = writingPatternOnly(packet) ? 'Predictability measurement' : supporting && opposing ? 'Responses disagree'
+          : packet.review_basis === 'different_writing_ranges' ? 'Different text ranges' : supporting
           ? basis === 'scored_context' ? 'Context response' : basis === 'ratio_reduction' ? 'Measured ratio' : 'Inspection flag'
           : 'Recorded comparison'
         const match = basis === 'scored_context' && !packet.matched_context_review ? sourceHighlight(packet) : null

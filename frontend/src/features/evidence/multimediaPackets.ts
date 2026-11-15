@@ -335,7 +335,7 @@ export interface DocumentOriginalTextLocation {
   ranges: [number, number][]
 }
 export interface DocumentEvidencePacket extends PacketBase {
-  review_basis?: 'writing_pattern_only'
+  review_basis?: 'writing_pattern_only' | 'different_writing_ranges'
   focus: TextSpan; context: TextSpan; anchors: DocumentAnchor[]; measurements: EvidenceMeasure[]
   supporting_windows: DocumentEvidenceWindow[]
   inspection_scope?: { basis: 'scored_context' | 'ratio_reduction'; spans: Pick<TextSpan, 'start' | 'end'>[] }

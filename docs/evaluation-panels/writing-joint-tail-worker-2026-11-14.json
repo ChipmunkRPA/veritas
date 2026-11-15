@@ -1,0 +1,54 @@
+{
+  "benchmark_sha256": "d4633d43cf0b8b27664fdf5c533bcca817e6b6d5c8c1eb7d4c493eb48cb51c09",
+  "checkout": {
+    "amount_minor": 999,
+    "currency": "USD",
+    "jobs_before_payment": 0,
+    "simulated": true
+  },
+  "rows": [
+    {
+      "different_ranges": [
+        [
+          0,
+          68
+        ],
+        [
+          69,
+          210
+        ],
+        [
+          211,
+          304
+        ]
+      ],
+      "group": "18e0684b01633fcfd3c2c8d48f5adb1fa3217220bfb625804c31d458b6575608",
+      "sha256": "e430721fdf600a6f7621d78e5d501476c523b1f9e14d5410cee13072fbd12f15",
+      "truth": null
+    },
+    {
+      "different_ranges": [
+        [
+          0,
+          68
+        ],
+        [
+          69,
+          209
+        ],
+        [
+          210,
+          303
+        ]
+      ],
+      "group": "18e0684b01633fcfd3c2c8d48f5adb1fa3217220bfb625804c31d458b6575608",
+      "sha256": "9c0d5eae3737600b31d5068f161ffcf79e6a1cfe172ca40aa5dd5cb0c6f14fb0",
+      "truth": [
+        69,
+        209
+      ]
+    }
+  ],
+  "schema": "chipmunk.writing-different-ranges-worker/1",
+  "source_verified_pdf_and_export": true
+}

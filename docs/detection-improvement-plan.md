@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Face-change localization at 29.97 fps](video-face-clip-boundary-2026-11-15.md#2997-fps-source-clocks)
+  reproduces all ten earlier locations after a clock-only conversion and
+  locates both boundaries in six of 12 staged edits from separate native
+  fractional-rate captures. The two panels add no flags on 48 ordinary
+  controls. The app and signed verifier keep exact source timestamps.
+
 - [Earlier-copy noisy speech at 48 kHz](audio-clean-speech-aac-2026-11-15.md#48-khz-mono-and-stereo-aac)
   covers qualified mono and stereo AAC submissions. The re-encoded panels
   located 56/64 staged replacements in mono and 57/64 in stereo, with no

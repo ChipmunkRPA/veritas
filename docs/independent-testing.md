@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [fractional-rate face replay](video-face-clip-boundary-2026-11-15.md#2997-fps-source-clocks)
+recounts edited intervals and ordinary controls at 30000/1001 fps. It
+checks a clock-only remux and separate captures recorded at that rate,
+with original evidence frames and exact presentation timestamps.
+
 The [chat formatting marker replay](document-chat-format-markers-2026-11-15.md#local-verification-and-replay)
 checks exact source positions across four document formats, then verifies
 the result in PDF, JSON and signed evidence. It includes 72 ordinary

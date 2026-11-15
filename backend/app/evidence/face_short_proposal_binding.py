@@ -23,6 +23,7 @@ OPPOSITE_PANE_TRACK_AVC_METHOD = "face-short-return/20"
 OVERLAPPING_PANE_TRACK_AVC_METHOD = "face-short-return/21"
 BOUNDARY_AVC_METHOD = "face-short-return/22"
 AVC_ENCODING = ("h264", "yuv420p", "avc1")
+AVC_FRAME_STEPS = (Fraction(1, 30), Fraction(1001, 30_000))
 SOURCE_PROFILES = {METHOD: (paired.ENCODING, "mp4"), WEBM_METHOD: (WEBM_ENCODING, "webm"),
                    AVC_METHOD: (AVC_ENCODING, "mp4"), SECOND_AVC_METHOD: (AVC_ENCODING, "mp4"),
                    MOVING_AVC_METHOD: (AVC_ENCODING, "mp4"), PRIMARY_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"),
@@ -62,7 +63,16 @@ def avc_source(table, encoding, carrier):
     return (tuple(encoding) == AVC_ENCODING and carrier == "mp4"
             and (table.width, table.height) == (table.coded_width, table.coded_height) == paired.SIZE
             and len(table) == paired.FRAME_COUNT and not (table.rotation or table.truncated or table.interpolated)
-            and exact_clock(table.tb, table.pts, table.pts[0]))
+            and _avc_tick_step(table.tb, table.pts, table.pts[0]) is not None)
+
+
+def _avc_tick_step(base, pts, first):
+    if len(pts) != paired.FRAME_COUNT or any(type(tick) is not int for tick in pts) or type(first) is not int:
+        return None
+    ticks = pts[1] - first
+    if ticks * base in AVC_FRAME_STEPS and all(tick == first + index * ticks for index, tick in enumerate(pts)):
+        return ticks
+    return None
 
 
 def exact_clock(base, pts, first):
@@ -84,8 +94,17 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     first_pts = record["source_first_pts"]
     is_webm = record["method"] == WEBM_METHOD
     encoding, carrier = SOURCE_PROFILES.get(record["method"], ((), None))
+    relative_tick = None
     if is_webm:
         clock = base == webm.WEBM_TIME_BASE and (table_pts is None or webm.valid_webm_clock(base, table_pts, first_pts))
+        relative_tick = webm.webm_tick
+    elif encoding == AVC_ENCODING:
+        pts = table_pts if table_pts is not None else [row["pts"] for row in record["scene_frame_inputs"]]
+        step = _avc_tick_step(base, pts, first_pts)
+        clock = step is not None
+
+        def relative_tick(index):
+            return index * step
     else:
         clock = table_pts is None or exact_clock(base, table_pts, first_pts)
     extra = {"face_detection_boxes"} if record["method"] in TRACK_METHODS else set()
@@ -150,7 +169,6 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
         record["scheduled_frame_indices"] == planned and len(planned) <= MAX_FACE_READS,
         "Brief face proposal exceeds its face sample budget",
     )
-    relative_tick = webm.webm_tick if is_webm else None
     faces = paired.frame_rows(record["frame_inputs"], source, planned, first_pts, base, face=True, relative_tick=relative_tick)
     scenes = paired.frame_rows(record["scene_frame_inputs"], source, PLAN, first_pts, base, relative_tick=relative_tick)
     require(

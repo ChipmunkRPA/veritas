@@ -120,7 +120,7 @@ def test_paired_edge_rejects_altered_proof(change, reason):
         face_boundary_binding.validate_record(value, coarse, source, table_pts=table.pts)
 
 
-@pytest.mark.parametrize("carrier", ["hevc", "webm", "avc", "avc_position", "avc_pane"])
+@pytest.mark.parametrize("carrier", ["hevc", "webm", "avc", "avc_fractional", "avc_position", "avc_pane"])
 def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(carrier):
     webm = carrier == "webm"
     table, source, _, value = record()
@@ -130,7 +130,10 @@ def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(carr
         source.update(time_base=table.time_base)
         assert face_short_proposal_binding.webm_source(table, scene_return_binding.WEBM_ENCODING, "webm")
         assert not face_short_proposal_binding.webm_source(table, scene_return_binding.WEBM_ENCODING, "mp4")
-    if carrier == "avc":
+    if carrier == "avc_fractional":
+        table = replace(table, time_base="1/90000", pts=tuple(7000 + i * 3003 for i in range(120)))
+        source.update(time_base=table.time_base)
+    if carrier in {"avc", "avc_fractional"}:
         assert face_short_proposal_binding.avc_source(table, face_short_proposal_binding.AVC_ENCODING, "mp4")
         assert not face_short_proposal_binding.avc_source(table, paired.ENCODING, "mp4")
         assert not face_short_proposal_binding.avc_source(table, face_short_proposal_binding.AVC_ENCODING, "webm")
@@ -138,6 +141,7 @@ def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(carr
         assert not face_short_proposal_binding.avc_source(irregular, face_short_proposal_binding.AVC_ENCODING, "mp4")
     method = {"hevc": face_short_proposal_binding.METHOD, "webm": face_short_proposal_binding.WEBM_METHOD,
               "avc": face_short_proposal_binding.AVC_METHOD,
+              "avc_fractional": face_short_proposal_binding.AVC_METHOD,
               "avc_position": face_short_proposal_binding.POSITION_TRACK_AVC_METHOD,
               "avc_pane": face_short_proposal_binding.PANE_TRACK_AVC_METHOD}[carrier]
     encoding, container = face_short_proposal_binding.SOURCE_PROFILES[method]
@@ -193,6 +197,12 @@ def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(carr
     assert type(settings).model_fields["video_face_unrouted_short_review"].default is False
     assert type(settings).model_fields["video_face_short_avc_review"].default is False
     face_return_binding.validate_record(value, source, table_pts=table.pts)
+    if carrier == "avc_fractional":
+        face_return_binding.validate_record(value, source)
+        bad = deepcopy(value)
+        bad["scene_frame_inputs"][70]["pts"] += 1
+        with pytest.raises(ValueError, match="exact native clock"):
+            face_return_binding.validate_record(bad, source)
     measurements = face_return_binding.proposal_boundary_measurements(value)
     assert [(item["label"], item["value"]) for item in measurements[:4]] == [
         ("Start face change above nearby variation", 0.38),

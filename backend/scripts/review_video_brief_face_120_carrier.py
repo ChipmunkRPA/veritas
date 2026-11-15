@@ -24,10 +24,10 @@ def overlap(first, second):
     return 2 * (min(first[1], second[1]) - max(first[0], second[0])) >= max(first[1], second[1]) - min(first[0], second[0])
 
 
-def expected_tick(index, row, carrier):
+def expected_tick(index, row, carrier, *, rate=30):
     if carrier == "vp9":
         return row["first_pts"] + (100 * index + 1) // 3
-    ticks = Fraction(index, 30) / Fraction(row["time_base"])
+    ticks = Fraction(index, rate) / Fraction(row["time_base"])
     require(ticks.denominator == 1, "Invalid AVC picture lattice")
     return row["first_pts"] + int(ticks)
 
@@ -90,7 +90,7 @@ def review(rows, carrier, design):
     return dict(totals) | {"passes": valid}
 
 
-def native(path, row, carrier):
+def native(path, row, carrier, *, rate=30):
     with path.open("rb") as handle:
         require(hashlib.file_digest(handle, "sha256").hexdigest() == row["delivery_sha256"], "Delivery bytes differ")
     raw = subprocess.check_output(["ffmpeg", "-nostdin", "-v", "error", "-copyts", "-threads", "1", "-i", str(path),
@@ -98,7 +98,7 @@ def native(path, row, carrier):
         "-threads", "1", "-f", "framehash", "-hash", "sha256", "-"], text=True, timeout=30).splitlines()
     require(f"#tb 0: {row['time_base']}" in raw, "Independent decode time base differs")
     frames = [line.replace(" ", "").split(",") for line in raw if not line.startswith("#")]
-    require(len(frames) == 120 and all(int(frame[2]) == expected_tick(i, row, carrier) for i, frame in enumerate(frames)),
+    require(len(frames) == 120 and all(int(frame[2]) == expected_tick(i, row, carrier, rate=rate) for i, frame in enumerate(frames)),
             "Independent native frame times differ")
     for anchor in (row["proposal"] or {}).get("anchors", []):
         actual = frames[anchor["frame_index"]]

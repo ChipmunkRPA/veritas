@@ -57,14 +57,14 @@ def relative(table):
     return [(tick - table.pts[0]) * table.tb for tick in table.pts]
 
 
-def authored(path, *, pictures=None, source=None, crf=23):
+def authored(path, *, pictures=None, source=None, crf=23, rate=RATE):
     opts = ["-c:v", "libx264", "-preset", "fast", "-crf", str(crf), "-threads", "1", "-pix_fmt", "yuv420p",
             "-video_track_timescale", "30000", "-movflags", "+faststart", str(path)]
     base = ["ffmpeg", "-nostdin", "-v", "error", "-filter_threads", "1"]
     if source is not None:
         subprocess.run([*base, "-i", str(source), "-map", "0:v:0", "-an", *opts], check=True, timeout=45)
         return
-    args = [*base, "-f", "rawvideo", "-pixel_format", "rgb24", "-video_size", "1280x720", "-framerate", "30", "-i", "pipe:0", *opts]
+    args = [*base, "-f", "rawvideo", "-pixel_format", "rgb24", "-video_size", "1280x720", "-framerate", str(rate), "-i", "pipe:0", *opts]
     with subprocess.Popen(args, stdin=subprocess.PIPE) as proc:
         try:
             for picture in pictures:
@@ -102,12 +102,12 @@ def native(archive, common, index, kind, output_indices):
     return output
 
 
-def describe(path, group, condition, truth):
+def describe(path, group, condition, truth, *, rate=RATE):
     from app.detectors.video.decode import decode_frames, probe_frames
 
     table = probe_frames(path, timeout_s=20)
-    require((table.width, table.height) == SIZE and relative(table) == [Fraction(i, RATE) for i in range(N)]
-            and not (table.rotation or table.interpolated or table.truncated), "Delivered source clock is not exact 720p30")
+    require((table.width, table.height) == SIZE and relative(table) == [Fraction(i, rate) for i in range(N)]
+            and not (table.rotation or table.interpolated or table.truncated), "Delivered 720p source clock differs")
     hashes = []
     for frame in decode_frames(path, table, range(N), timeout_s=15):
         require(frame.index == len(hashes) and frame.pts_verified, "Native frame hash lacks a verified timestamp")

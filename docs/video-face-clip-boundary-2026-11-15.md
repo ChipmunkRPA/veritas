@@ -12,8 +12,9 @@ keeps a previously selected stationary or moving range.
 · [Consecutive-frame localization research](https://arxiv.org/abs/2606.07090)
 · [Appearance and temporal residual research](https://arxiv.org/abs/2611.12508)
 
-The supported scope is an upright, four-second 720p H.264 MP4 with
-120 exact native pictures at 30 fps and enough single-face context.
+The supported scope is an upright, roughly four-second 720p H.264 MP4
+with 120 exact native pictures at 30 fps or 30000/1001 fps and enough
+single-face context.
 The first and last three pictures supply context for the closest
 supported transitions. A change with fewer surrounding pictures, an
 irregular clock, heavy motion or no comparable face can be missed. The
@@ -104,4 +105,63 @@ for split in development held; do
 done
 python3 -B -S -m "$module" review docs/evaluation-panels/video-face-clip-boundary-held-2026-11-15.json
 "$runner" -B -m scripts.video_face_clip_boundary_app "$run" "$run/app"
+```
+
+## 29.97 fps source clocks
+
+The same bounded search now admits `30000/1001` fps H.264 MP4 video.
+The worker requires a verified, uniform presentation timestamp for every
+one of the 120 pictures. It keeps each original tick and the source time
+base in the evidence. The offline viewer and original-file verifier both
+validate that clock. A timestamp that falls off the exact cadence leaves
+this bounded check unassessed. The face measurements, schedule and decision
+point carry over from the 30 fps check.
+
+One comparison remuxed the 56 earlier held clips at the fractional clock.
+The compressed picture packets were copied. All 6,720 decoded pictures
+matched the original delivery byte for byte. The other comparison used
+four separate retained publisher captures with native fractional clocks.
+It selected and encoded consecutive source pictures without interpolation.
+The two source groups are disjoint across banks. Each native capture
+contributed an early swap, late swap, tandem-compressed late swap, original,
+exposure change, same-recording jump and cross-recording cut. The staged
+swap pictures came from corresponding publisher tracks.
+[FFmpeg timestamp filter](https://ffmpeg.org/ffmpeg-bitstream-filters.html#setts)
+
+| Fractional-clock panel | Exact edited intervals | Ordinary controls flagged |
+| --- | ---: | ---: |
+| Earlier pictures with only the clock changed | 10/24 | 0/32 |
+| Separate captures recorded at the fractional rate | 6/12 | 0/16 |
+
+The remuxed clips reproduced every 30 fps selection and every evidence
+picture. The native captures supplied two exact early ranges, two exact
+late ranges and two exact tandem-compressed late ranges. The measured
+examples are short staged edits. Ordinary movement and lighting can
+produce a facial appearance change in other footage. The result has
+zero weight in the overall AI assessment.
+An independent FFmpeg decode verified all 10,080 presentation timestamps
+and 48 evidence frame hashes. Python 3.12 and 3.14 produced identical
+numeric review output.
+[Fractional-clock evaluation](evaluation-panels/video-face-fractional-avc-2026-11-15.json)
+
+Six simulated USD 9.99 checkouts ran the isolated Full worker with the
+fractional-clock review off and on. The enabled checks recorded
+**0.133–0.367 s** and **3.637–3.837 s**, with exact source ticks
+**[4004, 11,011)** and **[109,109, 115,115)** at a time base of
+`1/30000`. The genuine cut produced no additional finding. The API, PDF,
+JSON and signed source replay agreed on the ranges and native before,
+during and after frames and crops. Both variants retained their original
+automated assessments, and no unpaid job entered the queue.
+[Local checkout and report replay](evaluation-panels/video-face-fractional-avc-app-2026-11-15.json)
+
+```sh
+export PYTHONPATH=backend HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+runner=backend/.venv/bin/python
+module=scripts.video_face_fractional_avc
+"$runner" -B -m "$module" retime "$prior_boundary_run" "$run/retimed"
+"$runner" -B -m "$module" native "$prior_boundary_run" "$run/native"
+"$runner" -B -m "$module" publish "$run" "$run/fractional.json"
+python3 -B -S -m "$module" review docs/evaluation-panels/video-face-fractional-avc-2026-11-15.json
+"$runner" -B -m scripts.video_face_clip_boundary_app "$run/retimed" "$run/app" --rate 30000/1001
 ```

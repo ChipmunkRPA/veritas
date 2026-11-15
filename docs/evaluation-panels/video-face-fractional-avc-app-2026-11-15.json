@@ -1,0 +1,133 @@
+{
+  "cases": {
+    "early_swap": {
+      "range": [
+        4,
+        11
+      ],
+      "source_seconds": "0.133-0.367",
+      "exact_source_images": [
+        {
+          "role": "before",
+          "kind": "original",
+          "frame": 3,
+          "pts": 3003,
+          "sha256": "43d60c61e44c093b7c5b130ef4878486d384c640433f6cca3dab981667ae6364"
+        },
+        {
+          "role": "before",
+          "kind": "crop",
+          "frame": 3,
+          "pts": 3003,
+          "sha256": "2e9a4f94a6a6af3ad0a0b11910b588594abad1246b9cb70382839856f9b603a9"
+        },
+        {
+          "role": "during",
+          "kind": "original",
+          "frame": 8,
+          "pts": 8008,
+          "sha256": "60046d4ed4500cc273e7d99226b05a99752f9dcf4a89026867724ddf4bcbd5b7"
+        },
+        {
+          "role": "during",
+          "kind": "crop",
+          "frame": 8,
+          "pts": 8008,
+          "sha256": "29f00c72955febafaff91c331f961fefe3c932386c08c80eda48ee6cdb6a05e8"
+        },
+        {
+          "role": "after",
+          "kind": "original",
+          "frame": 11,
+          "pts": 11011,
+          "sha256": "e13c1c0085453b29b05bb19d2f04a6e5c491cf9f4700b169b2d9d4d44b78bb76"
+        },
+        {
+          "role": "after",
+          "kind": "crop",
+          "frame": 11,
+          "pts": 11011,
+          "sha256": "4da797a74383c07e302ee7517ccfc9ec3a0c3dec215cd0ed62aa2c0d8bf1bb78"
+        }
+      ],
+      "pdf_api_json_agree": true,
+      "signed_original_replay": true,
+      "different_original_rejected": true,
+      "template_set": "veritas-report-2.0.r151",
+      "time_base": "1/30000",
+      "source_ticks": [
+        4004,
+        11011
+      ]
+    },
+    "late_swap": {
+      "range": [
+        109,
+        115
+      ],
+      "source_seconds": "3.637-3.837",
+      "exact_source_images": [
+        {
+          "role": "before",
+          "kind": "original",
+          "frame": 108,
+          "pts": 108108,
+          "sha256": "d3f80c9bb59351341f82116202df8ee237989765d57e1f9494cf8224a6689684"
+        },
+        {
+          "role": "before",
+          "kind": "crop",
+          "frame": 108,
+          "pts": 108108,
+          "sha256": "b09e239863d83d276c4184bf77cbe9471f58154ea7a3270db2da38a8dfc34409"
+        },
+        {
+          "role": "during",
+          "kind": "original",
+          "frame": 112,
+          "pts": 112112,
+          "sha256": "62115184844caefc4d7be3e7305f987eb8d8d6487f44335b3fbe75e63924d81e"
+        },
+        {
+          "role": "during",
+          "kind": "crop",
+          "frame": 112,
+          "pts": 112112,
+          "sha256": "5be6f6a5385e47e47a2f7c588685fa374b3181edf079e3c0be64de69a3866671"
+        },
+        {
+          "role": "after",
+          "kind": "original",
+          "frame": 115,
+          "pts": 115115,
+          "sha256": "43aa24bd11adecf92a18b70101e5ea3a88092e9ccdc7aaf314fcb0401b706521"
+        },
+        {
+          "role": "after",
+          "kind": "crop",
+          "frame": 115,
+          "pts": 115115,
+          "sha256": "02b6e5ac75f91090b6d5ffe9c8c0e46d023b20a0ec38aba31115bc01e8bdd597"
+        }
+      ],
+      "pdf_api_json_agree": true,
+      "signed_original_replay": true,
+      "different_original_rejected": true,
+      "template_set": "veritas-report-2.0.r151",
+      "time_base": "1/30000",
+      "source_ticks": [
+        109109,
+        115115
+      ]
+    },
+    "late_cut": {
+      "range": null,
+      "added_flags": 0
+    }
+  },
+  "split": "held",
+  "simulated_paid_runs": 6,
+  "unpaid_jobs": 0,
+  "overall_assessments_retained": true,
+  "frame_rate": "30000/1001"
+}

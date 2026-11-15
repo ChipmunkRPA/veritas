@@ -23,14 +23,14 @@ DESIGN = {"timeline": "Exactly 120 presented 720p pictures at 30 fps, upright 4:
                       "Keep unmatched ordinary ranges and insufficient face coverage visible."}
 
 
-def source_plan(prior):
+def source_plan(prior, *, rate=30, groups=12, development=4):
     from app.detectors.video.decode import FrameTable
     from scripts.video_brief_face_avc_clock_confirmation import eligible_rate
     from scripts.video_brief_face_avc_confirmation import NATIVE, QUALIFIED
     from scripts.video_chroma_boundary_transfer import source_pin
+    from scripts.video_common_sources_v89 import read
     from scripts.video_face_short_boundary_confirmation import metadata
     from scripts.video_native_sources_v92 import ARCHIVE
-    from scripts.video_common_sources_v89 import read
 
     catalog = metadata()
     qualified = {row["group"]: row["qualification"] for row in read(QUALIFIED)["assets"] if row["kind"] == "original_videos"}
@@ -43,7 +43,7 @@ def source_plan(prior):
     components = {qualified[group]["component"] for group in seen}
     ordered = sorted(inventory, key=lambda row: hashlib.sha256(f"{SCHEMA}/{row['group']}".encode()).digest())
     output = []
-    for slot in range(12):
+    for slot in range(groups):
         early = POSITIONS[slot % 3]
         late = POSITIONS[3 + (slot // 3 + slot) % 3]
         offsets = (60 - early[0], 120 - late[1])
@@ -57,14 +57,14 @@ def source_plan(prior):
                 continue
             cases = {case["condition"]: case for case in item["cases"]}
             table = FrameTable.from_json(cases["original"]["frame_table"])
-            if (table.width, table.height) not in ((1280, 720), (1920, 1080)) or eligible_rate(table) != 30:
+            if (table.width, table.height) not in ((1280, 720), (1920, 1080)) or eligible_rate(table) != rate:
                 continue
             if not all(offset + 120 <= len(table) and FrameTable.from_json(cases[family]["frame_table"]) == table
                        and set(range(offset + a, offset + b)) <= set(cases[family]["actual_changed_frames"])
                        for family, offset, (a, b) in zip(families, offsets, (early, late), strict=True)):
                 continue
             output.append(source_pin(item["index"], ARCHIVE) | {"early": list(early), "late": list(late),
-                          "families": list(families), "offsets": list(offsets), "split": "development" if slot < 4 else "held"})
+                          "families": list(families), "offsets": list(offsets), "split": "development" if slot < development else "held"})
             urls.add(details["url"])
             donors.update(details["donors"])
             components.add(qualification["component"])
@@ -73,7 +73,7 @@ def source_plan(prior):
     return output
 
 
-def prepare(output, split):
+def prepare(output, split, *, rate=30):
     import cv2
     import numpy as np
 
@@ -113,9 +113,9 @@ def prepare(output, split):
             else:
                 offset = early_offset if condition.startswith("early") else late_offset
                 require(all(not np.array_equal(original[i+offset], frame) for i, frame in variant.items()), "Authored picture did not change")
-                authored(path, pictures=(variant.get(i, original[i+offset]) for i in range(120)))
+                authored(path, pictures=(variant.get(i, original[i+offset]) for i in range(120)), rate=rate)
             truth = [source["early"]] if condition == "early_swap" else [source["late"]] if condition in {"late_swap", "late_reencode"} else []
-            rows.append(describe(path, source["index"], condition, truth))
+            rows.append(describe(path, source["index"], condition, truth, rate=rate))
         print(f"Prepared {split} group {slot+1}/{len(bank)}", flush=True)
     write(folder / "media.json", rows)
 
@@ -124,7 +124,8 @@ def read_clip(path, row, detector, recognizer):
     import cv2
 
     from app.detectors.image.faces import detect_faces
-    from app.detectors.video import face_appearance, face_paired_edge, face_short_proposal as proposal
+    from app.detectors.video import face_appearance, face_paired_edge
+    from app.detectors.video import face_short_proposal as proposal
     from app.detectors.video.adapters.face_appearance import _measure
     from app.detectors.video.decode import FrameTable, decode_frames
     from app.evidence import face_short_proposal_binding as proof
@@ -149,7 +150,9 @@ def read_clip(path, row, detector, recognizer):
             result = _measure(rgb, bgr, i, table, detected[0], recognizer) if len(detected) == 1 else None
             faces[i] = (face_appearance.unit(result[0]), detected[0], result[1]) if result is not None else None
 
-    check = lambda _: None
+    def check(_):
+        return None
+
     measure(proof.ANCHOR_SAMPLES)
     anchors = {i: faces[i][2]["bbox"] for i in proof.ANCHOR_SAMPLES if faces[i] is not None}
 
@@ -175,8 +178,9 @@ def read_clip(path, row, detector, recognizer):
     return {"current": prior, "boundary": evaluate(edge, proof.SECOND_AVC_DURATIONS, boundary=True)}
 
 
-def score(output, split):
+def score(output, split, *, rate=30, group_count=None):
     import cv2
+
     from app.detectors.image.faces import load_yunet
     from app.evidence import face_short_proposal_binding as proof
     from scripts.video_brief_face_120_carrier import ROOT, WEIGHTS
@@ -194,24 +198,27 @@ def score(output, split):
         require(sha(path) == row["sha256"], "Fresh delivery bytes differ")
         readings = read_clip(path, row, detector, recognizer)
         clock = row["clock"]
-        require(proof.exact_clock(Fraction(clock["time_base"]), clock["pts"], clock["pts"][0]), "Unexpected clock")
+        require(len(clock["pts"]) == len(proof.PLAN) and all(
+            (tick - clock["pts"][0]) * Fraction(clock["time_base"]) == Fraction(i, rate)
+            for i, tick in enumerate(clock["pts"])), "Unexpected clock")
         rows.append({key: row[key] for key in ("group", "condition", "truth", "sha256")} | {
             "first_pts": clock["pts"][0], "time_base": clock["time_base"], "readings": readings})
         print(split, row["file"], {key: result["selected"] for key, result in readings.items()}, flush=True)
     plan = read(output / "freeze.json")
     record = {"schema": SCHEMA, "method": DESIGN, "split": split, "weights": WEIGHTS, "rows": rows,
               "groups": [{key: row[key] for key in ("index", "early", "late", "receipt_sha256")} for row in plan["sources"] if row["split"] == split]}
-    record["results"] = review(record)
+    record["results"] = review(record, rate=rate, group_count=group_count)
     write(output / f"{split}.json", record)
 
 
-def review(record):
+def review(record, *, rate=30, group_count=None):
     require(record["schema"] == SCHEMA and record["method"] == DESIGN, "Unknown evaluation method")
     groups = record["groups"]
     require([(row["group"], row["condition"]) for row in record["rows"]]
             == [(group["index"], case) for group in groups for case in CASES], "Frozen case roster differs")
     grouped = {group["index"]: group for group in groups}
-    require(len(grouped) == len(groups) == {"development": 4, "held": 8}[record["split"]], "Source groups differ")
+    expected = group_count if group_count is not None else {"development": 4, "held": 8}[record["split"]]
+    require(len(grouped) == len(groups) == expected, "Source groups differ")
     counts = {case: Counter() for case in CASES}
     for row in record["rows"]:
         case = row["condition"]
@@ -228,7 +235,7 @@ def review(record):
                 anchor = outcome["anchors"]
                 require(outcome["measured"] and 3 <= a < b <= 117 and 5 <= b-a <= 9 and
                         [item["index"] for item in anchor] == [a-1, min((*range(a, a+3), *range(b-3, b)), key=lambda i: (abs(2*i-a-b), i)), b]
-                        and all((item["pts"] - row["first_pts"]) * base == Fraction(item["index"], 30)
+                        and all((item["pts"] - row["first_pts"]) * base == Fraction(item["index"], rate)
                                 and SHA.fullmatch(item["rgb_sha256"]) for item in anchor), "Evidence timestamps differ")
         prior = outcomes["current"]["selected"]
         supplement = outcomes["boundary"]["selected"] if prior is None else None
@@ -243,12 +250,12 @@ def review(record):
     return result
 
 
-def pixels(output, split):
+def pixels(output, split, *, rate=30, group_count=None):
     from scripts.review_video_brief_face_120_carrier import native
 
     folder = output / split
     record = json.loads((output / f"{split}.json").read_bytes())
-    review(record)
+    review(record, rate=rate, group_count=group_count)
     media = {(row["group"], row["condition"]): row for row in json.loads((folder / "media.json").read_bytes())}
     anchors = 0
     for row in record["rows"]:
@@ -260,7 +267,7 @@ def pixels(output, split):
                 bound = {"frame_index": item["index"], "pts": item["pts"], "decoded_rgb_sha256": item["rgb_sha256"]}
                 require(selected.setdefault(item["index"], bound) == bound, "Two readings use different anchor pictures")
         anchors += native(folder / clip["file"], row | {"delivery_sha256": row["sha256"],
-                          "proposal": {"anchors": list(selected.values())}}, "avc")
+                          "proposal": {"anchors": list(selected.values())}}, "avc", rate=rate)
     return {"files": len(record["rows"]), "native_times_verified": 120 * len(record["rows"]), "verified_anchors": anchors}
 
 

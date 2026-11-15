@@ -3,6 +3,7 @@
 
 import argparse
 import os
+from fractions import Fraction
 from pathlib import Path
 
 from scripts.video_common_sources_v89 import read, write
@@ -11,9 +12,9 @@ from scripts.video_face_distinct_avc import BASE_FLAGS
 from scripts.video_short_return_encoded_app import ALLOW, PaymentStub, body, checkout, configure, read_result
 
 
-def run(study, output, split):
+def run(study, output, split, *, rate=30):
     panel = read(study / f"{split}.json")
-    review(panel)
+    review(panel, rate=rate)
     media = {(row["group"], row["condition"]): row for row in read(study / split / "media.json")}
 
     def example(condition):
@@ -60,6 +61,8 @@ def run(study, output, split):
             db.commit()
         for active in (False, True):
             settings.video_face_boundary_avc_review = active
+            if rate != 30:
+                settings.video_face_short_avc_review = active
             for row in cases:
                 name = row["condition"]
                 source_row = media[row["group"], name]
@@ -82,16 +85,23 @@ def run(study, output, split):
                     change = packet["face_return"]
                     interval = [change["start_frame_index"], change["end_frame_index"]]
                     assert [interval] == row["truth"] and packet["affects_overall_confidence"] is False
+                    ticks = [change["start_pts"], change["end_pts"]]
+                    assert ticks == [source_row["clock"]["pts"][i] for i in interval]
                     anchors = {role: change["anchors"][role] for role in ("before", "during", "after")}
                     timing = f"{change['start_stream_s']:.3f}-{change['end_stream_s']:.3f}"
                     surfaces = verified_surfaces(client, aid, source, source_row, evidence, packet, output / name,
                                                  representatives=anchors, initial_coverage=None, expected_range=timing)
                     receipts[name] = {"range": interval, "source_seconds": timing, **surfaces}
+                    if rate != 30:
+                        receipts[name].update(time_base=change["time_base"], source_ticks=ticks)
                 else:
                     receipts[name] = {"range": None, "added_flags": 0}
                 print(name, receipts[name], flush=True)
-    write(output / "receipt.json", {"cases": receipts, "split": split, "simulated_paid_runs": len(stub.sessions),
-                                    "unpaid_jobs": 0, "overall_assessments_retained": True})
+    result = {"cases": receipts, "split": split, "simulated_paid_runs": len(stub.sessions),
+              "unpaid_jobs": 0, "overall_assessments_retained": True}
+    if rate != 30:
+        result["frame_rate"] = str(rate)
+    write(output / "receipt.json", result)
 
 
 if __name__ == "__main__":
@@ -99,5 +109,6 @@ if __name__ == "__main__":
     parser.add_argument("study", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--split", choices=("development", "held"), default="held")
+    parser.add_argument("--rate", type=Fraction, default=Fraction(30))
     args = parser.parse_args()
-    run(args.study, args.output, args.split)
+    run(args.study, args.output, args.split, rate=args.rate)

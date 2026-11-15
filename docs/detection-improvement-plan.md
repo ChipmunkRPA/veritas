@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Stereo speech with interference on both microphones](audio-stereo-room-transfer-2026-11-15.md)
+  shows that the earlier other-channel match rule still admits every
+  exact-room reference. A later agreement probe kept all 14 useful
+  synthetic ranges from the downmix and reduced flags against room
+  references from 10/16 to 1/16. The probe needs fresh validation.
+
 - [Comparison on separate stereo channels](audio-clean-speech-stereo-long-2026-11-15.md)
   retains all 32 correctly located synthetic ranges on recordings with an
   extra competing voice on one channel. It cuts ordinary flags from 15/80

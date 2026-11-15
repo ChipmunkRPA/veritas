@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [stereo room replay](audio-stereo-room-transfer-2026-11-15.md#replay)
+recounts 172 earlier-copy comparisons using two synchronized room
+microphones. It separates matching foreground references, references to
+the room speech, ordinary revisions and unmodified room recordings.
+
 The [separate stereo channel replay](audio-clean-speech-stereo-long-2026-11-15.md#replay)
 recounts 272 earlier-copy pairs in each of two stereo layouts. It separates
 correct ranges, ordinary flags, and matches to the added background voice.

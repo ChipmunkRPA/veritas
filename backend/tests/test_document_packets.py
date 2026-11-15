@@ -23,6 +23,7 @@ from app.evidence import (
     document_passage_coverage,
     document_scope,
     document_unselected_responses,
+    document_word_visibility,
 )
 from app.evidence.document_packets import (
     DocumentPacketIntegrityError,
@@ -102,6 +103,8 @@ def packet_factory(tmp_path):
                        "decode_sha256": stage.sha256, "source_map_sha256": canonical_hash(doc.source_map),
                        "extracted_text_sha256": text_hash(doc.text)}}}, "signals": [signal],
                        "findings": [{"id": "F1", "evidence_ids": [signal["id"]]}]}
+            if word_visibility := doc.meta.get(document_word_visibility.KEY):
+                result["manifest"]["sampling"][document_word_visibility.COMMITMENT] = canonical_hash(word_visibility)
             analysis.result_hash = canonical_hash(result)
             store.put_bytes(canonical_json(result))
             return db, store, analysis, result, decoded, path

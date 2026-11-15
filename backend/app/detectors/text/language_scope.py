@@ -10,6 +10,7 @@ from app.detectors.text.segment import Sentence
 
 KEY = "writing_language_scope"
 ENGLISH = "english"
+TOO_LITTLE_AFTER_COVER = "too_little_after_cover"
 LIMITATION = "English writing could not be confirmed for statistical analysis"
 ASSESSMENT_SCOPE = "Writing-language coverage"
 MESSAGES = {
@@ -22,6 +23,9 @@ MESSAGES = {
     "unknown": ("Writing not assessed: language unclear",
                 "The language of the extracted writing could not be established reliably enough for the English "
                 "authorship checks. Automated authorship checks were skipped."),
+    TOO_LITTLE_AFTER_COVER: ("Writing not assessed: too little remaining text",
+                             "Too little text remained after pages with covered text were excluded. "
+                             "Automated authorship checks were skipped."),
 }
 LANGUAGE_POINT = .99
 MIN_PASSAGE_LETTERS = 45

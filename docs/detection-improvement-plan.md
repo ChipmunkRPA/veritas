@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Copyable text behind a solid PDF cover](document-pdf-covered-copyable-text-2026-11-14.md)
+  records where the rendered page covers text that the file still exposes.
+  The affected pages are excluded from writing inference. The app, PDF
+  and JSON report the source locations without reproducing the concealed words.
+
 - [Visible lip releases paired with speech timings](video-bilabial-mouth-transfer-2026-11-14.md)
   localized 5/128 staged local shifts, compared with 0/128 for the current
   timing check. Four other flags missed the position or direction rule.

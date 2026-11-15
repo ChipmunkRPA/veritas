@@ -75,6 +75,21 @@ describe('ordinary document passage inspection', () => {
     expect(within(section).getByText(/zero AI-authorship weight/)).toBeTruthy()
   })
 
+  it('shows the location and exclusion of copyable text behind a PDF cover', () => {
+    const set = evidence([])
+    show({ ...set, coverage: { ...set.coverage, pdf_text_visibility: {
+      schema: 'document-pdf-text-visibility/4', total_pages: 2, examined_pages: [1, 2], locations: [],
+      replacement_examined_pages: [1, 2], replacement_differences: [],
+      covered_examined_pages: [1, 2], covered_locations: [{ page: 2, covered_spans: 1, boxes: [[80, 100, 120, 114]] }],
+      coordinate_space: 'unrotated-page-points', authorship_confidence_contribution: 0,
+    } } })
+    const section = within(screen.getByRole('region', { name: 'PDF text visibility' }))
+    expect(section.getByText('Checked 2 of 2 pages for text behind solid covers.')).toBeTruthy()
+    expect(section.getByText('Page 2 · 1 covered copyable text span')).toBeTruthy()
+    expect(section.getByText('Excluded from writing checks.')).toBeTruthy()
+    expect(section.getByText('[80, 100, 120, 114] (unrotated PDF points)')).toBeTruthy()
+  })
+
   it('shows the native table location of a Word run with direct hidden formatting', () => {
     const set = evidence([])
     show({ ...set, coverage: { ...set.coverage, word_text_visibility: {

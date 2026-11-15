@@ -8,6 +8,8 @@ import re
 from bisect import bisect_right
 from collections import Counter
 
+from app.evidence import document_pdf_visibility
+
 VERSION = "document-evidence-5"
 MATCHED_VERSION = "document-evidence-6"
 PARAGRAPH_PRIORITY_VERSION = "document-evidence-7"
@@ -134,10 +136,11 @@ def pdf_excluded_pages(coverage: dict) -> set[int]:
     unmapped = coverage.get("unmapped_pages", [])
     partial = coverage.get("partially_checked_pages", [])
     scanned = ocr.get("pages", [])
-    if (not all(isinstance(rows, list) for rows in (unmapped, partial, scanned))
-            or any(not isinstance(row, dict) for row in [*partial, *scanned])):
+    covered = coverage.get(document_pdf_visibility.KEY, {}).get("covered_locations", [])
+    if (not all(isinstance(rows, list) for rows in (unmapped, partial, scanned, covered))
+            or any(not isinstance(row, dict) for row in [*partial, *scanned, *covered])):
         raise ValueError("Invalid PDF coverage")
-    excluded = [*unmapped, *(row.get("page") for row in [*partial, *scanned])]
+    excluded = [*unmapped, *(row.get("page") for row in [*partial, *scanned, *covered])]
     if any(type(page) is not int or page < 1 for page in excluded):
         raise ValueError("Invalid PDF coverage page")
     return set(excluded)
@@ -461,12 +464,15 @@ def _validate_pdf_pages(document: dict, passage: dict) -> None:
     mapped = [row["page"] for row in rows]
     gaps = page_gaps(total, mapped)
     unmapped = coverage.get("unmapped_pages", [])
+    covered = {row["page"] for row in coverage.get(document_pdf_visibility.KEY, {}).get("covered_locations", [])}
+    missing = set(unmapped) | covered
     reported_gaps = record["unmapped_page_ranges"]
     if (retained or dict(totals) != (passage["counts"] if rows else {}) or not partial.issubset(mapped)
             or not set(observed_ocr).issubset(mapped) or reported_gaps != gaps
             or any(type(bound) is not int for gap in reported_gaps for bound in gap)
-            or len(unmapped) != total - len(mapped)
             or any(type(page) is not int or not 1 <= page <= total for page in unmapped)
             or unmapped != sorted(set(unmapped))
-            or set(unmapped).intersection(mapped)):
+            or set(unmapped).intersection(covered)
+            or missing.intersection(mapped)
+            or len(missing) != total - len(mapped)):
         raise ValueError("PDF page totals differ from the recorded passage and extraction coverage")

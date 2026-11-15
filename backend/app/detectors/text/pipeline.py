@@ -413,6 +413,17 @@ def assemble_document(doc: Document, sents: list[Sentence], scores: DocumentScor
 
 
 def _analyze_segmented(doc: Document, sents: list[Sentence], art_dir: Path | None, t0: float) -> dict:
+    from app.evidence import document_pdf_visibility
+
+    if covered := doc.meta.get(document_pdf_visibility.KEY, {}).get("covered_locations"):
+        notice = document_pdf_visibility.covered_notice(covered)
+        result = assemble_document(doc, sents, DocumentScores(n_sentences=len(sents)), None)
+        result["verdict"].update(probability_ai=None, label="Not assessable", confidence="low",
+                                 summary=document_pdf_visibility.COVERED_HEADLINE, reasoning=[notice], caveats=[notice])
+        result["signals"] = []
+        for sentence in result["sentences"]:
+            sentence["reasons"] = [notice]
+        return result
     check_document_length(doc, sents)
     scope = language_scope.classify(doc.text, sents)
     if scope in language_scope.MESSAGES:

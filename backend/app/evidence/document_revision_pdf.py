@@ -36,6 +36,10 @@ def extract_native(path: Path, data: bytes, *, mixed_draft: bool = False, visibl
             or document.meta.get("unmapped_pages") or document.meta.get("partially_checked_pages")
             or any(row.get("extraction") != "text_layer" for row in document.source_map)):
         raise ValueError(message)
+    from app.evidence import document_pdf_visibility
+
+    if document.meta.get(document_pdf_visibility.KEY, {}).get("covered_locations"):
+        raise ValueError("Draft comparison requires all pages. A page contains copyable text behind a solid cover.")
     hidden_pages = document.meta.get("hidden_text_pages")
     if visible_text_only and hidden_pages:
         raise ValueError("The PDF contains hidden or fully transparent text.")

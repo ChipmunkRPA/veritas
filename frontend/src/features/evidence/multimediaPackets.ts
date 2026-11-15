@@ -457,11 +457,14 @@ export interface DocumentEvidenceSet extends SetBase {
       signal_ref: EvidenceRef; authorship_confidence_contribution: 0 };
     partially_checked_pages?: { page: number; image_boxes: [number, number, number, number][];
       coordinate_space: 'unrotated-page-points'; reason: string }[];
-    pdf_text_visibility?: { schema: 'document-pdf-text-visibility/1' | 'document-pdf-text-visibility/2' | 'document-pdf-text-visibility/3';
+    pdf_text_visibility?: { schema: 'document-pdf-text-visibility/1' | 'document-pdf-text-visibility/2' |
+      'document-pdf-text-visibility/3' | 'document-pdf-text-visibility/4';
       total_pages: number; examined_pages: number[];
       locations: { page: number; invisible_spans: number; boxes: [number, number, number, number][] }[];
       replacement_examined_pages?: number[];
       replacement_differences?: { page: number; boxes: [number, number, number, number][]; locations_incomplete: boolean }[];
+      covered_examined_pages?: number[];
+      covered_locations?: { page: number; covered_spans: number; boxes: [number, number, number, number][] }[];
       coordinate_space: 'unrotated-page-points'; authorship_confidence_contribution: 0 };
     word_text_visibility?: { schema: 'document-word-text-visibility/1'; part: string; checked_paragraphs: number; hidden_runs: number;
       locations: { body_path: (number | 'row' | 'cell')[]; body_paragraph: number | null; run: number; source_start: number; source_end: number }[];
@@ -480,7 +483,7 @@ export interface DocumentEvidenceSet extends SetBase {
 type WritingCheck = 'passage_classifier' | 'writing_pattern_ratio'
 type WritingCheckState = 'completed' | 'not_applicable' | 'skipped' | 'failed' | 'timed_out'
 export type WritingCheckReason = 'memory_budget' | 'unavailable' | 'verified_credentials'
-  | 'unsupported_language' | 'mixed_language' | 'language_unclear' | 'no_text'
+  | 'unsupported_language' | 'mixed_language' | 'language_unclear' | 'no_text' | 'too_little_after_cover'
 type WritingCheckCoverage =
   | { schema: 'document-writing-check-coverage/1'; checks: Partial<Record<WritingCheck, WritingCheckState>> }
   | { schema: 'document-writing-check-coverage/2'; checks: Partial<Record<WritingCheck, WritingCheckState>>;

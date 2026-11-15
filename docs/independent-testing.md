@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [PDF covered-text check](document-pdf-covered-copyable-text-2026-11-14.md#local-verification-and-replay)
+uses two PDF producers and known foreground and background paint orders.
+It verifies that covered words are absent from analysis and exports and
+that signed source replay checks the recorded page coordinates.
+
 The [visible lip-release replay](video-bilabial-mouth-transfer-2026-11-14.md#replay)
 compares current short lip-sync timing with independently measured mouth
 openings and acoustic anchors. It covers ordinary processing, constant

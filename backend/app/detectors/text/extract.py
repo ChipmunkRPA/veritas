@@ -432,7 +432,7 @@ def hybrid_ocr_notice(ocr_pages: list[dict]) -> str:
     return f"{subject} mapped text with text transcribed from image areas. Authorship confidence has not been validated for this mixed extraction."
 
 
-def extract_pdf(path: Path, *, allow_ocr: bool = True) -> Document:
+def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True) -> Document:
     import pymupdf
 
     page_parts: list[list[tuple[str, dict]]] = []
@@ -443,6 +443,7 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True) -> Document:
     percentage_text_pages = []
     visibility_examined, invisible_text = [], []
     replacement_examined, replacement_differences = [], []
+    covered_examined, covered_locations = [], []
     replacement_flag = getattr(pymupdf, "TEXT_IGNORE_ACTUALTEXT", 0)
     glyph_flags = (pymupdf.TEXTFLAGS_RAWDICT & ~pymupdf.TEXT_PRESERVE_IMAGES) | replacement_flag
     runtime = None
@@ -495,6 +496,16 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True) -> Document:
                 visibility_examined.append(page.number + 1)
                 if location := document_pdf_visibility.inspect_page(page, spans):
                     invisible_text.append(location)
+                if inspect_pdf_covers:
+                    try:
+                        covered = document_pdf_visibility.inspect_covered(page, spans, blocks)
+                    except (ValueError, RuntimeError):
+                        pass
+                    else:
+                        covered_examined.append(page.number + 1)
+                        if covered is not None:
+                            covered_locations.append(covered)
+                            continue
             if len(doc) <= NATIVE_COMPARISON_MAX_PAGES and spans and all(
                     span["type"] != 3 and span["opacity"] > 0 for span in spans):
                 percentage_text_pages.append(page.number + 1)
@@ -555,7 +566,8 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True) -> Document:
     d.meta = {"pages": pages, "method": "pymupdf", "unmapped_pages": empty_pages,
               "percentage_text_pages": percentage_text_pages,
               document_pdf_visibility.KEY: document_pdf_visibility.build(pages, visibility_examined, invisible_text,
-                                                                        replacement_examined, replacement_differences),
+                  replacement_examined, replacement_differences,
+                  covered=(covered_examined, covered_locations) if inspect_pdf_covers else None),
               "partially_checked_pages": partial_pages,
               "ocr": {"version": OCR_VERSION, "status": "partial" if empty_pages or partial_pages else "complete" if ocr_pages else "not_needed",
                       "pages": ocr_pages, "pages_without_text": [p["page"] for p in ocr_pages if p.get("coverage_scope") != "image_region"], "unchecked_pages": empty_pages,
@@ -858,10 +870,10 @@ def extract_eml(path: Path) -> Document:
     return document
 
 
-def extract(path: Path, ext: str, *, allow_ocr: bool = True) -> Document:
+def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
-        d = extract_pdf(path, allow_ocr=allow_ocr)
+        d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
     elif ext == ".docx":
         d = extract_docx(path)
     elif ext == ".eml":

@@ -23,12 +23,13 @@ REASONS = {
     "unsupported_language": ("not_applicable", "The extracted writing was outside English coverage."),
     "mixed_language": ("not_applicable", "The extracted text contained English and another language."),
     "language_unclear": ("not_applicable", "The check could not establish the language of the extracted writing."),
+    "too_little_after_cover": ("not_applicable", "Too little text remained after pages with covered text were excluded."),
     "no_text": ("not_applicable", "There was no extracted text for this check to read."),
 }
 
 
 def capture(entries, classifier_ids, ratio_id, *, language=None, verified_credentials=False):
-    from app.detectors.text.language_scope import MESSAGES
+    from app.detectors.text.language_scope import MESSAGES, TOO_LITTLE_AFTER_COVER
 
     runs, reasons = {}, {}
     for entry in entries:
@@ -52,7 +53,7 @@ def capture(entries, classifier_ids, ratio_id, *, language=None, verified_creden
                     code = "no_text"
                 elif language in MESSAGES and reason == MESSAGES[language][1]:
                     code = {"unsupported": "unsupported_language", "mixed": "mixed_language",
-                            "unknown": "language_unclear"}[language]
+                            "unknown": "language_unclear", TOO_LITTLE_AFTER_COVER: "too_little_after_cover"}[language]
             if code is not None:
                 reasons[name] = code
             else:

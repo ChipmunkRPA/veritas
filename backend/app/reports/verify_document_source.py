@@ -108,7 +108,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         except (OpcError, XMLSyntaxError) as error:
             raise ValueError("The supplied DOCX cannot be parsed locally") from error
     else:
-        doc = extract(original, extension, allow_ocr=replay_ocr)
+        covered_schema = coverage.get(document_pdf_visibility.KEY, {}).get("schema") == document_pdf_visibility.SCHEMA
+        doc = extract(original, extension, allow_ocr=replay_ocr, inspect_pdf_covers=covered_schema)
     if used_ocr and not doc.source_rasters:
         raise ValueError("The local OCR runtime could not reproduce the original scan. Check that the verified OCR data are installed.")
     unassigned_email_roles = (
@@ -208,9 +209,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     )
     pdf_visibility = coverage.get(document_pdf_visibility.KEY, {})
     pdf_replacement_detail = (" Verified the PDF copyable-text comparison and retained page locations."
-                              if pdf_visibility.get("schema") == document_pdf_visibility.SCHEMA else "")
+                              if "replacement_examined_pages" in pdf_visibility else "")
+    pdf_covered_detail = (" Verified the covered PDF text inspection and retained page locations."
+                          if "covered_examined_pages" in pdf_visibility else "")
     percentage_detail = " Verified repeated percentage statements and their value ranges." if document_percentage_consistency.KEY in evidence else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
-            f"{tracked_detail}{word_visibility_detail}{invisible_detail}{pdf_replacement_detail}{percentage_detail}")
+            f"{tracked_detail}{word_visibility_detail}{invisible_detail}{pdf_replacement_detail}{pdf_covered_detail}{percentage_detail}")

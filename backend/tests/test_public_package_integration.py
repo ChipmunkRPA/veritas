@@ -132,12 +132,14 @@ def multimedia_package(request, tmp_path, monkeypatch):
     scanned = request.param == "scanned_document"
     agreement = request.param == "document_agreement"
     hidden_word = request.param == "hidden_word"
+    covered_pdf = request.param == "covered_pdf"
     translated = request.param == "image_translation"
     large_affine = request.param == "image_affine_large"
     geometric = large_affine or request.param == "image_affine"
     embedded = request.param == "image_embedded_pair"
     editor = request.param == "image_editor_preview"
-    kind = "document" if hybrid or scanned or agreement or hidden_word else "image" if translated or geometric or embedded or editor else request.param
+    kind = ("document" if hybrid or scanned or agreement or hidden_word or covered_pdf else
+            "image" if translated or geometric or embedded or editor else request.param)
     if kind == "image":
         monkeypatch.setattr(settings, "image_jpeg_block_copy_review", False)
         monkeypatch.setattr(settings, "image_jpeg_offgrid_copy_review", False)
@@ -251,7 +253,9 @@ def multimedia_package(request, tmp_path, monkeypatch):
         document = document_packets.build_packet_set(db, analysis, store, result)
         assert document["coverage"][document_scope.CHECKPOINT_AGREEMENT_KEY]["ranges"] == ranges
     else:
-        db, store, analysis, result, *_ = request.getfixturevalue("packet_factory")(".pdf")
+        build_document = request.getfixturevalue("packet_factory")
+        options = {"source_pdf": request.getfixturevalue("covered_pdf"), "scores": ()} if covered_pdf else {}
+        db, store, analysis, result, *_ = build_document(".pdf", **options)
         document = document_packets.build_packet_set(db, analysis, store, result)
     key = signing.instance_key(tmp_path / "multimedia-key.pem")
     monkeypatch.setattr(settings, "data_dir", tmp_path / "data")

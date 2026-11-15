@@ -832,6 +832,17 @@ def _document_coverage_details(coverage: dict) -> list[str]:
                 notes.append(details)
             if visibility["replacement_differences"]:
                 notes.append(document_pdf_visibility.REPLACEMENT_LIMITATION)
+        if "covered_examined_pages" in visibility:
+            checked = len(visibility["covered_examined_pages"])
+            notes.append(f"PDF covered text. Checked {checked} of {visibility['total_pages']} pages for text behind solid covers.")
+            for page in visibility["covered_locations"]:
+                boxes = ", ".join(str(box) for box in page["boxes"])
+                count = page["covered_spans"]
+                label = "span" if count == 1 else "spans"
+                notes.append(f"Page {page['page']}. {count} covered copyable text {label}. "
+                             f"Excluded from writing checks. Locations in unrotated PDF points {boxes}.")
+            if visibility["covered_locations"]:
+                notes.append(document_pdf_visibility.COVERED_LIMITATION)
     if visibility := coverage.get(document_word_visibility.KEY):
         notes.append(f"Word text visibility. Checked {visibility['checked_paragraphs']} extracted paragraphs "
                      f"and found {visibility['hidden_runs']} text runs marked hidden. "

@@ -41,6 +41,7 @@ const writingCheckReasons: Record<WritingCheckReason, string> = {
   unsupported_language: 'The extracted writing was outside English coverage.',
   mixed_language: 'The extracted text contained English and another language.',
   language_unclear: 'The check could not establish the language of the extracted writing.',
+  too_little_after_cover: 'Too little text remained after pages with covered text were excluded.',
   no_text: 'There was no extracted text for this check to read.',
 }
 
@@ -370,6 +371,21 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
           </li>)}
         </ul>
         <p className="mt-2 mb-0 text-small text-text-muted">PDF accessibility and OCR corrections can legitimately change copyable text. This check carries zero AI-authorship weight.</p>
+      </>}
+      {textVisibility.covered_examined_pages && <p className="mt-2 mb-0 text-small">
+        Checked {textVisibility.covered_examined_pages.length} of {textVisibility.total_pages} pages for text behind solid covers.
+      </p>}
+      {!!textVisibility.covered_locations?.length && <>
+        <ul className="mt-2 mb-0 pl-5 text-small">
+          {textVisibility.covered_locations.map(row => <li key={row.page}>
+            Page {row.page} · {row.covered_spans} covered copyable text {row.covered_spans === 1 ? 'span' : 'spans'}
+            <p className="mt-1 mb-1 text-caption text-text-muted">Excluded from writing checks.</p>
+            <p className="mt-1 mb-1 font-mono text-caption text-text-muted">
+              {row.boxes.map(box => `[${box.join(', ')}]`).join(', ')} (unrotated PDF points)
+            </p>
+          </li>)}
+        </ul>
+        <p className="mt-2 mb-0 text-small text-text-muted">This check covers simple opaque rectangles in the page content and carries zero AI-authorship weight. It cannot verify the quality of a redaction.</p>
       </>}
     </section>}
     {writingChecks && <section className="mt-4 rounded-md border border-border p-4" aria-labelledby="writing-check-coverage-title">

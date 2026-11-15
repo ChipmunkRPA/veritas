@@ -24,6 +24,7 @@ from app.detectors.text import language_scope
 from app.detectors.text.adapters.stylometry import LEXICON_TITLE, SPANS_TITLE
 from app.detectors.text.extract import EXTRACTION_VERSION, Document, hybrid_ocr_notice, partial_pdf_notice
 from app.detectors.text.pipeline import (
+    MIN_WORDS,
     DocumentScores,
     assemble_document,
     check_document_length,
@@ -73,7 +74,11 @@ SPANS_CAPTION = ("Per-sentence p(AI) from the legacy fuser after contextual smoo
 def decode(ctx: StageContext) -> dict[str, Any]:
     path = common.media_path(ctx)
     doc, sents = decode_document(path, path.suffix)
-    words = check_document_length(doc, sents)
+    if doc.meta.get(document_pdf_visibility.KEY, {}).get("covered_locations"):
+        # Keep the PDF finding even when its excluded pages leave too little text to score.
+        words = sum(sentence.n_words for sentence in sents)
+    else:
+        words = check_document_length(doc, sents)
     artifacts = []
     for digest, encoded in doc.source_rasters.items():
         content = base64.b64decode(encoded, validate=True)
@@ -150,7 +155,9 @@ def detect(ctx: StageContext) -> dict[str, Any]:
     if not provenance_gate.stop(ctx):
         doc, sentences = document_input(ctx)
         ctx.check("before identifying writing language")
-        scope = language_scope.classify(doc.text, sentences)
+        covered = doc.meta.get(document_pdf_visibility.KEY, {}).get("covered_locations")
+        scope = (language_scope.TOO_LITTLE_AFTER_COVER if covered and decoded["words"] < MIN_WORDS else
+                 language_scope.classify(doc.text, sentences))
         ctx.check("after identifying writing language")
     detected = common.run_detectors(ctx, (Modality.TEXT,),
                                     outputs=StageOutputs(document={**decoded, language_scope.KEY: scope}),
@@ -272,13 +279,17 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
     visibility = doc.meta.get(document_pdf_visibility.KEY) or {}
     invisible = visibility.get("locations", [])
     replacement = visibility.get("replacement_differences", [])
+    covered = visibility.get("covered_locations", [])
     word_hidden = doc.meta.get(document_word_visibility.KEY, {}).get("hidden_runs", 0)
-    visibility_incomplete = (visibility.get("schema") in (document_pdf_visibility.FULL_PAGE_SCHEMA, document_pdf_visibility.SCHEMA)
+    visibility_incomplete = (visibility.get("schema") in (document_pdf_visibility.FULL_PAGE_SCHEMA,
+                             document_pdf_visibility.REPLACEMENT_SCHEMA, document_pdf_visibility.SCHEMA)
                              and len(visibility["examined_pages"]) < visibility["total_pages"])
     replacement_incomplete = ("replacement_examined_pages" in visibility
                               and len(visibility["replacement_examined_pages"]) < visibility["total_pages"])
-    if not any((unchecked, partial_notice, hybrid_notice, invisible, replacement, visibility_incomplete, replacement_incomplete,
-                word_hidden)):
+    covered_incomplete = ("covered_examined_pages" in visibility
+                          and len(visibility["covered_examined_pages"]) < visibility["total_pages"])
+    if not any((unchecked, partial_notice, hybrid_notice, invisible, replacement, covered, visibility_incomplete,
+                replacement_incomplete, covered_incomplete, word_hidden)):
         return output
     notices = []
     if unchecked:
@@ -304,6 +315,11 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
     if replacement_incomplete:
         visibility_notices.append(f"The PDF replacement text check completed on {len(visibility['replacement_examined_pages'])} of "
                                   f"{visibility['total_pages']} pages.")
+    if covered:
+        visibility_notices.append(document_pdf_visibility.covered_notice(covered))
+    if covered_incomplete:
+        visibility_notices.append(f"The PDF covered-text check completed on {len(visibility['covered_examined_pages'])} of "
+                                  f"{visibility['total_pages']} pages.")
     if word_hidden:
         label = "run" if word_hidden == 1 else "runs"
         visibility_notices.append(f"The Word file marks {word_hidden} text {label} as hidden. "
@@ -313,11 +329,13 @@ def enforce_extraction_scope(output: dict[str, Any], doc: Document) -> dict[str,
     scope = " ".join(notices)
     if word_hidden:
         headline = document_word_visibility.HEADLINE
+    elif covered:
+        headline = document_pdf_visibility.COVERED_HEADLINE
     elif invisible:
         headline = document_pdf_visibility.ASSESSMENT_HEADLINE
     elif replacement:
         headline = document_pdf_visibility.REPLACEMENT_HEADLINE
-    elif visibility_incomplete or replacement_incomplete:
+    elif visibility_incomplete or replacement_incomplete or covered_incomplete:
         headline = document_pdf_visibility.INCOMPLETE_HEADLINE
     elif partial_notice:
         headline = "Partially assessed: some document text remains unchecked"
@@ -447,7 +465,8 @@ def unassessed_language_fusion(ctx: StageContext, doc: Document, sents: list[Sen
                    for row in common.LEGACY_ASSESSMENTS]
     profile = {**ctx.outputs["condition"]["profile"], "within_validated_envelope": False,
                "validation_support": "unsupported", "validation_measured_at": None}
-    profile["limiting_conditions"] = [*profile.get("limiting_conditions", []), language_scope.LIMITATION]
+    limitation = reason if scope == language_scope.TOO_LITTLE_AFTER_COVER else language_scope.LIMITATION
+    profile["limiting_conditions"] = [*profile.get("limiting_conditions", []), limitation]
     return {"decision": decision, "signals": [], "assessments": assessments, "caveats": [reason], "calibration": [],
             "condition_profile": profile, "fusion": {"mode": "fallback", "reason": reason},
             "v1": {key: legacy[key] for key in ("verdict", "signals", "sentences", "stats", "document")}}

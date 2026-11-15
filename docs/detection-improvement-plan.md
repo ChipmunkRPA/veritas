@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Speaker isolation during short edits](audio-mixture-phase-isolation-2026-11-14.md)
+  compared 96 recordings. The exact target produced four useful ICSI
+  locations without matched-location collisions. Blind separation
+  produced zero. Reconstruction with the mixture phase produced one
+  location without a collision and flagged 16/24 genuine mixtures.
+  The practical methods remain in evaluation.
+
 - [A second voice detector under competing speech](audio-second-classifier-overlap-2026-11-14.md)
   appeared to recover four of 16 ICSI edits. All four locations also flagged
   on their matched genuine and isolated background controls. The shorter

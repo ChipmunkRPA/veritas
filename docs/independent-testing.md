@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [speaker isolation replay](audio-mixture-phase-isolation-2026-11-14.md#replay)
+recounts edit locations and corresponding genuine flags across the mixed
+recording, exact target stem, blind separation and reconstruction from
+the original mixture phase. Native replay checks that the two reconstructed
+streams sum to the original audio at matching sample positions.
+
 The [second voice detector replay](audio-second-classifier-overlap-2026-11-14.md#replay)
 recounts alerts and exact ranges under AMI and ICSI competing speech. It
 checks whether the apparent recoveries are also flagged at the same times

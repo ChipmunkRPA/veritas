@@ -174,58 +174,67 @@ def summarize(record, panel, points):
             for (db, kind, arm), counts in sorted(metrics.items())]
 
 
-def measure(args):
-    import numpy as np
+def load_classifier(weights, speech_path):
     import torch
     from transformers import AutoFeatureExtractor, AutoModelForAudioClassification
 
-    from app.detectors.audio.content import window_in_speech
     from app.detectors.audio.upgraded import SpeechActivity
     from scripts.audio_strong_traffic_view import network_free
 
-    points = calibrate(SOURCE.read(args.development)) if args.panel == "icsi" else None
-    source, _ = _parent(args.panel)
-    clips = source["freeze"]["plan"]["clips"]
-    weights = args.weights
     for name, digest in ASSETS.items():
         SOURCE.check(SOURCE.path_sha(weights / name) == digest, f"Unexpected model file: {name}")
-    SOURCE.check(SOURCE.path_sha(args.speech) == SPEECH_SHA256, "Unexpected speech activity weights")
-    args.output.mkdir(mode=0o700)
-    freeze = _lock(args.panel)
-    SOURCE.write(args.output / "freeze.json", {"method": freeze, "points": points})
+    SOURCE.check(SOURCE.path_sha(speech_path) == SPEECH_SHA256, "Unexpected speech activity weights")
     network_free()
     torch.set_num_threads(2)
     feature = AutoFeatureExtractor.from_pretrained(weights, local_files_only=True)
     model = AutoModelForAudioClassification.from_pretrained(weights, local_files_only=True).eval()
     SOURCE.check(set(model.config.id2label.values()) == {"fake", "real"}, "Unexpected model output labels")
+    return model, feature, SpeechActivity(speech_path)
+
+
+def window_log_odds(model, feature, pcm, spans, width):
+    import torch
+
+    from app.detectors.audio.content import window_in_speech
+
     fake, real = (model.config.label2id[label] for label in ("fake", "real"))
-    speech = SpeechActivity(args.speech)
-    measured, cache = [], {}
+    grid = GRIDS[width]
+    good = [(i, pcm[a:a + width]) for i, a in enumerate(grid)
+            if window_in_speech(spans, a / RATE, (a + width) / RATE, fraction=.5)]
+    scores = [None] * len(grid)
     with torch.inference_mode():
-        for clip in clips:
-            digest = clip["pcm_sha256"]
-            if digest not in cache:
-                raw = (args.pcm / f"{digest}.pcm").read_bytes()
-                SOURCE.check(SOURCE.digest(raw) == digest and len(raw) == 2 * parent.SAMPLES, "Unexpected PCM")
-                pcm = np.frombuffer(raw, "<i2").astype(np.float32) / 32768
-                spans = speech.spans(pcm)
-                widths = []
-                for width in WIDTHS:
-                    grid = GRIDS[width]
-                    good = [(i, pcm[a:a + width]) for i, a in enumerate(grid)
-                            if window_in_speech(spans, a / RATE, (a + width) / RATE, fraction=.5)]
-                    scores = [None] * len(grid)
-                    for begin in range(0, len(good), 4):
-                        batch = good[begin:begin + 4]
-                        values = feature([pcm_window for _, pcm_window in batch], sampling_rate=RATE, return_tensors="pt")
-                        logits = model(**values).logits.float()
-                        for (index, _), score in zip(batch, (logits[:, fake] - logits[:, real]).tolist(), strict=True):
-                            scores[index] = round(score, 7)
-                    widths.append(scores)
-                cache[digest] = {"pcm_sha256": digest, "log_odds": widths}
-            measured.append(cache[digest])
-            if len(measured) % 8 == 0:
-                print(f"{args.panel}: {len(measured)}/{len(clips)}", flush=True)
+        for begin in range(0, len(good), 4):
+            batch = good[begin:begin + 4]
+            values = feature([window for _, window in batch], sampling_rate=RATE, return_tensors="pt")
+            logits = model(**values).logits.float()
+            for (index, _), score in zip(batch, (logits[:, fake] - logits[:, real]).tolist(), strict=True):
+                scores[index] = round(score, 7)
+    return scores
+
+
+def measure(args):
+    import numpy as np
+
+    points = calibrate(SOURCE.read(args.development)) if args.panel == "icsi" else None
+    source, _ = _parent(args.panel)
+    clips = source["freeze"]["plan"]["clips"]
+    args.output.mkdir(mode=0o700)
+    freeze = _lock(args.panel)
+    SOURCE.write(args.output / "freeze.json", {"method": freeze, "points": points})
+    model, feature, speech = load_classifier(args.weights, args.speech)
+    measured, cache = [], {}
+    for clip in clips:
+        digest = clip["pcm_sha256"]
+        if digest not in cache:
+            raw = (args.pcm / f"{digest}.pcm").read_bytes()
+            SOURCE.check(SOURCE.digest(raw) == digest and len(raw) == 2 * parent.SAMPLES, "Unexpected PCM")
+            pcm = np.frombuffer(raw, "<i2").astype(np.float32) / 32768
+            spans = speech.spans(pcm)
+            measured_widths = [window_log_odds(model, feature, pcm, spans, width) for width in WIDTHS]
+            cache[digest] = {"pcm_sha256": digest, "log_odds": measured_widths}
+        measured.append(cache[digest])
+        if len(measured) % 8 == 0:
+            print(f"{args.panel}: {len(measured)}/{len(clips)}", flush=True)
     SOURCE.write(args.output / "measured.json", {"freeze": freeze, "points": points,
                                                   "device": "cpu", "measurements": measured})
 
